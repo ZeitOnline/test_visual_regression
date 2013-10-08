@@ -23,10 +23,6 @@ Setup ausführen als development
 
     bin/python setup.py develop
 
-Waitress (Webserver) installieren
-
-    bin/pip install waitress
-
 ## App starten
 
 Nach folgendem Aufruf lauscht die App auf Port 9090
