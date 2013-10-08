@@ -1,0 +1,13 @@
+{
+  "name": "friedbert",
+  "version": "0.0.0",
+  "description": "friedbert frontend component",
+  "dependencies": {
+    "grunt": "~0.4.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ZeitOnline/friedbert.git"
+  }
+}
