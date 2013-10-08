@@ -12,3 +12,5 @@ lib/
 lib64
 parts
 src/*.egg-info
+
+/node_modules/
