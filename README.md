@@ -62,7 +62,27 @@ Dann eine lokale Kopie von grunt anlegen im Projektverzeichnis:
 	cd friedbert
 	npm install grunt --save-dev
 
-Dadurch werden ein Verzeichnis `node_modules` angelegt. Dies bitte nicht anfassen.
+Dadurch werden ein Verzeichnis `node_modules` angelegt. Dies bitte nicht anfassen. Werden neue Grunt-Module dem Projekt hinzugefügt, müssen diese ggf. lokal nachinstalliert werden, da die Module nicht ins Repository eingecheckt werden:
+
+    npm install [grunt-module-name] --save-dev
+
+`--save-dev` sorgt dafür, dass das Modul in die package.json aufgenommen wird.
+
+Konfigurationsänderungen und -updates sind durch das Anpassen der package.json, vor allem aber der Gruntfile.js umzusetzen.
+
+Ist alles fertig installiert, kann mit
+
+    grunt watch
+
+der Grunt Watchdemon gestartet werden. Weitere Befehle werden sein:
+
+    grunt dist
+
+oder
+
+    grunt stage
+
+sind aber noch nicht Teil dieses Pakets.
 
 
 
