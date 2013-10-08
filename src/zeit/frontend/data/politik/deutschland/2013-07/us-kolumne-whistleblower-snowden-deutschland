@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/H/Eric_T_Hansen/index" publication-date="" expires="">
+      <display_name py:pytype="str">Eric T. Hansen</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/snowden-asyl-deutschland" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Affäre</supertitle>
+        <title py:pytype="str">Friedrich macht Snowden wenig Hoffnung auf Asyl</title>
+        <text py:pytype="str">Der Whistleblower ist auf der Suche nach einem Aufnahmeland und hat in der deutschen Botschaft in Moskau Asyl beantragt. Die Bundesregierung prüft Snowdens Anliegen nun.</text>
+        <description py:pytype="str">Der Whistleblower ist auf der Suche nach einem Aufnahmeland und hat in der deutschen Botschaft in Moskau Asyl beantragt. Die Bundesregierung prüft Snowdens Anliegen nun.</description>
+        <byline xsi:nil="true" />
+        <image alt="Bundesinnenminister Hans-Peter Friedrich (CSU)" align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-5/" type="jpg" publication-date="" expires="2013-10-02T14:33:33+00:00">
+          <bu py:pytype="str">Bundesinnenminister Hans-Peter Friedrich (CSU)</bu>
+          <copyright py:pytype="str">© Bernd Settnik/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-snowden-freiheit" year="2013" issue="23" ressort="Politik" author="Karsten Polke-Majewski" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA</supertitle>
+        <title py:pytype="str">Zu gutgläubig für Demokratie</title>
+        <text py:pytype="str">Was haben ehrbare Bürger mit dem Abhörskandal von NSA und GCHQ zu tun? Eine Menge. Denn die Überwachung greift die freie Gesellschaft an, kommentiert K. Polke-Majewski.</text>
+        <description py:pytype="str">Was haben ehrbare Bürger mit dem Abhörskandal von NSA und GCHQ zu tun? Eine Menge. Denn die Überwachung greift die freie Gesellschaft an, kommentiert K. Polke-Majewski.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Computer Kommunikation" base-id="http://xml.zeit.de/politik/deutschland/2013-07/computer-kommunikation/" type="jpg" publication-date="" expires="2013-10-02T09:48:14+00:00">
+          <bu py:pytype="str">Teilnehmer des Jahreskongresses des Chaos Computer Clubs (Archiv) </bu>
+          <copyright py:pytype="str">© Britta Pedersen/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/obama-snowden-manning-collage/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Collage von Berliner Aktivisten mit Bildern von US-Präsident Barack Obama und den Whistleblowern Eric Snowden und Bradley Manning</bu>
+      <copyright py:pytype="str">© Ronny Hartmann/AFP/Getty Images</copyright>
+    </image>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Eric T. Hansen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-04T13:18:34.889098+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-02T16:05:24.275833+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-07T16:23:31+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-04T13:18:38.626133+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-04T13:16:24.778377+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.horeld</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">7226ec1d74e343df9888f79dda876413</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4782</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:67f2c57b-4fee-47fd-915b-91f6cfec057f}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="7" type="Person">Edward Snowden</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="6" type="Organization">CDU</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="asyl" uuid="1f68751d-9938-4737-b150-95c265cf00f7" score="4" type="free">Asyl</tag><tag url_value="denkmal" uuid="66daffdd-20ee-4e25-9765-299039a133aa" score="4" type="free">Denkmal</tag><tag url_value="information" uuid="d120b0f4-30b8-4af4-b193-648f57f4c749" score="4" type="free">Information</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="prism" uuid="7c31cf4c-fa1d-4526-978a-4ba187d5da0d" score="4" type="topic">Prism</tag><tag url_value="spionage" uuid="ac33e676-64d2-4b10-b8dc-0c47574e6e20" score="4" type="free">Spionage</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="4" type="Location">USA</tag><tag url_value="whistleblower" uuid="6e72e907-6e0f-4792-b451-3db80db099b8" score="4" type="free">Whistleblower</tag><tag url_value="wirtschaftsspionage" uuid="93378290-dadd-4047-9bed-db5e7cb7bf32" score="4" type="free">Wirtschaftsspionage</tag><tag url_value="grossbritannien" uuid="60ea3a47-e23b-453c-96f7-122f91d91c8e" score="3" type="Location">Großbritannien</tag></rankedTags></head><body>
+    <supertitle>US-Kolumne</supertitle>
+    <title>Deutsche Whistleblower, zeigt euch!</title>
+    <subtitle>Whistleblower ja, aber nicht bei uns. Den eigenen Staat bloßzustellen, halten die Deutschen offenbar für unanständig. </subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/obama-snowden-manning-collage/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Collage von Berliner Aktivisten mit Bildern von US-Präsident Barack Obama und den Whistleblowern Eric Snowden und Bradley Manning</bu>
+        <copyright py:pytype="str">© Ronny Hartmann/AFP/Getty Images</copyright>
+      </image>
+      <p>Es wärmt mir das Herz, wenn die Deutschen in diesen Tagen regelrechte USA-Fans werden. Wenn sie <a href="http://www.zeit.de/schlagworte/personen/edward-snowden/index" target="_blank" class="">Edward Snowden</a>, den letzten aufrechten Ami, für seinen Mut und seine Rechtschaffenheit loben. Wir sind auch stolz auf ihn. Trotzdem frage ich mich, warum wir immer alles Tolle mit den Deutschen teilen müssen. Haben sie denn keine eigenen Whistleblower?</p>
+      <p>Immerhin ahnen wir ja, <a href="http://www.zeit.de/digital/datenschutz/2013-06/internet-ueberwachung-bnd" target="_blank" class="">dass die deutschen Geheimdienste ganz ähnliche Dinge tun</a> wie die amerikanische <entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity>. Schon einen Tag nachdem herauskam, dass die <a href="http://www.zeit.de/politik/deutschland/2013-07/nsa-snowden-freiheit" target="_blank" class="">NSA</a> Telefonverbindungsdaten nach auffälligen Mustern durchsucht, zeigte sich, dass Deutschland zu diesen Daten oder zumindest zu den Ergebnissen der Spionage Zugang hat. Offenbar ist der <entity idref="BND" entity_type="Organization" url_value="organisationen/bnd">BND</entity> aber zu faul, das eigene Volk selbst auszuhorchen, er lässt die Amis die Drecksarbeit machen. Zahlt Deutschland eigentlich für diese Informationen, oder kommt der amerikanische Steuerzahler dafür auf – sozusagen ein Spionage-Soli?</p>
+      <p>"Whistleblower ja, aber nicht bei uns" – das hat in Deutschland offenbar Tradition. Als Helmut Kohl 1998 mit Hinweis auf sein Ehrenwort ablehnte, die Spender der "schwarzen Kassen" bei der <entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity> zu nennen, rückte niemand mit den Fakten heraus. Oder noch früher, als 1979 der damalige BKA-Präsident Horst Herold die Daten des Einwohnermeldeamts mit denen der Stadtwerke im gesamten Raum Frankfurt verglich, um nach der RAF zu fahnden: Kein besorgter Beamter informierte die Öffentlichkeit, dass die Daten unbescholtener Bürger gesichtet werden; hierzulande nennt man diese Prozedur Rasterfahndung, in <entity idref="Amerika" entity_type="Location" url_value="orte/amerika">Amerika</entity> nennen wir es Prism.</p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/politik/ausland/2012-07/eric-hansen" publication-date="" expires="" />
+      <p>Nun ist auch der ernste Vorwurf laut geworden, Amerika höre Einrichtungen der Europäischen Union ab. Allerdings: Laut einem amerikanischen Geheimdienstler betreiben alle Länder der westlichen Welt auf solche Weise Politik- und Wirtschaftsspionage untereinander – also auch Deutschland. Doch noch fand sich kein Whistleblower, der diese Information verifizieren konnte.</p>
+      <p>Ein wenig übertreibe ich schon. Hin und wieder gibt es natürlich deutsche Whistleblower. Gerade neulich hat die Mitarbeiterin der Hamburger Arbeitsagentur Inge Hannemann auf den unmenschlichen Umgang der dortigen Mitarbeiter mit den <a href="http://www.zeit.de/schlagworte/themen/hartz-iv/index" target="_blank" class="">Hartz-IV</a>-"Kunden" hingewiesen und wurde dafür umgehend freigestellt. Das ist schon eine große Sache, auch wenn Ecuador sich immer noch nicht dazu geäußert hat, ob sie dort politisches Asyl bekommt oder nicht. Doch die Whistleblower, die einen ganzen Staat bloßstellen, kommen nicht aus Deutschland.</p>
+    </division>
+    <division type="page" teaser="Ein Promi-Steuerhinterzieher hier, ein Steinbrück'sches Fettnäpfchen dort">
+      <p>Natürlich kann es sein, dass sich dieses Land einfach nichts zu Schulden kommen lässt, im Gegensatz zu den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity>, Kanada, <entity idref="Gro%C3%9Fbritannien" entity_type="Location" url_value="orte/grossbritannien">Großbritannien</entity> und höchstwahrscheinlich jedem anderen größeren Staat der Welt. Deutschland, ein Staat ohne Fehl und Tadel – doch, das kann ich mir sogar vorstellen. Ja, es wäre unnatürlich, aber möglich.<br /></p>
+      <p>Die andere Theorie: Den eigenen Staat bloßzustellen, wäre unanständig. Es gibt einen Begriff dafür: Neo-Biedermeier.</p>
+      <p>Sie wissen ja, was das Biedermeier war: jene Epoche, in der die deutsche Bevölkerung das Gefühl hatte, sie habe im Staat sowieso nichts zu sagen. Und so kehrten sich die Menschen stattdessen nach innen, kritisierten den Staat mit scharfen Worten unter vier Augen, übten sich ansonsten aber in Gehorsam.<br /></p>
+      <p>Das würde passen. Wenn es um Innenpolitik geht, konzentriert sich die öffentliche Kritik möglichst auf greifbare Kleinigkeiten: ein Promi-Steuerhinterzieher hier, ein Steinbrück'sches Fettnäpfchen dort. Außenpolitik dagegen bietet immer deftiges Kritikpotenzial – an den USA, an Israel, an Italien, Russland oder Großbritannien, Ländern also, in denen echt was los ist. Und wo die Kritik der Deutschen rein gar nichts bewirken kann.</p>
+      <p>Das erklärt auch den seltsamen Spagat im NSA-Skandal: Man regt sich völlig zu Recht über die USA auf, aber dass der BND die NSA-Daten fröhlich mitbenutzt, spielt kaum eine Rolle. Der Neo-Biedermeierer geht davon aus, der eigene Staat werde schon wissen, was er tut – und bewahrt seine Empörung für exotische Länder auf, die nicht wissen, was sie tun.<br /></p>
+      <p>Andererseits kommt eine <a href="http://www.zeit.de/schlagworte/themen/bundestagswahl/index" target="_blank" class="">Bundestagswahl</a> auf uns zu, und der NSA-Skandal ist im Gegensatz zum NSU-Skandal eine Steilvorlage für deutsche Politiker, die sich mit deutlicher und berechtigter Kritik auf der internationalen Bühne profilieren wollen, ohne tatsächlich etwas zu bewegen. Wenn ich Politiker wäre, würde ich gerade jetzt die Gelegenheit ergreifen und lautstark verlangen, dass <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Edward Snowden</entity> politisches Asyl in der EU gewährt wird. Oder mindestens, dass Berlin ihm ein Denkmal baut.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <title>Deutsche Whistleblower, zeigt euch!</title>
+    <text>Whistleblower ja, aber nicht bei uns. Den eigenen Staat bloßzustellen, halten die Deutschen offenbar für unanständig.</text>
+  </teaser>
+</article>

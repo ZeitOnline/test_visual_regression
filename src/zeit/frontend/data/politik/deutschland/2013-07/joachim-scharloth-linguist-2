@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Joachim Scharloth</title>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" alt="joachim-scharloth-linguist-politik-sprache-blog" align="left" title="joachim-scharloth-linguist" src="http://xml.zeit.de/politik/deutschland/2013-07/joachim-scharloth-linguist/joachim-scharloth-linguist-180xVar.jpg" type="jpg" publication-date="" expires="">
+      <bu>Der Sprachwissenschaftler Joachim Scharloth.</bu>
+      <copyright>© Privat</copyright>
+    </image>
+    <text py:pytype="str">
+      <p>ist Professor für angewandte Linguistik an der TU Dresden. Er forscht unter anderem zu Sprache in der Politik und hat mit Kollegen ein Blog gestartet, das sich mit der Rhetorik deutscher Politiker und Parteien im Vorfeld der Bundestagswahlen befasst.</p>
+    </text>
+  </block>
+</container>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/C/Lisa_Caspari/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Lisa Caspari</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-mdb-datenprojekt-bundestag" year="2013" issue="28" ressort="Politik" author="Lisa Caspari;Paul Blickle;Martina Schories;Sascha Venohr" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Deutscher Bundestag</supertitle>
+        <title py:pytype="str">Die große Abgeordneten-Bilanz</title>
+        <text py:pytype="str">Wer hielt die meisten Reden, welche Fraktion war am aktivsten? Wir haben 155.965 öffentlich zugängliche Datensätze deutscher Abgeordneter ausgewertet und aufbereitet.</text>
+        <description py:pytype="str">Wer hielt die meisten Reden, welche Fraktion war am aktivsten? Wir haben 155.965 öffentlich zugängliche Datensätze deutscher Abgeordneter ausgewertet und aufbereitet.</description>
+        <byline xsi:nil="true" />
+        <image alt="Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen" href="http://bit.ly/19cNW53" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bundestag-4/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen</bu>
+          <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/data-blog-abgeordnetenbilanz" year="2013" issue="31" ressort="Politik" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/open-data/2013/07/25/155-965-datensatze-fur-unsere-abgeordnetenbilanz/">
+        <supertitle py:pytype="str">Data-Blog</supertitle>
+        <title py:pytype="str">Wie die Grafik zur Abgeordnetenbilanz entstand</title>
+        <text py:pytype="str">Tausende von Daten, heruntergeladen über Nacht und aufbereitet mit farblichen Codes. Lesen Sie hier, wie genau unsere aufwendige Visualisierung entstand.</text>
+        <description py:pytype="str">Tausende von Daten, heruntergeladen über Nacht und aufbereitet mit farblichen Codes. Lesen Sie hier, wie genau unsere aufwendige Visualisierung entstand.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Abgeordnetenbilanz" base-id="http://xml.zeit.de/politik/deutschland/2013-07/mdbbilanz-teaser/" type="jpg" publication-date="" expires="">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/grafik-abgeordnetenbilanz" year="2013" issue="31" ressort="Politik" contenttype="link" publication-date="" expires="" ns0:href="http://bit.ly/19cNW53">
+        <supertitle py:pytype="str">Bundestag</supertitle>
+        <title py:pytype="str">Die große Abgeordneten-Bilanz</title>
+        <text py:pytype="str">Wie aktiv waren einfache Abgeordnete und Promis in der vergangenen Legislaturperiode? Hier finden Sie alle Ergebnisse grafisch aufbereitet.</text>
+        <description py:pytype="str">Wie aktiv waren einfache Abgeordnete und Promis in der vergangenen Legislaturperiode? Hier finden Sie alle Ergebnisse grafisch aufbereitet.</description>
+        <byline xsi:nil="true" />
+        <image align="left" href="http://bit.ly/19cNW53" title="Aktivität im Bundestag" base-id="http://xml.zeit.de/administratives/2013-07/mdb_teaser.jpg/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Klicken Sie auf das Bild, um zur Grafik "Aktivität im Bundestag" zu gelangen</bu>
+          <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+    </references>
+    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" title="Pascal Kober" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pascal-kober/" type="jpg" publication-date="" expires="">
+      <bu xsi:nil="true" />
+      <copyright py:pytype="str">© Buck Fotogafie/Pascal Kober</copyright>
+    </image>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Lisa Caspari</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-19T16:53:44.593841+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-25T14:51:15.727461+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-24T02:01:54+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-26T09:25:02.251785+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-26T09:23:42.157391+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schultheiss</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">33ae436c71234a55b09771dd69e0e678</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5389</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:a0462392-8328-44f7-b43a-9985406a89a9}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">28</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="7" type="Organization">SPD</tag><tag url_value="fdp-fraktion" uuid="3106719d-9e5c-4c3d-a67c-696529ed7982" score="5" type="Organization">FDP-Fraktion</tag><tag url_value="philipp-roesler" uuid="229363ad-9d32-406b-956a-34080d493183" score="5" type="Person">Philipp Rösler</tag><tag url_value="rainer-bruederle" uuid="7a58f5dd-0021-4021-9cce-82236152a397" score="5" type="Person">Rainer Brüderle</tag><tag url_value="sozialpolitik" uuid="20a82457-4803-4f8f-8067-14a2dcda0012" score="5" type="topic">Sozialpolitik</tag><tag url_value="bundestag" uuid="8c0df820-912b-459b-8d2a-ae38f50cf1d9" score="4" type="free">Bundestag</tag><tag url_value="debatte" uuid="ad19c569-ccd3-4518-8829-377e941bf012" score="4" type="free">Debatte</tag><tag url_value="opposition" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" score="4" type="free">Opposition</tag><tag url_value="plenum" uuid="28be4353-f4c3-49c8-9ef6-f7bb3e7c07c0" score="4" type="free">Plenum</tag><tag url_value="praesident" uuid="df6a10e3-d392-4841-ade9-134cd7f7fd0a" score="4" type="free">Präsident</tag><tag url_value="regierungserklaerung" uuid="b73f2a08-0962-4452-adbc-d226477a09b2" score="4" type="free">Regierungserklärung</tag></rankedTags></head><body>
+    <supertitle>Abgeordnetenbilanz</supertitle>
+    <title>"Das sind für mich die besten Reden"</title>
+    <subtitle>Bundestagsneuling Pascal Kober hat in dieser Legislaturperiode 140 Reden gehalten – ein Rekord. Das sei eher zufällig passiert, sagt er im Interview.</subtitle>
+    <division type="page">
+      <image align="left" title="Pascal Kober" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pascal-kober/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str" />
+        <copyright py:pytype="str">© Buck Fotogafie/Pascal Kober</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE:</strong> Diese Legislaturperiode war Ihre erste im Bundestag. Unsere <a href="http://www.zeit.de/politik/deutschland/2013-07/grafik-abgeordnetenbilanz" target="_blank" class="">Abgeordneten-Bilanz</a> zeigt, dass Sie 140 Reden gehalten haben – <a href="http://www.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-mdb-datenprojekt-bundestag" target="_blank" class="">mehr als alle anderen Abgeordneten</a> und <a href="http://www.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-steinbrueck-merkel-bundestag-spd-wagenknecht" target="_blank" class="">Polit-Promis</a> auf sich verzeichnen können. Wie kommt's, dass die Fraktionsführung Sie so oft aufgestellt hat?</p>
+      <p><strong>Pascal Kober:</strong> Ich wollte Sozialpolitiker werden und habe alle Anstrengungen unternommen, dass mich die <entity idref="FDP-Fraktion" entity_type="Organization" url_value="organisationen/fdp-fraktion">FDP-Fraktion</entity> in den Ausschuss für Arbeit und Soziales entsendet. Die Opposition hat in der Sozialpolitik viele Anträge gestellt, die  entsprechend im Plenum auch behandelt wurden. Das hatte ich zu Beginn nicht auf dem Schirm. Die FDP-Fraktionsführung hatte es außerdem zur Bedingung für diese Erfüllung meines "Erstwunsches" gemacht, dass ich auch noch einen zweiten Ausschuss als ordentliches Mitglied mit übernehme: Menschenrechte und humanitäre Hilfe. Darüber kamen noch weitere Reden hinzu.</p>
+      <raw py:pytype="str">
+        <iframe frameborder="0" marginwidth="0" width="580" height="450" src="http://www.zeit.de/static/js/projekte/mdb/index.html?mdbid=1734&amp;q=53" />
+      </raw>
+      <p><strong>ZEIT ONLINE:</strong> Sie hielten fast jeden zweiten Sitzungstag eine Rede. Sind Sie noch aufgeregt, wenn der Präsident sie ans Rednerpult ruft? </p>
+      <p><strong>Kober:</strong> Manchmal. Und zwar dann, wenn ich während der laufenden Debatte merke, dass ich mein vorbereitetes Konzept vergessen kann, weil andere Redner vor mir schon alle meine Argumente vorgebracht haben. Dann muss ich schnell improvisieren und weiß häufig zu Beginn der Rede noch nicht, wie sie enden soll.  </p>
+      <p><strong>ZEIT ONLINE:</strong> Von Beruf sind Sie Pfarrer. Ein klarer Vorteil beim Reden halten? </p>
+      <p><strong>Kober:</strong> Als Pfarrer ist es mir nur einmal passiert, dass ein Gottesdienstbesucher meine Predigt durch Zwischenrufe kommentiert hat. Auf die Zwischenrufe während der Rede hatte mich das Predigen jedenfalls nicht vorbereitet.</p>
+      <image align="left" href="http://bit.ly/19cNW53" title="Aktivität im Bundestag" src="http://xml.zeit.de/administratives/2013-07/mdb_teaser.jpg/mdb_teaser.jpg-148x84.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+        <bu py:pytype="str">Klicken Sie auf das Bild, um zur Grafik "Aktivität im Bundestag" zu gelangen</bu>
+        <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+      </image>
+      <p>
+        <br />
+      </p>
+      <p><strong>ZEIT ONLINE:</strong> Was macht eine gute Plenarrede aus?   </p>
+      <p><strong>Kober:</strong> Ich finde die besten Reden sind die, die auf das in der Debatte vorher Gesagte wirklich eingehen. Wenn der Redner dann noch alle Register zieht: Lautstärke, Redegeschwindigkeit, Mimik, Gestik und Körperhaltung variiert und der Inhalt der Rede auch noch sachkundig ist und in der Form scharf aber respektvoll, dann sind das für mich die besten Reden. In diesem Sinne bewundernswert ist Anton Schaaf von der <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity>.  </p>
+      <p><strong>ZEIT ONLINE:</strong> Erinnern Sie sich noch an Ihren schlimmsten Versprecher in dieser Legislaturperiode?</p>
+      <p><strong>Kober:</strong> Glücklicherweise ist mir noch kein peinlicher Versprecher passiert. Aber eine Sorge hatte ich immer. Bei der SPD gibt es in der Sozialpolitik drei Kolleginnen mit Doppelnamen: Krüger-Leißner, Hiller-Ohm und Lösekrug-Möller. Ich hatte immer Sorge, dass ich sie bei einer spontanen Ansprache  während meiner Rede verwechseln könnte.</p>
+    </division>
+    <division type="page" teaser="&quot;Es kann noch etwas werden mit meinem Bekanntheitsgrad&quot;">
+      <p>
+        <br />
+      </p>
+      <p><strong>ZEIT ONLINE:</strong> Sind Sie beim Reden schon mal mit Ihren Zetteln durcheinander gekommen? </p>
+      <p><strong>Kober:</strong> Ja, häufiger. Wenn ich während einer Debatte zusätzliche Gedanken in meine Notizen aufgenommen habe oder Gedanken weglassen wollte. Dabei passiert es fast jedes Mal. Das kann man dann überbrücken, indem man wichtige Erkenntnisse ausspricht, wie z.B.: "Die vergangenen vier Jahre waren vier gute Jahre für Deutschland." Danach hat man entweder den Zettel wieder oder zumindest einen neuen Gedanken, der die Rede weiter führt.</p>
+      <p><strong>ZEIT ONLINE:</strong> Welches Wort können Sie nach vier Jahren nicht mehr hören, weil es im Parlament so oft benutzt wird? <br /></p>
+      <p><strong>Kober:</strong><a href="http://www.bundestag.de/dokumente/datenhandbuch/07/07_12/index.html" target="_blank" class="">Hammelsprung</a>. Wenn das Präsidium sich bei der Auszählung einer Abstimmung über die Mehrheitsverhältnisse nicht einig ist, müssen alle Abgeordneten – meist auf Antrag der Opposition – den Saal verlassen und müssen ihn dann durch gekennzeichnete Türen wieder betreten. Dabei werden sie gezählt. Das kostet Zeit und verschiebt alle nachfolgenden Debatten.  </p>
+      <p><strong>ZEIT ONLINE:</strong> Beginnen Sie jede Rede mit "Meine Damen und Herren, Herr Präsident"? </p>
+      <p><strong>Kober:</strong> Immer zuerst den Präsidenten: "Herr Präsident beziehungsweise Frau Präsidentin, liebe Kolleginnen und Kollegen". Die meisten Kollegen über Fraktionsgrenzen hinweg sind tatsächlich liebe Kollegen, die ich persönlich mag. Die anderen werden großzügig mit vereinnahmt.</p>
+      <p><strong>ZEIT ONLINE:</strong> Bringen Sie Zwischenfragen noch aus dem Konzept? </p>
+      <p><strong>Kober:</strong> Nein. Dabei geht es ja nicht um echte Fragen, sondern darum, dass die Kollegen in der Frage ihren eigenen Standpunkt unterbringen. Sie beginnen dann meistens mit: "Sind Sie nicht auch der Meinung, dass…?" Kommt die Frage von der Opposition, weiß man sogleich, dass "Nein" die richtige Antwort ist, kommt die Frage aus der Koalition, kann man getrost "Ja" antworten.</p>
+      <p><strong>ZEIT ONLINE:</strong> Wen hören Sie im Bundestag lieber reden: <entity idref="Rainer+Br%C3%BCderle" entity_type="Person" url_value="personen/rainer-bruederle">Rainer Brüderle</entity> oder <entity idref="Philipp+R%C3%B6sler" entity_type="Person" url_value="personen/philipp-roesler">Philipp Rösler</entity>? Sagen Sie jetzt nicht: beide gleich gerne! </p>
+      <p><strong>Kober:</strong> Tja. Auch nach so vielen Reden fällt mir darauf keine geschickte Antwort ein, die mich aus dieser Zwickmühle befreit, die sie mir stellen.</p>
+      <p><strong>ZEIT ONLINE:</strong> Wie kommt es, dass Sie im Bundestag sprachlich so präsent sind, aber kaum jemand Ihren Namen kennt? </p>
+      <p><strong>Kober:</strong> Ich halte meine Reden ja wie die meisten Kollegen in Fachdebatten und nicht in den Debatten zur Regierungserklärung der Kanzlerin. Über diese Fachdebatten berichten Medien eher wenig. Aber wir führen ja jetzt gerade dieses Interview. Es kann also noch was werden mit meinem Bekanntheitsgrad.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Abgeordnetenbilanz</supertitle>
+    <title>"Das sind für mich die besten Reden"</title>
+    <text>Bundestagsneuling Pascal Kober hat in dieser Legislaturperiode 140 Reden gehalten – ein Rekord. Das sei eher zufällig passiert, sagt er im Interview.</text>
+  </teaser>
+</article>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/C/Lisa_Caspari/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Lisa Caspari</display_name>
+    </author>
+    
+    <image align="left" title="Ulla Jelpke" base-id="http://xml.zeit.de/politik/deutschland/2013-07/ulla-jelpke/" type="jpg" publication-date="" expires="2013-10-09T09:58:53+00:00">
+      <bu py:pytype="str">Die innenpolitische Sprecherin der  Linke-Bundestagsfraktion, Ulla Jelpke (Archivbild von 2000) </bu>
+      <copyright py:pytype="str">© dpa</copyright>
+    </image>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-mdb-datenprojekt-bundestag" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Deutscher Bundestag</supertitle>
+        <title py:pytype="str">Die große Abgeordneten-Bilanz</title>
+        <text py:pytype="str">Wer hielt die meisten Reden, welche Fraktion war am aktivsten? Wir haben 155.965 öffentlich zugängliche Datensätze deutscher Abgeordneter ausgewertet und aufbereitet.</text>
+        <description py:pytype="str">Wer hielt die meisten Reden, welche Fraktion war am aktivsten? Wir haben 155.965 öffentlich zugängliche Datensätze deutscher Abgeordneter ausgewertet und aufbereitet.</description>
+        <byline xsi:nil="true" />
+        <image alt="Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen" href="http://bit.ly/19cNW53" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bundestag-4/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen</bu>
+          <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/abgeordnete-fragen-reden-iris-gleicke" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Abgeordnetenbilanz</supertitle>
+        <title py:pytype="str">"Ich habe nur bei einem Bruchteil aktiv mitgearbeitet"</title>
+        <text py:pytype="str">Laut unserer Abgeordnetenbilanz steht der Name Iris Gleicke auf fast allen Anträgen der SPD-Fraktion. Im Interview sagt sie, welchen Sinn das hat.</text>
+        <description py:pytype="str">Laut unserer Abgeordnetenbilanz steht der Name Iris Gleicke auf fast allen Anträgen der SPD-Fraktion. Im Interview sagt sie, welchen Sinn das hat.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Iris Gleicke" base-id="http://xml.zeit.de/politik/deutschland/2013-07/iris-gleicke-2/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Iris Gleicke</bu>
+          <copyright py:pytype="str">© SPD</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/abgeordnete-fragen-reden-volker-beck" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Abgeordnetenbilanz</supertitle>
+        <title py:pytype="str">"Die Koalition versteckt wichtige Debatten"</title>
+        <text py:pytype="str">Laut unserer Abgeordneten-Bilanz ging der Grüne Volker Beck im Bundestag am häufigsten dazwischen, wenn andere das Wort hatten. Im Interview sagt er, warum.</text>
+        <description py:pytype="str">Laut unserer Abgeordneten-Bilanz ging der Grüne Volker Beck im Bundestag am häufigsten dazwischen, wenn andere das Wort hatten. Im Interview sagt er, warum.</description>
+        <byline xsi:nil="true" />
+        <image alt="Der parlamentarische Geschäftsführer der Grünen-Fraktion, Volker Beck" align="left" title="Volker Beck" base-id="http://xml.zeit.de/politik/deutschland/2013-07/volker-beck-3/" type="jpg" publication-date="" expires="2013-10-09T09:38:34+00:00">
+          <bu py:pytype="str">Der parlamentarische Geschäftsführer der Grünen-Fraktion, Volker Beck</bu>
+          <copyright py:pytype="str">© Uwe Anspach/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Lisa Caspari</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-30T08:46:36.066788+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-30T08:45:39.238695+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-30T08:47:38.312626+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-30T08:44:46.478262+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-30T08:44:32.981844+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoehler</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">b5308c91e8a242cd856ad0e65faa43c5</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4752</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:de7e5392-a504-4fbe-a4b1-9103ffed7582}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="8" type="Organization">Bundesregierung</tag><tag url_value="faz" uuid="eeb401b1-cb44-4cbd-99d8-2dff1fb6a22b" score="6" type="Organization">FAZ</tag><tag url_value="ulla-jelpke" uuid="5e6c75b2-d684-4ead-bf78-8c17a4dbbd1b" score="6" type="Person">Ulla Jelpke</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="5" type="Person">Edward Snowden</tag><tag url_value="innenministerium" uuid="8c3db045-e6a8-45f7-8544-601404e58438" score="5" type="Organization">Innenministerium</tag><tag url_value="justizministerium" uuid="c9aac7ca-ae94-40be-a37a-e56dfd4c937e" score="5" type="Organization">Justizministerium</tag><tag url_value="bundespolizei" uuid="1ccff723-b97e-41cd-ab78-9a10438a0e3e" score="4" type="free">Bundespolizei</tag><tag url_value="bundestagspraesident" uuid="2430e799-a039-4136-b776-4d317c395951" score="4" type="free">Bundestagspräsident</tag><tag url_value="hautfarbe" uuid="a31516b8-e6af-4899-b0cb-c875c1232e5a" score="4" type="free">Hautfarbe</tag><tag url_value="karl-liebknecht" uuid="cbb65ff2-3b48-4a0b-a813-74a82647d4b4" score="4" type="Person">Karl Liebknecht</tag><tag url_value="skandal" uuid="cec90c14-b283-4b24-afa6-0f97acbbef5b" score="4" type="free">Skandal</tag><tag url_value="straftat" uuid="6560c23f-f426-4c5c-ab5d-c4866aa9ae3c" score="4" type="free">Straftat</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag><tag url_value="anschlag" uuid="a504d8cf-76d1-43e2-b18d-7a04f68a9d53" score="3" type="free">Anschlag</tag><tag url_value="innenminister" uuid="05da8430-80cf-4036-adb0-5da9d442b292" score="3" type="free">Innenminister</tag><tag url_value="moschee" uuid="9ddbb9df-585d-44ec-9594-8174ca4f0d96" score="3" type="free">Moschee</tag><tag url_value="regierung" uuid="bb3bd1ba-fe55-4bce-9ce5-368bae36b06f" score="3" type="free">Regierung</tag><tag url_value="statistik" uuid="32efd1ff-b908-415c-9098-2be8e8924b1f" score="3" type="free">Statistik</tag></rankedTags></head><body>
+    <supertitle>Abgeordnetenbilanz</supertitle>
+    <title>"Ich bin die Nervensäge des Innenministers"</title>
+    <subtitle>958 Fragen stellte die Linke-Politikerin Ulla Jelpke in der vergangenen Legislaturperiode an die Bundesregierung. Im Interview erklärt sie, was sie damit erreicht hat.</subtitle>
+    <division type="page">
+      <image align="left" title="Ulla Jelpke" base-id="http://xml.zeit.de/politik/deutschland/2013-07/ulla-jelpke/" type="jpg" publication-date="" expires="2013-10-09T09:58:53+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Die innenpolitische Sprecherin der  Linke-Bundestagsfraktion, Ulla Jelpke (Archivbild von 2000) </bu>
+        <copyright py:pytype="str">© dpa</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE: </strong><a href="http://www.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-mdb-datenprojekt-bundestag" target="_blank" class="">Unsere Abgeordnetenbilanz hat ergeben</a>, dass Sie die schwarz-gelbe <entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> in
+den vergangenen vier Jahren am meisten mit schriftlichen und mündlichen Fragen gelöchert haben. Insgesamt waren es 958 Fragen, deutlich mehr, als alle anderen Abgeordneten stellten. Auch in der Sommerpause geben Sie keine Ruhe, wie ich höre?<strong>
+</strong></p>
+      <p><strong>Ulla Jelpke:</strong> Ich möchte der Bundesregierung keine Pause gönnen. Ich frage in diesen Wochen unter anderem, wie die Bundesregierung dazu steht, dass die Bundespolizei weiterhin "racial profiling" betreibt, also Menschen nur aufgrund ihrer Hautfarbe kontrolliert. Daneben laufen die monatlichen oder Quartalsanfragen zu rechtsextremen Straftaten, Naziaufmärschen und Nazikonzerten natürlich auch in der Sommerpause weiter.</p>
+      <p><strong>ZEIT ONLINE:</strong> Mit Fragen können Sie faktisch nichts ändern. Warum also der ganze Aufwand?</p>
+      <p><strong>Jelpke:</strong> Das parlamentarische Frage- und Kontrollrecht ist neben Gesetzesinitiativen eine der wenigen Möglichkeiten von Oppositionsfraktionen, sich nicht nur selbst öffentlich zu positionieren, sondern auch die Regierung zum Farbebekennen zu zwingen. Mein Vorbild ist hier der Sozialist <entity idref="Karl+Liebknecht" entity_type="Person" url_value="personen/karl-liebknecht">Karl Liebknecht</entity>, der während des Ersten Weltkrieges mit seinem Fragemarathon neben der Reichsregierung auch die Kriegsbefürworter in seiner eigenen Fraktion zur Weißglut getrieben hat. In der <em>FAZ </em>hieß es einmal, ich würde mit meinen Kleinen Anfragen "Behördenerziehung" betreiben. Das ist in der Tat richtig. So wurden die Sicherheitsbehörden durch unsere Kleinen Anfragen erst dazu gezwungen, Statistiken über rechtsextreme Straftaten zu führen und damit das von der Regierung gerne unterschlagene Ausmaß rechter Gewalt deutlich zu machen.  <br /></p>
+      <infobox is_empty="False" href="http://xml.zeit.de/politik/deutschland/2013-07/kategorien-abgeordnetenbilanz" publication-date="" expires="" />
+      <p>
+        <br />
+      </p>
+      <p><strong>ZEIT ONLINE:</strong> Wann und wie entscheiden Sie, die Bundesregierung etwas zu fragen?<br /></p>
+      <p><strong>Jelpke:</strong> Manche Fragen ergeben sich aus der parlamentarischen Arbeit, etwa zur Vorbereitung einer Gesetzesinitiative. Viele Ideen kommen von meinen Mitarbeitern, die gut mit außerparlamentarischen Initiativen vernetzt sind. Manchmal inspirieren mich investigative Journalisten zu Fragen.</p>
+      <raw py:pytype="str">
+        <iframe frameborder="0" marginwidth="0" width="580" height="450" src="http://www.zeit.de/static/js/projekte/mdb/index.html?mdbid=230&amp;q=53" />
+      </raw>
+    </division>
+    <division type="page" teaser="&quot;Auch keine Antwort ist eine Antwort&quot;">
+      <p>
+        <br />
+      </p>
+      <p><strong>ZEIT ONLINE:</strong> Eine gute Frage darf keinen Raum für Missverständnisse lassen. Wie lange brauchen Sie normalerweise?</p>
+      <p><strong>Jelpke:</strong> Eine einzelne schriftliche Frage kann in drei Minuten formuliert sein, aber an einer ausführlichen Kleinen Anfrage mit vielen Unterfragen kann mein Büro eine Woche lang herum feilen.</p>
+      <p><strong>ZEIT ONLINE</strong>: Wie oft bekommen Sie Antworten von der Bundesregierung, mit denen Sie wirklich etwas anfangen können?</p>
+      <p><strong>Jelpke:</strong> Auch keine Antwort ist eine Antwort und lässt Interpretationen zu. So habe ich manchmal das Gefühl, dass jede Antifa-Gruppe besser über Entwicklungen im neofaschistischen Spektrum informiert ist als die Bundesregierung. <br /></p>
+      <p><strong>ZEIT ONLINE:</strong> Können Sie eigentlich nachfragen, wenn Ihnen die Formulierung der Bundesregierung zu kryptisch ist?</p>
+      <p><strong>Jelpke:</strong> Es gibt immer die Möglichkeit, eine Nachfrage zu stellen. Und in einer Reihe von Fällen haben wir uns beim Bundestagspräsidenten beschwert, wenn die Regierung blockte und keine oder eine völlig ungenügende Antwort gab.</p>
+      <image align="left" href="http://bit.ly/19cNW53" title="Aktivität im Bundestag" src="http://xml.zeit.de/administratives/2013-07/mdb_teaser.jpg/mdb_teaser.jpg-220x124.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+        <bu py:pytype="str">Klicken Sie auf das Bild, um zur Grafik "Aktivität im Bundestag" zu gelangen</bu>
+        <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE:</strong> Welches Ministerium blockiert am meisten? <br /></p>
+      <p><strong>Jelpke</strong>: Dem <entity idref="Innenministerium" entity_type="Organization" url_value="organisationen/innenministerium">Innenministerium</entity> muss ich jede Information mit beharrlichem Bohren aus der Nase ziehen. Ich bin aber stolz darauf, dort intern schon als die "Nervensäge des Innenministers" bekannt zu sein. Das <entity idref="Justizministerium" entity_type="Organization" url_value="organisationen/justizministerium">Justizministerium</entity> überschüttet uns dagegen manchmal mit so vielen statistischen Daten, dass wir mit der Auswertung fast überfordert sind.</p>
+      <p><strong>ZEIT ONLINE:</strong> Welchen Skandal haben Sie in der Legislatur mithilfe Ihrer schriftlichen Fragen aufgedeckt?</p>
+      <p><strong>Jelpke:</strong> Ganz große Skandale waren das nicht, aber doch immer wieder Erkenntnisse, die auf Interesse der Medien stießen. So musste die Bundesregierung zugeben, dass zahlreiche wegen Straftaten gesuchte Neonazis in Deutschland untergetaucht sind. Sie musste bekannt geben, wie oft Schusswaffen bei Nazis gefunden wurden und dass die Zahl von Anschlägen auf Moscheen inzwischen an das Niveau antisemitischer Gewalttaten heranreicht.</p>
+      <p><strong>ZEIT ONLINE:</strong> Welche Frage werden Sie gleich zu Beginn der nächsten Legislaturperiode stellen – unabhängig vom Wahlausgang?</p>
+      <p><strong>Jelpke:</strong> Die von <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Edward Snowden</entity> aufgedeckten Überwachungsprogramme durch den US-Geheimdienst NSA werden uns sicher noch länger beschäftigen. Da werde ich weiter nachbohren, insbesondere was eine mögliche Mitwisserschaft des Bundesnachrichtendienstes betrifft.<br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Abgeordnetenbilanz</supertitle>
+    <title>"Ich bin die Nervensäge des Innenministers"</title>
+    <text>958 Fragen stellte die Linke-Politikerin Ulla Jelpke in der vergangenen Legislaturperiode an die Bundesregierung. Im Interview erklärt sie, was sie damit erreicht hat.</text>
+  </teaser>
+</article>

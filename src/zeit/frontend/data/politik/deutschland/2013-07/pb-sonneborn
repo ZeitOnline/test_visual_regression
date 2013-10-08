@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Martin Sonneborn</title>
+    <text py:pytype="str">
+      <p>Martin Sonneborn ist seit der Gründung 2004 Bundesvorsitzender der Satire-Partei Die PARTEI (Partei für Arbeit, Rechtsstaat, Tierschutz, Elitenförderung und basisdemokratische Initiative). Vorher war er Chefredakteur des Satire-Magazins Titanic.</p>
+    </text>
+  </block>
+</container>

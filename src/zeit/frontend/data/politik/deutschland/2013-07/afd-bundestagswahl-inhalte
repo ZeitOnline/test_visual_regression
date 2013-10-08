@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Elisabeth_Gamperl/index" publication-date="" expires="">
+      <display_name py:pytype="str">Elisabeth Gamperl</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-04/afd-eurokritiker-waehler-partei-umfrage-yougov" year="2013" issue="16" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Umfrage</supertitle>
+        <title py:pytype="str">Viele AfD-Anhänger wählten früher Linke und FDP</title>
+        <text py:pytype="str">Die Anti-Euro-Partei ist für die Union weniger gefährlich als für andere Parteien. Ihrem Argument, man könne sich nicht frei äußern, stimmt ein Drittel der Deutschen zu.</text>
+        <description py:pytype="str">Die Anti-Euro-Partei ist für die Union weniger gefährlich als für andere Parteien. Ihrem Argument, man könne sich nicht frei äußern, stimmt ein Drittel der Deutschen zu.</description>
+        <byline xsi:nil="true" />
+        <image alt="Mitglieder der Alternative für Deutschland (AfD) während des Gründungsparteitages in Berlin" align="left" title="AFD" base-id="http://xml.zeit.de/politik/deutschland/2013-04/afd-3/" type="jpg" publication-date="" expires="2013-07-16T15:52:46+00:00">
+          <bu py:pytype="str">Mitglieder der Alternative für Deutschland (AfD) während des Gründungsparteitages in Berlin</bu>
+          <copyright py:pytype="str">© Marc Tirl/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-05/protestparteien-europa-antieuro" year="2013" issue="20" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Populismus</supertitle>
+        <title py:pytype="str">Europas neue Anti-Parteien</title>
+        <text py:pytype="str">Europa ist in der Krise, die Protestparteien breiten sich aus. Was wollen die Populisten und warum sind sie so erfolgreich? Von E. Gamperl</text>
+        <description py:pytype="str">Europa ist in der Krise, die Protestparteien breiten sich aus. Was wollen die Populisten und warum sind sie so erfolgreich? Von E. Gamperl</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Anti Europa Protest" base-id="http://xml.zeit.de/politik/2013-05/anti-europa-protest/" type="jpg" publication-date="" expires="2013-08-22T10:18:34+00:00">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© Szilard Koszticsak/EPA/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-04/afd-mitglieder-portrait" year="2013" issue="16" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">AfD-Mitglieder</supertitle>
+        <title py:pytype="str">Sie wollen die Alternative für Deutschland sein</title>
+        <text py:pytype="str">Altkonservative, Rechtspopulisten, EU-Gegner und Polit-Neulinge: Die Anti-Euro-Partei AfD ist eine sehr heterogene Gruppierung. Porträts einiger Mitglieder und Anhänger</text>
+        <description py:pytype="str">Altkonservative, Rechtspopulisten, EU-Gegner und Polit-Neulinge: Die Anti-Euro-Partei AfD ist eine sehr heterogene Gruppierung. Porträts einiger Mitglieder und Anhänger</description>
+        <byline xsi:nil="true" />
+        <image alt="Hans-Olaf Henkel (2012)" align="left" title="Hans-Olaf Henkel" base-id="http://xml.zeit.de/politik/deutschland/2013-04/hans-olaf-henkel/" type="jpg" publication-date="" expires="2013-07-17T13:59:16+00:00">
+          <bu py:pytype="str">Hans-Olaf Henkel (2012)</bu>
+          <copyright py:pytype="str">©Michael Kappeler dpa/lbn</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="AfD Pressekonferenz" base-id="http://xml.zeit.de/politik/deutschland/2013-07/afd-pressekonferenz-3/" type="jpg" publication-date="" expires="2013-10-15T18:46:25+00:00">
+      <bu py:pytype="str">Die Sprecher der neuen Partei "Alternative für Deutschland", Bernd Lucke und Frauke Petry</bu>
+      <copyright py:pytype="str">© Hannibal/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Gamperl</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-15T19:25:00.357090+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-15T17:02:34.328668+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-15T19:26:00.170140+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-15T17:03:53.693748+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-17T09:09:57.254462+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.gamperl</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">2067812abc8449fbb28063723f26ef4d</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3376</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:aef96997-d87c-4a03-a22d-0234d5e70931}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="klimawandel" uuid="9d573b7b-b0cb-40c9-a0cf-132d53ef70f7" score="6" type="free">Klimawandel</tag><tag url_value="gesundheitspolitik" uuid="1bd76858-56b5-4b64-9976-c6d35ed49b46" score="5" type="topic">Gesundheitspolitik</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="4" type="free">Bundestagswahl</tag><tag url_value="energie" uuid="50c4d726-649f-48d7-99c7-1c82949e6fdf" score="4" type="free">Energie</tag><tag url_value="klima" uuid="29ed1103-1a7c-4bd8-a009-1c232bf69b9e" score="4" type="free">Klima</tag><tag url_value="krankenkasse" uuid="8abfa597-85bd-4251-b0dd-cf7f98f61c71" score="4" type="free">Krankenkasse</tag><tag url_value="parlament" uuid="ee6f72a4-4dd9-428d-89cd-b97b2e96db13" score="4" type="free">Parlament</tag><tag url_value="euro" uuid="d411666c-5c17-4bc7-b5e5-060e044bb050" score="3" type="free">Euro</tag><tag url_value="gesundheit" uuid="e3ec9f2c-b8c0-4b52-b44c-35dfc6b1efe9" score="3" type="free">Gesundheit</tag><tag url_value="see" uuid="c00aa01c-49d5-4f99-b82e-08eaaf87464e" score="3" type="free">See</tag><tag url_value="versicherung" uuid="b305bb9f-3a78-4ef3-8c0f-379c25268287" score="3" type="free">Versicherung</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag><tag url_value="hessen" uuid="418d7173-999f-496a-929f-ef820e7aaa6b" score="1" type="Location">Hessen</tag></rankedTags></head><body>
+    <supertitle>Alternative für Deutschland</supertitle>
+    <title>Der Klimawandel ist wie Pipi im Baggersee</title>
+    <subtitle>Die AfD möchte mehr sein als nur eine Anti-Euro-Partei. Was sie zu Gesundheit und Energie zu sagen hat, wirkt allerdings unausgegoren und ziemlich wirr. </subtitle>
+    <division type="page">
+      <image align="left" title="AfD Pressekonferenz" base-id="http://xml.zeit.de/politik/deutschland/2013-07/afd-pressekonferenz-3/" type="jpg" publication-date="" expires="2013-10-15T18:46:25+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Die Sprecher der neuen Partei "Alternative für Deutschland", Bernd Lucke und Frauke Petry</bu>
+        <copyright py:pytype="str">© Hannibal/dpa</copyright>
+      </image>
+      <p>Bernd Lucke verkündet die "frohe Botschaft" in <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity>, Haus der Bundespressekonferenz: Die <a href="http://www.zeit.de/politik/deutschland/2013-04/deutschlandtrend-afd-prognose" target="_blank" class="">Alternative für Deutschland (AfD)</a> darf bei der Bundestagswahl in allen sechzehn Bundesländern antreten. Zudem schickt die im Februar gegründete Partei 153 Direktkandidaten ins Rennen um die Sitze im Parlament.  <br /></p>
+      <p>Damit der Einzug möglichst gelingen kann, möchte sich die in ihren Forderungen bislang auf die Abschaffung des Euro reduzierte Partei nun auch zu anderen Themen positionieren. Allerdings gerät die Präsentation der drei gegründeten Fachausschüsse mit den Schwerpunkten Energie, Gesundheit und Sicherheit ziemlich unausgereift und widersprüchlich.     <br /></p>
+      <p>Eigentlich ist der Ökonom Lucke ein Mann, der Contenance bewahren kann, bedacht und ruhig spricht. Normalerweise. Denn als Stephan Boyens beim Thema Energie den Klimawandel infrage stellt, kann Lucke sich nicht schnell genug von seinem Parteikollegen distanzieren: "Das ist eine persönliche Meinung und nicht die der Partei." Der Chef antwortet fortan auf alle energiepolitischen Fragen. Boyens muss schweigen.</p>
+      <p>Der AfD-Energieexperte hatte unter anderem gesagt, innerhalb der vergangenen 15 Jahre habe es keine Erwärmung des Klimas gegeben. Deshalb stelle sich die Frage, ob die Energiewende in Deutschland wirklich begründet sei. Kohlendioxid sei zudem ein kleines Spurenelement in der Luft und hätte wenig Auswirkungen auf das Klima. "Das ist, als ob meine dreijährige Tochter in den See pinkelt. Und dann haben wir Angst, dass der Baggersee kippt." Die deutsche "Retten wir die Welt"-Attitüde, gemischt mit der Angst vor der Erderwärmung, sei eine "explosive Mischung", so der Diplom-Kaufmann. Dies sei bei den Kosten der Energiewende von bis zu einer Billion Euro unangebracht.<br /></p>
+      <intertitle>AfD hofft auf Hessen<br /></intertitle>
+      <p>Auch die Vorstellungen zur Gesundheitspolitik wirken etwas wirr. So fordert AfD-Experte Wilhelm Esser einerseits eine Abkehr von der Zwei-Klassen-Medizin, andererseits ist er aber gegen eine Vereinheitlichung der deutschen Versicherungen. Damit stellt sich die Partei gegen das von der Opposition favorisierte Modell einer für alle verpflichtenden Bürgerversicherung, die das Ende der Privatversicherung mit sich brächte. Essen setzt sich stattdessen für mehr Wettbewerb bei den privaten Krankenkassen ein. Außerdem möchte er die gesundheitliche Versorgung in ländlichen Gebieten auf Kosten der Ballungszentren ausbauen.  <br /></p>
+      <p>Parteichef Lucke gibt sich trotz solcher Widersprüche und derzeit schlechter Umfragewerte optimistisch und hofft auf den Einzug ins Parlament. "Wir sind nahe dran an der Fünfprozenthürde", sagt er. Seine Partei lag zuletzt bei einem Wert von 3,5 Prozent. </p>
+      <p>Als nächstes möchte er deshalb den Bekanntheitsgrad steigern, um im "Wahlkampf in die Breite zu gehen". Die Partei verzeichne bereits 15.000 Mitglieder.    <br /></p>
+      <p>Lucke will noch vor der Bundestagswahl ein erstes Erfolgserlebnis erreichen: Bei der Wahl am 22. September in <entity idref="Hessen" entity_type="Location" url_value="orte/hessen">Hessen</entity> könnte die AfD ein respektables Ergebnis für eine erstmals antretende Partei erreichen – wenn sich der dortige Landesverband nicht weiter zerstreitet.<br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <text>Die AfD möchte mehr sein als nur eine Anti-Euro-Partei. Was sie zu Gesundheit und Energie zu sagen hat, wirkt allerdings unausgegoren und ziemlich wirr. Von E. Gamperl</text>
+    <supertitle>Alternative für Deutschland</supertitle>
+    <title>Der Klimawandel ist wie Pipi im Baggersee</title>
+  </teaser>
+</article>

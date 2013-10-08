@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/bundeswehr-drohnenverluste-kosten" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">Drohnenverluste kosten 110 Millionen Euro</title>
+        <text py:pytype="str">Abgestürzt, verschollen oder zerstört: Seit 2004 hat die Bundeswehr 137 Drohnen verloren. Das hat Millionen Euro gekostet, bestätigte das Verteidigungsministerium.</text>
+        <description py:pytype="str">Abgestürzt, verschollen oder zerstört: Seit 2004 hat die Bundeswehr 137 Drohnen verloren. Das hat Millionen Euro gekostet, bestätigte das Verteidigungsministerium.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Drohne Bundeswehr" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-bundeswehr/" type="jpg" publication-date="" expires="2013-10-24T16:23:19+00:00">
+          <bu py:pytype="str">Bundeswehrsoldaten lassen nahe Kundus, Afghanistan, eine Aufklärungsdrohe vom Typ Mikado fliegen.</bu>
+          <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-untersuchungsausschuss-drohne-de-maiziere" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Debakel</supertitle>
+        <title py:pytype="str">Rechnungshof nennt Verteidigungsministerium blauäugig</title>
+        <text py:pytype="str">Naive Beamten, verantwortungslose Vorgesetzte, Controller, die versagen: Eine Prüferin bescheinigt dem Verteidigungsministerium beim Euro Hawk schwere Versäumnisse. </text>
+        <description py:pytype="str">Naive Beamten, verantwortungslose Vorgesetzte, Controller, die versagen: Eine Prüferin bescheinigt dem Verteidigungsministerium beim Euro Hawk schwere Versäumnisse. </description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-4/" type="jpg" publication-date="" expires="2013-10-24T09:26:27+00:00">
+          <bu py:pytype="str">Der Untersuchungsauschuss zum Euro Hawk vor Beginn seiner ersten Sitzung</bu>
+          <copyright py:pytype="str">© Soeren Stache/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/untersuchungsausschuss-euro-hawk-zweiter-tag" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Ausschuss</supertitle>
+        <title py:pytype="str">Opposition sieht de Maizière belastet</title>
+        <text py:pytype="str">Für die Opposition ist am zweiten Tag des Drohnen-Ausschusses klar, dass de Maizière zu spät reagiert hat. Der Leiter des Rüstungsprojekts verteidigt den späten Stopp.</text>
+        <description py:pytype="str">Für die Opposition ist am zweiten Tag des Drohnen-Ausschusses klar, dass de Maizière zu spät reagiert hat. Der Leiter des Rüstungsprojekts verteidigt den späten Stopp.</description>
+        <byline xsi:nil="true" />
+        <image alt="Verteidigungsminister Thomas de Maizière mit dem Inspekteur der Luftwaffe, Generalleutnant Aarne Kreuzinge-Janick, vor einem Modell des Euro Hawk (Archiv)" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-maiziere/" type="jpg" publication-date="" expires="2013-08-22T16:51:19+00:00">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière mit dem Inspekteur der Luftwaffe, Generalleutnant Aarne Kreuzinge-Janick, vor einem Modell des Euro Hawk (Archiv)</bu>
+          <copyright py:pytype="str" link="http://www.flickr.com/photos/augustinfotos/">CC BY-ND 2.0 Flickr/Bundeswehrfotos</copyright>
+        </image>
+      </reference>
+    </references>
+    <image alt="Verteidigungsminister Thomas de Maizière neben einer Modellversion der Euro-Hawk-Drohne" align="left" title="Euro Hawk" base-id="http://xml.zeit.de/politik/deutschland/2013-05/maiziere-dronen/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Verteidigungsminister Thomas de Maizière neben einer Modellversion der Euro-Hawk-Drohne</bu>
+      <copyright py:pytype="str">© Wolfgang Rattay/Reuters</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, cwe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-25T06:02:40.678051+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-25T05:59:45.762686+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-25T06:03:42.163311+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-25T05:58:48.903807+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-25T05:57:11.105728+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.friese</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">6876bd856f974ec3979b7102b5f9217e</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2368</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e167e65f-a616-4a84-8bdb-e7b1095aa193}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="9" type="Organization">SPD</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="7" type="free">Bundeswehr</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="6" type="Organization">CDU</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="6" type="Organization">Verteidigungsministerium</tag><tag url_value="bundeswehrreform" uuid="fbf4b4ae-416d-42b8-bf5c-339db3cf4e74" score="4" type="free">Bundeswehrreform</tag><tag url_value="ruestung" uuid="c63fc5e4-9abb-4ffd-995b-2db6e49f156c" score="4" type="free">Rüstung</tag><tag url_value="staatssekretaer" uuid="8cef2717-2c27-4ddf-bd90-89790c56f1e0" score="4" type="free">Staatssekretär</tag><tag url_value="untersuchungsausschuss" uuid="b314a17c-8af6-4fd5-839e-aa9c2a488fc5" score="4" type="free">Untersuchungsausschuss</tag><tag url_value="verteidigungsminister" uuid="a90c57c7-6c40-4001-b341-e6b0d9cf0e0e" score="4" type="free">Verteidigungsminister</tag></rankedTags></head><body>
+    <supertitle>Bundeswehr</supertitle>
+    <title>SPD bezichtigt de Maizière der Lüge</title>
+    <subtitle>Neue Vorwürfe gegen de Maizière: Eine Mail aus dem Verteidigungsministerium soll beweisen, dass der Minister schon Anfang 2012 von den Problemen um den Euro Hawk wusste.</subtitle>
+    <division type="page">
+      <image alt="Verteidigungsminister Thomas de Maizière neben einer Modellversion der Euro-Hawk-Drohne" align="left" title="Euro Hawk" base-id="http://xml.zeit.de/politik/deutschland/2013-05/maiziere-dronen/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Verteidigungsminister Thomas de Maizière neben einer Modellversion der Euro-Hawk-Drohne</bu>
+        <copyright py:pytype="str">© Wolfgang Rattay/Reuters</copyright>
+      </image>
+      <p>In der Affäre um das gescheiterte <a href="http://www.zeit.de/politik/deutschland/2013-07/euro-hawk-untersuchungsausschuss-drohne-de-maiziere" target="_blank" class="">Drohnenprojekt Euro Hawk</a> hat die <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> neue Vorwürfe gegen Verteidigungsminister Thomas de Maizière (<entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity>) erhoben. Unter Berufung auf eine interne Mail aus dem <entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity> warf der SPD-Politiker Hans-Peter Bartels de Maizière Falschaussagen vor. "Nach der Aktenlage hat er nicht die Wahrheit gesagt", sagte Bartels der <em>Neuen Westfälischen</em>.</p>
+      <p>Im <a href="http://www.zeit.de/politik/deutschland/2013-07/untersuchungsausschuss-euro-hawk-zweiter-tag" target="_blank" class="">Untersuchungsausschuss zur Euro-Hawk-Affäre</a> hatte die SPD am Mittwoch eine E-Mail des für Rüstung zuständigen Abteilungsleiters Detlef Selhausen an das Büro des Staatssekretärs Stéphane Beemelmans vorgelegt. Dem Dokument zufolge warnte Selhausen schon im Januar 2012 vor einer "dramatischen Kostenexplosion" bei der Beschaffung der Aufklärungsdrohne. Der leitende Beamte riet von der Einleitung der serienmäßigen Beschaffung ab.</p>
+      <p>Für Bartels belegt das Schreiben, dass de Maizière <a href="http://www.zeit.de/politik/deutschland/2013-07/de-maiziere-drohne-belastendes-dokument" target="_blank" class="">ausreichend mit Informationen versorgt</a> gewesen sei. Es sei nicht glaubhaft, dass der Minister erst im Mai 2013 von den Problemen erfahren habe. "Der Minister wollte sich nicht um ein Rüstungsprojekt kümmern, das ihn dringend hätte interessieren müssen", sagte Bartels.</p>
+      <p>Mit Blick auf die <a href="http://www.zeit.de/politik/deutschland/2013-06/Bundeswehrverband" target="_blank" class="">Bundeswehrreform</a> sagte Bartels: "De Maizière hat Wert darauf gelegt, noch an jedem Schräubchen selbst zu drehen. Vielleicht hatte er keine Hand mehr frei, um sich um die Rüstungsbeschaffung zu kümmern." Bevor man einen Rücktritt fordern könne, müsse der Verteidigungsminister jedoch die Chance erhalten, zu den neuen Erkenntnissen Stellung zu nehmen.</p>
+      <p>De Maizière wollte sich zu den Vorwürfen nicht äußern. In der kommenden Woche werde er als Zeuge im Untersuchungsausschuss für alle Fragen zur Verfügung stehen, sagte der Minister. Es sei nicht angemessen, die Vorgänge im Ausschuss über die Presse zu kommentieren.</p>
+      <p>Das Verteidigungsministerium hatte das 2001 in die Wege geleitete Drohnenprojekt im Mai 2013 wegen massiver Zulassungsprobleme und steigender Kosten <a href="http://www.zeit.de/wirtschaft/2013-05/Drohne-Euro-Hawk-Ausstieg" target="_blank" class="">gestoppt</a>. Zu diesem Zeitpunkt beliefen sich die vertraglichen Verpflichtungen laut Rechnungshof bereits auf 668 Millionen Euro.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Bundeswehr</supertitle>
+    <title>SPD bezichtigt de Maizière der Lüge</title>
+    <text>Neue Vorwürfe gegen de Maizière: Eine Mail aus dem Verteidigungsministerium soll beweisen, dass der Minister schon Anfang 2012 von den Problemen um den Euro Hawk wusste.</text>
+  </teaser>
+</article>

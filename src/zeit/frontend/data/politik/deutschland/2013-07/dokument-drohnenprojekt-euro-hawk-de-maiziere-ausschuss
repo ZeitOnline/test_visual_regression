@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/nato-drohne-global-hawk-zulassung" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Rüstung</supertitle>
+        <title py:pytype="str">Probleme auch bei Nato-Drohnen</title>
+        <text py:pytype="str">Erst gab es Zulassungsprobleme beim Rüstungsprogramm Euro Hawk. Nun zeichnet sich ein ähnliches Dilemma bei einem Drohnen-Projekt der Nato ab.</text>
+        <description py:pytype="str">Erst gab es Zulassungsprobleme beim Rüstungsprogramm Euro Hawk. Nun zeichnet sich ein ähnliches Dilemma bei einem Drohnen-Projekt der Nato ab.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Global Hawk" base-id="http://xml.zeit.de/politik/ausland/2013-07/global-hawk/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Eine Drohne vom Typ Global Hawk der Firma Northrop Grumman (Archiv)</bu>
+          <copyright py:pytype="str">© Ben Stansall/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/29/de-maiziere-drohnen-verteidigungsmysterium" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="2013-07-19T01:53:03+00:00" expires="">
+        <supertitle py:pytype="str">Drohnen-Affäre</supertitle>
+        <title py:pytype="str">De Maizières Verteidigungsmysterium</title>
+        <text py:pytype="str">Wie kam es zum Drohnen-Debakel? Der Verteidigungsminister ist nicht das einzige Problem, analysiert der frühere Leiter des Planungsstabs im Ministerium, Hans Rühle.</text>
+        <description py:pytype="str">Wie kam es zum Drohnen-Debakel? Der Verteidigungsminister ist nicht das einzige Problem, analysiert der frühere Leiter des Planungsstabs im Ministerium, Hans Rühle.</description>
+        <byline py:pytype="str">von Hans Rühle</byline>
+        <image align="left" title="Thomas de Maiziere" base-id="http://xml.zeit.de/meinung/2013-07/s11-thomas-de-maiziere/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière an Bord einer Transall-Maschine auf dem Weg nach Pakistan</bu>
+          <copyright py:pytype="str">© Oliver Lang/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/de-maiziere-drohne-belastendes-dokument" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Affäre</supertitle>
+        <title py:pytype="str">Neue Zweifel an de Maizières Glaubwürdigkeit</title>
+        <text py:pytype="str">Kurz vor Beginn des Untersuchungsausschusses zum gescheiterten Drohnenprojekt gibt es neue Hinweise, dass der Verteidigungsminister doch früher von den Problemen wusste. </text>
+        <description py:pytype="str">Kurz vor Beginn des Untersuchungsausschusses zum gescheiterten Drohnenprojekt gibt es neue Hinweise, dass der Verteidigungsminister doch früher von den Problemen wusste. </description>
+        <byline xsi:nil="true" />
+        <image align="left" title="De Maizière" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thomas-de-maiziere-2/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière</bu>
+          <copyright py:pytype="str">© Odd Anderson/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <image alt="Bundesverteidigungsminister Thomas de Maizière" align="left" title="Bundesverteidigungsminister Thomas de Maizière" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thomas-de-maiziere-3/" type="jpg" publication-date="" expires="2013-10-20T20:21:11+00:00">
+      <bu py:pytype="str">Bundesverteidigungsminister Thomas de Maizière</bu>
+      <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, ds</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-21T07:08:16.199697+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-20T20:54:38.544667+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-21T07:09:25.097419+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-20T20:55:40.138676+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-20T20:53:29.254434+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.herrmann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1057ab915354464aa03eaf29e8aae404</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2976</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:db1ad13a-3259-44b5-ac44-19dc12cb18bb}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="vg_wort_id">1371848</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="thomas-de-maizi%C3%A8re" uuid="5b6e10e0-1481-43b9-8cab-1063607a4460" score="9" type="Person">Thomas de Maizière</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="5" type="Organization">Verteidigungsministerium</tag><tag url_value="bundestag" uuid="8c0df820-912b-459b-8d2a-ae38f50cf1d9" score="4" type="free">Bundestag</tag><tag url_value="drohne" uuid="43bd36b1-f610-4b5b-bb9f-ecce3ba5a708" score="4" type="free">Drohne</tag><tag url_value="minister" uuid="6753ad3b-3aa0-4cc3-97c3-d242c5de374e" score="4" type="free">Minister</tag><tag url_value="opposition" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" score="4" type="free">Opposition</tag><tag url_value="staatssekretaer" uuid="8cef2717-2c27-4ddf-bd90-89790c56f1e0" score="4" type="free">Staatssekretär</tag><tag url_value="untersuchungsausschuss" uuid="b314a17c-8af6-4fd5-839e-aa9c2a488fc5" score="4" type="free">Untersuchungsausschuss</tag><tag url_value="verteidigungsminister" uuid="a90c57c7-6c40-4001-b341-e6b0d9cf0e0e" score="4" type="free">Verteidigungsminister</tag><tag url_value="zeitung" uuid="8e467460-b2c2-4400-a9d2-d6c12dd6027d" score="4" type="free">Zeitung</tag></rankedTags></head><body>
+    <supertitle>Euro-Hawk-Debakel</supertitle>
+    <title>De Maizière war schon früh gewarnt</title>
+    <subtitle>Schon Anfang 2012 soll der Verteidigungsminister vom drohenden Scheitern des Drohnen-Projekts Euro Hawk erfahren haben. Das wäre früher, als er bislang  eingeräumt hat.</subtitle>
+    <division type="page">
+      <image alt="Bundesverteidigungsminister Thomas de Maizière" align="left" title="Bundesverteidigungsminister Thomas de Maizière" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thomas-de-maiziere-3/" type="jpg" publication-date="" expires="2013-10-20T20:21:11+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Bundesverteidigungsminister Thomas de Maizière</bu>
+        <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+      </image>
+      <p>In der Affäre um <a href="http://www.zeit.de/2013/29/de-maiziere-drohnen-verteidigungsmysterium" target="_blank" class="">das gescheiterte Drohnen-Projekt Euro Hawk</a> gerät Verteidigungsminister Thomas de <entity idref="Thomas+de+Maizi%C3%A8re" entity_type="Person" url_value="personen/thomas-de-maizi%C3%A8re">Maizière</entity> weiter in Erklärungsnot. Nach <a href="http://www.faz.net/aktuell/politik/drohnendebakel-de-maiziere-war-frueh-gewarnt-12289074.html" target="_blank" class="">Informationen der <em>Frankfurter Allgemeinen Sonntagszeitung (FAS) </em></a>wurde der Minister schon im Frühjahr 2012 über massive Probleme informiert. So sei in einer für ihn erstellten Informationsmappe für eine Rüstungsklausur von "Schwierigkeiten bei (der) Musterzulassung" für das Drohnen-Projekt die Rede gewesen.</p>
+      <p>Außerdem hieß es dem Bericht zufolge in der Mappe: "Kostensteigerungen stellen (das) Gesamtsystem zunehmend infrage." Sein Staatssekretär Stéphane Beemelmans hat laut <em>FAS</em> auf 
+dem Deckblatt der Mappe vermerkt, es handle sich um eine "sehr gute 
+Vorbereitung", die der Minister "ausdrücklich gelobt" habe. <br /></p>
+      <p>Diese schriftliche Unterrichtung steht im Widerspruch zu <a href="http://www.zeit.de/schlagworte/personen/thomas-de-maizi%C3%A8re/index" target="_blank" class="">de Maizières</a> bisheriger Darstellung. Er hatte Anfang Juni gesagt, bei der Rüstungsklausur am 1. März 2012 seien ihm Zulassungsprobleme als "lösbar" geschildert worden. Danach sei er mehr als ein Jahr lang nicht mehr mit dem Fall befasst gewesen. Erst am 13. Mai 2013 erhielt de Maizière nach eigener Aussage die Vorlage seiner beiden Staatssekretäre, das Euro-Hawk-Projekt zu stoppen – was er dann tat.</p>
+      <p>Allerdings gibt es seit Längerem Zweifel an dieser Darstellung. Vergangene Woche hatte die <a href="http://www.zeit.de/politik/deutschland/2013-07/de-maiziere-drohne-belastendes-dokument" target="_blank" class=""><em>Süddeutsche Zeitung</em> von einem internen Dokument berichtet</a>, das auf eine frühere Einbindung des Verteidigungsministers in die Probleme des Projekts hinweist. Zuvor hatte die Zeitung bereits geschrieben, de Maizière habe im Dezember 2012 eine umfassende Informationsmappe gegengezeichnet, die auf Probleme bei der Zulassung der Drohne hinwies. <br /></p>
+      <p>
+        <strong>Untersuchungsausschuss vernimmt am Montag erste Zeugen</strong>
+      </p>
+      <p>Der Bundestagsausschuss zur Drohnen-Affäre beginnt an diesem Montag mit seinen 
+Zeugenvernehmungen. Das Gremium soll klären, wie das Milliardenprojekt 
+in einem solchen Debakel enden konnte – und warum das 
+<entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity> es nicht früher gestoppt hat. De 
+Maizière soll am 31. Juli aussagen. Anfang September will sich der 
+Bundestag in einer Sondersitzung mit dem Thema befassen. <br /></p>
+      <p>Die Vorsitzende des Ausschusses, Susanne Kastner, sieht de Maizière in der Bringschuld. Der Deutschen Presse-Agentur sagte die SPD-Politikerin, sie verlange vom Verteidigungsminister, die bisherigen Widersprüche aufzuklären. Sie selbst habe "Schwierigkeiten", ihm noch zu glauben.  <br /></p>
+      <p>Vertreter der Opposition verlangen schon länger den Rücktritt des 
+Ministers. Kastner schloss sich diesen Forderungen nicht an. "De 
+Maizière muss selber verantworten, was er tut", sagte sie. Er müsse entscheiden, ob er Minister bleiben könne und wolle. "Aber eins ist klar: Konsequenzen muss es geben," sagte Kastner. </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <text>Schon Anfang 2012 soll der Verteidigungsminister vom drohenden Scheitern des Drohnen-Projekts Euro Hawk erfahren haben. Das wäre früher, als er bislang eingeräumt hat.</text>
+    <title>De Maizière war schon früh gewarnt</title>
+    <supertitle>Euro-Hawk-Debakel</supertitle>
+  </teaser>
+</article>

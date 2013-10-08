@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/D/Andrea_Dernbach/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Andrea Dernbach</display_name>
+    </author>
+    <image align="left" title="Thilo Sarrazin" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thilo-sarrazin/" type="jpg" publication-date="" expires="2013-10-12T11:58:00+00:00">
+      <bu py:pytype="str">Der frühere Finanzsenator Thilo Sarrazin
+</bu>
+      <copyright py:pytype="str">© Soeren Stache/dpa/lbn</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-04/deutschland-un-ruege-sarrazin" year="2013" issue="17" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Rassismus-Vorwurf</supertitle>
+        <title py:pytype="str">UN rügen Deutschland wegen Sarrazin</title>
+        <text py:pytype="str">In Deutschland gelten Sarrazins Thesen über kinderreiche und faule Migranten als Meinungsäußerungen. Die UN werten sie als rassistisch – und setzen Berlin ein Ultimatum.</text>
+        <description py:pytype="str">In Deutschland gelten Sarrazins Thesen über kinderreiche und faule Migranten als Meinungsäußerungen. Die UN werten sie als rassistisch – und setzen Berlin ein Ultimatum.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Sarrazin" base-id="http://xml.zeit.de/politik/deutschland/2013-04/sarrazin/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Thilo Sarrazin (Archiv)</bu>
+          <copyright py:pytype="str">© Thomas Peter/Reuters</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/18/un-ruege-deutschland-sarrazin" year="2013" issue="18" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Diskriminierung</supertitle>
+        <title py:pytype="str">Die UN-Rüge gegen Deutschland ist berechtigt</title>
+        <text py:pytype="str">Die Vereinten Nationen tadeln Deutschland wegen der Sarrazin-Debatte und anderer Rassismen. Wirkt irre? Ist es aber gar nicht, kommentiert Frank Drieschner. </text>
+        <description py:pytype="str">Die Vereinten Nationen tadeln Deutschland wegen der Sarrazin-Debatte und anderer Rassismen. Wirkt irre? Ist es aber gar nicht, kommentiert Frank Drieschner. </description>
+        <byline py:pytype="str">von Frank Drieschner</byline>
+        <image align="left" title="Sarrazin" base-id="http://xml.zeit.de/meinung/2013-04/s10-sarrazin/" type="jpg" publication-date="" expires="2013-06-10T10:26:08+00:00">
+          <bu py:pytype="str">Thilo Sarrazin (Archivbild von 2012)</bu>
+          <copyright py:pytype="str">© Carsten Koall/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Andrea Dernbach</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Tagesspiegel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-12T15:06:27.843010+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-12T13:22:52.024480+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-12T15:07:29.799643+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-12T13:21:59.666256+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-12T13:21:39.813583+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.vontaube</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">cbec401f7e3c44be9d930ed939e56b0f</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3390</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b1afb041-2ccf-4056-a50d-e8c004701e43}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="9" type="Organization">Bundesregierung</tag><tag url_value="bundesbank" uuid="f2feaf6b-502a-4605-8028-891c442df465" score="6" type="Organization">Bundesbank</tag><tag url_value="rassismus" uuid="39b764b7-0ee7-4c04-b6ad-133a77d7c6a0" score="6" type="free">Rassismus</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="6" type="Organization">SPD</tag><tag url_value="sigmar-gabriel" uuid="b4e41ffa-664c-4e98-a739-4497030d6a76" score="6" type="Person">Sigmar Gabriel</tag><tag url_value="bevoelkerung" uuid="59e2b382-24bd-4c73-8833-310f0d741c8f" score="5" type="topic">Bevölkerung</tag><tag url_value="ausbildung" uuid="b81275f7-b3a8-4c23-916d-14fb0a78f81f" score="4" type="free">Ausbildung</tag><tag url_value="sachbuch" uuid="5f403cf8-c83a-4f6c-8f5b-0122faea1a9a" score="4" type="free">Sachbuch</tag><tag url_value="sozialdemokratie" uuid="cc76452e-b4a7-4a0f-9e1a-65ea91823490" score="4" type="free">Sozialdemokratie</tag><tag url_value="staatsanwaltschaft" uuid="8fc2fba5-9010-4700-8361-da054ff631cf" score="4" type="free">Staatsanwaltschaft</tag><tag url_value="tagesspiegel" uuid="034c6bc1-ea5e-4e0e-a302-80ea616ef9ab" score="4" type="free">Tagesspiegel</tag><tag url_value="volksverhetzung" uuid="4abd6295-b946-4030-9727-c6dcfe952a59" score="4" type="free">Volksverhetzung</tag><tag url_value="zeitschrift" uuid="b0a1774a-c179-424c-9757-a6f9b7ebc4cf" score="4" type="free">Zeitschrift</tag><tag url_value="behoerde" uuid="115d43b1-a4fb-45e0-b077-32eb5446d700" score="3" type="free">Behörde</tag><tag url_value="botschaft" uuid="f5b1a92d-642f-412b-be5a-06cb7c943b95" score="3" type="free">Botschaft</tag><tag url_value="buch" uuid="76a89a6e-b5b5-46cd-92f4-a056e6aeaf6b" score="3" type="free">Buch</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag><tag url_value="genf" uuid="1b704594-fa2b-4ac2-8590-2cede6484cf0" score="1" type="Location">Genf</tag></rankedTags></head><body>
+    <supertitle>Rassismus</supertitle>
+    <title>Bundesregierung antwortet auf Sarrazin-Kritik der UN</title>
+    <subtitle>Deutschlands Rüge durch die UN wegen des Falls Sarrazin hat Folgen: Die Bundesregierung prüft nun, ob sie die Gesetze gegen Rassismus ändert.</subtitle>
+    <division type="page">
+      <image align="left" title="Thilo Sarrazin" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thilo-sarrazin/" type="jpg" publication-date="" expires="2013-10-12T11:58:00+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Der frühere Finanzsenator Thilo Sarrazin
+</bu>
+        <copyright py:pytype="str">© Soeren Stache/dpa/lbn</copyright>
+      </image>
+      <p>Die <entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> stellt Änderungen der Gesetzgebung gegen Rassismus in Aussicht. In einer Verbalnote an den Antirassismus-Ausschuss der Vereinten Nationen in Genf, der Deutschland im Falle Sarrazin gerügt hatte, heißt es: "Die Bundesregierung prüft aktuell die deutsche Gesetzgebung zur Strafbarkeit rassistischer Äußerungen im Lichte der Äußerungen des Ausschusses." Die Berliner Staatsanwaltschaft, die das Ermittlungsverfahren gegen Sarrazin wegen Beleidigung und Volksverhetzung eingestellt hatte, habe man gebeten, "jede Möglichkeit zu prüfen, die Entscheidung zur Verfahrenseinstellung zu überdenken", heißt es in dem Text vom 1. Juli, der dem <em>Tagesspiegel</em> vorliegt.</p>
+      <p>Der <a href="http://www.zeit.de/politik/deutschland/2013-04/deutschland-un-ruege-sarrazin" target="_blank" class="">Ausschuss hatte Anfang April</a> festgestellt, dass Sarrazins Äußerungen – damals noch in einem Interview für die Zeitschrift <em>Lettre</em> – rassistisch seien und dabei moniert, dass deutsche Behörden und Gesetzgebung die Bevölkerung gegen solche Äußerungen nicht ausreichend schützten. Die entsprechenden deutschen Gesetze würden zu eng ausgelegt; dass es kein Strafverfahren gegen Sarrazin gegeben habe, sei ein Verstoß gegen die Antirassismus-Konvention. Für eine Antwort aus <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity> hatte der Ausschuss eine Frist von 90 Tagen gesetzt.</p>
+      <p>Auslöser des Stellungnahme war eine Beschwerde des Türkischen Bunds Berlin-Brandenburg (TBB) in <entity idref="Genf" entity_type="Location" url_value="orte/genf">Genf</entity>, nachdem ein Ermittlungsverfahren wegen Volksverhetzung und Beleidigung, das er gegen Sarrazin angestrengt hatte, schon nach wenigen Wochen im November 2009, eingestellt worden war. Die Staatsanwaltschaft sah die Äußerungen Sarrazins als vom Recht auf freie Meinungsäußerung gedeckt an. Der Generalstaatsanwalt stellte sich hinter diese Sicht der Kollegen und stellte zudem fest, dass der TBB auch kein Klagerecht habe. Auch die Klagen zweier Berliner Migranten wurden abgelehnt.  <br /></p>
+      <intertitle>1,35 Millionen Exemplare von Sarrazins Buch verkauft<br /></intertitle>
+      <p>Das <em>Lettre</em>-Interview von 2009 war Sarrazins Buch <em>Deutschland schafft sich ab</em> vorausgegangen. Im Gespräch mit der Zeitschrift hatte der frühere Berliner Finanzsenator Sarrazin, damals noch Vorstandsmitglied der <entity idref="Bundesbank" entity_type="Organization" url_value="organisationen/bundesbank">Bundesbank</entity>, unter anderem gesagt, er müsse "niemanden anerkennen, der vom Staat lebt, diesen Staat ablehnt, für die Ausbildung seiner Kinder nicht vernünftig sorgt und ständig neue kleine Kopftuchmädchen produziert. Das gilt für siebzig Prozent der türkischen und für neunzig Prozent der arabischen Bevölkerung von Berlin".  </p>
+      <p>Ein Jahr später legte Sarrazin mit seinem Buch <em>Deutschland schafft sich ab</em> nach, von dem inzwischen, die Taschenbuchausgabe eingeschlossen, nach Angaben des Verlags 1,35 Millionen Exemplare verkauft sind – mehr als von jedem anderen politischen Sachbuch der deutschen Nachkriegsgeschichte.  </p>
+      <p>Der Versuch des Parteivorsitzenden <entity idref="Sigmar+Gabriel" entity_type="Person" url_value="personen/sigmar-gabriel">Sigmar Gabriel</entity>, den Sozialdemokraten Sarrazin aus der <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> auszuschließen ("Wer uns empfiehlt, diese Botschaft in unseren Reihen zu dulden, der fordert uns zur Aufgabe all dessen auf, was Sozialdemokratie ausmacht"), scheiterte. In der Osterwoche 2011 wurde das Ausschlussverfahren eingestellt,  nachdem Sarrazin erklärt hatte, er habe weder die Partei schädigen noch Migranten beleidigen wollen.<br /></p>
+      <p>
+        <em>Erschienen im <a href="http://www.tagesspiegel.de/politik/stellungnahme-zum-fall-sarrazin-bundesregierung-antwortet-auf-rassismus-vorwurf-der-un/8485086.html" target="_blank" class="">Tagesspiegel</a></em>
+        <a href="#article-editor-create-link"> </a>
+      </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <text>Deutschlands Rüge durch die UN wegen des Falls Sarrazin hat Folgen: Die Bundesregierung prüft nun, ob sie die Gesetze gegen Rassismus ändert.</text>
+    <title>Bundesregierung antwortet auf Sarrazin-Kritik der UN</title>
+    <supertitle>Rassismus</supertitle>
+  </teaser>
+</article>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/bnd-bundeswehr-prism-spionage" year="2013" issue="29" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Abhörtechnik</supertitle>
+        <title py:pytype="str">BND und Bundeswehr kennen Prism seit Jahren</title>
+        <text py:pytype="str">Berichte setzen die Regierung unter Druck: Der BND nutze dieselbe Technik, auf der Prism basiert, und die Bundeswehr wisse von der US-Spionage schon seit 2011, heißt es. </text>
+        <description py:pytype="str">Berichte setzen die Regierung unter Druck: Der BND nutze dieselbe Technik, auf der Prism basiert, und die Bundeswehr wisse von der US-Spionage schon seit 2011, heißt es. </description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/digital/datenschutz/2013-07/nsa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Basis der NSA in Bad Aibling</bu>
+          <copyright py:pytype="str">© Christof Stache/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/innenminister-friedrich-bundestag-nsa" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Überwachung</supertitle>
+        <title py:pytype="str">Friedrich fordert Deutsche zu besserem Datenschutz auf</title>
+        <text py:pytype="str">Der Bundesinnenminister hat wegen der NSA-Affäre eine digitale Grundrechtscharta gefordert. Zudem sollten die Bürger selbst für die Sicherheit ihrer Daten sorgen. </text>
+        <description py:pytype="str">Der Bundesinnenminister hat wegen der NSA-Affäre eine digitale Grundrechtscharta gefordert. Zudem sollten die Bürger selbst für die Sicherheit ihrer Daten sorgen. </description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-nsa-4/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Innenminister Hans-Peter Friedrich (CSU) vor der Sitzung des Geheimdienstausschusses im Bundestag</bu>
+          <copyright py:pytype="str">© Thomas Peter/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-skandal-opposition-kommentar" year="2013" issue="29" ressort="Politik" author="Ludwig Greven" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Wahlkampf und Abhörskandal</supertitle>
+        <title py:pytype="str">Danke, NSA!</title>
+        <text py:pytype="str">Rot-Grün freut sich über den Abhörskandal, der lenkt von eigenen Schwächen ab. Noch nicht mal die Regierungsschelte der Opposition ist ehrlich. Ein Kommentar</text>
+        <description py:pytype="str">Rot-Grün freut sich über den Abhörskandal, der lenkt von eigenen Schwächen ab. Noch nicht mal die Regierungsschelte der Opposition ist ehrlich. Ein Kommentar</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-goering-eckardt-3/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">NSA – Stoff für den Wahlkampf? Katrin Goering-Eckart (Grüne) und Peer Steinbrück (SPD) auf einer gemeinsamen Pressekonferenz.</bu>
+          <copyright py:pytype="str">© Tobias Schwarz/Reuters</copyright>
+        </image>
+      </reference>
+    </references>
+    
+    <image align="left" title="Friedrich-NSA" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-6/" type="jpg" publication-date="" expires="2013-10-17T11:42:58+00:00">
+      <bu py:pytype="str">Dauerbefragter: Innenminister Hans-Peter Friedrich (CSU).
+</bu>
+      <copyright py:pytype="str">© Michael Kappeler/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">afp, reuters, kg</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-29T14:29:21.124114+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-17T12:04:24.472668+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-18T07:47:39.442293+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-17T13:41:16.067622+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-17T13:40:56.147639+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.horeld</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">c35182c891a043e28fde1ab68452943a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4244</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:77bd1f21-dd7f-4857-a626-7976a8ac885a}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="ronald-pofalla" uuid="c72b4b4e-9d5e-414f-b4ae-b8d6515ebc4b" score="7" type="Person">Ronald Pofalla</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="6" type="Organization">CDU</tag><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="5" type="Person">Edward Snowden</tag><tag url_value="prism" uuid="7c31cf4c-fa1d-4526-978a-4ba187d5da0d" score="5" type="topic">Prism</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="4" type="free">Bundeswehr</tag><tag url_value="isaf" uuid="c321ec3a-c97f-4a5f-9a1a-d5c67dabe376" score="4" type="free">Isaf</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="regierungssprecher" uuid="afe915a9-4115-457f-ae27-cd5ebc4e1a71" score="4" type="free">Regierungssprecher</tag><tag url_value="steffen-seibert" uuid="f93a5c35-29f3-4ee6-866e-7d1fecb1ca45" score="4" type="Person">Steffen Seibert</tag><tag url_value="afghanistan" uuid="9187d28e-ea51-4485-b2d6-d5d3852f309c" score="3" type="Location">Afghanistan</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag></rankedTags></head><body>
+    <supertitle>NSA-Datenaffäre</supertitle>
+    <title>Ein, zwei, viele Prisms</title>
+    <subtitle>Auch BND und Bundeswehr sollen Prism-basierte Technik nutzen. Der Geheimdienst sagt, es handele sich nicht um das NSA-Programm, sondern um ein gleichnamiges Nato-System.</subtitle>
+    <division type="page">
+      <image align="left" title="Friedrich-NSA" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-6/" type="jpg" publication-date="" expires="2013-10-17T11:42:58+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Dauerbefragter: Innenminister Hans-Peter Friedrich (CSU).
+</bu>
+        <copyright py:pytype="str">© Michael Kappeler/dpa</copyright>
+      </image>
+      <p><a href="http://www.zeit.de/politik/deutschland/2013-07/innenminister-friedrich-bundestag-nsa" target="_blank" class="">Bundesinnenminister Hans-Peter Friedrich</a> muss den zweiten Tag in Folge über den <a href="http://www.zeit.de/digital/datenschutz/2013-07/faq-nsa-skandal" target="_blank" class="">Skandal um den US-Geheimdienst NSA</a> Auskunft geben. Am Vormittag stand er vor dem Innenausschuss des Bundestages und beantwortete Fragen über das Programm zum Abhören der weltweiten Internet- und  Telekommunikation. Dabei wurde er auch mit neuen Vorwürfen gegen die deutschen Geheimdienste konfrontiert. Der Auslandsgeheimdienst BND und auch die Bundeswehr sollen laut Medienberichten <a href="http://www.zeit.de/digital/datenschutz/2013-07/bnd-bundeswehr-prism-spionage" target="_blank" class="">bereits seit Jahren von dem Prism-Ausspähprogramm gewusst</a> haben. Nun sieht es aber eher so aus, als seien diese Berichte irreführend.<br /></p>
+      <p>Rasche Aufklärung versprach im Ausschuss zunächst nicht der CSU-Minister, sondern sein Parteikollege Hans-Peter Uhl. Bereits vor Beginn der Ausschusssitzung sagte er, dass sich das Verteidigungsministerium dazu "noch heute" äußern werde. "Es geht nicht um Prism, sondern um was ganz anderes", so der innenpolitische Sprecher der Unions-Fraktion. Details wollte er nicht nennen. Die Öffentlichkeit werde überrascht sein, deutete er an.</p>
+      <p>Weniger nebulös klang kurz darauf ein Statement des BND: "Bei dem heute in der <em>Bild</em>-Zeitung genannten, als Prism
+bezeichneten Programm handelt es sich um ein Nato/Isaf-Programm,
+das nicht identisch ist mit dem Prism-Programm der <entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity>", heißt es in dem Schreiben. Und: "Der BND hat keine Kenntnis vom Namen, Umfang und
+Ausmaß des NSA-Programms gehabt."<br /></p>
+      <p>Ähnlich äußerte sich Regierungssprecher <entity idref="Steffen+Seibert" entity_type="Person" url_value="personen/steffen-seibert">Steffen Seibert</entity>. Er verwies auf BND-Erkenntnisse, 
+wonach es sich bei einem in <entity idref="Afghanistan" entity_type="Location" url_value="orte/afghanistan">Afghanistan</entity> verwendeten System mit gleichem 
+Namen um ein anderes System handele. Es werde nicht von den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity>, sondern
+ von der Nato-Truppe Isaf betrieben. Beide Programme seien "nicht 
+identisch". <br /></p>
+      <p>Es gibt also zufällig mehrere Programme namens Prism. Auch bei der NSA oder deren Dienstleistern exitsieren noch andere gleichnamige Programme, die nichts mit dem zu tun haben, was durch die Enthüllungen von <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Edward Snowden</entity> bekannt geworden ist. Das lässt sich leicht nachweisen: Wer auf der Seite <em>indeed.com</em> nach <a href="http://www.indeed.com/resumes?q=PRISM+intelligence" target="_blank" class="">LinkedIn-Profilen von Geheimdienstlern oder Zuarbeitern zusammen mit dem Begriff Prism</a> sucht, bekommt mehrere Ergebnisse. Bei näherem Hinsehen wird aber schnell klar, dass Prism auch bei Geheimdiensten nicht gleich Prism ist.<br /></p>
+      <p><strong>De Maizière vor Ausschuss</strong>  </p>
+      <p>Der Ausschussvorsitzende Wolfgang Bosbach (<entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity>) nannte den Medienbericht dennoch "brisant" und kündigte an, dies auch im Ausschuss zu behandeln. Eben dies <a href="http://www.zeit.de/politik/deutschland/2013-07/nsa-skandal-opposition-kommentar" target="_blank" class="">bezwecken auch SPD und Grüne</a>. Deren Obmann Wolfgang Wieland will dazu auch Thomas de Maizière befragen: "Man muss nun auch den Verteidigungsminister laden", sagte er, wohl wissend, dass Friedrich als Innenminister für die Bundeswehr und ihren Geheimdienst MAD nicht zuständig ist.       </p>
+      <p>Von Friedrich selbst hat die Opposition bereits die Hoffnung aufgegeben, etwas Neues zu erfahren. SPD-Obmann Michael Hartmann hatte den Innenminister bereits am gestrigen Dienstag bei dessen Auftritt vor dem Parlamentarischen Kontrollgremium erlebt und bezweifelt deswegen, dass Friedrich wirklich etwas verheimlicht. "Er weiß aber auch nichts", sagte Hartmann.   <br /></p>
+      <p>
+        <strong>Fragen an Pofalla</strong>
+      </p>
+      <p>Verärgert ist er vor allem über den aus seiner Sicht nachlässigen Umgang der Bundesregierung mit der Datenaffäre. "Große Teile reagieren wie bei einer Lappalie", so Hartmann. Der Schlüssel zur Aufklärung liege zwar in Washington. "Aber der Schlüssel muss auch gedreht werden." Union und FDP sollten sich ein Beispiel an Gerhard Schröders Nein zum Irakkrieg nehmen.  </p>
+      <p>Bei ihrer Forderung nach Aufklärung zielen SPD und Grüne immer stärker auf  Kanzleramtsminister <entity idref="Ronald+Pofalla" entity_type="Person" url_value="personen/ronald-pofalla">Ronald Pofalla</entity>, der zugleich für die Kontrolle der Geheimdienste zuständig ist. Den habe er seit Bekanntwerden der Überwachung gar nicht mehr wahrgenommen, kritisierte Hartmann den Vertrauten von Bundeskanzlerin Angela Merkel. "Pofalla schweigt und schweigt und schweigt", sagte auch Grünen-Politiker Wieland. Die Koalition laviere und habe offenbar weder den Willen noch die Kraft, um für Aufklärung zu sorgen.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>NSA-Datenaffäre</supertitle>
+    <title>Ein, zwei, viele Prisms</title>
+    <text>Auch BND und Bundeswehr sollen Prism-basierte Technik nutzen. Der Geheimdienst sagt, es handele sich nicht um das NSA-Programm, sondern um ein gleichnamiges Nato-System.</text>
+  </teaser>
+</article>

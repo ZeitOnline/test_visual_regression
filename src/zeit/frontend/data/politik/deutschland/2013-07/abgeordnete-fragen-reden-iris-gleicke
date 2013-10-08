@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/C/Lisa_Caspari/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Lisa Caspari</display_name>
+    </author>
+    
+    <image align="left" title="Iris Gleicke" base-id="http://xml.zeit.de/politik/deutschland/2013-07/iris-gleicke-2/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Iris Gleicke</bu>
+      <copyright py:pytype="str">© SPD</copyright>
+    </image>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/mdbbilanz-abgeordnete-reden-kober" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Abgeordnetenbilanz</supertitle>
+        <title py:pytype="str">"Das sind für mich die besten Reden"</title>
+        <text py:pytype="str">Bundestagsneuling Pascal Kober hat in dieser Legislaturperiode 140 Reden gehalten – ein Rekord. Das sei eher zufällig passiert, sagt er im Interview.</text>
+        <description py:pytype="str">Bundestagsneuling Pascal Kober hat in dieser Legislaturperiode 140 Reden gehalten – ein Rekord. Das sei eher zufällig passiert, sagt er im Interview.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Pascal Kober" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pascal-kober/" type="jpg" publication-date="" expires="">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© Buck Fotogafie/Pascal Kober</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/abgeordnete-fragen-reden-volker-beck" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Abgeordnetenbilanz</supertitle>
+        <title py:pytype="str">"Die Koalition versteckt wichtige Debatten"</title>
+        <text py:pytype="str">Laut unserer Abgeordneten-Bilanz ging der Grüne Volker Beck im Bundestag am häufigsten dazwischen, wenn andere das Wort hatten. Im Interview sagt er, warum.</text>
+        <description py:pytype="str">Laut unserer Abgeordneten-Bilanz ging der Grüne Volker Beck im Bundestag am häufigsten dazwischen, wenn andere das Wort hatten. Im Interview sagt er, warum.</description>
+        <byline xsi:nil="true" />
+        <image alt="Der parlamentarische Geschäftsführer der Grünen-Fraktion, Volker Beck" align="left" title="Volker Beck" base-id="http://xml.zeit.de/politik/deutschland/2013-07/volker-beck-3/" type="jpg" publication-date="" expires="2013-10-09T09:38:34+00:00">
+          <bu py:pytype="str">Der parlamentarische Geschäftsführer der Grünen-Fraktion, Volker Beck</bu>
+          <copyright py:pytype="str">© Uwe Anspach/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-mdb-datenprojekt-bundestag" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Deutscher Bundestag</supertitle>
+        <title py:pytype="str">Die große Abgeordneten-Bilanz</title>
+        <text py:pytype="str">Wer hielt die meisten Reden, welche Fraktion war am aktivsten? Wir haben 155.965 öffentlich zugängliche Datensätze deutscher Abgeordneter ausgewertet und aufbereitet.</text>
+        <description py:pytype="str">Wer hielt die meisten Reden, welche Fraktion war am aktivsten? Wir haben 155.965 öffentlich zugängliche Datensätze deutscher Abgeordneter ausgewertet und aufbereitet.</description>
+        <byline xsi:nil="true" />
+        <image alt="Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen" href="http://bit.ly/19cNW53" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bundestag-4/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen</bu>
+          <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Lisa Caspari</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-29T14:13:23.704453+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-29T13:09:58.138728+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-30T08:45:41.570092+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-29T13:09:03.765150+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-29T13:08:53.313304+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">7978ceb3cc114dddbe546338b48a968c</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4809</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:2e5d1ae9-c7fb-4fbb-8c16-d0838b1963ec}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="frank-walter-steinmeier" uuid="b8702395-1aa9-4fc3-b065-e205c9425bf0" score="8" type="Person">Frank Walter Steinmeier</tag><tag url_value="spd-fraktion" uuid="b20a913e-8b98-41c7-9725-d4fb658298d6" score="7" type="Organization">SPD-Fraktion</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="6" type="Organization">SPD</tag><tag url_value="thomas-oppermann" uuid="28dc19f1-51c5-4905-a3fc-6292fe7c2182" score="6" type="Person">Thomas Oppermann</tag><tag url_value="betreuungsgeld" uuid="54db473c-3643-4819-8e47-272a771e4b0b" score="4" type="free">Betreuungsgeld</tag><tag url_value="arbeit" uuid="483a2523-0bc2-4665-8b1b-0ceeb52b53d3" score="3" type="free">Arbeit</tag><tag url_value="geschaeftsfuehrer" uuid="78e724f6-ee15-44bd-903e-85195cb8414a" score="3" type="free">Geschäftsführer</tag><tag url_value="mindestlohn" uuid="eb1f1206-5bd8-4d75-b95c-362ad9e6e56e" score="3" type="free">Mindestlohn</tag><tag url_value="rente" uuid="84c77c2e-4ab4-4b68-82ae-b1fd67f54e68" score="3" type="free">Rente</tag></rankedTags></head><body>
+    <supertitle>Abgeordnetenbilanz</supertitle>
+    <title>"Ich habe nur bei einem Bruchteil aktiv mitgearbeitet"</title>
+    <subtitle>Laut unserer Abgeordnetenbilanz steht der Name Iris Gleicke auf fast allen Anträgen der SPD-Fraktion. Im Interview sagt sie, welchen Sinn das hat.</subtitle>
+    <division type="page">
+      <image align="left" title="Iris Gleicke" base-id="http://xml.zeit.de/politik/deutschland/2013-07/iris-gleicke-2/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Iris Gleicke</bu>
+        <copyright py:pytype="str">© SPD</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE:</strong> Unsere <a href="http://www.zeit.de/politik/deutschland/2013-07/abgeordnetenbilanz-mdb-datenprojekt-bundestag" target="_blank" class="">Abgeordnetenbilanz</a> hat ergeben, dass Sie gemeinsam mit <entity idref="Frank-Walter+Steinmeier" entity_type="Person" url_value="personen/frank-walter-steinmeier">Frank-Walter Steinmeier</entity> und <entity idref="Thomas+Oppermann" entity_type="Person" url_value="personen/thomas-oppermann">Thomas Oppermann</entity> <a href="http://www.zeit.de/politik/deutschland/abgeordnetenbilanz/?partei=-&amp;ansicht=ml&amp;kategorie=2" target="_blank" class="">die meisten Gesetzesinitiativen und Anträge</a> aller Abgeordneter in den Bundestag eingebracht haben: Ihr Name ist auf diese Gruppeninitiativen 504 Mal verzeichnet, der von Herrn Steinmeier 516 Mal und der von Herrn Oppermann 513 Mal. <br /></p>
+      <p><strong>Iris Gleicke:</strong>  Wir sind schließlich auch die größte Oppositionsfraktion und legen uns mächtig ins Zeug, um deutlich zu machen, dass wir eine echte Alternative zu Frau Merkels Schnarchverein sind. Es wird ja gerne behauptet, dass man uns von der Union kaum unterscheiden kann, aber das ist totaler Unsinn, das beweisen wir mit diesen ganzen Anträgen.</p>
+      <p><strong>ZEIT ONLINE:</strong> Aber wie sinnvoll ist denn diese Arbeit überhaupt? Grundsätzlich werden  alle Anträge der Opposition von der Regierungskoalition abgelehnt.  </p>
+      <p><strong>Gleicke:</strong> Es ist schon manchmal frustrierend, wenn unsere wirklich guten Vorschläge erst im Bundestag scheitern und hinterher <a href="http://www.zeit.de/politik/deutschland/2013-06/cdu-csu-wahlprogramm-diskussion-merkel" target="_blank" class="">im CDU-Wahlprogramm auftauchen</a>, wie bei der Mietpreisbremse. Aber die Oppositionsbänke sind nun einmal hart. Das wird sich für uns hoffentlich bald ändern.</p>
+      <raw py:pytype="str">
+        <iframe frameborder="0" marginwidth="0" width="580" height="450" src="http://www.zeit.de/static/js/projekte/mdb/index.html?mdbid=147&amp;q=53" />
+      </raw>
+      <p><br /><strong>ZEIT ONLINE: </strong>Noch in der letzten Sitzungswoche Ende Juni haben Sie mit anderen Abgeordneten einen Antrag gestellt, auf das bereits beschlossene Betreuungsgeld zu verzichten. Welchen Sinn macht das?<strong><br /></strong></p>
+      <p><strong>Gleicke:</strong> Das Betreuungsgeld wird genau die Kinder von der Kindertagesstätte fernhalten, die frühkindliche Förderung brauchen. Das ist ein Irrsinn und ein Skandal. Das wissen auch die Frau Merkel und die Frau von der Leyen, die immer so treuherzig guckt. Aber da lassen wir die nicht raus, das werden wir denen bis zur Wahl immer wieder um die Ohren hauen.   <br /></p>
+      <infobox is_empty="False" href="http://xml.zeit.de/politik/deutschland/2013-07/kategorien-abgeordnetenbilanz" publication-date="" expires="" />
+      <p>
+        <br />
+      </p>
+      <p><strong>ZEIT ONLINE:</strong> Hand aufs Herz: Wie viele Ihrer Anträge hat Schwarz-Gelb in dieser Legislaturperiode passieren lassen?</p>
+      <p><strong>Gleicke</strong>: Keinen einzigen. Allerdings gab es über 100 interfraktionelle Anträge, bei denen wir als <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> oft die treibende Kraft waren.</p>
+      <p><strong>ZEIT ONLINE:</strong> Zu welchen Themenkomplexen hat die SPD die meisten Anträge gestellt?</p>
+      <p><strong>Gleicke</strong>:
+ Im Bereich Arbeit und Soziales waren es allein in dieser Wahlperiode 
+175 Anträge. Darunter auch die wichtigen Anträge zur 
+Ost-West-Angleichung bei der Rente, zum Mindestlohn und zur 
+Lohngleichheit.  </p>
+    </division>
+    <division type="page" teaser="Antrag zur &quot;artgerechten&quot; Haltung des Bundesadlers">
+      <image alt="Klicken Sie auf dieses Bild, um zur Abgeordnetengrafik zu gelangen" href="http://bit.ly/19cNW53" align="left" src="http://xml.zeit.de/politik/deutschland/2013-07/bundestag-4/bundestag-4-368x220.jpg" type="jpg" publication-date="" expires="" layout="large" custom-caption="Klicken Sie auf das Bild um zur ausführlichen Infografik zu gelangen" is_empty="False">
+        <bu py:pytype="str">Klicken Sie auf das Bild um zur ausführlichen Infografik zu gelangen</bu>
+        <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE:</strong> Welches war der skurrilste Antrag, der Ihnen in Ihrer Karriere als Parlamentarierin je untergekommen ist?</p>
+      <p><strong>Gleicke:</strong>
+ Am 29. Oktober 1992 hat die letzte Sitzung des Bundestages im Bonner Wasserwerk stattgefunden. Da gab es zum Abschied eine legendäre 
+Fragestunde. Es ging unter anderem um die Änderung der 
+Ausbildungsordnung für "Wasserwerker" und um die artgerechte Haltung 
+des Bundesadlers, den wir ja damals im Wasserwerk zurücklassen mussten. 
+Die Regierungsvertreter gaben sich übrigens die größte Mühe, diese 
+Fragen mit gleichem Ernst zu beantworten. Das alles steht Wort für 
+Wort im amtlichen Protokoll.</p>
+      <p><strong>ZEIT ONLINE:</strong> Welchem Antrag sollte Schwarz-Gelb endlich mal stattgeben? <br /></p>
+      <p><strong>Gleicke:</strong> Unserem Konzept zur Angleichung der Rentensystem in Ost und West. Das kriegen die selber niemals hin.</p>
+      <p><strong>ZEIT ONLINE:</strong> Wie oft haben Sie in dieser Legislatur einen Antrag mehrerer Abgeordneter wirklich selbst formuliert und wie oft sich nur draufschreiben lassen, weil Sie als parlamentarische Geschäftsführerin der <entity idref="SPD-Fraktion" entity_type="Organization" url_value="organisationen/spd-fraktion">SPD-Fraktion</entity> prominente Unterstützung für die Inhalte sind?</p>
+      <p><strong>Gleicke:</strong> Aktiv mitgearbeitet habe ich natürlich nur an einem Bruchteil dieser Anträge. Aber in denen steckt eine Menge Arbeit und auch echtes Herzblut von mir drin, zum Beispiel bei den Anträgen zur Ostrente. </p>
+      <p><strong>ZEIT ONLINE:</strong> Warum stehen auf vielen Anträgen und Gesetzesentwürfen immer so viele Namen von Abgeordneten, wenn sie doch eigentlich nur von einem Mitarbeiter eines MdBs formuliert wurden?</p>
+      <p><strong>Gleicke:</strong> Ist doch klar: Damit im Parlament und in der Öffentlichkeit deutlich wird, dass nicht nur ein paar Experten hinter dem Antrag stehen, sondern die ganze Fraktion, die den Antrag beschlossen hat. Im übrigen schreiben wir zumindest gelegentlich schon noch selber, bei allem Respekt vor unseren tüchtigen Mitarbeitern. <br /></p>
+      <p><strong>ZEIT ONLINE:</strong> Sie sind parlamentarische Geschäftsführerin der SPD-Fraktion, wie auch Ihr Kollege Oppermann. Doch Ihr Name ist nicht so bekannt. Wieso?  </p>
+      <p><strong>Gleicke:</strong> Ich kümmere mich tatsächlich mehr um interne und organisatorische Fragen, die man nicht an die große Glocke hängt. Ich bin ja unter anderem Personalchefin und Sicherheitsbeauftragte der Fraktion. Das ist die Art von Arbeit, die man macht, ohne viel drüber zu reden. Jedenfalls dann, wenn man sie gut machen will.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Abgeordnetenbilanz</supertitle>
+    <title>"Ich habe nur bei einem Bruchteil aktiv mitgearbeitet"</title>
+    <text>Laut unserer Abgeordnetenbilanz steht der Name Iris Gleicke auf fast allen Anträgen der SPD-Fraktion. Im Interview sagt sie, welchen Sinn das hat.</text>
+  </teaser>
+</article>

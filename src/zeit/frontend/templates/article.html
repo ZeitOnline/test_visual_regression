@@ -1,0 +1,12 @@
+{% extends "templates/layout.html" %}
+{% block content %}
+<div id="title">
+{{article.title|lower}}
+</div>
+<div id="subtitle">
+{{article.subtitle|lower}}
+</div>
+<div id="subtitle">
+{{article.page|safe}}
+</div>
+{% endblock content %}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Ludwig_Greven/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Ludwig Greven</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/interview-sahra-wagenknecht-kapitalismus" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Sahra Wagenknecht</supertitle>
+        <title py:pytype="str">"Der neue Sozialismus muss ein anderer sein"</title>
+        <text py:pytype="str">Der Kapitalismus wird verschwinden, sagt die stellvertretende Linken-Chefin Sahra Wagenknecht im Interview. Er halte sich nur, weil viele keine Alternative sehen.</text>
+        <description py:pytype="str">Der Kapitalismus wird verschwinden, sagt die stellvertretende Linken-Chefin Sahra Wagenknecht im Interview. Er halte sich nur, weil viele keine Alternative sehen.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/sahra-wagenknecht/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Linken-Politikerin Sahra Wagenknecht</bu>
+          <copyright py:pytype="str">© Tobias Schwarz /Reuters</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/10/Analyse-Rot-Rot-Gruen" year="2013" issue="10" ressort="Politik" contenttype="article" publication-date="2013-03-07T03:36:27+00:00" expires="">
+        <supertitle py:pytype="str">Bundestagswahl</supertitle>
+        <title py:pytype="str">Die Linke träumt von Rot-Rot-Grün</title>
+        <text py:pytype="str">Die Linkspartei wirbt für ein Bündnis mit SPD und Grünen nach der Bundestagswahl. Doch wie stehen die Chancen für die umstrittene Konstellation? Von Mariam Lau</text>
+        <description py:pytype="str">Die Linkspartei wirbt für ein Bündnis mit SPD und Grünen nach der Bundestagswahl. Doch wie stehen die Chancen für die umstrittene Konstellation? Von Mariam Lau</description>
+        <byline py:pytype="str">von Mariam Lau</byline>
+        <image align="left" title="kipping linke" base-id="http://xml.zeit.de/politik/deutschland/2013-03/linke-kipping/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Die Parteivorsitzende der Linken, Katja Kipping</bu>
+          <copyright py:pytype="str">©dpa/Hannibal Hanschke</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/ausland/2013-08/gysi-gabriel/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Linken-Fraktionschef Gregor Gysi (l.) und der SPD-Vorsitzende Sigmar Gabriel im Bundestag</bu>
+      <copyright py:pytype="str">© Fabrizio Bensch/Reuters</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Ludwig Greven</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comment-id">http://xml.zeit.de/2013/26/spd</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-01T11:20:20.188999+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-08-01T10:58:32.202688+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-01T11:21:22.270595+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-08-01T10:57:40.688375+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-08-01T10:56:33.729925+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.steffen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">f93c8e4740874f758883cc3b21653e68</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5073</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6655d195-1034-4553-85b2-053e04f70b0c}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="8" type="Organization">Grüne</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="8" type="Organization">SPD</tag><tag url_value="sigmar-gabriel" uuid="b4e41ffa-664c-4e98-a739-4497030d6a76" score="6" type="Person">Sigmar Gabriel</tag><tag url_value="gregor-gysi" uuid="3b754f01-e5b9-49f5-bfa6-3ef89ff1a1c5" score="5" type="Person">Gregor Gysi</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="4" type="free">Bundestagswahl</tag><tag url_value="datenschutz" uuid="42624787-c068-4f31-87bc-91675967dbfe" score="4" type="free">Datenschutz</tag><tag url_value="grundrecht" uuid="194b00f6-8af9-4c59-8196-15cc135bc1a0" score="4" type="free">Grundrecht</tag><tag url_value="pds" uuid="f2be8170-e4cc-43b5-8bf7-38920411ec56" score="4" type="free">PDS</tag><tag url_value="rente" uuid="84c77c2e-4ab4-4b68-82ae-b1fd67f54e68" score="4" type="free">Rente</tag><tag url_value="steuerpolitik" uuid="db91a697-f7ab-4a18-a121-50db41e67c61" score="4" type="free">Steuerpolitik</tag><tag url_value="umfrage" uuid="58b00f01-82b9-40b5-8e8f-e62e99a95943" score="4" type="free">Umfrage</tag><tag url_value="volksparteien" uuid="c0b00d28-6c30-4ea3-b0d2-b06e5a267858" score="4" type="free">Volksparteien</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag><tag url_value="brandenburg" uuid="f87fba11-0516-4250-899e-a12c10cc080e" score="1" type="Location">Brandenburg</tag><tag url_value="mecklenburg-vorpommern" uuid="c37139f6-c307-4aae-adae-9f7b82b53027" score="1" type="Location">Mecklenburg-Vorpommern</tag></rankedTags></head><body>
+    <supertitle>Rot-Rot-Grün</supertitle>
+    <title>Holt die Linke aus der Ecke</title>
+    <subtitle>Die Linkspartei vertritt unzufriedene Wähler, SPD und Grüne wollen aber partout nicht mit ihr koalieren. Das ist ein Irrtum, kommentiert L. Greven.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/ausland/2013-08/gysi-gabriel/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Linken-Fraktionschef Gregor Gysi (l.) und der SPD-Vorsitzende Sigmar Gabriel im Bundestag</bu>
+        <copyright py:pytype="str">© Fabrizio Bensch/Reuters</copyright>
+      </image>
+      <p>Wer Userbeiträge im Internet liest, etwa zur <a href="http://www.zeit.de/politik/deutschland/2013-07/wahlkampf-nsa-andere-themen#comments" target="_blank" class="">Spähaffäre</a>, stößt auf ein immer wiederkehrendes Lamento. Das geht ungefähr so: Die "etablierten Parteien" sind im Grunde alle gleich. Sie tun nichts gegen die Verletzung der Grundrechte, liefern Deutschland den Interessen der Wirtschaft und ausländischer Mächte wie den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> aus und fördern die Spaltung der Gesellschaft. Deshalb ist es vielen ziemlich gleich, wenn die Bürger am 22. September wählen und ob sie überhaupt zur Wahl gehen. Ändern werde sich doch ohnehin nichts. </p>
+      <p>Diese Wehklage mag nicht neu sein und Userkommentare sind sicher nicht repräsentativ. Doch dass der Unmut in der Bevölkerung über die Parteipolitik zunimmt, egal wer gerade regiert, zeigen auch Umfragen und die tendenziell sinkende Wahlbeteiligung. Viele erwarten offensichtlich nicht mehr, dass sich die Politik um ihre Probleme kümmet und sie löst. </p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/2012-09/ludwig-greven-barschel" publication-date="" expires="" />
+      <p>Die Alternativen zu den Etablierten sind überschaubar. Hier die Piraten, dort die rechtspopulistische AfD. Außerdem gibt es noch eine weitere, etwas ältere Partei, der eine grundsätzlich <a href="http://www.zeit.de/politik/deutschland/2013-07/interview-sahra-wagenknecht-kapitalismus" target="_blank" class="">andere Politik</a> zugetraut wird, sei es beim Datenschutz, in der Steuerpolitik oder bei der Rente: die Linke.  </p>
+      <intertitle>Falsche Ausgrenzungspolitik<br /></intertitle>
+      <p>In der realen Politik bleibt die Linkspartei jedoch außen vor. <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> und <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grüne</entity> <a href="http://www.zeit.de/politik/deutschland/2013-07/steinbrueck-bundestagswahl-koalition" target="_blank" class="">schließen weiterhin jede Zusammenarbeit mit ihr nach der Bundestagswahl aus</a>. Damit begeben sich beide Parteien aus mehreren Gründen in eine Falle.</p>
+      <p>Erstens: Ohne die Linke ist Rot-Grün weit von der Macht entfernt. Zusammen kommen SPD und Grüne nach den <a href="http://www.wahlrecht.de/umfragen/index.htm" target="_blank" class="">Umfragen</a> derzeit nur auf maximal 38 bis 39 Prozent – weniger als die Union alleine. Deshalb hat Linken-Fraktionschef <entity idref="Gregor+Gysi" entity_type="Person" url_value="personen/gregor-gysi">Gregor Gysi</entity> recht, wenn er sagt: Nur mit der Linkspartei hat die SPD eine realistische Chance, den Kanzler zu stellen und zusammen mit den Grünen einen Politikwechsel einzuleiten.</p>
+      <p>Inhaltlich gibt es zwischen SPD, den Grünen und Linkspartei zwar erhebliche Differenzen. So lehnt die Linke weitere Kampfeinsätze der Bundeswehr im Ausland ab. Und sie fordert eine Rücknahme oder zumindest grundlegende Überarbeitung der Sozialreformen und der Rente mit 67. Diese Forderungen gibt es allerdings auch in der SPD und bei Teilen der Grünen. Jedenfalls sprächen die programmatischen Unterschiede nicht zwingend dagegen, wenigstens Gespräche über eine mögliche Koalition zu führen. Schließlich schließen das Politiker von SPD und Grünen auch mit der Union und der FDP nicht grundsätzlich aus, obwohl dort die Positionen zum Teil wesentlich weiter auseinander liegen.</p>
+      <p>Zweitens: Wenn SPD und Grüne mit der Linkspartei nicht einmal reden wollen, bleiben ihnen nach Stand der Dinge als Option höchstwahrscheinlich nur eine neuerliche Große Koalition oder Schwarz-Grün. Beides würde sie jeweils spalten und auch das rot-grüne Lager sprengen. Jedenfalls ist diese Perspektive nicht dazu angetan, eigene Anhänger zur Wahl zu locken. Ohne Aussicht auf einen Kanzlerwechsel und eine grundlegend andere Politik werden Wähler, die mit der Politik von Schwarz-Gelb, aber auch der früheren von Rot-Grün unzufrieden sind, zu Hause bleiben.</p>
+    </division>
+    <division type="page" teaser="Futter für den Protest">
+      <p>Dabei gibt es, wie schon Willy Brandt feststellte, seit der Einheit in Deutschland eine strukturelle Mehrheit links der Mitte. Bei vier der sechs Bundestagswahlen seitdem lagen Rot-Rot-Grün zusammengenommen vor oder zumindest fast gleich auf mit Schwarz-Gelb. Und auch jetzt kommt das linke Lager in den Umfragen gemeinsam auf etwa 46 Prozent, ungefähr gleich viel, wenn nicht sogar etwas mehr als das bürgerliche Lager.  <br /></p>
+      <p>Drittens: Auch jenseits der Koalitionsarithmetik birgt die Ausschließeritis von SPD und Grünen gegenüber der Linkspartei grundsätzliche Gefahren. Im Osten bleibt die ehemalige SED bzw. PDS eine Volkspartei. Im Westen bekennen sich etwa vier bis fünf Prozent der Wähler zu ihr, etwa so viel wie zur FDP. Sie genauso wie die 18 bis 20 Prozent Linken-Anhänger in den neuen Länder weiterhin von jeder Regierungsmitwirkung im Bund fernzuhalten, fördert die Protesthaltung in der Bevölkerung und die Abwendung von der Demokratie: Wer nur mitreden darf, aber nichts zu sagen hat, fragt sich irgendwann, weshalb er noch sein Kreuzchen in der Wahlkabine machen soll.</p>
+      <p>Besser wäre, die Linkspartei wie schon auf Landesebene in <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity>, <entity idref="Mecklenburg-Vorpommern" entity_type="Location" url_value="orte/mecklenburg-vorpommern">Mecklenburg-Vorpommern</entity> und derzeit <entity idref="Brandenburg" entity_type="Location" url_value="orte/brandenburg">Brandenburg</entity> einzubinden und sie auf diesem Weg zu einer realistischeren Politik zu zwingen. SPD-Chef <entity idref="Sigmar+Gabriel" entity_type="Person" url_value="personen/sigmar-gabriel">Sigmar Gabriel</entity> hat das vor Kurzem erkannt, als er zwischen "Linkssektierern" im Westen und dem pragmatischen Teil der Linkspartei im Osten unterschied, mit denen er sich eine Regierungszusammenarbeit vorstellen könne. Nun müssten seine Partei und die Grünen nur noch die richtigen Konsequenzen ziehen. Denn der Obersektierer Oskar Lafontaine, der jeglicher Zusammenarbeit im Wege stand, ist in der Linkspartei nur noch ein Auslaufmodell. <br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Rot-Rot-Grün</supertitle>
+    <title>Holt die Linke aus der Ecke</title>
+    <text>Die Linkspartei vertritt unzufriedene Wähler, SPD und Grüne wollen aber partout nicht mit ihr koalieren. Das ist ein Irrtum, kommentiert L. Greven.</text>
+  </teaser>
+</article>

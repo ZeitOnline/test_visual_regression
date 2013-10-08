@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Ludwig_Greven/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Ludwig Greven</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/NSA-Gauck-Spionage-Datenschutz" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundespräsident</supertitle>
+        <title py:pytype="str">Gauck beunruhigt über NSA-Affäre</title>
+        <text py:pytype="str">Der Bundespräsident sieht das deutsche Freiheitsgefühl durch den US-Geheimdienst verletzt. Er habe sich selbst schon gefragt, ob er jetzt noch frei telefonieren könne.</text>
+        <description py:pytype="str">Der Bundespräsident sieht das deutsche Freiheitsgefühl durch den US-Geheimdienst verletzt. Er habe sich selbst schon gefragt, ob er jetzt noch frei telefonieren könne.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="NSA - Bundespräsident Joachim Gauck" base-id="http://xml.zeit.de/politik/deutschland/2013-07/nsa-joachim-gauck/" type="jpg" publication-date="" expires="2013-10-26T05:02:34+00:00">
+          <bu py:pytype="str">Bundespräsident Joachim Gauck </bu>
+          <copyright py:pytype="str">© Daniel Bockwoldt/dpa</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/de-maiziere-euro-hawk-affaere-untersuchungsausschuss" year="2013" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Affäre</supertitle>
+        <title py:pytype="str">Fliegen lief unter "Sonstiges"</title>
+        <text py:pytype="str">Zur Halbzeit im Untersuchungsausschuss zum Drohnen-Debakel steht eines schon fest: Bei der Entwicklung des Rüstungsprojekts haben gleich mehrere Ressortchefs geschlampt.</text>
+        <description py:pytype="str">Zur Halbzeit im Untersuchungsausschuss zum Drohnen-Debakel steht eines schon fest: Bei der Entwicklung des Rüstungsprojekts haben gleich mehrere Ressortchefs geschlampt.</description>
+        <byline py:pytype="str">Antje Sirleschtov</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thomas-de-maiziere-4/" type="jpg" publication-date="" expires="2013-10-26T07:49:39+00:00">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière</bu>
+          <copyright py:pytype="str">© Jens Wolf/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2013-07/solidaritaetszuschlag-merkel-kommentar" year="2013" issue="30" ressort="Wirtschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Wahlkampf</supertitle>
+        <title py:pytype="str">Lieber Steuern erhöhen als Soli zahlen</title>
+        <text py:pytype="str">Merkel will den Solidaritätszuschlag verlängern und für den Aufbau in ganz Deutschland nutzen. Der Ansatz ist richtig, die Lösung falsch, kommentiert Ludwig Greven.</text>
+        <description py:pytype="str">Merkel will den Solidaritätszuschlag verlängern und für den Aufbau in ganz Deutschland nutzen. Der Ansatz ist richtig, die Lösung falsch, kommentiert Ludwig Greven.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Baustelle Ostdeutschland" base-id="http://xml.zeit.de/wirtschaft/2013-07/baustelle-ostdeutschland/" type="jpg" publication-date="" expires="2013-10-23T09:36:17+00:00">
+          <bu py:pytype="str">Im Zentrum der Altstadt von Stralsund baut der Bund Büros, Wohnungen und Geschäfte (Bild vom September 2012).</bu>
+          <copyright py:pytype="str">© Stefan Sauer/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-wahlkampf/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Sommerwahlkampf: Kanzlerin Angela Merkel auf Werbetour in Heringsdorf auf der Insel Usedom</bu>
+      <copyright py:pytype="str">© Reuters/Fabrizio Bensch</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Ludwig Greven</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-28T12:08:30.751735+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-28T07:11:26.425680+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-29T05:35:51.497197+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-28T07:10:32.953865+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-28T07:10:23.253610+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">4778e4ca6f0d400e835f43e36d246dc0</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3368</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:eca14c83-65b1-4546-98df-227d02b8ce36}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="wahlkampf" uuid="83c6adec-c208-4adc-81ba-807b8992ff56" score="7" type="free">Wahlkampf</tag><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="6" type="Organization">Bundesregierung</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="4" type="free">Bundestagswahl</tag><tag url_value="euro-krise" uuid="d8ff0b97-34bc-442b-b694-191786077519" score="4" type="free">Euro-Krise</tag><tag url_value="euro-zone" uuid="11651740-d1d0-4f76-bb66-83bd2ee18090" score="4" type="free">Euro-Zone</tag><tag url_value="internet" uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" score="4" type="free">Internet</tag><tag url_value="mindestlohn" uuid="eb1f1206-5bd8-4d75-b95c-362ad9e6e56e" score="4" type="free">Mindestlohn</tag><tag url_value="nachrichtensendung" uuid="7b789535-4939-42e1-9ba1-dc60c391b2e0" score="4" type="free">Nachrichtensendung</tag><tag url_value="neuverschuldung" uuid="8868c272-74d4-4cba-b4ef-e5d5a1357d0a" score="4" type="free">Neuverschuldung</tag><tag url_value="niedriglohn" uuid="0eb0d45a-3a4f-4caa-884b-f6e997e23493" score="4" type="free">Niedriglohn</tag><tag url_value="rente" uuid="84c77c2e-4ab4-4b68-82ae-b1fd67f54e68" score="4" type="free">Rente</tag><tag url_value="strompreis" uuid="2ee280b7-9f44-49ee-88f2-4a2e56bc01c1" score="4" type="free">Strompreis</tag><tag url_value="verteidigungsminister" uuid="a90c57c7-6c40-4001-b341-e6b0d9cf0e0e" score="4" type="free">Verteidigungsminister</tag><tag url_value="wahl" uuid="3430a584-d5d3-4046-9180-bb2fc866c747" score="4" type="free">Wahl</tag><tag url_value="griechenland" uuid="e25ec114-33a2-42dc-a0c1-9cb9a9158b84" score="3" type="Location">Griechenland</tag><tag url_value="syrien" uuid="37d1aa51-fe08-4277-9e24-c7a7cb8bb778" score="3" type="Location">Syrien</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag><tag url_value="aegypten" uuid="5cbd32f6-2873-47ff-af18-3ad5253a74bc" score="3" type="Location">Ägypten</tag></rankedTags></head><body>
+    <supertitle>Wahlkampf</supertitle>
+    <title>Vergesst mal die Daten!</title>
+    <subtitle>Alles dreht sich nur noch um die Spähaffäre. Dabei gäbe es eine Reihe genauso wichtiger Wahlkampfthemen, nur sind die nicht so leicht zu greifen.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-wahlkampf/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Sommerwahlkampf: Kanzlerin Angela Merkel auf Werbetour in Heringsdorf auf der Insel Usedom</bu>
+        <copyright py:pytype="str">© Reuters/Fabrizio Bensch</copyright>
+      </image>
+      <p>Deutschland scheint es ziemlich gut zu gehen. Es herrscht ein Hochsommer, wie wir ihn lange nicht mehr hatten, und wir können es uns leisten, uns wochenlang über das <a href="http://www.zeit.de/digital/datenschutz/2013-07/nsa-skandal-tschernobyl-vergleich" target="_blank" class="">Ausspähen</a> unserer Internet- und Telefondaten zu erregen, als wäre das völlig neu und von Geheimdiensten nicht zu erwarten. </p>
+      <p>Aber das Thema eignet sich nun einmal wunderbar als Sommerloch-Skandal: Was die <a href="http://www.zeit.de/2013/31/usa-geheimdienst-abhoerskandal" target="_blank" class="">Agenten von NSA, BND und anderen</a> mit all unseren Daten machen, die viele so <a href="http://www.zeit.de/digital/datenschutz/2013-01/serie-mein-digitaler-schutzschild-einleitung" target="_blank" class="">bereitwillig wie ahnungslos</a> im Internet verbreiten, erfahren wir zwar nicht. Aber es gibt wenigstens klare Feindbilder, wenn man die vielen User-Kommentare und Leserbriefe liest: eine finstere Supermacht <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity>, eine willfährige <a href="http://www.zeit.de/politik/deutschland/2013-07/pofalla-geheimdienstgremium-auftritt" target="_blank" class="">Bundesregierung</a>, eine ebenso unfähige <a href="http://www.zeit.de/politik/deutschland/2013-07/nsa-skandal-opposition-kommentar" target="_blank" class="">Opposition</a>.</p>
+      <p>So kann es noch Wochen weitergehen. Denn andere, drängendere Themen scheint es in diesem merkwürdigen Sommerschlaf-Bundestagswahlkampf nicht zu geben. Die <a href="http://www.zeit.de/politik/ausland/2013-07/euro-schulden-hoechststand" target="_blank" class="">Euro-Krise</a>? Schlummert vor sich hin. Erschreckend viele Menschen in Deutschland bekommen <a href="http://www.zeit.de/wirtschaft/2013-07/niedriglohn-deutschland-studie" target="_blank" class="">Niedriglöhne</a>? Schlimm, aber das hören und lesen wir ebenfalls seit Jahren. Der Verteidigungsminister wusste wahrscheinlich noch früher als zugegeben von dem <a href="http://www.zeit.de/politik/deutschland/2013-07/de-maiziere-euro-hawk-affaere-untersuchungsausschuss" target="_blank" class="">Drohnen-Debakel</a>? Dachten wir es uns doch! In <a href="http://www.zeit.de/politik/ausland/2013-07/aegypten-mursi-haftbefehl" target="_blank" class="">Ägypten</a> droht ein Bürgerkrieg, in <a href="http://www.zeit.de/politik/ausland/2013-07/schiiten-sunniten-saudi-arabien-machtpolitik-iran" target="_blank" class="">Syrien</a> wird er immer heftiger? Tja – aber was können wir schon tun?</p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/2012-09/ludwig-greven-barschel" publication-date="" expires="" />
+      <p>So prallen viele wichtige Geschehnisse und Entwicklungen an uns ab. Stattdessen sind Zeitungen, Nachrichtensendungen und Websites voll mit immer neuen Enthüllungen, Analysen, Interviews und Kommentaren zur NSA-Affäre. </p>
+      <intertitle>Andere Fragen bleiben offen<br /></intertitle>
+      <p>Aber sind die anderen Fragen, die wir derzeit fröhlich ignorieren, wirklich so irrelevant? <br /></p>
+      <p>Nur ein paar Beispiele: Wie sieht es wirklich mit der Euro-Krise aus? Kommt das dicke Ende nicht erst noch, wenn die Bundestagswahl vorbei ist, zum Beispiel in Form eines zweiten Schuldenschnitts für <a href="http://www.zeit.de/wirtschaft/2013-07/griechenland-hilfspaket-finanzluecke" target="_blank" class="">Griechenland</a>, für den wir Steuerzahler aufkommen müssten und der die Finanzmärkte und die Euro-Zone in neue Turbulenzen stürzen würde? Brauchen wir einen <a href="http://www.zeit.de/video/2013-07/2539123334001/-spd-und-gruene-wollen-bei-wahlsieg-mindestlohn-anfang-2014-einfuehren#autoplay" target="_blank" class="">Mindestlohn</a>? Bleibt es bei der <a href="http://www.zeit.de/2013/29/angela-merkel-interview" target="_blank" class="">Rente mit 67</a>? Wie wird die Neuverschuldung endlich gestoppt: durch Einsparungen oder höhere Steuern? Wie geht es weiter mit der Energiewende und den Strompreisen? Wie schaffen wir <a href="http://www.zeit.de/2012/51/Wohnungsnot-Sozialwohnung-Stadt" target="_blank" class="">bezahlbaren Wohnraum</a> in den Städten?</p>
+      <p>Auf all das und vieles mehr hätte man schon gerne Antworten von den Parteien und Spitzenpolitikern. Sicher, manches davon steht in ihren Wahlprogrammen. Aber wer liest die schon, und wer glaubt überhaupt noch den Politikern, dass sie nach der Wahl umsetzen, was sie versprochen haben?</p>
+      <intertitle>Nicht ablenken lassen<br /></intertitle>
+      <p>Doch so leicht sollten wir es uns nicht machen. Wahlen ändern eh nichts, egal was ich wähle? Die Politiker machen sowieso, was sie wollen? Wenn das so wäre, könnten wir uns von der Demokratie gleich verabschieden. Und dann brauchen wir uns über die Politik auch nicht mehr zu empören.</p>
+      <p>Nein: Wir alle sind und bleiben das Volk! Und so wie wir oder andere in unserem Namen zu Recht Aufklärung über die Geheimdienstoperationen verlangen, so sollten wir genauso klare Aussagen zu anderen drängenden Problemen einfordern. Gerade im Wahlkampf. Selbst in diesem Super-Sommer.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Vergesst mal die Daten!</title>
+    <supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <text>Plötzlich dreht sich im Wahlkampf alles nur noch um die Spähaffäre. Dabei gibt es eine Reihe genauso wichtiger Wahlkampfthemen. Von Ludwig Greven</text>
+  </teaser>
+</article>

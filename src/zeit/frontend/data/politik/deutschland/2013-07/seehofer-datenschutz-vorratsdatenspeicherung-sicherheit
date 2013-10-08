@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/eugh-vorratsdatenspeicherung-grundrechte-charta" year="2013" issue="28" ressort="Digital" author="Patrick Beuth" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Europäischer Gerichtshof</supertitle>
+        <title py:pytype="str">Freiheit oder Vorratsdaten</title>
+        <text py:pytype="str">Der EuGH muss entscheiden: Ist die Vorratsdatenspeicherung mit den Grundrechten vereinbar? Das Urteil wird auch ein Signal im NSA-Skandal setzen. Von Patrick Beuth</text>
+        <description py:pytype="str">Der EuGH muss entscheiden: Ist die Vorratsdatenspeicherung mit den Grundrechten vereinbar? Das Urteil wird auch ein Signal im NSA-Skandal setzen. Von Patrick Beuth</description>
+        <byline xsi:nil="true" />
+        <image alt="Big Brother" align="left" title="Big Brother" base-id="http://xml.zeit.de/digital/datenschutz/2013-07/vorratsdatenspeicherung/" type="jpg" publication-date="" expires="">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© Fabrizio Bensch/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/internet-ueberwachung-datensicherheit-kommentar" year="2013" issue="28" ressort="Politik" author="Ludwig Greven" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Internetüberwachung </supertitle>
+        <title py:pytype="str">Unsere Daten werden nie sicher sein</title>
+        <text py:pytype="str">Eine Kontrolle der staatlichen Schnüffelei im Netz ist notwendig, aber schwierig. Da sollte man sich nichts vormachen. Zehn Gedanken zur NSA-Affäre</text>
+        <description py:pytype="str">Eine Kontrolle der staatlichen Schnüffelei im Netz ist notwendig, aber schwierig. Da sollte man sich nichts vormachen. Zehn Gedanken zur NSA-Affäre</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/server/" type="jpg" publication-date="" expires="2013-08-05T18:47:57+00:00">
+          <bu py:pytype="str">Staatlicher Zugriff: ein Mann an einem Serverschrank mit Netzwerkkabeln</bu>
+          <copyright py:pytype="str">© dpa/Julian Stratenschulte</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/vorratsdatenspeicherung-cdu-csu-mindestspeicherfristen" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Vorratsdatenspeicherung</supertitle>
+        <title py:pytype="str">CDU weiß nichts von ihrem Kurswechsel </title>
+        <text py:pytype="str">Generalsekretär Hermann Gröhe spricht von einer Ente: Die Union werde nicht von der Vorratsdatenspeicherung abrücken. Andere Unionspolitiker sind verwirrt. </text>
+        <description py:pytype="str">Generalsekretär Hermann Gröhe spricht von einer Ente: Die Union werde nicht von der Vorratsdatenspeicherung abrücken. Andere Unionspolitiker sind verwirrt. </description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Hermann Groehe, Angela Merkel" base-id="http://xml.zeit.de/politik/deutschland/2013-07/hermann-groehe-angela-merkel/" type="jpg" publication-date="" expires="2013-10-05T09:12:34+00:00">
+          <bu py:pytype="str">CDU-Generalsekretär Hermann Gröhe mit Kanzlerin Angela Merkel </bu>
+          <copyright py:pytype="str">© Johannes Eisele/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/horst-seehofer/" type="jpg" publication-date="" expires="2013-10-09T19:13:49+00:00">
+      <bu py:pytype="str">Bayerns Ministerpräsident Horst Seehofer</bu>
+      <copyright py:pytype="str">© David Ebener/dpa</copyright>
+    </image>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, cwe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-10T05:22:29.172777+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-09T19:30:39.494519+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-08T02:00:31+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-09T19:29:47.303713+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-09T19:29:33.469642+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.horeld</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">0185ded0e3f042d39375ab73a7d267f0</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2192</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:190d1d11-85d8-47c0-87e9-d172ef304459}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">28</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="horst-seehofer" uuid="d09f7d7e-414f-406c-bf4b-d8e89552c051" score="10" type="Person">Horst Seehofer</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="7" type="Organization">CDU</tag><tag url_value="csu" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" score="6" type="Organization">CSU</tag><tag url_value="datenschutz" uuid="42624787-c068-4f31-87bc-91675967dbfe" score="4" type="free">Datenschutz</tag><tag url_value="privatsphaere" uuid="831496e7-59c4-4284-a147-2761c11217ff" score="4" type="free">Privatsphäre</tag><tag url_value="vorratsdatenspeicherung" uuid="9e328181-74cf-4dff-ae52-eb43eb09b15c" score="4" type="free">Vorratsdatenspeicherung</tag></rankedTags></head><body>
+    <supertitle>Vorratsdatenspeicherung</supertitle>
+    <title>Seehofer warnt vor umfangreicher Datenerfassung</title>
+    <subtitle>Geht es nach dem CSU-Chef, könnten die Unionsparteien von der Vorratsdatenspeicherung abrücken. Seehofer fordert eine Grundsatzdiskussion zum Schutz der Privatsphäre.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/horst-seehofer/" type="jpg" publication-date="" expires="2013-10-09T19:13:49+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Bayerns Ministerpräsident Horst Seehofer</bu>
+        <copyright py:pytype="str">© David Ebener/dpa</copyright>
+      </image>
+      <p>Bayerns Ministerpräsident <entity idref="Horst+Seehofer" entity_type="Person" url_value="personen/horst-seehofer">Horst Seehofer</entity> hat eine Grundsatzdiskussion innerhalb der <entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity> und <entity idref="CSU" entity_type="Organization" url_value="organisationen/csu">CSU</entity> zum Thema <a href="http://www.zeit.de/politik/deutschland/2013-07/internet-ueberwachung-datensicherheit-kommentar" target="_blank" class="">Datenschutz</a> angeregt. "Wir müssen uns fragen, ob die Dinge alle so geregelt sind, dass wir der Bevölkerung sagen können: Ihr könnt euch auf den Schutz eurer Privatsphäre verlassen. Diese Diskussion wollte und will ich anstoßen", sagte Seehofer dem <a href="http://www.donaukurier.de/nachrichten/digital/datenschutz/Ingolstadt-Digital-Datenschutz-Seehofer-fordert-nach-Datendesaster-Grundsatzdiskussion;art251975,2788527" target="_blank" class=""><em>Donaukurier</em></a>.</p>
+      <p>Demnach will der CSU-Chef auch die Vorratsdatenspeicherung auf den Prüfstand stellen. "Wir müssen aufpassen, dass nicht durch die schiere Masse an Daten die Wahrscheinlichkeit steigt, dass diese Daten Füße bekommen und missbraucht werden", sagte Seehofer. </p>
+      <p>Sicherheitsbehörden müssten zwar unter strengen rechtsstaatlichen Voraussetzungen Datenzugriff haben, um Schwerstverbrechen zu verhindern. "Aber auf der anderen Seite darf es auch nicht zu einem Überwachungsstaat führen, in dem wir glauben, die Dinge im Griff zu haben, sie uns aber in Wirklichkeit aus den Händen gleiten." Seehofer forderte "ein Neujustieren bei der Abwägung von Freiheit und Sicherheit."</p>
+      <p>Die jüngsten Enthüllungen über internationale Geheimdienstaktivitäten 
+unter anderem der amerikanischen NSA bezeichnete Seehofer als 
+"Datendesaster". "Dass in diesem Umfang ohne irgendwelche rechtlichen 
+Grundlagen Daten abgefischt werden, hätte ich nicht für möglich 
+gehalten." Die deutschen Standards zum Datenschutz müssten auch international gelten, forderte Seehofer.<br /></p>
+      <p>Mit den Äußerungen zur Vorratsdatenspeicherung stellt sich Seehofer gegen die CDU. Erst in der vergangenen Woche hatte CDU-Generalsekretär Hermann Gröhe das Vorhaben, alle Telefonverbindungsdaten speichern zu lassen, bekräftigt. Medienberichte über einen <a href="http://www.zeit.de/politik/deutschland/2013-07/vorratsdatenspeicherung-cdu-csu-mindest" target="_blank" class="">Kurswechsel</a> wies die Partei zurück. Der könnte jedoch vom Europäischen Gerichtshof in Luxemburg erzwungen werden. Dort begann am Dienstag ein <a href="http://www.zeit.de/digital/datenschutz/2013-07/eugh-vorratsdatenspeicherung-grundrechte-charta" target="_blank" class="">Prozess</a>, der klären soll, ob die Vorratsdatenspeicherung mit der EU-Grundrechtcharta vereinbar ist.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <text>Geht es nach dem CSU-Chef, könnten die Unionsparteien von der Vorratsdatenspeicherung abrücken. Seehofer fordert eine Grundsatzdiskussion zum Schutz der Privatsphäre.</text>
+    <supertitle>Vorratsdatenspeicherung</supertitle>
+    <title>Seehofer warnt vor umfangreicher Datenerfassung</title>
+  </teaser>
+</article>
