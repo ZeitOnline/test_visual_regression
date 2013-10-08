@@ -37,7 +37,7 @@ Folgende URL liefert eine erste Sicht auf einen Artikel
 
     http://localhost:9090/politik/deutschland/2013-07/wahlbeobachter-portraets 
 
-Die Oprion --reload sorgt dafür, dass bei editiertem Code der Server neu gestartet wird
+Die Option --reload sorgt dafür, dass bei editiertem Code der Server neu gestartet wird
 
 	bin/pserve frontend.ini --reload
 
