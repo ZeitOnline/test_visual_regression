@@ -7,8 +7,12 @@
 		<h2 class="article__subtitle">
 			{{article.subtitle}}
 		</h2>
-		<div class="article__body">
-			{{article.page|safe}}
-		</div>
+    <div id="article_body">
+      {% for page in article.pagesxml %}
+        <div class="page">
+        {{page|safe}}
+        </div>
+      {% endfor %}
+    </div>
 	</div>
 {% endblock content %}

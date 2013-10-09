@@ -42,7 +42,10 @@ class Content (Resource):
         article_tree = objectify.parse(path)
         self.title = unicode(article_tree.getroot().body.title)
         self.subtitle = unicode(article_tree.getroot().body.subtitle)
-        self.page = etree.tostring(article_tree.getroot().body.xpath("//division[@type='page']")[0])
+        self.pages = article_tree.getroot().body.xpath("//division[@type='page']")
+        self.pagesxml = []
+        for page in self.pages:
+          self.pagesxml.append(etree.tostring(page))
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
 
