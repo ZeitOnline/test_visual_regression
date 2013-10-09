@@ -15,6 +15,8 @@ def factory(global_config, **settings):
     config.add_route('json', 'json/*traverse')
     config.add_static_view(name='css',
             path=pkg_resources.resource_filename(__name__,'css'))
+    config.add_static_view(name='fonts',
+            path=pkg_resources.resource_filename(__name__,'fonts'))
     config.add_static_view(name='js',
             path=pkg_resources.resource_filename(__name__,'js'))
     config.scan(package=zeit.frontend)
