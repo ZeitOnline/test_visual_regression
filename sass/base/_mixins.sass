@@ -1,0 +1,35 @@
+=link
+  &:link,
+  &:visited
+    @content
+
+=on-interaction
+  &:hover,
+  &:active,
+  &:focus
+    @content
+
+=visuallyhidden
+  border: 0
+  clip: rect(0 0 0 0)
+  height: 1px
+  margin: -1px
+  overflow: hidden
+  padding: 0
+  position: absolute
+  width: 1px
+
+=ir
+  display: block
+  overflow: hidden
+  white-space: nowrap
+  text-indent: 150%
+
+=unset-media($switch: false)
+  .media__aside
+    float: none
+    margin-bottom: $gutter-media
+    @if $switch
+      margin-left: 0
+    @else
+      margin-right: 0
