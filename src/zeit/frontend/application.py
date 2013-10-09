@@ -3,7 +3,6 @@ import zeit.frontend.model
 import zeit.frontend.navigation
 import pyramid.config
 import pyramid_jinja2
-import pkg_resources
 
 def factory(global_config, **settings):
     config = pyramid.config.Configurator(settings=settings,
@@ -13,9 +12,7 @@ def factory(global_config, **settings):
     utility.globals.update(zeit.frontend.navigation.get_sets())
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
     config.add_route('json', 'json/*traverse')
-    config.add_static_view(name='css',
-            path=pkg_resources.resource_filename(__name__,'css'))
-    config.add_static_view(name='js',
-            path=pkg_resources.resource_filename(__name__,'js'))
+    config.add_static_view(name='css', path='zeit.frontend:css/')
+    config.add_static_view(name='js', path='zeit.frontend:js/')
     config.scan(package=zeit.frontend)
     return config.make_wsgi_app()
