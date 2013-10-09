@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 					cssDir: codeDir + 'css',
 					debugInfo: true,
 					environment: 'development',
-					fontsPath: "fonts", // todo: map to the right path
+					fontsPath: codeDir + 'fonts',
 					httpPath: "/", // todp: adjust this later in project
 					imagesPath: "img", // todo: adjust this later in project
 					javascriptsPath: "js", // todo: map to the right path
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 			options: {
 				browser: true, // set browser enviroment
 				curly: true, // require curly braces around control structure
-				// devel: true, // accept console etc. 
+				// devel: true, // accept console etc.
 				eqeqeq: true, // prohibits the use of == and != in favor of === and !==
 				forin: true, // requires all for in loops to filter object's items
 				indent: 4, // tabsize should be 4 spaces

@@ -1,12 +1,14 @@
 {% extends "templates/layout.html" %}
 {% block content %}
-<div id="title">
-{{article.title|lower}}
-</div>
-<div id="subtitle">
-{{article.subtitle|lower}}
-</div>
-<div id="subtitle">
-{{article.page|safe}}
-</div>
+	<div class="article">
+		<h1 class="article__title">
+			{{article.title}}
+		</h1>
+		<h2 class="article__subtitle">
+			{{article.subtitle}}
+		</h2>
+		<div class="article__body">
+			{{article.page|safe}}
+		</div>
+	</div>
 {% endblock content %}
