@@ -14,3 +14,4 @@ parts
 src/*.egg-info
 
 /node_modules/
+src/zeit/frontend/css
