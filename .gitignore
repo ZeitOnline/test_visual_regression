@@ -15,3 +15,4 @@ src/*.egg-info
 
 /node_modules/
 src/zeit/frontend/css
+src/zeit/frontend/js
