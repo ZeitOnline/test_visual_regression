@@ -15,17 +15,9 @@ Per virtualenv die evtl. Systemabhängigkeiten ausknipsen
 
     virtualenv --no-site-packages .
 
-Pyramid installieren
-
-    bin/easy_install pyramid
-
 Setup ausführen als development
 
     bin/python setup.py develop
-
-Waitress (Webserver) installieren
-
-    bin/pip install waitress
 
 ## App starten
 

@@ -10,6 +10,7 @@ setup(
         'pyramid_jinja2',
         'setuptools',
         'simplejson',
+        'waitress',
     ],
     entry_points={
         'paste.app_factory': [
