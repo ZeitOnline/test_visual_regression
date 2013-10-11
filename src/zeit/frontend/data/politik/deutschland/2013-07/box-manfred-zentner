@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Manfred Zentner</title>
+    <text py:pytype="str">
+      <p>arbeitet seit 2001 für das Institut für Jugendkulturforschung in Wien und Hamburg. Zu seinen Schwerpunkten zählen Jugend in Europa und politische Partizipation.</p>
+    </text>
+  </block>
+</container>

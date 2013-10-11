@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-06/fluechtlingscamp-berlin-protest" year="2013" issue="23" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Protest-Camp</supertitle>
+        <title py:pytype="str">Berlin soll sehen, wie Flüchtlinge leben</title>
+        <text py:pytype="str">Während das Camp in München nach dem Hungerstreik aufgelöst wurde, geht der Flüchtlingsprotest in Berlin weiter – und wird immer professioneller. Von Nicole Sagener</text>
+        <description py:pytype="str">Während das Camp in München nach dem Hungerstreik aufgelöst wurde, geht der Flüchtlingsprotest in Berlin weiter – und wird immer professioneller. Von Nicole Sagener</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/fluechtlinge-berlin-zelt/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Eine Unterstützerin bereitet Betten für die Flüchtlinge am Berliner Oranienplatz vor (Archiv).</bu>
+          <copyright py:pytype="str">© Adam Berry/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/fluechtline-lampedusa-papst-franziskus" year="2013" issue="28" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Lampedusa</supertitle>
+        <title py:pytype="str">Papst geißelt Gleichgültigkeit gegen Flüchtlingselend</title>
+        <text py:pytype="str">Vorgänger Benedikt reiste als erstes zu einem Kirchenkongress. Franziskus geht einen anderen Weg: Er gedenkt der Menschen, die auf der Flucht über das Mittelmeer starben.</text>
+        <description py:pytype="str">Vorgänger Benedikt reiste als erstes zu einem Kirchenkongress. Franziskus geht einen anderen Weg: Er gedenkt der Menschen, die auf der Flucht über das Mittelmeer starben.</description>
+        <byline xsi:nil="true" />
+        <image alt="Papst Franziskus auf Lampedusa" align="left" title="Papst Lampedusa" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/papst-lampedusa-3/" type="jpg" publication-date="" expires="2013-10-08T12:52:27+00:00">
+          <bu py:pytype="str">Papst Franziskus auf Lampedusa
+</bu>
+          <copyright py:pytype="str">© Ciro Fusco/EPA/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-05/Fluechtlinge-Deutschland-Kommentar" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Asylpolitik</supertitle>
+        <title py:pytype="str">Es sind auch unsere Flüchtlinge</title>
+        <text py:pytype="str">Italien schickt Libyer zu uns? Schön wär's! Deutschland drückt sich dank Drittstaaten-Regelung vor der Verantwortung für Flüchtlinge. Eine Schande, meint L. Jacobsen.</text>
+        <description py:pytype="str">Italien schickt Libyer zu uns? Schön wär's! Deutschland drückt sich dank Drittstaaten-Regelung vor der Verantwortung für Flüchtlinge. Eine Schande, meint L. Jacobsen.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Fluechtlinge-Griechenland" base-id="http://xml.zeit.de/politik/deutschland/2013-05/Fluechtlinge-Griechenland/" type="jpg" publication-date="" expires="2013-08-29T17:20:19+00:00">
+          <bu py:pytype="str">Flüchtlinge warten in Athen auf Aufenthaltsgenehmigungen.</bu>
+          <copyright py:pytype="str">©Alexandros Vlachos/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <author href="http://xml.zeit.de/autoren/N/Gerd_Nowakowski" publication-date="" expires="">
+      <display_name py:pytype="str">Gerd Nowakowski</display_name>
+    </author>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/berlin-oranienplatz-fluechtlinge/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Flüchtlingscamp-Bewohner protestieren am Oranienplatz in Berlin-Kreuzberg.</bu>
+      <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Gerd Nowakowski</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-12T09:47:28.391213+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-11T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-12T13:08:30.355150+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-11T15:37:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">a5b6bc372f0d4ab08ba0677cc900adc4</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3797</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4621af46-8863-4c3c-9e70-e0a19e3ec571}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="europaeische-union" uuid="f7f8e748-cc2e-40b0-b065-267e6113e8a2" score="7" type="Organization">Europäische Union</tag><tag url_value="asylrecht" uuid="fffd277e-366e-4463-a48d-cc3d35798231" score="4" type="free">Asylrecht</tag><tag url_value="einwanderung" uuid="b0b89e61-b737-40a8-ad69-f80a02f19b40" score="4" type="free">Einwanderung</tag><tag url_value="fluechtling" uuid="d7c98935-f4bf-43b5-bf38-5307a4d3ed4e" score="4" type="free">Flüchtling</tag><tag url_value="tagesspiegel" uuid="034c6bc1-ea5e-4e0e-a302-80ea616ef9ab" score="4" type="free">Tagesspiegel</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="2" type="Location">Berlin</tag><tag url_value="lampedusa" uuid="77fe8681-a4e3-41ec-9ba4-d686a8d27a1f" score="1" type="Location">Lampedusa</tag></rankedTags></head><body>
+    <supertitle py:pytype="str">Flüchtlinge</supertitle>
+    <title>Wir brauchen ein neues Asyl-Gesetz </title>
+    <byline>Gerd Nowakowski</byline>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/berlin-oranienplatz-fluechtlinge/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Flüchtlingscamp-Bewohner protestieren am Oranienplatz in Berlin-Kreuzberg.</bu>
+        <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+      </image>
+      <p>Wer es sich selbst zu einfach macht, der macht es den Brandstiftern einfach. Und auch wer es gut meint, kann unbeabsichtigt selbst zum Brandstifter werden. Das gilt in <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity> für den Plattenbaubezirk Hellersdorf, wo ein neues Flüchtlingsheim abgelehnt wird, wie fürs hippe Kreuzberg, wo <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2013-06/fluechtlingscamp-berlin-protest" target="_blank" class="">campierende Asylbewerber</a> polarisieren. Zu einfach machen es sich die, die die ganze Debatte für überflüssig erklären, weil doch 2012 nur 77.000 Flüchtlinge nach Deutschland kamen. Ja, wo ist das Problem für ein Volk von 80 Millionen, was schon aus demografischen Gründen an Zuwanderung interessiert sein muss?</p>
+      <p> In der Tat hat der Asylkompromiss von 1993, der nur die Fassade eines Grundrechts übrig ließ, die Zahl von jährlich einer halben Million Asylbewerber radikal reduziert. Und von den Antragstellern werden nur zwei Prozent anerkannt. Doch diejenigen, die es hierher schaffen, sind nicht die gut ausgebildeten Eliten, die Deutschlands Politiker haben wollen, um die internationale Wettbewerbsfähigkeit zu erhalten. So zu tun, als hätte es keine Auswirkungen auf die Anwohner, als gäbe es keine Reibereien, wenn in der Nachbarschaft ein Heim mit hunderten Menschen entsteht, die nach eigenen kulturellen Regeln und Gewohnheiten leben, ist weltfremd.</p>
+      <p> Damit macht man es sich genauso einfach, wie die <entity idref="EU" entity_type="Organization" url_value="organisationen/eu">EU</entity> verantwortlich zu machen für das Repressionsregime an Europas Südgrenze. Dort sollen nun auch Drohnen fliegen; die aber schützen nicht Flüchtlinge, sondern die EU vor neuen Flüchtlingen. Es war immerhin Deutschland, das 1993 mit der Aushöhlung des Asylrechts die Blaupause für Europas Flüchtlingspolitik schrieb. Stacheldrahtzäune, Hubschrauber und Schiffe, die Boote abdrängen, oder auch die Mauer aus Paragrafen, die den Tod zahlloser Menschen verdecken, sind Ergebnis deutscher Politik. Daran ist zu erinnern anlässlich des <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2013-07/fluechtline-lampedusa-papst-franziskus" target="_blank" class="">Papstbesuchs auf Lampedusa</a> mit seinem Appell gegen Gleichgültigkeit und für mehr Humanität, der auch in Berlin eifrig zustimmend begleitet wurde.</p>
+      <p>
+        <strong>Bürgermeister als Brandstifter</strong>
+      </p>
+      <p> Nur ist der Papst nicht überall in Berlin gehört worden. Berlins NPD-Chef ist vielmehr ein rechter Brandstifter, einer, der in Hellersdorf und anderswo die Ängste von Menschen ausnutzen will für rassistische Politik. Verantwortliche Politik darf Hetze aber nicht nachgeben – und muss alles tun, um Belastungen zu reduzieren, damit wenigstens ein konfliktfreies Nebeneinander möglich wird. Dazu gehört mehr als ein Zaun um ein Heim. Und der grüne Kreuzberger Bürgermeister Franz Schulz wird da ebenfalls zum Brandstifter, wenn er am Oranienplatz eine Konfrontation zwischen campierenden Asylbewerbern und Anwohnern zulässt. Die Flüchtlinge prangern zu Recht das Asylrecht an, das nicht zuerst auf Hilfe, sondern auf Abschreckung angelegt ist. Doch Schulz weiß genau, dass sie dort auf dem Platz keine Zukunft haben; die Zustände zu tolerieren ist nicht humanitär, sondern politischer Eigennutz.</p>
+      <p> Eine Revision des Gesetzes, 20 Jahre nach dem Asylkompromiss, ist überfällig. Es ist die Politik selbst, die Anwohnerproteste schafft, wenn sie hunderte Flüchtlinge in leer stehende Schulen zwingt wie in Hellersdorf, anstatt sie in Wohnungen unterzubringen, wo sie sich integrieren können. Es ist falsch, Asylbewerbern jede Ausbildung, jedes Studium oder jede Arbeit zu verbieten und ihnen eine Residenzpflicht aufzuzwingen, statt ihnen Bewegungsfreiheit zuzugestehen. Die Lehre aus <entity idref="Lampedusa" entity_type="Location" url_value="orte/lampedusa">Lampedusa</entity> lautet darum: Wenn man es sich zu einfach macht, dann wird es nur schwieriger. Für alle.</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/zeitung/fluechtlinge-ueber-den-zaun/8485312.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br />
+      </p>
+    </division>
+    <subtitle>Asylbewerbern die Arbeit zu verbieten und eine Residenzpflicht aufzuzwingen, ist falsch. Sie müssen integriert werden, sonst nehmen die Proteste zu, findet G. Nowakowski.</subtitle>
+  </body>
+  
+  <teaser>
+    <title>Wir brauchen ein neues Asyl-Gesetz </title>
+    <supertitle>Flüchtlinge</supertitle>
+    <text>Asylbewerbern die Arbeit zu verbieten und eine Residenzpflicht aufzuzwingen, ist falsch. Sie müssen integriert werden, sonst nehmen die Proteste zu, findet G. Nowakowski.</text>
+  </teaser>
+  <indexteaser>
+    <title py:pytype="str">Flüchtlinge</title>
+    <text py:pytype="str">Über den Zaun</text>
+  </indexteaser>
+</article>

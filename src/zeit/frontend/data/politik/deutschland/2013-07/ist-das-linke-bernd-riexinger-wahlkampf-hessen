@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <keywordset>
+      <keyword source="manual">Linke</keyword>
+      <keyword source="manual">Hessen</keyword>
+      <keyword source="manual">Bernd Riexinger</keyword>
+      <keyword source="manual">Linkspartei</keyword>
+      <keyword source="manual">Willi van Ooyen</keyword>
+    </keywordset>
+    <author href="http://xml.zeit.de/autoren/M/Matthias_Meisner/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Matthias Meisner</display_name>
+    </author>
+    <rankedTags>
+      <tag url_value="bernd-riexinger" uuid="09648a5a-1231-4c9a-8ebe-bcc0ec85d6ad" score="8" type="Person">Bernd Riexinger</tag>
+      <tag url_value="hessen" uuid="418d7173-999f-496a-929f-ef820e7aaa6b" score="7" type="Location">Hessen</tag>
+      <tag url_value="amazon" uuid="d808ff6e-6cca-49fe-a092-f33f121b0da8" score="4" type="Organization">Amazon</tag>
+      <tag url_value="betriebsrat" uuid="0920058e-5a41-42c8-910f-6cf4cc34d693" score="4" type="free">Betriebsrat</tag>
+      <tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag>
+      <tag url_value="kassel" uuid="5ec63953-899b-4f04-bc64-3c6e55016467" score="1" type="Location">Kassel</tag>
+      <tag url_value="wiesbaden" uuid="aa5036b8-2916-4c19-ab2d-6a999abf4823" score="1" type="Location">Wiesbaden</tag>
+    </rankedTags>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-06/linke-parteitag-regierung-opposition-verantwortung" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Linken-Parteitag</supertitle>
+        <title py:pytype="str">Tollkühn geht's nur in der Opposition</title>
+        <text py:pytype="str">Auf ihrem Parteitag sagt die Linke zwar, dass sie gerne mitregieren würde. Die Rolle des Teufelchens aus der Opposition aber gefällt ihr besser. Von S. Dobmeier, Dresden</text>
+        <description py:pytype="str">Auf ihrem Parteitag sagt die Linke zwar, dass sie gerne mitregieren würde. Die Rolle des Teufelchens aus der Opposition aber gefällt ihr besser. Von S. Dobmeier, Dresden</description>
+        <byline xsi:nil="true"/>
+        <image alt="Hat was von Teufelchen: Eine Tanzgruppe auf dem Parteitag der Linken" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-06/linke-parteitag-3/" type="jpg" publication-date="" expires="2013-09-16T10:02:45+00:00">
+          <bu py:pytype="str">Hat was von Teufelchen: Eine Tanzgruppe auf dem Parteitag der Linken</bu>
+          <copyright py:pytype="str">© Kay Nietfeld/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-06/linke-parteitag-dresden-interviews" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Linken-Parteitag</supertitle>
+        <title py:pytype="str">"Opposition ist kein Mist"</title>
+        <text py:pytype="str">Wie lebt es sich fernab der Macht? Wie steht die Partei zur SPD? Wir haben am Rande des Parteitags den fünf wichtigsten Linken-Politikern die gleichen Fragen gestellt.</text>
+        <description py:pytype="str">Wie lebt es sich fernab der Macht? Wie steht die Partei zur SPD? Wir haben am Rande des Parteitags den fünf wichtigsten Linken-Politikern die gleichen Fragen gestellt.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="Parteitag Die Linke Übersicht" base-id="http://xml.zeit.de/politik/deutschland/2013-06/linke-parteitag-teaser/" type="jpg" publication-date="" expires="2013-09-15T14:17:48+00:00">
+          <bu py:pytype="str">Bernd Riexinger, Parteivorsitzender der Partei Die Linke spricht am 14.06.2013 zu Beginn des Parteitags in Dresden (Sachsen). Die Linke will sich auf den Bundestagswahlkampf vorbereiten und ihr Wahlprogramm beschlieﬂen. Foto: Jan Woitas/dpa +++(c) dpa - Bildfunk+++</bu>
+          <copyright py:pytype="str">© Jan Woitas/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-06/interview-kipping-parteitag-linke" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Linken-Parteitag</supertitle>
+        <title py:pytype="str">"Wir sind die soziale Alarmanlage"</title>
+        <text py:pytype="str">Es gab heftige Debatten, doch die letzten Monate waren gute Monate für die Linken, sagt Parteichefin Katja Kipping im Interview. Jetzt fehle noch das Selbstbewusstsein.</text>
+        <description py:pytype="str">Es gab heftige Debatten, doch die letzten Monate waren gute Monate für die Linken, sagt Parteichefin Katja Kipping im Interview. Jetzt fehle noch das Selbstbewusstsein.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="Katja Kipping" base-id="http://xml.zeit.de/politik/deutschland/2013-06/kipping/" type="jpg" publication-date="" expires="2013-09-12T14:23:34+00:00">
+          <bu py:pytype="str">Linken-Parteichefin Katja Kipping </bu>
+          <copyright py:pytype="str">© Tim Brakemeier/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/2013-07/bernd-riexinger-linke-parteitag/" type="jpg" publication-date="" expires="2013-10-10T07:21:01+00:00">
+      <bu py:pytype="str">Bernd Riexinger, Parteivorsitzender der Linken, auf dem Parteitag der Partei in Dresden im Juni 2013.</bu>
+      <copyright py:pytype="str">© Jan Woitas/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Matthias Meisner</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-10T10:22:54.541729+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-08T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-10T10:24:02.568810+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-10T10:04:29.871159+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_bu">Linke Last. Bernd Riexinger, seit gut einem Jahr Parteichef, strampelt in Frankfurt gegen die Stimmung.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/heprodimagesfotos82420130710riexingerzwei-jpg/8473536/2-formatOriginal.JPG?format=formatOriginal</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-10T10:04:10.833592+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.duelffer</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">363d62a788bf4a9887f6ad43245ce8bf</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4743</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6bc38a13-fecd-4a61-81bd-c2d3357d4808}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  </head>
+  <body>
+    <supertitle>Linke in Hessen</supertitle>
+    <title>Wo ein Parteichef vor sechs, sieben Leuten redet</title>
+    <subtitle>"Ist das Bsirske?" Linken-Chef Riexinger bekommt auf seiner Sommertour im hessischen Wahlkampf zu spüren, dass die Linke im Westen nicht die Massen erreicht. </subtitle>
+    <byline>Matthias Meisner</byline>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/2013-07/bernd-riexinger-linke-parteitag/" type="jpg" publication-date="" expires="2013-10-10T07:21:01+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Bernd Riexinger, Parteivorsitzender der Linken, auf dem Parteitag der Partei in Dresden im Juni 2013.</bu>
+        <copyright py:pytype="str">© Jan Woitas/dpa</copyright>
+      </image>
+      <p>Der Bundesvorsitzende der Linken ist gekommen, aber das scheint fast egal zu sein. Willi van Ooyen ist klar, dass die Aktion mit Bernd Riexinger an diesem schwülen Tag an der Hauptwache in Frankfurt nicht viel bringen wird. Um "gute Arbeit und Würde im Handel" soll es gehen. Aber hier werde halt "sehr schnell durchgegangen", sagt Ooyen, Fraktionschef im Wiesbadener Landtag, entschuldigend zur Begrüßung des Parteichefs, der in Hessen seine Sommertour beginnt.</p>
+      <p> Wenn die Resonanz auf die Wahlkampfhilfe aus Berlin am Beginn von Deutschlands umsatzstärkster Einkaufsstraße Zeil als Gradmesser gelten kann, wird es am 22. September sehr eng für die Linke in Hessen. Sie war 2008 erstmals ins Landesparlament eingezogen, konnte ihre Präsenz 2009 nach Andrea Ypsilantis gescheiterten Linksbündnis-Plänen ein Mal verteidigen. Jetzt, elf Wochen vor der Wahl, sind zur Enthüllung eines Großtransparents mit Riexinger gerade mal sechs, sieben Leute da. <br/></p>
+      <p>Schon früher die Lautsprecher aufgedreht hat nebenan eine dubiose Splitterpartei, die sich Italiens Antipolitiker Beppe Grillo zum Vorbild genommen hat. Und tausendmal wichtiger als Wahlkampf ist auf dem Platz das Mega-Event Ironman, auf das sich die Stadt mit einem Verkaufsstand für Laufschuhe, Bier- und Pizzabuden und Kinderkarussell rüstet. Ein Genosse in kurzen Hosen und mit zu kleinem roten Käppi verteilt Flugblätter. Franziska von der Linksjugend, Haare blau und violett gefärbt und mit großen Tattoos an den Oberarmen, reicht dem Bundesvorsitzenden das Mikrofon. Der spricht nur kurz, über Verkäuferinnen, die mit 1.300 Euro nicht vernünftig leben können, und gegen "Befristerei und ständige Unsicherheit" in der Branche. Die Genossen applaudieren artig. Eine Passantin ist schließlich doch stehen geblieben. "Ist das Bsirske?"</p>
+      <p> So falsch ist das gar nicht. Bevor Riexinger vor gut einem Jahr gemeinsam mit Katja Kipping den Vorsitz der Linken übernommen hat, war er zwar nicht Chef der Dienstleistungsgewerkschaft, jedoch deren Stuttgarter Bezirksleiter. Für das Parteiamt hat ihn ver.di beurlaubt. Wenn Riexinger jetzt kämpft um die Konsolidierung der Linken, dann spielt für ihn auch die Verankerung in den Gewerkschaften eine Rolle. Viel Kredit sei verspielt worden, als sich die Genossen im Dauerstreit befanden, sagt er. Den Gewerkschaftsfunktionär will er nicht abschütteln. Zwar hat der Betriebsrat von <a href="http://www.zeit.de/2012/47/Internet-Kaufhaus-Amazon-Kuendigungsfristen-Leiharbeit" class="">Amazon</a> in Bad Hersfeld eine Verabredung platzen lassen. Riexinger bekommt Ersatz beim "China-Paradies" gegenüber dem Frankfurter Gewerkschaftshaus: Ein südhessischer ver.di-Funktionär diskutiert mit ihm <a href="http://www.zeit.de/2013/25/einzelhandel-tarifvertraege-loehne" class="">die Lage im Einzelhandel</a>. Und schließlich spaziert Riexinger über die Zeil zu Karstadt, wo die Lage besonders bedrohlich ist – weil Investor <a href="http://www.zeit.de/2013/26/karstadt-nicolas-berggruen" class="">Nicolas Berggruen</a> nicht investiert. <br/></p>
+      <p>Riexinger dreht ein paar Runden auf dem parteieigenen Lastenfahrrad. Er will es erst nicht glauben – aber tatsächlich unterbrechen die Betriebsräte des Kaufhauses für ihn eine Sitzung. Kein Mikrofon, bestimmt Riexinger, damit die Personalvertreter nicht noch Ärger bekommen. Viele in der Belegschaft hätten Angst, bestätigt deren Chef. "Ganz toll, wie ihr da kämpft", sagt Riexinger, "auf uns könnt ihr bauen." Mit seinem Tross zieht er ins nächstbeste Lokal, bestellt einen Latte Macchiato und einen großen Apfelwein, den Blicken des Kellners ob dieser Kombination standhaltend. "Das war schon super, gigantisch", bejubelt er die paar Minuten mit den Betriebsräten.</p>
+      <p>Am Vortag hat er in Kassel unerwartet viel Zeit für die Landtagsabgeordnete Marjana Schott. Sie hat ein Treffen mit Migrantenvereinen liebevoll vorbereitet, holt gefüllte Weinblätter, Oliven und Schafskäse aus dem Einkaufskorb. Nur von den Migranten ist keiner da – mit erheblicher Verspätung kommt schließlich der Chef des Ausländerbeirates ins Klubhaus des FC Bosporus. Schott sagt, wie schwierig es sei für die Linke in den ländlichen Räumen, "im Vogelsberg, im Odenwald und in der finsteren Rhön". Und dann der Lagerwahlkampf zwischen Schwarz-Gelb und Rot-Grün – beide Blöcke beinahe gleichauf, die Hessen-Linke zerrieben. "Die Hölle", meint Schott. Später darauf angesprochen, wie gut er die organisatorische Panne verkraftet habe, gibt sich Riexinger nachsichtig. Die Verankerung im Westen sei eben nach wie vor schlecht. Gleich nach der Wahl wolle er jedoch den Parteiaufbau forcieren. "Aber sicher ist: Im Osten würde so etwas nie passieren."</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/politik/linken-chef-bernd-riexinger-in-hessen-ist-das-bsirske/8473498.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br/>
+      </p>
+    </division>
+  </body>
+  <teaser>
+    <title>Wo ein Parteichef vor sechs, sieben Leuten redet</title>
+    <text>"Ist das Bsirske?" Linken-Chef Riexinger bekommt auf seiner Sommertour im hessischen Wahlkampf zu spüren, dass die Linke im Westen nicht die Massen erreicht. </text>
+    <supertitle>Linke in Hessen</supertitle>
+  </teaser>
+  <indexteaser>
+    <title py:pytype="str">Linken-Chef Bernd Riexinger in Hessen</title>
+    <text py:pytype="str">„Ist das Bsirske?“</text>
+  </indexteaser>
+</article>

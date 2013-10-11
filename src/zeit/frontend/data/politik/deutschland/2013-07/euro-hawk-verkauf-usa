@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image align="left" title="Euro Hawk in Manching" base-id="http://xml.zeit.de/politik/deutschland/2013-07/eurohawk/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Musiker der Bundeswehr spielen 2011 bei der Auslieferung der Drohne Euro Hawk in Manching. </bu>
+      <copyright py:pytype="str">© Christof Stache/AFP/GettyImagesEuro</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/dokument-drohnenprojekt-euro-hawk-de-maiziere-ausschuss" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Debakel</supertitle>
+        <title py:pytype="str">De Maizière war schon früh gewarnt</title>
+        <text py:pytype="str">Schon Anfang 2012 soll der Verteidigungsminister vom drohenden Scheitern des Drohnen-Projekts Euro Hawk erfahren haben. Das wäre früher, als er bislang eingeräumt hat.</text>
+        <description py:pytype="str">Schon Anfang 2012 soll der Verteidigungsminister vom drohenden Scheitern des Drohnen-Projekts Euro Hawk erfahren haben. Das wäre früher, als er bislang eingeräumt hat.</description>
+        <byline xsi:nil="true" />
+        <image alt="Bundesverteidigungsminister Thomas de Maizière" align="left" title="Bundesverteidigungsminister Thomas de Maizière" base-id="http://xml.zeit.de/politik/deutschland/2013-07/thomas-de-maiziere-3/" type="jpg" publication-date="" expires="2013-10-20T20:21:11+00:00">
+          <bu py:pytype="str">Bundesverteidigungsminister Thomas de Maizière</bu>
+          <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/nato-drohne-global-hawk-zulassung" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Rüstung</supertitle>
+        <title py:pytype="str">Probleme auch bei Nato-Drohnen</title>
+        <text py:pytype="str">Erst gab es Zulassungsprobleme beim Rüstungsprogramm Euro Hawk. Nun zeichnet sich ein ähnliches Dilemma bei einem Drohnen-Projekt der Nato ab.</text>
+        <description py:pytype="str">Erst gab es Zulassungsprobleme beim Rüstungsprogramm Euro Hawk. Nun zeichnet sich ein ähnliches Dilemma bei einem Drohnen-Projekt der Nato ab.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Global Hawk" base-id="http://xml.zeit.de/politik/ausland/2013-07/global-hawk/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Eine Drohne vom Typ Global Hawk der Firma Northrop Grumman (Archiv)</bu>
+          <copyright py:pytype="str">© Ben Stansall/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/29/de-maiziere-drohnen-verteidigungsmysterium" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="2013-07-19T01:53:03+00:00" expires="">
+        <supertitle py:pytype="str">Drohnen-Affäre</supertitle>
+        <title py:pytype="str">De Maizières Verteidigungsmysterium</title>
+        <text py:pytype="str">Wie kam es zum Drohnen-Debakel? Der Verteidigungsminister ist nicht das einzige Problem, analysiert der frühere Leiter des Planungsstabs im Ministerium, Hans Rühle.</text>
+        <description py:pytype="str">Wie kam es zum Drohnen-Debakel? Der Verteidigungsminister ist nicht das einzige Problem, analysiert der frühere Leiter des Planungsstabs im Ministerium, Hans Rühle.</description>
+        <byline py:pytype="str">von Hans Rühle</byline>
+        <image align="left" title="Thomas de Maiziere" base-id="http://xml.zeit.de/meinung/2013-07/s11-thomas-de-maiziere/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière an Bord einer Transall-Maschine auf dem Weg nach Pakistan</bu>
+          <copyright py:pytype="str">© Oliver Lang/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, AFP, dpa, Reuters, sc</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-21T13:34:49.701246+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-21T08:42:51.210921+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-21T17:29:38.660692+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-21T13:30:52.006404+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-21T13:30:44.829632+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Richter</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">109c15e688d541438e10d7f237776062</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2682</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:f5b041be-d873-4ea4-9fe0-dbe85220233d}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="thomas-de-maizi%C3%A8re" uuid="5b6e10e0-1481-43b9-8cab-1063607a4460" score="9" type="Person">Thomas de Maizière</tag><tag url_value="nasa" uuid="9aeb7e09-eef6-40c1-bbe1-c7ebb958091f" score="6" type="Organization">Nasa</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="6" type="Organization">Verteidigungsministerium</tag><tag url_value="drohne" uuid="43bd36b1-f610-4b5b-bb9f-ecce3ba5a708" score="4" type="free">Drohne</tag></rankedTags></head><body>
+    <supertitle>Euro Hawk </supertitle>
+    <title>Eine Drohne zum Freundschaftspreis</title>
+    <subtitle>Schadensbegrenzung beim Euro Hawk: Das Verteidigungsministerium will die Drohne offenbar an die Nasa oder US-Luftwaffe verkaufen. Viel Geld sei damit nicht zu holen.</subtitle>
+    <division type="page">
+      <image align="left" title="Euro Hawk in Manching" base-id="http://xml.zeit.de/politik/deutschland/2013-07/eurohawk/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Musiker der Bundeswehr spielen 2011 bei der Auslieferung der Drohne Euro Hawk in Manching. </bu>
+        <copyright py:pytype="str">© Christof Stache/AFP/GettyImagesEuro</copyright>
+      </image>
+      <p>Das <entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity> will die deutsche Aufklärungsdrohne Euro Hawk offenbar an die <entity idref="US-Weltraumbeh%C3%B6rde" entity_type="Organization" url_value="organisationen/us-weltraumbehoerde">US-Weltraumbehörde</entity> <entity idref="Nasa" entity_type="Organization" url_value="organisationen/nasa">Nasa</entity> oder die US-Luftwaffe verkaufen. Laut einem vertraulichen Bericht des Verteidigungsministeriums vom 24. Mai, aus dem <em>Bild am Sonntag</em> zitiert, endet voraussichtlich im September die Erprobung des Systems durch die Herstellerfirmen. Danach sollen Drohne, Bodenstationen und Ersatzteile in das Eigentum der Bundeswehr übergehen. </p>
+      <p>Das Ministerium regt dem Bericht zufolge den anschließenden Verkauf des Euro Hawk an die Amerikaner an. Es macht sich aber offenbar keine großen Hoffnungen hinsichtlich des erzielbaren Preises: "Wesentliche Mittelrückflüsse werden nicht erwartet." </p>
+      <p>Verteidigungsminister <a href="http://www.zeit.de/2013/29/de-maiziere-drohnen-verteidigungsmysterium" target="_blank" class="">Thomas de Maizière</a> (CDU) hat das Drohnen-Projekt wegen massiver Probleme bei der Zulassung für den europäischen Luftraum und einer drohenden Kostenexplosion gestoppt. Nach Darstellung der Opposition wurden mehr als 500 Millionen Euro in den Euro Hawk investiert; das Ministerium bestreitet diese Behauptung. Ein Verkauf der Drohne soll helfen, den finanziellen Schaden zu verkleinern.</p>
+      <p>
+        <strong>Zeugenvernehmung im Ausschuss</strong>
+      </p>
+      <p>Im Euro-Hawk-Untersuchungsausschuss des Bundestags beginnt am Montag die Zeugenvernehmung. De <entity idref="Thomas+de+Maizi%C3%A8re" entity_type="Person" url_value="personen/thomas-de-maizi%C3%A8re">Maizière</entity> ist erst für Ende Juli geladen. Die Opposition wirft ihm vor, <a href="http://www.zeit.de/politik/deutschland/2013-07/dokument-drohnenprojekt-euro-hawk-de-maiziere-ausschuss" target="_blank" class="">früher als bislang zugegeben vom Ausmaß der Probleme mit der Drohne gewusst</a> und gegenüber dem Parlament die Unwahrheit gesagt zu haben; er habe zu spät gehandelt und dadurch Steuergelder verschwendet.</p>
+      <p>Bundeskanzlerin Angela Merkel (CDU) stärkte de Maizière in der <em>Welt am Sonntag</em> den Rücken. Auf die Frage, ob er ihr uneingeschränktes Vertrauen genieße, sagte Merkel: "Ja." Ob <a href="http://www.zeit.de/politik/deutschland/2013-06/maiziere-euro-hawk-klaus-kocks-interview" target="_blank" class="">de Maizière auch einer neuen Regierung mit Unionsbeteiligung angehören</a> könnte, ließ Merkel offen: "Ich schätze die Arbeit von Thomas de Maizière sehr. Ich verteile aber jetzt noch keine Kabinettsposten."</p>
+      <p>Der verteidigungspolitische Sprecher der SPD-Bundestagsfraktion, Rainer Arnold, bezeichnete den Plan als aussichtslos. "Das halte ich für einen ziemlichen Unfug. Die Amerikaner selbst haben diesen Typ von Euro Hawk stillgelegt, weil sie den nicht mehr haben wollten. Warum sollten sie ihn dann kaufen?", sagte Arnold der <em>Frankfurter Rundschau</em>. "Da ist der Wunsch Vater des Gedankens, aber nicht mehr. Meine Prognose ist: Das Teil steht irgendwann in einem Technik-Museum."<br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Euro Hawk </supertitle>
+    <title>Eine Drohne zum Freundschaftspreis</title>
+    <text>Schadensbegrenzung beim Euro Hawk: Das Verteidigungsministerium will die Drohne offenbar an die Nasa oder US-Luftwaffe verkaufen. Viel Geld sei damit nicht zu holen.</text>
+  </teaser>
+</article>

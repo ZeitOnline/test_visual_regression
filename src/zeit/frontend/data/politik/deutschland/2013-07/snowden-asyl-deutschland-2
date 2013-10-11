@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-6/" type="jpg" publication-date="" expires="2013-08-02T16:48:17+00:00">
+      <bu py:pytype="str">Ein Banner von Edward Snowden in Hongkong</bu>
+      <copyright py:pytype="str">© Kin Cheung/AP/dpa</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/snowden-asyl-aufnahme-aufenthaltsrecht" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">US-Geheimdienstaffäre</supertitle>
+        <title py:pytype="str">Wie Deutschland Snowden doch aufnehmen könnte</title>
+        <text py:pytype="str">Es ist unwahrscheinlich, dass einem Asylantrag des früheren Geheimdienstmitabeiters in Deutschland stattgegeben wird. Trotzdem könnte ihn die Bundesregierung aufnehmen.</text>
+        <description py:pytype="str">Es ist unwahrscheinlich, dass einem Asylantrag des früheren Geheimdienstmitabeiters in Deutschland stattgegeben wird. Trotzdem könnte ihn die Bundesregierung aufnehmen.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-3/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Edward Snowden</bu>
+          <copyright py:pytype="str">© The Guardian/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-snowden-freiheit" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA</supertitle>
+        <title py:pytype="str">Zu gutgläubig für Demokratie</title>
+        <text py:pytype="str">Was haben ehrbare Bürger mit dem Abhörskandal von NSA und GCHQ zu tun? Eine Menge. Denn die Überwachung greift die freie Gesellschaft an, kommentiert K. Polke-Majewski.</text>
+        <description py:pytype="str">Was haben ehrbare Bürger mit dem Abhörskandal von NSA und GCHQ zu tun? Eine Menge. Denn die Überwachung greift die freie Gesellschaft an, kommentiert K. Polke-Majewski.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Computer Kommunikation" base-id="http://xml.zeit.de/politik/deutschland/2013-07/computer-kommunikation/" type="jpg" publication-date="" expires="2013-10-02T09:48:14+00:00">
+          <bu py:pytype="str">Teilnehmer des Jahreskongresses des Chaos Computer Clubs (Archiv) </bu>
+          <copyright py:pytype="str">© Britta Pedersen/dpa</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/gauck-snowden-2" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Kritik an Snowden</supertitle>
+        <title py:pytype="str">Gauck, blind vor Staatsglauben</title>
+        <text py:pytype="str">Der Bundespräsident hat dem Prism-Enthüller "puren Verrat" unterstellt. Das ist unsensibel und steht dem obersten DDR-Aufarbeiter nicht gut an, findet Juliane Leopold.</text>
+        <description py:pytype="str">Der Bundespräsident hat dem Prism-Enthüller "puren Verrat" unterstellt. Das ist unsensibel und steht dem obersten DDR-Aufarbeiter nicht gut an, findet Juliane Leopold.</description>
+        <byline py:pytype="str">Juliane Leopold</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/gauck-snowden/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Bundespräsident Joachim Gauck in seinem Büro</bu>
+          <copyright py:pytype="str">© Fabrizio Bensch/Reuters</copyright>
+        </image>
+      </reference>
+    </references>
+    <badges>
+      <badge>video</badge>
+    </badges>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, AFP, Reuters, tis</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-02T21:41:29.960686+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-02T17:18:02.268638+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-02T21:42:29.725088+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-02T17:17:06.885260+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-03T05:31:07.449647+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.kmueller</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">a5bcfdb20095439e98e8cfba7d628894</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3593</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:dc98a389-f89c-4e3a-9211-1a3cc3e7b9b8}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="9" type="Organization">Bundesregierung</tag><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="9" type="Person">Edward Snowden</tag><tag url_value="angela-merkel" uuid="6698fedd-b573-4b9e-9587-839683bebc28" score="6" type="Person">Angela Merkel</tag><tag url_value="csu" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" score="6" type="Organization">CSU</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="6" type="Organization">Grüne</tag><tag url_value="hans-peter-friedrich" uuid="e4598182-697a-41c1-90b8-5d2124605cd3" score="6" type="Person">Hans-Peter Friedrich</tag><tag url_value="juergen-trittin" uuid="815e08c0-6003-430c-8c48-151d48c2863c" score="5" type="Person">Jürgen Trittin</tag><tag url_value="asyl" uuid="1f68751d-9938-4737-b150-95c265cf00f7" score="4" type="free">Asyl</tag><tag url_value="aufenthaltserlaubnis" uuid="1fd73e0f-f157-49fe-881f-cb20b7393602" score="4" type="free">Aufenthaltserlaubnis</tag><tag url_value="auswaertiges-amt" uuid="94ad1f40-967b-49fb-ba0f-8a16dfc8ff7b" score="4" type="Organization">Auswärtiges Amt</tag><tag url_value="bundesinnenministerium" uuid="4e4fbfc0-59c2-4a4d-b26a-775dee2850a8" score="4" type="free">Bundesinnenministerium</tag><tag url_value="katrin-goering-eckardt" uuid="1a49f2c9-5d2d-409d-aedf-22d9cf061fd4" score="4" type="Person">Katrin Göring-Eckardt</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="4" type="Location">USA</tag><tag url_value="whistleblower" uuid="6e72e907-6e0f-4792-b451-3db80db099b8" score="4" type="free">Whistleblower</tag><tag url_value="brief" uuid="5d768e2c-d098-4d95-b560-6e6f3074899c" score="3" type="free">Brief</tag><tag url_value="grossbritannien" uuid="60ea3a47-e23b-453c-96f7-122f91d91c8e" score="3" type="Location">Großbritannien</tag><tag url_value="grundrecht" uuid="194b00f6-8af9-4c59-8196-15cc135bc1a0" score="3" type="free">Grundrecht</tag><tag url_value="privatsphaere" uuid="831496e7-59c4-4284-a147-2761c11217ff" score="3" type="free">Privatsphäre</tag><tag url_value="rechtsstaat" uuid="c058570f-33d9-419f-aa4d-465fe4518856" score="3" type="free">Rechtsstaat</tag><tag url_value="visum" uuid="17f94713-3a7b-4604-9e53-1b5851684a07" score="3" type="free">Visum</tag><tag url_value="moskau" uuid="68918ea8-dfaa-4acd-8078-6bd1c66d32f7" score="2" type="Location">Moskau</tag></rankedTags></head><body>
+    <supertitle>Whistleblower</supertitle>
+    <title>Bundesregierung lehnt Snowdens Asylantrag ab </title>
+    <subtitle>Edward Snowden wird kein Asyl in Deutschland bekommen. Laut Bundesregierung sind die Voraussetzungen für eine Aufnahme des Whistleblowers nicht erfüllt. </subtitle>
+    <division type="page">
+      <image align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-6/" type="jpg" publication-date="" expires="2013-08-02T16:48:17+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Ein Banner von Edward Snowden in Hongkong</bu>
+        <copyright py:pytype="str">© Kin Cheung/AP/dpa</copyright>
+      </image>
+      <p>Die <entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> hat das <a href="http://www.zeit.de/politik/deutschland/2013-07/snowden-asyl-aufnahme-aufenthaltsrecht" target="_blank" class="">Aufnahmegesuch des ehemaligen US-Geheimdienstmitarbeiters Edward Snowden</a> abgelehnt. "Die Voraussetzungen
+für eine Aufnahme liegen nicht vor", teilten das <entity idref="Ausw%C3%A4rtige+Amt" entity_type="Organization" url_value="organisationen/auswaertige-amt">Auswärtige Amt</entity> und das
+Bundesinnenministerium mit. Snwoden, der sich in <entity idref="Moskau" entity_type="Location" url_value="orte/moskau">Moskau</entity> aufhält, hatte per Fax
+einen Antrag auf Asyl in Deutschland an die deutsche Botschaft in Moskau
+geschickt.   <br /></p>
+      <p>Ein Asylantrag muss allerdings in Deutschland gestellt
+werden. <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Snowdens</entity> Antrag wurde also wohl aus formalen Gründen abgelehnt. <br /></p>
+      <p>Die Bundesregierung hatte eine Aufnahme des US-Bürgers geprüft,
+der in seiner Heimat wegen Landesverrats gesucht wird. Der 30-jährige Whistleblower
+hat in mehreren Ländern um Asyl gebeten. Immer mehr Staaten wollen es ihm aber
+nicht gewähren.</p>
+      <p>Bundesinnenminister <entity idref="Hans-Peter+Friedrich" entity_type="Person" url_value="personen/hans-peter-friedrich">Hans-Peter Friedrich</entity> (<entity idref="CSU" entity_type="Organization" url_value="organisationen/csu">CSU</entity>) hatte den Eingang des Asylantrags von Snowden bestätigt, aber <a href="http://www.zeit.de/politik/deutschland/2013-07/snowden-asyl-deutschland" target="_blank" class="">zugleich die Hoffnungen gedämpft</a>. Er könne kein Asyl im eigentlichen Sinne beantragen, weil er dazu bereits in Deutschland sein müsste. Geprüft wurde, ob eine Aufnahme aus humanitären und völkerrechtlichen Gründen möglich sei. Auch dazu hatte sich Friedrich skeptisch geäußert, da die <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> ein Rechtsstaat seien.</p>
+      <p>Die Bundesrepublik hat zudem ein Auslieferungsabkommen mit den USA unterzeichnet. Präsident Barack Obama hatte Ländern darüber hinaus mit Konsequenzen gedroht, die Snowden
+Zuflucht bieten.</p>
+      <p>Die Spitzenkandidaten der <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grünen</entity>, <entity idref="Katrin+G%C3%B6ring-Eckardt" entity_type="Person" url_value="personen/katrin-goering-eckardt">Katrin Göring-Eckardt</entity> und <entity idref="J%C3%BCrgen+Trittin" entity_type="Person" url_value="personen/juergen-trittin">Jürgen Trittin</entity>, kritisierten die Entscheidung der Regierung. "Die Absage von <entity idref="Angela+Merkel" entity_type="Person" url_value="personen/angela-merkel">Angela Merkel</entity> an eine Aufnahme von Edward Snowden zeigt die ganze Scheinheiligkeit dieser Regierung. Sie gibt sich empört, unternimmt aber nichts", teilten sie mit. Snowden solle eine Aufenthaltserlaubnis erhalten, sagten sie weiter. Er hat mit der Aufdeckung von Geheimdienstpraktiken, die die Grundrechte eklatant verletzten, der Demokratie einen großen Dienst erwiesen.<br /></p>
+      <intertitle>Snowdens Vater lobt Sohn als Freiheitskämpfer<br /></intertitle>
+      <p>Der 30-Jährige hatte umfassende Spähprogramme des US-Geheimdienstes
+<entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity> und des britischen Geheimdienstes öffentlich gemacht. Außerdem soll die NSA
+EU-Einrichtungen verwanzt haben. Seit mehr als einer Woche hält sich Snowden im
+Transitbereich des Moskauer Flughafens Scheremetjewo auf. Er kann ihn ohne
+russisches Visum nicht verlassen. Die USA hatten seinen Pass für ungültig
+erklärt.</p>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2013-07/2522700455001" expires="2013-08-01T07:00:00+00:00" />
+      <p>Eine Auslieferung an die USA würde Snowden nach dessen eigener Einschätzung in Lebensgefahr bringen. In seinem Heimatland drohten ihm "lebenslange Haft oder sogar der Tod", schrieb er in seinem Asylantrag an den polnischen Außenminister.   <br /></p>
+      <p>Der Vater des flüchtigen Ex-Geheimdienstlers Edward Snowden hat sich in 
+einem offenen Brief an seinen Sohn gewandt und dessen Handeln als tapfer
+ und ehrenwert bezeichnet. In dem von einem Anwalt verfassten Schreiben 
+wandte sich Lon Snowden am Dienstag an seinen in Moskau gestrandeten 
+Sohn und hob ihn darin auf eine Stufe mit den amerikanischen 
+Freiheitskämpfern des 18. Jahrhunderts. Wie ein "moderner Paul Revere" 
+rufe er die amerikanischen Bürger dazu auf, gegen die "wachsende 
+Bedrohung der Tyrannei" aufzubegehren. Paul Revere und Thomas Paine, der
+ ebenfalls in dem Brief erwähnt wird, gehörten zu den wichtigsten 
+Verfechtern der amerikanischen Unabhängigkeit von <entity idref="Gro%C3%9Fbritannien" entity_type="Location" url_value="orte/grossbritannien">Großbritannien</entity>. Edward Snowden sei ein "Patriot", der die Frage nach Privatsphäre auf die
+ nationale Agenda gesetzt habe.<br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Bundesregierung lehnt Snowdens Asylantrag ab </title>
+    <supertitle>Whistleblower</supertitle>
+    <text>Edward Snowden wird kein Asyl in Deutschland bekommen. Laut Bundesregierung sind die Voraussetzungen für eine Aufnahme des Whistleblowers nicht erfüllt. </text>
+  </teaser>
+</article>

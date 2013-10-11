@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/D/Steffi_Dobmeier/index" publication-date="" expires="">
+      <display_name py:pytype="str">Steffi Dobmeier</display_name>
+    </author>
+    <image align="left" title="Christian Ude hält Wort" base-id="http://xml.zeit.de/politik/deutschland/2013-07/christian-ude-wort/" type="jpg" publication-date="" expires="2013-10-04T11:59:00+00:00">
+      <bu py:pytype="str">Das Wahlplakat von Christian Ude (SPD)</bu>
+      <copyright py:pytype="str">© M. C. Hurek/dpa</copyright>
+    </image>
+    <rankedTags>
+      <tag type="Location" score="1" uuid="bd9c5328-154e-4994-b705-8e4ee8c4fdbc" url_value="bayern">Bayern</tag>
+      <tag type="Location" score="1" uuid="93ba80ad-76d9-4ff5-bcf0-66d011cf8eef" url_value="muenchen">München</tag>
+      <tag type="Organization" score="7" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" url_value="spd">SPD</tag>
+      <tag type="Person" score="6" uuid="72a7dc22-5360-461f-85c7-6475164b0f6e" url_value="christian-ude">Christian Ude</tag>
+      <tag type="Person" score="6" uuid="d09f7d7e-414f-406c-bf4b-d8e89552c051" url_value="horst-seehofer">Horst Seehofer</tag>
+      <tag type="free" score="3" uuid="3430a584-d5d3-4046-9180-bb2fc866c747" url_value="wahl">Wahl</tag>
+      <tag type="Organization" score="7" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" url_value="csu">CSU</tag>
+      <tag type="Organization" score="6" uuid="6ea18a33-3088-4213-b2af-0001db06444a" url_value="fdp">FDP</tag>
+      <tag type="Organization" score="6" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" url_value="gruene">Grüne</tag>
+      <tag type="topic" score="5" uuid="09b3c991-6c1d-4ff8-bb51-8371158f1f10" url_value="finanzen">Finanzen</tag>
+      <tag type="free" score="4" uuid="63f2188a-b919-4ccf-9e7d-2b25f50bf99d" url_value="humor">Humor</tag>
+      <tag type="free" score="3" uuid="58b00f01-82b9-40b5-8e8f-e62e99a95943" url_value="umfrage">Umfrage</tag>
+    </rankedTags>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2012-08/bayern-spd-ude-altkanzler-schmidt" year="2012" issue="35" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bayern-SPD</supertitle>
+        <title py:pytype="str">Helmut Schmidt soll den Ude-Hype wiederbeleben</title>
+        <text py:pytype="str">Christian Ude möchte Ministerpräsident in Bayern werden. Doch seine Kampagne stockt. Deshalb holte seine Partei Altkanzler Helmut Schmidt zum gemeinsamen Auftritt.</text>
+        <description py:pytype="str">Christian Ude möchte Ministerpräsident in Bayern werden. Doch seine Kampagne stockt. Deshalb holte seine Partei Altkanzler Helmut Schmidt zum gemeinsamen Auftritt.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2012-08/schmidt-ude/" type="jpg" publication-date="" expires="2013-08-29T21:59:25+00:00">
+          <bu py:pytype="str">Helmut Schmidt und Christian Ude im Volkstheater in München</bu>
+          <copyright py:pytype="str">© Lukas Barth/dapd</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-05/seehofer-ude-landtag-verwandte" year="2013" issue="19" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Bayern</supertitle>
+        <title py:pytype="str">Seehofer wehrt sich gegen Rücktrittsforderungen</title>
+        <text py:pytype="str">Es sollte ein großer Tag für Seehofer werden: die Kür zum CSU-Spitzenkandidaten. Dann kam die Job-Affäre dazwischen und zwang Seehofer in die Offensive.</text>
+        <description py:pytype="str">Es sollte ein großer Tag für Seehofer werden: die Kür zum CSU-Spitzenkandidaten. Dann kam die Job-Affäre dazwischen und zwang Seehofer in die Offensive.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="Horst Seehofer" base-id="http://xml.zeit.de/politik/deutschland/2013-05/seehofer-2/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Der bayerische Ministerpräsident Horst Seehofer während des Parteikonvents der CSU in München</bu>
+          <copyright py:pytype="str">© Andreas Gebert/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-02/ude-steinbrueck-spd-aschermittwoch-bayern" year="2013" issue="7" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">SPD</supertitle>
+        <title py:pytype="str">Ude flieht in die Satire, Steinbrück räumt Fehler ein</title>
+        <text py:pytype="str">Die SPD bejubelt sich am Aschermittwoch lautstark selbst. Aber viel Bier und starke Sprüche können nicht über die missliche Lage hinwegtäuschen. Von P. Guyton, Vilshofen</text>
+        <description py:pytype="str">Die SPD bejubelt sich am Aschermittwoch lautstark selbst. Aber viel Bier und starke Sprüche können nicht über die missliche Lage hinwegtäuschen. Von P. Guyton, Vilshofen</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="SPD Aschermittwoch" base-id="http://xml.zeit.de/politik/deutschland/2013-02/spd-aschermittwoch/" type="jpg" publication-date="" expires="2013-05-13T12:41:59+00:00">
+          <bu py:pytype="str">Politischer Aschermittwoch der SPD: Kanzlerkandidat Peer Steinbrück und Münchens Oberbürgermeister Christian Ude im bayerischen Vilshofen</bu>
+          <copyright py:pytype="str">© Daniel Karmann/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Steffi Dobmeier</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-05T12:42:50.265694+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-05T12:43:49.775117+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-05T12:45:03.894267+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-05T12:43:49.868821+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-05T12:42:29.532539+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.klormann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1bcb203e38fc47f186c76f22aaaa7e71</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3462</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fce189c2-00bd-4987-a578-0c60048816f7}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">28</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  </head>
+  <body>
+    <supertitle>Bayern-Wahlkampf</supertitle>
+    <title>"Besser als langweilige Kampagnen"</title>
+    <subtitle>Bayerns SPD und ihr Spitzenkandidat Ude werden wegen eines Wahlplakats verspottet. Hauptsache Aufmerksamkeit, sagt SPD-Generalsekretärin Natascha Kohnen im Interview.</subtitle>
+    <division type="page">
+      <image align="left" title="Christian Ude hält Wort" base-id="http://xml.zeit.de/politik/deutschland/2013-07/christian-ude-wort/" type="jpg" publication-date="" expires="2013-10-04T11:59:00+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Das Wahlplakat von Christian Ude (SPD)</bu>
+        <copyright py:pytype="str">© M. C. Hurek/dpa</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE: </strong>Ist dieses Wahlplakat Ihr Ernst? <br/></p>
+      <p><strong>Natascha Kohnen: </strong>Aber natürlich! Das Plakat ist genau das, was ein Wahlplakat sein soll: 
+Witzig, anders, bildstark. Ein Blickfang, der Lust macht auf die Wahl.  </p>
+      <p><strong>ZEIT ONLINE: </strong>Lust auf Spott… <br/></p>
+      <p><strong>Natascha Kohnen: </strong>Wohlmeinender, witziger Spott ist doch besser als langweilige Kampagnen. <br/></p>
+      <p><strong>ZEIT ONLINE: </strong>Aber eine Kompetenzkampagne sieht anders aus.  </p>
+      <p><strong>Natascha Kohnen: </strong>Nein, überhaupt nicht. Das Plakat sagt deutlich und ganz ehrlich, dass 
+sich die Menschen in Bayern auf Christian Ude verlassen können. Das, was 
+er sagt, das meint er auch so. Er hat einen ganz anderen Politikstil als
+ Horst Seehofer, der ja gerne mal seine Meinung und Haltung ändert. Das 
+sehen Sie an der Asylpolitik, an der Atompolitik, am Donau-Ausbau. Heute
+ hü und morgen hott.</p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/politik/deutschland/2013-07/pb-kohnen" publication-date="" expires=""/>
+      <p><strong>ZEIT ONLINE: </strong>Ein Kandidat, der das Wort "Wort" in der Hand hält – ist der so viel glaubwürdiger? <br/></p>
+      <p><strong>Natascha Kohnen: </strong>Das Plakat ist einfach nicht so langweilig, wie Wahlkampfplakate sonst 
+sind. Die SPD hat ein relativ beschränktes Budget, es beträgt etwa ein 
+Zehntel der Finanzen, die die CSU im Wahlkampf zur Verfügung hat. Uns 
+war klar, dass wir besonders kreativ sein müssen. Mit dem aktuellen 
+Plakat erreichen wir auch die jungen Wähler. Sie machen sich sogar die 
+Mühe, im Netz mit dem Plakat zu spielen, es zu verändern.  </p>
+    </division>
+    <division type="page" teaser="&quot;Immerhin, die Aufmerksamkeit ist riesig&quot;">
+      <p><strong>ZEIT ONLINE: </strong>Sie kennen das <a href="http://udeholdingthings.tumblr.com/" target="_blank" class="">Tumblr Blog </a>"Ude holding things" also? <br/></p>
+      <p><strong>Natascha Kohnen: </strong>Ja. Und ich finde es toll. Die Menschen nehmen das Plakat zum Anlass, 
+sich mit dem Thema Wahl zu befassen. Sie lassen sich eine Menge 
+einfallen, denken darüber nach. Was wollen wir denn mehr? <br/></p>
+      <p><strong>ZEIT ONLINE: </strong>Ihnen ist aber schon klar, dass viele im Netz das Plakat für einen Witz halten.  </p>
+      <p><strong>Natascha Kohnen: </strong>Die meisten finden die Kampagne gut. Immerhin, die Aufmerksamkeit ist 
+riesig, viel größer als wir dachten. Das ist genau das, was wir zu 
+Beginn des Wahlkampfs – und wir sind ja tatsächlich erst am Anfang – 
+brauchen.  </p>
+      <p><strong>ZEIT ONLINE:</strong> Ist Aufmerksamkeit also wichtiger als politische Inhalte? <br/></p>
+      <p><strong>Natascha Kohnen: </strong>Wir haben mit dem ersten Plakat einen super Aufschlag hingelegt. Die 
+Aufmerksamkeit ist da und sie ist eine gute Voraussetzung für die 
+politischen Inhalte, die jetzt im Verlauf des Wahlkampfs noch intensiv 
+diskutiert werden. Das Plakat hängt bisher nur in München, weil dort 
+Wahlkampfplakate schon drei Monate vor der Abstimmung platziert werden 
+dürfen. Im August geht es richtig los, dann sind alle anderen 
+bayerischen Städte und Gemeinden dran. Nur so viel: Es wird noch andere 
+Plakate geben – und wir gehen den kreativen und inhaltsstarken Weg 
+weiter.  </p>
+      <p><strong>ZEIT ONLINE:</strong> Ude selbst sagt, er finde es fabelhaft, dass das Plakat so verspottet wird.  </p>
+      <p><strong>Natascha Kohnen: </strong>Er hat sich herrlich amüsiert über das Plakat und die Reaktionen darauf.
+ Er ist nun mal ein Mann, der nicht nur sein Wort hält, sondern auch 
+Humor hat.   </p>
+      <p><strong>ZEIT ONLINE:</strong> Den Humor wird er vielleicht brauchen, wenn die Wahl am 15. September gelaufen ist. <br/></p>
+      <p><strong>Natascha Kohnen: </strong>Es wird ein sehr spannender Wahlkampf. SPD, Grüne und Freie Wähler 
+kommen derzeit auf 43 Prozent, die CSU auf 46 Prozent. Die FDP ist laut 
+aktueller Umfragen raus. Damit wird es ganz schön eng. Wir werden sehen,
+ wer am Ende lacht.
+
+</p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Bayern-Wahlkampf</supertitle>
+    <title>"Besser als langweilige Kampagnen"</title>
+    <text>Bayerns SPD und ihr Spitzenkandidat Ude werden wegen eines Wahlplakats verspottet. Hauptsache Aufmerksamkeit, sagt SPD-Generalsekretärin Natascha Kohnen im Interview.</text>
+  </teaser>
+</article>

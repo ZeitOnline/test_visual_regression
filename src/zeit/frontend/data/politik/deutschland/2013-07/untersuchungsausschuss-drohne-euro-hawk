@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/F/Hauke_Friederichs-2/index" publication-date="" expires="">
+      <display_name py:pytype="str">Hauke Friederichs</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/bundeswehr-a400m-zulassung-de-maiziere" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">De Maizière droht neuer Ärger um Militärtransporter</title>
+        <text py:pytype="str">Nicht genug, dass der Euro Hawk verkauft werden soll, auch beim Transportflugzeug A400M gibt es Pannen. Einem Bericht zufolge fehlt den Maschinen die Zulassung.</text>
+        <description py:pytype="str">Nicht genug, dass der Euro Hawk verkauft werden soll, auch beim Transportflugzeug A400M gibt es Pannen. Einem Bericht zufolge fehlt den Maschinen die Zulassung.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Transportflugzeug A400M" base-id="http://xml.zeit.de/politik/deutschland/2013-07/transportflugzeug/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Transportflugzeug des Typs Airbus A400M nahe Paris</bu>
+          <copyright py:pytype="str">© Pascal Rossignol/Reuters</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/29/de-maiziere-drohnen-verteidigungsmysterium" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="2013-07-19T01:53:03+00:00" expires="">
+        <supertitle py:pytype="str">Drohnen-Affäre</supertitle>
+        <title py:pytype="str">De Maizières Verteidigungsmysterium</title>
+        <text py:pytype="str">Wie kam es zum Drohnen-Debakel? Der Verteidigungsminister ist nicht das einzige Problem, analysiert der frühere Leiter des Planungsstabs im Ministerium, Hans Rühle.</text>
+        <description py:pytype="str">Wie kam es zum Drohnen-Debakel? Der Verteidigungsminister ist nicht das einzige Problem, analysiert der frühere Leiter des Planungsstabs im Ministerium, Hans Rühle.</description>
+        <byline py:pytype="str">von Hans Rühle</byline>
+        <image align="left" title="Thomas de Maiziere" base-id="http://xml.zeit.de/meinung/2013-07/s11-thomas-de-maiziere/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière an Bord einer Transall-Maschine auf dem Weg nach Pakistan</bu>
+          <copyright py:pytype="str">© Oliver Lang/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-06/untersuchungsausschuss-drohnen-de-maiziere" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Drohnen-Affäre</supertitle>
+        <title py:pytype="str">Warum der Untersuchungsausschuss de Maizière hilft</title>
+        <text py:pytype="str">Ein Untersuchungsausschuss durchleuchtet ab jetzt das Drohnen-Desaster von Thomas de Maizière. Das könnte dem Minister mehr nutzen als schaden. Von Hauke Friederichs</text>
+        <description py:pytype="str">Ein Untersuchungsausschuss durchleuchtet ab jetzt das Drohnen-Desaster von Thomas de Maizière. Das könnte dem Minister mehr nutzen als schaden. Von Hauke Friederichs</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-06/maiziere-bundestag/" type="jpg" publication-date="" expires="2013-09-25T14:44:33+00:00">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière auf einer Bundestagssitzung (Archiv)</bu>
+          <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="Euro Hawk" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-euro-hawk/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Gegenstand des Untersuchungsausschusses: Die unbemannte Drohne Euro Hawk</bu>
+      <copyright py:pytype="str">© EADS via Getty Images</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Hauke Friederichs</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-22T03:02:23.985456+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-21T17:29:35.665834+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-22T03:06:57.079212+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-22T03:04:25.678190+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-22T03:00:51.085639+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.rvd-frueh-ersatz</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">141c024780f54e0fbd3f0e88b031eedc</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6120</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:380216e3-488b-44f3-a343-294161622b8b}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="franz-josef-jung" uuid="eacc143f-a21d-471d-b7ec-ca8f5b223e6f" score="7" type="Person">Franz Josef Jung</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="7" type="Organization">Grüne</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="7" type="Organization">SPD</tag><tag url_value="untersuchungsausschuss" uuid="b314a17c-8af6-4fd5-839e-aa9c2a488fc5" score="7" type="free">Untersuchungsausschuss</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="6" type="Organization">Verteidigungsministerium</tag><tag url_value="rudolf-scharping" uuid="41491512-4c3d-4f4a-bdf6-66de0ce5de98" score="5" type="Person">Rudolf Scharping</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="4" type="free">Bundeswehr</tag><tag url_value="die-linke" uuid="9eecf627-7a54-4e81-98c4-c7e5bd7e76e5" score="4" type="Organization">Die Linke</tag><tag url_value="drohne" uuid="43bd36b1-f610-4b5b-bb9f-ecce3ba5a708" score="4" type="free">Drohne</tag><tag url_value="kanzleramt" uuid="2497011d-a71c-4b85-baed-8c9fcd07be9b" score="4" type="free">Kanzleramt</tag><tag url_value="minister" uuid="6753ad3b-3aa0-4cc3-97c3-d242c5de374e" score="4" type="free">Minister</tag><tag url_value="omid-nouripour" uuid="854c954b-7163-4f3e-9242-b0502cb1ccad" score="4" type="Person">Omid Nouripour</tag><tag url_value="opposition" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" score="4" type="free">Opposition</tag><tag url_value="rainer-arnold" uuid="cb28ab9f-e0fd-4db0-8511-553124fbb36b" score="4" type="Person">Rainer Arnold</tag><tag url_value="verteidigungsminister" uuid="a90c57c7-6c40-4001-b341-e6b0d9cf0e0e" score="4" type="free">Verteidigungsminister</tag><tag url_value="wolfgang-schneiderhan" uuid="f9919674-01f3-4fa1-8b72-b8fad5d01e87" score="4" type="Person">Wolfgang Schneiderhan</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag><tag url_value="kundus" uuid="8bb28c27-2d02-4b54-aee4-925b44bf4505" score="1" type="Location">Kundus</tag></rankedTags></head><body>
+    <supertitle>Untersuchungsausschuss</supertitle>
+    <title>Wer ist schuld am Euro-Hawk-Debakel?</title>
+    <subtitle>750 Ordner, 126 Beweisbeschlüsse und 20 Zeugen in sechs Tagen: Der Untersuchungsausschuss zur Drohnen-Pleite beginnt am Montag mit der Zeugenbefragung. Von H. Friederichs</subtitle>
+    <division type="page">
+      <image align="left" title="Euro Hawk" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-euro-hawk/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Gegenstand des Untersuchungsausschusses: Die unbemannte Drohne Euro Hawk</bu>
+        <copyright py:pytype="str">© EADS via Getty Images</copyright>
+      </image>
+      <p>Kurz vor dem Beginn des 2. <a href="http://www.zeit.de/politik/deutschland/2013-06/untersuchungsausschuss-drohnen-de-maiziere" target="_blank" class="">Untersuchungsausschusses</a> fielen harte Worte. Die Opposition kritisierte das <entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity>: Zahlreiche angeforderte Unterlagen zum Desaster um die gescheiterte Anschaffung der Drohne Euro Hawk trafen mehrere Tage zu spät ein – und einige fehlen bis heute. Von einem Versuch der Verschleierung, sprach <entity idref="Omid+Nouripour" entity_type="Person" url_value="personen/omid-nouripour">Omid Nouripour</entity> sicherheitspolitischer Sprecher der <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grünen</entity>. "Man darf gespannt sein, wie de Maizière als Zeuge mit seinem angeblichen Nichtwissen umgeht", sagte sein Kollege von der <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity>, <entity idref="Rainer+Arnold" entity_type="Person" url_value="personen/rainer-arnold">Rainer Arnold</entity>.</p>
+      <p>Kurz vor dem Beginn der eigentlichen Arbeit trafen im Untersuchungsausschuss so viele Dokumente gleichzeitig ein, dass die Fachpolitiker und ihre Mitarbeiter diese vor dem Beginn der Zeugenbefragung am Montagmorgen unmöglich alle sichten können. Mehr als 750 Akten sind bereits im Sekretariat des Verteidigungsausschusses eingegangen. Die Mitarbeiter dort kämen kaum damit hinterher, die Tausende Seiten an Papier den Fraktionen weiterzuleiten, heißt es im politischen <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity>. Man werde mit Unterlagen nun geradezu überflutet. Rund 2.000 Akten sollen noch folgen. Auf die Abgeordneten und ihre Mitarbeiter, die bis Ende August den Untersuchungsausschuss abschließen sollen, kommt noch viel Arbeit zu.</p>
+      <p>Vertreter der Opposition klagen, dass wichtige Unterlagen fehlen. So warteten die Mitglieder des Untersuchungsausschusses auf Dokumente aus der Rechtsabteilung des Verteidigungsministeriums, auf Akten aus dem ehemaligen Führungsstab der Luftwaffe und aus dem Planungsstab von <a href="http://www.zeit.de/schlagworte/personen/thomas-de-maizi%C3%A8re/index" target="_blank" class="">Minister de Maizière</a>, heißt es aus Kreisen des Untersuchungsausschusses. Manche der noch offenen Dokumente sollen als geheim gestempelt sein. Sie dürfen nur in der Geheimschutzstelle des Bundestages eingesehen werden, was die Arbeit der Aufklärer noch aufwändiger macht. <br /></p>
+      <p>SPD, Grüne und <entity idref="Linkspartei" entity_type="Organization" url_value="organisationen/linkspartei">Linkspartei</entity> hatten vor der Sommerpause <a href="http://www.zeit.de/politik/deutschland/2013-06/untersuchungsausschuss-drohnen-de-maiziere" target="_blank" class="">die Umwandlung des Verteidigungsausschusses</a> in einen Untersuchungsausschuss erzwungen. Dessen Mitglieder sollen nun herausfinden, wie die Anschaffung des unbemannten Aufklärungsfliegers Euro Hawk scheitern konnte. In Wahlkampfzeiten ist besonders interessant, wer die Verantwortung für die Verschwendung von mehreren Hundert Millionen Euro Steuergeld trägt. <br /></p>
+      <p>Aus den Papierbergen hat die Opposition bereits einige interessante und belastende Dokumente herausgefischt. So lässt ein Vermerk eines Rüstungsdirektors aus dem Verteidigungsministerium aus dem<a href="http://www.zeit.de/politik/deutschland/2013-07/de-maiziere-drohne-belastendes-dokument" target="_blank" class=""> Januar 2013</a> daran zweifeln, dass Verteidigungsminister Thomas de Maizière erst kurz vor dem Scheitern des Euro-Hawk-Projekts im Mai von ernsten Problemen bei der Zulassung des ferngesteuerten Riesenfliegers erfahren hat. Der Spitzenbeamte notierte: "Der Minister erwartet bekanntermaßen zum 31. März 2013 (Eingang bei ihm) eine Entscheidungsvorlage mit klarer Aussage zur Zulassungsfähigkeit." Die <em><a href="http://www.sueddeutsche.de/politik/affaere-um-drohne-euro-hawk-dokument-erschuettert-de-maizires-glaubwuerdigkeit-1.1725342" target="_blank" class="">Süddeutsche Zeitung</a></em> berichtete am Freitag von weiteren Aktennotizen, die de Maizières Glaubwürdigkeit erschüttern sollen. Der Minister hatte erklärt, dass er erst Anfang März von Problemen beim Euro Hawk erfahren habe, die aber als "lösbar" dargestellt worden seien. Diese Aussage scheint nun nicht mehr haltbar zu sein.</p>
+      <p>Die Anschaffung der <a href="http://www.zeit.de/wirtschaft/2013-05/Drohne-Euro-Hawk-Ausstieg" target="_blank" class="">Drohne wurde im Mai gestoppt</a>, weil sie keine Zulassung für den deutschen Luftraum bekommt. Bevor die "Reißleine" gezogen wurde, wie de Maizière den Vorgang beschrieb, wurden bereits Millionen für Hangar und Landebahnen, und große Summen für einen Prototypen der Drohne eines amerikanischen Herstellers ausgegeben. Wie hoch der Verlust ist, konnte das Verteidigungsministerium bisher nicht exakt beziffern. Die Hoffnung, dass die in der Drohne getestete Aufklärungstechnik Isis in anderen Objekten weiter verwendet werden kann, scheint sich nun auch nicht zu erfüllen. Das <a href="http://www.spiegel.de/politik/deutschland/euro-hawk-drohne-koennte-noch-viel-teurer-werden-a-912245.html" target="_blank" class="">meldet der <em>Spiegel</em></a> nach einem Bericht des Wehrbeschaffungsamts vom November 2012.</p>
+    </division>
+    <division type="page" teaser="Politische Schwergewichte, Generäle und Beamte auf der Zeugenliste">
+      <p>Neben dem Aktenstudium sollen vor allen Vertreter der Rüstungsindustrie und der zuständigen Bundeswehrbehörden zur Aufklärung beitragen. <a href="http://www.zeit.de/politik/deutschland/2013-06/steinbrueck-untersuchungsausschuss-euro-hawk" target="_blank" class="">Auf der Zeugenliste</a> stehen 20 Namen, aktuelle und ehemalige politische Schwergewichte, Generäle und Beamte, die nur Experten kennen, sind darunter. Sie sollen an sechs Tagen gehört werden. Die prominentesten Zeugen kommen zum Anfang und zum Ende der öffentlichen Sitzungen: Zum Finale am 31. Juli ist der aktuelle Verteidigungsminister Thomas de Maizière geladen – den Auftakt am 22. Juli machen zwei seiner Vorgänger und ein ehemaliger Generalinspekteur der Bundeswehr.</p>
+      <p>Am Vormittag wird <a href="http://www.zeit.de/schlagworte/personen/wolfgang-schneiderhan/index" target="_blank" class="">Wolfgang Schneiderhan</a> befragt, einst der höchste Soldat der Bundeswehr. Wie der in Folge der <a href="http://www.zeit.de/schlagworte/orte/kundus" target="_blank" class="">Kundus</a>-Affäre entlassene, aber immer noch sehr hoch angesehene Ex-Generalinspekteur die Beschaffungspanne bewertet, wird unter Fachleuten mit Spannung erwartet. Er diente unter verschiedenen Regierungen und dürfte im Gegensatz zu den späteren Zeugen keine harten Fragerunden überstehen müssen.</p>
+      <p>Am Montagmittag soll <a href="http://www.zeit.de/schlagworte/personen/rudolf-scharping/index" target="_blank" class="">Rudolf Scharping</a> den Abgeordneten Rede und Antwort stehen. Die Union wird versuchen, den früheren Verteidigungsminister für die Drohnenpanne mitverantwortlich zu machen: In seiner Amtszeit begann das Euro-Hawk-Projekt. Der konkrete Beschaffungsvertrag wurde aber erst im Januar 2007 unterzeichnet, unter Minister <a href="http://www.zeit.de/schlagworte/personen/franz-josef-jung/index" target="_blank" class="">Franz-Josef Jung</a>. Er steht am Montag als dritter Zeuge auf der Liste. An <entity idref="Franz-Josef+Jung" entity_type="Person" url_value="personen/franz-josef-jung">Jung</entity> dürfte sich vor allem die Opposition abarbeiten. <br /></p>
+      <p>Ihr größtes Interesse gilt aber Thomas de Maizière. Er galt bis zur Drohnenaffäre als einer der wichtigsten Köpfe im Kabinett Merkel, gar als späterer, möglicher Nachfolger für das Kanzleramt. Nun versucht die Opposition de Maizière der Lüge zu überführen, um Merkel im Wahlkampf zu schwächen. Bis Ende August soll der Untersuchungsausschuss bereits einen Zwischenbericht vorlegen, über den am 2. und 3. September im Plenum des Bundestages diskutiert werden kann. De Maizières Drohnendebakel wird bis dahin noch für manche Schlagzeile sorgen.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Wer ist schuld am Euro-Hawk-Debakel?</title>
+    <supertitle>Untersuchungsausschuss</supertitle>
+    <text>750 Ordner, 126 Beweisbeschlüsse und 20 Zeugen in sechs Tagen: Der Untersuchungsausschuss zur Drohnen-Pleite beginnt am Montag mit der Zeugenbefragung. Von H. Friederichs</text>
+  </teaser>
+</article>

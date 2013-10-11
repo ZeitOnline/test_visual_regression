@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/friedrich-usa-prism-nsa-treffen" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Prism</supertitle>
+        <title py:pytype="str">USA sagen Friedrich Informationen über Spähprogramm zu</title>
+        <text py:pytype="str">Die USA haben Deutschland versichert, keine deutschen Unternehmen ausspioniert zu haben. Konkrete Antworten zum NSA-Skandal hat der Innenminister aber nicht erhalten.</text>
+        <description py:pytype="str">Die USA haben Deutschland versichert, keine deutschen Unternehmen ausspioniert zu haben. Konkrete Antworten zum NSA-Skandal hat der Innenminister aber nicht erhalten.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Hans-Peter Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/hans-peter-friedrich-2/" type="jpg" publication-date="" expires="2013-10-12T16:20:00+00:00">
+          <bu py:pytype="str">US-Vizepräsident Joe Biden ist im Gespräch in Washington Bundesinnenminister Hans-Peter Friedrich zugewandt.</bu>
+          <copyright py:pytype="str">© David Lienemann/The White House/dpa</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/hans-peter-friedrich-usa-aufklaerung-nsa-affaere" year="2013" ressort="Politik" author="Stephan-Andreas Casdorff" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">NSA-Affäre</supertitle>
+        <title py:pytype="str">Deutschland ist kein US-Vasall</title>
+        <text py:pytype="str">Der Innenminister ist in den USA, zur Aufklärung der NSA-Überwachung wird das nicht viel beitragen. Ein solcher Freundschaftsbesuch ist empörend. Ein Kommentar</text>
+        <description py:pytype="str">Der Innenminister ist in den USA, zur Aufklärung der NSA-Überwachung wird das nicht viel beitragen. Ein solcher Freundschaftsbesuch ist empörend. Ein Kommentar</description>
+        <byline py:pytype="str">Stephan-Andreas Casdorff</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/2013-07/hans-peter-friedrich/" type="jpg" publication-date="" expires="2013-10-12T07:31:12+00:00">
+          <bu py:pytype="str">Bundesinnenminister Hans-Peter Friedrich</bu>
+          <copyright py:pytype="str">© Daniel Karmann/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/themen/politik/nsa-abhoerskandal/index" year="2013" issue="28" ressort="Politik" contenttype="centerpage-2009" publication-date="" expires="">
+        <supertitle py:pytype="str">Alles zum Thema</supertitle>
+        <title py:pytype="str">Snowden und der NSA-Abhörskandal</title>
+        <text py:pytype="str">Welche Folgen hat der NSA-Abhörskandal? Was wird aus dem Ex-Geheimdienstmitarbeiter und Whistleblower Edward Snowden? Lesen Sie hier die wichtigsten Artikel zu dem Thema.</text>
+        <description py:pytype="str">Welche Folgen hat der NSA-Abhörskandal? Was wird aus dem Ex-Geheimdienstmitarbeiter und Whistleblower Edward Snowden? Lesen Sie hier die wichtigsten Artikel zu dem Thema.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/2013-07/nsa-themen-teaser/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Around 50 activists protest infront of the German Chancellory in solidarity with Whistle-blower Edward Snowden and his seek for asyl in various countries such as Germany, on July 4, 2013.</bu>
+          <copyright py:pytype="str">© David von Blohn/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-usa-nsa/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Bundesinnenminister Friedrich (r.) nebst seinem Gastgeber, US-Justizminister Holder</bu>
+      <copyright py:pytype="str">© Amy Mathers/dpa</copyright>
+    </image>
+    <badges>
+      <badge>video</badge>
+    </badges>
+    <author href="http://xml.zeit.de/autoren/G/Ludwig_Greven/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Ludwig Greven</display_name>
+    </author>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Ludwig Greven</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-15T08:30:04.492648+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-13T06:17:11.375476+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-12T02:02:03+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-13T06:16:19.677307+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-13T06:16:00.510452+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.horeld</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">7e7123b9ecb44e4491fa1ff54e55e138</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3166</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b24add5d-af57-4ee5-ac5e-172ad1e519d7}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="hans-peter-friedrich" uuid="e4598182-697a-41c1-90b8-5d2124605cd3" score="6" type="Person">Hans-Peter Friedrich</tag><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="5" type="Person">Edward Snowden</tag><tag url_value="datenschutz" uuid="42624787-c068-4f31-87bc-91675967dbfe" score="4" type="free">Datenschutz</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag></rankedTags></head><body>
+    <supertitle>Friedrichs USA-Reise</supertitle>
+    <title>So klug als wie zuvor</title>
+    <subtitle>Der Innenminister bringt aus Washington wie erwartet nichts Neues zur NSA-Spähoperation mit. Die Regierung sollte ihre Scheinaufklärung beenden.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-usa-nsa/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Bundesinnenminister Friedrich (r.) nebst seinem Gastgeber, US-Justizminister Holder</bu>
+        <copyright py:pytype="str">© Amy Mathers/dpa</copyright>
+      </image>
+      <p>Reisen bildet, heißt es. Aber dass die <a href="http://www.zeit.de/politik/deutschland/2013-07/hans-peter-friedrich-usa-aufklaerung-nsa-affaere" target="_blank" class="">Dienstreise von Innenminister Hans-Peter Friedrich</a> nach Washington ihn oder gar uns Bürger über die Überwachungsaktivitäten des US-Geheimdienstes zufriedenstellend aufklären würde, war von vornherein nicht zu erwarten. Es war vermutlich auch gar nicht die Absicht der Stippvisite.</p>
+      <p>Denn wenn es stimmt, worüber Deutschland seit den <a href="http://www.zeit.de/themen/politik/nsa-abhoerskandal/index" target="_blank" class="">Enthüllungen des abtrünnigen NSA-Mitarbeiters Edward Snowden</a> erregt diskutiert, dass nämlich sein ehemaliger Arbeitgeber Milliarden Daten von Deutschen wie anderen Ausländern ausspäht und darüber hinaus angeblich auch deutsche Staatseinrichtungen abhört, dann wird die US-Regierung wohl kaum ausgerechnet einen Abgesandten einer jener ausgespähten Nationen darüber detailliert informieren. Freund hin oder her. Denn dann könnten sie es ja gleich bleiben lassen. Das wollen die USA aber nicht, wie Präsident Barack Obama mehr als deutlich zu verstehen gegeben hat.</p>
+      <p>Also hätte sich <entity idref="Hans-Peter+Friedrich" entity_type="Person" url_value="personen/hans-peter-friedrich">Friedrich</entity> die Reise sparen können. Denn es macht ja keinen Spaß, an Türen zu klopfen, die nicht geöffnet werden, und Fragen zu stellen, von denen man von vornherein weiß, dass sie nicht beantwortet werden.</p>
+      <p>Nicht reisen ging aber auch nicht. Denn in Deutschland herrscht so etwas wie Wahlkampf, und die Empörung ist groß. Also hat Kanzlerin Angela Merkel Aufklärung versprochen, genauer gesagt: Sie hat versprochen, sich darum zu bemühen. Also schickte sie ein paar Regierungsbeamte und, sozusagen als ihren Chef-Ermittler, den Innenminister.</p>
+      <p>
+        <strong>Mittäterin im Stillen </strong>
+        <br />
+      </p>
+      <p>Klüger sind wir hinterher aber auch nicht. Konkrete Angaben zu dem Späh-Programm <a href="http://www.zeit.de/politik/ausland/2013-07/friedrich-usa-prism-nsa-treffen" target="_blank" class="">machte der Minister nicht</a>. Auch anderen Fragen der Journalisten wich er wiederholt aus. Die konkretere Aufklärung müsse ohnehin den Experten überlassen werden, so Friedrich.</p>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2013-07/2542371766001" expires="2013-08-11T07:00:00+00:00" />
+      <p>Nach dieser Reise wissen wir also nur, was wir vorher schon wussten: Dass der US-Regierung der Datenschutz und die Privatsphäre der deutschen Bürger ziemlich egal sind, wenn es um die Abwehr von Terror und anderen Gefahren geht. Und dass sie sich bei ihrer globalen Spähaktion von Protesten selbst befreundeter Länder nicht irritieren lässt und Fragen dazu brüsk abwehrt. Schließlich kann sie gewiss sein, dass die Bundesregierung wie andere Regierungen Geheimdiensterkenntnisse aus der weltweiten Observation immer gerne entgegen nimmt. Und im Zweifel nicht genau wissen will, woher die stammen und wie sie gewonnen werden. Also im Stillen Mittäterin ist.</p>
+      <p>Wenn die Kanzlerin es mit der Aufklärung wirklich ernst meinte, sollte sie auf solche Schau-Reisen ihrer Minister künftig verzichten. Sie sollte stattdessen aufdecken, was die Bundesregierung weiß über die Kooperation zwischen dem deutschen und amerikanischen Geheimdienst; welche Abkommen es dazu seit Langem gibt; und welche Informationen die NSA ihrerseits vom BND erhält. Dazu könnte sie von sich aus einiges sagen. Das möchte sie aber offensichtlich nicht.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>So klug als wie zuvor</title>
+    <text>Der Innenminister bringt aus Washington wie erwartet nichts Neues zur NSA-Spähoperation mit. Die Regierung sollte ihre Scheinaufklärung beenden. Ein Kommentar</text>
+    <supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+  </teaser>
+</article>

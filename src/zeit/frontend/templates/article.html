@@ -1,0 +1,18 @@
+{% extends "templates/layout.html" %}
+{% block content %}
+	<div class="article">
+		<h1 class="article__title">
+			{{article.title}}
+		</h1>
+		<h2 class="article__subtitle">
+			{{article.subtitle}}
+		</h2>
+    <div id="article_body">
+      {% for page in article.pagesxml %}
+        <div class="page">
+        {{page|safe}}
+        </div>
+      {% endfor %}
+    </div>
+	</div>
+{% endblock content %}

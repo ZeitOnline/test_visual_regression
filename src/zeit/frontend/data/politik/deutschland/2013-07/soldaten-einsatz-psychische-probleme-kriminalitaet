@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/S/Ulrike_Scheffer" publication-date="" expires="">
+      <display_name py:pytype="str">Ulrike Scheffer</display_name>
+    </author>
+    
+    <image alt="Panzergrenadiere in Hagenow" align="left" base-id="http://xml.zeit.de/politik/2013-07/soldaten-rueckkehrer-auslandseinsatz/" type="jpg" publication-date="" expires="2013-10-03T08:52:42+00:00">
+      <bu py:pytype="str">Panzergrenadiere in Hagenow</bu>
+      <copyright py:pytype="str">© Jens Büttner/dpa</copyright>
+    </image>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/2012/25/Bundeswehr-Veteranen" year="2012" issue="25" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">Deutschland vergisst seine Veteranen</title>
+        <text py:pytype="str">Kriegsheimkehrer können in Deutschland nicht mit viel Anerkennung rechnen. Besonders dramatisch ist das für die, die schwer geschädigt sind. Von S. von Wurmb-Seibel</text>
+        <description py:pytype="str">Kriegsheimkehrer können in Deutschland nicht mit viel Anerkennung rechnen. Besonders dramatisch ist das für die, die schwer geschädigt sind. Von S. von Wurmb-Seibel</description>
+        <byline py:pytype="str">Von Ronja von Wurmb-Seibel</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2012-06/Bundeswehr/" type="jpg" publication-date="" expires="2012-08-28T12:01:13+00:00">
+          <bu py:pytype="str">Bundeswehr-Soldaten beim Appell</bu>
+          <copyright py:pytype="str">© Armin Weigel/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2012-01/afghanistan-trauma-soldaten" year="2012" issue="4" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">So viele traumatisierte Soldaten wie nie</title>
+        <text py:pytype="str">Die Zahl der traumatisierten Bundeswehrsoldaten ist im vergangenen Jahr um 26 Prozent gestiegen. Ein Großteil der Soldaten war zum Auslandseinsatz in Afghanistan.</text>
+        <description py:pytype="str">Die Zahl der traumatisierten Bundeswehrsoldaten ist im vergangenen Jahr um 26 Prozent gestiegen. Ein Großteil der Soldaten war zum Auslandseinsatz in Afghanistan.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Bundeswehr Soldat Trauma" base-id="http://xml.zeit.de/politik/deutschland/2012-01/bundeswehr-trauma/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Bundeswehrsoldaten in Afghanistan</bu>
+          <copyright py:pytype="str">© Miguel Villagran/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2011/44/C-Traumatologe" year="2011" issue="44" ressort="Karriere" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr-Psychiater</supertitle>
+        <title py:pytype="str">Operation Seelenfrieden</title>
+        <text py:pytype="str">Immer mehr Soldaten kommen mit posttraumatischen Belastungsstörungen aus dem Auslandseinsatz zurück. Der Psychiater Peter Zimmermann hilft ihnen, wieder Halt zu finden.</text>
+        <description py:pytype="str">Immer mehr Soldaten kommen mit posttraumatischen Belastungsstörungen aus dem Auslandseinsatz zurück. Der Psychiater Peter Zimmermann hilft ihnen, wieder Halt zu finden.</description>
+        <byline xsi:nil="true" />
+        <image alt="Ein Soldat steht am Fenster in der Abteilung für Psychotraumatologie im Bundeswehrkrankenhaus in Hamburg." align="left" title="soldat" base-id="http://xml.zeit.de/karriere/beruf/2011-11/soldat/" type="jpg" publication-date="2011-11-11T13:54:18+00:00" expires="2012-02-11T13:54:20+00:00">
+          <bu py:pytype="str">Ein Soldat steht am Fenster in der Abteilung für Psychotraumatologie im Bundeswehrkrankenhaus in Hamburg.</bu>
+          <copyright py:pytype="str">© Marcus Brandt/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Ulrike Scheffer</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Tagesspiegel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-03T13:13:42.349492+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-02T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-03T09:54:42.661083+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-03T09:52:36.062856+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_bu">Zurück in den Alltag. Soldaten sitzen im Camp Marmal in Masar-i-Scharif in einer Transall-Transportmaschine, um nach Deutschland zurückzufliegen. Foto: Maurizio Gambarini/dpa</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/heprodimagesfotos82420130703bundeswehr3-jpg/8438140/2-formatOriginal.JPG?format=formatOriginal</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-03T09:50:03.253573+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.newsfeed</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">4d8e56258e6942889c3193c3c3a0cf0a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5529</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:08b45756-5d9e-470a-9aab-f442f1881cd4}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="krieg" uuid="f78a773c-d254-44e7-858c-42115325a930" score="9" type="free">Krieg</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="5" type="Organization">Verteidigungsministerium</tag><tag url_value="auslandseinsatz" uuid="22122803-d544-46af-b47b-abdb9c19281c" score="4" type="free">Auslandseinsatz</tag><tag url_value="bundeskriminalamt" uuid="f951ea23-5592-40b0-be49-3a5a9a7441e1" score="4" type="free">Bundeskriminalamt</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="4" type="free">Bundeswehr</tag><tag url_value="karriere" uuid="6fed221f-6c78-45db-9e6e-d72fcbe58aa4" score="4" type="free">Karriere</tag><tag url_value="straftat" uuid="6560c23f-f426-4c5c-ab5d-c4866aa9ae3c" score="4" type="free">Straftat</tag><tag url_value="tagesspiegel" uuid="034c6bc1-ea5e-4e0e-a302-80ea616ef9ab" score="4" type="free">Tagesspiegel</tag><tag url_value="trauma" uuid="359b22d6-4f11-484e-b472-b76cf13c738c" score="4" type="free">Trauma</tag><tag url_value="us-armee" uuid="38146959-89e3-4b97-bf6f-6dc75dd11ca3" score="4" type="free">US-Armee</tag><tag url_value="veteran" uuid="36f7890a-6547-4a81-97f9-59e8e6b3f659" score="4" type="free">Veteran</tag><tag url_value="afghanistan" uuid="9187d28e-ea51-4485-b2d6-d5d3852f309c" score="3" type="Location">Afghanistan</tag><tag url_value="irak" uuid="3b2208ac-e66d-4eeb-a340-34f63caef4a0" score="3" type="Location">Irak</tag><tag url_value="kosovo" uuid="616fa700-bbf7-4a2e-9056-4532bd363ceb" score="3" type="Location">Kosovo</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag></rankedTags></head><body>
+    <title>Krieg im Kopf</title>
+    <subtitle>Neuen Studien zufolge hat jeder vierte Einsatzsoldat psychische Probleme. Manche werden plötzlich kriminell. Viele scheuen sich aber, Hilfe anzunehmen. </subtitle>
+    <byline>Ulrike Scheffer</byline>
+    <division type="page">
+      <image alt="Panzergrenadiere in Hagenow" align="left" base-id="http://xml.zeit.de/politik/2013-07/soldaten-rueckkehrer-auslandseinsatz/" type="jpg" publication-date="" expires="2013-10-03T08:52:42+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Panzergrenadiere in Hagenow</bu>
+        <copyright py:pytype="str">© Jens Büttner/dpa</copyright>
+      </image>
+      <p>Die Auslandseinsätze der Bundeswehr haben offenbar weit schwerwiegendere Folgen für Soldaten und ihre Familien als bisher angenommen. Bekannt ist, dass die Zahl der Soldaten, die durch Einsätze in <entity idref="Afghanistan" entity_type="Location" url_value="orte/afghanistan">Afghanistan</entity> oder dem <entity idref="Kosovo" entity_type="Location" url_value="orte/kosovo">Kosovo</entity> psychische Probleme bekommen, seit Jahren steigt. Nun gibt es Hinweise, dass Einsatzsoldaten vermehrt straffällig werden. Und Belege dafür, dass Kinder oder Lebenspartner betroffener Soldaten oft ebenfalls psychisch erkranken.</p>
+      <p> Peter Zimmermann, Leiter des Psychotraumazentrums im Berliner Bundeswehrkrankenhaus, geht davon aus, dass bis zu 25 Prozent der deutschen Soldaten mit Einsatzerfahrung unter psychischen Störungen leiden, wie er dem <em>Tagesspiegel</em> unter Verweis auf vorläufige Studienergebnisse mitteilte. Viele von ihnen seien möglicherweise schon vor dem Einsatz belastet gewesen, nicht alle seien behandlungsbedürftig – doch auch schwere Depressionen, Angstzustände und Suchterkrankungen sind bei Einsatzsoldaten verbreitet, und immer mehr erkranken an einer sogenannten Posttraumatischen Belastungsstörung, kurz PTBS. Sie werden nach ihrer Rückkehr über Jahre hinweg von Ereignissen aus dem Einsatz verfolgt, die oft in normalen Alltagssituationen ins Bewusstsein zurückkehren.</p>
+      <p> 2012 waren nach Angaben des Bundesverteidigungsministeriums allein wegen PTBS mehr als 1140 Soldatinnen und Soldaten in Behandlung. Tatsächlich liegt die Zahl deutlich höher, denn Zeitsoldaten, die sich nach ihrem Ausscheiden aus der Bundeswehr in zivilen Einrichtungen behandeln lassen, sind in der offiziellen Statistik nicht erfasst. Die Dunkelziffer ist dem Institut für Klinische Psychologie und Psychotherapie an der TU Dresden zufolge doppelt so hoch.</p>
+      <p>
+        <strong>Soldaten mit vorbildlicher Karriere<br /></strong>
+      </p>
+      <p> Viele Soldaten scheuen sich demnach, einen Arzt oder Psychologen aufzusuchen, weil sie sich die Krankheit selbst nicht eingestehen, nach außen keine Schwäche zeigen wollen oder aber schlicht um ihre Karriere fürchten. Die Dresdner Forscher kamen zu dem Ergebnis, dass insgesamt rund zwei Prozent aller Einsatzsoldaten an PTBS erkranken, pro Jahr rund 300. Das sind immerhin deutlich weniger als in der US-Armee, die im <entity idref="Irak" entity_type="Location" url_value="orte/irak">Irak</entity> und in Afghanistan massiv in Kampfhandlungen verwickelt war.</p>
+      <p> Der Augsburger Anwalt Christian Steffgen, der als Vertragsanwalt des Deutschen Bundeswehrverbands Soldaten vertritt, hat festgestellt, dass auch Straftaten von Soldaten immer häufiger mit Einsatzerlebnissen in Verbindung stehen. "Das sind Soldaten mit vorbildlicher Karriere, die plötzlich persönlichkeitsfremde Taten begehen", sagte Steffgen.</p>
+      <p>
+        <strong>Auch die Kinder leiden darunter</strong>
+        <br />
+      </p>
+      <p> Gemeint ist: Soldaten, die nie mit dem Gesetz in Konflikt gekommen sind, beleidigen oder bedrohen plötzlich andere Verkehrsteilnehmer oder werden gewalttätig. "Die Hemmschwelle für ein solches Verhalten scheint durch Ereignisse im Einsatz, die nicht verarbeitet wurden, herabgesetzt zu werden", sagt der Anwalt. Fühlen sich die Soldaten im Straßenverkehr oder beim Gerangel an der Supermarktkasse provoziert, kann sie das "triggern", wie es im Fachjargon heißt. Sie werden mental in den Einsatz zurückversetzt und reagieren unverhältnismäßig aggressiv – im Extremfall mit unkontrollierten Gewaltausbrüchen.</p>
+      <p> Wie viele Einsatzsoldaten straffällig werden, ist nicht bekannt. Weder Bundeswehr noch Bundeskriminalamt erfassen diese Daten. In den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> sind Veteranen schon Amok gelaufen. "Denkbar ist das auch bei uns", sagt der Psychotherapeut Thomas Kleinheinrich, der die von Einsatzsoldaten gegründete Deutsche Kriegsopferfürsorge berät. Er sieht auch Parallelen zur Zeit nach 1945, als ganze Familien unter den Traumata der Kriegsheimkehrer gelitten hätten. "Auch heute gibt es Fälle, wo Kinder und Partner Probleme bekommen", sagt er. Kinder würden verhaltensauffällig oder machten plötzlich wieder ins Bett, wenn der Vater "emotional ausfalle". Auch häusliche Gewalt sei heute wie damals ein Thema.</p>
+    </division>
+    <supertitle>Soldaten</supertitle>
+    <division type="page" teaser="&quot;Gutachten-Pingpong&quot; über Jahre hinweg">
+      <p> Genau analysieren lassen sich die Auswirkungen der Einsatzbelastungen bisher nicht. Der von PTBS-Geschädigten gegründete Bund Deutscher Veteranen fordert daher, dass alle Einsatzheimkehrer zentral erfasst und wie in den USA auch nach dem Ausscheiden aus der Armee betreut werden. Denn gerade psychische Störungen sind langwierig und treten oft erst Jahre nach dem Einsatz auf.</p>
+      <p> Doch so weit ist man in Deutschland noch nicht. Lange wurden PTBS und andere psychische Erkrankungen oft nicht einmal als Wehrdienstbeschädigung anerkannt. Sogar das <entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity> gibt zu, dass es für die Soldaten in der Vergangenheit schwierig gewesen sei, einen Zusammenhang ihrer Erkrankung mit einem Einsatz zu belegen.</p>
+      <p> Ein "Gutachten-Pingpong" habe sich über Jahre hingezogen, sagt eine Sprecherin. Heute wird zunächst ein Zusammenhang zwischen Einsatz und Erkrankung angenommen und es obliegt dem Dienstherren, also der Bundeswehr, das Gegenteil zu beweisen. Künftig sollen alle Soldaten außerdem vor dem Einsatz ein psychologisches Screening durchlaufen, so dass vorbelastete Soldaten erst gar nicht in den Einsatz geschickt werden.</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/politik/krieg-im-kopf/8438118.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br />
+      </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title py:pytype="str">Krieg im Kopf</title>
+    <text>Neuen Studien zufolge hat jeder vierte Einsatzsoldat psychische Probleme. Manche werden plötzlich kriminell. Viele scheuen sich aber, Hilfe anzunehmen. </text>
+    <supertitle>Soldaten</supertitle>
+  </teaser>
+  <indexteaser>
+    <text py:pytype="str">Krieg im Kopf</text>
+  </indexteaser>
+</article>

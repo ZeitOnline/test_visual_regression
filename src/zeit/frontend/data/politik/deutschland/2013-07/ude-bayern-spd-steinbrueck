@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/C/Lisa_Caspari/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Lisa Caspari</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/csu-wahlkampf-bayern-parteitag" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">CSU</supertitle>
+        <title py:pytype="str">Seehofer verspricht jedem ein Bonbon</title>
+        <text py:pytype="str">Im Bayern-Wahlkampf will die CSU bei den Bürgern mit allem und jedem punkten. Horst Seehofer schwankt derweil zwischen Siegesgewissheit und Sorge. Von L. Caspari, München</text>
+        <description py:pytype="str">Im Bayern-Wahlkampf will die CSU bei den Bürgern mit allem und jedem punkten. Horst Seehofer schwankt derweil zwischen Siegesgewissheit und Sorge. Von L. Caspari, München</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/seehofer-2/" type="jpg" publication-date="" expires="2013-10-19T18:04:27+00:00">
+          <bu py:pytype="str">Der bayerische Ministerpräsident Horst Seehofer (Mitte, CSU) nach seiner Rede auf dem CSU-Parteitag in der Kleinen Olympiahalle in München</bu>
+          <copyright py:pytype="str">© Andreas Gebert/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/spd-bayern-wahlplakat" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bayern-Wahlkampf</supertitle>
+        <title py:pytype="str">"Besser als langweilige Kampagnen"</title>
+        <text py:pytype="str">Bayerns SPD und ihr Spitzenkandidat Ude werden wegen eines Wahlplakats verspottet. Hauptsache Aufmerksamkeit, sagt SPD-Generalsekretärin Natascha Kohnen im Interview.</text>
+        <description py:pytype="str">Bayerns SPD und ihr Spitzenkandidat Ude werden wegen eines Wahlplakats verspottet. Hauptsache Aufmerksamkeit, sagt SPD-Generalsekretärin Natascha Kohnen im Interview.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Christian Ude hält Wort" base-id="http://xml.zeit.de/politik/deutschland/2013-07/christian-ude-wort/" type="jpg" publication-date="" expires="2013-10-04T11:59:00+00:00">
+          <bu py:pytype="str">Das Wahlplakat von Christian Ude (SPD)</bu>
+          <copyright py:pytype="str">© M. C. Hurek/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/bayern-landtagswahl-umfrage" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Umfrage zur Landtagswahl</supertitle>
+        <title py:pytype="str">SPD fällt in Bayern auf historisches Tief zurück</title>
+        <text py:pytype="str">Zwei Monate vor der Landtagswahl kann Bayerns Ministerpräsident Seehofer auf eine absolute Mehrheit hoffen. Die SPD stürzt in einer Umfrage auf ihr Ergebnis von 2008 ab.</text>
+        <description py:pytype="str">Zwei Monate vor der Landtagswahl kann Bayerns Ministerpräsident Seehofer auf eine absolute Mehrheit hoffen. Die SPD stürzt in einer Umfrage auf ihr Ergebnis von 2008 ab.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/ude-seehofer/" type="jpg" publication-date="" expires="2013-10-18T08:55:36+00:00">
+          <bu py:pytype="str">Bayerns Ministerpräsident Horst Seehofer (r, CSU) unterhält sich mit dem Münchner Oberbürgermeister Christian Ude (SPD).</bu>
+          <copyright py:pytype="str">© Marc Müller/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="Christian Ude, Steinbrück" base-id="http://xml.zeit.de/politik/deutschland/2013-07/christian-ude-steinbrueck/" type="jpg" publication-date="" expires="2013-10-20T13:35:00+00:00">
+      <bu py:pytype="str">Peer Steinbrück (links) und Christian Ude beim SPD-Landesparteitag in München</bu>
+      <copyright py:pytype="str">© Andreas Gebert/dpa</copyright>
+    </image>
+    <badges>
+      <badge>video</badge>
+    </badges>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Lisa Caspari</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-21T13:01:22.099410+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-20T17:47:53.408324+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-21T13:02:24.859931+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-20T17:46:58.137681+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-20T17:46:50.857620+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.dschmidt</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">73d1391c31bf49b298ac6d151c18e700</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6166</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:7d994833-0b19-4905-8c62-cbc6a92b462e}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="horst-seehofer" uuid="d09f7d7e-414f-406c-bf4b-d8e89552c051" score="10" type="Person">Horst Seehofer</tag><tag url_value="csu" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" score="8" type="Organization">CSU</tag><tag url_value="christian-ude" uuid="72a7dc22-5360-461f-85c7-6475164b0f6e" score="8" type="Person">Christian Ude</tag><tag url_value="peer-steinbrueck" uuid="77c20c36-4377-478d-a59d-f1cd6452f563" score="8" type="Person">Peer Steinbrück</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="8" type="Organization">SPD</tag><tag url_value="gymnasium" uuid="b9bf86d8-848b-4736-bcf3-d1bfc5956fd0" score="4" type="free">Gymnasium</tag><tag url_value="bayern" uuid="bd9c5328-154e-4994-b705-8e4ee8c4fdbc" score="3" type="Location">Bayern</tag></rankedTags></head><body>
+    <supertitle>Bayern-SPD</supertitle>
+    <title>Ude zündet nicht</title>
+    <subtitle>In Bayern steuert der SPD-Kandidat auf ein Debakel bei der Landtagswahl hin. Er hofft auf falsche Umfragen und die Renitenz seiner Genossen.</subtitle>
+    <division type="page">
+      <image align="left" title="Christian Ude, Steinbrück" base-id="http://xml.zeit.de/politik/deutschland/2013-07/christian-ude-steinbrueck/" type="jpg" publication-date="" expires="2013-10-20T13:35:00+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Peer Steinbrück (links) und Christian Ude beim SPD-Landesparteitag in München</bu>
+        <copyright py:pytype="str">© Andreas Gebert/dpa</copyright>
+      </image>
+      <p>Was tun Wahlkämpfer, wenn die Partei auf das vielleicht schlechteste Ergebnis ihrer Geschichte zusteuert? Die <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> in <entity idref="Bayern" entity_type="Location" url_value="orte/bayern">Bayern</entity> tröstet sich mit Ausrufezeichen. "Jetzt ist alles drin!", "Jetzt geht es richtig los!", "Bayern kann das!" sowie: "Genau! <entity idref="Christian+Ude" entity_type="Person" url_value="personen/christian-ude">Ude</entity>." Dies sind nur ausgewählte Beispiele für die Motivationsparolen auf SPD-Werbepostkärtchen und Wahlkampf-Leinwänden.</p>
+      <p>Spitzenkandidat Christian Ude, bisher von Beruf Oberbürgermeister der Stadt München, lässt außerdem die Kommunalpolitik ruhen. Er hat sich "unbezahlten Urlaub" genommen, um im Bayern-Wahlkampfendspurt noch mal richtig reinzuhauen, wie seine Strategen gut und gerne und überall betonen. Allzu viel zu regeln dürfte die Stadt München in den Sommerferien sowieso nicht haben. Egal, Ude nennt sich jetzt auch selbst einen Vollzeitwahlkämpfer. Er hat es dringend nötig.</p>
+      <p>Nur 18 Prozent der Stimmen erreicht seine SPD jüngsten Umfragen zufolge – weniger noch als die 18,6 Prozent bei der verheerenden Landtagswahl 2008.  Außerdem liegen die Grünen heute nur noch vier Prozentpunkte hinter Udes Partei. So schlimm stand es noch nie um die bayerische Sozialdemokratie. Dabei ist sie Kummer gewohnt, weil sie schon seit den achtziger Jahren bei Landtagswahlen nicht mehr die 30-Prozent-Marke erreicht.</p>
+      <p>
+        <strong>Bloß kein Desaster vor der Bundestagswahl<br /></strong>
+      </p>
+      <p>Am 15. September geht es in Bayern für die SPD aber nicht nur um die schier allmächtige <entity idref="CSU" entity_type="Organization" url_value="organisationen/csu">CSU</entity>. Eine Woche später findet die Bundestagswahl statt, die bisher bekanntlich für die Sozialdemokraten auch nicht unter guten Vorzeichen steht. Da können die Genossen bundesweit kein desaströses Bayern-Ergebnis gebrauchen.</p>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2013-07/2557002563001" expires="2013-08-19T07:00:00+00:00" />
+      <p>"Bayern wird eine enorme Rolle spielen", gesteht auch <entity idref="Peer+Steinbr%C3%BCck" entity_type="Person" url_value="personen/peer-steinbrueck">Peer Steinbrück</entity> freimütig. Es ist Samstagvormittag, der Kanzlerkandidat ist nach München gereist, um am Landesparteitag der Bayern-SPD teilzunehmen. Ort für den Auftakt zum Wahlkampf-Endspurt: ein von der Sonne bereits völlig überhitztes Theaterzelt. Jetzt steht Steinbrück etwas verloren davor auf dem roten Teppich, denn "Vollzeit-Spitzenkandidat" Ude hat sich verspätet.</p>
+      <p>Also lobt der Kanzlerkandidat in die Kameras dessen "Verlässlichkeit" und "Solidität" und verweist auf andere SPD-Oberbürgermeister, die gute Ministerpräsidenten geworden seien. Von der SPD, versteht sich. Irgendwann fährt endlich Udes Auto vor. "Darf ich dich herzlich in deiner Stadt begrüßen?", schnoddert Steinbrück ihm fröhlich entgegen. Christian Ude lacht und haut dem Kanzlerkandidaten auf die Schulter.</p>
+    </division>
+    <division type="page" teaser="Die CSU lästert über Udes Bayern-Kenntnisse">
+      <p>Der 65-jährige Ude ist ein jovialer Menschenfreund, der viel lacht und öfters mal einen freundlich-verschmitzten Blick aufsetzt. Er galt daher als große Hoffnung der Sozialdemokraten, als einer, der im Vergleich mit dem selbsterklärten <a href="http://www.zeit.de/politik/deutschland/2013-07/csu-wahlkampf-bayern-parteitag" target="_blank" class="">CSU-Supermenschenfreund Horst Seehofer</a> bestehen kann. Doch Udes Wahlkampf zündet bisher nicht. Seine persönlichen Beliebtheitswerte sind zwar nicht schlecht, gingen aber zuletzt zurück. Ude hatte vor einiger Zeit bei mehreren öffentlichen Auftritten bayerische Regierungsbezirke vertauscht. Die CSU lästert bei den heimatbewussten Bayern nun gerne über die angeblich mangelnde Ortskenntnis des Großstädters.</p>
+      <p>Hinzu kommt, dass <entity idref="Horst+Seehofer" entity_type="Person" url_value="personen/horst-seehofer">Seehofer</entity> der SPD knallhart die Themen klaut. Studiengebühren abschaffen? Die CSU hat es bereits gemacht. Unfreiwillig, um einem Volksentscheid zuvorzukommen. Doch Seehofer hat sich diese Entscheidung längst zu eigen gemacht. Der CSU-Chef will außerdem einen (tariflichen) Mindestlohn, er redet gar von einer "menschlichen Arbeitswelt".</p>
+      <p>
+        <strong>Steinbrück ist gut gelaunt und kämpferisch</strong>
+        <br />
+      </p>
+      <p>Wer am Samstagfrüh in den <em>Zehn guten Gründen für Christian Ude</em>, einem kleinen SPD-Heftchen, blättert, stellt fest: Die CSU hat mindestens acht davon auch im eigenen Programm festgeschrieben: Wahlrecht zwischen acht- und neunjährigem Gymnasium, Mieterschutz, solide Finanzen. Natürlich gibt es Nuancen in der Formulierung, womöglich gravierende, doch welcher Wähler erkennt die so genau?</p>
+      <p>Immerhin, die Bayern-SPD lässt sich die gute Laune nicht verderben. Trotz der schnell unerträglichen Hitze im Zelt jubeln die Delegierten dem Kanzlerkandidaten Steinbrück zu, der eine gut gelaunte und kämpferische Rede hält. "Lasst euch nicht nervös machen", beschwört er die Zuhörer. Die "lose Kanone" Seehofer müsse jetzt einfach "über Bord geworfen werden". Umfragen täuschten, beschwört der Kanzlerkandidat die Bayern. Auch aus Eigeninteresse sind irreführende Demoskopiewerte seit Neuestem Steinbrücks Lieblingsthema.</p>
+      <p>"Die wichtigste politische Kraft in Bayern sind … die Unentschlossenen", ruft später auch Spitzenkandidat Ude den Genossen zu. In den nächsten 57 Tagen sei noch einiges zu stemmen. 300 Termine hat Ude angeblich noch im Kalender stehen. Er will, wie er sagt, auf seiner Tour durch das Land die Regierungsfähigkeit der bayerischen SPD beweisen.</p>
+      <p>
+        <strong>"Wir gönnen dem Land eine bessere Regierung"</strong>
+        <br />
+      </p>
+      <p>Doch der SPD-Kandidat ist kein großer Redner, seine Ansprache an die von der Hitze erschöpften Genossen gerät länglich und kleinteilig. Akribisch hakt Ude jedes politische Landesthema ab, prangert den Themenklau der CSU an. Auffällig oft rechtfertigt er sich: "Wir reden in keiner Weise das Land schlecht (…) wir gönnen ihm eine bessere Regierung." Und: Natürlich könne ein Dreierbündnis mit den Grünen sowie den schwer einzuordnenden, zuletzt latent eurokritischen Freien Wählern funktionieren: Schließlich habe man im Landtag "in 80 Prozent der Fälle" gemeinsam abgestimmt. </p>
+      <p>"Ihr seid bei diesem Finale nicht Zuschauer, ihr seid Akteure", ruft Ude dann noch den potenziellen Wahlkämpfern zu. Man sei es der Partei schuldig, jetzt zu kämpfen. Dafür hat auch Peer Steinbrück seine Unterstützung versprochen. Er werde in nächster Zeit häufig im Süden unterwegs sein, sagt der Kanzlerkandidat – er hat im Zelt das Sakko längst abgelegt, die Hemdsärmel nach oben gekrempelt – und wird dabei sehr pathetisch: "Lasst uns kämpfen, lasst uns zum Horizont laufen, und nehmt mich mit." <br /></p>
+      <p>Die SPD, sie ist nun eine Schicksalsgemeinschaft.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Ude zündet nicht</title>
+    <supertitle>Bayern-SPD</supertitle>
+    <text>In Bayern steuert der SPD-Kandidat auf ein Debakel bei der Landtagswahl hin. Er hofft auf falsche Umfragen und die Renitenz seiner Genossen. Von Lisa Caspari, München</text>
+  </teaser>
+</article>

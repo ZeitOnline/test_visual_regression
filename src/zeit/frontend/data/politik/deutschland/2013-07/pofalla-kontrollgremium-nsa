@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image align="left" title="Pofalla" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pofalla-3/" type="jpg" publication-date="" expires="2013-10-25T15:09:12+00:00">
+      <bu py:pytype="str">Kanzleramtsminister Ronald Pofalla (CDU) auf dem Weg in die Sondersitzung des Parlamentarischen Kontrollgremiums
+</bu>
+      <copyright py:pytype="str">© Michael Kappeler/dpa</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-pofalla-merkel-kommentar" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Ronald Pofalla</supertitle>
+        <title py:pytype="str">Merkels NSA-Springer </title>
+        <text py:pytype="str">Ronald Pofalla muss sich bohrenden Fragen der Opposition zur Spähaffäre stellen. Soll er als Schachfigur die Kanzlerin schützen?, fragt Ludwig Greven.</text>
+        <description py:pytype="str">Ronald Pofalla muss sich bohrenden Fragen der Opposition zur Spähaffäre stellen. Soll er als Schachfigur die Kanzlerin schützen?, fragt Ludwig Greven.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Merkel Pofalla" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-pofalla/" type="jpg" publication-date="" expires="2013-10-25T11:18:23+00:00">
+          <bu py:pytype="str">Bundeskanzlerin Angela Merkel und Kanzleramtsminister Ronald Pofalla. (Archivbild)</bu>
+          <copyright py:pytype="str">© Arno Burgi/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comment-id">http://xml.zeit.de/politik/2013-07/NSA-Spionage-Telefonueberwachung-Geheimdienst</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, AFP, Reuters, cba</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-25T16:22:53.637578+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-25T16:12:43.842885+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-25T16:26:12.155079+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-25T16:11:49.737730+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-25T16:11:40.753714+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.haake</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">d6874f9045894f75a7209cbefec45676</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2614</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:41c10850-a18d-4b3f-9175-d36ea02ccd10}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="ronald-pofalla" uuid="c72b4b4e-9d5e-414f-b4ae-b8d6515ebc4b" score="9" type="Person">Ronald Pofalla</tag><tag url_value="gerhard-schindler" uuid="16678205-5880-4f65-ae3a-d15cd5ceab90" score="6" type="Person">Gerhard Schindler</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag><tag url_value="opposition" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" score="3" type="free">Opposition</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag></rankedTags></head><body>
+    <supertitle>Geheimdienstausschuss</supertitle>
+    <title>Pofalla sieht Vorwürfe gegen deutsche Dienste ausgeräumt</title>
+    <subtitle>Kaum Datenweitergabe, kein Gesetzesbruch: Geheimdienstkoordinator Pofalla kommt aufgeräumt aus dem Kontrollgremium. Für die Opposition hingegen ist nichts geklärt.</subtitle>
+    <division type="page">
+      <image align="left" title="Pofalla" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pofalla-3/" type="jpg" publication-date="" expires="2013-10-25T15:09:12+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Kanzleramtsminister Ronald Pofalla (CDU) auf dem Weg in die Sondersitzung des Parlamentarischen Kontrollgremiums
+</bu>
+        <copyright py:pytype="str">© Michael Kappeler/dpa</copyright>
+      </image>
+      <p><a href="http://www.zeit.de/politik/deutschland/2013-07/nsa-pofalla-merkel-kommentar" target="_blank" class="">Kanzleramtschef und Geheimdienstkoordinator Ronald Pofalla</a> (CDU) hält die Vorwürfe für ausgeräumt, die im Zusammenhang mit der US-Spähaffäre auch gegen deutsche Geheimdienste erhoben werden. "Die Fragen, die die deutschen Nachrichtendienste betreffen, sind alle von mir in einer umfassenden Prüfung geklärt worden", sagte <entity idref="Ronald+Pofalla" entity_type="Person" url_value="personen/ronald-pofalla">Pofalla</entity>, nachdem er das Parlamentarische Kontrollgremium (PKG) des Bundestages informiert hatte. Der Datenschutz werde von den deutschen Nachrichtendiensten "zu 100 Prozent eingehalten".<br /></p>
+      <p>Zum Vorwurf, Daten deutscher Bürger seien an ausländische Nachrichtendienste übermittelt worden, sagte Pofalla, eine massenhafte Weitergabe habe es nicht gegeben. Übermittelt worden seien an die <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> nur zwei Datensätze, in denen es um einen bereits seit geraumer Zeit entführten Deutschen gehe. Die Weitergabe dieser Daten habe dessen Schutz gedient. Deutschland sei in einem komplizierten Fall wie diesem "auf die technische Hilfe der USA angewiesen". Der Vertreter der Linken, Steffen Bockhahn, hielt dagegen, die Vorwürfe gegen deutsche Geheimdienste seien von Pofalla nicht ausgeräumt worden.</p>
+      <p><br /><a href="http://www.zeit.de/digital/datenschutz/2013-07/faq-nsa-skandal" target="_blank" class="">Die Spähaktionen des US-Geheimdienstes NSA</a> wollte Pofalla nicht bewerten; er kündigte an, er werde sich auch dazu um weitere Aufklärung bemühen. Einstweilen läge eine Erklärung der <entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity> vor, nach der dieser nicht millionenfach die Daten deutscher Bürger überwacht.     </p>
+      <raw py:pytype="str">
+        <blockquote class="twitter-tweet"><p>Anders als im Vorfeld ankündigt, konnte Pofalla die Vorwürfe gegen die deutschen Geheimdienste nicht entkräften <a href="http://t.co/ja65zffIpa">http://t.co/ja65zffIpa</a></p>— Steffen Bockhahn (@DerRostocker) <a href="https://twitter.com/DerRostocker/statuses/360427115411275776">July 25, 2013</a></blockquote>
+        <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8" />
+      </raw>
+      <p>Vertreter der Opposition kritisierten besonders den <entity idref="Bundesnachrichtendienst" entity_type="Organization" url_value="organisationen/bundesnachrichtendienst">Bundesnachrichtendienst</entity> (<entity idref="BND" entity_type="Organization" url_value="organisationen/bnd">BND</entity>). Der PKG-Vorsitzende Thomas Oppermann (SPD) sagte, das Kontrollgremium sei "kein Stück weitergekommen". BND-Präsident <entity idref="Gerhard+Schindler" entity_type="Person" url_value="personen/gerhard-schindler">Gerhard Schindler</entity> habe in der Sitzung bestätigt, dass er sich um <a href="http://www.zeit.de/digital/datenschutz/2013-07/nsa-affaere-bnd-praesident-kritik" target="_blank" class="">eine lockerere Auslegung der Regeln für die Weitergabe von Daten bemüht habe</a>. Pofalla hingegen wies dies zurück. Ihm liege kein solcher Antrag vor. Schindler habe ihm zudem schriftlich bekräftigt, dass er dies nicht gefordert habe.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Pofalla sieht Vorwürfe gegen deutsche Dienste ausgeräumt</title>
+    <supertitle>Geheimdienstausschuss</supertitle>
+    <text>Kaum Datenweitergabe, kein Gesetzesbruch: Geheimdienstkoordinator Pofalla kommt aufgeräumt aus dem Kontrollgremium. Für die Opposition hingegen ist nichts geklärt.</text>
+  </teaser>
+</article>

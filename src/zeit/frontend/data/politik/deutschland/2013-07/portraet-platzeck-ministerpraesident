@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/platzeck/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Matthias Platzeck</bu>
+      <copyright py:pytype="str">© Adam Berry/Getty Images</copyright>
+    </image>
+    <author href="http://xml.zeit.de/autoren/B/Kirsten_Baukhage/index" publication-date="" expires="">
+      <display_name py:pytype="str">Kirsten Baukhage</display_name>
+    </author>
+    <author href="http://xml.zeit.de/autoren/B/Ronald_Bahlburg/index" publication-date="" expires="">
+      <display_name py:pytype="str">Ronald Bahlburg</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/portraet-dietmar-woidke" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Platzeck-Nachfolger</supertitle>
+        <title py:pytype="str">Woidke – der umgängliche Reformer</title>
+        <text py:pytype="str">Innenminister Dietmar Woidke soll dem scheidenden brandenburgischen Regierungschef folgen. Kenner schätzen den Stil des Ressortchefs und seine meist gute Laune.</text>
+        <description py:pytype="str">Innenminister Dietmar Woidke soll dem scheidenden brandenburgischen Regierungschef folgen. Kenner schätzen den Stil des Ressortchefs und seine meist gute Laune.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/dietmar-woidke/" type="jpg" publication-date="" expires="2013-10-29T15:10:38+00:00">
+          <bu py:pytype="str">Brandenburgs Innenminister Dietmar Woidke (SPD)</bu>
+          <copyright py:pytype="str">© Ralf Hirschberger/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-zukunft-schlaganfall-ber" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Brandenburg</supertitle>
+        <title py:pytype="str">Platzeck gibt seinen Rücktritt bekannt</title>
+        <text py:pytype="str">Sein Arzt hatte ihm von einer 80-Stunden-Woche abgeraten: Matthias Platzeck wird Ende August als Ministerpräsident zurücktreten. Sein Nachfolger wird Dietmar Woidke.</text>
+        <description py:pytype="str">Sein Arzt hatte ihm von einer 80-Stunden-Woche abgeraten: Matthias Platzeck wird Ende August als Ministerpräsident zurücktreten. Sein Nachfolger wird Dietmar Woidke.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-woidke-4/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Matthias Platzeck (r.) mit seinem designierten Nachfolger Dietmar Woidke</bu>
+          <copyright py:pytype="str">© Fabrizio Bensch/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/karriere/beruf/2013-06/chefsache-hilfe-fuehrungskraefte-erschoepfung" year="2013" issue="23" ressort="Karriere" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Vorsorge</supertitle>
+        <title py:pytype="str">So schützen Führungskräfte ihre Gesundheit</title>
+        <text py:pytype="str">Der Fall Matthias Platzeck zeigt: Besonders Entscheider sind gesundheitlich gefährdet. Sabine Hockling erklärt, worauf Führungskräfte achten sollten. </text>
+        <description py:pytype="str">Der Fall Matthias Platzeck zeigt: Besonders Entscheider sind gesundheitlich gefährdet. Sabine Hockling erklärt, worauf Führungskräfte achten sollten. </description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Brandenburgs Ministerpräsident Matthias Platzeck" base-id="http://xml.zeit.de/karriere/beruf/2013-06/platzeck/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Brandenburgs Ministerpräsident Matthias Platzeck</bu>
+          <copyright py:pytype="str">© Adam Berry/GettyImages</copyright>
+        </image>
+      </reference>
+    </references>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Kirsten Baukhage;Ronald Bahlburg</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, sdo</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-29T18:39:32.785449+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-29T14:57:47.838525+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-29T18:44:55.480979+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-29T14:56:52.735176+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-29T14:47:54.384326+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.newsfeed</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">2a85c12d6e2e4830b08e7a6495dfc1bc</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3797</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:d5de5db2-b3f3-4206-9e9a-2dde01319a0c}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="matthias-platzeck" uuid="d6a35720-9ea4-43c5-be55-b2042e43f3a5" score="9" type="Person">Matthias Platzeck</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="8" type="Organization">SPD</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="7" type="Organization">Grüne</tag><tag url_value="hans-modrow" uuid="a71bc614-a36d-47db-9b81-de9e65e62d1b" score="5" type="Person">Hans Modrow</tag><tag url_value="klaus-wowereit" uuid="32dddce6-f348-4bf7-a3f8-6f56ff80754e" score="5" type="Person">Klaus Wowereit</tag><tag url_value="manfred-stolpe" uuid="d1d65387-2ba0-45a6-8278-6107ad39ed70" score="5" type="Person">Manfred Stolpe</tag><tag url_value="arbeitsmarktreform" uuid="7311a76b-b946-4ed5-b10f-cb011c6b33d1" score="4" type="free">Arbeitsmarktreform</tag><tag url_value="ddr" uuid="1bba4e8d-d938-42af-b44b-674a01e024e3" score="4" type="free">DDR</tag><tag url_value="schlaganfall" uuid="410a5ff7-d19d-43ab-93c8-9ca10fbfd663" score="4" type="free">Schlaganfall</tag><tag url_value="talkshow" uuid="38b2bb38-c515-4b1c-ad4d-6dc449061cce" score="4" type="free">Talkshow</tag><tag url_value="umweltminister" uuid="b039d5b7-d6af-49b4-9655-9952d0b5efa5" score="4" type="free">Umweltminister</tag><tag url_value="brandenburg" uuid="f87fba11-0516-4250-899e-a12c10cc080e" score="2" type="Location">Brandenburg</tag><tag url_value="elbe" uuid="732d6f8a-424a-4024-812b-5ce94eee1bc9" score="1" type="Location">Elbe</tag><tag url_value="potsdam" uuid="5c449597-5463-4afb-ba83-87b1c1251951" score="1" type="Location">Potsdam</tag><tag url_value="schoenefeld" uuid="e5063ef0-cb6a-4e61-872c-67a24c3a7de0" score="1" type="Location">Schönefeld</tag></rankedTags></head><body>
+    <supertitle>Matthias Platzeck</supertitle>
+    <title>Ruhig, zupackend, unprätentiös</title>
+    <subtitle>Leise und nachdenklich, aber auch entschlossen und einsatzbereit – so kennen die Brandenburger den Regierungschef. Mit 59 Jahren macht er Platz – der Gesundheit zuliebe.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/platzeck/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Matthias Platzeck</bu>
+        <copyright py:pytype="str">© Adam Berry/Getty Images</copyright>
+      </image>
+      <p>Er gilt als der nachdenkliche, der leise, der bodenständige SPD-Politiker. <entity idref="Matthias+Platzeck" entity_type="Person" url_value="personen/matthias-platzeck">Matthias Platzeck</entity>
+ ist keiner, der sich in den Vordergrund oder in jede Talkshow drängt. 
+Seine ruhige und freundliche Art hat ihm große Sympathien bei seinen 
+Landsleuten in <entity idref="Brandenburg" entity_type="Location" url_value="orte/brandenburg">Brandenburg</entity> eingebracht. Der gebürtige Potsdamer war 
+populär als Umweltminister, er ist es als Ministerpräsident. Während der
+ Oderflut 1997 erwarb sich Platzeck, der Tag und Nacht die Stabilität der Deiche überwachte, den Ruf des zupackenden Machers. </p>
+      <p>Ähnlichen Einsatz bewies der 59-Jährige bei der jüngsten Flut an der 
+<entity idref="Elbe" entity_type="Location" url_value="orte/elbe">Elbe</entity> im Juni. Dabei ging der "Deichgraf" offenbar über die Grenze seiner
+ Kräfte hinaus – nun kündigte Platzeck <a href="http://www.zeit.de/politik/deutschland/2013-07/platzeck-zukunft-schlaganfall-ber" target="_blank" class="">aus gesundheitlichen
+ Gründen</a> seinen Rücktritt von den Ämtern als Ministerpräsident und 
+SPD-Landesvorsitzender an. Fünf Wochen zuvor hatte er nach seinem 
+Dauereinsatz in den Flutgebieten <a href="http://www.zeit.de/politik/deutschland/2013-07/platzeck-zukunft-schlaganfall-ber" target="_blank" class="">einen leichten Schlaganfall </a>erlitten. </p>
+      <p>   Schon einmal, vor sieben Jahren, änderte die Gesundheit seine Lebensplanung. Im 
+November 2005  schien 
+der Diplomingenieur und DDR-Umweltaktivist zunächst auf dem Höhepunkt seiner
+ politischen Karriere: Mit einem Spitzenergebnis von 99,4 Prozent wählte ihn die <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> zu ihrem Bundeschef.  <br /></p>
+      <p>Der 
+Sympathieträger aus dem Osten sollte die geschwächten Sozialdemokraten 
+nach kräftezehrenden internen Machtkämpfen stärken. Doch es kam anders: 
+Nach zwei Hörstürzen, einem Kreislauf- und einem Nervenzusammenbruch im 
+Frühjahr 2006 trat Platzeck nach nur 146 Tagen zurück. Die Dreifach-Belastung war zu hoch. </p>
+      <p>   Seine Ämter als brandenburgischer Regierungs- und SPD-Chef behielt der damals 52-Jährige bei. Gut ein Jahr zuvor hatte Platzeck
+– auf dem Höhepunkt der Hartz-IV-Kampagnen gegen die SPD – mit dem 
+klaren Eintreten für die aus seiner Sicht notwendigen 
+Arbeitsmarktreformen erfolgreich das Amt des Ministerpräsidenten 
+verteidigt. Im November 2009 wurde er dann zum dritten Mal an die Spitze
+ der brandenburgischen Regierung gewählt, diesmal war es eine rot-rote. <br /></p>
+      <p>
+        <strong>Beliebtester Politiker Brandenburgs</strong>
+      </p>
+      <p>   Auch 2013 zehrte ein drittes Spitzenamt an Platzecks 
+Nerven und Kräften. Nach der zum vierten Mal verschobenen Eröffnung des 
+neuen Hauptstadtflughafens Berlin-Brandenburg übernahm der SPD-Politiker
+ im Januar das<a href="http://www.zeit.de/politik/deutschland/2013-01/platzeck-flughafen-vertrauensabstimmung" target="_blank" class=""> Amt des Aufsichtsratschefs der BER-Flughafengesellschaft</a> 
+von seinem Berliner Amtskollegen <entity idref="Klaus+Wowereit" entity_type="Person" url_value="personen/klaus-wowereit">Klaus Wowereit</entity> (SPD). Platzeck 
+war zuletzt zwar immer noch mit 61 Prozent der beliebteste Politiker 
+Brandenburgs, hatte jedoch 20 Punkte im Vergleich zu alten Glanzzeiten 
+eingebüßt. Eine Mehrheit traut dem Regierungschef nicht zu, die Probleme
+ am neuen Hauptstadt-Airport in <entity idref="Sch%C3%B6nefeld" entity_type="Location" url_value="orte/schoenefeld">Schönefeld</entity> zu lösen. </p>
+      <p>   Der Sohn
+ eines HNO-Arztes und einer medizinisch-technischen Assistentin 
+hatte nach dem Grundwehrdienst bei der Nationalen Volksarmee von 
+1974 bis 1979 biomedizinische Kybernetik in Ilmenau studiert. Nach verschiedenen 
+Posten als Luft- und Umwelthygieniker wurde Platzeck im November 1989 Mitbegründer und Sprecher der <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grünen</entity> Liga in der DDR.</p>
+      <p>   Von Februar bis April 1990 war Platzeck
+ Minister ohne Geschäftsbereich in der DDR-Regierung von <entity idref="Hans+Modrow" entity_type="Person" url_value="personen/hans-modrow">Hans Modrow</entity>. Im
+ Oktober 1990 zog er als Abgeordneter für das Bündnis 90 in den 
+Potsdamer Landtag ein, schon im November wurde er zum Umweltminister 
+berufen. Den Zusammenschluss von Bündnis 90 und Grünen vollzog Platzeck
+ nicht mit. 1995 trat der Naturwissenschaftler in die SPD ein. 2002 
+übernahm er – nach einem Intermezzo als Oberbürgermeister von <entity idref="Potsdam" entity_type="Location" url_value="orte/potsdam">Potsdam</entity> – 
+das Amt des Ministerpräsidenten in Brandenburg von seinem politischen 
+Ziehvater <entity idref="Manfred+Stolpe" entity_type="Person" url_value="personen/manfred-stolpe">Manfred Stolpe</entity>. 
+
+
+</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Matthias Platzeck</supertitle>
+    <title>Ruhig, zupackend, unprätentiös</title>
+    <text>Leise und nachdenklich, aber auch entschlossen und einsatzbereit – so kennen die Brandenburger den Regierungschef. Mit 59 Jahren macht er Platz – der Gesundheit zuliebe.</text>
+  </teaser>
+</article>

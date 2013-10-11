@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/M/Thorsten_Metzner" publication-date="" expires="">
+      <display_name py:pytype="str">Thorsten Metzner</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-politiker-gesundheit" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Rücktritt von Platzeck</supertitle>
+        <title py:pytype="str">Das Leben geht vor</title>
+        <text py:pytype="str">Dass Matthias Platzeck aus Gesundheitsgründen seine politischen Ämter aufgibt, verdient Respekt. Andere Politiker dürfen sich daran ein Beispiel nehmen. Von Ludwig Greven</text>
+        <description py:pytype="str">Dass Matthias Platzeck aus Gesundheitsgründen seine politischen Ämter aufgibt, verdient Respekt. Andere Politiker dürfen sich daran ein Beispiel nehmen. Von Ludwig Greven</description>
+        <byline xsi:nil="true" />
+        <image alt="Der brandenburgische Ministerpräsident Matthias Platzeck im Fraktionsraum der SPD im Landtag in Potsdam " align="left" title="Matthias Platzeck Leben Politik" base-id="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-leben-politik/" type="jpg" publication-date="" expires="2013-10-30T06:35:15+00:00">
+          <bu py:pytype="str">Der brandenburgische Ministerpräsident Matthias Platzeck im Fraktionsraum der SPD im Landtag in Potsdam </bu>
+          <copyright py:pytype="str">© Ralf Hirschberger/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-brandenburg-ruecktritt" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Matthias Platzeck</supertitle>
+        <title py:pytype="str">Ostdeutsch, sachlich, unvollendet</title>
+        <text py:pytype="str">Matthias Platzeck tritt ab. Er war der erste bekennende ostdeutsche Politiker, dem der Westen wirklich zuhörte. Von Christian Bangel</text>
+        <description py:pytype="str">Matthias Platzeck tritt ab. Er war der erste bekennende ostdeutsche Politiker, dem der Westen wirklich zuhörte. Von Christian Bangel</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-5/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Brandenburgs Ministerpräsident Matthias Platzeck</bu>
+          <copyright py:pytype="str">© Sean Gallup/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/dietmar-woidke-matthias-platzeck/" type="jpg" publication-date="" expires="2013-10-30T09:52:34+00:00">
+      <bu py:pytype="str">Matthias Platzeck und sein designierter Nachfolger, Innenminister Dietmar Woidke (SPD)</bu>
+      <copyright py:pytype="str">© Ralf Hirschberger/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Thorsten Metzner</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-30T09:31:32.348441+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-30T09:06:23.636750+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-30T09:32:35.442085+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-30T09:05:29.372605+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-30T08:46:29.974433+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.duelffer</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Tagesspiegel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">848112e69fa94e48b3a9eebcd8ab64ec</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4744</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:176561df-6c36-42ee-bd44-26c954193155}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="matthias-platzeck" uuid="d6a35720-9ea4-43c5-be55-b2042e43f3a5" score="9" type="Person">Matthias Platzeck</tag><tag url_value="dietmar-woidke" uuid="ac1446ef-77ad-4bf1-bed1-c6fe1f017e75" score="8" type="Person">Dietmar Woidke</tag><tag url_value="rainer-speer" uuid="5442a722-a88d-4276-b3de-b92caac203bc" score="6" type="Person">Rainer Speer</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="6" type="Organization">SPD</tag><tag url_value="die-linke" uuid="9eecf627-7a54-4e81-98c4-c7e5bd7e76e5" score="5" type="Organization">Die Linke</tag><tag url_value="personalabbau" uuid="d59fd8ad-42c3-4f9c-9ab6-525fb79f802d" score="4" type="free">Personalabbau</tag><tag url_value="stellenabbau" uuid="91903599-3e07-49fe-9b4e-cf2038cc7e48" score="4" type="free">Stellenabbau</tag><tag url_value="ministerpraesident" uuid="4f2302bd-3bc0-4c9c-b4b4-205d89d25059" score="3" type="free">Ministerpräsident</tag><tag url_value="norwegen" uuid="e7df0992-3065-4258-a285-beda81ef3969" score="3" type="Location">Norwegen</tag><tag url_value="umweltminister" uuid="b039d5b7-d6af-49b4-9655-9952d0b5efa5" score="3" type="free">Umweltminister</tag><tag url_value="urlaub" uuid="a648f558-9bc0-4d11-bffc-b9b5a694f10d" score="3" type="free">Urlaub</tag></rankedTags></head><body>
+    <supertitle>Nachfolger von Platzeck </supertitle>
+    <title>Dietmar Woidke, der Deichgraf junior</title>
+    <subtitle>Er gilt als brandenburgisch-bodenständig. Matthias Platzeck beschreibt ihn als so, wie ein Politiker sein sollte. Er denke, bevor er spreche. Menschennähe müsse man ihm nicht erklären. Dietmar Woidke soll Platzecks Nachfolger werden. </subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/dietmar-woidke-matthias-platzeck/" type="jpg" publication-date="" expires="2013-10-30T09:52:34+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Matthias Platzeck und sein designierter Nachfolger, Innenminister Dietmar Woidke (SPD)</bu>
+        <copyright py:pytype="str">© Ralf Hirschberger/dpa</copyright>
+      </image>
+      <p>Sie haben viel telefoniert in den letzten Tagen. Und er hatte gehofft, dass der entscheidende Anruf von <entity idref="Matthias+Platzeck" entity_type="Person" url_value="personen/matthias-platzeck">Matthias Platzeck</entity> nicht kommen möge. Noch nicht jetzt, aber dann klingelte das Handy doch, und <entity idref="Dietmar+Woidke" entity_type="Person" url_value="personen/dietmar-woidke">Dietmar Woidke</entity>, in <entity idref="Norwegen" entity_type="Location" url_value="orte/norwegen">Norwegen</entity> auf einem Kreuzfahrtschiff unterwegs, brach seinen Urlaub ab. Am Sonntagabend flog er von Trondheim in die Heimat zurück. Und Platzeck, Brandenburgs nach elf Jahren scheidender Regierungschef, gab seinem Nachfolger mit auf den Weg: "Daran, seinen Urlaub abzubrechen, kann er sich schon mal gewöhnen." Woidke habe die Prüfung bestanden, scherzte Platzeck.</p>
+      <p>Ja, er ist vor allem ein grundsolider, ernsthafter Mann, dieser Woidke, 51 Jahre, bislang Innenminister und ab 28. August wohl neuer Ministerpräsident. Keiner, der rhetorisch brilliert, ein verbindlicher Typ, verlässlich, ein Fleißarbeiter. Nie würde er sich im Ton vergreifen. Am Montag, vor den eigenen Genossen, vor den Journalisten, war ihm der tiefe Respekt vor seinen künftigen Ämtern anzumerken. Er wisse um die große Verantwortung, die da auf ihn zukomme. Nein, er werde nicht sagen, was er anders machen werde. "Ich weiß, dass ich in den nächsten Jahren an Matthias Platzeck gemessen werde."</p>
+      <p>Eine Überraschung ist die Personalie nicht. Woidke, geboren in Forst in der Niederlausitz, hatte schnell Profil und Statur gewonnen, seit er 2010 nach dem Rücktritt des Platzeck-Vertrauten <entity idref="Rainer+Speer" entity_type="Person" url_value="personen/rainer-speer">Rainer Speer</entity> das Innenressort übernahm – und das in einer Zeit, als Polizisten wegen angekündigten Personalabbaus und Wachenschließungen auf die Barrikaden gingen; als die CDU-Opposition höhnte, er sei eine ahnungslose Neubesetzung. Dass er im Drama um Polizeireform und Stasi-Enthüllungen so schnell Tritt fasste, hatten ihm selbst Genossen nicht zugetraut. Er verschaffte sich Anerkennung, indem er den Konflikt entschärfte, den Stellenabbau hinter den Kulissen abfederte, viel im Land unterwegs war, zuhörte – und zugleich nach diversen Fällen konsequent eine Stasi-Überprüfung der Brandenburger Polizei durchsetzte.</p>
+      <p>
+        <strong>Union näher als Linkspartei</strong>
+        <br />
+      </p>
+      <p>Schon vorher hatte er eine sehr brandenburgisch-bodenständige Karriere hinter sich. Er kommt aus einem evangelisch geprägten SED-fernen Elternhaus, hatte vor 1989 an der Humboldt-Universität Landwirtschaft und Ernährungsphysiologie studiert, war seit 1994 Landtagsabgeordneter, parallel Stadtverordneter und Kreistagsabgeordneter, dann ab 2004 Agrar- und Umweltminister. Bei der Regierungsbildung 2009 verlor Woidke, dem das Bündnis mit den Linken suspekt war, seinen Kabinettsposten. Eine Entscheidung, die ihn persönlich traf, wegen der bei seinem Chef Platzeck aber auch viele Proteste eingingen. Der Lausitzer, dem intellektuell-ideologisches Parteikauderwelsch ein Gräuel ist, und der nun auch die <entity idref="Linkspartei" entity_type="Organization" url_value="organisationen/linkspartei">Landespartei</entity> lenken wird, reihte sich ein, führte danach als Chef die Landtagsfraktion mit ruhiger Hand. Zum engen Zirkel um Platzeck, zur "Troika", damals angeführt von Rainer Speer, hatte er nie gehört. Doch nachdem der Ministerpräsident seinen Vertrauten verlor, wurde das Verhältnis zu Woidke enger. Schon seit etwa 2011 war klar, dass es auf ihn als Kronprinz hinausläuft. Am Montag beschrieb ihn Platzeck, der Menschenkenner, so: "Er ist ein Typ, wie ein Politiker sein sollte. Er denkt erst und redet dann. Er steht mit beiden Füßen auf dem märkischen Boden. Ihm muss man Menschennähe nicht erklären."</p>
+      <p>Im Landtag waren Woidkes Auftritte schon länger aufmerksam registriert worden. Er war es, der sich zuletzt besonders hart mit der CDU-Opposition auseinandersetzte. Und doch ruhen bei den Christdemokraten viele Hoffnungen auf Woidke, dem man mit Blick auf die Koalitionsfrage nach der Landtagswahl 2014 nachsagt, dass ihm die Union näher stehe als die Linkspartei. Doch festlegen wird Woidke sich nicht, wie er sofort klarstellte. Den Regierungspragmatismus der brandenburgischen <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> hat auch er verinnerlicht. Bei seinem ersten Auftritt als designierter Ministerpräsident lobte er die Koalition mit den Linken in den höchsten Tönen.</p>
+      <p>Und trotzdem setzte Woidke bereits einen deutlichen Akzent: Er geht nicht in den Aufsichtsrat des Pannen-Flughafens, der größten Erblast. Er habe mit dem Schönefelder Großflughafen bisher kaum etwas zu tun gehabt. Er glaube nicht, dass es für das Projekt günstig wäre, wenn sich einer erst einarbeiten müsse. Er kennt die Risiken – und die eigenen Grenzen.</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/berlin/nachfolge-von-matthias-platzeck-dietmar-woidke-der-deichgraf-junior/8565940.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br />
+      </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Deichgraf junior</title>
+    <text>Denkt erst, redet dann: Der künftige Ministerpräsident Woidke ist auch in Brandenburg relativ unbekannt. Aber selbst die CDU freut sich auf ihn. Von Thorsten Metzner</text>
+    <supertitle>Dietmar Woidke </supertitle>
+  </teaser>
+</article>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Natascha Kohnen</title>
+    <text py:pytype="str">
+      <p>Natascha Kohnen ist seit Juli 2009 Generalsekretärin der Bayern-SPD, seit Juni 2011 ist sie auch stellvertretende Fraktionsvorsitzende der Sozialdemokraten im Bayerischen Landtag.</p>
+    </text>
+  </block>
+</container>

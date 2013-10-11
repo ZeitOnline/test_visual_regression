@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <keywordset>
+      <keyword source="manual">Bundesrat</keyword>
+      <keyword source="manual">Wahlkampf</keyword>
+      <keyword source="manual">Bundestagswahl</keyword>
+      <keyword source="manual">Koalition</keyword>
+    </keywordset>
+    <author href="http://xml.zeit.de/autoren/F/Albert_Funk/index" publication-date="" expires="">
+      <display_name py:pytype="str">Albert Funk</display_name>
+    </author>
+    <rankedTags>
+      <tag type="free" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" py:pytype="str">Opposition</tag>
+      <tag type="free" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" py:pytype="str">Bundestagswahl</tag>
+      <tag url_value="bundesrat" uuid="60554689-4bdc-475e-be96-af9ea832c66f" score="7" type="free">Bundesrat</tag>
+      <tag url_value="bundestag" uuid="8c0df820-912b-459b-8d2a-ae38f50cf1d9" score="4" type="free">Bundestag</tag>
+    </rankedTags>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/umfrage-fdp-koalition-steinbrueck-merkel" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">ZDF-Politbarometer</supertitle>
+        <title py:pytype="str">FDP erstmals wieder bei fünf Prozent</title>
+        <text py:pytype="str">Die Union vorn, Steinbrück hinter Merkel, Nein zu Schwarz-Grün: Eine Umfrage bestätigt die politischen Trends. Die Liberalen können hoffen.</text>
+        <description py:pytype="str">Die Union vorn, Steinbrück hinter Merkel, Nein zu Schwarz-Grün: Eine Umfrage bestätigt die politischen Trends. Die Liberalen können hoffen.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="FDP Umfrage" base-id="http://xml.zeit.de/politik/deutschland/2013-07/fdp-umfrage/" type="jpg" publication-date="" expires="2013-10-12T08:51:28+00:00">
+          <bu py:pytype="str">Ein altes FDP-Plakat in der Nähe der Geschäftsstelle der Partei in Hannover</bu>
+          <copyright py:pytype="str">© Julian Stratenschulte/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-goering-eckardt-rot-gruen-auftritt-mindestlohn" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Rot-Grün</supertitle>
+        <title py:pytype="str">Herr Göring-Eckardt, Frau Steinbrück und der Mindestlohn</title>
+        <text py:pytype="str">Die Kandidaten von SPD und Grünen präsentieren ihr Mindestlohn-Konzept. Gekichert wird, als es um das einst schwierige Verhältnis beider Parteien geht. Von L. Caspari</text>
+        <description py:pytype="str">Die Kandidaten von SPD und Grünen präsentieren ihr Mindestlohn-Konzept. Gekichert wird, als es um das einst schwierige Verhältnis beider Parteien geht. Von L. Caspari</description>
+        <byline xsi:nil="true"/>
+        <image alt="Grünen-Spitzenkandidatin Katrin Göring-Eckardt und SPD-Kanzlerkandidat Peer Steinbrück vor der Bundespressekonferenz" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-goering-eckardt/" type="jpg" publication-date="" expires="2013-10-11T11:19:14+00:00">
+          <bu py:pytype="str">Grünen-Spitzenkandidatin Katrin Göring-Eckardt und SPD-Kanzlerkandidat Peer Steinbrück vor der Bundespressekonferenz</bu>
+          <copyright py:pytype="str">© Kay Nietfeld/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/sonneborn-zulassung-bundestagswahl" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Die Partei</supertitle>
+        <title py:pytype="str">"Unser Ziel: 100 Prozent plus X"</title>
+        <text py:pytype="str">Die PARTEI darf zur Bundestagswahl antreten – nach 2005 zum zweiten Mal. Der Wahlkampf wird schmutzig und inhaltsleer, sagt Bundeschef Martin Sonneborn im Interview. </text>
+        <description py:pytype="str">Die PARTEI darf zur Bundestagswahl antreten – nach 2005 zum zweiten Mal. Der Wahlkampf wird schmutzig und inhaltsleer, sagt Bundeschef Martin Sonneborn im Interview. </description>
+        <byline xsi:nil="true"/>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/martin-sonneborn/" type="jpg" publication-date="" expires="2013-10-05T13:47:15+00:00">
+          <bu py:pytype="str">Martin Sonneborn, Bundesvorsitzender der Partei Die PARTEI</bu>
+          <copyright py:pytype="str">© Robert Michael/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="Bundesrat" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bundesrat/" type="jpg" publication-date="" expires="2013-10-15T12:23:58+00:00">
+      <bu py:pytype="str">Der Bundesrat ist am 26.06.2013 in Berlin zusammengekommen. Am 05.07.2013 trifft sich die Länderkammer zu ihrer letzten Sitzung vor der Sommerpause.</bu>
+      <copyright py:pytype="str">© Rainer Jensen/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Albert Funk</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Tagesspiegel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-16T11:22:34.949712+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-13T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-16T11:23:38.736556+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_bu">Der Bundesrat dürfte eine Rolle spielen, wenn es um Koalitionsmöglichkeiten nach der Bundestagswahl geht.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/mei-bundesrat-dpa/8495544/2-formatOriginal.jpg?format=formatOriginal</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-15T12:37:46.332493+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schlieben</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">460c0951bbaf4cf38eab813b90b4a606</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3550</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9593e446-b537-4e81-8ac5-27874ee9dbdd}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  </head>
+  <body>
+    <supertitle py:pytype="str">Mögliche Koalitionen nach der Wahl</supertitle>
+    <title>Schaut auf den Bundesrat</title>
+    <subtitle>Wenn Rot-Grün nicht gewinnt, wird die Sache kompliziert. Denn im Bundesrat haben die unionsgeführten Länder keine Mehrheit - viele Gesetze könnten in der Länderkammer scheitern. Eine Instanz aber könnte gewinnen.</subtitle>
+    <byline>Albert Funk</byline>
+    <division type="page">
+      <image align="left" title="Bundesrat" src="http://xml.zeit.de/politik/deutschland/2013-07/bundesrat/bundesrat-540x304.jpg" type="jpg" publication-date="" expires="2013-10-15T12:23:58+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Der Bundesrat ist am 26.06.2013 in Berlin zusammengekommen. Am 05.07.2013 trifft sich die Länderkammer zu ihrer letzten Sitzung vor der Sommerpause.</bu>
+        <copyright py:pytype="str">© Rainer Jensen/dpa</copyright>
+      </image>
+      <p>Am 22. September wird der <a href="http://www.zeit.de/schlagworte/themen/bundestag" class="">Bundestag</a> neu gewählt, aber der <a href="http://www.zeit.de/schlagworte/themen/bundesrat" target="_blank" class="">Bundesrat</a> ist schon da. In einer etwas veränderten Aufstellung vielleicht, falls in Hessen Schwarz-Gelb abgewählt wird (oder, weit weniger wahrscheinlich, in Bayern). Dann hätte <a href="http://www.zeit.de/politik/deutschland/2013-07/steinbrueck-goering-eckardt-rot-gruen-auftritt-mindestlohn" class="">Rot-Grün</a> in der Länderkammer eine richtige Mehrheit: Eine rot-grüne Koalition im Bund könnte, wie einst <a href="http://www.zeit.de/schlagworte/personen/angela-merkel" target="_blank" class="">Angela Merkel</a> so schön sagte, durchregieren. Eigentlich stehen die Zeichen schon seit ein, zwei Jahren in Deutschland auf Rot-Grün – wie 1998 und 2009 kündigt sich ein möglicher Regierungswechsel in den Ländern an. Aber der rot-grünen Offensive geht womöglich auf der Zielgeraden die Puste aus. Die Umfragen jedenfalls verheißen zurzeit keinen Durchmarsch: Bei allen Instituten hängt Rot-Grün unter der 40-Prozent-Marke – sechs, sieben Punkte mehr müssten es sein.</p>
+      <p> Daher dürfte in den Parteiführungen mit Blick auf Koalitionsoptionen nach der <a href="http://www.zeit.de/schlagworte/themen/bundestagswahl" class="">Wahl</a> die Konstellation im Bundesrat in den nächsten Wochen wichtiger werden. Schon vor der Sommerpause war deutlich zu sehen, dass die Sozialdemokraten die <a href="http://www.zeit.de/politik/2013-06/bilanz-koalitionsvertrag-cdu-fdp" class="">schwarz-gelbe Koalition</a> nicht allzu hart rangenommen haben im Bundesrat und im Vermittlungsausschuss. Auch dort hat die Opposition ja eine Mehrheit, die fast noch wichtiger ist als jene in der Länderkammer, denn so kann sie auch Einspruchsgesetze verhindern, bei denen der Bundesrat eigentlich nur ein aufschiebendes Veto hat – indem diese Gesetze einfach nicht aufgerufen und damit auf die lange Bank geschoben werden. Was wohl der Fall gewesen wäre, wenn man sicher mit Rot-Grün rechnen würde.</p>
+      <p> Koalitionen, das sollte man hinzufügen, werden vernünftigerweise nicht erst nach Wahlen begonnen – das dürften die holprigen Anfänge der großen Koalition 2005 und von Schwarz-Gelb nach 2009 die Parteien gelehrt haben. Beide Bündnisse waren nicht oder schlecht vorbereitet. Im Fünf-Parteien-System aber ist das kategorische Ausschließen von Koalitionen ein Unding – alle müssen offen sein für mehrere Optionen.</p>
+      <p> Ob die kleine <a href="http://www.zeit.de/schlagworte/organisationen/fdp" class="">FDP</a> sich aber eine Ampelkoalition antun würde, in der sie ständig auf eine rot-grüne Phalanx im Bundesrat trifft, ist unsicher. Bleiben also Koalitionen unter Führung der Union. Eine Fortsetzung von Schwarz-Gelb würde schwierig. Die Koalition müsste sowohl mit SPD und Grünen beständig Kompromisse schließen, wobei die Blockademöglichkeit im Vermittlungsausschuss bei den Einspruchsgesetzen zu einem Verfahren in Karlsruhe führen könnte.</p>
+      <p> Auch eine große Koalition hat keine Bundesratsmehrheit. Sie müsste die Grünen einbinden oder aber, was die Sache wohl leichter machen würde, die FDP, falls Hessen und Bayern schwarz-gelb bleiben. Schwarz-Grün (eine Option, die manche in der <a href="http://www.zeit.de/schlagworte/organisationen/spd" class="">SPD</a> den <a href="http://www.zeit.de/schlagworte/organisationen/gruene" class="">Grünen</a> gönnen würden) hätte kein einziges Land hinter sich und müsste dauerhaft mit der SPD verhandeln.</p>
+      <p> Kurzum: Jede von der Union geführte Zweierkoalition läuft letztlich auf eine Mehrparteienregierung hinaus. Was der Kanzlerin am Ende aber gar nicht so unrecht sein muss: Je komplizierter die Verhältnisse zwischen Bundestag und Bundesrat, desto wichtiger wird jene Instanz, die am Ende die Fäden zusammenführt – das Kanzleramt.</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/meinung/moegliche-koalitionen-nach-der-wahl-schaut-auf-den-bundesrat/8495568.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br/>
+      </p>
+    </division>
+  </body>
+  <teaser>
+    <title py:pytype="str">Schaut auf den Bundesrat</title>
+    <text>Rot-Grün hat in den Umfragen keine Mehrheit, wohl aber im Bundesrat. Das wird die Gesetzgebung auch künftig kompliziert machen. Merkel indes könnte sogar profitieren.</text>
+    <supertitle>Koalitionen nach der Wahl</supertitle>
+  </teaser>
+  <indexteaser>
+    <title py:pytype="str">Mögliche Koalitionen nach der Wahl</title>
+    <text py:pytype="str">Schaut auf den Bundesrat</text>
+  </indexteaser>
+</article>

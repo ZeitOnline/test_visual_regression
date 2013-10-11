@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Ludwig_Greven/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Ludwig Greven</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/2013-07/nsa-abhoerskandal-demokratie-freiheit" year="2013" issue="29" ressort="Politik" author="Robert Leicht" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Affäre</supertitle>
+        <title py:pytype="str">Wutschreie über das Abhören helfen nicht</title>
+        <text py:pytype="str">Die NSA-Affäre muss rechtspolitisch aufgearbeitet werden –  mit den notwendigen Differenzierungen, schreibt Robert Leicht in seiner Analyse über das Wesen des Abhörens.</text>
+        <description py:pytype="str">Die NSA-Affäre muss rechtspolitisch aufgearbeitet werden –  mit den notwendigen Differenzierungen, schreibt Robert Leicht in seiner Analyse über das Wesen des Abhörens.</description>
+        <byline xsi:nil="true" />
+        <image alt="NSA" align="left" title="NSA" base-id="http://xml.zeit.de/politik/ausland/2013-07/NSA/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Die National Security Agency (NSA) in Fort Meade, Maryland</bu>
+          <copyright py:pytype="str">© PAUL J. RICHARDS/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/nsa-skanda-nebelkerzen-kommentar" year="2013" issue="29" ressort="Digital" author="Patrick Beuth" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Skandal</supertitle>
+        <title py:pytype="str">Enthüllungen und dann nichts als Nebelkerzen</title>
+        <text py:pytype="str">Mit rhetorischen Ablenkungsmanövern und purer Ratlosigkeit reagieren Deutschlands Politiker auf den Abhörskandal. Konstruktive Vorschläge fehlen. Ein Kommentar</text>
+        <description py:pytype="str">Mit rhetorischen Ablenkungsmanövern und purer Ratlosigkeit reagieren Deutschlands Politiker auf den Abhörskandal. Konstruktive Vorschläge fehlen. Ein Kommentar</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Überwachung" base-id="http://xml.zeit.de/politik/deutschland/2013-07/prism-ueberwachung-4/" type="jpg" publication-date="" expires="">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© Louisa Gouliamaki/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/merke-nsa-usa-spaehaffaere-aufklaerung" year="2013" issue="29" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Datenaffäre</supertitle>
+        <title py:pytype="str">Merkel vertröstet NSA-Kritiker</title>
+        <text py:pytype="str">Wen späht die NSA wie in Deutschland aus? Mit wem arbeitet sie zusammen? All diese Fragen will die Regierung aufklären – allerdings nicht jetzt. Die Materie sei komplex.</text>
+        <description py:pytype="str">Wen späht die NSA wie in Deutschland aus? Mit wem arbeitet sie zusammen? All diese Fragen will die Regierung aufklären – allerdings nicht jetzt. Die Materie sei komplex.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Merkel" base-id="http://xml.zeit.de/politik/deutschland/2013-07/Merkel/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Angela Merkel</bu>
+          <copyright py:pytype="str">© Johannes Eisele/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-goering-eckardt-3/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">NSA – Stoff für den Wahlkampf? Katrin Goering-Eckart (Grüne) und Peer Steinbrück (SPD) auf einer gemeinsamen Pressekonferenz.</bu>
+      <copyright py:pytype="str">© Tobias Schwarz/Reuters</copyright>
+    </image>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Ludwig Greven</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-15T08:02:25.512273+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-16T15:58:57.181685+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-15T02:02:57+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-16T16:21:52.187550+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-16T16:21:32.517460+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.horeld</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">f4e39477c54945a0a1cd739e79259d40</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6034</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9c3adbb0-ecfd-484a-8c1f-5d54003c3af8}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="8" type="Organization">SPD</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="7" type="Organization">Grüne</tag><tag url_value="wahlkampf" uuid="83c6adec-c208-4adc-81ba-807b8992ff56" score="7" type="free">Wahlkampf</tag><tag url_value="george-w.-bush" uuid="de317952-b34e-4c69-aede-6ce3fe9234d8" score="6" type="Person">George W.  Bush</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="hans-peter-friedrich" uuid="e4598182-697a-41c1-90b8-5d2124605cd3" score="4" type="Person">Hans-Peter Friedrich</tag><tag url_value="kommunikation" uuid="ecf71c6d-51e7-4c2b-a38a-21c9f7aff9c9" score="4" type="free">Kommunikation</tag><tag url_value="privatsphaere" uuid="831496e7-59c4-4284-a147-2761c11217ff" score="4" type="free">Privatsphäre</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag><tag url_value="us-militaer" uuid="12f40d86-8d2b-4b7d-9fc5-12ba10d6b052" score="4" type="free">US-Militär</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag><tag url_value="bagdad" uuid="b40c5106-9307-49e8-b01d-d2f3b40d0a2e" score="1" type="Location">Bagdad</tag></rankedTags></head><body>
+    <supertitle>Wahlkampf und Abhörskandal</supertitle>
+    <title>Danke, NSA!</title>
+    <subtitle>Rot-Grün freut sich über den Abhörskandal, der lenkt von eigenen Schwächen ab. Noch nicht mal die Regierungsschelte der Opposition ist ehrlich, kommentiert Ludwig Greven.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-goering-eckardt-3/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">NSA – Stoff für den Wahlkampf? Katrin Goering-Eckart (Grüne) und Peer Steinbrück (SPD) auf einer gemeinsamen Pressekonferenz.</bu>
+        <copyright py:pytype="str">© Tobias Schwarz/Reuters</copyright>
+      </image>
+      <p>Vielleicht werden <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> und <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grüne</entity> Edward Snowden irgendwann ein kleines Denkmal setzen. Denn der Ex-Mitarbeiter des US-Geheimdienstes NSA hat der Opposition im deutschen Wahlkampf aus <a href="http://www.zeit.de/2013/26/spd" target="_blank" class="">tiefster Verzweiflung</a> geholfen. Bis vor wenigen Wochen fanden Sozialdemokraten und Grüne keinen rechten Angriffspunkt gegen Angela Merkel und ihre schwarz-gelbe Regierung.  </p>
+      <p>Doch dann kam Snowden mit seinen Enthüllungen über die gigantischen Ausspähprogramme der Amerikaner und Briten, und der Wahlkampf hatte auf einmal ein großes, unverhofftes Thema: Wie halten es die Parteien und Regierungen mit dem <a href="http://www.zeit.de/politik/2013-07/nsa-abhoerskandal-demokratie-freiheit" target="_blank" class="">Datenschutz</a>? Rechtfertigt die Sicherheit jeden Eingriff in die Freiheits- und Grundrechte? Was kann man gegen den großen Bruder jenseits des Atlantiks machen?</p>
+      <p>Die Oppositionsparteien überbieten sich seitdem jeden Tag mit Attacken auf die Bundesregierung, und die bietet mit ihrem Lavieren reichlich Angriffsfläche. Die parteipolitische Auseinandersetzung hat sich dabei erwartungsgemäß rasch vom eigentlichen Kern entfernt – was genau tun die Geheimdienste? Ist der <entity idref="Bundesnachrichtendienst" entity_type="Organization" url_value="organisationen/bundesnachrichtendienst">Bundesnachrichtendienst</entity> beteiligt? Sollte und kann man das stoppen? – auf die Nebenfrage verlagert: Was wussten Regierung und Kanzlerin wann von der Spähoperation, und was haben sie unternommen? Sagen sie die Wahrheit, wenn sie jede Mitwisserschaft bestreiten, oder haben sie die <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> sogar unterstützt?</p>
+      <intertitle>Wohlfeile Attacken<br /></intertitle>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/2012-09/ludwig-greven-barschel" publication-date="" expires="" />
+      <p>Natürlich sind diese Fragen berechtigt, und eine Opposition, die sich die Gelegenheit entgehen ließe, eine Regierung in Verlegenheit zu bringen, erst recht im Wahlkampf, hätte ihre Aufgabe verfehlt. Deshalb haben SPD, Grüne und Linke Bundesinnenminister <entity idref="Hans-Peter+Friedrich" entity_type="Person" url_value="personen/hans-peter-friedrich">Hans-Peter Friedrich</entity> am Dienstag zu einer weiteren Sondersitzung des Parlamentarischen Kontrollgremiums für die Geheimdienste vorgeladen, um etwas über die mageren Ergebnisse seiner <a href="http://www.zeit.de/politik/deutschland/2013-07/friedrich-usa-kommentar" target="_blank" class="">USA-Erkundungsreise</a> zu erfahren. Und deshalb spielen die Oppositionsparteien öffentlich mit dem Gedanken, einen <a href="http://www.zeit.de/politik/deutschland/2013-07/nsa-prism-friedrich-opposition-ausschuss" target="_blank" class="">Untersuchungsausschuss</a> einzusetzen, auch wenn sie wissen, dass der – ebenso wie die heutige Sitzung – kaum etwas zutage fördern dürfte.</p>
+      <p>Die wohlfeile Empörung der Wortführer von SPD und Grünen verfolgt aber in Wahrheit vor allem einen Zweck: von der eigenen Schwäche im Wahlkampf abzulenken – und von einer möglichen Verstrickung in den Geheimdienstskandal.</p>
+      <p>Denn die Überwachungsprogramme der Amerikaner, Briten und anderer Geheimdienste, auch des <entity idref="BND" entity_type="Organization" url_value="organisationen/bnd">BND</entity>, reichen lange zurück, bis in die Regierungszeit von Rot-Grün. Spätestens seit dem Terrorangriff vom 11. September 2001 haben die Regierungen begonnen, die Kommunikation der Bürger übers Internet flächendeckend zu observieren, wie vorher schon die Telekommunikation. Und schon vor dem 11. September hatten Bundestag und Bundesrat <a href="http://www.zeit.de/politik/deutschland/2013-06/bnd-internet-ueberwachung" target="_blank" class="">dem BND erlaubt</a>, ein Fünftel aller Kommunikationen nach und aus Deutschland auf mögliche Terrorverdachtspunkte zu überwachen. Der nutzt das bis heute.</p>
+      <p>Das Sagen hatten damals SPD-Kanzler Gerhard Schröder und sein grüner Außenminister Joschka Fischer. Am Regierungstisch saß auch der jetzige Grünen-Spitzenkandidat Jürgen Trittin, der ebenso wie SPD-Kanzlerkandidat Peer Steinbrück der Kanzlerin und der schwarz-gelben Regierung nun Verfassungsverstoß vorwirft, weil sie angeblich nichts unternehmen, um die Privatsphäre der Bürger zu schützen. <br /></p>
+      <p>Für die Kontrolle der Geheimdienste war bis 2005 der jetzige SPD-Fraktionschef Frank-Walter Steinmeier verantwortlich. Von ihm hört man nichts zu der NSA-Affäre – womöglich, weil er sehr genau weiß, dass <a href="http://www.zeit.de/politik/deutschland/2013-07/friedrich-prism-ermittlungserfolge" target="_blank" class="">Deutschland schon lange von Erkenntnissen profitiert</a>, die der US-Geheimdienst aus seiner Auslandsaufklärung gewinnt. Und diese Informationen werden gerne genutzt, nicht nur, wenn es um entführte Deutsche geht. </p>
+    </division>
+    <division type="page" teaser="Uneingeschränkte Hilfe für die USA">
+      <p>Über all das reden SPD und Grüne natürlich kaum. Und auch nicht darüber, dass sie selber die Geheimdienste ja keineswegs abschaffen wollen. Im Gegenteil: Die Grünen, von denen viele früher zumindest den Verfassungsschutz gerne beseitigt hätten, als sie selber von ihm noch beobachtet wurden, beklagen heute, dass die Schlapphütte im Fall der neonazistischen Terrorzelle NSU blind gewesen seien. <br /></p>
+      <p>Rechtsextreme sollen demnach also abgehört und bespitzelt werden dürfen, potenzielle islamistische Terroristen und ihre Unterstützer aber nicht? Können bei der Jagd nach ausländerfeindlichen Gewalttätern nicht ebenfalls völlig unschuldige Bürger Opfer der Überwachung werden? Und möchte die SPD im Verbotsverfahren gegen die NPD auf jegliche geheimdienstliche Erkenntnisse verzichten und sich stattdessen nur auf öffentliche Quellen stützen?</p>
+      <intertitle>Unbequeme Fragen<br /></intertitle>
+      <p>Das sind nicht so schöne Fragen. Weil Rot-Grün sie sich selber stellen müsste. Aber Redlichkeit im Wahlkampf verlangt, sich nicht nur über Versäumnisse der Regierung aufzuregen, sondern darzulegen, wie man es selber halten würde, wenn man im Herbst an die Regierung käme. Würde eine Regierung Steinbrück/Trittin dem BND sofort untersagen, weiterhin Internet-Daten auszuspähen und zu speichern? Würde sie ihm jede Kooperation mit ausländischen Diensten verbieten, falls die sich nicht verpflichten, deutsche Gesetze und Datenschutzbestimmungen einzuhalten? Könnten die Geheimdienste dann überhaupt noch ihre Aufgabe erfüllen, die Bürger vor Anschlägen und Angriffen von außen zu schützen?</p>
+      <p>Und noch eine unbequeme Frage: Als sich Bundeskanzler Schröder 2002 gegen den Irak-Feldzug von <entity idref="George+W.++Bush" entity_type="Person" url_value="personen/george-w.-bush">George W. Bush</entity> stellte und damit seinerzeit die Bundestagswahl gewann, beließ die rot-grüne Regierung einige <a href="http://www.zeit.de/online/2008/39/bnd-ausschuss-aussage" target="_blank" class="">BND-Agenten in Bagdad</a>. Sie sollen dem US-Militär später Zieldaten islamistischer Kommandeure geliefert haben. Schließlich hatte Schröder den USA nach den Anschlägen vom 11. September "uneingeschränkte Solidarität" im Kampf gegen den Terror versprochen. Gilt das heute nicht mehr? </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <text>Rot-Grün freut sich über den Abhörskandal, der lenkt von eigenen Schwächen ab. Noch nicht mal die Regierungsschelte der Opposition ist ehrlich. Ein Kommentar</text>
+    <supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <title>Danke, NSA!</title>
+  </teaser>
+</article>

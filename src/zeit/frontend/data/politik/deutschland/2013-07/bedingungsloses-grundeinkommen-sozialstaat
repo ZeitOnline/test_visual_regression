@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/E/Cordula_Eubel/index" publication-date="" expires="">
+      <display_name py:pytype="str">Cordula Eubel</display_name>
+    </author>
+    
+    <image align="left" title="Geldregen" base-id="http://xml.zeit.de/politik/deutschland/2013-07/geldregen/" type="jpg" publication-date="" expires="2013-10-22T08:09:07+00:00">
+      <bu py:pytype="str">Verschiedene Euro-Münzen und Euro-Banknoten</bu>
+      <copyright py:pytype="str">© Stefan Sauer/dpa</copyright>
+    </image>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/2013/24/daniel-haeni-grundeinkommen" year="2013" issue="24" ressort="Wirtschaft" contenttype="article" publication-date="2013-06-13T02:24:17+00:00" expires="">
+        <supertitle py:pytype="str">Daniel Häni</supertitle>
+        <title py:pytype="str">Ein Unternehmer kämpft für das Grundeinkommen</title>
+        <text py:pytype="str">Die Leute sollen Sinn aus ihrer Arbeit ziehen und nicht nur des Geldes wegen schuften, sagt Daniel Häni. Er will ein Grundeinkommen für die Schweiz. Von Philip Kovce</text>
+        <description py:pytype="str">Die Leute sollen Sinn aus ihrer Arbeit ziehen und nicht nur des Geldes wegen schuften, sagt Daniel Häni. Er will ein Grundeinkommen für die Schweiz. Von Philip Kovce</description>
+        <byline py:pytype="str">von Philip Kovce</byline>
+        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2013-06/daniel-haeni/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Wie bei Wilhelm Tell: Daniel Häni in seinem Café in Basel</bu>
+          <copyright py:pytype="str" link="http://www.andripol.com/">© Andri Pol für DIE ZEIT</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2012-11/utopie-grundeinkommen-werner" year="2012" issue="46" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Utopien</supertitle>
+        <title py:pytype="str">Gern arbeiten mit dem bedingungslosen Grundeinkommen</title>
+        <text py:pytype="str">Der Unternehmer Götz Werner fordert das bedingungslose Grundeinkommen. Wie sähe die Gesellschaft aus, wenn es Realität wäre? Die Art der Arbeit wäre eine ganz andere.</text>
+        <description py:pytype="str">Der Unternehmer Götz Werner fordert das bedingungslose Grundeinkommen. Wie sähe die Gesellschaft aus, wenn es Realität wäre? Die Art der Arbeit wäre eine ganz andere.</description>
+        <byline xsi:nil="true" />
+        <image alt="Götz Werner" align="left" title="Götz Werner" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2012-11/goetz-werner/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Götz Werner</bu>
+          <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2011-12/bedingungsloses-grundeinkommen-interview" year="2012" issue="1" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Sozialstaat</supertitle>
+        <title py:pytype="str">"Das bedingungslose Grundeinkommen macht nicht faul"</title>
+        <text py:pytype="str">Was, wenn der Staat jedem Bürger genügend Geld zum Leben zahlte? Die Gesellschaft würde davon profitieren, sagen ein Arbeitspsychologe und ein Soziologe im Interview.</text>
+        <description py:pytype="str">Was, wenn der Staat jedem Bürger genügend Geld zum Leben zahlte? Die Gesellschaft würde davon profitieren, sagen ein Arbeitspsychologe und ein Soziologe im Interview.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="arbeiter-2" base-id="http://xml.zeit.de/politik/deutschland/2011-12/arbeiter-2-2/" type="jpg" publication-date="" expires="2012-03-26T14:34:25+00:00">
+          <bu py:pytype="str"> </bu>
+          <copyright py:pytype="str">© dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Cordula Eubel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Tagesspiegel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-22T09:47:18.894509+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-21T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-22T09:48:18.650007+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-22T09:39:29.731610+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/heprodimagesfotos82220130622goldregen-jpg/8527488/2-formatOriginal.JPG?format=formatOriginal</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-22T09:38:51.637597+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.newsfeed</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">7364e8dc4f5d4bc78a41912d48f64a09</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6594</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:daed7665-36cb-4c43-bc75-5182b59ec6ae}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="hartz-iv" uuid="f8fb6d78-3f57-4871-8f2c-3698db2c3587" score="5" type="topic">Hartz IV</tag><tag url_value="armut" uuid="6fc9b581-74dd-4cea-b463-c40b177106e1" score="4" type="free">Armut</tag><tag url_value="einkommen" uuid="d4b05778-a1f8-4fe9-a936-f985085403a7" score="4" type="free">Einkommen</tag><tag url_value="einkommensteuer" uuid="6e0ee0a3-f23c-4e88-b313-3fd0a5f7b866" score="4" type="free">Einkommensteuer</tag><tag url_value="grundeinkommen" uuid="6fd64fd2-df0a-4563-85fd-10b2528195d6" score="4" type="free">Grundeinkommen</tag><tag url_value="sozialstaat" uuid="e0bfcda3-bf1d-4b51-9a3a-f1bfde542e53" score="4" type="free">Sozialstaat</tag></rankedTags></head><body>
+    <title>Staatlicher Goldregen</title>
+    <subtitle>Bedingungsloses Grundeinkommen für jeden – eine alte Idee findet auch in Deutschland wieder Anhänger. Was ist davon zu halten?</subtitle>
+    <byline>Cordula Eubel</byline>
+    <division type="page">
+      <image align="left" title="Geldregen" type="jpg" publication-date="" expires="2013-10-22T08:09:07+00:00" layout="large" is_empty="True">
+        <bu py:pytype="str">Verschiedene Euro-Münzen und Euro-Banknoten, aufgenommen in einer Sparkasse in Bergen (Archivfoto vom 28.11.2001). Die Steuerschätzer geben am Mittwoch (08.05.2013) ihre neue Einnahmeprognose für die Staatskassen bekannt. Foto: Stefan Sauer dpa</bu>
+        <copyright py:pytype="str">© Stefan Sauer/dpa</copyright>
+      </image>
+      <p>Es ist eine Idee, an der sich die Geister scheiden: Das bedingungslose <a href="http://www.zeit.de/schlagworte/themen/grundeinkommen/index" class="">Grundeinkommen</a> führt zu einer gerechteren und freieren Gesellschaft, sagen die einen. Es macht faul, sagen die anderen. Seit etwa 30 Jahren wird in Deutschland regelmäßig darüber debattiert, ob die revolutionäre Idee eines Tages Wirklichkeit werden sollte.</p>
+      <p>
+        <strong>Welche Wirkungen hätte das Grundeinkommen?</strong>
+      </p>
+      <p> Ein <a href="http://www.zeit.de/politik/deutschland/2011-12/bedingungsloses-grundeinkommen-interview" class="">bedingungsloses Grundeinkommen</a> würde den deutschen <a href="http://www.zeit.de/schlagworte/themen/" class="">Sozialstaat</a> komplett verändern. Die Idee ist, dass jeder Bürger vom Staat ein Einkommen gezahlt bekommt, mit dem er mindestens seine Existenz bestreiten kann. Und zwar unabhängig davon, ob er eine bezahlte Arbeit oder <a href="http://www.zeit.de/schlagworte/themen/vermoegen" class="">Vermögen</a> hat, ob er arbeitslos ist oder Chef eines Dax-Konzerns. Bedingslos heißt dieses Einkommen, weil keine Gegenleistung erwartet wird. Niemand soll gezwungen werden können, eine <a href="http://www.zeit.de/schlagworte/themen/arbeit" class="">Arbeit</a> anzunehmen.</p>
+      <p>
+        <strong>Wer unterstützt die Idee in Deutschland?</strong>
+      </p>
+      <p> Die Befürworter eines Grundeinkommens gehören ganz unterschiedlichen Lagern an. Die Allianz der <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2012-11/utopie-grundeinkommen-werner" class="">Unterstützer reicht vom Gründer der Drogeriemarktkette DM, Götz Werner</a>, bis zum Sozialwissenschaftler und grünen Vordenker Michael Opielka, von der Chefin der Linkspartei, <a href="http://www.zeit.de/schlagworte/personen/katja-kipping" class="">Katja Kipping</a>, bis zum ehemaligen CDU-Ministerpräsidenten <a href="http://www.zeit.de/schlagworte/personen/dieter-althaus" class="">Dieter Althaus</a>, von den Globalisierungskritikern von Attac bis zur katholischen Arbeitnehmerbewegung.</p>
+      <p>
+        <strong>Woher kommt die Idee?</strong>
+      </p>
+      <p> Die Grundidee ist mehrere Hundert Jahre alt: So stellte Thomas Morus in seinem Roman <em>Utopia</em> im Jahr 1516 die Forderung nach einem Lebensunterhalt für alle auf. Im 18. Jahrhundert verbreitete sich diese Vorstellung. Der britischen Autor Thomas Spence beispielsweise wollte mit einem Grundeinkommen, finanziert durch die Vergesellschaftung und Verpachtung von Grundbesitz, die Armut vieler Menschen beseitigen.</p>
+      <p> In der jüngeren Vergangenheit erfährt diese Idee auch in Deutschland wieder mehr Zuspruch – allerdings nicht nur als Mittel zur Bekämpfung von <a href="http://www.zeit.de/schlagworte/themen/armut" class="">Armut</a>. In den achtziger und neunziger Jahren erschien das Ideal der Vollbeschäftigung immer stärker als Utopie. Zunehmende Rationalisierung und Automatisierung in den Unternehmen führten zu einem Anstieg der Arbeitslosigkeit, unabhängig von der Konjunktur. Der Sozialstaat, der sich in erster Linie nach dem lebenslangen Normalarbeitsverhältnis und traditionellen Familienformen richtet, passte immer weniger zur Realität. Warum dann nicht gleich ein Einkommen für jeden einführen, das völlig von der Erwerbsarbeit losgelöst ist?</p>
+      <p>
+        <strong>Warum ist sie jetzt wieder aktuell?</strong>
+      </p>
+      <p> Befördert wurde die Debatte zweifellos auch durch Gerhard Schröders Sozialreformen. Mit <a href="http://www.zeit.de/schlagworte/themen/hartz-iv" class="">Hartz IV</a> prägte der damalige SPD-Kanzler ein neues Leitbild vom aktivierenden Sozialstaat, der mehr Eigenleistung vom Einzelnen abfordert – und Verweigerung mit Sanktionen bestraft. Hartz IV sei "offener Strafvollzug", schimpft der Unternehmer und DM-Gründer Werner. Von einem bedingungslosen Grundeinkommen verspricht er sich, dass auch Unternehmer künftig anders mit ihren Mitarbeitern umgehen. Arbeit, die heute sehr schlecht bezahlt werde, aber für die Gesellschaft notwendig sei, werde dann auch besser bezahlt oder attraktiver gestaltet werden, argumentiert er.</p>
+      <p>
+        <strong>Welche weiteren Vorteile verspricht man sich davon?</strong>
+      </p>
+      <p> Die Linken-Vorsitzende Kipping erhofft sich, dass auch andere Arbeit als die klassische Erwerbsarbeit stärker wertgeschätzt werde: etwa die unentgeltlich geleistete Erziehungs- und Sorgearbeit oder das soziale und das bürgerschaftliche Engagement der Menschen. Auf die Kritik, dass auch Reiche das Grundeinkommen erhalten sollen, entgegnet Kipping, dass bei Bedürftigkeitsprüfungen gerade die Ärmsten der Armen ihren Anspruch nicht einlösen. Außerdem sollten Reiche bei der Finanzierung des Grundeinkommens auch stärker zur Kasse gebeten werden.</p>
+    </division>
+    <supertitle>Grundeinkommen</supertitle>
+    <division type="page" teaser="Was kostet das ganze überhaupt?">
+      <p>
+        <strong>Was kostet das ganze überhaupt?</strong>
+      </p>
+      <p> Die Kosten für die Einführung eines Grundeinkommens schwanken je nach Ausgestaltung zwischen 250 Milliarden und 800 Milliarden Euro. Das klingt enorm – allerdings werden auch heute schon ähnliche Summen für Soziales ausgegeben.</p>
+      <p>
+        <strong>Wie soll das konkret umgesetzt werden?</strong>
+      </p>
+      <p> Grundsätzlich gibt es zwei Varianten des Grundeinkommens: die negative Einkommensteuer und die Sozialdividende. Letztere ist ein Betrag, der an jeden Bürger ausgezahlt wird. Die negative Einkommensteuer hingegen geht auf den amerikanischen Ökonomen Milton Friedman zurück, der 1962 ein auszahlbares, pauschales Steuerguthaben vorschlug.</p>
+      <p> Davon ließ sich auch der Volkswirt <a href="http://www.zeit.de/schlagworte/personen/thomas-straubhaar" class="">Thomas Straubhaar</a> inspirieren. Straubhaar ist gebürtiger Schweizer und Direktor des Hamburgischen Weltwirtschaftsinstituts (HWWI). Er entwickelte das Konzept des solidarischen Bürgergelds, das von Thüringens ehemaligem Ministerpräsidenten Dieter Althaus aufgegriffen wurde. Der CDU-Politiker forderte ein "großes Bürgergeld" von 600 Euro im Monat für Erwachsene mit einem Einkommen von weniger als 1.600 Euro. Wer mehr verdient, sollte nur noch ein "kleines Bürgergeld" von 200 Euro erhalten. Durch das Bürgergeld sollen alle anderen Sozialleistungen – vom Wohngeld über Hartz IV bis zum Kindergeld – ersetzt werden. Finanziert werden soll es durch eine pauschale Steuer. In der CDU wurde diese Idee jedoch bislang nicht breiter aufgegriffen.</p>
+      <p>
+        <strong>Wie stehen die anderen Parteien zum Grundeinkommen?</strong>
+      </p>
+      <p> Bei den Grünen und in der Linkspartei gibt es vergleichsweise starke Strömungen, die sich für ein Grundeinkommen einsetzen. Mehrheitsfähig sind diese Strömungen derzeit aber nicht. In ihren Wahlprogrammen sprechen sich beide Parteien dafür aus, zu dem Thema eine Enquetekommission im Bundestag einzurichten. Die SPD hingegen tut sich deutlich schwerer: Für viele Sozialdemokraten passt das Grundeinkommen nicht zu ihrem Verständnis als Arbeiterpartei. Ähnlich sieht das ein Großteil der Gewerkschafter. Der DGB-Vorsitzende Michael Sommer hält die Forderung nach einem Grundeinkommen für "gesellschaftspolitisch verheerend", weil Arbeit dann keinen Wert mehr habe.</p>
+      <p> Während die Piraten in ihrem Wahlprogramm – wenn auch eher unkonkret – ein bedingungsloses Grundeinkommen fordern, lehnt die FDP Transfers ohne Gegenleistung ab. Das "liberale Bürgergeld" in Höhe von 700 Euro im Monat solle nur die Bedürftigen schützen, proklamiert die FDP – und nicht "die Findigen".</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/zeitung/staatlicher-goldregen/8527448.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br />
+      </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Bedingungslos populär</title>
+    <text>Bedingungsloses Grundeinkommen für jeden – eine alte Idee findet in Deutschland wieder Anhänger, von der Linken bis hin zu manchem CDUler. Was ist davon zu halten?</text>
+    <supertitle>Grundeinkommen</supertitle>
+  </teaser>
+  <indexteaser>
+    <text py:pytype="str">Staatlicher Goldregen</text>
+  </indexteaser>
+</article>

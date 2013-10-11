@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-01T08:07:49.706431+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-01T08:08:59.056208+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-01T08:08:59.056208+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:a7a4d8b5-148c-48d1-a698-c25db724ccaf}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+    <header_image xsi:nil="true"/>
+    <snapshot xsi:nil="true"/>
+  </head>
+  <body>
+    <cluster area="feature">
+      <region area="lead">
+        <container cp:type="cpextra" module="solr-month" cp:__name__="id-8cb821da-3599-4e3b-b537-3f52374d9415">
+          <cp_extra id="solr-month"/>
+        </container>
+      </region>
+      <region area="informatives">
+        <container cp:type="cpextra" module="dpa-news" cp:__name__="id-f8645cef-e1f1-4b3e-98ae-eb9eb2e0d9de">
+          <cp_extra id="dpa-news"/>
+        </container>
+        <container cp:type="cpextra" module="afp_extra" cp:__name__="id-75ccaee7-318f-4d90-b01a-6bade30e644c">
+          <cp_extra id="afp_extra"/>
+        </container>
+        <container cp:type="cpextra" module="sid_extra" cp:__name__="id-c14b6c3e-e492-4db8-8946-a729d6826856">
+          <cp_extra id="sid_extra"/>
+        </container>
+        <container cp:type="cpextra" module="blindblock" cp:__name__="id-107e7d43-00d3-450c-9ef2-0acabacfe1b1">
+          <cp_extra id="blindblock"/>
+        </container>
+        <container cp:type="cpextra" module="mostread" cp:__name__="id-6189f975-b965-4fd8-9d1f-848a19359fcd">
+          <cp_extra id="mostread"/>
+        </container>
+        <container cp:type="cpextra" module="mostcommented" cp:__name__="id-a5a56b87-f1cf-403e-8967-479ff287c192">
+          <cp_extra id="mostcommented"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="teaser-mosaic"/>
+    <title>Artikel und Nachrichten im Juli 2013 aus dem Ressort Deutschland | ZEIT ONLINE</title>
+  </body>
+  <feed/>
+  <teaser>
+    <title>Artikel und Nachrichten im Juli 2013 aus dem Ressort Deutschland | ZEIT ONLINE</title>
+    <text>Lesen Sie alle Artikel und Nachrichten vom Juli 2013 aus dem Ressort Deutschland auf ZEIT ONLINE</text>
+  </teaser>
+</centerpage>

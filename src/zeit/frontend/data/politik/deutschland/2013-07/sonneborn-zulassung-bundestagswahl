@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/D/Steffi_Dobmeier/index" publication-date="" expires="">
+      <display_name py:pytype="str">Steffi Dobmeier</display_name>
+    </author>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/martin-sonneborn/" type="jpg" publication-date="" expires="2013-10-05T13:47:15+00:00">
+      <bu py:pytype="str">Martin Sonneborn, Bundesvorsitzender der Partei Die PARTEI</bu>
+      <copyright py:pytype="str">© Robert Michael/dpa</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-05/Die-Partei-Luebeck-Langbehn" year="2013" issue="22" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Satire-Partei</supertitle>
+        <title py:pytype="str">"Ich hoffe, das klingt nicht zu seriös"</title>
+        <text py:pytype="str">Erstmals schafft es in Lübeck ein Kandidat der Satire-Partei Die Partei ins Parlament – und könnte gleich über die Regierung entscheiden. Ein Anruf bei Bastian Langbehn</text>
+        <description py:pytype="str">Erstmals schafft es in Lübeck ein Kandidat der Satire-Partei Die Partei ins Parlament – und könnte gleich über die Regierung entscheiden. Ein Anruf bei Bastian Langbehn</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-05/die-partei/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Der erste "Partei"-Abgeordnete Bastian Langbehn am Abend des Wahlsiegs in Lübeck</bu>
+          <copyright py:pytype="str">©privat/Birger Treimer</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/internet/2013-04/postillon-stefan-sichermann-portrait" year="2013" issue="16" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Der Postillon</supertitle>
+        <title py:pytype="str">Geld verdienen mit Galgenhumor</title>
+        <text py:pytype="str">Stefan Sichermann betreibt die Satire-Website "Der Postillon". Seine Ein-Mann-Redaktion ist so erfolgreich, dass er davon leben kann. Nun denkt er an neue Formate.</text>
+        <description py:pytype="str">Stefan Sichermann betreibt die Satire-Website "Der Postillon". Seine Ein-Mann-Redaktion ist so erfolgreich, dass er davon leben kann. Nun denkt er an neue Formate.</description>
+        <byline xsi:nil="true" />
+        <image alt="Stefan Sichermann" align="left" title="Stefan Sichermann" base-id="http://xml.zeit.de/digital/internet/2013-04/postillon-sichermann/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Stefan Sichermann ist der Schöpfer des Postillon.</bu>
+          <copyright py:pytype="str">© Tobias Jochheim / ZEIT ONLINE</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2011-09/berlin-die-partei-sonneborn" year="2011" issue="38" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Die Partei</supertitle>
+        <title py:pytype="str">Wahlkampf mit Krawallsatire</title>
+        <text py:pytype="str">Er sucht die Medien, weil er nur durch sie existiert: Martin Sonneborn, Chef von Die Partei, agiert gern öffentlich. Hinter viel Satire zeigen sich auch seriöse Ziele.</text>
+        <description py:pytype="str">Er sucht die Medien, weil er nur durch sie existiert: Martin Sonneborn, Chef von Die Partei, agiert gern öffentlich. Hinter viel Satire zeigen sich auch seriöse Ziele.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2011-09/sonneborn-partei/" type="jpg" publication-date="" expires="2011-12-16T08:15:48+00:00">
+          <bu py:pytype="str">Der Bundesvorsitzende von Die Partei, Martin Sonneborn, posiert vor einem Wahlplakat.</bu>
+          <copyright py:pytype="str">© Soeren Stache/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Steffi Dobmeier</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-05T14:49:43.358759+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-05T14:39:35.522932+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-05T14:50:56.759652+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-05T14:38:40.720755+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-05T14:48:45.015753+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.pilath</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">792c41e13d764121bed417067523f9b8</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4508</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5b731796-99be-47e9-8502-761d42fc6bed}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">28</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="martin-sonneborn" uuid="baccc545-458a-4374-a5c2-f3584c7faefb" score="8" type="Person">Martin Sonneborn</tag><tag url_value="bundeswahlleiter" uuid="48438edb-9033-443f-9a99-906b0369cdea" score="4" type="free">Bundeswahlleiter</tag><tag url_value="wahlrecht" uuid="d6d53789-5457-4fe0-bc13-3e06f6e846a3" score="4" type="free">Wahlrecht</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="3" type="free">Bundestagswahl</tag><tag url_value="globalisierung" uuid="e812d25d-1376-4944-a3e9-9016bcc115e1" score="3" type="free">Globalisierung</tag><tag url_value="gruendung" uuid="0bf5cfc6-da0c-4afe-80ad-ebd0bb8c19b9" score="3" type="free">Gründung</tag><tag url_value="plus" uuid="3e030c3c-f30e-4fc9-8278-9b2adeaa40df" score="3" type="Organization">Plus</tag><tag url_value="wahlkampf" uuid="83c6adec-c208-4adc-81ba-807b8992ff56" score="3" type="free">Wahlkampf</tag></rankedTags></head><body>
+    <supertitle>Die Partei</supertitle>
+    <title>"Unser Ziel: 100 Prozent plus X"</title>
+    <subtitle>Die PARTEI darf zur Bundestagswahl antreten – nach 2005 zum zweiten Mal. Der Wahlkampf wird schmutzig und inhaltsleer, sagt Bundeschef Martin Sonneborn im Interview. </subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/martin-sonneborn/" type="jpg" publication-date="" expires="2013-10-05T13:47:15+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Martin Sonneborn, Bundesvorsitzender der Partei Die PARTEI</bu>
+        <copyright py:pytype="str">© Robert Michael/dpa</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE: </strong>Glückwunsch, Herr <entity idref="Martin+Sonneborn" entity_type="Person" url_value="personen/martin-sonneborn">Sonneborn</entity>. Sie dürfen mit der Partei Die PARTEI bei der Bundestagswahl
+antreten. Was ist Ihr erstes Projekt, wenn Sie Bundeskanzler werden?</p>
+      <p><strong>Martin Sonneborn:</strong> Vielen Dank erst mal für die
+Glückwünsche. Wurde auch Zeit. Ich werde als allererstes Bundeswahlleiter
+Roderich Egeler befördern. Zu was auch immer. Er könnte zum Beispiel Herrn
+Gauck ersetzen. Oder Saaldiener werden.</p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Als Dank dafür, dass er Ihre Partei endlich zugelassen hat?<strong><br /></strong></p>
+      <p><strong>Sonneborn: </strong>Nein, weil er dazugelernt hat
+in den letzten vier Jahren. Wobei, so richtig viel gelernt hat er nicht, das
+waren wieder seltsame Zustände bei der diesjährigen Entscheidung. Aber zumindest
+hat er gelernt – wenn auch mit zwei Juristen im Rücken, die ihm auf die Finger
+schauen –, dass er Parteien zulassen muss, die zur Wahl zugelassen werden
+dürfen, sollen, müssen.</p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Was hat die Partei 2013, was sie 2009 nicht hatte?</p>
+      <p><strong>Sonneborn: </strong>Wir erfüllen sämtliche formalen
+Voraussetzungen: Wir haben Landesverbände, Billiganzüge und gecastete
+Kanzlerkandidatinnen, wir veranstalten Bundesparteitage, treten elegant in der
+Öffentlichkeit auf und tragen zur Willensbildung des deutschen Volkes bei. Ob
+das Volk es will oder nicht. All das eben. Das taten wir 2009 aber auch schon. Nur sah Herr Egeler
+das anders. <br /></p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/politik/deutschland/2013-07/pb-sonneborn" publication-date="" expires="" />
+      <p><strong>Z<b>EIT ONLINE:</b></strong> Mit welcher Begründung?<strong><br /></strong></p>
+      <p><strong>Sonneborn: </strong>Unter recht fadenscheinigen
+Begründungen. Der Bundeswahlleiter behauptete, er habe ein Fax von uns, in dem
+steht, dass wir nur noch einen Landesverband hätten  und demnach keine Organisationsstruktur. Das
+war aber kompletter Unsinn. Wir hatten neun Landesverbände, inzwischen sind es
+sogar zwölf und zwei in Gründung. Aber immerhin, er hat das jetzt ja auch
+eingesehen.</p>
+      <p>Z<strong><b>EIT ONLINE: </b></strong>Wie haben Sie ihn überzeugt?</p>
+      <p><strong>Sonneborn: </strong>Mit unserem massiven Auftritt.
+Wir waren zu zwölft und in der Überzahl. Der Bundeswahlleiter hatte lediglich
+zehn Herren und Damen an seiner Seite. Das Duell haben wir klar gewonnen.</p>
+    </division>
+    <division type="page" teaser="&quot;Erst mal werden wir das Wahlrecht ändern&quot;">
+      <p><strong><b>ZEIT ONLINE: </b></strong>An Kampfeslust scheint es Ihnen schon mal nicht zu
+mangeln.</p>
+      <p><strong>Sonneborn: </strong>Nun ja, wir haben in den
+letzten vier Jahren relativ viel Druck aufgebaut. Schon weil wir nach 2009 Egelers
+Karriere beschädigen wollten, schließlich sind wir hämisch und nachtragend.</p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Was ist das Wahlziel der Partei?</p>
+      <p><strong>Sonneborn: </strong>2009 hätte ich gesagt: Alles
+unter 50 Prozent wäre eine Schande für dieses Land. In der Zwischenzeit ist
+viel passiert. Jetzt sage ich: 100 Prozent plus X – das X sind die Überhangmandate.</p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Und dann?<br /></p>
+      <p><strong>Sonneborn: </strong>Sobald wir an der Macht sind,
+werden wir als erstes das Wahlrecht ändern. Wir schneiden bei jungen Leuten
+sehr gut ab. In Schulen und Universitäten kommen wir auf gute, zweistellige
+Ergebnisse. In Altenheimen hingegen liegen wir regelmäßig weit unter null
+Prozent. Also wird das Wahlrecht erweitert und beschränkt gleichermaßen – auf
+die Altersgruppe zwischen 12 und 52. Das sichert uns gesunde Mehrheiten, bis
+die alten Zauseln den Weg alles Irdischen gegangen sind.</p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Mit welcher Strategie gehen Sie in den Wahlkampf?</p>
+      <p><strong>Sonneborn: </strong>Das Hauptthema bleibt gleich:
+Wir wollen Inhalte überwinden. </p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Und wenn die Wähler fragen, welche Inhalte das sein
+sollen?</p>
+      <p><strong>Sonneborn: </strong>Dann sollen sie in unser Regierungsprogramm
+schauen. Wir fordern z.B. eine Faulenquote. 17 Prozent der Führungspositionen sollen
+mit Faulen besetzt werden. Außerdem wollen wir die Sommerzeit abschaffen, bei
+gleichzeitiger Beibehaltung der Winterzeit: Das bringt jedes Jahr eine Stunde
+mehr ausschlafen… Und unbedingt Peter Altmeier abfracken. <a href="http://www.die-partei.de/regierungsprogramm/" target="_blank" class="">Details bitte selbst nachlesen</a>.</p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Was ist mit dem Wiederaufbau der Mauer?</p>
+      <p><strong>Sonneborn: </strong>Davon verabschieden wir uns gerade
+so ein bisschen, zumindest was die Mauer zwischen Ost und West angeht. 2004 war
+das aktuell, jetzt nicht mehr. Aber viele Menschen verbinden Die PARTEI natürlich
+mit dem Mauerbau. Deswegen wollen wir eine Mauer um Deutschland herum bauen. Damit
+setzen wir Globalisierung und unkontrollierten Finanzströmen etwas entgegen. </p>
+      <p><strong><b>ZEIT ONLINE: </b></strong>Sie haben noch 12 Wochen, um die Wähler zu überzeugen.</p>
+      <p><strong>Sonneborn: </strong>Das schaffen wir. Denn wir
+stehen für einen inhaltsleeren, populistischen und schmutzigen Wahlkampf.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>"Unser Ziel: 100 Prozent plus X"</title>
+    <supertitle>Die Partei</supertitle>
+    <text>Die PARTEI darf zur Bundestagswahl antreten – nach 2005 zum zweiten Mal. Der Wahlkampf wird schmutzig und inhaltsleer, sagt Bundeschef Martin Sonneborn im Interview. </text>
+  </teaser>
+</article>
