@@ -1,18 +1,30 @@
 {% extends "templates/layout.html" %}
 {% block content %}
-	<div class="article">
-		<h1 class="article__title">
-			{{article.title}}
-		</h1>
-		<h2 class="article__subtitle">
-			{{article.subtitle}}
-		</h2>
-    <div id="article__body">
-      {% for page in article.pagesxml %}
-        <div class="page">
-        {{page|safe}}
-        </div>
-      {% endfor %}
+	<article class="article">
+    <img src="http://placehold.it/940x400" class="article__main-image" />
+    <div class="article__wrap">
+      <header class="article__title-wrap">
+        <h2 class="article__supertitle">
+          Modemacher Azzedine Alaia
+        </h2>
+        <h1 class="article__title">
+    			{{article.title}}
+    		</h1>
+        <aside class="article__meta">
+          <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
+          <span class="article__meta__author">von Jina Khayyer</span>
+        </aside>
+      </header>
+  		<div class="article__subtitle">
+  			{{article.subtitle}}
+  		</div>
+      <div class="article__body">
+        {% for page in article.pagesxml %}
+          <div class="page">
+          {{page|safe}}
+          </div>
+        {% endfor %}
+      </div>
     </div>
-	</div>
+	</article>
 {% endblock content %}
