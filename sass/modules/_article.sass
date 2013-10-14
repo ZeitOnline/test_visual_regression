@@ -1,7 +1,30 @@
 .article
 
+.article__main-image
+
+.article__wrap
+	max-width: $medium-content-width + 2*$medium
+	margin: 0 auto
+	+respond-min($break-1)
+		padding: $medium
+
+.article__title-wrap
+
+.article__supertitle
+	@extend .supertitle
+	@extend .font-m-ml
+
 .article__title
-	+tablet(bold)
+	+tablet
+
+.article__meta
+
+
+.article__meta__timestamp
+
+
+.article__meta__author
+
 
 .article__subtitle
 	+franziska(bold)
