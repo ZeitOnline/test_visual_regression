@@ -1,9 +1,73 @@
 // Opt-in Typography
 .copy, %copy
-  max-width: 35em
-  +respond-min($break-2)
-    // 18px
-    font-size: 112.5%
-  +respond-min($break-3)
-    // 20px
-    font-size: 125%
+  p
+    max-width: 41.25em
+    margin-bottom: $small
+    +respond-min($break-2)
+      // 18px
+      font-size: 112.5%
+      max-width: 36.6em
+    +respond-min($break-3)
+      // 20px
+      font-size: 125%
+      max-width: 33em
+
+  figure
+    width: 100%
+    margin-bottom: $small
+    img
+      margin-bottom: $small
+    figcaption
+      @extend %meta
+      @extend %font-s-m
+    &.is-horizontal, &.is-horizontal--right
+      +pie-clearfix
+      img
+        width: 100%
+        max-width: 660px
+        display: block
+        +respond-min($break-1)
+          +inline-block
+          width: 60%
+        +respond-min($break-2)
+          width: 71.74%
+      figcaption
+        +respond-min($break-1)
+          +inline-block
+          padding-top: 5%
+          width: 40%
+        +respond-min($break-2)
+          width: 28.26%
+    &.is-horizontal
+      +respond-min($break-1)
+        img
+          float: left
+        figcaption
+          float: right
+          padding-left: $gutter
+    &.is-horizontal--right
+      +respond-min($break-1)
+        img
+          float: right
+        figcaption
+          float: left
+          padding-right: $gutter
+    &.is-full-width
+      width: 100%
+      img
+        display: block
+        width: 100%
+    &.is-stamp, &.is-stamp--right
+      max-width: 240px
+      margin: $small auto
+      +respond-min($break-2)
+        margin: $gutter $gutter $gutter 0
+        float: left
+    &.is-stamp--right
+      +respond-min($break-2)
+        margin: $gutter 0 $gutter $gutter
+        float: right
+
+
+
+

@@ -3,19 +3,16 @@
 .article__main-image
 
 .article__wrap
-	max-width: $medium-content-width + 2*$medium
-	margin: 0 auto
-	+respond-min($break-1)
-		padding: $medium
 
 .article__title-wrap
 
 .article__supertitle
-	@extend .supertitle
-	@extend .font-m-ml
+	@extend %supertitle
+	@extend %font-m-ml
 
 .article__title
 	+tablet
+	@extend %font-l-xl
 
 .article__meta
 
@@ -28,7 +25,15 @@
 
 .article__subtitle
 	+franziska(bold)
-	@extend .copy
+	@extend %copy
+	margin-bottom: $small
+
+.article__subheading
+	@extend %subheading
+	@extend %font-m-ml
 
 .article__body
-	@extend .copy
+	@extend %copy
+	+respond-min($break-3)
+		padding-left: $gutter/2
+		padding-right: $gutter/2
