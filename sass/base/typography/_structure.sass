@@ -2,10 +2,16 @@
   +tablet(thin)
   text-transform: uppercase
   color: $red
+  letter-spacing: 1px
+  margin-bottom: $micro
 
 .meta, %meta
-  +franziska
+  +tablet
   color: $grey
 
 .subheading, %subheading
+  +franziska(bold)
+
+.headline, %headline
   +tablet
+  line-height: $headline-line-height

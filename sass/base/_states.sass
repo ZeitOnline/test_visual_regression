@@ -4,3 +4,14 @@
 .is-centered
   display: block
   margin: 0 auto
+
+.has-dropcap
+  > p:first-of-type:first-letter
+    +tablet
+    font-size: $font-xl*2
+    display: block
+    height: 0.7em
+    line-height: 1.1
+    float: left
+    padding-right: 2%
+    text-align: center
