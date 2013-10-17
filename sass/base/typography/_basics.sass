@@ -17,6 +17,19 @@
     margin-bottom: $thin
     margin-top: $small
 
+  blockquote, .quote
+    @extend %quote
+    @extend %font-l-xl
+    +max-width-rem(400px)
+    color: $color-quote
+    display: block
+    margin-top: $small
+    margin-bottom: $small
+    margin-left: auto
+    margin-right: auto
+    &.quote--loud
+      @extend %quote--loud
+
   figure
     width: 100%
     margin-bottom: $medium

@@ -14,4 +14,14 @@
 
 .headline, %headline
   +tablet
-  line-height: $headline-line-height
+  line-height: $headline-line-height.quote, %quote
+.quote, %quote
+  +tablet(thin)
+  &:before
+    content: '»'
+  &:after
+    content: '«'
+
+.quote--loud, %quote--loud
+  @extend %quote
+  +cassise(bold)
