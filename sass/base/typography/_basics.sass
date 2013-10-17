@@ -56,8 +56,8 @@
     &.figure-horizontal, &.figure-horizontal--right
       +pie-clearfix
       .figure__media, img
+        +max-width-rem(660px)
         width: 100%
-        max-width: 660px
         display: block
         +respond-min($break-1)
           +inline-block
@@ -91,7 +91,7 @@
         display: block
         width: 100%
       .figure__caption, figcaption
-        max-width: 660px
+        +max-width-rem(660px)
         margin: 0 auto
         +respond-min($break-3)
           padding-right: 10%
@@ -117,7 +117,20 @@
       +respond-min($break-2)
         margin: $gutter 0 $gutter $gutter
         float: right
-
+    &.author-stamp
+      text-align: center
+      .figure__media, img
+        @extend %round-img
+        +inline-block
+        +max-width-rem(70px)
+        margin-bottom: $small
+        +respond-min($break-0)
+          +max-width-rem(100px)
+      .figure__caption
+        +max-width-rem(400px)
+        text-align: left
+        +respond-max($break-2)
+          margin-top: $fine
 
 
 
