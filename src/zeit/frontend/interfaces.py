@@ -5,4 +5,5 @@ class IPara(Interface):
     pass
 
 class IPage(Interface):
-    """Represents Pages in IContent"""
+    """ Represents Pages in IContent """
+    pass
