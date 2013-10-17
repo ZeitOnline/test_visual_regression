@@ -56,3 +56,13 @@
 	+respond-min($break-3)
 		padding-left: $gutter/2
 		padding-right: $gutter/2
+
+.has-headline-switch
+	+respond-max($break-3)
+		.article__title-wrap
+			margin-bottom: $medium
+	+respond-min($break-3)
+		display: table
+		.article__title-wrap
+			display: table-footer-group
+		.article__main-image
