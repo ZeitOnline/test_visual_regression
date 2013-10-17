@@ -7,6 +7,7 @@
 
 @import "base/functions"
 @import "base/constants"
+@import "base/mixins"
 @import "base/typography"
 @import "base/helper"
 @import "base/states"
@@ -19,13 +20,4 @@
 
 @import "base/shame"
 
-*
-	+box-sizing(border-box)
-
-body
-	+franziska
-	font-size: $font-m
-	line-height: $base-line-height
-	color: $color-text
-	margin: 0
-	padding: 0
+@import "base/defaults"
