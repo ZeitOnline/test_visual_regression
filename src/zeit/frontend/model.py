@@ -1,7 +1,8 @@
 from lxml import objectify, etree
 from os.path import isdir
 from os.path import isfile
-from pyramid.view import view_config
+from zope.interface import implementer
+from zeit.frontend import interfaces
 import pkg_resources
 
 class Resource(object):
@@ -29,50 +30,85 @@ def get_root(request):
 
 
 class Content (Resource):
-    title = 'foo'
-    subtitle = 'baa'
-    teaser_title = 'teaser_title'
-    teaser_text = 'teaser_text'
-    page = ''
+    title = ''
+    subtitle = ''
+    teaser_title = ''
+    teaser_text = ''
+    pages = []
+    lead_pic = ''
+    author = ''
 
     def __json__(self, request):
-        return dict((name, getattr(self, name)) for name in dir(self) if not name.startswith('__')) 
+        return dict((name, getattr(self, name)) for name in dir(self)
+                    if not name.startswith('__'))
 
     def __init__(self, path):
         article_tree = objectify.parse(path)
-        self.title = unicode(article_tree.getroot().body.title)
-        self.subtitle = unicode(article_tree.getroot().body.subtitle)
-        self.pages = article_tree.getroot().body.xpath("//division[@type='page']")
-        self.pagesxml = []
-        for page in self.pages:
-          self.pagesxml.append(etree.tostring(page))
+        root = article_tree.getroot()
+        self.title = unicode(root.body.title)
+        self.subtitle = unicode(root.body.subtitle)
+        self.supertitle = unicode(root.body.supertitle)
+        self.__construct_pages(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         # Startbild
-        # Spitzmarke
         # Datum | Uhrzeit
         # Autor
         # intertitle
-        # division -> p | img -> bu 
+        # division -> p | img -> bu
+
+    def __construct_pages(self, root):
+        pages = root.body.xpath("//division[@type='page']")
+        self.pages = _get_pages(pages)
 
 
-@view_config(route_name='json', context=Content,
-             renderer='json')
-@view_config(context=Content,
-             renderer='templates/article.html')
-def render_content(context, request):
-    return {'article':context}
+@implementer(interfaces.IPage)
+class Page(object):
+    _page_xml = None
+    content = []
+    def __init__(self,page_xml):
+        self._page_xml = page_xml
+        self.content = self._extract_items(page_xml)
 
-@view_config(route_name='json', context=Content,
-             renderer='json', name='teaser')
-@view_config(name='teaser', context=Content,
-             renderer='templates/teaser.html')
-def render_teaser(context, request):
-    return {
-            'teaser_title':context.teaser_title,
-            'teaser_text': context.teaser_text,
-            }
+    def _extract_items(self, page_xml):
+        for item in page_xml:
+            if item.tag == 'p':
+                self.content.append(Para(item))
 
 
+@implementer(interfaces.IPara)
+class Para(object):
+    def __init__(self, xml):
+        self.html = _inline_html(xml)
 
 
+def _get_pages(pages_xml):
+    pages = []
+    for page in pages_xml:
+        pages.append(Page(page))
+    return pages
+
+
+def _inline_html(xml):
+    filter_xslt = etree.XML('''
+        <xsl:stylesheet version="1.0"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml"
+                        omit-xml-declaration="yes" />
+            <xsl:template match="p">
+                <xsl:apply-templates />
+            </xsl:template>
+            <xsl:template match="i">
+                <i><xsl:apply-templates /></i>
+            </xsl:template>
+            <xsl:template match="em">
+                <em><xsl:apply-templates /></em>
+            </xsl:template>
+            <xsl:template match="a">
+                <a><xsl:apply-templates /></a>
+            </xsl:template>
+            <xsl:template match="a/@href">
+                <xsl:copy><xsl:apply-templates /></xsl:copy>
+        </xsl:stylesheet>''')
+    transform = etree.XSLT(filter_xslt)
+    return transform(xml)
