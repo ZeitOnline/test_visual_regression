@@ -10,6 +10,10 @@
     font-family: 'Franziska FF Bold'
     font-weight: 700
     line-height: $base-line-height*0.9
+  @else if $weight == semibold
+    font-family: 'Franziska FF SemiBold'
+    font-weight: 700
+    line-height: $base-line-height*0.9
   @if $style == italic
     font-style: italic
   @else if $style == normal
@@ -61,6 +65,9 @@
 
 .franziska-bold
   +franziska(bold, normal)
+
+.franziska-semibold
+  +franziska(semibold, normal)
 
 .franziska-bold-italic
   +franziska(bold, italic)
