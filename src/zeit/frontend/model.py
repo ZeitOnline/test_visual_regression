@@ -77,6 +77,10 @@ class Page(object):
         for item in page_xml.iterchildren():
             if item.tag == 'p':
                 content.append(Para(item))
+            if item.tag == 'intertitle':
+                content.append(Intertitle(item))
+            if item.tag == 'image':
+                content.append(Img(item))
         return content
 
 @implementer(interfaces.IPara)
@@ -84,15 +88,24 @@ class Para(object):
     def __init__(self, xml):
         self.html = _inline_html(xml)
 
+    def __str__(self):
+        return unicode(self.html)
+
 @implementer(interfaces.IImg)
 class Img(object):
     def __init__(self, xml):
-        pass
+        self.src = ''
+        self.caption = ''
+        self.copyright = ''
+        self.layout = ''
+
 
 @implementer(interfaces.IIntertitle)
 class Intertitle(object):
     def __init__(self, xml):
-        pass
+        self.text = unicode(xml.text)
+    def __str__(self):
+        return self.text
 
 @implementer(interfaces.IVideo)
 class Video(object):
@@ -122,11 +135,16 @@ def _inline_html(xml):
                 <em><xsl:apply-templates /></em>
             </xsl:template>
             <xsl:template match="a">
-                <a><xsl:apply-templates /></a>
+                <xsl:text> </xsl:text>
+                <a><xsl:apply-templates select="@* | node | text()" /> </a>
             </xsl:template>
             <xsl:template match="a/@href">
                 <xsl:copy><xsl:apply-templates /></xsl:copy>
             </xsl:template>
+            <xsl:template match="a/@target">
+                <xsl:copy><xsl:apply-templates /></xsl:copy>
+            </xsl:template>
+
         </xsl:stylesheet>''')
     transform = etree.XSLT(filter_xslt)
     return transform(xml)

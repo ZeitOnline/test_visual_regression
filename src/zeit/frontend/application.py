@@ -14,6 +14,7 @@ def factory(global_config, **settings):
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
     utility.globals.update(zeit.frontend.navigation.get_sets())
     utility.tests['elem'] = is_block
+    utility.trim_blocks = True
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
     config.add_route('json', 'json/*traverse')
     config.add_static_view(name='css', path='zeit.frontend:css/')
@@ -24,8 +25,10 @@ def factory(global_config, **settings):
 
 def is_block(obj, b_type):
     interface = None
-
     if  b_type == 'p':
         interface = zeit.frontend.interfaces.IPara
-
+    if  b_type == 'image':
+        interface = zeit.frontend.interfaces.IImg
+    if  b_type == 'intertitle':
+        interface = zeit.frontend.interfaces.IIntertitle
     return interface in zope.interface.providedBy(obj)

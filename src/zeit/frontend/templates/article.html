@@ -2,86 +2,41 @@
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 	<article class="article">
-    <div class="bleed">
-      <img src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/17-Freunde-von-Freunden-Frank-Leder-69.jpg" class="article__main-image" />
-    </div>
-    <div class="article__wrap">
-      <header class="article__title-wrap is-constrained is-centered">
-        <h2 class="article__supertitle">
-          Modemacher Azzedine Alaia
-        </h2>
-        <h1 class="article__title">
-    			{{view.title}}
-    		</h1>
-        <aside class="article__meta">
-          <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
-          <span class="article__meta__author">von Jina Khayyer</span>
-        </aside>
-    		<div class="article__subtitle">
-    			<p>{{view.subtitle}}</p>
-    		</div>
-      </header>
+        <div class="bleed">
+            <img src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/17-Freunde-von-Freunden-Frank-Leder-69.jpg" class="article__main-image" />
+        </div>
+        <div class="article__wrap">
+            <header class="article__title-wrap is-constrained is-centered">
+                <h2 class="article__supertitle">
+                    {{ view.supertitle }}
+                </h2>
+            <h1 class="article__title">
+        			{{view.title}}
+        		</h1>
+            <aside class="article__meta">
+                <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
+                <span class="article__meta__author">von Jina Khayyer</span>
+            </aside>
+        		<div class="article__subtitle">
+        			<p>{{view.subtitle}}</p>
+        		</div>
+            </header>
     
-      <div class="article__body has-dropcap">
-          {% for page in view.pages %}
-            <div class="article__page">
-                {% for item in page %}
-                    {% if item is elem('p') %}
-                        {{ blocks.p(item.html, "is-constrained is-centered")}}
-                    {% endif %}
+            <div class="article__body has-dropcap">
+                {% for page in view.pages %}
+                <div class="article__page">
+                    {% for item in page %}
+                        {% if item is elem('p') %}
+                            {{ blocks.p(item, "is-constrained is-centered")}}
+                        {% elif item is elem('intertitle') %}
+                            {{ blocks.intertitle(item) }}
+                        {% elif item is elem('image') %}
+                            {{ blocks.image(item) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
                 {% endfor %}
-            </div>    
-          {% endfor %}
-        <p class="is-constrained is-centered">Bei diesem Weinkeller ist jeder Tropfen eine Besonderheit. Mit den bunten Plastikkisten, grob gearbeiteten Regalen und unetikettierten Flaschen mag er zwar nicht wie eine Stätte erlesener Kostbarkeiten anmuten. Doch sorgsam gekühlt lagern hier die außergewöhnlichen Experimentierweine der Universität Stellenbosch in Südafrika. Erzeugnisse aus dem Labor, die nicht nur trinkbar, sondern mitunter auch die Weinherstellung von morgen bestimmen.</p>
-        <figure class="figure-stamp">
-          <img class="figure__media" src="http://images.zeit.de/lebensart/mode/2013-10/teaser-vinken-interview/teaser-vinken-interview-180xVar.jpg">
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">Der Schlüssel zum Erfolg liegt in der Harmonie dessen, was sich zwischen den Trauben tummelt. Deshalb untersucht das Stellenboscher Forscherteam die Lebensgemeinschaften im Wein, von der Rebe über den Most bis hin zu den Gärungsprozessen. Das Ziel: Herausfinden, mit welchen Mikroben die Pflanzen in der Natur interagieren, um neue, verbesserte Stämme im Labor zu entwickeln. "Und wo ginge das besser als in Südafrikas wichtigster Weinregion?", fragt die Mikrobiologin Evodia Setati von der Universität Stellenbosch.</p>
-        <p class="is-constrained is-centered">In diesem Weinkeller ist jeder Tropfen eine Besonderheit. Mit den bunten Plastikkisten, grob gearbeiteten Regalen und unetikettierten Flaschen mag er zwar nicht wie eine Stätte erlesener Kostbarkeiten anmuten. Doch sorgsam gekühlt lagern hier die außergewöhnlichen Experimentierweine der Universität Stellenbosch in Südafrika. Erzeugnisse aus dem Labor, die nicht nur trinkbar, sondern mitunter auch die Weinherstellung von morgen bestimmen.</p>
-        <p class="is-constrained is-centered">Der Weinanbau am Kap hat seit Jahrhunderten Tradition. Im Jahr 1659 kelterte der Kaufmann Jan van Riebeeck den ersten Tropfen, allerdings gerade mal acht Liter. Heute liegt Südafrika laut der Organisation Wines of South Africa mit rund 871 Millionen Litern auf Platz acht der weltweiten Produktion. Am verbreitetsten sind die Rebsorten Chenin Blanc gefolgt von Cabernet Sauvignon und Colombar – aus allen wollen die Forscher das Beste herausholen. "Der Geschmack soll so rein wie möglich sein", sagt Setati.</p>
-        <figure class="figure-horizontal">
-          <div class="figure__media figure__media--embed">
-            <div class="figure__media--embed__wrap">
-              <iframe src="//player.vimeo.com/video/76820114" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
-          </div>
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">Ob der Tropfen in der Flasche edel ist, hängt von zahlreichen Faktoren ab. "Viele Komponenten sind von der Natur bereits vorgegeben", sagt die Leiterin des Instituts für Wein-Biotechnologie Maret du Toit, "die Wetterbedingungen, die Beschaffenheit des Bodens oder die Qualität der Trauben." Und nicht zuletzt das Vorkommen der kleinsten Bewohner des Weinstocks, der Mikroben.</p>
-        <h3 class="article__subheading is-constrained is-centered">Jede Traube einzeln, per Hand gestampft</h3>
-        <p class="is-constrained is-centered">Sie sind die treibende Kraft, wandeln sie doch den Traubensaft in Wein um, die alkoholische Gärung. Gleich mehrere Hefe- und Bakterien-Spezies sind daran beteiligt. Als besonders wichtige Kulturen gelten die Hefe Saccharomyces cerevisiae sowie die Milchsäurebakterien Oenococcus oeni und Lactobacillus plantarum. Die Hefe erzeugt in der ersten Gärung Alkohol, wobei unter anderem Fettsäuren und Ester entstehen – beides wirkt sich auf das Aroma aus. Anschließend reduzieren die Bakterien im Laufe der malolaktischen Gärung den Säureanteil im Wein und tragen damit ebenfalls zur Bekömmlichkeit und zum Geschmack bei.</p>
-        <figure class="is-constrained is-centered">
-          <img class="figure__media" src="http://images.zeit.de/politik/deutschland/2013-10/ffm/ffm-540x304.jpg">
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">"Viele Winzer arbeiten ausschließlich mit den Mikroben an den Trauben oder in den Fässern", sagt Du Toit. Doch es gäbe eine bessere Strategie: Perfekt abgestimmte Kulturen aus dem Labor, die den Wein nicht nur fruchtiger, voller und komplexer, sondern auch länger haltbar machen. Mit einer Starterkultur entscheide sich, in welche Richtung sich der Wein entwickelt, erklärt Du Toit. "Es gilt daher, für jeden Tropfen die passende Mikroben-Mischung zu finden."</p>
-        <figure class="figure-full-width">
-          <img class="figure__media" src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/01-Freunde-von-Freunden-Frank-Leder-5.jpg">
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">Die Suche beginnt mitten im Weinberg. "Im Sommer pflücken wir eigenhändig die Trauben, mindestens 15 Kilogramm pro Experiment, meist mehr", erzählt Setati. Im weitläufigen Keller der Universität schließlich zupfen die Wissenschaftler jede Traube einzeln vom Stiel und stampfen sie per Hand, um fremde Mikroorganismen fernzuhalten. "Aus dem Most werden dann Proben entnommen, die enthaltenen Mikroben im Labor herangezüchtet und dort mithilfe von DNA-Analysen bestimmt", sagt Setati.</p>
-        <figure class="figure-stamp--right">
-          <img class="figure__media" src="http://images.zeit.de/kultur/kunst/2013-10/wolken-gerhard-richter-sotheby/wolken-gerhard-richter-sotheby-540x304.jpg">
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">Die Suche beginnt mitten im Weinberg. "Im Sommer pflücken wir eigenhändig die Trauben, mindestens 15 Kilogramm pro Experiment, meist mehr", erzählt Setati. Im weitläufigen Keller der Universität schließlich zupfen die Wissenschaftler jede Traube einzeln vom Stiel und stampfen sie per Hand, um fremde Mikroorganismen fernzuhalten. "Aus dem Most werden dann Proben entnommen, die enthaltenen Mikroben im Labor herangezüchtet und dort mithilfe von DNA-Analysen bestimmt", sagt Setati.</p>
-        <p class="is-constrained is-centered">Die Suche beginnt mitten im Weinberg. "Im Sommer pflücken wir eigenhändig die Trauben, mindestens 15 Kilogramm pro Experiment, meist mehr", erzählt Setati. Im weitläufigen Keller der Universität schließlich zupfen die Wissenschaftler jede Traube einzeln vom Stiel und stampfen sie per Hand, um fremde Mikroorganismen fernzuhalten. "Aus dem Most werden dann Proben entnommen, die enthaltenen Mikroben im Labor herangezüchtet und dort mithilfe von DNA-Analysen bestimmt", sagt Setati.</p>
-        <figure class="figure-horizontal--right">
-          <img class="figure__media" src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/03-Freunde-von-Freunden-Frank-Leder-21.jpg">
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">Die Suche beginnt mitten im Weinberg. "Im Sommer pflücken wir eigenhändig die Trauben, mindestens 15 Kilogramm pro Experiment, meist mehr", erzählt Setati. Im weitläufigen Keller der Universität schließlich zupfen die Wissenschaftler jede Traube einzeln vom Stiel und stampfen sie per Hand, um fremde Mikroorganismen fernzuhalten. "Aus dem Most werden dann Proben entnommen, die enthaltenen Mikroben im Labor herangezüchtet und dort mithilfe von DNA-Analysen bestimmt", sagt Setati.</p>
-        <figure class="figure-full-width">
-          <div class="figure__media figure__media--embed">
-            <div class="figure__media--embed__wrap">
-              <iframe src="//player.vimeo.com/video/76973327" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            </div>
-          </div>
-          <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
-        </figure>
-        <p class="is-constrained is-centered">"Viele Winzer arbeiten ausschließlich mit den Mikroben an den Trauben oder in den Fässern", sagt Du Toit. Doch es gäbe eine bessere Strategie: Perfekt abgestimmte Kulturen aus dem Labor, die den Wein nicht nur fruchtiger, voller und komplexer, sondern auch länger haltbar machen. Mit einer Starterkultur entscheide sich, in welche Richtung sich der Wein entwickelt, erklärt Du Toit. "Es gilt daher, für jeden Tropfen die passende Mikroben-Mischung zu finden."</p>
-      </div>
-    </div>
+        </div>
 	</article>
 {% endblock content %}

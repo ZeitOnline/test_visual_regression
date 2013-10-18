@@ -7,3 +7,17 @@ class IPara(Interface):
 class IPage(Interface):
     """ Represents Pages in IContent """
     pass
+
+
+class IIntertitle(Interface):
+    """ Represents Intertitle in IContent """
+    pass
+
+
+class IImg(Interface):
+    """ Represents Image in IContent """
+    pass
+
+class IVideo(Interface):
+    """ Represents Image in IContent """
+    pass
