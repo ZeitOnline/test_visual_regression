@@ -12,6 +12,7 @@ class Base(object):
         return {}
 
 
+
 @view_config(route_name='json',
              context=zeit.frontend.model.Content,
              renderer='json')

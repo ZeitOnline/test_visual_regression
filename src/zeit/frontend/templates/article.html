@@ -1,4 +1,5 @@
 {% extends "templates/layout.html" %}
+{% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 	<article class="article">
     <div class="bleed">
@@ -10,17 +11,27 @@
           Modemacher Azzedine Alaia
         </h2>
         <h1 class="article__title">
-    			{{article.title}}
+    			{{view.title}}
     		</h1>
         <aside class="article__meta">
           <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
           <span class="article__meta__author">von Jina Khayyer</span>
         </aside>
     		<div class="article__subtitle">
-    			<p>{{article.subtitle}}</p>
+    			<p>{{view.subtitle}}</p>
     		</div>
       </header>
+    
       <div class="article__body has-dropcap">
+          {% for page in view.pages %}
+            <div class="article__page">
+                {% for item in page %}
+                    {% if item is elem('p') %}
+                        {{ blocks.p(item.html, "is-constrained is-centered")}}
+                    {% endif %}
+                {% endfor %}
+            </div>    
+          {% endfor %}
         <p class="is-constrained is-centered">Bei diesem Weinkeller ist jeder Tropfen eine Besonderheit. Mit den bunten Plastikkisten, grob gearbeiteten Regalen und unetikettierten Flaschen mag er zwar nicht wie eine Stätte erlesener Kostbarkeiten anmuten. Doch sorgsam gekühlt lagern hier die außergewöhnlichen Experimentierweine der Universität Stellenbosch in Südafrika. Erzeugnisse aus dem Labor, die nicht nur trinkbar, sondern mitunter auch die Weinherstellung von morgen bestimmen.</p>
         <figure class="figure-stamp">
           <img class="figure__media" src="http://images.zeit.de/lebensart/mode/2013-10/teaser-vinken-interview/teaser-vinken-interview-180xVar.jpg">
@@ -70,11 +81,6 @@
           <figcaption class="figure__caption">Schätze lagern im südafrikanischen Stellenbosch in so manchem Weinkeller. Die richtige Mikrobenkultur könnte sie noch weiter veredeln.   |  © Kai Pfaffenbach/Reuters</figcaption>
         </figure>
         <p class="is-constrained is-centered">"Viele Winzer arbeiten ausschließlich mit den Mikroben an den Trauben oder in den Fässern", sagt Du Toit. Doch es gäbe eine bessere Strategie: Perfekt abgestimmte Kulturen aus dem Labor, die den Wein nicht nur fruchtiger, voller und komplexer, sondern auch länger haltbar machen. Mit einer Starterkultur entscheide sich, in welche Richtung sich der Wein entwickelt, erklärt Du Toit. "Es gilt daher, für jeden Tropfen die passende Mikroben-Mischung zu finden."</p>
-        <!--{% for page in article.pagesxml %}
-          <div class="page">
-          {{page|safe}}
-          </div>
-        {% endfor %}-->
       </div>
     </div>
 	</article>

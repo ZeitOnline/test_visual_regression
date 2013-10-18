@@ -64,23 +64,40 @@ class Content (Resource):
 
 @implementer(interfaces.IPage)
 class Page(object):
-    _page_xml = None
-    content = []
+    __content = []
+
     def __init__(self,page_xml):
-        self._page_xml = page_xml
-        self.content = self._extract_items(page_xml)
+        self.__content = iter(self._extract_items(page_xml))
+
+    def __iter__(self):
+        return self.__content
 
     def _extract_items(self, page_xml):
-        for item in page_xml:
+        content = []
+        for item in page_xml.iterchildren():
             if item.tag == 'p':
-                self.content.append(Para(item))
-
+                content.append(Para(item))
+        return content
 
 @implementer(interfaces.IPara)
 class Para(object):
     def __init__(self, xml):
         self.html = _inline_html(xml)
 
+@implementer(interfaces.IImg)
+class Img(object):
+    def __init__(self, xml):
+        pass
+
+@implementer(interfaces.IIntertitle)
+class Intertitle(object):
+    def __init__(self, xml):
+        pass
+
+@implementer(interfaces.IVideo)
+class Video(object):
+    def __init__(self, xml):
+        pass
 
 def _get_pages(pages_xml):
     pages = []
@@ -109,6 +126,7 @@ def _inline_html(xml):
             </xsl:template>
             <xsl:template match="a/@href">
                 <xsl:copy><xsl:apply-templates /></xsl:copy>
+            </xsl:template>
         </xsl:stylesheet>''')
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
