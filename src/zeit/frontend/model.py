@@ -5,6 +5,7 @@ from zope.interface import implementer
 from zeit.frontend import interfaces
 import pkg_resources
 
+
 class Resource(object):
     pass
 
@@ -16,7 +17,7 @@ class Directory(Resource):
         self.base_path = base_path
 
     def __getitem__(self, name):
-        path=self.base_path+'/'+name
+        path = self.base_path + '/' + name
         if isdir(path):
             return Directory(path)
         if isfile(path):
@@ -26,7 +27,7 @@ class Directory(Resource):
 
 
 def get_root(request):
-    return Directory(pkg_resources.resource_filename(__name__,'data'))
+    return Directory(pkg_resources.resource_filename(__name__, 'data'))
 
 
 class Content (Resource):
