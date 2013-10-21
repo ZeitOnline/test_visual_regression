@@ -19,7 +19,9 @@ def factory(global_config, **settings):
     config.add_route('json', 'json/*traverse')
     config.add_static_view(name='css', path='zeit.frontend:css/')
     config.add_static_view(name='js', path='zeit.frontend:js/')
+    config.add_static_view(name='img', path='zeit.frontend:img/')
     config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
+    config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
     config.scan(package=zeit.frontend)
     return config.make_wsgi_app()
 
