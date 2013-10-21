@@ -1,5 +1,5 @@
 .supertitle, %supertitle
-  +tablet(thin)
+  +tablet
   text-transform: uppercase
   color: $red
   letter-spacing: 1px
@@ -10,8 +10,19 @@
   color: $grey
 
 .subheading, %subheading
-  +franziska(bold)
+  +franziska(semibold)
 
 .headline, %headline
-  +tablet
+  +tablet(bold)
   line-height: $headline-line-height
+
+.quote, %quote
+  +tablet(thin)
+  &:before
+    content: '»'
+  &:after
+    content: '«'
+
+.quote--loud, %quote--loud
+  @extend %quote
+  +cassise(bold)

@@ -1,0 +1,27 @@
+.has-ad-label, %has-ad-label
+  +inline-block
+  &:before
+    @extend %meta
+    @extend %font-xs
+    content: "Anzeige"
+    text-transform: uppercase
+    display: block
+    text-align: right
+    border-bottom: 1px solid $grey
+    margin-bottom: 4px
+
+.ad-slot--inbetween
+  @extend %has-ad-label
+  +max-width-rem(300px)
+  +min-width-rem(300px)
+  margin-bottom: $medium
+  margin-top: $medium
+  +respond-min($break-1)
+    margin: 0 $gutter $gutter $gutter
+    float: right
+  +respond-max($break-0)
+    margin-left: -$gutter/3
+    display: block
+  img
+    margin: auto
+    width: 100%

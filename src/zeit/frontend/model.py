@@ -94,10 +94,11 @@ class Para(object):
 @implementer(interfaces.IImg)
 class Img(object):
     def __init__(self, xml):
-        self.src = ''
-        self.caption = ''
-        self.copyright = ''
-        self.layout = ''
+        self.src = xml.get('src')
+        self.align = xml.get('align')
+        self.caption = _inline_html(xml.find('bu'))
+        self.copyright = _inline_html(xml.find('copyright'))
+        self.layout = xml.get('layout')
 
 
 @implementer(interfaces.IIntertitle)
