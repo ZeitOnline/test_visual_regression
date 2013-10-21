@@ -81,6 +81,8 @@ class Page(object):
                 content.append(Intertitle(item))
             if item.tag == 'image':
                 content.append(Img(item))
+            if item.tag == 'blockquote':
+                content.append(Blockquote(item))
         return content
 
 @implementer(interfaces.IPara)
@@ -107,6 +109,12 @@ class Intertitle(object):
         self.text = unicode(xml.text)
     def __str__(self):
         return self.text
+
+@implementer(interfaces.IBlockquote)
+class Blockquote(object):
+    def __init__(self, xml):
+        self.text = unicode(xml.text)
+        self.type = xml.get('type')
 
 @implementer(interfaces.IVideo)
 class Video(object):
