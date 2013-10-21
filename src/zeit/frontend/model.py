@@ -48,6 +48,12 @@ class Content (Resource):
           self.pagesxml.append(etree.tostring(page))
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
+        # Startbild
+        # Spitzmarke
+        # Datum | Uhrzeit
+        # Autor
+        # intertitle
+        # division -> p | img -> bu 
 
 
 @view_config(route_name='json', context=Content,
