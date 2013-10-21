@@ -18,3 +18,5 @@ src/zeit/frontend/css
 src/zeit/frontend/js
 /.sass-cache/
 .DS_Store
+
+/photobox/
