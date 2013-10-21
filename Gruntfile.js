@@ -50,7 +50,8 @@ module.exports = function(grunt) {
 				loopfunc: true, // no warnings about functions in loops
 				// phantom: true // phatom js globals
 				trailing: true, // makes it an error to leave a trailing whitespace
-				undef: true // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
+				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
+				ignores: ['javascript/iqd-ads.js']
 			},
 			target: {
 				src : ['javascript/**/*.js']
