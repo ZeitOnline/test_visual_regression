@@ -10,9 +10,10 @@
     </h3>
 {%- endmacro %}
 
-{% macro blockquote(obj) -%}
+{% macro citation(obj) -%}
     <blockquote class="
-        {% if obj.type == 'loud' %}
+        <!-- double layout is missing -->
+        {% if obj.layout == 'wide' %}
             quote--loud
         {% else %}
             quote
