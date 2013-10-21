@@ -57,11 +57,24 @@ module.exports = function(grunt) {
 				src : ['javascript/**/*.js']
 			}
 		},
+
+		//replace variable values
+		'template': {
+	 		'options': {
+	   			'data': {
+	          		'js-source': '<%= concat.target.dest %>'
+	            }
+	        },
+	 	   'files': {
+	      		'src/zeit/frontend/templates/layout.html': ['src/zeit/frontend/templates/layout.html']
+	   		}
+	    },
+
 		// watch here
 		watch: {
 			js: {
 				files: ['<%= jshint.target.src %>'],
-				tasks: ['jshint', 'concat'],
+				tasks: ['jshint', 'concat', 'template'],
 			},
 			css: {
 				files: ['sass/**/*.sass'],
@@ -69,12 +82,14 @@ module.exports = function(grunt) {
 			}
 		}
 	});
+
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-template');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'concat']);
+	grunt.registerTask('default', ['jshint', 'compass:dev', 'concat', 'template']);
 };
