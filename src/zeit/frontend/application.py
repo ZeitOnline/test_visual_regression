@@ -8,8 +8,9 @@ import zeit.frontend.interfaces
 
 
 def factory(global_config, **settings):
+    root = zeit.frontend.model.get_root
     config = pyramid.config.Configurator(settings=settings,
-                                         root_factory=zeit.frontend.model.get_root)
+                                         root_factory=root)
     config.include('pyramid_jinja2')
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
     utility.globals.update(zeit.frontend.navigation.get_sets())
