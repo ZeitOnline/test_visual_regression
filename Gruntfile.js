@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'concat'],
 			},
 			css: {
-				files: ['sass/**/*.sass'],
+				files: ['sass/*.sass', 'sass/**/*.sass', 'sass/**/**/*.sass', 'sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
 			}
 		}

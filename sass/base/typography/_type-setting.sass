@@ -10,23 +10,38 @@
     font-family: 'Franziska FF Bold'
     font-weight: 700
     line-height: $base-line-height*0.9
+  @else if $weight == semibold
+    font-family: 'Franziska FF SemiBold'
+    font-weight: 700
+    line-height: $base-line-height*0.9
   @if $style == italic
     font-style: italic
   @else if $style == normal
     font-style: normal
 
+=cassise($weight: bold)
+  @if $weight == bold
+    font-family: 'cassise_modernfatface'
+    font-weight: normal
+    line-height: $base-line-height*0.95
+
 =tablet($weight: regular)
   @if $weight == regular
     font-family: 'TabletGothic'
-    font-weight: 400
+    font-weight: normal
+    line-height: $base-line-height
   @else if $weight == bold
+    font-family: 'TabletGothic-Bold'
+    font-weight: normal
+    line-height: $base-line-height*0.8
+  @else if $weight == fat
     font-family: 'TabletGothic-ExtraBold'
-    font-weight: 400
+    font-weight: normal
     line-height: $base-line-height*0.8
   @else if $weight == thin
     font-family: 'TabletGothicCompressed-Thin'
-    font-weight: 700
-    line-height: $base-line-height*0.75
+    font-weight: normal
+    line-height: $base-line-height*0.9
   font-weight: normal
   font-style: normal
 
@@ -39,6 +54,9 @@
 .tablet-bold
   +tablet(bold)
 
+.cassise-bold
+  +cassise(bold)
+
 .franziska
   +franziska(regular, normal)
 
@@ -47,6 +65,9 @@
 
 .franziska-bold
   +franziska(bold, normal)
+
+.franziska-semibold
+  +franziska(semibold, normal)
 
 .franziska-bold-italic
   +franziska(bold, italic)
