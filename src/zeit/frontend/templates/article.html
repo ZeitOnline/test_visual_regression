@@ -2,41 +2,44 @@
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 	<article class="article">
-    <div class="bleed">
-        <img src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/17-Freunde-von-Freunden-Frank-Leder-69.jpg" class="article__main-image" />
-    </div>
-    <div class="article__wrap">
-        <header class="article__title-wrap is-constrained is-centered">
-            <h2 class="article__supertitle">
-                {{ view.supertitle }}
-            </h2>
-        <h1 class="article__title">
-    			{{view.title}}
-    		</h1>
-        <aside class="article__meta">
-            <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
-            <span class="article__meta__author">von Jina Khayyer</span>
-        </aside>
-    		<div class="article__subtitle">
-    			<p>{{view.subtitle}}</p>
-    		</div>
-        </header>
-
-        <div class="article__body has-dropcap">
-            {% for page in view.pages %}
-            <div class="article__page">
-                {% for item in page %}
-                    {% if item is elem('p') %}
-                        {{ blocks.p(item, "is-constrained is-centered")}}
-                    {% elif item is elem('intertitle') %}
-                        {{ blocks.intertitle(item) }}
-                    {% elif item is elem('image') %}
-                        {{ blocks.image(item) }}
-                    {% endif %}
+        <div class="article__wrap">
+            <div class="article__head-wrap has-headline-switch">
+                <header class="article__title-wrap">
+                    <div class="is-constrained is-centered">
+                        <h2 class="article__supertitle">
+                            {{ view.supertitle }}
+                        </h2>
+                        <h1 class="article__title">
+                            {{view.title}}
+                        </h1>
+                        <aside class="article__meta">
+                            <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
+                            <span class="article__meta__author">von Jina Khayyer</span>
+                        </aside>
+                        <div class="article__subtitle">
+                            <p>{{view.subtitle}}</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="article__main-image bleed">
+                    <img src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/17-Freunde-von-Freunden-Frank-Leder-69.jpg" />
+                </div>
+            </div>
+            <div class="article__body has-dropcap">
+                {% for page in view.pages %}
+                <div class="article__page">
+                    {% for item in page %}
+                        {% if item is elem('p') %}
+                            {{ blocks.p(item, "is-constrained is-centered")}}
+                        {% elif item is elem('intertitle') %}
+                            {{ blocks.intertitle(item) }}
+                        {% elif item is elem('image') %}
+                            {{ blocks.image(item) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
                 {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
 	</article>
 {% endblock content %}
