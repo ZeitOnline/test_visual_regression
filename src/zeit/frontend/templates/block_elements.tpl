@@ -10,6 +10,18 @@
     </h3>
 {%- endmacro %}
 
+{% macro blockquote(obj) -%}
+    <blockquote class="
+        {% if obj.type == 'loud' %}
+            quote--loud
+        {% else %}
+            quote
+        {% endif %}
+    ">
+        {{ obj.text }}
+    </blockquote>
+{%- endmacro %}
+
 {% macro image(obj) -%}
     <figure class="
         {% if obj.layout == 'large' %}
@@ -37,4 +49,3 @@
             </figcaption>
     </figure>
 {%- endmacro %}
-

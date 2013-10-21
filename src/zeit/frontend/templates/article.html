@@ -35,6 +35,8 @@
                             {{ blocks.intertitle(item) }}
                         {% elif item is elem('image') %}
                             {{ blocks.image(item) }}
+                        {% elif item is elem('blockquote') %}
+                            {{ blocks.blockquote(item) }}
                         {% endif %}
                     {% endfor %}
                 </div>
