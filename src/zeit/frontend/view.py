@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 import zeit.frontend.model
 
+
 class Base(object):
     """Base class for all views."""
 
@@ -10,7 +11,6 @@ class Base(object):
 
     def __call__(self):
         return {}
-
 
 
 @view_config(route_name='json',
@@ -42,6 +42,7 @@ class Article(Base):
 
 class Gallery(Base):
     pass
+
 
 @view_config(route_name='json',
              context=zeit.frontend.model.Content,
