@@ -67,7 +67,7 @@ class Content (Resource):
 class Page(object):
     __content = []
 
-    def __init__(self,page_xml):
+    def __init__(self, page_xml):
         self.__content = iter(self._extract_items(page_xml))
 
     def __iter__(self):
@@ -86,6 +86,7 @@ class Page(object):
                 content.append(Blockquote(item))
         return content
 
+
 @implementer(interfaces.IPara)
 class Para(object):
     def __init__(self, xml):
@@ -93,6 +94,7 @@ class Para(object):
 
     def __str__(self):
         return unicode(self.html)
+
 
 @implementer(interfaces.IImg)
 class Img(object):
@@ -108,8 +110,10 @@ class Img(object):
 class Intertitle(object):
     def __init__(self, xml):
         self.text = unicode(xml.text)
+
     def __str__(self):
         return self.text
+
 
 @implementer(interfaces.IBlockquote)
 class Blockquote(object):
@@ -117,10 +121,12 @@ class Blockquote(object):
         self.text = unicode(xml.text)
         self.type = xml.get('type')
 
+
 @implementer(interfaces.IVideo)
 class Video(object):
     def __init__(self, xml):
         pass
+
 
 def _get_pages(pages_xml):
     pages = []
