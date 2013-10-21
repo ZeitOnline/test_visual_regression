@@ -44,4 +44,6 @@ var IQD_varPack = {
 var iqd_Loc = (top==self) ? window.location : parent.location;
 var iqd_Domain = iqd_Loc.href.toLowerCase();
 var iqd_TestKW = (iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
-					
+	
+var n_pbt = "";
+
