@@ -26,14 +26,15 @@ def factory(global_config, **settings):
     config.scan(package=zeit.frontend)
     return config.make_wsgi_app()
 
+
 def is_block(obj, b_type):
     interface = None
-    if  b_type == 'p':
+    if b_type == 'p':
         interface = zeit.frontend.interfaces.IPara
-    if  b_type == 'image':
+    if b_type == 'image':
         interface = zeit.frontend.interfaces.IImg
-    if  b_type == 'intertitle':
+    if b_type == 'intertitle':
         interface = zeit.frontend.interfaces.IIntertitle
-    if  b_type == 'blockquote':
+    if b_type == 'blockquote':
         interface = zeit.frontend.interfaces.IBlockquote
     return interface in zope.interface.providedBy(obj)
