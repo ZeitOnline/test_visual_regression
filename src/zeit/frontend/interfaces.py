@@ -25,6 +25,12 @@ class IIntertitle(Interface):
     pass
 
 
+class IAdvertising(Interface):
+
+    """ Represents Advertising in IContent """
+    pass
+
+
 class IImg(Interface):
 
     """ Represents Image in IContent """

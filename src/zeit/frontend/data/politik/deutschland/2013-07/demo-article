@@ -95,12 +95,19 @@
         <subtitle>Manche Gegenstände überstehen jeden Umzug. Geschichten unzertrennlicher Liebespaare</subtitle>
         <byline>von  Inga Krieger, Tillmann Prüfer</byline>
         <division type="page">
-            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" title="Cornelia Poletto" src="http://xml.zeit.de/lebensart/2013-10/cornelia-poletto/cornelia-poletto-540x304.jpg" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
+            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="" title="Cornelia Poletto" src="http://xml.zeit.de/lebensart/2013-10/cornelia-poletto/cornelia-poletto-540x304.jpg" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
                 <bu />
                 <copyright>© Privat</copyright>
             </image>
             <citation url="http://baconipsum.com/?paras=5&amp;amp;type=all-meat" text="Filet mignon pork loin hamburger, turducken swine capicola leberkas jowl pig spare ribs meatball venison short loin. Hamburger biltong chicken kielbasa sausage. Boudin salami drumstick jerky, meatball ham swine cow andouille chicken. Corned beef capicola sausage, strip steak bresaola shank bacon kielbasa pork loin ground round short loin salami." attribution="Langes Zitat von Bacon Ipsum, mit Link" layout="wide"/>
             <p>"Ich habe mir den Mixer 1986 oder 1987 gekauft, genau weiß ich das nicht mehr. Bei jedem
+      Umzug habe ich überlegt, ob er auch den ›Sprung‹ mit ins nächste Zuhause schaffen wird. Die
+      besondere Farbe und der Charme des Mixers haben mich immer wieder überzeugt, ihn doch wieder
+      mitzunehmen. Es gab dann jedes Mal hitzige Diskussionen über ihn. Ich bezeichne den Mixer
+      manchmal als ›Flo‹, da er auch schon oft gegen die Wand geflogen ist, aber immer wieder zu mir
+      zurückgeflogen kommt."</p>
+      <advertising type="rectangle" />
+      <p>"Ich habe mir den Mixer 1986 oder 1987 gekauft, genau weiß ich das nicht mehr. Bei jedem
       Umzug habe ich überlegt, ob er auch den ›Sprung‹ mit ins nächste Zuhause schaffen wird. Die
       besondere Farbe und der Charme des Mixers haben mich immer wieder überzeugt, ihn doch wieder
       mitzunehmen. Es gab dann jedes Mal hitzige Diskussionen über ihn. Ich bezeichne den Mixer

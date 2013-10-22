@@ -40,6 +40,8 @@
                             {{ blocks.image(item) }}
                         {% elif item is elem('citation') %}
                             {{ blocks.citation(item) }}
+                        {% elif item is elem('advertising') %}
+                            {{ blocks.advertising(item) }}
                         {% endif %}
                     {% endfor %}
                 </div>

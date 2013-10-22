@@ -23,10 +23,18 @@
     </blockquote>
 {%- endmacro %}
 
+{% macro advertising(ad) -%}
+    {% if ad.type == 'rectangle' %}
+        <div class="ad-slot--inbetween">
+            <img src="/img/ads/rectangle1.jpg">
+        </div>
+    {% endif %}
+{%- endmacro %}
+
 {% macro image(obj) -%}
     <figure class="
         {% if obj.layout == 'large' %}
-            figure--full-width
+            figure-full-width
         {% elif obj.layout == 'medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
