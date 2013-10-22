@@ -10,6 +10,7 @@ setup(
         'pyramid_jinja2',
         'setuptools',
         'simplejson',
+        'supervisor',
         'waitress',
     ],
     entry_points={
