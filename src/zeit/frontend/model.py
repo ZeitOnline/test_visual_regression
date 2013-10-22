@@ -144,30 +144,29 @@ def _get_pages(pages_xml):
 
 def _inline_html(xml):
     filter_xslt = etree.XML('''
-		<xsl:stylesheet version="1.0"
-			xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-			<xsl:output method="xml"
-						omit-xml-declaration="yes" />
-			<xsl:template match="p">
-				<xsl:apply-templates />
-			</xsl:template>
-			<xsl:template match="i">
-				<i><xsl:apply-templates /></i>
-			</xsl:template>
-			<xsl:template match="em">
-				<em><xsl:apply-templates /></em>
-			</xsl:template>
-			<xsl:template match="a">
-				<xsl:text> </xsl:text>
-				<a><xsl:apply-templates select="@* | node | text()" /> </a>
-			</xsl:template>
-			<xsl:template match="a/@href">
-				<xsl:copy><xsl:apply-templates /></xsl:copy>
-			</xsl:template>
-			<xsl:template match="a/@target">
-				<xsl:copy><xsl:apply-templates /></xsl:copy>
-			</xsl:template>
-
-		</xsl:stylesheet>''')
+        <xsl:stylesheet version="1.0"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml"
+                        omit-xml-declaration="yes" />
+            <xsl:template match="p">
+                <xsl:apply-templates />
+            </xsl:template>
+            <xsl:template match="i">
+                <i><xsl:apply-templates /></i>
+            </xsl:template>
+            <xsl:template match="em">
+                <em><xsl:apply-templates /></em>
+            </xsl:template>
+            <xsl:template match="a">
+                <xsl:text> </xsl:text>
+                <a><xsl:apply-templates select="@* | node | text()" /> </a>
+            </xsl:template>
+            <xsl:template match="a/@href">
+                <xsl:copy><xsl:apply-templates /></xsl:copy>
+            </xsl:template>
+            <xsl:template match="a/@target">
+                <xsl:copy><xsl:apply-templates /></xsl:copy>
+            </xsl:template>
+        </xsl:stylesheet>''')
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
