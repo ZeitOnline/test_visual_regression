@@ -36,6 +36,7 @@ class Content (Resource):
     teaser_title = ''
     teaser_text = ''
     pages = []
+    header_img_src = ''
     lead_pic = ''
     author = ''
 
@@ -50,6 +51,7 @@ class Content (Resource):
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
         self.__construct_pages(root)
+        self.__extract_header_img(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         # Startbild
@@ -61,6 +63,11 @@ class Content (Resource):
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
         self.pages = _get_pages(pages)
+
+    def __extract_header_img(self, root):
+        first_img = root.body.find('division').find('image')
+        if (first_img.get('layout') == 'zmo_header'):
+            self.header_img_src = first_img.get('src')
 
 
 @implementer(interfaces.IPage)
@@ -80,7 +87,7 @@ class Page(object):
                 content.append(Para(item))
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
-            if item.tag == 'image':
+            if item.tag == 'image' and item.get('layout') != 'zmo_header':
                 content.append(Img(item))
             if item.tag == 'citation':
                 content.append(Citation(item))

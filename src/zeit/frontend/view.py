@@ -3,6 +3,7 @@ import zeit.frontend.model
 
 
 class Base(object):
+
     """Base class for all views."""
 
     def __init__(self, context, request):
@@ -19,6 +20,7 @@ class Base(object):
 @view_config(context=zeit.frontend.model.Content,
              renderer='templates/article.html')
 class Article(Base):
+
     @property
     def lead_pic(self):
         return self.context.lead_pic
@@ -39,6 +41,10 @@ class Article(Base):
     def pages(self):
         return self.context.pages
 
+    @property
+    def header_img_src(self):
+        return self.context.header_img_src
+
 
 class Gallery(Base):
     pass
@@ -51,6 +57,7 @@ class Gallery(Base):
              context=zeit.frontend.model.Content,
              renderer='templates/teaser.html')
 class Teaser(Article):
+
     @property
     def teaser_text(self):
         """docstring for teaser"""

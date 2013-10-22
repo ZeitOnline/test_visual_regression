@@ -21,9 +21,11 @@
                         </div>
                     </div>
                 </header>
-                <div class="article__main-image bleed">
-                    <img src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/17-Freunde-von-Freunden-Frank-Leder-69.jpg" />
-                </div>
+                {% if view.header_img_src %}
+                    <div class="article__main-image bleed">
+                        <img src="{{view.header_img_src}}" />
+                    </div>
+                {% endif %}
             </div>
             <div class="article__body has-dropcap">
                 {% for page in view.pages %}
