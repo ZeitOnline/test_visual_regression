@@ -91,6 +91,8 @@ class Page(object):
                 content.append(Img(item))
             if item.tag == 'citation':
                 content.append(Citation(item))
+            if item.tag == 'advertising':
+                content.append(Advertising(item))
         return content
 
 
@@ -133,6 +135,16 @@ class Citation(object):
         self.attribution = xml.get('attribution')
         self.text = xml.get('text')
         self.layout = xml.get('layout')
+
+
+@implementer(interfaces.IAdvertising)
+class Advertising(object):
+
+    def __init__(self, xml):
+        self.type = unicode(xml.get('type'))
+
+    def __str__(self):
+        return self.type
 
 
 @implementer(interfaces.IVideo)

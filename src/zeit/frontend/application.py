@@ -37,4 +37,6 @@ def is_block(obj, b_type):
         interface = zeit.frontend.interfaces.IIntertitle
     if b_type == 'citation':
         interface = zeit.frontend.interfaces.ICitation
+    if b_type == 'advertising':
+        interface = zeit.frontend.interfaces.IAdvertising
     return interface in zope.interface.providedBy(obj)
