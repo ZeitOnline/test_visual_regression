@@ -8,15 +8,15 @@
             active_text: '',
             ads: [
               {
-                div_class: "ad__leaderboard",
-                min_width: 940,
+                div_class: "ad__leaderboard--full",
+                min_width: 728,
                 min_height: 0,
                 text: "Leaderboard"
               },
               {
                 div_class: "ad__leaderboard--mobile",
                 min_width: 320,
-                max_width: 940,
+                max_width: 728,
                 min_height: 0,
                 text: "Mobile Banner"
               }
@@ -28,7 +28,7 @@
             ads: [
               {
                 div_class: "ad__fp--top",
-                min_width: 1320,
+                min_width: 1400,
                 min_height: 0,
                 text: "Fireplace Top"
               }
@@ -40,7 +40,7 @@
             ads: [
               {
                 div_class: "ad__fp--left",
-                min_width: 1320,
+                min_width: 1400,
                 min_height: 600,
                 text: "Fireplace Left"
               }
@@ -52,7 +52,7 @@
             ads: [
               {
                 div_class: "ad__fp--right",
-                min_width: 1320,
+                min_width: 1400,
                 min_height: 600,
                 text: "Fireplace Right"
               }

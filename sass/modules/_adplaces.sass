@@ -1,6 +1,6 @@
 .ad
-  background-color: $grey
-  color: $white
+  background-color: $grey--light
+  color: $grey
   text-align: center
 
 .ad__fp--top
@@ -18,15 +18,17 @@
 
 .ad__fp--right
   @extend .ad
-  width: 160px
+  width: 200px
   height: 600px
+  //content: url('../img/ads/fp-side.png')
   float: right
   margin-left: 1.25em
 
 .ad__fp--left
   @extend .ad
-  width: 160px
+  width: 200px
   height: 600px
+  //content: url('../img/ads/fp-side.png')
   float: left
   margin-right: 1.25em
 
@@ -39,12 +41,25 @@
 
 .ad__leaderboard
   @extend .ad
-  width: 940px
-  height: 160px
+  width: 100%
   margin-bottom: 20px
+
+.ad__leaderboard--full
+  @extend .ad
+  width: 728px
+  height: 90px
+  //content: url('../img/ads/leaderboard.png')
+  display: block
+  margin-left: auto
+  margin-right: auto
 
 .ad__leaderboard--mobile
   @extend .ad
   width: 320px
   height: 80px
-  margin-bottom: 20px
+  content: url('../img/ads/mobile-banner.gif')
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+

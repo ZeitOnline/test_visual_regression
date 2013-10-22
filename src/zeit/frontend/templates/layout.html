@@ -58,13 +58,15 @@
 
         <div class="page-wrap">
 
-            <script data-name="ad__leaderboard">
-                (function() {
-                    if (window.ad_slots.leaderboard.active_class!= null && window.location.hash === '#ads') {
-                        document.write('<div class="' + window.ad_slots.leaderboard.active_class + '">' +window.ad_slots.leaderboard.active_text+ '</div>');
-                    }
-                }).call(this);
-            </script>
+            <div class="ad__leaderboard">
+                <script data-name="ad__leaderboard">
+                    (function() {
+                        if (window.ad_slots.leaderboard.active_class!= null && window.location.hash === '#ads') {
+                            document.write('<div class="' + window.ad_slots.leaderboard.active_class + '">' +window.ad_slots.leaderboard.active_text+ '</div>');
+                        }
+                    }).call(this);
+                </script>
+            </div>
 
             <nav class="nav">
                 <ul class="nav__list">
