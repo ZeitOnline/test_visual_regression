@@ -17,10 +17,24 @@
     margin-bottom: $thin
     margin-top: $small
 
+  blockquote, .quote
+    @extend %quote
+    @extend %font-l-xl
+    +max-width-rem(400px)
+    color: $color-quote
+    display: block
+    margin-top: $small
+    margin-bottom: $small
+    margin-left: auto
+    margin-right: auto
+    &.quote--loud
+      @extend %quote--loud
+
   figure
     width: 100%
     margin-bottom: $medium
     margin-top: $medium
+    clear: both
     .figure__media, img
       max-width: 100%
       width: 100%
@@ -43,8 +57,8 @@
     &.figure-horizontal, &.figure-horizontal--right
       +pie-clearfix
       .figure__media, img
+        +max-width-rem(660px)
         width: 100%
-        max-width: 660px
         display: block
         +respond-min($break-1)
           +inline-block
@@ -78,7 +92,7 @@
         display: block
         width: 100%
       .figure__caption, figcaption
-        max-width: 660px
+        +max-width-rem(660px)
         margin: 0 auto
         +respond-min($break-3)
           padding-right: 10%
@@ -104,7 +118,20 @@
       +respond-min($break-2)
         margin: $gutter 0 $gutter $gutter
         float: right
-
+    &.author-stamp
+      text-align: center
+      .figure__media, img
+        @extend %round-img
+        +inline-block
+        +max-width-rem(70px)
+        margin-bottom: $small
+        +respond-min($break-0)
+          +max-width-rem(100px)
+      .figure__caption
+        +max-width-rem(400px)
+        text-align: left
+        +respond-max($break-2)
+          margin-top: $fine
 
 
 

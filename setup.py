@@ -22,4 +22,5 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
+    zip_ok=False
 )

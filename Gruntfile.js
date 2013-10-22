@@ -27,6 +27,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		photobox: {
+	    task: {
+	      options: {
+	        screenSizes : [ '600x900', '320x800', '1200x900' ],
+	        urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
+	        useImageMagick: true
+	      }
+	    }
+	   },
 		concat: {
 			options: {
 				banner: bannerContent
@@ -77,7 +86,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'concat', 'template'],
 			},
 			css: {
-				files: ['sass/**/*.sass'],
+				files: ['sass/*.sass', 'sass/**/*.sass', 'sass/**/**/*.sass', 'sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
 			}
 		}
@@ -89,6 +98,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-template');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-photobox');
 
 	// register tasks here
 	grunt.registerTask('default', ['jshint', 'compass:dev', 'concat', 'template']);

@@ -5,6 +5,9 @@
 	margin-bottom: $medium
 	+respond-min($break-2)
 		margin-bottom: $large
+	img
+		width: 100%
+		display: block
 
 .article__wrap
 
@@ -43,7 +46,7 @@
 		content: "— "
 
 .article__subtitle
-	+franziska(bold)
+	+franziska(semibold)
 	@extend %copy
 	margin-bottom: $small
 
@@ -56,3 +59,14 @@
 	+respond-min($break-3)
 		padding-left: $gutter/2
 		padding-right: $gutter/2
+
+.has-headline-switch
+	width: 100%
+	+respond-max($break-3)
+		.article__title-wrap
+			margin-bottom: $medium
+	+respond-minw-minh($break-3, em(800px))
+		display: table
+		.article__title-wrap
+			display: table-footer-group
+		.article__main-image

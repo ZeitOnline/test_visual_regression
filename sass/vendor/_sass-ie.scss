@@ -13,6 +13,19 @@ $fix-mqs: false !default;
   }
 }
 
+@mixin respond-minw-minh($width, $height) {
+  @if $fix-mqs {
+    @if $fix-mqs >= $width {
+      @content;
+    }
+  }
+  @else {
+    @media screen and (min-width: $width) and (min-height: $height) {
+      @content;
+    }
+  }
+}
+
 @mixin respond-max($width) {
   @if $fix-mqs {
     @if $fix-mqs < $width {
@@ -26,6 +39,21 @@ $fix-mqs: false !default;
     }
   }
 }
+
+
+
+@mixin respond-min-max($min-width, $max-width) {
+  @if $fix-mqs {
+    @if $fix-mqs >= $min-width or $fix-mqs < $max-width {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $min-width) and (max-width: $max-with) {
+      @content;
+    }
+  }
+}
+
 
 $old-ie: false !default;
 
