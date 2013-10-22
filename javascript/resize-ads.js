@@ -1,35 +1,35 @@
 
 (function() {
         var prepare_slot;
-      
+    
         window.ad_slots = {
           top: {
-            active_url: "",
+            active_class: "",
             ads: [
               {
-                url: "./adserver/top-banner-s.js",
+                div_class: "ad__top-banner-s",
                 min_width: 320,
                 min_height: 0
               }, {
-                url: "./adserver/top-banner-m.js",
-                min_width: 728,
+                div_class: "ad__top-banner-m",
+                min_width: 940,
                 min_height: 0
               }
             ]
           },
           sidebar: {
-            active_url: "",
+            active_class: "",
             ads: [
               {
-                url: "./adserver/sidebar-banner-s.js",
+                div_class: "ad__sidebar-banner-s",
                 min_width: 320,
                 min_height: 150
               }, {
-                url: "./adserver/sidebar-banner-m.js",
+                div_class: "ad__sidebar-banner-m",
                 min_width: 320,
                 min_height: 400
               }, {
-                url: "./adserver/sidebar-banner-l.js",
+                div_class: "ad__sidebar-banner-l",
                 min_width: 320,
                 min_height: 700
               }
@@ -44,7 +44,7 @@
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             ad = _ref[_i];
             if (window.innerWidth >= ad.min_width && window.innerHeight >= ad.min_height) {
-              slot.active_url = ad.url;
+              slot.active_class = ad.div_class;
               break;
             } else {
               _results.push(void 0);

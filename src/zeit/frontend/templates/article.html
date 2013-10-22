@@ -1,19 +1,18 @@
 {% extends "templates/layout.html" %}
 {% block content %}
-
-  <div class='ad-slot--top'>
-    <script>
-        (function() {
-          if (window.ad_slots.top.active_url != null) {
-            document.write('<scr' + 'ipt src="' + window.ad_slots.top.active_url + '"></scri' + 'pt>');
-          }
-        
-        }).call(this);
-    </script>
-  </div>
-
 	<article class="article">
     <div class="bleed">
+
+      <div class='ad-slot--top'>
+                <script>
+                    (function() {
+                      if (window.ad_slots.top.active_class!= null) {
+                        document.write('<div class="' + window.ad_slots.top.active_class + '"></div>');
+                      }
+                    }).call(this);
+                </script>
+      </div>  
+
       <img src="http://images.zeit.de/lebensart/2013-09/fs-frank-leder-freunde-von-freunden/17-Freunde-von-Freunden-Frank-Leder-69.jpg" class="article__main-image" />
     </div>
     <div class="article__wrap">
