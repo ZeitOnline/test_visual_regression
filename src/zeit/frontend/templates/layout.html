@@ -21,7 +21,51 @@
         <script src="/js/friedbert-0.0.0.js"></script>
     </head>
     <body>
+
+        <script data-name="ad__fp--top">
+            (function() {
+                if (window.ad_slots.fp_top.active_class!= null && window.location.hash === '#fp') {
+                    document.write('<div class="' + window.ad_slots.fp_top.active_class + '">' +window.ad_slots.fp_top.active_text+ '</div>');
+                    document.write('<div class="ad__fp--billboard">Billboard</div>');
+
+                    $( '.' + window.ad_slots.fp_top.active_class ).mouseover( function(){
+                        $( '.ad__fp--billboard' ).show(); 
+                    });
+
+                    $( '.ad__fp--billboard' ).mouseout( function(){
+                        $( '.ad__fp--billboard' ).hide(); 
+                    });
+
+                }
+            }).call(this);
+        </script>
+
+        <script data-name="ad__fp--left">
+            (function() {
+                if (window.ad_slots.fp_left.active_class!= null && window.location.hash === '#fp') {
+                    document.write('<div class="' + window.ad_slots.fp_left.active_class + '">' +window.ad_slots.fp_left.active_text+ '</div>');
+                }
+            }).call(this);
+        </script>
+
+        <script data-name="ad__fp--right">
+            (function() {
+                if (window.ad_slots.fp_right.active_class!= null && window.location.hash === '#fp') {
+                    document.write('<div class="' + window.ad_slots.fp_right.active_class + '">' +window.ad_slots.fp_right.active_text+ '</div>');
+                }
+            }).call(this);
+        </script>
+
         <div class="page-wrap">
+
+            <script data-name="ad__leaderboard">
+                (function() {
+                    if (window.ad_slots.leaderboard.active_class!= null && window.location.hash === '#ads') {
+                        document.write('<div class="' + window.ad_slots.leaderboard.active_class + '">' +window.ad_slots.leaderboard.active_text+ '</div>');
+                    }
+                }).call(this);
+            </script>
+
             <nav class="nav">
                 <ul class="nav__list">
                     {% for link in top_formate.xpath('item/link') %}
@@ -34,9 +78,12 @@
                     {% endfor %}
                 </ul>
             </nav>
+
             <main role="main" class="main">
                 {%  block content %}{% endblock content %}
             </main>
+
         </div>
+
     </body>
 </html>
