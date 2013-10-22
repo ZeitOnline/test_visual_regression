@@ -25,9 +25,13 @@
 
 {% macro advertising(ad) -%}
     {% if ad.type == 'rectangle' %}
-        <div class="ad-slot--inbetween">
-            <img src="/img/ads/rectangle1.jpg">
-        </div>
+        <script data-name="ad__rectangle">
+            (function() {
+                if (window.ad_slots.rec.active_class!= null && window.location.hash === '#ads') {
+                    document.write('<div class="' + window.ad_slots.rec.active_class + '">' +window.ad_slots.rec.active_text+ '</div>');
+                }
+            }).call(this);
+        </script>
     {% endif %}
 {%- endmacro %}
 

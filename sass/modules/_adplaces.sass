@@ -36,8 +36,18 @@
   @extend .ad
   float: right
   width: 300px
-  height: 250px
+  height: 270px
   margin: 10px 10px 10px 10px
+  &:before
+    @extend %meta
+    @extend %font-xs
+    content: "Anzeige"
+    text-transform: uppercase
+    display: block
+    text-align: right
+    border-bottom: 1px solid $grey
+    margin-bottom: 4px
+    background-color: $white
 
 .ad__leaderboard
   @extend .ad
