@@ -28,7 +28,7 @@
             ads: [
               {
                 div_class: "ad__fp--top",
-                min_width: 1400,
+                min_width: 1245,
                 min_height: 0,
                 text: "Fireplace Top"
               }
@@ -40,7 +40,7 @@
             ads: [
               {
                 div_class: "ad__fp--left",
-                min_width: 1400,
+                min_width: 1245,
                 min_height: 600,
                 text: "Fireplace Left"
               }
@@ -52,7 +52,7 @@
             ads: [
               {
                 div_class: "ad__fp--right",
-                min_width: 1400,
+                min_width: 1245,
                 min_height: 600,
                 text: "Fireplace Right"
               }
