@@ -4,7 +4,7 @@
     <author href="http://xml.zeit.de/autoren/M/Thorsten_Metzner" publication-date="" expires="">
       <display_name py:pytype="str">Thorsten Metzner</display_name>
     </author>
-    
+
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/platzeck-politiker-gesundheit" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
         <supertitle py:pytype="str">Rücktritt von Platzeck</supertitle>
@@ -78,7 +78,7 @@
     <title>Dietmar Woidke, der Deichgraf junior</title>
     <subtitle>Er gilt als brandenburgisch-bodenständig. Matthias Platzeck beschreibt ihn als so, wie ein Politiker sein sollte. Er denke, bevor er spreche. Menschennähe müsse man ihm nicht erklären. Dietmar Woidke soll Platzecks Nachfolger werden. </subtitle>
     <division type="page">
-      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/dietmar-woidke-matthias-platzeck/" type="jpg" publication-date="" expires="2013-10-30T09:52:34+00:00" layout="large" is_empty="False">
+      <image align="left" src="/img/ads/rectangle1.jpg" base-id="http://xml.zeit.de/politik/deutschland/2013-07/dietmar-woidke-matthias-platzeck/" type="jpg" publication-date="" expires="2013-10-30T09:52:34+00:00" layout="large" is_empty="False">
         <bu py:pytype="str">Matthias Platzeck und sein designierter Nachfolger, Innenminister Dietmar Woidke (SPD)</bu>
         <copyright py:pytype="str">© Ralf Hirschberger/dpa</copyright>
       </image>
@@ -100,7 +100,7 @@
       </p>
     </division>
   </body>
-  
+
   <teaser>
     <title>Deichgraf junior</title>
     <text>Denkt erst, redet dann: Der künftige Ministerpräsident Woidke ist auch in Brandenburg relativ unbekannt. Aber selbst die CDU freut sich auf ihn. Von Thorsten Metzner</text>

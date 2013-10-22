@@ -95,7 +95,7 @@
         <subtitle>Manche Gegenstände überstehen jeden Umzug. Geschichten unzertrennlicher Liebespaare</subtitle>
         <byline>von  Inga Krieger, Tillmann Prüfer</byline>
         <division type="page">
-            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" title="Cornelia Poletto" src="http://xml.zeit.de/lebensart/2013-10/cornelia-poletto/cornelia-poletto-540x304.jpg" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
+            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="" title="Cornelia Poletto" src="http://xml.zeit.de/lebensart/2013-10/cornelia-poletto/cornelia-poletto-540x304.jpg" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
                 <bu />
                 <copyright>© Privat</copyright>
             </image>
