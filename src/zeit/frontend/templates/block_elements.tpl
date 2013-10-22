@@ -1,0 +1,64 @@
+{% macro p(html, class) -%}
+    <p class="{{ class }}">
+        {{ html | safe}}
+    </p>
+{%- endmacro %}
+
+{% macro intertitle(intertitle) -%}
+    <h3 class="article__subheading is-constrained is-centered">
+        {{ intertitle }}
+    </h3>
+{%- endmacro %}
+
+{% macro citation(obj) -%}
+    <blockquote class="
+        <!-- double layout is missing -->
+        {% if obj.layout == 'wide' %}
+            quote--loud
+        {% else %}
+            quote
+        {% endif %}
+    ">
+        {{ obj.text }}
+    </blockquote>
+{%- endmacro %}
+
+{% macro advertising(ad) -%}
+    {% if ad.type == 'rectangle' %}
+        <script data-name="ad__rectangle">
+            (function() {
+                if (window.ad_slots.rec.active_class!= null && window.location.hash === '#ads') {
+                    document.write('<div class="' + window.ad_slots.rec.active_class + '">' +window.ad_slots.rec.active_text+ '</div>');
+                }
+            }).call(this);
+        </script>
+    {% endif %}
+{%- endmacro %}
+
+{% macro image(obj) -%}
+    <figure class="
+        {% if obj.layout == 'large' %}
+            figure-full-width
+        {% elif obj.layout == 'medium' %}
+             {% if obj.align == 'left' %}
+                figure-horizontal
+            {% elif obj.align == 'right' %}
+                figure-horizontal--right
+            {% else %}
+                figure is-constrained is-centered
+            {% endif %}
+        {% elif obj.layout == 'small' %}
+            {% if obj.align == 'right' %}
+                figure-stamp--right
+            {% else %}
+                figure-stamp
+            {% endif %}
+        {% endif %}
+        ">
+            <img class="figure__media" src="{{obj.src | default('http://placehold.it/160x90', true)}}">
+            <figcaption class="figure__caption">
+                {{obj.caption}}
+                {{obj.copyright}}
+            </figcaption>
+    </figure>
+{%- endmacro %}

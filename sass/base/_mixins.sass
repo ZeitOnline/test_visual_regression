@@ -9,6 +9,23 @@
   &:focus
     @content
 
+=max-width-rem($px)
+  max-width: $px
+  max-width: rem($px)
+
+=min-width-rem($px)
+  min-width: $px
+  min-width: rem($px)
+
+=bleed
+  margin-left: -$page-padding--small
+  margin-right: -$page-padding--small
+  +respond-min($break-1)
+    margin-left: -$page-padding
+    margin-right: -$page-padding
+  +respond-min($max-page-width - 2*$gutter)
+    margin: 0
+
 =visuallyhidden
   border: 0
   clip: rect(0 0 0 0)

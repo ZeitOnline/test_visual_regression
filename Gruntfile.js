@@ -27,6 +27,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		photobox: {
+	    task: {
+	      options: {
+	        screenSizes : [ '600x900', '320x800', '1200x900' ],
+	        urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
+	        useImageMagick: true
+	      }
+	    }
+	   },
 		concat: {
 			options: {
 				banner: bannerContent
@@ -50,30 +59,47 @@ module.exports = function(grunt) {
 				loopfunc: true, // no warnings about functions in loops
 				// phantom: true // phatom js globals
 				trailing: true, // makes it an error to leave a trailing whitespace
-				undef: true // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
+				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
+				ignores: ['javascript/iqd-ads.js', 'javascript/resize-ads.js', 'javascript/jquery-1.10.2.min.js']
 			},
 			target: {
 				src : ['javascript/**/*.js']
 			}
 		},
+
+		//replace variable values
+		'template': {
+	 		'options': {
+	   			'data': {
+	          		'js-source': '<%= concat.target.dest %>'
+	            }
+	        },
+	 	   'files': {
+	      		'src/zeit/frontend/templates/layout.html': ['src/zeit/frontend/templates/layout.html']
+	   		}
+	    },
+
 		// watch here
 		watch: {
 			js: {
 				files: ['<%= jshint.target.src %>'],
-				tasks: ['jshint', 'concat'],
+				tasks: ['jshint', 'concat', 'template'],
 			},
 			css: {
-				files: ['sass/**/*.sass'],
+				files: ['sass/*.sass', 'sass/**/*.sass', 'sass/**/**/*.sass', 'sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
 			}
 		}
 	});
+
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-template');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-photobox');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'concat']);
+	grunt.registerTask('default', ['jshint', 'compass:dev', 'concat', 'template']);
 };

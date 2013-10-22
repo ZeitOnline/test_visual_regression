@@ -1,18 +1,52 @@
 {% extends "templates/layout.html" %}
+{% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
-	<div class="article">
-		<h1 class="article__title">
-			{{article.title}}
-		</h1>
-		<h2 class="article__subtitle">
-			{{article.subtitle}}
-		</h2>
-    <div id="article_body">
-      {% for page in article.pagesxml %}
-        <div class="page">
-        {{page|safe}}
+	<article class="article">
+        <div class="article__wrap">
+            <div class="article__head-wrap has-headline-switch">
+                <header class="article__title-wrap">
+                    <div class="is-constrained is-centered">
+                        <h2 class="article__supertitle">
+                            {{ view.supertitle }}
+                        </h2>
+                        <h1 class="article__title">
+                            {{view.title}}
+                        </h1>
+                        <aside class="article__meta">
+                            <span class="article__meta__timestamp">26. September 2013 09:47 Uhr</span>
+                            <span class="article__meta__author">von Jina Khayyer</span>
+                        </aside>
+                        <div class="article__subtitle">
+                            <p>{{view.subtitle}}</p>
+                        </div>
+                    </div>
+                </header>
+                {% if view.header_img_src %}
+                    <div class="article__main-image bleed">
+                        <img src="{{view.header_img_src}}" />
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="article__body has-dropcap">
+                {% for page in view.pages %}
+                <div class="article__page">
+                    {% for item in page %}
+                        {% if item is elem('p') %}
+                            {{ blocks.p(item, "is-constrained is-centered")}}
+                        {% elif item is elem('intertitle') %}
+                            {{ blocks.intertitle(item) }}
+                        {% elif item is elem('image') %}
+                            {{ blocks.image(item) }}
+                        {% elif item is elem('citation') %}
+                            {{ blocks.citation(item) }}
+                        {% elif item is elem('advertising') %}
+                            {{ blocks.advertising(item) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
         </div>
-      {% endfor %}
-    </div>
-	</div>
+	</article>
 {% endblock content %}
