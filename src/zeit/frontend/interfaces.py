@@ -2,30 +2,36 @@ from zope.interface import Interface
 
 
 class IPara(Interface):
-	""" Represents Paragraphs in IPage -> IContent """
-	pass
+
+    """ Represents Paragraphs in IPage -> IContent """
+    pass
 
 
 class IPage(Interface):
-	""" Represents Pages in IContent """
-	pass
+
+    """ Represents Pages in IContent """
+    pass
 
 
 class ICitation(Interface):
-	""" Represents Citation in IContent """
-	pass
+
+    """ Represents Citation in IContent """
+    pass
 
 
 class IIntertitle(Interface):
-	""" Represents Intertitle in IContent """
-	pass
+
+    """ Represents Intertitle in IContent """
+    pass
 
 
 class IImg(Interface):
-	""" Represents Image in IContent """
-	pass
+
+    """ Represents Image in IContent """
+    pass
 
 
 class IVideo(Interface):
-	""" Represents Image in IContent """
-	pass
+
+    """ Represents Image in IContent """
+    pass
