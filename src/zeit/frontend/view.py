@@ -45,6 +45,10 @@ class Article(Base):
     def header_img_src(self):
         return self.context.header_img_src
 
+    @property
+    def author(self):
+        return self.context.author
+
 
 class Gallery(Base):
     pass

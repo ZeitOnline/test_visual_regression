@@ -52,6 +52,7 @@ class Content (Resource):
         self.supertitle = unicode(root.body.supertitle)
         self.__construct_pages(root)
         self.__extract_header_img(root)
+        self.author = unicode(root.head.author.display_name)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         # Startbild
@@ -68,7 +69,6 @@ class Content (Resource):
         first_img = root.body.find('division').find('image')
         if (first_img.get('layout') == 'zmo_header'):
             self.header_img_src = first_img.get('src')
-
 
 @implementer(interfaces.IPage)
 class Page(object):
