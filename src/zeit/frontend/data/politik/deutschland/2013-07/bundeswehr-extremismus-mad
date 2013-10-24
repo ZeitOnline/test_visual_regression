@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2012-11/nsu-bundeswehr-geheimdienst" year="2012" issue="46" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">infographic</badge>
+        </badges>
+        <supertitle py:pytype="str">NSU-Ausschuss</supertitle>
+        <title py:pytype="str">Bundeswehr duldete bekennende Neonazis</title>
+        <text py:pytype="str">Die Truppenführung hat trotz Warnhinweisen des Geheimdienstes Rechtsextremisten ausgebildet. Mit verheerenden Folgen, wie sich im NSU-Untersuchungsausschuss zeigt.</text>
+        <description py:pytype="str">Die Truppenführung hat trotz Warnhinweisen des Geheimdienstes Rechtsextremisten ausgebildet. Mit verheerenden Folgen, wie sich im NSU-Untersuchungsausschuss zeigt.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Bundeswehr Rechtsextremismus" base-id="http://xml.zeit.de/politik/deutschland/2012-11/bundeswehr-rechtsextremismus/" type="jpg" publication-date="" expires="2013-02-08T12:37:36+00:00">
+          <bu py:pytype="str">Reservisten der Bundeswehr beim Geländemarsch</bu>
+          <copyright py:pytype="str">© Joker/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2012-09/geheimdienst-mad-verfassungsschutz-kritik-abschaffung" year="2012" issue="38" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">MAD</supertitle>
+        <title py:pytype="str">Der Geheimdienst hat keine Freunde mehr</title>
+        <text py:pytype="str">Drei Parteien wollen den Militärischen Abschirmdienst abschaffen. Er sei sein Geld nicht wert. Braucht die Bundeswehr einen eigenen Geheimdienst? Von Lisa Caspari</text>
+        <description py:pytype="str">Drei Parteien wollen den Militärischen Abschirmdienst abschaffen. Er sei sein Geld nicht wert. Braucht die Bundeswehr einen eigenen Geheimdienst? Von Lisa Caspari</description>
+        <byline xsi:nil="true" />
+        <image alt="Verteidigungsminister Thomas de Maizière im Gespräch mit deutschen Soldaten in Afghanistan" align="left" base-id="http://xml.zeit.de/politik/deutschland/2012-09/afghanistan-soldaten/" type="jpg" publication-date="" expires="2012-12-14T17:09:48+00:00">
+          <bu py:pytype="str">Verteidigungsminister Thomas de Maizière im Gespräch mit deutschen Soldaten in Afghanistan</bu>
+          <copyright py:pytype="str">© Michael Kappeler/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2012-12/rechtsextremistische-vorkommnisse-bundeswehr" year="2012" issue="52" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">Zahl der rechtsextremistischen Vorfälle hat leicht zugenommen</title>
+        <text py:pytype="str">In der Bundeswehr hat es 2012 mehr Fälle von Rechtsextremismus gegeben als im Jahr zuvor. Der Wehrbeauftragte sieht jedoch keinen Grund zur Beunruhigung.</text>
+        <description py:pytype="str">In der Bundeswehr hat es 2012 mehr Fälle von Rechtsextremismus gegeben als im Jahr zuvor. Der Wehrbeauftragte sieht jedoch keinen Grund zur Beunruhigung.</description>
+        <byline xsi:nil="true" />
+      </reference>
+    </references>
+    <image align="left" title="Bundeswehr Extremismus" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bundeswehr-extremismus/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">ARCHIV - Soldaten der Bundeswehr stehen†am Kyffh‰userdenkmal bei Steinthaleben nahe Bad Frankenhausen zum Gelˆbnis bereit (Archivfoto vom 05.05.2011). Der M¸nchner Hofgarten wird am Freitag (29.06.2012) erstmals Schauplatz einer feierlichen Offiziersernennung: Knapp 600 Offiziersanw‰rter, darunter 82 Frauen und 20 Offiziersanw‰rter des Sanit‰tsdienstes, werden im Rahmen des sogenannten Befˆrderungsappells zu Offizieren ernannt. Die Zeremonie beginnt mit einem ˆkumenischen Gottesdienst in der Theatinerkirche. Bislang fand der Befˆrderungsappell immer auf dem Gel‰nde der Universit‰t der Bundeswehr statt. Friedensaktivisten haben zu einer Mahnwache und einer Kundgebung gegen die Zeremonie aufgerufen. Foto: Martin Schutt dpa/lby  +++(c) dpa - Bildfunk+++</bu>
+      <copyright py:pytype="str">© Martin Schutt/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, AFP, dpa, ff</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-14T15:35:41.913248+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-14T15:26:10.935187+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-14T15:36:43.963023+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-14T15:25:28.258215+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-14T15:24:58.860455+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.behrens</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">bc652817886d420d9dce1437c8c5c8c2</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3727</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5f267e32-90ce-4b32-9dd2-64d9fd4ccaa2}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="4" type="free">Bundeswehr</tag><tag url_value="extremismus" uuid="40a994ec-1240-4436-9a75-bd957e5a1555" score="4" type="free">Extremismus</tag><tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag><tag url_value="militaerischer-abschirmdienst" uuid="56f518e5-5201-432a-932c-aac843be431d" score="3" type="free">Militärischer Abschirmdienst</tag><tag url_value="soldat" uuid="8dc028d7-8546-42d3-83d7-50b59c1aef4b" score="3" type="free">Soldat</tag><tag url_value="streitkraefte" uuid="15012170-eb43-4bfc-9d30-d6b43a9f5a2a" score="3" type="free">Streitkräfte</tag></rankedTags></head><body>
+    <supertitle>Militärischer Abschirmdienst</supertitle>
+    <title>Bundeswehr-Geheimdienst stuft 400 Soldaten als Extremisten ein</title>
+    <subtitle>Der Geheimdienst MAD hat im Jahr 2012 Hunderte Extremisten in den Reihen der Bundeswehr ausfindig gemacht – und ausgeschlossen. Die meisten seien Rechtsextreme gewesen.</subtitle>
+    <division type="page">
+      <image align="left" title="Bundeswehr Extremismus" type="jpg" publication-date="" expires="" layout="large" is_empty="True">
+        <bu py:pytype="str">ARCHIV - Soldaten der Bundeswehr stehen†am Kyffh‰userdenkmal bei Steinthaleben nahe Bad Frankenhausen zum Gelˆbnis bereit (Archivfoto vom 05.05.2011). Der M¸nchner Hofgarten wird am Freitag (29.06.2012) erstmals Schauplatz einer feierlichen Offiziersernennung: Knapp 600 Offiziersanw‰rter, darunter 82 Frauen und 20 Offiziersanw‰rter des Sanit‰tsdienstes, werden im Rahmen des sogenannten Befˆrderungsappells zu Offizieren ernannt. Die Zeremonie beginnt mit einem ˆkumenischen Gottesdienst in der Theatinerkirche. Bislang fand der Befˆrderungsappell immer auf dem Gel‰nde der Universit‰t der Bundeswehr statt. Friedensaktivisten haben zu einer Mahnwache und einer Kundgebung gegen die Zeremonie aufgerufen. Foto: Martin Schutt dpa/lby  +++(c) dpa - Bildfunk+++</bu>
+        <copyright py:pytype="str">© Martin Schutt/dpa</copyright>
+      </image>
+      <p>Im Jahr 2012 hat der <a href="http://www.zeit.de/politik/deutschland/2012-09/geheimdienst-mad-verfassungsschutz-kritik-abschaffung" target="_blank" class="">Militärische Abschirmdienst (MAD)</a> etwa 400 Extremisten in den Reihen der <a href="http://www.zeit.de/schlagworte/themen/bundeswehr/index" target="_blank" class="">Bundeswehr</a> ausgemacht. Etwas mehr als 300 von ihnen gehörten dem rechten Lager an, etwa 50 seien Islamisten, sagte MAD-Präsident Ulrich Birkenheier dem <a href="http://www.dradio.de/dlf/sendungen/idw_dlf/2176975/" target="_blank" class="">Deutschlandfunk</a>. </p>
+      <p>Für rechtsextremes Gedankengut sei vor allem die Gruppe der Männer zwischen 18 und 25 Jahren anfällig, sagte Birkenheier. Für sie sei die Bundeswehr attraktiv, "weil dort eine bestimmte Struktur herrscht". Außerdem sei der Umgang mit Waffen "für einige sehr interessant".</p>
+      <p>"Spürbar" gestiegen sei die Zahl der enttarnten islamistischen Extremisten: 2011 habe es gut 40 solcher Fälle gegeben, 2012 seien es schon 50 gewesen. Besonders auffällig seien hier Konvertiten, die sich radikalisierten.</p>
+      <p>Linksextremes Gedankengut sei dagegen in den Streitkräften kaum zu finden. "Diejenigen, die eine Linksneigung haben, die sind ja traditionell nicht so sehr auf die Bundeswehr fixiert", sagte Birkenheier. Linksextremisten nähmen die Bundeswehr eher "von außen" ins Visier.</p>
+      <intertitle>Extremisten von Waffen fernhalten<br /></intertitle>
+      <p>Der Grünen-Sicherheitspolitiker Omid Nouripour sagte, die Bundeswehr stehe in der Verantwortung, Extremisten vom Umgang mit Waffen fernzuhalten. Nirgendwo werde dies deutlicher als im Bezug auf den <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2012-09/nsu-untersuchungsausschuss-mad" target="_blank" class="">MAD und die Mitglieder der Neonazi-Zelle NSU</a>. Der Geheimdienst soll versucht haben, den späteren NSU-Terroristen Uwe 
+Mundlos als Informanten anzuwerben. Der MAD bestreitet dies.</p>
+      <p>Stark kritisiert wurde der Abschirmdienst auch dafür, den 
+NSU-Untersuchungsausschuss nicht über eine Akte informiert zu haben, die er schon Mitte der neunziger Jahre über Mundlos angelegt hatte. "Es ist deshalb gut, dass es in der Bundeswehr eine wachsende Sensibilität für den Kampf gegen Extremismus gibt", sagte Nouripour.  </p>
+      <p>Nicht immer reichen aber die Erkenntnisse des MAD nach Aussage von Birkenheier aus, um mutmaßliche Extremisten aus der Bundeswehr entlassen zu können. Die extremistische Gesinnung müsse gerichtlich nachgewiesen werden. "Fakt ist: Extremisten haben keinen Platz in der Bundeswehr", sagte er.   <br /></p>
+      <p>Da der MAD bislang erst dann aktiv werden könne, wenn der Betreffende als Soldat, Angestellter oder Beamter in der Bundeswehr eingestellt ist, sprach sich Birkenheier für eine Zuständigkeit des Bundeswehr-Geheimdiensts schon für Bewerber aus. "Der sichere Weg wäre natürlich eine gesetzliche Erweiterung der Kompetenz des MAD", sagte er. Einen entsprechenden Vorschlag für eine Gesetzesänderung prüfe das Verteidigungsministerium gerade.</p>
+      <p>Der 1956 gegründete Geheimdienst MAD soll die Bundeswehr und das Verteidigungsministerium gegen "sicherheitsgefährdende oder geheimdienstliche Tätigkeiten" – also Sabotage und Spionage – schützen.  </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Militärischer Abschirmdienst</supertitle>
+    <title>Bundeswehr-Geheimdienst stuft 400 Soldaten als Extremisten ein</title>
+    <text>Der Geheimdienst MAD hat im Jahr 2012 Hunderte Extremisten in den Reihen der Bundeswehr ausfindig gemacht – und ausgeschlossen. Die meisten seien Rechtsextreme gewesen.</text>
+  </teaser>
+</article>

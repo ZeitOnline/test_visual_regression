@@ -1,0 +1,81 @@
+.ad
+  background-color: $grey--light
+  color: $grey
+  text-align: center
+
+.ad__fp__container--top
+  width: 100%
+
+.ad__fp__container--left
+  float: left
+
+.ad__fp__container--right
+  float: right
+
+.ad__fp--top
+  @extend .ad
+  width: 100%
+  height: 90px
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+.ad__fp--right
+  @extend .ad
+  width: 120px
+  height: 600px
+  margin-left: 1.25em
+  margin-right: 91px
+  position: absolute
+  margin-top: -110px
+
+.ad__fp--left
+  @extend .ad
+  width: 120px
+  height: 600px
+  margin-right: 0
+  margin-left: -140px
+  position: absolute
+  margin-top: -110px
+
+.ad__rec
+  @extend .ad
+  float: right
+  width: 300px
+  height: 270px
+  margin: 10px 10px 10px 10px
+  &:before
+    @extend %meta
+    @extend %font-xs
+    content: "Anzeige"
+    text-transform: uppercase
+    display: block
+    text-align: right
+    border-bottom: 1px solid $grey
+    margin-bottom: 4px
+    background-color: $white
+
+.ad__leaderboard
+  @extend .ad
+  width: 100%
+  margin-bottom: 20px
+
+.ad__leaderboard--full
+  @extend .ad
+  width: 728px
+  height: 90px
+  //content: url('../img/ads/leaderboard.png')
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+.ad__leaderboard--mobile
+  @extend .ad
+  width: 320px
+  height: 80px
+  //content: url('../img/ads/mobile-banner.gif')
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+

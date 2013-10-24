@@ -1,0 +1,28 @@
+.supertitle, %supertitle
+  +tablet
+  text-transform: uppercase
+  color: $red
+  letter-spacing: 1px
+  margin-bottom: $micro
+
+.meta, %meta
+  +tablet
+  color: $grey
+
+.subheading, %subheading
+  +franziska(semibold)
+
+.headline, %headline
+  +tablet(bold)
+  line-height: $headline-line-height
+
+.quote, %quote
+  +tablet(thin)
+  &:before
+    content: '»'
+  &:after
+    content: '«'
+
+.quote--loud, %quote--loud
+  @extend %quote
+  +cassise(bold)

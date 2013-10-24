@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/meinung/2013-07/bundesregierung-prism-aufklaerung-kommentar" year="2013" issue="29" ressort="Meinung" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Überwachungsskandal</supertitle>
+        <title py:pytype="str">Wer nicht fragt, bleibt dumm </title>
+        <text py:pytype="str">Der NSA-Skandal zeigt, wie wenig die Regierung über das Handeln der Geheimdienste weiß. Doch das ist Taktik, kommentiert Till Schwarze.</text>
+        <description py:pytype="str">Der NSA-Skandal zeigt, wie wenig die Regierung über das Handeln der Geheimdienste weiß. Doch das ist Taktik, kommentiert Till Schwarze.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="Angela Merkel" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Kanzlerin Angela Merkel während einer Pressekonferenz in Paris Ende Mai</bu>
+          <copyright py:pytype="str">© Charles Platiau/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-prism-bundeswehr-friedrich-ausschuss" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Datenaffäre</supertitle>
+        <title py:pytype="str">Ein, zwei, viele Prisms</title>
+        <text py:pytype="str">Auch BND und Bundeswehr sollen Prism-basierte Technik nutzen. Der Geheimdienst sagt, es handele sich nicht um das NSA-Programm, sondern um ein gleichnamiges Nato-System.</text>
+        <description py:pytype="str">Auch BND und Bundeswehr sollen Prism-basierte Technik nutzen. Der Geheimdienst sagt, es handele sich nicht um das NSA-Programm, sondern um ein gleichnamiges Nato-System.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" title="Friedrich-NSA" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-6/" type="jpg" publication-date="" expires="2013-10-17T11:42:58+00:00">
+          <bu py:pytype="str">Dauerbefragter: Innenminister Hans-Peter Friedrich (CSU).
+</bu>
+          <copyright py:pytype="str">© Michael Kappeler/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/bnd-bundeswehr-prism-spionage" year="2013" issue="29" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Abhörtechnik</supertitle>
+        <title py:pytype="str">BND und Bundeswehr kennen Prism seit Jahren</title>
+        <text py:pytype="str">Berichte setzen die Regierung unter Druck: Der BND nutze dieselbe Technik, auf der Prism basiert, und die Bundeswehr wisse von der US-Spionage schon seit 2011, heißt es. </text>
+        <description py:pytype="str">Berichte setzen die Regierung unter Druck: Der BND nutze dieselbe Technik, auf der Prism basiert, und die Bundeswehr wisse von der US-Spionage schon seit 2011, heißt es. </description>
+        <byline xsi:nil="true"/>
+        <image align="left" base-id="http://xml.zeit.de/digital/datenschutz/2013-07/nsa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Basis der NSA in Bad Aibling</bu>
+          <copyright py:pytype="str">© Christof Stache/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <rankedTags>
+      <tag py:pytype="str" uuid="7c31cf4c-fa1d-4526-978a-4ba187d5da0d" type="topic">Prism</tag>
+      <tag type="Organization" score="4" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" url_value="nsa">NSA</tag>
+      <tag type="Organization" score="7" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" url_value="bundesregierung">Bundesregierung</tag>
+      <tag type="Organization" score="5" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" url_value="bundesnachrichtendienst">Bundesnachrichtendienst</tag>
+      <tag type="free" score="4" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" url_value="bundeswehr">Bundeswehr</tag>
+      <tag type="Person" score="4" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" url_value="edward-snowden">Edward Snowden</tag>
+      <tag type="free" score="4" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" url_value="geheimdienst">Geheimdienst</tag>
+      <tag type="free" score="4" uuid="ee76d07d-9be1-4dda-9900-bd3c7d5ea8e5" url_value="justizminister">Justizminister</tag>
+      <tag type="free" score="4" uuid="ecf71c6d-51e7-4c2b-a38a-21c9f7aff9c9" url_value="kommunikation">Kommunikation</tag>
+      <tag type="free" score="4" uuid="bb3bd1ba-fe55-4bce-9ce5-368bae36b06f" url_value="regierung">Regierung</tag>
+      <tag py:pytype="str" uuid="tag://tag://tag://6f1a4ca6-20f7-4504-9a36-ba60d9e1d6af" type="">Republikaner (USA)</tag>
+      <tag type="free" score="4" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" url_value="us-geheimdienst">US-Geheimdienst</tag>
+      <tag type="free" score="4" uuid="8e467460-b2c2-4400-a9d2-d6c12dd6027d" url_value="zeitung">Zeitung</tag>
+      <tag type="free" score="4" uuid="f1ce9830-354e-472f-b794-60d7a0f7e8a0" url_value="ueberwachung">Überwachung</tag>
+      <tag type="Location" score="3" uuid="9187d28e-ea51-4485-b2d6-d5d3852f309c" url_value="afghanistan">Afghanistan</tag>
+      <tag type="Location" score="3" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" url_value="usa">USA</tag>
+      <tag type="Location" score="1" uuid="9d19417d-2077-4125-b802-811fc6e8b7e9" url_value="washington-d.c.">Washington D.C.</tag>
+    </rankedTags>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, nsc</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-18T07:46:41.096281+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-18T04:05:16.689602+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stockinger</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2331</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:83bba9ce-2bdd-4e58-920a-3bab1ae66534}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  </head>
+  <body>
+    <supertitle>NSA-Datenaffäre</supertitle>
+    <title>Prism-Programme greifen auf dieselbe Datenbank zu</title>
+    <subtitle>Das von der Bundeswehr genutzte Prism-Programm soll dieselben Datenbanken nutzen, wie das NSA-Programm gleihen Namens. Auch Daten deutscher Bürger seien genutzt worden.</subtitle>
+    <division type="page">
+      <image layout="large" is_empty="True"/>
+      <p>Die beiden von Bundesregierung als nicht identisch bezeichneten Prism-Programme greifen nach einem Bericht der <em>Bild</em>-Zeitung auf dieselben Datenbanken des US-Geheimdienstes NSA zu. Die Zeitung, die sich auf Quellen in den USA beruft, schreibt, dass das in Afghanistan betriebene Prism sich aus den NSA-Datenbanken Marina und Mainway bediene.</p>
+      <p>In der Datenbank Marina würden Internet-Verbindungsdaten gespeichert, in der Mainway-Datenbank Telefon-Verbindungsdaten. Auch Daten deutscher Staatsbürger würden in den beiden Datenbanken gespeichert, schreibt das Blatt.</p>
+      <p>Das neu bekanntgewordene zweite Prism-Programm soll im Kommandobereich der Bundeswehr in Afghanistan zur Überwachung von Terrorverdächtigen eingesetzt worden sein. Bundesregierung und Bundesnachrichtendienst (BND) hatten am Mittwoch versichert, es handele sich um zwei unterschiedliche Programme.</p>
+      <p>Der BND hatte Vorwürfe zurückgewiesen, wonach die Bundeswehr das Ausspähinstrument des amerikanischen Geheimdienstes bereits seit Jahren kenne. <br/></p>
+      <p>Mit seiner Enthüllung der NSA-Überwachungsmethoden hatte der Ex-Geheimdienstmitarbeiter Edward Snowden weltweit für Aufsehen gesorgt. Demnach überwacht die NSA im großen Stil die Kommunikation von Bürgern und Politikern in Deutschland – vor allem durch das Prism-Programm.</p>
+      <p>
+        <strong>US-Politiker kritisieren Datensammelwut der Geheimdienste</strong>
+        <br/>
+      </p>
+      <p>In den USA haben Politiker über die Parteigrenzen hinweg die Regierung in Washington wegen der Datensammelwut des Geheimdiensts kritisiert. Bei einer Anhörung vor dem Rechtsausschuss des Kongresses äußerten Demokraten und Republikaner Bedenken gegen das Ausspähen amerikanischer Bürger.</p>
+      <p>"Es ist nicht haltbar, ungeheuerlich und muss sofort gestoppt werden", sagte der Demokrat John Conyers. Der Republikaner James Sensenbrenner sagte, der entscheidende Abschnitt des Patriot Act, auf dessen Grundlage die Regierung den Telefon- und Internetverkehr überwacht, müsse geändert werden.</p>
+      <p>Hochrangige Vertreter der Regierung verteidigten die Spähprogramme vor dem Ausschuss, darunter der stellvertretende Justizminister James Cole und John Inglis, stellvertretender NSA-Direktor.<br/></p>
+    </division>
+  </body>
+  <teaser>
+    <text>Das von der Bundeswehr genutzte Prism-Programm soll dieselben Datenbanken nutzen, wie das NSA-Programm gleihen Namens. Auch Daten deutscher Bürger seien genutzt worden.</text>
+    <title>Prism-Programme greifen auf dieselbe Datenbank zu</title>
+    <supertitle>NSA-Datenaffäre</supertitle>
+  </teaser>
+</article>

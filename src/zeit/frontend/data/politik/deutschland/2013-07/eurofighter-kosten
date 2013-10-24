@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/K/Sarah_Kramer/index" publication-date="" expires="">
+      <display_name py:pytype="str">Sarah Kramer</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2013-07/eurofighter-anschaffung-preis" year="2013" issue="28" ressort="Wirtschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Verteidigungsministerium</supertitle>
+        <title py:pytype="str">Der Eurofighter wird immer teurer</title>
+        <text py:pytype="str">Das Verteidigungsministerium muss erneut draufzahlen. Nach dem Drohnen-Desaster soll jetzt die Anschaffung des Eurofighters mehrere Milliarden mehr kosten. </text>
+        <description py:pytype="str">Das Verteidigungsministerium muss erneut draufzahlen. Nach dem Drohnen-Desaster soll jetzt die Anschaffung des Eurofighters mehrere Milliarden mehr kosten. </description>
+        <byline xsi:nil="true" />
+        <image alt="Der Eurofighter Typhoon auf der Luftfahrtmesse in Le Bourget bei Paris" align="left" title="Eurofighter" base-id="http://xml.zeit.de/wirtschaft/2013-07/eurofighter-bild/" type="jpg" publication-date="" expires="2013-10-06T19:56:43+00:00">
+          <bu py:pytype="str">Der Eurofighter Typhoon auf der Luftfahrtmesse in Le Bourget bei Paris</bu>
+          <copyright py:pytype="str">© Francois Mori/AP Photo</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2013-05/bundeswehr-beschaffungspolitik" year="2013" issue="22" ressort="Wirtschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">Die Verschwendungskultur des deutschen Militärs</title>
+        <text py:pytype="str">Der Euro-Hawk-Flop zeigt: Die Liste misslungener Rüstungsprojekte der Bundeswehr ist lang. Kritiker fordern eine transparentere Einkaufspolitik. Von Hauke Friederichs</text>
+        <description py:pytype="str">Der Euro-Hawk-Flop zeigt: Die Liste misslungener Rüstungsprojekte der Bundeswehr ist lang. Kritiker fordern eine transparentere Einkaufspolitik. Von Hauke Friederichs</description>
+        <byline xsi:nil="true" />
+        <image alt="Aufklärungsdrohne Euro Hawk" align="left" base-id="http://xml.zeit.de/wirtschaft/2013-05/euro-hawk-2/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Die Drohne Euro Hawk im Juli 2011 auf dem bayerischen Luftwaffenstützpunkt Manching</bu>
+          <copyright py:pytype="str">© Armin Weigel/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2013-05/Drohne-Euro-Hawk-Ausstieg" year="2013" issue="20" ressort="Wirtschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">Das Drohnen-Desaster</title>
+        <text py:pytype="str">Für Hunderte Millionen Euro kaufte die Bundeswehr eine Aufklärungsdrohne aus den USA, die hier nicht fliegen darf. Jetzt wird das Projekt gestoppt. Von Hauke Friederichs</text>
+        <description py:pytype="str">Für Hunderte Millionen Euro kaufte die Bundeswehr eine Aufklärungsdrohne aus den USA, die hier nicht fliegen darf. Jetzt wird das Projekt gestoppt. Von Hauke Friederichs</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Euro Hawk" base-id="http://xml.zeit.de/politik/deutschland/2013-05/euro-hawk/" type="jpg" publication-date="" expires="2013-08-15T15:18:56+00:00">
+          <bu py:pytype="str">Ein Modell der Drohne Euro Hawk (Archiv)</bu>
+          <copyright py:pytype="str">© Angelika Warmuth/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/eurofighter/" type="jpg" publication-date="" expires="2013-10-08T07:34:22+00:00">
+      <bu py:pytype="str">Ein "Eurofighter" auf einer Flugshow in Österreich</bu>
+      <copyright py:pytype="str">© Erwin Scheriau/epa/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Sarah Kramer</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-08T11:31:28.364579+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-07T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-08T11:32:31.400531+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_bu">Vom Jagdjet zum Mehrzweckflugzeug. Ein „Eurofighter“ dreht bei der Flugschau in Le Bourget nahe Paris seine Kreise. Foto: Gonzalo Fuentes/Reuters</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/heprodimagesfotos82420130708eurofighter-jpg/8461686/2-formatOriginal.JPG?format=formatOriginal</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-08T11:31:27.015997+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.klormann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">553d895900cc4a71abc4ab196caff011</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5414</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:3ecc6063-0afa-42a9-b08f-0bbc73765265}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="opposition" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" score="7" type="free">Opposition</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="7" type="Organization">Verteidigungsministerium</tag><tag url_value="bundestag" uuid="8c0df820-912b-459b-8d2a-ae38f50cf1d9" score="4" type="free">Bundestag</tag><tag url_value="drohne" uuid="43bd36b1-f610-4b5b-bb9f-ecce3ba5a708" score="4" type="free">Drohne</tag><tag url_value="eurofighter" uuid="d56b4166-efd0-46cf-a4e4-d4bc3c0660a0" score="4" type="free">Eurofighter</tag><tag url_value="luftwaffe" uuid="6e7ec382-a2ed-4e11-98e3-a5a5747a7631" score="4" type="free">Luftwaffe</tag><tag url_value="tagesspiegel" uuid="034c6bc1-ea5e-4e0e-a302-80ea616ef9ab" score="4" type="free">Tagesspiegel</tag></rankedTags></head><body>
+    <title>Opposition wirft de Maizière Fehler beim Eurofighter vor</title>
+    <subtitle>Die deutliche Verteuerung des Eurofighters ruft die Opposition auf den Plan: Ihr zufolge waren die Risiken bekannt, Verteidigungsminister de Maizière habe sie ignoriert.</subtitle>
+    <byline>Sarah Kramer</byline>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/eurofighter/" type="jpg" publication-date="" expires="2013-10-08T07:34:22+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Ein "Eurofighter" auf einer Flugshow in Österreich</bu>
+        <copyright py:pytype="str">© Erwin Scheriau/epa/dpa</copyright>
+      </image>
+      <p>Nach den Problemen mit der <a href="http://www.zeit.de/politik/deutschland/2013-06/euro-hawk-ministerium-verschweigt-bundestag" target="_blank" class="">Aufklärungsdrohne Euro Hawk</a> hat das <entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity> nun auch Schwierigkeiten bei der Verwirklichung eines weiteren Rüstungsprojekts: Das Kampfflugzeug <a href="http://www.zeit.de/wirtschaft/2013-07/eurofighter-anschaffung-preis" target="_blank" class="">Eurofighter wird viel teurer als geplant</a>. Das Verteidigungsministerium bestätigte am Wochenende, dass die bislang bewilligte Kaufsumme von 14,7 Milliarden Euro praktisch schon ausgegeben ist. Derzeit fehlen der Luftwaffe aber noch mehrere Dutzend Maschinen. Mit dem größten europäischen Rüstungsvorhaben, das früher Jäger 90 hieß, gab es schon mehrfach Schwierigkeiten, die zu erheblichen Verzögerungen führten. Von den ursprünglich geplanten 180 Maschinen hat die Bundeswehr nach Ministeriumsangaben inzwischen 101 im Einsatz. Zum Jahresende sollen es 108 sein.</p>
+      <p> Dann werden allerdings bereits 14,5 der vom Bundestag bewilligten 14,7 Milliarden Euro ausgegeben sein. Für die Anschaffung weiterer Eurofighter würden neue Milliarden fällig. Bestellt sind bislang 140 Maschinen. Der Stückpreis wird inzwischen auf 93,5 Millionen Euro veranschlagt. Beim Jäger 90 waren es ursprünglich 33 Millionen. <a href="http://www.spiegel.de/spiegel/vorab/eurofighter-droht-finanzieller-kollaps-a-909770.html" target="_blank" class="">Laut Nachrichtenmagazin <em>Spiegel</em></a> gehen die Preissteigerungen unter anderem auf Qualitätsmängel zurück, was der Hersteller EADS allerdings bestreitet.</p>
+      <p> Für die Opposition sind die neuerlichen Probleme ein gefundenes Fressen. Sie kritisiert nicht nur die Kostenexplosion beim Eurofighter-Vorhaben, sondern auch die Vogel-Strauß-Taktik von Verteidigungsminister <a href="http://www.zeit.de/schlagworte/personen/thomas-de-maizi%C3%A8re/index" target="_blank" class="">Thomas de Maizière</a> (CDU). "Der Minister hätte die Veränderungen am Flugzeug besser kommunizieren müssen", sagt etwa der SPD-Verteidigungsexperte Rainer Arnold. Die Risiken bei diesem Großprojekt seien in politischen Kreisen stets bekannt gewesen, sagt Omid Nouripour, Verteidigungsexperte der Grünen. "Dass es solche Dimensionen hat, übertrifft allerdings die Befürchtungen", sagte er mit Blick auf die Kostensteigerungen. In Sachen Rüstung wünscht sich der Grünen-Politiker vom Verteidigungsministerium und dessen Chef mehr Transparenz. "Herr de Maizière hat seit 2011 mehrfach sogenannte Chefgespräche mit <a href="http://www.zeit.de/wirtschaft/2013-06/drohnen-euro-hawk-eads" target="_blank" class="">EADS-Chef Thomas Enders</a> geführt. Ich wüsste gerne, ob der Eurofighter bei diesen Treffen Thema war und zu welchem Ergebnis die Unterredungen geführt haben", sagte Nouripour dem <em>Tagesspiegel</em>.</p>
+      <p> Der Eurofighter war ursprünglich als Jagdflugzeug konzipiert und bestellt worden, inzwischen benötigt die Luftwaffe aber Mehrzweckflugzeuge. Jagd-Jets dienen in erster Linie dem Kampf von Flugzeugen gegen Flugzeuge oder richten sich gegen Ziele am Boden. Mehrzweckmaschinen können dagegen in sehr unterschiedlichen Bereichen eingesetzt werden – etwa als Jäger, Bomber oder Aufklärungsflugzeug. Für die mehrfachen Änderungen am Eurofighter könne daher nicht die Industrie verantwortlich gemacht werden, sagt <a href="http://www.zeit.de/schlagworte/personen/hans-peter-bartels/index" target="_blank" class="">Hans-Peter Bartels</a> (SPD). Ein Sprecher des Verteidigungsministerium sprach in Zusammenhang mit den veränderten Anforderungen an den Eurofighter von "Weiterentwicklung". Dadurch entstehe "ein Mehrwert an dem Flugzeug". Bartels hält den derzeit genutzten Eurofighter-Bestand der deutschen Luftwaffe für ausreichend. "Wir befinden uns in einem Szenario, in dem sich die Nationen in Europa abstimmen sollten", sagte er. Wir brauchen die Fähigkeit, aber wir müssen bei den Jagdbombern nicht die Vormacht haben." Aus seiner Sicht könnten vor allem Länder wie die USA, Großbritannien und Frankreich den Bedarf an Jagdbombern decken. Neben den vorhandenen Eurofightern könne Deutschland in Zukunft auch auf 80 Kampfflugzeuge vom Typ Tornado zurückgreifen, die der Luftwaffe mindestens bis 2025 erhalten bleiben.</p>
+      <p> Mit Blick auf den Eurofighter rät Bartels dem Verteidigungsministerium, auf die nach seinen Informationen geplante taktische Ausbildung von Personal für 15 Eurofighter in Holloman (USA) zu verzichten, um Kosten zu sparen. Das Verteidigungsministerium wollte am Sonntag nicht bestätigen, dass es solche Pläne gibt. Derzeit trainieren auf dem Stützpunkt der US-Luftwaffe in New Mexico die Mannschaften von deutschen Tornados für den Einsatz. Die Kosten dafür liegen laut Bartels bei rund 250 Millionen Euro pro Jahr. Ein ähnlich hoher Betrag würde für eine Eurofighter-Ausbildung in den USA fällig, sagt der SPD-Politiker. Dabei wäre eine Schulung im Inland viel günstiger zu haben: Die dafür nötige Infrastruktur wäre beispielsweise im schleswig-holsteinischen Wittmund vorhanden.</p>
+      <p> Unterdessen müssen Deutschlands Steuerzahler womöglich doch nicht für das gescheiterte Drohnenprojekt Euro Hawk aufkommen. Nach einem Bericht der <em>Bild am Sonntag</em> bemängelt eine interne Stellungnahme des für Rüstungsvorhaben zuständigen Bundesamtes für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr (BAAINBw) fehlende Leistungen des Drohnen-Herstellers Euro Hawk GmbH. In dem vierseitigen Dokument heißt es, die Euro Hawk GmbH sei laut Entwicklungsvertrag dazu verpflichtet gewesen, "insbesondere die Verkehrssicherheit/Luftfahrttauglichkeit/Luftfahrtverträglichkeit" der Drohne nachzuweisen. Der 551,6 Millionen Euro teure Euro Hawk darf in Deutschland nicht starten, weil er keine Zulassung für den Luftverkehr bekommt.</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/politik/nach-euro-hawk-affaere-auch-eurofighter-wird-wesentlich-teurer-als-geplant/8461698.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br />
+      </p>
+    </division>
+    <supertitle>Rüstungsprojekt</supertitle>
+  </body>
+  
+  <teaser>
+    <title>Opposition wirft de Maizière Fehler beim Eurofighter vor</title>
+    <text>Die deutliche Verteuerung des Eurofighters ruft die Opposition auf den Plan: Ihr zufolge waren die Risiken bekannt, Verteidigungsminister de Maizière habe sie ignoriert.</text>
+    <supertitle>Rüstungsprojekt</supertitle>
+  </teaser>
+  <indexteaser>
+    <text py:pytype="str">Die Kosten explodieren</text>
+  </indexteaser>
+</article>

@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<channel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <title/>
+  <container/>
+  <object_limit>50</object_limit>
+</channel>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Renate Künast</title>
+    <text py:pytype="str">
+      <p>Renate Künast ist Fraktionsvorsitzende der Bundestagsfraktion von Bündnis 90/Die Grünen.</p>
+    </text>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" title="Renate Künast" src="http://xml.zeit.de/politik/deutschland/2013-07/renate-kuenast-portraet/renate-kuenast-portraet-180xVar.jpg" type="jpg" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright>© Sean Gallup/Getty Images</copyright>
+    </image>
+  </block>
+</container>

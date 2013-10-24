@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Julia Seeliger</title>
+    <text py:pytype="str">
+      <p>ist eine deutsche Journalistin. 2002 trat sie den Grünen bei und engagierte sich intensiv. Zehn Jahre später verließ sie die Partei wieder.</p>
+    </text>
+  </block>
+</container>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/snowden-asyl-deutschland-2" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Whistleblower</supertitle>
+        <title py:pytype="str">Bundesregierung lehnt Snowdens Asylantrag ab </title>
+        <text py:pytype="str">Edward Snowden wird kein Asyl in Deutschland bekommen. Laut Bundesregierung sind die Voraussetzungen für eine Aufnahme des Whistleblowers nicht erfüllt. </text>
+        <description py:pytype="str">Edward Snowden wird kein Asyl in Deutschland bekommen. Laut Bundesregierung sind die Voraussetzungen für eine Aufnahme des Whistleblowers nicht erfüllt. </description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-6/" type="jpg" publication-date="" expires="2013-08-02T16:48:17+00:00">
+          <bu py:pytype="str">Ein Banner von Edward Snowden in Hongkong</bu>
+          <copyright py:pytype="str">© Kin Cheung/AP/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/friedrich-uberwachung-deutschland" year="2013" issue="23" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Abhöraffäre</supertitle>
+        <title py:pytype="str">Innenminister bestreitet NSA-Überwachung deutscher Internetknoten</title>
+        <text py:pytype="str">Der Bundesinnenminister hat keine Hinweise darauf, dass der größte deutsche Internetknoten von US-Geheimdiensten abgehört wird. Die Aussage führt allerdings in die Irre.</text>
+        <description py:pytype="str">Der Bundesinnenminister hat keine Hinweise darauf, dass der größte deutsche Internetknoten von US-Geheimdiensten abgehört wird. Die Aussage führt allerdings in die Irre.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="De-Cix" base-id="http://xml.zeit.de/politik/deutschland/2013-07/de-cix/" type="jpg" publication-date="" expires="2013-09-02T15:37:50+00:00">
+          <bu py:pytype="str">Die Zufahrt zum Serverpark in Frankfurt, in dem auch der Internetknotenpunkt DE-CIX liegt.</bu>
+          <copyright py:pytype="str">© Boris Roessler/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/spionage-abhoerskandal-bundesregierung-kommentar" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">US-Spähprogamm</supertitle>
+        <title py:pytype="str">Merkel muss den USA jetzt drohen</title>
+        <text py:pytype="str">Es reicht nicht, dass die Kanzlerin das US-Spähprogramm kritisiert. Der Lauschangriff auf Deutsche und Europäer muss ernste Konsequenzen haben, fordert L. Greven.</text>
+        <description py:pytype="str">Es reicht nicht, dass die Kanzlerin das US-Spähprogramm kritisiert. Der Lauschangriff auf Deutsche und Europäer muss ernste Konsequenzen haben, fordert L. Greven.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2013-07/merkel-nsa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Angela Merkel (Archivbild)</bu>
+          <copyright py:pytype="str">© John MacDougall/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <author href="http://xml.zeit.de/autoren/P/Monika_Pilath/index" publication-date="" expires="">
+      <display_name py:pytype="str">Monika Pilath</display_name>
+    </author>
+    <image alt="Eingang zum Gelände des Bundesnachrichtendienstes (BND) in Pullach bei München" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bnd/" type="jpg" publication-date="" expires="2013-10-03T13:02:25+00:00">
+      <bu py:pytype="str">Eingang zum Gelände des Bundesnachrichtendienstes (BND) in Pullach bei München
+</bu>
+      <copyright py:pytype="str">© Peter Kneffel/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Monika Pilath</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, Reuters, AFP, dpa, mpi</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-03T15:16:05.613493+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-03T12:08:12.504420+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-04T15:04:24.703598+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-03T13:13:38.614546+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-03T13:12:18.441294+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.klormann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">b639cb0870984af4a7c03fb43d114d21</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5529</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:dbbe204a-cae9-41e7-b71b-04c9a3acc915}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="8" type="Organization">Bundesregierung</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="7" type="Organization">CDU</tag><tag url_value="fdp" uuid="6ea18a33-3088-4213-b2af-0001db06444a" score="7" type="Organization">FDP</tag><tag url_value="hans-christian-stroebele" uuid="e8dfa87c-810d-4a3b-b886-5dad6c362d4d" score="7" type="Person">Hans-Christian Ströbele</tag><tag url_value="regierung" uuid="bb3bd1ba-fe55-4bce-9ce5-368bae36b06f" score="7" type="free">Regierung</tag><tag url_value="ronald-pofalla" uuid="c72b4b4e-9d5e-414f-b4ae-b8d6515ebc4b" score="7" type="Person">Ronald Pofalla</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="7" type="Organization">SPD</tag><tag url_value="barack-obama" uuid="2d01be7f-14ac-44f0-8b66-eb0838ad21e6" score="6" type="Person">Barack Obama</tag><tag url_value="csu" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" score="6" type="Organization">CSU</tag><tag url_value="gerhard-schroeder" uuid="e98b488f-2609-45d3-b3a9-37eebe7fbe1c" score="6" type="Person">Gerhard Schröder</tag><tag url_value="thomas-oppermann" uuid="28dc19f1-51c5-4905-a3fc-6292fe7c2182" score="6" type="Person">Thomas Oppermann</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="prism" uuid="7c31cf4c-fa1d-4526-978a-4ba187d5da0d" score="5" type="topic">Prism</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="5" type="Location">USA</tag><tag url_value="aufklaerung" uuid="31251156-898e-4f78-a66f-b4bfbd21149d" score="4" type="free">Aufklärung</tag><tag url_value="kanzleramt" uuid="2497011d-a71c-4b85-baed-8c9fcd07be9b" score="4" type="free">Kanzleramt</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag><tag url_value="washington-d.c." uuid="9d19417d-2077-4125-b802-811fc6e8b7e9" score="1" type="Location">Washington D.C.</tag></rankedTags></head><body>
+    <supertitle>NSA-Affäre</supertitle>
+    <title>Regierung will nichts von US-Bespitzelung gewusst haben</title>
+    <subtitle>Wusste die Kanzlerin wirklich nichts von den Spähangriffen auf deutsche Bürger? Die Opposition zweifelt – wie auch an den Fähigkeiten des BND.</subtitle>
+    <division type="page">
+      <image alt="Eingang zum Gelände des Bundesnachrichtendienstes (BND) in Pullach bei München" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bnd/" type="jpg" publication-date="" expires="2013-10-03T13:02:25+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Eingang zum Gelände des Bundesnachrichtendienstes (BND) in Pullach bei München
+</bu>
+        <copyright py:pytype="str">© Peter Kneffel/dpa</copyright>
+      </image>
+      <p><entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> und deutsche Nachrichtendienste haben nach eigenen Angaben nichts von Spähangriffen des US-Geheimdienstes <entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity> gewusst. Das hätten deren Vertreter im Parlamentarischen Kontrollgremium (PKGr) deutlich gemacht, wie der Vorsitzende und der SPD-Parlamentsgeschäftsführer <entity idref="Thomas+Oppermann" entity_type="Person" url_value="personen/thomas-oppermann">Thomas Oppermann</entity> nach einer Sondersitzung sagte. Wenn das stimme, gebe es eine klare Schutzlücke, sagte Oppermann.</p>
+      <p>Der Grünen-Abgeordnete <entity idref="Hans-Christian+Str%C3%B6bele" entity_type="Person" url_value="personen/hans-christian-stroebele">Hans-Christian Ströbele</entity> zweifelte an der Darstellung der Bundesregierung. Die Regierung lasse es an den notwendigen Bemühungen zur Aufklärung der Vorgänge mangeln. <br /></p>
+      <p><entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> und Grüne warfen der Regierung und den deutschen Geheimdiensten Versagen vor. Oppermann sagte, offenbar könne "schrankenlos auf die Daten 
+deutscher Bürger zugegriffen werden". Er finde es unvorstellbar, dass es eine flächendeckende <a href="http://www.zeit.de/digital/datenschutz/2013-07/friedrich-uberwachung-deutschland" target="_blank" class="">Überwachung durch den US-Geheimdienst NSA</a> gegeben habe, "ohne dass das Kanzleramt, ohne dass unsere Geheimdienste etwas gemerkt haben". Die deutsche Spionageabwehr werde bei der Ausspähung durch die Geheimdienste befreundeter Staaten wie die <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> nicht aktiv. Dies müsse sich dringend ändern. "Wir können uns mit dem, was uns von der Bundesregierung angeboten wird, in keiner Weise zufrieden geben."</p>
+      <p>In der <a href="http://www.bundestag.de/bundestag/gremien/pkgr/index.jsp" target="_blank" class="">Sondersitzung des für die Geheimdienstkontrolle zuständigen Bundestagsgremiums</a> informierte unter anderen Kanzleramtschef <entity idref="Ronald+Pofalla" entity_type="Person" url_value="personen/ronald-pofalla">Ronald Pofalla</entity> (<entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity>) die Abgeordneten über die von Whistleblower Edward Snowden offengelegte NSA-Spionageaffäre. Der <a href="http://www.stroebele-online.de/" target="_blank" class="">Grünen-Abgeordnete Hans-Christian Ströbele</a> sagte, er habe den Verdacht, dass die Bundesregierung sehr viel mehr wisse, als sie vorgebe und deshalb nicht schärfer bei US-Präsident <entity idref="Barack+Obama" entity_type="Person" url_value="personen/barack-obama">Barack Obama</entity> interveniere.   </p>
+      <p>Die deutschen Geheimdienstchefs berichteten in der Sitzung nach Teilnehmerangaben, dass sie keine Hinweise über Ableitungen von Daten an deutschen Kommunikationsknotenpunkten hätten. Der Betreiber eines zentralen Datenknotenpunkts nahe Frankfurt versicherte demnach schriftlich, dass es keine Zusammenarbeit mit dem US-Geheimdienst gebe.</p>
+      <p>Der Präsident des Bundesverfassungsschutzes, Hans-Georg Maaßen, sagte bei einer gemeinsamen Pressekonferenz mit <a href="#article-editor-create-link" target="_blank">Bundesinnenminister Hans-Peter Friedrich (CSU)</a>, sein Amt habe nichts vom US-Datensammelprogramm Prism gewusst. Bislang habe seine Behörde insbesondere bei der Abwehr islamistischen Terrors sehr gut mit den US-Diensten zusammengearbeitet. Man sei auf die Informationen aus den USA angewiesen. Es sei möglich, dass die Amerikaner ihre mit den Deutschen geteilten Erkenntnisse auch mit Prism gewonnen hätten. Darüber aber würden die US-Kollegen nichts sagen.</p>
+    </division>
+    <division type="page" teaser="Ströbele will Merkel im Kontrollgremium befragen">
+      <p>Ströbele forderte, nicht nur Geheimdienstkoordinator Pofalla solle dem Bundestagsgremium Rechenschaft ablegen, sondern Bundeskanzlerin Angela Merkel (CDU) persönlich. Die Bundesregierung verletzte ihre Schutzpflichten eklatant, wenn sie die massenhafte Ausspähung der Bürger durch den US-Geheimdienst NSA nicht aufkläre und abstelle.</p>
+      <p>Der Grünen-Abgeordnete sagte weiter, es bestehe der Verdacht, dass der Bundesnachrichtendienst ebenfalls viel mehr wisse, als er zugebe. Möglicherweise überlasse der <entity idref="BND" entity_type="Organization" url_value="organisationen/bnd">BND</entity> der NSA auch "die Drecksarbeit" und habe Zugang zu den ausgespähten Daten.<br /></p>
+      <p>
+        <strong>Union und FDP erwarten Aufklärung durch die USA</strong>
+        <br />
+      </p>
+      <p>Politiker von Union und <entity idref="FDP" entity_type="Organization" url_value="organisationen/fdp">FDP</entity> verteidigten die Bundesregierung gegen den Vorwurf der schlechten Informationspolitik und schoben die Verantwortung an die USA und an Großbritannien weiter. "Für die Antworten ist die amerikanische Seite, die britische Seite zuständig", sagte das PKG-Mitglied Clemens Binninger (CDU). Die deutsche Spionageabwehr könne nicht Datenströme von Bürgern kontrollieren, die "rund um den Globus" gingen. Der FDP-Abgeordnete <a href="http://www.hartfrid-wolff.de/" target="_blank" class="">Hartfrid Wolff</a> sagte: "Wir erwarten Aufklärung durch die USA."<br /></p>
+      <p>Das FDP-Mitglied im Kontrollgremium verlangte zudem, untersucht werden müsse, was die frühere Bundesregierung unter Kanzler <entity idref="Gerhard+Schr%C3%B6der" entity_type="Person" url_value="personen/gerhard-schroeder">Gerhard Schröder</entity> (SPD) von den NSA-Schnüffeleien gewusst und welches Ausmaß diese gehabt hätten. Es sei "relevant zu sehen", ob und wie etwa der frühere Geheimdienstkoordinator und heutige SPD-Fraktionschef Frank-Walter Steinmeier gegen die mögliche Spionage tätig geworden sei.</p>
+      <p>
+        <strong>Friedrich lässt in Washington ermitteln</strong>
+      </p>
+      <p>
+        <strong />
+      </p>
+      <p>Innenminister Friedrich kündigte an, in der kommenden Woche eine Delegation auf Unterabteilungsleiter-Ebene nach <entity idref="Washington" entity_type="Location" url_value="orte/washington">Washington</entity> zu schicken, um sich über die Ausspähung von Deutschen durch US-Geheimdienste zu informieren.    <br /></p>
+      <p>Der CSU-Politiker zeigte gleichwohl Verständnis für die US-Geheimdienste. Die würden sich verhalten wie die Dienste anderer Länder, indem sie zum Schutz ihrer Bürger die Kommunikationsströme überprüften, die in ihr Land kämen. Bislang gebe es keine Hinweise darauf, dass US-Geheimdienste in Deutschland Datenquellen angezapft und damit gegen deutsche Gesetze verstoßen hätten.</p>
+      <p>Der frühere US-Geheimdienstmitarbeiter Edward Snowden wirft den USA die massenhafte Ausspähung von Bürgern anderer Länder vor und hatte Prism und andere Aktivitäten des US-Geheimdienstes NSA veröffentlicht. Auch in der Bundesregierung regte sich Empörung. Am Mittwoch tagte das für deutsche Geheimdienste zuständige Parlamentarische Kontrollgremium. Die Opposition will unter anderem wissen, ob und in welchen Umfang die Bundesregierung über die Aktivitäten der USA informiert war.<br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>NSA-Affäre</supertitle>
+    <text>Wusste die Kanzlerin wirklich nichts von den Spähangriffen auf deutsche Bürger? Die Opposition zweifelt – wie auch an den Fähigkeiten des BND.</text>
+    <title>Regierung will nichts von US-Bespitzelung gewusst haben</title>
+  </teaser>
+</article>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Zacharias Zacharakis</display_name>
+    </author>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-2/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Kanzlerin Angela Merkel in der Bundespressekonferenz</bu>
+      <copyright py:pytype="str">© Maja Hitij/CommonLens</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/angela-merkel-prism-pressekonferenz" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundesregierung</supertitle>
+        <title py:pytype="str">Merkel hat zu Prism nichts zu sagen</title>
+        <text py:pytype="str">Die Kanzlerin weicht auf ihrer Pressekonferenz wortreich den Fragen zum NSA-Skandal aus. Es sei nicht ihre Aufgabe, sich mit Details des Prism-Programms zu beschäftigen.</text>
+        <description py:pytype="str">Die Kanzlerin weicht auf ihrer Pressekonferenz wortreich den Fragen zum NSA-Skandal aus. Es sei nicht ihre Aufgabe, sich mit Details des Prism-Programms zu beschäftigen.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="PK Merkel" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pk-merkel/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Kanzlerin Angela Merkel (CDU) vor der Pressekonferenz in Berlin</bu>
+          <copyright py:pytype="str">© Tobias Schwarz/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/nsa-chef-prism" year="2013" issue="30" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Prism-Skandal</supertitle>
+        <title py:pytype="str">NSA-Chef wundert sich über deutsche Aufregung</title>
+        <text py:pytype="str">Datenschutz? Bürgerrechte? Freiheit? NSA-Chef Keith Alexander reagiert flapsig auf die deutsche Empörung über die US-Ausspähung. </text>
+        <description py:pytype="str">Datenschutz? Bürgerrechte? Freiheit? NSA-Chef Keith Alexander reagiert flapsig auf die deutsche Empörung über die US-Ausspähung. </description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Keith Alexander, National Security Agency" base-id="http://xml.zeit.de/politik/ausland/2013-07/keith-alexander-nsa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">NSA-Chef Keith Alexander</bu>
+          <copyright py:pytype="str">© Doug Kapustin/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/peer-steinbrueck-reaktion" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Überwachungsskandal</supertitle>
+        <title py:pytype="str">Steinbrück wirft Merkel Hilflosigkeit vor</title>
+        <text py:pytype="str">Der SPD-Kanzlerkandidat hat Bundeskanzlerin Merkel "erschreckende Ahnungs- und Hilflosigkeit" im Prism-Skandal attestiert. Als Kanzler würde er anders handeln.</text>
+        <description py:pytype="str">Der SPD-Kanzlerkandidat hat Bundeskanzlerin Merkel "erschreckende Ahnungs- und Hilflosigkeit" im Prism-Skandal attestiert. Als Kanzler würde er anders handeln.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-spd/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">SPD-Kanzlerkandidat Peer Steinbrück</bu>
+          <copyright py:pytype="str">© Johannes Eisele/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Zacharias Zacharakis</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-19T14:15:52.958476+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-19T13:48:09.026246+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-19T14:16:54.770792+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-19T13:58:51.894194+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-19T13:57:16.714845+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.zacharakis</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">e78f5e3ee2f241c582edd7606295a96d</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3489</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ec92ede7-5a9d-4462-aec5-f38d12958b53}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="angela-merkel" uuid="6698fedd-b573-4b9e-9587-839683bebc28" score="10" type="Person">Angela Merkel</tag><tag url_value="prism" uuid="7c31cf4c-fa1d-4526-978a-4ba187d5da0d" score="5" type="topic">Prism</tag><tag url_value="aufklaerung" uuid="31251156-898e-4f78-a66f-b4bfbd21149d" score="4" type="free">Aufklärung</tag><tag url_value="behoerde" uuid="115d43b1-a4fb-45e0-b077-32eb5446d700" score="4" type="free">Behörde</tag><tag url_value="bundeskanzler" uuid="947c300f-7ea5-4f2f-a91e-672a08d42c17" score="4" type="free">Bundeskanzler</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="4" type="free">Bundestagswahl</tag><tag url_value="generalbundesanwalt" uuid="d0b2d2c5-be7c-44ca-9dcb-b5f93e081973" score="4" type="free">Generalbundesanwalt</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="presse" uuid="0c785a89-3fff-420a-9366-b1e1245240fc" score="4" type="free">Presse</tag><tag url_value="rhetorik" uuid="81a3cdae-af07-48fd-b95b-bb00a9aa4e17" score="4" type="free">Rhetorik</tag><tag url_value="straftat" uuid="6560c23f-f426-4c5c-ab5d-c4866aa9ae3c" score="4" type="free">Straftat</tag><tag url_value="technik" uuid="98c3ed82-c170-47e0-986d-1d9d789e9db5" score="4" type="free">Technik</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="4" type="Location">USA</tag><tag url_value="umfrage" uuid="58b00f01-82b9-40b5-8e8f-e62e99a95943" score="4" type="free">Umfrage</tag><tag url_value="karlsruhe" uuid="e76cdf1d-ee47-4c43-85f9-acbb04ee8586" score="1" type="Location">Karlsruhe</tag></rankedTags></head><body>
+    <supertitle>NSA-Affäre</supertitle>
+    <title>Die Kanzlerin stiehlt sich aus der Verantwortung</title>
+    <subtitle>Ich warte lieber ab, sagt Angela Merkel, und bleibt in der NSA-Affäre demonstrativ passiv. Sie hat Angst vor weiteren Enthüllungen, kommentiert Zacharias Zacharakis.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-2/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Kanzlerin Angela Merkel in der Bundespressekonferenz</bu>
+        <copyright py:pytype="str">© Maja Hitij/CommonLens</copyright>
+      </image>
+      <p>Dieser eine Satz, er steht exemplarisch für das ganze Verhalten der Bundeskanzlerin in der Ausspäh-Affäre. <entity idref="Angela+Merkel" entity_type="Person" url_value="personen/angela-merkel">Angela Merkel</entity> sagt ihn, wie sie solche Dinge häufig zu sagen pflegt. Mit einem spöttischen Unterton: "Es ist nicht meine Aufgabe, mich in Details von Prism einzuarbeiten." Als ob es überflüssig sei, sich mit dem Computerprogramm zu befassen, das offenbar jeden Bürger in Deutschland überwacht. Nein, egal ist die Sache nicht.</p>
+      <p>Deshalb waren an diesem Freitag so viele Reporter wie selten zur <a href="http://www.zeit.de/politik/deutschland/2013-07/angela-merkel-prism-pressekonferenz" target="_blank" class="">letzten Pressekonferenz der Kanzlerin</a> vor der Sommerpause gekommen. Sie hofften, endlich mehr zu erfahren in der Frage, was die Bundesregierung für die Aufklärung der Geheimdienst-Affäre tut. Aber sie hätten wissen können, dass die Erwartungen zu hoch gesteckt waren. Merkel hat sich verhalten wie immer.</p>
+      <p>Abwarten und Weitersehen. Das ist das Leitmotiv dieser Kanzlerin. Gibt es eine öffentliche Erregung, eine Diskussion, zieht Merkel sich auf einen Beobachterposten zurück. Sie weigert sich einfach, öffentlich zu agieren, Verantwortung zu übernehmen, damit ja keine Fehler später auf sie zurückfallen. </p>
+      <p>In der NSA-Affäre behauptet Merkel, sie habe die <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> gebeten, die Sache zu klären, und das brauche jetzt eben Zeit. "Insofern warte ich lieber", sagte sie in der Berliner Pressekonferenz. Das aber reicht nicht. Mit dieser Passivität in der Aufklärung des Ausspäh-Skandals ist die Mehrheit in Deutschland nicht zufrieden. <a href="http://www.zeit.de/politik/deutschland/2013-07/Umfrage-Prism-Auklaerung" target="_blank" class="">Das zeigt eine aktuelle Umfrage.</a></p>
+      <p>
+        <strong>Merkel wird von Amerikaner vorgeführt</strong>
+        <br />
+      </p>
+      <p>Hier also öffnet sich kurz vor der Bundestagswahl eine Flanke, in die Merkels Herausforderer hineinstoßen könnte. <a href="http://www.zeit.de/politik/deutschland/2013-07/peer-steinbrueck-reaktion" target="_blank" class="">Peer Steinbrück sollte verlangen</a>, dass die Kanzlerin mehr Entschlossenheit in der Causa <entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity> beweist. Die Bürger sind darüber empört, dass ihre Daten von ausländischen Geheimdiensten ausgespäht werden. Warum kann sich Merkel nicht auch einmal öffentlich empören? Fürchtet sie etwa, die Amerikaner zu verärgern? Das sollte sie nicht, denn die führen die Kanzlerin gerade öffentlich vor.</p>
+      <p><a href="http://www.zeit.de/digital/datenschutz/2013-07/nsa-chef-prism" target="_blank" class="">NSA-Geheimdienstchef Keith Alexander hat keine Angst</a>, die Bundesregierung in der Öffentlichkeit zu blamieren. Ja, klar gebe es den Wunsch nach Aufklärung aus Deutschland. Aber: "Wir sagen ihnen nicht alles, was wir machen oder wie wir es machen", antwortet der US-General. </p>
+      <p>Warum also verschärft die Kanzlerin ihre Rhetorik nicht? Warum erhöht sie nicht den Druck auf die USA? Es gibt eine mögliche Antwort darauf. Sollte sich herausstellen, dass Merkel und <a href="http://www.zeit.de/politik/2013-07/nsa-prism-bnd-afghanistan" target="_blank" class="">die deutschen Behörden informiert waren</a> über die Ausspäh-Praxis und diese geduldet oder gar gefördert haben, könnten rechtliche Konsequenzen drohen. Schließlich ist das Ausspähen von Daten eine Straftat, und die Beihilfe dazu auch. Der Generalbundesanwalt in <entity idref="Karlsruhe" entity_type="Location" url_value="orte/karlsruhe">Karlsruhe</entity> sammelt bereits Beweise.<br /></p>
+      <p>Vielleicht hat die Kanzlerin deshalb an diesem Freitag erneut betont, sie habe von Prism erst aus der Presse erfahren. Dies aber erscheint immer unglaubwürdiger. Denn die deutschen Sicherheitsbehörden haben geheimdienstliche Erkenntnisse der USA genutzt, die mithilfe dieser womöglich in Deutschland illegalen Technik erworben worden sind. Und sie sollen rein gar nichts darüber gewusst haben?</p>
+      <p>Es würde der Kanzlerin so passen, wenn keiner mehr über die Sache spricht. Diesen Gefallen aber sollte man ihr nicht tun.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Die Kanzlerin stiehlt sich aus der Verantwortung</title>
+    <supertitle>NSA-Affäre</supertitle>
+    <text>Ich warte lieber ab, sagt Angela Merkel, und bleibt in der NSA-Affäre demonstrativ passiv. Sie hat Angst vor weiteren Enthüllungen, kommentiert Zacharias Zacharakis.</text>
+  </teaser>
+</article>

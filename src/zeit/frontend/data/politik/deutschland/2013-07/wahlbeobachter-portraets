@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Elisabeth_Gamperl/index" publication-date="" expires="">
+      <display_name py:pytype="str">Elisabeth Gamperl</display_name>
+    </author>
+    <image align="left" title="Amir Tehrani" base-id="http://xml.zeit.de/politik/deutschland/2013-07/wahl-amir-tehrani/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Amir Tehrani</bu>
+      <copyright py:pytype="str">© Andreas Prost</copyright>
+    </image>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-08/yougov-umfrage-bundestagswahl" year="2013" issue="34" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">YouGov-Umfrage</supertitle>
+        <title py:pytype="str">Die meisten Wähler haben sich schon entschieden</title>
+        <text py:pytype="str">Kaum Wahlfrust vor der Bundestagswahl: Das Lager der Nichtwähler wächst nicht und bleibt klein, zeigt eine ZEIT-ONLINE-Umfrage. Fast 70 Prozent wollen wählen gehen.</text>
+        <description py:pytype="str">Kaum Wahlfrust vor der Bundestagswahl: Das Lager der Nichtwähler wächst nicht und bleibt klein, zeigt eine ZEIT-ONLINE-Umfrage. Fast 70 Prozent wollen wählen gehen.</description>
+        <byline xsi:nil="true" />
+        <image alt="Ein Mitarbeiter der Stadt Hannover blickt in eine Wahlurne für die bevorstehende Bundestagswahl" align="left" title="Bundestagswahl Wahlurne" base-id="http://xml.zeit.de/politik/deutschland/2013-08/bundestagswahl-wahlurne/" type="jpg" publication-date="" expires="2013-11-15T12:51:43+00:00">
+          <bu py:pytype="str">Ein Mitarbeiter der Stadt Hannover blickt in eine Wahlurne für die bevorstehende Bundestagswahl</bu>
+          <copyright py:pytype="str">© Jochen Lübke/dpa </copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-06/nichtwaehler-umfrage" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Umfrage</supertitle>
+        <title py:pytype="str">Nichtwähler fühlen sich nicht unpolitisch</title>
+        <text py:pytype="str">Wer nicht wählt, muss nicht unbedingt politikverdrossen sein: Einer Umfrage zufolge verweigern sich viele Nichtwähler nur zeitweise, Wahlen finden sie wichtig.</text>
+        <description py:pytype="str">Wer nicht wählt, muss nicht unbedingt politikverdrossen sein: Einer Umfrage zufolge verweigern sich viele Nichtwähler nur zeitweise, Wahlen finden sie wichtig.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-06/wahlen/" type="jpg" publication-date="" expires="">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© Johannes Eisele/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/reportage-auslaenderbehoerde-3geschichten" year="2013" issue="29" ressort="Gesellschaft" author="Elisabeth Gamperl" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Immigration</supertitle>
+        <title py:pytype="str">Im Wartezimmer für Deutschland</title>
+        <text py:pytype="str">Rauchen, warten, hoffen: Tausend Menschen sprechen täglich in der Berliner Ausländerbehörde vor, um in Deutschland bleiben zu dürfen. Drei Schicksale.</text>
+        <description py:pytype="str">Rauchen, warten, hoffen: Tausend Menschen sprechen täglich in der Berliner Ausländerbehörde vor, um in Deutschland bleiben zu dürfen. Drei Schicksale.</description>
+        <byline xsi:nil="true" />
+        <image alt="Eine Frau zieht eine Wartemarke in Deutschlands größter Ausländerbehörde in Berlin-Moabit" align="left" title="Ausländerbehörde Berlin-Moabit" base-id="http://xml.zeit.de/politik/deutschland/2013-08/auslaenderbehoerde-3/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Eine Frau zieht eine Wartemarke in Deutschlands größter Ausländerbehörde in Berlin-Moabit</bu>
+          <copyright py:pytype="str">© Andreas Rentz/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Gamperl</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-09-02T13:52:29.517901+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-08-16T17:56:22.815398+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-09-02T15:31:29.434408+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-08-21T07:38:06.560318+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-08-21T07:37:52.365869+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">af3dc971fa864637936d17677d7da6f5</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Die Wahlbeobachter</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6696</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:185fbcf6-03ad-4254-bd45-9b680973118a}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="peer-steinbrueck" uuid="77c20c36-4377-478d-a59d-f1cd6452f563" score="8" type="Person">Peer Steinbrück</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="7" type="Organization">CDU</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="7" type="Organization">SPD</tag><tag url_value="auslaender" uuid="9104ed49-bd5e-40e0-97a9-867d009bfe09" score="5" type="topic">Ausländer</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="4" type="free">Bundestagswahl</tag><tag url_value="schueler" uuid="d011d0ee-30ce-435c-a297-65f1604761a0" score="4" type="free">Schüler</tag><tag url_value="staatsbuergerschaft" uuid="4dbc41cf-66ed-46b4-82ea-5dc29a671663" score="4" type="free">Staatsbürgerschaft</tag><tag url_value="wahlrecht" uuid="d6d53789-5457-4fe0-bc13-3e06f6e846a3" score="4" type="free">Wahlrecht</tag><tag url_value="iran" uuid="6bbaa15b-4386-4950-be14-3c16e97fcfc1" score="3" type="Location">Iran</tag><tag url_value="spanien" uuid="a0373825-91d1-4a7a-9588-f1879618b404" score="3" type="Location">Spanien</tag><tag url_value="tuerkei" uuid="d6f4b59d-a5e4-45ef-90ae-2e4bed7b5a06" score="3" type="Location">Türkei</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag><tag url_value="europa" uuid="1c8b0c32-1a49-4370-9818-7af636e4b30b" score="1" type="Location">Europa</tag></rankedTags></head><body>
+    <supertitle>Serie Wahlbeobachter</supertitle>
+    <title>Ihre Stimme zählt nicht </title>
+    <subtitle>Sie leben in Deutschland, dürfen aber nicht wählen. Sie sind zu jung oder laut Pass Ausländer. ZEIT ONLINE gibt Nichtwählern im Wahlkampf eine Stimme. Vier Porträts</subtitle>
+    <division type="page">
+      <image align="left" type="jpg" publication-date="" expires="" layout="large" is_empty="True">
+        <bu py:pytype="str" />
+        <copyright py:pytype="str">© Andreas Prost</copyright>
+      </image>
+      <p>Eine Schülerin, eine spanische Journalistin, ein Unternehmer mit Flüchtlingspass und ein Kioskbesitzer aus der <entity idref="T%C3%BCrkei" entity_type="Location" url_value="orte/tuerkei">Türkei</entity>: Vier Menschen, die in Deutschland leben, aber bei der Bundestagswahl am 22. September nicht abstimmen dürfen. Um ihre Stimmen kämpft keine Partei. Weil sie zu jung sind oder keinen deutschen Pass haben. ZEIT ONLINE befragt in der neuen Serie Wahlbeobachter regelmäßig Menschen, die von der Bundespolitik ausgeschlossen sind, wie sie über den laufenden Wahlkampf denken.<br /></p>
+      <intertitle>Bülent Kilic, 34 Jahre, Kioskbesitzer<br /></intertitle>
+      <image align="left" title="Bülent Kilic" src="http://xml.zeit.de/politik/deutschland/2013-08/wahlbeobachter-kilic/wahlbeobachter-kilic-540x304.jpg" type="jpg" publication-date="2013-08-29T10:22:12+00:00" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str" />
+        <copyright py:pytype="str">© Andreas Prost</copyright>
+      </image>
+      <p>Bülent Kilic lebt schon seit fast einem Jahrzehnt in
+Deutschland, zahlt hier seine Steuern und schafft als Unternehmer eines Kiosks
+in Berlin-Neukölln Arbeitsplätze. Über die Verwendung der Steuern darf er
+trotzdem nicht entscheiden. "Hätte ich keinen ausländischen Pass, würde ich
+wählen, denn dort, wo ich lebe und arbeite, möchte ich auch etwas zu sagen
+haben", sagt der 34-Jährige.</p>
+      <p>Kilic ist in der Türkei geboren und hat dort Volkswirtschaftslehre
+studiert. 2004 zog es ihn in die Bundesrepublik, weil er in einem
+innovativen, freien Land leben wollte, wie er sagt. Er wollte hier ein Masterstudium beginnen. Da sein Grundstudium nicht angerechnet wurde, begann er nochmal von vorne. Ausländer lebten in diesem Land ständig unter Druck, sagt er: "Was passiert, wenn ich mich scheiden lasse oder krank werde? Mir bereitet das Kopfzerbrechen."  <br /></p>
+      <p>Von der Politik wünscht er sich ein neues Aufenthaltsgesetz und Wahlrecht auch für Ausländer. "Es
+sollte möglich sein, nach zehn Jahren in Deutschland hier auch wählen zu dürfen."
+
+</p>
+      <p>Politik ist für Kilic ein ständiger "Ausgleich zwischen den Kräften". Er würde Peer Steinbrück wählen, da nach einer
+konservativen eine sozialdemokratische Legislaturperiode sinnvoll sei: "Wir
+haben lange gespart, jetzt kommen wieder die Menschen dran." Außerdem ist Steinbrück Finanzexperte. So jemand wie er wisse also, wie mit einer Finanzkrise umzugehen sei.</p>
+      <p>Was
+würde er Bundeskanzlerin Merkel fragen, wenn er mit ihr sprechen dürfte? "Viele Menschen mit
+Migrationshintergrund wählen die <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity>, nicht die <entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity>. Mich würde interessieren,
+wie sie sich das erklärt."   <br /></p>
+      <intertitle>María Prieto-Vázquez, 28 Jahre, Journalistin </intertitle>
+      <image align="left" title="Maria Prieto Vázquez" src="http://xml.zeit.de/politik/deutschland/2013-08/wahlbeobachter-vazquez/wahlbeobachter-vazquez-540x304.jpg" type="jpg" publication-date="2013-08-29T10:28:00+00:00" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str" />
+        <copyright py:pytype="str">© Andreas Prost</copyright>
+      </image>
+      <p>Wahlbeobachtung ist der Job der Spanierin María
+Prieto-Vázquez. Als Journalistin berichtet sie seit drei Jahren für einen
+spanischen Privatradiosender über deutsche Politik, also hauptsächlich über
+"Frau Merkel", wie die 28-Jährige sie nennt.  <br /></p>
+      <p>"Manchmal habe ich das Gefühl, dass die Bundestagswahl für
+die Spanier wichtiger ist als für die Deutschen", sagt Prieto-Vázquez, die
+in <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity> lebt. <entity idref="Spanien" entity_type="Location" url_value="orte/spanien">Spanien</entity> stehe, so wie der Rest <entity idref="Europa" entity_type="Location" url_value="orte/europa">Europas</entity>, still, im Stand-by-Modus, und warte gespannt auf das Ergebnis der Wahl in Berlin. Obwohl sich laut Prieto-Vázquez jeder Spanier einen Machtwechsel
+wünscht, kennt niemand den Gegenkandidaten Peer Steinbrück. "Es ist auch nicht leicht, einen Unterschied zwischen
+Merkels CDU und der SPD zu erkennen." Das wäre auch ihre Frage an Steinbrück:
+Warum spielt die Sozialdemokratie in Deutschland und Europa keine Rolle?</p>
+      <p>Was würde sie Merkel sagen, wenn sie die Möglichkeit hätte, mit ihr zu sprechen?
+"Sie spricht immer von Wettbewerbsfähigkeit. Aber das ist für uns mit weniger Gehalt
+und Rechten für die Mitarbeiter verbunden." Merkel ist bei ihren Landsleuten sehr unbeliebt, sie selbst mag die Bundeskanzlerin. Sie sei sehr nett und hätte
+Charisma.  <br /></p>
+      <p>Und Steinbrück? "Er sieht den Menschen nicht in die Augen. Er ist
+vielleicht ein guter Politiker, aber keine Führungsperson." Würde die
+Spanierin Merkel am 22.September auch wählen? "Eigentlich nicht. Sie kann
+ein Land zwar führen, aber politisch bin ich eher links und bin für
+Gleichberechtigung und pro Homo-Ehe."</p>
+    </division>
+    <division type="page" teaser="Schülerin Charlotte Bartels und Unternehmer Amir Tehrani">
+      <intertitle>Charlotte Bartels, 17 Jahre, Schülerin</intertitle>
+      <image alt="Charlotte Bartels" align="left" title="Charlotte Bartels" src="http://xml.zeit.de/politik/deutschland/2013-08/wahlbeobachter-bartels/wahlbeobachter-bartels-540x304.jpg" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str" />
+        <copyright py:pytype="str">© Andreas Prost</copyright>
+      </image>
+      <p>Sie ist wohl die Einzige, die in der Runde der ZEIT-ONLINE-Wahlbeobachter froh ist, nicht wählen zu können. Charlotte Bartels ist
+eine 17-jährige Schülerin aus Berlin-Buch. Sie wird erst in einem Jahr
+18 Jahre alt. Zum
+Glück, sagt die Einserschülerin, denn: "Es ist für mich schwierig, einen
+Politiker zu finden, der das Programm durchzieht, was er sich vornimmt. Ich
+würde mich deshalb mit einer Entscheidung noch überfordert fühlen."</p>
+      <p>Bartels macht nächstes Jahr Abitur, ist Chefredakteurin der
+Onlineschülerzeitung, engagiert sich ehrenamtlich bei einem Kinder- und Jugendverein
+und hat in diesem Jahr zum zweiten Mal den Berliner Debattierwettbewerb für Schüler gewonnen. Wahrscheinlich wird sie Politik studieren, ganz sicher ist sie sich aber noch nicht. Mit den beiden Spitzenkandidaten würde sie über Bildung sprechen. <br /></p>
+      <p>Am 22. September wird sie mit ihren Eltern und ihrem großen
+Bruder die Berichterstattung verfolgen. Wen würde sie wählen, wenn sie könnte?
+"Das kann ich nicht sagen. Ich würde mich aber nicht von Sympathien leiten
+lassen. Es geht hier um Kompetenz."  </p>
+      <intertitle>Amir Tehrani, 32 Jahre, Unternehmensberater</intertitle>
+      <image align="left" title="Amir Tehrani" src="http://xml.zeit.de/politik/deutschland/2013-07/wahl-amir-tehrani/wahl-amir-tehrani-540x304.jpg" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str" />
+        <copyright py:pytype="str">© Andreas Prost</copyright>
+      </image>
+      <p>Amir Tehrani ist unglücklich, dass er nur zuschauen darf bei der deutschen Politik. Vor fast drei Jahrzehnten, als Sechsjähriger, ist
+der gebürtige Iraner alleine in einem Münchner Flüchtlingsheim gestrandet,
+seitdem lebt er mit blauem Flüchtlingspass in der Bundesrepublik. Da ihm
+der <entity idref="Iran" entity_type="Location" url_value="orte/iran">Iran</entity>, wie es im Fachjargon heißt, die Entlassung der Staatsbürgerschaft verweigert, kann der
+32-Jährige nicht eingebürgert werden. Alle sechs Monate muss er deswegen
+seinen Ausweis bei der Berliner Ausländerbehörde verlängern lassen.  <br /></p>
+      <p>"Die doppelte Staatsbürgerschaft würde mit einem Schlag eine
+Vielzahl meiner Probleme lösen, aber seit Schwarz-Gelb regiert, bedeutet
+Politik Stillstand", sagt Tehrani, der als selbstständiger Unternehmensberater
+zwölf Mitarbeiter beschäftigt.</p>
+      <p>Laut Tehrani haben die deutschen Politiker keinen Bezug zur Realität der in Deutschland lebenden Bürger: "Sie haben keine Ahnung von den Problemen in diesem Land. Außerdem wissen sie nicht, wie es Menschen mit Migrationshintergrund geht." Diese Ignoranz der Politiker ist seiner Meinung nach auch der Grund, warum sich immer mehr Deutsche von der Politik abwenden. Ein Fehler, findet Tehrani. "Die Deutschen sollten mehr meckern und sich mehr über Politik informieren. Viele haben vergessen, wie wichtig die Wahl für die Demokratie ist."<br />Tehrani würde Kanzlerkandidat Peer Steinbrück wählen, denn "das würden wir im
+täglichen Leben und in der Geldbörse spüren." Und was würde er Steinbrück in einem persönlichen Gespräch sagen? "Er muss rhetorisch an sich arbeiten, weniger Fremdwörter benutzen. Denn sonst versteht ihn niemand."</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Serie Wahlbeobachter</supertitle>
+    <title>Ihre Stimme zählt nicht</title>
+    <text>Sie leben in Deutschland, dürfen aber nicht wählen. Sie sind zu jung oder haben keinen deutschen Pass. ZEIT ONLINE gibt ihnen im Wahlkampf eine Stimme. Vier Porträts</text>
+  </teaser>
+</article>

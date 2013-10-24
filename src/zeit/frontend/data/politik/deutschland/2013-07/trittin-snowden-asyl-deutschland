@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image alt="Der Vorsitzende der Bundestagsfraktion Bündnis 90/Die Grünen, Jürgen Trittin" align="left" title="Juergen Trittin" base-id="http://xml.zeit.de/politik/ausland/2013-07/juergen-trittin/" type="jpg" publication-date="" expires="2013-10-01T07:48:02+00:00">
+      <bu py:pytype="str">Der Vorsitzende der Bundestagsfraktion Bündnis 90/Die Grünen, Jürgen Trittin</bu>
+      <copyright py:pytype="str">© Peter Steffen/dpa</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/nsa-spionage-usa-eu" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Skandal</supertitle>
+        <title py:pytype="str">USA wollen auf Spionage-Vorwürfe reagieren </title>
+        <text py:pytype="str">Die Empörung über die NSA-Datenspionage ist groß, EU-Kommissarin Reding droht mit wirtschaftlichen Konsequenzen. US-Geheimdienst-Chef Clapper verspricht nun Aufklärung.</text>
+        <description py:pytype="str">Die Empörung über die NSA-Datenspionage ist groß, EU-Kommissarin Reding droht mit wirtschaftlichen Konsequenzen. US-Geheimdienst-Chef Clapper verspricht nun Aufklärung.</description>
+        <byline xsi:nil="true" />
+        <image alt="Das Hauptquartier der National Security Agency (NSA) in Fort Meade, Maryland" align="left" title="NSA Headquarter" base-id="http://xml.zeit.de/digital/datenschutz/2013-07/nsa-headquarter/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Das Hauptquartier der National Security Agency (NSA) in Fort Meade, Maryland
+</bu>
+          <copyright py:pytype="str">© NSA/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/2013-06/snowden-russland-ecuador-fluechtling" year="2013" issue="23" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Geheimnisverrat</supertitle>
+        <title py:pytype="str">Wie kann Snowden nach Ecuador geschleust werden?</title>
+        <text py:pytype="str">Edward Snowden harrt am Moskauer Flughafen aus. Angeblich will der flüchtige Whistleblower nach Ecuador. Das Land verhandelt nun mit Russland darüber, wie das gehen soll.</text>
+        <description py:pytype="str">Edward Snowden harrt am Moskauer Flughafen aus. Angeblich will der flüchtige Whistleblower nach Ecuador. Das Land verhandelt nun mit Russland darüber, wie das gehen soll.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Edward Snowden" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-06/edward-snowden-5/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Edward Snowden in den Moskauer Nachrichten</bu>
+          <copyright py:pytype="str">© Tatyana Makeyeva/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-06/usa-spionage-eu" year="2013" issue="23" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Spionage</supertitle>
+        <title py:pytype="str">USA sollen EU-Gebäude verwanzt haben</title>
+        <text py:pytype="str">Der Geheimdienst NSA hat schon vor Jahren den Lauschangriff auf die Europäische Union gestartet. In Washington, New York und Brüssel hörten und lasen die Amerikaner mit.</text>
+        <description py:pytype="str">Der Geheimdienst NSA hat schon vor Jahren den Lauschangriff auf die Europäische Union gestartet. In Washington, New York und Brüssel hörten und lasen die Amerikaner mit.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="ohr-usa" base-id="http://xml.zeit.de/digital/datenschutz/2013-06/ohr-usa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Mitglieder der Internet-Partei der Ukraine demonstrieren in Kiew gegen die USA.</bu>
+          <copyright py:pytype="str">©Gleb Garanich/Reuters</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Reuters, dpa, fz</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-01T09:54:09.673634+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-01T08:08:51.256835+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-01T09:55:11.722175+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-01T08:07:57.453980+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-01T08:07:32.797625+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoehler</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">3cc4e2fc78ef4442b4c32670748ad3f6</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">1780</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b5e68051-cdb0-460d-b10c-a9662ad15112}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="9" type="Person">Edward Snowden</tag><tag url_value="juergen-trittin" uuid="815e08c0-6003-430c-8c48-151d48c2863c" score="9" type="Person">Jürgen Trittin</tag><tag url_value="europaeische-union" uuid="f7f8e748-cc2e-40b0-b065-267e6113e8a2" score="7" type="Organization">Europäische Union</tag><tag url_value="ard" uuid="370eebc8-820a-4ccb-b362-838b2a91fe78" score="6" type="Organization">ARD</tag><tag url_value="asyl" uuid="1f68751d-9938-4737-b150-95c265cf00f7" score="6" type="free">Asyl</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="6" type="Organization">Grüne</tag><tag url_value="linkspartei" uuid="76c8dbd6-be59-44d6-bf43-ec9f739babd7" score="6" type="Organization">Die Linke</tag><tag url_value="demokratie" uuid="8c448de3-8460-4946-9cd0-438b66377a96" score="4" type="free">Demokratie</tag><tag url_value="flughafen" uuid="f586b9ff-ed24-465d-9b16-fd432904d270" score="4" type="free">Flughafen</tag><tag url_value="freihandel" uuid="6e240b05-f72e-4044-a8e5-fbb662af1156" score="4" type="free">Freihandel</tag><tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag><tag url_value="landtag" uuid="ec77c6e8-1785-435f-8eb0-1bdb47dc7fcc" score="4" type="free">Landtag</tag><tag url_value="prozess" uuid="147b3c52-b8d8-41a2-8e3d-7fe2409719bb" score="3" type="free">Prozess</tag><tag url_value="russland" uuid="7e0c9cb6-51c6-46a3-85d3-fd5ff5bf5726" score="3" type="Location">Russland</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag><tag url_value="unternehmen" uuid="c6003980-ac2a-4a34-98a2-cc999e0c03d0" score="3" type="free">Unternehmen</tag><tag url_value="europa" uuid="1c8b0c32-1a49-4370-9818-7af636e4b30b" score="1" type="Location">Europa</tag><tag url_value="moskau" uuid="68918ea8-dfaa-4acd-8078-6bd1c66d32f7" score="1" type="Location">Moskau</tag></rankedTags></head><body>
+    <supertitle>Abhörskandal</supertitle>
+    <title>Trittin fordert Asyl für Snowden in Deutschland</title>
+    <subtitle>Jürgen Trittin findet es peinlich für die Demokratie, dass Edward Snowden sich in Russland verstecken muss. Deutschland und die EU sollten ihm Unterschlupf gewähren.</subtitle>
+    <division type="page">
+      <image alt="Der Vorsitzende der Bundestagsfraktion Bündnis 90/Die Grünen, Jürgen Trittin" align="left" title="Juergen Trittin" base-id="http://xml.zeit.de/politik/ausland/2013-07/juergen-trittin/" type="jpg" publication-date="" expires="2013-10-01T07:48:02+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Der Vorsitzende der Bundestagsfraktion Bündnis 90/Die Grünen, Jürgen Trittin</bu>
+        <copyright py:pytype="str">© Peter Steffen/dpa</copyright>
+      </image>
+      <p>Der Fraktionschef der <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grünen</entity>, <a href="http://www.zeit.de/schlagworte/personen/juergen-trittin/index" target="_blank" class="">Jürgen Trittin</a>, hat Asyl für <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2013-06/snowden-flucht-russland-ecuador" target="_blank" class="">Edward Snowden</a> in der <entity idref="EU" entity_type="Organization" url_value="organisationen/eu">EU</entity> und damit auch in Deutschland gefordert. "Der sollte hier in <entity idref="Europa" entity_type="Location" url_value="orte/europa">Europa</entity> eine entsprechende sichere Unterkunft haben, denn er hat Europa einen Dienst erwiesen, indem er einen massiven Angriff auf den europäischen Bürger und Unternehmen offenbart hat", sagte <entity idref="J%C3%BCrgen+Trittin" entity_type="Person" url_value="personen/juergen-trittin">Trittin</entity> im <a href="http://www.daserste.de/information/politik-weltgeschehen/morgenmagazin/berichte-und-interviews/trittin-zu-nsa-abhoerskandal-100.html" target="_blank" class=""><em>ARD</em>-<em>Morgenmagazin</em></a>.</p>
+      <p>Es sei für die Demokratien peinlich, "dass so jemand, der sich um die Demokratie ja verdient gemacht hat, bei Despoten Unterschlupf finden muss".    <br /></p>
+      <p><entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Snowden</entity> hält sich russischen Angaben zufolge weiter auf dem 
+internationalen Flughafen in <entity idref="Moskau" entity_type="Location" url_value="orte/moskau">Moskau</entity> auf. In den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> soll dem 
+30-Jährigen, der umfangreiche Spionageaktionen <a href="http://www.zeit.de/digital/datenschutz/2013-06/usa-spionage-eu" target="_blank" class="">amerikanischer und britischer Geheimdienste enthüllte</a>, wegen Geheimnisverrats der Prozess gemacht werden.</p>
+      <intertitle>Piraten fordern Verdienstorden<br /></intertitle>
+      <p>Außerdem sprach sich Trittin dafür aus, angesichts der Abhörskandale, 
+die existierenden Abkommen mit den USA über den Austausch von Bankdaten 
+sowie von Fluggastdaten seitens der Europäischen Union aufzukündigen. 
+Auch <a href="http://www.zeit.de/wirtschaft/2013-06/usa-eu-freihandelszone-verhandlungen" target="_blank" class="">über Freihandel</a>
+ werde man nur sprechen können, wenn klar sei, dass die Regeln 
+eingehalten würden. So müsse das Betriebsgeheimnis gewahrt werden und 
+dürfe nicht ausspioniert werden. "Die Amerikaner führen sich genauso 
+auf, wie sie es den Chinesen vorwerfen", sagte Trittin.</p>
+      <p>Auch die <entity idref="Linke" entity_type="Organization" url_value="organisationen/linke">Linke</entity> hatte bereits vergangene Woche Asyl für Snowden in Deutschland verlangt. Die Piraten-Fraktion im nordrhein-westfälischen Landtag hat den ehemaligen Geheimdienstmitarbeiter sogar für den Verdienstorden der Bundesrepublik vorgeschlagen. Damit solle dessen "Opferbereitschaft und seine Verdienste für die Menschen" gewürdigt werden, sagte der Piraten-Landtagsfraktionschef Joachim Paul.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Trittin fordert Asyl für Snowden in Deutschland</title>
+    <supertitle>Abhörskandal</supertitle>
+    <text>Jürgen Trittin findet es peinlich für die Demokratie, dass Edward Snowden sich in Russland verstecken muss. Deutschland und die EU sollten ihm Unterschlupf gewähren.</text>
+  </teaser>
+</article>

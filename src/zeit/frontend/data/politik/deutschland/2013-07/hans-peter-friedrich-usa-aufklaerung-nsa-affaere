@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <keywordset>
+      <keyword source="manual">NSA</keyword>
+      <keyword source="manual">Daten</keyword>
+      <keyword source="manual">Geheimdienste</keyword>
+    </keywordset>
+    <rankedTags>
+      <tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="9" type="Location">USA</tag>
+      <tag url_value="hans-peter-friedrich" uuid="e4598182-697a-41c1-90b8-5d2124605cd3" score="4" type="Person">Hans-Peter Friedrich</tag>
+      <tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="6" type="Organization">Bundesregierung</tag>
+      <tag url_value="ueberwachung" uuid="f1ce9830-354e-472f-b794-60d7a0f7e8a0" score="4" type="free">Überwachung</tag>
+      <tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag>
+      <tag url_value="verfassung" uuid="30e52aaf-093d-46ee-918b-e21ca1a0749e" score="4" type="free">Verfassung</tag>
+      <tag url_value="aufklaerung" uuid="31251156-898e-4f78-a66f-b4bfbd21149d" score="4" type="free">Aufklärung</tag>
+      <tag url_value="jimmy-carter" uuid="8cf125a7-ce3b-46a3-9638-4b6a9254c228" score="6" type="Person">Jimmy Carter</tag>
+      <tag url_value="auslaender" uuid="9104ed49-bd5e-40e0-97a9-867d009bfe09" score="5" type="topic">Ausländer</tag>
+      <tag url_value="amtseid" uuid="4eed60e2-c674-4af3-9386-0e59db420fe4" score="4" type="free">Amtseid</tag>
+      <tag url_value="bundeskanzler" uuid="947c300f-7ea5-4f2f-a91e-672a08d42c17" score="4" type="free">Bundeskanzler</tag>
+      <tag url_value="daniel-ellsberg" uuid="52680b32-ddbf-4a78-8147-a4020a427759" score="4" type="Person">Daniel Ellsberg</tag>
+      <tag url_value="grundrecht" uuid="194b00f6-8af9-4c59-8196-15cc135bc1a0" score="4" type="free">Grundrecht</tag>
+      <tag url_value="us-praesident" uuid="0714e716-b140-40a2-bb8e-eb4c26113090" score="4" type="free">US-Präsident</tag>
+      <tag url_value="oder" uuid="352c7f41-226e-45ce-806f-fc16309eec81" score="1" type="Location">Oder</tag>
+      <tag url_value="washington-d.c." uuid="9d19417d-2077-4125-b802-811fc6e8b7e9" score="1" type="Location">Washington D.C.</tag>
+    </rankedTags>
+    <author href="http://xml.zeit.de/autoren/C/Stephan-Andreas_Casdorff" publication-date="" expires="">
+      <display_name py:pytype="str">Stephan-Andreas Casdorff</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/friedirch-usa-reise-nsa" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">NSA-Skandal</supertitle>
+        <title py:pytype="str">Friedrich kündigt deutliche Worte gegenüber US-Regierung an</title>
+        <text py:pytype="str">Der Bundesinnenminister will in den USA Aufklärung über den NSA-Skandal bekommen und seinen Unmut deutlich machen. Zugleich verteidigt Friedrich die US-Regierung.</text>
+        <description py:pytype="str">Der Bundesinnenminister will in den USA Aufklärung über den NSA-Skandal bekommen und seinen Unmut deutlich machen. Zugleich verteidigt Friedrich die US-Regierung.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/friedrich-nsa-2/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Bundesinnenminister Hans-Peter Friedrich (CSU)</bu>
+          <copyright py:pytype="str">© Johannes Eisele/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/29/zeitgeist-nsa-abhoeraffaere" year="2013" issue="29" ressort="Politik" author="Josef Joffe" contenttype="article" publication-date="2013-07-11T08:00:21+00:00" expires="">
+        <supertitle py:pytype="str">Zeitgeist</supertitle>
+        <title py:pytype="str">Die Heuchelei der NSA-Ankläger</title>
+        <text py:pytype="str">NSA, Bundesnachrichtendienst, DGSE – alle Geheimdienste hören mit und jeder profitiert vom anderen. Das ist ganz gut so. Ein Kommentar</text>
+        <description py:pytype="str">NSA, Bundesnachrichtendienst, DGSE – alle Geheimdienste hören mit und jeder profitiert vom anderen. Das ist ganz gut so. Ein Kommentar</description>
+        <byline py:pytype="str">von Josef Joffe</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2013-07/nsa-berlin/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Ehemalige NSA-Abhörstation auf dem Teufelsberg in Berlin. Von dort belauschte der US-Geheimdienst früher den Warschauer Pakt</bu>
+          <copyright py:pytype="str">© Reuters/Pawel Kopczynski</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/themen/politik/nsa-abhoerskandal/index" year="2013" issue="28" ressort="Politik" contenttype="centerpage-2009" publication-date="" expires="">
+        <supertitle py:pytype="str">Alles zum Thema</supertitle>
+        <title py:pytype="str">Snowden und der NSA-Abhörskandal</title>
+        <text py:pytype="str">Welche Folgen hat der NSA-Abhörskandal? Was wird aus dem Ex-Geheimdienstmitarbeiter und Whistleblower Edward Snowden? Lesen Sie hier die wichtigsten Artikel zu dem Thema.</text>
+        <description py:pytype="str">Welche Folgen hat der NSA-Abhörskandal? Was wird aus dem Ex-Geheimdienstmitarbeiter und Whistleblower Edward Snowden? Lesen Sie hier die wichtigsten Artikel zu dem Thema.</description>
+        <byline xsi:nil="true"/>
+        <image align="left" base-id="http://xml.zeit.de/politik/2013-07/nsa-themen-teaser/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Around 50 activists protest infront of the German Chancellory in solidarity with Whistle-blower Edward Snowden and his seek for asyl in various countries such as Germany, on July 4, 2013.</bu>
+          <copyright py:pytype="str">© David von Blohn/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/2013-07/hans-peter-friedrich/" type="jpg" publication-date="" expires="2013-10-12T07:31:12+00:00">
+      <bu py:pytype="str">Bundesinnenminister Hans-Peter Friedrich</bu>
+      <copyright py:pytype="str">© Daniel Karmann/dpa</copyright>
+    </image>
+    <badges>
+      <badge>video</badge>
+    </badges>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Stephan-Andreas Casdorff</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-15T08:30:05.272647+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-10T22:00:00.000000+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-17T14:17:58.093323+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-12T10:05:42.949163+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_bu">Überwachungsanlage.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/antennen2_dpa/8457628/2-formatOriginal.jpg?format=formatOriginal</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-12T10:02:42.045569+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.horeld</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">TGS</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">84d8aec9d7ee4152a2bb359e6b32acca</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3258</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:2042275f-07d7-4445-8f74-544ecd5d3e45}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  </head>
+  <body>
+    <supertitle>NSA-Affäre</supertitle>
+    <title>Deutschland ist kein US-Vasall</title>
+    <subtitle>Der Innenminister ist in den USA, zur Aufklärung der NSA-Überwachung wird das nicht viel beitragen. Ein solcher Freundschaftsbesuch ist empörend, kommentiert S. Casdorff.</subtitle>
+    <byline>Stephan-Andreas Casdorff</byline>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/2013-07/hans-peter-friedrich/" type="jpg" publication-date="" expires="2013-10-12T07:31:12+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Bundesinnenminister Hans-Peter Friedrich</bu>
+        <copyright py:pytype="str">© Daniel Karmann/dpa</copyright>
+      </image>
+      <p>So, nun ist Hans-Peter Friedrich in den USA, um sich das abzuholen, was die dortige Administration Aufklärung nennt. Und abgesehen davon, dass nur schon das Wort doppeldeutig klingt: Anderes als das, was Amerikas Geheimdienste herausgeben wollen, wird er nicht bekommen, der Bundesminister – also wenig bis nichts.</p>
+      <p> Ist doch klar: Unrechtsbewusstsein ist in Washington nicht vorhanden, im Gegenteil, bis hin zum Präsidenten fühlen sie sich berechtigt, das Recht anderer Länder zu brechen, wenn es denn der Terrorismusfindung dient. Oder wozu auch immer; denn es werden ja hier alle zu allem abgehört und ausgespäht, und der "Beifang" kann schon noch nützlich sein.</p>
+      <p> Und dennoch gibt es in der Bundesregierung außer der Bundesjustizministerin – die sich dafür sogar anfeinden lassen muss – noch immer keinen anderen, der sich engagiert empört. Oder eine andere. Was wiederum umgekehrt für Demokraten empörend ist!</p>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2013-07/2538305689001" expires="2013-08-09T07:00:00+00:00"/>
+      <p> Darf man in diesem Zusammenhang an den Amtseid erinnern? Schaden vom deutschen Volk abzuwenden, fordert der. Und schade ist, dass den nicht allen voran die Bundeskanzlerin beklagt. Dabei müssen wir, der Souverän, darauf bauen und vertrauen können, dass die freiheitlich-demokratische Grundordnung geschützt wird. Dass also keiner, nennt er sich auch Freund, unsere Grundrechte aushebelt und die Regierung das gleichmütig hinnimmt.</p>
+      <p> Deutschland, diese Bundesrepublik, ist ein souveräner Staat, kein Satellit, kein Vasall. Das haben wir hinter uns, oder? Den USA dankbar zu sein für Unterstützung über viele Jahrzehnte kann nicht bedeuten, millionenfachen Rechtsbruch gutzuheißen. Oder, wie der Autor Eugen Ruge gerade schrieb, nach der Unverschämtheit durch den US-Präsidenten, dass von der Ausspähung ja nur Ausländer betroffen seien, auch noch die Demütigung ertragen zu müssen.</p>
+      <intertitle>Erschreckendes Politikverständnis<br/></intertitle>
+      <p> Mag den Amerikanern die permanente Verletzung ihrer Verfassungszusätze egal sein. Doch es soll niemand verlangen, dass uns unsere Verfassung einerlei zu sein hätte. Erst recht nicht unsere eigene Bundeskanzlerin.</p>
+      <p> Deren jüngste Äußerungen zeigen im Übrigen ein ziemlich erschreckendes Politikverständnis. Die Wahrheit ist aber vielmehr das, was der berühmte Whistleblower Daniel Ellsberg schreibt: "Wir müssen uns vor einer vollkommen außer Kontrolle geratenen Überwachung retten, die alle effektive Macht an die Exekutive und ihre Geheimdienste verschiebt." Und was wissen wir schon, wie Daten, die in die Fänge der NSA-Krake geraten, gegen wen verwendet werden? Oder verwendet worden sind.</p>
+      <p> Ach, wenn doch bloß jemand Bundeskanzler wäre, der wie damals Helmut Schmidt US-Präsident Jimmy Carter wegen der Neutronenbombe den Marsch bliese. Schmidt verbat sich barsch die Stationierung einer zynischen Waffe, deren Strahlung alles Leben vernichtet, ohne großen Sachschaden und lang anhaltende radioaktive Verseuchung anzurichten.</p>
+      <p> In der NSA-Affäre muss jetzt dringend auch einer Art Verseuchung Einhalt geboten werden.</p>
+      <p>
+        <a href="http://www.tagesspiegel.de/meinung/hans-peter-friedrich-in-den-usa-in-der-nsa-affaere-droht-deutschland-verseuchungsgefahr/8485008.html" target="_blank" class="">
+          <em>Erschienen im Tagesspiegel</em>
+        </a>
+        <br/>
+      </p>
+    </division>
+  </body>
+  <teaser>
+    <title>Deutschland ist kein US-Vasall</title>
+    <text>Der Innenminister ist in den USA, zur Aufklärung der NSA-Überwachung wird das nicht viel beitragen. Ein solcher Freundschaftsbesuch ist empörend. Ein Kommentar</text>
+    <supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+  </teaser>
+  <indexteaser>
+    <title py:pytype="str">Hans-Peter Friedrich in den USA</title>
+    <text py:pytype="str">Bei der NSA-Affäre droht auch Deutschland Verseuchungsgefahr</text>
+  </indexteaser>
+</article>

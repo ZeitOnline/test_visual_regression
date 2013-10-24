@@ -1,0 +1,72 @@
+.article
+	margin-bottom: $huge
+
+.article__main-image
+	margin-bottom: $medium
+	+respond-min($break-2)
+		margin-bottom: $large
+	img
+		width: 100%
+		display: block
+
+.article__wrap
+
+.article__title-wrap
+
+.article__supertitle
+	@extend %supertitle
+	@extend %font-m
+
+.article__title
+	@extend %headline
+	@extend %font-xxl-xxxl-xxxxl
+	margin-top: $micro
+	margin-bottom: $micro
+
+.article__meta
+	margin-bottom: $medium
+	+respond-max($break-2)
+		font-size: $font-xs
+	+respond-min($break-2)
+		margin-bottom: $large
+
+.article__meta__timestamp
+	@extend %meta
+	letter-spacing: 1px
+	text-transform: uppercase
+
+.article__meta__author
+	+franziska(regular, italic)
+	display: block
+	color: $grey
+	font-size: $font-ml
+	+respond-min($break-1)
+		display: inline
+	&:before
+		content: "— "
+
+.article__subtitle
+	+franziska(semibold)
+	@extend %copy
+	margin-bottom: $small
+
+.article__subheading
+	@extend %subheading
+	@extend %font-l-xl
+
+.article__body
+	@extend %copy
+	+respond-min($break-3)
+		padding-left: $gutter/2
+		padding-right: $gutter/2
+
+.has-headline-switch
+	width: 100%
+	+respond-max($break-3)
+		.article__title-wrap
+			margin-bottom: $medium
+	+respond-minw-minh($break-3, em(800px))
+		display: table
+		.article__title-wrap
+			display: table-footer-group
+		.article__main-image

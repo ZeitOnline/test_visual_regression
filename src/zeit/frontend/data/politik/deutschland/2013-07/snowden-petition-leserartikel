@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/S/Wim_Schwerdtner/index" publication-date="" expires="">
+      <display_name py:pytype="str">Wim Schwerdtner</display_name>
+    </author>
+    <image alt="Bundeskanzlerin Angela Merkel mit abhörsicherem Blackberry" align="left" title="Merkel Telefon Hand" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-telefon-abhoerskandal/" type="jpg" publication-date="" expires="2013-10-15T16:00:10+00:00">
+      <bu py:pytype="str">Bundeskanzlerin Angela Merkel mit abhörsicherem Blackberry auf der CeBIT.</bu>
+      <copyright py:pytype="str">©Julian Stratenschulte/dpa</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/merke-nsa-usa-spaehaffaere-aufklaerung" year="2013" issue="29" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Datenaffäre</supertitle>
+        <title py:pytype="str">Merkel vertröstet NSA-Kritiker</title>
+        <text py:pytype="str">Wen späht die NSA wie in Deutschland aus? Mit wem arbeitet sie zusammen? All diese Fragen will die Regierung aufklären – allerdings nicht jetzt. Die Materie sei komplex.</text>
+        <description py:pytype="str">Wen späht die NSA wie in Deutschland aus? Mit wem arbeitet sie zusammen? All diese Fragen will die Regierung aufklären – allerdings nicht jetzt. Die Materie sei komplex.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Merkel" base-id="http://xml.zeit.de/politik/deutschland/2013-07/Merkel/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Angela Merkel</bu>
+          <copyright py:pytype="str">© Johannes Eisele/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-prism-friedrich-opposition-ausschuss" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Prism-Affäre</supertitle>
+        <title py:pytype="str">Linke und Grüne wollen NSA-Untersuchungsausschuss</title>
+        <text py:pytype="str">Die US-Reise des Innenministers ist für die Opposition ein Flop, die Kooperation von NSA und BND fragwürdig. Nun verlangen Linke und Grüne einen Untersuchungsausschuss.</text>
+        <description py:pytype="str">Die US-Reise des Innenministers ist für die Opposition ein Flop, die Kooperation von NSA und BND fragwürdig. Nun verlangen Linke und Grüne einen Untersuchungsausschuss.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="NSA" base-id="http://xml.zeit.de/politik/ausland/2013-07/nsa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Die Abhörstation der NSA in Bad Aibling </bu>
+          <copyright py:pytype="str">© Michael Dalder/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/2013-07/nsa-abhoerskandal-demokratie-freiheit" year="2013" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Affäre</supertitle>
+        <title py:pytype="str">Wutschreie über das Abhören helfen nicht</title>
+        <text py:pytype="str">Die NSA-Affäre muss rechtspolitisch aufgearbeitet werden –  mit den notwendigen Differenzierungen, schreibt Robert Leicht in seiner Analyse über das Wesen des Abhörens.</text>
+        <description py:pytype="str">Die NSA-Affäre muss rechtspolitisch aufgearbeitet werden –  mit den notwendigen Differenzierungen, schreibt Robert Leicht in seiner Analyse über das Wesen des Abhörens.</description>
+        <byline xsi:nil="true" />
+        <image alt="NSA" align="left" title="NSA" base-id="http://xml.zeit.de/politik/ausland/2013-07/NSA/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Die National Security Agency (NSA) in Fort Meade, Maryland</bu>
+          <copyright py:pytype="str">© PAUL J. RICHARDS/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Wim Schwerdtner</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-16T15:34:50.801399+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-16T13:57:33.976603+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-16T15:36:01.705934+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-16T13:56:47.911741+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-16T15:34:45.260038+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">leserartikel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Leserartikel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">4b9581a0caff4480ab6dac7361a8b13e</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2757</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6a87fa33-ac3f-443c-b3ef-e126a60f74b4}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="7" type="Person">Edward Snowden</tag><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="6" type="Organization">Bundesregierung</tag><tag url_value="jean-claude-juncker" uuid="7864592c-d209-429f-a349-0076ba130417" score="5" type="Person">Jean-Claude Juncker</tag><tag url_value="asyl" uuid="1f68751d-9938-4737-b150-95c265cf00f7" score="4" type="free">Asyl</tag><tag url_value="demonstration" uuid="b55c8611-2fe1-465d-a894-97cf1a94504f" score="4" type="free">Demonstration</tag><tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag><tag url_value="gruendung" uuid="0bf5cfc6-da0c-4afe-80ad-ebd0bb8c19b9" score="4" type="free">Gründung</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="opposition" uuid="62891fdd-06c5-4cea-b1f5-5ef5d41f9f0e" score="4" type="free">Opposition</tag><tag url_value="premierminister" uuid="0dc17fd4-8030-43ce-bbd5-9e66001f802d" score="4" type="free">Premierminister</tag><tag url_value="protest" uuid="d3a806c4-0bfa-42f7-9461-3e3339670fab" score="4" type="free">Protest</tag><tag url_value="rechtsstaat" uuid="c058570f-33d9-419f-aa4d-465fe4518856" score="4" type="free">Rechtsstaat</tag><tag url_value="regierung" uuid="bb3bd1ba-fe55-4bce-9ce5-368bae36b06f" score="4" type="free">Regierung</tag><tag url_value="schicksal" uuid="95a37a40-4181-467f-821c-da2dd99d42c5" score="4" type="free">Schicksal</tag><tag url_value="verfassung" uuid="30e52aaf-093d-46ee-918b-e21ca1a0749e" score="4" type="free">Verfassung</tag><tag url_value="ueberwachung" uuid="f1ce9830-354e-472f-b794-60d7a0f7e8a0" score="4" type="free">Überwachung</tag><tag url_value="wahl" uuid="3430a584-d5d3-4046-9180-bb2fc866c747" score="3" type="free">Wahl</tag></rankedTags></head><body>
+    <supertitle>Abhörskandal</supertitle>
+    <title>Geschrei für Snowden</title>
+    <subtitle>Die deutschen Politiker versuchen, das Thema Datenskandal bis zur Bundestagswahl auszusitzen. Leser Wim Schwerdtner ruft auf, ein Zeichen bürgerlichen Protests zu setzen.</subtitle>
+    <division type="page">
+      <image alt="Bundeskanzlerin Angela Merkel mit abhörsicherem Blackberry" align="left" title="Merkel Telefon Hand" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-telefon-abhoerskandal/" type="jpg" publication-date="" expires="2013-10-15T16:00:10+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Bundeskanzlerin Angela Merkel mit abhörsicherem Blackberry auf der CeBIT.</bu>
+        <copyright py:pytype="str">©Julian Stratenschulte/dpa</copyright>
+      </image>
+      <p>Seit sechs Wochen enthüllt <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Edward Snowden</entity> der Welt und insbesondere uns Bundesbürgern die <a href="http://www.zeit.de/digital/datenschutz/2013-07/faq-nsa-skandal" target="_blank" class="">Machenschaften der NSA</a>. Zum ersten Mal richtet sich die Spionagemacht eines Staates nicht mehr nur gegen einen anderen – sogenannten befreundeten – Staat, sondern gegen jeden Bürger, gegen jeden einzelnen von uns.</p>
+      <p>Wer nun erwartet hätte, dass Regierung oder Opposition unsere Verfassung verteidigen und diese Rechtsbrüche beenden, sieht sich getäuscht. Denn gerade rechtzeitig <a href="http://www.sueddeutsche.de/politik/historiker-foschepoth-ueber-us-ueberwachung-die-nsa-darf-in-deutschland-alles-machen-1.1717216" target="_blank" class="">klärt der Historiker Josef Foschepoth darüber auf</a>, dass seit Gründung der Bundesrepublik alle Regierungen und somit alle Parteien des Bundestages (bis auf die erst 2007 gegründete Linke) diese widerrechtlichen Überwachungen mitgetragen und damit unsere Verfassung gebrochen haben. Wer also die Bundesrepublik bislang für einen souveränen, demokratischen Rechtsstaat gehalten hat, sieht sich getäuscht von nahezu allen Parteien des Bundestages – seit über 60 Jahren.</p>
+      <p>Folglich gibt es nur <a href="http://www.zeit.de/digital/datenschutz/2013-07/nsa-skanda-nebelkerzen-kommentar" target="_blank" class="">wohltemperierte Empörung bei führenden Politikern</a> inklusive Angela Merkel ("Abhören geht unter Freunden wirklich nicht!"). Auch die Opposition macht nicht den Eindruck von Entschlossenheit jenseits von Wahlkampfgetöse. Vielmehr scheint es beiden Seiten darum zu gehen, die Affäre bis zur Wahl auszusitzen. Eine politische Taktik, die Luxemburgs Premierminister <entity idref="Jean-Claude+Juncker" entity_type="Person" url_value="personen/jean-claude-juncker">Jean-Claude Juncker</entity> einmal <a href="http://www.spiegel.de/spiegel/print/d-15317086.html" target="_blank" class="">so beschrieb</a>: "Wir beschließen etwas, stellen das dann in den Raum und warten einige Zeit ab, was passiert. Wenn es dann kein großes Geschrei gibt und keine Aufstände, […] dann machen wir weiter – Schritt für Schritt, bis es kein Zurück mehr gibt."</p>
+      <p>Wenn wir Bürger verhindern wollen, dass unser Rechtsstaat weiter ausgehöhlt und unsere Verfassung mit Wissen unserer Politiker systematisch gebrochen wird, wenn wir verhindern wollen, dass Geheimdienste alle unsere Bewegungen und Worte überwachen, dann müssen wir jetzt aufstehen!</p>
+      <p>Eine naheliegende und einfache Form des Protestes bietet die Online-Petition des Deutschen Bundestages "<a href="https://epetitionen.bundestag.de/petitionen/_2013/_06/_11/Petition_43198.nc.html" target="_blank" class="">Politisches Asyl für den US-Bürger Edward Snowden</a>". Natürlich hat die <entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> den Asylantrag längst abgelehnt. Diese Petition wird am Schicksal Snowdens nichts ändern –  aber sie kann ein Zeugnis des Respekts vor seiner selbstlosen Tat sein und eine machtvolle Demonstration gegenüber unseren politischen Parteien.</p>
+      <p>Machen wir deutlich, dass die Überwachungsaffäre nicht so leicht ausgesessen werden kann, sondern sehr wohl wahlentscheidend ist. Wir haben bis zum 31. Juli Zeit.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Abhörskandal</supertitle>
+    <title>Geschrei für Snowden</title>
+    <text>Die deutschen Politiker versuchen, das Thema Datenskandal bis zur Bundestagswahl auszusitzen. Leser Wim Schwerdtner ruft auf, ein Zeichen bürgerlichen Protests zu setzen.</text>
+  </teaser>
+</article>

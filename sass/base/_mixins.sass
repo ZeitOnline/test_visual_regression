@@ -1,0 +1,52 @@
+=link
+  &:link,
+  &:visited
+    @content
+
+=on-interaction
+  &:hover,
+  &:active,
+  &:focus
+    @content
+
+=max-width-rem($px)
+  max-width: $px
+  max-width: rem($px)
+
+=min-width-rem($px)
+  min-width: $px
+  min-width: rem($px)
+
+=bleed
+  margin-left: -$page-padding--small
+  margin-right: -$page-padding--small
+  +respond-min($break-1)
+    margin-left: -$page-padding
+    margin-right: -$page-padding
+  +respond-min($max-page-width - 2*$gutter)
+    margin: 0
+
+=visuallyhidden
+  border: 0
+  clip: rect(0 0 0 0)
+  height: 1px
+  margin: -1px
+  overflow: hidden
+  padding: 0
+  position: absolute
+  width: 1px
+
+=ir
+  display: block
+  overflow: hidden
+  white-space: nowrap
+  text-indent: 150%
+
+=unset-media($switch: false)
+  .media__aside
+    float: none
+    margin-bottom: $gutter-media
+    @if $switch
+      margin-left: 0
+    @else
+      margin-right: 0

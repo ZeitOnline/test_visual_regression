@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/M/Anna_von_Muenchhausen/index" publication-date="" expires="">
+      <display_name py:pytype="str">Anna von Münchhausen</display_name>
+    </author>
+    
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-08/kohl-1983/" type="jpg" publication-date="" expires="2013-09-08T13:32:13+00:00">
+      <bu py:pytype="str">Helmut Kohl freut sich am Wahlabend des 6. März 1983 mit seiner Frau Hannelore über den Sieg seiner CDU bei der Bundestagswahl.</bu>
+      <copyright py:pytype="str">© Heinrich Sanden/dpa </copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Anna von Münchhausen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-17T09:53:43.420945+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-08-17T09:54:45.467184+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-17T09:54:45.467184+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-08-17T09:53:42.997944+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.geil</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">4d9afd76ddb44c32954e316d86d34da2</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Wahlkampfzeiten</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6231</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6427d19e-4608-4969-9dc6-c61b76c26cd2}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="helmut-kohl" uuid="c5cc6b8b-ed07-4421-953b-35a8253999ba" score="10" type="Person">Helmut Kohl</tag><tag url_value="helmut-schmidt" uuid="4309e8be-0d39-435c-b575-2299daef9092" score="8" type="Person">Helmut Schmidt</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="8" type="Organization">SPD</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="7" type="Organization">CDU</tag><tag url_value="hans-jochen-vogel" uuid="d057dc5b-ecfc-4e5a-8ec9-41320ea13101" score="7" type="Person">Hans-Jochen Vogel</tag><tag url_value="wahlkampf" uuid="83c6adec-c208-4adc-81ba-807b8992ff56" score="7" type="free">Wahlkampf</tag><tag url_value="franz-josef-strauss" uuid="00a1654f-a128-4a4e-b6bf-b2e7dfc344c7" score="6" type="Person">Franz Josef Strauß</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="6" type="Organization">Grüne</tag><tag url_value="willy-brandt" uuid="22dcfcef-b001-4664-ac7a-ee15e3696209" score="6" type="Person">Willy Brandt</tag><tag url_value="apokalypse" uuid="a14ff67e-04f3-4a72-821b-3e5831008d14" score="5" type="free">Apokalypse</tag><tag url_value="bundestag" uuid="8c0df820-912b-459b-8d2a-ae38f50cf1d9" score="4" type="free">Bundestag</tag><tag url_value="bundestagswahl" uuid="1dd2ab43-b375-4aa2-8174-651ab1e48af8" score="4" type="free">Bundestagswahl</tag><tag url_value="friedensbewegung" uuid="9c1be4b1-6703-4ba7-b1a1-f6214212e21b" score="4" type="free">Friedensbewegung</tag><tag url_value="kanzleramt" uuid="2497011d-a71c-4b85-baed-8c9fcd07be9b" score="4" type="free">Kanzleramt</tag><tag url_value="wahl" uuid="3430a584-d5d3-4046-9180-bb2fc866c747" score="4" type="free">Wahl</tag></rankedTags></head><body>
+    <supertitle>Wahlkampf 1983</supertitle>
+    <title>Die Apokalypse und ein Kanzler in Strickjacke</title>
+    <subtitle>Kaum eine Bundestagswahl hatte eine so dramatische Vorgeschichte wie jene vor 30 Jahren – und endete derart unspektakulär.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-08/kohl-1983/" type="jpg" publication-date="" expires="2013-09-08T13:32:13+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Helmut Kohl freut sich am Wahlabend des 6. März 1983 mit seiner Frau Hannelore über den Sieg seiner CDU bei der Bundestagswahl.</bu>
+        <copyright py:pytype="str">© Heinrich Sanden/dpa </copyright>
+      </image>
+      <p>Seltsam, aber meine private Erinnerung an die Wahl 1983 beginnt mit einem fixen Datum, dem 22. Mai 1982. An diesem Tag sitze ich als Braut inmitten einer festlichen Gesellschaft neben meinem frisch angetrauten Ehemann auf einer mit rotem Chintz bezogenen Bank. Auf der haben vor uns schon viele Brautpaare Platz genommen in dem 300 Jahre alten Elternhaus. Ob diese Brautleute beim Essen auch eine so ernste Rede gehört haben wie wir damals?  <br /></p>
+      <p>Mein Vater hält sich nicht lange auf mit Floskeln wie dem Glück der Liebe. Stattdessen spricht er, der zwei Weltkriege miterlebt hatte, den einen als Kind, den anderen als Soldat, von einer düsteren Zukunft und zitiert ein Wort des englischen Dramatikers Christopher Fry: "Das Dunkel ist Licht genug."  <br /></p>
+      <p>Das Dunkel benennt er sehr präzise – mit der akuten Gefahr eines neuen Weltkriegs, den er angesichts der bevorstehenden Nato-Nachrüstung für wahrscheinlich hält. Unser Frieden sei so gefährdet wie nie seit dem Ende des <a href="http://www.zeit.de/schlagworte/themen/zweiter-weltkrieg/index" target="_blank" class="">Zweiten Weltkriegs</a>, sagt er und entlässt das Brautpaar mit der Mahnung, alles daran zu setzen, den Frieden zu erhalten. Heftig diskutieren unsere Gäste danach beim Erdbeer-Tiramisu über das Für und Wider der Stationierung amerikanischer Mittelstreckenwaffen und Cruise Missiles. Wird man einen solchen Krieg, mitten in Deutschland, dort, wo der hochgerüstete Osten auf den hochgerüsteten Westen stößt, überleben? Kann das Theorem vom Gleichgewicht des Schreckens tatsächlich halten?</p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/printautoren/anna-von-muenchhausen-info" publication-date="" expires="" />
+      <p>Wenige Wochen nach diesem denkwürdigen Tag überschlagen sich die Ereignisse: Rücktritt von vier FDP-Ministern der <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity>/FDP-Regierung unter Kanzler <a href="http://www.zeit.de/schlagworte/personen/helmut-schmidt/index" target="_blank" class="">Helmut Schmidt</a>, Koalitionsbruch. <a href="http://www.zeit.de/schlagworte/personen/helmut-kohl/index" target="_blank" class="">Helmut Kohl</a> wird zum Nachfolger gewählt, die SPD spricht von Verrat, in der FDP gärt, manche rechnen mit ihrer Spaltung. Denn erstmals hat es in der Bundesrepublik einen Machtwechsel ohne Wahlen gegeben; zur Bundestagswahl 1980 war die FDP noch mit einem Bekenntnis zur sozialliberalen Koalition angetreten, die sie nun aufgekündigt hat. Nicht alle Liberale ziehen da mit.</p>
+      <p>Von verschiedenen Seiten wird deshalb der Ruf nach Neuwahlen laut, um die neue Regierung zu legitimieren. Der Weg dahin ist allerdings schwierig. Denn vorgezogene Wahlen sind nach dem Grundgesetz nur unter strengen Bedingungen möglich. Nach einigem Hin und Her macht am 17. Dezember 1982 Schwarz-Gelb mit einer absichtlich verlorenen Vertrauensfrage den Weg frei für die Auflösung des Bundestags und Neuwahlen am 6. März 1983. Spitzenkandidat der <entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity>: <entity idref="Helmut+Kohl" entity_type="Person" url_value="personen/helmut-kohl">Helmut Kohl</entity>. Für die SPD tritt <a href="http://www.zeit.de/schlagworte/personen/hans-jochen-vogel/index" target="_blank" class="">Hans Jochen Vogel</a> an, der sich selber als Verlegenheitskandidat sieht.  </p>
+      <p>Der Exjustizminister ist keiner, den einen Saal zum Kochen bringt. Als Mann "mit den Klarsichthüllen" verspotten ihn selbst Parteifreunde. Aber er fühlt sich in der Pflicht, da kein anderer Genosse ran will. Zu düster sind die Aussichten: Die SPD liegt nach dem Verlust der Macht am Boden, der Koalitionspartner ist ihr abhanden gekommen, ein neuer ist (noch) nicht in Sicht, und sie ist zudem heftig zerstritten. Nur wenige stehen noch hinter dem Kurs des hochgeachteten, aber am Ende in der eigenen Partei fast isolierten Exkanzlers <entity idref="Helmut+Schmidt" entity_type="Person" url_value="personen/helmut-schmidt">Helmut Schmidt</entity>, vor allem in der Nachrüstungsfrage. Die Mehrheit der Genossen stellt sich unter dem Vorsitzenden <entity idref="Willy+Brandt" entity_type="Person" url_value="personen/willy-brandt">Willy Brandt</entity> an die Seite der Friedensbewegung und fordert ein atomwaffenfreies Europa.<br /></p>
+      <p>Kohl dagegen hat sich schnell in der Strickjacke der Macht eingerichtet. Er ist sich seiner Sache ziemlich sicher, und er kann es nach Lage der Dinge auch sein.<br /></p>
+    </division>
+    <division type="page" teaser="Der Atomstreit spaltete das Land">
+      <p>Worum es damals in erster Linie ging, daran erinnert sich jeder, der die Wahl hatte, auch wenn die Einzelheiten der vermeintlich existenzbedrohenden Szenarien längst im historischen Nebel versunken sind. Der Streit um Raketen und Nachrüstung spaltet Familien, Freunde, Kollegen und sorgt nach den machtvollen Friedensdemonstrationen im Bonner Hofgarten im Herbst 1982 auch im Frühjahr 1983 noch für heftige Debatten. <br /></p>
+      <p>Andere Fragen wirken verglichen mit der angeblich drohenden atomaren Apokalypse banal: Arbeitslosigkeit, Mieten-Gezerre, saurer Regen. Obendrein ist noch vier Wochen vor dem Wahltermin gar nicht endgültig entschieden, ob die Wahl überhaupt stattfindet. Vor dem Bundesverfassungsgericht haben vier Abgeordnete gegen die Auflösung des Bundestags geklagt. Die Wahlkampfmaschinerie läuft erst einmal auf Verdacht. <br /></p>
+      <p>Die SPD bemüht sich nach Kräften, die Wahl zur Schicksalswahl zu stilisieren, nach dem Motto: Achtung, die Republik kippt nach rechts! Doch das zieht nicht. Kohl wird zwar insbesondere von Intellektuellen als Pfälzer Provinzler und "Birne" verhöhnt, aber als reaktionäre Schreckensfigur wie <entity idref="Franz+Josef+Strau%C3%9F" entity_type="Person" url_value="personen/franz-josef-strauss">Franz Josef Strauß</entity> 1980 taugt er nicht. Und <entity idref="Hans+Jochen+Vogel" entity_type="Person" url_value="personen/hans-jochen-vogel">Vogel</entity> ist kein Typ, der solche politischen Szenarien verkaufen will oder kann.  <br /></p>
+      <p>Ich wähle ihn trotzdem. Denn Kohl, der für sich in Anspruch nimmt, die breite Masse des Volkes zu verkörpern und entsprechend bräsig daher kommt, überzeugt mich mit seinen muffigen Floskeln wie der "geistig-moralischen Wende" keine Sekunde lang. Der Mehrheit der verunsicherten Wähler gefällt dagegen offensichtlich,  dass er auf bürgerliche Tugenden setzt und nach den politisch aufgeladenen 1970er Jahren und den innenpolitischen Auseinandersetzungen in der Schlussphase der sozialliberalen Koalition ein ruhigeres Regieren verspricht.<br /></p>
+      <infobox is_empty="False" href="http://xml.zeit.de/politik/2013-07/wahlkampfzeiten-info" publication-date="" expires="" />
+      <p>Am Ende ist die Wahlbeteiligung fast so hoch wie bei der historischen Willy-Wahl 1972: 89,1 Prozent. Die <a href="http://www.zeit.de/schlagworte/organisationen/cdu" target="_blank" class="">CDU</a> erhält ihr bis heute zweitbestes Zweitstimmenergebnis bei einer Bundestagswahl und verpasst mit 48,8 Prozent nur knapp die absolute Mehrheit. Die SPD abgeschlagen bei 38,2 Prozent. <br /></p>
+      <p>Manche glauben, es werde den nach 13 Regierungsjahren ausgepowerten Sozialdemokraten gut tun, sich in der Opposition zu regenerieren, um nach vier Jahren gestärkt die Macht zurückzuerobern. Dass es am Ende fast 16 Jahre dauern wird, bis wieder ein Sozialdemokrat ins Kanzleramt einzieht, zusammen mit den <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grünen</entity>, die 1983 zum ersten Mal in den Bundestag einziehen, ahnt damals niemand.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Wahlkampf 1983</supertitle>
+    <title>Die Apokalypse und ein Kanzler in Strickjacke</title>
+    <text>Kaum eine Bundestagswahl hatte eine so dramatische Vorgeschichte wie jene vor 30 Jahren – und endete derart unspektakulär.</text>
+  </teaser>
+</article>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/2013/27/drohnen-krieg-regeln" year="2013" issue="27" ressort="Gesellschaft" contenttype="article" publication-date="2013-07-04T01:35:26+00:00" expires="">
+        <supertitle py:pytype="str">Kriegsführung</supertitle>
+        <title py:pytype="str">Nicht die Drohnen sind das Problem</title>
+        <text py:pytype="str">Das Problem ist eine neue Art von Kriegen. Die Völkergemeinschaft muss Regeln zu ihrer Einhegung finden</text>
+        <description py:pytype="str">Das Problem ist eine neue Art von Kriegen. Die Völkergemeinschaft muss Regeln zu ihrer Einhegung finden</description>
+        <byline py:pytype="str">von Christian Schmidt</byline>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-04/bundeswehr-kampfdrohnen-usa-reaper" year="2013" issue="18" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Bundeswehr</supertitle>
+        <title py:pytype="str">Nicht reif für Kampfdrohnen</title>
+        <text py:pytype="str">Die USA bieten Deutschland in Konkurrenz zu Israel Drohnen an. Das Angebot kommt zu früh. Zu viele moralische, rechtliche und technische Fragen sind offen. Von T. Wiegold</text>
+        <description py:pytype="str">Die USA bieten Deutschland in Konkurrenz zu Israel Drohnen an. Das Angebot kommt zu früh. Zu viele moralische, rechtliche und technische Fragen sind offen. Von T. Wiegold</description>
+        <byline xsi:nil="true" />
+        <image alt="Amerikanische Reaper-Drohne auf dem Flugfeld von Fort Drum, New York" align="left" title="Reaper Drohne" base-id="http://xml.zeit.de/politik/deutschland/2013-04/reaper-drohne/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Amerikanische Reaper-Drohne auf dem Flugfeld von Fort Drum, New York</bu>
+          <copyright py:pytype="str">© U.S. Air Force/Staff Sgt. Ricky Best/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-02/drohnen-krieg-legalitaet-moral-strategie" year="2013" issue="9" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Anti-Terror-Kampf</supertitle>
+        <title py:pytype="str">Über Recht und Moral des Drohnenkriegs</title>
+        <text py:pytype="str">Legaler Akt der Selbstverteidigung oder perfides Kriegsverbrechen? Ist der Drohnenkrieg notwendig und gerecht? Zwischen Moral und Gesetz klafft eine Lücke. Von C. Luther</text>
+        <description py:pytype="str">Legaler Akt der Selbstverteidigung oder perfides Kriegsverbrechen? Ist der Drohnenkrieg notwendig und gerecht? Zwischen Moral und Gesetz klafft eine Lücke. Von C. Luther</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Predator Drohne" base-id="http://xml.zeit.de/politik/ausland/2013-02/predator-drohne/" type="jpg" publication-date="" expires="2013-05-26T09:46:22+00:00">
+          <bu py:pytype="str">US-Drohne vom Typ MQ-1 Predator</bu>
+          <copyright py:pytype="str">© Tech. Sgt. Effrain Lopez/Air Force/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    
+    <image align="left" title="Drohne Bundeswehr" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-bundeswehr/" type="jpg" publication-date="" expires="2013-10-24T16:23:19+00:00">
+      <bu py:pytype="str">Bundeswehrsoldaten lassen nahe Kundus, Afghanistan, eine Aufklärungsdrohe vom Typ Mikado fliegen.</bu>
+      <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, nsc</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-24T17:31:08.098040+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-24T17:32:10.720854+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-24T17:32:10.720854+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-24T17:31:06.467870+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.klormann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">d1ce0f2061644182a8c344771c680661</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">1328</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8a23e01e-f3da-4543-ab6a-5964fa2b32dc}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="euro" uuid="d411666c-5c17-4bc7-b5e5-060e044bb050" score="9" type="free">Euro</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="7" type="free">Bundeswehr</tag><tag url_value="thomas-de-maizi%C3%A8re" uuid="5b6e10e0-1481-43b9-8cab-1063607a4460" score="5" type="Person">Thomas de Maizière</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="5" type="Organization">Verteidigungsministerium</tag><tag url_value="auslandseinsatz" uuid="22122803-d544-46af-b47b-abdb9c19281c" score="4" type="free">Auslandseinsatz</tag><tag url_value="ministerium" uuid="4377de05-8a28-4e96-bdb1-fe2bcc026a51" score="4" type="free">Ministerium</tag><tag url_value="spiegel" uuid="1d88a15b-4848-4800-b573-00535ee72e16" score="4" type="free">Spiegel</tag><tag url_value="verlust" uuid="a800f2b9-4347-499a-a238-ed9bdfbdf7c1" score="4" type="free">Verlust</tag><tag url_value="verteidigungsminister" uuid="a90c57c7-6c40-4001-b341-e6b0d9cf0e0e" score="4" type="free">Verteidigungsminister</tag><tag url_value="afghanistan" uuid="9187d28e-ea51-4485-b2d6-d5d3852f309c" score="3" type="Location">Afghanistan</tag><tag url_value="kosovo" uuid="616fa700-bbf7-4a2e-9056-4532bd363ceb" score="3" type="Location">Kosovo</tag></rankedTags></head><body>
+    <supertitle>Bundeswehr</supertitle>
+    <title>Drohnenverluste kosten 110 Millionen Euro</title>
+    <subtitle>Abgestürzt, verschollen oder zerstört: Seit 2004 hat die Bundeswehr 137 Drohnen verloren. Das hat Millionen Euro gekostet, bestätigte das Verteidigungsministerium.</subtitle>
+    <division type="page">
+      <image align="left" title="Drohne Bundeswehr" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-bundeswehr/" type="jpg" publication-date="" expires="2013-10-24T16:23:19+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Bundeswehrsoldaten lassen nahe Kundus, Afghanistan, eine Aufklärungsdrohe vom Typ Mikado fliegen.</bu>
+        <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
+      </image>
+      <p>Verunglückte Bundeswehr-Drohnen haben die deutsche Armee bislang knapp 110 Millionen Euro gekostet. Das bestätigte ein Sprecher von Verteidigungsminister Thomas de Maizière. Damit gab das Ministerium erstmals Kosten an, die der Bundeswehr aus <a href="http://www.bmvg.de/resource/resource/MzEzNTM4MmUzMzMyMmUzMTM1MzMyZTM2MzEzMDMwMzAzMDMwMzAzMDY4Njk2NTYxNzY2YzYxNmUyMDIwMjAyMDIw/~5683561.pdf" target="_blank" class="">Drohnenverlusten</a> entstanden sind. Seit 2004 seien insgesamt 137 unbemannte Fluggeräte abgestürzt, verschollen oder zerstört worden.</p>
+      <p>Am stärksten betroffen ist demnach das Modell Luna. Die Bundeswehr verlor bislang 52 Aufklärungsdrohnen dieses Typs, was nach einem Bericht von <em><a href="http://www.spiegel.de/politik/deutschland/millionenschaden-drohnen-stuerzen-oefter-ab-als-bisher-angegeben-a-912818.html" target="_blank" class="">Spiegel Online</a></em> einen Schaden von 14,3 Millionen Euro verursacht hat. <br /></p>
+      <p>Rund die Hälfte der Gesamtkosten gehe aber auf Unfälle der Zielortungsdrohnen vom Typ KZO zurück, schreibt <em>Spiegel Online</em>. Die Verluste von zwei großen Aufklärungsdrohnen des Modells Heron kosteten insgesamt 9,3 Millionen Euro.</p>
+      <p>Der Großteil der Flugsysteme stürzte während Auslandseinsätzen der Bundeswehr in <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2013-06/bundeswehr-drohne-afghanistan-airbus" target="_blank" class="">Afghanistan</a> und im <entity idref="Kosovo" entity_type="Location" url_value="orte/kosovo">Kosovo</entity> ab, 23 Flugsysteme verunglückten dem Ministerium zufolge in Deutschland.<br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <text>Abgestürzt, verschollen oder zerstört: Seit 2004 hat die Bundeswehr 137 Drohnen verloren. Das hat Millionen Euro gekostet, bestätigte das Verteidigungsministerium.</text>
+    <title>Drohnenverluste kosten 110 Millionen Euro</title>
+    <supertitle>Bundeswehr</supertitle>
+  </teaser>
+</article>
