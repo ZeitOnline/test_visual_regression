@@ -1,5 +1,7 @@
 from pyramid.view import view_config
 import zeit.frontend.model
+from babel.dates import format_datetime
+from babel.dates import get_timezone_name, get_timezone
 
 
 class Base(object):
@@ -13,6 +15,10 @@ class Base(object):
     def __call__(self):
         return {}
 
+    @property
+    def publish_date(self):
+        tz = get_timezone('Europe/Berlin')
+        return tz.localize(self.context.publish_date)
 
 @view_config(route_name='json',
              context=zeit.frontend.model.Content,

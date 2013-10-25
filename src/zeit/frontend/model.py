@@ -4,6 +4,7 @@ from os.path import isfile
 from zope.interface import implementer
 from zeit.frontend import interfaces
 import pkg_resources
+import iso8601
 
 
 class Resource(object):
@@ -56,8 +57,9 @@ class Content (Resource):
         self.author = unicode(root.head.author.display_name)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        self.publish_date = root.head.xpath(
-            "//attribute[@name='date_first_released']")[0].text
+        dpth = "//attribute[@name='date_first_released']"
+        pdate = root.head.xpath(dpth).pop().text
+        self.publish_date = iso8601.parse_date(pdate)
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
