@@ -5,7 +5,6 @@ from zope.interface import implementer
 from zeit.frontend import interfaces
 import pkg_resources
 
-
 class Resource(object):
     pass
 
@@ -39,6 +38,7 @@ class Content (Resource):
     header_img_src = ''
     lead_pic = ''
     author = ''
+    publish_date = ''
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -55,11 +55,7 @@ class Content (Resource):
         self.author = unicode(root.head.author.display_name)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        # Startbild
-        # Datum | Uhrzeit
-        # Autor
-        # intertitle
-        # division -> p | img -> bu
+        self.publish_date = root.head.xpath("//attribute[@name='date_first_released']")[0].text
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")

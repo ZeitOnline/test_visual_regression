@@ -49,6 +49,10 @@ class Article(Base):
     def author(self):
         return self.context.author
 
+    @property
+    def publish_date(self):
+        return self.context.publish_date
+
 
 class Gallery(Base):
     pass
