@@ -5,6 +5,7 @@ from zope.interface import implementer
 from zeit.frontend import interfaces
 import pkg_resources
 
+
 class Resource(object):
     pass
 
@@ -55,7 +56,8 @@ class Content (Resource):
         self.author = unicode(root.head.author.display_name)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        self.publish_date = root.head.xpath("//attribute[@name='date_first_released']")[0].text
+        self.publish_date = root.head.xpath(
+            "//attribute[@name='date_first_released']")[0].text
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
@@ -65,6 +67,7 @@ class Content (Resource):
         first_img = root.body.find('division').find('image')
         if (first_img.get('layout') == 'zmo_header'):
             self.header_img_src = first_img.get('src')
+
 
 @implementer(interfaces.IPage)
 class Page(object):
