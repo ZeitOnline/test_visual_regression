@@ -73,7 +73,7 @@ class Content (Resource):
     def __extract_header_img(self, root):
         first_img = root.body.find('division').find('image')
         if (first_img.get('layout') == 'zmo_header'):
-            self.header_img_src = first_img.get('src')
+            self.header_img = Img(first_img)
 
 
 @implementer(interfaces.IPage)

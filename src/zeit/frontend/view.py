@@ -48,8 +48,8 @@ class Article(Base):
         return self.context.pages
 
     @property
-    def header_img_src(self):
-        return self.context.header_img_src
+    def header_img(self):
+        return self.context.header_img
 
     @property
     def author(self):

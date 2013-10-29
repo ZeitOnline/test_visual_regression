@@ -3,7 +3,7 @@
 {% block content %}
 	<article class="article">
         <div class="article__wrap">
-            <div class="article__head-wrap has-headline-switch">
+            <div class="article__head-wrap">
                 <header class="article__title-wrap">
                     <div class="is-constrained is-centered">
                         <h2 class="article__supertitle">
@@ -23,10 +23,8 @@
                         </div>
                     </div>
                 </header>
-                {% if view.header_img_src %}
-                    <div class="article__main-image bleed">
-                        <img src="{{view.header_img_src}}" />
-                    </div>
+                {% if view.header_img %}
+                    {{ blocks.image(view.header_img) }}
                 {% endif %}
 
             </div>
