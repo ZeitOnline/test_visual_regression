@@ -10,14 +10,16 @@
 			injectref = window.document.getElementsByTagName( "link" )[0];
 
 			function loadCSS( href ){
+				// possible enhancement: check in localstorage if fonts already cached
 				var fontslink = window.document.createElement( "link" );
 				fontslink.rel = "stylesheet";
 				fontslink.href= href;
 				if( injectref && injectref.parentNode ) {
 					injectref.parentNode.insertBefore( fontslink, injectref );
+					// store in localstorage if not in there yet
 				}
 			}
-			alert(old_browser);
+
 			if (!old_browser) {
 				loadCSS(fonts);
 			}
