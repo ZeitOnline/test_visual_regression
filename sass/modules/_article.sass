@@ -70,3 +70,19 @@
 		.article__title-wrap
 			display: table-footer-group
 		.article__main-image
+
+.article__tags
+	@extend %meta
+	@extend .article__meta
+	margin-top: $huge
+	text-transform: uppercase
+	a
+		@extend %meta-link
+
+.article__tags__title
+	+tablet(bold)
+	margin-left: $micro
+	margin-right: $fine
+	color: $grey--dark
+
+

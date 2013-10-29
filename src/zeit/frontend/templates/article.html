@@ -48,6 +48,16 @@
                     {% endfor %}
                 </div>
                 {% endfor %}
+
+                <div class="article__tags is-constrained is-centered">
+                    <span class="article__tags__title">Tags</span> 
+                    {% for tag in view.rankedTags %}
+                            {% for item in tag %}
+                                <a href="{{ item.url }}" id="hp.article.tools.tag.Verschlüsselung" title="Artikel mit dem Schlagwort *Verschlüsselung* anzeigen">{{ item.html }}</a>,
+                            {% endfor %}
+                    {% endfor %}
+                </div>
+                
             </div>
         </div>
 	</article>

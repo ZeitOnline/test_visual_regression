@@ -41,3 +41,13 @@ class IVideo(Interface):
 
     """ Represents Image in IContent """
     pass
+
+class ITags(Interface):
+
+    """ Represents Tags in IContent """
+    pass
+
+class ITag(Interface):
+
+    """ Represents Single Tag in IContent """
+    pass

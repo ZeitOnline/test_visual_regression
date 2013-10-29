@@ -59,6 +59,9 @@ class Article(Base):
     def publish_date(self):
         return self.context.publish_date
 
+    @property
+    def rankedTags(self):
+        return self.context.rankedTags
 
 class Gallery(Base):
     pass

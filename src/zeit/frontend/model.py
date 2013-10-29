@@ -41,6 +41,7 @@ class Content (Resource):
     lead_pic = ''
     author = ''
     publish_date = ''
+    rankedTags = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -60,6 +61,10 @@ class Content (Resource):
         dpth = "//attribute[@name='date_first_released']"
         pdate = root.head.xpath(dpth).pop().text
         self.publish_date = iso8601.parse_date(pdate)
+        self.__construct_tags(root)
+    
+    def __construct_tags(self, root):
+        self.rankedTags = _get_tags(root.head.rankedTags)
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
@@ -117,7 +122,6 @@ class Img(object):
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = xml.get('layout')
 
-
 @implementer(interfaces.IIntertitle)
 class Intertitle(object):
 
@@ -154,6 +158,32 @@ class Video(object):
     def __init__(self, xml):
         pass
 
+@implementer(interfaces.ITags)
+class Tags(object):
+
+    __content = []
+
+    def __init__(self, tag_xml):
+        self.__content = iter(self._extract_items(tag_xml))
+
+    def __iter__(self):
+        return self.__content
+
+    def _extract_items(self, tag_xml):
+        content = []
+        for item in tag_xml.iterchildren():
+            content.append(Tag(item))
+        return content
+
+@implementer(interfaces.ITag)
+class Tag(object):
+
+    def __init__(self, xml):
+        self.html = _inline_html(xml)
+        self.url = xml.get('url_value')
+
+    def __str__(self):
+        return unicode(self.html)
 
 def _get_pages(pages_xml):
     pages = []
@@ -161,6 +191,11 @@ def _get_pages(pages_xml):
         pages.append(Page(page))
     return pages
 
+def _get_tags(tags_xml):
+    tags = []
+    for tag in tags_xml:
+        tags.append(Tags(tag))
+    return tags
 
 def _inline_html(xml):
     filter_xslt = etree.XML('''
