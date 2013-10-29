@@ -23,10 +23,8 @@
                         </div>
                     </div>
                 </header>
-                {% if view.header_img_src %}
-                    <div class="article__main-image bleed">
-                        <img src="{{view.header_img_src}}" />
-                    </div>
+                {% if view.header_img %}
+                    {{ blocks.image(view.header_img) }}
                 {% endif %}
 
             </div>
