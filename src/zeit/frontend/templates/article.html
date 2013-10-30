@@ -47,6 +47,7 @@
                 </div>
                 {% endfor %}
 
+                {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
                     <span class="article__tags__title">Tags</span> 
                     {% for tag in view.rankedTags %}
@@ -55,6 +56,7 @@
                             {% endfor %}
                     {% endfor %}
                 </div>
+                {% endif %}
                 
             </div>
         </div>
