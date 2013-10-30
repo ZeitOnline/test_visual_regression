@@ -64,7 +64,10 @@ class Content (Resource):
         self.__construct_tags(root)
     
     def __construct_tags(self, root):
-        self.rankedTags = _get_tags(root.head.rankedTags)
+        try:
+            self.rankedTags = _get_tags(root.head.rankedTags)
+        except AttributeError:
+            return
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
