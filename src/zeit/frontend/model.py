@@ -42,6 +42,7 @@ class Content (Resource):
     author = ''
     publish_date = ''
     rankedTags = []
+    source = ''
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -61,11 +62,59 @@ class Content (Resource):
         dpth = "//attribute[@name='date_first_released']"
         pdate = root.head.xpath(dpth).pop().text
         self.publish_date = iso8601.parse_date(pdate)
-        self.__construct_tags(root)
+        self.rankedTags = self.__construct_tags(root)
+        self.source = self.__construct_source(root)
+
+        #root.head.xpath("//attribute[@name='product-name']").pop().text
     
+        #attribute[@name='copyrights']
+        #attribute[@name='product-id']
+            #$product-id='ZMLB
+            #$productxml/product[@id=$product-id]/@href
+            #$product-id='ZEI' or $product-id='ZEAR'
+            #fallback: $productxml/product[@id=$product-id]
+
+    def __construct_source(self, root):
+        try: 
+            copyright = root.head.xpath("//attribute[@name='copyrights']")
+
+            if copyright:
+                return copyright 
+            else:
+                return self.__construct_product_id(root)
+
+        except AttributeError:
+            return __construct_product_id(root)
+
+    def __construct_product_id(self, root):
+        try: 
+            product_id = root.head.xpath("//attribute[@name='product-id']")
+            base_path = pkg_resources.resource_filename(__name__, 'data')
+            products_path = objectify.parse(base_path + '/config/products.xml') 
+            products_root = products_path.getroot()
+
+            if product_id:
+
+                #product_name = root.head.xpath("//product[@id='%s']") % product_id.pop()  
+                #product_name = products_root
+
+                return #products_path.getroot().products
+
+                #if(product_id.pop() is 'ZMLB'):
+                 #   return
+                #elif (product_id.pop() is 'ZEI'):
+                 #   return
+
+            else:
+                return 
+
+        except AttributeError:
+            return 
+
+
     def __construct_tags(self, root):
         try:
-            self.rankedTags = _get_tags(root.head.rankedTags)
+            return _get_tags(root.head.rankedTags)
         except AttributeError:
             return
 

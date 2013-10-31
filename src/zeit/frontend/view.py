@@ -63,6 +63,10 @@ class Article(Base):
     def rankedTags(self):
         return self.context.rankedTags
 
+    @property
+    def source(self):
+        return self.context.source
+
 class Gallery(Base):
     pass
 
