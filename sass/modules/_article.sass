@@ -72,4 +72,19 @@
 	margin-right: $fine
 	color: $grey--dark
 
+.article__meta__box
+	div
+		@extend %meta
+		font-size: $smaller
+		margin-top: $small	
+	span
+		display: block
+		text-transform: uppercase
+		margin-top: $tiny
+		&:first-child
+			+tablet(bold)
+			color: $grey--dark
+		&:last-child
+			color: $grey
+
 

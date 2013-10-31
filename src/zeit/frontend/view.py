@@ -67,6 +67,10 @@ class Article(Base):
     def genre(self):
         return self.context.genre
 
+    @property
+    def source(self):
+        return self.context.source
+
 class Gallery(Base):
     pass
 

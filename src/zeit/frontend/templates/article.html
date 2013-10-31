@@ -17,6 +17,7 @@
                             {{view.publish_date | format_date('long')}}
                         -->
                         {{ blocks.article_meta(view.author, view.genre) }}
+
                         <div class="article__subtitle">
                             <p>{{view.subtitle}}</p>
                         </div>
@@ -27,15 +28,32 @@
                 {% endif %}
 
             </div>
+
             <div class="article__body has-dropcap">
+                {% set add_meta = true %}
+
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item is elem('p') %}
+                        {% if item is elem('p') %} 
+                            
+                            <!-- integrate meta box at first paragraph only -->
+                            {% if add_meta %} 
+                                {{ blocks.meta_box(view.publish_date | format_date('long'), "article__meta__box figure-stamp") }}
+                                {% set add_meta = false %}
+                            {% endif %}
+
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
                         {% elif item is elem('image') %}
+
+                            <!-- integrate meta box only when layout isn't large -->
+                            {% if item.layout != 'large' and add_meta %} 
+                                {{ blocks.meta_box(view.publish_date | format_date('long'), "article__meta__box figure-stamp") }}
+                                {% set add_meta = false %}
+                            {% endif %}
+
                             {{ blocks.image(item) }}
                         {% elif item is elem('citation') %}
                             {{ blocks.citation(item) }}

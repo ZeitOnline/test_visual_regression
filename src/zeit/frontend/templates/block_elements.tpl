@@ -4,6 +4,19 @@
     </p>
 {%- endmacro %}
 
+{% macro meta_box(date, class) -%}
+    <figure class="{{ class }}">
+        <div>
+            <span>Aktualisiert</span>
+            <span>{{ date }}</span>
+        </div>
+        <div>
+            <span>Quellen</span>
+            <span>die Zeit</span>
+        </div>
+    </figure>
+{%- endmacro %}
+
 {% macro intertitle(intertitle) -%}
     <h3 class="article__subheading is-constrained is-centered">
         {{ intertitle }}
