@@ -12,12 +12,11 @@
                         <h1 class="article__title">
                             {{view.title}}
                         </h1>
-                        <aside class="article__meta">
-                            <span class="article__meta__timestamp">
-                                {{view.publish_date | format_date('long')}}
-                            </span>
-                            <span class="article__meta__author">von {{view.author}}</span>
-                        </aside>
+                        <!--
+                            todo: place date into article
+                            {{view.publish_date | format_date('long')}}
+                        -->
+                        {{ blocks.article_meta(view.author, view.genre) }}
                         <div class="article__subtitle">
                             <p>{{view.subtitle}}</p>
                         </div>
