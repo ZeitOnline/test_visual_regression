@@ -24,26 +24,12 @@
 	margin-bottom: $micro
 
 .article__meta
+	@extend %meta
 	margin-bottom: $medium
 	+respond-max($break-2)
 		font-size: $font-xs
 	+respond-min($break-2)
 		margin-bottom: $large
-
-.article__meta__timestamp
-	@extend %meta
-	letter-spacing: 1px
-	text-transform: uppercase
-
-.article__meta__author
-	+franziska(regular, italic)
-	display: block
-	color: $grey
-	font-size: $font-ml
-	+respond-min($break-1)
-		display: inline
-	&:before
-		content: "— "
 
 .article__subtitle
 	+franziska(semibold)

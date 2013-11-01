@@ -64,6 +64,10 @@ class Article(Base):
         return self.context.rankedTags
 
     @property
+    def genre(self):
+        return self.context.genre
+
+    @property
     def source(self):
         return self.context.source
 

@@ -42,6 +42,7 @@ class Content (Resource):
     author = ''
     publish_date = ''
     rankedTags = []
+    genre = ''
     source = ''
 
     def __json__(self, request):
@@ -62,6 +63,8 @@ class Content (Resource):
         dpth = "//attribute[@name='date_first_released']"
         pdate = root.head.xpath(dpth).pop().text
         self.publish_date = iso8601.parse_date(pdate)
+        self.__construct_tags(root)
+        self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
         self.source = self.__construct_source(root)
 
@@ -117,6 +120,15 @@ class Content (Resource):
             return _get_tags(root.head.rankedTags)
         except AttributeError:
             return
+
+    def __construct_genre(self, root):
+        rawgenre = root.head.xpath("//attribute[@name='genre']")
+        if len(rawgenre) > 0:
+            genreconfig = pkg_resources.resource_filename(__name__, "config/article-genres.xml")
+            genretree = objectify.parse(genreconfig)
+            genreroot = genretree.getroot()
+            expr = "//genre[@name='%s' and @display-frontend='true']/@prose" % (rawgenre[0])
+            self.genre = genreroot.xpath(expr)[0]
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
