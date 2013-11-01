@@ -39,7 +39,7 @@
                             
                             <!-- integrate meta box at first paragraph only -->
                             {% if add_meta %} 
-                                {{ blocks.meta_box(view.publish_date | format_date('long'), "article__meta__box figure-stamp") }}
+                                {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
                                 {% set add_meta = false %}
                             {% endif %}
 
@@ -50,7 +50,7 @@
 
                             <!-- integrate meta box only when layout isn't large -->
                             {% if item.layout != 'large' and add_meta %} 
-                                {{ blocks.meta_box(view.publish_date | format_date('long'), "article__meta__box figure-stamp") }}
+                                {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
                                 {% set add_meta = false %}
                             {% endif %}
 

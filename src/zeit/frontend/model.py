@@ -92,21 +92,14 @@ class Content (Resource):
     def __construct_product_id(self, root):
         try: 
             product_id = root.head.xpath("//attribute[@name='product-id']")
-            base_path = pkg_resources.resource_filename(__name__, 'data')
-            products_path = objectify.parse(base_path + '/config/products.xml') 
-            products_root = products_path.getroot()
+            products_path = pkg_resources.resource_filename(__name__, 'config/products.xml')
+            products_tree = objectify.parse(products_path) 
+            products_root = products_tree.getroot()
 
             if product_id:
 
-                #product_name = root.head.xpath("//product[@id='%s']") % product_id.pop()  
-                #product_name = products_root
-
-                return #products_path.getroot().products
-
-                #if(product_id.pop() is 'ZMLB'):
-                 #   return
-                #elif (product_id.pop() is 'ZEI'):
-                 #   return
+                product_name = products_root.xpath("//product[@id='%s']/@title" % (product_id[0]))  
+                return product_name[0]
 
             else:
                 return 

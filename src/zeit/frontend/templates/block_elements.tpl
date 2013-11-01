@@ -4,7 +4,7 @@
     </p>
 {%- endmacro %}
 
-{% macro meta_box(date, class) -%}
+{% macro meta_box(date, source, class) -%}
     <figure class="{{ class }}">
         <div>
             <span>Aktualisiert</span>
@@ -12,7 +12,7 @@
         </div>
         <div>
             <span>Quellen</span>
-            <span>die Zeit</span>
+            <span>{{ source }}</span>
         </div>
     </figure>
 {%- endmacro %}
