@@ -71,6 +71,11 @@ class Article(Base):
     def source(self):
         return self.context.source
 
+    @property
+    def location(self):
+        return self.context.location
+
+
 class Gallery(Base):
     pass
 
