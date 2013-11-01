@@ -1,6 +1,7 @@
 {% extends "templates/layout.html" %}
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
+
 	<article class="article">
         <div class="article__wrap">
             <div class="article__head-wrap">
@@ -30,17 +31,19 @@
             </div>
 
             <div class="article__body has-dropcap">
-                {% set add_meta = true %}
+
+                {% set vars ={'add_meta': true} %}
 
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
+                        
                         {% if item is elem('p') %} 
                             
                             <!-- integrate meta box at first paragraph only -->
-                            {% if add_meta %} 
+                            {% if vars.add_meta %} 
                                 {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-                                {% set add_meta = false %}
+                                {% if vars.update({'add_meta': false}) %}{% endif %}
                             {% endif %}
 
                             {{ blocks.p(item, "is-constrained is-centered")}}
@@ -51,7 +54,7 @@
                             <!-- integrate meta box only when layout isn't large -->
                             {% if item.layout != 'large' and add_meta %} 
                                 {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-                                {% set add_meta = false %}
+                                {% if vars.update({'add_meta': false}) %}{% endif %}
                             {% endif %}
 
                             {{ blocks.image(item) }}

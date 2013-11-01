@@ -68,21 +68,12 @@ class Content (Resource):
         self.rankedTags = self.__construct_tags(root)
         self.source = self.__construct_source(root)
 
-        #root.head.xpath("//attribute[@name='product-name']").pop().text
-    
-        #attribute[@name='copyrights']
-        #attribute[@name='product-id']
-            #$product-id='ZMLB
-            #$productxml/product[@id=$product-id]/@href
-            #$product-id='ZEI' or $product-id='ZEAR'
-            #fallback: $productxml/product[@id=$product-id]
-
     def __construct_source(self, root):
-        try: 
+        try:
             copyright = root.head.xpath("//attribute[@name='copyrights']")
 
             if copyright:
-                return copyright 
+                return copyright
             else:
                 return self.__construct_product_id(root)
 
@@ -90,23 +81,24 @@ class Content (Resource):
             return __construct_product_id(root)
 
     def __construct_product_id(self, root):
-        try: 
+        try:
             product_id = root.head.xpath("//attribute[@name='product-id']")
-            products_path = pkg_resources.resource_filename(__name__, 'config/products.xml')
-            products_tree = objectify.parse(products_path) 
+            path = 'config/products.xml'
+            products_path = pkg_resources.resource_filename(__name__, path)
+            products_tree = objectify.parse(products_path)
             products_root = products_tree.getroot()
 
             if product_id:
 
-                product_name = products_root.xpath("//product[@id='%s']/@title" % (product_id[0]))  
+                expr = "//product[@id='%s']/@title" % (product_id[0])
+                product_name = products_root.xpath(expr)
                 return product_name[0]
 
             else:
-                return 
+                return
 
         except AttributeError:
-            return 
-
+            return
 
     def __construct_tags(self, root):
         try:
