@@ -37,7 +37,6 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        
                         {% if item is elem('p') %} 
                             
                             <!-- integrate meta box at first paragraph only -->
@@ -52,11 +51,11 @@
                         {% elif item is elem('image') %}
 
                             <!-- integrate meta box only when layout isn't large -->
-                            {% if item.layout != 'large' and add_meta %} 
+                            {% if item.layout != 'large' and vars.add_meta %} 
                                 {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
                                 {% if vars.update({'add_meta': false}) %}{% endif %}
                             {% endif %}
-
+            
                             {{ blocks.image(item) }}
                         {% elif item is elem('citation') %}
                             {{ blocks.citation(item) }}
