@@ -16,7 +16,7 @@
                             todo: place date into article
                             {{view.publish_date | format_date('long')}}
                         -->
-                        {{ blocks.article_meta(view.author, view.genre) }}
+                        {{ blocks.article_meta(view.author, view.genre, view.location) }}
 
                         <div class="article__subtitle">
                             <p>{{view.subtitle}}</p>

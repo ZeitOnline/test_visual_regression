@@ -78,13 +78,16 @@
     </figure>
 {%- endmacro %}
 
-{% macro article_meta(author, genre) -%}
+{% macro article_meta(author, genre, location) -%}
     <aside class="article__meta">
         {% if genre %}
             <span class="article__meta__genre">{{genre}}</span>
             <span class="article__meta__author"> von {{author}}</span>
         {% else %}
             <span class="article__meta__author">Von {{author}}</span>
+        {% endif %}
+        {% if location %}
+            <span class="article__meta__location">, {{location}}</span>
         {% endif %}
     </aside>
 {%- endmacro %}
