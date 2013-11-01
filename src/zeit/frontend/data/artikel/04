@@ -79,6 +79,7 @@
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">38</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">reportage</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="location">Berlin</attribute>
     </head>
     <body>
         <supertitle>Szene-Stadt</supertitle>
