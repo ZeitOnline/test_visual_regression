@@ -79,11 +79,11 @@ class Content (Resource):
             #fallback: $productxml/product[@id=$product-id]
 
     def __construct_source(self, root):
-        try: 
+        try:
             copyright = root.head.xpath("//attribute[@name='copyrights']")
 
             if copyright:
-                return copyright 
+                return copyright
             else:
                 return self.__construct_product_id(root)
 
@@ -91,23 +91,22 @@ class Content (Resource):
             return __construct_product_id(root)
 
     def __construct_product_id(self, root):
-        try: 
+        try:
             product_id = root.head.xpath("//attribute[@name='product-id']")
             products_path = pkg_resources.resource_filename(__name__, 'config/products.xml')
-            products_tree = objectify.parse(products_path) 
+            products_tree = objectify.parse(products_path)
             products_root = products_tree.getroot()
 
             if product_id:
 
-                product_name = products_root.xpath("//product[@id='%s']/@title" % (product_id[0]))  
+                product_name = products_root.xpath("//product[@id='%s']/@title" % (product_id[0]))
                 return product_name[0]
 
             else:
-                return 
+                return
 
         except AttributeError:
-            return 
-
+            return
 
     def __construct_tags(self, root):
         try:
@@ -116,13 +115,15 @@ class Content (Resource):
             return
 
     def __construct_genre(self, root):
-        rawgenre = root.head.xpath("//attribute[@name='genre']")
-        if len(rawgenre) > 0:
-            genreconfig = pkg_resources.resource_filename(__name__, "config/article-genres.xml")
-            genretree = objectify.parse(genreconfig)
-            genreroot = genretree.getroot()
-            expr = "//genre[@name='%s' and @display-frontend='true']/@prose" % (rawgenre[0])
-            self.genre = genreroot.xpath(expr)[0]
+        genres = root.head.xpath("//attribute[@name='genre']")
+        path = "config/article-genres.xml"
+        if len(genres) > 0:
+            gconf = pkg_resources.resource_filename(__name__, path)
+            gtree = objectify.parse(gconf)
+            groot = gtree.getroot()
+            expr = "//genre[@name='%s' and @display-frontend='true']/@prose" %\
+                (genres.pop(0))
+            self.genre = groot.xpath(expr).pop(0)
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
@@ -180,6 +181,7 @@ class Img(object):
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = xml.get('layout')
 
+
 @implementer(interfaces.IIntertitle)
 class Intertitle(object):
 
@@ -216,6 +218,7 @@ class Video(object):
     def __init__(self, xml):
         pass
 
+
 @implementer(interfaces.ITags)
 class Tags(object):
 
@@ -233,6 +236,7 @@ class Tags(object):
             content.append(Tag(item))
         return content
 
+
 @implementer(interfaces.ITag)
 class Tag(object):
 
@@ -243,17 +247,20 @@ class Tag(object):
     def __str__(self):
         return unicode(self.html)
 
+
 def _get_pages(pages_xml):
     pages = []
     for page in pages_xml:
         pages.append(Page(page))
     return pages
 
+
 def _get_tags(tags_xml):
     tags = []
     for tag in tags_xml:
         tags.append(Tags(tag))
     return tags
+
 
 def _inline_html(xml):
     filter_xslt = etree.XML('''
