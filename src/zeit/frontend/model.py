@@ -66,10 +66,11 @@ class Content (Resource):
         self.__construct_tags(root)
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
-        self.source = self.__construct_source(root)
+        self.location =\
+            root.head.xpath("//attribute[@name='location']").pop(0)
 
         #root.head.xpath("//attribute[@name='product-name']").pop().text
-    
+
         #attribute[@name='copyrights']
         #attribute[@name='product-id']
             #$product-id='ZMLB
