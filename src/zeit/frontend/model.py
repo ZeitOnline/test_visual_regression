@@ -66,8 +66,7 @@ class Content (Resource):
         self.__construct_tags(root)
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
-        self.location =\
-            root.head.xpath("//attribute[@name='location']").pop(0)
+        self.location = self.__construct_location(root)
 
         #root.head.xpath("//attribute[@name='product-name']").pop().text
 
@@ -106,6 +105,12 @@ class Content (Resource):
                 return
 
         except AttributeError:
+            return
+
+    def __construct_location(self, root):
+        try:
+            return root.head.xpath("//attribute[@name='location']").pop()
+        except IndexError:
             return
 
     def __construct_tags(self, root):
