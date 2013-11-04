@@ -5,6 +5,7 @@ import pyramid.config
 import pyramid_jinja2
 import zope.interface
 import zeit.frontend.interfaces
+from babel.dates import format_datetime
 
 
 def factory(global_config, **settings):
@@ -15,6 +16,8 @@ def factory(global_config, **settings):
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
     utility.globals.update(zeit.frontend.navigation.get_sets())
     utility.tests['elem'] = is_block
+    utility.filters['format_date'] = format_date
+    utility.filters['translate_url'] = translate_url
     utility.trim_blocks = True
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
     config.add_route('json', 'json/*traverse')
@@ -40,3 +43,13 @@ def is_block(obj, b_type):
     if b_type == 'advertising':
         interface = zeit.frontend.interfaces.IAdvertising
     return interface in zope.interface.providedBy(obj)
+
+
+def translate_url(obj):
+    return obj.replace("xml.zeit.de", "www.zeit.de", 1)
+
+
+def format_date(obj, type):
+    if type == 'long':
+        format = "dd. MMMM yyyy, H:mm 'Uhr'"
+        return format_datetime(obj, format, locale="de_De")

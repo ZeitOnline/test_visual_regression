@@ -4,6 +4,7 @@ from os.path import isfile
 from zope.interface import implementer
 from zeit.frontend import interfaces
 import pkg_resources
+import iso8601
 
 
 class Resource(object):
@@ -39,6 +40,10 @@ class Content (Resource):
     header_img_src = ''
     lead_pic = ''
     author = ''
+    publish_date = ''
+    rankedTags = []
+    genre = ''
+    source = ''
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -52,13 +57,87 @@ class Content (Resource):
         self.supertitle = unicode(root.body.supertitle)
         self.__construct_pages(root)
         self.__extract_header_img(root)
+        self.author = self.__construct_author(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        # Startbild
-        # Datum | Uhrzeit
-        # Autor
-        # intertitle
-        # division -> p | img -> bu
+        dpth = "//attribute[@name='date_first_released']"
+        pdate = root.head.xpath(dpth).pop().text
+        self.publish_date = iso8601.parse_date(pdate)
+        self.__construct_tags(root)
+        self.__construct_genre(root)
+        self.rankedTags = self.__construct_tags(root)
+        self.location = self.__construct_location(root)
+
+    def __construct_author(self, root):
+        try:
+            name = unicode(root.head.author.display_name)
+            try:
+                url = root.head.author.xpath("@href")
+                if(len(url) > 0):
+                    url = url.pop()
+                else:
+                    url = ""
+                return (name, url)
+            except AttributeError:
+                return (name,)
+        except AttributeError:
+            return
+
+    def __construct_source(self, root):
+        try:
+            copyright = root.head.xpath("//attribute[@name='copyrights']")
+
+            if copyright:
+                return copyright
+            else:
+                return self.__construct_product_id(root)
+
+        except AttributeError:
+            return __construct_product_id(root)
+
+    def __construct_product_id(self, root):
+        try:
+            product_id = root.head.xpath("//attribute[@name='product-id']")
+            path = 'config/products.xml'
+            products_path = pkg_resources.resource_filename(__name__, path)
+            products_tree = objectify.parse(products_path)
+            products_root = products_tree.getroot()
+
+            if product_id:
+
+                expr = "//product[@id='%s']/@title" % (product_id[0])
+                product_name = products_root.xpath(expr)
+
+                return product_name[0]
+
+            else:
+                return
+
+        except AttributeError:
+            return
+
+    def __construct_location(self, root):
+        try:
+            return root.head.xpath("//attribute[@name='location']").pop()
+        except IndexError:
+            return
+
+    def __construct_tags(self, root):
+        try:
+            return _get_tags(root.head.rankedTags)
+        except AttributeError:
+            return
+
+    def __construct_genre(self, root):
+        genres = root.head.xpath("//attribute[@name='genre']")
+        path = "config/article-genres.xml"
+        if len(genres) > 0:
+            gconf = pkg_resources.resource_filename(__name__, path)
+            gtree = objectify.parse(gconf)
+            groot = gtree.getroot()
+            expr = "//genre[@name='%s' and @display-frontend='true']/@prose" %\
+                (genres.pop(0))
+            self.genre = groot.xpath(expr).pop(0)
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
@@ -67,7 +146,7 @@ class Content (Resource):
     def __extract_header_img(self, root):
         first_img = root.body.find('division').find('image')
         if (first_img.get('layout') == 'zmo_header'):
-            self.header_img_src = first_img.get('src')
+            self.header_img = Img(first_img)
 
 
 @implementer(interfaces.IPage)
@@ -154,11 +233,47 @@ class Video(object):
         pass
 
 
+@implementer(interfaces.ITags)
+class Tags(object):
+
+    __content = []
+
+    def __init__(self, tag_xml):
+        self.__content = iter(self._extract_items(tag_xml))
+
+    def __iter__(self):
+        return self.__content
+
+    def _extract_items(self, tag_xml):
+        content = []
+        for item in tag_xml.iterchildren():
+            content.append(Tag(item))
+        return content
+
+
+@implementer(interfaces.ITag)
+class Tag(object):
+
+    def __init__(self, xml):
+        self.html = _inline_html(xml)
+        self.url = xml.get('url_value')
+
+    def __str__(self):
+        return unicode(self.html)
+
+
 def _get_pages(pages_xml):
     pages = []
     for page in pages_xml:
         pages.append(Page(page))
     return pages
+
+
+def _get_tags(tags_xml):
+    tags = []
+    for tag in tags_xml:
+        tags.append(Tags(tag))
+    return tags
 
 
 def _inline_html(xml):

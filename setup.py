@@ -12,6 +12,8 @@ setup(
         'simplejson',
         'supervisor',
         'waitress',
+        'iso8601',
+        'Babel',
     ],
     entry_points={
         'paste.app_factory': [
