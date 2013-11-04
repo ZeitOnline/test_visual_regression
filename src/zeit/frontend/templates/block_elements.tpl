@@ -81,13 +81,23 @@
 {% macro article_meta(author, genre, location) -%}
     {% set prefix = " von " if genre %}
     {% set suffix = ", " if location %}
+    
     <aside class="article__meta">
         {% if genre %}
             <span class="article__meta__genre">{{genre}}</span>
         {% endif %}
-        {{prefix|default("Von ")}}<span class="article__meta__author">{{author}}</span>{{suffix}}
+        {{prefix|default("Von ")}}{{authorlink(author)}}{{suffix}}
         {% if location %}
             <span class="article__meta__location">{{location}}</span>
         {% endif %}
     </aside>
+{%- endmacro %}
+
+{% macro authorlink(author, class="article__meta__author") -%}
+    {% set authorname, authorurl = author %}
+    {% if authorurl -%}
+        <a href="{{authorurl|translate_url}}" class="{{class}}">{{authorname}}</a>
+    {%- elif authorname -%}
+        <span class="{{class}}">{{authroname}}</span>
+    {%- endif %}
 {%- endmacro %}
