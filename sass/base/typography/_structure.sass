@@ -5,6 +5,18 @@
   letter-spacing: 1px
   margin-bottom: $micro
 
+.meta-link, %meta-link
+  border-bottom: 2px solid $blue
+  margin-left: $micro
+  text-decoration: none
+  &:link
+    color: $blue
+  &:visited
+    color: $blue
+  &:hover
+    color: #7fa7e1
+    border-bottom: 2px solid #7fa7e1
+
 .meta, %meta
   +tablet
   color: $grey
@@ -33,7 +45,7 @@
   font-size: $font-s--px
   margin-left: $fine
   &:before
-    content: '̶'
+    content: '- '
   a
     @extend %meta-link
 
