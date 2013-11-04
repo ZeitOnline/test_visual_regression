@@ -22,8 +22,7 @@
 			storage_base_string = 'de.zeit.zmo__webfonts--';
 
 			// detect old browsers that won’t support woff anyways
-			// alternative: ('querySelector' in document && 'localStorage' in window && 'addEventListener' in window)
-			var is_old_browser = ua.indexOf( "Android" ) > -1 && ua.indexOf( "like Gecko" ) > -1 && ua.indexOf( "Chrome" ) === -1 || window.document.documentElement.className.indexOf( "lt-ie9" ) > -1,
+			var is_old_browser = 'querySelector' in document && 'localStorage' in window && 'addEventListener' in window && ua.indexOf( "Android" ) > -1 && ua.indexOf( "like Gecko" ) > -1 && ua.indexOf( "Chrome" ) === -1 || window.document.documentElement.className.indexOf( "lt-ie9" ) > -1,
 			inject_ref = window.document.getElementsByTagName( "link" )[0];
 
 			function append_css(style) {
