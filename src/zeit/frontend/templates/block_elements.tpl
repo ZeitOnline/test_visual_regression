@@ -98,8 +98,8 @@
 {% macro authorlink(author, class="article__meta__author") -%}
     {% set authorname, authorurl = author %}
     {% if authorurl -%}
-        <a href="{{authorurl|translate_url}}" class="{{class}}">{{authorname}}</a>
+        <a href="{{authorurl|translate_url}}" class="{{class}} meta-link">{{authorname}}</a>
     {%- elif authorname -%}
-        <span class="{{class}}">{{authroname}}</span>
+        <span class="{{class}}">{{authorname}}</span>
     {%- endif %}
 {%- endmacro %}
