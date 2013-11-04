@@ -57,7 +57,7 @@ class Content (Resource):
         self.supertitle = unicode(root.body.supertitle)
         self.__construct_pages(root)
         self.__extract_header_img(root)
-        self.author = unicode(root.head.author.display_name)
+        self.author = self.__construct_author(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         dpth = "//attribute[@name='date_first_released']"
@@ -67,6 +67,21 @@ class Content (Resource):
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
         self.location = self.__construct_location(root)
+
+    def __construct_author(self, root):
+        try:
+            name = unicode(root.head.author.display_name)
+            try:
+                url = root.head.author.xpath("@href")
+                if(len(url) > 0):
+                    url = url.pop()
+                else:
+                    url = ""
+                return (name, url)
+            except AttributeError:
+                return (name,)
+        except AttributeError:
+            return
 
     def __construct_source(self, root):
         try:
