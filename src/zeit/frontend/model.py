@@ -73,7 +73,11 @@ class Content (Resource):
             name = unicode(root.head.author.display_name)
             try:
                 url = root.head.author.xpath("@href")
-                return (name, url.pop())
+                if(len(url) > 0):
+                    url = url.pop()
+                else:
+                    url = ""
+                return (name, url)
             except AttributeError:
                 return (name,)
         except AttributeError:
