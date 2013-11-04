@@ -19,7 +19,16 @@
             quote
         {% endif %}
     ">
-        {{ obj.text }}
+        <span class="quote__text">{{ obj.text }}</span>
+        {% if obj.attribution %}
+            {% if obj.url %}
+                <a href="{{ obj.url }}">
+                    <span class="quote__author">{{ obj.attribution }}</span>
+                </a>
+            {% else %}
+                <span class="quote__author">{{ obj.attribution }}</span>
+            {% endif %}
+        {% endif %}
     </blockquote>
 {%- endmacro %}
 

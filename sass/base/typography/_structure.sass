@@ -18,10 +18,24 @@
 
 .quote, %quote
   +tablet(thin)
+
+.quote__text
   &:before
     content: '»'
   &:after
     content: '«'
+
+.quote__author
+  +tablet
+  display: block
+  margin-top: $small
+  color: $grey
+  font-size: $font-s--px
+  margin-left: $fine
+  &:before
+    content: '̶'
+  a
+    extend %meta-link 
 
 .quote--loud, %quote--loud
   @extend %quote
