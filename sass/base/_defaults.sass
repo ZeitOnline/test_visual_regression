@@ -13,3 +13,13 @@ img
   max-width: 100%
   height: auto
   display: block
+
+a
+  +link-colors($red, $red, $red, $dark-red, $red)
+  +transition(border-color, 0.2s)
+  border-bottom: 1px solid $white
+  padding-bottom: -0.05em
+  text-decoration: none
+  +on-interaction
+    text-decoration: none
+    border-color: $red
