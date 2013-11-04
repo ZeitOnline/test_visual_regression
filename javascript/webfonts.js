@@ -7,12 +7,13 @@
 			var font_dictionary = [
 				{
 					identifier: 'base',
+					selector: null,
 					has_priority: true,
 					path: '/css/standalone-fonts/base.css'
 				},
 				{
 					identifier: 'quotes',
-					selectors: ['.quote', '.quote--loud'],
+					selector: '.quote, .quote--loud',
 					has_priority: false,
 					path: '/css/standalone-fonts/quotes.css'
 				}
@@ -56,14 +57,17 @@
 				for (var i in font_dictionary) {
 					if (i) {
 						var pack = font_dictionary[i];
-						pack.data = localStorage.getItem(storage_base_string + pack.identifier);
-						// if pack has priority or data is already in localstorage: apply immediately
-						if (pack.has_priority || pack.data) {
-							// drop it in as fast as possible
-							fetch_css(pack.path, pack.identifier, pack.data);
-						} else {
-							// schedule for later lazy loading
-							scheduled_fonts.push(font_dictionary[i]);
+						// apply fonts if no selector present or selector returns at least one element
+						if (!pack.selector || document.querySelectorAll(pack.selector).length >= 1) {
+							pack.data = localStorage.getItem(storage_base_string + pack.identifier);
+							// if pack has priority or data is already in localstorage: apply immediately
+							if (pack.has_priority || pack.data) {
+								// drop it in as fast as possible
+								fetch_css(pack.path, pack.identifier, pack.data);
+							} else {
+								// schedule for later lazy loading
+								scheduled_fonts.push(font_dictionary[i]);
+							}
 						}
 					}
 				}
