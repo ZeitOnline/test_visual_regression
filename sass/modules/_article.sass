@@ -28,13 +28,11 @@
 	margin-bottom: $medium
 	+respond-max($break-2)
 		font-size: $font-xs
-	+respond-min($break-2)
-		margin-bottom: $large
 
 .article__subtitle
 	+franziska(semibold)
 	@extend %copy
-	margin-bottom: $small
+	margin-bottom: $medium
 
 .article__subheading
 	@extend %subheading
@@ -60,7 +58,7 @@
 .article__tags
 	@extend %meta
 	@extend .article__meta
-	font-size: $smaller
+	font-size: $font-s
 	margin-top: $huge
 	text-transform: uppercase
 	a
@@ -75,8 +73,8 @@
 .article__meta__box
 	div
 		@extend %meta
-		font-size: $smaller
-		margin-top: $small	
+		font-size: $font-s
+		margin-top: $small
 	span
 		display: block
 		text-transform: uppercase
