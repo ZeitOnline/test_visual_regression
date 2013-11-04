@@ -1,17 +1,17 @@
 =franziska($weight: regular, $style: normal)
   line-height: $base-line-height
   @if $weight == hair
-    font-family: 'Franziska FF Hair'
+    font-family: "Franziska FF Hair", $serif-fallbacks
     font-weight: 400
   @else if $weight == regular
-    font-family: 'Franziska FF'
+    font-family: "Franziska FF", $serif-fallbacks
     font-weight: 400
   @else if $weight == bold
-    font-family: 'Franziska FF Bold'
+    font-family: "Franziska FF Bold", $serif-fallbacks
     font-weight: 700
     line-height: $base-line-height*0.9
   @else if $weight == semibold
-    font-family: 'Franziska FF SemiBold'
+    font-family: "Franziska FF SemiBold", $serif-fallbacks
     font-weight: 700
     line-height: $base-line-height*0.9
   @if $style == italic
@@ -21,25 +21,25 @@
 
 =cassise($weight: bold)
   @if $weight == bold
-    font-family: 'cassise_modernfatface'
+    font-family: "cassise_modernfatface", $serif-fallbacks
     font-weight: normal
     line-height: $base-line-height*0.95
 
 =tablet($weight: regular)
   @if $weight == regular
-    font-family: 'TabletGothic'
+    font-family: "TabletGothic", $sans-fallbacks
     font-weight: normal
     line-height: $base-line-height
   @else if $weight == bold
-    font-family: 'TabletGothic-Bold'
+    font-family: "TabletGothic-Bold", $sans-fallbacks
     font-weight: normal
     line-height: $base-line-height*0.8
   @else if $weight == fat
-    font-family: 'TabletGothic-ExtraBold'
+    font-family: "TabletGothic-ExtraBold", $sans-fallbacks
     font-weight: normal
     line-height: $base-line-height*0.8
   @else if $weight == thin
-    font-family: 'TabletGothicCompressed-Thin'
+    font-family: "TabletGothicCompressed-Thin", $sans-fallbacks
     font-weight: normal
     line-height: $base-line-height*0.9
   font-weight: normal
