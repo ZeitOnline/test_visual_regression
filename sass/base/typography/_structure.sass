@@ -5,21 +5,9 @@
   letter-spacing: 1px
   margin-bottom: $micro
 
-.meta-link, %meta-link
-  border-bottom: 2px solid $blue
-  margin-left: $micro
-  text-decoration: none
-  &:link
-    color: $blue
-  &:hover
-    color: #7fa7e1
-    border-bottom: 2px solid #7fa7e1
-
 .meta, %meta
   +tablet
   color: $grey
-  letter-spacing: 1px
-  text-transform: uppercase
 
 .subheading, %subheading
   +franziska(semibold)
@@ -47,7 +35,7 @@
   &:before
     content: '̶'
   a
-    extend %meta-link 
+    @extend %meta-link
 
 .quote--loud, %quote--loud
   @extend %quote
