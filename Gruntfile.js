@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 			},
 			target: {
 				src: ['<%= jshint.target.src %>'],
-				ignores: [ 'javascript/jquery-1.10.2.min.js' ],
+				ignores: ['javascript/jquery-1.10.2.min.js', 'javascript/resize-ads.js', 'javascript/modernizr.custom.42776.js'],
 				dest: project.codeDir + 'js/' + project.concatJs
 			}
 		},
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 			default: {
 				files: [
 					//copy non concatinated scripts
-					{ expand: true, cwd: 'javascript', src: [ project.jqueryVersion ], dest: project.codeDir + 'js/' },
+					{ expand: true, cwd: 'javascript', src: [ project.jqueryVersion, 'modernizr.custom.42776.js', 'resize-ads.js'], dest: project.codeDir + 'js/' },
 				]
 			}
 		},
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 				loopfunc: true, // no warnings about functions in loops
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
-				ignores: [ 'javascript/iqd-ads.js', 'javascript/jquery-1.10.2.min.js' ],
+				ignores: [ 'javascript/iqd-ads.js', 'javascript/jquery-1.10.2.min.js', 'javascript/modernizr.custom.42776.js' ],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
 			},
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 		watch: {
 			js: {
 				files: ['<%= jshint.target.src %>'],
-				tasks: ['jshint', 'concat', 'template'],
+				tasks: ['jshint', 'concat', 'copy'],
 			},
 			css: {
 				files: ['sass/*.sass', 'sass/**/*.sass', 'sass/**/**/*.sass', 'sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'],
