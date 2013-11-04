@@ -86,7 +86,9 @@
         {% if genre %}
             <span class="article__meta__genre">{{genre}}</span>
         {% endif %}
+        {% if author -%}
         {{prefix|default("Von ")}}{{authorlink(author)}}{{suffix}}
+        {%- endif %}
         {% if location %}
             <span class="article__meta__location">{{location}}</span>
         {% endif %}
