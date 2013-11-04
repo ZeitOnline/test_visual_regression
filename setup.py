@@ -20,6 +20,10 @@ setup(
             'main=zeit.frontend.application:factory',
         ],
     },
+    extras_require={
+        'test': [
+        ],
+    },
     namespace_packages=['zeit'],
     packages=find_packages('src'),
     package_dir={'': 'src'},
