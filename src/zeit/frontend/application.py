@@ -17,6 +17,7 @@ def factory(global_config, **settings):
     utility.globals.update(zeit.frontend.navigation.get_sets())
     utility.tests['elem'] = is_block
     utility.filters['format_date'] = format_date
+    utility.filters['translate_url'] = translate_url
     utility.trim_blocks = True
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
     config.add_route('json', 'json/*traverse')
@@ -44,6 +45,11 @@ def is_block(obj, b_type):
     return interface in zope.interface.providedBy(obj)
 
 
+def translate_url(obj):
+    return obj.replace("xml.zeit.de", "www.zeit.de", 1)
+
+
 def format_date(obj, type):
     if type == 'long':
-        return format_datetime(obj, "dd. MMMM yyyy, H:mm 'Uhr'", locale="de_De")
+        format = "dd. MMMM yyyy, H:mm 'Uhr'"
+        return format_datetime(obj, format, locale="de_De")
