@@ -20,11 +20,19 @@
 =bleed
   margin-left: -$page-padding--small
   margin-right: -$page-padding--small
+  width: auto !important
+  figcaption
+    margin-left: $page-padding--small !important
   +respond-min($break-1)
     margin-left: -$page-padding
     margin-right: -$page-padding
-  +respond-min($max-page-width - 2*$gutter)
+    figcaption
+      margin-left: $page-padding  !important
+  +respond-min($medium-content-width + 2*$gutter)
     margin: 0
+    figcaption
+      margin-left: auto !important
+
 
 =visuallyhidden
   border: 0
