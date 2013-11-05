@@ -66,6 +66,7 @@ class Content (Resource):
         self.__construct_tags(root)
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
+        self.source = self.__construct_source(root)
         self.location = self.__construct_location(root)
 
     def __construct_author(self, root):
