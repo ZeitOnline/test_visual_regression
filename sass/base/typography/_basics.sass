@@ -1,9 +1,5 @@
 // Opt-in Typography
 .copy, %copy
-  a
-    +link-colors($black, $black, $black, $black, $black)
-    +on-interaction
-      text-decoration: none
   p
     max-width: 41.25em
     margin-bottom: $fine
@@ -24,13 +20,12 @@
   blockquote, .quote
     @extend %quote
     @extend %font-l-xl
-    +max-width-rem(400px)
     color: $color-quote
     display: block
-    margin-top: $small
-    margin-bottom: $small
-    margin-left: auto
-    margin-right: auto
+    +respond-min($break-1)
+      float: left
+      max-width: em(120px)
+      margin: $large $medium $large auto
     &.quote--loud
       @extend %quote--loud
 
