@@ -160,16 +160,28 @@ class Page(object):
     def __iter__(self):
         return self.__content
 
+    def __add_meta(self, add_meta):
+        if add_meta is False:
+            return('metabox')
+        else:
+            return False
+
     def _extract_items(self, page_xml):
         content = []
+        add_meta = False
+
         for item in page_xml.iterchildren():
             if item.tag == 'p':
+                add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Para(item))
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
             if item.tag == 'image' and item.get('layout') != 'zmo_header':
+                if item.get('layout') != 'large':
+                    add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Img(item))
             if item.tag == 'citation':
+                add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
