@@ -13,7 +13,7 @@ def test_inline_html_should_filter_to_valid_html():
 
    xml = etree.fromstring(p)
    xml_str = """Text  <a href="foo"> ba </a> und <em>Text</em>
-                abc invalid
+           abc invalid
 """
    assert str(_inline_html(xml)) == xml_str
 
