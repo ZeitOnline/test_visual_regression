@@ -60,6 +60,10 @@ class Article(Base):
         return self.context.publish_date
 
     @property
+    def last_modified_date(self):
+        return self.context.last_modified_date
+
+    @property
     def rankedTags(self):
         return self.context.rankedTags
 

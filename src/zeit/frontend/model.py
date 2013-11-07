@@ -41,6 +41,7 @@ class Content (Resource):
     lead_pic = ''
     author = ''
     publish_date = ''
+    last_modified_date = ''
     rankedTags = []
     genre = ''
     source = ''
@@ -62,8 +63,8 @@ class Content (Resource):
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         pdate = self.__construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
-        #self.publish_date = pdate
-        self.__construct_tags(root)
+        ldate = self.__get_date_element(root, 'date-last-modified')
+        self.last_modified_date = iso8601.parse_date(ldate)
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
         self.source = self.__construct_source(root)
@@ -84,19 +85,19 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __get_publish_date(self, root, date_element):
+    def __get_date_element(self, root, date_element):
         date = "//attribute[@name='%s']" % date_element
         if root.head.xpath(date):
             return root.head.xpath(date).pop().text
 
     def __construct_publish_date(self, root):
-        lsp_date = self.__get_publish_date(root, 'last-semantic-published')
-        lsc_date = self.__get_publish_date(root, 'last-semantic-change')
-        dfr_date = self.__get_publish_date(root, 'date_first_released')
-        dlm_date = self.__get_publish_date(root, 'date-last-modified')
+        lsp_date = self.__get_date_element(root, 'last-semantic-published')
+        lsc_date = self.__get_date_element(root, 'last-semantic-change')
+        dfr_date = self.__get_date_element(root, 'date_first_released')
+        dlm_date = self.__get_date_element(root, 'date-last-modified')
 
         if lsp_date is not None:
-            return 'test'
+            return lsp_date
         elif lsc_date is not None:
             return lsc_date
         elif dfr_date is not None:
