@@ -60,9 +60,9 @@ class Content (Resource):
         self.author = self.__construct_author(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        dpth = "//attribute[@name='date_first_released']"
-        pdate = root.head.xpath(dpth).pop().text
+        pdate = self.__construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
+        #self.publish_date = pdate
         self.__construct_tags(root)
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
@@ -83,6 +83,28 @@ class Content (Resource):
                 return (name,)
         except AttributeError:
             return
+
+    def __get_publish_date(self, root, date_element):
+        date = "//attribute[@name='%s']" % date_element
+        if root.head.xpath(date):
+            return root.head.xpath(date).pop().text
+
+    def __construct_publish_date(self, root):
+        lsp_date = self.__get_publish_date(root, 'last-semantic-published')
+        lsc_date = self.__get_publish_date(root, 'last-semantic-change')
+        dfr_date = self.__get_publish_date(root, 'date_first_released')
+        dlm_date = self.__get_publish_date(root, 'date-last-modified')
+
+        if lsp_date is not None:
+            return 'test'
+        elif lsc_date is not None:
+            return lsc_date
+        elif dfr_date is not None:
+            return dfr_date
+        elif dlm_date is not None:
+            return dlm_date
+        else:
+            return ''
 
     def __construct_source(self, root):
         try:
