@@ -4,6 +4,19 @@
     </p>
 {%- endmacro %}
 
+{% macro meta_box(date, source, class) -%}
+    <figure class="{{ class }}">
+        <div>
+            <span>Aktualisiert</span>
+            <span>{{ date }}</span>
+        </div>
+        <div>
+            <span>Quellen</span>
+            <span>{{ source }}</span>
+        </div>
+    </figure>
+{%- endmacro %}
+
 {% macro intertitle(intertitle) -%}
     <h3 class="article__subheading is-constrained is-centered">
         {{ intertitle }}
@@ -19,7 +32,18 @@
             quote
         {% endif %}
     ">
-        {{ obj.text }}
+        <span class="quote__text">{{ obj.text }}</span>
+        {% if obj.attribution %}
+            {% if obj.url %}
+                <span class="quote__author">
+                    <a href="{{ obj.url }}">
+                        {{ obj.attribution }}
+                    </a>
+                </span>
+            {% else %}
+                <span class="quote__author">{{ obj.attribution }}</span>
+            {% endif %}
+        {% endif %}
     </blockquote>
 {%- endmacro %}
 
@@ -39,6 +63,8 @@
     <figure class="
         {% if obj.layout == 'large' %}
             figure-full-width
+        {% elif obj.layout == 'zmo_header' %}
+            article__main-image figure-full-width bleed
         {% elif obj.layout == 'medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
@@ -61,4 +87,30 @@
                 {{obj.copyright}}
             </figcaption>
     </figure>
+{%- endmacro %}
+
+{% macro article_meta(author, genre, location) -%}
+    {% set prefix = " von " if genre %}
+    {% set suffix = ", " if location %}
+    
+    <aside class="article__meta">
+        {% if genre %}
+            <span class="article__meta__genre">{{genre}}</span>
+        {% endif %}
+        {% if author -%}
+        {{prefix|default("Von ")}}{{authorlink(author)}}{{suffix}}
+        {%- endif %}
+        {% if location %}
+            <span class="article__meta__location">{{location}}</span>
+        {% endif %}
+    </aside>
+{%- endmacro %}
+
+{% macro authorlink(author, class="article__meta__author") -%}
+    {% set authorname, authorurl = author %}
+    {% if authorurl -%}
+        <a href="{{authorurl|translate_url}}" class="{{class}} meta-link">{{authorname}}</a>
+    {%- elif authorname -%}
+        <span class="{{class}}">{{authorname}}</span>
+    {%- endif %}
 {%- endmacro %}

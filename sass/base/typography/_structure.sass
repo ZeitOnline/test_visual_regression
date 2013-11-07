@@ -1,9 +1,13 @@
 .supertitle, %supertitle
   +tablet
   text-transform: uppercase
-  color: $red
+  color: $black
   letter-spacing: 1px
   margin-bottom: $micro
+  font-size: $font-s
+
+.meta-link, %meta-link
+  margin-left: $micro
 
 .meta, %meta
   +tablet
@@ -18,10 +22,24 @@
 
 .quote, %quote
   +tablet(thin)
+
+.quote__text
   &:before
     content: '»'
   &:after
     content: '«'
+
+.quote__author
+  +tablet
+  display: block
+  margin-top: $small
+  color: $grey
+  font-size: $font-s--px
+  margin-left: $fine
+  &:before
+    content: '- '
+  a
+    @extend %meta-link
 
 .quote--loud, %quote--loud
   @extend %quote

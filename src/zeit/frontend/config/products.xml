@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<products>
+  <product id="ZEDE" title="ZEIT ONLINE">ZEIT ONLINE</product>
+  <product id="ZEI" title="DIE ZEIT">DIE ZEIT</product>
+  <product id="leserartikel" href="http://www.zeit.de/leserartikel/index" title="Leserartikel">Leserartikel</product>
+  <product id="ZMLB" href="http://www.zeit.de/zeit-magazin/index" title="ZEITmagazin">ZEITmagazin</product>
+  <product id="TEST">Test/Development</product>
+  <product id="ZTCS" href="http://www.zeit.de/campus/index" title="ZEIT Campus">ZEIT Campus</product>
+  <product id="CSRG" href="http://www.zeit.de/campus/index" title="ZEIT CAMPUS Ratgeber">ZEIT CAMPUS Ratgeber</product>
+  <product id="ZTWI" href="http://www.zeit.de/wissen/zeit-wissen/index" title="ZEIT Wissen">ZEIT Wissen</product>
+  <product id="ZTGS" href="http://www.zeit.de/wissen/zeit-geschichte/index" title="ZEIT Geschichte">ZEIT Geschichte</product>
+  <product id="ZECH">Zeit Schweiz</product>
+  <product id="ZEOE">Zeit Oesterreich</product>
+  <product id="ZESA">Zeit Sachsen</product>
+  <product id="ZSF">Zeit Studienführer</product>
+  <product id="KINZ">Kinderzeit Magazin</product>
+  <product id="ADV">Advertorial</product>
+  <product id="News">DPA</product>
+  <product id="afp">AFP</product>
+  <product id="ADMIN">Administratives</product>
+  <product id="MMV" href="http://www.michael-mueller-verlag.de/" target="_blank" title="Michael Müller Verlag">Michael Müller Verlag</product>
+  <product id="TGS" href="http://www.tagesspiegel.de" target="_blank" title="Tagesspiegel">Tagesspiegel</product>
+  <product id="SpeDE" href="http://www.spektrum.de" target="_blank" title="spektrum.de">spektrum.de</product>
+  <product id="SdW" href="http://www.spektrum.de" target="_blank" title="Spektrum der Wissenschaft">Spektrum der Wissenschaft</product>
+  <product id="SpeD" href="http://www.spektrumdirekt.de" target="_blank" title="spektrumdirekt.de">spektrumdirekt.de</product>
+  <product id="Vice" href="http://www.vice.com/de" target="_blank" title="Vice">Vice</product>
+  <product id="GG" href="http://www.gehirn-und-geist.de/" target="_blank" title="Gehirn &amp; Geist">Gehirn &amp; Geist</product>
+  <product id="HaBl" href="http://www.handelsblatt.com" target="_blank" title="Handelsblatt">Handelsblatt</product>
+  <product id="CW" href="http://www.christundwelt.de/" target="_blank" title="Christ &amp; Welt">Christ &amp; Welt</product>
+  <product id="UGC">User Generated Content</product>
+  <product id="NAGEO" href="http://www.nationalgeographic.de" title="National Geographic">National Geographic</product>
+  <product id="GOLEM" href="http://www.golem.de" target="_blank" title="golem.de">golem.de</product>
+  <product id="SID" title="Sport-Informations-Dienst">Sport-Informations-Dienst</product>
+  <product id="Reuters" title="Reuters">Reuters</product>
+  <product id="WEKU" href="http://www.weltkunst.de/" target="_blank" title="Weltkunst">Weltkunst</product>
+  <product id="WIWO" href="http://www.wiwo.de/" target="_blank" title="WirtschaftsWoche">WirtschaftsWoche</product>
+  <product id="T3N" href="http://www.t3n.de" target="_blank" title="t3n">t3n</product>
+  <product id="Effilee" href="http://www.effilee.de/" target="_blank" title="Effilee">Effilee</product>
+  <product id="ZEAR" title="DIE ZEIT">DIE ZEIT</product>
+  <product id="Unknown" title="Unbekannt">Unbekannt</product>
+</products>

@@ -78,6 +78,8 @@
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:f04f8b3d-b055-45af-b540-cadf13334126}</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">38</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">reportage</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="location">Berlin</attribute>
     </head>
     <body>
         <supertitle>Szene-Stadt</supertitle>
@@ -117,7 +119,7 @@
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
     <p>In vielen der neu renovierten Häuser mit ihren meist aufwändig sanierten Wohnungen beträgt die Nettokaltmiete pro Quadratmeter bei Neuvermietungen mittlerweile 7,50 Euro oder mehr, hat Dieter Rink, Stadtsoziologe am UFZ Leipzig, beobachtet. Viele von Leipzigs Wächterhäusern, ein <a href="http://www.zeit.de/lebensart/2012-11/zwischennutzung-stadtentwicklung-prinzessinnengaerten" target="_blank" class="">Vorzeige-Konzept der Zwischennutzung</a> für sanierungsbedürftige Bauten, bei dem die Mieter einen geringen Obolus zahlen und dafür die Räumlichkeiten in Eigenarbeit renovieren, werden nach der privaten Instandsetzung teurer weitervermietet. <a href="http://www.querbeet-leipzig.de/" target="_blank" class="">Queerbeet</a>, ein Verein für städtisches Gemeinschaftsgärtnern, musste jüngst seinen Garten im Leipziger Westen aufgeben. Die Bagger sind bereits angerückt, eine neue Kita soll gebaut werden.  </p>
-    <citation text="Es war ein Gedankenanstoß, aber wir sind schnell auf Widerstand gestoßen." />
+    <citation text="Es war ein Gedankenanstoß, aber wir sind schnell auf Widerstand gestoßen." attribution="Ariane Jedlitschka, Kunstschaffende" layout="short"/>
     <p>Solche Verluste machen wütend. Die Menschen, die ihre Muskelkraft in das Abkratzen von Tapeten und ihre Liebe in Sprösslinge stecken, haben das Gefühl, ausgenutzt zu werden. Dabei sagt das Wort Zwischennutzung ja bereits, was es ist: eine Brücke zwischen dem unbenutzten Alten und dem aufgewerteten Neuen. Die Zwischennutzer werden Teil des Systems, das sie eigentlich ändern möchten.</p>
 </division>
 <division type="page" teaser="Die Zukunft eines sozialverträglichen Stadtlebens">

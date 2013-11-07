@@ -1,5 +1,6 @@
 from pyramid.view import view_config
 import zeit.frontend.model
+from babel.dates import get_timezone
 
 
 class Base(object):
@@ -12,6 +13,11 @@ class Base(object):
 
     def __call__(self):
         return {}
+
+    @property
+    def publish_date(self):
+        tz = get_timezone('Europe/Berlin')
+        return tz.localize(self.context.publish_date)
 
 
 @view_config(route_name='json',
@@ -42,8 +48,32 @@ class Article(Base):
         return self.context.pages
 
     @property
-    def header_img_src(self):
-        return self.context.header_img_src
+    def header_img(self):
+        return self.context.header_img
+
+    @property
+    def author(self):
+        return self.context.author
+
+    @property
+    def publish_date(self):
+        return self.context.publish_date
+
+    @property
+    def rankedTags(self):
+        return self.context.rankedTags
+
+    @property
+    def genre(self):
+        return self.context.genre
+
+    @property
+    def source(self):
+        return self.context.source
+
+    @property
+    def location(self):
+        return self.context.location
 
 
 class Gallery(Base):
