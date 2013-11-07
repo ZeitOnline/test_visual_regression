@@ -16,6 +16,16 @@ def jinja2_env(request):
     return utility
 
 
+def test_macro_intertitle_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    lines = tpl.module.intertitle("xy").splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
+    assert m == output
+
+
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
