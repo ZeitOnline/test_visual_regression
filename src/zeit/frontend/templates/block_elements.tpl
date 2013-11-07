@@ -107,10 +107,10 @@
 {%- endmacro %}
 
 {% macro authorlink(author, class="article__meta__author") -%}
-    {% set authorname, authorurl = author %}
-    {% if authorurl -%}
-        <a href="{{authorurl|translate_url}}" class="{{class}} meta-link">{{authorname}}</a>
-    {%- elif authorname -%}
-        <span class="{{class}}">{{authorname}}</span>
+    
+    {% if author.href -%}
+        <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>
+    {%- else -%}
+        <span class="{{class}}">{{author.name}}</span>
     {%- endif %}
 {%- endmacro %}

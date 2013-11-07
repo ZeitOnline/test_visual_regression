@@ -72,15 +72,11 @@ class Content (Resource):
     def __construct_author(self, root):
         try:
             name = unicode(root.head.author.display_name)
-            try:
-                url = root.head.author.xpath("@href")
-                if(len(url) > 0):
-                    url = url.pop()
-                else:
-                    url = ""
-                return (name, url)
-            except AttributeError:
-                return (name,)
+            url = root.head.author.xpath("@href")
+            if(len(url) > 0):
+                return {'name': name, 'href': url.pop()}
+            else:
+                return {'name': name}
         except AttributeError:
             return
 
