@@ -38,9 +38,7 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item == 'metabox' %} 
-                            {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-                        {% elif item is elem('p') %} 
+                        {% if item is elem('p') %} 
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
