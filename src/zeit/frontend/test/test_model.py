@@ -32,3 +32,6 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     markup = '<span class="article__meta__author">Nico</span>'
     assert markup == tpl.module.authorlink(('Nico','')).strip()
+
+def test_block_type_should_deliver_type_og_block_element():
+    pass
