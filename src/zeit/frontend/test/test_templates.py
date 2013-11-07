@@ -18,5 +18,9 @@ def jinja2_env(request):
 
 def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    markup = '<span class="article__meta__author">Nico</span>'
-    assert markup == tpl.module.authorlink(('Nico', '')).strip()
+    data = {'name': 'abc'}
+    markup = '<span class="article__meta__author">abc</span>'
+    assert markup == tpl.module.authorlink(data).strip()
+    markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
+    data = {'name': 'abc', 'href': 'xyz'}
+    assert markup == tpl.module.authorlink(data).strip()
