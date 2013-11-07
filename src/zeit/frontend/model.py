@@ -160,19 +160,12 @@ class Page(object):
     def __iter__(self):
         return self.__content
 
-    def __add_meta(self, add_meta):
-        if add_meta is False:
-            return('metabox')
-        else:
-            return False
-
     def _extract_items(self, page_xml):
         content = []
         add_meta = False
 
         for item in page_xml.iterchildren():
             if item.tag == 'p':
-                add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Para(item))
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
@@ -185,7 +178,19 @@ class Page(object):
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
+        content = __insert_metabox(content)
         return content
+
+
+def __insert_metabox(c):
+    c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
+    return c
+
+
+@implementer(interfaces.IMetaBox)
+class Metabox(object):
+    def __init__(self):
+        pass
 
 
 @implementer(interfaces.IPara)
