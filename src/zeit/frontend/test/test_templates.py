@@ -16,6 +16,17 @@ def jinja2_env(request):
     return utility
 
 
+def test_macro_p_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    html = 'Alles nicht so <em>wichtig</em>, oder?!'
+    lines = tpl.module.p(html, 'test').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<p class="test">Alles nicht so <em>wichtig</em>, oder?!</p>'
+    assert markup == output
+
+
 def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     data = {'name': 'abc'}
