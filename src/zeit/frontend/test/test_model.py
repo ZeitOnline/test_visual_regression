@@ -70,3 +70,22 @@ def test_metabox_should_be_inserted_before_first_paragraph():
     content = model.__insert_metabox(content)
 
     assert type(content[1]) ==  type(Metabox())
+
+def test_publish_date_should_produce_localized_date():
+    import iso8601
+    from zeit.frontend import view
+    from mock import Mock
+
+    pd = iso8601.parse_date("2013-10-10T10:00+00:00")
+    m = Mock()
+    m.publish_date = pd
+    base = view.Base(m,Mock())
+
+    assert base.publish_date == 0
+
+
+
+
+
+
+
