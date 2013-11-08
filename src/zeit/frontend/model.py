@@ -57,26 +57,28 @@ class Content (Resource):
         self.supertitle = unicode(root.body.supertitle)
         self.__construct_pages(root)
         self.__extract_header_img(root)
-        self.author = self.__construct_author(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         dpth = "//attribute[@name='date_first_released']"
         pdate = root.head.xpath(dpth).pop().text
         self.publish_date = iso8601.parse_date(pdate)
         self.__construct_tags(root)
-        self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
         self.source = self.__construct_source(root)
+        self.genre = self.__construct_genre(root)
         self.location = self.__construct_location(root)
+        self.author = self.__construct_author(root)
 
     def __construct_author(self, root):
         try:
-            name = unicode(root.head.author.display_name)
+            author = {'name': unicode(root.head.author.display_name)}
             url = root.head.author.xpath("@href")
-            if(len(url) > 0):
-                return {'name': name, 'href': url.pop()}
-            else:
-                return {'name': name}
+            if len(url) > 0:
+                author['href'] = url.pop()
+            author['prefix'] = " von " if self.genre else "Von "
+            if self.location:
+                author['suffix'] = ", "
+            return author
         except AttributeError:
             return
 
@@ -134,7 +136,7 @@ class Content (Resource):
             groot = gtree.getroot()
             expr = "//genre[@name='%s' and @display-frontend='true']/@prose" %\
                 (genres.pop(0))
-            self.genre = groot.xpath(expr).pop(0)
+            return groot.xpath(expr).pop(0)
 
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
