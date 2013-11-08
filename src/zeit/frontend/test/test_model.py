@@ -80,7 +80,16 @@ def test_publish_date_should_produce_localized_date():
     m.publish_date = pd
     base = view.Base(m,Mock())
 
-    assert base.publish_date == 0
+    #expected offset 200
+    assert str(base.publish_date) == '2013-10-10 12:00:00+02:00'
+
+    pd = iso8601.parse_date("2013-11-11T10:00+00:00")
+    m = Mock()
+    m.publish_date = pd
+    base = view.Base(m,Mock())
+
+    # expected offset 100
+    assert str(base.publish_date) == '2013-11-11 11:00:00+01:00'
 
 
 
