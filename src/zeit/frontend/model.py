@@ -162,18 +162,35 @@ class Page(object):
 
     def _extract_items(self, page_xml):
         content = []
+        add_meta = False
+
         for item in page_xml.iterchildren():
             if item.tag == 'p':
                 content.append(Para(item))
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
             if item.tag == 'image' and item.get('layout') != 'zmo_header':
+                if item.get('layout') != 'large':
+                    add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Img(item))
             if item.tag == 'citation':
+                add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
+        content = __insert_metabox(content)
         return content
+
+
+def __insert_metabox(c):
+    c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
+    return c
+
+
+@implementer(interfaces.IMetaBox)
+class Metabox(object):
+    def __init__(self):
+        pass
 
 
 @implementer(interfaces.IPara)
