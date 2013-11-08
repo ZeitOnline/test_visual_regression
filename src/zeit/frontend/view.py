@@ -56,10 +56,6 @@ class Article(Base):
         return self.context.author
 
     @property
-    def publish_date(self):
-        return self.context.publish_date
-
-    @property
     def last_modified_date(self):
         return self.context.last_modified_date
 

@@ -61,10 +61,12 @@ class Content (Resource):
         self.author = self.__construct_author(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
+        #publish date = shown in article and meta name=date
         pdate = self.__construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
+        # last modified date, shown in meta name=last_modified
         ldate = self.__get_date_element(root, 'date-last-modified')
-        self.last_modified_date = iso8601.parse_date(ldate)
+        self.last_modified_date = ldate
         self.__construct_genre(root)
         self.rankedTags = self.__construct_tags(root)
         self.source = self.__construct_source(root)
