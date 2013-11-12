@@ -59,11 +59,13 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
 
 def test_macro_subpagehead_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    css_class = 'article__subpagehead is-centered'
-    data = {'number': 1, 'subtitle': 'Title', 'class': css_class}
-    data_empty = {'number': 1, 'subtitle': '', 'class': css_class}
-    markup = '<div class="article__chapter"><span>Kapitel 1\
-    </span><span>— Title —</span><span></span></div>'
-    markup_empty = ''
-    assert markup == tpl.module.subpagehead(data).strip()
-    assert markup_empty == tpl.module.subpagehead(data_empty).strip()
+    css_class = 'article__subpage-head is-centered'
+    markup = '<div class="article__subpage-chapter"><span>Kapitel 1' \
+        '</span><span>- Title -</span><span></span></div>' \
+        '<div class="%s">1 - Title</div>' % css_class
+    lines = tpl.module.subpagehead(1, 'Title', css_class).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+    assert '' == tpl.module.subpagehead(0, '', '')

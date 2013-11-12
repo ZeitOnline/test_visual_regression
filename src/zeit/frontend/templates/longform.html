@@ -36,9 +36,12 @@
 
                 <section class="article__page">
                     
-                    {{ blocks.subpagehead( page.number, page.teaser, 'article__subpagehead is-centered' ) }}
+                    {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
 
                     <div class="article__page-wrap">
+
+                        {{ blocks.subpage_index( page.teaser ) }}
+                        {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
 
 	                    {% for item in page %}
 	                        {% if item is elem('p') %}

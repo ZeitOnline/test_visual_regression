@@ -45,16 +45,33 @@ $longform-content-max-width: 700px
     left: 5%
     width: 90%
     z-index: 2
-
 	
-  .article__subpagehead
+  .article__subpage-head
     @extend %subheading
     font-size: $font-xxl--px
     margin: $medium auto $large auto
     max-width: 920px	
     padding-left: $gutter
+  
+  .article_subpage-index
+    display: none
+    +respond-min($break-2)
+      display: inline
+    @extend %meta
+    max-width: em(240px)
+    background-color: $white
+    border-bottom: $micro solid $grey
+    padding-top: $medium
+    padding-bottom: $gutter
+    margin-right: $gutter
+    float: left
+    position: relative
+    top: -$large
+    span
+      display: block
+      margin: $gutter $gutter $gutter $gutter
 
-  .article__chapter
+  .article__subpage-chapter
     @extend %meta
     position: relative
     top: -$medium

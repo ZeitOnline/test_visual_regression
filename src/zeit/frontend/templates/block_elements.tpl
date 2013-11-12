@@ -4,15 +4,32 @@
     </p>
 {%- endmacro %}
 
-{% macro subpagehead(number, subtitle, class) -%}
+{% macro subpage_chapter(number, subtitle, class) -%}
     {% if subtitle %}
-        <div class="article__chapter">
+        <div class="{{ class }}">
             <span>Kapitel {{ number }}</span>
-            <span>— {{ subtitle }} —</span>
+            <span>- {{ subtitle }} -</span>
             <span></span>
         </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro subpage_index(subtitle) -%}
+    {% if subtitle %}
+        <div class="article_subpage-index">
+            <span>1 - Kein zeitlos sicheres Geschäft mehr</span>
+            <span>2 - Im Tod sind alle gleich</span>
+            <span>3 - Ein freier Markt mit Kampfpreisen</span>
+            <span>4 - Der Friedhof ein Spiegel des Diesseits</span>
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro subpage_head(number, subtitle, class) -%}
+    {% if subtitle %}
         <div class="{{ class }}">
-            {{ number }} — {{ subtitle }}
+            <a name="kapitel{{ number }}"></a>
+            {{ number }} - {{ subtitle }}
         </div>
     {% endif %}
 {%- endmacro %}
