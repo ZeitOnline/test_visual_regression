@@ -35,7 +35,9 @@
                 {% for page in view.pages %}
 
                 <section class="article__page">
+                    
                     {{ blocks.subpagehead( page.number, page.teaser, 'article__subpagehead is-centered' ) }}
+
                     <div class="article__page-wrap">
 
 	                    {% for item in page %}
