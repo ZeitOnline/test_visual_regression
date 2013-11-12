@@ -1,3 +1,5 @@
+$article-content-max-width: 660px
+
 // Opt-in Typography
 .copy, %copy
   p
@@ -57,7 +59,7 @@ figure
   &.figure-horizontal, &.figure-horizontal--right
     +pie-clearfix
     .figure__media, img
-      +max-width-rem(660px)
+      +max-width-rem($article-content-max-width)
       width: 100%
       display: block
       +respond-min($break-1)
@@ -92,7 +94,7 @@ figure
       display: block
       width: 100%
     .figure__caption, figcaption
-      +max-width-rem(660px)
+      +max-width-rem($article-content-max-width)
       margin: 0 auto
       +respond-min($break-3)
         padding-right: 10%
