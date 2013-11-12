@@ -64,7 +64,7 @@
         {% if obj.layout == 'large' %}
             figure-full-width
         {% elif obj.layout == 'zmo_header' %}
-            article__main-image figure-full-width bleed
+            article__main-image figure-full-width
         {% elif obj.layout == 'medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
@@ -95,7 +95,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro authorlink(author, class="article__meta__author") -%}    
+{% macro authorlink(author, class="article__meta__author") -%}
     {% if author.href -%}
         <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>
     {%- else -%}

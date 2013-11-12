@@ -2,7 +2,7 @@
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 
-	<article class="article">
+	<article class="article article--longform">
         <div class="article__wrap">
             <div class="article__head-wrap">
                 <header class="article__title-wrap">
@@ -48,7 +48,7 @@
                                 {% if vars.update({'add_meta': false}) %}{% endif %}
                             {% endif %}
 
-                            {{ blocks.p(item, "is-constrained is-centered")}}
+                            {{ blocks.p(item)}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
                         {% elif item is elem('image') %}
