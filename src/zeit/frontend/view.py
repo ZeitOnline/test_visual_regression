@@ -24,7 +24,7 @@ class Base(object):
              context=zeit.frontend.model.Content,
              renderer='json')
 @view_config(context=zeit.frontend.model.Content,
-             renderer='templates/article.html')
+             renderer='templates/longform.html')
 class Article(Base):
 
     @property

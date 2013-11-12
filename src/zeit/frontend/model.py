@@ -143,9 +143,12 @@ class Content (Resource):
         self.pages = _get_pages(pages)
 
     def __extract_header_img(self, root):
-        first_img = root.body.find('division').find('image')
-        if (first_img.get('layout') == 'zmo_header'):
-            self.header_img = Img(first_img)
+        try:
+            first_img = root.body.find('division').find('image')
+            if (first_img.get('layout') == 'zmo_header'):
+                self.header_img = Img(first_img)
+        except AttributeError:
+            return
 
 
 @implementer(interfaces.IPage)
