@@ -8,10 +8,11 @@
     {% if subtitle %}
         <div class="article__chapter">
             <span>Kapitel {{ number }}</span>
-            <span>- {{ subtitle }} -</span>
+            <span>— {{ subtitle }} —</span>
+            <span></span>
         </div>
         <div class="{{ class }}">
-            {{ number }} - {{ subtitle }}
+            {{ number }} — {{ subtitle }}
         </div>
     {% endif %}
 {%- endmacro %}

@@ -55,3 +55,15 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
     data = {'name': 'abc', 'href': 'xyz'}
     assert markup == tpl.module.authorlink(data).strip()
+
+
+def test_macro_subpagehead_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    css_class = 'article__subpagehead is-centered'
+    data = {'number': 1, 'subtitle': 'Title', 'class': css_class}
+    data_empty = {'number': 1, 'subtitle': '', 'class': css_class}
+    markup = '<div class="article__chapter"><span>Kapitel 1\
+    </span><span>— Title —</span><span></span></div>'
+    markup_empty = ''
+    assert markup == tpl.module.subpagehead(data).strip()
+    assert markup_empty == tpl.module.subpagehead(data_empty).strip()

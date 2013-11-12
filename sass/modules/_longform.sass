@@ -49,24 +49,31 @@ $longform-content-max-width: 700px
 	
   .article__subpagehead
     @extend %subheading
-    @extend %font-l-xl
-    margin: $large auto $large auto
+    font-size: $font-xxl--px
+    margin: $medium auto $large auto
     max-width: 920px	
+    padding-left: $gutter
 
   .article__chapter
     @extend %meta
+    position: relative
+    top: -$medium
     width: 100%
     background-color: $grey--bright
     span
       letter-spacing: $hair	
       font-size: $font-s--px	
       text-transform: uppercase	
-      min-width: 700px
       margin: auto
       display: block
       text-align: center
       &:first-child
+        padding-top: $large
         +tablet(bold)
+      &:last-child
+        padding-bottom: $large
+      +respond-min($break-2)
+        min-width: 700px
 
   .article__supertitle
     +tablet
