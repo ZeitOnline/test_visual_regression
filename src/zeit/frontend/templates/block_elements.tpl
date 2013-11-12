@@ -4,8 +4,12 @@
     </p>
 {%- endmacro %}
 
-{% macro subtitle(number, subtitle, class) -%}
+{% macro subpagehead(number, subtitle, class) -%}
     {% if subtitle %}
+        <div class="article__chapter">
+            <span>Kapitel {{ number }}</span>
+            <span>- {{ subtitle }} -</span>
+        </div>
         <div class="{{ class }}">
             {{ number }} - {{ subtitle }}
         </div>

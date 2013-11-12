@@ -38,3 +38,25 @@
   .article__title-wrap
     position: relative
     z-index: 2
+	
+  .article__subpagehead
+    @extend %subheading
+    @extend %font-l-xl
+    margin: $large auto $large auto
+    max-width: 920px	
+
+  .article__chapter
+    @extend %meta
+    width: 100%
+    background-color: $grey--bright
+    span
+      letter-spacing: $hair	
+      font-size: $font-s--px	
+      text-transform: uppercase	
+      min-width: 700px
+      margin: auto
+      display: block
+      text-align: center
+      &:first-child
+        +tablet(bold)
+        
