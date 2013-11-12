@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<article>
+    <head>
+        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/S/Henning_Sussebach/index.xml" publication-date="" expires="">
+            <display_name>Henning Sußebach</display_name>
+        </author>
+        <rankedTags xmlns:ns12="http://codespeak.net/lxml/objectify/pytype">
+            <tag type="free" uuid="7d5e3177-92bc-448b-927b-cd366faab64b">Sterben</tag>
+            <tag type="free" uuid="37d972d8-d308-4ba9-bfb6-5f710db7bb19">Tod</tag>
+            <tag type="free" uuid="6795b610-bb8b-4dc5-9c5f-153165fff1c0">Bestattung</tag>
+        </rankedTags>
+        <references>
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/42/bestattungsunternehmen-serway" year="2013" issue="42" ressort="Karriere" author="Christine Böhringer " contenttype="article" publication-date="" expires="">
+                <supertitle>Bestattungsunternehmen</supertitle>
+                <title>Ich besorg noch den Trauerflor, Papa</title>
+                <text>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat 
+sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</text>
+                <description>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat 
+sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</description>
+                <byline>von Christine Böhringer</byline>
+            </reference>
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/2013-10/spaetmoderner-mensch-sterben-optimierter-tod" year="2013" issue="41" ressort="Gesellschaft" author="Christian Schüle" contenttype="article" publication-date="" expires="">
+                <supertitle>Lebensende</supertitle>
+                <title>Der optimierte Tod</title>
+                <text>Der spätmoderne Mensch überlässt sein letztes Stündlein nicht länger Gott oder dem Schicksal. Er will das Sterben so gezielt gestalten wie seinen Lebenslauf. </text>
+                <description>Der spätmoderne Mensch überlässt sein letztes Stündlein nicht länger Gott oder dem Schicksal. Er will das Sterben so gezielt gestalten wie seinen Lebenslauf. </description>
+                <byline />
+                <image align="left" title="EKG" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-10/EKG/" type="jpg" publication-date="" expires="">
+                    <bu />
+                    <copyright>© Fabrizio Bensch/Reuters</copyright>
+                </image>
+            </reference>
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2012/46/Essay-Tod-Leben" year="2012" issue="46" ressort="Wissen" author="Christian Schüle" contenttype="article" publication-date="2012-11-15T01:39:15+00:00" expires="">
+                <supertitle>Umgang mit dem Tod</supertitle>
+                <title>Wie wir sterben lernen</title>
+                <text>Der Mensch lässt sich seinen Tod nicht mehr aus der Hand nehmen. Was lange Tabu war, ist in der Mitte der Gesellschaft angekommen. Ein Essay übers Sterben von C. Schüle</text>
+                <description>Der Mensch lässt sich seinen Tod nicht mehr aus der Hand nehmen. Was lange Tabu war, ist in der Mitte der Gesellschaft angekommen. Ein Essay übers Sterben von C. Schüle</description>
+                <byline>VON CHRISTIAN SCHÜLE</byline>
+                <image align="left" alt="Auf das Sterben vorbereitet: Eine todkranke Frau wird in einem Hospiz in den Arm genommen." title="Hospiz Sterben Tod " base-id="http://xml.zeit.de/wissen/gesundheit/2012-11/hospiz-sterben/" type="jpg" publication-date="" expires="">
+                    <bu>Auf das Sterben vorbereitet: Eine todkranke Frau wird in einem Hospiz in den Arm genommen.</bu>
+                    <copyright>©  John Moore/Getty Images</copyright>
+                </image>
+            </reference>
+        </references>
+        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/gesellschaft/2013-10/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
+            <bu>Einäscherung</bu>
+            <copyright>© Benne Ochs</copyright>
+        </image>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">1585573</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="author">Henning Sußebach</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breadcrumb_title">Friedhofsbetreiber machen sich Sorgen ums Geschäft</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-11-03T23:51:40.633335+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-24T06:00:00+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-11-03T23:52:43.246934+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-11-03T07:10:00.626737+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">24.10.2013</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="first_count">2013-11-01</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2013-44-friedhof-hamburg-ohlsdorf</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.aufmacher</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Ohlsdorf</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-11-03T07:09:52.421693+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2013-11-02</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.helmund</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="origname">Ohlsdorf</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="page">15</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">07b65ba335ce4337bb82fbffc727eb90</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2013-10-31T02:37:21+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="ressort">Dossier</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2013-44</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="text-length">37848</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">688</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:244818ef-9642-494c-aa8d-48db553d043a}</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">44</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+    </head>
+    <body>
+        <title>Die Angst des Friedhofs vor dem Tod</title>
+        <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Auch auf dem Großfriedhof in Hamburg-Ohlsdorf wächst die Sorge ums Geschäft: Bringen Apfelhaine und Ruhewälder die Rettung?</subtitle>
+        <byline>von Henning Sußebach</byline>
+        <division type="page">
+            <p>Auch der Tod hat in Deutschland ein exaktes Maß. 213 Zentimeter lang, 83
+      Zentimeter breit und 170 Zentimeter tief muss die Grube werden, die Artur und Jürgen an diesem
+      Morgen schaufeln, abgeschirmt von Rhododendren und im Schutz der frühen Stunde. Auf dem alten,
+      von Wiese überwachsenen Grabplatz M13-377 steht ein Sargbegräbnis an, der Klassiker. Routine
+      für das "Grüfte-Team", um sechs Uhr angerückt mit Bagger, Spaten, Harke. Mit staksigen
+      Schritten läuft Artur, ein junger Mann mit bleichem Nachtgesicht, ein nur für ihn sichtbares
+      Raster auf dem Rasen ab. Er markiert ein Rechteck, hebt den Daumen. Dann lässt Jürgen, ein
+      schnauzbärtiger Schweiger, die Baggerschaufel in den Boden beißen. Gras zerreißt. Mäuse
+      fliehen. Ein Frosch springt in die Büsche. Nach zwanzig Zentimetern winden sich erste
+      Würmer.</p>
+            <p>"Da kommt noch mehr", sagt Artur und stützt sich auf den Spaten.</p>
+            <p>Noch mehr? Auf Grabplatz M13-377 liegen Schicksale in Schichten. Eine alte Zink-Urne, die wie
+      ein Blindgänger im Boden schlief – Deckelprägung "Rudolph S..., gest. 27. 5. 1961" – und die
+      jetzt zerplatzt zwischen den Baggerzähnen. Ein Leichenhemd, halb zerfressen. Ein Sarggriff.
+      Und ein Oberschenkelknochen, schwarz wie Kohle. Zentimeter für Zentimeter nagt sich der Bagger
+      durch die Geologie der Generationen, im Verwaltungsdeutsch: immer tiefer hinab in eine
+      "Grabstätte" mit wiederholt "abgelaufenem Nutzungsrecht", "mehrfach wiederbelegt". Alte Tote
+      weichen neuen Toten. Auch die letzte Ruhe währt nicht ewig.</p>
+            <p>Nach einer halben Stunde sind die Männer unten. Artur streift sich Handschuhe über, lässt
+      eine Leiter in die Grube rasseln, klettert hinunter, gräbt am Grund der Gruft ein kleines
+      Loch, legt Oberschenkelknochen, Leichentuch und Urnensplitter hinein, zieht den Boden glatt
+      und sticht mit dem Spaten die Beißspuren der Baggerschaufel weg. "Damit es nicht so nach
+      Maschine aussieht", sagt er. "Das mögen die Menschen nicht."</p>
+            <p>In ein paar Stunden, wenn die Trauerzüge auf den Friedhof kommen, wird da das perfekte Loch
+      sein. Eins, das keine Fragen aufwirft. Das wie das erste und einzige auf Erden wirkt. Artur,
+      Jürgen und ihr Bagger werden dann verschwunden sein in den Weiten einer Trost- und
+      Trauerlandschaft, die wie eine dicht bewaldete Insel im Hamburger Hausgrau liegt. Sie werden
+      unsichtbar geworden sein auf einem Friedhof, der mit seinen 391 Hektar Fläche größer ist als
+      New Yorks Central Park, neunmal größer als der Vatikan. Ein grünes Grenzland zwischen Leben
+      und Tod, das bis heute 1,5 Millionen Leichen aufgenommen hat. Ein gigantischer Umschlagplatz
+      zwischen Diesseits und Jenseits, durchzogen von 17 Kilometer Straße, erschlossen von zwei
+      Buslinien mit 24 Haltestellen, gespeist von 78,5 Kilometer Wasserrohren, bestückt mit fünf
+      Notrufsäulen, 700 Schöpfbrunnen und 1300 Friedhofsbänken. Ein Ort, so schaurig-schön, dass die
+      Menschen hier spazieren gehen. Wie zur Beruhigung trägt er einen besonders betulichen Namen:
+      Ohlsdorf.</p>
+            <p>Wenn morgens die Stadt anspringt, ist die Arbeit auf Europas größtem Friedhof längst
+      angelaufen, wie an einem Fließband, das seit mehr als hundert Jahren Tag für Tag die Toten der
+      Stadt ins Himmelreich befördert. Oder, atheistisch ausgedrückt, unter die Erde. Ohlsdorf ist
+      die letzte, in sattem Grün versteckte Station der Stadtmaschinerie, sie wird geführt von einer
+      Anstalt öffentlichen Rechts und am Laufen gehalten von rund 300 Mitarbeitern: Totengräbern und
+      Tischlern, Steinmetzen und Elektrikern, Gärtnern und Köchen, Hotelfachwirten und
+      Kraftfahrzeugmechanikern, Klempnern und Kaufleuten. Wenn sie im ersten Licht des Tages zur
+      Arbeit angerückt sind, bewegen sie sich auf ihrem eigenen Koordinatennetz, auf Hunderten von
+      Planquadraten von AH 7 über Bp 74 bis ZX 13.</p>
+            <p>Wer zum ersten Mal nach Ohlsdorf kommt, hat das Gefühl, einen fremden Kontinent zu betreten,
+      auf dem er sich verlaufen kann. Ein Neuankömmling ahnt nicht, dass hier ein Arzt nach
+      Mordopfern sucht, ein Gärtner fingierte Gedenktafeln aufstellt und ein Metallmonster krachend
+      Grabsteine zerkaut – zu unüberschaubar ist das Terrain. Als vor drei Jahren Loki Schmidt
+      gestorben war, schickten die Boulevardzeitungen Reporter los. Auftrag: schon vor der
+      Beisetzung das Familiengrab der Schmidts zu fotografieren. Tagelang irrten sie umher. Fündig
+      wurden sie erst, als das Büro des Altkanzlers der Friedhofsverwaltung erlaubte, den exakten
+      Ort zu nennen.</p>
+            <p>Ohlsdorf. Dieser Friedhof ist einer wie keiner und doch einer wie alle. Ein einzigartiger
+      Mikrokosmos und zugleich Synonym für des Menschen Umgang mit dem Tod wie mit dem Leben. Ein
+      Friedhof ist steinernes Standbild, hier hinterlässt jede Generation ein Bild ihrer selbst, mal
+      ein kriegerisches, mal ein romantisches, mal ein religiöses, mal ein rationales. Auf jedem
+      Friedhof werden Lebensgeschichten über den Tod hinaus erzählt. Davon, wer die Verstorbenen
+      einmal waren. Und manchmal auch, wer sie gewesen sein möchten.</p>
+            <p>Ohlsdorf also. Man könnte die Geschichte des menschlichen Daseins hier sehr blutig erzählen,
+      anhand von Kriegsgräbern, Soldatengräbern, Massengräbern, Tätergräbern, Opfergräbern.</p>
+            <p>Man könnte sie traurig erzählen, wegen all der Kindergräber, der zu früh Geborenen,
+      Misshandelten, Überfahrenen, an Leukämie Gestorbenen, auf deren Grabfeldern Spielzeugautos
+      parken und Windspiele rotieren.</p>
+            <p>Man könnte sie blitzgewittrig erzählen, am Beispiel der vielen Prominenten, etwa der
+      Schauspieler Hans Albers, Gustaf Gründgens und Inge Meysel, des Malers Philipp Otto Runge, des
+      Schriftstellers Wolfgang Borchert, des Tierparkgründers Carl Hagenbeck oder der
+      Pornodarstellerin Sexy Cora, gestorben bei einer Brustvergrößerung und auf N 7 beerdigt als
+      Carolin Wosnitza.</p>
+            <p>Man könnte sie bedrückend erzählen wegen der "Vorhalteflächen", zum Beispiel auf Bl 54 und Bq
+      62, freigehalten für den Fall eines Flugzeugabsturzes, eines Terroranschlags, einer Epidemie,
+      eines nächsten Krieges.</p>
+        </division>
+        <caption>Soldatengräber aus dem Ersten Weltkrieg in Hamburg-Ohlsdorf – und neue Abgasfilter im
+      Krematorium</caption>
+        <caption>Wolfgang Purwin, Leiter des Ohlsdorfer Friedhofs</caption>
+        <caption>Urnentransportkästen, bereit für die anonyme Beisetzung (links); Marmorskulptur im
+      Friedhofswald</caption>
+        <caption>Schwarzkiefern mit herbstlich gefärbtem Wein (links); Sarg mit einem Verstorbenen in
+      der Kühlkammer vor der Einäscherung</caption>
+        <caption>Sandy Sven Vogt, Leiter des Krematoriums in Ohlsdorf</caption>
+        <image-credits>Fotos: Benne Ochs für DIE ZEIT/www.benneochs.de</image-credits>
+        <image-credits>Fotos (S. 16 + 17): Benne Ochs für DIE ZEIT/www.benneochs.de</image-credits>
+        <supertitle>Friedhof Hamburg-Ohlsdorf</supertitle>
+        <division type="page" teaser="Selbst der Tod garantiert kein zeitlos sicheres Geschäft mehr">
+            <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
+      Hamburger Vermessungstechniker, die auf den schnurgeraden Alleen ihre Infrarotgeräte
+      justieren, anhand des Biologen, der seit einem Jahr die Bäume zählt und noch nicht weit
+      gekommen ist. Oder anhand der Rehe, Füchse, Uhus, Graugänse, Steinmarder, Baumfalken,
+      Mauswiesel, Pelzbienen, Eisvögel, Gelbhalsmäuse, Grabwespen, Eichenzipfelfalter und sieben
+      Fledermausarten, die zwischen den Toten ein prächtiges Leben führen.</p>
+            <p>Man könnte sie soziologisch erzählen, weil in der Friedhofswelt von Ohlsdorf klar wird, zu
+      welcher Zeit die Menschen untereinander welche Trennlinien gezogen haben. Hier liegen die
+      Toten mal sortiert nach Herkunft: die Chinesen beispielsweise auf Bp 68 und die Schweizer auf
+      L 14–15. Mal nach Religion: die Mitglieder der einstigen iranisch-mohammedanischen Gemeinde
+      auf X 19 und die Anhänger des alten persischen Glaubens der Bahá’í auf Bo 72. Mal nach Beruf:
+      die Seemänner auf Bi 58 und die Bürsten- und Pinselmacher auf V 14.</p>
+            <p>Man muss sie jetzt aber hochaktuell erzählen, anhand der im ersten Moment verwunderlichen
+      Meldung, dass selbst der Tod kein zeitlos sicheres Geschäft mehr garantiert. Deutschlands
+      Friedhöfe sind nicht mehr ausgelastet, auch Ohlsdorf ist es nicht. Das Fließband gerät ins
+      Stocken. Weil eine schrumpfende Gesellschaft immer weniger Tote hergibt. Weil sich einige
+      Menschen – im Zeitalter der Individualisierung – nicht mehr nach dem Raster der Reihengräber
+      richten wollen. Und weil andere am liebsten spurlos verschwinden möchten, jedenfalls preiswert
+      und pflegeleicht.</p>
+            <p>Auf Planquadrat N 4, im barockprächtigen Verwaltungsgebäude, das wie ein kolonialer
+      Regierungssitz am Westtor von Ohlsdorf liegt, reden die Friedhofsmanager schon von
+      "Belegungsproblemen" und "Überhangflächen": ungenutztes Friedhofsland – schön, aber nutzlos
+      wie ein unbestellter Acker. Die Branche trifft sich zu Krisenkongressen, Stadtkämmerer
+      streichen Zuschüsse, Immobilienmakler hoffen auf Bauland mitten in den Städten.</p>
+            <p>Sogar ein Friedhof kann mal sterben. Denn zum Leben braucht er Tote.</p>
+            <p>Die Furcht der Friedhöfe vor dem eigenen Ende: In Ohlsdorf liegt sie gut versteckt unter viel
+      Pathos und Patina, wird überstrahlt von Superlativen und Reiseführer-Ruhm. Wer hört schon,
+      wenn Artur und Jürgen morgens beim Blick auf ihren Laufzettel sagen: "Heute nur sieben Särge?"
+      Wer sieht schon, wie sich der Geschäftsführer fast täglich die Zahlen bringen lässt. Und wer
+      kann wissen, dass sie in Ohlsdorf deshalb den Friedhof der Zukunft planen, ein ziemlich
+      lebensfrohes Totenreich namens "Ohlsdorf 2050", von dem noch die Rede sein wird.</p>
+            <p>Doch jetzt, im Oktober des Jahres 2013, hat im Keller des Krematoriums, auf Planquadrat V 3,
+      der Amtsarzt Doktor Otto Seibel seinen lindgrünen Kittel zugeknöpft, Plastikhandschuhe über
+      die Finger gezogen und die Kühlräume betreten. Eine weiß gekachelte Welt unter einem Himmel
+      aus Neonlicht, an den Wänden Metallregale mit Schubfächern voller Särge. Die Luft gesättigt
+      vom Geruch einsetzender Verwesung, ein Mix wie aus Schweiß, Kot und Bittermandel, bedampft mit
+      Zitrusduft aus Parfümspendern.</p>
+            <p>Das Krematorium ist ein himmelwärts strebender Backsteinbau mit einem Schornstein, so
+      kolossal wie ein Kirchturm, ganz oben eine Uhr und drei Wörter in Gold. "EINE VON DIESEN".
+      Eine Mahnung an die Menschen, die draußen durch die Straßen hasten: Eine von diesen Stunden
+      auf der Uhr wird für jeden irgendwann die letzte sein.</p>
+            <p>Die Einäscherung. Es gibt kein besseres Beispiel dafür, wie steter Wertewandel etwas
+      zeitverzögert immer den Umgang mit dem Tod verändert: Was heute als hygienisch und pragmatisch
+      gilt, war lange als vorgezogenes Fegefeuer verrufen und später als Bestattung zweiter Klasse
+      verschrien. Die katholische Kirche schloss erst 1963, auf dem 2. Vatikanischen Konzil, ihren
+      Frieden mit der Kremation. Inzwischen ist der Anteil der Einäscherungen in Deutschland von
+      0,02 Prozent im Jahr 1900 auf mehr als 50 Prozent gestiegen. Im Hamburg liegt er bei 73
+      Prozent, in Berlin bei 80, in Rostock um die 90. Und weil die Bestattungsgesetze bis zu acht
+      Urnen auf jener Fläche erlauben, die früher mal ein Sarg einnahm, schrumpfen die Friedhöfe
+      immer schneller.</p>
+            <p>Die Bestatter bringen die Toten meist in der Nacht, stille Zulieferer in schwarzen Wagen. Ein
+      Wink mit der Chipkarte, und automatisch schwingen die Türen zu den fünf Grad kalten Kühlräumen
+      auf. Letzte Wartesäle vor dem endgültigen Verschwinden. Buchten für 150 Leichen. Darunter acht
+      "Tiefkühlplätze", etwa für Fälle, in denen sich keine Angehörigen finden oder Kinder
+      ungeliebter Eltern ewig darum streiten, wer die Einäscherung bezahlen soll.</p>
+            <p>Im Kühlraum Nummer zwei stemmt sich Doktor Seibel ein Klemmbrett voller Totenscheine in den
+      Bauch und lässt seinen Kugelschreiber klicken, als spanne er einen Revolver. Vor seinen Augen
+      öffnen zwei Krematoriumsmitarbeiter fünf Särge. Ein Quietschen, ein Knarren, ein Blick auf das
+      Ende. Gesichter wie wächserne Masken. Drei Männer und zwei Frauen starren ins Nichts,
+      spitznasig, gelbhäutig, mit offenen Mündern. Vier von ihnen liegen in Inkontinenzwindeln, zwei
+      haben Kanülen im Arm. An ihren Knöcheln hängen noch die Namensbänder aus dem Krankenhaus. Sie
+      wirken, als seien sie im Sterben geschrumpft. Da ist viel Haut für wenig Körper.</p>
+            <p>Im kalten Fleisch der Toten tastet Seibel nach Knochenbrüchen, hebt Beine und Arme, sucht
+      nach Stichwunden, Schnitten, Dekubitusgeschwüren. Der Arzt zieht eine Pinzette aus der
+      Brusttasche und hebt die Augenlider der Toten an. "Ein Erstickungstod lässt Blutungen im Auge
+      zurück", murmelt er, "auffällig rosafarbene Haut könnte Folge einer Vergiftung sein." Bevor
+      ein Mensch verbrannt wird, Hinweise auf Verbrechen für immer verglühen, schickt das
+      Kriminologische Institut stets einen Experten zur zweiten amtsärztlichen Untersuchung vorbei.
+      Seibel arbeitet schnell und weitgehend stumm. Augen, Hals, Rücken, Unterleib. Im Durchschnitt
+      eine verdächtige Leiche pro Monat holt er sich zum Sezieren ins Institut. Manchmal werden
+      Verfahren wegen Vernachlässigung daraus, hin und wieder Mordprozesse. Heute brummt Seibel nur
+      Diagnosen wie "herzkrank" oder "Alkoholiker", macht Haken auf Haken unter die Totenscheine,
+      lässt den Kugelschreiber klicken und verabschiedet sich mit knappem Nicken. Die Männer vom
+      Krematorium streifen den Leichen silbrig schimmernde Totenhemden über und schließen die
+      Särge.</p>
+            <p>Am Ende des Flures bullern die Öfen. Dahinter vibriert ein Filtersystem, ein fauchendes
+      Röhrenwesen, das Staub schluckt und Ruß frisst, damit über der Stadt kein schwarzer Rauch
+      aufsteigt.</p>
+            <p>Wer hinter die Kulissen von Ohlsdorf blickt, lernt schnell: Friedhöfe sind illusionäre Orte.
+      All das Verwesen und Vergehen verhüllen sie mit einer Decke aus blühendem Leben. Jahr für Jahr
+      pflanzen die Gärtner von Ohlsdorf 270.000 Stiefmütterchen und 266.000 Begonien. Mit all den
+      Blumen, Kapellen und Engelsstatuen geben Friedhöfe ein Ewigkeitsversprechen. Sie wirken, als
+      seien sie von jeher da und würden für immer bleiben.</p>
+            <p>Dabei sind sie eine ziemlich neue Idee.</p>
+            <p>
+        In der Antike war "Totenfürsorge" Angelegenheit der Familie. Die Reichen bauten ihren Ahnen
+      Mausoleen, Etrusker, Griechen und Römer hinterließen steinerne Totenstädte, Nekropolen. Die
+      Armen wurden in Sandgruben verscharrt, in ausgetrockneten Brunnen entsorgt, verschwanden
+      namenlos in Massengräbern. Das änderte sich in Europa erst, als christliche Gemeinden den Rang
+      der Familie einnahmen und ihre Toten auf den Kirchhöfen begruben. Was blieb, waren die engen
+      Grenzen der Konfessionen. Wohin mit den Ungläubigen? Den Fremden? Erst im Zuge der Aufklärung
+      trauten sich die Menschen, die Deutungshoheit der Kirchen über den Tod zu hinterfragen,
+      begannen die Städte, kommunale Zentralfriedhöfe anzulegen, die jedem Platz boten. In seinem
+      Buch
+        <em>Ruhe sanft,</em>
+        einer Art Standardwerk der Friedhofsliteratur, schreibt der
+      Kunsthistoriker Reiner Sörries: "Dass jedermann ohne Ansehen der Person, des Geschlechtes, der
+      Volks- oder Kirchenzugehörigkeit Anspruch auf ein eigenes Grab besitzt, ist eine
+      Errungenschaft der Neuzeit."
+      </p>
+        </division>
+        <division type="page" teaser="Für jeden soll Platz sein, im Tod sind alle gleich">
+            <p>Als am 1. Juli 1877 der Ohlsdorfer Friedhof eröffnet wurde – damals weit außerhalb der Stadt
+      –, war es kein Zufall, dass auf Planquadrat U 9 zuerst ein mittelloses Tuberkulose-Opfer aus
+      dem Stadtteil St. Georg beerdigt wurde: die Tischlerfrau Eva Maria Stülken, geborene
+      Luegerbauer, gestorben mit 39 Jahren und seither Laufende Nummer 1 auf Seite 1 in Band I des
+      Ohlsdorfer Grabkatasters.</p>
+            <p>All die Grabfelder der Chinesen und Schweizer, der Muslime und Bahá’í, der Seeleute und
+      Bürstenmacher, sie sind nicht trennend gemeint, sondern einigend. 1995 wurde eine
+      regenbogenbunte Grabstätte für Aids-Tote geschaffen, als noch kein Mittel gegen die Krankheit
+      gefunden war und vor allem Homosexuelle an ihr starben, oft von ihren Partnern verlassen und
+      von ihren Familien verstoßen.</p>
+            <p>Für jeden soll Platz sein, im Tod sind alle gleich. Das ist das Ohlsdorfer
+      Gründungsmantra.</p>
+            <p>Und heute ein Problem.</p>
+            <p>
+        Im ersten Stock des Verwaltungsgebäudes, auf Planquadrat N 4, räuspert sich Wolfgang Purwin
+      die Anspannung aus der Kehle und strafft sich, als stünde eine Bilanzpressekonferenz bevor.
+      Purwin ist ein schlanker Mann von Mitte 60, Schwimmer, Anzugträger und Geschäftsführer der
+      Hamburger Friedhöfe AöR, der Boss von Ohlsdorf also – kein Maschinist, sondern ein
+      Diplom-Kaufmann, der, wenn es ums Sterben geht, von "Kernmärkten" und "Marktanteilen" spricht,
+      von "Quoten" und
+        <em>"unique selling points"</em>
+        . Und von der "schwarzen Null", die Hamburg
+      am Ende jedes Jahres von ihm sehen will.
+      </p>
+            <p>Die schwarze Null, sie ist das Wunschergebnis am Ende einer komplizierten Kette von Zahlen.
+      4399 Tote haben sie im vergangenen Jahr in Ohlsdorf beigesetzt, 3,3 Prozent weniger als im
+      Jahr davor, in dem es auch schon 3,9 Prozent weniger waren als noch ein Jahr früher, das
+      wiederum 1,3 Prozent schlechter war als das vorangegangene. Es ist ein Rätsel: Seit 40 Jahren
+      pendelt die Einwohnerzahl der Stadt da draußen um die 1,7 Millionen, ist zuletzt sogar
+      gestiegen – aber die Zahl der Sterbenden sinkt! Von 26 099 im Jahr 1975 auf 17 012 im Jahr
+      2012. Die Ursachen dafür sind nicht ganz klar: Klafft in der Rentnergeneration immer noch eine
+      "Kriegskerbe", weil Männer, die heute sterben könnten, schon als Soldaten gefallen sind? Oder
+      liegt es eher daran, dass die Leute länger leben? Aber müssten dann nicht längst Kohorten
+      jener Jahrgänge sterben, die früh damit angefangen haben, länger zu leben? Ein Grund ist auch:
+      Die Menschen ziehen jung in die Stadt. Wenn sie alt werden, wandern sie ins Umland ab und
+      sterben dort.</p>
+            <p>Manchmal, wenn die Toten ausbleiben, ruft Purwin bei den Bestattern an und fragt, wie es bei
+      denen aussehe. "Wenn ich dann höre: ›Hier hat seit Wochen das Telefon nicht mehr geklingelt‹ –
+      dann weiß ich wenigstens, es liegt nicht an uns."</p>
+            <p>Das ist die Lage. Mit fast 50 anderen Friedhöfen in der Stadt ringt Purwin um die Toten wie
+      um einen seltenen Rohstoff. Und seit Kurzem ist da ja noch dieses neue Problem, das Purwin
+      natürlich "Herausforderung" nennt.</p>
+            <p>
+        Die Mitglieder der Multioptionsgesellschaft möchten sich nicht mehr dem schematischen
+      Schachbrettmuster der Friedhöfe fügen. Lust und Last, das eigene Leben zu gestalten, sind mit
+      dem Tod nicht passé. Die Menschen legen ihr Schicksal nicht mehr in Gottes Hand, sie planen
+      ihre Trauerfeiern selbst. Die ökologisch Gesinnten wollen nicht unter kleinbürgerlicher
+      Bepflanzung enden, Esoteriker lassen ihre Asche aus Heißluftballons verstreuen, Bergsteiger
+      auf Alpengipfeln. Fans des Hamburger SV können sich direkt am Stadion begraben lassen.
+      Heimatvertriebene lassen ihre Urnen von der Firma HanSeeArt bis in die polnische Ostsee fahren
+      und GPS-genau über torpedierten Flüchtlingsschiffen wie der
+        <em>Gustloff</em>
+        versenken.
+      </p>
+            <p>Anders als in der Schweiz, wo man die Asche seiner Verwandten zu Diamanten pressen lassen
+      kann, gilt in Deutschland nach wie vor die Friedhofspflicht. Doch die Definition dessen, was
+      ein Friedhof ist, wird in den Gesetzen immer weiter gefasst. Vor gut zehn Jahren hat bei
+      Kassel der erste privat betriebene "Friedwald" eröffnet, ein Forst voller Urnen. Mittlerweile
+      finden sich in allen Regionen "Ruhewälder" und "Ruheforste", manche empfohlen von Greenpeace
+      und dem WWF.</p>
+            <p>Wolfgang Purwin hat kein Meer und keinen Forst. Zwischen all den alternativen
+      Bestattungsformen ist sein Friedhof auch nur noch eine Option. Noch ist der Trend
+      überschaubar, getragen von einer selbst empfundenen Avantgarde, aber Purwin muss aufpassen,
+      dass ihm die gesellschaftliche Mitte nicht wegbricht und ihm am Ende vor allem die Sparsamen,
+      Kniepigen und tatsächlich Armen bleiben. Fast ein Viertel der Menschen entscheidet sich für
+      die anonyme Urnenbestattung für 849 Euro, der Geschäftsführer nennt sie in seiner
+      Verkäuferfreundlichkeit "sehr kostenbewusste Kunden". Keine Feier, kein Grabschmuck, kein
+      Stein, kein Name, kein konkreter Ort zum Trauern für die Nachkommen. Inzwischen reihen sich
+      auf drei anonymen Grabfeldern mehr als 40.000 Urnen, neuerdings biologisch abbaubar. Ein
+      komplettes Stadionpublikum, dicht an dicht sortiert wie in einem unterirdischen
+      Eierkarton.</p>
+            <p>Wer braucht im Zeitalter der Umzugsbiografien noch ein sorgsam gepflegtes Grab? Wer kommt
+      überhaupt noch zum Trauern auf den Friedhof einer Stadt, in der in jedem zweiten Haushalt ein
+      Single lebt?</p>
+            <p>Purwin hat in den vergangenen Jahren 120 Stellen gestrichen, Bagger und Computer gekauft. Er
+      hat das Krematorium ausgegliedert, zu einer GmbH umgebaut und den Mitarbeitern dort einen
+      Haustarifvertrag abgerungen, ohne Weihnachts- und Urlaubsgeld. Friedhofsstill ging das
+      vonstatten, denn Purwin steht unter dem Zwang, seine Anstalt wirtschaftlich zu führen, ohne es
+      wirtschaftlich aussehen zu lassen. Doch Sparen allein wird nicht reichen.</p>
+            <p>Er muss die Abwanderung der Seelen stoppen.</p>
+            <p>In den Öfen des Krematoriums brennen mittlerweile die von Amtsarzt Seibel freigegebenen
+      Leichen. Gut eine Stunde lang zehren die Flammen bei rund 900 Grad die Leiber auf. Erst brennt
+      der Sarg und entzündet die Haare. Dann verflüssigt sich das Körperfett zu Öl und zerkocht das
+      Fleisch. Muskeln verkohlen. Am Ende bleiben Ascheflocken, ein paar Knochen und künstliche
+      Hüftgelenke.</p>
+            <p>"Alles in allem vier bis fünf Kilo", sagt Krematoriumsleiter Sandy Sven Voigt, der mehr als
+      20 Jahre lang Altenpfleger war und Wert legt auf die Feststellung, dass sich die Menschen
+      sogar noch im Feuer unterschiedlich verhalten. "Was du zu Lebzeiten gelebt hast, erlebst du
+      auch im Tod", sagt Voigt und erzählt, dass die zähen Drahtigen oft länger brennen als
+      gemütliche Dicke. Und dass Krebskranke in den Öfen häufig ihr allerletztes Martyrium
+      durchlaufen: "Nach langer Chemotherapie sind deren Körper fast feuerfest. Die brauchen doppelt
+      so lange."</p>
+            <p>Voigt ist ein beinahe zierlicher Mann mit Ziegenbart, er bezeichnet sich als esoterisch und
+      lässt nicht unerwähnt, dass er zu Hause Hühner hält und nur selbst angebautes Gemüse isst.
+      Unter dem Röhrenhimmel des Krematoriums bewegt er sich gestikulierend wie ein Showmaster. Die
+      Rolle des Sonderlings, die in der Welt der Lebenden fast jedem Friedhofsangestellten anhaftet,
+      hat er mit Freuden angenommen, weil sich der Gesellschaft aus dieser Position am besten der
+      Spiegel vorhalten lässt. Zum Beispiel: all der Zivilisationsschrott, den sie bei ihm ablädt!
+      "Der Mensch ist eines der wenigen Tiere auf der Erde, die am Ende der Nahrungskette stehen",
+      sagt Voigt, "bei ihm sammelt sich alles." Quecksilber, Antibiotika, Pestizide, Weichmacher. In
+      den Filtern des Krematoriums finden sich immer mehr Dioxine und Furane. Die Rückstände lässt
+      Voigt unterirdisch verklappen, in einem stillgelegten Bergwerk. Als Sondermüll.</p>
+        </division>
+        <division type="page" teaser="Das Geschäft mit dem Sterben ist längst ein freier Markt mit Kampfpreisen">
+            <p>Aber auch Schätze finden sich hin und wieder unter den Toten. Als vor drei Jahren aufflog,
+      dass Krematoriumsangestellte in der Außenstelle Öjendorf jahrelang Goldzähne aus der Asche
+      klauben konnten, hatte die Stadt ihren Skandal. Die "Goldjungs" wurden entlassen, und Voigt
+      wurde der neue Chef.</p>
+            <p>"Ich würde mich freuen, wenn wir den Tod zum Anlass nähmen, das Leben des Verstorbenen noch
+      einmal zu feiern", sagt Voigt. Er wünsche sich prächtige Feste, freue sich über jeden von
+      Enkeln bemalten Sarg. Ausgerechnet ganz unten im Maschinenraum der Menschenbeseitigungsanlage
+      arbeitet ein Beinahephilosoph, der gegen eine Entsorgungskultur wettert, in der die Lebenden
+      ihre Toten möglichst schnell und billig beseitigen lassen wollten. Viel zu oft und viel zu
+      schnell, sagt Voigt, verwandele sich Trauer in Habgier, "weil die Hinterbliebenen das Erbe
+      schon vor dem Begräbnis als ihres betrachten".</p>
+            <p>Dazu kommt, dass das Geschäft mit dem Sterben längst ein freier Markt mit Kampfpreisen
+      geworden ist: Vor einigen Jahren wurden rund um Hamburg private Krematorien gebaut, einige in
+      Gewerbegebieten. Wer es noch billiger will, lässt die Toten zum Verbrennen nach Polen oder
+      Tschechien fahren. Angehörige können Angebote einholen und Aufträge vergeben: Einäschern in
+      Polen, Bestatten in Ohlsdorf, alles geht. Immer öfter werden bei Voigt Leichen in billigsten
+      Importsärgen aus Rumänien angeliefert. "Pressspan, einen Zentimeter dünn, sofort verbrannt."
+      Dann liegt die Leiche nackt im Ofen, ohne Holz, ohne Hitze, ohne Würde vor allem, und Voigts
+      Männer müssen den Gasbrenner ganz weit aufdrehen.</p>
+            <p>Schwer zu sagen, ob da nur ein ehemaliger Monopolist sein verlorenes Monopol beklagt oder ob
+      eine Geiz-ist-geil-Gesellschaft begonnen hat, ihre Bestattungskultur kaputtzusparen.</p>
+            <p>An einem der Herbsttage, an denen der Himmel über Hamburg schwer an grauen Wolken trägt,
+      zerren zwei Männer eine Rollkarre über Planquadrat W 17: Torsten Herbst, der
+      Landschaftsarchitekt von Ohlsdorf, und Rainer Franz, ein Steinmetz. Auf ihrer Karre liegt ein
+      Kissenstein, ein Grabstein also, der nicht hochkant steht, sondern flach auf der Erde liegt.
+      Nicht so wuchtig, ohne Schnörkel, sehr gefragt gerade. In den hellen Adria-Marmor ist ein Name
+      gemeißelt: FIETE CLAUSEN. Darunter ein Geburtsdatum: 9. 8. 1922. Herbst und Franz tragen den
+      Stein unter einen jungen Apfelbaum.</p>
+            <p>"Hierhin?", fragt Franz.</p>
+            <p>"Bisschen weiter links", sagt Herbst.</p>
+            <p>"So?", fragt Franz.</p>
+            <p>"Jetzt liegt er schief", sagt Herbst.</p>
+            <p>Sie sind keine Männer vieler Worte, eher des kargen "nu ja ...", wie so viele in den Weiten
+      von Ohlsdorf. Es bleibt offen, ob ihre Verschwiegenheit sie zum Friedhof brachte oder ob erst
+      der Friedhof sie verstummen ließ. Herbst gibt mit peilenden Blicken Anweisungen wie ein
+      Bildhauer. Franz hebt, senkt und schiebt. Dann ruht Fiete Clausens Stein sorgsam austariert in
+      der Waagerechten. Dabei wird Fiete Clausen hier nie liegen. Fiete Clausen gibt es gar nicht.
+      Denn der Marmorblock ist kein Grabstein, eher ein Grundstein. Für das neue Ohlsdorf.</p>
+            <p>
+        Ein Jahr lang hat Herbst, der Landschaftsarchitekt, am "Apfelhain" gearbeitet, einem
+      modernen Grabfeld mit 89 Urnen- und elf Sarggräbern unter sechs Apfelbäumen. "Baumbezogene
+      Grabstätten sprechen die Leute unglaublich an", sagt er. Fiete Clausen ist sein imaginärer
+      Werbeträger. Wann immer Spaziergänger das Grab entdecken, sollen sie denken: Schön hat der’s!
+      In den nächsten Tagen wird der Kommunikationschef des Friedhofs – auch den gibt es – sogar
+      eine Mitteilung mit spezieller Bibelauslegung verschicken: "Die Anlage ist inspiriert durch
+      den Apfel als christliches Sinnbild der Weisheit und Erkenntnis sowie die östliche
+      Vorstellung, dass der Apfelbaum mit dem Zauber seiner Blüte Schönheit und Frieden
+      transportiert. Darüber hinaus – als Verweis auf die Hoffnung – wird im Eingangsbereich das
+      Luther-Zitat zu lesen sein:
+        <em>Auch wenn ich wüsste, dass morgen die Welt zugrunde geht,
+        würde ich heute noch ein Apfelbäumchen pflanzen."</em></p>
+            <p>Wer hätte das gedacht: Ein Grab muss heute beworben werden wie Waschmittel. Was für Ariel
+      Klementine war, könnte für Ohlsdorf Fiete Clausen werden. Regelmäßig diskutieren sie hier in
+      "Vertriebsrunden" solche Fragen: Wie antworten wir auf den Boom der Baumgräber draußen?
+      Sollten wir was mit Bambus anbieten? Wie reagieren wir darauf, dass Eltern glauben, ihren
+      Kindern keine Grabpflege mehr aufbürden zu können?</p>
+            <p>So wie Volkswagen nicht mehr nur mit dem Golf auskommt, hat Ohlsdorf mittlerweile
+      zielgruppengenau zugeschnittene "Themen- und Konzeptgrabstätten" im Programm: überbordende
+      Schmetterlingsgärten. Romantische Rosenhaine. Mediterrane Kolumbarien, in denen Urnen in
+      Vitrinen stehen. Paaranlagen. Und in einer Ecke mit besonders knorrigen Bäumen eben auch einen
+      Ruhewald. "Für den lehrergewordenen Grünen", wie der Kommunikationschef sagt. Und
+      selbstverständlich "pflegefrei" für die Angehörigen.</p>
+            <p>In den Gebührenlisten von Ohlsdorf ist jetzt von "Standard", "gehobenem Standard" und
+      "herausgehobenem Niveau" zu lesen, die Spanne reicht von 849 bis 6250 Euro, vom Billig- bis
+      zum Premiumgrab. Der moderne Volksfriedhof macht nicht mehr alle gleich, sondern bietet jedem
+      etwas anderes.</p>
+            <p>So liefern sich die Manager von Ohlsdorf einen Wettlauf mit dem Zeitgeist – aber der stellt
+      immer schneller immer neue Fragen. Die aktuellste ist so kalt und dunkel wie ein Grab: Braucht
+      Trauer überhaupt noch einen realen Ort?</p>
+            <p>Im Internet haben Onlinefriedhöfe mit Namen wie "Stayalive" und "Straße der Besten" eröffnet.
+      Dort bleiben die Toten auf Fotos und Filmen lebendig, und ihre Angehörigen können virtuelle
+      Kerzen entzünden, egal, wo auf der Welt sie gerade sind. Der Markt macht alles möglich: vom
+      totalen Entschwinden per Rakete ins All bis zum dauernden Dableiben in der Schmuckurne über
+      dem Fernseher daheim – mit einem nicht ganz legalen Umweg über Schweizer Krematorien.</p>
+            <p>Welcher dieser Wege die Trauer erschwert und welcher sie erleichtert, darüber wird heftig
+      gestritten. Auf einmal stellen sich ganz neue Fragen: Darf ein Verstorbener völlig
+      verschwinden? Gehört er nur sich selbst? Oder den Hinterbliebenen? Oder gar der ganzen
+      Gesellschaft?</p>
+            <p>Der Kunsthistoriker Sörries glaubt, die Privatisierung des Todes habe auch Nachteile. Er
+      erklärt das am Beispiel des zum Erinnerungsdiamanten gepressten Gatten, der fortan am Hals der
+      Witwe baumelt: Es gebe dann "keinen Trauerort für potenziell Trauernde außerhalb des
+      Familienkreises, es kann zu Streitigkeiten innerhalb der Familie führen, und die
+      trauerpsychologischen Konsequenzen einer zu großen Nähe zwischen Toten und Lebenden sind nicht
+      bedacht".</p>
+        </division>
+        <division type="page" teaser="Der Friedhof ist kein Fenster ins Jenseits, sondern ein Spiegel des Diesseits">
+            <p>In Ohlsdorf sagen sie natürlich: Genau die richtige Halbdistanz zwischen Toten und Lebenden
+      biete ein Friedhof. Der Ort eben, an dem langsam Gras drüber wächst.</p>
+            <p>An einem Dienstagmorgen gleitet ein Bus über die zentrale Friedhofsallee, hinter den Fenstern
+      29 Männer und Frauen, vorwiegend in Rentnerbeige, unterwegs auf einer "Rundfahrt zu besonderen
+      Anlagen". Vorne am Mikrofon sitzt Anja Wiebke, laut Visitenkarte "Leiterin Marketing und
+      Vertrieb", erzählt mit Frühstücksfernsehfreundlichkeit von den 212.000 "aktuell aktiven
+      Grabstätten" – und leitet dann über zu den Baumgräbern auf Bl 58, die wie zufällig am Weg
+      liegen und der erste Stopp auf der Tour sind.</p>
+            <p>Die Rentner steigen aus, laufen ein paar Meter über knackende Eicheln und stehen dann wie
+      eine Schulklasse vor der Marketingfrau, die ihnen die Idee der Themengrabstätten erläutert.
+      Kein einziges Mal an diesem Tag spricht Wiebke vom "Sterben", immer nur vom "Gehen". Das
+      Rauschen der Bäume nennt sie "Konzert für die Ewigkeit". Als die Rentner zurück in den Bus
+      klettern, liegt auf jedem Sitz eine Mappe mit Friedhofsplan, Gebührenblatt und
+      Kugelschreiber.</p>
+            <p>Zwei Stunden lang rollt der Bus über den Friedhof, von der Schmetterlingsgrabstätte auf Bn 71
+      über den Ruhewald auf Bx 64 bis zum Apfelhain auf W 17, wo Fiete Clausen bereits einen Platz
+      blockiert zu haben scheint. Zwischen Buchs- und Eibenhecken stecken moosgrüne Schilder mit der
+      Aufschrift: "Weitere Informationen, auch über die Möglichkeit einer Reservierung, erhalten Sie
+      im Beratungszentrum und unter 040/593880."</p>
+            <p>Vielleicht haben die Leute sich unter der vagen Bezeichnung der Tour etwas anderes
+      vorgestellt, womöglich wollten sie lieber Prominentengräber gucken, aber niemand beschwert
+      sich über die Verkaufsfahrt. Es gibt zu viele Gräber, auf denen schon die eigenen
+      Geburtsjahrgänge stehen. 1930, 1938, 1942. Der Mensch wird demütig im Angesicht des Todes. Mit
+      der Nervosität von Prüflingen fragen die Rentner nach: "Einäscherung ist im Preis dabei? ...
+      Ist das hier für Särge schon ausgebucht? ... Wo muss ich mich noch mal melden, wenn ich mich
+      dafür interessiere?"</p>
+            <p>
+        In Ohlsdorf haben die Planer inzwischen ein Vorsorge-Center eröffnet, das aussieht wie der
+      Kundenberatungsbereich einer Sparkasse. Auf Besprechungsinseln können die Leute in bunt
+      bebilderten Katalogen blättern und ihr Traumgrab reservieren, auch den Wochentag ihrer eigenen
+      Beerdigung festlegen. Das ist der
+        <em>"unique selling point",</em>
+        von dem Geschäftsführer
+      Purwin sprach.
+      </p>
+            <p>Als der Tross zum letzten Mal zum Bus läuft, läuft am Ende der Gruppe ein Ehepaar, beide
+      schon gebeugt von vielen Jahren.</p>
+            <p>"Die haben sich ganz schön was einfallen lassen", sagt sie.</p>
+            <p>"Jau", sagt er.</p>
+            <p>"Ich könnte glatt sterben", sagt sie.</p>
+            <p>"Das lass mal", sagt er.</p>
+            <p>Das Tabu, das so lange den Tod umzäunte – es wird eingerissen auch vom Inneren der Friedhöfe
+      aus. Sie wecken jetzt Nachfrage durch ein Angebot, das fast so schnell wechselt wie die
+      Saisonware in den Modeboutiquen. Im Krematoriumskomplex hat ein Restaurant eröffnet, damit die
+      Trauernden auch zum Leichenschmaus auf dem Gelände bleiben. Noch bleibt der Friedhof seinem
+      Kerngeschäft treu, aber die Chefs planen ja längst "Ohlsdorf 2050": Ein Café in zentraler
+      Lage, auf Planquadrat Y 41? Sehr wahrscheinlich. Ein Fahrradverleih? Gut möglich. Ein
+      Kinderspielplatz? Bestimmt. Ein Hochseilgarten? Eher nicht. Ein Joggingpfad? Schon eher. Eine
+      Freilichtbühne für Konzerte? Gute Idee.</p>
+            <p>Die Manager arbeiten mit Hochschulen zusammen, studieren Stadtparkstrukturen und Spielplätze.
+      In ihren Schubladen liegen erste Pläne, detaillierte Skizzen, auf denen Ohlsdorf von einem
+      neuen Nutzungsnetz überspannt ist.</p>
+            <p>Wenn überall Wälder zu Friedhöfen werden, kann sich ein Friedhof dann nicht auch in ein
+      Freizeitland verwandeln? Hätte die Spaßgesellschaft damit auch noch die Welt der Friedhöfe
+      erobert? Oder rückten Leben und Tod endlich wieder näher zusammen?</p>
+            <p>Die taunassen Wiesen sind überspannt von Spinnennetzen, als Anne-Katrin Kirch und Wolfgang
+      Haack auf Planquadrat AF 26 zum letzten Arbeitsgang aufbrechen, dorthin, wo das Fließband der
+      Friedhofsmaschine Ohlsdorf ausläuft.</p>
+            <p>Die beiden sind seit Jahrzehnten Gärtnermeister auf dem Friedhof. Kirch ist groß, grauhaarig
+      und schlank, Haack folgt ihr tapsig wie ein Bär. Sie hat eine Spraydose dabei, er trägt eine
+      schwere, schwarze Kladde. Sie gehen "punkten": abgelaufene Gräber mit einem grellgrünen Stoß
+      aus der Dose markieren, als Zeichen für das Räumkommando.</p>
+            <p>Haack klappt seine Mappe auf. Spalten voller gelebter Leben, schon so lange her, dass jetzt
+      sogar die Gräber todgeweiht sind.</p>
+            <p>"Lass uns bei der 81 anfangen", sagt Haack.</p>
+            <p>"Das hier ist die 93", sagt Kirch.</p>
+            <p>"Dann weiter rechts", sagt Haack und wedelt sich eine Fliege von der Nase.</p>
+            <p>
+        Haack nennt Namen und Nummern, Kirch sprüht. Es sieht aus, als arbeiteten sich die beiden
+      durch ein Bild von Caspar David Friedrich. Im Herbstlicht werfen die Bäume lange Schatten. Auf
+      den Lichtungen tanzen letzte Mücken. Und auf den Grabsteinen leuchten grüne Punkte, ganz
+      ähnlich dem deutschen Recyclingsymbol. An diesem Tag sterben die Steine von
+        <em>Elise</em>
+        und
+        <em>Emil</em>
+        ,
+        <em>Martha</em>
+        und
+        <em>Carl</em>
+        ,
+        <em>Anna</em>
+        und
+        <em>Otto</em>
+        ,
+        <em>Bertha</em>
+        und
+        <em>Julius</em>
+        .
+      </p>
+            <p>Haack und Kirch wissen nicht, ob sie gerade Raum für die nächsten Toten schaffen oder
+      vielleicht für einen Kinderspielplatz in Ohlsdorf, diesem Friedhof, der größer ist als alle
+      anderen 30.000 im Land und doch so wie alle: kein Fenster ins Jenseits, sondern ein Spiegel
+      des Diesseits. Ein menschengemachtes Biotop und naturgemachtes Kulturdenkmal, wie es ein
+      Onlinefriedhof nie sein wird. Ein Ort, an dem Platz ist auch für Unschönes und Unbequemes, wo
+      Kriegsverbrecher neben Folteropfern liegen. Ein Ort, an dem jede Generation der nächsten
+      Mahnungen und Fragen hinterlässt. Ein Ort, an dem bald womöglich Enkel neben den Gräbern ihrer
+      Großeltern schaukeln werden. Ein Ort, so allumfassend, dass er sogar sein eigenes Klima hat:
+      Über Kapelle 9 liegt eine Wetterscheide, wo sich im Winter Regen oft in Schnee verwandelt. Bei
+      Kapelle 7 verlieren Handys manchmal den Empfang.</p>
+            <p>Im Apfelhain neben Kapelle 2 sind seit ein paar Tagen die ersten Gräber reserviert. Der
+      Ruhewald ist ausgebucht. Die Zahlen, die der Geschäftsführer sich bringen lässt, sind besser
+      als im Vorjahr, um genau 4,15 Prozent. Allerdings weiß noch niemand, ob es an all den neuen
+      Apfel-, Rosen- und Baumgräbern liegt oder nur daran, dass seit Langem mal wieder mehr Menschen
+      gestorben sind. Im Winter, nur das ist sicher, werden sie auf Planquadrat Bs 73 eine
+      knirschende Höllenmaschine aufstellen, die zwei Monate lang all die grün gepunkteten
+      Grabsteine zerbeißt, bis die so klein geschreddert sind, dass zumindest sie auf diesem Terrain
+      der Toten zu neuem Leben erweckt werden: als Straßenbaumaterial.</p>
+        </division>
+    </body>
+    <teaser>
+        <title>Die Angst des Friedhofs vor dem Tod</title>
+        <text>Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und Ruhewälder die Rettung fürs Geschäft?</text>
+        <supertitle>Bestattungen</supertitle>
+    </teaser>
+</article>
