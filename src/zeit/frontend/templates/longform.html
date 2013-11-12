@@ -5,6 +5,9 @@
 	<article class="article article--longform">
         <div class="article__wrap">
             <div class="article__head-wrap">
+                {% if view.header_img %}
+                    {{ blocks.head_image_longform(view.header_img) }}
+                {% endif %}
                 <header class="article__title-wrap">
                     <div class="is-constrained is-centered">
                         <h2 class="article__supertitle">
@@ -27,10 +30,6 @@
                         </div>
                     </div>
                 </header>
-                {% if view.header_img %}
-                    {{ blocks.image(view.header_img) }}
-                {% endif %}
-
             </div>
 
             <div class="article__body">
