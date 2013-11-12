@@ -17,7 +17,7 @@
   min-width: $px
   min-width: rem($px)
 
-=bleed($max: false)
+=bleed($max: $medium-content-width + 2*$gutter)
   margin-left: -$page-padding--small
   margin-right: -$page-padding--small
   width: auto !important
@@ -28,11 +28,10 @@
     margin-right: -$page-padding
     figcaption
       margin-left: $page-padding  !important
-  @if $max
-    +respond-min($max)
-      margin: 0
-      figcaption
-        margin-left: auto !important
+  +respond-min($max)
+    margin: 0
+    figcaption
+      margin-left: auto !important
 
 
 =visuallyhidden
