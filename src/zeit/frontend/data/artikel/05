@@ -13,9 +13,9 @@
             <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/42/bestattungsunternehmen-serway" year="2013" issue="42" ressort="Karriere" author="Christine Böhringer " contenttype="article" publication-date="" expires="">
                 <supertitle>Bestattungsunternehmen</supertitle>
                 <title>Ich besorg noch den Trauerflor, Papa</title>
-                <text>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat 
+                <text>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat
 sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</text>
-                <description>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat 
+                <description>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat
 sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</description>
                 <byline>von Christine Böhringer</byline>
             </reference>
@@ -53,6 +53,7 @@ sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breadcrumb_title">Friedhofsbetreiber machen sich Sorgen ums Geschäft</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="longform">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
@@ -107,6 +108,10 @@ sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Auch auf dem Großfriedhof in Hamburg-Ohlsdorf wächst die Sorge ums Geschäft: Bringen Apfelhaine und Ruhewälder die Rettung?</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
+            <image align="left" src="/img/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
+                <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
+                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
+            </image>
             <p>Auch der Tod hat in Deutschland ein exaktes Maß. 213 Zentimeter lang, 83
       Zentimeter breit und 170 Zentimeter tief muss die Grube werden, die Artur und Jürgen an diesem
       Morgen schaufeln, abgeschirmt von Rhododendren und im Schutz der frühen Stunde. Auf dem alten,

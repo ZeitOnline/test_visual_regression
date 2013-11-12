@@ -179,7 +179,7 @@ class Page(object):
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
-        content = __insert_metabox(content)
+        #content = __insert_metabox(content)
         return content
 
 
