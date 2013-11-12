@@ -157,6 +157,7 @@ class Page(object):
 
     def __init__(self, page_xml):
         self.__content = iter(self._extract_items(page_xml))
+        self.teaser = page_xml.get('teaser')
 
     def __iter__(self):
         return self.__content

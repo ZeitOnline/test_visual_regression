@@ -35,14 +35,31 @@
 
             <div class="article__body">
 
+                {% set vars ={'add_meta': true} %}
+
                 {% for page in view.pages %}
                 <div class="article__page">
+                    <h1 style="background-color: red;">{{page.teaser}}</h1>
                     {% for item in page %}
-                        {% if item is elem('p') %} 
+                        {% if item is elem('p') %}
+
+                            <!-- integrate meta box at first paragraph only -->
+                            {% if vars.add_meta %}
+                                {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
+                                {% if vars.update({'add_meta': false}) %}{% endif %}
+                            {% endif %}
+
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
                         {% elif item is elem('image') %}
+
+                            <!-- integrate meta box only when layout isn't large -->
+                            {% if item.layout != 'large' and vars.add_meta %}
+                                {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
+                                {% if vars.update({'add_meta': false}) %}{% endif %}
+                            {% endif %}
+
                             {{ blocks.image(item) }}
                         {% elif item is elem('citation') %}
                             {{ blocks.citation(item) }}
@@ -55,10 +72,10 @@
 
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
-                    <span class="article__tags__title">Tags</span> 
+                    <span class="article__tags__title">Tags</span>
                     {% for tag in view.rankedTags %}
                             {% for item in tag %}
-                                <a href="#{{ item.url }}">{{ item.html }}</a>
+                                <a href="#{{ item.url }}" id="hp.article.tools.tag.Verschlüsselung" title="Artikel mit dem Schlagwort *Verschlüsselung* anzeigen">{{ item.html }}</a>
                                 {% if not loop.last %}
                                     ,
                                 {% endif %}
@@ -66,7 +83,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
             </div>
         </div>
 	</article>
