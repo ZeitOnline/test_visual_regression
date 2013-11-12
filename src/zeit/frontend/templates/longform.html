@@ -33,37 +33,39 @@
 				{% set vars ={'add_meta': true} %}
 
                 {% for page in view.pages %}
-                <div class="article__page">
-                    {{ blocks.subtitle( page.number, page.teaser, 'article__subtitle' ) }}
+                <section class="article__page">
+                    <div class="article__page-wrap">
+	                    {{ blocks.subtitle( page.number, page.teaser, 'article__subtitle' ) }}
 
-                    {% for item in page %}
-                        {% if item is elem('p') %}
+	                    {% for item in page %}
+	                        {% if item is elem('p') %}
 
-							<!-- integrate meta box at first paragraph only -->
-							{% if vars.add_meta %}
-								{{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-								{% if vars.update({'add_meta': false}) %}{% endif %}
+								<!-- integrate meta box at first paragraph only -->
+								{% if vars.add_meta %}
+									{{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
+									{% if vars.update({'add_meta': false}) %}{% endif %}
+								{% endif %}
+
+								{{ blocks.p(item)}}
+							{% elif item is elem('intertitle') %}
+								{{ blocks.intertitle(item) }}
+							{% elif item is elem('image') %}
+
+								<!-- integrate meta box only when layout isn't large -->
+								{% if item.layout != 'large' and vars.add_meta %}
+									{{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
+									{% if vars.update({'add_meta': false}) %}{% endif %}
+								{% endif %}
+
+								{{ blocks.image(item) }}
+							{% elif item is elem('citation') %}
+								{{ blocks.citation(item) }}
+							{% elif item is elem('advertising') %}
+								{{ blocks.advertising(item) }}
 							{% endif %}
-
-							{{ blocks.p(item)}}
-						{% elif item is elem('intertitle') %}
-							{{ blocks.intertitle(item) }}
-						{% elif item is elem('image') %}
-
-							<!-- integrate meta box only when layout isn't large -->
-							{% if item.layout != 'large' and vars.add_meta %}
-								{{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-								{% if vars.update({'add_meta': false}) %}{% endif %}
-							{% endif %}
-
-							{{ blocks.image(item) }}
-						{% elif item is elem('citation') %}
-							{{ blocks.citation(item) }}
-						{% elif item is elem('advertising') %}
-							{{ blocks.advertising(item) }}
-						{% endif %}
-					{% endfor %}
-				</div>
+						{% endfor %}
+					</div>
+				</section>
 				{% endfor %}
 
 				{% if view.rankedTags %}
