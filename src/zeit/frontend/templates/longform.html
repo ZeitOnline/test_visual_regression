@@ -48,7 +48,7 @@
                                 {% if vars.update({'add_meta': false}) %}{% endif %}
                             {% endif %}
 
-                            {{ blocks.p(item, "is-constrained is-centered")}}
+                            {{ blocks.p(item)}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
                         {% elif item is elem('image') %}
