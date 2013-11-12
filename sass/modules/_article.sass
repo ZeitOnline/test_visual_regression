@@ -1,5 +1,11 @@
 .article
+	margin-left: auto
+	margin-right: auto
 	margin-bottom: $huge
+	max-width: $max-page-width
+	padding: $page-padding--small
+	+respond-min($break-1)
+		padding: $page-padding
 
 .article__main-image
 	margin-bottom: $medium
