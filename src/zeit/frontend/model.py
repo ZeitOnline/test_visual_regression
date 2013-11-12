@@ -172,11 +172,8 @@ class Page(object):
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
             if item.tag == 'image' and item.get('layout') != 'zmo_header':
-                if item.get('layout') != 'large':
-                    add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Img(item))
             if item.tag == 'citation':
-                add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
