@@ -4,6 +4,14 @@
     </p>
 {%- endmacro %}
 
+{% macro subtitle(number, subtitle, class) -%}
+    {% if subtitle %}
+        <div class="{{ class }}">
+            {{ number }} - {{ subtitle }}
+        </div>
+    {% endif %}
+{%- endmacro %}
+                
 {% macro meta_box(date, source, class) -%}
     <figure class="{{ class }}">
         <div>

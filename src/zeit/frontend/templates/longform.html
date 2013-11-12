@@ -38,7 +38,8 @@
 
                 {% for page in view.pages %}
                 <div class="article__page">
-                    <h1 style="background-color: red;">{{page.teaser}}</h1>
+                    {{ blocks.subtitle( page.number, page.teaser, 'article__subtitle' ) }}
+
                     {% for item in page %}
                         {% if item is elem('p') %}
 

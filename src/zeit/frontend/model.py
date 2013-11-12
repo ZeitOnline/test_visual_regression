@@ -157,7 +157,9 @@ class Page(object):
 
     def __init__(self, page_xml):
         self.__content = iter(self._extract_items(page_xml))
-        self.teaser = page_xml.get('teaser')
+        self.number = page_xml.number
+        if page_xml.get('teaser') is not None:
+            self.teaser = page_xml.get('teaser')
 
     def __iter__(self):
         return self.__content
@@ -281,7 +283,10 @@ class Tag(object):
 
 def _get_pages(pages_xml):
     pages = []
+    number = 0
     for page in pages_xml:
+        page.number = number
+        number = number + 1
         pages.append(Page(page))
     return pages
 
