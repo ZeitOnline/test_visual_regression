@@ -84,18 +84,15 @@ $longform-content-max-width: 700px
   .article__page
     padding-top: $small
     padding-bottom: $small
-    padding-left: $page-padding--small
-    padding-right: $page-padding--small
     +respond-min($break-1)
       padding-top: $medium
       padding-bottom: $medium
-      padding-left: $page-padding
-      padding-right: $page-padding
     &:nth-child(2n+1)
       background-color: $grey--light
 
   .article__page-wrap
-    max-width: em(1440px)
+    +padded
+    max-width: em(1460px)
     margin: 0 auto
 
   .is-constrained
