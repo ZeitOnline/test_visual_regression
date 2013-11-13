@@ -35,6 +35,7 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
+                    {{ item }}
                         {% if item is elem('p') %} 
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}

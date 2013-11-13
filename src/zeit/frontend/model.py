@@ -170,21 +170,19 @@ class Page(object):
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
             if item.tag == 'image' and item.get('layout') != 'zmo_header':
-                if item.get('layout') != 'large':
-                    add_meta = content.append(self.__add_meta(add_meta))
+                #if item.get('layout') != 'large':
                 content.append(Img(item))
             if item.tag == 'citation':
-                add_meta = content.append(self.__add_meta(add_meta))
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
-        content = __insert_metabox(content)
+        content = self.__insert_metabox(content)
         return content
 
-
-def __insert_metabox(c):
-    c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
-    return c
+    def __insert_metabox(self, c):
+        index = c.index(next(obj for obj in c if type(obj) == Para))
+        c.insert(index, Metabox())
+        return c
 
 
 @implementer(interfaces.IMetaBox)
