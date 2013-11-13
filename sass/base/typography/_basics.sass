@@ -17,17 +17,18 @@
     margin-bottom: $thin
     margin-top: $small
 
-  blockquote, .quote
+  blockquote
     @extend %quote
     @extend %font-l-xl
     color: $color-quote
     display: block
-    +respond-min($break-1)
-      float: left
-      max-width: em(120px)
-      margin: $large $medium $large auto
     &.quote--wide
       @extend %quote--wide
+    &.quote
+      +respond-min($break-1)
+        float: left
+        max-width: em(120px)
+        margin: $large $medium $large auto
 
 figure
   width: 100%
