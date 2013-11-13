@@ -60,7 +60,7 @@
     <blockquote class="
         <!-- double layout is missing -->
         {% if obj.layout == 'wide' %}
-            quote--loud
+            quote--wide
         {% else %}
             quote
         {% endif %}
