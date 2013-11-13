@@ -45,18 +45,16 @@ $longform-content-max-width: 700px
     left: 5%
     width: 90%
     z-index: 2
-	
+
   .article__subpage-head
     @extend %subheading
     font-size: $font-xxl--px
+    font-size: $font-xxl--rem
     margin: $medium auto $large auto
-    max-width: 920px	
+    max-width: 920px
     padding-left: $gutter
-  
+
   .article_subpage-index
-    display: none
-    +respond-min($break-2)
-      display: inline
     @extend %meta
     max-width: em(240px)
     background-color: $white
@@ -67,15 +65,18 @@ $longform-content-max-width: 700px
     float: left
     position: relative
     top: -$large
+    display: none
+    +respond-min($break-2)
+      display: inline
     a
       &:link, &:visited
         color: $grey
-        text-decoration: none  
-      &:hover
+        text-decoration: none
+      +on-interaction
         border-color: $grey
     span
       display: block
-      margin: $gutter $gutter $gutter $gutter
+      margin: $gutter
     .article_subpage-active
       color: $black
 
@@ -86,19 +87,19 @@ $longform-content-max-width: 700px
     width: 100%
     background-color: $grey--bright
     span
-      letter-spacing: $hair	
-      font-size: $font-s--px	
-      text-transform: uppercase	
+      letter-spacing: $hair
+      font-size: $font-s
+      text-transform: uppercase
       margin: auto
       display: block
       text-align: center
       &:first-child
-        padding-top: $large
         +tablet(bold)
+        padding-top: $large
       &:last-child
         padding-bottom: $large
       +respond-min($break-2)
-        min-width: 700px
+        min-width: $longform-content-max-width
 
   .article__supertitle
     +tablet
