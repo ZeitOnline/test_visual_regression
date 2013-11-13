@@ -51,8 +51,8 @@ module.exports = function(grunt) {
 				banner: project.bannerContent
 			},
 			target: {
-				src: ['<%= jshint.target.src %>'],
-				ignores: ['javascript/jquery-1.10.2.min.js', 'javascript/resize-ads.js', 'javascript/modernizr.custom.42776.js'],
+				src: ['<%= jshint.target.src %>', '!javascript/jquery-1.10.2.min.js', '!javascript/resize-ads.js', '!javascript/modernizr.custom.42776.js'],
+				//ignores: ['javascript/jquery-1.10.2.min.js', 'javascript/resize-ads.js', 'javascript/modernizr.custom.42776.js'],
 				dest: project.codeDir + 'js/' + project.concatJs
 			}
 		},
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
 				ignores: [ 'javascript/iqd-ads.js', 'javascript/jquery-1.10.2.min.js', 'javascript/modernizr.custom.42776.js' ],
-				// devel: true, // accept console etc.
+				devel: true, // accept console etc.
 				// phantom: true // phatom js globals
 			},
 			target: {
