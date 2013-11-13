@@ -14,14 +14,17 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro subpage_index(subtitle) -%}
+{% macro subpage_index(index, subtitle, number) -%}
     {% if subtitle %}
         <div class="article_subpage-index">
-            <span>1 - Kein zeitlos sicheres Geschäft mehr</span>
-            <span>2 - Im Tod sind alle gleich</span>
-            <span>3 - Ein freier Markt mit Kampfpreisen</span>
-            <span>4 - Der Friedhof ein Spiegel des Diesseits</span>
-        </div>
+        {% for chapter in index %}
+            {% if loop.index == number %}
+                <span class="article_subpage-active"><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+            {% else %}
+                <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+            {% endif %}
+        {% endfor %}
+    </div>
     {% endif %}
 {%- endmacro %}
 

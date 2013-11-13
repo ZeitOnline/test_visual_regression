@@ -48,6 +48,10 @@ class Article(Base):
         return self.context.pages
 
     @property
+    def subpage_index(self):
+        return self.context.subpage_index
+
+    @property
     def header_img(self):
         return self.context.header_img
 

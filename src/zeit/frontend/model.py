@@ -44,6 +44,7 @@ class Content (Resource):
     rankedTags = []
     genre = ''
     source = ''
+    subpage_index = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -141,6 +142,17 @@ class Content (Resource):
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
         self.pages = _get_pages(pages)
+        self.subpage_index = self.__construct_subpage_index(self.pages)
+
+    def __construct_subpage_index(self, pages):
+        index = []
+        for page in pages:
+            try:
+                string = "%i - %s" % (page.number, page.teaser)
+                index.append(string)
+            except AttributeError:
+                pass
+        return index
 
     def __extract_header_img(self, root):
         try:

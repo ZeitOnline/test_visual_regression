@@ -67,9 +67,15 @@ $longform-content-max-width: 700px
     float: left
     position: relative
     top: -$large
+    a
+      &:link, &:visited
+        color: $grey
+        text-decoration: none  
     span
       display: block
       margin: $gutter $gutter $gutter $gutter
+    .article_subpage-active
+      color: $black
 
   .article__subpage-chapter
     @extend %meta
