@@ -57,15 +57,66 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     assert markup == tpl.module.authorlink(data).strip()
 
 
-def test_macro_subpagehead_should_produce_markup(jinja2_env):
+def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    css_class = 'article__subpage-head is-centered'
-    markup = '<div class="article__subpage-chapter"><span>Kapitel 1' \
-        '</span><span>- Title -</span><span></span></div>' \
-        '<div class="%s">1 - Title</div>' % css_class
-    lines = tpl.module.subpagehead(1, 'Title', css_class).splitlines()
+    css_class = 'article__subpage-chapter'
+
+    # assert normal markup
+    markup = '<div class="%s">' \
+        '<span>Kapitel 1</span>' \
+        '<span>- Title -</span>' \
+        '<span></span></div>' % css_class
+    lines = tpl.module.subpage_chapter(1, 'Title', css_class).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
     assert markup == output
-    assert '' == tpl.module.subpagehead(0, '', '')
+
+    # assert empty subtitle
+    assert '' == tpl.module.subpage_chapter(0, '', '')
+
+
+def test_macro_subpage_index_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    css_index = 'article__subpage-index'
+    markup_standart = '<div class="%s">' % css_index
+
+    # assert normal markup
+    markup = '%s<span><a href="#kapitel1">1</a></span></div>' % markup_standart
+    lines = tpl.module.subpage_index(
+        ['1'], 'Title', 2, css_index, '').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+    # assert active markup
+    css_active = 'article__subpage-active'
+    markup_active = '%s<span class="%s">1</span></div>' \
+        % (markup_standart, css_active)
+    lines_active = tpl.module.subpage_index(
+        ['1'], 'Title', 1, css_index, css_active).splitlines()
+    output_active = ""
+    for line in lines_active:
+        output_active += line.strip()
+    assert markup_active == output_active
+
+    # assert empty subtitle
+    assert '' == tpl.module.subpage_index(['1'], '', 1)
+
+
+def test_macro_subpage_head_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    css_class = 'article__subpage-head'
+
+    # assert normal markup
+    markup = '<div class="%s">' \
+        '<a name="kapitel1"></a>1 - Title</div>' % css_class
+    lines = tpl.module.subpage_head(1, 'Title', css_class).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+    # assert empty subtitle
+    assert '' == tpl.module.subpage_head(1, '', css_class)

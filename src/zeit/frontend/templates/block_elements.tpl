@@ -14,12 +14,12 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro subpage_index(index, subtitle, number) -%}
+{% macro subpage_index(index, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
-        <div class="article_subpage-index">
+        <div class="{{ index_class }}">
         {% for chapter in index %}
             {% if loop.index == number %}
-                <span class="article_subpage-active">{{ chapter }}</span>
+                <span class="{{ active_class }}">{{ chapter }}</span>
             {% else %}
                 <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
             {% endif %}
