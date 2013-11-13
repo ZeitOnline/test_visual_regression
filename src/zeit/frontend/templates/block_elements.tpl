@@ -19,7 +19,7 @@
         <div class="article_subpage-index">
         {% for chapter in index %}
             {% if loop.index == number %}
-                <span class="article_subpage-active"><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+                <span class="article_subpage-active">{{ chapter }}</span>
             {% else %}
                 <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
             {% endif %}
