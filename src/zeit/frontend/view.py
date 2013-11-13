@@ -14,11 +14,6 @@ class Base(object):
     def __call__(self):
         return {}
 
-    @property
-    def publish_date(self):
-        tz = get_timezone('Europe/Berlin')
-        return tz.localize(self.context.publish_date)
-
 
 @view_config(route_name='json',
              context=zeit.frontend.model.Content,
@@ -57,7 +52,8 @@ class Article(Base):
 
     @property
     def publish_date(self):
-        return self.context.publish_date
+        tz = get_timezone('Europe/Berlin')
+        return self.context.publish_date.astimezone(tz)
 
     @property
     def publish_date_meta(self):
