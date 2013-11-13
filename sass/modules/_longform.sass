@@ -1,4 +1,7 @@
 $longform-content-max-width: 700px
+$longform-inline-max-width: 920px
+$bp-adjust-horizontal-figures--1: 1280px
+$bp-adjust-horizontal-figures--2: 1440px
 
 .article.article--longform
   padding: 0
@@ -140,6 +143,33 @@ $longform-content-max-width: 700px
       .figure__caption, figcaption
         +max-width-rem($longform-content-max-width)
     &.figure-horizontal, &.figure-horizontal--right
+      +respond-min(em($bp-adjust-horizontal-figures--1))
+        +max-width-rem($longform-inline-max-width)
+        width: 60%
+        margin-left: auto
+        margin-right: auto
+        position: relative
+        .figure__media, img
+          float: none
+          width: 100%
+        .figure__caption, figcaption
+          position: absolute
+          left: 100%
+          width: auto
+          padding-left: $gutter
+          width: 30%
+          top: 0
+          float: none
+      +respond-min(em($bp-adjust-horizontal-figures--2))
+        width: 100%
+        .figure__caption, figcaption
+          width: 25%
       .figure__media, img
-        +max-width-rem($longform-content-max-width)
+        +max-width-rem($longform-inline-max-width)
+      .figure__caption, figcaption
+    &.figure-horizontal--right
+      +respond-min(em($bp-adjust-horizontal-figures--1))
+        .figure__caption, figcaption
+          right: 100%
+          left: auto
 
