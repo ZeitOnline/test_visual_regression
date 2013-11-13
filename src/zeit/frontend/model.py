@@ -41,6 +41,7 @@ class Content (Resource):
     lead_pic = ''
     author = ''
     publish_date = ''
+    publish_date_meta = ''
     last_modified_date = ''
     rankedTags = []
     genre = ''
@@ -64,6 +65,7 @@ class Content (Resource):
         #publish date = shown in article and meta name=date
         pdate = self.__construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
+        self.publish_date_meta = pdate
         # last modified date, shown in meta name=last_modified
         ldate = self.__get_date_element(root, 'date-last-modified')
         self.last_modified_date = ldate

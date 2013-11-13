@@ -60,6 +60,10 @@ class Article(Base):
         return self.context.publish_date
 
     @property
+    def publish_date_meta(self):
+        return self.context.publish_date_meta
+
+    @property
     def last_modified_date(self):
         return self.context.last_modified_date
 
