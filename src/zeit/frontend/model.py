@@ -148,7 +148,7 @@ class Content (Resource):
         index = []
         for page in pages:
             try:
-                string = "%i - %s" % (page.number, page.teaser)
+                string = unicode("%i -- %s") % (page.number, page.teaser)
                 index.append(string)
             except AttributeError:
                 pass

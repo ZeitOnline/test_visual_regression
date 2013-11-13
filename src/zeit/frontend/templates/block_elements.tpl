@@ -8,7 +8,7 @@
     {% if subtitle %}
         <div class="{{ class }}">
             <span>Kapitel {{ number }}</span>
-            <span>- {{ subtitle }} -</span>
+            <span>&mdash; {{ subtitle }} &mdash;</span>
             <span></span>
         </div>
     {% endif %}
@@ -32,11 +32,11 @@
     {% if subtitle %}
         <div class="{{ class }}">
             <a name="kapitel{{ number }}"></a>
-            {{ number }} - {{ subtitle }}
+            {{ number }} &mdash; {{ subtitle }}
         </div>
     {% endif %}
 {%- endmacro %}
-                
+
 {% macro meta_box(date, source, class) -%}
     <figure class="{{ class }}">
         <div>
