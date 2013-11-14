@@ -13,12 +13,15 @@
                         <h1 class="article__title">
                             {{view.title}}
                         </h1>
-                        <!--
-                            todo: place date into article
-                            {{view.publish_date | format_date('long')}}
-                        -->
-                        {{ blocks.article_meta(view.author, view.genre, view.location) }}
-
+                        <aside class="article__meta">
+                            {% if view.genre -%}
+                                <span class="article__meta__genre">{{view.genre}}</span>
+                            {%- endif %}
+                            {{ blocks.meta_author(view.author) }}
+                            {% if view.location -%}
+                                <span class="article__meta__location">{{view.location}}</span>
+                            {%- endif %}
+                        </aside>
                         <div class="article__subtitle">
                             <p>{{view.subtitle}}</p>
                         </div>
