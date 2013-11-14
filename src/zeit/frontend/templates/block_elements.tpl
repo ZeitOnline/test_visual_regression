@@ -8,18 +8,18 @@
     {% if subtitle %}
         <div class="{{ class }}">
             <span>Kapitel {{ number }}</span>
-            <span>- {{ subtitle }} -</span>
+            <span>&mdash; {{ subtitle }} &mdash;</span>
             <span></span>
         </div>
     {% endif %}
 {%- endmacro %}
 
-{% macro subpage_index(index, subtitle, number) -%}
+{% macro subpage_index(index, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
-        <div class="article_subpage-index">
+        <div class="{{ index_class }}">
         {% for chapter in index %}
             {% if loop.index == number %}
-                <span class="article_subpage-active"><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+                <span class="{{ active_class }}">{{ chapter }}</span>
             {% else %}
                 <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
             {% endif %}
@@ -32,11 +32,11 @@
     {% if subtitle %}
         <div class="{{ class }}">
             <a name="kapitel{{ number }}"></a>
-            {{ number }} - {{ subtitle }}
+            {{ number }} &mdash; {{ subtitle }}
         </div>
     {% endif %}
 {%- endmacro %}
-                
+
 {% macro meta_box(date, source, class) -%}
     <figure class="{{ class }}">
         <div>
@@ -60,7 +60,7 @@
     <blockquote class="
         <!-- double layout is missing -->
         {% if obj.layout == 'wide' %}
-            quote--loud
+            quote--wide
         {% else %}
             quote
         {% endif %}
