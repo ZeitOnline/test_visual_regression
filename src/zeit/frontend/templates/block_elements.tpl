@@ -1,4 +1,4 @@
-{% macro p(html, class) -%}
+{% macro para(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
@@ -59,7 +59,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro image(obj) -%}
+{% macro img(obj) -%}
     <figure class="
         {% if obj.layout == 'large' %}
             figure-full-width
@@ -92,7 +92,7 @@
 {% macro article_meta(author, genre, location) -%}
     {% set prefix = " von " if genre %}
     {% set suffix = ", " if location %}
-    
+
     <aside class="article__meta">
         {% if genre %}
             <span class="article__meta__genre">{{genre}}</span>

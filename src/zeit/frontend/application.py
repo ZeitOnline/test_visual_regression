@@ -45,6 +45,7 @@ def is_block(obj, b_type):
         interface = zeit.frontend.interfaces.IAdvertising
     return interface in zope.interface.providedBy(obj)
 
+
 def block_type(obj):
     return type(obj).__name__.lower()
 

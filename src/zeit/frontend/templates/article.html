@@ -35,19 +35,8 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item is elem('p') %}
-                            {{ blocks.p(item)}}
-                        {% elif item is elem('intertitle') %}
-                            {{ blocks.intertitle(item) }}
-                        {% elif item is elem('image') %}
-                            {{ blocks.image(item) }}
-                        {% elif item is elem('citation') %}
-                            {{ blocks.citation(item) }}
-                        {% elif item is elem('advertising') %}
-                            {{ blocks.advertising(item) }}
-                        {% endif %}
-
-
+                            <h1>{{ item|block_type }}</h1>
+                            {{ blocks[item|block_type](item)}}
                     {% endfor %}
                 </div>
                 {% endfor %}
