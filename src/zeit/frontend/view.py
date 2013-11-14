@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 import zeit.frontend.model
 from babel.dates import get_timezone
+from pyramid.renderers import render_to_response
 
 
 class Base(object):
@@ -24,8 +25,15 @@ class Base(object):
              context=zeit.frontend.model.Content,
              renderer='json')
 @view_config(context=zeit.frontend.model.Content,
-             renderer='templates/longform.html')
+             renderer='templates/article.html')
 class Article(Base):
+
+    def __call__(self):
+        if self.context.template == 'longform':
+            return render_to_response('templates/longform.html',
+                                       {"view":self},
+                                       request=self.request)
+        return {}
 
     @property
     def lead_pic(self):

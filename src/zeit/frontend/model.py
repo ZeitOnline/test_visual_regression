@@ -53,7 +53,7 @@ class Content (Resource):
     def __init__(self, path):
         article_tree = objectify.parse(path)
         root = article_tree.getroot()
-        self.contenttype = unicode(root.head.xpath("//attribute[@name='contenttype']").pop().text)
+        self.xml = root
         self.title = unicode(root.body.title)
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
@@ -70,6 +70,13 @@ class Content (Resource):
         self.genre = self.__construct_genre(root)
         self.location = self.__construct_location(root)
         self.author = self.__construct_author(root)
+
+    @property
+    def template(self):
+        el = self.xml.head.xpath("//attribute[@name='contenttype']")
+        if len(el) > 0:
+            return el.pop().text
+        return 'default'
 
     def __construct_author(self, root):
         try:
