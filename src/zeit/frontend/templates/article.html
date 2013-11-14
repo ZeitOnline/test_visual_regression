@@ -36,7 +36,7 @@
                 <div class="article__page">
                     {% for item in page %}
                         {% if item is elem('p') %}
-                            {{ blocks.p(item, "is-constrained is-centered")}}
+                            {{ blocks.p(item)}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
                         {% elif item is elem('image') %}

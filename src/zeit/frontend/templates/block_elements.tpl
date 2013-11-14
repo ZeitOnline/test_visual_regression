@@ -1,5 +1,5 @@
 {% macro p(html, class) -%}
-    <p class="{{ class }}">
+    <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
 {%- endmacro %}
