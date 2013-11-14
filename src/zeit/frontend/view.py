@@ -17,7 +17,7 @@ class Base(object):
     @property
     def publish_date(self):
         tz = get_timezone('Europe/Berlin')
-        return tz.localize(self.context.publish_date)
+        return self.context.publish_date.astimezone(tz)
 
 
 @view_config(route_name='json',
