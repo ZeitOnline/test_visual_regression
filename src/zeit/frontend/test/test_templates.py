@@ -120,3 +120,30 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
     # assert empty subtitle
     assert '' == tpl.module.subpage_head(1, '', css_class)
+
+def test_macro_citation_should_produce_valid_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+
+    # assert normal quote
+    obj = {'layout': 'quote', 'attribution': 'Autor',
+           'url': 'www.zeit.de', 'text': 'Text'}
+    lines = tpl.module.citation(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<blockquote class="quote"><span class="quote__text">' \
+        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
+        'Autor</a></span></blockquote>'
+    assert markup == output
+
+    # assert wider quote
+    obj = {'layout': 'wide', 'attribution': 'Autor',
+           'url': 'www.zeit.de', 'text': 'Text'}
+    lines = tpl.module.citation(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<blockquote class="quote--wide"><span class="quote__text">' \
+        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
+        'Autor</a></span></blockquote>'
+    assert markup == output
