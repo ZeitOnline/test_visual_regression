@@ -53,6 +53,7 @@ class Content (Resource):
     def __init__(self, path):
         article_tree = objectify.parse(path)
         root = article_tree.getroot()
+        self.contenttype = unicode(root.head.xpath("//attribute[@name='contenttype']").pop().text)
         self.title = unicode(root.body.title)
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
