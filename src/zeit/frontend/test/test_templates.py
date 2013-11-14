@@ -64,7 +64,7 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     # assert normal markup
     markup = '<div class="%s">' \
         '<span>Kapitel 1</span>' \
-        '<span>- Title -</span>' \
+        '<span>&mdash; Title &mdash;</span>' \
         '<span></span></div>' % css_class
     lines = tpl.module.subpage_chapter(1, 'Title', css_class).splitlines()
     output = ""
@@ -111,7 +111,7 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
     # assert normal markup
     markup = '<div class="%s">' \
-        '<a name="kapitel1"></a>1 - Title</div>' % css_class
+        '<a name="kapitel1"></a>1 &mdash; Title</div>' % css_class
     lines = tpl.module.subpage_head(1, 'Title', css_class).splitlines()
     output = ""
     for line in lines:

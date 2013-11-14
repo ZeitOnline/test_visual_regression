@@ -56,6 +56,12 @@ $bp-adjust-horizontal-figures--2: 1440px
     margin: $medium auto $large auto
     max-width: 920px
     padding-left: $gutter
+    a
+      display: block
+      position: relative
+      top: -$large
+      border-bottom: 0px
+
 
   .article__subpage-index
     display: none
@@ -133,6 +139,9 @@ $bp-adjust-horizontal-figures--2: 1440px
     +padded
     max-width: em(1460px)
     margin: 0 auto
+
+  .quote--wide
+    margin-left: $huge
 
   .is-constrained
     max-width: $longform-content-max-width
