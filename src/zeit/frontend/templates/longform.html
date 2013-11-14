@@ -21,14 +21,25 @@
 				{% if view.genre -%}
 					<span class="article__meta__genre">{{view.genre}}</span>
 				{%- endif %}
-				{{ blocks.meta_author(view.author) }}
 				{% if view.location -%}
 					<span class="article__meta__location">{{view.location}}</span>
 				{%- endif %}
 			</aside>
-			<div class="article__subtitle padded">
-				<p>{{view.subtitle}}</p>
-			</div>
+
+			<div class="article__opener is-constrained padded">
+          <span class="article__subtitle">
+              <p>{{view.subtitle}}</p>
+          </span>
+          <span class="article__meta">
+              {% if view.genre -%}
+                  <span class="article__meta__genre">{{view.genre}}</span>
+              {%- endif %}
+              {{ blocks.meta_author(view.author) }}
+              {% if view.location -%}
+                  <span class="article__meta__location">{{view.location}}</span>
+              {%- endif %}
+          </span>
+      </div>
 
 			<div class="article__body">
 				{% set vars ={'add_meta': true} %}
@@ -36,7 +47,7 @@
                 {% for page in view.pages %}
 
                 <section class="article__page">
-                    
+
                     {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
 
                     <div class="article__page-wrap">
@@ -45,25 +56,11 @@
                         {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
 
 	                    {% for item in page %}
-	                        {% if item is elem('p') %}
-
-								<!-- integrate meta box at first paragraph only -->
-								{% if vars.add_meta %}
-									{{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-									{% if vars.update({'add_meta': false}) %}{% endif %}
-								{% endif %}
-
+	            {% if item is elem('p') %}
 								{{ blocks.p(item)}}
 							{% elif item is elem('intertitle') %}
 								{{ blocks.intertitle(item) }}
 							{% elif item is elem('image') %}
-
-								<!-- integrate meta box only when layout isn't large -->
-								{% if item.layout != 'large' and vars.add_meta %}
-									{{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-									{% if vars.update({'add_meta': false}) %}{% endif %}
-								{% endif %}
-
 								{{ blocks.image(item) }}
 							{% elif item is elem('citation') %}
 								{{ blocks.citation(item) }}

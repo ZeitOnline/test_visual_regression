@@ -143,9 +143,15 @@ $bp-adjust-horizontal-figures--2: 1440px
   .quote--wide
     margin-left: $huge
 
+  .article__opener
+    margin-left: auto
+    margin-right: auto
+
   .is-constrained
     max-width: $longform-content-max-width
     max-width: rem($longform-content-max-width)
+    &.padded
+      +box-sizing(content-box)
 
   figure
     &.figure-full-width

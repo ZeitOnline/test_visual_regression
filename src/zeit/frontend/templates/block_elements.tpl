@@ -37,17 +37,33 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro meta_box(date, source, class) -%}
-    <figure class="{{ class }}">
-        <div>
-            <span>Aktualisiert</span>
-            <span>{{ date }}</span>
+{% macro subpage_index(index, subtitle, number, index_class, active_class) -%}
+    {% if subtitle %}
+        <div class="{{ index_class }}">
+        {% for chapter in index %}
+            {% if loop.index == number %}
+                <span class="{{ active_class }}">{{ chapter }}</span>
+            {% else %}
+                <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro subpage_head(number, subtitle, class) -%}
+    {% if subtitle %}
+        <div class="{{ class }}">
+            <a name="kapitel{{ number }}"></a>
+            {{ number }} &mdash; {{ subtitle }}
         </div>
-        <div>
-            <span>Quellen</span>
-            <span>{{ source }}</span>
-        </div>
-    </figure>
+    {% endif %}
+{%- endmacro %}
+
+{% macro author_date(date, source, class) -%}
+    <div class="{{ class }}">
+        <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
+    </div>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}

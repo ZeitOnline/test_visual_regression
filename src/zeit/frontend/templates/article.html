@@ -13,17 +13,20 @@
                         <h1 class="article__title">
                             {{view.title}}
                         </h1>
-                        <aside class="article__meta">
-                            {% if view.genre -%}
-                                <span class="article__meta__genre">{{view.genre}}</span>
-                            {%- endif %}
-                            {{ blocks.meta_author(view.author) }}
-                            {% if view.location -%}
-                                <span class="article__meta__location">{{view.location}}</span>
-                            {%- endif %}
-                        </aside>
-                        <div class="article__subtitle">
-                            <p>{{view.subtitle}}</p>
+                        {{ blocks.author_date(view.publish_date | format_date('long'), view.source, "article__meta") }}
+                        <div class="article__opener">
+                            <span class="article__subtitle">
+                                <p>{{view.subtitle}}</p>
+                            </span>
+                            <span class="article__meta">
+                                {% if view.genre -%}
+                                    <span class="article__meta__genre">{{view.genre}}</span>
+                                {%- endif %}
+                                {{ blocks.meta_author(view.author) }}
+                                {% if view.location -%}
+                                    <span class="article__meta__location">{{view.location}}</span>
+                                {%- endif %}
+                            </span>
                         </div>
                     </div>
                 </header>

@@ -30,13 +30,30 @@
 
 .article__meta
 	@extend %meta
+	text-transform: uppercase
 	margin-bottom: $medium
-	+respond-max($break-2)
-		font-size: $font-xs
+	display: block
+	margin-top: $thin
+	letter-spacing: 1px
+	font-size: $font-xs
+	+respond-min($break-1)
+		font-size: $font-s
+
+.article__meta__source
+	&:after
+		content: ', '
+		+respond-min($break-1)
+			content: ' — '
+
+.article__meta__date
+	+respond-max($break-1)
+		display: block
 
 .article__subtitle
-	+franziska(semibold)
 	@extend %copy
+	+franziska(semibold)
+
+.article__opener
 	margin-bottom: $medium
 
 .article__subheading
