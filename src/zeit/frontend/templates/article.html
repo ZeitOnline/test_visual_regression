@@ -35,9 +35,7 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item == 'metabox' %} 
-                            {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-                        {% elif item is elem('p') %} 
+                        {% if item is elem('p') %} 
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
@@ -59,7 +57,7 @@
                     <span class="article__tags__title">Tags</span> 
                     {% for tag in view.rankedTags %}
                             {% for item in tag %}
-                                <a href="#{{ item.url }}" id="hp.article.tools.tag.Verschlüsselung" title="Artikel mit dem Schlagwort *Verschlüsselung* anzeigen">{{ item.html }}</a>
+                                <a href="#{{ item.url }}">{{ item.html }}</a>
                                 {% if not loop.last %}
                                     ,
                                 {% endif %}
