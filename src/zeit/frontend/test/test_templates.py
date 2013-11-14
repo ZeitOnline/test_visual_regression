@@ -55,3 +55,31 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
     data = {'name': 'abc', 'href': 'xyz'}
     assert markup == tpl.module.authorlink(data).strip()
+
+
+def test_macro_citation_should_produce_valid_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+
+    # assert normal quote
+    obj = {'layout': 'quote', 'attribution': 'Autor',
+           'url': 'www.zeit.de', 'text': 'Text'}
+    lines = tpl.module.citation(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<blockquote class="quote"><span class="quote__text">' \
+        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
+        'Autor</a></span></blockquote>'
+    assert markup == output
+
+    # assert wider quote
+    obj = {'layout': 'wide', 'attribution': 'Autor',
+           'url': 'www.zeit.de', 'text': 'Text'}
+    lines = tpl.module.citation(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<blockquote class="quote--wide"><span class="quote__text">' \
+        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
+        'Autor</a></span></blockquote>'
+    assert markup == output

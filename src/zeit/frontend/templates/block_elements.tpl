@@ -25,7 +25,6 @@
 
 {% macro citation(obj) -%}
     <blockquote class="
-        <!-- double layout is missing -->
         {% if obj.layout == 'wide' %}
             quote--wide
         {% else %}
