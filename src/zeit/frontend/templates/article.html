@@ -35,7 +35,7 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item is elem('p') %} 
+                        {% if item is elem('p') %}
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
@@ -46,7 +46,7 @@
                         {% elif item is elem('advertising') %}
                             {{ blocks.advertising(item) }}
                         {% endif %}
-                        
+
 
                     {% endfor %}
                 </div>
@@ -54,7 +54,7 @@
 
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
-                    <span class="article__tags__title">Tags</span> 
+                    <span class="article__tags__title">Tags</span>
                     {% for tag in view.rankedTags %}
                             {% for item in tag %}
                                 <a href="#{{ item.url }}">{{ item.html }}</a>
@@ -65,7 +65,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
             </div>
         </div>
 	</article>
