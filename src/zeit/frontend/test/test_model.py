@@ -57,6 +57,25 @@ def __mock_img():
     xml = etree.fromstring(p)
     return Img(xml)
 
+
+def __mock_intertitle():
+    from zeit.frontend.model import Intertitle
+    it = """
+        <intertitle>Foo</intertitle>
+        """
+    xml = etree.fromstring(it)
+    return Intertitle(xml)
+
+
+def __mock_citation():
+    from zeit.frontend.model import Citation
+    cit = """
+        <citation />
+        """
+    xml = etree.fromstring(cit)
+    return Citation(xml)
+
+
 def test_metabox_should_be_inserted_before_first_paragraph():
     from zeit.frontend.model import Metabox
     from zeit.frontend import model

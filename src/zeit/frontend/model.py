@@ -179,10 +179,10 @@ class Page(object):
         #content = self.__insert_metabox(content)
         return content
 
-    def __insert_metabox(self, c):
-        index = c.index(next(obj for obj in c if type(obj) == Para))
-        c.insert(index, Metabox())
-        return c
+def __insert_metabox(c):
+    index = c.index(next(obj for obj in c if type(obj) == Para))
+    c.insert(index, Metabox())
+    return c
 
 
 @implementer(interfaces.IMetaBox)
