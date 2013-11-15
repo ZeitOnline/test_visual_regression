@@ -17,7 +17,6 @@ def test_inline_html_should_filter_to_valid_html():
 """
    assert str(_inline_html(xml)) == xml_str
 
-
 @pytest.fixture(scope="module")
 def jinja2_env(request):
     config = pyramid.config.Configurator()
@@ -78,10 +77,3 @@ def test_publish_date_should_produce_localized_date():
 
     # expected offset 100
     assert str(base.publish_date) == '2013-11-11 11:00:00+01:00'
-
-
-
-
-
-
-
