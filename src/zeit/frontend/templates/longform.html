@@ -1,0 +1,92 @@
+{% extends "templates/layout.html" %}
+{% import 'templates/block_elements.tpl' as blocks %}
+{% block content %}
+
+	<article class="article article--longform">
+		<div class="article__wrap">
+			<div class="article__head-wrap">
+				{% if view.header_img %}
+					{{ blocks.head_image_longform(view.header_img) }}
+				{% endif %}
+				<header class="article__title-wrap">
+					<h2 class="article__supertitle">
+						{{ view.supertitle }}
+					</h2>
+					<h1 class="article__title">
+						{{view.title}}
+					</h1>
+				</header>
+			</div>
+			<aside class="article__meta">
+				{% if view.genre -%}
+					<span class="article__meta__genre">{{view.genre}}</span>
+				{%- endif %}
+				{% if view.location -%}
+					<span class="article__meta__location">{{view.location}}</span>
+				{%- endif %}
+			</aside>
+
+			<div class="article__opener is-constrained padded">
+          <span class="article__subtitle">
+              <p>{{view.subtitle}}</p>
+          </span>
+          <span class="article__meta">
+              {% if view.genre -%}
+                  <span class="article__meta__genre">{{view.genre}}</span>
+              {%- endif %}
+              {{ blocks.meta_author(view.author) }}
+              {% if view.location -%}
+                  <span class="article__meta__location">{{view.location}}</span>
+              {%- endif %}
+          </span>
+      </div>
+
+			<div class="article__body">
+				{% set vars ={'add_meta': true} %}
+
+                {% for page in view.pages %}
+
+                <section class="article__page">
+
+                    {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
+
+                    <div class="article__page-wrap">
+
+                        {{ blocks.subpage_index( view.subpage_index, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+                        {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
+
+	                    {% for item in page %}
+	            {% if item is elem('p') %}
+								{{ blocks.p(item)}}
+							{% elif item is elem('intertitle') %}
+								{{ blocks.intertitle(item) }}
+							{% elif item is elem('image') %}
+								{{ blocks.image(item) }}
+							{% elif item is elem('citation') %}
+								{{ blocks.citation(item) }}
+							{% elif item is elem('advertising') %}
+								{{ blocks.advertising(item) }}
+							{% endif %}
+						{% endfor %}
+					</div>
+				</section>
+				{% endfor %}
+
+				{% if view.rankedTags %}
+				<div class="article__tags is-constrained is-centered">
+					<span class="article__tags__title">Tags</span>
+					{% for tag in view.rankedTags %}
+							{% for item in tag %}
+								<a href="#{{ item.url }}" id="hp.article.tools.tag.Verschlüsselung" title="Artikel mit dem Schlagwort *Verschlüsselung* anzeigen">{{ item.html }}</a>
+								{% if not loop.last %}
+									,
+								{% endif %}
+							{% endfor %}
+					{% endfor %}
+				</div>
+				{% endif %}
+
+			</div>
+		</div>
+	</article>
+{% endblock content %}

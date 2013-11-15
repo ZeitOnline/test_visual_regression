@@ -55,3 +55,95 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
     data = {'name': 'abc', 'href': 'xyz'}
     assert markup == tpl.module.authorlink(data).strip()
+
+
+def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    css_class = 'article__subpage-chapter'
+
+    # assert normal markup
+    markup = '<div class="%s">' \
+        '<span>Kapitel 1</span>' \
+        '<span>&mdash; Title &mdash;</span>' \
+        '<span></span></div>' % css_class
+    lines = tpl.module.subpage_chapter(1, 'Title', css_class).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+    # assert empty subtitle
+    assert '' == tpl.module.subpage_chapter(0, '', '')
+
+
+def test_macro_subpage_index_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    css_index = 'article__subpage-index'
+    markup_standart = '<div class="%s">' % css_index
+
+    # assert normal markup
+    markup = '%s<span><a href="#kapitel1">1</a></span></div>' % markup_standart
+    lines = tpl.module.subpage_index(
+        ['1'], 'Title', 2, css_index, '').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+    # assert active markup
+    css_active = 'article__subpage-active'
+    markup_active = '%s<span class="%s">1</span></div>' \
+        % (markup_standart, css_active)
+    lines_active = tpl.module.subpage_index(
+        ['1'], 'Title', 1, css_index, css_active).splitlines()
+    output_active = ""
+    for line in lines_active:
+        output_active += line.strip()
+    assert markup_active == output_active
+
+    # assert empty subtitle
+    assert '' == tpl.module.subpage_index(['1'], '', 1)
+
+
+def test_macro_subpage_head_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    css_class = 'article__subpage-head'
+
+    # assert normal markup
+    markup = '<div class="%s">' \
+        '<a name="kapitel1"></a>1 &mdash; Title</div>' % css_class
+    lines = tpl.module.subpage_head(1, 'Title', css_class).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+    # assert empty subtitle
+    assert '' == tpl.module.subpage_head(1, '', css_class)
+
+def test_macro_citation_should_produce_valid_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+
+    # assert normal quote
+    obj = {'layout': 'quote', 'attribution': 'Autor',
+           'url': 'www.zeit.de', 'text': 'Text'}
+    lines = tpl.module.citation(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<blockquote class="quote"><span class="quote__text">' \
+        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
+        'Autor</a></span></blockquote>'
+    assert markup == output
+
+    # assert wider quote
+    obj = {'layout': 'wide', 'attribution': 'Autor',
+           'url': 'www.zeit.de', 'text': 'Text'}
+    lines = tpl.module.citation(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<blockquote class="quote--wide"><span class="quote__text">' \
+        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
+        'Autor</a></span></blockquote>'
+    assert markup == output

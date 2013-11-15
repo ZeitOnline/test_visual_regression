@@ -13,17 +13,20 @@
                         <h1 class="article__title">
                             {{view.title}}
                         </h1>
-                        <aside class="article__meta">
-                            {% if view.genre -%}
-                                <span class="article__meta__genre">{{view.genre}}</span>
-                            {%- endif %}
-                            {{ blocks.meta_author(view.author) }}
-                            {% if view.location -%}
-                                <span class="article__meta__location">{{view.location}}</span>
-                            {%- endif %}
-                        </aside>
-                        <div class="article__subtitle">
-                            <p>{{view.subtitle}}</p>
+                        {{ blocks.author_date(view.publish_date | format_date('long'), view.source, "article__meta") }}
+                        <div class="article__opener">
+                            <span class="article__subtitle">
+                                <p>{{view.subtitle}}</p>
+                            </span>
+                            <span class="article__meta">
+                                {% if view.genre -%}
+                                    <span class="article__meta__genre">{{view.genre}}</span>
+                                {%- endif %}
+                                {{ blocks.meta_author(view.author) }}
+                                {% if view.location -%}
+                                    <span class="article__meta__location">{{view.location}}</span>
+                                {%- endif %}
+                            </span>
                         </div>
                     </div>
                 </header>
@@ -38,7 +41,7 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item is elem('p') %} 
+                        {% if item is elem('p') %}
                             {{ blocks.p(item, "is-constrained is-centered")}}
                         {% elif item is elem('intertitle') %}
                             {{ blocks.intertitle(item) }}
@@ -55,7 +58,7 @@
 
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
-                    <span class="article__tags__title">Tags</span> 
+                    <span class="article__tags__title">Tags</span>
                     {% for tag in view.rankedTags %}
                             {% for item in tag %}
                                 <a href="#{{ item.url }}">{{ item.html }}</a>
@@ -66,7 +69,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
             </div>
         </div>
 	</article>

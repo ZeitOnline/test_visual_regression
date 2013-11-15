@@ -44,6 +44,7 @@ class Content (Resource):
     rankedTags = []
     genre = ''
     source = ''
+    subpage_index = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -52,6 +53,7 @@ class Content (Resource):
     def __init__(self, path):
         article_tree = objectify.parse(path)
         root = article_tree.getroot()
+        self.xml = root
         self.title = unicode(root.body.title)
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
@@ -68,6 +70,13 @@ class Content (Resource):
         self.genre = self.__construct_genre(root)
         self.location = self.__construct_location(root)
         self.author = self.__construct_author(root)
+
+    @property
+    def template(self):
+        el = self.xml.head.xpath("//attribute[@name='contenttype']")
+        if len(el) > 0:
+            return el.pop().text
+        return 'default'
 
     def __construct_author(self, root):
         try:
@@ -141,11 +150,25 @@ class Content (Resource):
     def __construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
         self.pages = _get_pages(pages)
+        self.subpage_index = self.__construct_subpage_index(self.pages)
+
+    def __construct_subpage_index(self, pages):
+        index = []
+        for page in pages:
+            try:
+                string = unicode("%i -- %s") % (page.number, page.teaser)
+                index.append(string)
+            except AttributeError:
+                pass
+        return index
 
     def __extract_header_img(self, root):
-        first_img = root.body.find('division').find('image')
-        if (first_img.get('layout') == 'zmo_header'):
-            self.header_img = Img(first_img)
+        try:
+            first_img = root.body.find('division').find('image')
+            if (first_img.get('layout') == 'zmo_header'):
+                self.header_img = Img(first_img)
+        except AttributeError:
+            return
 
 
 @implementer(interfaces.IPage)
@@ -154,6 +177,9 @@ class Page(object):
 
     def __init__(self, page_xml):
         self.__content = iter(self._extract_items(page_xml))
+        self.number = page_xml.number
+        if page_xml.get('teaser') is not None:
+            self.teaser = page_xml.get('teaser')
 
     def __iter__(self):
         return self.__content
@@ -168,19 +194,23 @@ class Page(object):
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
             if item.tag == 'image' and item.get('layout') != 'zmo_header':
-                #if item.get('layout') != 'large':
                 content.append(Img(item))
             if item.tag == 'citation':
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
-        #content = self.__insert_metabox(content)
         return content
 
-    def __insert_metabox(self, c):
-        index = c.index(next(obj for obj in c if type(obj) == Para))
-        c.insert(index, Metabox())
-        return c
+
+@implementer(interfaces.IMetaBox)
+class Metabox(object):
+    def __init__(self):
+        pass
+
+
+def __insert_metabox(c):
+    c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
+    return c
 
 
 @implementer(interfaces.IMetaBox)
@@ -278,7 +308,10 @@ class Tag(object):
 
 def _get_pages(pages_xml):
     pages = []
+    number = 0
     for page in pages_xml:
+        page.number = number
+        number = number + 1
         pages.append(Page(page))
     return pages
 

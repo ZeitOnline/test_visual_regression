@@ -31,9 +31,9 @@ def jinja2_env(request):
 def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     markup = '<span class="article__meta__author">Nico</span>'
-    assert markup == tpl.module.authorlink(('Nico','')).strip()
-
-
+    author = {'name': 'Nico'}
+    assert markup == tpl.module.authorlink(
+        author, 'article__meta__author').strip()
 
 def __mock_p():
     from zeit.frontend.model import Para
@@ -56,19 +56,6 @@ def __mock_img():
     xml = etree.fromstring(p)
     return Img(xml)
 
-def test_metabox_should_be_inserted_before_first_paragraph():
-    from zeit.frontend.model import Metabox
-    from zeit.frontend import model
-
-    content = [__mock_p(), __mock_img(), __mock_p()]
-    content = model.__insert_metabox(content)
-
-    assert type(content[0]) ==  type(Metabox())
-
-    content = [__mock_img(), __mock_p()]
-    content = model.__insert_metabox(content)
-
-    assert type(content[1]) ==  type(Metabox())
 
 def test_publish_date_should_produce_localized_date():
     import iso8601
@@ -90,5 +77,3 @@ def test_publish_date_should_produce_localized_date():
 
     # expected offset 100
     assert str(base.publish_date) == '2013-11-11 11:00:00+01:00'
-
-

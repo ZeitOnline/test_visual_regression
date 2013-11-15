@@ -17,7 +17,14 @@
   min-width: $px
   min-width: rem($px)
 
-=bleed
+=padded
+  padding-left: $page-padding--small
+  padding-right: $page-padding--small
+  +respond-min($break-1)
+    padding-left: $page-padding
+    padding-right: $page-padding
+
+=bleed($max: $medium-content-width + 2*$gutter)
   margin-left: -$page-padding--small
   margin-right: -$page-padding--small
   width: auto !important
@@ -28,7 +35,7 @@
     margin-right: -$page-padding
     figcaption
       margin-left: $page-padding  !important
-  +respond-min($medium-content-width + 2*$gutter)
+  +respond-min($max)
     margin: 0
     figcaption
       margin-left: auto !important
