@@ -3,12 +3,12 @@ module.exports = function(grunt) {
 
 	// local variables
 	var project = {
-			bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
-			name: '<%= pkg.name %>-<%= pkg.version%>',
-			codeDir: 'src/zeit/frontend/',
-			jqueryVersion: 'jquery-1.10.2.min.js',
-			concatJs: '<%= pkg.name %>.js'
-		}
+		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
+		name: '<%= pkg.name %>-<%= pkg.version%>',
+		codeDir: 'src/zeit/frontend/',
+		jqueryVersion: 'jquery-1.10.2.min.js',
+		concatJs: '<%= pkg.name %>.js'
+	};
 
 	// configuration
 	grunt.initConfig({
@@ -36,23 +36,36 @@ module.exports = function(grunt) {
 
 		//photobox
 		photobox: {
-	    	task: {
-				options: {
-	        		screenSizes : [ '600x900', '320x800', '1200x900' ],
-	        		urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
-	        		useImageMagick: true
-	      		}
-	    	}
-	   	},
+			task: {
+			options: {
+				screenSizes : [ '600x900', '320x800', '1200x900' ],
+				urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
+				useImageMagick: true
+				}
+			}
+		},
 
-	   	//concat files
+		//concat files
 		concat: {
 			options: {
 				banner: project.bannerContent
 			},
-			target: {
-				src: ['<%= jshint.target.src %>', '!javascript/jquery-1.10.2.min.js', '!javascript/resize-ads.js', '!javascript/modernizr.custom.42776.js'],
-				//ignores: ['javascript/jquery-1.10.2.min.js', 'javascript/resize-ads.js', 'javascript/modernizr.custom.42776.js'],
+			top: {
+				src: [
+					'javascript/config-ads.js',
+					'javascript/resize-ads.js',
+					'javascript/modernizr.custom.42776.js'
+				],
+				dest: project.codeDir + 'js/' + '<%= pkg.name %>-top.js'
+			},
+			bottom: {
+				src: [
+					'<%= jshint.target.src %>',
+					'!javascript/jquery-1.10.2.min.js',
+					'!javascript/resize-ads.js',
+					'!javascript/modernizr.custom.42776.js',
+					'!javascript/config-ads.js'
+				],
 				dest: project.codeDir + 'js/' + project.concatJs
 			}
 		},
@@ -62,7 +75,12 @@ module.exports = function(grunt) {
 			default: {
 				files: [
 					//copy non concatinated scripts
-					{ expand: true, cwd: 'javascript', src: [ project.jqueryVersion, 'modernizr.custom.42776.js', 'resize-ads.js'], dest: project.codeDir + 'js/' },
+					{
+						expand: true,
+						cwd: 'javascript',
+						src: [ project.jqueryVersion ],
+						dest: project.codeDir + 'js/'
+					},
 				]
 			}
 		},
@@ -81,7 +99,7 @@ module.exports = function(grunt) {
 				loopfunc: true, // no warnings about functions in loops
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
-				ignores: [ 'javascript/iqd-ads.js', 'javascript/jquery-1.10.2.min.js', 'javascript/modernizr.custom.42776.js' ],
+				ignores: [ 'javascript/iqd-ads.js', 'javascript/jquery-1.10.2.min.js', 'javascript/modernizr.custom.42776.js', 'javascript/config-ads.js'],
 				devel: true, // accept console etc.
 				// phantom: true // phatom js globals
 			},
@@ -102,6 +120,7 @@ module.exports = function(grunt) {
 			}
 		}
 	});
+
 
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass');
