@@ -46,6 +46,23 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_chapter(0, '', '')
 
 
+def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    obj = [{'link': 'link', 'text': 'text'}]
+
+    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs" ' \
+        'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
+        'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
+        'Wo bin ich?</div><div class="breadcrumbs__list">' \
+        '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
+        '<a href="link">text</a></div></div></div></div>'
+    lines = tpl.module.breadcrumbs(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     css_index = 'article__subpage-index'
@@ -156,6 +173,53 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
+def test_image_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+
+    obj = [{'layout': 'large', 'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test'},
+           {'layout': 'zmo_header',
+            'css': 'article__main-image figure-full-width',
+            'caption': 'test', 'copyright': 'test'},
+           {'layout': 'medium', 'align': 'left', 'css': 'figure-horizontal',
+            'caption': 'test', 'copyright': 'test'},
+           {'layout': 'medium', 'align': 'right',
+            'css': 'figure-horizontal--right',
+            'caption': 'test', 'copyright': 'test'},
+           {'layout': 'medium', 'align': False, 'css': 'figure '
+            'is-constrained is-centered', 'caption': 'test',
+            'copyright': 'test'},
+           {'layout': 'small', 'align': 'right',
+            'css': 'figure-stamp--right',
+            'caption': 'test', 'copyright': 'test'},
+           {'layout': 'small', 'align': False, 'css': 'figure-stamp',
+            'caption': 'test', 'copyright': 'test'}]
+
+    for el in obj:
+        print el['css']
+        lines = tpl.module.image(el).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        markup = '<figure class="%s"><img class="figure__media"' \
+            ' src="http://placehold.it/160x90"><figcaption' \
+            ' class="figure__caption">testtest</figcaption></figure>' \
+            % el['css']
+        assert markup == output
+
+
+def test_macro_head_image_longform_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    obj = {'caption': 'test', 'copyright': 'test', 'src': 'test.gif'}
+    lines = tpl.module.head_image_longform(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    markup = '<div class="article__main-image--longform"' \
+        ' style="background-image: url(test.gif)";>testtest</div>'
+    assert markup == output
+
+
 def test_macro_meta_author_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
@@ -174,31 +238,3 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
     data = {'name': 'abc', 'href': 'xyz'}
     assert markup == tpl.module.authorlink(data).strip()
-
-
-def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-
-    # assert normal quote
-    obj = {'layout': 'quote', 'attribution': 'Autor',
-           'url': 'www.zeit.de', 'text': 'Text'}
-    lines = tpl.module.citation(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    markup = '<blockquote class="quote"><span class="quote__text">' \
-        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
-        'Autor</a></span></blockquote>'
-    assert markup == output
-
-    # assert wider quote
-    obj = {'layout': 'wide', 'attribution': 'Autor',
-           'url': 'www.zeit.de', 'text': 'Text'}
-    lines = tpl.module.citation(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    markup = '<blockquote class="quote--wide"><span class="quote__text">' \
-        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
-        'Autor</a></span></blockquote>'
-    assert markup == output
