@@ -25,6 +25,7 @@
 
         <div class="page-wrap">
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__fp__container--top">
                 <script>
                     (function() {
@@ -34,7 +35,9 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__leaderboard">
                 <script data-name="ad__leaderboard">
                     (function() {
@@ -44,7 +47,9 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__fp__container--left">
                 <script>
                     (function() {
@@ -54,7 +59,9 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__fp__container--right">
                 <script>
                     (function() {
@@ -64,6 +71,7 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
         <main role="main" class="main">
             {%  block content %}{% endblock content %}
