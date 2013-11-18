@@ -79,7 +79,7 @@
 						div_class: "ad__rec",
 						min_width: 720,
 						min_height: 0,
-						text: "Rectangle"
+						text: '<script src="http://ad.doubleclick.net/N183/adj/zeitmz/homepage;tile=8;' + window.n_pbt + ';sz=300x250,300x600,300x100;kw=iqadtile8,zeitmz,noiqdband,'+ window.iqd_TestKW +';ord=' + window.ord + '?" type="text/javascript"><\/script>'
 					}
 			]
 		}
