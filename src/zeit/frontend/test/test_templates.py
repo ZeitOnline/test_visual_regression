@@ -27,36 +27,6 @@ def test_macro_p_should_produce_markup(jinja2_env):
     assert markup == output
 
 
-def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    lines = tpl.module.intertitle("xy").splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
-    assert m == output
-
-
-def test_macro_meta_author_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
-    markup = 'von <span class="article__meta__author">y</span>,'
-    assert markup == tpl.module.meta_author(data).strip()
-    data['href'] = 'x'
-    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>,'
-    assert markup == tpl.module.meta_author(data).strip()
-
-
-def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    data = {'name': 'abc'}
-    markup = '<span class="article__meta__author">abc</span>'
-    assert markup == tpl.module.authorlink(data).strip()
-    markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
-    data = {'name': 'abc', 'href': 'xyz'}
-    assert markup == tpl.module.authorlink(data).strip()
-
-
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     css_class = 'article__subpage-chapter'
@@ -121,6 +91,29 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     # assert empty subtitle
     assert '' == tpl.module.subpage_head(1, '', css_class)
 
+
+def test_macro_author_date_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    markup = '<div class="test"><span class="article__meta__source">' \
+        'Aus zon</span><span class="article__meta__date">01.01.2013' \
+        '</span></div>'
+    lines = tpl.module.author_date('01.01.2013', 'zon', 'test').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+
+def test_macro_intertitle_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    lines = tpl.module.intertitle("xy").splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
+    assert m == output
+
+
 def test_macro_citation_should_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
 
@@ -147,3 +140,41 @@ def test_macro_citation_should_produce_valid_markup(jinja2_env):
         'Text</span><span class="quote__author"><a href="www.zeit.de">' \
         'Autor</a></span></blockquote>'
     assert markup == output
+
+
+def test_macro_advertising_should_produce_script(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+
+    # test normal
+    ad = {type: 'rectangle'}
+    markup = '<script data-name="ad__rectangle">'
+    output = tpl.module.advertising(ad).splitlines
+    assert markup == output.pop()
+
+    # test inactive
+    ad_inactive = {type: 'no'}
+    assert '' == tpl.module.advertising(ad)
+
+# image
+
+# head_image_longform
+
+
+def test_macro_meta_author_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
+    markup = 'von <span class="article__meta__author">y</span>,'
+    assert markup == tpl.module.meta_author(data).strip()
+    data['href'] = 'x'
+    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>,'
+    assert markup == tpl.module.meta_author(data).strip()
+
+
+def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    data = {'name': 'abc'}
+    markup = '<span class="article__meta__author">abc</span>'
+    assert markup == tpl.module.authorlink(data).strip()
+    markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
+    data = {'name': 'abc', 'href': 'xyz'}
+    assert markup == tpl.module.authorlink(data).strip()
