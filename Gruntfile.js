@@ -112,5 +112,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'watch']);
+	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy']);
 };
