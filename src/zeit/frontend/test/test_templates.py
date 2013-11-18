@@ -146,18 +146,14 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
 
     # test normal
-    ad = {type: 'rectangle'}
+    ad = {'type': 'rectangle'}
     markup = '<script data-name="ad__rectangle">'
-    output = tpl.module.advertising(ad).splitlines
-    assert markup == output.pop()
+    lines = tpl.module.advertising(ad).splitlines()
+    assert markup == lines[0].strip()
 
     # test inactive
-    ad_inactive = {type: 'no'}
-    assert '' == tpl.module.advertising(ad)
-
-# image
-
-# head_image_longform
+    ad_inactive = {'type': 'no'}
+    assert '' == tpl.module.advertising(ad_inactive)
 
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
