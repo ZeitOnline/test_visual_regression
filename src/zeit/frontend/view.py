@@ -29,7 +29,9 @@ class Base(object):
 class Article(Base):
 
     def __call__(self):
+        self.context.advertising_enabled = True
         if self.context.template == 'longform':
+            self.context.advertising_enabled = False
             return render_to_response('templates/longform.html',
                                        {"view":self},
                                        request=self.request)
