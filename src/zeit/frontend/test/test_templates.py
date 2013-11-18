@@ -36,6 +36,15 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
     m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
     assert m == output
 
+def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    path_data = [{'text': 'Start', 'link': 'http://zeit.de'}, {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},{'text': 'Kann Leipzig Hypezig ueberleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}]
+    lines = tpl.module.breadcrumbs(path_data).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    m = '<div class="breadcrumbs-wrap"><div class="breadcrumbs" id="js-breadcrumbs"><div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">Wo bin ich?</div><div class="breadcrumbs__list"><div class="breadcrumbs__list__item" itemprop="breadcrumb"><a href="http://zeit.de">Start</a>&rsaquo;<a href="http://zeit.de/magazin">ZEIT Magazin</a>&rsaquo;<a href="http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung">Kann Leipzig Hypezig ueberleben?</a></div></div></div></div>'
+    assert m == output
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')

@@ -17,13 +17,13 @@
 {% macro breadcrumbs(crumbs) -%}
     <div class="breadcrumbs-wrap">
         <div class="breadcrumbs" id="js-breadcrumbs">
-            <div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schließen">Wo bin ich?</div>
+            <div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">Wo bin ich?</div>
             <div class="breadcrumbs__list">
                 <div class="breadcrumbs__list__item" itemprop="breadcrumb">
                     {% for crumb in crumbs %}
                         <a href="{{crumb.link}}">{{crumb.text}}</a>
                         {% if not loop.last %}
-                         ›
+                          &rsaquo;
                         {% endif %}
                     {% endfor %}
                 </div>
