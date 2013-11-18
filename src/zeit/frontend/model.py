@@ -208,17 +208,6 @@ class Metabox(object):
         pass
 
 
-def _insert_metabox(c):
-    c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
-    return c
-
-
-@implementer(interfaces.IMetaBox)
-class Metabox(object):
-    def __init__(self):
-        pass
-
-
 @implementer(interfaces.IPara)
 class Para(object):
 

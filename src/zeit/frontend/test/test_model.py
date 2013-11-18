@@ -7,16 +7,17 @@ import zeit.frontend.application
 
 
 def test_inline_html_should_filter_to_valid_html():
-   p = """
+    p = """
            <p>Text <a href='foo'> ba </a> und <em>Text</em>
            abc <invalid>invalid</invalid></p>
        """
 
-   xml = etree.fromstring(p)
-   xml_str = """Text  <a href="foo"> ba </a> und <em>Text</em>
+    xml = etree.fromstring(p)
+    xml_str = """Text  <a href="foo"> ba </a> und <em>Text</em>
            abc invalid
 """
-   assert str(_inline_html(xml)) == xml_str
+
+    assert str(_inline_html(xml)) == xml_str
 
 
 @pytest.fixture(scope="module")
@@ -51,6 +52,7 @@ def _mock_p():
 
 
 def _mock_img():
+
     from zeit.frontend.model import Img
     p = """
            <image layout="" align="" src="">
@@ -70,15 +72,15 @@ def test_publish_date_should_produce_localized_date():
     pd = iso8601.parse_date("2013-10-10T10:00+00:00")
     m = Mock()
     m.publish_date = pd
-    base = view.Base(m,Mock())
+    base = view.Base(m, Mock())
 
-    #expected offset 200
+    # expected offset 200
     assert str(base.publish_date) == '2013-10-10 12:00:00+02:00'
 
     pd = iso8601.parse_date("2013-11-11T10:00+00:00")
     m = Mock()
     m.publish_date = pd
-    base = view.Base(m,Mock())
+    base = view.Base(m, Mock())
 
     # expected offset 100
     assert str(base.publish_date) == '2013-11-11 11:00:00+01:00'
