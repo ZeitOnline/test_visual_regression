@@ -27,7 +27,7 @@ Nach folgendem Aufruf lauscht die App auf Port 9090
 
 Folgende URL liefert eine erste Sicht auf einen Artikel
 
-    http://localhost:9090/politik/deutschland/2013-07/wahlbeobachter-portraets 
+    http://localhost:9090/politik/deutschland/2013-07/wahlbeobachter-portraets
 
 Die Option --reload sorgt dafür, dass bei editiertem Code der Server neu gestartet wird
 
@@ -39,6 +39,7 @@ Nach Ausführung obiger Schritte wird zur Frontendentwicklung ein weiteres Tools
 
 ### Was Du brauchst
 
+
 - [node](http://nodejs.org/)
 - [grunt](http://gruntjs.com/)
 
@@ -46,13 +47,13 @@ Die Installation von `node.js` ist sehr systemspezifisch. Am *einfachsten* kann 
 
 Wenn node installiert ist, zuerst das Grunt-Commandline-Interface installieren:
 
-	cd ~
-	npm install -g grunt-cli
+    cd ~
+    npm install -g grunt-cli
 
 Dann eine lokale Kopie von grunt anlegen im Projektverzeichnis:
 
-	cd friedbert
-	npm install grunt --save-dev
+    cd friedbert
+    npm install grunt --save-dev
 
 Dadurch werden ein Verzeichnis `node_modules` angelegt. Dies bitte nicht anfassen. Werden neue Grunt-Module dem Projekt hinzugefügt, müssen diese ggf. lokal nachinstalliert werden, da die Module nicht ins Repository eingecheckt werden:
 
@@ -76,6 +77,17 @@ oder
 
 sind aber noch nicht Teil dieses Pakets.
 
+### JS-Tests über Karma in lokalen Browsern und Browserstack laufen lassen
+
+Sofern noch nicht geschehen über npm karma, mocha, chai und Konsorten installieren:
+
+    npm install
+
+Dann die Mocha-Tests folgendermaßen starten:
+
+    karma start karma-conf.js
+
+Die Karma-Konfiguration (bspw. welche Browser verwendet werden) findet sich im Projekt-Root als karma-conf.js.
 
 
 

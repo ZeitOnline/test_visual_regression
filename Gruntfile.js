@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 				loopfunc: true, // no warnings about functions in loops
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
-				ignores: [ 'javascript/libs/iqd-ads.js', 'javascript/libs/jquery-1.10.2.min.js', 'javascript/libs/modernizr.custom.42776.js', 'javascript/libs/require.js' ],
+				ignores: [ 'javascript/libs/iqd-ads.js', 'javascript/libs/chai.js', 'javascript/libs/jquery-1.10.2.min.js', 'javascript/libs/modernizr.custom.42776.js', 'javascript/libs/require.js' ],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
 			},
