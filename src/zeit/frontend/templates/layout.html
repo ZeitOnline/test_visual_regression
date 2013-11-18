@@ -45,19 +45,6 @@
                 </script>
             </div>
 
-            <nav class="nav">
-                <ul class="nav__list">
-                    {% for link in top_formate.xpath('item/link') %}
-                        <li class="nav__list__item"><a href="{{ link.get('href') }}">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-                <ul class="nav__list">
-                    {% for link in sitemap.xpath('.//item/link') %}
-                        <li class="nav__list__item"><a href="{{ link.get('href') }}">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
-
             <div class="ad__fp__container--left">
                 <script>
                     (function() {
