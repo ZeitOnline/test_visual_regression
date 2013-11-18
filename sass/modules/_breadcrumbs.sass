@@ -1,5 +1,7 @@
 .breadcrumbs-wrap
   padding: $micro
+  +respond-max($break-1)
+    display: none
 
 .breadcrumbs
   +inline-block
@@ -15,6 +17,7 @@
   font-size: $font-xs
   color: $grey
   padding: $micro $thin
+  padding-top: 0
   margin: $micro $micro 0 $micro
   -webkit-touch-callout: none
   -webkit-user-select: none
@@ -24,7 +27,8 @@
   user-select: none
   &:after
     content: ' ›'
-    margin-left: $thin
+    font-size: $font-xl
+    margin-left: $micro
   .no-js &
     display: none
   .is-active &
@@ -37,6 +41,7 @@
   +tablet
   vertical-align: top
   padding: $micro $thin
+  padding-top: 0
   margin: $micro $micro 0 $micro
   list-style-type: none
   font-size: $font-xs
