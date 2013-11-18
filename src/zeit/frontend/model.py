@@ -44,6 +44,7 @@ class Content (Resource):
     rankedTags = []
     genre = ''
     source = ''
+    subpage_index = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -52,24 +53,32 @@ class Content (Resource):
     def __init__(self, path):
         article_tree = objectify.parse(path)
         root = article_tree.getroot()
+        self.xml = root
         self.title = unicode(root.body.title)
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
-        self.__construct_pages(root)
-        self.__extract_header_img(root)
+        self._construct_pages(root)
+        self._extract_header_img(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         dpth = "//attribute[@name='date_first_released']"
         pdate = root.head.xpath(dpth).pop().text
         self.publish_date = iso8601.parse_date(pdate)
-        self.__construct_tags(root)
-        self.rankedTags = self.__construct_tags(root)
-        self.source = self.__construct_source(root)
-        self.genre = self.__construct_genre(root)
-        self.location = self.__construct_location(root)
-        self.author = self.__construct_author(root)
+        self._construct_tags(root)
+        self.rankedTags = self._construct_tags(root)
+        self.source = self._construct_source(root)
+        self.genre = self._construct_genre(root)
+        self.location = self._construct_location(root)
+        self.author = self._construct_author(root)
 
-    def __construct_author(self, root):
+    @property
+    def template(self):
+        el = self.xml.head.xpath("//attribute[@name='contenttype']")
+        if len(el) > 0:
+            return el.pop().text
+        return 'default'
+
+    def _construct_author(self, root):
         try:
             author = {'name': unicode(root.head.author.display_name)}
             url = root.head.author.xpath("@href")
@@ -82,19 +91,19 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __construct_source(self, root):
+    def _construct_source(self, root):
         try:
             copyright = root.head.xpath("//attribute[@name='copyrights']")
 
             if copyright:
                 return copyright
             else:
-                return self.__construct_product_id(root)
+                return self._construct_product_id(root)
 
         except AttributeError:
-            return __construct_product_id(root)
+            return _construct_product_id(root)
 
-    def __construct_product_id(self, root):
+    def _construct_product_id(self, root):
         try:
             product_id = root.head.xpath("//attribute[@name='product-id']")
             path = 'config/products.xml'
@@ -115,19 +124,19 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __construct_location(self, root):
+    def _construct_location(self, root):
         try:
             return root.head.xpath("//attribute[@name='location']").pop()
         except IndexError:
             return
 
-    def __construct_tags(self, root):
+    def _construct_tags(self, root):
         try:
             return _get_tags(root.head.rankedTags)
         except AttributeError:
             return
 
-    def __construct_genre(self, root):
+    def _construct_genre(self, root):
         genres = root.head.xpath("//attribute[@name='genre']")
         path = "config/article-genres.xml"
         if len(genres) > 0:
@@ -138,14 +147,28 @@ class Content (Resource):
                 (genres.pop(0))
             return groot.xpath(expr).pop(0)
 
-    def __construct_pages(self, root):
+    def _construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
         self.pages = _get_pages(pages)
+        self.subpage_index = self._construct_subpage_index(self.pages)
 
-    def __extract_header_img(self, root):
-        first_img = root.body.find('division').find('image')
-        if (first_img.get('layout') == 'zmo_header'):
-            self.header_img = Img(first_img)
+    def _construct_subpage_index(self, pages):
+        index = []
+        for page in pages:
+            try:
+                string = unicode("%i -- %s") % (page.number, page.teaser)
+                index.append(string)
+            except AttributeError:
+                pass
+        return index
+
+    def _extract_header_img(self, root):
+        try:
+            first_img = root.body.find('division').find('image')
+            if (first_img.get('layout') == 'zmo_header'):
+                self.header_img = Img(first_img)
+        except AttributeError:
+            return
 
 
 @implementer(interfaces.IPage)
@@ -154,12 +177,17 @@ class Page(object):
 
     def __init__(self, page_xml):
         self.__content = iter(self._extract_items(page_xml))
+        self.number = page_xml.number
+        if page_xml.get('teaser') is not None:
+            self.teaser = page_xml.get('teaser')
 
     def __iter__(self):
         return self.__content
 
     def _extract_items(self, page_xml):
         content = []
+        add_meta = False
+
         for item in page_xml.iterchildren():
             if item.tag == 'p':
                 content.append(Para(item))
@@ -172,6 +200,23 @@ class Page(object):
             if item.tag == 'advertising':
                 content.append(Advertising(item))
         return content
+
+
+@implementer(interfaces.IMetaBox)
+class Metabox(object):
+    def __init__(self):
+        pass
+
+
+def _insert_metabox(c):
+    c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
+    return c
+
+
+@implementer(interfaces.IMetaBox)
+class Metabox(object):
+    def __init__(self):
+        pass
 
 
 @implementer(interfaces.IPara)
@@ -263,7 +308,10 @@ class Tag(object):
 
 def _get_pages(pages_xml):
     pages = []
+    number = 0
     for page in pages_xml:
+        page.number = number
+        number = number + 1
         pages.append(Page(page))
     return pages
 

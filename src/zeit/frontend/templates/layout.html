@@ -17,7 +17,11 @@
         <!--[if gt IE 8]><!-->
             <link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
         <!--<![endif]-->
-        <script src="/js/friedbert-top.js"></script>
+
+        <script src="/js/libs/modernizr.custom.42776.js"></script>
+        <script src="/js/libs/resize-ads.js"></script>
+        <script data-main="/js/app.js" src="/js/libs/require.js"></script>
+
     </head>
     <body>
 
@@ -42,19 +46,6 @@
                     }).call(this);
                 </script>
             </div>
-
-            <nav class="nav">
-                <ul class="nav__list">
-                    {% for link in top_formate.xpath('item/link') %}
-                        <li class="nav__list__item"><a href="{{ link.get('href') }}">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-                <ul class="nav__list">
-                    {% for link in sitemap.xpath('.//item/link') %}
-                        <li class="nav__list__item"><a href="{{ link.get('href') }}">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
 
             <div class="ad__fp__container--left">
                 <script>
@@ -81,6 +72,7 @@
         </main>
 
         </div>
+
         <div id="iqdLastNode">
             <script type="text/javascript"> 
                 var IQDComplete = { 

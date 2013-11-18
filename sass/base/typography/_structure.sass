@@ -1,7 +1,7 @@
 .supertitle, %supertitle
   +tablet
   text-transform: uppercase
-  color: $black
+  color: $grey
   letter-spacing: 1px
   margin-bottom: $micro
   font-size: $font-s
@@ -21,7 +21,8 @@
   line-height: $headline-line-height
 
 .quote, %quote
-  +tablet(thin)
+  +tablet()
+  font-size: $font-l--px
 
 .quote__text
   &:before
@@ -30,17 +31,16 @@
     content: '«'
 
 .quote__author
-  +tablet
+  @extend %meta
+  font-size: $font-s--px
   display: block
   margin-top: $small
-  color: $grey
-  font-size: $font-s--px
   margin-left: $fine
   &:before
-    content: '- '
+    content: "\2014  "
   a
     @extend %meta-link
 
-.quote--loud, %quote--loud
+.quote--wide, %quote--wide
   @extend %quote
-  +cassise(bold)
+  max-width: 50%

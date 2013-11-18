@@ -1,8 +1,11 @@
+$article-content-max-width: 660px
+
 // Opt-in Typography
 .copy, %copy
   p
-    max-width: 41.25em
     margin-bottom: $fine
+    margin-left: auto
+    margin-right: auto
     font-size: $font-ml
     max-width: 36.6em
     +respond-min($break-3)
@@ -17,17 +20,18 @@
     margin-bottom: $thin
     margin-top: $small
 
-  blockquote, .quote
+  blockquote
     @extend %quote
     @extend %font-l-xl
     color: $color-quote
     display: block
-    +respond-min($break-1)
-      float: left
-      max-width: em(120px)
-      margin: $large $medium $large auto
-    &.quote--loud
-      @extend %quote--loud
+    &.quote--wide
+      @extend %quote--wide
+    &.quote
+      +respond-min($break-1)
+        float: left
+        max-width: em(120px)
+        margin: $large $medium $large auto
 
 figure
   width: 100%
@@ -56,7 +60,7 @@ figure
   &.figure-horizontal, &.figure-horizontal--right
     +pie-clearfix
     .figure__media, img
-      +max-width-rem(660px)
+      +max-width-rem($article-content-max-width)
       width: 100%
       display: block
       +respond-min($break-1)
@@ -91,7 +95,7 @@ figure
       display: block
       width: 100%
     .figure__caption, figcaption
-      +max-width-rem(660px)
+      +max-width-rem($article-content-max-width)
       margin: 0 auto
       +respond-min($break-3)
         padding-right: 10%
@@ -131,6 +135,4 @@ figure
       text-align: left
       +respond-max($break-2)
         margin-top: $fine
-
-
 
