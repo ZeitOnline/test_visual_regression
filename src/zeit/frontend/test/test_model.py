@@ -35,7 +35,7 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     assert markup == tpl.module.authorlink(
         author, 'article__meta__author').strip()
 
-def __mock_p():
+def _mock_p():
     from zeit.frontend.model import Para
     p = """
            <p>Text <a href='foo'> ba </a> und <em>Text</em>
@@ -45,7 +45,7 @@ def __mock_p():
     xml = etree.fromstring(p)
     return Para(xml)
 
-def __mock_img():
+def _mock_img():
     from zeit.frontend.model import Img
     p = """
            <image layout="" align="" src="">
