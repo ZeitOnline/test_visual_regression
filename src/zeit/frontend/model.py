@@ -57,19 +57,19 @@ class Content (Resource):
         self.title = unicode(root.body.title)
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
-        self.__construct_pages(root)
-        self.__extract_header_img(root)
+        self._construct_pages(root)
+        self._extract_header_img(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         dpth = "//attribute[@name='date_first_released']"
         pdate = root.head.xpath(dpth).pop().text
         self.publish_date = iso8601.parse_date(pdate)
-        self.__construct_tags(root)
-        self.rankedTags = self.__construct_tags(root)
-        self.source = self.__construct_source(root)
-        self.genre = self.__construct_genre(root)
-        self.location = self.__construct_location(root)
-        self.author = self.__construct_author(root)
+        self._construct_tags(root)
+        self.rankedTags = self._construct_tags(root)
+        self.source = self._construct_source(root)
+        self.genre = self._construct_genre(root)
+        self.location = self._construct_location(root)
+        self.author = self._construct_author(root)
 
     @property
     def template(self):
@@ -78,7 +78,7 @@ class Content (Resource):
             return el.pop().text
         return 'default'
 
-    def __construct_author(self, root):
+    def _construct_author(self, root):
         try:
             author = {'name': unicode(root.head.author.display_name)}
             url = root.head.author.xpath("@href")
@@ -91,19 +91,19 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __construct_source(self, root):
+    def _construct_source(self, root):
         try:
             copyright = root.head.xpath("//attribute[@name='copyrights']")
 
             if copyright:
                 return copyright
             else:
-                return self.__construct_product_id(root)
+                return self._construct_product_id(root)
 
         except AttributeError:
-            return __construct_product_id(root)
+            return _construct_product_id(root)
 
-    def __construct_product_id(self, root):
+    def _construct_product_id(self, root):
         try:
             product_id = root.head.xpath("//attribute[@name='product-id']")
             path = 'config/products.xml'
@@ -124,19 +124,19 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __construct_location(self, root):
+    def _construct_location(self, root):
         try:
             return root.head.xpath("//attribute[@name='location']").pop()
         except IndexError:
             return
 
-    def __construct_tags(self, root):
+    def _construct_tags(self, root):
         try:
             return _get_tags(root.head.rankedTags)
         except AttributeError:
             return
 
-    def __construct_genre(self, root):
+    def _construct_genre(self, root):
         genres = root.head.xpath("//attribute[@name='genre']")
         path = "config/article-genres.xml"
         if len(genres) > 0:
@@ -147,12 +147,12 @@ class Content (Resource):
                 (genres.pop(0))
             return groot.xpath(expr).pop(0)
 
-    def __construct_pages(self, root):
+    def _construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
         self.pages = _get_pages(pages)
-        self.subpage_index = self.__construct_subpage_index(self.pages)
+        self.subpage_index = self._construct_subpage_index(self.pages)
 
-    def __construct_subpage_index(self, pages):
+    def _construct_subpage_index(self, pages):
         index = []
         for page in pages:
             try:
@@ -162,7 +162,7 @@ class Content (Resource):
                 pass
         return index
 
-    def __extract_header_img(self, root):
+    def _extract_header_img(self, root):
         try:
             first_img = root.body.find('division').find('image')
             if (first_img.get('layout') == 'zmo_header'):
@@ -208,7 +208,7 @@ class Metabox(object):
         pass
 
 
-def __insert_metabox(c):
+def _insert_metabox(c):
     c.insert(c.index(next(obj for obj in c if type(obj) == Para)), Metabox())
     return c
 

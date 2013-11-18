@@ -1,9 +1,10 @@
 from lxml import etree
 from zeit.frontend.model import _inline_html
-import  pytest
+import pytest
 import pyramid.config
 import pyramid_jinja2
 import zeit.frontend.application
+
 
 def test_inline_html_should_filter_to_valid_html():
    p = """
@@ -17,6 +18,7 @@ def test_inline_html_should_filter_to_valid_html():
 """
    assert str(_inline_html(xml)) == xml_str
 
+
 @pytest.fixture(scope="module")
 def jinja2_env(request):
     config = pyramid.config.Configurator()
@@ -28,6 +30,7 @@ def jinja2_env(request):
     utility.trim_blocks = True
     return utility
 
+
 def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     markup = '<span class="article__meta__author">Nico</span>'
@@ -35,7 +38,8 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     assert markup == tpl.module.authorlink(
         author, 'article__meta__author').strip()
 
-def __mock_p():
+
+def _mock_p():
     from zeit.frontend.model import Para
     p = """
            <p>Text <a href='foo'> ba </a> und <em>Text</em>
@@ -45,7 +49,8 @@ def __mock_p():
     xml = etree.fromstring(p)
     return Para(xml)
 
-def __mock_img():
+
+def _mock_img():
     from zeit.frontend.model import Img
     p = """
            <image layout="" align="" src="">
