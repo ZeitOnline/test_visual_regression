@@ -3,12 +3,12 @@ module.exports = function(grunt) {
 
 	// local variables
 	var project = {
-			bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
-			name: '<%= pkg.name %>-<%= pkg.version%>',
-			codeDir: 'src/zeit/frontend/',
-			jqueryVersion: 'jquery-1.10.2.min.js',
-			concatJs: '<%= pkg.name %>.js'
-		}
+		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
+		name: '<%= pkg.name %>-<%= pkg.version%>',
+		codeDir: 'src/zeit/frontend/',
+		jqueryVersion: 'jquery-1.10.2.min.js',
+		concatJs: '<%= pkg.name %>.js'
+	};
 
 	// configuration
 	grunt.initConfig({
@@ -36,16 +36,16 @@ module.exports = function(grunt) {
 
 		//photobox
 		photobox: {
-	    	task: {
-				options: {
-	        		screenSizes : [ '600x900', '320x800', '1200x900' ],
-	        		urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
-	        		useImageMagick: true
-	      		}
-	    	}
-	   	},
+			task: {
+			options: {
+				screenSizes : [ '600x900', '320x800', '1200x900' ],
+				urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
+				useImageMagick: true
+				}
+			}
+		},
 
-	   	//concat files
+		//concat files
 		concat: {
 			options: {
 				banner: project.bannerContent
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 			default: {
 				files: [
 					//copy non concatinated scripts
-					{ expand: true, cwd: 'javascript', src: ['**'], dest: project.codeDir + 'js/' },
+					{ expand: true, cwd: 'javascript', src: ['**'], dest: project.codeDir + 'js/' }
 				]
 			}
 		},
@@ -103,6 +103,7 @@ module.exports = function(grunt) {
 		}
 	});
 
+
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
@@ -112,5 +113,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'watch']);
+	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy']);
 };

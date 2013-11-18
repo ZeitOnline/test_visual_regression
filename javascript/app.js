@@ -6,6 +6,9 @@ require.config({
   }
 });
 
-require(['modules/fontloader'], function(fontloader) {
+require(['modules/fontloader',
+         'modules/breadcrumbs'], function(fontloader,
+                                          breadcrumbs) {
   fontloader.init();
+  breadcrumbs.init();
 });

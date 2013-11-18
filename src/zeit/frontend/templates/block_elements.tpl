@@ -4,17 +4,61 @@
     </p>
 {%- endmacro %}
 
-{% macro meta_box(date, source, class) -%}
-    <figure class="{{ class }}">
-        <div>
-            <span>Aktualisiert</span>
-            <span>{{ date }}</span>
+{% macro subpage_chapter(number, subtitle, class) -%}
+    {% if subtitle %}
+        <div class="{{ class }}">
+            <span>Kapitel {{ number }}</span>
+            <span>&mdash; {{ subtitle }} &mdash;</span>
+            <span></span>
         </div>
-        <div>
-            <span>Quellen</span>
-            <span>{{ source }}</span>
+    {% endif %}
+{%- endmacro %}
+
+{% macro breadcrumbs(crumbs) -%}
+    <div class="breadcrumbs-wrap">
+        <div class="breadcrumbs" id="js-breadcrumbs">
+            <div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">Wo bin ich?</div>
+            <div class="breadcrumbs__list">
+                <div class="breadcrumbs__list__item" itemprop="breadcrumb">
+                    {% for crumb in crumbs %}
+                        <a href="{{crumb.link}}">{{crumb.text}}</a>
+                        {% if not loop.last %}
+                          &rsaquo;
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    </figure>
+    </div>
+{%- endmacro %}
+
+{% macro subpage_index(index, subtitle, number, index_class, active_class) -%}
+    {% if subtitle %}
+        <div class="{{ index_class }}">
+        {% for chapter in index %}
+            {% if loop.index == number %}
+                <span class="{{ active_class }}">{{ chapter }}</span>
+            {% else %}
+                <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro subpage_head(number, subtitle, class) -%}
+    {% if subtitle %}
+        <div class="{{ class }}">
+            <a name="kapitel{{ number }}"></a>
+            {{ number }} &mdash; {{ subtitle }}
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro author_date(date, source, class) -%}
+    <div class="{{ class }}">
+        <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
+    </div>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
@@ -63,7 +107,7 @@
         {% if obj.layout == 'large' %}
             figure-full-width
         {% elif obj.layout == 'zmo_header' %}
-            article__main-image figure-full-width bleed
+            article__main-image figure-full-width
         {% elif obj.layout == 'medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
@@ -88,13 +132,18 @@
     </figure>
 {%- endmacro %}
 
+{% macro head_image_longform(obj) -%}
+    <div class="article__main-image--longform" style="background-image: url({{obj.src | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
+    </div>
+{%- endmacro %}
+
 {% macro meta_author(author) -%}
     {% if author -%}
         {{ author.prefix }}{{ authorlink(author) }}{{ author.suffix }}
     {%- endif %}
 {%- endmacro %}
 
-{% macro authorlink(author, class="article__meta__author") -%}    
+{% macro authorlink(author, class="article__meta__author") -%}
     {% if author.href -%}
         <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>
     {%- else -%}

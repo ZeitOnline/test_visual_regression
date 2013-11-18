@@ -1,0 +1,67 @@
+.breadcrumbs-wrap
+  padding: $micro
+  +respond-max($break-1)
+    display: none
+
+.breadcrumbs
+  +inline-block
+  margin-bottom: $small
+  background-color: $grey--light
+  &.is-active, .no-js &
+    width: 100%
+
+.breadcrumbs__trigger
+  +tablet
+  +inline-block
+  cursor: pointer
+  font-size: $font-xs
+  color: $grey
+  padding: $micro $thin
+  padding-top: 0
+  margin: $micro $micro 0 $micro
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  &:after
+    content: ' ›'
+    font-size: $font-xl
+    margin-left: $micro
+  .no-js &
+    display: none
+  .is-active &
+    margin-right: 0
+    &:after
+      content: ''
+      margin-left: 0
+
+.breadcrumbs__list
+  +tablet
+  vertical-align: top
+  padding: $micro $thin
+  padding-top: 0
+  margin: $micro $micro 0 $micro
+  list-style-type: none
+  font-size: $font-xs
+  .js &
+    display: none
+  .is-active &
+    +inline-block
+    margin-left: $small
+
+.breadcrumbs__list__item
+  display: inline
+  padding: 0
+  margin: 0
+  color: $grey
+  a
+    +link-colors($grey, $grey, $grey, $grey, $grey)
+    border-bottom: none
+    border-bottom-width: 0
+    padding: 0
+    margin-right: $thin
+    margin-left: $thin
+    &:first-child
+      margin-left: 0

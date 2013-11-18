@@ -16,6 +16,7 @@ def test_inline_html_should_filter_to_valid_html():
     xml_str = """Text  <a href="foo"> ba </a> und <em>Text</em>
            abc invalid
 """
+
     assert str(_inline_html(xml)) == xml_str
 
 
@@ -39,7 +40,7 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
         author, 'article__meta__author').strip()
 
 
-def __mock_p():
+def _mock_p():
     from zeit.frontend.model import Para
     p = """
            <p>Text <a href='foo'> ba </a> und <em>Text</em>
@@ -50,7 +51,8 @@ def __mock_p():
     return Para(xml)
 
 
-def __mock_img():
+def _mock_img():
+
     from zeit.frontend.model import Img
     p = """
            <image layout="" align="" src="">
