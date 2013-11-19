@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 import zeit.frontend.model
 from babel.dates import get_timezone
+from pyramid.renderers import render_to_response
 
 
 class Base(object):
@@ -27,6 +28,15 @@ class Base(object):
              renderer='templates/article.html')
 class Article(Base):
 
+    def __call__(self):
+        self.context.advertising_enabled = True
+        if self.context.template == 'longform':
+            self.context.advertising_enabled = False
+            return render_to_response('templates/longform.html',
+                                      {"view": self},
+                                      request=self.request)
+        return {}
+
     @property
     def lead_pic(self):
         return self.context.lead_pic
@@ -48,6 +58,10 @@ class Article(Base):
         return self.context.pages
 
     @property
+    def subpage_index(self):
+        return self.context.subpage_index
+
+    @property
     def header_img(self):
         return self.context.header_img
 
@@ -57,7 +71,16 @@ class Article(Base):
 
     @property
     def publish_date(self):
-        return self.context.publish_date
+        tz = get_timezone('Europe/Berlin')
+        return self.context.publish_date.astimezone(tz)
+
+    @property
+    def publish_date_meta(self):
+        return self.context.publish_date_meta
+
+    @property
+    def last_modified_date(self):
+        return self.context.last_modified_date
 
     @property
     def rankedTags(self):

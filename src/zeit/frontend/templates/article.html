@@ -2,7 +2,17 @@
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 
-	<article class="article">
+    <article class="article">
+        <nav class="main-nav">
+            <div class="main-nav--primary"></div>
+            <div class="main-nav--secondary"></div>
+        </nav>
+        {{ blocks.breadcrumbs([
+            {'text': 'Start', 'link': 'http://zeit.de'},
+            {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},
+            {'text': 'Lebensart', 'link': 'http://zeit.de/magazin/mode'},
+            {'text': 'Kann Leipzig Hypezig überleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}
+        ]) }}
         <div class="article__wrap">
             <div class="article__head-wrap">
                 <header class="article__title-wrap">
@@ -13,14 +23,22 @@
                         <h1 class="article__title">
                             {{view.title}}
                         </h1>
-                        <!--
-                            todo: place date into article
-                            {{view.publish_date | format_date('long')}}
-                        -->
-                        {{ blocks.article_meta(view.author, view.genre, view.location) }}
-
-                        <div class="article__subtitle">
-                            <p>{{view.subtitle}}</p>
+                        <div class="article__meta">
+                            {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+                        </div>
+                        <div class="article__opener">
+                            <span class="article__subtitle">
+                                <p>{{view.subtitle}}</p>
+                            </span>
+                            <span class="article__meta">
+                                {% if view.genre -%}
+                                    <span class="article__meta__genre">{{view.genre}}</span>
+                                {%- endif %}
+                                {{ blocks.meta_author(view.author) }}
+                                {% if view.location -%}
+                                    <span class="article__meta__location">{{view.location}}</span>
+                                {%- endif %}
+                            </span>
                         </div>
                     </div>
                 </header>
@@ -35,7 +53,6 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                            <h1>{{ item|block_type }}</h1>
                             {{ blocks[item|block_type](item)}}
                     {% endfor %}
                 </div>

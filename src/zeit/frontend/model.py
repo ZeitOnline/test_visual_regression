@@ -41,9 +41,12 @@ class Content (Resource):
     lead_pic = ''
     author = ''
     publish_date = ''
+    publish_date_meta = ''
+    last_modified_date = ''
     rankedTags = []
     genre = ''
     source = ''
+    subpage_index = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -52,51 +55,84 @@ class Content (Resource):
     def __init__(self, path):
         article_tree = objectify.parse(path)
         root = article_tree.getroot()
+        self.xml = root
         self.title = unicode(root.body.title)
         self.subtitle = unicode(root.body.subtitle)
         self.supertitle = unicode(root.body.supertitle)
-        self.__construct_pages(root)
-        self.__extract_header_img(root)
-        self.author = self.__construct_author(root)
+        self._construct_pages(root)
+        self._extract_header_img(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        dpth = "//attribute[@name='date_first_released']"
-        pdate = root.head.xpath(dpth).pop().text
+        # publish date = shown in article and meta name=date
+        pdate = self.__construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
-        self.__construct_tags(root)
-        self.__construct_genre(root)
-        self.rankedTags = self.__construct_tags(root)
-        self.source = self.__construct_source(root)
-        self.location = self.__construct_location(root)
+        self.publish_date_meta = pdate
+        # last modified date, shown in meta name=last_modified
+        ldate = self.__get_date_element(root, 'date-last-modified')
+        self.last_modified_date = ldate
+        self._construct_tags(root)
+        self.rankedTags = self._construct_tags(root)
+        self.source = self._construct_source(root)
+        self.genre = self._construct_genre(root)
+        self.location = self._construct_location(root)
+        self.author = self._construct_author(root)
 
-    def __construct_author(self, root):
+    @property
+    def template(self):
+        el = self.xml.head.xpath("//attribute[@name='contenttype']")
+        if len(el) > 0:
+            return el.pop().text
+        return 'default'
+
+    def _construct_author(self, root):
+
         try:
-            name = unicode(root.head.author.display_name)
-            try:
-                url = root.head.author.xpath("@href")
-                if(len(url) > 0):
-                    url = url.pop()
-                else:
-                    url = ""
-                return (name, url)
-            except AttributeError:
-                return (name,)
+            author = {'name': unicode(root.head.author.display_name)}
+            url = root.head.author.xpath("@href")
+            if len(url) > 0:
+                author['href'] = url.pop()
+            author['prefix'] = " von " if self.genre else "Von "
+            if self.location:
+                author['suffix'] = ", "
+            return author
         except AttributeError:
             return
 
-    def __construct_source(self, root):
+    def __get_date_element(self, root, date_element):
+        date = "//attribute[@name='%s']" % date_element
+        if root.head.xpath(date):
+            return root.head.xpath(date).pop().text
+
+    def __construct_publish_date(self, root):
+        lsp_date = self.__get_date_element(root, 'last-semantic-published')
+        lsc_date = self.__get_date_element(root, 'last-semantic-change')
+        dfr_date = self.__get_date_element(root, 'date_first_released')
+        dlm_date = self.__get_date_element(root, 'date-last-modified')
+
+        if lsp_date is not None:
+            return lsp_date
+        elif lsc_date is not None:
+            return lsc_date
+        elif dfr_date is not None:
+            return dfr_date
+        elif dlm_date is not None:
+            return dlm_date
+        else:
+            return ''
+
+    def _construct_source(self, root):
         try:
             copyright = root.head.xpath("//attribute[@name='copyrights']")
 
             if copyright:
                 return copyright
             else:
-                return self.__construct_product_id(root)
+                return self._construct_product_id(root)
 
         except AttributeError:
-            return __construct_product_id(root)
+            return _construct_product_id(root)
 
-    def __construct_product_id(self, root):
+    def _construct_product_id(self, root):
         try:
             product_id = root.head.xpath("//attribute[@name='product-id']")
             path = 'config/products.xml'
@@ -117,19 +153,19 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __construct_location(self, root):
+    def _construct_location(self, root):
         try:
             return root.head.xpath("//attribute[@name='location']").pop()
         except IndexError:
             return
 
-    def __construct_tags(self, root):
+    def _construct_tags(self, root):
         try:
             return _get_tags(root.head.rankedTags)
         except AttributeError:
             return
 
-    def __construct_genre(self, root):
+    def _construct_genre(self, root):
         genres = root.head.xpath("//attribute[@name='genre']")
         path = "config/article-genres.xml"
         if len(genres) > 0:
@@ -138,16 +174,30 @@ class Content (Resource):
             groot = gtree.getroot()
             expr = "//genre[@name='%s' and @display-frontend='true']/@prose" %\
                 (genres.pop(0))
-            self.genre = groot.xpath(expr).pop(0)
+            return groot.xpath(expr).pop(0)
 
-    def __construct_pages(self, root):
+    def _construct_pages(self, root):
         pages = root.body.xpath("//division[@type='page']")
         self.pages = _get_pages(pages)
+        self.subpage_index = self._construct_subpage_index(self.pages)
 
-    def __extract_header_img(self, root):
-        first_img = root.body.find('division').find('image')
-        if (first_img.get('layout') == 'zmo_header'):
-            self.header_img = Img(first_img)
+    def _construct_subpage_index(self, pages):
+        index = []
+        for page in pages:
+            try:
+                string = unicode("%i -- %s") % (page.number, page.teaser)
+                index.append(string)
+            except AttributeError:
+                pass
+        return index
+
+    def _extract_header_img(self, root):
+        try:
+            first_img = root.body.find('division').find('image')
+            if (first_img.get('layout') == 'zmo_header'):
+                self.header_img = Img(first_img)
+        except AttributeError:
+            return
 
 
 @implementer(interfaces.IPage)
@@ -156,6 +206,9 @@ class Page(object):
 
     def __init__(self, page_xml):
         self.__content = iter(self._extract_items(page_xml))
+        self.number = page_xml.number
+        if page_xml.get('teaser') is not None:
+            self.teaser = page_xml.get('teaser')
 
     def __iter__(self):
         return self.__content
@@ -170,23 +223,16 @@ class Page(object):
             if item.tag == 'intertitle':
                 content.append(Intertitle(item))
             if item.tag == 'image' and item.get('layout') != 'zmo_header':
-                #if item.get('layout') != 'large':
                 content.append(Img(item))
             if item.tag == 'citation':
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
-        #content = self.__insert_metabox(content)
         return content
-
-def __insert_metabox(c):
-    index = c.index(next(obj for obj in c if type(obj) == Para))
-    c.insert(index, Metabox())
-    return c
-
 
 @implementer(interfaces.IMetaBox)
 class Metabox(object):
+
     def __init__(self):
         pass
 
@@ -280,7 +326,10 @@ class Tag(object):
 
 def _get_pages(pages_xml):
     pages = []
+    number = 0
     for page in pages_xml:
+        page.number = number
+        number = number + 1
         pages.append(Page(page))
     return pages
 
