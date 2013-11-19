@@ -32,29 +32,22 @@
 			</div>
 
 			<div class="article__body">
-				{% set vars ={'add_meta': true} %}
+				
+        {% for page in view.pages %}
+          <section class="article__page">
+            {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
 
-                {% for page in view.pages %}
+            <div class="article__page-wrap">
 
-                <section class="article__page">
+              {{ blocks.subpage_index( view.subpage_index, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
 
-                    {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
-
-                    <div class="article__page-wrap">
-
-                        {{ blocks.subpage_index( view.subpage_index, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
-                        {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
-
-                {% for page in view.pages %}
-                <div class="article__page">
-                    {% for item in page %}
-                            {{ blocks[item|block_type](item)}}
-                    {% endfor %}
-                </div>
-                {% endfor %}
-					</div>
-				</section>
-				{% endfor %}
+              {% for item in page %}
+                  {{ blocks[item|block_type](item)}}
+              {% endfor %}
+            </div>
+          </section>
+        {% endfor %}
 
 				{% if view.rankedTags %}
 				<div class="article__tags is-constrained is-centered">
