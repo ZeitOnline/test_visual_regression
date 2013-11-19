@@ -33,8 +33,8 @@ class Article(Base):
         if self.context.template == 'longform':
             self.context.advertising_enabled = False
             return render_to_response('templates/longform.html',
-                                       {"view":self},
-                                       request=self.request)
+                                      {"view": self},
+                                      request=self.request)
         return {}
 
     @property
@@ -71,7 +71,16 @@ class Article(Base):
 
     @property
     def publish_date(self):
-        return self.context.publish_date
+        tz = get_timezone('Europe/Berlin')
+        return self.context.publish_date.astimezone(tz)
+
+    @property
+    def publish_date_meta(self):
+        return self.context.publish_date_meta
+
+    @property
+    def last_modified_date(self):
+        return self.context.last_modified_date
 
     @property
     def rankedTags(self):

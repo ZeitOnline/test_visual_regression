@@ -41,6 +41,8 @@ class Content (Resource):
     lead_pic = ''
     author = ''
     publish_date = ''
+    publish_date_meta = ''
+    last_modified_date = ''
     rankedTags = []
     genre = ''
     source = ''
@@ -61,9 +63,13 @@ class Content (Resource):
         self._extract_header_img(root)
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
-        dpth = "//attribute[@name='date_first_released']"
-        pdate = root.head.xpath(dpth).pop().text
+        # publish date = shown in article and meta name=date
+        pdate = self.__construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
+        self.publish_date_meta = pdate
+        # last modified date, shown in meta name=last_modified
+        ldate = self.__get_date_element(root, 'date-last-modified')
+        self.last_modified_date = ldate
         self._construct_tags(root)
         self.rankedTags = self._construct_tags(root)
         self.source = self._construct_source(root)
@@ -79,6 +85,7 @@ class Content (Resource):
         return 'default'
 
     def _construct_author(self, root):
+
         try:
             author = {'name': unicode(root.head.author.display_name)}
             url = root.head.author.xpath("@href")
@@ -90,6 +97,28 @@ class Content (Resource):
             return author
         except AttributeError:
             return
+
+    def __get_date_element(self, root, date_element):
+        date = "//attribute[@name='%s']" % date_element
+        if root.head.xpath(date):
+            return root.head.xpath(date).pop().text
+
+    def __construct_publish_date(self, root):
+        lsp_date = self.__get_date_element(root, 'last-semantic-published')
+        lsc_date = self.__get_date_element(root, 'last-semantic-change')
+        dfr_date = self.__get_date_element(root, 'date_first_released')
+        dlm_date = self.__get_date_element(root, 'date-last-modified')
+
+        if lsp_date is not None:
+            return lsp_date
+        elif lsc_date is not None:
+            return lsc_date
+        elif dfr_date is not None:
+            return dfr_date
+        elif dlm_date is not None:
+            return dlm_date
+        else:
+            return ''
 
     def _construct_source(self, root):
         try:
@@ -204,6 +233,7 @@ class Page(object):
 
 @implementer(interfaces.IMetaBox)
 class Metabox(object):
+
     def __init__(self):
         pass
 
