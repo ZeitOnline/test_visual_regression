@@ -90,6 +90,15 @@ module.exports = function(grunt) {
 			}
 		},
 
+		grunticon: {
+      dist: {
+	      options: {
+		      src: "sass/icons/",
+		      dest: "src/zeit/frontend/css/icons/"
+		    }
+		  }
+    },
+
 		// watch here
 		watch: {
 			js: {
@@ -111,7 +120,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-photobox');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-grunticon');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy']);
+	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'grunticon']);
 };
