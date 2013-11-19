@@ -55,10 +55,8 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro author_date(date, source, class) -%}
-    <div class="{{ class }}">
-        <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
-    </div>
+{% macro author_date(date, source) -%}
+    <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
