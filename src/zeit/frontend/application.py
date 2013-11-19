@@ -17,6 +17,7 @@ def factory(global_config, **settings):
     utility.globals.update(zeit.frontend.navigation.get_sets())
     utility.tests['elem'] = is_block
     utility.filters['format_date'] = format_date
+    utility.filters['block_type'] = block_type
     utility.filters['translate_url'] = translate_url
     utility.trim_blocks = True
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
@@ -43,6 +44,10 @@ def is_block(obj, b_type):
     if b_type == 'advertising':
         interface = zeit.frontend.interfaces.IAdvertising
     return interface in zope.interface.providedBy(obj)
+
+
+def block_type(obj):
+    return type(obj).__name__.lower()
 
 
 def translate_url(obj):

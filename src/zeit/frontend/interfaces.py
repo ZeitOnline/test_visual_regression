@@ -36,6 +36,7 @@ class IImg(Interface):
     """ Represents Image in IContent """
     pass
 
+
 class IMetaBox(Interface):
 
     """ Represents Metabox in IContent """
@@ -47,10 +48,12 @@ class IVideo(Interface):
     """ Represents Image in IContent """
     pass
 
+
 class ITags(Interface):
 
     """ Represents Tags in IContent """
     pass
+
 
 class ITag(Interface):
 

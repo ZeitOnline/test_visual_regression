@@ -53,17 +53,7 @@
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item is elem('p') %}
-                            {{ blocks.p(item, "is-constrained is-centered")}}
-                        {% elif item is elem('intertitle') %}
-                            {{ blocks.intertitle(item) }}
-                        {% elif item is elem('image') %}
-                            {{ blocks.image(item) }}
-                        {% elif item is elem('citation') %}
-                            {{ blocks.citation(item) }}
-                        {% elif item is elem('advertising') %}
-                            {{ blocks.advertising(item) }}
-                        {% endif %}
+                            {{ blocks[item|block_type](item)}}
                     {% endfor %}
                 </div>
                 {% endfor %}

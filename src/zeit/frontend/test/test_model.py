@@ -64,6 +64,24 @@ def _mock_img():
     return Img(xml)
 
 
+def _mock_intertitle():
+    from zeit.frontend.model import Intertitle
+    it = """
+        <intertitle>Foo</intertitle>
+        """
+    xml = etree.fromstring(it)
+    return Intertitle(xml)
+
+
+def _mock_citation():
+    from zeit.frontend.model import Citation
+    cit = """
+        <citation />
+        """
+    xml = etree.fromstring(cit)
+    return Citation(xml)
+
+
 def test_publish_date_should_produce_localized_date():
     import iso8601
     from zeit.frontend import view

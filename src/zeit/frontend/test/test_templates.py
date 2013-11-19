@@ -19,11 +19,12 @@ def jinja2_env(request):
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
-    lines = tpl.module.p(html, 'test').splitlines()
+    lines = tpl.module.para(html).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-    markup = '<p class="test">Alles nicht so <em>wichtig</em>, oder?!</p>'
+    markup = '<p class="is-constrained is-centered">'
+    markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
     assert markup == output
 
 
@@ -173,7 +174,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_image_should_produce_markup(jinja2_env):
+def test_img_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
@@ -197,7 +198,7 @@ def test_image_should_produce_markup(jinja2_env):
 
     for el in obj:
         print el['css']
-        lines = tpl.module.image(el).splitlines()
+        lines = tpl.module.img(el).splitlines()
         output = ""
         for line in lines:
             output += line.strip()

@@ -45,19 +45,13 @@
                         {{ blocks.subpage_index( view.subpage_index, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
                         {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
 
-	                    {% for item in page %}
-	            {% if item is elem('p') %}
-								{{ blocks.p(item)}}
-							{% elif item is elem('intertitle') %}
-								{{ blocks.intertitle(item) }}
-							{% elif item is elem('image') %}
-								{{ blocks.image(item) }}
-							{% elif item is elem('citation') %}
-								{{ blocks.citation(item) }}
-							{% elif item is elem('advertising') %}
-								{{ blocks.advertising(item) }}
-							{% endif %}
-						{% endfor %}
+                {% for page in view.pages %}
+                <div class="article__page">
+                    {% for item in page %}
+                            {{ blocks[item|block_type](item)}}
+                    {% endfor %}
+                </div>
+                {% endfor %}
 					</div>
 				</section>
 				{% endfor %}
