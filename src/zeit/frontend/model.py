@@ -230,6 +230,7 @@ class Page(object):
                 content.append(Advertising(item))
         return content
 
+
 @implementer(interfaces.IMetaBox)
 class Metabox(object):
 

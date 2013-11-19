@@ -23,7 +23,8 @@ def test_macro_p_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    markup = '<p class="is-constrained is-centered">Alles nicht so <em>wichtig</em>, oder?!</p>'
+    markup = '<p class="is-constrained is-centered">'
+    markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
     assert markup == output
 
 
