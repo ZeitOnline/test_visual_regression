@@ -111,10 +111,10 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 def test_macro_author_date_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    markup = '<div class="test"><span class="article__meta__source">' \
+    markup = '<span class="article__meta__source">' \
         'Aus zon</span><span class="article__meta__date">01.01.2013' \
-        '</span></div>'
-    lines = tpl.module.author_date('01.01.2013', 'zon', 'test').splitlines()
+        '</span>'
+    lines = tpl.module.author_date('01.01.2013', 'zon').splitlines()
     output = ""
     for line in lines:
         output += line.strip()
