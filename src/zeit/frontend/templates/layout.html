@@ -22,13 +22,17 @@
         <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
         <meta name="date" content="{{ view.publish_date_meta }}"/> 
 
-        <script src="/js/modernizr.custom.42776.js"></script>
-        <script src="/js/resize-ads.js"></script>
+        <script src="/js/libs/modernizr.custom.42776.js"></script>
+        <script src="/js/libs/resize-ads.js"></script>
+        <script data-main="/js/app.js" src="/js/libs/require.js"></script>
+
+
     </head>
     <body>
 
         <div class="page-wrap">
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__fp__container--top">
                 <script>
                     (function() {
@@ -38,7 +42,9 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__leaderboard">
                 <script data-name="ad__leaderboard">
                     (function() {
@@ -48,20 +54,9 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
-            <nav class="nav">
-                <ul class="nav__list">
-                    {% for link in top_formate.xpath('item/link') %}
-                        <li class="nav__list__item"><a href="{{ link.get('href') }}">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-                <ul class="nav__list">
-                    {% for link in sitemap.xpath('.//item/link') %}
-                        <li class="nav__list__item"><a href="{{ link.get('href') }}">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
-
+            {% if view.context.advertising_enabled %}
             <div class="ad__fp__container--left">
                 <script>
                     (function() {
@@ -71,7 +66,9 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
+            {% if view.context.advertising_enabled %}
             <div class="ad__fp__container--right">
                 <script>
                     (function() {
@@ -81,13 +78,22 @@
                     }).call(this);
                 </script>
             </div>
+            {% endif %}
 
         <main role="main" class="main">
             {%  block content %}{% endblock content %}
         </main>
 
         </div>
-        <script src="/js/jquery-1.10.2.min.js"></script>
-        <script src="/js/friedbert.js"></script>
+
+        <div id="iqdLastNode">
+            <script type="text/javascript"> 
+                var IQDComplete = { 
+                    init : function() {
+                        return true;
+                    }
+                };
+            </script>
+        </div>
     </body>
 </html>
