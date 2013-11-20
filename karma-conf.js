@@ -15,6 +15,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'src/zeit/frontend/js/libs/chai.js',
+      'src/zeit/frontend/js/libs/require.js',
+      'src/zeit/frontend/js/modules/*.js',
       'src/zeit/frontend/test/js/*.js'
     ],
 
@@ -79,7 +81,9 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome', 'PhantomJS', 'Firefox', 'bs_firefox_mac', 'bs_iphone5'],
+
+    browsers: ['PhantomJS'],
+    //browsers: ['Chrome', 'PhantomJS', 'Firefox', 'bs_firefox_mac', 'bs_iphone5'],
 
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,
@@ -87,6 +91,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true
+    singleRun: false
   });
 };
