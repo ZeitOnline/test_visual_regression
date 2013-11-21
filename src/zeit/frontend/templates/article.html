@@ -2,7 +2,17 @@
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 
-	<article class="article">
+    <article class="article">
+        <nav class="main-nav">
+            <div class="main-nav--primary"></div>
+            <div class="main-nav--secondary"></div>
+        </nav>
+        {{ blocks.breadcrumbs([
+            {'text': 'Start', 'link': 'http://zeit.de'},
+            {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},
+            {'text': 'Lebensart', 'link': 'http://zeit.de/magazin/mode'},
+            {'text': 'Kann Leipzig Hypezig überleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}
+        ]) }}
         <div class="article__wrap">
             <div class="article__head-wrap">
                 <header class="article__title-wrap">
@@ -13,65 +23,47 @@
                         <h1 class="article__title">
                             {{view.title}}
                         </h1>
-                        <!--
-                            todo: place date into article
-                            {{view.publish_date | format_date('long')}}
-                        -->
-                        {{ blocks.article_meta(view.author, view.genre, view.location) }}
-
-                        <div class="article__subtitle">
-                            <p>{{view.subtitle}}</p>
+                        <div class="article__meta">
+                            {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+                        </div>
+                        <div class="article__opener">
+                            <span class="article__subtitle">
+                                <p>{{view.subtitle}}</p>
+                            </span>
+                            <span class="article__meta">
+                                {% if view.genre -%}
+                                    <span class="article__meta__genre">{{view.genre}}</span>
+                                {%- endif %}
+                                {{ blocks.meta_author(view.author) }}
+                                {% if view.location -%}
+                                    <span class="article__meta__location">{{view.location}}</span>
+                                {%- endif %}
+                            </span>
                         </div>
                     </div>
                 </header>
                 {% if view.header_img %}
-                    {{ blocks.image(view.header_img) }}
+                    {{ blocks.img(view.header_img) }}
                 {% endif %}
 
             </div>
 
             <div class="article__body">
 
-                {% set vars ={'add_meta': true} %}
-
                 {% for page in view.pages %}
                 <div class="article__page">
                     {% for item in page %}
-                        {% if item is elem('p') %} 
-                            
-                            <!-- integrate meta box at first paragraph only -->
-                            {% if vars.add_meta %} 
-                                {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-                                {% if vars.update({'add_meta': false}) %}{% endif %}
-                            {% endif %}
-
-                            {{ blocks.p(item, "is-constrained is-centered")}}
-                        {% elif item is elem('intertitle') %}
-                            {{ blocks.intertitle(item) }}
-                        {% elif item is elem('image') %}
-
-                            <!-- integrate meta box only when layout isn't large -->
-                            {% if item.layout != 'large' and vars.add_meta %} 
-                                {{ blocks.meta_box(view.publish_date | format_date('long'), view.source, "article__meta__box figure-stamp") }}
-                                {% if vars.update({'add_meta': false}) %}{% endif %}
-                            {% endif %}
-            
-                            {{ blocks.image(item) }}
-                        {% elif item is elem('citation') %}
-                            {{ blocks.citation(item) }}
-                        {% elif item is elem('advertising') %}
-                            {{ blocks.advertising(item) }}
-                        {% endif %}
+                            {{ blocks[item|block_type](item)}}
                     {% endfor %}
                 </div>
                 {% endfor %}
 
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
-                    <span class="article__tags__title">Tags</span> 
+                    <span class="article__tags__title">Tags</span>
                     {% for tag in view.rankedTags %}
                             {% for item in tag %}
-                                <a href="#{{ item.url }}" id="hp.article.tools.tag.Verschlüsselung" title="Artikel mit dem Schlagwort *Verschlüsselung* anzeigen">{{ item.html }}</a>
+                                <a href="#{{ item.url }}">{{ item.html }}</a>
                                 {% if not loop.last %}
                                     ,
                                 {% endif %}
@@ -79,7 +71,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
             </div>
         </div>
 	</article>

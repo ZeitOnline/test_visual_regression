@@ -1,0 +1,69 @@
+{% extends "templates/layout.html" %}
+{% import 'templates/block_elements.tpl' as blocks %}
+{% block content %}
+
+	<article class="article article--longform">
+		{{ blocks.breadcrumbs([
+        {'text': 'Start', 'link': 'http://zeit.de'},
+        {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},
+        {'text': 'Lebensart', 'link': 'http://zeit.de/magazin/mode'},
+        {'text': 'Kann Leipzig Hypezig überleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}
+    ]) }}
+		<div class="article__wrap">
+			<div class="article__head-wrap">
+  				{% if view.header_img %}
+  					{{ blocks.head_image_longform(view.header_img) }}
+  				{% endif %}
+  				<header class="article__title-wrap">
+  					<h2 class="article__supertitle">
+  						{{ view.supertitle }}
+  					</h2>
+  					<h1 class="article__title">
+  						{{view.title}}
+  					</h1>
+            <div class="article__meta">
+              {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+              {{ blocks.meta_author(view.author) }}
+            </div>
+            <span class="article__subtitle">
+                <p>{{view.subtitle}}</p>
+            </span>
+          </header>
+			</div>
+
+			<div class="article__body">
+				
+        {% for page in view.pages %}
+          <section class="article__page">
+            {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
+
+            <div class="article__page-wrap">
+
+              {{ blocks.subpage_index( view.subpage_index, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
+
+              {% for item in page %}
+                  {{ blocks[item|block_type](item)}}
+              {% endfor %}
+            </div>
+          </section>
+        {% endfor %}
+
+				{% if view.rankedTags %}
+				<div class="article__tags is-constrained is-centered">
+					<span class="article__tags__title">Tags</span>
+					{% for tag in view.rankedTags %}
+							{% for item in tag %}
+								<a href="#{{ item.url }}" id="hp.article.tools.tag.{{ item.html }}" title="Artikel mit dem Schlagwort *{{ item.html }}* anzeigen">{{ item.html }}</a>
+								{% if not loop.last %}
+									,
+								{% endif %}
+							{% endfor %}
+					{% endfor %}
+				</div>
+				{% endif %}
+
+			</div>
+		</div>
+	</article>
+{% endblock content %}
