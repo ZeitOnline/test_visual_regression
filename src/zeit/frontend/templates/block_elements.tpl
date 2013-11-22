@@ -148,3 +148,9 @@
         <span class="{{class}}">{{author.name}}</span>
     {%- endif %}
 {%- endmacro %}
+
+{% macro video(item) -%}
+    dssdds
+    {{item.format}}
+
+{%- endmacro %}

@@ -47,6 +47,7 @@ class Content (Resource):
     genre = ''
     source = ''
     subpage_index = []
+    video = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
@@ -228,6 +229,8 @@ class Page(object):
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
+            if item.tag == 'video':
+                content.append(Video(item))
         return content
 
 
@@ -257,6 +260,28 @@ class Img(object):
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = xml.get('layout')
+
+
+@implementer(interfaces.IVideo)
+class Video(object):
+
+    def __init__(self, xml):
+        self.format = xml.get('format')
+        self.is_empty = xml.get('is_empty')
+        self.expires = xml.get('expires')
+        self.meta = _construct_video_meta(self, xml.get('href'))
+
+    def _construct_video_meta(self, href):
+        try:
+            href = href.replace('http://xml.zeit.de', '')
+            path = 'data%s' % href
+            video_path = pkg_resources.resource_filename(__name__, path)
+            video_tree = objectify.parse(video_path)
+            video_root = video_tree.getroot()
+
+            return(video_root)
+        except AttributeError:
+            return
 
 
 @implementer(interfaces.IIntertitle)
