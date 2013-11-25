@@ -216,7 +216,6 @@ class Page(object):
 
     def _extract_items(self, page_xml):
         content = []
-        add_meta = False
 
         for item in page_xml.iterchildren():
             if item.tag == 'p':
@@ -232,13 +231,6 @@ class Page(object):
             if item.tag == 'video':
                 content.append(Video(item))
         return content
-
-
-@implementer(interfaces.IMetaBox)
-class Metabox(object):
-
-    def __init__(self):
-        pass
 
 
 @implementer(interfaces.IPara)
@@ -269,19 +261,20 @@ class Video(object):
         self.format = xml.get('format')
         self.is_empty = xml.get('is_empty')
         self.expires = xml.get('expires')
-        self.meta = _construct_video_meta(self, xml.get('href'))
+        self._construct_video_meta(xml.get('href'))
 
     def _construct_video_meta(self, href):
-        try:
-            href = href.replace('http://xml.zeit.de', '')
-            path = 'data%s' % href
-            video_path = pkg_resources.resource_filename(__name__, path)
-            video_tree = objectify.parse(video_path)
-            video_root = video_tree.getroot()
 
-            return(video_root)
-        except AttributeError:
-            return
+        href = href.replace('http://xml.zeit.de', '')
+        path = 'data%s' % href
+        video_path = pkg_resources.resource_filename(__name__, path)
+        video_tree = objectify.parse(video_path)
+        video_root = video_tree.getroot()
+        self.subtitle = unicode(video_root.body.subtitle)
+        self.id = href.split('/').pop()
+        video_still = video_root.head.xpath("//attribute[@name='video_still']")
+        if video_still:
+            self.video_still = video_still.pop().text
 
 
 @implementer(interfaces.IIntertitle)
@@ -312,13 +305,6 @@ class Advertising(object):
 
     def __str__(self):
         return self.type
-
-
-@implementer(interfaces.IVideo)
-class Video(object):
-
-    def __init__(self, xml):
-        pass
 
 
 @implementer(interfaces.ITags)

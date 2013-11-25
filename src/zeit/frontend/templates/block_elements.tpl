@@ -149,8 +149,44 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro video(item) -%}
-    dssdds
-    {{item.format}}
+{% macro video(obj) -%}
+    
+    {% if obj.id -%}
+
+        <figure class="
+        {% if obj.layout == 'small' %}
+            figure-stamp
+        {% else %}
+            figure is-constrained is-centered
+        {% endif %}">
+
+            <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+
+            <!-- <object id="myExperience{{obj.id}}" class="BrightcoveExperience">
+                <param name="htmlFallback" value="true" /> 
+                <param name="bgcolor" value="#FFFFFF" />
+                <param name="width" value="580" />
+                <param name="height" value="327" />
+                <param name="playerID" value="71289488001" />
+                <param name="playerKey" value="AQ~~,AAAABDk7jCk~,Hc7JUgOccNp4D5O9OupA8T0ybhDjWLSQ" />
+                <param name="isVid" value="true" />
+                <param name="isUI" value="true" />
+                <param name="dynamicStreaming" value="true" />
+                <param name="@videoPlayer" value="{{obj.id}}" />
+                <param name="includeAPI" value="false" />
+                <param name="autoStart" value="true" /> 
+            </object> -->
+
+            <script type="text/javascript">
+                brightcove.createExperiences();
+            </script>
+
+            <figcaption class="figure__caption">
+                {{obj.subtitle}}  
+            </figcaption>
+
+        </figure>
+
+    {%- endif %}
 
 {%- endmacro %}
