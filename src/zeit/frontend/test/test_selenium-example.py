@@ -5,10 +5,12 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 login = 'http://codecandies:HoEsjYgp9pwqGSMUmyPo@hub.browserstack.com/wd/hub'
 driver = webdriver.Firefox()
 driver.get("http://www.google.com")
-if not "Google" in driver.title:
-    raise Exception("Unable to load google page!")
+assert "Google" in driver.title
+#if not "Google" in driver.title:
+#    raise Exception("Unable to load google page!")
 elem = driver.find_element_by_name("q")
 elem.send_keys("selenium")
 elem.submit()
+assert "Yahoo" in driver.title
 print driver.title
 driver.quit()
