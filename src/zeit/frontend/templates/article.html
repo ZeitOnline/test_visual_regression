@@ -1,4 +1,4 @@
-{% extends "templates/layout.html" %}
+^{% extends "templates/layout.html" %}
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
 
@@ -71,6 +71,8 @@
                     {% endfor %}
                 </div>
                 {% endif %}
+                
+                {{ blocks.focussed_next_read(view.focussedNextRead) }}
 
             </div>
         </div>
