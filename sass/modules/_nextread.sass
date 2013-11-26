@@ -1,0 +1,45 @@
+.article__nextread
+	@extend %meta
+	background: #f7f7f7 //$grey--bright TODO: Farbe absprechen
+	border-top: 1px solid $grey
+	margin-top: $huge
+	padding: $large
+
+.article__nextread__lead
+	+tablet(bold)
+	font-size: $font-ml
+	letter-spacing: $hair
+	text-align: center
+	text-transform: uppercase
+
+.article__nextread__body
+	background: $white
+	margin: $large $large 0 $large
+	max-height: 175px
+	img
+		float: left
+		height: 175px
+		width: 265px
+
+.article__nextread__article
+	margin-left: 265px
+	padding: $medium
+	.nextread-minimal &
+		margin-left: 0
+
+.article__nextread__supertitle
+	@extend %supertitle
+	@extend %font-xs
+	display: block
+	padding-bottom: $micro
+	margin: 0
+	.nextread-minimal &
+		text-align: center
+
+.article__nextread__title
+	@extend %font-xl
+	display: block
+	.nextread-minimal &
+		margin: 0 auto
+		max-width: 56%
+		text-align: center
