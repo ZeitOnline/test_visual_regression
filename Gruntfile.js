@@ -5,10 +5,12 @@ module.exports = function(grunt) {
 	var project = {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
-		codeDir: 'src/zeit/frontend/',
+        binDir: 'bin/',
+	    codeDir: 'src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js'
 	};
+	
 
 	// configuration
 	grunt.initConfig({
@@ -20,6 +22,7 @@ module.exports = function(grunt) {
 		compass: {
 			dev: {
 				options: {
+					binPath: project.binDir + 'compass',
 					cssDir: project.codeDir + 'css',
 					debugInfo: true,
 					environment: 'development',
@@ -93,8 +96,8 @@ module.exports = function(grunt) {
 		grunticon: {
       dist: {
 	      options: {
-		      src: "sass/icons/",
-		      dest: "src/zeit/frontend/css/icons/"
+		      src: "sass/icons", 
+		      dest: project.codeDir + "/css/icons"
 		    }
 		  }
     },
@@ -114,7 +117,7 @@ module.exports = function(grunt) {
 
 
 	// load node modules
-	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-contrib-compass-shabunc');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
