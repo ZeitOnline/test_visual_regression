@@ -270,7 +270,9 @@ class Video(object):
         video_path = pkg_resources.resource_filename(__name__, path)
         video_tree = objectify.parse(video_path)
         video_root = video_tree.getroot()
-        self.subtitle = unicode(video_root.body.subtitle)
+        self.description = unicode(video_root.body.subtitle)
+        self.title = unicode(video_root.body.title)
+        self.supertitle = unicode(video_root.body.supertitle)
         self.id = href.split('/').pop()
         video_still = video_root.head.xpath("//attribute[@name='video_still']")
         if video_still:
