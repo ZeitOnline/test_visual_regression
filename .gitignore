@@ -22,3 +22,6 @@ src/zeit/frontend/js
 frontend.ini
 buildout.cfg
 /photobox/
+ghostdriver.log
+pyramid.log
+pyramid.pid

@@ -9,6 +9,7 @@ from babel.dates import format_datetime
 
 
 def factory(global_config, **settings):
+
     root = zeit.frontend.model.get_root
     config = pyramid.config.Configurator(settings=settings,
                                          root_factory=root)

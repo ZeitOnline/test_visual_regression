@@ -4,6 +4,7 @@ from zeit.frontend.model import Img
 from zeit.frontend.model import Intertitle
 from zeit.frontend.model import Para
 
+
 def mock_p():
     p = """
            <p>Text <a href='foo'> ba </a> und <em>Text</em>
