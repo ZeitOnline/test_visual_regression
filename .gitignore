@@ -25,3 +25,5 @@ buildout.cfg
 ghostdriver.log
 pyramid.log
 pyramid.pid
+
+/buildout_overrides.cfg
