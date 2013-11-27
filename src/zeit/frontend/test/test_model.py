@@ -94,3 +94,33 @@ def test_publish_date_should_produce_localized_date():
 
     # expected offset 100
     assert str(base.publish_date) == '2013-11-11 11:00:00+01:00'
+
+
+def test_construct_focussed_next_returns_next_read():
+    from zeit.frontend.model import get_root
+    from zeit.frontend.model import Content
+    from lxml import objectify
+    ref = """
+        <root>
+            <head>
+            <references>
+                <reference type="intern" href="URL">
+                    <supertitle>SUPER</supertitle>
+                    <title>TITEL</title>
+                    <text>
+                        TEXT
+                    </text>
+                    <description>
+                        DESCRIPTION
+                    </description>
+                    <image align="left" title="" base-id="" type="jpg" />
+                </reference>
+            </references>
+            </head>
+        </root>
+        """
+    xml = objectify.fromstring(ref)
+    directory = get_root("pfft")
+    content = Content(directory.base_path + '/artikel/03')
+    nextread = content._construct_focussed_nextread(xml)
+    assert nextread is not None

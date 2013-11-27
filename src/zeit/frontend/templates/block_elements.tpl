@@ -149,15 +149,17 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro focussed_next_read( nextRead ) -%}
+{% macro focussed_nextread( nextRead ) -%}
+    {{ nextRead }}
     {% if nextRead %}
-        <aside class="article__nextread nextread-max is-centered"> <!-- .nextread-minimal / .nextread-max -->
+        <!-- .nextread-minimal / .nextread-max -->
+        <aside class="article__nextread nextread-max is-centered"> 
             <div class="article__nextread__lead">Lesen Sie jetzt:</div>
             <div class="article__nextread__body is-centered">
                 <img alt="" title="" src="http://localhost:9090/img/artikel/03/01.jpg">
                 <div class="article__nextread__article">
-                    <span class="article__nextread__supertitle">Modemacher Azzedine Alaia</span>
-                    <span class="article__nextread__title">Im Schnabel des unglaublich langen Graureihers und so</span>
+                    <span class="article__nextread__supertitle">{{ nextRead.supertitle }}</span>
+                    <span class="article__nextread__title">{{ nextRead.title }}</span>
                 </div>
             </div>
         </aside>

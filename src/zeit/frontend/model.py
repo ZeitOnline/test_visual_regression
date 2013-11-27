@@ -76,6 +76,7 @@ class Content(Resource):
         self.genre = self._construct_genre(root)
         self.location = self._construct_location(root)
         self.author = self._construct_author(root)
+        self.focussed_nextread = self._construct_focussed_nextread(root)
 
     @property
     def template(self):
@@ -102,6 +103,12 @@ class Content(Resource):
         date = "//attribute[@name='%s']" % date_element
         if root.head.xpath(date):
             return root.head.xpath(date).pop().text
+
+    def _construct_focussed_nextread(self, root):
+        try:
+            return root.head.references.reference[0]
+        except AttributeError:
+            return
 
     def __construct_publish_date(self, root):
         lsp_date = self.__get_date_element(root, 'last-semantic-published')
