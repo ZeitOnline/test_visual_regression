@@ -81,4 +81,4 @@ def test_construct_focussed_next_returns_next_read():
     directory = get_root("pfft")
     content = Content(directory.base_path + '/artikel/03')
     nextread = content._construct_focussed_nextread(xml)
-    assert nextread is not None
+    assert nextread.supertitle == "SUPER"
