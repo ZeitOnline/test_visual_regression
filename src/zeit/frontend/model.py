@@ -31,7 +31,7 @@ def get_root(request):
     return Directory(pkg_resources.resource_filename(__name__, 'data'))
 
 
-class Content (Resource):
+class Content(Resource):
     title = ''
     subtitle = ''
     teaser_title = ''
