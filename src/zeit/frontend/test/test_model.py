@@ -32,48 +32,6 @@ def jinja2_env(request):
     return utility
 
 
-def _mock_p():
-    from zeit.frontend.model import Para
-    p = """
-           <p>Text <a href='foo'> ba </a> und <em>Text</em>
-           abc</p>
-       """
-
-    xml = etree.fromstring(p)
-    return Para(xml)
-
-
-def _mock_img():
-
-    from zeit.frontend.model import Img
-    p = """
-           <image layout="" align="" src="">
-                <bu>foo</bu><copyright>foo</copyright>
-           </image>
-       """
-
-    xml = etree.fromstring(p)
-    return Img(xml)
-
-
-def _mock_intertitle():
-    from zeit.frontend.model import Intertitle
-    it = """
-        <intertitle>Foo</intertitle>
-        """
-    xml = etree.fromstring(it)
-    return Intertitle(xml)
-
-
-def _mock_citation():
-    from zeit.frontend.model import Citation
-    cit = """
-        <citation />
-        """
-    xml = etree.fromstring(cit)
-    return Citation(xml)
-
-
 def test_publish_date_should_produce_localized_date():
     import iso8601
     from zeit.frontend import view

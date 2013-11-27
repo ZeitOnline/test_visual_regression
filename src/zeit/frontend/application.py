@@ -9,6 +9,7 @@ from babel.dates import format_datetime
 
 
 def factory(global_config, **settings):
+
     root = zeit.frontend.model.get_root
     config = pyramid.config.Configurator(settings=settings,
                                          root_factory=root)
@@ -27,7 +28,7 @@ def factory(global_config, **settings):
     config.add_static_view(name='img', path='zeit.frontend:img/')
     config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
     config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
-    config.scan(package=zeit.frontend)
+    config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
     return config.make_wsgi_app()
 
 
