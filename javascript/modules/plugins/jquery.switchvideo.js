@@ -38,6 +38,12 @@
 					el.buildPlayer( this );
 				});
 			},
+			//add play button to image
+			addButton: function( that ){
+				if( el.id ){
+					$( that ).find( 'span[data-video-button]' ).addClass( 'video__button' );
+				}
+			},
 			//grab meta data
 			buildId: function( that ){
 				el.id = $( that ).attr( "data-video" );
@@ -64,10 +70,10 @@
 			//stored video id
 			id: false
 		};
-
-		//run through data-video elements
+				//run through data-video elements
 		$(this).each(function(){
 			el.buildId( this );
+			el.addButton( this );
 			el.addEvent( this );
 			el.testForFlash( this );
 		});

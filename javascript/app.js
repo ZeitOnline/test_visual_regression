@@ -16,9 +16,5 @@ require(['modules/fontloader', 'modules/breadcrumbs', 'modules/plugins/jquery.sw
 	function( fontloader, breadcrumbs ) {
 		fontloader.init();
 		breadcrumbs.init();
-
-		//apply switch Video plugin
-		if( $( "figure[data-video]" ).size() > 0 ){
-			$( "figure[data-video]" ).switchVideo();
-		}
+		$( "figure[data-video]" ).switchVideo();
 });

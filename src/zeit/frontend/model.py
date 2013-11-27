@@ -267,16 +267,26 @@ class Video(object):
 
         href = href.replace('http://xml.zeit.de', '')
         path = 'data%s' % href
-        video_path = pkg_resources.resource_filename(__name__, path)
-        video_tree = objectify.parse(video_path)
-        video_root = video_tree.getroot()
-        self.description = unicode(video_root.body.subtitle)
-        self.title = unicode(video_root.body.title)
-        self.supertitle = unicode(video_root.body.supertitle)
-        self.id = href.split('/').pop()
-        video_still = video_root.head.xpath("//attribute[@name='video_still']")
-        if video_still:
-            self.video_still = video_still.pop().text
+
+        try:
+            video_path = pkg_resources.resource_filename(__name__, path)
+            video_tree = objectify.parse(video_path)
+            video_root = video_tree.getroot()
+
+            video_avail = video_root.head.xpath(
+                "//attribute[@name='type']")
+
+            if video_avail.pop().text == 'video':
+                self.description = unicode(video_root.body.subtitle)
+                self.title = unicode(video_root.body.title)
+                self.supertitle = unicode(video_root.body.supertitle)
+                self.id = href.split('/').pop()
+                video_still = video_root.head.xpath(
+                    "//attribute[@name='video_still']")
+                if video_still:
+                    self.video_still = video_still.pop().text
+        except:
+            return
 
 
 @implementer(interfaces.IIntertitle)

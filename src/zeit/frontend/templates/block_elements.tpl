@@ -156,8 +156,11 @@
             figure-stamp
         {% else %}
             figure is-constrained is-centered
-        {% endif %} video--block" data-video="{{obj.id}}">
-            <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+        {% endif %}" data-video="{{obj.id}}">
+            <div class="video__still">
+                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+                <span data-video-button="true"></span>
+            </div>
             <figcaption class="figure__caption">
                 {% if obj.format == 'small' %}
                     {{obj.title}}  
