@@ -32,14 +32,6 @@ def jinja2_env(request):
     return utility
 
 
-def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    markup = '<span class="article__meta__author">Nico</span>'
-    author = {'name': 'Nico'}
-    assert markup == tpl.module.authorlink(
-        author, 'article__meta__author').strip()
-
-
 def _mock_p():
     from zeit.frontend.model import Para
     p = """
