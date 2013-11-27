@@ -16,12 +16,14 @@ browsers = {
     'phantomjs': webdriver.PhantomJS,
 }
 
+
 @pytest.fixture(scope='session')
 def testserver(request):
     server = WSGIServer(application=factory(settings), port="6543")
     server.start()
     request.addfinalizer(server.stop)
     return server
+
 
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
@@ -35,4 +37,3 @@ def selenium_driver(request):
 
     request.addfinalizer(lambda *args: b.quit())
     return b
-
