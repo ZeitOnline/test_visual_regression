@@ -68,5 +68,8 @@ def format_date(obj, type):
 
 
 def baseId_to_src(obj):
-    path = obj.rpartition("/")
-    return path
+    # Hilfsfunktion bis zum File-Connector, oder Ausbau derselben
+    # es werden immer jpgs und immer in 540x304
+    path = obj.rpartition("/")[0]
+    trunk = path.rpartition("/")[2]
+    return path.replace('xml.', 'images.') + "/" + trunk + "-540x304.jpg"
