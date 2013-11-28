@@ -151,10 +151,12 @@
 
 {% macro focussed_nextread( nextRead ) -%}
     {%-if nextRead -%}
-<aside class="article__nextread nextread-max is-centered">
+<aside class="article__nextread nextread-{{nextRead.layout}} is-centered">
     <div class="article__nextread__lead">Lesen Sie jetzt:</div>
     <div class="article__nextread__body is-centered">
-        <img alt="" title="" src="{{ nextRead.image|base2src }}">
+        {% if nextRead.layout == "base" %}
+            <img alt="" title="" src="{{ nextRead.image|base2src }}">
+        {% endif %}
         <div class="article__nextread__article">
             <span class="article__nextread__supertitle">{{ nextRead.supertitle }}</span>
             <span class="article__nextread__title">{{ nextRead.title }}</span>

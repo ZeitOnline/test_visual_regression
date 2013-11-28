@@ -80,6 +80,7 @@ def test_construct_focussed_next_returns_next_read():
     assert nextread['supertitle'] == "SUPER"
     assert nextread['title'] == "TITLE"
     assert nextread['image'] == "BASEID"
+    assert nextread['layout'] == "base"
     ref = """
         <root>
             <head>

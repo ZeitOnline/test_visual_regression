@@ -12,8 +12,8 @@ settings = {
 }
 
 browsers = {
-    'firefox': webdriver.Firefox,
-    'phantomjs': webdriver.PhantomJS,
+    #'firefox': webdriver.Firefox,
+    #'phantomjs': webdriver.PhantomJS,
 }
 
 
