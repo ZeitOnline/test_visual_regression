@@ -7,7 +7,7 @@
             <display_name>Cornelius Lange</display_name>
         </author>
         <references>
-            <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2012-03/link-serie-weinkolumne-lange" year="2012" issue="11" ressort="Lebensart" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/weinkolumne">
+            <reference layout="minimal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2012-03/link-serie-weinkolumne-lange" year="2012" issue="11" ressort="Lebensart" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/weinkolumne">
                 <supertitle>Die Ausleser </supertitle>
                 <title>Alle Folgen der Weinkolumne von Fabian und Cornelius Lange</title>
                 <text>Fabian und Cornelius Lange sind immer auf der Suche nach ultimativen Weinen. In der Kolumne "Die Ausleser" schreiben sie über Entdeckungen und Trends in aller Welt. </text>
