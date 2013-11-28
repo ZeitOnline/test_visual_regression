@@ -111,6 +111,7 @@ class Content(Resource):
                             ('title', unicode(xml.title))])
             if xml.image is not None:
                 nextread['image'] = xml.image.get("base-id")
+            nextread['layout'] = xml.get("layout")
             return nextread
         except AttributeError:
             return

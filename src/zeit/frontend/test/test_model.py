@@ -80,3 +80,39 @@ def test_construct_focussed_next_returns_next_read():
     assert nextread['supertitle'] == "SUPER"
     assert nextread['title'] == "TITLE"
     assert nextread['image'] == "BASEID"
+    ref = """
+        <root>
+            <head>
+            <references>
+                <reference layout="maximal" type="intern" href="URL">
+                    <supertitle>SUPER</supertitle>
+                    <title>TITLE</title>
+                    <texta>XXX</texta>
+                    <description>DESCRIPTION</description>
+                    <image align="left" title="" base-id="BASEID" type="jpg" />
+                </reference>
+            </references>
+            </head>
+        </root>
+        """
+    xml = objectify.fromstring(ref)
+    nextread = content._construct_focussed_nextread(xml)
+    assert nextread['layout'] == "maximal"
+    ref = """
+        <root>
+            <head>
+            <references>
+                <reference layout="minimal" type="intern" href="URL">
+                    <supertitle>SUPER</supertitle>
+                    <title>TITLE</title>
+                    <texta>XXX</texta>
+                    <description>DESCRIPTION</description>
+                    <image align="left" title="" base-id="BASEID" type="jpg" />
+                </reference>
+            </references>
+            </head>
+        </root>
+        """
+    xml = objectify.fromstring(ref)
+    nextread = content._construct_focussed_nextread(xml)
+    assert nextread['layout'] == "minimal"
