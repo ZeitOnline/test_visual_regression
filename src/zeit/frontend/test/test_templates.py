@@ -9,10 +9,7 @@ def jinja2_env(request):
     config = pyramid.config.Configurator()
     config.include('pyramid_jinja2')
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
-    utility.tests['elem'] = zeit.frontend.application.is_block
-    utility.filters['format_date'] = zeit.frontend.application.format_date
-    utility.filters['translate_url'] = zeit.frontend.application.translate_url
-    utility.trim_blocks = True
+    utility = zeit.frontend.application.configure_jinja2(utility)
     return utility
 
 
