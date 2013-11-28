@@ -242,7 +242,7 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     nextread = {'supertitle': "SUPER",
                 'title': "TITLE",
-                'image': "http://xml.zeit.de/1/k-b/",
+                'image': "http://images.zeit.de/1/k-b/k-b-540x304.jpg",
                 'layout': "base",
                 'href': 'LINK'}
     m = '<aside class="article__nextread nextread-base is-centered">'

@@ -79,7 +79,7 @@ def test_construct_focussed_next_returns_next_read():
     nextread = content._construct_focussed_nextread(xml)
     assert nextread['supertitle'] == "SUPER"
     assert nextread['title'] == "TITLE"
-    assert nextread['image'] == "BASEID"
+    assert nextread['image'] == "/-540x304.jpg"
     assert nextread['layout'] == "base"
     ref = """
         <root>

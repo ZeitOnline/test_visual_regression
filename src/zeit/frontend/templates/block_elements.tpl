@@ -156,7 +156,7 @@
             <a href="{{ nextRead.href }}">
                 <div class="article__nextread__body is-centered">
                     {% if nextRead.layout == "base" %}
-                        <img alt="" title="" src="{{ nextRead.image|base2src }}">
+                        <img alt="" title="" src="{{ nextRead.image }}">
                     {% endif %}
                     <div class="article__nextread__article">
                         <span class="article__nextread__supertitle">{{ nextRead.supertitle }}</span>

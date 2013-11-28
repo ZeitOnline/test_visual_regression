@@ -111,7 +111,11 @@ class Content(Resource):
                             ('title', unicode(xml.title)),
                             ('href', xml.get('href'))])
             if xml.image is not None:
-                nextread['image'] = xml.image.get("base-id")
+                i = xml.image.get("base-id")
+                i = i.rpartition("/")[0]
+                trunk = i.rpartition("/")[2]
+                nextread['image'] =\
+                    i.replace('xml.', 'images.') + "/" + trunk + "-540x304.jpg"
             layout = "base"
             if xml.get("layout") is not None:
                 layout = xml.get("layout")
