@@ -20,6 +20,7 @@ def factory(global_config, **settings):
     utility.filters['format_date'] = format_date
     utility.filters['block_type'] = block_type
     utility.filters['translate_url'] = translate_url
+    utility.filters['base2src'] = baseId_to_src
     utility.trim_blocks = True
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
     config.add_route('json', 'json/*traverse')
@@ -59,3 +60,8 @@ def format_date(obj, type):
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
         return format_datetime(obj, format, locale="de_De")
+
+
+def baseId_to_src(obj):
+    path = obj.rpartition("/")
+    return path

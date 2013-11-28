@@ -106,7 +106,12 @@ class Content(Resource):
 
     def _construct_focussed_nextread(self, root):
         try:
-            return root.head.references.reference[0]
+            xml = root.head.references.reference[0]
+            nextread = dict([('supertitle', unicode(xml.supertitle)),
+                            ('title', unicode(xml.title))])
+            if xml.image is not None:
+                nextread['image'] = xml.image.get("base-id")
+            return nextread
         except AttributeError:
             return
 

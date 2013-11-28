@@ -64,14 +64,10 @@ def test_construct_focussed_next_returns_next_read():
             <references>
                 <reference type="intern" href="URL">
                     <supertitle>SUPER</supertitle>
-                    <title>TITEL</title>
-                    <text>
-                        TEXT
-                    </text>
-                    <description>
-                        DESCRIPTION
-                    </description>
-                    <image align="left" title="" base-id="" type="jpg" />
+                    <title>TITLE</title>
+                    <texta>XXX</texta>
+                    <description>DESCRIPTION</description>
+                    <image align="left" title="" base-id="BASEID" type="jpg" />
                 </reference>
             </references>
             </head>
@@ -81,4 +77,6 @@ def test_construct_focussed_next_returns_next_read():
     directory = get_root("pfft")
     content = Content(directory.base_path + '/artikel/03')
     nextread = content._construct_focussed_nextread(xml)
-    assert nextread.supertitle == "SUPER"
+    assert nextread['supertitle'] == "SUPER"
+    assert nextread['title'] == "TITLE"
+    assert nextread['image'] == "BASEID"
