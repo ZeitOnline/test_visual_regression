@@ -242,17 +242,15 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     nextread = {'supertitle': "SUPER",
                 'title': "TITLE",
-                'image': "http://xml.zeit.de/p/d/1/k-b/"}
-    markup = """
-<aside class="article__nextread nextread-max is-centered">
+                'image': "http://xml.zeit.de/1/k-b/"}
+    markup = """<aside class="article__nextread nextread-max is-centered">
     <div class="article__nextread__lead">Lesen Sie jetzt:</div>
     <div class="article__nextread__body is-centered">
-        <img alt="" title="" src="http://images.zeit.de/p/d/1/k-b/k-b-540.jpg">
+        <img alt="" title="" src="http://images.zeit.de/1/k-b/k-b-540x304.jpg">
         <div class="article__nextread__article">
             <span class="article__nextread__supertitle">SUPER</span>
             <span class="article__nextread__title">TITLE</span>
         </div>
     </div>
-</aside>
-            """
-    #assert markup == tpl.module.focussed_nextread(nextread)
+</aside>"""
+    assert markup == tpl.module.focussed_nextread(nextread).strip()
