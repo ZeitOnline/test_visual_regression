@@ -37,6 +37,7 @@ def configure_jinja2(jinja2_env):
     jinja2_env.trim_blocks = True
     return jinja2_env
 
+
 def is_block(obj, b_type):
     interface = None
     if b_type == 'p':
