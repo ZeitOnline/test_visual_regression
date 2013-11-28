@@ -243,15 +243,18 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
     nextread = {'supertitle': "SUPER",
                 'title': "TITLE",
                 'image': "http://xml.zeit.de/1/k-b/",
-                'layout': "base"}
+                'layout': "base",
+                'href': 'LINK'}
     m = '<aside class="article__nextread nextread-base is-centered">'
-    i = '<img alt="" title="" src="http://images.zeit.de/1/k-b/k-b-540x304.jpg">'
+    i = 'src="http://images.zeit.de/1/k-b/k-b-540x304.jpg">'
     s = '<span class="article__nextread__supertitle">SUPER</span>'
     t = '<span class="article__nextread__title">TITLE</span>'
+    l = '<a href="LINK">'
     assert m in tpl.module.focussed_nextread(nextread)
     assert i in tpl.module.focussed_nextread(nextread)
     assert s in tpl.module.focussed_nextread(nextread)
     assert t in tpl.module.focussed_nextread(nextread)
+    assert l in tpl.module.focussed_nextread(nextread)
     nextread['layout'] = "maximal"
     m = '<aside class="article__nextread nextread-maximal is-centered">'
     assert m in tpl.module.focussed_nextread(nextread)

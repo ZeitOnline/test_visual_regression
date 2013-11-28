@@ -108,7 +108,8 @@ class Content(Resource):
         try:
             xml = root.head.references.reference[0]
             nextread = dict([('supertitle', unicode(xml.supertitle)),
-                            ('title', unicode(xml.title))])
+                            ('title', unicode(xml.title)),
+                            ('href', xml.get('href'))])
             if xml.image is not None:
                 nextread['image'] = xml.image.get("base-id")
             layout = "base"
