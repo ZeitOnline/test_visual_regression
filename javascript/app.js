@@ -7,8 +7,11 @@ require.config({
 });
 
 require(['modules/fontloader',
-         'modules/breadcrumbs'], function(fontloader,
-                                          breadcrumbs) {
+         'modules/breadcrumbs',
+         'modules/main-nav'], function(fontloader,
+                                       breadcrumbs,
+                                       main_nav) {
   fontloader.init();
   breadcrumbs.init();
+  main_nav.init();
 });
