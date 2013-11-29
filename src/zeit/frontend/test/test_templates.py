@@ -242,14 +242,16 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     nextread = {'supertitle': "SUPER",
                 'title': "TITLE",
-                'image': "http://images.zeit.de/1/k-b/k-b-540x304.jpg",
+                'image': "http://images.zeit.de/k-b/k-b-540x304.jpg",
                 'layout': "base",
-                'href': 'LINK'}
+                'href': "LINK",
+                'bu': "BU",
+                'copyright': "CP"}
     m = '<aside class="article__nextread nextread-base is-centered">'
-    i = 'src="http://images.zeit.de/1/k-b/k-b-540x304.jpg">'
+    i = 'title="BU" alt="BU" src="http://images.zeit.de/k-b/k-b-540x304.jpg">'
     s = '<span class="article__nextread__supertitle">SUPER</span>'
     t = '<span class="article__nextread__title">TITLE</span>'
-    l = '<a href="LINK">'
+    l = '<a title="SUPER: TITLE" href="LINK">'
     assert m in tpl.module.focussed_nextread(nextread)
     assert i in tpl.module.focussed_nextread(nextread)
     assert s in tpl.module.focussed_nextread(nextread)
@@ -257,7 +259,9 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
     assert l in tpl.module.focussed_nextread(nextread)
     nextread['layout'] = "maximal"
     m = '<aside class="article__nextread nextread-maximal is-centered">'
+    d = 'data-backgroundImage="http://images.zeit.de/k-b/k-b-540x304.jpg">'
     assert m in tpl.module.focussed_nextread(nextread)
+    assert d in tpl.module.focussed_nextread(nextread)
     nextread['layout'] = "minimal"
     m = '<aside class="article__nextread nextread-minimal is-centered">'
     assert m in tpl.module.focussed_nextread(nextread)

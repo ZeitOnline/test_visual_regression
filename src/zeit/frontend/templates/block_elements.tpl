@@ -153,12 +153,16 @@
     {%-if nextRead -%}
         <aside class="article__nextread nextread-{{nextRead.layout}} is-centered">
             <div class="article__nextread__lead">Lesen Sie jetzt:</div>
-            <a href="{{ nextRead.href }}">
+            <a title="{{ nextRead.supertitle }}: {{ nextRead.title }}" href="{{ nextRead.href }}">
                 <div class="article__nextread__body is-centered">
                     {% if nextRead.layout == "base" %}
-                        <img alt="" title="" src="{{ nextRead.image }}">
+                        <img title="{{ nextRead.bu }}" alt="{{ nextRead.bu }}" src="{{ nextRead.image }}">
                     {% endif %}
+                    {%- if nextRead.layout == "maximal" %}
+                    <div class="article__nextread__article" data-backgroundImage="{{ nextRead.image }}">
+                    {%- else -%}
                     <div class="article__nextread__article">
+                    {% endif -%}
                         <span class="article__nextread__supertitle">{{ nextRead.supertitle }}</span>
                         <span class="article__nextread__title">{{ nextRead.title }}</span>
                     </div>

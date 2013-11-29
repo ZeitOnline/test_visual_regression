@@ -111,8 +111,13 @@ class Content(Resource):
                             ('title', unicode(xml.title)),
                             ('href', xml.get('href'))])
             if xml.image is not None:
-                i = xml.image.get("base-id")
-                i = i.rpartition("/")[0]
+                bu = xml.xpath("image/bu")
+                if len(bu) > 0:
+                    nextread['bu'] = bu[0]
+                cp = xml.xpath("image/copyright")
+                if len(cp) > 0:
+                    nextread['copyright'] = cp[0]
+                i = xml.image.get("base-id").rpartition("/")[0]
                 trunk = i.rpartition("/")[2]
                 nextread['image'] =\
                     i.replace('xml.', 'images.') + "/" + trunk + "-540x304.jpg"

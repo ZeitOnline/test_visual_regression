@@ -67,7 +67,10 @@ def test_construct_focussed_next_returns_next_read():
                     <title>TITLE</title>
                     <texta>XXX</texta>
                     <description>DESCRIPTION</description>
-                    <image align="left" title="" base-id="BASEID" type="jpg" />
+                    <image align="left" title="" base-id="BASEID" type="jpg">
+                        <bu>BU</bu>
+                        <copyright>COPY</copyright>
+                    </image>
                 </reference>
             </references>
             </head>
@@ -79,6 +82,8 @@ def test_construct_focussed_next_returns_next_read():
     nextread = content._construct_focussed_nextread(xml)
     assert nextread['supertitle'] == "SUPER"
     assert nextread['title'] == "TITLE"
+    assert nextread['bu'] == "BU"
+    assert nextread['copyright'] == "COPY"
     assert nextread['image'] == "/-540x304.jpg"
     assert nextread['layout'] == "base"
     ref = """
@@ -90,7 +95,10 @@ def test_construct_focussed_next_returns_next_read():
                     <title>TITLE</title>
                     <texta>XXX</texta>
                     <description>DESCRIPTION</description>
-                    <image align="left" title="" base-id="BASEID" type="jpg" />
+                    <image align="left" title="" base-id="BASEID" type="jpg">
+                        <bu>BU</bu>
+                        <copyright>COPY</copyright>
+                    </image>
                 </reference>
             </references>
             </head>
