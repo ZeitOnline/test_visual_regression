@@ -1,6 +1,11 @@
 .breadcrumbs-wrap
   +respond-min($nav__break__full-menu)
     padding: $micro
+    &.is-full-width
+      position: absolute
+      z-index: 3
+      .breadcrumbs
+        background-color: rgba($white, 0.75)
 
 .breadcrumbs
   +respond-min($nav__break__full-menu)
