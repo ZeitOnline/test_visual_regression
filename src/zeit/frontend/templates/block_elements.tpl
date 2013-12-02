@@ -1,4 +1,4 @@
-{% macro para(html, class) -%}
+{% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
@@ -100,7 +100,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro img(obj) -%}
+{% macro image(obj) -%}
     <figure class="
         {% if obj.layout == 'large' %}
             figure-full-width

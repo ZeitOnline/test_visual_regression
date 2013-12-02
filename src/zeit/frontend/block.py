@@ -38,7 +38,7 @@ def block_type(obj):
 
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IParagraph)
-class P(object):
+class Paragraph(object):
 
     def __init__(self, model_block):
         self.html = _inline_html(model_block.xml)
@@ -126,7 +126,7 @@ def _inline_html(xml):
 
 
 def configure_components():
-    zope.component.provideAdapter(P)
+    zope.component.provideAdapter(Paragraph)
     zope.component.provideAdapter(Image)
     zope.component.provideAdapter(Intertitle)
     zope.component.provideAdapter(Citation)

@@ -1,10 +1,16 @@
-from zeit.frontend import testing
-from zeit.frontend.block import block_type
+from zeit.frontend.block import _inline_html
+import lxml.etree
 
 
-def test_block_type_should_deliver_type_of_block_element():
-    assert block_type(testing.mock_p()) == 'para'
-    assert block_type(testing.mock_img()) == 'img'
-    i = testing.mock_intertitle()
-    assert block_type(i) == 'intertitle'
-    assert block_type(testing.mock_citation()) == 'citation'
+def test_inline_html_should_filter_to_valid_html():
+    p = """
+           <p>Text <a href='foo'> ba </a> und <em>Text</em>
+           abc <invalid>invalid</invalid></p>
+       """
+
+    xml = lxml.etree.fromstring(p)
+    xml_str = """Text  <a href="foo"> ba </a> und <em>Text</em>
+           abc invalid
+"""
+
+    assert str(_inline_html(xml)) == xml_str

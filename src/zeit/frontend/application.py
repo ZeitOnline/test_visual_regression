@@ -48,7 +48,9 @@ class Application(object):
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
+        # XXX use grokcore.component instead
         zeit.frontend.block.configure_components()
+        zeit.frontend.article.configure_components()
 
     def get_repository(self, request):
         return zope.component.getUtility(

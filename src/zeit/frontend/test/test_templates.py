@@ -20,7 +20,7 @@ def jinja2_env(request):
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
-    lines = tpl.module.para(html).splitlines()
+    lines = tpl.module.paragraph(html).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -175,7 +175,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_img_should_produce_markup(jinja2_env):
+def test_image_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
@@ -199,7 +199,7 @@ def test_img_should_produce_markup(jinja2_env):
 
     for el in obj:
         print el['css']
-        lines = tpl.module.img(el).splitlines()
+        lines = tpl.module.image(el).splitlines()
         output = ""
         for line in lines:
             output += line.strip()

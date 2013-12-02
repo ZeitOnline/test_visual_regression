@@ -51,7 +51,7 @@ class Article(Base):
 
     @property
     def pages(self):
-        return self.context.pages
+        return zeit.frontend.interfaces.IPages(self.context)
 
     @property
     def subpage_index(self):

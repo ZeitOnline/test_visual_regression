@@ -1,61 +1,20 @@
-from zope.interface import Interface
+import zope.interface
+import zope.interface.common.sequence
 
 
-class IPara(Interface):
-
-    """ Represents Paragraphs in IPage -> IContent """
-    pass
-
-
-class IPage(Interface):
-
-    """ Represents Pages in IContent """
-    pass
+class IPages(zope.interface.common.sequence.IReadSequence):
+    """List of the <division>s of an zeit.content.article.interfaces.IArticle
+    """
 
 
-class ICitation(Interface):
+class IPage(zope.interface.Interface):
+    """A page offers list-access to the blocks
+    (zeit.edit.interfaces.IBlock) contained in it.
+    """
 
-    """ Represents Citation in IContent """
-    pass
+    number = zope.interface.Attribute(
+        'The position of this division in the article body (1-based)')
+    teaser = zope.interface.Attribute('Page teaser')
 
-
-class IIntertitle(Interface):
-
-    """ Represents Intertitle in IContent """
-    pass
-
-
-class IAdvertising(Interface):
-
-    """ Represents Advertising in IContent """
-    pass
-
-
-class IImg(Interface):
-
-    """ Represents Image in IContent """
-    pass
-
-
-class IMetaBox(Interface):
-
-    """ Represents Metabox in IContent """
-    pass
-
-
-class IVideo(Interface):
-
-    """ Represents Image in IContent """
-    pass
-
-
-class ITags(Interface):
-
-    """ Represents Tags in IContent """
-    pass
-
-
-class ITag(Interface):
-
-    """ Represents Single Tag in IContent """
-    pass
+    def __iter__(self):
+        """iterate over our blocks"""
