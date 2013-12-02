@@ -32,14 +32,14 @@
     </div>
 {%- endmacro %}
 
-{% macro subpage_index(index, subtitle, number, index_class, active_class) -%}
+{% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
         <div class="{{ index_class }}">
-        {% for chapter in index %}
+        {% for page in pages if page.teaser %}
             {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ chapter }}</span>
+                <span class="{{ active_class }}">{{ page.number }} -- {{ page.teaser }}</span>
             {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} -- {{  page.teaser  }}</a></span>
             {% endif %}
         {% endfor %}
     </div>

@@ -39,7 +39,7 @@
 
             <div class="article__page-wrap">
 
-              {{ blocks.subpage_index( view.subpage_index, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+              {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
               {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
 
               {% for item in page %}

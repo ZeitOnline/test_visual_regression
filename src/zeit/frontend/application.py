@@ -100,6 +100,12 @@ class Application(object):
                 __name__, 'data'),
         })
 
+        zope.app.appsetup.product.setProductConfiguration(
+            'zeit.content.article', {
+                'genre-url': _product_url(
+                    'zeit.content.article.tests', 'article-genres.xml'),
+        })
+
     @property
     def pipeline(self):
         return [

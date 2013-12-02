@@ -54,10 +54,6 @@ class Article(Base):
         return zeit.frontend.interfaces.IPages(self.context)
 
     @property
-    def subpage_index(self):
-        return self.context.subpage_index
-
-    @property
     def header_img(self):
         return self.context.header_img
 
