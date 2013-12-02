@@ -26,14 +26,15 @@
 					'<param name="autoStart" value="true" />' +
 					'</object></div>';
 
-					$( that ).parent().prepend( playerObj );
-					$( that ).remove();
+					var parent = $( that ).parent();
+					parent.empty();
+					parent.prepend( playerObj );
 					window.brightcove.createExperiences();
 				}
 			},
 			//add show/hide event
 			addEvent: function( that ){
-				$( that ).find( "img" ).on( "click", function( ev ){
+				$( that ).find( "img, .figure__video__button" ).on( "click", function( ev ){
 					ev.preventDefault();
 					el.buildPlayer( this );
 				});
@@ -41,7 +42,7 @@
 			//add play button to image
 			addButton: function( that ){
 				if( el.id ){
-					$( that ).find( 'span[data-video-button]' ).addClass( 'video__button' );
+					$( that ).find( '.figure__video__button' ).addClass( 'icon-playbutton' );
 				}
 			},
 			//grab meta data
