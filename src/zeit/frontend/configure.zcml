@@ -1,0 +1,9 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <include file="vivi.zcml" />
+
+  <utility
+    factory="zeit.cms.repository.repository.Repository"
+    provides="zeit.cms.repository.interfaces.IRepository"
+    />
+</configure>

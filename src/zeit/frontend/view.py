@@ -1,7 +1,7 @@
-from pyramid.view import view_config
-import zeit.frontend.model
 from babel.dates import get_timezone
 from pyramid.renderers import render_to_response
+from pyramid.view import view_config
+import zeit.content.article.interfaces
 
 
 class Base(object):
@@ -22,9 +22,9 @@ class Base(object):
 
 
 @view_config(route_name='json',
-             context=zeit.frontend.model.Content,
+             context=zeit.content.article.interfaces.IArticle,
              renderer='json')
-@view_config(context=zeit.frontend.model.Content,
+@view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 class Article(Base):
 
@@ -104,10 +104,10 @@ class Gallery(Base):
 
 
 @view_config(route_name='json',
-             context=zeit.frontend.model.Content,
+             context=zeit.content.article.interfaces.IArticle,
              renderer='json', name='teaser')
 @view_config(name='teaser',
-             context=zeit.frontend.model.Content,
+             context=zeit.content.article.interfaces.IArticle,
              renderer='templates/teaser.html')
 class Teaser(Article):
 

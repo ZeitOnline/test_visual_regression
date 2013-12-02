@@ -1,9 +1,10 @@
 from lxml import etree
 from zeit.frontend.model import _inline_html
-import pytest
 import pyramid.config
 import pyramid_jinja2
+import pytest
 import zeit.frontend.application
+import zeit.frontend.block
 
 
 def test_inline_html_should_filter_to_valid_html():
@@ -25,7 +26,7 @@ def jinja2_env(request):
     config = pyramid.config.Configurator()
     config.include('pyramid_jinja2')
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
-    utility.tests['elem'] = zeit.frontend.application.is_block
+    utility.tests['elem'] = zeit.frontend.block.is_block
     utility.filters['format_date'] = zeit.frontend.application.format_date
     utility.filters['translate_url'] = zeit.frontend.application.translate_url
     utility.trim_blocks = True

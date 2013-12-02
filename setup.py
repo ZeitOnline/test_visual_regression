@@ -14,6 +14,11 @@ setup(
         'simplejson',
         'supervisor',
         'waitress',
+        'zeit.cms',
+        'zeit.connector >= 2.1.0.dev0',
+        'zeit.content.article',
+        'zope.app.appsetup',
+        'zope.configuration',
     ],
     entry_points={
         'paste.app_factory': [

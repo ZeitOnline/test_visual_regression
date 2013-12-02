@@ -1,54 +1,118 @@
-import zeit.frontend
-import zeit.frontend.model
-import zeit.frontend.navigation
+from babel.dates import format_datetime
+import pkg_resources
 import pyramid.config
 import pyramid_jinja2
-import zope.interface
-import zeit.frontend.interfaces
-from babel.dates import format_datetime
+import zeit.frontend
+import zeit.frontend.block
+import zeit.frontend.navigation
+import zope.app.appsetup.product
+import zope.component
+import zope.configuration.xmlconfig
 
 
-def factory(global_config, **settings):
+class Application(object):
 
-    root = zeit.frontend.model.get_root
-    config = pyramid.config.Configurator(settings=settings,
-                                         root_factory=root)
-    config.include('pyramid_jinja2')
-    utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
-    utility.globals.update(zeit.frontend.navigation.get_sets())
-    utility.tests['elem'] = is_block
-    utility.filters['format_date'] = format_date
-    utility.filters['block_type'] = block_type
-    utility.filters['translate_url'] = translate_url
-    utility.trim_blocks = True
-    config.add_renderer('.html', pyramid_jinja2.renderer_factory)
-    config.add_route('json', 'json/*traverse')
-    config.add_static_view(name='css', path='zeit.frontend:css/')
-    config.add_static_view(name='js', path='zeit.frontend:js/')
-    config.add_static_view(name='img', path='zeit.frontend:img/')
-    config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
-    config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
-    config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
-    return config.make_wsgi_app()
+    def __init__(self):
+        self.settings = {}
+
+    def __call__(self, global_config, **settings):
+        self.settings.update(settings)
+        self.configure()
+        return self.make_wsgi_app(global_config)
+
+    def configure(self):
+        self.configure_zca()
+
+        registry = pyramid.registry.Registry(
+            bases=(zope.component.getGlobalSiteManager(),))
+        self.config = config = pyramid.config.Configurator(
+            settings=self.settings,
+            registry=registry)
+        config.setup_registry(settings=self.settings)
+
+        config.include('pyramid_jinja2')
+        self.configure_jinja()
+        config.add_renderer('.html', pyramid_jinja2.renderer_factory)
+
+        config.add_route('json', 'json/*traverse')
+        config.add_static_view(name='css', path='zeit.frontend:css/')
+        config.add_static_view(name='js', path='zeit.frontend:js/')
+        config.add_static_view(name='img', path='zeit.frontend:img/')
+        config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
+        config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
+
+        config.set_root_factory(self.get_repository)
+        config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
+        zeit.frontend.block.configure_components()
+
+    def get_repository(self, request):
+        return zope.component.getUtility(
+            zeit.cms.repository.interfaces.IRepository)
+
+    def configure_jinja(self):
+        jinja = self.config.registry.getUtility(
+            pyramid_jinja2.IJinja2Environment)
+        jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.tests['elem'] = zeit.frontend.block.is_block
+        jinja.filters['format_date'] = format_date
+        jinja.filters['block_type'] = zeit.frontend.block.block_type
+        jinja.filters['translate_url'] = translate_url
+        jinja.trim_blocks = True
+
+    def configure_zca(self):
+        self.configure_product_config()
+        context = zope.configuration.config.ConfigurationMachine()
+        zope.configuration.xmlconfig.registerCommonDirectives(context)
+        zope.configuration.xmlconfig.include(context, package=zeit.frontend)
+        context.execute_actions()
+
+    def configure_product_config(self):
+        zope.app.appsetup.product.setProductConfiguration('zeit.cms', {
+            'keyword-configuration': _product_url(
+                'zeit.cms.tagging.tests', 'keywords_config.xml'),
+            'source-badges': _product_url(
+                'zeit.cms.asset', 'badges.xml'),
+            'source-banners': _product_url(
+                'zeit.cms.content', 'banners.xml'),
+            'source-keyword': _product_url(
+                'zeit.cms.content', 'zeit-ontologie-prism.xml'),
+            'source-navigation': _product_url(
+                'zeit.cms.content', 'navigation.xml'),
+            'source-products': _product_url(
+                'zeit.cms.content', 'products.xml'),
+            'source-serie': _product_url(
+                'zeit.cms.content', 'serie.xml'),
+            'whitelist-url': _product_url(
+                'zeit.cms.tagging.tests', 'whitelist.xml'),
+        })
+
+        zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
+            'repository-path': pkg_resources.resource_filename(
+                __name__, 'data'),
+        })
+
+    @property
+    def pipeline(self):
+        return [
+            # ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
+        ]
+
+    def make_wsgi_app(self, global_config):
+        app = self.config.make_wsgi_app()
+        for spec, protocol, name, extra in self.pipeline:
+            if protocol == 'factory':
+                factory = getattr(self, spec)
+                app = factory(app, **extra)
+                continue
+            entrypoint = pkg_resources.get_entry_info(spec, protocol, name)
+            app = entrypoint.load()(app, global_config, **extra)
+        return app
+
+factory = Application()
 
 
-def is_block(obj, b_type):
-    interface = None
-    if b_type == 'p':
-        interface = zeit.frontend.interfaces.IPara
-    if b_type == 'image':
-        interface = zeit.frontend.interfaces.IImg
-    if b_type == 'intertitle':
-        interface = zeit.frontend.interfaces.IIntertitle
-    if b_type == 'citation':
-        interface = zeit.frontend.interfaces.ICitation
-    if b_type == 'advertising':
-        interface = zeit.frontend.interfaces.IAdvertising
-    return interface in zope.interface.providedBy(obj)
-
-
-def block_type(obj):
-    return type(obj).__name__.lower()
+def _product_url(package, path):
+    return 'file://' + pkg_resources.resource_filename(package, path)
 
 
 def translate_url(obj):
