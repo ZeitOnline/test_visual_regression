@@ -5,6 +5,8 @@ setup(
     version='0.1.dev0',
 
     install_requires=[
+        'Babel',
+        'iso8601',
         'lxml',
         'pyramid',
         'pyramid_jinja2',
@@ -12,8 +14,6 @@ setup(
         'simplejson',
         'supervisor',
         'waitress',
-        'iso8601',
-        'Babel',
     ],
     entry_points={
         'paste.app_factory': [
