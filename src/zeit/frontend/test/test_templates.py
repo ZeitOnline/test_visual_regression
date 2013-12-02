@@ -259,9 +259,9 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
     assert l in tpl.module.focussed_nextread(nextread)
     nextread['layout'] = "maximal"
     m = '<aside class="article__nextread nextread-maximal is-centered">'
-    d = 'data-backgroundImage="http://images.zeit.de/k-b/k-b-540x304.jpg">'
+    bi = '<div class="article__nextread__body is-centered" style='
     assert m in tpl.module.focussed_nextread(nextread)
-    assert d in tpl.module.focussed_nextread(nextread)
+    assert bi in tpl.module.focussed_nextread(nextread)
     nextread['layout'] = "minimal"
     m = '<aside class="article__nextread nextread-minimal is-centered">'
     assert m in tpl.module.focussed_nextread(nextread)
