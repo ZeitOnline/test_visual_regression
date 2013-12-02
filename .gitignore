@@ -9,6 +9,7 @@ downloads
 eggs
 include
 lib/
+local/
 lib64
 parts
 src/*.egg-info
