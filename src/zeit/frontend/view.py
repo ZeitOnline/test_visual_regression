@@ -1,6 +1,7 @@
 from babel.dates import get_timezone
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
+from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 import zeit.content.article.interfaces
 
 
@@ -37,10 +38,6 @@ class Article(Base):
         return {}
 
     @property
-    def lead_pic(self):
-        return self.context.lead_pic
-
-    @property
     def title(self):
         return self.context.title
 
@@ -66,24 +63,35 @@ class Article(Base):
 
     @property
     def author(self):
-        return self.context.author
+        try:
+            author = self.context.authors[0]
+        except IndexError:
+            author = None
+        return {
+            'name': author.display_name if author else None,
+            'href': author.uniqueId if author else None,
+            'prefix': " von " if self.context.genre else "Von ",
+            'suffix': ', ' if self.location else None,
+        }
 
     @property
     def publish_date(self):
         tz = get_timezone('Europe/Berlin')
-        return self.context.publish_date.astimezone(tz)
+        return IPublishInfo(
+            self.context).date_last_published_semantic.astimezone(tz)
 
     @property
     def publish_date_meta(self):
-        return self.context.publish_date_meta
+        return IPublishInfo(
+            self.context).date_last_published_semantic.isoformat()
 
     @property
     def last_modified_date(self):
-        return self.context.last_modified_date
+        return IModified(self.context).date_last_modified
 
     @property
     def rankedTags(self):
-        return self.context.rankedTags
+        return self.context.keywords
 
     @property
     def genre(self):
@@ -91,11 +99,11 @@ class Article(Base):
 
     @property
     def source(self):
-        return self.context.source
+        return self.context.copyrights or self.context.product_text
 
     @property
     def location(self):
-        return self.context.location
+        return None  # XXX not implemented in zeit.content.article yet
 
 
 class Gallery(Base):

@@ -63,7 +63,8 @@
                     <span class="article__tags__title">Tags</span>
                     {% for tag in view.rankedTags %}
                             {% for item in tag %}
-                                <a href="#{{ item.url }}">{{ item.html }}</a>
+{# XXX use url_value instead of code, which zeit.cms.tagging needs to expose #}
+                                <a href="#{{ item.code }}">{{ item.label }}</a>
                                 {% if not loop.last %}
                                     ,
                                 {% endif %}
