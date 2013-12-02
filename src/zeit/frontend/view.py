@@ -5,7 +5,6 @@ import zeit.content.article.interfaces
 
 
 class Base(object):
-
     """Base class for all views."""
 
     def __init__(self, context, request):
