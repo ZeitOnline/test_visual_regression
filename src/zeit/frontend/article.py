@@ -11,11 +11,13 @@ class Page(object):
 
     def __init__(self, division):
         self.number = division.number
-        self.teaser = division.teaser
+        self.teaser = division.teaser or ''
         self.blocks = []
 
     def append(self, block):
-        self.blocks.append(IFrontendBlock(block))
+        block = IFrontendBlock(block, None)
+        if block is not None:
+            self.blocks.append(block)
 
     def __iter__(self):
         return iter(self.blocks)
