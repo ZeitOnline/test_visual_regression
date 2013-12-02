@@ -28,6 +28,7 @@
 
 					var parent = $( that ).parent();
 					parent.empty();
+					parent.css({ 'width': '100%', 'float': 'none' });
 					parent.prepend( playerObj );
 					window.brightcove.createExperiences();
 				}
@@ -65,6 +66,7 @@
 				}
 
 				if( !hasFlash ){
+					$( that ).find( ".figure__video__button" ).remove();
 					$( that ).find( "img" ).trigger( "click" );
 				}
 			},

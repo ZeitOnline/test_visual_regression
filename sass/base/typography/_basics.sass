@@ -38,9 +38,6 @@ figure
   margin-bottom: $medium
   margin-top: $medium
   clear: both
-  .figure__video__button
-    top: 40%
-    left: 45%
   .figure__media, img
     max-width: 100%
     width: 100%
@@ -105,9 +102,17 @@ figure
   &.figure-stamp, &.figure-stamp--right
     margin: $small auto
     overflow: hidden
-    .figure__video__button
-      top: 20%
-      left: 30%
+    .video__still
+      width: 40%
+      margin: 0 $gutter $gutter/2 0
+      float: left
+      .figure__video__button
+        width: 60px
+        height: 60px
+      .figure__media, img
+        width: 100%
+        float: none
+        margin: 0
     .figure__media, img
       margin: 0 $gutter $gutter/2 0
       max-width: em(240px)
@@ -119,6 +124,15 @@ figure
       max-width: em(240px)
       margin: $gutter $gutter $large 0
       float: left
+      .video__still
+        width: 100%
+        margin: 0
+        float: none
+        .figure__video__button
+          width: 90px
+          height: 90px
+        .figure__media, img
+          margin-bottom: $gutter
       .figure__media, img
         float: none
         margin-bottom: $gutter
