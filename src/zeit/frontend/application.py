@@ -1,4 +1,5 @@
 from babel.dates import format_datetime
+import logging
 import pkg_resources
 import pyramid.config
 import pyramid_jinja2
@@ -8,6 +9,9 @@ import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
+
+
+log = logging.getLogger(__name__)
 
 
 class Application(object):
@@ -34,6 +38,7 @@ class Application(object):
         self.configure_jinja()
         config.add_renderer('.html', pyramid_jinja2.renderer_factory)
 
+        log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
         config.add_static_view(name='css', path='zeit.frontend:css/')
         config.add_static_view(name='js', path='zeit.frontend:js/')
@@ -50,6 +55,7 @@ class Application(object):
             zeit.cms.repository.interfaces.IRepository)
 
     def configure_jinja(self):
+        log.debug('Configuring Jinja')
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
@@ -60,6 +66,7 @@ class Application(object):
         jinja.trim_blocks = True
 
     def configure_zca(self):
+        log.debug('Configuring ZCA')
         self.configure_product_config()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
