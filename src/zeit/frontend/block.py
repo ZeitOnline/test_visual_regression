@@ -87,16 +87,6 @@ class Citation(object):
         self.layout = model_block.layout
 
 
-# XXX not modelled in vivi
-class Advertising(object):
-
-    def __init__(self, xml):
-        self.type = unicode(xml.get('type'))
-
-    def __str__(self):
-        return self.type
-
-
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IVideo)
 class Video(object):
