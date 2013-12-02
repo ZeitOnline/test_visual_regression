@@ -4,22 +4,28 @@ $nav__logo-mobile-width: image-width('zeit-logo.png')/24
 $nav__logo-mobile-height: image-height('zeit-logo.png')/2
 $nav__logo-full-width: image-width('zeit-logo.png')/2
 $nav__logo-full-height: image-height('zeit-logo.png')/2
-$nav__service-primary-full-width: 250px
+$nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
 
 // mobile hover
 // click wherever to close menus
 // close menus when others open
-// spacing
+// spacing, colors
 // breadcrumb mobile finetuning
 // außerhalb von artikel
 // "Startseite Zeit Magazin" auf Desktop
-// longform adjustment
+// longform adjustment: content-breite 1420
 
 .main-nav
   position: relative
   width: 100%
+  max-width: $max-page-width - $page-padding*2
+  margin: 0 auto
   margin-bottom: $nav__row-height
+  &.is-full-width
+    max-width: none
+    margin-bottom: 0
+    z-index: 20
   +respond-min($nav__break__full-menu)
     margin-bottom: $nav__row-height * 2
     height: $nav__row-height * 2
@@ -28,9 +34,20 @@ $nav__section-border: 1px solid $grey--mid
     +link-colors($white, $white, $white, $white, $white)
     +tablet
     border-width: 0
+    +respond-min($nav__break__full-menu)
+      margin-bottom: $thin
     &.is-active
       opacity: 0.5
 
+.main-nav__wrap
+  +respond-min($nav__break__full-menu)
+    max-width: $max-page-width - $page-padding*2
+    margin: 0 auto
+    height: 100%
+    position: relative
+    .is-full-width &
+      border-left: $nav__section-border
+      border-right: $nav__section-border
 
 .main-nav__logo
   float: left
@@ -40,6 +57,7 @@ $nav__section-border: 1px solid $grey--mid
   background-color: $grey--mid-dark
   margin-right: 1px
   border: none
+  margin-bottom: 0 !important
   position: relative
   overflow: hidden
   +respond-min($nav__break__full-menu)
@@ -179,7 +197,7 @@ $nav__section-border: 1px solid $grey--mid
 .main-nav__section__content
   display: none
   padding: $small
-  &.is-always-open
+  &.is-always-open, &.is-open
     display: block
   a
     font-size: $font-s
@@ -189,6 +207,7 @@ $nav__section-border: 1px solid $grey--mid
   +respond-max($nav__break__full-menu)
     .main-nav__ressorts &
       +column-count(2)
+      +column-gap($compact)
   +respond-min($nav__break__full-menu)
     min-width: em(120px)
     background-color: $grey--mid-dark
@@ -198,12 +217,15 @@ $nav__section-border: 1px solid $grey--mid
   .main-nav__all-ressorts &,
   .main-nav__service &
     +column-count(2)
-    padding-bottom: $thin !important
+    +column-gap($compact)
+  .main-nav__all-ressorts &,
+  .main-nav__service &,
+  .main-nav__community &
+    padding-bottom: $micro !important
     .main-nav__section__content
       height: 100%
       +respond-min($nav__break__full-menu)
-        padding-bottom: $thin !important
-
+        padding-bottom: $micro !important
 
 =nav__open-submenu
   display: block
@@ -294,13 +316,54 @@ $nav__section-border: 1px solid $grey--mid
     white-space: nowrap
     .main-nav__section__content
       overflow: scroll
-      padding-left: $small
+      position: relative
+      height: 100%
+      margin-left: $fine
+      padding: 0
+      .main-nav__section__content__wrap
+        +transition(left, 0.2s)
+        position: absolute
+        left: 0
+        height: 100%
+        padding: $fine 0
+      .has-topic-slider &
+        padding-right: $medium*2
+        overflow: hidden
+        &:after
+          content: ''
+          position: absolute
+          height: 100%
+          width: $medium*2
+          background-color: $grey--mid-dark
+          z-index: 5
+          right: 0
     a
       +inline-block
       margin-right: $small
+      margin-top: $hair
+      margin-bottom: 0
       &:last-child
         margin-right: 0
 
+.main-nav__ressorts__slider-arrow--left,
+.main-nav__ressorts__slider-arrow--right
+  width: $medium
+  height: $nav__row-height
+  position: absolute
+  z-index: 10
+  background-position: center center
+  display: none
+  cursor: pointer
+  .has-topic-slider &
+    display: block
+  &.is-inactive
+    opacity: 0.5
+    cursor: default
+
+.main-nav__ressorts__slider-arrow--left
+  right: $medium
+.main-nav__ressorts__slider-arrow--right
+  right: 0
 
 .main-nav__service
   border-left: $nav__section-border
@@ -315,6 +378,19 @@ $nav__section-border: 1px solid $grey--mid
 
 
 .main-nav__search
+  input
+    +tablet
+    +inline-block
+    margin-top: $thin/2
+    vertical-align: middle
+    border: none
+    padding: $hair $thin
+    height: $nav__row-height - $thin
+  input[type=text]
+    background-color: $grey--mid
+  input[type=submit]
+    background-color: $black
+    color: $white
   +respond-min($nav__break__full-menu)
     position: absolute
     border-left: $nav__section-border
@@ -326,9 +402,10 @@ $nav__section-border: 1px solid $grey--mid
       left: auto !important
       top: 0 !important
       height: $nav__row-height
-      padding: $fine
+      padding: 0
+      padding-left: $thin/2
       border-left: $nav__section-border
-      right: $nav__row-height + $small
+      right: $nav__row-height + $micro
       white-space: nowrap
       border-bottom: $nav__section-border
     .main-nav__section__trigger
