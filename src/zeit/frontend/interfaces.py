@@ -13,7 +13,7 @@ class IPage(zope.interface.Interface):
     """
 
     number = zope.interface.Attribute(
-        'The position of this division in the article body (1-based)')
+        'The position of this division in the article body (0-based)')
     teaser = zope.interface.Attribute('Page teaser')
 
     def __iter__(self):
