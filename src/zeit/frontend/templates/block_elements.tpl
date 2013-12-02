@@ -163,7 +163,7 @@
         {% endif %}" data-video="{{obj.id}}">
             <div class="video__still">
                 <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
-                <span class="figure__video__button"></span>
+                <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
                     {{obj.description}} 

@@ -35,7 +35,7 @@
 			},
 			//add show/hide event
 			addEvent: function( that ){
-				$( that ).find( "img, .figure__video__button" ).on( "click", function( ev ){
+				$( that ).find( "img, .video__button" ).on( "click", function( ev ){
 					ev.preventDefault();
 					el.buildPlayer( this );
 				});
@@ -43,7 +43,7 @@
 			//add play button to image
 			addButton: function( that ){
 				if( el.id ){
-					$( that ).find( '.figure__video__button' ).addClass( 'icon-playbutton' );
+					$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
 				}
 			},
 			//grab meta data
@@ -66,7 +66,7 @@
 				}
 
 				if( !hasFlash ){
-					$( that ).find( ".figure__video__button" ).remove();
+					$( that ).find( ".video__button" ).remove();
 					$( that ).find( "img" ).trigger( "click" );
 				}
 			},

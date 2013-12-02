@@ -12,10 +12,10 @@ def test_video_html(selenium_driver, testserver):
             assert 'figure__media' == unicode(img.get_attribute("class"))
             assert 'figure__caption' == unicode(cap.get_attribute("class"))
             try:
-                assert 'figure__video__button' == unicode(
+                assert 'video__button' == unicode(
                     but.get_attribute("class"))
             except:
-                assert 'figure__video__button icon-playbutton' == unicode(
+                assert 'video__button icon-playbutton' == unicode(
                     but.get_attribute("class"))
             # after click
             img.click()
