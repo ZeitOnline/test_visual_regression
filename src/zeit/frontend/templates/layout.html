@@ -87,6 +87,7 @@
             </div>
             {% endif %}
 
+        {{ blocks.main_nav(view.context.main_nav_full_width) }}
         <main role="main" class="main">
             {%  block content %}{% endblock content %}
         </main>
