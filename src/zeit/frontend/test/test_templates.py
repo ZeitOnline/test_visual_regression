@@ -70,10 +70,15 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     css_index = 'article__subpage-index'
     markup_standart = '<div class="%s">' % css_index
 
+    fake_page = type('Dummy', (object,), {})
+    fake_page.number = 1
+    fake_page.teaser = 'Erster'
+
     # assert normal markup
-    markup = '%s<span><a href="#kapitel1">1</a></span></div>' % markup_standart
+    markup = '%s<span><a href="#kapitel1">1 -- Erster</a></span></div>' % (
+        markup_standart)
     lines = tpl.module.subpage_index(
-        ['1'], 'Title', 2, css_index, '').splitlines()
+        [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -81,10 +86,10 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert active markup
     css_active = 'article__subpage-active'
-    markup_active = '%s<span class="%s">1</span></div>' \
+    markup_active = '%s<span class="%s">1 -- Erster</span></div>' \
         % (markup_standart, css_active)
     lines_active = tpl.module.subpage_index(
-        ['1'], 'Title', 1, css_index, css_active).splitlines()
+        [fake_page], 'Title', 1, css_index, css_active).splitlines()
     output_active = ""
     for line in lines_active:
         output_active += line.strip()
