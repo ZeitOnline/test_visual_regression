@@ -51,13 +51,29 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     obj = [{'link': 'link', 'text': 'text'}]
 
-    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs" ' \
+    markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
         'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
         'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
         'Wo bin ich?</div><div class="breadcrumbs__list">' \
         '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
         '<a href="link">text</a></div></div></div></div>'
-    lines = tpl.module.breadcrumbs(obj).splitlines()
+    lines = tpl.module.breadcrumbs(obj, False).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    obj = [{'link': 'link', 'text': 'text'}]
+
+    markup = '<div class="breadcrumbs-wrap is-full-width"><div class="breadcrumbs" ' \
+        'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
+        'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
+        'Wo bin ich?</div><div class="breadcrumbs__list">' \
+        '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
+        '<a href="link">text</a></div></div></div></div>'
+    lines = tpl.module.breadcrumbs(obj, True).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
