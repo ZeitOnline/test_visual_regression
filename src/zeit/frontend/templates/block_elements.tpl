@@ -171,3 +171,26 @@
         </aside>
     {%- endif -%}
 {%- endmacro %}
+
+{% macro video(obj) -%}
+    {% if obj.id -%}
+        <figure class="
+        {% if obj.format == 'small' %}
+            figure-stamp
+        {% elif obj.format == 'large' %}
+            figure-full-width
+        {% elif obj.format == 'small-right' %}
+             figure-stamp--right
+        {% else %}
+             figure is-constrained is-centered
+        {% endif %}" data-video="{{obj.id}}">
+            <div class="video__still">
+                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+                <span class="video__button"></span>
+            </div>
+            <figcaption class="figure__caption">
+                    {{obj.description}} 
+            </figcaption>
+        </figure>
+    {%- endif %}
+{%- endmacro %}
