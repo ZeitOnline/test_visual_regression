@@ -51,13 +51,29 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('../templates/block_elements.tpl')
     obj = [{'link': 'link', 'text': 'text'}]
 
-    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs" ' \
+    markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
         'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
         'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
         'Wo bin ich?</div><div class="breadcrumbs__list">' \
         '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
         '<a href="link">text</a></div></div></div></div>'
-    lines = tpl.module.breadcrumbs(obj).splitlines()
+    lines = tpl.module.breadcrumbs(obj, False).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    obj = [{'link': 'link', 'text': 'text'}]
+
+    markup = '<div class="breadcrumbs-wrap is-full-width"><div class="breadcrumbs" ' \
+        'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
+        'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
+        'Wo bin ich?</div><div class="breadcrumbs__list">' \
+        '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
+        '<a href="link">text</a></div></div></div></div>'
+    lines = tpl.module.breadcrumbs(obj, True).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -239,3 +255,44 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
     data = {'name': 'abc', 'href': 'xyz'}
     assert markup == tpl.module.authorlink(data).strip()
+
+
+def test_macro_video_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+
+    # assert default video
+    obj = {'id': '1', 'video_still': 'pic.jpg',
+           'description': 'test', 'format': ''}
+    fig = '<figure class="figure is-constrained is-centered" data-video="1">'
+    img = '<img class="figure__media" src="pic.jpg">'
+    cap = '<figcaption class="figure__caption">test</figcaption>'
+    lines = tpl.module.video(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert fig in output
+    assert img in output
+    assert cap in output
+
+    #assert different formates
+    obj['format'] = 'small'
+    fig = '<figure class="figure-stamp" data-video="1">'
+    lines = tpl.module.video(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert fig in output
+    obj['format'] = 'small-right'
+    fig = '<figure class="figure-stamp--right" data-video="1">'
+    lines = tpl.module.video(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert fig in output
+    obj['format'] = 'large'
+    fig = '<figure class="figure-full-width" data-video="1">'
+    lines = tpl.module.video(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert fig in output

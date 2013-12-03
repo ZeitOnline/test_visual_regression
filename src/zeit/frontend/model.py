@@ -64,11 +64,11 @@ class Content (Resource):
         self.teaser_title = unicode(article_tree.getroot().teaser.title)
         self.teaser_text = unicode(article_tree.getroot().teaser.text)
         # publish date = shown in article and meta name=date
-        pdate = self.__construct_publish_date(root)
+        pdate = self._construct_publish_date(root)
         self.publish_date = iso8601.parse_date(pdate)
         self.publish_date_meta = pdate
         # last modified date, shown in meta name=last_modified
-        ldate = self.__get_date_element(root, 'date-last-modified')
+        ldate = self._get_date_element(root, 'date-last-modified')
         self.last_modified_date = ldate
         self._construct_tags(root)
         self.rankedTags = self._construct_tags(root)
@@ -112,16 +112,16 @@ class Content (Resource):
         except AttributeError:
             return
 
-    def __get_date_element(self, root, date_element):
+    def _get_date_element(self, root, date_element):
         date = "//attribute[@name='%s']" % date_element
         if root.head.xpath(date):
             return root.head.xpath(date).pop().text
 
-    def __construct_publish_date(self, root):
-        lsp_date = self.__get_date_element(root, 'last-semantic-published')
-        lsc_date = self.__get_date_element(root, 'last-semantic-change')
-        dfr_date = self.__get_date_element(root, 'date_first_released')
-        dlm_date = self.__get_date_element(root, 'date-last-modified')
+    def _construct_publish_date(self, root):
+        lsp_date = self._get_date_element(root, 'last-semantic-published')
+        lsc_date = self._get_date_element(root, 'last-semantic-change')
+        dfr_date = self._get_date_element(root, 'date_first_released')
+        dlm_date = self._get_date_element(root, 'date-last-modified')
 
         if lsp_date is not None:
             return lsp_date
@@ -229,7 +229,6 @@ class Page(object):
 
     def _extract_items(self, page_xml):
         content = []
-        add_meta = False
 
         for item in page_xml.iterchildren():
             if item.tag == 'p':
@@ -242,14 +241,9 @@ class Page(object):
                 content.append(Citation(item))
             if item.tag == 'advertising':
                 content.append(Advertising(item))
+            if item.tag == 'video':
+                content.append(Video(item))
         return content
-
-
-@implementer(interfaces.IMetaBox)
-class Metabox(object):
-
-    def __init__(self):
-        pass
 
 
 @implementer(interfaces.IPara)
@@ -271,6 +265,41 @@ class Img(object):
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = xml.get('layout')
+
+
+@implementer(interfaces.IVideo)
+class Video(object):
+
+    def __init__(self, xml):
+        self.format = xml.get('format')
+        self.is_empty = xml.get('is_empty')
+        self.expires = xml.get('expires')
+        self._construct_video_meta(xml.get('href'))
+
+    def _construct_video_meta(self, href):
+
+        href = href.replace('http://xml.zeit.de', '')
+        path = 'data%s' % href
+
+        try:
+            video_path = pkg_resources.resource_filename(__name__, path)
+            video_tree = objectify.parse(video_path)
+            video_root = video_tree.getroot()
+
+            video_avail = video_root.head.xpath(
+                "//attribute[@name='type']")
+
+            if video_avail.pop().text == 'video':
+                self.description = unicode(video_root.body.subtitle)
+                self.title = unicode(video_root.body.title)
+                self.supertitle = unicode(video_root.body.supertitle)
+                self.id = href.split('/').pop()
+                video_still = video_root.head.xpath(
+                    "//attribute[@name='video_still']")
+                if video_still:
+                    self.video_still = video_still.pop().text
+        except:
+            return
 
 
 @implementer(interfaces.IIntertitle)
@@ -301,13 +330,6 @@ class Advertising(object):
 
     def __str__(self):
         return self.type
-
-
-@implementer(interfaces.IVideo)
-class Video(object):
-
-    def __init__(self, xml):
-        pass
 
 
 @implementer(interfaces.ITags)
