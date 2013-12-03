@@ -10,7 +10,7 @@
 			buildPlayer: function( that ){
 
 				if( el.id ){
-					var playerObj = '<div class="video__wrapper"><div style="display:none"></div>' +
+					var playerObj = '<div class="video__wrapper" data-video='+el.id+'><div style="display:none"></div>' +
 					'<object id="myExperience' +el.id+ '" class="BrightcoveExperience">' +
 					'<param name="htmlFallback" value="true" />' +
 					'<param name="bgcolor" value="#FFFFFF" />' +
@@ -33,10 +33,15 @@
 					window.brightcove.createExperiences();
 				}
 			},
+			//grab meta data
+			buildId: function( that ){
+				el.id = $( that ).closest( "figure[data-video]" ).attr( "data-video" );
+			},
 			//add show/hide event
 			addEvent: function( that ){
 				$( that ).find( "img, .video__button" ).on( "click", function( ev ){
 					ev.preventDefault();
+					el.buildId( this );
 					el.buildPlayer( this );
 				});
 			},
@@ -45,10 +50,6 @@
 				if( el.id ){
 					$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
 				}
-			},
-			//grab meta data
-			buildId: function( that ){
-				el.id = $( that ).attr( "data-video" );
 			},
 			//trigger player if flash isnt enabled, to avoid douple tap 
 			testForFlash: function( that ){
