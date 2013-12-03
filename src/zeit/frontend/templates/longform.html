@@ -3,12 +3,6 @@
 {% block content %}
 
 	<article class="article article--longform">
-		{{ blocks.breadcrumbs([
-        {'text': 'Start', 'link': 'http://zeit.de'},
-        {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},
-        {'text': 'Lebensart', 'link': 'http://zeit.de/magazin/mode'},
-        {'text': 'Kann Leipzig Hypezig überleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}
-    ]) }}
 		<div class="article__wrap">
 			<div class="article__head-wrap">
   				{% if view.header_img %}
@@ -32,7 +26,7 @@
 			</div>
 
 			<div class="article__body">
-				
+
         {% for page in view.pages %}
           <section class="article__page">
             {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}

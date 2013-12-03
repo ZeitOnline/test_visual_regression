@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js'
 	};
-	
+
 
 	// configuration
 	grunt.initConfig({
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 					environment: 'development',
 					fontsPath: project.codeDir + 'fonts',
 					httpPath: "/", // todo: adjust this later in project
-					imagesPath: "img", // todo: adjust this later in project
+					imagesPath: "src/zeit/frontend/img", // todo: adjust this later in project
 					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
 					sassDir: 'sass',
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
 		grunticon: {
       dist: {
 	      options: {
-		      src: "sass/icons", 
+		      src: "sass/icons",
 		      dest: project.codeDir + "/css/icons"
 		    }
 		  }
