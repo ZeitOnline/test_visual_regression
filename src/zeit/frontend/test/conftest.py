@@ -1,7 +1,7 @@
-import pytest
-from selenium import webdriver
 from pytest_localserver.http import WSGIServer
-from zeit.frontend.application import factory
+from selenium import webdriver
+import pytest
+import zeit.frontend.application
 
 settings = {
     'pyramid.reload_templates': 'false',
@@ -18,8 +18,13 @@ browsers = {
 
 
 @pytest.fixture(scope='session')
-def testserver(request):
-    server = WSGIServer(application=factory(settings), port="6543")
+def application():
+    return zeit.frontend.application.Application()(settings)
+
+
+@pytest.fixture(scope='session')
+def testserver(application, request):
+    server = WSGIServer(application=application, port="6543")
     server.start()
     request.addfinalizer(server.stop)
     return server
