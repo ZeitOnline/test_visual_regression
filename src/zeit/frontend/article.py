@@ -1,13 +1,12 @@
+from grokcore.component import adapter, implementer
 from zeit.frontend.block import IFrontendBlock
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
-import zope.component
 
 
+@implementer(zeit.frontend.interfaces.IPage)
 class Page(object):
-
-    zope.interface.implements(zeit.frontend.interfaces.IPage)
 
     def __init__(self, division):
         self.number = division.number
@@ -23,8 +22,8 @@ class Page(object):
         return iter(self.blocks)
 
 
-@zope.component.adapter(zeit.content.article.interfaces.IArticle)
-@zope.interface.implementer(zeit.frontend.interfaces.IPages)
+@adapter(zeit.content.article.interfaces.IArticle)
+@implementer(zeit.frontend.interfaces.IPages)
 def pages_of_article(context):
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     # IEditableBody excludes the first division since it cannot be edited
@@ -41,7 +40,3 @@ def pages_of_article(context):
         else:
             page.append(block)
     return pages
-
-
-def configure_components():
-    zope.component.provideAdapter(pages_of_article)

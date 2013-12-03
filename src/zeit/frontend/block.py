@@ -1,7 +1,6 @@
 # coding: utf-8
 from lxml import etree
-from zope.component import adapter
-from zope.interface import implementer
+from grokcore.component import adapter, implementer
 import zeit.content.article.edit.interfaces
 import zope.interface
 
@@ -123,11 +122,3 @@ def _inline_html(xml):
         </xsl:stylesheet>''')
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
-
-
-def configure_components():
-    zope.component.provideAdapter(Paragraph)
-    zope.component.provideAdapter(Image)
-    zope.component.provideAdapter(Intertitle)
-    zope.component.provideAdapter(Citation)
-    zope.component.provideAdapter(Video)

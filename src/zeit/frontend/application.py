@@ -1,5 +1,7 @@
 from babel.dates import format_datetime
+import grokcore.component.zcml
 import logging
+import martian
 import pkg_resources
 import pyramid.config
 import pyramid_jinja2
@@ -15,6 +17,12 @@ log = logging.getLogger(__name__)
 
 
 class Application(object):
+
+    DONT_GROK = (
+        'conftest',
+        'test',
+        'testing',
+    )
 
     def __init__(self):
         self.settings = {}
@@ -48,9 +56,6 @@ class Application(object):
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
-        # XXX use grokcore.component instead
-        zeit.frontend.block.configure_components()
-        zeit.frontend.article.configure_components()
 
     def get_repository(self, request):
         return zope.component.getUtility(
@@ -73,6 +78,12 @@ class Application(object):
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
+        # can't use <grok> directive since we can't configure excludes there
+        martian.grok_dotted_name(
+            'zeit.frontend',
+            grokcore.component.zcml.the_module_grokker,
+            exclude_filter=lambda name: name in set(self.DONT_GROK),
+            config=context)
         context.execute_actions()
 
     def configure_product_config(self):

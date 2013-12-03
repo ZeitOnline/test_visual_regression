@@ -6,8 +6,10 @@ setup(
 
     install_requires=[
         'Babel',
+        'grokcore.component',
         'iso8601',
         'lxml',
+        'martian',
         'pyramid',
         'pyramid_jinja2',
         'setuptools',
