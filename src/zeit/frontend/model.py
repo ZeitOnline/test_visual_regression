@@ -47,7 +47,6 @@ class Content (Resource):
     genre = ''
     source = ''
     subpage_index = []
-    video = []
 
     def __json__(self, request):
         return dict((name, getattr(self, name)) for name in dir(self)
