@@ -22,13 +22,13 @@ class Base(object):
 
 
 _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo': (
+               'lebensart': (
                    'ZEIT Magazin',
                    'http://www.zeit.de/magazin/index',
                    'myid2',
                ),
-               'lebensart': (
-                   'ZEIT Magazin',
+               'mode': (
+                   'Mode',
                    'http://www.zeit.de/magazin/lebensart/index',
                    'myid3',
                ), }
