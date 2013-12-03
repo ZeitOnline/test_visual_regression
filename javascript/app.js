@@ -12,9 +12,10 @@ require.config({
 	}
 });
 
-require(['modules/fontloader', 'modules/breadcrumbs', 'modules/plugins/jquery.switchvideo'],
-	function( fontloader, breadcrumbs ) {
-		fontloader.init();
-		breadcrumbs.init();
+require(['modules/fontloader', 'modules/breadcrumbs', 'modules/main-nav', 'modules/plugins/jquery.switchvideo'],
+  function( fontloader, breadcrumbs, main_nav ) {
+    fontloader.init();
+    main_nav.init();
+    breadcrumbs.init();
 		$( "figure[data-video]" ).switchVideo();
 });

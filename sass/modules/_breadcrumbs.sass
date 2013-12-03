@@ -1,34 +1,38 @@
 .breadcrumbs-wrap
-  padding: $micro
-  +respond-max($break-1)
-    display: none
+  +respond-min($nav__break__full-menu)
+    padding: $micro
+    &.is-full-width
+      position: absolute
+      z-index: 3
+      .breadcrumbs
+        background-color: rgba($white, 0.75)
 
 .breadcrumbs
-  +inline-block
-  margin-bottom: $small
-  background-color: $grey--light
+  +respond-min($nav__break__full-menu)
+    +inline-block
+    margin-bottom: $small
+    background-color: $grey--light
   &.is-active, .no-js &
     width: 100%
 
 .breadcrumbs__trigger
   +tablet
   +inline-block
+  +no-user-select
   cursor: pointer
   font-size: $font-xs
-  color: $grey
   padding: $micro $thin
   padding-top: 0
   margin: $micro $micro 0 $micro
-  -webkit-touch-callout: none
-  -webkit-user-select: none
-  -khtml-user-select: none
-  -moz-user-select: none
-  -ms-user-select: none
-  user-select: none
+  color: $grey
+  +respond-min($nav__break__full-menu)
+  +respond-max($nav__break__full-menu)
+    display: none
   &:after
     content: ' ›'
-    font-size: $font-xl
-    margin-left: $micro
+    +respond-min($nav__break__full-menu)
+      font-size: $font-xl
+    margin-right: $micro
   .no-js &
     display: none
   .is-active &
@@ -44,20 +48,23 @@
   padding-top: 0
   margin: $micro $micro 0 $micro
   list-style-type: none
-  font-size: $font-xs
-  .js &
-    display: none
+  +respond-min($nav__break__full-menu)
+    font-size: $font-xs
+    .js &
+      display: none
   .is-active &
     +inline-block
     margin-left: $small
 
 .breadcrumbs__list__item
-  display: inline
+  display: inline !important
   padding: 0
   margin: 0
   color: $grey
   a
-    +link-colors($grey, $grey, $grey, $grey, $grey)
+    display: inline !important
+    +respond-min($nav__break__full-menu)
+      +link-colors($grey, $grey, $grey, $grey, $grey)
     border-bottom: none
     border-bottom-width: 0
     padding: 0

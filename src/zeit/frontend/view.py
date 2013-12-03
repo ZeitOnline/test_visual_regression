@@ -30,8 +30,10 @@ class Article(Base):
 
     def __call__(self):
         self.context.advertising_enabled = True
+        self.context.main_nav_full_width = False
         if self.context.template == 'longform':
             self.context.advertising_enabled = False
+            self.context.main_nav_full_width = True
             return render_to_response('templates/longform.html',
                                       {"view": self},
                                       request=self.request)
