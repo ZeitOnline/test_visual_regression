@@ -7,23 +7,28 @@ $nav__logo-full-height: image-height('zeit-logo.png')/2
 $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
 
-// mobile hover
-// click wherever to close menus
-// "Startseite Zeit Magazin" auf Desktop
-// "Zeit Magazin" statt Alle Ressorts auf Desktop
-// menu head auf desktop cursor default
-// search on mobile
+.is-small-screen-only
+  display: block !important
+  +respond-min($nav__break__full-menu)
+    display: none !important
+
+.is-large-screen-only
+  display: none !important
+  +respond-min($nav__break__full-menu)
+    display: block !important
 
 .main-nav
   position: relative
   width: 100%
   max-width: $max-page-width - $page-padding*2
   margin: 0 auto
+  margin-top: $small
   margin-bottom: $nav__row-height
   &.is-full-width
     max-width: none
     margin-bottom: 0
     z-index: 20
+    margin-top: 0
   +respond-min($nav__break__full-menu)
     margin-bottom: $nav__row-height * 2
     height: $nav__row-height * 2
@@ -102,6 +107,7 @@ $nav__section-border: 1px solid $grey--mid
   text-align: right
   +respond-min($nav__break__full-menu)
     border-left: $nav__section-border
+    cursor: default
 
 
 .main-nav__menu__head__headline
@@ -170,9 +176,12 @@ $nav__section-border: 1px solid $grey--mid
   display: block
   letter-spacing: 1px
   padding: $small
-  border-bottom: $nav__section-border !important
-  border-top: $nav__section-border !important
-  border-top-width: 2px !important
+  +respond-max($nav__break__full-menu)
+    border-bottom: $nav__section-border !important
+    border-top: $nav__section-border !important
+    border-top-width: 2px !important
+  +respond-min($nav__break__full-menu)
+    padding-bottom: $small !important
 
 
 .main-nav__section
@@ -236,7 +245,7 @@ $nav__section-border: 1px solid $grey--mid
       padding: $fine
   .main-nav__all-ressorts &,
   .main-nav__service &
-    a
+    .main-nav__section__content__wrap a
       +inline-block
       vertical-align: top
       width: 48%
@@ -509,6 +518,7 @@ $nav__section-border: 1px solid $grey--mid
     .main-nav__section__content
       &:after
         background: none
+        width: 0
 
 
 .main-nav__community

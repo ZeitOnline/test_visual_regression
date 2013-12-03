@@ -12,11 +12,13 @@ define(['jquery'], function() {
   var $ressort_slider_strip;
 
   var init_mobile_nav = function() {
+    // enable hamburger
     $main_nav_trigger.click(function(e) {
       e.preventDefault();
       $main_nav_content.toggle();
     });
 
+    // enable accordeons
     $main_nav_section_triggers.click(function(e) {
       e.preventDefault();
       var $current_content = $(this).next();
@@ -48,17 +50,27 @@ define(['jquery'], function() {
   };
 
   var init_desktop_nav = function() {
+    // disable hover fallback
     $main_nav.removeClass('has-hover');
+
+    // enable drop downs
     $main_nav_section_triggers.click(function(e) {
       e.preventDefault();
 
+      // close all other menus
       $main_nav_section_contents.not($(this).next()).removeClass('is-open');
       $main_nav_section_triggers.not($(this)).removeClass('is-open');
       $main_nav_sections.not($(this).parent()).removeClass('has-open-menu');
 
+      // open correct one
       $(this).toggleClass('is-active').next().toggleClass('is-open');
       $(this).parent().toggleClass('has-open-menu');
     });
+
+    // move current ressort link to all-ressorts drop down
+    $('#js-main-nav-all-ressorts-content').prepend($('#js-main-nav-current-ressort').detach());
+
+    // init topics/ressort slider if necessary
     init_desktop_ressort_slider();
   };
 

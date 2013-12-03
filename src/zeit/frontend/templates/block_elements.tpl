@@ -13,7 +13,7 @@
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
-                    <a href="#" class="main-nav__menu__content__current-ressort">Startseite ZEIT Magazin</a>
+                    <a href="#" class="main-nav__menu__content__current-ressort" id="js-main-nav-current-ressort">Startseite ZEIT Magazin</a>
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__section__content is-always-open" id="js-main-nav-ressorts-slider-container">
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
@@ -30,20 +30,25 @@
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
-                        <span class="main-nav__section__trigger icon-arrow-down">Alle Ressorts</span>
-                        <div class="main-nav__section__content">
-                            <a href="#">Politik</a>
-                            <a href="#">Wirtschaft</a>
-                            <a href="#">Gesellschaft</a>
-                            <a href="#">Kultur</a>
-                            <a href="#">Wissen</a>
-                            <a href="#">Digital</a>
-                            <a href="#">Studium</a>
-                            <a href="#">Karriere</a>
-                            <a href="#" class="is-active">Magazin</a>
-                            <a href="#">Reisen</a>
-                            <a href="#">Mobilität</a>
-                            <a href="#">Sport</a>
+                        <span class="main-nav__section__trigger icon-arrow-down">
+                            <span class="is-small-screen-only">Alle Ressorts</span>
+                            <span class="is-large-screen-only">ZEIT Magazin</span>
+                        </span>
+                        <div class="main-nav__section__content" id="js-main-nav-all-ressorts-content">
+                            <div class="main-nav__section__content__wrap">
+                                <a href="#">Politik</a>
+                                <a href="#">Wirtschaft</a>
+                                <a href="#">Gesellschaft</a>
+                                <a href="#">Kultur</a>
+                                <a href="#">Wissen</a>
+                                <a href="#">Digital</a>
+                                <a href="#">Studium</a>
+                                <a href="#">Karriere</a>
+                                <a href="#" class="is-active">Magazin</a>
+                                <a href="#">Reisen</a>
+                                <a href="#">Mobilität</a>
+                                <a href="#">Sport</a>
+                            </div>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
@@ -56,18 +61,20 @@
                     <div class="main-nav__section main-nav__service">
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
-                            <a href="#">ZEITCampus</a>
-                            <a href="#">ZEITGeschichte</a>
-                            <a href="#">ZEITWissen</a>
-                            <a href="#">Partnersuche</a>
-                            <a href="#">Immobilien</a>
-                            <a href="#">Automarkt</a>
-                            <a href="#">Jobs</a>
-                            <a href="#">Reiseangebote</a>
-                            <a href="#">Apps</a>
-                            <a href="#">Audio</a>
-                            <a href="#">Archiv</a>
-                            <a href="#">Spiele</a>
+                            <div class="main-nav__section__content__wrap">
+                                <a href="#">ZEITCampus</a>
+                                <a href="#">ZEITGeschichte</a>
+                                <a href="#">ZEITWissen</a>
+                                <a href="#">Partnersuche</a>
+                                <a href="#">Immobilien</a>
+                                <a href="#">Automarkt</a>
+                                <a href="#">Jobs</a>
+                                <a href="#">Reiseangebote</a>
+                                <a href="#">Apps</a>
+                                <a href="#">Audio</a>
+                                <a href="#">Archiv</a>
+                                <a href="#">Spiele</a>
+                            </div>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__search">
