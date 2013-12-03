@@ -3,9 +3,10 @@ from zeit.frontend.block import IFrontendBlock
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
+import zope.interface
 
 
-@implementer(zeit.frontend.interfaces.IPage)
+@zope.interface.implementer(zeit.frontend.interfaces.IPage)
 class Page(object):
 
     def __init__(self, division):
