@@ -102,6 +102,17 @@ figure
   &.figure-stamp, &.figure-stamp--right
     margin: $small auto
     overflow: hidden
+    .video__still
+      width: 40%
+      margin: 0 $gutter $gutter/2 0
+      float: left
+      .video__button
+        width: 60px
+        height: 60px
+      .figure__media, img
+        width: 100%
+        float: none
+        margin: 0
     .figure__media, img
       margin: 0 $gutter $gutter/2 0
       max-width: em(240px)
@@ -113,6 +124,15 @@ figure
       max-width: em(240px)
       margin: $gutter $gutter $large 0
       float: left
+      .video__still
+        width: 100%
+        margin: 0
+        float: none
+        .video__button
+          width: 100px
+          height: 100px
+        .figure__media, img
+          margin-bottom: $gutter
       .figure__media, img
         float: none
         margin-bottom: $gutter
