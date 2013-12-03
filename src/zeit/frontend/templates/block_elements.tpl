@@ -9,11 +9,11 @@
             </a>
             <div class="main-nav__menu">
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
-                    <div class="main-nav__menu__head__headline">Zeit Magazin</div>
+                    <div class="main-nav__menu__head__headline">ZEIT Magazin</div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
-                    <a href="#" class="main-nav__menu__content__current-ressort">Startseite Zeit Magazin</a>
+                    <a href="#" class="main-nav__menu__content__current-ressort">Startseite ZEIT Magazin</a>
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__section__content is-always-open" id="js-main-nav-ressorts-slider-container">
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
@@ -56,19 +56,25 @@
                     <div class="main-nav__section main-nav__service">
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
-                            <a href="#">Service1</a>
-                            <a href="#">Service2</a>
-                            <a href="#">Service3</a>
-                            <a href="#">Service4</a>
-                            <a href="#">Service5</a>
-                            <a href="#">Service6</a>
+                            <a href="#">ZEITCampus</a>
+                            <a href="#">ZEITGeschichte</a>
+                            <a href="#">ZEITWissen</a>
+                            <a href="#">Partnersuche</a>
+                            <a href="#">Immobilien</a>
+                            <a href="#">Automarkt</a>
+                            <a href="#">Jobs</a>
+                            <a href="#">Reiseangebote</a>
+                            <a href="#">Apps</a>
+                            <a href="#">Audio</a>
+                            <a href="#">Archiv</a>
+                            <a href="#">Spiele</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__search">
                         <span class="main-nav__section__trigger icon-search">Suche</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__search__form">
-                                <input class="main-nav__search__input" type="text" placeholder="Stichworte">
+                                <input class="main-nav__search__input" type="text" size="20" placeholder="Suchbegriff …">
                                 <input class="main-nav__search__submit" type="submit" value="Suchen">
                             </div>
                         </div>

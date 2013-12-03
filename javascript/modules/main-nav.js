@@ -4,6 +4,7 @@ define(['jquery'], function() {
 
   var $main_nav_trigger = $('#js-main-nav-trigger');
   var $main_nav_content = $('#js-main-nav-content');
+  var $main_nav_sections = $('.main-nav__section');
   var $main_nav_section_triggers = $('.main-nav__section__trigger');
   var $main_nav_section_contents = $('.main-nav__section__content:not(.is-always-open)');
   var $main_nav = $('#js-main-nav');
@@ -32,7 +33,7 @@ define(['jquery'], function() {
       $main_nav.addClass('has-topic-slider');
       var $left_arrow = $ressort_slider_container.find('.main-nav__ressorts__slider-arrow--left');
       var $right_arrow = $ressort_slider_container.find('.main-nav__ressorts__slider-arrow--right');
-      var move_by = hidden_offset + $left_arrow.width()*2;
+      var move_by = hidden_offset + $left_arrow.width()*3;
       $left_arrow.click(function() {
         $ressort_slider_strip.css('left', 0);
         $right_arrow.removeClass('is-inactive');
@@ -50,6 +51,11 @@ define(['jquery'], function() {
     $main_nav.removeClass('has-hover');
     $main_nav_section_triggers.click(function(e) {
       e.preventDefault();
+
+      $main_nav_section_contents.not($(this).next()).removeClass('is-open');
+      $main_nav_section_triggers.not($(this)).removeClass('is-open');
+      $main_nav_sections.not($(this).parent()).removeClass('has-open-menu');
+
       $(this).toggleClass('is-active').next().toggleClass('is-open');
       $(this).parent().toggleClass('has-open-menu');
     });

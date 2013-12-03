@@ -3,7 +3,7 @@
 define(['jquery'], function() {
 
 	var init = function() {
-		if (window.innerWidth > 768) {
+		if (window.innerWidth >= 768) {
 			var trigger_alternate_caption;
 			$(document.getElementById('js-breadcrumbs__trigger')).click(function() {
 				trigger_alternate_caption = $(this).data('alternate');
