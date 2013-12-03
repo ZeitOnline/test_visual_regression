@@ -100,6 +100,10 @@ class Article(Base):
     def location(self):
         return self.context.location
 
+    @property
+    def focussed_nextread(self):
+        return self.context.focussed_nextread
+
 
 class Gallery(Base):
     pass

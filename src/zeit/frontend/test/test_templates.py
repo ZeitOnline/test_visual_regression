@@ -9,10 +9,7 @@ def jinja2_env(request):
     config = pyramid.config.Configurator()
     config.include('pyramid_jinja2')
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
-    utility.tests['elem'] = zeit.frontend.application.is_block
-    utility.filters['format_date'] = zeit.frontend.application.format_date
-    utility.filters['translate_url'] = zeit.frontend.application.translate_url
-    utility.trim_blocks = True
+    utility = zeit.frontend.application.configure_jinja2(utility)
     return utility
 
 
@@ -255,6 +252,35 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
     data = {'name': 'abc', 'href': 'xyz'}
     assert markup == tpl.module.authorlink(data).strip()
+
+
+def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    nextread = {'supertitle': "SUPER",
+                'title': "TITLE",
+                'image': "http://images.zeit.de/k-b/k-b-540x304.jpg",
+                'layout': "base",
+                'href': "LINK",
+                'bu': "BU",
+                'copyright': "CP"}
+    m = '<aside class="article__nextread nextread-base is-centered">'
+    i = 'title="BU" alt="BU" src="http://images.zeit.de/k-b/k-b-540x304.jpg">'
+    s = '<span class="article__nextread__supertitle">SUPER</span>'
+    t = '<span class="article__nextread__title">TITLE</span>'
+    l = '<a title="SUPER: TITLE" href="LINK">'
+    assert m in tpl.module.focussed_nextread(nextread)
+    assert i in tpl.module.focussed_nextread(nextread)
+    assert s in tpl.module.focussed_nextread(nextread)
+    assert t in tpl.module.focussed_nextread(nextread)
+    assert l in tpl.module.focussed_nextread(nextread)
+    nextread['layout'] = "maximal"
+    m = '<aside class="article__nextread nextread-maximal is-centered">'
+    bi = '<div class="article__nextread__body is-centered" style='
+    assert m in tpl.module.focussed_nextread(nextread)
+    assert bi in tpl.module.focussed_nextread(nextread)
+    nextread['layout'] = "minimal"
+    m = '<aside class="article__nextread nextread-minimal is-centered">'
+    assert m in tpl.module.focussed_nextread(nextread)
 
 
 def test_macro_video_should_produce_markup(jinja2_env):

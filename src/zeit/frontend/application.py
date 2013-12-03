@@ -15,12 +15,7 @@ def factory(global_config, **settings):
                                          root_factory=root)
     config.include('pyramid_jinja2')
     utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
-    utility.globals.update(zeit.frontend.navigation.get_sets())
-    utility.tests['elem'] = is_block
-    utility.filters['format_date'] = format_date
-    utility.filters['block_type'] = block_type
-    utility.filters['translate_url'] = translate_url
-    utility.trim_blocks = True
+    utility = configure_jinja2(utility)
     config.add_renderer('.html', pyramid_jinja2.renderer_factory)
     config.add_route('json', 'json/*traverse')
     config.add_static_view(name='css', path='zeit.frontend:css/')
@@ -30,6 +25,17 @@ def factory(global_config, **settings):
     config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
     config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
     return config.make_wsgi_app()
+
+
+def configure_jinja2(jinja2_env):
+    jinja2_env.tests['elem'] = is_block
+    jinja2_env.filters['format_date'] = format_date
+    jinja2_env.filters['block_type'] = block_type
+    jinja2_env.filters['translate_url'] = translate_url
+    jinja2_env.filters['base2src'] = baseId_to_src
+    jinja2_env.globals.update(zeit.frontend.navigation.get_sets())
+    jinja2_env.trim_blocks = True
+    return jinja2_env
 
 
 def is_block(obj, b_type):
@@ -59,3 +65,11 @@ def format_date(obj, type):
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
         return format_datetime(obj, format, locale="de_De")
+
+
+def baseId_to_src(obj):
+    # Hilfsfunktion bis zum File-Connector, oder Ausbau derselben
+    # es werden immer jpgs und immer in 540x304
+    path = obj.rpartition("/")[0]
+    trunk = path.rpartition("/")[2]
+    return path.replace('xml.', 'images.') + "/" + trunk + "-540x304.jpg"

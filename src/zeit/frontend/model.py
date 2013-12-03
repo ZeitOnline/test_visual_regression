@@ -31,7 +31,7 @@ def get_root(request):
     return Directory(pkg_resources.resource_filename(__name__, 'data'))
 
 
-class Content (Resource):
+class Content(Resource):
     title = ''
     subtitle = ''
     teaser_title = ''
@@ -76,6 +76,7 @@ class Content (Resource):
         self.genre = self._construct_genre(root)
         self.location = self._construct_location(root)
         self.author = self._construct_author(root)
+        self.focussed_nextread = self._construct_focussed_nextread(root)
 
     @property
     def template(self):
@@ -102,6 +103,31 @@ class Content (Resource):
         date = "//attribute[@name='%s']" % date_element
         if root.head.xpath(date):
             return root.head.xpath(date).pop().text
+
+    def _construct_focussed_nextread(self, root):
+        try:
+            xml = root.head.references.reference[0]
+            nextread = dict([('supertitle', unicode(xml.supertitle)),
+                            ('title', unicode(xml.title)),
+                            ('href', xml.get('href'))])
+            if xml.image is not None:
+                bu = xml.xpath("image/bu")
+                if len(bu) > 0:
+                    nextread['bu'] = bu[0]
+                cp = xml.xpath("image/copyright")
+                if len(cp) > 0:
+                    nextread['copyright'] = cp[0]
+                i = xml.image.get("base-id").rpartition("/")[0]
+                trunk = i.rpartition("/")[2]
+                nextread['image'] =\
+                    i.replace('xml.', 'images.') + "/" + trunk + "-540x304.jpg"
+            layout = "base"
+            if xml.get("layout") is not None:
+                layout = xml.get("layout")
+            nextread['layout'] = layout
+            return nextread
+        except AttributeError:
+            return
 
     def _construct_publish_date(self, root):
         lsp_date = self._get_date_element(root, 'last-semantic-published')
