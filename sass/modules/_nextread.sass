@@ -1,0 +1,150 @@
+$nextread-background: #f7f7f7
+$nextread-image-width: 260px
+$nextread-image-height: 172px
+$nextread-minimal-height: em(165px)
+$nextread-maximal-height: em(320px)
+$color-nextread: #606060
+
+%link-grey
+	a
+		+link
+			color: $color-nextread
+			text-decoration: none
+			span
+				color: $color-nextread
+		+on-interaction
+			color: $color-nextread
+			text-decoration: underline
+			span
+				color: $color-nextread
+				text-decoration: underline
+
+%link-white
+	a
+		+link
+			color: $white
+			text-decoration: none
+			span
+				color: $white
+		+on-interaction
+			color: $white
+			text-decoration: underline
+			span
+				color: $white
+				text-decoration: underline
+
+%nextread-text
+	.article__nextread__supertitle
+		+respond-min($break-1)
+			text-align: center
+	.article__nextread__title
+		+respond-min($break-1)
+			font-size: $font-ml
+			text-align: center
+		+respond-min($break-2)
+			+padded
+			font-size: $font-xxl
+
+.article__nextread
+	@extend %meta
+	background: $nextread-background
+	color: $color-nextread
+	border-top: 1px solid $color-nextread
+	margin-top: $huge
+	padding-bottom: $large
+
+.article__nextread__lead
+	+tablet(bold)
+	font-size: $font-ml
+	letter-spacing: $hair
+	padding: $medium 0
+	text-align: center
+	text-transform: uppercase
+
+.article__nextread__body
+
+.article__nextread__supertitle
+	@extend %supertitle
+	@extend %font-xs
+	display: block
+	padding-bottom: $micro
+
+.article__nextread__title
+	font-size: $font-ml
+	display: block
+
+.nextread-base
+	@extend %link-grey
+	@extend %nextread-text
+	position: relative
+	img
+		height: auto
+		display: block
+		width: 100%
+		+respond-min($break-2)
+			display: table-cell
+			height: $nextread-image-height
+			width: $nextread-image-width
+		+respond-min($break-4)
+	.article__nextread__body
+		background: $white
+		margin: 0 auto
+		max-width: $medium-content-width
+		width: 80%
+		+respond-min($break-2)
+			display: table
+			height: $nextread-image-height
+	.article__nextread__article
+		padding: $medium
+		+respond-min($break-2)
+			display: table-cell
+			padding: 0 $small
+			vertical-align: middle
+			.article__nextread__title
+				font-size: $font-xl
+				padding: 0
+				text-align: left
+			.article__nextread__supertitle
+				text-align: left
+				padding: 0
+
+.nextread-minimal
+	@extend %link-grey
+	@extend %nextread-text
+	.article__nextread__body
+		background: $white
+		margin: 0 auto
+		padding: $medium
+		width: 80%
+
+
+.nextread-maximal
+	@extend %link-white
+	@extend %nextread-text
+	+respond-min($break-1)
+		padding-left: $medium
+		padding-right: $medium
+	.article__nextread__body
+		+background-size(cover)
+		display: table
+		height: $nextread-minimal-height
+		width: 100%
+		+respond-min($break-2)
+			height: $nextread-minimal-height * 1.5
+		+respond-min($break-2)
+			height: $nextread-maximal-height
+	.article__nextread__article
+		display: table-cell
+		padding: 0 $small
+		text-align: center
+		vertical-align: middle
+	.article__nextread__title
+		font-size: $font-xl
+		+respond-min($break-1)
+			font-size: $font-xxl
+		+respond-min($break-2)
+			font-size: $font-xxxl
+		+respond-min($break-3)
+			font-size: $font-xxxxl
+
+

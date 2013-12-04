@@ -263,6 +263,32 @@
     {%- endif %}
 {%- endmacro %}
 
+{% macro focussed_nextread( nextread ) -%}
+    {%-if nextread -%}
+      {% set layout = nextread['layout'] %}
+      {% set image = nextread['image'] %}
+      {% set nextread = nextread['article'] %}
+        <aside class="article__nextread nextread-{{nextread.layout}} is-centered">
+            <div class="article__nextread__lead">Lesen Sie jetzt:</div>
+            <a title="{{ nextread.supertitle }}: {{ nextread.title }}" href="{{ nextread.uniqueId|translate_url }}">
+                {% if layout == "maximal"%}
+                <div class="article__nextread__body is-centered" style="background-image:url({{ nextread.image }});">
+                {% else %}
+                <div class="article__nextread__body is-centered">
+                {% endif %}
+                    {% if layout == "base" and image %}
+                        <img title="{{ image['caption'] }}" alt="{{ image['caption'] }}" src="{{ image['uniqueId']|translate_url }}">
+                    {% endif %}
+                    <div class="article__nextread__article">
+                        <span class="article__nextread__supertitle">{{ nextread.supertitle }}</span>
+                        <span class="article__nextread__title">{{ nextread.title }}</span>
+                    </div>
+                </div>
+            </a>
+        </aside>
+    {%- endif -%}
+{%- endmacro %}
+
 {% macro video(obj) -%}
     {% if obj.id -%}
         <figure class="

@@ -4,7 +4,7 @@
             <display_name>Pia Volk</display_name>
         </author>
         <references>
-            <reference type="intern" href="http://xml.zeit.de/2013/36/urban-gardening-essbare-stadt" year="2013" issue="36" ressort="Lebensart" author="Hanno Rauterberg" contenttype="article" publication-date="2013-09-05T02:26:40+00:00" expires="">
+            <reference layout="maximal" type="intern" href="http://xml.zeit.de/artikel/05" year="2013" issue="36" ressort="Lebensart" author="Hanno Rauterberg" contenttype="article" publication-date="2013-09-05T02:26:40+00:00" expires="">
                 <supertitle>Essbare Stadt</supertitle>
                 <title>Lasst es euch schmecken!</title>
                 <text>Aus der Stadt wird ein Feld, und jeder darf ernten: In Andernach, Seattle oder Almere wächst neben Kohl und Salat auch der soziale Zusammenhalt.</text>

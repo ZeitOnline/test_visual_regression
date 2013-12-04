@@ -1,24 +1,17 @@
 import pyramid.config
-import pyramid_jinja2
 import pytest
 import zeit.frontend.application
-import zeit.frontend.block
 
 
 @pytest.fixture(scope="module")
 def jinja2_env(request):
-    config = pyramid.config.Configurator()
-    config.include('pyramid_jinja2')
-    utility = config.registry.getUtility(pyramid_jinja2.IJinja2Environment)
-    utility.tests['elem'] = zeit.frontend.block.is_block
-    utility.filters['format_date'] = zeit.frontend.application.format_date
-    utility.filters['translate_url'] = zeit.frontend.application.translate_url
-    utility.trim_blocks = True
-    return utility
+    app = zeit.frontend.application.Application()
+    app.config = pyramid.config.Configurator()
+    return app.configure_jinja()
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
     lines = tpl.module.paragraph(html).splitlines()
     output = ""
@@ -30,7 +23,7 @@ def test_macro_p_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     css_class = 'article__subpage-chapter'
 
     # assert normal markup
@@ -49,7 +42,7 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = [{'link': 'link', 'text': 'text'}]
 
     markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
@@ -65,7 +58,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     assert markup == output
 
 def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = [{'link': 'link', 'text': 'text'}]
 
     markup = '<div class="breadcrumbs-wrap is-full-width"><div class="breadcrumbs" ' \
@@ -82,7 +75,7 @@ def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
 
 
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     css_index = 'article__subpage-index'
     markup_standart = '<div class="%s">' % css_index
 
@@ -116,7 +109,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_head_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     css_class = 'article__subpage-head'
 
     # assert normal markup
@@ -133,7 +126,7 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 
 def test_macro_author_date_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     markup = '<span class="article__meta__source">' \
         'Aus zon</span><span class="article__meta__date">01.01.2013' \
         '</span>'
@@ -145,7 +138,7 @@ def test_macro_author_date_should_produce_markup(jinja2_env):
 
 
 def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     lines = tpl.module.intertitle("xy").splitlines()
     output = ""
     for line in lines:
@@ -155,7 +148,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
 
 
 def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert normal quote
     obj = {'layout': 'quote', 'attribution': 'Autor',
@@ -183,7 +176,7 @@ def test_macro_citation_should_produce_valid_markup(jinja2_env):
 
 
 def test_macro_advertising_should_produce_script(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # test normal
     ad = {'type': 'rectangle'}
@@ -197,7 +190,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
 
 def test_image_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test'},
@@ -232,7 +225,7 @@ def test_image_should_produce_markup(jinja2_env):
 
 
 def test_macro_head_image_longform_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = {'caption': 'test', 'copyright': 'test', 'src': 'test.gif'}
     lines = tpl.module.head_image_longform(obj).splitlines()
     output = ""
@@ -244,7 +237,7 @@ def test_macro_head_image_longform_should_produce_markup(jinja2_env):
 
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
     markup = 'von <span class="article__meta__author">y</span>,'
     assert markup == tpl.module.meta_author(data).strip()
@@ -254,7 +247,7 @@ def test_macro_meta_author_should_produce_markup(jinja2_env):
 
 
 def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     data = {'name': 'abc'}
     markup = '<span class="article__meta__author">abc</span>'
     assert markup == tpl.module.authorlink(data).strip()
@@ -263,8 +256,37 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
     assert markup == tpl.module.authorlink(data).strip()
 
 
+def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    nextread = {'supertitle': "SUPER",
+                'title': "TITLE",
+                'image': "http://images.zeit.de/k-b/k-b-540x304.jpg",
+                'layout': "base",
+                'href': "LINK",
+                'bu': "BU",
+                'copyright': "CP"}
+    m = '<aside class="article__nextread nextread-base is-centered">'
+    i = 'title="BU" alt="BU" src="http://images.zeit.de/k-b/k-b-540x304.jpg">'
+    s = '<span class="article__nextread__supertitle">SUPER</span>'
+    t = '<span class="article__nextread__title">TITLE</span>'
+    l = '<a title="SUPER: TITLE" href="LINK">'
+    assert m in tpl.module.focussed_nextread(nextread)
+    assert i in tpl.module.focussed_nextread(nextread)
+    assert s in tpl.module.focussed_nextread(nextread)
+    assert t in tpl.module.focussed_nextread(nextread)
+    assert l in tpl.module.focussed_nextread(nextread)
+    nextread['layout'] = "maximal"
+    m = '<aside class="article__nextread nextread-maximal is-centered">'
+    bi = '<div class="article__nextread__body is-centered" style='
+    assert m in tpl.module.focussed_nextread(nextread)
+    assert bi in tpl.module.focussed_nextread(nextread)
+    nextread['layout'] = "minimal"
+    m = '<aside class="article__nextread nextread-minimal is-centered">'
+    assert m in tpl.module.focussed_nextread(nextread)
+
+
 def test_macro_video_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',

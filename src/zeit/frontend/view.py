@@ -1,7 +1,9 @@
 from babel.dates import get_timezone
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
+from zeit.cms.related.interfaces import IRelatedContent
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
+from zeit.content.image.interfaces import IImageMetadata
 import zeit.content.article.interfaces
 
 
@@ -102,6 +104,24 @@ class Article(Base):
     @property
     def location(self):
         return None  # XXX not implemented in zeit.content.article yet
+
+    @property
+    def focussed_nextread(self):
+        # XXX nextread is not implemented in zeit.content.article yet, so we'll
+        # use relateds for the time being
+        related = IRelatedContent(self.context).related
+        if related:
+            related = related[0]
+            image = related.main_image
+            if image is not None:
+                image = {
+                    'uniqueId': image.uniqueId,
+                    'caption': (related.main_image_block.custom_caption
+                                or IImageMetadata(image).caption),
+                }
+            return {'layout': 'base',  # XXX not implemented
+                    'article': related,
+                    'image': image}
 
 
 class Gallery(Base):

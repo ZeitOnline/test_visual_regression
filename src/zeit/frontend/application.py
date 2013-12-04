@@ -42,9 +42,7 @@ class Application(object):
             registry=registry)
         config.setup_registry(settings=self.settings)
 
-        config.include('pyramid_jinja2')
         self.configure_jinja()
-        config.add_renderer('.html', pyramid_jinja2.renderer_factory)
 
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
@@ -63,6 +61,8 @@ class Application(object):
 
     def configure_jinja(self):
         log.debug('Configuring Jinja')
+        self.config.include('pyramid_jinja2')
+        self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
@@ -71,6 +71,7 @@ class Application(object):
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
         jinja.trim_blocks = True
+        return jinja
 
     def configure_zca(self):
         log.debug('Configuring ZCA')

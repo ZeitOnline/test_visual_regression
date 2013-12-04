@@ -24,3 +24,6 @@ def test_video_html(selenium_driver, testserver):
                 wrap.find_element_by_tag_name("object")
             except:
                 wrap.find_element_by_tag_name("iframe")
+            # test if the correct video is shown
+            assert wrap.get_attribute(
+                "data-video") == video.get_attribute("data-video")
