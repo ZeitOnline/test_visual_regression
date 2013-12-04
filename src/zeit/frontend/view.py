@@ -119,6 +119,8 @@ class Article(Base):
                     'caption': (related.main_image_block.custom_caption
                                 or IImageMetadata(image).caption),
                 }
+            else:
+                image = {'uniqueId': None}
             return {'layout': 'base',  # XXX not implemented
                     'article': related,
                     'image': image}

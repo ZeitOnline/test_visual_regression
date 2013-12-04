@@ -29,6 +29,7 @@ setup(
     },
     extras_require={
         'test': [
+            'mock',
         ],
     },
     namespace_packages=['zeit'],

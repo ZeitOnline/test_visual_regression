@@ -267,12 +267,12 @@
     {%-if nextread -%}
       {% set layout = nextread['layout'] %}
       {% set image = nextread['image'] %}
-      {% set nextread = nextread['article'] %}
-        <aside class="article__nextread nextread-{{nextread.layout}} is-centered">
+      {% set article = nextread['article'] %}
+        <aside class="article__nextread nextread-{{layout}} is-centered">
             <div class="article__nextread__lead">Lesen Sie jetzt:</div>
-            <a title="{{ nextread.supertitle }}: {{ nextread.title }}" href="{{ nextread.uniqueId|translate_url }}">
+            <a title="{{ article.supertitle }}: {{ article.title }}" href="{{ article.uniqueId|translate_url }}">
                 {% if layout == "maximal"%}
-                <div class="article__nextread__body is-centered" style="background-image:url({{ nextread.image }});">
+                <div class="article__nextread__body is-centered" style="background-image:url({{ image['uniqueId'] }});">
                 {% else %}
                 <div class="article__nextread__body is-centered">
                 {% endif %}
@@ -280,8 +280,8 @@
                         <img title="{{ image['caption'] }}" alt="{{ image['caption'] }}" src="{{ image['uniqueId']|translate_url }}">
                     {% endif %}
                     <div class="article__nextread__article">
-                        <span class="article__nextread__supertitle">{{ nextread.supertitle }}</span>
-                        <span class="article__nextread__title">{{ nextread.title }}</span>
+                        <span class="article__nextread__supertitle">{{ article.supertitle }}</span>
+                        <span class="article__nextread__title">{{ article.title }}</span>
                     </div>
                 </div>
             </a>
