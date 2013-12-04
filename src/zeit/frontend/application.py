@@ -88,6 +88,7 @@ class Application(object):
         context.execute_actions()
 
     def configure_product_config(self):
+        # XXX make configurable, but see #36
         zope.app.appsetup.product.setProductConfiguration('zeit.cms', {
             'keyword-configuration': _product_url(
                 'zeit.cms.tagging.tests', 'keywords_config.xml'),
@@ -116,6 +117,10 @@ class Application(object):
             'zeit.content.article', {
                 'genre-url': _product_url(
                     'zeit.content.article.tests', 'article-genres.xml'),
+                'image-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
+                                        'data/article-image-layouts.xml'),
+                'video-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
+                                        'data/article-video-layouts.xml'),
         })
 
     @property
