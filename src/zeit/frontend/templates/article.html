@@ -1,18 +1,7 @@
 {% extends "templates/layout.html" %}
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
-
     <article class="article">
-        <nav class="main-nav">
-            <div class="main-nav--primary"></div>
-            <div class="main-nav--secondary"></div>
-        </nav>
-        {{ blocks.breadcrumbs([
-            {'text': 'Start', 'link': 'http://zeit.de'},
-            {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},
-            {'text': 'Lebensart', 'link': 'http://zeit.de/magazin/mode'},
-            {'text': 'Kann Leipzig Hypezig überleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}
-        ]) }}
         <div class="article__wrap">
             <div class="article__head-wrap">
                 <header class="article__title-wrap">
@@ -71,6 +60,8 @@
                     {% endfor %}
                 </div>
                 {% endif %}
+                
+                {{ blocks.focussed_nextread(view.focussed_nextread) }}
 
             </div>
         </div>

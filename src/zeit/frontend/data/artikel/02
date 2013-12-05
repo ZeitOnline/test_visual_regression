@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <article>
     <head>
+        <references>
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/44/friedhof-hamburg-ohlsdorf" year="2013" issue="44" ressort="Gesellschaft" author="Henning Sußebach" contenttype="article" publication-date="2013-10-31T02:37:21+00:00" expires="">
+                <supertitle>Bestattungen</supertitle>
+                <title>Die Angst des Friedhofs vor dem Tod</title>
+                <text>
+                Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und Ruhewälder die Rettung fürs Geschäft?
+                </text>
+                <description>
+                Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und Ruhewälder die Rettung fürs Geschäft?
+                </description>
+                <byline>von Henning Sußebach</byline>
+                <image align="left" base-id="http://xml.zeit.de/gesellschaft/2013-10/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
+                    <bu>Einäscherung</bu>
+                    <copyright>© Benne Ochs</copyright>
+                </image>
+            </reference>
+        </references>
         <rankedTags>
             <tag url_value="jil-sander" uuid="24af7d16-c5e3-49c4-b7e3-e73771d260d0" score="8" type="Person">Jil Sander</tag>
             <tag url_value="vivienne-westwood" uuid="abb02616-b1ad-4661-be2a-d9275c9fcb1a" score="6" type="Person">Vivienne Westwood</tag>

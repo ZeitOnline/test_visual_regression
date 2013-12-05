@@ -32,56 +32,6 @@ def jinja2_env(request):
     return utility
 
 
-def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
-    markup = '<span class="article__meta__author">Nico</span>'
-    author = {'name': 'Nico'}
-    assert markup == tpl.module.authorlink(
-        author, 'article__meta__author').strip()
-
-
-def _mock_p():
-    from zeit.frontend.model import Para
-    p = """
-           <p>Text <a href='foo'> ba </a> und <em>Text</em>
-           abc</p>
-       """
-
-    xml = etree.fromstring(p)
-    return Para(xml)
-
-
-def _mock_img():
-
-    from zeit.frontend.model import Img
-    p = """
-           <image layout="" align="" src="">
-                <bu>foo</bu><copyright>foo</copyright>
-           </image>
-       """
-
-    xml = etree.fromstring(p)
-    return Img(xml)
-
-
-def _mock_intertitle():
-    from zeit.frontend.model import Intertitle
-    it = """
-        <intertitle>Foo</intertitle>
-        """
-    xml = etree.fromstring(it)
-    return Intertitle(xml)
-
-
-def _mock_citation():
-    from zeit.frontend.model import Citation
-    cit = """
-        <citation />
-        """
-    xml = etree.fromstring(cit)
-    return Citation(xml)
-
-
 def test_publish_date_should_produce_localized_date():
     import iso8601
     from zeit.frontend import view
@@ -102,3 +52,76 @@ def test_publish_date_should_produce_localized_date():
 
     # expected offset 100
     assert str(base.publish_date) == '2013-11-11 11:00:00+01:00'
+
+
+def test_construct_focussed_next_returns_next_read():
+    from zeit.frontend.model import get_root
+    from zeit.frontend.model import Content
+    from lxml import objectify
+    ref = """
+        <root>
+            <head>
+            <references>
+                <reference type="intern" href="URL">
+                    <supertitle>SUPER</supertitle>
+                    <title>TITLE</title>
+                    <texta>XXX</texta>
+                    <description>DESCRIPTION</description>
+                    <image align="left" title="" base-id="BASEID" type="jpg">
+                        <bu>BU</bu>
+                        <copyright>COPY</copyright>
+                    </image>
+                </reference>
+            </references>
+            </head>
+        </root>
+        """
+    xml = objectify.fromstring(ref)
+    directory = get_root("pfft")
+    content = Content(directory.base_path + '/artikel/03')
+    nextread = content._construct_focussed_nextread(xml)
+    assert nextread['supertitle'] == "SUPER"
+    assert nextread['title'] == "TITLE"
+    assert nextread['bu'] == "BU"
+    assert nextread['copyright'] == "COPY"
+    assert nextread['image'] == "/-540x304.jpg"
+    assert nextread['layout'] == "base"
+    ref = """
+        <root>
+            <head>
+            <references>
+                <reference layout="maximal" type="intern" href="URL">
+                    <supertitle>SUPER</supertitle>
+                    <title>TITLE</title>
+                    <texta>XXX</texta>
+                    <description>DESCRIPTION</description>
+                    <image align="left" title="" base-id="BASEID" type="jpg">
+                        <bu>BU</bu>
+                        <copyright>COPY</copyright>
+                    </image>
+                </reference>
+            </references>
+            </head>
+        </root>
+        """
+    xml = objectify.fromstring(ref)
+    nextread = content._construct_focussed_nextread(xml)
+    assert nextread['layout'] == "maximal"
+    ref = """
+        <root>
+            <head>
+            <references>
+                <reference layout="minimal" type="intern" href="URL">
+                    <supertitle>SUPER</supertitle>
+                    <title>TITLE</title>
+                    <texta>XXX</texta>
+                    <description>DESCRIPTION</description>
+                    <image align="left" title="" base-id="BASEID" type="jpg" />
+                </reference>
+            </references>
+            </head>
+        </root>
+        """
+    xml = objectify.fromstring(ref)
+    nextread = content._construct_focussed_nextread(xml)
+    assert nextread['layout'] == "minimal"

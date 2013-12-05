@@ -9,6 +9,7 @@ downloads
 eggs
 include
 lib/
+local/
 lib64
 parts
 src/*.egg-info
@@ -22,3 +23,8 @@ src/zeit/frontend/js
 frontend.ini
 buildout.cfg
 /photobox/
+ghostdriver.log
+pyramid.log
+pyramid.pid
+
+/buildout_overrides.cfg
