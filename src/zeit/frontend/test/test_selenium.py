@@ -101,12 +101,12 @@ def test_main_nav(selenium_driver, testserver):
         # there is a logo
         assert(logo.is_displayed())
 
-        # all res are present and can be opened
+        # all ressorts are present and can be opened
         assert(all_res_trig.is_displayed())
         all_res_trig.click()
         assert(all_res_cont.is_displayed())
 
-        # all res dropdown contains at least one link
+        # all ressorts dropdown contains at least one link
         assert(len(all_res_links) > 0)
 
         # service is present and can be opened
