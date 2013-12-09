@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
         binDir: 'bin/',
-	    codeDir: 'src/zeit/frontend/',
+		codeDir: 'src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js'
 	};
@@ -89,17 +89,17 @@ module.exports = function(grunt) {
 				// phantom: true // phatom js globals
 			},
 			target: {
-				src : ['javascript/**/*.js']
+				src : ['javascript/**/*.js', '!javascript/libs/sasmobile.js']
 			}
 		},
 
 		grunticon: {
-      dist: {
-	      options: {
-		      src: "sass/icons",
-		      dest: project.codeDir + "/css/icons"
-		    }
-		  }
+			dist: {
+				options: {
+				src: "sass/icons",
+				dest: project.codeDir + "/css/icons"
+			}
+		}
     },
 
 		// watch here
