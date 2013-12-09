@@ -72,8 +72,10 @@ class Article(Base):
     @property
     def publish_date(self):
         tz = get_timezone('Europe/Berlin')
-        return IPublishInfo(
-            self.context).date_last_published_semantic.astimezone(tz)
+        date = IPublishInfo(
+            self.context).date_last_published_semantic
+        if date:
+            return date.astimezone(tz)
 
     @property
     def publish_date_meta(self):
