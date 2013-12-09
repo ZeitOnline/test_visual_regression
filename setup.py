@@ -19,6 +19,7 @@ setup(
         'zeit.cms',
         'zeit.connector >= 2.1.0.dev0',
         'zeit.content.article',
+        'zeit.intrafind',
         'zope.app.appsetup',
         'zope.configuration',
     ],

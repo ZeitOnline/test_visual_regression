@@ -53,12 +53,10 @@
                     {# XXX will be empty until zeit.connector
                        provides DAV-properties #}
                     {% for tag in view.rankedTags %}
-                            {% for item in tag %}
-                                <a href="#{{ item.url_value }}">{{ item.label }}</a>
-                                {% if not loop.last %}
-                                    ,
-                                {% endif %}
-                            {% endfor %}
+                      <a href="#{{ tag.url_value }}">{{ tag.label }}</a>
+                      {% if not loop.last %}
+                          ,
+                      {% endif %}
                     {% endfor %}
                 </div>
                 {% endif %}
