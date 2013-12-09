@@ -17,11 +17,6 @@ class Base(object):
     def __call__(self):
         return {}
 
-    @property
-    def publish_date(self):
-        tz = get_timezone('Europe/Berlin')
-        return self.context.publish_date.astimezone(tz)
-
 
 @view_config(route_name='json',
              context=zeit.content.article.interfaces.IArticle,
