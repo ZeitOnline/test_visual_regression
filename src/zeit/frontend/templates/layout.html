@@ -17,13 +17,45 @@
         <!--[if gt IE 8]><!-->
             <link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
         <!--<![endif]-->
+        <style type="text/css">
+            #iqd_mainAd {
+                margin-bottom: 0;
+            }
+            #iqd_align_Ad {
+                width: 61.25em;
+                margin: 0 auto;
+            }
+            #iqd_topAd {
+                padding: 0;
+                position: relative;
+            }
+            #iqd_rightAd {
+                position: absolute;
+                bottom: -630px;
+                left: 980px;
+                width: 160px;
+            }
+            #iqadtile1 {
+                padding-left: 20px;
+            }
+            .content .wrapper{
+                max-width: 61.25em;
+                padding-left: 1.25em;
+                padding-right: 1.25em;
+                margin-left: auto;
+                margin-right: auto;
+                border: 2px solid red;
+            }
+        </style>  
 
         <meta name="last-modified" content="{{ view.last_modified_date }}"/>
         <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
         <meta name="date" content="{{ view.publish_date_meta }}"/>
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
+        {% if view.context.advertising_enabled %}
         <script src="/js/libs/resize-ads.js"></script>
+        {% endif %}
         <script data-main="/js/app.js" src="/js/libs/require.js"></script>
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
@@ -35,63 +67,49 @@
         <noscript>
             <link href="/css/icons/icons.fallback.css" rel="stylesheet">
         </noscript>
+
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
+        {% if view.context.advertising_enabled %}
+        <script type="text/javascript">
+            nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
+            document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');     
+        </script>
+        {% endif %}
 
         <div class="page-wrap">
 
             {% if view.context.advertising_enabled %}
-            <div class="ad__fp__container--top">
-                <script>
-                    (function() {
-                        if (window.ad_slots.fp_top.active_class!= null && window.location.hash === '#fp') {
-                            document.write('<div class="' + window.ad_slots.fp_top.active_class + '">' +window.ad_slots.fp_top.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
+            <div id="iqd_mainAd" >
+                <div id="iqd_align_Ad">
+                    <div id="iqd_topAd">
+                        <script>
+                            resizeAds.print_ad_place('topbanner');
+                            // (function() {
+                            //     if (window.ad_slots.topbanner.active_class!= null && window.location.hash === '#ads') {
+                            //         document.write('<div class="' + window.ad_slots.topbanner.active_class + '">' +window.ad_slots.topbanner.active_text+ '</div>');
+                            //     }
+                            // }).call(this);
+                        </script>
+                        <div id="iqd_rightAd">
+                            <script>
+                                // (function() {
+                                //     if (window.ad_slots.skyscraper.active_class!= null && window.location.hash === '#ads') {
+                                //         document.write('<div class="' + window.ad_slots.skyscraper.active_class + '">' +window.ad_slots.skyscraper.active_text+ '</div>');
+                                //     }
+                                // }).call(this);
+                            </script>
+                        </div> 
+                    </div>
+                </div> 
             </div>
             {% endif %}
 
-            {% if view.context.advertising_enabled %}
-            <div class="ad__leaderboard">
-                <script data-name="ad__leaderboard">
-                    (function() {
-                        if (window.ad_slots.leaderboard.active_class!= null && window.location.hash === '#ads') {
-                            document.write('<div class="' + window.ad_slots.leaderboard.active_class + '">' +window.ad_slots.leaderboard.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
-            </div>
-            {% endif %}
 
-            {% if view.context.advertising_enabled %}
-            <div class="ad__fp__container--left">
-                <script>
-                    (function() {
-                        if (window.ad_slots.fp_left.active_class!= null && window.location.hash === '#fp') {
-                            document.write('<div class="' + window.ad_slots.fp_left.active_class + '">' +window.ad_slots.fp_left.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
-            </div>
-            {% endif %}
-
-            {% if view.context.advertising_enabled %}
-            <div class="ad__fp__container--right">
-                <script>
-                    (function() {
-                        if (window.ad_slots.fp_right.active_class!= null && window.location.hash === '#fp') {
-                            document.write('<div class="' + window.ad_slots.fp_right.active_class + '">' +window.ad_slots.fp_right.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
-            </div>
-            {% endif %}
-
-        {{ blocks.main_nav(view.context.main_nav_full_width) }}
-        <main role="main" class="main">
-            {%  block content %}{% endblock content %}
-        </main>
+            {{ blocks.main_nav(view.context.main_nav_full_width) }}
+            <main role="main" class="main">
+                {%  block content %}{% endblock content %}
+            </main>
 
         </div>
 
