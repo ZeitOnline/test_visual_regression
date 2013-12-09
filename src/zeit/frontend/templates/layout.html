@@ -72,6 +72,8 @@
     <body itemscope itemtype="http://schema.org/WebPage">
         {% if view.context.advertising_enabled %}
         <script type="text/javascript">
+            var ord = (Math.random()*100000);
+            var n_pbt = "";
             nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
             document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');     
         </script>
@@ -84,20 +86,11 @@
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
                         <script>
-                            resizeAds.print_ad_place('topbanner');
-                            // (function() {
-                            //     if (window.ad_slots.topbanner.active_class!= null && window.location.hash === '#ads') {
-                            //         document.write('<div class="' + window.ad_slots.topbanner.active_class + '">' +window.ad_slots.topbanner.active_text+ '</div>');
-                            //     }
-                            // }).call(this);
+                            document.write( resizeAds.printable_ad_place('topbanner') );
                         </script>
                         <div id="iqd_rightAd">
                             <script>
-                                // (function() {
-                                //     if (window.ad_slots.skyscraper.active_class!= null && window.location.hash === '#ads') {
-                                //         document.write('<div class="' + window.ad_slots.skyscraper.active_class + '">' +window.ad_slots.skyscraper.active_text+ '</div>');
-                                //     }
-                                // }).call(this);
+                                document.write( resizeAds.printable_ad_place('skyscraper') );
                             </script>
                         </div> 
                     </div>
