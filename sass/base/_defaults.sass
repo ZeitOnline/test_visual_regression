@@ -21,11 +21,12 @@ img
   display: block
 
 a
-  +link-colors($blue, $blue, $blue, $midnight, $blue)
+  +link-colors($color-link--default, $color-link--default, $color-link--default, $color-link--default, $color-link--default)
   +transition(border-color, 0.2s)
-  border-bottom: 1px solid $white
+  border-bottom: 1px solid transparent
+  border-bottom: 1px solid rgba($color-link--default, 0)
   padding-bottom: -0.05em
   text-decoration: none
   +on-interaction
     text-decoration: none
-    border-color: $blue
+    border-color: $color-link--default
