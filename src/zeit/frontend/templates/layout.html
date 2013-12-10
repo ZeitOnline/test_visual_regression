@@ -85,17 +85,23 @@
 
             {% if view.context.advertising_enabled %}
             <script>
-                document.write( resizeAds.printable_ad_place('mobile_topbanner') );
+                if( typeof(window.resizeAds) !== "undefined" ) {
+                    document.write( resizeAds.printable_ad_place('mobile_topbanner') );
+                }
             </script>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
                         <script>
-                            document.write( resizeAds.printable_ad_place('topbanner') );
+                            if( typeof(window.resizeAds) !== "undefined" ) {
+                                document.write( resizeAds.printable_ad_place('topbanner') );
+                            }
                         </script>
                         <div id="iqd_rightAd">
                             <script>
-                                document.write( resizeAds.printable_ad_place('skyscraper') );
+                                if( typeof(window.resizeAds) !== "undefined" ) {
+                                    document.write( resizeAds.printable_ad_place('skyscraper') );
+                                }
                             </script>
                         </div> 
                     </div>

@@ -204,12 +204,10 @@
 
 {% macro advertising(ad) -%}
     {% if ad.type == 'rectangle' %}
-        <script data-name="ad__rectangle">
-            (function() {
-                if (window.ad_slots.rec.active_class!= null && window.location.hash === '#ads') {
-                    document.write('<div class="' + window.ad_slots.rec.active_class + '">' +window.ad_slots.rec.active_text+ '</div>');
-                }
-            }).call(this);
+        <script>
+            if( typeof(window.resizeAds) !== "undefined" ) {
+                document.write( resizeAds.printable_ad_place('medrec_10') );
+            }
         </script>
     {% endif %}
 {%- endmacro %}

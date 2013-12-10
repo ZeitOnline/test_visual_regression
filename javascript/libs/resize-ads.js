@@ -46,6 +46,20 @@ var resizeAds = function( win ) {
 			if( typeof window.sasmobile === 'function') {
 				window.sasmobile(sas_pageid,sas_formatid,sas_target);
 			}
+		},
+		medrec_8: {
+			url: 'http://ad.de.doubleclick.net/adj/',
+			fragment: 'zeitonline/zolmz',
+			tile: 8,
+			size: '300x250,300x600,300x100',
+			keywords: ['iqadtile8', 'zeitmz', 'noiqdband']
+		},
+		medrec_10: {
+			url: 'http://ad.de.doubleclick.net/adj/',
+			fragment: 'zeitonline/zolmz',
+			tile: 10,
+			size: '300x250,300x100',
+			keywords: ['iqadtile10', 'zeitmz', 'noiqdband']
 		}
 	},
 	places = {
@@ -88,6 +102,26 @@ var resizeAds = function( win ) {
 					ad: ads.skyscraper
 				}
 			]
+		},
+		medrec_8: {
+			active_class: null,
+			active_id: null,
+			ads: [{
+				div_id: 'iqadtile8',
+				min_width: 480,
+				min_height: 0,
+				ad: ads.medrec_8
+			}]
+		},
+		medrec_10: {
+			active_class: null,
+			active_id: null,
+			ads: [{
+				div_id: 'iqadtile10',
+				min_width: 480,
+				min_height: 0,
+				ad: ads.medrec_10
+			}]
 		}
 	},
 	prepare_slot = function( slot ) {
