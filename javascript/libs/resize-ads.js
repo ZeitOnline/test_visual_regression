@@ -20,8 +20,6 @@ var resizeAds = function( win ) {
 	win.iqd_Domain = win.iqd_Loc.href.toLowerCase();
 	win.iqd_TestKW = (win.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
 
-	var console = window.console || {};
-
 	// privates
 	var ads = {
 		// top banner supplies: leaderboard, wallpaper and fireplace
@@ -40,27 +38,51 @@ var resizeAds = function( win ) {
 			tile: 2,
 			size: '120x600',
 			keywords: ['iqadtile2', 'zeitonline', 'zeitmz']
+		},
+		mobile: function() {
+			var sas_pageid = '54114/391248',
+				sas_formatid = 13500,
+				sas_target = '';
+			if( typeof window.sasmobile === 'function') {
+				window.sasmobile(sas_pageid,sas_formatid,sas_target);
+			}
 		}
 	},
 	places = {
 		topbanner: {
 			active_class: null,
-			active_ad: null,
+			active_id: null,
 			ads: [
+				// desktop
 				{
-					div_class: 'iqadtile1',
+					div_id: 'iqadtile1',
 					min_width: 728,
 					min_height: 0,
 					ad: ads.topbanner
 				}
 			]
 		},
+		mobile_topbanner: {
+			active_class: null,
+			active_id: null,
+			ads: [
+				// mobile
+				{
+					div_id: 'sas_13500',
+					div_class: 'ad__leaderboard--mobile',
+					max_width: 727,
+					min_width: 320,
+					min_height: 0,
+					callback: ads.mobile
+				}
+			]
+		},
 		skyscraper: {
 			active_class: null,
-			active_ad: null,
+			active_id: null,
 			ads: [
 				{
-					div_class: 'iqadtile2',
+					div_id: 'iqadtile2',
 					min_width: 728,
 					min_height: 0,
 					ad: ads.skyscraper
@@ -81,8 +103,15 @@ var resizeAds = function( win ) {
 			if (window.innerWidth >= ad.min_width &&
 				window.innerHeight >= ad.min_height &&
 				window.innerWidth <= ad.max_width) {
-					slot.active_class = ad.div_class;
-					slot.active_ad = ad.ad;
+					slot.active_class = typeof(ad.div_class) !== "undefined" ? ad.div_class : "";
+					slot.active_id = typeof(ad.div_id) !== "undefined"? ad.div_id : "";
+					if( typeof(ad.ad) !== "undefined" ) {
+						slot.active_ad = ad.ad;
+					}
+					if( typeof(ad.callback) === "function" ) {
+						// add callback to the onload event
+						window[ addEventListener ? 'addEventListener' : 'attachEvent' ]( addEventListener ? 'load' : 'onload', ad.callback );
+					}
 					return slot;
 			} else {
 				_results.push(void 0);
@@ -93,20 +122,31 @@ var resizeAds = function( win ) {
 
 	return {
 		printable_ad_place: function( place ) {
-			var slot = prepare_slot( places[place] );
-			var ad = '<script src="';
-			ad += slot.active_ad.url;
-			ad += slot.active_ad.fragment;
-			ad += ';tile=' + slot.active_ad.tile;
-			ad += ';' + win.n_pbt;
-			ad += ';sz=' + slot.active_ad.size;
-			ad += ';kw=' + slot.active_ad.keywords.join(",");
-			ad += ',' + win.iqd_TestKW;
-			ad += ';ord=' + win.IQD_varPack.ord;
-			ad += '?" type="text/javascript"><\/script>';
-			var div = '<div class="' + slot.active_class + '">%1</div>';
-			div = div.replace("%1", ad);
-			return div;
+			var slot = prepare_slot( places[place] ),
+				ad = '';
+			if( typeof slot.active_id !== "undefined" ) {
+				if( typeof(slot.active_ad) !== 'undefined' ) {
+					ad = '<script src="';
+					ad += slot.active_ad.url;
+					ad += slot.active_ad.fragment;
+					if( typeof slot.active_ad.dcopt !== 'undefined' ) {
+						ad+= ';dcopt=' + slot.active_ad.dcopt;
+					}
+					ad += ';tile=' + slot.active_ad.tile;
+					ad += ';' + win.n_pbt;
+					ad += 'sz=' + slot.active_ad.size;
+					ad += ';kw=' + slot.active_ad.keywords.join(",");
+					ad += ',' + win.iqd_TestKW;
+					ad += ';ord=' + win.IQD_varPack.ord;
+					ad += '?" type="text/javascript"><\/script>';
+				}
+				var div = '<div class="' + slot.active_class + '" id="' + slot.active_id + '">%1</div>';
+				div = div.replace("%1", ad);
+				return div;
+			} else {
+				// empty string returned to deactivate document.write()
+				return "";
+			}
 		}
 	};
 

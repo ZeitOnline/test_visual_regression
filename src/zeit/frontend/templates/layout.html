@@ -54,6 +54,7 @@
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
         {% if view.context.advertising_enabled %}
+        <script src="/js/libs/sasmobile.js"></script>
         <script src="/js/libs/resize-ads.js"></script>
         {% endif %}
         <script data-main="/js/app.js" src="/js/libs/require.js"></script>
@@ -72,6 +73,7 @@
     <body itemscope itemtype="http://schema.org/WebPage">
         {% if view.context.advertising_enabled %}
         <script type="text/javascript">
+            var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/homepage;";
             var ord = (Math.random()*100000);
             var n_pbt = "";
             nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
@@ -82,6 +84,9 @@
         <div class="page-wrap">
 
             {% if view.context.advertising_enabled %}
+            <script>
+                document.write( resizeAds.printable_ad_place('mobile_topbanner') );
+            </script>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
