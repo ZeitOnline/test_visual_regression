@@ -1,9 +1,10 @@
-$nav__row-height: em(50px)
+$nav__row-height--px: 50px
+$nav__row-height: em($nav__row-height--px)
 $nav__break__full-menu: em(768px)
-$nav__logo-mobile-width: image-width('zeit-logo.png')/24
-$nav__logo-mobile-height: image-height('zeit-logo.png')/2
-$nav__logo-full-width: image-width('zeit-logo.png')/2
-$nav__logo-full-height: image-height('zeit-logo.png')/2
+$nav__logo-mobile-width: image-width('zeit-logo--magazin.png')/27
+$nav__logo-mobile-height: image-height('zeit-logo--magazin.png')/2
+$nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
+$nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
 
@@ -120,6 +121,7 @@ $nav__section-border: 1px solid $grey--mid
   float: left
   height: 100%
   margin-left: $small
+  line-height: $nav__row-height--px
   line-height: em_to_rem($nav__row-height)
   +respond-min($nav__break__full-menu)
     display: none
@@ -179,7 +181,6 @@ $nav__section-border: 1px solid $grey--mid
   +respond-max($nav__break__full-menu)
     border-bottom: $nav__section-border !important
     border-top: $nav__section-border !important
-    border-top-width: 2px !important
   +respond-min($nav__break__full-menu)
     padding-bottom: $small !important
 
@@ -335,6 +336,7 @@ $nav__section-border: 1px solid $grey--mid
     position: absolute
     top: $nav__row-height
     right: 0
+    z-index: 3
     left: auto
     text-align: right
     width: $nav__service-primary-full-width
@@ -366,12 +368,15 @@ $nav__section-border: 1px solid $grey--mid
 
 
 .main-nav__ressorts
+  +respond-max($nav__break__full-menu)
+    border-top-width: 2px !important
   +respond-min($nav__break__full-menu)
     position: absolute
     top: $nav__row-height
     left: 0
     overflow: hidden
     width: 100%
+    z-index: 2
     padding-right: $nav__service-primary-full-width
     white-space: nowrap
     .main-nav__section__content
@@ -484,6 +489,7 @@ $nav__section-border: 1px solid $grey--mid
     .main-nav__section__trigger
       +hide-text
       background-position: center center
+      width: $nav__row-height--px
       width: em_to_rem($nav__row-height)
   +respond-max($nav__break__full-menu)
     .main-nav__section__trigger
@@ -496,6 +502,7 @@ $nav__section-border: 1px solid $grey--mid
   .main-nav__search
     border-bottom: $nav__section-border
     .main-nav__section__trigger
+      line-height: $nav__row-height--px
       line-height: em_to_rem($nav__row-height)
   .main-nav__all-ressorts,
   .main-nav__service,

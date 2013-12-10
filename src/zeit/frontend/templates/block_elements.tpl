@@ -1,10 +1,10 @@
 {% macro main_nav(is_full_width) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+            <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="/img/zeit-logo.png" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <img src="/img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -13,7 +13,6 @@
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
-                    <a href="#" class="main-nav__menu__content__current-ressort" id="js-main-nav-current-ressort">Startseite ZEIT Magazin</a>
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__section__content is-always-open" id="js-main-nav-ressorts-slider-container">
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
@@ -29,10 +28,10 @@
                             </div>
                         </div>
                     </div>
+                    <a href="http://zeit.de" class="main-nav__menu__content__current-ressort" id="js-main-nav-current-ressort">Startseite ZEIT Online</a>
                     <div class="main-nav__section main-nav__all-ressorts">
                         <span class="main-nav__section__trigger icon-arrow-down">
-                            <span class="is-small-screen-only">Alle Ressorts</span>
-                            <span class="is-large-screen-only">ZEIT Magazin</span>
+                            Alle Ressorts
                         </span>
                         <div class="main-nav__section__content" id="js-main-nav-all-ressorts-content">
                             <div class="main-nav__section__content__wrap">
@@ -303,7 +302,7 @@
                 <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
-                    {{obj.description}} 
+                    {{obj.description}}
             </figcaption>
         </figure>
     {%- endif %}
