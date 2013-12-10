@@ -115,7 +115,6 @@ module.exports = function(grunt) {
 		}
 	});
 
-
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass-shabunc');
 	grunt.loadNpmTasks('grunt-contrib-concat');
