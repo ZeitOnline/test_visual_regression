@@ -20,7 +20,8 @@ var resizeAds = function( win ) {
 	win.iqd_Domain = win.iqd_Loc.href.toLowerCase();
 	win.iqd_TestKW = (win.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
 
-	// privates
+	// list of possible ads
+	// guess we need this configuration somewhere global accessible
 	var ads = {
 		// top banner supplies: leaderboard, wallpaper and fireplace
 		topbanner: {
@@ -30,6 +31,15 @@ var resizeAds = function( win ) {
 			tile: 1,
 			size: '728x90',
 			keywords: ['iqadtile1', 'zeitonline', 'zeitmz']
+		},
+		// top banner supplies: leaderboard
+		topbanner_no_fp_no_wp: {
+			url: 'http://ad.de.doubleclick.net/adj/',
+			fragment: 'zeitonline/zolmz',
+			dcopt: 'ist',
+			tile: 1,
+			size: '728x90',
+			keywords: ['iqadtile1', 'zeitonline', 'zeitmz', 'noiqdfireplace', 'noiqdwallpaper']
 		},
 		// scyscraper ad (hidden if wallpaper or fireplace is given)
 		skyscraper: {
@@ -62,17 +72,27 @@ var resizeAds = function( win ) {
 			keywords: ['iqadtile10', 'zeitmz', 'noiqdband']
 		}
 	},
+	// configuration of ad places aka. slots
+	// one place can own n ads, differing by screen estate size
 	places = {
 		topbanner: {
 			active_class: null,
 			active_id: null,
 			ads: [
-				// desktop
+				// desktop: full width
+				{
+					div_id: 'iqadtile1',
+					min_width: 981,
+					min_height: 0,
+					ad: ads.topbanner
+				},
+				// desktop: not enough space for fireplace and wallpaper
 				{
 					div_id: 'iqadtile1',
 					min_width: 728,
+					max_width: 980,
 					min_height: 0,
-					ad: ads.topbanner
+					ad: ads.topbanner_no_fp_no_wp
 				}
 			]
 		},
