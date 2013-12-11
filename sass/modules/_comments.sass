@@ -1,0 +1,156 @@
+$comments__break-outside: em(1280px)
+
+.article__comments-trigger
+  +inline-block
+  +transition(all, 0.2s)
+  cursor: pointer
+  background-color: $grey--light
+  color: $red
+  text-align: center
+  margin: 0 auto
+  margin-bottom: $small
+  position: relative
+  padding: $micro $small
+  +respond-min($comments__break-outside)
+    padding: $hair $small $fine $small
+    position: absolute
+    top: 0
+    right: -20px
+  &:after
+    +transition(all, 0.2s)
+    +box-sizing(content-box)
+    content: ''
+    width: 0
+    height: 0
+    border: 20px solid $red
+    position: absolute
+    right: 10px
+    bottom: -20px
+    border-color: transparent $grey--light transparent transparent
+    display: none
+    +respond-min($comments__break-outside)
+      display: block
+  &:hover, .show-comments &
+    background-color: $red
+    color: $white
+    &:after
+      border: 20px solid $grey--light
+      border-color: transparent $red transparent transparent
+
+
+.article__comments-trigger__count
+  font-size: $font-l
+  margin-right: $micro
+  +respond-min($comments__break-outside)
+    margin-right: 0
+    display: block
+    font-size: $font-xxxl
+
+
+.comments
+  display: none
+  +respond-min($comments__break-outside)
+    +animation('comments_fade_in' 0.25s ease-in-out 1 0s)
+    position: absolute
+    top: 0
+    height: 100%
+    overflow: auto
+    left: em(980px) - $page-padding
+    width: em(300px)
+    background-color: $white
+
+.comments__head
+  margin-bottom: $medium
+  text-align: center
+
+.comments__head__cta
+  font-size: $font-xl
+  max-width: 15em
+  margin: 0 auto
+  text-align: center
+  strong
+    +franziska(bold)
+
+.comments__head__trigger
+  +inline-block
+  margin-top: $small
+  padding: $thin $small
+  background-color: $red
+  color: $white
+
+.comments__head__form
+  display: none
+
+.comments__list
+
+
+.comment
+  margin-bottom: $medium
+
+
+.comment__head
+
+
+.comment__head__img
+  +inline-block
+  +border-radius(50%)
+  max-width: em(30px)
+  max-height: em(30px)
+  margin-right: $thin
+
+
+.comment__head__name
+  +inline-block
+  +tablet(bold)
+  color: $grey
+
+.comment__head__name__label
+  +tablet
+  margin-left: $micro
+  font-size: $font-xs
+  background-color: $red
+  color: $white
+  padding: $hair $micro
+
+.comment__head__date
+  +inline-block
+  +tablet
+  color: $grey
+  margin-left: $thin
+  &:before
+    content: "– "
+
+
+.comment__body
+  +tablet
+  color: $grey
+  margin-left: 0
+  font-size: $font-s
+  p
+    margin-left: 0
+
+
+.comment__tools
+
+
+.comment__tools__favorite
+  +hide-text
+  width: 20px
+  height: 20px
+
+
+.comment__tools__reply
+
+.article
+  +respond-min($comments__break-outside)
+    +transition(all, 0.5s)
+    position: relative
+    left: 50%
+    margin-left: -490px
+
+.article.show-comments
+  +respond-min($comments__break-outside)
+    left: 0
+    margin-left: 0
+  .comments
+    display: block
