@@ -1,0 +1,40 @@
+.tabs
+  width: 100%
+
+.tabs__head
+  +pie-clearfix
+  margin-bottom: $small
+
+.tabs__head__tab
+  +tablet
+  float: left
+  padding: $thin $small
+  text-align: center
+  text-transform: uppercase
+  color: $grey
+  background-color: $grey--light
+  border-bottom: 1px solid $grey
+  border-right: 1px solid $grey
+  +on-interaction
+    color: $grey
+    border-color: $grey
+    text-decoration: none
+  &.is-active
+    background-color: $white
+    border: none
+    color: $grey
+    border-right: 1px solid $grey
+  &:last-child
+    border-right: none
+  .has-2 &
+    width: 50%
+  .has-3 &
+    width: 33.333%
+  .has-4 &
+    width: 25%
+  .has-5 &
+    width: 20%
+
+.tabs__content
+  padding: $small
+  margin-bottom: $medium
