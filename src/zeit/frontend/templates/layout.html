@@ -53,12 +53,11 @@
         <meta name="date" content="{{ view.publish_date_meta }}"/>
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
+
         {% if view.context.advertising_enabled %}
         <script src="/js/libs/sasmobile.js"></script>
         <script src="/js/libs/resize-ads.js"></script>
         {% endif %}
-        <script data-main="/js/app.js" src="/js/libs/require.js"></script>
-        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
@@ -126,5 +125,7 @@
                 };
             </script>
         </div>
+        <script data-main="/js/app.js" src="/js/libs/require.js"></script>
+        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
     </body>
 </html>
