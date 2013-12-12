@@ -301,7 +301,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert img in output
     assert cap in output
 
-    #assert different formates
+    # assert different formates
     obj['format'] = 'small'
     fig = '<figure class="figure-stamp" data-video="1">'
     lines = tpl.module.video(obj).splitlines()
