@@ -1,6 +1,9 @@
 from babel.dates import get_timezone
+from os.path import basename
 from pyramid.renderers import render_to_response
+from pyramid.response import FileResponse
 from pyramid.view import view_config
+from urlparse import urlparse
 from zeit.cms.related.interfaces import IRelatedContent
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.image.interfaces import IImageMetadata
@@ -139,3 +142,15 @@ class Teaser(Article):
     def teaser_text(self):
         """docstring for teaser"""
         return self.context.teaser
+
+
+@view_config(context=zeit.content.image.interfaces.IImage)
+def image_download(context, request):
+    base = request.registry.settings.get('image_base_path')
+    path = base + urlparse(context.uniqueId).path
+    response = FileResponse(path=path, request=request,
+        content_type=context.mimeType.encode('utf8'))
+    response.headers['Content-Disposition'] = ('inline; filename="%s"' %
+        basename(path).encode('utf8'))
+    response.headers['Content-Length'] = str(context.size)
+    return response

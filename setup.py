@@ -31,6 +31,7 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'webtest',
         ],
     },
     namespace_packages=['zeit'],
