@@ -203,11 +203,7 @@
 
 {% macro advertising(ad) -%}
     {% if ad.type == 'rectangle' %}
-        <script>
-            if( typeof(window.resizeAds) !== "undefined" ) {
-                document.write( resizeAds.printable_ad_place('medrec_10') );
-            }
-        </script>
+        <div class="iqdplace" data-place="medrec_8"></div>
     {% endif %}
 {%- endmacro %}
 

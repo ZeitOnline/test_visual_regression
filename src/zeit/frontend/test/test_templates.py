@@ -180,8 +180,9 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
     # test normal
     ad = {'type': 'rectangle'}
-    markup = 'document.write( resizeAds.printable_ad_place(\'medrec_10\') )'
-    assert markup in tpl.module.advertising(ad)
+    markup = '<div class="iqdplace" data-place="medrec_8"></div>'
+    lines = tpl.module.advertising(ad).splitlines()
+    assert markup == lines[0].strip()
 
     # test inactive
     ad_inactive = {'type': 'no'}

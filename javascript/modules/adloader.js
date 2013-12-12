@@ -44,14 +44,14 @@ define(['jquery'], function() {
 		},
 		medrec_8: {
 			url: 'http://ad.de.doubleclick.net/adj/',
-			fragment: 'zeitonline/zolmz',
+			fragment: 'zeitonline/zeitmz',
 			tile: 8,
 			size: '300x250,300x600,300x100',
 			keywords: ['iqadtile8', 'zeitmz', 'noiqdband']
 		},
 		medrec_10: {
 			url: 'http://ad.de.doubleclick.net/adj/',
-			fragment: 'zeitonline/zolmz',
+			fragment: 'zeitonline/zeitmz',
 			tile: 10,
 			size: '300x250,300x100',
 			keywords: ['iqadtile10', 'zeitmz', 'noiqdband']
@@ -91,14 +91,16 @@ define(['jquery'], function() {
 			ad: ads.skyscraper
 		}],
 		medrec_8: [{
+			div_class: "ad__rec",
 			div_id: 'iqadtile8',
-			min_width: 480,
+			min_width: 720,
 			min_height: 0,
 			ad: ads.medrec_8
 		}],
 		medrec_10: [{
+			div_class: "ad__rec",
 			div_id: 'iqadtile10',
-			min_width: 480,
+			min_width: 720,
 			min_height: 0,
 			ad: ads.medrec_10
 		}]
