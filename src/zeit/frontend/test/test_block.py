@@ -4,13 +4,13 @@ import lxml.etree
 
 def test_inline_html_should_filter_to_valid_html():
     p = """
-           <p>Text <a href='foo'> ba </a> und <em>Text</em>
-           abc <invalid>invalid</invalid></p>
+           <p>Text <a href='foo' class='myclass' rel='nofollow' data-foo='bar' foo='ron'> ba </a> und <em>Text</em>
+           abc <invalid>invalid</invalid> valid: <em>valid</em></p>
        """
 
     xml = lxml.etree.fromstring(p)
-    xml_str = """Text  <a href="foo"> ba </a> und <em>Text</em>
-           abc invalid
+    xml_str = """Text <a href="foo" class="myclass" rel="nofollow" data-foo="bar"> ba </a> und <em>Text</em>
+           abc invalid valid: <em>valid</em>
 """
-
-    assert str(_inline_html(xml)) == xml_str
+    print _inline_html(xml)
+    assert xml_str == str(_inline_html(xml))

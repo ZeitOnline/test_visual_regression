@@ -98,30 +98,75 @@ class Video(object):
 
 
 def _inline_html(xml):
+    allowed_elements = "a|span|strong|img|em|sup|sub|caption"
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             <xsl:output method="xml"
                         omit-xml-declaration="yes" />
-            <xsl:template match="p">
-                <xsl:apply-templates />
+          <!-- Semantische HTML-ELemente übernehmen -->
+          <xsl:template match="%s">
+          <xsl:element name="{name()}">
+            <xsl:apply-templates select="@*" />
+            <xsl:apply-templates select="*|text()[normalize-space(.) != '']" />
+          </xsl:element>
+          </xsl:template>
+          <xsl:template match="@abbr|@accept|@accept-charset|@accesskey|
+                               @action|@alt|@async|@autocomplete|@autofocus|
+                               @autoplay|@challenge|@charset|@checked|@cite|
+                               @class|@cols|@colspan|@command|@content|
+                               @contenteditable|@contextmenu|@controls|
+                               @coords|@crossorigin|@data|@datetime|
+                               @default|@defer|@dir|@dirname|@disabled|
+                               @draggable|@dropzone|@enctype|@for|@form|
+                               @formaction|@formenctype|@formmethod|
+                               @formnovalidate|@formtarget|@headers|
+                               @height|@hidden|@high|@href|@hreflang|
+                               @http-equiv|@icon|@id|@inert|@inputmode|
+                               @ismap|@itemid|@itemprop|@itemref|
+                               @itemscope|@itemtype|@keytype|@kind|@label|
+                               @lang|@list|@loop|@low|@manifest|@max|
+                               @maxlength|@media|@mediagroup|@method|
+                               @min|@multiple|@muted|@name|@novalidate|
+                               @onabort|@onafterprint|@onbeforeprint|
+                               @onbeforeunload|@onblur|@onblur|@oncanplay|
+                               @oncanplaythrough|@onchange|@onclick|
+                               @oncontextmenu|@ondblclick|@ondrag|
+                               @ondragend|@ondragenter|@ondragleave|
+                               @ondragover|@ondragstart|@ondrop|
+                               @ondurationchange|@onemptied|@onended|
+                               @onerror|@onfocus|@onformchange|
+                               @onforminput|@onhashchange|@oninput|
+                               @oninvalid|@onkeydown|@onkeypress|
+                               @onkeyup|@onload|@onloadeddata|
+                               @onloadedmetadata|@onloadstart|
+                               @onmessage|@onmousedown|@onmousemove|
+                               @onmouseout|@onmouseover|@onmouseup|
+                               @onmousewheel|@onoffline|@ononline|
+                               @onpagehide|@onpageshow|@onpause|
+                               @onplay|@onplaying|@onpopstate|
+                               @onprogress|@onratechange|@onreadystatechange|
+                               @onreset|@onresize|@onscroll|@onseeked|
+                               @onseeking|@onselect|@onshow|@onstalled|
+                               @onstorage|@onsubmit|@onsuspend|
+                               @ontimeupdate|@onunload|@onvolumechange|
+                               @onwaiting|@open|@optimum|@option|@pattern|
+                               @ping|@placeholder|@poster|@preload|
+                               @pubdate|@radiogroup|@readonly|@readonly|
+                               @rel|@required|@reversed|@role|@rows|
+                               @rowspan|@sandbox|@scope|@scoped|@seamless|
+                               @selected|@shape|@size|@sizes|@span|
+                               @spellcheck|@src|@srcdoc|@srclang|@srcset|
+                               @start|@step|@style|@tabindex|@target|
+                               @title|@translate|@type|@typemustmatch|
+                               @usemap|@value|@width|@wrap|
+                               @*[starts-with(name(),'data-')]|
+                               @*[starts-with(name(),'aria-')]">
+              <xsl:attribute name="{name()}">
+                <xsl:value-of select="." />
+              </xsl:attribute>
             </xsl:template>
-            <xsl:template match="i">
-                <i><xsl:apply-templates /></i>
-            </xsl:template>
-            <xsl:template match="em">
-                <em><xsl:apply-templates /></em>
-            </xsl:template>
-            <xsl:template match="a">
-                <xsl:text> </xsl:text>
-                <a><xsl:apply-templates select="@* | node | text()" /> </a>
-            </xsl:template>
-            <xsl:template match="a/@href">
-                <xsl:copy><xsl:apply-templates /></xsl:copy>
-            </xsl:template>
-            <xsl:template match="a/@target">
-                <xsl:copy><xsl:apply-templates /></xsl:copy>
-            </xsl:template>
-        </xsl:stylesheet>''')
+          <xsl:template match="@*" />
+        </xsl:stylesheet>''' % (allowed_elements))
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
