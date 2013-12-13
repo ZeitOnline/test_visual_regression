@@ -62,53 +62,54 @@
                 {% endif %}
 
                 <div class="article__comments-trigger" id="js-comments-trigger">
-                    <span class="article__comments-trigger__count">47</span>
+                    <span class="article__comments-trigger__count icon-close">47</span>
                     Kommentare
                 </div>
                 <section class="comments" id="js-comments">
-                    <div class="tabs has-two">
-                        <div class="tabs has-2">
-                            <div class="tabs__head">
-                                <a href="#tab1" class="tabs__head__tab is-active">Alle</a>
-                                <a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
-
-                            </div>
+                    <div class="comments__head" id="js-comments-head">
+                        <h4 class="comments__head__cta">Es existieren bereits <strong>47</strong> Kommentare zu diesem Thema – wie stehen Sie dazu?</h4>
+                        <span class="button comments__head__trigger">Kommentar schreiben</span>
+                        <form class="comments__head__form">
+                            <textarea>Post stuff here</textarea>
+                            <input type="submit" value="Absenden" />
+                        </form>
+                    </div>
+                    <div class="tabs has-2">
+                        <div class="tabs__head" id="js-comments-tabs-head">
+                            <a href="#tab1" class="tabs__head__tab is-active">Alle</a>
+                            <a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
                         </div>
-                        <div class="tabs__content">
-                            <a name="tab1"></a>
-                            <div class="comments__head">
-                                <h4 class="comments__head__cta">Es existieren bereits <strong>47</strong> Kommentare zu diesem Thema – wie stehen Sie dazu?</h4>
-                                <span class="button comments__head__trigger">Kommentar schreiben</span>
-                                <form class="comments__head__form">
-                                    <textarea>Post stuff here</textarea>
-                                    <input type="submit" value="Absenden" />
-                                </form>
+                        <div class="comments__body" id="js-comments-body">
+                            <div class="tabs__content">
+                                <a name="tab1"></a>
+                                <div class="comments__list" id="js-comments-all-list">
+                                    {% for x in range(0, 40) %}
+                                        <article class="comment">
+                                            <div class="comment__head">
+                                                <img src="/img/exner.jpg" class="comment__head__img" />
+                                                <strong class="comment__head__name">
+                                                    Maria Exner
+                                                    <span class="comment__head__name__label">C</span>
+                                                </strong>
+                                                <span class="comment__head__date">vor 7 Minuten</span>
+                                            </div>
+                                            <div class="comment__body">
+                                                <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen erstmal gehöhrig ausgrenzen und das obwohl ein großer Teil der eigenen Basis so denkt.</p>
+                                            </div>
+                                            <aside class="comment__tools">
+                                                <a class="comment__tools__favorite icon-favorite">Favorisieren</a>
+                                                <a class="comment__tools__reply icon-reply">Antworten</a>
+                                            </aside>
+                                        </article>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <div class="comments__list">
-                                {% for x in range(0, 10) %}
-                                    <article class="comment">
-                                        <div class="comment__head">
-                                            <img src="/img/exner.jpg" class="comment__head__img" />
-                                            <strong class="comment__head__name">
-                                                Maria Exner
-                                                <span class="comment__head__name__label">C</span>
-                                            </strong>
-                                            <span class="comment__head__date">vor 7 Minuten</span>
-                                        </div>
-                                        <div class="comment__body">
-                                            <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen erstmal gehöhrig ausgrenzen und das obwohl ein großer Teil der eigenen Basis so denkt.</p>
-                                        </div>
-                                        <aside class="comment__tools">
-                                            <a class="comment__tools__favorite icon-favorite">Favorisieren</a>
-                                            <a class="comment__tools__reply icon-reply">Antworten</a>
-                                        </aside>
-                                    </article>
-                                {% endfor %}
+                            <div class="tabs__content" style="display: none;">
+                                <a name="tab2"></a>
+                                LOL, noch nichts drin.
                             </div>
-                        </div>
-                        <div class="tabs__content">
-                            <a name="tab2"></a>
-                            LOL, noch nichts drin.
+                            <div class="comments__body__prev" id="js-comments-body-next">Neuere</div>
+                            <div class="comments__body__next" id="js-comments-body-prev">Ältere</div>
                         </div>
                     </div>
                 </section>

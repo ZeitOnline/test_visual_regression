@@ -1,3 +1,4 @@
+$comments__break-overlap:  em(768px)
 $comments__break-outside: em(1280px)
 
 .article__comments-trigger
@@ -11,8 +12,8 @@ $comments__break-outside: em(1280px)
   margin-bottom: $small
   position: relative
   padding: $micro $small
-  +respond-min($comments__break-outside)
-    padding: $hair $small $fine $small
+  +respond-min($comments__break-overlap)
+    padding: 0 $small $fine $small
     position: absolute
     top: 0
     right: -20px
@@ -39,23 +40,43 @@ $comments__break-outside: em(1280px)
 
 
 .article__comments-trigger__count
+  +background-size(0,0)
   font-size: $font-l
   margin-right: $micro
-  +respond-min($comments__break-outside)
+  +respond-min($comments__break-overlap)
+    font-size: $font-xxl
     margin-right: 0
     display: block
+    margin-top: $hair
+  +respond-min($comments__break-outside)
     font-size: $font-xxxl
+  .show-comments &
+    color: transparent
+    background-position: center center
+    +background-size(contain)
 
 
 .comments
+  z-index: 20
   display: none
-  +respond-min($comments__break-outside)
-    +animation('comments_fade_in' 0.25s ease-in-out 1 0s)
+  +respond-min($comments__break-overlap)
+    +box-shadow
+    +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
     position: absolute
-    top: 0
+    top: $medium
     height: 100%
-    overflow: auto
+    right: -$page-padding
+    min-width: em(300px)
+    max-width: em(700px)
+    width: 100%
+    background-color: rgba($white, 0.95)
+  +respond-min($comments__break-outside)
+    +box-shadow(none)
+    +animation('comments_outside_move_in' 0.25s ease-in-out 1 0s)
+    top: 0
+    right: auto
     left: em(980px) - $page-padding
+    border-left: 1px dotted $grey--light
     width: em(300px)
     background-color: $white
 
@@ -82,6 +103,49 @@ $comments__break-outside: em(1280px)
   display: none
 
 .comments__list
+  +translateZ(0)
+  +transition(all, 1s)
+  position: relative
+  top: 0px
+
+.comments__body
+  overflow: hidden
+  padding-bottom: $large
+  &:after
+    +background(linear-gradient(rgba($white, 0), $white))
+    content: ''
+    display: none
+    width: 100%
+    height: em(400px)
+    position: absolute
+    bottom: 0
+    left: 0
+  &.is-longer
+    &:after,
+    .comments__body__next,
+    .comments__body__prev
+      display: block
+
+.comments__body__next,
+.comments__body__prev
+  +tablet
+  position: absolute
+  text-align: center
+  cursor: pointer
+  display: none
+  left: 25%
+  width: 50%
+  height: em(50px)
+  background-color: $red
+  color: $white
+  z-index: 4
+  line-height: em(50px)
+
+.comments__body__next
+  bottom: em(25px)
+
+.comments__body__prev
+  bottom: em(100px)
 
 
 .comment
@@ -150,6 +214,7 @@ $comments__break-outside: em(1280px)
 
 .article.show-comments
   +respond-min($comments__break-outside)
+    +translateZ(0)
     left: 0
     margin-left: 0
   .comments
