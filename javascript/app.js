@@ -17,7 +17,7 @@ require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/c
     fontloader.init();
     main_nav.init();
     breadcrumbs.init();
-    comments.init();
     tabs.init();
+    comments.init();
 		$( "figure[data-video]" ).switchVideo();
 });
