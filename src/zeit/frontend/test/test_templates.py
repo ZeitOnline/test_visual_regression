@@ -180,7 +180,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
     # test normal
     ad = {'type': 'rectangle'}
-    markup = '<script data-name="ad__rectangle">'
+    markup = '<div class="iqdplace" data-place="medrec_8"></div>'
     lines = tpl.module.advertising(ad).splitlines()
     assert markup == lines[0].strip()
 
