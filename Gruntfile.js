@@ -32,6 +32,7 @@ module.exports = function(grunt) {
 					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
 					sassDir: 'sass',
+					require: ['animation'],
 					raw: 'preferred_syntax=:sass\n'
 				}
 			}
