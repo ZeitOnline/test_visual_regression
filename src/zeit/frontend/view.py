@@ -117,6 +117,7 @@ class Article(Base):
     def focussed_nextread(self):
         return self.context.focussed_nextread
 
+    @property
     def breadcrumb(self):
         l = [_navigation['start']]
         if self.context.ressort in _navigation:
