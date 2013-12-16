@@ -85,6 +85,20 @@ class Content(Resource):
             return el.pop().text
         return 'default'
 
+    @property
+    def ressort(self):
+        el = self.xml.head.xpath("//attribute[@name='ressort']")
+        if len(el) > 0:
+            return el.pop().text
+        return 'default'
+
+    @property
+    def sub_ressort(self):
+        el = self.xml.head.xpath("//attribute[@name='sub_ressort']")
+        if len(el) > 0:
+            return el.pop().text
+        return 'default'
+
     def _construct_author(self, root):
 
         try:

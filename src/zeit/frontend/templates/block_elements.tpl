@@ -1,4 +1,4 @@
-{% macro main_nav(is_full_width) -%}
+{% macro main_nav(breadcrumb, is_full_width) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
@@ -97,12 +97,7 @@
                     </div>
                     <div class="main-nav__section main-nav__breadcrumbs">
                         <div class="main-nav__section__content is-always-open">
-                            {{ breadcrumbs([
-                                {'text': 'Start', 'link': 'http://zeit.de'},
-                                {'text': 'ZEIT Magazin', 'link': 'http://zeit.de/magazin'},
-                                {'text': 'Lebensart', 'link': 'http://zeit.de/magazin/mode'},
-                                {'text': 'Kann Leipzig Hypezig überleben?', 'link': 'http://www.zeit.de/lebensart/2013-10/leipzig-hypezig-gentrifizierung-wohnkonzepte-stadtentwicklung'}
-                            ], is_full_width) }}
+                            {{ breadcrumbs(breadcrumb, is_full_width) }}
                         </div>
                     </div>
                 </div>
@@ -134,7 +129,7 @@
             <div class="breadcrumbs__list">
                 <div class="breadcrumbs__list__item" itemprop="breadcrumb">
                     {% for crumb in crumbs %}
-                        <a href="{{crumb.link}}">{{crumb.text}}</a>
+                        <a href="{{crumb[1]}}">{{crumb[0]}}</a>
                         {% if not loop.last %}
                           &rsaquo;
                         {% endif %}

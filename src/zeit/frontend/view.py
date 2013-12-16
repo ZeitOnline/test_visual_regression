@@ -21,6 +21,19 @@ class Base(object):
         return self.context.publish_date.astimezone(tz)
 
 
+_navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'lebensart': (
+                   'ZEIT Magazin',
+                   'http://www.zeit.de/magazin/index',
+                   'myid2',
+               ),
+               'mode': (
+                   'Mode',
+                   'http://www.zeit.de/magazin/lebensart/index',
+                   'myid3',
+               ), }
+
+
 @view_config(route_name='json',
              context=zeit.frontend.model.Content,
              renderer='json')
@@ -103,6 +116,16 @@ class Article(Base):
     @property
     def focussed_nextread(self):
         return self.context.focussed_nextread
+
+    def breadcrumb(self):
+        l = [_navigation['start']]
+        if self.context.ressort in _navigation:
+            l.append(_navigation[self.context.ressort])
+        if self.context.sub_ressort in _navigation:
+            l.append(_navigation[self.context.sub_ressort])
+        if self.title:
+            l.append((self.title, 'http://localhost'))
+        return l
 
 
 class Gallery(Base):
