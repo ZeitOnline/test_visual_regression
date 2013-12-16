@@ -18,5 +18,5 @@ require(['modules/fontloader', 'modules/breadcrumbs', 'modules/main-nav', 'modul
     main_nav.init();
     breadcrumbs.init();
     adloader.init();
-		$( "figure[data-video]" ).switchVideo();
+	$( "figure[data-video]" ).switchVideo();
 });
