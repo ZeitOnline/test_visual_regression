@@ -12,6 +12,7 @@ setup(
         'martian',
         'pyramid',
         'pyramid_jinja2',
+        'repoze.bitblt',
         'setuptools',
         'simplejson',
         'supervisor',

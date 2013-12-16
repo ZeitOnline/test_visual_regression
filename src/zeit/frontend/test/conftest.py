@@ -1,4 +1,5 @@
 from pytest_localserver.http import WSGIServer
+from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp
 from os.path import abspath, dirname, join, sep
@@ -35,7 +36,8 @@ browsers = {
 
 @pytest.fixture(scope='session')
 def application():
-    return zeit.frontend.application.Application()({}, **settings)
+    app = zeit.frontend.application.Application()({}, **settings)
+    return ImageTransformationMiddleware(app, secret='time')
 
 
 @pytest.fixture(scope='session')
