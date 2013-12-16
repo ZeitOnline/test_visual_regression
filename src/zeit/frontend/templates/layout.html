@@ -90,7 +90,11 @@
             </div>
             {% endif %}
 
-            <div class="page-wrap--inner">
+            {% if view.context.is_longform %}
+            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
+            {% else %}
+            <div class="page-wrap--inner" id="js-page-wrap-inner">
+            {% endif %}
                 {{ blocks.main_nav(view.context.main_nav_full_width) }}
                 <main role="main" class="main">
                     {%  block content %}{% endblock content %}
