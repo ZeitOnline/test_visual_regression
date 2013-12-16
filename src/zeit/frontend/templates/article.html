@@ -68,7 +68,7 @@
                 <section class="comments" id="js-comments">
                     <div class="comments__head" id="js-comments-head">
                         <h4 class="comments__head__cta">Es existieren bereits <strong>47</strong> Kommentare zu diesem Thema – wie stehen Sie dazu?</h4>
-                        <span class="button comments__head__trigger">Kommentar schreiben</span>
+                        <span class="button comments__head__trigger">Kommentieren</span>
                         <form class="comments__head__form">
                             <textarea>Post stuff here</textarea>
                             <input type="submit" value="Absenden" />
@@ -97,7 +97,7 @@
                                                 <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen erstmal gehöhrig ausgrenzen und das obwohl ein großer Teil der eigenen Basis so denkt.</p>
                                             </div>
                                             <aside class="comment__tools">
-                                                <a class="comment__tools__favorite icon-favorite">Favorisieren</a>
+                                                <a class="comment__tools__reply icon-reply">Melden</a>
                                                 <a class="comment__tools__reply icon-reply">Antworten</a>
                                             </aside>
                                         </article>
@@ -106,7 +106,29 @@
                             </div>
                             <div class="tabs__content">
                                 <a name="tab2"></a>
-                                LOL, noch nichts drin.
+                                <div class="comments__list">
+                                    {% for x in range(0, 30) %}
+                                        <article class="comment">
+                                            <div class="comment__head">
+                                                <img src="/img/exner.jpg" class="comment__head__img" />
+                                                <strong class="comment__head__name">
+                                                    Maria Exner
+                                                    <span class="comment__head__name__label">C</span>
+                                                </strong>
+                                                <span class="comment__head__date">vor 20 Minuten</span>
+                                            </div>
+                                            <div class="comment__body">
+                                                <p>mal gehöhrig ausgrenzen und das obwohl ein großer Teil der eigenen Basis so denkt.</p>
+                                                <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen</p>
+                                                <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen</p>
+                                            </div>
+                                            <aside class="comment__tools">
+                                                <a class="comment__tools__report icon-report">Melden</a>
+                                                <a class="comment__tools__reply icon-reply">Antworten</a>
+                                            </aside>
+                                        </article>
+                                    {% endfor %}
+                                </div>
                             </div>
                             <div class="comments__body__prev" id="js-comments-body-next">Neuere</div>
                             <div class="comments__body__next" id="js-comments-body-prev">Ältere</div>
