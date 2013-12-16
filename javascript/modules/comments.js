@@ -3,7 +3,7 @@
 define(['jquery', 'modules/tabs'], function() {
   var $comments_trigger = $('#js-comments-trigger');
   var $comments = $('#js-comments');
-  var $article = $('#js-article');
+  var $page_wrap_inner = $('#js-page-wrap-inner');
   var $comments_head = $('#js-comments-head');
   var $comments_tabs_head = $('#js-comments-tabs-head');
   var $comments_body = $('#js-comments-body');
@@ -53,7 +53,7 @@ define(['jquery', 'modules/tabs'], function() {
       window_width = $(window).innerWidth();
 
       if (window_width >= 1280) {
-        var comments_width = window_width - $article.outerWidth();
+        var comments_width = window_width - $page_wrap_inner.outerWidth();
         // restrict width of comments box when outside (could be done in css?)
         if (comments_width > 700) {
           comments_width = 700;
@@ -64,7 +64,7 @@ define(['jquery', 'modules/tabs'], function() {
       }
 
       // show the comments
-      $article.toggleClass('show-comments');
+      $page_wrap_inner.toggleClass('show-comments');
 
       recalculate_pagination();
     });

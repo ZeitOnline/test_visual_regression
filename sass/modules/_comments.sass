@@ -205,17 +205,12 @@ $comments__break-outside: em(1280px)
 
 .comment__tools__reply
 
-.article
-  +respond-min($comments__break-outside)
-    +transition(all, 0.5s)
-    position: relative
-    left: 50%
-    margin-left: -490px
 
-.article.show-comments
+.page-wrap--inner.show-comments
   +respond-min($comments__break-outside)
     +translateZ(0)
     left: 0
     margin-left: 0
+    z-index: 2000
   .comments
     display: block

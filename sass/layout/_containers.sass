@@ -9,5 +9,16 @@
 
 .page-wrap--inner
   max-width: $max-page-width
-  margin: 0 auto
-  background-color: $white
+  background-color: $color-page-bg
+  +respond-min($max-page-width)
+    +transition(all, 0.5s)
+    position: relative
+    left: 50%
+    margin-left: -$max-page-width/2
+  &.for-longform
+    max-width: none
+    left: 0
+    margin-left: 0
+    height: 100%
+    min-height: 100%
+
