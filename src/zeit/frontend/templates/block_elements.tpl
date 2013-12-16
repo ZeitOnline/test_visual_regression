@@ -203,13 +203,7 @@
 
 {% macro advertising(ad) -%}
     {% if ad.type == 'rectangle' %}
-        <script data-name="ad__rectangle">
-            (function() {
-                if (window.ad_slots.rec.active_class!= null && window.location.hash === '#ads') {
-                    document.write('<div class="' + window.ad_slots.rec.active_class + '">' +window.ad_slots.rec.active_text+ '</div>');
-                }
-            }).call(this);
-        </script>
+        <div class="iqdplace" data-place="medrec_8"></div>
     {% endif %}
 {%- endmacro %}
 
