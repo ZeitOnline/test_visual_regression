@@ -21,9 +21,8 @@ $nav__section-border: 1px solid $grey--mid
 .main-nav
   position: relative
   width: 100%
-  max-width: $max-page-width - $page-padding*2
+  max-width: $max-page-width
   margin: 0 auto
-  margin-top: $small
   margin-bottom: $nav__row-height
   &.is-full-width
     max-width: none
@@ -45,7 +44,7 @@ $nav__section-border: 1px solid $grey--mid
 
 .main-nav__wrap
   +respond-min($nav__break__full-menu)
-    max-width: $max-page-width - $page-padding*2
+    max-width: $max-page-width
     margin: 0 auto
     height: 100%
     position: relative
