@@ -22,6 +22,7 @@ class Base(object):
 
 
 _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'zmo':('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
                'lebensart': (
                    'ZEIT Magazin',
                    'http://www.zeit.de/magazin/index',
@@ -120,6 +121,7 @@ class Article(Base):
     @property
     def breadcrumb(self):
         l = [_navigation['start']]
+        l.append(_navigation['zmo'])
         if self.context.ressort in _navigation:
             l.append(_navigation[self.context.ressort])
         if self.context.sub_ressort in _navigation:
