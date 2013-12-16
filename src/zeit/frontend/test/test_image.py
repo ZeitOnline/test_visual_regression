@@ -21,3 +21,13 @@ def test_scaled_image_download(browser, asset):
     assert int(result.headers['Content-Length']) < 4843
     assert result.headers['Content-Type'] == 'image/jpeg; charset=UTF-8'
     assert result.headers['Content-Disposition'] == 'inline; filename="bnd-148x84.jpg"'
+
+
+def test_scaled_image_download_with_bad_signature(browser, asset):
+    path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
+    signature = sha1('80:60:foobar').hexdigest()      # we know the secret! :)
+    result = browser.get('/bitblt-80x60-' + signature + path)
+    # bad signatures cause `repoze.bitblt` to do nothing; we get the original image
+    image = Image.open(StringIO(''.join(result.app_iter)))
+    assert image.size == (148, 84)
+    assert result.headers['Content-Length'] == '4843'
