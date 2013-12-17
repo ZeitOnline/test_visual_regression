@@ -1,4 +1,5 @@
 import pytest
+import selenium
 from selenium import webdriver
 from pytest_localserver.http import WSGIServer
 from zeit.frontend.application import factory
@@ -16,6 +17,7 @@ browsers = {
     #'phantomjs': webdriver.PhantomJS,
 }
 
+selenium_speed = 2000
 
 @pytest.fixture(scope='session')
 def testserver(request):
@@ -30,7 +32,6 @@ def selenium_driver(request):
     if request.param == 'firefox':
         profile = webdriver.FirefoxProfile()
         profile.set_preference('network.http.use-cache', False)
-
         b = browsers[request.param](firefox_profile=profile)
     else:
         b = browsers[request.param]()
