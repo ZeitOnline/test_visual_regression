@@ -43,8 +43,8 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    obj = [{'link': 'link', 'text': 'text'}]
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
         'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
@@ -58,11 +58,13 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         output += line.strip()
     assert markup == output
 
-def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    obj = [{'link': 'link', 'text': 'text'}]
 
-    markup = '<div class="breadcrumbs-wrap is-full-width"><div class="breadcrumbs" ' \
+def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
+    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    obj = [('text', 'link')]
+
+    markup = '<div class="breadcrumbs-wrap is-full-width">' \
+        '<div class="breadcrumbs" ' \
         'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
         'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
         'Wo bin ich?</div><div class="breadcrumbs__list">' \
@@ -181,7 +183,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
     # test normal
     ad = {'type': 'rectangle'}
-    markup = '<script data-name="ad__rectangle">'
+    markup = '<div class="iqdplace" data-place="medrec_8"></div>'
     lines = tpl.module.advertising(ad).splitlines()
     assert markup == lines[0].strip()
 
@@ -314,7 +316,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert img in output
     assert cap in output
 
-    #assert different formates
+    # assert different formates
     obj['format'] = 'small'
     fig = '<figure class="figure-stamp" data-video="1">'
     lines = tpl.module.video(obj).splitlines()

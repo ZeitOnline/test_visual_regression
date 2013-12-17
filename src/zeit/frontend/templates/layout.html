@@ -17,16 +17,42 @@
         <!--[if gt IE 8]><!-->
             <link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
         <!--<![endif]-->
+        <style type="text/css">
+            #iqd_mainAd {
+                margin-bottom: 0;
+            }
+            #iqd_align_Ad {
+                width: 61.25em;
+                margin: 0 auto;
+            }
+            #iqd_topAd {
+                padding: 0;
+                position: relative;
+            }
+            #iqd_rightAd {
+                position: absolute;
+                bottom: -630px;
+                left: 980px;
+                width: 160px;
+            }
+            #iqadtile1 {
+                padding-left: 20px;
+            }
+            .content .wrapper{
+                max-width: 61.25em;
+                padding-left: 1.25em;
+                padding-right: 1.25em;
+                margin-left: auto;
+                margin-right: auto;
+                border: 2px solid red;
+            }
+        </style>
 
         <meta name="last-modified" content="{{ view.last_modified_date }}"/>
         <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
         <meta name="date" content="{{ view.publish_date_meta }}"/>
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
-        <script src="/js/libs/resize-ads.js"></script>
-        <script data-main="/js/app.js" src="/js/libs/require.js"></script>
-        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
-
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
             window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
@@ -35,63 +61,45 @@
         <noscript>
             <link href="/css/icons/icons.fallback.css" rel="stylesheet">
         </noscript>
+
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
+        {% if view.context.advertising_enabled %}
+        <script type="text/javascript">
+            var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/homepage;";
+            var ord = (Math.random()*100000);
+            var n_pbt = "";
+            nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
+            document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');
+        </script>
+        {% endif %}
 
         <div class="page-wrap">
 
             {% if view.context.advertising_enabled %}
-            <div class="ad__fp__container--top">
-                <script>
-                    (function() {
-                        if (window.ad_slots.fp_top.active_class!= null && window.location.hash === '#fp') {
-                            document.write('<div class="' + window.ad_slots.fp_top.active_class + '">' +window.ad_slots.fp_top.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
+            <div class="iqdplace" data-place="mobile_topbanner"></div>
+            <div id="iqd_mainAd" >
+                <div id="iqd_align_Ad">
+                    <div id="iqd_topAd">
+                        <div class="iqdplace" data-place="topbanner"></div>
+                        <div id="iqd_rightAd">
+                            <div class="iqdplace" data-place="skyscraper"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endif %}
 
-            {% if view.context.advertising_enabled %}
-            <div class="ad__leaderboard">
-                <script data-name="ad__leaderboard">
-                    (function() {
-                        if (window.ad_slots.leaderboard.active_class!= null && window.location.hash === '#ads') {
-                            document.write('<div class="' + window.ad_slots.leaderboard.active_class + '">' +window.ad_slots.leaderboard.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
-            </div>
+            {% if view.context.is_longform %}
+            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
+            {% else %}
+            <div class="page-wrap--inner" id="js-page-wrap-inner">
             {% endif %}
-
-            {% if view.context.advertising_enabled %}
-            <div class="ad__fp__container--left">
-                <script>
-                    (function() {
-                        if (window.ad_slots.fp_left.active_class!= null && window.location.hash === '#fp') {
-                            document.write('<div class="' + window.ad_slots.fp_left.active_class + '">' +window.ad_slots.fp_left.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
+                {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+                <main role="main" class="main">
+                    {%  block content %}{% endblock content %}
+                </main>
             </div>
-            {% endif %}
-
-            {% if view.context.advertising_enabled %}
-            <div class="ad__fp__container--right">
-                <script>
-                    (function() {
-                        if (window.ad_slots.fp_right.active_class!= null && window.location.hash === '#fp') {
-                            document.write('<div class="' + window.ad_slots.fp_right.active_class + '">' +window.ad_slots.fp_right.active_text+ '</div>');
-                        }
-                    }).call(this);
-                </script>
-            </div>
-            {% endif %}
-
-        {{ blocks.main_nav(view.context.main_nav_full_width) }}
-        <main role="main" class="main">
-            {%  block content %}{% endblock content %}
-        </main>
 
         </div>
 
@@ -104,5 +112,26 @@
                 };
             </script>
         </div>
+        {% if view.context.advertising_enabled %}
+            <script>
+                // IQD varPack
+                window.IQD_varPack = {
+                    iqdSite: 'zol',
+                    iqdRessort: '',
+                    ord: Math.random()*10000000000000000,
+                    iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
+                    iqdCountSkyReq: parseInt(0,10),
+                    iqdEnableSky: 'neutral'
+                };
+                // IQD variable test
+                window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
+                window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
+                window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
+            </script>
+            <script src="/js/libs/postscribe.min.js"></script>
+            <script src="/js/libs/sasmobile.js"></script>
+        {% endif %}
+        <script data-main="/js/app.js" src="/js/libs/require.js"></script>
+        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
     </body>
 </html>
