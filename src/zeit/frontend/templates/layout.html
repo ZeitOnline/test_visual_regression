@@ -95,7 +95,7 @@
             {% else %}
             <div class="page-wrap--inner" id="js-page-wrap-inner">
             {% endif %}
-                {{ blocks.main_nav(view.context.main_nav_full_width) }}
+                {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
                 <main role="main" class="main">
                     {%  block content %}{% endblock content %}
                 </main>
