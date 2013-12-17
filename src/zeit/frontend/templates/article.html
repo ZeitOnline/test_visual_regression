@@ -61,17 +61,19 @@
                 </div>
                 {% endif %}
 
-                <div class="article__comments-trigger" id="js-comments-trigger">
-                    <span class="article__comments-trigger__count icon-close">47</span>
-                    Kommentare
+                <div class="tc">
+                    <div class="article__comments-trigger" id="js-comments-trigger">
+                        <div class="article__comments-trigger__wrap">
+                            <span class="article__comments-trigger__count icon-close-comments">47</span>
+                            Kommentare
+                        </div>
+                    </div>
                 </div>
                 <section class="comments" id="js-comments">
                     <div class="comments__head" id="js-comments-head">
-                        <h4 class="comments__head__cta">Es existieren bereits <strong>47</strong> Kommentare zu diesem Thema – wie stehen Sie dazu?</h4>
-                        <span class="button comments__head__trigger">Kommentieren</span>
-                        <form class="comments__head__form">
-                            <textarea>Post stuff here</textarea>
-                            <input type="submit" value="Absenden" />
+                        <form class="comments__head__form" id="js-comments-head-form">
+                            <textarea placeholder="Ich denke …"></textarea>
+                            <input type="submit" class="button" value="Kommentieren" />
                         </form>
                     </div>
                     <div class="tabs has-2">
@@ -87,18 +89,18 @@
                                         <article class="comment">
                                             <div class="comment__head">
                                                 <img src="/img/exner.jpg" class="comment__head__img" />
-                                                <strong class="comment__head__name">
-                                                    Maria Exner
-                                                    <span class="comment__head__name__label">C</span>
-                                                </strong>
-                                                <span class="comment__head__date">vor 7 Minuten</span>
+                                                <div class="comment__head__meta">
+                                                    <strong class="comment__head__meta__name">Maria Exner</strong>
+                                                    <a href="#" class="comment__head__meta__date">vor {{(x+1)*10}} Minuten</a>
+                                                    <div class="comment__head__meta__label">Community</div>
+                                                </div>
                                             </div>
                                             <div class="comment__body">
                                                 <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen erstmal gehöhrig ausgrenzen und das obwohl ein großer Teil der eigenen Basis so denkt.</p>
                                             </div>
                                             <aside class="comment__tools">
-                                                <a class="comment__tools__reply icon-reply">Melden</a>
-                                                <a class="comment__tools__reply icon-reply">Antworten</a>
+                                                <a class="comment__tools__flag icon-flag">Kommentar melden</a>
+                                                <a class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>
                                             </aside>
                                         </article>
                                     {% endfor %}
@@ -111,11 +113,11 @@
                                         <article class="comment">
                                             <div class="comment__head">
                                                 <img src="/img/exner.jpg" class="comment__head__img" />
-                                                <strong class="comment__head__name">
-                                                    Maria Exner
-                                                    <span class="comment__head__name__label">C</span>
-                                                </strong>
-                                                <span class="comment__head__date">vor 20 Minuten</span>
+                                                <div class="comment__head__meta">
+                                                    <strong class="comment__head__meta__name">Maria Exner</strong>
+                                                    <span class="comment__head__meta__date">vor {{(x+1)*10}} Minuten</span>
+                                                    <div class="comment__head__meta__label">Community</div>
+                                                </div>
                                             </div>
                                             <div class="comment__body">
                                                 <p>mal gehöhrig ausgrenzen und das obwohl ein großer Teil der eigenen Basis so denkt.</p>
@@ -123,15 +125,19 @@
                                                 <p>...aber er wird wohl keine große politische Karriere machen. Anpassung ist da wesentlich förderlicher für das eigene Weiterkommen. Die Partei wird in in weiten Teilen</p>
                                             </div>
                                             <aside class="comment__tools">
-                                                <a class="comment__tools__report icon-report">Melden</a>
-                                                <a class="comment__tools__reply icon-reply">Antworten</a>
+                                                <a class="comment__tools__flag icon-flag">Kommentar melden</a>
+                                                <a class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>
                                             </aside>
                                         </article>
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="comments__body__prev" id="js-comments-body-next">Neuere</div>
-                            <div class="comments__body__next" id="js-comments-body-prev">Ältere</div>
+                            <div class="comments__body__newer">
+                                <div class="button icon-comments-newer-inactive" id="js-comments-body-newer">Neuere</div>
+                            </div>
+                            <div class="comments__body__older">
+                                <div class="button icon-comments-older-inactive" id="js-comments-body-older">Ältere</div>
+                            </div>
                         </div>
                     </div>
                 </section>

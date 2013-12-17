@@ -1,3 +1,5 @@
+$tabs__active-border: #CCC
+
 .tabs
   width: 100%
 
@@ -7,24 +9,25 @@
 
 .tabs__head__tab
   +tablet
+  +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
   float: left
-  padding: $thin $small
+  padding: $little $small
   text-align: center
   text-transform: uppercase
-  color: $grey
-  background-color: $grey--light
-  border-bottom: 1px solid $grey
-  border-right: 1px solid $grey
+  letter-spacing: 1px
+  background-color: $white
+  border-bottom: 1px solid $tabs__active-border
+  border-right: 1px solid $tabs__active-border
   +on-interaction
     color: $grey
-    border-color: $grey
+    border-color: $tabs__active-border
     text-decoration: none
   &.is-active
+    +link-colors($grey, $grey, $grey, $grey, $grey)
     background-color: $white
     border: none
-    color: $grey
-    border-right: 1px solid $grey
-    border-top: 1px solid $grey
+    border-right: 1px solid $tabs__active-border
+    border-top: 1px solid $tabs__active-border
   &:last-child
     border-right: none
   .has-2 &
