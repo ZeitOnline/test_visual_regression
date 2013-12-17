@@ -42,12 +42,9 @@ class Article(Base):
     def __call__(self):
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
-<<<<<<< HEAD
-        if IArticleTemplateSettings(self.context).template == 'longform':
-=======
         self.context.is_longform = False
-        if self.context.template == 'longform':
->>>>>>> master
+
+        if IArticleTemplateSettings(self.context).template == 'longform':
             self.context.advertising_enabled = False
             self.context.main_nav_full_width = True
             self.context.is_longform = True
