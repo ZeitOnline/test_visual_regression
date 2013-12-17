@@ -63,6 +63,12 @@
 .article__body
 	@extend %copy
 	position: relative
+	p:first-of-type
+		+respond-min($comments__break-overlap)
+			padding-right: em(80px)
+		+respond-min($break-3)
+			padding-right: 0
+
 	+respond-min($break-3)
 		padding-left: $gutter/2
 		padding-right: $gutter/2
