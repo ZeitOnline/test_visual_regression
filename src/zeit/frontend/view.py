@@ -1,9 +1,9 @@
 from babel.dates import get_timezone
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
-from zeit.cms.related.interfaces import IRelatedContent
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.image.interfaces import IImageMetadata
+from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 import zeit.content.article.interfaces
 
 
@@ -28,7 +28,7 @@ class Article(Base):
     def __call__(self):
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
-        if self.context.template == 'longform':
+        if IArticleTemplateSettings(self.context).template == 'longform':
             self.context.advertising_enabled = False
             self.context.main_nav_full_width = True
             return render_to_response('templates/longform.html',
@@ -104,11 +104,9 @@ class Article(Base):
 
     @property
     def focussed_nextread(self):
-        # XXX nextread is not implemented in zeit.content.article yet, so we'll
-        # use relateds for the time being
-        related = IRelatedContent(self.context).related
+        nextread = INextRead(self.context)
+        related = nextread.nextread
         if related:
-            related = related[0]
             image = related.main_image
             if image is not None:
                 image = {
@@ -118,7 +116,7 @@ class Article(Base):
                 }
             else:
                 image = {'uniqueId': None}
-            return {'layout': 'base',  # XXX not implemented
+            return {'layout': nextread.nextread_layout,
                     'article': related,
                     'image': image}
 

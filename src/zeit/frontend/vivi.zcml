@@ -26,6 +26,7 @@
   <exclude package="zeit.content.cp.browser" />
   <include package="zeit.content.cp" />
   <include package="zeit.intrafind" />
+  <include package="zeit.magazin" />
 
   <!-- <include package="zeit.seo" /> -->
 

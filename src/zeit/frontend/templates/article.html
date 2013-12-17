@@ -50,8 +50,6 @@
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
                     <span class="article__tags__title">Tags</span>
-                    {# XXX will be empty until zeit.connector
-                       provides DAV-properties #}
                     {% for tag in view.rankedTags %}
                       <a href="#{{ tag.url_value }}">{{ tag.label }}</a>
                       {% if not loop.last %}
