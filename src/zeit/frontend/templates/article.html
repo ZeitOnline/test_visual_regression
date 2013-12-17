@@ -1,7 +1,7 @@
 {% extends "templates/layout.html" %}
 {% import 'templates/block_elements.tpl' as blocks %}
 {% block content %}
-    <article class="article">
+    <article class="article" id="js-article">
         <div class="article__wrap">
             <div class="article__head-wrap">
                 <header class="article__title-wrap">
@@ -60,7 +60,9 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
+                {{ blocks.mock_comments() }}
+
                 {{ blocks.focussed_nextread(view.focussed_nextread) }}
 
             </div>

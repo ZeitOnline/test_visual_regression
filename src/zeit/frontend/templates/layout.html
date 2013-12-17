@@ -46,7 +46,7 @@
                 margin-right: auto;
                 border: 2px solid red;
             }
-        </style>  
+        </style>
 
         <meta name="last-modified" content="{{ view.last_modified_date }}"/>
         <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
@@ -70,7 +70,7 @@
             var ord = (Math.random()*100000);
             var n_pbt = "";
             nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
-            document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');     
+            document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');
         </script>
         {% endif %}
 
@@ -84,17 +84,22 @@
                         <div class="iqdplace" data-place="topbanner"></div>
                         <div id="iqd_rightAd">
                             <div class="iqdplace" data-place="skyscraper"></div>
-                        </div> 
+                        </div>
                     </div>
-                </div> 
+                </div>
             </div>
             {% endif %}
 
-
-        {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
-        <main role="main" class="main">
-            {%  block content %}{% endblock content %}
-        </main>
+            {% if view.context.is_longform %}
+            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
+            {% else %}
+            <div class="page-wrap--inner" id="js-page-wrap-inner">
+            {% endif %}
+                {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+                <main role="main" class="main">
+                    {%  block content %}{% endblock content %}
+                </main>
+            </div>
 
         </div>
 
