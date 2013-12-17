@@ -88,6 +88,7 @@ module.exports = function(grunt) {
 				ignores: [
 					'javascript/libs/chai.js',
 					'javascript/libs/jquery-1.10.2.min.js',
+					'javascript/libs/jquery.visible.min.js',
 					'javascript/libs/modernizr.custom.42776.js',
 					'javascript/libs/require.js',
 					'javascript/libs/sasmobile.js',
