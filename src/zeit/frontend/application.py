@@ -117,13 +117,15 @@ class Application(object):
             'zeit.content.article', {
                 'genre-url': _product_url(
                     'zeit.content.article.tests', 'article-genres.xml'),
-                'image-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
-                                        'data/article-image-layouts.xml'),
-                'video-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
-                                        'data/article-video-layouts.xml'),
-                'htmlblock-layout-source': (
-                    'http://zip6.zeit.de:9000/cms/work/'
-                    'data/article-htmlblock-layouts.xml'),
+                'image-layout-source': _product_url(
+                    'zeit.content.article.edit.tests',
+                    'image-layouts.xml'),
+                'video-layout-source': _product_url(
+                    'zeit.content.article.edit.tests',
+                    'video-layouts.xml'),
+                'htmlblock-layout-source': _product_url(
+                    'zeit.content.article.edit.tests',
+                    'htmlblock-layouts.xml'),
         })
 
         zope.app.appsetup.product.setProductConfiguration(
