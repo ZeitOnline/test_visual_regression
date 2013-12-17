@@ -51,7 +51,7 @@ class Paragraph(object):
 class Image(object):
 
     def __new__(cls, model_block):
-        if model_block.layout == 'zmo_header':
+        if model_block.layout == 'zmo-xl':
             return None
         return super(Image, cls).__new__(cls, model_block)
 

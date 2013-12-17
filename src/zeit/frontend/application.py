@@ -121,6 +121,19 @@ class Application(object):
                                         'data/article-image-layouts.xml'),
                 'video-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
                                         'data/article-video-layouts.xml'),
+                'htmlblock-layout-source': (
+                    'http://zip6.zeit.de:9000/cms/work/'
+                    'data/article-htmlblock-layouts.xml'),
+        })
+
+        zope.app.appsetup.product.setProductConfiguration(
+            'zeit.magazin', {
+                'article-template-source': (
+                    'http://zip6.zeit.de:9000/cms/work/'
+                    'data/article-templates.xml'),
+                'article-related-layout-source': (
+                    'http://zip6.zeit.de:9000/cms/work/'
+                    'data/article-related-layouts.xml'),
         })
 
     @property
