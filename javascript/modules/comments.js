@@ -23,6 +23,10 @@ define(['jquery', 'modules/tabs'], function() {
       if ($comments_body.height() < $comments_all_list.height()) {
         $comments_body.addClass('show-older-trigger');
       }
+      var current_top_offset = parseInt($comments_all_list.css('top').replace('px',''), 10);
+      if (current_top_offset < 0) {
+        $comments_body.addClass('show-newer-trigger');
+      }
     // handle mobile widths
     } else {
       $comments_body.css('height', 'auto');
@@ -64,9 +68,10 @@ define(['jquery', 'modules/tabs'], function() {
       }, 250);
     });
 
+
     // handle tab switch: recalculate comment metrics for new comment list
     $comments_tabs_head.find('.tabs__head__tab').click(function(e) {
-      $comments_body.removeClass('has-older-comments has-newer-comments');
+      $comments_body.removeClass('show-newer-trigger show-older-trigger');
       recalculate_pagination();
     });
 
