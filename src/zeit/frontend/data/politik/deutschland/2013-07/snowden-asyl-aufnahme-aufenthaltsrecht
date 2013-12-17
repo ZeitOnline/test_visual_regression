@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-3/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Edward Snowden</bu>
+      <copyright py:pytype="str">© The Guardian/Getty Images</copyright>
+    </image>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/snowden" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Whistleblower</supertitle>
+        <title py:pytype="str">Snowden verzichtet auf Asyl in Russland</title>
+        <text py:pytype="str">Der Enthüller der NSA-Spionageaffäre hat laut Kreml seinen Antrag zurückgezogen. Grund seien die von Putin gestellten Bedingungen. Snowden will nun auch nach Deutschland.</text>
+        <description py:pytype="str">Der Enthüller der NSA-Spionageaffäre hat laut Kreml seinen Antrag zurückgezogen. Grund seien die von Putin gestellten Bedingungen. Snowden will nun auch nach Deutschland.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Snowden Asyl" base-id="http://xml.zeit.de/politik/ausland/2013-07/snowden-asyl-2/" type="jpg" publication-date="" expires="2013-10-02T05:41:16+00:00">
+          <bu py:pytype="str">Ein Bus in Hongkong fährt an einem Unterstützerplakat für Edward Snowden vorbei.  </bu>
+          <copyright py:pytype="str">© Kin Cheung/AP/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/snowden-putin-asyl" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Abhörskandal</supertitle>
+        <title py:pytype="str">Putin bietet Snowden Bleiberecht an</title>
+        <text py:pytype="str">Die Flucht Snowdens ist möglicherweise zu Ende: Der Whistleblower könne in Russland bleiben, sagt Präsident Putin – vorausgesetzt, er schade den USA nicht weiter.</text>
+        <description py:pytype="str">Die Flucht Snowdens ist möglicherweise zu Ende: Der Whistleblower könne in Russland bleiben, sagt Präsident Putin – vorausgesetzt, er schade den USA nicht weiter.</description>
+        <byline xsi:nil="true" />
+        <image alt="TV-Bilder von Edward Snowden in Moskau" align="left" base-id="http://xml.zeit.de/politik/ausland/2013-07/putin-snowden/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">TV-Bilder von Edward Snowden in Moskau</bu>
+          <copyright py:pytype="str">© Sergei Karpukhin/Reuters</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, AFP, Reuters, zz</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-02T15:33:48.477556+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-02T15:13:51.591987+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-02T15:34:51.045545+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-02T15:12:57.712200+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-02T15:12:34.771777+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.zacharakis</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">bb23a0b01aa645289cea94766745f3f8</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3579</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:935903d4-d23e-4c9e-8752-43d38ae7b1fe}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="9" type="Person">Edward Snowden</tag><tag url_value="csu" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" score="6" type="Organization">CSU</tag><tag url_value="justizministerium" uuid="c9aac7ca-ae94-40be-a37a-e56dfd4c937e" score="5" type="Organization">Justizministerium</tag><tag url_value="asyl" uuid="1f68751d-9938-4737-b150-95c265cf00f7" score="4" type="free">Asyl</tag><tag url_value="fluechtling" uuid="d7c98935-f4bf-43b5-bf38-5307a4d3ed4e" score="4" type="free">Flüchtling</tag><tag url_value="innenminister" uuid="05da8430-80cf-4036-adb0-5da9d442b292" score="4" type="free">Innenminister</tag><tag url_value="rechtsstaat" uuid="c058570f-33d9-419f-aa4d-465fe4518856" score="4" type="free">Rechtsstaat</tag><tag url_value="spionage" uuid="ac33e676-64d2-4b10-b8dc-0c47574e6e20" score="4" type="free">Spionage</tag><tag url_value="todesstrafe" uuid="72530d6b-cd07-40d7-bad9-2cb3a44667ee" score="4" type="free">Todesstrafe</tag><tag url_value="us-geheimdienst" uuid="282ef388-70fd-42e2-b90f-e18a8529c06a" score="4" type="free">US-Geheimdienst</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="4" type="Location">USA</tag><tag url_value="einstellung" uuid="417fe802-d3e8-4345-8570-90c8d1553c7d" score="3" type="free">Einstellung</tag><tag url_value="syrien" uuid="37d1aa51-fe08-4277-9e24-c7a7cb8bb778" score="3" type="Location">Syrien</tag><tag url_value="frankfurt-am-main" uuid="897a4bb0-3350-4613-ad8d-dd3625bb9a08" score="1" type="Location">Frankfurt am Main</tag><tag url_value="moskau" uuid="68918ea8-dfaa-4acd-8078-6bd1c66d32f7" score="1" type="Location">Moskau</tag></rankedTags></head><body>
+    <supertitle>US-Geheimdienstaffäre</supertitle>
+    <title>Wie Deutschland Snowden doch aufnehmen könnte</title>
+    <subtitle>Es ist unwahrscheinlich, dass einem Asylantrag des früheren Geheimdienstmitabeiters in Deutschland stattgegeben wird. Trotzdem könnte ihn die Bundesregierung aufnehmen.</subtitle>
+    <division type="page">
+      <image align="left" title="Snowden Friedrich" base-id="http://xml.zeit.de/politik/deutschland/2013-07/snowden-friedrich-3/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Edward Snowden</bu>
+        <copyright py:pytype="str">© The Guardian/Getty Images</copyright>
+      </image>
+      <p>Die Bundesregierung <a href="http://www.zeit.de/politik/deutschland/2013-07/snowden-asyl-deutschland" target="_blank" class="">prüft derzeit eine Aufnahme</a> des ehemaligen US-Geheimdienstmitarbeiters <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Edward Snowden</entity> in Deutschland. Zuvor war in der deutschen Botschaft in <entity idref="Moskau" entity_type="Location" url_value="orte/moskau">Moskau</entity> ein Asylantrag Snowdens eingegangen, bestätigte Außenminister Guido Westerwelle. Asylanträge können allerdings nicht aus dem Ausland gestellt werden. Daher untersucht die Bundesregierung nun eine Aufnahme nach dem Aufenthaltsrecht, ohne dass ein Antrag gestellt wird.<br /></p>
+      <p>Maßgeblich dafür ist der <a href="http://www.gesetze-im-internet.de/aufenthg_2004/BJNR195010004.html" target="_blank" class="">Artikel 22 des Aufenthaltsgesetzes</a>. Dieser sieht grundsätzlich
+die Möglichkeit einer Aufnahme aus dem Ausland vor, wenn dies
+aus völkerrechtlichen oder dringenden humanitären Gründen oder
+zur Wahrung <a href="http://www.zeit.de/politik/deutschland/2013-07/spionage-abhoerskandal-bundesregierung-kommentar" target="_blank" class="">der politischen Interessen der Bundesrepublik</a>
+erforderlich erscheint. Nach dieser Regelung werden etwa
+Flüchtlinge aus dem Bürgerkriegsland <entity idref="Syrien" entity_type="Location" url_value="orte/syrien">Syrien</entity> in Deutschland
+aufgenommen.</p>
+      <p>Der Aspekt der politischen Dringlichkeit ist nach Aussage von Bundesinnenminister Hans-Peter Friedrich (<entity idref="CSU" entity_type="Organization" url_value="organisationen/csu">CSU</entity>) in dieser Sache am ehesten anzuwenden. Die Bundesregierung könnte eine Aufnahme damit begründen, dass damit die Abhörmethoden der US-Geheimdienste aufgeklärt werden sollen.</p>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2013-07/2522293312001" expires="2013-08-01T07:00:00+00:00" />
+      <p>Kompliziert wird der Fall aber, weil Snowden von den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> wegen Spionage mit internationalem Haftbefehl gesucht wird. Die EU und die USA haben ein Auslieferungsabkommen geschlossen, das 2010 in Kraft trat. Danach müssen mutmaßliche Täter ausgeliefert werden, wenn ihnen Haftstrafen von mindestens einem Jahr drohen. Könnte gegen den mutmaßlichen Täter allerdings die Todesstrafe verhängt werden, muss Deutschland dem Vertrag zufolge nur ausliefern, wenn die USA zuvor zusichern, die Todesstrafe nicht zu vollziehen.</p>
+      <p>
+        <strong>Auslieferung müsste Justizministerium zustimmen</strong>
+        <br />
+      </p>
+      <p>Ob Snowden tatsächlich in die USA ausgeliefert würde, hängt nach Einschätzung von Experten von vielen Faktoren ab und gilt als juristisch extrem komplizierte Frage. Der Deutsche Anwaltverein (DAV) geht davon aus, dass selbst bei einer Anerkennung Snowdens als Flüchtling das Auslieferungsrecht Vorrang hätte. Letztlich hänge eine Auslieferung aber von der Zustimmung des Justizministeriums ab. Nach Kenntnis des DAV hat Deutschland bisher niemanden ausgeliefert, der als asylberechtigt oder als Flüchtling anerkannt wurde.</p>
+      <p>Wollte Snowden es doch über das Asylverfahren versuchen, müsste er erst nach Deutschland einreisen, weil ein Antrag nur auf deutschem Boden gestellt werden kann. Der IT-Spezialist müsste daher etwa nach <entity idref="Frankfurt+am+Main" entity_type="Location" url_value="orte/frankfurt-am-main">Frankfurt am Main</entity> fliegen, um dort um Schutz bitten zu können. Weil sein US-Pass mittlerweile für ungültig erklärt wurde, um seine weitere Flucht um die Welt zu erschweren, bräuchte er die Erlaubnis russischer Behörden.</p>
+      <p>Dass einem Asylantrag Snowdens in Deutschland stattgegeben wird, ist unwahrscheinlich. Innenminister Friedrich sagte zwar, dass eine Aufnahme aus humanitären und völkerrechtlichen Gründen geprüft werde. Die USA seien aber ein Rechtsstaat.   <br /></p>
+      <p>Asyl erhalten in Deutschland nur politisch Verfolgte. Dies liegt beispielsweise vor, wenn ein Staat einen Menschen wegen seiner politischen Überzeugung oder seiner religiösen Einstellung in seinen Rechten verletzt und aus der Gemeinschaft ausgrenzt. Der Menschenrechtsverstoß muss so schwerwiegend sein, dass er die Menschenwürde verletzt und über das hinausgeht, was die Bewohner des jeweiligen Staates ansonsten allgemein hinzunehmen haben.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Wie Deutschland Snowden doch aufnehmen könnte</title>
+    <supertitle>US-Geheimdienstaffäre</supertitle>
+    <text>Es ist unwahrscheinlich, dass einem Asylantrag des früheren Geheimdienstmitabeiters in Deutschland stattgegeben wird. Trotzdem könnte ihn die Bundesregierung aufnehmen.</text>
+  </teaser>
+</article>

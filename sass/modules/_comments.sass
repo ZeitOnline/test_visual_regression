@@ -1,0 +1,244 @@
+.article__comments-trigger
+  +inline-block
+  +transition(all, 0.2s)
+  cursor: pointer
+  background-color: $grey--light
+  color: $red
+  text-align: center
+  margin: 0 auto
+  margin-bottom: $small
+  position: relative
+  padding: $micro $small
+  +respond-min($comments__break-overlap)
+    padding: $micro $small $fine $small
+    position: absolute
+    top: 0
+    right: -20px
+  &:after
+    +transition(all, 0.2s)
+    +box-sizing(content-box)
+    content: ''
+    width: 0
+    height: 0
+    border: 30px solid $red
+    position: absolute
+    right: 10px
+    bottom: -20px
+    border-color: transparent $grey--light transparent transparent
+    display: none
+    +respond-min($comments__break-outside)
+      display: block
+
+.article__comments-trigger__wrap
+  position: relative
+  z-index: 1
+
+.article__comments-trigger__count
+  +background-size(0,0)
+  font-size: $font-l
+  margin-right: $micro
+  +respond-min($comments__break-overlap)
+    font-size: $font-xxl
+    margin-right: 0
+    display: block
+    margin-top: $hair
+  +respond-min($comments__break-outside)
+    font-size: $font-xxxl
+  .show-comments &
+    +respond-max($comments__break-overlap)
+      +background-size(contain)
+    +background-size(40%, 40%)
+    color: transparent
+    background-position: center center
+
+
+.comments
+  z-index: 20
+  display: none
+  margin-left: -$page-padding--small
+  margin-right: -$page-padding--small
+  +respond-min($break-1)
+    margin-left: -$page-padding
+    margin-right: -$page-padding
+  +respond-max($comments__break-overlap)
+    width: auto !important
+  +respond-min($comments__break-overlap)
+    +box-shadow
+    +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
+    margin: 0
+    position: absolute
+    top: 5.25em
+    height: 100%
+    right: -$page-padding
+    min-width: em(300px)
+    max-width: em(700px)
+    width: 100%
+    background-color: $white
+  +respond-min($comments__break-outside)
+    +box-shadow(none)
+    +animation('comments_outside_move_in' 0.25s ease-in-out 1 0s)
+    top: 0
+    right: auto
+    left: em(980px) - $page-padding
+    border-left: 1px dotted $grey--light
+    width: em(300px)
+    background-color: $white
+
+.comments__head
+  margin-top: $page-padding
+  margin-bottom: $large
+  text-align: center
+
+.comments__head__form
+  +padded
+  display: block
+  margin-bottom: $small
+  overflow: hidden
+  .show-form &
+  textarea
+    margin-bottom: $thin
+  input[type=submit]
+    float: right
+
+.comments__list
+  +translateZ(0)
+  +transition(all, 1s)
+  position: relative
+  top: 0px
+
+.comments__body
+  overflow: hidden
+  padding-bottom: $large
+  position: relative
+  &.show-older-trigger
+    .comments__body__older
+      display: block
+  &.show-newer-trigger
+    .comments__body__newer
+      display: block
+
+.comments__body__older,
+.comments__body__newer
+  display: none
+  width: 100%
+  height: em(80px)
+  position: absolute
+  left: 0
+  z-index: 3
+  background-color: $white
+  background-color: rgba($white, 0.7)
+  text-align: center
+  .button
+    +inline-block
+    +background-size(20%, 20%)
+    background-position: 10px center
+    text-align: center
+    cursor: pointer
+    width: auto
+    padding-left: 40px
+    z-index: 4
+    margin-top: em(25px)
+
+
+.comments__body__older
+  bottom: 0
+
+.comments__body__newer
+  top: 0
+
+
+.comment
+  margin-bottom: $medium
+  &.is-indented
+    margin-top: -$medium
+    padding-left: $small
+    border-left: 2px solid $grey--light
+    + .is-indented
+      margin-top: -$medium
+
+
+.comment__head
+
+
+.comment__head__img
+  +inline-block
+  +border-radius(50%)
+  max-width: em(30px)
+  max-height: em(30px)
+  margin-right: $thin
+  margin-top: -$micro
+
+.comment__head__meta
+  +inline-block
+
+
+.comment__head__meta__name
+  +inline-block
+  +tablet(bold)
+  color: $grey--mid
+  margin-right: $fine
+
+.comment__head__meta__label
+  +tablet
+  display: block
+  font-size: $font-xs
+  color: $grey
+
+.comment__head__meta__date
+  +inline-block
+  +tablet
+  +link-colors($grey, $grey, $grey, $grey, $grey)
+  +on-interaction
+    border-color: $grey
+  &:before
+    margin-right: $fine
+    content: "—"
+
+
+.comment__body
+  +tablet
+  color: $grey--mid
+  margin-left: 0
+  margin-top: -0.75em
+  font-size: $font-s
+  p
+    margin-left: 0
+    &:last-of-type
+      margin-bottom: 0
+
+
+.comment__tools
+  text-align: right
+  padding-right: $small
+
+.comment__tools__reply,
+.comment__tools__flag
+  +inline-block
+  +hide-text
+  +background-size(70%, 70%)
+  +opacity(0.5)
+  background-position: center center
+  cursor: pointer
+  margin-left: $thin
+  border: none !important
+  text-decoration: none
+  width: 30px
+  height: 30px
+  max-width: 30px
+  max-height: 30px
+  -webkit-filter: grayscale(1)
+  +on-interaction
+    +opacity(1)
+    -webkit-filter: grayscale(0)
+
+.comment__tools__flag
+  +background-size(60%, 60%)
+
+.page-wrap--inner.show-comments
+  +respond-min($comments__break-outside)
+    +translateZ(0)
+    left: 0
+    margin-left: 0
+    z-index: 2000
+  .comments
+    display: block

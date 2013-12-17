@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/nsa-affaere-bnd-praesident-kritik" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">NSA-Affäre</supertitle>
+        <title py:pytype="str">Opposition fordert Entlassung deutscher Geheimdienstchefs</title>
+        <text py:pytype="str">BND und Verfassungsschutz verfügen über eine NSA-Software – wollen aber keine Gesetze verletzt haben. Das bezweifelt die Opposition. Sie fordert personelle Konsequenzen. </text>
+        <description py:pytype="str">BND und Verfassungsschutz verfügen über eine NSA-Software – wollen aber keine Gesetze verletzt haben. Das bezweifelt die Opposition. Sie fordert personelle Konsequenzen. </description>
+        <byline xsi:nil="true" />
+        <image alt="BND-Präsident Gerhard Schindler (M.) in Berlin (Archiv)" align="left" title="Schindler" base-id="http://xml.zeit.de/politik/deutschland/2013-07/bnd-schindler/" type="jpg" publication-date="" expires="2013-10-21T19:39:06+00:00">
+          <bu py:pytype="str">BND-Präsident Gerhard Schindler (M.) in Berlin (Archiv)</bu>
+          <copyright py:pytype="str">© Ole Spata/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/nsa-merkel-kommentar" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Ausspäh-Affäre</supertitle>
+        <title py:pytype="str">Merkel in der NSA-Falle</title>
+        <text py:pytype="str">Die Regierung gerät in der NSA-Affäre immer stärker in Bedrängnis. Der Kanzlerin schadet das bislang kaum. Das kann sich aber ändern, kommentiert Ludwig Greven.</text>
+        <description py:pytype="str">Die Regierung gerät in der NSA-Affäre immer stärker in Bedrängnis. Der Kanzlerin schadet das bislang kaum. Das kann sich aber ändern, kommentiert Ludwig Greven.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="merkel-kommentar-nsa" base-id="http://xml.zeit.de/politik/deutschland/2013-07/merkel-kommentar-nsa/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Bundeskanzlerin Angela Merkel (Bild vom 19. Juli 2013)</bu>
+          <copyright py:pytype="str">©Sebastian Kahnert/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-07/faq-nsa-skandal" year="2013" issue="29" ressort="Digital" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Überwachung</supertitle>
+        <title py:pytype="str">Das Wichtigste zu Prism und XKeyscore</title>
+        <text py:pytype="str">Wie funktionieren die Spähprogramme Prism, Tempora und XKeyscore? Wer überwacht wen? Wer kontrolliert die Überwacher? Die wichtigsten Fakten im Überblick. Von P. Beuth</text>
+        <description py:pytype="str">Wie funktionieren die Spähprogramme Prism, Tempora und XKeyscore? Wer überwacht wen? Wer kontrolliert die Überwacher? Die wichtigsten Fakten im Überblick. Von P. Beuth</description>
+        <byline xsi:nil="true" />
+        <image alt="Ehemalige Abhörstation der NSA" align="left" title="Abhörstation" base-id="http://xml.zeit.de/digital/datenschutz/2013-07/teufelsberg/" type="jpg" publication-date="" expires="2013-10-22T10:32:01+00:00">
+          <bu py:pytype="str">Kuppel der ehemaligen Abhörstation der NSA auf dem Berliner Teufelsberg</bu>
+          <copyright py:pytype="str">© Maurizio Gambarini / dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pofalla-merkel/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Kanzleramtsminister Ronald Pofalla und Bundeskanzlerin Angela Merkel</bu>
+      <copyright py:pytype="str">© Tobias Schwarz/Reuters</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, Reuters, AFP, kg</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-01T14:24:41.922388+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-22T12:46:59.072546+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-01T15:57:56.958659+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-22T12:46:10.651887+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-22T12:45:54.683923+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwarze</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">2c50f7ce7a1341d88171acda28fe7605</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3511</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:508c3804-79c1-4449-991b-4c70c9017033}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="ronald-pofalla" uuid="c72b4b4e-9d5e-414f-b4ae-b8d6515ebc4b" score="9" type="Person">Ronald Pofalla</tag><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="8" type="Organization">Bundesregierung</tag><tag url_value="andrea-nahles" uuid="a5283cef-5f5a-466b-8204-626a8630896d" score="5" type="Person">Andrea Nahles</tag><tag url_value="bundeskanzleramt" uuid="54b312d4-bf70-4ac4-af74-e778a53badc0" score="5" type="Organization">Bundeskanzleramt</tag><tag url_value="bundesnachrichtendienst" uuid="820d7bcd-838a-42e4-b61e-288bdfc982de" score="5" type="Organization">Bundesnachrichtendienst</tag><tag url_value="prism" uuid="7c31cf4c-fa1d-4526-978a-4ba187d5da0d" score="5" type="topic">Prism</tag><tag url_value="aufklaerung" uuid="31251156-898e-4f78-a66f-b4bfbd21149d" score="4" type="free">Aufklärung</tag><tag url_value="bundesamt-fuer-verfassungsschutz" uuid="e1f5e06d-64ec-47d7-b773-75620e2144f7" score="4" type="Organization">Bundesamt für Verfassungsschutz</tag><tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag><tag url_value="grundrecht" uuid="194b00f6-8af9-4c59-8196-15cc135bc1a0" score="4" type="free">Grundrecht</tag><tag url_value="nsa" uuid="f7ea7581-173b-41a8-a054-0cb4179e6072" score="4" type="Organization">NSA</tag><tag url_value="regierungssprecher" uuid="afe915a9-4115-457f-ae27-cd5ebc4e1a71" score="4" type="free">Regierungssprecher</tag><tag url_value="software" uuid="20ad7a77-d06a-4ec2-b1df-96497d29d5bd" score="4" type="free">Software</tag><tag url_value="spiegel" uuid="1d88a15b-4848-4800-b573-00535ee72e16" score="4" type="free">Spiegel</tag><tag url_value="urlaub" uuid="a648f558-9bc0-4d11-bffc-b9b5a694f10d" score="4" type="free">Urlaub</tag></rankedTags></head><body>
+    <supertitle>NSA-Affäre</supertitle>
+    <title>Pofalla will vor Geheimdienstausschuss aussagen</title>
+    <subtitle>Der Kanzleramtsminister war in den vergangenen Tagen im Urlaub. In dieser Woche will Pofalla endlich das Parlamentarische Kontrollgremium in der NSA-Affäre informieren.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/pofalla-merkel/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+        <bu py:pytype="str">Kanzleramtsminister Ronald Pofalla und Bundeskanzlerin Angela Merkel</bu>
+        <copyright py:pytype="str">© Tobias Schwarz/Reuters</copyright>
+      </image>
+      <p>Der Druck auf die <entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> in der <a href="http://www.zeit.de/digital/datenschutz/2013-07/faq-nsa-skandal" target="_blank" class="">NSA-Affäre</a> wächst wegen neuer Enthüllungen immer weiter – nun hat das <entity idref="Bundeskanzleramt" entity_type="Organization" url_value="organisationen/bundeskanzleramt">Bundeskanzleramt</entity> eine umfassende Prüfung angekündigt. Über das Ergebnis werde Kanzleramtschef <entity idref="Ronald+Pofalla" entity_type="Person" url_value="personen/ronald-pofalla">Ronald Pofalla</entity> 
+"kurzfristig" dem Parlamentarischen Kontrollgremium (PKG) des 
+Bundestags berichten, sagte Vizeregierungssprecher Georg Streiter. Die Bundesregierung nehme die Berichte 
+"sehr ernst".</p>
+      <p>In der Sitzung des für die Geheimdienstkontrolle zuständigen Gremiums 
+sollen nach den Angaben Streiters alle aufgeworfenen Fragen geklärt 
+werden. Der PKG-Vorsitzende, SPD-Parlamentsgeschäftsführer Thomas 
+Oppermann, will frühestens ab Mittwoch zu einer Sitzung einladen. Der 
+konkrete Termin stehe noch nicht fest, er werde "zeitnah" festgesetzt, hieß es. <br /></p>
+      <p>Die Opposition hatte zuvor eine öffentliche Aufklärung der Überwachungsaffäre von Pofalla gefordert. 
+Generalsekretärin <entity idref="Andrea+Nahles" entity_type="Person" url_value="personen/andrea-nahles">Andrea Nahles</entity> sagte, der Kanzleramtschef müsse alle Fragen in 
+dieser Woche  beantworten – am besten öffentlich. "Ich möchte auch ganz klar sagen, dass es um die Frage geht, ob Pofalla
+ als Chef des Bundeskanzleramts und vor allem als Koordinator der 
+Geheimdienste wirklich im Amt bleiben kann, wenn diese Fragen nicht 
+zügig aufgeklärt werden können."</p>
+      <p>Pofalla ist für die Koordination der Geheimdienste
+zuständig. Er wird besonders heftig kritisiert, weil die Bundesregierung auch mehr als sechs Wochen nach Bekanntwerden der Spähaffäre nicht
+dargelegt hat, in welchem Umfang Daten deutscher Bürger
+ausgespäht wurden und ob dabei Grundrechte Deutscher verletzt worden
+sind.  <br /></p>
+      <p>Ein Grund für Pofallas fehlende Erklärung war offenbar die Tatsache, dass er sich im Urlaub befand. Der Kanzleramtschef sei die vergangenen Wochen im Urlaub gewesen und erst seit dem heutigen Montag wieder da, sagte Vizeregierungssprecher Streiter nach <a href="https://twitter.com/ctretbar/status/359245587998179328" target="_blank" class="">Angaben eines Journalisten</a>.</p>
+      <raw py:pytype="str">
+        <blockquote class="twitter-tweet"><p>Regierungssprecher Streiter: "Pofalla war die letzten Wochen im Urlaub und ist seit heute wieder da" <a href="https://twitter.com/search?q=%23PRISM&amp;src=hash">#PRISM</a> <a href="https://twitter.com/search?q=%23NSA&amp;src=hash">#NSA</a></p>— Christian Tretbar (@ctretbar) <a href="https://twitter.com/ctretbar/statuses/359245587998179328">July 22, 2013</a></blockquote>
+        <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8" />
+      </raw>
+      <p>Er könne nicht ganz sicher sagen, wann genau Pofalla im Urlaub gewesen sei, <a href="https://twitter.com/ctretbar/status/359250675550523392" target="_blank" class="">"aber in der vergangenen Woche ganz sicher"</a>.
+ Das würde bedeuten, dass der für die Geheimdienste zuständige Politiker
+ zu einem denkbar schlechten Zeitpunkt nicht handlungsfähig war.
+</p>
+      <raw py:pytype="str">
+        <blockquote class="twitter-tweet"><p>Wie lange genau Pofalla im Urlaub war, kann Regierungssprecher Streiter nicht sagen: "Aber in der vergangenen Woche ganz sicher." <a href="https://twitter.com/search?q=%23prism&amp;src=hash">#prism</a></p>— Christian Tretbar (@ctretbar) <a href="https://twitter.com/ctretbar/statuses/359250675550523392">July 22, 2013</a></blockquote>
+        <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8" />
+      </raw>
+      <p>Die Vorwürfe gegen die Bundesregierung im NSA-Skandal sind durch einen Bericht des <em>Spiegels</em> noch größer geworden. Demnach
+soll das <entity idref="Bundesamt+f%C3%BCr+Verfassungsschutz" entity_type="Organization" url_value="organisationen/bundesamt-fuer-verfassungsschutz">Bundesamt für Verfassungsschutz</entity> (BfV) eine Spähsoftware der
+<entity idref="NSA" entity_type="Organization" url_value="organisationen/nsa">NSA</entity> namens X-Keyscore einsetzt haben. Unterwiesen im Umgang mit dem
+Computerprogramm werde der Inlandsgeheimdienst durch den <entity idref="Bundesnachrichtendienst" entity_type="Organization" url_value="organisationen/bundesnachrichtendienst">Bundesnachrichtendienst</entity> (<entity idref="BND" entity_type="Organization" url_value="organisationen/bnd">BND</entity>). Das BfV erklärte daraufhin, die
+Software werde nur getestet.  </p>
+      <p>Wie <em>Der Spiegel </em>weiter berichtete, hat
+sich die Zusammenarbeit deutscher Geheimdienste mit der NSA
+zudem zuletzt intensiviert. Der BND etwa habe sich bei der Bundesregierung für eine laxere Auslegung deutscher Datenschutzgesetze eingesetzt. <a title="externer Link" href="http://www.spiegel.de/politik/deutschland/bnd-und-bfv-setzen-nsa-spaehprogramm-xkeyscore-ein-a-912196.html" class="" target="_blank">In den
+zitierten US-Unterlagen</a> sei in diesem Zusammenhang vom "Eifer" des
+BND-Präsidenten Schindler die Rede.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>NSA-Affäre</supertitle>
+    <title>Pofalla will vor Geheimdienstausschuss aussagen</title>
+    <text>Der Kanzleramtsminister war in den vergangenen Tagen im Urlaub. In dieser Woche will Pofalla endlich das Parlamentarische Kontrollgremium in der NSA-Affäre informieren.</text>
+  </teaser>
+</article>

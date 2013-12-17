@@ -1,0 +1,577 @@
+$nav__row-height--px: 50px
+$nav__row-height: em($nav__row-height--px)
+$nav__break__full-menu: em(768px)
+$nav__logo-mobile-width: image-width('zeit-logo--magazin.png')/27
+$nav__logo-mobile-height: image-height('zeit-logo--magazin.png')/2
+$nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
+$nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
+$nav__service-primary-full-width: 200px
+$nav__section-border: 1px solid $grey--mid
+
+.is-small-screen-only
+  display: block !important
+  +respond-min($nav__break__full-menu)
+    display: none !important
+
+.is-large-screen-only
+  display: none !important
+  +respond-min($nav__break__full-menu)
+    display: block !important
+
+.main-nav
+  position: relative
+  width: 100%
+  max-width: $max-page-width
+  margin: 0 auto
+  margin-bottom: $nav__row-height
+  &.is-full-width
+    max-width: none
+    margin-bottom: 0
+    z-index: 20
+    margin-top: 0
+  +respond-min($nav__break__full-menu)
+    margin-bottom: $nav__row-height * 2
+    height: $nav__row-height * 2
+    background-color: $grey--mid-dark
+  a
+    +link-colors($white, $white, $white, $white, $white)
+    +tablet
+    border-width: 0
+    +respond-min($nav__break__full-menu)
+      margin-bottom: $fine
+    &.is-active
+      opacity: 0.5
+
+.main-nav__wrap
+  +respond-min($nav__break__full-menu)
+    max-width: $max-page-width
+    margin: 0 auto
+    height: 100%
+    position: relative
+    .is-full-width &
+      max-width: $max-longform-width - $page-padding*2
+      +respond-min($max-longform-width - $page-padding*2)
+        border-left: $nav__section-border
+        border-right: $nav__section-border
+
+.main-nav__logo
+  float: left
+  width: $nav__row-height
+  height: $nav__row-height
+  color: $white
+  background-color: $grey--mid-dark
+  margin-right: 1px
+  border: none
+  margin-bottom: 0 !important
+  position: relative
+  overflow: hidden
+  +respond-min($nav__break__full-menu)
+    width: em($nav__logo-full-width) + 2*$small
+    border-bottom: $nav__section-border !important
+
+
+.main-nav__logo__wrap
+  width: $nav__logo-mobile-width
+  height: $nav__logo-mobile-height
+  position: absolute
+  overflow: hidden
+  left: 50%
+  top: 50%
+  margin-left: -$nav__logo-mobile-width/2
+  margin-top: -$nav__logo-mobile-height/2
+  +respond-min($nav__break__full-menu)
+    margin-left: -$nav__logo-full-width/2
+    margin-top: -$nav__logo-full-height/2
+    width: $nav__logo-full-width
+  img
+    width: $nav__logo-full-width
+    height: $nav__logo-full-height
+    min-width: $nav__logo-full-width
+    min-height: $nav__logo-full-height
+    max-width: $nav__logo-full-width
+    max-height: $nav__logo-full-height
+
+
+.main-nav__menu
+  overflow: hidden
+  height: $nav__row-height
+  background-color: $grey--mid-dark
+  +respond-min($nav__break__full-menu)
+    background: none
+    border-bottom: $nav__section-border
+
+
+.main-nav__menu__head
+  height: 100%
+  cursor: pointer
+  text-align: right
+  +respond-min($nav__break__full-menu)
+    border-left: $nav__section-border
+    cursor: default
+
+
+.main-nav__menu__head__headline
+  +tablet
+  +inline-block
+  +no-user-select
+  color: $white
+  font-size: $font-s
+  letter-spacing: 1px
+  float: left
+  height: 100%
+  margin-left: $small
+  line-height: $nav__row-height--px
+  line-height: em_to_rem($nav__row-height)
+  +respond-min($nav__break__full-menu)
+    display: none
+
+
+.main-nav__menu__head__hamburger
+  +hide-text
+  +inline-block
+  width: 25px
+  height: 3px
+  right: $small
+  top: $nav__row-height/5
+  background-color: $white
+  margin: 3px 0
+  overflow: visible
+  position: relative
+  &:before, &:after
+    position: absolute
+    width: 100%
+    height: 3px
+    left: 0
+    color: red
+    content: ''
+    display: block
+    border: 0 solid $white
+  &:before
+    border-top-width: 3px
+    top: -8px
+  &:after
+    bottom: -8px
+    border-bottom-width: 3px
+  +respond-min($nav__break__full-menu)
+    display: none
+
+
+.main-nav__menu__content
+  display: none
+  position: absolute
+  left: 1px
+  width: 100%
+  width: -moz-calc(100% - 1px)
+  width: -webkit-calc(100% - 1px)
+  width: calc(100% - 1px)
+  padding-left: $nav__row-height
+  +respond-min($nav__break__full-menu)
+    display: block
+    position: static
+
+
+.main-nav__menu__content__current-ressort
+  +tablet
+  font-size: $font-s
+  background-color: $grey--mid-dark
+  display: block
+  letter-spacing: 1px
+  padding: $small
+  +respond-max($nav__break__full-menu)
+    border-bottom: $nav__section-border !important
+    border-top: $nav__section-border !important
+  +respond-min($nav__break__full-menu)
+    padding-bottom: $small !important
+
+
+.main-nav__section
+  background-color: $grey--mid-dark
+  border-top: 1px solid $grey--mid
+  border-bottom: 1px solid $grey--mid
+  +respond-min($nav__break__full-menu)
+    border: none
+    background-color: $grey--mid-dark
+    height: $nav__row-height
+
+
+.main-nav__section__trigger
+  +tablet
+  +no-user-select
+  color: $white
+  font-size: $font-s
+  letter-spacing: 1px
+  cursor: pointer
+  background-color: $grey--mid-dark
+  padding: $small
+  display: block
+  +respond-min($nav__break__full-menu)
+    padding: 0
+    height: 100%
+
+
+.main-nav__section__content
+  display: none
+  padding: $small
+  +respond-max($nav__break__full-menu)
+    padding-top: 0
+  &.is-always-open, &.is-open
+    padding-top: $small
+    display: block
+  &.is-open
+    +respond-max($nav__break__full-menu)
+      padding-top: 0
+      padding-bottom: $thin
+  a
+    font-size: $font-s
+    letter-spacing: 1px
+    display: block
+    padding: $micro 0
+  +respond-max($nav__break__full-menu)
+    a
+      padding: $thin 0
+    .main-nav__ressorts &
+      a
+        +inline-block
+        vertical-align: top
+        width: 48%
+        &:nth-child(2n)
+          padding-left: $small
+  +respond-min($nav__break__full-menu)
+    padding: $small $compact $compact $compact
+    min-width: em(120px)
+    background-color: $grey--mid-dark
+    .main-nav__ressorts &,
+    .main-nav__service-primary &,
+      padding: $fine
+  .main-nav__all-ressorts &,
+  .main-nav__service &
+    .main-nav__section__content__wrap a
+      +inline-block
+      vertical-align: top
+      width: 48%
+      &:nth-child(2n)
+        padding-left: $small
+  .main-nav__all-ressorts &,
+  .main-nav__service &,
+  .main-nav__community &
+    +respond-min($nav__break__full-menu)
+      padding-bottom: $micro !important
+    .main-nav__section__content
+      height: 100%
+      +respond-min($nav__break__full-menu)
+        padding-bottom: $micro !important
+
+=nav__open-submenu
+  display: block
+  left: 0
+  top: 100%
+  top: -moz-calc(100% + 1px)
+  top: -webkit-calc(100% + 1px)
+  top: calc(100% + 1px)
+  position: absolute
+  z-index: 10
+  width: em(300px)
+  .main-nav__service-primary &
+    left: auto
+    right: 0
+    width: 100%
+  .main-nav__ressorts &
+    position: static
+
+
++respond-min($nav__break__full-menu)
+  .has-hover
+    .main-nav__all-ressorts,
+    .main-nav__service,
+    .main-nav__search,
+    .main-nav__community
+      .main-nav__section__trigger:hover + .main-nav__section__content,
+      .main-nav__section__content:hover
+        +nav__open-submenu
+
+  .main-nav__all-ressorts,
+  .main-nav__service,
+  .main-nav__search,
+  .main-nav__community
+    .main-nav__section__content.is-open
+      +nav__open-submenu
+
+  .main-nav__community
+    .main-nav__section__content.is-open
+      width: em(100px)
+
+  .main-nav__search
+    .main-nav__section__content.is-open
+      width: auto
+
+  .has-hover .main-nav__all-ressorts:hover,
+  .has-hover .main-nav__service:hover,
+  .has-hover .main-nav__community:hover,
+  .main-nav__all-ressorts.has-open-menu,
+  .main-nav__service.has-open-menu,
+  .main-nav__community.has-open-menu
+    border-bottom-color: $grey--mid-dark
+
+
+.main-nav__service-primary
+  a
+    +inline-block
+    margin-right: $small
+    &:last-child
+      margin-right: 0
+    a
+      padding: 0
+  +respond-max($nav__break__full-menu)
+    border: none
+    .main-nav__section__content
+      padding: 0
+      a
+        border-top: $nav__section-border
+        border-bottom: $nav__section-border
+        display: block
+        margin-right: 0
+        padding: $small
+  +respond-min($nav__break__full-menu)
+    position: absolute
+    top: $nav__row-height
+    right: 0
+    z-index: 3
+    left: auto
+    text-align: right
+    width: $nav__service-primary-full-width
+    overflow: hidden
+    a
+      margin-top: $hair
+      margin-bottom: 0
+    .main-nav__section__content
+      padding-right: $small
+
+
+.main-nav__all-ressorts
+  +respond-min($nav__break__full-menu)
+    position: absolute
+    border-right: $nav__section-border
+    left: em($nav__logo-full-width) + em(38px)
+    top: 0
+    padding: 0 $small
+
+
+.main-nav__all-ressorts,
+.main-nav__service,
+  .main-nav__section__trigger
+    padding-right: $compact
+    background-position: right center
+  +respond-max($nav__break__full-menu)
+    .main-nav__section__trigger
+      background: none
+
+
+.main-nav__ressorts
+  +respond-max($nav__break__full-menu)
+    border-top-width: 2px !important
+  +respond-min($nav__break__full-menu)
+    position: absolute
+    top: $nav__row-height
+    left: 0
+    overflow: hidden
+    width: 100%
+    z-index: 2
+    padding-right: $nav__service-primary-full-width
+    white-space: nowrap
+    .main-nav__section__content
+      position: relative
+      height: 100%
+      margin-left: $small
+      padding: 0
+      overflow: hidden
+      .no-js &
+        overflow: auto
+        overflow-x: auto
+        overflow-y: hidden
+      .main-nav__section__content__wrap
+        +transition(left, 0.2s)
+        position: absolute
+        left: 0
+        height: 100%
+        padding: $fine 0
+      .has-topic-slider &
+        padding-right: $small*3
+        overflow: hidden
+        &:after
+          content: ''
+          position: absolute
+          height: 100%
+          width: $small*3
+          background-color: $grey--mid-dark
+          z-index: 5
+          right: 0
+    a
+      +inline-block
+      margin-right: $small
+      margin-top: $hair
+      margin-bottom: 0
+      &:last-child
+        margin-right: 0
+
+
+.main-nav__ressorts__slider-arrow--left,
+.main-nav__ressorts__slider-arrow--right
+  width: $small
+  height: $nav__row-height
+  position: absolute
+  z-index: 10
+  background-position: center center
+  display: none
+  cursor: pointer
+  .has-topic-slider &
+    display: block
+  &.is-inactive
+    opacity: 0.5
+    cursor: default
+
+
+.main-nav__ressorts__slider-arrow--left
+  right: $small
+.main-nav__ressorts__slider-arrow--right
+  right: 0
+
+
+.main-nav__service
+  +respond-min($nav__break__full-menu)
+    border-left: $nav__section-border
+    position: absolute
+    right: $nav__row-height + em(66px)
+    top: 0
+    padding: 0 $small
+    .main-nav__section__content
+      left: auto !important
+      right: 0
+
+
+.main-nav__search
+  input
+    +tablet
+    +inline-block
+    +border-radius(0)
+    font-size: $font-s
+    margin-top: $thin*0.9
+    vertical-align: middle
+    border: none
+    padding: $hair $thin
+    height: $nav__row-height - $thin
+  input[type=text]
+    margin-left: $hair
+    background-color: $grey--mid
+  input[type=submit]
+    margin-right: $hair*1.3
+    background-color: $grey
+    color: $white
+    padding: 0 $small
+  +respond-min($nav__break__full-menu)
+    position: absolute
+    border-left: $nav__section-border
+    border-right: $nav__section-border
+    padding: 0
+    right: $nav__row-height + em(14px)
+    top: 0
+    &.has-open-menu
+      border-left: none
+    .main-nav__section__content
+      left: auto !important
+      top: 0 !important
+      height: $nav__row-height
+      padding: 0
+      padding-left: $thin/2
+      right: $nav__row-height
+      white-space: nowrap
+      border-bottom: $nav__section-border
+    .main-nav__section__trigger
+      +hide-text
+      background-position: center center
+      width: $nav__row-height--px
+      width: em_to_rem($nav__row-height)
+  +respond-max($nav__break__full-menu)
+    .main-nav__section__trigger
+      background: none
+
+
++respond-min($nav__break__full-menu)
+  .main-nav__all-ressorts,
+  .main-nav__service,
+  .main-nav__search
+    border-bottom: $nav__section-border
+    .main-nav__section__trigger
+      line-height: $nav__row-height--px
+      line-height: em_to_rem($nav__row-height)
+  .main-nav__all-ressorts,
+  .main-nav__service,
+  .main-nav__community
+    .main-nav__section__content
+      &:before, &:after
+        position: absolute
+        content: ''
+        height: $nav__row-height
+        top: 0
+        pointer-events: none
+        width: 80px
+      &:before
+        +background-image(linear-gradient(left, rgba($black, 0), rgba($black, 0.6)))
+        right: 100%
+      &:after
+        +background-image(linear-gradient(left, rgba($black, 0.6), rgba($black, 0)))
+        left: 100%
+  .main-nav__community
+    .main-nav__section__content
+      &:after
+        background: none
+        width: 0
+
+
+.main-nav__community
+  +respond-min($nav__break__full-menu)
+    position: absolute
+    right: 0
+    padding: 0 $fine 0 $fine
+    left: auto
+    top: 0
+    border-bottom: $nav__section-border
+    .main-nav__section__trigger
+      background: none
+      padding-top: $hair*2
+      width: $nav__row-height
+      height: auto
+      max-width: $nav__row-height
+      max-height: $nav__row-height
+      overflow: hidden
+    .main-nav__section__content
+      left: auto !important
+      right: 0
+  img
+    +border-radius(50%)
+    +respond-max($nav__break__full-menu)
+      +inline-block
+      max-width: em(30px)
+      margin-top: -$micro
+      margin-right: $fine
+    +respond-min($nav__break__full-menu)
+      padding: $thin
+
+
+.main-nav__breadcrumbs
+  +respond-max($nav__break__full-menu)
+    background-color: $grey--dark
+    border-bottom: none
+    .breadcrumbs__list
+      padding: 0
+      margin: 0
+  +respond-min($nav__break__full-menu)
+    position: absolute
+    left: 0
+    background: none
+    width: 100%
+    top: 2*$nav__row-height
+    padding: 0
+    .main-nav__section__content
+      background: none
+      padding: 0
+

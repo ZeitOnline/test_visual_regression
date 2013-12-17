@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-06/pakistan-anschlagsserie-sharif" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Anschlagsserie</supertitle>
+        <title py:pytype="str">Zahlreiche Tote bei Anschlägen in Pakistan</title>
+        <text py:pytype="str">Einen Monat nach Amtsantritt von Premierminister Sharif wurden bei einer Anschlagsserie mehr als 50 Menschen getötet. Ziel waren Zivilisten der schiitischen Minderheit.</text>
+        <description py:pytype="str">Einen Monat nach Amtsantritt von Premierminister Sharif wurden bei einer Anschlagsserie mehr als 50 Menschen getötet. Ziel waren Zivilisten der schiitischen Minderheit.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Pakistan" base-id="http://xml.zeit.de/politik/ausland/2013-06/anschlagsserie-pakistan-autobombe/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Die detonierte Autobombe in der nordpakistanischen Stadt Peshawar.</bu>
+          <copyright py:pytype="str">© Arshad Arbab/EPA</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-07/irak-gefaengnis-angriff" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Irak</supertitle>
+        <title py:pytype="str">Al-Kaida befreit Hunderte Gefangene aus Abu Ghraib</title>
+        <text py:pytype="str">Bei Angriffen auf zwei Hochsicherheitsgefängnisse im Irak haben Aufständische etwa 500 Häftlinge freigelassen. Mehr als 40 Menschen starben bei den Kämpfen. </text>
+        <description py:pytype="str">Bei Angriffen auf zwei Hochsicherheitsgefängnisse im Irak haben Aufständische etwa 500 Häftlinge freigelassen. Mehr als 40 Menschen starben bei den Kämpfen. </description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2013-07/irak/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Das Gefängnis Abu Ghraib nahe Bagdad</bu>
+          <copyright py:pytype="str">© Mohammed Ameen/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/ausland/2013-05/fs-pakistan-wahl" year="2013" issue="20" ressort="Politik" contenttype="gallery" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">gallery</badge>
+        </badges>
+        <supertitle py:pytype="str">Bilder aus Pakistan</supertitle>
+        <title py:pytype="str">Wahl zwischen Terror und Optimismus</title>
+        <text py:pytype="str">Bomben auf Wahlbüros, verletzte und entführte Politiker: Pakistan steht vor dem Machtwechsel, doch der Wahlkampf verlief nicht überall friedlich. Der Wahlkampf in Bildern</text>
+        <description py:pytype="str">Bomben auf Wahlbüros, verletzte und entführte Politiker: Pakistan steht vor dem Machtwechsel, doch der Wahlkampf verlief nicht überall friedlich. Der Wahlkampf in Bildern</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2013-05/fs-pakistan-wahl-teaser/" type="jpg" publication-date="" expires="">
+          <bu xsi:nil="true" />
+          <copyright py:pytype="str">© Fayaz Aziz/Reuters</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="Pakistan Gefängnis" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/pakistan-gefaengnis/" type="jpg" publication-date="" expires="2013-10-30T05:52:11+00:00">
+      <bu py:pytype="str">Das Zentralgefängnis in Pakistan (Archivbild)</bu>
+      <copyright py:pytype="str">© Arshad Arbab/EPA/dpa</copyright>
+    </image>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, AFP, sig</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-30T07:06:20.471845+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-30T04:47:10.321584+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-30T07:07:22.553284+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-30T04:46:19.047622+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-30T04:44:46.057647+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoehler</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">de48421900da43ffb6fc0599f4108ef7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Ausland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3154</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:7cfd1481-b969-4bd7-9dd0-a7fa96d3c989}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="pakistan" uuid="30e48806-b7cc-4e9c-9dc0-aec1c67bcc01" score="7" type="Location">Pakistan</tag><tag url_value="taliban" uuid="dcf0962a-9622-40f1-b75e-997e88fee684" score="7" type="free">Taliban</tag><tag url_value="asif-ali-zardari" uuid="0713300d-8f43-494f-aef5-7beb61bfc0ef" score="6" type="Person">Asif Ali Zardari</tag><tag url_value="gefaengnis" uuid="92b3b0f9-1db3-4f35-8145-85cb2498c265" score="4" type="free">Gefängnis</tag><tag url_value="nawaz-sharif" uuid="a2240064-3379-4976-bc75-4e679f4f22d4" score="4" type="Person">Nawaz Sharif</tag><tag url_value="parlament" uuid="ee6f72a4-4dd9-428d-89cd-b97b2e96db13" score="4" type="free">Parlament</tag><tag url_value="parlamentswahl" uuid="896efa10-edec-4d53-9323-82a8083d6850" score="4" type="free">Parlamentswahl</tag><tag url_value="provinz" uuid="9a0cdbe4-4f6c-475d-b5d8-22e81c58d899" score="4" type="free">Provinz</tag><tag url_value="praesident" uuid="df6a10e3-d392-4841-ade9-134cd7f7fd0a" score="4" type="free">Präsident</tag><tag url_value="sprengsatz" uuid="18ac87c6-c0db-41c9-9eae-bb0947bf9175" score="4" type="free">Sprengsatz</tag><tag url_value="staatsoberhaupt" uuid="ec0d1242-73bf-43b7-bfdf-af7903711ff0" score="4" type="free">Staatsoberhaupt</tag><tag url_value="ueberfall" uuid="59189510-9a30-4e36-bfaa-52207d945a02" score="4" type="free">Überfall</tag><tag url_value="afghanistan" uuid="9187d28e-ea51-4485-b2d6-d5d3852f309c" score="3" type="Location">Afghanistan</tag><tag url_value="islamabad" uuid="0ad3379f-278a-4e3f-a893-98a8a0a805f4" score="1" type="Location">Islamabad</tag><tag url_value="karatschi" uuid="e5b3ebce-5ee6-4cf2-b6f4-a55b929f31cd" score="1" type="Location">Karatschi</tag></rankedTags></head><body>
+    <supertitle>Aufstand</supertitle>
+    <title>Taliban befreien 250 Gefangene in Pakistan</title>
+    <subtitle>Einen Tag vor der Präsidentschaftswahl haben Taliban in Pakistan ein Gefängnis angegriffen. Fast 250 Häftlinge sind entflohen, es gab Tote und Verletzte.</subtitle>
+    <division type="page">
+      <image align="left" title="Pakistan Gefängnis" type="jpg" publication-date="" expires="2013-10-30T05:52:11+00:00" layout="large" is_empty="True">
+        <bu py:pytype="str">epa03791629 A view of the central jail where Dr. Shakil Afridi, accused of running a fake vaccination campaign to get DNA of Al-Qaeda chief Osama bin Laden, on behalf of United States Central Intelligence Agency (CIA), is held, in Peshawar, Pakistan, 18 July 2013. Dr. Shakil Afridi appealed to Peshawar's High Court against the decision of a tribal court that had convicted him for involvement in anti-state activities and sentenced him to 33 years in prison. EPA/ARSHAD ARBAB +++(c) dpa - Bildfunk+++
+</bu>
+        <copyright py:pytype="str">© Arshad Arbab/EPA/dpa</copyright>
+      </image>
+      <p>Nach einem Taliban-Angriff auf ein Gefängnis im Nordwesten <entity idref="Pakistan" entity_type="Location" url_value="orte/pakistan">Pakistans</entity> sind nach Angaben der Regierung 243 Häftlinge entflohen. Unter ihnen sind auch etwa 30 islamistische Aufständische, sagte ein Regierungsvertreter.<br /></p>
+      <p> Mindestens 14 Menschen seien bei dem Angriff getötet worden, darunter sechs Polizisten. Mindestens neun Häftlinge wurden später wieder gefasst.  </p>
+      <p>Nach Polizeiangaben hatten Taliban mit Mörsergranaten und Panzerabwehrraketen das Zentralgefängnis in Dera Ismail Khan in der Provinz Khyber Pakhtunkhwa angegriffen. Kurz vor Mitternacht fuhren demnach etwa 70 Taliban-Kämpfer auf Motorrädern und in Autos vor dem Gefängnis vor. Sie zündeten mehrere Sprengsätze und brachten die Gefängnismauern zum Einsturz. Anschließend seien als Polizisten verkleidete Taliban in das Gefängnis eingedrungen und hätten damit begonnen, Häftlinge zu befreien — darunter mindestens 25, die als gefährliche Terroristen eingestuft seien.<br /></p>
+      <p>Der Überfall dauerte etwa viereinhalb Stunden, unter den Todesopfern sind sechs Polizisten, sechs schiitische Häftlinge, zwei Zivilisten sowie eine nicht näher genannte Zahl Taliban. In der Stadt wurde eine Ausgangssperre verhängt. <br /></p>
+      <p>In dem Gefängnis unweit der Grenze zu <entity idref="Afghanistan" entity_type="Location" url_value="orte/afghanistan">Afghanistan</entity> sitzen bis zu 5.000 Menschen ein, darunter 300 Aufständische.</p>
+      <intertitle>Pakistans Parlamente wählen neuen Präsidenten<br /></intertitle>
+      <p>Der Überfall ereignete sich am Vorabend zur Wahl eines neuen Präsidenten. Am heutigen Dienstag stimmen Pakistans Parlamentarier über ein neues Staatsoberhaupt ab. Die Muslim-Liga von Premierminister <entity idref="Nawaz+Sharif" entity_type="Person" url_value="personen/nawaz-sharif">Nawaz Sharif</entity> hat den Geschäftsmann Mamnoon Hussain aus <entity idref="Karachi" entity_type="Location" url_value="orte/karachi">Karachi</entity> aufgestellt, seine Wahl gilt als sicher. Bei den <a href="http://www.zeit.de/politik/ausland/2013-05/fs-pakistan-wahl" target="_blank" class="">Parlamentswahlen im Mai</a> hatte die PML-N absolute Mehrheiten in der Nationalversammlung und in der wichtigsten Provinz Punjab erlangt. <br /></p>
+      <p>Die Oppositionspartei, die Volkspartei PPP des amtierenden Präsidenten <entity idref="Asif+Ali+Zardari" entity_type="Person" url_value="personen/asif-ali-zardari">Asif Ali Zardari</entity>, hat einen Wahlboykott angekündigt und ihren Kandidaten zurückgezogen. Als Grund gab die PPP an, dass die Abstimmung eine Woche vorgezogen wurde und daher nicht ausreichend Zeit zur Vorbereitung blieb.   <br /></p>
+      <p>Die Amtszeit von Präsident Asif Ali Zardari, dem Witwer der Ende 2007 ermordeten Expremierministerin Benazir Bhutto, endet am 8. September. Er tritt nicht zur Wiederwahl an, da er angesichts der Mehrheitsverhältnisse in den Parlamenten keine Chance auf einen Sieg gehabt hätte. Der neue Präsident wird von den Parlamenten in den vier Provinzen und in <entity idref="Islamabad" entity_type="Location" url_value="orte/islamabad">Islamabad</entity> bestimmt.<br /></p>
+      <p />
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Taliban befreien 250 Gefangene in Pakistan</title>
+    <supertitle>Aufstand</supertitle>
+    <text>Einen Tag vor der Präsidentschaftswahl haben Taliban in Pakistan ein Gefängnis angegriffen. Fast 250 Häftlinge sind entflohen, es gab Tote und Verletzte.</text>
+  </teaser>
+</article>

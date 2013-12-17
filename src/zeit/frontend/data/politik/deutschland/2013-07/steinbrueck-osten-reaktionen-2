@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/L/Stefan_Locke/index" publication-date="" expires="">
+      <display_name py:pytype="str">Stefan Locke</display_name>
+    </author>
+    
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/2013/28/peer-steinbrueck-osten" year="2013" issue="28" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Wahlkampf</supertitle>
+        <title py:pytype="str">Gewinnen Sie den Osten noch, Herr Steinbrück?</title>
+        <text py:pytype="str">Die neuen Länder sind mir nahe, sagt der SPD-Kanzlerkandidat. Im Interview spricht er über seine Zeit in der DDR und seine Chancen gegen Angela Merkels Heimvorteil. </text>
+        <description py:pytype="str">Die neuen Länder sind mir nahe, sagt der SPD-Kanzlerkandidat. Im Interview spricht er über seine Zeit in der DDR und seine Chancen gegen Angela Merkels Heimvorteil. </description>
+        <byline py:pytype="str">von Martin Machowecz, Stefan Schirmer</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/2013-07/peer-steinbrueck-lesung/" type="jpg" publication-date="" expires="2013-08-03T09:37:13+00:00">
+          <bu py:pytype="str">SPD-Kanzlerkandidat Peer Steinbrück im Willy-Brandt-Haus in Berlin</bu>
+          <copyright py:pytype="str">© Jörg Carstensen/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-bundestagswahl-koalition" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundestagswahl</supertitle>
+        <title py:pytype="str">Steinbrück will große Koalition nicht ausschließen</title>
+        <text py:pytype="str">In der SPD wächst die Furcht, nach der Wahl wieder in ein Bündnis mit der Union gedrängt zu werden. Kanzlerkandidat Peer Steinbrück legt sich dennoch nicht dagegen fest.</text>
+        <description py:pytype="str">In der SPD wächst die Furcht, nach der Wahl wieder in ein Bündnis mit der Union gedrängt zu werden. Kanzlerkandidat Peer Steinbrück legt sich dennoch nicht dagegen fest.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="steinbrueck-spd" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">SPD-Kanzlerkandidat Peer Steinbrück spricht auf einem SPD-Treffen in Hannover Ende 2012.</bu>
+          <copyright py:pytype="str">© Adam Berry/AFP/GettyImages</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-06/Steinbrueck-Grass-Brandt-Wahlkampf" year="2013" issue="23" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Grass und Steinbrück</supertitle>
+        <title py:pytype="str">Wenn er nur wie Willy wär'</title>
+        <text py:pytype="str">Günter Grass kommt zur SPD, redet über Willy Brandt und ein wenig mit Peer Steinbrück. Viel haben sich Großdichter und Kanzlerkandidat nicht zu sagen. Von Lenz Jacobsen</text>
+        <description py:pytype="str">Günter Grass kommt zur SPD, redet über Willy Brandt und ein wenig mit Peer Steinbrück. Viel haben sich Großdichter und Kanzlerkandidat nicht zu sagen. Von Lenz Jacobsen</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Grass-Steinbrueck" base-id="http://xml.zeit.de/politik/deutschland/2013-06/Grass-Steinbrueck-2/" type="jpg" publication-date="" expires="2013-09-27T09:36:21+00:00">
+          <bu py:pytype="str">So wie einst mit Willy Brandt: Günter Grass und Peer Steinbrück bei ihrer Veranstaltung in der SPD-Zentrale, im Hintergrund ein Bild des Dichters mit dem ehemaligen Bundeskanzler Brandt.</bu>
+          <copyright py:pytype="str">©Jörg Carstensen/dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="Peer Steinbrück" base-id="http://xml.zeit.de/politik/deutschland/2013-07/steinbrueck-osten-reaktionen/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">SPD-Kanzlerkandidat Peer Steinbrück (Archiv)</bu>
+      <copyright py:pytype="str">© Johannes Simon/Getty Images</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Stefan Locke</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-05T09:14:18.487746+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-05T09:14:31.827991+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-05T09:14:31.827991+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-05T09:13:35.834634+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-05T09:14:15.745780+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.cruz</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">0b3879c99f4a45a2a4fae1bd5cdaa754</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4356</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e7d917b6-d91d-4dce-98a8-8a144075e29d}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">28</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="csu" uuid="959f19e4-2482-4137-9404-c57dbe7b7859" score="8" type="Organization">CSU</tag><tag url_value="markus-meckel" uuid="816d69dc-33b3-4592-96af-aa781ed15487" score="8" type="Person">Markus Meckel</tag><tag url_value="peer-steinbrueck" uuid="77c20c36-4377-478d-a59d-f1cd6452f563" score="8" type="Person">Peer Steinbrück</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="8" type="Organization">SPD</tag><tag url_value="sed" uuid="50c01e4e-706d-4ddc-97e9-8c17873f717f" score="6" type="Organization">SED</tag><tag url_value="die-linke" uuid="9eecf627-7a54-4e81-98c4-c7e5bd7e76e5" score="5" type="Organization">Die Linke</tag><tag url_value="biografie" uuid="8299f548-0336-4235-b37b-05a2540bd2de" score="4" type="free">Biografie</tag><tag url_value="bundestagswahlkampf" uuid="b7eeea76-4ac5-488b-b478-b39e7794824c" score="4" type="free">Bundestagswahlkampf</tag><tag url_value="christean-wagner" uuid="f88f5141-1707-410f-9fc6-4e41834c2143" score="4" type="Person">Christean Wagner</tag><tag url_value="ddr" uuid="1bba4e8d-d938-42af-b44b-674a01e024e3" score="4" type="free">DDR</tag><tag url_value="gedenkstaette" uuid="3b4e4ba8-c90f-4896-8d82-5911032f3dc0" score="4" type="free">Gedenkstätte</tag><tag url_value="hermann-groehe" uuid="555c6df2-4494-4022-a9f1-3a99714c29c6" score="4" type="Person">Hermann Gröhe</tag><tag url_value="hubertus-knabe" uuid="dcf6abab-411f-4b5f-9718-ae3e42eb61bd" score="4" type="Person">Hubertus Knabe</tag><tag url_value="kinderbetreuung" uuid="b0abafb0-0f77-4be9-ab4d-a01d5e2a53a8" score="4" type="free">Kinderbetreuung</tag><tag url_value="mauerfall" uuid="6f51cf5a-e509-4c9e-9800-6e1852bb4ea4" score="4" type="free">Mauerfall</tag><tag url_value="ruhrgebiet" uuid="db345832-ddc4-445a-bafa-5da06e8cc40d" score="4" type="free">Ruhrgebiet</tag><tag url_value="twitter" uuid="1c236538-3464-4005-bb46-b560de681764" score="4" type="free">Twitter</tag><tag url_value="bayern" uuid="bd9c5328-154e-4994-b705-8e4ee8c4fdbc" score="1" type="Location">Bayern</tag></rankedTags></head><body>
+    <supertitle>SPD-Kanzlerkandidat</supertitle>
+    <title>Steinbrück verheddert sich in Ost-Debatte</title>
+    <subtitle>Peer Steinbrücks Aussagen zu SED-Mitgliedern und DDR rufen kontroverse Reaktionen hervor </subtitle>
+    <division type="page">
+      <image align="left" title="Peer Steinbrück" type="jpg" publication-date="" expires="" layout="large" is_empty="True">
+        <bu py:pytype="str">SPD-Kanzlerkandidat Peer Steinbrück (Archiv)</bu>
+        <copyright py:pytype="str">© Johannes Simon/Getty Images</copyright>
+      </image>
+      <p>Die heftigen Reaktionen ließen nicht lange auf sich warten: <a href="http://www.zeit.de/2013/28/peer-steinbrueck-osten" target="_blank" class="">Im ZEIT-Interview hatte Kanzlerkandidat Peer Steinbrück die Westdeutschen dafür kritisiert</a>, nach dem Mauerfall zu überheblich mit ostdeutschen Biografien umgegangen zu sein. Für viele Ost-Belange habe zu wenig Verständnis geherrscht: "Zum Beispiel dafür, dass Leute Mitglieder der <a href="http://www.zeit.de/schlagworte/organisationen/sed/index" target="_blank" class="">SED</a> geworden sind: Das geschah oft mit einer gewissen Selbstverständlichkeit, und zwar derselben, mit der man in <entity idref="Bayern" entity_type="Location" url_value="orte/bayern">Bayern</entity> in die <a href="http://www.zeit.de/schlagworte/organisationen/csu/index" target="_blank" class="">CSU</a> eintrat oder im Ruhrgebiet in die <a href="http://www.zeit.de/schlagworte/organisationen/spd/index" target="_blank" class="">SPD</a>", sagte Steinbrück, der selbst aus Hamburg kommt. </p>
+      <p>Der Mitbegründer der <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> in der DDR, <a href="http://www.zeit.de/schlagworte/personen/markus-meckel/index" target="_blank" class="">Markus Meckel</a>, hält diese Aussagen Steinbrücks jedoch für "fahrlässig und historisch falsch". "Wer so redet, verkennt den Druck, den es auf Leute gab, unbedingt der <entity idref="SED" entity_type="Organization" url_value="organisationen/sed">SED</entity> beizutreten", sagte <entity idref="Markus+Meckel" entity_type="Person" url_value="personen/markus-meckel">Meckel</entity>. "Viele haben dem widerstanden und damit auf berufliche Karrieren verzichtet." Abgesehen von Einzelfällen sei es in der DDR nicht mal jenseits der Politik möglich gewesen, ohne SED-Mitgliedschaft Karriere zu machen. "Ab einer bestimmten Stufe ging es nur noch mit Parteibuch", sagte Meckel. Gleichwohl sei es auch heute in Deutschland nicht unüblich, aus Karrieregründen in eine Partei einzutreten, "inbesondere in Ländern, die lange von einer Regierungspartei geprägt sind". In diesem Punkt habe Steinbrück recht. </p>
+      <p>Zugleich wehrte sich Meckel gegen den vorherrschenden Eindruck, die SPD habe einstigen SED-Mitgliedern die Aufnahme verwehrt. Steinbrück hatte es in dem Gespräch als Fehler bezeichnet, ehemalige SED-Mitglieder komplett zurückzuweisen. "Das ist historisch falsch. Ein solches Verbot hat es nie gegeben", sagte Meckel. Jeder Ortsverein sei damals gebeten worden, die Biographien ehemaliger SED-Genossen sehr kritisch zu prüfen. Lediglich von Ende Februar bis Anfang Juni 1990 habe es ein Aufnahme-Moratorium gegeben. Danach seien auch zahlreiche ehemalige SED-Mitglieder der SPD beigetreten. </p>
+      <raw py:pytype="str">
+        <blockquote class="twitter-tweet"><p><a href="https://twitter.com/search?q=%23Steinbr%C3%BCcks&amp;src=hash">#Steinbrücks</a> Vergleich von SED mit <entity idref="CSU" entity_type="Organization" url_value="organisationen/csu">CSU</entity> und SPD ist ungeheuerlich. Er verharmlost DDR-Diktatur aus Wahlkampfzwecken <a href="http://t.co/zVSj5FaAof">http://t.co/zVSj5FaAof</a></p>— Hermann Gröhe (@groehe) <a href="https://twitter.com/groehe/statuses/352736215591686145">July 4, 2013</a></blockquote>
+        <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8" />
+      </raw>
+      <p>Auch in anderen Parteien führten Steinbrücks Äußerungen zu zum Teil heftigen Reaktionen, was  auch am nahenden Bundestagswahlkampf liegen dürfte. "Steinbrücks Vergleich von SED mit CSU und SPD ist ungeheuerlich", <a href="https://twitter.com/groehe/status/352736215591686145" target="_blank" class="">erklärte CDU-Generalsekretär Hermann Gröhe auf Twitter</a>. "Er verharmlost die DDR-Diktatur aus Wahlkampfzwecken." Thüringens FDP-Generalsekretär <a href="https://twitter.com/Patrick_Kurth/status/352453902593032194" target="_blank" class="">Patrick Kurth sagte, ebenfalls auf Twitter</a>: "Auch bei DDR-Geschichte ist Streinbrück ahnunglos." Und <entity idref="Hubertus+Knabe" entity_type="Person" url_value="personen/hubertus-knabe">Hubertus Knabe</entity>, Direktor der Gedenkstätte Berlin-Hohenschönhausen, der einstigen zentralen Untersuchungshaftanstalt der Staatssicherheit, warf Steinbrück vor, mit seinen Äußerungen "bei ostdeutschen Wählern auf Stimmenfang" gehen zu wollen. Wer den Beitritt zur SED mit dem zur CSU oder SPD vergleiche, betreibe "echte Geschichtsklitterung". </p>
+      <raw py:pytype="str">
+        <blockquote class="twitter-tweet"><p>Auch bei <a href="https://twitter.com/search?q=%23DDR&amp;src=hash">#DDR</a>-Geschichte ist <a href="https://twitter.com/search?q=%23Steinbr%C3%BCck&amp;src=hash">#Steinbrück</a> ahnungslos. <a href="https://twitter.com/search?q=%23SED&amp;src=hash">#SED</a>-Beitritt sei oft "Selbstverständlichkeit".  <a href="http://t.co/HILLtYPIA0">http://t.co/HILLtYPIA0</a></p>— Patrick Kurth MdB (@Patrick_Kurth) <a href="https://twitter.com/Patrick_Kurth/statuses/352453902593032194">July 3, 2013</a></blockquote>
+        <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8" />
+      </raw>
+      <p><br />Doch nicht nur das Thema SED-Mitgliedschaft, auch Steinbrücks Äußerungen zur besseren  Kinderbetreuung und Frauenerwerbsquote als "positivem Erbe" der DDR riefen ablehnende Reaktionen hervor. Der hessische CDU-Fraktionschef <entity idref="Christean+Wagner" entity_type="Person" url_value="personen/christean-wagner">Christean Wagner</entity> bezeichnete dies als "Anbiederung an die <entity idref="Linkspartei" entity_type="Organization" url_value="organisationen/linkspartei">Linkspartei</entity> und Vorbereitung einer politischen Zusammenarbeit, falls es für Rot-Grün nicht reicht". <br /></p>
+      <p>Allerdings hatte Steinbrück in dem Gespräch einer Tolerierung oder gar Koalition mit der Linkspartei nach der Bundestagswahl eine klare Absage erteilt. Man habe es bei der Linken zwar mit einem pragmatischen Teil in den neuen Ländern zu tun, der bereit sei, Verantwortung zu übernehmen, aber eben auch mit einer großen Zahl von Sektierern im Westen. Wohl auch deshalb reihte sich selbst die Linkspartei in den Chor der Kritiker ein: "Steinbrück wanzt sich an den Osten ran", <a href="https://twitter.com/MatthiasHoehn/status/352468743462457344" target="_blank" class="">twitterte Bundesgeschäftsführer Matthias Höhn</a>. Das ganze sei "ein sehr durchsichtiges Manöver".  </p>
+      <raw py:pytype="str">
+        <blockquote class="twitter-tweet"><p>Steinbrück wanzt sich an den Osten an. Sehr durchsichtiges Manöver. <a href="http://t.co/Z2JndL3OvC">http://t.co/Z2JndL3OvC</a></p>— Matthias Höhn (@MatthiasHoehn) <a href="https://twitter.com/MatthiasHoehn/statuses/352468743462457344">July 3, 2013</a></blockquote>
+        <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8" />
+      </raw>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Steinbrück verheddert sich in Ost-Debatte</title>
+    <supertitle>SPD-Kanzlerkandidat</supertitle>
+    <text>Darf man CSU und SED miteinander vergleichen? Peer Steinbrücks Aussagen zur DDR rufen kontroverse Reaktionen hervor. Manche verstehen den SPD-Kandidaten bewusst falsch.</text>
+  </teaser>
+</article>

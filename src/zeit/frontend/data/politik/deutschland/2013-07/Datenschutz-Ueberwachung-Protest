@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Elisabeth_Gamperl/index" publication-date="" expires="">
+      <display_name py:pytype="str">Elisabeth Gamperl</display_name>
+    </author>
+    <image align="left" title="Demo Berlin " base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/Demo-Berlin/" type="jpg" publication-date="" expires="">
+      <bu py:pytype="str">Die Berliner demonstrierten gegen den Überwachungsstaat</bu>
+      <copyright py:pytype="str">©Pawel Kopczynski/Reuters</copyright>
+    </image>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/demonstration-gegen-ueberwachung" year="2013" issue="31" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+        <video href="http://xml.zeit.de/video/2013-07/2568826095001" href2="" expires="2013-08-26T07:00:00+00:00" video_id="vid2568826095001" video_id_2="" />
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Abhörskandal</supertitle>
+        <title py:pytype="str">Tausende demonstrieren gegen Spähaktionen</title>
+        <text py:pytype="str">Unter dem Motto "Stop watching us" laufen in mehr als 30 deutschen Städten Proteste gegen Datenüberwachung. Die Veranstalter hatten sich jedoch mehr Teilnehmer erhofft.</text>
+        <description py:pytype="str">Unter dem Motto "Stop watching us" laufen in mehr als 30 deutschen Städten Proteste gegen Datenüberwachung. Die Veranstalter hatten sich jedoch mehr Teilnehmer erhofft.</description>
+        <byline xsi:nil="true" />
+        <image alt="Demonstration gegen Überwachung in Berlin" align="left" title="Demonstration Berlin" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/demonstration-berlin-4/" type="jpg" publication-date="" expires="2013-10-27T16:02:32+00:00">
+          <bu py:pytype="str">Demonstration gegen Überwachung in Berlin</bu>
+          <copyright py:pytype="str">© Pawel Kopczynski/Reuters</copyright>
+        </image>
+      </reference>
+    </references>
+    
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Gamperl</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comment-id">http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/nsa-demonstrationen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-29T08:00:48.438802+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-27T21:11:10.599936+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-29T08:01:51.419551+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-27T21:36:33.147224+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-27T21:36:16.209596+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.gamperl</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">eaec0bd7c5d84ce5a66a99c72e6497b1</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3334</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ade8ee0f-c677-4360-b7dd-f264f3965c87}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="edward-snowden" uuid="00247cae-8077-4ddb-81ba-70dff62a1780" score="7" type="Person">Edward Snowden</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="6" type="Organization">Grüne</tag><tag url_value="bundeskanzleramt" uuid="54b312d4-bf70-4ac4-af74-e778a53badc0" score="5" type="Organization">Bundeskanzleramt</tag><tag url_value="piratenpartei" uuid="7a989bf1-5355-4234-aff6-ce9244be2b62" score="5" type="Organization">Piratenpartei</tag><tag url_value="asyl" uuid="1f68751d-9938-4737-b150-95c265cf00f7" score="4" type="free">Asyl</tag><tag url_value="datenschutz" uuid="42624787-c068-4f31-87bc-91675967dbfe" score="4" type="free">Datenschutz</tag><tag url_value="die-linke" uuid="9eecf627-7a54-4e81-98c4-c7e5bd7e76e5" score="4" type="Organization">Die Linke</tag><tag url_value="facebook" uuid="ddd1c7c5-1864-4642-818c-c153a2c9ebe5" score="4" type="Organization">Facebook</tag><tag url_value="geheimdienst" uuid="873d5929-08f3-4cb5-8c3b-aa233005cbd8" score="4" type="free">Geheimdienst</tag><tag url_value="physik" uuid="03414e03-49cf-4521-8d0a-54f624860a3a" score="4" type="free">Physik</tag><tag url_value="privatsphaere" uuid="831496e7-59c4-4284-a147-2761c11217ff" score="4" type="free">Privatsphäre</tag><tag url_value="ueberwachung" uuid="f1ce9830-354e-472f-b794-60d7a0f7e8a0" score="4" type="free">Überwachung</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="2" type="Location">Berlin</tag><tag url_value="hamburg" uuid="35412dac-1753-47db-aba2-7c86ba4368d3" score="1" type="Location">Hamburg</tag><tag url_value="muenchen" uuid="93ba80ad-76d9-4ff5-bcf0-66d011cf8eef" score="1" type="Location">München</tag></rankedTags></head><body>
+    <supertitle>Bundesweite Proteste</supertitle>
+    <title>Tausende fordern Stopp der Datenüberwachung</title>
+    <subtitle>10.000 Deutsche haben gegen das Abhören der Geheimdienste demonstriert. Es kamen weniger als erwartet, Netzaktivisten sind aber positiv überrascht.</subtitle>
+    <division type="page">
+      <image align="left" title="Demo Berlin " type="jpg" publication-date="" expires="" layout="large" is_empty="True">
+        <bu py:pytype="str">Die Berliner demonstrierten gegen den Überwachungsstaat</bu>
+        <copyright py:pytype="str">©Pawel Kopczynski/Reuters</copyright>
+      </image>
+      <gallery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/bg-demonstration-anti-prism-nsa" year="2013" issue="31" ressort="Gesellschaft" contenttype="gallery" publication-date="" expires="">
+        <supertitle py:pytype="str">NSA-Skandal</supertitle>
+        <title py:pytype="str">Bilder der Demonstration in Berlin</title>
+        <text xsi:nil="true" />
+        <description xsi:nil="true" />
+        <byline xsi:nil="true" />
+      </gallery>
+      <p>14 Uhr Heinrichplatz, Berlin-Kreuzberg. Bevor der Protestzug Richtung Brandenburger Tor loszog, schmierten sich die meisten Demonstranten mit Sonnencreme ein. Bei extremer Hitze protestierten in <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity> rund 1.000 Menschen gegen die Überwachung und für den Datenschutz. Mit Schildern wie "Du bist jetzt Terrorist", und "Demo bei 36 Grad, gegen 360 Grad Überwachung" und mit Guy-Fawkes-Masken, die als Zeichen des Internetkollektivs Anonymous gelten, zogen sie durch die Straßen. Der Protestmarsch wurde von einem breiten Bündnis organisiert – allen voran der <entity idref="Piratenpartei" entity_type="Organization" url_value="organisationen/piratenpartei">Piratenpartei</entity>, den <entity idref="Gr%C3%BCnen" entity_type="Organization" url_value="organisationen/gruenen">Grünen</entity> und verschiedenen Nichtregierungsorganisationen.  </p>
+      <p>In Berlin und mehr als <a href="http://demonstrare.de/termine/27-07-stopwatchingus-deutschlandweite-proteste-gegen-prism-und-tempora" target="_blank" class="">30 weiteren deutschen Städten</a> demonstrierten insgesamt knapp 10.000 Menschen unter dem Motto "<em>Stop watching us!</em>" Sie forderten das <a href="http://www.zeit.de/digital/datenschutz/2013-07/anhoerung-kongress-nsa-verbindungsdaten" target="_blank" class="">Recht auf Privatsphäre</a> und Schutz für Whistleblower wie <entity idref="Edward+Snowden" entity_type="Person" url_value="personen/edward-snowden">Edward Snowden</entity>. In <entity idref="M%C3%BCnchen" entity_type="Location" url_value="orte/muenchen">München</entity> waren rund 500 Menschen auf der Straße, <entity idref="Hamburg" entity_type="Location" url_value="orte/hamburg">Hamburg</entity> hatte 2.000 Teilnehmer, Frankfurt rund 1.000.  </p>
+      <p>"Wir können uns nicht alles gefallen lassen. Es reicht jetzt", sagt etwa die Berlinerin Marie S. Die 32-Jährige leitet ein Kaffeehaus in Friedrichshain und ist zum ersten Mal bei einer Demonstration dabei. Von der hatte sie  über <entity idref="Facebook" entity_type="Organization" url_value="organisationen/facebook">Facebook</entity> erfahren: "Jeder, der es okay findet überwacht zu werden, hat Demokratie nicht verstanden." Philipp, Doktorand der Physik, ist dabei, um sein Gewissen zu beruhigen: "Die Bürger werden von der Politik für dumm verkauft. Ich glaube nicht, dass wir etwas ändern können, aber wir müssen Zeichen setzen."   <br /></p>
+      <p>Obwohl in der Hauptstadt weniger Menschen kamen als erwartet – die Organisatoren rechneten mit 5.000 Teilnehmern –  zeigten sich die Verantwortlichen positiv überrascht. "Ich hätte nicht gedacht, dass sich heute so viele einfinden", sagte etwa Mitorganisator Steffen Aumüller von der <entity idref="Linkspartei" entity_type="Organization" url_value="organisationen/linkspartei">Linkspartei</entity>. Auch die Piratenpartei freute sich über den Zuspruch: "Die Menschen merken endlich, dass jeden dieses Thema angeht", sagte Bruno Kramm. </p>
+      <p>
+        <strong>Mehr Aktionen geplant </strong>
+      </p>
+      <p>Die deutsche Netzbewegung hatte es schwer in den vergangenen Wochen. Ihre Mitglieder ließen sich nicht motivieren. So standen etwa Anfang Juli nur rund 50 Demonstranten vor dem <entity idref="Bundeskanzleramt" entity_type="Organization" url_value="organisationen/bundeskanzleramt">Bundeskanzleramt</entity> in Berlin, um für Asyl für Snowden zu demonstrieren. Die Piratenpartei, das bislang erfolgreichste Mitglied der Netzbewegung, stagnierte in den Umfragen auf einem tiefen Niveau. Gründe dafür seien <a href="http://www.zeit.de/gesellschaft/zeitgeschehen/2013-07/nsa-demonstrationen" target="_blank" class="">fehlende Struktur und finanzielle Mittel</a>. Zudem seien viele Aktivisten bewusst parteilos.</p>
+      <p>Der bayerische Piraten-Spitzenkandidat Kramm hofft aber darauf, dass die Netzbewegung reaktiviert wird: "Die Bewegung ist zwar sehr zerstreut. Aber das heute zeigt, dass wir es immer noch drauf haben. Wir müssen uns bündeln. Wir planen jetzt mehrere Aktionen." Die nächste ist bereits für Montag angekündigt: Die Digitale Gesellschaft ruft zu einem <a href="http://digitalegesellschaft.de/2013/07/1-groser-bnd-spaziergang-am-29-7-um-19-uhr/" target="_blank" class="">Spaziergang zum neuen BND-Gebäude</a> in Berlin auf. Das Augenmerk wird bei dieser Aktion auf deutsche Geheimdienste gelenkt. Nur um eines bitten die Veranstalter: Die Parteifahnen sollen zu Hause gelassen werden.  <br /></p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title>Tausende fordern Stopp der Datenüberwachung</title>
+    <supertitle>Bundesweite Proteste</supertitle>
+    <text>10.000 Deutsche haben gegen das Abhören der Geheimdienste demonstriert. Es kamen weniger als erwartet, Netzaktivisten sind aber positiv überrascht. Von E. Gamperl, Berlin</text>
+  </teaser>
+</article>

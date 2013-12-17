@@ -1,0 +1,158 @@
+$article-content-max-width: 660px
+
+// Opt-in Typography
+.copy, %copy
+  p
+    margin-bottom: $fine
+    margin-left: auto
+    margin-right: auto
+    font-size: $font-ml
+    max-width: 36.6em
+    +respond-min($break-3)
+      font-size: $font-l
+      max-width: 33em
+
+  .two-cols
+    max-width: none
+    -webkit-column-count: 2
+
+  h1, h2, h3, h4, h5, h6
+    margin-bottom: $thin
+    margin-top: $small
+
+  blockquote
+    @extend %quote
+    @extend %font-l-xl
+    color: $color-quote
+    display: block
+    &.quote--wide
+      @extend %quote--wide
+    &.quote
+      +respond-min($break-1)
+        float: left
+        max-width: em(160px)
+        margin: $large $medium $large auto
+
+figure
+  width: 100%
+  margin-bottom: $medium
+  margin-top: $medium
+  clear: both
+  .figure__media, img
+    max-width: 100%
+    width: 100%
+    margin-bottom: $small
+  .figure__caption, figcaption
+    @extend %meta
+    @extend %font-s
+  .figure__media--embed
+    .figure__media--embed__wrap
+      width: 100%
+      position: relative
+      background-color: black
+      padding-bottom: 56.25%
+    iframe
+      position: absolute
+      width: 100%
+      height: 100%
+      left: 0
+      top: 0
+  &.figure-horizontal, &.figure-horizontal--right
+    +pie-clearfix
+    .figure__media, img
+      +max-width-rem($article-content-max-width)
+      width: 100%
+      display: block
+      +respond-min($break-1)
+        +inline-block
+        width: 60%
+      +respond-min($break-2)
+        width: 71.74%
+    .figure__caption, figcaption
+      +respond-min($break-1)
+        +inline-block
+        padding-top: 5%
+        width: 40%
+      +respond-min($break-2)
+        width: 28.26%
+  &.figure-horizontal
+    +respond-min($break-1)
+      .figure__media, img
+        float: left
+      .figure__caption, figcaption
+        float: right
+        padding-left: $gutter
+  &.figure-horizontal--right
+    +respond-min($break-1)
+      .figure__media, img
+        float: right
+      .figure__caption, figcaption
+        float: left
+        padding-right: $gutter
+  &.figure-full-width
+    width: 100%
+    .figure__media, img
+      display: block
+      width: 100%
+    .figure__caption, figcaption
+      +max-width-rem($article-content-max-width)
+      margin: 0 auto
+      +respond-min($break-3)
+        padding-right: 10%
+  &.figure-stamp, &.figure-stamp--right
+    margin: $small auto
+    overflow: hidden
+    .video__still
+      width: 40%
+      margin: 0 $gutter $gutter/2 0
+      float: left
+      .video__button
+        width: 60px
+        height: 60px
+      .figure__media, img
+        width: 100%
+        float: none
+        margin: 0
+    .figure__media, img
+      margin: 0 $gutter $gutter/2 0
+      max-width: em(240px)
+      float: left
+      width: 40%
+    .figure__caption, figcaption
+      overflow: hidden
+    +respond-min($break-2)
+      max-width: em(240px)
+      margin: $gutter $gutter $large 0
+      float: left
+      .video__still
+        width: 100%
+        margin: 0
+        float: none
+        .video__button
+          width: 100px
+          height: 100px
+        .figure__media, img
+          margin-bottom: $gutter
+      .figure__media, img
+        float: none
+        margin-bottom: $gutter
+        width: 100%
+  &.figure-stamp--right
+    +respond-min($break-2)
+      margin: $gutter 0 $gutter $gutter
+      float: right
+  &.author-stamp
+    text-align: center
+    .figure__media, img
+      @extend %round-img
+      +inline-block
+      +max-width-rem(70px)
+      margin-bottom: $small
+      +respond-min($break-0)
+        +max-width-rem(100px)
+    .figure__caption
+      +max-width-rem(400px)
+      text-align: left
+      +respond-max($break-2)
+        margin-top: $fine
+

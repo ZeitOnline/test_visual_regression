@@ -1,0 +1,53 @@
+.supertitle, %supertitle
+  +tablet
+  text-transform: uppercase
+  color: $grey
+  letter-spacing: 1px
+  margin-bottom: $micro
+  font-size: $font-s
+
+.meta-link, %meta-link
+  margin-left: $micro
+
+.meta, %meta
+  +tablet
+  color: $grey
+
+.subheading, %subheading
+  +franziska(semibold)
+
+.headline, %headline
+  +tablet
+  line-height: $headline-line-height
+
+.quote, %quote
+  +tablet()
+  font-size: $font-l--px
+  margin-left: 0
+
+.quote__text
+  &:before
+    content: '»'
+  &:after
+    content: '«'
+
+.quote__author
+  @extend %meta
+  font-size: $font-s--px
+  display: block
+  margin-top: $small
+  margin-left: $fine
+  &:before
+    content: "\2014  "
+  a
+    @extend %meta-link
+
+.quote--wide, %quote--wide
+  @extend %quote
+  +respond-min($break-1)
+    margin-left: $small
+    max-width: 80%
+  +respond-min($break-2)
+    max-width: 70%
+  +respond-min($break-3)
+    max-width: 50%

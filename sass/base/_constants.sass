@@ -1,0 +1,99 @@
+// margins/paddings
+$hair:           em(1px)
+$micro:          em(4px)
+$tiny:           em(6px)
+$thin:           em(8px)
+$fine:           em(10px)
+$little:         em(14px)
+$small:          em(18px)
+$compact:        em(28px)
+$medium:         em(36px)
+$large:          em(56px)
+$wide:           em(72px)
+$huge:           em(90px)
+
+// font sizes in px
+$font-xs--px:    12px
+$font-s--px:     14px
+$font-m--px:     16px
+$font-ml--px:    18px
+$font-l--px:     20px
+$font-xl--px:    24px
+$font-xxl--px:   30px
+$font-xxxl--px:  40px
+$font-xxxxl--px: 50px
+
+// font sizes in em
+$font-xs: em($font-xs--px)
+$font-s:  em($font-s--px)
+$font-m:  em($font-m--px)
+$font-ml: em($font-ml--px)
+$font-l:  em($font-l--px)
+$font-xl: em($font-xl--px)
+$font-xxl: em($font-xxl--px)
+$font-xxxl: em($font-xxxl--px)
+$font-xxxxl: em($font-xxxxl--px)
+
+// font sizes in rem
+$font-xs--rem: em_to_rem($font-xs)
+$font-s--rem:  em_to_rem($font-s)
+$font-m--rem:  em_to_rem($font-m)
+$font-ml--rem: em_to_rem($font-ml)
+$font-l--rem:  em_to_rem($font-l)
+$font-xl--rem: em_to_rem($font-xl)
+$font-xxl--rem: em_to_rem($font-xxl)
+$font-xxxl--rem: em_to_rem($font-xxxl)
+$font-xxxxl--rem: em_to_rem($font-xxxxl)
+
+$sans-fallbacks: Helvetica, Arial, FreeSans, sans-serif
+$serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif,serif
+
+$base-line-height: 1.55
+$headline-line-height: 1.3
+
+// utility colors
+$yellow:         #FFE117
+$red:            #990000
+$dark-red:       #7c0e14
+$blue:           #355bde
+$midnight:       #1f2091
+
+$white:          #FFF
+$grey--bright:   #f9f9f9
+$grey--light:    #EEE
+$charcoal:       #AAA
+$grey:           #777
+$grey--mid:      #444444
+$grey--dark:     #333332
+$grey--mid-dark: #252525
+$black:          #000
+
+// semantic colors
+$color-page-bg: $white
+$color-text: $black
+$color-canvas-bg: $white
+$color-quote: $grey--dark
+$color-link--default: $red
+
+// content lengths
+$small-content-width:  27em
+$medium-content-width: em(660px)
+$large-content-width:  44.25em
+$max-page-width:       em(980px)
+$max-longform-width:   em(1460px)
+
+// layout
+$gutter: em(20px)
+$page-padding: $gutter
+$page-padding--small: $gutter*0.75
+
+// Standard breakpoints
+$break-0: em(480px)
+$break-1: em(576px)
+$break-2: em(720px)
+$break-3: em(1024px)
+$break-4: em(1120px)
+
+// for comments
+$comments__break-overlap:  em(768px)
+$comments__break-outside: em(1280px)

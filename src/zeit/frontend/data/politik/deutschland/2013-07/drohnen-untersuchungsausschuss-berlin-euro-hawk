@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/F/Hauke_Friederichs-2/index" publication-date="" expires="">
+      <display_name py:pytype="str">Hauke Friederichs</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/scharping-euro-hawk-ausschuss" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Untersuchungsausschuss</supertitle>
+        <title py:pytype="str">Scharping gibt de Maizière Mitschuld an Drohnen-Desaster</title>
+        <text py:pytype="str">Bei der Konzeption des Drohnenprojektes sei alles richtig gelaufen, sagt der Ex-Verteidigungsminister vor dem Untersuchungsausschuss – und kritisiert seinen Nachfolger.</text>
+        <description py:pytype="str">Bei der Konzeption des Drohnenprojektes sei alles richtig gelaufen, sagt der Ex-Verteidigungsminister vor dem Untersuchungsausschuss – und kritisiert seinen Nachfolger.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/scharping-2/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Der ehemalige Verteidigungsminister Rudolf Scharping (SPD) </bu>
+          <copyright py:pytype="str">© Michael Gottschalk/CommonLens</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/untersuchungsausschuss-drohne-euro-hawk" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Untersuchungsausschuss</supertitle>
+        <title py:pytype="str">Wer ist schuld am Euro-Hawk-Debakel?</title>
+        <text py:pytype="str">750 Ordner, 126 Beweisbeschlüsse und 20 Zeugen in sechs Tagen: Der Untersuchungsausschuss zur Drohnen-Pleite beginnt am Montag mit der Zeugenbefragung. Von H. Friederichs</text>
+        <description py:pytype="str">750 Ordner, 126 Beweisbeschlüsse und 20 Zeugen in sechs Tagen: Der Untersuchungsausschuss zur Drohnen-Pleite beginnt am Montag mit der Zeugenbefragung. Von H. Friederichs</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Euro Hawk" base-id="http://xml.zeit.de/politik/deutschland/2013-07/drohne-euro-hawk/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Gegenstand des Untersuchungsausschusses: Die unbemannte Drohne Euro Hawk</bu>
+          <copyright py:pytype="str">© EADS via Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-verkauf-usa" year="2013" issue="30" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro Hawk </supertitle>
+        <title py:pytype="str">Eine Drohne zum Freundschaftspreis</title>
+        <text py:pytype="str">Schadensbegrenzung beim Euro Hawk: Das Verteidigungsministerium will die Drohne offenbar an die Nasa oder US-Luftwaffe verkaufen. Viel Geld sei damit nicht zu holen.</text>
+        <description py:pytype="str">Schadensbegrenzung beim Euro Hawk: Das Verteidigungsministerium will die Drohne offenbar an die Nasa oder US-Luftwaffe verkaufen. Viel Geld sei damit nicht zu holen.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Euro Hawk in Manching" base-id="http://xml.zeit.de/politik/deutschland/2013-07/eurohawk/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Musiker der Bundeswehr spielen 2011 bei der Auslieferung der Drohne Euro Hawk in Manching. </bu>
+          <copyright py:pytype="str">© Christof Stache/AFP/GettyImagesEuro</copyright>
+        </image>
+      </reference>
+    </references>
+    <image alt="Zeugenvernehmung im Drohnen-Untersuchungsausschuss des Bundestags" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-3/" type="jpg" publication-date="" expires="2013-10-22T16:58:11+00:00">
+      <bu py:pytype="str">Zeugenvernehmung im Drohnen-Untersuchungsausschuss des Bundestags</bu>
+      <copyright py:pytype="str">© Rainer Jensen/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Hauke Friederichs</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-22T17:44:10.072054+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-22T17:15:48.404043+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-22T17:45:26.721347+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-22T17:29:32.206191+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-22T17:44:09.621824+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bangel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">c29fff663b6c454dbf3d18a2c02b2156</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">6329</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:854d8c5c-c209-4e7a-b2f6-ae35d2ce698e}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="video_id">http://xml.zeit.de/video/2013-07/2559998420001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="rudolf-scharping" uuid="41491512-4c3d-4f4a-bdf6-66de0ce5de98" score="9" type="Person">Rudolf Scharping</tag><tag url_value="wolfgang-schneiderhan" uuid="f9919674-01f3-4fa1-8b72-b8fad5d01e87" score="8" type="Person">Wolfgang Schneiderhan</tag><tag url_value="cdu" uuid="30138082-e7f6-4ea6-ac16-1b84d349fb94" score="7" type="Organization">CDU</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="7" type="Organization">SPD</tag><tag url_value="wahlkampf" uuid="83c6adec-c208-4adc-81ba-807b8992ff56" score="7" type="free">Wahlkampf</tag><tag url_value="bundesverteidigungsministerium" uuid="b89a9a5b-d7e4-466c-b9da-55a912c2255c" score="6" type="Organization">Bundesverteidigungsministerium</tag><tag url_value="gruene" uuid="21652f10-d3a0-4d94-97e0-53b94a7fabcb" score="6" type="Organization">Grüne</tag><tag url_value="die-linke" uuid="9eecf627-7a54-4e81-98c4-c7e5bd7e76e5" score="5" type="Organization">Die Linke</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="4" type="free">Bundeswehr</tag><tag url_value="bundeswehrsoldat" uuid="0ae64ab0-228c-4075-a9e8-54979a4adce0" score="4" type="free">Bundeswehrsoldat</tag><tag url_value="drohne" uuid="43bd36b1-f610-4b5b-bb9f-ecce3ba5a708" score="4" type="free">Drohne</tag><tag url_value="kanzleramt" uuid="2497011d-a71c-4b85-baed-8c9fcd07be9b" score="4" type="free">Kanzleramt</tag><tag url_value="untersuchungsausschuss" uuid="b314a17c-8af6-4fd5-839e-aa9c2a488fc5" score="4" type="free">Untersuchungsausschuss</tag><tag url_value="verteidigungsminister" uuid="a90c57c7-6c40-4001-b341-e6b0d9cf0e0e" score="4" type="free">Verteidigungsminister</tag></rankedTags></head><body>
+    <supertitle>Euro-Hawk-Ausschuss</supertitle>
+    <title>Wahlkampf in Saal 4.900</title>
+    <subtitle>Ein Untersuchungsausschuss soll klären, wer das Euro-Hawk-Desaster verschuldet hat. Die erste Sitzung aber war Sommertheater. Immerhin mit Scharping. </subtitle>
+    <division type="page">
+      <image alt="Zeugenvernehmung im Drohnen-Untersuchungsausschuss des Bundestags" align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-3/" type="jpg" publication-date="" expires="2013-10-22T16:58:11+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Zeugenvernehmung im Drohnen-Untersuchungsausschuss des Bundestags</bu>
+        <copyright py:pytype="str">© Rainer Jensen/dpa</copyright>
+      </image>
+      <p>In
+Berlin beginnt ein weiterer schöner Sommertag: Die ersten Touristen flanieren am
+Kanzleramt vorbei, Rasensprenger kämpfen im Regierungsviertel vergeblich gegen
+die braunen Stellen im Grün an, und im
+Paul-Löbe-Haus gegenüber des Reichstages nimmt am Montagmorgen der
+<a href="http://www.zeit.de/politik/deutschland/2013-07/euro-hawk-untersuchungsausschuss" target="_blank" class="">Untersuchungsausschuss zum Euro-Hawk-Desaster</a> seine Arbeit auf. Er soll mitten in der Sommerpause klären, warum die Anschaffung der Spähdrohne misslungen ist.
+Weshalb Hunderte Millionen Euro Steuergeld verschwendet wurden. Und wie die
+Verfahren im <entity idref="Bundesverteidigungsministerium" entity_type="Organization" url_value="organisationen/bundesverteidigungsministerium">Bundesverteidigungsministerium</entity> verbessert werden können. <a href="http://www.zeit.de/politik/deutschland/2013-06/untersuchungsausschuss-drohnen-de-maiziere" target="_blank" class="">So lauten
+zumindest die offiziellen Arbeitsaufträge.</a></p>
+      <p>In
+Wahlkampfzeiten geht es der Opposition aber auch darum, den bereits
+angeschlagenen Verteidigungsminister weiter zu beschädigen.
+SPD-Spitzenpolitiker haben bereits mehrfach <a href="http://www.zeit.de/politik/deutschland/2013-07/de-maiziere-drohne-belastendes-dokument" target="_blank" class="">den Rücktritt von Thomas de
+Maizière</a> gefordert. Die Union hingegen versucht, den einstigen starken Mann im
+Kabinett Merkel zu schützen. Die Verteidigungsexperten von <entity idref="CDU" entity_type="Organization" url_value="organisationen/cdu">CDU</entity> und CSU
+betonen immer wieder, dass der Plan, Euro Hawk anzuschaffen, unter Rot-Grün und
+unter dem SPD-Minister <entity idref="Rudolf+Scharping" entity_type="Person" url_value="personen/rudolf-scharping">Rudolf Scharping</entity> getroffen wurde. </p>
+      <p>Das Interesse der Medien ist riesig. Vor dem Sitzungssaal 4.900
+drängen sich die Berichterstatter. Es herrscht Chaos, die
+Journalistenakkreditierung ist miserabel vorbereitet worden. Als ob niemand in
+der Verwaltung mit großer medialer Aufmerksamkeit gerechnet hätte. Wer darf in
+den Sitzungssaal hinein?, fragen sich die Beamten und trauen ihren eigenen
+Listen nicht. Mit einer halben Stunde Verspätung geht dann endlich
+die Zeugenbefragung los.</p>
+      <p>Der
+ehemalige Vier-Sterne-General <entity idref="Wolfgang+Schneiderhan" entity_type="Person" url_value="personen/wolfgang-schneiderhan">Wolfgang Schneiderhan</entity> nimmt am hellen Holztisch Platz. Hinter ihm sitzen einige Juristen und Offiziere aus dem
+Verteidigungsministerium, ihm gegenüber die Abgeordneten an einem langen,
+halbkreisförmigen Tisch. Ausführlich erläutert Schneiderhan, als
+Generalinspekteur bis Sommer 2009 höchster Bundeswehrsoldat, die
+Beschaffungsverfahren. Er benutzt zahllose Abkürzungen und greift auf den Fachjargon
+der Militärs zurück. Er spricht über Bedarfsträger, Transformationsprozesse, Kampfwertanpassung,
+Systemfähigkeitsforderungen, industrielle Nachversorgung. Mancher Abgeordneter schaut
+verstohlen auf die Uhr, andere wischen ständig über ihre iPads, nur wenige
+können sich für Schneiderhans Detailverliebtheit begeistern.</p>
+      <intertitle>Natürlich auch mündlich informiert<br /></intertitle>
+      <p>Nach
+seinem Vortrag sind die Abgeordneten dran. Fragen werden nach der Berliner
+Runde gestellt, die stärkste Fraktion hat die meiste Zeit: Die Union darf 23
+Minuten fragen, die <entity idref="SPD" entity_type="Organization" url_value="organisationen/spd">SPD</entity> 14, die FDP neun und <entity idref="Gr%C3%BCne" entity_type="Organization" url_value="organisationen/gruene">Grüne</entity> sowie Linke sieben Minuten. CDU, CSU und FDP gehen schnell die Fragen aus. Auch die SPD begnügt sich mit
+zwei Runden. <entity idref="Linkspartei" entity_type="Organization" url_value="organisationen/linkspartei">Linkspartei</entity> und Grüne haben noch einige Fragen mehr. Die Linken
+langen beim Thema aber wieder daneben, wollen wissen, ob die von Euro Hawk
+erfassten Daten auch für die Strafverfolgung, also im Inneren, benutzt worden
+wären. Doch die Drohne war noch gar nicht im Einsatz. Bisher waren die Militärs
+froh, wenn die ferngelenkte Maschine nach kurzen Tests wieder heil am Boden angekommen
+war.</p>
+      <p>Auf
+die wichtigste Frage, wer die Drohnenpleite zu verantworten hat, gibt es am
+Montag wenig Erhellendes zu erfahren. Schneiderhan habe früh von Problemen beim
+Euro Hawk erfahren, diese seien aber als lösbar beschrieben worden. Ein wenig klingt
+Schneiderhan wie Verteidigungsminister de Maizière, der
+ebenfalls bis zum Ende des mindestens 500 Millionen Euro teuren Drohnenprojekts
+lediglich über lösbare Probleme informiert worden sein will. Einen gravierenden
+Unterschied gibt es aber: Schneiderhan amüsiert sich über de Maizière. Er habe
+als Generalinspekteur nie geglaubt, nur mit schriftlichen Vorlagen arbeiten zu
+können. Natürlich habe er viele klärende Gespräche geführt und die Minister,
+unter denen er diente, auch mündlich informiert. Als er das sagt, lacht die
+Opposition auf. Schließlich hatte de Maizière behauptet, lediglich schriftliche
+Informationen zur Kenntnis zu nehmen, die auf dem Dienstweg auf seinem
+Schreibtisch landen.</p>
+    </division>
+    <division type="page" teaser="Scharping, Jung: Nicht in unserer Amtszeit">
+      <p>Schneiderhan,
+ein parteiübergreifend angesehener Experte, hält die Anschaffung eines Langstrecken-Aufklärungssystems zur Signalerfassung weiterhin für dringend notwendig. Die Bundeswehr habe durch den Ausfall von Euro Hawk eine ernste
+Fähigkeitslücke, sagt Schneiderhan. Bis Mitte 2009, bis zum Ausscheiden aus dem
+Amt, kann er keine Fehler sehen, die bei der Beschaffung gemacht wurden.</p>
+      <p>Nach
+Schneiderhans Befragung stellt Inge Höger von der Linkspartei fest: "Viel Neues
+haben wir nicht erfahren." Ob bis Ende Juli überhaupt noch Neues
+herauskommt, darf bezweifelt werden. Zum Finale wird de Maizière von der
+Opposition hart befragt werden. Bisher aufgetauchte Dokumente zeigen, dass der
+Minister früher informiert gewesen sein muss, als er bisher eingeräumt hat. Doch
+sein Rücktritt oder seine Entlassung gelten in der Wahlkampfhochphase als äußerst
+unwahrscheinlich.</p>
+      <intertitle>Keine "Geburtsfehler"<br /></intertitle>
+      <p>De
+Maizières Verantwortung für das Projekt und damit für die Panne, unterstreicht Scharping in seiner Aussage. Er scheint sich am Montagmittag über die
+fünf Kamerateams und neun Fotografen zu freuen, die ihn im Saal 4.900
+ablichten. So viel Aufmerksamkeit hatte er seit seinem Ausscheiden aus der
+Bundespolitik nicht mehr. Er redet vor allem über Studien, die er in Auftrag
+gegeben habe, um herauszufinden, welches System zur Nachrichtengewinnung die Bundeswehr
+einführen sollte. Der Entwicklungsvertrag für Euro Hawk wurde 2007
+unterschrieben, da war Scharping schon lange nicht mehr im Amt. Die nicht ganz
+ernsten Angriffsversuche der Regierungsparteien und der Linken perlen an ihm einfach
+ab. Von einem "Geburtsfehler" des Projekts, der in seine Amtszeit falle, würde
+er nicht sprechen, sagt Scharping.</p>
+      <p>Ein
+wenig mehr könnte da schon Ex-Verteidigungsminister Franz Josef Jung zur
+Aufklärung beitragen. Er hat die Entwicklung von Euro Hawk in Auftrag gegeben. Doch
+wie die anderen Zeugen auch, sieht Jung die Fehler nicht in seiner Amtszeit. Fünf
+Sitzungen bleiben dem Untersuchungsausschuss noch, um zu klären, wer das
+Drohnendesaster zu verantworten hat.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <title>Wahlkampf in Saal 4.900</title>
+    <text>Ein Untersuchungsausschuss soll klären, wer das Euro-Hawk-Desaster verschuldet hat. Die erste Sitzung aber war Sommertheater. Immerhin mit Scharping. Von H. Friederichs</text>
+  </teaser>
+</article>

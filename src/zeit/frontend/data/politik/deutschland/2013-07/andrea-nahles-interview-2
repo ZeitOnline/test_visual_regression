@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/L/Raoul_Loebbert/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Raoul Löbbert</display_name>
+    </author>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="video" href="http://xml.zeit.de/video/2013-07/2546539371001" year="2013" ressort="Politik" contenttype="video" publication-date="" expires="">
+        <video-still src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_2546558683001_vs-51e416ebe4b045dec8235835-1094249756001.jpg?pubId=18140073001" />
+        <thumbnail src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_2546558684001_th-51e416ebe4b045dec8235835-1094249756001.jpg?pubId=18140073001" />
+        <supertitle py:pytype="str">NSA-Skandal</supertitle>
+        <title py:pytype="str">Nahles fordert Aufklärung von Merkel in Späh-Affäre</title>
+        <text py:pytype="str">SPD-Generalsekretärin Andrea Nahles hat Bundeskanzlerin Angela Merkel die Verletzung von Grundrechten und Gleichgültigkeit in der NSA-Affäre vorgeworfen. Sie verlangte eine sofortige Aufklärung seitens der Bundesregierung.</text>
+        <description py:pytype="str">SPD-Generalsekretärin Andrea Nahles hat Bundeskanzlerin Angela Merkel die Verletzung von Grundrechten und Gleichgültigkeit in der NSA-Affäre vorgeworfen. Sie verlangte eine sofortige Aufklärung seitens der Bundesregierung.</description>
+        <byline xsi:nil="true" />
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2013-03/spd-wahlkampf-nahles-steinbrueck" year="2013" issue="10" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Bundestagswahl</supertitle>
+        <title py:pytype="str">Nahles entmachtet Steinbrücks Wahlkampfteam</title>
+        <text py:pytype="str">Die Pannen bei Peer Steinbrücks Wahlkampagne haben Konsequenzen: SPD-Generalsekretärin Nahles übernimmt die Wahlkampfleitung, Steinbrücks Leute verlieren an Einfluss.</text>
+        <description py:pytype="str">Die Pannen bei Peer Steinbrücks Wahlkampagne haben Konsequenzen: SPD-Generalsekretärin Nahles übernimmt die Wahlkampfleitung, Steinbrücks Leute verlieren an Einfluss.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Andrea Nahles" base-id="http://xml.zeit.de/politik/deutschland/2013-03/andrea-nahles-wahlkampf/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">SPD-Generalsekretärin Andrea Nahles</bu>
+          <copyright py:pytype="str">© Carsten Koall/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2012-12/spd-30-stunden-woche-fuer-eltern" year="2012" issue="52" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">SPD-Wahlprogramm</supertitle>
+        <title py:pytype="str">Nahles will 30-Stunden-Woche für Eltern</title>
+        <text py:pytype="str">Die SPD will die Vereinbarkeit von Beruf und Familie stärken: Generalsekretärin Andrea Nahles schlägt eine staatlich bezuschusste 30-Stunden-Woche für Eltern vor.</text>
+        <description py:pytype="str">Die SPD will die Vereinbarkeit von Beruf und Familie stärken: Generalsekretärin Andrea Nahles schlägt eine staatlich bezuschusste 30-Stunden-Woche für Eltern vor.</description>
+        <byline xsi:nil="true" />
+        <image align="left" title="Nahles" base-id="http://xml.zeit.de/politik/deutschland/2012-12/nahles-30-std-woche/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">SPD-Generalsekretärin Andrea Nahles
+</bu>
+          <copyright py:pytype="str">© Hannibal/dpa/lbn</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" title="Andrea Nahles" base-id="http://xml.zeit.de/politik/deutschland/2013-07/andrea-nahles-interview/" type="jpg" publication-date="" expires="2013-10-17T11:20:15+00:00">
+      <bu py:pytype="str">SPD-Generalsekretärin Andrea Nahles (Archiv)</bu>
+      <copyright py:pytype="str">© Britta Pedersen/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Raoul Löbbert</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Christ &amp; Welt</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-17T13:28:55.384870+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-17T14:08:17.235107+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-17T14:08:17.235107+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-17T13:28:46.681759+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bangel</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">3088af9c3eef4a74baf3b2eb69b965ec</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">8458</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:14afadf3-5f55-4252-aff8-0f4fad84cd25}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="andrea-nahles" uuid="a5283cef-5f5a-466b-8204-626a8630896d" score="9" type="Person">Andrea Nahles</tag><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="6" type="Organization">Bundesregierung</tag><tag url_value="spd" uuid="064122ab-b6e4-4441-8cce-1f407cea1b04" score="6" type="Organization">SPD</tag><tag url_value="bundestag" uuid="8c0df820-912b-459b-8d2a-ae38f50cf1d9" score="4" type="free">Bundestag</tag><tag url_value="dorf" uuid="610e75bb-03d7-482f-9893-ddbec91433d7" score="4" type="free">Dorf</tag><tag url_value="mario-adorf" uuid="f6644c71-0d11-44d6-a973-e1f8bb8482dd" score="4" type="Person">Mario Adorf</tag><tag url_value="fuehrerschein" uuid="65451202-25ff-4bad-96e0-309fd5938281" score="3" type="free">Führerschein</tag><tag url_value="mit" uuid="c503e81c-df84-4606-98e4-a3ba97db8b07" score="3" type="Organization">MIT</tag><tag url_value="wiedervereinigung" uuid="ce05be56-57b9-4bf1-8fc1-6f7b47a3d20b" score="3" type="free">Wiedervereinigung</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag><tag url_value="bonn" uuid="ae3c42f6-8230-473a-8ec6-30156b2e9e92" score="1" type="Location">Bonn</tag><tag url_value="eifel" uuid="3064a045-04e8-434b-9b80-b05d28422b6c" score="1" type="Location">Eifel</tag><tag url_value="rheinland" uuid="65457a59-7802-4aa6-aca5-36f0af344a20" score="1" type="Location">Rheinland</tag><tag url_value="rheinland-pfalz" uuid="e240ca5c-3831-4ddd-8985-65e00cbcd04e" score="1" type="Location">Rheinland-Pfalz</tag></rankedTags></head><body>
+    <supertitle>Andrea Nahles</supertitle>
+    <title>"Eine zunehmende Identifizierung mit der Heimat"</title>
+    <subtitle>Provinzialität und Politik: SPD-Generalsekretärin Nahles lebt in der Eifel. Im Interview lobt sie das Landleben – und ist zugleich froh: "Die Autobahn ist nicht weit."</subtitle>
+    <division type="page">
+      <image align="left" title="Andrea Nahles" type="jpg" publication-date="" expires="2013-10-17T11:20:15+00:00" layout="large" is_empty="True">
+        <bu py:pytype="str">SPD-Generalsekretärin Andrea Nahles (Archiv)</bu>
+        <copyright py:pytype="str">© Britta Pedersen/dpa</copyright>
+      </image>
+      <p><strong>Frage:</strong> Frau <entity idref="Andrea+Nahles" entity_type="Person" url_value="personen/andrea-nahles">Nahles</entity>, Sie haben Ihren persönlichen Beitrag zur demografischen Entwicklung Ihres Dorfes geleistet: Sie sind die Mutter einer Tochter. Ist die <entity idref="Eifel" entity_type="Location" url_value="orte/eifel">Eifel</entity> ein guter Ort, um dort aufzuwachsen?</p>
+      <p><strong>Andrea Nahles:</strong> Und ob! Das weiß ich aus eigener Erfahrung. Deshalb haben mein Mann und ich uns entschieden, dass unsere Tochter in dem Dorf aufwachsen soll, in dem auch ich groß geworden bin: in Weiler. Dort leben wir auf dem ehemaligen Bauernhof meiner Urgroßeltern. Da gibt’s viel Platz und frische Luft. Weiler ist ein Paradies für Kinder.</p>
+      <p><strong>Frage:</strong> Mit seinen 500 Bewohnern ist Weiler einer der wenigen Orte in der <a href="http://www.zeit.de/schlagworte/orte/eifel/index" target="_blank" class="">Eifel</a>, die nicht schrumpfen. Was macht Weiler richtig, was andere Dörfer falsch machen?</p>
+      <p><strong>Nahles: </strong>Weiler hat viel für die Infrastruktur getan: Es gibt eine Schule, einen Kindergarten und ein Neubaugebiet, wo man sich als junge Familie sein Häuschen hinsetzen kann. Außerdem verfügt Weiler über eine Kneipe und eine Kegelbahn. Das erhöht den Freizeitwert doch beträchtlich, finden Sie nicht?</p>
+      <p><strong>Frage:</strong> Durchaus. Dennoch dürfte, was die Kneipen- und Kegelbahndichte anbelangt, jede Kleinstadt einen höheren Freizeitwert haben. Außerdem gibt es in einer Stadt viele Dinge, die den Weilern völlig fremd sind: der Supermarkt um die Ecke etwa. Warum bleiben die Menschen trotzdem?</p>
+      <p><strong>Nahles:</strong> Vielleicht, weil sie es charmant finden, dass in Weiler der Supermarkt bei Bedarf direkt vor ihrer Haustür hält. Für alles Wichtige gibt es bei uns fahrende Bäcker, Metzger und Händler. Das Leben auf dem Land macht erfinderisch, ärmer ist es nicht.</p>
+      <p><strong><b>Frage:</b></strong>Und wie erklären Sie das einer Frau, die in ihrem Bauernhof alt geworden ist und – <a href="http://www.zeit.de/2010/11/M-Aerztemangel" target="_blank" class="">ein gängiges Problem in dünn bevölkerten Regionen</a> – in ihrer Nähe nun keinen Hausarzt mehr hat? Muss die Frau ins Heim?</p>
+      <p><strong>Nahles: </strong>Sie muss nirgends hin. Zum Glück funktioniert die Hausarztversorgung in der Eifel noch. Das Land <a href="http://www.zeit.de/schlagworte/orte/rheinland-pfalz/index" target="_blank" class="">Rheinland-Pfalz</a> hat dafür ein Modellprojekt entwickelt: Die Hausärzte sind in einem Verbund organisiert, sodass sie einander vertreten können. Hinzu kommen Ärzte, die per se keine Praxis eröffnen wollen und einspringen können, wo Not am Mann ist. Der Verbund stellt zum Beispiel auch junge Ärztinnen mit Kindern an, die sonst nicht praktizieren könnten. Davon abgesehen gibt es …</p>
+      <p><strong><b>Frage:</b></strong>Lassen Sie mich raten: eine fahrende <a href="http://www.zeit.de/schlagworte/themen/apotheke/index" target="_blank" class="">Apotheke</a>.</p>
+      <p><strong>Nahles:</strong> Ja klar.</p>
+      <p><strong>Frage:</strong> Seit einigen Jahren kann man eine Renaissance des Landlebens beobachten, von der Magazine wie <em>Landlust</em><br />profitieren. Bekommen Sie davon in Weiler etwas mit?</p>
+      <p><strong>Nahles:</strong> Diese Verklärung des Landlebens beobachtet man meist doch bei Großstädtern, die seit Jahren keine Kuh oder Scheune gesehen haben. Bei vielen, die wie ich immer noch auf dem Land leben, beobachte ich seit einigen Jahren eine zunehmende Identifizierung mit ihrer Heimat. Wer heute auf dem Land aufwächst, möchte nicht mehr so schnell wie möglich wegziehen. Der lebt auf dem Land trotz aller Widrigkeiten – und er lebt gerne dort.</p>
+      <p><strong>Frage:</strong> Vielleicht kommt er aber auch einfach nicht weg. Weiler hat keinen Bahnhof, und Busse gibt’s auch so gut wie nicht.</p>
+      <p><strong>Nahles:</strong> Stimmt, aber die Autobahn ist nicht allzu weit entfernt. Natürlich ist die eingeschränkte Mobilität einer der typischen Schwachpunkte der Region. Wer keinen Führerschein hat, der hat es schwer und ist auf die Hilfe der Nachbarn angewiesen.</p>
+      <p><strong>Frage:</strong> Sie selbst pendeln regelmäßig zwischen <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity> und Weiler hin und her.</p>
+      <p><strong>Nahles:</strong> Ja, ich versuche, einmal in der Woche von zu Hause aus zu arbeiten, und bin am Wochenende zu Hause – und zu Hause, das ist Weiler. Obwohl ich mittlerweile beinahe mehr Zeit im Auto auf Deutschlands Autobahnen verbringe als in meinem Bauernhof.</p>
+    </division>
+    <division type="page" teaser="Die Eifel-Sozen sind eher pragmatisch und unideologisch">
+      <p><strong>Frage:</strong> In Deutschland sind die strukturschwachen Regionen des Westens so gut wie nie Thema. Warum eigentlich nicht?</p>
+      <p><strong>Nahles:</strong> Das hat etwas mit der jüngeren deutschen Geschichte zu tun. Nach der <a href="http://www.zeit.de/schlagworte/themen/wiedervereinigung/index" target="_blank" class="">Wiedervereinigung</a> hat sich die <a href="http://www.zeit.de/schlagworte/organisationen/bundesregierung/index" target="_blank" class="">Bundesregierung</a> erst einmal auf den Aufbau Ost konzentriert.</p>
+      <p><strong>Frage:</strong> Die Wiedervereinigung ist aber schon lange Geschichte. Ist es nicht Zeit für einen Aufbau West? Braucht die Eifel den Soli?</p>
+      <p><strong>Nahles:</strong> Es gibt schon die Erwartungshaltung bei uns, dass die Strukturfördermittel nicht nach Himmelsrichtung, sondern nach Bedarf verteilt werden. Insbesondere, was das Straßennetz angeht, sind Investitionen notwendig, da es alternative Verkehrsmöglichkeiten nicht gibt. Aber wir wollen auch nicht das neue Armenhaus des Landes sein.</p>
+      <p><strong>Frage:</strong> Das ist die Eifel immer gewesen.</p>
+      <p><strong>Nahles:</strong> Gerade deshalb. Wir haben viele Jahre dafür gekämpft, dieses Image abzustreifen. Die meisten strukturschwachen Regionen des Westens haben keine Lust mehr, als arm und abgehängt zu gelten. Sie wollen nicht einstimmen in den Chor der Kläger und Bittsteller. Für die Eifel kommt außerdem hinzu, dass sie seit einigen Jahren ein ganz neues Selbstbewusstsein entwickelt hat.</p>
+      <p><strong>Frage:</strong> Woraus speist sich das?</p>
+      <p><strong>Nahles:</strong> Zum Beispiel aus den Eifelkrimis. Die verkaufen sich deutschlandweit gut und haben dem Tourismus der Region neuen Auftrieb gegeben. Heute kommen viele Menschen in die Eifel und wollen die Schauplätze der Romane sehen. Einer meiner Mitarbeiter hat das auch einmal gemacht.</p>
+      <p><strong>Frage:</strong> Ist das eine Einstellungsvoraussetzung im Büro Nahles?</p>
+      <p><strong>Nahles:</strong> (lacht) Nein, so weit würde ich nicht gehen.</p>
+      <p><strong>Frage:</strong> Aber ist es wirklich so gut für das Image, vor allem für Mord und Totschlag bekannt zu sein?</p>
+      <p><strong>Nahles:</strong> Die Mischung aus Provinzialität und Kriminalität, Landschaft und Lustmord, Gegend und Gewalt verkauft sich generell gut – das gilt nicht nur für die Eifel. Am Ende erinnert sich der Leser doch nur an die schönen Seiten der Eifel.</p>
+      <p><strong>Frage:</strong> Verkauft sich Provinzialität auch gut in der Politik? Immerhin haben viele Spitzenpolitiker einen ländlichen Hintergrund.</p>
+      <p><strong>Nahles:</strong> Wenn man in einer ländlichen Region groß wird und sich beruflich verändern möchte, dann ist man schon besonders ehrgeizig. Vielleicht ist das ein Grund, warum relativ viele Politiker aus der Provinz in der Bundespolitik Karriere gemacht haben. Doch daraus kann man keine Gesetzmäßigkeit ableiten. In der ländlichen Region gibt es nicht so viele aktive Parteimitglieder. Wer also dort engagiert bei der Sache ist, fällt leichter auf. In der Stadt dagegen gibt es mehr Konkurrenz.</p>
+      <p><strong>Frage:</strong> Weiler ist also ein Karrieresprungbrett. Haben Sie deshalb vor vielen Jahren dort den SPD-Ortsverein gegründet?</p>
+      <p><strong>Nahles:</strong> Bestimmt nicht, dafür gibt es zu viele Nachteile. Mein Wahlkreis etwa gehört zu denen, die ich als Sozialdemokratin nur schwer direkt gewinnen kann. Hier ist die Union traditionell stark. Man ist auf einen sicheren Listenplatz angewiesen, und der ist nicht garantiert. 1998 etwa zog ich in den Bundestag ein. Vier Jahre später flog ich wieder raus, weil mir der sichere Platz fehlte, seit 2005 bin ich Abgeordnete im Deutschen Bundestag.</p>
+      <p><strong>Frage:</strong>Wo man keine Chance hat, an die Macht zu kommen, ist der Glaube ans Ideal oft besonders groß. Sind die Sozen in der Diaspora sozialdemokratischer als die Sozen in den Hochburgen?</p>
+      <p><strong>Nahles:</strong> Die Eifel-Sozen sind eher pragmatisch und unideologisch, das macht die Nähe zum sozialdemokratisch gefärbten <entity idref="Rheinland" entity_type="Location" url_value="orte/rheinland">Rheinland</entity>.</p>
+      <p><strong>Frage:</strong> Was haben Ihre Eltern eigentlich gesagt, als Sie damals die <a href="http://www.zeit.de/schlagworte/themen/sozialdemokratie/index" target="_blank" class="">Sozialdemokratie</a> nach Weiler brachten?</p>
+      <p><strong>Nahles:</strong> Begeistert waren sie nicht gerade. Sie befürchteten wohl, dass ich den Dorffrieden störe.</p>
+      <p><strong>Frage:</strong> Haben Sie?</p>
+      <p><strong>Nahles:</strong> Schon, aber zu viel Frieden macht schläfrig. Das haben sogar meine Eltern mittlerweile gemerkt.</p>
+      <p><strong>Frage:</strong> Wie das?</p>
+      <p><strong>Nahles:</strong> Sie sind acht Jahre nach mir in die <a href="http://www.zeit.de/schlagworte/organisationen/spd" target="_blank" class="">SPD</a> eingetreten.</p>
+      <p><strong>Frage:</strong> Mal ehrlich, wollten Sie niemals raus dem Dorf? Vielleicht damals in Ihrer wilden Studentenzeit?</p>
+      <p><strong>Nahles:</strong> Also so wild war die wahrlich nicht. Ich habe in <entity idref="Bonn" entity_type="Location" url_value="orte/bonn">Bonn</entity> studiert und wohnte im Studentenwohnheim, weil ich nicht bereit war, allzu weit von meiner Heimat entfernt zu leben.</p>
+      <p><strong>Frage:</strong> Und heute ist aus der Studentin der größte lebende Promi der Eifel geworden.</p>
+      <p><strong>Nahles:</strong> Halt! Was ist mit <a href="http://www.zeit.de/schlagworte/personen/mario-adorf/index" target="_blank" class="">Mario Adorf</a>?</p>
+      <p><strong>Frage:</strong> Okay, sagen wir der größtelebende und noch aktive Promi. Was würden Sie den Weilern eigentlich<br />sagen, wenn Sie Ihnen irgendwann ein Denkmal bauen wollen?</p>
+      <p><strong>Nahles:</strong> Um Himmels willen! Dass sie das besser bleiben lassen sollten.</p>
+      <p><strong>Frage:</strong> Wieso? Baut man in der Eifel nicht gerne Denkmäler?</p>
+      <p><strong>Nahles:</strong> Erstens: Nein. Zweitens: Bitte nicht für mich.</p>
+      <p>
+        <a href="http://christundwelt.de/" target="_blank" class="">
+          <em>Erschienen in Christ und Welt</em>
+        </a>
+        <br />
+      </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Andrea Nahles</supertitle>
+    <title>"Eine zunehmende Identifizierung mit der Heimat"</title>
+    <text>Provinzialität und Politik: SPD-Generalsekretärin Nahles lebt in der Eifel. Im Interview lobt sie das Landleben – und ist zugleich froh: "Die Autobahn ist nicht weit."</text>
+  </teaser>
+</article>

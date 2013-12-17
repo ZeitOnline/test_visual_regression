@@ -1,0 +1,220 @@
+$longform-content-max-width: 700px
+$longform-inline-max-width: 920px
+$bp-adjust-horizontal-figures--1: 1280px
+$bp-adjust-horizontal-figures--2: 1440px
+
+.article.article--longform
+  padding: 0
+  min-height: 100%
+  height: 100%
+  max-width: none
+
+  .article__subtitle
+    color: $white
+
+  .article__wrap
+    padding-top: 0
+    margin-top: 0
+    min-height: 100%
+    height: 100%
+
+  p
+    max-width: 38.88em
+    +respond-min($break-3)
+      max-width: 35em
+
+  .article__head-wrap
+    position: relative
+    overflow: hidden
+    height: 80%
+    min-height: em(400px)
+    padding-top: 0
+    margin-top: 0
+    background-color: $black
+    &:after
+      +box-shadow(inset 0 -200px 200px rgba($black, 0.7))
+      content: ''
+      position: absolute
+      z-index: 1
+      height: 100%
+      width: 200%
+      left: -50%
+      bottom: -50px
+
+  .article__main-image--longform
+    +background-size(cover)
+    +hide-text
+    z-index: 1
+    background-color: $black
+    background-repeat: no-repeat
+    background-position: center center
+    position: absolute
+    top: 0
+    height: 100%
+    left: 0
+    right: 0
+
+  .article__title-wrap
+    position: absolute
+    overflow: hidden
+    text-align: center
+    bottom: 0
+    padding-bottom: 4%
+    padding-left: 5%
+    padding-right: 5%
+    width: 100%
+    z-index: 2
+    .article__meta
+      color: $white
+      margin-bottom: 3em
+      a
+        +link-colors($white, $white, $white, $white, $white)
+        border-color: $white
+
+  .article__meta__source
+    display: none
+
+  .article__subpage-head
+    @extend %subheading
+    margin: $small auto $small auto
+    font-size: $font-xl--px
+    font-size: $font-xl--rem
+    max-width: 920px
+    +respond-min($break-1)
+      font-size: $font-xxl--px
+      font-size: $font-xxl--rem
+      margin-bottom: $medium
+      margin-top: $medium
+    +respond-min($break-2)
+      padding-left: $gutter
+    a
+      display: block
+      position: relative
+      top: -$large
+      border-bottom: 0px
+
+  .article__subpage-index
+    display: none
+    +respond-min($break-2)
+      display: inline
+    @extend %meta
+    max-width: em(240px)
+    background-color: $white
+    border-bottom: $micro solid $grey
+    padding-top: $medium
+    padding-bottom: $gutter
+    margin-right: $gutter*2
+    float: left
+    position: relative
+    top: -$large
+    display: none
+    +respond-min($break-2)
+      display: inline
+    a
+      &:link, &:visited
+        color: $grey
+        text-decoration: none
+      +on-interaction
+        border-color: $grey
+    span
+      display: block
+      margin: $gutter $gutter $gutter $gutter
+    .article__subpage-active
+      color: $black
+
+  .article__subpage-chapter
+    @extend %meta
+    position: relative
+    top: -$medium
+    width: 100%
+    background-color: $grey--bright
+    span
+      letter-spacing: $hair
+      font-size: $font-s
+      text-transform: uppercase
+      margin: auto
+      display: block
+      text-align: center
+      &:first-child
+        +tablet(bold)
+        padding-top: $large
+      &:last-child
+        padding-bottom: $large
+      +respond-min($break-2)
+        min-width: $longform-content-max-width
+
+  .article__supertitle
+    display: none
+
+  .article__title
+    +tablet
+    color: $white
+
+  .article__body
+    padding-left: 0
+    padding-right: 0
+
+  .article__page
+    padding-top: $small
+    padding-bottom: $small
+    background-color: $color-page-bg
+    +respond-min($break-1)
+      padding-top: $medium
+      padding-bottom: $medium
+    &:nth-child(2n+1)
+      background-color: $grey--light
+
+  .article__page-wrap
+    +padded
+    max-width: em(1460px)
+    margin: 0 auto
+
+  .quote--wide
+    +respond-min($break-3)
+      margin-left: $huge
+
+  .article__opener
+    margin-left: auto
+    margin-right: auto
+
+  .is-constrained
+    max-width: $longform-content-max-width
+    max-width: rem($longform-content-max-width)
+    &.padded
+      +box-sizing(content-box)
+
+  figure
+    &.figure-full-width
+      .figure__caption, figcaption
+        +max-width-rem($longform-content-max-width)
+    &.figure-horizontal, &.figure-horizontal--right
+      +respond-min(em($bp-adjust-horizontal-figures--1))
+        +max-width-rem($longform-inline-max-width)
+        width: 60%
+        margin-left: auto
+        margin-right: auto
+        position: relative
+        .figure__media, img
+          float: none
+          width: 100%
+        .figure__caption, figcaption
+          position: absolute
+          left: 100%
+          width: auto
+          padding-left: $gutter
+          width: 30%
+          top: 0
+          float: none
+      +respond-min(em($bp-adjust-horizontal-figures--2))
+        width: 100%
+        .figure__caption, figcaption
+          width: 25%
+      .figure__media, img
+        +max-width-rem($longform-inline-max-width)
+      .figure__caption, figcaption
+    &.figure-horizontal--right
+      +respond-min(em($bp-adjust-horizontal-figures--1))
+        .figure__caption, figcaption
+          right: 100%
+          left: auto
+

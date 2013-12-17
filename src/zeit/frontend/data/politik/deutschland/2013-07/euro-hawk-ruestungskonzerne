@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/2013-07/industrie-verteidigt-drohne" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Ausschuss</supertitle>
+        <title py:pytype="str">Industrie-Boss kritisiert de Maizières Drohnenstopp</title>
+        <text py:pytype="str">Die Hersteller des Euro Hawk haben kein Verständnis dafür, dass der Verteidigungsminister das Projekt stoppte. Ihre Aussagen könnten den Druck auf de Maizière erhöhen.</text>
+        <description py:pytype="str">Die Hersteller des Euro Hawk haben kein Verständnis dafür, dass der Verteidigungsminister das Projekt stoppte. Ihre Aussagen könnten den Druck auf de Maizière erhöhen.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/2013-07/eads-manager-vor-drohnenausschuss/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Der Vorstandschef der EADS-Rüstungstochter Cassidian, Bernhard Gerwert, sagt im Untersuchungsausschuss zur Drohnen-Affäre aus.</bu>
+          <copyright py:pytype="str">©Hannibal/dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/2013-07/drohnenhersteller-sagen-aus" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Euro-Hawk-Desaster</supertitle>
+        <title py:pytype="str">De Maizière droht Druck von Drohnenherstellern</title>
+        <text py:pytype="str">Für den Verteidigungsminister wird es ernst. Vor dem Untersuchungsausschuss zum gescheiterten Drohnenprojekt werden die Hersteller des Euro Hawk aussagen.  </text>
+        <description py:pytype="str">Für den Verteidigungsminister wird es ernst. Vor dem Untersuchungsausschuss zum gescheiterten Drohnenprojekt werden die Hersteller des Euro Hawk aussagen.  </description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/politik/2013-07/verteidigungsministe/" type="jpg" publication-date="" expires="">
+          <bu py:pytype="str">Bundesverteidigungsminister Thomas de Maizière (CDU)</bu>
+          <copyright py:pytype="str">©EPA/Jalil Rezayee</copyright>
+        </image>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2013/31/verteidigungsminister-thomas-de-maiziere" year="2013" issue="31" ressort="Politik" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Drohnenaffäre</supertitle>
+        <title py:pytype="str">Weshalb de Maizière bleiben darf </title>
+        <text py:pytype="str">Eigentlich müsst der Verteidigungsminister gehen, weil er zu Euro Hawk die Unwahrheit gesagt hat. Aber nicht einmal die SPD-Spitze möchte ihn stürzen. Von Peter Dausend</text>
+        <description py:pytype="str">Eigentlich müsst der Verteidigungsminister gehen, weil er zu Euro Hawk die Unwahrheit gesagt hat. Aber nicht einmal die SPD-Spitze möchte ihn stürzen. Von Peter Dausend</description>
+        <byline py:pytype="str">von Peter Dausend</byline>
+        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/maiziere-schutzschirm/" type="jpg" publication-date="" expires="2013-08-25T08:01:46+00:00">
+          <bu py:pytype="str">Der Unverzichtbare: Verteidigungsminister Thomas de Maizière </bu>
+          <copyright py:pytype="str">© dpa/Marijan Murat</copyright>
+        </image>
+      </reference>
+    </references>
+    <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-5/" type="jpg" publication-date="" expires="2013-10-29T16:33:57+00:00">
+      <bu py:pytype="str">Der Vizepräsident von Northrop Grumman, Janis Pamiljans, vor dem Drohnen-Untersuchungsausschuss des Bundestags</bu>
+      <copyright py:pytype="str">© Hannibal/dpa</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, AFP, Reuters, sdo</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-29T17:02:41.856743+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-29T16:44:06.775229+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-07-29T17:03:44.477519+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-29T16:43:11.921879+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-29T16:43:02.393733+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.klormann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">f2bbb132e5f5404188510e8bbc557dad</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3381</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:153ec5d6-0319-422c-9bc3-a272f204e243}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+  <rankedTags><tag url_value="euro" uuid="d411666c-5c17-4bc7-b5e5-060e044bb050" score="9" type="free">Euro</tag><tag url_value="verteidigungsministerium" uuid="4d2eb3d6-2165-4e5b-b7ea-c6fe6a00198b" score="7" type="Organization">Verteidigungsministerium</tag><tag url_value="bundesregierung" uuid="5943323b-adb4-4cfa-b604-f66a88eb0620" score="6" type="Organization">Bundesregierung</tag><tag url_value="northrop-grumman" uuid="d04c0238-7efb-41aa-b676-5a316a324009" score="6" type="Person">Northrop Grumman</tag><tag url_value="eads" uuid="5fae15f4-fbf1-44ac-9a33-d659c8894687" score="5" type="Organization">EADS</tag><tag url_value="aufklaerung" uuid="31251156-898e-4f78-a66f-b4bfbd21149d" score="4" type="free">Aufklärung</tag><tag url_value="aufklaerungssystem" uuid="ca7b75e7-fae2-45b7-bc6c-d3fe8a57ad81" score="4" type="free">Aufklärungssystem</tag><tag url_value="bundeswehr" uuid="4470f7f2-0c54-4fea-8741-d85b20408ed6" score="4" type="free">Bundeswehr</tag><tag url_value="drohne" uuid="43bd36b1-f610-4b5b-bb9f-ecce3ba5a708" score="4" type="free">Drohne</tag><tag url_value="flugzeug" uuid="a7cd6cfd-beac-4297-a332-46cabf24eaf6" score="4" type="free">Flugzeug</tag><tag url_value="nachrichtenagentur" uuid="a279fe52-7064-4a92-b178-c157a140edcc" score="4" type="free">Nachrichtenagentur</tag><tag url_value="untersuchungsausschuss" uuid="b314a17c-8af6-4fd5-839e-aa9c2a488fc5" score="4" type="free">Untersuchungsausschuss</tag><tag url_value="vizepraesident" uuid="7d5b3f80-d190-4ca8-bc30-fc60c1070c80" score="4" type="free">Vizepräsident</tag><tag url_value="ministerium" uuid="4377de05-8a28-4e96-bdb1-fe2bcc026a51" score="3" type="free">Ministerium</tag><tag url_value="technik" uuid="98c3ed82-c170-47e0-986d-1d9d789e9db5" score="3" type="free">Technik</tag><tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="3" type="Location">USA</tag></rankedTags></head><body>
+    <supertitle>Euro Hawk</supertitle>
+    <title>Hersteller widersprechen de Maizières Kostenrechnung</title>
+    <subtitle>Der Druck auf das Verteidigungsministerium wächst: Der US-Rüstungskonzern will am Euro Hawk festhalten. Ein Lieferstopp sei teurer als ein Neustart des Drohnen-Projekts.</subtitle>
+    <division type="page">
+      <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2013-07/euro-hawk-5/" type="jpg" publication-date="" expires="2013-10-29T16:33:57+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Der Vizepräsident von Northrop Grumman, Janis Pamiljans, vor dem Drohnen-Untersuchungsausschuss des Bundestags</bu>
+        <copyright py:pytype="str">© Hannibal/dpa</copyright>
+      </image>
+      <p>Die <a href="http://www.zeit.de/politik/2013-07/drohnenhersteller-sagen-aus" target="_blank" class="">Hersteller der Drohne Euro Hawk</a> haben das <entity idref="Verteidigungsministerium" entity_type="Organization" url_value="organisationen/verteidigungsministerium">Verteidigungsministerium</entity>
+aufgefordert, doch noch einen Rettungsversuch für das umstrittene Projekt zu
+starten. Eine Zulassung sei weitaus weniger teuer als bisher kommuniziert,
+sagten hochrangige Vertreter der Rüstungskonzerne Northrop Grumman (NGC) aus
+den <entity idref="USA" entity_type="Location" url_value="orte/usa">USA</entity> und <entity idref="EADS" entity_type="Organization" url_value="organisationen/eads">EADS</entity> vor dem Untersuchungsausschuss des Bundestags. <entity idref="Northrop+Grumman" entity_type="Person" url_value="personen/northrop-grumman">Northrop
+Grumman</entity> stellt den Flieger, EADS die Aufklärungstechnik.</p>
+      <p>"Ich rate,
+unbedingt an dem Programm festzuhalten", sagte der Vizepräsident von Northrop Grumman, Janis Pamiljans.
+Auch
+der <a href="http://www.zeit.de/politik/2013-07/industrie-verteidigt-drohne" target="_blank" class="">Chef der EADS-Rüstungstochter Cassidian, Bernhard Gerwert</a>, ist gegen ein
+Ende des Projekts: "Ich hätte einen Abbruch auch 2010
+nicht für sinnvoll gehalten, genauso wenig wie ich es jetzt für sinnvoll halte."  </p>
+      <p>Sowohl
+Gerwert als auch Pamiljans warfen dem Verteidigungsministerium vor, mit dem
+Verzicht auf die Bestellung den teuersten Weg für den deutschen Steuerzahler
+gewählt zu haben. Damit argumentieren
+die Industrievertreter völlig anders als die Opposition, die de Maizière
+vorwirft, er hätte das Drohnen-Projekt
+bereits früher abbrechen sollen. </p>
+      <p>Die Vertreter der Rüstungskonzerne
+widersprachen der Schätzung, dass bis zu 600 Millionen Euro zusätzlich für eine
+Zulassung des unbemannten Aufklärungsfliegers fällig würden. Stattdessen gehe
+es um 160 bis 193 Millionen Euro und damit weniger als ein Drittel, sagte
+Pamiljans</p>
+      <p>Die Technik, die für den Euro Hawk
+bestimmt war, soll nun in ein anderes Flugzeug integriert werden. Das
+Verteidigungsministerium prüft derzeit, welches Flugzeug das sein könnte. Pamiljans
+sagte, dies würde teurer werden als eine Euro-Hawk-Beschaffung und eine
+erhebliche Verzögerung von bis zu zehn Jahren bedeuten. "Wir glauben, dass der
+Euro Hawk das System ist, das zu den geringsten Kosten führt." An die
+<entity idref="Bundesregierung" entity_type="Organization" url_value="organisationen/bundesregierung">Bundesregierung</entity> appellierte der Manager: "Ich glaube, dass wir angesichts der
+Haushaltszwänge gemeinsam dafür verantwortlich sein sollten, kein zusätzliches
+Geld auszugeben."   <br /></p>
+      <p>
+        <strong>Euro Hawk sollte offenbar nicht nur militärisch genutzt werden</strong>
+        <br />
+      </p>
+      <p><a href="http://www.zeit.de/politik/deutschland/2013-07/euro-hawk-untersuchungsausschuss-drohne-de-maiziere" target="_blank" class="">Das Verteidigungsministerium</a> hatte die
+geplante serienmäßige Beschaffung des Euro Hawks Anfang Mai wegen der geschätzten
+Mehrkosten für die Zulassung gestoppt. Zu diesem Zeitpunkt waren schon 668
+Millionen Euro in das Projekt geflossen. </p>
+      <p>Indes wurde bekannt, dass die Aufklärungsdrohne
+offenbar nicht nur die Bundeswehr mit Daten aus dem Aufklärungssystem ISIS
+versorgen sollte. So heißt es nach Informationen der Nachrichtenagentur Reuters
+in dem als geheim eingestuften Einsatzkonzept der Bundeswehr für den Euro Hawk
+vom 19. November 2007, bei "Sondereinsätzen" könne man die Drohne
+auch für "ressortübergreifende Nachrichtengewinnung und Aufklärung"
+verwenden. Zudem seien Einsätze im Rahmen von Hilfs- und Rettungsaktionen oder
+"Einsätze zur Unterstützung des wehrtechnischen Bereichs" denkbar.   <br /></p>
+      <p>In der öffentlichen Darstellung war vom
+Verteidigungsministerium stets auf die alleinige militärische Nutzung der
+Aufklärungsdrohne verwiesen worden. Das Ministerium wollte sich dazu nicht äußern.</p>
+    </division>
+  </body>
+  
+  <teaser>
+    <supertitle>Euro Hawk</supertitle>
+    <title>Hersteller widersprechen de Maizières Kostenrechnung</title>
+    <text>Der Druck auf das Verteidigungsministerium wächst: Der US-Rüstungskonzern will am Euro Hawk festhalten. Ein Lieferstopp sei teurer als ein Neustart des Drohnen-Projekts.</text>
+  </teaser>
+</article>
