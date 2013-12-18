@@ -206,9 +206,9 @@
     <figure class="
         {% if obj.layout == 'large' %}
             figure-full-width
-        {% elif obj.layout == 'zmo_header' %}
+        {% elif obj.layout == 'zmo-xl' %}
             article__main-image figure-full-width
-        {% elif obj.layout == 'medium' %}
+        {% elif obj.layout == 'zmo-medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
             {% elif obj.align == 'right' %}

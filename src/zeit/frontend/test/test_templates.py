@@ -197,15 +197,16 @@ def test_image_should_produce_markup(jinja2_env):
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test'},
-           {'layout': 'zmo_header',
+           {'layout': 'zmo-xl',
             'css': 'article__main-image figure-full-width',
             'caption': 'test', 'copyright': 'test'},
-           {'layout': 'medium', 'align': 'left', 'css': 'figure-horizontal',
+           {'layout': 'zmo-medium', 'align': 'left',
+            'css': 'figure-horizontal',
             'caption': 'test', 'copyright': 'test'},
-           {'layout': 'medium', 'align': 'right',
+           {'layout': 'zmo-medium', 'align': 'right',
             'css': 'figure-horizontal--right',
             'caption': 'test', 'copyright': 'test'},
-           {'layout': 'medium', 'align': False, 'css': 'figure '
+           {'layout': 'zmo-medium', 'align': False, 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
             'copyright': 'test'},
            {'layout': 'small', 'align': 'right',

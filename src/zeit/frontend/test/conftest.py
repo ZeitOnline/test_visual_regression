@@ -1,5 +1,3 @@
-import pytest
-from selenium import webdriver
 from pytest_localserver.http import WSGIServer
 from selenium import webdriver
 import pytest
@@ -17,6 +15,7 @@ browsers = {
     'firefox': webdriver.Firefox
     #'phantomjs': webdriver.PhantomJS,
 }
+
 
 
 @pytest.fixture(scope='session')
