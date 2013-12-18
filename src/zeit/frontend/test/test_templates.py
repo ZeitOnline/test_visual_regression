@@ -43,7 +43,7 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
@@ -60,7 +60,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('../templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap is-full-width">' \

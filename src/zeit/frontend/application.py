@@ -116,24 +116,26 @@ class Application(object):
         zope.app.appsetup.product.setProductConfiguration(
             'zeit.content.article', {
                 'genre-url': _product_url(
-                    'zeit.content.article.tests', 'article-genres.xml'),
-                'image-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
-                                        'data/article-image-layouts.xml'),
-                'video-layout-source': ('http://zip6.zeit.de:9000/cms/work/'
-                                        'data/article-video-layouts.xml'),
-                'htmlblock-layout-source': (
-                    'http://zip6.zeit.de:9000/cms/work/'
-                    'data/article-htmlblock-layouts.xml'),
+                    'zeit.frontend', 'data/config/article-genres.xml'),
+                'image-layout-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-image-layouts.xml'),
+                'video-layout-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-video-layouts.xml'),
+                'htmlblock-layout-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-htmlblock-layouts.xml'),
         })
 
         zope.app.appsetup.product.setProductConfiguration(
             'zeit.magazin', {
-                'article-template-source': (
-                    'http://zip6.zeit.de:9000/cms/work/'
-                    'data/article-templates.xml'),
-                'article-related-layout-source': (
-                    'http://zip6.zeit.de:9000/cms/work/'
-                    'data/article-related-layouts.xml'),
+                'article-template-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-templates.xml'),
+                'article-related-layout-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-related-layouts.xml'),
         })
 
     @property
