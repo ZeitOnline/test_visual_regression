@@ -208,7 +208,7 @@
             figure-full-width
         {% elif obj.layout == 'zmo_header' %}
             article__main-image figure-full-width
-        {% elif obj.layout == 'zmo-medium' %}
+        {% elif obj.layout == 'medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
             {% elif obj.align == 'right' %}
