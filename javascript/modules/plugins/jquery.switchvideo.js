@@ -1,85 +1,68 @@
-/* switch between image and video player */
+/* global console, define, alert */
 
-(function( $ ){
+define(['jquery'], function() {
 
-	$.fn.switchVideo = function() {
+	(function( $ ){
 
-		var el = {
+		$.fn.switchVideo = function() {
 
-			//build Playerobject
-			buildPlayer: function( that ){
+			//stuff used for player
+			var el = {
 
-				if( el.id ){
-					var playerObj = '<div class="video__wrapper" data-video='+el.id+'><div style="display:none"></div>' +
-					'<object id="myExperience' +el.id+ '" class="BrightcoveExperience">' +
-					'<param name="htmlFallback" value="true" />' +
-					'<param name="bgcolor" value="#FFFFFF" />' +
-					'<param name="width" value="580" />' +
-					'<param name="height" value="327" />' +
-					'<param name="playerID" value="71289488001" />' +
-					'<param name="playerKey" value="AQ~~,AAAABDk7jCk~,Hc7JUgOccNp4D5O9OupA8T0ybhDjWLSQ" />' +
-					'<param name="isVid" value="true" />' +
-					'<param name="isUI" value="true" />' +
-					'<param name="dynamicStreaming" value="true" />' +
-					'<param name="@videoPlayer" value="' +el.id+ '" />' +
-					'<param name="includeAPI" value="false" />' +
-					'<param name="autoStart" value="true" />' +
-					'</object></div>';
-
-					var parent = $( that ).parent();
-					parent.empty();
-					parent.css({ 'width': '100%', 'float': 'none' });
-					parent.prepend( playerObj );
-					window.brightcove.createExperiences();
-				}
-			},
-			//grab meta data
-			buildId: function( that ){
-				el.id = $( that ).closest( "figure[data-video]" ).attr( "data-video" );
-			},
-			//add show/hide event
-			addEvent: function( that ){
-				$( that ).find( "img, .video__button" ).on( "click", function( ev ){
-					ev.preventDefault();
-					el.buildId( this );
-					el.buildPlayer( this );
-				});
-			},
-			//add play button to image
-			addButton: function( that ){
-				if( el.id ){
-					$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
-				}
-			},
-			//trigger player if flash isnt enabled, to avoid douple tap 
-			testForFlash: function( that ){
-				var hasFlash = false;
-
-				try {
-					var flash = new window.ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-					if( flash ){
-						hasFlash = true;
+				//build Playerobject
+				buildPlayer: function( that ){
+					
+					if( el.id ){
+						var playerObj = '<div class="video__wrapper" data-video='+el.id+'><div style="display:none"></div>' +
+						'<object id="myExperience' +el.id+ '" class="BrightcoveExperience">' +
+						'<param name="htmlFallback" value="true" />' +
+						'<param name="bgcolor" value="#FFFFFF" />' +
+						'<param name="width" value="580" />' +
+						'<param name="height" value="327" />' +
+						'<param name="playerID" value="2922359108001" />' +
+						'<param name="playerKey" value="AQ~~,AAAABDk7jCk~,Hc7JUgOccNpvlYo3iMVDRDd9PQS2LC9K" />' +
+						'<param name="isVid" value="true" />' +
+						'<param name="isUI" value="true" />' +
+						'<param name="dynamicStreaming" value="true" />' +
+						'<param name="@videoPlayer" value="' +el.id+ '" />' +
+						'<param name="autoStart" value="true" />' +
+						'</object></div>';
+			
+						var parent = $( that ).parent();
+						parent.empty();
+						parent.css({ 'width': '100%', 'float': 'none' });
+						parent.prepend( playerObj );
+						window.brightcove.createExperiences();
 					}
-				}catch(e){
-					if(navigator.mimeTypes ["application/x-shockwave-flash"] !== undefined){
-						hasFlash = true;
+				},
+				//grab meta data
+				buildId: function( that ){
+					el.id = $( that ).closest( "figure[data-video]" ).attr( "data-video" );
+				},
+				//add show/hide event
+				addEvent: function( that ){
+					$( that ).find( "img, .video__button" ).on( "click", function( ev ){
+						ev.preventDefault();
+						el.buildId( this );
+						el.buildPlayer( this );
+					});
+				},
+				//add play button to image
+				addButton: function( that ){
+					if( el.id ){
+						$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
 					}
-				}
+				},
+				//stored video id
+				id: false
+			};
 
-				if( !hasFlash ){
-					$( that ).find( ".video__button" ).remove();
-					$( that ).find( "img" ).trigger( "click" );
-				}
-			},
-			//stored video id
-			id: false
+			//run through data-video elements
+			$(this).each(function(){
+				el.buildId( this );
+				el.addButton( this );
+				el.addEvent( this );
+			});
 		};
-				//run through data-video elements
-		$(this).each(function(){
-			el.buildId( this );
-			el.addButton( this );
-			el.addEvent( this );
-			el.testForFlash( this );
-		});
-	};
-})( jQuery );
+	})( jQuery );
+});

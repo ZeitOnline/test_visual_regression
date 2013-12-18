@@ -18,6 +18,20 @@ class Base(object):
         return {}
 
 
+_navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'zmo':('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
+               'lebensart': (
+                   'ZEIT Magazin',
+                   'http://www.zeit.de/magazin/index',
+                   'myid2',
+               ),
+               'mode': (
+                   'Mode',
+                   'http://www.zeit.de/magazin/lebensart/index',
+                   'myid3',
+               ), }
+
+
 @view_config(route_name='json',
              context=zeit.content.article.interfaces.IArticle,
              renderer='json')
@@ -28,9 +42,11 @@ class Article(Base):
     def __call__(self):
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
+        self.context.is_longform = False
         if IArticleTemplateSettings(self.context).template == 'longform':
             self.context.advertising_enabled = False
             self.context.main_nav_full_width = True
+            self.context.is_longform = True
             return render_to_response('templates/longform.html',
                                       {"view": self},
                                       request=self.request)
@@ -119,6 +135,18 @@ class Article(Base):
             return {'layout': nextread.nextread_layout,
                     'article': related,
                     'image': image}
+
+    @property
+    def breadcrumb(self):
+        l = [_navigation['start']]
+        l.append(_navigation['zmo'])
+        if self.context.ressort in _navigation:
+            l.append(_navigation[self.context.ressort])
+        if self.context.sub_ressort in _navigation:
+            l.append(_navigation[self.context.sub_ressort])
+        if self.title:
+            l.append((self.title, 'http://localhost'))
+        return l
 
 
 class Gallery(Base):

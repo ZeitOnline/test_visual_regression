@@ -16,6 +16,8 @@ browsers = {
     #'phantomjs': webdriver.PhantomJS,
 }
 
+selenium_speed = 2000
+
 
 @pytest.fixture(scope='session')
 def application():
@@ -35,7 +37,6 @@ def selenium_driver(request):
     if request.param == 'firefox':
         profile = webdriver.FirefoxProfile()
         profile.set_preference('network.http.use-cache', False)
-
         b = browsers[request.param](firefox_profile=profile)
     else:
         b = browsers[request.param]()
