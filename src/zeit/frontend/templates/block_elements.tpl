@@ -106,7 +106,7 @@
     </nav>
 {%- endmacro %}
 
-{% macro para(html, class) -%}
+{% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
@@ -140,14 +140,14 @@
     </div>
 {%- endmacro %}
 
-{% macro subpage_index(index, subtitle, number, index_class, active_class) -%}
+{% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
         <div class="{{ index_class }}">
-        {% for chapter in index %}
+        {% for page in pages if page.teaser %}
             {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ chapter }}</span>
+                <span class="{{ active_class }}">{{ page.number }} -- {{ page.teaser }}</span>
             {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ chapter }}</a></span>
+                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} -- {{  page.teaser  }}</a></span>
             {% endif %}
         {% endfor %}
     </div>
@@ -202,13 +202,13 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro img(obj) -%}
+{% macro image(obj) -%}
     <figure class="
         {% if obj.layout == 'large' %}
             figure-full-width
-        {% elif obj.layout == 'zmo_header' %}
+        {% elif obj.layout == 'zmo-xl' %}
             article__main-image figure-full-width
-        {% elif obj.layout == 'medium' %}
+        {% elif obj.layout == 'zmo-medium' %}
              {% if obj.align == 'left' %}
                 figure-horizontal
             {% elif obj.align == 'right' %}
@@ -253,20 +253,23 @@
 
 {% macro focussed_nextread( nextread ) -%}
     {%-if nextread -%}
-        <aside class="article__nextread nextread-{{nextread.layout}} is-centered">
+      {% set layout = nextread['layout'] %}
+      {% set image = nextread['image'] %}
+      {% set article = nextread['article'] %}
+        <aside class="article__nextread nextread-{{layout}} is-centered">
             <div class="article__nextread__lead">Lesen Sie jetzt:</div>
-            <a title="{{ nextread.supertitle }}: {{ nextread.title }}" href="{{ nextread.href|translate_url }}">
-                {% if nextread.layout == "maximal"%}
-                <div class="article__nextread__body is-centered" style="background-image:url({{ nextread.image }});">
+            <a title="{{ article.supertitle }}: {{ article.title }}" href="{{ article.uniqueId|translate_url }}">
+                {% if layout == "maximal"%}
+                <div class="article__nextread__body is-centered" style="background-image:url({{ image['uniqueId'] }});">
                 {% else %}
                 <div class="article__nextread__body is-centered">
                 {% endif %}
-                    {% if nextread.layout == "base" %}
-                        <img title="{{ nextread.bu }}" alt="{{ nextread.bu }}" src="{{ nextread.image }}">
+                    {% if layout == "base" and image %}
+                        <img title="{{ image['caption'] }}" alt="{{ image['caption'] }}" src="{{ image['uniqueId']|translate_url }}">
                     {% endif %}
                     <div class="article__nextread__article">
-                        <span class="article__nextread__supertitle">{{ nextread.supertitle }}</span>
-                        <span class="article__nextread__title">{{ nextread.title }}</span>
+                        <span class="article__nextread__supertitle">{{ article.supertitle }}</span>
+                        <span class="article__nextread__title">{{ article.title }}</span>
                     </div>
                 </div>
             </a>

@@ -89,13 +89,28 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ce4d2ffc-ebb0-42cc-80bb-e6549094187a}</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">43</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name="Article" module="zeit.content.article.article"/&gt;
+            &lt;global name="Interface" module="zope.interface"/&gt;
+            &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+            &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
     </head>
     <body>
         <title>Nicht ohne meinen Mixer!</title>
         <subtitle>Manche Gegenstände überstehen jeden Umzug. Geschichten unzertrennlicher Liebespaare</subtitle>
         <byline>von  Inga Krieger, Tillmann Prüfer</byline>
         <division type="page">
-            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="" title="Cornelia Poletto" src="http://xml.zeit.de/lebensart/2013-10/cornelia-poletto/cornelia-poletto-540x304.jpg" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
+            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="" title="Cornelia Poletto" src="http://xml.zeit.de/lebensart/2013-10/cornelia-poletto/cornelia-poletto-540x304.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
                 <bu />
                 <copyright>© Privat</copyright>
             </image>

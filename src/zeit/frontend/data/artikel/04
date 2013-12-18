@@ -4,7 +4,7 @@
             <display_name>Pia Volk</display_name>
         </author>
         <references>
-            <reference layout="maximal" type="intern" href="http://xml.zeit.de/2013/36/urban-gardening-essbare-stadt" year="2013" issue="36" ressort="Lebensart" author="Hanno Rauterberg" contenttype="article" publication-date="2013-09-05T02:26:40+00:00" expires="">
+            <reference layout="maximal" type="intern" href="http://xml.zeit.de/artikel/05" year="2013" issue="36" ressort="Lebensart" author="Hanno Rauterberg" contenttype="article" publication-date="2013-09-05T02:26:40+00:00" expires="">
                 <supertitle>Essbare Stadt</supertitle>
                 <title>Lasst es euch schmecken!</title>
                 <text>Aus der Stadt wird ein Feld, und jeder darf ernten: In Andernach, Seattle oder Almere wächst neben Kohl und Salat auch der soziale Zusammenhalt.</text>
@@ -79,19 +79,33 @@
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">38</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">reportage</attribute>
-        <attribute ns="http://namespaces.zeit.de/CMS/document" name="location">Berlin</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name="Article" module="zeit.content.article.article"/&gt;
+            &lt;global name="Interface" module="zope.interface"/&gt;
+            &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+            &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
     </head>
     <body>
         <supertitle>Szene-Stadt</supertitle>
         <title>Kann Leipzig Hypezig überleben?</title>
         <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen &#8211; aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
         <division type="page">
-            <image align="left" src="/img/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo_header" is_empty="False">
+            <image align="left" src="/img/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen. <a href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank" class="">"Disneyland des Unperfekten"</a> wurde die Stadt in einem Artikel der <em>FAZ</em> getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein <a href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank" class="">"Biotop der Schwulenszene"</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich "Hypezig" etabliert.  </p>
-            <image align="" src="/img/artikel/04/02.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="medium" is_empty="False">
+            <image align="" src="/img/artikel/04/02.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -114,7 +128,7 @@
         <advertising type="rectangle" />
     <p>Den Titel der Armutshauptstadt hat Leipzig vor Kurzem an Dortmund abgegeben, in der Liste der am meisten von Armut bedrohten Großstädte steht die Messestadt jetzt auf Rang zwei. Viele Menschen in der Stadt leben nicht freiwillig am Existenzminimum, sie haben sich nicht bewusst dafür entschieden, mit sehr wenig Geld auszukommen. Aber es gibt auch jene, die sich diese Stadt zum Leben aussuchen, weil sie bei 80 Euro Miete mit 200 Euro Einkommen zur Sicherung ihrer Existenz hinkommen. Wo geht das noch? Wo kann man ein bisschen arbeiten, um jede Menge zu leben?  <br/>
         </p>
-    <image align="left" src="/img/artikel/04/04.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="medium" is_empty="False">
+    <image align="left" src="/img/artikel/04/04.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -139,7 +153,7 @@
             </image>
     <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/reisen/2013-06/box-pia-volk" publication-date="" expires=""/>
     <p>Einige wenige der rund 2.000Brachflächen werden derzeit von der Stadt in offenen Stadtraum umgewandelt. Im Plattenbau-Stadtteil Grünau wurde an der Stelle eines abgerissenen Hochhauses <a href="http://www.bfn.de/0401_pm.html?tx_ttnews[tt_news]=4651" target="_blank" class="">einWald gepflanzt</a>. Auch am <a href="http://www.leipziger-westen.de/upload/bilder/Handlungsschwerpunkte/Bau_u_Sanierung/Rahmenplan_Bahnhof_Plagwitz_110907.pdf" target="_blank" class="">Bahnhof Plagwitz</a> soll ein Wäldchen entstehen, sogarein kleines Naturschutzgebiet. Aber es sind kleine Areale im Vergleich zu dem,was verschwinden könnte, wenn zum Immobilienboom und den bessergestellten Studenten auch noch mehr Wirtschaftswachstum in die Stadt kommt.  </p>
-    <image align="right" src="/img/artikel/04/06.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="medium" is_empty="False">
+    <image align="right" src="/img/artikel/04/06.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Leipzig Hauptbahnhof ist mit einer Grundfläche von 83.640 Quadratmetern der flächenmäßig größte Kopfbahnhof Europas.</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>

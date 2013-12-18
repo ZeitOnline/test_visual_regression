@@ -1,0 +1,12 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:grok="http://namespaces.zope.org/grok">
+
+  <include file="vivi.zcml" />
+
+  <utility
+    factory="zeit.cms.repository.repository.Repository"
+    provides="zeit.cms.repository.interfaces.IRepository"
+    />
+
+</configure>

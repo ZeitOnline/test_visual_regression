@@ -51,12 +51,10 @@
                 <div class="article__tags is-constrained is-centered">
                     <span class="article__tags__title">Tags</span>
                     {% for tag in view.rankedTags %}
-                            {% for item in tag %}
-                                <a href="#{{ item.url }}">{{ item.html }}</a>
-                                {% if not loop.last %}
-                                    ,
-                                {% endif %}
-                            {% endfor %}
+                      <a href="#{{ tag.url_value }}">{{ tag.label }}</a>
+                      {% if not loop.last %}
+                          ,
+                      {% endif %}
                     {% endfor %}
                 </div>
                 {% endif %}

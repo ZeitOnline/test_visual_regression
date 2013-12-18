@@ -1,11 +1,13 @@
-from pyramid.view import view_config
-import zeit.frontend.model
 from babel.dates import get_timezone
 from pyramid.renderers import render_to_response
+from pyramid.view import view_config
+from zeit.cms.workflow.interfaces import IPublishInfo, IModified
+from zeit.content.image.interfaces import IImageMetadata
+from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
+import zeit.content.article.interfaces
 
 
 class Base(object):
-
     """Base class for all views."""
 
     def __init__(self, context, request):
@@ -14,11 +16,6 @@ class Base(object):
 
     def __call__(self):
         return {}
-
-    @property
-    def publish_date(self):
-        tz = get_timezone('Europe/Berlin')
-        return self.context.publish_date.astimezone(tz)
 
 
 _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
@@ -36,9 +33,9 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 
 
 @view_config(route_name='json',
-             context=zeit.frontend.model.Content,
+             context=zeit.content.article.interfaces.IArticle,
              renderer='json')
-@view_config(context=zeit.frontend.model.Content,
+@view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 class Article(Base):
 
@@ -46,7 +43,8 @@ class Article(Base):
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
         self.context.is_longform = False
-        if self.context.template == 'longform':
+
+        if IArticleTemplateSettings(self.context).template == 'longform':
             self.context.advertising_enabled = False
             self.context.main_nav_full_width = True
             self.context.is_longform = True
@@ -54,10 +52,6 @@ class Article(Base):
                                       {"view": self},
                                       request=self.request)
         return {}
-
-    @property
-    def lead_pic(self):
-        return self.context.lead_pic
 
     @property
     def title(self):
@@ -73,11 +67,7 @@ class Article(Base):
 
     @property
     def pages(self):
-        return self.context.pages
-
-    @property
-    def subpage_index(self):
-        return self.context.subpage_index
+        return zeit.frontend.interfaces.IPages(self.context)
 
     @property
     def header_img(self):
@@ -85,24 +75,37 @@ class Article(Base):
 
     @property
     def author(self):
-        return self.context.author
+        try:
+            author = self.context.authors[0]
+        except IndexError:
+            author = None
+        return {
+            'name': author.display_name if author else None,
+            'href': author.uniqueId if author else None,
+            'prefix': " von " if self.context.genre else "Von ",
+            'suffix': ', ' if self.location else None,
+        }
 
     @property
     def publish_date(self):
         tz = get_timezone('Europe/Berlin')
-        return self.context.publish_date.astimezone(tz)
+        date = IPublishInfo(
+            self.context).date_last_published_semantic
+        if date:
+            return date.astimezone(tz)
 
     @property
     def publish_date_meta(self):
-        return self.context.publish_date_meta
+        return IPublishInfo(
+            self.context).date_last_published_semantic.isoformat()
 
     @property
     def last_modified_date(self):
-        return self.context.last_modified_date
+        return IModified(self.context).date_last_modified
 
     @property
     def rankedTags(self):
-        return self.context.rankedTags
+        return self.context.keywords
 
     @property
     def genre(self):
@@ -110,15 +113,29 @@ class Article(Base):
 
     @property
     def source(self):
-        return self.context.source
+        return self.context.copyrights or self.context.product_text
 
     @property
     def location(self):
-        return self.context.location
+        return None  # XXX not implemented in zeit.content.article yet
 
     @property
     def focussed_nextread(self):
-        return self.context.focussed_nextread
+        nextread = INextRead(self.context)
+        related = nextread.nextread
+        if related:
+            image = related.main_image
+            if image is not None:
+                image = {
+                    'uniqueId': image.uniqueId,
+                    'caption': (related.main_image_block.custom_caption
+                                or IImageMetadata(image).caption),
+                }
+            else:
+                image = {'uniqueId': None}
+            return {'layout': nextread.nextread_layout,
+                    'article': related,
+                    'image': image}
 
     @property
     def breadcrumb(self):
@@ -138,10 +155,10 @@ class Gallery(Base):
 
 
 @view_config(route_name='json',
-             context=zeit.frontend.model.Content,
+             context=zeit.content.article.interfaces.IArticle,
              renderer='json', name='teaser')
 @view_config(name='teaser',
-             context=zeit.frontend.model.Content,
+             context=zeit.content.article.interfaces.IArticle,
              renderer='templates/teaser.html')
 class Teaser(Article):
 
