@@ -300,7 +300,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro comment(indented, img_url, name, min_ago, role, text) -%}
+{% macro comment(indented, img_url, name, timestamp, role, text) -%}
     <article class="comment {% if indented -%}is-indented{%- endif %}">
         <div class="comment__head">
             {% if img_url -%}
@@ -308,14 +308,14 @@
             {%- endif %}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{name}}</strong>
-                <a href="#" class="comment__head__meta__date">vor {{min_ago}} Minuten</a>
+                <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
                 {% if role -%}
                     <div class="comment__head__meta__label">{{role}}</div>
                 {%- endif %}
             </div>
         </div>
         <div class="comment__body">
-            <p>{{text}}</p>
+            <p>{{text|safe}}</p>
         </div>
         <aside class="comment__tools">
             <a class="comment__tools__flag icon-flag">Kommentar melden</a>
@@ -349,8 +349,8 @@
                 <div class="tabs__content is-active">
                     <a name="tab1"></a>
                     <div class="comments__list">
-                        {% for commenttuple in comments %}
-                            {{ comment(*commenttuple) }}
+                        {% for commentdict in comments %}
+                            {{ comment(**commentdict) }}
                         {% endfor %}
                     </div>
                 </div>
