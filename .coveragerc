@@ -1,0 +1,6 @@
+[html]
+directory=htdocs/coverage
+
+[run]
+omit = 
+    */zeit/frontend/test/*
