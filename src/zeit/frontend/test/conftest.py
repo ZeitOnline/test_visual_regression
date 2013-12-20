@@ -1,7 +1,10 @@
+from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from selenium import webdriver
+from os import path
 import pytest
 import zeit.frontend.application
+from zeit import frontend
 
 settings = {
     'pyramid.reload_templates': 'false',
@@ -9,6 +12,7 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
+    'agatho_url': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments')
 }
 
 browsers = {
@@ -21,6 +25,25 @@ browsers = {
 @pytest.fixture(scope='session')
 def application():
     return zeit.frontend.application.Application()(settings)
+
+
+@pytest.fixture
+def config(request):
+    config = setUp(settings=settings)
+    request.addfinalizer(tearDown)
+    return config
+
+
+@pytest.fixture
+def dummy_request(request, config):
+    config.manager.get()['request'] = req = DummyRequest(is_xhr=False)
+    return req
+
+
+@pytest.fixture
+def agatho():
+    from zeit.frontend.comments import Agatho
+    return Agatho(agatho_url=settings['agatho_url'])
 
 
 @pytest.fixture(scope='session')

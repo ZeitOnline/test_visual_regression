@@ -1,12 +1,4 @@
 from pytest import fixture
-from os import path
-
-@fixture
-def agatho():
-    from zeit.frontend.comments import Agatho
-    from zeit import frontend
-    return Agatho(agatho_url=u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'))
-
 
 @fixture
 def xml_comment(agatho):
@@ -22,3 +14,9 @@ def test_comment_as_json(xml_comment):
     from zeit.frontend.comments import comment_as_json
     json_comment = comment_as_json(xml_comment)
     assert json_comment['name'] == 'Skarsgard'
+
+
+def test_get_entire_thread(dummy_request):
+    from zeit.frontend.comments import thread
+    thread_as_json = thread(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets', dummy_request)
+    assert thread_as_json[0]['name'] == 'Skarsgard'
