@@ -325,10 +325,11 @@
 {%- endmacro %}
 
 {% macro mock_comments(comments) -%}
+    {% if comments is not none -%}
     <div class="tc">
         <div class="article__comments-trigger" id="js-comments-trigger">
             <div class="article__comments-trigger__wrap">
-                <span class="article__comments-trigger__count icon-close-comments">47</span>
+                <span class="article__comments-trigger__count icon-close-comments">{{comments['comment_count']}}</span>
                 Kommentare
             </div>
         </div>
@@ -349,7 +350,7 @@
                 <div class="tabs__content is-active">
                     <a name="tab1"></a>
                     <div class="comments__list">
-                        {% for commentdict in comments %}
+                        {% for commentdict in comments['comments'] %}
                             {{ comment(**commentdict) }}
                         {% endfor %}
                     </div>
@@ -368,4 +369,5 @@
             </div>
         </div>
     </section>
+    {%- endif %}
 {%- endmacro %}

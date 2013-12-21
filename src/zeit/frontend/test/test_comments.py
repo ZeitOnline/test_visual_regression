@@ -1,4 +1,7 @@
 from pytest import fixture
+from zeit.frontend.comments import get_thread
+
+unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
 
 @fixture
 def xml_comment(agatho):
@@ -6,8 +9,12 @@ def xml_comment(agatho):
 
 
 def test_agatho_collection_get(agatho):
-    thread = agatho.collection_get(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+    thread = agatho.collection_get(unique_id)
     assert thread.xpath('comment_count')[0].text == '41'
+
+
+def test_agatho_collection_get_for_nonexistent(agatho):
+    assert agatho.collection_get(u'/nosuchthread') is None
 
 
 def test_comment_as_json(xml_comment):
@@ -17,6 +24,9 @@ def test_comment_as_json(xml_comment):
 
 
 def test_get_entire_thread(dummy_request):
-    from zeit.frontend.comments import thread
-    thread_as_json = thread(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets', dummy_request)
-    assert thread_as_json[0]['name'] == 'Skarsgard'
+    thread_as_json = get_thread(unique_id, dummy_request)
+    assert thread_as_json['comments'][0]['name'] == 'Skarsgard'
+    assert thread_as_json['comment_count'] == 41
+
+def test_get_non_existent_thread(dummy_request):
+    assert get_thread(u'/nosuchthread', dummy_request) is None

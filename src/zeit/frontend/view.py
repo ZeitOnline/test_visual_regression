@@ -6,7 +6,7 @@ from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 import zeit.content.article.interfaces
-from .comments import thread
+from .comments import get_thread
 
 
 class Base(object):
@@ -45,6 +45,7 @@ class Article(Base):
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
         self.context.is_longform = False
+        self.comments = self._comments()
 
         if IArticleTemplateSettings(self.context).template == 'longform':
             self.context.advertising_enabled = False
@@ -152,9 +153,8 @@ class Article(Base):
         return l
 
 
-    @property
-    def comments(self):
-        return thread(unique_id=self.context.uniqueId, request=self.request)
+    def _comments(self):
+        return get_thread(unique_id=self.context.uniqueId, request=self.request)
 
 
 class Gallery(Base):
