@@ -108,9 +108,13 @@ class Application(object):
                 'zeit.cms.tagging.tests', 'whitelist.xml'),
         })
 
+        if ('repository_path' not in self.settings.keys() or
+                self.settings['repository_path'] is None):
+            self.repository_path = pkg_resources.resource_filename(
+                __name__, 'data')
+
         zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': pkg_resources.resource_filename(
-                __name__, 'data'),
+            'repository-path': self.settings['repository_path'],
         })
 
         zope.app.appsetup.product.setProductConfiguration(
@@ -126,7 +130,8 @@ class Application(object):
                 'htmlblock-layout-source': _product_url(
                     'zeit.frontend',
                     'data/config/article-htmlblock-layouts.xml'),
-        })
+            }
+        )
 
         zope.app.appsetup.product.setProductConfiguration(
             'zeit.magazin', {
@@ -136,7 +141,8 @@ class Application(object):
                 'article-related-layout-source': _product_url(
                     'zeit.frontend',
                     'data/config/article-related-layouts.xml'),
-        })
+            }
+        )
 
     @property
     def pipeline(self):
