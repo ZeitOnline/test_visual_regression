@@ -109,12 +109,12 @@ class Application(object):
         })
 
         if ('repository_path' not in self.settings.keys() or
-                self.settings.repository_path is None):
+                self.settings['repository_path'] is None):
             self.repository_path = pkg_resources.resource_filename(
                 __name__, 'data')
 
         zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': self.repository_path,
+            'repository-path': self.settings['repository_path'],
         })
 
         zope.app.appsetup.product.setProductConfiguration(
