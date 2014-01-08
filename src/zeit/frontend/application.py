@@ -108,9 +108,12 @@ class Application(object):
                 'zeit.cms.tagging.tests', 'whitelist.xml'),
         })
 
+        if 'repository_path' not in self.settings.keys():
+            self.repository_path =  pkg_resources.resource_filename(
+                __name__, 'data')
+
         zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': pkg_resources.resource_filename(
-                __name__, 'data'),
+            'repository-path': self.repository_path,
         })
 
         zope.app.appsetup.product.setProductConfiguration(
