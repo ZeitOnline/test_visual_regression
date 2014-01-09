@@ -29,4 +29,5 @@ def test_get_entire_thread(dummy_request):
     assert thread_as_json['comment_count'] == 41
 
 def test_get_non_existent_thread(dummy_request):
-    assert get_thread(u'/nosuchthread', dummy_request) is None
+    assert get_thread(u'/nosuchthread', dummy_request)['comment_count'] == 0
+    assert get_thread(u'/nosuchthread', dummy_request)['comments'] == []

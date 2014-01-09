@@ -36,4 +36,4 @@ def get_thread(unique_id, request):
             comments=[comment_as_json(comment) for comment in thread.xpath('//comment')],
             comment_count=int(thread.xpath('/comments/comment_count')[0].text))
     else:
-        return None
+        return dict(comments=[], comment_count=0)
