@@ -87,7 +87,8 @@ class Application(object):
             config=context)
         context.execute_actions()
 
-    def get_repository_path(self):
+    @property
+    def repository_path(self):
         if ('repository_path' not in self.settings.keys() or
                 self.settings['repository_path'] == None):
             return pkg_resources.resource_filename( __name__, 'data')
@@ -115,7 +116,7 @@ class Application(object):
         })
 
         zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': self.get_repository_path(),
+            'repository-path': self.repository_path,
         })
 
         zope.app.appsetup.product.setProductConfiguration(
