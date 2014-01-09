@@ -31,3 +31,10 @@ def test_get_entire_thread(dummy_request):
 def test_get_non_existent_thread(dummy_request):
     assert get_thread(u'/nosuchthread', dummy_request)['comment_count'] == 0
     assert get_thread(u'/nosuchthread', dummy_request)['comments'] == []
+
+
+def test_get_entire_thread_via_rest(browser):
+    thread_as_json = browser.get_json('http://example.com/-comments/artikel/01')
+    assert thread_as_json.json['comments'][0]['name'] == 'Skarsgard'
+    assert thread_as_json.json['comment_count'] == 41
+

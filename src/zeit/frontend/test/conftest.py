@@ -3,6 +3,7 @@ from pytest_localserver.http import WSGIServer
 from selenium import webdriver
 from os import path
 import pytest
+from webtest import TestApp as TestAppBase
 import zeit.frontend.application
 from zeit import frontend
 
@@ -65,3 +66,19 @@ def selenium_driver(request):
 
     request.addfinalizer(lambda *args: b.quit())
     return b
+
+
+class TestApp(TestAppBase):
+
+    def get_json(self, url, params=None, headers=None, *args, **kw):
+        if headers is None:
+            headers = {}
+        headers['Accept'] = 'application/json'
+        return self.get(url, params, headers, *args, **kw)
+
+
+
+@pytest.fixture
+def browser(application):
+    """ Returns an instance of `webtest.TestApp`. """
+    return TestApp(application, extra_environ=dict(HTTP_HOST='example.com'))

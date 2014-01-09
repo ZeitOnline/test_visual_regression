@@ -2,6 +2,9 @@
 import urlparse
 from lxml import etree
 
+from pyramid.view import view_config
+import zeit.content.article.interfaces
+
 def path_of_article(unique_id):
     return urlparse.urlparse(unique_id).path[1:]
 
@@ -37,3 +40,9 @@ def get_thread(unique_id, request):
             comment_count=int(thread.xpath('/comments/comment_count')[0].text))
     else:
         return dict(comments=[], comment_count=0)
+
+@view_config(route_name='comments',
+    context=zeit.content.article.interfaces.IArticle,
+    renderer='json')
+def rest_get_thread(context, request):
+    return get_thread(context.uniqueId, request)
