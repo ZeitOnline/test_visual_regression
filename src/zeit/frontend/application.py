@@ -87,6 +87,13 @@ class Application(object):
             config=context)
         context.execute_actions()
 
+    @property
+    def repository_path(self):
+        if ('repository_path' not in self.settings.keys() or
+                self.settings['repository_path'] == None):
+            return pkg_resources.resource_filename( __name__, 'data')
+        return self.settings['repository_path']
+
     def configure_product_config(self):
         # XXX make configurable, but see #36
         zope.app.appsetup.product.setProductConfiguration('zeit.cms', {
@@ -108,13 +115,8 @@ class Application(object):
                 'zeit.cms.tagging.tests', 'whitelist.xml'),
         })
 
-        if ('repository_path' not in self.settings.keys() or
-                self.settings['repository_path'] == ''):
-            self.settings['repository_path'] = pkg_resources.resource_filename(
-                __name__, 'data')
-
         zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': self.settings['repository_path'],
+            'repository-path': self.repository_path,
         })
 
         zope.app.appsetup.product.setProductConfiguration(
