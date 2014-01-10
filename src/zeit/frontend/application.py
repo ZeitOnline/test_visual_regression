@@ -46,7 +46,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
-        config.add_route('comments', '/-comments/*traverse')
+        config.add_route('comments', '/-comments/collection/*traverse')
         config.add_static_view(name='css', path='zeit.frontend:css/')
         config.add_static_view(name='js', path='zeit.frontend:js/')
         config.add_static_view(name='img', path='zeit.frontend:img/')
