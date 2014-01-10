@@ -43,6 +43,7 @@ class Application(object):
         config.setup_registry(settings=self.settings)
 
         self.configure_jinja()
+        self.config.include("cornice")
 
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')

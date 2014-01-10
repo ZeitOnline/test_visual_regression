@@ -370,4 +370,14 @@
         </div>
     </section>
     {%- endif %}
+
+    <div class="tc">
+        <div class="article__comments-trigger">
+            <div class="article__comments-trigger__wrap">
+                Kommentar hinzufügen
+            </div>
+        </div>
+    </div>
+
+
 {%- endmacro %}

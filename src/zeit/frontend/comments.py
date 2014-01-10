@@ -41,8 +41,17 @@ def get_thread(unique_id, request):
     else:
         return dict(comments=[], comment_count=0)
 
-@view_config(route_name='comments',
-    context=zeit.content.article.interfaces.IArticle,
-    renderer='json')
-def rest_get_thread(context, request):
-    return get_thread(context.uniqueId, request)
+
+from cornice.resource import resource, view
+from zeit.frontend import COMMENT_COLLECTION_PATH, COMMENT_PATH
+
+@resource(collection_path=COMMENT_COLLECTION_PATH, path=COMMENT_PATH)
+class Comment(object):
+
+    def __init__(self, context, request):
+        self.request = request
+        self.context = context
+
+    @view(renderer='json', context=zeit.content.article.interfaces.IArticle)
+    def collection_get(self):
+        return get_thread(self.context.uniqueId, self.request)
