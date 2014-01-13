@@ -9,14 +9,15 @@ define(['jquery'], function() {
         return '/bitblt-' + width + 'x' + height + '-' + digest;
     };
 
-    var scale = function(image, width, height) {
+    var rescale = function(image) {
         var origin = location.origin;
-        image.src = image.src.replace(origin, origin + prefix(width, height));
+        var url = origin + prefix(image.width, image.height);
+        image.src = image.src.replace(origin, url);
     };
 
     var init = function() {
         $('img.figure__media').each(function() {
-            scale(this, 80, 60);
+            rescale(this);
         });
     };
 
