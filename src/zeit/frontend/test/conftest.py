@@ -34,6 +34,7 @@ browsers = {
 }
 
 
+
 @pytest.fixture(scope='session')
 def application():
     app = zeit.frontend.application.Application()({}, **settings)
@@ -53,7 +54,6 @@ def selenium_driver(request):
     if request.param == 'firefox':
         profile = webdriver.FirefoxProfile()
         profile.set_preference('network.http.use-cache', False)
-
         b = browsers[request.param](firefox_profile=profile)
     else:
         b = browsers[request.param]()

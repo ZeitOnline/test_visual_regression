@@ -13,11 +13,14 @@ require.config({
 	}
 });
 
-require(['modules/fontloader', 'modules/breadcrumbs', 'modules/main-nav', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo'],
-  function( fontloader, breadcrumbs, main_nav, images ) {
+require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo'],
+  function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
     fontloader.init();
     main_nav.init();
     breadcrumbs.init();
+    tabs.init();
+    comments.init();
+    adloader.init();
     images.init();
 		$( "figure[data-video]" ).switchVideo();
 });

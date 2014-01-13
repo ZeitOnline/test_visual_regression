@@ -87,6 +87,13 @@ class Application(object):
             config=context)
         context.execute_actions()
 
+    @property
+    def repository_path(self):
+        if ('repository_path' not in self.settings.keys() or
+                self.settings['repository_path'] == None):
+            return pkg_resources.resource_filename( __name__, 'data')
+        return self.settings['repository_path']
+
     def configure_product_config(self):
         # XXX make configurable, but see #36
         zope.app.appsetup.product.setProductConfiguration('zeit.cms', {
@@ -109,34 +116,35 @@ class Application(object):
         })
 
         zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': pkg_resources.resource_filename(
-                __name__, 'data'),
+            'repository-path': self.repository_path,
         })
 
         zope.app.appsetup.product.setProductConfiguration(
             'zeit.content.article', {
                 'genre-url': _product_url(
-                    'zeit.content.article.tests', 'article-genres.xml'),
+                    'zeit.frontend', 'data/config/article-genres.xml'),
                 'image-layout-source': _product_url(
-                    'zeit.content.article.edit.tests',
-                    'image-layouts.xml'),
+                    'zeit.frontend',
+                    'data/config/article-image-layouts.xml'),
                 'video-layout-source': _product_url(
-                    'zeit.content.article.edit.tests',
-                    'video-layouts.xml'),
+                    'zeit.frontend',
+                    'data/config/article-video-layouts.xml'),
                 'htmlblock-layout-source': _product_url(
-                    'zeit.content.article.edit.tests',
-                    'htmlblock-layouts.xml'),
-        })
+                    'zeit.frontend',
+                    'data/config/article-htmlblock-layouts.xml'),
+            }
+        )
 
         zope.app.appsetup.product.setProductConfiguration(
             'zeit.magazin', {
-                'article-template-source': (
-                    'http://zip6.zeit.de:9000/cms/work/'
-                    'data/article-templates.xml'),
-                'article-related-layout-source': (
-                    'http://zip6.zeit.de:9000/cms/work/'
-                    'data/article-related-layouts.xml'),
-        })
+                'article-template-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-templates.xml'),
+                'article-related-layout-source': _product_url(
+                    'zeit.frontend',
+                    'data/config/article-related-layouts.xml'),
+            }
+        )
 
     @property
     def pipeline(self):

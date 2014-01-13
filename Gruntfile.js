@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
         binDir: 'bin/',
-	    codeDir: 'src/zeit/frontend/',
+		codeDir: 'src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js'
 	};
@@ -32,6 +32,7 @@ module.exports = function(grunt) {
 					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
 					sassDir: 'sass',
+					require: ['animation'],
 					raw: 'preferred_syntax=:sass\n'
 				}
 			}
@@ -84,7 +85,16 @@ module.exports = function(grunt) {
 				loopfunc: true, // no warnings about functions in loops
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
-				ignores: [ 'javascript/libs/iqd-ads.js', 'javascript/libs/chai.js', 'javascript/libs/jquery-1.10.2.min.js', 'javascript/libs/modernizr.custom.42776.js', 'javascript/libs/require.js', 'javascript/libs/sjcl.js' ],
+				ignores: [
+					'javascript/libs/chai.js',
+					'javascript/libs/jquery-1.10.2.min.js',
+					'javascript/libs/jquery.visible.min.js',
+					'javascript/libs/modernizr.custom.42776.js',
+					'javascript/libs/require.js',
+					'javascript/libs/sasmobile.js',
+					'javascript/libs/sjcl.js',
+					'javascript/libs/postscribe.min.js'
+				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
 			},
@@ -94,12 +104,12 @@ module.exports = function(grunt) {
 		},
 
 		grunticon: {
-      dist: {
-	      options: {
-		      src: "sass/icons",
-		      dest: project.codeDir + "/css/icons"
-		    }
-		  }
+			dist: {
+				options: {
+				src: "sass/icons",
+				dest: project.codeDir + "/css/icons"
+			}
+		}
     },
 
 		// watch here
@@ -114,7 +124,6 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-
 
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass-shabunc');
