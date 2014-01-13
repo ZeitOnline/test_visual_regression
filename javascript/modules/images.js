@@ -11,7 +11,7 @@ define(['jquery'], function() {
 
     var rescale = function(image) {
         var origin = location.origin;
-        var url = origin + prefix(image.width, image.height);
+        var url = origin + prefix(Math.round(image.width / 8), Math.round(image.height / 8));
         image.src = image.src.replace(origin, url);
     };
 
