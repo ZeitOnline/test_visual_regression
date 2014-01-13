@@ -1,4 +1,6 @@
 from babel.dates import format_datetime
+from repoze.bitblt.transform import compute_signature
+from urlparse import urlsplit, urlunsplit
 import grokcore.component.zcml
 import logging
 import martian
@@ -70,6 +72,7 @@ class Application(object):
         jinja.filters['format_date'] = format_date
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
+        jinja.filters['default_image_url'] = default_image_url
         jinja.trim_blocks = True
         return jinja
 
@@ -178,3 +181,19 @@ def format_date(obj, type):
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
         return format_datetime(obj, format, locale="de_De")
+
+
+# definition of default images sizes per layout context
+default_images_sizes = dict(
+    large=(300, 200),
+)
+
+
+def default_image_url(image):
+    width, height = default_images_sizes.get(image.layout, (160, 90))
+    signature = compute_signature(width, height, 'time')    # TODO: use secret from settings?
+    scheme, netloc, path, query, fragment = urlsplit(image.src)
+    parts = path.split('/')
+    parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
+    path = '/'.join(parts)
+    return urlunsplit((scheme, netloc, path, query, fragment))
