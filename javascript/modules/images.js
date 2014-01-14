@@ -11,8 +11,8 @@ define(['jquery'], function() {
 
     var rescale = function(image) {
         var origin = location.origin;
-        var url = origin + prefix(image.width, image.height);
-        image.src = image.src.replace(origin, url);
+        var token = prefix(image.width, image.height);
+        image.src = image.src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
     };
 
     var init = function() {
