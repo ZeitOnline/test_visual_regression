@@ -84,6 +84,10 @@ class Application(object):
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
+        zope.configuration.xmlconfig.include(
+            context, package=zeit.connector, file='%s-connector.zcml' %
+            self.settings['connector_type'])
+
         # can't use <grok> directive since we can't configure excludes there
         martian.grok_dotted_name(
             'zeit.frontend',

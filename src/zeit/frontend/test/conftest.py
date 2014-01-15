@@ -10,6 +10,7 @@ settings = {
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
 
+    'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
 
     'vivi_zeit.cms_keyword-configuration': (
