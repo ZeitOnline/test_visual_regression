@@ -9,6 +9,34 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
+
+    'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
+
+    'vivi_zeit.cms_keyword-configuration': (
+        'egg://zeit.cms.tagging.tests/keywords_config.xml'),
+    'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
+    'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
+    'vivi_zeit.cms_source-keyword': (
+        'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
+    'vivi_zeit.cms_source-navigation': (
+        'egg://zeit.cms.content/navigation.xml'),
+    'vivi_zeit.cms_source-products': 'egg://zeit.cms.content/products.xml',
+    'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
+    'vivi_zeit.cms_whitelist-url': (
+        'egg://zeit.cms.tagging.tests/whitelist.xml'),
+
+    'vivi_zeit.content.article_genre-url': (
+        'egg://zeit.frontend/data/config/article-genres.xml'),
+    'vivi_zeit.content.article_image-layout-source': (
+        'egg://zeit.frontend/data/config/article-image-layouts.xml'),
+    'vivi_zeit.content.article_video-layout-source': (
+        'egg://zeit.frontend/data/config/article-video-layouts.xml'),
+    'vivi_zeit.content.article_htmlblock-layout-source': (
+        'egg://zeit.frontend/data/config/article-htmlblock-layouts.xml'),
+    'vivi_zeit.magazin_article-template-source': (
+        'egg://zeit.frontend/data/config/article-templates.xml'),
+    'vivi_zeit.magazin_article-related-layout-source': (
+        'egg://zeit.frontend/data/config/article-related-layouts.xml'),
 }
 
 browsers = {
@@ -17,10 +45,9 @@ browsers = {
 }
 
 
-
 @pytest.fixture(scope='session')
 def application():
-    return zeit.frontend.application.Application()(settings)
+    return zeit.frontend.application.Application()({}, **settings)
 
 
 @pytest.fixture(scope='session')
