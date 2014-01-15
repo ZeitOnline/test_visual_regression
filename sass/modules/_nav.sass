@@ -595,11 +595,11 @@ $nav__section-border: 1px solid $grey--mid
 .main-nav__sharing__item
   +hide-text
   +inline-block
+  +transition(background)
+  background-position: center center
   width: $nav__row-height
+  +on-interaction
+    background-color: $grey--mid
+
   height: $nav__row-height
-  &.is-twitter
-    background-color: $color-twitter
-  &.is-facebook
-    background-color: $color-facebook
-  &.is-google
-    background-color: $color-google
+  border-left: $nav__section-border !important
