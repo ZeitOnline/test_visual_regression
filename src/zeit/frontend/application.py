@@ -61,6 +61,8 @@ class Application(object):
             zeit.cms.repository.interfaces.IRepository)
 
     def configure_jinja(self):
+        """Sets up names and filters that will be available for all
+        templates."""
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
@@ -75,6 +77,8 @@ class Application(object):
         return jinja
 
     def configure_zca(self):
+        """Sets up zope.component registrations by reading our
+        configure.zcml file."""
         log.debug('Configuring ZCA')
         self.configure_product_config()
         context = zope.configuration.config.ConfigurationMachine()
@@ -122,6 +126,22 @@ class Application(object):
 
     @property
     def pipeline(self):
+        """Configuration of a WSGI pipeline.
+
+        Our WSGI application is wrapped in each filter in turn,
+        so the first entry in this list is closest to the application,
+        and the last entry is closest to the WSGI server.
+
+        Each entry is a tuple (spec, protocol, name, arguments).
+        The default meaning is to load an entry point called ``name`` of type
+        ``protocol`` from the package ``spec`` and load it, passing
+        ``arguments`` as kw parameters (thus, arguments must be a dict).
+
+        If ``protocol`` is 'factory', then instead of an entry point the method
+        of this object with the name ``spec`` is called, passing ``arguments``
+        as kw parameters.
+
+        """
         return [
             # ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
         ]
