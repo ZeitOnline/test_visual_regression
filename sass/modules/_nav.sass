@@ -29,6 +29,16 @@ $nav__section-border: 1px solid $grey--mid
     margin-bottom: 0
     z-index: 20
     margin-top: 0
+  &.is-compact
+    left: 0
+    top: 0
+    height: $nav__row-height
+    +respond-min($nav__break__full-menu)
+      height: $nav__row-height
+    .no-touch &
+      position: fixed
+      ~ .main
+        margin-top: $nav__row-height
   +respond-min($nav__break__full-menu)
     margin-bottom: $nav__row-height * 2
     height: $nav__row-height * 2
@@ -68,6 +78,8 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     width: em($nav__logo-full-width) + 2*$small
     border-bottom: $nav__section-border !important
+    .is-compact &
+      border-bottom: none !important
 
 
 .main-nav__logo__wrap
@@ -99,6 +111,8 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     background: none
     border-bottom: $nav__section-border
+    .is-compact &
+      border-bottom: none
 
 
 .main-nav__menu__head
@@ -575,3 +589,17 @@ $nav__section-border: 1px solid $grey--mid
       background: none
       padding: 0
 
+.main-nav__sharing
+  float: right
+
+.main-nav__sharing__item
+  +hide-text
+  +inline-block
+  width: $nav__row-height
+  height: $nav__row-height
+  &.is-twitter
+    background-color: $color-twitter
+  &.is-facebook
+    background-color: $color-facebook
+  &.is-google
+    background-color: $color-google
