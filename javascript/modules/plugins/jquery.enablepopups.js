@@ -2,7 +2,7 @@
 
 define(['jquery'], function() {
 
-	(function( $ ){
+	(function($){
 
 		$.fn.enablePopups = function() {
 
@@ -15,5 +15,5 @@ define(['jquery'], function() {
 			});
 
 		};
-	})( jQuery );
+	})(jQuery);
 });
