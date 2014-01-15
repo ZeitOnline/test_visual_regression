@@ -117,7 +117,7 @@
             </a>
             <div class="main-nav__menu">
                 <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status=Zeit.de" target="_blank" class="main-nav__sharing__item icon-twitter" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://zeit.de&p[images][0]=&p[title]=Zeit.de&p[summary]=" target="_blank" class="main-nav__sharing__item icon-facebook" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;">Auf Facebook teilen</a><a href="https://plus.google.com/share?url=http://zeit.de" target="_blank" class="main-nav__sharing__item icon-google" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');return false;">Auf Google+ teilen</a>
+                    <a href="http://twitter.com/home?status=Zeit.de" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://zeit.de&p[images][0]=&p[title]=Zeit.de&p[summary]=" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url=http://zeit.de" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
                 </aside>
             </div>
         </div>
