@@ -34,7 +34,7 @@ def test_get_non_existent_thread(dummy_request):
 
 
 def test_get_entire_thread_via_rest(browser):
-    thread_as_json = browser.get_json('http://example.com/-comments/collection/artikel/01')
+    thread_as_json = browser.get_json('http://example.com/-/comments/collection/artikel/01')
     assert thread_as_json.json['comments'][0]['name'] == 'Skarsgard'
     assert thread_as_json.json['comment_count'] == 41
 

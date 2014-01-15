@@ -45,13 +45,17 @@ def get_thread(unique_id, request):
 from cornice.resource import resource, view
 from zeit.frontend import COMMENT_COLLECTION_PATH, COMMENT_PATH
 
-@resource(collection_path=COMMENT_COLLECTION_PATH, path=COMMENT_PATH)
+def unique_id_factory(request):
+    return '/'.join([u'http://xml.zeit.de'] + list(request.matchdict['subpath']))
+
+
+@resource(collection_path=COMMENT_COLLECTION_PATH, path=COMMENT_PATH, factory=unique_id_factory)
 class Comment(object):
 
     def __init__(self, context, request):
+        self.unique_id = context
         self.request = request
-        self.context = context
 
-    @view(renderer='json', context=zeit.content.article.interfaces.IArticle)
+    @view(renderer='json')
     def collection_get(self):
-        return get_thread(self.context.uniqueId, self.request)
+        return get_thread(self.unique_id, self.request)

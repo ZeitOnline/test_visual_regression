@@ -6,7 +6,7 @@ setup(
 
     install_requires=[
         'Babel',
-        'cornice',
+        'cornice >= 0.16.2',
         'grokcore.component',
         'iso8601',
         'lxml',
