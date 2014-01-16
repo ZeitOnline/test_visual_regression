@@ -2,8 +2,10 @@ from babel.dates import get_timezone
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
+from zeit.content.article.edit.interfaces import IImage
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
+from zope.component import providedBy
 import zeit.content.article.interfaces
 
 
@@ -19,7 +21,7 @@ class Base(object):
 
 
 _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo':('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
+               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
                'lebensart': (
                    'ZEIT Magazin',
                    'http://www.zeit.de/magazin/index',
@@ -71,7 +73,9 @@ class Article(Base):
 
     @property
     def header_img(self):
-        return self.context.header_img
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
+            return zeit.frontend.block.Image(body.values()[0])
 
     @property
     def author(self):

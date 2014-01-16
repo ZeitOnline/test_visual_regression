@@ -1,4 +1,5 @@
 import mock
+import zeit.cms.interfaces
 from zeit.frontend import view
 
 
@@ -14,9 +15,7 @@ def test_breadcumb_should_produce_expected_data():
         'lebensart': ('lebensart',
                       'http://www.zeit.de/magazin/lebensart/index',
                       'myid3'),
-        'mode': ('mode',
-                      'http://www.zeit.de/magazin/mode/index',
-                      'myid4'), }
+        'mode': ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'), }
 
     article = view.Article(context, '')
 
@@ -43,9 +42,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
         'lebensart': ('lebensart',
                       'http://www.zeit.de/magazin/lebensart/index',
                       'myid3'),
-        'mode': ('mode',
-                      'http://www.zeit.de/magazin/mode/index',
-                      'myid4'), }
+        'mode': ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'), }
 
     article = view.Article(context, '')
 
@@ -56,3 +53,9 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
         ('This is my title', 'http://localhost'), ]
 
     assert article.breadcrumb == l
+
+
+def test_header_img_should_be_first_image_of_content_blocks(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.header_img.src == '/img/artikel/01/01.jpg'
