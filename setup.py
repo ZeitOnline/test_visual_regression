@@ -32,6 +32,10 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'pytest',
+            'pytest-localserver',
+            'pytest-pep8',
+            'selenium',
         ],
     },
     namespace_packages=['zeit'],
