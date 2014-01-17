@@ -33,6 +33,11 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'pytest',
+            'pytest-localserver',
+            'pytest-pep8',
+            'requests',
+            'selenium',
             'webtest',
         ],
     },
