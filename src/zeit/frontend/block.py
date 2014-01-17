@@ -1,4 +1,5 @@
 # coding: utf-8
+import PIL
 from lxml import etree
 from grokcore.component import adapter, implementer
 import zeit.content.article.edit.interfaces
@@ -57,11 +58,17 @@ class Image(object):
 
     def __init__(self, model_block):
         xml = model_block.xml
-        self.src = model_block.references and model_block.references.uniqueId
+        self.image = model_block.references
+        self.src = self.image and self.image.uniqueId
         self.align = xml.get('align')
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout
+
+    @property
+    def ratio(self):
+        width, height = PIL.Image.open(self.image.open()).size
+        return float(width) / float(height)
 
 
 @implementer(IFrontendBlock)
