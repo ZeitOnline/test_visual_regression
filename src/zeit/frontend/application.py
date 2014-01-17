@@ -198,13 +198,13 @@ def format_date(obj, type):
 
 # definition of default images sizes per layout context
 default_images_sizes = dict(
-    large=(300, 200),
+    large=(800, 600),
     small=(200, 300),
 )
 
 
 def default_image_url(image):
-    width, height = default_images_sizes.get(image.layout, (160, 90))
+    width, height = default_images_sizes.get(image.layout, (640, 480))
     # TODO: use secret from settings?
     signature = compute_signature(width, height, 'time')
     scheme, netloc, path, query, fragment = urlsplit(image.src)
