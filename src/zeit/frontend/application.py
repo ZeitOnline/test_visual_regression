@@ -199,6 +199,7 @@ def format_date(obj, type):
 # definition of default images sizes per layout context
 default_images_sizes = dict(
     large=(300, 200),
+    small=(200, 300),
 )
 
 
