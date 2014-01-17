@@ -21,13 +21,13 @@ define(['jquery'], function() {
     };
 
     var init = function() {
-        $('figure > noscript').each(function() {
+        $('.scaled-image > noscript').each(function() {
             var noscript = $(this);
-            var figure = noscript.parent();
+            var parent = noscript.parent();
             var markup = noscript.text();
             markup = markup.replace('src="', 'data-src="');
-            figure.html(markup);
-            figure.find('img.figure__media').each(function() {
+            parent.html(markup);
+            parent.find('img').each(function() {
                 rescale(this);
             });
         });
