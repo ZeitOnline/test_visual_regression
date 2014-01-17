@@ -226,8 +226,7 @@
         ">
             <div class="scaled-image">
                 <noscript>
-                    <img class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}"
-                        data-ratio="{{obj.ratio}}">
+                        <img class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
                 </noscript>
             </div>
             <figcaption class="figure__caption">
