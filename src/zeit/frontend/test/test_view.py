@@ -63,6 +63,11 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     url = 'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
     assert article_view.header_img.src == url
 
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
+    assert article_view.header_img.src == url
+
 
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):
     r = requests.get(testserver.url + '/exampleimages/artikel/01/01.jpg')
