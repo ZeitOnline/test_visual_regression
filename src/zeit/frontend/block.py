@@ -57,7 +57,7 @@ class Image(object):
 
     def __init__(self, model_block):
         xml = model_block.xml
-        self.src = xml.get('src')
+        self.src = model_block.references and model_block.references.uniqueId
         self.align = xml.get('align')
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))

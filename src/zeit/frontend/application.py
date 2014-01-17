@@ -1,9 +1,11 @@
 from babel.dates import format_datetime
 import grokcore.component.zcml
+import jinja2
 import logging
 import martian
 import pkg_resources
 import pyramid.config
+import pyramid.threadlocal
 import pyramid_jinja2
 import urlparse
 import zeit.frontend
@@ -46,6 +48,7 @@ class Application(object):
         self.configure_jinja()
 
         log.debug('Configuring Pyramid')
+        config.add_route('home', '/')
         config.add_route('json', 'json/*traverse')
         config.add_static_view(name='css', path='zeit.frontend:css/')
         config.add_static_view(name='js', path='zeit.frontend:js/')
@@ -172,8 +175,14 @@ def maybe_convert_egg_url(url):
         parts.netloc, parts.path[1:])
 
 
-def translate_url(obj):
-    return obj.replace("xml.zeit.de", "www.zeit.de", 1)
+@jinja2.contextfilter
+def translate_url(context, url):
+    if url is None:
+        return None
+    # XXX Is it really not possible to get to the actual template variables
+    # (like context, view, request) through the jinja2 context?!??
+    request = pyramid.threadlocal.get_current_request()
+    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
 def format_date(obj, type):

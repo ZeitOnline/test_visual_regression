@@ -35,6 +35,7 @@ setup(
             'pytest',
             'pytest-localserver',
             'pytest-pep8',
+            'requests',
             'selenium',
         ],
     },
