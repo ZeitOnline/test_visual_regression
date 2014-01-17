@@ -224,7 +224,10 @@
             {% endif %}
         {% endif %}
         ">
-            <img class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+            <noscript>
+            <img class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}"
+                 data-ratio="{{obj.ratio}}">
+            </noscript>
             <figcaption class="figure__caption">
                 {{obj.caption}}
                 {{obj.copyright}}

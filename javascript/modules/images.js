@@ -12,17 +12,24 @@ define(['jquery'], function() {
     };
 
     var rescale = function(image) {
-        if (image.width / image.naturalWidth < rescale_threshold) {
-            return;     // rescaling is not needed...
-        }
-        var origin = location.origin;
-        var token = prefix(image.width, image.height);
-        image.src = image.src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
+        var img = $(image);
+        var width = img.width();
+        var height = img.height() || Math.round(width / img.data('ratio'));
+        var token = prefix(width, height);
+        var src = image.src || img.data('src');
+        image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
     };
 
     var init = function() {
-        $('img.figure__media').each(function() {
-            rescale(this);
+        $('figure > noscript').each(function() {
+            var noscript = $(this);
+            var figure = noscript.parent();
+            var markup = noscript.text();
+            markup = markup.replace('src="', 'data-src="');
+            figure.html(markup);
+            figure.find('img.figure__media').each(function() {
+                rescale(this);
+            });
         });
     };
 
