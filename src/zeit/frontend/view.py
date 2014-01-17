@@ -4,6 +4,7 @@ from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
+import os.path
 import pyramid.response
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -192,6 +193,9 @@ class Image(Base):
             response.app_iter = pyramid.response.FileIter(self.context.open())
 
         # Workaround for <https://github.com/Pylons/webob/issues/130>
-        response.content_type = self.context.mimeType
+        response.content_type = self.context.mimeType.encode('utf-8')
         response.headers['Content-Type'] = response.content_type
+        response.headers['Content-Length'] = str(self.context.size)
+        response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
+            os.path.basename(self.context.uniqueId).encode('utf8'))
         return response

@@ -92,6 +92,7 @@ module.exports = function(grunt) {
 					'javascript/libs/modernizr.custom.42776.js',
 					'javascript/libs/require.js',
 					'javascript/libs/sasmobile.js',
+					'javascript/libs/sjcl.js',
 					'javascript/libs/postscribe.min.js'
 				],
 				// devel: true, // accept console etc.

@@ -1,4 +1,6 @@
 from babel.dates import format_datetime
+from repoze.bitblt.transform import compute_signature
+from urlparse import urlsplit, urlunsplit
 import grokcore.component.zcml
 import jinja2
 import logging
@@ -76,6 +78,7 @@ class Application(object):
         jinja.filters['format_date'] = format_date
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
+        jinja.filters['default_image_url'] = default_image_url
         jinja.trim_blocks = True
         return jinja
 
@@ -182,6 +185,8 @@ def translate_url(context, url):
     # XXX Is it really not possible to get to the actual template variables
     # (like context, view, request) through the jinja2 context?!??
     request = pyramid.threadlocal.get_current_request()
+    if request is None:  # XXX should only happen in tests
+        return url
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
@@ -189,3 +194,20 @@ def format_date(obj, type):
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
         return format_datetime(obj, format, locale="de_De")
+
+
+# definition of default images sizes per layout context
+default_images_sizes = dict(
+    large=(300, 200),
+)
+
+
+def default_image_url(image):
+    width, height = default_images_sizes.get(image.layout, (160, 90))
+    # TODO: use secret from settings?
+    signature = compute_signature(width, height, 'time')
+    scheme, netloc, path, query, fragment = urlsplit(image.src)
+    parts = path.split('/')
+    parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
+    path = '/'.join(parts)
+    return urlunsplit((scheme, netloc, path, query, fragment))

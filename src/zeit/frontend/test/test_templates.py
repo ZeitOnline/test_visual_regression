@@ -1,4 +1,5 @@
 from mock import Mock
+from re import match
 import pyramid.config
 import pytest
 import zeit.frontend.application
@@ -215,17 +216,24 @@ def test_image_should_produce_markup(jinja2_env):
            {'layout': 'small', 'align': False, 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test'}]
 
+    class Image(object):
+
+        src = '/img/artikel/01/01.jpg'
+
+        def __init__(self, data):
+            vars(self).update(data)
+
     for el in obj:
         print el['css']
-        lines = tpl.module.image(el).splitlines()
+        lines = tpl.module.image(Image(el)).splitlines()
         output = ""
         for line in lines:
             output += line.strip()
         markup = '<figure class="%s"><img class="figure__media"' \
-            ' src="http://placehold.it/160x90"><figcaption' \
+            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg"><figcaption' \
             ' class="figure__caption">testtest</figcaption></figure>' \
             % el['css']
-        assert markup == output
+        assert match(markup, output)
 
 
 def test_macro_head_image_longform_should_produce_markup(jinja2_env):
