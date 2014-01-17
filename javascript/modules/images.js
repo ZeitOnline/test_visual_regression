@@ -2,8 +2,6 @@
 
 define(['jquery'], function() {
 
-    var rescale_threshold = 1.5;
-
     var prefix = function(width, height) {
         var key = width + ':' + height + ':time';
         var out = sjcl.hash.sha1.hash(key);
