@@ -29,8 +29,6 @@
 
         {% for page in view.pages %}
           <section class="article__page">
-            {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
-
             <div class="article__page-wrap">
 
               {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
