@@ -12,6 +12,7 @@ setup(
         'martian',
         'pyramid',
         'pyramid_jinja2',
+        'repoze.bitblt',
         'setuptools',
         'simplejson',
         'supervisor',
@@ -32,6 +33,12 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'pytest',
+            'pytest-localserver',
+            'pytest-pep8',
+            'requests',
+            'selenium',
+            'webtest',
         ],
     },
     namespace_packages=['zeit'],

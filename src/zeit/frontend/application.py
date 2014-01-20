@@ -1,9 +1,13 @@
 from babel.dates import format_datetime
+from repoze.bitblt.transform import compute_signature
+from urlparse import urlsplit, urlunsplit
 import grokcore.component.zcml
+import jinja2
 import logging
 import martian
 import pkg_resources
 import pyramid.config
+import pyramid.threadlocal
 import pyramid_jinja2
 import urlparse
 import zeit.frontend
@@ -46,6 +50,7 @@ class Application(object):
         self.configure_jinja()
 
         log.debug('Configuring Pyramid')
+        config.add_route('home', '/')
         config.add_route('json', 'json/*traverse')
         config.add_static_view(name='css', path='zeit.frontend:css/')
         config.add_static_view(name='js', path='zeit.frontend:js/')
@@ -73,6 +78,7 @@ class Application(object):
         jinja.filters['format_date'] = format_date
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
+        jinja.filters['default_image_url'] = default_image_url
         jinja.trim_blocks = True
         return jinja
 
@@ -172,11 +178,37 @@ def maybe_convert_egg_url(url):
         parts.netloc, parts.path[1:])
 
 
-def translate_url(obj):
-    return obj.replace("xml.zeit.de", "www.zeit.de", 1)
+@jinja2.contextfilter
+def translate_url(context, url):
+    if url is None:
+        return None
+    # XXX Is it really not possible to get to the actual template variables
+    # (like context, view, request) through the jinja2 context?!??
+    request = pyramid.threadlocal.get_current_request()
+    if request is None:  # XXX should only happen in tests
+        return url
+    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
 def format_date(obj, type):
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
         return format_datetime(obj, format, locale="de_De")
+
+
+# definition of default images sizes per layout context
+default_images_sizes = dict(
+    large=(800, 600),
+    small=(200, 300),
+)
+
+
+def default_image_url(image):
+    width, height = default_images_sizes.get(image.layout, (640, 480))
+    # TODO: use secret from settings?
+    signature = compute_signature(width, height, 'time')
+    scheme, netloc, path, query, fragment = urlsplit(image.src)
+    parts = path.split('/')
+    parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
+    path = '/'.join(parts)
+    return urlunsplit((scheme, netloc, path, query, fragment))

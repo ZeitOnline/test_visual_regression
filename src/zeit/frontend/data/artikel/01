@@ -113,7 +113,7 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
         <subtitle>Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das über die Gentrifizierung? Ein Erklärungsversuch.</subtitle>
         <byline>von  Marie Schmidt</byline>
         <division type="page">
-            <image src="/img/artikel/01/01.jpg" xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/lebensart/2013-10/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00" layout="large" is_empty="False">
+            <image src="http://xml.zeit.de/exampleimages/artikel/01/01.jpg" xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/lebensart/2013-10/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00" layout="large" is_empty="False">
                 <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
                 <copyright>© Andreas Gebert/dpa</copyright>
             </image>
