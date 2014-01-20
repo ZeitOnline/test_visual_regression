@@ -229,8 +229,8 @@ def test_image_should_produce_markup(jinja2_env):
         output = ""
         for line in lines:
             output += line.strip()
-        markup = '<figure class="%s"><img class="figure__media"' \
-            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg"><figcaption' \
+        markup = '<figure class="%s"><div class="scaled-image"><noscript><img class="figure__media"' \
+            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" data-ratio=""></noscript></div><figcaption' \
             ' class="figure__caption">testtest</figcaption></figure>' \
             % el['css']
         assert match(markup, output)
