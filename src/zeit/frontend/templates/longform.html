@@ -5,9 +5,18 @@
 	<article class="article article--longform">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
-  				{% if view.header_img %}
-  					{{ blocks.head_image_longform(view.header_img) }}
-  				{% endif %}
+        
+  				<!--{% if view.header_img %}-->
+  					<!--{{ blocks.head_image_longform(view.header_img) }}-->
+  				<!--{% endif %}-->
+
+          <div class="article__main-image--longform"> 
+            <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+                  <source src="http://brightcove04.o.brightcove.com/18140073001/18140073001_955299532001_ameise-ohnemusik.mp4" type="video/mp4">
+                  <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201311/3753/18140073001_2855836420001_klima.jpg?pubId=18140073001">
+              </video>
+          </div>
+
   				<header class="article__title-wrap">
   					<h2 class="article__supertitle">
   						{{ view.supertitle }}

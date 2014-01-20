@@ -303,7 +303,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id -%}
+    {% if obj.id and obj.format != 'background' -%}
         <figure class="
         {% if obj.format == 'small' %}
             figure-stamp
@@ -322,6 +322,13 @@
                     {{obj.description}}
             </figcaption>
         </figure>
+    {%- elif obj.id and obj.format == 'background' %} 
+        <!-- <div>
+            <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+                <source src="{{obj.source}}" type="video/mp4">
+                <img src="{{obj.video_still}}">
+            </video>
+        </div> -->
     {%- endif %}
 {%- endmacro %}
 
