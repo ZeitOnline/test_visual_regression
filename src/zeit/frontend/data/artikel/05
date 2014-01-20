@@ -121,7 +121,7 @@
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
-            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
+            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>

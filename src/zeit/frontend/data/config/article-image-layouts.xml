@@ -9,6 +9,7 @@
   <layout id="upright" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
 
   <layout id="zmo-xl" available="zeit.magazin.interfaces.IZMOContent">XL</layout>
+  <layout id="zmo-xl-header" available="zeit.magazin.interfaces.IZMOContent">XL</layout>
   <layout id="zmo-medium" available="zeit.magazin.interfaces.IZMOContent">M hochkant mittig</layout>
   <layout id="zmo-large-left" available="zeit.magazin.interfaces.IZMOContent">L links</layout>
   <layout id="zmo-large-center" available="zeit.magazin.interfaces.IZMOContent">L mittig</layout>

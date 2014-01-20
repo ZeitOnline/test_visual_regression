@@ -255,7 +255,8 @@
 {%- endmacro %}
 
 {% macro head_image_longform(obj) -%}
-    <div class="article__main-image--longform" style="background-image: url({{obj.src | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
+    <div class="article__main-image--longform" style="background-image:
+    url({{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
     </div>
 {%- endmacro %}
 
