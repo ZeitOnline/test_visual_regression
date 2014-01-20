@@ -69,6 +69,12 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     assert article_view.header_img.src == url
 
 
+def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    body = zeit.content.article.edit.interfaces.IEditableBody(context)
+    assert zeit.frontend.block.Image(body.values()[0]) is None
+
+
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):
     r = requests.get(testserver.url + '/exampleimages/artikel/01/01.jpg')
     assert r.headers['content-type'] == 'image/jpeg'

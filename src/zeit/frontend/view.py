@@ -81,7 +81,7 @@ class Article(Base):
     def header_img(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
-            return zeit.frontend.block.Image(body.values()[0])
+            return zeit.frontend.block.HeaderImage(body.values()[0])
 
     @property
     def author(self):
