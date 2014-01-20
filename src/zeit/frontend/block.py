@@ -114,6 +114,7 @@ class Citation(object):
 class Video(object):
 
     def __init__(self, model_block):
+        # import pdb;pdb.set_trace()
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
         self.video_still = model_block.video.video_still
