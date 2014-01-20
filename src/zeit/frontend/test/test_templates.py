@@ -238,14 +238,22 @@ def test_image_should_produce_markup(jinja2_env):
 
 def test_macro_head_image_longform_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    obj = {'caption': 'test', 'copyright': 'test', 'src': 'test.gif'}
+    obj = Mock()
+    obj.caption = 'test'
+    obj.copyright = 'test'
+    obj.src = 'test.gif'
+
     lines = tpl.module.head_image_longform(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-    markup = '<div class="article__main-image--longform"' \
-        ' style="background-image: url(test.gif)";>testtest</div>'
-    assert markup == output
+    start = '<div class="article__main-image--longform"' \
+        ' style="background-image:url('
+
+    end = 'test.gif)";>testtest</div>'
+    assert output.startswith(start)
+    assert output.endswith(end)
+
 
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
