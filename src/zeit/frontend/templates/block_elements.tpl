@@ -106,6 +106,24 @@
     </nav>
 {%- endmacro %}
 
+{% macro main_nav_compact() -%}
+    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
+        <div class="main-nav__wrap">
+            <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="Zeit Online">
+                <div class="main-nav__logo__wrap">
+                    <img src="/img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                </div>
+            </a>
+            <div class="main-nav__menu">
+                <aside class="main-nav__sharing">
+                    <a href="http://twitter.com/home?status=Zeit.de" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://zeit.de&p[images][0]=&p[title]=Zeit.de&p[summary]=" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url=http://zeit.de" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
+                </aside>
+            </div>
+        </div>
+    </nav>
+{%- endmacro %}
+
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
@@ -224,7 +242,11 @@
             {% endif %}
         {% endif %}
         ">
-            <img class="figure__media" src="{{obj.src | default('http://placehold.it/160x90', true)}}">
+            <div class="scaled-image">
+                <noscript>
+                        <img class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+                </noscript>
+            </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
                 {{obj.copyright}}
@@ -233,7 +255,8 @@
 {%- endmacro %}
 
 {% macro head_image_longform(obj) -%}
-    <div class="article__main-image--longform" style="background-image: url({{obj.src | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
+    <div class="article__main-image--longform" style="background-image:
+    url({{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
     </div>
 {%- endmacro %}
 

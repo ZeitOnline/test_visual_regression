@@ -6,7 +6,13 @@ from zeit.content.article.edit.interfaces import IImage
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
+import os.path
+import pyramid.response
+import zeit.connector.connector
+import zeit.connector.interfaces
 import zeit.content.article.interfaces
+import zeit.content.image.interfaces
+import zope.component
 
 
 class Base(object):
@@ -75,7 +81,7 @@ class Article(Base):
     def header_img(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
-            return zeit.frontend.block.Image(body.values()[0])
+            return zeit.frontend.block.HeaderImage(body.values()[0])
 
     @property
     def author(self):
@@ -154,10 +160,6 @@ class Article(Base):
         return l
 
 
-class Gallery(Base):
-    pass
-
-
 @view_config(route_name='json',
              context=zeit.content.article.interfaces.IArticle,
              renderer='json', name='teaser')
@@ -170,3 +172,34 @@ class Teaser(Article):
     def teaser_text(self):
         """docstring for teaser"""
         return self.context.teaser
+
+
+@view_config(context=zeit.content.image.interfaces.IImage)
+class Image(Base):
+
+    def __call__(self):
+        connector = zope.component.getUtility(
+            zeit.connector.interfaces.IConnector)
+        if not isinstance(connector, zeit.connector.connector.Connector):
+            # Default case: filesystem. We can avoid loading the image
+            # contents into memory here, and instead simply tell the web server
+            # to stream out the file by giving its absolute path.
+            repository_path = connector.repository_path
+            if not repository_path.endswith('/'):
+                repository_path += '/'
+            response = pyramid.response.FileResponse(
+                self.context.uniqueId.replace(
+                    'http://xml.zeit.de/', repository_path),
+                content_type=self.context.mimeType)
+        else:
+            # Special case for DAV (preview environment)
+            response = self.request.response
+            response.app_iter = pyramid.response.FileIter(self.context.open())
+
+        # Workaround for <https://github.com/Pylons/webob/issues/130>
+        response.content_type = self.context.mimeType.encode('utf-8')
+        response.headers['Content-Type'] = response.content_type
+        response.headers['Content-Length'] = str(self.context.size)
+        response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
+            os.path.basename(self.context.uniqueId).encode('utf8'))
+        return response

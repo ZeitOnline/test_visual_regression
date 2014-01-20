@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
         binDir: 'bin/',
-		codeDir: 'src/zeit/frontend/',
+		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js'
 	};
@@ -28,10 +28,10 @@ module.exports = function(grunt) {
 					environment: 'development',
 					fontsPath: project.codeDir + 'fonts',
 					httpPath: "/", // todo: adjust this later in project
-					imagesPath: "src/zeit/frontend/img", // todo: adjust this later in project
+					imagesPath: "./src/zeit/frontend/img", // todo: adjust this later in project
 					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
-					sassDir: 'sass',
+					sassDir: './sass',
 					require: ['animation'],
 					raw: 'preferred_syntax=:sass\n'
 				}
@@ -92,6 +92,7 @@ module.exports = function(grunt) {
 					'javascript/libs/modernizr.custom.42776.js',
 					'javascript/libs/require.js',
 					'javascript/libs/sasmobile.js',
+					'javascript/libs/sjcl.js',
 					'javascript/libs/postscribe.min.js'
 				],
 				// devel: true, // accept console etc.
@@ -105,7 +106,7 @@ module.exports = function(grunt) {
 		grunticon: {
 			dist: {
 				options: {
-				src: "sass/icons",
+				src: "./sass/icons",
 				dest: project.codeDir + "/css/icons"
 			}
 		}
