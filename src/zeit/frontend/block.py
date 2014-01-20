@@ -95,6 +95,10 @@ class Video(object):
         self.format = model_block.layout
         self.video_still = model_block.video.video_still
         self.description = model_block.video.subtitle
+        # not in vivi yet, set static for testing
+        self.source = ("http://brightcove04.o.brightcove.com/"
+                       "18140073001/18140073001_955299532001_"
+                       "ameise-ohnemusik.mp4")  # XXX ugly
 
 
 def _inline_html(xml):
