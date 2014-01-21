@@ -10,6 +10,8 @@ import pyramid.config
 import pyramid.threadlocal
 import pyramid_jinja2
 import urlparse
+import zeit.connector.connector
+import zeit.connector.interfaces
 import zeit.frontend
 import zeit.frontend.block
 import zeit.connector.mock
@@ -93,10 +95,8 @@ class Application(object):
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
-        zope.configuration.xmlconfig.include(
-            context, package=zeit.connector, file='%s-connector.zcml' %
-            self.settings['connector_type'])
-
+        zope.component.provideUtility(
+            self.configure_connector(), zeit.connector.interfaces.IConnector)
         # can't use <grok> directive since we can't configure excludes there
         martian.grok_dotted_name(
             'zeit.frontend',
@@ -104,6 +104,20 @@ class Application(object):
             exclude_filter=lambda name: name in set(self.DONT_GROK),
             config=context)
         context.execute_actions()
+
+    def configure_connector(self):
+        typ = self.settings['connector_type']
+      # XXX zeit.connector should have a ZCML file for plain-dav
+        if typ == 'dav':
+            config = zope.app.appsetup.product.getProductConfiguration(
+                'zeit.connector')
+            return zeit.connector.connector.Connector(
+                dict(default=config.get('document-store')))
+        elif typ == 'filesystem':
+            return zeit.connector.mock.filesystem_connector_factory()
+        raise ValueError(
+            'Invalid setting connector_type=%s, allowed are {dav, filesystem}'
+            % typ)
 
     def configure_product_config(self):
         """Sets values of Zope Product Config used by vivi for configuration,
