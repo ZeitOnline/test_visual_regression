@@ -9,10 +9,10 @@ define(['jquery'], function() {
         return '/bitblt-' + width + 'x' + height + '-' + digest;
     };
 
-    var rescale = function(image) {
+    var rescale = function(image, width, height) {
         var img = $(image);
-        var width = img.width();
-        var height = img.height() || Math.round(width / img.data('ratio'));
+        width = width || img.width();
+        height = height || img.height() || Math.round(width / img.data('ratio'));
         var token = prefix(width, height);
         var src = image.src || img.data('src');
         image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);

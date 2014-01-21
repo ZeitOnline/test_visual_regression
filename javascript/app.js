@@ -15,21 +15,15 @@ require.config({
 			deps: [ 'jquery' ],
 			exports: 'jQuery.fn.bxSlider'
 		}
+	},{
+		'modules/plugins/jquery.enablepopups': {
+			deps: [ 'jquery' ],
+			exports: 'jQuery.fn.enablePopups'
+		}
 	}]
 });
 
-require([
-	'modules/fontloader',
-	'modules/breadcrumbs',
-	'modules/tabs',
-	'modules/comments',
-	'modules/main-nav',
-	'modules/adloader',
-	'modules/images',
-	'sjcl',
-	'modules/plugins/jquery.switchvideo',
-	'libs/jquery.bxslider'
-	],
+require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo', 'libs/jquery.bxslider', 'modules/plugins/jquery.enablepopups'],
   function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
     fontloader.init();
     main_nav.init();
@@ -38,6 +32,7 @@ require([
     comments.init();
     adloader.init();
     images.init();
-	$( "figure[data-video]" ).switchVideo();
-	$( "figure.gallery__inline").bxSlider();
+    $( "figure[data-video]" ).switchVideo();
+    $( "a.js-has-popup" ).enablePopups();
+    $( "figure.gallery__inline").bxSlider();
 });

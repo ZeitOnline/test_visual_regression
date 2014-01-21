@@ -95,11 +95,16 @@
             {% else %}
             <div class="page-wrap--inner" id="js-page-wrap-inner">
             {% endif %}
+
+            {% if view.context.is_longform %}
+                {{ blocks.main_nav_compact() }}
+            {% else %}
                 {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
-                <main role="main" class="main">
-                    {%  block content %}{% endblock content %}
-                </main>
-            </div>
+            {% endif %}
+
+            <main role="main" class="main">
+                {%  block content %}{% endblock content %}
+            </main>
 
         </div>
 

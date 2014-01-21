@@ -16,7 +16,12 @@ class IFrontendBlock(zope.interface.Interface):
     This interface is both a marker for identifying front-end objects
     representing blocks, and a mechanical detail of using the ZCA to construct
     such a front-end representation of a given vivi article-body block.
+    """
 
+
+class IFrontendHeaderBlock(zope.interface.Interface):
+    """ A HeaderBlock identifies elements that appear only in headers of
+    the content.
     """
 
 
@@ -52,7 +57,7 @@ class Paragraph(object):
 class Image(object):
 
     def __new__(cls, model_block):
-        if model_block.layout == 'zmo-xl':
+        if model_block.layout == 'zmo-xl-header':
             return None
         return super(Image, cls).__new__(cls, model_block)
 
@@ -69,6 +74,17 @@ class Image(object):
     def ratio(self):
         width, height = PIL.Image.open(self.image.open()).size
         return float(width) / float(height)
+
+
+@implementer(IFrontendHeaderBlock)
+@adapter(zeit.content.article.edit.interfaces.IImage)
+class HeaderImage(Image):
+
+    def __new__(cls, model_block):
+        return super(Image, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block):
+        super(HeaderImage, self).__init__(model_block)
 
 
 @implementer(IFrontendBlock)
