@@ -12,6 +12,7 @@ import pyramid_jinja2
 import urlparse
 import zeit.frontend
 import zeit.frontend.block
+import zeit.connector.mock
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -56,6 +57,8 @@ class Application(object):
         config.add_static_view(name='js', path='zeit.frontend:js/')
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
+
+        #ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         config.set_root_factory(self.get_repository)
