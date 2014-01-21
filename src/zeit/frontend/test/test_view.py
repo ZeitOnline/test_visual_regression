@@ -79,3 +79,10 @@ def test_image_view_returns_image_data_for_filesystem_connector(testserver):
     r = requests.get(testserver.url + '/exampleimages/artikel/01/01.jpg')
     assert r.headers['content-type'] == 'image/jpeg'
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
+
+
+def test_inline_gallery_should_be_contained_in_body(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    body = zeit.content.article.edit.interfaces.IEditableBody(context)
+    assert body.values == []
