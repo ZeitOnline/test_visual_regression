@@ -14,8 +14,6 @@ setup(
         'pyramid_jinja2',
         'setuptools',
         'simplejson',
-        'supervisor',
-        'waitress',
         'zeit.cms',
         'zeit.connector >= 2.1.0.dev0',
         'zeit.content.article',
@@ -32,6 +30,13 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'pytest',
+            'pytest-localserver',
+            'pytest-pep8',
+            'repoze.bitblt',
+            'requests',
+            'selenium',
+            'webtest',
         ],
     },
     namespace_packages=['zeit'],

@@ -2,7 +2,8 @@
 
 require.config({
 	paths: {
-    "jquery": "libs/jquery-1.10.2.min"
+		"jquery": "libs/jquery-1.10.2.min",
+		"sjcl": "libs/sjcl"
 	},
 	shim: {
 		'modules/plugins/jquery.switchvideo': {
@@ -16,14 +17,15 @@ require.config({
 	}
 });
 
-require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/plugins/jquery.switchvideo', 'modules/plugins/jquery.enablepopups'],
-  function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader) {
+require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo', 'modules/plugins/jquery.enablepopups'],
+  function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
     fontloader.init();
     main_nav.init();
     breadcrumbs.init();
     tabs.init();
     comments.init();
     adloader.init();
+    images.init();
     $( "figure[data-video]" ).switchVideo();
-		$( "a.js-has-popup" ).enablePopups();
+    $( "a.js-has-popup" ).enablePopups();
 });

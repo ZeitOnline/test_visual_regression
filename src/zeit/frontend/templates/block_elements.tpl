@@ -242,7 +242,11 @@
             {% endif %}
         {% endif %}
         ">
-            <img class="figure__media" src="{{obj.src | default('http://placehold.it/160x90', true)}}">
+            <div class="scaled-image">
+                <noscript>
+                        <img class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+                </noscript>
+            </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
                 {{obj.copyright}}
@@ -251,7 +255,8 @@
 {%- endmacro %}
 
 {% macro head_image_longform(obj) -%}
-    <div class="article__main-image--longform" style="background-image: url({{obj.src | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
+    <div class="article__main-image--longform" style="background-image:
+    url({{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
     </div>
 {%- endmacro %}
 

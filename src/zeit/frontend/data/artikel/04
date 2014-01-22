@@ -100,19 +100,19 @@
         <title>Kann Leipzig Hypezig überleben?</title>
         <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen &#8211; aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
         <division type="page">
-            <image align="left" src="/img/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
+            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen. <a href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank" class="">"Disneyland des Unperfekten"</a> wurde die Stadt in einem Artikel der <em>FAZ</em> getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein <a href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank" class="">"Biotop der Schwulenszene"</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich "Hypezig" etabliert.  </p>
-            <image align="" src="/img/artikel/04/02.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
+            <image align="" src="http://xml.zeit.de/exampleimages/artikel/04/02.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Die Kritik an der medialen Hochjubelei folgte auf dem Fuße: Der Leipziger Publizist André Hermann sammelt auf dem Blog <em>
                 <a href="http://hypezig.tumblr.com/" target="_blank" class="">Hypezig</a>
                 </em> die Medienberichte über seine Stadt und ärgert sich darüber, dass die problematischen Seiten in den Berichten stets untergehen. Dass öffentliches Geld im City-Tunnel versenkt werde, viele Leipziger die Inszenierung des Völkerschlachtdenkmals als Top-Sehenswürdigkeit durchaus fragwürdig fänden und die Förderung der freien Kunstszene noch immer auf sich warten ließe, würde schlicht verschwiegen. Hermanns Kritik ist durchaus berechtigt, in Leipzig ist nicht alles Gold, was glänzt. Und doch würden viele Leipziger niemals woanders leben wollen.  </p>
-                <image align="left" src="/img/artikel/04/03.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+                <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/03.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
                 </image>
@@ -128,7 +128,7 @@
         <advertising type="rectangle" />
     <p>Den Titel der Armutshauptstadt hat Leipzig vor Kurzem an Dortmund abgegeben, in der Liste der am meisten von Armut bedrohten Großstädte steht die Messestadt jetzt auf Rang zwei. Viele Menschen in der Stadt leben nicht freiwillig am Existenzminimum, sie haben sich nicht bewusst dafür entschieden, mit sehr wenig Geld auszukommen. Aber es gibt auch jene, die sich diese Stadt zum Leben aussuchen, weil sie bei 80 Euro Miete mit 200 Euro Einkommen zur Sicherung ihrer Existenz hinkommen. Wo geht das noch? Wo kann man ein bisschen arbeiten, um jede Menge zu leben?  <br/>
         </p>
-    <image align="left" src="/img/artikel/04/04.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
+    <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/04.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -147,13 +147,13 @@
     <p>"In Leipzig gibt es noch günstige Immobilien", sagt auch Jochen Schmidt vom Mietshäuser <a href="http:// www.syndikat.org" target="_blank" class="">Syndikat</a>. Das Syndikat hilft Wohngemeinschaften, ihre Häuser zu kaufen und sie über die Gründung einer gemeinsamen GmbH mit einem Vetorechtsystem vor Spekulationsverkäufen zu schützen. So sollen hohe, renditegetriebene Mieten verhindert werden. Wohnen kann man in den Häusern des Syndikats zu Preisen, die dauerhaft auf Hartz-IV-Niveau liegen.</p>
     <citation text="Es war ein Gedankenanstoß, aber wir sind schnell auf Widerstand gestoßen." attribution="Ariane Jedlitschka, Kunstschaffende" layout="wide"/>
     <p>Privat organisieren ohne zu privatisieren &#8211; Ansätze für solche Formen der Verwaltung gibt es in Leipzig auch für öffentliche Räume. Ariane Jedlitschka hat gemeinsam mit zwei anderen Kunstschaffenden angeregt, das <a href="http://www.deinfeld.de/" target="_blank" class="">Jahrtausendfeld</a> gemeinschaftlich zu erwerben, eine Brache im Leipziger Westen mit wildem Bewuchs. "Es war ein Gedankenanstoß", sagt Jedlitschka "aber wir sind schnell auf Widerstand gestoßen. Die kritische Masse hat einfach gefehlt." Akteure, die handeln und nicht nur meckern darüber, dass die anderen ihnen etwaswegnehmen, gibt es auch in Leipzig zu wenige.   </p>
-    <image align="left" src="/img/artikel/04/07.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+    <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/07.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
     <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/reisen/2013-06/box-pia-volk" publication-date="" expires=""/>
     <p>Einige wenige der rund 2.000Brachflächen werden derzeit von der Stadt in offenen Stadtraum umgewandelt. Im Plattenbau-Stadtteil Grünau wurde an der Stelle eines abgerissenen Hochhauses <a href="http://www.bfn.de/0401_pm.html?tx_ttnews[tt_news]=4651" target="_blank" class="">einWald gepflanzt</a>. Auch am <a href="http://www.leipziger-westen.de/upload/bilder/Handlungsschwerpunkte/Bau_u_Sanierung/Rahmenplan_Bahnhof_Plagwitz_110907.pdf" target="_blank" class="">Bahnhof Plagwitz</a> soll ein Wäldchen entstehen, sogarein kleines Naturschutzgebiet. Aber es sind kleine Areale im Vergleich zu dem,was verschwinden könnte, wenn zum Immobilienboom und den bessergestellten Studenten auch noch mehr Wirtschaftswachstum in die Stadt kommt.  </p>
-    <image align="right" src="/img/artikel/04/06.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
+    <image align="right" src="http://xml.zeit.de/exampleimages/artikel/04/06.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Leipzig Hauptbahnhof ist mit einer Grundfläche von 83.640 Quadratmetern der flächenmäßig größte Kopfbahnhof Europas.</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
