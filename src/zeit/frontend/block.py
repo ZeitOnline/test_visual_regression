@@ -209,5 +209,8 @@ def _inline_html(xml):
             </xsl:template>
           <xsl:template match="@*" />
         </xsl:stylesheet>''' % (allowed_elements))
-    transform = etree.XSLT(filter_xslt)
-    return transform(xml)
+    try:
+        transform = etree.XSLT(filter_xslt)
+        return transform(xml)
+    except TypeError:
+        return None
