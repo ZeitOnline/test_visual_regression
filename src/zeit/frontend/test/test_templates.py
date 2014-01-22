@@ -229,8 +229,10 @@ def test_image_should_produce_markup(jinja2_env):
         output = ""
         for line in lines:
             output += line.strip()
-        markup = '<figure class="%s"><div class="scaled-image"><noscript><img class="figure__media"' \
-            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" data-ratio=""></noscript></div><figcaption' \
+        markup = '<figure class="%s"><div class="scaled-image"><noscript>' \
+            '<img class="figure__media"' \
+            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
+            'data-ratio=""></noscript></div><figcaption' \
             ' class="figure__caption">testtest</figcaption></figure>' \
             % el['css']
         assert match(markup, output)
@@ -254,7 +256,6 @@ def test_macro_head_image_longform_should_produce_markup(jinja2_env):
     end = '"></noscript></div>testtest'
     assert output.startswith(start)
     assert output.endswith(end)
-
 
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
@@ -356,3 +357,26 @@ def test_macro_video_should_produce_markup(jinja2_env):
     for line in lines:
         output += line.strip()
     assert fig in output
+
+
+def test_macro_head_video_longform_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+
+    # assert default video
+    obj = {}
+    wrapper = '<div data-backgroundvideo="'
+    video = '<video preload="auto" autoplay="true" ' \
+            'loop="loop" muted="muted" volume="0" poster="'
+    source = '<source '
+    img = '<img '
+    fallback = '<div class="article__main-image--longform' \
+        ' video--fallback" style="background-image:url'
+    lines = tpl.module.head_video_longform(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert wrapper in output
+    assert video in output
+    assert source in output
+    assert img in output
+    assert fallback in output
