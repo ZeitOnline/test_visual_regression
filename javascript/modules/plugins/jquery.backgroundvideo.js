@@ -17,14 +17,14 @@ define(['jquery'], function() {
 			$(this).each(function(){
 				
 				var $element = $( this );
-
-				if( Modernizr.backgroundsize ) {
+		
+				if( Modernizr.touch || !Modernizr.video ) {
 
 					$element.find( "video" ).remove();
 					$element.find( "div" ).show();
 
 				}else{
-
+					
 					el.setVideoPosition( $element );
 
 					//reset video position on resize
