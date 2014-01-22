@@ -336,21 +336,21 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert cap in output
 
     # assert different formates
-    obj['format'] = 'small'
+    obj['format'] = 'zmo-small'
     fig = '<figure class="figure-stamp" data-video="1">'
     lines = tpl.module.video(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
     assert fig in output
-    obj['format'] = 'small-right'
+    obj['format'] = 'zmo-small-right'
     fig = '<figure class="figure-stamp--right" data-video="1">'
     lines = tpl.module.video(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
     assert fig in output
-    obj['format'] = 'large'
+    obj['format'] = 'zmo-large'
     fig = '<figure class="figure-full-width" data-video="1">'
     lines = tpl.module.video(obj).splitlines()
     output = ""
