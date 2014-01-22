@@ -247,10 +247,11 @@ def test_macro_head_image_longform_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    start = '<div class="article__main-image--longform"' \
-        ' style="background-image:url('
 
-    end = 'test.gif)";>testtest</div>'
+    start = '<div class="scaled-image is-pixelperfect">' \
+        '<noscript><img class="article__main-image--longform" src="'
+
+    end = '"></noscript></div>testtest'
     assert output.startswith(start)
     assert output.endswith(end)
 
