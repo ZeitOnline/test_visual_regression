@@ -85,4 +85,8 @@ def test_inline_gallery_should_be_contained_in_body(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = view.Article(context, '')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    assert body.values == []
+    hastpye = False
+    for value in body.values():
+        if value.type == 'gallery':
+            hastype = True
+    assert hastype
