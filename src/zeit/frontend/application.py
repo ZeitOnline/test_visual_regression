@@ -12,6 +12,7 @@ import pyramid_jinja2
 import urlparse
 import zeit.connector.connector
 import zeit.connector.interfaces
+import zeit.connector.mock
 import zeit.frontend
 import zeit.frontend.block
 import zeit.connector.mock
