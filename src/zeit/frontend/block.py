@@ -120,6 +120,24 @@ class Video(object):
         self.description = model_block.video.subtitle
 
 
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IGallery)
+class InlineGallery(object):
+
+    def __init__(self, model_block):
+      self._gallery_items = model_block.references.items
+
+    def items(self):
+      my_items = []
+      for item in self._gallery_items():
+        src, entry = item
+        if(entry.layout != 'hidden'):
+          # not ready: entry has the gallery entry object
+          # entry.image is a RepositoryImage
+          # dead end here
+          my_items.append(entry)
+      return my_items
+
 def _inline_html(xml):
     allowed_elements = "a|span|strong|img|em|sup|sub|caption"
     filter_xslt = etree.XML('''

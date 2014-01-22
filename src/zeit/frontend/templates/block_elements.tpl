@@ -416,3 +416,15 @@
         </div>
     </section>
 {%- endmacro %}
+
+{% macro inlinegallery(obj) -%}
+    {% set items = obj.items() %}
+    <div class="inline-gallery">
+        <ul class="inline-gallery__bxslider">
+            {% for item in items %}
+            <!-- Gallery-Items as block.image(obj) -->
+            <li>{{ image(item) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{%- endmacro %}
