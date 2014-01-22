@@ -255,9 +255,9 @@
 {%- endmacro %}
 
 {% macro head_image_longform(obj) -%}
-    <div class="scaled-image">
+    <div class="scaled-image is-pixelperfect">
         <noscript>
-            <img class="article__main-image--longform figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+            <img class="article__main-image--longform" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
         </noscript>
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
