@@ -303,13 +303,13 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and obj.format != 'background' -%}
+    {% if obj.id and obj.format != 'zmo-background' -%}
         <figure class="
-        {% if obj.format == 'small' %}
+        {% if obj.format == 'zmo-small' %}
             figure-stamp
-        {% elif obj.format == 'large' %}
+        {% elif obj.format == 'zmo-large' %}
             figure-full-width
-        {% elif obj.format == 'small-right' %}
+        {% elif obj.format == 'zmo-small-right' %}
              figure-stamp--right
         {% else %}
              figure is-constrained is-centered

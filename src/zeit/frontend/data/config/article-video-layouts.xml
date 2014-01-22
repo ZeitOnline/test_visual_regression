@@ -11,5 +11,5 @@
   <layout id="zmo-small-right" available="zeit.magazin.interfaces.IZMOContent">S rechts</layout>
   <layout id="zmo-medium" available="zeit.magazin.interfaces.IZMOContent">M</layout>
   <layout id="zmo-large" available="zeit.magazin.interfaces.IZMOContent">L</layout>
-  <layout id="background" available="zeit.magazin.interfaces.IZMOContent">Hintergrund</layout>
+  <layout id="zmo-background" available="zeit.magazin.interfaces.IZMOContent">Hintergrund</layout>
 </video-layouts>

@@ -121,7 +121,7 @@
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
-            <video format="background" is_empty="True" href="http://xml.zeit.de/video/2013-11/1953013471001" expires=""/>
+            <video format="zmo-background" is_empty="True" href="http://xml.zeit.de/video/2013-11/1953013471001" expires=""/>
             <p>Auch der Tod hat in Deutschland ein exaktes Maß. 213 Zentimeter lang, 83
       Zentimeter breit und 170 Zentimeter tief muss die Grube werden, die Artur und Jürgen an diesem
       Morgen schaufeln, abgeschirmt von Rhododendren und im Schutz der frühen Stunde. Auf dem alten,
@@ -132,7 +132,7 @@
       schnauzbärtiger Schweiger, die Baggerschaufel in den Boden beißen. Gras zerreißt. Mäuse
       fliehen. Ein Frosch springt in die Büsche. Nach zwanzig Zentimetern winden sich erste
       Würmer.</p>
-      <video format="small" is_empty="True" href="http://xml.zeit.de/video/2013-11/2855680816001" expires=""/>
+      <video format="zmo-small" is_empty="True" href="http://xml.zeit.de/video/2013-11/2855680816001" expires=""/>
             <p>"Da kommt noch mehr", sagt Artur und stützt sich auf den Spaten.</p>
             <p>Noch mehr? Auf Grabplatz M13-377 liegen Schicksale in Schichten. Eine alte Zink-Urne, die wie
       ein Blindgänger im Boden schlief – Deckelprägung "Rudolph S..., gest. 27. 5. 1961" – und die
@@ -212,7 +212,7 @@
       dem Stadtteil St. Georg beerdigt wurde: die Tischlerfrau Eva Maria Stülken, geborene
       Luegerbauer, gestorben mit 39 Jahren und seither Laufende Nummer 1 auf Seite 1 in Band I des
       Ohlsdorfer Grabkatasters.</p>
-      <video format="small-right" is_empty="True" href="http://xml.zeit.de/video/2013-11/2855680816001" expires=""/>
+      <video format="zmo-small-right" is_empty="True" href="http://xml.zeit.de/video/2013-11/2855680816001" expires=""/>
             <p>All die Grabfelder der Chinesen und Schweizer, der Muslime und Bahá’í, der Seeleute und
       Bürstenmacher, sie sind nicht trennend gemeint, sondern einigend. 1995 wurde eine
       regenbogenbunte Grabstätte für Aids-Tote geschaffen, als noch kein Mittel gegen die Krankheit
@@ -247,7 +247,7 @@
       jener Jahrgänge sterben, die früh damit angefangen haben, länger zu leben? Ein Grund ist auch:
       Die Menschen ziehen jung in die Stadt. Wenn sie alt werden, wandern sie ins Umland ab und
       sterben dort.</p>
-      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2013-11/2877141983001" expires=""/>
+      <video format="zmo-large" is_empty="True" href="http://xml.zeit.de/video/2013-11/2877141983001" expires=""/>
             <p>Manchmal, wenn die Toten ausbleiben, ruft Purwin bei den Bestattern an und fragt, wie es bei
       denen aussehe. "Wenn ich dann höre: ›Hier hat seit Wochen das Telefon nicht mehr geklingelt‹ –
       dann weiß ich wenigstens, es liegt nicht an uns."</p>
