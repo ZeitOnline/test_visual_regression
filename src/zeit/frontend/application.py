@@ -203,8 +203,14 @@ def translate_url(context, url):
     # XXX Is it really not possible to get to the actual template variables
     # (like context, view, request) through the jinja2 context?!??
     request = pyramid.threadlocal.get_current_request()
+
+
     if request is None:  # XXX should only happen in tests
         return url
+
+    if 'proxy_url' in request.registry.settings: # We might want the proxy url
+        proxy = request.registry.settings['proxy_url']
+        return  url.replace("http://xml.zeit.de/", proxy, 1)
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
