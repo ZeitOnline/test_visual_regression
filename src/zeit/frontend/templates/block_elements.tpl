@@ -325,6 +325,16 @@
     {%- endif %}
 {%- endmacro %}
 
+{% macro head_video_longform(obj) -%}
+    <div data-backgroundvideo="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" class="article__main-video--longform"> 
+        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+                <source src="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" type="video/mp4">
+                <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+        </video>
+            <div class="article__main-image--longform" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001)"></div>
+    </div>
+{%- endmacro %}
+
 {% macro comment(indented, img_url, name, min_ago, role, text) -%}
     <article class="comment {% if indented -%}is-indented{%- endif %}">
         <div class="comment__head">
