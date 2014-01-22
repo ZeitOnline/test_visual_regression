@@ -79,14 +79,12 @@ $bp-adjust-horizontal-figures--2: 1440px
     margin: $small auto $small auto
     font-size: $font-xl--px
     font-size: $font-xl--rem
-    max-width: 920px
+    max-width: $longform-content-max-width
+    max-width: rem($longform-content-max-width)
     +respond-min($break-1)
       font-size: $font-xxl--px
       font-size: $font-xxl--rem
-      margin-bottom: $medium
       margin-top: $medium
-    +respond-min($break-2)
-      padding-left: $gutter
     a
       display: block
       position: relative
@@ -99,10 +97,8 @@ $bp-adjust-horizontal-figures--2: 1440px
       display: inline
     @extend %meta
     max-width: em(240px)
-    background-color: $white
     border-bottom: $micro solid $grey
-    padding-top: $medium
-    padding-bottom: $gutter
+    padding: 0 $small
     margin-right: $gutter*2
     float: left
     position: relative
@@ -118,7 +114,7 @@ $bp-adjust-horizontal-figures--2: 1440px
         border-color: $grey
     span
       display: block
-      margin: $gutter $gutter $gutter $gutter
+      margin: $gutter 0
     .article__subpage-active
       color: $black
 
@@ -149,10 +145,14 @@ $bp-adjust-horizontal-figures--2: 1440px
   .article__title
     +tablet
     color: $white
+    line-height: 1.2
+    margin-bottom: $thin
 
   .article__body
     padding-left: 0
     padding-right: 0
+    background-color: $white
+
 
   .article__page
     padding-top: $small
@@ -161,12 +161,19 @@ $bp-adjust-horizontal-figures--2: 1440px
     +respond-min($break-1)
       padding-top: $medium
       padding-bottom: $medium
+    .article__subpage-index
+      background-color: $grey--bright
     &:nth-child(2n+1)
       background-color: $grey--light
+      .article__subpage-index
+        background-color: $white
+    &:first-child
+      +respond-min($break-3)
+        padding-top: $wide
 
   .article__page-wrap
     +padded
-    max-width: em(1460px)
+    max-width: $max-longform-width
     margin: 0 auto
 
   .quote--wide
