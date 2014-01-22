@@ -6,16 +6,11 @@
 		<div class="article__wrap">
 			<div class="article__head-wrap">
         
-  				<!--{% if view.header_img %}-->
-  					<!--{{ blocks.head_image_longform(view.header_img) }}-->
-  				<!--{% endif %}-->
-
-          <div class="article__main-image--longform"> 
-            <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
-                  <source src="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" type="video/mp4">
-                  <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
-              </video>
-          </div>
+          {% if view.header_img %}
+            {{ blocks.head_image_longform(view.header_img) }}
+          {% else %}
+            {{ blocks.head_video_longform(view.header_video) }}
+  				{% endif %}
 
   				<header class="article__title-wrap">
   					<h2 class="article__supertitle">
