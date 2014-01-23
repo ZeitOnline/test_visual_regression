@@ -32,7 +32,7 @@
             <div class="article__page-wrap">
 
               {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
-              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
+              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
 
               {% for item in page %}
                   {{ blocks[item|block_type](item)}}
