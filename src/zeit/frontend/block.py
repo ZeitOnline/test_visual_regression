@@ -121,6 +121,17 @@ class Video(object):
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 
+        highest_rendition = 0
+        index = 0
+
+        for rendition in model_block.video.renditions:
+            if(model_block.video.renditions[highest_rendition].frame_width
+              < rendition.frame_width):
+                highest_rendition = index
+            index = index + 1
+
+        self.source = model_block.video.renditions[highest_rendition].url
+
 
 def _inline_html(xml):
     allowed_elements = "a|span|strong|img|em|sup|sub|caption"

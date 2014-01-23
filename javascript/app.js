@@ -10,14 +10,18 @@ require.config({
 			deps: [ 'jquery' ],
 			exports: 'jQuery.fn.switchVideo'
 		},
-    'modules/plugins/jquery.enablepopups': {
-      deps: [ 'jquery' ],
-      exports: 'jQuery.fn.enablePopups'
-    }
+		'modules/plugins/jquery.backgroundvideo': {
+			deps: [ 'jquery' ],
+			exports: 'jQuery.fn.backgroundVideo'
+		},
+		'modules/plugins/jquery.enablepopups': {
+			deps: [ 'jquery' ],
+			exports: 'jQuery.fn.enablePopups'
+		}
 	}
 });
 
-require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo', 'modules/plugins/jquery.enablepopups'],
+require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo', 'modules/plugins/jquery.backgroundvideo', 'modules/plugins/jquery.enablepopups'],
   function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
     fontloader.init();
     main_nav.init();
@@ -27,5 +31,6 @@ require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/c
     adloader.init();
     images.init();
     $( "figure[data-video]" ).switchVideo();
+    $( "div[data-backgroundvideo]" ).backgroundVideo();
     $( "a.js-has-popup" ).enablePopups();
 });
