@@ -14,3 +14,7 @@ def test_inline_html_should_filter_to_valid_html():
 """
     print _inline_html(xml)
     assert xml_str == str(_inline_html(xml))
+
+def test_inline_html_should_return_none_on_non_xml_input():
+    assert _inline_html('foo') == None
+    assert _inline_html(None) == None
