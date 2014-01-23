@@ -205,7 +205,7 @@ def translate_url(context, url):
     if request is None:  # XXX should only happen in tests
         return url
 
-    if 'proxy_url' in request.registry.settings:  # We might want the proxy url
+    if request.registry.settings['proxy_url'] == '':
         proxy = request.registry.settings['proxy_url']
         return url.replace("http://xml.zeit.de/", proxy, 1)
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
