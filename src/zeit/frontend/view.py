@@ -3,6 +3,7 @@ from pyramid.renderers import render_to_response
 from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.article.edit.interfaces import IImage
+from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy

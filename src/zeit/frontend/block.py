@@ -114,10 +114,23 @@ class Citation(object):
 class Video(object):
 
     def __init__(self, model_block):
+        #import pdb;pdb.set_trace()
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
         self.video_still = model_block.video.video_still
         self.description = model_block.video.subtitle
+
+        highest_rendition = 0
+        index = 0
+        choose = 0
+
+        for rendition in model_block.video.renditions:
+            if(model_block.video.renditions[highest_rendition].frame_width 
+              < rendition.frame_width):
+                highest_rendition = index
+            index = index + 1
+
+        self.source = model_block.video.renditions[highest_rendition].url
 
 
 def _inline_html(xml):
