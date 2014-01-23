@@ -54,6 +54,21 @@ $bp-adjust-horizontal-figures--2: 1440px
     left: 0
     right: 0
 
+  .article__main-video--longform
+    overflow: hidden
+    position: relative
+    height: 100%
+    z-index: 1
+    .video--fallback
+      display: none
+    video
+      position: absolute
+      bottom: 0
+      left: 0
+      min-width: 100%
+      min-height: 100%
+      max-width: none
+      
   .article__title-wrap
     position: absolute
     overflow: hidden

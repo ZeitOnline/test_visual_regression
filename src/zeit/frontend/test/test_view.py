@@ -61,7 +61,7 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = view.Article(context, '')
     url = 'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
-    assert article_view.header_img.src == url
+    assert article_view.header_img is None
 
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view.Article(context, '')

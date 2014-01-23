@@ -16,6 +16,11 @@ require.config({
 			exports: 'jQuery.fn.bxSlider'
 		}
 	},{
+		'modules/plugins/jquery.backgroundvideo': {
+			deps: [ 'jquery' ],
+			exports: 'jQuery.fn.backgroundVideo'
+		}
+	},{
 		'modules/plugins/jquery.enablepopups': {
 			deps: [ 'jquery' ],
 			exports: 'jQuery.fn.enablePopups'
@@ -23,16 +28,31 @@ require.config({
 	}]
 });
 
-require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo', 'libs/jquery.bxslider', 'modules/plugins/jquery.enablepopups'],
-  function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
-    fontloader.init();
-    main_nav.init();
-    breadcrumbs.init();
-    tabs.init();
-    comments.init();
-    adloader.init();
-    images.init();
-    $( "figure[data-video]" ).switchVideo();
-    $( "a.js-has-popup" ).enablePopups();
-    $( "figure.gallery__inline").bxSlider();
-});
+require([
+	'modules/fontloader',
+	'modules/breadcrumbs',
+	'modules/tabs',
+	'modules/comments',
+	'modules/main-nav',
+	'modules/adloader',
+	'modules/images',
+	'sjcl',
+	'modules/plugins/jquery.switchvideo',
+	'libs/jquery.bxslider',
+	'modules/plugins/jquery.backgroundvideo',
+	'modules/plugins/jquery.enablepopups'
+	],
+	function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
+		fontloader.init();
+		main_nav.init();
+		breadcrumbs.init();
+		tabs.init();
+		comments.init();
+		adloader.init();
+		images.init();
+		$( "figure[data-video]" ).switchVideo();
+		$( "div[data-backgroundvideo]" ).backgroundVideo();
+		$( "a.js-has-popup" ).enablePopups();
+		$( "figure.gallery__inline").bxSlider();
+	}
+);

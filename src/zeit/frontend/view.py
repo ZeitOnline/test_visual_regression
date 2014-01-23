@@ -3,6 +3,7 @@ from pyramid.renderers import render_to_response
 from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.article.edit.interfaces import IImage
+from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
@@ -81,7 +82,8 @@ class Article(Base):
     def header_img(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
-            return zeit.frontend.block.HeaderImage(body.values()[0])
+            header_img = zeit.frontend.block.HeaderImage(body.values()[0])
+            return header_img if header_img.layout == 'zmo-xl-header' else None
 
     @property
     def author(self):

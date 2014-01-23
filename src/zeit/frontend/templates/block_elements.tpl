@@ -255,9 +255,11 @@
 {%- endmacro %}
 
 {% macro head_image_longform(obj) -%}
-    <div class="article__main-image--longform" style="background-image:
-    url({{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}})";>{{obj.caption}}{{obj.copyright}}
-    </div>
+    <div class="scaled-image is-pixelperfect">
+        <noscript>
+            <img class="article__main-image--longform" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        </noscript>
+    </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
 {% macro meta_author(author) -%}
@@ -301,13 +303,13 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id -%}
+    {% if obj.id and obj.format != 'zmo-background' -%}
         <figure class="
-        {% if obj.format == 'small' %}
+        {% if obj.format == 'zmo-small' %}
             figure-stamp
-        {% elif obj.format == 'large' %}
+        {% elif obj.format == 'zmo-large' %}
             figure-full-width
-        {% elif obj.format == 'small-right' %}
+        {% elif obj.format == 'zmo-small-right' %}
              figure-stamp--right
         {% else %}
              figure is-constrained is-centered
@@ -321,6 +323,17 @@
             </figcaption>
         </figure>
     {%- endif %}
+{%- endmacro %}
+
+{% macro head_video_longform(obj) -%}
+    <!-- TODO: remove test data -->
+    <div data-backgroundvideo="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" class="article__main-video--longform"> 
+        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+                <source src="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" type="video/mp4">
+                <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+        </video>
+            <div class="article__main-image--longform video--fallback" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001)"></div>
+    </div>
 {%- endmacro %}
 
 {% macro comment(indented, img_url, name, min_ago, role, text) -%}
