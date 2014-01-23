@@ -114,10 +114,12 @@ class Citation(object):
 class Video(object):
 
     def __init__(self, model_block):
-        self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
-        self.format = model_block.layout
+        if getattr(model_block, 'video', None) is None:
+            return None
         self.video_still = model_block.video.video_still
         self.description = model_block.video.subtitle
+        self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
+        self.format = model_block.layout
 
 
 def _inline_html(xml):
