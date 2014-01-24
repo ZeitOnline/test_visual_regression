@@ -164,7 +164,7 @@ class HeaderVideo(_Video):
         super(HeaderVideo, self).__init__(model_block)
 
 
-class InlineGalleryImage(object):
+class InlineGalleryImage(Image):
 
     def __init__(self, item):
         self.caption = item.caption
@@ -174,7 +174,7 @@ class InlineGalleryImage(object):
 
         if hasattr(item, 'image'):
             self.src = item.image.uniqueId
-
+            self.image = item.image
         image_meta = zeit.content.image.interfaces.IImageMetadata(item)
         self.copyright = image_meta.copyrights
         self.alt = image_meta.alt
@@ -193,9 +193,6 @@ class InlineGallery(object):
         for item in self._gallery_items():
             src, entry = item
             if(entry.layout != 'hidden'):
-                # not ready: entry has the gallery entry object
-                # entry.image is a RepositoryImage
-                # dead end here
                 my_items.append(InlineGalleryImage(entry))
         return my_items
 
