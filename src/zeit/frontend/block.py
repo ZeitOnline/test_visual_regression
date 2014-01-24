@@ -3,6 +3,7 @@ import PIL
 from lxml import etree
 from grokcore.component import adapter, implementer
 import zeit.content.article.edit.interfaces
+import zeit.content.image.interfaces
 import zope.interface
 import logging
 
@@ -161,6 +162,39 @@ class HeaderVideo(_Video):
 
     def __init__(self, model_block):
         super(HeaderVideo, self).__init__(model_block)
+
+
+class InlineGalleryImage(Image):
+
+    def __init__(self, item):
+        self.caption = item.caption
+        self.layout = "large" #item.layout
+        self.title = item.title
+        self.text = item.text
+
+        if hasattr(item, 'image'):
+            self.src = item.image.uniqueId
+            self.image = item.image
+        image_meta = zeit.content.image.interfaces.IImageMetadata(item)
+        self.copyright = image_meta.copyrights
+        self.alt = image_meta.alt
+        self.align = image_meta.alignment
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IGallery)
+class InlineGallery(object):
+
+    def __init__(self, model_block):
+        self._gallery_items = model_block.references.items
+
+    def items(self):
+        my_items = []
+        for item in self._gallery_items():
+            src, entry = item
+            if(entry.layout != 'hidden'):
+                my_items.append(InlineGalleryImage(entry))
+        return my_items
 
 
 def _inline_html(xml):

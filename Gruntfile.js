@@ -94,6 +94,9 @@ module.exports = function(grunt) {
 					'javascript/libs/sasmobile.js',
 					'javascript/libs/sjcl.js',
 					'javascript/libs/postscribe.min.js',
+					'javascript/libs/jquery.bxslider.js',
+					'javascript/libs/jquery.easing.1.3.js',
+					'javascript/libs/jquery.fitvids.js',
 					'javascript/libs/underscore-min.js'
 				],
 				// devel: true, // accept console etc.

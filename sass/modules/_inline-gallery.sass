@@ -1,0 +1,70 @@
+// reset from bxSlider
+.bx-wrapper
+	position: relative
+	margin: 0 auto 60px
+	padding: em(40px) 0 0 0
+	+has-layout()
+	img
+		max-width: 100%
+		display: block
+	.bx-viewport
+		margin: 0
+		padding: 0
+	// controls
+	.bx-pager
+		+inline-block
+		+tablet
+		color: $grey--mid
+		font-size: 0.9em
+		height: $gallery-button-radius
+		line-height: $gallery-button-radius + 0.5em
+		padding-right: $fine
+	.bx-controls
+		height: $gallery-button-radius
+		position: absolute
+		top: 0
+		right: 0
+	.bx-controls-direction
+		+inline-block
+	.bx-next, .bx-prev
+		+inline-block
+		width: $gallery-button-radius
+		height: $gallery-button-radius
+		text-indent: -5000em
+		border: 1px solid $grey--mid
+		margin-left: 10px
+		border-radius: 50%
+		background-position: 50% 50%
+		background-size: 20%
+		+opacity(0.42)
+		&:hover
+			+opacity(1)
+		&.disabled
+			+opacity(0.2)
+	// figure elements in bxSlide
+	figure
+		margin: 0
+		padding: 0
+		clear: none
+		.figure__media
+			cursor: e-resize
+		.figure__caption
+			color: $grey--mid
+			margin: 0 !important
+			padding: 0 !important
+			max-width: auto !important
+			.figure__caption__copyright
+				color: $charcoal
+				a
+					+link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
+					+on-interaction
+						text-decoration: none
+						border-color: $charcoal
+	// elements not in actual use
+	.bx-controls-auto,
+	.bx-loading
+		display: none
+
+
+
+
