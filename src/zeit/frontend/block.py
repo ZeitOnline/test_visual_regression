@@ -126,13 +126,15 @@ class _Video(object):
     @property
     def source(self):
         try:
-            highest_rendition = self.renditions.pop()
+            highest_rendition = self.renditions[0]
             for rendition in self.renditions:
                 if highest_rendition.frame_width < rendition.frame_width:
                     highest_rendition = rendition
             return highest_rendition.url
         except AttributeError:
             logging.exception("no renditions set")
+        except TypeError:
+            logging.exception("renditions are propably empty")
 
 
 @implementer(IFrontendBlock)
