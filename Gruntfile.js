@@ -97,6 +97,7 @@ module.exports = function(grunt) {
 					'javascript/libs/jquery.bxslider.js',
 					'javascript/libs/jquery.easing.1.3.js',
 					'javascript/libs/jquery.fitvids.js'
+					'javascript/libs/underscore-min.js'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals

@@ -52,9 +52,8 @@ $bp-adjust-horizontal-figures--4: 1450px
     background-position: center center
     position: absolute
     top: 0
-    height: 100%
     left: 0
-    right: 0
+    width: 100%
 
   .article__main-video--longform
     overflow: hidden
@@ -72,7 +71,7 @@ $bp-adjust-horizontal-figures--4: 1450px
       min-width: 100%
       min-height: 100%
       max-width: none
-      
+
   .article__title-wrap
     position: absolute
     overflow: hidden
@@ -89,6 +88,21 @@ $bp-adjust-horizontal-figures--4: 1450px
       a
         +link-colors($white, $white, $white, $white, $white)
         border-color: $white
+
+  &.has-light-header
+    .article__head-wrap
+      background-color: $charcoal
+      color: $charcoal
+      &:after
+        +box-shadow(none)
+    .article__title-wrap
+      .article__subtitle, .article__title, .article__meta
+        +text-shadow(rgba($white, 1) 0 0 30px)
+        color: $black
+      .article__meta a
+        +link-colors($black, $black, $black, $black, $black)
+        border-color: $black
+
 
   .article__meta__source
     display: none
