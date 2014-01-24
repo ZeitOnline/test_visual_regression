@@ -1,6 +1,8 @@
 import mock
 import zeit.cms.interfaces
 from zeit.frontend import view
+from zeit.content.article.edit.reference import Gallery
+from zeit.frontend.block import InlineGalleryImage
 import mock
 import requests
 
@@ -58,15 +60,42 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
 
 
 def test_header_img_should_be_first_image_of_content_blocks(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view.Article(context, '')
-    url = 'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
-    assert article_view.header_img is None
-
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view.Article(context, '')
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
+
+
+def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.header_img is None
+
+
+def test_header_video_should_be_first_image_of_content_blocks(application):
+    vid_url = 'http://xml.zeit.de/artikel/header_video'
+    context = zeit.cms.interfaces.ICMSContent(vid_url)
+    article_view = view.Article(context, '')
+    url = 'http://brightcove.vo.llnwd.net/pd16/media/18140073001/201311/3985/18140073001_2855917553001_afp-klima2.mp4'
+    assert article_view.header_video.source == url
+
+
+def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.header_video is None
+
+
+def test_header_elem_should_be_img_if_there_is_a_header_img(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImage
+
+
+def test_header_elem_should_be_video_if_there_is_a_header_video(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/header_video')
+    article_view = view.Article(context, '')
+    assert type(article_view.header_elem) == zeit.frontend.block.HeaderVideo
 
 
 def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):
@@ -83,10 +112,17 @@ def test_image_view_returns_image_data_for_filesystem_connector(testserver):
 
 def test_inline_gallery_should_be_contained_in_body(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view.Article(context, '')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    hastpye = False
-    for value in body.values():
-        if value.type == 'gallery':
-            hastype = True
-    assert hastype
+    assert type(body.values()[14]) == Gallery
+
+def test_inline_gallery_should_have_images(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    body = zeit.content.article.edit.interfaces.IEditableBody(context)
+    frontend_gallery = zeit.frontend.block.InlineGallery(body.values()[14])
+    assert type(frontend_gallery.items()[3]) == InlineGalleryImage
+
+    gallery_image = frontend_gallery.items()[3]
+
+    assert gallery_image.src == u'http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
+    assert gallery_image.alt == None
+    assert gallery_image.copyright == ((u'\xa9', None, False),)

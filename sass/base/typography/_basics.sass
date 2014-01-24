@@ -3,8 +3,9 @@ $article-content-max-width: 660px
 // Opt-in Typography
 .copy, %copy
   p
-    margin-bottom: $fine
+    margin-bottom: $small
     margin-left: auto
+    margin-top: 0
     margin-right: auto
     font-size: $font-ml
     max-width: 36.6em
@@ -25,13 +26,14 @@ $article-content-max-width: 660px
     @extend %font-l-xl
     color: $color-quote
     display: block
+    margin: $medium 0
     &.quote--wide
       @extend %quote--wide
     &.quote
       +respond-min($break-1)
         float: left
         max-width: em(160px)
-        margin: $large $medium $large auto
+        margin: $medium $medium $medium auto
 
 figure
   width: 100%
@@ -100,15 +102,15 @@ figure
       +respond-min($break-3)
         padding-right: 10%
   &.figure-stamp, &.figure-stamp--right
-    margin: $small auto
+    margin: $thin auto $small auto
     overflow: hidden
     .video__still
       width: 40%
       margin: 0 $gutter $gutter/2 0
       float: left
       .video__button
-        width: 60px
-        height: 60px
+        width: 50px
+        height: 50px
       .figure__media, img
         width: 100%
         float: none
@@ -118,19 +120,17 @@ figure
       max-width: em(240px)
       float: left
       width: 40%
-    .figure__caption, figcaption
-      overflow: hidden
     +respond-min($break-2)
       max-width: em(240px)
-      margin: $gutter $gutter $large 0
+      margin: $thin $gutter $large 0
       float: left
       .video__still
         width: 100%
         margin: 0
         float: none
         .video__button
-          width: 100px
-          height: 100px
+          width: 65px
+          height: 65px
         .figure__media, img
           margin-bottom: $gutter
       .figure__media, img
@@ -139,7 +139,7 @@ figure
         width: 100%
   &.figure-stamp--right
     +respond-min($break-2)
-      margin: $gutter 0 $gutter $gutter
+      margin: $thin 0 $gutter $gutter
       float: right
   &.author-stamp
     text-align: center

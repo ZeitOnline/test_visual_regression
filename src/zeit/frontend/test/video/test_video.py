@@ -1,4 +1,5 @@
 from zeit.frontend.block import Video
+from zeit.frontend.block import HeaderVideo
 from mock import Mock
 
 
@@ -56,3 +57,18 @@ def test_video_source_should_be_highes_rendition_url():
     model_block.video.renditions = None
     video = Video(model_block)
     assert video.source is None
+
+def test_header_video_should_be_created_if_layout_is_zmo_header():
+    model_block = Mock()
+    model_block.layout = 'zmo-xl-header'
+    model_block.video.uniqueId = 'foo'
+    h_video = HeaderVideo(model_block)
+    assert type(h_video) == HeaderVideo
+    assert h_video.format == 'zmo-xl-header'
+
+    model_block = Mock()
+    model_block.layout = 'zmo-xl-noheader'
+    model_block.video.uniqueId = 'foo'
+
+    h_video = HeaderVideo(model_block)
+    assert h_video == None

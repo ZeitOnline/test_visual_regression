@@ -163,9 +163,9 @@
         <div class="{{ index_class }}">
         {% for page in pages if page.teaser %}
             {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ page.number }} -- {{ page.teaser }}</span>
+                <span class="{{ active_class }}">{{ page.number }} — {{ page.teaser }}</span>
             {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} -- {{  page.teaser  }}</a></span>
+                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} — {{  page.teaser  }}</a></span>
             {% endif %}
         {% endfor %}
     </div>
@@ -254,7 +254,11 @@
     </figure>
 {%- endmacro %}
 
-{% macro head_image_longform(obj) -%}
+{% macro inlinegalleryimage(obj) -%}
+    {{ image(obj) }}
+{%- endmacro %}
+
+{% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
         <noscript>
             <img class="article__main-image--longform" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
@@ -303,7 +307,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and obj.format != 'zmo-background' -%}
+    {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
         {% if obj.format == 'zmo-small' %}
             figure-stamp
@@ -325,14 +329,13 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro head_video_longform(obj) -%}
-    <!-- TODO: remove test data -->
-    <div data-backgroundvideo="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" class="article__main-video--longform"> 
-        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
-                <source src="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" type="video/mp4">
-                <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+{% macro headervideo(obj) -%}
+    <div data-backgroundvideo="true" class="article__main-video--longform"> 
+        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
+                <source src="{{obj.source}}" type="video/mp4">
+                <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})">
         </video>
-            <div class="article__main-image--longform video--fallback" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001)"></div>
+            <div class="article__main-image--longform video--fallback" style="background-image:url({{obj.video_still}})"></div>
     </div>
 {%- endmacro %}
 
@@ -431,39 +434,10 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="inline-gallery" id="gal">
-        <!-- Gallery-Items as block.image(obj) -->
-        <!-- mock code, TODO: replace with Image-Objects, NB -->
-        <figure class="figure-full-width">
-            <div class="scaled-image">
-                <noscript>
-                        <img class="figure__media" src="http://localhost:9090/galerien/bg-automesse-detroit-2014-usa-bilder/462438185.jpg" data-ratio="1.5">
-                </noscript>
-            </div>
-            <figcaption class="figure__caption">
-                Ford präsentiert auf der Automesse in Detroit den neuen Pick-up F-150. <span class="figure__caption__copyright">| © Geoff Robins/AFP/Getty Images</span>
-            </figcaption>
-        </figure>
-        <figure class="figure-full-width">
-            <div class="scaled-image">
-                <noscript>
-                        <img class="figure__media" src="/galerien/bg-automesse-detroit-2014-usa-bilder/Detroit Eindrücke_6.jpg" data-ratio="1.5">
-                </noscript>
-            </div>
-            <figcaption class="figure__caption">
-                Auch Konkurrent GMC zeigt eine neue Pick-up-Serie, den Canyon. <span class="figure__caption__copyright">| <a href="http://spx.comschon">© SPX/Matthias Knödler</a></span>
-            </figcaption>
-        </figure>
-        <figure class="figure-full-width">
-            <div class="scaled-image">
-                <noscript>
-                        <img class="figure__media" src="/galerien/bg-automesse-detroit-2014-usa-bilder/462635637.jpg" data-ratio="1.5">
-                </noscript>
-            </div>
-            <figcaption class="figure__caption">
-                Cadillac stellt auf der Messe das neue ATS Coupé vor. <span class="figure__caption__copyright">| © Stan Honda/AFP/Getty Images</span>
-            </figcaption>
-        </figure>
-        <!-- /mock code ende -->
+    <div class="inline-gallery">
+        {% for item in obj.items() %}
+            <!-- Gallery-Items as block.image(obj) -->
+           {{ inlinegalleryimage(item) }}
+        {% endfor %}
     </div>
 {%- endmacro %}

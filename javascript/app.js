@@ -4,12 +4,18 @@ require.config({
 	paths: {
 		"jquery": "libs/jquery-1.10.2.min",
 		"sjcl": "libs/sjcl",
-		"bxSlider": 'libs/jquery.bxslider'
+		"bxSlider": 'libs/jquery.bxslider',
+		"underscore": "libs/underscore-min"
 	},
 	shim: [{
 		'libs/jquery.switchvideo': {
 			deps: [ 'jquery' ],
 			exports: 'jQuery.fn.switchVideo'
+		}
+	},{
+		'libs/jquery.bxslider': {
+			deps: [ 'jquery' ],
+			exports: 'jQuery.fn.bxSlider'
 		}
 	},{
 		'modules/plugins/jquery.backgroundvideo': {
@@ -26,6 +32,11 @@ require.config({
 			deps: [ 'jquery', 'bxSlider' ],
 			exports: 'jQuery.fn.inlinegallery'
 		}
+    },{
+        'modules/plugins/jquery.animatescroll': {
+            deps: [ 'jquery' ],
+            exports: 'jQuery.fn.animateScroll'
+        }
 	}]
 });
 
@@ -43,7 +54,8 @@ require([
 	'modules/plugins/jquery.backgroundvideo',
 	'modules/plugins/jquery.enablepopups',
 	'bxSlider',
-	'modules/plugins/jquery.inlinegallery'
+	'modules/plugins/jquery.inlinegallery',
+    'modules/plugins/jquery.animatescroll'
 	],
 	function($, fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
 		fontloader.init();
@@ -57,5 +69,6 @@ require([
 		$( "div[data-backgroundvideo]" ).backgroundVideo();
 		$( "a.js-has-popup" ).enablePopups();
 		$( ".inline-gallery" ).inlinegallery();
+        $( "a[href^='#']" ).animateScroll();
 	}
 );

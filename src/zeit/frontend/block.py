@@ -3,8 +3,10 @@ import PIL
 from lxml import etree
 from grokcore.component import adapter, implementer
 import zeit.content.article.edit.interfaces
+import zeit.content.image.interfaces
 import zope.interface
 import logging
+
 
 # Since this interface is an implementation detail rather than part of the API
 # of zeit.frontend, it makes more sense to keep it within the Python module
@@ -81,6 +83,8 @@ class Image(object):
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
+        if model_block.layout != 'zmo-xl-header':
+            return None
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
@@ -109,9 +113,7 @@ class Citation(object):
         self.layout = model_block.layout
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(object):
+class _Video(object):
 
     def __init__(self, model_block):
         if getattr(model_block, 'video', None) is None:
@@ -125,13 +127,58 @@ class Video(object):
     @property
     def source(self):
         try:
-            highest_rendition = self.renditions.pop()
+            highest_rendition = self.renditions[0]
             for rendition in self.renditions:
                 if highest_rendition.frame_width < rendition.frame_width:
                     highest_rendition = rendition
             return highest_rendition.url
         except AttributeError:
             logging.exception("no renditions set")
+        except TypeError:
+            logging.exception("renditions are propably empty")
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IVideo)
+class Video(_Video):
+
+    def __new__(cls, model_block):
+        if model_block.layout == 'zmo-xl-header':
+            return None
+        return super(Video, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block):
+        super(Video, self).__init__(model_block)
+
+
+@implementer(IFrontendHeaderBlock)
+@adapter(zeit.content.article.edit.interfaces.IVideo)
+class HeaderVideo(_Video):
+
+    def __new__(cls, model_block):
+        if model_block.layout != 'zmo-xl-header':
+            return None
+        return super(HeaderVideo, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block):
+        super(HeaderVideo, self).__init__(model_block)
+
+
+class InlineGalleryImage(Image):
+
+    def __init__(self, item):
+        self.caption = item.caption
+        self.layout = item.layout
+        self.title = item.title
+        self.text = item.text
+
+        if hasattr(item, 'image'):
+            self.src = item.image.uniqueId
+            self.image = item.image
+        image_meta = zeit.content.image.interfaces.IImageMetadata(item)
+        self.copyright = image_meta.copyrights
+        self.alt = image_meta.alt
+        self.align = image_meta.alignment
 
 
 @implementer(IFrontendBlock)
@@ -139,18 +186,16 @@ class Video(object):
 class InlineGallery(object):
 
     def __init__(self, model_block):
-      self._gallery_items = model_block.references.items
+        self._gallery_items = model_block.references.items
 
     def items(self):
-      my_items = []
-      for item in self._gallery_items():
-        src, entry = item
-        if(entry.layout != 'hidden'):
-          # not ready: entry has the gallery entry object
-          # entry.image is a RepositoryImage
-          # dead end here
-          my_items.append(entry)
-      return my_items
+        my_items = []
+        for item in self._gallery_items():
+            src, entry = item
+            if(entry.layout != 'hidden'):
+                my_items.append(InlineGalleryImage(entry))
+        return my_items
+
 
 def _inline_html(xml):
     allowed_elements = "a|span|strong|img|em|sup|sub|caption"
