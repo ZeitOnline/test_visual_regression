@@ -163,9 +163,9 @@
         <div class="{{ index_class }}">
         {% for page in pages if page.teaser %}
             {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ page.number }} -- {{ page.teaser }}</span>
+                <span class="{{ active_class }}">{{ page.number }} — {{ page.teaser }}</span>
             {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} -- {{  page.teaser  }}</a></span>
+                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} — {{  page.teaser  }}</a></span>
             {% endif %}
         {% endfor %}
     </div>

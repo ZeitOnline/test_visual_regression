@@ -1,7 +1,9 @@
-$longform-content-max-width: 700px
+$longform-content-max-width: 615px
 $longform-inline-max-width: 920px
-$bp-adjust-horizontal-figures--1: 1280px
-$bp-adjust-horizontal-figures--2: 1440px
+$bp-adjust-horizontal-figures--1: 1120px
+$bp-adjust-horizontal-figures--2: 1320px
+$bp-adjust-horizontal-figures--3: 1385px
+$bp-adjust-horizontal-figures--4: 1450px
 
 .article.article--longform
   padding: 0
@@ -26,7 +28,7 @@ $bp-adjust-horizontal-figures--2: 1440px
   .article__head-wrap
     position: relative
     overflow: hidden
-    height: 80%
+    height: 85%
     min-height: em(400px)
     padding-top: 0
     margin-top: 0
@@ -94,14 +96,12 @@ $bp-adjust-horizontal-figures--2: 1440px
     margin: $small auto $small auto
     font-size: $font-xl--px
     font-size: $font-xl--rem
-    max-width: 920px
+    max-width: $longform-content-max-width
+    max-width: rem($longform-content-max-width)
     +respond-min($break-1)
       font-size: $font-xxl--px
       font-size: $font-xxl--rem
-      margin-bottom: $medium
       margin-top: $medium
-    +respond-min($break-2)
-      padding-left: $gutter
     a
       display: block
       position: relative
@@ -114,10 +114,8 @@ $bp-adjust-horizontal-figures--2: 1440px
       display: inline
     @extend %meta
     max-width: em(240px)
-    background-color: $white
     border-bottom: $micro solid $grey
-    padding-top: $medium
-    padding-bottom: $gutter
+    padding: 0 $small
     margin-right: $gutter*2
     float: left
     position: relative
@@ -133,7 +131,7 @@ $bp-adjust-horizontal-figures--2: 1440px
         border-color: $grey
     span
       display: block
-      margin: $gutter $gutter $gutter $gutter
+      margin: $gutter 0
     .article__subpage-active
       color: $black
 
@@ -164,10 +162,17 @@ $bp-adjust-horizontal-figures--2: 1440px
   .article__title
     +tablet
     color: $white
+    line-height: 1.2
+    margin-bottom: $thin
 
   .article__body
     padding-left: 0
     padding-right: 0
+    background-color: $white
+    p:first-of-type
+      +respond-min($comments__break-overlap)
+        padding-right: 0
+
 
   .article__page
     padding-top: $small
@@ -176,12 +181,19 @@ $bp-adjust-horizontal-figures--2: 1440px
     +respond-min($break-1)
       padding-top: $medium
       padding-bottom: $medium
+    .article__subpage-index
+      background-color: $grey--bright
     &:nth-child(2n+1)
       background-color: $grey--light
+      .article__subpage-index
+        background-color: $white
+    &:first-child
+      +respond-min($break-3)
+        padding-top: $wide
 
   .article__page-wrap
     +padded
-    max-width: em(1460px)
+    max-width: $max-longform-width
     margin: 0 auto
 
   .quote--wide
@@ -197,38 +209,43 @@ $bp-adjust-horizontal-figures--2: 1440px
     max-width: rem($longform-content-max-width)
     &.padded
       +box-sizing(content-box)
+    +respond-min($break-3)
+      max-width: $longform-content-max-width*1.13
+      max-width: rem($longform-content-max-width)*1.13
 
   figure
     &.figure-full-width
       .figure__caption, figcaption
         +max-width-rem($longform-content-max-width)
     &.figure-horizontal, &.figure-horizontal--right
-      +respond-min(em($bp-adjust-horizontal-figures--1))
-        +max-width-rem($longform-inline-max-width)
-        width: 60%
-        margin-left: auto
-        margin-right: auto
+      +max-width-rem($longform-inline-max-width)
+      margin-left: auto
+      margin-right: auto
+      +respond-min(em($bp-adjust-horizontal-figures--2))
         position: relative
+        width: 100%
         .figure__media, img
           float: none
           width: 100%
         .figure__caption, figcaption
+          +max-width-rem(240px)
+          width: em(200px)
           position: absolute
           left: 100%
-          width: auto
           padding-left: $gutter
-          width: 30%
           top: 0
           float: none
-      +respond-min(em($bp-adjust-horizontal-figures--2))
-        width: 100%
+      +respond-min(em($bp-adjust-horizontal-figures--3))
         .figure__caption, figcaption
-          width: 25%
+          width: em(220px)
+      +respond-min(em($bp-adjust-horizontal-figures--4))
+        .figure__caption, figcaption
+          width: 100%
       .figure__media, img
         +max-width-rem($longform-inline-max-width)
       .figure__caption, figcaption
     &.figure-horizontal--right
-      +respond-min(em($bp-adjust-horizontal-figures--1))
+      +respond-min(em($bp-adjust-horizontal-figures--2))
         .figure__caption, figcaption
           right: 100%
           left: auto
