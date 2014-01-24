@@ -83,6 +83,7 @@ class Article(Base):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
             header_img = zeit.frontend.block.HeaderImage(body.values()[0])
+            if header_img is None: return None
             return header_img if header_img.layout == 'zmo-xl-header' else None
 
     @property
