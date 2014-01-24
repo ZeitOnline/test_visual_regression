@@ -6,12 +6,7 @@
 		<div class="article__wrap">
 			<div class="article__head-wrap">
         
-          {% if view.header_img %}
-            {{ blocks.head_image_longform(view.header_img) }}
-          {% else %}
-             <!-- TODO: remove test data -->
-            {{ blocks.head_video_longform(test) }}
-  				{% endif %}
+          {{ blocks[view.header_elem|block_type](view.header_elem) }}
 
   				<header class="article__title-wrap">
   					<h2 class="article__supertitle">

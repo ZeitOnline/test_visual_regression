@@ -2,11 +2,7 @@
 <head>
 <keywordset/>
 <renditions>
-<rendition url="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" frame_width="1280"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953017188001_fotomomente-nordlichter.mp4" frame_width="640"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018297001_fotomomente-nordlichter.mp4" frame_width="720"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953016536001_fotomomente-nordlichter.mp4" frame_width="400"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953016535001_fotomomente-nordlichter.mp4" frame_width="480"/>
+<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4" frame_width="1280"/>
 </renditions>
 <references/>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -34,7 +30,7 @@ http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_19560
 <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">video</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9135becb-ee77-4e82-acd3-a3f0ede596a1}</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="video_still">
-http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001
+http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/3097/18140073001_3094729885001_7x.jpg
 </attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2012</attribute>
 </head>
