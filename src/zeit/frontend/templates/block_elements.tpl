@@ -429,3 +429,22 @@
         </div>
     </section>
 {%- endmacro %}
+
+{% macro sharing_meta(obj) -%}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@zeitonline">
+    <meta name="twitter:creator" content="@zeitonline">
+    <meta name="twitter:title" content="{{ obj.title }}">
+    <meta name="twitter:description" content="{{ obj.subtitle }}">
+    <meta name="twitter:image" content="">
+
+    <meta property="og:site_name" content="ZEIT ONLINE">
+    <meta property="fb:admins" content="595098294">
+    <meta property="og:type" content="article">
+    <link itemprop="image" rel="image_src" href="">
+    <meta property="og:title" content="{{ obj.title }}">
+    <meta property="og:description" itemprop="description" content="{{ obj.subtitle }}">
+    <meta property="og:image" class="scaled-image is-pixelperfect" content="">
+    <meta property="og:url" content="">
+
+{%- endmacro %}

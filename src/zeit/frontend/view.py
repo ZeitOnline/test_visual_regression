@@ -86,6 +86,13 @@ class Article(Base):
             return header_img if header_img.layout == 'zmo-xl-header' else None
 
     @property
+    def lead_img(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
+            lead_img = zeit.frontend.block.HeaderImage(body.values()[0])
+            return lead_img
+
+    @property
     def author(self):
         try:
             author = self.context.authors[0]
