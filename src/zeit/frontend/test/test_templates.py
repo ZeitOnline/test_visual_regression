@@ -88,8 +88,8 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     fake_page.teaser = 'Erster'
 
     # assert normal markup
-    markup = u'%s<span><a href="#kapitel1">1 \u2014 Erster</a></span></div>' % (
-        markup_standart)
+    markup = u'%s<span><a href="#kapitel1">1 \u2014 ' \
+        'Erster</a></span></div>' % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -238,14 +238,14 @@ def test_image_should_produce_markup(jinja2_env):
         assert match(markup, output)
 
 
-def test_macro_head_image_longform_should_produce_markup(jinja2_env):
+def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = Mock()
     obj.caption = 'test'
     obj.copyright = 'test'
     obj.src = 'test.gif'
 
-    lines = tpl.module.head_image_longform(obj).splitlines()
+    lines = tpl.module.headerimage(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -359,19 +359,19 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert fig in output
 
 
-def test_macro_head_video_longform_should_produce_markup(jinja2_env):
+def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert default video
-    obj = {}
+    obj = { 'video_still': 'test.jpg', 'source': 'test.mp4'}
     wrapper = '<div data-backgroundvideo="'
     video = '<video preload="auto" autoplay="true" ' \
-            'loop="loop" muted="muted" volume="0" poster="'
-    source = '<source '
+            'loop="loop" muted="muted" volume="0" poster="test.jpg'
+    source = '<source src="test.mp4'
     img = '<img '
     fallback = '<div class="article__main-image--longform' \
-        ' video--fallback" style="background-image:url'
-    lines = tpl.module.head_video_longform(obj).splitlines()
+        ' video--fallback" style="background-image:url(test.jpg'
+    lines = tpl.module.headervideo(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()

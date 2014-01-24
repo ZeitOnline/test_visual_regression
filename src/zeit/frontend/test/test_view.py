@@ -58,15 +58,42 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
 
 
 def test_header_img_should_be_first_image_of_content_blocks(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view.Article(context, '')
-    url = 'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
-    assert article_view.header_img is None
-
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view.Article(context, '')
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
+
+
+def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.header_img is None
+
+
+def test_header_video_should_be_first_image_of_content_blocks(application):
+    vid_url = 'http://xml.zeit.de/artikel/header_video'
+    context = zeit.cms.interfaces.ICMSContent(vid_url)
+    article_view = view.Article(context, '')
+    url = 'http://brightcove.vo.llnwd.net/pd16/media/18140073001/201311/3985/18140073001_2855917553001_afp-klima2.mp4'
+    assert article_view.header_video.source == url
+
+
+def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.header_video is None
+
+
+def test_header_elem_should_be_img_if_there_is_a_header_img(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImage
+
+
+def test_header_elem_should_be_video_if_there_is_a_header_video(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/header_video')
+    article_view = view.Article(context, '')
+    assert type(article_view.header_elem) == zeit.frontend.block.HeaderVideo
 
 
 def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):

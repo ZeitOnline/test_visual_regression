@@ -81,9 +81,23 @@ class Article(Base):
     @property
     def header_img(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
-            header_img = zeit.frontend.block.HeaderImage(body.values()[0])
-            return header_img if header_img.layout == 'zmo-xl-header' else None
+        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        if IImage in providedBy(obj):
+            header_img = zeit.frontend.block.HeaderImage(obj)
+            return header_img
+
+    @property
+    def header_video(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        if IVideo in providedBy(obj):
+            header_vid = zeit.frontend.block.HeaderVideo(obj)
+            return header_vid
+
+    @property
+    def header_elem(self):
+        if self.header_video is not None: return self.header_video
+        return self.header_img
 
     @property
     def author(self):
