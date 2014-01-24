@@ -303,7 +303,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and obj.format != 'zmo-background' -%}
+    {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
         {% if obj.format == 'zmo-small' %}
             figure-stamp
@@ -327,12 +327,12 @@
 
 {% macro head_video_longform(obj) -%}
     <!-- TODO: remove test data -->
-    <div data-backgroundvideo="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" class="article__main-video--longform"> 
-        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
-                <source src="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" type="video/mp4">
-                <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+    <div data-backgroundvideo="true" class="article__main-video--longform"> 
+        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/3097/18140073001_3094729885001_7x.jpg?pubId=18140073001">
+                <source src="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4?pubId=18140073001&videoId=3094708030001" type="video/mp4">
+                <div class="article__main-image--longform video--fallback" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/3097/18140073001_3094729885001_7x.jpg?pubId=18140073001)"></div>
         </video>
-            <div class="article__main-image--longform video--fallback" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001)"></div>
+            <div class="article__main-image--longform video--fallback" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/3097/18140073001_3094729885001_7x.jpg?pubId=18140073001)"></div>
     </div>
 {%- endmacro %}
 
