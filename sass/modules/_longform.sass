@@ -70,7 +70,7 @@ $bp-adjust-horizontal-figures--4: 1450px
       min-width: 100%
       min-height: 100%
       max-width: none
-      
+
   .article__title-wrap
     position: absolute
     overflow: hidden
@@ -87,6 +87,19 @@ $bp-adjust-horizontal-figures--4: 1450px
       a
         +link-colors($white, $white, $white, $white, $white)
         border-color: $white
+
+  &.has-light-header
+    .article__head-wrap:after
+      +box-shadow(inset 0 -200px 200px rgba($white, 0.7))
+    .article__title-wrap
+      .article__subtitle, .article__title
+        color: $black
+      .article__meta
+        color: $black
+        a
+          +link-colors($black, $black, $black, $black, $black)
+          border-color: $black
+
 
   .article__meta__source
     display: none
