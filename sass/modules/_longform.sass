@@ -90,16 +90,18 @@ $bp-adjust-horizontal-figures--4: 1450px
         border-color: $white
 
   &.has-light-header
-    .article__head-wrap:after
-      +box-shadow(inset 0 -200px 200px rgba($white, 0.7))
+    .article__head-wrap
+      background-color: $charcoal
+      color: $charcoal
+      &:after
+        +box-shadow(none)
     .article__title-wrap
-      .article__subtitle, .article__title
+      .article__subtitle, .article__title, .article__meta
+        +text-shadow(rgba($white, 1) 0 0 30px)
         color: $black
-      .article__meta
-        color: $black
-        a
-          +link-colors($black, $black, $black, $black, $black)
-          border-color: $black
+      .article__meta a
+        +link-colors($black, $black, $black, $black, $black)
+        border-color: $black
 
 
   .article__meta__source
