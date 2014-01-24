@@ -99,7 +99,7 @@
             {% endif %}
 
             {% if view.context.is_longform %}
-                {{ blocks.main_nav_compact() }}
+                {{ blocks.main_nav_compact(view) }}
             {% else %}
                 {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
             {% endif %}
