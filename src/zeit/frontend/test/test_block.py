@@ -1,5 +1,7 @@
 from zeit.frontend.block import _inline_html
 from zeit.frontend.block import Video
+from zeit.frontend.block import HeaderVideo
+from zeit.frontend.block import HeaderImage
 import lxml.etree
 import mock
 
@@ -33,3 +35,36 @@ def test_video_block_should_be_fault_tolerant_if_video_is_None():
     model_block.video.uniqueId = 'foo'
     video = Video(model_block)
     assert hasattr(video, 'video_still')
+
+
+def test_header_video_should_be_created_if_layout_is_zmo_header():
+    model_block = mock.Mock()
+    model_block.layout = 'zmo-xl-header'
+    model_block.video.uniqueId = 'foo'
+    h_video = HeaderVideo(model_block)
+    assert type(h_video) == HeaderVideo
+    assert h_video.format == 'zmo-xl-header'
+
+
+def test_header_video_should_not_be_created_if_layout_does_not_fit():
+    model_block = mock.Mock()
+    model_block.layout = 'zmo-xl-noheader'
+    model_block.video.uniqueId = 'foo'
+
+    h_video = HeaderVideo(model_block)
+    assert h_video == None
+
+
+def test_header_image_should_be_created_if_layout_is_zmo_header():
+    model_block = mock.Mock()
+    model_block.layout = 'zmo-xl-header'
+    h_image = HeaderImage(model_block)
+    assert type(h_image) == HeaderImage
+
+
+def test_header_image_should_not_be_created_if_layout_does_not_fit():
+    model_block = mock.Mock()
+    model_block.layout = 'zmo-xl-noheader'
+
+    h_image = HeaderImage(model_block)
+    assert h_image == None
