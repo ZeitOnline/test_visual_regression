@@ -4,7 +4,7 @@ from lxml import etree
 from grokcore.component import adapter, implementer
 import zeit.content.article.edit.interfaces
 import zope.interface
-
+import logging
 
 # Since this interface is an implementation detail rather than part of the API
 # of zeit.frontend, it makes more sense to keep it within the Python module
@@ -114,10 +114,24 @@ class Citation(object):
 class Video(object):
 
     def __init__(self, model_block):
-        self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
-        self.format = model_block.layout
+        if getattr(model_block, 'video', None) is None:
+            return None
+        self.renditions = model_block.video.renditions
         self.video_still = model_block.video.video_still
         self.description = model_block.video.subtitle
+        self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
+        self.format = model_block.layout
+
+    @property
+    def source(self):
+        try:
+            highest_rendition = self.renditions.pop()
+            for rendition in self.renditions:
+                if highest_rendition.frame_width < rendition.frame_width:
+                    highest_rendition = rendition
+            return highest_rendition.url
+        except AttributeError:
+            logging.exception("no renditions set")
 
 
 @implementer(IFrontendBlock)

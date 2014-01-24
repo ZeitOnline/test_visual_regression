@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <article-genres>
-	<genre name="nachricht" prose="Eine Nachricht" display-frontend="false">Nachricht</genre>
-	<genre name="bericht" prose="Ein Bericht" display-frontend="false">Bericht</genre>
-	<genre name="analyse" prose="Eine Analyse" display-frontend="false">Analyse</genre>
-	<genre name="reportage" prose="Eine Reportage" display-frontend="true">Reportage</genre>
-	<genre name="interview" prose="Ein Interview" display-frontend="false">Interview</genre>
-	<genre name="portrait" prose="Ein Porträt" display-frontend="false">Porträt</genre>
-	<genre name="glosse" prose="Eine Glosse" display-frontend="true">Glosse</genre>
-	<genre name="kommentar" prose="Ein Kommentar" display-frontend="true">Kommentar</genre>
-	<genre name="leserartikel" prose="Ein Leserartikel" display-frontend="true">Leserartikel</genre>
-	<genre name="gastbeitrag" prose="Ein Gastbeitrag" display-frontend="true">Gastbeitrag</genre>
+  <genre name="nachricht" prose="Eine Nachricht" display-frontend="false">Nachricht</genre>
+  <genre name="bericht" prose="Ein Bericht" display-frontend="false">Bericht</genre>
+  <genre name="analyse" prose="Eine Analyse" display-frontend="false">Analyse</genre>
+  <genre name="reportage" prose="Eine Reportage" display-frontend="false">Reportage</genre>
+  <genre name="interview" prose="Ein Interview" display-frontend="false">Interview</genre>
+  <genre name="portrait" prose="Ein Porträt" display-frontend="false">Porträt</genre>
+  <genre name="glosse" prose="Eine Glosse" display-frontend="true">Glosse</genre>
+  <genre name="kommentar" prose="Ein Kommentar" display-frontend="true">Kommentar</genre>
+  <genre name="leserartikel" prose="Ein Leserartikel" display-frontend="true">Leserartikel</genre>
+  <genre name="gastbeitrag" prose="Ein Gastbeitrag" display-frontend="true">Gastbeitrag</genre>
 </article-genres>
