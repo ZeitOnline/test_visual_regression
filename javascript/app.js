@@ -2,7 +2,8 @@
 
 require.config({
 	paths: {
-		"jquery": "libs/jquery-1.10.2.min",
+    "jquery": "libs/jquery-1.10.2.min",
+		"underscore": "libs/underscore-min",
 		"sjcl": "libs/sjcl"
 	},
 	shim: {
