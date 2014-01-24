@@ -22,21 +22,23 @@
 
 .quote, %quote
   +tablet()
-  font-size: $font-l--px
   margin-left: 0
 
 .quote__text
+  display: block
+  line-height: 1.4
   &:before
     content: '»'
+    margin-right: 0.1em
   &:after
     content: '«'
+    margin-left: 0.1em
 
 .quote__author
   @extend %meta
   font-size: $font-s--px
   display: block
-  margin-top: $small
-  margin-left: $fine
+  margin-top: $thin
   &:before
     content: "\2014  "
   a
