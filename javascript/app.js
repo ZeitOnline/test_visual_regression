@@ -18,15 +18,16 @@ require.config({
 			deps: [ 'jquery' ],
 			exports: 'jQuery.fn.enablePopups'
 		},
-    'modules/plugins/jquery.animatescroll': {
-      deps: [ 'jquery' ],
-      exports: 'jQuery.fn.animateScroll'
-    }
+        'modules/plugins/jquery.animatescroll': {
+            deps: [ 'jquery' ],
+            exports: 'jQuery.fn.animateScroll'
+        }
 	}
 });
 
 require(['modules/fontloader', 'modules/breadcrumbs', 'modules/tabs', 'modules/comments', 'modules/main-nav', 'modules/adloader', 'modules/images', 'sjcl', 'modules/plugins/jquery.switchvideo', 'modules/plugins/jquery.backgroundvideo', 'modules/plugins/jquery.enablepopups', 'modules/plugins/jquery.animatescroll'],
-  function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
+
+function(fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
     fontloader.init();
     main_nav.init();
     breadcrumbs.init();
