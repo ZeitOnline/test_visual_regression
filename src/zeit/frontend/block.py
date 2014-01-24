@@ -6,6 +6,7 @@ import zeit.content.article.edit.interfaces
 import zope.interface
 import logging
 
+
 # Since this interface is an implementation detail rather than part of the API
 # of zeit.frontend, it makes more sense to keep it within the Python module
 # that deals with the concept of blocks rather than within a separate
@@ -139,18 +140,19 @@ class Video(object):
 class InlineGallery(object):
 
     def __init__(self, model_block):
-      self._gallery_items = model_block.references.items
+        self._gallery_items = model_block.references.items
 
     def items(self):
-      my_items = []
-      for item in self._gallery_items():
-        src, entry = item
+        my_items = []
+        for item in self._gallery_items():
+            src, entry = item
         if(entry.layout != 'hidden'):
-          # not ready: entry has the gallery entry object
-          # entry.image is a RepositoryImage
-          # dead end here
-          my_items.append(entry)
-      return my_items
+            # not ready: entry has the gallery entry object
+            # entry.image is a RepositoryImage
+            # dead end here
+            my_items.append(entry)
+        return my_items
+
 
 def _inline_html(xml):
     allowed_elements = "a|span|strong|img|em|sup|sub|caption"
