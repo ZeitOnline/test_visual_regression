@@ -6,6 +6,7 @@ import zeit.content.article.edit.interfaces
 import zope.interface
 import logging
 
+
 # Since this interface is an implementation detail rather than part of the API
 # of zeit.frontend, it makes more sense to keep it within the Python module
 # that deals with the concept of blocks rather than within a separate
@@ -81,6 +82,8 @@ class Image(object):
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
+        if model_block.layout != 'zmo-xl-header':
+            return None
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
@@ -109,9 +112,7 @@ class Citation(object):
         self.layout = model_block.layout
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(object):
+class _Video(object):
 
     def __init__(self, model_block):
         if getattr(model_block, 'video', None) is None:
@@ -132,6 +133,32 @@ class Video(object):
             return highest_rendition.url
         except AttributeError:
             logging.exception("no renditions set")
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IVideo)
+class Video(_Video):
+
+    def __new__(cls, model_block):
+        if model_block.layout == 'zmo-xl-header':
+            return None
+        return super(Video, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block):
+        super(Video, self).__init__(model_block)
+
+
+@implementer(IFrontendHeaderBlock)
+@adapter(zeit.content.article.edit.interfaces.IVideo)
+class HeaderVideo(_Video):
+
+    def __new__(cls, model_block):
+        if model_block.layout != 'zmo-xl-header':
+            return None
+        return super(HeaderVideo, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block):
+        super(HeaderVideo, self).__init__(model_block)
 
 
 def _inline_html(xml):
