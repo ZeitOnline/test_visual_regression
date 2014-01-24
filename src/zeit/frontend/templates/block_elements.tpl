@@ -435,11 +435,9 @@
 
 {% macro inlinegallery(obj) -%}
     <div class="inline-gallery">
-        <ul class="inline-gallery__bxslider">
             {% for item in obj.items() %}
                 <!-- Gallery-Items as block.image(obj) -->
-            <li>{{ image(item) }}</li>
+               {{ inlinegalleryimage(item) }}
             {% endfor %}
-        </ul>
     </div>
 {%- endmacro %}
