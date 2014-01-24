@@ -431,41 +431,39 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="inline-gallery">
-        <div class="inline-gallery__figures">
-            <!-- Gallery-Items as block.image(obj) -->
-            <!-- mock code, TODO: replace with Image-Objects, NB -->
-            <figure class="figure-full-width">
-                <div class="scaled-image">
-                    <noscript>
-                            <img class="figure__media" src="http://localhost:9090/galerien/bg-automesse-detroit-2014-usa-bilder/462438185.jpg" data-ratio="1.5">
-                    </noscript>
-                </div>
-                <figcaption class="figure__caption">
-                    Ford präsentiert auf der Automesse in Detroit den neuen Pick-up F-150. | © Geoff Robins/AFP/Getty Images
-                </figcaption>
-            </figure>
-            <figure class="figure-full-width">
-                <div class="scaled-image">
-                    <noscript>
-                            <img class="figure__media" src="/galerien/bg-automesse-detroit-2014-usa-bilder/Detroit Eindrücke_6.jpg" data-ratio="1.5">
-                    </noscript>
-                </div>
-                <figcaption class="figure__caption">
-                    Auch Konkurrent GMC zeigt eine neue Pick-up-Serie, den Canyon. | © SPX/Matthias Knödler
-                </figcaption>
-            </figure>
-            <figure class="figure-full-width">
-                <div class="scaled-image">
-                    <noscript>
-                            <img class="figure__media" src="/galerien/bg-automesse-detroit-2014-usa-bilder/462635637.jpg" data-ratio="1.5">
-                    </noscript>
-                </div>
-                <figcaption class="figure__caption">
-                    Cadillac stellt auf der Messe das neue ATS Coupé vor. | © Stan Honda/AFP/Getty Images
-                </figcaption>
-            </figure>
-            <!-- /mock code ende -->
-        </div>
+    <div class="inline-gallery" id="gal">
+        <!-- Gallery-Items as block.image(obj) -->
+        <!-- mock code, TODO: replace with Image-Objects, NB -->
+        <figure class="figure-full-width">
+            <div class="scaled-image">
+                <noscript>
+                        <img class="figure__media" src="http://localhost:9090/galerien/bg-automesse-detroit-2014-usa-bilder/462438185.jpg" data-ratio="1.5">
+                </noscript>
+            </div>
+            <figcaption class="figure__caption">
+                Ford präsentiert auf der Automesse in Detroit den neuen Pick-up F-150. <span class="figure__caption__copyright">| © Geoff Robins/AFP/Getty Images</span>
+            </figcaption>
+        </figure>
+        <figure class="figure-full-width">
+            <div class="scaled-image">
+                <noscript>
+                        <img class="figure__media" src="/galerien/bg-automesse-detroit-2014-usa-bilder/Detroit Eindrücke_6.jpg" data-ratio="1.5">
+                </noscript>
+            </div>
+            <figcaption class="figure__caption">
+                Auch Konkurrent GMC zeigt eine neue Pick-up-Serie, den Canyon. <span class="figure__caption__copyright">| <a href="http://spx.comschon">© SPX/Matthias Knödler</a></span>
+            </figcaption>
+        </figure>
+        <figure class="figure-full-width">
+            <div class="scaled-image">
+                <noscript>
+                        <img class="figure__media" src="/galerien/bg-automesse-detroit-2014-usa-bilder/462635637.jpg" data-ratio="1.5">
+                </noscript>
+            </div>
+            <figcaption class="figure__caption">
+                Cadillac stellt auf der Messe das neue ATS Coupé vor. <span class="figure__caption__copyright">| © Stan Honda/AFP/Getty Images</span>
+            </figcaption>
+        </figure>
+        <!-- /mock code ende -->
     </div>
 {%- endmacro %}
