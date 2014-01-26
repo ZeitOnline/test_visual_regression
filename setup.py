@@ -15,7 +15,7 @@ setup(
         'setuptools',
         'simplejson',
         'zeit.cms',
-        'zeit.connector >= 2.1.0.dev0',
+        'zeit.connector >= 2.2',
         'zeit.content.article',
         'zeit.intrafind',
         'zeit.magazin',
