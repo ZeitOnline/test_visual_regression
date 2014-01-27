@@ -5,6 +5,7 @@ from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.image.interfaces import IImageMetadata
+from zeit.frontend.log import access_log
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
 import os.path
@@ -24,6 +25,7 @@ class Base(object):
         self.request = request
 
     def __call__(self):
+        access_log.info(self.request.url)
         return {}
 
 
@@ -49,6 +51,7 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 class Article(Base):
 
     def __call__(self):
+        super(Article, self).__call__()
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
         self.context.is_longform = False
@@ -194,6 +197,7 @@ class Teaser(Article):
 class Image(Base):
 
     def __call__(self):
+        super(Article, self).__call__()
         connector = zope.component.getUtility(
             zeit.connector.interfaces.IConnector)
         if not isinstance(connector, zeit.connector.connector.Connector):
