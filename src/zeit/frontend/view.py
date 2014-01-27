@@ -197,7 +197,7 @@ class Teaser(Article):
 class Image(Base):
 
     def __call__(self):
-        super(Article, self).__call__()
+        super(Image, self).__call__()
         connector = zope.component.getUtility(
             zeit.connector.interfaces.IConnector)
         if not isinstance(connector, zeit.connector.connector.Connector):
