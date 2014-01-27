@@ -52,7 +52,7 @@
         <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
         <meta name="date" content="{{ view.publish_date_meta }}"/>
 
-        {{ blocks.sharing_meta( view ) }}
+        {{blocks.sharing_meta(view,request)}}
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
         <script>
@@ -99,7 +99,7 @@
             {% endif %}
 
             {% if view.context.is_longform %}
-                {{ blocks.main_nav_compact(view) }}
+                {{ blocks.main_nav_compact(view,request) }}
             {% else %}
                 {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
             {% endif %}
