@@ -445,7 +445,9 @@
     <meta property="og:url" content="{{request.url}}">
 
     <!-- TODO: add image sources -->
-    <meta property="og:image" content="">
-    <link itemprop="image" rel="image_src" href="">
-    <meta name="twitter:image" content="">
+    {% if obj.lead_img %}
+        <meta property="og:image" class="scaled-image" content="{{obj.lead_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.lead_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <meta class="scaled-image" name="twitter:image" content="{{obj.lead_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+    {% endif %}
 {%- endmacro %}
