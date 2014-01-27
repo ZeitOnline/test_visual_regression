@@ -37,6 +37,7 @@ setup(
             'requests',
             'selenium',
             'webtest',
+            'zope.testbrowser',
         ],
     },
     namespace_packages=['zeit'],
