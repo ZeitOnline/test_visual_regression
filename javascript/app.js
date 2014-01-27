@@ -57,7 +57,7 @@ require([
 	'modules/plugins/jquery.inlinegallery',
     'modules/plugins/jquery.animatescroll'
 	],
-	function($, fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
+	function(jQuery, fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
 		fontloader.init();
 		main_nav.init();
 		breadcrumbs.init();
