@@ -3,7 +3,7 @@ import zeit.cms.interfaces
 from zeit.frontend import view
 from zeit.content.article.edit.reference import Gallery
 from zeit.frontend.block import InlineGalleryImage
-import mock
+from zope.testbrowser.browser import Browser
 import requests
 
 
@@ -115,6 +115,7 @@ def test_inline_gallery_should_be_contained_in_body(testserver):
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert type(body.values()[14]) == Gallery
 
+
 def test_inline_gallery_should_have_images(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
@@ -122,7 +123,24 @@ def test_inline_gallery_should_have_images(testserver):
     assert type(frontend_gallery.items()[3]) == InlineGalleryImage
 
     gallery_image = frontend_gallery.items()[3]
-
     assert gallery_image.src == u'http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
     assert gallery_image.alt == None
     assert gallery_image.copyright == ((u'\xa9', None, False),)
+
+
+def test_article_request_should_have_body_element(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert '<body itemscope itemtype="http://schema.org/WebPage">' in browser.contents
+    assert '</body>' in browser.contents
+
+
+def test_article_request_should_have_html5_doctype(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert '<!DOCTYPE html>' in browser.contents
+
+
+def test_artikel05_should_have_header_image(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert '<div class="article__head-wrap">' in browser.contents
+    assert '<div class="scaled-image is-pixelperfect">' in browser.contents
+    assert '<img class="article__main-image--longform"' in browser.contents
