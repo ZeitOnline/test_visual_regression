@@ -47,8 +47,8 @@ require([
 	'modules/tabs',
 	'modules/comments',
 	'modules/main-nav',
-	'modules/adloader',
 	'modules/images',
+	'modules/supplement',
 	'sjcl',
 	'modules/plugins/jquery.switchvideo',
 	'modules/plugins/jquery.backgroundvideo',
@@ -57,14 +57,14 @@ require([
 	'modules/plugins/jquery.inlinegallery',
     'modules/plugins/jquery.animatescroll'
 	],
-	function($, fontloader, breadcrumbs, tabs, comments, main_nav, adloader, images) {
+	function(jQuery, fontloader, breadcrumbs, tabs, comments, main_nav, images, supplement) {
 		fontloader.init();
 		main_nav.init();
 		breadcrumbs.init();
 		tabs.init();
 		comments.init();
-		adloader.init();
 		images.init();
+		supplement.init();
 		$( "figure[data-video]" ).switchVideo();
 		$( "div[data-backgroundvideo]" ).backgroundVideo();
 		$( "a.js-has-popup" ).enablePopups();
