@@ -88,8 +88,8 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     fake_page.teaser = 'Erster'
 
     # assert normal markup
-    markup = '%s<span><a href="#kapitel1">1 -- Erster</a></span></div>' % (
-        markup_standart)
+    markup = u'%s<span><a href="#kapitel1">1 \u2014 ' \
+        'Erster</a></span></div>' % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -99,7 +99,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert active markup
     css_active = 'article__subpage-active'
-    markup_active = '%s<span class="%s">1 -- Erster</span></div>' \
+    markup_active = u'%s<span class="%s">1 \u2014 Erster</span></div>' \
         % (markup_standart, css_active)
     lines_active = tpl.module.subpage_index(
         [fake_page], 'Title', 1, css_index, css_active).splitlines()
@@ -238,14 +238,14 @@ def test_image_should_produce_markup(jinja2_env):
         assert match(markup, output)
 
 
-def test_macro_head_image_longform_should_produce_markup(jinja2_env):
+def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = Mock()
     obj.caption = 'test'
     obj.copyright = 'test'
     obj.src = 'test.gif'
 
-    lines = tpl.module.head_image_longform(obj).splitlines()
+    lines = tpl.module.headerimage(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -359,19 +359,19 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert fig in output
 
 
-def test_macro_head_video_longform_should_produce_markup(jinja2_env):
+def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert default video
-    obj = {}
+    obj = {'video_still': 'test.jpg', 'source': 'test.mp4'}
     wrapper = '<div data-backgroundvideo="'
     video = '<video preload="auto" autoplay="true" ' \
-            'loop="loop" muted="muted" volume="0" poster="'
-    source = '<source '
+            'loop="loop" muted="muted" volume="0" poster="test.jpg'
+    source = '<source src="test.mp4'
     img = '<img '
     fallback = '<div class="article__main-image--longform' \
-        ' video--fallback" style="background-image:url'
-    lines = tpl.module.head_video_longform(obj).splitlines()
+        ' video--fallback" style="background-image:url(test.jpg'
+    lines = tpl.module.headervideo(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -380,3 +380,35 @@ def test_macro_head_video_longform_should_produce_markup(jinja2_env):
     assert source in output
     assert img in output
     assert fallback in output
+
+
+def test_macro_sharing_meta_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+
+    # assert default video
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true'}
+    request = {'url': 'test.de'}
+    twitter = ['<meta name="twitter:card" content="summary">',
+               '<meta name="twitter:site" content="@zeitonline">',
+               '<meta name="twitter:creator" content="@zeitonline">',
+               '<meta name="twitter:title" content="title">',
+               '<meta name="twitter:description" content="subtitle">']
+    fb = ['<meta property="og:site_name" content="ZEIT ONLINE">',
+          '<meta property="fb:admins" content="595098294">',
+          '<meta property="og:type" content="article">',
+          '<meta property="og:title" content="title">',
+          '"og:description" itemprop="description" content="subtitle">',
+          '<meta property="og:url" content="test.de">']
+    image = ['<meta property="og:image" class="scaled-image" content="',
+             '<link itemprop="image" class="scaled-image" rel="image_src"',
+             '<meta class="scaled-image" name="twitter:image" content="']
+    lines = tpl.module.sharing_meta(obj, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for fb_meta in fb:
+        assert fb_meta in output
+    for twitter_meta in twitter:
+        assert twitter_meta in output
+    for img in image:
+        assert img in output

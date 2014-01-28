@@ -107,6 +107,7 @@
 {%- endmacro %}
 
 {% macro main_nav_compact(obj,request) -%}
+
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
@@ -116,12 +117,13 @@
                 </div>
             </a>
             <div class="main-nav__menu">
-                <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.url}}&p[images][0]=&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
+                <aside class="main-nav__sharing scaled-image">
+                    <a href="http://twitter.com/home?status={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.url}}&p[images][0]={{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
                 </aside>
             </div>
         </div>
     </nav>
+    
 {%- endmacro %}
 
 {% macro paragraph(html, class) -%}
@@ -163,9 +165,9 @@
         <div class="{{ index_class }}">
         {% for page in pages if page.teaser %}
             {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ page.number }} -- {{ page.teaser }}</span>
+                <span class="{{ active_class }}">{{ page.number }} — {{ page.teaser }}</span>
             {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} -- {{  page.teaser  }}</a></span>
+                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} — {{  page.teaser  }}</a></span>
             {% endif %}
         {% endfor %}
     </div>
@@ -254,7 +256,11 @@
     </figure>
 {%- endmacro %}
 
-{% macro head_image_longform(obj) -%}
+{% macro inlinegalleryimage(obj) -%}
+    {{ image(obj) }}
+{%- endmacro %}
+
+{% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
         <noscript>
             <img class="article__main-image--longform" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
@@ -303,7 +309,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and obj.format != 'zmo-background' -%}
+    {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
         {% if obj.format == 'zmo-small' %}
             figure-stamp
@@ -325,14 +331,13 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro head_video_longform(obj) -%}
-    <!-- TODO: remove test data -->
-    <div data-backgroundvideo="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" class="article__main-video--longform"> 
-        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
-                <source src="http://brightcove.vo.llnwd.net/pd16/media/18140073001/18140073001_1953018840001_fotomomente-nordlichter.mp4" type="video/mp4">
-                <img src="http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001">
+{% macro headervideo(obj) -%}
+    <div data-backgroundvideo="true" class="article__main-video--longform"> 
+        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
+                <source src="{{obj.source}}" type="video/mp4">
+                <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})">
         </video>
-            <div class="article__main-image--longform video--fallback" style="background-image:url(http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041163001_ari-origin05-arc-154-1352391648824.jpg?pubId=18140073001)"></div>
+            <div class="article__main-image--longform video--fallback" style="background-image:url({{obj.video_still}})"></div>
     </div>
 {%- endmacro %}
 
@@ -443,11 +448,19 @@
     <meta property="og:title" content="{{obj.title}}">
     <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
     <meta property="og:url" content="{{request.url}}">
-
-    <!-- TODO: add image sources -->
-    {% if obj.lead_img %}
-        <meta property="og:image" class="scaled-image" content="{{obj.lead_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-        <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.lead_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-        <meta class="scaled-image" name="twitter:image" content="{{obj.lead_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+    
+    {% if obj.sharing_img %}
+        <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
     {% endif %}
+{%- endmacro %}
+
+{% macro inlinegallery(obj) -%}
+    <div class="inline-gallery">
+        {% for item in obj.items() %}
+            <!-- Gallery-Items as block.image(obj) -->
+           {{ inlinegalleryimage(item) }}
+        {% endfor %}
+    </div>
 {%- endmacro %}

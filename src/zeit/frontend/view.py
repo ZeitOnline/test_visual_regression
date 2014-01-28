@@ -5,6 +5,7 @@ from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.image.interfaces import IImageMetadata
+from zeit.frontend.log import access_log
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
 import os.path
@@ -24,6 +25,7 @@ class Base(object):
         self.request = request
 
     def __call__(self):
+        access_log.info(self.request.url)
         return {}
 
 
@@ -49,6 +51,7 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 class Article(Base):
 
     def __call__(self):
+        super(Article, self).__call__()
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
         self.context.is_longform = False
@@ -81,16 +84,36 @@ class Article(Base):
     @property
     def header_img(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
-            header_img = zeit.frontend.block.HeaderImage(body.values()[0])
-            return header_img if header_img.layout == 'zmo-xl-header' else None
+        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        if IImage in providedBy(obj):
+            header_img = zeit.frontend.block.HeaderImage(obj)
+            return header_img
 
     @property
-    def lead_img(self):
+    def header_video(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        if len(body.values()) > 1 and IImage in providedBy(body.values()[0]):
-            lead_img = zeit.frontend.block.HeaderImage(body.values()[0])
-            return lead_img
+        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        if IVideo in providedBy(obj):
+            header_vid = zeit.frontend.block.HeaderVideo(obj)
+            return header_vid
+
+    @property
+    def header_elem(self):
+        if self.header_video is not None: return self.header_video
+        return self.header_img
+
+    @property
+    def first_img(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        if IImage in providedBy(obj):
+            first_img = zeit.frontend.block.Image(obj)
+            return first_img
+
+    @property
+    def sharing_img(self):
+        if self.header_img is not None: return self.header_img
+        return self.first_img
 
     @property
     def author(self):
@@ -187,6 +210,7 @@ class Teaser(Article):
 class Image(Base):
 
     def __call__(self):
+        super(Image, self).__call__()
         connector = zope.component.getUtility(
             zeit.connector.interfaces.IConnector)
         if not isinstance(connector, zeit.connector.connector.Connector):

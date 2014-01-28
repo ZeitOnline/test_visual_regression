@@ -10,6 +10,7 @@ eggs
 include
 lib/
 local/
+log/
 lib64
 parts
 src/*.egg-info
