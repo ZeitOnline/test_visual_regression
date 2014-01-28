@@ -4,7 +4,9 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
 import zope.interface
+import logging
 
+log = logging.getLogger(__name__)
 
 @zope.interface.implementer(zeit.frontend.interfaces.IPage)
 class Page(object):
@@ -15,9 +17,13 @@ class Page(object):
         self.blocks = []
 
     def append(self, block):
-        block = IFrontendBlock(block, None)
-        if block is not None:
-            self.blocks.append(block)
+        try:
+            block = IFrontendBlock(block, None)
+            if block is not None:
+                self.blocks.append(block)
+        except OSError:
+            log.error("Reference for %s does not exist." % type(block))
+
 
     def __iter__(self):
         return iter(self.blocks)
