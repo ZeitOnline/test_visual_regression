@@ -47,7 +47,7 @@
 		padding: 0
 		clear: none
 		.figure__media
-			cursor: e-resize
+			cursor: pointer
 		.figure__caption
 			color: $grey--mid
 			margin: 0 !important
@@ -60,6 +60,8 @@
 					+on-interaction
 						text-decoration: none
 						border-color: $charcoal
+					&:focus
+						outline: 0
 	// elements not in actual use
 	.bx-controls-auto,
 	.bx-loading
