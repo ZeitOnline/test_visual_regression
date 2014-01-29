@@ -1,7 +1,4 @@
-/* global define */
-
-define(["jquery", "bxSlider"], function($) {
-
+(function($) {
 	$.fn.inlinegallery = function( defaults ) {
 
 		var options = $.extend({
@@ -23,5 +20,4 @@ define(["jquery", "bxSlider"], function($) {
 			$(".bx-prev").addClass('icon-pfeil-hover-links');
 		});
 	};
-
-});
+})(jQuery);
