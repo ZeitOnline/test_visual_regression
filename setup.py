@@ -12,6 +12,7 @@ setup(
         'martian',
         'pyramid',
         'pyramid_jinja2',
+        'pyramid_tm',
         'setuptools',
         'simplejson',
         'zeit.cms',
