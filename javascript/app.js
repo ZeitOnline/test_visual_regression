@@ -32,11 +32,11 @@ require.config({
 			deps: [ 'jquery', 'bxSlider' ],
 			exports: 'jQuery.fn.inlinegallery'
 		}
-    },{
-        'modules/plugins/jquery.animatescroll': {
-            deps: [ 'jquery' ],
-            exports: 'jQuery.fn.animateScroll'
-        }
+	},{
+		'modules/plugins/jquery.animatescroll': {
+			deps: [ 'jquery' ],
+			exports: 'jQuery.fn.animateScroll'
+		}
 	}]
 });
 
@@ -55,7 +55,7 @@ require([
 	'modules/plugins/jquery.enablepopups',
 	'bxSlider',
 	'modules/plugins/jquery.inlinegallery',
-    'modules/plugins/jquery.animatescroll'
+	'modules/plugins/jquery.animatescroll'
 	],
 	function(jQuery, fontloader, breadcrumbs, tabs, comments, main_nav, images, supplement) {
 		fontloader.init();
@@ -65,10 +65,10 @@ require([
 		comments.init();
 		images.init();
 		supplement.init();
-		$( "figure[data-video]" ).switchVideo();
-		$( "div[data-backgroundvideo]" ).backgroundVideo();
-		$( "a.js-has-popup" ).enablePopups();
-		$( ".inline-gallery" ).inlinegallery();
-        $( "a[href^='#']" ).animateScroll();
+		$("figure[data-video]").switchVideo();
+		$("div[data-backgroundvideo]").backgroundVideo();
+		$("a.js-has-popup").enablePopups();
+		$(".inline-gallery").inlinegallery();
+		$("a[href^='#']").animateScroll();
 	}
 );
