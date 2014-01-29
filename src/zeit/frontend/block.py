@@ -71,6 +71,8 @@ class Image(object):
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout
+        self.attr_title = 'Hippo img title'
+        self.attr_alt = 'Hippo img alt'
 
     @property
     def ratio(self):
