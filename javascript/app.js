@@ -42,7 +42,7 @@ require.config({
 
 require([
 	'jquery',
-	'modules/fontloader',
+	'modules/fontloader_body',
 	'modules/breadcrumbs',
 	'modules/tabs',
 	'modules/comments',
@@ -57,8 +57,8 @@ require([
 	'modules/plugins/jquery.inlinegallery',
 	'modules/plugins/jquery.animatescroll'
 	],
-	function(jQuery, fontloader, breadcrumbs, tabs, comments, main_nav, images, supplement) {
-		fontloader.init();
+	function(jQuery, fontloader_body, breadcrumbs, tabs, comments, main_nav, images, supplement) {
+		fontloader_body.init();
 		main_nav.init();
 		breadcrumbs.init();
 		tabs.init();
