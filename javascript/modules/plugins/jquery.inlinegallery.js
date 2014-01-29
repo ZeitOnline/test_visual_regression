@@ -1,6 +1,6 @@
-/* global console, define, _this */
+/* global define */
 
-define(["jquery"], function($) {
+define(["jquery", "bxSlider"], function($) {
 
 	$.fn.inlinegallery = function( defaults ) {
 
