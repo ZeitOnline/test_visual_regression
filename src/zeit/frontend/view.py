@@ -103,6 +103,19 @@ class Article(Base):
         return self.header_img
 
     @property
+    def first_img(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        if IImage in providedBy(obj):
+            first_img = zeit.frontend.block.Image(obj)
+            return first_img
+
+    @property
+    def sharing_img(self):
+        if self.header_img is not None: return self.header_img
+        return self.first_img
+
+    @property
     def author(self):
         try:
             author = self.context.authors[0]

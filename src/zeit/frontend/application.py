@@ -218,13 +218,18 @@ default_images_sizes = dict(
 
 
 def default_image_url(image):
-    width, height = default_images_sizes.get(image.layout, (640, 480))
-    # TODO: use secret from settings?
-    signature = compute_signature(width, height, 'time')
-    if image.src is None:
-        return None
-    scheme, netloc, path, query, fragment = urlsplit(image.src)
-    parts = path.split('/')
-    parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
-    path = '/'.join(parts)
-    return urlunsplit((scheme, netloc, path, query, fragment))
+    try:
+        width, height = default_images_sizes.get(image.layout, (640, 480))
+        # TODO: use secret from settings?
+        signature = compute_signature(width, height, 'time')
+
+        if image.src is None:
+            return None 
+
+        scheme, netloc, path, query, fragment = urlsplit(image.src)
+        parts = path.split('/')
+        parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
+        path = '/'.join(parts)
+        return urlunsplit((scheme, netloc, path, query, fragment))
+    except:
+        log.debug('Cannot produce a default URL.')

@@ -106,7 +106,8 @@
     </nav>
 {%- endmacro %}
 
-{% macro main_nav_compact() -%}
+{% macro main_nav_compact(obj,request) -%}
+
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
@@ -116,12 +117,13 @@
                 </div>
             </a>
             <div class="main-nav__menu">
-                <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status=Zeit.de" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://zeit.de&p[images][0]=&p[title]=Zeit.de&p[summary]=" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url=http://zeit.de" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
+                <aside class="main-nav__sharing scaled-image">
+                    <a href="http://twitter.com/home?status={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.url}}&p[images][0]={{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
                 </aside>
             </div>
         </div>
     </nav>
+    
 {%- endmacro %}
 
 {% macro paragraph(html, class) -%}
@@ -431,6 +433,27 @@
             </div>
         </div>
     </section>
+{%- endmacro %}
+
+{% macro sharing_meta(obj,request) -%}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@zeitonline">
+    <meta name="twitter:creator" content="@zeitonline">
+    <meta name="twitter:title" content="{{obj.title}}">
+    <meta name="twitter:description" content="{{obj.subtitle}}">
+
+    <meta property="og:site_name" content="ZEIT ONLINE">
+    <meta property="fb:admins" content="595098294">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{obj.title}}">
+    <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
+    <meta property="og:url" content="{{request.url}}">
+    
+    {% if obj.sharing_img %}
+        <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+    {% endif %}
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}

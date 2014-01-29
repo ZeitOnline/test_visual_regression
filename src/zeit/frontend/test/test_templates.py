@@ -363,7 +363,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert default video
-    obj = { 'video_still': 'test.jpg', 'source': 'test.mp4'}
+    obj = {'video_still': 'test.jpg', 'source': 'test.mp4'}
     wrapper = '<div data-backgroundvideo="'
     video = '<video preload="auto" autoplay="true" ' \
             'loop="loop" muted="muted" volume="0" poster="test.jpg'
@@ -380,3 +380,35 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert source in output
     assert img in output
     assert fallback in output
+
+
+def test_macro_sharing_meta_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+
+    # assert default video
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true'}
+    request = {'url': 'test.de'}
+    twitter = ['<meta name="twitter:card" content="summary">',
+               '<meta name="twitter:site" content="@zeitonline">',
+               '<meta name="twitter:creator" content="@zeitonline">',
+               '<meta name="twitter:title" content="title">',
+               '<meta name="twitter:description" content="subtitle">']
+    fb = ['<meta property="og:site_name" content="ZEIT ONLINE">',
+          '<meta property="fb:admins" content="595098294">',
+          '<meta property="og:type" content="article">',
+          '<meta property="og:title" content="title">',
+          '"og:description" itemprop="description" content="subtitle">',
+          '<meta property="og:url" content="test.de">']
+    image = ['<meta property="og:image" class="scaled-image" content="',
+             '<link itemprop="image" class="scaled-image" rel="image_src"',
+             '<meta class="scaled-image" name="twitter:image" content="']
+    lines = tpl.module.sharing_meta(obj, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for fb_meta in fb:
+        assert fb_meta in output
+    for twitter_meta in twitter:
+        assert twitter_meta in output
+    for img in image:
+        assert img in output
