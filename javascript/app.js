@@ -30,15 +30,15 @@ require.config({
 // the order in the array and the function names have to correlate
 // which is quite disturbing in my book…
 require([
-	'modules/fontloader',
+	'modules/fontloader_body',
 	'modules/breadcrumbs',
 	'modules/main-nav',
 	'modules/tabs',
 	'modules/comments',
 	'modules/images',
 	'modules/supplement',
-], function( fontloader, breadcrumbs, main_nav, tabs, comments, images, supplement ) {
-	fontloader.init();
+], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement ) {
+	fontloader_body.init();
 	breadcrumbs.init();
 	main_nav.init();
 	tabs.init();
