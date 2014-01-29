@@ -8,7 +8,8 @@ require.config({
 		"jquery": "libs/jquery-1.10.2.min",
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
-		"bxSlider": "libs/jquery.bxslider"
+		"bxSlider": "libs/jquery.bxslider",
+		"postscribe": "libs/postscribe.min"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts

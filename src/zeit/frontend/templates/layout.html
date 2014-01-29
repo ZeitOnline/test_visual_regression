@@ -68,6 +68,21 @@
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
         {% if view.context.advertising_enabled %}
+        <script>
+            // IQD varPack
+            window.IQD_varPack = {
+                iqdSite: 'zol',
+                iqdRessort: '',
+                ord: Math.random()*10000000000000000,
+                iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
+                iqdCountSkyReq: parseInt(0,10),
+                iqdEnableSky: 'neutral'
+            };
+            // IQD variable test
+            window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
+            window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
+            window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
+        </script>
         <script type="text/javascript">
             var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/homepage;";
             var ord = (Math.random()*100000);
@@ -121,22 +136,6 @@
             </script>
         </div>
         {% if view.context.advertising_enabled %}
-            <script>
-                // IQD varPack
-                window.IQD_varPack = {
-                    iqdSite: 'zol',
-                    iqdRessort: '',
-                    ord: Math.random()*10000000000000000,
-                    iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
-                    iqdCountSkyReq: parseInt(0,10),
-                    iqdEnableSky: 'neutral'
-                };
-                // IQD variable test
-                window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
-                window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
-                window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
-            </script>
-            <script src="/js/libs/postscribe.min.js"></script>
             <script src="/js/libs/sasmobile.js"></script>
         {% endif %}
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
