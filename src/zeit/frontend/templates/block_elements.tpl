@@ -28,27 +28,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="http://zeit.de" class="main-nav__menu__content__current-ressort" id="js-main-nav-current-ressort">Startseite ZEIT Online</a>
                     <div class="main-nav__section main-nav__all-ressorts">
-                        <span class="main-nav__section__trigger icon-arrow-down">
-                            Alle Ressorts
-                        </span>
-                        <div class="main-nav__section__content" id="js-main-nav-all-ressorts-content">
-                            <div class="main-nav__section__content__wrap">
-                                <a href="#">Politik</a>
-                                <a href="#">Wirtschaft</a>
-                                <a href="#">Gesellschaft</a>
-                                <a href="#">Kultur</a>
-                                <a href="#">Wissen</a>
-                                <a href="#">Digital</a>
-                                <a href="#">Studium</a>
-                                <a href="#">Karriere</a>
-                                <a href="#" class="is-active">Magazin</a>
-                                <a href="#">Reisen</a>
-                                <a href="#">Mobilität</a>
-                                <a href="#">Sport</a>
-                            </div>
-                        </div>
+                        <a href="http://zeit.de" class="is-standalone-link">ZEIT Online</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
@@ -123,7 +104,7 @@
             </div>
         </div>
     </nav>
-    
+
 {%- endmacro %}
 
 {% macro paragraph(html, class) -%}
@@ -332,7 +313,7 @@
 {%- endmacro %}
 
 {% macro headervideo(obj) -%}
-    <div data-backgroundvideo="true" class="article__main-video--longform"> 
+    <div data-backgroundvideo="true" class="article__main-video--longform">
         <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
                 <source src="{{obj.source}}" type="video/mp4">
                 <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})">
@@ -448,7 +429,7 @@
     <meta property="og:title" content="{{obj.title}}">
     <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
     <meta property="og:url" content="{{request.url}}">
-    
+
     {% if obj.sharing_img %}
         <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
         <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
