@@ -19,14 +19,11 @@ require.config({
 		'modules/plugins/jquery.switchvideo': ["jquery"],
 		'modules/plugins/jquery.backgroundvideo': ['jquery'],
 		'modules/plugins/jquery.enablepopups': ['jquery'],
-		'modules/plugins/jquery.animatescroll': ['jquery']
+		'modules/plugins/jquery.animatescroll': ['jquery'],
+		'sjcl': {
+			exports: 'sjcl'
+		}
 	}
-});
-
-// add require libraries that will return nothing here but are needed in global object
-// it's a good idea to name them in the config.paths-section
-require(['sjcl'], function() {
-	return {};
 });
 
 // required plain vanilla ja programs here
