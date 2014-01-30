@@ -1,6 +1,6 @@
 /* global console, define, alert, sjcl, _ */
 
-define(['jquery', 'underscore'], function() {
+define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
 
     var resp_imgs = [];
 
