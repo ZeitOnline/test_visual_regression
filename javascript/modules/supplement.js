@@ -1,6 +1,6 @@
 /* global console, define, alert, postscribe */
 
-define(['jquery'], function() {
+define(['postscribe', 'jquery'], function() {
 
 	// list of possible ads
 	// guess we need this configuration somewhere global accessible
