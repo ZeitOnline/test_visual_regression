@@ -76,7 +76,9 @@ def test_header_video_should_be_first_image_of_content_blocks(application):
     vid_url = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
     article_view = view.Article(context, '')
-    url = 'http://brightcove.vo.llnwd.net/pd16/media/18140073001/201311/3985/18140073001_2855917553001_afp-klima2.mp4'
+    url = 'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/' \
+        '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights' \
+        '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4'
     assert article_view.header_video.source == url
 
 
