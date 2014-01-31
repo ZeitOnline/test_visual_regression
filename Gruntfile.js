@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 			default: {
 				files: [
 					//copy non concatinated scripts
-					{ expand: true, cwd: 'javascript', src: ['**'], dest: project.codeDir + 'js/' }
+					{ expand: true, cwd: './javascript', src: ['**'], dest: project.codeDir + 'js/' }
 				]
 			}
 		},
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'copy'],
 			},
 			css: {
-				files: ['sass/*.sass', 'sass/**/*.sass', 'sass/**/**/*.sass', 'sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'],
+				files: ['./sass/*.sass', './sass/**/*.sass', './sass/**/**/*.sass', './sass/*.scss', './sass/**/*.scss', './sass/**/**/*.scss'],
 				tasks: ['compass:dev']
 			}
 		}
