@@ -1,34 +1,13 @@
 /* global console, define */
 
 define(['jquery'], function() {
-	// set up all font packages we need
-	var font_dictionary = [
-		{
-			identifier: 'base',
-			selector: null,
-			has_priority: true,
-			path: '/css/standalone-fonts/base.css'
-		},
-		{
-			identifier: 'quotes',
-			selector: '.quote, .quote--loud',
-			has_priority: false,
-			path: '/css/standalone-fonts/quotes.css'
-		}
-	];
-	var ua = window.navigator.userAgent,
-	storage_base_string = 'de.zeit.zmo__webfonts--';
-
-	// detect old browsers that won’t support woff anyways
-	var is_old_browser = 'querySelector' in document && 'localStorage' in window && 'addEventListener' in window && ua.indexOf( "Android" ) > -1 && ua.indexOf( "like Gecko" ) > -1 && ua.indexOf( "Chrome" ) === -1 || window.document.documentElement.className.indexOf( "lt-ie9" ) > -1,
-	inject_ref = window.document.getElementsByTagName( "link" )[0];
-
+	var fl = window.FontLoader;
 	var append_css = function(style) {
 		// create a style tag in the <head> filled with raw font-face declarations
 		var style_tag = window.document.createElement( "style" );
 		style_tag.innerHTML = style;
-		if( inject_ref && inject_ref.parentNode ) {
-			inject_ref.parentNode.insertBefore( style_tag, inject_ref );
+		if( fl.inject_ref && fl.inject_ref.parentNode ) {
+			fl.inject_ref.parentNode.insertBefore( style_tag, fl.inject_ref );
 		}
 	};
 
@@ -42,7 +21,7 @@ define(['jquery'], function() {
 				url: path,
 				success: function (ajaxed_style) {
 					// we’ve got the fonts, store them in localstorage and apply them
-					localStorage.setItem(storage_base_string + identifier, ajaxed_style);
+					localStorage.setItem(fl.storage_base_string + identifier, ajaxed_style);
 					append_css(ajaxed_style);
 				}
 			});
@@ -51,19 +30,19 @@ define(['jquery'], function() {
 
 	var load_fonts = function() {
 		var scheduled_fonts = [];
-		for (var i in font_dictionary) {
+		for (var i in fl.font_dictionary) {
 			if (i) {
-				var pack = font_dictionary[i];
+				var pack = fl.font_dictionary[i];
 				// apply fonts if no selector present or selector returns at least one element
 				if (!pack.selector || document.querySelectorAll(pack.selector).length >= 1) {
-					pack.data = localStorage.getItem(storage_base_string + pack.identifier);
+					pack.data = localStorage.getItem(fl.storage_base_string + pack.identifier);
 					// if pack has priority or data is already in localstorage: apply immediately
 					if (pack.has_priority || pack.data) {
 						// drop it in as fast as possible
 						fetch_css(pack.path, pack.identifier, pack.data);
 					} else {
 						// schedule for later lazy loading
-						scheduled_fonts.push(font_dictionary[i]);
+						scheduled_fonts.push(fl.font_dictionary[i]);
 					}
 				}
 			}
@@ -80,7 +59,7 @@ define(['jquery'], function() {
 
 	// only load webfont css when we have a good guesstimate that the browser will support woff
 	var init = function() {
-		if (!is_old_browser) {
+		if (!fl.is_old_browser && !fl.fonts_loaded) {
 			load_fonts();
 		}
 	};
