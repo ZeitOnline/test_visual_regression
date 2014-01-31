@@ -10,17 +10,24 @@ define(['jquery'], function() {
   var $main_nav = $('#js-main-nav');
   var $ressort_slider_container;
   var $ressort_slider_strip;
+  var $open_menu;
+  var $open_menu_container;
+  var mobile_menu_open = false;
+  var full_nav_breakpoint = 768;
 
   var init_mobile_nav = function() {
     // enable hamburger
     $main_nav_trigger.click(function(e) {
       e.preventDefault();
+      e.stopPropagation();
       $main_nav_content.toggle();
+      mobile_menu_open = !mobile_menu_open;
     });
 
     // enable accordeons
     $main_nav_section_triggers.click(function(e) {
       e.preventDefault();
+      e.stopPropagation();
       var $current_content = $(this).next();
       $main_nav_section_contents.not($current_content).removeClass('is-open');
       $(this).next().toggleClass('is-open');
@@ -56,6 +63,7 @@ define(['jquery'], function() {
     // enable drop downs
     $main_nav_section_triggers.click(function(e) {
       e.preventDefault();
+      e.stopPropagation();
 
       // close all other menus
       $main_nav_section_contents.not($(this).next()).removeClass('is-open');
@@ -63,8 +71,8 @@ define(['jquery'], function() {
       $main_nav_sections.not($(this).parent()).removeClass('has-open-menu');
 
       // open correct one
-      $(this).toggleClass('is-active').next().toggleClass('is-open');
-      $(this).parent().toggleClass('has-open-menu');
+      $open_menu = $(this).toggleClass('is-active').next().toggleClass('is-open');
+      $open_menu_container = $(this).parent().toggleClass('has-open-menu');
     });
 
     // move current ressort link to all-ressorts drop down
@@ -74,12 +82,36 @@ define(['jquery'], function() {
     init_desktop_ressort_slider();
   };
 
+  var close_open_menu = function() {
+    if (window.innerWidth < full_nav_breakpoint) {
+      if (mobile_menu_open) {
+        // close mobile nav when open
+        $main_nav_content.hide();
+        mobile_menu_open = !mobile_menu_open;
+      }
+    } else {
+      if ($open_menu_container && $open_menu) {
+        // close desktop nav dropdowns when open
+        $open_menu.removeClass('is-open');
+        $open_menu = undefined;
+        $open_menu_container.removeClass('has-open-menu');
+        $open_menu_container = undefined;
+      }
+    }
+  };
+
   var init = function() {
-    if (window.innerWidth < 768) {
+    // init nav depending on screen size
+    if (window.innerWidth < full_nav_breakpoint) {
       init_mobile_nav();
     } else {
       init_desktop_nav();
     }
+
+    // close all menus whenever user clicks anywhere else
+    $('body').click(function(e) {
+      close_open_menu();
+    });
   };
 
   return {

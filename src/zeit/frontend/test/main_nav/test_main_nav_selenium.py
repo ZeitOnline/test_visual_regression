@@ -69,11 +69,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
     logo = main_nav.find_element_by_class_name('main-nav__logo__img')
 
-    all_res = main_nav.find_element_by_class_name('main-nav__all-ressorts')
-    all_res_trig = all_res.find_element_by_class_name(class_trig)
-    all_res_cont = all_res.find_element_by_class_name(class_cont)
-    all_res_links = all_res_cont.find_elements_by_tag_name('a')
-
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
     res_content = res.find_element_by_class_name(class_cont)
     res_links = res_content.find_elements_by_tag_name('a')
@@ -107,20 +102,14 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     else:
         assert(menu.is_displayed())
 
+
     # menu can be opened by click
-    trigger.click()
+    if small_screen:
+        trigger.click()
     assert(menu.is_displayed())
 
     # there is a logo
     assert(logo.is_displayed())
-
-    # all ressorts are present and can be opened
-    assert(all_res_trig.is_displayed())
-    all_res_trig.click()
-    assert(all_res_cont.is_displayed())
-
-    # all ressorts dropdown contains at least one link
-    assert(len(all_res_links) > 0)
 
     # service is present and can be opened
     assert(service_trig.is_displayed())

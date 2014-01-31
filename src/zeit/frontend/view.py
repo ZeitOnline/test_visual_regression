@@ -8,6 +8,7 @@ from zeit.content.image.interfaces import IImageMetadata
 from zeit.frontend.log import access_log
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
+import logging
 import os.path
 import pyramid.response
 import zeit.connector.connector
@@ -15,6 +16,8 @@ import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zope.component
+
+log = logging.getLogger(__name__)
 
 
 class Base(object):
@@ -82,37 +85,44 @@ class Article(Base):
         return zeit.frontend.interfaces.IPages(self.context)
 
     @property
-    def header_img(self):
+    def _select_first_body_obj(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        return body.values().pop(0) if len(body.values()) > 0 else None
+
+    def _create_obj(self, cls, obj):
+        try:
+            return cls(obj)
+        except OSError:
+            log.debug("Object dies not exist.")
+
+    @property
+    def header_img(self):
+        obj = self._select_first_body_obj
         if IImage in providedBy(obj):
-            header_img = zeit.frontend.block.HeaderImage(obj)
-            return header_img
+            return self._create_obj(zeit.frontend.block.HeaderImage, obj)
 
     @property
     def header_video(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        obj = self._select_first_body_obj
         if IVideo in providedBy(obj):
-            header_vid = zeit.frontend.block.HeaderVideo(obj)
-            return header_vid
-
-    @property
-    def header_elem(self):
-        if self.header_video is not None: return self.header_video
-        return self.header_img
+            return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
 
     @property
     def first_img(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        obj = body.values().pop(0) if len(body.values()) > 0 else None
+        obj = self._select_first_body_obj
         if IImage in providedBy(obj):
-            first_img = zeit.frontend.block.Image(obj)
-            return first_img
+            return self._create_obj(zeit.frontend.block.Image, obj)
+
+    @property
+    def header_elem(self):
+        if self.header_video is not None:
+            return self.header_video
+        return self.header_img
 
     @property
     def sharing_img(self):
-        if self.header_img is not None: return self.header_img
+        if self.header_img is not None:
+            return self.header_img
         return self.first_img
 
     @property
