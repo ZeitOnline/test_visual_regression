@@ -1,7 +1,4 @@
-/* global console, define, _this */
-
-define(["jquery"], function($) {
-
+(function($) {
 	$.fn.inlinegallery = function( defaults ) {
 
 		var options = $.extend({
@@ -23,5 +20,4 @@ define(["jquery"], function($) {
 			$(".bx-prev").addClass('icon-pfeil-hover-links');
 		});
 	};
-
-});
+})(jQuery);

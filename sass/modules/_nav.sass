@@ -259,7 +259,6 @@ $nav__section-border: 1px solid $grey--mid
     .main-nav__ressorts &,
     .main-nav__service-primary &,
       padding: $fine
-  .main-nav__all-ressorts &,
   .main-nav__service &
     .main-nav__section__content__wrap a
       +inline-block
@@ -267,7 +266,6 @@ $nav__section-border: 1px solid $grey--mid
       width: 48%
       &:nth-child(2n)
         padding-left: $small
-  .main-nav__all-ressorts &,
   .main-nav__service &,
   .main-nav__community &
     +respond-min($nav__break__full-menu)
@@ -297,7 +295,6 @@ $nav__section-border: 1px solid $grey--mid
 
 +respond-min($nav__break__full-menu)
   .has-hover
-    .main-nav__all-ressorts,
     .main-nav__service,
     .main-nav__search,
     .main-nav__community
@@ -305,7 +302,6 @@ $nav__section-border: 1px solid $grey--mid
       .main-nav__section__content:hover
         +nav__open-submenu
 
-  .main-nav__all-ressorts,
   .main-nav__service,
   .main-nav__search,
   .main-nav__community
@@ -320,10 +316,8 @@ $nav__section-border: 1px solid $grey--mid
     .main-nav__section__content.is-open
       width: auto
 
-  .has-hover .main-nav__all-ressorts:hover,
   .has-hover .main-nav__service:hover,
   .has-hover .main-nav__community:hover,
-  .main-nav__all-ressorts.has-open-menu,
   .main-nav__service.has-open-menu,
   .main-nav__community.has-open-menu
     border-bottom-color: $grey--mid-dark
@@ -366,14 +360,30 @@ $nav__section-border: 1px solid $grey--mid
 .main-nav__all-ressorts
   +respond-min($nav__break__full-menu)
     position: absolute
-    border-right: $nav__section-border
+    border-bottom: $nav__section-border
     left: em($nav__logo-full-width) + em(38px)
     top: 0
     padding: 0 $small
 
 
-.main-nav__all-ressorts,
-.main-nav__service,
+.is-standalone-link
+  font-size: $font-s
+  border-top: 1px solid $grey--mid-dark
+  border-bottom: 1px solid $grey--mid-dark
+  border-width: 1px !important
+  display: block
+  letter-spacing: 1px
+  +on-interaction
+    border-color: $grey--mid-dark
+  +respond-max($nav__break__full-menu)
+    padding: $small
+  +respond-min($nav__break__full-menu)
+    height: $nav__row-height
+    line-height: em_to_rem($nav__row-height) !important
+    line-height: $nav__row-height--px !important
+
+
+.main-nav__service
   .main-nav__section__trigger
     padding-right: $compact
     background-position: right center
@@ -512,14 +522,12 @@ $nav__section-border: 1px solid $grey--mid
 
 
 +respond-min($nav__break__full-menu)
-  .main-nav__all-ressorts,
   .main-nav__service,
   .main-nav__search
     border-bottom: $nav__section-border
     .main-nav__section__trigger
       line-height: $nav__row-height--px
       line-height: em_to_rem($nav__row-height)
-  .main-nav__all-ressorts,
   .main-nav__service,
   .main-nav__community
     .main-nav__section__content

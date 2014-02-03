@@ -24,11 +24,14 @@ def test_IPages_contains_blocks(application):
     assert 'Zweite' == pages[1].teaser
 
 
-def test_article_sharing_meta_html(selenium_driver, testserver):
+def test_article_has_valid_twitter_meta_tags(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
+    title = driver.find_element_by_class_name('article__title').text.strip()
+    path = "//span[@class='article__subtitle']/p"
+    desc = driver.find_element_by_xpath(path).text.strip()
+
     for meta in driver.find_elements_by_tag_name('meta'):
-        #twitter
         if meta.get_attribute("name") == 'twitter:card':
             assert 'summary' == unicode(meta.get_attribute("content"))
         if meta.get_attribute("name") == 'twitter:site':
@@ -36,14 +39,33 @@ def test_article_sharing_meta_html(selenium_driver, testserver):
         if meta.get_attribute("name") == 'twitter:creator':
             assert '@zeitonline' == unicode(meta.get_attribute("content"))
         if meta.get_attribute("name") == 'twitter:title':
-            assert 'Der Chianti hat eine zweite Chance verdient' == \
-                unicode(meta.get_attribute("content"))
+            assert unicode(title) == \
+                unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:description':
-            assert 'Erst Heilsbringer, dann Massenware: ' \
-                'Der Chianti ist tief gefallen. Doch engagierte ' \
-                'Winzer retten dem Wein in der Bastflasche die Ehre. ' == \
-                unicode(meta.get_attribute("content"))
-        #fb
+            assert unicode(desc) == \
+                unicode(meta.get_attribute("content").strip())
+        if meta.get_attribute("name") == 'twitter:image':
+            assert 'scaled-image' == unicode(meta.get_attribute("class"))
+
+
+def test_article_has_all_twitter_meta_tags(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/03' % testserver.url)
+    driver.find_element_by_xpath("//meta[@name='twitter:card']")
+    driver.find_element_by_xpath("//meta[@name='twitter:site']")
+    driver.find_element_by_xpath("//meta[@name='twitter:creator']")
+    driver.find_element_by_xpath("//meta[@name='twitter:title']")
+    driver.find_element_by_xpath("//meta[@name='twitter:description']")
+
+
+def test_article_has_valid_facebook_meta_tags(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/03' % testserver.url)
+    title = driver.find_element_by_class_name('article__title').text.strip()
+    path = "//span[@class='article__subtitle']/p"
+    desc = driver.find_element_by_xpath(path).text.strip()
+
+    for meta in driver.find_elements_by_tag_name('meta'):
         if meta.get_attribute("property") == 'og:site_name':
             assert 'ZEIT ONLINE' == unicode(meta.get_attribute("content"))
         if meta.get_attribute("property") == 'fb:admins':
@@ -51,15 +73,20 @@ def test_article_sharing_meta_html(selenium_driver, testserver):
         if meta.get_attribute("property") == 'og:type':
             assert 'article' == unicode(meta.get_attribute("content"))
         if meta.get_attribute("property") == 'og:title':
-            assert 'Der Chianti hat eine zweite Chance verdient' == \
-                unicode(meta.get_attribute("content"))
+            assert unicode(title) == \
+                unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:description':
-            assert 'Erst Heilsbringer, dann Massenware: ' \
-                'Der Chianti ist tief gefallen. Doch engagierte ' \
-                'Winzer retten dem Wein in der Bastflasche die Ehre. ' == \
-                unicode(meta.get_attribute("content"))
-        #images
+            assert unicode(desc) == \
+                unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
-        if meta.get_attribute("name") == 'twitter:image':
-            assert 'scaled-image' == unicode(meta.get_attribute("class"))
+
+
+def test_article_has_all_facebook_meta_tags(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/03' % testserver.url)
+    driver.find_element_by_xpath("//meta[@property='og:site_name']")
+    driver.find_element_by_xpath("//meta[@property='fb:admins']")
+    driver.find_element_by_xpath("//meta[@property='og:type']")
+    driver.find_element_by_xpath("//meta[@property='og:title']")
+    driver.find_element_by_xpath("//meta[@property='og:description']")
