@@ -1,6 +1,16 @@
 //Wrapper function with one parameter
 module.exports = function(grunt) {
 
+        // Monkey patch delete so it allows deleting outside the current
+        // directory, which we need since the grunt binary resides in
+        // work/frontend, while the sources are in work/source/zeit.frontend.
+	var orig_delete = grunt.file.delete;
+	grunt.file.delete = function(filepath, options) {
+		options = options || {};
+		options['force'] = true;
+		orig_delete(filepath, options);
+	}
+
 	// local variables
 	var project = {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
