@@ -7,9 +7,9 @@ module.exports = function(grunt) {
 	var orig_delete = grunt.file.delete;
 	grunt.file.delete = function(filepath, options) {
 		options = options || {};
-		options['force'] = true;
+		options.force = true;
 		orig_delete(filepath, options);
-	}
+	};
 
 	// local variables
 	var project = {
@@ -18,13 +18,26 @@ module.exports = function(grunt) {
         binDir: './',
 		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
-		concatJs: '<%= pkg.name %>.js'
+		concatJs: '<%= pkg.name %>.js',
+		sourceDir: './',
+		rubyVersion: '1.9.3'
 	};
     
     // This is a little ugly, but if we want to run this locally we need
     // an empty binDir. Everything is than expected to be in PATH.
     project.binDir = project.binDir == '.'+'/' ? '' : 'bin/';
-    grunt.log.writeln(project.binDir);
+
+
+    // checking ruby version, printing a hint if not stadard version
+	var sys = require('sys');
+	var exec = require('child_process').exec;
+	var child;
+    child = exec("ruby --version", function (error, stdout, stderr) {
+		if( stdout.indexOf(project.rubyVersion) < 0 ) {
+			grunt.log.writeln("You're using Ruby " + stdout);
+		}
+	});
+
 
 	// configuration
 	grunt.initConfig({
@@ -42,10 +55,10 @@ module.exports = function(grunt) {
 					environment: 'development',
 					fontsPath: project.codeDir + 'fonts',
 					httpPath: "/", // todo: adjust this later in project
-					imagesPath: "./src/zeit/frontend/img", // todo: adjust this later in project
+					imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
 					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
-					sassDir: './sass',
+					sassDir: project.sourceDir + 'sass',
 					require: ['animation'],
 					raw: 'preferred_syntax=:sass\n'
 				}
@@ -69,7 +82,7 @@ module.exports = function(grunt) {
 				banner: project.bannerContent
 			},
 			target: {
-				src: ['javascript/modules/*.js'],
+				src: [project.sourceDir + 'javascript/modules/*.js'],
 				ignores: [],
 				dest: project.codeDir + 'js/' + project.concatJs
 			}
@@ -80,7 +93,7 @@ module.exports = function(grunt) {
 			default: {
 				files: [
 					//copy non concatinated scripts
-					{ expand: true, cwd: './javascript', src: ['**'], dest: project.codeDir + 'js/' }
+					{ expand: true, cwd: project.sourceDir + 'javascript', src: ['**'], dest: project.codeDir + 'js/' }
 				]
 			}
 		},
@@ -100,31 +113,31 @@ module.exports = function(grunt) {
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
 				ignores: [
-					'javascript/libs/chai.js',
-					'javascript/libs/jquery-1.10.2.min.js',
-					'javascript/libs/jquery.visible.min.js',
-					'javascript/libs/modernizr.custom.42776.js',
-					'javascript/libs/require.js',
-					'javascript/libs/sasmobile.js',
-					'javascript/libs/sjcl.js',
-					'javascript/libs/postscribe.min.js',
-					'javascript/libs/jquery.bxslider.js',
-					'javascript/libs/jquery.easing.1.3.js',
-					'javascript/libs/jquery.fitvids.js',
-					'javascript/libs/underscore-min.js'
+					project.sourceDir + 'javascript/libs/chai.js',
+					project.sourceDir + 'javascript/libs/jquery-1.10.2.min.js',
+					project.sourceDir + 'javascript/libs/jquery.visible.min.js',
+					project.sourceDir + 'javascript/libs/modernizr.custom.42776.js',
+					project.sourceDir + 'javascript/libs/require.js',
+					project.sourceDir + 'javascript/libs/sasmobile.js',
+					project.sourceDir + 'javascript/libs/sjcl.js',
+					project.sourceDir + 'javascript/libs/postscribe.min.js',
+					project.sourceDir + 'javascript/libs/jquery.bxslider.js',
+					project.sourceDir + 'javascript/libs/jquery.easing.1.3.js',
+					project.sourceDir + 'javascript/libs/jquery.fitvids.js',
+					project.sourceDir + 'javascript/libs/underscore-min.js'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
 			},
 			target: {
-				src : ['javascript/**/*.js']
+				src : [project.sourceDir + 'javascript/**/*.js']
 			}
 		},
 
 		grunticon: {
 			dist: {
 				options: {
-				src: "./sass/icons",
+				src: project.sourceDir + "sass/icons",
 				dest: project.codeDir + "/css/icons"
 			}
 		}
@@ -137,7 +150,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'copy'],
 			},
 			css: {
-				files: ['./sass/*.sass', './sass/**/*.sass', './sass/**/**/*.sass', './sass/*.scss', './sass/**/*.scss', './sass/**/**/*.scss'],
+				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
 			}
 		}
