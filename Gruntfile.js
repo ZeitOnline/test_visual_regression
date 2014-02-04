@@ -1,9 +1,9 @@
 //Wrapper function with one parameter
 module.exports = function(grunt) {
 
-        // Monkey patch delete so it allows deleting outside the current
-        // directory, which we need since the grunt binary resides in
-        // work/frontend, while the sources are in work/source/zeit.frontend.
+    // Monkey patch delete so it allows deleting outside the current
+    // directory, which we need since the grunt binary resides in
+    // work/frontend, while the sources are in work/source/zeit.frontend.
 	var orig_delete = grunt.file.delete;
 	grunt.file.delete = function(filepath, options) {
 		options = options || {};
@@ -15,12 +15,16 @@ module.exports = function(grunt) {
 	var project = {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
-        binDir: 'bin/',
+        binDir: './',
 		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js'
 	};
-
+    
+    // This is a little ugly, but if we want to run this locally we need
+    // an empty binDir. Everything is than expected to be in PATH.
+    project.binDir = project.binDir == '.'+'/' ? '' : 'bin/';
+    grunt.log.writeln(project.binDir);
 
 	// configuration
 	grunt.initConfig({
