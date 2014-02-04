@@ -7,8 +7,8 @@
 			pagerType: "short",
 			nextText: "Zum nächsten Bild",
 			prevText: "Zum vorigen Bild",
-			infiniteLoop: false,
-			hideControlOnEnd: true
+			infiniteLoop: true,
+			hideControlOnEnd: false
 		}, defaults);
 		
 		return this.each(function(){
@@ -16,8 +16,8 @@
 			$('.figure__media', slider).on("click", function(){
 				slider.goToNextSlide();
 			});
-			$(".bx-next").addClass('icon-pfeil-hover-rechts');
-			$(".bx-prev").addClass('icon-pfeil-hover-links');
+			$(".bx-next").addClass('icon-pfeil-rechts');
+			$(".bx-prev").addClass('icon-pfeil-links');
 		});
 	};
 })(jQuery);
