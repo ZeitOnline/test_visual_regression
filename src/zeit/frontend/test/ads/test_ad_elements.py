@@ -43,6 +43,5 @@ def test_ad_display(selenium_driver, testserver, screen_size):
     driver.get('%s/artikel/01' % testserver.url)
     if small_screen:
         assert driver.find_element_by_css_selector(m_sel) != 0
-        
     else:
         assert driver.find_element_by_css_selector(d_sel) != 0
