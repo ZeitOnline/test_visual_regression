@@ -28,7 +28,7 @@ module.exports = function(grunt) {
     project.binDir = project.binDir == '.'+'/' ? '' : 'bin/';
 
 
-    // checking ruby version, printing a hint if not stadard version
+    // checking ruby version, printing a hint if not standard version
 	var sys = require('sys');
 	var exec = require('child_process').exec;
 	var child;
