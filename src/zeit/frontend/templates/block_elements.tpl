@@ -1,3 +1,5 @@
+
+
 {% macro main_nav(breadcrumb, is_full_width) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
@@ -85,6 +87,16 @@
             </div>
         </div>
     </nav>
+{%- endmacro %}
+
+{% macro main_footer(year) -%}
+    <footer class="main-footer">
+        <div class="main-footer__Z">
+            <img src="/img/z-logo.svg" class="main-footer__Z__img" />
+        </div>
+        <div class="main-footer__C">&copy; {{year}} ZEIT Online</div>
+        </figure>
+    </footer>
 {%- endmacro %}
 
 {% macro main_nav_compact(obj,request) -%}
