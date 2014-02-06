@@ -52,6 +52,7 @@
         <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
         <meta name="date" content="{{ view.publish_date_meta }}"/>
 
+        <!-- sharing metadata -->
         {{blocks.sharing_meta(view,request)}}
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
@@ -66,9 +67,14 @@
         <noscript>
             <link href="/css/icons/icons.fallback.css" rel="stylesheet">
         </noscript>
-
+        <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
+
+        <!-- tracking at top -->
+        {{blocks.ivw_ver2_tracking(view,request)}}
+        {{blocks.ivw_ver1_tracking(view)}}
+
         {% if view.context.advertising_enabled %}
         <script>
             // IQD varPack
@@ -141,5 +147,12 @@
             <script src="/js/libs/sasmobile.js"></script>
         {% endif %}
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+
+        <!-- tracking at end -->
+        {{blocks.ga_tracking()}}
+        {{blocks.cc_tracking(view.banner_channel)}}
+        {{blocks.meetrics_tracking()}}
+        {{blocks.webtrekk_tracking(view,request)}}
+
     </body>
 </html>
