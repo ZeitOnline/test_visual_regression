@@ -244,7 +244,9 @@
             </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
-                {{obj.copyright}}
+                {% if obj.copyright != '©' %}
+                <span class="figure__copyright">{{obj.copyright}}</span>
+                {% endif %}
             </figcaption>
     </figure>
 {%- endmacro %}
