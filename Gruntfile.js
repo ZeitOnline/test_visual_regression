@@ -134,6 +134,15 @@ module.exports = function(grunt) {
 			}
 		},
 
+		jsdoc : {
+			dist : {
+				src: [project.sourceDir + 'javascript/modules/**/*.js'], 
+				options: {
+					destination: project.codeDir + 'js/doc'
+				}
+			}
+		},
+
 		grunticon: {
 			dist: {
 				options: {
@@ -141,6 +150,7 @@ module.exports = function(grunt) {
 				dest: project.codeDir + "/css/icons"
 			}
 		}
+
     },
 
 		// watch here
@@ -164,7 +174,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-photobox');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-grunticon');
+	grunt.loadNpmTasks('grunt-jsdoc');
 
 	// register tasks here
 	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'grunticon']);
+	grunt.registerTask('production', ['jshint']);
 };
