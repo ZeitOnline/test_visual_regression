@@ -1,3 +1,4 @@
+/* global console */
 (function($) {
 	$.fn.inlinegallery = function( defaults ) {
 
@@ -12,10 +13,29 @@
 		}, defaults);
 		
 		return this.each(function(){
-			var slider = $( this ).bxSlider( options );
-			$('.figure__media', slider).on("click", function(){
+			var slider = $( this ).bxSlider( options ),
+				ffw = $('<a class="bx-overlay-next icon-pfeil-rechts" href="">Ein Bild vor</a>'),
+				rwd = $('<a class="bx-overlay-prev icon-pfeil-links" href="">Ein Bild zurück</a>');
+
+			// additional buttons on image
+			$(this).parent().parent().append(ffw);
+			$(this).parent().parent().append(rwd);
+			$(ffw).on("click", function(evt){
+				evt.preventDefault();
 				slider.goToNextSlide();
 			});
+			$(rwd).on("click", function(evt){
+				evt.preventDefault();
+				slider.goToPrevSlide();
+			});
+			// add hover-class for button display
+			$(this).find("img").hover(function() {
+				$(this).parents('.bx-wrapper').toggleClass("bx-wrapper-hovered");
+			}, function() {
+				$(this).parents('.bx-wrapper').toggleClass("bx-wrapper-hovered");
+			});
+
+			// add icons to existing gallery buttons
 			$(".bx-next").addClass('icon-pfeil-rechts');
 			$(".bx-prev").addClass('icon-pfeil-links');
 		});

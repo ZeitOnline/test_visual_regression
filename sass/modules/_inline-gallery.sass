@@ -37,18 +37,37 @@
 		background-position: 50% 50%
 		background-size: 20%
 		color: #fff
+		border-color: none
 		+opacity(0.3)
 		&:hover
 			+opacity(0.7)
+			border: none
 		&.disabled
 			+opacity(0.1)
+	.bx-overlay-next, .bx-overlay-prev
+		$overlaysize: $gallery-button-radius * 2
+		@extend .bx-next
+		width: $overlaysize
+		height: $overlaysize
+		position: absolute
+		z-index: 9999
+		top: 50%
+		margin-top: -$gallery-button-radius/2
+		outline: 0
+		+opacity(0)
+	.bx-overlay-prev
+		left: em(10px)
+	.bx-overlay-next
+		right: em(10px)
+	&.bx-wrapper-hovered
+		.bx-overlay-next, .bx-overlay-prev
+			+opacity(0.3)
+
 	// figure elements in bxSlide
 	figure
 		margin: 0
 		padding: 0
 		clear: none
-		.figure__media
-			cursor: pointer
 		.figure__caption
 			color: $grey--mid
 			margin: 0 !important
