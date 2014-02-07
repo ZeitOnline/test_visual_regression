@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 	var project = {
 		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
-        binDir: './',
+		binDir: './',
 		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		concatJs: '<%= pkg.name %>.js',
@@ -47,20 +47,31 @@ module.exports = function(grunt) {
 
 		// compile sass code
 		compass: {
+			// general options
+			options: {
+				binPath: project.binDir + 'compass',
+				cssDir: project.codeDir + 'css',
+				fontsPath: project.codeDir + 'fonts',
+				httpPath: "/", // todo: adjust this later in project
+				imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
+				javascriptsPath: "js", // todo: map to the right path
+				sassDir: project.sourceDir + 'sass',
+				require: ['animation'],
+				raw: 'preferred_syntax=:sass\n'
+			},
 			dev: {
 				options: {
-					binPath: project.binDir + 'compass',
-					cssDir: project.codeDir + 'css',
 					debugInfo: true,
 					environment: 'development',
-					fontsPath: project.codeDir + 'fonts',
-					httpPath: "/", // todo: adjust this later in project
-					imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
-					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
-					sassDir: project.sourceDir + 'sass',
-					require: ['animation'],
-					raw: 'preferred_syntax=:sass\n'
+				}
+			},
+			dist: {
+				options: {
+					debugInfo: false,
+					environment: 'production',
+					force: true,
+					outputStyle: 'compressed',
 				}
 			}
 		},
@@ -134,7 +145,7 @@ module.exports = function(grunt) {
 			}
 		},
 
-		jsdoc : {
+		jsdoc: {
 			dist : {
 				src: [project.sourceDir + 'javascript/modules/**/*.js'], 
 				options: {
@@ -146,12 +157,11 @@ module.exports = function(grunt) {
 		grunticon: {
 			dist: {
 				options: {
-				src: project.sourceDir + "sass/icons",
-				dest: project.codeDir + "/css/icons"
+					src: project.sourceDir + "sass/icons",
+					dest: project.codeDir + "/css/icons"
+				}
 			}
-		}
-
-    },
+		},
 
 		// watch here
 		watch: {
@@ -178,5 +188,5 @@ module.exports = function(grunt) {
 
 	// register tasks here
 	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'grunticon']);
-	grunt.registerTask('production', ['jshint']);
+	grunt.registerTask('production', ['jshint','compass:dist', 'copy', 'grunticon']);
 };
