@@ -473,7 +473,7 @@
         <script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
         <script type="text/javascript">
 
-            var Z_WT_KENNUNG = "redaktion.{%if obj.ressort%}{{obj.ressort}}{%endif%}.{%if obj.sub_ressort%}{{obj.sub_ressort}}{%endif%}..{{obj.type}}.online.{{request.path}}"; // content id
+            var Z_WT_KENNUNG = "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path}}"; // content id
 
             var webtrekk = {
                 linkTrack : "standard",
@@ -496,7 +496,7 @@
                     1: "{% if obj.author %}{{obj.author.name}}{% endif %}",
                     2: "{{obj.banner_channel}}",
                     3: "1/1",
-                    4: '{% if obj.rankedTags %}{% for tag in obj.rankedTags %}{{tag.label}}{% if not loop.last %};{% endif %}{% endfor %}{% endif %}',
+                    4: "{{obj.rankedTagsList}}",
                     6: "{{obj.text_length}}",
                     7: "",
                     9: "{{obj.banner_channel}}"
@@ -507,21 +507,21 @@
             wt.sendinfo();        
         </script>
         <noscript>
-            <div><img alt="" width="1" height="1" src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{%if obj.ressort%}{{obj.ressort}}{%endif%}.{%if obj.sub_ressort%}{{obj.sub_ressort}}{%endif%}..{{obj.tracking_type}}.online.{{request.path}},0,0,0,0,0,0,0,0&cg1=Redaktion&cg2={{obj.tracking_type}}&cg3={{obj.ressort}}&cg4=Online&cp1={% if obj.author %}{{obj.author.name}}{% endif %}&cp2={{obj.banner_channel}}&cp3=1&cp4={% if obj.rankedTags %}{% for tag in obj.rankedTags %}{{tag.label}}{% if not loop.last %};{% endif %}{% endfor %}{% endif %}&cp6={{obj.text_length}}&cp7=&cp9={{obj.banner_channel}}"></div>
+            <div><img alt="" width="1" height="1" src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path}},0,0,0,0,0,0,0,0&cg1=Redaktion&cg2={{obj.tracking_type}}&cg3={{obj.ressort}}&cg4=Online&cp1={% if obj.author %}{{obj.author.name}}{% endif %}&cp2={{obj.banner_channel}}&cp3=1&cp4={{obj.rankedTagsList}}&cp6={{obj.text_length}}&cp7=&cp9={{obj.banner_channel}}"></div>
         </noscript>
 {%- endmacro %}
 
-{% macro ivw_ver1_tracking(obj) -%}
+{% macro ivw_ver1_tracking(channel) -%}
 <!-- ivw ver1 tracking -->
 <!-- SZM VERSION="1.5" -->
 <!--Dieses Online-Angebot unterliegt nicht der IVW-Kontrolle!-->
     <script type="text/javascript">
-        var Z_IVW_RESSORT = '{{obj.banner_channel}}';
-        var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{obj.banner_channel}}";
+        var Z_IVW_RESSORT = "{{channel}}";
+        var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
         document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"smztag\" width=\"1\" height=\"1\" />");
     </script> 
     <noscript>
-        <img alt="szmtag" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{obj.banner_channel}};" height="1" width="1" />
+        <img alt="szmtag" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
     </noscript>
 {%- endmacro %}
 

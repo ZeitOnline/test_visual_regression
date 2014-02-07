@@ -160,6 +160,16 @@ class Article(Base):
         return self.context.keywords
 
     @property
+    def rankedTagsList(self):
+        keyword_list = ''
+        if self.rankedTags:
+            for keyword in self.context.keywords:
+                keyword_list += keyword.label + ';'
+            return keyword_list[:-1]
+        else:
+            return ''
+
+    @property
     def genre(self):
         return self.context.genre
 
@@ -214,11 +224,15 @@ class Article(Base):
     def ressort(self):
         if self.context.ressort:
             return self.context.ressort.lower()
+        else:
+            return ''
 
     @property
     def sub_ressort(self):
         if self.context.sub_ressort:
             return self.context.sub_ressort.lower()
+        else:
+            return ''
 
     @property
     def text_length(self):
