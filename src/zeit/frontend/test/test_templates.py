@@ -252,7 +252,7 @@ def test_image_should_produce_markup(jinja2_env):
             '<img class="figure__media"' \
             ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
             'data-ratio=""></noscript></div><figcaption' \
-            ' class="figure__caption">testtest</figcaption></figure>' \
+            ' class="figure__caption">test<span class="figure__copyright">test</span></figcaption></figure>' \
             % el['css']
         assert match(markup, output)
 
