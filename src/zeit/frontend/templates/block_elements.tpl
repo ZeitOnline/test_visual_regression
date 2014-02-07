@@ -244,7 +244,9 @@
             </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
-                {{obj.copyright}}
+                {% if obj.copyright != '©' %}
+                <span class="figure__copyright">{{obj.copyright}}</span>
+                {% endif %}
             </figcaption>
     </figure>
 {%- endmacro %}
@@ -434,7 +436,6 @@
     <meta name="twitter:creator" content="@zeitonline">
     <meta name="twitter:title" content="{{obj.title}}">
     <meta name="twitter:description" content="{{obj.subtitle}}">
-
     <meta property="og:site_name" content="ZEIT ONLINE">
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
@@ -447,6 +448,109 @@
         <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
         <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
     {% endif %}
+{%- endmacro %}
+
+{% macro ga_tracking() -%}
+<!-- ga tracking -->
+        <script type="text/javascript"> 
+            var _gaq = _gaq || []; 
+            _gaq.push(['_setAccount', 'UA-18122964-1']); 
+            _gaq.push(['_setDomainName', '.zeit.de']); 
+            _gaq.push (['_gat._anonymizeIp']);
+            _gaq.push(['_trackPageview']); 
+            (function() { 
+            var ga = document.createElement('script'); 
+            ga.type = 'text/javascript'; 
+            ga.async = true; 
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+            var s = document.getElementsByTagName('script')[0]; 
+            s.parentNode.insertBefore(ga, s); })(); 
+        </script>  
+{%- endmacro %}
+
+{% macro cc_tracking(channel) -%}
+<!-- cc tracking -->
+    <script type="text/javascript">
+        document.write('<img alt="" height="1" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'" width="1" >');
+    </script> 
+{%- endmacro %}
+
+{% macro meetrics_tracking() -%}
+<!-- meetrics tracking -->
+    <script type="text/javascript" src="http://scripts.zeit.de/js/rsa.js"></script>
+    <script type="text/javascript">try{loadMWA208571();}catch(e){}</script>
+    <script type="text/javascript">try{mainMWA208571();}catch(e){}</script>
+{%- endmacro %}
+
+{% macro webtrekk_tracking(obj, request) -%}
+<!-- webtrekk tracking -->
+        <script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
+        <script type="text/javascript">
+
+            var Z_WT_KENNUNG = "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path}}"; // content id
+
+            var webtrekk = {
+                linkTrack : "standard",
+                heatmap : "0",
+                linkTrackAttribute: "id"
+            };
+
+            var wt = new webtrekkV3(webtrekk);
+
+            wt.cookie = "1"; // (3|1, 1st or 3rd party cookie)
+            wt.contentGroup = {
+                1: "Redaktion",
+                2: "{{obj.tracking_type}}",
+                3: "{{obj.ressort}}",
+                4: "Online"
+            };
+            
+            {% if obj.type == 'article' -%}
+                wt.customParameter = {
+                    1: "{% if obj.author %}{{obj.author.name}}{% endif %}",
+                    2: "{{obj.banner_channel}}",
+                    3: "1/1",
+                    4: "{{obj.rankedTagsList}}",
+                    6: "{{obj.text_length}}",
+                    7: "",
+                    9: "{{obj.banner_channel}}"
+                };
+             {%- endif %}
+           
+            wt.contentId = Z_WT_KENNUNG;
+            wt.sendinfo();        
+        </script>
+        <noscript>
+            <div><img alt="" width="1" height="1" src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path}},0,0,0,0,0,0,0,0&cg1=Redaktion&cg2={{obj.tracking_type}}&cg3={{obj.ressort}}&cg4=Online&cp1={% if obj.author %}{{obj.author.name}}{% endif %}&cp2={{obj.banner_channel}}&cp3=1&cp4={{obj.rankedTagsList}}&cp6={{obj.text_length}}&cp7=&cp9={{obj.banner_channel}}"></div>
+        </noscript>
+{%- endmacro %}
+
+{% macro ivw_ver1_tracking(channel) -%}
+<!-- ivw ver1 tracking -->
+<!-- SZM VERSION="1.5" -->
+<!--Dieses Online-Angebot unterliegt nicht der IVW-Kontrolle!-->
+    <script type="text/javascript">
+        var Z_IVW_RESSORT = "{{channel}}";
+        var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
+        document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"smztag\" width=\"1\" height=\"1\" />");
+    </script> 
+    <noscript>
+        <img alt="szmtag" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
+    </noscript>
+{%- endmacro %}
+
+{% macro ivw_ver2_tracking(obj,request) -%}
+<!-- ivw ver2 tracking -->
+<!-- SZM VERSION="2" -->
+    <script type="text/javascript">
+        var iam_data = {
+            "st" : "zeitonl",
+            "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text", 
+            "sv" : "ke",
+            "co" : "URL: {{request.path}}"
+        }
+        iom.c(iam_data,1); 
+    </script>
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}

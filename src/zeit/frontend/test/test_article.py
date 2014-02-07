@@ -90,3 +90,21 @@ def test_article_has_all_facebook_meta_tags(selenium_driver, testserver):
     driver.find_element_by_xpath("//meta[@property='og:type']")
     driver.find_element_by_xpath("//meta[@property='og:title']")
     driver.find_element_by_xpath("//meta[@property='og:description']")
+
+
+def test_all_tracking_pixel_are_send(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/05' % testserver.url)
+    driver.find_element_by_xpath(
+        "//script[@src='http://www.google-analytics.com/ga.js']")
+    driver.find_element_by_xpath(
+        "//script[@src='http://scripts.zeit.de/js/rsa.js']")
+    driver.find_element_by_xpath(
+        "//script[@src='http://scripts.zeit.de/static/js/" +
+        "webtrekk/webtrekk_v3.js']")
+    driver.find_element_by_xpath(
+        "//script[@src='https://script.ioam.de/iam.js']")
+    driver.find_element_by_xpath(
+        "//img[starts-with(@src,'http://cc.zeit.de/cc.gif')]")
+    driver.find_element_by_xpath(
+        "//img[starts-with(@src,'http://zeitonl.ivwbox.de')]")
