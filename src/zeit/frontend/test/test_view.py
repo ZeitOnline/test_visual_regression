@@ -146,3 +146,46 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<div class="article__head-wrap">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
     assert '<img class="article__main-image--longform"' in browser.contents
+
+
+def test_content_should_have_type(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    content_type = type(context).__name__.lower()
+    assert content_type is not None
+
+
+def test_tracking_type_is_provided(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    article_view = view.Article(context, '')
+    assert article_view.tracking_type == 'Artikel'
+
+
+def test_artikel02_has_lebensart_ressort(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    article_view = view.Article(context, '')
+    assert article_view.ressort == 'lebensart'
+
+
+def test_artikel02_has_mode_sub_ressort(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    article_view = view.Article(context, '')
+    assert article_view.sub_ressort == 'mode'
+
+
+def test_artikel02_has_correct_banner_channel(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    article_view = view.Article(context, '')
+    assert article_view.banner_channel == 'lebensart/mode/article'
+
+
+def test_artikel05_has_rankedTagsList(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert article_view.rankedTagsList is not None
+    assert article_view.rankedTagsList != ''
+
+
+def test_artikel05_has_set_text_length(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert article_view.text_length is not None
