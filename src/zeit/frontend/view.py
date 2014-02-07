@@ -1,4 +1,5 @@
 from babel.dates import get_timezone
+from datetime import date
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
@@ -58,6 +59,7 @@ class Article(Base):
         self.context.advertising_enabled = True
         self.context.main_nav_full_width = False
         self.context.is_longform = False
+        self.context.current_year = date.today().year
 
         if IArticleTemplateSettings(self.context).template == 'longform':
             self.context.advertising_enabled = False

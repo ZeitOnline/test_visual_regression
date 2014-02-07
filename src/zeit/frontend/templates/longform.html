@@ -5,7 +5,7 @@
 	<article class="article article--longform">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
-   
+
           {{ blocks[view.header_elem|block_type](view.header_elem) }}
 
   				<header class="article__title-wrap">
@@ -40,18 +40,6 @@
             </div>
           </section>
         {% endfor %}
-
-				{% if view.rankedTags %}
-				<div class="article__tags is-constrained is-centered">
-					<span class="article__tags__title">Tags</span>
-					{% for tag in view.rankedTags %}
-								<a href="#{{ tag.url_value }}" id="hp.article.tools.tag.{{ tag.label }}" title="Artikel mit dem Schlagwort *{{ tag.label }}* anzeigen">{{ tag.label }}</a>
-								{% if not loop.last %}
-									,
-								{% endif %}
-					{% endfor %}
-				</div>
-				{% endif %}
 
 			</div>
 		</div>

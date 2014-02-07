@@ -1,5 +1,6 @@
 from mock import Mock
 from re import match
+from datetime import date
 import pyramid.config
 import pytest
 import zeit.frontend.application
@@ -41,6 +42,24 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
     # assert empty subtitle
     assert '' == tpl.module.subpage_chapter(0, '', '')
+
+def test_macro_footer_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    current_year = date.today().year
+
+    # assert normal markup
+    markup = '<footer class="main-footer">' \
+        '<div class="main-footer__Z">' \
+        '<img src="/img/z-logo.svg" class="main-footer__Z__img" />' \
+        '</div>' \
+        '<div class="main-footer__C">&copy; ' + str(current_year) + ' ZEIT Online</div>' \
+        '</figure>' \
+        '</footer>'
+    lines = tpl.module.main_footer(current_year).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):

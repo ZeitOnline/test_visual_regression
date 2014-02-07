@@ -4,11 +4,12 @@ $bp-adjust-horizontal-figures--1: 1120px
 $bp-adjust-horizontal-figures--2: 1320px
 $bp-adjust-horizontal-figures--3: 1385px
 $bp-adjust-horizontal-figures--4: 1450px
+$longform-header-offset: 80px
+$longform-header-min-height: 400px
+$longform-header-max-height: 1400px
 
 .article.article--longform
   padding: 0
-  min-height: 100%
-  height: 100%
   max-width: none
 
   .article__subtitle
@@ -17,9 +18,6 @@ $bp-adjust-horizontal-figures--4: 1450px
   .article__wrap
     padding-top: 0
     margin-top: 0
-    min-height: 100%
-    height: 100%
-
   p
     max-width: 38.88em
     +respond-min($break-3)
@@ -28,11 +26,50 @@ $bp-adjust-horizontal-figures--4: 1450px
   .article__head-wrap
     position: relative
     overflow: hidden
-    height: 85%
-    min-height: em(400px)
     padding-top: 0
     margin-top: 0
     background-color: $black
+    min-height: em($longform-header-min-height)
+    max-height: em($longform-header-max-height)
+    height: em(400px)
+    +respond-min-h(em(500px))
+      height: em(500px) - em($longform-header-offset)
+    +respond-min-h(em(550px))
+      height: em(550px) - em($longform-header-offset)
+    +respond-min-h(em(600px))
+      height: em(600px) - em($longform-header-offset)
+    +respond-min-h(em(650px))
+      height: em(650px) - em($longform-header-offset)
+    +respond-min-h(em(700px))
+      height: em(700px) - em($longform-header-offset)
+    +respond-min-h(em(750px))
+      height: em(750px) - em($longform-header-offset)
+    +respond-min-h(em(800px))
+      height: em(800px) - em($longform-header-offset)
+    +respond-min-h(em(850px))
+      height: em(850px) - em($longform-header-offset)
+    +respond-min-h(em(900px))
+      height: em(900px) - em($longform-header-offset)
+    +respond-min-h(em(950px))
+      height: em(950px) - em($longform-header-offset)
+    +respond-min-h(em(1000px))
+      height: em(1000px) - em($longform-header-offset)
+    +respond-min-h(em(1050px))
+      height: em(1050px) - em($longform-header-offset)
+    +respond-min-h(em(1100px))
+      height: em(1100px) - em($longform-header-offset)
+    +respond-min-h(em(1150px))
+      height: em(1150px) - em($longform-header-offset)
+    +respond-min-h(em(1200px))
+      height: em(1200px) - em($longform-header-offset)
+    +respond-min-h(em(1250px))
+      height: em(1250px) - em($longform-header-offset)
+    +respond-min-h(em(1300px))
+      height: em(1300px) - em($longform-header-offset)
+    +respond-min-h(em(1350px))
+      height: em(1350px) - em($longform-header-offset)
+    +respond-min-h(em(1400px))
+      height: em(1400px) - em($longform-header-offset)
     &:after
       +box-shadow(inset 0 -200px 200px rgba($black, 0.7))
       content: ''
@@ -184,6 +221,7 @@ $bp-adjust-horizontal-figures--4: 1450px
   .article__body
     padding-left: 0
     padding-right: 0
+    padding-bottom: 0
     background-color: $white
     p:first-of-type
       +respond-min($comments__break-overlap)
