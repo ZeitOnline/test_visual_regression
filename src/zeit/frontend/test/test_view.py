@@ -127,7 +127,7 @@ def test_inline_gallery_should_have_images(testserver):
     gallery_image = frontend_gallery.items()[3]
     assert gallery_image.src == u'http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
     assert gallery_image.alt == None
-    assert gallery_image.copyright == ((u'\xa9', None, False),)
+    assert gallery_image.copyright == u'\xa9'
 
 
 def test_article_request_should_have_body_element(testserver):
