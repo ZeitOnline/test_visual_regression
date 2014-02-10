@@ -18,7 +18,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
             // get the parent height, don’t use ratio to update pixelperfect img
             height = $img.parent().parent().height();
         } else {
-            height = height || $img.height() || Math.round(width / $img.data('ratio'));
+            //ToDo (T.B.) $img.height() has a wrong value if alt attribute is set in image
+            //height = height || $img.height() || Math.round(width / $img.data('ratio'));
+            height = height || Math.round(width / $img.data('ratio'));
         }
         var token = prefix(width, height);
         var src = image.src || $img.data('src');
