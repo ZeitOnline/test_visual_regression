@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 		sourceDir: './',
 		rubyVersion: '1.9.3'
 	};
-    
+
     // This is a little ugly, but if we want to run this locally we need
     // an empty binDir. Everything is than expected to be in PATH.
     project.binDir = project.binDir == '.'+'/' ? '' : 'bin/';
@@ -124,7 +124,8 @@ module.exports = function(grunt) {
 					project.sourceDir + 'javascript/libs/jquery.bxslider.js',
 					project.sourceDir + 'javascript/libs/jquery.easing.1.3.js',
 					project.sourceDir + 'javascript/libs/jquery.fitvids.js',
-					project.sourceDir + 'javascript/libs/underscore-min.js'
+					project.sourceDir + 'javascript/libs/underscore-min.js',
+					project.sourceDir + 'javascript/libs/packery.pkgd.js'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
