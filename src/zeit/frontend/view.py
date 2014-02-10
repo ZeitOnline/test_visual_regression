@@ -68,6 +68,11 @@ class Article(Base):
             return render_to_response('templates/longform.html',
                                       {"view": self},
                                       request=self.request)
+        if IArticleTemplateSettings(self.context).template == 'photocluster':
+            self.context.advertising_enabled = False
+            return render_to_response('templates/photocluster.html',
+                                      {"view": self},
+                                      request=self.request)
         return {}
 
     @property

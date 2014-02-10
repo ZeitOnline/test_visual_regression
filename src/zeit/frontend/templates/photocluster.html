@@ -1,0 +1,215 @@
+{% extends "templates/layout.html" %}
+{% import 'templates/block_elements.tpl' as blocks %}
+{% block content %}
+    <article class="article" id="js-article">
+        <div class="article__wrap">
+            <div class="article__head-wrap">
+                <header class="article__title-wrap">
+                    <div class="is-constrained is-centered">
+                        <h2 class="article__supertitle">
+                            {{ view.supertitle }}
+                        </h2>
+                        <h1 class="article__title">
+                            {{view.title}}
+                        </h1>
+                        <div class="article__meta">
+                            {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+                        </div>
+                        <div class="article__opener">
+                            <span class="article__subtitle">
+                                <p>{{view.subtitle}}</p>
+                            </span>
+                            <span class="article__meta">
+                                {% if view.genre -%}
+                                    <span class="article__meta__genre">{{view.genre}}</span>
+                                {%- endif %}
+                                {{ blocks.meta_author(view.author) }}
+                                {% if view.location -%}
+                                    <span class="article__meta__location">{{view.location}}</span>
+                                {%- endif %}
+                            </span>
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+            <div class="article__body">
+                <div class="article__page">
+                    <div class="photocluster">
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.39444850256">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-800x600-b4257492687d9c7cfabb028a0e0a145a02fdd72c/03.jpg" data-ratio="1.39444850256">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="0.694451680125">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/02.jpg" data-ratio="0.694451680125">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="0.666">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/r1.jpg" data-ratio="0.666">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.49953139644">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-800x600-b4257492687d9c7cfabb028a0e0a145a02fdd72c/r2.jpg" data-ratio="1.49953139644">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.68539325843">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/r3.jpg" data-ratio="1.68539325843">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                                            <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.39444850256">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-800x600-b4257492687d9c7cfabb028a0e0a145a02fdd72c/03.jpg" data-ratio="1.39444850256">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="0.694451680125">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/02.jpg" data-ratio="0.694451680125">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="0.666">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/r1.jpg" data-ratio="0.666">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.49953139644">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-800x600-b4257492687d9c7cfabb028a0e0a145a02fdd72c/r2.jpg" data-ratio="1.49953139644">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.68539325843">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/r3.jpg" data-ratio="1.68539325843">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                                            <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.39444850256">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-800x600-b4257492687d9c7cfabb028a0e0a145a02fdd72c/03.jpg" data-ratio="1.39444850256">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="0.694451680125">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/02.jpg" data-ratio="0.694451680125">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="0.666">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/r1.jpg" data-ratio="0.666">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.49953139644">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-800x600-b4257492687d9c7cfabb028a0e0a145a02fdd72c/r2.jpg" data-ratio="1.49953139644">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                          <noscript data-ratio="1.68539325843">
+                            <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/r3.jpg" data-ratio="1.68539325843">
+                          </noscript>
+                        </div>
+                      </div>
+                      <div class="photocluster__item">
+                        <div class="scaled-image">
+                            <noscript data-ratio="1.49926793558">
+                              <img class="figure__media" src="http://localhost:9090/exampleimages/artikel/05/bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/r4.jpg" data-ratio="1.49926793558">
+                            </noscript>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                {{ blocks.focussed_nextread(view.focussed_nextread) }}
+
+            </div>
+        </div>
+	</article>
+{% endblock content %}

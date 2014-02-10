@@ -1,4 +1,4 @@
-/* globals require, define, console */
+/* globals require, define, packery, console */
 
 // configuration section for require js
 require.config({
@@ -9,7 +9,8 @@ require.config({
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
 		"bxSlider": "libs/jquery.bxslider",
-		"postscribe": "libs/postscribe.min"
+		"postscribe": "libs/postscribe.min",
+		"packery": "libs/packery.pkgd"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
@@ -37,14 +38,16 @@ require([
 	'modules/comments',
 	'modules/images',
 	'modules/supplement',
-], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement ) {
+	'modules/photocluster',
+], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement, photocluster) {
 	fontloader_body.init();
 	breadcrumbs.init();
 	main_nav.init();
 	tabs.init();
 	comments.init();
-	images.init();
 	supplement.init();
+	photocluster.init();
+	images.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here

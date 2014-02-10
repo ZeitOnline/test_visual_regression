@@ -238,7 +238,7 @@
         {% endif %}
         ">
             <div class="scaled-image">
-                <noscript>
+                <noscript data-ratio="{{obj.ratio}}">
                         <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
                 </noscript>
             </div>

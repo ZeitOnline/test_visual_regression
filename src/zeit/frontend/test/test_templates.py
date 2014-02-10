@@ -262,7 +262,7 @@ def test_image_should_produce_markup(jinja2_env):
         output = ""
         for line in lines:
             output += line.strip()
-        markup = '<figure class="%s"><div class="scaled-image"><noscript>' \
+        markup = '<figure class="%s"><div class="scaled-image"><noscript data-ratio="">' \
             '<img alt="%s" title="%s" class="figure__media"' \
             ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
             'data-ratio=""></noscript></div><figcaption' \
