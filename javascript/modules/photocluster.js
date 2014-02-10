@@ -16,7 +16,7 @@ define(['packery', 'jquery'], function() {
         // find responsive image container within packery block
         var $rimg = $photo.find('img, noscript').eq(0);
         if ($rimg.length === 1) {
-          // adjust height of packery block to ratio of image
+          // adjust height of packery block to ratio of image and add 5px padding on top and bottom (see CSS)
           // TODO: debounced recalculation on resize (see images.js for example)
           $photo.css('height', $photo.width()/$rimg.data('ratio') + 10);
         }
