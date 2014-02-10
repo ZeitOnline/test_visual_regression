@@ -18,10 +18,22 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
 		element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper")))
 		nextselector = ".bx-next"
 		prevselector = ".bx-prev"
+		onextselector = ".bx-overlay-next"
+		oprevselector = ".bx-overlay-prev"
+		# test navigation buttons
 		nextbutton = driver.find_element_by_css_selector(nextselector)
 		prevbutton = driver.find_element_by_css_selector(prevselector)
 		assert nextbutton
 		assert prevbutton
+		nextbutton.click()
+		prevbutton.click()
+		# test overlay buttons
+		overlaynext = driver.find_element_by_css_selector(onextselector)
+		overlayprev = driver.find_element_by_css_selector(onextselector)
+		assert overlaynext
+		assert overlayprev
+		overlaynext.click()
+		overlayprev.click()
     except:
 		print "Timeout Gallery Script"
 		assert False
