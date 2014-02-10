@@ -64,6 +64,7 @@ class Image(object):
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
+        # TODO: don't use XML but adapt an Image and use it's metadata
         xml = model_block.xml
         self.image = model_block.references
         self.src = self.image and self.image.uniqueId
@@ -176,7 +177,10 @@ class InlineGalleryImage(Image):
             self.src = item.image.uniqueId
             self.image = item.image
         image_meta = zeit.content.image.interfaces.IImageMetadata(item)
-        self.copyright = image_meta.copyrights
+        # TODO: get complete list of copyrights with links et al
+        # this just returns the first copyright without link
+        # mvp it is
+        self.copyright = [copyright[0] for copyright in image_meta.copyrights][0]
         self.alt = image_meta.alt
         self.align = image_meta.alignment
 
