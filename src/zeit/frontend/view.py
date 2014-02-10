@@ -167,6 +167,16 @@ class Article(Base):
         return self.context.keywords
 
     @property
+    def rankedTagsList(self):
+        keyword_list = ''
+        if self.rankedTags:
+            for keyword in self.context.keywords:
+                keyword_list += keyword.label + ';'
+            return keyword_list[:-1]
+        else:
+            return ''
+
+    @property
     def genre(self):
         return self.context.genre
 
@@ -207,6 +217,44 @@ class Article(Base):
         if self.title:
             l.append((self.title, 'http://localhost'))
         return l
+
+    @property
+    def tracking_type(self):
+        if type(self.context).__name__.lower() == 'article':
+            return 'Artikel'
+
+    @property
+    def type(self):
+        return type(self.context).__name__.lower()
+
+    @property
+    def ressort(self):
+        if self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+    @property
+    def sub_ressort(self):
+        if self.context.sub_ressort:
+            return self.context.sub_ressort.lower()
+        else:
+            return ''
+
+    @property
+    def text_length(self):
+        return self.context.textLength
+
+    @property
+    def banner_channel(self):
+        channel = ''
+        if self.ressort:
+            channel += self.ressort
+        if self.sub_ressort:
+            channel += "/" + self.sub_ressort
+        if self.type:
+            channel += "/" + self.type
+        return channel
 
 
 @view_config(route_name='json',
