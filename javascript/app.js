@@ -1,4 +1,4 @@
-/* globals require, define, console */
+/* globals require, define, packery, console */
 
 // configuration section for require js
 require.config({
@@ -8,7 +8,8 @@ require.config({
 		"jquery": "libs/jquery-1.10.2.min",
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
-		"bxSlider": "libs/jquery.bxslider"
+		"bxSlider": "libs/jquery.bxslider",
+		"packery": "libs/packery.pkgd"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
@@ -35,12 +36,14 @@ require([
 	'modules/tabs',
 	'modules/comments',
 	'modules/images',
-], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement ) {
+	'modules/photocluster',
+], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement, photocluster) {
 	fontloader_body.init();
 	breadcrumbs.init();
 	main_nav.init();
 	tabs.init();
 	comments.init();
+	photocluster.init();
 	images.init();
 });
 
