@@ -216,24 +216,38 @@ def test_image_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
-            'caption': 'test', 'copyright': 'test'},
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'zmo-xl',
             'css': 'article__main-image figure-full-width',
-            'caption': 'test', 'copyright': 'test'},
+            'caption': 'test', 'copyright': 'test',
+						'attr_alt': 'My alt content',
+						'attr_title': 'My title content'},
            {'layout': 'zmo-medium', 'align': 'left',
             'css': 'figure-horizontal',
-            'caption': 'test', 'copyright': 'test'},
+            'caption': 'test', 'copyright': 'test',
+						'attr_alt': 'My alt content',
+						'attr_title': 'My title content'},
            {'layout': 'zmo-medium', 'align': 'right',
             'css': 'figure-horizontal--right',
-            'caption': 'test', 'copyright': 'test'},
+            'caption': 'test', 'copyright': 'test',
+						'attr_alt': 'My alt content',
+						'attr_title': 'My title content'},
            {'layout': 'zmo-medium', 'align': False, 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
-            'copyright': 'test'},
+            'copyright': 'test',
+						'attr_alt': 'My alt content',
+						'attr_title': 'My title content'},
            {'layout': 'small', 'align': 'right',
             'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': 'test'},
+            'caption': 'test', 'copyright': 'test',
+						'attr_alt': 'My alt content',
+						'attr_title': 'My title content'},
            {'layout': 'small', 'align': False, 'css': 'figure-stamp',
-            'caption': 'test', 'copyright': 'test'}]
+            'caption': 'test', 'copyright': 'test',
+						'attr_alt': 'My alt content',
+						'attr_title': 'My title content'}]
 
     class Image(object):
 
@@ -249,13 +263,12 @@ def test_image_should_produce_markup(jinja2_env):
         for line in lines:
             output += line.strip()
         markup = '<figure class="%s"><div class="scaled-image"><noscript data-ratio="">' \
-            '<img class="figure__media"' \
+            '<img alt="%s" title="%s" class="figure__media"' \
             ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
             'data-ratio=""></noscript></div><figcaption' \
             ' class="figure__caption">test<span class="figure__copyright">test</span></figcaption></figure>' \
-            % el['css']
+            % (el['css'], el['attr_alt'], el['attr_title'])
         assert match(markup, output)
-
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')

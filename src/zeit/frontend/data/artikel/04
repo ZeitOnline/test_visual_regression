@@ -100,7 +100,7 @@
         <title>Kann Leipzig Hypezig überleben?</title>
         <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen &#8211; aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
         <division type="page">
-            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
+            <image align="left" title="Hippos TITLE Attr Bau Buero" alt="Hippos ALT Attr Bau Büro" src="http://xml.zeit.de/exampleimages/artikel/04/01.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-xl" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
