@@ -136,7 +136,8 @@ module.exports = function(grunt) {
 					project.sourceDir + 'javascript/libs/jquery.easing.1.3.js',
 					project.sourceDir + 'javascript/libs/jquery.fitvids.js',
 					project.sourceDir + 'javascript/libs/underscore-min.js',
-					project.sourceDir + 'javascript/libs/packery.pkgd.js'
+					project.sourceDir + 'javascript/libs/packery.pkgd.js',
+					project.sourceDir + 'javascript/documentation'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
@@ -150,8 +151,20 @@ module.exports = function(grunt) {
 			dist : {
 				src: [project.sourceDir + 'javascript/modules/**/*.js'], 
 				options: {
-					destination: project.codeDir + 'js/doc'
+					destination: project.sourceDir + 'javascript/documentation'
 				}
+			}
+		},
+
+		'sftp-deploy': {
+			build: {
+				docs: {
+					host: 'buildit.zeit.de',
+					port: 22
+				},
+				src: project.sourceDir + 'javascript/documentation/**',
+				dest: '/srv/nginx/javascript/documentation',
+				server_sep: '/'
 			}
 		},
 
@@ -186,8 +199,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-grunticon');
 	grunt.loadNpmTasks('grunt-jsdoc');
+	grunt.loadNpmTasks('grunt-sftp-deploy');
 
 	// register tasks here
 	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'grunticon']);
 	grunt.registerTask('production', ['jshint','compass:dist', 'copy', 'grunticon']);
+	grunt.registerTask('docs', ['jsdoc', 'sftp-deploy']);
+
 };
