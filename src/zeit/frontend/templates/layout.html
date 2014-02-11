@@ -46,7 +46,6 @@
         {{blocks.sharing_meta(view,request)}}
 
         <script src="/js/libs/modernizr.custom.42776.js"></script>
-        <script data-main="/js/app" src="/js/libs/require.js"></script>
         <script src="/js/modules/fontloader_head.js"></script>
 
         <script>
@@ -58,6 +57,9 @@
             <link href="/css/icons/icons.fallback.css" rel="stylesheet">
         </noscript>
         <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
+        {% if view.context.advertising_enabled %}
+            <script src="/js/libs/sasmobile.js"></script>
+        {% endif %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
 
@@ -67,6 +69,9 @@
 
         {% if view.context.advertising_enabled %}
         <script>
+            // negative keyword 'diuqilon'
+            // todo: if we get a billboard, we need more options (NB)
+            var diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
             // IQD varPack
             window.IQD_varPack = {
                 iqdSite: 'zol',
@@ -93,7 +98,9 @@
         <div class="page-wrap">
 
             {% if view.context.advertising_enabled %}
-            <div class="iqdplace" data-place="mobile_topbanner"></div>
+            <div class="iqdplace">
+                <div id="sas_13500"></div>
+            </div>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
@@ -134,9 +141,6 @@
                 };
             </script>
         </div>
-        {% if view.context.advertising_enabled %}
-            <script src="/js/libs/sasmobile.js"></script>
-        {% endif %}
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         <!-- tracking at end -->
@@ -144,6 +148,15 @@
         {{blocks.cc_tracking(view.banner_channel)}}
         {{blocks.meetrics_tracking()}}
         {{blocks.webtrekk_tracking(view,request)}}
-
+        
+        <script data-main="/js/app" src="/js/libs/require.js"></script>
+        <script type="text/javascript">
+            var sas_pageid = '54114/391248',
+            sas_formatid = 13500,
+            sas_target = '';
+            if( typeof window.sasmobile === 'function') {
+                window.sasmobile(sas_pageid,sas_formatid,sas_target);
+            }
+        </script>
     </body>
 </html>
