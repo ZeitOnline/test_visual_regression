@@ -37,7 +37,7 @@ require([
 	'modules/comments',
 	'modules/images',
 	'modules/photocluster',
-], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement, photocluster) {
+], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, photocluster) {
 	fontloader_body.init();
 	breadcrumbs.init();
 	main_nav.init();
