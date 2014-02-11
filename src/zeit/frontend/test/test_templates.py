@@ -543,7 +543,7 @@ def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
              'var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + string,
              'document.write("<img src=',
              '</script',
-             '<img alt="szmtag" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
+             '<img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
              + string]
     lines = tpl.module.ivw_ver1_tracking(string).splitlines()
     output = ""
@@ -571,3 +571,33 @@ def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
         output += line.strip()
     for el in elems:
         assert el in output
+
+
+def test_macro_adplace_should_produce_markup(jinja2_env):
+    # todo: after importing banner.xml to the system
+    # make multiple tests from this
+    # with all standard banner
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    banner = {'name':'superbanner',
+        'tile': '1',
+        'sizes': ['728x90'],
+        'dcopt': 'ist',
+        'label': 'anzeige',
+        'noscript_width_height': ('728','90'),
+        'diuqilon': True,
+        'min_width': 768}
+    num = '123456789'
+    markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
+             'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
+             'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
+             '+ diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
+             '/javascript"><\/script>\');'
+    lines = tpl.module.adplace(banner).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup in output
+
+
+
+

@@ -9,7 +9,6 @@ require.config({
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
 		"bxSlider": "libs/jquery.bxslider",
-		"postscribe": "libs/postscribe.min",
 		"packery": "libs/packery.pkgd"
 	},
 	// a shim is need for jQuery Plugins to load
@@ -37,7 +36,6 @@ require([
 	'modules/tabs',
 	'modules/comments',
 	'modules/images',
-	'modules/supplement',
 	'modules/photocluster',
 ], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement, photocluster) {
 	fontloader_body.init();
@@ -45,7 +43,6 @@ require([
 	main_nav.init();
 	tabs.init();
 	comments.init();
-	supplement.init();
 	photocluster.init();
 	images.init();
 });
