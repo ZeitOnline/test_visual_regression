@@ -121,7 +121,7 @@
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
-            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -158,8 +158,8 @@
         <image-credits>Fotos (S. 16 + 17): Benne Ochs für DIE ZEIT/www.benneochs.de</image-credits>
         <supertitle>Friedhof Hamburg-Ohlsdorf</supertitle>
         <division type="page" teaser="Kein zeitlos sicheres Geschäft mehr">
-        <image align="right" src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
-        <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
+        <image align="right" src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False" alt="My 05er alt" title="my 05er title">
+        <bu>Ein Mann in Leipzig XXXXXXXX vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
