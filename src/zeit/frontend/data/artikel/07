@@ -43,7 +43,7 @@
             <bu>Einäscherung</bu>
             <copyright>© Benne Ochs</copyright>
         </image>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="template">longform</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="template">photocluster</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">1585573</attribute>
@@ -121,10 +121,7 @@
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
-            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">
-                <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
-                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
-            </image>
+            <video format="zmo-xl-header" is_empty="True" href="http://xml.zeit.de/video/2014-01/1953013471001" expires=""/>
             <p>Auch der Tod hat in Deutschland ein exaktes Maß. 213 Zentimeter lang, 83
       Zentimeter breit und 170 Zentimeter tief muss die Grube werden, die Artur und Jürgen an diesem
       Morgen schaufeln, abgeschirmt von Rhododendren und im Schutz der frühen Stunde. Auf dem alten,
@@ -158,8 +155,8 @@
         <image-credits>Fotos (S. 16 + 17): Benne Ochs für DIE ZEIT/www.benneochs.de</image-credits>
         <supertitle>Friedhof Hamburg-Ohlsdorf</supertitle>
         <division type="page" teaser="Kein zeitlos sicheres Geschäft mehr">
-        <image align="right" src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False" alt="My 05er alt" title="my 05er title">
-        <bu>Ein Mann in Leipzig XXXXXXXX vor dem "Bau Büro"</bu>
+        <image align="right" src="/img/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+        <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
@@ -181,7 +178,7 @@
       Menschen – im Zeitalter der Individualisierung – nicht mehr nach dem Raster der Reihengräber
       richten wollen. Und weil andere am liebsten spurlos verschwinden möchten, jedenfalls preiswert
       und pflegeleicht.</p>
-      <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/r1.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+      <image align="left" src="/img/artikel/05/r1.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
         <bu>Ein Streetart-Plakat der Künstlerin Gerlinde Meyer im Leipziger Stadtteil Plagwitz</bu>
         <copyright>© Pia Volk</copyright>
     </image>
@@ -232,7 +229,7 @@
         . Und von der "schwarzen Null", die Hamburg
       am Ende jedes Jahres von ihm sehen will.
       </p>
-      <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/03.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+      <image align="left" src="/img/artikel/05/03.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
       <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -308,7 +305,7 @@
 
 
 
-            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/r4.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
+            <image align="left" src="/img/artikel/05/r4.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -355,7 +352,7 @@
       blockiert zu haben scheint. Zwischen Buchs- und Eibenhecken stecken moosgrüne Schilder mit der
       Aufschrift: "Weitere Informationen, auch über die Möglichkeit einer Reservierung, erhalten Sie
       im Beratungszentrum und unter 040/593880."</p>
-      <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/r2.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+      <image align="left" src="/img/artikel/05/r2.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -375,7 +372,7 @@
         von dem Geschäftsführer
       Purwin sprach.
       </p>
-            <image align="right" src="http://xml.zeit.de/exampleimages/artikel/05/r3.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+            <image align="right" src="/img/artikel/05/r3.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
                 <bu>Leipzig Hauptbahnhof ist mit einer Grundfläche von 83.640 Quadratmetern der flächenmäßig größte Kopfbahnhof Europas.</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
