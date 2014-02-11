@@ -251,6 +251,32 @@ class Article(Base):
             channel += "/" + self.type
         return channel
 
+    @property
+    def banner(self):
+        # faking banner xml (mvp yeah you know me)
+        return {
+            'superbanner': {
+                'name': 'superbanner',
+                'tile': '1',
+                'sizes': ['728x90'],
+                'dcopt': 'ist',
+                'label': 'anzeige',
+                'noscript_width_height': ('728', '90'),
+                'diuqilon': True,
+                'min_width': 768
+            },
+            'skyscraper': {
+                'name': 'skyscraper',
+                'tile': '2',
+                'sizes': ['120x600'],
+                'dcopt': 'ist',
+                'adlabel': 'Anzeige',
+                'noscript_width_height': ('120','600'),
+                'diuqilon': True,
+                'min_width': 768
+            },
+        }
+
 
 @view_config(route_name='json',
              context=zeit.content.article.interfaces.IArticle,
