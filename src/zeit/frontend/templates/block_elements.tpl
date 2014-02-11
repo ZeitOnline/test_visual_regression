@@ -532,10 +532,10 @@
     <script type="text/javascript">
         var Z_IVW_RESSORT = "{{channel}}";
         var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
-        document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"smztag\" width=\"1\" height=\"1\" />");
+        document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"\" width=\"1\" height=\"1\" />");
     </script> 
     <noscript>
-        <img alt="szmtag" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
+        <img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
     </noscript>
 {%- endmacro %}
 
@@ -548,7 +548,7 @@
             "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text", 
             "sv" : "ke",
             "co" : "URL: {{request.path}}"
-        }
+        };
         iom.c(iam_data,1); 
     </script>
 {%- endmacro %}
