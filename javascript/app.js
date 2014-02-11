@@ -8,8 +8,7 @@ require.config({
 		"jquery": "libs/jquery-1.10.2.min",
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
-		"bxSlider": "libs/jquery.bxslider",
-		"postscribe": "libs/postscribe.min"
+		"bxSlider": "libs/jquery.bxslider"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
@@ -36,7 +35,6 @@ require([
 	'modules/tabs',
 	'modules/comments',
 	'modules/images',
-	'modules/supplement',
 ], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, supplement ) {
 	fontloader_body.init();
 	breadcrumbs.init();
@@ -44,7 +42,6 @@ require([
 	tabs.init();
 	comments.init();
 	images.init();
-	supplement.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here
