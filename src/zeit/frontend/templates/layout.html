@@ -10,7 +10,26 @@
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
         <title>ZMO</title>
         <meta name='description'>
-        <meta content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
+        <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
+        <script>
+            var viewport_meta = document.getElementById('viewport-meta');
+            var viewports = {
+                    default: viewport_meta.getAttribute('content'),
+                    landscape: 'width=1280'
+                };
+            var viewport_set = function() {
+                if ( screen.width > 768 ) {
+                    viewport_meta.setAttribute( 'content', viewports.landscape );
+                } else {
+                    viewport_meta.setAttribute( 'content', viewports.default );
+                }
+                
+            };
+            viewport_set();
+            window.onresize = function() { 
+                viewport_set(); 
+            };
+        </script>
         <!--[if lte IE 8]>
             <link href="/css/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
         <![endif]-->
