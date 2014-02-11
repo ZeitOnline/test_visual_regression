@@ -561,3 +561,21 @@
         {% endfor %}
     </div>
 {%- endmacro %}
+
+{% macro adplace(banner) -%}
+    {%set kw = 'zeitonline,zeitmz' %}
+    <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
+    <div id="iqadtile{{banner.tile}}">
+        <script type="text/javascript">
+            if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
+            document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}diuqilon{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+            }
+        </script>
+        <noscript>
+        <div>
+            <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
+                <img src="http://ad.de.doubleclick.net/ad/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
+        </a></div>
+        </noscript>
+    </div>
+{%- endmacro %}
