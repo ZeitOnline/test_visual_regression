@@ -158,11 +158,12 @@ module.exports = function(grunt) {
 
 		'sftp-deploy': {
 			build: {
-				docs: {
+				auth: {
 					host: 'buildit.zeit.de',
-					port: 22
+					port: 22,
+					authKey: 'privateKey'
 				},
-				src: project.sourceDir + 'javascript/documentation/**',
+				src: project.sourceDir + 'javascript/documentation',
 				dest: '/srv/nginx/javascript/documentation',
 				server_sep: '/'
 			}
