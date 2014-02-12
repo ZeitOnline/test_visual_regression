@@ -41,6 +41,7 @@ setup(
             'zope.testbrowser',
         ],
     },
+    setup_requires=['setuptools_git'],
     namespace_packages=['zeit'],
     packages=find_packages('src'),
     package_dir={'': 'src'},
