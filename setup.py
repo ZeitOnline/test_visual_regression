@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.1',
+    version='0.2.dev0',
 
     install_requires=[
         'Babel',
