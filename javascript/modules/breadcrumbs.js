@@ -1,7 +1,9 @@
 /* global console, define, alert */
-
 define(['jquery'], function() {
 
+	/**
+	 * show breadcrumbs
+	 */
 	var init = function() {
 		if (window.innerWidth >= 768) {
 			var trigger_alternate_caption;

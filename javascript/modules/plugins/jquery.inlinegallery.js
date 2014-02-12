@@ -1,4 +1,10 @@
+/* global console, alert */
 (function($) {
+
+	/**
+	 * integrate inline gallery
+	 * @param  {Object} defaults
+	 */
 	$.fn.inlinegallery = function( defaults ) {
 
 		var options = $.extend({
@@ -11,6 +17,9 @@
 			hideControlOnEnd: true
 		}, defaults);
 		
+		/**
+		 * activate bxSlider
+		 */
 		return this.each(function(){
 			var slider = $( this ).bxSlider( options );
 			$('.figure__media', slider).on("click", function(){

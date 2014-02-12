@@ -1,9 +1,14 @@
 /* global console, alert */
 (function($){
 
+  /**
+   * animate scrolling for anchor links
+   */
   $.fn.animateScroll = function() {
 
-    //run through links that jump to anchors
+    /**
+     * run through links that jump to anchors
+     */
     $(this).each(function(){
       $(this).click(function(e) {
         e.preventDefault();
