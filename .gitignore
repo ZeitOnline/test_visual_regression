@@ -4,6 +4,7 @@
 dist
 src/*.egg-info
 .*
+setuptools_git-*
 src/zeit/frontend/css
 src/zeit/frontend/js
 .DS_Store
