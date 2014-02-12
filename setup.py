@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.1.dev0',
+    version='0.2.dev0',
 
     install_requires=[
         'Babel',
@@ -41,6 +41,7 @@ setup(
             'zope.testbrowser',
         ],
     },
+    setup_requires=['setuptools_git'],
     namespace_packages=['zeit'],
     packages=find_packages('src'),
     package_dir={'': 'src'},
