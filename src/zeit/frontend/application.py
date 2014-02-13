@@ -104,7 +104,7 @@ class Application(object):
 
     def configure_connector(self, context):
         typ = self.settings['connector_type']
-        allowed = ('noncachingdav', 'filesystem')
+        allowed = ('dav', 'tbcdav', 'filesystem')
         if typ not in allowed:
             raise ValueError(
                 'Invalid setting connector_type=%s, allowed are {%s}'
