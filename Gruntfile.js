@@ -169,6 +169,28 @@ module.exports = function(grunt) {
 			}
 		},
 
+		requirejs: {
+			options: {
+				keepBuildDir: true,
+				baseUrl: project.sourceDir + 'javascript/',
+				mainConfigFile: project.sourceDir + 'javascript/app.js',
+				out: project.codeDir + 'js/main.js',
+				name: "app",
+				generateSourceMaps: true,
+				preserveLicenseComments: false
+			},
+			dev: {
+				options: {
+					optimize: "none"
+				}
+			},
+			dist: {
+				options: {
+					optimize: "uglify2"
+				}
+			}
+		},
+
 		grunticon: {
 			dist: {
 				options: {
@@ -182,7 +204,7 @@ module.exports = function(grunt) {
 		watch: {
 			js: {
 				files: ['<%= jshint.target.src %>'],
-				tasks: ['jshint', 'copy'],
+				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
 				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
@@ -201,10 +223,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-grunticon');
 	grunt.loadNpmTasks('grunt-jsdoc');
 	grunt.loadNpmTasks('grunt-sftp-deploy');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'grunticon']);
-	grunt.registerTask('production', ['jshint','compass:dist', 'copy', 'grunticon']);
+	grunt.registerTask('default', ['jshint', 'requirejs:dist', 'compass:dev', 'copy', 'grunticon']);
+	grunt.registerTask('production', ['jshint', 'requirejs:dist', 'compass:dist', 'copy', 'grunticon']);
 	grunt.registerTask('docs', ['jsdoc', 'sftp-deploy']);
 
 };
