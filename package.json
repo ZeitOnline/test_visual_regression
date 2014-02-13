@@ -19,13 +19,12 @@
     "mocha": "~1.13.0",
     "zombie": "~2.0.0-alpha24",
     "assert": "~0.4.9",
-    "karma-browserstack-launcher": "0.0.4",
     "browserstacktunnel-wrapper": "~1.1.0",
-    "karma-junit-reporter": "~0.1.0",
     "grunt-grunticon": "~0.6.14",
     "grunt-jsdoc": "~0.5.1",
     "grunt-sftp-deploy": "~0.0.11",
-    "grunt-contrib-requirejs": "~0.4.1"
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-grunticon": "~0.6.14"
   },
   "repository": {
     "type": "git",
