@@ -13,12 +13,10 @@ module.exports = function(grunt) {
 
 	// local variables
 	var project = {
-		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
 		binDir: './',
 		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
-		concatJs: '<%= pkg.name %>.js',
 		sourceDir: './',
 		rubyVersion: '1.9.3'
 	};
@@ -84,18 +82,6 @@ module.exports = function(grunt) {
 				urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
 				useImageMagick: true
 				}
-			}
-		},
-
-		//concat files
-		concat: {
-			options: {
-				banner: project.bannerContent
-			},
-			target: {
-				src: [project.sourceDir + 'javascript/modules/*.js'],
-				ignores: [],
-				dest: project.codeDir + 'js/' + project.concatJs
 			}
 		},
 
@@ -215,7 +201,6 @@ module.exports = function(grunt) {
 
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass-shabunc');
-	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-photobox');
