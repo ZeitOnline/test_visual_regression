@@ -598,6 +598,9 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
         output += line.strip()
     assert markup in output
 
+def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
+     tpl = jinja2_env.get_template('templates/block_elements.tpl')
+     assert  tpl.module.no_block('') == ''
 
 
 
