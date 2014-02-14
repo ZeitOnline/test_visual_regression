@@ -9,25 +9,67 @@ window.FontLoader = (function() {
 		{
 			identifier: 'base',
 			selector: null,
-			has_priority: true,
-			path: '/css/standalone-fonts/base.css'
+			path: '/css/standalone-fonts/base.css',
+			version: "1.0"
 		},
 		{
 			identifier: 'quotes',
 			selector: '.quote, .quote--loud',
-			has_priority: false,
-			path: '/css/standalone-fonts/quotes.css'
+			path: '/css/standalone-fonts/quotes.css',
+			version: "1.0"
 		}
 	];
 
-	this.ua = window.navigator.userAgent;
 	this.storage_base_string = 'de.zeit.zmo__webfonts--';
+	this.storage_version_suffix = '--version';
+	this.scheduled_fonts = [];
 
-	// detect old browsers that won’t support woff anyways
-	this.is_old_browser = 'querySelector' in document && 'localStorage' in window && 'addEventListener' in window && this.ua.indexOf( "Android" ) > -1 && this.ua.indexOf( "like Gecko" ) > -1 && this.ua.indexOf( "Chrome" ) === -1 || window.document.documentElement.className.indexOf( "lt-ie9" ) > -1;
-	this.inject_ref = window.document.getElementsByTagName( "link" )[0];
+	// detect modern browsers that support woff
+	this.modern_browser = ('querySelector' in document) && ('localStorage' in window) && ('addEventListener' in window) && (window.document.documentElement.className.indexOf( "lt-ie9" ) === -1);
+	this.inject_ref = window.document.getElementsByTagName("link")[0];
 
-	this.fonts_loaded = false;
+	// queue font pack download for later
+	this.lazy_load_fonts = function(pack) {
+		this.scheduled_fonts.push(pack);
+	};
+
+	// create a style tag in the <head> filled with raw font-face declarations
+	this.append_css = function(style) {
+		var style_tag = window.document.createElement("style");
+		style_tag.innerHTML = style;
+		if(this.inject_ref && this.inject_ref.parentNode) {
+			this.inject_ref.parentNode.insertBefore(style_tag, this.inject_ref);
+		}
+	};
+
+	// load fonts from localstorage or queue up for lazy loading
+	this.init_fonts = function() {
+		// run through all font packs in the dictionary
+		for (var i in this.font_dictionary) {
+			if (i) {
+				var pack = this.font_dictionary[i];
+				var stored_version = localStorage.getItem(this.storage_base_string + pack.identifier + this.storage_version_suffix);
+				pack.data = localStorage.getItem(this.storage_base_string + pack.identifier);
+				if (pack.data) {
+					if (pack.version === stored_version) {
+						// font is in localstorage, drop data in style tag immediately
+						this.append_css(pack.data);
+					} else {
+						// font is in local storage, but outdated, queue font download for later
+						this.lazy_load_fonts(this.font_dictionary[i]);
+					}
+				} else {
+					// not in localstorage, queue font download for later
+					this.lazy_load_fonts(this.font_dictionary[i]);
+				}
+			}
+		}
+	};
+
+	// only load fonts if modern browser
+	if (this.modern_browser) {
+		this.init_fonts();
+	}
 
 	return this;
 })();
