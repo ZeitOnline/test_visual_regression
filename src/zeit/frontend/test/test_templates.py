@@ -24,6 +24,18 @@ def test_macro_p_should_produce_markup(jinja2_env):
     markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
     assert markup == output
 
+def test_macro_raw_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    css_class = 'raw'
+    markup = '<div class="%s">'\
+        '<blink>ZEIT ONLINE</blink>'\
+        '</div>' % css_class
+    obj = {'xml': '<blink>ZEIT ONLINE</blink>'}
+    lines = tpl.module.raw(obj).splitlines()
+    output = ""
+    for line in lines:
+      output += line
+      assert markup == output
 
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
