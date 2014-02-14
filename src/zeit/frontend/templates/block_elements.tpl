@@ -186,6 +186,10 @@
     </h3>
 {%- endmacro %}
 
+{% macro raw(obj) -%}
+    <div class="raw">{{obj.xml|safe}}</div>
+{%- endmacro %}
+
 {% macro citation(obj) -%}
     <blockquote class="
         {% if obj.layout == 'wide' %}

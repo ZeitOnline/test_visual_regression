@@ -104,6 +104,13 @@ class Intertitle(object):
     def __str__(self):
         return self.text
 
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IRawXML)
+class Raw(object):
+
+    def __init__(self, model_block):
+        self.xml = _raw_html(model_block.xml)
+
 
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.ICitation)
@@ -202,6 +209,19 @@ class InlineGallery(object):
                 my_items.append(InlineGalleryImage(entry))
         return my_items
 
+def _raw_html(xml):
+    filter_xslt = etree.XML('''
+        <xsl:stylesheet version="1.0"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml"
+                        omit-xml-declaration="yes" />
+          <xsl:template match="raw">
+            <xsl:copy-of select="*" />
+          </xsl:template>
+        </xsl:stylesheet>
+    ''')
+    transform = etree.XSLT(filter_xslt)
+    return transform(xml)
 
 def _inline_html(xml):
     allowed_elements = "a|span|strong|img|em|sup|sub|caption"
