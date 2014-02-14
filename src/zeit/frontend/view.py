@@ -96,11 +96,11 @@ class Article(Base):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
 
-    def _create_obj(self, cls, obj):
+    def _create_obj(self, _cls, obj):
         try:
-            return cls(obj)
+            return _cls(obj)
         except OSError:
-            log.debug("Object dies not exist.")
+            log.debug("Object does not exist.")
 
     @property
     def header_img(self):
