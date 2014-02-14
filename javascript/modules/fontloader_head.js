@@ -1,5 +1,8 @@
 /* global console, alert */
 
+/**
+ * font loader setup
+ */
 window.FontLoader = (function() {
 	// set up all font packages we need
 	this.font_dictionary = [

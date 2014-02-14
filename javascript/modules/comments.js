@@ -1,6 +1,6 @@
 /* global console, define, alert */
-
 define(['jquery', 'modules/tabs'], function() {
+  
   var $comments_trigger = $('#js-comments-trigger');
   var $comments = $('#js-comments');
   var $page_wrap_inner = $('#js-page-wrap-inner');
@@ -12,39 +12,55 @@ define(['jquery', 'modules/tabs'], function() {
   var comments_body_height = 0;
   var window_width = 0;
 
+  /**
+   * handels comment pagination
+   */
   var recalculate_pagination = function() {
+
     // handle tablet/desktop size with paginated comments
     if (window_width >= 768) {
+
       // calculate maximum height for comments and set
       $comments_active_list = $('#js-comments-body .tabs__content.is-active .comments__list');
       comments_body_height = $comments.outerHeight() - document.getElementById('js-comments-body').offsetTop;
       $comments_body.css('height', comments_body_height);
+
       // detect whether we even need pagination
       if (comments_body_height < $comments_active_list.height()) {
         $comments_body.addClass('show-older-trigger');
       }
+
       var current_top_offset = parseInt($comments_active_list.css('top').replace('px',''), 10);
+
       if (current_top_offset < 0) {
         $comments_body.addClass('show-newer-trigger');
       }
+
     // handle mobile widths
     } else {
       $comments_body.css('height', 'auto');
     }
   };
 
+  /**
+   * handles comment events
+   */
   var init = function() {
+
     // bind pagination for older comments
     $comments_older.click(function() {
+
       // calculate new comments offset
       var current_top_offset = parseInt($comments_active_list.css('top').replace('px',''), 10);
       var list_offset = current_top_offset - comments_body_height;
       $comments_body.addClass('show-newer-trigger');
+
       // detect whether we need the older trigger for another round
       if (Math.abs(list_offset) + comments_body_height > $comments_active_list.height()) {
         $comments_body.removeClass('show-older-trigger');
       }
       $comments_active_list.css('top', list_offset);
+
       // scroll to top of comments
       $('html, body').animate({
         scrollTop: $comments_trigger.offset().top
@@ -53,15 +69,18 @@ define(['jquery', 'modules/tabs'], function() {
 
     // bind pagination for newer comments
     $comments_newer.click(function() {
+
       // calculate new comments offset
       var current_top_offset = parseInt($comments_active_list.css('top').replace('px',''), 10);
       var list_offset = current_top_offset + comments_body_height;
       $comments_body.addClass('show-older-trigger');
+
       // detect whether we need the newer trigger for another round
       if (list_offset >= 0) {
         $comments_body.removeClass('show-newer-trigger');
       }
       $comments_active_list.css('top', list_offset);
+
       // scroll to top of comments
       $('html, body').animate({
         scrollTop: $comments_trigger.offset().top
@@ -77,6 +96,7 @@ define(['jquery', 'modules/tabs'], function() {
 
     // bind comments trigger to toggle comments
     $comments_trigger.click(function() {
+
       window_width = $(window).innerWidth();
 
       if (window_width >= 1280) {

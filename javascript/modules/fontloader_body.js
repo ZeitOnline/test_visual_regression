@@ -1,9 +1,13 @@
 /* global console, define */
-
 define(['jquery'], function() {
+
 	var fl = window.FontLoader;
+
+	/**
+	 * create a style tag in the <head> filled with raw font-face declarations
+	 * @param  {Object} style
+	 */
 	var append_css = function(style) {
-		// create a style tag in the <head> filled with raw font-face declarations
 		var style_tag = window.document.createElement( "style" );
 		style_tag.innerHTML = style;
 		if( fl.inject_ref && fl.inject_ref.parentNode ) {
@@ -11,6 +15,12 @@ define(['jquery'], function() {
 		}
 	};
 
+	/**
+	 * fetch css either from local storage or with ajax
+	 * @param  {[type]} path
+	 * @param  {[type]} identifier
+	 * @param  {[type]} font_data
+	 */
 	var fetch_css = function(path, identifier, font_data) {
 		// if we already have font_data (from localstorage), make use of it immediately
 		if (font_data && font_data.length > 0) {
@@ -28,6 +38,9 @@ define(['jquery'], function() {
 		}
 	};
 
+	/**
+	 * load fonts
+	 */
 	var load_fonts = function() {
 		var scheduled_fonts = [];
 		for (var i in fl.font_dictionary) {
@@ -57,7 +70,9 @@ define(['jquery'], function() {
 		};
 	};
 
-	// only load webfont css when we have a good guesstimate that the browser will support woff
+	/**
+	 * only load webfont css when we have a good guesstimate that the browser will support woff
+	 */
 	var init = function() {
 		if (!fl.is_old_browser && !fl.fonts_loaded) {
 			load_fonts();
