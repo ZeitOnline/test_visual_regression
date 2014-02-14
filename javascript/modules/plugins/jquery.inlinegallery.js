@@ -1,22 +1,29 @@
+/* global console */
+
 /**
- * See (http://jquery.com/).
- * @name jQuery
- * @class 
- * See the jQuery Library  (http://jquery.com/) for full details.  This just
- * documents the function and classes that are added to jQuery by this plug-in.
- */
-/**
- * See (http://jquery.com/)
- * @name fn
- * @class 
- * See the jQuery Library  (http://jquery.com/) for full details.  This just
- * documents the function and classes that are added to jQuery by this plug-in.
- * @memberOf jQuery
+ * @fileOverview  Inline-Gallery preparation and evokation script
+ * @author nico.bruenjes@zeit.de
+ * @version  0.1
  */
 (function($) {
 	/**
-	 * Inline-Gallery preparation and evokation script 
-	 *
+	 * See (http://jquery.com/).
+	 * @name jQuery
+	 * @alias $
+	 * @class jQuery Library
+	 * See the jQuery Library  (http://jquery.com/) for full details.  This just
+	 * documents the function and classes that are added to jQuery by this plug-in.
+	 */
+	/**
+	 * See (http://jquery.com/)
+	 * @name fn
+	 * @class jQuery Library
+	 * See the jQuery Library  (http://jquery.com/) for full details.  This just
+	 * documents the function and classes that are added to jQuery by this plug-in.
+	 * @memberOf jQuery
+	 */
+	/**
+	 * Prepares the inline gallery and adds some extra features 
 	 * @class inlinegallery
 	 * @memberOf jQuery.fn
 	 * @param  {object} defaults	configuration object, overwriting presetted options
@@ -60,6 +67,10 @@
 			/* add icons to existing gallery buttons */
 			$(".bx-next").addClass('icon-pfeil-rechts');
 			$(".bx-prev").addClass('icon-pfeil-links');
+
+			$(this).on("scaling_ready", function(e) {
+				slider.redrawSlider();
+			});
 		});
 	};
 })(jQuery);

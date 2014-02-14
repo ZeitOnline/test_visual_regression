@@ -13,12 +13,10 @@ module.exports = function(grunt) {
 
 	// local variables
 	var project = {
-		bannerContent: '/*! <%= pkg.name %> <%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> \n' + ' *  License: <%= pkg.license %> */\n',
 		name: '<%= pkg.name %>-<%= pkg.version%>',
-        binDir: './',
+		binDir: './',
 		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
-		concatJs: '<%= pkg.name %>.js',
 		sourceDir: './',
 		rubyVersion: '1.9.3'
 	};
@@ -47,20 +45,31 @@ module.exports = function(grunt) {
 
 		// compile sass code
 		compass: {
+			// general options
+			options: {
+				binPath: project.binDir + 'compass',
+				cssDir: project.codeDir + 'css',
+				fontsPath: project.codeDir + 'fonts',
+				httpPath: "/", // todo: adjust this later in project
+				imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
+				javascriptsPath: "js", // todo: map to the right path
+				sassDir: project.sourceDir + 'sass',
+				require: ['animation'],
+				raw: 'preferred_syntax=:sass\n'
+			},
 			dev: {
 				options: {
-					binPath: project.binDir + 'compass',
-					cssDir: project.codeDir + 'css',
 					debugInfo: true,
 					environment: 'development',
-					fontsPath: project.codeDir + 'fonts',
-					httpPath: "/", // todo: adjust this later in project
-					imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
-					javascriptsPath: "js", // todo: map to the right path
 					outputStyle: 'expanded',
-					sassDir: project.sourceDir + 'sass',
-					require: ['animation'],
-					raw: 'preferred_syntax=:sass\n'
+				}
+			},
+			dist: {
+				options: {
+					debugInfo: false,
+					environment: 'production',
+					force: true,
+					outputStyle: 'compressed',
 				}
 			}
 		},
@@ -73,18 +82,6 @@ module.exports = function(grunt) {
 				urls        : [ 'http://localhost:9090/politik/deutschland/2013-07/demo-article' ],
 				useImageMagick: true
 				}
-			}
-		},
-
-		//concat files
-		concat: {
-			options: {
-				banner: project.bannerContent
-			},
-			target: {
-				src: [project.sourceDir + 'javascript/modules/*.js'],
-				ignores: [],
-				dest: project.codeDir + 'js/' + project.concatJs
 			}
 		},
 
@@ -125,7 +122,8 @@ module.exports = function(grunt) {
 					project.sourceDir + 'javascript/libs/jquery.easing.1.3.js',
 					project.sourceDir + 'javascript/libs/jquery.fitvids.js',
 					project.sourceDir + 'javascript/libs/underscore-min.js',
-					project.sourceDir + 'javascript/libs/packery.pkgd.js'
+					project.sourceDir + 'javascript/libs/packery.pkgd.js',
+					project.sourceDir + 'javascript/documentation'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
@@ -135,20 +133,64 @@ module.exports = function(grunt) {
 			}
 		},
 
+		jsdoc: {
+			dist : {
+				src: [project.sourceDir + 'javascript/modules/**/*.js'], 
+				options: {
+					destination: project.sourceDir + 'javascript/documentation'
+				}
+			}
+		},
+
+		'sftp-deploy': {
+			build: {
+				auth: {
+					host: 'buildit.zeit.de',
+					port: 22,
+					authKey: 'privateKey'
+				},
+				src: project.sourceDir + 'javascript/documentation',
+				dest: '/srv/nginx/javascript/documentation',
+				server_sep: '/'
+			}
+		},
+
+		requirejs: {
+			options: {
+				keepBuildDir: true,
+				baseUrl: project.sourceDir + 'javascript/',
+				mainConfigFile: project.sourceDir + 'javascript/app.js',
+				out: project.codeDir + 'js/main.js',
+				name: "app",
+				generateSourceMaps: true,
+				preserveLicenseComments: false
+			},
+			dev: {
+				options: {
+					optimize: "none"
+				}
+			},
+			dist: {
+				options: {
+					optimize: "uglify2"
+				}
+			}
+		},
+
 		grunticon: {
 			dist: {
 				options: {
-				src: project.sourceDir + "sass/icons",
-				dest: project.codeDir + "/css/icons"
+					src: project.sourceDir + "sass/icons",
+					dest: project.codeDir + "/css/icons"
+				}
 			}
-		}
-    },
+		},
 
 		// watch here
 		watch: {
 			js: {
 				files: ['<%= jshint.target.src %>'],
-				tasks: ['jshint', 'copy'],
+				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
 				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
@@ -159,13 +201,18 @@ module.exports = function(grunt) {
 
 	// load node modules
 	grunt.loadNpmTasks('grunt-contrib-compass-shabunc');
-	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-photobox');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-grunticon');
+	grunt.loadNpmTasks('grunt-jsdoc');
+	grunt.loadNpmTasks('grunt-sftp-deploy');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'compass:dev', 'copy', 'grunticon']);
+	grunt.registerTask('default', ['jshint', 'requirejs:dist', 'compass:dev', 'copy', 'grunticon']);
+	grunt.registerTask('production', ['jshint', 'requirejs:dist', 'compass:dist', 'copy', 'grunticon']);
+	grunt.registerTask('docs', ['jsdoc', 'sftp-deploy']);
+
 };
