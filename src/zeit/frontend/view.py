@@ -135,7 +135,7 @@ class Article(Base):
     @property
     def author(self):
         try:
-            author = self.context.authors[0]
+            author = self.context.authorships[0].target
         except IndexError:
             author = None
         return {
