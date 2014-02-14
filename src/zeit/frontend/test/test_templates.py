@@ -303,12 +303,14 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
+    # To Do: Here was a suffix once. NOt sure what it is good for or where it
+    # comes from (RD)
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
-    markup = 'von <span class="article__meta__author">y</span>,'
+    markup = 'von <span class="article__meta__author">y</span>'
     assert markup == tpl.module.meta_author(data).strip()
     data['href'] = 'x'
-    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>,'
+    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>'
     assert markup == tpl.module.meta_author(data).strip()
 
 

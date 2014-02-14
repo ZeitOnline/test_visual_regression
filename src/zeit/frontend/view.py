@@ -136,7 +136,7 @@ class Article(Base):
     def author(self):
         try:
             author = self.context.authorships[0].target
-        except IndexError:
+        except (IndexError, OSError):
             author = None
         return {
             'name': author.display_name if author else None,
