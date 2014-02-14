@@ -25,6 +25,10 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
         var token = prefix(width, height);
         var src = image.src || $img.data('src');
         image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
+        // add event triggering to tell the world
+        $(image).on("load", function(e){
+            $(this).trigger("scaling_ready");
+        });
     };
 
     var rescale_all = function(e) {

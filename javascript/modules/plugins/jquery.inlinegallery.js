@@ -1,3 +1,5 @@
+/* global console */
+
 /**
  * @fileOverview  Inline-Gallery preparation and evokation script
  * @author nico.bruenjes@zeit.de
@@ -65,6 +67,10 @@
 			/* add icons to existing gallery buttons */
 			$(".bx-next").addClass('icon-pfeil-rechts');
 			$(".bx-prev").addClass('icon-pfeil-links');
+
+			$(this).on("scaling_ready", function(e) {
+				slider.redrawSlider();
+			});
 		});
 	};
 })(jQuery);
