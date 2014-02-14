@@ -265,7 +265,7 @@
 
 {% macro meta_author(author) -%}
     {% if author -%}
-        {{ author.prefix }}{{ authorlink(author) }}{{ author.suffix }}
+        {{ author.prefix }}{{ authorlink(author) }} {### TO DO: {{ author.suffix }} ###}
     {%- endif %}
 {%- endmacro %}
 
