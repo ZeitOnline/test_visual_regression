@@ -395,11 +395,12 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert default video
-    obj = {'video_still': 'test.jpg', 'source': 'test.mp4'}
-    wrapper = '<div data-backgroundvideo="'
+    obj = {'video_still': 'test.jpg', 'source': 'test.mp4', 'id': 1}
+    wrapper = '<div data-backgroundvideo="1'
     video = '<video preload="auto" autoplay="true" ' \
             'loop="loop" muted="muted" volume="0" poster="test.jpg'
     source = '<source src="test.mp4'
+    source_webm = 'http://opendata.zeit.de/zmo-videos/1.webm'
     img = '<img '
     fallback = '<div class="article__main-image--longform' \
         ' video--fallback" style="background-image:url(test.jpg'
@@ -410,6 +411,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert wrapper in output
     assert video in output
     assert source in output
+    assert source_webm in output
     assert img in output
     assert fallback in output
 
