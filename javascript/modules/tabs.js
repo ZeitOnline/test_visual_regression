@@ -2,6 +2,10 @@
 
 define(['jquery'], function() {
 
+  /**
+   * [init description]
+   * @return {[type]}
+   */
   var init = function() {
     var $tabs = $('.tabs');
     $tabs.each(function(idx, container) {

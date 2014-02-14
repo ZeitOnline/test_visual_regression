@@ -1,5 +1,4 @@
 /* global console, define, alert */
-
 define(['jquery'], function() {
 
   var $main_nav_trigger = $('#js-main-nav-trigger');
@@ -15,6 +14,10 @@ define(['jquery'], function() {
   var mobile_menu_open = false;
   var full_nav_breakpoint = 768;
 
+  /**
+   * [init_mobile_nav description]
+   * @return {[type]}
+   */
   var init_mobile_nav = function() {
     // enable hamburger
     $main_nav_trigger.click(function(e) {
@@ -34,6 +37,10 @@ define(['jquery'], function() {
     });
   };
 
+  /**
+   * [init_desktop_ressort_slider description]
+   * @return {[type]}
+   */
   var init_desktop_ressort_slider = function() {
     $ressort_slider_container = $('#js-main-nav-ressorts-slider-container');
     $ressort_slider_strip = $('#js-main-nav-ressorts-slider-strip');
@@ -56,6 +63,10 @@ define(['jquery'], function() {
     }
   };
 
+  /**
+   * [init_desktop_nav description]
+   * @return {[type]}
+   */
   var init_desktop_nav = function() {
     // disable hover fallback
     $main_nav.removeClass('has-hover');
@@ -82,6 +93,10 @@ define(['jquery'], function() {
     init_desktop_ressort_slider();
   };
 
+  /**
+   * [close_open_menu description]
+   * @return {[type]}
+   */
   var close_open_menu = function() {
     if (window.innerWidth < full_nav_breakpoint) {
       if (mobile_menu_open) {
@@ -100,6 +115,10 @@ define(['jquery'], function() {
     }
   };
 
+  /**
+   * [init description]
+   * @return {[type]}
+   */
   var init = function() {
     // init nav depending on screen size
     if (window.innerWidth < full_nav_breakpoint) {

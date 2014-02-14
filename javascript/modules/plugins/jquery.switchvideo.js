@@ -1,14 +1,16 @@
 /* global console, alert */
-
-
 (function( $ ){
 
+	/**
+	 * plugin to integrate video player
+	 */
 	$.fn.switchVideo = function() {
 
-		//stuff used for player
 		var el = {
-
-			//build Playerobject
+			/**
+			 * build html for player object
+			 * @param {Object} that
+			 */
 			buildPlayer: function( that ){
 				
 				if( el.id ){
@@ -34,11 +36,17 @@
 					window.brightcove.createExperiences();
 				}
 			},
-			//grab meta data
+			/**
+			 * grab video id from meta data and store it
+			 * @param  {Object} that
+			 */
 			buildId: function( that ){
 				el.id = $( that ).closest( "figure[data-video]" ).attr( "data-video" );
 			},
-			//add show/hide event
+			/**
+			 * add show/hide event for video still image and button
+			 * @param {Object} that
+			 */
 			addEvent: function( that ){
 				$( that ).find( "img, .video__button" ).on( "click", function( ev ){
 					ev.preventDefault();
@@ -46,17 +54,21 @@
 					el.buildPlayer( this );
 				});
 			},
-			//add play button to image
+			/**
+			 * add play button to image
+			 * @param {Object} that
+			 */
 			addButton: function( that ){
 				if( el.id ){
 					$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
 				}
 			},
-			//stored video id
 			id: false
 		};
 
-		//run through data-video elements
+		/**
+		 * run through data-video elements
+		 */
 		$(this).each(function(){
 			el.buildId( this );
 			el.addButton( this );
