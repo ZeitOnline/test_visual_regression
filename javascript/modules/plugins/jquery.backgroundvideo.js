@@ -17,9 +17,7 @@
 			}
 		};
 
-		/**
-		 * run through data-backgroundvideo elements
-		 */
+		//run through data-backgroundvideo elements
 		$(this).each(function(){
 			
 			var $element = $( this );
