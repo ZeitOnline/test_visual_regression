@@ -1,10 +1,14 @@
 /* global console, alert */
-
 (function($){
 
+	/**
+	 * generate popup 
+	 */
 	$.fn.enablePopups = function() {
 
-		//run through popup links
+		/**
+		 * run through popup links
+		 */
 		$(this).each(function(){
 			$(this).click(function(e) {
 				e.preventDefault();

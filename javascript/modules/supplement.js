@@ -105,6 +105,12 @@ define(['postscribe', 'jquery'], function() {
 			ad: ads.medrec_10
 		}]
 	},
+	/**
+	 * [build_tag description]
+	 * @param  {[type]} creative
+	 * @param  {[type]} elem
+	 * @return {[type]}
+	 */
 	build_tag = function( creative, elem ) {
 		var adclass = creative.div_class || "",
 		adid = creative.div_id || "",
@@ -134,6 +140,12 @@ define(['postscribe', 'jquery'], function() {
 			return tag;
 		}
 	},
+	/**
+	 * [prepare_slot description]
+	 * @param  {[type]} place
+	 * @param  {[type]} elem
+	 * @return {[type]}
+	 */
 	prepare_slot = function( place, elem ) {
 		var slot = places[place], ad, _i, _len, _ref, tag, result;
 		_ref = slot.slice(0).reverse();
@@ -154,6 +166,10 @@ define(['postscribe', 'jquery'], function() {
 		return result;
 
 	},
+	/**
+	 * [init description]
+	 * @return {[type]}
+	 */
 	init = function() {
 		$(".iqdplace").each(function() {
 			var place = $(this).data('place'),

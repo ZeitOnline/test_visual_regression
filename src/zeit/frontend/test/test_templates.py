@@ -24,6 +24,18 @@ def test_macro_p_should_produce_markup(jinja2_env):
     markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
     assert markup == output
 
+def test_macro_raw_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    css_class = 'raw'
+    markup = '<div class="%s">'\
+        '<blink>ZEIT ONLINE</blink>'\
+        '</div>' % css_class
+    obj = {'xml': '<blink>ZEIT ONLINE</blink>'}
+    lines = tpl.module.raw(obj).splitlines()
+    output = ""
+    for line in lines:
+      output += line
+      assert markup == output
 
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
@@ -291,12 +303,14 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
 
 def test_macro_meta_author_should_produce_markup(jinja2_env):
+    # To Do: Here was a suffix once. NOt sure what it is good for or where it
+    # comes from (RD)
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
-    markup = 'von <span class="article__meta__author">y</span>,'
+    markup = 'von <span class="article__meta__author">y</span>'
     assert markup == tpl.module.meta_author(data).strip()
     data['href'] = 'x'
-    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>,'
+    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>'
     assert markup == tpl.module.meta_author(data).strip()
 
 
@@ -395,11 +409,12 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     # assert default video
-    obj = {'video_still': 'test.jpg', 'source': 'test.mp4'}
-    wrapper = '<div data-backgroundvideo="'
+    obj = {'video_still': 'test.jpg', 'source': 'test.mp4', 'id': 1}
+    wrapper = '<div data-backgroundvideo="1'
     video = '<video preload="auto" autoplay="true" ' \
             'loop="loop" muted="muted" volume="0" poster="test.jpg'
     source = '<source src="test.mp4'
+    source_webm = 'http://opendata.zeit.de/zmo-videos/1.webm'
     img = '<img '
     fallback = '<div class="article__main-image--longform' \
         ' video--fallback" style="background-image:url(test.jpg'
@@ -410,6 +425,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert wrapper in output
     assert video in output
     assert source in output
+    assert source_webm in output
     assert img in output
     assert fallback in output
 
@@ -598,6 +614,9 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
         output += line.strip()
     assert markup in output
 
+def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
+     tpl = jinja2_env.get_template('templates/block_elements.tpl')
+     assert  tpl.module.no_block('') == ''
 
 
 

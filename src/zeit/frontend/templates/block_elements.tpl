@@ -186,6 +186,10 @@
     </h3>
 {%- endmacro %}
 
+{% macro raw(obj) -%}
+    <div class="raw">{{obj.xml|safe}}</div>
+{%- endmacro %}
+
 {% macro citation(obj) -%}
     <blockquote class="
         {% if obj.layout == 'wide' %}
@@ -265,7 +269,7 @@
 
 {% macro meta_author(author) -%}
     {% if author -%}
-        {{ author.prefix }}{{ authorlink(author) }}{{ author.suffix }}
+        {{ author.prefix }}{{ authorlink(author) }} {### TO DO: {{ author.suffix }} ###}
     {%- endif %}
 {%- endmacro %}
 
@@ -327,9 +331,10 @@
 {%- endmacro %}
 
 {% macro headervideo(obj) -%}
-    <div data-backgroundvideo="true" class="article__main-video--longform">
+    <div data-backgroundvideo="{{obj.id}}" class="article__main-video--longform">
         <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
                 <source src="{{obj.source}}" type="video/mp4">
+                <source src="http://opendata.zeit.de/zmo-videos/{{obj.id}}.webm" type="video/webm">
                 <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})">
         </video>
             <div class="article__main-image--longform video--fallback" style="background-image:url({{obj.video_still}})"></div>
@@ -579,3 +584,9 @@
         </noscript>
     </div>
 {%- endmacro %}
+
+<!-- We use this, if for some reason or block is None -->
+{% macro no_block(obj) %}
+{% endmacro %}
+
+

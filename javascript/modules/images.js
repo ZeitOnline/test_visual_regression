@@ -1,9 +1,14 @@
 /* global console, define, alert, sjcl, _ */
-
 define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
 
     var resp_imgs = [];
 
+    /**
+     * [prefix description]
+     * @param  {[type]} width
+     * @param  {[type]} height
+     * @return {[type]}
+     */
     var prefix = function(width, height) {
         var key = width + ':' + height + ':time';
         var out = sjcl.hash.sha1.hash(key);
@@ -11,6 +16,13 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
         return '/bitblt-' + width + 'x' + height + '-' + digest;
     };
 
+    /**
+     * rescale one image
+     * @param  {[type]} image
+     * @param  {[type]} subsequent
+     * @param  {[type]} width
+     * @param  {[type]} height
+     */
     var rescale_one = function(image, subsequent, width, height) {
         var $img = $(image);
         width = width || $img.width();
@@ -25,8 +37,16 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
         var token = prefix(width, height);
         var src = image.src || $img.data('src');
         image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
+        // add event triggering to tell the world
+        $(image).on("load", function(e){
+            $(this).trigger("scaling_ready");
+        });
     };
 
+    /**
+     * rescale all images
+     * @param  {[type]} e
+     */
     var rescale_all = function(e) {
         if (!e) {
             // initial case, no images there yet, so create them
@@ -56,6 +76,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
         }
     };
 
+    /**
+     * init scaling
+     */
     var init = function() {
         rescale_all();
         var lazy_rescale_all = _.debounce(rescale_all, 1000);
