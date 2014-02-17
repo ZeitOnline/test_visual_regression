@@ -4,7 +4,8 @@ Change log for zeit.frontend
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Cleaned up inheritance mechanisms between article views and their longform
+  variant. (#ZMO-281)
 
 
 0.1 (2014-02-12)

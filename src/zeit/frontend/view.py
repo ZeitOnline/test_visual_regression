@@ -54,20 +54,17 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
              renderer='templates/article.html')
 class Article(Base):
 
+    advertising_enabled = True
+    main_nav_full_width = False
+    is_longform = False
+
     def __call__(self):
         super(Article, self).__call__()
-        self.context.advertising_enabled = True
-        self.context.main_nav_full_width = False
-        self.context.is_longform = False
+        self.context.advertising_enabled = self.advertising_enabled
+        self.context.main_nav_full_width = self.main_nav_full_width
+        self.context.is_longform = self.is_longform
         self.context.current_year = date.today().year
 
-        if IArticleTemplateSettings(self.context).template == 'longform':
-            self.context.advertising_enabled = False
-            self.context.main_nav_full_width = True
-            self.context.is_longform = True
-            return render_to_response('templates/longform.html',
-                                      {"view": self},
-                                      request=self.request)
         if IArticleTemplateSettings(self.context).template == 'photocluster':
             self.context.advertising_enabled = False
             return render_to_response('templates/photocluster.html',
@@ -281,6 +278,15 @@ class Article(Base):
                 'min_width': 768
             },
         }
+
+
+@view_config(context=zeit.frontend.article.ILongformArticle,
+             renderer='templates/longform.html')
+class LongformArticle(Article):
+
+    advertising_enabled = False
+    main_nav_full_width = True
+    is_longform = True
 
 
 @view_config(route_name='json',
