@@ -314,9 +314,9 @@
 {% macro video(obj) -%}
     {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
-        {% if obj.format == 'zmo-small' %}
+        {% if obj.format == 'zmo-small' or obj.format == 'zmo-small-left' or obj.format == 'small' %}
             figure-stamp
-        {% elif obj.format == 'zmo-large' %}
+        {% elif obj.format == 'zmo-large' or obj.format == 'large' %}
             figure-full-width
         {% elif obj.format == 'zmo-small-right' %}
              figure-stamp--right

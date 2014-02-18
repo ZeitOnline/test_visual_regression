@@ -415,27 +415,33 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert cap in output
 
     # assert different formates
-    obj['format'] = 'zmo-small'
-    fig = '<figure class="figure-stamp" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert fig in output
-    obj['format'] = 'zmo-small-right'
-    fig = '<figure class="figure-stamp--right" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert fig in output
-    obj['format'] = 'zmo-large'
-    fig = '<figure class="figure-full-width" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert fig in output
+    obj = [
+        {'format': 'zmo-small-left',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'},
+        {'format': 'zmo-small-right',
+         'id': 1,
+         'fig': '<figure class="figure-stamp--right" data-video="1">'},
+        {'format': 'zmo-large',
+         'id': 1,
+         'fig': '<figure class="figure-full-width" data-video="1">'},
+        {'format': 'large',
+         'id': 1,
+         'fig': '<figure class="figure-full-width" data-video="1">'},
+        {'format': 'zmo-small',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'},
+        {'format': 'small',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'}]
+
+    for el in obj:
+        lines = tpl.module.video(el).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        print lines
+        assert el['fig'] in output
 
 
 def test_macro_headervideo_should_produce_markup(jinja2_env):
