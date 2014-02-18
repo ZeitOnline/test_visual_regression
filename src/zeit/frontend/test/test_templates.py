@@ -263,6 +263,30 @@ def test_image_should_produce_markup(jinja2_env):
            {'layout': 'small', 'align': False, 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-center', 'align': False,
+            'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-right', 'align': False,
+            'css': 'figure-stamp--right',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-right', 'align': False,
+            'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-left', 'align': False,
+            'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
             'attr_title': 'My title content'}]
 
     class Image(object):
@@ -286,6 +310,8 @@ def test_image_should_produce_markup(jinja2_env):
             ' class="figure__caption">test<span class="figure__copyright">' \
             'test</span></figcaption></figure>' \
             % (el['css'], el['attr_alt'], el['attr_title'])
+        print markup
+        print output
         assert match(markup, output)
 
 

@@ -221,24 +221,28 @@
 
 {% macro image(obj) -%}
     <figure class="
-        {% if obj.layout == 'large' %}
+        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
             figure-full-width
         {% elif obj.layout == 'zmo-xl' %}
             article__main-image figure-full-width
         {% elif obj.layout == 'zmo-medium' %}
-             {% if obj.align == 'left' %}
+            {% if obj.align == 'left' %}
                 figure-horizontal
             {% elif obj.align == 'right' %}
                 figure-horizontal--right
             {% else %}
                 figure is-constrained is-centered
             {% endif %}
-        {% elif obj.layout == 'small' %}
-            {% if obj.align == 'right' %}
-                figure-stamp--right
-            {% else %}
-                figure-stamp
-            {% endif %}
+        {% elif obj.layout == 'zmo-small-left' or (obj.layout == 'small' and obj.align == 'left') %}
+            figure-stamp
+        {% elif obj.layout == 'zmo-small-right' or (obj.layout == 'small' and obj.align == 'right') %}
+            figure-stamp--right
+        {% elif obj.layout == 'zmo-large-left' or (obj.layout == 'large' and obj.align == 'left') %}
+            figure-full-width
+        {% elif obj.layout == 'zmo-large-right' or (obj.layout == 'large' and obj.align == 'right') %}
+            figure-full-width
+        {% else %}
+            figure-stamp
         {% endif %}
         ">
             <div class="scaled-image">
