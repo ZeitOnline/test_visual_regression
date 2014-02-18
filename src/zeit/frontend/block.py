@@ -61,7 +61,7 @@ class Paragraph(object):
 class Image(object):
 
     def __new__(cls, model_block):
-        if model_block.layout == 'zmo-xl-header':
+        if model_block.layout == 'zmo-xl-header' or model_block.is_empty:
             return None
         return super(Image, cls).__new__(cls, model_block)
 
@@ -88,7 +88,7 @@ class Image(object):
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
-        if model_block.layout != 'zmo-xl-header':
+        if model_block.layout != 'zmo-xl-header' or model_block.is_empty:
             return None
         return super(Image, cls).__new__(cls, model_block)
 

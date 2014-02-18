@@ -65,6 +65,14 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
 
+def test_header_img_should_be_None_if_is_empty_is_True(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    img = article_view._select_first_body_obj
+    img.is_empty = True
+
+    assert article_view.header_img == None
+
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
@@ -72,7 +80,7 @@ def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
     assert article_view.header_img is None
 
 
-def test_header_video_should_be_first_image_of_content_blocks(application):
+def test_header_video_should_be_first_video_of_content_blocks(application):
     vid_url = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
     article_view = view.Article(context, '')
