@@ -10,7 +10,9 @@
   <layout id="zmo-xl-header" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL-Header</layout>
 
   <layout id="zmo-xl" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL</layout>
-  <layout id="zmo-medium" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant mittig</layout>
+  <layout id="zmo-medium-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant links</layout>
+  <layout id="zmo-medium-center" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant mittig</layout>
+  <layout id="zmo-medium-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant rechts</layout>
   <layout id="zmo-large-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - L links</layout>
   <layout id="zmo-large-center" available="zeit.magazin.interfaces.IZMOContent">ZMO - L mittig</layout>
   <layout id="zmo-large-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - L rechts</layout>
