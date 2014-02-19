@@ -58,6 +58,7 @@ def test_video_source_should_be_highes_rendition_url():
     video = Video(model_block)
     assert video.source is None
 
+
 def test_header_video_should_be_created_if_layout_is_zmo_header():
     model_block = Mock()
     model_block.layout = 'zmo-xl-header'
@@ -71,4 +72,4 @@ def test_header_video_should_be_created_if_layout_is_zmo_header():
     model_block.video.uniqueId = 'foo'
 
     h_video = HeaderVideo(model_block)
-    assert h_video == None
+    assert h_video is None
