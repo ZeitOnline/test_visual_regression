@@ -255,7 +255,7 @@ def test_image_should_produce_markup(jinja2_env):
             'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'small-right',
+           {'layout': 'zmo-small-right',
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
@@ -318,6 +318,7 @@ def test_image_should_produce_markup(jinja2_env):
             ' class="figure__caption">test<span class="figure__copyright">' \
             'test</span></figcaption></figure>' \
             % (el['css'], el['attr_alt'], el['attr_title'])
+        print el['layout']
         print markup
         print output
         assert match(markup, output)

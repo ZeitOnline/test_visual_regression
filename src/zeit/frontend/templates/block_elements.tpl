@@ -221,7 +221,7 @@
 
 {% macro image(obj) -%}
     <figure class="
-        {% if obj.layout == 'zmo-large-center' %}
+        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
             figure-full-width
         {% elif obj.layout == 'zmo-xl' %}
             article__main-image figure-full-width
@@ -233,6 +233,8 @@
             figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-left' %}
             figure-stamp
+        {% elif obj.layout == 'zmo-small-center' %}
+            figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-right' %}
             figure-stamp--right
         {% elif obj.layout == 'zmo-large-left' %}
@@ -312,9 +314,9 @@
 {% macro video(obj) -%}
     {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
-        {% if obj.format == 'zmo-small-left' %}
+        {% if obj.format == 'zmo-small-left' or obj.format == 'small' %}
             figure-stamp
-        {% elif obj.format == 'zmo-large-left' or obj.format == 'zmo-large-center' or obj.format == 'zmo-large-right' %}
+        {% elif obj.format == 'large' or obj.format == 'zmo-large-left' or obj.format == 'zmo-large-center' or obj.format == 'zmo-large-right' %}
             figure-full-width
         {% elif obj.format == 'zmo-small-right' %}
              figure-stamp--right
