@@ -221,25 +221,23 @@
 
 {% macro image(obj) -%}
     <figure class="
-        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
+        {% if obj.layout == 'zmo-large-center' %}
             figure-full-width
         {% elif obj.layout == 'zmo-xl' %}
             article__main-image figure-full-width
-        {% elif obj.layout == 'zmo-medium' %}
-            {% if obj.align == 'left' %}
-                figure-horizontal
-            {% elif obj.align == 'right' %}
-                figure-horizontal--right
-            {% else %}
-                figure is-constrained is-centered
-            {% endif %}
-        {% elif obj.layout == 'zmo-small-left' or (obj.layout == 'small' and obj.align == 'left') %}
+        {% elif obj.layout == 'zmo-medium-left' %}
+            figure-horizontal
+        {% elif obj.layout == 'zmo-medium-right' %}
+            figure-horizontal--right
+        {% elif obj.layout == 'zmo-medium-center' %}
+            figure is-constrained is-centered
+        {% elif obj.layout == 'zmo-small-left' %}
             figure-stamp
-        {% elif obj.layout == 'zmo-small-right' or (obj.layout == 'small' and obj.align == 'right') %}
+        {% elif obj.layout == 'zmo-small-right' %}
             figure-stamp--right
-        {% elif obj.layout == 'zmo-large-left' or (obj.layout == 'large' and obj.align == 'left') %}
+        {% elif obj.layout == 'zmo-large-left' %}
             figure-full-width
-        {% elif obj.layout == 'zmo-large-right' or (obj.layout == 'large' and obj.align == 'right') %}
+        {% elif obj.layout == 'zmo-large-right' %}
             figure-full-width
         {% else %}
             figure-stamp
@@ -314,9 +312,9 @@
 {% macro video(obj) -%}
     {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
-        {% if obj.format == 'zmo-small' or obj.format == 'zmo-small-left' or obj.format == 'small' %}
+        {% if obj.format == 'zmo-small-left' %}
             figure-stamp
-        {% elif obj.format == 'zmo-large' or obj.format == 'large' %}
+        {% elif obj.format == 'zmo-large-left' or obj.format == 'zmo-large-center' or obj.format == 'zmo-large-right' %}
             figure-full-width
         {% elif obj.format == 'zmo-small-right' %}
              figure-stamp--right
