@@ -23,7 +23,7 @@
                                 {% if view.genre -%}
                                     <span class="article__meta__genre">{{view.genre}}</span>
                                 {%- endif %}
-                                {{ blocks.meta_author(view.author) }}
+                                {{ blocks.meta_author(view.authors) }}
                                 {% if view.location -%}
                                     <span class="article__meta__location">{{view.location}}</span>
                                 {%- endif %}

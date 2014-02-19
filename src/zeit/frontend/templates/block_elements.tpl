@@ -267,18 +267,22 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
-{% macro meta_author(author) -%}
+{% macro meta_author(author, genre) -%}
     {% if author -%}
-        {{ author.prefix }}{{ authorlink(author) }} {### TO DO: {{ author.suffix }} ###}
+        {{ authorlink(author) }}
     {%- endif %}
 {%- endmacro %}
 
-{% macro authorlink(author, class="article__meta__author") -%}
-    {% if author.href -%}
-        <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>
-    {%- else -%}
-        <span class="{{class}}">{{author.name}}</span>
-    {%- endif %}
+{% macro authorlink(authors, class="article__meta__author") -%}
+    {% for author in authors %}
+        {{author.prefix}}
+        {% if author.href -%}
+            <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>{{author.location}}
+        {%- else -%}
+            <span class="{{class}}">{{author.name}}{{author.location}}</span>
+        {%- endif %}
+        {{author.suffix}}
+    {% endfor %}
 {%- endmacro %}
 
 {% macro focussed_nextread( nextread ) -%}

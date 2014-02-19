@@ -5,6 +5,7 @@ from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo, IModified
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
+from zeit.content.author.interfaces import IAuthorReference
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.frontend.log import access_log
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
@@ -132,18 +133,41 @@ class Article(Base):
             return self.header_img
         return self.first_img
 
-    @property
-    def author(self):
+    def _get_author(self, index):
         try:
-            author = self.context.authorships[0].target
+            author = index.target
+            author_ref = index
         except (IndexError, OSError):
             author = None
         return {
             'name': author.display_name if author else None,
             'href': author.uniqueId if author else None,
-            'prefix': " von " if self.context.genre else "Von ",
-            'suffix': ', ' if self.location else None,
+            'suffix': '',
+            'prefix': '',
+            'location': ", " + IAuthorReference(author_ref).location
+            if IAuthorReference(author_ref).location else '',
         }
+
+    @property
+    def authors(self):
+        authorList = []
+        try:
+            author_ref = self.context.authorships
+            for index, author in enumerate(author_ref):
+                result = self._get_author(author)
+                if result is not None:
+                    #add prefix
+                    if index == 0:
+                        result['prefix'] = "von "
+                    #add suffix
+                    if index == len(author_ref) - 2:
+                        result['suffix'] = "und"
+                    elif index < len(author_ref) - 1:
+                        result['suffix'] = ", "
+                    authorList.append(result)
+            return authorList
+        except (IndexError, OSError):
+            return None
 
     @property
     def date_first_released(self):
