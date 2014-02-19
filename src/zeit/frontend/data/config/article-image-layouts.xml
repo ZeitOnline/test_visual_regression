@@ -1,4 +1,4 @@
-<?xml version="1.0"?>                                                                                                                                                                                                                                                         
+<?xml version="1.0"?>
 <image-layouts>
   <!-- these should use zeit.cms.section.interfaces.IZONContent,
        change it once the working copies had a chance to settle.
@@ -11,9 +11,9 @@
 
   <layout id="zmo-xl" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL</layout>
   <layout id="zmo-medium" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant mittig</layout>
-  <layout id="zmo-large" available="zeit.magazin.interfaces.IZMOContent">ZMO - L links</layout>
-  <layout id="zmo-large" available="zeit.magazin.interfaces.IZMOContent">ZMO - L mittig</layout>
-  <layout id="zmo-large" available="zeit.magazin.interfaces.IZMOContent">ZMO - L rechts</layout>
-  <layout id="zmo-small" available="zeit.magazin.interfaces.IZMOContent">ZMO - S hochkant links</layout>
-  <layout id="zmo-small" available="zeit.magazin.interfaces.IZMOContent">ZMO - S hochkant rechts</layout>
+  <layout id="zmo-large-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - L links</layout>
+  <layout id="zmo-large-center" available="zeit.magazin.interfaces.IZMOContent">ZMO - L mittig</layout>
+  <layout id="zmo-large-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - L rechts</layout>
+  <layout id="zmo-small-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - S hochkant links</layout>
+  <layout id="zmo-small-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - S hochkant rechts</layout>
 </image-layouts>
