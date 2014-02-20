@@ -240,27 +240,59 @@ def test_image_should_produce_markup(jinja2_env):
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-medium', 'align': 'left',
+           {'layout': 'zmo-medium-left',
             'css': 'figure-horizontal',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-medium', 'align': 'right',
+           {'layout': 'zmo-medium-right',
             'css': 'figure-horizontal--right',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-medium', 'align': False, 'css': 'figure '
+           {'layout': 'zmo-medium-center','css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
             'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'small', 'align': 'right',
+           {'layout': 'zmo-small-right',
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'small', 'align': False, 'css': 'figure-stamp',
+           {'layout': 'zmo-small-left', 'css': 'figure-stamp',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-center', 'css': 'figure is-constrained is-centered',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-center',
+            'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-right', 'align': False,
+            'css': 'figure-stamp--right',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-right', 'align': False,
+            'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-left', 'align': False,
+            'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'}]
@@ -392,27 +424,33 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert cap in output
 
     # assert different formates
-    obj['format'] = 'zmo-small'
-    fig = '<figure class="figure-stamp" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert fig in output
-    obj['format'] = 'zmo-small-right'
-    fig = '<figure class="figure-stamp--right" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert fig in output
-    obj['format'] = 'zmo-large'
-    fig = '<figure class="figure-full-width" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert fig in output
+    obj = [
+        {'format': 'zmo-small-left',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'},
+        {'format': 'zmo-small-right',
+         'id': 1,
+         'fig': '<figure class="figure-stamp--right" data-video="1">'},
+        {'format': 'zmo-large-center',
+         'id': 1,
+         'fig': '<figure class="figure-full-width" data-video="1">'},
+        {'format': 'large',
+         'id': 1,
+         'fig': '<figure class="figure-full-width" data-video="1">'},
+        {'format': 'zmo-small-left',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'},
+        {'format': 'small',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'}]
+
+    for el in obj:
+        lines = tpl.module.video(el).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        print lines
+        assert el['fig'] in output
 
 
 def test_macro_headervideo_should_produce_markup(jinja2_env):
