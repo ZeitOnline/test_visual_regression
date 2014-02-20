@@ -246,9 +246,13 @@
         {% endif %}
         ">
             <div class="scaled-image">
+                <!--[if gte IE 9]> -->
                 <noscript data-ratio="{{obj.ratio}}">
+                <!-- <![endif]-->
                         <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+                <!--[if gte IE 9]> -->
                 </noscript>
+                <!-- <![endif]-->
             </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}

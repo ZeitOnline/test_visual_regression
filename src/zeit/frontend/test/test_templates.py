@@ -311,16 +311,16 @@ def test_image_should_produce_markup(jinja2_env):
         for line in lines:
             output += line.strip()
         markup = '<figure class="%s"><div class="scaled-image">' \
-            '<noscript data-ratio="">' \
-            '<img alt="%s" title="%s" class="figure__media"' \
-            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
-            'data-ratio=""></noscript></div><figcaption' \
-            ' class="figure__caption">test<span class="figure__copyright">' \
-            'test</span></figcaption></figure>' \
-            % (el['css'], el['attr_alt'], el['attr_title'])
-        print el['layout']
-        print markup
-        print output
+                 '<!--\[if gte IE 9\]> --><noscript data-ratio="">' \
+                 '<!-- <!\[endif\]--><img alt="%s" title="%s" ' \
+                 'class="figure__media" ' \
+                 'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
+                 'data-ratio=""><!--\[if gte IE 9\]> --></noscript>' \
+                 '<!-- <!\[endif\]--></div><figcaption ' \
+                 'class="figure__caption">test<span ' \
+                 'class="figure__copyright">test</span>' \
+                 '</figcaption></figure>' \
+                 % (el['css'], el['attr_alt'], el['attr_title'])
         assert match(markup, output)
 
 
