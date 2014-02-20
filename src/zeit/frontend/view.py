@@ -16,6 +16,7 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
+import zeit.frontend.article
 import zope.component
 
 log = logging.getLogger(__name__)
