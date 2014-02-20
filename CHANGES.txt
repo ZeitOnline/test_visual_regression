@@ -7,6 +7,8 @@ Change log for zeit.frontend
 - Cleaned up inheritance mechanisms between article views and their longform
   variant. (#ZMO-281)
 
+- Put inclusion of the transaction-management tween in application code.
+
 
 0.1 (2014-02-12)
 ----------------
