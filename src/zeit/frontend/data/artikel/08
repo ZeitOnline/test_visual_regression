@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <author href="http://xml.zeit.de/autoren/M/Anne_Mustermann/index" publication-date="" expires="">
@@ -21,9 +22,10 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-02-19T08:56:03.901538+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-02-19T13:30:49.756588+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-02-19T13:31:49.631724+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-02-19T13:31:49.631724+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-02-19T13:30:50.862175+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
@@ -32,7 +34,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-02-19T08:39:25.780113+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-02-20T12:57:10.445789+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
@@ -69,13 +71,13 @@
     <supertitle>Candy Shop</supertitle>
     <title>I want Candies</title>
     <subtitle>Apple pie cotton candy sweet roll powder I love. I love toffee jelly beans fruitcake. Macaroon candy canes macaroon unerdwear.com. Liquorice tiramisu cake sweet cotton candy sesame snaps tart apple pie. Macaroon chocolate bar fruitcake powder bear claw. Gummi bears brownie chocolate cake brownie cake icing. Gummi bears brownie pie biscuit. Icing candy I love cake cake ice cream.</subtitle>
-    <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" type="page" ns0:__name__="id-e6404f8c-9df9-4a80-adad-6db4ff6fe1dd">
-      <image layout="large" is_empty="True" ns0:__name__="id-96786211-6f52-4438-96db-b1a1e3261422"/>
-      <p ns0:__name__="id-040b6991-a107-4456-9efa-79507c7a631f">Gummi bears chupa chups jelly. Dessert lollipop chocolate cake brownie dragée ice cream powder liquorice. Jelly caramels gingerbread pastry I love cupcake tart. Dessert I love donut I love gingerbread. Bear claw I love icing I love dragée chocolate bar sugar plum muffin. Biscuit pie muffin cupcake macaroon pastry. Macaroon sweet caramels fruitcake jelly beans cupcake halvah. I love I love chocolate cake liquorice tootsie roll unerdwear.com. Biscuit brownie pastry apple pie. Pudding tootsie roll dessert sesame snaps chocolate bar.</p>
-      <p ns0:__name__="id-ea1976c4-137d-425a-a094-bbfb9eb25a53">Sweet roll jelly liquorice toffee tootsie roll halvah powder marzipan. Marshmallow dragée muffin muffin I love sugar plum jelly chocolate bar. Jujubes chocolate bar marshmallow chocolate lollipop cheesecake ice cream unerdwear.com chocolate cake. Candy candy canes I love jelly. Candy canes I love marshmallow pie. Carrot cake pudding cake pastry sweet roll tootsie roll sweet. Sugar plum gummies carrot cake chupa chups. I love gummi bears bonbon icing jujubes caramels jelly beans.</p>
-      <p ns0:__name__="id-173e75e1-ee69-4a9f-9b50-781c3f915c7f">Chupa chups marzipan muffin jujubes cupcake apple pie macaroon caramels soufflé. Icing jelly-o I love candy canes marzipan chocolate bar unerdwear.com. Apple pie dragée candy canes ice cream. I love halvah I love donut chocolate chocolate bar halvah I love icing. I love lemon drops I love marzipan fruitcake chocolate cake. Oat cake wafer muffin jelly beans. Sesame snaps fruitcake brownie cotton candy candy brownie cheesecake liquorice topping. Gingerbread donut liquorice liquorice gummies halvah. Gummies marshmallow applicake lemon drops biscuit sweet roll dragée I love. Topping wafer sugar plum chocolate bar jujubes candy canes I love.</p>
-      <p ns0:__name__="id-e1a1ec1c-5cf3-458e-944b-d4093cada494">Apple pie cotton candy sweet roll powder I love. I love toffee jelly beans fruitcake. Macaroon candy canes macaroon unerdwear.com. Liquorice tiramisu cake sweet cotton candy sesame snaps tart apple pie. Macaroon chocolate bar fruitcake powder bear claw. Gummi bears brownie chocolate cake brownie cake icing. Gummi bears brownie pie biscuit. Icing candy I love cake cake ice cream.</p>
-      <p ns0:__name__="id-47cbab20-2069-4f7d-821f-724862257bda">Icing I love donut candy I love. Cheesecake tootsie roll cupcake. Carrot cake dragée cotton candy dessert pudding liquorice sweet roll chocolate cake. Caramels cookie cheesecake. Lollipop marzipan liquorice dessert I love. Muffin gingerbread danish unerdwear.com sesame snaps cookie chocolate. Chocolate bar I love chocolate bar. Soufflé cookie I love halvah. Brownie liquorice I love.</p>
+    <division type="page">
+      <image layout="large" is_empty="True"/>
+      <p>Gummi bears chupa chups jelly. Dessert lollipop chocolate cake brownie dragée ice cream powder liquorice. Jelly caramels gingerbread pastry I love cupcake tart. Dessert I love donut I love gingerbread. Bear claw I love icing I love dragée chocolate bar sugar plum muffin. Biscuit pie muffin cupcake macaroon pastry. Macaroon sweet caramels fruitcake jelly beans cupcake halvah. I love I love chocolate cake liquorice tootsie roll unerdwear.com. Biscuit brownie pastry apple pie. Pudding tootsie roll dessert sesame snaps chocolate bar.</p>
+      <p>Sweet roll jelly liquorice toffee tootsie roll halvah powder marzipan. Marshmallow dragée muffin muffin I love sugar plum jelly chocolate bar. Jujubes chocolate bar marshmallow chocolate lollipop cheesecake ice cream unerdwear.com chocolate cake. Candy candy canes I love jelly. Candy canes I love marshmallow pie. Carrot cake pudding cake pastry sweet roll tootsie roll sweet. Sugar plum gummies carrot cake chupa chups. I love gummi bears bonbon icing jujubes caramels jelly beans.</p>
+      <p>Chupa chups marzipan muffin jujubes cupcake apple pie macaroon caramels soufflé. Icing jelly-o I love candy canes marzipan chocolate bar unerdwear.com. Apple pie dragée candy canes ice cream. I love halvah I love donut chocolate chocolate bar halvah I love icing. I love lemon drops I love marzipan fruitcake chocolate cake. Oat cake wafer muffin jelly beans. Sesame snaps fruitcake brownie cotton candy candy brownie cheesecake liquorice topping. Gingerbread donut liquorice liquorice gummies halvah. Gummies marshmallow applicake lemon drops biscuit sweet roll dragée I love. Topping wafer sugar plum chocolate bar jujubes candy canes I love.</p>
+      <p>Apple pie cotton candy sweet roll powder I love. I love toffee jelly beans fruitcake. Macaroon candy canes macaroon unerdwear.com. Liquorice tiramisu cake sweet cotton candy sesame snaps tart apple pie. Macaroon chocolate bar fruitcake powder bear claw. Gummi bears brownie chocolate cake brownie cake icing. Gummi bears brownie pie biscuit. Icing candy I love cake cake ice cream.</p>
+      <p>Icing I love donut candy I love. Cheesecake tootsie roll cupcake. Carrot cake dragée cotton candy dessert pudding liquorice sweet roll chocolate cake. Caramels cookie cheesecake. Lollipop marzipan liquorice dessert I love. Muffin gingerbread danish unerdwear.com sesame snaps cookie chocolate. Chocolate bar I love chocolate bar. Soufflé cookie I love halvah. Brownie liquorice I love.</p>
     </division>
   </body>
 </article>
