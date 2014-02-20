@@ -14,14 +14,14 @@
         <script>
             var viewport_meta = document.getElementById('viewport-meta');
             var viewports = {
-                    default: viewport_meta.getAttribute('content'),
+                    standard: viewport_meta.getAttribute('content'),
                     landscape: 'width=1280'
                 };
             var viewport_set = function() {
-                if ( screen.width > 768 ) {
+                if ( screen.width == 768 && Math.abs(window.orientation) == 90 ) {
                     viewport_meta.setAttribute( 'content', viewports.landscape );
                 } else {
-                    viewport_meta.setAttribute( 'content', viewports.default );
+                    viewport_meta.setAttribute( 'content', viewports.standard);
                 }
                 
             };
