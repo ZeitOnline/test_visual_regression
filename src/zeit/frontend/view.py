@@ -161,7 +161,7 @@ class Article(Base):
                         result['prefix'] = "von "
                     #add suffix
                     if index == len(author_ref) - 2:
-                        result['suffix'] = "und"
+                        result['suffix'] = " und"
                     elif index < len(author_ref) - 1:
                         result['suffix'] = ", "
                     authorList.append(result)
