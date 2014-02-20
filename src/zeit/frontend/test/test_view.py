@@ -72,7 +72,7 @@ def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
     assert article_view.header_img is None
 
 
-def test_header_video_should_be_first_image_of_content_blocks(application):
+def test_header_video_should_be_first_video_of_content_blocks(application):
     vid_url = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
     article_view = view.Article(context, '')

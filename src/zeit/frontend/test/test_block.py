@@ -1,6 +1,7 @@
 from zeit.frontend.block import _inline_html
 from zeit.frontend.block import Video
 from zeit.frontend.block import HeaderVideo
+from zeit.frontend.block import Image
 from zeit.frontend.block import HeaderImage
 import lxml.etree
 import mock
@@ -58,6 +59,7 @@ def test_header_video_should_not_be_created_if_layout_does_not_fit():
 def test_header_image_should_be_created_if_layout_is_zmo_header():
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-header'
+    delattr(model_block, 'is_empty')
     h_image = HeaderImage(model_block)
     assert type(h_image) == HeaderImage
 
@@ -65,6 +67,22 @@ def test_header_image_should_be_created_if_layout_is_zmo_header():
 def test_header_image_should_not_be_created_if_layout_does_not_fit():
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-noheader'
+    delattr(model_block, 'is_empty')
 
     h_image = HeaderImage(model_block)
     assert h_image == None
+
+def test_image_should_be_None_if_is_empty_is_True():
+    model_block = mock.Mock()
+    model_block.layout = 'zmo-xl-noheader'
+    model_block.is_empty = True
+    image = Image(model_block)
+    assert image == None
+
+def test_image_should_be_Fail_if_is_empty_doesnot_exist():
+    model_block = mock.Mock()
+    model_block.layout = 'zmo-xl-header'
+    delattr(model_block, 'is_empty')
+    image = Image(model_block)
+    assert image == None
+
