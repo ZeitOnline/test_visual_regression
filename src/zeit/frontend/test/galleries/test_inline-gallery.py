@@ -29,11 +29,15 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
 		prevbutton.click()
 		# test overlay buttons
 		overlaynext = driver.find_element_by_css_selector(onextselector)
+		elemOpacity = driver.execute_script('return $(".bx-overlay-next").css("opacity")')
 		overlayprev = driver.find_element_by_css_selector(onextselector)
 		assert overlaynext
 		assert overlayprev
 		overlaynext.click()
+		elemOpacityLater = driver.execute_script('return $(".bx-overlay-next").css("opacity")')
 		overlayprev.click()
+		# opacity should have changed
+		assert elemOpacity != elemOpacityLater
     except:
 		print "Timeout Gallery Script"
 		assert False

@@ -108,3 +108,17 @@ def test_all_tracking_pixel_are_send(selenium_driver, testserver):
         "//img[starts-with(@src,'http://cc.zeit.de/cc.gif')]")
     driver.find_element_by_xpath(
         "//img[starts-with(@src,'http://zeitonl.ivwbox.de')]")
+
+
+def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
+    driver = selenium_driver
+    # ipad landscape
+    driver.set_window_size(1024, 768)
+    driver.get('%s/artikel/01' % testserver.url)
+    content = driver.execute_script("return iam_data.st")
+    assert content == "zeitonl"
+    # ipad portrait and smaller
+    driver.set_window_size(766, 1024)
+    driver.get('%s/artikel/01' % testserver.url)
+    content = driver.execute_script("return iam_data.st")
+    assert content == "mobzeit"

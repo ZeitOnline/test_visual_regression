@@ -57,19 +57,25 @@
 				evt.preventDefault();
 				slider.goToPrevSlide();
 			});
-			/* add hover-class for button display */
-			$(this).find("img").hover(function() {
-				$(this).parents('.bx-wrapper').toggleClass("bx-wrapper-hovered");
-			}, function() {
-				$(this).parents('.bx-wrapper').toggleClass("bx-wrapper-hovered");
-			});
 
 			/* add icons to existing gallery buttons */
 			$(".bx-next").addClass('icon-pfeil-rechts');
 			$(".bx-prev").addClass('icon-pfeil-links');
 
+			$(".figure__media", this).mouseenter(function() {
+				$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
+			}).mouseleave(function() {
+				$(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
+			});
+
 			$(this).on("scaling_ready", function(e) {
 				slider.redrawSlider();
+				/* add hover-class for button display */
+				$(".figure__media", this).mouseenter(function() {
+					$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
+				}).mouseleave(function() {
+					$(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
+				});
 			});
 		});
 	};
