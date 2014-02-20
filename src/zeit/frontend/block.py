@@ -13,6 +13,7 @@ import logging
 # that deals with the concept of blocks rather than within a separate
 # interfaces module.
 class IFrontendBlock(zope.interface.Interface):
+
     """An item that provides data from an article-body block to a Jinja macro.
 
     This interface is both a marker for identifying front-end objects
@@ -22,6 +23,7 @@ class IFrontendBlock(zope.interface.Interface):
 
 
 class IFrontendHeaderBlock(zope.interface.Interface):
+
     """ A HeaderBlock identifies elements that appear only in headers of
     the content.
     """
@@ -61,7 +63,8 @@ class Paragraph(object):
 class Image(object):
 
     def __new__(cls, model_block):
-        if model_block.layout == 'zmo-xl-header':
+        if (model_block.layout == 'zmo-xl-header' or
+                getattr(model_block, 'is_empty', False)):
             return None
         return super(Image, cls).__new__(cls, model_block)
 
@@ -88,7 +91,8 @@ class Image(object):
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
-        if model_block.layout != 'zmo-xl-header':
+        if (model_block.layout != 'zmo-xl-header' or
+                getattr(model_block, 'is_empty', False)):
             return None
         return super(Image, cls).__new__(cls, model_block)
 
@@ -105,6 +109,7 @@ class Intertitle(object):
 
     def __str__(self):
         return self.text
+
 
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IRawXML)
@@ -180,7 +185,7 @@ class InlineGalleryImage(Image):
 
     def __init__(self, item):
         self.caption = item.caption
-        self.layout = "large" #item.layout
+        self.layout = "large"  # item.layout
         self.title = item.title
         self.text = item.text
 
@@ -191,7 +196,8 @@ class InlineGalleryImage(Image):
         # TODO: get complete list of copyrights with links et al
         # this just returns the first copyright without link
         # mvp it is
-        self.copyright = [copyright[0] for copyright in image_meta.copyrights][0]
+        self.copyright = [copyright[0]
+                          for copyright in image_meta.copyrights][0]
         self.alt = image_meta.alt
         self.align = image_meta.alignment
 
@@ -211,6 +217,7 @@ class InlineGallery(object):
                 my_items.append(InlineGalleryImage(entry))
         return my_items
 
+
 def _raw_html(xml):
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
@@ -224,6 +231,7 @@ def _raw_html(xml):
     ''')
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
+
 
 def _inline_html(xml):
     allowed_elements = "a|span|strong|img|em|sup|sub|caption"

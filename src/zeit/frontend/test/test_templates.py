@@ -24,6 +24,7 @@ def test_macro_p_should_produce_markup(jinja2_env):
     markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
     assert markup == output
 
+
 def test_macro_raw_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     css_class = 'raw'
@@ -34,8 +35,9 @@ def test_macro_raw_should_produce_markup(jinja2_env):
     lines = tpl.module.raw(obj).splitlines()
     output = ""
     for line in lines:
-      output += line
-      assert markup == output
+        output += line
+        assert markup == output
+
 
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
@@ -55,6 +57,7 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     # assert empty subtitle
     assert '' == tpl.module.subpage_chapter(0, '', '')
 
+
 def test_macro_footer_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     current_year = date.today().year
@@ -64,7 +67,8 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         '<div class="main-footer__Z">' \
         '<img src="/img/z-logo.svg" class="main-footer__Z__img" />' \
         '</div>' \
-        '<div class="main-footer__C">&copy; ' + str(current_year) + ' ZEIT Online</div>' \
+        '<div class="main-footer__C">&copy; ' \
+        + str(current_year) + ' ZEIT Online</div>' \
         '</figure>' \
         '</footer>'
     lines = tpl.module.main_footer(current_year).splitlines()
@@ -234,32 +238,32 @@ def test_image_should_produce_markup(jinja2_env):
            {'layout': 'zmo-xl',
             'css': 'article__main-image figure-full-width',
             'caption': 'test', 'copyright': 'test',
-						'attr_alt': 'My alt content',
-						'attr_title': 'My title content'},
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'zmo-medium', 'align': 'left',
             'css': 'figure-horizontal',
             'caption': 'test', 'copyright': 'test',
-						'attr_alt': 'My alt content',
-						'attr_title': 'My title content'},
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'zmo-medium', 'align': 'right',
             'css': 'figure-horizontal--right',
             'caption': 'test', 'copyright': 'test',
-						'attr_alt': 'My alt content',
-						'attr_title': 'My title content'},
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'zmo-medium', 'align': False, 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
             'copyright': 'test',
-						'attr_alt': 'My alt content',
-						'attr_title': 'My title content'},
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'small', 'align': 'right',
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-						'attr_alt': 'My alt content',
-						'attr_title': 'My title content'},
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'small', 'align': False, 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test',
-						'attr_alt': 'My alt content',
-						'attr_title': 'My title content'}]
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'}]
 
     class Image(object):
 
@@ -274,13 +278,19 @@ def test_image_should_produce_markup(jinja2_env):
         output = ""
         for line in lines:
             output += line.strip()
-        markup = '<figure class="%s"><div class="scaled-image"><noscript data-ratio="">' \
-            '<img alt="%s" title="%s" class="figure__media"' \
-            ' src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
-            'data-ratio=""></noscript></div><figcaption' \
-            ' class="figure__caption">test<span class="figure__copyright">test</span></figcaption></figure>' \
-            % (el['css'], el['attr_alt'], el['attr_title'])
+        markup = '<figure class="%s"><div class="scaled-image">' \
+                 '<!--\[if gte IE 9\]> --><noscript data-ratio="">' \
+                 '<!-- <!\[endif\]--><img alt="%s" title="%s" ' \
+                 'class="figure__media" ' \
+                 'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
+                 'data-ratio=""><!--\[if gte IE 9\]> --></noscript>' \
+                 '<!-- <!\[endif\]--></div><figcaption ' \
+                 'class="figure__caption">test<span ' \
+                 'class="figure__copyright">test</span>' \
+                 '</figcaption></figure>' \
+                 % (el['css'], el['attr_alt'], el['attr_title'])
         assert match(markup, output)
+
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
@@ -575,7 +585,7 @@ def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
            'sub_ressort': 'mode'}
     request = {'path': '/test/test'}
     elems = ['<script',
-             '"st" : "zeitonl"',
+             '"st" : ""',
              '"cp" : "lebensart/mode/bild-text"',
              '"sv" : "ke"',
              '"co" : "URL: /test/test"',
@@ -594,14 +604,14 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     # make multiple tests from this
     # with all standard banner
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    banner = {'name':'superbanner',
-        'tile': '1',
-        'sizes': ['728x90'],
-        'dcopt': 'ist',
-        'label': 'anzeige',
-        'noscript_width_height': ('728','90'),
-        'diuqilon': True,
-        'min_width': 768}
+    banner = {'name': 'superbanner',
+              'tile': '1',
+              'sizes': ['728x90'],
+              'dcopt': 'ist',
+              'label': 'anzeige',
+              'noscript_width_height': ('728', '90'),
+              'diuqilon': True,
+              'min_width': 768}
     num = '123456789'
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
              'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
@@ -614,9 +624,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
         output += line.strip()
     assert markup in output
 
+
 def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
-     tpl = jinja2_env.get_template('templates/block_elements.tpl')
-     assert  tpl.module.no_block('') == ''
-
-
-
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    assert tpl.module.no_block('') == ''

@@ -242,9 +242,13 @@
         {% endif %}
         ">
             <div class="scaled-image">
+                <!--[if gte IE 9]> -->
                 <noscript data-ratio="{{obj.ratio}}">
+                <!-- <![endif]-->
                         <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+                <!--[if gte IE 9]> -->
                 </noscript>
+                <!-- <![endif]-->
             </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
@@ -548,12 +552,25 @@
 <!-- ivw ver2 tracking -->
 <!-- SZM VERSION="2" -->
     <script type="text/javascript">
+
+        //set breakpoint for mobile tracking
+        ivw_min_width = 767;
+
         var iam_data = {
-            "st" : "zeitonl",
+            "st" : "",
             "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text", 
             "sv" : "ke",
             "co" : "URL: {{request.path}}"
         };
+
+        if( window.innerWidth >= ivw_min_width ){
+        //desktop
+            iam_data.st = "zeitonl";
+        }else{
+        //mobile
+           iam_data.st = "mobzeit"; 
+        }
+
         iom.c(iam_data,1); 
     </script>
 {%- endmacro %}
