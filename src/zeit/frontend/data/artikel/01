@@ -18,7 +18,7 @@
                 <text>Wie steht's um das bayerische Nachtleben, 30 Jahre nach Giorgio Moroder? Der DJ und Labelbetreiber Mathias Modica gibt im Interview die Route für den perfekten Abend vor.</text>
                 <description>Wie steht's um das bayerische Nachtleben, 30 Jahre nach Giorgio Moroder? Der DJ und Labelbetreiber Mathias Modica gibt im Interview die Route für den perfekten Abend vor.</description>
                 <byline />
-                <image align="left" base-id="http://xml.zeit.de/reisen/2013-08/mathias-modica/" type="jpg" publication-date="" expires="">
+                <image base-id="http://xml.zeit.de/reisen/2013-08/mathias-modica/" type="jpg" publication-date="" expires="">
                     <bu>Der DJ Mathias Modica  in der Ruby Bar, die er zusammen mit zwei Freunden betreibt.</bu>
                     <copyright link="http://www.bastiarlt.de">© Sebastian Arlt für DIE ZEIT</copyright>
                 </image>
@@ -29,7 +29,7 @@
                 <text>Zu hohe Mieten, zu wenig Platz: Münchner Produktdesigner waren in der Stadt lange nicht sichtbar. Ein Laden auf der Maximilianstraße soll das ändern. </text>
                 <description>Zu hohe Mieten, zu wenig Platz: Münchner Produktdesigner waren in der Stadt lange nicht sichtbar. Ein Laden auf der Maximilianstraße soll das ändern. </description>
                 <byline />
-                <image align="left" base-id="http://xml.zeit.de/lebensart/2013-08/teaser-design-muenchen2-2/" type="jpg" publication-date="" expires="">
+                <image base-id="http://xml.zeit.de/lebensart/2013-08/teaser-design-muenchen2-2/" type="jpg" publication-date="" expires="">
                     <bu>Der temporäre Shop Haeppi Piecis verkauft Mode und Produktdesign aus München. </bu>
                     <copyright>© Phil Pham</copyright>
                 </image>
@@ -45,13 +45,13 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
                 <description>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
 Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</description>
                 <byline />
-                <image align="left" title="Tobias Petri Teaser" base-id="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-teaser-2/" type="jpg" publication-date="" expires="">
+                <image title="Tobias Petri Teaser" base-id="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-teaser-2/" type="jpg" publication-date="" expires="">
                     <bu />
                     <copyright>© Christoph Schaller für Freunde von Freunden</copyright>
                 </image>
             </reference>
         </references>
-        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/lebensart/2013-10/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00">
+        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/lebensart/2013-10/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00">
             <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
             <copyright>© Andreas Gebert/dpa</copyright>
         </image>
@@ -113,7 +113,7 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
         <subtitle>Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das über die Gentrifizierung? Ein Erklärungsversuch.</subtitle>
         <byline>von  Marie Schmidt</byline>
         <division type="page">
-            <image src="http://xml.zeit.de/exampleimages/artikel/01/01.jpg" xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/lebensart/2013-10/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00" layout="large" is_empty="False">
+            <image src="http://xml.zeit.de/exampleimages/artikel/01/01.jpg" xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/lebensart/2013-10/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00" layout="large" is_empty="False">
                 <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
                 <copyright>© Andreas Gebert/dpa</copyright>
             </image>
