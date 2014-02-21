@@ -144,9 +144,6 @@
         </div>
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
-        <!-- seo article date modification -->
-        {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date('long'))}}
-
         <!-- tracking at end -->
         {{blocks.ga_tracking()}}
         {{blocks.cc_tracking(view.banner_channel)}}

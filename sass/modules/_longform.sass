@@ -13,7 +13,15 @@ $longform-header-max-height: 1400px
   max-width: none
 
   .article__subtitle
-    color: $white
+    color: $grey--dark
+    text-align: center
+    line-height: 1.5
+
+  .article__subtitle__line
+    height: $micro
+    width: $extremhuge
+    border-bottom: $micro solid $grey--light
+    margin: $big auto $medium auto
 
   .article__wrap
     padding-top: 0
@@ -114,12 +122,13 @@ $longform-header-max-height: 1400px
     overflow: hidden
     text-align: center
     bottom: 0
-    padding-bottom: 4%
     padding-left: 5%
     padding-right: 5%
     width: 100%
     z-index: 2
     .article__meta
+      font-size: $little
+      letter-spacing: $hair
       color: $white
       margin-bottom: 3em
       a
@@ -216,7 +225,10 @@ $longform-header-max-height: 1400px
     +tablet
     color: $white
     line-height: 1.2
-    margin-bottom: $thin
+    margin-bottom: $tiny
+    font-size: $font-xxxxl--px
+    +respond-min($break-2)
+      font-size: $font-xxxxxl--px
 
   .article__body
     padding-left: 0
@@ -236,9 +248,9 @@ $longform-header-max-height: 1400px
       padding-top: $medium
       padding-bottom: $medium
     .article__subpage-index
+      background-color: $grey--bright 
+    &:nth-child(2n+2)
       background-color: $grey--bright
-    &:nth-child(2n+1)
-      background-color: $grey--light
       .article__subpage-index
         background-color: $white
     &:first-child
@@ -248,7 +260,7 @@ $longform-header-max-height: 1400px
   .article__page-wrap
     +padded
     max-width: $max-longform-width
-    margin: 0 auto
+    margin: $medium auto
 
   .quote--wide
     +respond-min($break-3)

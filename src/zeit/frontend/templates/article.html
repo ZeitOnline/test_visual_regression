@@ -74,5 +74,9 @@
 
             </div>
         </div>
-    </article>
+	</article>
+
+    <!-- seo article date modification -->
+    {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date('long'))}}
+
 {% endblock content %}

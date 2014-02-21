@@ -132,14 +132,19 @@ class Article(Base):
 
     @property
     def author(self):
+        prefix = ''
         try:
             author = self.context.authorships[0].target
+            if IArticleTemplateSettings(self.context).template == 'longform':
+                prefix = u'\u2014' + ' von '
+            else:
+                prefix = ' von '
         except (IndexError, OSError):
             author = None
         return {
             'name': author.display_name if author else None,
             'href': author.uniqueId if author else None,
-            'prefix': " von " if self.context.genre else "Von ",
+            'prefix': prefix,
             'suffix': ', ' if self.location else None,
         }
 
@@ -160,7 +165,7 @@ class Article(Base):
     def date_last_published_semantic(self):
         tz = get_timezone('Europe/Berlin')
         date = IPublishInfo(self.context).date_last_published_semantic
-        if self.date_first_released is not None:
+        if self.date_first_released is not None and date is not None:
             if date > self.date_first_released:
                 return date.astimezone(tz)
             else:
