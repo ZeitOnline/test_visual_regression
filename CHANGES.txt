@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.2 (unreleased)
 ----------------
 
+- Cleaned up inheritance mechanisms between article views and their longform
+  variant. (#ZMO-281)
 - Gruntfile ready for production
 - alt title attributes work
 - webm video source on opendata.zeit.de
@@ -16,6 +18,8 @@ Change log for zeit.frontend
 - hacking back images to IE 8/7
 - adapt template to support new image/video formats from vivi config files
 - better imageformats
+- Put inclusion of the transaction-management tween in application code.
+
 
 0.1 (2014-02-12)
 ----------------

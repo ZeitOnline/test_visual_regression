@@ -1,10 +1,15 @@
 from grokcore.component import adapter, implementer
 from zeit.frontend.block import IFrontendBlock
+from zeit.magazin.interfaces import IArticleTemplateSettings
+import logging
+import pyramid.interfaces
+import pyramid.traversal
+import zeit.cms.repository.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
 import zope.interface
-import logging
+
 
 log = logging.getLogger(__name__)
 
@@ -47,3 +52,20 @@ def pages_of_article(context):
         else:
             page.append(block)
     return pages
+
+
+class ILongformArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+
+@adapter(zeit.cms.repository.interfaces.IRepository)
+@implementer(pyramid.interfaces.ITraverser)
+class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
+
+    def __call__(self, request):
+        tdict = super(RepositoryTraverser, self).__call__(request)
+        context = tdict['context']
+        if zeit.content.article.interfaces.IArticle.providedBy(context):
+            if IArticleTemplateSettings(context).template == 'longform':
+                zope.interface.alsoProvides(context, ILongformArticle)
+        return tdict
