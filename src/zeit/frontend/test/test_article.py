@@ -127,5 +127,4 @@ def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
 def test_article05_has_subtitle__line_class(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/05' % testserver.url)
-    desc = driver.find_element_by_class('article__subtitle__line')
-
+    assert driver.find_element_by_class_name('article__subtitle__line') != 0
