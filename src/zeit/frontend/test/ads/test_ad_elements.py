@@ -37,6 +37,7 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
         # ipad landscape
         assert 'width=1280' in content
 
+
 def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
     driver = selenium_driver
     m_sel = "meta[id='viewport-meta']"
@@ -49,3 +50,15 @@ def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
         assert 'width=device-width' in content
 
 
+def test_var_IQD_varPack_isset(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/01' % testserver.url)
+    varpack = driver.execute_script("return typeof window.IQD_varPack");
+    assert varpack == "object"
+
+
+def test_var_Krux_isset(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/01' % testserver.url)
+    krux = driver.execute_script("return typeof window.Krux");
+    assert krux == "function"
