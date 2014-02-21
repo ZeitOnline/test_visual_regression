@@ -136,12 +136,16 @@ class Article(Base):
     def author(self):
         try:
             author = self.context.authorships[0].target
+            if IArticleTemplateSettings(self.context).template == 'longform':
+                prefix = u'\u2014' + ' von '
+            else:
+                prefix = ' von '
         except (IndexError, OSError):
             author = None
         return {
             'name': author.display_name if author else None,
             'href': author.uniqueId if author else None,
-            'prefix': " von " if self.context.genre else "Von ",
+            'prefix': prefix,
             'suffix': ', ' if self.location else None,
         }
 

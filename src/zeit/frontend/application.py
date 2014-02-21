@@ -207,7 +207,9 @@ def translate_url(context, url):
 def format_date(obj, type):
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
-        return format_datetime(obj, format, locale="de_De")
+    elif type == 'short':
+        format = "dd. MMMM yyyy"
+    return format_datetime(obj, format, locale="de_De")
 
 
 # definition of default images sizes per layout context
@@ -224,7 +226,7 @@ def default_image_url(image):
         signature = compute_signature(width, height, 'time')
 
         if image.src is None:
-            return None 
+            return None
 
         scheme, netloc, path, query, fragment = urlsplit(image.src)
         parts = path.split('/')
