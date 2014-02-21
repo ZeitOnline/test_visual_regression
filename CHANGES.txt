@@ -4,7 +4,8 @@ Change log for zeit.frontend
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- newest iqd scripts for user tracking
+- cleaned up iqd script section
 
 
 0.2 (2014-02-21)
