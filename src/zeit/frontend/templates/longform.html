@@ -11,7 +11,7 @@
   	  <header class="article__title-wrap">
             {{ article.title() }}
             <div class="article__meta">
-              {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+              {{ blocks.author_date(view.show_article_date | format_date('long'), view.source) }}
               {{ blocks.meta_author(view.author) }}
             </div>
             {{ article.subtitle() }}
