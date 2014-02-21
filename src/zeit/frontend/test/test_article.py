@@ -122,3 +122,9 @@ def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     driver.get('%s/artikel/01' % testserver.url)
     content = driver.execute_script("return iam_data.st")
     assert content == "mobzeit"
+
+
+def test_article05_has_subtitle__line_class(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/05' % testserver.url)
+    assert driver.find_element_by_class_name('article__subtitle__line') != 0

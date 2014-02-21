@@ -8,22 +8,28 @@
 
           {{ blocks[view.header_elem|block_type](view.header_elem) }}
 
-  	  <header class="article__title-wrap">
+  	       <header class="article__title-wrap">
             {{ article.title() }}
             <div class="article__meta">
-              {{ blocks.author_date(view.show_article_date | format_date('long'), view.source) }}
+              {{ blocks.author_date(view.date_first_released | format_date('short'), view.source) }}
               {{ blocks.meta_author(view.author) }}
             </div>
-            {{ article.subtitle() }}
           </header>
 			</div>
 
 			<div class="article__body">
 
+        <!-- block for Teaser -->
+         <section class="article__page">
+            <div class="article__page-wrap">
+              {{ article.subtitle() }}
+              <div class="article__subtitle__line"></div>
+            </div>
+          </section>
+
         {% for page in view.pages %}
           <section class="article__page">
             <div class="article__page-wrap">
-
               {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
               {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
 
