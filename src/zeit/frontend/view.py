@@ -192,6 +192,24 @@ class Article(Base):
             else:
                 return None
 
+    def _get_date_format(self):
+        if self.context.product.id == 'ZEI' or \
+           self.context.product.id == 'ZMLB':
+                return 'short'
+        else:
+            return 'long'
+
+    @property
+    def show_date_format(self):
+        if self.date_last_published_semantic:
+            return 'long'
+        else:
+            return self._get_date_format()
+
+    @property
+    def show_date_format_seo(self):
+        return self._get_date_format()
+
     @property
     def show_article_date(self):
         if self.date_last_published_semantic:
@@ -215,11 +233,37 @@ class Article(Base):
 
     @property
     def genre(self):
-        return self.context.genre
+        # TODO: remove prose list, if integration of article-genres.xml
+        # is clear (as)
+        prefix = 'ein'
+        if (self.context.genre == 'glosse') or \
+           (self.context.genre == 'reportage') or \
+           (self.context.genre == 'nachricht') or \
+           (self.context.genre == 'analyse'):
+                prefix = 'eine'
+        if self.context.genre:
+            return prefix + " " + self.context.genre
+        else:
+            return None
 
     @property
     def source(self):
-        return self.context.copyrights or self.context.product_text
+        # TODO: find sth more elegant (as)
+        # 1. dont know why source stays empty if default value wasnt changed
+        # 2. issue/year will only be shown for Z and ZM right now
+        # because there's alway a value in volume and year
+        source = ''
+        if self.context.product_text:
+            if self.context.product.id == 'ZEI' or \
+               self.context.product.id == 'ZMLB':
+                    source = self.context.product_text + ' Nr. ' \
+                        + str(self.context.volume) + '/' + \
+                        str(self.context.year)
+            else:
+                source = self.context.product_text
+        else:
+            source = "Zeit Online"
+        return self.context.copyrights or source
 
     @property
     def location(self):

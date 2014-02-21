@@ -176,7 +176,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro author_date(date, source) -%}
+{% macro source_date(date, source) -%}
     <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
 {%- endmacro %}
 
