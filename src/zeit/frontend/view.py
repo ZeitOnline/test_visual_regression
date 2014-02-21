@@ -134,6 +134,7 @@ class Article(Base):
 
     @property
     def author(self):
+        prefix = ''
         try:
             author = self.context.authorships[0].target
             if IArticleTemplateSettings(self.context).template == 'longform':
