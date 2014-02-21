@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Changed Styling of Longform Header (including Title, Subtitle, Author, Date styling) (#ZMO-462)
 
 
 0.2 (2014-02-21)
