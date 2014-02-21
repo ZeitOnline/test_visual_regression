@@ -229,6 +229,8 @@
             figure-horizontal
         {% elif obj.layout == 'zmo-medium-right' %}
             figure-horizontal--right
+        {% elif obj.layout == 'zmo-medium-center' %}
+            figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-left' %}
             figure-stamp
         {% elif obj.layout == 'zmo-small-right' %}
