@@ -48,6 +48,7 @@ class Application(object):
             registry=registry)
         config.setup_registry(settings=self.settings)
 
+        self.config.include('pyramid_tm')
         self.configure_jinja()
 
         log.debug('Configuring Pyramid')

@@ -16,6 +16,7 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
+import zeit.frontend.article
 import zope.component
 
 log = logging.getLogger(__name__)
@@ -54,20 +55,17 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
              renderer='templates/article.html')
 class Article(Base):
 
+    advertising_enabled = True
+    main_nav_full_width = False
+    is_longform = False
+
     def __call__(self):
         super(Article, self).__call__()
-        self.context.advertising_enabled = True
-        self.context.main_nav_full_width = False
-        self.context.is_longform = False
+        self.context.advertising_enabled = self.advertising_enabled
+        self.context.main_nav_full_width = self.main_nav_full_width
+        self.context.is_longform = self.is_longform
         self.context.current_year = date.today().year
 
-        if IArticleTemplateSettings(self.context).template == 'longform':
-            self.context.advertising_enabled = False
-            self.context.main_nav_full_width = True
-            self.context.is_longform = True
-            return render_to_response('templates/longform.html',
-                                      {"view": self},
-                                      request=self.request)
         if IArticleTemplateSettings(self.context).template == 'photocluster':
             self.context.advertising_enabled = False
             return render_to_response('templates/photocluster.html',
@@ -146,21 +144,34 @@ class Article(Base):
         }
 
     @property
-    def publish_date(self):
+    def date_first_released(self):
         tz = get_timezone('Europe/Berlin')
         date = IPublishInfo(
-            self.context).date_last_published_semantic
+            self.context).date_first_released
         if date:
             return date.astimezone(tz)
 
     @property
-    def publish_date_meta(self):
+    def date_first_released_meta(self):
         return IPublishInfo(
-            self.context).date_last_published_semantic.isoformat()
+            self.context).date_first_released.isoformat()
 
     @property
-    def last_modified_date(self):
-        return IModified(self.context).date_last_modified
+    def date_last_published_semantic(self):
+        tz = get_timezone('Europe/Berlin')
+        date = IPublishInfo(self.context).date_last_published_semantic
+        if self.date_first_released is not None:
+            if date > self.date_first_released:
+                return date.astimezone(tz)
+            else:
+                return None
+
+    @property
+    def show_article_date(self):
+        if self.date_last_published_semantic:
+            return self.date_last_published_semantic
+        else:
+            return self.date_first_released
 
     @property
     def rankedTags(self):
@@ -276,11 +287,20 @@ class Article(Base):
                 'sizes': ['120x600'],
                 'dcopt': 'ist',
                 'adlabel': 'Anzeige',
-                'noscript_width_height': ('120','600'),
+                'noscript_width_height': ('120', '600'),
                 'diuqilon': True,
                 'min_width': 768
             },
         }
+
+
+@view_config(context=zeit.frontend.article.ILongformArticle,
+             renderer='templates/longform.html')
+class LongformArticle(Article):
+
+    advertising_enabled = False
+    main_nav_full_width = True
+    is_longform = True
 
 
 @view_config(route_name='json',

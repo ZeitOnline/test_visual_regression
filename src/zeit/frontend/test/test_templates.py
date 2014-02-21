@@ -664,6 +664,42 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     assert markup in output
 
 
+def test_add_publish_date_generates_script(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+
+    obj = [{'lm': None,
+            'pd': '1.Januar2014',
+            'markup': ''},
+           {'lm': '2.Januar2014',
+            'pd': '1.Januar2014',
+            'markup': '1.Januar2014'}]
+
+    for el in obj:
+        lines = tpl.module.add_publish_date(el['lm'], el['pd']).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        assert el['markup'] in output
+
+
+def test_date_meta_should_produce_metatags(jinja2_env):
+    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+
+    obj = [{'date_last_published_semantic': '',
+            'date_first_released_meta': '1.1.2011',
+            'markup': '<meta name="last-modified" content="1.1.2011"/>'},
+           {'date_last_published_semantic': '1.2.2011',
+            'date_first_released_meta': '1.1.2011',
+            'markup': '<meta name="last-modified" content="1.2.2011"/>'}]
+
+    for el in obj:
+        lines = tpl.module.date_meta(el).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        assert el['markup'] in output
+
+
 def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     assert tpl.module.no_block('') == ''

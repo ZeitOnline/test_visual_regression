@@ -1,25 +1,20 @@
 {% extends "templates/layout.html" %}
 {% import 'templates/block_elements.tpl' as blocks %}
+{% import 'templates/article.html' as article with context %}
 {% block content %}
-
 	<article class="article article--longform">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
-                {{ blocks[view.header_elem|block_type](view.header_elem) }}
-  				<header class="article__title-wrap">
-  					<h2 class="article__supertitle">
-  						{{ view.supertitle }}
-  					</h2>
-  					<h1 class="article__title">
-  						{{view.title}}
-  					</h1>
+
+          {{ blocks[view.header_elem|block_type](view.header_elem) }}
+
+  	  <header class="article__title-wrap">
+            {{ article.title() }}
             <div class="article__meta">
-              {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+              {{ blocks.author_date(view.show_article_date | format_date('long'), view.source) }}
               {{ blocks.meta_author(view.author) }}
             </div>
-            <span class="article__subtitle">
-                <p>{{view.subtitle}}</p>
-            </span>
+            {{ article.subtitle() }}
           </header>
 			</div>
 
@@ -32,9 +27,7 @@
               {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
               {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
 
-              {% for item in page %}
-                  {{ blocks[item|block_type](item)}}
-              {% endfor %}
+              {{ article.render_page(page) }}
             </div>
           </section>
         {% endfor %}

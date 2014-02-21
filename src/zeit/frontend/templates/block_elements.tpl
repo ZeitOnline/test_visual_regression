@@ -610,6 +610,29 @@
     </div>
 {%- endmacro %}
 
+{% macro add_publish_date( lm_date, publish_date) -%}
+    {% if lm_date %}
+        <script type="text/javascript">
+        //due to seo reasons, original publish date is added later
+            var el = document.getElementsByClassName('article__meta__date');
+            var content = el[0].innerText;
+            el[0].innerText = '{{publish_date}}, zuletzt aktualisiert: ' + content;
+        </script>
+    {% endif %}
+{%- endmacro %}
+
+{% macro date_meta(view) -%}
+    {% if view.date_last_published_semantic %}
+        <meta name="last-modified" content="{{ view.date_last_published_semantic }}"/>
+        <meta http-equiv="last-modified" content="{{ view.date_last_published_semantic }}"/>
+    {% else %}
+        <meta name="last-modified" content="{{ view.date_first_released_meta }}"/>
+        <meta http-equiv="last-modified" content="{{ view.date_first_released_meta }}"/>
+    {% endif %}
+    <meta name="date" content="{{ view.date_first_released_meta }}"/>
+{%- endmacro %}
+
+        
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
