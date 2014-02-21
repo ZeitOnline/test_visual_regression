@@ -5,6 +5,8 @@ Change log for zeit.frontend
 ----------------
 
 - Changed Styling of Longform Header (including Title, Subtitle, Author, Date styling) (#ZMO-462)
+- newest iqd scripts for user tracking
+- cleaned up iqd script section
 
 
 0.2 (2014-02-21)

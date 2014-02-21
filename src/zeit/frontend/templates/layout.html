@@ -56,45 +56,22 @@
             <link href="/css/icons/icons.fallback.css" rel="stylesheet">
         </noscript>
         <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
+        <script type="text/javascript" src="/js/libs/iqd/adam.js"></script>
         {% if view.context.advertising_enabled %}
             <!--[if gte IE 9]> -->
-            <script src="/js/libs/sasmobile.js"></script>
+            <script src="/js/libs/iqd/sasmobile.js"></script>
             <!-- <![endif]-->
         {% endif %}
+        {{blocks.iqd_init()}}
+        {{blocks.iqd_krux_head()}}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
 
         <!-- tracking at top -->
         {{blocks.ivw_ver2_tracking(view,request)}}
         {{blocks.ivw_ver1_tracking(view.banner_channel)}}
-
-        {% if view.context.advertising_enabled %}
-        <script>
-            // negative keyword 'diuqilon'
-            // todo: if we get a billboard, we need more options (NB)
-            var diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
-            // IQD varPack
-            window.IQD_varPack = {
-                iqdSite: 'zol',
-                iqdRessort: '',
-                ord: Math.random()*10000000000000000,
-                iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
-                iqdCountSkyReq: parseInt(0,10),
-                iqdEnableSky: 'neutral'
-            };
-            // IQD variable test
-            window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
-            window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
-            window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
-        </script>
-        <script type="text/javascript">
-            var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/homepage;";
-            var ord = (Math.random()*100000);
-            var n_pbt = "";
-            nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
-            document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');
-        </script>
-        {% endif %}
+        {{blocks.iqd_nuggad()}}
+        {{blocks.iqd_krux_body()}}
 
         <div class="page-wrap">
 
