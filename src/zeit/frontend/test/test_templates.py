@@ -337,9 +337,10 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
         output += line.strip()
 
     start = '<div class="scaled-image is-pixelperfect">' \
-        '<noscript><img class="article__main-image--longform" src="'
+            '<!--[if gte IE 9]> --><noscript><!-- <![endif]-->' \
+            '<img class="article__main-image--longform" src="'
 
-    end = '"></noscript></div>testtest'
+    end = '--></noscript><!-- <![endif]--></div>testtest'
     assert output.startswith(start)
     assert output.endswith(end)
 
