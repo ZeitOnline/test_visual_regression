@@ -19,6 +19,10 @@ Change log for zeit.frontend
 - adapt template to support new image/video formats from vivi config files
 - better imageformats
 - Put inclusion of the transaction-management tween in application code.
+- updates version of grunticon to 1.0.0
+- do not load sasmobile.js on IE < 9
+- bugfix viewport script for ipad landscape
+- fix headerimage in IE < 9
 
 
 0.1 (2014-02-12)
