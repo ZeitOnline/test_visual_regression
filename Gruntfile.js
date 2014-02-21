@@ -110,19 +110,7 @@ module.exports = function(grunt) {
 				trailing: true, // makes it an error to leave a trailing whitespace
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
 				ignores: [
-					project.sourceDir + 'javascript/libs/chai.js',
-					project.sourceDir + 'javascript/libs/jquery-1.10.2.min.js',
-					project.sourceDir + 'javascript/libs/jquery.visible.min.js',
-					project.sourceDir + 'javascript/libs/modernizr.custom.42776.js',
-					project.sourceDir + 'javascript/libs/require.js',
-					project.sourceDir + 'javascript/libs/sasmobile.js',
-					project.sourceDir + 'javascript/libs/sjcl.js',
-					project.sourceDir + 'javascript/libs/postscribe.min.js',
-					project.sourceDir + 'javascript/libs/jquery.bxslider.js',
-					project.sourceDir + 'javascript/libs/jquery.easing.1.3.js',
-					project.sourceDir + 'javascript/libs/jquery.fitvids.js',
-					project.sourceDir + 'javascript/libs/underscore-min.js',
-					project.sourceDir + 'javascript/libs/packery.pkgd.js',
+					project.sourceDir + 'javascript/libs/**/*',
 					project.sourceDir + 'javascript/documentation'
 				],
 				// devel: true, // accept console etc.
