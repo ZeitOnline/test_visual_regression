@@ -179,9 +179,15 @@ module.exports = function(grunt) {
 
 		grunticon: {
 			dist: {
-				options: {
-					src: project.sourceDir + "sass/icons",
+				files: [{
+					expand: true,
+					cwd: project.sourceDir + "sass/icons",
+					src: ['*.svg', '*.png'],
 					dest: project.codeDir + "/css/icons"
+				}],
+				options: {
+					defaultWidth: "100px",
+					defaultHeight: "100px"
 				}
 			}
 		},

@@ -14,14 +14,14 @@
         <script>
             var viewport_meta = document.getElementById('viewport-meta');
             var viewports = {
-                    default: viewport_meta.getAttribute('content'),
+                    standard: viewport_meta.getAttribute('content'),
                     landscape: 'width=1280'
                 };
             var viewport_set = function() {
-                if ( screen.width > 768 ) {
+                if ( screen.width == 768 && Math.abs(window.orientation) == 90 ) {
                     viewport_meta.setAttribute( 'content', viewports.landscape );
                 } else {
-                    viewport_meta.setAttribute( 'content', viewports.default );
+                    viewport_meta.setAttribute( 'content', viewports.standard);
                 }
                 
             };
@@ -57,7 +57,9 @@
         </noscript>
         <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
         {% if view.context.advertising_enabled %}
+            <!--[if gte IE 9]> -->
             <script src="/js/libs/sasmobile.js"></script>
+            <!-- <![endif]-->
         {% endif %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">

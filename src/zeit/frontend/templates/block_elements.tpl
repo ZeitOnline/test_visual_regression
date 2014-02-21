@@ -261,9 +261,13 @@
 
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
+        <!--[if gte IE 9]> -->
         <noscript>
+        <!-- <![endif]-->
             <img class="article__main-image--longform" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <!--[if gte IE 9]> -->
         </noscript>
+        <!-- <![endif]-->
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
