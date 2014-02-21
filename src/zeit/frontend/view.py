@@ -146,21 +146,34 @@ class Article(Base):
         }
 
     @property
-    def publish_date(self):
+    def date_first_released(self):
         tz = get_timezone('Europe/Berlin')
         date = IPublishInfo(
-            self.context).date_last_published_semantic
+            self.context).date_first_released
         if date:
             return date.astimezone(tz)
 
     @property
-    def publish_date_meta(self):
+    def date_first_released_meta(self):
         return IPublishInfo(
-            self.context).date_last_published_semantic.isoformat()
+            self.context).date_first_released.isoformat()
 
     @property
-    def last_modified_date(self):
-        return IModified(self.context).date_last_modified
+    def date_last_published_semantic(self):
+        tz = get_timezone('Europe/Berlin')
+        date = IPublishInfo(self.context).date_last_published_semantic
+        if self.date_first_released is not None:
+            if date > self.date_first_released:
+                return date.astimezone(tz)
+            else:
+                return None
+
+    @property
+    def show_article_date(self):
+        if self.date_last_published_semantic:
+            return self.date_last_published_semantic
+        else:
+            return self.date_first_released
 
     @property
     def rankedTags(self):
@@ -276,7 +289,7 @@ class Article(Base):
                 'sizes': ['120x600'],
                 'dcopt': 'ist',
                 'adlabel': 'Anzeige',
-                'noscript_width_height': ('120','600'),
+                'noscript_width_height': ('120', '600'),
                 'diuqilon': True,
                 'min_width': 768
             },

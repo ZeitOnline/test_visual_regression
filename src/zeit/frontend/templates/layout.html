@@ -38,9 +38,8 @@
         <!--<![endif]-->
         <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
 
-        <meta name="last-modified" content="{{ view.last_modified_date }}"/>
-        <meta http-equiv="last-modified" content="{{ view.last_modified_date }}"/>
-        <meta name="date" content="{{ view.publish_date_meta }}"/>
+        <!-- date metadata -->
+        {{blocks.date_meta(view)}}
 
         <!-- sharing metadata -->
         {{blocks.sharing_meta(view,request)}}
@@ -142,6 +141,9 @@
             </script>
         </div>
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+
+        <!-- seo article date modification -->
+        {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date('long'))}}
 
         <!-- tracking at end -->
         {{blocks.ga_tracking()}}

@@ -189,3 +189,11 @@ def test_artikel05_has_set_text_length(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view.Article(context, '')
     assert article_view.text_length is not None
+
+
+def test_article05_has_date_formats(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert article_view.date_last_published_semantic is not None
+    assert article_view.date_first_released is not None
+    assert article_view.show_article_date is not None

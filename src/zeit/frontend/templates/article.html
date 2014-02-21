@@ -13,7 +13,7 @@
                             {{view.title}}
                         </h1>
                         <div class="article__meta">
-                            {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+                            {{ blocks.author_date(view.show_article_date | format_date('long'), view.source) }}
                         </div>
                         <div class="article__opener">
                             <span class="article__subtitle">
