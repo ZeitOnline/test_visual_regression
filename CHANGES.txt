@@ -1,8 +1,8 @@
 Change log for zeit.frontend
 ============================
 
-0.2.3 (unreleased)
---------------------
+0.2.3 (2014-02-22)
+------------------
 
 - Removed loads of data to have a smaller egg.
 
