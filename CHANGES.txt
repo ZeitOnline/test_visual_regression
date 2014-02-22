@@ -1,6 +1,12 @@
 Change log for zeit.frontend
 ============================
 
+0.2.2.1 (unreleased)
+--------------------
+
+- change Manifest in for rcursive include.
+
+
 0.2.2 (2014-02-22)
 ------------------
 
