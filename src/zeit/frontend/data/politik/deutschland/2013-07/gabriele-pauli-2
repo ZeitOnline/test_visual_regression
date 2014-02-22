@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
-  <block>
-    <title>Gabriele Pauli</title>
-    <text py:pytype="str">
-      <p>55, war lange CSU-Landrätin im Kreis Fürth. 2007 wurde sie bekannt, weil sie Ministerpräsident Edmund Stoiber Spitzelmethoden gegen sie vorwarf. Stoiber zog sich zurück, Pauli verließ die CSU. 2008 kandidierte sie für die Freien Wähler und zog in den Landtag ein. Dort wurde sie 2009 aus der Fraktion ausgeschlossen. Im gleichen Jahr gründete sie die Partei Freie Union, die sie wieder im Streit verließ. Pauli wäre bei der Landtagswahl im September gerne noch einmal für den Landtag angetreten, aber sie sieht sich politisch isoliert. Am 2. September erscheint ihre politische Biografie.</p>
-    </text>
-  </block>
-</container>
