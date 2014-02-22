@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Just trying the release cycle. No actual changes.
 
 
 0.2.1 (2014-02-22)
