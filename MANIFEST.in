@@ -1,2 +1,2 @@
-recursive-include src/zeit/frontend/css *.*
-recursive-include src/zeit/frontend/js *.*
+graft src/zeit/frontend/css
+graft src/zeit/frontend/js
