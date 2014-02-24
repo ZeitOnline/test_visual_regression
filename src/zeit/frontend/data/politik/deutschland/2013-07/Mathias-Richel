@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
-  <block>
-    <title>Mathias Richel</title>
-    <text py:pytype="str">
-      <p>ist Werber, Sozialdemokrat und <span class="st">Mitglieder des Gesprächkreises Netzpolitik des SPD-Parteivorstands.</span></p>
-    </text>
-  </block>
-</container>

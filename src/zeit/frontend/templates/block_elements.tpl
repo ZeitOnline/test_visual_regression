@@ -577,6 +577,105 @@
     </script>
 {%- endmacro %}
 
+{% macro iqd_init() -%}
+<script type="text/javascript">
+    // negative keyword 'diuqilon'
+    // todo: if we get a billboard, we need more options (NB)
+    var diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
+    // IQD varPack
+    window.IQD_varPack = {
+        iqdSite: 'zol',
+        iqdRessort: '',
+        ord: Math.random()*10000000000000000,
+        iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
+        iqdCountSkyReq: parseInt(0,10),
+        iqdEnableSky: 'neutral'
+    };
+    // IQD variable test
+    window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
+    window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
+    window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
+    // ]]>
+</script>
+{%- endmacro %}
+
+{% macro iqd_krux_head() -%}
+<script type="text/javascript" src="http://ad.yieldlab.net/yp/21752,21754,21759,21987?ts=1392992264"></script>
+{# BEGIN Krux Control Tag for "IQ" #}
+{# Source: /snippet/controltag?confid=Ip52Cnbc&site=IQ&edit=1 #}
+<script class="kxct" data-id="Ip52Cnbc" data-timing="async" data-version="1.9" type="text/javascript">
+    window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+    (function(){
+        var k=document.createElement('script');k.type='text/javascript';k.async=true;
+        var m,src=(m=location.href.match(/\bkxsrc=([^&]+)/))&&decodeURIComponent(m[1]);
+        k.src = /^https?:\/\/([^\/]+\.)?krxd\.net(:\d{1,5})?\//i.test(src) ? src : src === "disable" ? "" : (location.protocol==="https:"?"https:":"http:")+"//cdn.krxd.net/controltag?confid=Ip52Cnbc";
+        var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
+    }());
+</script>
+{# END Krux Controltag #}
+{# BEGIN Krux IQ #}
+<script class="kxint" type="text/javascript">
+    window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+    (function(){
+        var Krux = this.Krux.adaudience = this.Krux.adaudience || {};
+        function retrieve(n){
+            var m, k='kxadaudience_'+n;
+            if (window.localStorage) {
+                return window.localStorage[k] || "";
+            } else if (navigator.cookieEnabled) {
+                m = document.cookie.match(k+'=([^;]*)');
+                return (m && unescape(m[1])) || "";
+            } else {
+                return '';
+            }
+        }
+        Krux.user = retrieve('user');
+        Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+        var dfpp = [];
+        for(var i = 0; i < Krux.segments.length; i++) {
+            dfpp.push(Krux.segments[i]);
+        }
+        Krux.dfppKeyValues = dfpp.length ? dfpp.join(',') + ';' : '';
+        Krux.dfppKeyValues = 'ksg=' + Krux.dfppKeyValues;
+    })();
+</script>
+{%- endmacro %}
+
+{% macro iqd_nuggad() -%}
+<script type="text/javascript">
+    var n_pbt = "";
+    nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
+    document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');
+</script>
+{%- endmacro %}
+
+{% macro iqd_krux_body() -%}
+<script type="text/javascript">
+    // <![CDATA[
+    var YLP = yl.YpResult || "";
+    var ylpid = [21752, 21754, 21759, 21987];
+    var ylpid2 = [6069, 3039, 5641, 8504];
+    try { var ylpsky = YLP.get(ylpid[0]).id; } catch(e) { ylpsky = 0; }
+    try { var ylpmedrec = YLP.get(ylpid[1]).id; } catch(e) { ylpmedrec = 0; }
+    try { var ylpsuba = YLP.get(ylpid[2]).id; } catch(e) { ylpsuba = 0; }
+    try { var ylpdynamic = YLP.get(ylpid[3]).id; } catch(e) { ylpdynamic = 0; }
+    try { var ylpwf = YLP.get(ylpid[3]).format; } catch(e) { ylpwf = 0; }
+    var ylpwfid = 'y' + ylpwf;
+    var iqd_wlCus = ['ysky', 'ymdr', 'ysba', 'ydyc', ylpwfid];
+    var iqd_wlCusRec = [ylpsky, ylpmedrec, ylpsuba, ylpdynamic, ylpwf];
+    var iqd_wlCusRecStr = [];
+    for (var i = 0; i < iqd_wlCus.length; i++) {
+        iqd_wlCusRecStr[i] =  (iqd_wlCusRec[i] > 0) ? iqd_wlCus[i] + '=1' : iqd_wlCus[i] + '=0';
+    }
+    document.write('<scr'+'ipt>n_pbt += iqd_wlCusRecStr.join("\;");</scr'+'ipt>');
+    if (window.Krux.adaudience.dfppKeyValues){
+        document.write('<scr'+'ipt>n_pbt += ";" + window.Krux.adaudience.dfppKeyValues;</scr'+'ipt>');
+    }
+    // ]]>
+</script>
+<script>n_pbt = n_pbt.substr(0,1150);</script>
+{%- endmacro %}
+
 {% macro inlinegallery(obj) -%}
     <div class="inline-gallery">
         {% for item in obj.items() %}
