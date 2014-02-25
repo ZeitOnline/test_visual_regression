@@ -347,7 +347,7 @@
         <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
                 <source src="{{obj.source}}" type="video/mp4">
                 <source src="http://opendata.zeit.de/zmo-videos/{{obj.id}}.webm" type="video/webm">
-                <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})">
+                <!-- <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})"> -->
         </video>
             <div class="article__main-image--longform video--fallback" style="background-image:url({{obj.video_still}})"></div>
     </div>
