@@ -612,12 +612,14 @@
 
 {% macro add_publish_date( lm_date, publish_date) -%}
     {% if lm_date %}
+        <!--[if gt IE 8]><!-->
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
             var el = document.getElementsByClassName('article__meta__date');
             var content = el[0].innerText;
             el[0].innerText = '{{publish_date}}, zuletzt aktualisiert: ' + content;
         </script>
+        <!--<![endif]-->
     {% endif %}
 {%- endmacro %}
 
