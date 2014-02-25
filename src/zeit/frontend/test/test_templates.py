@@ -265,10 +265,6 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-small-center', 'css': 'figure is-constrained is-centered',
-            'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
            {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
@@ -287,16 +283,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-large-right', 'align': False,
-            'css': 'figure-full-width',
-            'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
-           {'layout': 'zmo-large-left', 'align': False,
-            'css': 'figure-full-width',
-            'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'}]
+           ]
 
     class Image(object):
 
@@ -474,12 +461,12 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     obj = {'video_still': 'test.jpg', 'source': 'test.mp4', 'id': 1}
     wrapper = '<div data-backgroundvideo="1'
     video = '<video preload="auto" autoplay="true" ' \
-            'loop="loop" muted="muted" volume="0" poster="test.jpg'
+            'loop="loop" muted="muted" volume="0"'
     source = '<source src="test.mp4'
     source_webm = 'http://opendata.zeit.de/zmo-videos/1.webm'
     img = '<img '
-    fallback = '<div class="article__main-image--longform' \
-        ' video--fallback" style="background-image:url(test.jpg'
+    fallback = '<img class="article__main-image--longform' \
+        ' video--fallback" src="test.jpg'
     lines = tpl.module.headervideo(obj).splitlines()
     output = ""
     for line in lines:

@@ -233,14 +233,8 @@
             figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-left' %}
             figure-stamp
-        {% elif obj.layout == 'zmo-small-center' %}
-            figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-right' %}
             figure-stamp--right
-        {% elif obj.layout == 'zmo-large-left' %}
-            figure-full-width
-        {% elif obj.layout == 'zmo-large-right' %}
-            figure-full-width
         {% else %}
             figure-stamp
         {% endif %}
@@ -349,7 +343,7 @@
                 <source src="http://opendata.zeit.de/zmo-videos/{{obj.id}}.webm" type="video/webm">
                 <!-- <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})"> -->
         </video>
-            <div class="article__main-image--longform video--fallback" style="background-image:url({{obj.video_still}})"></div>
+        <img class="article__main-image--longform video--fallback" src="{{obj.video_still}}">
     </div>
 {%- endmacro %}
 
@@ -711,12 +705,14 @@
 
 {% macro add_publish_date( lm_date, publish_date) -%}
     {% if lm_date %}
+        <!--[if gt IE 8]><!-->
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
             var el = document.getElementsByClassName('article__meta__date');
             var content = el[0].innerText;
             el[0].innerText = '{{publish_date}}, zuletzt aktualisiert: ' + content;
         </script>
+        <!--<![endif]-->
     {% endif %}
 {%- endmacro %}
 

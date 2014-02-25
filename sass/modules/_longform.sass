@@ -107,8 +107,6 @@ $longform-header-max-height: 1400px
     z-index: 1
     .video--fallback
       display: none
-    img
-      min-width: 100%
     video
       position: absolute
       bottom: 0
@@ -235,6 +233,8 @@ $longform-header-max-height: 1400px
     padding-right: 0
     padding-bottom: 0
     background-color: $white
+    p
+      margin-bottom: $little
     p:first-of-type
       +respond-min($comments__break-overlap)
         padding-right: 0
@@ -256,6 +256,9 @@ $longform-header-max-height: 1400px
     &:first-child
       +respond-min($break-3)
         padding-top: $wide
+    &:nth-child(2)
+      +tablet
+
 
   .article__page-wrap
     +padded

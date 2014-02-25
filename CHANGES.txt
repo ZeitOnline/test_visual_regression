@@ -7,6 +7,10 @@ Change log for zeit.frontend
 - Load logo if behind prefixed proxy.
 - Produce a different url for images (with prefix)
 - translated url goes to whatever is the host
+- change backgroundvideo mobile fallback
+- force removal of video poster attribute after loading to avoid glitch
+- adds text-only stylesheet for ie7
+
 
 0.2.5 (2014-02-25)
 ------------------
