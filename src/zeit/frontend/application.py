@@ -202,7 +202,7 @@ def translate_url(context, url):
     if request.registry.settings['proxy_url'] != '':
         proxy = request.registry.settings['proxy_url']
         return url.replace("http://xml.zeit.de/", proxy, 1)
-    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+    return url.replace("http://xml.zeit.de", request.host, 1)
 
 
 def format_date(obj, type):
@@ -233,6 +233,9 @@ def default_image_url(image):
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
-        return urlunsplit((scheme, netloc, path, query, fragment))
+        url =  urlunsplit((scheme, netloc, path, query, fragment))
+        request = pyramid.threadlocal.get_current_request()
+        import pdb;pdb.set_trace()
+        return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL.')

@@ -5,7 +5,8 @@ Change log for zeit.frontend
 ------------------
 
 - Load logo if behind prefixed proxy.
-
+- Produce a different url for images (with prefix)
+- translated url goes to whatever is the host
 
 0.2.5 (2014-02-25)
 ------------------

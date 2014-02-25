@@ -4,6 +4,7 @@ from datetime import date
 import pyramid.config
 import pytest
 import zeit.frontend.application
+import pyramid.threadlocal
 
 
 @pytest.fixture(scope="module")
@@ -228,7 +229,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_image_should_produce_markup(jinja2_env):
+def test_image_should_produce_markup(jinja2_env, monkeypatch):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
@@ -250,7 +251,7 @@ def test_image_should_produce_markup(jinja2_env):
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-medium-center','css': 'figure '
+           {'layout': 'zmo-medium-center', 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
             'copyright': 'test',
             'attr_alt': 'My alt content',
@@ -304,8 +305,20 @@ def test_image_should_produce_markup(jinja2_env):
         def __init__(self, data):
             vars(self).update(data)
 
+    def route_url(str):
+        return 'http://localhost/'
+
+    def get_current_request():
+        my_mock = Mock()
+        my_mock.route_url = route_url
+        return my_mock
+
+    monkeypatch.setattr(
+        pyramid.threadlocal, 'get_current_request', get_current_request)
+
     for el in obj:
         print el['css']
+        print el['layout']
         lines = tpl.module.image(Image(el)).splitlines()
         output = ""
         for line in lines:
