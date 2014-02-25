@@ -6,7 +6,7 @@
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="/img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <img src="{{request.route_url('home')}}img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -111,7 +111,7 @@
             </a>
             <div class="main-nav__menu">
                 <aside class="main-nav__sharing scaled-image">
-                    <a href="http://twitter.com/home?status={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.url}}&p[images][0]={{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
+                    <a href="http://twitter.com/home?status={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.url}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
                 </aside>
             </div>
         </div>
@@ -243,7 +243,7 @@
                 <!--[if gte IE 9]> -->
                 <noscript data-ratio="{{obj.ratio}}">
                 <!-- <![endif]-->
-                        <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+                        <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
                 <!--[if gte IE 9]> -->
                 </noscript>
                 <!-- <![endif]-->
@@ -266,7 +266,7 @@
         <!--[if gte IE 9]> -->
         <noscript>
         <!-- <![endif]-->
-            <img class="article__main-image--longform" src="{{obj | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+            <img class="article__main-image--longform" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}">
         <!--[if gte IE 9]> -->
         </noscript>
         <!-- <![endif]-->
@@ -455,9 +455,9 @@
     <meta property="og:url" content="{{request.url}}">
 
     {% if obj.sharing_img %}
-        <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
         <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-        <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+        <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
     {% endif %}
 {%- endmacro %}
 
