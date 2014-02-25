@@ -233,14 +233,8 @@
             figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-left' %}
             figure-stamp
-        {% elif obj.layout == 'zmo-small-center' %}
-            figure is-constrained is-centered
         {% elif obj.layout == 'zmo-small-right' %}
             figure-stamp--right
-        {% elif obj.layout == 'zmo-large-left' %}
-            figure-full-width
-        {% elif obj.layout == 'zmo-large-right' %}
-            figure-full-width
         {% else %}
             figure-stamp
         {% endif %}
