@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.2.8 (unreleased)
+0.2.8 (2014-02-25)
 ------------------
 
 - Fixed translate_url filter.
