@@ -235,7 +235,6 @@ def default_image_url(image):
         path = '/'.join(parts)
         url =  urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
-        import pdb;pdb.set_trace()
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL.')
