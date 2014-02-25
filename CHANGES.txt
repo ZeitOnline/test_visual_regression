@@ -5,6 +5,7 @@ Change log for zeit.frontend
 ----------------
 
 - Changed Styling of Longform Header (including Title, Subtitle, Author, Date styling) (#ZMO-462)
+- adds text-only stylesheet for ie7
 
 
 0.2 (2014-02-21)
