@@ -18,7 +18,12 @@ module.exports = function(grunt) {
 		codeDir: './src/zeit/frontend/',
 		jqueryVersion: 'jquery-1.10.2.min.js',
 		sourceDir: './',
-		rubyVersion: '1.9.3'
+		rubyVersion: '1.9.3',
+		tasks: {
+			production: ['jshint', 'requirejs:dist', 'compass:dist', 'copy', 'grunticon'],
+			development: ['jshint', 'requirejs:dist', 'compass:dev', 'copy', 'grunticon'],
+			docs: ['jsdoc', 'sftp-deploy']
+		}
 	};
 
     // This is a little ugly, but if we want to run this locally we need
@@ -205,8 +210,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	// register tasks here
-	grunt.registerTask('default', ['jshint', 'requirejs:dist', 'compass:dev', 'copy', 'grunticon']);
-	grunt.registerTask('production', ['jshint', 'requirejs:dist', 'compass:dist', 'copy', 'grunticon']);
-	grunt.registerTask('docs', ['jsdoc', 'sftp-deploy']);
+	grunt.registerTask('default', project.tasks.production);
+	grunt.registerTask('production', project.tasks.production);
+	grunt.registerTask('dev', project.tasks.development);
+	grunt.registerTask('docs', project.tasks.docs);
 
 };
