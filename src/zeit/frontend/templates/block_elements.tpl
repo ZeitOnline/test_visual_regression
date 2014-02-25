@@ -349,7 +349,7 @@
                 <source src="http://opendata.zeit.de/zmo-videos/{{obj.id}}.webm" type="video/webm">
                 <!-- <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})"> -->
         </video>
-            <div class="article__main-image--longform video--fallback" style="background-image:url({{obj.video_still}})"></div>
+        <img class="article__main-image--longform video--fallback" src="{{obj.video_still}}">
     </div>
 {%- endmacro %}
 

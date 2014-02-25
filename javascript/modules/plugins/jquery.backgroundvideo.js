@@ -14,6 +14,8 @@
 			setVideoPosition: function( $element ){
 				var video = $element.find("video");
 				video.css({"left": ($element.width() - video.width())/2 + "px"});
+				/* prevents the video from glitching */
+				video.removeAttr("poster");
 			}
 		};
 
@@ -26,7 +28,7 @@
 			if( Modernizr.touch || !Modernizr.video ) {
 
 				$element.find( "video" ).remove();
-				$element.find( "div" ).show();
+				$element.find( ".video--fallback" ).show();
 
 			}else{
 				
