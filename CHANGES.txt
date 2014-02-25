@@ -9,7 +9,6 @@ Change log for zeit.frontend
 - adds text-only stylesheet for ie7
 
 
-
 0.2.5 (2014-02-25)
 ------------------
 
