@@ -108,7 +108,7 @@
             <main role="main" class="main">
                 {%  block content %}{% endblock content %}
             </main>
-            {{blocks.main_footer(view.context.current_year)}}
+            {{blocks.main_footer(view.context.current_year, request)}}
 
         </div>
 

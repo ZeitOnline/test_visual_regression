@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed static image_urls.
 
 
 0.2.6 (2014-02-25)
