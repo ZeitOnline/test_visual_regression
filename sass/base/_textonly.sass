@@ -5,7 +5,8 @@
 .bx-wrapper,
 .main-footer__Z,
 .scaled-image,
-.is-pixelperfect
+.is-pixelperfect,
+.main-nav__service-primary
 	display: none !important
 
 .main-nav,
@@ -17,5 +18,27 @@
 	text-align: center
 	padding-bottom: 4em
 
-.article.article--longform .article__head-wrap
-	background: $white
+.article--longform .article__head-wrap
+	background: $white !important
+	color: $white
+	height: auto !important
+	min-height: 1% !important
+	position: static !important
+	padding: $huge 0 0 0 !important 
+
+.article--longform .article__title,
+.article--longform .article__meta
+	color: $black !important
+
+.article--longform
+	width: $max-page-width !important
+
+.article--longform .article__title-wrap
+	position: static !important
+	text-align: center !important
+	left: auto !important
+	top: auto !important
+	padding: $fine
+
+.article__subpage-index
+	top: 0 !important
