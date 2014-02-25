@@ -10,13 +10,13 @@ Change log for zeit.frontend
 0.2.5 (2014-02-25)
 ------------------
 
-- Nothing changed yet.
+- Add reverse proxy capabilities (url_prefix).
 
 
 0.2.4 (2014-02-23)
 ------------------
 
-- Nothing changed yet.
+- Tried a new version management. No major improve.
 
 
 0.2.3.2 (2014-02-22)
