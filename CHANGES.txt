@@ -4,7 +4,8 @@ Change log for zeit.frontend
 0.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- change backgroundvideo mobile fallback
+- force removal of video poster attribute after loading to avoid glitch
 
 
 0.2.5 (2014-02-25)
