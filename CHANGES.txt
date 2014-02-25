@@ -1,16 +1,27 @@
 Change log for zeit.frontend
 ============================
 
-0.2.5 (unreleased)
+0.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Load logo if behind prefixed proxy.
+- Produce a different url for images (with prefix)
+- translated url goes to whatever is the host
+- change backgroundvideo mobile fallback
+- force removal of video poster attribute after loading to avoid glitch
+- adds text-only stylesheet for ie7
+
+
+0.2.5 (2014-02-25)
+------------------
+
+- Add reverse proxy capabilities (url_prefix). (inserted after release)
 
 
 0.2.4 (2014-02-23)
 ------------------
 
-- Nothing changed yet.
+- Tried a new version management. No major improve. (inserted after release)
 
 
 0.2.3.2 (2014-02-22)
