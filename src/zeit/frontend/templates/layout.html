@@ -31,10 +31,10 @@
             };
         </script>
         <!--[if lte IE 8]>
-            <link href="/css/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{request.route_url('home')}}css/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
         <![endif]-->
         <!--[if gt IE 8]><!-->
-            <link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{request.route_url('home')}}css/screen.css" media="screen" rel="stylesheet" type="text/css" />
         <!--<![endif]-->
         <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
 
@@ -44,29 +44,28 @@
         <!-- sharing metadata -->
         {{blocks.sharing_meta(view,request)}}
 
-        <script src="/js/libs/modernizr.custom.42776.js"></script>
-        <script src="/js/modules/fontloader_head.js"></script>
+        <script src="{{request.route_url('home')}}js/libs/modernizr.custom.42776.js"></script>
+        <script src="{{request.route_url('home')}}js/modules/fontloader_head.js"></script>
 
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
             window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
-            grunticon( [ "/css/icons/icons.data.svg.css", "/css/icons/icons.data.png.css", "/css/icons/icons.fallback.css" ] );
+            grunticon( [ "{{request.route_url('home')}}css/icons/icons.data.svg.css", "{{request.route_url('home')}}css/icons/icons.data.png.css", "{{request.route_url('home')}}css/icons/icons.fallback.css" ] );
         </script>
         <noscript>
-            <link href="/css/icons/icons.fallback.css" rel="stylesheet">
+            <link href="{{request.route_url('home')}}css/icons/icons.fallback.css" rel="stylesheet">
         </noscript>
         <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
-        <script type="text/javascript" src="/js/libs/iqd/adam.js"></script>
+        <script type="text/javascript" src="{{request.route_url('home')}}js/libs/iqd/adam.js"></script>
         {% if view.context.advertising_enabled %}
             <!--[if gte IE 9]> -->
-            <script src="/js/libs/iqd/sasmobile.js"></script>
+            <script src="{{request.route_url('home')}}js/libs/iqd/sasmobile.js"></script>
             <!-- <![endif]-->
         {% endif %}
         {{blocks.iqd_init()}}
         {{blocks.iqd_krux_head()}}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
-
         <!-- tracking at top -->
         {{blocks.ivw_ver2_tracking(view,request)}}
         {{blocks.ivw_ver1_tracking(view.banner_channel)}}
@@ -127,7 +126,7 @@
         {{blocks.meetrics_tracking()}}
         {{blocks.webtrekk_tracking(view,request)}}
         
-        <script data-main="/js/main" src="/js/libs/require.js"></script>
+        <script data-main="{{request.route_url('home')}}js/main" src="{{request.route_url('home')}}js/libs/require.js"></script>
         <script type="text/javascript">
             var sas_pageid = '54114/391248',
             sas_formatid = 13500,
