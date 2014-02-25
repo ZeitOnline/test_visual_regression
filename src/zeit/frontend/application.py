@@ -202,7 +202,8 @@ def translate_url(context, url):
     if request.registry.settings['proxy_url'] != '':
         proxy = request.registry.settings['proxy_url']
         return url.replace("http://xml.zeit.de/", proxy, 1)
-    return url.replace("http://xml.zeit.de", request.host, 1)
+    host = 'http://%s' % (request.host)
+    return url.replace("http://xml.zeit.de", host, 1)
 
 
 def format_date(obj, type):
