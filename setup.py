@@ -1,9 +1,14 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.3.dev0',
-
+    version='0.2.5.dev0',
+    author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
+    author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
+                  ron.drongowski@zeit.de, anika.szuppa@zeit.de',
     install_requires=[
         'Babel',
         'grokcore.component',

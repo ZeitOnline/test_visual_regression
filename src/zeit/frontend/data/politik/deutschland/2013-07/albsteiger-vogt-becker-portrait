@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
-  <block>
-    <title>Die Autoren</title>
-    <text py:pytype="str">
-      <p>Katrin Albsteiger (Vorsitzende JU Bayern), Sascha Vogt (Vorsitzender Jusos), Lasse Becker (Vorsitzender JuLis)</p>
-    </text>
-  </block>
-</container>

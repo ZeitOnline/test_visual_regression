@@ -1,11 +1,54 @@
 Change log for zeit.frontend
 ============================
 
-0.3 (unreleased)
-----------------
+0.2.5 (unreleased)
+------------------
+
+- adds text-only stylesheet for ie7
+
+
+0.2.4 (2014-02-23)
+------------------
+
+- Nothing changed yet.
+
+
+0.2.3.2 (2014-02-22)
+--------------------
+
+- Back to graft directive in Manifest.in.
+
+
+0.2.3.1 (2014-02-22)
+--------------------
+
+- Change Manifest.in for recursive-include.
+
+
+0.2.3 (2014-02-22)
+------------------
+
+- Removed loads of data to have a smaller egg.
+
+
+0.2.2.1 (2014-02-22)
+--------------------
+
+- change Manifest in for rcursive include.
+
+
+0.2.2 (2014-02-22)
+------------------
+
+- Just trying the release cycle. No actual changes.
+
+
+0.2.1 (2014-02-22)
+------------------
 
 - Changed Styling of Longform Header (including Title, Subtitle, Author, Date styling) (#ZMO-462)
-- adds text-only stylesheet for ie7
+- newest iqd scripts for user tracking
+- cleaned up iqd script section
 
 
 0.2 (2014-02-21)
