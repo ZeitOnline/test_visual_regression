@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.2.6 (unreleased)
 ------------------
 
+- change backgroundvideo mobile fallback
+- force removal of video poster attribute after loading to avoid glitch
 - adds text-only stylesheet for ie7
 
 
