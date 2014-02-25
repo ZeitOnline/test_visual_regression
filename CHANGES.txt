@@ -4,19 +4,19 @@ Change log for zeit.frontend
 0.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Load logo if behind prefixed proxy.
 
 
 0.2.5 (2014-02-25)
 ------------------
 
-- Add reverse proxy capabilities (url_prefix).
+- Add reverse proxy capabilities (url_prefix). (inserted after release)
 
 
 0.2.4 (2014-02-23)
 ------------------
 
-- Tried a new version management. No major improve.
+- Tried a new version management. No major improve. (inserted after release)
 
 
 0.2.3.2 (2014-02-22)
