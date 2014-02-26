@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.2.9 (unreleased)
 ------------------
 
+- remove unessecary code
+- add health_check url
 - add video_still for sharing if header has video
 - remove title tag in logo
 - fix missing proxy-url in fontloader
