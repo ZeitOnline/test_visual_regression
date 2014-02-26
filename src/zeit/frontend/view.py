@@ -320,9 +320,6 @@ class LongformArticle(Article):
     is_longform = True
 
 
-@view_config(route_name='json',
-             context=zeit.content.article.interfaces.IArticle,
-             renderer='json', name='teaser')
 @view_config(name='teaser',
              context=zeit.content.article.interfaces.IArticle,
              renderer='templates/teaser.html')
