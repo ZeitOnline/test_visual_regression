@@ -197,3 +197,30 @@ def test_article05_has_date_formats(testserver):
     assert article_view.date_last_published_semantic is not None
     assert article_view.date_first_released is not None
     assert article_view.show_article_date is not None
+
+
+def test_article01__has_correct_twitter_card_type(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.twitter_card_type == 'summary'
+
+
+def test_article05_has_correct_twitter_card_type(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert article_view.twitter_card_type == 'summary_large_image'
+
+
+def test_article01_has_correct_sharing_img_src(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.sharing_img.src == \
+        'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
+
+
+def test_article06_has_correct_sharing_img_video_still(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/06')
+    article_view = view.Article(context, '')
+    assert article_view.sharing_img.video_still == \
+        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/' \
+        '201401/3097/18140073001_3094729885001_7x.jpg'
