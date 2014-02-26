@@ -50,9 +50,6 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
                ), }
 
 
-@view_config(route_name='json',
-             context=zeit.content.article.interfaces.IArticle,
-             renderer='json')
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 class Article(Base):
