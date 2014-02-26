@@ -12,6 +12,7 @@
         <meta name='description' content='In Eisenhüttenstadt ist eine der deutschen Erstaufnahme-Einrichtungen für Flüchtlinge. Eine multimediale Reportage über Hoffnung und Verzweiflung'>
         <meta name="robots" content="index,follow,noodp,noydir,noarchive">
         <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
+        {% if view.context.advertising_enabled %}
         <script>
             var viewport_meta = document.getElementById('viewport-meta');
             var viewports = {
@@ -31,6 +32,7 @@
                 viewport_set(); 
             };
         </script>
+        {% endif %}
         <script>
             window.ZMO = window.ZMO || {};
             window.ZMO.home = "{{request.route_url('home')}}";
