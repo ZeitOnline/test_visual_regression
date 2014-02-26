@@ -66,13 +66,21 @@ def test_macro_footer_should_produce_markup(jinja2_env):
     # assert normal markup
     markup = '<footer class="main-footer">' \
         '<div class="main-footer__Z">' \
-        '<img src="/img/z-logo.svg" class="main-footer__Z__img" />' \
+        '<img src="http://localhost/img/z-logo.svg" class="main-footer__Z__img" />' \
         '</div>' \
         '<div class="main-footer__C">&copy; ' \
         + str(current_year) + ' ZEIT Online</div>' \
         '</figure>' \
         '</footer>'
-    lines = tpl.module.main_footer(current_year).splitlines()
+
+    request = Mock()
+
+    def route_url(str):
+        return 'http://localhost/'
+
+    request.route_url = route_url
+
+    lines = tpl.module.main_footer(current_year, request).splitlines()
     output = ""
     for line in lines:
         output += line.strip()

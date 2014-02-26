@@ -1,7 +1,25 @@
 Change log for zeit.frontend
 ============================
 
-0.2.6 (unreleased)
+0.2.9 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+0.2.8 (2014-02-25)
+------------------
+
+- Fixed translate_url filter.
+
+
+0.2.7 (2014-02-25)
+------------------
+
+- Fixed static image_urls.
+
+
+0.2.6 (2014-02-25)
 ------------------
 
 - Load logo if behind prefixed proxy.
