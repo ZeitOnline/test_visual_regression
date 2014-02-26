@@ -490,7 +490,9 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
 def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
-    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true'}
+    # test usual
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
+           'twitter_card_type': 'summary'}
     request = {'url': 'test.de'}
     twitter = ['<meta name="twitter:card" content="summary">',
                '<meta name="twitter:site" content="@zeitonline">',
@@ -515,6 +517,25 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
+        assert img in output
+
+    # test video still is set as sharing img
+    obj = {'title': 'title', 'subtitle': 'subtitle',
+           'sharing_img': {'video_still': 'true'},
+           'twitter_card_type': 'summary_large_image'}
+    twitter = ['<meta name="twitter:card" content="summary_large_image">']
+    image = ['<meta property="og:image" content="',
+             '<link itemprop="image" rel="image_src"',
+             '<meta name="twitter:image" content="']
+    lines = tpl.module.sharing_meta(obj, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    print output
+    for twitter_meta in twitter:
+        assert twitter_meta in output
+    for img in image:
+        print img
         assert img in output
 
 
