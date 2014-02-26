@@ -11,8 +11,8 @@
   	       <header class="article__title-wrap">
             {{ article.title() }}
             <div class="article__meta">
-              {{ blocks.author_date(view.date_first_released | format_date('short'), view.source) }}
-              {{ blocks.meta_author(view.author) }}
+              {{ blocks.source_date(view.date_first_released | format_date('short'), view.source) }}
+              {{ blocks.meta_author(view.authors) }}
             </div>
           </header>
 			</div>

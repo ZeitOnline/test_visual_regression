@@ -197,3 +197,33 @@ def test_article05_has_date_formats(testserver):
     assert article_view.date_last_published_semantic is not None
     assert article_view.date_first_released is not None
     assert article_view.show_article_date is not None
+
+
+# TODO: correct testing if we have author objects localy (as)
+# def test_article08_has_second_author(testserver):
+#     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+#     article_view = view.Article(context, '')
+#     assert article_view.authors[1].name is 'Armin Mustermann'
+#     assert article_view.authors[1].suffix is ', '
+#     assert article_view.authors[1].location is ', London'
+
+
+# def test_article08_has_first_author(testserver):
+#     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+#     article_view = view.Article(context, '')
+#     assert article_view.authors[0].name is 'Anne Mustermann'
+#     assert article_view.authors[0].suffix is ', '
+#     assert article_view.authors[0].prefix is 'von '
+#     assert article_view.authors[0].location is ', Berlin'
+
+
+def test_article08_has_correct_genre(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = view.Article(context, '')
+    assert article_view.genre == 'ein kommentar'
+
+
+def test_article08_has_correct_source(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = view.Article(context, '')
+    assert article_view.source == 'DIE ZEIT Nr. 26/2008'

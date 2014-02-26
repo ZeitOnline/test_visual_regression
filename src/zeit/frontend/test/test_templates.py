@@ -173,12 +173,12 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_head(1, '', css_class)
 
 
-def test_macro_author_date_should_produce_markup(jinja2_env):
+def test_macro_source_date_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     markup = '<span class="article__meta__source">' \
         'Aus zon</span><span class="article__meta__date">01.01.2013' \
         '</span>'
-    lines = tpl.module.author_date('01.01.2013', 'zon').splitlines()
+    lines = tpl.module.source_date('01.01.2013', 'zon').splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -353,26 +353,31 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     assert output.endswith(end)
 
 
-def test_macro_meta_author_should_produce_markup(jinja2_env):
-    # To Do: Here was a suffix once. NOt sure what it is good for or where it
-    # comes from (RD)
+def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
-    markup = 'von <span class="article__meta__author">y</span>'
-    assert markup == tpl.module.meta_author(data).strip()
-    data['href'] = 'x'
-    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>'
-    assert markup == tpl.module.meta_author(data).strip()
+    test_class = 'test'
+    obj = [{'prefix': 'von', 'href': 'www.zeit.de',
+            'name': 'Tom', 'location': ', Bern', 'suffix': 'und'},
+           {'prefix': '', 'href': '',
+            'name': 'Anna', 'location': '', 'suffix': ''}]
+    markup = 'von<a href="www.zeit.de" class="test meta-link">Tom</a>, Bern' \
+             'und<span class="test">Anna</span>'
+    lines = tpl.module.meta_author(obj, test_class).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup.strip() == output
 
 
-def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
+def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    data = {'name': 'abc'}
-    markup = '<span class="article__meta__author">abc</span>'
-    assert markup == tpl.module.authorlink(data).strip()
-    markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
-    data = {'name': 'abc', 'href': 'xyz'}
-    assert markup == tpl.module.authorlink(data).strip()
+    test_class = 'test'
+    obj = []
+    lines = tpl.module.meta_author(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert '' == output
 
 
 def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):

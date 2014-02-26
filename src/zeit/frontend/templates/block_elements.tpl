@@ -176,7 +176,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro author_date(date, source) -%}
+{% macro source_date(date, source) -%}
     <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
 {%- endmacro %}
 
@@ -273,19 +273,19 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
-{% macro meta_author(author) -%}
-    {% if author -%}
-        {{ author.prefix }}{{ authorlink(author) }} {### TO DO: {{ author.suffix }} ###}
-    {%- endif %}
-{%- endmacro %}
-
-{% macro authorlink(author, class="article__meta__author") -%}
-    {% if author.href -%}
-        <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>
-    {%- else -%}
-        <span class="{{class}}">{{author.name}}</span>
-    {%- endif %}
-{%- endmacro %}
+{% macro meta_author(authors, class="article__meta__author") %}
+    {%- if authors -%}
+        {%- for author in authors -%}
+            {{author.prefix}}
+            {%- if author.href -%}
+                <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>{{author.location}}
+            {%- else -%}
+                <span class="{{class}}">{{author.name}}{{author.location}}</span>
+            {%- endif -%}
+            {{author.suffix}}
+        {%- endfor -%}
+    {%- endif -%}
+{% endmacro %}
 
 {% macro focussed_nextread( nextread ) -%}
     {%-if nextread -%}
