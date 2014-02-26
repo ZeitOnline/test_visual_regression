@@ -100,15 +100,17 @@ $longform-header-max-height: 1400px
     left: 0
     width: 100%
     &.video--fallback
+      display: none
       position: absolute
       top: 0
-      left: -50%
       right: 0
       bottom: 0
       margin: auto
-      min-width: 200%
       min-height: 100%
-
+      @media only screen and (orientation : portrait)
+        left: -50%
+        min-width: 200%
+      
   .article__main-video--longform
     overflow: hidden
     position: relative
