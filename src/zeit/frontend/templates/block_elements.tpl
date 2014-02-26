@@ -89,10 +89,10 @@
     </nav>
 {%- endmacro %}
 
-{% macro main_footer(year) -%}
+{% macro main_footer(year, request) -%}
     <footer class="main-footer">
         <div class="main-footer__Z">
-            <img src="/img/z-logo.svg" class="main-footer__Z__img" />
+            <img src="{{request.route_url('home')}}img/z-logo.svg" class="main-footer__Z__img" />
         </div>
         <div class="main-footer__C">&copy; {{year}} ZEIT Online</div>
         </figure>
@@ -105,7 +105,7 @@
             <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="/img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
+                    <img src="{{request.route_url('home')}}img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
