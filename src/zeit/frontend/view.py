@@ -128,7 +128,10 @@ class Article(Base):
     def sharing_img(self):
         if self.header_img is not None:
             return self.header_img
-        return self.first_img
+        if self.header_video is not None:
+            return self.header_video
+        else:
+            return self.first_img
 
     @property
     def author(self):
@@ -147,6 +150,13 @@ class Article(Base):
             'prefix': prefix,
             'suffix': ', ' if self.location else None,
         }
+
+    @property
+    def twitter_card_type(self):
+        if IArticleTemplateSettings(self.context).template == 'longform':
+            return 'summary_large_image'
+        else:
+            return 'summary'
 
     @property
     def date_first_released(self):
