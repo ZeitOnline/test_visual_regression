@@ -25,6 +25,7 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
      */
     var rescale_one = function(image, subsequent, width, height) {
         var $img = $(image);
+        console.debug($img);
         width = width || $img.width();
         if (subsequent && $img.parents('.is-pixelperfect').length) {
             // get the parent height, don’t use ratio to update pixelperfect img

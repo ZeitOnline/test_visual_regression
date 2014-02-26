@@ -100,13 +100,13 @@
 {%- endmacro %}
 
 {% macro main_nav_compact(obj,request) -%}
-
+<!-- bild: {{obj.sharing_img}} -->
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="/img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <img src="/img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
