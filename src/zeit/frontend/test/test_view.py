@@ -147,11 +147,11 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
     assert '<img class="article__main-image--longform"' in browser.contents
 
-def test_health_check_should_response_and_have_status_204(testserver):
+def test_health_check_should_response_and_have_status_200(testserver):
     browser = Browser('%s/health_check' % testserver.url)
-    assert browser.headers['Content-Length'] == '0'
+    assert browser.headers['Content-Length'] == '2'
     resp = view.health_check('request')
-    assert resp.status_code == 204
+    assert resp.status_code == 200
 
 def test_content_should_have_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')

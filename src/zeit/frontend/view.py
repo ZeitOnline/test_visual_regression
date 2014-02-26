@@ -362,4 +362,5 @@ class Image(Base):
 
 @view_config(route_name='health_check')
 def health_check(request):
-    return Response(None, 204)
+    return Response('OK', 200)
+
