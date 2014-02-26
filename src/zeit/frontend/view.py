@@ -1,8 +1,9 @@
 from babel.dates import get_timezone
 from datetime import date
 from pyramid.renderers import render_to_response
+from pyramid.response import Response
 from pyramid.view import view_config
-from zeit.cms.workflow.interfaces import IPublishInfo, IModified
+from zeit.cms.workflow.interfaces import IPublishInfo
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.image.interfaces import IImageMetadata
@@ -23,6 +24,7 @@ log = logging.getLogger(__name__)
 
 
 class Base(object):
+
     """Base class for all views."""
 
     def __init__(self, context, request):
@@ -48,9 +50,6 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
                ), }
 
 
-@view_config(route_name='json',
-             context=zeit.content.article.interfaces.IArticle,
-             renderer='json')
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 class Article(Base):
@@ -318,9 +317,6 @@ class LongformArticle(Article):
     is_longform = True
 
 
-@view_config(route_name='json',
-             context=zeit.content.article.interfaces.IArticle,
-             renderer='json', name='teaser')
 @view_config(name='teaser',
              context=zeit.content.article.interfaces.IArticle,
              renderer='templates/teaser.html')
@@ -362,3 +358,8 @@ class Image(Base):
         response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
             os.path.basename(self.context.uniqueId).encode('utf8'))
         return response
+
+
+@view_config(route_name='health_check')
+def health_check(request):
+    return Response(None, 204)

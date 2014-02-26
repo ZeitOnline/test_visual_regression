@@ -53,7 +53,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('home', '/')
-        config.add_route('json', 'json/*traverse')
+        config.add_route('health_check', '/health_check')
         config.add_static_view(name='css', path='zeit.frontend:css/')
         config.add_static_view(name='js', path='zeit.frontend:js/')
         config.add_static_view(name='img', path='zeit.frontend:img/')
