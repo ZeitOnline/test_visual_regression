@@ -690,11 +690,13 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="inline-gallery">
-        {% for item in obj.items() %}
-            <!-- Gallery-Items as block.image(obj) -->
-           {{ inlinegalleryimage(item) }}
-        {% endfor %}
+    <div class="figure is-constrained is-centered">
+        <div class="inline-gallery">
+            {% for item in obj.items() %}
+                <!-- Gallery-Items as block.image(obj) -->
+               {{ inlinegalleryimage(item) }}
+            {% endfor %}
+        </div>
     </div>
 {%- endmacro %}
 

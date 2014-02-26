@@ -10,6 +10,9 @@ Change log for zeit.frontend
 - remove title tag in logo
 - fix missing proxy-url in fontloader
 - hack seo data into template
+- change inline gallery size
+- fix diverse bugs
+- fix fallback image in video header
 
 
 0.2.8 (2014-02-25)
