@@ -4,7 +4,8 @@ Change log for zeit.frontend
 0.2.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix missing proxy-url in fontloader
+- hack seo data into template
 
 
 0.2.8 (2014-02-25)
