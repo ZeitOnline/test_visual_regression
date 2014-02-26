@@ -189,7 +189,7 @@
 
 {% macro intertitle(intertitle) -%}
     <h3 class="article__subheading is-constrained is-centered">
-        {{ intertitle }}
+        {{ intertitle|striptags }}
     </h3>
 {%- endmacro %}
 
