@@ -9,6 +9,7 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
 import zope.interface
+import pyramid.httpexceptions
 
 
 log = logging.getLogger(__name__)
@@ -63,9 +64,13 @@ class ILongformArticle(zeit.content.article.interfaces.IArticle):
 class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
     def __call__(self, request):
-        tdict = super(RepositoryTraverser, self).__call__(request)
-        context = tdict['context']
-        if zeit.content.article.interfaces.IArticle.providedBy(context):
-            if IArticleTemplateSettings(context).template == 'longform':
-                zope.interface.alsoProvides(context, ILongformArticle)
-        return tdict
+        try:
+            tdict = super(RepositoryTraverser, self).__call__(request)
+            context = tdict['context']
+            if zeit.content.article.interfaces.IArticle.providedBy(context):
+                if IArticleTemplateSettings(context).template == 'longform':
+                    zope.interface.alsoProvides(context, ILongformArticle)
+            return tdict
+        except OSError, e:
+            if e.errno == 2:
+                raise pyramid.httpexceptions.HTTPNotFound()

@@ -1,10 +1,13 @@
-import mock
-import zeit.cms.interfaces
-from zeit.frontend import view
+from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery
+from zeit.frontend import view
 from zeit.frontend.block import InlineGalleryImage
 from zope.testbrowser.browser import Browser
+import mock
+import pytest
 import requests
+import zeit.cms.interfaces
+
 
 
 def test_breadcumb_should_produce_expected_data():
@@ -152,6 +155,15 @@ def test_health_check_should_response_and_have_status_200(testserver):
     assert browser.headers['Content-Length'] == '2'
     resp = view.health_check('request')
     assert resp.status_code == 200
+
+def test_a_404_request_should_be_from_zon_main_page(testserver):
+    browser = Browser()
+    browser.handleErrors = False
+    with pytest.raises(HTTPError):
+        browser.open('%s/this_is_a_404_page_my_dear' % testserver.url)
+        assert '404 Not Found' in str(browser.headers)
+
+    assert 'Dokument nicht gefunden' in browser.contents
 
 def test_content_should_have_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
