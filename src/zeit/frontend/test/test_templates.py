@@ -493,7 +493,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     # test usual
     obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
            'twitter_card_type': 'summary'}
-    request = {'url': 'test.de'}
+    request = {'host': 'test.de', 'path_info': '/myurl'}
     twitter = ['<meta name="twitter:card" content="summary">',
                '<meta name="twitter:site" content="@zeitonline">',
                '<meta name="twitter:creator" content="@zeitonline">',
@@ -504,7 +504,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
           '"og:description" itemprop="description" content="subtitle">',
-          '<meta property="og:url" content="test.de">']
+          '<meta property="og:url" content="test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
              '<meta class="scaled-image" name="twitter:image" content="']
@@ -595,7 +595,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
            'banner_channel': 'lebensart/mode/article',
            'text_length': 1000,
            'rankedTagsList': 'test;test'}
-    request = {'path': '/test/test'}
+    request = {'path_info': '/test/test'}
     el_def = ['<script',
               'src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"',
               "</script",
@@ -651,7 +651,7 @@ def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = {'ressort': 'lebensart',
            'sub_ressort': 'mode'}
-    request = {'path': '/test/test'}
+    request = {'path_info': '/test/test'}
     elems = ['<script',
              '"st" : ""',
              '"cp" : "lebensart/mode/bild-text"',
