@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- the forgotten hotfix...
 
 
 0.2.11 (2014-02-27)
