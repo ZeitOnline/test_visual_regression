@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.2.11 (unreleased)
+0.2.11 (2014-02-27)
 -------------------
 
 - hotfix the width of inline galleries to em(910p)x
