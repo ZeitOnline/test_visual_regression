@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add a 404 view loaded from zeit.de/error/404.
 
 
 0.2.14 (2014-02-27)

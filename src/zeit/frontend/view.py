@@ -2,6 +2,7 @@ from babel.dates import get_timezone
 from datetime import date
 from pyramid.renderers import render_to_response
 from pyramid.response import Response
+from pyramid.view import notfound_view_config
 from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo
 from zeit.content.article.edit.interfaces import IImage
@@ -19,6 +20,7 @@ import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
 import zope.component
+import urllib2
 
 log = logging.getLogger(__name__)
 
@@ -364,3 +366,14 @@ class Image(Base):
 def health_check(request):
     return Response('OK', 200)
 
+
+@notfound_view_config(request_method='GET')
+def notfound_get(request):
+    try:
+        request = urllib2.Request('http://www.zeit.de/error/404')
+        response = urllib2.urlopen(request, timeout=4)
+        html = response.read()
+        return Response(html, status='404 Not Found')
+    except urllib2.URLError:
+        return Response('Status 404:Dokument nicht gefunden.',
+                        status='404 Not Found')
