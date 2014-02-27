@@ -102,7 +102,7 @@
 {% macro main_nav_compact(obj,request) -%}
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
                     <img src="{{request.route_url('home')}}img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
@@ -515,7 +515,8 @@
         <script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
         <script type="text/javascript">
 
-            var Z_WT_KENNUNG = "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path}}"; // content id
+            var Z_WT_KENNUNG =
+            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path_info}}"; // content id
 
             var webtrekk = {
                 linkTrack : "standard",
