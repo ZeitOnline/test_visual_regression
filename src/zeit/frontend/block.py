@@ -185,7 +185,7 @@ class InlineGalleryImage(Image):
 
     def __init__(self, item):
         self.caption = item.caption
-        self.layout = "zmo-medium-center"  # item.layout
+        self.layout = "large"  # item.layout
         self.title = item.title
         self.text = item.text
 
