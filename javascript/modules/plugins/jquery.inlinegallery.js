@@ -32,7 +32,7 @@
 	$.fn.inlinegallery = function( defaults ) {
 
 		var options = $.extend({
-			slideSelector: '.figure.is-constrained',
+			slideSelector: '.figure-full-width',
 			easing: 'ease-in-out',
 			pagerType: "short",
 			nextText: "Zum nächsten Bild",

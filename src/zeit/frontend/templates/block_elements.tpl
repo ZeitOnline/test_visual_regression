@@ -690,7 +690,7 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="figure is-constrained is-centered">
+    <div class="figure figure-full-width">
         <div class="inline-gallery">
             {% for item in obj.items() %}
                 <!-- Gallery-Items as block.image(obj) -->
