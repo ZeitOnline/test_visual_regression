@@ -1,16 +1,17 @@
 Change log for zeit.frontend
 ============================
 
-0.2.14 (unreleased)
+0.2.14 (2014-02-27)
 -------------------
 
-- Nothing changed yet.
+- hotfix: Fix Link in Logo and for webtrekk.
 
 
 0.2.13 (2014-02-27)
 -------------------
 
-- Nothing changed yet.
+- hotfix: We had wrong sharing urls (Changelog entry forgotten in original
+  comit).
 
 
 0.2.12 (2014-02-27)
