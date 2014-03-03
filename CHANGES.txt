@@ -4,7 +4,10 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add basic structure for Centerpages
+- Refactor template logic for macros. The are now located in 
+templates/macro and named [type]_macro.tpl
+
 
 
 0.2.15 (2014-02-27)
