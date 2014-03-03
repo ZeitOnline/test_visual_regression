@@ -35,6 +35,13 @@ $article-content-max-width: 660px
         max-width: em(160px)
         margin: $medium $medium $medium auto
 
+// hacked for longform launch
+// todo: delete when possible (NB)
+div.figure-full-width
+  width: 100% //100%
+  max-width: em(910px)
+  margin: 0 auto
+
 figure
   width: 100%
   margin-bottom: $medium
@@ -91,13 +98,18 @@ figure
       .figure__caption, figcaption
         float: left
         padding-right: $gutter
+  // hacked for longform-launch
+  // todo: make responsible by height (NB)
   &.figure-full-width
-    width: 100%
+    width: 100% //100%
+    max-width: em(910px)
+    margin: 0 auto
     .figure__media, img
       display: block
       width: 100%
     .figure__caption, figcaption
-      +max-width-rem($article-content-max-width)
+      +max-width-rem(695px) // hacked for longform launch (NB)
+      //+max-width-rem($article-content-max-width)
       margin: 0 auto
       +respond-min($break-3)
         padding-right: 10%
@@ -155,4 +167,3 @@ figure
       text-align: left
       +respond-max($break-2)
         margin-top: $fine
-

@@ -495,8 +495,10 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
 def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
 
-    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true'}
-    request = {'url': 'test.de'}
+    # test usual
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
+           'twitter_card_type': 'summary'}
+    request = {'host': 'test.de', 'path_info': '/myurl'}
     twitter = ['<meta name="twitter:card" content="summary">',
                '<meta name="twitter:site" content="@zeitonline">',
                '<meta name="twitter:creator" content="@zeitonline">',
@@ -507,7 +509,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
           '"og:description" itemprop="description" content="subtitle">',
-          '<meta property="og:url" content="test.de">']
+          '<meta property="og:url" content="test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
              '<meta class="scaled-image" name="twitter:image" content="']
@@ -520,6 +522,25 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
+        assert img in output
+
+    # test video still is set as sharing img
+    obj = {'title': 'title', 'subtitle': 'subtitle',
+           'sharing_img': {'video_still': 'true'},
+           'twitter_card_type': 'summary_large_image'}
+    twitter = ['<meta name="twitter:card" content="summary_large_image">']
+    image = ['<meta property="og:image" content="',
+             '<link itemprop="image" rel="image_src"',
+             '<meta name="twitter:image" content="']
+    lines = tpl.module.sharing_meta(obj, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    print output
+    for twitter_meta in twitter:
+        assert twitter_meta in output
+    for img in image:
+        print img
         assert img in output
 
 
@@ -579,7 +600,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
            'banner_channel': 'lebensart/mode/article',
            'text_length': 1000,
            'rankedTagsList': 'test;test'}
-    request = {'path': '/test/test'}
+    request = {'path_info': '/test/test'}
     el_def = ['<script',
               'src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"',
               "</script",
@@ -635,7 +656,7 @@ def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
     obj = {'ressort': 'lebensart',
            'sub_ressort': 'mode'}
-    request = {'path': '/test/test'}
+    request = {'path_info': '/test/test'}
     elems = ['<script',
              '"st" : ""',
              '"cp" : "lebensart/mode/bild-text"',

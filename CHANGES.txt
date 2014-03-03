@@ -1,10 +1,60 @@
 Change log for zeit.frontend
 ============================
 
-0.2.9 (unreleased)
-------------------
+0.2.16 (unreleased)
+-------------------
 
 - Nothing changed yet.
+
+
+0.2.15 (2014-02-27)
+-------------------
+
+- Add a 404 view loaded from zeit.de/error/404.
+
+
+0.2.14 (2014-02-27)
+-------------------
+
+- hotfix: Fix Link in Logo and for webtrekk.
+
+
+0.2.13 (2014-02-27)
+-------------------
+
+- hotfix: We had wrong sharing urls (Changelog entry forgotten in original
+  comit).
+
+
+0.2.12 (2014-02-27)
+-------------------
+
+- the forgotten hotfix...
+
+
+0.2.11 (2014-02-27)
+-------------------
+
+- hotfix the width of inline galleries to em(910p)x
+
+0.2.10 (2014-02-26)
+-------------------
+
+- Nothing changed yet.
+
+
+0.2.9 (2014-02-26)
+------------------
+
+- remove unessecary code
+- add health_check url
+- add video_still for sharing if header has video
+- remove title tag in logo
+- fix missing proxy-url in fontloader
+- hack seo data into template
+- change inline gallery size
+- fix diverse bugs
+- fix fallback image in video header
 
 
 0.2.8 (2014-02-25)

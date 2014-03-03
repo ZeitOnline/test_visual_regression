@@ -3,19 +3,19 @@
 /**
  * font loader setup
  */
-window.FontLoader = (function() {
+window.FontLoader = (function(ZMO) {
 	// set up all font packages we need
 	this.font_dictionary = [
 		{
 			identifier: 'base',
 			selector: null,
-			path: '/css/standalone-fonts/base.css',
+			path: ZMO.home + 'css/standalone-fonts/base.css',
 			version: "1.0"
 		},
 		{
 			identifier: 'quotes',
 			selector: '.quote, .quote--loud',
-			path: '/css/standalone-fonts/quotes.css',
+			path: ZMO.home + 'css/standalone-fonts/quotes.css',
 			version: "1.0"
 		}
 	];
@@ -72,4 +72,4 @@ window.FontLoader = (function() {
 	}
 
 	return this;
-})();
+})(window.ZMO);

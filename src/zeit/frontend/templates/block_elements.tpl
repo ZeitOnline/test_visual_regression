@@ -100,18 +100,29 @@
 {%- endmacro %}
 
 {% macro main_nav_compact(obj,request) -%}
-<!-- bild: {{obj.sharing_img}} -->
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="{{request.route_url('home')}}img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <img src="{{request.route_url('home')}}img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
                 <aside class="main-nav__sharing scaled-image">
-                    <a href="http://twitter.com/home?status={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.url}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a><a href="https://plus.google.com/share?url={{request.url}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
+                    <a
+                    href="http://twitter.com/home?status={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a>
+
+                    {%- if obj.sharing_img.video_still -%}
+                        <a
+                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img.video_still}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
+                    {%- else -%}
+                        <a
+                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
+                    {%- endif -%}
+
+                    <a
+                    href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
                 </aside>
             </div>
         </div>
@@ -182,7 +193,7 @@
 
 {% macro intertitle(intertitle) -%}
     <h3 class="article__subheading is-constrained is-centered">
-        {{ intertitle }}
+        {{ intertitle|striptags }}
     </h3>
 {%- endmacro %}
 
@@ -442,7 +453,7 @@
 {%- endmacro %}
 
 {% macro sharing_meta(obj,request) -%}
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="{{obj.twitter_card_type}}">
     <meta name="twitter:site" content="@zeitonline">
     <meta name="twitter:creator" content="@zeitonline">
     <meta name="twitter:title" content="{{obj.title}}">
@@ -452,12 +463,18 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title}}">
     <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
-    <meta property="og:url" content="{{request.url}}">
+    <meta property="og:url" content="{{request.host}}{{request.path_info}}">
 
     {% if obj.sharing_img %}
-        <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
-        <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-        <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
+        {% if obj.sharing_img.video_still %}
+            <meta property="og:image" content="{{obj.sharing_img.video_still}}">
+            <link itemprop="image" rel="image_src" href="{{obj.sharing_img.video_still}}">
+            <meta name="twitter:image" content="{{obj.sharing_img.video_still}}">
+        {% else %}
+            <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
+            <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
+            <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
+        {% endif %}
     {% endif %}
 {%- endmacro %}
 
@@ -498,7 +515,8 @@
         <script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
         <script type="text/javascript">
 
-            var Z_WT_KENNUNG = "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path}}"; // content id
+            var Z_WT_KENNUNG =
+            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path_info}}"; // content id
 
             var webtrekk = {
                 linkTrack : "standard",
@@ -532,7 +550,8 @@
             wt.sendinfo();        
         </script>
         <noscript>
-            <div><img alt="" width="1" height="1" src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path}},0,0,0,0,0,0,0,0&cg1=Redaktion&cg2={{obj.tracking_type}}&cg3={{obj.ressort}}&cg4=Online&cp1={% if obj.author %}{{obj.author.name}}{% endif %}&cp2={{obj.banner_channel}}&cp3=1&cp4={{obj.rankedTagsList}}&cp6={{obj.text_length}}&cp7=&cp9={{obj.banner_channel}}"></div>
+            <div><img alt="" width="1" height="1"
+            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&cg1=Redaktion&cg2={{obj.tracking_type}}&cg3={{obj.ressort}}&cg4=Online&cp1={% if obj.author %}{{obj.author.name}}{% endif %}&cp2={{obj.banner_channel}}&cp3=1&cp4={{obj.rankedTagsList}}&cp6={{obj.text_length}}&cp7=&cp9={{obj.banner_channel}}"></div>
         </noscript>
 {%- endmacro %}
 
@@ -562,7 +581,7 @@
             "st" : "",
             "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text", 
             "sv" : "ke",
-            "co" : "URL: {{request.path}}"
+            "co" : "URL: {{request.path_info}}"
         };
 
         if( window.innerWidth >= ivw_min_width ){
@@ -677,11 +696,13 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="inline-gallery">
-        {% for item in obj.items() %}
-            <!-- Gallery-Items as block.image(obj) -->
-           {{ inlinegalleryimage(item) }}
-        {% endfor %}
+    <div class="figure figure-full-width">
+        <div class="inline-gallery">
+            {% for item in obj.items() %}
+                <!-- Gallery-Items as block.image(obj) -->
+               {{ inlinegalleryimage(item) }}
+            {% endfor %}
+        </div>
     </div>
 {%- endmacro %}
 

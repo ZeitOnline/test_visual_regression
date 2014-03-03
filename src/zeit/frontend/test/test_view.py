@@ -1,10 +1,13 @@
-import mock
-import zeit.cms.interfaces
-from zeit.frontend import view
+from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery
+from zeit.frontend import view
 from zeit.frontend.block import InlineGalleryImage
 from zope.testbrowser.browser import Browser
+import mock
+import pytest
 import requests
+import zeit.cms.interfaces
+
 
 
 def test_breadcumb_should_produce_expected_data():
@@ -147,6 +150,20 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
     assert '<img class="article__main-image--longform"' in browser.contents
 
+def test_health_check_should_response_and_have_status_200(testserver):
+    browser = Browser('%s/health_check' % testserver.url)
+    assert browser.headers['Content-Length'] == '2'
+    resp = view.health_check('request')
+    assert resp.status_code == 200
+
+def test_a_404_request_should_be_from_zon_main_page(testserver):
+    browser = Browser()
+    browser.handleErrors = False
+    with pytest.raises(HTTPError):
+        browser.open('%s/this_is_a_404_page_my_dear' % testserver.url)
+        assert '404 Not Found' in str(browser.headers)
+
+    assert 'Dokument nicht gefunden' in browser.contents
 
 def test_content_should_have_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
@@ -227,3 +244,30 @@ def test_article08_has_correct_source(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view.Article(context, '')
     assert article_view.source == 'DIE ZEIT Nr. 26/2008'
+
+def test_article01__has_correct_twitter_card_type(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.twitter_card_type == 'summary'
+
+
+def test_article05_has_correct_twitter_card_type(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert article_view.twitter_card_type == 'summary_large_image'
+
+
+def test_article01_has_correct_sharing_img_src(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view.Article(context, '')
+    assert article_view.sharing_img.src == \
+        'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
+
+
+def test_article06_has_correct_sharing_img_video_still(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/06')
+    article_view = view.Article(context, '')
+    assert article_view.sharing_img.video_still == \
+        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/' \
+        '201401/3097/18140073001_3094729885001_7x.jpg'
+
