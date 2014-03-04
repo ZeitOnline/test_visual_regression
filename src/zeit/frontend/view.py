@@ -149,7 +149,7 @@ class Article(Base):
             'location': ", " + IAuthorReference(author_ref).location
             if IAuthorReference(author_ref).location and
             IArticleTemplateSettings(self.context).template
-            == 'longform' else '',
+            != 'longform' else '',
         }
 
     @property
@@ -276,8 +276,6 @@ class Article(Base):
                         str(self.context.year)
             elif self.context.product.id != 'ZEDE':
                 source = self.context.product_text
-        if source is not None:
-            source = 'Aus ' + source
         return self.context.copyrights or source
 
     @property
