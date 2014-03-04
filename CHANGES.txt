@@ -8,7 +8,7 @@ Change log for zeit.frontend
 - Add basic structure for Centerpages
 - Refactor template logic for macros. The are now located in 
 templates/macro and named [type]_macro.tpl
-
+- fix Headerimage Glitch on iOS
 
 
 0.2.15 (2014-02-27)
