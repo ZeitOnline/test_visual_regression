@@ -77,6 +77,6 @@
 	</article>
 
     <!-- seo article date modification -->
-    {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date('long'))}}
+    {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
 
 {% endblock content %}

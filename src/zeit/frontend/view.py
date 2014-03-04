@@ -147,7 +147,9 @@ class Article(Base):
             'suffix': '',
             'prefix': '',
             'location': ", " + IAuthorReference(author_ref).location
-            if IAuthorReference(author_ref).location else '',
+            if IAuthorReference(author_ref).location and
+            IArticleTemplateSettings(self.context).template
+            == 'longform' else '',
         }
 
     @property
@@ -175,6 +177,7 @@ class Article(Base):
         except (IndexError, OSError):
             return None
 
+    @property
     def twitter_card_type(self):
         if IArticleTemplateSettings(self.context).template == 'longform':
             return 'summary_large_image'
@@ -264,17 +267,17 @@ class Article(Base):
         # 1. dont know why source stays empty if default value wasnt changed
         # 2. issue/year will only be shown for Z and ZM right now
         # because there's alway a value in volume and year
-        source = ''
+        source = None
         if self.context.product_text:
             if self.context.product.id == 'ZEI' or \
                self.context.product.id == 'ZMLB':
                     source = self.context.product_text + ' Nr. ' \
                         + str(self.context.volume) + '/' + \
                         str(self.context.year)
-            else:
+            elif self.context.product.id != 'ZEDE':
                 source = self.context.product_text
-        else:
-            source = "Zeit Online"
+        if source is not None:
+            source = 'Aus ' + source
         return self.context.copyrights or source
 
     @property

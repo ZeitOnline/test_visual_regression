@@ -188,7 +188,10 @@
 {%- endmacro %}
 
 {% macro source_date(date, source) -%}
-    <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
+    {% if source %}
+        <span class="article__meta__source">{{ source }}</span>
+    {% endif %}
+    <span class="article__meta__date">{{ date }}</span>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
@@ -724,14 +727,18 @@
     </div>
 {%- endmacro %}
 
-{% macro add_publish_date( lm_date, publish_date) -%}
+{% macro add_publish_date( lm_date, publish_date, format) -%}
     {% if lm_date %}
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
             var el = document.getElementsByClassName('article__meta__date');
             var content = el[0].innerText;
-            el[0].innerText = '{{publish_date}}, zuletzt aktualisiert: ' + content;
+            if( '{{format}}' === 'long' ){
+                el[0].innerText = '{{publish_date}}, zuletzt aktualisiert: ' + content;
+            }else{
+                el[0].innerText = '{{publish_date}}, editiert: ' + content;
+            }
         </script>
         <!--<![endif]-->
     {% endif %}
