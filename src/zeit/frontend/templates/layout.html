@@ -109,7 +109,7 @@
             {% if view.context.is_longform %}
                 {{ blocks.main_nav_compact(view,request) }}
             {% else %}
-                {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+                {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width, request) }}
             {% endif %}
 
             <main role="main" class="main">

@@ -208,9 +208,12 @@ class Article(Base):
                 return None
 
     def _get_date_format(self):
-        if self.context.product.id == 'ZEI' or \
-           self.context.product.id == 'ZMLB':
-                return 'short'
+        if self.context.product:
+            if self.context.product.id == 'ZEI' or \
+               self.context.product.id == 'ZMLB':
+                    return 'short'
+            else:
+                return 'long'
         else:
             return 'long'
 

@@ -1,6 +1,6 @@
 
 
-{% macro main_nav(breadcrumb, is_full_width) -%}
+{% macro main_nav(breadcrumb, is_full_width, request) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
