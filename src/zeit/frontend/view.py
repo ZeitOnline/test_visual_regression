@@ -276,6 +276,8 @@ class Article(Base):
                         str(self.context.year)
             elif self.context.product.id != 'ZEDE':
                 source = self.context.product_text
+        if source is not None:
+            source = 'Quelle: ' + source
         return self.context.copyrights or source
 
     @property

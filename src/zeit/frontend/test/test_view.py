@@ -243,7 +243,8 @@ def test_article08_has_correct_genre(testserver):
 def test_article08_has_correct_source(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view.Article(context, '')
-    assert article_view.source == 'DIE ZEIT Nr. 26/2008'
+    assert article_view.source == 'Quelle: DIE ZEIT Nr. 26/2008'
+
 
 def test_article01__has_correct_twitter_card_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')

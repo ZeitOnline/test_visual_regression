@@ -175,8 +175,8 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 def test_macro_source_date_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    markup = '<span class="article__meta__source">' \
-        'Aus zon</span><span class="article__meta__date">01.01.2013' \
+    markup = '<span class="article__meta__second__source">' \
+        'zon</span><span class="article__meta__second__date">01.01.2013' \
         '</span>'
     lines = tpl.module.source_date('01.01.2013', 'zon').splitlines()
     output = ""
