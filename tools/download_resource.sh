@@ -8,7 +8,7 @@
 
 dav_host='http://cms-backend.zeit.de:9000';
 
-curl ${dav_host}/cms/work/$1 > resource
+curl ${dav_host}/cms/work/$1 > resource 2> /dev/null
 
 outcurl=$(curl -X PROPFIND --header "depth:1" ${dav_host}/cms/work/$1 2> /dev/null |xsltproc meta_dav2xml.xslt -)
 
