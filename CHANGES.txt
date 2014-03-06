@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add a tool for downloading resources from CMS.
 
 
 0.2.15 (2014-02-27)
