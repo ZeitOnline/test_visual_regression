@@ -16,6 +16,7 @@ import os.path
 import pyramid.response
 import zeit.connector.connector
 import zeit.connector.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
@@ -317,6 +318,12 @@ class LongformArticle(Article):
     advertising_enabled = False
     main_nav_full_width = True
     is_longform = True
+
+
+@view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             renderer='templates/centerpage.html')
+class Centerpage(Base):
+    pass
 
 
 @view_config(name='teaser',
