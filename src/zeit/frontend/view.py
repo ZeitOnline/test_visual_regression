@@ -165,9 +165,9 @@ class Article(Base):
                     if index == 0:
                         if IArticleTemplateSettings(self.context).template \
                            == 'longform':
-                            result['prefix'] = u'\u2014' + ' von '
+                            result['prefix'] = u'\u2014' + ' von'
                         else:
-                            result['prefix'] = ' von '
+                            result['prefix'] = ' von'
                     #add suffix
                     if index == len(author_ref) - 2:
                         result['suffix'] = " und"

@@ -1,9 +1,6 @@
 from StringIO import StringIO
 from zeit.content.article.article import Article
 from zeit.frontend.interfaces import IPages
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_IPages_contains_blocks(application):
@@ -202,6 +199,16 @@ def test_article08_has_correct_print_source(selenium_driver, testserver):
     text = driver.find_element_by_class_name('article__meta__second__source')\
         .text.strip()
     assert text == 'QUELLE: DIE ZEIT NR. 26/2008'
+
+
+def test_article08_has_correct_author_text(selenium_driver, testserver):
+    # print source
+    driver = selenium_driver
+    driver.get('%s/artikel/08' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta')\
+        .text.strip()
+    assert text == 'EIN KOMMENTAR VONANNE MUSTERMANN, BERLIN' \
+        ' UNDOLIVER FRITSCH, LONDON'
 
 
 def test_article_1_10_produces_no_error(selenium_driver, testserver):

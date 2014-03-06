@@ -252,24 +252,24 @@ def test_article10_has_correct_date_formats(testserver):
     assert article_view.show_date_format_seo == 'long'
 
 
-# TODO: correct testing if we have author objects localy (as)
-# def test_article08_has_second_author(testserver):
-#     xml = 'http://xml.zeit.de/artikel/08'
-#     context = zeit.cms.interfaces.ICMSContent(xml)
-#     article_view = view.Article(context, '')
-#     assert article_view.authors[1].name is 'Armin Mustermann'
-#     assert article_view.authors[1].suffix is ', '
-#     assert article_view.authors[1].location is ', London'
-
-
 def test_article08_has_first_author(testserver):
     xml = 'http://xml.zeit.de/artikel/08'
     context = zeit.cms.interfaces.ICMSContent(xml)
     article_view = view.Article(context, '')
     assert article_view.authors[0]['name'] == u'Anne Mustermann'
-#    assert article_view.authors[0]['suffix'] == ', '
-#    assert article_view.authors[0]['prefix'] == 'von '
-#    assert article_view.authors[0]['location'] == ', Berlin'
+    assert article_view.authors[0]['suffix'] == ' und'
+    assert article_view.authors[0]['prefix'] == ' von'
+    assert article_view.authors[0]['location'] == ', Berlin'
+
+
+def test_article08_has_second_author(testserver):
+    xml = 'http://xml.zeit.de/artikel/08'
+    context = zeit.cms.interfaces.ICMSContent(xml)
+    article_view = view.Article(context, '')
+    assert article_view.authors[1]['name'] == u'Oliver Fritsch'
+    assert article_view.authors[1]['suffix'] == ''
+    assert article_view.authors[1]['prefix'] == ''
+    assert article_view.authors[1]['location'] == ', London'
 
 
 def test_article08_has_correct_genre(testserver):
