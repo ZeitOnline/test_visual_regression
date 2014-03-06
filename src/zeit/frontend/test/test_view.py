@@ -9,7 +9,6 @@ import requests
 import zeit.cms.interfaces
 
 
-
 def test_breadcumb_should_produce_expected_data():
     context = mock.Mock()
     context.ressort = 'mode'
@@ -98,7 +97,8 @@ def test_header_elem_should_be_img_if_there_is_a_header_img(application):
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/header_video')
+    xml = 'http://xml.zeit.de/artikel/header_video'
+    context = zeit.cms.interfaces.ICMSContent(xml)
     article_view = view.Article(context, '')
     assert type(article_view.header_elem) == zeit.frontend.block.HeaderVideo
 
@@ -128,14 +128,17 @@ def test_inline_gallery_should_have_images(testserver):
     assert type(frontend_gallery.items()[3]) == InlineGalleryImage
 
     gallery_image = frontend_gallery.items()[3]
-    assert gallery_image.src == u'http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
-    assert gallery_image.alt == None
+    assert gallery_image.src == \
+        u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
+        '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
+    assert gallery_image.alt is None
     assert gallery_image.copyright == u'\xa9'
 
 
 def test_article_request_should_have_body_element(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
-    assert '<body itemscope itemtype="http://schema.org/WebPage">' in browser.contents
+    assert '<body itemscope itemtype="http://schema.org/WebPage">'\
+        in browser.contents
     assert '</body>' in browser.contents
 
 
@@ -150,11 +153,13 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
     assert '<img class="article__main-image--longform"' in browser.contents
 
+
 def test_health_check_should_response_and_have_status_200(testserver):
     browser = Browser('%s/health_check' % testserver.url)
     assert browser.headers['Content-Length'] == '2'
     resp = view.health_check('request')
     assert resp.status_code == 200
+
 
 def test_a_404_request_should_be_from_zon_main_page(testserver):
     browser = Browser()
@@ -164,6 +169,7 @@ def test_a_404_request_should_be_from_zon_main_page(testserver):
         assert '404 Not Found' in str(browser.headers)
 
     assert 'Dokument nicht gefunden' in browser.contents
+
 
 def test_content_should_have_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
@@ -208,12 +214,104 @@ def test_artikel05_has_set_text_length(testserver):
     assert article_view.text_length is not None
 
 
-def test_article05_has_date_formats(testserver):
+def test_article05_has_correct_dates(testserver):
+    #updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view.Article(context, '')
-    assert article_view.date_last_published_semantic is not None
-    assert article_view.date_first_released is not None
-    assert article_view.show_article_date is not None
+    assert article_view.date_last_published_semantic.isoformat() ==\
+        '2013-11-03T08:10:00.626737+01:00'
+    assert article_view.date_first_released.isoformat() ==\
+        '2013-10-24T08:00:00+02:00'
+    assert article_view.show_article_date.isoformat() ==\
+        '2013-11-03T08:10:00.626737+01:00'
+
+
+def test_article03_has_correct_dates(testserver):
+    #not updated article
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    article_view = view.Article(context, '')
+    assert article_view.date_first_released.isoformat() ==\
+        '2013-07-30T17:20:50.176115+02:00'
+    assert article_view.show_article_date.isoformat() ==\
+        '2013-07-30T17:20:50.176115+02:00'
+
+
+def test_article09_has_correct_date_formats(testserver):
+    #print article, updated
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article_view = view.Article(context, '')
+    assert article_view.show_date_format == 'long'
+    assert article_view.show_date_format_seo == 'short'
+
+
+def test_article10_has_correct_date_formats(testserver):
+    #online article, updated
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    article_view = view.Article(context, '')
+    assert article_view.show_date_format == 'long'
+    assert article_view.show_date_format_seo == 'long'
+
+
+# TODO: correct testing if we have author objects localy (as)
+# def test_article08_has_second_author(testserver):
+#     xml = 'http://xml.zeit.de/artikel/08'
+#     context = zeit.cms.interfaces.ICMSContent(xml)
+#     article_view = view.Article(context, '')
+#     assert article_view.authors[1].name is 'Armin Mustermann'
+#     assert article_view.authors[1].suffix is ', '
+#     assert article_view.authors[1].location is ', London'
+
+
+# def test_article08_has_first_author(testserver):
+#     xml = 'http://xml.zeit.de/artikel/08'
+#     context = zeit.cms.interfaces.ICMSContent(xml)
+#     article_view = view.Article(context, '')
+#     assert article_view.authors[0].name is 'Anne Mustermann'
+#     assert article_view.authors[0].suffix is ', '
+#     assert article_view.authors[0].prefix is 'von '
+#     assert article_view.authors[0].location is ', Berlin'
+
+
+def test_article08_has_correct_genre(testserver):
+    # 'ein'
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = view.Article(context, '')
+    assert article_view.genre == 'ein kommentar'
+
+
+def test_article09_has_correct_genre(testserver):
+    # 'eine'
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article_view = view.Article(context, '')
+    assert article_view.genre == 'eine glosse'
+
+
+def test_article05_has_no_genre(testserver):
+    # no genre
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    article_view = view.Article(context, '')
+    assert article_view.genre is None
+
+
+def test_article08_has_correct_source(testserver):
+    #print source
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = view.Article(context, '')
+    assert article_view.source == 'Quelle: DIE ZEIT Nr. 26/2008'
+
+
+def test_article10_has_correct_source(testserver):
+    #online source
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    article_view = view.Article(context, '')
+    assert article_view.source == 'Quelle: golem.de'
+
+
+def test_article03_has_empty_source(testserver):
+    #zon source
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    article_view = view.Article(context, '')
+    assert article_view.source is None
 
 
 def test_article01__has_correct_twitter_card_type(testserver):
