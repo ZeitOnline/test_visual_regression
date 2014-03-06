@@ -1,5 +1,6 @@
 {% extends "templates/layout.html" %}
-{% import 'templates/block_elements.tpl' as blocks %}
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% block content %}
     <article class="article" id="js-article">
         <div class="article__wrap">

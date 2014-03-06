@@ -1,6 +1,13 @@
 {% extends "templates/layout.html" %}
-{% import 'templates/block_elements.tpl' as blocks with context%}
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% import 'templates/article.html' as article with context %}
+
+{%  block page_wrap_inner %}
+            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
+            {{ lama.main_nav_compact(view,request) }}
+{% endblock page_wrap_inner %}
+
 {% block content %}
 	<article class="article article--longform">
 		<div class="article__wrap">
