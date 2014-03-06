@@ -104,7 +104,6 @@
     </div>
 {%- endmacro %}
 
-
 {% macro sharing_meta(obj,request) -%}
     <meta name="twitter:card" content="{{obj.twitter_card_type}}">
     <meta name="twitter:site" content="@zeitonline">
@@ -284,7 +283,6 @@
     </nav>
 {%- endmacro %}
 
-
 {% macro ivw_ver1_tracking(channel) -%}
 <!-- ivw ver1 tracking -->
 <!-- SZM VERSION="1.5" -->
@@ -388,7 +386,6 @@
         </noscript>
     </div>
 {%- endmacro %}
-
 
 {% macro main_nav_compact(obj,request) -%}
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
