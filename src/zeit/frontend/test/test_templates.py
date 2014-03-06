@@ -174,7 +174,7 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 
 def test_macro_source_date_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     markup = '<span class="article__meta__second__source">' \
         'zon</span><span class="article__meta__second__date">01.01.2013' \
         '</span>'
@@ -354,7 +354,7 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
 
 def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     test_class = 'test'
     obj = [{'prefix': 'von', 'href': 'www.zeit.de',
             'name': 'Tom', 'location': ', Bern', 'suffix': 'und'},
@@ -370,7 +370,7 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
 
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     test_class = 'test'
     obj = []
     lines = tpl.module.meta_author(obj).splitlines()
