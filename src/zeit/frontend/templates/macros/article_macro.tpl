@@ -1,7 +1,4 @@
 
-
-<<<<<<< HEAD:src/zeit/frontend/templates/macros/article_macro.tpl
-=======
 {% macro main_nav(breadcrumb, is_full_width, request) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
@@ -100,7 +97,6 @@
         </figure>
     </footer>
 {%- endmacro %}
->>>>>>> ZMO-326-finishing:src/zeit/frontend/templates/block_elements.tpl
 
 {% macro main_nav_compact(obj,request) -%}
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
