@@ -178,12 +178,21 @@ def test_article05_has_correct_date(selenium_driver, testserver):
     assert text == u'03. NOVEMBER 2013'
 
 
-def test_article10_has_no_source(selenium_driver, testserver):
+def test_article03_has_no_source(selenium_driver, testserver):
+    # zon source
+    driver = selenium_driver
+    driver.get('%s/artikel/03' % testserver.url)
+    class_name = '.article__meta__second__source'
+    assert len(driver.find_elements_by_css_selector(class_name)) == 0
+
+
+def test_article10_has_correct_online_source(selenium_driver, testserver):
     # online source
     driver = selenium_driver
     driver.get('%s/artikel/10' % testserver.url)
-    class_name = '.article__meta__second__source'
-    assert len(driver.find_elements_by_css_selector(class_name)) == 0
+    text = driver.find_element_by_class_name('article__meta__second__source')\
+        .text.strip()
+    assert text == 'QUELLE: GOLEM.DE'
 
 
 def test_article08_has_correct_print_source(selenium_driver, testserver):

@@ -271,7 +271,7 @@ class Article(Base):
         # 2. issue/year will only be shown for Z and ZM right now
         # because there's alway a value in volume and year
         source = None
-        if self.context.product_text:
+        if self.context.product:
             if self.context.product.id == 'ZEI' or \
                self.context.product.id == 'ZMLB':
                     source = self.context.product_text + ' Nr. ' \
@@ -279,6 +279,9 @@ class Article(Base):
                         str(self.context.year)
             elif self.context.product.id != 'ZEDE':
                 source = self.context.product_text
+        elif self.context.product_text:
+            source = self.context.product_text
+        #add prefix
         if source is not None:
             source = 'Quelle: ' + source
         return self.context.copyrights or source

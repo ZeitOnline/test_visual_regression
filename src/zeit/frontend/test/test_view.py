@@ -273,24 +273,42 @@ def test_article10_has_correct_date_formats(testserver):
 
 
 def test_article08_has_correct_genre(testserver):
+    # 'ein'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view.Article(context, '')
     assert article_view.genre == 'ein kommentar'
 
 
+def test_article09_has_correct_genre(testserver):
+    # 'eine'
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article_view = view.Article(context, '')
+    assert article_view.genre == 'eine glosse'
+
+
 def test_article05_has_no_genre(testserver):
+    # no genre
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view.Article(context, '')
     assert article_view.genre is None
 
 
 def test_article08_has_correct_source(testserver):
+    #print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view.Article(context, '')
     assert article_view.source == 'Quelle: DIE ZEIT Nr. 26/2008'
 
 
+def test_article10_has_correct_source(testserver):
+    #online source
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    article_view = view.Article(context, '')
+    assert article_view.source == 'Quelle: golem.de'
+
+
 def test_article03_has_empty_source(testserver):
+    #zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = view.Article(context, '')
     assert article_view.source is None
