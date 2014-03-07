@@ -343,9 +343,10 @@ class Centerpage(Base):
 
     @property
     def pagedescription(self):
-        #ToDo(T.B.) should be, doesn't work
+        #ToDo(T.B.) should be self.context.html-meta-title, doesn't work
         #return self.context.html-meta-title
-        return 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und Kolumnen rund um die Themen Mode, Essen, Trinken und Partnerschaft.'
+        output = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+        return output
 
     @property
     def rankedTags(self):
