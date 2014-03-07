@@ -1,3 +1,4 @@
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 <!DOCTYPE html>
 <!--[if lt IE 8]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 ie nurtext" lang="de"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9 ie" lang="de"> <![endif]-->
@@ -50,10 +51,10 @@
         <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
 
         <!-- date metadata -->
-        {{blocks.date_meta(view)}}
+        {{lama.date_meta(view)}}
 
         <!-- sharing metadata -->
-        {{blocks.sharing_meta(view,request)}}
+        {{lama.sharing_meta(view,request)}}
 
         <script src="{{request.route_url('home')}}js/libs/modernizr.custom.42776.js"></script>
         <script src="{{request.route_url('home')}}js/modules/fontloader_head.js"></script>
@@ -73,15 +74,15 @@
             <script src="{{request.route_url('home')}}js/libs/iqd/sasmobile.js"></script>
             <!-- <![endif]-->
         {% endif %}
-        {{blocks.iqd_init()}}
-        {{blocks.iqd_krux_head()}}
+        {{lama.iqd_init()}}
+        {{lama.iqd_krux_head()}}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
         <!-- tracking at top -->
-        {{blocks.ivw_ver2_tracking(view,request)}}
-        {{blocks.ivw_ver1_tracking(view.banner_channel)}}
-        {{blocks.iqd_nuggad()}}
-        {{blocks.iqd_krux_body()}}
+        {{lama.ivw_ver2_tracking(view,request)}}
+        {{lama.ivw_ver1_tracking(view.banner_channel)}}
+        {{lama.iqd_nuggad()}}
+        {{lama.iqd_krux_body()}}
 
         <div class="page-wrap">
 
@@ -92,31 +93,23 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ blocks.adplace(view.banner['superbanner']) }}
+                        {{ lama.adplace(view.banner['superbanner']) }}
                         <div id="iqd_rightAd">
-                            {{ blocks.adplace(view.banner['skyscraper']) }}
+                            {{ lama.adplace(view.banner['skyscraper']) }}
                         </div>
                     </div>
                 </div>
             </div>
             {% endif %}
-
-            {% if view.context.is_longform %}
-            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
-            {% else %}
-            <div class="page-wrap--inner" id="js-page-wrap-inner">
-            {% endif %}
-
-            {% if view.context.is_longform %}
-                {{ blocks.main_nav_compact(view,request) }}
-            {% else %}
-                {{ blocks.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
-            {% endif %}
+            {% block page_wrap_inner %}
+                <div class="page-wrap--inner" id="js-page-wrap-inner">
+                {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+            {% endblock page_wrap_inner %}
 
             <main role="main" class="main">
                 {%  block content %}{% endblock content %}
             </main>
-            {{blocks.main_footer(view.context.current_year, request)}}
+            {{lama.main_footer(view.context.current_year, request)}}
 
         </div>
 
@@ -132,10 +125,10 @@
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         <!-- tracking at end -->
-        {{blocks.ga_tracking()}}
-        {{blocks.cc_tracking(view.banner_channel)}}
-        {{blocks.meetrics_tracking()}}
-        {{blocks.webtrekk_tracking(view,request)}}
+        {{lama.ga_tracking()}}
+        {{lama.cc_tracking(view.banner_channel)}}
+        {{lama.meetrics_tracking()}}
+        {{lama.webtrekk_tracking(view,request)}}
         
         <script data-main="{{request.route_url('home')}}js/main" src="{{request.route_url('home')}}js/libs/require.js"></script>
         <script type="text/javascript">

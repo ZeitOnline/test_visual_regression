@@ -15,7 +15,7 @@ def jinja2_env(request):
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
     lines = tpl.module.paragraph(html).splitlines()
     output = ""
@@ -27,7 +27,7 @@ def test_macro_p_should_produce_markup(jinja2_env):
 
 
 def test_macro_raw_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_class = 'raw'
     markup = '<div class="%s">'\
         '<blink>ZEIT ONLINE</blink>'\
@@ -41,7 +41,7 @@ def test_macro_raw_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_class = 'article__subpage-chapter'
 
     # assert normal markup
@@ -60,7 +60,7 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
 
 def test_macro_footer_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     current_year = date.today().year
 
     # assert normal markup
@@ -88,7 +88,7 @@ def test_macro_footer_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
@@ -105,7 +105,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap is-full-width">' \
@@ -123,7 +123,7 @@ def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
 
 
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
     markup_standart = '<div class="%s">' % css_index
 
@@ -157,7 +157,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_head_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_class = 'article__subpage-head'
 
     # assert normal markup
@@ -174,7 +174,7 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 
 def test_macro_author_date_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     markup = '<span class="article__meta__source">' \
         'Aus zon</span><span class="article__meta__date">01.01.2013' \
         '</span>'
@@ -186,7 +186,7 @@ def test_macro_author_date_should_produce_markup(jinja2_env):
 
 
 def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     lines = tpl.module.intertitle("xy").splitlines()
     output = ""
     for line in lines:
@@ -196,7 +196,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
 
 
 def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert normal quote
     obj = {'layout': 'quote', 'attribution': 'Autor',
@@ -224,7 +224,7 @@ def test_macro_citation_should_produce_valid_markup(jinja2_env):
 
 
 def test_macro_advertising_should_produce_script(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # test normal
     ad = {'type': 'rectangle'}
@@ -238,7 +238,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
 
 def test_image_should_produce_markup(jinja2_env, monkeypatch):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test',
@@ -333,7 +333,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     obj = Mock()
     obj.caption = 'test'
     obj.copyright = 'test'
@@ -356,7 +356,7 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 def test_macro_meta_author_should_produce_markup(jinja2_env):
     # To Do: Here was a suffix once. NOt sure what it is good for or where it
     # comes from (RD)
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
     markup = 'von <span class="article__meta__author">y</span>'
     assert markup == tpl.module.meta_author(data).strip()
@@ -366,7 +366,7 @@ def test_macro_meta_author_should_produce_markup(jinja2_env):
 
 
 def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     data = {'name': 'abc'}
     markup = '<span class="article__meta__author">abc</span>'
     assert markup == tpl.module.authorlink(data).strip()
@@ -376,7 +376,7 @@ def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
 
 
 def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     article = Mock()
     article.supertitle = "SUPER"
@@ -416,7 +416,7 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
 
 
 def test_macro_video_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
@@ -463,7 +463,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
 
 
 def test_macro_headervideo_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert default video
     obj = {'video_still': 'test.jpg', 'source': 'test.mp4', 'id': 1}
@@ -488,7 +488,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
 
 
 def test_macro_sharing_meta_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
     # test usual
     obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
@@ -540,7 +540,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
 
 
 def test_macro_ga_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     elems = ["<script",
              "_gaq.push(['_setAccount'",
              "_gaq.push(['_setDomainName'",
@@ -556,7 +556,7 @@ def test_macro_ga_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_cc_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     string = "lebensart/mode/article"
     elems = ['<script',
              'src="http://cc.zeit.de/cc.gif?banner-channel=' + string,
@@ -570,7 +570,7 @@ def test_macro_cc_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     elems = ['<script',
              'src="http://scripts.zeit.de/js/rsa.js"',
              'loadMWA208571()',
@@ -585,7 +585,7 @@ def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = {'ressort': 'lebensart',
            'sub_ressort': 'mode',
            'type': 'article',
@@ -630,7 +630,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     string = "lebensart/mode/article"
     elems = ['<script',
              'var Z_IVW_RESSORT = "' + string,
@@ -648,7 +648,7 @@ def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = {'ressort': 'lebensart',
            'sub_ressort': 'mode'}
     request = {'path_info': '/test/test'}
@@ -671,7 +671,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     # todo: after importing banner.xml to the system
     # make multiple tests from this
     # with all standard banner
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     banner = {'name': 'superbanner',
               'tile': '1',
               'sizes': ['728x90'],
@@ -694,7 +694,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
 
 
 def test_add_publish_date_generates_script(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     obj = [{'lm': None,
             'pd': '1.Januar2014',
@@ -712,7 +712,7 @@ def test_add_publish_date_generates_script(jinja2_env):
 
 
 def test_date_meta_should_produce_metatags(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
     obj = [{'date_last_published_semantic': '',
             'date_first_released_meta': '1.1.2011',
@@ -730,5 +730,5 @@ def test_date_meta_should_produce_metatags(jinja2_env):
 
 
 def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''

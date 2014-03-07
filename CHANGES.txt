@@ -4,6 +4,10 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
+- Refactor inheritance logic for longform
+- Add basic structure for Centerpages
+- Refactor template logic for macros. The are now located in 
+templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 
 
