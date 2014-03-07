@@ -11,3 +11,5 @@ javascript/documentation
 /.sass-cache/
 .DS_Store
 /node_modules/
+tools/resource
+tools/resource.meta

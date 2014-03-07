@@ -207,6 +207,7 @@ def translate_url(context, url):
 
 
 def format_date(obj, type):
+    format = ""
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
     elif type == 'short':
