@@ -339,7 +339,7 @@ class Centerpage(Base):
     def pagetitle(self):
         #ToDo(T.B.) should be, doesn't work
         #return self.context.html-meta-title
-        return 'Lebensart - Mode, Essen &amp; Trinken, Partnerschaft | ZEIT ONLINE'
+        return 'Lebensart - Mode, Essen und Trinken, Partnerschaft | ZEIT ONLINE'
 
     @property
     def pagedescription(self):
