@@ -135,6 +135,12 @@ def test_article_has_correct_page_title(selenium_driver, testserver):
     title = driver.title.strip()
     assert title == 'Kolumne Die Ausleser: Der Chianti hat eine zweite Chance verdient'
 
+def test_article_without_supertitle_has_correct_page_title(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/03a' % testserver.url)
+    title = driver.title.strip()
+    assert title == 'Der Chianti hat eine zweite Chance verdient'
+
 def test_article_has_correct_page_meta_description(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)

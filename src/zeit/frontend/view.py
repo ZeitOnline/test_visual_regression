@@ -88,7 +88,10 @@ class Article(Base):
 
     @property
     def pagetitle(self):
-        return self.context.supertitle + ': ' + self.context.title
+        if self.context.supertitle:
+            return self.context.supertitle + ': ' + self.context.title
+        else:
+            return self.context.title
 
     @property
     def pages(self):
