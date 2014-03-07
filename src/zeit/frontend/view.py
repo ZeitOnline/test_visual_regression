@@ -95,6 +95,10 @@ class Article(Base):
             return self.context.title
 
     @property
+    def pagedescription(self):
+        return self.context.subtitle
+
+    @property
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
 
@@ -330,7 +334,35 @@ class LongformArticle(Article):
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              renderer='templates/centerpage.html')
 class Centerpage(Base):
-    pass
+
+    @property
+    def pagetitle(self):
+        #ToDo(T.B.) should be, doesn't work
+        #return self.context.html-meta-title
+        return 'Lebensart - Mode, Essen &amp; Trinken, Partnerschaft | ZEIT ONLINE'
+
+    @property
+    def pagedescription(self):
+        #ToDo(T.B.) should be, doesn't work
+        #return self.context.html-meta-title
+        return 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und Kolumnen rund um die Themen Mode, Essen, Trinken und Partnerschaft.'
+
+    @property
+    def rankedTags(self):
+        #ToDo(T.B.) keywords are empty
+        return self.context.keywords
+
+    @property
+    def rankedTagsList(self):
+        keyword_list = ''
+        if self.rankedTags:
+            #ToDo(T.B.) keywords are empty
+            for keyword in self.context.keywords:
+                keyword_list += keyword.label + ';'
+            return keyword_list[:-1]
+        else:
+            return 'ZEIT ONLINE, ZEIT MAGAZIN'
+
 
 
 @view_config(name='teaser',
