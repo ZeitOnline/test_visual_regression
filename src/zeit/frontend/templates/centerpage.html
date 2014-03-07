@@ -1,5 +1,13 @@
 {% extends "templates/layout.html" %}
 {%  block content %}
-FOO
+
+{% for lead_block in view.lead_blocks %}
+
+ {% for teaser in lead_block %}
+    {{ teaser.teaserTitle }}
+ {% endfor %}       
+
+{% endfor %}
+
 {% endblock content %}
 

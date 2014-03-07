@@ -323,8 +323,9 @@ class LongformArticle(Article):
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              renderer='templates/centerpage.html')
 class Centerpage(Base):
-    pass
-
+    @property
+    def lead_blocks(self):
+        return self.context['lead'].values()
 
 @view_config(name='teaser',
              context=zeit.content.article.interfaces.IArticle,
