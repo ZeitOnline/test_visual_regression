@@ -254,7 +254,7 @@
             <p>Das ist die Lage. Mit fast 50 anderen Friedhöfen in der Stadt ringt Purwin um die Toten wie
       um einen seltenen Rohstoff. Und seit Kurzem ist da ja noch dieses neue Problem, das Purwin
       natürlich "Herausforderung" nennt.</p>
-      <video format="zmo-medium" is_empty="True" href="http://xml.zeit.de/video/2014-01/3035864892001" expires=""/>
+      <video format="zmo-medium-center" is_empty="True" href="http://xml.zeit.de/video/2014-01/3035864892001" expires=""/>
             <p>
         Die Mitglieder der Multioptionsgesellschaft möchten sich nicht mehr dem schematischen
       Schachbrettmuster der Friedhöfe fügen. Lust und Last, das eigene Leben zu gestalten, sind mit
@@ -305,7 +305,7 @@
 
 
 
-            <image align="left" src="/img/artikel/05/r4.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium" is_empty="False">
+            <image align="left" src="/img/artikel/05/r4.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium-center" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
