@@ -87,6 +87,10 @@ class Article(Base):
         return self.context.supertitle
 
     @property
+    def pagetitle(self):
+        return self.context.supertitle + ': ' + self.context.title
+
+    @property
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
 
