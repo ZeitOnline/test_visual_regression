@@ -36,7 +36,6 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
-             path_info='',
              renderer='templates/article.html')
 class Article(zeit.frontend.view.Base):
 
@@ -70,6 +69,18 @@ class Article(zeit.frontend.view.Base):
     @property
     def supertitle(self):
         return self.context.supertitle
+
+    @property
+    def pagetitle(self):
+        if self.context.supertitle:
+            return self.context.supertitle + ': ' + self.context.title
+        else:
+            return self.context.title
+
+    @property
+    def pagedescription(self):
+        return self.context.subtitle
+
 
     @property
     def pages(self):
