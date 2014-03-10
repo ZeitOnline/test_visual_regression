@@ -68,6 +68,8 @@
                 </div>
                 {% endif %}
 
+                {{ blocks.print_pagination( view.pagination ) }}
+
                 {{ blocks.mock_comments() }}
 
                 {{ blocks.focussed_nextread(view.focussed_nextread) }}
