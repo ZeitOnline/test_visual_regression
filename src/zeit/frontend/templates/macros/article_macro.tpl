@@ -1,37 +1,4 @@
 
-
-
-{% macro main_nav_compact(obj,request) -%}
-    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <div class="main-nav__wrap">
-            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
-                <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    <img src="{{request.route_url('home')}}img/zeit-logo--magazin.png" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
-                </div>
-            </a>
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing scaled-image">
-                    <a
-                    href="http://twitter.com/home?status={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a>
-
-                    {%- if obj.sharing_img.video_still -%}
-                        <a
-                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img.video_still}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
-                    {%- else -%}
-                        <a
-                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
-                    {%- endif -%}
-
-                    <a
-                    href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
-                </aside>
-            </div>
-        </div>
-    </nav>
-
-{%- endmacro %}
-
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
@@ -71,8 +38,11 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro author_date(date, source) -%}
-    <span class="article__meta__source">Aus {{ source }}</span><span class="article__meta__date">{{ date }}</span>
+{% macro source_date(date, source) -%}
+    {% if source %}
+        <span class="article__meta__second__source">{{ source }}</span>
+    {% endif %}
+    <span class="article__meta__second__date">{{ date }}</span>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
@@ -168,19 +138,19 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
-{% macro meta_author(author) -%}
-    {% if author -%}
-        {{ author.prefix }}{{ authorlink(author) }} {### TO DO: {{ author.suffix }} ###}
-    {%- endif %}
-{%- endmacro %}
-
-{% macro authorlink(author, class="article__meta__author") -%}
-    {% if author.href -%}
-        <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>
-    {%- else -%}
-        <span class="{{class}}">{{author.name}}</span>
-    {%- endif %}
-{%- endmacro %}
+{% macro meta_author(authors, class="article__meta__author") %}
+    {%- if authors -%}
+        {%- for author in authors -%}
+            {{author.prefix}}
+            {%- if author.href -%}
+                <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>{{author.location}}
+            {%- else -%}
+                <span class="{{class}}">{{author.name}}{{author.location}}</span>
+            {%- endif -%}
+            {{author.suffix}}
+        {%- endfor -%}
+    {%- endif -%}
+{% endmacro %}
 
 {% macro focussed_nextread( nextread ) -%}
     {%-if nextread -%}
@@ -336,9 +306,6 @@
     </section>
 {%- endmacro %}
 
-
-
-
 {% macro inlinegallery(obj) -%}
     <div class="figure figure-full-width">
         <div class="inline-gallery">
@@ -350,21 +317,25 @@
     </div>
 {%- endmacro %}
 
-{% macro add_publish_date( lm_date, publish_date) -%}
+{% macro add_publish_date( lm_date, publish_date, format) -%}
     {% if lm_date %}
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
-            var el = document.getElementsByClassName('article__meta__date');
+            var el = document.getElementsByClassName('article__meta__second__date');
             var content = el[0].innerText;
-            el[0].innerText = '{{publish_date}}, zuletzt aktualisiert: ' + content;
+            if( content != undefined ){
+                if( '{{format}}' === 'long' ){
+                    el[0].innerHTML = '{{publish_date}}<span>zuletzt aktualisiert am ' + content + '</span>';
+                }else{
+                    el[0].innerHTML = '{{publish_date}}<span>editiert: ' + content + '</span>';
+                }
+            }
         </script>
         <!--<![endif]-->
     {% endif %}
 {%- endmacro %}
-
-
-        
+       
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}

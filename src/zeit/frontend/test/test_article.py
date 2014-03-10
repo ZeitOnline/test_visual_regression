@@ -155,3 +155,107 @@ def test_article_has_correct_page_meta_keywords(selenium_driver, testserver):
     meta_description_tag = driver.find_element_by_xpath('//meta[@name="keywords"]')
     teststring = u'Wein, Italien, Toskana, Bologna, Bozen, Florenz, T\xfcbingen'
     assert meta_description_tag.get_attribute("content").strip() == teststring
+
+def test_article08_has_correct_date(selenium_driver, testserver):
+    # not updated print article
+    driver = selenium_driver
+    driver.get('%s/artikel/08' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__date')\
+        .text.strip()
+    assert text == '19. FEBRUAR 2014'
+
+
+def test_article09_has_correct_date(selenium_driver, testserver):
+    # updated print article
+    driver = selenium_driver
+    driver.get('%s/artikel/09' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__date')\
+        .text.strip()
+    assert text == u'04. M\xc4RZ 2014, 14:35 UHR'
+
+
+def test_article03_has_correct_date(selenium_driver, testserver):
+    # not updated online article
+    driver = selenium_driver
+    driver.get('%s/artikel/03' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__date')\
+        .text.strip()
+    assert text == u'30. JULI 2013, 17:20 UHR'
+
+
+def test_article10_has_correct_date(selenium_driver, testserver):
+    # updated online article
+    driver = selenium_driver
+    driver.get('%s/artikel/10' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__date')\
+        .text.strip()
+    assert text == u'20. FEBRUAR 2014, 17:59 UHR'
+
+
+def test_article05_has_correct_date(selenium_driver, testserver):
+    # longform
+    driver = selenium_driver
+    driver.get('%s/artikel/05' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__date')\
+        .text.strip()
+    assert text == u'03. NOVEMBER 2013'
+
+
+def test_article03_has_no_source(selenium_driver, testserver):
+    # zon source
+    driver = selenium_driver
+    driver.get('%s/artikel/03' % testserver.url)
+    class_name = '.article__meta__second__source'
+    assert len(driver.find_elements_by_css_selector(class_name)) == 0
+
+
+def test_article10_has_correct_online_source(selenium_driver, testserver):
+    # online source
+    driver = selenium_driver
+    driver.get('%s/artikel/10' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__source')\
+        .text.strip()
+    assert text == 'QUELLE: GOLEM.DE'
+
+
+def test_article08_has_correct_print_source(selenium_driver, testserver):
+    # print source
+    driver = selenium_driver
+    driver.get('%s/artikel/08' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta__second__source')\
+        .text.strip()
+    assert text == 'QUELLE: DIE ZEIT NR. 26/2008'
+
+
+def test_article08_has_correct_author_text(selenium_driver, testserver):
+    # print source
+    driver = selenium_driver
+    driver.get('%s/artikel/08' % testserver.url)
+    text = driver.find_element_by_class_name('article__meta')\
+        .text.strip()
+    assert text == 'EIN KOMMENTAR VONANNE MUSTERMANN, BERLIN' \
+        ' UNDOLIVER FRITSCH, LONDON'
+
+
+def test_article_1_10_produces_no_error(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/01' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/02' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/03' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/04' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/05' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/06' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/07' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/08' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/09' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/artikel/10' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0

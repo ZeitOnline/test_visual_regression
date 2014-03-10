@@ -7,6 +7,7 @@ from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
+from zeit.content.author.interfaces import IAuthorReference
 from zeit.content.image.interfaces import IImageMetadata
 from zeit.frontend.log import access_log
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
@@ -146,23 +147,47 @@ class Article(Base):
         else:
             return self.first_img
 
-    @property
-    def author(self):
-        prefix = ''
+    def _get_author(self, index):
         try:
-            author = self.context.authorships[0].target
-            if IArticleTemplateSettings(self.context).template == 'longform':
-                prefix = u'\u2014' + ' von '
-            else:
-                prefix = ' von '
+            author = index.target
+            author_ref = index
         except (IndexError, OSError):
             author = None
         return {
             'name': author.display_name if author else None,
             'href': author.uniqueId if author else None,
-            'prefix': prefix,
-            'suffix': ', ' if self.location else None,
+            'suffix': '',
+            'prefix': '',
+            'location': ", " + IAuthorReference(author_ref).location
+            if IAuthorReference(author_ref).location and
+            IArticleTemplateSettings(self.context).template
+            != 'longform' else '',
         }
+
+    @property
+    def authors(self):
+        authorList = []
+        try:
+            author_ref = self.context.authorships
+            for index, author in enumerate(author_ref):
+                result = self._get_author(author)
+                if result is not None:
+                    #add prefix
+                    if index == 0:
+                        if IArticleTemplateSettings(self.context).template \
+                           == 'longform':
+                            result['prefix'] = u'\u2014' + ' von'
+                        else:
+                            result['prefix'] = ' von'
+                    #add suffix
+                    if index == len(author_ref) - 2:
+                        result['suffix'] = " und"
+                    elif index < len(author_ref) - 1:
+                        result['suffix'] = ", "
+                    authorList.append(result)
+            return authorList
+        except (IndexError, OSError):
+            return None
 
     @property
     def twitter_card_type(self):
@@ -194,6 +219,27 @@ class Article(Base):
             else:
                 return None
 
+    def _get_date_format(self):
+        if self.context.product:
+            if self.context.product.id == 'ZEI' or \
+               self.context.product.id == 'ZMLB':
+                    return 'short'
+            else:
+                return 'long'
+        else:
+            return 'long'
+
+    @property
+    def show_date_format(self):
+        if self.date_last_published_semantic:
+            return 'long'
+        else:
+            return self._get_date_format()
+
+    @property
+    def show_date_format_seo(self):
+        return self._get_date_format()
+
     @property
     def show_article_date(self):
         if self.date_last_published_semantic:
@@ -217,11 +263,40 @@ class Article(Base):
 
     @property
     def genre(self):
-        return self.context.genre
+        # TODO: remove prose list, if integration of article-genres.xml
+        # is clear (as)
+        prefix = 'ein'
+        if (self.context.genre == 'glosse') or \
+           (self.context.genre == 'reportage') or \
+           (self.context.genre == 'nachricht') or \
+           (self.context.genre == 'analyse'):
+                prefix = 'eine'
+        if self.context.genre:
+            return prefix + " " + self.context.genre
+        else:
+            return None
 
     @property
     def source(self):
-        return self.context.copyrights or self.context.product_text
+        # TODO: find sth more elegant (as)
+        # 1. dont know why source stays empty if default value wasnt changed
+        # 2. issue/year will only be shown for Z and ZM right now
+        # because there's alway a value in volume and year
+        source = None
+        if self.context.product:
+            if self.context.product.id == 'ZEI' or \
+               self.context.product.id == 'ZMLB':
+                    source = self.context.product_text + ' Nr. ' \
+                        + str(self.context.volume) + '/' + \
+                        str(self.context.year)
+            elif self.context.product.id != 'ZEDE':
+                source = self.context.product_text
+        elif self.context.product_text:
+            source = self.context.product_text
+        #add prefix
+        if source is not None:
+            source = 'Quelle: ' + source
+        return self.context.copyrights or source
 
     @property
     def location(self):
