@@ -89,6 +89,17 @@ class Article(Base):
         return self.context.supertitle
 
     @property
+    def pagetitle(self):
+        if self.context.supertitle:
+            return self.context.supertitle + ': ' + self.context.title
+        else:
+            return self.context.title
+
+    @property
+    def pagedescription(self):
+        return self.context.subtitle
+
+    @property
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
 
@@ -398,7 +409,36 @@ class LongformArticle(Article):
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              renderer='templates/centerpage.html')
 class Centerpage(Base):
-    pass
+
+    @property
+    def pagetitle(self):
+        #ToDo(T.B.) should be, doesn't work
+        #return self.context.html-meta-title
+        return 'Lebensart - Mode, Essen und Trinken, Partnerschaft | ZEIT ONLINE'
+
+    @property
+    def pagedescription(self):
+        #ToDo(T.B.) should be self.context.html-meta-title, doesn't work
+        #return self.context.html-meta-title
+        output = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+        return output
+
+    @property
+    def rankedTags(self):
+        #ToDo(T.B.) keywords are empty
+        return self.context.keywords
+
+    @property
+    def rankedTagsList(self):
+        keyword_list = ''
+        if self.rankedTags:
+            #ToDo(T.B.) keywords are empty
+            for keyword in self.context.keywords:
+                keyword_list += keyword.label + ';'
+            return keyword_list[:-1]
+        else:
+            return 'ZEIT ONLINE, ZEIT MAGAZIN'
+
 
 
 @view_config(name='teaser',
