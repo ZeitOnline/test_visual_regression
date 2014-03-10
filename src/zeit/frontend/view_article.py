@@ -16,6 +16,7 @@ import zeit.content.cp.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
+import pyramid.httpexceptions
 
 log = logging.getLogger(__name__)
 
@@ -35,12 +36,14 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
+             path_info='',
              renderer='templates/article.html')
 class Article(zeit.frontend.view.Base):
 
     advertising_enabled = True
     main_nav_full_width = False
     is_longform = False
+    page_nr = 1
 
     def __call__(self):
         super(Article, self).__call__()
@@ -71,6 +74,17 @@ class Article(zeit.frontend.view.Base):
     @property
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
+
+    @property
+    def current_page(self):
+        return self.pages[0]
+
+    @property
+    def pagination(self):
+        return {
+            'current': self.page_nr,
+            'total': len(self.pages)
+        }
 
     @property
     def _select_first_body_obj(self):
@@ -141,14 +155,14 @@ class Article(zeit.frontend.view.Base):
             for index, author in enumerate(author_ref):
                 result = self._get_author(author)
                 if result is not None:
-                    #add prefix
+                    # add prefix
                     if index == 0:
                         if IArticleTemplateSettings(self.context).template \
                            == 'longform':
                             result['prefix'] = u'\u2014' + ' von'
                         else:
                             result['prefix'] = ' von'
-                    #add suffix
+                    # add suffix
                     if index == len(author_ref) - 2:
                         result['suffix'] = " und"
                     elif index < len(author_ref) - 1:
@@ -192,7 +206,7 @@ class Article(zeit.frontend.view.Base):
         if self.context.product:
             if self.context.product.id == 'ZEI' or \
                self.context.product.id == 'ZMLB':
-                    return 'short'
+                return 'short'
             else:
                 return 'long'
         else:
@@ -239,7 +253,7 @@ class Article(zeit.frontend.view.Base):
            (self.context.genre == 'reportage') or \
            (self.context.genre == 'nachricht') or \
            (self.context.genre == 'analyse'):
-                prefix = 'eine'
+            prefix = 'eine'
         if self.context.genre:
             return prefix + " " + self.context.genre
         else:
@@ -255,14 +269,14 @@ class Article(zeit.frontend.view.Base):
         if self.context.product:
             if self.context.product.id == 'ZEI' or \
                self.context.product.id == 'ZMLB':
-                    source = self.context.product_text + ' Nr. ' \
-                        + str(self.context.volume) + '/' + \
-                        str(self.context.year)
+                source = self.context.product_text + ' Nr. ' \
+                    + str(self.context.volume) + '/' + \
+                    str(self.context.year)
             elif self.context.product.id != 'ZEDE':
                 source = self.context.product_text
         elif self.context.product_text:
             source = self.context.product_text
-        #add prefix
+        # add prefix
         if source is not None:
             source = 'Quelle: ' + source
         return self.context.copyrights or source
@@ -364,6 +378,39 @@ class Article(zeit.frontend.view.Base):
                 'min_width': 768
             },
         }
+
+
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             name='seite',
+             path_info='.*seite/[0-9]+$',
+             renderer='templates/article.html')
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             name='komplettansicht',
+             renderer='templates/article_komplett.html')
+class ArticlePage(Article):
+
+    def __call__(self):
+        super(ArticlePage, self).__call__()
+
+        if self.request.view_name == 'komplettansicht':
+            return {}
+
+        pages_in_article = len(self.pages)
+
+        if self.page_nr > pages_in_article:
+            raise pyramid.httpexceptions.HTTPNotFound()
+        return {}
+
+    @property
+    def page_nr(self):
+        try:
+            return int(self.request.subpath[0])
+        except (IndexError, ValueError):
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+    @property
+    def current_page(self):
+        return zeit.frontend.interfaces.IPages(self.context)[self.page_nr-1]
 
 
 @view_config(context=zeit.frontend.article.ILongformArticle,

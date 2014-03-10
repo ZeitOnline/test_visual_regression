@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
+- Implement pagination from backend
+- Register views for Article Pages
 - Add a tool for downloading resources from CMS.
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages

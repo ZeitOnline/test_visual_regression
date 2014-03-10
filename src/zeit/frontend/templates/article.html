@@ -51,13 +51,11 @@
             </div>
 
             <div class="article__body">
-
-                {% for page in view.pages %}
-                <div class="article__page">
-                    {{ render_page(page) }}
-                </div>
-                {% endfor %}
-
+                {% block article_pages %}
+                    <div class="article__page">
+                        {{ render_page(view.current_page) }}
+                    </div>
+                {% endblock article_pages %}    
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
                     <span class="article__tags__title">Tags</span>

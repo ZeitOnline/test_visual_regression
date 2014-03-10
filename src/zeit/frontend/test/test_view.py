@@ -4,6 +4,7 @@ from zeit.frontend import view
 from zeit.frontend import view_article
 from zeit.frontend.block import InlineGalleryImage
 from zope.testbrowser.browser import Browser
+from pyramid.httpexceptions import HTTPNotFound
 import mock
 import pytest
 import requests
@@ -340,3 +341,49 @@ def test_article06_has_correct_sharing_img_video_still(testserver):
     assert article_view.sharing_img.video_still == \
         'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/' \
         '201401/3097/18140073001_3094729885001_7x.jpg'
+
+def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    page = view_article.ArticlePage(article, mock.Mock())
+    page.request.subpath = ('x')
+    with pytest.raises(HTTPNotFound):
+        page()
+
+def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    page = view_article.ArticlePage(article, mock.Mock())
+    page.request.subpath = ()
+    with pytest.raises(HTTPNotFound):
+        page()
+
+def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    page = view_article.ArticlePage(article, mock.Mock())
+    page.request.subpath = (u'3')
+    with pytest.raises(HTTPNotFound):
+        page()
+
+def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    page = view_article.ArticlePage(article, mock.Mock())
+    page.request.subpath = (u'2')
+    page()
+    assert len(page.pages) == int(page.request.subpath)
+
+def test_ArticlePage_komplett_should_show_all_pages(testserver):
+    browser = Browser('%s/artikel/03/komplettansicht' % testserver.url)
+    assert 'Chianti ein Comeback wirklich verdient' in browser.contents
+
+def test_pagination_dict_should_have_correct_entries(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.subpath = (u'2')
+
+    assert view.pagination['current'] == 2
+    assert view.pagination['total'] == 2
+
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = view_article.Article(article, '')
+
+    assert view.pagination['current'] == 1
+    assert view.pagination['total'] == 2
