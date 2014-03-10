@@ -1,0 +1,8 @@
+{% extends "templates/article.html" %}
+{% block article_pages %}
+    {% for page in view.pages %}
+        <div class="article__page">
+            {{ render_page(page) }}
+        </div>
+    {% endfor %}        
+{% endblock article_pages %}    
