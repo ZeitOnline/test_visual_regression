@@ -387,6 +387,13 @@ class Article(zeit.frontend.view.Base):
             },
         }
 
+    @property
+    def next_title(self):
+        try:
+            return zeit.frontend.interfaces.IPages(self.context)[self.page_nr].teaser
+        except (IndexError):
+            return ''
+
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='seite',
