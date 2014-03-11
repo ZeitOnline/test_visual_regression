@@ -381,9 +381,11 @@ def test_pagination_dict_should_have_correct_entries(testserver):
 
     assert view.pagination['current'] == 2
     assert view.pagination['total'] == 2
+    assert view.pagination['next_page_title'] == 'Sogar die eckige Flasche kommt zurück'
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = view_article.Article(article, '')
 
     assert view.pagination['current'] == 1
     assert view.pagination['total'] == 2
+    assert view.pagination['next_page_title'] == 'Sogar die runde Flasche kommt zurück'

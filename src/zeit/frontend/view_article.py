@@ -94,7 +94,8 @@ class Article(zeit.frontend.view.Base):
     def pagination(self):
         return {
             'current': self.page_nr,
-            'total': len(self.pages)
+            'total': len(self.pages),
+            'next_page_title': self.next_title
         }
 
     @property
@@ -422,6 +423,13 @@ class ArticlePage(Article):
     @property
     def current_page(self):
         return zeit.frontend.interfaces.IPages(self.context)[self.page_nr-1]
+
+    @property
+    def next_title(self):
+        try:
+            return zeit.frontend.interfaces.IPages(self.context)[self.page_nr].teaser
+        except (IndexError):
+            return ''
 
 
 @view_config(context=zeit.frontend.article.ILongformArticle,
