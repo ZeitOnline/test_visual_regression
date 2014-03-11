@@ -395,3 +395,12 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     assert view.pagination['current'] == 1
     assert view.pagination['total'] == 3
     assert view.pagination['next_page_title'] == (u'Sogar die runde Flasche kommt zur\xfcck')
+
+
+def test_pagination_next_title_should_be_in_html(testserver):
+    browser = Browser('%s/artikel/03/seite/02' % testserver.url)
+    assert 'Auf Seite 3' in browser.contents
+    assert 'Sogar die eckige Flasche kommt' in browser.contents
+
+
+
