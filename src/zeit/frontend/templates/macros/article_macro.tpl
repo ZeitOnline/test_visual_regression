@@ -343,9 +343,9 @@
         <div class="article__pagination__nexttitle"><!-- ggf. Titel der nächsten Seite --></div>
         <ul class="article__pager">
             {% if pagination.current > 1 %}
-                <li class="article__pager__prev is-active"><a href="">Zurück</a></li>
+                <li class="article__pager__prev"><a class="icon-paginierungs-pfeil-links" href="">Zurück</a></li>
             {% else %}
-                <li class="article__pager__prev is-inactive">Zurück</li>
+                <li class="article__pager__prev is-inactive"><span class="icon-paginierungs-pfeil-links-inaktiv">Zurück</span></li>
             {% endif %}
             {% for number in range(pagination.total)  %}
                 {% if loop.index == pagination.current %}
@@ -355,9 +355,9 @@
                 {% endif %}
             {% endfor %}
             {% if pagination.current < pagination.total %}
-                <li class="article__pager__next is-active"><a href="">Vor</a></li>
+                <li class="article__pager__next"><a class="icon-paginierungs-pfeil-rechts" href="">Vor</a></li>
             {% else %}
-                <li class="article__pager__next is-active">Vor</li>
+                <li class="article__pager__next is-inactive"><span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span></li>
             {% endif %}
         </ul>
     </div>

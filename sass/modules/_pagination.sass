@@ -1,0 +1,73 @@
+%pagerlink
+	display: block
+	color: $grey--mid
+	-webkit-transition: none
+	-moz-transition: none
+	-o-transition: none
+	transition: none
+	&:link, &:hover, &:active, &:focus
+		border-bottom: none
+		text-decoration: none
+	&:link, &:visited
+		color: $grey--mid
+	&:hover
+		color: $red
+
+%pager
+	+tablet
+	font-size: em(14px)
+	+inline-block
+	line-height: em(34px)
+	margin: 0 em(16px)
+	min-width: em(23px)
+	min-height: em(34px)
+	text-align: center
+	vertical-align: center
+	color: $grey--mid
+	a
+		@extend %pagerlink
+		
+
+
+
+%pagerarrow
+	a
+		@extend %pagerlink
+		background-color: $grey--light
+		background-position: 50% 50%
+		background-size: 36%
+		text-indent: -50000em
+	span
+		display: block
+		color: $grey--light
+		background-position: 50% 50%
+		background-size: 36%
+		text-indent: -50000em
+
+
+.article__pagination
+	padding-top: $mediumhuge
+
+.article__pagination__nexttitle
+
+.article__pager
+	list-style: none
+	text-align: center
+
+.article__pager__prev
+	@extend %pager
+	@extend %pagerarrow
+
+.article__pager__number
+	@extend %pager
+
+.article__pager__number.is-current
+	a
+		&:link, &:visited, &:active
+			color: $grey--light
+			cursor: pointer
+
+.article__pager__next
+	@extend %pager
+	@extend %pagerarrow
+
