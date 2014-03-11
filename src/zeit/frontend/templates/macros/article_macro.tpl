@@ -341,7 +341,7 @@
     <div class="article__pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
         <div class="paginator__a11y__title is-audible" id="pagination-title" style="display:none">Seitennavigation</div> <!-- nach unsichtbar verschieben -->
         {% if pagination.next_page_title %}
-        <div class="article__pagination__nexttitle">Auf Seite {{pagination.current + 1}} — {{pagination.next_page_title}}</div>
+        <div class="article__pagination__nexttitle"><a href="">Auf Seite {{pagination.current + 1}} <span class="paginator__dash">—</span> {{pagination.next_page_title}}</a></div>
         {% endif %}
         <ul class="article__pager">
             {% if pagination.current > 1 %}
