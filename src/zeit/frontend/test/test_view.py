@@ -299,14 +299,14 @@ def test_article08_has_correct_source(testserver):
     #print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view_article.Article(context, '')
-    assert article_view.source == 'Quelle: DIE ZEIT Nr. 26/2008'
+    assert article_view.source == 'DIE ZEIT Nr. 26/2008'
 
 
 def test_article10_has_correct_source(testserver):
     #online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = view_article.Article(context, '')
-    assert article_view.source == 'Quelle: golem.de'
+    assert article_view.source == 'golem.de'
 
 
 def test_article03_has_empty_source(testserver):
@@ -342,12 +342,14 @@ def test_article06_has_correct_sharing_img_video_still(testserver):
         'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/' \
         '201401/3097/18140073001_3094729885001_7x.jpg'
 
+
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
     page.request.subpath = ('x')
     with pytest.raises(HTTPNotFound):
         page()
+
 
 def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
@@ -356,12 +358,14 @@ def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
     with pytest.raises(HTTPNotFound):
         page()
 
+
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
     page.request.subpath = (u'3')
     with pytest.raises(HTTPNotFound):
         page()
+
 
 def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
@@ -370,9 +374,11 @@ def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     page()
     assert len(page.pages) == int(page.request.subpath)
 
+
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
     browser = Browser('%s/artikel/03/komplettansicht' % testserver.url)
     assert 'Chianti ein Comeback wirklich verdient' in browser.contents
+
 
 def test_pagination_dict_should_have_correct_entries(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')

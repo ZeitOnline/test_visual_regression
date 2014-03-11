@@ -129,17 +129,20 @@ def test_article05_has_subtitle__line_class(selenium_driver, testserver):
     driver.get('%s/artikel/05' % testserver.url)
     assert driver.find_element_by_class_name('article__subtitle__line') != 0
 
+
 def test_article_has_correct_page_title(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
     title = driver.title.strip()
     assert title == 'Kolumne Die Ausleser: Der Chianti hat eine zweite Chance verdient'
 
+
 def test_article_without_supertitle_has_correct_page_title(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03a' % testserver.url)
     title = driver.title.strip()
     assert title == 'Der Chianti hat eine zweite Chance verdient'
+
 
 def test_article_has_correct_page_meta_description(selenium_driver, testserver):
     driver = selenium_driver
@@ -149,12 +152,14 @@ def test_article_has_correct_page_meta_description(selenium_driver, testserver):
                  'Doch engagierte Winzer retten dem Wein in der Bastflasche die Ehre.'
     assert meta_description_tag.get_attribute("content").strip() == teststring
 
+
 def test_article_has_correct_page_meta_keywords(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
     meta_description_tag = driver.find_element_by_xpath('//meta[@name="keywords"]')
     teststring = u'Wein, Italien, Toskana, Bologna, Bozen, Florenz, T\xfcbingen'
     assert meta_description_tag.get_attribute("content").strip() == teststring
+
 
 def test_article08_has_correct_date(selenium_driver, testserver):
     # not updated print article
@@ -215,7 +220,7 @@ def test_article10_has_correct_online_source(selenium_driver, testserver):
     driver.get('%s/artikel/10' % testserver.url)
     text = driver.find_element_by_class_name('article__meta__second__source')\
         .text.strip()
-    assert text == 'QUELLE: GOLEM.DE'
+    assert text == 'GOLEM.DE'
 
 
 def test_article08_has_correct_print_source(selenium_driver, testserver):
@@ -224,7 +229,7 @@ def test_article08_has_correct_print_source(selenium_driver, testserver):
     driver.get('%s/artikel/08' % testserver.url)
     text = driver.find_element_by_class_name('article__meta__second__source')\
         .text.strip()
-    assert text == 'QUELLE: DIE ZEIT NR. 26/2008'
+    assert text == 'DIE ZEIT NR. 26/2008'
 
 
 def test_article08_has_correct_author_text(selenium_driver, testserver):
