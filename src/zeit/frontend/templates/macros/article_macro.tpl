@@ -340,7 +340,9 @@
     {% if pagination.total > 1 %}
     <div class="article__pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
         <div class="paginator__a11y__title is-audible" id="pagination-title" style="display:none">Seitennavigation</div> <!-- nach unsichtbar verschieben -->
-        <div class="article__pagination__nexttitle">{{pagination.next_page_title}}</div>
+        {% if pagination.next_page_title %}
+        <div class="article__pagination__nexttitle">Auf Seite {{pagination.current + 1}} — {{pagination.next_page_title}}</div>
+        {% endif %}
         <ul class="article__pager">
             {% if pagination.current > 1 %}
                 <li class="article__pager__prev"><a class="icon-paginierungs-pfeil-links" href="">Zurück</a></li>
