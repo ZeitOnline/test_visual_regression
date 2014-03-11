@@ -81,7 +81,6 @@ class Article(zeit.frontend.view.Base):
     def pagedescription(self):
         return self.context.subtitle
 
-
     @property
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
@@ -288,9 +287,6 @@ class Article(zeit.frontend.view.Base):
                 source = self.context.product_text
         elif self.context.product_text:
             source = self.context.product_text
-        # add prefix
-        if source is not None:
-            source = 'Quelle: ' + source
         return self.context.copyrights or source
 
     @property
