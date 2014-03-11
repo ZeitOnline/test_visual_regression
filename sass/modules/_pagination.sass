@@ -46,10 +46,23 @@
 	padding-top: $mediumhuge
 
 .article__pagination__nexttitle
+	+tablet(bold)
+	color: $grey--dark
+	text-align: center
+	margin-bottom: em(60px)
+	a
+		+link-colors($grey--dark, $red, $grey--dark, $grey--dark, $grey--dark)
+	a:hover span.paginator__dash
+		color: $red
+
+.paginator__dash
+	color: $charcoal
 
 .article__pager
 	list-style: none
 	text-align: center
+	padding-bottom: em(60px)
+	border-bottom: 1px solid $grey--light
 
 .article__pager__prev
 	@extend %pager
