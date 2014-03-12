@@ -1,0 +1,5 @@
+<div class='area__lead'>
+    {% for teaser_block in view.area_lead %}
+        {% include 'templates/inc/teaser_block_' + teaser_block.type + '.html' ignore missing %}
+    {% endfor %}
+</div>
