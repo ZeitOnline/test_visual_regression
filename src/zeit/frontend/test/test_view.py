@@ -362,7 +362,7 @@ def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.subpath = (u'3')
+    page.request.subpath = (u'4')
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -370,7 +370,7 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
 def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.subpath = (u'2')
+    page.request.subpath = (u'3')
     page()
     assert len(page.pages) == int(page.request.subpath)
 
