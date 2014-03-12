@@ -4,11 +4,16 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
+- Implement pagination from backend
+- Register views for Article Pages
+- Add a tool for downloading resources from CMS.
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages
 - Refactor template logic for macros. The are now located in 
 templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
+- add date, source, genre testing
+- fix author issue and add testing
 
 
 0.2.15 (2014-02-27)

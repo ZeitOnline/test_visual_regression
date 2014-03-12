@@ -9,8 +9,9 @@
     <head>
         <meta charset='utf-8'>
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
-        <title>Flüchtlinge in Deutschland: Willkommen in der Fremde | ZEIT ONLINE</title>
-        <meta name='description' content='In Eisenhüttenstadt ist eine der deutschen Erstaufnahme-Einrichtungen für Flüchtlinge. Eine multimediale Reportage über Hoffnung und Verzweiflung'>
+        <title>{{view.pagetitle}}</title>
+        <meta name='description' content='{{view.pagedescription}}'>
+        <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
         <meta name="robots" content="index,follow,noodp,noydir,noarchive">
         <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
         {% if view.context.advertising_enabled %}
@@ -100,6 +101,7 @@
                 </div>
             </div>
             {% endif %}
+
             {% block page_wrap_inner %}
                 <div class="page-wrap--inner" id="js-page-wrap-inner">
                 {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}

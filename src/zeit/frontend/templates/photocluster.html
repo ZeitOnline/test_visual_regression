@@ -1,5 +1,6 @@
 {% extends "templates/layout.html" %}
-{% import 'templates/block_elements.tpl' as blocks %}
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% block content %}
     <article class="article" id="js-article">
         <div class="article__wrap">
@@ -13,7 +14,7 @@
                             {{view.title}}
                         </h1>
                         <div class="article__meta">
-                            {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
+                            {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
                         </div>
                         <div class="article__opener">
                             <span class="article__subtitle">

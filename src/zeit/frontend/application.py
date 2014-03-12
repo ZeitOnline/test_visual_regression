@@ -80,6 +80,7 @@ class Application(object):
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
+        jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
@@ -207,12 +208,15 @@ def translate_url(context, url):
 
 
 def format_date(obj, type):
+    format = ""
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
     elif type == 'short':
         format = "dd. MMMM yyyy"
     return format_datetime(obj, format, locale="de_De")
 
+def replace_list_seperator(semicolonseperatedlist, seperator):
+    return semicolonseperatedlist.replace(';', seperator)
 
 # definition of default images sizes per layout context
 default_images_sizes = dict(

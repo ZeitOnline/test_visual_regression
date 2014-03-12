@@ -5,11 +5,14 @@ import logging
 import pyramid.interfaces
 import pyramid.traversal
 import zeit.cms.repository.interfaces
+import zeit.content.article
+import zeit.content.article.article
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
 import zope.interface
 import pyramid.httpexceptions
+import zeit.content.article.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -74,3 +77,5 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         except OSError, e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
+
+

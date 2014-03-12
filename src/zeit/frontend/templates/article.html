@@ -31,33 +31,31 @@
                 <header class="article__title-wrap">
                     <div class="is-constrained is-centered">
                         {{ title() }}
-                        <div class="article__meta">
-                            {{ blocks.author_date(view.show_article_date | format_date('long'), view.source) }}
-                        </div>
                         <div class="article__opener">
                             {{ subtitle() }}
                             <span class="article__meta">
                                 {% if view.genre -%}
                                     <span class="article__meta__genre">{{view.genre}}</span>
                                 {%- endif %}
-                                {{ blocks.meta_author(view.author) }}
+                                {{ blocks.meta_author(view.authors) }}
                                 {% if view.location -%}
                                     <span class="article__meta__location">{{view.location}}</span>
                                 {%- endif %}
                             </span>
+                        </div>
+                        <div class="article__meta__second">
+                            {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
                         </div>
                     </div>
                 </header>
             </div>
 
             <div class="article__body">
-
-                {% for page in view.pages %}
-                <div class="article__page">
-                    {{ render_page(page) }}
-                </div>
-                {% endfor %}
-
+                {% block article_pages %}
+                    <div class="article__page">
+                        {{ render_page(view.current_page) }}
+                    </div>
+                {% endblock article_pages %}    
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
                     <span class="article__tags__title">Tags</span>
@@ -77,8 +75,7 @@
             </div>
         </div>
 	</article>
-
     <!-- seo article date modification -->
-    {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date('long'))}}
+    {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
 
 {% endblock content %}
