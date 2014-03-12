@@ -73,9 +73,13 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 if IArticleTemplateSettings(context).template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
-            return tdict
+            return self._change_viewname(tdict)
         except OSError, e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
 
+    def _change_viewname(self, tdict):
+        if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
+            tdict['view_name'] = 'seite'
+        return tdict
 
