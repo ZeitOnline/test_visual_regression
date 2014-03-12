@@ -1,5 +1,11 @@
 {% extends "templates/layout.html" %}
+{% import 'templates/macros/cp_macro.tpl' as cp with context%}
+
 {%  block content %}
-FOO
+
+{{ cp.lead_full('video') }}
+<br><br>
+{{ cp.lead_full('image') }}
+
 {% endblock content %}
 

@@ -1,0 +1,72 @@
+.cp__lead, %cp__lead
+	background-color: $black
+	&:after
+		+box-shadow(inset 0 -200px 200px rgba($black, 0.7))
+		content: ''
+		position: absolute
+		z-index: 1
+		height: 100%
+		width: 200%
+		left: -50%
+		top: 0px
+
+.cp__lead-full
+	@extend %cp__lead
+	position: relative
+	overflow: hidden
+	padding-top: 0
+	margin-top: 0
+	height: em(550px)
+
+.cp__lead-full__wrap
+	overflow: hidden
+	position: relative
+	height: 100%
+	z-index: 1
+	video
+		position: absolute
+		bottom: 0
+		left: 0
+		min-width: 100%
+		min-height: 100%
+		max-width: none
+	img
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		margin: auto
+		min-height: 100%
+		width: 100%
+		@media only screen and (orientation : portrait)
+			left: -50%
+			min-width: 200%
+
+.cp__lead-full__title-wrap
+	position: absolute
+	overflow: hidden
+	text-align: center
+	bottom: $medium
+	padding-left: 15%
+	padding-right: 15%
+	width: 100%
+	z-index: 2	
+	.cp__lead__title
+		&:before
+			content: "«"
+		&:after
+			content: "»"
+
+.cp__lead__title
+	+tablet
+	color: $white
+	margin-bottom: $tiny
+	font-size: $font-xxl
+	+respond-min($break-2)
+		font-size: $font-xxl
+
+.cp__lead__subtitle
+	@extend %copy
+	+franziska()
+	color: $white
+	font-size: $font-ml
