@@ -90,11 +90,27 @@ class Article(zeit.frontend.view.Base):
         return self.pages[0]
 
     @property
+    def next_title(self):
+        try:
+            return self.pages[self.page_nr].teaser
+        except (IndexError):
+            return ''
+
+    @property
+    def article_url(self):
+        traversed_path = ''
+        for path in self.request.traversed:
+            traversed_path += '/' + path
+        return self.request.host_url + traversed_path
+
+    @property
     def pagination(self):
         return {
             'current': self.page_nr,
             'total': len(self.pages),
-            'next_page_title': self.next_title
+            'next_page_title': self.next_title,
+            'article_url': self.article_url,
+            'paging_scheme': '/seite/'
         }
 
     @property
@@ -386,13 +402,6 @@ class Article(zeit.frontend.view.Base):
                 'min_width': 768
             },
         }
-
-    @property
-    def next_title(self):
-        try:
-            return zeit.frontend.interfaces.IPages(self.context)[self.page_nr].teaser
-        except (IndexError):
-            return ''
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

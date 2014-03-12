@@ -338,26 +338,28 @@
 
 {% macro print_pagination( pagination ) -%}
     {% if pagination.total > 1 %}
+    {% set next = pagination.article_url ~ pagination.paging_scheme ~ (pagination.current + 1) %}
+    {% set prev = pagination.article_url ~ pagination.paging_scheme ~ (pagination.current - 1) %}
     <div class="article__pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
         <div class="paginator__a11y__title is-audible" id="pagination-title" style="display:none">Seitennavigation</div> <!-- nach unsichtbar verschieben -->
         {% if pagination.next_page_title %}
-        <div class="article__pagination__nexttitle"><a href="">Auf Seite {{pagination.current + 1}} <span class="paginator__dash">—</span> {{pagination.next_page_title}}</a></div>
+        <div class="article__pagination__nexttitle"><a href="{{next}}">Auf Seite {{pagination.current + 1}} <span class="paginator__dash">—</span> {{pagination.next_page_title}}</a></div>
         {% endif %}
         <ul class="article__pager">
             {% if pagination.current > 1 %}
-                <li class="article__pager__prev"><a class="icon-paginierungs-pfeil-links" href="">Zurück</a></li>
+                <li class="article__pager__prev"><a class="icon-paginierungs-pfeil-links" href="{{prev}}">Zurück</a></li>
             {% else %}
                 <li class="article__pager__prev is-inactive"><span class="icon-paginierungs-pfeil-links-inaktiv">Zurück</span></li>
             {% endif %}
             {% for number in range(pagination.total)  %}
                 {% if loop.index == pagination.current %}
-                    <li class="article__pager__number is-current"><a href="">{{number+1}}</a></li>
+                    <li class="article__pager__number is-current"><a href="{{pagination.article_url ~ pagination.paging_scheme ~ (number + 1)}}">{{number+1}}</a></li>
                 {% else %}
-                    <li class="article__pager__number"><a href="">{{number+1}}</a></li>
+                    <li class="article__pager__number"><a href="{{pagination.article_url ~ pagination.paging_scheme ~ (number + 1)}}">{{number+1}}</a></li>
                 {% endif %}
             {% endfor %}
             {% if pagination.current < pagination.total %}
-                <li class="article__pager__next"><a class="icon-paginierungs-pfeil-rechts" href="">Vor</a></li>
+                <li class="article__pager__next"><a class="icon-paginierungs-pfeil-rechts" href="{{next}}">Vor</a></li>
             {% else %}
                 <li class="article__pager__next is-inactive"><span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span></li>
             {% endif %}
