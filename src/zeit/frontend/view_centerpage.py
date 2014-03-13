@@ -45,6 +45,6 @@ class Centerpage(zeit.frontend.view.Base):
             return 'ZEIT ONLINE, ZEIT MAGAZIN'
 
     @property
-    def lead_blocks(self):
+    def area_lead(self):
         return self.context['lead'].values()
 

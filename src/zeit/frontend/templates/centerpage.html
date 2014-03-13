@@ -1,13 +1,5 @@
 {% extends "templates/layout.html" %}
 {%  block content %}
-
-{% for lead_block in view.lead_blocks %}
-
- {% for teaser in lead_block %}
-    {{ teaser.teaserTitle }}
- {% endfor %}       
-
-{% endfor %}
-
+    {% include "templates/inc/cp_area_lead.html" ignore missing %}
 {% endblock content %}
 
