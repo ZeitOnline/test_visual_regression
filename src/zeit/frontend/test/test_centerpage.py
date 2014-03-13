@@ -5,10 +5,6 @@ import zeit.cms.interfaces
 import requests
 import zeit.frontend.view_centerpage
 
-def test_centerpage_should_have_expected_markup(testserver):
-    browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert 'FOO' in browser.contents
-
 def test_centerpage_should_have_correct_page_title(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
