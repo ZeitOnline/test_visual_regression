@@ -57,9 +57,12 @@
                     </div>
                 {% endblock article_pages %}   
                 
-                {% if view.pagination %}
-                  {{ blocks.print_pagination( view.pagination ) }}
-                {% endif %}
+                
+                {% block article_pagination %}
+                  {% if view.pagination %}
+                    {{ blocks.print_pagination( view.pagination ) }}
+                  {% endif %}
+                {% endblock article_pagination %}
 
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">

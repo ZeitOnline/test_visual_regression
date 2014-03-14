@@ -411,9 +411,6 @@ class Article(zeit.frontend.view.Base):
              name='seite',
              path_info='.*seite-[0-9]+$',
              renderer='templates/article.html')
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             name='komplettansicht',
-             renderer='templates/article_komplett.html')
 class ArticlePage(Article):
 
     def __call__(self):
