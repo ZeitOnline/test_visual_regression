@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # To download a resource from the CMS vivi, call this script with an path as
 # argument. This path should _not_ begin with a '/' and ist a subpath of
