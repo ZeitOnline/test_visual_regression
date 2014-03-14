@@ -59,9 +59,9 @@
                 
                 
                 {% block article_pagination %}
-                  {% if view.pagination %}
-                    {{ blocks.print_pagination( view.pagination ) }}
-                  {% endif %}
+                    {% if view.pagination %}
+                        {{ blocks.print_pagination( view.pagination ) }}
+                    {% endif %}
                 {% endblock article_pagination %}
 
                 {% if view.rankedTags %}
