@@ -1,0 +1,5 @@
+<div class='teaser_block__default'>
+    {% for teaser in teaser_block %}
+        {% include 'templates/inc/teaser/teaser_' + teaser | block_type + '.html' ignore missing %}
+    {% endfor %}
+</div>
