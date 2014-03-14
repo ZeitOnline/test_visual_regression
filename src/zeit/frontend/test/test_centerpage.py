@@ -18,7 +18,7 @@ def test_centerpage_should_have_page_meta_description(selenium_driver, testserve
     teststring = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
     assert meta_description_tag.get_attribute("content").strip() == teststring
 
-def test_centerpage_should_habe_page_meta_keywords(selenium_driver, testserver):
+def test_centerpage_should_have_page_meta_keywords(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     meta_description_tag = driver.find_element_by_xpath('//meta[@name="keywords"]')
