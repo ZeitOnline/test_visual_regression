@@ -389,7 +389,7 @@ class Article(zeit.frontend.view.Base):
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='seite',
-             path_info='.*seite/[0-9]+$',
+             path_info='.*seite-[0-9]+$',
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='komplettansicht',
@@ -411,7 +411,10 @@ class ArticlePage(Article):
     @property
     def page_nr(self):
         try:
-            return int(self.request.subpath[0])
+            n = int(self.request.path_info.split("/")[-1][6:])
+            if n == 1:
+                raise pyramid.httpexceptions.HTTPNotFound()
+            return n
         except (IndexError, ValueError):
             raise pyramid.httpexceptions.HTTPNotFound()
 

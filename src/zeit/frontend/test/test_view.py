@@ -346,7 +346,7 @@ def test_article06_has_correct_sharing_img_video_still(testserver):
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.subpath = ('x')
+    page.request.path_info = 'article/seite-x'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -354,7 +354,7 @@ def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
 def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.subpath = ()
+    page.request.path_info = 'article/seite-'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -362,17 +362,23 @@ def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.subpath = (u'3')
+    page.request.path_info = u'article/seite-5'
     with pytest.raises(HTTPNotFound):
         page()
 
+def test_ArticlePage_should_not_work_if_view_name_is_seite_1(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    page = view_article.ArticlePage(article, mock.Mock())
+    page.request.path_info = u'article/seite-1'
+    with pytest.raises(HTTPNotFound):
+        page()
 
 def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.subpath = (u'2')
+    page.request.path_info = 'article/seite-2'
     page()
-    assert len(page.pages) == int(page.request.subpath)
+    assert len(page.pages) == 2
 
 
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
@@ -383,7 +389,7 @@ def test_ArticlePage_komplett_should_show_all_pages(testserver):
 def test_pagination_dict_should_have_correct_entries(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = view_article.ArticlePage(article, mock.Mock())
-    view.request.subpath = (u'2')
+    view.request.path_info = u'article/seite-2'
 
     assert view.pagination['current'] == 2
     assert view.pagination['total'] == 2
