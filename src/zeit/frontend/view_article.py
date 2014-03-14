@@ -37,6 +37,9 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             name='komplettansicht',
+             renderer='templates/article_komplett.html')
 class Article(zeit.frontend.view.Base):
 
     advertising_enabled = True
