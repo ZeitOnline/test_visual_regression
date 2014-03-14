@@ -4,8 +4,15 @@
 {%  block content %}
 
 {{ cp.lead_full('video') }}
-<br><br>
 {{ cp.lead_full('image') }}
+
+<div class="cp__head">
+	<div class="cp__head__teaser">
+		{{ cp.lead_half() }}
+	</div>
+	<div class="cp__head__informatives">
+	</div>
+</div>
 
 {% endblock content %}
 
