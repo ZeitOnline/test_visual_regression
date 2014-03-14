@@ -113,7 +113,7 @@ class Article(zeit.frontend.view.Base):
             'total': len(self.pages),
             'next_page_title': self.next_title,
             'article_url': self.article_url,
-            'paging_scheme': '/seite/'
+            'paging_scheme': '/seite-'
         }
 
     @property
