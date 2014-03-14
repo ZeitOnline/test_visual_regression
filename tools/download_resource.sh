@@ -6,7 +6,7 @@
 # To download resource and meta resource of the homepage call:
 # ./download_resource.sh index
 
-dav_host='http://cms-backend.zeit.de:9000';
+dav_host='http://vivi-pommes.zeit.de:9000';
 
 curl ${dav_host}/cms/work/$1 > resource 2> /dev/null
 
