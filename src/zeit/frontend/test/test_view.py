@@ -376,9 +376,9 @@ def test_ArticlePage_should_not_work_if_view_name_is_seite_1(testserver):
 def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.path_info = 'article/seite-2'
+    page.request.path_info = 'article/seite-3'
     page()
-    assert len(page.pages) == 2
+    assert len(page.pages) == 3
 
 
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
@@ -404,7 +404,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
 
 
 def test_pagination_next_title_should_be_in_html(testserver):
-    browser = Browser('%s/artikel/03/seite/02' % testserver.url)
+    browser = Browser('%s/artikel/03/seite-2' % testserver.url)
     assert 'Auf Seite 3' in browser.contents
     assert 'Sogar die eckige Flasche kommt' in browser.contents
 
