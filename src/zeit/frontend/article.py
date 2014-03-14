@@ -1,6 +1,5 @@
 from grokcore.component import adapter, implementer
 from zeit.frontend.block import IFrontendBlock
-from zeit.magazin.interfaces import IArticleTemplateSettings
 import logging
 import pyramid.interfaces
 import pyramid.traversal
@@ -60,22 +59,5 @@ def pages_of_article(context):
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
-
-
-@adapter(zeit.cms.repository.interfaces.IRepository)
-@implementer(pyramid.interfaces.ITraverser)
-class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
-
-    def __call__(self, request):
-        try:
-            tdict = super(RepositoryTraverser, self).__call__(request)
-            context = tdict['context']
-            if zeit.content.article.interfaces.IArticle.providedBy(context):
-                if IArticleTemplateSettings(context).template == 'longform':
-                    zope.interface.alsoProvides(context, ILongformArticle)
-            return tdict
-        except OSError, e:
-            if e.errno == 2:
-                raise pyramid.httpexceptions.HTTPNotFound()
 
 
