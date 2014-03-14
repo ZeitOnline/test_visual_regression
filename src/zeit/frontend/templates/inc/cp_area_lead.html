@@ -1,0 +1,10 @@
+{% import 'templates/macros/cp_macro.tpl' as cp with context%}
+
+<div class='area__lead'>
+	{{ cp.lead_full('video') }}
+	{{ cp.lead_full('image') }}
+
+    {% for teaser_block in view.area_lead %}
+        {% include 'templates/inc/teaser_block_' + teaser_block.type + '.html' ignore missing %}
+    {% endfor %}
+</div>

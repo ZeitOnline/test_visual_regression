@@ -1,6 +1,9 @@
 from babel.dates import format_datetime
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
+from grokcore.component import adapter, implementer
+from zeit.magazin.interfaces import IArticleTemplateSettings
+from zeit.frontend.article import ILongformArticle
 import grokcore.component.zcml
 import jinja2
 import logging
@@ -243,3 +246,25 @@ def default_image_url(image):
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL.')
+
+@adapter(zeit.cms.repository.interfaces.IRepository)
+@implementer(pyramid.interfaces.ITraverser)
+class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
+
+    def __call__(self, request):
+        try:
+            tdict = super(RepositoryTraverser, self).__call__(request)
+            context = tdict['context']
+            if zeit.content.article.interfaces.IArticle.providedBy(context):
+                if IArticleTemplateSettings(context).template == 'longform':
+                    zope.interface.alsoProvides(context, ILongformArticle)
+            return self._change_viewname(tdict)
+        except OSError, e:
+            if e.errno == 2:
+                raise pyramid.httpexceptions.HTTPNotFound()
+
+    def _change_viewname(self, tdict):
+        if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
+            tdict['view_name'] = 'seite'
+        return tdict
+

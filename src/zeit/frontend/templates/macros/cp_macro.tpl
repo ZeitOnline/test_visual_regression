@@ -38,12 +38,3 @@
       	</span>
   	</header>
 {%- endmacro %}
-
-<!-- TODO: remove test data, switch to responsive (as)-->
-{% macro lead_half() -%}	
-	<div class="cp__lead-half__wrap">
-		<div class="cp__lead-half">
-	        <img src="http://images.zeit.de/wissen/geschichte/2013-07/s79-volkstanz/s79-volkstanz-540x304.jpg">
-	    </div>
-	</div>
-{%- endmacro %}

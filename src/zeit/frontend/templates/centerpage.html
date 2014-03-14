@@ -1,18 +1,7 @@
 {% extends "templates/layout.html" %}
-{% import 'templates/macros/cp_macro.tpl' as cp with context%}
 
 {%  block content %}
-
-{{ cp.lead_full('video') }}
-{{ cp.lead_full('image') }}
-
-<div class="cp__head">
-	<div class="cp__head__teaser">
-		{{ cp.lead_half() }}
-	</div>
-	<div class="cp__head__informatives">
-	</div>
-</div>
-
+    {% include "templates/inc/cp_area_lead.html" ignore missing %}
 {% endblock content %}
+
 
