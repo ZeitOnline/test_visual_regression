@@ -1,63 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
-    <keywordset>
-      <keyword py:pytype="str" source="manual">mode</keyword>
-      <keyword py:pytype="str" source="manual">essen</keyword>
-      <keyword py:pytype="str" source="manual">leben</keyword>
-      <keyword py:pytype="str" source="manual">kochen</keyword>
-      <keyword py:pytype="str" source="manual">trinken</keyword>
-      <keyword py:pytype="str" source="manual">partnerschaft</keyword>
-      <keyword py:pytype="str" source="manual">ehe</keyword>
-      <keyword py:pytype="str" source="manual">familie</keyword>
-      <keyword py:pytype="str" source="manual">bekleidung</keyword>
-    </keywordset>
     <header_image xsi:nil="true"/>
     <snapshot xsi:nil="true"/>
-    <topiclinks>
-      <topiclink>
-        <topiclink_label_1>Prêt-à-porter Schauen</topiclink_label_1>
-        <topiclink_url_1>http://www.zeit.de/schlagworte/themen/fashion-week/index</topiclink_url_1>
-        <topiclink_label_2>Harper's Bazaar</topiclink_label_2>
-        <topiclink_url_2>http://www.zeit.de/lebensart/mode/2014-02/Harpers-Bazaar-Margit-J-Mayer-Frauen-Mode-Macht</topiclink_url_2>
-        <topiclink_label_3>Vegane Ernährung</topiclink_label_3>
-        <topiclink_url_3>http://www.zeit.de/schlagworte/themen/veganismus/index</topiclink_url_3>
-      </topiclink>
-    </topiclinks>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-03-03T09:52:48.156261+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2009-09-06T09:14:31.584672+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-03-02T11:00:46.037350+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-03-02T11:00:03.490286+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-03-17T11:57:09.949644+00:00</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="first_count">2009-09-05</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Die Lust am Leben: Aktuelle Berichte, Ratgeber und Kolumnen rund um die Themen Mode, Essen, Trinken und Partnerschaft.</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Lebensart - Mode, Essen &amp; Trinken, Partnerschaft | ZEIT ONLINE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-02T10:59:28.338888+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2014-01-03</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.weihser</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-17T12:30:58.358916+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.drongowski</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Zeit Online</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">2110563</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b8a7844d-32ec-45b4-abb2-818bd34028c3}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="was_automatically_syndicated_into"></attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2012</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:2a78abca-01b3-4884-97e3-4db1ceec720f}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
@@ -76,713 +46,135 @@
   <body>
     <cluster area="feature">
       <region area="lead">
-        <container cp:type="teaser" module="leader" cp:__name__="id-79d56c52-2a3e-4de4-b431-e33736d3d50e">
-          <block href="http://xml.zeit.de/artikel/01" year="2014" issue="10" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="2014-02-27T08:50:00+00:00" expires="" date-last-modified="2014-03-02T11:11:54+00:00" date-first-released="2014-02-27T06:00:00+00:00" date-last-published="2014-03-02T11:12:53.999951+00:00" last-semantic-change="2014-03-02T10:57:30.409590+00:00">
-            <supertitle py:pytype="str">Serie Wochenmarkt</supertitle>
-            <title py:pytype="str">Hühnchen statt Extremsport</title>
-            <text py:pytype="str">Hähnchenkeulen mit Piment, Chili und Kreuzkümmel würzen, dazu Kichererbsen und Aprikosen geben, das Ganze in den Backofen schieben – und fertig ist das gute Leben.</text>
-            <description py:pytype="str">Hähnchenkeulen mit Piment, Chili und Kreuzkümmel würzen, dazu Kichererbsen und Aprikosen geben, das Ganze in den Backofen schieben – und fertig ist das gute Leben.</description>
-            <byline py:pytype="str">von Elisabeth Raether</byline>
-            <image base-id="http://xml.zeit.de/2014/10/wochenmarkt-huehnchen/" type="jpg" title="Hühnchen mit Kichererbsen" alt="Hühnchen mit Kichererbsen" align="left" publication-date="" expires="2014-05-24T17:17:00+00:00">
-              <bu py:pytype="str">Hühnchen mit Kichererbsen</bu>
-              <copyright py:pytype="str">© Jason Lowe</copyright>
+        <container cp:type="teaser" module="leader" cp:__name__="id-aea7d6b5-0393-441e-8cb0-21406ac4675b">
+          <block href="http://xml.zeit.de/artikel/01" uniqueId="http://xml.zeit.de/artikel/01" year="2013" issue="40" ressort="lebensart" author="Marie Schmidt" contenttype="article" publication-date="2013-10-03T03:11:20+00:00" expires="" date-last-modified="2014-03-17T10:04:15+00:00" date-first-released="2013-09-26T06:00:00+00:00" date-last-published="2013-10-08T09:26:47.102964+00:00" last-semantic-change="2013-10-08T09:25:41.176681+00:00">
+            <supertitle py:pytype="str">Gentrifizierung</supertitle>
+            <teaser_supertitle py:pytype="str">Gentrifizierung</teaser_supertitle>
+            <title py:pytype="str">Das Münchner Stüberl stirbt</title>
+            <text py:pytype="str">Mei, is' des traurig! Die Schoppenstube im Münchner Glockenbachviertel hat dichtgemacht. Was erzählt uns das über die Gentrifizierung?</text>
+            <description py:pytype="str">Mei, is' des traurig! Die Schoppenstube im Münchner Glockenbachviertel hat dichtgemacht. Was erzählt uns das über die Gentrifizierung?</description>
+            <byline py:pytype="str">von  Marie Schmidt</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <gallery type="intern" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
+              <supertitle xsi:nil="true"/>
+              <teaser_supertitle xsi:nil="true"/>
+              <title py:pytype="str">Automesse Detroit 2014 US-Hersteller</title>
+              <text xsi:nil="true"/>
+              <description xsi:nil="true"/>
+              <byline xsi:nil="true"/>
+              <breadcrumb_title xsi:nil="true"/>
+            </gallery>
+            <author href="http://xml.zeit.de/autoren/S/Marie_Schmidt" publication-date="" expires="">
+              <display_name>Marie Schmidt</display_name>
+            </author>
+          </block>
+        </container>
+        <container cp:type="teaser" module="leader" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
+          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text</bu>
+              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
             </image>
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+          </block>
+        </container>
+        <container cp:type="teaser" module="buttons" cp:__name__="id-1328295a-a6ce-472c-be0e-7a1c29ea8aff">
+          <block href="http://xml.zeit.de/centerpage/article_video_asset" uniqueId="http://xml.zeit.de/centerpage/article_video_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T12:00:49+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T11:54:47.509887+00:00">
+            <supertitle py:pytype="str">Video Asset Article Spitzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Video Asset Article Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">und der Titel dazu</title>
+            <text py:pytype="str">Es leben die Skispringenden Sportredakteure!</text>
+            <description py:pytype="str">Es leben die Skispringenden Sportredakteure!</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text</bu>
+              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
+            </image>
+            <badges>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <video href="http://xml.zeit.de/video/2014-01/3035864892001" href2="" expires="" video_id="vid3035864892001" video_id_2=""/>
+            <gallery type="intern" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
+              <supertitle xsi:nil="true"/>
+              <teaser_supertitle xsi:nil="true"/>
+              <title py:pytype="str">Automesse Detroit 2014 US-Hersteller</title>
+              <text xsi:nil="true"/>
+              <description xsi:nil="true"/>
+              <byline xsi:nil="true"/>
+              <breadcrumb_title xsi:nil="true"/>
+            </gallery>
+          </block>
+        </container>
+        <container cp:type="teaser" module="buttons" cp:__name__="id-c234aacf-c9fc-40eb-a79b-a001d82ba3d7">
+          <block href="http://xml.zeit.de/centerpage/article_gallery_asset" uniqueId="http://xml.zeit.de/centerpage/article_gallery_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:59:53+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T11:53:21.893984+00:00">
+            <supertitle py:pytype="str">Article Gallery Spitzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Gallery Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Gallery Title</title>
+            <text py:pytype="str">Die ist der Teasertext mit einer Autobildergaleriee. Huh, huh. Kräftige mächtige Autos. Yeah. Schnell. Brumm Brumm.</text>
+            <description py:pytype="str">Die ist der Teasertext mit einer Autobildergaleriee. Huh, huh. Kräftige mächtige Autos. Yeah. Schnell. Brumm Brumm.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text</bu>
+              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
+            </image>
+            <badges>
+              <badge py:pytype="str">gallery</badge>
+            </badges>
+            <gallery type="intern" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
+              <supertitle xsi:nil="true"/>
+              <teaser_supertitle xsi:nil="true"/>
+              <title py:pytype="str">Automesse Detroit 2014 US-Hersteller</title>
+              <text xsi:nil="true"/>
+              <description xsi:nil="true"/>
+              <byline xsi:nil="true"/>
+              <breadcrumb_title xsi:nil="true"/>
+            </gallery>
+          </block>
+        </container>
+        <container cp:type="teaser" module="buttons" cp:__name__="id-b57fdbb3-1bee-4480-83f1-1a602d5ec55c">
+          <block href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" uniqueId="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="" date-last-modified="2014-03-17T10:05:02+00:00" date-first-released="2014-01-15T05:43:31.418516+00:00" date-last-published="2014-01-15T06:33:57.811351+00:00" last-semantic-change="2014-01-14T17:23:45.053764+00:00">
+            <supertitle xsi:nil="true"/>
+            <teaser_supertitle xsi:nil="true"/>
+            <title py:pytype="str">Automesse Detroit 2014 US-Hersteller</title>
+            <text xsi:nil="true"/>
+            <description xsi:nil="true"/>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
           </block>
         </container>
       </region>
       <region area="informatives">
-        <container cp:type="cpextra" module="mostread" cp:__name__="a193bd75-499f-461b-915f-d890c9c52d7c">
+        <container cp:type="cpextra" module="mostread" cp:__name__="id-89f07ff6-3996-426d-9a8d-590c2ea54fbd">
           <cp_extra id="mostread"/>
         </container>
-        <container cp:type="cpextra" module="mostcommented" cp:__name__="8a0deaa7-b426-4535-81c6-19731ec48df7" read_more="Zur Ranglisten-Übersicht" read_more_url="http://www.zeit.de/ranglisten">
+        <container cp:type="cpextra" module="mostcommented" cp:__name__="id-2c7abdb6-80e4-442c-a1d9-ff25e6856f52">
           <cp_extra id="mostcommented"/>
         </container>
-        <container cp:type="xml" module="xml" cp:__name__="39c0da06-4f19-4bd4-b72d-e7111688250f" title="Serviceangebote des ZEIT-Verlags">
-          <raw>
-            <ul class="clear">
-              <li class="narrow">
-                <ul>
-                  <li>
-                    <a href="http://diezeit.ebalance.de/public/home.xhtml" rel="nofollow">Gesund abnehmen</a>
-                  </li>
-                  <li>
-                    <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.serviceangeb.digipak.text.digitalpaket">ZEIT Digital-Paket</a>
-                  </li>
-                  <li>
-                    <a href="http://www.zeit.de/angebote/kinotrailer" rel="nofollow">Kinotrailer</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="narrow nomargin">
-                <ul>
-                  <li>
-                    <a href="http://www.zeit.de/angebote/partnersuche" rel="nofollow">Partnersuche</a>
-                  </li>
-                  <li>
-                    <a href="http://marktplatz.zeit.de/veranstaltungen/index" rel="nofollow">Kulturangebote</a>
-                  </li>
-                  <li>
-                    <a href="http://www.bellevue-ferienhaus.de/zeit/" rel="nofollow">Ferienhäuser</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </raw>
-        </container>
-        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="aa739819-7661-41f3-9c7f-9313821f6cf3" layout="368x110" title="Freunde von Freunden: Die Wohndesign-Serie">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/freunde-von-freunden" year="2012" issue="15" ressort="Lebensart" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/freunde-von-freunden" date-last-modified="2013-06-12T08:33:13+00:00" date-first-released="2012-04-05T10:53:19.968235+00:00" date-last-published="2013-06-12T08:33:19.982483+00:00" last-semantic-change="2013-06-12T08:32:03.438303+00:00" contenttype="link">
-            <supertitle py:pytype="str">Wohndesign</supertitle>
-            <title py:pytype="str">Freunde von Freunden</title>
-            <text xsi:nil="true"/>
-            <description xsi:nil="true"/>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/2013-03/fs-alejandro-sticotti-mercedes-hernaez-teaser/" type="jpg" title="Alejandro Sticotti und Mercedes Hernaez" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-              <copyright py:pytype="str" link="hhttp://www.freundevonfreunden.com/interviews/alejandro-sticotti-mercedes-hernaez/">© Ana Armendariz für Freunde von Freunden</copyright>
-            </image>
-          </block>
-          <image type="intern" href="http://xml.zeit.de/lebensart/2012-03/fs-io-wright-fvf-teaser/fs-io-wright-fvf-teaser-368x110.jpg" publication-date="" expires=""/>
-        </container>
-        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="id-1f504986-e8b7-4c69-ac51-11c483b588e7" layout="368x220" title="Serie &quot;Bier!&quot;: Die neue Lust am Brauen">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/kultur/film/2013-11/link-serie-bier" year="2013" issue="48" ressort="Lebensart" author="Nina Anika Klotz" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/bier" date-last-modified="2013-11-22T14:28:52+00:00" date-first-released="" date-last-published="" last-semantic-change="2013-11-22T14:27:58.131645+00:00">
-            <supertitle py:pytype="str">Serie "Bier!"</supertitle>
-            <title py:pytype="str">Die brauen sich was zusammen</title>
-            <text xsi:nil="true"/>
-            <description xsi:nil="true"/>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-11/brauerei-berliner-weisse/" type="jpg" title="Berliner Weiße" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Das Bogk-Bier, nicht zu verwechseln mit dem Bock-Bier. Darauf zu sehen: der Brauer Andreas Bogk in Strichmännchenoptik</bu>
-              <copyright py:pytype="str">© Nina Anika Klotz</copyright>
-            </image>
-          </block>
-          <image type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2013-07/craft-beer/craft-beer-368x220.jpg" publication-date="" expires=""/>
-        </container>
-        <container cp:type="video" module="video" cp:__name__="c089ada3-1fa3-43e5-b76b-a457d0dd71e9">
-          <video videoID="716324869001" player="pls" expires="" format="large"/>
-        </container>
-        <container cp:type="cpextra" module="facebook_connect_box" cp:__name__="id-b5aa5551-6ba3-4076-8745-8445acccee4f">
-          <cp_extra id="facebook_connect_box"/>
-        </container>
-        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="9de94de9-5867-4e8b-aaec-0cdfea167d56" title="Stilkolume: Neue Trends in Mode und Design">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/online/2009/36/pruefer-stilkolumne-link" year="2009" issue="36" ressort="Lebensart" publication-date="2009-09-05T04:02:57+00:00" expires="" ns0:href="http://www.zeit.de/themen/serie/index?q=stilkolumne" date-last-modified="2013-09-19T09:03:30+00:00" date-first-released="2009-09-01T07:46:09.581805+00:00" date-last-published="2013-09-19T09:04:30.062571+00:00" last-semantic-change="2013-09-19T09:03:23.245641+00:00" contenttype="link" author="Tillmann Prüfer">
-            <supertitle py:pytype="str">Stilkolumne</supertitle>
-            <title py:pytype="str">Alle Folgen der wöchentlichen Stilkritik </title>
-            <text py:pytype="str">Von Acne bis Zegna: Tillmann Prüfer über die aktuelle Mode und die neuesten Trends in Beauty und Design.</text>
-            <description py:pytype="str">Von Acne bis Zegna: Tillmann Prüfer über die aktuelle Mode und die neuesten Trends in Beauty und Design.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-08/stilkolumne-samt/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Royales Blau trägt die Frau: Samtjacke von Herno</bu>
-              <copyright py:pytype="str">© Peter Langer</copyright>
-            </image>
-          </block>
-          <image type="intern" href="http://xml.zeit.de/bilder/2009/36/lebensart/stilkolumne-seriebild/stilkolumne-seriebild-368x110.jpg" publication-date="" expires=""/>
-        </container>
       </region>
     </cluster>
-    <cluster area="teaser-mosaic">
-      <region cp:type="teaser-bar" module="normal" area="teaser-row-full" cp:__name__="74d70ac8-cf2e-47a9-8c16-0c3b8e08f54d">
-        <container cp:type="teaser" module="ressort" cp:__name__="f9f4b302-bae7-4f1a-806c-ad813dfa0653" title="Mode" hide-dupes="False" visible="True">
-          <referenced_cp py:pytype="str">http://xml.zeit.de/lebensart/mode/index</referenced_cp>
-          <autopilot>true</autopilot>
-          <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" parse="xml" xpointer="xpointer(/channel/container/block)" href="/var/cms/work/lebensart/mode/index.lead">
-            <xi:fallback>Ziel http://xml.zeit.de/lebensart/mode/index.lead nicht erreichbar.</xi:fallback>
-          </xi:include>
-        </container>
-        <container cp:type="teaser" module="ressort" cp:__name__="231d8021-f8de-43d3-b387-d187fe7dd2b0" title="Partnerschaft" hide-dupes="False" visible="True">
-          <referenced_cp py:pytype="str">http://xml.zeit.de/lebensart/partnerschaft/index</referenced_cp>
-          <autopilot py:pytype="bool">true</autopilot>
-          <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" parse="xml" xpointer="xpointer(/channel/container/block)" href="/var/cms/work/lebensart/partnerschaft/index.lead">
-            <xi:fallback>Ziel http://xml.zeit.de/lebensart/partnerschaft/index.lead nicht erreichbar.</xi:fallback>
-          </xi:include>
-        </container>
-        <container cp:type="teaser" module="ressort" hide-dupes="False" cp:__name__="584f9267-e8a2-4f8e-a804-e338d78dfc56" title="Essen &amp; Trinken" visible="True">
-          <referenced_cp py:pytype="str">http://xml.zeit.de/lebensart/essen-trinken/index</referenced_cp>
-          <autopilot py:pytype="bool">true</autopilot>
-          <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" parse="xml" xpointer="xpointer(/channel/container/block)" href="/var/cms/work/lebensart/essen-trinken/index.lead">
-            <xi:fallback>Ziel http://xml.zeit.de/lebensart/essen-trinken/index.lead nicht erreichbar.</xi:fallback>
-          </xi:include>
-        </container>
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="68612366-0ebf-446b-9e96-4b722bfcd838" title="Fotograf Frank Horvath" visible="True">
-          <block href="http://xml.zeit.de/lebensart/mode/2014-01/fs-frank-horvat-fashion-galerie-hiltawsky" year="2014" issue="2" ressort="Lebensart" contenttype="gallery" publication-date="" expires="2014-03-30T09:04:37+00:00" date-last-modified="2014-01-09T10:25:24+00:00" date-first-released="2014-01-09T10:26:24.424703+00:00" date-last-published="2014-01-09T10:26:24.424703+00:00" last-semantic-change="2014-01-09T09:47:10.485622+00:00">
-            <badges>
-              <badge py:pytype="str">gallery</badge>
-            </badges>
-            <supertitle py:pytype="str">Modefotograf Frank Horvat</supertitle>
-            <title py:pytype="str">Der Anfang der modernen Frau</title>
-            <text py:pytype="str">Er ist eine Legende der Modefotografie: Frank Horvats Bilder prägten über Jahrzehnte Hefte wie "Vogue", "Life" und "Harper's Bazaar". Nun werden sie in Berlin gezeigt.</text>
-            <description py:pytype="str">Er ist eine Legende der Modefotografie: Frank Horvats Bilder prägten über Jahrzehnte Hefte wie "Vogue", "Life" und "Harper's Bazaar". Nun werden sie in Berlin gezeigt.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2014-01/fs-frank-horvat-fashion-teaser/" type="jpg" title="Fotostrecke: Frank Horvat" align="left" publication-date="" expires="2014-03-30T09:04:37+00:00">
-              <bu py:pytype="str">Frank Horvat: "Cover for Harper's Bazaar", Paris, 1967</bu>
-              <copyright py:pytype="str" link="http://www.hiltawsky.com">© Frank Horvat | Courtesy Galerie Hiltawsky</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/2013/47/Kolumne-Mnner" year="2013" issue="47" ressort="Lebensart" author="Susanne Mayer" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2013-11-15T09:36:45+00:00" date-first-released="2013-11-14T06:00:00+00:00" date-last-published="2013-11-15T09:37:45.449908+00:00" last-semantic-change="2013-11-15T09:36:43.932297+00:00">
-            <supertitle py:pytype="str">Kolumne Männer!</supertitle>
-            <title py:pytype="str">Diesmal nur Nettes über den Mann</title>
-            <text py:pytype="str">Nachdem unsere Kolumnistin im Netz so oft angekläfft wurde, wechselt sie nun die Argumentationsrichtung: Zum Glück sind Männer nicht so bekloppt wie viele Frauen.</text>
-            <description py:pytype="str">Nachdem unsere Kolumnistin im Netz so oft angekläfft wurde, wechselt sie nun die Argumentationsrichtung: Zum Glück sind Männer nicht so bekloppt wie viele Frauen.</description>
-            <byline py:pytype="str">von Susanne Mayer</byline>
-            <image base-id="http://xml.zeit.de/kultur/2013-11/tasche/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Victoria Beckham mit ihrer geliebten Birkin-Bag in der Armbeuge (Archiv)</bu>
-              <copyright py:pytype="str">© Frazer Harrison/Getty Images</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/mode/2013-07/kleid-kleines-schwarzes-ausstellung" year="2013" issue="31" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2013-12-02T17:18:01+00:00" date-first-released="2013-08-01T13:46:50.190115+00:00" date-last-published="2013-12-02T18:18:49+00:00" last-semantic-change="2013-08-14T14:31:11.329739+00:00" author="Susanne Mayer">
-            <supertitle py:pytype="str">Ausstellung Little Black Dress</supertitle>
-            <title py:pytype="str">Einfach nur schwarz</title>
-            <text py:pytype="str">Leicht und übermütig beantwortet das kleine schwarze Kleid die ewige Frage: "Was zieh ich an?" Und um nichts anderes geht es in der Mode. </text>
-            <description py:pytype="str">Leicht und übermütig beantwortet das kleine schwarze Kleid die ewige Frage: "Was zieh ich an?" Und um nichts anderes geht es in der Mode. </description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-08/teaser-little-black-dress/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Das kleine Schwarze von Chanel, neu interpretiert von Karl Lagerfeld</bu>
-              <copyright py:pytype="str">© Mona Bismarck American Centre</copyright>
-            </image>
-          </block>
-          <autopilot py:pytype="bool">false</autopilot>
-        </container>
-      </region>
-      <region cp:type="teaser-bar" module="normal" area="teaser-row-full" cp:__name__="3dbb4ed7-d924-4442-9476-ac8a2e1a93dc">
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="0a02ff4e-4daa-4364-981b-582b67f50b43" title="Mode für den Mann" visible="True">
-          <block href="http://xml.zeit.de/lebensart/mode/2014-01/maennermode-winterkollektion-london" year="2014" issue="3" ressort="Lebensart" author="Ulf Lippitz" contenttype="article" publication-date="" expires="" date-last-modified="2014-01-10T14:47:25+00:00" date-first-released="2014-01-10T14:06:59.134591+00:00" date-last-published="2014-01-10T14:48:24.971217+00:00" last-semantic-change="2014-01-10T07:43:35.151047+00:00">
-            <supertitle py:pytype="str">Männermode</supertitle>
-            <title py:pytype="str">An der Coolness sich das Herz erwärmt</title>
-            <text py:pytype="str">Ganz oben sitzt der Hosenbund, weit unten weht der Mantelsaum: In London wurde der erste Schwung Männermode für den Winter vorgestellt. Eine Auslese </text>
-            <description py:pytype="str">Ganz oben sitzt der Hosenbund, weit unten weht der Mantelsaum: In London wurde der erste Schwung Männermode für den Winter vorgestellt. Eine Auslese </description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2014-01/fs-burberry-hackett-saunders-london-mode-maenner-artikel/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Winterkollektion 2014: Langer Mantel von MAN, hohe Taille von Burberry und Block-Pulli von Jonathan Saunders</bu>
-              <copyright py:pytype="str">© Imaxtree</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/mode/2013-11/isabel-marant-hm" year="2013" issue="46" ressort="Lebensart" author="Estelle Marandon" contenttype="article" publication-date="" expires="" date-last-modified="2013-11-14T08:48:02+00:00" date-first-released="2013-11-14T08:15:48.607750+00:00" date-last-published="2013-11-14T08:49:02.670622+00:00" last-semantic-change="2013-11-14T08:14:43.830471+00:00">
-            <supertitle py:pytype="str">Isabel Marant</supertitle>
-            <title py:pytype="str">Die Designerin der Gegensätze</title>
-            <text py:pytype="str">Isabel Marant ist eine der meistkopierten Designerinnen. Nun sind ihre Stücke erstmals für die große Masse zugänglich – in einer Kollektion für H&amp;M.</text>
-            <description py:pytype="str">Isabel Marant ist eine der meistkopierten Designerinnen. Nun sind ihre Stücke erstmals für die große Masse zugänglich – in einer Kollektion für H&amp;M.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-11/isabel-marant/" type="jpg" align="left" publication-date="" expires="2013-12-31T10:05:00+00:00">
-              <bu py:pytype="str">Die Designerin Isabel Marant mit ihrer H&amp;M-Kollektion</bu>
-              <copyright py:pytype="str">© H&amp;M</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/mode/2013-06/fs-untragbar-mode-hochschule-kuenste-bremen" year="2013" issue="23" ressort="Lebensart" contenttype="gallery" publication-date="" expires="" date-last-modified="2013-08-26T16:30:32+00:00" date-first-released="2013-07-26T06:05:35.628711+00:00" date-last-published="2013-07-27T14:21:53.477071+00:00" last-semantic-change="2013-07-26T06:03:13.725756+00:00">
-            <badges>
-              <badge py:pytype="str">gallery</badge>
-            </badges>
-            <supertitle py:pytype="str">Mode-Magazin</supertitle>
-            <title py:pytype="str">Kleid flieht vor Körper</title>
-            <text py:pytype="str">Die Design-Absolventen der Hochschule für Künste Bremen haben ein Modemagazin produziert, in dem nichts so sitzt, wie es soll. Wir zeigen Bilder aus "Untragbar".</text>
-            <description py:pytype="str">Die Design-Absolventen der Hochschule für Künste Bremen haben ein Modemagazin produziert, in dem nichts so sitzt, wie es soll. Wir zeigen Bilder aus "Untragbar".</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-06/fs-untragbar-mode-hochschule-kuenste-bremen-teaser/" type="jpg" title="Fotostrecke: Untragbar - Mode-Magazin" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Julia Eberhardt &amp; Eike Harder &amp; Nadja Kote: "Lunae" </bu>
-              <copyright py:pytype="str" link="http://www.textem.de/index.php?id=2447">© Julia Eberhardt &amp; Eike Harder &amp; Nadja Kote/Textem Verlag</copyright>
-            </image>
-          </block>
-          <autopilot py:pytype="bool">false</autopilot>
-        </container>
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="42953d8b-768d-4683-97cf-f6d6749e1d2d" title="Serie Amuse Buch" visible="True">
-          <block href="http://xml.zeit.de/lebensart/essen-trinken/2013-12/Backbuch-liebesbisschen-laura-seebacher" year="2013" issue="51" ressort="Lebensart" author="Kirsten Haake" contenttype="article" publication-date="" expires="" date-last-modified="2013-12-26T08:35:26+00:00" date-first-released="2013-12-26T08:36:26.080041+00:00" date-last-published="2013-12-26T08:36:26.080041+00:00" last-semantic-change="2013-12-26T08:35:22.633589+00:00">
-            <supertitle py:pytype="str">Serie Amuse Buch</supertitle>
-            <title py:pytype="str">Kuchen für den Catwalk</title>
-            <text py:pytype="str">Elegant, ein bisschen süß und farbenfroh: Das Backbuch "Liebesbisschen" bietet Kuchen, Keksen und Torten einen echten Laufsteg. Da kann man auch mal ausrutschen.</text>
-            <description py:pytype="str">Elegant, ein bisschen süß und farbenfroh: Das Backbuch "Liebesbisschen" bietet Kuchen, Keksen und Torten einen echten Laufsteg. Da kann man auch mal ausrutschen.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-12/teaser-kochbuch/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-              <copyright py:pytype="str">© Gräfe und Unzer Verlag/Fotografie: Elissavet Patrikiou</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/essen-trinken/2013-11/stevan-paul-kochbuch-deutschland-vegetarisch" year="2013" issue="46" ressort="Lebensart" author="Kirsten Haake" contenttype="article" publication-date="" expires="" date-last-modified="2013-11-15T16:44:06+00:00" date-first-released="2013-11-15T16:45:05.945171+00:00" date-last-published="2013-11-15T16:45:05.945171+00:00" last-semantic-change="2013-11-15T16:44:02.080892+00:00">
-            <supertitle py:pytype="str">Serie Amuse Buch</supertitle>
-            <title py:pytype="str">Der Speck kann weg</title>
-            <text py:pytype="str">Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</text>
-            <description py:pytype="str">Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-11/semmelknoedel/" type="jpg" title="semmelknödel mit rahmkraut" alt="Semmelknödel mit Rahmkraut aus &quot;Deutschland vegetarisch&quot;" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Dreierlei Klöße aus "Deutschland vegetarisch"</bu>
-              <copyright py:pytype="str">© Kramp + Gölling</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/essen-trinken/2013-07/weinkolumne-chianti-comeback-toskana" year="2013" issue="31" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2013-12-02T17:20:26+00:00" date-first-released="2013-07-30T15:20:50.176115+00:00" date-last-published="2013-12-02T18:20:41+00:00" last-semantic-change="2013-07-30T15:19:43.217623+00:00" author="Fabian Lange;Cornelius Lange">
-            <supertitle py:pytype="str">Kolumne Die Ausleser</supertitle>
-            <title py:pytype="str">Der Chianti hat eine zweite Chance verdient</title>
-            <text py:pytype="str">Erst Heilsbringer, dann Massenware: Der Chianti ist tief gefallen. Doch engagierte Winzer retten dem Wein in der Bastflasche die Ehre. </text>
-            <description py:pytype="str">Erst Heilsbringer, dann Massenware: Der Chianti ist tief gefallen. Doch engagierte Winzer retten dem Wein in der Bastflasche die Ehre. </description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-chianti/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
-              <copyright py:pytype="str">© Reuters/Alessandro Bianchi</copyright>
-            </image>
-          </block>
-          <autopilot>false</autopilot>
-        </container>
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="ee7929e0-4a73-4cf2-9618-84028deae22f" title="Stilkolumne" visible="True">
-          <block href="http://xml.zeit.de/2013/48/stilkolumne-kindlich" year="2013" issue="48" ressort="Lebensart" author="Tillmann Prüfer" contenttype="article" publication-date="2013-11-21T08:58:45+00:00" expires="" date-last-modified="2013-11-25T07:02:30+00:00" date-first-released="2013-11-21T06:00:00+00:00" date-last-published="2013-11-25T07:03:30.010731+00:00" last-semantic-change="2013-11-20T20:19:15.574140+00:00">
-            <supertitle py:pytype="str">Stilkolumne</supertitle>
-            <title py:pytype="str">Im Teddymantel wieder Kind sein</title>
-            <text py:pytype="str">Tu mir nichts, dann tu ich dir auch nichts: Warum bringen die Designer plötzlich Kuschelmode auf den Markt?</text>
-            <description py:pytype="str">Tu mir nichts, dann tu ich dir auch nichts: Warum bringen die Designer plötzlich Kuschelmode auf den Markt?</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-11/stilkolumne-teddymantel/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Teddymantel von Max Mara</bu>
-              <copyright py:pytype="str">© Peter Langer</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/mode/2013-07/3d-mode-iris-van-herpen" year="2013" issue="28" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2013-12-02T17:40:43+00:00" date-first-released="2013-07-04T13:02:31.704327+00:00" date-last-published="2013-12-02T18:41:21+00:00" last-semantic-change="2013-07-04T15:53:57.194360+00:00" author="Jina Khayyer">
-            <supertitle py:pytype="str">3D-Mode</supertitle>
-            <title py:pytype="str">Kunst oder Kleid?</title>
-            <text py:pytype="str">In ihren Schuhen und Kleidern kann man nur stehen. Trotzdem sollte man sich den Namen Iris van Herpen merken. Ihre Haute Couture kommt aus dem 3D-Drucker. Von J. Khayyer</text>
-            <description py:pytype="str">In ihren Schuhen und Kleidern kann man nur stehen. Trotzdem sollte man sich den Namen Iris van Herpen merken. Ihre Haute Couture kommt aus dem 3D-Drucker. Von J. Khayyer</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-07/iris-van-herpen/" type="jpg" title="Iris van Herpen" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Die Designerin Iris van Herpen (links) grüßt nach ihrer Haute Couture Präsentation das Publikum.</bu>
-              <copyright py:pytype="str">© Miguel Medina/AFP/Getty Images</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/mode/2013-04/lwren-scott-modedesign" year="2013" issue="17" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2013-12-02T18:51:33+00:00" date-first-released="2013-05-09T12:32:07.590779+00:00" date-last-published="2013-12-02T19:52:45+00:00" last-semantic-change="2013-05-09T12:30:54.681581+00:00" author="Estelle Marandon">
-            <supertitle py:pytype="str">Designerin L'Wren Scott</supertitle>
-            <title py:pytype="str">Die strengen Kleider der Grandes Dames</title>
-            <text py:pytype="str">Die Größe zählt doch: Weil ihr als Teenager nichts gepasst hat, begann L'Wren Scott selbst Mode zu machen. Ihre Bleistiftröcke und Samtroben geben Hollywooddiven Würde.</text>
-            <description py:pytype="str">Die Größe zählt doch: Weil ihr als Teenager nichts gepasst hat, begann L'Wren Scott selbst Mode zu machen. Ihre Bleistiftröcke und Samtroben geben Hollywooddiven Würde.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/mode/2013-04/nicole-kidman-lwren-scott/" type="jpg" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Nicole Kidman in einem Kleid von L'Wren Scott auf der Oscarverleihung 2013</bu>
-              <copyright py:pytype="str">© Christopher Polk/Getty Images</copyright>
-            </image>
-          </block>
-          <autopilot py:pytype="bool">false</autopilot>
-        </container>
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="13072ec0-c4e6-49ec-8d51-aebeca540736" title="Stadtentwicklung" visible="True">
-          <block href="http://xml.zeit.de/lebensart/2013-09/fs-architektur-chile-white-mountains-2" year="2013" issue="38" ressort="Lebensart" contenttype="gallery" publication-date="" expires="" date-last-modified="2013-10-17T16:17:20+00:00" date-first-released="2013-10-17T16:18:20.616001+00:00" date-last-published="2013-10-17T16:18:20.616001+00:00" last-semantic-change="2013-10-17T16:10:15.830050+00:00">
-            <badges>
-              <badge py:pytype="str">gallery</badge>
-            </badges>
-            <supertitle py:pytype="str">Chile</supertitle>
-            <title py:pytype="str">Architekten als Landschaftsbauer</title>
-            <text py:pytype="str">Chile ist ein Land der Gegensätze. Diese Vielfalt spiegelt sich auch in seiner modernen Architektur wider. Ein Bildband stellt aufsehenerregende Gebäude vor.</text>
-            <description py:pytype="str">Chile ist ein Land der Gegensätze. Diese Vielfalt spiegelt sich auch in seiner modernen Architektur wider. Ein Bildband stellt aufsehenerregende Gebäude vor.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/2013-09/fs-architektur-chile-white-mountains-teaser/" type="jpg" title="Architektur in Chile Teaser" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-              <copyright py:pytype="str">© Carlos Eguigurren</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/lebensart/2013-08/fs-eastern-promises-architektur-ostasien-2" year="2013" issue="32" ressort="Lebensart" contenttype="gallery" publication-date="" expires="" date-last-modified="2013-08-22T05:37:55+00:00" date-first-released="2013-08-22T05:38:54.234644+00:00" date-last-published="2013-08-22T05:38:54.234644+00:00" last-semantic-change="2013-08-22T05:37:26.689672+00:00">
-            <badges>
-              <badge py:pytype="str">gallery</badge>
-            </badges>
-            <supertitle py:pytype="str">Architektur in Asien</supertitle>
-            <title py:pytype="str">Häuser als Katalysatoren des Wandels</title>
-            <text py:pytype="str">Was passiert in der Architektur Ostasiens abseits vom Hype um Stararchitekten? Der Band "Eastern Promises" zeigt innovative Bauten, die Region und Menschen respektieren. </text>
-            <description py:pytype="str">Was passiert in der Architektur Ostasiens abseits vom Hype um Stararchitekten? Der Band "Eastern Promises" zeigt innovative Bauten, die Region und Menschen respektieren. </description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/lebensart/2013-08/fs-eastern-promises-architektur-ostasien-teaser/" type="jpg" title="Eastern Promises Teaser" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-              <copyright py:pytype="str">© Shu He</copyright>
-            </image>
-          </block>
-          <block href="http://xml.zeit.de/2013/06/Architektur-Rohbau-Aesthetik" year="2013" issue="6" ressort="Kultur" author="Tobias Timm" contenttype="article" publication-date="2013-02-07T03:33:00+00:00" expires="" date-last-modified="2013-02-13T18:36:13+00:00" date-first-released="2013-01-31T06:00:00+00:00" date-last-published="2013-02-13T18:37:12.585950+00:00" last-semantic-change="2013-02-13T18:35:01.962227+00:00">
-            <supertitle py:pytype="str">Architektur</supertitle>
-            <title py:pytype="str">Recycelte Häuser aus modernen Ruinen</title>
-            <text py:pytype="str">Umbaubewegung: Innovative Architekten nutzen vorhandene Bausubstanz und Industriestoffe, um Neues zu schaffen. Nicht alle ihrer Projekte sind für die Ewigkeit gedacht. </text>
-            <description py:pytype="str">Umbaubewegung: Innovative Architekten nutzen vorhandene Bausubstanz und Industriestoffe, um Neues zu schaffen. Nicht alle ihrer Projekte sind für die Ewigkeit gedacht. </description>
-            <byline py:pytype="str">Von Tobias Timm</byline>
-            <image base-id="http://xml.zeit.de/kultur/2013-02/brandlhuber/" type="jpg" alt="Das Gebäude aus Beton und Glas von Arno Brandlhuber iin Berlin" align="left" publication-date="" expires="">
-              <bu py:pytype="str">Das Gebäude aus Beton und Glas von Arno Brandlhuber iin Berlin</bu>
-              <copyright py:pytype="str" link="http://www.freundevonfreunden.com/interviews/arno-brandlhuber/">© Philipp Langenheim für Freunde von Freunden </copyright>
-            </image>
-          </block>
-          <autopilot py:pytype="bool">false</autopilot>
-        </container>
-      </region>
-      <region cp:type="teaser-bar" module="mr" area="teaser-row-full" cp:__name__="2841b423-a9d0-4354-81d0-070e13f7ec54">
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="0d542e31-ec88-4d27-a8e7-f9074fb88974" title="ZEIT SHOP" publisher="Verlagsangebot" publisher_url="http://shop.zeit.de/category/2130-Bilderbuchschatz?et=l6VVNm&amp;et_cid=19&amp;et_lid=194&amp;et_sub=KW_9_Bilderbuchschatz" supertitle_url="http://shop.zeit.de/category/2130-Bilderbuchschatz?et=l6VVNm&amp;et_cid=19&amp;et_lid=194&amp;et_sub=KW_9_Bilderbuchschatz" visible="True">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/Links_Shopleiste/zs_bilderbuecher" year="2013" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/category/2130-Bilderbuchschatz?et=l6VVNm&amp;et_cid=19&amp;et_lid=194&amp;et_sub=KW_9_Bilderbuchschatz" ns0:target="_blank" date-last-modified="2014-02-27T14:39:01+00:00" date-first-released="2013-03-07T16:26:04.644769+00:00" date-last-published="2014-02-27T14:40:01.259581+00:00" last-semantic-change="2014-02-27T14:38:50.949685+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">Die ZEIT-Edition "Bilderbuchschatz"</title>
-            <text py:pytype="str">Ein Geschenk fürs Leben: Zwölf wundervolle Bilderbücher für Kinder von 0 bis 5 Jahren in der exklusiven ZEIT-Edition – mit hochwertiger Schatzkiste zum Sitzen und Verstau</text>
-            <description py:pytype="str">Ein Geschenk fürs Leben: Zwölf wundervolle Bilderbücher für Kinder von 0 bis 5 Jahren in der exklusiven ZEIT-Edition – mit hochwertiger Schatzkiste zum Sitzen und Verstau</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/Links_Shopleiste/bilder/zs_bilderbuchschatz_neu/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
-          </block>
-        </container>
-        <container cp:type="teaser" module="ressort" hide-dupes="True" cp:__name__="id-40213ea8-e3c4-453b-8c7e-52c2d3d8b0f3" title="Stellenmarkt" publisher="Verlagsangebot" publisher_url="http://jobs.zeit.de/?wt_mc=zeit_de.intern.verlagszeile.zon_lebensart.anzeige.stellenmarkt_frau_bob.bild_text&amp;partner=Lbi" supertitle_url="http://jobs.zeit.de/?wt_mc=zeit_de.intern.verlagszeile.zon_lebensart.anzeige.stellenmarkt_frau_bob.bild_text&amp;partner=Lbi" visible="True">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/Links/stellenmarkt_karriere" year="2013" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://jobs.zeit.de/?wt_mc=zeit_de.intern.verlagszeile.zon_startseite.anzeige.stellenmarkt_frau_pony.bild_text&amp;partner=Lbi" ns0:target="_blank" date-last-modified="2014-02-28T08:46:27+00:00" date-first-released="2013-03-28T08:43:50.281028+00:00" date-last-published="2014-02-28T08:47:27.558062+00:00" last-semantic-change="2014-02-28T08:46:11.297578+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">Neue Stellenangebote im ZEIT Stellenmarkt</title>
-            <text py:pytype="str">Entdecken Sie vielfältige Stellenangebote mit Verantwortung. Die Online-Jobsuche bietet Ihnen alle aktuellen Jobs der gedruckten ZEIT und vieles mehr.</text>
-            <description py:pytype="str">Entdecken Sie vielfältige Stellenangebote mit Verantwortung. Die Online-Jobsuche bietet Ihnen alle aktuellen Jobs der gedruckten ZEIT und vieles mehr.</description>
-            <byline xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/Links/stellenmarkt-2/ZEIT_Stellenmarkt_3/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
-          </block>
-        </container>
-      </region>
-    </cluster>
-    <title>Lebensart</title>
+    <cluster area="teaser-mosaic"/>
+    <supertitle>ZMO CP</supertitle>
+    <title>ZMO</title>
+    <subtitle>ZMO CP</subtitle>
   </body>
-  <feed>
-    <reference type="intern" href="http://xml.zeit.de/2014/10/wochenmarkt-huehnchen-curry" year="2014" issue="10" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="2014-02-27T08:50:00+00:00" expires="">
-      <supertitle py:pytype="str">Serie Wochenmarkt</supertitle>
-      <title py:pytype="str">Hühnchen statt Extremsport</title>
-      <text py:pytype="str">Hähnchenkeulen mit Piment, Chili und Kreuzkümmel würzen, dazu Kicherbsen und Aprikosen geben, das Ganze in den Backofen schieben – und fertig ist das gute Leben.</text>
-      <description py:pytype="str">Hähnchenkeulen mit Piment, Chili und Kreuzkümmel würzen, dazu Kicherbsen und Aprikosen geben, das Ganze in den Backofen schieben – und fertig ist das gute Leben.</description>
-      <byline py:pytype="str">von Elisabeth Raether</byline>
-      <image base-id="http://xml.zeit.de/2014/10/wochenmarkt-huehnchen/" type="jpg" title="Hühnchen mit Kichererbsen" alt="Hühnchen mit Kichererbsen" align="left" publication-date="" expires="2014-05-24T17:17:00+00:00">
-        <bu py:pytype="str">Hühnchen mit Kichererbsen</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/10/stilkolumne-pvc-mode" year="2014" issue="10" ressort="Lebensart" author="Tillmann Prüfer" contenttype="article" publication-date="2014-02-27T08:51:00+00:00" expires="">
-      <supertitle py:pytype="str">Stilkolumne</supertitle>
-      <title py:pytype="str">Mode für Vinylfans</title>
-      <text py:pytype="str">PVC-Mode ist in Fetischkreisen weit verbreitet. Nun verwenden auch mutige Designer das verruchte Material und die weniger Beherzten lassen Leder wie Plastik erscheinen. </text>
-      <description py:pytype="str">PVC-Mode ist in Fetischkreisen weit verbreitet. Nun verwenden auch mutige Designer das verruchte Material und die weniger Beherzten lassen Leder wie Plastik erscheinen. </description>
-      <byline py:pytype="str">von Tillmann Prüfer</byline>
-      <image base-id="http://xml.zeit.de/2014/10/stilkolumne-vinyl/" type="jpg" alt="Glänzendes schwarzes Vinyl ist Bestandteil dieses Kleids von Calvin Klein Collection" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Glänzendes schwarzes Vinyl ist Bestandteil dieses Kleids von Calvin Klein Collection</bu>
-        <copyright py:pytype="str">© Peter Langer</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/mode/2014-02/fs-jeans-mode-japan-textil-industrie-2" year="2014" issue="10" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">gallery</badge>
-      </badges>
-      <supertitle py:pytype="str">Kojima</supertitle>
-      <title py:pytype="str">Das Labor der perfekten Patina</title>
-      <text py:pytype="str">Japanisches Denim, für Kenner bedeutet das: Jeans in außergewöhnlicher Qualität. Das Zentrum der fernöstlichen Jeansindustrie ist die Region Kojima mit 200 Manufakturen.</text>
-      <description py:pytype="str">Japanisches Denim, für Kenner bedeutet das: Jeans in außergewöhnlicher Qualität. Das Zentrum der fernöstlichen Jeansindustrie ist die Region Kojima mit 200 Manufakturen.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/fs-jeans-mode-japan-textil-industrie-teaser/" type="jpg" title="Jeansherstellung Japan" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Chris McGrath/Getty Images</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/10/deutschlandkarte-liebesbruecken" year="2014" issue="10" ressort="Lebensart" author="Matthias Stolz" contenttype="article" publication-date="2014-02-27T08:46:00+00:00" expires="">
-      <supertitle py:pytype="str">Serie Deutschlandkarte</supertitle>
-      <title py:pytype="str">Liebesbrücken</title>
-      <text py:pytype="str">Ewige Liebe schwört man sich heutzutage mithilfe eines Vorhängeschlosses. Auf welchen Brücken Sie ihre romantische Ader ausleben können, verrät die Deutschlandkarte.</text>
-      <description py:pytype="str">Ewige Liebe schwört man sich heutzutage mithilfe eines Vorhängeschlosses. Auf welchen Brücken Sie ihre romantische Ader ausleben können, verrät die Deutschlandkarte.</description>
-      <byline py:pytype="str">von Matthias Stolz</byline>
-      <image base-id="http://xml.zeit.de/lebensart/2014-02/d-karte-10/" type="jpg" align="left" href="http://images.zeit.de/lebensart/2014-02/d-karte-10/d-karte-10-thickbox.jpg" publication-date="" expires="">
-        <bu py:pytype="str">Klicken Sie auf das Bild, um die Karte zu vergrößern</bu>
-        <copyright py:pytype="str" link="http://www.joergblock.de/">© Jörg Block</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/09/auktion-vintage-haute-couture" year="2014" issue="9" ressort="Lebensart" author="Susanne Mayer" contenttype="article" publication-date="2014-02-27T03:15:45+00:00" expires="">
-      <supertitle py:pytype="str">Vintage Couture</supertitle>
-      <title py:pytype="str">Und natürlich Dior!</title>
-      <text py:pytype="str">Ein Mann liebt große Roben. Wieso? Eine Begegnung mit dem Sammler einer Kollektion von Vintage Couture – die er schließlich doch versteigern ließ.  </text>
-      <description py:pytype="str">Ein Mann liebt große Roben. Wieso? Eine Begegnung mit dem Sammler einer Kollektion von Vintage Couture – die er schließlich doch versteigern ließ.  </description>
-      <byline py:pytype="str">von Susanne Mayer</byline>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/vintage-mode-teaser/" type="jpg" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Cocktailkleid von David Fielden, um 1985   </bu>
-        <copyright py:pytype="str">© Kunsthaus Lempertz 2013  </copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-02/fs-freunde-von-freunden-austin" year="2014" issue="9" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">gallery</badge>
-      </badges>
-      <supertitle py:pytype="str">Serie Freunde von Freunden</supertitle>
-      <title py:pytype="str">Auf dem Sonnendeck</title>
-      <text py:pytype="str">Die Textildesignerin Alyson Fox lebt und arbeitet in einem lichten Bungalow außerhalb von Austin, Texas. Das Wohnblog "Freunde von Freunden" war bei ihr zu Gast.</text>
-      <description py:pytype="str">Die Textildesignerin Alyson Fox lebt und arbeitet in einem lichten Bungalow außerhalb von Austin, Texas. Das Wohnblog "Freunde von Freunden" war bei ihr zu Gast.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/2014-02/fs-freunde-von-freunden-austin-teaser-2/" type="jpg" title="FvF Teaser" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str" link="http://www.freundevonfreunden.com/interviews/alyson-fox/">© Michael Muller für Freunde von Freunden</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/rick-owens-mode-designer" year="2014" issue="8" ressort="Lebensart" author="Jina Khayyer" contenttype="article" publication-date="2014-02-13T08:48:00+00:00" expires="" genre="interview">
-      <supertitle py:pytype="str">Rick Owens</supertitle>
-      <title py:pytype="str">"Ich bin ein Diktator"</title>
-      <text py:pytype="str">Die Mode von Rick Owens gehört zum eigenwilligsten, was die Pariser Fashion Week zu bieten hat. Grunge und Sport bestimmen seine Entwürfe, Kollaps und Erfolg sein Leben. </text>
-      <description py:pytype="str">Die Mode von Rick Owens gehört zum eigenwilligsten, was die Pariser Fashion Week zu bieten hat. Grunge und Sport bestimmen seine Entwürfe, Kollaps und Erfolg sein Leben. </description>
-      <byline py:pytype="str">von  Jina Khayyer</byline>
-      <image base-id="http://xml.zeit.de/2014/08/rick-owens/" type="jpg" title="Rick Owens" alt="Rick Owens" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Dem Designer Rick Owens bedeuten Kleider weniger, seit er seinen Körper in Form gebracht hat.  </bu>
-        <copyright py:pytype="str">© Adrien Dirand</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-02/fs-wilhelm-deffke-design-2" year="2014" issue="8" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">gallery</badge>
-      </badges>
-      <supertitle py:pytype="str">Gestalter Wilhelm Deffke</supertitle>
-      <title py:pytype="str">Vater des Logos</title>
-      <text py:pytype="str">Wilhelm Deffke gilt als Pionier des modernen Corporate Designs. Die Logos und Plakate, die er vor 100 Jahren für Reemtsma und Hapag entwarf, sind heute noch zeitgemäß.</text>
-      <description py:pytype="str">Wilhelm Deffke gilt als Pionier des modernen Corporate Designs. Die Logos und Plakate, die er vor 100 Jahren für Reemtsma und Hapag entwarf, sind heute noch zeitgemäß.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/2014-02/fs-wilhelm-deffke-design-teaser/" type="jpg" title="Wilhelm Deffke Teaser" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Bröhan Design Foundation</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/09/muenchen-designer" year="2014" issue="9" ressort="Lebensart" contenttype="article" publication-date="2014-02-20T08:55:00+00:00" expires="">
-      <supertitle py:pytype="str">Design-Hauptstadt</supertitle>
-      <title py:pytype="str">Warum ich München liebe</title>
-      <text py:pytype="str">Ausgerechnet in München arbeiten die besten deutschen Designer. Was ist an der Stadt so inspirierend? Sieben von ihnen haben diese Frage in einer Zeichnung beantwortet.</text>
-      <description py:pytype="str">Ausgerechnet in München arbeiten die besten deutschen Designer. Was ist an der Stadt so inspirierend? Sieben von ihnen haben diese Frage in einer Zeichnung beantwortet.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/2014/09/a-kind-of-guise-3/" type="jpg" title="Grafik von A Kind of Guise" alt="Grafik von A Kind of Guise" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Grafik von A Kind of Guise</bu>
-        <copyright py:pytype="str">© A Kind of Guise</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/09/stilkolumne-unterwaesche" year="2014" issue="9" ressort="Lebensart" author="Tillmann Prüfer" contenttype="article" publication-date="2014-02-20T08:47:00+00:00" expires="">
-      <supertitle py:pytype="str">Stilkolumne</supertitle>
-      <title py:pytype="str">Das Drunter ist das Drüber</title>
-      <text py:pytype="str">Auch Unterwäsche ist ein Statussymbol, in der Mode wird sie deshalb sichtbarer. Ein Trend, der auch etwas über den Wandel des Verhältnisses von Mann und Frau erzählt.</text>
-      <description py:pytype="str">Auch Unterwäsche ist ein Statussymbol, in der Mode wird sie deshalb sichtbarer. Ein Trend, der auch etwas über den Wandel des Verhältnisses von Mann und Frau erzählt.</description>
-      <byline py:pytype="str">von Tillmann Prüfer</byline>
-      <image base-id="http://xml.zeit.de/2014/09/stilkolumne-unterwaesche-2/" type="jpg" alt="Rosa Stunde: Seidenslip mit Spitze von Mimi Holliday, 49 Euro" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Rosa Stunde: Seidenslip mit Spitze von Mimi Holliday, 49 Euro</bu>
-        <copyright py:pytype="str">© Peter Langer</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-02/mailaender-modenschauen-herbst-winter" year="2014" issue="9" ressort="Lebensart" author="Tillmann Prüfer" contenttype="article" publication-date="" expires="">
-      <supertitle py:pytype="str">Mailänder Modeschauen</supertitle>
-      <title py:pytype="str">Zurück zur Natürlichkeit</title>
-      <text py:pytype="str">Ein Kleid aus Wollfilz für die angezogene Frau, golddurchwebte Transparenz für die ausgezogene Frau: In Mailand versöhnt die Herbstmode zwei Entwürfe von Weiblichkeit.</text>
-      <description py:pytype="str">Ein Kleid aus Wollfilz für die angezogene Frau, golddurchwebte Transparenz für die ausgezogene Frau: In Mailand versöhnt die Herbstmode zwei Entwürfe von Weiblichkeit.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/mailand-fashion-mode-bottega-veneta/" type="jpg" title="Mailand Fashion Mode Bottega Veneta" alt="Mailand Fashion Mode Bottega Veneta" align="left" publication-date="" expires="2014-05-23T16:19:34+00:00">
-        <bu py:pytype="str">Models präsentieren die Kollektion von Bottega Veneta auf den Mailänder Modenschauen.</bu>
-        <copyright py:pytype="str">© Daniel Dal Zennaro/EPA/dpa</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/09/wochenmarkt-rote-beete-salat-mozzarella" year="2014" issue="9" ressort="Lebensart" author="Anke Gröner" contenttype="article" publication-date="2014-02-20T08:46:00+00:00" expires="">
-      <supertitle py:pytype="str">Serie Wochenmarkt</supertitle>
-      <title py:pytype="str">Kalte Tage, Rote Bete</title>
-      <text py:pytype="str">Der Brite Hugh Fearnley-Whittingstall wühlt gerne in Muttererde und empfiehlt seinen Landsleuten "genial einfache" Gerichte. Dieser Rote-Bete-Salat ist eines davon.</text>
-      <description py:pytype="str">Der Brite Hugh Fearnley-Whittingstall wühlt gerne in Muttererde und empfiehlt seinen Landsleuten "genial einfache" Gerichte. Dieser Rote-Bete-Salat ist eines davon.</description>
-      <byline py:pytype="str">von Anke Gröner</byline>
-      <image base-id="http://xml.zeit.de/2014/09/wochenmarkt-rote-beete-salat/" type="jpg" title="Rote-Beete-Salat mit Büffelmozzarella" alt="Rote-Beete-Salat mit Büffelmozzarella" align="left" publication-date="" expires="2014-05-18T12:35:30+00:00">
-        <bu py:pytype="str">Rote-Beete-Salat mit Büffelmozzarella</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/mode-turnschuhe-sneaker" year="2014" issue="8" ressort="Lebensart" author="Anja Francesca Richter" contenttype="article" publication-date="2014-02-13T08:47:00+00:00" expires="">
-      <supertitle py:pytype="str">Turnschuhe</supertitle>
-      <title py:pytype="str">Freiheit für die Füße!</title>
-      <text py:pytype="str">Turnschuhe bestimmen die Modewelt. Der Erfolg der Sneakers ist ein Zeichen dafür, dass Frauen immer weniger bereit sind, sich für die Mode zu opfern.</text>
-      <description py:pytype="str">Turnschuhe bestimmen die Modewelt. Der Erfolg der Sneakers ist ein Zeichen dafür, dass Frauen immer weniger bereit sind, sich für die Mode zu opfern.</description>
-      <byline py:pytype="str">von Anja Francesca Richter</byline>
-      <image base-id="http://xml.zeit.de/2014/08/turnschuhe/" type="jpg" title="Sneakers" alt="Sneakers aus Leder von Louis Vuitton und aus Alligator-Imitat von Hogan" align="left" publication-date="" expires="2014-03-13T09:42:20+00:00">
-        <bu py:pytype="str">Sneakers aus Leder von Louis Vuitton und aus Alligator-Imitat von Hogan</bu>
-        <copyright py:pytype="str">© Lukas Gansterer</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2014-02/landwirtschaft-tierhaltung-veganismus" year="2014" issue="8" ressort="Lebensart" author="Thomas Trueblood" contenttype="article" publication-date="" expires="" genre="leserartikel">
-      <supertitle py:pytype="str">Veganismus</supertitle>
-      <title py:pytype="str">Wir Landwirte, Herren über Leben und Tod</title>
-      <text py:pytype="str">Tierliebe verträgt sich nicht mit der Zucht von Nutztieren. Aber diesen Widerspruch müssen wir aushalten, wenn wir Fleisch und Milchprodukte konsumieren wollen.</text>
-      <description py:pytype="str">Tierliebe verträgt sich nicht mit der Zucht von Nutztieren. Aber diesen Widerspruch müssen wir aushalten, wenn wir Fleisch und Milchprodukte konsumieren wollen.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2014-02/schafe-lamm/" type="jpg" title="Mutterschaf mit Lamm" alt="Ein Lamm mit seiner Mutter" align="left" publication-date="2014-02-19T14:42:53+00:00" expires="2014-05-19T13:42:00+00:00">
-        <bu py:pytype="str">Ein Lamm mit seiner Mutter</bu>
-        <copyright py:pytype="str">© David Ebener/dpa</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/09/industrie-design-muenchen" year="2014" issue="9" ressort="Lebensart" author="Alard von Kittlitz" contenttype="article" publication-date="2014-02-20T08:56:00+00:00" expires="">
-      <supertitle py:pytype="str">Design aus München</supertitle>
-      <title py:pytype="str">Wo die schönen Dinge wohnen</title>
-      <text py:pytype="str">Menschen wie Konstantin Grcic haben München zur deutschen Design-Hauptstadt gemacht. Jetzt wächst an der Isar schon die dritte Generation von Industriedesignern heran. </text>
-      <description py:pytype="str">Menschen wie Konstantin Grcic haben München zur deutschen Design-Hauptstadt gemacht. Jetzt wächst an der Isar schon die dritte Generation von Industriedesignern heran. </description>
-      <byline py:pytype="str">von Alard von Kittlitz</byline>
-      <image base-id="http://xml.zeit.de/2014/09/charlotte-talbot/" type="jpg" title="Charlotte Talbot" alt="Charlotte Talbot" align="left" publication-date="" expires="2014-03-20T13:05:02+00:00">
-        <bu py:pytype="str">Industriedesignern Charlotte Talbot</bu>
-        <copyright py:pytype="str">© Robert Fischer</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-02/quiz-mundarten-redaktion" year="2014" issue="9" ressort="Lebensart" contenttype="quiz" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">video</badge>
-      </badges>
-      <supertitle py:pytype="str">Tag der Muttersprache</supertitle>
-      <title py:pytype="str">Mundart, Kauderwelsch und Zungenschlag</title>
-      <text py:pytype="str">Auch in einer Redaktion gibt es mal Verständnisprobleme. Wir haben unsere Dialektiker zum Tag der Muttersprache vor die Kamera gebeten. Können Sie ihnen folgen? Ein Quiz</text>
-      <description py:pytype="str">Auch in einer Redaktion gibt es mal Verständnisprobleme. Wir haben unsere Dialektiker zum Tag der Muttersprache vor die Kamera gebeten. Können Sie ihnen folgen? Ein Quiz</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/kultur/2014-02/mundart/" type="jpg" title="Mundart" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© ZEIT ONLINE</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/mode/2014-02/paul-smith-ausstellung-london" year="2014" issue="9" ressort="Lebensart" author="Ulf Lippitz" contenttype="article" publication-date="" expires="">
-      <supertitle py:pytype="str">Paul Smith</supertitle>
-      <title py:pytype="str">Hello, Paul! Willkommen in Deutschland!</title>
-      <text py:pytype="str">Die Mode des britischen Designers Paul Smith entsteht in einem Raum aus Tradition, Witz und Experiment. Nun eröffnet der erste Laden in Hamburg. Zeit für ein Kennenlernen</text>
-      <description py:pytype="str">Die Mode des britischen Designers Paul Smith entsteht in einem Raum aus Tradition, Witz und Experiment. Nun eröffnet der erste Laden in Hamburg. Zeit für ein Kennenlernen</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/smith-models/" type="jpg" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Farbe, Florales und die britische Schneiderkunst machen die Mode von Paul Smith aus.</bu>
-        <copyright py:pytype="str">© Promotion Paul Smith / Design Museum London</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/mode/2014-02/fs-fashion-week-london" year="2014" issue="8" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">gallery</badge>
-      </badges>
-      <supertitle py:pytype="str">Fashion Week London</supertitle>
-      <title py:pytype="str">Remix für den Kleiderschrank </title>
-      <text py:pytype="str">Im Pyjama zum Dinner? Nerz zu Nylon? Als Cowgirl in die Chefetage? Auf der Londoner Fashion Week gibt ein munteres Sampling von Materialien und Referenzen den Ton an.  </text>
-      <description py:pytype="str">Im Pyjama zum Dinner? Nerz zu Nylon? Als Cowgirl in die Chefetage? Auf der Londoner Fashion Week gibt ein munteres Sampling von Materialien und Referenzen den Ton an.  </description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/fs-fashion-week-london-teaser/" type="jpg" title="Fashion Week London Teaser" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Jonathan Brady/dpa</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-01/fs-freunde-von-freunden-melbourne" year="2014" issue="5" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">gallery</badge>
-      </badges>
-      <supertitle py:pytype="str">Wohnserie "Freunde von Freunden"</supertitle>
-      <title py:pytype="str">Zwischen Büchern wohnt sich's vielseitig</title>
-      <text py:pytype="str">Die australische Künstlerin Nell lebt in einem sonnigen Apartment in Sydney. Das Wohnblog "Freunde von Freunden" entlockte ihr ein Einrichtungsgeheimnis.</text>
-      <description py:pytype="str">Die australische Künstlerin Nell lebt in einem sonnigen Apartment in Sydney. Das Wohnblog "Freunde von Freunden" entlockte ihr ein Einrichtungsgeheimnis.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/2014-01/fs-freunde-von-freunden-melbourne-teaser/" type="jpg" title="Freunde von Freunden Melbourne" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str" link="http://www.freundevonfreunden.com/interviews/nell/">© Penny Lane für Freunde von Freunden</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/maenner-ostdeutschland" year="2014" issue="8" ressort="Lebensart" author="Anne Hähnig;Isabel Pfaff" contenttype="article" publication-date="2014-02-13T08:58:44+00:00" expires="">
-      <supertitle py:pytype="str">Geschlechterrollen</supertitle>
-      <title py:pytype="str">Der unscheinbare Held</title>
-      <text py:pytype="str">Die "Ostfrau" ist ein Phänomen, der "Ostmann" ein Phantom. Dabei hat er den Männern des Westens vieles Voraus, als Avantgarde-Vater, Politiker, Künstler. Eine Spurensuche</text>
-      <description py:pytype="str">Die "Ostfrau" ist ein Phänomen, der "Ostmann" ein Phantom. Dabei hat er den Männern des Westens vieles Voraus, als Avantgarde-Vater, Politiker, Künstler. Eine Spurensuche</description>
-      <byline py:pytype="str">von  Anne Hähnig, Isabel Pfaff</byline>
-      <image base-id="http://xml.zeit.de/lebensart/partnerschaft/2014-02/teaser-huebner/" type="jpg" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Der Schauspieler Charly Hübner</bu>
-        <copyright py:pytype="str">© Thomas Niedermueller/Getty Images</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/gesellschaftskritik-heidi-klum-trennung" year="2014" issue="8" ressort="Lebensart" author="Christine Meffert" contenttype="article" publication-date="2014-02-13T08:49:00+00:00" expires="" genre="glosse">
-      <supertitle py:pytype="str">Serie Gesellschaftskritik</supertitle>
-      <title py:pytype="str">Das Timing der Liebe</title>
-      <text py:pytype="str">Heidi Klum ist nicht mehr mit ihrem früheren Bodyguard zusammen. Der Start der Beziehung kam einst zum perfekten Zeitpunkt. Nun ist auch ihr Ende eine Frage des Timings. </text>
-      <description py:pytype="str">Heidi Klum ist nicht mehr mit ihrem früheren Bodyguard zusammen. Der Start der Beziehung kam einst zum perfekten Zeitpunkt. Nun ist auch ihr Ende eine Frage des Timings. </description>
-      <byline py:pytype="str">von Christine Meffert</byline>
-      <image base-id="http://xml.zeit.de/2014/08/heidi-klum/" type="jpg" title="Heidi Klum" alt="Heidi Klum auf der Gala &quot;Hollywood macht sich stark gegen Krebs&quot;" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Heidi Klum auf der Gala "Hollywood macht sich stark gegen Krebs"</bu>
-        <copyright py:pytype="str">© Michael Buckner/Getty Images</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-02/fs-heimat-fotografen" year="2014" issue="6" ressort="Lebensart" contenttype="gallery" publication-date="" expires="2014-03-05T15:33:00+00:00">
-      <supertitle py:pytype="str">Ausstellung "Heimat"</supertitle>
-      <title py:pytype="str">Zwischen Bockwurst und Nachbars Garten</title>
-      <text py:pytype="str">Was bedeutet Heimat? Das NRW-Forum Düsseldorf sucht darauf in fotografischen Perspektiven von Andreas Mühe, Hans-Peter Feldmann und 21 weiteren Künstlern eine Antwort. </text>
-      <description py:pytype="str">Was bedeutet Heimat? Das NRW-Forum Düsseldorf sucht darauf in fotografischen Perspektiven von Andreas Mühe, Hans-Peter Feldmann und 21 weiteren Künstlern eine Antwort. </description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/2014-02/fs-heimat-fotografen-teaser/" type="jpg" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Heinz Cibulka</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/maenner-scheitern" year="2014" issue="8" ressort="Lebensart" author="Susanne Mayer" contenttype="article" publication-date="" expires="">
-      <supertitle py:pytype="str">Kolumne Männer!</supertitle>
-      <title py:pytype="str">Reue? Nö!</title>
-      <text py:pytype="str">Das Verhältnis vom Mann zum Scheitern ist bewundernswert. Frauen bekommen in Stresssituationen rote Flecken – bei den Boys glitzert statt der Augen nur das Gel im Haar. </text>
-      <description py:pytype="str">Das Verhältnis vom Mann zum Scheitern ist bewundernswert. Frauen bekommen in Stresssituationen rote Flecken – bei den Boys glitzert statt der Augen nur das Gel im Haar. </description>
-      <byline py:pytype="str">von Susanne Mayer</byline>
-      <image base-id="http://xml.zeit.de/lebensart/partnerschaft/2014-02/teaser-guttenberg-maenner/" type="jpg" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Karl-Theodor zu Guttenberg am Tag seines Rücktritts in März 2011</bu>
-        <copyright py:pytype="str">© Maurizio Gambarini/dpa</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/stilkolumne-mode-muell-trash" year="2014" issue="8" ressort="Lebensart" author="Tillmann Prüfer" contenttype="article" publication-date="2014-02-13T08:54:00+00:00" expires="">
-      <supertitle py:pytype="str">Stilkolumne</supertitle>
-      <title py:pytype="str">Flirt mit dem Trash</title>
-      <text py:pytype="str">In der Sommerkollektion von Lanvin finden sich Taschen, die an Müllsäcke erinnern. Was am Ende von unserem Konsum übrig bleibt, hat Modemacher schon oft inspiriert.</text>
-      <description py:pytype="str">In der Sommerkollektion von Lanvin finden sich Taschen, die an Müllsäcke erinnern. Was am Ende von unserem Konsum übrig bleibt, hat Modemacher schon oft inspiriert.</description>
-      <byline py:pytype="str">von  Tillmann Prüfer</byline>
-      <image base-id="http://xml.zeit.de/2014/08/stilkolumne-tasche-lanvin/" type="jpg" alt="Designer faszinieren Materialien, die an Mülltüten erinnern. Tasche von Lanvin, 1.685 Euro" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Designer faszinieren Materialien, die an Mülltüten erinnern. Tasche von Lanvin, 1.685 Euro</bu>
-        <copyright py:pytype="str">© Peter Langer</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/wochenmarkt-buchweizen-pfannkuchen" year="2014" issue="8" ressort="Lebensart" author="Anke Gröner" contenttype="article" publication-date="2014-02-13T08:44:00+00:00" expires="">
-      <supertitle py:pytype="str">Serie Wochenmarkt</supertitle>
-      <title py:pytype="str">Speck oder Apfelmus?</title>
-      <text py:pytype="str">Mit Eischnee aufgeschlagen werden Pfannkuchen aus Buchweizenmehl fluffig wie Pancakes. Dann stellt sich nur noch die Frage: süß oder salzig? </text>
-      <description py:pytype="str">Mit Eischnee aufgeschlagen werden Pfannkuchen aus Buchweizenmehl fluffig wie Pancakes. Dann stellt sich nur noch die Frage: süß oder salzig? </description>
-      <byline py:pytype="str">von Anke Gröner</byline>
-      <image base-id="http://xml.zeit.de/2014/08/wochenmarkt-pfannkuchen/" type="jpg" title="Buchweizen-Pfannkuchen" alt="Buchweizen-Pfannkuchen" align="left" publication-date="" expires="2014-05-11T10:42:13+00:00">
-        <bu py:pytype="str">Buchweizen-Pfannkuchen</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
-      </image>
-    </reference>
-    <reference xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2014-02/link-rezeptor-gnocchi-al-forno" year="2014" issue="8" ressort="Lebensart" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/rezeptor/2014/02/13/gnocchi-al-forno_3139">
-      <supertitle py:pytype="str">Rezeptor-Blog</supertitle>
-      <title py:pytype="str">So viel besser als das gekaufte Zeug</title>
-      <text py:pytype="str">Vergessen Sie das Fertigzeug: Ein halbes Kilo Kartoffeln stampfen, mutig würzen, ein Eigelb dazu, kneten, rollen, rupfen – fertig sind die selbstgemachten Gnocchi. </text>
-      <description py:pytype="str">Vergessen Sie das Fertigzeug: Ein halbes Kilo Kartoffeln stampfen, mutig würzen, ein Eigelb dazu, kneten, rollen, rupfen – fertig sind die selbstgemachten Gnocchi. </description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2014-02/teaser-rezeptor-gnocchi/" type="jpg" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Thorsten Lange</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/partnerschaft/2014-02/datingportal-tinder-im-gegenteil" year="2014" issue="8" ressort="Lebensart" author="Daniel Herbstreit" contenttype="article" publication-date="" expires="">
-      <supertitle py:pytype="str">Online-Dating </supertitle>
-      <title py:pytype="str">Ich mach dir ein Bild von mir</title>
-      <text py:pytype="str">Neue Datingsites fragen nicht mehr nach gemeinsamen Hobbys. Auf "Tinder" und "im gegenteil" müssen Liebessuchende ihr Leben einfach nur ins rechte Licht rücken.</text>
-      <description py:pytype="str">Neue Datingsites fragen nicht mehr nach gemeinsamen Hobbys. Auf "Tinder" und "im gegenteil" müssen Liebessuchende ihr Leben einfach nur ins rechte Licht rücken.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/partnerschaft/2014-02/jonathan/" type="jpg" title="Jonathan" alt="Jonathan, 25, aus Berlin-Mitte" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Jonathan, 25, aus Berlin-Mitte</bu>
-        <copyright py:pytype="str" link="http://imgegenteil.de/berlin/jungs/jonathan-25-mitte/">© Im Gegenteil</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/2014/08/proenza-schouler-modedesign" year="2014" issue="8" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="2014-02-13T08:46:00+00:00" expires="" genre="interview">
-      <supertitle py:pytype="str">New York Fashion Week</supertitle>
-      <title py:pytype="str">"Handwerk und Sport"</title>
-      <text py:pytype="str">Die Kollektionen von Proenza Schouler stehen auf der New York Fashion Week für coole Modernität. Das Geheimnis der beiden Designer: Sie lassen Welten aufeinanderprallen. </text>
-      <description py:pytype="str">Die Kollektionen von Proenza Schouler stehen auf der New York Fashion Week für coole Modernität. Das Geheimnis der beiden Designer: Sie lassen Welten aufeinanderprallen. </description>
-      <byline py:pytype="str">von Elisabeth Raether</byline>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/proenza-schouler/" type="jpg" title="Proenza Schouler" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Frisch aus New York: Entwürfe aus der Herbst/Winterkollektion 2014</bu>
-        <copyright py:pytype="str">© Neilson Barnard/Getty Images</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/mode/2014-02/Harpers-Bazaar-Margit-J-Mayer-Frauen-Mode-Macht" year="2014" issue="7" ressort="Lebensart" author="Maria Exner" contenttype="article" publication-date="" expires="" genre="interview">
-      <supertitle py:pytype="str">"Harper's Bazaar"</supertitle>
-      <title py:pytype="str">"Die Frau wird so erst ein Mensch"</title>
-      <text py:pytype="str">Margit J. Mayer ist Chefredakteurin der neuen deutschen "Harper's Bazaar". Hier spricht sie über Mode als Machtinstrument, deutsche Vorurteile und arbeitende Frauen.</text>
-      <description py:pytype="str">Margit J. Mayer ist Chefredakteurin der neuen deutschen "Harper's Bazaar". Hier spricht sie über Mode als Machtinstrument, deutsche Vorurteile und arbeitende Frauen.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/mode/2014-02/teaser-margitjmayer-portrait/" type="jpg" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Die Journalistin Margit J. Mayer</bu>
-        <copyright py:pytype="str">© Hubert Burda Media</copyright>
-      </image>
-    </reference>
-    <reference type="intern" href="http://xml.zeit.de/lebensart/2014-01/fs-freunde-von-freunden-muenchen-2" year="2014" issue="5" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
-      <badges>
-        <badge py:pytype="str">gallery</badge>
-      </badges>
-      <supertitle py:pytype="str">Wohnserie Freunde von Freunden</supertitle>
-      <title py:pytype="str">Schöner Wohnen selbst gemacht</title>
-      <text py:pytype="str">Jeden Winkel der Wohnung von Anke Eberhardt schmücken selbst gemachte Accessoires. "Freunde von Freunden" war bei der Chefin des Do-it-Yourself-Magazins "Cut" in München.</text>
-      <description py:pytype="str">Jeden Winkel der Wohnung von Anke Eberhardt schmücken selbst gemachte Accessoires. "Freunde von Freunden" war bei der Chefin des Do-it-Yourself-Magazins "Cut" in München.</description>
-      <byline xsi:nil="true"/>
-      <image base-id="http://xml.zeit.de/lebensart/2014-01/fs-freunde-von-freunden-muenchen-teaser/" type="jpg" title="Freunde von Freunden Teaser München" align="left" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Evi Lemberger für Freunde von Freunden</copyright>
-      </image>
-    </reference>
-  </feed>
+  <feed/>
   <teaser>
-    <title py:pytype="str">Lebensart</title>
+    <title>ZMO</title>
+    <text>ZMO CP</text>
   </teaser>
-  <indexteaser>
-    <text py:pytype="str">Lebensart</text>
-  </indexteaser>
 </centerpage>

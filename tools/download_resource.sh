@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # To download a resource from the CMS vivi, call this script with an path as
 # argument. This path should _not_ begin with a '/' and ist a subpath of
@@ -6,7 +6,7 @@
 # To download resource and meta resource of the homepage call:
 # ./download_resource.sh index
 
-dav_host='http://cms-backend.zeit.de:9000';
+dav_host='http://vivi-pommes.zeit.de:9000';
 
 curl ${dav_host}/cms/work/$1 > resource 2> /dev/null
 
