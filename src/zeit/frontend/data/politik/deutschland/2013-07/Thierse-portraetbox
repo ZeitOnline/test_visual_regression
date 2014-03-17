@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
-  <block>
-    <title>Wolfgang Thierse</title>
-    <text py:pytype="str">
-      <p><a href="http://www.thierse.de/">Wolfgang Thierse</a> (SPD) wurde am 22. Oktober 1943 in Breslau geboren. Nach der Vertreibung der Familie wuchs er in Thüringen auf. Von Juni bis September 1990 stand er den Sozialdemokraten in der DDR vor. Seit Herbst 1990 ist Thierse Mitglied des Bundestages, nun scheidet er aus. Von 1998 bis 2005 war er Präsident, seit 2005 Vizepräsident des Bundestages. Er ist Mitglied des Zentralkomitees der deutschen Katholiken und Schirmherr zahlreicher Initiativen, darunter die <a href="http://www.amadeu-antonio-stiftung.de/">Amadeo Antonio Stiftung</a> und das <a href="http://www.bzfo.de/">Behandlungszentrums für Folteropfer Berlin</a>.</p>
-    </text>
-  </block>
-</container>

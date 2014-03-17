@@ -1,59 +1,49 @@
 {% extends "templates/layout.html" %}
-{% import 'templates/block_elements.tpl' as blocks %}
-{% block content %}
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
+{% import 'templates/article.html' as article with context %}
 
+{%  block page_wrap_inner %}
+            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
+            {{ lama.main_nav_compact(view,request) }}
+{% endblock page_wrap_inner %}
+
+{% block content %}
 	<article class="article article--longform">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
-  				{% if view.header_img %}
-  					{{ blocks.head_image_longform(view.header_img) }}
-  				{% endif %}
-  				<header class="article__title-wrap">
-  					<h2 class="article__supertitle">
-  						{{ view.supertitle }}
-  					</h2>
-  					<h1 class="article__title">
-  						{{view.title}}
-  					</h1>
+
+          {{ blocks[view.header_elem|block_type](view.header_elem) }}
+
+  	       <header class="article__title-wrap">
+            {{ article.title() }}
             <div class="article__meta">
-              {{ blocks.author_date(view.publish_date | format_date('long'), view.source) }}
-              {{ blocks.meta_author(view.author) }}
+              {{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
+              {{ blocks.meta_author(view.authors) }}
             </div>
-            <span class="article__subtitle">
-                <p>{{view.subtitle}}</p>
-            </span>
           </header>
 			</div>
 
 			<div class="article__body">
 
+        <!-- block for Teaser -->
+         <section class="article__page">
+            <div class="article__page-wrap">
+              {{ article.subtitle() }}
+              <div class="article__subtitle__line"></div>
+            </div>
+          </section>
+
         {% for page in view.pages %}
           <section class="article__page">
-            {{ blocks.subpage_chapter( page.number, page.teaser, 'article__subpage-chapter' ) }}
-
             <div class="article__page-wrap">
-
               {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
-              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered' ) }}
+              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
 
-              {% for item in page %}
-                  {{ blocks[item|block_type](item)}}
-              {% endfor %}
+              {{ article.render_page(page) }}
             </div>
           </section>
         {% endfor %}
-
-				{% if view.rankedTags %}
-				<div class="article__tags is-constrained is-centered">
-					<span class="article__tags__title">Tags</span>
-					{% for tag in view.rankedTags %}
-								<a href="#{{ tag.url_value }}" id="hp.article.tools.tag.{{ tag.label }}" title="Artikel mit dem Schlagwort *{{ tag.label }}* anzeigen">{{ tag.label }}</a>
-								{% if not loop.last %}
-									,
-								{% endif %}
-					{% endfor %}
-				</div>
-				{% endif %}
 
 			</div>
 		</div>

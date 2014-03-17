@@ -2,7 +2,6 @@
 	+padded
 	margin-left: auto
 	margin-right: auto
-	margin-bottom: $huge
 	max-width: $max-page-width
 
 .article__main-image
@@ -31,7 +30,7 @@
 .article__meta
 	@extend %meta
 	text-transform: uppercase
-	margin-bottom: $medium
+	margin-bottom: $large
 	display: block
 	margin-top: $thin
 	letter-spacing: 1px
@@ -39,13 +38,33 @@
 	+respond-min($break-1)
 		font-size: $font-s
 
-.article__meta__source
+.article__meta__second
+	@extend %meta
+	text-transform: uppercase
+	margin-bottom: $huge
+	display: block
+	margin-top: $thin
+	letter-spacing: 1px
+	font-size: $font-xs
+	border-top: $dblhair solid $charcoal
+	border-bottom: $dblhair solid $charcoal
+	padding: $fine 0 $fine 0
+
+.article__meta__second__source
 	&:after
 		content: ', '
 		+respond-min($break-1)
 			content: ' — '
 
-.article__meta__date
+.article__meta__second__date
+	span
+		color: $charcoal
+		&:before
+			white-space: pre
+			content: ', \A'
+			color: $charcoal
+			+respond-min($break-1)
+				content: ' — '
 	+respond-max($break-1)
 		display: block
 
@@ -59,6 +78,8 @@
 .article__subheading
 	@extend %subheading
 	@extend %font-l-xl
+	margin-bottom: $little !important
+	margin-top: $compact !important
 
 .article__body
 	@extend %copy
@@ -88,7 +109,7 @@
 	@extend %meta
 	@extend .article__meta
 	font-size: $font-s
-	margin-top: $huge
+	margin-top: $large
 	text-transform: uppercase
 	a
 		@extend %meta-link

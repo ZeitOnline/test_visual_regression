@@ -1,5 +1,6 @@
 // margins/paddings
 $hair:           em(1px)
+$dblhair:        em(2px)
 $micro:          em(4px)
 $tiny:           em(6px)
 $thin:           em(8px)
@@ -8,9 +9,11 @@ $little:         em(14px)
 $small:          em(18px)
 $compact:        em(28px)
 $medium:         em(36px)
+$big:            em(48px)
 $large:          em(56px)
 $wide:           em(72px)
 $huge:           em(90px)
+$extremhuge:     em(200px)
 
 // font sizes in px
 $font-xs--px:    12px
@@ -22,6 +25,7 @@ $font-xl--px:    24px
 $font-xxl--px:   30px
 $font-xxxl--px:  40px
 $font-xxxxl--px: 50px
+$font-xxxxxl--px: 64px
 
 // font sizes in em
 $font-xs: em($font-xs--px)
@@ -48,7 +52,7 @@ $font-xxxxl--rem: em_to_rem($font-xxxxl)
 $sans-fallbacks: Helvetica, Arial, FreeSans, sans-serif
 $serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif,serif
 
-$base-line-height: 1.55
+$base-line-height: 1.50
 $headline-line-height: 1.3
 
 // utility colors
@@ -68,6 +72,11 @@ $grey--dark:     #333332
 $grey--mid-dark: #252525
 $black:          #000
 
+// social
+$color-twitter: #2F95C1
+$color-facebook: #4256A2
+$color-google: #A12F25
+
 // semantic colors
 $color-page-bg: $white
 $color-text: $black
@@ -80,7 +89,7 @@ $small-content-width:  27em
 $medium-content-width: em(660px)
 $large-content-width:  44.25em
 $max-page-width:       em(980px)
-$max-longform-width:   em(1460px)
+$max-longform-width:   em(1364px)
 
 // layout
 $gutter: em(20px)
@@ -97,3 +106,6 @@ $break-4: em(1120px)
 // for comments
 $comments__break-overlap:  em(768px)
 $comments__break-outside: em(1280px)
+
+// image galleries
+$gallery-button-radius: em(35px)

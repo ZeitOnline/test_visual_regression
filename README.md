@@ -1,6 +1,6 @@
 ZMO on Friedbert
 =================
-
+## Testing Batou-Updating 1
 ## Initiales Setup Pyramid-App
 
 Zunächst Repo clonen
@@ -76,23 +76,3 @@ oder
     grunt stage
 
 sind aber noch nicht Teil dieses Pakets.
-
-### JS-Tests über Karma in lokalen Browsern und Browserstack laufen lassen
-
-Sofern noch nicht geschehen über npm karma, mocha, chai und Konsorten installieren:
-
-    npm install
-
-Dann die Mocha-Tests folgendermaßen starten:
-
-    karma start karma-conf.js
-
-Die Karma-Konfiguration (bspw. welche Browser verwendet werden) findet sich im Projekt-Root als karma-conf.js.
-
-
-
-
-
-
-
-

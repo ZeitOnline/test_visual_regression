@@ -7,9 +7,9 @@
   <!-- default value must not use available -->
   <layout id="large">vollbreit</layout>
   <layout id="double" available="zeit.cms.interfaces.ICMSContent">doppelbreit</layout>
-
   <layout id="zmo-small-left" available="zeit.magazin.interfaces.IZMOContent">S links</layout>
   <layout id="zmo-small-right" available="zeit.magazin.interfaces.IZMOContent">S rechts</layout>
   <layout id="zmo-medium" available="zeit.magazin.interfaces.IZMOContent">M</layout>
   <layout id="zmo-large" available="zeit.magazin.interfaces.IZMOContent">L</layout>
+  <layout id="zmo-xl-header" available="zeit.magazin.interfaces.IZMOContent">Hintergrundvideo im Header</layout>
 </video-layouts>

@@ -1,0 +1,172 @@
+Change log for zeit.frontend
+============================
+
+0.2.16 (unreleased)
+-------------------
+
+- Implement pagination from backend
+- Register views for Article Pages
+- Add a tool for downloading resources from CMS.
+- Refactor inheritance logic for longform
+- Add basic structure for Centerpages
+- Refactor template logic for macros. The are now located in 
+templates/macro and named [type]_macro.tpl
+- fix Headerimage Glitch on iOS
+- add date, source, genre testing
+- fix author issue and add testing
+
+
+0.2.15 (2014-02-27)
+-------------------
+
+- Add a 404 view loaded from zeit.de/error/404.
+
+
+0.2.14 (2014-02-27)
+-------------------
+
+- hotfix: Fix Link in Logo and for webtrekk.
+
+
+0.2.13 (2014-02-27)
+-------------------
+
+- hotfix: We had wrong sharing urls (Changelog entry forgotten in original
+  comit).
+
+
+0.2.12 (2014-02-27)
+-------------------
+
+- the forgotten hotfix...
+
+
+0.2.11 (2014-02-27)
+-------------------
+
+- hotfix the width of inline galleries to em(910p)x
+
+0.2.10 (2014-02-26)
+-------------------
+
+- Nothing changed yet.
+
+
+0.2.9 (2014-02-26)
+------------------
+
+- remove unessecary code
+- add health_check url
+- add video_still for sharing if header has video
+- remove title tag in logo
+- fix missing proxy-url in fontloader
+- hack seo data into template
+- change inline gallery size
+- fix diverse bugs
+- fix fallback image in video header
+
+
+0.2.8 (2014-02-25)
+------------------
+
+- Fixed translate_url filter.
+
+
+0.2.7 (2014-02-25)
+------------------
+
+- Fixed static image_urls.
+
+
+0.2.6 (2014-02-25)
+------------------
+
+- Load logo if behind prefixed proxy.
+- Produce a different url for images (with prefix)
+- translated url goes to whatever is the host
+- change backgroundvideo mobile fallback
+- force removal of video poster attribute after loading to avoid glitch
+- adds text-only stylesheet for ie7
+- compress css
+- add favicon
+- fix gallery bu bug
+
+
+0.2.5 (2014-02-25)
+------------------
+
+- Add reverse proxy capabilities (url_prefix). (inserted after release)
+
+
+0.2.4 (2014-02-23)
+------------------
+
+- Tried a new version management. No major improve. (inserted after release)
+
+
+0.2.3.2 (2014-02-22)
+--------------------
+
+- Back to graft directive in Manifest.in.
+
+
+0.2.3.1 (2014-02-22)
+--------------------
+
+- Change Manifest.in for recursive-include.
+
+
+0.2.3 (2014-02-22)
+------------------
+
+- Removed loads of data to have a smaller egg.
+
+
+0.2.2.1 (2014-02-22)
+--------------------
+
+- change Manifest in for rcursive include.
+
+
+0.2.2 (2014-02-22)
+------------------
+
+- Just trying the release cycle. No actual changes.
+
+
+0.2.1 (2014-02-22)
+------------------
+
+- Changed Styling of Longform Header (including Title, Subtitle, Author, Date styling) (#ZMO-462)
+- newest iqd scripts for user tracking
+- cleaned up iqd script section
+
+
+0.2 (2014-02-21)
+----------------
+
+- Cleaned up inheritance mechanisms between article views and their longform
+  variant. (#ZMO-281)
+- Gruntfile ready for production
+- alt title attributes work
+- webm video source on opendata.zeit.de
+- raw elements work on articles
+- Better handling for authors
+- minor bugfixes for longform article
+- bugfixing in inlinegallery
+- enable ivw mobile switch
+- better tests for HeaderImage.
+- hacking back images to IE 8/7
+- adapt template to support new image/video formats from vivi config files
+- better imageformats
+- Put inclusion of the transaction-management tween in application code.
+- updates version of grunticon to 1.0.0
+- do not load sasmobile.js on IE < 9
+- bugfix viewport script for ipad landscape
+- fix headerimage in IE < 9
+
+
+0.1 (2014-02-12)
+----------------
+
+- Initial release.

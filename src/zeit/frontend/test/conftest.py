@@ -1,11 +1,26 @@
 from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
+from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
-from os import path
-import pytest
 from webtest import TestApp as TestAppBase
+from webtest import TestApp
+from os.path import abspath, dirname, join, sep
+import pytest
+import pyramid.config
 import zeit.frontend.application
 from zeit import frontend
+
+
+def test_asset_path(*parts):
+    """ Return full file-system path for given test asset path. """
+    from zeit import frontend
+    return abspath(join(dirname(frontend.__file__), 'data', *parts))
+
+
+def test_asset(path):
+    """ Return file-object for given test asset path. """
+    return open(test_asset_path(*path.split(sep)), 'rb')
+
 
 settings = {
     'pyramid.reload_templates': 'false',
@@ -14,7 +29,37 @@ settings = {
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
     'agatho_url': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments')
+    'proxy_url' : '',
+    'connector_type': 'filesystem',
+    'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
+
+    'vivi_zeit.cms_keyword-configuration': (
+        'egg://zeit.cms.tagging.tests/keywords_config.xml'),
+    'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
+    'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
+    'vivi_zeit.cms_source-keyword': (
+        'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
+    'vivi_zeit.cms_source-navigation': (
+        'egg://zeit.cms.content/navigation.xml'),
+    'vivi_zeit.cms_source-products': 'egg://zeit.cms.content/products.xml',
+    'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
+    'vivi_zeit.cms_whitelist-url': (
+        'egg://zeit.cms.tagging.tests/whitelist.xml'),
+
+    'vivi_zeit.content.article_genre-url': (
+        'egg://zeit.frontend/data/config/article-genres.xml'),
+    'vivi_zeit.content.article_image-layout-source': (
+        'egg://zeit.frontend/data/config/article-image-layouts.xml'),
+    'vivi_zeit.content.article_video-layout-source': (
+        'egg://zeit.frontend/data/config/article-video-layouts.xml'),
+    'vivi_zeit.content.article_htmlblock-layout-source': (
+        'egg://zeit.frontend/data/config/article-htmlblock-layouts.xml'),
+    'vivi_zeit.magazin_article-template-source': (
+        'egg://zeit.frontend/data/config/article-templates.xml'),
+    'vivi_zeit.magazin_article-related-layout-source': (
+        'egg://zeit.frontend/data/config/article-related-layouts.xml'),
 }
+
 
 browsers = {
     'firefox': webdriver.Firefox
@@ -22,10 +67,17 @@ browsers = {
 }
 
 
+@pytest.fixture(scope="module")
+def jinja2_env(request):
+    app = zeit.frontend.application.Application()
+    app.config = pyramid.config.Configurator()
+    return app.configure_jinja()
+
 
 @pytest.fixture(scope='session')
 def application():
-    return zeit.frontend.application.Application()(settings)
+    app = zeit.frontend.application.Application()({}, **settings)
+    return ImageTransformationMiddleware(app, secret='time')
 
 
 @pytest.fixture
@@ -68,6 +120,18 @@ def selenium_driver(request):
     return b
 
 
+@pytest.fixture
+def asset():
+    return test_asset
+
+
+@pytest.fixture
+def browser(application):
+    """ Returns an instance of `webtest.TestApp`. """
+    extra_environ = dict(HTTP_HOST='example.com')
+    return TestApp(application, extra_environ=extra_environ)
+
+
 class TestApp(TestAppBase):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
@@ -76,9 +140,3 @@ class TestApp(TestAppBase):
         headers['Accept'] = 'application/json'
         return self.get(url, params, headers, *args, **kw)
 
-
-
-@pytest.fixture
-def browser(application):
-    """ Returns an instance of `webtest.TestApp`. """
-    return TestApp(application, extra_environ=dict(HTTP_HOST='example.com'))

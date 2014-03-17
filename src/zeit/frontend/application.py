@@ -1,10 +1,19 @@
 from babel.dates import format_datetime
+from repoze.bitblt.transform import compute_signature
+from urlparse import urlsplit, urlunsplit
+from grokcore.component import adapter, implementer
+from zeit.magazin.interfaces import IArticleTemplateSettings
+from zeit.frontend.article import ILongformArticle
 import grokcore.component.zcml
+import jinja2
 import logging
 import martian
 import pkg_resources
 import pyramid.config
+import pyramid.threadlocal
 import pyramid_jinja2
+import urlparse
+import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
 import zeit.frontend.navigation
@@ -42,16 +51,21 @@ class Application(object):
             registry=registry)
         config.setup_registry(settings=self.settings)
 
+        self.config.include('pyramid_tm')
         self.configure_jinja()
         self.config.include("cornice")
 
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
         config.add_route('comments', '/-comments/collection/*traverse')
+        config.add_route('home', '/')
+        config.add_route('health_check', '/health_check')
         config.add_static_view(name='css', path='zeit.frontend:css/')
         config.add_static_view(name='js', path='zeit.frontend:js/')
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
+
+        #ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         config.set_root_factory(self.get_repository)
@@ -62,6 +76,8 @@ class Application(object):
             zeit.cms.repository.interfaces.IRepository)
 
     def configure_jinja(self):
+        """Sets up names and filters that will be available for all
+        templates."""
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
@@ -70,17 +86,22 @@ class Application(object):
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
+        jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
+        jinja.filters['default_image_url'] = default_image_url
         jinja.trim_blocks = True
         return jinja
 
     def configure_zca(self):
+        """Sets up zope.component registrations by reading our
+        configure.zcml file."""
         log.debug('Configuring ZCA')
         self.configure_product_config()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
+        self.configure_connector(context)
         # can't use <grok> directive since we can't configure excludes there
         martian.grok_dotted_name(
             'zeit.frontend',
@@ -89,67 +110,66 @@ class Application(object):
             config=context)
         context.execute_actions()
 
-    @property
-    def repository_path(self):
-        if ('repository_path' not in self.settings.keys() or
-                self.settings['repository_path'] == None):
-            return pkg_resources.resource_filename( __name__, 'data')
-        return self.settings['repository_path']
+    def configure_connector(self, context):
+        typ = self.settings['connector_type']
+        allowed = ('dav', 'tbcdav', 'filesystem')
+        if typ not in allowed:
+            raise ValueError(
+                'Invalid setting connector_type=%s, allowed are {%s}'
+                % (typ, ', '.join(allowed)))
+        zope.configuration.xmlconfig.include(
+            context, package=zeit.connector, file='%s-connector.zcml' % typ)
 
     def configure_product_config(self):
-        # XXX make configurable, but see #36
-        zope.app.appsetup.product.setProductConfiguration('zeit.cms', {
-            'keyword-configuration': _product_url(
-                'zeit.cms.tagging.tests', 'keywords_config.xml'),
-            'source-badges': _product_url(
-                'zeit.cms.asset', 'badges.xml'),
-            'source-banners': _product_url(
-                'zeit.cms.content', 'banners.xml'),
-            'source-keyword': _product_url(
-                'zeit.cms.content', 'zeit-ontologie-prism.xml'),
-            'source-navigation': _product_url(
-                'zeit.cms.content', 'navigation.xml'),
-            'source-products': _product_url(
-                'zeit.cms.content', 'products.xml'),
-            'source-serie': _product_url(
-                'zeit.cms.content', 'serie.xml'),
-            'whitelist-url': _product_url(
-                'zeit.cms.tagging.tests', 'whitelist.xml'),
-        })
+        """Sets values of Zope Product Config used by vivi for configuration,
+        using settings from the WSGI ini file.
 
-        zope.app.appsetup.product.setProductConfiguration('zeit.connector', {
-            'repository-path': self.repository_path,
-        })
+        Requires the following naming convention in the ini file:
+            vivi_<PACKAGE>_<SETTING> = <VALUE>
+        for example
+            vivi_zeit.connector_repository-path = egg://zeit.frontend/data
 
-        zope.app.appsetup.product.setProductConfiguration(
-            'zeit.content.article', {
-                'genre-url': _product_url(
-                    'zeit.frontend', 'data/config/article-genres.xml'),
-                'image-layout-source': _product_url(
-                    'zeit.frontend',
-                    'data/config/article-image-layouts.xml'),
-                'video-layout-source': _product_url(
-                    'zeit.frontend',
-                    'data/config/article-video-layouts.xml'),
-                'htmlblock-layout-source': _product_url(
-                    'zeit.frontend',
-                    'data/config/article-htmlblock-layouts.xml'),
-            }
-        )
+        (XXX This is based on the assumption that vivi never uses an underscore
+        in a SETTING name.)
 
-        zope.app.appsetup.product.setProductConfiguration(
-            'zeit.magazin', {
-                'article-template-source': _product_url(
-                    'zeit.frontend',
-                    'data/config/article-templates.xml'),
-                'article-related-layout-source': _product_url(
-                    'zeit.frontend',
-                    'data/config/article-related-layouts.xml'),
-            }
-        )
+        For convenience we resolve egg:// URLs using pkg_resources into file://
+        URLs. This functionality should probably move to vivi, see VIV-288.
+
+        """
+        for key, value in self.settings.items():
+            if not key.startswith('vivi_'):
+                continue
+
+            ignored, package, setting = key.split('_')
+            if zope.app.appsetup.product.getProductConfiguration(
+                    package) is None:
+                zope.app.appsetup.product.setProductConfiguration(package, {})
+            config = zope.app.appsetup.product.getProductConfiguration(package)
+            value = maybe_convert_egg_url(value)
+            # XXX Stopgap until FRIED-12, since MockConnector does not
+            # understand file-URLs
+            if key == 'vivi_zeit.connector_repository-path':
+                value = value.replace('file://', '')
+            config[setting] = value
 
     @property
     def pipeline(self):
+        """Configuration of a WSGI pipeline.
+
+        Our WSGI application is wrapped in each filter in turn,
+        so the first entry in this list is closest to the application,
+        and the last entry is closest to the WSGI server.
+
+        Each entry is a tuple (spec, protocol, name, arguments).
+        The default meaning is to load an entry point called ``name`` of type
+        ``protocol`` from the package ``spec`` and load it, passing
+        ``arguments`` as kw parameters (thus, arguments must be a dict).
+
+        If ``protocol`` is 'factory', then instead of an entry point the method
+        of this object with the name ``spec`` is called, passing ``arguments``
+        as kw parameters.
+
+        """
         return [
             # ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
         ]
@@ -172,15 +192,86 @@ class Application(object):
 factory = Application()
 
 
-def _product_url(package, path):
-    return 'file://' + pkg_resources.resource_filename(package, path)
+def maybe_convert_egg_url(url):
+    if not url.startswith('egg://'):
+        return url
+    parts = urlparse.urlparse(url)
+    return 'file://' + pkg_resources.resource_filename(
+        parts.netloc, parts.path[1:])
 
 
-def translate_url(obj):
-    return obj.replace("xml.zeit.de", "www.zeit.de", 1)
+@jinja2.contextfilter
+def translate_url(context, url):
+    if url is None:
+        return None
+    # XXX Is it really not possible to get to the actual template variables
+    # (like context, view, request) through the jinja2 context?!??
+    request = pyramid.threadlocal.get_current_request()
+    if request is None:  # XXX should only happen in tests
+        return url
+
+    if request.registry.settings['proxy_url'] != '':
+        proxy = request.registry.settings['proxy_url']
+        return url.replace("http://xml.zeit.de/", proxy, 1)
+    host = 'http://%s' % (request.host)
+    return url.replace("http://xml.zeit.de", host, 1)
 
 
 def format_date(obj, type):
+    format = ""
     if type == 'long':
         format = "dd. MMMM yyyy, H:mm 'Uhr'"
-        return format_datetime(obj, format, locale="de_De")
+    elif type == 'short':
+        format = "dd. MMMM yyyy"
+    return format_datetime(obj, format, locale="de_De")
+
+def replace_list_seperator(semicolonseperatedlist, seperator):
+    return semicolonseperatedlist.replace(';', seperator)
+
+# definition of default images sizes per layout context
+default_images_sizes = dict(
+    large=(800, 600),
+    small=(200, 300),
+)
+
+
+def default_image_url(image):
+    try:
+        width, height = default_images_sizes.get(image.layout, (640, 480))
+        # TODO: use secret from settings?
+        signature = compute_signature(width, height, 'time')
+
+        if image.src is None:
+            return None
+
+        scheme, netloc, path, query, fragment = urlsplit(image.src)
+        parts = path.split('/')
+        parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
+        path = '/'.join(parts)
+        url =  urlunsplit((scheme, netloc, path, query, fragment))
+        request = pyramid.threadlocal.get_current_request()
+        return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+    except:
+        log.debug('Cannot produce a default URL.')
+
+@adapter(zeit.cms.repository.interfaces.IRepository)
+@implementer(pyramid.interfaces.ITraverser)
+class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
+
+    def __call__(self, request):
+        try:
+            tdict = super(RepositoryTraverser, self).__call__(request)
+            context = tdict['context']
+            if zeit.content.article.interfaces.IArticle.providedBy(context):
+                if IArticleTemplateSettings(context).template == 'longform':
+                    zope.interface.alsoProvides(context, ILongformArticle)
+            return self._change_viewname(tdict)
+        except OSError, e:
+            if e.errno == 2:
+                raise pyramid.httpexceptions.HTTPNotFound()
+
+    def _change_viewname(self, tdict):
+        if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
+            tdict['view_name'] = 'seite'
+        return tdict
+

@@ -1,9 +1,14 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.1.dev0',
-
+    version='0.2.16.dev0',
+    author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
+    author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
+                  ron.drongowski@zeit.de, anika.szuppa@zeit.de',
     install_requires=[
         'Babel',
         'cornice >= 0.16.2',
@@ -13,12 +18,11 @@ setup(
         'martian',
         'pyramid',
         'pyramid_jinja2',
+        'pyramid_tm',
         'setuptools',
         'simplejson',
-        'supervisor',
-        'waitress',
         'zeit.cms',
-        'zeit.connector >= 2.1.0.dev0',
+        'zeit.connector >= 2.3',
         'zeit.content.article',
         'zeit.intrafind',
         'zeit.magazin',
@@ -34,8 +38,17 @@ setup(
         'test': [
             'mock',
             'webtest',
+            'pytest',
+            'pytest-localserver',
+            'pytest-pep8',
+            'repoze.bitblt',
+            'requests',
+            'selenium',
+            'webtest',
+            'zope.testbrowser',
         ],
     },
+    setup_requires=['setuptools_git'],
     namespace_packages=['zeit'],
     packages=find_packages('src'),
     package_dir={'': 'src'},

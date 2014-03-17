@@ -1,23 +1,31 @@
-$longform-content-max-width: 700px
+$longform-content-max-width: 615px
 $longform-inline-max-width: 920px
-$bp-adjust-horizontal-figures--1: 1280px
-$bp-adjust-horizontal-figures--2: 1440px
+$bp-adjust-horizontal-figures--1: 1120px
+$bp-adjust-horizontal-figures--2: 1320px
+$bp-adjust-horizontal-figures--3: 1385px
+$bp-adjust-horizontal-figures--4: 1450px
+$longform-header-offset: 80px
+$longform-header-min-height: 400px
+$longform-header-max-height: 1400px
 
 .article.article--longform
   padding: 0
-  min-height: 100%
-  height: 100%
   max-width: none
 
   .article__subtitle
-    color: $white
+    color: $grey--dark
+    text-align: center
+    line-height: 1.5
+
+  .article__subtitle__line
+    height: $micro
+    width: $extremhuge
+    border-bottom: $micro solid $grey--light
+    margin: $big auto $medium auto
 
   .article__wrap
     padding-top: 0
     margin-top: 0
-    min-height: 100%
-    height: 100%
-
   p
     max-width: 38.88em
     +respond-min($break-3)
@@ -26,11 +34,50 @@ $bp-adjust-horizontal-figures--2: 1440px
   .article__head-wrap
     position: relative
     overflow: hidden
-    height: 80%
-    min-height: em(400px)
     padding-top: 0
     margin-top: 0
     background-color: $black
+    min-height: em($longform-header-min-height)
+    max-height: em($longform-header-max-height)
+    height: em(400px)
+    +respond-min-h(em(500px))
+      height: em(500px) - em($longform-header-offset)
+    +respond-min-h(em(550px))
+      height: em(550px) - em($longform-header-offset)
+    +respond-min-h(em(600px))
+      height: em(600px) - em($longform-header-offset)
+    +respond-min-h(em(650px))
+      height: em(650px) - em($longform-header-offset)
+    +respond-min-h(em(700px))
+      height: em(700px) - em($longform-header-offset)
+    +respond-min-h(em(750px))
+      height: em(750px) - em($longform-header-offset)
+    +respond-min-h(em(800px))
+      height: em(800px) - em($longform-header-offset)
+    +respond-min-h(em(850px))
+      height: em(850px) - em($longform-header-offset)
+    +respond-min-h(em(900px))
+      height: em(900px) - em($longform-header-offset)
+    +respond-min-h(em(950px))
+      height: em(950px) - em($longform-header-offset)
+    +respond-min-h(em(1000px))
+      height: em(1000px) - em($longform-header-offset)
+    +respond-min-h(em(1050px))
+      height: em(1050px) - em($longform-header-offset)
+    +respond-min-h(em(1100px))
+      height: em(1100px) - em($longform-header-offset)
+    +respond-min-h(em(1150px))
+      height: em(1150px) - em($longform-header-offset)
+    +respond-min-h(em(1200px))
+      height: em(1200px) - em($longform-header-offset)
+    +respond-min-h(em(1250px))
+      height: em(1250px) - em($longform-header-offset)
+    +respond-min-h(em(1300px))
+      height: em(1300px) - em($longform-header-offset)
+    +respond-min-h(em(1350px))
+      height: em(1350px) - em($longform-header-offset)
+    +respond-min-h(em(1400px))
+      height: em(1400px) - em($longform-header-offset)
     &:after
       +box-shadow(inset 0 -200px 200px rgba($black, 0.7))
       content: ''
@@ -39,7 +86,7 @@ $bp-adjust-horizontal-figures--2: 1440px
       height: 100%
       width: 200%
       left: -50%
-      bottom: -50px
+      top: 0px
 
   .article__main-image--longform
     +background-size(cover)
@@ -50,28 +97,69 @@ $bp-adjust-horizontal-figures--2: 1440px
     background-position: center center
     position: absolute
     top: 0
-    height: 100%
     left: 0
-    right: 0
+    width: 100%
+    &.video--fallback
+      display: none
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      margin: auto
+      min-height: 100%
+      @media only screen and (orientation : portrait)
+        left: -50%
+        min-width: 200%
+      
+  .article__main-video--longform
+    overflow: hidden
+    position: relative
+    height: 100%
+    z-index: 1
+    .video--fallback
+      display: none
+    video
+      position: absolute
+      bottom: 0
+      left: 0
+      min-width: 100%
+      min-height: 100%
+      max-width: none
 
   .article__title-wrap
     position: absolute
     overflow: hidden
     text-align: center
     bottom: 0
-    padding-bottom: 4%
     padding-left: 5%
     padding-right: 5%
     width: 100%
     z-index: 2
     .article__meta
+      font-size: $little
+      letter-spacing: $hair
       color: $white
       margin-bottom: 3em
       a
         +link-colors($white, $white, $white, $white, $white)
         border-color: $white
 
-  .article__meta__source
+  &.has-light-header
+    .article__head-wrap
+      background-color: $charcoal
+      color: $charcoal
+      &:after
+        +box-shadow(none)
+    .article__title-wrap
+      .article__subtitle, .article__title, .article__meta
+        +text-shadow(rgba($white, 1) 0 0 30px)
+        color: $black
+      .article__meta a
+        +link-colors($black, $black, $black, $black, $black)
+        border-color: $black
+
+
+  .article__meta__second__source
     display: none
 
   .article__subpage-head
@@ -79,14 +167,12 @@ $bp-adjust-horizontal-figures--2: 1440px
     margin: $small auto $small auto
     font-size: $font-xl--px
     font-size: $font-xl--rem
-    max-width: 920px
+    max-width: $longform-content-max-width
+    max-width: rem($longform-content-max-width)
     +respond-min($break-1)
       font-size: $font-xxl--px
       font-size: $font-xxl--rem
-      margin-bottom: $medium
       margin-top: $medium
-    +respond-min($break-2)
-      padding-left: $gutter
     a
       display: block
       position: relative
@@ -99,10 +185,8 @@ $bp-adjust-horizontal-figures--2: 1440px
       display: inline
     @extend %meta
     max-width: em(240px)
-    background-color: $white
     border-bottom: $micro solid $grey
-    padding-top: $medium
-    padding-bottom: $gutter
+    padding: 0 $small
     margin-right: $gutter*2
     float: left
     position: relative
@@ -118,7 +202,7 @@ $bp-adjust-horizontal-figures--2: 1440px
         border-color: $grey
     span
       display: block
-      margin: $gutter $gutter $gutter $gutter
+      margin: $gutter 0
     .article__subpage-active
       color: $black
 
@@ -149,10 +233,23 @@ $bp-adjust-horizontal-figures--2: 1440px
   .article__title
     +tablet
     color: $white
+    line-height: 1.2
+    margin-bottom: $tiny
+    font-size: $font-xxxxl--px
+    +respond-min($break-2)
+      font-size: $font-xxxxxl--px
 
   .article__body
     padding-left: 0
     padding-right: 0
+    padding-bottom: 0
+    background-color: $white
+    p
+      margin-bottom: $little
+    p:first-of-type
+      +respond-min($comments__break-overlap)
+        padding-right: 0
+
 
   .article__page
     padding-top: $small
@@ -161,13 +258,23 @@ $bp-adjust-horizontal-figures--2: 1440px
     +respond-min($break-1)
       padding-top: $medium
       padding-bottom: $medium
-    &:nth-child(2n+1)
-      background-color: $grey--light
+    .article__subpage-index
+      background-color: $grey--bright 
+    &:nth-child(2n+2)
+      background-color: $grey--bright
+      .article__subpage-index
+        background-color: $white
+    &:first-child
+      +respond-min($break-3)
+        padding-top: $wide
+    &:nth-child(2)
+      +tablet
+
 
   .article__page-wrap
     +padded
-    max-width: em(1460px)
-    margin: 0 auto
+    max-width: $max-longform-width
+    margin: $medium auto
 
   .quote--wide
     +respond-min($break-3)
@@ -182,38 +289,43 @@ $bp-adjust-horizontal-figures--2: 1440px
     max-width: rem($longform-content-max-width)
     &.padded
       +box-sizing(content-box)
+    +respond-min($break-3)
+      max-width: $longform-content-max-width*1.13
+      max-width: rem($longform-content-max-width)*1.13
 
   figure
-    &.figure-full-width
-      .figure__caption, figcaption
-        +max-width-rem($longform-content-max-width)
+    // &.figure-full-width
+    //   .figure__caption, figcaption
+    //     +max-width-rem($longform-content-max-width)
     &.figure-horizontal, &.figure-horizontal--right
-      +respond-min(em($bp-adjust-horizontal-figures--1))
-        +max-width-rem($longform-inline-max-width)
-        width: 60%
-        margin-left: auto
-        margin-right: auto
+      +max-width-rem($longform-inline-max-width)
+      margin-left: auto
+      margin-right: auto
+      +respond-min(em($bp-adjust-horizontal-figures--2))
         position: relative
+        width: 100%
         .figure__media, img
           float: none
           width: 100%
         .figure__caption, figcaption
+          +max-width-rem(240px)
+          width: em(200px)
           position: absolute
           left: 100%
-          width: auto
           padding-left: $gutter
-          width: 30%
           top: 0
           float: none
-      +respond-min(em($bp-adjust-horizontal-figures--2))
-        width: 100%
+      +respond-min(em($bp-adjust-horizontal-figures--3))
         .figure__caption, figcaption
-          width: 25%
+          width: em(220px)
+      +respond-min(em($bp-adjust-horizontal-figures--4))
+        .figure__caption, figcaption
+          width: 100%
       .figure__media, img
         +max-width-rem($longform-inline-max-width)
       .figure__caption, figcaption
     &.figure-horizontal--right
-      +respond-min(em($bp-adjust-horizontal-figures--1))
+      +respond-min(em($bp-adjust-horizontal-figures--2))
         .figure__caption, figcaption
           right: 100%
           left: auto

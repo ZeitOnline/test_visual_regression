@@ -1,7 +1,10 @@
 from mock import Mock
+from re import match
+from datetime import date
 import pyramid.config
 import pytest
 import zeit.frontend.application
+import pyramid.threadlocal
 
 
 @pytest.fixture(scope="module")
@@ -12,7 +15,7 @@ def jinja2_env(request):
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
     lines = tpl.module.paragraph(html).splitlines()
     output = ""
@@ -23,8 +26,22 @@ def test_macro_p_should_produce_markup(jinja2_env):
     assert markup == output
 
 
+def test_macro_raw_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    css_class = 'raw'
+    markup = '<div class="%s">'\
+        '<blink>ZEIT ONLINE</blink>'\
+        '</div>' % css_class
+    obj = {'xml': '<blink>ZEIT ONLINE</blink>'}
+    lines = tpl.module.raw(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line
+        assert markup == output
+
+
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_class = 'article__subpage-chapter'
 
     # assert normal markup
@@ -42,8 +59,36 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_chapter(0, '', '')
 
 
+def test_macro_footer_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    current_year = date.today().year
+
+    # assert normal markup
+    markup = '<footer class="main-footer">' \
+        '<div class="main-footer__Z">' \
+        '<img src="http://localhost/img/z-logo.svg" ' \
+        'class="main-footer__Z__img" /></div>' \
+        '<div class="main-footer__C">&copy; ' \
+        + str(current_year) + ' ZEIT Online</div>' \
+        '</figure>' \
+        '</footer>'
+
+    request = Mock()
+
+    def route_url(str):
+        return 'http://localhost/'
+
+    request.route_url = route_url
+
+    lines = tpl.module.main_footer(current_year, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
@@ -60,7 +105,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs-wrap is-full-width">' \
@@ -78,7 +123,7 @@ def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
 
 
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
     markup_standart = '<div class="%s">' % css_index
 
@@ -87,8 +132,8 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     fake_page.teaser = 'Erster'
 
     # assert normal markup
-    markup = '%s<span><a href="#kapitel1">1 -- Erster</a></span></div>' % (
-        markup_standart)
+    markup = u'%s<span><a href="#kapitel1">1 \u2014 ' \
+        'Erster</a></span></div>' % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -98,7 +143,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert active markup
     css_active = 'article__subpage-active'
-    markup_active = '%s<span class="%s">1 -- Erster</span></div>' \
+    markup_active = u'%s<span class="%s">1 \u2014 Erster</span></div>' \
         % (markup_standart, css_active)
     lines_active = tpl.module.subpage_index(
         [fake_page], 'Title', 1, css_index, css_active).splitlines()
@@ -112,7 +157,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_head_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_class = 'article__subpage-head'
 
     # assert normal markup
@@ -128,12 +173,12 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_head(1, '', css_class)
 
 
-def test_macro_author_date_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    markup = '<span class="article__meta__source">' \
-        'Aus zon</span><span class="article__meta__date">01.01.2013' \
+def test_macro_source_date_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    markup = '<span class="article__meta__second__source">' \
+        'zon</span><span class="article__meta__second__date">01.01.2013' \
         '</span>'
-    lines = tpl.module.author_date('01.01.2013', 'zon').splitlines()
+    lines = tpl.module.source_date('01.01.2013', 'zon').splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -141,7 +186,7 @@ def test_macro_author_date_should_produce_markup(jinja2_env):
 
 
 def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     lines = tpl.module.intertitle("xy").splitlines()
     output = ""
     for line in lines:
@@ -151,7 +196,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
 
 
 def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert normal quote
     obj = {'layout': 'quote', 'attribution': 'Autor',
@@ -179,7 +224,7 @@ def test_macro_citation_should_produce_valid_markup(jinja2_env):
 
 
 def test_macro_advertising_should_produce_script(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # test normal
     ad = {'type': 'rectangle'}
@@ -192,76 +237,151 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_image_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+def test_image_should_produce_markup(jinja2_env, monkeypatch):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
-            'caption': 'test', 'copyright': 'test'},
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
            {'layout': 'zmo-xl',
             'css': 'article__main-image figure-full-width',
-            'caption': 'test', 'copyright': 'test'},
-           {'layout': 'zmo-medium', 'align': 'left',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-medium-left',
             'css': 'figure-horizontal',
-            'caption': 'test', 'copyright': 'test'},
-           {'layout': 'zmo-medium', 'align': 'right',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-medium-right',
             'css': 'figure-horizontal--right',
-            'caption': 'test', 'copyright': 'test'},
-           {'layout': 'zmo-medium', 'align': False, 'css': 'figure '
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-medium-center', 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
-            'copyright': 'test'},
-           {'layout': 'small', 'align': 'right',
+            'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-right',
             'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': 'test'},
-           {'layout': 'small', 'align': False, 'css': 'figure-stamp',
-            'caption': 'test', 'copyright': 'test'}]
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-left', 'css': 'figure-stamp',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-large-center',
+            'css': 'figure-full-width',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           {'layout': 'zmo-small-right', 'align': False,
+            'css': 'figure-stamp--right',
+            'caption': 'test', 'copyright': 'test',
+            'attr_alt': 'My alt content',
+            'attr_title': 'My title content'},
+           ]
+
+    class Image(object):
+
+        src = '/img/artikel/01/01.jpg'
+
+        def __init__(self, data):
+            vars(self).update(data)
+
+    def route_url(str):
+        return 'http://localhost/'
+
+    def get_current_request():
+        my_mock = Mock()
+        my_mock.route_url = route_url
+        return my_mock
+
+    monkeypatch.setattr(
+        pyramid.threadlocal, 'get_current_request', get_current_request)
 
     for el in obj:
         print el['css']
-        lines = tpl.module.image(el).splitlines()
+        print el['layout']
+        lines = tpl.module.image(Image(el)).splitlines()
         output = ""
         for line in lines:
             output += line.strip()
-        markup = '<figure class="%s"><img class="figure__media"' \
-            ' src="http://placehold.it/160x90"><figcaption' \
-            ' class="figure__caption">testtest</figcaption></figure>' \
-            % el['css']
-        assert markup == output
+        markup = '<figure class="%s"><div class="scaled-image">' \
+                 '<!--\[if gte IE 9\]> --><noscript data-ratio="">' \
+                 '<!-- <!\[endif\]--><img alt="%s" title="%s" ' \
+                 'class="figure__media" ' \
+                 'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
+                 'data-ratio=""><!--\[if gte IE 9\]> --></noscript>' \
+                 '<!-- <!\[endif\]--></div><figcaption ' \
+                 'class="figure__caption">test<span ' \
+                 'class="figure__copyright">test</span>' \
+                 '</figcaption></figure>' \
+                 % (el['css'], el['attr_alt'], el['attr_title'])
+        assert match(markup, output)
 
 
-def test_macro_head_image_longform_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    obj = {'caption': 'test', 'copyright': 'test', 'src': 'test.gif'}
-    lines = tpl.module.head_image_longform(obj).splitlines()
+def test_macro_headerimage_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    obj = Mock()
+    obj.caption = 'test'
+    obj.copyright = 'test'
+    obj.src = 'test.gif'
+
+    lines = tpl.module.headerimage(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-    markup = '<div class="article__main-image--longform"' \
-        ' style="background-image: url(test.gif)";>testtest</div>'
-    assert markup == output
+
+    start = '<div class="scaled-image is-pixelperfect">' \
+            '<!--[if gte IE 9]> --><noscript><!-- <![endif]-->' \
+            '<img class="article__main-image--longform" src="'
+
+    end = '--></noscript><!-- <![endif]--></div>testtest'
+    assert output.startswith(start)
+    assert output.endswith(end)
 
 
-def test_macro_meta_author_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    data = {'name': "y", 'prefix': ' von ', 'suffix': ', '}
-    markup = 'von <span class="article__meta__author">y</span>,'
-    assert markup == tpl.module.meta_author(data).strip()
-    data['href'] = 'x'
-    markup = 'von <a href="x" class="article__meta__author meta-link">y</a>,'
-    assert markup == tpl.module.meta_author(data).strip()
+def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    test_class = 'test'
+    obj = [{'prefix': 'von', 'href': 'www.zeit.de',
+            'name': 'Tom', 'location': ', Bern', 'suffix': 'und'},
+           {'prefix': '', 'href': '',
+            'name': 'Anna', 'location': '', 'suffix': ''}]
+    markup = 'von<a href="www.zeit.de" class="test meta-link">Tom</a>, Bern' \
+             'und<span class="test">Anna</span>'
+    lines = tpl.module.meta_author(obj, test_class).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup.strip() == output
 
 
-def test_macro_authorlink_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
-    data = {'name': 'abc'}
-    markup = '<span class="article__meta__author">abc</span>'
-    assert markup == tpl.module.authorlink(data).strip()
-    markup = '<a href="xyz" class="article__meta__author meta-link">abc</a>'
-    data = {'name': 'abc', 'href': 'xyz'}
-    assert markup == tpl.module.authorlink(data).strip()
+def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    test_class = 'test'
+    obj = []
+    lines = tpl.module.meta_author(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert '' == output
 
 
 def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     article = Mock()
     article.supertitle = "SUPER"
@@ -301,7 +421,7 @@ def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
 
 
 def test_macro_video_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/block_elements.tpl')
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
@@ -318,24 +438,302 @@ def test_macro_video_should_produce_markup(jinja2_env):
     assert cap in output
 
     # assert different formates
-    obj['format'] = 'small'
-    fig = '<figure class="figure-stamp" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
+    obj = [
+        {'format': 'zmo-small-left',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'},
+        {'format': 'zmo-small-right',
+         'id': 1,
+         'fig': '<figure class="figure-stamp--right" data-video="1">'},
+        {'format': 'zmo-large-center',
+         'id': 1,
+         'fig': '<figure class="figure-full-width" data-video="1">'},
+        {'format': 'large',
+         'id': 1,
+         'fig': '<figure class="figure-full-width" data-video="1">'},
+        {'format': 'zmo-small-left',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'},
+        {'format': 'small',
+         'id': 1,
+         'fig': '<figure class="figure-stamp" data-video="1">'}]
+
+    for el in obj:
+        lines = tpl.module.video(el).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        print lines
+        assert el['fig'] in output
+
+
+def test_macro_headervideo_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+
+    # assert default video
+    obj = {'video_still': 'test.jpg', 'source': 'test.mp4', 'id': 1}
+    wrapper = '<div data-backgroundvideo="1'
+    video = '<video preload="auto" autoplay="true" ' \
+            'loop="loop" muted="muted" volume="0"'
+    source = '<source src="test.mp4'
+    source_webm = 'http://opendata.zeit.de/zmo-videos/1.webm'
+    img = '<img '
+    fallback = '<img class="article__main-image--longform' \
+        ' video--fallback" src="test.jpg'
+    lines = tpl.module.headervideo(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-    assert fig in output
-    obj['format'] = 'small-right'
-    fig = '<figure class="figure-stamp--right" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
+    assert wrapper in output
+    assert video in output
+    assert source in output
+    assert source_webm in output
+    assert img in output
+    assert fallback in output
+
+
+def test_macro_sharing_meta_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    # test usual
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
+           'twitter_card_type': 'summary'}
+    request = {'host': 'test.de', 'path_info': '/myurl'}
+    twitter = ['<meta name="twitter:card" content="summary">',
+               '<meta name="twitter:site" content="@zeitonline">',
+               '<meta name="twitter:creator" content="@zeitonline">',
+               '<meta name="twitter:title" content="title">',
+               '<meta name="twitter:description" content="subtitle">']
+    fb = ['<meta property="og:site_name" content="ZEIT ONLINE">',
+          '<meta property="fb:admins" content="595098294">',
+          '<meta property="og:type" content="article">',
+          '<meta property="og:title" content="title">',
+          '"og:description" itemprop="description" content="subtitle">',
+          '<meta property="og:url" content="test.de/myurl">']
+    image = ['<meta property="og:image" class="scaled-image" content="',
+             '<link itemprop="image" class="scaled-image" rel="image_src"',
+             '<meta class="scaled-image" name="twitter:image" content="']
+    lines = tpl.module.sharing_meta(obj, request).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-    assert fig in output
-    obj['format'] = 'large'
-    fig = '<figure class="figure-full-width" data-video="1">'
-    lines = tpl.module.video(obj).splitlines()
+    for fb_meta in fb:
+        assert fb_meta in output
+    for twitter_meta in twitter:
+        assert twitter_meta in output
+    for img in image:
+        assert img in output
+
+    # test video still is set as sharing img
+    obj = {'title': 'title', 'subtitle': 'subtitle',
+           'sharing_img': {'video_still': 'true'},
+           'twitter_card_type': 'summary_large_image'}
+    twitter = ['<meta name="twitter:card" content="summary_large_image">']
+    image = ['<meta property="og:image" content="',
+             '<link itemprop="image" rel="image_src"',
+             '<meta name="twitter:image" content="']
+    lines = tpl.module.sharing_meta(obj, request).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-    assert fig in output
+    print output
+    for twitter_meta in twitter:
+        assert twitter_meta in output
+    for img in image:
+        print img
+        assert img in output
+
+
+def test_macro_ga_tracking_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    elems = ["<script",
+             "_gaq.push(['_setAccount'",
+             "_gaq.push(['_setDomainName'",
+             "_gaq.push (['_gat._anonymizeIp'",
+             "_gaq.push(['_trackPageview'",
+             "</script"]
+    lines = tpl.module.ga_tracking().splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_cc_tracking_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    string = "lebensart/mode/article"
+    elems = ['<script',
+             'src="http://cc.zeit.de/cc.gif?banner-channel=' + string,
+             "</script"]
+    lines = tpl.module.cc_tracking(string).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    elems = ['<script',
+             'src="http://scripts.zeit.de/js/rsa.js"',
+             'loadMWA208571()',
+             'mainMWA208571()',
+             "</script"]
+    lines = tpl.module.meetrics_tracking().splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    obj = {'ressort': 'lebensart',
+           'sub_ressort': 'mode',
+           'type': 'article',
+           'tracking_type': 'Artikel',
+           'author': {
+               'name': 'Martin Mustermann'},
+           'banner_channel': 'lebensart/mode/article',
+           'text_length': 1000,
+           'rankedTagsList': 'test;test'}
+    request = {'path_info': '/test/test'}
+    el_def = ['<script',
+              'src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"',
+              "</script",
+              "wt.sendinfo();",
+              "http://zeit01.webtrekk.net/" +
+              "981949533494636/wt.pl?p=311,redaktion" +
+              ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0&" +
+              "cg1=Redaktion&cg2=Artikel&cg3=lebensart&cg4=Online&" +
+              "cp1=Martin Mustermann&cp2=lebensart/mode/article&cp3=1&cp4=" +
+              "test;test&cp6=1000&cp7=&cp9=lebensart/mode/article"]
+    el_cont = ['1: "Redaktion"',
+               '2: "Artikel"',
+               '3: "lebensart"',
+               '4: "Online"']
+    el_cust = ['1: "Martin Mustermann"',
+               '2: "lebensart/mode/article"',
+               '3: "1/1"',
+               '4: "test;test"',
+               '6: "1000"',
+               '7: ""',
+               '9: "lebensart/mode/article"']
+    lines = tpl.module.webtrekk_tracking(obj, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in el_def:
+        assert el in output
+    for el in el_cont:
+        assert el in output
+    for el in el_cust:
+        assert el in output
+
+
+def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    string = "lebensart/mode/article"
+    elems = ['<script',
+             'var Z_IVW_RESSORT = "' + string,
+             'var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + string,
+             'document.write("<img src=',
+             '</script',
+             '<img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
+             + string]
+    lines = tpl.module.ivw_ver1_tracking(string).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    obj = {'ressort': 'lebensart',
+           'sub_ressort': 'mode'}
+    request = {'path_info': '/test/test'}
+    elems = ['<script',
+             '"st" : ""',
+             '"cp" : "lebensart/mode/bild-text"',
+             '"sv" : "ke"',
+             '"co" : "URL: /test/test"',
+             'iom.c(iam_data,1);'
+             '</script']
+    lines = tpl.module.ivw_ver2_tracking(obj, request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_adplace_should_produce_markup(jinja2_env):
+    # todo: after importing banner.xml to the system
+    # make multiple tests from this
+    # with all standard banner
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    banner = {'name': 'superbanner',
+              'tile': '1',
+              'sizes': ['728x90'],
+              'dcopt': 'ist',
+              'label': 'anzeige',
+              'noscript_width_height': ('728', '90'),
+              'diuqilon': True,
+              'min_width': 768}
+    num = '123456789'
+    markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
+             'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
+             'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
+             '+ diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
+             '/javascript"><\/script>\');'
+    lines = tpl.module.adplace(banner).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup in output
+
+
+def test_add_publish_date_generates_script(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+
+    obj = [{'lm': None,
+            'pd': '1.Januar2014',
+            'markup': ''},
+           {'lm': '2.Januar2014',
+            'pd': '1.Januar2014',
+            'markup': '1.Januar2014'}]
+
+    for el in obj:
+        lines = tpl.module.add_publish_date(el['lm'], el['pd']).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        assert el['markup'] in output
+
+
+def test_date_meta_should_produce_metatags(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    obj = [{'date_last_published_semantic': '',
+            'date_first_released_meta': '1.1.2011',
+            'markup': '<meta name="last-modified" content="1.1.2011"/>'},
+           {'date_last_published_semantic': '1.2.2011',
+            'date_first_released_meta': '1.1.2011',
+            'markup': '<meta name="last-modified" content="1.2.2011"/>'}]
+
+    for el in obj:
+        lines = tpl.module.date_meta(el).splitlines()
+        output = ""
+        for line in lines:
+            output += line.strip()
+        assert el['markup'] in output
+
+
+def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    assert tpl.module.no_block('') == ''

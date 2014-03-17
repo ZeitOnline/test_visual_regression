@@ -1,3 +1,8 @@
+from zeit.frontend.block import Video
+from zeit.frontend.block import HeaderVideo
+from mock import Mock
+
+
 def test_video_html(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
@@ -27,3 +32,44 @@ def test_video_html(selenium_driver, testserver):
             # test if the correct video is shown
             assert wrap.get_attribute(
                 "data-video") == video.get_attribute("data-video")
+
+
+def test_video_source_should_be_highes_rendition_url():
+    model_block = Mock()
+    rend_1 = Mock()
+    rend_1.frame_width = 460
+    rend_1.url = "http://rend_1"
+
+    rend_2 = Mock()
+    rend_2.frame_width = 1860
+    rend_2.url = "http://rend_2"
+
+    rend_3 = Mock()
+    rend_3.frame_width = 1260
+    rend_3.url = "http://rend_3"
+    model_block.video.uniqueId = 'foo'
+
+    model_block.video.renditions = [rend_1, rend_2, rend_3]
+    video = Video(model_block)
+
+    assert video.source == "http://rend_2"
+
+    model_block.video.renditions = None
+    video = Video(model_block)
+    assert video.source is None
+
+
+def test_header_video_should_be_created_if_layout_is_zmo_header():
+    model_block = Mock()
+    model_block.layout = 'zmo-xl-header'
+    model_block.video.uniqueId = 'foo'
+    h_video = HeaderVideo(model_block)
+    assert type(h_video) == HeaderVideo
+    assert h_video.format == 'zmo-xl-header'
+
+    model_block = Mock()
+    model_block.layout = 'zmo-xl-noheader'
+    model_block.video.uniqueId = 'foo'
+
+    h_video = HeaderVideo(model_block)
+    assert h_video is None

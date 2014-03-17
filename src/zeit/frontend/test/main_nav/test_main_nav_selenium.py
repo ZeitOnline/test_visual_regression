@@ -8,6 +8,46 @@ def screen_size(request):
     return request.param
 
 
+def test_compact_main_nav(selenium_driver, testserver, screen_size):
+    # run twice, once for small screens, once for large
+    driver = selenium_driver
+
+    # set to small size on first run
+    small_screen = screen_size[2]
+    driver.set_window_size(screen_size[0], screen_size[1])
+
+    driver.get('%s/artikel/05' % testserver.url)
+
+    nav_list = driver.find_elements_by_class_name('main-nav')
+    main_nav = driver.find_elements_by_class_name('main-nav')[0]
+    logo = main_nav.find_element_by_class_name('main-nav__logo__img')
+    sharing = main_nav.find_element_by_class_name('main-nav__sharing')
+    buttons = sharing.find_elements_by_class_name('main-nav__sharing__item')
+    twitter = sharing.find_element_by_class_name('icon-twitter')
+    facebook = sharing.find_element_by_class_name('icon-facebook')
+    google = sharing.find_element_by_class_name('icon-google')
+
+    # there's exactly one navigation
+    assert(len(nav_list) == 1)
+
+    # navigation is visible
+    assert(main_nav.is_displayed())
+
+    # there is a logo
+    assert(logo.is_displayed())
+
+    # sharing is visible
+    assert(sharing.is_displayed())
+
+    # sharing has three buttons
+    assert(len(buttons) == 3)
+
+    # twitter, facebook and google buttons are visible
+    assert(twitter.is_displayed())
+    assert(facebook.is_displayed())
+    assert(google.is_displayed())
+
+
 def test_main_nav(selenium_driver, testserver, screen_size):
     # run twice, once for small screens, once for large
     driver = selenium_driver
@@ -28,11 +68,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     trigger = main_nav.find_element_by_class_name('main-nav__menu__head')
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
     logo = main_nav.find_element_by_class_name('main-nav__logo__img')
-
-    all_res = main_nav.find_element_by_class_name('main-nav__all-ressorts')
-    all_res_trig = all_res.find_element_by_class_name(class_trig)
-    all_res_cont = all_res.find_element_by_class_name(class_cont)
-    all_res_links = all_res_cont.find_elements_by_tag_name('a')
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
     res_content = res.find_element_by_class_name(class_cont)
@@ -67,20 +102,14 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     else:
         assert(menu.is_displayed())
 
+
     # menu can be opened by click
-    trigger.click()
+    if small_screen:
+        trigger.click()
     assert(menu.is_displayed())
 
     # there is a logo
     assert(logo.is_displayed())
-
-    # all ressorts are present and can be opened
-    assert(all_res_trig.is_displayed())
-    all_res_trig.click()
-    assert(all_res_cont.is_displayed())
-
-    # all ressorts dropdown contains at least one link
-    assert(len(all_res_links) > 0)
 
     # service is present and can be opened
     assert(service_trig.is_displayed())
