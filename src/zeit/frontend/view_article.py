@@ -105,6 +105,17 @@ class Article(zeit.frontend.view.Base):
         return self.request.host_url + path
 
     @property
+    def pages_urls(self):
+        _pages_urls = []
+        for number in range(0, len(self.pages)):
+            url = self.request.host_url + self.article_url
+            if number > 0:
+                url += '/seite-' + str(number+1)
+            _pages_urls.append(url)
+        return _pages_urls
+    
+
+    @property
     def pagination(self):
         return {
             'current': self.page_nr,
