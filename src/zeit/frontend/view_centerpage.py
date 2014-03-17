@@ -48,3 +48,9 @@ class Centerpage(zeit.frontend.view.Base):
     def area_lead(self):
         return self.context['lead'].values()
 
+    @property
+    def test_teaser(self):
+        context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+        asset = zeit.frontend.interfaces.IAutoSelectAsset(context, None)
+
+
