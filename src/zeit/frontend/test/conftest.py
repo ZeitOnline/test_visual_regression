@@ -4,6 +4,7 @@ from selenium import webdriver
 from webtest import TestApp
 from os.path import abspath, dirname, join, sep
 import pytest
+import pyramid.config
 import zeit.frontend.application
 
 
@@ -60,6 +61,13 @@ browsers = {
     'firefox': webdriver.Firefox
     #'phantomjs': webdriver.PhantomJS,
 }
+
+
+@pytest.fixture(scope="module")
+def jinja2_env(request):
+    app = zeit.frontend.application.Application()
+    app.config = pyramid.config.Configurator()
+    return app.configure_jinja()
 
 
 @pytest.fixture(scope='session')
