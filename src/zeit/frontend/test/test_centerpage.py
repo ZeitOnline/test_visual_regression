@@ -1,9 +1,11 @@
 from zope.testbrowser.browser import Browser
 import mock
 import pytest
-import zeit.cms.interfaces
 import requests
+import zeit.cms.interfaces
+import zeit.frontend.interfaces
 import zeit.frontend.view_centerpage
+import zeit.content.gallery.gallery
 
 def test_centerpage_should_have_correct_page_title(selenium_driver, testserver):
     driver = selenium_driver
@@ -41,5 +43,31 @@ def test_cp_area_lead_should_have_expected_markup(jinja2_env, testserver):
               u"            <span class='teaser__title teaser__default__title'>Mei, is des traurig!</span>",
               u'        </a>',
               u'    </h2>',
-              u'</div>    </div>    </div>']
-    assert tpl.render(view=view, request=view.request).splitlines() == result
+              ]
+    render = tpl.render(view=view, request=view.request).splitlines()
+    assert render[:10] == result
+
+def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(testserver):
+    article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    assert type(asset) == zeit.content.gallery.gallery.Gallery
+
+def test_autoselected_asset_from_cp_teaser_should_be_an_image(testserver):
+    article = 'http://xml.zeit.de/centerpage/article_image_asset'
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    assert type(asset) == zeit.content.image.imagereference.ImagesAdapter
+
+def test_autoselected_asset_from_cp_teaser_should_be_a_video(testserver):
+    article = 'http://xml.zeit.de/centerpage/article_video_asset'
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    assert type(asset) == zeit.content.video.video.Video
+
+def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
+    article = 'http://xml.zeit.de/centerpage/article_video_asset_2'
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    assert type(asset[0]) == zeit.content.video.video.Video
+    assert type(asset[1]) == zeit.content.video.video.Video
