@@ -101,10 +101,8 @@ class Article(zeit.frontend.view.Base):
 
     @property
     def article_url(self):
-        traversed_path = ''
-        for path in self.request.traversed:
-            traversed_path += '/' + path
-        return self.request.host_url + traversed_path
+        path = '/'.join(self.request.traversed)
+        return self.request.host_url + path
 
     @property
     def pagination(self):
