@@ -414,4 +414,30 @@ def test_pagination_next_title_should_be_in_html(testserver):
     assert 'Sogar die eckige Flasche kommt' in browser.contents
 
 
+def test_pagination_urls_list_should_have_correct_entries_paged_article(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/03/seite-2'
+    view.request.traversed = ('artikel', '03')
+    view.request.host_url = ''
+
+    assert view.pages_urls[0] == 'artikel/03'
+    assert view.pages_urls[1] == 'artikel/03/seite-2'
+    assert view.pages_urls[2] == 'artikel/03/seite-3'
+
+
+def test_pagination_urls_list_should_have_correct_entries_single_article(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/01'
+    view.request.traversed = ('artikel', '01')
+    view.request.host_url = ''
+
+    assert view.pages_urls[0] == 'artikel/01'
+    assert len(view.pages_urls) == 1
+
+
+
 
