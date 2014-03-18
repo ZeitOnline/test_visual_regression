@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import urlparse
+from datetime import datetime
 from lxml import etree
 
 from pyramid.view import view_config
@@ -23,11 +24,19 @@ class Agatho(object):
 def comment_as_json(comment):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
+    if comment.xpath('author/@roles'):
+      roles = comment.xpath('author/@roles')[0]
+    else:
+      roles = ''
     return dict(indented=bool(len(comment.xpath('inreply'))),
         img_url=u'',
         name=comment.xpath('author/name/text()')[0],
-        timestamp="1.1.1970", # todo: parse date element
-        role=False,
+        timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
+                           int(comment.xpath('date/month/text()')[0]),
+                           int(comment.xpath('date/day/text()')[0]),
+                           int(comment.xpath('date/hour/text()')[0]),
+                           int(comment.xpath('date/minute/text()')[0])),
+        role=roles,
         text=comment.xpath('content/text()')[0])
 
 def get_thread(unique_id, request):
