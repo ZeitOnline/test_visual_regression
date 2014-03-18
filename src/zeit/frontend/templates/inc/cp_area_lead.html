@@ -1,5 +1,11 @@
 <div class='area__lead'>
-    {% for teaser_block in view.area_lead %}
-        {% include 'templates/inc/teaser_block_' + teaser_block.type + '.html' ignore missing %}
+    {% for teaser_block in view.area_lead -%}
+        {%-
+           set teaser_blocks = [
+                'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
+                'templates/inc/teaser_block_default.html'
+                ]
+        %}
+        {% include teaser_blocks ignore missing %}
     {% endfor %}
 </div>

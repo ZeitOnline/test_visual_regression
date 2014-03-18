@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
+- Add a method to load teaser_blocks and teasers
 - Implement pagination from backend
 - Register views for Article Pages
 - Add a tool for downloading resources from CMS.
@@ -14,6 +15,7 @@ templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 - add date, source, genre testing
 - fix author issue and add testing
+- implement pagination in frontend
 
 
 0.2.15 (2014-02-27)

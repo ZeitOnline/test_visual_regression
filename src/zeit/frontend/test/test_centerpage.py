@@ -1,4 +1,5 @@
 from zope.testbrowser.browser import Browser
+from zeit.frontend.application import most_sufficient_teaser_tpl
 import mock
 import pytest
 import requests
@@ -6,6 +7,7 @@ import zeit.cms.interfaces
 import zeit.frontend.interfaces
 import zeit.frontend.view_centerpage
 import zeit.content.gallery.gallery
+
 
 def test_centerpage_should_have_correct_page_title(selenium_driver, testserver):
     driver = selenium_driver
@@ -46,6 +48,19 @@ def test_cp_area_lead_should_have_expected_markup(jinja2_env, testserver):
               ]
     render = tpl.render(view=view, request=view.request).splitlines()
     assert render[:10] == result
+
+def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
+    should = [
+        'templates/inc/teaser/teaser_lead_article_video.html',
+        'templates/inc/teaser/teaser_lead_article_default.html',
+        'templates/inc/teaser/teaser_lead_default_video.html',
+        'templates/inc/teaser/teaser_lead_default_default.html',
+        'templates/inc/teaser/teaser_default_article_video.html',
+        'templates/inc/teaser/teaser_default_article_default.html',
+        'templates/inc/teaser/teaser_default_default_video.html',
+        'templates/inc/teaser/teaser_default_default_default.html']
+    result = most_sufficient_teaser_tpl('lead', 'article', 'video')
+    assert result == should
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(testserver):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
