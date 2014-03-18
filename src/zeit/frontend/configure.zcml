@@ -4,6 +4,8 @@
 
   <include file="vivi.zcml" />
 
+  <grok:grok package="." exclude="test" />
+
   <utility
     factory="zeit.cms.repository.repository.Repository"
     provides="zeit.cms.repository.interfaces.IRepository"

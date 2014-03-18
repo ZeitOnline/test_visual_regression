@@ -4,10 +4,8 @@ from urlparse import urlsplit, urlunsplit
 from grokcore.component import adapter, implementer
 from zeit.magazin.interfaces import IArticleTemplateSettings
 from zeit.frontend.article import ILongformArticle
-import grokcore.component.zcml
 import jinja2
 import logging
-import martian
 import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
@@ -26,12 +24,6 @@ log = logging.getLogger(__name__)
 
 
 class Application(object):
-
-    DONT_GROK = (
-        'conftest',
-        'test',
-        'testing',
-    )
 
     def __init__(self):
         self.settings = {}
@@ -99,12 +91,6 @@ class Application(object):
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
         self.configure_connector(context)
-        # can't use <grok> directive since we can't configure excludes there
-        martian.grok_dotted_name(
-            'zeit.frontend',
-            grokcore.component.zcml.the_module_grokker,
-            exclude_filter=lambda name: name in set(self.DONT_GROK),
-            config=context)
         context.execute_actions()
 
     def configure_connector(self, context):
