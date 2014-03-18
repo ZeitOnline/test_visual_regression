@@ -206,13 +206,12 @@
         <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
                 <source src="{{obj.source}}" type="video/mp4">
                 <source src="http://opendata.zeit.de/zmo-videos/{{obj.id}}.webm" type="video/webm">
-                <!-- <img class="article__main-image--longform" style="background-image:url({{obj.video_still}})"> -->
         </video>
         <img class="article__main-image--longform video--fallback" src="{{obj.video_still}}">
     </div>
 {%- endmacro %}
 
-{% macro comment(indented, img_url, name, min_ago, role, text) -%}
+{% macro comment(indented, img_url, name, timestamp, role, text) -%}
     <article class="comment {% if indented -%}is-indented{%- endif %}">
         <div class="comment__head">
             {% if img_url -%}
@@ -236,7 +235,7 @@
     </article>
 {%- endmacro %}
 
-{% macro mock_comments(comments) -%}
+{% macro comments(comments) -%}
     {% if comments is not none -%}
     <div class="tc">
         <div class="article__comments-trigger" id="js-comments-trigger">

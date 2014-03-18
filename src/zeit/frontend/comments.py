@@ -26,7 +26,7 @@ def comment_as_json(comment):
     return dict(indented=bool(len(comment.xpath('inreply'))),
         img_url=u'',
         name=comment.xpath('author/name/text()')[0],
-        timestamp=None, # todo: parse date element
+        timestamp="1.1.1970", # todo: parse date element
         role=False,
         text=comment.xpath('content/text()')[0])
 

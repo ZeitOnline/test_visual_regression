@@ -2,8 +2,9 @@ from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
-from webtest import TestApp as TestAppBase
 from webtest import TestApp
+from webtest import TestApp as TestAppBase
+from os import path
 from os.path import abspath, dirname, join, sep
 import pytest
 import pyramid.config
@@ -28,7 +29,7 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-    'agatho_url': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments')
+    'agatho_url': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
     'proxy_url' : '',
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
@@ -131,7 +132,6 @@ def browser(application):
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
 
-
 class TestApp(TestAppBase):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
@@ -139,4 +139,3 @@ class TestApp(TestAppBase):
             headers = {}
         headers['Accept'] = 'application/json'
         return self.get(url, params, headers, *args, **kw)
-
