@@ -28,10 +28,13 @@ setup(
         'zeit.magazin',
         'zope.app.appsetup',
         'zope.configuration',
+        'zope.component',
+        'zope.processlifetime',
     ],
     entry_points={
         'paste.app_factory': [
             'main=zeit.frontend.application:factory',
+            'preview=zeit.frontend.preview:factory',
         ],
     },
     extras_require={

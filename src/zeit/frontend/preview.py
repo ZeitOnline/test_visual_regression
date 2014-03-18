@@ -1,0 +1,36 @@
+import pyramid.events
+import zeit.frontend.application
+import zope.component
+import zope.processlifetime
+
+
+class Application(zeit.frontend.application.Application):
+
+    def configure_zca(self):
+        # ZCA setup is done by preview.zcml, which is included by the CMS
+        # site.zcml at the right time, so the setup_zodb handler below works.
+        pass
+
+    def configure_product_config(self):
+        # Since we're running inside the CMS process, the product config is
+        # already set up.
+        pass
+
+factory = Application()
+
+
+@zope.component.adapter(zope.processlifetime.IDatabaseOpenedWithRoot)
+def setup_zodb(event):
+    db = event.database
+    connection = db.open()
+    root = connection.root()
+    # We should not hardcode the name, but use ZopePublication.root_name
+    # instead, but since the name is not ever going to be changed, we can
+    # safely skip the dependency on zope.app.publication.
+    root_folder = root.get('Application', None)
+    factory.root_folder = root_folder
+
+
+@pyramid.events.subscriber(pyramid.events.NewRequest)
+def set_site(request):
+    zope.component.hooks.setSite(factory.root_folder)
