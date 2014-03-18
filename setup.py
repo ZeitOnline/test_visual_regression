@@ -19,6 +19,7 @@ setup(
         'pyramid_jinja2',
         'pyramid_tm',
         'repoze.bitblt',
+        'repoze.vhm',
         'setuptools',
         'simplejson',
         'zeit.cms',

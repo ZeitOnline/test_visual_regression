@@ -154,7 +154,7 @@ class Application(object):
 
         """
         return [
-            # ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
+            ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
         ]
 
     def make_wsgi_app(self, global_config):
@@ -189,11 +189,7 @@ def translate_url(context, url):
     if request is None:  # XXX should only happen in tests
         return url
 
-    if request.registry.settings['proxy_url'] != '':
-        proxy = request.registry.settings['proxy_url']
-        return url.replace("http://xml.zeit.de/", proxy, 1)
-    host = 'http://%s' % (request.host)
-    return url.replace("http://xml.zeit.de", host, 1)
+    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
 def format_date(obj, type):
