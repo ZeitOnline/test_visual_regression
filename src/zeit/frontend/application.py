@@ -4,6 +4,8 @@ from urlparse import urlsplit, urlunsplit
 from grokcore.component import adapter, implementer
 from zeit.magazin.interfaces import IArticleTemplateSettings
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.centerpage import auto_select_asset
+import itertools
 import grokcore.component.zcml
 import jinja2
 import logging
@@ -81,12 +83,14 @@ class Application(object):
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
+        jinja.filters['auto_select_asset'] = auto_select_asset
         jinja.trim_blocks = True
         return jinja
 
@@ -246,6 +250,21 @@ def default_image_url(image):
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL.')
+
+def most_sufficient_teaser_tpl(block_layout,
+                               content_type,
+                               asset,
+                               prefix='templates/inc/teaser/teaser_',
+                               suffix='.html',
+                               separator='_'):
+
+        types = (block_layout, content_type, asset)
+        defaults =('default', 'default', 'default')
+        zipped =  zip(types, defaults)
+
+        combinations =  [t for t in itertools.product(*zipped)]
+        func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
+        return map(func, combinations)
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
 @implementer(pyramid.interfaces.ITraverser)

@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.2.16 (unreleased)
 -------------------
 
+- Add a method to load teaser_blocks and teasers
 - Implement pagination from backend
 - Register views for Article Pages
 - Add a tool for downloading resources from CMS.
