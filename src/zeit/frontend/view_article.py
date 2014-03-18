@@ -38,6 +38,9 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             name='komplettansicht',
+             renderer='templates/article_komplett.html')
 class Article(zeit.frontend.view.Base):
 
     advertising_enabled = True
@@ -92,10 +95,50 @@ class Article(zeit.frontend.view.Base):
         return self.pages[0]
 
     @property
+    def next_title(self):
+        try:
+            return self.pages[self.page_nr].teaser
+        except (IndexError):
+            return ''
+
+    @property
+    def article_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.host_url + '/' + path
+
+    @property
+    def pages_urls(self):
+        _pages_urls = []
+        for number in range(0, len(self.pages)):
+            url = self.article_url
+            if number > 0:
+                url += '/seite-' + str(number+1)
+            _pages_urls.append(url)
+        return _pages_urls
+
+    @property
+    def next_page_url(self):
+        _actual_index = self.page_nr - 1
+        total = len(self.pages)
+        return self.pages_urls[_actual_index +1] if _actual_index + 1 < total else None
+
+
+    @property
+    def prev_page_url(self):
+        actual_index = self.page_nr - 1
+        return self.pages_urls[actual_index -1] if actual_index-1 >= 0 else None 
+
+
+    @property
     def pagination(self):
         return {
             'current': self.page_nr,
-            'total': len(self.pages)
+            'total': len(self.pages),
+            'next_page_title': self.next_title,
+            'article_url': self.article_url,
+            'pages_urls': self.pages_urls,
+            'next_page_url': self.next_page_url,
+            'prev_page_url': self.prev_page_url
         }
 
     @property
@@ -397,9 +440,6 @@ class Article(zeit.frontend.view.Base):
              name='seite',
              path_info='.*seite-[0-9]+$',
              renderer='templates/article.html')
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             name='komplettansicht',
-             renderer='templates/article_komplett.html')
 class ArticlePage(Article):
 
     def __call__(self):
@@ -427,6 +467,13 @@ class ArticlePage(Article):
     @property
     def current_page(self):
         return zeit.frontend.interfaces.IPages(self.context)[self.page_nr-1]
+
+    @property
+    def next_title(self):
+        try:
+            return zeit.frontend.interfaces.IPages(self.context)[self.page_nr].teaser
+        except (IndexError):
+            return ''
 
 
 @view_config(context=zeit.frontend.article.ILongformArticle,

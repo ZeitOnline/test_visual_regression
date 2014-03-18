@@ -59,6 +59,8 @@ settings = {
         'egg://zeit.frontend/data/config/article-templates.xml'),
     'vivi_zeit.magazin_article-related-layout-source': (
         'egg://zeit.frontend/data/config/article-related-layouts.xml'),
+    'vivi_zeit.content.cp_block-layout-source': (
+        'egg://zeit.frontend/data/config/cp-layouts.xml')
 }
 
 
