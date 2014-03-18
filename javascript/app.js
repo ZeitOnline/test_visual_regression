@@ -69,4 +69,11 @@ require([
 		$(this).removeClass('icon-paginierungs-pfeil-links-hover');
 		$(this).addClass('icon-paginierungs-pfeil-links');
 	});
+	$( "a.icon-paginierungs-pfeil-rechts").hover(function(){
+		$(this).removeClass('icon-paginierungs-pfeil-rechts');
+		$(this).addClass('icon-paginierungs-pfeil-rechts-hover');
+	}, function(){
+		$(this).removeClass('icon-paginierungs-pfeil-rechts-hover');
+		$(this).addClass('icon-paginierungs-pfeil-rechts');
+	});
 });
