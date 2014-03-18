@@ -62,4 +62,11 @@ require([
 	$( "div[data-backgroundvideo]" ).backgroundVideo();
 	$( "a.js-has-popup" ).enablePopups();
 	$( "a[href^='#']" ).animateScroll();
+	$( "a.icon-paginierungs-pfeil-links").hover(function(){
+		$(this).removeClass('icon-paginierungs-pfeil-links');
+		$(this).addClass('icon-paginierungs-pfeil-links-hover');
+	}, function(){
+		$(this).removeClass('icon-paginierungs-pfeil-links-hover');
+		$(this).addClass('icon-paginierungs-pfeil-links');
+	});
 });
