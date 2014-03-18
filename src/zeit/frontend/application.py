@@ -28,6 +28,8 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
+    DONT_SCAN = ['.testing', '.test', '.preview']
+
     def __init__(self):
         self.settings = {}
 
@@ -61,7 +63,7 @@ class Application(object):
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         config.set_root_factory(self.get_repository)
-        config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
+        config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
 
     def get_repository(self, request):
         return zope.component.getUtility(
