@@ -422,9 +422,9 @@ def test_pagination_urls_list_should_have_correct_entries_paged_article(testserv
     view.request.traversed = ('artikel', '03')
     view.request.host_url = ''
 
-    assert view.pages_urls[0] == 'artikel/03'
-    assert view.pages_urls[1] == 'artikel/03/seite-2'
-    assert view.pages_urls[2] == 'artikel/03/seite-3'
+    assert view.pages_urls[0] == '/artikel/03'
+    assert view.pages_urls[1] == '/artikel/03/seite-2'
+    assert view.pages_urls[2] == '/artikel/03/seite-3'
 
 
 def test_pagination_urls_list_should_have_correct_entries_single_article(testserver):
@@ -432,12 +432,47 @@ def test_pagination_urls_list_should_have_correct_entries_single_article(testser
 
     view = view_article.ArticlePage(article, mock.Mock())
     view.request.path_info = u'article/01'
-    view.request.traversed = ('artikel', '01')
+    view.request.traversed = (u'artikel', u'01')
     view.request.host_url = ''
 
-    assert view.pages_urls[0] == 'artikel/01'
+    assert view.pages_urls[0] == '/artikel/01'
     assert len(view.pages_urls) == 1
 
+
+def test_pagination_next_page_url_is_working(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = view_article.Article(article, mock.Mock())
+    view.request.traversed = (u'artikel', u'03')
+    view.request.host_url = ''
+
+    assert view.pagination['next_page_url'] == '/artikel/03/seite-2'
+
+
+def test_pagination_next_page_url_on_last_page_is_none(testserver):
+    browser = Browser('%s/artikel/03/seite-3' % testserver.url)
+    content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
+    
+    assert content in browser.contents
+
+
+def test_pagination_prev_page_url_is_working(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/03/seite-2'
+    view.request.traversed = (u'artikel', u'03')
+    view.request.host_url = ''
+
+    assert view.pagination['prev_page_url'] == u'/artikel/03'
+
+
+def test_pagination_prev_page_url_on_first_page_is_none(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = view_article.Article(article, mock.Mock())
+    view.request.traversed = ('artikel', '03')
+    view.request.host_url = ''
+
+    assert view.pagination['prev_page_url'] is None
 
 
 
