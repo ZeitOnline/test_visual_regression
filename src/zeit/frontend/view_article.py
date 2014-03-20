@@ -48,7 +48,6 @@ class Article(zeit.frontend.view.Base):
     page_nr = 1
 
     def __call__(self):
-        super(Article, self).__call__()
         self.context.advertising_enabled = self.advertising_enabled
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
@@ -437,8 +436,6 @@ class Article(zeit.frontend.view.Base):
 class ArticlePage(Article):
 
     def __call__(self):
-        super(ArticlePage, self).__call__()
-
         if self.request.view_name == 'komplettansicht':
             return {}
 
