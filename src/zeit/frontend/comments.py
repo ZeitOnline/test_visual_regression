@@ -2,6 +2,7 @@
 import urlparse
 from datetime import datetime
 from lxml import etree
+from random import randint
 
 from pyramid.view import view_config
 import zeit.content.article.interfaces
@@ -15,8 +16,10 @@ class Agatho(object):
         self.entry_point = agatho_url
 
     def collection_get(self, unique_id):
+        #random='?r='+str(randint(2,90000))
         try:
-            return etree.parse('%s%s' % (self.entry_point, path_of_article(unique_id)))
+            #return etree.parse('%s%s%s' % (self.entry_point, path_of_article(unique_id),random))
+            return etree.parse('%s%s%s' % (self.entry_point, path_of_article(unique_id)))
         except IOError: # lxml reports a 404 as IOError, 404 code signals that no thread exists for that article
             return None
 
@@ -28,6 +31,11 @@ def comment_as_json(comment):
       roles = comment.xpath('author/@roles')[0]
     else:
       roles = ''
+
+    if comment.xpath('content/text()'):
+      content=comment.xpath('content/text()')[0]
+    else:
+      content = '[fehler]'
     return dict(indented=bool(len(comment.xpath('inreply'))),
         img_url=u'',
         name=comment.xpath('author/name/text()')[0],
@@ -37,16 +45,22 @@ def comment_as_json(comment):
                            int(comment.xpath('date/hour/text()')[0]),
                            int(comment.xpath('date/minute/text()')[0])),
         role=roles,
-        text=comment.xpath('content/text()')[0])
+        text=content)
 
 def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""
     api = Agatho(request.registry.settings.agatho_url)
     thread = api.collection_get(unique_id)
+    try:
+        drupal_userid=request.cookies['drupal-userid']
+    except(IndexError, OSError):
+        drupal_userid=0
     if thread is not None:
         return dict(
-            comments=[comment_as_json(comment) for comment in thread.xpath('//comment')],
-            comment_count=int(thread.xpath('/comments/comment_count')[0].text))
+            comments=[comment_as_json(comment) for comment in reversed(thread.xpath('//comment'))],
+            comment_count=int(thread.xpath('/comments/comment_count')[0].text),
+            nid=thread.xpath('/comments/nid')[0].text,
+            my_uid=drupal_userid)
     else:
         return dict(comments=[], comment_count=0)
 
