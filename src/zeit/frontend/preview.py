@@ -6,6 +6,8 @@ import zope.processlifetime
 
 class Application(zeit.frontend.application.Application):
 
+    DONT_SCAN = ['.testing', '.test']
+
     def configure_zca(self):
         # ZCA setup is done by preview.zcml, which is included by the CMS
         # site.zcml at the right time, so the setup_zodb handler below works.
