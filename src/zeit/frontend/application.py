@@ -9,7 +9,6 @@ import itertools
 import grokcore.component.zcml
 import jinja2
 import logging
-import martian
 import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
@@ -29,11 +28,7 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_GROK = (
-        'conftest',
-        'test',
-        'testing',
-    )
+    DONT_SCAN = ['.testing', '.test', '.preview']
 
     def __init__(self):
         self.settings = {}
@@ -68,7 +63,7 @@ class Application(object):
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         config.set_root_factory(self.get_repository)
-        config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
+        config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
 
     def get_repository(self, request):
         return zope.component.getUtility(
@@ -103,12 +98,6 @@ class Application(object):
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
         self.configure_connector(context)
-        # can't use <grok> directive since we can't configure excludes there
-        martian.grok_dotted_name(
-            'zeit.frontend',
-            grokcore.component.zcml.the_module_grokker,
-            exclude_filter=lambda name: name in set(self.DONT_GROK),
-            config=context)
         context.execute_actions()
 
     def configure_connector(self, context):
@@ -172,7 +161,7 @@ class Application(object):
 
         """
         return [
-            # ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
+            ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
         ]
 
     def make_wsgi_app(self, global_config):
@@ -207,11 +196,7 @@ def translate_url(context, url):
     if request is None:  # XXX should only happen in tests
         return url
 
-    if request.registry.settings['proxy_url'] != '':
-        proxy = request.registry.settings['proxy_url']
-        return url.replace("http://xml.zeit.de/", proxy, 1)
-    host = 'http://%s' % (request.host)
-    return url.replace("http://xml.zeit.de", host, 1)
+    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
 def format_date(obj, type):
@@ -286,4 +271,3 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
             tdict['view_name'] = 'seite'
         return tdict
-

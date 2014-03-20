@@ -229,7 +229,7 @@
         . Und von der "schwarzen Null", die Hamburg
       am Ende jedes Jahres von ihm sehen will.
       </p>
-      <image src="http://xml.zeit.de/exampleimages/artikel/05/03.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-large-left" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/05/03.jpg" type="jpg" publication-date="" expires="" layout="zmo-large-left" is_empty="False">
       <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -305,7 +305,7 @@
 
 
 
-            <image src="http://xml.zeit.de/exampleimages/artikel/05/r4.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium-left" is_empty="False">
+            <image src="http://xml.zeit.de/exampleimages/artikel/05/r4.jpg" type="jpg" publication-date="" expires="" layout="zmo-medium-left" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -352,7 +352,7 @@
       blockiert zu haben scheint. Zwischen Buchs- und Eibenhecken stecken moosgrüne Schilder mit der
       Aufschrift: "Weitere Informationen, auch über die Möglichkeit einer Reservierung, erhalten Sie
       im Beratungszentrum und unter 040/593880."</p>
-      <image src="http://xml.zeit.de/exampleimages/artikel/05/r2.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-large-left" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/05/r2.jpg" type="jpg" publication-date="" expires="" layout="zmo-large-left" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -372,7 +372,7 @@
         von dem Geschäftsführer
       Purwin sprach.
       </p>
-            <image src="http://xml.zeit.de/exampleimages/artikel/05/r3.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-small-right" is_empty="False">
+            <image src="http://xml.zeit.de/exampleimages/artikel/05/r3.jpg" type="jpg" publication-date="" expires="" layout="zmo-small-right" is_empty="False">
                 <bu>Leipzig Hauptbahnhof ist mit einer Grundfläche von 83.640 Quadratmetern der flächenmäßig größte Kopfbahnhof Europas.</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>

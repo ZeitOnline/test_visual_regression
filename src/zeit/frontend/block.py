@@ -71,14 +71,15 @@ class Image(object):
     def __init__(self, model_block):
         # TODO: don't use XML but adapt an Image and use it's metadata
         xml = model_block.xml
-        self.image = model_block.references
-        self.src = self.image and self.image.uniqueId
         self.align = xml.get('align')
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout
-        self.attr_title = model_block.title
-        self.attr_alt = model_block.alt
+        if model_block.references:
+            self.image = model_block.references.target
+            self.src = self.image and self.image.uniqueId
+            self.attr_title = model_block.references.title
+            self.attr_alt = model_block.references.alt
 
     @property
     def ratio(self):
