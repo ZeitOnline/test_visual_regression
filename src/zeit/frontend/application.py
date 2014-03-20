@@ -176,10 +176,6 @@ class Application(object):
                 continue
             entrypoint = pkg_resources.get_entry_info(spec, protocol, name)
             app = entrypoint.load()(app, global_config, **extra)
-        # TODO: why do the settings not contain the global config at his point?
-        # we need to explicitly update them, otherwise selenium tests will not have
-        # access to them.
-        app.registry.settings.update(global_config)
         return app
 
 factory = Application()
