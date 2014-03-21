@@ -1,14 +1,14 @@
 from babel.dates import format_datetime
+from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
-from grokcore.component import adapter, implementer
-from zeit.magazin.interfaces import IArticleTemplateSettings
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.centerpage import auto_select_asset
+from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
-import grokcore.component.zcml
 import jinja2
 import logging
+import os.path
 import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
@@ -40,7 +40,9 @@ class Application(object):
 
     def configure(self):
         self.configure_zca()
+        self.configure_pyramid()
 
+    def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
         self.config = config = pyramid.config.Configurator(
@@ -62,8 +64,20 @@ class Application(object):
         #ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
+        def asset_url(request, path, **kw):
+            kw['_app_url'] = join_url_path(
+                request.application_url, request.registry.settings.get(
+                    'asset_prefix', ''))
+            if path == '/':
+                return request.route_url('home', **kw)
+            if ':' not in path:
+                path = 'zeit.frontend:' + path
+            return request.static_url(path, **kw)
+        config.add_request_method(asset_url)
+
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+        return config
 
     def get_repository(self, request):
         return zope.component.getUtility(
@@ -184,6 +198,13 @@ def maybe_convert_egg_url(url):
     parts = urlparse.urlparse(url)
     return 'file://' + pkg_resources.resource_filename(
         parts.netloc, parts.path[1:])
+
+
+def join_url_path(base, path):
+    parts = urlparse.urlsplit(base)
+    path = os.path.join(parts.path, path)
+    return urlparse.urlunsplit(
+        (parts[0], parts[1], path, parts[3], parts[4]))
 
 
 @jinja2.contextfilter

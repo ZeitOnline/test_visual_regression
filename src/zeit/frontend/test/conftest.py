@@ -72,6 +72,11 @@ def jinja2_env(request):
     return app.configure_jinja()
 
 
+@pytest.fixture
+def app_settings():
+    return settings.copy()
+
+
 @pytest.fixture(scope='session')
 def application():
     app = zeit.frontend.application.Application()({}, **settings)
