@@ -101,7 +101,7 @@ class Article(zeit.frontend.view.Base):
     @property
     def article_url(self):
         path = '/'.join(self.request.traversed)
-        return self.request.host_url + '/' + path
+        return self.request.route_url('home') + path
 
     @property
     def pages_urls(self):
