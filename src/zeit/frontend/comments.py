@@ -51,16 +51,12 @@ def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""
     api = Agatho(request.registry.settings.agatho_url)
     thread = api.collection_get(unique_id)
-    try:
-        drupal_userid=request.cookies['drupal-userid']
-    except(IndexError, OSError):
-        drupal_userid=0
     if thread is not None:
         return dict(
             comments=[comment_as_json(comment) for comment in reversed(thread.xpath('//comment'))],
             comment_count=int(thread.xpath('/comments/comment_count')[0].text),
             nid=thread.xpath('/comments/nid')[0].text,
-            my_uid=drupal_userid)
+            my_uid=request.cookies.get('drupal-userid', 0))
     else:
         return dict(comments=[], comment_count=0)
 
