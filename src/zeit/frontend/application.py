@@ -207,6 +207,7 @@ def format_date(obj, type):
         format = "dd. MMMM yyyy"
     return format_datetime(obj, format, locale="de_De")
 
+
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
@@ -234,7 +235,8 @@ def default_image_url(image):
         request = pyramid.threadlocal.get_current_request()
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
-        log.debug('Cannot produce a default URL.')
+        log.debug('Cannot produce a default URL for %s', image)
+
 
 def most_sufficient_teaser_tpl(block_layout,
                                content_type,
@@ -250,6 +252,7 @@ def most_sufficient_teaser_tpl(block_layout,
         combinations =  [t for t in itertools.product(*zipped)]
         func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
         return map(func, combinations)
+
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
 @implementer(pyramid.interfaces.ITraverser)

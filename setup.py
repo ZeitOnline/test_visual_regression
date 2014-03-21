@@ -23,7 +23,7 @@ setup(
         'setuptools',
         'simplejson',
         'zeit.cms',
-        'zeit.connector >= 2.3',
+        'zeit.connector >= 2.3.2.dev0',
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.gallery',
