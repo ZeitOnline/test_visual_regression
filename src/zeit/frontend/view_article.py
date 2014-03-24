@@ -442,6 +442,7 @@ class Article(zeit.frontend.view.Base):
 class ArticlePage(Article):
 
     def __call__(self):
+        super(ArticlePage, self).__call__()
         if self.request.view_name == 'komplettansicht':
             return {}
 
