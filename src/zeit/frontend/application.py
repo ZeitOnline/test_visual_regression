@@ -233,7 +233,7 @@ def default_image_url(image):
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
-        url =  urlunsplit((scheme, netloc, path, query, fragment))
+        url = urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
@@ -247,10 +247,10 @@ def most_sufficient_teaser_tpl(block_layout,
                                separator='_'):
 
         types = (block_layout, content_type, asset)
-        defaults =('default', 'default', 'default')
-        zipped =  zip(types, defaults)
+        defaults = ('default', 'default', 'default')
+        zipped = zip(types, defaults)
 
-        combinations =  [t for t in itertools.product(*zipped)]
+        combinations = [t for t in itertools.product(*zipped)]
         func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
         return map(func, combinations)
 
