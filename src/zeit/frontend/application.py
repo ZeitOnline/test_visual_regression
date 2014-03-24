@@ -176,7 +176,12 @@ class Application(object):
         """
         return [
             ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
+            ('remove_asset_prefix', 'factory', '', {})
         ]
+
+    def remove_asset_prefix(self, app):
+        return URLPrefixMiddleware(
+            app, prefix=self.settings.get('asset_prefix', ''))
 
     def make_wsgi_app(self, global_config):
         app = self.config.make_wsgi_app()
@@ -190,6 +195,25 @@ class Application(object):
         return app
 
 factory = Application()
+
+
+class URLPrefixMiddleware(object):
+    """Removes a path prefix from the PATH_INFO if it is present.
+    We use this so that if an ``asset_prefix`` is configured, we respond
+    correctly for URLs both with and without the asset_prefix -- otherwise
+    the reverse proxy in front of us would need to rewrite URLs with
+    ``asset_prefix`` to strip it.
+    """
+
+    def __init__(self, app, prefix):
+        self.app = app
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+        path = environ['PATH_INFO']
+        if path.startswith(self.prefix):
+            environ['PATH_INFO'] = path.replace(self.prefix, '', 1)
+        return self.app(environ, start_response)
 
 
 def maybe_convert_egg_url(url):
