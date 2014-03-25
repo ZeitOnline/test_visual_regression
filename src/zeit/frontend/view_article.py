@@ -17,6 +17,7 @@ import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
 import pyramid.httpexceptions
+from .comments import get_thread
 
 log = logging.getLogger(__name__)
 
@@ -52,6 +53,7 @@ class Article(zeit.frontend.view.Base):
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = date.today().year
+        self.comments = self._comments()
 
         if IArticleTemplateSettings(self.context).template == 'photocluster':
             self.context.advertising_enabled = False
@@ -364,6 +366,10 @@ class Article(zeit.frontend.view.Base):
             l.append((self.title, 'http://localhost'))
         return l
 
+    def _comments(self):
+        return get_thread(unique_id=self.context.uniqueId,
+                          request=self.request)
+
     @property
     def tracking_type(self):
         if type(self.context).__name__.lower() == 'article':
@@ -436,6 +442,7 @@ class Article(zeit.frontend.view.Base):
 class ArticlePage(Article):
 
     def __call__(self):
+        super(ArticlePage, self).__call__()
         if self.request.view_name == 'komplettansicht':
             return {}
 

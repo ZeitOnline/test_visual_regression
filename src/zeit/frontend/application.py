@@ -50,8 +50,11 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
+        self.config.include("cornice")
 
         log.debug('Configuring Pyramid')
+        config.add_route('json', 'json/*traverse')
+        config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('health_check', '/health_check')
         config.add_static_view(name='css', path='zeit.frontend:css/')

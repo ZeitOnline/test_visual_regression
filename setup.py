@@ -11,6 +11,7 @@ setup(
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
     install_requires=[
         'Babel',
+        'cornice >= 0.16.2',
         'grokcore.component',
         'iso8601',
         'lxml',
@@ -52,6 +53,7 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'webtest',
             'pytest',
             'pytest-localserver',
             'pytest-pep8',
