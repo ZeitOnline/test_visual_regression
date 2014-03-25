@@ -82,6 +82,7 @@ def test_image_should_be_None_if_is_empty_is_True():
 def test_image_should_be_Fail_if_is_empty_doesnot_exist():
     model_block = mock.Mock(spec=('layout',))
     model_block.layout = 'zmo-xl-header'
+    model_block.is_empty = None
     image = Image(model_block)
     assert image == None
 
