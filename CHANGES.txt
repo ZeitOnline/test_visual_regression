@@ -16,7 +16,7 @@ templates/macro and named [type]_macro.tpl
 - add date, source, genre testing
 - fix author issue and add testing
 - implement pagination in frontend
-
+- Rendering for the daily newsletter.
 
 0.2.15 (2014-02-27)
 -------------------
