@@ -220,9 +220,11 @@
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{name}}</strong>
                 <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
+                {# goesn't yet, see https://zeit-online.atlassian.net/browse/ZMO-563?focusedCommentId=23823&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-23823
                 {% if role -%}
                     <div class="comment__head__meta__label">{{role}}</div>
                 {%- endif %}
+                #}
             </div>
         </div>
         <div class="comment__body">
