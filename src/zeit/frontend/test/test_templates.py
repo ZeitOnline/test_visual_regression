@@ -74,11 +74,7 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         '</footer>'
 
     request = Mock()
-
-    def route_url(str):
-        return 'http://localhost/'
-
-    request.route_url = route_url
+    request.asset_url.side_effect = lambda x: 'http://localhost/' + x
 
     lines = tpl.module.main_footer(current_year, request).splitlines()
     output = ""
@@ -300,13 +296,10 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         def __init__(self, data):
             vars(self).update(data)
 
-    def route_url(str):
-        return 'http://localhost/'
-
     def get_current_request():
-        my_mock = Mock()
-        my_mock.route_url = route_url
-        return my_mock
+        request = Mock()
+        request.route_url.return_value = 'http://localhost/'
+        return request
 
     monkeypatch.setattr(
         pyramid.threadlocal, 'get_current_request', get_current_request)
