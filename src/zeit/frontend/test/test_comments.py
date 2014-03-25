@@ -9,7 +9,7 @@ def xml_comment(agatho):
 
 @fixture
 def xml_local_comment(agatho):
-    return agatho.collection_get(u'http://localhost:8888:/agatho/thread/artikel/03').xpath('//comment')[0]
+    return agatho.collection_get(u'http://localhost:8888/agatho/thread/artikel/03').xpath('//comment')[0]
 
 
 def test_agatho_collection_get(agatho):
