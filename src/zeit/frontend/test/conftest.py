@@ -21,10 +21,10 @@ def test_asset(path):
 
 settings = {
     'pyramid.reload_templates': 'false',
-    'pyramid.debug_authorization': 'false',
-    'pyramid.debug_notfound': 'false',
-    'pyramid.debug_routematch': 'false',
-    'pyramid.debug_templates': 'false',
+    'pyramid.debug_authorization': 'true',
+    'pyramid.debug_notfound': 'true',
+    'pyramid.debug_routematch': 'true',
+    'pyramid.debug_templates': 'true',
 
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
