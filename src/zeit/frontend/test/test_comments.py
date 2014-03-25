@@ -1,11 +1,11 @@
 from pytest import fixture
 from zeit.frontend.comments import get_thread
 
-unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets'
+unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
 
 @fixture
 def xml_comment(agatho):
-    return agatho.collection_get(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets').xpath('//comment')[0]
+    return agatho.collection_get(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets').xpath('//comment')[0]
 
 @fixture
 def xml_local_comment(agatho):
