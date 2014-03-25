@@ -29,5 +29,6 @@ def test_comment_as_json(xml_comment):
 
 def test_get_entire_thread(dummy_request):
     thread_as_json = get_thread(unique_id, dummy_request)
-    assert thread_as_json['comments'][0]['name'] == 'Skarsgard'
+    assert thread_as_json['comments'][0]['name'] == 'marconi'
+    assert thread_as_json['comments'][40]['name'] == 'Skarsgard'
     assert thread_as_json['comment_count'] == 41
