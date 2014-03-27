@@ -1,63 +1,25 @@
 {% extends "templates/layout.html" %}
 {% import 'templates/macros/article_macro.tpl' as blocks with context%}
 
-{% macro title() -%}
-  <h2 class="article__supertitle">
-      {{ view.supertitle }}
-  </h2>
-  <h1 class="article__title">
-      {{view.title}}
-  </h1>
-{%- endmacro %}
-
-{% macro subtitle() -%}
-  <span class="article__subtitle">
-      <p>{{view.subtitle}}</p>
-  </span>
-{%- endmacro %}
-
 {% macro render_page(page) %}
   {% for item in page %}
           {{ blocks[item|block_type](item)}}
   {% endfor %}
 {% endmacro %}
 
-
-
 {% block content %}
     <article class="article" id="js-article">
         <div class="article__wrap">
-            <div class="article__head-wrap">
-                <header class="article__title-wrap">
-                    <div class="is-constrained is-centered">
-                        {{ title() }}
-                        <div class="article__opener">
-                            {{ subtitle() }}
-                            <span class="article__meta">
-                                {% if view.genre -%}
-                                    <span class="article__meta__genre">{{view.genre}}</span>
-                                {%- endif %}
-                                {{ blocks.meta_author(view.authors) }}
-                                {% if view.location -%}
-                                    <span class="article__meta__location">{{view.location}}</span>
-                                {%- endif %}
-                            </span>
-                        </div>
-                        <div class="article__meta__second">
-                            {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
-                        </div>
-                    </div>
-                </header>
-            </div>
+            {% include "templates/inc/headers/article_header_default.html" ignore missing with context %}
 
             <div class="article__body">
                 {% block article_pages %}
                     <div class="article__page">
                         {{ render_page(view.current_page) }}
                     </div>
-                {% endblock article_pages %}   
-                
-                
+                {% endblock article_pages %}
+
+
                 {% block article_pagination %}
                     {% if view.pagination %}
                         {{ blocks.print_pagination( view.pagination ) }}

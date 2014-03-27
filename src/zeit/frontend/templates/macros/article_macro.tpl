@@ -1,3 +1,17 @@
+{% macro title() -%}
+  <h2 class="article__supertitle">
+      {{ view.supertitle }}
+  </h2>
+  <h1 class="article__title">
+      {{view.title}}
+  </h1>
+{%- endmacro %}
+
+{% macro subtitle() -%}
+  <span class="article__subtitle">
+      <p>{{view.subtitle}}</p>
+  </span>
+{%- endmacro %}
 
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
@@ -350,7 +364,7 @@
                 <li class="article__pager__number {{current_class}}"><a href="{{url}}">{{loop.index}}</a></li>
             {%- endfor %}
 
-            
+
             {% if pagination.next_page_url %}
                 <li class="article__pager__next"><a class="icon-paginierungs-pfeil-rechts" href="{{pagination.next_page_url}}">Vor</a></li>
             {% else %}
@@ -360,7 +374,7 @@
     </div>
     {% endif %}
 {%- endmacro %}
-       
+
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
