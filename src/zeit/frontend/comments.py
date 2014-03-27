@@ -16,9 +16,7 @@ class Agatho(object):
         self.entry_point = agatho_url
 
     def collection_get(self, unique_id):
-        #random='?r='+str(randint(2,90000))
         try:
-            #return etree.parse('%s%s%s' % (self.entry_point, path_of_article(unique_id),random))
             return etree.parse('%s%s' % (self.entry_point, path_of_article(unique_id)))
         except IOError: # lxml reports a 404 as IOError, 404 code signals that no thread exists for that article
             return None
