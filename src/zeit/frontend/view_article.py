@@ -71,7 +71,7 @@ class Article(zeit.frontend.view.Base):
         return IArticleTemplateSettings(self.context).template
 
     @property
-    def template(self):
+    def header_layout(self):
         return IArticleTemplateSettings(self.context).header_layout
 
     @property
@@ -490,7 +490,7 @@ class LongformArticle(Article):
     main_nav_full_width = True
     is_longform = True
 
-@view_config(context=zeit.frontend.article.ILongformArticle,
+@view_config(context=zeit.frontend.article.IShortformArticle,
              renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass

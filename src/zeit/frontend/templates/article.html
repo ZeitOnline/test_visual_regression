@@ -10,7 +10,7 @@
 {% block content %}
     <article class="article" id="js-article">
         <div class="article__wrap">
-            {% include "templates/inc/headers/article_header_default.html" ignore missing with context %}
+            {% include "templates/inc/headers/article_header_"+view.header_layout+".html" ignore missing with context %}
 
             <div class="article__body">
                 {% block article_pages %}
