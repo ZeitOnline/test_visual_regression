@@ -68,11 +68,13 @@ class Article(zeit.frontend.view.Base):
 
     @property
     def template(self):
-        return IArticleTemplateSettings(self.context).template
+        template = IArticleTemplateSettings(self.context).template
+        return template if template is not None else "default"
 
     @property
-    def template(self):
-        return IArticleTemplateSettings(self.context).header_layout
+    def header_layout(self):
+        layout = IArticleTemplateSettings(self.context).header_layout
+        return layout if layout is not None else "default"
 
     @property
     def subtitle(self):
