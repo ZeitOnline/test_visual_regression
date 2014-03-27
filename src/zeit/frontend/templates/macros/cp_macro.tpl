@@ -24,7 +24,7 @@
 {% macro lead_full_image() -%}	
 	<div class="cp__lead-full">
         <img src="http://images.zeit.de/wissen/geschichte/2013-07/s79-volkstanz/s79-volkstanz-540x304.jpg">
-    </div>
+  </div>
 {%- endmacro %}
 
 <!-- TODO: remove test data (as)-->
