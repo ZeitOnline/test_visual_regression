@@ -492,7 +492,7 @@ class LongformArticle(Article):
     main_nav_full_width = True
     is_longform = True
 
-@view_config(context=zeit.frontend.article.ILongformArticle,
+@view_config(context=zeit.frontend.article.IShortformArticle,
              renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass
