@@ -67,6 +67,14 @@ class Article(zeit.frontend.view.Base):
         return self.context.title
 
     @property
+    def template(self):
+        return IArticleTemplateSettings(self.context).template
+
+    @property
+    def template(self):
+        return IArticleTemplateSettings(self.context).header_layout
+
+    @property
     def subtitle(self):
         return self.context.subtitle
 
@@ -125,7 +133,7 @@ class Article(zeit.frontend.view.Base):
     @property
     def prev_page_url(self):
         actual_index = self.page_nr - 1
-        return self.pages_urls[actual_index -1] if actual_index-1 >= 0 else None 
+        return self.pages_urls[actual_index -1] if actual_index-1 >= 0 else None
 
 
     @property
@@ -481,6 +489,11 @@ class LongformArticle(Article):
     advertising_enabled = False
     main_nav_full_width = True
     is_longform = True
+
+@view_config(context=zeit.frontend.article.ILongformArticle,
+             renderer='templates/shortform.html')
+class ShortformArticle(Article):
+    pass
 
 
 @view_config(name='teaser',
