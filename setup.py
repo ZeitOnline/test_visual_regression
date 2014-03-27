@@ -19,6 +19,8 @@ setup(
         'pyramid',
         'pyramid_jinja2',
         'pyramid_tm',
+        'pyramid_debugtoolbar',
+        'pyramid_mako',
         'repoze.bitblt',
         'repoze.vhm',
         'setuptools',
