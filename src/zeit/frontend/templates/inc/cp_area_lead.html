@@ -1,10 +1,23 @@
-{% import 'templates/macros/cp_macro.tpl' as cp with context%}
+{#
 
+This is the main template for the context type "centerpage".
+
+Available attributes:
+	zeit.frontend.view_centerpage.Centerpage
+
+#}
 <div class='area__lead'>
-	{{ cp.lead_full('video') }}
-	{{ cp.lead_full('image') }}
 
-    {% for teaser_block in view.area_lead %}
-        {% include 'templates/inc/teaser_block_' + teaser_block.type + '.html' ignore missing %}
+    {{ cp.lead_full('video') }}
+    {{ cp.lead_full('image') }}
+
+    {% for teaser_block in view.area_lead -%}
+        {%-
+           set teaser_blocks = [
+                'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
+                'templates/inc/teaser_block_default.html'
+                ]
+        %}
+        {% include teaser_blocks ignore missing %}
     {% endfor %}
 </div>

@@ -346,7 +346,7 @@ def test_article06_has_correct_sharing_img_video_still(testserver):
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.path_info = 'article/seite-x'
+    page.request.path_info = 'article/03/seite-x'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -354,7 +354,7 @@ def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
 def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.path_info = 'article/seite-'
+    page.request.path_info = 'article/03/seite-'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -362,23 +362,23 @@ def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.path_info = u'article/seite-5'
+    page.request.path_info = u'article/03/seite-5'
     with pytest.raises(HTTPNotFound):
         page()
 
 def test_ArticlePage_should_not_work_if_view_name_is_seite_1(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.path_info = u'article/seite-1'
+    page.request.path_info = u'article/03/seite-1'
     with pytest.raises(HTTPNotFound):
         page()
 
 def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
-    page.request.path_info = 'article/seite-2'
+    page.request.path_info = 'article/03/seite-3'
     page()
-    assert len(page.pages) == 2
+    assert len(page.pages) == 3
 
 
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
@@ -388,14 +388,91 @@ def test_ArticlePage_komplett_should_show_all_pages(testserver):
 
 def test_pagination_dict_should_have_correct_entries(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+
     view = view_article.ArticlePage(article, mock.Mock())
-    view.request.path_info = u'article/seite-2'
+    view.request.path_info = u'article/03/seite-2'
+    view.request.traversed = (u'artikel', u'03')
+    view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 2
-    assert view.pagination['total'] == 2
+    assert view.pagination['total'] == 3
+    assert view.pagination['next_page_title'] == (u'Sogar die eckige Flasche kommt zur\xfcck')
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    view = view_article.Article(article, '')
+    view = view_article.Article(article, mock.Mock())
+    view.request.traversed = ('artikel', '03')
+    view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 1
-    assert view.pagination['total'] == 2
+    assert view.pagination['total'] == 3
+    assert view.pagination['next_page_title'] == (u'Sogar die runde Flasche kommt zur\xfcck')
+
+
+def test_pagination_next_title_should_be_in_html(testserver):
+    browser = Browser('%s/artikel/03/seite-2' % testserver.url)
+    assert 'Auf Seite 3' in browser.contents
+    assert 'Sogar die eckige Flasche kommt' in browser.contents
+
+
+def test_pagination_urls_list_should_have_correct_entries_paged_article(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/03/seite-2'
+    view.request.traversed = ('artikel', '03')
+    view.request.route_url.return_value = '/'
+
+    assert view.pages_urls[0] == '/artikel/03'
+    assert view.pages_urls[1] == '/artikel/03/seite-2'
+    assert view.pages_urls[2] == '/artikel/03/seite-3'
+
+
+def test_pagination_urls_list_should_have_correct_entries_single_article(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/01'
+    view.request.traversed = (u'artikel', u'01')
+    view.request.route_url.return_value = '/'
+
+    assert view.pages_urls[0] == '/artikel/01'
+    assert len(view.pages_urls) == 1
+
+
+def test_pagination_next_page_url_is_working(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = view_article.Article(article, mock.Mock())
+    view.request.traversed = (u'artikel', u'03')
+    view.request.route_url.return_value = '/'
+
+    assert view.pagination['next_page_url'] == '/artikel/03/seite-2'
+
+
+def test_pagination_next_page_url_on_last_page_is_none(testserver):
+    browser = Browser('%s/artikel/03/seite-3' % testserver.url)
+    content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
+    
+    assert content in browser.contents
+
+
+def test_pagination_prev_page_url_is_working(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+
+    view = view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/03/seite-2'
+    view.request.traversed = (u'artikel', u'03')
+    view.request.route_url.return_value = '/'
+
+    assert view.pagination['prev_page_url'] == u'/artikel/03'
+
+
+def test_pagination_prev_page_url_on_first_page_is_none(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = view_article.Article(article, mock.Mock())
+    view.request.traversed = ('artikel', '03')
+    view.request.route_url.return_value = '/'
+
+    assert view.pagination['prev_page_url'] is None
+
+
+

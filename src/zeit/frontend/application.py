@@ -1,13 +1,14 @@
 from babel.dates import format_datetime
+from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
-from grokcore.component import adapter, implementer
-from zeit.magazin.interfaces import IArticleTemplateSettings
 from zeit.frontend.article import ILongformArticle
-import grokcore.component.zcml
+from zeit.frontend.centerpage import auto_select_asset
+from zeit.magazin.interfaces import IArticleTemplateSettings
+import itertools
 import jinja2
 import logging
-import martian
+import os.path
 import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
@@ -27,11 +28,7 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_GROK = (
-        'conftest',
-        'test',
-        'testing',
-    )
+    DONT_SCAN = ['.testing', '.test', '.preview']
 
     def __init__(self):
         self.settings = {}
@@ -43,7 +40,9 @@ class Application(object):
 
     def configure(self):
         self.configure_zca()
+        self.configure_pyramid()
 
+    def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
         self.config = config = pyramid.config.Configurator(
@@ -53,8 +52,11 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
+        self.config.include("cornice")
 
         log.debug('Configuring Pyramid')
+        config.add_route('json', 'json/*traverse')
+        config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('health_check', '/health_check')
         config.add_static_view(name='css', path='zeit.frontend:css/')
@@ -65,8 +67,20 @@ class Application(object):
         #ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
+        def asset_url(request, path, **kw):
+            kw['_app_url'] = join_url_path(
+                request.application_url, request.registry.settings.get(
+                    'asset_prefix', ''))
+            if path == '/':
+                return request.route_url('home', **kw)
+            if ':' not in path:
+                path = 'zeit.frontend:' + path
+            return request.static_url(path, **kw)
+        config.add_request_method(asset_url)
+
         config.set_root_factory(self.get_repository)
-        config.scan(package=zeit.frontend, ignore=['.testing', '.test'])
+        config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+        return config
 
     def get_repository(self, request):
         return zope.component.getUtility(
@@ -81,12 +95,14 @@ class Application(object):
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
+        jinja.filters['auto_select_asset'] = auto_select_asset
         jinja.trim_blocks = True
         return jinja
 
@@ -99,12 +115,6 @@ class Application(object):
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.frontend)
         self.configure_connector(context)
-        # can't use <grok> directive since we can't configure excludes there
-        martian.grok_dotted_name(
-            'zeit.frontend',
-            grokcore.component.zcml.the_module_grokker,
-            exclude_filter=lambda name: name in set(self.DONT_GROK),
-            config=context)
         context.execute_actions()
 
     def configure_connector(self, context):
@@ -168,8 +178,13 @@ class Application(object):
 
         """
         return [
-            # ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
+            ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
+            ('remove_asset_prefix', 'factory', '', {})
         ]
+
+    def remove_asset_prefix(self, app):
+        return URLPrefixMiddleware(
+            app, prefix=self.settings.get('asset_prefix', ''))
 
     def make_wsgi_app(self, global_config):
         app = self.config.make_wsgi_app()
@@ -185,12 +200,38 @@ class Application(object):
 factory = Application()
 
 
+class URLPrefixMiddleware(object):
+    """Removes a path prefix from the PATH_INFO if it is present.
+    We use this so that if an ``asset_prefix`` is configured, we respond
+    correctly for URLs both with and without the asset_prefix -- otherwise
+    the reverse proxy in front of us would need to rewrite URLs with
+    ``asset_prefix`` to strip it.
+    """
+
+    def __init__(self, app, prefix):
+        self.app = app
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+        path = environ['PATH_INFO']
+        if path.startswith(self.prefix):
+            environ['PATH_INFO'] = path.replace(self.prefix, '', 1)
+        return self.app(environ, start_response)
+
+
 def maybe_convert_egg_url(url):
     if not url.startswith('egg://'):
         return url
     parts = urlparse.urlparse(url)
     return 'file://' + pkg_resources.resource_filename(
         parts.netloc, parts.path[1:])
+
+
+def join_url_path(base, path):
+    parts = urlparse.urlsplit(base)
+    path = os.path.join(parts.path, path)
+    return urlparse.urlunsplit(
+        (parts[0], parts[1], path, parts[3], parts[4]))
 
 
 @jinja2.contextfilter
@@ -203,11 +244,7 @@ def translate_url(context, url):
     if request is None:  # XXX should only happen in tests
         return url
 
-    if request.registry.settings['proxy_url'] != '':
-        proxy = request.registry.settings['proxy_url']
-        return url.replace("http://xml.zeit.de/", proxy, 1)
-    host = 'http://%s' % (request.host)
-    return url.replace("http://xml.zeit.de", host, 1)
+    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
 def format_date(obj, type):
@@ -217,6 +254,7 @@ def format_date(obj, type):
     elif type == 'short':
         format = "dd. MMMM yyyy"
     return format_datetime(obj, format, locale="de_De")
+
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
@@ -241,11 +279,28 @@ def default_image_url(image):
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
-        url =  urlunsplit((scheme, netloc, path, query, fragment))
+        url = urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
-        log.debug('Cannot produce a default URL.')
+        log.debug('Cannot produce a default URL for %s', image)
+
+
+def most_sufficient_teaser_tpl(block_layout,
+                               content_type,
+                               asset,
+                               prefix='templates/inc/teaser/teaser_',
+                               suffix='.html',
+                               separator='_'):
+
+        types = (block_layout, content_type, asset)
+        defaults = ('default', 'default', 'default')
+        zipped = zip(types, defaults)
+
+        combinations = [t for t in itertools.product(*zipped)]
+        func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
+        return map(func, combinations)
+
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
 @implementer(pyramid.interfaces.ITraverser)
@@ -267,4 +322,3 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
             tdict['view_name'] = 'seite'
         return tdict
-

@@ -17,6 +17,7 @@ import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
 import pyramid.httpexceptions
+from .comments import get_thread
 
 log = logging.getLogger(__name__)
 
@@ -37,6 +38,9 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             name='komplettansicht',
+             renderer='templates/article_komplett.html')
 class Article(zeit.frontend.view.Base):
 
     advertising_enabled = True
@@ -45,11 +49,11 @@ class Article(zeit.frontend.view.Base):
     page_nr = 1
 
     def __call__(self):
-        super(Article, self).__call__()
         self.context.advertising_enabled = self.advertising_enabled
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = date.today().year
+        self.comments = self._comments()
 
         if IArticleTemplateSettings(self.context).template == 'photocluster':
             self.context.advertising_enabled = False
@@ -90,10 +94,50 @@ class Article(zeit.frontend.view.Base):
         return self.pages[0]
 
     @property
+    def next_title(self):
+        try:
+            return self.pages[self.page_nr].teaser
+        except (IndexError):
+            return ''
+
+    @property
+    def article_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path
+
+    @property
+    def pages_urls(self):
+        _pages_urls = []
+        for number in range(0, len(self.pages)):
+            url = self.article_url
+            if number > 0:
+                url += '/seite-' + str(number+1)
+            _pages_urls.append(url)
+        return _pages_urls
+
+    @property
+    def next_page_url(self):
+        _actual_index = self.page_nr - 1
+        total = len(self.pages)
+        return self.pages_urls[_actual_index +1] if _actual_index + 1 < total else None
+
+
+    @property
+    def prev_page_url(self):
+        actual_index = self.page_nr - 1
+        return self.pages_urls[actual_index -1] if actual_index-1 >= 0 else None 
+
+
+    @property
     def pagination(self):
         return {
             'current': self.page_nr,
-            'total': len(self.pages)
+            'total': len(self.pages),
+            'next_page_title': self.next_title,
+            'article_url': self.article_url,
+            'pages_urls': self.pages_urls,
+            'next_page_url': self.next_page_url,
+            'prev_page_url': self.prev_page_url
         }
 
     @property
@@ -322,6 +366,10 @@ class Article(zeit.frontend.view.Base):
             l.append((self.title, 'http://localhost'))
         return l
 
+    def _comments(self):
+        return get_thread(unique_id=self.context.uniqueId,
+                          request=self.request)
+
     @property
     def tracking_type(self):
         if type(self.context).__name__.lower() == 'article':
@@ -391,14 +439,10 @@ class Article(zeit.frontend.view.Base):
              name='seite',
              path_info='.*seite-[0-9]+$',
              renderer='templates/article.html')
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             name='komplettansicht',
-             renderer='templates/article_komplett.html')
 class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-
         if self.request.view_name == 'komplettansicht':
             return {}
 
@@ -421,6 +465,13 @@ class ArticlePage(Article):
     @property
     def current_page(self):
         return zeit.frontend.interfaces.IPages(self.context)[self.page_nr-1]
+
+    @property
+    def next_title(self):
+        try:
+            return zeit.frontend.interfaces.IPages(self.context)[self.page_nr].teaser
+        except (IndexError):
+            return ''
 
 
 @view_config(context=zeit.frontend.article.ILongformArticle,

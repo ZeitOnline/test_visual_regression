@@ -47,4 +47,3 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def area_lead(self):
         return self.context['lead'].values()
-

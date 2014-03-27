@@ -55,7 +55,15 @@
                     <div class="article__page">
                         {{ render_page(view.current_page) }}
                     </div>
-                {% endblock article_pages %}    
+                {% endblock article_pages %}   
+                
+                
+                {% block article_pagination %}
+                    {% if view.pagination %}
+                        {{ blocks.print_pagination( view.pagination ) }}
+                    {% endif %}
+                {% endblock article_pagination %}
+
                 {% if view.rankedTags %}
                 <div class="article__tags is-constrained is-centered">
                     <span class="article__tags__title">Tags</span>
@@ -68,7 +76,7 @@
                 </div>
                 {% endif %}
 
-                {{ blocks.mock_comments() }}
+                {{ blocks.comments(view.comments) }}
 
                 {{ blocks.focussed_nextread(view.focussed_nextread) }}
 

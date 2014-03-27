@@ -1,7 +1,6 @@
 from pyramid.response import Response
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
-from zeit.frontend.log import access_log
 import logging
 import os.path
 import pyramid.response
@@ -26,7 +25,6 @@ class Base(object):
         self.request = request
 
     def __call__(self):
-        access_log.info(self.request.url)
         return {}
 
 
@@ -34,7 +32,6 @@ class Base(object):
 class Image(Base):
 
     def __call__(self):
-        super(Image, self).__call__()
         connector = zope.component.getUtility(
             zeit.connector.interfaces.IConnector)
         if not isinstance(connector, zeit.connector.connector.Connector):
