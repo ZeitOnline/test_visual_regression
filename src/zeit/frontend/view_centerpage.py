@@ -46,5 +46,4 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_lead(self):
-        import pdb;pdb.set_trace();
         return self.context['lead'].values()
