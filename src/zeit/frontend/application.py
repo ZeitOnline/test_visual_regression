@@ -1,22 +1,17 @@
-from babel.dates import format_datetime
 from grokcore.component import adapter, implementer
-from repoze.bitblt.transform import compute_signature
-from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
-from zeit.frontend.centerpage import auto_select_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
-import itertools
-import jinja2
 import logging
 import os.path
 import pkg_resources
 import pyramid.config
-import pyramid.threadlocal
 import pyramid_jinja2
 import urlparse
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
+import zeit.frontend.centerpage
+import zeit.frontend.jinja
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -94,16 +89,23 @@ class Application(object):
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
-        jinja.globals.update(zeit.frontend.navigation.get_sets())
-        jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
-        jinja.tests['elem'] = zeit.frontend.block.is_block
-        jinja.filters['format_date'] = format_date
-        jinja.filters['replace_list_seperator'] = replace_list_seperator
-        jinja.filters['block_type'] = zeit.frontend.block.block_type
-        jinja.filters['translate_url'] = translate_url
-        jinja.filters['default_image_url'] = default_image_url
-        jinja.filters['auto_select_asset'] = auto_select_asset
+
         jinja.trim_blocks = True
+
+        jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['get_teaser_template'] = (
+            zeit.frontend.jinja.most_sufficient_teaser_tpl)
+        jinja.tests['elem'] = zeit.frontend.block.is_block
+
+        # XXX Use scanning to register filters instead of listing them here
+        # again.
+        jinja.filters['block_type'] = zeit.frontend.block.block_type
+        jinja.filters['auto_select_asset'] = (
+            zeit.frontend.centerpage.auto_select_asset)
+        for name in ['format_date', 'replace_list_seperator', 'translate_url',
+                     'default_image_url']:
+            jinja.filters[name] = getattr(zeit.frontend.jinja, name)
+
         return jinja
 
     def configure_zca(self):
@@ -232,74 +234,6 @@ def join_url_path(base, path):
     path = os.path.join(parts.path, path)
     return urlparse.urlunsplit(
         (parts[0], parts[1], path, parts[3], parts[4]))
-
-
-@jinja2.contextfilter
-def translate_url(context, url):
-    if url is None:
-        return None
-    # XXX Is it really not possible to get to the actual template variables
-    # (like context, view, request) through the jinja2 context?!??
-    request = pyramid.threadlocal.get_current_request()
-    if request is None:  # XXX should only happen in tests
-        return url
-
-    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
-
-
-def format_date(obj, type):
-    format = ""
-    if type == 'long':
-        format = "dd. MMMM yyyy, H:mm 'Uhr'"
-    elif type == 'short':
-        format = "dd. MMMM yyyy"
-    return format_datetime(obj, format, locale="de_De")
-
-
-def replace_list_seperator(semicolonseperatedlist, seperator):
-    return semicolonseperatedlist.replace(';', seperator)
-
-# definition of default images sizes per layout context
-default_images_sizes = dict(
-    large=(800, 600),
-    small=(200, 300),
-)
-
-
-def default_image_url(image):
-    try:
-        width, height = default_images_sizes.get(image.layout, (640, 480))
-        # TODO: use secret from settings?
-        signature = compute_signature(width, height, 'time')
-
-        if image.src is None:
-            return None
-
-        scheme, netloc, path, query, fragment = urlsplit(image.src)
-        parts = path.split('/')
-        parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
-        path = '/'.join(parts)
-        url = urlunsplit((scheme, netloc, path, query, fragment))
-        request = pyramid.threadlocal.get_current_request()
-        return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
-    except:
-        log.debug('Cannot produce a default URL for %s', image)
-
-
-def most_sufficient_teaser_tpl(block_layout,
-                               content_type,
-                               asset,
-                               prefix='templates/inc/teaser/teaser_',
-                               suffix='.html',
-                               separator='_'):
-
-        types = (block_layout, content_type, asset)
-        defaults = ('default', 'default', 'default')
-        zipped = zip(types, defaults)
-
-        combinations = [t for t in itertools.product(*zipped)]
-        func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-        return map(func, combinations)
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)

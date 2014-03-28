@@ -1,5 +1,5 @@
 from zope.testbrowser.browser import Browser
-from zeit.frontend.application import most_sufficient_teaser_tpl
+from zeit.frontend.jinja import most_sufficient_teaser_tpl
 import mock
 import pytest
 import requests
