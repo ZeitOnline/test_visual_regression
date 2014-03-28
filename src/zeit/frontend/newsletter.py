@@ -8,7 +8,15 @@ import zeit.newsletter.interfaces
 
 @view_config(context=zeit.newsletter.interfaces.INewsletter,
              renderer='dav://newsletter.html')
+@view_config(context=zeit.newsletter.interfaces.INewsletter,
+             request_param='format=txt',
+             renderer='dav://newsletter_text.html')
 class Newsletter(zeit.frontend.view.Base):
+
+    def __call__(self):
+        if self.request.params.get('format') == 'txt':
+            self.request.response.content_type = 'text/plain; charset=utf-8'
+        return {}
 
     def translate_url(self, url):
         return url.replace('http://xml.zeit.de/', 'http://www.zeit.de/', 1)
