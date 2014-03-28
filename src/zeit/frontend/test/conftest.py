@@ -1,24 +1,17 @@
-from os import path
-from os.path import abspath, dirname, join, sep
 from pyramid.testing import setUp, tearDown, DummyRequest
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
-from zeit import frontend
 import gocept.httpserverlayer.wsgi
+import pkg_resources
 import pytest
 import zeit.frontend.application
 
 
-def test_asset_path(*parts):
-    """ Return full file-system path for given test asset path. """
-    from zeit import frontend
-    return abspath(join(dirname(frontend.__file__), 'data', *parts))
-
-
 def test_asset(path):
     """ Return file-object for given test asset path. """
-    return open(test_asset_path(*path.split(sep)), 'rb')
+    return open(pkg_resources.resource_filename(
+        'zeit.frontend', 'data' + path), 'rb')
 
 
 settings = {
@@ -28,8 +21,8 @@ settings = {
     'pyramid.debug_routematch': 'true',
     'pyramid.debug_templates': 'true',
 
-    'agatho_url': u'file://%s/' % path.join(
-        path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
+    'agatho_url': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/comments'),
 
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
@@ -145,6 +138,7 @@ def browser(application):
     """ Returns an instance of `webtest.TestApp`. """
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
+
 
 class TestApp(TestAppBase):
 
