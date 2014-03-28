@@ -293,13 +293,13 @@ def most_sufficient_teaser_tpl(block_layout,
                                suffix='.html',
                                separator='_'):
 
-        types = (block_layout, content_type, asset)
-        defaults = ('default', 'default', 'default')
-        zipped = zip(types, defaults)
+    types = (block_layout, content_type, asset)
+    defaults = ('default', 'default', 'default')
+    zipped = zip(types, defaults)
 
-        combinations = [t for t in itertools.product(*zipped)]
-        func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-        return map(func, combinations)
+    combinations = [t for t in itertools.product(*zipped)]
+    func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
+    return map(func, combinations)
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)

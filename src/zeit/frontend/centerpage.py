@@ -2,7 +2,7 @@ import zeit.cms.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 
-def auto_select_asset (teaser):
+def auto_select_asset(teaser):
     gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)
     video =  zeit.content.video.interfaces.IVideoAsset(teaser)
     image = zeit.content.image.interfaces.IImages(teaser)
