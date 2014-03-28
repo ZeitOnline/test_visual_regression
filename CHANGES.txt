@@ -1,7 +1,13 @@
 Change log for zeit.frontend
 ============================
 
-0.2.16 (unreleased)
+0.2.17 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+0.2.16 (2014-03-25)
 -------------------
 
 - Add a method to load teaser_blocks and teasers
@@ -16,6 +22,7 @@ templates/macro and named [type]_macro.tpl
 - add date, source, genre testing
 - fix author issue and add testing
 - implement pagination in frontend
+- Adjust for running inside the CMS process for previews.
 
 
 0.2.15 (2014-02-27)

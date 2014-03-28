@@ -5,12 +5,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.2.16.dev0',
+    version='0.2.17.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
     install_requires=[
         'Babel',
+        'cornice >= 0.16.2',
         'grokcore.component',
         'iso8601',
         'lxml',
@@ -18,12 +19,14 @@ setup(
         'pyramid',
         'pyramid_jinja2',
         'pyramid_tm',
+        'pyramid_debugtoolbar',
+        'pyramid_mako',
         'repoze.bitblt',
         'repoze.vhm',
         'setuptools',
         'simplejson',
         'zeit.cms',
-        'zeit.connector >= 2.3',
+        'zeit.connector >= 2.3.2.dev0',
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.cp',
@@ -53,6 +56,7 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'webtest',
             'pytest',
             'pytest-localserver',
             'pytest-pep8',
