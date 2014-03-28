@@ -95,7 +95,7 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
 def test_header_elem_should_be_img_if_there_is_a_header_img(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, '')
-    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImage
+    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImageStandard
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
@@ -451,7 +451,7 @@ def test_pagination_next_page_url_is_working(testserver):
 def test_pagination_next_page_url_on_last_page_is_none(testserver):
     browser = Browser('%s/artikel/03/seite-3' % testserver.url)
     content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
-    
+
     assert content in browser.contents
 
 
