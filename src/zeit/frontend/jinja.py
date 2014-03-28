@@ -96,8 +96,9 @@ class HTTPLoader(jinja2.BaseLoader):
                 template, lambda: True)
 
         url = self.url + template
+        log.debug('Loading template %r from %s', template, url)
         response = requests.get(url)
-        return response.text, template, CompareModifiedHeader(
+        return response.text, url, CompareModifiedHeader(
             url, response.headers.get('Last-Modified'))
 
 
@@ -111,6 +112,9 @@ class CompareModifiedHeader(object):
     def __call__(self):
         """Conforms to jinja2 uptodate semantics: Returns True if the template
         was not modified."""
+        # NOTE: *Every time* a template is rendered we trigger an HTTP request.
+        # Do we need introduce a delay to only perform the request every X
+        # minutes?
         response = requests.head(self.url)
         last_modified = self.parse_rfc822(
             response.headers.get('Last-Modified'))
