@@ -56,10 +56,10 @@ setup(
     },
     extras_require={
         'test': [
+            'gocept.httpserverlayer',
             'mock',
             'webtest',
             'pytest',
-            'pytest-localserver',
             'pytest-pep8',
             'requests',
             'selenium',

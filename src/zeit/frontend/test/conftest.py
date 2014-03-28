@@ -1,15 +1,14 @@
-from pyramid.testing import setUp, tearDown, DummyRequest
-from pytest_localserver.http import WSGIServer
-from repoze.bitblt.processor import ImageTransformationMiddleware
-from selenium import webdriver
-from webtest import TestApp
-from webtest import TestApp as TestAppBase
 from os import path
 from os.path import abspath, dirname, join, sep
-import pytest
-import pyramid.config
-import zeit.frontend.application
+from pyramid.testing import setUp, tearDown, DummyRequest
+from repoze.bitblt.processor import ImageTransformationMiddleware
+from selenium import webdriver
+from webtest import TestApp as TestAppBase
 from zeit import frontend
+import gocept.httpserverlayer.wsgi
+import pyramid.config
+import pytest
+import zeit.frontend.application
 
 
 def test_asset_path(*parts):
@@ -113,9 +112,14 @@ def agatho():
 
 @pytest.fixture(scope='session')
 def testserver(application, request):
-    server = WSGIServer(application=application, port="6543")
-    server.start()
-    request.addfinalizer(server.stop)
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6543  # XXX Why not use the default (random) port?
+    server.wsgi_app = application
+    server.setUp()
+    # Convenience / compatibility with pytest-localserver which was used here
+    # previously.
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
     return server
 
 
