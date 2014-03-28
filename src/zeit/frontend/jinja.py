@@ -6,9 +6,11 @@ import email.utils
 import itertools
 import jinja2
 import logging
+import pkg_resources
 import pyramid.threadlocal
 import pytz
 import requests
+import urlparse
 
 
 log = logging.getLogger(__name__)
@@ -93,6 +95,12 @@ class HTTPLoader(jinja2.BaseLoader):
         if not self.url:
             return (
                 'ERROR: load_template_from_dav_url not configured',
+                template, lambda: True)
+        if self.url.startswith('egg://'):  # For tests
+            parts = urlparse.urlparse(self.url)
+            return (
+                pkg_resources.resource_string(
+                    parts.netloc, parts.path[1:] + template),
                 template, lambda: True)
 
         url = self.url + template

@@ -21,6 +21,8 @@ settings = {
     'pyramid.debug_routematch': 'true',
     'pyramid.debug_templates': 'true',
 
+    'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
+
     'agatho_url': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/comments'),
 
