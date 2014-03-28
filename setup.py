@@ -24,7 +24,6 @@ setup(
         'repoze.bitblt',
         'repoze.vhm',
         'setuptools',
-        'simplejson',
         'zeit.cms',
         'zeit.connector >= 2.3.3.dev0',
         'zeit.content.article',
