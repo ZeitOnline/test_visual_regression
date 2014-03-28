@@ -82,6 +82,11 @@ class Image(object):
             self.src = self.image and self.image.uniqueId
             self.attr_title = model_block.references.title
             self.attr_alt = model_block.references.alt
+        else:
+            self.image = None
+            self.src = None
+            self.attr_title = None
+            self.attr_alt = None
 
     @property
     def ratio(self):

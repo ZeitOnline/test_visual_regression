@@ -1,11 +1,15 @@
+from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp
+from webtest import TestApp as TestAppBase
+from os import path
 from os.path import abspath, dirname, join, sep
 import pytest
 import pyramid.config
 import zeit.frontend.application
+from zeit import frontend
 
 
 def test_asset_path(*parts):
@@ -25,6 +29,9 @@ settings = {
     'pyramid.debug_notfound': 'true',
     'pyramid.debug_routematch': 'true',
     'pyramid.debug_templates': 'true',
+
+    'agatho_url': u'file://%s/' % path.join(
+        path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
 
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
@@ -74,10 +81,34 @@ def jinja2_env(request):
     return app.configure_jinja()
 
 
+@pytest.fixture
+def app_settings():
+    return settings.copy()
+
+
 @pytest.fixture(scope='session')
 def application():
     app = zeit.frontend.application.Application()({}, **settings)
     return ImageTransformationMiddleware(app, secret='time')
+
+
+@pytest.fixture
+def config(request):
+    config = setUp(settings=settings)
+    request.addfinalizer(tearDown)
+    return config
+
+
+@pytest.fixture
+def dummy_request(request, config):
+    config.manager.get()['request'] = req = DummyRequest(is_xhr=False)
+    return req
+
+
+@pytest.fixture
+def agatho():
+    from zeit.frontend.comments import Agatho
+    return Agatho(agatho_url=settings['agatho_url'])
 
 
 @pytest.fixture(scope='session')
@@ -111,3 +142,11 @@ def browser(application):
     """ Returns an instance of `webtest.TestApp`. """
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
+
+class TestApp(TestAppBase):
+
+    def get_json(self, url, params=None, headers=None, *args, **kw):
+        if headers is None:
+            headers = {}
+        headers['Accept'] = 'application/json'
+        return self.get(url, params, headers, *args, **kw)
