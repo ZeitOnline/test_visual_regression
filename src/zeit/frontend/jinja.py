@@ -1,10 +1,14 @@
 from babel.dates import format_datetime
+from datetime import datetime
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
+import email.utils
 import itertools
 import jinja2
 import logging
 import pyramid.threadlocal
+import pytz
+import requests
 
 
 log = logging.getLogger(__name__)
@@ -76,3 +80,43 @@ def most_sufficient_teaser_tpl(block_layout,
         combinations = [t for t in itertools.product(*zipped)]
         func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
         return map(func, combinations)
+
+
+class HTTPLoader(jinja2.BaseLoader):
+
+    def __init__(self, url):
+        self.url = url
+        if not self.url.endswith('/'):
+            self.url += '/'
+
+    def get_source(self, environment, template):
+        url = self.url + template
+        response = requests.get(url)
+        return response.text, template, CompareModifiedHeader(
+            url, response.headers.get('Last-Modified'))
+
+
+class CompareModifiedHeader(object):
+    """Compares a stored timestamp against the current Last-Modified header."""
+
+    def __init__(self, url, timestamp):
+        self.url = url
+        self.last_retrieved = self.parse_rfc822(timestamp)
+
+    def __call__(self):
+        """Conforms to jinja2 uptodate semantics: Returns True if the template
+        was not modified."""
+        response = requests.head(self.url)
+        last_modified = self.parse_rfc822(
+            response.headers.get('Last-Modified'))
+        return last_modified <= self.last_retrieved
+
+    @staticmethod
+    def parse_rfc822(timestamp):
+        # XXX Dear stdlib, are you serious? Unfortunately, not even arrow
+        # deals with RFC822 timestamps. This solution is sponsored by
+        # <https://stackoverflow.com/questions/1568856>.
+        if timestamp:
+            return datetime.fromtimestamp(
+                email.utils.mktime_tz(email.utils.parsedate_tz(timestamp)),
+                pytz.utc)
