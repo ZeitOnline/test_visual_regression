@@ -1,6 +1,7 @@
 from grokcore.component import adapter, implementer
 from zeit.frontend.article import ILongformArticle
 from zeit.magazin.interfaces import IArticleTemplateSettings
+import jinja2
 import logging
 import os.path
 import pkg_resources
@@ -89,6 +90,13 @@ class Application(object):
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
+
+        default_loader = jinja.loader
+        jinja.loader = zeit.frontend.jinja.PrefixLoader({
+            None: default_loader,
+            'dav': zeit.frontend.jinja.HTTPLoader(self.settings.get(
+                'load_template_from_dav_url'))
+        }, delimiter='://')
 
         jinja.trim_blocks = True
 

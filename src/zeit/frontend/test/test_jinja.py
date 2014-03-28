@@ -45,3 +45,10 @@ def test_checks_uptodate_using_last_modified_header(template_server):
     later = time.time() + 1
     touch(template, later)
     assert not uptodate()
+
+
+def test_no_url_configured_yields_error_message():
+    loader = zeit.frontend.jinja.HTTPLoader(url=None)
+    UNUSED_ENVIRONMENT = None
+    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    assert 'load_template_from_dav_url' in source

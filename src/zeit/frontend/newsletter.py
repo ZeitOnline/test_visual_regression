@@ -7,7 +7,7 @@ import zeit.newsletter.interfaces
 
 
 @view_config(context=zeit.newsletter.interfaces.INewsletter,
-             renderer='templates/newsletter.html')
+             renderer='dav://newsletter.html')
 class Newsletter(zeit.frontend.view.Base):
 
     def translate_url(self, url):

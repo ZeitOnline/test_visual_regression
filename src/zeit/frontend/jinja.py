@@ -86,10 +86,15 @@ class HTTPLoader(jinja2.BaseLoader):
 
     def __init__(self, url):
         self.url = url
-        if not self.url.endswith('/'):
+        if url and not self.url.endswith('/'):
             self.url += '/'
 
     def get_source(self, environment, template):
+        if not self.url:
+            return (
+                'ERROR: load_template_from_dav_url not configured',
+                template, lambda: True)
+
         url = self.url + template
         response = requests.get(url)
         return response.text, template, CompareModifiedHeader(
@@ -120,3 +125,30 @@ class CompareModifiedHeader(object):
             return datetime.fromtimestamp(
                 email.utils.mktime_tz(email.utils.parsedate_tz(timestamp)),
                 pytz.utc)
+
+
+class PrefixLoader(jinja2.BaseLoader):
+    """Tweaked version of jinja2.PrefixLoader that defaults to prefix None
+    if the requested path contains no prefix delimiter.
+    """
+
+    def __init__(self, mapping, delimiter='/'):
+        self.mapping = mapping
+        self.delimiter = delimiter
+
+    def get_source(self, environment, template):
+        if self.delimiter not in template:
+            loader = self.mapping[None]
+            name = template
+        else:
+            try:
+                prefix, name = template.split(self.delimiter, 1)
+                loader = self.mapping[prefix]
+            except (ValueError, KeyError):
+                raise jinja2.TemplateNotFound(template)
+        try:
+            return loader.get_source(environment, name)
+        except jinja2.TemplateNotFound:
+            # re-raise the exception with the correct fileame here.
+            # (the one that includes the prefix)
+            raise jinja2.TemplateNotFound(template)
