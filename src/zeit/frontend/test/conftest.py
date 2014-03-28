@@ -6,7 +6,6 @@ from selenium import webdriver
 from webtest import TestApp as TestAppBase
 from zeit import frontend
 import gocept.httpserverlayer.wsgi
-import pyramid.config
 import pytest
 import zeit.frontend.application
 
@@ -74,9 +73,9 @@ browsers = {
 
 
 @pytest.fixture(scope="module")
-def jinja2_env(request):
+def jinja2_env():
     app = zeit.frontend.application.Application()
-    app.config = pyramid.config.Configurator()
+    app.configure_pyramid()
     return app.configure_jinja()
 
 

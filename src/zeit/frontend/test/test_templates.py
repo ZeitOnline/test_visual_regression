@@ -1,17 +1,7 @@
 from mock import Mock
 from re import match
 from datetime import date
-import pyramid.config
-import pytest
-import zeit.frontend.application
 import pyramid.threadlocal
-
-
-@pytest.fixture(scope="module")
-def jinja2_env(request):
-    app = zeit.frontend.application.Application()
-    app.config = pyramid.config.Configurator()
-    return app.configure_jinja()
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
