@@ -1,24 +1,19 @@
 {% import 'templates/macros/article_macro.tpl' as blocks with context%}
 
 <div class="article__head-wrap">
-    <header class="article__title-wrap">
-        <div class="is-constrained is-centered">
-            {{ blocks.title() }}
-            <div class="article__opener">
-                {{ blocks.subtitle() }}
-                <span class="article__meta">
-                    {% if view.genre -%}
-                        <span class="article__meta__genre">{{view.genre}}</span>
-                    {%- endif %}
-                    {{ blocks.meta_author(view.authors) }}
-                    {% if view.location -%}
-                        <span class="article__meta__location">{{view.location}}</span>
-                    {%- endif %}
-                </span>
-            </div>
-            <div class="article__meta__second">
-                {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
-            </div>
-        </div>
+    <header class="article__head">
+      {{ blocks.title() }}
+      {{ blocks[view.header_elem|block_type](view.header_elem) }}
+      {{ blocks.subtitle() }}
+      <span class="article__head__meta">
+        {% if view.genre -%}
+            <span class="article__head__meta__genre">{{view.genre}}</span>
+        {%- endif %}
+        {{ blocks.meta_author(view.authors) }}
+        {% if view.location -%}
+            <span class="article__head__meta__location">{{view.location}}</span>
+        {%- endif %}
+        {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+      </span>
     </header>
 </div>

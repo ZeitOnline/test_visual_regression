@@ -1,0 +1,66 @@
+.article__head__headline
+.article__head__supertitle
+.article__head__subtitle
+.article__head-wrap
+.article__head
+  text-align: center
+
+.article__head__meta__genre
+.article__head__meta__location
+.article__head__meta__author
+
+.article__head__image
+  +bleed
+  margin-bottom: $medium
+  +respond-min($break-2)
+    margin-bottom: $large
+  img
+    width: 100%
+    display: block
+
+.article__head__supertitle
+  @extend %supertitle
+  @extend %font-m
+
+.article__head__headline
+  @extend %headline
+  @extend %font-xl-xxl
+  margin-top: $micro
+  margin-bottom: $micro
+
+.article__head__meta
+  @extend %meta
+  text-align: left
+  text-transform: uppercase
+  margin-bottom: $large
+  display: block
+  margin-top: $thin
+  letter-spacing: 1px
+  font-size: $font-xs
+  +respond-min($break-1)
+    font-size: $font-s
+
+.article__head__subtitle
+  @extend %subheading
+  text-align: left
+  margin-bottom: $little !important
+  margin-top: $compact !important
+
+.article__head__meta__source
+  &:after
+    content: ', '
+    +respond-min($break-1)
+      content: ' — '
+
+.article__head__meta__date
+  span
+    color: $charcoal
+    &:before
+      white-space: pre
+      content: ', \A'
+      color: $charcoal
+      +respond-min($break-1)
+        content: ' — '
+  +respond-max($break-1)
+    display: block
+

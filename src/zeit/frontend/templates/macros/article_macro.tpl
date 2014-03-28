@@ -1,14 +1,14 @@
 {% macro title() -%}
-  <h2 class="article__supertitle">
+  <h2 class="article__head__supertitle">
       {{ view.supertitle }}
   </h2>
-  <h1 class="article__title">
+  <h1 class="article__head__headline">
       {{view.title}}
   </h1>
 {%- endmacro %}
 
 {% macro subtitle() -%}
-  <span class="article__subtitle">
+  <span class="article__head__subtitle">
       <p>{{view.subtitle}}</p>
   </span>
 {%- endmacro %}
@@ -54,9 +54,9 @@
 
 {% macro source_date(date, source) -%}
     {% if source %}
-        <span class="article__meta__second__source">{{ source }}</span>
+        <span class="article__head__meta__source">{{ source }}</span>
     {% endif %}
-    <span class="article__meta__second__date">{{ date }}</span>
+    <span class="article__head__meta__date">{{ date }}</span>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
@@ -98,12 +98,16 @@
     {% endif %}
 {%- endmacro %}
 
+{% macro headerimagestandard(obj) -%}
+    <div class="article__head__image">
+        {{ image(obj) }}
+    </div>
+{%- endmacro %}
+
 {% macro image(obj) -%}
     <figure class="
-        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
+        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' or obj.layout == 'zmo-xl-header' %}
             figure-full-width
-        {% elif obj.layout == 'zmo-xl' %}
-            article__main-image figure-full-width
         {% elif obj.layout == 'zmo-medium-left' %}
             figure-horizontal
         {% elif obj.layout == 'zmo-medium-right' %}
@@ -152,7 +156,7 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
-{% macro meta_author(authors, class="article__meta__author") %}
+{% macro meta_author(authors, class="article__head__meta__author") %}
     {%- if authors -%}
         {%- for author in authors -%}
             {{author.prefix}}
@@ -327,7 +331,7 @@
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
-            var el = document.getElementsByClassName('article__meta__second__date');
+            var el = document.getElementsByClassName('article__head__meta__date');
             var content = el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){

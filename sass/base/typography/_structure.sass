@@ -1,7 +1,5 @@
 .supertitle, %supertitle
   +tablet
-  text-transform: uppercase
-  color: $grey
   letter-spacing: 1px
   margin-bottom: $micro
   font-size: $font-s
@@ -10,14 +8,15 @@
   margin-left: $micro
 
 .meta, %meta
-  +tablet
-  color: $grey
+  +tablet(bold)
+  text-transform: uppercase
 
 .subheading, %subheading
-  +franziska(semibold)
+  +tablet
 
 .headline, %headline
-  +tablet
+  +tablet(bold)
+  letter-spacing: 1px
   line-height: $headline-line-height
 
 .quote, %quote
