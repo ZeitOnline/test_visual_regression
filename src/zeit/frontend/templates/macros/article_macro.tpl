@@ -230,7 +230,7 @@
         </div>
         <aside class="comment__tools">
             <a class="comment__tools__flag icon-flag">Kommentar melden</a>
-            <a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>
+            {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
         </aside>
     </article>
 {%- endmacro %}
