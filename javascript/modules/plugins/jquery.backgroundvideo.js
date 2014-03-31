@@ -15,13 +15,15 @@
 				var video = $element.find("video");
 				video.css({"left": ($element.width() - video.width())/2 + "px"});
 				/* prevents the video from glitching */
-				video.removeAttr("poster");
+				
+				if( $element.attr('data-backgroundvideo') ){
+					video.removeAttr("poster");
+				}
 			}
 		};
 
 		//run through data-backgroundvideo elements
 		$(this).each(function(){
-			
 			var $element = $( this );
 			
 			//show image instead of video when on mobile or no html5 video avaiable
