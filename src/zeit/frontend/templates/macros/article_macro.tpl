@@ -106,8 +106,10 @@
 
 {% macro image(obj) -%}
     <figure class="
-        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' or obj.layout == 'zmo-xl-header' %}
+        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
             figure-full-width
+        {% elif obj.layout == 'zmo-xl-header' %}
+            figure-header
         {% elif obj.layout == 'zmo-medium-left' %}
             figure-horizontal
         {% elif obj.layout == 'zmo-medium-right' %}
