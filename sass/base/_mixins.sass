@@ -48,7 +48,6 @@
     figcaption
       margin-left: auto !important
 
-
 =visuallyhidden
   border: 0
   clip: rect(0 0 0 0)
@@ -73,3 +72,8 @@
       margin-left: 0
     @else
       margin-right: 0
+
+=body-type-zoom
+  font-size: $font-ml
+  +respond-min($break-3)
+    font-size: $font-l

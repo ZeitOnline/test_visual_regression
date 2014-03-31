@@ -3,14 +3,13 @@ $article-content-max-width: 660px
 // Opt-in Typography
 .copy, %copy
   p
+    +body-type-zoom
     margin-bottom: $small
     margin-left: auto
     margin-top: 0
     margin-right: auto
-    font-size: $font-ml
     max-width: 36.6em
     +respond-min($break-3)
-      font-size: $font-l
       max-width: 33em
 
   .two-cols
@@ -52,7 +51,7 @@ figure
     width: 100%
     margin-bottom: $small
   .figure__caption, figcaption
-    @extend %meta
+    @extend %figcaption
     @extend %font-s
   .figure__media--embed
     .figure__media--embed__wrap
