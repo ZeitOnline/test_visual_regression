@@ -8,9 +8,9 @@
 {%- endmacro %}
 
 {% macro subtitle() -%}
-  <span class="article__head__subtitle">
+  <div class="article__head__subtitle">
       <p>{{view.subtitle}}</p>
-  </span>
+  </div>
 {%- endmacro %}
 
 {% macro paragraph(html, class) -%}
