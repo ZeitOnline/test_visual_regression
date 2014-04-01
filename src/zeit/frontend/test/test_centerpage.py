@@ -1,5 +1,6 @@
 from zope.testbrowser.browser import Browser
 from zeit.frontend.application import most_sufficient_teaser_tpl
+from zeit.frontend.application import most_sufficient_teaser_img
 import mock
 import pytest
 import requests
@@ -86,3 +87,15 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     asset = zeit.frontend.centerpage.auto_select_asset(context)
     assert type(asset[0]) == zeit.content.video.video.Video
     assert type(asset[1]) == zeit.content.video.video.Video
+
+def test_default_teaser_should_return_default_teaser_image(testserver):
+    article = 'http://xml.zeit.de/centerpage/article_image_asset'
+    article_context = zeit.cms.interfaces.ICMSContent(article)
+
+    cp = 'http://xml.zeit.de/centerpage/lebensart'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    teaser_block = cp_context['lead'][0]
+
+    teaser_img = most_sufficient_teaser_img(teaser_block, article_context)
+    assert teaser_img == \
+        "http://images.zeit.de/centerpage/katzencontent/katzencontent-540x304"

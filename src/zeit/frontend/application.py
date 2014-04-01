@@ -13,6 +13,7 @@ import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
 import pyramid_jinja2
+import re
 import urlparse
 import zeit.connector
 import zeit.frontend
@@ -96,6 +97,7 @@ class Application(object):
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
+        jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['replace_list_seperator'] = replace_list_seperator
@@ -300,6 +302,17 @@ def most_sufficient_teaser_tpl(block_layout,
     combinations = [t for t in itertools.product(*zipped)]
     func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
     return map(func, combinations)
+
+
+def most_sufficient_teaser_img(teaser_block,
+                               teaser):
+    img_pattern = teaser_block.layout.image_pattern
+    asset = auto_select_asset(teaser)
+    img_base_name = re.split('/', asset.uniqueId)[-1]
+    teaser_img = '%s/%s-%s' % (asset.uniqueId, img_base_name, img_pattern)
+    teaser_img = teaser_img.replace('xml.zeit.de', 'images.zeit.de')
+    request = pyramid.threadlocal.get_current_request()
+    return teaser_img
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
