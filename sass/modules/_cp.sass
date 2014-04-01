@@ -1,6 +1,13 @@
 //TODO: copy to constants if values are clear (as)
 $cp__lead-full-height: em(550px)
 
+//hide breadcrumbs for cp
+.for-centerpage
+	.main-nav
+		margin-bottom: 0px
+	.main-nav__breadcrumbs
+		display: none
+
 .cp__lead, %cp__lead
 	background-color: $black
 	&:after
@@ -17,7 +24,6 @@ $cp__lead-full-height: em(550px)
 	position: relative
 	overflow: hidden
 	padding-top: 0
-	margin-top: 0
 	height: $cp__lead-full-height
 
 .cp__lead-full

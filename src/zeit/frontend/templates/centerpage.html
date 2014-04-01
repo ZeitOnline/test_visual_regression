@@ -8,6 +8,11 @@ Available attributes:
 #}
 {% extends "templates/layout.html" %}
 
+{%  block page_wrap_inner %}
+	<div class="page-wrap--inner for-centerpage" id="js-page-wrap-inner">
+    {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+{% endblock page_wrap_inner %}
+
 {%  block content %}
     {% include "templates/inc/cp_area_lead.html" ignore missing %}
 {% endblock content %}
