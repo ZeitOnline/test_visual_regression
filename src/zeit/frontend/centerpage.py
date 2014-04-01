@@ -11,4 +11,4 @@ def auto_select_asset(teaser):
         return [video.video, video.video_2]
     if video.video is not None: return video.video
     if gallery.gallery is not None: return gallery.gallery
-    if image is not None: return image
+    if image is not None: return image.image

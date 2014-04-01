@@ -72,7 +72,7 @@ def test_autoselected_asset_from_cp_teaser_should_be_an_image(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.auto_select_asset(context)
-    assert type(asset) == zeit.content.image.imagereference.ImagesAdapter
+    assert type(asset) == zeit.content.image.imagegroup.ImageGroup
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video(testserver):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
