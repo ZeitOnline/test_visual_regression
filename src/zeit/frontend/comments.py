@@ -79,7 +79,6 @@ def _place_answers_under_parent(xml):
         </xsl:stylesheet>
     ''')
     transform = etree.XSLT(filter_xslt)
-    #import pdb; pdb.set_trace();
     return transform(xml)
 
 def comment_as_json(comment):
