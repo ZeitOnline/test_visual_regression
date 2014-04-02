@@ -305,13 +305,13 @@ def most_sufficient_teaser_tpl(block_layout,
 
 
 def most_sufficient_teaser_img(teaser_block,
-                               teaser):
+                               teaser,
+                               file_type='jpg'):
     img_pattern = teaser_block.layout.image_pattern
     asset = auto_select_asset(teaser)
     img_base_name = re.split('/', asset.uniqueId)[-1]
-    teaser_img = '%s/%s-%s' % (asset.uniqueId, img_base_name, img_pattern)
-    teaser_img = teaser_img.replace('xml.zeit.de', 'images.zeit.de')
-    request = pyramid.threadlocal.get_current_request()
+    teaser_img = '%s/%s-%s.%s' % \
+        (asset.uniqueId, img_base_name, img_pattern, file_type)
     return teaser_img
 
 
