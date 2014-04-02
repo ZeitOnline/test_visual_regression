@@ -13,12 +13,28 @@
 			 */
 			setVideoPosition: function( $element ){
 				var video = $element.find("video");
-				video.css({"left": ($element.width() - video.width())/2 + "px"});
-				/* prevents the video from glitching */
 				
+				video.css({"left": ($element.width() - video.width())/2 + "px"});
+
+				$.each( video.find( "source" ), function( index, value ){
+					console.debug( value );
+				});
+				
+				/* prevents the video from glitching */
 				if( $element.attr('data-backgroundvideo') ){
 					video.removeAttr("poster");
 				}
+			},
+			/**
+			 *
+			 * @param  {string} src_url [url of src to test]
+			 * @return {[type]}         [description]
+			 */
+			srcExists: function(src_url){
+				var http = new XMLHttpRequest();
+				http.open('HEAD', src_url, false);
+				http.send();
+				return http.status !== 404;
 			}
 		};
 
