@@ -107,17 +107,9 @@
         areas="teaser-mosaic"
         />
     <layout 
-        id="zmo-leader-fullwidth-image"
-        title="ZMO Vollbreiter Aufmacher mit Bild"
-        image_pattern="940x400"
-        areas="lead-1"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout 
-        id="zmo-leader-fullwidth-video"
+        id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher mit Video"
         image_pattern="940x400"
         areas="lead-1"
-        available="zeit.magazin.interfaces.IZMOContent"
         />
 </layouts>
