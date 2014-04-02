@@ -3,6 +3,9 @@ import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 
 def auto_select_asset (teaser):
+    if teaser is None:
+        return None
+
     gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)
     video =  zeit.content.video.interfaces.IVideoAsset(teaser)
     image = zeit.content.image.interfaces.IImages(teaser)

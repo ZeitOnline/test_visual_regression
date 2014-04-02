@@ -14,8 +14,9 @@ Available attributes:
 {% endblock page_wrap_inner %}
 
 {%  block content %}
-	{% include "templates/inc/cp_area_lead_full.html" ignore missing %}
-    {% include "templates/inc/cp_area_lead.html" ignore missing %}
+    {%- include get_teaser_template(
+        'zmo-leader-fullwidth',
+        'default',
+        view.area_lead_full_teaser | auto_select_asset | block_type | default('default')) ignore missing -%}
+    {%- include "templates/inc/cp_area_lead.html" ignore missing -%}
 {% endblock content %}
-
-
