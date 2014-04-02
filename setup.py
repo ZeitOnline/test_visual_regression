@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.2.16.dev0',
+    version='0.2.17.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
@@ -19,6 +19,8 @@ setup(
         'pyramid',
         'pyramid_jinja2',
         'pyramid_tm',
+        'pyramid_debugtoolbar',
+        'pyramid_mako',
         'repoze.bitblt',
         'repoze.vhm',
         'setuptools',
