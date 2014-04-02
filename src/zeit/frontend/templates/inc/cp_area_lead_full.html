@@ -5,8 +5,8 @@ This is the main template for the context type "centerpage".
 Available attributes:
 	zeit.frontend.view_centerpage.Centerpage
 #}
-<div class='area__lead'>
-        {% for teaser_block in view.area_lead -%}
+
+{% for teaser_block in view.area_lead_full_teaser -%}
             {%-
                set teaser_blocks = [
                     'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
@@ -14,5 +14,4 @@ Available attributes:
                     ]
             %}
             {% include teaser_blocks ignore missing %}
-        {% endfor %}
-</div>
+{% endfor %}
