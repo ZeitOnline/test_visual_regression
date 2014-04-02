@@ -1,0 +1,18 @@
+{#
+
+Default teaser template for image groups.
+
+Available attributes:
+	teaser
+	teaser_block
+
+#}
+<div class='teaser__default'>
+    <h2 title='{{teaser.supertitle}} – {{teaser.title}}'>
+        <a href='{{teaser.href}}'>
+			<img src="{{get_teaser_image(teaser_block, teaser) | translate_url}}" />
+            <span class='teaser__supertitle teaser__default__supertitle'>{{teaser.supertitle}}</span>
+            <span class='teaser__title teaser__default__title'>{{teaser.title}}</span>
+        </a>
+    </h2>
+</div>
