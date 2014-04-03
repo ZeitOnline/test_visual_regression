@@ -1,6 +1,8 @@
-from zope.testbrowser.browser import Browser
-from zeit.frontend.application import most_sufficient_teaser_tpl
+from pytest import fixture
+from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_img
+from zeit.frontend.application import most_sufficient_teaser_tpl
+from zope.testbrowser.browser import Browser
 import mock
 import pyramid.threadlocal
 import pytest
@@ -10,6 +12,16 @@ import zeit.cms.interfaces
 import zeit.frontend.interfaces
 import zeit.frontend.view_centerpage
 import zeit.content.gallery.gallery
+
+
+@fixture
+def monkeyreq(monkeypatch):
+    def request():
+        m = mock.Mock()
+        m.route_url = lambda x: "http://example.com/"
+        return m
+
+    monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
 def test_centerpage_should_have_correct_page_title(selenium_driver, testserver):
@@ -90,7 +102,7 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     assert type(asset[1]) == zeit.content.video.video.Video
 
 def test_default_teaser_should_return_default_teaser_image(
-    testserver, monkeypatch):
+    testserver, monkeyreq):
 
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
@@ -98,13 +110,6 @@ def test_default_teaser_should_return_default_teaser_image(
     cp = 'http://xml.zeit.de/centerpage/lebensart'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
-
-    def request():
-        m = mock.Mock()
-        m.route_url = lambda x: "http://example.com/"
-        return m
-
-    monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
     teaser_img = most_sufficient_teaser_img(teaser_block, article_context)
     assert re.search(
