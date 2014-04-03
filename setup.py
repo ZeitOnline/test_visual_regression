@@ -63,6 +63,7 @@ setup(
             'pytest',
             'pytest-pep8',
             'selenium',
+            'waitress',
             'webtest',
             'zope.testbrowser [wsgi]',
         ],

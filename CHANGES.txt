@@ -5,6 +5,7 @@ Change log for zeit.frontend
 -------------------
 
 - Rendering for the daily newsletter.
+- Change ordering of comments.
 
 
 0.2.16 (2014-03-25)
