@@ -309,6 +309,7 @@ def most_sufficient_teaser_img(teaser_block,
                                file_type='jpg'):
     img_pattern = teaser_block.layout.image_pattern
     asset = auto_select_asset(teaser)
+    if asset is None: return None
     img_base_name = re.split('/', asset.uniqueId)[-1]
     teaser_img = '%s/%s-%s.%s' % \
         (asset.uniqueId, img_base_name, img_pattern, file_type)
