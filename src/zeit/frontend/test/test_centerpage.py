@@ -101,6 +101,34 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     assert type(asset[0]) == zeit.content.video.video.Video
     assert type(asset[1]) == zeit.content.video.video.Video
 
+def test_default_image_url_should_return_default_image_size(
+    testserver, monkeyreq):
+
+    image_id = \
+        'http://xml.zeit.de/centerpage/katzencontent/katzencontent-180x101.jpg'
+    image = zeit.cms.interfaces.ICMSContent(image_id)
+    image_url = default_image_url(image)
+    assert re.search(
+        'http://example.com/centerpage/katzencontent/bitblt-200x300-.*/katzencontent-180x101.jpg',
+        image_url)
+
+def test_default_image_url_should_return_available_image_size(
+    testserver, monkeyreq):
+
+    image_id = \
+        'http://xml.zeit.de/centerpage/katzencontent/katzencontent-180x101.jpg'
+    image = zeit.cms.interfaces.ICMSContent(image_id)
+    image_url = default_image_url(image)
+    assert re.search(
+        'http://example.com/centerpage/katzencontent/bitblt-200x300-.*/katzencontent-180x101.jpg',
+        image_url)
+
+def test_default_image_url_should_return_None_when_no_uniqueId_is_given(
+    testserver, monkeyreq):
+
+    m = mock.Mock()
+    assert default_image_url(m) == None
+
 def test_default_teaser_should_return_default_teaser_image(
     testserver, monkeyreq):
 
