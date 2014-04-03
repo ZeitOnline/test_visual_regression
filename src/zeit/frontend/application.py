@@ -264,10 +264,10 @@ def replace_list_seperator(semicolonseperatedlist, seperator):
 
 # definition of default images sizes per layout context
 default_images_sizes = {
-    'default':(200, 300),
-    'large':(800, 600),
-    'small':(200, 300),
-    '540x304':(200, 300),
+    'default': (200, 300),
+    'large': (800, 600),
+    'small': (200, 300),
+    '540x304': (200, 300),
 }
 
 
@@ -316,13 +316,15 @@ def most_sufficient_teaser_img(teaser_block,
                                file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
     asset = auto_select_asset(teaser)
-    if asset is None: return None
+    if asset is None:
+        return None
     image_base_name = re.split('/', asset.uniqueId)[-1]
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
         teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
-        image_url = default_image_url(teaser_image, image_pattern=image_pattern)
+        image_url = default_image_url(
+            teaser_image, image_pattern=image_pattern)
         return image_url
     except TypeError:
         return None
