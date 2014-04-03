@@ -6,7 +6,6 @@ $standard-header-image-max-width: 31.25em
     p
       +body-type-zoom
 
-.article__head-wrap
 .article__head
   text-align: center
   max-width: $standard-header-max-width
@@ -43,6 +42,8 @@ $standard-header-image-max-width: 31.25em
   img
     width: 100%
     display: block
+  .figure__caption
+    text-align: right
 
 .article__head__meta
   @extend %meta
@@ -66,13 +67,9 @@ $standard-header-image-max-width: 31.25em
 
 .article__head__meta__source
   &:after
-    content: ', '
-    +respond-min($break-1)
-      content: ' — '
+    content: ' — '
 
 .article__head__meta__date
-  +respond-max($break-1)
-    display: block
   span
     &:before
       white-space: pre

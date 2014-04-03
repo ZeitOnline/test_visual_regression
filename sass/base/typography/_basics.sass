@@ -37,7 +37,7 @@ $article-content-max-width: 660px
 // hacked for longform launch
 // todo: delete when possible (NB)
 div.figure-full-width
-  width: 100% //100%
+  width: 100%
   max-width: em(910px)
   margin: 0 auto
 
@@ -49,10 +49,10 @@ figure
   .figure__media, img
     max-width: 100%
     width: 100%
-    margin-bottom: $small
   .figure__caption, figcaption
     @extend %figcaption
     @extend %font-s
+    margin-top: $small
   .figure__media--embed
     .figure__media--embed__wrap
       width: 100%

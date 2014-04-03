@@ -1,10 +1,12 @@
 {% import 'templates/macros/article_macro.tpl' as blocks with context%}
 
 <div class="article__head-wrap">
-    <header class="article__head article__head--default">
-      {{ blocks.supertitle() }}
+    <header class="article__head article__head--stamp is-constrained">
+      <div class="article__head__stamp-wrap">
+        {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        {{ blocks.supertitle() }}
+      </div>
       {{ blocks.title() }}
-      {{ blocks[view.header_elem|block_type](view.header_elem) }}
       {{ blocks.subtitle(True) }}
       <span class="article__head__meta-wrap">
         <span class="article__head__meta">

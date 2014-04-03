@@ -2,8 +2,11 @@
 
 <div class="article__head-wrap">
     <header class="article__head article__head--traum">
-      {{ blocks.title() }}
-      {{ blocks.subtitle(False) }}
+      <div class="is-constrained">
+        {{ blocks.supertitle() }}
+        {{ blocks.title() }}
+        {{ blocks.subtitle(False) }}
+      </div>
       {{ blocks[view.header_elem|block_type](view.header_elem) }}
       <span class="article__head__meta-wrap is-constrained">
         <span class="article__head__meta">

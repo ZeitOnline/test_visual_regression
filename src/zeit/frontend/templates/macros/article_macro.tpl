@@ -1,7 +1,10 @@
-{% macro title() -%}
+{% macro supertitle() -%}
   <h2 class="article__head__supertitle">
       {{ view.supertitle }}
   </h2>
+{%- endmacro %}
+
+{% macro title() -%}
   <h1 class="article__head__headline">
       {{view.title}}
   </h1>
