@@ -320,9 +320,12 @@ def most_sufficient_teaser_img(teaser_block,
     image_base_name = re.split('/', asset.uniqueId)[-1]
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
-    teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
-    image_url = default_image_url(teaser_image, image_pattern=image_pattern)
-    return image_url
+    try:
+        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        image_url = default_image_url(teaser_image, image_pattern=image_pattern)
+        return image_url
+    except TypeError:
+        return None
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
