@@ -16,13 +16,70 @@ class Agatho(object):
         self.entry_point = agatho_url
 
     def collection_get(self, unique_id):
-        #random='?r='+str(randint(2,90000))
         try:
-            #return etree.parse('%s%s%s' % (self.entry_point, path_of_article(unique_id),random))
-            return etree.parse('%s%s' % (self.entry_point, path_of_article(unique_id)))
+            return _place_answers_under_parent(etree.parse('%s%s' % (self.entry_point, path_of_article(unique_id))))
         except IOError: # lxml reports a 404 as IOError, 404 code signals that no thread exists for that article
             return None
 
+def _place_answers_under_parent(xml):
+    filter_xslt = etree.XML('''
+        <xsl:stylesheet version="1.0"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml"
+                        omit-xml-declaration="yes" />
+          <xsl:template match="comments">
+            <comments>
+              <xsl:apply-templates select="comment_count" />
+              <xsl:apply-templates select="last_comment_timestamp" />
+              <xsl:apply-templates select="last_comment_name" />
+              <xsl:apply-templates select="last_comment_uid" />
+              <xsl:apply-templates select="nid" />
+              <xsl:apply-templates select="path" />
+              <xsl:apply-templates select="source" />
+              <xsl:apply-templates select="comment">
+                <xsl:sort select="./@id" order="descending" data-type="text" />
+              </xsl:apply-templates>
+            </comments>
+          </xsl:template>
+          <xsl:template match="comments/last_comment_timestamp">
+            <xsl:copy-of select="." />
+          </xsl:template>
+          <xsl:template match="comments/last_comment_name">
+            <xsl:copy-of select="." />
+          </xsl:template>
+          <xsl:template match="comments/last_comment_uid">
+            <xsl:copy-of select="." />
+          </xsl:template>
+          <xsl:template match="comments/comment_count">
+            <xsl:copy-of select="." />
+          </xsl:template>
+          <xsl:template match="nid">
+            <xsl:copy-of select="." />
+          </xsl:template>
+          <xsl:template match="comments/comment">
+          <xsl:variable name="cid"><xsl:value-of select="@id" /></xsl:variable>
+            <xsl:if test="not(inreply)">
+              <xsl:copy-of select="." />
+            </xsl:if>
+            <xsl:apply-templates select="//comment/inreply[@to=$cid]">
+              <xsl:sort select="./@cid" order="ascending" data-type="text" />
+            </xsl:apply-templates>
+          </xsl:template>
+          <xsl:template match="comments/path">
+            <xsl:copy-of select="." />
+          </xsl:template>
+          <xsl:template match="comments/source">
+            <xsl:copy-of select="." />
+          </xsl:template>
+
+          <xsl:template match="//comment/inreply">
+            <xsl:copy-of select=".." />
+          </xsl:template>
+
+        </xsl:stylesheet>
+    ''')
+    transform = etree.XSLT(filter_xslt)
+    return transform(xml)
 
 def comment_as_json(comment):
     """ expects an lxml element representing an agatho comment and returns a
@@ -49,11 +106,11 @@ def comment_as_json(comment):
 
 def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""
-    api = Agatho(request.registry.settings.agatho_url)
+    api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
     thread = api.collection_get(unique_id)
     if thread is not None:
         return dict(
-            comments=[comment_as_json(comment) for comment in reversed(thread.xpath('//comment'))],
+            comments=[comment_as_json(comment) for comment in thread.xpath('//comment')],
             comment_count=int(thread.xpath('/comments/comment_count')[0].text),
             nid=thread.xpath('/comments/nid')[0].text,
             my_uid=request.cookies.get('drupal-userid', 0))

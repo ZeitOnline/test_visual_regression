@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.17 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Change ordering of comments.
 
 
 0.2.16 (2014-03-25)
