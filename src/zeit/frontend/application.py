@@ -15,6 +15,7 @@ import pyramid.threadlocal
 import pyramid_jinja2
 import re
 import urlparse
+import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
@@ -262,22 +263,28 @@ def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
 # definition of default images sizes per layout context
-default_images_sizes = dict(
-    large=(800, 600),
-    small=(200, 300),
-)
+default_images_sizes = {
+    'default':(200, 300),
+    'large':(800, 600),
+    'small':(200, 300),
+    '540x304':(200, 300),
+}
 
 
-def default_image_url(image):
+def default_image_url(image,
+                      image_pattern='default'):
     try:
-        width, height = default_images_sizes.get(image.layout, (640, 480))
+        if hasattr(image, 'layout'):
+            width, height = default_images_sizes.get(image.layout, (640, 480))
+        else:
+            width, height = default_images_sizes.get(image_pattern, (640, 480))
         # TODO: use secret from settings?
         signature = compute_signature(width, height, 'time')
 
-        if image.src is None:
+        if image.uniqueId is None:
             return None
 
-        scheme, netloc, path, query, fragment = urlsplit(image.src)
+        scheme, netloc, path, query, fragment = urlsplit(image.uniqueId)
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)

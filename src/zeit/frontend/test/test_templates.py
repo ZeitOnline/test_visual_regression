@@ -291,7 +291,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
     class Image(object):
 
-        src = '/img/artikel/01/01.jpg'
+        uniqueId = '/img/artikel/01/01.jpg'
 
         def __init__(self, data):
             vars(self).update(data)
