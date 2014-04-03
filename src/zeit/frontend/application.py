@@ -314,13 +314,15 @@ def most_sufficient_teaser_tpl(block_layout,
 def most_sufficient_teaser_img(teaser_block,
                                teaser,
                                file_type='jpg'):
-    img_pattern = teaser_block.layout.image_pattern
+    image_pattern = teaser_block.layout.image_pattern
     asset = auto_select_asset(teaser)
     if asset is None: return None
-    img_base_name = re.split('/', asset.uniqueId)[-1]
-    teaser_img = '%s/%s-%s.%s' % \
-        (asset.uniqueId, img_base_name, img_pattern, file_type)
-    return teaser_img
+    image_base_name = re.split('/', asset.uniqueId)[-1]
+    image_id = '%s/%s-%s.%s' % \
+        (asset.uniqueId, image_base_name, image_pattern, file_type)
+    teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+    image_url = default_image_url(teaser_image, image_pattern=image_pattern)
+    return image_url
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
