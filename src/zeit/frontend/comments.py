@@ -106,7 +106,7 @@ def comment_as_json(comment):
 
 def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""
-    api = Agatho(request.registry.settings.agatho_url)
+    api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
     thread = api.collection_get(unique_id)
     if thread is not None:
         return dict(
