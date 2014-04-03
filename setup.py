@@ -61,6 +61,7 @@ setup(
             'pytest-pep8',
             'requests',
             'selenium',
+            'waitress',
             'webtest',
             'zope.testbrowser',
         ],
