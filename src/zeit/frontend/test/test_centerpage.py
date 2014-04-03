@@ -2,7 +2,9 @@ from zope.testbrowser.browser import Browser
 from zeit.frontend.application import most_sufficient_teaser_tpl
 from zeit.frontend.application import most_sufficient_teaser_img
 import mock
+import pyramid.threadlocal
 import pytest
+import re
 import requests
 import zeit.cms.interfaces
 import zeit.frontend.interfaces
@@ -87,7 +89,9 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     assert type(asset[0]) == zeit.content.video.video.Video
     assert type(asset[1]) == zeit.content.video.video.Video
 
-def test_default_teaser_should_return_default_teaser_image(testserver):
+def test_default_teaser_should_return_default_teaser_image(
+    testserver, monkeypatch):
+
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
 
@@ -95,6 +99,14 @@ def test_default_teaser_should_return_default_teaser_image(testserver):
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
 
+    def request():
+        m = mock.Mock()
+        m.route_url = lambda x: "http://example.com/"
+        return m
+
+    monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
+
     teaser_img = most_sufficient_teaser_img(teaser_block, article_context)
-    assert teaser_img == \
-        "http://images.zeit.de/centerpage/katzencontent/katzencontent-540x304"
+    assert re.search(
+        "http://example.com/centerpage/katzencontent/bitblt-200x300.*katzencontent-540x304.jpg",
+        teaser_img)
