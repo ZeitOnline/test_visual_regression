@@ -1,3 +1,7 @@
+// –––––––––––––––––––––––
+//      TRAUM HEADER
+// –––––––––––––––––––––––
+
 .article__head--traum
   max-width: none
 
@@ -40,3 +44,22 @@
   .article__head__meta__author
   .article__head__meta__source
   .article__head__meta__date
+
+// –––––––––––––––––––––––
+//    TEXT ONLY HEADER
+// –––––––––––––––––––––––
+
+.article__head--text-only
+  text-align: left
+  +respond-min($break-2)
+    padding-left: 7%
+
+  .article__head__headline
+    margin-bottom: $small
+    +respond-min($break-2)
+      margin-bottom: $small
+
+  .article__head__subtitle
+    @extend %headline
+    @extend %font-xl-xxl
+    margin-bottom: $big
