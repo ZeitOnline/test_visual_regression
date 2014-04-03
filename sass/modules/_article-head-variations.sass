@@ -30,11 +30,10 @@
   .article__head__image
     max-width: none
     figcaption
-      max-width: 47.14em
+      @extend .is-constrained
       margin: 0 auto
 
   .article__head__meta-wrap
-    max-width: 41.25em
     margin: 0 auto
     display: block
 
@@ -63,3 +62,22 @@
     @extend %headline
     @extend %font-xl-xxl
     margin-bottom: $big
+
+// –––––––––––––––––––––––
+//    LEINWAND HEADER
+// –––––––––––––––––––––––
+
+.article__head--leinwand
+  max-width: none
+  .article__head__subtitle
+    p
+      +body-type-zoom
+  .is-constrained
+    margin: 0 auto
+  .article__head__image
+    +bleed($nav__break__full-menu)
+    max-width: none
+  .figure-header
+    margin-top: -3.2em
+    +respond-min($nav__break__full-menu)
+      margin-top: -5em
