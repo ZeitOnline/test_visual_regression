@@ -3,11 +3,12 @@
 Default teaser template.
 
 Available attributes:
-	teaser
+    teaser_block
+    teaser
 
 #}
 <div class='teaser__default'>
-    <img class='teaser__default__image' src='' title='' alt='' />
+    {% block asset %}{% endblock %}
     <h2 title='{{teaser.supertitle}} – {{teaser.title}}'>
         <a href='{{teaser.href}}'>
             <span class='teaser__supertitle teaser__default__supertitle'>{{teaser.supertitle}}</span>

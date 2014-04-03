@@ -80,6 +80,7 @@ class Image(object):
         if model_block.references:
             self.image = model_block.references.target
             self.src = self.image and self.image.uniqueId
+            self.uniqueId = self.image and self.image.uniqueId
             self.attr_title = model_block.references.title
             self.attr_alt = model_block.references.alt
         else:

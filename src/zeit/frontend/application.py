@@ -7,7 +7,9 @@ import os.path
 import pkg_resources
 import pyramid.config
 import pyramid_jinja2
+import re
 import urlparse
+import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
@@ -103,6 +105,8 @@ class Application(object):
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.globals['get_teaser_template'] = (
             zeit.frontend.jinja.most_sufficient_teaser_tpl)
+        jinja.globals['get_teaser_image'] = (
+            zeit.frontend.jinja.most_sufficient_teaser_img)
         jinja.tests['elem'] = zeit.frontend.block.is_block
 
         # XXX Use scanning to register filters instead of listing them here

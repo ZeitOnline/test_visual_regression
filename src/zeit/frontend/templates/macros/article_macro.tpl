@@ -244,7 +244,7 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            <form action="{{request.registry.settings.agatho_url[:-1]+request.path}}?destination={{request.url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
+            <form action="{{comment_post_url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
                 <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
                 <input id="node_id" type="hidden" value="{{comments['nid']}}" name="nid">

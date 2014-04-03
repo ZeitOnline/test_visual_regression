@@ -16,16 +16,15 @@ def test_asset(path):
 
 settings = {
     'pyramid.reload_templates': 'false',
-    'pyramid.debug_authorization': 'true',
-    'pyramid.debug_notfound': 'true',
-    'pyramid.debug_routematch': 'true',
-    'pyramid.debug_templates': 'true',
-
-    'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
 
     'agatho_url': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/comments'),
 
+    'pyramid.debug_authorization': 'false',
+    'pyramid.debug_notfound': 'false',
+    'pyramid.debug_routematch': 'false',
+    'pyramid.debug_templates': 'false',
+    'agatho_host': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
 
@@ -101,7 +100,7 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     from zeit.frontend.comments import Agatho
-    return Agatho(agatho_url=settings['agatho_url'])
+    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
 @pytest.fixture(scope='session')
