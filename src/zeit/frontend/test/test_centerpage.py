@@ -39,8 +39,7 @@ def test_cp_area_lead_should_have_expected_markup(jinja2_env, testserver):
     result = [u"<div class='area__lead'>",
               u"            <div class='teaser_block__default'>",
               u"            <div class='teaser__default'>",
-              u"    <img class='teaser__default__image' src='' title='' alt='' />",
-              u"    <h2 title='Gentrifizierung \u2013 Mei, is des traurig!'>",
+              u"        <h2 title='Gentrifizierung \u2013 Mei, is des traurig!'>",
               u"        <a href=''>",
               u"            <span class='teaser__supertitle teaser__default__supertitle'>Gentrifizierung</span>",
               u"            <span class='teaser__title teaser__default__title'>Mei, is des traurig!</span>",
@@ -48,7 +47,7 @@ def test_cp_area_lead_should_have_expected_markup(jinja2_env, testserver):
               u'    </h2>',
               ]
     render = tpl.render(view=view, request=view.request).splitlines()
-    assert render[:10] == result
+    assert render[:9] == result
 
 def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
     should = [
