@@ -247,7 +247,6 @@
             <form action="{{request.registry.settings.agatho_url[:-1]+request.path}}?destination={{request.url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
                 <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
-                <input id="subject msg" type="hidden" value="default subject zmo to be replaced by js" name="subject">
                 <input id="node_id" type="hidden" value="{{comments['nid']}}" name="nid">
                 <input id="parent_id" type="hidden" value="" name="pid">
                 <input id="user_id" type="hidden" value="{{comments['my_uid']}}" name="uid">
