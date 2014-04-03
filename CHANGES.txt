@@ -5,7 +5,7 @@ Change log for zeit.frontend
 -------------------
 
 - Change ordering of comments.
-
+- Autoselect images, that fit the teaser-block
 
 0.2.16 (2014-03-25)
 -------------------

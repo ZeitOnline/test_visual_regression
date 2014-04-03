@@ -13,7 +13,9 @@ import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
 import pyramid_jinja2
+import re
 import urlparse
+import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
@@ -96,6 +98,7 @@ class Application(object):
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
+        jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['replace_list_seperator'] = replace_list_seperator
@@ -260,22 +263,28 @@ def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
 # definition of default images sizes per layout context
-default_images_sizes = dict(
-    large=(800, 600),
-    small=(200, 300),
-)
+default_images_sizes = {
+    'default': (200, 300),
+    'large': (800, 600),
+    'small': (200, 300),
+    '540x304': (200, 300),
+}
 
 
-def default_image_url(image):
+def default_image_url(image,
+                      image_pattern='default'):
     try:
-        width, height = default_images_sizes.get(image.layout, (640, 480))
+        if hasattr(image, 'layout'):
+            width, height = default_images_sizes.get(image.layout, (640, 480))
+        else:
+            width, height = default_images_sizes.get(image_pattern, (640, 480))
         # TODO: use secret from settings?
         signature = compute_signature(width, height, 'time')
 
-        if image.src is None:
+        if image.uniqueId is None:
             return None
 
-        scheme, netloc, path, query, fragment = urlsplit(image.src)
+        scheme, netloc, path, query, fragment = urlsplit(image.uniqueId)
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
@@ -293,13 +302,32 @@ def most_sufficient_teaser_tpl(block_layout,
                                suffix='.html',
                                separator='_'):
 
-        types = (block_layout, content_type, asset)
-        defaults = ('default', 'default', 'default')
-        zipped = zip(types, defaults)
+    types = (block_layout, content_type, asset)
+    defaults = ('default', 'default', 'default')
+    zipped = zip(types, defaults)
 
-        combinations = [t for t in itertools.product(*zipped)]
-        func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-        return map(func, combinations)
+    combinations = [t for t in itertools.product(*zipped)]
+    func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
+    return map(func, combinations)
+
+
+def most_sufficient_teaser_img(teaser_block,
+                               teaser,
+                               file_type='jpg'):
+    image_pattern = teaser_block.layout.image_pattern
+    asset = auto_select_asset(teaser)
+    if asset is None:
+        return None
+    image_base_name = re.split('/', asset.uniqueId)[-1]
+    image_id = '%s/%s-%s.%s' % \
+        (asset.uniqueId, image_base_name, image_pattern, file_type)
+    try:
+        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        image_url = default_image_url(
+            teaser_image, image_pattern=image_pattern)
+        return image_url
+    except TypeError:
+        return None
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
