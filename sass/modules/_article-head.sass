@@ -1,5 +1,12 @@
 $standard-header-max-width: 41.25em
-$standard-header-image-max-width: 29em
+$standard-header-image-max-width: 31.25em
+
+.article__head--default
+  .article__head__headline
+    @extend %font-xl-xxl
+  .article__head__subtitle
+    p
+      +body-type-zoom
 
 .article__head-wrap
 .article__head
@@ -10,20 +17,21 @@ $standard-header-image-max-width: 29em
 
 .article__head__supertitle
   @extend %supertitle
-  @extend %font-m
-  margin-bottom: $compact
+  font-size: $font-m
+  margin-bottom: $small
+  +respond-min($break-2)
+    font-size: $font-ml
 
 .article__head__headline
   @extend %headline
-  @extend %font-xl-xxl
-  margin-bottom: $medium
+  margin-bottom: $compact
+  +respond-min($break-2)
+    margin-bottom: $big
 
 .article__head__subtitle
   @extend %subheading
   text-align: left
-  margin-bottom: $compact !important
-  p
-    +body-type-zoom
+  margin-bottom: $compact
 
 .article__head__image
   max-width: $standard-header-image-max-width
@@ -46,9 +54,12 @@ $standard-header-image-max-width: 29em
   margin-top: $thin
   letter-spacing: 1px
   font-size: $font-xs
-  max-width: 25em
-  +respond-min($break-1)
-    font-size: $font-s
+  max-width: 28em
+  line-height: $meta-line-height
+
+.article__head__meta__offset
+  display: block
+  margin-bottom: $thin
 
 .article__head__meta__genre
 .article__head__meta__location
@@ -64,11 +75,7 @@ $standard-header-image-max-width: 29em
   +respond-max($break-1)
     display: block
   span
-    color: $charcoal
     &:before
       white-space: pre
-      content: ', \A'
-      color: $charcoal
-      +respond-min($break-1)
-        content: ' — '
+      content: ' — '
 
