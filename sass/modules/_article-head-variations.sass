@@ -1,0 +1,42 @@
+.article__head--traum
+  max-width: none
+
+  .article__head__supertitle
+    margin-bottom: $small
+    +respond-min($break-2)
+      margin-bottom: $medium
+
+  .article__head__headline
+    @extend %font-xl-xxl
+    margin-bottom: 0
+
+  .article__head__subtitle
+    @extend %headline
+    @extend %font-xl-xxl
+    text-align: center
+    margin-bottom: $big
+    &:before
+      content: "—"
+      display: block
+      margin-top: $micro
+      margin-bottom: $micro
+    p
+      margin-top: 0
+
+  .article__head__image
+    max-width: none
+    figcaption
+      max-width: 47.14em
+      margin: 0 auto
+
+  .article__head__meta-wrap
+    max-width: 41.25em
+    margin: 0 auto
+    display: block
+
+  .article__head__meta
+  .article__head__meta__genre
+  .article__head__meta__location
+  .article__head__meta__author
+  .article__head__meta__source
+  .article__head__meta__date
