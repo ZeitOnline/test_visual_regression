@@ -213,6 +213,17 @@
 
 {% macro comment(indented, recommended, img_url, name, timestamp, role, text) -%}
     <article class="comment {% if indented -%}is-indented{%- endif %}">
+        {{comment_inner(recommended, img_url, name, timestamp, role, text)}}
+    </article>
+{%- endmacro %}
+
+{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text) -%}
+    <article class="comment">
+        {{comment_inner(recommended, img_url, name, timestamp, role, text)}}
+    </article>
+{%- endmacro %}
+
+{% macro comment_inner(recommended, img_url, name, timestamp, role, text) -%}
         <div class="comment__head">
             {% if img_url -%}
                 <img src="{{img_url}}" class="comment__head__img" />
@@ -229,7 +240,6 @@
             <a class="comment__tools__flag icon-flag">Kommentar melden</a>
             {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
         </aside>
-    </article>
 {%- endmacro %}
 
 {% macro comments(comments) -%}
@@ -271,7 +281,7 @@
                     <div class="comments__list">
                         {% for commentdict in comments['comments'] %}
                             {% if commentdict['recommended'] -%}
-                                {{ comment(**commentdict) }}
+                                {{ comment_recommend(**commentdict) }}
                             {%- endif %}
                         {% endfor %}
                     </div>
