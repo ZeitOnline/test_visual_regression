@@ -5,7 +5,7 @@
 {%- endmacro %}
 
 {% macro title() -%}
-  <h1 class="article__head__headline">
+  <h1 class="article__head__title">
       {{view.title}}
   </h1>
 {%- endmacro %}
