@@ -224,22 +224,23 @@
 {%- endmacro %}
 
 {% macro comment_inner(recommended, img_url, name, timestamp, role, text) -%}
-        <div class="comment__head">
-            {% if img_url -%}
-                <img src="{{img_url}}" class="comment__head__img" />
-            {%- endif %}
-            <div class="comment__head__meta">
-                <strong class="comment__head__meta__name">{{name}}</strong>
-                <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
-            </div>
+    <div class="comment__head">
+        {% if img_url -%}
+            <img src="{{img_url}}" class="comment__head__img" />
+        {%- endif %}
+        <div class="comment__head__meta">
+            <strong class="comment__head__meta__name">{{name}}</strong>
+            <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
         </div>
-        <div class="comment__body">
-            <p>{{text|safe}}</p>
-        </div>
-        <aside class="comment__tools">
-            <a class="comment__tools__flag icon-flag">Kommentar melden</a>
-            {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
-        </aside>
+    </div>
+    <div class="comment__body">
+        <p>{{text|safe}}</p>
+    </div>
+    <aside class="comment__tools">
+        <script type="text/javascript" src="http://scripts.zeit.de/static/js/plugins/jquery.comments.js?0058" />
+        <a class="comment__tools__flag icon-flag">Kommentar melden</a>
+        {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
+    </aside>
 {%- endmacro %}
 
 {% macro comments(comments) -%}
