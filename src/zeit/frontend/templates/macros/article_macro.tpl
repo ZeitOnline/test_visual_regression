@@ -220,9 +220,6 @@
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{name}}</strong>
                 <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
-                {% if role -%}
-                    <div class="comment__head__meta__label">{{role}}</div>
-                {%- endif %}
             </div>
         </div>
         <div class="comment__body">
@@ -230,7 +227,7 @@
         </div>
         <aside class="comment__tools">
             <a class="comment__tools__flag icon-flag">Kommentar melden</a>
-            <a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>
+            {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
         </aside>
     </article>
 {%- endmacro %}
@@ -247,10 +244,9 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            <form action="{{request.registry.settings.agatho_url[:-1]+request.path}}?destination={{request.url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
+            <form action="{{comment_post_url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
                 <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
-                <input id="subject msg" type="hidden" value="default subject zmo to be replaced by js" name="subject">
                 <input id="node_id" type="hidden" value="{{comments['nid']}}" name="nid">
                 <input id="parent_id" type="hidden" value="" name="pid">
                 <input id="user_id" type="hidden" value="{{comments['my_uid']}}" name="uid">
