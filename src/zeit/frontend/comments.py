@@ -116,7 +116,7 @@ def get_thread(unique_id, request):
     if thread is not None:
         return dict(
             comments=[comment_as_json(comment)
-                      for comment in reversed(thread.xpath('//comment'))],
+                      for comment in thread.xpath('//comment')],
             comment_count=int(thread.xpath('/comments/comment_count')[0].text),
             nid=thread.xpath('/comments/nid')[0].text,
             my_uid=request.cookies.get('drupal-userid', 0))
