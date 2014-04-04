@@ -20,6 +20,7 @@ Available attributes:
 #}
 <div class='teaser_block__default'>
     {% for teaser in teaser_block %}
+    	{{  teaser | auto_select_asset | block_type }}
         {% include get_teaser_template(
             teaser_block.layout.id,
             teaser | block_type,

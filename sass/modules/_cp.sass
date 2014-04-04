@@ -1,5 +1,6 @@
 //TODO: copy to constants if values are clear (as)
 $cp__lead-full-height: em(550px)
+$cp__lead__wrap-width: 65%
 
 //hide breadcrumbs for cp
 .for-centerpage
@@ -7,6 +8,8 @@ $cp__lead-full-height: em(550px)
 		margin-bottom: 0px
 	.main-nav__breadcrumbs
 		display: none
+	.main
+		overflow: hidden
 
 .cp__lead, %cp__lead
 	background-color: $black
@@ -19,6 +22,56 @@ $cp__lead-full-height: em(550px)
 		width: 200%
 		left: -50%
 		top: 0px
+
+.cp__lead__title
+	+tablet()
+	color: $white
+	margin: 0 0 $tiny
+	font-size: $font-xxl
+	letter-spacing: $hair
+	+respond-min($break-2)
+		font-size: $font-xxxl
+
+.cp__lead__subtitle
+	@extend %copy
+	+tablet()
+	color: $white
+	line-height: $medium
+	font-size: $font-ml
+
+.cp__lead__supertitle
+	@extend %copy
+	+tablet()
+	color: $white
+	font-size: $font-ml
+
+.cp__lead__wrap
+	width: 100%
+	padding: $compact $compact $compact $compact
+	+respond-min($break-2)
+		float: left
+		width: $cp__lead__wrap-width
+
+.cp__lead__informatives__wrap
+	padding: $compact $compact $compact
+	+respond-min($break-2)
+		float: left
+
+.cp__lead-leader__wrap
+	position: relative
+	overflow: hidden
+	padding-top: 0
+	padding-bottom: $compact
+	height: $cp__lead-full-height	
+
+.cp__lead-leader__title__wrap
+	position: absolute
+	overflow: hidden
+	bottom: $medium
+	padding-left: 5%
+	padding-right: 5%
+	width: 100%
+	z-index: 2	
 
 .cp__lead-full__wrap
 	position: relative
@@ -65,17 +118,3 @@ $cp__lead-full-height: em(550px)
 			content: "«"
 		&:after
 			content: "»"
-
-.cp__lead__title
-	+tablet
-	color: $white
-	margin-bottom: $tiny
-	font-size: $font-xxl
-	+respond-min($break-2)
-		font-size: $font-xxl
-
-.cp__lead__subtitle
-	@extend %copy
-	+franziska()
-	color: $white
-	font-size: $font-ml
