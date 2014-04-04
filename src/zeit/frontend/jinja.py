@@ -9,11 +9,15 @@ import logging
 import pkg_resources
 import pyramid.threadlocal
 import pytz
+import re
 import requests
 import urlparse
+import zeit.cms.interfaces
+import zeit.frontend.centerpage
 
 
 log = logging.getLogger(__name__)
+
 
 @jinja2.contextfilter
 def translate_url(context, url):
@@ -93,7 +97,7 @@ def most_sufficient_teaser_img(teaser_block,
                                teaser,
                                file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
-    asset = auto_select_asset(teaser)
+    asset = zeit.frontend.centerpage.auto_select_asset(teaser)
     if asset is None:
         return None
     image_base_name = re.split('/', asset.uniqueId)[-1]
