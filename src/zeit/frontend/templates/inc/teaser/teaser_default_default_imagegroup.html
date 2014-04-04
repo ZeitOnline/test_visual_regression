@@ -1,0 +1,16 @@
+{#
+
+Default teaser template for image groups.
+
+Available attributes:
+    teaser
+    teaser_block
+
+#}
+{% extends "templates/inc/teaser/teaser_default_default_default.html" -%}
+{% block asset %}
+{% set teaser_image_src = get_teaser_image(teaser_block, teaser) | translate_url -%}
+{% if teaser_image_src %}
+<img class='teaser__default__image' src='{{teaser_image_src}}' title='' alt='' />
+{% endif %}
+{% endblock %}
