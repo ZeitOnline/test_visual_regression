@@ -43,12 +43,18 @@
 {% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
         <div class="{{ index_class }}">
+        <div class="article__subpage-index__title">&uuml;bersicht</div>
         {% for page in pages if page.teaser %}
-            {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ page.number }} — {{ page.teaser }}</span>
-            {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} — {{  page.teaser  }}</a></span>
-            {% endif %}
+            <div class="article__subpage-index__item">
+                <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
+                <span class="article__subpage-index__item__title-wrap">
+                    {% if loop.index == number %}
+                        <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
+                    {% else %}
+                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title">{{  page.teaser  }}</a>
+                    {% endif %}
+                </span>
+            </div>
         {% endfor %}
     </div>
     {% endif %}

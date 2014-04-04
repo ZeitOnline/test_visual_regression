@@ -185,7 +185,7 @@ $longform-header-max-height: 1400px
 
   .article__subpage-head
     @extend %headline
-    margin: $small auto $small auto
+    margin: 0 auto $small auto
     font-size: $font-xl--px
     font-size: $font-xl--rem
     max-width: $longform-content-max-width
@@ -193,7 +193,7 @@ $longform-header-max-height: 1400px
     +respond-min($break-1)
       font-size: $font-xxl--px
       font-size: $font-xxl--rem
-      margin-top: $medium
+      margin-top: 0
     a
       display: block
       position: relative
@@ -201,16 +201,13 @@ $longform-header-max-height: 1400px
       border-bottom: 0px
 
   .article__subpage-index
-    @extend %meta
+    +tablet
     display: none
     max-width: em(240px)
-    border-bottom: $micro solid $grey
     padding: 0 $small
     margin-right: $gutter*2
     float: left
-    position: relative
-    top: -$large
-    display: none
+    margin-top: $thin
     +respond-min($break-2)
       display: inline
     a
@@ -219,11 +216,29 @@ $longform-header-max-height: 1400px
         text-decoration: none
       +on-interaction
         border-color: $grey
-    span
-      display: block
-      margin: $gutter 0
     .article__subpage-active
       color: $black
+
+  .article__subpage-index__title
+    text-transform: uppercase
+    font-size: $font-s
+
+  .article__subpage-index__item
+    +pie-clearfix
+    display: block
+    margin: $gutter 0
+    font-size: $font-s
+
+  .article__subpage-index__item__title-wrap
+    overflow: hidden
+    display: block
+
+  .article__subpage-index__item__title
+    display: inline
+
+  .article__subpage-index__item__count
+    float: left
+    min-width: em(40px)
 
   .article__subpage-chapter
     @extend %meta
