@@ -17,7 +17,7 @@
 
   	       <header class="article__title-wrap">
             {{ blocks.title() }}
-            <div class="article__meta">
+            <div class="article__head__meta">
               {{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
               {{ blocks.meta_author(view.authors) }}
             </div>
@@ -30,7 +30,6 @@
          <section class="article__page">
             <div class="article__page-wrap">
               {{ blocks.subtitle() }}
-              <div class="article__subtitle__line"></div>
             </div>
           </section>
 

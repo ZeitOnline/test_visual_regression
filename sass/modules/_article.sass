@@ -27,6 +27,11 @@
 			display: table-footer-group
 		.article__main-image
 
+.article__subheading
+	@extend %headline
+	+body-type-zoom
+	margin-top: $compact !important
+
 .article__tags
 	@extend %meta
 	@extend .article__head__meta

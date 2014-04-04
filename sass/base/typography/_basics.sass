@@ -24,7 +24,6 @@ $article-content-max-width: 660px
 
   blockquote
     @extend %quote
-    @extend %font-l-xl
     color: $color-quote
     display: block
     margin: $medium 0
@@ -33,7 +32,7 @@ $article-content-max-width: 660px
     &.quote
       +respond-min($break-1)
         float: left
-        max-width: em(160px)
+        +max-width-rem(208px)
         margin: $medium $medium $medium auto
 
 // hacked for longform launch

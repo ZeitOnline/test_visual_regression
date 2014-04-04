@@ -12,16 +12,33 @@ $longform-header-max-height: 1400px
   padding: 0
   max-width: none
 
-  .article__head__subtitle
-    color: $grey--dark
-    text-align: center
-    line-height: 1.5
+  .article__head__headline
+    color: $white
+    font-size: $font-xl
+    margin-bottom: $fine
+    +respond-min($break-1)
+      font-size: $font-xxl
+    +respond-min($break-2)
+      margin-bottom: 0
+      margin-bottom: $fine
+      font-size: $font-xxxl
+    +respond-min($break-4)
+      font-size: $font-xxxxl
 
-  .article__subtitle__line
-    height: $micro
-    width: $extremhuge
-    border-bottom: $micro solid $grey--light
-    margin: $big auto $medium auto
+  .article__head__subtitle
+    margin-bottom: 0
+    p
+      +tablet(bold)
+      max-width: 25em
+      color: $grey--dark
+      text-align: center
+      line-height: 1.5
+      font-size: $font-ml
+      margin-bottom: 0 !important
+      +respond-min($break-2)
+        font-size: $font-l
+      +respond-min($break-3)
+        font-size: $font-xl
 
   .article__wrap
     padding-top: 0
@@ -136,10 +153,18 @@ $longform-header-max-height: 1400px
     width: 100%
     z-index: 2
     .article__head__meta
-      font-size: $little
+      font-size: $font-xs
       letter-spacing: $hair
       color: $white
       margin-bottom: 3em
+      margin-left: auto
+      text-align: center
+      letter-spacing: 2px
+      margin-right: auto
+      +respond-min($break-2)
+        font-size: $font-s
+      +respond-min($break-4)
+        font-size: $font-m
       a
         +link-colors($white, $white, $white, $white, $white)
         border-color: $white
@@ -151,19 +176,15 @@ $longform-header-max-height: 1400px
       &:after
         +box-shadow(none)
     .article__title-wrap
-      .article__head__subtitle, .article__head__title, .article__head__meta
+      .article__head__headline, .article__head__meta
         +text-shadow(rgba($white, 1) 0 0 30px)
         color: $black
       .article__head__meta a
         +link-colors($black, $black, $black, $black, $black)
         border-color: $black
 
-
-  .article__meta__second__source
-    display: none
-
   .article__subpage-head
-    @extend %subheading
+    @extend %headline
     margin: $small auto $small auto
     font-size: $font-xl--px
     font-size: $font-xl--rem
@@ -180,10 +201,8 @@ $longform-header-max-height: 1400px
       border-bottom: 0px
 
   .article__subpage-index
-    display: none
-    +respond-min($break-2)
-      display: inline
     @extend %meta
+    display: none
     max-width: em(240px)
     border-bottom: $micro solid $grey
     padding: 0 $small
@@ -258,23 +277,18 @@ $longform-header-max-height: 1400px
     +respond-min($break-1)
       padding-top: $medium
       padding-bottom: $medium
-    .article__subpage-index
-      background-color: $grey--bright
-    &:nth-child(2n+2)
-      background-color: $grey--bright
-      .article__subpage-index
-        background-color: $white
-    &:first-child
-      +respond-min($break-3)
-        padding-top: $wide
     &:nth-child(2)
       +tablet
+    &:first-child
+      .article__page-wrap
+        margin-bottom: 0
+
 
 
   .article__page-wrap
     +padded
     max-width: $max-longform-width
-    margin: $medium auto
+    margin: $fine auto $medium auto
 
   .quote--wide
     +respond-min($break-3)

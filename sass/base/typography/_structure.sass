@@ -25,12 +25,12 @@
   line-height: $headline-line-height
 
 .quote, %quote
-  +tablet()
+  @extend %headline
   margin-left: 0
 
 .quote__text
+  +body-type-zoom
   display: block
-  line-height: 1.4
   &:before
     content: '»'
     margin-right: 0.1em
@@ -39,10 +39,11 @@
     margin-left: 0.1em
 
 .quote__author
-  @extend %meta
-  font-size: $font-s--px
+  +tablet(regular)
+  font-size: $font-s
   display: block
-  margin-top: $thin
+  color: $charcoal
+  margin-top: $little
   &:before
     content: "\2014  "
   a
