@@ -211,19 +211,19 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(indented, recommended, img_url, name, timestamp, role, text) -%}
+{% macro comment(indented, recommended, img_url, name, timestamp, role, text, my_uid) -%}
     <article class="comment {% if indented -%}is-indented{%- endif %}">
-        {{comment_inner(recommended, img_url, name, timestamp, role, text)}}
+        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid)}}
     </article>
 {%- endmacro %}
 
-{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text) -%}
+{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text, my_uid) -%}
     <article class="comment">
-        {{comment_inner(recommended, img_url, name, timestamp, role, text)}}
+        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid)}}
     </article>
 {%- endmacro %}
 
-{% macro comment_inner(recommended, img_url, name, timestamp, role, text) -%}
+{% macro comment_inner(recommended, img_url, name, timestamp, role, text, my_uid) -%}
     <div class="comment__head">
         {% if img_url -%}
             <img src="{{img_url}}" class="comment__head__img" />
@@ -237,8 +237,7 @@
         <p>{{text|safe}}</p>
     </div>
     <aside class="comment__tools">
-        <script type="text/javascript" src="http://scripts.zeit.de/static/js/plugins/jquery.comments.js?0058" />
-        <a class="comment__tools__flag icon-flag">Kommentar melden</a>
+        {% if my_uid > 0 %}<a class="comment__tools__flag icon-flag">Kommentar melden</a>{%- endif %}
         {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
     </aside>
 {%- endmacro %}

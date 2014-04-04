@@ -81,7 +81,7 @@ def _place_answers_under_parent(xml):
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
 
-def comment_as_json(comment):
+def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
     if comment.xpath('author/@roles'):
@@ -103,7 +103,8 @@ def comment_as_json(comment):
                            int(comment.xpath('date/hour/text()')[0]),
                            int(comment.xpath('date/minute/text()')[0])),
         role=roles,
-        text=content)
+        text=content,
+        my_uid=request.cookies.get('drupal-userid', 0))
 
 def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""
@@ -111,7 +112,7 @@ def get_thread(unique_id, request):
     thread = api.collection_get(unique_id)
     if thread is not None:
         return dict(
-            comments=[comment_as_json(comment) for comment in thread.xpath('//comment')],
+            comments=[comment_as_json(comment,request) for comment in thread.xpath('//comment')],
             comment_count=int(thread.xpath('/comments/comment_count')[0].text),
             nid=thread.xpath('/comments/nid')[0].text,
             my_uid=request.cookies.get('drupal-userid', 0))
