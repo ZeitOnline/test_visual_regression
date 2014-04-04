@@ -17,14 +17,16 @@ def test_asset(path):
 settings = {
     'pyramid.reload_templates': 'false',
 
-    'agatho_url': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.frontend', 'data/comments'),
-
     'pyramid.debug_authorization': 'false',
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-    'agatho_host': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
+
+    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/comments'),
+
+    'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
+
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
 

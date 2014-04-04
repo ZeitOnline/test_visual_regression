@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-from zope.testbrowser.browser import Browser
-from zeit.frontend.jinja import most_sufficient_teaser_tpl
-=======
 from pytest import fixture
-from zeit.frontend.application import default_image_url
-from zeit.frontend.application import most_sufficient_teaser_img
-from zeit.frontend.application import most_sufficient_teaser_tpl
->>>>>>> master
+from zeit.frontend.jinja import default_image_url
+from zeit.frontend.jinja import most_sufficient_teaser_img
+from zeit.frontend.jinja import most_sufficient_teaser_tpl
 import mock
 import pyramid.threadlocal
 import re
