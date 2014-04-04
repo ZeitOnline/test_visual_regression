@@ -55,9 +55,9 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Spitzmarke</supertitle>
-    <title>Kann Leipzig Hypezig überleben?</title>
-    <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
+    <supertitle>Ich habe einen Traum</supertitle>
+    <title>Pegah Ferydoni</title>
+    <subtitle>»Wie viele Flüchtlingskinder bin ich eine Suchende, Getriebene.«</subtitle>
     <division type="page">
       <image src="http://xml.zeit.de/centerpage/katzencontent/katzencontent.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>

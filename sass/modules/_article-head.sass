@@ -2,6 +2,10 @@ $standard-header-max-width: 41.25em
 $standard-header-image-max-width: 31.25em
 
 .article__head--default
+  .article__head__headline
+    font-size: $font-xl
+    +respond-min($break-2)
+      font-size: $font-xxl
   .article__head__subtitle
     p
       +body-type-zoom
@@ -10,18 +14,26 @@ $standard-header-image-max-width: 31.25em
   text-align: center
   max-width: $standard-header-max-width
   margin: 0 auto
-  margin-bottom: $wide
+  margin-bottom: $compact
+  margin-top: $medium
+  +respond-min($break-1)
+    margin-bottom: $big
+  +respond-min($break-2)
+    margin-top: $large
+    margin-bottom: $large
+  +respond-min($break-3)
+    margin-top: $wide
+    margin-bottom: $wide
 
 .article__head__supertitle
   @extend %supertitle
   font-size: $font-m
   margin-bottom: $small
-  +respond-min($break-2)
+  +respond-min($break-3)
     font-size: $font-ml
 
 .article__head__headline
   @extend %headline
-  @extend %font-xl-xxl
   margin-bottom: $compact
   +respond-min($break-2)
     margin-bottom: $big
@@ -37,19 +49,25 @@ $standard-header-image-max-width: 31.25em
   display: block
   margin: 0 auto
   margin-bottom: $medium
-  +respond-min($break-2)
+  +respond-min($break-1)
     margin-bottom: $large
+  +respond-min($break-2)
+    margin-bottom: $wide
   img
     width: 100%
     display: block
+  figure
+    margin-top: 0
+    margin-bottom: 0
   .figure__caption
+    display: none
     text-align: right
 
 .article__head__meta
   @extend %meta
   text-align: left
   text-transform: uppercase
-  margin-bottom: $large
+  margin-bottom: 0
   display: block
   margin-top: $thin
   letter-spacing: 1px
@@ -59,7 +77,7 @@ $standard-header-image-max-width: 31.25em
 
 .article__head__meta__offset
   display: block
-  margin-bottom: $thin
+  margin-bottom: $fine
 
 .article__head__meta__genre
 .article__head__meta__location
