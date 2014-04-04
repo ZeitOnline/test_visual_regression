@@ -211,7 +211,7 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(indented, img_url, name, timestamp, role, text) -%}
+{% macro comment(indented, recommended, img_url, name, timestamp, role, text) -%}
     <article class="comment {% if indented -%}is-indented{%- endif %}">
         <div class="comment__head">
             {% if img_url -%}
@@ -269,6 +269,11 @@
                 <div class="tabs__content">
                     <a name="tab2"></a>
                     <div class="comments__list">
+                        {% for commentdict in comments['comments'] %}
+                            {% if commentdict['recommended'] -%}
+                                {{ comment(**commentdict) }}
+                            {%- endif %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="comments__body__newer">

@@ -94,6 +94,7 @@ def comment_as_json(comment):
     else:
       content = '[fehler]'
     return dict(indented=bool(len(comment.xpath('inreply'))),
+        recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=u'',
         name=comment.xpath('author/name/text()')[0],
         timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
