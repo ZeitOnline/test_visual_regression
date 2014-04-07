@@ -7,6 +7,8 @@ Available attributes:
 
 #}
 
+    {% set teaser_image_src = get_teaser_image(teaser_block, teaser) | translate_url -%}
+
 <!-- TODO: repair images and links (as)-->
 <div class="cp__lead-leader__wrap">
 
@@ -22,14 +24,8 @@ Available attributes:
         </span>
     </header>
 
-    <div class="cp__lead-full scaled-image">
-      <!--[if gte IE 9]> -->
-        <noscript data-ratio="{{teaser.ratio}}">
-      <!-- <![endif]-->
-          <img alt="{{teaser.attr_alt}}" title="{{teaser.attr_title}}" class="figure__media" src="{{teaser | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{teaser.ratio}}">
-      <!--[if gte IE 9]> -->
-        </noscript>
-      <!-- <![endif]-->
+    <div class="cp__lead-full">
+          <img alt="{{teaser.attr_alt}}" title="{{teaser.attr_title}}" class="figure__media" src="{{teaser_image_src}}" data-ratio="{{teaser.ratio}}">
   </div>
 
 </div>
