@@ -59,7 +59,7 @@
     <title>Pegah Ferydoni</title>
     <subtitle>»Wie viele Flüchtlingskinder bin ich eine Suchende, Getriebene.«</subtitle>
     <division type="page">
-      <image src="http://xml.zeit.de/centerpage/katzencontent/katzencontent.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/traum.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>
         <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
       </image>
