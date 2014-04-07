@@ -1,24 +1,21 @@
-{% macro lead_full_video(obj) -%}  
-  <div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full">
-        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
-             <source src="{{obj.flv_url}}" type="video/mp4">
-              <source src="http://opendata.zeit.de/zmo-videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">
-        </video>
-        <img class="video--fallback" src="{{obj.video_still}}">
-    </div>
-{%- endmacro %}
+{#
 
-{% macro lead_full_title(teaser) -%}
-  <header class="cp__lead-full__title__wrap">
-      <h1 class="cp__lead__title">{{teaser.teaserTitle}}</h1>
-        <span class="cp__lead__subtitle">
-          {{teaser.teaserText}} 
-        </span>
-    </header>
-{%- endmacro %}
+Video teaser template for fullwidth teaser
 
-<div class="cp__lead-full__wrap">
-    {{ lead_full_video(view.area_lead_full_teaser | auto_select_asset) }}
-    {{ lead_full_title(view.area_lead_full_teaser) }}
+Available attributes:
+    teaser
+
+#}
+{% extends "templates/inc/teaser/teaser_zmo-leader-fullwidth_default_default.html" -%}
+
+{% block asset %}
+{%- set obj = teaser | auto_select_asset %}
+<div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full">
+      <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
+            <source src="{{obj.flv_url}}" type="video/mp4">
+            <source src="http://opendata.zeit.de/zmo-videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">
+      </video>
+      <img class="video--fallback" src="{{obj.video_still}}">
 </div>
+{% endblock %}
 

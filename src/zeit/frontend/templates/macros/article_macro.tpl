@@ -358,7 +358,6 @@
 {%- endmacro %}
        
 <!-- We use this, if for some reason or block is None -->
-{% macro default(obj) %}
+{% macro no_block(obj) %}
 {% endmacro %}
-
 

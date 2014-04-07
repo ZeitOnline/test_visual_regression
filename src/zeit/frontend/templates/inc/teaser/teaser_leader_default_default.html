@@ -1,31 +1,35 @@
-<!-- TODO: repair when function is ready (as)-->
-{% macro lead_teaser_image(obj) -%}     
-  <div class="cp__lead-full scaled-image">
+{#
+
+Default teaser template for leader
+
+Available attributes:
+    teaser
+
+#}
+
+<!-- TODO: repair images and links (as)-->
+<div class="cp__lead-leader__wrap">
+
+  <header class="cp__lead-leader__title__wrap">
+      <span class="cp__lead__supertitle">
+        <a href="#">{{teaser.teaserSupertitle}}</a>
+      </span>
+        <h1 class="cp__lead__title">
+          <a href="#">{{teaser.teaserTitle}}</a>
+        </h1>
+        <span class="cp__lead__subtitle">
+          <a href="#">{{teaser.teaserText}}</a> 
+        </span>
+    </header>
+
+    <div class="cp__lead-full scaled-image">
       <!--[if gte IE 9]> -->
-        <noscript data-ratio="{{obj.ratio}}">
+        <noscript data-ratio="{{teaser.ratio}}">
       <!-- <![endif]-->
-          <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+          <img alt="{{teaser.attr_alt}}" title="{{teaser.attr_title}}" class="figure__media" src="{{teaser | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{teaser.ratio}}">
       <!--[if gte IE 9]> -->
         </noscript>
       <!-- <![endif]-->
   </div>
-{%- endmacro %}
 
-{% macro lead_teaser_title(teaser) -%}
-  <header class="cp__lead-leader__title__wrap">
-  		<span class="cp__lead__supertitle">
-  			{{teaser.teaserSupertitle}}
-  		</span>
-      	<h1 class="cp__lead__title">
-        	{{teaser.teaserTitle}}
-      	</h1>
-        <span class="cp__lead__subtitle">
-          {{teaser.teaserText}} 
-        </span>
-    </header>
-{%- endmacro %}
-
-<div class="cp__lead-leader__wrap">
-    {{ lead_teaser_image(teaser) }}
-    {{ lead_teaser_title(teaser) }}
 </div>
