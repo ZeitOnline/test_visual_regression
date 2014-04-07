@@ -42,7 +42,7 @@ def test_article_has_valid_twitter_meta_tags(selenium_driver, testserver):
             assert unicode(title) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:description':
-            assert unicode(desc) == \
+            assert unicode(desc.replace(' vonAnne Mustermann','')) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
@@ -76,7 +76,7 @@ def test_article_has_valid_facebook_meta_tags(selenium_driver, testserver):
             assert unicode(title) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:description':
-            assert unicode(desc) == \
+            assert unicode(desc.replace(' vonAnne Mustermann','')) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
