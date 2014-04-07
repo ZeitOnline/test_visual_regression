@@ -3,15 +3,16 @@ $article-content-max-width: 660px
 // Opt-in Typography
 .copy, %copy
   p
+    +body-type-zoom
     margin-bottom: $small
     margin-left: auto
     margin-top: 0
     margin-right: auto
-    font-size: $font-ml
     max-width: 36.6em
     +respond-min($break-3)
-      font-size: $font-l
       max-width: 33em
+    em, i
+      +franziska(regular, italic)
 
   .two-cols
     max-width: none
@@ -23,7 +24,6 @@ $article-content-max-width: 660px
 
   blockquote
     @extend %quote
-    @extend %font-l-xl
     color: $color-quote
     display: block
     margin: $medium 0
@@ -32,13 +32,13 @@ $article-content-max-width: 660px
     &.quote
       +respond-min($break-1)
         float: left
-        max-width: em(160px)
+        +max-width-rem(208px)
         margin: $medium $medium $medium auto
 
 // hacked for longform launch
 // todo: delete when possible (NB)
 div.figure-full-width
-  width: 100% //100%
+  width: 100%
   max-width: em(910px)
   margin: 0 auto
 
@@ -50,10 +50,10 @@ figure
   .figure__media, img
     max-width: 100%
     width: 100%
-    margin-bottom: $small
   .figure__caption, figcaption
-    @extend %meta
+    @extend %figcaption
     @extend %font-s
+    margin-top: $small
   .figure__media--embed
     .figure__media--embed__wrap
       width: 100%
@@ -103,14 +103,16 @@ figure
   &.figure-full-width
     width: 100% //100%
     max-width: em(910px)
-    margin: 0 auto
+    margin-left: auto
+    margin-right: auto
     .figure__media, img
       display: block
       width: 100%
     .figure__caption, figcaption
       +max-width-rem(695px) // hacked for longform launch (NB)
       //+max-width-rem($article-content-max-width)
-      margin: 0 auto
+      margin-left: auto
+      margin-right: auto
       +respond-min($break-3)
         padding-right: 10%
   &.figure-stamp, &.figure-stamp--right

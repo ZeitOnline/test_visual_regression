@@ -17,6 +17,7 @@ $mediumhuge:	 em(154px)
 $extremhuge:     em(200px)
 
 // font sizes in px
+$font-xxs--px:   10px
 $font-xs--px:    12px
 $font-s--px:     14px
 $font-m--px:     16px
@@ -29,6 +30,7 @@ $font-xxxxl--px: 50px
 $font-xxxxxl--px: 64px
 
 // font sizes in em
+$font-xxs: em($font-xxs--px)
 $font-xs: em($font-xs--px)
 $font-s:  em($font-s--px)
 $font-m:  em($font-m--px)
@@ -40,6 +42,7 @@ $font-xxxl: em($font-xxxl--px)
 $font-xxxxl: em($font-xxxxl--px)
 
 // font sizes in rem
+$font-xxs--rem: em_to_rem($font-xxs)
 $font-xs--rem: em_to_rem($font-xs)
 $font-s--rem:  em_to_rem($font-s)
 $font-m--rem:  em_to_rem($font-m)
@@ -54,7 +57,8 @@ $sans-fallbacks: Helvetica, Arial, FreeSans, sans-serif
 $serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif,serif
 
 $base-line-height: 1.50
-$headline-line-height: 1.3
+$headline-line-height: 1.4
+$meta-line-height: 1.7
 
 // utility colors
 $yellow:         #FFE117

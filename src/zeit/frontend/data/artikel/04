@@ -1,6 +1,6 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
-        <author href="http://xml.zeit.de/autoren/V/Pia_Volk" publication-date="" expires="">
+        <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Pia Volk</display_name>
         </author>
         <references>

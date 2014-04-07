@@ -26,10 +26,10 @@
             <tag url_value="paris" uuid="677bc5e6-35e8-47da-af94-c8fed6316ba2" score="1" type="Location">Paris</tag>
             <tag url_value="koerper" uuid="e6ce87ec-1302-44f0-86cd-c47f633b9b26" score="4" type="free">Körper</tag>
         </rankedTags>
-        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/M/Ijoma_Mangold/index.xml" publication-date="" expires="">
+        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Ijoma Mangold</display_name>
         </author>
-        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/M/Susanne_Mayer/index.xml" publication-date="" expires="">
+        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
             <display_name>Susanne Mayer</display_name>
         </author>
         <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/lebensart/mode/2013-10/teaser-vinken-interview/" type="jpg" publication-date="" expires="">

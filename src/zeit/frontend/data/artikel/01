@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <article>
     <head>
-        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/S/Marie_Schmidt" publication-date="" expires="">
+        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Marie Schmidt</display_name>
         </author>
         <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">

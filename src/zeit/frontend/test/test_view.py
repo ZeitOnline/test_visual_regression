@@ -95,7 +95,7 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
 def test_header_elem_should_be_img_if_there_is_a_header_img(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, '')
-    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImage
+    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImageStandard
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
@@ -153,7 +153,7 @@ def test_artikel05_should_have_header_image(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
     assert '<div class="article__head-wrap">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
-    assert '<img class="article__main-image--longform"' in browser.contents
+    assert '<img class="article__main-image--longform' in browser.contents
 
 
 def test_health_check_should_response_and_have_status_200(testserver):
