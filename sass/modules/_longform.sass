@@ -12,16 +12,33 @@ $longform-header-max-height: 1400px
   padding: 0
   max-width: none
 
-  .article__subtitle
-    color: $grey--dark
-    text-align: center
-    line-height: 1.5
+  .article__head__title
+    color: $white
+    font-size: $font-xl
+    margin-bottom: $fine
+    +respond-min($break-1)
+      font-size: $font-xxl
+    +respond-min($break-2)
+      margin-bottom: 0
+      margin-bottom: $fine
+      font-size: $font-xxxl
+    +respond-min($break-4)
+      font-size: $font-xxxxl
 
-  .article__subtitle__line
-    height: $micro
-    width: $extremhuge
-    border-bottom: $micro solid $grey--light
-    margin: $big auto $medium auto
+  .article__head__subtitle
+    margin-bottom: 0
+    p
+      +tablet(bold)
+      max-width: 25em
+      color: $grey--dark
+      text-align: center
+      line-height: 1.5
+      font-size: $font-ml
+      margin-bottom: 0 !important
+      +respond-min($break-2)
+        font-size: $font-l
+      +respond-min($break-3)
+        font-size: $font-xl
 
   .article__wrap
     padding-top: 0
@@ -110,7 +127,7 @@ $longform-header-max-height: 1400px
       @media only screen and (orientation : portrait)
         left: -50%
         min-width: 200%
-      
+
   .article__main-video--longform
     overflow: hidden
     position: relative
@@ -135,11 +152,19 @@ $longform-header-max-height: 1400px
     padding-right: 5%
     width: 100%
     z-index: 2
-    .article__meta
-      font-size: $little
+    .article__head__meta
+      font-size: $font-xs
       letter-spacing: $hair
       color: $white
       margin-bottom: 3em
+      margin-left: auto
+      text-align: center
+      letter-spacing: 2px
+      margin-right: auto
+      +respond-min($break-2)
+        font-size: $font-s
+      +respond-min($break-4)
+        font-size: $font-m
       a
         +link-colors($white, $white, $white, $white, $white)
         border-color: $white
@@ -151,20 +176,16 @@ $longform-header-max-height: 1400px
       &:after
         +box-shadow(none)
     .article__title-wrap
-      .article__subtitle, .article__title, .article__meta
+      .article__head__title, .article__head__meta
         +text-shadow(rgba($white, 1) 0 0 30px)
         color: $black
-      .article__meta a
+      .article__head__meta a
         +link-colors($black, $black, $black, $black, $black)
         border-color: $black
 
-
-  .article__meta__second__source
-    display: none
-
   .article__subpage-head
-    @extend %subheading
-    margin: $small auto $small auto
+    @extend %headline
+    margin: 0 auto $small auto
     font-size: $font-xl--px
     font-size: $font-xl--rem
     max-width: $longform-content-max-width
@@ -172,7 +193,7 @@ $longform-header-max-height: 1400px
     +respond-min($break-1)
       font-size: $font-xxl--px
       font-size: $font-xxl--rem
-      margin-top: $medium
+      margin-top: 0
     a
       display: block
       position: relative
@@ -180,18 +201,13 @@ $longform-header-max-height: 1400px
       border-bottom: 0px
 
   .article__subpage-index
+    +tablet
     display: none
-    +respond-min($break-2)
-      display: inline
-    @extend %meta
     max-width: em(240px)
-    border-bottom: $micro solid $grey
     padding: 0 $small
     margin-right: $gutter*2
     float: left
-    position: relative
-    top: -$large
-    display: none
+    margin-top: $thin
     +respond-min($break-2)
       display: inline
     a
@@ -200,11 +216,29 @@ $longform-header-max-height: 1400px
         text-decoration: none
       +on-interaction
         border-color: $grey
-    span
-      display: block
-      margin: $gutter 0
     .article__subpage-active
       color: $black
+
+  .article__subpage-index__title
+    text-transform: uppercase
+    font-size: $font-s
+
+  .article__subpage-index__item
+    +pie-clearfix
+    display: block
+    margin: $gutter 0
+    font-size: $font-s
+
+  .article__subpage-index__item__title-wrap
+    overflow: hidden
+    display: block
+
+  .article__subpage-index__item__title
+    display: inline
+
+  .article__subpage-index__item__count
+    float: left
+    min-width: em(40px)
 
   .article__subpage-chapter
     @extend %meta
@@ -258,23 +292,18 @@ $longform-header-max-height: 1400px
     +respond-min($break-1)
       padding-top: $medium
       padding-bottom: $medium
-    .article__subpage-index
-      background-color: $grey--bright 
-    &:nth-child(2n+2)
-      background-color: $grey--bright
-      .article__subpage-index
-        background-color: $white
-    &:first-child
-      +respond-min($break-3)
-        padding-top: $wide
     &:nth-child(2)
       +tablet
+    &:first-child
+      .article__page-wrap
+        margin-bottom: 0
+
 
 
   .article__page-wrap
     +padded
     max-width: $max-longform-width
-    margin: $medium auto
+    margin: $fine auto $medium auto
 
   .quote--wide
     +respond-min($break-3)

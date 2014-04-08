@@ -27,8 +27,8 @@ def test_IPages_contains_blocks(application):
 def test_article_has_valid_twitter_meta_tags(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
-    title = driver.find_element_by_class_name('article__title').text.strip()
-    path = "//span[@class='article__subtitle']/p"
+    title = driver.find_element_by_class_name('article__head__title').text.strip()
+    path = "//div[@class='article__head__subtitle']/p"
     desc = driver.find_element_by_xpath(path).text.strip()
 
     for meta in driver.find_elements_by_tag_name('meta'):
@@ -42,7 +42,7 @@ def test_article_has_valid_twitter_meta_tags(selenium_driver, testserver):
             assert unicode(title) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:description':
-            assert unicode(desc) == \
+            assert unicode(desc.replace(' vonAnne Mustermann','')) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
@@ -61,8 +61,8 @@ def test_article_has_all_twitter_meta_tags(selenium_driver, testserver):
 def test_article_has_valid_facebook_meta_tags(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
-    title = driver.find_element_by_class_name('article__title').text.strip()
-    path = "//span[@class='article__subtitle']/p"
+    title = driver.find_element_by_class_name('article__head__title').text.strip()
+    path = "//div[@class='article__head__subtitle']/p"
     desc = driver.find_element_by_xpath(path).text.strip()
 
     for meta in driver.find_elements_by_tag_name('meta'):
@@ -76,7 +76,7 @@ def test_article_has_valid_facebook_meta_tags(selenium_driver, testserver):
             assert unicode(title) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:description':
-            assert unicode(desc) == \
+            assert unicode(desc.replace(' vonAnne Mustermann','')) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
@@ -124,12 +124,6 @@ def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     assert content == "mobzeit"
 
 
-def test_article05_has_subtitle__line_class(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/05' % testserver.url)
-    assert driver.find_element_by_class_name('article__subtitle__line') != 0
-
-
 def test_article_has_correct_page_title(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
@@ -165,7 +159,7 @@ def test_article08_has_correct_date(selenium_driver, testserver):
     # not updated print article
     driver = selenium_driver
     driver.get('%s/artikel/08' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__date')\
+    text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
     assert text == '19. FEBRUAR 2014'
 
@@ -174,7 +168,7 @@ def test_article09_has_correct_date(selenium_driver, testserver):
     # updated print article
     driver = selenium_driver
     driver.get('%s/artikel/09' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__date')\
+    text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
     assert text == u'04. M\xc4RZ 2014, 14:35 UHR'
 
@@ -183,7 +177,7 @@ def test_article03_has_correct_date(selenium_driver, testserver):
     # not updated online article
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__date')\
+    text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
     assert text == u'30. JULI 2013, 17:20 UHR'
 
@@ -192,7 +186,7 @@ def test_article10_has_correct_date(selenium_driver, testserver):
     # updated online article
     driver = selenium_driver
     driver.get('%s/artikel/10' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__date')\
+    text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
     assert text == u'20. FEBRUAR 2014, 17:59 UHR'
 
@@ -201,7 +195,7 @@ def test_article05_has_correct_date(selenium_driver, testserver):
     # longform
     driver = selenium_driver
     driver.get('%s/artikel/05' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__date')\
+    text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
     assert text == u'03. NOVEMBER 2013'
 
@@ -210,7 +204,7 @@ def test_article03_has_no_source(selenium_driver, testserver):
     # zon source
     driver = selenium_driver
     driver.get('%s/artikel/03' % testserver.url)
-    class_name = '.article__meta__second__source'
+    class_name = '.article__head__meta__source'
     assert len(driver.find_elements_by_css_selector(class_name)) == 0
 
 
@@ -218,7 +212,7 @@ def test_article10_has_correct_online_source(selenium_driver, testserver):
     # online source
     driver = selenium_driver
     driver.get('%s/artikel/10' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__source')\
+    text = driver.find_element_by_class_name('article__head__meta__source')\
         .text.strip()
     assert text == 'GOLEM.DE'
 
@@ -227,7 +221,7 @@ def test_article08_has_correct_print_source(selenium_driver, testserver):
     # print source
     driver = selenium_driver
     driver.get('%s/artikel/08' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta__second__source')\
+    text = driver.find_element_by_class_name('article__head__meta__source')\
         .text.strip()
     assert text == 'DIE ZEIT NR. 26/2008'
 
@@ -236,10 +230,9 @@ def test_article08_has_correct_author_text(selenium_driver, testserver):
     # print source
     driver = selenium_driver
     driver.get('%s/artikel/08' % testserver.url)
-    text = driver.find_element_by_class_name('article__meta')\
+    text = driver.find_element_by_class_name('article__head__meta')\
         .text.strip()
-    assert text == 'EIN KOMMENTAR VONANNE MUSTERMANN, BERLIN' \
-        ' UNDOLIVER FRITSCH, LONDON'
+    assert text == 'DIE ZEIT NR. 26/2008 19. FEBRUAR 2014'
 
 
 def test_article_1_10_produces_no_error(selenium_driver, testserver):

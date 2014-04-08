@@ -3,6 +3,7 @@ from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IShortformArticle
 from zeit.frontend.centerpage import auto_select_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
@@ -350,6 +351,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 if IArticleTemplateSettings(context).template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
+                if IArticleTemplateSettings(context).template == 'short':
+                    zope.interface.alsoProvides(context, IShortformArticle)
             return self._change_viewname(tdict)
         except OSError, e:
             if e.errno == 2:

@@ -4,83 +4,6 @@
 	margin-right: auto
 	max-width: $max-page-width
 
-.article__main-image
-	+bleed
-	margin-bottom: $medium
-	+respond-min($break-2)
-		margin-bottom: $large
-	img
-		width: 100%
-		display: block
-
-.article__wrap
-
-.article__title-wrap
-
-.article__supertitle
-	@extend %supertitle
-	@extend %font-m
-
-.article__title
-	@extend %headline
-	@extend %font-xxl-xxxl-xxxxl
-	margin-top: $micro
-	margin-bottom: $micro
-
-.article__meta
-	@extend %meta
-	text-transform: uppercase
-	margin-bottom: $large
-	display: block
-	margin-top: $thin
-	letter-spacing: 1px
-	font-size: $font-xs
-	+respond-min($break-1)
-		font-size: $font-s
-
-.article__meta__second
-	@extend %meta
-	text-transform: uppercase
-	margin-bottom: $huge
-	display: block
-	margin-top: $thin
-	letter-spacing: 1px
-	font-size: $font-xs
-	border-top: $dblhair solid $charcoal
-	border-bottom: $dblhair solid $charcoal
-	padding: $fine 0 $fine 0
-
-.article__meta__second__source
-	&:after
-		content: ', '
-		+respond-min($break-1)
-			content: ' — '
-
-.article__meta__second__date
-	span
-		color: $charcoal
-		&:before
-			white-space: pre
-			content: ', \A'
-			color: $charcoal
-			+respond-min($break-1)
-				content: ' — '
-	+respond-max($break-1)
-		display: block
-
-.article__subtitle
-	@extend %copy
-	+franziska(semibold)
-
-.article__opener
-	margin-bottom: $medium
-
-.article__subheading
-	@extend %subheading
-	@extend %font-l-xl
-	margin-bottom: $little !important
-	margin-top: $compact !important
-
 .article__body
 	@extend %copy
 	position: relative
@@ -89,7 +12,6 @@
 			padding-right: em(80px)
 		+respond-min($break-3)
 			padding-right: 0
-
 	+respond-min($break-3)
 		padding-left: $gutter/2
 		padding-right: $gutter/2
@@ -105,9 +27,14 @@
 			display: table-footer-group
 		.article__main-image
 
+.article__subheading
+	@extend %headline
+	+body-type-zoom
+	margin-top: $compact !important
+
 .article__tags
 	@extend %meta
-	@extend .article__meta
+	@extend .article__head__meta
 	font-size: $font-s
 	margin-top: $large
 	text-transform: uppercase
