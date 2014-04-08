@@ -9,7 +9,6 @@ Available attributes:
 #}
 {% extends "templates/inc/teaser/teaser_zmo-leader-fullwidth_default_default.html" -%}
 
-<!-- TODO: repair image (as)-->
 {% block asset %}
 {%- set obj = teaser | auto_select_asset %}
 {%- set image_src = get_teaser_image(teaser_block, teaser) | translate_url %}
@@ -17,4 +16,3 @@ Available attributes:
           <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{image_src}}" data-ratio="{{obj.ratio}}">
   </div>
 {% endblock %}
-
