@@ -1,5 +1,6 @@
 from pytest import fixture
 from zeit.frontend.comments import get_thread
+import requests
 
 unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
 
@@ -21,9 +22,10 @@ def test_agatho_collection_get_for_nonexistent(agatho):
     assert agatho.collection_get(u'/nosuchthread') is None
 
 
-def test_comment_as_json(xml_comment):
+def test_comment_as_json(xml_comment, testserver):
+    r = requests.get(testserver.url + '/artikel/01')
     from zeit.frontend.comments import comment_as_json
-    json_comment = comment_as_json(xml_comment)
+    json_comment = comment_as_json(xml_comment, r)
     assert json_comment['name'] == 'claudiaE'
 
 
