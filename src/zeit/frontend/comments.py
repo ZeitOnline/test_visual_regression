@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import urlparse
+import string
 from datetime import datetime
 from lxml import etree
 from random import randint
@@ -84,15 +85,24 @@ def _place_answers_under_parent(xml):
 def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
+    roles_string = ''
     if comment.xpath('author/@roles'):
-      roles = comment.xpath('author/@roles')[0]
-    else:
-      roles = ''
+        roles = string.split(comment.xpath('author/@roles')[0], ",")
+        sex = comment.xpath('author/@sex')[0]
+        roles_words = {"author_weiblich":"Redaktion",
+                       u"author_männlich":"Redaktion",
+                       "expert_weiblich":"Expertin",
+                       u"expert_männlich":"Experte",
+                       "freelancer_weiblich":"Freie Autorin",
+                       u"freelancer_männlich":"Freier Autor"}
+        for role in roles:
+            if role+"_"+sex in roles_words.keys():
+                roles_string = roles_string+", "+roles_words[role+"_"+sex]
 
     if comment.xpath('content/text()'):
-      content=comment.xpath('content/text()')[0]
+        content=comment.xpath('content/text()')[0]
     else:
-      content = '[fehler]'
+        content = '[fehler]'
     return dict(indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=u'',
@@ -102,8 +112,8 @@ def comment_as_json(comment, request):
                            int(comment.xpath('date/day/text()')[0]),
                            int(comment.xpath('date/hour/text()')[0]),
                            int(comment.xpath('date/minute/text()')[0])),
-        role=roles,
         text=content,
+        role=roles_string[2:],
         my_uid=request.cookies.get('drupal-userid', 0))
 
 def get_thread(unique_id, request):
