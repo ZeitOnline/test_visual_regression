@@ -114,7 +114,8 @@ def comment_as_json(comment, request):
                            int(comment.xpath('date/minute/text()')[0])),
         text=content,
         role=roles_string[2:],
-        my_uid=request.cookies.get('drupal-userid', 0))
+        my_uid=request.cookies.get('drupal-userid', 0),
+        cid=comment.xpath('./@id')[0])
 
 def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""

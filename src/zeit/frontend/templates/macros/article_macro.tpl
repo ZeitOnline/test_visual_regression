@@ -248,26 +248,26 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(indented, recommended, img_url, name, timestamp, role, text, my_uid) -%}
-    <article class="comment {% if indented -%}is-indented{%- endif %}">
-        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid)}}
+{% macro comment(indented, recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
+    <article class="comment {% if indented -%}is-indented{%- endif %}" id="{{cid}}">
+        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid)}}
     </article>
 {%- endmacro %}
 
-{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text, my_uid) -%}
-    <article class="comment">
-        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid)}}
+{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
+    <article class="comment" id="{{cid}}">
+        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid)}}
     </article>
 {%- endmacro %}
 
-{% macro comment_inner(recommended, img_url, name, timestamp, role, text, my_uid) -%}
+{% macro comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
     <div class="comment__head">
         {% if img_url -%}
             <img src="{{img_url}}" class="comment__head__img" />
         {%- endif %}
         <div class="comment__head__meta">
             <strong class="comment__head__meta__name">{{name}}</strong>
-            <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
+            <a href="#{{cid}}" class="comment__head__meta__date">{{timestamp}}</a>
             {% if role -%}
               <div class="comment__head__meta__label">{{role}}</div>
             {%- endif %}
