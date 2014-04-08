@@ -1,6 +1,9 @@
+from babel.dates import get_timezone
+from datetime import date
 from pyramid.response import Response
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
+from zeit.cms.workflow.interfaces import IPublishInfo
 import logging
 import os.path
 import pyramid.response
@@ -54,6 +57,56 @@ class Content(Base):
         else:
             return ''
 
+    @property
+    def show_article_date(self):
+        if self.date_last_published_semantic:
+            return self.date_last_published_semantic
+        else:
+            return self.date_first_released
+
+    @property
+    def date_first_released(self):
+        tz = get_timezone('Europe/Berlin')
+        date = IPublishInfo(
+            self.context).date_first_released
+        if date:
+            return date.astimezone(tz)
+
+    @property
+    def date_first_released_meta(self):
+        return IPublishInfo(
+            self.context).date_first_released.isoformat()
+
+    @property
+    def date_last_published_semantic(self):
+        tz = get_timezone('Europe/Berlin')
+        date = IPublishInfo(self.context).date_last_published_semantic
+        if self.date_first_released is not None and date is not None:
+            if date > self.date_first_released:
+                return date.astimezone(tz)
+            else:
+                return None
+
+    def _get_date_format(self):
+        if self.context.product:
+            if self.context.product.id == 'ZEI' or \
+               self.context.product.id == 'ZMLB':
+                return 'short'
+            else:
+                return 'long'
+        else:
+            return 'long'
+
+    @property
+    def show_date_format(self):
+        if self.date_last_published_semantic:
+            return 'long'
+        else:
+            return self._get_date_format()
+
+    @property
+    def show_date_format_seo(self):
+        return self._get_date_format()
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(Base):

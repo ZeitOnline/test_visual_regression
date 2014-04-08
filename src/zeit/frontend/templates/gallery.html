@@ -1,1 +1,23 @@
-{% extends "templates/layout.html" %}
+{% extends "templates/article.html" %}
+
+{% block article_header %}
+    {% include "templates/inc/headers/gallery_header.html" ignore missing with context %}
+{% endblock article_header %}
+
+{% block article_pages %}
+    <div class="article__page">
+        Hallo
+    </div>
+{% endblock article_pages %}
+
+{% block article_pagination %}
+{% endblock article_pagination %}
+
+{% block article_comments %}
+{% endblock article_comments %}
+
+{% block article_nextread %}
+{% endblock article_nextread %}
+
+{% block article_publishdate %}
+{% endblock article_publishdate %}
