@@ -18,6 +18,7 @@ import urlparse
 import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
+import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.navigation
 import zope.app.appsetup.product
@@ -43,6 +44,13 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
+        self.configure_banner()
+
+    def configure_banner(self):
+        banner_source = maybe_convert_egg_url(
+            self.settings['vivi_zeit.frontend_banner-source'])
+        zeit.frontend.banner.banner_list = \
+            zeit.frontend.banner.make_banner_list(banner_source)
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -66,7 +74,7 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
 
-        #ToDo: Is this still needed. Can it be removed?
+        # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         def asset_url(request, path, **kw):
@@ -204,6 +212,7 @@ factory = Application()
 
 
 class URLPrefixMiddleware(object):
+
     """Removes a path prefix from the PATH_INFO if it is present.
     We use this so that if an ``asset_prefix`` is configured, we respond
     correctly for URLs both with and without the asset_prefix -- otherwise
