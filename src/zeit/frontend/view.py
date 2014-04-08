@@ -27,6 +27,33 @@ class Base(object):
     def __call__(self):
         return {}
 
+class Content(Base):
+    @property
+    def title(self):
+        return self.context.title
+
+    @property
+    def subtitle(self):
+        return self.context.subtitle
+
+    @property
+    def supertitle(self):
+        return self.context.supertitle
+
+    @property
+    def rankedTags(self):
+        return self.context.keywords
+
+    @property
+    def rankedTagsList(self):
+        keyword_list = ''
+        if self.rankedTags:
+            for keyword in self.context.keywords:
+                keyword_list += keyword.label + ';'
+            return keyword_list[:-1]
+        else:
+            return ''
+
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(Base):
