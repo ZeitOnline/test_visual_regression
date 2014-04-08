@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import urlparse
+import string
 from datetime import datetime
 from lxml import etree
 from random import randint
@@ -84,15 +85,24 @@ def _place_answers_under_parent(xml):
 def comment_as_json(comment):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
+    roles_string = ''
     if comment.xpath('author/@roles'):
-      roles = comment.xpath('author/@roles')[0]
-    else:
-      roles = ''
+        roles = string.split(comment.xpath('author/@roles')[0], ",")
+        sex = comment.xpath('author/@sex')[0]
+        roles_words = {"author_weiblich":"Redaktion",
+                       u"author_männlich":"Redaktion",
+                       "expert_weiblich":"Expertin",
+                       u"expert_männlich":"Experte",
+                       "freelancer_weiblich":"Freie Autorin",
+                       u"freelancer_männlich":"Freier Autor"}
+        for role in roles:
+            if role+"_"+sex in roles_words.keys():
+                roles_string = roles_string+", "+roles_words[role+"_"+sex]
 
     if comment.xpath('content/text()'):
-      content=comment.xpath('content/text()')[0]
+        content=comment.xpath('content/text()')[0]
     else:
-      content = '[fehler]'
+        content = '[fehler]'
     return dict(indented=bool(len(comment.xpath('inreply'))),
         img_url=u'',
         name=comment.xpath('author/name/text()')[0],
@@ -101,7 +111,7 @@ def comment_as_json(comment):
                            int(comment.xpath('date/day/text()')[0]),
                            int(comment.xpath('date/hour/text()')[0]),
                            int(comment.xpath('date/minute/text()')[0])),
-        role=roles,
+        role=roles_string[2:],
         text=content)
 
 def get_thread(unique_id, request):
