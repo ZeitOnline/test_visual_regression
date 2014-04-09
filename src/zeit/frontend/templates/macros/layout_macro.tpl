@@ -366,7 +366,6 @@
             <img src="{{request.asset_url('img/z-logo.svg')}}" class="main-footer__Z__img" />
         </div>
         <div class="main-footer__C">&copy; {{year}} ZEIT Online</div>
-        </figure>
     </footer>
 {%- endmacro %}
 
