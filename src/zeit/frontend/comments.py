@@ -86,18 +86,23 @@ def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
     roles_string = ''
+    role_labels = []
+    gender = 'undefined'
     if comment.xpath('author/@roles'):
         roles = string.split(comment.xpath('author/@roles')[0], ",")
-        sex = comment.xpath('author/@sex')[0]
+        try:
+            gender = comment.xpath('author/@sex')[0]
+        except IndexError:
+            pass
         roles_words = {"author_weiblich":"Redaktion",
                        u"author_männlich":"Redaktion",
+                       u"author_undefined":"Redaktion",
                        "expert_weiblich":"Expertin",
                        u"expert_männlich":"Experte",
                        "freelancer_weiblich":"Freie Autorin",
                        u"freelancer_männlich":"Freier Autor"}
-        for role in roles:
-            if role+"_"+sex in roles_words.keys():
-                roles_string = roles_string+", "+roles_words[role+"_"+sex]
+        role_labels = [roles_words['%s_%s' % (role, gender)]
+            for role in roles if '%s_%s' % (role, gender) in roles_words]
 
     if comment.xpath('content/text()'):
         content=comment.xpath('content/text()')[0]
@@ -113,7 +118,7 @@ def comment_as_json(comment, request):
                            int(comment.xpath('date/hour/text()')[0]),
                            int(comment.xpath('date/minute/text()')[0])),
         text=content,
-        role=roles_string[2:],
+        role=', '.join(role_labels),
         my_uid=request.cookies.get('drupal-userid', 0),
         cid=comment.xpath('./@id')[0])
 
