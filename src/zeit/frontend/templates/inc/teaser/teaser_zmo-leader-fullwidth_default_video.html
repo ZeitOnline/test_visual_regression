@@ -10,12 +10,14 @@ Available attributes:
 
 {% block asset %}
 {%- set obj = teaser | auto_select_asset %}
-<div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full">
-      <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
-            <source src="{{obj.flv_url}}" type="video/mp4">
-            <source src="http://opendata.zeit.de/zmo-videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">
-      </video>
-      <img class="video--fallback" src="{{obj.video_still}}">
-</div>
+<a href="{{teaser.uniqueId | translate_url}}">
+	<div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full">
+	      <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
+	            <source src="{{obj.flv_url}}" type="video/mp4">
+	            <source src="http://opendata.zeit.de/zmo-videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">
+	      </video>
+	      <img class="video--fallback" src="{{obj.video_still}}">
+	</div>
+</a>
 {% endblock %}
 

@@ -10,9 +10,12 @@ Available attributes:
 {% extends "templates/inc/teaser/teaser_zmo-leader-fullwidth_default_default.html" -%}
 
 {% block asset %}
-{%- set obj = teaser | auto_select_asset %}
 {%- set image_src = get_teaser_image(teaser_block, teaser) | translate_url %}
+<a href="{{teaser.uniqueId | translate_url}}">
   <div class="cp__lead-full">
-          <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{image_src}}" data-ratio="{{obj.ratio}}">
+  	{% if image_src %}
+          <img alt="{{teaser.title}}" title="{{teaser.title}}" class="figure__media" src="{{image_src}}">
+    {% endif %}
   </div>
+</a>
 {% endblock %}
