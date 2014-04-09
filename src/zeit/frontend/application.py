@@ -3,7 +3,9 @@ from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IShortformArticle
 from zeit.frontend.centerpage import auto_select_asset
+from zeit.frontend.centerpage import get_image_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
 import jinja2
@@ -329,10 +331,16 @@ def most_sufficient_teaser_tpl(block_layout,
 
 def most_sufficient_teaser_img(teaser_block,
                                teaser,
+                               asset_type=None,
                                file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
-    asset = auto_select_asset(teaser)
-    if asset is None:
+    if asset_type is None:
+        asset = auto_select_asset(teaser)
+    elif asset_type == 'image':
+        asset = get_image_asset(teaser)
+    else:
+        raise KeyError(asset_type)
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
     image_base_name = re.split('/', asset.uniqueId)[-1]
     image_id = '%s/%s-%s.%s' % \
@@ -357,6 +365,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 if IArticleTemplateSettings(context).template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
+                if IArticleTemplateSettings(context).template == 'short':
+                    zope.interface.alsoProvides(context, IShortformArticle)
             return self._change_viewname(tdict)
         except OSError, e:
             if e.errno == 2:

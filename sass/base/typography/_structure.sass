@@ -1,32 +1,36 @@
 .supertitle, %supertitle
   +tablet
-  text-transform: uppercase
-  color: $grey
-  letter-spacing: 1px
+  letter-spacing: 2px
   margin-bottom: $micro
-  font-size: $font-s
 
 .meta-link, %meta-link
   margin-left: $micro
 
 .meta, %meta
+  +tablet(bold)
+  text-transform: uppercase
+  font-size: $font-s
+
+.figcaption, %figcaption
   +tablet
-  color: $grey
+  .figure__copyright
+    color: $grey
 
 .subheading, %subheading
-  +franziska(semibold)
+  +tablet
 
 .headline, %headline
-  +tablet
+  +tablet(bold)
+  letter-spacing: 1px
   line-height: $headline-line-height
 
 .quote, %quote
-  +tablet()
+  @extend %headline
   margin-left: 0
 
 .quote__text
+  +body-type-zoom
   display: block
-  line-height: 1.4
   &:before
     content: '»'
     margin-right: 0.1em
@@ -35,10 +39,11 @@
     margin-left: 0.1em
 
 .quote__author
-  @extend %meta
-  font-size: $font-s--px
+  +tablet(regular)
+  font-size: $font-s
   display: block
-  margin-top: $thin
+  color: $charcoal
+  margin-top: $little
   &:before
     content: "\2014  "
   a

@@ -225,7 +225,12 @@
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
+<<<<<<< HEAD
                         <a href="http://zeit.de" class="is-standalone-link">ZEIT ONLINE</a>
+=======
+                        <a href="http://zeit.de"
+                        class="is-standalone-link">ZEIT ONLINE</a>
+>>>>>>> master
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
