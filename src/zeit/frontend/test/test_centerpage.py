@@ -93,7 +93,6 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     assert type(asset[1]) == zeit.content.video.video.Video
 
 
-<<<<<<< HEAD
 def test_cp_area_lead_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
@@ -242,7 +241,8 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         for link in a:
             assert link.get_attribute("href") == 'http://127.0.0.1'\
                 ':6543/centerpage/article_image_asset'
-=======
+
+
 def test_get_image_asset_should_return_image_asset(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
@@ -265,7 +265,6 @@ def test_get_video_asset_should_return_video_asset(testserver):
     asset = zeit.frontend.centerpage.get_video_asset(
         context)
     assert type(asset) == zeit.content.video.video.Video
->>>>>>> master
 
 
 def test_default_image_url_should_return_default_image_size(
@@ -326,7 +325,8 @@ def test_default_teaser_should_return_teaser_image_for_named_asset(
     teaser_img = most_sufficient_teaser_img(
         teaser_block, article_context, asset_type='image')
     assert re.search(
-        "http://example.com/centerpage/katzencontent/bitblt-200x300.*katzencontent-540x304.jpg",
+        "http://example.com/centerpage/katzencontent/"
+        "bitblt-200x300.*katzencontent-540x304.jpg",
         teaser_img)
 
 
