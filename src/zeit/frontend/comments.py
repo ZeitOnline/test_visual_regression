@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import urlparse
+import string
 from datetime import datetime
 from lxml import etree
 from random import randint
@@ -81,19 +82,34 @@ def _place_answers_under_parent(xml):
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
 
-def comment_as_json(comment):
+def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
+    roles_string = ''
+    role_labels = []
+    gender = 'undefined'
     if comment.xpath('author/@roles'):
-      roles = comment.xpath('author/@roles')[0]
-    else:
-      roles = ''
+        roles = string.split(comment.xpath('author/@roles')[0], ",")
+        try:
+            gender = comment.xpath('author/@sex')[0]
+        except IndexError:
+            pass
+        roles_words = {"author_weiblich":"Redaktion",
+                       u"author_männlich":"Redaktion",
+                       u"author_undefined":"Redaktion",
+                       "expert_weiblich":"Expertin",
+                       u"expert_männlich":"Experte",
+                       "freelancer_weiblich":"Freie Autorin",
+                       u"freelancer_männlich":"Freier Autor"}
+        role_labels = [roles_words['%s_%s' % (role, gender)]
+            for role in roles if '%s_%s' % (role, gender) in roles_words]
 
     if comment.xpath('content/text()'):
-      content=comment.xpath('content/text()')[0]
+        content=comment.xpath('content/text()')[0]
     else:
-      content = '[fehler]'
+        content = '[fehler]'
     return dict(indented=bool(len(comment.xpath('inreply'))),
+        recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=u'',
         name=comment.xpath('author/name/text()')[0],
         timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
@@ -101,8 +117,10 @@ def comment_as_json(comment):
                            int(comment.xpath('date/day/text()')[0]),
                            int(comment.xpath('date/hour/text()')[0]),
                            int(comment.xpath('date/minute/text()')[0])),
-        role=roles,
-        text=content)
+        text=content,
+        role=', '.join(role_labels),
+        my_uid=request.cookies.get('drupal-userid', 0),
+        cid=comment.xpath('./@id')[0])
 
 def get_thread(unique_id, request):
     """ return a dict representation of the comment thread of the given article"""
@@ -110,9 +128,10 @@ def get_thread(unique_id, request):
     thread = api.collection_get(unique_id)
     if thread is not None:
         return dict(
-            comments=[comment_as_json(comment) for comment in thread.xpath('//comment')],
+            comments=[comment_as_json(comment,request) for comment in thread.xpath('//comment')],
             comment_count=int(thread.xpath('/comments/comment_count')[0].text),
             nid=thread.xpath('/comments/nid')[0].text,
+            comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
             my_uid=request.cookies.get('drupal-userid', 0))
     else:
         return dict(comments=[], comment_count=0)
