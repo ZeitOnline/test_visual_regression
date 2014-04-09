@@ -86,6 +86,7 @@ def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
     roles_string = ''
+    role_labels = []
     gender = 'undefined'
     if comment.xpath('author/@roles'):
         roles = string.split(comment.xpath('author/@roles')[0], ",")
@@ -98,9 +99,7 @@ def comment_as_json(comment, request):
                        u"author_undefined":"Redaktion",
                        "expert_weiblich":"Expertin",
                        u"expert_männlich":"Experte",
-                       u"expert_undefined":"",
                        "freelancer_weiblich":"Freie Autorin",
-                       "freelancer_undefined":"",
                        u"freelancer_männlich":"Freier Autor"}
         role_labels = [roles_words['%s_%s' % (role, gender)]
             for role in roles if '%s_%s' % (role, gender) in roles_words]
