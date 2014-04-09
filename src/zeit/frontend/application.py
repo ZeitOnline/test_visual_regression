@@ -1,4 +1,6 @@
 from babel.dates import format_datetime
+from datetime import datetime
+from datetime import timedelta
 from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
@@ -103,6 +105,7 @@ class Application(object):
         jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
+        jinja.filters['format_date_ago'] = format_date_ago
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
@@ -255,6 +258,40 @@ def translate_url(context, url):
 def format_date(obj, type='short'):
     formats = {'long':"dd. MMMM yyyy, H:mm 'Uhr'", 'short':"dd. MMMM yyyy"}
     return format_datetime(obj, formats[type], locale="de_De")
+
+
+def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
+    #customization of https://bitbucket.org/russellballestrini/ago :)
+    delta = dt
+    if type(dt) is not type(timedelta()):
+        delta = datetime.now() - dt
+
+    the_tense = past_tense
+    if delta < timedelta(0):
+        the_tense = future_tense
+
+    delta = abs( delta )
+    d = {
+        'Jahr'   : int(delta.days / 365),
+        'Tag'    : int(delta.days % 365),
+        'Stunde'   : int(delta.seconds / 3600),
+        'Minute' : int(delta.seconds / 60) % 60,
+        'Sekunde' : delta.seconds % 60
+    }
+    hlist = []
+    count = 0
+    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
+    units_plural = { 'Jahr':'Jahre', 'Tag':'Tage', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    for unit in units:
+        unit_displayed = unit
+        if count >= precision: break # met precision
+        if d[ unit ] == 0: continue # skip 0's
+        if d[ unit ] != 1:
+            unit_displayed = units_plural[unit]
+        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        count += 1
+    human_delta = ', '.join( hlist )
+    return the_tense.format(human_delta)
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):

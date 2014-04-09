@@ -267,7 +267,7 @@
         {%- endif %}
         <div class="comment__head__meta">
             <strong class="comment__head__meta__name">{{name}}</strong>
-            <a href="#{{cid}}" class="comment__head__meta__date">{{timestamp}}</a>
+            <a href="#{{cid}}" class="comment__head__meta__date">{{timestamp | format_date_ago()}}</a>
             {% if role -%}
               <div class="comment__head__meta__label">{{role}}</div>
             {%- endif %}
