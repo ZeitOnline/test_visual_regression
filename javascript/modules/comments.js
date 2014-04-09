@@ -13,7 +13,7 @@ define(['jquery', 'modules/tabs'], function() {
   var window_width = 0;
 
   /**
-   * handels comment pagination
+   * handles comment pagination
    */
   var recalculate_pagination = function() {
 
