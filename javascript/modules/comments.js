@@ -42,10 +42,19 @@ define(['jquery', 'modules/tabs'], function() {
         }
     };
 
+    var replyToComment = function() {
+        var id = this.getAttribute('data-id');
+
+        document.forms['comments-form'].elements.pid.value = id;
+    };
+
     /**
      * handles comment events
      */
     var init = function() {
+
+        // register event handlers
+        $comments_body.on('click', '.js-reply-to-comment', replyToComment);
 
         // bind pagination for older comments
         $comments_older.click(function() {

@@ -264,7 +264,7 @@
         </div>
         <aside class="comment__tools">
             <a class="comment__tools__flag icon-flag">Kommentar melden</a>
-            {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
+            {% if not indented -%}<a href="#comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-id="{{name}}">Auf Kommentar antworten</a>{%- endif %}
         </aside>
     </article>
 {%- endmacro %}
@@ -280,13 +280,13 @@
         </div>
     </div>
     <section class="comments" id="js-comments">
-        <div class="comments__head" id="js-comments-head">
-            <form action="{{comment_post_url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
+        <div class="comments__head">
+            <form action="{{comment_post_url}}" method="POST" class="comments__head__form" id="comments-form">
                 <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
-                <input id="node_id" type="hidden" value="{{comments['nid']}}" name="nid">
-                <input id="parent_id" type="hidden" value="" name="pid">
-                <input id="user_id" type="hidden" value="{{comments['my_uid']}}" name="uid">
+                <input type="hidden" name="nid" value="{{comments['nid']}}">
+                <input type="hidden" name="pid" value="">
+                <input type="hidden" name="uid" value="{{comments['my_uid']}}">
             </form>
         </div>
         <div class="tabs has-2">
