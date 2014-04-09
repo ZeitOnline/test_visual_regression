@@ -1,34 +1,34 @@
 /* global console, alert */
 (function($){
 
-  /**
-   * animate scrolling for anchor links
-   */
-  $.fn.animateScroll = function() {
-
     /**
-     * run through links that jump to anchors
+     * animate scrolling for anchor links
      */
-    $(this).each(function() {
-      $(this).click(function(e) {
-        var anchor = $(this).attr('href').slice(1), // remove '#'
-          target;
+    $.fn.animateScroll = function() {
 
-        if (anchor) {
-          target = document.getElementById(anchor) || document.getElementsByName(anchor)[0];
-        }
+        /**
+         * run through links that jump to anchors
+         */
+        $(this).each(function() {
+            $(this).click(function(e) {
+                var anchor = $(this).attr('href').slice(1), // remove '#'
+                    target;
 
-        if (!target) {
-          return;
-        }
+                if (anchor) {
+                    target = document.getElementById(anchor) || document.getElementsByName(anchor)[0];
+                }
 
-        e.preventDefault();
+                if (!target) {
+                    return;
+                }
 
-        $('html, body').animate({
-          scrollTop: $(target).offset().top
-        }, 500);
-      });
-    });
+                e.preventDefault();
 
-  };
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top
+                }, 500);
+            });
+        });
+
+    };
 })(jQuery);
