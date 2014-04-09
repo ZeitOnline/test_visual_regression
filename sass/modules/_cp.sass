@@ -12,7 +12,8 @@ $cp__lead__informatives__wrap-width: 35%
 	.main
 		overflow: hidden
 
-.cp__lead__image__link__underlined, %cp__lead__image__link__underlined
+//standard classes for cp
+.cp__image__link--underlined, %cp__image__link--underlined
 	a
 		+link-colors($white, $white, $white, $white, $white)
 		text-decoration: none
@@ -20,13 +21,14 @@ $cp__lead__informatives__wrap-width: 35%
 			text-decoration: none
 			border-color: $white
 
-.cp__lead__image__link, %cp__lead__image__link
+.cp__image__link, %cp__image__link
 	a
 		+link-colors($white, $white, $white, $white, $white)
 		text-decoration: none
 		+on-interaction
 			border-style: none
-		
+
+//standard classes for cp lead area		
 .cp__lead, %cp__lead
 	background-color: $black
 	&:after
@@ -39,70 +41,7 @@ $cp__lead__informatives__wrap-width: 35%
 		left: -50%
 		top: 0px
 
-.cp__lead__title
-	@extend %cp__lead__image__link__underlined
-	+tablet()
-	color: $white
-	margin: 0 0 $tiny
-	font-size: $font-xxl
-	line-height: $small
-	letter-spacing: $hair
-	+respond-min($break-2)
-		font-size: $font-xxxl
-
-.cp__lead__subtitle
-	@extend %cp__lead__image__link
-	@extend %copy
-	+tablet()
-	color: $white
-	font-size: $font-ml
-
-.cp__lead__supertitle
-	@extend %cp__lead__image__link
-	@extend %copy
-	+tablet()
-	line-height: $medium
-	color: $white
-	font-size: $font-ml
-
-.cp__lead__wrap
-	width: 100%
-	padding: $compact $compact $compact $compact
-	+respond-min($break-2)
-		float: left
-		width: $cp__lead__wrap-width
-
-.cp__lead__informatives__wrap
-	padding: $compact $compact $compact
-	width: 100%
-	+respond-min($break-2)
-		float: left
-		width: $cp__lead__informatives__wrap-width
-
-.cp__lead-leader__wrap
-	position: relative
-	overflow: hidden
-	padding-top: 0
-	height: $cp__lead-full-height	
-	margin-bottom: $compact
-
-.cp__lead-leader__title__wrap
-	position: absolute
-	overflow: hidden
-	bottom: $medium
-	padding-left: 5%
-	padding-right: 5%
-	width: 100%
-	z-index: 2	
-
-.cp__lead-full__wrap
-	position: relative
-	overflow: hidden
-	padding-top: 0
-	height: $cp__lead-full-height
-
-.cp__lead-full
-	@extend %cp__lead
+.cp__lead-assets, %cp__lead-assets
 	overflow: hidden
 	position: relative
 	height: 100%
@@ -125,6 +64,82 @@ $cp__lead__informatives__wrap-width: 35%
 		@media only screen and (orientation : portrait)
 			left: -50%
 			min-width: 200%
+
+.cp__lead__title
+	@extend %cp__image__link--underlined
+	+tablet()
+	color: $white
+	margin: 0 0 $tiny
+	font-size: $font-xxl
+	line-height: $small
+	letter-spacing: $hair
+	+respond-min($break-2)
+		font-size: $font-xxxl
+
+.cp__lead__subtitle
+	@extend %cp__image__link
+	@extend %copy
+	+tablet()
+	color: $white
+	font-size: $font-ml
+
+.cp__lead__supertitle
+	@extend %cp__image__link
+	@extend %copy
+	+tablet()
+	line-height: $medium
+	color: $white
+	font-size: $font-ml
+
+//wrapper lead area
+.cp__lead__wrap
+	width: 100%
+	padding: $compact $compact $compact $compact
+	+respond-min($break-2)
+		float: left
+		width: $cp__lead__wrap-width
+
+//wrapper informatives area
+.cp__lead__informatives__wrap
+	padding: $compact $compact $compact
+	width: 100%
+	+respond-min($break-2)
+		float: left
+		width: $cp__lead__informatives__wrap-width
+
+//teaser type leader
+.cp__lead-leader__wrap
+	position: relative
+	overflow: hidden
+	padding-top: 0
+	height: $cp__lead-full-height	
+	margin-bottom: $compact
+	background-color: $black
+
+.cp__lead-leader
+	@extend %cp__lead
+	@extend %cp__lead-assets
+
+.cp__lead-leader__title__wrap
+	position: absolute
+	overflow: hidden
+	bottom: $medium
+	padding-left: 5%
+	padding-right: 5%
+	width: 100%
+	z-index: 2	
+
+//teaser type full (fullwidth leader)
+.cp__lead-full__wrap
+	position: relative
+	overflow: hidden
+	padding-top: 0
+	height: $cp__lead-full-height
+	background-color: $black
+
+.cp__lead-full
+	@extend %cp__lead
+	@extend %cp__lead-assets
 
 .cp__lead-full__title__wrap
 	position: absolute
