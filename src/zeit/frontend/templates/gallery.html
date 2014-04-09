@@ -6,6 +6,11 @@
 
 {% block article_pages %}
     <div class="article__page">
+        {% for image in view.images %}
+            <block>
+                <img src="{{image.image.uniqueId | translate_url}}" />
+            </block>
+        {% endfor %}
         Hallo
     </div>
 {% endblock article_pages %}
