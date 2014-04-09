@@ -43,7 +43,7 @@ def is_block(obj, b_type):
 
 def block_type(obj):
     if obj is None:
-        return "default"
+        return "no_block"
     return type(obj).__name__.lower()
 
 
