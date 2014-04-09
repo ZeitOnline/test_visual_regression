@@ -72,7 +72,7 @@
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
-            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&cg1=Redaktion&cg2={{obj.tracking_type}}&cg3={{obj.ressort}}&cg4=Online&cp1={% if obj.author %}{{obj.author.name}}{% endif %}&cp2={{obj.banner_channel}}&cp3=1&cp4={{obj.rankedTagsList}}&cp6={{obj.text_length}}&cp7=&cp9={{obj.banner_channel}}"></div>
+            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cp1={% if obj.author %}{{obj.author.name}}{% endif %}&amp;cp2={{obj.banner_channel}}&amp;cp3=1&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}"></div>
         </noscript>
 {%- endmacro %}
 
