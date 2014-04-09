@@ -252,13 +252,9 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
-def format_date(obj, type):
-    format = ""
-    if type == 'long':
-        format = "dd. MMMM yyyy, H:mm 'Uhr'"
-    elif type == 'short':
-        format = "dd. MMMM yyyy"
-    return format_datetime(obj, format, locale="de_De")
+def format_date(obj, type='short'):
+    formats = {'long':"dd. MMMM yyyy, H:mm 'Uhr'", 'short':"dd. MMMM yyyy"}
+    return format_datetime(obj, formats[type], locale="de_De")
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
