@@ -79,12 +79,14 @@ def _place_answers_under_parent(xml):
 
         </xsl:stylesheet>
     ''')
+    transform = etree.XSLT(filter_xslt)
     return transform(xml)
 
 def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
     roles_string = ''
+    picture_url = u'http://community.zeit.de/files/pictures/keinbild.gif'
     role_labels = []
     gender = 'undefined'
     if comment.xpath('author/@roles'):
@@ -103,13 +105,15 @@ def comment_as_json(comment, request):
         role_labels = [roles_words['%s_%s' % (role, gender)]
             for role in roles if '%s_%s' % (role, gender) in roles_words]
 
+    if comment.xpath('author/@picture'):
+        picture_url=request.registry.settings.agatho_host+'/'+comment.xpath('author/@picture')[0]
     if comment.xpath('content/text()'):
         content=comment.xpath('content/text()')[0]
     else:
         content = '[fehler]'
     return dict(indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
-        img_url=u'',
+        img_url=picture_url,
         name=comment.xpath('author/name/text()')[0],
         timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
                            int(comment.xpath('date/month/text()')[0]),
