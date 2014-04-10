@@ -7,11 +7,20 @@
 {% block article_pages %}
     <div class="article__page">
         {% for image in view.images %}
-            <block>
+            {% set image_meta = image | get_image_metadata %}
+            {% set copyright = image_meta.copyrights[0] %}
+            <div class="bx-slide">
                 <img src="{{image.image.uniqueId | translate_url}}" />
-            </block>
+                <div class="bu">
+                    {% if image.caption %}
+                        <span class="caption">{{image.caption}}</span>
+                    {% endif %}
+                    {% if image_meta.copyrights %}
+                        <span class="copyright">{{copyright[0]}}</span>
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
-        Hallo
     </div>
 {% endblock article_pages %}
 
