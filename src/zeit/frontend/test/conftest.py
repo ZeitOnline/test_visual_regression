@@ -29,7 +29,16 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-    'agatho_host': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
+    'agatho_host': u'file://%s/' % path.join(
+            path.dirname(path.abspath(frontend.__file__)),
+            'data',
+            'comments'
+        ),
+    'linkreach_host': u'file://%s/' % path.join(
+                path.dirname(path.abspath(frontend.__file__)),
+                'data',
+                'linkreach'
+            ),
     'proxy_url' : '',
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
