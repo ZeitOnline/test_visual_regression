@@ -115,6 +115,11 @@ def agatho():
     from zeit.frontend.comments import Agatho
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
+@pytest.fixture
+def linkreach():
+    from zeit.frontend.reach import LinkReach
+    return LinkReach(linkreach_host=settings['linkreach_host'])
+
 
 @pytest.fixture(scope='session')
 def testserver(application, request):
