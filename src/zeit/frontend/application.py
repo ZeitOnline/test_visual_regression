@@ -331,10 +331,10 @@ def most_sufficient_teaser_tpl(block_layout,
     return map(func, combinations)
 
 
-def most_sufficient_teaser_img(teaser_block,
-                               teaser,
-                               asset_type=None,
-                               file_type='jpg'):
+def most_sufficient_teaser_image(teaser_block,
+                                 teaser,
+                                 asset_type=None,
+                                 file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
     if asset_type is None:
         asset = auto_select_asset(teaser)
