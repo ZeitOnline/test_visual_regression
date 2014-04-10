@@ -111,6 +111,8 @@ class Application(object):
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
         jinja.filters['auto_select_asset'] = auto_select_asset
+        jinja.filters['obj_debug'] = obj_debug
+        jinja.filters['substring_from'] = substring_from
         jinja.trim_blocks = True
         return jinja
 
@@ -255,11 +257,6 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
-def format_date(obj, type='short'):
-    formats = {'long':"dd. MMMM yyyy, H:mm 'Uhr'", 'short':"dd. MMMM yyyy"}
-    return format_datetime(obj, formats[type], locale="de_De")
-
-
 def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
     #customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
@@ -292,6 +289,20 @@ def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
         count += 1
     human_delta = ', '.join( hlist )
     return the_tense.format(human_delta)
+
+
+def obj_debug(value):
+    try:
+        res = []
+        for k in dir(value):
+            res.append('%r : %r;' % (k, getattr(value, k)))
+        return '\n'.join(res)
+    except AttributeError:
+        return False
+
+
+def substring_from(string, find):
+    return string.split(find)[-1]
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
