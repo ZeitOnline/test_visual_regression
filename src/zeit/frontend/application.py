@@ -99,8 +99,9 @@ class Application(object):
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['create_image_url'] = create_image_url
+        jinja.globals['get_teaser_image'] = most_sufficient_teaser_image
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
-        jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['replace_list_seperator'] = replace_list_seperator
@@ -110,6 +111,7 @@ class Application(object):
         jinja.filters['auto_select_asset'] = auto_select_asset
         jinja.filters['obj_debug'] = obj_debug
         jinja.filters['substring_from'] = substring_from
+        jinja.filters['get_image_metadata'] = get_image_metadata
         jinja.trim_blocks = True
         return jinja
 
@@ -347,9 +349,22 @@ def most_sufficient_teaser_img(teaser_block,
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
         teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
-        image_url = default_image_url(
-            teaser_image, image_pattern=image_pattern)
-        return image_url
+        return teaser_image
+    except TypeError:
+        return None
+
+
+def create_image_url(teaser_block, image):
+    image_pattern = teaser_block.layout.image_pattern
+    image_url = default_image_url(
+        image, image_pattern=image_pattern)
+    return image_url
+
+
+def get_image_metadata(image):
+    try:
+        image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
+        return image_metadata
     except TypeError:
         return None
 

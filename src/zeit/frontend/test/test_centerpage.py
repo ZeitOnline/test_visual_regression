@@ -1,6 +1,8 @@
 from zeit.frontend.application import default_image_url
-from zeit.frontend.application import most_sufficient_teaser_img
+from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
+from zeit.frontend.application import create_image_url
+from zeit.frontend.application import get_image_metadata
 import mock
 import pyramid.threadlocal
 import pytest
@@ -297,47 +299,47 @@ def test_default_image_url_should_return_None_when_no_uniqueId_is_given(
     assert default_image_url(m) is None
 
 
-def test_default_teaser_should_return_default_teaser_image(
-        testserver, monkeyreq):
-    article = 'http://xml.zeit.de/centerpage/article_image_asset'
-    article_context = zeit.cms.interfaces.ICMSContent(article)
-
+def test_default_teaser_should_return_default_teaser_image(testserver):
     cp = 'http://xml.zeit.de/centerpage/lebensart'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
 
-    teaser_img = most_sufficient_teaser_img(teaser_block, article_context)
+    article = 'http://xml.zeit.de/centerpage/article_image_asset'
+    article_context = zeit.cms.interfaces.ICMSContent(article)
+
+    teaser_img = most_sufficient_teaser_image(teaser_block, article_context)
+    assert zeit.content.image.interfaces.IImage.providedBy(teaser_img)
+
+
+def test_teaser_image_url_should_be_created(
+        testserver, monkeyreq):
+    cp = 'http://xml.zeit.de/centerpage/lebensart'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    teaser_block = cp_context['lead'][0]
+
+    article = 'http://xml.zeit.de/centerpage/article_image_asset'
+    article_context = zeit.cms.interfaces.ICMSContent(article)
+
+    teaser_image = most_sufficient_teaser_image(teaser_block, article_context)
+
+    image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(
         "http://example.com/centerpage/katzencontent/"
         "bitblt-200x300.*katzencontent-540x304.jpg",
-        teaser_img)
+        image_url)
 
 
-def test_default_teaser_should_return_teaser_image_for_named_asset(
-        testserver, monkeyreq):
-    article = 'http://xml.zeit.de/centerpage/article_image_asset'
-    article_context = zeit.cms.interfaces.ICMSContent(article)
-
+def test_image_metadata_should_be_accessible(testserver):
     cp = 'http://xml.zeit.de/centerpage/lebensart'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
 
-    teaser_img = most_sufficient_teaser_img(
-        teaser_block, article_context, asset_type='image')
-    assert re.search(
-        "http://example.com/centerpage/katzencontent/"
-        "bitblt-200x300.*katzencontent-540x304.jpg",
-        teaser_img)
-
-
-def test_autoselect_asset_should_raise_error_on_garbage_asset(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
 
-    cp = 'http://xml.zeit.de/centerpage/lebensart'
-    cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    teaser_block = cp_context['lead'][0]
-
-    with pytest.raises(KeyError):
-        most_sufficient_teaser_img(
-            teaser_block, article_context, asset_type='kamehameha')
+    teaser_img = most_sufficient_teaser_image(teaser_block, article_context)
+    img_meta = get_image_metadata(teaser_img)
+    assert zeit.content.image.interfaces.IImageMetadata.providedBy(img_meta)
+    assert img_meta.title == u'Katze!'
+    assert img_meta.alt == u'Die ist der Alttest'
+    assert img_meta.caption == u'Die ist der image sub text'

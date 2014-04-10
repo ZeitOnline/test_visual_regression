@@ -9,8 +9,10 @@ Available attributes:
 #}
 {% extends "templates/inc/teaser/teaser_default_default_default.html" -%}
 {% block asset %}
-{% set teaser_image_src = get_teaser_image(teaser_block, teaser) | translate_url -%}
-{% if teaser_image_src %}
-<img class='teaser__default__image' src='{{teaser_image_src}}' title='' alt='' />
+{% set teaser_image = get_teaser_image(teaser_block, teaser) -%}
+{% set teaser_image_url = create_image_url(teaser_block, teaser) | translate_url -%}
+{%- set obj = teaser | auto_select_asset %}
+{% if teaser_image_url %}
+<img class='teaser__default__image' src='{{teaser_image_url}}' title='' alt='' />
 {% endif %}
 {% endblock %}
