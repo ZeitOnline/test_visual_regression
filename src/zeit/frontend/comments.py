@@ -14,7 +14,7 @@ def path_of_article(unique_id):
 class Agatho(object):
 
     def __init__(self, agatho_url):
-        self.entry_point = agatho_url
+      self.entry_point = agatho_url
 
     def collection_get(self, unique_id):
         try:
@@ -79,7 +79,6 @@ def _place_answers_under_parent(xml):
 
         </xsl:stylesheet>
     ''')
-    transform = etree.XSLT(filter_xslt)
     return transform(xml)
 
 def comment_as_json(comment, request):
@@ -127,14 +126,17 @@ def get_thread(unique_id, request):
     api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
     thread = api.collection_get(unique_id)
     if thread is not None:
-        return dict(
-            comments=[comment_as_json(comment,request) for comment in thread.xpath('//comment')],
-            comment_count=int(thread.xpath('/comments/comment_count')[0].text),
-            nid=thread.xpath('/comments/nid')[0].text,
-            comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
-            my_uid=request.cookies.get('drupal-userid', 0))
+        try:
+            return dict(
+                comments=[comment_as_json(comment,request) for comment in thread.xpath('//comment')],
+                comment_count=int(thread.xpath('/comments/comment_count')[0].text),
+                nid=thread.xpath('/comments/nid')[0].text,
+                comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
+                my_uid=request.cookies.get('drupal-userid', 0))
+        except AssertionError:
+            return None
     else:
-        return dict(comments=[], comment_count=0)
+        return None
 
 
 from cornice.resource import resource, view
