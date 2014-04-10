@@ -2,6 +2,7 @@
 $cp__lead-full-height: em(550px)
 $cp__lead__wrap-width: 65%
 $cp__lead__informatives__wrap-width: 35%
+$cp__buttons__image-height: em(165px)
 
 //hide breadcrumbs for cp
 .for-centerpage
@@ -13,6 +14,15 @@ $cp__lead__informatives__wrap-width: 35%
 		overflow: hidden
 
 //standard classes for cp
+.cp__image__link, %cp__image__link
+	a
+		+link-colors($white, $white, $white, $white, $white)
+		text-decoration: none
+		+transition(none)
+		+on-interaction
+			border-bottom: 0px
+			text-decoration: none
+
 .cp__image__link--underlined, %cp__image__link--underlined
 	a
 		+link-colors($white, $white, $white, $white, $white)
@@ -21,12 +31,17 @@ $cp__lead__informatives__wrap-width: 35%
 			text-decoration: none
 			border-color: $white
 
-.cp__image__link, %cp__image__link
+.cp__text__link, %cp__text__link
+	@extend %cp__image__link
 	a
-		+link-colors($white, $white, $white, $white, $white)
-		text-decoration: none
+		+link-colors($black, $black, $black, $black, $black)
+
+.cp__text__link--underlined, %cp__text__link--underlined
+	@extend %cp__image__link--underlined
+	a
+		+link-colors($black, $black, $black, $black, $black)
 		+on-interaction
-			border-style: none
+			border-color: $black
 
 //standard classes for cp lead area		
 .cp__lead, %cp__lead
@@ -113,7 +128,7 @@ $cp__lead__informatives__wrap-width: 35%
 	overflow: hidden
 	padding-top: 0
 	height: $cp__lead-full-height	
-	margin-bottom: $compact
+	margin-bottom: $big
 	background-color: $black
 
 .cp__lead-leader
@@ -155,3 +170,52 @@ $cp__lead__informatives__wrap-width: 35%
 			content: "«"
 		&:after
 			content: "»"
+
+//teaser type button
+.cp__buttons__wrap
+	width: 100%
+	span
+		display: block
+	margin-bottom: $compact
+	+respond-min($break-2)
+		width: 50%
+		float: left
+		&:nth-child(even)
+			clear: left
+			padding-right: $little
+		&:nth-child(odd)
+			padding-left: $little
+
+.cp__buttons__image
+	width: 100%
+	overflow: hidden
+	+respond-min($break-2)
+		max-height: $cp__buttons__image-height
+
+.cp__buttons__title__wrap
+	display: block
+	margin-top: $small
+
+.cp__buttons__supertitle
+	@extend %cp__text__link
+	@extend %copy
+	+tablet()
+	line-height: $small
+	color: $black
+	font-size: $font-s
+
+.cp__buttons__title
+	@extend %cp__text__link--underlined
+	+tablet(bold)
+	line-height: $small
+	color: $black
+	font-size: $font-ml
+	margin: $tiny 0 $thin 0
+
+.cp__buttons__subtitle
+	@extend %cp__text__link
+	@extend %copy
+	+tablet()
+	line-height: $small
+	color: $black
+	font-size: $font-m

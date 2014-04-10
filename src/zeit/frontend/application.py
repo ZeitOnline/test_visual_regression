@@ -110,6 +110,7 @@ class Application(object):
         jinja.filters['auto_select_asset'] = auto_select_asset
         jinja.filters['obj_debug'] = obj_debug
         jinja.filters['substring_from'] = substring_from
+        jinja.filters['hide_none'] = hide_none
         jinja.trim_blocks = True
         return jinja
 
@@ -267,6 +268,12 @@ def obj_debug(value):
 def substring_from(string, find):
     return string.split(find)[-1]
 
+
+def hide_none(string):
+    if string is None:
+        return ''
+    else:
+        return string
 
 def format_date(obj, type):
     format = ""
