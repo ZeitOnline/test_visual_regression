@@ -58,3 +58,15 @@
     max-width: 70%
   +respond-min($break-3)
     max-width: 50%
+
+.video--fallback
+  display: none
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  margin: auto
+  min-height: 100%
+  @media only screen and (orientation : portrait)
+    left: -50%
+    min-width: 200%
