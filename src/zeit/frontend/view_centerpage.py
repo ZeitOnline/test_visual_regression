@@ -70,8 +70,8 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def global_facebook_shares(self):
-        return self._shares.linkreach.fetch_data('facebook', 20)[:10]
+        return self._shares.fetch_data('facebook', 20)[:10]
 
     @property
     def global_googleplus_shares(self):
-        return self._shares.linkreach.fetch_data('googleplus', 20)[:10]
+        return self._shares.fetch_data('googleplus', 20)[:10]

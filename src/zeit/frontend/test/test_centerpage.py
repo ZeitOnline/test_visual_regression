@@ -1,3 +1,4 @@
+from zeit.frontend import view_centerpage
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_img
 from zeit.frontend.application import most_sufficient_teaser_tpl

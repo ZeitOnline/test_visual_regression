@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from zeit.frontend import view_centerpage
 from zeit.frontend.reach import DataSequence
 from zeit.frontend.reach import Entry
 from zeit.frontend.reach import LinkReach
