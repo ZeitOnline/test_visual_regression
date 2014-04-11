@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-import datetime
+from zeit.frontend import view_centerpage
+from zeit.frontend.reach import DataSequence
 from zeit.frontend.reach import Entry
 from zeit.frontend.reach import LinkReach
-from zeit.frontend.reach import DataSequence
-import zeit.frontend.reach
+import datetime
+import pyramid.testing
 import pytest
+import zeit.frontend.reach
 
 
 entry_data = {
@@ -15,7 +17,7 @@ entry_data = {
     'subtitle': 'my_subtitle',
     'timestamp': 1397127353368,
     'section': 'my_section',
-    'fetched_at': 1397127353368,
+    'fetchedAt': 1397127353368,
 }
 
 
@@ -32,7 +34,7 @@ def test_entry_for_linkreach_should_deserialize():
     assert entry['section'] == 'my_section'
 
     my_date = datetime.datetime(2014, 4, 10, 12, 55, 53)
-    assert entry['fetched_at'].replace(tzinfo=None) == my_date
+    assert entry['fetchedAt'].replace(tzinfo=None) == my_date
     assert entry['timestamp'].replace(tzinfo=None) == my_date
 
 
@@ -46,3 +48,15 @@ def test_data_sequence_for_linkreach_should_deserialize():
 def test_not_provided_service_should_throw_exception():
     with pytest.raises(zeit.frontend.reach.UnprovidedService):
         LinkReach('file:///foo').fetch_data('foo', 20)
+
+def test_data_for_twitter_should_be_fetched(linkreach):
+    data = linkreach.fetch_data('twitter', 20)
+    assert len(data) == 20
+
+def test_data_for_facebook_should_be_fetched(linkreach):
+    data = linkreach.fetch_data('facebook', 20)
+    assert len(data) == 20
+
+def test_data_for_googleplus_should_be_fetched(linkreach):
+    data = linkreach.fetch_data('googleplus', 20)
+    assert len(data) == 20

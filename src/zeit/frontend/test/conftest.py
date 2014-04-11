@@ -37,7 +37,8 @@ settings = {
     'linkreach_host': u'file://%s/' % path.join(
                 path.dirname(path.abspath(frontend.__file__)),
                 'data',
-                'linkreach'
+                'linkreach',
+                'api',
             ),
     'proxy_url' : '',
     'connector_type': 'filesystem',

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import colander
 import datetime
+import urllib2
+import json
 from babel.dates import get_timezone
 
 
@@ -23,6 +25,15 @@ class LinkReach(object):
     def fetch_data(self, service, limit):
         if service not in self.services:
             raise UnprovidedService('No service named: ' + service)
+        url = '%s/zonrank/%s?limit=%s' % (
+            self.entry_point,
+            service,
+            limit,
+        )
+
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req, timeout=4)
+        return DataSequence().deserialize(json.load(response))
 
 
 def _prepare_date(value):
@@ -32,8 +43,7 @@ def _prepare_date(value):
 
 class Entry(colander.MappingSchema):
 
-    score = colander.SchemaNode(colander.Int(),
-                                validator=colander.Range(0, 9999))
+    score = colander.SchemaNode(colander.Int())
     location = colander.SchemaNode(colander.String())
     supertitle = colander.SchemaNode(colander.String())
     title = colander.SchemaNode(colander.String())
@@ -41,7 +51,7 @@ class Entry(colander.MappingSchema):
     timestamp = colander.SchemaNode(colander.Int(),
                                     preparer=_prepare_date)
     section = colander.SchemaNode(colander.String())
-    fetched_at = colander.SchemaNode(colander.Int(),
+    fetchedAt = colander.SchemaNode(colander.Int(),
                                      preparer=_prepare_date)
 
 
