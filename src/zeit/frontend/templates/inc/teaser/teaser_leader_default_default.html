@@ -8,6 +8,7 @@ Available attributes:
 #}
 
 <div class="cp__lead-leader__wrap">
+  {% block asset %}{% endblock %}
   <header class="cp__lead-leader__title__wrap">
       <span class="cp__lead__supertitle">
         <a href="{{teaser.uniqueId | translate_url}}">
@@ -23,5 +24,4 @@ Available attributes:
       {{teaser.teaserText}}
     </span>
   </header>
-  {% block asset %}{% endblock %}
 </div>

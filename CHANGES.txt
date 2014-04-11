@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.2.18 (unreleased)
 -------------------
 
+- add cp buttons
 - add cp lead area main structure
 - add fullwidth teaser video/ audio
 - add leading teaser with image
