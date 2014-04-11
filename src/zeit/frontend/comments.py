@@ -14,7 +14,7 @@ def path_of_article(unique_id):
 class Agatho(object):
 
     def __init__(self, agatho_url):
-      self.entry_point = agatho_url
+        self.entry_point = agatho_url
 
     def collection_get(self, unique_id):
         try:
