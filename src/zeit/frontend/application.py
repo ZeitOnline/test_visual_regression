@@ -286,6 +286,17 @@ default_images_sizes = {
     'large': (800, 600),
     'small': (200, 300),
     '540x304': (200, 300),
+    'teaser_classic': (300, 169),
+    'teaser_tile': (300, 300),
+    'teaser_series_landscape': (640, 427),
+    'teaser_series_square': (640, 640),
+    'teaser_series_portrait': (640, 960),
+    'teaser_column_dream': (640, 800),
+    'teaser_column_snap_landscape': (640, 360),
+    'teaser_column_snap_portrait': (640, 960),
+    'hp_lead_square': (640, 640),
+    'hp_lead_portrait': (640, 864),
+    'hp_lead_superspecial': (980, 551),
 }
 
 
