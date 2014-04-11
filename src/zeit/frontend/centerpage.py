@@ -31,3 +31,4 @@ def get_gallery_asset(teaser):
 def get_image_asset(teaser):
     image = zeit.content.image.interfaces.IImages(teaser)
     return image.image
+
