@@ -27,10 +27,10 @@ class LinkReach(object):
 
 def _prepare_date(value):
     tz = get_timezone('Europe/Berlin')
-    return datetime.datetime.fromtimestamp(value/1000, tz)
+    return datetime.datetime.fromtimestamp(value / 1000, tz)
 
 
-class _Entry(colander.MappingSchema):
+class Entry(colander.MappingSchema):
 
     score = colander.SchemaNode(colander.Int(),
                                 validator=colander.Range(0, 9999))
@@ -45,7 +45,5 @@ class _Entry(colander.MappingSchema):
                                      preparer=_prepare_date)
 
 
-class Entry(object):
-
-    def __init__(self, entries):
-        self.__dict__.update(entries)
+class DataSequence(colander.SequenceSchema):
+    entry = Entry()
