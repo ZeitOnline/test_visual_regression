@@ -1,27 +1,31 @@
 {% extends "templates/article.html" %}
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
 
 {% block article_header %}
     {% include "templates/inc/headers/gallery_header.html" ignore missing with context %}
 {% endblock article_header %}
 
 {% block article_pages %}
-    <div class="article__page">
+<div class="figure figure-full-width">
+    <div class="inline-gallery">
         {% for image in view.images %}
             {% set image_meta = image | get_image_metadata %}
             {% set copyright = image_meta.copyrights[0] %}
-            <div class="bx-slide">
-                <img src="{{image.image.uniqueId | translate_url}}" />
-                <div class="bu">
-                    {% if image.caption %}
-                        <span class="caption">{{image.caption}}</span>
-                    {% endif %}
-                    {% if image_meta.copyrights %}
-                        <span class="copyright">{{copyright[0]}}</span>
-                    {% endif %}
+            <figure class="figure-full-width">
+                <div class="scaled-image">
+                    <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
                 </div>
-            </div>
+                {% if image.caption %}
+                <figcaption class="figure__caption">{{image.caption}}
+                    {% if image_meta.copyrights %}
+                        <span class="figure__copyright">{{copyright[0]}}</span>
+                    {% endif %}
+                </figcaption>
+                {% endif %}
+            </figure>
         {% endfor %}
     </div>
+</div>
 {% endblock article_pages %}
 
 {% block article_pagination %}

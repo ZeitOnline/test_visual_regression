@@ -44,8 +44,7 @@
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:cbcd4ccf-56b6-4989-9086-04cf7642d193}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
-        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">
-            &lt;pickle&gt;
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
                 &lt;initialized_object&gt;
                     &lt;klass&gt;
                         &lt;global module=&quot;zope.interface.declarations&quot; name=&quot;Provides&quot;/&gt;
@@ -58,8 +57,7 @@
                         &lt;/tuple&gt;
                     &lt;/arguments&gt;
                 &lt;/initialized_object&gt;
-            &lt;/pickle&gt;
-        </attribute>
+            &lt;/pickle&gt;</attribute>
     </head>
     <body>
         <column layout="left"/>
@@ -68,7 +66,7 @@
                 <block name="01-desktop-schreibtisch-computer-digital.jpg">
                     <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                     <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Nicole Zepter ist Chefredakteurin des Magazins &quot;The Germans&quot;, das hier ist ihr Schreibtisch. Zepter findet Blassrosa &quot;beruhigend&quot;.</caption>
-                    <image align="left" expires="" alt="pumpe" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/01-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <image align="left" alt="pumpe" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/01-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <bu/>
                         <copyright>© Nicole Zepter für ZEITmagazin</copyright>
                     </image>

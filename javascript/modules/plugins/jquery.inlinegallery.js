@@ -23,7 +23,7 @@
 	 * @memberOf jQuery
 	 */
 	/**
-	 * Prepares the inline gallery and adds some extra features 
+	 * Prepares the inline gallery and adds some extra features
 	 * @class inlinegallery
 	 * @memberOf jQuery.fn
 	 * @param  {object} defaults	configuration object, overwriting presetted options
@@ -38,9 +38,10 @@
 			nextText: "Zum nächsten Bild",
 			prevText: "Zum vorigen Bild",
 			infiniteLoop: true,
-			hideControlOnEnd: false
+			hideControlOnEnd: false,
+            adaptiveHeight: true,
 		}, defaults);
-		
+
 		return this.each(function(){
 			var slider = $( this ).bxSlider( options ),
 				ffw = $('<a class="bx-overlay-next icon-pfeil-rechts" href="">Ein Bild vor</a>'),

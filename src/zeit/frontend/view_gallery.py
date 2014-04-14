@@ -10,5 +10,5 @@ class Gallery(zeit.frontend.view.Content):
     def images(self):
         return [self.context[i] for i in self.context]
 
-    # def __call__(self):
-    #     import pdb;pdb.set_trace()
+    def __call__(self):
+         import pdb;pdb.set_trace()
