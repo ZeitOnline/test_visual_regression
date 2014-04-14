@@ -1,5 +1,6 @@
 $longform-content-max-width: 615px
 $longform-inline-max-width: 920px
+$longform-image-caption-max-width: 695px
 $bp-adjust-horizontal-figures--1: 1120px
 $bp-adjust-horizontal-figures--2: 1320px
 $bp-adjust-horizontal-figures--3: 1385px
@@ -360,6 +361,5 @@ $longform-header-max-height: 1400px
           left: auto
     &.figure-full-width
       .figure__caption, figcaption
-        //TODO: find correct value or store to variable (as)
-        +max-width-rem(695px) // hacked for longform launch (NB)
+        +max-width-rem($longform-image-caption-max-width)
 
