@@ -52,6 +52,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             node = $(form).find('.comments__recipient').first(),
             html = 'Antwort auf: <a href="#cid-' + cid + '">' + name + '</a>';
 
+        // focus comment input
+        form.elements.comment.focus();
+
         form.elements.pid.value = cid;
         node.html(html).find("a[href^='#']").animateScroll();
     };
