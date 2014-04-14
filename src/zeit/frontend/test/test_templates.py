@@ -70,7 +70,6 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'class="main-footer__Z__img" /></div>' \
         '<div class="main-footer__C">&copy; ' \
         + str(current_year) + ' ZEIT Online</div>' \
-        '</figure>' \
         '</footer>'
 
     request = Mock()
