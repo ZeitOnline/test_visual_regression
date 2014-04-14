@@ -3,10 +3,6 @@ from lxml import objectify
 import urllib2
 import zeit.frontend.interfaces
 import zope.interface
-#
-# Class to rule banner.xml
-# in the place to be
-#
 
 #
 # A place is a space on the website, which can
