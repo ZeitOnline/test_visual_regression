@@ -358,4 +358,8 @@ $longform-header-max-height: 1400px
         .figure__caption, figcaption
           right: 100%
           left: auto
+    &.figure-full-width
+      .figure__caption, figcaption
+        //TODO: find correct value or store to variable (as)
+        +max-width-rem(695px) // hacked for longform launch (NB)
 
