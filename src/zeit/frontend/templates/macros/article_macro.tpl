@@ -24,6 +24,20 @@
     </div>
 {%- endmacro %}
 
+{% macro quote_subtitle(include_meta=False) -%}
+    <div class="article__head__subtitle">
+        <p>
+            »{{view.subtitle}}«
+            {% if include_meta %}
+                {% if view.genre -%}
+                    {{view.genre}}
+                {%- endif %}
+                {{ meta_author(view.authors) }}
+            {%- endif %}
+        </p>
+    </div>
+{%- endmacro %}
+
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}

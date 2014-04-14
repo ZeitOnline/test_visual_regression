@@ -317,7 +317,7 @@ class Article(zeit.frontend.view.Base):
            (self.context.genre == 'analyse'):
             prefix = 'eine'
         if self.context.genre:
-            return prefix + " " + self.context.genre
+            return prefix + " " + self.context.genre.title()
         else:
             return None
 
