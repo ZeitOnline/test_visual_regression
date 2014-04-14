@@ -1,3 +1,4 @@
+from zeit.frontend import view_centerpage
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
@@ -446,3 +447,10 @@ def test_image_metadata_should_be_accessible(testserver):
     assert img_meta.title == u'Katze!'
     assert img_meta.alt == u'Die ist der Alttest'
     assert img_meta.caption == u'Die ist der image sub text'
+
+
+def test_get_reaches_from_centerpage_view(dummy_request):
+    view = view_centerpage.Centerpage('', dummy_request)
+    assert len(view.global_twitter_shares) == 10
+    assert len(view.global_googleplus_shares) == 10
+    assert len(view.global_facebook_shares) == 10

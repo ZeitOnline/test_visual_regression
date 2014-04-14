@@ -1,4 +1,6 @@
 from babel.dates import format_datetime
+from datetime import datetime
+from datetime import timedelta
 from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
@@ -49,6 +51,10 @@ class Application(object):
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
+
+        linkreach =  maybe_convert_egg_url(self.settings['linkreach_host'])
+        self.settings['linkreach_host'] = linkreach
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
@@ -104,6 +110,7 @@ class Application(object):
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
+        jinja.filters['format_date_ago'] = format_date_ago
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
@@ -257,6 +264,45 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
+def format_date(obj, type='short'):
+    formats = {'long':"dd. MMMM yyyy, H:mm 'Uhr'", 'short':"dd. MMMM yyyy"}
+    return format_datetime(obj, formats[type], locale="de_De")
+
+
+def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
+    #customization of https://bitbucket.org/russellballestrini/ago :)
+    delta = dt
+    if type(dt) is not type(timedelta()):
+        delta = datetime.now() - dt
+
+    the_tense = past_tense
+    if delta < timedelta(0):
+        the_tense = future_tense
+
+    delta = abs( delta )
+    d = {
+        'Jahr'   : int(delta.days / 365),
+        'Tag'    : int(delta.days % 365),
+        'Stunde'   : int(delta.seconds / 3600),
+        'Minute' : int(delta.seconds / 60) % 60,
+        'Sekunde' : delta.seconds % 60
+    }
+    hlist = []
+    count = 0
+    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
+    units_plural = { 'Jahr':'Jahre', 'Tag':'Tage', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    for unit in units:
+        unit_displayed = unit
+        if count >= precision: break # met precision
+        if d[ unit ] == 0: continue # skip 0's
+        if d[ unit ] != 1:
+            unit_displayed = units_plural[unit]
+        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        count += 1
+    human_delta = ', '.join( hlist )
+    return the_tense.format(human_delta)
+
+
 def obj_debug(value):
     try:
         res = []
@@ -277,14 +323,6 @@ def hide_none(string):
     else:
         return string
 
-def format_date(obj, type):
-    format = ""
-    if type == 'long':
-        format = "dd. MMMM yyyy, H:mm 'Uhr'"
-    elif type == 'short':
-        format = "dd. MMMM yyyy"
-    return format_datetime(obj, format, locale="de_De")
-
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
@@ -295,6 +333,17 @@ default_images_sizes = {
     'large': (800, 600),
     'small': (200, 300),
     '540x304': (200, 300),
+    'teaser_classic': (300, 169),
+    'teaser_tile': (300, 300),
+    'teaser_series_landscape': (640, 427),
+    'teaser_series_square': (640, 640),
+    'teaser_series_portrait': (640, 960),
+    'teaser_column_dream': (640, 800),
+    'teaser_column_snap_landscape': (640, 360),
+    'teaser_column_snap_portrait': (640, 960),
+    'hp_lead_square': (640, 640),
+    'hp_lead_portrait': (640, 864),
+    'hp_lead_superspecial': (980, 551),
 }
 
 
