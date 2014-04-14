@@ -22,10 +22,9 @@ def test_agatho_collection_get_for_nonexistent(agatho):
     assert agatho.collection_get(u'/nosuchthread') is None
 
 
-def test_comment_as_json(xml_comment, testserver):
-    r = requests.get(testserver.url + '/artikel/01')
+def test_comment_as_json(xml_comment, dummy_request):
     from zeit.frontend.comments import comment_as_json
-    json_comment = comment_as_json(xml_comment, r)
+    json_comment = comment_as_json(xml_comment, dummy_request)
     assert json_comment['name'] == 'claudiaE'
 
 
