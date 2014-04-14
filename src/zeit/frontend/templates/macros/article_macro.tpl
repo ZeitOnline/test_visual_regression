@@ -256,7 +256,7 @@
             {%- endif %}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
-                <a href="#{{comment.cid}}" class="comment__head__meta__date">{{comment.timestamp}}</a>
+                <a href="#{{comment.cid}}" class="comment__head__meta__date">{{comment.timestamp | format_date_ago()}}</a>
                 {% if comment.role -%}
                   <div class="comment__head__meta__label">{{comment.role}}</div>
                 {%- endif %}
@@ -425,5 +425,3 @@
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
-
-

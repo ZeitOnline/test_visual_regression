@@ -1,0 +1,40 @@
+//main cp styles
+
+//hide breadcrumbs for cp
+.for-centerpage
+	.main-nav
+		margin-bottom: 0px
+	.main-nav__breadcrumbs
+		display: none
+	.main
+		overflow: hidden
+
+//standard classes for cp
+.cp__image__link, %cp__image__link
+	a
+		+link-colors($white, $white, $white, $white, $white)
+		text-decoration: none
+		+transition(none)
+		+on-interaction
+			border-bottom: 0px
+			text-decoration: none
+
+.cp__image__link--underlined, %cp__image__link--underlined
+	a
+		+link-colors($white, $white, $white, $white, $white)
+		text-decoration: none
+		+on-interaction
+			text-decoration: none
+			border-color: $white
+
+.cp__text__link, %cp__text__link
+	@extend %cp__image__link
+	a
+		+link-colors($black, $black, $black, $black, $black)
+
+.cp__text__link--underlined, %cp__text__link--underlined
+	@extend %cp__image__link--underlined
+	a
+		+link-colors($black, $black, $black, $black, $black)
+		+on-interaction
+			border-color: $black

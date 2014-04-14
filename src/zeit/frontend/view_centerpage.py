@@ -1,4 +1,5 @@
 from pyramid.view import view_config
+from zeit.frontend.reach import LinkReach
 import logging
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -46,4 +47,31 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_lead(self):
-        return self.context['lead'].values()
+        teaser_list = self.context['lead'].values()
+        for teaser in teaser_list:
+            if teaser.layout.id == 'zmo-leader-fullwidth':
+                teaser_list.remove(teaser)
+        return teaser_list
+
+    @property
+    def area_lead_full_teaser(self):
+        for teaser_block in self.context['lead'].values():
+            if teaser_block.layout.id == 'zmo-leader-fullwidth':
+                return teaser_block
+
+    @property
+    def _shares(self):
+        reach_url = self.request.registry.settings.linkreach_host
+        return LinkReach(reach_url)
+
+    @property
+    def global_twitter_shares(self):
+        return self._shares.fetch_data('twitter', 20)[:10]
+
+    @property
+    def global_facebook_shares(self):
+        return self._shares.fetch_data('facebook', 20)[:10]
+
+    @property
+    def global_googleplus_shares(self):
+        return self._shares.fetch_data('googleplus', 20)[:10]

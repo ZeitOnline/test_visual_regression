@@ -1,0 +1,24 @@
+{#
+
+Default teaser template for fullwidth teaser
+
+Available attributes:
+    teaser
+
+#}
+
+<div class="cp__lead-full__wrap">
+	{% block asset %}{% endblock %}
+    <header class="cp__lead-full__title__wrap">
+		<h1 class="cp__lead__title">
+			<a href="{{teaser.uniqueId | translate_url}}">
+				«{{teaser.teaserTitle}}»
+	      	</a>
+      	</h1>
+      	<span class="cp__lead__subtitle">
+			<a href="{{teaser.uniqueId | translate_url}}">
+				{{teaser.teaserText}}
+			</a> 
+		</span>
+	</header>
+</div>
