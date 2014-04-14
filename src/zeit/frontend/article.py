@@ -57,4 +57,6 @@ def pages_of_article(context):
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
+class IShortformArticle(zeit.content.article.interfaces.IArticle):
+    pass
 

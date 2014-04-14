@@ -2,16 +2,22 @@
   <template name="article">
     <title>Artikel</title>
     <header name="default">
-      <title>Standard (Headline unter Bild)</title>
+      <title>Standard</title>
     </header>
-    <header name="inside">
-      <title>Headline im Bild</title>
+    <header name="traum">
+      <title>Traum</title>
     </header>
-    <header name="sticker">
-      <title>Headline-Etikett</title>
+    <header name="text-only">
+      <title>Nur Text</title>
     </header>
-    <header name="left">
-      <title>Headline links neben Bild</title>
+    <header name="leinwand">
+      <title>Leinwand</title>
+    </header>
+    <header name="briefmarke">
+      <title>Briefmarke</title>
+    </header>
+    <header name="mode">
+      <title>Mode</title>
     </header>
   </template>
 

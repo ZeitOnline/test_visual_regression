@@ -1,9 +1,9 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
-        <author href="http://xml.zeit.de/autoren/L/Fabian_Lange/index.xml" publication-date="" expires="">
+        <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Fabian Lange</display_name>
         </author>
-        <author href="http://xml.zeit.de/autoren/L/Cornelius_Lange/index.xml" publication-date="" expires="">
+        <author href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
             <display_name>Cornelius Lange</display_name>
         </author>
         <references>

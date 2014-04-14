@@ -3,7 +3,9 @@ from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IShortformArticle
 from zeit.frontend.centerpage import auto_select_asset
+from zeit.frontend.centerpage import get_image_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
 import jinja2
@@ -13,7 +15,9 @@ import pkg_resources
 import pyramid.config
 import pyramid.threadlocal
 import pyramid_jinja2
+import re
 import urlparse
+import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
@@ -96,6 +100,7 @@ class Application(object):
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
+        jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['replace_list_seperator'] = replace_list_seperator
@@ -103,6 +108,8 @@ class Application(object):
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
         jinja.filters['auto_select_asset'] = auto_select_asset
+        jinja.filters['obj_debug'] = obj_debug
+        jinja.filters['substring_from'] = substring_from
         jinja.trim_blocks = True
         return jinja
 
@@ -247,6 +254,20 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
+def obj_debug(value):
+    try:
+        res = []
+        for k in dir(value):
+            res.append('%r : %r;' % (k, getattr(value, k)))
+        return '\n'.join(res)
+    except AttributeError:
+        return False
+
+
+def substring_from(string, find):
+    return string.split(find)[-1]
+
+
 def format_date(obj, type):
     format = ""
     if type == 'long':
@@ -260,22 +281,28 @@ def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
 # definition of default images sizes per layout context
-default_images_sizes = dict(
-    large=(800, 600),
-    small=(200, 300),
-)
+default_images_sizes = {
+    'default': (200, 300),
+    'large': (800, 600),
+    'small': (200, 300),
+    '540x304': (200, 300),
+}
 
 
-def default_image_url(image):
+def default_image_url(image,
+                      image_pattern='default'):
     try:
-        width, height = default_images_sizes.get(image.layout, (640, 480))
+        if hasattr(image, 'layout'):
+            width, height = default_images_sizes.get(image.layout, (640, 480))
+        else:
+            width, height = default_images_sizes.get(image_pattern, (640, 480))
         # TODO: use secret from settings?
         signature = compute_signature(width, height, 'time')
 
-        if image.src is None:
+        if image.uniqueId is None:
             return None
 
-        scheme, netloc, path, query, fragment = urlsplit(image.src)
+        scheme, netloc, path, query, fragment = urlsplit(image.uniqueId)
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
@@ -293,13 +320,38 @@ def most_sufficient_teaser_tpl(block_layout,
                                suffix='.html',
                                separator='_'):
 
-        types = (block_layout, content_type, asset)
-        defaults = ('default', 'default', 'default')
-        zipped = zip(types, defaults)
+    types = (block_layout, content_type, asset)
+    defaults = ('default', 'default', 'default')
+    zipped = zip(types, defaults)
 
-        combinations = [t for t in itertools.product(*zipped)]
-        func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-        return map(func, combinations)
+    combinations = [t for t in itertools.product(*zipped)]
+    func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
+    return map(func, combinations)
+
+
+def most_sufficient_teaser_img(teaser_block,
+                               teaser,
+                               asset_type=None,
+                               file_type='jpg'):
+    image_pattern = teaser_block.layout.image_pattern
+    if asset_type is None:
+        asset = auto_select_asset(teaser)
+    elif asset_type == 'image':
+        asset = get_image_asset(teaser)
+    else:
+        raise KeyError(asset_type)
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
+        return None
+    image_base_name = re.split('/', asset.uniqueId)[-1]
+    image_id = '%s/%s-%s.%s' % \
+        (asset.uniqueId, image_base_name, image_pattern, file_type)
+    try:
+        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        image_url = default_image_url(
+            teaser_image, image_pattern=image_pattern)
+        return image_url
+    except TypeError:
+        return None
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
@@ -313,6 +365,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 if IArticleTemplateSettings(context).template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
+                if IArticleTemplateSettings(context).template == 'short':
+                    zope.interface.alsoProvides(context, IShortformArticle)
             return self._change_viewname(tdict)
         except OSError, e:
             if e.errno == 2:
