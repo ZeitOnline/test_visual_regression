@@ -1,0 +1,205 @@
+[
+
+    {
+        "location": "/sport/2014-04/dortmund-madrid-wunder-aus",
+        "score": "202",
+        "supertitle": "Borussia Dortmund",
+        "title": "Das schönste Aus aller Zeiten",
+        "subtitle": "Am Ende fehlte ein Tor. Doch manche Dinge sind wichtiger als das Endergebnis. Etwa die Erkenntnis, dass der Dortmunder Emotionsfußball lebendiger ist denn je zuvor. ",
+        "timestamp": 1397028277894,
+        "section": "sport",
+        "fetchedAt": 1397028602741
+    },
+    {
+        "location": "/gesellschaft/zeitgeschehen/2014-04/afghanistan-fotografin-niedringhaus-tod",
+        "score": "153",
+        "supertitle": "Anja Niedringhaus",
+        "title": "Deutsche Fotografin in Afghanistan erschossen",
+        "subtitle": "Die Journalistin der Nachrichtenagentur AP, Anja Niedringhaus, ist nach nach Polizeiangaben im Osten des Landes getötet worden – offenbar von einem Polizisten. ",
+        "timestamp": 1396599864732,
+        "section": "gesellschaft",
+        "fetchedAt": 1396599902574
+    },
+    {
+        "location": "/digital/datenschutz/2014-04/vorratsdatenspeicherung-europaeischer-gerichtshof-eugh",
+        "score": "142",
+        "supertitle": "EU",
+        "title": "Gerichtshof kippt Richtlinie zur Vorratsdatenspeicherung",
+        "subtitle": "Der Europäische Gerichtshof hat das umstrittene Gesetz zur Vorratsdatenspeicherung für unzulässig erklärt. Ohne Verdacht auf Straftaten sei es EU-rechtswidrig.",
+        "timestamp": 1396944083877,
+        "section": "digital",
+        "fetchedAt": 1396944302605
+    },
+    {
+        "location": "/wirtschaft/2014-04/hartmut-mehdorn-flughafen-ber-brandschutz-siemens",
+        "score": "122",
+        "supertitle": "Flughafen Berlin ",
+        "title": "BER könnte Baugenehmigung verlieren",
+        "subtitle": "Die Kontrolleure des Bauprojekts misstrauen dem Flughafenchef zunehmend. Werden die Arbeiten an dem Brandschutz nicht beschleunigt, könnte die Baugenehmigung auslaufen.",
+        "timestamp": 1397034519026,
+        "section": "wirtschaft",
+        "fetchedAt": 1397034902070
+    },
+    {
+        "location": "/digital/datenschutz/2014-04/openssl-faq",
+        "score": "117",
+        "supertitle": "OpenSSL",
+        "title": "\"Heartbleed\" – auf der Gruselskala bis 10 ist es die 11",
+        "subtitle": "Selten hat ein Software-Fehler die Fachwelt so in Aufregung versetzt wie im Fall von \"Heartbleed\". Die wichtigsten Fragen und Antworten für Nicht-Experten im Überblick",
+        "timestamp": 1397054913599,
+        "section": "digital",
+        "fetchedAt": 1397055302453
+    },
+    {
+        "location": "/politik/deutschland/2014-04/europawahl-cdu",
+        "score": "107",
+        "supertitle": "Europa",
+        "title": "Merkel muss es wieder richten",
+        "subtitle": "Derselbe Slogan und selbst die Halskette kommt einem bekannt vor. Im Europawahlkampf recycelt die CDU Plakate von der Bundestagswahl. Dabei tritt Merkel gar nicht an. ",
+        "timestamp": 1396621023761,
+        "section": "politik",
+        "fetchedAt": 1396621502501
+    },
+    {
+        "location": "/wirtschaft/unternehmen/2014-04/lebensmittel-einzelhandel-konsum-nachhaltig",
+        "score": "97",
+        "supertitle": "Lebensmittel",
+        "title": "Verpackungsfrei einkaufen",
+        "subtitle": "Vier Millionen Tonnen Verpackungsmüll werden in Deutschland pro Jahr produziert. Ein Geschäft in Wien zeigt, dass es auch anders geht – zum Vorteil für die Kunden.",
+        "timestamp": 1396881951913,
+        "section": "wirtschaft",
+        "fetchedAt": 1396882202702
+    },
+    {
+        "location": "/wirtschaft/2014-04/griechenland-schuldenkrise-kapitalmarkt-comeback",
+        "score": "91",
+        "supertitle": "Euro-Krise",
+        "title": "\"Griechenland ist gerettet\"",
+        "subtitle": "Die Regierung in Athen braucht kein weiteres Rettungspaket, sagt Investmentstratege Andrew Bosomworth. Merkels Spardiktat hat funktioniert, aber der Preis war sehr hoch.",
+        "timestamp": 1396619668155,
+        "section": "wirtschaft",
+        "fetchedAt": 1396620002605
+    },
+    {
+        "location": "/digital/datenschutz/2014-04/big-data-gesundheitswesen-nhs",
+        "score": "84",
+        "supertitle": "KrankenhausdatenBig Data Infobox",
+        "title": "Der elektronische englische PatientBig Data: Neue InformationenNeue TechnikNeue Fragen",
+        "subtitle": "Das britische Gesundheitswesen wird zum Big-Data-Projekt – ohne Zustimmung der Patienten. Ein Lehrstück über die chaotische Umsetzung einer sinnvollen Idee",
+        "timestamp": 1397041315071,
+        "section": "digital",
+        "fetchedAt": 1397041502524
+    },
+    {
+        "location": "/gesellschaft/2014-03/pflichtbewusstsein-selbstverwirklichung",
+        "score": "80",
+        "supertitle": "PflichtbewusstseinThemenwoche Perfektes Leben",
+        "title": "Du bist schuldThemenwoche Perfektes LebenDie Texte der Woche",
+        "subtitle": "Zuständig sein, allen Erwartungen gerecht werden, moralisch handeln: Dauernd tun wir etwas, obwohl wir nicht wollen. Zeit, sich vom Pflichtbewusstsein zu verabschieden. ",
+        "timestamp": 1397028428816,
+        "section": "gesellschaft",
+        "fetchedAt": 1397028603241
+    },
+    {
+        "location": "/hamburg/kultur/2014-04/elbphilharmonie-hamburg-untersuchungsausschuss",
+        "score": "76",
+        "supertitle": "Elbphilharmonie Hamburg",
+        "title": "Erschwindelte Schönheit",
+        "subtitle": "Ohne Lügen und Vertuschungen wäre die Elbphilharmonie nie gebaut worden. Dies zeigt der Hamburger Abschlussbericht. Aber was sagt das über unsere Demokratie?",
+        "timestamp": 1396873724627,
+        "section": "hamburg",
+        "fetchedAt": 1396873803005
+    },
+    {
+        "location": "/politik/deutschland/2014-04/nsa-merkel-handy-ueberwachung",
+        "score": "73",
+        "supertitle": "Snowden-LeaksDie Enthüllungen des Edward SnowdenDer NSA-Skandal und die digitale Gegenwehr",
+        "title": "NSA lässt Merkel abblitzenEdward SnowdenDie EnthüllungenUnd wie sie bewertet werdenFAQ zum NSA-SkandalAnleitungen zur Gegenwehr",
+        "subtitle": "Die Bundesregierung hat in den USA um Informationen über die Überwachung des Kanzlerinnen-Handys gebeten – vergeblich. Die Grünen beklagen fehlenden Aufklärungswillen. ",
+        "timestamp": 1397022590479,
+        "section": "politik",
+        "fetchedAt": 1397022902754
+    },
+    {
+        "location": "/digital/datenschutz/2014-04/eugh-entscheidet-ueber-vorratsdatenspeicherung-datenschutz",
+        "score": "73",
+        "supertitle": "VorratsdatenspeicherungVorratsdatenspeicherung",
+        "title": "EuGH urteilt über die Zukunft der VorratsdatenVorratsdatenUnschuldsvermutungStreit in der KoalitionGerichtsverfahren",
+        "subtitle": "Die Vorratsdatenspeicherung wurde in Deutschland eingeführt, abgeschafft – und soll nun wiederkommen. Aber zunächst entscheidet nun der EuGH, ob sie Grundrechte verletzt.",
+        "timestamp": 1396893182911,
+        "section": "digital",
+        "fetchedAt": 1396893302690
+    },
+    {
+        "location": "/wissen/2014-04/selbstverwirklichung-gerhard-schulze-interview",
+        "score": "70",
+        "supertitle": "SelbstverwirklichungThemenwoche Perfektes LebenSelbstverwirklichung",
+        "title": "\"Allein im Tun erfahren wir uns selbst\"Themenwoche Perfektes LebenDie Texte der WocheDie ErlebnisgesellschaftDrei SchemataFünf Milieus",
+        "subtitle": "Das Konzept der Selbstverwirklichung ist falsch, sagt der Sozialforscher Gerhard Schulze. Wer sich auf das Selbst beschränkt, verpasse alles andere.",
+        "timestamp": 1396865953014,
+        "section": "wissen",
+        "fetchedAt": 1396866302130
+    },
+    {
+        "location": "/politik/deutschland/2014-04/nsa-ruecktritt-binninger-ausschuss-fragen",
+        "score": "67",
+        "supertitle": "NSA-Ausschuss",
+        "title": "Ein seltsamer Rücktritt",
+        "subtitle": "Der NSA-Ausschuss hat seine Arbeit noch nicht begonnen, da tritt der Vorsitzende zurück. Wurde er vom Kanzleramt unter Druck gesetzt, wie die Grünen behaupten?",
+        "timestamp": 1397060906654,
+        "section": "politik",
+        "fetchedAt": 1397061302737
+    },
+    {
+        "location": "/politik/deutschland/2014-04/umfrage-kritik-ttip",
+        "score": "65",
+        "supertitle": "Freihandelsabkommen",
+        "title": "Deutsche befürchten amerikanische Standards",
+        "subtitle": "Eine Umfrage zeigt die Skepsis der Deutschen gegenüber einem Freihandelsabkommen. Nur zwei Prozent vertrauen den US-Regeln für Lebensmittel. ",
+        "timestamp": 1397098490153,
+        "section": "politik",
+        "fetchedAt": 1397098802690
+    },
+    {
+        "location": "/politik/ausland/2014-04/ukraine-konflikt-machtpolitik-postmoderne",
+        "score": "65",
+        "supertitle": "Putins Aggression",
+        "title": "Die Ukraine-Krise bedroht besonders Deutschland",
+        "subtitle": "Deutschland muss empfindlich auf die Aggression Russlands reagieren. Es wird auf der Seite der Verlierer stehen, wenn wieder das Recht des Stärkeren gilt.",
+        "timestamp": 1396881635711,
+        "section": "politik",
+        "fetchedAt": 1396881902113
+    },
+    {
+        "location": "/digital/datenschutz/2014-04/vorratsdatenspeicherung-eugh-urteil-kommentar",
+        "score": "62",
+        "supertitle": "Datenspeicherung",
+        "title": "Das Konzept der Vorratsdaten ist erledigt",
+        "subtitle": "Mit dem EuGH-Urteil ist die Vorratsdatenspeicherung in ihrer jetzigen Form Geschichte. Die Sammelwut kann künftig nicht mehr 500 Millionen Bürger zu Verdächtigen machen.",
+        "timestamp": 1396959472620,
+        "section": "digital",
+        "fetchedAt": 1396959602361
+    },
+    {
+        "location": "/campus/2014/03/nc-abschaffen-pro-contra",
+        "score": "62",
+        "supertitle": "Studieren",
+        "title": "Soll der NC fallen?",
+        "subtitle": "Die deutschen Unis wehren sich mit Zulassungsbeschränkungen gegen die Studentenflut. Ist das ein Problem?",
+        "timestamp": 1396936800000,
+        "section": "studium",
+        "fetchedAt": 1396933802008
+    },
+    {
+        "location": "/karriere/2014-04/cottbus-lohndumping-anwalt-jobcenter-urteil",
+        "score": "61",
+        "supertitle": "Lohndumping",
+        "title": "Anwalt darf Stundenlohn von 1,60 Euro zahlen",
+        "subtitle": "Das Arbeitsgericht Cottbus hat die Klage eines Jobcenters wegen Lohndumping abgewiesen. Löhne von rund 1,60 Euro pro Stunde seien zwar sittenwidrig, aber nicht illegal.",
+        "timestamp": 1397057516053,
+        "section": "karriere",
+        "fetchedAt": 1397057702358
+    }
+
+]
+

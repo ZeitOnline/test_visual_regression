@@ -49,6 +49,10 @@ class Application(object):
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
+
+        linkreach =  maybe_convert_egg_url(self.settings['linkreach_host'])
+        self.settings['linkreach_host'] = linkreach
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
