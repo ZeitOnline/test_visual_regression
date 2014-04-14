@@ -6,6 +6,7 @@
 
 .article__body
 	@extend %copy
+	@extend %dancing_fonts
 	position: relative
 	p:first-of-type
 		+respond-min($comments__break-overlap)
@@ -15,6 +16,7 @@
 	+respond-min($break-3)
 		padding-left: $gutter/2
 		padding-right: $gutter/2
+
 
 .has-headline-switch
 	width: 100%
