@@ -289,7 +289,7 @@
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
             <form action="{{comments['comment_post_url']}}" method="POST" class="comments__head__form" id="js-comments-form">
-                <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
+                <textarea name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
                 <input type="hidden" name="nid" value="{{comments['nid']}}">
                 <input type="hidden" name="pid" value="">
