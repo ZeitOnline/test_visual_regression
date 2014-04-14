@@ -1,0 +1,95 @@
+$standard-header-max-width: 41.25em
+$standard-header-image-max-width: 31.25em
+
+.article__head--default
+  .article__head__title
+    font-size: $font-xl
+    +respond-min($break-2)
+      font-size: $font-xxl
+  .article__head__subtitle
+    p
+      +body-type-zoom
+
+.article__head
+  text-align: center
+  max-width: $standard-header-max-width
+  margin: 0 auto
+  margin-bottom: $compact
+  margin-top: $medium
+  +respond-min($break-1)
+    margin-bottom: $big
+  +respond-min($break-2)
+    margin-top: $large
+    margin-bottom: $large
+  +respond-min($break-3)
+    margin-top: $wide
+    margin-bottom: $wide
+
+.article__head__supertitle
+  @extend %supertitle
+  font-size: $font-m
+  margin-bottom: $small
+  +respond-min($break-3)
+    font-size: $font-ml
+
+.article__head__title
+  @extend %headline
+  margin-bottom: $compact
+  +respond-min($break-2)
+    margin-bottom: $big
+
+.article__head__subtitle
+  @extend %subheading
+  text-align: left
+  margin-bottom: $compact
+
+.article__head__image
+  max-width: $standard-header-image-max-width
+  text-align: left
+  display: block
+  margin: 0 auto
+  margin-bottom: $medium
+  +respond-min($break-1)
+    margin-bottom: $large
+  +respond-min($break-2)
+    margin-bottom: $wide
+  img
+    width: 100%
+    display: block
+  figure
+    margin-top: 0
+    margin-bottom: 0
+  .figure__caption
+    display: none
+    text-align: right
+
+.article__head__meta
+  @extend %meta
+  text-align: left
+  text-transform: uppercase
+  margin-bottom: 0
+  display: block
+  margin-top: $thin
+  letter-spacing: 1px
+  font-size: $font-xs
+  max-width: 28em
+  line-height: $meta-line-height
+
+.article__head__meta__offset
+  display: block
+  margin-bottom: $fine
+
+.article__head__meta__genre
+.article__head__meta__location
+.article__head__meta__author
+
+.article__head__meta__source
+  &:after
+    content: ' — '
+
+.article__head__meta__date
+  span
+    &:before
+      white-space: pre
+      content: ' — '
+

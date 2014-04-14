@@ -14,12 +14,12 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-03-27T12:19:43.953570+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-03T14:17:50.808736+00:00</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-27T12:29:51.583707+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-07T10:29:39.101900+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
@@ -50,8 +50,8 @@
   <body>
     <cluster area="feature">
       <region area="lead">
-        <container cp:type="teaser" module="leader-fullwidth" cp:__name__="id-1328295a-a6ce-472c-be0e-7a1c29ea8aff">
-          <block href="http://xml.zeit.de/centerpage/article_video_asset" uniqueId="http://xml.zeit.de/centerpage/article_video_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T12:00:49+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T11:54:47.509887+00:00">
+        <container cp:type="teaser" module="zmo-leader-fullwidth" cp:__name__="id-1328295a-a6ce-472c-be0e-7a1c29ea8aff">
+          <block href="http://xml.zeit.de/centerpage/article_video_asset" uniqueId="http://xml.zeit.de/centerpage/article_video_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-31T15:36:21+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-31T08:47:23.909308+00:00">
             <supertitle py:pytype="str">Video Asset Article Spitzmarke</supertitle>
             <teaser_supertitle py:pytype="str">Video Asset Article Spitzmarke</teaser_supertitle>
             <title py:pytype="str">und der Titel dazu</title>
@@ -76,29 +76,6 @@
               <byline xsi:nil="true"/>
               <breadcrumb_title xsi:nil="true"/>
             </gallery>
-          </block>
-        </container>
-        <container cp:type="teaser" module="leader" cp:__name__="id-aea7d6b5-0393-441e-8cb0-21406ac4675b">
-          <block href="http://xml.zeit.de/artikel/01" uniqueId="http://xml.zeit.de/artikel/01" year="2013" issue="40" ressort="lebensart" author="Marie Schmidt" contenttype="article" publication-date="2013-10-03T03:11:20+00:00" expires="" date-last-modified="2014-03-17T10:04:15+00:00" date-first-released="2013-09-26T06:00:00+00:00" date-last-published="2013-10-08T09:26:47.102964+00:00" last-semantic-change="2013-10-08T09:25:41.176681+00:00">
-            <supertitle py:pytype="str">Gentrifizierung</supertitle>
-            <teaser_supertitle py:pytype="str">Gentrifizierung</teaser_supertitle>
-            <title py:pytype="str">Das Münchner Stüberl stirbt</title>
-            <text py:pytype="str">Mei, is' des traurig! Die Schoppenstube im Münchner Glockenbachviertel hat dichtgemacht. Was erzählt uns das über die Gentrifizierung?</text>
-            <description py:pytype="str">Mei, is' des traurig! Die Schoppenstube im Münchner Glockenbachviertel hat dichtgemacht. Was erzählt uns das über die Gentrifizierung?</description>
-            <byline py:pytype="str">von  Marie Schmidt</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <gallery type="intern" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
-              <supertitle xsi:nil="true"/>
-              <teaser_supertitle xsi:nil="true"/>
-              <title py:pytype="str">Automesse Detroit 2014 US-Hersteller</title>
-              <text xsi:nil="true"/>
-              <description xsi:nil="true"/>
-              <byline xsi:nil="true"/>
-              <breadcrumb_title xsi:nil="true"/>
-            </gallery>
-            <author href="http://xml.zeit.de/autoren/S/Marie_Schmidt" publication-date="" expires="">
-              <display_name>Marie Schmidt</display_name>
-            </author>
           </block>
         </container>
         <container cp:type="teaser" module="leader" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
@@ -173,7 +150,7 @@
     </cluster>
     <cluster area="teaser-mosaic"/>
     <supertitle>ZMO CP</supertitle>
-    <title>ZMO</title>
+    <title>CP Video Lead</title>
     <subtitle>ZMO CP</subtitle>
   </body>
   <feed/>

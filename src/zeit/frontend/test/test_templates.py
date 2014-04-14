@@ -111,15 +111,14 @@ def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
-    markup_standart = '<div class="%s">' % css_index
+    markup_standart = '<div class="%s"><div class="article__subpage-index__title">&uuml;bersicht</div>' % css_index
 
     fake_page = type('Dummy', (object,), {})
     fake_page.number = 1
     fake_page.teaser = 'Erster'
 
     # assert normal markup
-    markup = u'%s<span><a href="#kapitel1">1 \u2014 ' \
-        'Erster</a></span></div>' % (markup_standart)
+    markup = u'%s<div class="article__subpage-index__item"><span class="article__subpage-index__item__count">1 &mdash; </span><span class="article__subpage-index__item__title-wrap"><a href="#kapitel1" class="article__subpage-index__item__title">Erster</a></span></div></div>' % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -129,8 +128,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert active markup
     css_active = 'article__subpage-active'
-    markup_active = u'%s<span class="%s">1 \u2014 Erster</span></div>' \
-        % (markup_standart, css_active)
+    markup_active = u'%s<div class="article__subpage-index__item"><span class="article__subpage-index__item__count">1 &mdash; </span><span class="article__subpage-index__item__title-wrap"><span class="article__subpage-index__item__title %s">Erster</span></span></div></div>' % (markup_standart, css_active)
     lines_active = tpl.module.subpage_index(
         [fake_page], 'Title', 1, css_index, css_active).splitlines()
     output_active = ""
@@ -161,8 +159,8 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 def test_macro_source_date_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
-    markup = '<span class="article__meta__second__source">' \
-        'zon</span><span class="article__meta__second__date">01.01.2013' \
+    markup = '<span class="article__head__meta__source">' \
+        'zon</span><span class="article__head__meta__date">01.01.2013' \
         '</span>'
     lines = tpl.module.source_date('01.01.2013', 'zon').splitlines()
     output = ""
@@ -230,8 +228,8 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},
-           {'layout': 'zmo-xl',
-            'css': 'article__main-image figure-full-width',
+           {'layout': 'zmo-xl-header',
+            'css': 'figure-header',
             'caption': 'test', 'copyright': 'test',
             'attr_alt': 'My alt content',
             'attr_title': 'My title content'},

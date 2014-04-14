@@ -67,6 +67,16 @@ class Article(zeit.frontend.view.Base):
         return self.context.title
 
     @property
+    def template(self):
+        template = IArticleTemplateSettings(self.context).template
+        return template if template is not None else "default"
+
+    @property
+    def header_layout(self):
+        layout = IArticleTemplateSettings(self.context).header_layout
+        return layout if layout is not None else "default"
+
+    @property
     def subtitle(self):
         return self.context.subtitle
 
@@ -119,14 +129,12 @@ class Article(zeit.frontend.view.Base):
     def next_page_url(self):
         _actual_index = self.page_nr - 1
         total = len(self.pages)
-        return self.pages_urls[_actual_index +1] if _actual_index + 1 < total else None
-
+        return self.pages_urls[_actual_index + 1] if _actual_index + 1 < total else None
 
     @property
     def prev_page_url(self):
         actual_index = self.page_nr - 1
-        return self.pages_urls[actual_index -1] if actual_index-1 >= 0 else None 
-
+        return self.pages_urls[actual_index - 1] if actual_index-1 >= 0 else None
 
     @property
     def pagination(self):
@@ -155,7 +163,7 @@ class Article(zeit.frontend.view.Base):
     def header_img(self):
         obj = self._select_first_body_obj
         if IImage in providedBy(obj):
-            return self._create_obj(zeit.frontend.block.HeaderImage, obj)
+            return zeit.frontend.block.HeaderImageStandard(obj)
 
     @property
     def header_video(self):
@@ -474,7 +482,8 @@ class ArticlePage(Article):
     @property
     def next_title(self):
         try:
-            return zeit.frontend.interfaces.IPages(self.context)[self.page_nr].teaser
+            page = zeit.frontend.interfaces.IPages(self.context)[self.page_nr]
+            return page.teaser
         except (IndexError):
             return ''
 
@@ -486,6 +495,18 @@ class LongformArticle(Article):
     advertising_enabled = False
     main_nav_full_width = True
     is_longform = True
+
+    @property
+    def header_img(self):
+        obj = self._select_first_body_obj
+        if IImage in providedBy(obj):
+            return self._create_obj(zeit.frontend.block.HeaderImage, obj)
+
+
+@view_config(context=zeit.frontend.article.IShortformArticle,
+             renderer='templates/shortform.html')
+class ShortformArticle(Article):
+    pass
 
 
 @view_config(name='teaser',

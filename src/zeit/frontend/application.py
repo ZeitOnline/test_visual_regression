@@ -1,15 +1,13 @@
 from grokcore.component import adapter, implementer
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IShortformArticle
 from zeit.magazin.interfaces import IArticleTemplateSettings
-import jinja2
 import logging
 import os.path
 import pkg_resources
 import pyramid.config
 import pyramid_jinja2
-import re
 import urlparse
-import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
@@ -115,7 +113,7 @@ class Application(object):
         jinja.filters['auto_select_asset'] = (
             zeit.frontend.centerpage.auto_select_asset)
         for name in ['format_date', 'replace_list_seperator', 'translate_url',
-                     'default_image_url']:
+                     'default_image_url', 'obj_debug', 'substring_from']:
             jinja.filters[name] = getattr(zeit.frontend.jinja, name)
 
         return jinja
@@ -259,6 +257,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 if IArticleTemplateSettings(context).template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
+                if IArticleTemplateSettings(context).template == 'short':
+                    zope.interface.alsoProvides(context, IShortformArticle)
             return self._change_viewname(tdict)
         except OSError, e:
             if e.errno == 2:

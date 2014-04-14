@@ -1,3 +1,28 @@
+{% macro supertitle() -%}
+  <h2 class="article__head__supertitle">
+      {{ view.supertitle }}
+  </h2>
+{%- endmacro %}
+
+{% macro title() -%}
+  <h1 class="article__head__title">
+      {{view.title}}
+  </h1>
+{%- endmacro %}
+
+{% macro subtitle(include_meta=False) -%}
+    <div class="article__head__subtitle">
+        <p>
+            {{view.subtitle}}
+            {% if include_meta %}
+                {% if view.genre -%}
+                    {{view.genre}}
+                {%- endif %}
+                {{ meta_author(view.authors) }}
+            {%- endif %}
+        </p>
+    </div>
+{%- endmacro %}
 
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
@@ -18,12 +43,18 @@
 {% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
         <div class="{{ index_class }}">
+        <div class="article__subpage-index__title">&uuml;bersicht</div>
         {% for page in pages if page.teaser %}
-            {% if loop.index == number %}
-                <span class="{{ active_class }}">{{ page.number }} — {{ page.teaser }}</span>
-            {% else %}
-                <span><a href="#kapitel{{ loop.index }}">{{ page.number }} — {{  page.teaser  }}</a></span>
-            {% endif %}
+            <div class="article__subpage-index__item">
+                <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
+                <span class="article__subpage-index__item__title-wrap">
+                    {% if loop.index == number %}
+                        <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
+                    {% else %}
+                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title">{{  page.teaser  }}</a>
+                    {% endif %}
+                </span>
+            </div>
         {% endfor %}
     </div>
     {% endif %}
@@ -40,9 +71,9 @@
 
 {% macro source_date(date, source) -%}
     {% if source %}
-        <span class="article__meta__second__source">{{ source }}</span>
+        <span class="article__head__meta__source">{{ source }}</span>
     {% endif %}
-    <span class="article__meta__second__date">{{ date }}</span>
+    <span class="article__head__meta__date">{{ date }}</span>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
@@ -84,12 +115,18 @@
     {% endif %}
 {%- endmacro %}
 
+{% macro headerimagestandard(obj) -%}
+    <div class="article__head__image">
+        {{ image(obj) }}
+    </div>
+{%- endmacro %}
+
 {% macro image(obj) -%}
     <figure class="
         {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
             figure-full-width
-        {% elif obj.layout == 'zmo-xl' %}
-            article__main-image figure-full-width
+        {% elif obj.layout == 'zmo-xl-header' %}
+            figure-header
         {% elif obj.layout == 'zmo-medium-left' %}
             figure-horizontal
         {% elif obj.layout == 'zmo-medium-right' %}
@@ -138,7 +175,7 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
-{% macro meta_author(authors, class="article__meta__author") %}
+{% macro meta_author(authors, class="article__head__meta__author") %}
     {%- if authors -%}
         {%- for author in authors -%}
             {{author.prefix}}
@@ -309,7 +346,7 @@
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
-            var el = document.getElementsByClassName('article__meta__second__date');
+            var el = document.getElementsByClassName('article__head__meta__date');
             var content = el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){
@@ -346,7 +383,7 @@
                 <li class="article__pager__number {{current_class}}"><a href="{{url}}">{{loop.index}}</a></li>
             {%- endfor %}
 
-            
+
             {% if pagination.next_page_url %}
                 <li class="article__pager__next"><a class="icon-paginierungs-pfeil-rechts" href="{{pagination.next_page_url}}">Vor</a></li>
             {% else %}
@@ -356,9 +393,8 @@
     </div>
     {% endif %}
 {%- endmacro %}
-       
+
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
-
 

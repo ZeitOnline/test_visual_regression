@@ -109,6 +109,12 @@ class HeaderImage(Image):
         super(HeaderImage, self).__init__(model_block)
 
 
+@implementer(IFrontendHeaderBlock)
+@adapter(zeit.content.article.edit.interfaces.IImage)
+class HeaderImageStandard(HeaderImage):
+    pass
+
+
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IIntertitle)
 class Intertitle(object):

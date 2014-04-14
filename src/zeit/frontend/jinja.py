@@ -32,6 +32,20 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
+def obj_debug(value):
+    try:
+        res = []
+        for k in dir(value):
+            res.append('%r : %r;' % (k, getattr(value, k)))
+        return '\n'.join(res)
+    except AttributeError:
+        return False
+
+
+def substring_from(string, find):
+    return string.split(find)[-1]
+
+
 def format_date(obj, type):
     format = ""
     if type == 'long':
@@ -95,10 +109,16 @@ def most_sufficient_teaser_tpl(block_layout,
 
 def most_sufficient_teaser_img(teaser_block,
                                teaser,
+                               asset_type=None,
                                file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
-    asset = zeit.frontend.centerpage.auto_select_asset(teaser)
-    if asset is None:
+    if asset_type is None:
+        asset = zeit.frontend.centerpage.auto_select_asset(teaser)
+    elif asset_type == 'image':
+        asset = zeit.frontend.centerpage.get_image_asset(teaser)
+    else:
+        raise KeyError(asset_type)
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
     image_base_name = re.split('/', asset.uniqueId)[-1]
     image_id = '%s/%s-%s.%s' % \
