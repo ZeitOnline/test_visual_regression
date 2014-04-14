@@ -83,10 +83,10 @@ $nav__section-border: 1px solid $grey--mid
 
 .main-nav__logo__img
   display: block
-  background: url('/img/zm-logo--white.svg') no-repeat
-  background-size: contain
   width: $nav__logo-mobile-width
   height: $nav__logo-mobile-height
+  &.icon-zm-logo--white
+    background-size: contain
   +respond-min($nav__break__full-menu)
     background: url('/img/zeit-logo--magazin.png') no-repeat
     background-size: contain
