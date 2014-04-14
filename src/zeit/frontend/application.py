@@ -52,7 +52,7 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
-        linkreach =  maybe_convert_egg_url(self.settings['linkreach_host'])
+        linkreach = maybe_convert_egg_url(self.settings['linkreach_host'])
         self.settings['linkreach_host'] = linkreach
 
         self.config = config = pyramid.config.Configurator(
@@ -105,8 +105,9 @@ class Application(object):
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['create_image_url'] = create_image_url
+        jinja.globals['get_teaser_image'] = most_sufficient_teaser_image
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
-        jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
         jinja.filters['format_date_ago'] = format_date_ago
@@ -117,6 +118,8 @@ class Application(object):
         jinja.filters['auto_select_asset'] = auto_select_asset
         jinja.filters['obj_debug'] = obj_debug
         jinja.filters['substring_from'] = substring_from
+        jinja.filters['hide_none'] = hide_none
+        jinja.filters['get_image_metadata'] = get_image_metadata
         jinja.trim_blocks = True
         return jinja
 
@@ -262,7 +265,7 @@ def translate_url(context, url):
 
 
 def format_date(obj, type='short'):
-    formats = {'long':"dd. MMMM yyyy, H:mm 'Uhr'", 'short':"dd. MMMM yyyy"}
+    formats = {'long': "dd. MMMM yyyy, H:mm 'Uhr'", 'short': "dd. MMMM yyyy"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
@@ -313,6 +316,12 @@ def obj_debug(value):
 def substring_from(string, find):
     return string.split(find)[-1]
 
+
+def hide_none(string):
+    if string is None:
+        return ''
+    else:
+        return string
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
@@ -377,10 +386,10 @@ def most_sufficient_teaser_tpl(block_layout,
     return map(func, combinations)
 
 
-def most_sufficient_teaser_img(teaser_block,
-                               teaser,
-                               asset_type=None,
-                               file_type='jpg'):
+def most_sufficient_teaser_image(teaser_block,
+                                 teaser,
+                                 asset_type=None,
+                                 file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
     if asset_type is None:
         asset = auto_select_asset(teaser)
@@ -395,9 +404,22 @@ def most_sufficient_teaser_img(teaser_block,
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
         teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
-        image_url = default_image_url(
-            teaser_image, image_pattern=image_pattern)
-        return image_url
+        return teaser_image
+    except TypeError:
+        return None
+
+
+def create_image_url(teaser_block, image):
+    image_pattern = teaser_block.layout.image_pattern
+    image_url = default_image_url(
+        image, image_pattern=image_pattern)
+    return image_url
+
+
+def get_image_metadata(image):
+    try:
+        image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
+        return image_metadata
     except TypeError:
         return None
 
