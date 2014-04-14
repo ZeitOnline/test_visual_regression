@@ -597,10 +597,11 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
               "wt.sendinfo();",
               "http://zeit01.webtrekk.net/" +
               "981949533494636/wt.pl?p=311,redaktion" +
-              ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0&" +
-              "cg1=Redaktion&cg2=Artikel&cg3=lebensart&cg4=Online&" +
-              "cp1=Martin Mustermann&cp2=lebensart/mode/article&cp3=1&cp4=" +
-              "test;test&cp6=1000&cp7=&cp9=lebensart/mode/article"]
+              ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0" +
+              "&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart" +
+              "&amp;cg4=Online&amp;cp1=Martin Mustermann" +
+              "&amp;cp2=lebensart/mode/article&amp;cp3=1&amp;cp4=test;test" +
+              "&amp;cp6=1000&amp;cp7=&amp;cp9=lebensart/mode/article"]
     el_cont = ['1: "Redaktion"',
                '2: "Artikel"',
                '3: "lebensart"',
