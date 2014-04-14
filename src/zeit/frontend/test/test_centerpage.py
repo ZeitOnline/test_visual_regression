@@ -1,3 +1,4 @@
+from zeit.frontend import view_centerpage
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
@@ -437,12 +438,13 @@ def test_image_metadata_should_be_accessible(testserver):
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
 
-    article = 'http://xml.zeit.de/centerpage/article_image_asset'
-    article_context = zeit.cms.interfaces.ICMSContent(article)
+    with pytest.raises(KeyError):
+        most_sufficient_teaser_img(
+            teaser_block, article_context, asset_type='kamehameha')
 
-    teaser_img = most_sufficient_teaser_image(teaser_block, article_context)
-    img_meta = get_image_metadata(teaser_img)
-    assert zeit.content.image.interfaces.IImageMetadata.providedBy(img_meta)
-    assert img_meta.title == u'Katze!'
-    assert img_meta.alt == u'Die ist der Alttest'
-    assert img_meta.caption == u'Die ist der image sub text'
+
+def test_get_reaches_from_centerpage_view(dummy_request):
+    view = view_centerpage.Centerpage('', dummy_request)
+    assert len(view.global_twitter_shares) == 10
+    assert len(view.global_googleplus_shares) == 10
+    assert len(view.global_facebook_shares) == 10
