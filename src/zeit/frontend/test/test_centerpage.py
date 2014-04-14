@@ -1,3 +1,4 @@
+from zeit.frontend import view_centerpage
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_img
 from zeit.frontend.application import most_sufficient_teaser_tpl
@@ -341,3 +342,9 @@ def test_autoselect_asset_should_raise_error_on_garbage_asset(testserver):
     with pytest.raises(KeyError):
         most_sufficient_teaser_img(
             teaser_block, article_context, asset_type='kamehameha')
+
+def test_get_reaches_from_centerpage_view(dummy_request):
+    view = view_centerpage.Centerpage('', dummy_request)
+    assert len(view.global_twitter_shares) == 10
+    assert len(view.global_googleplus_shares) == 10
+    assert len(view.global_facebook_shares) == 10

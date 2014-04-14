@@ -3,13 +3,11 @@ import urlparse
 import string
 from datetime import datetime
 from lxml import etree
-from random import randint
 
-from pyramid.view import view_config
-import zeit.content.article.interfaces
 
 def path_of_article(unique_id):
     return urlparse.urlparse(unique_id).path[1:]
+
 
 class Agatho(object):
 
@@ -18,9 +16,16 @@ class Agatho(object):
 
     def collection_get(self, unique_id):
         try:
-            return _place_answers_under_parent(etree.parse('%s%s' % (self.entry_point, path_of_article(unique_id))))
-        except IOError: # lxml reports a 404 as IOError, 404 code signals that no thread exists for that article
+            return _place_answers_under_parent(
+                etree.parse(
+                    '%s%s' % (self.entry_point, path_of_article(unique_id))
+                )
+            )
+        except IOError:  # lxml reports a 404 as IOError,
+                         # 404 code signals that no thread exists
+                         # for that article
             return None
+
 
 def _place_answers_under_parent(xml):
     filter_xslt = etree.XML('''
@@ -82,10 +87,10 @@ def _place_answers_under_parent(xml):
     transform = etree.XSLT(filter_xslt)
     return transform(xml)
 
+
 def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
-    roles_string = ''
     picture_url = u'http://community.zeit.de/files/pictures/keinbild.gif'
     role_labels = []
     gender = 'undefined'
@@ -125,8 +130,10 @@ def comment_as_json(comment, request):
         my_uid=request.cookies.get('drupal-userid', 0),
         cid=comment.xpath('./@id')[0])
 
+
 def get_thread(unique_id, request):
-    """ return a dict representation of the comment thread of the given article"""
+    """ return a dict representation of the
+        comment thread of the given article"""
     api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
     thread = api.collection_get(unique_id)
     if thread is not None:
@@ -146,11 +153,15 @@ def get_thread(unique_id, request):
 from cornice.resource import resource, view
 from zeit.frontend import COMMENT_COLLECTION_PATH, COMMENT_PATH
 
+
 def unique_id_factory(request):
-    return '/'.join([u'http://xml.zeit.de'] + list(request.matchdict['subpath']))
+    str = [u'http://xml.zeit.de'] + list(request.matchdict['subpath'])
+    return '/'.join(str)
 
 
-@resource(collection_path=COMMENT_COLLECTION_PATH, path=COMMENT_PATH, factory=unique_id_factory)
+@resource(collection_path=COMMENT_COLLECTION_PATH,
+          path=COMMENT_PATH,
+          factory=unique_id_factory)
 class Comment(object):
 
     def __init__(self, context, request):
