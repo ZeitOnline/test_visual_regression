@@ -3,9 +3,11 @@ from zeit.frontend.comments import get_thread
 
 unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
 
+
 @fixture
 def xml_comment(agatho):
     return agatho.collection_get(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets').xpath('//comment')[0]
+
 
 @fixture
 def xml_local_comment(agatho):
@@ -21,9 +23,9 @@ def test_agatho_collection_get_for_nonexistent(agatho):
     assert agatho.collection_get(u'/nosuchthread') is None
 
 
-def test_comment_as_json(xml_comment):
+def test_comment_as_json(xml_comment, dummy_request):
     from zeit.frontend.comments import comment_as_json
-    json_comment = comment_as_json(xml_comment)
+    json_comment = comment_as_json(xml_comment, dummy_request)
     assert json_comment['name'] == 'claudiaE'
 
 
