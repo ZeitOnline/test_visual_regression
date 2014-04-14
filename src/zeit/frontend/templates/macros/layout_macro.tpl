@@ -205,7 +205,7 @@
             </a>
             <div class="main-nav__menu">
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
-                    <div class="main-nav__menu__head__headline">ZEIT Magazin</div>
+                    <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
