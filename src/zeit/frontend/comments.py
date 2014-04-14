@@ -100,23 +100,24 @@ def comment_as_json(comment, request):
             gender = comment.xpath('author/@sex')[0]
         except IndexError:
             pass
-        roles_words = {"author_weiblich":"Redaktion",
-                       u"author_männlich":"Redaktion",
-                       u"author_undefined":"Redaktion",
-                       "expert_weiblich":"Expertin",
-                       u"expert_männlich":"Experte",
-                       "freelancer_weiblich":"Freie Autorin",
-                       u"freelancer_männlich":"Freier Autor"}
-        role_labels = [roles_words['%s_%s' % (role, gender)]
-            for role in roles if '%s_%s' % (role, gender) in roles_words]
+        roles_words = {"author_weiblich": "Redaktion",
+                       u"author_männlich": "Redaktion",
+                       u"author_undefined": "Redaktion",
+                       "expert_weiblich": "Expertin",
+                       u"expert_männlich": "Experte",
+                       "freelancer_weiblich": "Freie Autorin",
+                       u"freelancer_männlich": "Freier Autor"}
+        role_labels = [roles_words['%s_%s' % (role, gender)] for role in roles
+                       if '%s_%s' % (role, gender) in roles_words]
 
     if comment.xpath('author/@picture'):
-        picture_url=request.registry.settings.agatho_host+'/'+comment.xpath('author/@picture')[0]
+        picture_url = request.registry.settings.agatho_host + '/' + comment.xpath('author/@picture')[0]
     if comment.xpath('content/text()'):
-        content=comment.xpath('content/text()')[0]
+        content = comment.xpath('content/text()')[0]
     else:
         content = '[fehler]'
-    return dict(indented=bool(len(comment.xpath('inreply'))),
+    return dict(
+        indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
         name=comment.xpath('author/name/text()')[0],
@@ -139,7 +140,7 @@ def get_thread(unique_id, request):
     if thread is not None:
         try:
             return dict(
-                comments=[comment_as_json(comment,request) for comment in thread.xpath('//comment')],
+                comments=[comment_as_json(comment, request) for comment in thread.xpath('//comment')],
                 comment_count=int(thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
                 comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
