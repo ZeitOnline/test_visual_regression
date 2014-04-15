@@ -1,7 +1,7 @@
 //$nav__row-height--px and $nav__row-height was moved to constants
 $nav__break__full-menu: em(768px)
-$nav__logo-mobile-width: image-width('zeit-logo--magazin.png')/27
-$nav__logo-mobile-height: image-height('zeit-logo--magazin.png')/2
+$nav__logo-mobile-width: 76px/2
+$nav__logo-mobile-height: 40px/2
 $nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
 $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
@@ -28,16 +28,6 @@ $nav__section-border: 1px solid $grey--mid
     margin-bottom: 0
     z-index: 100000 // absurd high z-index to overrule ads and such
     margin-top: 0
-  &.is-compact
-    left: 0
-    top: 0
-    height: $nav__row-height
-    +respond-min($nav__break__full-menu)
-      height: $nav__row-height
-    .no-touch &
-      position: fixed
-      ~ .main
-        margin-top: $nav__row-height
   +respond-min($nav__break__full-menu)
     height: $nav__row-height * 2
     background-color: $grey--mid-dark
@@ -76,15 +66,11 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     width: em($nav__logo-full-width) + 2*$small
     border-bottom: $nav__section-border !important
-    .is-compact &
-      border-bottom: none !important
-
 
 .main-nav__logo__wrap
   width: $nav__logo-mobile-width
   height: $nav__logo-mobile-height
   position: absolute
-  overflow: hidden
   left: 50%
   top: 50%
   margin-left: -$nav__logo-mobile-width/2
@@ -93,14 +79,19 @@ $nav__section-border: 1px solid $grey--mid
     margin-left: -$nav__logo-full-width/2
     margin-top: -$nav__logo-full-height/2
     width: $nav__logo-full-width
-  img
+    height: $nav__logo-full-height
+
+.main-nav__logo__img
+  display: block
+  width: $nav__logo-mobile-width
+  height: $nav__logo-mobile-height
+  &.icon-zm-logo--white
+    background-size: contain
+  +respond-min($nav__break__full-menu)
+    background: url('/img/zeit-logo--magazin.png') no-repeat
+    background-size: contain
     width: $nav__logo-full-width
     height: $nav__logo-full-height
-    min-width: $nav__logo-full-width
-    min-height: $nav__logo-full-height
-    max-width: $nav__logo-full-width
-    max-height: $nav__logo-full-height
-
 
 .main-nav__menu
   overflow: hidden
@@ -109,9 +100,6 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     background: none
     border-bottom: $nav__section-border
-    .is-compact &
-      border-bottom: none
-
 
 .main-nav__menu__head
   height: 100%
@@ -178,6 +166,8 @@ $nav__section-border: 1px solid $grey--mid
   width: -webkit-calc(100% - 1px)
   width: calc(100% - 1px)
   padding-left: $nav__row-height
+  &.is-open
+    display: block
   +respond-min($nav__break__full-menu)
     display: block
     position: static
@@ -358,7 +348,7 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     position: absolute
     border-bottom: $nav__section-border
-    left: em($nav__logo-full-width) + em(38px)
+    right: em(230px)
     top: 0
     padding: 0 $small
 
@@ -447,7 +437,8 @@ $nav__section-border: 1px solid $grey--mid
   display: none
   cursor: pointer
   .has-topic-slider &
-    display: block
+    +respond-min($nav__break__full-menu)
+      display: block
   &.is-inactive
     opacity: 0.5
     cursor: default
