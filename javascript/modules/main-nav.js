@@ -23,7 +23,7 @@ define(['jquery'], function() {
     $main_nav_trigger.click(function(e) {
       e.preventDefault();
       e.stopPropagation();
-      $main_nav_content.toggle();
+      $main_nav_content.toggleClass('is-open');
       mobile_menu_open = !mobile_menu_open;
     });
 
@@ -101,7 +101,7 @@ define(['jquery'], function() {
     if (window.innerWidth < full_nav_breakpoint) {
       if (mobile_menu_open) {
         // close mobile nav when open
-        $main_nav_content.hide();
+        $main_nav_content.removeClass('is-open');
         mobile_menu_open = !mobile_menu_open;
       }
     } else {
