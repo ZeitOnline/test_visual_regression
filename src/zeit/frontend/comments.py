@@ -88,7 +88,7 @@ def _place_answers_under_parent(xml):
     return transform(xml)
 
 
-def comment_as_json(comment, request):
+def comment_as_dict(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
     picture_url = u'http://community.zeit.de/files/pictures/keinbild.gif'
@@ -142,7 +142,7 @@ def get_thread(unique_id, request):
     if thread is not None:
         try:
             return dict(
-                comments=[comment_as_json(comment, request) for comment in thread.xpath('//comment')],
+                comments=[comment_as_dict(comment, request) for comment in thread.xpath('//comment')],
                 comment_count=int(thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
                 comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
