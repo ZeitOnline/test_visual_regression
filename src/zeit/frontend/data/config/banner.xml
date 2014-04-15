@@ -7,7 +7,6 @@
     <width>728</width>
     <height>90</height>
     <dcopt>ist</dcopt>
-    <adlabel>Anzeige</adlabel>
     <diuqilon>True</diuqilon>
   </place>
   <place number="2" active="true">
@@ -16,7 +15,6 @@
     <width>120</width>
     <height>600</height>
     <dcopt>ist</dcopt>
-    <adlabel>Anzeige</adlabel>
     <diuqilon>True</diuqilon>
   </place>
   <place number="3" active="true">

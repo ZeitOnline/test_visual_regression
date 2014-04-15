@@ -11,7 +11,7 @@ import zope.interface
 # @param string tile tilenumber as supplied in iqd speech
 # @param array sizes in the form 'widthxheight' i.e. '728x90'
 # @param bool diuqilon sets negative keyword targeting
-# @keyparam string label Label to be shown above the ad, defaults to 'Anzeige'
+# @param string label Label to be shown above the ad
 # @keyparam int min_width window width negativ keyword targeting
 #               is applied to, defaults to 0 (no min-width)
 # @keyparam bool active deactivate the place by configuration if needed
@@ -22,7 +22,7 @@ import zope.interface
 @zope.interface.implementer(zeit.frontend.interfaces.IPlace)
 class Place(object):
 
-    def __init__(self, tile, sizes, diuqilon, label='Anzeige',
+    def __init__(self, tile, sizes, diuqilon, label,
                  min_width=0, active=True, dcopt='ist'):
         self.name = 'tile_' + str(tile)
         self.tile = tile
@@ -30,7 +30,8 @@ class Place(object):
         self.diuqilon = diuqilon
         self.min_width = min_width
         self.dcopt = dcopt
-        self.label = label
+        if label is not None:
+            self.label = label
         if not isinstance(self.sizes, list) or self.sizes[0] is None:
             raise IndexError("Invalid Sizes Array")
         self.noscript_width_height = self.sizes[0].split('x')
@@ -52,7 +53,11 @@ def make_banner_list(banner_config):
             diuqilon = place.diuqilon
         except AttributeError:
             diuqilon = False
+        try:
+            adlabel = place.adlabel
+        except AttributeError:
+            adlabel = None
         banner_list.append(Place(
-            place.tile, sizes, diuqilon, label=place.adlabel,
+            place.tile, sizes, diuqilon, adlabel,
             min_width=0, active=place.get('active'), dcopt=place.dcopt))
     return sorted(banner_list, key=lambda place: place.tile)
