@@ -20,7 +20,7 @@ import zope.interface
 
 
 @zope.interface.implementer(zeit.frontend.interfaces.IPlace)
-class Place:
+class Place(object):
 
     def __init__(self, tile, sizes, diuqilon, label='Anzeige',
                  min_width=0, active=True, dcopt='ist'):
@@ -48,7 +48,11 @@ def make_banner_list(banner_config):
             sizes = place.multiple_sizes.split(',').strip()
         except AttributeError:
             sizes = [str(place.width) + 'x' + str(place.height)]
+        try:
+            diuqilon = place.diuqilon
+        except AttributeError:
+            diuqilon = False
         banner_list.append(Place(
-            place.tile, sizes, None, label=place.adlabel,
+            place.tile, sizes, diuqilon, label=place.adlabel,
             min_width=0, active=place.get('active'), dcopt=place.dcopt))
-    return banner_list
+    return sorted(banner_list, key=lambda place: place.tile)

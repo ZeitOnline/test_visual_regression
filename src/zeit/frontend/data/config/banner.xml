@@ -8,6 +8,7 @@
     <height>90</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <diuqilon>True</diuqilon>
   </place>
   <place number="2" active="true">
     <name>skyscraper</name>
@@ -16,6 +17,7 @@
     <height>600</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <diuqilon>True</diuqilon>
   </place>
   <place number="3" active="true">
     <name>sponsorbar</name>
