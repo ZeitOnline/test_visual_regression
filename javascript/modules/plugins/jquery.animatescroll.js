@@ -24,7 +24,7 @@
 
                 e.preventDefault();
 
-                $('html, body').animate({
+                $('html, body').stop().animate({
                     scrollTop: $(target).offset().top
                 }, 500);
             });
