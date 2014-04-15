@@ -13,14 +13,18 @@ define(['jquery'], function() {
   var $open_menu_container;
   var mobile_menu_open = false;
   var full_nav_breakpoint = 768;
+  var has_mobile_nav; // will be filled in init_mobile_nav/init_desktop_nav
 
   /**
    * [init_mobile_nav description]
    * @return {[type]}
    */
   var init_mobile_nav = function() {
+    has_mobile_nav = true;
+
     // enable hamburger
-    $main_nav_trigger.click(function(e) {
+    $main_nav_trigger.off('click.nav-handler');
+    $main_nav_trigger.on('click.nav-handler', function(e) {
       e.preventDefault();
       e.stopPropagation();
       $main_nav_content.toggleClass('is-open');
@@ -28,7 +32,8 @@ define(['jquery'], function() {
     });
 
     // enable accordeons
-    $main_nav_section_triggers.click(function(e) {
+    $main_nav_section_triggers.off('click.nav-handler');
+    $main_nav_section_triggers.on('click.nav-handler', function(e) {
       e.preventDefault();
       e.stopPropagation();
       var $current_content = $(this).next();
@@ -50,11 +55,13 @@ define(['jquery'], function() {
       var $left_arrow = $ressort_slider_container.find('.main-nav__ressorts__slider-arrow--left');
       var $right_arrow = $ressort_slider_container.find('.main-nav__ressorts__slider-arrow--right');
       var move_by = hidden_offset + $left_arrow.width()*3;
+      $left_arrow.off();
       $left_arrow.click(function() {
         $ressort_slider_strip.css('left', 0);
         $right_arrow.removeClass('is-inactive');
         $left_arrow.addClass('is-inactive');
       });
+      $right_arrow.off();
       $right_arrow.click(function() {
         $ressort_slider_strip.css('left', -1 * move_by);
         $left_arrow.removeClass('is-inactive');
@@ -68,11 +75,14 @@ define(['jquery'], function() {
    * @return {[type]}
    */
   var init_desktop_nav = function() {
+    has_mobile_nav = false;
+
     // disable hover fallback
     $main_nav.removeClass('has-hover');
 
     // enable drop downs
-    $main_nav_section_triggers.click(function(e) {
+    $main_nav_section_triggers.off('click.nav-handler');
+    $main_nav_section_triggers.on('click.nav-handler', function(e) {
       e.preventDefault();
       e.stopPropagation();
 
@@ -130,6 +140,15 @@ define(['jquery'], function() {
     // close all menus whenever user clicks anywhere else
     $('body').click(function(e) {
       close_open_menu();
+    });
+
+    // deliver the right navigation type on window resize
+    $(window).resize(function() {
+        if ( !has_mobile_nav && (window.innerWidth < full_nav_breakpoint) ) {
+            init_mobile_nav();
+        } else if ( has_mobile_nav && (window.innerWidth >= full_nav_breakpoint) ) {
+            init_desktop_nav();
+        }
     });
   };
 
