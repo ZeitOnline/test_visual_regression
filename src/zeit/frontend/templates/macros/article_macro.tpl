@@ -1,3 +1,9 @@
+{% import 'templates/macros/layout_macro.tpl' as lama with context %}
+
+{% macro place(item) -%}
+    {{lama.adplace(item)}}
+{%- endmacro %}
+
 {% macro supertitle() -%}
   <h2 class="article__head__supertitle">
       {{ view.supertitle }}

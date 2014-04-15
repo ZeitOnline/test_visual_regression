@@ -416,39 +416,12 @@ class Article(zeit.frontend.view.Base):
             channel += "/" + self.type
         return channel
 
-    # @property
-    # def banner(self):
-    #     # faking banner xml (mvp yeah you know me)
-    #     return {
-    #         'superbanner': {
-    #             'name': 'superbanner',
-    #             'tile': '1',
-    #             'sizes': ['728x90'],
-    #             'dcopt': 'ist',
-    #             'label': 'anzeige',
-    #             'noscript_width_height': ('728', '90'),
-    #             'diuqilon': True,
-    #             'min_width': 768
-    #         },
-    #         'skyscraper': {
-    #             'name': 'skyscraper',
-    #             'tile': '2',
-    #             'sizes': ['120x600'],
-    #             'dcopt': 'ist',
-    #             'adlabel': 'Anzeige',
-    #             'noscript_width_height': ('120', '600'),
-    #             'diuqilon': True,
-    #             'min_width': 768
-    #         },
-    #     }
-
 
     def banner(self, tile):
-        _banner_list = zeit.frontend.banner.banner_list
-        for index, banner in enumerate(_banner_list):
-            if banner.tile == tile:
-                return banner
-        return None
+        try:
+            return zeit.frontend.banner.banner_list[tile-1]
+        except IndexError:
+            return None
 
 
     @property
