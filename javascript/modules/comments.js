@@ -60,7 +60,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         window.scrollTo(x, y);
 
         form.elements.pid.value = cid;
-        node.html(html).find("a[href^='#']").animateScroll();
+        node.html(html);
     };
 
     /**
@@ -158,8 +158,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments_body.on('click', '.js-cancel-report', cancelReport);
         $comments_trigger.click(toggleComments);
         $(window).on('resize', updateLayout);
-        // enable animation of dynamically added anchor links
-        $comments_body.on('click', ".js-cancel-report a[href^='#']", function(e){ $(this).animateScroll(); });
 
         // mimic hover for the sake of grunticons - change later (SVG Sprites FTW)
         $('.icon-flag').hover(function() {
