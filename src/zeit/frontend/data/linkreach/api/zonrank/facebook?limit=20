@@ -1,0 +1,204 @@
+[
+
+    {
+        "location": "/sport/2014-04/dortmund-madrid-wunder-aus",
+        "score": "16674",
+        "supertitle": "Borussia Dortmund",
+        "title": "Das schönste Aus aller Zeiten",
+        "subtitle": "Am Ende fehlte ein Tor. Doch manche Dinge sind wichtiger als das Endergebnis. Etwa die Erkenntnis, dass der Dortmunder Emotionsfußball lebendiger ist denn je zuvor. ",
+        "timestamp": 1397028277894,
+        "section": "sport",
+        "fetchedAt": 1397028602741
+    },
+    {
+        "location": "/wirtschaft/unternehmen/2014-04/lebensmittel-einzelhandel-konsum-nachhaltig",
+        "score": "5780",
+        "supertitle": "Lebensmittel",
+        "title": "Verpackungsfrei einkaufen",
+        "subtitle": "Vier Millionen Tonnen Verpackungsmüll werden in Deutschland pro Jahr produziert. Ein Geschäft in Wien zeigt, dass es auch anders geht – zum Vorteil für die Kunden.",
+        "timestamp": 1396881951913,
+        "section": "wirtschaft",
+        "fetchedAt": 1396882202702
+    },
+    {
+        "location": "/gesellschaft/2014-03/pflichtbewusstsein-selbstverwirklichung",
+        "score": "2391",
+        "supertitle": "PflichtbewusstseinThemenwoche Perfektes Leben",
+        "title": "Du bist schuldThemenwoche Perfektes LebenDie Texte der Woche",
+        "subtitle": "Zuständig sein, allen Erwartungen gerecht werden, moralisch handeln: Dauernd tun wir etwas, obwohl wir nicht wollen. Zeit, sich vom Pflichtbewusstsein zu verabschieden. ",
+        "timestamp": 1397028428816,
+        "section": "gesellschaft",
+        "fetchedAt": 1397028603241
+    },
+    {
+        "location": "/kultur/2014-04/wetten-dass-ende-gottschalk",
+        "score": "1704",
+        "supertitle": "Aus für ZDF-Show",
+        "title": "Gottschalk überrascht das Ende für \"Wetten, dass?\"",
+        "subtitle": "Der dienstälteste Moderator von \"Wetten,dass...?, Thomas Gottschalk, zeigte sich verblüfft von der Absetzung der Show. Deren Schöpfer Frank Elstner reagierte betroffen.",
+        "timestamp": 1396758688729,
+        "section": "kultur",
+        "fetchedAt": 1396759202287
+    },
+    {
+        "location": "/gesellschaft/zeitgeschehen/2014-04/peaches-geldof-tod",
+        "score": "1339",
+        "supertitle": "Großbritannien",
+        "title": "Peaches Geldof ist tot",
+        "subtitle": "Die 25-jährige Tochter von Rocksänger Bob Geldof ist nach Polizeiangaben verstorben. Woran sie starb, ist bisher unklar.",
+        "timestamp": 1396893107625,
+        "section": "gesellschaft",
+        "fetchedAt": 1396893302531
+    },
+    {
+        "location": "/campus/2014/03/nc-abschaffen-pro-contra",
+        "score": "1155",
+        "supertitle": "Studieren",
+        "title": "Soll der NC fallen?",
+        "subtitle": "Die deutschen Unis wehren sich mit Zulassungsbeschränkungen gegen die Studentenflut. Ist das ein Problem?",
+        "timestamp": 1396936800000,
+        "section": "studium",
+        "fetchedAt": 1396933802008
+    },
+    {
+        "location": "/politik/ausland/2014-04/fs-anja-niedringhaus",
+        "score": "1026",
+        "supertitle": "Anja Niedringhaus",
+        "title": "\"Wenn ich es nicht fotografiere, wird es nicht bekannt\"",
+        "subtitle": "Anja Niedringhaus hat sich für ihre Arbeit an die gefährlichsten Orte der Welt gewagt. Nun ist die Fotografin selbst zum Opfer von Gewalt geworden. Ihre letzten Bilder",
+        "timestamp": 1396625369108,
+        "section": "politik",
+        "fetchedAt": 1396626002954
+    },
+    {
+        "location": "/gesellschaft/zeitgeschehen/2014-04/afghanistan-fotografin-niedringhaus-tod",
+        "score": "1016",
+        "supertitle": "Anja Niedringhaus",
+        "title": "Deutsche Fotografin in Afghanistan erschossen",
+        "subtitle": "Die Journalistin der Nachrichtenagentur AP, Anja Niedringhaus, ist nach nach Polizeiangaben im Osten des Landes getötet worden – offenbar von einem Polizisten. ",
+        "timestamp": 1396599864732,
+        "section": "gesellschaft",
+        "fetchedAt": 1396599902574
+    },
+    {
+        "location": "/kultur/film/2014-04/markus-lanz-wetten-dass-offenburg",
+        "score": "989",
+        "supertitle": "Wetten, dass..?",
+        "title": "Der Glanz ist weg",
+        "subtitle": "Es ist der traurigste Abgang der Fernsehgeschichte seit dem Tod von Winnetou. \"Wetten, dass..?\" ist Geschichte und keiner scheint darüber zu trauern.",
+        "timestamp": 1396737304279,
+        "section": "kultur",
+        "fetchedAt": 1396737602478
+    },
+    {
+        "location": "/reisen/2014-02/fs-erde-luftaufnahmen",
+        "score": "938",
+        "supertitle": "Satellitenbilder",
+        "title": "Blick aus dem All",
+        "subtitle": "Abstrakte Muster und Farbspektakel: Aus der Luft betrachtet sieht die Erde berauschend schön aus. Wir zeigen Satellitenbilder des Blauen Planeten.",
+        "timestamp": 1396639722558,
+        "section": "reisen",
+        "fetchedAt": 1396640102961
+    },
+    {
+        "location": "/kultur/musik/2014-04/kurt-cobain-heimatstadt-aberdeen",
+        "score": "907",
+        "supertitle": "Kurt Cobain",
+        "title": "Der schwierige Sohn",
+        "subtitle": "Am 5. April 1994 nahm sich Kurt Cobain das Leben. Fans aus aller Welt gedenken des Sängers. Nur Cobains Heimatstadt Aberdeen tut sich schwer mit ihrem berühmten Sohn.",
+        "timestamp": 1396713772162,
+        "section": "reisen",
+        "fetchedAt": 1396714802838
+    },
+    {
+        "location": "/politik/deutschland/2014-04/europawahl-cdu",
+        "score": "812",
+        "supertitle": "Europa",
+        "title": "Merkel muss es wieder richten",
+        "subtitle": "Derselbe Slogan und selbst die Halskette kommt einem bekannt vor. Im Europawahlkampf recycelt die CDU Plakate von der Bundestagswahl. Dabei tritt Merkel gar nicht an. ",
+        "timestamp": 1396621023761,
+        "section": "politik",
+        "fetchedAt": 1396621502501
+    },
+    {
+        "location": "/politik/deutschland/2014-04/doppelte-staatsbuergerschaft-kabinett-gesetz",
+        "score": "769",
+        "supertitle": "Integration",
+        "title": "Bundesregierung beschließt doppelte Staatsbürgerschaft",
+        "subtitle": "In Deutschland aufgewachsene Kinder ausländischer Eltern müssen sich nicht mehr für eine Nationalität entscheiden. Das verabschiedete Gesetz ermöglicht ihnen zwei Pässe.",
+        "timestamp": 1396945851601,
+        "section": "politik",
+        "fetchedAt": 1396946101994
+    },
+    {
+        "location": "/karriere/2014-04/cottbus-lohndumping-anwalt-jobcenter-urteil",
+        "score": "730",
+        "supertitle": "Lohndumping",
+        "title": "Anwalt darf Stundenlohn von 1,60 Euro zahlen",
+        "subtitle": "Das Arbeitsgericht Cottbus hat die Klage eines Jobcenters wegen Lohndumping abgewiesen. Löhne von rund 1,60 Euro pro Stunde seien zwar sittenwidrig, aber nicht illegal.",
+        "timestamp": 1397057516053,
+        "section": "karriere",
+        "fetchedAt": 1397057702358
+    },
+    {
+        "location": "/wissen/2014-04/selbstverwirklichung-gerhard-schulze-interview",
+        "score": "701",
+        "supertitle": "SelbstverwirklichungThemenwoche Perfektes LebenSelbstverwirklichung",
+        "title": "\"Allein im Tun erfahren wir uns selbst\"Themenwoche Perfektes LebenDie Texte der WocheDie ErlebnisgesellschaftDrei SchemataFünf Milieus",
+        "subtitle": "Das Konzept der Selbstverwirklichung ist falsch, sagt der Sozialforscher Gerhard Schulze. Wer sich auf das Selbst beschränkt, verpasse alles andere.",
+        "timestamp": 1396865953014,
+        "section": "wissen",
+        "fetchedAt": 1396866302130
+    },
+    {
+        "location": "/politik/ausland/2014-04/ungarn-orban-wahlsieg-kommentar",
+        "score": "620",
+        "supertitle": "Ungarn",
+        "title": "Die fünf Gründe für Orbáns Wahlsieg",
+        "subtitle": "Viktor Orbán hat die Wahl in Ungarn erneut gewonnen. Die Ungarn mögen ihn. Sein Image des starken Staatsmanns ist ein Grund dafür. Ein anderer die schwache Opposition.",
+        "timestamp": 1396807552610,
+        "section": "politik",
+        "fetchedAt": 1396807802505
+    },
+    {
+        "location": "/kultur/2014-03/work-life-balance-berufung-beruf",
+        "score": "620",
+        "supertitle": "Work-Life-BalanceThemenwoche Perfektes Leben",
+        "title": "Wir fühlen uns berufenThemenwoche Perfektes LebenDie Texte der Woche",
+        "subtitle": "Beruf und Berufung werden eins, die Grenze zwischen Arbeit und Privatleben löst sich auf. Was zufrieden und glücklich machen kann, birgt eine große Gefahr. ",
+        "timestamp": 1396948082771,
+        "section": "kultur",
+        "fetchedAt": 1396948503175
+    },
+    {
+        "location": "/digital/datenschutz/2014-04/vorratsdatenspeicherung-europaeischer-gerichtshof-eugh",
+        "score": "605",
+        "supertitle": "EU",
+        "title": "Gerichtshof kippt Richtlinie zur Vorratsdatenspeicherung",
+        "subtitle": "Der Europäische Gerichtshof hat das umstrittene Gesetz zur Vorratsdatenspeicherung für unzulässig erklärt. Ohne Verdacht auf Straftaten sei es EU-rechtswidrig.",
+        "timestamp": 1396944083877,
+        "section": "digital",
+        "fetchedAt": 1396944302605
+    },
+    {
+        "location": "/politik/deutschland/2014-04/bordell-gesetz-schwesig",
+        "score": "557",
+        "supertitle": "Prostitution",
+        "title": "Schwesig will Erlaubnispflicht für Bordelle",
+        "subtitle": "Für jede Pommesbude gelten strengere Regeln als für Bordelle, klagt Familienministerin Schwesig. Sie plant härtere Regelungen, etwa bei Bordell-Neueröffnungen.",
+        "timestamp": 1397054224923,
+        "section": "politik",
+        "fetchedAt": 1397054702104
+    },
+    {
+        "location": "/2014/16/russlanddebatte-krimkrise-putin",
+        "score": "550",
+        "supertitle": "Die Deutschen und Russland",
+        "title": "Wie Putin spaltet",
+        "subtitle": "Woran liegt es, dass so viele Bürger die Krimkrise ganz anders beurteilen als Politik und Medien?",
+        "timestamp": 1397109600000,
+        "section": "politik",
+        "fetchedAt": 1397125802244
+    }
+
+]

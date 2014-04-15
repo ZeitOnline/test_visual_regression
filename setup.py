@@ -5,13 +5,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.2.17.dev0',
+    version='0.2.18.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
     install_requires=[
         'Babel',
         'cornice >= 0.16.2',
+        'colander',
         'grokcore.component',
         'iso8601',
         'lxml',

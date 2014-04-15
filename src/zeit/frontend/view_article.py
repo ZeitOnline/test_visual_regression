@@ -317,7 +317,7 @@ class Article(zeit.frontend.view.Base):
            (self.context.genre == 'analyse'):
             prefix = 'eine'
         if self.context.genre:
-            return prefix + " " + self.context.genre
+            return prefix + " " + self.context.genre.title()
         else:
             return None
 
@@ -423,11 +423,6 @@ class Article(zeit.frontend.view.Base):
         except IndexError:
             return None
 
-
-    @property
-    def comment_post_url(self):
-        return "%s/agatho/thread/%s?destination=%s" % (self.request.registry.settings.agatho_host,
-            self.request.path, self.request.url)
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

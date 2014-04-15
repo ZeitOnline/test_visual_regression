@@ -1,10 +1,13 @@
 from babel.dates import format_datetime
+from datetime import datetime
+from datetime import timedelta
 from grokcore.component import adapter, implementer
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
 from zeit.frontend.centerpage import auto_select_asset
+from zeit.frontend.centerpage import get_image_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
 import jinja2
@@ -56,6 +59,10 @@ class Application(object):
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
+
+        linkreach = maybe_convert_egg_url(self.settings['linkreach_host'])
+        self.settings['linkreach_host'] = linkreach
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
@@ -106,15 +113,21 @@ class Application(object):
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
         jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['create_image_url'] = create_image_url
+        jinja.globals['get_teaser_image'] = most_sufficient_teaser_image
         jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
-        jinja.globals['get_teaser_image'] = most_sufficient_teaser_img
         jinja.tests['elem'] = zeit.frontend.block.is_block
         jinja.filters['format_date'] = format_date
+        jinja.filters['format_date_ago'] = format_date_ago
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
         jinja.filters['auto_select_asset'] = auto_select_asset
+        jinja.filters['obj_debug'] = obj_debug
+        jinja.filters['substring_from'] = substring_from
+        jinja.filters['hide_none'] = hide_none
+        jinja.filters['get_image_metadata'] = get_image_metadata
         jinja.trim_blocks = True
         return jinja
 
@@ -260,13 +273,64 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
-def format_date(obj, type):
-    format = ""
-    if type == 'long':
-        format = "dd. MMMM yyyy, H:mm 'Uhr'"
-    elif type == 'short':
-        format = "dd. MMMM yyyy"
-    return format_datetime(obj, format, locale="de_De")
+def format_date(obj, type='short'):
+    formats = {'long': "dd. MMMM yyyy, H:mm 'Uhr'", 'short': "dd. MMMM yyyy"}
+    return format_datetime(obj, formats[type], locale="de_De")
+
+
+def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
+    #customization of https://bitbucket.org/russellballestrini/ago :)
+    delta = dt
+    if type(dt) is not type(timedelta()):
+        delta = datetime.now() - dt
+
+    the_tense = past_tense
+    if delta < timedelta(0):
+        the_tense = future_tense
+
+    delta = abs( delta )
+    d = {
+        'Jahr'   : int(delta.days / 365),
+        'Tag'    : int(delta.days % 365),
+        'Stunde'   : int(delta.seconds / 3600),
+        'Minute' : int(delta.seconds / 60) % 60,
+        'Sekunde' : delta.seconds % 60
+    }
+    hlist = []
+    count = 0
+    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
+    units_plural = { 'Jahr':'Jahre', 'Tag':'Tage', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    for unit in units:
+        unit_displayed = unit
+        if count >= precision: break # met precision
+        if d[ unit ] == 0: continue # skip 0's
+        if d[ unit ] != 1:
+            unit_displayed = units_plural[unit]
+        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        count += 1
+    human_delta = ', '.join( hlist )
+    return the_tense.format(human_delta)
+
+
+def obj_debug(value):
+    try:
+        res = []
+        for k in dir(value):
+            res.append('%r : %r;' % (k, getattr(value, k)))
+        return '\n'.join(res)
+    except AttributeError:
+        return False
+
+
+def substring_from(string, find):
+    return string.split(find)[-1]
+
+
+def hide_none(string):
+    if string is None:
+        return ''
+    else:
+        return string
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
@@ -278,6 +342,17 @@ default_images_sizes = {
     'large': (800, 600),
     'small': (200, 300),
     '540x304': (200, 300),
+    'teaser_classic': (300, 169),
+    'teaser_tile': (300, 300),
+    'teaser_series_landscape': (640, 427),
+    'teaser_series_square': (640, 640),
+    'teaser_series_portrait': (640, 960),
+    'teaser_column_dream': (640, 800),
+    'teaser_column_snap_landscape': (640, 360),
+    'teaser_column_snap_portrait': (640, 960),
+    'hp_lead_square': (640, 640),
+    'hp_lead_portrait': (640, 864),
+    'hp_lead_superspecial': (980, 551),
 }
 
 
@@ -321,21 +396,40 @@ def most_sufficient_teaser_tpl(block_layout,
     return map(func, combinations)
 
 
-def most_sufficient_teaser_img(teaser_block,
-                               teaser,
-                               file_type='jpg'):
+def most_sufficient_teaser_image(teaser_block,
+                                 teaser,
+                                 asset_type=None,
+                                 file_type='jpg'):
     image_pattern = teaser_block.layout.image_pattern
-    asset = auto_select_asset(teaser)
-    if asset is None:
+    if asset_type is None:
+        asset = auto_select_asset(teaser)
+    elif asset_type == 'image':
+        asset = get_image_asset(teaser)
+    else:
+        raise KeyError(asset_type)
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
     image_base_name = re.split('/', asset.uniqueId)[-1]
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
         teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
-        image_url = default_image_url(
-            teaser_image, image_pattern=image_pattern)
-        return image_url
+        return teaser_image
+    except TypeError:
+        return None
+
+
+def create_image_url(teaser_block, image):
+    image_pattern = teaser_block.layout.image_pattern
+    image_url = default_image_url(
+        image, image_pattern=image_pattern)
+    return image_url
+
+
+def get_image_metadata(image):
+    try:
+        image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
+        return image_metadata
     except TypeError:
         return None
 

@@ -29,7 +29,17 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-    'agatho_host': u'file://%s/' % path.join(path.dirname(path.abspath(frontend.__file__)), 'data', 'comments'),
+    'agatho_host': u'file://%s/' % path.join(
+            path.dirname(path.abspath(frontend.__file__)),
+            'data',
+            'comments'
+        ),
+    'linkreach_host': u'file://%s/' % path.join(
+                path.dirname(path.abspath(frontend.__file__)),
+                'data',
+                'linkreach',
+                'api',
+            ),
     'proxy_url' : '',
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
@@ -107,6 +117,11 @@ def dummy_request(request, config):
 def agatho():
     from zeit.frontend.comments import Agatho
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+
+@pytest.fixture
+def linkreach():
+    from zeit.frontend.reach import LinkReach
+    return LinkReach(linkreach_host=settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')
