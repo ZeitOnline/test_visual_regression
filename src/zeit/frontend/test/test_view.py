@@ -278,14 +278,14 @@ def test_article08_has_correct_genre(testserver):
     # 'ein'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view_article.Article(context, '')
-    assert article_view.genre == 'ein kommentar'
+    assert article_view.genre == 'ein Kommentar'
 
 
 def test_article09_has_correct_genre(testserver):
     # 'eine'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     article_view = view_article.Article(context, '')
-    assert article_view.genre == 'eine glosse'
+    assert article_view.genre == 'eine Glosse'
 
 
 def test_article05_has_no_genre(testserver):

@@ -323,6 +323,7 @@ def hide_none(string):
     else:
         return string
 
+
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
