@@ -248,25 +248,38 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(indented, img_url, name, timestamp, role, text) -%}
-    <article class="comment {% if indented -%}is-indented{%- endif %}">
-        <div class="comment__head">
-            {% if img_url -%}
-                <img src="{{img_url}}" class="comment__head__img" />
-            {%- endif %}
-            <div class="comment__head__meta">
-                <strong class="comment__head__meta__name">{{name}}</strong>
-                <a href="#" class="comment__head__meta__date">{{timestamp}}</a>
-            </div>
-        </div>
-        <div class="comment__body">
-            <p>{{text|safe}}</p>
-        </div>
-        <aside class="comment__tools">
-            <a class="comment__tools__flag icon-flag">Kommentar melden</a>
-            {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
-        </aside>
+{% macro comment(indented, recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
+    <article class="comment {% if indented -%}is-indented{%- endif %}" id="{{cid}}">
+        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid)}}
     </article>
+{%- endmacro %}
+
+{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
+    <article class="comment" id="{{cid}}">
+        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid)}}
+    </article>
+{%- endmacro %}
+
+{% macro comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
+    <div class="comment__head">
+        {% if img_url -%}
+            <img src="{{img_url}}" class="comment__head__img" />
+        {%- endif %}
+        <div class="comment__head__meta">
+            <strong class="comment__head__meta__name">{{name}}</strong>
+            <a href="#{{cid}}" class="comment__head__meta__date">{{timestamp | format_date_ago()}}</a>
+            {% if role -%}
+              <div class="comment__head__meta__label">{{role}}</div>
+            {%- endif %}
+        </div>
+    </div>
+    <div class="comment__body">
+        <p>{{text|safe}}</p>
+    </div>
+    <aside class="comment__tools">
+        {% if my_uid > 0 %}<a class="comment__tools__flag icon-flag">Kommentar melden</a>{%- endif %}
+        {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
+    </aside>
 {%- endmacro %}
 
 {% macro comments(comments) -%}
@@ -281,7 +294,7 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            <form action="{{comment_post_url}}" method="POST" class="comments__head__form" id="js-comments-head-form">
+            <form action="{{comments['comment_post_url']}}" method="POST" class="comments__head__form" id="js-comments-head-form">
                 <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
                 <input id="node_id" type="hidden" value="{{comments['nid']}}" name="nid">
@@ -306,6 +319,11 @@
                 <div class="tabs__content">
                     <a name="tab2"></a>
                     <div class="comments__list">
+                        {% for commentdict in comments['comments'] %}
+                            {% if commentdict['recommended'] -%}
+                                {{ comment_recommend(**commentdict) }}
+                            {%- endif %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="comments__body__newer">

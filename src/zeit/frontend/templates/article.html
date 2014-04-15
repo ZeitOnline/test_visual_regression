@@ -38,7 +38,9 @@
                 </div>
                 {% endif %}
 
-                {{ blocks.comments(view.comments) }}
+                {% if view.comments %}
+                    {{ blocks.comments(view.comments) }}
+                {% endif %}
 
                 {{ blocks.focussed_nextread(view.focussed_nextread) }}
 
