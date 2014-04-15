@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.2.18 (unreleased)
+0.2.18 (2014-04-15)
 -------------------
 
 - do article cleanup (hide tags, rework header2, restyle caption, capitalize genre, small style changes)
