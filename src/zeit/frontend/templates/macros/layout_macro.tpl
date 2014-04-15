@@ -1,27 +1,27 @@
 
 {% macro ga_tracking() -%}
 <!-- ga tracking -->
-        <script type="text/javascript"> 
-            var _gaq = _gaq || []; 
-            _gaq.push(['_setAccount', 'UA-18122964-1']); 
-            _gaq.push(['_setDomainName', '.zeit.de']); 
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-18122964-1']);
+            _gaq.push(['_setDomainName', '.zeit.de']);
             _gaq.push (['_gat._anonymizeIp']);
-            _gaq.push(['_trackPageview']); 
-            (function() { 
-            var ga = document.createElement('script'); 
-            ga.type = 'text/javascript'; 
-            ga.async = true; 
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
-            var s = document.getElementsByTagName('script')[0]; 
-            s.parentNode.insertBefore(ga, s); })(); 
-        </script>  
+            _gaq.push(['_trackPageview']);
+            (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s); })();
+        </script>
 {%- endmacro %}
 
 {% macro cc_tracking(channel) -%}
 <!-- cc tracking -->
     <script type="text/javascript">
         document.write('<img alt="" height="1" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'" width="1" >');
-    </script> 
+    </script>
 {%- endmacro %}
 
 {% macro meetrics_tracking() -%}
@@ -54,7 +54,7 @@
                 3: "{{obj.ressort}}",
                 4: "Online"
             };
-            
+
             {% if obj.type == 'article' -%}
                 wt.customParameter = {
                     1: "{% if obj.author %}{{obj.author.name}}{% endif %}",
@@ -66,9 +66,9 @@
                     9: "{{obj.banner_channel}}"
                 };
              {%- endif %}
-           
+
             wt.contentId = Z_WT_KENNUNG;
-            wt.sendinfo();        
+            wt.sendinfo();
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
@@ -134,7 +134,7 @@
 <script type="text/javascript">
     // negative keyword 'diuqilon'
     // todo: if we get a billboard, we need more options (NB)
-    var diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
+    window.diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
@@ -292,7 +292,7 @@
         var Z_IVW_RESSORT = "{{channel}}";
         var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
         document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"\" width=\"1\" height=\"1\" />");
-    </script> 
+    </script>
     <noscript>
         <img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
     </noscript>
@@ -308,7 +308,7 @@
 
         var iam_data = {
             "st" : "",
-            "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text", 
+            "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text",
             "sv" : "ke",
             "co" : "URL: {{request.path_info}}"
         };
@@ -318,10 +318,10 @@
             iam_data.st = "zeitonl";
         }else{
         //mobile
-           iam_data.st = "mobzeit"; 
+           iam_data.st = "mobzeit";
         }
 
-        iom.c(iam_data,1); 
+        iom.c(iam_data,1);
     </script>
 {%- endmacro %}
 
@@ -376,7 +376,7 @@
     <div id="iqadtile{{banner.tile}}">
         <script type="text/javascript">
             if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
-            document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}diuqilon{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+            document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
             }
         </script>
         <noscript>
