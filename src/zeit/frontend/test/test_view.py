@@ -346,6 +346,7 @@ def test_article06_has_correct_sharing_img_video_still(testserver):
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
+    page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-x'
     with pytest.raises(HTTPNotFound):
         page()
@@ -354,6 +355,7 @@ def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
 def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
+    page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-'
     with pytest.raises(HTTPNotFound):
         page()
@@ -362,20 +364,25 @@ def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver):
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
+    page.request.registry.settings = {}
     page.request.path_info = u'article/03/seite-5'
     with pytest.raises(HTTPNotFound):
         page()
 
+
 def test_ArticlePage_should_not_work_if_view_name_is_seite_1(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
+    page.request.registry.settings = {}
     page.request.path_info = u'article/03/seite-1'
     with pytest.raises(HTTPNotFound):
         page()
 
+
 def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
+    page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-3'
     page()
     assert len(page.pages) == 3
