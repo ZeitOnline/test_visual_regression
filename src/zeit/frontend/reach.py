@@ -25,6 +25,9 @@ class LinkReach(object):
     def fetch_data(self, service, limit):
         if service not in self.services:
             raise UnprovidedService('No service named: ' + service)
+        if not self.entry_point:
+            return []
+
         url = '%s/zonrank/%s?limit=%s' % (
             self.entry_point,
             service,
