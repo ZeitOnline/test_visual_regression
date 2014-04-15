@@ -290,7 +290,7 @@ def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
     hlist = []
     count = 0
     units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
-    units_plural = { 'Jahr':'Jahre', 'Tag':'Tage', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    units_plural = { 'Jahr':'Jahren', 'Tag':'Tagen', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
     for unit in units:
         unit_displayed = unit
         if count >= precision: break # met precision
