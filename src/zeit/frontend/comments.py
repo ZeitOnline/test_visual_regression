@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+import urlparse
+import string
 from datetime import datetime
 from lxml import etree
-import urlparse
 
 
 def path_of_article(unique_id):
@@ -83,49 +85,68 @@ def _place_answers_under_parent(xml):
     return transform(xml)
 
 
-def comment_as_json(comment):
+def comment_as_json(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
+    picture_url = u'http://community.zeit.de/files/pictures/keinbild.gif'
+    role_labels = []
+    gender = 'undefined'
     if comment.xpath('author/@roles'):
-        roles = comment.xpath('author/@roles')[0]
-    else:
-        roles = ''
+        roles = string.split(comment.xpath('author/@roles')[0], ",")
+        try:
+            gender = comment.xpath('author/@sex')[0]
+        except IndexError:
+            pass
+        roles_words = {"author_weiblich": "Redaktion",
+                       u"author_männlich": "Redaktion",
+                       u"author_undefined": "Redaktion",
+                       "expert_weiblich": "Expertin",
+                       u"expert_männlich": "Experte",
+                       "freelancer_weiblich": "Freie Autorin",
+                       u"freelancer_männlich": "Freier Autor"}
+        role_labels = [roles_words['%s_%s' % (role, gender)] for role in roles
+                       if '%s_%s' % (role, gender) in roles_words]
 
+    if comment.xpath('author/@picture'):
+        picture_url = request.registry.settings.agatho_host + '/' + comment.xpath('author/@picture')[0]
     if comment.xpath('content/text()'):
         content = comment.xpath('content/text()')[0]
     else:
         content = '[fehler]'
-    return dict(indented=bool(len(comment.xpath('inreply'))),
-                img_url=u'',
-                name=comment.xpath('author/name/text()')[0],
-                timestamp=datetime(
-                    int(comment.xpath('date/year/text()')[0]),
-                    int(comment.xpath('date/month/text()')[0]),
-                    int(comment.xpath('date/day/text()')[0]),
-                    int(comment.xpath('date/hour/text()')[0]),
-                    int(comment.xpath('date/minute/text()')[0])),
-                role=roles,
-                text=content)
+
+    return dict(
+        indented=bool(len(comment.xpath('inreply'))),
+        recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
+        img_url=picture_url,
+        name=comment.xpath('author/name/text()')[0],
+        timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
+                           int(comment.xpath('date/month/text()')[0]),
+                           int(comment.xpath('date/day/text()')[0]),
+                           int(comment.xpath('date/hour/text()')[0]),
+                           int(comment.xpath('date/minute/text()')[0])),
+        text=content,
+        role=', '.join(role_labels),
+        my_uid=request.cookies.get('drupal-userid', 0),
+        cid=comment.xpath('./@id')[0])
 
 
 def get_thread(unique_id, request):
-    """ return a dict representation of the comment thread of
-        the given article"""
-
-    agatho_host = request.registry.settings.get('agatho_host')
-    if not agatho_host:
-        return None
-    api = Agatho('%s/agatho/thread/' % agatho_host)
+    """ return a dict representation of the
+        comment thread of the given article"""
+    api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
     thread = api.collection_get(unique_id)
     if thread is not None:
-        return dict(
-            comments=[comment_as_json(comment)
-                      for comment in thread.xpath('//comment')],
-            comment_count=int(thread.xpath('/comments/comment_count')[0].text),
-            nid=thread.xpath('/comments/nid')[0].text,
-            my_uid=request.cookies.get('drupal-userid', 0))
+        try:
+            return dict(
+                comments=[comment_as_json(comment, request) for comment in thread.xpath('//comment')],
+                comment_count=int(thread.xpath('/comments/comment_count')[0].text),
+                nid=thread.xpath('/comments/nid')[0].text,
+                comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
+                my_uid=request.cookies.get('drupal-userid', 0))
+        except AssertionError:
+            return None
     else:
-        return dict(comments=[], comment_count=0)
+        return None
 
 
 from cornice.resource import resource, view
@@ -133,12 +154,13 @@ from zeit.frontend import COMMENT_COLLECTION_PATH, COMMENT_PATH
 
 
 def unique_id_factory(request):
-    return '/'.join(
-        [u'http://xml.zeit.de'] + list(request.matchdict['subpath']))
+    str = [u'http://xml.zeit.de'] + list(request.matchdict['subpath'])
+    return '/'.join(str)
 
 
 @resource(collection_path=COMMENT_COLLECTION_PATH,
-          path=COMMENT_PATH, factory=unique_id_factory)
+          path=COMMENT_PATH,
+          factory=unique_id_factory)
 class Comment(object):
 
     def __init__(self, context, request):

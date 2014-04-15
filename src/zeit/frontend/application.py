@@ -41,6 +41,10 @@ class Application(object):
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
+
+        self.settings['linkreach_host'] = maybe_convert_egg_url(
+            self.settings.get('linkreach_host', ''))
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
@@ -60,7 +64,7 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
 
-        #ToDo: Is this still needed. Can it be removed?
+        # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         def asset_url(request, path, **kw):
@@ -104,7 +108,10 @@ class Application(object):
         jinja.globals['get_teaser_template'] = (
             zeit.frontend.jinja.most_sufficient_teaser_tpl)
         jinja.globals['get_teaser_image'] = (
-            zeit.frontend.jinja.most_sufficient_teaser_img)
+            zeit.frontend.jinja.most_sufficient_teaser_image)
+        jinja.globals['create_image_url'] = (
+            zeit.frontend.jinja.create_image_url)
+
         jinja.tests['elem'] = zeit.frontend.block.is_block
 
         # XXX Use scanning to register filters instead of listing them here
@@ -112,8 +119,11 @@ class Application(object):
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['auto_select_asset'] = (
             zeit.frontend.centerpage.auto_select_asset)
-        for name in ['format_date', 'replace_list_seperator', 'translate_url',
-                     'default_image_url', 'obj_debug', 'substring_from']:
+        for name in [
+                'format_date', 'format_date_ago',
+                'replace_list_seperator', 'translate_url',
+                'default_image_url', 'get_image_metadata',
+                'obj_debug', 'substring_from', 'hide_none']:
             jinja.filters[name] = getattr(zeit.frontend.jinja, name)
 
         return jinja

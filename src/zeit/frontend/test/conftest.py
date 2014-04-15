@@ -24,6 +24,8 @@ settings = {
 
     'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/comments'),
+    'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/linkreach/api'),
 
     'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
 
@@ -64,7 +66,7 @@ settings = {
 
 browsers = {
     'firefox': webdriver.Firefox
-    #'phantomjs': webdriver.PhantomJS,
+    # 'phantomjs': webdriver.PhantomJS,
 }
 
 
@@ -103,6 +105,12 @@ def dummy_request(request, config):
 def agatho():
     from zeit.frontend.comments import Agatho
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+
+
+@pytest.fixture
+def linkreach():
+    from zeit.frontend.reach import LinkReach
+    return LinkReach(linkreach_host=settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')
