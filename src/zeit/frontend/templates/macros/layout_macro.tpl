@@ -200,12 +200,12 @@
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="{{request.asset_url('img/zeit-logo--magazin.png')}}" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
-                    <div class="main-nav__menu__head__headline">ZEIT Magazin</div>
+                    <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
@@ -226,7 +226,7 @@
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
                         <a href="http://zeit.de"
-                        class="is-standalone-link">ZEIT ONLINE</a>
+                        class="is-standalone-link">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
@@ -391,35 +391,3 @@
         </div>
     </div>
 {%- endmacro %}
-
-{% macro main_nav_compact(obj,request) -%}
-    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <div class="main-nav__wrap">
-            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
-                <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    <img src="{{request.asset_url('img/zeit-logo--magazin.png')}}" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
-                </div>
-            </a>
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing scaled-image">
-                    <a
-                    href="http://twitter.com/home?status={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a>
-
-                    {%- if obj.sharing_img.video_still -%}
-                        <a
-                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img.video_still}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
-                    {%- else -%}
-                        <a
-                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
-                    {%- endif -%}
-
-                    <a
-                    href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
-                </aside>
-            </div>
-        </div>
-    </nav>
-
-{%- endmacro %}
-

@@ -60,8 +60,8 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
-        linkreach = maybe_convert_egg_url(self.settings['linkreach_host'])
-        self.settings['linkreach_host'] = linkreach
+        self.settings['linkreach_host'] = maybe_convert_egg_url(
+            self.settings.get('linkreach_host', ''))
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
@@ -299,7 +299,7 @@ def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
     hlist = []
     count = 0
     units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
-    units_plural = { 'Jahr':'Jahre', 'Tag':'Tage', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    units_plural = { 'Jahr':'Jahren', 'Tag':'Tagen', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
     for unit in units:
         unit_displayed = unit
         if count >= precision: break # met precision
