@@ -12,6 +12,7 @@ setup(
     install_requires=[
         'Babel',
         'cornice >= 0.16.2',
+        'colander',
         'grokcore.component',
         'iso8601',
         'lxml',
@@ -25,6 +26,7 @@ setup(
         'repoze.vhm',
         'setuptools',
         'simplejson',
+        'zc.iso8601',
         'zeit.cms',
         'zeit.connector >= 2.3.2.dev0',
         'zeit.content.article',
@@ -41,6 +43,7 @@ setup(
         'zeit.find',
         'zeit.intrafind',
         'zeit.magazin',
+        'zeit.wysiwyg',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',

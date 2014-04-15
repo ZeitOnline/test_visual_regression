@@ -9,10 +9,10 @@ Available attributes:
 #}
 {% extends "templates/inc/teaser/teaser_default_default_default.html" -%}
 {% block asset %}
-{% set teaser_image = get_teaser_image(teaser_block, teaser) -%}
-{% set teaser_image_url = create_image_url(teaser_block, teaser) | translate_url -%}
-{%- set obj = teaser | auto_select_asset %}
-{% if teaser_image_url %}
-<img class='teaser__default__image' src='{{teaser_image_url}}' title='' alt='' />
+{%- set image = get_teaser_image(teaser_block, teaser) %}
+{%- set image_url = create_image_url(teaser_block, image) | translate_url %}
+{%- set image_meta = image | get_image_metadata %}
+{% if image_url %}
+<img class='teaser__default__image' src='{{image_url}}' alt="{{image_meta.alt}}" title="{{image_meta.title}}" />
 {% endif %}
 {% endblock %}

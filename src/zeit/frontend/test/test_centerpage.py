@@ -1,3 +1,4 @@
+from zeit.frontend import view_centerpage
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
@@ -119,11 +120,14 @@ def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
             ".cp__lead-leader__title__wrap")
         link_wrap = element.find_elements_by_tag_name(
             "a")
+        image_wrap = element.find_elements_by_css_selector(
+            ".cp__lead-leader__image")
         assert len(text_wrap) != 0
         assert len(link_wrap) == 3
+        assert len(image_wrap) != 0
 
 
-def test_cp_leadteaser_has_expected_content(selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_text_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
@@ -142,10 +146,108 @@ def test_cp_leadteaser_has_expected_content(selenium_driver, testserver):
             ' zum Katzenbild passen.'
 
 
+def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__lead-leader__image")
+    assert len(wrap) != 0
+    for element in wrap:
+        img = element.find_element_by_tag_name(
+            "img")
+        assert img.get_attribute("src") == 'http://'\
+            '127.0.0.1:6543/centerpage/katzencontent/'\
+            'bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/'\
+            'katzencontent-540x304.jpg'
+        assert img.get_attribute("alt") == 'Die ist der Alttest'
+        assert img.get_attribute("title") == 'Katze!'
+
+
 def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp__lead-leader__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        link_wrap = element.find_elements_by_tag_name("a")
+        assert len(link_wrap) == 3
+        for link in link_wrap:
+            assert link.get_attribute("href") == 'http://'\
+                '127.0.0.1:6543/centerpage/article_image_asset'
+
+
+def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        text_wrap = element.find_elements_by_css_selector(
+            ".cp__buttons__title__wrap")
+        link_wrap = element.find_elements_by_tag_name(
+            "a")
+        image_wrap = element.find_elements_by_css_selector(
+            ".cp__buttons__image")
+        assert len(text_wrap) != 0
+        assert len(link_wrap) == 3
+        assert len(image_wrap) != 0
+
+
+def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__buttons__image")
+    assert len(wrap) != 0
+    for element in wrap:
+        img = element.find_element_by_tag_name(
+            "img")
+        assert img.get_attribute("src") == 'http://'\
+            '127.0.0.1:6543/centerpage/katzencontent/'\
+            'bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/'\
+            'katzencontent-148x84.jpg'
+        assert img.get_attribute("alt") == 'Die ist der Alttest'
+        assert img.get_attribute("title") == 'Katze!'
+
+
+def test_cp_button_has_expected_structure(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        text_wrap = element.find_elements_by_css_selector(
+            ".cp__buttons__title__wrap")
+        link_wrap = element.find_elements_by_tag_name(
+            "a")
+        assert len(text_wrap) != 0
+        assert len(link_wrap) == 2
+
+
+def test_cp_button_has_expected_text_content(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__buttons__title__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        supertitle = element.find_element_by_css_selector(
+            ".cp__buttons__supertitle")
+        title = element.find_element_by_css_selector(".cp__buttons__title")
+        subtitle = element.find_element_by_css_selector(
+            ".cp__buttons__subtitle")
+        assert unicode(supertitle.text) == u'Article Image Asset Spitzmarke'
+        assert unicode(title.text) == u'Article Image Asset Titel'
+        assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
+            ' z.B. lorem ipsum sein.'\
+            ' Oder was anderes nicht ganz so langweiliges,'\
+            ' zum Katzenbild passen.'
+
+
+def test_cp_button_has_expected_links(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
@@ -198,7 +300,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'Es leben die Skispringenden Sportredakteure!' == \
             unicode(subtitle.text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert 'und der Titel dazu' == unicode(h1.text)
+        assert u'\u00ABund der Titel dazu\u00BB' == unicode(h1.text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
@@ -232,11 +334,13 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
 
         #content
         assert src_img == unicode(img.get_attribute("src"))
-        assert unicode(h1.text) == 'Article Image Asset Titel'
+        assert unicode(h1.text) == u'\u00ABArticle Image Asset Titel\u00BB'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\
             ' zum Katzenbild passen.'
+        assert img.get_attribute("alt") == 'Die ist der Alttest'
+        assert img.get_attribute("title") == 'Katze!'
 
         #links
         assert len(a) == 3
@@ -343,3 +447,10 @@ def test_image_metadata_should_be_accessible(testserver):
     assert img_meta.title == u'Katze!'
     assert img_meta.alt == u'Die ist der Alttest'
     assert img_meta.caption == u'Die ist der image sub text'
+
+
+def test_get_reaches_from_centerpage_view(dummy_request):
+    view = view_centerpage.Centerpage('', dummy_request)
+    assert len(view.global_twitter_shares) == 10
+    assert len(view.global_googleplus_shares) == 10
+    assert len(view.global_facebook_shares) == 10

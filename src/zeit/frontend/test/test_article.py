@@ -257,3 +257,12 @@ def test_article_1_10_produces_no_error(selenium_driver, testserver):
     assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
     driver.get('%s/artikel/10' % testserver.url)
     assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+
+
+def test_article_header2_has_correct_subtitle(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/header2' % testserver.url)
+    text = driver.find_element_by_class_name('article__head__subtitle')\
+        .text.strip()
+    assert text == u'\u00BBWie viele Fl\u00FCchtlingskinder bin '\
+        u'ich eine Suchende, Getriebene.\u00AB'
