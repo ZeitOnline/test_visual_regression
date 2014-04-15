@@ -53,6 +53,7 @@
 
 
 .comments
+  +tablet
   z-index: 20
   display: none
   margin-left: -$page-padding--small
@@ -87,7 +88,6 @@
 .comments__head
   margin-top: $page-padding
   margin-bottom: $large
-  text-align: center
 
 .comments__head__form
   +padded
@@ -99,6 +99,10 @@
     margin-bottom: $thin
   input[type=submit]
     float: right
+
+.comments__recipient
+  color: $grey
+  padding-top: $fine // match baseline of submit button
 
 .comments__list
   +translateZ(0)
@@ -150,11 +154,8 @@
 .comment
   margin-bottom: $medium
   &.is-indented
-    margin-top: -$medium
     padding-left: $small
     border-left: 2px solid $grey--light
-    + .is-indented
-      margin-top: -$medium
 
 
 .comment__head
@@ -179,14 +180,12 @@
   margin-right: $fine
 
 .comment__head__meta__label
-  +tablet
   display: block
   font-size: $font-xs
   color: $grey
 
 .comment__head__meta__date
   +inline-block
-  +tablet
   +link-colors($grey, $grey, $grey, $grey, $grey)
   +on-interaction
     border-color: $grey
@@ -196,13 +195,11 @@
 
 
 .comment__body
-  +tablet
   color: $grey--mid
-  margin-left: 0
-  margin-top: -0.75em
   font-size: $font-s
   p
-    margin-left: 0
+    margin-left: 0 // this is because of .article__body p:first-of-type, on tablets that makes room for the comments trigger
+    max-width: none // this is because of .copy p, .article__body p
     &:last-of-type
       margin-bottom: 0
 
@@ -215,24 +212,21 @@
 .comment__tools__flag
   +inline-block
   +hide-text
-  +background-size(70%, 70%)
-  +opacity(0.5)
-  background-position: center center
   cursor: pointer
-  margin-left: $thin
+  margin-left: $small
   border: none !important
   text-decoration: none
-  width: 30px
-  height: 30px
-  max-width: 30px
-  max-height: 30px
-  -webkit-filter: grayscale(1)
-  +on-interaction
-    +opacity(1)
-    -webkit-filter: grayscale(0)
+  width: 20px
+  height: 20px
 
-.comment__tools__flag
-  +background-size(60%, 60%)
+.comment__report__form
+  margin-bottom: $medium
+
+.comments__report__actions
+  text-align: right
+  .button
+    margin-left: $thin
+    vertical-align: baseline
 
 .page-wrap--inner.show-comments
   +respond-min($comments__break-outside)
