@@ -262,38 +262,32 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(indented, recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
-    <article class="comment {% if indented -%}is-indented{%- endif %}" id="{{cid}}">
-        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid)}}
-    </article>
-{%- endmacro %}
-
-{% macro comment_recommend(indented, recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
-    <article class="comment" id="{{cid}}">
-        {{comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid)}}
-    </article>
-{%- endmacro %}
-
-{% macro comment_inner(recommended, img_url, name, timestamp, role, text, my_uid, cid) -%}
-    <div class="comment__head">
-        {% if img_url -%}
-            <img src="{{img_url}}" class="comment__head__img" />
-        {%- endif %}
-        <div class="comment__head__meta">
-            <strong class="comment__head__meta__name">{{name}}</strong>
-            <a href="#{{cid}}" class="comment__head__meta__date">{{timestamp | format_date_ago()}}</a>
-            {% if role -%}
-              <div class="comment__head__meta__label">{{role}}</div>
+{% macro comment(comment, flat) -%}
+    <article class="comment{% if comment.indented and not flat %} is-indented{% endif %}" id="{{comment.cid}}">
+        <div class="comment__head">
+            {% if comment.img_url -%}
+                <img src="{{comment.img_url}}" class="comment__head__img" />
             {%- endif %}
+            <div class="comment__head__meta">
+                <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
+                <a href="#{{comment.cid}}" class="comment__head__meta__date">{{comment.timestamp | format_date_ago()}}</a>
+                {% if comment.role -%}
+                  <div class="comment__head__meta__label">{{comment.role}}</div>
+                {%- endif %}
+            </div>
         </div>
-    </div>
-    <div class="comment__body">
-        <p>{{text|safe}}</p>
-    </div>
-    <aside class="comment__tools">
-        {% if my_uid > 0 %}<a class="comment__tools__flag icon-flag">Kommentar melden</a>{%- endif %}
-        {% if not indented -%}<a href="#js-comments-head-form" class="comment__tools__reply icon-reply">Auf Kommentar antworten</a>{%- endif %}
-    </aside>
+        <div class="comment__body">
+            {{comment.text|safe}}
+        </div>
+        <aside class="comment__tools">
+            {% if not comment.indented -%}
+            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}">
+                Auf Kommentar antworten
+            </a>
+            {%- endif %}
+            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}">Kommentar melden</a>{%- endif %}
+        </aside>
+    </article>
 {%- endmacro %}
 
 {% macro comments(comments) -%}
@@ -308,12 +302,13 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comments__head__form" id="js-comments-head-form">
-                <textarea id="comment_msg" name="comment" placeholder="Ich denke …"></textarea>
+            <form action="{{comments['comment_post_url']}}" method="POST" class="comments__head__form" id="js-comments-form">
+                <textarea name="comment" placeholder="Ich denke …"></textarea>
                 <input type="submit" class="button" value="Kommentieren" />
-                <input id="node_id" type="hidden" value="{{comments['nid']}}" name="nid">
-                <input id="parent_id" type="hidden" value="" name="pid">
-                <input id="user_id" type="hidden" value="{{comments['my_uid']}}" name="uid">
+                <input type="hidden" name="nid" value="{{comments['nid']}}">
+                <input type="hidden" name="pid" value="">
+                <input type="hidden" name="uid" value="{{comments['my_uid']}}">
+                <div class="comments__recipient"></div>
             </form>
         </div>
         <div class="tabs has-2">
@@ -326,7 +321,7 @@
                     <a name="tab1"></a>
                     <div class="comments__list">
                         {% for commentdict in comments['comments'] %}
-                            {{ comment(**commentdict) }}
+                            {{ comment(commentdict, false) }}
                         {% endfor %}
                     </div>
                 </div>
@@ -335,7 +330,7 @@
                     <div class="comments__list">
                         {% for commentdict in comments['comments'] %}
                             {% if commentdict['recommended'] -%}
-                                {{ comment_recommend(**commentdict) }}
+                                {{ comment(commentdict, true) }}
                             {%- endif %}
                         {% endfor %}
                     </div>
@@ -348,6 +343,21 @@
                 </div>
             </div>
         </div>
+        <script type="text/template" id="js-report-comment-template">
+            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__report__form comment__body" style="display: none">
+                <p><strong>Kommentar als bedenklich melden</strong></p>
+                <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?"></textarea></p>
+                <p>
+                    Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+                    Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+                </p>
+                <p class="comments__report__actions">
+                    <input type="hidden" name="cid" value="<%- commentId %>">
+                    <a href="#" class="js-cancel-report">Abbrechen</a>
+                    <button disabled="disabled" class="button">Abschicken</button>
+                </p>
+            </form>
+        </script>
     </section>
     {%- endif %}
 
@@ -429,4 +439,3 @@
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
-
