@@ -50,10 +50,14 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             name = this.getAttribute('data-name'),
             form = document.forms['js-comments-form'],
             node = $(form).find('.comments__recipient').first(),
-            html = 'Antwort auf: <a href="#cid-' + cid + '">' + name + '</a>';
+            html = 'Antwort auf: <a href="#cid-' + cid + '">' + name + '</a>',
+            x = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft,
+            y = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 
-        // focus comment input
+        // focus comment input - without scrolling into view
+        // to keep the animated scrolling going
         form.elements.comment.focus();
+        window.scrollTo(x, y);
 
         form.elements.pid.value = cid;
         node.html(html).find("a[href^='#']").animateScroll();
