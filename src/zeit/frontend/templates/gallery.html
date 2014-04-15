@@ -6,24 +6,26 @@
 {% endblock article_header %}
 
 {% block article_pages %}
-<div class="figure figure-full-width">
-    <div class="inline-gallery">
-        {% for image in view.images %}
-            {% set image_meta = image | get_image_metadata %}
-            {% set copyright = image_meta.copyrights[0] %}
-            <figure class="figure-full-width">
-                <div class="scaled-image">
-                    <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
-                </div>
-                {% if image.caption %}
-                <figcaption class="figure__caption">{{image.caption}}
-                    {% if image_meta.copyrights %}
-                        <span class="figure__copyright">{{copyright[0]}}</span>
+<div class="gallery">
+    <div class="figure figure-full-width">
+        <div class="inline-gallery">
+            {% for image in view.images %}
+                {% set image_meta = image | get_image_metadata %}
+                {% set copyright = image_meta.copyrights[0] %}
+                <figure class="figure-full-width">
+                    <div class="scaled-image">
+                        <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
+                    </div>
+                    {% if image.caption %}
+                    <figcaption class="figure__caption">{{image.caption}}
+                        {% if image_meta.copyrights %}
+                            <span class="figure__copyright">{{copyright[0]}}</span>
+                        {% endif %}
+                    </figcaption>
                     {% endif %}
-                </figcaption>
-                {% endif %}
-            </figure>
-        {% endfor %}
+                </figure>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock article_pages %}
