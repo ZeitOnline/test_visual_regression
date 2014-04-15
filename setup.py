@@ -31,6 +31,7 @@ setup(
         'zeit.connector >= 2.3.2.dev0',
         'zeit.content.article',
         'zeit.content.author',
+        'zeit.content.cp',
         'zeit.content.gallery',
         'zeit.content.image',
         'zeit.content.infobox',
