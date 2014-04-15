@@ -1,7 +1,9 @@
 import zeit.cms.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
-
+from grokcore.component import adapter, implementer
+import zope.interface
+from zeit.content.image.interfaces import IImageGroup, IImage,  IImageMetadata
 
 def auto_select_asset(teaser):
     video = get_video_asset(teaser)
@@ -27,8 +29,30 @@ def get_gallery_asset(teaser):
     gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)
     return gallery.gallery
 
-
 def get_image_asset(teaser):
     image = zeit.content.image.interfaces.IImages(teaser)
     return image.image
+
+
+class ITeaserImage(zope.interface.Interface):
+    """ A Teaser Image """
+
+
+@implementer(ITeaserImage)
+@adapter(IImageGroup, IImage)
+class TeaserImage(object):
+    def __init__(self, image_group, image):
+        meta = IImageMetadata(image_group)
+        self.align = None
+        self.caption = meta.caption
+        self.image = image
+        self.layout = ''
+        self.src = image.uniqueId
+        self.uniqueId = image.uniqueId
+        self.attr_title = meta.title
+        self.attr_alt = meta.alt
+        self.copyright = meta.copyrights
+
+
+
 

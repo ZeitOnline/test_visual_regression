@@ -1,4 +1,5 @@
 from zeit.frontend import view_centerpage
+from zope.component import getMultiAdapter
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
@@ -51,6 +52,7 @@ def test_centerpage_should_have_page_meta_keywords(
         '//meta[@name="keywords"]')
     teststring = u'ZEIT ONLINE, ZEIT MAGAZIN'
     assert meta_description_tag.get_attribute("content").strip() == teststring
+
 
 
 def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
@@ -431,6 +433,22 @@ def test_teaser_image_url_should_be_created(
         "http://example.com/centerpage/katzencontent/"
         "bitblt-200x300.*katzencontent-540x304.jpg",
         image_url)
+
+
+def test_teaser_image_should_be_created_from_image_group_and_image(testserver):
+    import zeit.cms.interfaces
+    img = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'\
+        'katzencontent/katzencontent-148x84.jpg')
+    imgrp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'\
+        'katzencontent/')
+    teaser_image = getMultiAdapter(
+        (imgrp,img),
+        zeit.frontend.centerpage.ITeaserImage)
+
+    assert teaser_image.caption == 'Die ist der image sub text'
+    assert teaser_image.src == img.uniqueId
+    assert teaser_image.attr_alt == 'Die ist der Alttest'
+    assert teaser_image.attr_title == 'Katze!'
 
 
 def test_image_metadata_should_be_accessible(testserver):

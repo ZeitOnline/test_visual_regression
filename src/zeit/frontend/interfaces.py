@@ -18,3 +18,4 @@ class IPage(zope.interface.Interface):
 
     def __iter__(self):
         """iterate over our blocks"""
+

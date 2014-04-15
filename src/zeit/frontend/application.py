@@ -23,6 +23,7 @@ import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
 import zeit.frontend.block
+import zeit.frontend.centerpage
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -74,7 +75,7 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
 
-        #ToDo: Is this still needed. Can it be removed?
+        # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         def asset_url(request, path, **kw):
@@ -218,6 +219,7 @@ factory = Application()
 
 
 class URLPrefixMiddleware(object):
+
     """Removes a path prefix from the PATH_INFO if it is present.
     We use this so that if an ``asset_prefix`` is configured, we respond
     correctly for URLs both with and without the asset_prefix -- otherwise
@@ -269,37 +271,41 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
-def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
-    #customization of https://bitbucket.org/russellballestrini/ago :)
+def format_date_ago(dt, precision=2, past_tense='vor {}',
+                    future_tense='in {}'):
+    # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
-    if type(dt) is not type(timedelta()):
+    if not isinstance(dt, type(timedelta())):
         delta = datetime.now() - dt
 
     the_tense = past_tense
     if delta < timedelta(0):
         the_tense = future_tense
 
-    delta = abs( delta )
+    delta = abs(delta)
     d = {
-        'Jahr'   : int(delta.days / 365),
-        'Tag'    : int(delta.days % 365),
-        'Stunde'   : int(delta.seconds / 3600),
-        'Minute' : int(delta.seconds / 60) % 60,
-        'Sekunde' : delta.seconds % 60
+        'Jahr': int(delta.days / 365),
+        'Tag': int(delta.days % 365),
+        'Stunde': int(delta.seconds / 3600),
+        'Minute': int(delta.seconds / 60) % 60,
+        'Sekunde': delta.seconds % 60
     }
     hlist = []
     count = 0
-    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
-    units_plural = { 'Jahr':'Jahren', 'Tag':'Tagen', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
+    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
+                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
     for unit in units:
         unit_displayed = unit
-        if count >= precision: break # met precision
-        if d[ unit ] == 0: continue # skip 0's
-        if d[ unit ] != 1:
+        if count >= precision:
+            break  # met precision
+        if d[unit] == 0:
+            continue  # skip 0's
+        if d[unit] != 1:
             unit_displayed = units_plural[unit]
-        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        hlist.append('%s %s' % (d[unit], unit_displayed))
         count += 1
-    human_delta = ', '.join( hlist )
+    human_delta = ', '.join(hlist)
     return the_tense.format(human_delta)
 
 
@@ -404,7 +410,9 @@ def most_sufficient_teaser_image(teaser_block,
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
-        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        teaser_image = zope.component.getMultiAdapter(
+            (asset, zeit.cms.interfaces.ICMSContent(image_id)),
+            zeit.frontend.centerpage.ITeaserImage)
         return teaser_image
     except TypeError:
         return None
@@ -439,7 +447,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 if IArticleTemplateSettings(context).template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
             return self._change_viewname(tdict)
-        except OSError, e:
+        except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
 
