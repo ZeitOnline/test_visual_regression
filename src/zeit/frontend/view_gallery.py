@@ -1,4 +1,5 @@
 import zeit.content.gallery.interfaces
+import zeit.wysiwyg.interfaces
 from pyramid.view import view_config
 
 
@@ -10,5 +11,9 @@ class Gallery(zeit.frontend.view.Content):
     def images(self):
         return [self.context[i] for i in self.context]
 
-    def __call__(self):
-         import pdb;pdb.set_trace()
+    @property
+    def galleryText(self):
+        return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
+
+    # def __call__(self):
+    #      import pdb;pdb.set_trace()

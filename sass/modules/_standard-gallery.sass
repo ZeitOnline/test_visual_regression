@@ -1,3 +1,17 @@
 .gallery
+    padding: 10px 0px 1px 0px
+    background-color: $grey--light
+    margin-left: -$page-padding
+    margin-right: -15px
+    +respond-min($break-1)
+        margin-left: -$page-padding
+        margin-right: -$page-padding
+    +respond-min($break-3)
+        margin-left: -($page-padding+$gutter/2)
+        margin-right: -($page-padding+$gutter/2)
     .figure__caption
         margin-left: 0 !important
+
+.gallery__description
+    font-family: "TabletGothic", $sans-fallbacks
+    font-size: $font-s
