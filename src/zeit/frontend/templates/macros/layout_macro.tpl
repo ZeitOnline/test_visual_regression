@@ -134,7 +134,7 @@
 <script type="text/javascript">
     // negative keyword 'diuqilon'
     // todo: if we get a billboard, we need more options (NB)
-    var diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
+    window.diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
@@ -392,17 +392,22 @@
 {% macro adplace(banner) -%}
     {%set kw = 'zeitonline,zeitmz' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}">
-        <script type="text/javascript">
-            if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
-            document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}diuqilon{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
-            }
-        </script>
-        <noscript>
-        <div>
-            <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
-                <img src="http://ad.de.doubleclick.net/ad/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
-        </a></div>
-        </noscript>
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__width_{{banner.noscript_width_height[0]}}">
+        {% if banner.label -%}
+        <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
+        {%- endif %}
+        <div class="ad__{{banner.name}}__inner">
+            <script type="text/javascript">
+                if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
+                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                }
+            </script>
+            <noscript>
+            <div>
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
+                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
+            </a></div>
+            </noscript>
+        </div>
     </div>
 {%- endmacro %}
