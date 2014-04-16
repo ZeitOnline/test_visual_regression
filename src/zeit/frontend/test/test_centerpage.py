@@ -443,7 +443,7 @@ def test_teaser_image_should_be_created_from_image_group_and_image(testserver):
         'katzencontent/')
     teaser_image = getMultiAdapter(
         (imgrp,img),
-        zeit.frontend.centerpage.ITeaserImage)
+        zeit.frontend.interfaces.ITeaserImage)
 
     assert teaser_image.caption == 'Die ist der image sub text'
     assert teaser_image.src == img.uniqueId
