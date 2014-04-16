@@ -3,6 +3,7 @@ import urlparse
 import string
 from datetime import datetime
 from lxml import etree
+import pkg_resources
 
 
 def path_of_article(unique_id):
@@ -176,7 +177,10 @@ class Comment(object):
         return get_thread(self.unique_id, self.request)
 
 
-def comments_per_unique_id():
-    myxml = etree.parse('/Users/baumann/Desktop/tmp/friedbert-test_NEU/zeit.friedbert.deployment/work/source/zeit.frontend/src/zeit/frontend/data/node-comment-statistics.xml')
-    nodes = myxml.xpath('/nodes/node')
+def comments_per_unique_id(self):
+    node_comment_statistics_file = pkg_resources.resource_filename(__name__,
+                                      self.request.registry.settings.\
+                                      node_comment_statistics_path)
+    node_comment_statistics = etree.parse(node_comment_statistics_file)
+    nodes = node_comment_statistics.xpath('/nodes/node')
     return {node.values()[0]:node.values()[1] for node in nodes}
