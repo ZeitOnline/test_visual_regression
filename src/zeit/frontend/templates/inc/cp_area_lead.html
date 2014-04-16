@@ -5,17 +5,22 @@ This is the main template for the context type "centerpage".
 Available attributes:
 	zeit.frontend.view_centerpage.Centerpage
 #}
+
+{% macro include(obj) -%}
+    {% for teaser_block in obj -%}
+        {%-
+            set teaser_blocks = [
+                'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
+                'templates/inc/teaser_block_default.html'
+            ]
+        %}
+        {% include teaser_blocks ignore missing %}
+    {% endfor %}
+{%- endmacro %}
+
 <div class='cp__lead__wrap'>
-        {% for teaser_block in view.area_lead -%}
-            {%-
-               set teaser_blocks = [
-                    'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
-                    'templates/inc/teaser_block_default.html'
-                    ]
-            %}
-            {% include teaser_blocks ignore missing %}
-        {% endfor %}
+    {{ include(view.area_lead) }}
 </div>
 <div class='cp__lead__informatives__wrap'>
-Hier erscheinen die Informatives
+    {{ include(view.area_informatives) }}
 </div> 

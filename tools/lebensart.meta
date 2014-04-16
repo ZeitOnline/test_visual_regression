@@ -10,11 +10,10 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-10T09:02:20.289554+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:2a78abca-01b3-4884-97e3-4db1ceec720f}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-10T09:02:14.558175+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-15T13:17:05.588501+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
@@ -26,11 +25,12 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-15T13:12:22.614795+00:00</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
-  <attribute ns="DAV:" name="creationdate">2014-04-10T09:02:20Z</attribute>
-  <attribute ns="DAV:" name="getcontentlength">13590</attribute>
-  <attribute ns="DAV:" name="getlastmodified">Thu, 10 Apr 2014 09:02:20 GMT</attribute>
-  <attribute ns="DAV:" name="getetag">"e26ad-3516-4f6ac7983a635"</attribute>
+  <attribute ns="DAV:" name="creationdate">2014-04-15T13:17:11Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">13457</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 15 Apr 2014 13:17:11 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e09cd-3491-4f7149e20d44d"</attribute>
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
