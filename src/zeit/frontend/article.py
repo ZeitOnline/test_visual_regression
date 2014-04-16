@@ -34,6 +34,15 @@ class Page(object):
         return iter(self.blocks)
 
 
+def _inject_banner_code(pages):
+    _tile = 4 # banner tile in articles
+    _p = 3 # paragraph to insert ad before
+    for index, page in enumerate(pages, start=1):
+        if index % 2 != 0 and len(page.blocks) > 2:
+            page.blocks.insert(_p, zeit.frontend.banner.banner_list[_tile-1])
+    return pages
+
+
 @adapter(zeit.content.article.interfaces.IArticle)
 @implementer(zeit.frontend.interfaces.IPages)
 def pages_of_article(context):
@@ -51,12 +60,12 @@ def pages_of_article(context):
             pages.append(page)
         else:
             page.append(block)
-    return pages
+    return _inject_banner_code(pages)
 
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
+
 class IShortformArticle(zeit.content.article.interfaces.IArticle):
     pass
-
