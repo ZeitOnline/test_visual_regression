@@ -1,16 +1,17 @@
 /* global console, define, alert, _ */
 define(['jquery', 'underscore', 'modules/tabs'], function() {
 
-    var $comments_trigger = $('#js-comments-trigger');
-    var $comments = $('#js-comments');
-    var $page_wrap_inner = $('#js-page-wrap-inner');
-    var $comments_tabs_head = $('#js-comments-tabs-head');
-    var $comments_body = $('#js-comments-body');
-    var $comments_active_list;
-    var $comments_older = $('#js-comments-body-older');
-    var $comments_newer = $('#js-comments-body-newer');
-    var comments_body_height = null;
-    var window_width = null;
+    var $comments_trigger = $('#js-comments-trigger'),
+        $comments = $('#js-comments'),
+        $page_wrap_inner = $('#js-page-wrap-inner'),
+        $page_ad_container = $('#iqd_align_Ad'),
+        $comments_tabs_head = $('#js-comments-tabs-head'),
+        $comments_body = $('#js-comments-body'),
+        $comments_active_list,
+        $comments_older = $('#js-comments-body-older'),
+        $comments_newer = $('#js-comments-body-newer'),
+        comments_body_height = null,
+        window_width = null;
 
     /**
      * handles comment pagination
@@ -101,7 +102,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var toggleComments = function() {
         $page_wrap_inner.toggleClass('show-comments');
-
+        $page_ad_container.toggleClass('show-comments');
         // this should not be done on every toggle, but we have to do it once *after* comments get visible. refactor
         calculatePagination();
     };
