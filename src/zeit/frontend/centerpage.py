@@ -48,5 +48,7 @@ class TeaserImage(zeit.frontend.block.BaseImage):
         self.src = image.uniqueId
         self.uniqueId = image.uniqueId
         self.attr_title = meta.title
+        self.title = meta.title
         self.attr_alt = meta.alt
+        self.alt = meta.alt
         self.copyright = meta.copyrights
