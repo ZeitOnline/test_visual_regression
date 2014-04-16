@@ -302,7 +302,7 @@
         margin-left: $compact
         vertical-align: baseline
 
-.page-wrap--inner.show-comments
+.show-comments .page-wrap--inner
     +respond-min($comments__break-outside)
         +translateZ(0)
         left: 0
@@ -314,7 +314,7 @@
 #iqd_mainAd
     +transition(all, 1s)
 
-#iqd_align_Ad.show-comments
+.show-comments #iqd_align_Ad
     +respond-min($comments__break-outside)
         +translateZ(0)
         margin-left: 0

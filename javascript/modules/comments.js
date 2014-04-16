@@ -4,7 +4,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     var $comments_trigger = $('#js-comments-trigger'),
         $comments = $('#js-comments'),
         $page_wrap_inner = $('#js-page-wrap-inner'),
-        $page_ad_container = $('#iqd_align_Ad'),
         $comments_tabs_head = $('#js-comments-tabs-head'),
         $comments_body = $('#js-comments-body'),
         $comments_active_list,
@@ -159,9 +158,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Toggle comments
      */
     var toggleComments = function() {
-        $page_wrap_inner.toggleClass('show-comments');
-        $page_ad_container.toggleClass('show-comments');
+        $(document.body).toggleClass('show-comments');
         // this should not be done on every toggle, but we have to do it once *after* comments get visible. refactor
+        // we should not have to do it at all but document.getElementById('js-comments-body').offsetTop there makes it necessary
         calculatePagination();
     };
 
