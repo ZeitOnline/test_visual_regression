@@ -30,6 +30,7 @@ require.config({
 // the order in the array and the function names have to correlate
 // which is quite disturbing in my book…
 require([
+	'modules/errors',
 	'modules/fontloader_body',
 	'modules/breadcrumbs',
 	'modules/main-nav',
@@ -37,7 +38,8 @@ require([
 	'modules/comments',
 	'modules/images',
 	'modules/photocluster',
-], function( fontloader_body, breadcrumbs, main_nav, tabs, comments, images, photocluster) {
+], function( errors, fontloader_body, breadcrumbs, main_nav, tabs, comments, images, photocluster) {
+	errors.init();
 	fontloader_body.init();
 	breadcrumbs.init();
 	main_nav.init();
