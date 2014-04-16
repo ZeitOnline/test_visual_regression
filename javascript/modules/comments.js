@@ -150,6 +150,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var init = function() {
 
+        if (! $comments.length) {
+            return;
+        }
+
         initLayout();
 
         // register event handlers
