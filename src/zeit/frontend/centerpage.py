@@ -37,7 +37,7 @@ def get_image_asset(teaser):
 
 @implementer(zeit.frontend.interfaces.ITeaserImage)
 @adapter(IImageGroup, IImage)
-class TeaserImage():
+class TeaserImage(zeit.frontend.block.BaseImage):
 
     def __init__(self, image_group, image):
         meta = IImageMetadata(image_group)
@@ -50,12 +50,3 @@ class TeaserImage():
         self.attr_title = meta.title
         self.attr_alt = meta.alt
         self.copyright = meta.copyrights
-
-    @property
-    def ratio(self):
-        width, height = PIL.Image.open(self.image.open()).size
-        return float(width) / float(height)
-
-
-
-
