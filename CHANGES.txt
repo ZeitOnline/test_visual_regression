@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.2.20 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- add new footer and change link color
 
 
 0.2.19 (2014-04-15)
