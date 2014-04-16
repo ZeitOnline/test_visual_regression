@@ -53,8 +53,10 @@ class Centerpage(zeit.frontend.view.Base):
         teaserblock_list = self.context['lead'].values()
         for teaserblock in teaserblock_list:
             for teaser in teaserblock:
-                pass
-                teaser.__setattr__('commentscount', unique_id_comments['/'+urlparse.urlparse(teaser.uniqueId).path[1:]])
+                try:
+                    teaser.__setattr__('commentscount', unique_id_comments['/'+urlparse.urlparse(teaser.uniqueId).path[1:]])
+                except KeyError:
+                    teaser.__setattr__('commentscount', None)
             if teaserblock.layout.id == 'zmo-leader-fullwidth':
                 teaserblock_list.remove(teaserblock)
         return teaserblock_list
