@@ -41,6 +41,7 @@ settings = {
                 'api',
             ),
     'proxy_url' : '',
+    'node_comment_statistics_path' : 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
 
