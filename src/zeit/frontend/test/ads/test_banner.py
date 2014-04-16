@@ -3,6 +3,7 @@ from zeit.frontend import view
 from zeit.frontend import view_article
 from zeit.frontend.banner import Place
 import zeit.cms.interfaces
+from zope.testbrowser.browser import Browser
 
 
 def test_banner_place_should_be_serialized(testserver):
@@ -33,3 +34,9 @@ def test_banner_view_should_return_None_if_tile_is_not_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, '')
     assert article_view.banner(999) is None
+
+
+def test_banner_should_not_be_displayed_on_short_pages(testserver):
+    browser = Browser('%s/artikel/header2' % testserver.url)
+    assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
+        not in browser.contents
