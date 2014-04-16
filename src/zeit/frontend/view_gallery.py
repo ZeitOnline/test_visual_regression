@@ -14,6 +14,3 @@ class Gallery(zeit.frontend.view.Content):
     @property
     def galleryText(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
-
-    # def __call__(self):
-    #      import pdb;pdb.set_trace()

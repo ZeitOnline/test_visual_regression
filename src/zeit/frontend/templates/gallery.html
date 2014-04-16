@@ -2,7 +2,12 @@
 {% import 'templates/macros/article_macro.tpl' as blocks with context%}
 
 {% block article_header %}
-    {% include "templates/inc/headers/gallery_header.html" ignore missing with context %}
+    <div class="article__head-wrap">
+        <header class="article__head article__head--default">
+          {{ blocks.supertitle() }}
+          {{ blocks.title() }}
+        </header>
+    </div>
 {% endblock article_header %}
 
 {% block article_pages %}
@@ -17,9 +22,10 @@
                         <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
                     </div>
                     {% if image.caption %}
-                    <figcaption class="figure__caption">{{image.caption}}
+                    <figcaption class="figure__caption">
+                        <span class="figure__caption__text">{{image.caption}}</span>
                         {% if image_meta.copyrights %}
-                            <span class="figure__copyright">{{copyright[0]}}</span>
+                            <span class="figure__caption__copyright">{{copyright[0]}}</span>
                         {% endif %}
                     </figcaption>
                     {% endif %}
@@ -28,19 +34,18 @@
         </div>
     </div>
 </div>
-<div class="gallery__description">
-    {{view.galleryText | safe}}
+<div class="gallery__info">
+    <div class="gallery__description">
+        {{view.galleryText | safe}}
+    </div>
+    <div class="article__head__meta">
+        <div class="article__head__meta__date">
+            {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+            {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
+        </div>
+    </div>
 </div>
 {% endblock article_pages %}
 
-<!-- {% block article_pagination %}
-{% endblock article_pagination %}
-
-{% block article_comments %}
-{% endblock article_comments %}
-
-{% block article_nextread %}
-{% endblock article_nextread %}
-
 {% block article_publishdate %}
-{% endblock article_publishdate %} -->
+{% endblock article_publishdate %}
