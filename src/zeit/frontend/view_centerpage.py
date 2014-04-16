@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from zeit.frontend.reach import LinkReach
 import comments
 import logging
-from lxml import etree
+import urlparse
 import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.cp.interfaces
@@ -49,15 +49,15 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_lead(self):
-        unique_id_comments = comments.comments_per_unique_id()
-        teaser_list = self.context['lead'].values()
-        for teaser in teaser_list:
-            teaserxml = teaser_list[1].xml_source
-            unique_id = comments.path_of_article(etree.fromstring(teaserxml).xpath('/container/block/@href')[0])
-            teaser.__setattr__('commentscount', unique_id_comments['/'+unique_id])
-            if teaser.layout.id == 'zmo-leader-fullwidth':
-                teaser_list.remove(teaser)
-        return teaser_list
+        unique_id_comments = comments.comments_per_unique_id(self)
+        teaserblock_list = self.context['lead'].values()
+        for teaserblock in teaserblock_list:
+            for teaser in teaserblock:
+                pass
+                teaser.__setattr__('commentscount', unique_id_comments['/'+urlparse.urlparse(teaser.uniqueId).path[1:]])
+            if teaserblock.layout.id == 'zmo-leader-fullwidth':
+                teaserblock_list.remove(teaserblock)
+        return teaserblock_list
 
     @property
     def area_lead_full_teaser(self):
