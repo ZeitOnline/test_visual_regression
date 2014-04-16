@@ -1,5 +1,6 @@
 def test_js_flawless_document_load(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/07' % testserver.url)
-    errors = driver.execute_script('return window.jsErrors');
-    assert not errors
+    for i in range(1, 10):
+        driver.get('%s/artikel/%02d' % (testserver.url, i))
+        errors = driver.execute_script('return window.jsErrors');
+        assert not errors
