@@ -174,3 +174,9 @@ class Comment(object):
     @view(renderer='json')
     def collection_get(self):
         return get_thread(self.unique_id, self.request)
+
+
+def comments_per_unique_id():
+    myxml = etree.parse('/Users/baumann/Desktop/tmp/friedbert-test_NEU/zeit.friedbert.deployment/work/source/zeit.frontend/src/zeit/frontend/data/node-comment-statistics.xml')
+    nodes = myxml.xpath('/nodes/node')
+    return {node.values()[0]:node.values()[1] for node in nodes}
