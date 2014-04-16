@@ -412,7 +412,7 @@ def most_sufficient_teaser_image(teaser_block,
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
-            zeit.frontend.centerpage.ITeaserImage)
+            zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
         return None
