@@ -287,11 +287,9 @@
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}">
-                Auf Kommentar antworten
-            </a>
+            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {%- endif %}
-            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}">Kommentar melden</a>{%- endif %}
+            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>{%- endif %}
         </aside>
     </article>
 {%- endmacro %}
