@@ -22,20 +22,16 @@ class IPage(zope.interface.Interface):
         """iterate over our blocks"""
 
 
-<<<<<<< HEAD
 class ITeaserImage(zope.interface.Interface):
     """ A Teaser Image """
 
 
-=======
 class IPlace(zope.interface.Interface):
 
     """A place is a space on the website, which can
     be filled with a banner.
     """
 
-
 class IBannerlist(zope.interface.Interface):
 
     """A list of ad places"""
->>>>>>> master

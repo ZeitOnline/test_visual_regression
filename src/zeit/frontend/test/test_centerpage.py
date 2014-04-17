@@ -155,17 +155,10 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
     for element in wrap:
         img = element.find_element_by_tag_name(
             "img")
-<<<<<<< HEAD
         assert re.search('http://.*/centerpage/katzencontent/' +
                          'bitblt-.*/' +
                          'katzencontent-540x304.jpg',
                          img.get_attribute("src"))
-=======
-        assert img.get_attribute("src") == 'http://'\
-            '127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-290x163-6f23eb21841c68a24ccd3e4c753ff985aef5a0b9/'\
-            'katzencontent-540x304.jpg'
->>>>>>> master
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -436,12 +429,8 @@ def test_teaser_image_url_should_be_created(
 
     image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(
-        "http://example.com/centerpage/katzencontent/"
-<<<<<<< HEAD
+        "http://example.com/centerpage/katzencontent/"\
         "bitblt-.*katzencontent-540x304.jpg",
-=======
-        "bitblt-290x163.*katzencontent-540x304.jpg",
->>>>>>> master
         image_url)
 
 
