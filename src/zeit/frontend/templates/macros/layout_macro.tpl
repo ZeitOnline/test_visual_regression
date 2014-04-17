@@ -1,27 +1,27 @@
 
 {% macro ga_tracking() -%}
 <!-- ga tracking -->
-        <script type="text/javascript"> 
-            var _gaq = _gaq || []; 
-            _gaq.push(['_setAccount', 'UA-18122964-1']); 
-            _gaq.push(['_setDomainName', '.zeit.de']); 
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-18122964-1']);
+            _gaq.push(['_setDomainName', '.zeit.de']);
             _gaq.push (['_gat._anonymizeIp']);
-            _gaq.push(['_trackPageview']); 
-            (function() { 
-            var ga = document.createElement('script'); 
-            ga.type = 'text/javascript'; 
-            ga.async = true; 
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
-            var s = document.getElementsByTagName('script')[0]; 
-            s.parentNode.insertBefore(ga, s); })(); 
-        </script>  
+            _gaq.push(['_trackPageview']);
+            (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s); })();
+        </script>
 {%- endmacro %}
 
 {% macro cc_tracking(channel) -%}
 <!-- cc tracking -->
     <script type="text/javascript">
         document.write('<img alt="" height="1" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'" width="1" >');
-    </script> 
+    </script>
 {%- endmacro %}
 
 {% macro meetrics_tracking() -%}
@@ -54,7 +54,7 @@
                 3: "{{obj.ressort}}",
                 4: "Online"
             };
-            
+
             {% if obj.type == 'article' -%}
                 wt.customParameter = {
                     1: "{% if obj.author %}{{obj.author.name}}{% endif %}",
@@ -66,9 +66,9 @@
                     9: "{{obj.banner_channel}}"
                 };
              {%- endif %}
-           
+
             wt.contentId = Z_WT_KENNUNG;
-            wt.sendinfo();        
+            wt.sendinfo();
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
@@ -134,7 +134,7 @@
 <script type="text/javascript">
     // negative keyword 'diuqilon'
     // todo: if we get a billboard, we need more options (NB)
-    var diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
+    window.diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
@@ -200,12 +200,12 @@
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <img src="{{request.asset_url('img/zeit-logo--magazin.png')}}" class="main-nav__logo__img" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
                 </div>
             </a>
             <div class="main-nav__menu">
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
-                    <div class="main-nav__menu__head__headline">ZEIT Magazin</div>
+                    <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
@@ -226,7 +226,7 @@
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
                         <a href="http://zeit.de"
-                        class="is-standalone-link">ZEIT ONLINE</a>
+                        class="is-standalone-link">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
@@ -292,7 +292,7 @@
         var Z_IVW_RESSORT = "{{channel}}";
         var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
         document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"\" width=\"1\" height=\"1\" />");
-    </script> 
+    </script>
     <noscript>
         <img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
     </noscript>
@@ -308,7 +308,7 @@
 
         var iam_data = {
             "st" : "",
-            "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text", 
+            "cp" : "{%if obj.ressort%}{{obj.ressort}}/{%endif%}{%if obj.sub_ressort%}{{obj.sub_ressort}}/{%endif%}bild-text",
             "sv" : "ke",
             "co" : "URL: {{request.path_info}}"
         };
@@ -318,10 +318,10 @@
             iam_data.st = "zeitonl";
         }else{
         //mobile
-           iam_data.st = "mobzeit"; 
+           iam_data.st = "mobzeit";
         }
 
-        iom.c(iam_data,1); 
+        iom.c(iam_data,1);
     </script>
 {%- endmacro %}
 
@@ -372,49 +372,22 @@
 {% macro adplace(banner) -%}
     {%set kw = 'zeitonline,zeitmz' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}">
-        <script type="text/javascript">
-            if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
-            document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}diuqilon{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
-            }
-        </script>
-        <noscript>
-        <div>
-            <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
-                <img src="http://ad.de.doubleclick.net/ad/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
-        </a></div>
-        </noscript>
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__width_{{banner.noscript_width_height[0]}}">
+        {% if banner.label -%}
+        <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
+        {%- endif %}
+        <div class="ad__{{banner.name}}__inner">
+            <script type="text/javascript">
+                if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
+                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                }
+            </script>
+            <noscript>
+            <div>
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
+                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
+            </a></div>
+            </noscript>
+        </div>
     </div>
 {%- endmacro %}
-
-{% macro main_nav_compact(obj,request) -%}
-    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <div class="main-nav__wrap">
-            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
-                <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    <img src="{{request.asset_url('img/zeit-logo--magazin.png')}}" class="main-nav__logo__img" itemprop="logo" alt="Nachrichten auf ZEIT ONLINE" />
-                </div>
-            </a>
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing scaled-image">
-                    <a
-                    href="http://twitter.com/home?status={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a>
-
-                    {%- if obj.sharing_img.video_still -%}
-                        <a
-                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img.video_still}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
-                    {%- else -%}
-                        <a
-                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
-                    {%- endif -%}
-
-                    <a
-                    href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
-                </aside>
-            </div>
-        </div>
-    </nav>
-
-{%- endmacro %}
-

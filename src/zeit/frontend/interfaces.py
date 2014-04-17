@@ -3,11 +3,13 @@ import zope.interface.common.sequence
 
 
 class IPages(zope.interface.common.sequence.IReadSequence):
+
     """List of the <division>s of an zeit.content.article.interfaces.IArticle
     """
 
 
 class IPage(zope.interface.Interface):
+
     """A page offers list-access to the blocks
     (zeit.edit.interfaces.IBlock) contained in it.
     """
@@ -20,7 +22,20 @@ class IPage(zope.interface.Interface):
         """iterate over our blocks"""
 
 
+<<<<<<< HEAD
 class ITeaserImage(zope.interface.Interface):
     """ A Teaser Image """
 
 
+=======
+class IPlace(zope.interface.Interface):
+
+    """A place is a space on the website, which can
+    be filled with a banner.
+    """
+
+
+class IBannerlist(zope.interface.Interface):
+
+    """A list of ad places"""
+>>>>>>> master
