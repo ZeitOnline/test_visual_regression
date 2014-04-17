@@ -250,16 +250,22 @@ class NewsletterGroup(object):
 @adapter(zeit.newsletter.interfaces.ITeaser)
 class NewsletterTeaser(object):
 
+    autoplay = None
+
     def __init__(self, context):
         self.context = context
         if zeit.content.video.interfaces.IVideoContent.providedBy(
                 context.reference):
             self.more = 'Video starten'
+            self.autoplay = True
         else:
             self.more = 'weiterlesen'
 
     @property
     def image(self):
+        if zeit.content.video.interfaces.IVideoContent.providedBy(
+                self.context.reference):
+            return self.context.reference.thumbnail
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
         group = (images is not None) and images.image
@@ -269,7 +275,17 @@ class NewsletterTeaser(object):
         for name in group:
             basename, ext = os.path.splitext(name)
             if basename.endswith('148x84'):
-                return group[name]
+                image = group[name]
+                return image.uniqueId.replace(
+                    'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
+
+    @property
+    def url(self):
+        url = self.uniqueId.replace(
+            'http://xml.zeit.de/', 'http://www.zeit.de/', 1)
+        if self.autoplay:
+            url += '#autoplay'
+        return url
 
     def __getattr__(self, name):
         return getattr(self.context.reference, name)

@@ -2,8 +2,8 @@
     {{group.title}}
     {% for teaser in group.values() %}
         {% if teaser.image %}
-            {{view.image_url(teaser.image.uniqueId)}}
+            {{teaser.image}}
         {% endif %}
-        {{teaser.title}}: {{view.translate_url(teaser.uniqueId)}}
+        {{teaser.title}}: {{teaser.url}}
     {% endfor %}
 {% endfor %}

@@ -18,12 +18,6 @@ class Newsletter(zeit.frontend.view.Base):
             self.request.response.content_type = 'text/plain; charset=utf-8'
         return {}
 
-    def translate_url(self, url):
-        return url.replace('http://xml.zeit.de/', 'http://www.zeit.de/', 1)
-
-    def image_url(self, url):
-        return url.replace('http://xml.zeit.de/', 'http://images.zeit.de/', 1)
-
     @property
     def date_first_released(self):
         tz = get_timezone('Europe/Berlin')
