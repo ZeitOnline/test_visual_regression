@@ -482,4 +482,12 @@ def test_pagination_prev_page_url_on_first_page_is_none(testserver):
     assert view.pagination['prev_page_url'] is None
 
 
-
+def test_article09_should_have_a_focussed_nextread(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article_view = view_article.Article(context, '')
+    nextread = article_view.focussed_nextread
+    assert nextread is not None
+    assert isinstance(nextread['article'],\
+                      zeit.content.article.article.Article)
+    assert nextread['image']['uniqueId'] is None
+    assert nextread['layout'] == 'minimal'
