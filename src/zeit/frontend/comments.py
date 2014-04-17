@@ -146,6 +146,7 @@ def get_thread(unique_id, request):
                 comment_count=int(thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
                 comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
+                my_name=request.cookies.get('drupal-username', ''),
                 my_uid=request.cookies.get('drupal-userid', 0))
         except AssertionError:
             return None
