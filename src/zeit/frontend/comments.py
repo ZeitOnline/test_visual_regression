@@ -3,7 +3,7 @@ import urlparse
 import string
 from datetime import datetime
 from lxml import etree
-import pkg_resources
+import zeit.cms.interfaces
 
 
 def path_of_article(unique_id):
@@ -178,9 +178,10 @@ class Comment(object):
 
 
 def comments_per_unique_id(self):
-    node_comment_statistics_file = pkg_resources.resource_filename(__name__,
-                                      self.request.registry.settings.\
-                                      node_comment_statistics_path)
-    node_comment_statistics = etree.parse(node_comment_statistics_file)
-    nodes = node_comment_statistics.xpath('/nodes/node')
-    return {node.values()[0]:node.values()[1] for node in nodes}
+    try:
+        node_comment_statistics_file = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/data/node-comment-statistics.xml')
+        node_comment_statistics = etree.parse(node_comment_statistics_file)
+        nodes = node_comment_statistics.xpath('/nodes/node')
+        return {node.values()[0]:node.values()[1] for node in nodes}
+    except IOError, TypeError:
+        return {}
