@@ -121,7 +121,7 @@ class Article(zeit.frontend.view.Base):
         for number in range(0, len(self.pages)):
             url = self.article_url
             if number > 0:
-                url += '/seite-' + str(number+1)
+                url += '/seite-' + str(number + 1)
             _pages_urls.append(url)
         return _pages_urls
 
@@ -129,12 +129,14 @@ class Article(zeit.frontend.view.Base):
     def next_page_url(self):
         _actual_index = self.page_nr - 1
         total = len(self.pages)
-        return self.pages_urls[_actual_index + 1] if _actual_index + 1 < total else None
+        return self.pages_urls[_actual_index + 1] \
+            if _actual_index + 1 < total else None
 
     @property
     def prev_page_url(self):
         actual_index = self.page_nr - 1
-        return self.pages_urls[actual_index - 1] if actual_index-1 >= 0 else None
+        return self.pages_urls[actual_index - 1] \
+            if actual_index - 1 >= 0 else None
 
     @property
     def pagination(self):
@@ -362,10 +364,7 @@ class Article(zeit.frontend.view.Base):
             except AttributeError:
                 image = {'uniqueId': None}
                 _layout = 'minimal'
-            read = {'layout': _layout,
-                    'article': related,
-                    'image': image}
-            return read
+            return {'layout': _layout, 'article': related, 'image': image}
 
     @property
     def breadcrumb(self):
@@ -421,13 +420,11 @@ class Article(zeit.frontend.view.Base):
             channel += "/" + self.type
         return channel
 
-
     def banner(self, tile):
         try:
-            return zeit.frontend.banner.banner_list[tile-1]
+            return zeit.frontend.banner.banner_list[tile - 1]
         except IndexError:
             return None
-
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -459,7 +456,7 @@ class ArticlePage(Article):
 
     @property
     def current_page(self):
-        return zeit.frontend.interfaces.IPages(self.context)[self.page_nr-1]
+        return zeit.frontend.interfaces.IPages(self.context)[self.page_nr - 1]
 
     @property
     def next_title(self):
