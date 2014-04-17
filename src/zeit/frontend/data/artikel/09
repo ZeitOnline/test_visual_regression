@@ -63,11 +63,6 @@
     <title>More Candy</title>
     <subtitle>Apple pie cotton candy sweet roll powder I love. I love toffee jelly beans fruitcake. Macaroon candy canes macaroon unerdwear.com. Liquorice tiramisu cake sweet cotton candy sesame snaps tart apple pie. Macaroon chocolate bar fruitcake powder bear claw. Gummi bears brownie chocolate cake brownie cake icing. Gummi bears brownie pie biscuit. Icing candy I love cake cake ice cream.</subtitle>
     <division type="page">
-      <image layout="large" is_empty="True"/>
-      <image src="http://xml.zeit.de/zeit-magazin/fotos/flucht_raw_biga_bilder/fr/img/bild8_ls.jpg" type="jpg" publication-date="" expires="" layout="zmo-medium-center" is_empty="False">
-        <bu py:pytype="str"/>
-        <copyright py:pytype="str">©</copyright>
-      </image>
       <p>
         <br/>
       </p>
