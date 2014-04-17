@@ -491,3 +491,10 @@ def test_article09_should_have_a_focussed_nextread(application):
                       zeit.content.article.article.Article)
     assert nextread['image']['uniqueId'] is None
     assert nextread['layout'] == 'minimal'
+
+
+def test_article01_should_not_have_a_focussed_nextread(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view_article.Article(context, '')
+    nextread = article_view.focussed_nextread
+    assert nextread is None
