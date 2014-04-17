@@ -8,10 +8,14 @@ Available attributes:
 
 #}
 {% extends "templates/inc/teaser/teaser_default_default_default.html" -%}
+
 {% block asset %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
-{%- set image_url = create_image_url(teaser_block, image) | translate_url %}
-{% if image_url %}
-<img class='teaser__default__image' src='{{image_url}}' alt="{{image.alt}}" title="{{image.title}}" />
-{% endif %}
+<!--[if gte IE 9]> -->
+    <noscript data-ratio="{{image.ratio}}">
+<!-- <![endif]-->
+        <img alt="{{image.attr_alt}}" title="{{image.attr_title}}" class="figure__media teaser__default__image" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+<!--[if gte IE 9]> -->
+    </noscript>
+<!-- <![endif]-->
 {% endblock %}
