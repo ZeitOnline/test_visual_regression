@@ -4,13 +4,8 @@ Change log for zeit.frontend
 0.2.20 (unreleased)
 -------------------
 
-<<<<<<< HEAD
-- Add new ZMO teaser and image formats
-- Add Multiadapter for TeaserImage.
-=======
 - Add Multiadapter for TeaserImage.
 - Add new ZMO teaser and image formats
->>>>>>> ron/create_teaser_image
 
 
 0.2.19 (2014-04-15)
