@@ -347,20 +347,25 @@ class Article(zeit.frontend.view.Base):
     @property
     def focussed_nextread(self):
         nextread = INextRead(self.context)
-        related = nextread.nextread
+        related = nextread.nextread[0]
         if related:
-            image = related.main_image
-            if image is not None:
+            try:
+                _layout = related.nextread_layout
+            except AttributeError:
+                _layout = 'base'
+            try:
+                image = related.main_image
                 image = {
                     'uniqueId': image.uniqueId,
                     'caption': (related.main_image_block.custom_caption
-                                or IImageMetadata(image).caption),
-                }
-            else:
+                                or IImageMetadata(image).caption)}
+            except AttributeError:
                 image = {'uniqueId': None}
-            return {'layout': nextread.nextread_layout,
+                _layout = 'minimal'
+            read = {'layout': _layout,
                     'article': related,
                     'image': image}
+            return read
 
     @property
     def breadcrumb(self):
