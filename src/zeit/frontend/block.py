@@ -6,6 +6,7 @@ import logging
 import os.path
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
+import zeit.content.video.interfaces
 import zeit.newsletter.interfaces
 import zope.interface
 
@@ -251,6 +252,11 @@ class NewsletterTeaser(object):
 
     def __init__(self, context):
         self.context = context
+        if zeit.content.video.interfaces.IVideoContent.providedBy(
+                context.reference):
+            self.more = 'Video starten'
+        else:
+            self.more = 'weiterlesen'
 
     @property
     def image(self):
