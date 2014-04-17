@@ -1,7 +1,20 @@
 Change log for zeit.frontend
 ============================
 
-0.2.18 (unreleased)
+0.2.20 (unreleased)
+-------------------
+
+- Add new ZMO teaser and image formats
+- Add Multiadapter for TeaserImage.
+
+
+0.2.19 (2014-04-15)
+-------------------
+
+- imporove linkreach_url configuration
+
+
+0.2.18 (2014-04-15)
 -------------------
 
 - do article cleanup (hide tags, rework header2, restyle caption, capitalize genre, small style changes)
@@ -28,7 +41,7 @@ Change log for zeit.frontend
 - Add a tool for downloading resources from CMS.
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages
-- Refactor template logic for macros. The are now located in 
+- Refactor template logic for macros. The are now located in
 templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 - add date, source, genre testing

@@ -18,3 +18,20 @@ class IPage(zope.interface.Interface):
 
     def __iter__(self):
         """iterate over our blocks"""
+
+
+class IPlace(zope.interface.Interface):
+
+    """A place is a space on the website, which can
+    be filled with a banner.
+    """
+
+
+class IBannerlist(zope.interface.Interface):
+
+    """A list of ad places"""
+
+
+class ITeaserImage(zope.interface.Interface):
+    """ A Teaser Image """
+
