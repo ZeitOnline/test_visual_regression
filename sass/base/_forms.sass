@@ -5,17 +5,32 @@
   cursor: pointer
   text-transform: uppercase
   padding: $fine $small $thin*0.8 $small
-  background-color: $red
-  color: $white
+  color: $color-button
+  background-color: $color-button-bg
   letter-spacing: 1px
   border: none
+  +on-interaction
+    color: $color-button--hover
+    background-color: $color-button-bg--hover
+  &[disabled]
+    color: $color-button--disabled
+    background-color: $color-button-bg--disabled
+
+input,
+textarea,
+select
+  font-size: $font-ml
+  // line-height: 1.2222
+  color: $color-input
+  background-color: $color-input-bg
+  border: none
+  padding: $small
 
 textarea
-  +tablet
-  +border-radius(0)
   display: block
   width: 100%
-  border: none
-  background-color: $grey--light
-  min-height: em(150px)
-  padding: $small
+  min-height: em(140px)
+
++input-placeholder
+  color: $charcoal
+  opacity: 1
