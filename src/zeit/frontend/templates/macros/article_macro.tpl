@@ -272,14 +272,14 @@
     <article class="comment{% if comment.indented and not flat %} is-indented{% endif %}" id="{{comment.cid}}">
         <div class="comment__head">
             {% if comment.img_url -%}
-                <img src="{{comment.img_url}}" class="comment__head__img" />
-            {%- endif %}
+            <img src="{{comment.img_url}}" class="comment__head__img" />
+            {% endif -%}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
                 <a href="#{{comment.cid}}" class="comment__head__meta__date">{{comment.timestamp | format_date_ago()}}</a>
                 {% if comment.role -%}
-                  <div class="comment__head__meta__label">{{comment.role}}</div>
-                {%- endif %}
+                <div class="comment__head__meta__label">{{comment.role}}</div>
+                {% endif -%}
             </div>
         </div>
         <div class="comment__body">
@@ -287,9 +287,11 @@
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
-            {%- endif %}
-            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>{%- endif %}
+            <a class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
+            {% endif -%}
+            {% if comment.my_uid > 0 -%}
+            <a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
+            {% endif -%}
         </aside>
     </article>
 {%- endmacro %}
@@ -306,13 +308,19 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comments__head__form" id="js-comments-form">
-                <textarea name="comment" placeholder="Ich denke …"></textarea>
-                <input type="submit" class="button" value="Kommentieren" />
-                <input type="hidden" name="nid" value="{{comments['nid']}}">
-                <input type="hidden" name="pid" value="">
-                <input type="hidden" name="uid" value="{{comments['my_uid']}}">
-                <div class="comments__recipient"></div>
+            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" id="js-comments-form">
+                <p>
+                    <textarea name="comment" placeholder="Ich denke …" class="js-required"></textarea>
+                    <input type="hidden" name="nid" value="{{comments['nid']}}">
+                    <input type="hidden" name="pid" value="">
+                    <input type="hidden" name="uid" value="{{comments['my_uid']}}">
+                </p>
+                {% if comments.my_uid > 0 -%}
+                <div class="comment__sender">angemeldet als <a href="http://community.zeit.de/user/{{comments.my_uid}}">{{comments.my_name|e}}</a></div>
+                {% endif -%}
+                <div class="comment__form__actions">
+                    <input type="submit" class="button" value="Kommentieren" disabled />
+                </div>
             </form>
         </div>
         <div class="tabs has-2">
@@ -322,16 +330,14 @@
             </div>
             <div class="comments__body" id="js-comments-body">
                 <div class="tabs__content is-active">
-                    <a name="tab1"></a>
-                    <div class="comments__list">
+                    <div class="comments__list" id="tab1">
                         {% for commentdict in comments['comments'] %}
                             {{ comment(commentdict, false) }}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="tabs__content">
-                    <a name="tab2"></a>
-                    <div class="comments__list">
+                    <div class="comments__list" id="tab2">
                         {% for commentdict in comments['comments'] %}
                             {% if commentdict['recommended'] -%}
                                 {{ comment(commentdict, true) }}
@@ -348,17 +354,15 @@
             </div>
         </div>
         <script type="text/template" id="js-report-comment-template">
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__report__form comment__body" style="display: none">
-                <p><strong>Kommentar als bedenklich melden</strong></p>
-                <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?"></textarea></p>
-                <p>
+            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" style="display: none">
+                <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
+                <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
-                <p class="comments__report__actions">
+                <p class="comment__form__actions">
                     <input type="hidden" name="cid" value="<%- commentId %>">
-                    <a href="#" class="js-cancel-report">Abbrechen</a>
-                    <button disabled="disabled" class="button">Abschicken</button>
+                    <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button">Abschicken</button>
                 </p>
             </form>
         </script>

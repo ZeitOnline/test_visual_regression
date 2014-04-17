@@ -88,27 +88,15 @@
 .comments__head
     margin-top: $page-padding
     margin-bottom: $large
-
-.comments__head__form
-    +padded
-    display: block
-    margin-bottom: $small
-    overflow: hidden
-    .show-form &
-    textarea
-        margin-bottom: $thin
-    input[type=submit]
-        float: right
-
-.comments__recipient
-    color: $grey
-    padding-top: $fine // match baseline of submit button
+    .comment__form
+        +padded
 
 .comments__list
-    +translateZ(0)
+    // +translateZ(0)
     +transition(all, 1s)
     position: relative
     top: 0px
+    padding: 0 $small
 
 .comments__body
     overflow: hidden
@@ -120,6 +108,10 @@
     &.show-newer-trigger
         .comments__body__newer
             display: block
+    p
+        margin: 0 auto $small
+        &:last-child
+            margin-bottom: 0
 
 .comments__body__older,
 .comments__body__newer
@@ -152,31 +144,32 @@
 
 
 .comment
-    margin-bottom: $medium
+    margin-top: $large
     &.is-indented
-        padding-left: $small
-        border-left: 2px solid $grey--light
+        margin-top: $compact
+        // border-left: 2px solid $grey--light
+        .comment__head,
+        .comment__body
+            padding-left: $large
 
 
 .comment__head
-
+    font-size: $font-ml
+    margin-bottom: $little
 
 .comment__head__img
     +inline-block
     +border-radius(50%)
-    max-width: em(30px)
-    max-height: em(30px)
+    max-width: em(40px)
+    max-height: em(40px)
     margin-right: $thin
-    margin-top: -$micro
 
 .comment__head__meta
     +inline-block
 
-
 .comment__head__meta__name
-    +inline-block
     +tablet(bold)
-    color: $grey--mid
+    color: $grey--mid-dark
     margin-right: $fine
 
 .comment__head__meta__label
@@ -195,18 +188,12 @@
 
 
 .comment__body
-    color: $grey--mid
-    font-size: $font-s
-    p
-        margin-left: 0 // this is because of .article__body p:first-of-type, on tablets that makes room for the comments trigger
-        max-width: none // this is because of .copy p, .article__body p
-        &:last-of-type
-            margin-bottom: 0
+    font-size: $font-ml
 
 
 .comment__tools
     text-align: right
-    padding-right: $small
+    padding-right: $fine
 
 .comment__tools__reply,
 .comment__tools__flag
@@ -219,13 +206,31 @@
     width: 20px
     height: 20px
 
-.comment__report__form
-    margin-bottom: $medium
+.comments__body .comment__form
+    padding-bottom: $medium
+    border-bottom: 2px solid $grey--light
+    textarea
+        margin-top: $compact
 
-.comments__report__actions
+.comment__sender
+    float: left
+    color: $charcoal
+    font-size: $font-s
+    a
+        color: $grey--mid
+
+.comment__form__text
+    font-size: $font-s
+    color: $grey--mid-dark
+
+.comment__form__actions
     text-align: right
+    a
+        font-size: $font-s
+        text-transform: uppercase
+        color: $grey--mid-dark
     .button
-        margin-left: $thin
+        margin-left: $compact
         vertical-align: baseline
 
 .page-wrap--inner.show-comments

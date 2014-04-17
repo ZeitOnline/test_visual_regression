@@ -11,7 +11,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments_older = $('#js-comments-body-older'),
         $comments_newer = $('#js-comments-body-newer'),
         comments_body_height = null,
-        window_width = null;
+        window_width = null,
+        inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
     /**
      * handles comment pagination
@@ -48,20 +49,29 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var replyToComment = function() {
         var cid  = this.getAttribute('data-cid'),
-            name = this.getAttribute('data-name'),
-            form = document.forms['js-comments-form'],
-            node = $(form).find('.comments__recipient').first(),
-            html = 'Antwort auf: <a href="#cid-' + cid + '">' + name + '</a>',
-            x = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft,
-            y = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+            comment = $(this).closest('article'),
+            form = comment.find('.js-reply-form');
 
-        // focus comment input - without scrolling into view
-        // to keep the animated scrolling going
-        form.elements.comment.focus();
-        window.scrollTo(x, y);
+        if ( ! form.length ) {
+            form = $('#js-comments-form')
+                .clone()
+                .removeAttr('id')
+                .addClass('js-reply-form')
+                .css('display', 'none')
+                .appendTo(comment);
+            form.find('.button').prop('disabled', true);
+            form.get(0).elements.pid.value = cid;
+        }
 
-        form.elements.pid.value = cid;
-        node.html(html);
+        if (form.is(':hidden')) {
+            hideOtherForms();
+        }
+
+        form.slideToggle().find('textarea').focus(); // generic = :input:enabled:visible:first
+    };
+
+    var hideOtherForms = function() {
+        $comments_body.find('form').filter(':visible').slideToggle();
     };
 
     /**
@@ -69,8 +79,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var reportComment = function() {
         var cid  = this.getAttribute('data-cid'),
-            comment = $('#cid-' + cid),
-            form = comment.next('.comment__report__form'),
+            comment = $(this).closest('article'),
+            form = comment.find('.js-report-form'),
             template, templateData;
 
         if ( ! form.length ) {
@@ -82,10 +92,14 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 commentId: cid
             };
 
-            form = $(template(templateData)).insertAfter(comment);
+            form = $(template(templateData)).addClass('js-report-form').appendTo(comment);
         }
 
-        form.slideToggle();
+        if (form.is(':hidden')) {
+            hideOtherForms();
+        }
+
+        form.slideToggle().find('textarea').focus();
     };
 
     /**
@@ -94,7 +108,16 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     var cancelReport = function(e) {
         e.preventDefault();
 
-        $(this).closest('.comment__report__form').slideUp();
+        $(this).closest('.js-report-form').slideUp();
+    };
+
+    /**
+     * Enable form submit button
+     */
+    var enableForm = function() {
+        var blank = /^\s*$/.test(this.value);
+
+        $(this.form).find('.button').prop('disabled', blank);
     };
 
     /**
@@ -161,6 +184,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments_body.on('click', '.js-reply-to-comment', replyToComment);
         $comments_body.on('click', '.js-report-comment', reportComment);
         $comments_body.on('click', '.js-cancel-report', cancelReport);
+        $comments.on(inputEvent, '.js-required', enableForm);
         $comments_trigger.click(toggleComments);
         $(window).on('resize', updateLayout);
 
