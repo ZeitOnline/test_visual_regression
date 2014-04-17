@@ -179,8 +179,12 @@ class Comment(object):
 
 def comments_per_unique_id(self):
     try:
-        node_comment_statistics_file = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/data/node-comment-statistics.xml')
-        node_comment_statistics = etree.parse(node_comment_statistics_file)
+        node_comment_statistics_file = zeit.cms.interfaces.ICMSContent(
+                                          'http://xml.zeit.de/'+\
+                                          self.request.registry.settings.\
+                                          node_comment_statistics_path)
+        node_comment_statistics = etree.fromstring(
+                                  node_comment_statistics_file.data.encode())
         nodes = node_comment_statistics.xpath('/nodes/node')
         return {node.values()[0]:node.values()[1] for node in nodes}
     except IOError, TypeError:
