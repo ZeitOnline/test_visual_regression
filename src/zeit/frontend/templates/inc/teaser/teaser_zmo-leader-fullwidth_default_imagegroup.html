@@ -12,7 +12,7 @@ Available attributes:
 {% block asset %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 <a href="{{teaser.uniqueId | translate_url}}">
-    <div class="scaled-image cp__lead-full">
+    <div class="scaled-image is-pixelperfect cp__lead-full" data-wrap=".cp__lead-full__wrap">
         <!--[if gte IE 9]> -->
             <noscript data-ratio="{{image.ratio}}">
         <!-- <![endif]-->

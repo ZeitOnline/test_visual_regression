@@ -28,7 +28,13 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
         width = width || $img.width();
         if (subsequent && $img.parents('.is-pixelperfect').length) {
             // get the parent height, don’t use ratio to update pixelperfect img
-            height = $img.parent().parent().height();
+            // it also possible to pass the height delivering element via data-wrap
+            if( $img.parent().attr('data-wrap') ){
+                height = $($img.parent().attr('data-wrap')).height();
+            }else{
+                height = $img.parent().parent().height();
+            }
+
         } else {
             //ToDo (T.B.) $img.height() has a wrong value if alt attribute is set in image
             //height = height || $img.height() || Math.round(width / $img.data('ratio'));
