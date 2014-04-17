@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/data/node-comment-statistics.xml</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:2a16674c-7783-4e41-b2c4-e82a57c5619b}</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2012-08-15T16:56:04Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">72234</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 15 Aug 2012 13:40:05 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1061f5-11a2a-4c74e107f5740"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">application/xml</attribute>
+</head>
