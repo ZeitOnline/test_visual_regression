@@ -1,48 +1,45 @@
 $tabs__active-border: #CCC
 
 .tabs
-  width: 100%
+    width: 100%
 
 .tabs__head
-  +pie-clearfix
-  margin-bottom: $small
+    +pie-clearfix
 
 .tabs__head__tab
-  +tablet
-  +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
-  float: left
-  padding: $little $small
-  text-align: center
-  text-transform: uppercase
-  letter-spacing: 1px
-  background-color: $white
-  border-bottom: 1px solid $tabs__active-border
-  border-right: 1px solid $tabs__active-border
-  +on-interaction
-    color: $grey
-    border-color: $tabs__active-border
-    text-decoration: none
-  &.is-active
-    +link-colors($grey, $grey, $grey, $grey, $grey)
+    +tablet
+    +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
+    float: left
+    padding: $little $small
+    text-align: center
+    text-transform: uppercase
+    letter-spacing: 1px
     background-color: $white
-    border: none
+    border-bottom: 1px solid $tabs__active-border
     border-right: 1px solid $tabs__active-border
-    border-top: 1px solid $tabs__active-border
-  &:last-child
-    border-right: none
-  .has-2 &
-    width: 50%
-  .has-3 &
-    width: 33.333%
-  .has-4 &
-    width: 25%
-  .has-5 &
-    width: 20%
+    +on-interaction
+        color: $grey
+        border-color: $tabs__active-border
+        text-decoration: none
+    &.is-active
+        +link-colors($grey, $grey, $grey, $grey, $grey)
+        background-color: $white
+        border: none
+        border-right: 1px solid $tabs__active-border
+        border-top: 1px solid $tabs__active-border
+    &:last-child
+        border-right: none
+    .has-2 &
+        width: 50%
+    .has-3 &
+        width: 33.333%
+    .has-4 &
+        width: 25%
+    .has-5 &
+        width: 20%
 
 .tabs__content
-  padding: $small
-  margin-bottom: $medium
-  .js &
-    display: none
-  .no-js &, &.is-active
-    display: block
+    .js &
+        display: none
+    .no-js &, &.is-active
+        display: block
