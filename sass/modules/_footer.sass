@@ -3,25 +3,53 @@
   display: block
   background-color: $grey--mid-dark
   text-align: center
-  padding: $big $small $large $small
+  padding: $petite $small $wide $small 
 
-.main-footer__Z
-  margin-bottom: $small
-  &:after, &:before
-    +inline-block
-    content: ''
-    max-width: em(140px)
-    width: 30%
-    height: 1px
-    background-color: $grey
+.main-footer__box
+  font-size: $font-xxs
+  +respond-min($break-1)
+    font-size: $font-xs
 
-.main-footer__Z__img
-  +inline-block
-  margin: 0 $small
-  width: em(15px)
-  max-width: em(15px)
+.main-footer__ZM
+  height: $wide
+  +respond-min($break-0)
+    height: $big
+    float: left
+    border-right: $dblhair solid $grey
 
-.main-footer__C
+.main-footer__ZM__img
+  display: block
+  width: 41px
+  height: 20px
+  background-size: contain
+  margin-right: $little
+  opacity: 0.3
+  margin-top: $micro
+
+.main-footer__links
   color: $grey
-  text-transform: uppercase
-  letter-spacing: 1px
+  text-align: left
+  //Verlag schouldnt have a dot
+  div:first-child
+    li:first-child
+      &:after
+        content: ''
+  ul
+    list-style-type: none
+    margin: 0
+    padding: 0
+    li
+      display: inline
+      &:after
+        content: '•'
+        margin: 0 $tiny 0 $tiny
+      &:last-child:after
+        content: ''
+  a
+    +on-interaction
+      text-decoration: none
+      border-color: $color-link--default
+      color: $color-link--default
+  +respond-min($break-0)
+    margin-left: $little
+    float: left

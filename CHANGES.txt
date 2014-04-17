@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.2.20 (unreleased)
 -------------------
 
+- add new footer and change link color
 - Add new ZMO teaser and image formats
 
 
