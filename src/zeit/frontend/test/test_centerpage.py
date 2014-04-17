@@ -204,7 +204,7 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
             "img")
         assert img.get_attribute("src") == 'http://'\
             '127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/'\
+            'bitblt-74x42-466d08ab7d9e8cc7182af9503b5e4e26f7899607/'\
             'katzencontent-148x84.jpg'
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
@@ -325,8 +325,8 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         subtitle = teaser.find_element_by_tag_name("span")
         src_img = \
             'http://127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-640x480-9233bf866124e837824b56b39c8df601'\
-            '48115b15/katzencontent-940x400.jpg'
+            'bitblt-470x200-70300116b0be03fac91bbbe494056273'\
+            'b87988c2/katzencontent-940x400.jpg'
 
         # structure
         assert len(img_wrap) != 0
@@ -429,7 +429,7 @@ def test_teaser_image_url_should_be_created(
 
     image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(
-        "http://example.com/centerpage/katzencontent/"
+        "http://example.com/centerpage/katzencontent/"\
         "bitblt-.*katzencontent-540x304.jpg",
         image_url)
 

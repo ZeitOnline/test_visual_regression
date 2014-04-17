@@ -70,7 +70,6 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'class="main-footer__Z__img" /></div>' \
         '<div class="main-footer__C">&copy; ' \
         + str(current_year) + ' ZEIT Online</div>' \
-        '</figure>' \
         '</footer>'
 
     request = Mock()
@@ -598,10 +597,11 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
               "wt.sendinfo();",
               "http://zeit01.webtrekk.net/" +
               "981949533494636/wt.pl?p=311,redaktion" +
-              ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0&" +
-              "cg1=Redaktion&cg2=Artikel&cg3=lebensart&cg4=Online&" +
-              "cp1=Martin Mustermann&cp2=lebensart/mode/article&cp3=1&cp4=" +
-              "test;test&cp6=1000&cp7=&cp9=lebensart/mode/article"]
+              ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0" +
+              "&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart" +
+              "&amp;cg4=Online&amp;cp1=Martin Mustermann" +
+              "&amp;cp2=lebensart/mode/article&amp;cp3=1&amp;cp4=test;test" +
+              "&amp;cp6=1000&amp;cp7=&amp;cp9=lebensart/mode/article"]
     el_cont = ['1: "Redaktion"',
                '2: "Artikel"',
                '3: "lebensart"',
@@ -680,7 +680,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
              'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
              'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
-             '+ diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
+             '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
              '/javascript"><\/script>\');'
     lines = tpl.module.adplace(banner).splitlines()
     output = ""
