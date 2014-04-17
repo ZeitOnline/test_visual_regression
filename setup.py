@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.2.18.dev0',
+    version='0.2.21.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
@@ -31,6 +31,7 @@ setup(
         'zeit.connector >= 2.3.2.dev0',
         'zeit.content.article',
         'zeit.content.author',
+        'zeit.content.cp',
         'zeit.content.gallery',
         'zeit.content.image',
         'zeit.content.infobox',
