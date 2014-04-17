@@ -200,7 +200,7 @@
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -360,12 +360,32 @@
 <script>n_pbt = n_pbt.substr(0,1150);</script>
 {%- endmacro %}
 
-{% macro main_footer(year, request) -%}
+{% macro main_footer() -%}
     <footer class="main-footer">
-        <div class="main-footer__Z">
-            <img src="{{request.asset_url('img/z-logo.svg')}}" class="main-footer__Z__img" />
+        <div class="main-footer__box is-constrained is-centered">
+            <div class="main-footer__ZM">
+                <span class="main-footer__ZM__img icon-zm-logo--white"></span>
+            </div>     
+            <div class="main-footer__links">
+                <div>
+                    <ul>
+                        <li>VERLAG</li>
+                        <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
+                        <li><a href="http://www.zeitverlag.de/presse/rechte-und-lizenzen">Rechte &amp; Lizenzen</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>Bildrechte</li>
+                        <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
+                        <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
+                        <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
+                        <li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>
+                        <li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="main-footer__C">&copy; {{year}} ZEIT Online</div>
     </footer>
 {%- endmacro %}
 

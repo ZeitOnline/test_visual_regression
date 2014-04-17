@@ -52,7 +52,7 @@ class Application(object):
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
-            self.settings['vivi_zeit.frontend_banner-source'])
+            self.settings.get('vivi_zeit.frontend_banner-source', ''))
         zeit.frontend.banner.banner_list = \
             zeit.frontend.banner.make_banner_list(banner_source)
 
