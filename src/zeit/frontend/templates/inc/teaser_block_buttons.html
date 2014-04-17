@@ -18,6 +18,7 @@ Available attributes:
 
 <div class='cp__buttons__wrap'>
     {% for teaser in teaser_block %}
+        <span>{{ view.teaser_get_commentcount(teaser.uniqueId) }} Kommentare</span>
         {% include get_teaser_template(
             teaser_block.layout.id,
             teaser | block_type,
