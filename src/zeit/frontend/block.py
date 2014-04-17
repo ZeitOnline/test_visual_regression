@@ -204,6 +204,7 @@ class InlineGalleryImage(Image):
 
         if hasattr(item, 'image'):
             self.src = item.image.uniqueId
+            self.uniqueId = item.image.uniqueId
             self.image = item.image
         image_meta = zeit.content.image.interfaces.IImageMetadata(item)
         # TODO: get complete list of copyrights with links et al
