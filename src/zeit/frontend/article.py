@@ -69,3 +69,7 @@ class ILongformArticle(zeit.content.article.interfaces.IArticle):
 
 class IShortformArticle(zeit.content.article.interfaces.IArticle):
     pass
+
+
+class IStandardColumnArticle(zeit.content.article.interfaces.IArticle):
+    pass
