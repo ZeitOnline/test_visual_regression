@@ -109,6 +109,19 @@ class HeaderImage(Image):
 
 @implementer(IFrontendHeaderBlock)
 @adapter(zeit.content.article.edit.interfaces.IImage)
+class ColumnImage(Image):
+
+    def __new__(cls, model_block):
+        if (getattr(model_block, 'is_empty', False)):
+            return None
+        return super(Image, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block):
+        super(ColumnImage, self).__init__(model_block)
+
+
+@implementer(IFrontendHeaderBlock)
+@adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImageStandard(HeaderImage):
     pass
 

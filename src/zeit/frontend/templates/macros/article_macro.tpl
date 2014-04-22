@@ -195,6 +195,19 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
+{% macro columnimage(obj) -%}
+    <div class="scaled-image is-pixelperfect">
+        <!--[if gte IE 9]> -->
+        <noscript>
+        <!-- <![endif]-->
+            <img class="article__main-image--longform" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}">
+        <!--[if gte IE 9]> -->
+        </noscript>
+        <!-- <![endif]-->
+    </div>{{obj.caption}}{{obj.copyright}}
+{%- endmacro %}
+
+
 {% macro meta_author(authors, class="article__head__meta__author") %}
     {%- if authors -%}
         {%- for author in authors -%}
