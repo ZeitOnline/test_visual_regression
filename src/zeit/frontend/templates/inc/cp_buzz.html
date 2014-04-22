@@ -16,7 +16,7 @@ Available attributes:
     {% for service, articles in view.area_buzz.items() %}
     <div class='buzz__service'>
         <div class='buzz__header'>
-            <div class="buzz__circle icon-{{ service }}"></div>
+            <div class="buzz__icon icon-buzz-{{ service }}"></div>
             <div class="buzz__caption">{{ captions[service][0] }}</div>
         </div>
         <div class="buzz__service__list">
@@ -36,4 +36,5 @@ Available attributes:
         </div>
     </div>
     {% endfor %}
+    <div class="buzz__divider"></div>
 </div>
