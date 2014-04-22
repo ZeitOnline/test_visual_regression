@@ -71,5 +71,5 @@ class IShortformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
-class IStandardColumnArticle(zeit.content.article.interfaces.IArticle):
+class IColumnArticle(zeit.content.article.interfaces.IArticle):
     pass

@@ -6,7 +6,7 @@ from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
-from zeit.frontend.article import IStandardColumnArticle
+from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
 from zeit.frontend.centerpage import get_image_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
@@ -470,7 +470,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, IShortformArticle)
                 if IArticleTemplateSettings(context).template == 'column':
                     zope.interface.alsoProvides(context,
-                                                IStandardColumnArticle)
+                                                IColumnArticle)
             return self._change_viewname(tdict)
         except OSError, e:
             if e.errno == 2:
