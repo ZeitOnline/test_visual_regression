@@ -280,7 +280,7 @@ def format_date(obj, type='short'):
 
 
 def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
-    #customization of https://bitbucket.org/russellballestrini/ago :)
+    # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
     if type(dt) is not type(timedelta()):
         delta = datetime.now() - dt
@@ -289,27 +289,30 @@ def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
     if delta < timedelta(0):
         the_tense = future_tense
 
-    delta = abs( delta )
+    delta = abs(delta)
     d = {
-        'Jahr'   : int(delta.days / 365),
-        'Tag'    : int(delta.days % 365),
-        'Stunde'   : int(delta.seconds / 3600),
-        'Minute' : int(delta.seconds / 60) % 60,
-        'Sekunde' : delta.seconds % 60
+        'Jahr': int(delta.days / 365),
+        'Tag': int(delta.days % 365),
+        'Stunde': int(delta.seconds / 3600),
+        'Minute': int(delta.seconds / 60) % 60,
+        'Sekunde': delta.seconds % 60
     }
     hlist = []
     count = 0
-    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
-    units_plural = { 'Jahr':'Jahren', 'Tag':'Tagen', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
+    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
+                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
     for unit in units:
         unit_displayed = unit
-        if count >= precision: break # met precision
-        if d[ unit ] == 0: continue # skip 0's
-        if d[ unit ] != 1:
+        if count >= precision:
+            break  # met precision
+        if d[unit] == 0:
+            continue  # skip 0's
+        if d[unit] != 1:
             unit_displayed = units_plural[unit]
-        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        hlist.append('%s %s' % (d[unit], unit_displayed))
         count += 1
-    human_delta = ', '.join( hlist )
+    human_delta = ', '.join(hlist)
     return the_tense.format(human_delta)
 
 
