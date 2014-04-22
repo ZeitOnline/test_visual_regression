@@ -41,7 +41,7 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='komplettansicht',
              renderer='templates/article_komplett.html')
-class Article(zeit.frontend.view.Base):
+class Article(zeit.frontend.view.Content):
 
     advertising_enabled = True
     main_nav_full_width = False
@@ -63,10 +63,6 @@ class Article(zeit.frontend.view.Base):
         return {}
 
     @property
-    def title(self):
-        return self.context.title
-
-    @property
     def template(self):
         template = IArticleTemplateSettings(self.context).template
         return template if template is not None else "default"
@@ -75,14 +71,6 @@ class Article(zeit.frontend.view.Base):
     def header_layout(self):
         layout = IArticleTemplateSettings(self.context).header_layout
         return layout if layout is not None else "default"
-
-    @property
-    def subtitle(self):
-        return self.context.subtitle
-
-    @property
-    def supertitle(self):
-        return self.context.supertitle
 
     @property
     def pagetitle(self):
@@ -242,71 +230,6 @@ class Article(zeit.frontend.view.Base):
             return 'summary_large_image'
         else:
             return 'summary'
-
-    @property
-    def date_first_released(self):
-        tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(
-            self.context).date_first_released
-        if date:
-            return date.astimezone(tz)
-
-    @property
-    def date_first_released_meta(self):
-        return IPublishInfo(
-            self.context).date_first_released.isoformat()
-
-    @property
-    def date_last_published_semantic(self):
-        tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(self.context).date_last_published_semantic
-        if self.date_first_released is not None and date is not None:
-            if date > self.date_first_released:
-                return date.astimezone(tz)
-            else:
-                return None
-
-    def _get_date_format(self):
-        if self.context.product:
-            if self.context.product.id == 'ZEI' or \
-               self.context.product.id == 'ZMLB':
-                return 'short'
-            else:
-                return 'long'
-        else:
-            return 'long'
-
-    @property
-    def show_date_format(self):
-        if self.date_last_published_semantic:
-            return 'long'
-        else:
-            return self._get_date_format()
-
-    @property
-    def show_date_format_seo(self):
-        return self._get_date_format()
-
-    @property
-    def show_article_date(self):
-        if self.date_last_published_semantic:
-            return self.date_last_published_semantic
-        else:
-            return self.date_first_released
-
-    @property
-    def rankedTags(self):
-        return self.context.keywords
-
-    @property
-    def rankedTagsList(self):
-        keyword_list = ''
-        if self.rankedTags:
-            for keyword in self.context.keywords:
-                keyword_list += keyword.label + ';'
-            return keyword_list[:-1]
-        else:
-            return ''
 
     @property
     def genre(self):
