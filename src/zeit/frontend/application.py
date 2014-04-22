@@ -53,7 +53,7 @@ class Application(object):
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
-            self.settings['vivi_zeit.frontend_banner-source'])
+            self.settings.get('vivi_zeit.frontend_banner-source', ''))
         zeit.frontend.banner.banner_list = \
             zeit.frontend.banner.make_banner_list(banner_source)
 
@@ -345,6 +345,18 @@ default_images_sizes = {
     'default': (200, 300),
     'large': (800, 600),
     'small': (200, 300),
+    'upright': (320, 480),
+    'zmo-xl-header': (460, 306),
+    'zmo-xl': (460, 306),
+    'zmo-medium-left': (225, 125),
+    'zmo-medium-center': (225, 125),
+    'zmo-medium-right': (225, 125),
+    'zmo-large-left': (225, 125),
+    'zmo-large-center': (225, 125),
+    'zmo-large-right': (225, 125),
+    'zmo-small-left': (225, 125),
+    'zmo-small-center': (225, 125),
+    'zmo-small-right': (225, 125),
     '540x304': (290, 163),
     '940x400': (470, 200),
     '148x84': (74, 42),
@@ -352,32 +364,16 @@ default_images_sizes = {
     '368x110': (160, 48),
     '368x220': (160, 96),
     '180x101': (90, 50),
-    'teaser_classic': (150, 84),
-    'teaser_tile': (150, 150),
-    'teaser_series_landscape': (320, 213),
-    'teaser_series_square': (320, 320),
-    'teaser_series_portrait': (320, 480),
-    'teaser_column_dream': (320, 400),
-    'teaser_column_snap_landscape': (320, 180),
-    'teaser_column_snap_portrait': (320, 480),
-    'article_tiny_landscape': (150, 100),
-    'article_tiny_portrait': (150, 225),
-    'article_lead': (460, 368),
-    'article_small_landscape': (225, 150),
-    'article_small_portrait': (225, 337),
-    'article_medium_landscape': (330, 220),
-    'article_medium_portrait': (330, 495),
-    'article_large_landscape': (460, 306),
-    'article_large_portrait': (460, 690),
-    'nextread_large': (460, 259),
-    'nextread_medium': (330, 220),
-    'hp_lead_square': (320, 320),
-    'hp_lead_portrait': (320, 432),
-    'hp_lead_superspecial': (490, 275),
-    'special_thumbnail': (50, 50),
-    'special_column': (150, 100),
-    'special_dream': (460, 575),
-    'special_longread': (800, 450)
+    'zmo-landscape-large': (460, 306),
+    'zmo-landscape-small': (225, 125),
+    'zmo-square-large': (200, 200),
+    'zmo-square-small': (50, 50),
+    'zmo-lead-upright': (320, 480),
+    'zmo-upright': (320, 432),
+    'zmo-large': (460, 200),
+    'zmo-medium': (330, 100),
+    'zmo-small': (200, 50),
+    'zmo-x-small': (100, 25),
 }
 
 

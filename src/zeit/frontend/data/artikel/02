@@ -93,38 +93,8 @@
         <subtitle>Eine elegante Frau steht unter Verdacht – der Dummheit und der Frivolität. Warum? Ein Gespräch über Mode mit Barbara Vinken, Autorin des Buches "Angezogen"</subtitle>
         <byline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
 
-        <image-credits>Fotos: Sigrid Reinichs</image-credits>
-        <caption>Barbara Vinken ist Professorin für Literaturwissenschaft und romanische Philologie.
-      Nach New York, Paris, Berlin lehrt sie zurZeit in München. Für uns öffnet sie den
-      Kleiderschrank und zeigt ihre Lieblingsstücke, hier ein Kleid von AlaÏA. links auf der Suche
-      nach einem Buch, in einem Kleid von Rolan Mouret, Schuhe: Jimmy Choo</caption>
-        <caption>Das kleine Schwarze zeichnet die Figur als Silhouette, wie ein Anzug es nie könnte.
-      Links oben: AlaÏa, dazu Schuhe von Manolo Blahnik. Oben rechts: kurzes Kleid von Thierry
-      Mugler. Unten links: Kleid von Lanvin. unten rechts: Kleid von Prada, Jacke Sonja
-      Rykiel</caption>
-        <caption>Das Frivole der Mode ist dem Geist des Protestantismus verhasst. Lieber Nackt als
-      geschmückt! Barbara Vinken in einem Kleid von Lanvin</caption>
-        <entry xmlns="http://namespaces.zeit.de/bibinfo">
-            <auth-info>
-                <author>Barbara Vinken</author>
-            </auth-info>
-            <title>Angezogen - Das Geheimnis der Mode</title>
-            <genre>Sachbuch</genre>
-            <category>Sachbuch</category>
-            <original_language>Deutsch</original_language>
-            <edition>
-                <publisher>Klett Cotta</publisher>
-                <year>2013</year>
-                <pages>255</pages>
-                <price>19,95</price>
-            </edition>
-        </entry>
 
         <division type="page" teaser="&quot;Ich möchte Weiblichkeit behaupten&quot;">
-            <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" src="http://xml.zeit.de/lebensart/mode/2013-10/Inline-vinken-3/Inline-vinken-3-180xVar.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
-                <bu>Kleid von Prada, Jacke von Sonja Rykiel</bu>
-                <copyright>© Sigrid Reinichs</copyright>
-            </image>
             <p>
                 <strong>ZEIT:</strong>
         Sie adressieren Ihr Buch an ein Publikum, das in den protestantischen Denkmustern lebt,

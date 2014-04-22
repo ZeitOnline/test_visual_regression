@@ -193,6 +193,7 @@ def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
         assert len(image_wrap) != 0
 
 
+#todo: adapt test after define correct format (as)
 def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
@@ -202,6 +203,13 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
     for element in wrap:
         img = element.find_element_by_tag_name(
             "img")
+
+        # image_pattern = \
+        #     'http://.*/centerpage/katzencontent/'\
+        #     'bitblt-.*'\
+        #     '/katzencontent-zmo-landscape-large.jpg'
+        # assert re.search(image_pattern, img.get_attribute("src"))
+
         assert img.get_attribute("src") == 'http://'\
             '127.0.0.1:6543/centerpage/katzencontent/'\
             'bitblt-74x42-466d08ab7d9e8cc7182af9503b5e4e26f7899607/'\
@@ -323,20 +331,16 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         h1 = teaser.find_element_by_tag_name("h1")
         a = teaser.find_elements_by_tag_name("a")
         subtitle = teaser.find_element_by_tag_name("span")
-        src_img = \
-            'http://127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-470x200-70300116b0be03fac91bbbe494056273'\
-            'b87988c2/katzencontent-940x400.jpg'
+        image_pattern = \
+            'http://.*/centerpage/katzencontent/'\
+            'bitblt-.*'\
+            '/katzencontent-zmo-landscape-large.jpg'
 
         # structure
         assert len(img_wrap) != 0
         assert len(title_wrap) != 0
 
-        # content
-        assert re.search('http://.*/centerpage/katzencontent/' +
-                         'bitblt-.*/' +
-                         'katzencontent-940x400.jpg',
-                         img.get_attribute("src"))
+        assert re.search(image_pattern, img.get_attribute("src"))
         assert unicode(h1.text) == u'\u00ABArticle Image Asset Titel\u00BB'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
