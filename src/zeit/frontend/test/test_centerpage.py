@@ -157,7 +157,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
             "img")
         assert img.get_attribute("src") == 'http://'\
             '127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-200x300-c302245709334b3eb72a8de061de81a6d193e3d5/'\
+            'bitblt-290x163-6f23eb21841c68a24ccd3e4c753ff985aef5a0b9/'\
             'katzencontent-540x304.jpg'
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
@@ -204,7 +204,7 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
             "img")
         assert img.get_attribute("src") == 'http://'\
             '127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-640x480-9233bf866124e837824b56b39c8df60148115b15/'\
+            'bitblt-74x42-466d08ab7d9e8cc7182af9503b5e4e26f7899607/'\
             'katzencontent-148x84.jpg'
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
@@ -323,17 +323,17 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         h1 = teaser.find_element_by_tag_name("h1")
         a = teaser.find_elements_by_tag_name("a")
         subtitle = teaser.find_element_by_tag_name("span")
-        src_img = \
-            'http://127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-640x480-9233bf866124e837824b56b39c8df601'\
-            '48115b15/katzencontent-940x400.jpg'
+        image_pattern = \
+            'http://.*/centerpage/katzencontent/'\
+            'bitblt-.*'\
+            '/katzencontent-zmo-landscape-large.jpg'
 
         #structure
         assert len(img_wrap) != 0
         assert len(title_wrap) != 0
 
         #content
-        assert src_img == unicode(img.get_attribute("src"))
+        assert re.search(image_pattern, img.get_attribute("src"))
         assert unicode(h1.text) == u'\u00ABArticle Image Asset Titel\u00BB'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
@@ -429,7 +429,7 @@ def test_teaser_image_url_should_be_created(
     image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(
         "http://example.com/centerpage/katzencontent/"
-        "bitblt-200x300.*katzencontent-540x304.jpg",
+        "bitblt-290x163.*katzencontent-540x304.jpg",
         image_url)
 
 

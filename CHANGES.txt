@@ -1,10 +1,23 @@
 Change log for zeit.frontend
 ============================
 
-0.2.19 (unreleased)
+0.2.21 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- new layouts for zmo-teaser-blocks
+
+
+0.2.20 (2014-04-17)
+-------------------
+
+- add new footer and change link color
+- Add new ZMO teaser and image formats
+
+
+0.2.19 (2014-04-15)
+-------------------
+
+- imporove linkreach_url configuration
 
 
 0.2.18 (2014-04-15)

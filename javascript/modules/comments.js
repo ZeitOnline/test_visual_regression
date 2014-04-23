@@ -1,16 +1,17 @@
 /* global console, define, alert, _ */
 define(['jquery', 'underscore', 'modules/tabs'], function() {
 
-    var $comments_trigger = $('#js-comments-trigger');
-    var $comments = $('#js-comments');
-    var $page_wrap_inner = $('#js-page-wrap-inner');
-    var $comments_tabs_head = $('#js-comments-tabs-head');
-    var $comments_body = $('#js-comments-body');
-    var $comments_active_list;
-    var $comments_older = $('#js-comments-body-older');
-    var $comments_newer = $('#js-comments-body-newer');
-    var comments_body_height = null;
-    var window_width = null;
+    var $comments_trigger = $('#js-comments-trigger'),
+        $comments = $('#js-comments'),
+        $page_wrap_inner = $('#js-page-wrap-inner'),
+        $page_ad_container = $('#iqd_align_Ad'),
+        $comments_tabs_head = $('#js-comments-tabs-head'),
+        $comments_body = $('#js-comments-body'),
+        $comments_active_list,
+        $comments_older = $('#js-comments-body-older'),
+        $comments_newer = $('#js-comments-body-newer'),
+        comments_body_height = null,
+        window_width = null;
 
     /**
      * handles comment pagination
@@ -50,13 +51,17 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             name = this.getAttribute('data-name'),
             form = document.forms['js-comments-form'],
             node = $(form).find('.comments__recipient').first(),
-            html = 'Antwort auf: <a href="#cid-' + cid + '">' + name + '</a>';
+            html = 'Antwort auf: <a href="#cid-' + cid + '">' + name + '</a>',
+            x = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft,
+            y = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 
-        // focus comment input
+        // focus comment input - without scrolling into view
+        // to keep the animated scrolling going
         form.elements.comment.focus();
+        window.scrollTo(x, y);
 
         form.elements.pid.value = cid;
-        node.html(html).find("a[href^='#']").animateScroll();
+        node.html(html);
     };
 
     /**
@@ -97,7 +102,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var toggleComments = function() {
         $page_wrap_inner.toggleClass('show-comments');
-
+        $page_ad_container.toggleClass('show-comments');
         // this should not be done on every toggle, but we have to do it once *after* comments get visible. refactor
         calculatePagination();
     };
@@ -146,6 +151,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var init = function() {
 
+        if (! $comments.length) {
+            return;
+        }
+
         initLayout();
 
         // register event handlers
@@ -154,8 +163,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments_body.on('click', '.js-cancel-report', cancelReport);
         $comments_trigger.click(toggleComments);
         $(window).on('resize', updateLayout);
-        // enable animation of dynamically added anchor links
-        $comments_body.on('click', ".js-cancel-report a[href^='#']", function(e){ $(this).animateScroll(); });
 
         // mimic hover for the sake of grunticons - change later (SVG Sprites FTW)
         $('.icon-flag').hover(function() {

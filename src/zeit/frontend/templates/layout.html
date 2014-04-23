@@ -27,11 +27,11 @@
                 } else {
                     viewport_meta.setAttribute( 'content', viewports.standard);
                 }
-                
+
             };
             viewport_set();
-            window.onresize = function() { 
-                viewport_set(); 
+            window.onresize = function() {
+                viewport_set();
             };
         </script>
         {% endif %}
@@ -86,32 +86,35 @@
 
         <div class="page-wrap">
 
-            {% if view.context.advertising_enabled %}
+        {% if view.context.advertising_enabled %}
             <div class="iqdplace">
                 <div id="sas_13500"></div>
             </div>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama.adplace(view.banner['superbanner']) }}
+                        {{ lama.adplace(view.banner(1)) }}
                         <div id="iqd_rightAd">
-                            {{ lama.adplace(view.banner['skyscraper']) }}
+                            {{ lama.adplace(view.banner(2)) }}
                         </div>
                     </div>
                 </div>
             </div>
-            {% endif %}
+        {% endif %}
 
-            {% block page_wrap_inner %}
-                <div class="page-wrap--inner" id="js-page-wrap-inner">
+        {% block page_wrap_inner %}
+            <div class="page-wrap--inner" id="js-page-wrap-inner">
+        {% endblock page_wrap_inner %}
+
                 {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
-            {% endblock page_wrap_inner %}
 
-            <main role="main" class="main">
-                {%  block content %}{% endblock content %}
-            </main>
-            {{lama.main_footer(view.context.current_year, request)}}
+                <main role="main" class="main">
+                    {%  block content %}{% endblock content %}
+                </main>
 
+                {{lama.main_footer()}}
+
+            </div><!-- end: #js-page-wrap-inner -->
         </div>
 
         <div id="iqdLastNode">

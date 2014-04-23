@@ -57,17 +57,27 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/artikel/01" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Flüchtlinge</supertitle>
+        <teaser_supertitle xsi:nil="true"/>
+        <title xsi:nil="true"/>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+          <display_name py:pytype="str">Carolin Emcke</display_name>
+          <location>Eisenhüttenstadt</location>
+        </author>
+      </reference>
+    </nextread>
   </head>
   <body>
     <supertitle>Candys</supertitle>
     <title>More Candy</title>
     <subtitle>Apple pie cotton candy sweet roll powder I love. I love toffee jelly beans fruitcake. Macaroon candy canes macaroon unerdwear.com. Liquorice tiramisu cake sweet cotton candy sesame snaps tart apple pie. Macaroon chocolate bar fruitcake powder bear claw. Gummi bears brownie chocolate cake brownie cake icing. Gummi bears brownie pie biscuit. Icing candy I love cake cake ice cream.</subtitle>
     <division type="page">
-      <image layout="large" is_empty="True"/>
-      <image src="http://xml.zeit.de/zeit-magazin/fotos/flucht_raw_biga_bilder/fr/img/bild8_ls.jpg" type="jpg" publication-date="" expires="" layout="zmo-medium-center" is_empty="False">
-        <bu py:pytype="str"/>
-        <copyright py:pytype="str">©</copyright>
-      </image>
       <p>
         <br/>
       </p>
