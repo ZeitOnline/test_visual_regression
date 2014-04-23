@@ -32,4 +32,4 @@ def test_cookieless_request_returns_default(app_info_request):
 
 @mark.user('test-friedbert')
 def test_app_info_contains_user(app_info, app_info_request):
-	assert assemble_app_info(app_info_request)['name'] == 'test-friedbert'
+	assert assemble_app_info(app_info_request)['user']['name'] == 'test-friedbert'

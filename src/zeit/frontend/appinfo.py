@@ -13,7 +13,8 @@ def assemble_app_info(request):
         result['authenticated'] = True
     else:
         result['authenticated'] = False
-    return dict(result, **request.session.get(ZMO_USER_KEY, dict()))
+    result['user'] = request.session.get(ZMO_USER_KEY, dict())
+    return dict(result)
 
 
 app_info = Service(name='appinfo', path='/-/', renderer='json', accept='application/json')
