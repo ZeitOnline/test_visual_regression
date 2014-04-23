@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+      <tag type="free" url_value="internet" uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" ns10:pytype="str">Internet</tag>
+      <tag url_value="facebook" uuid="ddd1c7c5-1864-4642-818c-c153a2c9ebe5" score="4" type="Organization">Facebook</tag>
+      <tag type="free" url_value="katzen" uuid="c62c0ec4-4710-4c45-a41f-837f390f75a9" ns10:pytype="str">Katzen</tag>
+    </rankedTags>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/M/Christine_Meffert/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Christine Meffert</display_name>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/link-serie-gesellschaftskritik" year="2013" issue="28" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/gesellschaftskritik">
+        <supertitle py:pytype="str">Serie</supertitle>
+        <teaser_supertitle py:pytype="str">Serie</teaser_supertitle>
+        <title py:pytype="str">Lesen Sie hier alle Artikel aus der Gesellschaftskritik</title>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+      </reference>
+    </references>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/grumpy-cat/" type="jpg" title="Grumpy Cat bei den MTV Movie Awards 2014" alt="Grumpy Cat bei den MTV Movie Awards 2014" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Grumpy Cat bei den MTV Movie Awards 2014</bu>
+      <copyright py:pytype="str">© Jason Merritt/Getty Images</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2065376</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Christine Meffert</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-15T10:12:25.359168+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.04.2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="genre">glosse</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-17-Gesellschaft</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">gesellschaftskritik</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Gesellschaft</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-17T10:49:25.197602+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">Gesellschaft</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">2144093180</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Gesellschaftskritik</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">Archivfreigabe</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Internet</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="template">column</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2971</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:289c6f07-710e-42f3-85ad-398a6d08f927}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Über schlechte Laune</title>
+    <subtitle/>
+    <byline>von Christine Meffert</byline>
+    <division type="page">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/grumpy-cat/" type="jpg" title="Grumpy Cat bei den MTV Movie Awards 2014" alt="Grumpy Cat bei den MTV Movie Awards 2014" align="left" publication-date="" expires="" is_empty="False" layout="large">
+        <bu py:pytype="str">Grumpy Cat bei den MTV Movie Awards 2014</bu>
+        <copyright py:pytype="str">© Jason Merritt/Getty Images</copyright>
+      </image>
+      <p>Es ist selten geworden, dass man mit schlechter Laune ein Star wird. Die Kultur der schlechten Laune ist mit Figuren wie Ekel Alfred und Oskar aus der Mülltonne untergegangen.</p>
+      <p>Heute haben die Figuren auf den Bildschirmen gefälligst supergut drauf zu sein, dass heißt nicht zwangsläufig nett und lieb – siehe Dieter Bohlen –, aber bitte bloß nicht "schlecht gelaunt". Wenn einer "schlecht gelaunt" rüberkommt, ist das fast schon sein mediales Todesurteil, da mag der schlecht Gelaunte noch so viel auf dem Kasten haben und noch so viele Gründe für schlechte Laune.</p>
+      <p>
+        Im echten Leben trifft man sie natürlich immer noch, die Stinkstiefel, Weltverächter und Misanthropen. Sie begegnen uns in der Familie, im Büro und im Fahrstuhl, und leider wird ihre Lebenshaltung selten durch die Prise Humor veredelt, die schlechte Laune unterhaltsam machen kann. Aber auf dem Bildschirm hat Muffeligkeit kaum noch eine Chance: Aus den Medien ist sie fast völlig verschwunden. Auch auf Facebook kann man nur
+        <em>liken,</em>
+        nicht
+        <em>haten.</em>
+</p>
+      <p>
+        Nun gibt es wahrscheinlich bei jeder extremen Entwicklung einen Moment, an dem die Sache kippt. Dass die mediale Gute-Laune-Welle ihren Scheitelpunkt erreicht haben könnte, dafür gibt es nun ein lebendes Indiz. Nein, es ist kein Mensch, die trauen sich – außer vielleicht Jürgen Klopp in dem einen oder anderen Interview – nicht mehr oder noch nicht. Es ist eine Katze, die, unbesorgt um sozialen  Status, den Vorkämpfer macht. <a class="" href="https://www.facebook.com/TheOfficialGrumpyCat" target="_blank">Vier Millionen Facebook-Fans</a> und ein
+        <em>Time-</em>Cover haben ihr das miesepetrige Aussehen schon eingebracht. Mit ihrer schlechten Laune macht sie sehr vielen Menschen gute.
+      </p>
+      <p>Wer ist dieses Tier, das vorlebt, was viele sich insgeheim wünschen? Einfach mal eine Fresse ziehen, nicht so zu tun, als würde das Leben Spaß machen, und trotzdem extrem beliebt sein?</p>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/bilder/2009/36/gesellschaft/roter-teppich-gesellschaftskritik/roter-teppich-gesellschaftskritik-180xVar.jpg" type="jpg" title="Gesellschaftskritik" align="left" href="http://www.zeit.de/serie/gesellschaftskritik" publication-date="" expires="" set-manually="True" layout="small" is_empty="False">
+        <bu py:pytype="str">Klicken Sie auf das Bild, um weitere Artikel der Serie "Gesellschaftskritik" zu lesen.</bu>
+        <copyright py:pytype="str">© Frazer Harrison/Getty Images </copyright>
+      </image>
+      <p>Geboren wurde Grumpy Cat in Arizona mit einem genetisch bedingten Defekt, dem sogenannten  felinen Kleinwuchs, der auch ihren Gesichtsausdruck erklärt. Anfang April feierte sie ihren zweiten Geburtstag. Und obwohl es ziemlich gut für sie läuft (siehe oben), zeigte sie auch bei ihrer Geburtstagsfeier keine heitere Miene. Das Leben, scheint die Katze zu kommunizieren, ist manchmal einfach zum Kotzen. Warum, so könnte man fragen, brauchen wir eine Katze, um eine so einfache Wahrheit zu transportieren? Happy birthday, Grumpy Cat, und lass dir deine schlechte Laune nicht verderben!</p>
+      <p>
+        <em>Anmerkung der Redaktion, 16.04.2014: In diesem Artikel stand ursprünglich, Grumpy Cat habe einen Stern auf dem Hollywood-"Walk of Fame" erhalten. Diese Information basierte auf einer weit verbreiteten Falschmeldung im Internet.</em>
+      </p>
+    </division>
+    <caption>Schlecht gelaunt berühmt: Grumpy Cat</caption>
+    <image-credits>Foto Rodrigo Vaz / Getty images</image-credits>
+    <supertitle>Serie Gesellschaftskritik</supertitle>
+  </body>
+  <teaser>
+    <title>Über schlechte Laune</title>
+    <text>Grumpy Cat ist im Internet ein Star und bringt den Menschen ihr Anrecht auf schlechte Laune zurück. </text>
+    <supertitle>Serie Gesellschaftskritik</supertitle>
+  </teaser>
+</article>
