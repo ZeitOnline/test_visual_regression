@@ -71,7 +71,9 @@
             color: $grey--mid
             // margin: 0 !important
             padding: 0
-            max-width: auto
+            //max-width: none
+            margin: 0 auto !important
+            margin-top: $small !important
             .figure__caption__copyright
                 color: $charcoal
                 a
@@ -81,6 +83,13 @@
                         border-color: $charcoal
                     &:focus
                         outline: 0
+        .figure__media
+            display: block
+            max-width: 100%
+            max-height: em(520px)
+            height: auto
+            width: auto
+            margin: 0 auto
     // elements not in actual use
     .bx-controls-auto,
     .bx-loading

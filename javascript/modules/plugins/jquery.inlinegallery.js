@@ -124,6 +124,16 @@
                     figures.unbind();
                 }
             });
+
+            var figCaptions = $('.gallery .inline-gallery .figure-full-width .figure__caption');
+            figCaptions.each(function( index ) {
+                var imageWidth = $( this ).prev().find('.figure__media').width();
+                $( this ).width(imageWidth);
+                $( this ).css("max-width", imageWidth);
+                if(imageWidth > 400) {
+                    $( this ).css('padding-right', '30%');
+                }
+            });
 		});
 	};
 })(jQuery);
