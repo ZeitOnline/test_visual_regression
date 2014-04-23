@@ -21,7 +21,6 @@ entry_data = {
 
 
 def test_entry_for_linkreach_should_deserialize():
-
     schema = Entry()
     entry = schema.deserialize(entry_data)
 
@@ -46,16 +45,20 @@ def test_data_sequence_for_linkreach_should_deserialize():
 
 def test_not_provided_service_should_throw_exception():
     with pytest.raises(zeit.frontend.reach.UnprovidedService):
-        LinkReach('file:///foo').fetch_data('foo', 20)
+        LinkReach('file:///foo').fetch_data('foo', 3)
+
 
 def test_data_for_twitter_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('twitter', 20)
-    assert len(data) == 20
+    data = linkreach.fetch_data('twitter', 3)
+    assert len(data) == 3
+
 
 def test_data_for_facebook_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('facebook', 20)
-    assert len(data) == 20
+    data = linkreach.fetch_data('facebook', 3)
+    assert len(data) == 3
+
 
 def test_data_for_googleplus_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('googleplus', 20)
-    assert len(data) == 20
+    data = linkreach.fetch_data('googleplus', 3)
+    assert len(data) == 3
+
