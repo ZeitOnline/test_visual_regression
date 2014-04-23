@@ -40,3 +40,9 @@ def test_banner_should_not_be_displayed_on_short_pages(testserver):
     browser = Browser('%s/artikel/header2' % testserver.url)
     assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
         not in browser.contents
+
+
+def test_banner_should_not_be_displayed_on_disabled_pages(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
+        not in browser.contents
