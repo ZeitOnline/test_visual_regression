@@ -142,15 +142,14 @@
 .comments__head
     margin-top: $page-padding
     margin-bottom: $large
-    .comment__form
-        +padded
+    +padded
 
 .comments__list
     // +translateZ(0)
     +transition(all, 1s)
+    +padded
     position: relative
     top: 0px
-    padding: 0 $small
 
 .comments__body
     overflow: hidden
@@ -199,6 +198,8 @@
 
 .comment
     margin-top: $large
+    &:first-child
+        margin-top: $compact
     &.is-indented
         margin-top: $compact
         // border-left: 2px solid $grey--light
