@@ -196,15 +196,17 @@
 {%- endmacro %}
 
 {% macro columnimage(obj) -%}
-    <div class="scaled-image is-pixelperfect">
-        <!--[if gte IE 9]> -->
-        <noscript>
-        <!-- <![endif]-->
-            <img class="article__main-image--longform" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}">
-        <!--[if gte IE 9]> -->
-        </noscript>
-        <!-- <![endif]-->
-    </div>{{obj.caption}}{{obj.copyright}}
+    <div class="article__column__headerimage">
+        <div class="scaled-image">
+            <!--[if gte IE 9]> -->
+            <noscript data-ratio="{{obj.ratio}}">
+            <!-- <![endif]-->
+                    <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+            <!--[if gte IE 9]> -->
+            </noscript>
+            <!-- <![endif]-->
+        </div>
+    </div>
 {%- endmacro %}
 
 

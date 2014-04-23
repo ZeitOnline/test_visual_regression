@@ -109,6 +109,12 @@ class HeaderImage(Image):
 
 @implementer(IFrontendHeaderBlock)
 @adapter(zeit.content.article.edit.interfaces.IImage)
+class HeaderImageStandard(HeaderImage):
+    pass
+
+
+@implementer(IFrontendHeaderBlock)
+@adapter(zeit.content.article.edit.interfaces.IImage)
 class ColumnImage(Image):
 
     def __new__(cls, model_block):
@@ -118,12 +124,6 @@ class ColumnImage(Image):
 
     def __init__(self, model_block):
         super(ColumnImage, self).__init__(model_block)
-
-
-@implementer(IFrontendHeaderBlock)
-@adapter(zeit.content.article.edit.interfaces.IImage)
-class HeaderImageStandard(HeaderImage):
-    pass
 
 
 @implementer(IFrontendBlock)

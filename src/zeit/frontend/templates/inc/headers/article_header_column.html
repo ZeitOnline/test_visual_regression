@@ -1,10 +1,13 @@
 {% import 'templates/macros/article_macro.tpl' as blocks with context%}
 
 <div class="article__head-wrap">
-    <header class="article__head article__head--stamp is-constrained">
+    <header class="article__head is-constrained">
         {{ blocks.supertitle() }}
         {{ blocks.title() }}
-        {{ blocks.meta_author(view.authors) }}
+
+        <div class="article__column__author__wrap">
+            {{ blocks.meta_author(view.authors, 'article__column__author') }}
+        </div>
 
         {{ blocks[view.header_elem|block_type](view.header_elem) }}
 
