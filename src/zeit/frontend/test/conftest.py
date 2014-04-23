@@ -2,7 +2,6 @@ from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
-from webtest import TestApp
 from webtest import TestApp as TestAppBase
 from os import path
 from os.path import abspath, dirname, join, sep
@@ -153,6 +152,7 @@ def browser(application):
     """ Returns an instance of `webtest.TestApp`. """
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
+
 
 class TestApp(TestAppBase):
 
