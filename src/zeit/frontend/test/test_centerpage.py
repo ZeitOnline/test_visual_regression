@@ -323,17 +323,17 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         h1 = teaser.find_element_by_tag_name("h1")
         a = teaser.find_elements_by_tag_name("a")
         subtitle = teaser.find_element_by_tag_name("span")
-        src_img = \
-            'http://127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-470x200-70300116b0be03fac91bbbe494056273'\
-            'b87988c2/katzencontent-940x400.jpg'
+        image_pattern = \
+            'http://.*/centerpage/katzencontent/'\
+            'bitblt-.*'\
+            '/katzencontent-zmo-landscape-large.jpg'
 
         #structure
         assert len(img_wrap) != 0
         assert len(title_wrap) != 0
 
         #content
-        assert src_img == unicode(img.get_attribute("src"))
+        assert re.search(image_pattern, img.get_attribute("src"))
         assert unicode(h1.text) == u'\u00ABArticle Image Asset Titel\u00BB'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
