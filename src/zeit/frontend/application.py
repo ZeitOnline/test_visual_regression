@@ -98,6 +98,17 @@ class Application(object):
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+
+        from pyramid.authorization import ACLAuthorizationPolicy
+        from .security import CommunityAuthenticationPolicy
+        import pyramid_beaker
+        config.include("pyramid_beaker")
+        session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
+        config.set_session_factory(session_factory)
+        config.set_authentication_policy(CommunityAuthenticationPolicy())
+        config.set_authorization_policy(ACLAuthorizationPolicy())
+        from zeit.frontend.appinfo import assemble_app_info
+        config.add_request_method(assemble_app_info, 'app_info', reify=True)
         return config
 
     def get_repository(self, request):

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/2014/17/paar-abgewendet-streit/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-15T09:19:51.425701+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-04-15T09:20:10.317546+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; milchhonig / photocase.de&lt;/unicode&gt; &lt;string&gt;http://www.photocase.de/milchhonig&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Paar steht abgewendet nebeneinander</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">photocaseskcgsvjz55080421.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e2075cde-f229-4902-afe4-79c2979e8763}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Paar steht abgewendet nebeneinander</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-04-15T09:21:05.579288+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Emotionale K&#xE4;lte</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-04-15T09:20:23.908004+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-04-15T09:20:13Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 15 Apr 2014 09:20:13 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1362d09-1000-4f7114eb6b4e8"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
