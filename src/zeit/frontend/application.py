@@ -99,7 +99,8 @@ class Application(object):
         config.set_session_factory(session_factory)
         config.set_authentication_policy(CommunityAuthenticationPolicy())
         config.set_authorization_policy(ACLAuthorizationPolicy())
-
+        from zeit.frontend.appinfo import assemble_app_info
+        config.add_request_method(assemble_app_info, 'app_info', reify=True)
         return config
 
     def get_repository(self, request):
