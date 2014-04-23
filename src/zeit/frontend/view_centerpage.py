@@ -18,27 +18,27 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagetitle(self):
-        #ToDo(T.B.) should be, doesn't work
-        #return self.context.html-meta-title
+        # ToDo(T.B.) should be, doesn't work
+        # return self.context.html-meta-title
         return 'Lebensart - Mode, Essen und Trinken, Partnerschaft | ZEIT ONLINE'
 
     @property
     def pagedescription(self):
-        #ToDo(T.B.) should be self.context.html-meta-title, doesn't work
-        #return self.context.html-meta-title
+        # ToDo(T.B.) should be self.context.html-meta-title, doesn't work
+        # return self.context.html-meta-title
         output = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
         return output
 
     @property
     def rankedTags(self):
-        #ToDo(T.B.) keywords are empty
+        # ToDo(T.B.) keywords are empty
         return self.context.keywords
 
     @property
     def rankedTagsList(self):
         keyword_list = ''
         if self.rankedTags:
-            #ToDo(T.B.) keywords are empty
+            # ToDo(T.B.) keywords are empty
             for keyword in self.context.keywords:
                 keyword_list += keyword.label + ';'
             return keyword_list[:-1]
@@ -60,15 +60,12 @@ class Centerpage(zeit.frontend.view.Base):
                 return teaser_block
 
     @property
-    def _shares(self):
-        reach_url = self.request.registry.settings.linkreach_host
-        return LinkReach(reach_url)
-
-    @property
     def area_buzz(self):
-        # TODO: Return actual comment data instead of g+ (N.D.)
-        return dict(
-                    twitter=self._shares.fetch_data('twitter', 3),
-                    facebook=self._shares.fetch_data('facebook', 3),
-                    comments=self._shares.fetch_data('googleplus', 3)
+        agatho = self.request.registry.settings.agatho_host
+        linkreach = self.request.registry.settings.linkreach_host
+        reach = LinkReach(agatho, linkreach)
+        buzz = dict(twitter=reach.fetch_service('twitter', 3),
+                    facebook=reach.fetch_service('facebook', 3),
+                    comments=reach.fetch_comments('zeit-magazin', 3)
                     )
+        return buzz
