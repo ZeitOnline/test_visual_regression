@@ -353,8 +353,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
                 </div>
-                <a href="http://community.zeit.de/user/login?destination=" class="button">Anmelden</a>
-                <a href="http://community.zeit.de/user/register?destination=" class="button">Registrieren</a>
+                <a href="http://community.zeit.de/user/login?destination={{request.url|urlencode}}" class="button">Anmelden</a>
+                <a href="http://community.zeit.de/user/register?destination={{request.url|urlencode}}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </div>
