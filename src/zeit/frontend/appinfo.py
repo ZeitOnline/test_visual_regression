@@ -17,4 +17,4 @@ def get_app_info(request):
         result['authenticated'] = False
     # TODO: should expose the user info as custom request predicate
     # instead of exposing the session key here
-    return dict(result, **request.session[ZMO_USER_KEY])
+    return dict(result, **request.session.get(ZMO_USER_KEY, dict()))

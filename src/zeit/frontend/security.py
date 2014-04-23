@@ -14,12 +14,18 @@ class AGATHOAuthenticationPolicy(SessionAuthenticationPolicy):
     """
 
     def authenticated_userid(self, request):
-        # store/retrieve the user info in/from the session
+        # if no community cookie is present, bail out straight away:
+        if request.cookies.get('drupal-userid') is None:
+            # avoid stale session data by making sure it's deleted
+            if ZMO_USER_KEY in request.session:
+                del request.session[ZMO_USER_KEY]
+            return None
+ 
+        # if we have a community cookie, store/retrieve the user info in/from the session
         if not ZMO_USER_KEY in request.session:
             user_info = get_agatho_user_info(request)
             request.session[ZMO_USER_KEY] = user_info
         else:
-            # TODO: either configure a time out or implement logout!
             user_info = request.session[ZMO_USER_KEY]
 
         return user_info['uid']
