@@ -201,7 +201,7 @@
             <!--[if gte IE 9]> -->
             <noscript data-ratio="{{obj.ratio}}">
             <!-- <![endif]-->
-                    <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+                    <img class="figure__media" alt="{{obj.attr_alt|default('')}}" title="{{obj.attr_title|default('')}}" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
             <!--[if gte IE 9]> -->
             </noscript>
             <!-- <![endif]-->
