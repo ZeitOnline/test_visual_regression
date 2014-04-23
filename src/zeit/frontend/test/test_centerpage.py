@@ -450,7 +450,10 @@ def test_image_metadata_should_be_accessible(testserver):
 
 
 def test_get_reaches_from_centerpage_view(dummy_request):
-    view = view_centerpage.Centerpage('', dummy_request)
-    assert len(view.global_twitter_shares) == 10
-    assert len(view.global_googleplus_shares) == 10
-    assert len(view.global_facebook_shares) == 10
+    buzz = view_centerpage.Centerpage('', dummy_request).area_buzz
+
+    assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
+    assert len(buzz['facebook']) == 3
+    assert len(buzz['twitter']) == 3
+    assert len(buzz['comments']) == 3
+
