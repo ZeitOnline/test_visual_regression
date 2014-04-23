@@ -41,6 +41,8 @@ banner_list = None
 
 
 def make_banner_list(banner_config):
+    if not banner_config:
+        return []
     banner_list = []
     file = urllib2.urlopen(banner_config)
     root = objectify.fromstring(file.read())
