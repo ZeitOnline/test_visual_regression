@@ -6,12 +6,12 @@ Available attributes:
 	zeit.frontend.view_centerpage.Centerpage
 #}
 
-{% macro include(obj) -%}
+{% macro include(obj, type) -%}
     {% for teaser_block in obj -%}
         {%-
             set teaser_blocks = [
-                'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
-                'templates/inc/teaser_block_default.html'
+                'templates/inc/' + type + '_block_' + teaser_block.layout.id + '.html',
+                'templates/inc/' + type + '_block_default.html'
             ]
         %}
         {% include teaser_blocks ignore missing %}
@@ -19,8 +19,8 @@ Available attributes:
 {%- endmacro %}
 
 <div class='cp__lead__wrap'>
-    {{ include(view.area_lead) }}
+    {{ include(view.area_lead, 'lead') }}
 </div>
 <div class='cp__lead__informatives__wrap'>
-    {{ include(view.area_informatives) }}
+    {{ include(view.area_informatives, 'inf') }}
 </div>

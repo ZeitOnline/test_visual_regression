@@ -1,0 +1,28 @@
+{#
+
+default lead template.
+
+Available attributes:
+    teaser_block
+    teaser
+
+#}
+
+<div class='cp__buttons__wrap'>
+	{% block asset %}{% endblock %}
+	<span class="cp__buttons__title__wrap">
+	    <span class="cp__buttons__supertitle">
+	    	<a href="{{teaser.uniqueId | translate_url}}">
+	 			{{teaser.teaserSupertitle | hide_none}}
+			</a>
+		</span>
+		<span class="cp__buttons__title">
+			<a href="{{teaser.uniqueId | translate_url}}">
+				{{teaser.teaserTitle}}
+	        </a>
+		</span>
+	    <span class="cp__buttons__subtitle">
+	      {{teaser.teaserText | hide_none}}
+		</span>
+	</span>
+</div>

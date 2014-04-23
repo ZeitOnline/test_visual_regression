@@ -157,7 +157,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
             "img")
         assert re.search('http://.*/centerpage/katzencontent/' +
                          'bitblt-.*/' +
-                         'katzencontent-540x304.jpg',
+                         'katzencontent-zmo-square-large.jpg',
                          img.get_attribute("src"))
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
@@ -179,7 +179,7 @@ def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
 def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap-double")
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
@@ -189,11 +189,10 @@ def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
         image_wrap = element.find_elements_by_css_selector(
             ".cp__buttons__image")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
+        assert len(link_wrap) >= 2
         assert len(image_wrap) != 0
 
 
-#todo: adapt test after define correct format (as)
 def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
@@ -204,16 +203,11 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
         img = element.find_element_by_tag_name(
             "img")
 
-        # image_pattern = \
-        #     'http://.*/centerpage/katzencontent/'\
-        #     'bitblt-.*'\
-        #     '/katzencontent-zmo-landscape-large.jpg'
-        # assert re.search(image_pattern, img.get_attribute("src"))
-
-        assert img.get_attribute("src") == 'http://'\
-            '127.0.0.1:6543/centerpage/katzencontent/'\
-            'bitblt-74x42-466d08ab7d9e8cc7182af9503b5e4e26f7899607/'\
-            'katzencontent-148x84.jpg'
+        image_pattern = \
+            'http://.*/centerpage/katzencontent/'\
+            'bitblt-.*'\
+            '/katzencontent-zmo-landscape-small.jpg'
+        assert re.search(image_pattern, img.get_attribute("src"))
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -255,11 +249,11 @@ def test_cp_button_has_expected_text_content(selenium_driver, testserver):
 def test_cp_button_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap-double")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        assert len(link_wrap) == 3
+        assert len(link_wrap) >= 2
         for link in link_wrap:
             assert link.get_attribute("href") == 'http://'\
                 '127.0.0.1:6543/centerpage/article_image_asset'
@@ -433,22 +427,23 @@ def test_teaser_image_url_should_be_created(
 
     image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(
-        "http://example.com/centerpage/katzencontent/"\
-        "bitblt-.*katzencontent-540x304.jpg",
+        "http://example.com/centerpage/katzencontent/"
+        "bitblt-.*katzencontent-zmo-square-large.jpg",
         image_url)
 
 
 def test_teaser_image_should_be_created_from_image_group_and_image(testserver):
     import zeit.cms.interfaces
     img = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'
-                                          'katzencontent/katzencontent-148x84.jpg')
+                                          'katzencontent/katzencontent'
+                                          '-148x84.jpg')
     imgrp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'
                                             'katzencontent/')
     teaser_image = getMultiAdapter(
         (imgrp, img),
         zeit.frontend.interfaces.ITeaserImage)
 
-    assert teaser_image.caption == 'Die ist der image sub text'
+    assert teaser_image.caption == 'Die ist der image sub text '
     assert teaser_image.src == img.uniqueId
     assert teaser_image.attr_alt == 'Die ist der Alttest'
     assert teaser_image.attr_title == 'Katze!'

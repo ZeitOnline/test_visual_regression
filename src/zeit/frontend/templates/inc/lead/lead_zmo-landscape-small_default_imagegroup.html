@@ -1,17 +1,17 @@
 {#
 
-Imagegroup teaser template for buttons
+imagegroup lead template for zmo-landscape-small
 
 Available attributes:
     teaser
 
 #}
-{% extends "templates/inc/teaser/teaser_buttons_default_default.html" -%}
+{% extends "templates/inc/lead/lead_zmo-landscape-small_default_default.html" -%}
 
 {% block asset %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 <a href="{{teaser.uniqueId | translate_url}}">
-    <div class="scaled-image cp__buttons__image">
+    <div class="scaled-image is-pixelperfect cp__buttons__image" data-wrap=".cp__buttons__image">
         <!--[if gte IE 9]> -->
             <noscript data-ratio="{{image.ratio}}">
         <!-- <![endif]-->

@@ -1,13 +1,13 @@
 {#
 
-Image teaser template for fullwidth teaser
+imagegroup lead template for zmo-leader-fullwidth
 
 Available attributes:
     teaser_block
     teaser
 
 #}
-{% extends "templates/inc/teaser/teaser_zmo-leader-fullwidth_default_default.html" -%}
+{% extends "templates/inc/lead/lead_zmo-leader-fullwidth_default_default.html" -%}
 
 {% block asset %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
