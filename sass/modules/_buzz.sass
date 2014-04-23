@@ -4,22 +4,22 @@
     +respond-max($break-2)
         +visuallyhidden
     +tablet(regular)
-    padding: 0 $compact $compact $compact
     clear: left
+    padding: 0 $compact $compact $compact
     width: 100%
 
 .buzz__header
     +no-user-select
     +tablet(bold)
-    letter-spacing: 1px
-    text-transform: uppercase
-    text-align: center
     font-size: $font-ml
+    letter-spacing: 1px
+    text-align: center
+    text-transform: uppercase
 
 .buzz__divider
-    text-align: center
     border-bottom: $dblhair solid $black
     height: $fine
+    text-align: center
     .buzz__header
         background-color: $white
         padding: 0 $petite
@@ -33,45 +33,43 @@
 
 .buzz__icon
     background-size: cover
-    margin-right: $fine
     display: inline-block
-    vertical-align: middle
     line-height: $medium
+    margin-right: $fine
     height: $medium
     width: $medium
+    vertical-align: middle
 
 .buzz__caption
-    height: $medium
-    vertical-align: middle
     display: inline-block
+    height: $medium
     line-height: $medium
+    vertical-align: middle
 
 .buzz__service__list
-    padding: 0 $fine
     counter-reset: buzz-list
+    padding: 0 $fine
 
 .buzz__service__list__entry
-    word-wrap: break-word
     margin-bottom: $compact
-    position: relative
     padding-left: $medium
+    position: relative
+    word-wrap: break-word
     p
         margin: $micro 0
 
 .buzz__service__list__entry:before
-    position: absolute
-    font-size: $font-xxxl
-    font-family: "Tiemann", serif
-    top: 0
-    left: 0
     content: counter(buzz-list)
     counter-increment: buzz-list
+    font-family: "Tiemann", serif
+    font-size: $font-xxxl
+    position: absolute
+    left: 0
+    top: 0
 
 .buzz__service__list__entry__supertitle
-    +tablet(regular)
-    margin: 0
-    letter-spacing: 1px
     font-size: $font-s
+    letter-spacing: 1px
 
 .buzz__service__list__entry__title
     +tablet(bold)
@@ -80,6 +78,6 @@
         color: $black
 
 .buzz__service__list__entry__score
-    margin: 0
     color: $grey
     font-size: $font-s
+    margin: 0
