@@ -4,7 +4,10 @@ import datetime
 import urllib2
 import json
 import comments
+import zeit.cms.interfaces
+from lxml import etree
 from babel.dates import get_timezone
+
 
 
 class UnavailableDepartmentException(Exception):
@@ -31,7 +34,7 @@ class LinkReach(object):
     def fetch_service(self, service, limit):
         if service not in self.services:
             raise UnavailableServiceException('No service named: ' + service)
-        if not 0<limit<10:
+        if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be greater than 0 '
                                             'and less than 10.')
         if not self.linkreach_host:
@@ -43,26 +46,50 @@ class LinkReach(object):
         return DataSequence().deserialize(json.load(response))
 
     def fetch_comments(self, department, limit):
-        if not department in self.departments:
+        if department not in self.departments:
             raise UnavailableDepartmentException('Departement not configured:'
                                                  ' ' + department)
-        if not 0<limit<10:
+        if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be greater than 0 '
                                             'and less than 10.')
-        if not self.agatho_host:
+
+        url = ('%s/data/comments/agatho/commentsection/mostcommented/24/%s'
+               '.xml' % (self.agatho_host, department)
+               )
+        try:
+            tree = etree.parse(url)
+        except IOError:
             return []
 
-        url = '%s/%s' % (self.agatho_host, department)
+        item_list = []
 
-        # TODO: Implement xml fetching and parsing.
-        # req = urllib2.Request(url)
-        # response = urllib2.urlopen(req, timeout=4)
-        # comments.comments_per_unique_id('ID', 0)
+        for rss_node in etree.parse(url).xpath('/rss/channel/item')[:limit]:
+            web_path = rss_node.xpath('guid/text()')[0]
+            rel_path = web_path[18:]
+            xml_path = 'http://xml.zeit.de' + rel_path
 
-        return DataSequence().deserialize([{'title': url}])
+            try:
+                article = zeit.cms.interfaces.ICMSContent(xml_path)
+            except TypeError:
+                continue
+
+            # TODO: Get real comment count, when ZMO-538 is merged.
+
+            item = dict(location=rel_path,
+                        score=0, # comments.comments_per_unique_id(path),
+                        supertitle=article.supertitle,
+                        title=article.title,
+                        subtitle=article.subtitle,
+                        section=article.ressort
+                        )
+            item_list.append(item)
+
+        return DataSequence().deserialize(item_list)
 
 
 def _prepare_date(value):
+    if not isinstance(value, int):
+        return None
     tz = get_timezone('Europe/Berlin')
     return datetime.datetime.fromtimestamp(value / 1000, tz)
 
@@ -74,9 +101,15 @@ class Entry(colander.MappingSchema):
     supertitle = colander.SchemaNode(colander.String())
     title = colander.SchemaNode(colander.String())
     subtitle = colander.SchemaNode(colander.String())
-    timestamp = colander.SchemaNode(colander.Int(), preparer=_prepare_date)
+    timestamp = colander.SchemaNode(colander.Int(),
+                                    preparer=_prepare_date,
+                                    missing=colander.drop
+                                    )
     section = colander.SchemaNode(colander.String())
-    fetchedAt = colander.SchemaNode(colander.Int(), preparer=_prepare_date)
+    fetchedAt = colander.SchemaNode(colander.Int(),
+                                    preparer=_prepare_date,
+                                    missing=colander.drop
+                                    )
 
 
 class DataSequence(colander.SequenceSchema):
