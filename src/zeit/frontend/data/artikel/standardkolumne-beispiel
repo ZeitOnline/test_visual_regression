@@ -70,15 +70,30 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/artikel/header3" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Flüchtlinge</supertitle>
+        <teaser_supertitle xsi:nil="true"/>
+        <title xsi:nil="true"/>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+          <display_name py:pytype="str">Carolin Emcke</display_name>
+          <location>Eisenhüttenstadt</location>
+        </author>
+      </reference>
+    </nextread>
   </head>
   <body>
     <supertitle>Liebeskolumne</supertitle>
     <title>Darf er sich wirklich heimlich sterilisieren lassen</title>
     <subtitle/>
     <division type="page">
-      <image src="http://xml.zeit.de/exampleimages/artikel/briefmarke.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-large-center" is_empty="False">
-        <bu>Diese BU darf nicht zu sehen sein</bu>
-        <copyright py:pytype="str">©netz</copyright>
+      <image src="http://xml.zeit.de/centerpage/katzencontent/katzencontent.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+        <bu py:pytype="str">Die ist der image sub text</bu>
+        <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
       </image>
       <p><strong>Die Frage: </strong>Maria und Klaus haben zwei Kinder, Klaus findet, damit ist die Familienplanung abgeschlossen. Maria bedrückt es jedoch, dass sie nun nie wieder schwanger werden soll. Sie haben zwei Mädchen, sie hätte auch noch gerne einen Jungen. So bezirzt sie Klaus, es darauf ankommen zu lassen, es sei sowieso unwahrscheinlich, schwanger zu werden, solange ein Kind noch gestillt werde. Prompt kommt die dritte Schwangerschaft. Klaus schluckt seinen Ärger hinunter, geht zum Arzt und lässt sich sterilisieren. Maria ist fassungslos. "Du hättest das mit mir besprechen müssen!" – "Ich dachte, ich tue uns einen Gefallen", sagt Klaus. "Ich nehme dir den Verhütungsstress ab!" Aber das Gegenteil geschieht. Bald sind Klaus und Maria ein Elternpaar ohne Erotik.</p>
       <p><br/><strong>Wolfgang Schmidbauer antwortet:</strong> Maria hat das Widerstreben von Klaus nicht ernst genommen und sich darüber hinweggesetzt. Klaus hat ihren Trick weder durchschaut noch bisher selbst Verantwortung für die Verhütung übernommen. Auf der tiefen Ebene der Familienplanung sind sich Maria und Klaus offenbar fremd geblieben. Dafür spricht auch die anscheindend praktische Erklärung, welche Klaus für seine Sterilisierung liefert: Er will endlich Sex ohne generative Folgen; Maria hingegen fühlt sich jetzt entwertet und verliert die Lust. Sie will keinen Mann, der ihr signalisiert, dass er auf gar keinen Fall noch ein Kind mit ihr haben möchte. Die beiden haben sich nur oberflächlich verbunden und das bis zu ihrer Krise um das dritte Kind nicht bemerkt.</p>
