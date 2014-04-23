@@ -1,0 +1,94 @@
+$mtb_teaser_width: em(270px)
+
+.cp__mtb__wrap
+    clear: left
+    width: 100%
+
+.cp__mtb
+    +justify-children-horizontally('%cp__mtb__cell')
+    width: 88%
+    margin: auto
+
+    +respond-min-max($break-1, $break-3)
+        width: 2*$mtb_teaser_width + $compact // two teaser columns, one margin
+    +respond-min($break-3)
+        width: 3*$mtb_teaser_width + 2*$big // three teaser columns, two margins
+
+
+.cp__mtb__title,
+.cp__mtb__subtitle
+    text-align: center
+    margin: auto
+    width: 80%
+    +respond-min($break-1)
+        width: 70%
+
+.cp__mtb__title
+    @extend %headline
+    text-transform: uppercase
+    margin-bottom: $petite
+    font-size: $font-ml
+
+.cp__mtb__subtitle
+    +tablet(regular)
+    font-size: $font-m
+    line-height: 1.25
+    margin-bottom: $medium
+
+
+/* ---------------------------------------- */
+
+
+%cp__mtb__cell
+    // left/right margins are not needed, due to justified inline-block
+    margin: 0 0 $medium 0
+    vertical-align: top
+    width: 100%
+
+    +respond-min($break-1)
+        width: $mtb_teaser_width
+    +respond-min($break-3)
+        margin: $big 0 0 0
+
+    // debugging
+    font-size: 50px
+    color: white
+    // /debugging
+
+
+/* ---------------------------------------- */
+
+
+$cell-background: darkgreen
+
+.cp__mtb__cell__1_1
+    @extend %cp__mtb__cell
+    height: 410px
+    background-color: $cell-background
+
+.cp__mtb__cell__1_2
+    @extend %cp__mtb__cell
+    height: 380px
+    background-color: lighten($cell-background, 10%)
+
+.cp__mtb__cell__2_1
+    @extend %cp__mtb__cell
+    height: 360px
+    background-color: lighten($cell-background, 20%)
+
+.cp__mtb__cell__2_2
+    @extend %cp__mtb__cell
+    height: 500px
+    background-color: lighten($cell-background, 30%)
+
+.cp__mtb__cell__3_1
+    @extend %cp__mtb__cell
+    height: 450px
+    background-color: lighten($cell-background, 40%)
+
+.cp__mtb__cell__3_2
+    @extend %cp__mtb__cell
+    height: 360px
+    background-color: lighten($cell-background, 50%)
+
+
