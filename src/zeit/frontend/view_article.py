@@ -41,7 +41,7 @@ _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='komplettansicht',
              renderer='templates/article_komplett.html')
-class Article(zeit.frontend.view.Base):
+class Article(zeit.frontend.view.Content):
 
     advertising_enabled = True
     main_nav_full_width = False
@@ -63,10 +63,6 @@ class Article(zeit.frontend.view.Base):
         return {}
 
     @property
-    def title(self):
-        return self.context.title
-
-    @property
     def template(self):
         template = IArticleTemplateSettings(self.context).template
         return template if template is not None else "default"
@@ -75,14 +71,6 @@ class Article(zeit.frontend.view.Base):
     def header_layout(self):
         layout = IArticleTemplateSettings(self.context).header_layout
         return layout if layout is not None else "default"
-
-    @property
-    def subtitle(self):
-        return self.context.subtitle
-
-    @property
-    def supertitle(self):
-        return self.context.supertitle
 
     @property
     def pagetitle(self):
@@ -121,7 +109,7 @@ class Article(zeit.frontend.view.Base):
         for number in range(0, len(self.pages)):
             url = self.article_url
             if number > 0:
-                url += '/seite-' + str(number+1)
+                url += '/seite-' + str(number + 1)
             _pages_urls.append(url)
         return _pages_urls
 
@@ -129,12 +117,14 @@ class Article(zeit.frontend.view.Base):
     def next_page_url(self):
         _actual_index = self.page_nr - 1
         total = len(self.pages)
-        return self.pages_urls[_actual_index + 1] if _actual_index + 1 < total else None
+        return self.pages_urls[_actual_index + 1] \
+            if _actual_index + 1 < total else None
 
     @property
     def prev_page_url(self):
         actual_index = self.page_nr - 1
-        return self.pages_urls[actual_index - 1] if actual_index-1 >= 0 else None
+        return self.pages_urls[actual_index - 1] \
+            if actual_index - 1 >= 0 else None
 
     @property
     def pagination(self):
@@ -242,71 +232,6 @@ class Article(zeit.frontend.view.Base):
             return 'summary'
 
     @property
-    def date_first_released(self):
-        tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(
-            self.context).date_first_released
-        if date:
-            return date.astimezone(tz)
-
-    @property
-    def date_first_released_meta(self):
-        return IPublishInfo(
-            self.context).date_first_released.isoformat()
-
-    @property
-    def date_last_published_semantic(self):
-        tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(self.context).date_last_published_semantic
-        if self.date_first_released is not None and date is not None:
-            if date > self.date_first_released:
-                return date.astimezone(tz)
-            else:
-                return None
-
-    def _get_date_format(self):
-        if self.context.product:
-            if self.context.product.id == 'ZEI' or \
-               self.context.product.id == 'ZMLB':
-                return 'short'
-            else:
-                return 'long'
-        else:
-            return 'long'
-
-    @property
-    def show_date_format(self):
-        if self.date_last_published_semantic:
-            return 'long'
-        else:
-            return self._get_date_format()
-
-    @property
-    def show_date_format_seo(self):
-        return self._get_date_format()
-
-    @property
-    def show_article_date(self):
-        if self.date_last_published_semantic:
-            return self.date_last_published_semantic
-        else:
-            return self.date_first_released
-
-    @property
-    def rankedTags(self):
-        return self.context.keywords
-
-    @property
-    def rankedTagsList(self):
-        keyword_list = ''
-        if self.rankedTags:
-            for keyword in self.context.keywords:
-                keyword_list += keyword.label + ';'
-            return keyword_list[:-1]
-        else:
-            return ''
-
-    @property
     def genre(self):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
@@ -347,20 +272,24 @@ class Article(zeit.frontend.view.Base):
     @property
     def focussed_nextread(self):
         nextread = INextRead(self.context)
-        related = nextread.nextread
-        if related:
-            image = related.main_image
-            if image is not None:
+        try:
+            related = nextread.nextread[0]
+            try:
+                _layout = related.nextread_layout
+            except AttributeError:
+                _layout = 'base'
+            try:
+                image = related.main_image
                 image = {
                     'uniqueId': image.uniqueId,
                     'caption': (related.main_image_block.custom_caption
-                                or IImageMetadata(image).caption),
-                }
-            else:
+                                or IImageMetadata(image).caption)}
+            except AttributeError:
                 image = {'uniqueId': None}
-            return {'layout': nextread.nextread_layout,
-                    'article': related,
-                    'image': image}
+                _layout = 'minimal'
+            return {'layout': _layout, 'article': related, 'image': image}
+        except IndexError:
+            return None
 
     @property
     def breadcrumb(self):
@@ -416,13 +345,11 @@ class Article(zeit.frontend.view.Base):
             channel += "/" + self.type
         return channel
 
-
     def banner(self, tile):
         try:
-            return zeit.frontend.banner.banner_list[tile-1]
+            return zeit.frontend.banner.banner_list[tile - 1]
         except IndexError:
             return None
-
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -454,7 +381,7 @@ class ArticlePage(Article):
 
     @property
     def current_page(self):
-        return zeit.frontend.interfaces.IPages(self.context)[self.page_nr-1]
+        return zeit.frontend.interfaces.IPages(self.context)[self.page_nr - 1]
 
     @property
     def next_title(self):
