@@ -272,7 +272,7 @@
     <article class="comment{% if comment.indented and not flat %} is-indented{% endif %}" id="{{comment.cid}}">
         <div class="comment__head">
             {% if comment.img_url -%}
-            <img src="{{comment.img_url}}" class="comment__head__img" />
+            <img src="{{comment.img_url}}" class="comment__head__img" alt="" />
             {% endif -%}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
