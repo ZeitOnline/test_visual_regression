@@ -59,8 +59,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 .addClass('js-reply-form')
                 .css('display', 'none')
                 .appendTo(comment);
-            form.find('.button').prop('disabled', true);
-            form.get(0).elements.pid.value = cid;
+            form.find('input[type="submit"]').prop('disabled', true);
+            form.find('input[name="pid"]').val(cid);
         }
 
         if (form.is(':hidden')) {
@@ -109,6 +109,41 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         e.preventDefault();
 
         $(this).closest('.js-report-form').slideUp();
+    };
+
+    /**
+     * Submit report
+     */
+    var submitReport = function(e) {
+        e.preventDefault();
+
+        var sendurl = "http://community.zeit.de/services/json",
+            input = this.form.elements;
+
+        // var generateJSONPNumber = function () {};
+
+        $.ajax({
+            url: sendurl,
+            data: {
+                method:     'flag.flagnote',
+                flag_name:  'kommentar_bedenklich',
+                uid:        input.uid.value,
+                content_id: input.content_id.value,
+                note:       input.note.value
+            },
+            // jsonpCallback: 'jsonp' + generateJSONPNumber(),
+            dataType: 'jsonp',
+            success: function(data) {
+                if (data) {
+                    if (!data['#error']) {
+                        alert("Danke! Ihre Meldung wird an die Redaktion weitergeleitet.");
+                    }
+                    else {
+                    }
+                }
+            }
+         });
+
     };
 
     /**
@@ -194,6 +229,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments_body.on('click', '.js-reply-to-comment', replyToComment);
         $comments_body.on('click', '.js-report-comment', reportComment);
         $comments_body.on('click', '.js-cancel-report', cancelReport);
+        $comments_body.on('click', '.js-submit-report', submitReport);
         $comments.on(inputEvent, '.js-required', enableForm);
         $comments_trigger.click(toggleComments);
         $(window).on('resize', updateLayout);

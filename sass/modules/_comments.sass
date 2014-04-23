@@ -262,17 +262,31 @@
     width: 20px
     height: 20px
 
-.comments__body .comment__form
-    padding-bottom: $medium
-    border-bottom: 2px solid $grey--light
-    margin-bottom: $large
+.comment__form--login
+    text-align: center
+    .button + .button
+        margin-left: 15px
 
-.comment__sender
-    float: left
+.comments__body
+    .comment__form
+        padding-bottom: $medium
+        border-bottom: 2px solid $grey--light
+        margin-bottom: $large
+    .comment__form--login
+        background-color: $grey--light
+        border-bottom-style: none
+
+.comment__form__wrap
+    padding: $compact 0 $medium
+
+.comment__form__note
     color: $charcoal
     font-size: $font-s
     a
         color: $grey--mid
+
+.comment__form__note--casual
+    float: left
 
 .comment__form__text
     font-size: $font-s

@@ -268,8 +268,8 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(comment, flat) -%}
-    <article class="comment{% if comment.indented and not flat %} is-indented{% endif %}" id="{{comment.cid}}">
+{% macro comment(comment, featured) -%}
+    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{comment.cid}}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
             <img src="{{comment.img_url}}" class="comment__head__img" alt="" />
@@ -289,9 +289,7 @@
             {% if not comment.indented -%}
             <a class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {% endif -%}
-            {% if comment.my_uid > 0 -%}
             <a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
-            {% endif -%}
         </aside>
     </article>
 {%- endmacro %}
@@ -337,20 +335,28 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
+            {% if comments.my_uid > 0 -%}
             <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" id="js-comments-form">
                 <p>
-                    <textarea name="comment" placeholder="Ich denke …" class="js-required"></textarea>
+                    <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
                     <input type="hidden" name="nid" value="{{comments['nid']}}">
                     <input type="hidden" name="pid" value="">
                     <input type="hidden" name="uid" value="{{comments['my_uid']}}">
                 </p>
-                {% if comments.my_uid > 0 -%}
-                <div class="comment__sender">angemeldet als <a href="http://community.zeit.de/user/{{comments.my_uid}}">{{comments.my_name|e}}</a></div>
-                {% endif -%}
+                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="http://community.zeit.de/user/{{comments.my_uid}}">{{comments.my_name|e}}</a></div>
                 <div class="comment__form__actions">
                     <input type="submit" class="button" value="Kommentieren" disabled />
                 </div>
             </form>
+            {% else -%}
+            <form class="comment__form comment__form--login" id="js-comments-form">
+                <div class="comment__form__wrap">
+                    <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
+                </div>
+                <a href="http://community.zeit.de/user/login?destination=" class="button">Anmelden</a>
+                <a href="http://community.zeit.de/user/register?destination=" class="button">Registrieren</a>
+            </form>
+            {% endif -%}
         </div>
         <div class="tabs has-2">
             <div class="tabs__head" id="js-comments-tabs-head">
@@ -383,6 +389,7 @@
             </div>
         </div>
         <script type="text/template" id="js-report-comment-template">
+            {% if comments.my_uid > 0 -%}
             <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
@@ -390,10 +397,20 @@
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">
-                    <input type="hidden" name="cid" value="<%- commentId %>">
-                    <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button">Abschicken</button>
+                    <input type="hidden" name="uid" value="{{comments.my_uid}}">
+                    <input type="hidden" name="content_id" value="<%- commentId %>">
+                    <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
                 </p>
             </form>
+            {% else -%}
+            <form class="comment__form comment__form--login" style="display: none">
+                <div class="comment__form__wrap">
+                    <div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
+                </div>
+                <a href="http://community.zeit.de/user/login?destination=" class="button">Anmelden</a>
+                <a href="http://community.zeit.de/user/register?destination=" class="button">Registrieren</a>
+            </form>
+            {% endif -%}
         </script>
     </section>
     {%- endif %}
