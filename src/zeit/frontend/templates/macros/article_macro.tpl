@@ -303,7 +303,7 @@
                     <span class="article__sharing__total">47</span>
                     <span class="article__sharing__unit">Tsd.</span>
                 </div>
-                <div class="article__sharing__services" style="display: none">
+                <div class="article__sharing__services blind">
                     <a class="item">
                         <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                         <span class="article__sharing__services__text">8,2 Tsd</span>

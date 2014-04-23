@@ -208,7 +208,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var toggleSharing = function() {
         $(this).find('.article__sharing__icon').toggleClass('icon-sharebox-share').toggleClass('icon-sharebox-close');
-        $('.article__sharing__services').slideToggle();
+        $('.article__sharing__services').toggleClass('blind');
     };
 
     /**
