@@ -29,7 +29,7 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-    'agatho_host': u'file://%s/' % path.join(
+    'community_host': u'file://%s/' % path.join(
             path.dirname(path.abspath(frontend.__file__)),
             'data',
             'comments'
@@ -114,7 +114,7 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     from zeit.frontend.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+    return Agatho(agatho_url='%s/agatho/thread/' % settings['community_host'])
 
 @pytest.fixture
 def linkreach():

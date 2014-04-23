@@ -92,12 +92,12 @@ class Application(object):
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
 
         from pyramid.authorization import ACLAuthorizationPolicy
-        from .security import AGATHOAuthenticationPolicy
+        from .security import CommunityAuthenticationPolicy
         import pyramid_beaker
         config.include("pyramid_beaker")
         session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
         config.set_session_factory(session_factory)
-        config.set_authentication_policy(AGATHOAuthenticationPolicy())
+        config.set_authentication_policy(CommunityAuthenticationPolicy())
         config.set_authorization_policy(ACLAuthorizationPolicy())
 
         return config

@@ -111,7 +111,7 @@ def comment_as_dict(comment, request):
                        if '%s_%s' % (role, gender) in roles_words]
 
     if comment.xpath('author/@picture'):
-        picture_url = request.registry.settings.agatho_host + '/' + comment.xpath('author/@picture')[0]
+        picture_url = request.registry.settings.community_host + '/' + comment.xpath('author/@picture')[0]
     if comment.xpath('content/text()'):
         content = comment.xpath('content/text()')[0]
     else:
@@ -135,9 +135,9 @@ def comment_as_dict(comment, request):
 def get_thread(unique_id, request):
     """ return a dict representation of the
         comment thread of the given article"""
-    if 'agatho_host' not in request.registry.settings:
+    if 'community_host' not in request.registry.settings:
         return None
-    api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
+    api = Agatho('%s/agatho/thread/' % request.registry.settings.community_host)
     thread = api.collection_get(unique_id)
     if thread is not None:
         try:
@@ -146,7 +146,7 @@ def get_thread(unique_id, request):
                 comment_count=int(thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
                 # TODO: the post url should point to ourselves, not to the 'back-backend'
-                comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
+                comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.community_host, request.path, request.url),
                 my_uid=request.cookies.get('drupal-userid', 0))
         except AssertionError:
             return None
