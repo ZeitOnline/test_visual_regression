@@ -1,6 +1,6 @@
 .article__comments-trigger
     +inline-block
-    +transition(all, 0.2s)
+    +transition(all 0.2s)
     cursor: pointer
     background-color: $grey--light
     color: $red
@@ -15,7 +15,7 @@
         top: 0
         right: -20px
     &:after
-        +transition(all, 0.2s)
+        +transition(all 0.2s)
         +box-sizing(content-box)
         content: ''
         width: 0
@@ -106,7 +106,7 @@
 
 .comments__list
     +translateZ(0)
-    +transition(all, 1s)
+    +transition(all 1s)
     position: relative
     top: 0px
 
@@ -238,7 +238,7 @@
         display: block
 
 #iqd_mainAd
-    +transition(all, 1s)
+    +transition(all 1s)
 
 #iqd_align_Ad.show-comments
     +respond-min($comments__break-outside)
