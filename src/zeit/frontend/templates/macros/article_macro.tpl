@@ -299,10 +299,39 @@
 {% macro comments(comments) -%}
     {% if comments is not none -%}
     <div class="tc">
-        <div class="article__comments-trigger" id="js-comments-trigger">
-            <div class="article__comments-trigger__wrap">
-                <span class="article__comments-trigger__count icon-close-comments">{{comments['comment_count']}}</span>
-                Kommentare
+        <div class="article__socialbox">
+            <div class="article__sharing">
+                <div class="item article__sharing__sum">
+                    <span class="article__sharing__total">47</span>
+                    <span class="article__sharing__unit">Tsd.</span>
+                </div>
+                <div class="article__sharing__services" style="display: none">
+                    <a class="item">
+                        <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
+                        <span class="article__sharing__services__text">8,2 Tsd</span>
+                    </a>
+                    <a class="item">
+                        <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
+                        <span class="article__sharing__services__text">6,7 Tsd</span>
+                    </a>
+                    <a class="item">
+                        <span class="article__sharing__services__icon icon-sharebox-google"></span>
+                        <span class="article__sharing__services__text">877</span>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="article__sharing__link js-toggle-sharing">
+                        <span class="article__sharing__icon icon-sharebox-share"></span>
+                        Teilen
+                    </a>
+                </div>
+            </div>
+
+            <div class="article__comments-trigger" id="js-comments-trigger">
+                <a class="article__comments-trigger__link">
+                    <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
+                    <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+                </a>
             </div>
         </div>
     </div>
@@ -368,16 +397,6 @@
         </script>
     </section>
     {%- endif %}
-
-    <div class="tc">
-        <div class="article__comments-trigger">
-            <div class="article__comments-trigger__wrap">
-                Kommentar hinzufügen
-            </div>
-        </div>
-    </div>
-
-
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}

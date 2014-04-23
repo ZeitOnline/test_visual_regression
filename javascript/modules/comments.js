@@ -170,6 +170,14 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     }, 250); // Maximum run of once per 250 milliseconds
 
     /**
+     * Toggle sharing box
+     */
+    var toggleSharing = function() {
+        $(this).find('.article__sharing__icon').toggleClass('icon-sharebox-share').toggleClass('icon-sharebox-close');
+        $('.article__sharing__services').slideToggle();
+    };
+
+    /**
      * Initialize comment section
      */
     var init = function() {
@@ -179,6 +187,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         }
 
         initLayout();
+
+        $('.js-toggle-sharing').on('click', toggleSharing);
 
         // register event handlers
         $comments_body.on('click', '.js-reply-to-comment', replyToComment);

@@ -1,56 +1,110 @@
-.article__comments-trigger
-    +inline-block
-    +transition(all, 0.2s)
-    cursor: pointer
-    background-color: $grey--light
-    color: $red
-    text-align: center
-    margin: 0 auto
-    margin-bottom: $small
-    position: relative
-    padding: $micro $small
+.article__socialbox
+    a
+        color: $black
+        border-bottom: none
+    .item
+        background-color: $grey--light
+        margin-bottom: $hair
+        padding: $micro
+    .article__sharing__sum
+        padding: $fine $micro
     +respond-min($comments__break-overlap)
-        padding: $micro $small $fine $small
         position: absolute
         top: 0
         right: -20px
-    &:after
-        +transition(all, 0.2s)
-        +box-sizing(content-box)
-        content: ''
-        width: 0
-        height: 0
-        border: 30px solid $red
-        position: absolute
-        right: 10px
-        bottom: -20px
-        border-color: transparent $grey--light transparent transparent
-        display: none
-        +respond-min($comments__break-outside)
-            display: block
+        margin-bottom: $small
 
-.article__comments-trigger__wrap
-    position: relative
-    z-index: 1
-
-.article__comments-trigger__count
-    +background-size(0,0)
-    font-size: $font-l
-    margin-right: $micro
-    +respond-min($comments__break-overlap)
-        font-size: $font-xxl
-        margin-right: 0
-        display: block
-        margin-top: $hair
+.article__sharing
+    margin-bottom: $fine
+    display: none
     +respond-min($comments__break-outside)
-        font-size: $font-xxxl
-    .show-comments &
-        +respond-max($comments__break-overlap)
-            +background-size(contain)
-        +background-size(40%, 40%)
-        color: transparent
+        display: block
+
+.article__sharing__total
+    font-size: $font-ml
+
+.article__sharing__unit
+    font-size: $font-xs
+
+.article__sharing__services
+    text-align: left
+    .item
+        display: block
+        padding: $tiny $micro $tiny $little
+        color: $black
+        cursor: pointer
+        &:hover
+            background-color: $grey--bright
+            .article__sharing__services__text
+                color: $black
+
+.article__sharing__services__text
+    font-size: $font-xs
+    color: $grey
+
+.article__sharing__link,
+.article__comments-trigger__text
+    +tablet(bold)
+    font-size: em(11px)
+    color: $black
+
+.article__sharing__link,
+.article__comments-trigger__link
+    cursor: pointer
+    &:hover
+        opacity: 0.5
+
+.article__sharing__icon
+    +inline-block
+    margin-right: $micro
+    width: 14px
+    height: 10px
+    &.icon-sharebox-close
+        +background-size(contain)
         background-position: center center
 
+.article__sharing__services__icon
+    +inline-block
+    margin-right: $tiny
+    width: 14px
+    height: 14px
+    background-position: center center
+
+.article__comments-trigger
+    +inline-block
+    background-color: $grey--light
+    text-align: center
+    margin: 0 auto
+    position: relative
+    +respond-min($comments__break-outside)
+        &:after
+            content: ''
+            position: absolute
+            right: 12px
+            bottom: -16px
+            border-width: 8px
+            border-style: solid
+            border-color: $grey--light $grey--light transparent transparent
+
+.article__comments-trigger__link
+    display: block
+    padding: $micro $small
+    +respond-min($comments__break-overlap)
+        padding: 12px $little 7px
+
+.article__comments-trigger__count
+    +inline-block
+    min-width: 13px
+    background-position: -13px -13px
+    font-size: $font-ml
+    line-height: normal
+    margin-right: $micro
+    +respond-min($comments__break-overlap)
+        margin-right: 0
+        display: block
+    .show-comments &
+        color: transparent
+        background-position: center center
 
 .comments
     +tablet
@@ -194,6 +248,7 @@
 .comment__tools
     text-align: right
     padding-right: $fine
+    margin-bottom: $compact
 
 .comment__tools__reply,
 .comment__tools__flag
@@ -209,8 +264,7 @@
 .comments__body .comment__form
     padding-bottom: $medium
     border-bottom: 2px solid $grey--light
-    textarea
-        margin-top: $compact
+    margin-bottom: $large
 
 .comment__sender
     float: left
