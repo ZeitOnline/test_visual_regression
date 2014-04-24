@@ -8,6 +8,12 @@ Available attributes:
 
 {% macro include(obj, type) -%}
     {% for teaser_block in obj -%}
+
+        {% if (type == 'inf') and (loop.index == 3) -%}
+            <!-- special ad integration by counter -->
+            {% include 'templates/inc/informatives/inf_ad.html' ignore missing %}
+        {% endif %}
+
         {%-
             set teaser_blocks = [
                 'templates/inc/' + type + '_block_' + teaser_block.layout.id + '.html',
@@ -15,6 +21,7 @@ Available attributes:
             ]
         %}
         {% include teaser_blocks ignore missing %}
+
     {% endfor %}
 {%- endmacro %}
 

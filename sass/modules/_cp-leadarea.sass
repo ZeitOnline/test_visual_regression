@@ -53,7 +53,6 @@ $cp__buttons__image-height: em(165px)
 .cp__lead__subtitle
 	@extend %cp__image__link
 	@extend %copy
-	+tablet()
 	color: $white
 	font-size: $font-m
 	line-height: $petite
@@ -63,7 +62,6 @@ $cp__buttons__image-height: em(165px)
 .cp__lead__supertitle
 	@extend %cp__image__link
 	@extend %copy
-	+tablet()
 	line-height: $medium
 	color: $white
 	font-size: $font-s
@@ -80,10 +78,9 @@ $cp__buttons__image-height: em(165px)
 
 //wrapper informatives area
 .cp__lead__informatives__wrap
-	padding: 0 $compact $compact
+	padding: $compact $compact $compact
 	width: 100%
 	+respond-min($break-2)
-		padding: $compact $compact $compact
 		float: left
 		width: $cp__lead__informatives__wrap-width
 
@@ -97,7 +94,7 @@ $cp__buttons__image-height: em(165px)
 	background-color: $black
 	+respond-min($break-2)
 		margin-top: $compact
-		margin-bottom: $big
+		margin-bottom: $compact
 
 .cp__lead-leader__image
 	@extend %cp__lead
@@ -146,16 +143,22 @@ $cp__buttons__image-height: em(165px)
 	@extend %cp__buttons__wrap
 	width: 100%	
 	padding: 0 $compact 0 $compact
+	margin-top: $compact
+	margin-bottom: 0
 	+respond-min($break-2)
 		width: 50%
 		float: left
 		padding: 0 0 0 0
-		&:nth-child(even)
-			clear: left
-			padding-right: $little
-		&:nth-child(odd)
-			padding-left: $little
-			
+
+.cp__buttons__wrap-double:nth-of-type(odd)
+	clear: left
+	+respond-min($break-2)
+		padding-right: $little
+
+.cp__buttons__wrap-double:nth-of-type(even)
+	+respond-min($break-2)
+		padding-left: $little	
+		
 .cp__buttons__image
 	overflow: hidden
 	height: $cp__buttons__image-height*1.5
@@ -172,11 +175,10 @@ $cp__buttons__image-height: em(165px)
 .cp__buttons__supertitle
 	@extend %cp__text__link
 	@extend %copy
-	+tablet()
+	margin-bottom: tiny
 	line-height: $petite
 	color: $black
 	font-size: $font-s
-	margin-bottom: tiny
 
 .cp__buttons__title
 	@extend %cp__text__link--underlined
@@ -189,7 +191,6 @@ $cp__buttons__image-height: em(165px)
 .cp__buttons__subtitle
 	@extend %cp__text__link
 	@extend %copy
-	+tablet()
 	line-height: $petite
 	color: $black
 	font-size: $font-m

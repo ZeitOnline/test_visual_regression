@@ -63,10 +63,21 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl) {
                 markup = markup.replace('src="', 'data-src="');
                 $parent.html(markup);
                 var $imgs = $parent.find('img');
+                var height = 0;
+                var width = 0;
                 $imgs.each(function() {
                     if ($parent.hasClass('is-pixelperfect')) {
-                        // use explicit width and height from responsive image parent element
-                        rescale_one(this, false, $parent.parent().width(), $parent.parent().height());
+
+                        // use explicit width and height from responsive image parent element or data-wrap element
+                        if( $(this).parent().attr('data-wrap') ){
+                            height = $($(this).parent().attr('data-wrap')).height();
+                            width = $($(this).parent().attr('data-wrap')).width();
+                        }else{
+                            height = $parent.parent().height();
+                            width = $parent.parent().width();
+                        }
+
+                        rescale_one(this, false, width, height);
                     } else {
                         // determine size of image from width + ratio of original image
                         rescale_one(this, false);

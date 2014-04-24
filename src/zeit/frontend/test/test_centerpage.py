@@ -259,6 +259,19 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
                 '127.0.0.1:6543/centerpage/article_image_asset'
 
 
+def test_cp_should_have_informatives_ad_at_3rd_place(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__lead__informatives__wrap")
+    assert len(wrap) != 0
+    elements = wrap[0].find_elements_by_tag_name("div")
+    add = elements[2].find_element_by_css_selector(
+        ".cp__buttons__ad").get_attribute("class")
+    assert add == 'cp__buttons__ad'
+
+
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/cp_with_video_lead' % testserver.url)
