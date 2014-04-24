@@ -6,6 +6,7 @@ from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
+from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
 from zeit.frontend.centerpage import get_image_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
@@ -290,8 +291,10 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
+
 def format_date_ago(dt, precision=2, past_tense='vor {}',
                     future_tense='in {}'):
+
     # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
     if not isinstance(dt, type(timedelta())):
@@ -482,6 +485,9 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, ILongformArticle)
                 if IArticleTemplateSettings(context).template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
+                if IArticleTemplateSettings(context).template == 'column':
+                    zope.interface.alsoProvides(context,
+                                                IColumnArticle)
             return self._change_viewname(tdict)
         except OSError as e:
             if e.errno == 2:
