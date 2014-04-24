@@ -139,6 +139,7 @@ class Application(object):
         jinja.filters['obj_debug'] = obj_debug
         jinja.filters['substring_from'] = substring_from
         jinja.filters['hide_none'] = hide_none
+        jinja.filters['get_image_metadata'] = get_image_metadata
         jinja.trim_blocks = True
         return jinja
 
@@ -458,6 +459,14 @@ def create_image_url(teaser_block, image):
     image_url = default_image_url(
         image, image_pattern=image_pattern)
     return image_url
+
+
+def get_image_metadata(image):
+    try:
+        image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
+        return image_metadata
+    except TypeError:
+        return None
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
