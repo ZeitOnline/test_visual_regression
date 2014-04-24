@@ -66,6 +66,6 @@ class Centerpage(zeit.frontend.view.Base):
         reach = LinkReach(community, linkreach)
         buzz = dict(twitter=reach.fetch_service('twitter', 3),
                     facebook=reach.fetch_service('facebook', 3),
-                    comments=reach.fetch_comments('zeit-magazin', 3)
+                    comments=reach.fetch_comments(3)
                     )
         return buzz
