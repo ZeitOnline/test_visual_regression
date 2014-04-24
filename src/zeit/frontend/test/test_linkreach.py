@@ -3,7 +3,6 @@ from zeit.frontend.reach import DataSequence
 from zeit.frontend.reach import Entry
 from zeit.frontend.reach import LinkReach
 import datetime
-import pyramid.testing
 import pytest
 import zeit.frontend.reach
 
@@ -43,22 +42,31 @@ def test_data_sequence_for_linkreach_should_deserialize():
     assert len(seq) == 9
 
 
-def test_not_provided_service_should_throw_exception():
-    with pytest.raises(zeit.frontend.reach.UnprovidedService):
-        LinkReach('file:///foo').fetch_data('foo', 3)
+def test_unavailable_service_should_throw_exception():
+    with pytest.raises(zeit.frontend.reach.UnavailableServiceException):
+        LinkReach('file:///foo', 'file:///foo').fetch_service('foo', 3)
 
 
 def test_data_for_twitter_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('twitter', 3)
+    data = linkreach.fetch_service('twitter', 3)
     assert len(data) == 3
 
 
 def test_data_for_facebook_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('facebook', 3)
+    data = linkreach.fetch_service('facebook', 3)
     assert len(data) == 3
 
 
 def test_data_for_googleplus_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('googleplus', 3)
+    data = linkreach.fetch_service('googleplus', 3)
     assert len(data) == 3
 
+
+def test_unavailable_section_should_throw_exception():
+    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+        LinkReach('file:///foo', 'file:///foo').fetch_comments('foo', 3)
+
+
+def test_data_for_comments_should_be_fetched(linkreach):
+    data = linkreach.fetch_comments('zeit-magazin', 3)
+    assert len(data) == 3

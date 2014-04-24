@@ -3,7 +3,6 @@ import colander
 import datetime
 import urllib2
 import json
-import comments
 import zeit.cms.interfaces
 from lxml import etree
 from babel.dates import get_timezone
@@ -56,11 +55,6 @@ class LinkReach(object):
 
         url = '%s/agatho/commentsection/mostcommented/24/%s.xml' % \
               (self.community_host, section)
-
-        try:
-            tree = etree.parse(url)
-        except IOError:
-            return []
 
         item_list = []
 
