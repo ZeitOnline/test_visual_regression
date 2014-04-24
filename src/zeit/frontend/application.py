@@ -25,6 +25,7 @@ import zeit.connector
 import zeit.frontend
 import zeit.frontend.banner
 import zeit.frontend.block
+import zeit.frontend.centerpage
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -290,10 +291,13 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
-def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
+
+def format_date_ago(dt, precision=2, past_tense='vor {}',
+                    future_tense='in {}'):
+
     # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
-    if type(dt) is not type(timedelta()):
+    if not isinstance(dt, type(timedelta())):
         delta = datetime.now() - dt
 
     the_tense = past_tense
@@ -445,7 +449,9 @@ def most_sufficient_teaser_image(teaser_block,
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
-        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        teaser_image = zope.component.getMultiAdapter(
+            (asset, zeit.cms.interfaces.ICMSContent(image_id)),
+            zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
         return None
@@ -483,7 +489,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context,
                                                 IColumnArticle)
             return self._change_viewname(tdict)
-        except OSError, e:
+        except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
 
