@@ -16,6 +16,11 @@
     color: $color-button--disabled
     background-color: $color-button-bg--disabled
 
+// avoid inheriting any :visited link colors for button anchors
+a.button
+  +link
+    color: $color-button
+
 input,
 textarea,
 select
