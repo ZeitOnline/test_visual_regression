@@ -85,3 +85,8 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def global_googleplus_shares(self):
         return self._shares.fetch_data('googleplus', 20)[:10]
+
+    @property
+    def area_informatives(self):
+        teaser_list = self.context['informatives'].values()
+        return teaser_list

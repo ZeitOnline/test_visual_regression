@@ -14,6 +14,12 @@ def assemble_app_info(request):
     else:
         result['authenticated'] = False
     result['user'] = request.session.get(ZMO_USER_KEY, dict())
+    result['community_host'] = request.registry.settings.community_host + '/'
+    result['community_paths'] = {'login': 'user/login',
+                                 'register': 'user/register',
+                                 'logout': 'logout',
+                                 'leserartikel': 'leserartikel',
+                                 'newsletter': 'newsletter'}
     return dict(result)
 
 
