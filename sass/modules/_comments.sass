@@ -307,6 +307,21 @@
         margin-left: $compact
         vertical-align: baseline
 
+.comment__form__success
+    text-align: center
+    padding: $large 0 $large - $medium
+    .comment__icon--40
+        margin-bottom: $compact
+
+.comment__form__success__text
+    color: $charcoal
+    font-size: $font-ml
+
+.comment__icon--40
+    +inline-block
+    width: em(40px)
+    height: em(40px)
+
 .show-comments .page-wrap--inner
     +respond-min($comments__break-outside)
         +translateZ(0)

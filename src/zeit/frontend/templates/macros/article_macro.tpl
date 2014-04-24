@@ -350,15 +350,15 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            {% if comments.my_uid > 0 -%}
+            {% if request.app_info.authenticated -%}
             <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" id="js-comments-form">
                 <p>
                     <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
                     <input type="hidden" name="nid" value="{{comments['nid']}}">
                     <input type="hidden" name="pid" value="">
-                    <input type="hidden" name="uid" value="{{comments['my_uid']}}">
+                    <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
                 </p>
-                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="http://community.zeit.de/user/{{comments.my_uid}}">{{comments.my_name|e}}</a></div>
+                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{request.app_info.community_host}}user/{{request.app_info.user.uid}}">{{request.app_info.user.name|e}}</a></div>
                 <div class="comment__form__actions">
                     <input type="submit" class="button" value="Kommentieren" disabled />
                 </div>
@@ -368,8 +368,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
                 </div>
-                <a href="http://community.zeit.de/user/login?destination={{request.url|urlencode}}" class="button">Anmelden</a>
-                <a href="http://community.zeit.de/user/register?destination={{request.url|urlencode}}" class="button">Registrieren</a>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.login}}?destination={{request.url|e}}" class="button">Anmelden</a>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.register}}?destination={{request.url|e}}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </div>
@@ -403,16 +403,22 @@
                 </div>
             </div>
         </div>
+        <script type="text/template" id="js-report-success-template">
+            <div class="comment__form__success">
+                <span class="comment__icon--40 icon-check-kommentar-gesendet"></span>
+                <div class="comment__form__success__text">Danke! Ihre Meldung wird an die Redaktion weitergeleitet.</div>
+            </div>
+        </script>
         <script type="text/template" id="js-report-comment-template">
-            {% if comments.my_uid > 0 -%}
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" style="display: none">
+            {% if request.app_info.authenticated -%}
+            <form action="{{comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">
-                    <input type="hidden" name="uid" value="{{comments.my_uid}}">
+                    <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
                     <input type="hidden" name="content_id" value="<%- commentId %>">
                     <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
                 </p>
@@ -422,8 +428,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
                 </div>
-                <a href="http://community.zeit.de/user/login?destination=" class="button">Anmelden</a>
-                <a href="http://community.zeit.de/user/register?destination=" class="button">Registrieren</a>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.login}}?destination={{request.url|e}}" class="button">Anmelden</a>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.register}}?destination={{request.url|e}}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </script>

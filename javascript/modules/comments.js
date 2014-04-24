@@ -116,10 +116,11 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     var submitReport = function(e) {
         e.preventDefault();
 
-        var sendurl = "http://community.zeit.de/services/json",
+        var sendurl = this.form.getAttribute('action'),
+            form = this.form,
             input = this.form.elements;
 
-        // var generateJSONPNumber = function () {};
+        // $(this).prop('disabled', true).html('Senden');
 
         $.ajax({
             url: sendurl,
@@ -130,19 +131,35 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 content_id: input.content_id.value,
                 note:       input.note.value
             },
-            // jsonpCallback: 'jsonp' + generateJSONPNumber(),
+            jsonpCallback: 'jsonp' + generateJSONPNumber(),
             dataType: 'jsonp',
-            success: function(data) {
-                if (data) {
-                    if (!data['#error']) {
-                        alert("Danke! Ihre Meldung wird an die Redaktion weitergeleitet.");
+            success: function(response) {
+                if (response) {
+                    if (!response['#error']) {
+                        var $form = $(form),
+                            html = $('#js-report-success-template').html(),
+                            height = $form.css('height'),
+                            newHeight;
+
+                        $form.html(html);
+
+                        newHeight = $form.css('height');
+
+                        $form
+                            .css('height', height)
+                            .animate({height: newHeight});
                     }
                     else {
+                        // what else?
                     }
                 }
             }
          });
 
+    };
+
+    var generateJSONPNumber = function() {
+        return (1361462065627 + Math.floor(Math.random()*101));
     };
 
     /**
