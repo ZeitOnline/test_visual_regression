@@ -46,6 +46,6 @@ def get_community_user_info(request):
     # parse XML resonse and construct a dictionary from it
     xml_info = etree.fromstring(community_response.body)
     user_info = dict()
-    for key in ['uid', 'name', 'mail']:
+    for key in ['uid', 'name', 'picture']:
         user_info[key] = xml_info.xpath('//user/%s' % key)[0].text
     return user_info
