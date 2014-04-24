@@ -449,11 +449,12 @@ def test_image_metadata_should_be_accessible(testserver):
     assert img_meta.caption == u'Die ist der image sub text'
 
 
-def test_get_reaches_from_centerpage_view(dummy_request):
-    buzz = view_centerpage.Centerpage('', dummy_request).area_buzz
+def test_get_reaches_from_centerpage_view(config):
+    request = mock.Mock()
+    request.registry = config.registry
 
+    buzz = view_centerpage.Centerpage('', request).area_buzz
     assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
     assert len(buzz['facebook']) == 3
     assert len(buzz['twitter']) == 3
     assert len(buzz['comments']) == 3
-
