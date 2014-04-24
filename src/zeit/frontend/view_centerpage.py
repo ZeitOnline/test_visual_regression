@@ -69,3 +69,8 @@ class Centerpage(zeit.frontend.view.Base):
                     comments=reach.fetch_comments(3)
                     )
         return buzz
+
+    @property
+    def area_informatives(self):
+        teaser_list = self.context['informatives'].values()
+        return teaser_list
