@@ -10,7 +10,7 @@ from babel.dates import get_timezone
 
 
 
-class UnavailableDepartmentException(Exception):
+class UnavailablSectiontException(Exception):
     pass
 
 
@@ -25,13 +25,14 @@ class LimitOutOfBoundsException(Exception):
 class LinkReach(object):
 
     services = ['twitter', 'facebook', 'googleplus']
-    departments = ['zeit-magazin']
+    sections = ['zeit-magazin']
 
-    def __init__(self, agatho_host, linkreach_host):
-        self.agatho_host = agatho_host
+    def __init__(self, community_host, linkreach_host):
+        self.community_host = community_host
         self.linkreach_host = linkreach_host
 
     def fetch_service(self, service, limit):
+        # TODO: Does the linkreach API allow for section filters?
         if service not in self.services:
             raise UnavailableServiceException('No service named: ' + service)
         if not 0 < limit < 10:
@@ -45,17 +46,17 @@ class LinkReach(object):
         response = urllib2.urlopen(req, timeout=4)
         return DataSequence().deserialize(json.load(response))
 
-    def fetch_comments(self, department, limit):
-        if department not in self.departments:
-            raise UnavailableDepartmentException('Departement not configured:'
-                                                 ' ' + department)
+    def fetch_comments(self, section, limit):
+        if section not in self.sections:
+            raise UnavailableSectionException('Section not configured: '
+                                                 + section)
         if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be greater than 0 '
                                             'and less than 10.')
 
-        url = ('%s/data/comments/agatho/commentsection/mostcommented/24/%s'
-               '.xml' % (self.agatho_host, department)
-               )
+        url = '%s/agatho/commentsection/mostcommented/24/%s.xml' % \
+              (self.community_host, section)
+
         try:
             tree = etree.parse(url)
         except IOError:
@@ -73,8 +74,7 @@ class LinkReach(object):
             except TypeError:
                 continue
 
-            # TODO: Get real comment count, when ZMO-538 is merged.
-
+            # TODO: Get real score, as soon as ZMO-538 is merged.
             item = dict(location=rel_path,
                         score=0, # comments.comments_per_unique_id(path),
                         supertitle=article.supertitle,
