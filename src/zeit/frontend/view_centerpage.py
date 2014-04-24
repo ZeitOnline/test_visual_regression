@@ -61,9 +61,9 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_buzz(self):
-        agatho = self.request.registry.settings.agatho_host
+        community = self.request.registry.settings.community_host
         linkreach = self.request.registry.settings.linkreach_host
-        reach = LinkReach(agatho, linkreach)
+        reach = LinkReach(community, linkreach)
         buzz = dict(twitter=reach.fetch_service('twitter', 3),
                     facebook=reach.fetch_service('facebook', 3),
                     comments=reach.fetch_comments('zeit-magazin', 3)
