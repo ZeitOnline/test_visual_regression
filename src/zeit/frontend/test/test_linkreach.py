@@ -42,9 +42,33 @@ def test_data_sequence_for_linkreach_should_deserialize():
     assert len(seq) == 9
 
 
-def test_unavailable_service_should_throw_exception():
+def test_unavailable_service_should_throw_exception(app_settings):
+    ch = app_settings['community_host']
+    lh = app_settings['linkreach_host']
     with pytest.raises(zeit.frontend.reach.UnavailableServiceException):
-        LinkReach('file:///foo', 'file:///foo').fetch_service('foo', 3)
+        LinkReach(ch, lh).fetch_service('foo', 3)
+
+
+def test_unavailable_section_should_throw_exceptions(app_settings):
+    ch = app_settings['community_host']
+    lh = app_settings['linkreach_host']
+    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+        LinkReach(ch, lh).fetch_comments(3, section='foo')
+    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+        LinkReach(ch, lh).fetch_service('twitter', 3, section='foo')
+
+
+def test_out_of_bounds_limits_should_throw_exceptions(app_settings):
+    ch = app_settings['community_host']
+    lh = app_settings['linkreach_host']
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        LinkReach(ch, lh).fetch_comments(0)
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        LinkReach(ch, lh).fetch_comments(99)
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        LinkReach(ch, lh).fetch_service('twitter', 0)
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        LinkReach(ch, lh).fetch_service('twitter', 99)
 
 
 def test_data_for_twitter_should_be_fetched(linkreach):
@@ -61,12 +85,6 @@ def test_data_for_googleplus_should_be_fetched(linkreach):
     data = linkreach.fetch_service('googleplus', 3)
     assert len(data) == 3
 
-
-def test_unavailable_section_should_throw_exception():
-    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
-        LinkReach('file:///foo', 'file:///foo').fetch_comments('foo', 3)
-
-
-def test_data_for_comments_should_be_fetched(linkreach):
-    data = linkreach.fetch_comments('zeit-magazin', 3)
+def test_data_for_comments_should_be_fetched(application, linkreach):
+    data = linkreach.fetch_comments(3)
     assert len(data) == 3

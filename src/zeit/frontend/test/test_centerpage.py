@@ -449,9 +449,10 @@ def test_image_metadata_should_be_accessible(testserver):
     assert img_meta.caption == u'Die ist der image sub text'
 
 
-def test_get_reaches_from_centerpage_view(config):
+def test_get_reaches_from_centerpage_view(application, app_settings):
     request = mock.Mock()
-    request.registry = config.registry
+    request.registry.settings.community_host = app_settings['community_host']
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
 
     buzz = view_centerpage.Centerpage('', request).area_buzz
     assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
