@@ -10,7 +10,7 @@ from babel.dates import get_timezone
 
 
 
-class UnavailablSectiontException(Exception):
+class UnavailableSectionException(Exception):
     pass
 
 
