@@ -2,7 +2,6 @@ from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
-from webtest import TestApp
 from webtest import TestApp as TestAppBase
 from os import path
 from os.path import abspath, dirname, join, sep
@@ -30,8 +29,17 @@ settings = {
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
 
-    'agatho_host': 'egg://zeit.frontend/data/comments',
-    'linkreach_host': 'egg://zeit.frontend/data/linkreach/api',
+    'community_host': u'file://%s/' % path.join(
+            path.dirname(path.abspath(frontend.__file__)),
+            'data',
+            'comments'
+        ),
+    'linkreach_host': u'file://%s/' % path.join(
+                path.dirname(path.abspath(frontend.__file__)),
+                'data',
+                'linkreach',
+                'api',
+            ),
     'proxy_url' : '',
     'connector_type': 'filesystem',
 
@@ -109,7 +117,7 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     from zeit.frontend.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+    return Agatho(agatho_url='%s/agatho/thread/' % settings['community_host'])
 
 @pytest.fixture
 def linkreach():
@@ -148,6 +156,7 @@ def browser(application):
     """ Returns an instance of `webtest.TestApp`. """
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
+
 
 class TestApp(TestAppBase):
 
