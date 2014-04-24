@@ -195,6 +195,21 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
+{% macro columnimage(obj) -%}
+    <div class="article__column__headerimage">
+        <div class="scaled-image">
+            <!--[if gte IE 9]> -->
+            <noscript data-ratio="{{obj.ratio}}">
+            <!-- <![endif]-->
+                    <img class="figure__media" alt="{{obj.attr_alt|default('')}}" title="{{obj.attr_title|default('')}}" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+            <!--[if gte IE 9]> -->
+            </noscript>
+            <!-- <![endif]-->
+        </div>
+    </div>
+{%- endmacro %}
+
+
 {% macro meta_author(authors, class="article__head__meta__author") %}
     {%- if authors -%}
         {%- for author in authors -%}

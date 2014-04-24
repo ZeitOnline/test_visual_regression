@@ -413,6 +413,12 @@ class ShortformArticle(Article):
     pass
 
 
+@view_config(context=zeit.frontend.article.IColumnArticle,
+             renderer='templates/column.html')
+class ColumnArticle(Article):
+    pass
+
+
 @view_config(name='teaser',
              context=zeit.content.article.interfaces.IArticle,
              renderer='templates/teaser.html')

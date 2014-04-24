@@ -5,6 +5,9 @@ Change log for zeit.frontend
 -------------------
 
 - new layouts for zmo-teaser-blocks
+- new format: Standardkolumnenformat
+- fix for too much ads
+- respecting advertising_enabled switch
 
 
 0.2.20 (2014-04-17)

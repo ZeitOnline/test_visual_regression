@@ -1,0 +1,18 @@
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+<div class="article__head-wrap">
+    <header class="article__head article__head--column">
+        <div class="is-constrained">
+            {{ blocks.supertitle() }}
+            {{ blocks.title() }}
+            <div class="article__column__author">
+                {{ blocks.meta_author(view.authors) }}
+            </div>
+            {{ blocks.columnimage(view.header_img) }}
+            <span class="article__head__meta-wrap">
+                <span class="article__head__meta">
+                    {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+                </span>
+            </span>
+        </div>
+    </header>
+</div>
