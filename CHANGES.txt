@@ -4,6 +4,10 @@ Change log for zeit.frontend
 0.2.21 (unreleased)
 -------------------
 
+- change teaser template structure
+- add responsivesness for leadarea teasers
+- integrate ad space in cp
+- integrate informative area in cp
 - Add Multiadapter for TeaserImage.
 - new layouts for zmo-teaser-blocks
 
