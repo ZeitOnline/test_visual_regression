@@ -113,20 +113,6 @@ class HeaderImageStandard(HeaderImage):
     pass
 
 
-@implementer(IFrontendHeaderBlock)
-@adapter(zeit.content.article.edit.interfaces.IImage)
-class ColumnImage(Image):
-
-    def __new__(cls, model_block):
-        if (model_block.layout != 'zmo-xl-header' or
-                getattr(model_block, 'is_empty', False)):
-            return None
-        return super(Image, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(ColumnImage, self).__init__(model_block)
-
-
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IIntertitle)
 class Intertitle(object):

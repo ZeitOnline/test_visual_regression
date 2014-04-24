@@ -416,12 +416,7 @@ class ShortformArticle(Article):
 @view_config(context=zeit.frontend.article.IColumnArticle,
              renderer='templates/column.html')
 class ColumnArticle(Article):
-
-    @property
-    def header_img(self):
-        obj = self._select_first_body_obj
-        if IImage in providedBy(obj):
-            return self._create_obj(zeit.frontend.block.ColumnImage, obj)
+    pass
 
 
 @view_config(name='teaser',
