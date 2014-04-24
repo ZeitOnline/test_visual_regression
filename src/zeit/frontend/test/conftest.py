@@ -122,7 +122,7 @@ def agatho():
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
-    return LinkReach(linkreach_host=settings['linkreach_host'])
+    return LinkReach(settings['community_host'], settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')
