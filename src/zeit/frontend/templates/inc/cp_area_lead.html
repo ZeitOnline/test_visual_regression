@@ -17,8 +17,9 @@ Available attributes:
         %}
         {% include teaser_blocks ignore missing %}
 
-        {% if (type == 'inf') and (loop.index == 2 or loop.last) -%}
+        {% if (type == 'inf') and (loop.index == 2 or loop.last) and (added is not defined) -%}
             <!-- special ad integration by counter -->
+            {% set added = true %}
             {% include 'templates/inc/informatives/inf_ad.html' ignore missing %}
         {% endif %}
 
