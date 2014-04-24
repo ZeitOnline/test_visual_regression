@@ -70,6 +70,7 @@ $cp__buttons__image-height: em(165px)
 
 //wrapper lead area
 .cp__lead__wrap
+	+justify-children-horizontally('.cp__buttons__wrap-double')
 	width: 100%
 	+respond-min($break-2)
 		float: left
@@ -141,23 +142,15 @@ $cp__buttons__image-height: em(165px)
 
 .cp__buttons__wrap-double
 	@extend %cp__buttons__wrap
-	width: 100%	
+	vertical-align: top !important
+	width: 100%
 	padding: 0 $compact 0 $compact
 	margin-top: $compact
 	margin-bottom: 0
 	+respond-min($break-2)
-		width: 50%
-		float: left
+		min-height: 350px
+		width: 48%
 		padding: 0 0 0 0
-
-.cp__buttons__wrap-double:nth-of-type(odd)
-	clear: left
-	+respond-min($break-2)
-		padding-right: $little
-
-.cp__buttons__wrap-double:nth-of-type(even)
-	+respond-min($break-2)
-		padding-left: $little	
 		
 .cp__buttons__image
 	overflow: hidden
