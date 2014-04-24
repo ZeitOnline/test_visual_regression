@@ -2,11 +2,11 @@
 import colander
 import datetime
 import urllib2
+import urllib
 import json
 import zeit.cms.interfaces
 from lxml import etree
 from babel.dates import get_timezone
-
 
 
 class UnavailableSectionException(Exception):
@@ -30,28 +30,29 @@ class LinkReach(object):
         self.community_host = community_host
         self.linkreach_host = linkreach_host
 
-    def fetch_service(self, service, limit):
-        # TODO: Does the linkreach API allow for section filters?
+    def fetch_service(self, service, limit, section='zeit-magazin'):
+        if section not in self.sections:
+            raise UnavailableSectionException('No section named: ' + section)
+
         if service not in self.services:
             raise UnavailableServiceException('No service named: ' + service)
-        if not 0 < limit < 10:
-            raise LimitOutOfBoundsException('Limit must be greater than 0 '
-                                            'and less than 10.')
-        if not self.linkreach_host:
-            return []
 
-        url = '%s/zonrank/%s?limit=%s' % (self.linkreach_host, service, limit)
+        if not 0 < limit < 10:
+            raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
+
+        params = urllib.urlencode({'limit': limit, 'section': section})
+        url = '%s/zonrank/%s?%s' % (self.linkreach_host, service, params)
+
         req = urllib2.Request(url)
         response = urllib2.urlopen(req, timeout=4)
         return DataSequence().deserialize(json.load(response))
 
-    def fetch_comments(self, section, limit):
+    def fetch_comments(self, limit, section='zeit-magazin'):
         if section not in self.sections:
-            raise UnavailableSectionException('Section not configured: '
-                                                 + section)
+            raise UnavailableSectionException('No section named: ' + section)
+
         if not 0 < limit < 10:
-            raise LimitOutOfBoundsException('Limit must be greater than 0 '
-                                            'and less than 10.')
+            raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
         url = '%s/agatho/commentsection/mostcommented/24/%s.xml' % \
               (self.community_host, section)
