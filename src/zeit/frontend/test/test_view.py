@@ -156,6 +156,13 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<img class="article__main-image--longform' in browser.contents
 
 
+def test_column_should_have_header_image(testserver):
+    browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
+    assert '<div class="article__column__headerimage">' in browser.contents
+    assert '<div class="scaled-image">' in browser.contents
+    assert '<img class="figure__media"' in browser.contents
+
+
 def test_health_check_should_response_and_have_status_200(testserver):
     browser = Browser('%s/health_check' % testserver.url)
     assert browser.headers['Content-Length'] == '2'

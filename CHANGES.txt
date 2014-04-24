@@ -4,7 +4,15 @@ Change log for zeit.frontend
 0.2.21 (unreleased)
 -------------------
 
+- change teaser template structure
+- add responsivesness for leadarea teasers
+- integrate ad space in cp
+- integrate informative area in cp
+- Add Multiadapter for TeaserImage.
 - new layouts for zmo-teaser-blocks
+- new format: Standardkolumnenformat
+- fix for too much ads
+- respecting advertising_enabled switch
 
 
 0.2.20 (2014-04-17)
@@ -48,7 +56,7 @@ Change log for zeit.frontend
 - Add a tool for downloading resources from CMS.
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages
-- Refactor template logic for macros. The are now located in 
+- Refactor template logic for macros. The are now located in
 templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 - add date, source, genre testing

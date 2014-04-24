@@ -134,12 +134,6 @@
         </container>
       </region>
       <region area="informatives">
-        <container cp:type="cpextra" module="mostread" cp:__name__="id-89f07ff6-3996-426d-9a8d-590c2ea54fbd">
-          <cp_extra id="mostread"/>
-        </container>
-        <container cp:type="cpextra" module="mostcommented" cp:__name__="id-2c7abdb6-80e4-442c-a1d9-ff25e6856f52">
-          <cp_extra id="mostcommented"/>
-        </container>
       </region>
     </cluster>
     <cluster area="teaser-mosaic"/>

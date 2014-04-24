@@ -63,7 +63,7 @@
 			$(".bx-next").addClass('icon-pfeil-rechts');
 			$(".bx-prev").addClass('icon-pfeil-links');
 
-			$(".figure__media", this).mouseenter(function() {
+			$(".scaled-image", this).mouseenter(function() {
 				$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
 			}).mouseleave(function() {
 				$(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
@@ -72,7 +72,7 @@
 			$(this).on("scaling_ready", function(e) {
 				slider.redrawSlider();
 				/* add hover-class for button display */
-				$(".figure__media", this).mouseenter(function() {
+				$(".scaled-image", this).mouseenter(function() {
 					$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
 				}).mouseleave(function() {
 					$(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
@@ -124,6 +124,30 @@
                     figures.unbind();
                 }
             });
-		});
-	};
+
+            //for portrait mode images, set max height
+            var figMedia = $('.inline-gallery .figure-full-width .figure__media');
+            figMedia.each(function( index ) {
+                var imageWidth = $( this ).width();
+                var imageHeight = $( this ).height();
+                if(imageWidth <= imageHeight) {
+                    $( this ).css('max-width', '100%');
+                    $( this ).css('max-height', '620px');
+                    $( this ).css('width', 'auto');
+                    $( this ).css('height', 'auto');
+                    $( this ).css("margin", '0 auto');
+                }
+            });
+
+            var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
+            figCaptions.each(function( index ) {
+                var imageWidth = $( this ).prev().find('.figure__media').width();
+                $( this ).width(imageWidth);
+                $( this ).css("max-width", imageWidth);
+                if(imageWidth > 520) {
+                    $( this ).css('padding-right', '30%');
+                }
+            });
+        });
+    };
 })(jQuery);
