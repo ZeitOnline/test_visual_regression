@@ -188,5 +188,5 @@ def comments_per_unique_id(self):
                                   node_comment_statistics_file.data.encode())
         nodes = node_comment_statistics.xpath('/nodes/node')
         return {node.values()[0]:node.values()[1] for node in nodes}
-    except IOError, TypeError:
+    except:
         return {}
