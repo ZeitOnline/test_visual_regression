@@ -365,7 +365,7 @@
         <div class="main-footer__box is-constrained is-centered">
             <div class="main-footer__ZM">
                 <span class="main-footer__ZM__img icon-zm-logo--white"></span>
-            </div>     
+            </div>
             <div class="main-footer__links">
                 <div>
                     <ul>
@@ -389,10 +389,10 @@
     </footer>
 {%- endmacro %}
 
-{% macro adplace(banner) -%}
+{% macro adplace(banner, pagetype='article') -%}
     {%set kw = 'zeitonline,zeitmz' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__width_{{banner.noscript_width_height[0]}}">
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}}">
         {% if banner.label -%}
         <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
         {%- endif %}
