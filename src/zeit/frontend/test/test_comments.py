@@ -43,7 +43,10 @@ def test_a_fucking_dict_with_fucking_article_paths_and_fucking_comment_counts_sh
     my_dummy_request = mock.Mock()
     my_dummy_request.request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
     comment_count_dict = comments_per_unique_id(my_dummy_request)
-    assert comment_count_dict['/centerpage/article_image_asset'] == '22'
+    mytype = type(comment_count_dict) is dict
+    assert mytype == True
+    comments_in_article = comment_count_dict['/centerpage/article_image_asset']
+    assert comments_in_article == '22'
 
 
 @mark.selenium
