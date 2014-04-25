@@ -375,8 +375,8 @@
         </div>
         <div class="tabs has-2">
             <div class="tabs__head" id="js-comments-tabs-head">
-                <a href="#tab1" class="tabs__head__tab is-active">Alle</a>
-                <a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
+                <a href="#tab1" class="tabs__head__tab static-scroll is-active">Alle</a>
+                <a href="#tab2" class="tabs__head__tab static-scroll">Ausgewählte</a>
             </div>
             <div class="comments__body" id="js-comments-body">
                 <div class="tabs__content is-active">
