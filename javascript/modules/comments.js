@@ -250,18 +250,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments_trigger.click(toggleComments);
         $(window).on('resize', updateLayout);
 
-        // mimic hover for the sake of grunticons - change later (SVG Sprites FTW)
-        $('.icon-flag').hover(function() {
-            $(this).removeClass('icon-flag').addClass('icon-flag-hover');
-        }, function() {
-            $(this).removeClass('icon-flag-hover').addClass('icon-flag');
-        });
-        $('.icon-reply').hover(function() {
-            $(this).removeClass('icon-reply').addClass('icon-reply-hover');
-        }, function() {
-            $(this).removeClass('icon-reply-hover').addClass('icon-reply');
-        });
-
         // on document ready: check for url hash to enable anchor links and return urls
         $(function() {
             var anchor = window.location.hash.slice(1);

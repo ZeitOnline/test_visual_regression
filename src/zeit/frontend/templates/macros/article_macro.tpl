@@ -302,9 +302,9 @@
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
+            <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {% endif -%}
-            <a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
+            <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
         </aside>
     </article>
 {%- endmacro %}
