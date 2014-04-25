@@ -6,6 +6,7 @@ from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
+from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
 from zeit.frontend.centerpage import get_image_asset
 from zeit.magazin.interfaces import IArticleTemplateSettings
@@ -22,7 +23,9 @@ import urlparse
 import zeit.cms.interfaces
 import zeit.connector
 import zeit.frontend
+import zeit.frontend.banner
 import zeit.frontend.block
+import zeit.frontend.centerpage
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -47,6 +50,13 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
+        self.configure_banner()
+
+    def configure_banner(self):
+        banner_source = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_banner-source', ''))
+        zeit.frontend.banner.banner_list = \
+            zeit.frontend.banner.make_banner_list(banner_source)
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -74,7 +84,7 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
 
-        #ToDo: Is this still needed. Can it be removed?
+        # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
 
         def asset_url(request, path, **kw):
@@ -90,6 +100,17 @@ class Application(object):
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+
+        from pyramid.authorization import ACLAuthorizationPolicy
+        from .security import CommunityAuthenticationPolicy
+        import pyramid_beaker
+        config.include("pyramid_beaker")
+        session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
+        config.set_session_factory(session_factory)
+        config.set_authentication_policy(CommunityAuthenticationPolicy())
+        config.set_authorization_policy(ACLAuthorizationPolicy())
+        from zeit.frontend.appinfo import assemble_app_info
+        config.add_request_method(assemble_app_info, 'app_info', reify=True)
         return config
 
     def get_repository(self, request):
@@ -218,6 +239,7 @@ factory = Application()
 
 
 class URLPrefixMiddleware(object):
+
     """Removes a path prefix from the PATH_INFO if it is present.
     We use this so that if an ``asset_prefix`` is configured, we respond
     correctly for URLs both with and without the asset_prefix -- otherwise
@@ -269,37 +291,43 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
-def format_date_ago(dt, precision=2, past_tense='vor {}', future_tense='in {}'):
-    #customization of https://bitbucket.org/russellballestrini/ago :)
+
+def format_date_ago(dt, precision=2, past_tense='vor {}',
+                    future_tense='in {}'):
+
+    # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
-    if type(dt) is not type(timedelta()):
+    if not isinstance(dt, type(timedelta())):
         delta = datetime.now() - dt
 
     the_tense = past_tense
     if delta < timedelta(0):
         the_tense = future_tense
 
-    delta = abs( delta )
+    delta = abs(delta)
     d = {
-        'Jahr'   : int(delta.days / 365),
-        'Tag'    : int(delta.days % 365),
-        'Stunde'   : int(delta.seconds / 3600),
-        'Minute' : int(delta.seconds / 60) % 60,
-        'Sekunde' : delta.seconds % 60
+        'Jahr': int(delta.days / 365),
+        'Tag': int(delta.days % 365),
+        'Stunde': int(delta.seconds / 3600),
+        'Minute': int(delta.seconds / 60) % 60,
+        'Sekunde': delta.seconds % 60
     }
     hlist = []
     count = 0
-    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
-    units_plural = { 'Jahr':'Jahren', 'Tag':'Tagen', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
+    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
+                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
     for unit in units:
         unit_displayed = unit
-        if count >= precision: break # met precision
-        if d[ unit ] == 0: continue # skip 0's
-        if d[ unit ] != 1:
+        if count >= precision:
+            break  # met precision
+        if d[unit] == 0:
+            continue  # skip 0's
+        if d[unit] != 1:
             unit_displayed = units_plural[unit]
-        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        hlist.append('%s %s' % (d[unit], unit_displayed))
         count += 1
-    human_delta = ', '.join( hlist )
+    human_delta = ', '.join(hlist)
     return the_tense.format(human_delta)
 
 
@@ -332,18 +360,35 @@ default_images_sizes = {
     'default': (200, 300),
     'large': (800, 600),
     'small': (200, 300),
-    '540x304': (200, 300),
-    'teaser_classic': (300, 169),
-    'teaser_tile': (300, 300),
-    'teaser_series_landscape': (640, 427),
-    'teaser_series_square': (640, 640),
-    'teaser_series_portrait': (640, 960),
-    'teaser_column_dream': (640, 800),
-    'teaser_column_snap_landscape': (640, 360),
-    'teaser_column_snap_portrait': (640, 960),
-    'hp_lead_square': (640, 640),
-    'hp_lead_portrait': (640, 864),
-    'hp_lead_superspecial': (980, 551),
+    'upright': (320, 480),
+    'zmo-xl-header': (460, 306),
+    'zmo-xl': (460, 306),
+    'zmo-medium-left': (225, 125),
+    'zmo-medium-center': (225, 125),
+    'zmo-medium-right': (225, 125),
+    'zmo-large-left': (225, 125),
+    'zmo-large-center': (225, 125),
+    'zmo-large-right': (225, 125),
+    'zmo-small-left': (225, 125),
+    'zmo-small-center': (225, 125),
+    'zmo-small-right': (225, 125),
+    '540x304': (290, 163),
+    '940x400': (470, 200),
+    '148x84': (74, 42),
+    '220x124': (110, 62),
+    '368x110': (160, 48),
+    '368x220': (160, 96),
+    '180x101': (90, 50),
+    'zmo-landscape-large': (460, 306),
+    'zmo-landscape-small': (225, 125),
+    'zmo-square-large': (200, 200),
+    'zmo-square-small': (50, 50),
+    'zmo-lead-upright': (320, 480),
+    'zmo-upright': (320, 432),
+    'zmo-large': (460, 200),
+    'zmo-medium': (330, 100),
+    'zmo-small': (200, 50),
+    'zmo-x-small': (100, 25),
 }
 
 
@@ -404,7 +449,9 @@ def most_sufficient_teaser_image(teaser_block,
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
-        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        teaser_image = zope.component.getMultiAdapter(
+            (asset, zeit.cms.interfaces.ICMSContent(image_id)),
+            zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
         return None
@@ -438,8 +485,11 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, ILongformArticle)
                 if IArticleTemplateSettings(context).template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
+                if IArticleTemplateSettings(context).template == 'column':
+                    zope.interface.alsoProvides(context,
+                                                IColumnArticle)
             return self._change_viewname(tdict)
-        except OSError, e:
+        except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
 

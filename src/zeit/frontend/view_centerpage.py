@@ -17,6 +17,10 @@ log = logging.getLogger(__name__)
 class Centerpage(zeit.frontend.view.Base):
 
     @property
+    def type(self):
+        return type(self.context).__name__.lower()
+
+    @property
     def pagetitle(self):
         #ToDo(T.B.) should be, doesn't work
         #return self.context.html-meta-title
@@ -75,3 +79,14 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def global_googleplus_shares(self):
         return self._shares.fetch_data('googleplus', 20)[:10]
+
+    @property
+    def area_informatives(self):
+        teaser_list = self.context['informatives'].values()
+        return teaser_list
+
+    def banner(self, tile):
+        try:
+            return zeit.frontend.banner.banner_list[tile - 1]
+        except IndexError:
+            return None

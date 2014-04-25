@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.2.20.dev0',
+    version='0.2.21.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
@@ -18,6 +18,7 @@ setup(
         'lxml',
         'martian',
         'pyramid',
+        'pyramid_beaker',
         'pyramid_jinja2',
         'pyramid_tm',
         'pyramid_debugtoolbar',
@@ -27,6 +28,7 @@ setup(
         'setuptools',
         'simplejson',
         'zc.iso8601',
+        'wsgiproxy',
         'zeit.cms',
         'zeit.connector >= 2.3.2.dev0',
         'zeit.content.article',

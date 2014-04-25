@@ -62,21 +62,30 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
 def test_macro_footer_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    current_year = date.today().year
 
     # assert normal markup
-    markup = '<footer class="main-footer">' \
-        '<div class="main-footer__Z">' \
-        '<img src="http://localhost/img/z-logo.svg" ' \
-        'class="main-footer__Z__img" /></div>' \
-        '<div class="main-footer__C">&copy; ' \
-        + str(current_year) + ' ZEIT Online</div>' \
-        '</footer>'
+    markup = '<footer class="main-footer">'\
+        '<div class="main-footer__box is-constrained is-centered">'\
+        '<div class="main-footer__ZM">'\
+        '<span class="main-footer__ZM__img icon-zm-logo--white"></span>'\
+        '</div><div class="main-footer__links"><div><ul><li>VERLAG</li>'\
+        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
+        'Mediadaten</a></li><li><a href="'\
+        'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
+        'Rechte &amp; Lizenzen</a></li>'\
+        '</ul></div><div><ul><li>Bildrechte</li>'\
+        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
+        'Datenschutz</a></li>'\
+        '<li><a href="'\
+        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
+        'onlinewerbung.html">Cookies</a></li>'\
+        '<li><a href="http://www.zeit.de/administratives/'\
+        'agb-kommentare-artikel">AGB</a></li>'\
+        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
+        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
+        '</ul></div></div></div></footer>'
 
-    request = Mock()
-    request.asset_url.side_effect = lambda x: 'http://localhost/' + x
-
-    lines = tpl.module.main_footer(current_year, request).splitlines()
+    lines = tpl.module.main_footer().splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -690,7 +699,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
              'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
              'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
-             '+ diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
+             '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
              '/javascript"><\/script>\');'
     lines = tpl.module.adplace(banner).splitlines()
     output = ""

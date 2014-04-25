@@ -1,3 +1,9 @@
+{% import 'templates/macros/layout_macro.tpl' as lama with context %}
+
+{% macro place(item) -%}
+    {{lama.adplace(item)}}
+{%- endmacro %}
+
 {% macro supertitle() -%}
   <h2 class="article__head__supertitle">{{ view.supertitle }}</h2>
 {%- endmacro %}
@@ -175,6 +181,20 @@
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
+{% macro columnimage(obj) -%}
+    <div class="article__column__headerimage">
+        <div class="scaled-image">
+            <!--[if gte IE 9]> -->
+            <noscript data-ratio="{{obj.ratio}}">
+            <!-- <![endif]-->
+                    <img class="figure__media" alt="{{obj.attr_alt|default('')}}" title="{{obj.attr_title|default('')}}" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
+            <!--[if gte IE 9]> -->
+            </noscript>
+            <!-- <![endif]-->
+        </div>
+    </div>
+{%- endmacro %}
+
 {% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
     {%- if authors -%}
         {%- for author in authors -%}
@@ -271,11 +291,9 @@
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}">
-                Auf Kommentar antworten
-            </a>
+            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {%- endif %}
-            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}">Kommentar melden</a>{%- endif %}
+            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>{%- endif %}
         </aside>
     </article>
 {%- endmacro %}

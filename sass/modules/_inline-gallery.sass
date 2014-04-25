@@ -1,91 +1,92 @@
 // reset from bxSlider
 .bx-wrapper
-	position: relative
-	margin: 0 auto 60px
-	padding: em(50px) 0 0 0
-	+has-layout()
-	img
-		max-width: 100%
-		display: block
-	.bx-viewport
-		margin: 0
-		padding: 0
-	// controls
-	.bx-pager
-		+inline-block
-		+tablet
-		color: $grey--mid
-		font-size: 0.9em
-		height: $gallery-button-radius
-		line-height: $gallery-button-radius + 0.5em
-		padding-right: $fine
-	.bx-controls
-		height: $gallery-button-radius
-		position: absolute
-		top: 0
-		right: 0
-	.bx-controls-direction
-		+inline-block
-	.bx-next, .bx-prev
-		+inline-block
-		width: $gallery-button-radius
-		height: $gallery-button-radius
-		text-indent: -5000em
-		margin-left: 10px
-		border-radius: 50%
-		background-color: #000
-		background-position: 50% 50%
-		background-size: 20%
-		color: #fff
-		border-color: none
-		+opacity(0.3)
-		&:hover
-			+opacity(0.7)
-			border: none
-		&.disabled
-			+opacity(0.1)
-	.bx-overlay-next, .bx-overlay-prev
-		$overlaysize: $gallery-button-radius * 2
-		@extend .bx-next
-		width: $overlaysize
-		height: $overlaysize
-		position: absolute
-		z-index: 9999
-		top: 50%
-		margin-top: -$gallery-button-radius/2
-		outline: 0
-		+opacity(0)
-	.bx-overlay-prev
-		left: em(10px)
-	.bx-overlay-next
-		right: em(10px)
-	&.bx-wrapper-hovered
-		.bx-overlay-next, .bx-overlay-prev
-			+opacity(0.3)
+    position: relative
+    margin: 0 auto 60px
+    padding: em(50px) 0 0 0
+    +has-layout()
+    img
+        max-width: 100%
+        display: block
+    .bx-viewport
+        margin: 0
+        padding: 0
+    // controls
+    .bx-pager
+        +inline-block
+        +tablet
+        color: $grey--mid
+        font-size: 0.9em
+        height: $gallery-button-radius
+        line-height: $gallery-button-radius + 0.5em
+        padding-right: $fine
+    .bx-controls
+        height: $gallery-button-radius
+        position: absolute
+        top: 0
+        right: 0
+    .bx-controls-direction
+        +inline-block
+    .bx-next, .bx-prev
+        +inline-block
+        width: $gallery-button-radius
+        height: $gallery-button-radius
+        text-indent: -5000em
+        margin-left: 10px
+        border-radius: 50%
+        background-color: #000
+        background-position: 50% 50%
+        background-size: 20%
+        color: #fff
+        border-color: none
+        +opacity(0.3)
+        &:hover
+            +opacity(0.7)
+            border: none
+        &.disabled
+            +opacity(0.1)
+    .bx-overlay-next, .bx-overlay-prev
+        $overlaysize: $gallery-button-radius * 2
+        @extend .bx-next
+        width: $overlaysize
+        height: $overlaysize
+        position: absolute
+        z-index: 9999
+        top: 50%
+        margin-top: -$gallery-button-radius
+        outline: 0
+        +opacity(0)
+    .bx-overlay-next
+        right: em(10px)
+    &.bx-wrapper-hovered
+        .bx-overlay-next, .bx-overlay-prev
+            +opacity(0.3)
+            border: none
 
-	// figure elements in bxSlide
-	figure
-		margin: 0
-		padding: 0
-		clear: none
-		.figure__caption
-			color: $grey--mid
-			// margin: 0 !important
-			padding: 0
-			max-width: auto
-			.figure__caption__copyright
-				color: $charcoal
-				a
-					+link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
-					+on-interaction
-						text-decoration: none
-						border-color: $charcoal
-					&:focus
-						outline: 0
-	// elements not in actual use
-	.bx-controls-auto,
-	.bx-loading
-		display: none
+    // figure elements in bxSlide
+    figure
+        margin: 0
+        padding: 0
+        clear: none
+        .figure__caption
+            color: $grey--mid
+            // margin: 0 !important
+            padding: 0
+            //max-width: none
+            margin: 0 auto !important
+            margin-top: $small !important
+            .figure__caption__copyright
+                color: $charcoal
+                a
+                    +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
+                    +on-interaction
+                        text-decoration: none
+                        border-color: $charcoal
+                    &:focus
+                        outline: 0
+    // elements not in actual use
+    .bx-controls-auto,
+    .bx-loading
+        display: none
 
 
 

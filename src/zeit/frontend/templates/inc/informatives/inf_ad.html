@@ -1,0 +1,11 @@
+{#
+
+informatives ad template
+
+#}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
+<div class='cp__buttons__wrap'>
+	<div class='cp__buttons__ad'>
+		{{ lama.adplace(view.banner(7), view.type) }}
+	</div>
+</div>

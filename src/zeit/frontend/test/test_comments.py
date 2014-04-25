@@ -1,4 +1,4 @@
-from pytest import fixture
+from pytest import fixture, mark
 from zeit.frontend.comments import get_thread
 
 unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
@@ -23,9 +23,9 @@ def test_agatho_collection_get_for_nonexistent(agatho):
     assert agatho.collection_get(u'/nosuchthread') is None
 
 
-def test_comment_as_json(xml_comment, dummy_request):
-    from zeit.frontend.comments import comment_as_json
-    json_comment = comment_as_json(xml_comment, dummy_request)
+def test_comment_as_dict(xml_comment, dummy_request):
+    from zeit.frontend.comments import comment_as_dict
+    json_comment = comment_as_dict(xml_comment, dummy_request)
     assert json_comment['name'] == 'claudiaE'
 
 
@@ -35,6 +35,8 @@ def test_get_entire_thread(dummy_request):
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
 
+
+@mark.selenium
 def test_reply_to_comment(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)

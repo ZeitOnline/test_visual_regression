@@ -156,6 +156,13 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<img class="article__main-image--longform' in browser.contents
 
 
+def test_column_should_have_header_image(testserver):
+    browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
+    assert '<div class="article__column__headerimage">' in browser.contents
+    assert '<div class="scaled-image">' in browser.contents
+    assert '<img class="figure__media"' in browser.contents
+
+
 def test_health_check_should_response_and_have_status_200(testserver):
     browser = Browser('%s/health_check' % testserver.url)
     assert browser.headers['Content-Length'] == '2'
@@ -482,4 +489,19 @@ def test_pagination_prev_page_url_on_first_page_is_none(testserver):
     assert view.pagination['prev_page_url'] is None
 
 
+def test_article09_should_have_a_focussed_nextread(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article_view = view_article.Article(context, '')
+    nextread = article_view.focussed_nextread
+    assert nextread is not None
+    assert isinstance(nextread['article'],\
+                      zeit.content.article.article.Article)
+    assert nextread['image']['uniqueId'] is None
+    assert nextread['layout'] == 'minimal'
 
+
+def test_article01_should_not_have_a_focussed_nextread(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view_article.Article(context, '')
+    nextread = article_view.focussed_nextread
+    assert nextread is None

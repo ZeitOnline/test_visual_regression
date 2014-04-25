@@ -3,9 +3,8 @@
 {% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% import 'templates/article.html' as article with context %}
 
-{%  block page_wrap_inner %}
-            <div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
-            {{ lama.main_nav_compact(view,request) }}
+{% block page_wrap_inner %}
+	<div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
 {% endblock page_wrap_inner %}
 
 {% block content %}
@@ -13,37 +12,35 @@
 		<div class="article__wrap">
 			<div class="article__head-wrap">
 
-          {{ blocks[view.header_elem|block_type](view.header_elem) }}
+				{{ blocks[view.header_elem|block_type](view.header_elem) }}
 
-  	       <header class="article__title-wrap">
-            {{ blocks.title() }}
-            <div class="article__head__meta">
-              {{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
-              {{ blocks.meta_author(view.authors) }}
-            </div>
-          </header>
+				<header class="article__title-wrap">
+					{{ blocks.title() }}
+					<div class="article__head__meta">
+						{{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
+						{{ blocks.meta_author(view.authors) }}
+					</div>
+				</header>
 			</div>
 
 			<div class="article__body">
+				<!-- block for Teaser -->
+				<section class="article__page">
+					<div class="article__page-wrap">
+						{{ blocks.subtitle() }}
+					</div>
+				</section>
 
-        <!-- block for Teaser -->
-         <section class="article__page">
-            <div class="article__page-wrap">
-              {{ blocks.subtitle() }}
-            </div>
-          </section>
+				{% for page in view.pages %}
+				<section class="article__page">
+					<div class="article__page-wrap">
+						{{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
+						{{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
 
-        {% for page in view.pages %}
-          <section class="article__page">
-            <div class="article__page-wrap">
-              {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
-              {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
-
-              {{ article.render_page(page) }}
-            </div>
-          </section>
-        {% endfor %}
-
+						{{ article.render_page(page) }}
+					</div>
+				</section>
+				{% endfor %}
 			</div>
 		</div>
 	</article>

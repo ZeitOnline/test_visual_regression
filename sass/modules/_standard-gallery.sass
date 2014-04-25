@@ -1,0 +1,51 @@
+.gallery
+    background-color: $grey--light
+    margin-bottom: 40px
+    margin-left: -$page-padding+em(5px)
+    margin-right: -$page-padding+em(5px)
+    padding: 20px 0px 10px 0px
+    +respond-min($break-1)
+        margin-left: -$page-padding
+        margin-right: -$page-padding
+    +respond-min($break-3)
+        margin-left: -($page-padding+$gutter/2)
+        margin-right: -($page-padding+$gutter/2)
+    .figure__caption
+        margin-left: 0 !important
+        +respond-max($break-3)
+            padding-left: 5px !important
+            width: 100% !important
+        +respond-max($break-1)
+            background: rgba(0,0,0,0.3)
+            bottom: 0
+            color: $white !important
+            display: none
+            left: 0
+            margin-top: 0
+            max-width: none !important
+            padding: 15px !important
+            position: absolute
+            .figure__caption__copyright
+                color: $white !important
+    +respond-max($break-1)
+        padding: 0
+        .bx-overlay-next, .bx-overlay-prev
+            display: none
+            height: $gallery-button-radius
+            opacity: 0.3
+            top: em(45px)
+            width: $gallery-button-radius
+        .bx-wrapper
+            padding-top: 0
+        .bx-controls
+            display: none
+
+.gallery__description
+    font-family: "TabletGothic", $sans-fallbacks
+    font-size: $font-s
+
+.gallery__info
+    margin-top: 50px
+    margin: 0 auto
+    max-width: 33em
+

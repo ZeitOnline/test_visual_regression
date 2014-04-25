@@ -4,8 +4,9 @@ $cp__lead-full-height: em(550px)
 $cp__lead__wrap-width: 65%
 $cp__lead__informatives__wrap-width: 35%
 $cp__buttons__image-height: em(165px)
+$cp__buttons__wrap-height: em(350px)
 
-//standard classes for cp lead area		
+//standard classes for cp lead area
 .cp__lead, %cp__lead
 	background-color: $black
 	&:after
@@ -53,7 +54,6 @@ $cp__buttons__image-height: em(165px)
 .cp__lead__subtitle
 	@extend %cp__image__link
 	@extend %copy
-	+tablet()
 	color: $white
 	font-size: $font-m
 	line-height: $petite
@@ -63,7 +63,6 @@ $cp__buttons__image-height: em(165px)
 .cp__lead__supertitle
 	@extend %cp__image__link
 	@extend %copy
-	+tablet()
 	line-height: $medium
 	color: $white
 	font-size: $font-s
@@ -72,32 +71,24 @@ $cp__buttons__image-height: em(165px)
 
 //wrapper lead area
 .cp__lead__wrap
+	+justify-children-horizontally('.cp__buttons__wrap-double')
 	width: 100%
-	padding: 0 0 $compact 0
 	+respond-min($break-2)
 		float: left
 		width: $cp__lead__wrap-width
 		padding: 0 $compact $compact $compact
-
-//wrapper informatives area
-.cp__lead__informatives__wrap
-	padding: $compact $compact $compact
-	width: 100%
-	+respond-min($break-2)
-		float: left
-		width: $cp__lead__informatives__wrap-width
 
 //teaser type leader
 .cp__lead-leader__wrap
 	position: relative
 	overflow: hidden
 	padding-top: 0
-	height: $cp__lead-full-height	
+	height: $cp__lead-full-height
 	margin-bottom: $small
 	background-color: $black
 	+respond-min($break-2)
 		margin-top: $compact
-		margin-bottom: $big
+		margin-bottom: $compact
 
 .cp__lead-leader__image
 	@extend %cp__lead
@@ -110,7 +101,7 @@ $cp__buttons__image-height: em(165px)
 	padding-left: 5%
 	padding-right: 5%
 	width: 100%
-	z-index: 2	
+	z-index: 2
 
 //teaser type full (fullwidth leader)
 .cp__lead-full__wrap
@@ -124,10 +115,6 @@ $cp__buttons__image-height: em(165px)
 .cp__lead-full
 	@extend %cp__lead
 	@extend %cp__lead-assets
-	img
-		@media only screen and (orientation : portrait)
-			left: -50%
-			min-width: 200%
 
 .cp__lead-full__title__wrap
 	position: absolute
@@ -137,39 +124,44 @@ $cp__buttons__image-height: em(165px)
 	padding-left: 15%
 	padding-right: 15%
 	width: 100%
-	z-index: 2	
+	z-index: 2
 
 //teaser type button
-.cp__buttons__wrap
+.cp__buttons__wrap, %cp__buttons__wrap
 	width: 100%
 	span
 		display: block
 	margin-bottom: $compact
-	padding: 0 $compact 0 $compact
-	+respond-min($break-2)
-		width: 50%
-		float: left
-		padding: 0 0 0 0
-		&:nth-child(even)
-			clear: left
-			padding-right: $little
-		&:nth-child(odd)
-			padding-left: $little
 
-.cp__buttons__image
+.cp__buttons__wrap-double
+	@extend %cp__buttons__wrap
+	vertical-align: top !important
 	width: 100%
-	overflow: hidden
+	padding: 0 $compact 0 $compact
+	margin-top: $compact
+	margin-bottom: 0
 	+respond-min($break-2)
-		max-height: $cp__buttons__image-height
+		min-height: $cp__buttons__wrap-height
+		width: 48%
+		padding: 0 0 0 0
+		
+.cp__buttons__image
+	overflow: hidden
+	height: $cp__buttons__image-height*1.5
+	margin-bottom: $small
+	img
+		width: 100%
+		height: 100%
+	+respond-min($break-2)
+		height: $cp__buttons__image-height
 
 .cp__buttons__title__wrap
 	display: block
-	margin-top: $small
 
 .cp__buttons__supertitle
 	@extend %cp__text__link
 	@extend %copy
-	+tablet()
+	margin-bottom: tiny
 	line-height: $petite
 	color: $black
 	font-size: $font-s
@@ -180,12 +172,11 @@ $cp__buttons__image-height: em(165px)
 	line-height: $petite
 	color: $black
 	font-size: $font-ml
-	margin: $tiny 0 $thin 0
+	margin: 0 0 $thin 0
 
 .cp__buttons__subtitle
 	@extend %cp__text__link
 	@extend %copy
-	+tablet()
 	line-height: $petite
 	color: $black
 	font-size: $font-m

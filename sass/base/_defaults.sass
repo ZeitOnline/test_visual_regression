@@ -18,11 +18,12 @@ img
 
 a
   +link-colors($color-link--default, $color-link--default, $color-link--default, $color-link--default, $color-link--default)
-  +transition(border-color, 0.2s)
+  +transition(border-color 0.2s)
   border-bottom: 1px solid transparent
   border-bottom: 1px solid rgba($color-link--default, 0)
   padding-bottom: -0.05em
   text-decoration: none
   +on-interaction
     text-decoration: none
-    border-color: $color-link--default
+    border-color: $color-link--hover
+    color: $color-link--hover

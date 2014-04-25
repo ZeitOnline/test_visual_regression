@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+      <tag type="free" url_value="kochen" uuid="ed546578-e0a4-4388-abd6-53d590dbf664" ns10:pytype="str">Kochen</tag>
+      <tag type="free" url_value="kochrezept" uuid="d7701afc-a69c-4d8f-9aed-423278121c13" ns10:pytype="str">Kochrezept</tag>
+      <tag type="free" url_value="vegetarische-ernaehrung" uuid="4ce9df78-500c-46f8-b7ba-c3ae47d46ace" ns10:pytype="str">Vegetarische Ernährung</tag>
+    </rankedTags>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+      <display_name py:pytype="str">Elisabeth Raether</display_name>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2013-11/stevan-paul-kochbuch-deutschland-vegetarisch" year="2013" issue="46" ressort="Lebensart" author="Kirsten Haake" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Serie Amuse Buch</supertitle>
+        <teaser_supertitle py:pytype="str">Serie Amuse Buch</teaser_supertitle>
+        <title py:pytype="str">Der Speck kann weg</title>
+        <text py:pytype="str">Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</text>
+        <description py:pytype="str">Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title py:pytype="str">Ein Lob auf das Kochbuch "Deutschland vegetarisch"</breadcrumb_title>
+        <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-11/semmelknoedel/" type="jpg" title="semmelknödel mit rahmkraut" alt="Semmelknödel mit Rahmkraut aus &quot;Deutschland vegetarisch&quot;" align="left" publication-date="" expires="">
+          <bu py:pytype="str">Dreierlei Klöße aus "Deutschland vegetarisch"</bu>
+          <copyright py:pytype="str">© Kramp + Gölling</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/H/Kirsten _Haake/index" publication-date="" expires="">
+          <display_name py:pytype="str">Kirsten Haake</display_name>
+        </author>
+      </reference>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2014/14/infografik-fleischersatz-ernaehrung" year="2014" issue="14" ressort="Wissen" author="Bernd Eberhart;Haika Hinze;Jelka Lerche" contenttype="article" publication-date="2014-03-27T01:03:00+00:00" expires="">
+        <supertitle py:pytype="str">Wissen in Bildern</supertitle>
+        <teaser_supertitle py:pytype="str">Wissen in Bildern</teaser_supertitle>
+        <title py:pytype="str">Fleischnix &amp; Primus Tofu</title>
+        <text py:pytype="str">Aus Überzeugung nur Möhren und Salat? Das muss nicht sein. Auch Vegetarier essen Steaks und Spaghetti Bolognese. Aber was steckt in tierfreundlichen Fleischalternativen?</text>
+        <description py:pytype="str">Aus Überzeugung nur Möhren und Salat? Das muss nicht sein. Auch Vegetarier essen Steaks und Spaghetti Bolognese. Aber was steckt in tierfreundlichen Fleischalternativen?</description>
+        <byline py:pytype="str">von Bernd Eberhart</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/wissen/2014-03/s45-infografik-fleischalternativen/" type="jpg" align="left" href="http://images.zeit.de/wissen/2014-03/s45-infografik-fleischalternativen.pdf" publication-date="2014-03-28T01:01:00+00:00" expires="">
+          <bu py:pytype="str">Klicken Sie auf das Bild, um die Grafik als PDF herunterzuladen.</bu>
+          <copyright py:pytype="str">© H. Hinze/J. Lerche/P. M. Hoffmann/B. Eberhart</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/E/Bernd_Eberhart/index" publication-date="" expires="">
+          <display_name py:pytype="str">Bernd Eberhart</display_name>
+        </author>
+        <author href="http://xml.zeit.de/autoren/H/Haika_Hinze/index" publication-date="" expires="">
+          <display_name py:pytype="str">Haika Hinze</display_name>
+        </author>
+        <author href="http://xml.zeit.de/autoren/L/Jelka_Lerche/index" publication-date="" expires="">
+          <display_name py:pytype="str">Jelka Lerche</display_name>
+        </author>
+      </reference>
+    </references>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00">
+      <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
+      <copyright py:pytype="str">© Silvio Knezevic</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2110540</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Raether</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-15T09:28:28.561273+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.04.2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-17-Genieen-Silvio-Knezevic-17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">geschichte</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Genießen_Silvio Knezevic 17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-16T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">Genießen_Silvio Knezevic 17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">26</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1026431116</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">Archivfreigabe</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">essen-trinken</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3762</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:0b0ea64a-7ecb-4685-927f-9e53755177b1}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Heimlich vegetarisch</title>
+    <subtitle>Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</subtitle>
+    <byline>von Elisabeth Raether</byline>
+    <division type="page">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00" layout="large" is_empty="False">
+        <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
+        <copyright py:pytype="str">© Silvio Knezevic</copyright>
+      </image>
+      <p>
+        <strong>Vorspeise</strong>
+      </p>
+      <p><em>Ofengeröstetes Gemüse</em><br/>1 Blumenkohl , 200 g Bundmöhren, 2 rote Zwiebeln, etwas Olivenöl, 2 hart gekochte Eier, Salz, Pfeffer<br/>Olivenöl, Essig, Salz, Pfeffer, Kapern (gehackt)</p>
+      <p>Blumenkohl-Röschen abtrennen, Möhren der Länge  nach halbieren, in einer Schüssel mit reichlich  Olivenöl, Salz und Pfeffer vermengen. Dann mit  geviertelten roten Zwiebeln auf einem mit Backpapier ausgelegten Blech im Ofen 25 Minuten bei  200 Grad rösten. Währenddessen ab und zu wenden.  Das Gemüse darf etwas bräunen.</p>
+      <p>Für die Vinaigrette Olivenöl, Essig, Salz, Pfeffer und gehackte Kapern vermengen. Das Gemüse  auf Tellern verteilen, etwas Vinaigrette darübergeben.  Die Eier kann man der Länge nach  geviertelt dazu servieren oder über das Gemüse bröseln.</p>
+      <p>
+        <strong>Hauptspeise</strong>
+      </p>
+      <p><em>Linsencurry mit Gurkenraita</em><br/>4 Zwiebeln, 1 kleine Chilischote, 3 Knoblauchzehen,  1 Stück Ingwer, gemahlener Piment, gemahlener Koriander, gemahlener Zimt, gemahlener Kumin (die Gewürze  in großzügigen Mengen bemessen)<br/>Olivenöl, 800 g Kartoffeln, 300 g rote Linsen, 8 getrocknete Datteln<br/>1 Salatgurke, 400 g Joghurt (mit 3,5 Prozent oder mit  10 Prozent Fettanteil), Zitronensaft<br/>Frische Kräuter wie Dill, Minze und Koriander (gehackt)</p>
+      <p>Wenn Sie bei diesem Gericht gar nicht darauf hinweisen, dass es vegetarisch ist, merkt es  vielleicht niemand: Setzt man den Deutschen Kartoffeln vor, sind sie meistens zufrieden. Zunächst werden  Zwiebeln, Chilischote (das Gericht sollte scharf  schmecken), Knoblauch, Ingwer gehackt und zusammen mit den Gewürzen in Olivenöl angeschwitzt.  Die in nicht zu kleine Würfel geschnittenen, geschälten  Kartoffeln dazu, und sofort mit Wasser angießen,  sodass sie fast bedeckt sind. Zugedeckt köcheln lassen.  Nach 10 Minuten Linsen und klein geschnittene  Datteln dazugeben, mit Wasser bedecken. Weiter köcheln lassen, bis die Kartoffeln gar und die Linsen  weich sind, das dauert ungefähr 15 bis 20 Minuten.  Den Topf während des Kochens im Auge behalten: Wenn Flüssigkeit fehlt, Wasser nachgießen.  Erst am Ende salzen, sonst verlängert sich die Garzeit.</p>
+      <p>Raita ist eine indische Joghurtmischung, die eine  frische Ergänzung zu cremigen, scharfen Currys ist.  Die Salatgurke fein hacken oder reiben, Joghurt  mit dem Schneebesen aufschlagen, beides vermengen,  mit Salz und Zitronensaft abschmecken.</p>
+      <p>Das Curry auf den Tellern verteilen, etwas Raita dazu sowie die gehackten frischen Kräuter.</p>
+      <p>
+        <strong>Dessert</strong>
+      </p>
+      <p><em>Pistazienparfait</em><br/>2 Eier, 70 g Zucker, 200 ml Sahne, 2 EL gemahlene Pistazien (ungesalzene Pistazien  mit dem Pürierstab oder im Mörser zerkleinern),  ¼ TL gemahlener Kardamom</p>
+      <p>Die Eier trennen. In einer Schüssel die Eigelbe und die Hälfte des Zuckers mit dem Schneebesen schaumig schlagen. Pistazien und Kardamom dazu. Sahne schlagen und unter die Ei-Masse heben. Die Eiweiße mit  dem verbliebenen Zucker steif schlagen. Dann behutsam unter die Masse heben. Die Masse in eine Auflauf- form oder Gläser füllen und 5 bis 6 Stunden tiefkühlen.</p>
+    </division>
+    <image-credits>Fotos  Silvio Knezevic</image-credits>
+    <caption>Wer kein Fleisch isst, kann trotzdem andere bekochen. So machen junge Leute das
+      heutzutage</caption>
+    <caption>Kein Fleisch, aber für konservative Esser sind wenigstens Kartoffeln im Curry</caption>
+    <caption>Der Creative Director des ZEITmagazins Mirko Borsche (rechts im linken Bild) hat
+      Mitarbeiter und Kollegen zu einem frühen Abendessen in sein Studio in München
+      eingeladen</caption>
+    <caption>So sehen Vegetarier heute aus. Eigentlich ganz normal also</caption>
+    <caption>Links im Bild wird das Pistazienparfait gegessen, unten ist es frisch. Wir haben in
+      diesem Heft sogar ein veganes Dessertrezept versteckt. Finden Sie es?</caption>
+    <supertitle>Kochen für Gäste</supertitle>
+  </body>
+  <teaser>
+    <title>Heimlich vegetarisch</title>
+    <text>Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</text>
+    <supertitle>Kochen für Gäste</supertitle>
+  </teaser>
+</article>
