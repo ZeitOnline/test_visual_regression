@@ -270,6 +270,9 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
     add = elements[2].find_element_by_css_selector(
         ".cp__buttons__ad").get_attribute("class")
     assert add == 'cp__buttons__ad'
+    mr = elements[2].find_element_by_css_selector(
+        "#iqadtile7").get_attribute("class")
+    assert mr == "ad__tile_7 ad__width_300"
 
 
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
