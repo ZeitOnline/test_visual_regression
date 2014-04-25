@@ -8,7 +8,6 @@ Available attributes:
 
 {% macro include(obj, type) -%}
     {% for teaser_block in obj -%}
-
         {%-
             set teaser_blocks = [
                 'templates/inc/' + type + '_block_' + teaser_block.layout.id + '.html',
