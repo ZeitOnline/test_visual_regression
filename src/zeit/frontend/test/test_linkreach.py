@@ -42,33 +42,27 @@ def test_data_sequence_for_linkreach_should_deserialize():
     assert len(seq) == 9
 
 
-def test_unavailable_service_should_throw_exception(app_settings):
-    ch = app_settings['community_host']
-    lh = app_settings['linkreach_host']
+def test_unavailable_service_should_throw_exception(linkreach):
     with pytest.raises(zeit.frontend.reach.UnavailableServiceException):
-        LinkReach(ch, lh).fetch_service('foo', 3)
+        linkreach.fetch_service('foo', 3)
 
 
-def test_unavailable_section_should_throw_exceptions(app_settings):
-    ch = app_settings['community_host']
-    lh = app_settings['linkreach_host']
+def test_unavailable_section_should_throw_exceptions(linkreach):
     with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
-        LinkReach(ch, lh).fetch_comments(3, section='foo')
+        linkreach.fetch_comments(3, section='foo')
     with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
-        LinkReach(ch, lh).fetch_service('twitter', 3, section='foo')
+        linkreach.fetch_service('twitter', 3, section='foo')
 
 
-def test_out_of_bounds_limits_should_throw_exceptions(app_settings):
-    ch = app_settings['community_host']
-    lh = app_settings['linkreach_host']
+def test_out_of_bounds_limits_should_throw_exceptions(linkreach):
     with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
-        LinkReach(ch, lh).fetch_comments(0)
+        linkreach.fetch_comments(0)
     with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
-        LinkReach(ch, lh).fetch_comments(99)
+        linkreach.fetch_comments(99)
     with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
-        LinkReach(ch, lh).fetch_service('twitter', 0)
+        linkreach.fetch_service('twitter', 0)
     with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
-        LinkReach(ch, lh).fetch_service('twitter', 99)
+        linkreach.fetch_service('twitter', 99)
 
 
 def test_data_for_twitter_should_be_fetched(linkreach):
