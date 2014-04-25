@@ -91,7 +91,7 @@ def _place_answers_under_parent(xml):
 def comment_as_dict(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
-    picture_url = u'http://community.zeit.de/files/pictures/keinbild.gif'
+    picture_url = None
     role_labels = []
     gender = 'undefined'
     if comment.xpath('author/@roles'):
