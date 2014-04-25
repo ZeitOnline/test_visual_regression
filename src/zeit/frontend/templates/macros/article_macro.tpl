@@ -396,10 +396,10 @@
                     </div>
                 </div>
                 <div class="comments__body__newer">
-                    <div class="button icon-comments-newer-inactive" id="js-comments-body-newer">Neuere</div>
+                    <div class="button icon-comments-newer" id="js-comments-body-newer">Neuere</div>
                 </div>
                 <div class="comments__body__older">
-                    <div class="button icon-comments-older-inactive" id="js-comments-body-older">Ältere</div>
+                    <div class="button icon-comments-older" id="js-comments-body-older">Ältere</div>
                 </div>
             </div>
         </div>
