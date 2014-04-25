@@ -125,6 +125,7 @@
     +respond-min($comments__break-overlap)
         +box-shadow
         +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
+        overflow: hidden
         margin: 0
         position: absolute
         top: 5.25em
@@ -143,6 +144,13 @@
         border-left: 1px dotted $grey--light
         width: em(300px)
         background-color: $white
+    &.show-older-trigger
+        .comments__button__older
+            display: block
+    &.show-newer-trigger
+        .comments__button__newer
+            display: block
+
 
 .comments__head
     margin-top: $page-padding
@@ -150,29 +158,22 @@
     +padded
 
 .comments__list
-    // +translateZ(0)
-    +transition(all 1s)
+    +transition(top 1s)
     +padded
+    padding-bottom: $large
     position: relative
     top: 0px
 
 .comments__body
     overflow: hidden
-    padding-bottom: $large
     position: relative
-    &.show-older-trigger
-        .comments__body__older
-            display: block
-    &.show-newer-trigger
-        .comments__body__newer
-            display: block
     p
         margin: 0 auto $small
         &:last-child
             margin-bottom: 0
 
-.comments__body__older,
-.comments__body__newer
+.comments__button__older,
+.comments__button__newer
     display: none
     width: 100%
     height: em(80px)
@@ -193,11 +194,10 @@
         z-index: 4
         margin-top: em(25px)
 
-
-.comments__body__older
+.comments__button__older
     bottom: 0
 
-.comments__body__newer
+.comments__button__newer
     top: 0
 
 

@@ -312,7 +312,7 @@
 {% macro comments(comments) -%}
     {% if comments is not none -%}
     <div class="tc">
-        <div class="article__socialbox">
+        <div class="article__socialbox" id="js-social-services">
             <div class="article__sharing">
                 <div class="item article__sharing__sum">
                     <span class="article__sharing__total">47</span>
@@ -340,8 +340,8 @@
                 </div>
             </div>
 
-            <div class="article__comments-trigger" id="js-comments-trigger">
-                <a class="article__comments-trigger__link">
+            <div class="article__comments-trigger">
+                <a class="article__comments-trigger__link js-comments-trigger">
                     <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
                     <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
                 </a>
@@ -395,13 +395,13 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="comments__body__newer">
-                    <div class="button icon-comments-newer" id="js-comments-body-newer">Neuere</div>
-                </div>
-                <div class="comments__body__older">
-                    <div class="button icon-comments-older" id="js-comments-body-older">Ältere</div>
+                <div class="comments__button__newer" id="js-comments-button-up">
+                    <div class="button icon-comments-newer js-scroll-comments" data-direction="up">Neuere</div>
                 </div>
             </div>
+        </div>
+        <div class="comments__button__older" id="js-comments-button-down">
+            <div class="button icon-comments-older js-scroll-comments" data-direction="down">Ältere</div>
         </div>
         <script type="text/template" id="js-report-success-template">
             <div class="comment__form__success">
