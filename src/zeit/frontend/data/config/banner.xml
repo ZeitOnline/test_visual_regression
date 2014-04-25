@@ -57,7 +57,6 @@
     <width>300</width>
     <height>250</height>
     <dcopt>ist</dcopt>
-    <adlabel>Anzeige</adlabel>
   </place>
   <place number="8" active="true">
     <name>info-mr-2</name>

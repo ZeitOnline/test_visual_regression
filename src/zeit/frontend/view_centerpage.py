@@ -74,3 +74,9 @@ class Centerpage(zeit.frontend.view.Base):
     def area_informatives(self):
         teaser_list = self.context['informatives'].values()
         return teaser_list
+
+    def banner(self, tile):
+        try:
+            return zeit.frontend.banner.banner_list[tile - 1]
+        except IndexError:
+            return None
