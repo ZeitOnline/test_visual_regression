@@ -43,8 +43,8 @@ class LinkReach(object):
         params = urllib.urlencode({'limit': limit, 'section': section})
         url = '%s/zonrank/%s?%s' % (self.linkreach_host, service, params)
 
-        req = urllib2.Request(url)
-        response = urllib2.urlopen(req, timeout=4)
+        response = urllib2.urlopen(url, timeout=4)
+
         return DataSequence().deserialize(json.load(response))
 
     def fetch_comments(self, limit, section='zeit-magazin'):
@@ -54,17 +54,24 @@ class LinkReach(object):
         if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
-        url = '%s/agatho/commentsection/mostcommented/24/%s.xml' % \
-              (self.community_host, section)
+        path = '%s/agatho/commentsection/mostcommented/24/%s.xml'
+        url = path % (self.community_host, section)
 
         item_list = []
 
-        for rss_node in etree.parse(url).xpath('/rss/channel/item')[:limit]:
+        try:
+            # Fail gracefully if community host is unavailable.
+            tree = etree.parse(url).xpath('/rss/channel/item')
+        except IOError:
+            return []
+
+        for rss_node in tree[:limit]:
             web_path = rss_node.xpath('guid/text()')[0]
             rel_path = web_path[18:]
             xml_path = 'http://xml.zeit.de' + rel_path
 
             try:
+                # Ignore item if CMS lookup fails.
                 article = zeit.cms.interfaces.ICMSContent(xml_path)
             except TypeError:
                 continue
@@ -90,7 +97,6 @@ def _prepare_date(value):
 
 
 class Entry(colander.MappingSchema):
-
     score = colander.SchemaNode(colander.Int())
     location = colander.SchemaNode(colander.String())
     supertitle = colander.SchemaNode(colander.String())
