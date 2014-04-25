@@ -208,7 +208,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             currentOffset = parseInt($commentsActiveList.css('top'), 10),
             windowTop = $(window).scrollTop(),
             windowBottom = windowTop + document.documentElement.clientHeight,
-            visibleTop = getHiddenOffset($buttonUp).top - $buttonUp.height(), // maybe do it once?
+            visibleTop = getHiddenOffset($buttonUp).top + $buttonUp.height(), // maybe do it once?
             visibleBottom = getHiddenOffset($buttonDown).top, // maybe do it once?
             newOffset,
             commentsOffset,
