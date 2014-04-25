@@ -1,7 +1,7 @@
 from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery
 from zeit.frontend import view
-from zeit.frontend import view_article
+from zeit.frontend import view_article, view_centerpage
 from zeit.frontend.block import InlineGalleryImage
 from zope.testbrowser.browser import Browser
 from pyramid.httpexceptions import HTTPNotFound
@@ -505,3 +505,12 @@ def test_article01_should_not_have_a_focussed_nextread(application):
     article_view = view_article.Article(context, '')
     nextread = article_view.focussed_nextread
     assert nextread is None
+
+def test_cp_teaser_with_comments_should_get_comments_count(testserver):
+    cp = 'http://xml.zeit.de/centerpage/lebensart'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    request = mock.Mock()
+    request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
+    view = view_centerpage.Centerpage('',request)
+    comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
+    assert comment_count == '22'
