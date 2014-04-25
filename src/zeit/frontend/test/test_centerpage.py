@@ -117,11 +117,11 @@ def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__title__wrap")
+            ".cp__lead-leader__title__wrap--dark")
         link_wrap = element.find_elements_by_tag_name(
             "a")
         image_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__image")
+            ".cp__lead-leader__image--dark")
         assert len(text_wrap) != 0
         assert len(link_wrap) == 3
         assert len(image_wrap) != 0
@@ -131,7 +131,7 @@ def test_cp_leadteaser_has_expected_text_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__title__wrap")
+        ".cp__lead-leader__title__wrap--dark")
     assert len(wrap) != 0
     for element in wrap:
         supertitle = element.find_element_by_css_selector(
@@ -150,7 +150,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__image")
+        ".cp__lead-leader__image--dark")
     assert len(wrap) != 0
     for element in wrap:
         img = element.find_element_by_tag_name(
@@ -179,7 +179,7 @@ def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
 def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap-double")
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
@@ -249,7 +249,7 @@ def test_cp_button_has_expected_text_content(selenium_driver, testserver):
 def test_cp_button_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap-double")
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
@@ -281,7 +281,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
     assert len(wrap) != 0
     for teaser in wrap:
-        vid_wrap = teaser.find_element_by_class_name("cp__lead-full")
+        vid_wrap = teaser.find_element_by_class_name("cp__lead-full--dark")
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
@@ -307,7 +307,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap' == \
+        assert 'cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert 'cp__lead__title' == unicode(h1.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
@@ -335,7 +335,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
     assert len(wrap) != 0
     for teaser in wrap:
-        img_wrap = teaser.find_elements_by_class_name("cp__lead-full")
+        img_wrap = teaser.find_elements_by_class_name("cp__lead-full--dark")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_elements_by_tag_name("header")
         h1 = teaser.find_element_by_tag_name("h1")
@@ -364,6 +364,18 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         for link in a:
             assert link.get_attribute("href") == 'http://127.0.0.1'\
                 ':6543/centerpage/article_image_asset'
+
+
+def test_teaser_light_versions_are_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    teaser = driver.find_elements_by_css_selector(".cp__lead-full--light")
+    assert len(teaser) != 0
+
+    driver.get('%s/centerpage/lebensart-2' % testserver.url)
+    teaser = driver.find_elements_by_css_selector(
+        ".cp__lead-leader__image--light")
+    assert len(teaser) != 0
 
 
 def test_get_image_asset_should_return_image_asset(testserver):
@@ -470,3 +482,19 @@ def test_get_reaches_from_centerpage_view(dummy_request):
     assert len(view.global_twitter_shares) == 10
     assert len(view.global_googleplus_shares) == 10
     assert len(view.global_facebook_shares) == 10
+
+
+def test_centerpages_produces_no_error(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/cp_with_video_lead' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/lebensart-2' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0

@@ -49,14 +49,14 @@ class Centerpage(zeit.frontend.view.Base):
     def area_lead(self):
         teaser_list = self.context['lead'].values()
         for teaser in teaser_list:
-            if teaser.layout.id == 'zmo-leader-fullwidth':
+            if teaser.layout.id == 'zmo-leader-fullwidth' or teaser.layout.id == 'zmo-leader-fullwidth-light':
                 teaser_list.remove(teaser)
         return teaser_list
 
     @property
     def area_lead_full_teaser(self):
         for teaser_block in self.context['lead'].values():
-            if teaser_block.layout.id == 'zmo-leader-fullwidth':
+            if teaser_block.layout.id == 'zmo-leader-fullwidth' or teaser_block.layout.id == 'zmo-leader-fullwidth-light':
                 return teaser_block
 
     @property

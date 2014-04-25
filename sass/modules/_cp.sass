@@ -11,32 +11,32 @@
 		+tablet()
 
 //standard classes for cp
-.cp__image__link, %cp__image__link
+.cp__link--light, %cp__link--light
 	a
-		+link-colors($white, $white, $white, $white, $white)
+		+link-colors($black, $black, $black, $black, $black)
 		text-decoration: none
 		+transition(none)
 		+on-interaction
 			border-bottom: 0px
 			text-decoration: none
 
-.cp__image__link--underlined, %cp__image__link--underlined
+.cp__link--light--underlined, %cp__link--light--underlined
 	a
-		+link-colors($white, $white, $white, $white, $white)
+		+link-colors($black, $black, $black, $black, $black)
 		text-decoration: none
 		+on-interaction
 			text-decoration: none
-			border-color: $white
+			border-color: $black
 			border-bottom-width: $dblhair
 
-.cp__text__link, %cp__text__link
-	@extend %cp__image__link
+.cp__link--dark, %cp__link--dark
+	@extend %cp__link--light
 	a
-		+link-colors($black, $black, $black, $black, $black)
+		+link-colors($white, $white, $white, $white, $white)
 
-.cp__text__link--underlined, %cp__text__link--underlined
-	@extend %cp__image__link--underlined
+.cp__link--dark--underlined, %cp__link--dark--underlined
+	@extend %cp__link--light--underlined
 	a
-		+link-colors($black, $black, $black, $black, $black)
+		+link-colors($white, $white, $white, $white, $white)
 		+on-interaction
-			border-color: $black
+			border-color: $white

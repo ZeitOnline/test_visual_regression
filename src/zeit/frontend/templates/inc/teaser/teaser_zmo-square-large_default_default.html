@@ -1,0 +1,27 @@
+{#
+
+default teaser template for zmo-square-large
+
+Available attributes:
+    teaser
+
+#}
+
+<div class="cp__lead-leader__wrap">
+  {% block asset %}{% endblock %}
+  <header class="cp__lead-leader__title__wrap--dark">
+      <span class="cp__lead__supertitle">
+        <a href="{{teaser.uniqueId | translate_url}}">
+          {{teaser.teaserSupertitle}}
+        </a>
+      </span>
+      <h1 class="cp__lead__title">
+        <a href="{{teaser.uniqueId | translate_url}}">
+          {{teaser.teaserTitle}}
+        </a>
+      </h1>
+    <span class="cp__lead__subtitle">
+      {{teaser.teaserText}}
+    </span>
+  </header>
+</div>
