@@ -5,7 +5,7 @@ $mtb_teaser_width: em(270px)
     width: 100%
 
 .cp__mtb
-    +justify-children-horizontally('%cp__mtb__cell')
+    +justify-children-horizontally('.cp__mtb__teaser')
     width: 88%
     margin: auto
 
@@ -36,10 +36,9 @@ $mtb_teaser_width: em(270px)
     margin-bottom: $medium
 
 
-/* ---------------------------------------- */
+// ----------------------------------------
 
-
-%cp__mtb__cell
+.cp__mtb__teaser
     // left/right margins are not needed, due to justified inline-block
     margin: 0 0 $big 0
     vertical-align: top !important

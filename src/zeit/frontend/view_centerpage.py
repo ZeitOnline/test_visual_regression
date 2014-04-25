@@ -31,7 +31,7 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def monothematic_block(self):
         if self._monothematic_block is not None:
-            return self._monothematic_block.values()
+            return self._monothematic_block
 
     @property
     def type(self):

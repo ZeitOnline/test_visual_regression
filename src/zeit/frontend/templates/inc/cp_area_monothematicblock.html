@@ -1,11 +1,24 @@
+{#
+
+This is the monothematic block template for the context type "centerpage".
+
+Available attributes:
+    zeit.frontend.view_centerpage.Centerpage
+#}
 
 <div class="cp__mtb__wrap">
 
     <div class="cp__mtb">
-        <div class="cp__mtb__title">Wo die schönen Dinge Wohnen</div>
-        <div class="cp__mtb__subtitle">Wie es kam, dass in München eine goldene Generation von Industriedesignern heranwuchs.</div>
+        <div class="cp__mtb__title">{{view.monothematic_block.supertitle}}</div>
+        <div class="cp__mtb__subtitle">{{view.monothematic_block.teaserText}}</div>
 
-
-    </div>
+        {% for teaser_block in view.monothematic_block.values() -%}
+            {% for teaser in teaser_block %}
+                {% include get_teaser_template(
+                    teaser_block.layout.id,
+                    teaser | block_type,
+                    teaser | auto_select_asset | block_type) ignore missing %}
+            {% endfor %}
+        {% endfor %}
 
 </div>
