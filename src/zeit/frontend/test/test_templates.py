@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from mock import Mock
-from re import match, sub
-from datetime import date
+from re import match
 import pyramid.config
 import pytest
 import zeit.frontend.application
@@ -380,7 +379,6 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
-    test_class = 'test'
     authors = []
     lines = tpl.module.meta_author(authors).splitlines()
     output = ""
