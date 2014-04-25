@@ -10,6 +10,7 @@ Available attributes:
 <div class='cp__buttons__wrap-double'>
 	{% block asset %}{% endblock %}
 	<span class="cp__buttons__title__wrap">
+  <span>{{ view.teaser_get_commentcount(teaser.uniqueId) }} Kommentare</span>
 	    <span class="cp__buttons__supertitle">
 	    	<a href="{{teaser.uniqueId | translate_url}}">
 	 			{{teaser.teaserSupertitle | hide_none}}
