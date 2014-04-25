@@ -514,3 +514,6 @@ def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     view = view_centerpage.Centerpage('',request)
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
+    #For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
+    comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_assetXXX')
+    assert comment_count == None
