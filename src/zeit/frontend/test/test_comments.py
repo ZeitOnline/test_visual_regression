@@ -1,4 +1,6 @@
+import mock
 from pytest import fixture, mark
+import zeit.cms.interfaces
 from zeit.frontend.comments import get_thread
 
 unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
@@ -34,6 +36,14 @@ def test_get_entire_thread(dummy_request):
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
+
+
+def test_a_fucking_dict_with_fucking_article_paths_and_fucking_comment_counts_should_be_create(testserver):
+    from zeit.frontend.comments import comments_per_unique_id
+    my_dummy_request = mock.Mock()
+    my_dummy_request.request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
+    comment_count_dict = comments_per_unique_id(my_dummy_request)
+    assert comment_count_dict['/centerpage/article_image_asset'] == '22'
 
 
 @mark.selenium
