@@ -7,25 +7,26 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $commentsTabsHead = $('#js-comments-tabs-head'),
         $commentsBody = $('#js-comments-body'),
         $commentsActiveList = $('#js-comments-body .tabs__content.is-active .comments__list'),
-        $buttonUp = $('#js-comments-button-up'),
-        $buttonDown = $('#js-comments-button-down'),
-        documentWidth = null,
+        currentOffset = 0,
+        cache = {},
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
     /**
      * handles comment pagination
      */
     var calculatePagination = function() {
+        var documentWidth = getCachedValue('documentWidth');
+
+        $comments.removeClass('show-newer-trigger show-older-trigger');
+
         // handle tablet/desktop size with paginated comments
         if (documentWidth >= 768) {
             var commentsScrollHeight = getHiddenProperty($comments, 'scrollHeight');
 
             // detect whether we even need pagination
-            if ($comments.height() < commentsScrollHeight) {
+            if ($comments.height() < commentsScrollHeight + currentOffset) {
                 $comments.addClass('show-older-trigger');
             }
-
-            var currentOffset = parseInt($commentsActiveList.css('top'), 10);
 
             if (currentOffset < 0) {
                 $comments.addClass('show-newer-trigger');
@@ -164,7 +165,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Initialize layout
      */
     var initLayout = function() {
-        documentWidth = getDocumentWidth();
+        // invalidate cache
+        cache = {};
+
+        var documentWidth = getCachedValue('documentWidth');
 
         if (documentWidth >= 1280) {
             // on big screens find out how much outside space there is
@@ -204,30 +208,33 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Scroll comments list
      */
     var scrollComments = function(e) {
-        var direction = e.target.getAttribute('data-direction'),
-            currentOffset = parseInt($commentsActiveList.css('top'), 10),
-            windowTop = $(window).scrollTop(),
-            windowBottom = windowTop + document.documentElement.clientHeight,
-            visibleTop = getHiddenOffset($buttonUp).top + $buttonUp.height(), // maybe do it once?
-            visibleBottom = getHiddenOffset($buttonDown).top, // maybe do it once?
+        var direction      = e.target.getAttribute('data-direction'),
+            windowTop      = $(window).scrollTop(),
+            windowBottom   = windowTop + document.documentElement.clientHeight,
+            commentsHeight = getCachedValue('commentsHeight'),
+            commentsTop    = getCachedValue('commentsTop'),
+            visibleTop     = getCachedValue('visibleTop'),
+            visibleBottom  = getCachedValue('visibleBottom'),
+            start = visibleTop,
+            end = visibleBottom,
             newOffset,
-            commentsOffset,
-            visibleArea;
+            visibleHeight,
+            listHeight;
 
-        // calculate maximum height for comments
+        // calculate visible height for comments
         if (windowTop > visibleTop) {
-            visibleTop = windowTop;
+            start = windowTop;
         }
         if (windowBottom < visibleBottom) {
-            visibleBottom = windowBottom;
+            end = windowBottom;
         }
 
-        visibleArea = Math.round(visibleBottom - visibleTop);
+        visibleHeight = Math.round(end - start);
 
         switch (direction) {
             case 'up':
                 // calculate new comments offset
-                newOffset = currentOffset + visibleArea;
+                newOffset = currentOffset + visibleHeight;
                 $comments.addClass('show-older-trigger');
 
                 // detect whether we need the newer trigger for another round
@@ -237,11 +244,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 }
 
                 // ensure maximum viewport
-                commentsOffset = Math.floor($commentsBody.offset().top);
-
-                if (windowTop < commentsOffset) {
+                if (windowTop < commentsTop) {
                     $('html, body').animate({
-                        scrollTop: commentsOffset
+                        scrollTop: Math.floor(commentsTop)
                     }, 1000);
                 }
 
@@ -249,21 +254,55 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
 
             default:
                 // calculate new comments offset
-                newOffset = currentOffset - visibleArea;
+                newOffset = currentOffset - visibleHeight;
                 $comments.addClass('show-newer-trigger');
+                listHeight = $commentsBody.prop('scrollHeight'); // same as $commentsActiveList.height()
 
                 // detect whether we need the older trigger for another round
-                if (Math.abs(newOffset) + visibleArea > $commentsActiveList.height()) {
+                if (Math.abs(newOffset) + commentsHeight > listHeight) {
+                    newOffset = -listHeight + Math.ceil(commentsHeight); // never scroll too far
                     $comments.removeClass('show-older-trigger');
                 }
         }
 
         $commentsActiveList.css('top', newOffset);
+        currentOffset = newOffset;
     };
 
     /**
      * Helper functions
      */
+    var getCachedValue = function(key) {
+        if (key in cache) {
+            return cache[key];
+        }
+
+        switch (key) {
+            case 'commentsHeight':
+            case 'commentsTop':
+            case 'visibleTop':
+            case 'visibleBottom':
+                var $buttonUp = $('#js-comments-button-up'),
+                    $buttonDown = $('#js-comments-button-down');
+
+                cache.commentsHeight = $comments.height() - $commentsBody.position().top;
+                cache.commentsTop    = $commentsBody.offset().top;
+                cache.visibleTop     = cache.commentsTop + $buttonUp.height();
+                cache.visibleBottom  = cache.commentsTop + cache.commentsHeight - $buttonDown.height();
+                break;
+
+            case 'documentWidth':
+                cache.documentWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
+                break;
+        }
+
+        if (key in cache) {
+            return cache[key];
+        }
+
+        return null;
+    };
+
     var getHiddenProperty = function(element, property) {
         element.css('display', 'block');
         var value = element.prop(property);
@@ -272,24 +311,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         return value;
     };
 
-    var getHiddenOffset = function(element) {
-        element.css('display', 'block');
-        var offset = element.offset();
-        element.css('display', '');
-
-        return offset;
-    };
-
     var hideOtherForms = function() {
         $commentsBody.find('form').filter(':visible').slideToggle();
     };
 
     var generateJSONPNumber = function() {
         return (1361462065627 + Math.floor(Math.random()*101));
-    };
-
-    var getDocumentWidth = function() {
-        return document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
     };
 
     /**
@@ -336,7 +363,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         // handle tab switch: recalculate comment metrics for new comment list
         $commentsTabsHead.on('click', '.tabs__head__tab', function(e) {
             $commentsActiveList = $(e.target.hash);
-            $comments.removeClass('show-newer-trigger show-older-trigger');
             calculatePagination();
         });
 
