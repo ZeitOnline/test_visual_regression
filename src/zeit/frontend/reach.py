@@ -2,60 +2,115 @@
 import colander
 import datetime
 import urllib2
+import urllib
 import json
+import zeit.cms.interfaces
+from lxml import etree
 from babel.dates import get_timezone
 
 
-class UnprovidedService(Exception):
+class UnavailableSectionException(Exception):
+    pass
 
-    def __init__(self, msg):
-        self.msg = msg
 
-    def __str__(self):
-        return repr(self.msg)
+class UnavailableServiceException(Exception):
+    pass
+
+
+class LimitOutOfBoundsException(Exception):
+    pass
 
 
 class LinkReach(object):
 
     services = ['twitter', 'facebook', 'googleplus']
+    sections = ['zeit-magazin']
 
-    def __init__(self, linkreach_host):
-        self.entry_point = linkreach_host
+    def __init__(self, community_host, linkreach_host):
+        self.community_host = community_host
+        self.linkreach_host = linkreach_host
 
-    def fetch_data(self, service, limit):
+    def fetch_service(self, service, limit, section='zeit-magazin'):
+        if section not in self.sections:
+            raise UnavailableSectionException('No section named: ' + section)
+
         if service not in self.services:
-            raise UnprovidedService('No service named: ' + service)
-        if not self.entry_point:
+            raise UnavailableServiceException('No service named: ' + service)
+
+        if not 0 < limit < 10:
+            raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
+
+        params = urllib.urlencode({'limit': limit, 'section': section})
+        url = '%s/zonrank/%s?%s' % (self.linkreach_host, service, params)
+
+        response = urllib2.urlopen(url, timeout=4)
+
+        return DataSequence().deserialize(json.load(response))
+
+    def fetch_comments(self, limit, section='zeit-magazin'):
+        if section not in self.sections:
+            raise UnavailableSectionException('No section named: ' + section)
+
+        if not 0 < limit < 10:
+            raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
+
+        path = '%s/agatho/commentsection/mostcommented/24/%s.xml'
+        url = path % (self.community_host, section)
+
+        item_list = []
+
+        try:
+            # Fail gracefully if community host is unavailable.
+            tree = etree.parse(url).xpath('/rss/channel/item')
+        except IOError:
             return []
 
-        url = '%s/zonrank/%s?limit=%s' % (
-            self.entry_point,
-            service,
-            limit,
-        )
+        for rss_node in tree[:limit]:
+            web_path = rss_node.xpath('guid/text()')[0]
+            rel_path = web_path[18:]
+            xml_path = 'http://xml.zeit.de' + rel_path
 
-        req = urllib2.Request(url)
-        response = urllib2.urlopen(req, timeout=4)
-        return DataSequence().deserialize(json.load(response))
+            try:
+                # Ignore item if CMS lookup fails.
+                article = zeit.cms.interfaces.ICMSContent(xml_path)
+            except TypeError:
+                continue
+
+            # TODO: Get real score, as soon as ZMO-538 is merged.
+            item = dict(location=rel_path,
+                        score=0, # comments.comments_per_unique_id(path),
+                        supertitle=article.supertitle,
+                        title=article.title,
+                        subtitle=article.subtitle,
+                        section=article.ressort
+                        )
+            item_list.append(item)
+
+        return DataSequence().deserialize(item_list)
 
 
 def _prepare_date(value):
+    if not isinstance(value, int):
+        return None
     tz = get_timezone('Europe/Berlin')
     return datetime.datetime.fromtimestamp(value / 1000, tz)
 
 
 class Entry(colander.MappingSchema):
-
     score = colander.SchemaNode(colander.Int())
     location = colander.SchemaNode(colander.String())
     supertitle = colander.SchemaNode(colander.String())
     title = colander.SchemaNode(colander.String())
     subtitle = colander.SchemaNode(colander.String())
     timestamp = colander.SchemaNode(colander.Int(),
-                                    preparer=_prepare_date)
+                                    preparer=_prepare_date,
+                                    missing=colander.drop
+                                    )
     section = colander.SchemaNode(colander.String())
     fetchedAt = colander.SchemaNode(colander.Int(),
-                                     preparer=_prepare_date)
+                                    preparer=_prepare_date,
+                                    missing=colander.drop
+                                    )
 
 
 class DataSequence(colander.SequenceSchema):

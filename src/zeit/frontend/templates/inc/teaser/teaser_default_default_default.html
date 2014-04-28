@@ -1,6 +1,6 @@
 {#
 
-Default Informatives template.
+default teaser template.
 
 Available attributes:
     teaser_block
@@ -9,6 +9,7 @@ Available attributes:
 #}
 
 <div class='cp__buttons__wrap'>
+	{% block asset %}{% endblock %}
 	<span class="cp__buttons__title__wrap">
 	    <span class="cp__buttons__supertitle">
 	    	<a href="{{teaser.uniqueId | translate_url}}">
