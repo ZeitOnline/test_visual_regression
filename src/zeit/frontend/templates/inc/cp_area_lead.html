@@ -11,8 +11,8 @@ Available attributes:
 
         {%-
             set teaser_blocks = [
-                'templates/inc/' + type + '_block_' + teaser_block.layout.id + '.html',
-                'templates/inc/' + type + '_block_default.html'
+                'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
+                'templates/inc/teaser_block_default.html'
             ]
         %}
         {% include teaser_blocks ignore missing %}
@@ -20,7 +20,7 @@ Available attributes:
         {% if (type == 'inf') and (loop.index == 2 or loop.last) and (added is not defined) -%}
             <!-- special ad integration by counter -->
             {% set added = true %}
-            {% include 'templates/inc/informatives/inf_ad.html' ignore missing %}
+            {% include 'templates/inc/teaser/teaser_ad.html' ignore missing %}
         {% endif %}
 
     {% endfor %}

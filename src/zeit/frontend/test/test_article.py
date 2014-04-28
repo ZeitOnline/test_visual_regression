@@ -1,6 +1,7 @@
 from StringIO import StringIO
 from zeit.content.article.article import Article
 from zeit.frontend.interfaces import IPages
+from zope.testbrowser.browser import Browser
 
 
 def test_IPages_contains_blocks(application):
@@ -42,7 +43,7 @@ def test_article_has_valid_twitter_meta_tags(selenium_driver, testserver):
             assert unicode(title) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:description':
-            assert unicode(desc.replace(' vonAnne Mustermann','')) == \
+            assert unicode(desc.strip(' Von Anne Mustermann')) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("name") == 'twitter:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
@@ -76,7 +77,7 @@ def test_article_has_valid_facebook_meta_tags(selenium_driver, testserver):
             assert unicode(title) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:description':
-            assert unicode(desc.replace(' vonAnne Mustermann','')) == \
+            assert unicode(desc.strip(' Von Anne Mustermann')) == \
                 unicode(meta.get_attribute("content").strip())
         if meta.get_attribute("property") == 'og:image':
             assert 'scaled-image' == unicode(meta.get_attribute("class"))
@@ -266,3 +267,43 @@ def test_article_header2_has_correct_subtitle(selenium_driver, testserver):
         .text.strip()
     assert text == u'\u00BBWie viele Fl\u00FCchtlingskinder bin '\
         u'ich eine Suchende, Getriebene.\u00AB'
+
+
+def test_artikel_header_header1_should_have_correct_header_source(testserver):
+    browser = Browser('%s/artikel/header1' % testserver.url)
+    assert '<h1 class="article__head__title">' in browser.contents
+
+
+def test_artikel_header_header2_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/header2' % testserver.url)
+    assert '<header class="article__head article__head--traum">' in browser.contents
+
+
+def test_artikel_header_header3_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/header3' % testserver.url)
+    assert '<header class="article__head article__head--text-only">' in browser.contents
+
+
+def test_artikel_header_header4_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/header4' % testserver.url)
+    assert '<header class="article__head article__head--stamp is-constrained">' in browser.contents
+
+
+def test_artikel_header_header5_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/header5' % testserver.url)
+    assert '<header class="article__head article__head--leinwand">' in browser.contents
+
+
+def test_artikel_header_header6_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/header6' % testserver.url)
+    assert '<header class="article__head article__head--mode">' in browser.contents
+
+
+def test_artikel_header_standardkolumne_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
+    assert '<header class="article__head article__head--column">' in browser.contents
+
+
+def test_artikel_header_sequelpage_should_have_correct_source(testserver):
+    browser = Browser('%s/artikel/03/seite-2' % testserver.url)
+    assert '<header class="article__head article__head--sequel">' in browser.contents
