@@ -1,0 +1,37 @@
+.cp__teaser__gallery
+    min-height: 387px
+    position: relative
+    width: 100%
+    & > .scaled-image img
+        max-height: 386px
+        width: 100%
+
+.cp__teaser__gallery__wrap
+    background: #000
+    background: transparentize($black, 0.35)
+    bottom: 0
+    padding: $tiny $petite $compact $petite
+    position: absolute
+    width: 100%
+    .icon-galerie-icon-white
+        display: inline-block
+        height: 30px
+        position: absolute
+        top: -40px
+        width: 40px
+
+.cp__teaser__gallery__kicker
+    @extend %copy
+    color: $white
+    font-size: $font-s
+    line-height: $petite
+    margin-bottom: $tiny
+
+.cp__teaser__gallery__title
+    +tablet(bold)
+    color: $white
+    font-size: $font-ml
+    line-height: $petite
+    margin: 0
+    text-shadow: rgba(255,255,255,.01) 0 -1px 1px
+    -webkit-font-smoothing: antialiased
