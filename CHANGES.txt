@@ -16,8 +16,9 @@ Change log for zeit.frontend
 - new format: Standardkolumnenformat
 - fix for too much ads
 - respecting advertising_enabled switch
-- ad banner tile to cp informatives
-- ad a page header to sequel pages
+- add banner tile to cp informatives
+- implement buzz module
+- add a page header to sequel pages
 - fix subtitle case sensitivity
 - fix nextread typography
 

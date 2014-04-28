@@ -474,11 +474,16 @@ def test_teaser_image_should_be_created_from_image_group_and_image(testserver):
     assert teaser_image.attr_title == 'Katze!'
 
 
-def test_get_reaches_from_centerpage_view(dummy_request):
-    view = view_centerpage.Centerpage('', dummy_request)
-    assert len(view.global_twitter_shares) == 10
-    assert len(view.global_googleplus_shares) == 10
-    assert len(view.global_facebook_shares) == 10
+def test_get_reaches_from_centerpage_view(application, app_settings):
+    request = mock.Mock()
+    request.registry.settings.community_host = app_settings['community_host']
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
+
+    buzz = view_centerpage.Centerpage('', request).area_buzz
+    assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
+    assert len(buzz['facebook']) == 3
+    assert len(buzz['twitter']) == 3
+    assert len(buzz['comments']) == 3
 
 
 def test_centerpages_produces_no_error(selenium_driver, testserver):
