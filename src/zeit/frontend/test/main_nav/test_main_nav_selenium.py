@@ -40,8 +40,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     community = main_nav.find_element_by_class_name('main-nav__community')
     community_trig = community.find_element_by_class_name(class_trig)
-    community_cont = community.find_element_by_class_name(class_cont)
-    community_links = community_cont.find_elements_by_tag_name('a')
 
     search = main_nav.find_element_by_class_name('main-nav__search')
     search_trig = search.find_element_by_class_name(class_trig)
@@ -95,10 +93,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     # community is present and can be opened
     assert(community_trig.is_displayed())
     community_trig.click()
-    assert(community_cont.is_displayed())
-
-    # community dropdown contains at least one link
-    assert(len(community_links) > 0)
 
     # visible sub res + topics
     assert(res_content.is_displayed())

@@ -1,4 +1,5 @@
 $nextread-background: #f7f7f7
+$nextread-bordercolor: #eee
 $nextread-image-width: 260px
 $nextread-image-height: 172px
 $nextread-minimal-height: em(165px)
@@ -14,10 +15,10 @@ $color-nextread: #606060
 				color: $color-nextread
 		+on-interaction
 			color: $color-nextread
-			text-decoration: underline
+			.article__nextread__title
+				text-decoration: underline
 			span
 				color: $color-nextread
-				text-decoration: underline
 
 %link-white
 	a
@@ -28,10 +29,11 @@ $color-nextread: #606060
 				color: $white
 		+on-interaction
 			color: $white
-			text-decoration: underline
+			.article__nextread__title
+				text-decoration: underline
 			span
 				color: $white
-				text-decoration: underline
+
 
 %nextread-text
 	.article__nextread__supertitle
@@ -49,9 +51,10 @@ $color-nextread: #606060
 	@extend %meta
 	background: $nextread-background
 	color: $color-nextread
-	border-top: 1px solid $color-nextread
+	border-top: 1px solid $nextread-bordercolor
 	margin-top: $huge
 	padding-bottom: $large
+	text-transform: none
 
 .article__nextread__lead
 	+tablet(bold)
@@ -72,6 +75,7 @@ $color-nextread: #606060
 .article__nextread__title
 	font-size: $font-ml
 	display: block
+	letter-spacing: 1px
 
 .nextread-base
 	@extend %link-grey

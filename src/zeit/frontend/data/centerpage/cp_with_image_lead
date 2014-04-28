@@ -1,26 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
+  
     <header_image xsi:nil="true"/>
     <snapshot xsi:nil="true"/>
-    <og_meta>
-      <og_title>Meta-Headline CP With Video Lead</og_title>
-      <og_description>Meta-Description CP With Video Lead</og_description>
-    </og_meta>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-03-31T15:41:02.123755+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-23T09:53:55.785886+00:00</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-07T09:40:23.492340+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-22T15:19:11.561004+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.drongowski</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
@@ -29,9 +26,9 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:dee5ff09-253c-4711-a626-bb37ad0c886f}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5ab05897-0df2-416c-ba99-f857a4bcd595}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
@@ -41,12 +38,18 @@
       &lt;tuple&gt;
         &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+  
+  
+  
+  
+  
   </head>
+
   <body>
     <cluster area="feature">
       <region area="lead">
