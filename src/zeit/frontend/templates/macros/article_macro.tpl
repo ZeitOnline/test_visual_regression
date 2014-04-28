@@ -5,41 +5,27 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <h2 class="article__head__supertitle">
-      {{ view.supertitle }}
-  </h2>
+  <h2 class="article__head__supertitle">{{ view.supertitle }}</h2>
 {%- endmacro %}
 
 {% macro title() -%}
-  <h1 class="article__head__title">
-      {{view.title}}
-  </h1>
+  <h1 class="article__head__title">{{view.title}}</h1>
 {%- endmacro %}
 
-{% macro subtitle(include_meta=False) -%}
+{% macro subtitle(include_meta=False, with_quotes=False) -%}
     <div class="article__head__subtitle">
         <p>
-            {{view.subtitle}}
-            {% if include_meta %}
-                {% if view.genre -%}
-                    {{view.genre}}
-                {%- endif %}
-                {{ meta_author(view.authors) }}
-            {%- endif %}
-        </p>
-    </div>
-{%- endmacro %}
-
-{% macro quote_subtitle(include_meta=False) -%}
-    <div class="article__head__subtitle">
-        <p>
-            »{{view.subtitle}}«
-            {% if include_meta %}
-                {% if view.genre -%}
-                    {{view.genre}}
-                {%- endif %}
-                {{ meta_author(view.authors) }}
-            {%- endif %}
+            {% if with_quotes %}
+                »{{view.subtitle}}«
+            {% else %}
+                {{view.subtitle}}
+            {% endif %}
+            {% if include_meta and view.genre %}
+                {{view.genre|title}}
+            {% endif %}
+            {% if include_meta and view.authors %}
+                {{ meta_author(view.authors, titlecase=view.genre==None) }}
+            {% endif %}
         </p>
     </div>
 {%- endmacro %}
@@ -209,13 +195,16 @@
     </div>
 {%- endmacro %}
 
-
-{% macro meta_author(authors, class="article__head__meta__author") %}
+{% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
     {%- if authors -%}
         {%- for author in authors -%}
-            {{author.prefix}}
+            {%- if titlecase -%}
+                {{author.prefix|title}}
+            {% else %}
+                {{author.prefix}}
+            {% endif %}
             {%- if author.href -%}
-                <a href="{{author.href|translate_url}}" class="{{class}} meta-link">{{author.name}}</a>{{author.location}}
+                <a href="{{author.href|translate_url}}" class="{{class}}">{{author.name}}</a>{{author.location}}
             {%- else -%}
                 <span class="{{class}}">{{author.name}}{{author.location}}</span>
             {%- endif -%}

@@ -1,6 +1,6 @@
 {#
 
-default lead template for zmo-leader-fullwidth
+default teaser template for zmo-leader-fullwidth
 
 Available attributes:
     teaser
@@ -9,7 +9,7 @@ Available attributes:
 
 <div class="cp__lead-full__wrap">
 	{% block asset %}{% endblock %}
-    <header class="cp__lead-full__title__wrap">
+    <header class="cp__lead-full__title__wrap--light">
 		<h1 class="cp__lead__title">
 			<a href="{{teaser.uniqueId | translate_url}}">
 				«{{teaser.teaserTitle}}»
