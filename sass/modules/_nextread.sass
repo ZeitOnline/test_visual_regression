@@ -9,15 +9,11 @@ $color-nextread: #606060
 %link-grey
 	a
 		+link
-			color: $color-nextread
 			text-decoration: none
-			span
-				color: $color-nextread
 		+on-interaction
-			color: $color-nextread
 			.article__nextread__title
 				text-decoration: underline
-			span
+			.article__nextread__supertitle
 				color: $color-nextread
 
 %link-white
@@ -69,11 +65,13 @@ $color-nextread: #606060
 .article__nextread__supertitle
 	@extend %supertitle
 	@extend %font-xs
+	color: $color-nextread
 	display: block
 	padding-bottom: $micro
 
 .article__nextread__title
 	font-size: $font-ml
+	color: $black
 	display: block
 	letter-spacing: 1px
 
