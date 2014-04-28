@@ -150,12 +150,16 @@
     &.show-newer-trigger
         .comments__button__newer
             display: block
+    p
+        margin: 0 auto $small
+        &:last-child
+            margin-bottom: 0
 
 
 .comments__head
-    margin-top: $page-padding
-    margin-bottom: $large
     +padded
+    padding-top: $page-padding
+    padding-bottom: $large
 
 .comments__list
     +transition(top 1s)
@@ -167,10 +171,6 @@
 .comments__body
     overflow: hidden
     position: relative
-    p
-        margin: 0 auto $small
-        &:last-child
-            margin-bottom: 0
 
 .comments__button__older,
 .comments__button__newer
