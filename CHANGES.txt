@@ -6,6 +6,7 @@ Change log for zeit.frontend
 
 - integrate invert functionality for teasers
 - correct teaser layouts
+- add different markup for login and anonymous state in Header
 - change teaser template structure
 - add responsivesness for leadarea teasers
 - integrate ad space in cp
@@ -16,6 +17,9 @@ Change log for zeit.frontend
 - fix for too much ads
 - respecting advertising_enabled switch
 - ad banner tile to cp informatives
+- ad a page header to sequel pages
+- fix subtitle case sensitivity
+- fix nextread typography
 
 
 0.2.20 (2014-04-17)
