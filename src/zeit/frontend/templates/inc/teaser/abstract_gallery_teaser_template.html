@@ -1,0 +1,30 @@
+{#
+
+Abstract Template for inclusion in different gallery templates.
+Will not be called by itself.
+
+#}
+
+<div class="{{self.additional_css_class()}}">
+    {%- set image = get_teaser_image(teaser_block, teaser) %}
+    {% block asset %}
+        <div class="scaled-image">
+            <!--[if gt IE 9]>-->
+                <noscript data-ratio="{{image.ratio}}">
+            <!--<![endif]-->
+                    <img alt="{{image.alt|hide_none}}" title="{{image.title|hide_none}}" class="cp__mtb__teaser__image figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+            <!--[if gt IE 9]>-->
+                </noscript>
+            <!--<![endif]-->
+        </div>
+    {% endblock %}
+    <div class="{{self.additional_css_class()}}__wrap">
+        <span class="icon-galerie-icon-white"></span>
+        <div class="{{self.additional_css_class()}}__kicker">
+            {{teaser.teaserSupertitle}}
+        </div>
+        <div class="{{self.additional_css_class()}}__title">
+            {{teaser.teaserTitle}}
+        </div>
+    </div>
+</div>
