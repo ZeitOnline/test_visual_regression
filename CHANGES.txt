@@ -15,6 +15,7 @@ Change log for zeit.frontend
 - fix for too much ads
 - respecting advertising_enabled switch
 - ad banner tile to cp informatives
+- ad a page header to sequel pages
 - fix subtitle case sensitivity
 - fix nextread typography
 
