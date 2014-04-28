@@ -21,6 +21,7 @@ Change log for zeit.frontend
 - add a page header to sequel pages
 - fix subtitle case sensitivity
 - fix nextread typography
+- provide comment counts for teasers and most commented lists
 
 
 0.2.20 (2014-04-17)
@@ -65,7 +66,7 @@ Change log for zeit.frontend
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages
 - Refactor template logic for macros. The are now located in
-templates/macro and named [type]_macro.tpl
+  templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 - add date, source, genre testing
 - fix author issue and add testing

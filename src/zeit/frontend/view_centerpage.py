@@ -1,6 +1,8 @@
 from pyramid.view import view_config
 from zeit.frontend.reach import LinkReach
+import comments
 import logging
+import urlparse
 import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.cp.interfaces
@@ -24,7 +26,8 @@ class Centerpage(zeit.frontend.view.Base):
     def pagetitle(self):
         # ToDo(T.B.) should be, doesn't work
         # return self.context.html-meta-title
-        return 'Lebensart - Mode, Essen und Trinken, Partnerschaft | ZEIT ONLINE'
+        return 'Lebensart - Mode, Essen und Trinken, ' + \
+               'Partnerschaft | ZEIT ONLINE'
 
     @property
     def pagedescription(self):
@@ -51,16 +54,24 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_lead(self):
-        teaser_list = self.context['lead'].values()
-        for teaser in teaser_list:
-            if teaser.layout.id == 'zmo-leader-fullwidth' or teaser.layout.id == 'zmo-leader-fullwidth-light':
-                teaser_list.remove(teaser)
-        return teaser_list
+        teaserblock_list = self.context['lead'].values()
+        for teaserblock in teaserblock_list:
+            if teaserblock.layout.id == 'zmo-leader-fullwidth':
+                teaserblock_list.remove(teaserblock)
+        return teaserblock_list
+
+    def teaser_get_commentcount(self, uniqueId):
+        unique_id_comments = comments.comments_per_unique_id(self)
+        try:
+            return unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
+        except KeyError:
+            return None
 
     @property
     def area_lead_full_teaser(self):
         for teaser_block in self.context['lead'].values():
-            if teaser_block.layout.id == 'zmo-leader-fullwidth' or teaser_block.layout.id == 'zmo-leader-fullwidth-light':
+            if (teaser_block.layout.id == 'zmo-leader-fullwidth' or
+                teaser_block.layout.id == 'zmo-leader-fullwidth-light'):
                 return teaser_block
 
     @property
