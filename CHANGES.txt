@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.2.21 (unreleased)
 -------------------
 
+- integrate invert functionality for teasers
+- correct teaser layouts
 - add different markup for login and anonymous state in Header
 - change teaser template structure
 - add responsivesness for leadarea teasers
