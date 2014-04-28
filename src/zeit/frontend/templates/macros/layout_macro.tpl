@@ -264,14 +264,11 @@
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__community">
-                        <span class="main-nav__section__trigger">
-                            <img src="/img/exner.jpg" class="main-nav__community__avatar">
-                            Community
-                        </span>
-                        <div class="main-nav__section__content">
-                            <a href="#">Account</a>
-                            <a href="#">Logout</a>
-                        </div>
+                        {% if request.app_info.authenticated %}
+                            {{ head_user_is_logged_in_true() }}
+                        {%- else -%}
+                            {{ head_user_is_logged_in_false() }}
+                        {%- endif -%}
                     </div>
                     <div class="main-nav__section main-nav__breadcrumbs">
                         <div class="main-nav__section__content is-always-open">
@@ -282,6 +279,28 @@
             </div>
         </div>
     </nav>
+{%- endmacro %}
+
+{% macro head_user_is_logged_in_true()  %}
+    <span class="main-nav__section__trigger">
+        {% if request.app_info.user.picture %}
+            <img src="{{ request.app_info.community_host }}{{ request.app_info.user.picture }}" class="main-nav__community__avatar">
+        {%- else -%}
+            <span>X</span> <!-- ToDo(T.B.) - Dummycode, tbd by frontend (see https://zeit-online.atlassian.net/browse/ZMO-580#comment-24209) -->
+        {%- endif -%}
+        Community
+    </span>
+    <div class="main-nav__section__content">
+        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">Account</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}">Logout</a>
+    </div>
+{%- endmacro %}
+
+{% macro head_user_is_logged_in_false()  %}
+    <span class="main-nav__section__trigger">
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a> /
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
+    </span>
 {%- endmacro %}
 
 {% macro ivw_ver1_tracking(channel) -%}
@@ -365,7 +384,7 @@
         <div class="main-footer__box is-constrained is-centered">
             <div class="main-footer__ZM">
                 <span class="main-footer__ZM__img icon-zm-logo--white"></span>
-            </div>     
+            </div>
             <div class="main-footer__links">
                 <div>
                     <ul>
@@ -389,10 +408,10 @@
     </footer>
 {%- endmacro %}
 
-{% macro adplace(banner) -%}
+{% macro adplace(banner, pagetype='article') -%}
     {%set kw = 'zeitonline,zeitmz' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__width_{{banner.noscript_width_height[0]}}">
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}}">
         {% if banner.label -%}
         <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
         {%- endif %}

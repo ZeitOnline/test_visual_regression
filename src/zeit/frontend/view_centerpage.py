@@ -17,6 +17,10 @@ log = logging.getLogger(__name__)
 class Centerpage(zeit.frontend.view.Base):
 
     @property
+    def type(self):
+        return type(self.context).__name__.lower()
+
+    @property
     def pagetitle(self):
         # ToDo(T.B.) should be, doesn't work
         # return self.context.html-meta-title
