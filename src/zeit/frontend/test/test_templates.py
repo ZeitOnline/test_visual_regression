@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 from mock import Mock
 from re import match
-from datetime import date
 import pyramid.config
 import pytest
 import zeit.frontend.application
@@ -129,14 +129,19 @@ def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
-    markup_standart = '<div class="%s"><div class="article__subpage-index__title">&uuml;bersicht</div>' % css_index
+    markup_standart = ('<div class="%s"><div class="article__subpage-index__'
+                       'title">&uuml;bersicht</div>') % css_index
 
     fake_page = type('Dummy', (object,), {})
     fake_page.number = 1
     fake_page.teaser = 'Erster'
 
     # assert normal markup
-    markup = u'%s<div class="article__subpage-index__item"><span class="article__subpage-index__item__count">1 &mdash; </span><span class="article__subpage-index__item__title-wrap"><a href="#kapitel1" class="article__subpage-index__item__title">Erster</a></span></div></div>' % (markup_standart)
+    markup = (u'%s<div class="article__subpage-index__item"><span class="'
+        'article__subpage-index__item__count">1 &mdash; </span><span class="'
+        'article__subpage-index__item__title-wrap"><a href="#kapitel1" class'
+        '="article__subpage-index__item__title">Erster</a></span></div></div>'
+        ) % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -146,7 +151,11 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert active markup
     css_active = 'article__subpage-active'
-    markup_active = u'%s<div class="article__subpage-index__item"><span class="article__subpage-index__item__count">1 &mdash; </span><span class="article__subpage-index__item__title-wrap"><span class="article__subpage-index__item__title %s">Erster</span></span></div></div>' % (markup_standart, css_active)
+    markup_active = (u'%s<div class="article__subpage-index__item"><span '
+        'class="article__subpage-index__item__count">1 &mdash; </span><span '
+        'class="article__subpage-index__item__title-wrap"><span class="'
+        'article__subpage-index__item__title %s">Erster</span></span></div>'
+        '</div>') % (markup_standart, css_active)
     lines_active = tpl.module.subpage_index(
         [fake_page], 'Title', 1, css_index, css_active).splitlines()
     output_active = ""
@@ -355,13 +364,13 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     test_class = 'test'
-    obj = [{'prefix': 'von', 'href': 'www.zeit.de',
+    authors = [{'prefix': 'Von', 'href': 'www.zeit.de',
             'name': 'Tom', 'location': ', Bern', 'suffix': 'und'},
            {'prefix': '', 'href': '',
             'name': 'Anna', 'location': '', 'suffix': ''}]
-    markup = 'von<a href="www.zeit.de" class="test meta-link">Tom</a>, Bern' \
+    markup = 'Von<a href="www.zeit.de" class="test">Tom</a>, Bern' \
              'und<span class="test">Anna</span>'
-    lines = tpl.module.meta_author(obj, test_class).splitlines()
+    lines = tpl.module.meta_author(authors, test_class).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -370,9 +379,8 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
-    test_class = 'test'
-    obj = []
-    lines = tpl.module.meta_author(obj).splitlines()
+    authors = []
+    lines = tpl.module.meta_author(authors).splitlines()
     output = ""
     for line in lines:
         output += line.strip()

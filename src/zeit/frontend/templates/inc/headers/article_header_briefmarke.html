@@ -7,7 +7,7 @@
         {{ blocks.supertitle() }}
       </div>
       {{ blocks.title() }}
-      {{ blocks.subtitle(True) }}
+      {{ blocks.subtitle(include_meta=True) }}
       <span class="article__head__meta-wrap">
         <span class="article__head__meta">
           {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
