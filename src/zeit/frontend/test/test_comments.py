@@ -1,6 +1,5 @@
 import mock
 from pytest import fixture, mark
-import zeit.cms.interfaces
 from zeit.frontend.comments import get_thread
 
 unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
@@ -38,15 +37,14 @@ def test_get_entire_thread(dummy_request):
     assert thread_as_json['comment_count'] == 41
 
 
-def test_a_fucking_dict_with_fucking_article_paths_and_fucking_comment_counts_should_be_create(testserver):
+def test_dict_with_article_paths_and_comment_counts_should_be_created(testserver):
     from zeit.frontend.comments import comments_per_unique_id
-    #if request on node-comment-statistics fails nevertheless a dict should be return value:
+    # if request on node-comment-statistics fails nevertheless a dict should be return value:
     my_failing_request = mock.Mock()
     my_failing_request.request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xmlxxx'
     comment_count_dict = comments_per_unique_id(my_failing_request)
-    mytype = type(comment_count_dict) is dict
-    assert mytype == True
-    #for test article path on existing node-comment-statistics we expect the correct commentcount:
+    assert type(comment_count_dict) is dict
+    # for test article path on existing node-comment-statistics we expect the correct commentcount:
     my_successful_request = mock.Mock()
     my_successful_request.request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
     comment_count_dict = comments_per_unique_id(my_successful_request)

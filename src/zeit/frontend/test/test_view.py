@@ -224,7 +224,7 @@ def test_artikel05_has_set_text_length(testserver):
 
 
 def test_article05_has_correct_dates(testserver):
-    #updated article
+    # updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, '')
     assert article_view.date_last_published_semantic.isoformat() ==\
@@ -236,7 +236,7 @@ def test_article05_has_correct_dates(testserver):
 
 
 def test_article03_has_correct_dates(testserver):
-    #not updated article
+    # not updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = view_article.Article(context, '')
     assert article_view.date_first_released.isoformat() ==\
@@ -246,7 +246,7 @@ def test_article03_has_correct_dates(testserver):
 
 
 def test_article09_has_correct_date_formats(testserver):
-    #print article, updated
+    # print article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     article_view = view_article.Article(context, '')
     assert article_view.show_date_format == 'long'
@@ -254,7 +254,7 @@ def test_article09_has_correct_date_formats(testserver):
 
 
 def test_article10_has_correct_date_formats(testserver):
-    #online article, updated
+    # online article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = view_article.Article(context, '')
     assert article_view.show_date_format == 'long'
@@ -303,21 +303,21 @@ def test_article05_has_no_genre(testserver):
 
 
 def test_article08_has_correct_source(testserver):
-    #print source
+    # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view_article.Article(context, '')
     assert article_view.source == 'DIE ZEIT Nr. 26/2008'
 
 
 def test_article10_has_correct_source(testserver):
-    #online source
+    # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = view_article.Article(context, '')
     assert article_view.source == 'golem.de'
 
 
 def test_article03_has_empty_source(testserver):
-    #zon source
+    # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = view_article.Article(context, '')
     assert article_view.source is None
@@ -494,7 +494,7 @@ def test_article09_should_have_a_focussed_nextread(application):
     article_view = view_article.Article(context, '')
     nextread = article_view.focussed_nextread
     assert nextread is not None
-    assert isinstance(nextread['article'],\
+    assert isinstance(nextread['article'],
                       zeit.content.article.article.Article)
     assert nextread['image']['uniqueId'] is None
     assert nextread['layout'] == 'minimal'
@@ -506,14 +506,13 @@ def test_article01_should_not_have_a_focussed_nextread(application):
     nextread = article_view.focussed_nextread
     assert nextread is None
 
+
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
-    cp = 'http://xml.zeit.de/centerpage/lebensart'
-    cp_context = zeit.cms.interfaces.ICMSContent(cp)
     request = mock.Mock()
     request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
-    view = view_centerpage.Centerpage('',request)
+    view = view_centerpage.Centerpage('', request)
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
-    #For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
+    # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_assetXXX')
-    assert comment_count == None
+    assert comment_count is None
