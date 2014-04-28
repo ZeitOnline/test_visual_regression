@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.2.21 (unreleased)
 -------------------
 
+- add different markup for login and anonymous state in Header
 - change teaser template structure
 - add responsivesness for leadarea teasers
 - integrate ad space in cp
