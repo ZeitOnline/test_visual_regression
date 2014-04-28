@@ -8,6 +8,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $commentsBody = $('#js-comments-body'),
         $commentsActiveList = $('#js-comments-body .tabs__content.is-active .comments__list'),
         currentOffset = 0,
+        slideDuration = 300,
         cache = {},
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
@@ -53,11 +54,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             form.find('input[name="pid"]').val(cid);
         }
 
-        if (form.is(':hidden')) {
-            hideOtherForms();
-        }
-
-        form.slideToggle().find('textarea').focus(); // generic = :input:enabled:visible:first
+        showForm(form, comment);
     };
 
     /**
@@ -81,11 +78,34 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             form = $(template(templateData)).addClass('js-report-form').appendTo(comment);
         }
 
+        showForm(form, comment);
+    };
+
+    /**
+     * Show form
+     */
+    var showForm = function(form, comment) {
+        var checkHeight = false;
+
         if (form.is(':hidden')) {
             hideOtherForms();
+            checkHeight = true;
         }
 
-        form.slideToggle().find('textarea').focus();
+        form.slideToggle(slideDuration, function() {
+            if (checkHeight) {
+                var needed = comment.offset().top + comment.height(),
+                    available = getCachedValue('visibleBottom'),
+                    missing = needed - available;
+
+                if (missing > 0) {
+                    setCurrentOffset(currentOffset - missing);
+                    calculatePagination();
+                }
+            }
+
+            form.find('textarea').focus();
+        });
     };
 
     /**
@@ -94,7 +114,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     var cancelReport = function(e) {
         e.preventDefault();
 
-        $(this).closest('.js-report-form').slideUp();
+        $(this).closest('.js-report-form').slideUp(slideDuration);
     };
 
     /**
@@ -264,8 +284,42 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 }
         }
 
-        $commentsActiveList.css('top', newOffset);
-        currentOffset = newOffset;
+        setCurrentOffset(newOffset);
+    };
+
+    /**
+     * Ensure visibility of linked comment
+     */
+    var showComment = function() {
+        var anchor = window.location.hash.slice(1), // remove '#'
+            target,
+            offset;
+
+            if (/^cid-\d/.test(anchor)) {
+                target = $(window.location.hash);
+
+                if (! target.length) {
+                    return;
+                }
+
+                // links from "recommented comments"
+                if (! target.is(':visible')) {
+                    $commentsTabsHead.find('.tabs__head__tab:first').click();
+
+                    $('html, body').stop().animate({
+                        scrollTop: $commentsTabsHead.offset().top
+                    }, 400);
+
+                    offset = $commentsActiveList.offset().top - target.offset().top;
+
+                    if (offset < 0) {
+                        offset += getCachedValue('buttonUpHeight');
+                    }
+
+                    setCurrentOffset(offset);
+                    calculatePagination();
+                }
+            }
     };
 
     /**
@@ -277,6 +331,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         }
 
         switch (key) {
+            case 'buttonUpHeight':
             case 'commentsHeight':
             case 'commentsTop':
             case 'visibleTop':
@@ -284,9 +339,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 var $buttonUp = $('#js-comments-button-up'),
                     $buttonDown = $('#js-comments-button-down');
 
+                cache.buttonUpHeight = $buttonUp.height();
                 cache.commentsHeight = $comments.height() - $commentsBody.position().top;
                 cache.commentsTop    = $commentsBody.offset().top;
-                cache.visibleTop     = cache.commentsTop + $buttonUp.height();
+                cache.visibleTop     = cache.commentsTop + cache.buttonUpHeight;
                 cache.visibleBottom  = cache.commentsTop + cache.commentsHeight - $buttonDown.height();
                 break;
 
@@ -310,8 +366,14 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         return value;
     };
 
+    var setCurrentOffset = function(offset) {
+        offset = Math.round(offset);
+        $commentsActiveList.css('top', offset);
+        currentOffset = offset;
+    };
+
     var hideOtherForms = function() {
-        $commentsBody.find('form').filter(':visible').slideToggle();
+        $commentsBody.find('form').filter(':visible').slideToggle(slideDuration);
     };
 
     var generateJSONPNumber = function() {
@@ -339,6 +401,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $comments.on('click', '.js-scroll-comments', scrollComments);
         $comments.on(inputEvent, '.js-required', enableForm);
         $(window).on('resize', updateLayout);
+        $(window).on('hashchange', showComment);
 
         // on document ready: check for url hash to enable anchor links and return urls
         $(function() {
@@ -353,15 +416,16 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                     return;
                 }
 
-                $('html, body').animate({
+                $('html, body').stop().animate({
                     scrollTop: $(target).offset().top
-                }, 500);
+                }, 400);
             }
         });
 
         // handle tab switch: recalculate comment metrics for new comment list
         $commentsTabsHead.on('click', '.tabs__head__tab', function(e) {
             $commentsActiveList = $(e.target.hash);
+            currentOffset = parseInt($commentsActiveList.css('top'), 10);
             calculatePagination();
         });
 
