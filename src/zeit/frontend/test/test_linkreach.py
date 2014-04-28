@@ -3,7 +3,6 @@ from zeit.frontend.reach import DataSequence
 from zeit.frontend.reach import Entry
 from zeit.frontend.reach import LinkReach
 import datetime
-import pyramid.testing
 import pytest
 import zeit.frontend.reach
 
@@ -21,7 +20,6 @@ entry_data = {
 
 
 def test_entry_for_linkreach_should_deserialize():
-
     schema = Entry()
     entry = schema.deserialize(entry_data)
 
@@ -44,18 +42,43 @@ def test_data_sequence_for_linkreach_should_deserialize():
     assert len(seq) == 9
 
 
-def test_not_provided_service_should_throw_exception():
-    with pytest.raises(zeit.frontend.reach.UnprovidedService):
-        LinkReach('file:///foo').fetch_data('foo', 20)
+def test_unavailable_service_should_throw_exception(linkreach):
+    with pytest.raises(zeit.frontend.reach.UnavailableServiceException):
+        linkreach.fetch_service('foo', 3)
+
+
+def test_unavailable_section_should_throw_exceptions(linkreach):
+    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+        linkreach.fetch_comments(3, section='foo')
+    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+        linkreach.fetch_service('twitter', 3, section='foo')
+
+
+def test_out_of_bounds_limits_should_throw_exceptions(linkreach):
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        linkreach.fetch_comments(0)
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        linkreach.fetch_comments(99)
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        linkreach.fetch_service('twitter', 0)
+    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+        linkreach.fetch_service('twitter', 99)
+
 
 def test_data_for_twitter_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('twitter', 20)
-    assert len(data) == 20
+    data = linkreach.fetch_service('twitter', 3)
+    assert len(data) == 3
+
 
 def test_data_for_facebook_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('facebook', 20)
-    assert len(data) == 20
+    data = linkreach.fetch_service('facebook', 3)
+    assert len(data) == 3
+
 
 def test_data_for_googleplus_should_be_fetched(linkreach):
-    data = linkreach.fetch_data('googleplus', 20)
-    assert len(data) == 20
+    data = linkreach.fetch_service('googleplus', 3)
+    assert len(data) == 3
+
+def test_data_for_comments_should_be_fetched(application, linkreach):
+    data = linkreach.fetch_comments(3)
+    assert len(data) == 3
