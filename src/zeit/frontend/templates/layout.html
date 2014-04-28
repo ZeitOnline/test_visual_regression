@@ -108,11 +108,13 @@
             <div class="page-wrap--inner" id="js-page-wrap-inner">
         {% endblock page_wrap_inner %}
 
-                {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+                {{ lama.main_nav(view.context.main_nav_full_width) }}
 
                 <main role="main" class="main">
                     {%  block content %}{% endblock content %}
                 </main>
+
+                {{ lama.breadcrumbs(view.breadcrumb, view.context.main_nav_full_width) }}
 
                 {{lama.main_footer()}}
 
