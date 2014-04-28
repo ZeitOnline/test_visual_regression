@@ -70,25 +70,20 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def area_lead_full_teaser(self):
         for teaser_block in self.context['lead'].values():
-            if teaser_block.layout.id == 'zmo-leader-fullwidth':
+            if (teaser_block.layout.id == 'zmo-leader-fullwidth' or
+                teaser_block.layout.id == 'zmo-leader-fullwidth-light'):
                 return teaser_block
 
     @property
-    def _shares(self):
-        reach_url = self.request.registry.settings.linkreach_host
-        return LinkReach(reach_url)
-
-    @property
-    def global_twitter_shares(self):
-        return self._shares.fetch_data('twitter', 20)[:10]
-
-    @property
-    def global_facebook_shares(self):
-        return self._shares.fetch_data('facebook', 20)[:10]
-
-    @property
-    def global_googleplus_shares(self):
-        return self._shares.fetch_data('googleplus', 20)[:10]
+    def area_buzz(self):
+        community = self.request.registry.settings.community_host
+        linkreach = self.request.registry.settings.linkreach_host
+        reach = LinkReach(community, linkreach)
+        buzz = dict(twitter=reach.fetch_service('twitter', 3),
+                    facebook=reach.fetch_service('facebook', 3),
+                    comments=reach.fetch_comments(3)
+                    )
+        return buzz
 
     @property
     def area_informatives(self):

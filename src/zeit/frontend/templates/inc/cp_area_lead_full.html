@@ -10,8 +10,8 @@ Available attributes:
 {%- if teaser_block %}
 	{%-
 	   set teaser_blocks = [
-	        'templates/inc/lead_block_' + teaser_block.layout.id + '.html',
-	        'templates/inc/lead_block_default.html'
+	        'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
+	        'templates/inc/teaser_block_default.html'
 	        ]
 	%}
 	{% include teaser_blocks ignore missing %}

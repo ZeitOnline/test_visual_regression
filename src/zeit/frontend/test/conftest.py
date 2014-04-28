@@ -28,6 +28,7 @@ settings = {
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
+
     'community_host': u'file://%s/' % path.join(
         path.dirname(path.abspath(frontend.__file__)),
         'data',
@@ -42,6 +43,7 @@ settings = {
     'proxy_url': '',
     'node_comment_statistics_path': 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
+
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
 
     'vivi_zeit.cms_keyword-configuration': (
@@ -122,7 +124,7 @@ def agatho():
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
-    return LinkReach(linkreach_host=settings['linkreach_host'])
+    return LinkReach(settings['community_host'], settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')
