@@ -368,7 +368,7 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
             'name': 'Tom', 'location': ', Bern', 'suffix': 'und'},
            {'prefix': '', 'href': '',
             'name': 'Anna', 'location': '', 'suffix': ''}]
-    markup = 'Von<a href="www.zeit.de" class="test meta-link">Tom</a>, Bern' \
+    markup = 'Von<a href="www.zeit.de" class="test">Tom</a>, Bern' \
              'und<span class="test">Anna</span>'
     lines = tpl.module.meta_author(authors, test_class).splitlines()
     output = ""
