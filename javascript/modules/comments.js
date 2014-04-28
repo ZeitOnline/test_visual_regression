@@ -165,9 +165,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Initialize layout
      */
     var initLayout = function() {
-        // invalidate cache
-        cache = {};
-
         var documentWidth = getCachedValue('documentWidth');
 
         if (documentWidth >= 1280) {
@@ -191,6 +188,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Update layout, debounced
      */
     var updateLayout = _.debounce(function(e) {
+        // invalidate cache
+        cache = {};
 
         initLayout();
 
