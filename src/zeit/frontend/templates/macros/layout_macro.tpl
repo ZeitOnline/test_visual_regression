@@ -462,3 +462,12 @@
 
 {%- endmacro %}
 
+{% macro insert_responsive_image(image, image_class) %}
+    <!--[if gt IE 9]>-->
+        <noscript data-ratio="{{image.ratio}}">
+    <!--<![endif]-->
+            <img alt="{{image.alt}}" title="{{image.title}}" class="{{image_class}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+    <!--[if gt IE 9]>-->
+        </noscript>
+    <!--<![endif]-->
+{% endmacro %}

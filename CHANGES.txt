@@ -1,8 +1,14 @@
 Change log for zeit.frontend
 ============================
 
-0.2.21 (unreleased)
--------------------
+0.3.1 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+0.3.0 (2014-04-29)
+------------------
 
 - split informatives and lead area according to seperator cp extra
 - prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo
@@ -24,6 +30,7 @@ Change log for zeit.frontend
 - add a page header to sequel pages
 - fix subtitle case sensitivity
 - fix nextread typography
+- provide comment counts for teasers and most commented lists
 
 
 0.2.20 (2014-04-17)
@@ -68,7 +75,7 @@ Change log for zeit.frontend
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages
 - Refactor template logic for macros. The are now located in
-templates/macro and named [type]_macro.tpl
+  templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 - add date, source, genre testing
 - fix author issue and add testing
