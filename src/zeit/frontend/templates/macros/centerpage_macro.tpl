@@ -1,14 +1,6 @@
-{#
 
-This is the main template for the context type "centerpage".
-
-Available attributes:
-	zeit.frontend.view_centerpage.Centerpage
-#}
-
-{% macro include(obj, type) -%}
+{% macro include_cp_block(obj, ad) -%}
     {% for teaser_block in obj -%}
-
         {%-
             set teaser_blocks = [
                 'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
@@ -17,7 +9,7 @@ Available attributes:
         %}
         {% include teaser_blocks ignore missing %}
 
-        {% if (type == 'inf') and (loop.index == 2 or loop.last) and (added is not defined) -%}
+        {% if (ad == 'enable') and (loop.index == 2 or loop.last) and (added is not defined) -%}
             <!-- special ad integration by counter -->
             {% set added = true %}
             {% include 'templates/inc/teaser/teaser_ad.html' ignore missing %}
@@ -25,10 +17,3 @@ Available attributes:
 
     {% endfor %}
 {%- endmacro %}
-
-<div class='cp__lead__wrap'>
-    {{ include(view.area_lead, 'lead') }}
-</div>
-<div class='cp__lead__informatives__wrap'>
-    {{ include(view.area_informatives, 'inf') }}
-</div>

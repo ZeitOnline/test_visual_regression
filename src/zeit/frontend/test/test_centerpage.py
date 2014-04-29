@@ -315,7 +315,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'Es leben die Skispringenden Sportredakteure!' == \
             unicode(subtitle.text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert u'\u00ABund der Titel dazu\u00BB' == unicode(h1.text)
+        assert u'\u00BBund der Titel dazu\u00AB' == unicode(h1.text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
@@ -348,7 +348,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert len(title_wrap) != 0
 
         assert re.search(image_pattern, img.get_attribute("src"))
-        assert unicode(h1.text) == u'\u00ABArticle Image Asset Titel\u00BB'
+        assert unicode(h1.text) == u'\u00BBArticle Image Asset Titel\u00AB'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\
@@ -500,3 +500,90 @@ def test_centerpages_produces_no_error(selenium_driver, testserver):
     assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
     driver.get('%s/centerpage/lebensart' % testserver.url)
     assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+
+
+def test_cp_lead_should_have_correct_first_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    lead1_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#'\
+        'lead/id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    lead1_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
+        'id-eae7c703-98e9-491a-a30d-c1c5cebd2371'
+    assert lead1_first_block == cp_view.area_lead1[0].uniqueId
+    assert lead1_last_block == cp_view.area_lead1[3].uniqueId
+
+
+def test_cp_lead_should_have_correct_second_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    lead2_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
+        'id-cc6bbea3-1337-42f5-8fe1-01c9c4476600'
+    lead2_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
+        'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    assert lead2_first_block == cp_view.area_lead2[0].uniqueId
+    assert lead2_last_block == cp_view.area_lead2[1].uniqueId
+
+
+def test_cp_lead_should_have_no_blocks(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    lead_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo#lead/'\
+        'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    lead_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo#lead/'\
+        'id-48962e5e-cdbe-4148-a12c-17724cd0e96b'
+    assert lead_first_block == cp_view.area_lead1[0].uniqueId
+    assert lead_last_block == cp_view.area_lead1[3].uniqueId
+
+
+def test_cp_informatives_should_have_correct_first_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    informatives1_first_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+    informatives1_last_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-bff224c9-088e-40d4-987d-9d986de804bd'
+
+    assert informatives1_first_block == cp_view.area_informatives1[0].uniqueId
+    assert informatives1_last_block == cp_view.area_informatives1[1].uniqueId
+
+
+def test_cp_informatives_should_have_correct_second_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    informatives2_first_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
+    informatives2_last_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+
+    assert informatives2_first_block == cp_view.area_informatives2[0].uniqueId
+    assert informatives2_last_block == cp_view.area_informatives2[1].uniqueId
+
+
+def test_cp_informatives_should_have_no_blocks(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    informatives_first_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
+        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+    informatives_last_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
+        '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
+
+    assert informatives_first_block == cp_view.area_informatives1[0].uniqueId
+    assert informatives_last_block == cp_view.area_informatives1[2].uniqueId

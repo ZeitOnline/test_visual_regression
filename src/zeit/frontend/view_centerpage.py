@@ -53,9 +53,57 @@ class Centerpage(zeit.frontend.view.Base):
     def area_lead(self):
         teaser_list = self.context['lead'].values()
         for teaser in teaser_list:
-            if teaser.layout.id == 'zmo-leader-fullwidth' or teaser.layout.id == 'zmo-leader-fullwidth-light':
-                teaser_list.remove(teaser)
+            try:
+                if teaser.layout.id == 'zmo-leader-fullwidth' or teaser.layout.id == 'zmo-leader-fullwidth-light':
+                    teaser_list.remove(teaser)
+            except:
+                pass
         return teaser_list
+
+    @property
+    def area_lead1(self):
+        teaser_list = self.seperator('before', self.area_lead)
+        if teaser_list:
+            return teaser_list
+        else:
+            return self.area_lead
+
+    @property
+    def area_lead2(self):
+        return self.seperator('after', self.area_lead)
+
+    @property
+    def area_informatives(self):
+        teaser_list = self.context['informatives'].values()
+        return teaser_list
+
+    @property
+    def area_informatives1(self):
+        teaser_list = self.seperator('before', self.area_informatives)
+        if teaser_list:
+            return teaser_list
+        else:
+            return self.area_informatives
+
+    @property
+    def area_informatives2(self):
+        return self.seperator('after', self.area_informatives)
+
+    def seperator(self, position, obj):
+        teaser_list = obj
+        for teaser in teaser_list:
+            try:
+                if teaser.cpextra == 'zmo-seperator-for-cps':
+                    split = teaser_list.index(teaser)
+                    if position == 'before':
+                        teaser_list = teaser_list[:split]
+                    else:
+                        teaser_list = teaser_list[split:]
+                        teaser_list.remove(teaser)
+                    return teaser_list
+            except:
+                pass
+        return False
 
     @property
     def area_lead_full_teaser(self):
@@ -73,11 +121,6 @@ class Centerpage(zeit.frontend.view.Base):
                     comments=reach.fetch_comments(3)
                     )
         return buzz
-
-    @property
-    def area_informatives(self):
-        teaser_list = self.context['informatives'].values()
-        return teaser_list
 
     def banner(self, tile):
         try:
