@@ -86,8 +86,8 @@
     {% endif %}
     <meta name="date" content="{{ view.date_first_released_meta }}"/>
 {%- endmacro %}
-{% macro breadcrumbs(crumbs, is_full_width) -%}
-    <div class="breadcrumbs-wrap {% if is_full_width %}is-full-width{% endif %}">
+{% macro breadcrumbs(crumbs) -%}
+    <div class="breadcrumbs-wrap">
         <div class="breadcrumbs" id="js-breadcrumbs">
             <div class="breadcrumbs__list-wrap">
                 <div class="breadcrumbs__list">
