@@ -745,3 +745,71 @@ def test_date_meta_should_produce_metatags(jinja2_env):
 def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''
+
+
+def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    image = Mock()
+    image.alt = 'ALT'
+    image.title = 'TITLE'
+    image.src = 'SRC'
+
+    lines = tpl.module.insert_responsive_image(image).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<!--[if gt IE 9]>-->' in output
+    assert '<img alt="ALT"' in output
+    assert 'title="TITLE"' in output
+    assert '<!--<![endif]-->' in output
+
+def test_macro_insert_responsive_image_should_produce_alternative_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    image = Mock()
+    image.alt = 'ALT'
+    image.title = 'TITLE'
+    image.src = 'SRC'
+
+    lines = tpl.module.insert_responsive_image(image, 'CLASS').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'class="CLASS figure__media' in output
+
+
+def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = "SUPATITLE"
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<a href="ID">' in output
+    assert '<div class="teaser__kicker">SUPATITLE</div>' in output
+    assert '<div class="teaser__title">TITLE</div>' in output
+
+
+def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = "SUPATITLE"
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser, 'CLASS', withlink=False).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<a href="ID">' not in output
+    assert '<div class="CLASS__kicker">SUPATITLE</div>' in output
+    assert '<div class="CLASS__title">TITLE</div>' in output
