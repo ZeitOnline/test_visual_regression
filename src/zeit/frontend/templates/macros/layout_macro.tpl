@@ -89,10 +89,14 @@
 {% macro breadcrumbs(crumbs, is_full_width) -%}
     <div class="breadcrumbs-wrap {% if is_full_width %}is-full-width{% endif %}">
         <div class="breadcrumbs" id="js-breadcrumbs">
-            <div class="breadcrumbs__list">
-                <div class="breadcrumbs__list__item" itemprop="breadcrumb">
+            <div class="breadcrumbs__list-wrap">
+                <div class="breadcrumbs__list">
                     {% for crumb in crumbs %}
-                        <a href="{{crumb[1]}}">{{crumb[0]}}</a>
+                        <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href="{{crumb[1]}}" itemprop="url">
+                                <span itemprop="title">{{crumb[0]}}</span>
+                            </a>
+                        </div>
                         {% if not loop.last %}
                           &rsaquo;
                         {% endif %}
