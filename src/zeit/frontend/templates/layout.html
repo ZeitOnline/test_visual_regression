@@ -109,12 +109,14 @@
         {% endblock page_wrap_inner %}
 
                 {% block navigation %}
-                    {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
+                    {{ lama.main_nav(view.context.main_nav_full_width) }}
                 {% endblock navigation %}
 
                 <main role="main" class="main">
                     {%  block content %}{% endblock content %}
                 </main>
+
+                {{ lama.breadcrumbs(view.breadcrumb) }}
 
                 {{lama.main_footer()}}
 
