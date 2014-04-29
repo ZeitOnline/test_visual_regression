@@ -286,22 +286,28 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     /**
      * Ensure visibility of linked comment
      */
-    var showComment = function() {
-        var anchor = window.location.hash.slice(1), // remove '#'
-            target,
-            offset;
+    var showComment = function(event, onload) {
+        var anchor = window.location.hash.slice(1); // remove '#'
 
             if (/^cid-\d/.test(anchor)) {
-                target = $(window.location.hash);
+                var target = $(window.location.hash),
+                    hidden = target.is(':hidden'),
+                    offset;
 
                 if (! target.length) {
                     return;
                 }
 
-                // links from "recommented comments"
-                if (! target.is(':visible')) {
-                    $commentsTabsHead.find('.tabs__head__tab:first').click();
+                if (onload) {
+                    toggleComments();
+                }
 
+                // links from "recommented comments"
+                if (hidden) {
+                    $commentsTabsHead.find('.tabs__head__tab:first').click();
+                }
+
+                if (hidden || onload) {
                     if (paginated) {
                         $('html, body').stop().animate({
                             scrollTop: $commentsTabsHead.offset().top
@@ -338,7 +344,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             case 'commentsTop':
             case 'visibleTop':
             case 'visibleBottom':
-                var $buttonUp = $('#js-comments-button-up'),
+                var $buttonUp   = $('#js-comments-button-up'),
                     $buttonDown = $('#js-comments-button-down');
 
                 cache.buttonUpHeight = $buttonUp.height();
@@ -405,22 +411,11 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $(window).on('hashchange', showComment);
 
         // on document ready: check for url hash to enable anchor links and return urls
-        $(function() {
-            var anchor = window.location.hash.slice(1);
-
-            if (/^cid-\d/.test(anchor)) {
-                toggleComments();
-
-                var target = document.getElementById(anchor) || document.getElementsByName(anchor)[0];
-
-                if (!target) {
-                    return;
-                }
-
-                $('html, body').stop().animate({
-                    scrollTop: $(target).offset().top
-                }, 400);
-            }
+        $(function(e) {
+            // setTimeout needed for FF bug with linked element inside block having overflow:hidden
+            window.setTimeout(function(){
+               showComment(e, true);
+           }, 1);
         });
 
         // handle tab switch: recalculate comment metrics for new comment list
