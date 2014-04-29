@@ -1,10 +1,22 @@
 .cp__teaser__gallery
-    min-height: 387px
+    max-height: 386px
     position: relative
     width: 100%
     & > .scaled-image img
         max-height: 386px
         width: 100%
+    a
+        +link
+            color: $white
+            text-decoration: none
+        +on-interaction
+            color: $white
+        .cp__teaser__gallery__kicker
+            +on-interaction
+                text-decoration: none
+        .cp__teaser__gallery__title
+            +on-interaction
+                text-decoration: underline
 
 .cp__teaser__gallery__wrap
     background: #000
