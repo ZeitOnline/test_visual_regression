@@ -9,6 +9,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $commentsActiveList = $('#js-comments-body .tabs__content.is-active .comments__list'),
         currentOffset = 0,
         slideDuration = 300,
+        paginated = false,
         cache = {},
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
@@ -32,6 +33,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             if (currentOffset < 0) {
                 $comments.addClass('show-newer-trigger');
             }
+
+            paginated = true;
         }
     };
 
@@ -89,7 +92,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
 
         if (form.is(':hidden')) {
             hideOtherForms();
-            checkHeight = true;
+            checkHeight = paginated;
         }
 
         form.slideToggle(slideDuration, function() {
@@ -299,18 +302,24 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 if (! target.is(':visible')) {
                     $commentsTabsHead.find('.tabs__head__tab:first').click();
 
-                    $('html, body').stop().animate({
-                        scrollTop: $commentsTabsHead.offset().top
-                    }, 400);
+                    if (paginated) {
+                        $('html, body').stop().animate({
+                            scrollTop: $commentsTabsHead.offset().top
+                        }, 400);
 
-                    offset = $commentsActiveList.offset().top - target.offset().top;
+                        offset = $commentsActiveList.offset().top - target.offset().top;
 
-                    if (offset < 0) {
-                        offset += getCachedValue('buttonUpHeight');
+                        if (offset < 0) {
+                            offset += getCachedValue('buttonUpHeight');
+                        }
+
+                        setCurrentOffset(offset);
+                        calculatePagination();
+                    } else {
+                        $('html, body').stop().animate({
+                            scrollTop: target.offset().top
+                        }, 500);
                     }
-
-                    setCurrentOffset(offset);
-                    calculatePagination();
                 }
             }
     };
