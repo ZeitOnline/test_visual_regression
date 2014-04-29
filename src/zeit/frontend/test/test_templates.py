@@ -95,7 +95,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
-    markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs"' \
+    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs"' \
         ' id="js-breadcrumbs"><div class="breadcrumbs__list-wrap">' \
         '<div class="breadcrumbs__list">' \
         '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
