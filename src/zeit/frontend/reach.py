@@ -67,7 +67,7 @@ class LinkReach(object):
             try:
                 # Ignore item if CMS lookup fails.
                 article = zeit.cms.interfaces.ICMSContent(xml_path)
-            except RuntimeError:#TypeError:
+            except TypeError:
                 continue
 
             comment_stats = comments_per_unique_id(self.stats_path)
