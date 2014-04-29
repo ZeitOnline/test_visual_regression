@@ -1,15 +1,14 @@
 {#
-
 Abstract Template for inclusion in different gallery templates.
 Will not be called by itself.
-
 #}
+
 {% import 'templates/macros/layout_macro.tpl' as lama with context%}
 <div class="{{self.additional_css_class()}}">
     {%- set image = get_teaser_image(teaser_block, teaser) %}
     {% block asset %}
         <div class="scaled-image">
-            {{ lama.insert_responsive_image(image, 'cp__mtb__teaser__image') }}
+            {{ lama.insert_responsive_image(image) }}
         </div>
     {% endblock %}
     <div class="{{self.additional_css_class()}}__wrap">
