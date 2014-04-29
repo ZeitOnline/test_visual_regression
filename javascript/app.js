@@ -65,7 +65,7 @@ require([
 	$( "figure[data-video]" ).switchVideo();
 	$( "div[data-backgroundvideo]" ).backgroundVideo();
 	$( "a.js-has-popup" ).enablePopups();
-	$( "main" ).animateScroll({selector: "a[href^='#']:not(.static-scroll)"});
+	$( "main" ).animateScroll({selector: '.js-scroll'});
 	$( "a.icon-paginierungs-pfeil-links").hover(function(){
 		$(this).removeClass('icon-paginierungs-pfeil-links');
 		$(this).addClass('icon-paginierungs-pfeil-links-hover');

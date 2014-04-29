@@ -139,8 +139,9 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     # assert normal markup
     markup = (u'%s<div class="article__subpage-index__item"><span class="'
         'article__subpage-index__item__count">1 &mdash; </span><span class="'
-        'article__subpage-index__item__title-wrap"><a href="#kapitel1" class'
-        '="article__subpage-index__item__title">Erster</a></span></div></div>'
+        'article__subpage-index__item__title-wrap"><a href="#kapitel1" class="'
+        'article__subpage-index__item__title js-scroll">Erster</a></span></div>'
+        '</div>'
         ) % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()

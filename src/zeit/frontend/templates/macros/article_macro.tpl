@@ -57,7 +57,7 @@
                     {% if loop.index == number %}
                         <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
                     {% else %}
-                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title">{{  page.teaser  }}</a>
+                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{  page.teaser  }}</a>
                     {% endif %}
                 </span>
             </div>
@@ -280,7 +280,7 @@
             {% endif -%}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
-                <a href="#{{comment.cid}}" class="comment__head__meta__date">{{comment.timestamp | format_date_ago()}}</a>
+                <a href="#{{comment.cid}}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{comment.timestamp | format_date_ago()}}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{comment.role}}</div>
                 {% endif -%}
@@ -362,8 +362,8 @@
         </div>
         <div class="tabs has-2">
             <div class="tabs__head" id="js-comments-tabs-head">
-                <a href="#tab1" class="tabs__head__tab static-scroll is-active">Alle</a>
-                <a href="#tab2" class="tabs__head__tab static-scroll">Ausgewählte</a>
+                <a href="#tab1" class="tabs__head__tab is-active">Alle</a>
+                <a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
             </div>
             <div class="comments__body" id="js-comments-body">
                 <div class="tabs__content is-active">
@@ -402,7 +402,7 @@
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
-                    Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+                    Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">
                     <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
