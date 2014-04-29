@@ -61,9 +61,10 @@ class Centerpage(zeit.frontend.view.Base):
         return teaserblock_list
 
     def teaser_get_commentcount(self, uniqueId):
-        unique_id_comments = comments.comments_per_unique_id(self)
+        stats_path = self.request.registry.settings.node_comment_statistics_path
+        unique_id_comments = comments.comments_per_unique_id(stats_path)
         try:
-            return unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
+            return unique_id_comments['/' + urlparse.urlparse(uniqueId).path[1:]]
         except KeyError:
             return None
 
@@ -76,9 +77,9 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_buzz(self):
-        community = self.request.registry.settings.community_host
+        stats_path = self.request.registry.settings.node_comment_statistics_path
         linkreach = self.request.registry.settings.linkreach_host
-        reach = LinkReach(community, linkreach)
+        reach = LinkReach(stats_path, linkreach)
         buzz = dict(twitter=reach.fetch_service('twitter', 3),
                     facebook=reach.fetch_service('facebook', 3),
                     comments=reach.fetch_comments(3)

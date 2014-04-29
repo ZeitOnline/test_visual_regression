@@ -5,8 +5,8 @@ import urllib2
 import urllib
 import json
 import zeit.cms.interfaces
-from lxml import etree
 from babel.dates import get_timezone
+from comments import comments_per_unique_id
 
 
 class UnavailableSectionException(Exception):
@@ -26,9 +26,9 @@ class LinkReach(object):
     services = ['twitter', 'facebook', 'googleplus']
     sections = ['zeit-magazin']
 
-    def __init__(self, community_host, linkreach_host):
-        self.community_host = community_host
-        self.linkreach_host = linkreach_host
+    def __init__(self, stats_path, linkreach):
+        self.stats_path = stats_path
+        self.linkreach = linkreach
 
     def fetch_service(self, service, limit, section='zeit-magazin'):
         if section not in self.sections:
@@ -41,7 +41,7 @@ class LinkReach(object):
             raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
         params = urllib.urlencode({'limit': limit, 'section': section})
-        url = '%s/zonrank/%s?%s' % (self.linkreach_host, service, params)
+        url = '%s/zonrank/%s?%s' % (self.linkreach, service, params)
 
         response = urllib2.urlopen(url, timeout=4)
 
@@ -54,18 +54,12 @@ class LinkReach(object):
         if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
-        path = '%s/agatho/commentsection/mostcommented/24/%s.xml'
-        url = path % (self.community_host, section)
+        url = 'http://xml.zeit.de/cms/work/import/feeds/most_comments_%s.rss'
+        feed = zeit.cms.interfaces.ICMSContent(url % section)
 
         item_list = []
 
-        try:
-            # Fail gracefully if community host is unavailable.
-            tree = etree.parse(url).xpath('/rss/channel/item')
-        except IOError:
-            return []
-
-        for rss_node in tree[:limit]:
+        for rss_node in feed.xml.xpath('/rss/channel/item')[:limit]:
             web_path = rss_node.xpath('guid/text()')[0]
             rel_path = web_path[18:]
             xml_path = 'http://xml.zeit.de' + rel_path
@@ -73,12 +67,13 @@ class LinkReach(object):
             try:
                 # Ignore item if CMS lookup fails.
                 article = zeit.cms.interfaces.ICMSContent(xml_path)
-            except TypeError:
+            except RuntimeError:#TypeError:
                 continue
 
-            # TODO: Get real score, as soon as ZMO-538 is merged.
+            comment_stats = comments_per_unique_id(self.stats_path)
+
             item = dict(location=rel_path,
-                        score=0, # comments.comments_per_unique_id(path),
+                        score=comment_stats.get(xml_path, 0),
                         supertitle=article.supertitle,
                         title=article.title,
                         subtitle=article.subtitle,
