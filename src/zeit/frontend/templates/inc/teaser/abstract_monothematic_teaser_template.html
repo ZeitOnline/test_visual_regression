@@ -9,16 +9,16 @@ Available attributes:
 {% import 'templates/macros/layout_macro.tpl' as layout_macro with context %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
-<div class="cp__mtb__teaser">
+<div class="mtb__teaser">
     <a href="{{teaser.uniqueId | translate_url}}">
         <div class="scaled-image">
-            {{ layout_macro.insert_responsive_image(image, 'cp__mtb__teaser__image') }}
+            {{ layout_macro.insert_responsive_image(image, 'mtb__teaser__image') }}
         </div>
     </a>
-    <div class="cp__mtb__teaser__kicker">
+    <div class="mtb__teaser__kicker">
         {{teaser.teaserSupertitle}}
     </div>
-    <div class="cp__mtb__teaser__title">
+    <div class="mtb__teaser__title">
         {{teaser.teaserTitle}}
     </div>
 </div>

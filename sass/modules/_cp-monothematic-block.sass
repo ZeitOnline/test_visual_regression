@@ -1,10 +1,10 @@
 $mtb_teaser_width: em(270px)
 
-.cp__mtb__wrap
+.mtb__wrap
     clear: left
     width: 100%
 
-.cp__mtb
+.mtb
     width: 88%
     margin: auto
 
@@ -14,34 +14,34 @@ $mtb_teaser_width: em(270px)
         width: 3*$mtb_teaser_width + 2*$big // three teaser columns, two margins
 
 
-.cp__mtb__title,
-.cp__mtb__subtitle
+.mtb__title,
+.mtb__subtitle
     text-align: center
     margin: auto
     width: 80%
     +respond-min($break-1)
         width: 70%
 
-.cp__mtb__title
+.mtb__title
     @extend %headline
     text-transform: uppercase
     margin-bottom: $petite
     font-size: $font-ml
 
-.cp__mtb__subtitle
+.mtb__subtitle
     +tablet(regular)
     font-size: $font-m
     line-height: 1.25
     margin-bottom: $medium
 
 
-.cp__mtb__teasers__wrap
-    +justify-children-horizontally('.cp__mtb__teasers__wrap')
+.mtb__teasers__wrap
+    +justify-children-horizontally('.mtb__teaser')
 
     +respond-min($break-1)
         +columns($mtb_teaser_width)
 
-.cp__mtb__teaser
+.mtb__teaser
     // left/right margins are not needed, due to justified inline-block
     margin: 0 0 $big 0
     vertical-align: top !important
@@ -52,13 +52,13 @@ $mtb_teaser_width: em(270px)
     // +respond-min($break-3)
     //     margin: 0 0 $big 0
 
-.cp__mtb__teaser__title
+.mtb__teaser__title
     @extend .cp__buttons__title
     margin-bottom: 0
 
-.cp__mtb__teaser__kicker
+.mtb__teaser__kicker
     @extend .cp__buttons__supertitle
 
-.cp__mtb__teaser__image
+.mtb__teaser__image
     width: 100%
     margin: 0 auto $little auto
