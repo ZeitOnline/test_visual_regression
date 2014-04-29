@@ -1,4 +1,4 @@
-/* global console, define, alert, _ */
+/* global console, define, _ */
 define(['jquery', 'underscore', 'modules/tabs'], function() {
 
     var $socialServices = $('#js-social-services'),
@@ -127,7 +127,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             form = this.form,
             input = this.form.elements;
 
-        // $(this).prop('disabled', true).html('Senden');
+        // avoid repeated submits
+        $(this).prop('disabled', true);
 
         $.ajax({
             url: sendurl,
@@ -214,14 +215,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         initLayout();
 
     }, 250); // Maximum run of once per 250 milliseconds
-
-    /**
-     * Toggle sharing box
-     */
-    var toggleSharing = function() {
-        $(this).find('.article__sharing__icon').toggleClass('icon-sharebox-share').toggleClass('icon-sharebox-close');
-        $('.article__sharing__services').toggleClass('blind');
-    };
 
     /**
      * Scroll comments list
@@ -392,7 +385,6 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         initLayout();
 
         // register event handlers
-        $socialServices.on('click', '.js-toggle-sharing', toggleSharing);
         $socialServices.on('click', '.js-comments-trigger', toggleComments);
         $commentsBody.on('click', '.js-reply-to-comment', replyToComment);
         $commentsBody.on('click', '.js-report-comment', reportComment);

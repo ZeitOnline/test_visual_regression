@@ -36,15 +36,17 @@ require([
 	'modules/main-nav',
 	'modules/tabs',
 	'modules/comments',
+	'modules/sharing',
 	'modules/images',
 	'modules/photocluster',
-], function( errors, fontloader_body, breadcrumbs, main_nav, tabs, comments, images, photocluster) {
+], function( errors, fontloader_body, breadcrumbs, main_nav, tabs, comments, sharing, images, photocluster) {
 	errors.init();
 	fontloader_body.init();
 	breadcrumbs.init();
 	main_nav.init();
 	tabs.init();
 	comments.init();
+	sharing.init();
 	photocluster.init();
 	images.init();
 });

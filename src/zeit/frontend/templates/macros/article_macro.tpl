@@ -300,41 +300,39 @@
 
 {% macro comments(comments) -%}
     {% if comments is not none -%}
-    <div class="tc">
-        <div class="article__socialbox" id="js-social-services">
-            <div class="article__sharing">
-                <div class="item article__sharing__sum">
-                    <span class="article__sharing__total">47</span>
-                    <span class="article__sharing__unit">Tsd.</span>
-                </div>
-                <div class="article__sharing__services blind">
-                    <a class="item">
-                        <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
-                        <span class="article__sharing__services__text">8,2 Tsd</span>
-                    </a>
-                    <a class="item">
-                        <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-                        <span class="article__sharing__services__text">6,7 Tsd</span>
-                    </a>
-                    <a class="item">
-                        <span class="article__sharing__services__icon icon-sharebox-google"></span>
-                        <span class="article__sharing__services__text">877</span>
-                    </a>
-                </div>
-                <div class="item">
-                    <a class="article__sharing__link js-toggle-sharing">
-                        <span class="article__sharing__icon icon-sharebox-share"></span>
-                        Teilen
-                    </a>
-                </div>
+    <div class="article__socialbox tc" id="js-social-services">
+        <div class="article__sharing">
+            <div class="article__sharing__item article__sharing__sum">
+                <span class="article__sharing__total">47</span>
+                <span class="article__sharing__unit">Tsd.</span>
             </div>
-
-            <div class="article__comments-trigger">
-                <a class="article__comments-trigger__link js-comments-trigger">
-                    <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
-                    <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+            <div class="article__sharing__services blind">
+                <a class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
+                    <span class="article__sharing__services__text">8,2 Tsd</span>
+                </a>
+                <a class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
+                    <span class="article__sharing__services__text">6,7 Tsd</span>
+                </a>
+                <a class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-google"></span>
+                    <span class="article__sharing__services__text">877</span>
                 </a>
             </div>
+            <div class="article__sharing__item">
+                <a class="article__sharing__link js-toggle-sharing">
+                    <span class="article__sharing__icon icon-sharebox-share"></span>
+                    Teilen
+                </a>
+            </div>
+        </div>
+
+        <div class="article__comments-trigger">
+            <a class="article__comments-trigger__link js-comments-trigger">
+                <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
+                <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+            </a>
         </div>
     </div>
     <section class="comments" id="js-comments">
