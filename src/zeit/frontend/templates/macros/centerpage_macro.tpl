@@ -20,7 +20,7 @@
 
 {% macro comments_count(comments) -%}
     {% if comments %}
-        <span class="cp__comment__count__wrap">
+        <span class="cp__comment__count__wrap icon-comments-count">
             {{comments}}
         </span>
     {% endif %}
