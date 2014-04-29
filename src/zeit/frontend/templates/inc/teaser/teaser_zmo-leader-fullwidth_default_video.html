@@ -1,17 +1,17 @@
 {#
 
-video lead template for fullwidth teaser
+video teaser template for fullwidth teaser
 
 Available attributes:
     teaser
 
 #}
-{% extends "templates/inc/lead/lead_zmo-leader-fullwidth_default_default.html" -%}
+{% extends "templates/inc/teaser/teaser_zmo-leader-fullwidth_default_default.html" -%}
 
 {% block asset %}
 {%- set obj = teaser | auto_select_asset %}
 <a href="{{teaser.uniqueId | translate_url}}">
-	<div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full">
+	<div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full--dark">
 	      <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
 	            <source src="{{obj.flv_url}}" type="video/mp4">
 	            <source src="http://opendata.zeit.de/zmo-videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">

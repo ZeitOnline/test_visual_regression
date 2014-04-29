@@ -1,9 +1,18 @@
 Change log for zeit.frontend
 ============================
 
-0.2.21 (unreleased)
--------------------
+0.3.1 (unreleased)
+------------------
 
+- Nothing changed yet.
+
+
+0.3.0 (2014-04-29)
+------------------
+
+- integrate invert functionality for teasers
+- correct teaser layouts
+- add different markup for login and anonymous state in Header
 - change teaser template structure
 - add responsivesness for leadarea teasers
 - integrate ad space in cp
@@ -13,7 +22,12 @@ Change log for zeit.frontend
 - new format: Standardkolumnenformat
 - fix for too much ads
 - respecting advertising_enabled switch
-- ad banner tile to cp informatives
+- add banner tile to cp informatives
+- implement buzz module
+- add a page header to sequel pages
+- fix subtitle case sensitivity
+- fix nextread typography
+- provide comment counts for teasers and most commented lists
 
 
 0.2.20 (2014-04-17)
@@ -58,7 +72,7 @@ Change log for zeit.frontend
 - Refactor inheritance logic for longform
 - Add basic structure for Centerpages
 - Refactor template logic for macros. The are now located in
-templates/macro and named [type]_macro.tpl
+  templates/macro and named [type]_macro.tpl
 - fix Headerimage Glitch on iOS
 - add date, source, genre testing
 - fix author issue and add testing

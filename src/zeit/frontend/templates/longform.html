@@ -7,6 +7,10 @@
 	<div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
 {% endblock page_wrap_inner %}
 
+{% block navigation %}
+    {{ lama.main_nav_compact(view,request) }}
+{% endblock navigation %}
+
 {% block content %}
 	<article class="article article--longform">
 		<div class="article__wrap">
