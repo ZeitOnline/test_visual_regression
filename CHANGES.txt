@@ -5,13 +5,16 @@ Change log for zeit.frontend
 ------------------
 
 - add new module gallery teaser
+- split informatives and lead area according to seperator cp extra
+- prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo
+- root background video webm and image file load to live0
+- integrate invert functionality for teasers
+- correct teaser layouts
 
 
 0.3.0 (2014-04-29)
 ------------------
 
-- integrate invert functionality for teasers
-- correct teaser layouts
 - add different markup for login and anonymous state in Header
 - change teaser template structure
 - add responsivesness for leadarea teasers
