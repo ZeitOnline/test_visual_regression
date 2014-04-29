@@ -1,9 +1,13 @@
 .cp__teaser__gallery
-    max-height: 386px
+    display: none
+    height: 386px
     position: relative
+    overflow: hidden
     width: 100%
     & > .scaled-image img
-        max-height: 386px
+        position: absolute
+        top: -25%
+        left: 0%
         width: 100%
     a
         +link
@@ -17,6 +21,21 @@
         .cp__teaser__gallery__title
             +on-interaction
                 text-decoration: underline
+    +respond-min($break-1)
+        display: block
+    +respond-min($break-2)
+        height: auto
+        max-height: 386px
+        & > .scaled-image img
+            max-height: 386px
+            position: static
+            top: auto
+            left: auto
+    +respond-min($break-3)
+        max-height: 386px
+        & > .scaled-image img
+            max-height: 386px
+
 
 .cp__teaser__gallery__wrap
     background: #000
