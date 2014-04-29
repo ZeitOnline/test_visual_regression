@@ -48,6 +48,9 @@ $mtb_teaser_width: em(270px)
 
     +respond-min($break-1)
         +columns($mtb_teaser_width)
+        +column-gap($petite)
+    +respond-min($break-3)
+        +column-gap($medium)
 
 .mtb__teaser
     // left/right margins are not needed, due to justified inline-block
