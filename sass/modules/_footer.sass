@@ -3,12 +3,15 @@
   display: block
   background-color: $grey--mid-dark
   text-align: center
-  padding: $petite $small $wide $small 
+  padding: $petite $small $wide $small
 
 .main-footer__box
   font-size: $font-xxs
   +respond-min($break-1)
     font-size: $font-xs
+    margin-left: 5%
+  +respond-min($break-2)
+    margin-left: em(214px)
 
 .main-footer__ZM
   height: $wide
