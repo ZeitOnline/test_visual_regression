@@ -6,18 +6,13 @@ Available attributes:
     teaserBlock
     teaser
 #}
+{% import 'templates/macros/layout_macro.tpl' as layout_macro with context %}
+{%- set image = get_teaser_image(teaser_block, teaser) %}
 
 <div class="cp__mtb__teaser">
-    {% set image = get_teaser_image(teaser_block, teaser) %}
     <a href="{{teaser.uniqueId | translate_url}}">
         <div class="scaled-image">
-            <!--[if gte IE 9]> -->
-                <noscript data-ratio="{{image.ratio}}">
-            <!-- <![endif]-->
-                    <img alt="{{image.alt}}" title="{{image.title}}" class="cp__mtb__teaser__image" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
-            <!--[if gte IE 9]> -->
-                </noscript>
-            <!-- <![endif]-->
+            {{ layout_macro.insert_responsive_image(image, 'cp__mtb__teaser__image') }}
         </div>
     </a>
     <div class="cp__mtb__teaser__kicker">
