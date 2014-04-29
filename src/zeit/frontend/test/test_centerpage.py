@@ -295,11 +295,10 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             '927/18140073001_3035897844001_Beitrag-' \
             'Skispringen-f-r-Anf-nger.mp4'
         src2_val = \
-            'http://opendata.zeit.de/zmo-videos/3035864892001.webm'
+            'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
         src_img = \
-            'http://brightcove.vo.llnwd.net/d21/unsecured/media/' \
-            '18140073001/201401/2713/18140073001_3035871869001' \
-            '_Skispringen.jpg?pubId=18140073001'
+            'http://www.zeit.de/live0-backend/multimedia/'\
+            'videos/3035864892001.jpg'
 
         # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
