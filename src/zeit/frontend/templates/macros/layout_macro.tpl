@@ -89,7 +89,6 @@
 {% macro breadcrumbs(crumbs, is_full_width) -%}
     <div class="breadcrumbs-wrap {% if is_full_width %}is-full-width{% endif %}">
         <div class="breadcrumbs" id="js-breadcrumbs">
-            <!-- <div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">Wo bin ich?</div> -->
             <div class="breadcrumbs__list">
                 <div class="breadcrumbs__list__item" itemprop="breadcrumb">
                     {% for crumb in crumbs %}
