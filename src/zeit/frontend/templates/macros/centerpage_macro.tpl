@@ -17,3 +17,11 @@
 
     {% endfor %}
 {%- endmacro %}
+
+{% macro comments_count(comments) -%}
+    {% if comments %}
+        <span class="cp__comment__count__wrap">
+            {{comments}}
+        </span>
+    {% endif %}
+{%- endmacro %}

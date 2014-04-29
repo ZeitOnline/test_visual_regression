@@ -67,7 +67,10 @@ class Centerpage(zeit.frontend.view.Base):
     def teaser_get_commentcount(self, uniqueId):
         unique_id_comments = comments.comments_per_unique_id(self)
         try:
-            return unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
+            count = \
+                unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
+            if int(count) >= 15:
+                return count
         except KeyError:
             return None
 
