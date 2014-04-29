@@ -102,25 +102,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
         '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
         '</a></div></div></div></div></div>'
-    lines = tpl.module.breadcrumbs(obj, False).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
-def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    obj = [('text', 'link')]
-
-    markup = '<div class="breadcrumbs-wrap is-full-width"><div class="breadcrumbs"' \
-        ' id="js-breadcrumbs"><div class="breadcrumbs__list-wrap">' \
-        '<div class="breadcrumbs__list">' \
-        '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
-        ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
-        '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
-        '</a></div></div></div></div></div>'
-    lines = tpl.module.breadcrumbs(obj, True).splitlines()
+    lines = tpl.module.breadcrumbs(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
