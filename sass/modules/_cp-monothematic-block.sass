@@ -13,6 +13,12 @@ $mtb_teaser_width: em(270px)
     +respond-min($break-3)
         width: 3*$mtb_teaser_width + 2*$big // three teaser columns, two margins
 
+.mtb__divider
+    border-top: $dblhair solid $black
+    height: 0
+    margin: 0 $compact $small $compact
+    +respond-min($break-1)
+        margin-bottom: $medium
 
 .mtb__title,
 .mtb__subtitle
@@ -34,6 +40,8 @@ $mtb_teaser_width: em(270px)
     line-height: 1.25
     margin-bottom: $medium
 
+
+// start: teasers //
 
 .mtb__teasers__wrap
     +justify-children-horizontally('.mtb__teaser')
@@ -62,3 +70,5 @@ $mtb_teaser_width: em(270px)
 .mtb__teaser__image
     width: 100%
     margin: 0 auto $little auto
+
+// end: teasers //
