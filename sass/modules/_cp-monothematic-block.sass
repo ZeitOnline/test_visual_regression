@@ -5,7 +5,6 @@ $mtb_teaser_width: em(270px)
     width: 100%
 
 .cp__mtb
-    +justify-children-horizontally('.cp__mtb__teaser')
     width: 88%
     margin: auto
 
@@ -36,7 +35,11 @@ $mtb_teaser_width: em(270px)
     margin-bottom: $medium
 
 
-// ----------------------------------------
+.cp__mtb__teasers__wrap
+    +justify-children-horizontally('.cp__mtb__teasers__wrap')
+
+    +respond-min($break-1)
+        +columns($mtb_teaser_width)
 
 .cp__mtb__teaser
     // left/right margins are not needed, due to justified inline-block
@@ -59,6 +62,3 @@ $mtb_teaser_width: em(270px)
 .cp__mtb__teaser__image
     width: 100%
     margin: 0 auto $little auto
-    // +respond-min
-
-// ----------------------------------------
