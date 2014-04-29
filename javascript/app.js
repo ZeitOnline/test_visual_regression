@@ -32,16 +32,14 @@ require.config({
 require([
 	'modules/errors',
 	'modules/fontloader_body',
-	'modules/breadcrumbs',
 	'modules/main-nav',
 	'modules/tabs',
 	'modules/comments',
 	'modules/images',
 	'modules/photocluster',
-], function( errors, fontloader_body, breadcrumbs, main_nav, tabs, comments, images, photocluster) {
+], function( errors, fontloader_body, main_nav, tabs, comments, images, photocluster) {
 	errors.init();
 	fontloader_body.init();
-	breadcrumbs.init();
 	main_nav.init();
 	tabs.init();
 	comments.init();

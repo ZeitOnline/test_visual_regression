@@ -1,0 +1,68 @@
+.cp__teaser__gallery
+    display: none
+    height: 386px
+    position: relative
+    overflow: hidden
+    width: 100%
+    & > .scaled-image img
+        position: absolute
+        top: -25%
+        left: 0%
+        width: 100%
+    a
+        +link
+            color: $white
+            text-decoration: none
+        +on-interaction
+            color: $white
+        .cp__teaser__gallery__kicker
+            +on-interaction
+                text-decoration: none
+        .cp__teaser__gallery__title
+            +on-interaction
+                text-decoration: underline
+    +respond-min($break-1)
+        display: block
+    +respond-min($break-2)
+        height: auto
+        max-height: 386px
+        & > .scaled-image img
+            max-height: 386px
+            position: static
+            top: auto
+            left: auto
+    +respond-min($break-3)
+        max-height: 386px
+        & > .scaled-image img
+            max-height: 386px
+
+
+.cp__teaser__gallery__wrap
+    background: #000
+    background: transparentize($black, 0.35)
+    bottom: 0
+    padding: $tiny $petite $compact $petite
+    position: absolute
+    width: 100%
+    .icon-galerie-icon-white
+        display: inline-block
+        height: 30px
+        position: absolute
+        top: -40px
+        width: 40px
+
+.cp__teaser__gallery__kicker
+    @extend %copy
+    color: $white
+    font-size: $font-s
+    line-height: $petite
+    margin-bottom: $tiny
+
+.cp__teaser__gallery__title
+    +tablet(bold)
+    color: $white
+    font-size: $font-ml
+    line-height: $petite
+    margin: 0
+    text-shadow: rgba(255,255,255,.01) 0 -1px 1px
+    -webkit-font-smoothing: antialiased
