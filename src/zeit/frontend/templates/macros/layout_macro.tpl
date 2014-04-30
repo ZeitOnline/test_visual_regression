@@ -134,7 +134,8 @@
 <script type="text/javascript">
     // negative keyword 'diuqilon'
     // todo: if we get a billboard, we need more options (NB)
-    window.diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
+    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    window.diuqilon = (w < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
