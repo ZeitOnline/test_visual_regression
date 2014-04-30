@@ -8,6 +8,7 @@
     <height>90</height>
     <dcopt>ist</dcopt>
     <diuqilon>True</diuqilon>
+    <min_width>768</min_width>
   </place>
   <place number="2" active="true">
     <name>skyscraper</name>
@@ -16,6 +17,7 @@
     <height>600</height>
     <dcopt>ist</dcopt>
     <diuqilon>True</diuqilon>
+    <min_width>768</min_width>
   </place>
   <place number="3" active="true">
     <name>sponsorbar</name>
@@ -25,6 +27,7 @@
     <height>50</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="4" active="true">
     <name>tribune</name>
@@ -33,6 +36,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="5" active="true">
     <name>articleadwords</name>
@@ -41,6 +45,7 @@
     <height>400</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="6" active="true">
     <name>toolbox</name>
@@ -49,6 +54,7 @@
     <height>100</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="7" active="true">
     <name>info-mr-1</name>
@@ -57,6 +63,7 @@
     <width>300</width>
     <height>250</height>
     <dcopt>ist</dcopt>
+    <min_width>768</min_width>
   </place>
   <place number="8" active="true">
     <name>info-mr-2</name>
@@ -66,6 +73,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="9" active="true">
     <name>info-mr-3</name>
@@ -75,6 +83,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <!--place number="10" active="true">
     <name>info-mr-4</name>
@@ -101,6 +110,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="13" active="true">
     <name>mosaic-mr-1</name>
@@ -110,6 +120,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="14" active="true">
     <name>mosaic-mr-2</name>
@@ -119,6 +130,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="15" active="true">
     <name>mosaic-mr-3</name>
@@ -128,6 +140,7 @@
     <height>250</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="16" active="true">
     <name>textlink</name>
@@ -136,6 +149,7 @@
     <height>50</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
   <place number="17" active="false">
     <name>High Impact Ad</name>
@@ -144,5 +158,6 @@
     <height>615</height>
     <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
+    <min_width>768</min_width>
   </place>
 </banner>
