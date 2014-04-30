@@ -410,13 +410,13 @@
 {% macro adplace(banner, pagetype='article') -%}
     {%set kw = 'zeitonline,zeitmz' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}}">
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}} ad__min__{{banner.min_width}}">
         {% if banner.label -%}
         <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
         {%- endif %}
         <div class="ad__{{banner.name}}__inner">
             <script type="text/javascript">
-                if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
+                if( window.zmo_actual_load_width > {{ banner.min_width|default(0) }} ) {
                 document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
