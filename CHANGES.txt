@@ -1,7 +1,13 @@
 Change log for zeit.frontend
 ============================
 
-0.3.1 (unreleased)
+0.4.1 (unreleased)
+------------------
+
+- add monothematic block (MTB)
+
+
+0.4.0 (2014-04-30)
 ------------------
 
 - add comment counter for teaser

@@ -60,7 +60,7 @@ $fix-mqs-h: false !default;
       @content;
     }
   } @else {
-    @media screen and (min-width: $min-width) and (max-width: $max-with) {
+    @media screen and (min-width: $min-width) and (max-width: $max-width) {
       @content;
     }
   }
