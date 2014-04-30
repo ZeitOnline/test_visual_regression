@@ -1,4 +1,3 @@
-import mock
 from pytest import fixture, mark
 from zeit.frontend.comments import get_thread
 
@@ -40,14 +39,12 @@ def test_get_entire_thread(dummy_request):
 def test_dict_with_article_paths_and_comment_counts_should_be_created(testserver):
     from zeit.frontend.comments import comments_per_unique_id
     # if request on node-comment-statistics fails nevertheless a dict should be return value:
-    my_failing_request = mock.Mock()
-    my_failing_request.request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xmlxxx'
-    comment_count_dict = comments_per_unique_id(my_failing_request)
+    stats_path = 'data/node-comment-statistics.xmlxxx'
+    comment_count_dict = comments_per_unique_id(stats_path)
     assert type(comment_count_dict) is dict
     # for test article path on existing node-comment-statistics we expect the correct commentcount:
-    my_successful_request = mock.Mock()
-    my_successful_request.request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
-    comment_count_dict = comments_per_unique_id(my_successful_request)
+    stats_path = 'data/node-comment-statistics.xml'
+    comment_count_dict = comments_per_unique_id(stats_path)
     comments_in_article = comment_count_dict['/centerpage/article_image_asset']
     assert comments_in_article == '22'
 

@@ -586,3 +586,12 @@ def test_cp_informatives_should_have_no_blocks(application):
 
     assert informatives_first_block == cp_view.area_informatives1[0].uniqueId
     assert informatives_last_block == cp_view.area_informatives1[2].uniqueId
+
+
+def test_cp_teaser_should_have_comment_count(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__comment__count__wrap")
+    comments = wrap[0].text
+    assert len(wrap) != 0
+    assert comments == '22'
