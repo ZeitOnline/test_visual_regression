@@ -18,13 +18,16 @@
         <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
         {% if view.context.advertising_enabled %}
         <script>
+            var zmo_actual_load_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            var zmo_mobile_width = 768;
+            var zmo_is_mobile_view = window.zmo_actual_load_width < window.zmo_mobile_width;
             var viewport_meta = document.getElementById('viewport-meta');
             var viewports = {
                     standard: viewport_meta.getAttribute('content'),
                     landscape: 'width=1280'
                 };
             var viewport_set = function() {
-                if ( screen.width == 768 && Math.abs(window.orientation) == 90 ) {
+                if ( screen.width == window.zmo_mobile_width && Math.abs(window.orientation) == 90 ) {
                     viewport_meta.setAttribute( 'content', viewports.landscape );
                 } else {
                     viewport_meta.setAttribute( 'content', viewports.standard);
@@ -89,7 +92,7 @@
         <div class="page-wrap">
 
         {% if view.context.advertising_enabled %}
-            <div class="iqdplace">
+            <div class="iqd_mobile__adplace">
                 <div id="sas_13500"></div>
             </div>
             <div id="iqd_mainAd" >
@@ -145,7 +148,7 @@
             var sas_pageid = '54114/391248',
             sas_formatid = 13500,
             sas_target = '';
-            if( typeof window.sasmobile === 'function') {
+            if( typeof window.sasmobile === 'function' && zmo_is_mobile_view ) {
                 window.sasmobile(sas_pageid,sas_formatid,sas_target);
             }
         </script>

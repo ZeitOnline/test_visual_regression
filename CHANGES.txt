@@ -11,6 +11,8 @@ Change log for zeit.frontend
 - root background video webm and image file load to live0
 - integrate invert functionality for teasers
 - correct teaser layouts
+- in article ads alternate now tile 7 and 8 instead of 4
+- fix some ad issues
 
 
 0.3.0 (2014-04-29)
