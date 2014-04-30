@@ -18,6 +18,12 @@ log = logging.getLogger(__name__)
              renderer='templates/centerpage.html')
 class Centerpage(zeit.frontend.view.Base):
 
+    advertising_enabled = True
+
+    def __call__(self):
+        self.context.advertising_enabled = self.advertising_enabled
+        return {}
+
     @property
     def type(self):
         return type(self.context).__name__.lower()
