@@ -63,6 +63,7 @@
     <width>300</width>
     <height>250</height>
     <dcopt>ist</dcopt>
+    <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
   <place number="8" active="true">
