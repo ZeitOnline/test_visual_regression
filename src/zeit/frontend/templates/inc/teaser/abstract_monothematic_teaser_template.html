@@ -6,10 +6,12 @@ Available attributes:
     teaserBlock
     teaser
 #}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 {% import 'templates/macros/layout_macro.tpl' as layout_macro with context %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
 <div class="mtb__teaser">
+    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
     <a href="{{teaser.uniqueId | translate_url}}">
         <div class="scaled-image">
             {{ layout_macro.insert_responsive_image(image, 'mtb__teaser__image') }}

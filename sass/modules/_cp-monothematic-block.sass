@@ -55,13 +55,12 @@ $mtb_teaser_width: em(270px)
 .mtb__teaser
     // left/right margins are not needed, due to justified inline-block
     margin: 0 0 $big 0
+    position: relative
     vertical-align: top !important
     width: 100%
 
     +respond-min($break-1)
         width: $mtb_teaser_width
-    // +respond-min($break-3)
-    //     margin: 0 0 $big 0
 
 .mtb__teaser__title
     @extend .cp__buttons__title
