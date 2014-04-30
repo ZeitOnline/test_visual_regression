@@ -50,11 +50,11 @@ def test_banner_should_not_be_displayed_on_disabled_pages(testserver):
 
 def test_banner_view_should_be_displayed_on_odd_pages(testserver):
     browser = Browser('%s/artikel/03' % testserver.url)
-    assert '<div id="iqadtile4" class="ad__tile_4 ad__on__article ad__width_300">' \
+    assert '<div id="iqadtile7" class="ad__tile_7 ad__on__article ad__width_300">' \
         in browser.contents
     browser = Browser('%s/artikel/03/seite-3' % testserver.url)
-    assert '<div id="iqadtile4" class="ad__tile_4 ad__on__article ad__width_300">' \
+    assert '<div id="iqadtile8" class="ad__tile_8 ad__on__article ad__width_300">' \
         in browser.contents
     browser = Browser('%s/artikel/03/seite-7' % testserver.url)
-    assert '<div id="iqadtile4" class="ad__tile_4 ad__on__article ad__width_300">' \
+    assert '<div id="iqadtile7" class="ad__tile_7 ad__on__article ad__width_300">' \
         in browser.contents
