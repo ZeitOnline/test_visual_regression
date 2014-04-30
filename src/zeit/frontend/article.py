@@ -35,12 +35,23 @@ class Page(object):
 
 
 def _inject_banner_code(pages, advertising_enabled):
-    _tile = 4 # banner tile in articles
-    _p = 3 # paragraph to insert ad before
+    _tile = 4  # banner tile in articles
+    _p = 2  # paragraph to insert ad before
+
     if(advertising_enabled):
         for index, page in enumerate(pages, start=1):
-            if index % 2 != 0 and len(page.blocks) > (_p-1):
-                page.blocks.insert(_p, zeit.frontend.banner.banner_list[_tile-1])
+            paragraphs = filter(
+                lambda b: isinstance(
+                    b, zeit.frontend.block.Paragraph), page.blocks)
+            if index % 2 != 0 and len(paragraphs) > _p+1:
+                try:
+                    _para = paragraphs[_p]
+                    for i, block in enumerate(page.blocks):
+                        if _para == block:
+                            page.blocks.insert(i, zeit.frontend.banner.banner_list[_tile - 1])
+                            break
+                except IndexError:
+                    pass
     return pages
 
 
