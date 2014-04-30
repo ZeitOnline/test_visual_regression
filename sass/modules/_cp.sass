@@ -1,11 +1,13 @@
 //main cp styles
 $cp__buttons__image-height: em(165px)
+$cp__comment__count-height: em(50px)
+$cp__comment__count-width: em(60px)
 
 //hide breadcrumbs for cp
 .for-centerpage
 	.main-nav
 		margin-bottom: 0px
-	.main-nav__breadcrumbs
+	.breadcrumbs-wrap
 		display: none
 	.main
 		overflow: hidden
@@ -44,6 +46,7 @@ $cp__buttons__image-height: em(165px)
 
 //teaser type button
 .cp__buttons__wrap, %cp__buttons__wrap
+	position: relative
 	width: 100%
 	span
 		display: block
@@ -85,3 +88,17 @@ $cp__buttons__image-height: em(165px)
 	line-height: $junior
 	color: $black
 	font-size: $font-s
+
+//comments
+.cp__comment__count__wrap
+	font-size: $little
+	color: $white
+	position: absolute
+	text-align: center
+	padding-right: $micro
+	padding-top: $thin
+	height: $cp__comment__count-height
+	width: $cp__comment__count-width
+	right: $little
+	top: $small
+	z-index: 3

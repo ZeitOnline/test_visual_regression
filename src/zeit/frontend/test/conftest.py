@@ -74,6 +74,8 @@ settings = {
         'egg://zeit.frontend/data/config/article-related-layouts.xml'),
     'vivi_zeit.content.cp_block-layout-source': (
         'egg://zeit.frontend/data/config/cp-layouts.xml'),
+    'vivi_zeit.content.cp_bar-layout-source': (
+        'egg://zeit.frontend/config/cp-bar-layouts.xml'),
     'vivi_zeit.frontend_banner-source': (
         'egg://zeit.frontend/data/config/banner.xml')
 }

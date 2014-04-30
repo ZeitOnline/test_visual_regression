@@ -17,3 +17,22 @@
 
     {% endfor %}
 {%- endmacro %}
+
+{% macro comments_count(comments) -%}
+    {% if comments %}
+        <span class="cp__comment__count__wrap icon-comments-count">
+            {{comments}}
+        </span>
+    {% endif %}
+{%- endmacro %}
+
+{% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
+    {% if withlink -%}<a href="{{teaser.uniqueId | translate_url}}">{%- endif %}
+    <div class="{{ additional_css_class | default('teaser') }}__kicker">
+        {{teaser.teaserSupertitle}}
+    </div>
+    <div class="{{ additional_css_class | default('teaser') }}__title">
+        {{teaser.teaserTitle}}
+    </div>
+    {% if withlink -%}</a>{%- endif %}
+{%- endmacro %}

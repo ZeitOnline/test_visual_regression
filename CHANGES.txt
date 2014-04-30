@@ -1,15 +1,27 @@
 Change log for zeit.frontend
 ============================
 
-0.3.1 (unreleased)
+0.4.1 (unreleased)
 ------------------
 
+- add monothematic block (MTB)
+
+
+0.4.0 (2014-04-30)
+------------------
+
+- add comment counter for teaser
 - add new module gallery teaser
 - split informatives and lead area according to seperator cp extra
 - prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo
 - root background video webm and image file load to live0
 - integrate invert functionality for teasers
 - correct teaser layouts
+- in article ads alternate now tile 7 and 8 instead of 4
+- fix some ad issues
+- enhanced comment section inluding inline replies and reports,
+  new scrolling behavior, animated anchor links and more
+- template for sharebox (fb, twitter, g+)
 
 
 0.3.0 (2014-04-29)

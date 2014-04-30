@@ -79,6 +79,13 @@
   +respond-min($break-3)
     font-size: $font-l
 
+=input-placeholder
+  ::-webkit-input-placeholder
+    @content
+  ::-moz-placeholder
+    @content
+  ::input-placeholder
+    @content
 
 =justify-children-horizontally($elements-selector)
   text-align: justify
