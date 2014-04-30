@@ -62,6 +62,15 @@ $mtb_teaser_width: em(270px)
     +respond-min($break-1)
         width: $mtb_teaser_width
 
+    a
+        +link
+            text-decoration: none
+        +on-interaction
+            & > .mtb__teaser__kicker
+                text-decoration: none
+            & > .mtb__teaser__title
+                text-decoration: underline
+
 .mtb__teaser__title
     @extend .cp__buttons__title
     margin-bottom: 0
