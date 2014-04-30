@@ -1,0 +1,150 @@
+$card-background-color1: #a1f88c
+$card-background-color2: #c3e76d
+$card-background-color3: #00ae50
+$card-background-color4: #008e51
+$card-background-color5: #09663e
+
+$card-slider-darkness: 10%
+$card-slider-lucency: 0.10
+
+$card-button-width: 8em
+
+.card
+    +tablet
+    margin: 0 3% 3% 0
+    float: left
+    width: 30%
+    padding-bottom: 45%
+    position: relative
+    text-align: center
+    +perspective(1000px)
+
+    &.js-flipped .card__flip
+        +transform(rotateY(-180deg))
+    &.js-slid .card__slide
+        bottom: 0
+
+.card__flip,
+.card__front,
+.card__back,
+.card__slider,
+.card__slide
+    position: absolute
+    width: 100%
+    height: 100%
+
+.card__flip
+    z-index: 1
+    +transition(transform 0.5s)
+    +transform-style(preserve-3d)
+
+.card__front,
+.card__back
+    padding: 15% 5%
+    +backface-visibility(hidden)
+
+.card__front
+    z-index: 2
+
+.card__back
+    +transform(rotateY(180deg))
+
+.card__slider
+    overflow: hidden
+
+.card__slide
+    z-index: 3
+    background-color: rgba(0, 0, 0, 0.1)
+    bottom: 100%
+    +transition(bottom 0.3s)
+
+.card__title
+    margin: 0 0 1.5em
+    font-size: $font-s
+    font-weight: normal
+    letter-spacing: 2px
+    text-transform: uppercase
+
+.card__text
+    +tablet(bold)
+    font-size: $font-ml
+    letter-spacing: 1px
+
+.card__button
+    +tablet(bold)
+    +inline-block
+    font-size: $font-s
+    letter-spacing: 2px
+    text-transform: uppercase
+    padding: 1em
+    background-color: rgba(0, 0, 0, 0.3)
+    border-bottom: none
+    cursor: pointer
+    position: absolute
+    bottom: 10%
+    left: 50%
+    min-width: $card-button-width
+    margin-left: $card-button-width / -2
+    +link-colors(inherit, inherit, inherit, inherit, inherit)
+    +on-interaction
+        background-color: rgba(0, 0, 0, 0.4)
+
+.card__sharing-icons
+    width: 68%
+    margin: 34% auto 0
+    font-size: 0
+
+.card__sharing-icon
+    +inline-block
+    width: 44%
+    padding-bottom: 44%
+    margin: 0 2% 4%
+    border-bottom: none
+    +background-size(auto 60%)
+    background-position: center center
+    background-color: rgba(0, 0, 0, 0.4)
+    +on-interaction
+        background-color: rgba(0, 0, 0, 0.2)
+
+// colors
+.card--bg1,
+.card--bg2
+    color: $black
+
+.card--bg3,
+.card--bg4,
+.card--bg5
+    color: #fff
+    text-rendering: optimizeLegibility
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+.card--bg1
+    .card__flip
+        background-color: $card-background-color1
+    .card__slide
+        background-color: transparentize(darken($card-background-color1, $card-slider-darkness), $card-slider-lucency)
+
+.card--bg2
+    .card__flip
+        background-color: $card-background-color2
+    .card__slide
+        background-color: transparentize(darken($card-background-color2, $card-slider-darkness), $card-slider-lucency)
+
+.card--bg3
+    .card__flip
+        background-color: $card-background-color3
+    .card__slide
+        background-color: transparentize(darken($card-background-color3, $card-slider-darkness), $card-slider-lucency)
+
+.card--bg4
+    .card__flip
+        background-color: $card-background-color4
+    .card__slide
+        background-color: transparentize(darken($card-background-color4, $card-slider-darkness), $card-slider-lucency)
+
+.card--bg5
+    .card__flip
+        background-color: $card-background-color5
+    .card__slide
+        background-color: transparentize(darken($card-background-color5, $card-slider-darkness), $card-slider-lucency)
