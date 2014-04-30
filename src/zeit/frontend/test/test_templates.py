@@ -310,7 +310,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             output += line.strip()
         markup = '<figure class="%s"><div class="scaled-image">' \
                  '<!--\[if gt IE 9\]>--><noscript data-ratio="">' \
-                 '<!--<!\[endif\]--><img  alt="%s" title="%s" ' \
+                 '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
                  'class=" figure__media" ' \
                  'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
                  'data-ratio=""><!--\[if gt IE 9\]>--></noscript>' \
@@ -319,9 +319,6 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                  'class="figure__copyright">test</span>' \
                  '</figcaption></figure>' \
                  % (el['css'], el['alt'], el['title'])
-
-        print markup
-        print output
 
         assert match(markup, output)
 
@@ -342,7 +339,7 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
     start = '<div class="scaled-image is-pixelperfect">' \
             '<!--[if gt IE 9]>--><noscript data-ratio="1"><!--<![endif]-->' \
-            '<img  alt="test" title="test" class="article__main-image--longform figure__media" src="'
+            '<img alt="test" title="test" class="article__main-image--longform figure__media" src="'
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)

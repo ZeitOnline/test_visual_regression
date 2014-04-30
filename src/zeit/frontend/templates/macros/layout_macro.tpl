@@ -477,7 +477,7 @@
     <!--[if gt IE 9]>-->
         <noscript data-ratio="{{image.ratio}}">
     <!--<![endif]-->
-            <img {% if alt %} alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+            <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
     <!--[if gt IE 9]>-->
         </noscript>
     <!--<![endif]-->
