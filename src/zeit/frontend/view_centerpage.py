@@ -23,6 +23,21 @@ class Centerpage(zeit.frontend.view.Base):
         self._unique_id_comments = comments.comments_per_unique_id(stats_path)
         return super(Centerpage, self).__call__()
 
+    def __init__(self, context, request):
+        super(Centerpage, self).__init__(context, request)
+        try:
+            teaserbar = self.context['teaser-mosaic'].values()[0]
+            if teaserbar.layout.id == 'zmo-mtb':
+                self._monothematic_block = teaserbar
+        except IndexError:
+            log.error('no monothematic block present')
+            self._monothematic_block = None
+
+    @property
+    def monothematic_block(self):
+        if self._monothematic_block is not None:
+            return self._monothematic_block
+
     @property
     def type(self):
         return type(self.context).__name__.lower()

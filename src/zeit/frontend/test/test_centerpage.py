@@ -480,7 +480,10 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
     request.registry.settings.community_host = app_settings['community_host']
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
 
-    buzz = view_centerpage.Centerpage('', request).area_buzz
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, request)
+
+    buzz = view.area_buzz
     assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
     assert len(buzz['facebook']) == 3
     assert len(buzz['twitter']) == 3
@@ -597,3 +600,15 @@ def test_cp_teaser_should_have_comment_count(selenium_driver, testserver):
     comments = wrap[0].text
     assert len(wrap) != 0
     assert comments == '22'
+
+
+def test_centerpage_should_have_monothematic_block(application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.monothematic_block) == 6
+
+
+def test_centerpage_should_have_no_monothematic_block(application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/lebensart')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.monothematic_block is None

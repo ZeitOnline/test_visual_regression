@@ -512,6 +512,8 @@ def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
     view = view_centerpage.Centerpage('', request)
     view() #trigger __call__ method
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, request)
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
