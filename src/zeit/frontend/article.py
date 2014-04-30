@@ -33,14 +33,34 @@ class Page(object):
     def __iter__(self):
         return iter(self.blocks)
 
-
+##
+#
+# Injecting banner code in page.blocks
+# counts and injects only after paragraphs (2nd actually)
+# alternating tile 7 and 8 are injected
+#
+##
 def _inject_banner_code(pages, advertising_enabled):
-    _tile = 4 # banner tile in articles
-    _p = 3 # paragraph to insert ad before
+    _tile = [7, 8]  # banner tiles in articles
+    _p = 2  # paragraph to insert ad after
+
     if(advertising_enabled):
         for index, page in enumerate(pages, start=1):
-            if index % 2 != 0 and len(page.blocks) > (_p-1):
-                page.blocks.insert(_p, zeit.frontend.banner.banner_list[_tile-1])
+            paragraphs = filter(
+                lambda b: isinstance(
+                    b, zeit.frontend.block.Paragraph), page.blocks)
+            if index % 2 != 0 and len(paragraphs) > _p + 1:
+                try:
+                    _para = paragraphs[_p]
+                    for i, block in enumerate(page.blocks):
+                        if _para == block:
+                            tilenumber = _tile[0] - 1
+                            page.blocks.insert(
+                                i, zeit.frontend.banner.banner_list[tilenumber])
+                            _tile.reverse()
+                            break
+                except IndexError:
+                    pass
     return pages
 
 

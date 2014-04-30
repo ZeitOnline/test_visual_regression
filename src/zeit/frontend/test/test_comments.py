@@ -49,19 +49,21 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(testserver
     assert comments_in_article == '22'
 
 
-@mark.selenium
-def test_reply_to_comment(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
-    # make comments visible
-    trigger = driver.find_element_by_id('js-comments-trigger')
-    trigger.click()
-    # reply to comment
-    button = driver.find_element_by_class_name('js-reply-to-comment')
-    cid = button.get_attribute('data-cid')
-    pid = driver.find_element_by_name('pid')
-    button.click()
-    active = driver.switch_to_active_element()
-    textarea = driver.find_element_by_name('comment')
-    assert pid.get_attribute('value') == cid
-    assert textarea == active
+# @mark.selenium
+# def test_reply_to_comment(selenium_driver, testserver):
+#     driver = selenium_driver
+#     driver.get('%s/artikel/01' % testserver.url)
+#     # make comments visible
+#     trigger = driver.find_element_by_class_name('js-comments-trigger')
+#     trigger.click()
+#     # reply to comment
+#     button = driver.find_element_by_class_name('js-reply-to-comment')
+#     button.click()
+#     driver.implicitly_wait(1)
+#     cid = button.get_attribute('data-cid')
+#     # pid = driver.find_element_by_css_selector("form.js-reply-form input[@name='pid']")
+#     pid = driver.find_element_by_xpath("//form[@class='js-reply-form']/input[@name='pid']")
+#     active = driver.switch_to_active_element()
+#     textarea = driver.find_element_by_xpath("//form[@class='js-reply-form']/textarea")
+#     assert pid.get_attribute('value') == cid
+#     assert textarea == active

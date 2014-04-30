@@ -372,7 +372,7 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
-    page.request.path_info = u'article/03/seite-5'
+    page.request.path_info = u'article/03/seite-9'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -392,7 +392,7 @@ def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-3'
     page()
-    assert len(page.pages) == 3
+    assert len(page.pages) == 7
 
 
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
@@ -409,7 +409,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 2
-    assert view.pagination['total'] == 3
+    assert view.pagination['total'] == 7
     assert view.pagination['next_page_title'] == (u'Sogar die eckige Flasche kommt zur\xfcck')
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
@@ -418,7 +418,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 1
-    assert view.pagination['total'] == 3
+    assert view.pagination['total'] == 7
     assert view.pagination['next_page_title'] == (u'Sogar die runde Flasche kommt zur\xfcck')
 
 
@@ -463,7 +463,7 @@ def test_pagination_next_page_url_is_working(testserver):
 
 
 def test_pagination_next_page_url_on_last_page_is_none(testserver):
-    browser = Browser('%s/artikel/03/seite-3' % testserver.url)
+    browser = Browser('%s/artikel/03/seite-7' % testserver.url)
     content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
 
     assert content in browser.contents
