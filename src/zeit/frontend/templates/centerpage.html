@@ -14,8 +14,9 @@ Available attributes:
 
 {%  block content %}
     {%- include "templates/inc/cp_area_lead_full.html" ignore missing -%}
-    {%- include "templates/inc/cp_area_lead.html" ignore missing -%}
+    {%- include "templates/inc/cp_area_lead-1.html" ignore missing -%}
     {% if view.is_hp %}
         {%- include "templates/inc/cp_buzz.html" ignore missing -%}
     {% endif %}
+    {%- include "templates/inc/cp_area_lead-2.html" ignore missing -%}
 {% endblock content %}

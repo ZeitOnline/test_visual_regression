@@ -86,14 +86,17 @@
     {% endif %}
     <meta name="date" content="{{ view.date_first_released_meta }}"/>
 {%- endmacro %}
-{% macro breadcrumbs(crumbs, is_full_width) -%}
-    <div class="breadcrumbs-wrap {% if is_full_width %}is-full-width{% endif %}">
+{% macro breadcrumbs(crumbs) -%}
+    <div class="breadcrumbs-wrap">
         <div class="breadcrumbs" id="js-breadcrumbs">
-            <div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">Wo bin ich?</div>
-            <div class="breadcrumbs__list">
-                <div class="breadcrumbs__list__item" itemprop="breadcrumb">
+            <div class="breadcrumbs__list-wrap">
+                <div class="breadcrumbs__list">
                     {% for crumb in crumbs %}
-                        <a href="{{crumb[1]}}">{{crumb[0]}}</a>
+                        <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href="{{crumb[1]}}" itemprop="url">
+                                <span itemprop="title">{{crumb[0]}}</span>
+                            </a>
+                        </div>
                         {% if not loop.last %}
                           &rsaquo;
                         {% endif %}
@@ -194,7 +197,7 @@
 </script>
 {%- endmacro %}
 
-{% macro main_nav(breadcrumb, is_full_width) -%}
+{% macro main_nav(is_full_width) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
@@ -269,11 +272,6 @@
                         {%- else -%}
                             {{ head_user_is_logged_in_false() }}
                         {%- endif -%}
-                    </div>
-                    <div class="main-nav__section main-nav__breadcrumbs">
-                        <div class="main-nav__section__content is-always-open">
-                            {{ breadcrumbs(breadcrumb, is_full_width) }}
-                        </div>
                     </div>
                 </div>
             </div>
