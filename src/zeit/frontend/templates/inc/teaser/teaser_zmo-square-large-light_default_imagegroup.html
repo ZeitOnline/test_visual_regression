@@ -6,10 +6,13 @@ Available attributes:
     teaser
 
 #}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 {% extends "templates/inc/teaser/teaser_zmo-square-large-light_default_default.html" -%}
 
 {% block asset %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
+
+{{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
 <a href="{{teaser.uniqueId | translate_url}}">
     <div class="scaled-image is-pixelperfect cp__lead-leader__image--light" data-wrap=".cp__lead-leader__wrap">
         <!--[if gte IE 9]> -->

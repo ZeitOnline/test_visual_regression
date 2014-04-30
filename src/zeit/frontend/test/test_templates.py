@@ -95,31 +95,14 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
-    markup = '<div class="breadcrumbs-wrap "><div class="breadcrumbs" ' \
-        'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
-        'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
-        'Wo bin ich?</div><div class="breadcrumbs__list">' \
-        '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
-        '<a href="link">text</a></div></div></div></div>'
-    lines = tpl.module.breadcrumbs(obj, False).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
-def test_macro_breadcrumbs_should_produce_markup_for_longform(jinja2_env):
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    obj = [('text', 'link')]
-
-    markup = '<div class="breadcrumbs-wrap is-full-width">' \
-        '<div class="breadcrumbs" ' \
-        'id="js-breadcrumbs"><div class="breadcrumbs__trigger" ' \
-        'id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">' \
-        'Wo bin ich?</div><div class="breadcrumbs__list">' \
-        '<div class="breadcrumbs__list__item" itemprop="breadcrumb">' \
-        '<a href="link">text</a></div></div></div></div>'
-    lines = tpl.module.breadcrumbs(obj, True).splitlines()
+    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs"' \
+        ' id="js-breadcrumbs"><div class="breadcrumbs__list-wrap">' \
+        '<div class="breadcrumbs__list">' \
+        '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
+        ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
+        '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
+        '</a></div></div></div></div></div>'
+    lines = tpl.module.breadcrumbs(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -478,15 +461,16 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert default video
-    obj = {'video_still': 'test.jpg', 'source': 'test.mp4', 'id': 1}
+    obj = {'source': 'test.mp4', 'id': 1}
     wrapper = '<div data-backgroundvideo="1'
-    video = '<video preload="auto" autoplay="true" ' \
+    video = '<video preload="auto" autoplay="true" '\
             'loop="loop" muted="muted" volume="0"'
     source = '<source src="test.mp4'
-    source_webm = 'http://opendata.zeit.de/zmo-videos/1.webm'
+    source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
     img = '<img '
-    fallback = '<img class="article__main-image--longform' \
-        ' video--fallback" src="test.jpg'
+    fallback = '<img class="article__main-image--longform'\
+        ' video--fallback" src="http://www.zeit.de/live0-backend/'\
+        'multimedia/videos/1.jpg'
     lines = tpl.module.headervideo(obj).splitlines()
     output = ""
     for line in lines:
@@ -745,3 +729,83 @@ def test_date_meta_should_produce_metatags(jinja2_env):
 def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''
+
+
+def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    image = Mock()
+    image.alt = 'ALT'
+    image.title = 'TITLE'
+    image.src = 'SRC'
+
+    lines = tpl.module.insert_responsive_image(image).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<!--[if gt IE 9]>-->' in output
+    assert '<img alt="ALT"' in output
+    assert 'title="TITLE"' in output
+    assert '<!--<![endif]-->' in output
+
+def test_macro_insert_responsive_image_should_produce_alternative_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    image = Mock()
+    image.alt = 'ALT'
+    image.title = 'TITLE'
+    image.src = 'SRC'
+
+    lines = tpl.module.insert_responsive_image(image, 'CLASS').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'class="CLASS figure__media' in output
+
+
+def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = "SUPATITLE"
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<a href="ID">' in output
+    assert '<div class="teaser__kicker">SUPATITLE</div>' in output
+    assert '<div class="teaser__title">TITLE</div>' in output
+
+
+def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = "SUPATITLE"
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser, 'CLASS', withlink=False).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<a href="ID">' not in output
+    assert '<div class="CLASS__kicker">SUPATITLE</div>' in output
+    assert '<div class="CLASS__title">TITLE</div>' in output
+
+
+def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+    markup = '<span class="cp__comment__count__wrap '\
+        'icon-comments-count">3</span>'
+    lines = tpl.module.comments_count(3).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
