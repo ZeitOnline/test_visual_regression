@@ -6,12 +6,15 @@ Available attributes:
     teaser
 
 #}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 {% extends "templates/inc/teaser/teaser_zmo-landscape-small_default_default.html" -%}
 
 {% block asset %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
+
+{{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
 <a href="{{teaser.uniqueId | translate_url}}">
-    <div class="scaled-image is-pixelperfect cp__buttons__image" data-wrap=".cp__buttons__image">
+    <div class="scaled-image is-pixelperfect cp__buttons__image" data-wrap=".cp__buttons__image"> 
         <!--[if gte IE 9]> -->
             <noscript data-ratio="{{image.ratio}}">
         <!-- <![endif]-->
@@ -21,4 +24,5 @@ Available attributes:
         <!-- <![endif]-->
     </div>
 </a>
+
 {% endblock %}
