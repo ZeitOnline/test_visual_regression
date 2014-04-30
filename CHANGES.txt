@@ -10,6 +10,9 @@ Change log for zeit.frontend
 - root background video webm and image file load to live0
 - integrate invert functionality for teasers
 - correct teaser layouts
+- enhanced comment section inluding inline replies and reports,
+  new scrolling behavior, animated anchor links and more
+- template for sharebox (fb, twitter, g+)
 
 
 0.3.0 (2014-04-29)
