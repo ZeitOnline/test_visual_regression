@@ -57,7 +57,7 @@
                     {% if loop.index == number %}
                         <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
                     {% else %}
-                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title">{{  page.teaser  }}</a>
+                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{  page.teaser  }}</a>
                     {% endif %}
                 </span>
             </div>
@@ -272,18 +272,18 @@
     </div>
 {%- endmacro %}
 
-{% macro comment(comment, flat) -%}
-    <article class="comment{% if comment.indented and not flat %} is-indented{% endif %}" id="{{comment.cid}}">
+{% macro comment(comment, featured) -%}
+    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{comment.cid}}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
-                <img src="{{comment.img_url}}" class="comment__head__img" />
-            {%- endif %}
+            <img src="{{comment.img_url}}" class="comment__head__img" alt="" />
+            {% endif -%}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
-                <a href="#{{comment.cid}}" class="comment__head__meta__date">{{comment.timestamp | format_date_ago()}}</a>
+                <a href="#{{comment.cid}}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{comment.timestamp | format_date_ago()}}</a>
                 {% if comment.role -%}
-                  <div class="comment__head__meta__label">{{comment.role}}</div>
-                {%- endif %}
+                <div class="comment__head__meta__label">{{comment.role}}</div>
+                {% endif -%}
             </div>
         </div>
         <div class="comment__body">
@@ -291,33 +291,74 @@
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a href="#js-comments-form" class="comment__tools__reply icon-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" data-name="{{comment.name}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
-            {%- endif %}
-            {% if comment.my_uid > 0 %}<a class="comment__tools__flag icon-flag js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>{%- endif %}
+            <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
+            {% endif -%}
+            <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
         </aside>
     </article>
 {%- endmacro %}
 
 {% macro comments(comments) -%}
     {% if comments is not none -%}
-    <div class="tc">
-        <div class="article__comments-trigger" id="js-comments-trigger">
-            <div class="article__comments-trigger__wrap">
-                <span class="article__comments-trigger__count icon-close-comments">{{comments['comment_count']}}</span>
-                Kommentare
+    <div class="article__socialbox tc" id="js-social-services">
+        <div class="article__sharing">
+            <div class="article__sharing__item article__sharing__sum">
+                <span class="article__sharing__total">47</span>
+                <span class="article__sharing__unit">Tsd.</span>
             </div>
+            <div class="article__sharing__services blind">
+                <a class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
+                    <span class="article__sharing__services__text">8,2 Tsd</span>
+                </a>
+                <a class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
+                    <span class="article__sharing__services__text">6,7 Tsd</span>
+                </a>
+                <a class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-google"></span>
+                    <span class="article__sharing__services__text">877</span>
+                </a>
+            </div>
+            <div class="article__sharing__item">
+                <a class="article__sharing__link js-toggle-sharing">
+                    <span class="article__sharing__icon icon-sharebox-share"></span>
+                    Teilen
+                </a>
+            </div>
+        </div>
+
+        <div class="article__comments-trigger">
+            <a class="article__comments-trigger__link js-comments-trigger">
+                <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
+                <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+            </a>
         </div>
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comments__head__form" id="js-comments-form">
-                <textarea name="comment" placeholder="Ich denke …"></textarea>
-                <input type="submit" class="button" value="Kommentieren" />
-                <input type="hidden" name="nid" value="{{comments['nid']}}">
-                <input type="hidden" name="pid" value="">
-                <input type="hidden" name="uid" value="{{comments['my_uid']}}">
-                <div class="comments__recipient"></div>
+            {% if request.app_info.authenticated -%}
+            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" id="js-comments-form">
+                <p>
+                    <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
+                    <input type="hidden" name="nid" value="{{comments['nid']}}">
+                    <input type="hidden" name="pid" value="">
+                    <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
+                </p>
+                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{request.app_info.community_host}}user/{{request.app_info.user.uid}}">{{request.app_info.user.name|e}}</a></div>
+                <div class="comment__form__actions">
+                    <input type="submit" class="button" value="Kommentieren" disabled />
+                </div>
             </form>
+            {% else -%}
+            <form class="comment__form comment__form--login" id="js-comments-form">
+                <div class="comment__form__wrap">
+                    <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
+                </div>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.login}}?destination={{request.url|e}}" class="button">Anmelden</a>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.register}}?destination={{request.url|e}}" class="button">Registrieren</a>
+            </form>
+            {% endif -%}
         </div>
         <div class="tabs has-2">
             <div class="tabs__head" id="js-comments-tabs-head">
@@ -326,16 +367,14 @@
             </div>
             <div class="comments__body" id="js-comments-body">
                 <div class="tabs__content is-active">
-                    <a name="tab1"></a>
-                    <div class="comments__list">
+                    <div class="comments__list" id="tab1">
                         {% for commentdict in comments['comments'] %}
                             {{ comment(commentdict, false) }}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="tabs__content">
-                    <a name="tab2"></a>
-                    <div class="comments__list">
+                    <div class="comments__list" id="tab2">
                         {% for commentdict in comments['comments'] %}
                             {% if commentdict['recommended'] -%}
                                 {{ comment(commentdict, true) }}
@@ -343,41 +382,46 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="comments__body__newer">
-                    <div class="button icon-comments-newer-inactive" id="js-comments-body-newer">Neuere</div>
-                </div>
-                <div class="comments__body__older">
-                    <div class="button icon-comments-older-inactive" id="js-comments-body-older">Ältere</div>
+                <div class="comments__button__newer" id="js-comments-button-up">
+                    <div class="button icon-comments-newer js-scroll-comments" data-direction="up">Neuere</div>
                 </div>
             </div>
         </div>
+        <div class="comments__button__older" id="js-comments-button-down">
+            <div class="button icon-comments-older js-scroll-comments" data-direction="down">Ältere</div>
+        </div>
+        <script type="text/template" id="js-report-success-template">
+            <div class="comment__form__success">
+                <span class="comment__icon--40 icon-check-kommentar-gesendet"></span>
+                <div class="comment__form__success__text">Danke! Ihre Meldung wird an die Redaktion weitergeleitet.</div>
+            </div>
+        </script>
         <script type="text/template" id="js-report-comment-template">
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__report__form comment__body" style="display: none">
-                <p><strong>Kommentar als bedenklich melden</strong></p>
-                <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?"></textarea></p>
-                <p>
+            {% if request.app_info.authenticated -%}
+            <form action="{{comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
+                <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
+                <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
-                    Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+                    Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
-                <p class="comments__report__actions">
-                    <input type="hidden" name="cid" value="<%- commentId %>">
-                    <a href="#" class="js-cancel-report">Abbrechen</a>
-                    <button disabled="disabled" class="button">Abschicken</button>
+                <p class="comment__form__actions">
+                    <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
+                    <input type="hidden" name="content_id" value="<%- commentId %>">
+                    <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
                 </p>
             </form>
+            {% else -%}
+            <form class="comment__form comment__form--login" style="display: none">
+                <div class="comment__form__wrap">
+                    <div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
+                </div>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.login}}?destination={{request.url|e}}" class="button">Anmelden</a>
+                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.register}}?destination={{request.url|e}}" class="button">Registrieren</a>
+            </form>
+            {% endif -%}
         </script>
     </section>
     {%- endif %}
-
-    <div class="tc">
-        <div class="article__comments-trigger">
-            <div class="article__comments-trigger__wrap">
-                Kommentar hinzufügen
-            </div>
-        </div>
-    </div>
-
-
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}

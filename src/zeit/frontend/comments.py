@@ -93,7 +93,7 @@ def _place_answers_under_parent(xml):
 def comment_as_dict(comment, request):
     """ expects an lxml element representing an agatho comment and returns a
     dict representation """
-    picture_url = u'http://community.zeit.de/files/pictures/keinbild.gif'
+    picture_url = None
     role_labels = []
     gender = 'undefined'
     if comment.xpath('author/@roles'):
@@ -130,7 +130,6 @@ def comment_as_dict(comment, request):
                            int(comment.xpath('date/minute/text()')[0])),
         text=content,
         role=', '.join(role_labels),
-        my_uid=request.cookies.get('drupal-userid', 0),
         cid=comment.xpath('./@id')[0])
 
 
@@ -147,9 +146,9 @@ def get_thread(unique_id, request):
                 comments=[comment_as_dict(comment, request) for comment in thread.xpath('//comment')],
                 comment_count=int(thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
-                # TODO: the post url should point to ourselves, not to the 'back-backend'
+                # TODO: these urls should point to ourselves, not to the 'back-backend'
                 comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.community_host, request.path, request.url),
-                my_uid=request.cookies.get('drupal-userid', 0))
+                comment_report_url="%s/services/json" % (request.registry.settings.community_host))
         except AssertionError:
             return None
     else:
