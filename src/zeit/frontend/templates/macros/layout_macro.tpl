@@ -20,7 +20,7 @@
 {% macro cc_tracking(channel) -%}
 <!-- cc tracking -->
     <script type="text/javascript">
-        document.write('<img alt="" height="1" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'" width="1" >');
+        document.write('<img alt="" class="visuallyhidden" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'">');
     </script>
 {%- endmacro %}
 
