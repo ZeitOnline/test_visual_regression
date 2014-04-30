@@ -15,10 +15,5 @@ Available attributes:
             {{ layout_macro.insert_responsive_image(image, 'mtb__teaser__image') }}
         </div>
     </a>
-    <div class="mtb__teaser__kicker">
-        {{teaser.teaserSupertitle}}
-    </div>
-    <div class="mtb__teaser__title">
-        {{teaser.teaserTitle}}
-    </div>
+    {{ layout_macro.teaser_supertitle_title(teaser, 'mtb__teaser') }}
 </div>
