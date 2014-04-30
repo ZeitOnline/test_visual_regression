@@ -159,6 +159,8 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
                          'bitblt-.*/' +
                          'katzencontent-zmo-square-large.jpg',
                          img.get_attribute("src"))
+        print img.get_attribute("alt")
+        print img.get_attribute("title")
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 

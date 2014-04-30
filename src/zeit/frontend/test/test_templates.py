@@ -236,55 +236,55 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-xl-header',
             'css': 'figure-header',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-medium-left',
             'css': 'figure-horizontal',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-medium-right',
             'css': 'figure-horizontal--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-medium-center', 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
             'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-right',
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-left', 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-large-center',
             'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-right', 'align': False,
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            ]
 
     class Image(object):
@@ -310,16 +310,16 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         for line in lines:
             output += line.strip()
         markup = '<figure class="%s"><div class="scaled-image">' \
-                 '<!--\[if gte IE 9\]> --><noscript data-ratio="">' \
-                 '<!-- <!\[endif\]--><img alt="%s" title="%s" ' \
-                 'class="figure__media" ' \
+                 '<!--\[if gt IE 9\]>--><noscript data-ratio="">' \
+                 '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
+                 'class=" figure__media" ' \
                  'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
-                 'data-ratio=""><!--\[if gte IE 9\]> --></noscript>' \
-                 '<!-- <!\[endif\]--></div><figcaption ' \
+                 'data-ratio=""><!--\[if gt IE 9\]>--></noscript>' \
+                 '<!--<!\[endif\]--></div><figcaption ' \
                  'class="figure__caption">test<span ' \
                  'class="figure__copyright">test</span>' \
                  '</figcaption></figure>' \
-                 % (el['css'], el['attr_alt'], el['attr_title'])
+                 % (el['css'], el['alt'], el['title'])
         assert match(markup, output)
 
 
@@ -329,6 +329,9 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     obj.caption = 'test'
     obj.copyright = 'test'
     obj.src = 'test.gif'
+    obj.ratio = 1
+    obj.alt = "test"
+    obj.title = "test"
 
     lines = tpl.module.headerimage(obj).splitlines()
     output = ""
@@ -336,10 +339,12 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
         output += line.strip()
 
     start = '<div class="scaled-image is-pixelperfect">' \
-            '<!--[if gte IE 9]> --><noscript><!-- <![endif]-->' \
-            '<img class="article__main-image--longform" src="'
+            '<!--[if gt IE 9]>--><noscript data-ratio="1"><!--<![endif]-->' \
+            '<img alt="test" title="test" class="article__main-image--longform figure__media" src="'
+    end = '--></noscript><!--<![endif]--></div>testtest'
 
-    end = '--></noscript><!-- <![endif]--></div>testtest'
+    print output
+
     assert output.startswith(start)
     assert output.endswith(end)
 
@@ -765,7 +770,7 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(jinja2_
 
 def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
@@ -783,7 +788,7 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
 
 def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
