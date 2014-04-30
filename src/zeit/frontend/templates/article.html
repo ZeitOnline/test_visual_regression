@@ -50,6 +50,12 @@
                     {% endif %}
                 {% endblock article_comments %}
 
+                {% block portraitbox %}
+                    {% if view.portraitbox %}
+                        <div class="haha">Huhu</div>
+                    {% endif %}
+                {% endblock portraitbox %}
+
                 {% block article_nextread %}
                     {{ blocks.focussed_nextread(view.focussed_nextread) }}
                 {% endblock article_nextread %}
