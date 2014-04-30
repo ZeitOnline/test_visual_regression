@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.3.1 (unreleased)
 ------------------
 
+- add comment counter for teaser
 - add new module gallery teaser
 - split informatives and lead area according to seperator cp extra
 - prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo

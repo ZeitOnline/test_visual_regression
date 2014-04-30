@@ -68,7 +68,10 @@ class Centerpage(zeit.frontend.view.Base):
         stats_path = self.request.registry.settings.node_comment_statistics_path
         unique_id_comments = comments.comments_per_unique_id(stats_path)
         try:
-            return unique_id_comments['/' + urlparse.urlparse(uniqueId).path[1:]]
+            count = \
+                unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
+            if int(count) >= 15:
+                return count
         except KeyError:
             return None
 

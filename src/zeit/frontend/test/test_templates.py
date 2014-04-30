@@ -797,3 +797,15 @@ def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_
     assert '<a href="ID">' not in output
     assert '<div class="CLASS__kicker">SUPATITLE</div>' in output
     assert '<div class="CLASS__title">TITLE</div>' in output
+
+
+def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+    markup = '<span class="cp__comment__count__wrap '\
+        'icon-comments-count">3</span>'
+    lines = tpl.module.comments_count(3).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
