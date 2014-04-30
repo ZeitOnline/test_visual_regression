@@ -8,6 +8,12 @@ Available attributes:
 #}
 {% extends "templates/layout.html" %}
 
+{% block page_title %}
+    {% if view.is_hp == False %}
+        <span class="cp__title">{{view.pagetitle_in_body}}</span>
+    {% endif %}
+{% endblock page_title %}
+
 {%  block page_wrap_inner %}
     <div class="page-wrap--inner for-centerpage" id="js-page-wrap-inner">
 {% endblock page_wrap_inner %}

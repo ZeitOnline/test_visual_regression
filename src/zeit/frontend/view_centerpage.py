@@ -46,6 +46,8 @@ class Centerpage(zeit.frontend.view.Base):
     def is_hp(self):
         if self.request.path == '/'+self.request.registry.settings.hp:
             return True
+        else:
+            return False
 
     @property
     def pagetitle(self):
@@ -53,6 +55,10 @@ class Centerpage(zeit.frontend.view.Base):
         # return self.context.html-meta-title
         return 'Lebensart - Mode, Essen und Trinken, ' + \
                'Partnerschaft | ZEIT ONLINE'
+
+    @property
+    def pagetitle_in_body(self):
+        return self.context.title
 
     @property
     def pagedescription(self):
