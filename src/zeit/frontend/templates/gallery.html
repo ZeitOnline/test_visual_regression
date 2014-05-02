@@ -17,19 +17,21 @@
             {% for image in view.images %}
                 {% set image_meta = image | get_image_metadata %}
                 {% set copyright = image_meta.copyrights[0] %}
-                <figure class="figure-full-width">
-                    <div class="scaled-image">
-                        <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
-                    </div>
-                    {% if image.caption %}
-                    <figcaption class="figure__caption">
-                        <span class="figure__caption__text">{{image.caption}}</span>
-                        {% if image_meta.copyrights %}
-                            <span class="figure__caption__copyright">{{copyright[0]}}</span>
+                {% if image.layout != "hidden" %}
+                    <figure class="figure-full-width">
+                        <div class="scaled-image">
+                            <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
+                        </div>
+                        {% if image.caption %}
+                        <figcaption class="figure__caption">
+                            <span class="figure__caption__text">{{image.caption}}</span>
+                            {% if image_meta.copyrights %}
+                                <span class="figure__caption__copyright">{{copyright[0]}}</span>
+                            {% endif %}
+                        </figcaption>
                         {% endif %}
-                    </figcaption>
-                    {% endif %}
-                </figure>
+                    </figure>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

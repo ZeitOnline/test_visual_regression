@@ -148,6 +148,7 @@
                     $( this ).css('padding-right', '30%');
                 }
             });
+            slider.redrawSlider();
         });
     };
 })(jQuery);
