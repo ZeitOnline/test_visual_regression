@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.4.1 (unreleased)
 ------------------
 
+- add large teaser (gallery and default format)
 - add monothematic block (MTB)
 
 
