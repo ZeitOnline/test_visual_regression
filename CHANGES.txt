@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.4.1 (unreleased)
+0.4.1 (2014-05-02)
 ------------------
 
 - add large teaser (gallery and default format)
