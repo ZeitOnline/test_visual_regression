@@ -5,6 +5,7 @@ Change log for zeit.frontend
 ------------------
 
 - add monothematic block (MTB)
+- make comments in reach more failsafe
 
 
 0.4.0 (2014-04-30)
