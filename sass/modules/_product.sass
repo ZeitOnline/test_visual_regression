@@ -1,24 +1,35 @@
 // styles for product galleries
 
 .product
-    margin: 0 auto 1.125em
-    max-width: 40em
+    margin: 0 auto $small
+    max-width: $medium-content-width
+
+.product__wrap
+    margin-top: $large
+    +respond-max($break-2)
+        text-align: center
 
 .product__wrap__entry
-    width: 15em
-    margin: 2em
+    width: $medium-content-width/2
+    padding: 0 $compact
+    margin: 0 0-$hair $large
     display: inline-block
     vertical-align: top
 
 .product__image
-    margin: 0 auto $fine
-    width: 14em
+    margin: 0 auto $medium
+    max-width: ($medium-content-width/2)-(2*$medium)
+
+.product__caption
+    margin: 0 auto
+    font-size: $font-s
+    text-align: left
 
 .product__caption__text
-    font-size: $font-ml
-    margin-bottom: $fine
+    color: $grey--mid
+    margin-bottom: $micro
+    line-height: $font-ml
 
 .product__caption__copyright
-    color: $grey
-    font-size: $font-xs
-    margin-left: $medium
+    color: $charcoal
+    margin: $dblhair 0 $dblhair $small
