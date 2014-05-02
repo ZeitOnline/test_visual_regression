@@ -24,6 +24,25 @@ def monkeyreq(monkeypatch):
     monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
+def test_homepage_should_have_buzz_module_centerpage_should_not(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/index' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.cp__buzz')) == 1
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.cp__buzz')) == 0
+
+
+def test_centerpage_should_have_pagetitle_in_body_but_hp_not(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/index' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.cp__title')) == 0
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    pagetitle_in_body = driver.find_elements_by_css_selector('.cp__title')
+    assert pagetitle_in_body[0].text.strip() == "ZMO"
+
+
 def test_centerpage_should_have_correct_page_title(
         selenium_driver, testserver):
     driver = selenium_driver

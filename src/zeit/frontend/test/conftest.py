@@ -41,6 +41,7 @@ settings = {
         'api',
     ),
     'proxy_url': '',
+    'hp': 'zeit-magazin/index',
     'node_comment_statistics_path': 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
 

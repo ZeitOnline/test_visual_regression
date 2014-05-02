@@ -115,6 +115,9 @@
                     {{ lama.main_nav(view.context.main_nav_full_width) }}
                 {% endblock navigation %}
 
+                {% block page_title %}
+                {% endblock page_title %}
+
                 <main role="main" class="main">
                     {%  block content %}{% endblock content %}
                 </main>
