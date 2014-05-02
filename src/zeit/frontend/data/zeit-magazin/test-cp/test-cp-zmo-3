@@ -139,7 +139,7 @@
         <container cp:type="cpextra" module="zmo-seperator-for-cps" cp:__name__="id-f040f1ef-90cb-457b-bc4e-c5d86007a812">
            <cp_extra id="zmo-seperator-for-cps"/>
          </container>
-        <container cp:type="teaser" module="zmo-landscape-large-photo" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600">
+        <container cp:type="teaser" module="zmo-landscape-large" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600">
           <block href="http://xml.zeit.de/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
             <supertitle py:pytype="str">Serie Gesellschaftskritik</supertitle>
             <teaser_supertitle py:pytype="str">Serie Gesellschaftskritik</teaser_supertitle>
@@ -273,8 +273,8 @@
       </region>
     </cluster>
     <cluster area="teaser-mosaic">
-      <region cp:type="teaser-bar" module="zmo-mtb" area="teaser-row-full" cp:__name__="id-0f67f534-56f7-4d74-95a4-1698e9a2c43d" supertitle="Wo die schönen Dinge Wohnen" teaserText="Wie es kam, dass in München eine goldene Generation von Industriedesignern heranwuchs.">
-        <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-789d5cb9-dcfc-4949-b54e-e113cfa1b486">
+      <region cp:type="teaser-bar" module="zmo-cluster" area="teaser-row-full" cp:__name__="id-0f67f534-56f7-4d74-95a4-1698e9a2c43d">
+        <container cp:type="teaser" module="zmo-mtb-upright" hide-dupes="True" visible="True" cp:__name__="id-789d5cb9-dcfc-4949-b54e-e113cfa1b486">
           <block href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
@@ -291,8 +291,6 @@
               <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
-        </container>
-        <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-0912b730-9a10-4a5a-b32c-9ba64e9f00a8">
           <block href="http://xml.zeit.de/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
             <supertitle py:pytype="str">Serie Gesellschaftskritik</supertitle>
             <teaser_supertitle py:pytype="str">Serie Gesellschaftskritik</teaser_supertitle>
@@ -309,8 +307,6 @@
               <display_name py:pytype="str">Christine Meffert</display_name>
             </author>
           </block>
-        </container>
-        <container cp:type="teaser" module="zmo-mtb-upright" hide-dupes="True" visible="True" cp:__name__="id-67dd4726-6c21-4b8b-ae09-db510fa9c5d4">
           <block href="http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen</supertitle>
             <teaser_supertitle py:pytype="str">Kochen</teaser_supertitle>
@@ -327,11 +323,9 @@
               <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
-        </container>
-        <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-5f82eff9-7764-42dd-8d5e-93352bfe2a21">
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
-            <teaser_supertitle py:pytype="str">Kochen mit Freunden</teaser_supertitle>
+            <teaser_supertitle py:pytype="str">Raffiniert kochen</teaser_supertitle>
             <title py:pytype="str">Die perfekte Illusion</title>
             <text py:pytype="str">Safran, Salzzitronen, Anis, Bulgur – ein paar ungewöhnliche Zutaten genügen, damit Ihre Freunde und Sie selbst glauben können, Sie seien ein guter Koch.</text>
             <description py:pytype="str">Safran, Salzzitronen, Anis, Bulgur – ein paar ungewöhnliche Zutaten genügen, damit Ihre Freunde und Sie selbst glauben können, Sie seien ein guter Koch.</description>
@@ -345,8 +339,6 @@
               <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
-        </container>
-        <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-c19af17e-bbbf-4952-9728-8914360f821e">
           <block href="http://xml.zeit.de/zeit-magazin/test-cp/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Liebeskolumne</supertitle>
             <teaser_supertitle py:pytype="str">Liebeskolumne</teaser_supertitle>
@@ -361,24 +353,6 @@
             </image>
             <author href="http://xml.zeit.de/autoren/S/Wolfgang_Schmidbauer/index.xml" publication-date="" expires="">
               <display_name py:pytype="str">Wolfgang Schmidbauer</display_name>
-            </author>
-          </block>
-        </container>
-        <container cp:type="teaser" module="zmo-mtb-upright" hide-dupes="True" visible="True" cp:__name__="id-3197288c-687e-497d-b65f-d150a9931832">
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-            <supertitle py:pytype="str">Kochen für Gäste</supertitle>
-            <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
-            <title py:pytype="str">Heimlich vegetarisch</title>
-            <text py:pytype="str">Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</text>
-            <description py:pytype="str">Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</description>
-            <byline py:pytype="str">von Elisabeth Raether</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00">
-              <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
-              <copyright py:pytype="str">© Silvio Knezevic</copyright>
-            </image>
-            <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-              <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
         </container>
