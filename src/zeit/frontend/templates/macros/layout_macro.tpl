@@ -20,7 +20,7 @@
 {% macro cc_tracking(channel) -%}
 <!-- cc tracking -->
     <script type="text/javascript">
-        document.write('<img alt="" height="1" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'" width="1" >');
+        document.write('<img alt="" class="visuallyhidden" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'">');
     </script>
 {%- endmacro %}
 
@@ -462,22 +462,23 @@
 {%- endmacro %}
 
 {% macro insert_responsive_image(image, image_class) %}
+    
+    {% set alt = ''%}
+    {% set title = ''%}
+
+    {% if image.alt %}
+        {% set alt = image.alt %}
+        {% set title = image.title %}
+    {% elif image.attr_alt %}
+        {% set alt = image.attr_alt %}
+        {% set title = image.attr_title %}
+    {% endif %}
+    
     <!--[if gt IE 9]>-->
         <noscript data-ratio="{{image.ratio}}">
     <!--<![endif]-->
-            <img alt="{{image.alt}}" title="{{image.title}}" class="{{image_class}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+            <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
     <!--[if gt IE 9]>-->
         </noscript>
     <!--<![endif]-->
 {% endmacro %}
-
-{% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
-    {% if withlink -%}<a href="{{teaser.uniqueId | translate_url}}">{%- endif %}
-    <div class="{{ additional_css_class | default('teaser') }}__kicker">
-        {{teaser.teaserSupertitle}}
-    </div>
-    <div class="{{ additional_css_class | default('teaser') }}__title">
-        {{teaser.teaserTitle}}
-    </div>
-    {% if withlink -%}</a>{%- endif %}
-{%- endmacro %}

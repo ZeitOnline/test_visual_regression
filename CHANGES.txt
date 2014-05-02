@@ -1,7 +1,13 @@
 Change log for zeit.frontend
 ============================
 
-0.3.1 (unreleased)
+0.4.1 (unreleased)
+------------------
+
+- add monothematic block (MTB)
+
+
+0.4.0 (2014-04-30)
 ------------------
 
 - add comment counter for teaser
@@ -13,6 +19,9 @@ Change log for zeit.frontend
 - correct teaser layouts
 - in article ads alternate now tile 7 and 8 instead of 4
 - fix some ad issues
+- enhanced comment section inluding inline replies and reports,
+  new scrolling behavior, animated anchor links and more
+- template for sharebox (fb, twitter, g+)
 
 
 0.3.0 (2014-04-29)

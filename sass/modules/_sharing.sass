@@ -1,0 +1,66 @@
+.article__sharing
+    margin-bottom: $fine
+    display: none
+    +respond-min($comments__break-outside)
+        display: block
+    a
+        border-bottom: none
+
+.article__sharing__item
+    color: $black
+    background-color: $grey--light
+    margin-bottom: $hair
+    padding: $micro
+
+.article__sharing__sum
+    padding: $fine $micro
+
+.article__sharing__total
+    font-size: $font-ml
+
+.article__sharing__unit
+    font-size: $font-xs
+
+.article__sharing__services
+    text-align: left
+    overflow: hidden
+    max-height: em(120px)
+    +transition(max-height .2s linear)
+    &.blind
+        max-height: 0
+    .article__sharing__item
+        display: block
+        padding: $tiny $micro $tiny $little
+        cursor: pointer
+        &:hover
+            background-color: $grey--bright
+            .article__sharing__services__text
+                color: $black
+
+.article__sharing__services__text
+    font-size: $font-xs
+    color: $grey
+
+.article__sharing__link
+    +tablet(bold)
+    font-size: em(11px)
+    color: $black
+    cursor: pointer
+    &:hover
+        opacity: 0.5
+
+.article__sharing__icon
+    +inline-block
+    margin-right: $micro
+    width: 14px
+    height: 10px
+    &.icon-sharebox-close
+        +background-size(contain)
+        background-position: center center
+
+.article__sharing__services__icon
+    +inline-block
+    margin-right: $tiny
+    width: 14px
+    height: 14px
+    background-position: center center

@@ -160,7 +160,7 @@ def test_column_should_have_header_image(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert '<div class="article__column__headerimage">' in browser.contents
     assert '<div class="scaled-image">' in browser.contents
-    assert '<img class="figure__media"' in browser.contents
+    assert '<img class=" figure__media"' in browser.contents
 
 
 def test_health_check_should_response_and_have_status_200(testserver):
@@ -510,7 +510,9 @@ def test_article01_should_not_have_a_focussed_nextread(application):
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
     request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
-    view = view_centerpage.Centerpage('', request)
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = view_centerpage.Centerpage(cp, request)
+    view() #trigger __call__ method
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
