@@ -114,14 +114,17 @@
 Angelegenheit. Das wurde vor zwei Jahren deutlich, als eine
 US-Supermarktkette per Datenanalyse die Schwangerschaft einer Minderjährigen aus
 Minnesota erkannte,
+
                 <a class="" href="http://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/" target="_blank">
                     noch bevor es ihr eigener Vater tat</a>.</p>
+            <portraitbox expires="" href="http://xml.zeit.de/portraitboxen/patrick" is_empty="False" layout="short" publication-date=""/>
             <p>Die Datenanalysten der Target-Märkte haben damals den
 Schwangerschafts-Vorhersage-Wert erfunden. Das war möglich, weil jeder
 Target-Kunde eine Identifikationsnummer verpasst bekommt, die mit seinen
 Kreditkartendaten, seinem Namen oder seiner E-Mail-Adresse verknüpft ist. So
 kann Target nachverfolgen, was seine Kunden kaufen und das mit Daten aus anderen
 Quellen –
+
                 <a class="" href="http://www.zeit.de/2013/28/acxiom" target="_blank">
                     zum Beispiel von spezialisierten Datensammlern wie Acxiom</a>– ergänzen.</p>
             <p>Die Analyse ergab unter anderem, dass Schwangere ab einem
@@ -130,24 +133,24 @@ dem veränderten Konsumverhalten sogar schließen, wann ungefähr die Geburt
 ansteht – und diese Informationen für zielgerichtete Werbung nutzen. Werdende
 Eltern brauchen viele Dinge, die sie vorher nicht brauchten und sind
 dementsprechend wertvolle Kunden.</p>
-           <!--  <raw py:pytype="str">
-                <iframe frameborder="0" height="326" scrolling="no" src="https://new.livestream.com/accounts/246408/events/2949381/videos/49073251/player?autoPlay=false&amp;height=326&amp;mute=false&amp;width=580" width="580"/>
-                <p/>
-            </raw> -->
+            <!--  <raw py:pytype="str"><iframe frameborder="0" height="326" scrolling="no" src="https://new.livestream.com/accounts/246408/events/2949381/videos/49073251/player?autoPlay=false&amp;height=326&amp;mute=false&amp;width=580" width="580"/><p/></raw>-->
             <p>Lässt sich ein Algorithmus wie der von Target austricksen? Können Schwangere
 verhindern, dass werbetreibende Unternehmen auf sie aufmerksam werden? Janet
 Vertesi, Soziologin an der Princeton Universität, hat es einmal darauf ankommen lassen. </p>
-            <portraitbox expires="" href="http://xml.zeit.de/administratives/autoreninfos/patrick-beuth-info" is_empty="False" layout="short" publication-date=""/>
             <p>Auf der Konferenz
+
                 <a class="" href="http://theorizingtheweb.tumblr.com/" target="_blank">
                     Theorizing the Web</a>in New York beschrieb sie diesen Versuch. &quot;Meine Geschichte handelt
 von Big Data, aber aus der Perspektive von jemandem, der verhindern möchte,
 verfolgt und in Datenbanken gesteckt zu werden&quot;,
+
                 <a class="" href="http://mashable.com/2014/04/26/big-data-pregnancy/" target="_blank">
                     sagte sie laut
+
                     <em>
                         Mashable</em>
                 </a>.
+
                 <br/></p>
             <p>Zunächst musste sie das
 potenziell größte Informationsleck schließen: Facebook. Sie rief alle ihre
@@ -169,8 +172,10 @@ neues Amazon-Konto an und verwendete dazu eine E-Mail-Adresse auf ihrem eigenen
 Server. Hätte sie einen E-Mail-Provider wie Gmail benutzt, hätte sie damit rechnen müssen, dass ihre Mails automatisiert nach werberelevanten Begriffen durchleuchtet worden wären. Die Amazon-Pakete ließ sie sich an eine Packstation liefern und sie bezahlte
 ausschließlich mit Amazon-Geschenkkarten, die sie wiederum in Geschäften
 kaufte. Auch das war nötig, um ihre Einkäufe nicht mit ihren Kreditkartendaten zu verknüpfen.
+
                 <br/></p>
             <intertitle>Bargeldumtausch hat Grenzen
+
                 <br/></intertitle>
             <p>Als ihr Mann in einer Drogerie
 Geschenkgutscheine im Wert von 500 Dollar besorgen wollte, um einen Kinderwagen

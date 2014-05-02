@@ -36,6 +36,15 @@
     </p>
 {%- endmacro %}
 
+{% macro portraitbox(obj) -%}
+    <figure class="portraitbox figure-stamp">
+        <div class="portraitbox-heading">
+            {{obj.name}}
+        </div>
+        {{obj.text | safe}}
+    </figure>
+{%- endmacro %}
+
 {% macro subpage_chapter(number, subtitle, class) -%}
     {% if subtitle %}
         <div class="{{ class }}">

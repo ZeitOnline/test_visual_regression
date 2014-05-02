@@ -7,7 +7,6 @@ from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.content.image.interfaces import IImageMetadata
-from zeit.content.portraitbox.interfaces import IPortraitbox
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
 import logging
@@ -289,15 +288,6 @@ class Article(zeit.frontend.view.Content):
                 image = {'uniqueId': None}
                 _layout = 'minimal'
             return {'layout': _layout, 'article': related, 'image': image}
-        except IndexError:
-            return None
-
-    @property
-    def portraitbox(self):
-        portraitbox = IPortraitbox(self.context)
-        try:
-            title = portraitbox.title[0]
-            return title
         except IndexError:
             return None
 

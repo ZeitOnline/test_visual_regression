@@ -57,6 +57,14 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IPortraitbox)
+class Portraitbox(object):
+
+    def __init__(self, model_block):
+        self.text = model_block.references.text
+        self.name = model_block.references.name
+
 class BaseImage(object):
 
     @property
