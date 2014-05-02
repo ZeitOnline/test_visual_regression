@@ -91,14 +91,14 @@
             <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
-        <block is_crop_of="462635637.jpg" name="462635637-540x304.jpg">
+        <block is_crop_of="02-shomei-tomatsu.jpg" name="02-shomei-tomatsu.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Cadillac stellt auf der Messe das neue ATS Coupé vor.</caption>
-          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462635637-540x304.jpg" type="jpg" publication-date="" expires="">
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/02-shomei-tomatsu.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
             <copyright py:pytype="str">© Stan Honda/AFP/Getty Images</copyright>
           </image>
-          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462635637-540x304.jpg" type="jpg" publication-date="" expires="">
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/02-shomei-tomatsu.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
             <copyright py:pytype="str">© Stan Honda/AFP/Getty Images</copyright>
           </thumbnail>
