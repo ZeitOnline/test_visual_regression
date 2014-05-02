@@ -6,7 +6,6 @@ from pyramid.view import view_config
 @view_config(context=zeit.frontend.gallery.IGallery,
              renderer='templates/gallery.html')
 class Gallery(zeit.frontend.view.Content):
-
     @property
     def images(self):
         return [self.context[i] for i in self.context]
