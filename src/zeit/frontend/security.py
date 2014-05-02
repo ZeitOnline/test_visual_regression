@@ -14,19 +14,20 @@ class CommunityAuthenticationPolicy(SessionAuthenticationPolicy):
     """
 
     def authenticated_userid(self, request):
+        drupal_id = request.cookies.get('drupal-userid')
         # if no community cookie is present, bail out straight away:
-        if request.cookies.get('drupal-userid') is None:
+        if drupal_id is None:
             # avoid stale session data by making sure it's deleted
             if ZMO_USER_KEY in request.session:
                 del request.session[ZMO_USER_KEY]
             return None
  
-        # if we have a community cookie, store/retrieve the user info in/from the session
-        if not ZMO_USER_KEY in request.session:
+        # if we have a community cookie for the current user, store/retrieve the user info in/from the session
+        if ZMO_USER_KEY in request.session and drupal_id == request.session[ZMO_USER_KEY].get('uid'):
+            user_info = request.session[ZMO_USER_KEY]
+        else:
             user_info = get_community_user_info(request)
             request.session[ZMO_USER_KEY] = user_info
-        else:
-            user_info = request.session[ZMO_USER_KEY]
 
         return user_info['uid']
 

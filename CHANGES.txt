@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- add monothematic block (MTB)
 
 
 0.4.0 (2014-04-30)
