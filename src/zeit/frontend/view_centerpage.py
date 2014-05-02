@@ -18,7 +18,10 @@ log = logging.getLogger(__name__)
              renderer='templates/centerpage.html')
 class Centerpage(zeit.frontend.view.Base):
 
+    advertising_enabled = True
+
     def __call__(self):
+        self.context.advertising_enabled = self.advertising_enabled
         stats_path = self.request.registry.settings.node_comment_statistics_path
         self._unique_id_comments = comments.comments_per_unique_id(stats_path)
         return super(Centerpage, self).__call__()
@@ -43,11 +46,22 @@ class Centerpage(zeit.frontend.view.Base):
         return type(self.context).__name__.lower()
 
     @property
+    def is_hp(self):
+        if self.request.path == '/'+self.request.registry.settings.hp:
+            return True
+        else:
+            return False
+
+    @property
     def pagetitle(self):
         # ToDo(T.B.) should be, doesn't work
         # return self.context.html-meta-title
         return 'Lebensart - Mode, Essen und Trinken, ' + \
                'Partnerschaft | ZEIT ONLINE'
+
+    @property
+    def pagetitle_in_body(self):
+        return self.context.title
 
     @property
     def pagedescription(self):

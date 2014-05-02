@@ -39,7 +39,7 @@
 			prevText: "Zum vorigen Bild",
 			infiniteLoop: true,
 			hideControlOnEnd: false,
-            adaptiveHeight: true,
+            adaptiveHeight: true
 		}, defaults);
 
 		return this.each(function(){
@@ -71,6 +71,8 @@
 
 			$(this).on("scaling_ready", function(e) {
 				slider.redrawSlider();
+                figInMediaRes();
+                figCaptionSizing();
 				/* add hover-class for button display */
 				$(".scaled-image", this).mouseenter(function() {
 					$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
@@ -125,29 +127,46 @@
                 }
             });
 
-            //for portrait mode images, set max height
-            var figMedia = $('.inline-gallery .figure-full-width .figure__media');
-            figMedia.each(function( index ) {
-                var imageWidth = $( this ).width();
-                var imageHeight = $( this ).height();
-                if(imageWidth <= imageHeight) {
-                    $( this ).css('max-width', '100%');
-                    $( this ).css('max-height', '620px');
-                    $( this ).css('width', 'auto');
-                    $( this ).css('height', 'auto');
-                    $( this ).css("margin", '0 auto');
-                }
-            });
+            var figInMediaRes = function() {
+                //for portrait mode images, set max height
+                var figMedia = $('.inline-gallery .figure-full-width .figure__media');
+                figMedia.each(function( index ) {
+                    var imageWidth = $( this ).width();
+                    var imageHeight = $( this ).height();
+                    if(imageWidth <= imageHeight) {
+                        $( this ).css('max-width', '100%');
+                        $( this ).css('max-height', '620px');
+                        $( this ).css('width', 'auto');
+                        $( this ).css('height', 'auto');
+                        $( this ).css("margin", '0 auto');
+                    }
+                });
+            };
 
-            var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
-            figCaptions.each(function( index ) {
-                var imageWidth = $( this ).prev().find('.figure__media').width();
-                $( this ).width(imageWidth);
-                $( this ).css("max-width", imageWidth);
-                if(imageWidth > 520) {
-                    $( this ).css('padding-right', '30%');
-                }
-            });
+            figInMediaRes();
+
+            var figCaptionSizing = function() {
+                var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
+                figCaptions.each(function( index ) {
+                    var media = $( this ).prev().find('.figure__media'),
+                    imageWidth = media.width(),
+                    imageHeight = media.height();
+                    if( $(this).parents('.gallery').size() > 0 ) {
+                        $( this ).width(imageWidth);
+                        $( this ).css("max-width", imageWidth);
+                        if(imageWidth > 520) {
+                            $( this ).css('padding-right', '30%');
+                        }
+                    } else {
+                        if(imageWidth <= imageHeight) {
+                            $( this ).css("max-width", imageWidth);
+                        }
+                    }
+                });
+            };
+
+            figCaptionSizing();
+            slider.redrawSlider();
         });
     };
 })(jQuery);

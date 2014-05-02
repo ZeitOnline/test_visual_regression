@@ -7,8 +7,9 @@ Available attributes:
 
 #}
 
-<div class="cp__buttons__large-photo__wrap">
-	{% block asset %}{% endblock %}
-	Zukünftiger Inhalt von teaser_zmo-landscape-large-photo_default_default.html erscheint hier.
-</div>
+{% extends "templates/inc/teaser/abstract_teaser_template.html" -%}
+{%block wrapper_class %}cp__buttons__large__wrap{% endblock %}
+{%block title_wrapper_class %}cp__buttons__large__title__wrap{% endblock %}
+{%block title_class %}cp__buttons__large__title{% endblock %}
+{%block hide_subtitle %}true{% endblock %}
 
