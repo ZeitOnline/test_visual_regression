@@ -6,8 +6,18 @@ Available attributes:
     teaser
 
 #}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% extends "templates/inc/teaser/teaser_zmo-landscape-large_default_default.html" -%}
 
 {% block asset %}
-Zukünftiger Inhalt von teaser_zmo-landscape-large_default_imagegroup.html erscheint hier.
+{%- set image = get_teaser_image(teaser_block, teaser) %}
+
+{{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
+<a href="{{teaser.uniqueId | translate_url}}">
+    <div class="scaled-image is-pixelperfect cp__buttons__large__image" data-wrap=".cp__buttons__large__image">
+        {{ lama.insert_responsive_image(image) }}
+    </div>
+</a>
+
 {% endblock %}

@@ -8,21 +8,8 @@ Available attributes:
 
 #}
 
-<div class='cp__buttons__wrap'>
-	{% block asset %}{% endblock %}
-	<span class="cp__buttons__title__wrap">
-	    <span class="cp__buttons__supertitle">
-	    	<a href="{{teaser.uniqueId | translate_url}}">
-	 			{{teaser.teaserSupertitle | hide_none}}
-			</a>
-		</span>
-		<span class="cp__buttons__title">
-			<a href="{{teaser.uniqueId | translate_url}}">
-				{{teaser.teaserTitle}}
-	        </a>
-		</span>
-	    <span class="cp__buttons__subtitle">
-	      {{teaser.teaserText | hide_none}}
-		</span>
-	</span>
-</div>
+{% extends "templates/inc/teaser/abstract_teaser_template.html" -%}
+{%block wrapper_class %}cp__buttons__wrap{% endblock %}
+{%block title_wrapper_class %}cp__buttons__title__wrap{% endblock %}
+{%block title_class %}cp__buttons__title{% endblock %}
+{%block hide_subtitle %}false{% endblock %}
