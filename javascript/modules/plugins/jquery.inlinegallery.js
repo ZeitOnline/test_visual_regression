@@ -127,7 +127,6 @@
                 }
             });
 
-
             var figInMediaRes = function() {
                 //for portrait mode images, set max height
                 var figMedia = $('.inline-gallery .figure-full-width .figure__media');
@@ -167,7 +166,7 @@
             };
 
             figCaptionSizing();
-
+            slider.redrawSlider();
         });
     };
 })(jQuery);
