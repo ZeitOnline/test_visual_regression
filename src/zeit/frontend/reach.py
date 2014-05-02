@@ -54,9 +54,11 @@ class LinkReach(object):
         if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
-        url = 'http://xml.zeit.de/cms/work/import/feeds/most_comments_%s.rss'
-        feed = zeit.cms.interfaces.ICMSContent(url % section)
-
+        try:
+            url = 'http://xml.zeit.de/cms/work/import/feeds/most_comments_%s.rss'
+            feed = zeit.cms.interfaces.ICMSContent(url % section)
+        except TypeError:
+            return []
         item_list = []
 
         for rss_node in feed.xml.xpath('/rss/channel/item')[:limit]:
