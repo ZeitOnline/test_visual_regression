@@ -411,6 +411,7 @@ def default_image_url(image,
         path = '/'.join(parts)
         url = urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
+
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
@@ -445,7 +446,7 @@ def most_sufficient_teaser_image(teaser_block,
         raise KeyError(asset_type)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
-    image_base_name = re.split('/', asset.uniqueId)[-1]
+    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
