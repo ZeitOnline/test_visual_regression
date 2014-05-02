@@ -491,6 +491,7 @@ def test_default_image_url_should_return_available_image_size(
 def test_default_image_url_should_return_None_when_no_uniqueId_is_given(
         testserver, monkeyreq):
     m = mock.Mock()
+    m.uniqueId = "http://xml.zeit.de/my_unique_id"
     assert default_image_url(m) is None
 
 
