@@ -61,7 +61,7 @@ def _inject_banner_code(pages, advertising_enabled):
                                 break
                     except IndexError:
                         pass
-        return pages
+    return pages
 
 
 @adapter(zeit.content.article.interfaces.IArticle)
