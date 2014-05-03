@@ -367,7 +367,7 @@ $main-nav__service-position-right: em(200px)
   +respond-min($nav__break__full-menu)
     position: absolute
     border-bottom: $nav__section-border
-    right: $main-nav__all-ressorts-position-right
+    //right: $main-nav__all-ressorts-position-right
     top: 0
     padding: 0 $small
 
@@ -474,7 +474,7 @@ $main-nav__service-position-right: em(200px)
     border-left: $nav__section-border
     border-right: $nav__section-border
     position: absolute
-    right: em(200px)
+    //right: em(200px)
     top: 0
     padding: 0 $small
     .main-nav__section__content
@@ -631,3 +631,8 @@ $main-nav__service-position-right: em(200px)
     .main-nav__section__without_trigger
       width: $nav__community--logged-out-width
       max-width: $nav__community--logged-out-width
+  .main-nav__all-ressorts
+    +respond-min($nav__break__full-menu)
+      right: $main-nav__all-ressorts-position-right
+  .main-nav__service
+    right: $main-nav__service-position-right
