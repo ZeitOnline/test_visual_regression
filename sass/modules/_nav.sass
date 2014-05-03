@@ -6,6 +6,9 @@ $nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
 $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
+$nav__community--logged-out-width: em(170px)
+$main-nav__all-ressorts-position-right: em(310px)
+$main-nav__service-position-right: em(200px)
 
 .is-small-screen-only
   display: block !important
@@ -364,7 +367,7 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     position: absolute
     border-bottom: $nav__section-border
-    right: em(230px)
+    right: $main-nav__all-ressorts-position-right
     top: 0
     padding: 0 $small
 
@@ -469,8 +472,9 @@ $nav__section-border: 1px solid $grey--mid
 .main-nav__service
   +respond-min($nav__break__full-menu)
     border-left: $nav__section-border
+    border-right: $nav__section-border
     position: absolute
-    right: $nav__row-height + em(66px)
+    right: em(200px)
     top: 0
     padding: 0 $small
     .main-nav__section__content
@@ -564,6 +568,7 @@ $nav__section-border: 1px solid $grey--mid
     top: 0
     border-bottom: $nav__section-border
     .main-nav__section__trigger
+      line-height: $nav__row-height--px
       background: none
       padding-top: $hair*2
       width: $nav__row-height
@@ -574,6 +579,9 @@ $nav__section-border: 1px solid $grey--mid
     .main-nav__section__content
       left: auto !important
       right: 0
+    .main-nav__community--logged-out
+      width: $nav__community--logged-out-width
+      max-width: $nav__community--logged-out-width
   img
     +border-radius(50%)
     +respond-max($nav__break__full-menu)

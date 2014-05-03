@@ -201,10 +201,10 @@
 {% macro main_nav(is_full_width) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+            <a href="http://zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE"></span>
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -218,47 +218,42 @@
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
                             <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
                             <div class="main-nav__section__content__wrap" id="js-main-nav-ressorts-slider-strip">
-                                <a href="#">Mode</a>
-                                <a href="#">Essen & Trinken</a>
-                                <a href="#">Veganes Leben</a>
-                                <a href="#">Wochenmarkt</a>
-                                <a href="#">Design</a>
-                                <a href="#">Gesellschaft</a>
-                                <a href="#">Bartpflege</a>
+                                <a href="http://{{request.host}}/zeit-magazin/mode-design/index">Mode & Design</a>
+                                <a href="http://{{request.host}}/zeit-magazin/essen-trinken/index">Essen & Trinken</a>
+                                <a href="http://{{request.host}}/zeit-magazin/leben/index">Leben</a>
                             </div>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
-                        <a href="http://zeit.de"
+                        <a href="http://www.zeit.de/index"
                         class="is-standalone-link">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
-                            <a href="#">Abo</a>
-                            <a href="#">Shop</a>
-                            <a href="#">ePaper</a>
+                            <a href="http://www.zeitabo.de/?mcwt=2009_07_0002">Abo</a>
+                            <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=42&et_lid=175&et_sub=Startseite_header">Shop</a>
+                            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper">ePaper</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__service">
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__section__content__wrap">
-                                <a href="#">ZEITCampus</a>
-                                <a href="#">ZEITGeschichte</a>
-                                <a href="#">ZEITWissen</a>
-                                <a href="#">Partnersuche</a>
-                                <a href="#">Immobilien</a>
-                                <a href="#">Automarkt</a>
-                                <a href="#">Jobs</a>
-                                <a href="#">Reiseangebote</a>
-                                <a href="#">Apps</a>
-                                <a href="#">Audio</a>
-                                <a href="#">Archiv</a>
-                                <a href="#">Spiele</a>
+                                <a href="http://www.zeit.de/campus/index">ZEITCampus</a>
+                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index">ZEITGeschichte</a>
+                                <a href="http://www.zeit.de/wissen/zeit-wissen/index">ZEITWissen</a>
+                                <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a>
+                                <a href="http://zeit.immowelt.de/">Immobilien</a>
+                                <a href="http://automarkt.zeit.de/">Automarkt</a>
+                                <a href="http://jobs.zeit.de/">Jobs</a>
+                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps">Apps</a>
+                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio">Audio</a>
+                                <a href="http://www.zeit.de/archiv">Archiv</a>
+                                <a href="http://www.zeit.de/spiele/index">Spiele</a>
                             </div>
                         </div>
                     </div>
-                    <div class="main-nav__section main-nav__search">
+                    <!-- <div class="main-nav__section main-nav__search">
                         <span class="main-nav__section__trigger icon-search">Suche</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__search__form">
@@ -266,7 +261,7 @@
                                 <input class="main-nav__search__submit" type="submit" value="Suchen">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="main-nav__section main-nav__community">
                         {% if request.app_info.authenticated %}
                             {{ head_user_is_logged_in_true() }}
@@ -281,7 +276,7 @@
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_true()  %}
-    <span class="main-nav__section__trigger">
+    <span class="main-nav__section__trigger main-nav__community--logged-in">
         {% if request.app_info.user.picture %}
             <img src="{{ request.app_info.community_host }}{{ request.app_info.user.picture }}" class="main-nav__community__avatar">
         {%- else -%}
@@ -296,8 +291,8 @@
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false()  %}
-    <span class="main-nav__section__trigger">
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a> /
+    <span class="main-nav__section__trigger main-nav__community--logged-out">
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a>/
         <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
     </span>
 {%- endmacro %}
