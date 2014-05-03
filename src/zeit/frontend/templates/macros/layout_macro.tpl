@@ -204,7 +204,7 @@
             <a href="http://zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE"></span>
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -212,6 +212,11 @@
                     <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
+                {% if request.app_info.authenticated %}
+                    <div class="main-nav__menu__content main-nav--logged-in" id="js-main-nav-content">
+                {%- else -%}
+                    <div class="main-nav__menu__content main-nav--logged-out" id="js-main-nav-content">
+                {%- endif -%}
                 <div class="main-nav__menu__content" id="js-main-nav-content">
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__section__content is-always-open" id="js-main-nav-ressorts-slider-container">
@@ -276,7 +281,7 @@
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_true()  %}
-    <span class="main-nav__section__trigger main-nav__community--logged-in">
+    <span class="main-nav__section__trigger">
         {% if request.app_info.user.picture %}
             <img src="{{ request.app_info.community_host }}{{ request.app_info.user.picture }}" class="main-nav__community__avatar">
         {%- else -%}
@@ -285,13 +290,13 @@
         Community
     </span>
     <div class="main-nav__section__content">
-        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">Account</a>
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}">Logout</a>
+        <a href="http://{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">Account</a>
+        <a href="http://{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}">Logout</a>
     </div>
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false()  %}
-    <span class="main-nav__section__trigger main-nav__community--logged-out">
+    <span>
         <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a>/
         <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
     </span>
@@ -431,7 +436,7 @@
             <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN" />
                 </div>
             </a>
             <div class="main-nav__menu">
