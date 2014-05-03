@@ -625,7 +625,9 @@ $main-nav__service-position-right: em(200px)
 
 //special values for logged out status
 .main-nav--logged-out
+  .main-nav__section__without_trigger
+    @extend .main-nav__section__trigger
   .main-nav__community
-    .main-nav__section__trigger
+    .main-nav__section__without_trigger
       width: $nav__community--logged-out-width
       max-width: $nav__community--logged-out-width
