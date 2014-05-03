@@ -296,8 +296,7 @@
 
 {% macro head_user_is_logged_in_false()  %}
     <span class="main-nav__section__without_trigger">
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a>/
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a>/ <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
     </span>
 {%- endmacro %}
 

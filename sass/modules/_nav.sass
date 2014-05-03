@@ -8,6 +8,7 @@ $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
 $nav__community--logged-out-width: em(200px)
 $main-nav__all-ressorts-position-right: em(310px)
+$main-nav__all-ressorts-position-right-logged-in: em(230px)
 $main-nav__service-position-right: em(200px)
 
 .is-small-screen-only
@@ -367,7 +368,7 @@ $main-nav__service-position-right: em(200px)
   +respond-min($nav__break__full-menu)
     position: absolute
     border-bottom: $nav__section-border
-    //right: $main-nav__all-ressorts-position-right
+    right: $main-nav__all-ressorts-position-right-logged-in
     top: 0
     padding: 0 $small
 
@@ -474,7 +475,7 @@ $main-nav__service-position-right: em(200px)
     border-left: $nav__section-border
     border-right: $nav__section-border
     position: absolute
-    //right: em(200px)
+    right: $nav__row-height + em(66px)
     top: 0
     padding: 0 $small
     .main-nav__section__content
