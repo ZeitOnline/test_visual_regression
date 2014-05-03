@@ -7,6 +7,7 @@ Change log for zeit.frontend
 - add large teaser (gallery and default format)
 - add monothematic block (MTB)
 - make comments in reach more failsafe
+- template for product galleries
 
 
 0.4.0 (2014-04-30)
