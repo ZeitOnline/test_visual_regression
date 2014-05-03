@@ -7,19 +7,24 @@ $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
 $nav__community--logged-out-width: em(200px)
-$main-nav__all-ressorts-position-right: em(310px)
-$main-nav__all-ressorts-position-right-logged-in: em(230px)
-$main-nav__service-position-right: em(200px)
+$main-nav__all-ressorts-position-right-logged-out: em(310px)
+$main-nav__all-ressorts-position-right-logged-in: em(180px)
+$main-nav__service-position-right-logged-out: em(200px)
+$main-nav__service-position-right-logged-in: em(64px)
+$icon-avatar-std-size: em(40px)
+
 
 .is-small-screen-only
   display: block !important
   +respond-min($nav__break__full-menu)
     display: none !important
 
+
 .is-large-screen-only
   display: none !important
   +respond-min($nav__break__full-menu)
     display: block !important
+
 
 .main-nav
   position: relative
@@ -54,6 +59,7 @@ $main-nav__service-position-right: em(200px)
     &.is-active
       opacity: 0.5
 
+
 .main-nav__wrap
   +respond-min($nav__break__full-menu)
     max-width: $max-page-width
@@ -65,6 +71,7 @@ $main-nav__service-position-right: em(200px)
       +respond-min($max-longform-width - $page-padding*2)
         border-left: $nav__section-border
         border-right: $nav__section-border
+
 
 .main-nav__logo
   float: left
@@ -98,6 +105,7 @@ $main-nav__service-position-right: em(200px)
     width: $nav__logo-full-width
     height: $nav__logo-full-height
 
+
 .main-nav__logo__img
   display: block
   width: $nav__logo-mobile-width
@@ -109,6 +117,7 @@ $main-nav__service-position-right: em(200px)
     background-size: contain
     width: $nav__logo-full-width
     height: $nav__logo-full-height
+
 
 .main-nav__menu
   overflow: hidden
@@ -475,7 +484,7 @@ $main-nav__service-position-right: em(200px)
     border-left: $nav__section-border
     border-right: $nav__section-border
     position: absolute
-    right: $nav__row-height + em(66px)
+    right: $main-nav__service-position-right-logged-in
     top: 0
     padding: 0 $small
     .main-nav__section__content
@@ -580,6 +589,11 @@ $main-nav__service-position-right: em(200px)
     .main-nav__section__content
       left: auto !important
       right: 0
+    .main-nav__community__icon,
+    .main-nav__community__icon--pic
+      position: absolute
+      right: em(16px)
+      top: em(8px)
   img
     +border-radius(50%)
     +respond-max($nav__break__full-menu)
@@ -589,6 +603,22 @@ $main-nav__service-position-right: em(200px)
       margin-right: $fine
     +respond-min($nav__break__full-menu)
       padding: $thin
+
+
+.main-nav__community__icon
+  display: block
+  background-size: contain
+  width: $icon-avatar-std-size
+  height: $icon-avatar-std-size
+  background-repeat:no-repeat
+
+
+.main-nav__community__icon--pic
+  @extend .main-nav__community__icon
+  background-position: center
+  background-size: auto
+  background-repeat: no-repeat
+  +border-radius($icon-avatar-std-size/2)
 
 
 .main-nav__breadcrumbs
@@ -634,6 +664,6 @@ $main-nav__service-position-right: em(200px)
       max-width: $nav__community--logged-out-width
   .main-nav__all-ressorts
     +respond-min($nav__break__full-menu)
-      right: $main-nav__all-ressorts-position-right
+      right: $main-nav__all-ressorts-position-right-logged-out
   .main-nav__service
-    right: $main-nav__service-position-right
+    right: $main-nav__service-position-right-logged-out
