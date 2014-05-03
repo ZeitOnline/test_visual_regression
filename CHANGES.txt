@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- allow br-tags as inline html
 
 
 0.4.2 (2014-05-03)
