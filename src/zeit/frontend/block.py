@@ -57,6 +57,7 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+
 class BaseImage(object):
 
     @property
@@ -152,6 +153,7 @@ class _Video(object):
             return None
         self.renditions = model_block.video.renditions
         self.video_still = model_block.video.video_still
+        self.title = model_block.video.title
         self.description = model_block.video.subtitle
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout

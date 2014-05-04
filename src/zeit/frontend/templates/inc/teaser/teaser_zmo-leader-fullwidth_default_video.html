@@ -16,7 +16,7 @@ Available attributes:
 	            <source src="{{obj.flv_url}}" type="video/mp4">
 	            <source src="http://live0.zeit.de/multimedia/videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">
 	      </video>
-	      <img class="video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.uniqueId|substring_from('/')}}.jpg">
+	      <img class="video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.uniqueId|substring_from('/')}}.jpg" alt="{{obj.teaserTitle}}">
 	</div>
 </a>
 {% endblock %}
