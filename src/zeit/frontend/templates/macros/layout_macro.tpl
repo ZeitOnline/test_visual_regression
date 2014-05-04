@@ -288,8 +288,8 @@
         {%- endif -%}
     </span>
     <div class="main-nav__section__content">
-        <a href="http://{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="drupal_account">Account</a>
-        <a href="http://{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="drupal_logout">Logout</a>
+        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="drupal_account">Account</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="drupal_logout">Logout</a>
     </div>
 {%- endmacro %}
 
