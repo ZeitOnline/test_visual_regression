@@ -115,6 +115,10 @@
                     {{ lama.main_nav(view.context.main_nav_full_width,request) }}
                 {% endblock navigation %}
 
+                {% if view.context.advertising_enabled %}
+                    {{ lama.adplace(view.banner(3), view.banner_channel) }}
+                {% endif %}
+
                 {% block page_title %}
                 {% endblock page_title %}
 

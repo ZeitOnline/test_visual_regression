@@ -65,6 +65,15 @@ def test_banner_view_should_be_displayed_on_pages(testserver):
         in browser.contents
 
 
+def test_banner_tile3_should_be_displayed_on_pages(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    assert '<div id="iqadtile3" class="ad__tile_3 ad__on__article ad__width_800 ad__min__768">' \
+        in browser.contents
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<div id="iqadtile3" class="ad__tile_3 ad__on__centerpage ad__width_800 ad__min__768">' \
+        in browser.contents
+
+
 
 def test_banner_view_should_be_displayed_on_pages(testserver):
     browser = Browser('%s/artikel/03/seite-2' % testserver.url)
