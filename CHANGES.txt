@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.4.1 (unreleased)
 ------------------
 
+- correct links and community functions within navigation
 - add large teaser (gallery and default format)
 - add monothematic block (MTB)
 
