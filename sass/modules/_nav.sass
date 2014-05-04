@@ -6,16 +6,25 @@ $nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
 $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
+$nav__community--logged-out-width: em(195px)
+$main-nav__all-ressorts-position-right-logged-out: em(310px)
+$main-nav__all-ressorts-position-right-logged-in: em(180px)
+$main-nav__service-position-right-logged-out: em(200px)
+$main-nav__service-position-right-logged-in: em(64px)
+$icon-avatar-std-size: em(40px)
+
 
 .is-small-screen-only
   display: block !important
   +respond-min($nav__break__full-menu)
     display: none !important
 
+
 .is-large-screen-only
   display: none !important
   +respond-min($nav__break__full-menu)
     display: block !important
+
 
 .main-nav
   position: relative
@@ -50,6 +59,7 @@ $nav__section-border: 1px solid $grey--mid
     &.is-active
       opacity: 0.5
 
+
 .main-nav__wrap
   +respond-min($nav__break__full-menu)
     max-width: $max-page-width
@@ -61,6 +71,7 @@ $nav__section-border: 1px solid $grey--mid
       +respond-min($max-longform-width - $page-padding*2)
         border-left: $nav__section-border
         border-right: $nav__section-border
+
 
 .main-nav__logo
   float: left
@@ -94,6 +105,7 @@ $nav__section-border: 1px solid $grey--mid
     width: $nav__logo-full-width
     height: $nav__logo-full-height
 
+
 .main-nav__logo__img
   display: block
   width: $nav__logo-mobile-width
@@ -105,6 +117,7 @@ $nav__section-border: 1px solid $grey--mid
     background-size: contain
     width: $nav__logo-full-width
     height: $nav__logo-full-height
+
 
 .main-nav__menu
   overflow: hidden
@@ -364,7 +377,7 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     position: absolute
     border-bottom: $nav__section-border
-    right: em(230px)
+    right: $main-nav__all-ressorts-position-right-logged-in
     top: 0
     padding: 0 $small
 
@@ -469,8 +482,9 @@ $nav__section-border: 1px solid $grey--mid
 .main-nav__service
   +respond-min($nav__break__full-menu)
     border-left: $nav__section-border
+    border-right: $nav__section-border
     position: absolute
-    right: $nav__row-height + em(66px)
+    right: $main-nav__service-position-right-logged-in
     top: 0
     padding: 0 $small
     .main-nav__section__content
@@ -564,6 +578,7 @@ $nav__section-border: 1px solid $grey--mid
     top: 0
     border-bottom: $nav__section-border
     .main-nav__section__trigger
+      line-height: $nav__row-height--px
       background: none
       padding-top: $hair*2
       width: $nav__row-height
@@ -574,6 +589,11 @@ $nav__section-border: 1px solid $grey--mid
     .main-nav__section__content
       left: auto !important
       right: 0
+    .main-nav__community__icon,
+    .main-nav__community__icon--pic
+      position: absolute
+      right: em(16px)
+      top: em(8px)
   img
     +border-radius(50%)
     +respond-max($nav__break__full-menu)
@@ -583,6 +603,22 @@ $nav__section-border: 1px solid $grey--mid
       margin-right: $fine
     +respond-min($nav__break__full-menu)
       padding: $thin
+
+
+.main-nav__community__icon
+  display: block
+  background-size: contain
+  width: $icon-avatar-std-size
+  height: $icon-avatar-std-size
+  background-repeat:no-repeat
+
+
+.main-nav__community__icon--pic
+  @extend .main-nav__community__icon
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+  +border-radius($icon-avatar-std-size/2)
 
 
 .main-nav__breadcrumbs
@@ -617,3 +653,17 @@ $nav__section-border: 1px solid $grey--mid
 
   height: $nav__row-height
   border-left: $nav__section-border !important
+
+//special values for logged out status
+.main-nav--logged-out
+  .main-nav__section__without_trigger
+    @extend .main-nav__section__trigger
+  .main-nav__community
+    .main-nav__section__without_trigger
+      width: $nav__community--logged-out-width
+      max-width: $nav__community--logged-out-width
+  .main-nav__all-ressorts
+    +respond-min($nav__break__full-menu)
+      right: $main-nav__all-ressorts-position-right-logged-out
+  .main-nav__service
+    right: $main-nav__service-position-right-logged-out

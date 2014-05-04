@@ -112,7 +112,7 @@
         {% endblock page_wrap_inner %}
 
                 {% block navigation %}
-                    {{ lama.main_nav(view.context.main_nav_full_width) }}
+                    {{ lama.main_nav(view.context.main_nav_full_width,request) }}
                 {% endblock navigation %}
 
                 {% block page_title %}
