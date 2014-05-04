@@ -153,7 +153,7 @@ class _Video(object):
         self.renditions = model_block.video.renditions
         self.video_still = model_block.video.video_still
         self.description = model_block.video.subtitle
-        self.name = model_block.video.title
+        self.title = model_block.video.title
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 

@@ -839,9 +839,9 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
 
     markup = '<span class="main-nav__community__icon--pic"'\
         ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
-    account = '<a href="http://www.zeit.de/user/1"'\
+    account = '<a href="www.zeit.de/user/1"'\
         ' id="drupal_account">Account</a>'
-    logout = '<a href="http://www.zeit.de/logout?destination=test"'\
+    logout = '<a href="www.zeit.de/logout?destination=test"'\
         ' id="drupal_logout">Logout</a>'
 
     lines = tpl.module.head_user_is_logged_in_true(request).splitlines()

@@ -234,7 +234,7 @@
              figure is-constrained is-centered
         {% endif %}" data-video="{{obj.id}}">
             <div class="video__still">
-                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
                 <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
@@ -245,6 +245,7 @@
 {%- endmacro %}
 
 {% macro headervideo(obj) -%}
+    {{ obj | obj_debug }}
     <div data-backgroundvideo="{{obj.id}}" class="article__main-video--longform">
         <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
                 <source src="{{obj.source}}" type="video/mp4">
