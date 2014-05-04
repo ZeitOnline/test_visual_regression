@@ -1,12 +1,25 @@
 Change log for zeit.frontend
 ============================
 
-0.4.1 (unreleased)
+0.4.3 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+0.4.2 (2014-05-03)
+------------------
+
+- Nothing changed yet.
+
+
+0.4.1 (2014-05-02)
 ------------------
 
 - correct links and community functions within navigation
 - add large teaser (gallery and default format)
 - add monothematic block (MTB)
+- make comments in reach more failsafe
 
 
 0.4.0 (2014-04-30)
