@@ -681,7 +681,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'min_width': 768}
     num = '123456789'
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
-             'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
+             'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
              'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
              '/javascript"><\/script>\');'

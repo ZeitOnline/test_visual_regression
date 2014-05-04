@@ -211,7 +211,7 @@ def test_artikel02_has_mode_sub_ressort(testserver):
 def test_artikel02_has_correct_banner_channel(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, '')
-    assert article_view.banner_channel == 'lebensart/mode/article'
+    assert article_view.banner_channel == 'zeitmz/mode/article'
 
 
 def test_artikel05_has_rankedTagsList(testserver):
