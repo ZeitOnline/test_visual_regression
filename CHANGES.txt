@@ -5,7 +5,6 @@ Change log for zeit.frontend
 ------------------
 
 - allow br-tags as inline html
-- add zone information to adplaces
 
 
 0.4.2 (2014-05-03)
