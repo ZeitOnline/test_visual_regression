@@ -151,15 +151,19 @@
                     var media = $( this ).prev().find('.figure__media'),
                     imageWidth = media.width(),
                     imageHeight = media.height();
-                    if( $(this).parents('.gallery').size() > 0 ) {
-                        $( this ).width(imageWidth);
-                        $( this ).css("max-width", imageWidth);
-                        if(imageWidth > 520) {
-                            $( this ).css('padding-right', '30%');
-                        }
-                    } else {
-                        if(imageWidth <= imageHeight) {
+                    console.debug(imageWidth);
+                    /* TODO imageWidth !== 24 is quickfix for betatest, pls correct issue (as)*/
+                    if( imageWidth !== 24 ){
+                        if( $(this).parents('.gallery').size() > 0) {
+                            $( this ).width(imageWidth);
                             $( this ).css("max-width", imageWidth);
+                            if(imageWidth > 520) {
+                                $( this ).css('padding-right', '30%');
+                            }
+                        } else {
+                            if(imageWidth <= imageHeight) {
+                                $( this ).css("max-width", imageWidth);
+                            }
                         }
                     }
                 });

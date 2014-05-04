@@ -1,0 +1,45 @@
+{% extends "templates/article.html" %}
+{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+
+{% block article_header %}
+    <div class="article__head-wrap">
+        <header class="article__head article__head--default">
+          {{ blocks.supertitle() }}
+          {{ blocks.title() }}
+        </header>
+    </div>
+{% endblock article_header %}
+
+{% block article_pages %}
+
+<div class="product">
+    <div class="product__info">
+        <div class="product__description">
+            {{ view.galleryText | safe }}
+        </div>
+        <div class="article__head__meta">
+            <div class="article__head__meta__date">
+                {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+                {{ blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="product__wrap">
+        {% for image in view.images %}
+            <figure class="product__wrap__entry">
+                {% set image_meta = image | get_image_metadata %}
+                {% set copyright = image_meta.copyrights[0] %}
+                <img alt="" title="" class="product__image" src="{{image.image.uniqueId | translate_url}}">
+                <figcaption class="product__caption">
+                    <div class="product__caption__text">{{ image.caption }}</div>
+                    {% if image_meta.copyrights %}
+                        <span class="product__caption__copyright">{{ copyright[0] }}</span>
+                    {% endif %}
+                </figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock article_pages %}

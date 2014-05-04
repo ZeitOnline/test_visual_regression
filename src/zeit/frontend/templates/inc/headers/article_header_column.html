@@ -7,7 +7,9 @@
             <div class="article__column__author">
                 {{ blocks.meta_author(view.authors) }}
             </div>
-            {{ blocks.columnimage(view.header_img) }}
+            {% if view.header_img %}
+                {{ blocks.columnimage(view.header_img) }}
+            {% endif %}
             <span class="article__head__meta-wrap">
                 <span class="article__head__meta">
                     {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
