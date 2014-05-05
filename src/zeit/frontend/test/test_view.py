@@ -13,52 +13,69 @@ import zeit.cms.interfaces
 
 def test_breadcumb_should_produce_expected_data():
     context = mock.Mock()
-    context.ressort = 'mode'
-    context.sub_ressort = 'lebensart'
+    context.ressort = 'zeit-magazin'
+    context.sub_ressort = 'mode-design'
     context.title = 'This is my title'
 
-    view_article._navigation = {
-        'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-        'zmo': ('ZEIT Magazin', 'http://www.zeit.de/magazin/index', 'myid2'),
-        'lebensart': ('lebensart',
-                      'http://www.zeit.de/magazin/lebensart/index',
-                      'myid3'),
-        'mode': ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'), }
+    view_article._navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+               'leben': (
+                   'Leben',
+                   'http://www.zeit.de/zeit-magazin/leben/index',
+                   'myid2',
+               ),
+               'mode-design': (
+                   'Mode & Design',
+                   'http://www.zeit.de/zeit-magazin/mode-design/index',
+                   'myid3',
+               ),
+               'essen-trinken': (
+                   'Essen & Trinken',
+                   'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+                   'myid4',
+               ), }
 
     article = view_article.Article(context, '')
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
-        ('ZEIT Magazin', 'http://www.zeit.de/magazin/index', 'myid2'),
-        ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'),
-        ('lebensart', 'http://www.zeit.de/magazin/lebensart/index',
-            'myid3'),
-        ('This is my title', 'http://localhost'), ]
+        ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+        ('Mode & Design', 'http://www.zeit.de/zeit-magazin/mode-design/index', 'myid3'),
+        ('This is my title', ''), ]
 
     assert article.breadcrumb == l
 
 
 def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context = mock.Mock()
-    context.ressort = 'modex'
+    context.ressort = 'zeit-magazin'
     context.sub_ressort = 'lebensartx'
     context.title = 'This is my title'
 
-    view_article._navigation = {
-        'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-        'zmo': ('ZEIT Magazin', 'http://www.zeit.de/magazin/index', 'myid2'),
-        'lebensart': ('lebensart',
-                      'http://www.zeit.de/magazin/lebensart/index',
-                      'myid3'),
-        'mode': ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'), }
+    view_article._navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+               'leben': (
+                   'Leben',
+                   'http://www.zeit.de/zeit-magazin/leben/index',
+                   'myid2',
+               ),
+               'mode-design': (
+                   'Mode & Design',
+                   'http://www.zeit.de/zeit-magazin/mode-design/index',
+                   'myid3',
+               ),
+               'essen-trinken': (
+                   'Essen & Trinken',
+                   'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+                   'myid4',
+               ), }
 
     article = view_article.Article(context, '')
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
-        ('ZEIT Magazin', 'http://www.zeit.de/magazin/index',
-            'myid2'),
-        ('This is my title', 'http://localhost'), ]
+        ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+        ('This is my title', ''), ]
 
     assert article.breadcrumb == l
 

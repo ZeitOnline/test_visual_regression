@@ -85,3 +85,9 @@ def test_banner_view_should_be_displayed_on_pages(testserver):
     browser = Browser('%s/artikel/03/seite-6' % testserver.url)
     assert '<div id="iqadtile7" class="ad__tile_7 ad__on__article ad__width_300 ad__min__768">' \
         not in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    assert "var sas_pageid = '32375/445608'" in browser.contents
+    assert "sas_formatid = 13500," in browser.contents
