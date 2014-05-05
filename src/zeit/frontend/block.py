@@ -62,6 +62,9 @@ class Paragraph(object):
 class Portraitbox(object):
 
     def __init__(self, model_block):
+        ref = model_block.references
+        if ref is None:
+            return None
         self.text = self._author_text(model_block.references.text)
         self.name = model_block.references.name
 
