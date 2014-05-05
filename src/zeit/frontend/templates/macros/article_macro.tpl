@@ -37,12 +37,14 @@
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}
-    <figure class="portraitbox figure-stamp">
-        <div class="portraitbox-heading">
-            {{obj.name}}
-        </div>
-        {{obj.text | safe}}
-    </figure>
+    {% if obj.name and obj.name %}
+        <figure class="portraitbox figure-stamp">
+            <div class="portraitbox-heading">
+                {{obj.name}}
+            </div>
+            {{obj.text | safe}}
+        </figure>
+    {% endif %}
 {%- endmacro %}
 
 {% macro subpage_chapter(number, subtitle, class) -%}
