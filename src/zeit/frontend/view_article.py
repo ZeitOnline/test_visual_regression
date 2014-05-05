@@ -22,20 +22,6 @@ from .comments import get_thread
 log = logging.getLogger(__name__)
 
 
-_navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
-               'lebensart': (
-                   'ZEIT Magazin',
-                   'http://www.zeit.de/magazin/index',
-                   'myid2',
-               ),
-               'mode': (
-                   'Mode',
-                   'http://www.zeit.de/magazin/lebensart/index',
-                   'myid3',
-               ), }
-
-
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -291,18 +277,6 @@ class Article(zeit.frontend.view.Content):
         except IndexError:
             return None
 
-    @property
-    def breadcrumb(self):
-        l = [_navigation['start']]
-        l.append(_navigation['zmo'])
-        if self.context.ressort in _navigation:
-            l.append(_navigation[self.context.ressort])
-        if self.context.sub_ressort in _navigation:
-            l.append(_navigation[self.context.sub_ressort])
-        if self.title:
-            l.append((self.title, 'http://localhost'))
-        return l
-
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
                           request=self.request)
@@ -333,23 +307,6 @@ class Article(zeit.frontend.view.Content):
     @property
     def text_length(self):
         return self.context.textLength
-
-    @property
-    def banner_channel(self):
-        channel = ''
-        if self.ressort:
-            channel += self.ressort.replace('lebensart','zeitmz')
-        if self.sub_ressort:
-            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
-        if self.type:
-            channel += "/" + self.type
-        return channel
-
-    def banner(self, tile):
-        try:
-            return zeit.frontend.banner.banner_list[tile - 1]
-        except IndexError:
-            return None
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

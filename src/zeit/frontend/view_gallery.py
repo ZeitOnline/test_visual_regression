@@ -6,6 +6,12 @@ from pyramid.view import view_config
 @view_config(context=zeit.frontend.gallery.IGallery,
              renderer='templates/gallery.html')
 class Gallery(zeit.frontend.view.Content):
+
+    advertising_enabled = True
+    def __call__(self):
+        self.context.advertising_enabled = self.advertising_enabled
+        return {}
+
     @property
     def images(self):
         return [self.context[i] for i in self.context]
