@@ -1,15 +1,51 @@
 Change log for zeit.frontend
 ============================
 
-0.3.1 (unreleased)
+0.4.4 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+0.4.3 (2014-05-04)
+------------------
+
+- allow br-tags as inline html
+- add zone information to adplaces
+- add banner place 3
+
+
+0.4.2 (2014-05-03)
+------------------
+
+- adjust padding bewteen buzz box and lead area
+
+
+0.4.1 (2014-05-02)
+------------------
+
+- correct links and community functions within navigation
+- add large teaser (gallery and default format)
+- add monothematic block (MTB)
+- make comments in reach more failsafe
+- template for product galleries
+
+
+0.4.0 (2014-04-30)
+------------------
+
+- add comment counter for teaser
 - add new module gallery teaser
 - split informatives and lead area according to seperator cp extra
 - prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo
 - root background video webm and image file load to live0
 - integrate invert functionality for teasers
 - correct teaser layouts
+- in article ads alternate now tile 7 and 8 instead of 4
+- fix some ad issues
+- enhanced comment section inluding inline replies and reports,
+  new scrolling behavior, animated anchor links and more
+- template for sharebox (fb, twitter, g+)
 
 
 0.3.0 (2014-04-29)

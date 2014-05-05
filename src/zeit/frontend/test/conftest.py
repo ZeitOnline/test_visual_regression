@@ -41,6 +41,7 @@ settings = {
         'api',
     ),
     'proxy_url': '',
+    'hp': 'zeit-magazin/index',
     'node_comment_statistics_path': 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
 
@@ -73,8 +74,12 @@ settings = {
         'egg://zeit.frontend/data/config/article-related-layouts.xml'),
     'vivi_zeit.content.cp_block-layout-source': (
         'egg://zeit.frontend/data/config/cp-layouts.xml'),
+    'vivi_zeit.content.cp_bar-layout-source': (
+        'egg://zeit.frontend/config/cp-bar-layouts.xml'),
     'vivi_zeit.frontend_banner-source': (
-        'egg://zeit.frontend/data/config/banner.xml')
+        'egg://zeit.frontend/data/config/banner.xml'),
+    'vivi_zeit.content.gallery_gallery-types-url': (
+        'egg://zeit.frontend/data/config/gallery-types.xml')
 }
 
 

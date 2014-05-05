@@ -165,7 +165,11 @@ def test_column_should_have_header_image(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert '<div class="article__column__headerimage">' in browser.contents
     assert '<div class="scaled-image">' in browser.contents
-    assert '<img class="figure__media"' in browser.contents
+    assert '<img class=" figure__media"' in browser.contents
+
+def test_column_should_not_have_header_image(testserver):
+    browser = Browser('%s/artikel/standardkolumne-ohne-bild-beispiel' % testserver.url)
+    assert '<div class="article__column__headerimage">' not in browser.contents
 
 
 def test_health_check_should_response_and_have_status_200(testserver):
@@ -212,7 +216,7 @@ def test_artikel02_has_mode_sub_ressort(testserver):
 def test_artikel02_has_correct_banner_channel(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, '')
-    assert article_view.banner_channel == 'lebensart/mode/article'
+    assert article_view.banner_channel == 'zeitmz/mode/article'
 
 
 def test_artikel05_has_rankedTagsList(testserver):
@@ -377,7 +381,7 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
-    page.request.path_info = u'article/03/seite-5'
+    page.request.path_info = u'article/03/seite-9'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -397,7 +401,7 @@ def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-3'
     page()
-    assert len(page.pages) == 3
+    assert len(page.pages) == 7
 
 
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
@@ -414,7 +418,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 2
-    assert view.pagination['total'] == 3
+    assert view.pagination['total'] == 7
     assert view.pagination['next_page_title'] == (u'Sogar die eckige Flasche kommt zur\xfcck')
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
@@ -423,7 +427,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 1
-    assert view.pagination['total'] == 3
+    assert view.pagination['total'] == 7
     assert view.pagination['next_page_title'] == (u'Sogar die runde Flasche kommt zur\xfcck')
 
 
@@ -468,7 +472,7 @@ def test_pagination_next_page_url_is_working(testserver):
 
 
 def test_pagination_next_page_url_on_last_page_is_none(testserver):
-    browser = Browser('%s/artikel/03/seite-3' % testserver.url)
+    browser = Browser('%s/artikel/03/seite-7' % testserver.url)
     content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
 
     assert content in browser.contents
@@ -515,7 +519,9 @@ def test_article01_should_not_have_a_focussed_nextread(application):
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
     request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
-    view = view_centerpage.Centerpage('', request)
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = view_centerpage.Centerpage(cp, request)
+    view() #trigger __call__ method
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None

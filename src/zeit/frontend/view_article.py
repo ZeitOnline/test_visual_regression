@@ -338,9 +338,9 @@ class Article(zeit.frontend.view.Content):
     def banner_channel(self):
         channel = ''
         if self.ressort:
-            channel += self.ressort
+            channel += self.ressort.replace('lebensart','zeitmz')
         if self.sub_ressort:
-            channel += "/" + self.sub_ressort
+            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
         if self.type:
             channel += "/" + self.type
         return channel
