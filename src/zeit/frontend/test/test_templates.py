@@ -427,7 +427,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    print output
+
     assert fig in output
     assert img in output
     assert cap in output
