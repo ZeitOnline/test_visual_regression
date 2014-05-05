@@ -426,9 +426,9 @@
             var content = el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){
-                    el[0].innerHTML = '{{publish_date}}<span>zuletzt aktualisiert am ' + content + '</span>';
+                    el[0].innerHTML = '{{publish_date}} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
                 }else{
-                    el[0].innerHTML = '{{publish_date}}<span>editiert: ' + content + '</span>';
+                    el[0].innerHTML = '{{publish_date}} —<br><span>editiert: ' + content + '</span>';
                 }
             }
         </script>
