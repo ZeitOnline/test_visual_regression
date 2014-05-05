@@ -290,7 +290,7 @@ def translate_url(context, url):
 
 
 def format_date(obj, type='short'):
-    formats = {'long': "dd. MMMM yyyy, H:mm 'Uhr'", 'short': "dd. MMMM yyyy"}
+    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 

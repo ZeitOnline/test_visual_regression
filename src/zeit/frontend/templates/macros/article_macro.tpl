@@ -15,17 +15,19 @@
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
     <div class="article__head__subtitle">
         <p>
-            {% if with_quotes %}
-                »{{view.subtitle}}«
-            {% else %}
-                {{view.subtitle}}
-            {% endif %}
-            {% if include_meta and view.genre %}
-                {{view.genre|title}}
-            {% endif %}
-            {% if include_meta and view.authors %}
-                {{ meta_author(view.authors, titlecase=view.genre==None) }}
-            {% endif %}
+            <strong>
+                {% if with_quotes %}
+                    »{{view.subtitle}}«
+                {% else %}
+                    {{view.subtitle}}
+                {% endif %}
+                {% if include_meta and view.genre %}
+                    {{view.genre|title}}
+                {% endif %}
+                {% if include_meta and view.authors %}
+                    {{ meta_author(view.authors, titlecase=view.genre==None) }}
+                {% endif %}
+            </strong>
         </p>
     </div>
 {%- endmacro %}
@@ -83,9 +85,9 @@
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h3 class="article__subheading is-constrained is-centered">
+    <h2 class="article__subheading is-constrained is-centered">
         {{ intertitle|striptags }}
-    </h3>
+    </h2>
 {%- endmacro %}
 
 {% macro raw(obj) -%}
