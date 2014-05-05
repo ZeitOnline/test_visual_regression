@@ -785,6 +785,23 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     assert '<div class="teaser__kicker">SUPATITLE</div>' in output
     assert '<div class="teaser__title">TITLE</div>' in output
 
+def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = None
+    teaser.supertitle = "FALLBACK"
+
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'FALLBACK' in output
+
 
 def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
