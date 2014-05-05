@@ -72,7 +72,7 @@
 			$(this).on("scaling_ready", function(e) {
 				slider.redrawSlider();
                 figInMediaRes();
-                figCaptionSizing();
+                figCaptionSizing( $(e.target) );
 				/* add hover-class for button display */
 				$(".scaled-image", this).mouseenter(function() {
 					$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
@@ -145,25 +145,21 @@
 
             figInMediaRes();
 
-            var figCaptionSizing = function() {
+            var figCaptionSizing = function( image ) {
                 var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
                 figCaptions.each(function( index ) {
-                    var media = $( this ).prev().find('.figure__media'),
+                    var media = image || $( this ).prev().find('.figure__media'),
                     imageWidth = media.width(),
                     imageHeight = media.height();
-                    console.debug(imageWidth);
-                    /* TODO imageWidth !== 24 is quickfix for betatest, pls correct issue (as)*/
-                    if( imageWidth !== 24 ){
-                        if( $(this).parents('.gallery').size() > 0) {
-                            $( this ).width(imageWidth);
+                    if( $(this).parents('.gallery').size() > 0) {
+                        $( this ).width(imageWidth);
+                        $( this ).css("max-width", imageWidth);
+                        if(imageWidth > 520) {
+                            $( this ).css('padding-right', '30%');
+                        }
+                    } else {
+                        if(imageWidth <= imageHeight) {
                             $( this ).css("max-width", imageWidth);
-                            if(imageWidth > 520) {
-                                $( this ).css('padding-right', '30%');
-                            }
-                        } else {
-                            if(imageWidth <= imageHeight) {
-                                $( this ).css("max-width", imageWidth);
-                            }
                         }
                     }
                 });
