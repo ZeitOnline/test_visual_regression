@@ -186,7 +186,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
+    m = '<h2 class="article__subheading is-constrained is-centered">xy</h2>'
     assert m == output
 
 
@@ -504,7 +504,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="fb:admins" content="595098294">',
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
-          '"og:description" itemprop="description" content="subtitle">',
+          '"og:description" content="subtitle">',
           '<meta property="og:url" content="test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
