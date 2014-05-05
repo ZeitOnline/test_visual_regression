@@ -277,8 +277,8 @@ def test_article_header2_has_correct_subtitle(selenium_driver, testserver):
     driver.get('%s/artikel/header2' % testserver.url)
     text = driver.find_element_by_class_name('article__head__subtitle')\
         .text.strip()
-    assert text == u'\u00BBWie viele Fl\u00FCchtlingskinder bin '\
-        u'ich eine Suchende, Getriebene.\u00AB'
+    assert text == u'Wie viele Fl\u00FCchtlingskinder bin '\
+        u'ich eine Suchende, Getriebene.'
 
 
 def test_artikel_header_header1_should_have_correct_header_source(testserver):
