@@ -245,7 +245,7 @@
              figure is-constrained is-centered
         {% endif %}" data-video="{{obj.id}}">
             <div class="video__still">
-                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
                 <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
@@ -261,7 +261,7 @@
                 <source src="{{obj.source}}" type="video/mp4">
                 <source src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.webm" type="video/webm">
         </video>
-        <img class="article__main-image--longform video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.id}}.jpg">
+        <img class="article__main-image--longform video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.id}}.jpg" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
     </div>
 {%- endmacro %}
 
