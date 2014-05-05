@@ -308,23 +308,6 @@ class Article(zeit.frontend.view.Content):
     def text_length(self):
         return self.context.textLength
 
-    @property
-    def banner_channel(self):
-        channel = ''
-        if self.ressort:
-            channel += self.ressort.replace('lebensart','zeitmz')
-        if self.sub_ressort:
-            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
-        if self.type:
-            channel += "/" + self.type
-        return channel
-
-    def banner(self, tile):
-        try:
-            return zeit.frontend.banner.banner_list[tile - 1]
-        except IndexError:
-            return None
-
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='seite',

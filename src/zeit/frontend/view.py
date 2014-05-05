@@ -30,6 +30,26 @@ class Base(object):
     def __call__(self):
         return {}
 
+    @property
+    def banner_channel(self):
+        channel = ''
+        if self.ressort:
+            myressort = self.ressort.replace('zeit-magazin','zeitmz')
+            # TODO: end discrepance between testing and live ressports!
+            myressort = myressort.replace('lebensart','zeitmz')
+            channel += myressort
+        if self.sub_ressort:
+            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
+        if self.type:
+            channel += "/" + self.type
+        return channel
+
+    def banner(self, tile):
+        try:
+            return zeit.frontend.banner.banner_list[tile - 1]
+        except IndexError:
+            return None
+
 class Content(Base):
     _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
                    'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),

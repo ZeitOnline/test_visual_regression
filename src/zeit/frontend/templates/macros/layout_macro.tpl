@@ -423,7 +423,7 @@
             </script>
             <noscript>
             <div>
-                <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
                     <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
             </a></div>
             </noscript>
