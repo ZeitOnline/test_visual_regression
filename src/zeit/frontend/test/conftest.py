@@ -34,6 +34,11 @@ settings = {
         'data',
         'comments'
     ),
+    'agatho_host': u'file://%s/' % path.join(
+        path.dirname(path.abspath(frontend.__file__)),
+        'data',
+        'comments'
+    ),
     'linkreach_host': u'file://%s/' % path.join(
         path.dirname(path.abspath(frontend.__file__)),
         'data',
