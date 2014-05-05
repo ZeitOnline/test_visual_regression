@@ -1,52 +1,59 @@
-$card-background-color1: #a1f88c
-$card-background-color2: #c3e76d
-$card-background-color3: #00ae50
-$card-background-color4: #008e51
-$card-background-color5: #09663e
-
-$card-slider-darkness: 10%
-$card-slider-lucency: 0.10
-
 $card-button-width: 8em
+$card-rotate-y: -180deg
 
-.card
+.card__wrap
+    max-width: 320px
+    margin: 0 auto
+
+.card__deck
     +tablet
-    margin: 0 3% 3% 0
-    float: left
-    width: 30%
-    padding-bottom: 45%
+    width: 100%
+    padding-bottom: 150%
     position: relative
     text-align: center
     +perspective(1000px)
 
-    &.js-flipped .card__flip
-        +transform(rotateY(-180deg))
+    &.js-flipped .card--front,
+        +transform(rotateY(0deg + $card-rotate-y))
+    &.js-flipped .card--back
+        +transform(rotateY(180deg + $card-rotate-y))
     &.js-slid .card__slide
         bottom: 0
 
-.card__flip,
-.card__front,
-.card__back,
+.card,
 .card__slider,
 .card__slide
     position: absolute
     width: 100%
     height: 100%
 
-.card__flip
+.card
+    color: $black
+    background-color: #c3e76d
+    // this is good for light text on dark background
+    // color: #fff
+    // text-rendering: optimizeLegibility
+    // -webkit-font-smoothing: antialiased
+    // -moz-osx-font-smoothing: grayscale
+
     z-index: 1
+    padding: 15% 5%
+    background-position: 50% 50%
+    background-repeat: no-repeat
+    +background-size(contain)
+
+.card--front,
+.card--back
     +transition(transform 0.5s)
     +transform-style(preserve-3d)
-
-.card__front,
-.card__back
-    padding: 15% 5%
     +backface-visibility(hidden)
 
-.card__front
+.card--front
     z-index: 2
+    +transform(rotateY(0deg))
 
-.card__back
+.card--back
+    z-index: 1
     +transform(rotateY(180deg))
 
 .card__slider
@@ -54,12 +61,12 @@ $card-button-width: 8em
 
 .card__slide
     z-index: 3
-    background-color: rgba(0, 0, 0, 0.1)
+    background-color: rgba(0, 0, 0, 0.7)
     bottom: 100%
     +transition(bottom 0.3s)
 
 .card__title
-    margin: 0 0 1.5em
+    margin: 0 0 15%
     font-size: $font-s
     font-weight: normal
     letter-spacing: 2px
@@ -68,7 +75,11 @@ $card-button-width: 8em
 .card__text
     +tablet(bold)
     font-size: $font-ml
+    line-height: 1.4
     letter-spacing: 1px
+
+.card__text--with-bg
+    margin-top: 70%
 
 .card__button
     +tablet(bold)
@@ -106,45 +117,3 @@ $card-button-width: 8em
     +on-interaction
         background-color: rgba(0, 0, 0, 0.2)
 
-// colors
-.card--bg1,
-.card--bg2
-    color: $black
-
-.card--bg3,
-.card--bg4,
-.card--bg5
-    color: #fff
-    text-rendering: optimizeLegibility
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
-
-.card--bg1
-    .card__flip
-        background-color: $card-background-color1
-    .card__slide
-        background-color: transparentize(darken($card-background-color1, $card-slider-darkness), $card-slider-lucency)
-
-.card--bg2
-    .card__flip
-        background-color: $card-background-color2
-    .card__slide
-        background-color: transparentize(darken($card-background-color2, $card-slider-darkness), $card-slider-lucency)
-
-.card--bg3
-    .card__flip
-        background-color: $card-background-color3
-    .card__slide
-        background-color: transparentize(darken($card-background-color3, $card-slider-darkness), $card-slider-lucency)
-
-.card--bg4
-    .card__flip
-        background-color: $card-background-color4
-    .card__slide
-        background-color: transparentize(darken($card-background-color4, $card-slider-darkness), $card-slider-lucency)
-
-.card--bg5
-    .card__flip
-        background-color: $card-background-color5
-    .card__slide
-        background-color: transparentize(darken($card-background-color5, $card-slider-darkness), $card-slider-lucency)

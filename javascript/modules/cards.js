@@ -5,22 +5,22 @@ define(['jquery'], function() {
      * Flip card
      */
     var flipCard = function(e) {
-        var card = $(this).closest('.card');
+        var deck = $(this).closest('.card__deck');
 
         e.preventDefault();
 
-        card.toggleClass('js-flipped');
+        deck.toggleClass('js-flipped');
     };
 
    /**
      * Slide card
      */
     var slideCard = function(e) {
-        var card = $(this).closest('.card');
+        var deck = $(this).closest('.card__deck');
 
         e.preventDefault();
 
-        card.toggleClass('js-slid');
+        deck.toggleClass('js-slid');
     };
 
    /**
