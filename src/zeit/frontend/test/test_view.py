@@ -69,10 +69,11 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
 
-def test_article_should_have_author_box(application):
+def test_article_should_have_author_box(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/autorenbox')
     article_view = view_article.Article(context, '')
-    assert False
+    body = zeit.content.article.edit.interfaces.IEditableBody(article_view.context)
+    assert type(body.values()[2]) == Portraitbox
 
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
