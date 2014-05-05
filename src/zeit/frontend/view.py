@@ -31,6 +31,24 @@ class Base(object):
         return {}
 
 class Content(Base):
+    _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+                   'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+                   'leben': (
+                       'Leben',
+                       'http://www.zeit.de/zeit-magazin/leben/index',
+                       'myid2',
+                   ),
+                   'mode-design': (
+                       'Mode & Design',
+                       'http://www.zeit.de/zeit-magazin/mode-design/index',
+                       'myid3',
+                   ),
+                   'essen-trinken': (
+                       'Essen & Trinken',
+                       'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+                       'myid4',
+                   ), }
+
     @property
     def title(self):
         return self.context.title
@@ -107,6 +125,20 @@ class Content(Base):
     @property
     def show_date_format_seo(self):
         return self._get_date_format()
+
+    @property
+    def breadcrumb(self):
+        crumb = self._navigation
+        l = [crumb['start']]
+        l.append(crumb['zmo'])
+        if self.context.ressort in crumb:
+            l.append(crumb[self.context.ressort])
+        if self.context.sub_ressort in crumb:
+            l.append(crumb[self.context.sub_ressort])
+        if self.title:
+            l.append((self.title, ''))
+        return l
+
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(Base):

@@ -22,20 +22,6 @@ from .comments import get_thread
 log = logging.getLogger(__name__)
 
 
-_navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
-               'lebensart': (
-                   'ZEIT Magazin',
-                   'http://www.zeit.de/magazin/index',
-                   'myid2',
-               ),
-               'mode': (
-                   'Mode',
-                   'http://www.zeit.de/magazin/lebensart/index',
-                   'myid3',
-               ), }
-
-
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -290,18 +276,6 @@ class Article(zeit.frontend.view.Content):
             return {'layout': _layout, 'article': related, 'image': image}
         except IndexError:
             return None
-
-    @property
-    def breadcrumb(self):
-        l = [_navigation['start']]
-        l.append(_navigation['zmo'])
-        if self.context.ressort in _navigation:
-            l.append(_navigation[self.context.ressort])
-        if self.context.sub_ressort in _navigation:
-            l.append(_navigation[self.context.sub_ressort])
-        if self.title:
-            l.append((self.title, 'http://localhost'))
-        return l
 
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
