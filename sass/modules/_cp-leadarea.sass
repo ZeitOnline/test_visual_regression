@@ -85,10 +85,12 @@ $cp__lead__wrap-width: 65%
 .cp__lead-leader__wrap
 	position: relative
 	overflow: hidden
-	padding-top: 0
 	height: $cp__lead-full-height
+	margin-top: $small
 	margin-bottom: $small
 	background-color: $black
+	width: 100%
+	display: inline-block
 	+respond-min($break-2)
 		margin-top: $compact
 		margin-bottom: $compact
@@ -136,7 +138,6 @@ $cp__lead__wrap-width: 65%
 	padding-top: 0
 	height: $cp__lead-full-height
 	background-color: $black
-	margin-bottom: $compact
 
 .cp__lead-full--dark
 	@extend %cp__lead--dark
