@@ -280,26 +280,28 @@
     </article>
 {%- endmacro %}
 
-{% macro comments(comments) -%}
+{% macro comments(comments, linkreach) -%}
     {% if comments is not none -%}
     <div class="article__socialbox tc" id="js-social-services">
         <div class="article__sharing">
+            {% if linkreach.total -%}
             <div class="article__sharing__item article__sharing__sum">
-                <span class="article__sharing__total">47</span>
-                <span class="article__sharing__unit">Tsd.</span>
+                <span class="article__sharing__total">{{ linkreach.total[0] }}</span>
+                <span class="article__sharing__unit">{{ linkreach.total[1] }}</span>
             </div>
+            {%- endif %}
             <div class="article__sharing__services blind">
                 <a class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
-                    <span class="article__sharing__services__text">8,2 Tsd</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(linkreach.facebook) }}</span>
                 </a>
                 <a class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-                    <span class="article__sharing__services__text">6,7 Tsd</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(linkreach.twitter) }}</span>
                 </a>
                 <a class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-google"></span>
-                    <span class="article__sharing__services__text">877</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(linkreach.googleplus) }}</span>
                 </a>
             </div>
             <div class="article__sharing__item">
