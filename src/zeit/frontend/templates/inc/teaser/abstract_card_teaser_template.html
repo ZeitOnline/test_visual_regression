@@ -1,0 +1,18 @@
+{#
+
+default teaser template for cards
+
+Available attributes:
+    teaser_block
+    teaser
+
+#}
+{%- set image = get_teaser_image(teaser_block, teaser) -%}
+
+<div class="cp__buttons__wrap">
+
+    <div class="card__wrap">
+        {% block card_deck %}{% endblock card_deck %}
+    </div>
+
+</div>
