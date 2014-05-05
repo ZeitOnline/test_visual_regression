@@ -684,7 +684,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'min_width': 768}
     num = '123456789'
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
-             'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
+             'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
              'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
              '/javascript"><\/script>\');'
@@ -814,3 +814,99 @@ def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
         output += line.strip()
 
     assert markup in output
+
+
+def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    request = Mock()
+    request.app_info.user.picture = None
+
+    #no pic
+    markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
+
+    lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+
+    #pic
+    request = Mock()
+    request.app_info.community_host = 'www.zeit.de/'
+    request.app_info.user.picture = 'test.jpg'
+    request.app_info.user.uid = 1
+    request.app_info.community_paths.logout = 'logout'
+    request.url = 'test'
+
+    markup = '<span class="main-nav__community__icon--pic"'\
+        ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
+    account = '<a href="www.zeit.de/user/1"'\
+        ' id="drupal_account">Account</a>'
+    logout = '<a href="www.zeit.de/logout?destination=test"'\
+        ' id="drupal_logout">Logout</a>'
+
+    lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+    assert account in output
+    assert logout in output
+
+
+def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    request = Mock()
+    request.app_info.community_host = 'www.zeit.de/'
+    request.app_info.community_paths.login = 'login'
+    request.app_info.community_paths.register = 'register'
+    request.url = 'test'
+
+    markup = '<span class="main-nav__section__without_trigger">'\
+        '<a href="www.zeit.de/login?destination=test"'\
+        ' id="drupal_login">Anmelden</a>/<a href="www.zeit.de/'\
+        'register?destination=test" id="drupal_register">'\
+        'Registrieren</a></span>'
+
+    lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+
+
+def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    request = Mock()
+
+    #logged in
+    request.app_info.authenticated = 'true'
+    markup = '<div class="main-nav__menu__content '\
+        'main-nav--logged-in" id="js-main-nav-content">'
+    logged = 'Account'
+    lines = tpl.module.main_nav('true', request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+    assert logged in output
+
+    #logged out
+    request.app_info.authenticated = None
+    markup = '<div class="main-nav__menu__content '\
+        'main-nav--logged-out" id="js-main-nav-content">'
+    unlogged = 'Registrieren'
+    lines = tpl.module.main_nav('true', request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+    assert unlogged in output

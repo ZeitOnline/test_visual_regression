@@ -9,6 +9,9 @@ from zeit.frontend.article import IShortformArticle
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
 from zeit.frontend.centerpage import get_image_asset
+from zeit.frontend.gallery import IGallery
+from zeit.frontend.gallery import IProductGallery
+from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
 import jinja2
@@ -291,7 +294,6 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
-
 def format_date_ago(dt, precision=2, past_tense='vor {}',
                     future_tense='in {}'):
 
@@ -489,6 +491,11 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 if IArticleTemplateSettings(context).template == 'column':
                     zope.interface.alsoProvides(context,
                                                 IColumnArticle)
+            elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
+                if IGalleryMetadata(context).type == 'zmo-product':
+                    zope.interface.alsoProvides(context, IProductGallery)
+                else:
+                    zope.interface.alsoProvides(context, IGallery)
             return self._change_viewname(tdict)
         except OSError as e:
             if e.errno == 2:

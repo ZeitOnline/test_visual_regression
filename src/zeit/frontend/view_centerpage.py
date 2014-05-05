@@ -170,6 +170,32 @@ class Centerpage(zeit.frontend.view.Base):
                     )
         return buzz
 
+    @property
+    def ressort(self):
+        if self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+    @property
+    def sub_ressort(self):
+        if self.context.sub_ressort:
+            return self.context.sub_ressort.lower()
+        else:
+            return ''
+
+    @property
+    def banner_channel(self):
+        channel = ''
+        if self.ressort:
+            channel += self.ressort.replace('lebensart','zeitmz')
+        if self.sub_ressort:
+            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
+        if self.type:
+            channel += "/" + self.type
+        return channel
+
+
     def banner(self, tile):
         try:
             return zeit.frontend.banner.banner_list[tile - 1]

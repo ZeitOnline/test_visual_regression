@@ -77,7 +77,9 @@ settings = {
     'vivi_zeit.content.cp_bar-layout-source': (
         'egg://zeit.frontend/config/cp-bar-layouts.xml'),
     'vivi_zeit.frontend_banner-source': (
-        'egg://zeit.frontend/data/config/banner.xml')
+        'egg://zeit.frontend/data/config/banner.xml'),
+    'vivi_zeit.content.gallery_gallery-types-url': (
+        'egg://zeit.frontend/data/config/gallery-types.xml')
 }
 
 
