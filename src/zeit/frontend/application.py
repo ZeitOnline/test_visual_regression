@@ -391,6 +391,7 @@ default_images_sizes = {
     'zmo-medium': (330, 100),
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
+    'zmo-card-picture': (600, 900),
 }
 
 
