@@ -397,7 +397,9 @@ default_images_sizes = {
 def default_image_url(image,
                       image_pattern='default'):
     try:
-        if hasattr(image, 'layout'):
+        if image_pattern != 'default':
+            width, height = default_images_sizes.get(image_pattern, (640, 480))
+        elif hasattr(image, 'layout'):
             width, height = default_images_sizes.get(image.layout, (640, 480))
         else:
             width, height = default_images_sizes.get(image_pattern, (640, 480))
