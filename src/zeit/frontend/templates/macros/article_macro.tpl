@@ -247,8 +247,8 @@
 {% macro headervideo(obj) -%}
     <div data-backgroundvideo="{{obj.id}}" class="article__main-video--longform">
         <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
-                <source src="{{obj.source}}" type="video/mp4">
-                <source src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.webm" type="video/webm">
+                <!-- <source src="{{obj.source}}" type="video/mp4"> -->
+                <source src="http://live0.zeit.de/multimedia/videos/3535440497001.webm" type="video/webm">
         </video>
         <img class="article__main-image--longform video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.id}}.jpg">
     </div>
