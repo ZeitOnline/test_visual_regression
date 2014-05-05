@@ -30,7 +30,7 @@ def get_video_asset(teaser):
     if video.video_2 is not None and video.video is not None:
         video.video_2.highest_rendition = _get_video_source(video.video_2)
         return [video.video, video.video_2]
-        
+
     return video.video
 
 def _get_video_source(self):
@@ -41,9 +41,9 @@ def _get_video_source(self):
                 highest_rendition = rendition
         return highest_rendition.url
     except AttributeError:
-        pass
+        return self.flv_url
     except TypeError:
-        pass
+        return self.flv_url
 
 def get_gallery_asset(teaser):
     gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)

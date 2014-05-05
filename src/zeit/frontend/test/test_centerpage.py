@@ -357,9 +357,9 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             teaser.find_element_by_xpath('//source[2]').get_attribute("src")
 
         src1_val = \
-            'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/' \
-            '927/18140073001_3035897844001_Beitrag-' \
-            'Skispringen-f-r-Anf-nger.mp4'
+            'http://brightcove.vo.llnwd.net/pd15/media/18140073001/'\
+            '201401/1105/18140073001_3035966678001_Beitrag'\
+            '-Skispringen-f-r-Anf-nger.mp4'
         src2_val = \
             'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
         src_img = \
