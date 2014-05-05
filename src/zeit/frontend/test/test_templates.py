@@ -417,14 +417,17 @@ def test_macro_video_should_produce_markup(jinja2_env):
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
-           'description': 'test', 'format': ''}
+           'description': 'test', 'format': '', 'title': 'title'}
     fig = '<figure class="figure is-constrained is-centered" data-video="1">'
-    img = '<img class="figure__media" src="pic.jpg">'
+    img = '<img class="figure__media" src="pic.jpg" alt="Video: title"'\
+        ' title="Video: title">'
+
     cap = '<figcaption class="figure__caption">test</figcaption>'
     lines = tpl.module.video(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
+    print output
     assert fig in output
     assert img in output
     assert cap in output

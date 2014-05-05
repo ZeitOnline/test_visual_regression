@@ -13,7 +13,7 @@ Available attributes:
 <a href="{{teaser.uniqueId | translate_url}}">
 	<div data-backgroundvideo="{{obj.uniqueId|substring_from('/')}}" class="cp__lead-full--dark">
 	      <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
-	            <source src="{{obj.flv_url}}" type="video/mp4">
+	            <source src="{{obj.highest_rendition}}" type="video/mp4">
 	            <source src="http://live0.zeit.de/multimedia/videos/{{obj.uniqueId|substring_from('/')}}.webm" type="video/webm">
 	      </video>
 	      <img class="video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.uniqueId|substring_from('/')}}.jpg" alt="{{obj.teaserTitle}}">
