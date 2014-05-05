@@ -162,6 +162,10 @@ def test_column_should_have_header_image(testserver):
     assert '<div class="scaled-image">' in browser.contents
     assert '<img class=" figure__media"' in browser.contents
 
+def test_column_should_not_have_header_image(testserver):
+    browser = Browser('%s/artikel/standardkolumne-ohne-bild-beispiel' % testserver.url)
+    assert '<div class="article__column__headerimage">' not in browser.contents
+
 
 def test_health_check_should_response_and_have_status_200(testserver):
     browser = Browser('%s/health_check' % testserver.url)
@@ -207,7 +211,7 @@ def test_artikel02_has_mode_sub_ressort(testserver):
 def test_artikel02_has_correct_banner_channel(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, '')
-    assert article_view.banner_channel == 'lebensart/mode/article'
+    assert article_view.banner_channel == 'zeitmz/mode/article'
 
 
 def test_artikel05_has_rankedTagsList(testserver):
@@ -510,10 +514,9 @@ def test_article01_should_not_have_a_focussed_nextread(application):
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
     request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
-    view = view_centerpage.Centerpage('', request)
-    view() #trigger __call__ method
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.frontend.view_centerpage.Centerpage(cp, request)
+    view = view_centerpage.Centerpage(cp, request)
+    view() #trigger __call__ method
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None

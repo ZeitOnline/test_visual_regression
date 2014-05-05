@@ -57,6 +57,7 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+
 class BaseImage(object):
 
     @property
@@ -153,6 +154,7 @@ class _Video(object):
         self.renditions = model_block.video.renditions
         self.video_still = model_block.video.video_still
         self.description = model_block.video.subtitle
+        self.title = model_block.video.title
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 
@@ -250,7 +252,7 @@ def _raw_html(xml):
 
 
 def _inline_html(xml):
-    allowed_elements = "a|span|strong|img|em|sup|sub|caption"
+    allowed_elements = "a|span|strong|img|em|sup|sub|caption|br"
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">

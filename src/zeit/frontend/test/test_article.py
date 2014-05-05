@@ -201,6 +201,18 @@ def test_article05_has_correct_date(selenium_driver, testserver):
     assert text == u'03. NOVEMBER 2013'
 
 
+def test_print_article_has_no_last_changed_date(testserver):
+    # print articles should omit the last semantic change date
+    article = Browser('%s/artikel/01' % testserver.url).contents
+    assert '26. September 2013<span>editiert' not in article
+
+
+def test_online_article_has_last_changed_date(testserver):
+    # online articles should include the last semantic change date
+    article = Browser('%s/artikel/04' % testserver.url).contents
+    assert '01. Oktober 2013, 16:38 Uhr<span>editiert' in article
+
+
 def test_article03_has_no_source(selenium_driver, testserver):
     # zon source
     driver = selenium_driver

@@ -18,7 +18,10 @@ log = logging.getLogger(__name__)
              renderer='templates/centerpage.html')
 class Centerpage(zeit.frontend.view.Base):
 
+    advertising_enabled = True
+
     def __call__(self):
+        self.context.advertising_enabled = self.advertising_enabled
         stats_path = self.request.registry.settings.node_comment_statistics_path
         self._unique_id_comments = comments.comments_per_unique_id(stats_path)
         return super(Centerpage, self).__call__()
@@ -43,11 +46,22 @@ class Centerpage(zeit.frontend.view.Base):
         return type(self.context).__name__.lower()
 
     @property
+    def is_hp(self):
+        if self.request.path == '/'+self.request.registry.settings.hp:
+            return True
+        else:
+            return False
+
+    @property
     def pagetitle(self):
         # ToDo(T.B.) should be, doesn't work
         # return self.context.html-meta-title
         return 'Lebensart - Mode, Essen und Trinken, ' + \
                'Partnerschaft | ZEIT ONLINE'
+
+    @property
+    def pagetitle_in_body(self):
+        return self.context.title
 
     @property
     def pagedescription(self):
@@ -155,6 +169,32 @@ class Centerpage(zeit.frontend.view.Base):
                     comments=reach.fetch_comments(3)
                     )
         return buzz
+
+    @property
+    def ressort(self):
+        if self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+    @property
+    def sub_ressort(self):
+        if self.context.sub_ressort:
+            return self.context.sub_ressort.lower()
+        else:
+            return ''
+
+    @property
+    def banner_channel(self):
+        channel = ''
+        if self.ressort:
+            channel += self.ressort.replace('lebensart','zeitmz')
+        if self.sub_ressort:
+            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
+        if self.type:
+            channel += "/" + self.type
+        return channel
+
 
     def banner(self, tile):
         try:

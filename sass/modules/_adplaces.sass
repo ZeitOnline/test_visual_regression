@@ -13,6 +13,12 @@
 %ad__inner
     margin: 0 auto
 
+// hide all desktop ads
+.ad__min__768
+    display: none
+    +respond-min(em(769px))
+        display: block
+
 // mobile
 .iqd_mobile__adplace
     width: 320px
@@ -30,8 +36,8 @@
         padding: $small 0
     +respond-min($break-3)
         border: none
-        float: left
-        margin: 0 $medium $compact 0
+        float: right
+        margin: 0 0 $compact $medium
         max-width: 300px
         padding: 0
     object
@@ -54,6 +60,9 @@
 .ad__tile_7.ad__on__centerpage // tile 7 on cp
     @extend %ad__mr
     margin: 0 auto $compact auto
+    .ad__tile_7__label,
+    .ad__tile_8__label
+        display: none
     +respond-min($break-2)
         padding: 0
         border: none

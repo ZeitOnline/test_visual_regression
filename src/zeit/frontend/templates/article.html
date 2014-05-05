@@ -170,8 +170,11 @@
         </div>
     </article>
     <!-- seo article date modification -->
-    {% block article_publishdate %}
-        {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
-    {% endblock article_publishdate %}
+
+    {% if view.context.product.id not in ['TGS', 'ZEI', 'ZMLB'] %}
+        {% block article_publishdate %}
+            {{blocks.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
+        {% endblock article_publishdate %}
+    {% endif %}
 
 {% endblock content %}

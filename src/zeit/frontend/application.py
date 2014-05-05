@@ -9,6 +9,9 @@ from zeit.frontend.article import IShortformArticle
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
 from zeit.frontend.centerpage import get_image_asset
+from zeit.frontend.gallery import IGallery
+from zeit.frontend.gallery import IProductGallery
+from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import itertools
 import jinja2
@@ -291,7 +294,6 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
-
 def format_date_ago(dt, precision=2, past_tense='vor {}',
                     future_tense='in {}'):
 
@@ -411,6 +413,7 @@ def default_image_url(image,
         path = '/'.join(parts)
         url = urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
+
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
@@ -445,7 +448,7 @@ def most_sufficient_teaser_image(teaser_block,
         raise KeyError(asset_type)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
-    image_base_name = re.split('/', asset.uniqueId)[-1]
+    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
@@ -488,6 +491,11 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 if IArticleTemplateSettings(context).template == 'column':
                     zope.interface.alsoProvides(context,
                                                 IColumnArticle)
+            elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
+                if IGalleryMetadata(context).type == 'zmo-product':
+                    zope.interface.alsoProvides(context, IProductGallery)
+                else:
+                    zope.interface.alsoProvides(context, IGallery)
             return self._change_viewname(tdict)
         except OSError as e:
             if e.errno == 2:
