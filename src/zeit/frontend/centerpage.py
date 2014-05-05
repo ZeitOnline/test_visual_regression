@@ -1,6 +1,5 @@
 from grokcore.component import adapter, implementer
 from zeit.content.image.interfaces import IImageGroup, IImage, IImageMetadata
-from zeit.content.video.interfaces import IVideo
 import zeit.cms.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
