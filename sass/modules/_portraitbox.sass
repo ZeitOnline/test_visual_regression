@@ -1,9 +1,8 @@
 .portraitbox
-    margin-bottom: em(10px)
-    margin-left: em(20px)
-    margin-right: em(40px)
-    margin-top: em(30px)
-    width: em(200px)
+    margin: em(55px) em(45px) em(20px) em(20px) !important
+    width: em(180px)
+    +respond-max($break-2)
+        display: none
     .portraitbox-heading
         font-family: "TabletGothic-Bold", $sans-fallbacks
         font-size: $little
@@ -14,4 +13,4 @@
     p
         font-family: "TabletGothic", $sans-fallbacks
         font-size: em(12px)
-        line-height: em(18px)
+        line-height: 1.5em
