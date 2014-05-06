@@ -171,7 +171,7 @@ def test_article09_has_correct_date(selenium_driver, testserver):
     driver.get('%s/artikel/09' % testserver.url)
     text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
-    assert text == u'04. M\xc4RZ 2014, 14:35 UHR'
+    assert text == u'4. M\xc4RZ 2014, 14:35 UHR'
 
 
 def test_article03_has_correct_date(selenium_driver, testserver):
@@ -198,7 +198,7 @@ def test_article05_has_correct_date(selenium_driver, testserver):
     driver.get('%s/artikel/05' % testserver.url)
     text = driver.find_element_by_class_name('article__head__meta__date')\
         .text.strip()
-    assert text == u'03. NOVEMBER 2013'
+    assert text == u'3. NOVEMBER 2013'
 
 
 def test_print_article_has_no_last_changed_date(testserver):
@@ -210,7 +210,7 @@ def test_print_article_has_no_last_changed_date(testserver):
 def test_online_article_has_last_changed_date(testserver):
     # online articles should include the last semantic change date
     article = Browser('%s/artikel/04' % testserver.url).contents
-    assert '01. Oktober 2013, 16:38 Uhr<span>editiert' in article
+    assert '1. Oktober 2013, 16:38 Uhr' in article
 
 
 def test_article03_has_no_source(selenium_driver, testserver):
@@ -277,8 +277,8 @@ def test_article_header2_has_correct_subtitle(selenium_driver, testserver):
     driver.get('%s/artikel/header2' % testserver.url)
     text = driver.find_element_by_class_name('article__head__subtitle')\
         .text.strip()
-    assert text == u'\u00BBWie viele Fl\u00FCchtlingskinder bin '\
-        u'ich eine Suchende, Getriebene.\u00AB'
+    assert text == u'Wie viele Fl\u00FCchtlingskinder bin '\
+        u'ich eine Suchende, Getriebene.'
 
 
 def test_artikel_header_header1_should_have_correct_header_source(testserver):

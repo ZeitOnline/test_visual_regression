@@ -186,7 +186,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
+    m = '<h2 class="article__subheading is-constrained is-centered">xy</h2>'
     assert m == output
 
 
@@ -417,14 +417,17 @@ def test_macro_video_should_produce_markup(jinja2_env):
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
-           'description': 'test', 'format': ''}
+           'description': 'test', 'format': '', 'title': 'title'}
     fig = '<figure class="figure is-constrained is-centered" data-video="1">'
-    img = '<img class="figure__media" src="pic.jpg">'
+    img = '<img class="figure__media" src="pic.jpg" alt="Video: title"'\
+        ' title="Video: title">'
+
     cap = '<figcaption class="figure__caption">test</figcaption>'
     lines = tpl.module.video(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
+
     assert fig in output
     assert img in output
     assert cap in output
@@ -501,7 +504,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="fb:admins" content="595098294">',
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
-          '"og:description" itemprop="description" content="subtitle">',
+          '"og:description" content="subtitle">',
           '<meta property="og:url" content="test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
@@ -781,6 +784,23 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     assert '<a href="ID">' in output
     assert '<div class="teaser__kicker">SUPATITLE</div>' in output
     assert '<div class="teaser__title">TITLE</div>' in output
+
+def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = None
+    teaser.supertitle = "FALLBACK"
+
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'FALLBACK' in output
 
 
 def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):

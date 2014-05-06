@@ -12,8 +12,10 @@
 			 * @param {Object} $element
 			 */
 			setVideoPosition: function( $element ){
+
 				var video = $element.find("video");
 				video.css({"left": ($element.width() - video.width())/2 + "px"});
+				video.css({"top": ($element.height() - video.height())/2 + "px"});
 				/* prevents the video from glitching */
 				
 				if( $element.attr('data-backgroundvideo') ){
@@ -35,7 +37,9 @@
 			}else{
 				
 				//set initial position of video
-				el.setVideoPosition( $element );
+				$( window ).on("load", function(){
+					el.setVideoPosition( $element );
+				});
 
 				//reset video position on resize
 				$( window ).on("resize", function(){

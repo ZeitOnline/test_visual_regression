@@ -1,0 +1,35 @@
+{#
+
+teaser template for citation card
+
+Available attributes:
+    teaser_block
+    teaser
+
+#}
+{%- extends "templates/inc/teaser/abstract_card_teaser_template.html" -%}
+
+{% block card_deck %}
+ <div class="card__deck">
+    <div class="card card--front" style="background-color: #{{teaser_block.background_color}}; background-image: url({{image | default_image_url(image_pattern=teaser_block.layout.image_pattern) }});">
+        <h2 class="card__title">{{teaser.teaserSupertitle}}</h2>
+        <div class="card__text card__text--with-bg">{{teaser.teaserTitle}}</div>
+        <a href="{{teaser.uniqueId | translate_url}}" class="card__button js-flip-card">Drehen</a>
+    </div>
+    <div class="card card--back" style="background-color: #{{teaser_block.background_color}};">
+        <h2 class="card__title">{{teaser.teaserSupertitle}}</h2>
+        <div class="card__text">{{teaser.teaserText}}</div>
+        <a href="{{teaser.uniqueId | translate_url}}" class="card__button js-slide-card">Teilen</a>
+    </div>
+    <div class="card__slider">
+        <div class="card__slide js-slide-card">
+            <div class="card__sharing-icons">
+                <a href="#" class="card__sharing-icon icon-twitter"></a>
+                <a href="#" class="card__sharing-icon icon-google"></a>
+                <a href="#" class="card__sharing-icon icon-facebook"></a>
+                <a href="#" class="card__sharing-icon icon-mail"></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock card_deck %}

@@ -15,17 +15,19 @@
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
     <div class="article__head__subtitle">
         <p>
-            {% if with_quotes %}
-                »{{view.subtitle}}«
-            {% else %}
-                {{view.subtitle}}
-            {% endif %}
-            {% if include_meta and view.genre %}
-                {{view.genre|title}}
-            {% endif %}
-            {% if include_meta and view.authors %}
-                {{ meta_author(view.authors, titlecase=view.genre==None) }}
-            {% endif %}
+            <strong>
+                {% if with_quotes %}
+                    »{{view.subtitle}}«
+                {% else %}
+                    {{view.subtitle}}
+                {% endif %}
+                {% if include_meta and view.genre %}
+                    {{view.genre|title}}
+                {% endif %}
+                {% if include_meta and view.authors %}
+                    {{ meta_author(view.authors, titlecase=view.genre==None) }}
+                {% endif %}
+            </strong>
         </p>
     </div>
 {%- endmacro %}
@@ -83,9 +85,9 @@
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h3 class="article__subheading is-constrained is-centered">
+    <h2 class="article__subheading is-constrained is-centered">
         {{ intertitle|striptags }}
-    </h3>
+    </h2>
 {%- endmacro %}
 
 {% macro raw(obj) -%}
@@ -234,7 +236,7 @@
              figure is-constrained is-centered
         {% endif %}" data-video="{{obj.id}}">
             <div class="video__still">
-                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
                 <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
@@ -250,7 +252,7 @@
                 <source src="{{obj.source}}" type="video/mp4">
                 <source src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.webm" type="video/webm">
         </video>
-        <img class="article__main-image--longform video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.id}}.jpg">
+        <img class="article__main-image--longform video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.id}}.jpg" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
     </div>
 {%- endmacro %}
 
@@ -440,9 +442,9 @@
             var content = el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){
-                    el[0].innerHTML = '{{publish_date}}<span>zuletzt aktualisiert am ' + content + '</span>';
+                    el[0].innerHTML = '{{publish_date}} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
                 }else{
-                    el[0].innerHTML = '{{publish_date}}<span>editiert: ' + content + '</span>';
+                    el[0].innerHTML = '{{publish_date}} —<br><span>editiert: ' + content + '</span>';
                 }
             }
         </script>

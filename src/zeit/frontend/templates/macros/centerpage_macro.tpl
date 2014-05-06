@@ -30,7 +30,11 @@
 {% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
     {% if withlink -%}<a href="{{teaser.uniqueId | translate_url}}">{%- endif %}
     <div class="{{ additional_css_class | default('teaser') }}__kicker">
-        {{teaser.teaserSupertitle}}
+        {% if teaser.teaserSupertitle is not none%}
+            {{teaser.teaserSupertitle | hide_none}}
+        {%- else %}
+            {{teaser.supertitle | hide_none }}
+        {%- endif %}    
     </div>
     <div class="{{ additional_css_class | default('teaser') }}__title">
         {{teaser.teaserTitle}}

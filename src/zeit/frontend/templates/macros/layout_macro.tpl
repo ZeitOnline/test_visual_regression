@@ -87,15 +87,18 @@
     <meta name="date" content="{{ view.date_first_released_meta }}"/>
 {%- endmacro %}
 {% macro breadcrumbs(crumbs) -%}
+
     <div class="breadcrumbs-wrap">
         <div class="breadcrumbs" id="js-breadcrumbs">
             <div class="breadcrumbs__list-wrap">
                 <div class="breadcrumbs__list">
                     {% for crumb in crumbs %}
                         <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-                            <a href="{{crumb[1]}}" itemprop="url">
-                                <span itemprop="title">{{crumb[0]}}</span>
-                            </a>
+                            {% if crumb[1] != '' %}
+                                <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
+                            {% else %}
+                                <span itemprop="title">&nbsp;&nbsp;{{crumb[0]}}</span>
+                            {% endif %}
                         </div>
                         {% if not loop.last %}
                           &rsaquo;
@@ -117,7 +120,7 @@
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title}}">
-    <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
+    <meta property="og:description" content="{{obj.subtitle}}">
     <meta property="og:url" content="{{request.host}}{{request.path_info}}">
 
     {% if obj.sharing_img %}
@@ -420,7 +423,7 @@
             </script>
             <noscript>
             <div>
-                <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
                     <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
             </a></div>
             </noscript>

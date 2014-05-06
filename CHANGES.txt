@@ -1,10 +1,18 @@
 Change log for zeit.frontend
 ============================
 
-0.4.4 (unreleased)
+0.4.5 (unreleased)
 ------------------
 
 - article share counters connected to linkreach
+
+
+0.4.4 (2014-05-05)
+------------------
+
+- fix ad zone in noscript
+- fix adzones for new ressorts
+- fix breadcrumbs for new ressorts
 
 
 0.4.3 (2014-05-04)
