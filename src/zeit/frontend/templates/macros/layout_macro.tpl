@@ -394,7 +394,7 @@
                 </div>
                 <div>
                     <ul>
-                        <li>Bildrechte</li>
+                        <!-- <li>Bildrechte</li> -->
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
