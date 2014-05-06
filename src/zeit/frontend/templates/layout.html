@@ -75,7 +75,7 @@
         <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
         <script type="text/javascript" src="{{request.asset_url('js/libs/iqd/adam.js')}}"></script>
         {% if view.context.advertising_enabled %}
-            <!--[if gte IE 9]> -->
+            <!--[if gt IE 9]>-->
             <script src="{{request.asset_url('js/libs/iqd/sasmobile.js')}}"></script>
             <!-- <![endif]-->
         {% endif %}
