@@ -1,12 +1,19 @@
 Change log for zeit.frontend
 ============================
 
-0.4.7 (unreleased)
+0.4.8 (unreleased)
+------------------
+- new square teaser logic
+
+0.4.7 (2014-05-06)
 ------------------
 
+- add teaserbar capabilities to centerpage
 - add author portrait-box to articles
 - Adapted test-config
 - quickfix MTB behaviour in Webkit browsers
+- use in config defined agatho_host (and not community_host) for agatho requests
+- use in config defined timeout for agatho requests
 - Adapted test-config.
 - article share counters connected to linkreach
 - clean up sharing and tracking URLs in templates
@@ -16,7 +23,7 @@ Change log for zeit.frontend
 - Adapted test-config.
 - improve comment area button wrapping
 - add TiemannLight fontface
-- new square teaser logic
+- add flipcards
 
 
 0.4.6 (2014-05-06)
