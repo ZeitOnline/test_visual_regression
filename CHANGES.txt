@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - add author portrait-box to articles
 - Adapted test-config
+- quickfix MTB behaviour in Webkit browsers
+- Adapted test-config.
 
 0.4.6 (2014-05-06)
 ------------------
