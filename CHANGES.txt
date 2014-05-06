@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.4.7 (unreleased)
 ------------------
 
+- add teaserbar capabilities to centerpage
 - fix logo for internet exploder 8
 - fix longform in ie8
 - quickfix MTB behaviour in Webkit browsers
