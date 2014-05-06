@@ -34,7 +34,7 @@
             {{teaser.teaserSupertitle | hide_none}}
         {%- else %}
             {{teaser.supertitle | hide_none }}
-        {%- endif %}    
+        {%- endif %}
     </div>
     <div class="{{ additional_css_class | default('teaser') }}__title">
         {{teaser.teaserTitle}}
