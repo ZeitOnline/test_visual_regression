@@ -339,7 +339,7 @@
 
         <div class="article__comments-trigger">
             <a class="article__comments-trigger__link js-comments-trigger">
-                <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
+                <span class="article__comments-trigger__count icon-sharebox-close">{{obj.comments.comment_count}}</span>
                 <span class="article__comments-trigger__text">{% if obj.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
             </a>
         </div>
@@ -347,10 +347,10 @@
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
             {% if request.app_info.authenticated -%}
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" id="js-comments-form">
+            <form action="{{obj.comments.comment_post_url}}" method="POST" class="comment__form" id="js-comments-form">
                 <p>
                     <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
-                    <input type="hidden" name="nid" value="{{comments['nid']}}">
+                    <input type="hidden" name="nid" value="{{obj.comments.nid}}">
                     <input type="hidden" name="pid" value="">
                     <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
                 </p>
@@ -377,14 +377,14 @@
             <div class="comments__body" id="js-comments-body">
                 <div class="tabs__content is-active">
                     <div class="comments__list" id="tab1">
-                        {% for commentdict in comments['comments'] %}
+                        {% for commentdict in obj.comments.comments %}
                             {{ comment(commentdict, false) }}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="tabs__content">
                     <div class="comments__list" id="tab2">
-                        {% for commentdict in comments['comments'] %}
+                        {% for commentdict in obj.comments.comments %}
                             {% if commentdict['recommended'] -%}
                                 {{ comment(commentdict, true) }}
                             {%- endif %}
