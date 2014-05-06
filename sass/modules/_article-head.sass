@@ -9,6 +9,8 @@ $standard-header-image-max-width: 31.25em
   .article__head__subtitle
     p
       +body-type-zoom
+    strong
+      font-weight: normal
 
 .article__head
   text-align: center
@@ -76,7 +78,7 @@ $standard-header-image-max-width: 31.25em
   margin-top: $thin
   letter-spacing: 1px
   font-size: $font-xs
-  max-width: 28em
+  max-width: 40em
   line-height: $meta-line-height
 
 .article__head__meta__offset
@@ -90,10 +92,4 @@ $standard-header-image-max-width: 31.25em
 .article__head__meta__source
   &:after
     content: ' — '
-
-.article__head__meta__date
-  span
-    &:before
-      white-space: pre
-      content: ' — '
 

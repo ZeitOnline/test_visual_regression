@@ -120,7 +120,7 @@
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title}}">
-    <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
+    <meta property="og:description" content="{{obj.subtitle}}">
     <meta property="og:url" content="{{request.host}}{{request.path_info}}">
 
     {% if obj.sharing_img %}

@@ -1,7 +1,14 @@
 Change log for zeit.frontend
 ============================
 
-0.4.4 (unreleased)
+0.4.5 (unreleased)
+------------------
+
+- use in config defined agatho_host (and not community_host) for agatho requests
+- use in config defined timeout for agatho requests
+
+
+0.4.4 (2014-05-05)
 ------------------
 
 - fix ad zone in noscript

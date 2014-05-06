@@ -48,7 +48,7 @@ def make_banner_list(banner_config):
     root = objectify.fromstring(file.read())
     for place in root.place:
         try:
-            sizes = place.multiple_sizes.split(',').strip()
+            sizes = str(place.multiple_sizes).strip().split(',')
         except AttributeError:
             sizes = [str(place.width) + 'x' + str(place.height)]
         try:

@@ -135,9 +135,9 @@ def comment_as_dict(comment, request):
 def get_thread(unique_id, request):
     """ return a dict representation of the
         comment thread of the given article"""
-    if 'community_host' not in request.registry.settings:
+    if 'agatho_host' not in request.registry.settings:
         return None
-    api = Agatho(agatho_url='%s/agatho/thread/' % request.registry.settings.community_host,
+    api = Agatho(agatho_url='%s/agatho/thread/' % request.registry.settings.agatho_host,
       timeout=float(request.registry.settings.community_host_timeout_secs))
     thread = api.collection_get(unique_id)
     if thread is not None:
@@ -147,8 +147,8 @@ def get_thread(unique_id, request):
                 comment_count=int(thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
                 # TODO: these urls should point to ourselves, not to the 'back-backend'
-                comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.community_host, request.path, request.url),
-                comment_report_url="%s/services/json" % (request.registry.settings.community_host))
+                comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
+                comment_report_url="%s/services/json" % (request.registry.settings.agatho_host))
         except AssertionError:
             return None
     else:
