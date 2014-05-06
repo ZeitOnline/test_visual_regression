@@ -5,11 +5,14 @@
     overflow: hidden
     width: 100%
     margin-bottom: $compact
-    & > .scaled-image img
-        position: absolute
-        top: -25%
-        left: 0%
-        width: 100%
+    & > .scaled-image
+        @extend %cp__lead
+        @extend %cp__lead--dark
+        img
+            position: absolute
+            top: -25%
+            left: 0%
+            width: 100%
     a
         +link
             color: $white
@@ -39,12 +42,11 @@
 
 
 .cp__teaser__gallery__wrap
-    background: #000
-    background: transparentize($black, 0.35)
     bottom: 0
     padding: $tiny $petite $compact $petite
     position: absolute
     width: 100%
+    z-index: 2
     .icon-galerie-icon-white
         display: inline-block
         height: 30px
