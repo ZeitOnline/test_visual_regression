@@ -74,3 +74,7 @@ class TeaserImage(zeit.frontend.block.BaseImage):
         self.attr_alt = meta.alt
         self.alt = meta.alt
         self.copyright = meta.copyrights
+        if self.attr_alt == '':
+            self.attr_alt = meta.caption
+        if self.attr_title == '':
+            self.attr_title = meta.caption
