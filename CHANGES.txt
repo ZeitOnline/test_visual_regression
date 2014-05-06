@@ -4,15 +4,14 @@ Change log for zeit.frontend
 0.4.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix logo for internet exploder 8
+- fix longform in ie8
 
 
 0.4.6 (2014-05-06)
 ------------------
 
 - that community fix
-- adding logo support for internet explorer 8
-- fix longform in internet explorer 8
 
 
 0.4.5 (2014-05-06)
