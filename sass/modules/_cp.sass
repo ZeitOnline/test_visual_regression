@@ -5,13 +5,16 @@ $cp__comment__count-height: em(50px)
 $cp__comment__count-width: em(60px)
 
 .cp__title
-	margin-top: $compact
-	letter-spacing: 0.4em
+	margin-top: em_to_rem($medium)
+	letter-spacing: rem(6px)
 	text-transform: uppercase
 	font-size: $font-xl
-	font-family: "Tiemann", serif
+	font-family: "TiemannLight", serif
 	text-align: center
 	display: block
+
+.cp__title ~ .main > .cp__lead-full__wrap
+	margin-top: em_to_rem($medium)
 
 //hide breadcrumbs for cp
 .for-centerpage
@@ -61,7 +64,7 @@ $cp__comment__count-width: em(60px)
 	span
 		display: block
 	margin-bottom: $compact
-		
+
 .cp__buttons__image
 	overflow: hidden
 	height: $cp__buttons__image-height*1.5
@@ -105,7 +108,7 @@ $cp__comment__count-width: em(60px)
 	padding-top: 0 !important
 	margin-top: $compact
 	margin-bottom: 0
-		
+
 .cp__buttons__large__image
 	@extend .cp__buttons__image
 	height: $cp__buttons__large__image-height

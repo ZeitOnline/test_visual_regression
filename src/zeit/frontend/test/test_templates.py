@@ -72,7 +72,7 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
         'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li>Bildrechte</li>'\
+        '</ul></div><div><ul><!-- <li>Bildrechte</li> -->'\
         '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
@@ -103,6 +103,19 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
         '</a></div></div></div></div></div>'
     lines = tpl.module.breadcrumbs(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+def test_macro_portraitbox_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    obj = {'name': 'name', 'text': 'text'}
+
+    markup = '<figure class="portraitbox figure-stamp">' \
+        '<div class="portraitbox-heading">name</div>' \
+        'text</figure>'
+    lines = tpl.module.portraitbox(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/reisen/2013-06/box-pia-volk</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-06-26T16:13:30.539145+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-01T13:13:35.612816+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-01T13:14:37.456316+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.exner</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:48d37f08-926e-4519-93e2-f5b8e3863ee3}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-01T13:13:26.681814+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">portraitbox</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2013-10-01T13:13:37Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">806</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 01 Oct 2013 13:13:37 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"64656a-326-4e7adb87eb290"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

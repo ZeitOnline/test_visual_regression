@@ -1,5 +1,5 @@
 from urllib2 import HTTPError
-from zeit.content.article.edit.reference import Gallery
+from zeit.content.article.edit.reference import Gallery, Portraitbox
 from zeit.frontend import view
 from zeit.frontend import view_article, view_centerpage
 from zeit.frontend.block import InlineGalleryImage
@@ -80,11 +80,40 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     assert article.breadcrumb == l
 
 
+def test_linkreach_property_should_be_set(application, app_settings):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    request = mock.Mock()
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    article_view = view_article.Article(context, request)
+    article_view.request.url = 'artikel/03'
+    article_view.request.traversed = ('foo',)
+    article_view.request.route_url = lambda *args: ''
+    assert isinstance(article_view.linkreach, dict)
+
+
+def test_linkreach_property_should_fetch_correct_data(testserver,
+                                                      app_settings):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    request = mock.Mock()
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    article_view = view_article.Article(context, request)
+    article_view.request.url = 'foo'
+    article_view.request.traversed = ('foo',)
+    article_view.request.route_url = lambda *args: ''
+    assert article_view.linkreach['total'] == ('1,1', 'Tsd.')
+
+
 def test_header_img_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, '')
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
+
+def test_article_should_have_author_box(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/autorenbox')
+    article_view = view_article.Article(context, '')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article_view.context)
+    assert type(body.values()[2]) == Portraitbox
 
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
