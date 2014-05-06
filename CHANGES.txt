@@ -15,6 +15,7 @@ Change log for zeit.frontend
 - quickfix MTB behaviour in Webkit browsers
 - Adapted test-config.
 - improve comment area button wrapping
+- add TiemannLight fontface
 
 0.4.6 (2014-05-06)
 ------------------
