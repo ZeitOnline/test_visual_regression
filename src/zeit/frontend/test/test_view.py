@@ -199,9 +199,7 @@ def test_artikel05_should_have_header_image(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
     assert '<div class="article__head-wrap">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
-    assert '<img alt="Ein Mann in Leipzig vor dem &#34;Bau B\xc3\xbcro&#34;\n"'\
-           'title="Ein Mann in Leipzig vor dem &#34;Bau B\xc3\xbcro&#34;\n"'\
-           'class="article__main-image--longform' in browser.contents
+    assert 'class="article__main-image--longform' in browser.contents
 
 
 def test_column_should_have_header_image(testserver):
