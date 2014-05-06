@@ -28,4 +28,7 @@ Available attributes:
     {% if view.monothematic_block %}
         {%- include "templates/inc/cp_area_monothematicblock.html" ignore missing -%}
     {% endif %}
+    {% if view.teaserbar %}
+        {%- include "templates/inc/cp_area_teaserbar.html" ignore missing -%}
+    {% endif %}
 {% endblock content %}
