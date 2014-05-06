@@ -141,7 +141,7 @@
         id="zmo-square-large"
         title="ZMO großes Quadrat"
         image_pattern="zmo-square-large"
-        areas="lead-1"
+        areas="lead-1 lead"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
