@@ -437,7 +437,7 @@
             <a href="http://zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
