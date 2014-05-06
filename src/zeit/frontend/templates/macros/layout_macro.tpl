@@ -37,7 +37,7 @@
         <script type="text/javascript">
 
             var Z_WT_KENNUNG =
-            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{'/'.join(('',)+request.traversed)}}"; // content id
+            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online./{{'/'.join(request.traversed or ())}}"; // content id
 
             var webtrekk = {
                 linkTrack : "standard",
@@ -110,7 +110,7 @@
     </div>
 {%- endmacro %}
 
-{% macro sharing_meta(obj,request) -%}
+{% macro sharing_meta(obj, request) -%}
     <meta name="twitter:card" content="{{obj.twitter_card_type}}">
     <meta name="twitter:site" content="@zeitonline">
     <meta name="twitter:creator" content="@zeitonline">
@@ -121,7 +121,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title}}">
     <meta property="og:description" content="{{obj.subtitle}}">
-    <meta property="og:url" content="{{obj.article_url}}">
+    <meta property="og:url" content="{{obj.article_url or request.host + request.path_info}}">
 
     {% if obj.sharing_img %}
         {% if obj.sharing_img.video_still %}
