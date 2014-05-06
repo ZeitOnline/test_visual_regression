@@ -5,6 +5,8 @@ Change log for zeit.frontend
 ------------------
 
 - that community fix
+- adding logo support for internet explorer 8
+- fix longform in internet explorer 8
 
 
 0.4.5 (2014-05-06)
