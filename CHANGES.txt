@@ -7,6 +7,8 @@ Change log for zeit.frontend
 - add author portrait-box to articles
 - Adapted test-config
 - quickfix MTB behaviour in Webkit browsers
+- use in config defined agatho_host (and not community_host) for agatho requests
+- use in config defined timeout for agatho requests
 - Adapted test-config.
 - article share counters connected to linkreach
 - clean up sharing and tracking URLs in templates
