@@ -3,6 +3,7 @@ import urlparse
 import string
 from datetime import datetime
 from lxml import etree
+import requests
 from lxml.etree import XMLSyntaxError
 import zeit.cms.interfaces
 
@@ -13,20 +14,21 @@ def path_of_article(unique_id):
 
 class Agatho(object):
 
-    def __init__(self, agatho_url):
+    def __init__(self, agatho_url, timeout=5.0):
         self.entry_point = agatho_url
+        self.timeout = timeout
 
     def collection_get(self, unique_id):
         try:
-            return _place_answers_under_parent(
-                etree.parse(
-                    '%s%s' % (self.entry_point, path_of_article(unique_id))
-                )
-            )
-        except(IOError, XMLSyntaxError):
-            # lxml reports a 404 as IOError,
-            # 404 code signals that no thread exists
-            # for that article
+            response = requests.get('%s%s' % (self.entry_point, path_of_article(unique_id)), timeout=self.timeout)
+        except: # yes, we really do want to catch *all* exceptions here!
+            return None
+        if response.ok:
+            try:
+                return _place_answers_under_parent(etree.fromstring(response.content))
+            except(IOError, XMLSyntaxError):
+                return None
+        else:
             return None
 
 
@@ -139,7 +141,8 @@ def get_thread(unique_id, request):
         comment thread of the given article"""
     if 'agatho_host' not in request.registry.settings:
         return None
-    api = Agatho('%s/agatho/thread/' % request.registry.settings.agatho_host)
+    api = Agatho(agatho_url='%s/agatho/thread/' % request.registry.settings.agatho_host,
+      timeout=float(request.registry.settings.community_host_timeout_secs))
     thread = api.collection_get(unique_id)
     if thread is not None:
         try:

@@ -189,7 +189,7 @@
         id="zmo-landscape-small"
         title="ZMO kleiner Teaser 16:9"
         image_pattern="zmo-landscape-small"
-        areas="lead informatives"
+        areas="lead informatives teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 

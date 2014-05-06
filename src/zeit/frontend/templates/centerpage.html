@@ -9,9 +9,9 @@ Available attributes:
 {% extends "templates/layout.html" %}
 
 {% block page_title %}
-    {% if view.is_hp == False %}
+    <!-- {% if view.is_hp == False %}
         <span class="cp__title">{{view.pagetitle_in_body}}</span>
-    {% endif %}
+    {% endif %} -->
 {% endblock page_title %}
 
 {%  block page_wrap_inner %}
@@ -27,5 +27,8 @@ Available attributes:
     {%- include "templates/inc/cp_area_lead-2.html" ignore missing -%}
     {% if view.monothematic_block %}
         {%- include "templates/inc/cp_area_monothematicblock.html" ignore missing -%}
+    {% endif %}
+    {% if view.teaserbar %}
+        {%- include "templates/inc/cp_area_teaserbar.html" ignore missing -%}
     {% endif %}
 {% endblock content %}
