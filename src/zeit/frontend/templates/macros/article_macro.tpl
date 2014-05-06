@@ -293,7 +293,7 @@
             </div>
             {%- endif %}
             <div class="article__sharing__services">
-                <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{request.url}}&amp;p[images][0]={{obj.sharing_img.video_still or obj.sharing_img|default_image_url}}&amp;p[title]={{obj.title}}&amp;p[summary]={{obj.subtitle}}"
+                <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{view.article_url}}&amp;p[images][0]={{obj.sharing_img.video_still or obj.sharing_img|default_image_url}}&amp;p[title]={{obj.title}}&amp;p[summary]={{obj.subtitle}}"
                     target="_blank"
                     class="article__sharing__item js-has-popup"
                     data-width="600"
@@ -301,7 +301,7 @@
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                 <a href="http://twitter.com/home?status={{request.url}}"
+                 <a href="http://twitter.com/home?status={{view.article_url}}"
                     target="_blank"
                     class="article__sharing__item js-has-popup"
                     data-width="600"
@@ -309,7 +309,7 @@
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a href="https://plus.google.com/share?url={{request.url}}"
+                <a href="https://plus.google.com/share?url={{view.article_url}}"
                    target="_blank"
                    class="article__sharing__item js-has-popup"
                    data-width="480"

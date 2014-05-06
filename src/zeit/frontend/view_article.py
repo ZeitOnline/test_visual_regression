@@ -294,7 +294,7 @@ class Article(zeit.frontend.view.Content):
 
         linkreach = self.request.registry.settings.linkreach_host
         reach = LinkReach(None, linkreach)
-        raw = reach.get_counts_by_url(self.request.url)
+        raw = reach.get_counts_by_url(self.article_url)
         total = raw.pop('total', 0)
         counts = {'total': total} if total >= 10 else {}
         counts.update([(k, v.get('total', 0)) for k, v in raw.items()])

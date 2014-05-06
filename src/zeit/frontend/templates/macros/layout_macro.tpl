@@ -37,7 +37,7 @@
         <script type="text/javascript">
 
             var Z_WT_KENNUNG =
-            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path_info}}"; // content id
+            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{'/'.join(('',)+request.traversed)}}"; // content id
 
             var webtrekk = {
                 linkTrack : "standard",
@@ -121,7 +121,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title}}">
     <meta property="og:description" content="{{obj.subtitle}}">
-    <meta property="og:url" content="{{request.host}}{{request.path_info}}">
+    <meta property="og:url" content="{{obj.article_url}}">
 
     {% if obj.sharing_img %}
         {% if obj.sharing_img.video_still %}

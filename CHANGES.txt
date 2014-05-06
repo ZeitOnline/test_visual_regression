@@ -5,6 +5,7 @@ Change log for zeit.frontend
 ------------------
 
 - article share counters connected to linkreach
+- clean up sharing and tracking URLs in templates
 
 
 0.4.4 (2014-05-05)
