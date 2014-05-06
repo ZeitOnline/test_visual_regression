@@ -6,8 +6,11 @@ Change log for zeit.frontend
 
 - article share counters connected to linkreach
 - clean up sharing and tracking URLs in templates
+- fix logo for internet exploder 8
+- fix longform in ie8
+- quickfix MTB behaviour in Webkit browsers
 - Adapted test-config.
-
+- improve comment area button wrapping
 
 0.4.6 (2014-05-06)
 ------------------
@@ -19,13 +22,12 @@ Change log for zeit.frontend
 ------------------
 
 - bufixing
->>>>>>> master
 
 
 0.4.4 (2014-05-05)
 ------------------
 
-- fix footer, IE9 Bug, underlining of fullwidth teaser title  
+- fix footer, IE9 Bug, underlining of fullwidth teaser title
 - fix ad zone in noscript
 - fix adzones for new ressorts
 - fix breadcrumbs for new ressorts
