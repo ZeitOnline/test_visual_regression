@@ -3,6 +3,7 @@ import urlparse
 import string
 from datetime import datetime
 from lxml import etree
+from lxml.etree from XMLSyntaxError
 import zeit.cms.interfaces
 
 
@@ -22,7 +23,7 @@ class Agatho(object):
                     '%s%s' % (self.entry_point, path_of_article(unique_id))
                 )
             )
-        except IOError:
+        except(IOError, XMLSyntaxError):
             # lxml reports a 404 as IOError,
             # 404 code signals that no thread exists
             # for that article
