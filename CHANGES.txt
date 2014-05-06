@@ -1,11 +1,22 @@
 Change log for zeit.frontend
 ============================
 
-0.4.5 (unreleased)
+0.4.7 (unreleased)
 ------------------
 
 - add author portrait-box to articles
+- Adapted test-config
 
+0.4.6 (2014-05-06)
+------------------
+
+- that community fix
+
+
+0.4.5 (2014-05-06)
+------------------
+
+- bufixing
 
 0.4.4 (2014-05-05)
 ------------------

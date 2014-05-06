@@ -380,7 +380,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'Es leben die Skispringenden Sportredakteure!' == \
             unicode(subtitle.text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert u'\u00BBund der Titel dazu\u00AB' == unicode(h1.text)
+        assert u'und der Titel dazu' == unicode(h1.text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
@@ -413,7 +413,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert len(title_wrap) != 0
 
         assert re.search(image_pattern, img.get_attribute("src"))
-        assert unicode(h1.text) == u'\u00BBArticle Image Asset Titel\u00AB'
+        assert unicode(h1.text) == u'Article Image Asset Titel'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\
