@@ -292,7 +292,7 @@
                 <span class="article__sharing__unit">{{ obj.linkreach.total[1] }}</span>
             </div>
             {%- endif %}
-            <div class="article__sharing__services">
+            <div class="article__sharing__services blind">
                 <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{view.article_url}}&amp;p[images][0]={{obj.sharing_img.video_still or obj.sharing_img|default_image_url}}&amp;p[title]={{obj.title}}&amp;p[summary]={{obj.subtitle}}"
                     target="_blank"
                     class="article__sharing__item js-has-popup"
