@@ -176,11 +176,15 @@ class Centerpage(zeit.frontend.view.Base):
         stats_path = self.request.registry.settings.node_comment_statistics_path
         linkreach = self.request.registry.settings.linkreach_host
         reach = LinkReach(stats_path, linkreach)
-        buzz = dict(twitter=reach.fetch_service('twitter', 3),
-                    facebook=reach.fetch_service('facebook', 3),
-                    comments=reach.fetch_comments(3)
-                    )
-        return buzz
+        try:
+            buzz = dict(twitter=reach.fetch_service('twitter', 3),
+                        facebook=reach.fetch_service('facebook', 3),
+                        comments=reach.fetch_comments(3)
+                   )
+            return buzz
+        except:
+            log.error('Cant reach link-reach')
+        return dict(twitter=[],facebook=[],comments=[])
 
     @property
     def ressort(self):

@@ -106,16 +106,29 @@ def _prepare_date(value):
 
 
 class Entry(colander.MappingSchema):
-    score = colander.SchemaNode(colander.Int())
-    location = colander.SchemaNode(colander.String())
-    supertitle = colander.SchemaNode(colander.String())
-    title = colander.SchemaNode(colander.String())
-    subtitle = colander.SchemaNode(colander.String())
+    score = colander.SchemaNode(colander.Int(),
+                                missing=colander.drop
+                                )
+    location = colander.SchemaNode(colander.String(),
+                                missing=colander.drop
+                                )
+    supertitle = colander.SchemaNode(colander.String(),
+                                missing=colander.drop
+                                )
+    title = colander.SchemaNode(colander.String(),
+                                missing=colander.drop
+                                )
+    subtitle = colander.SchemaNode(colander.String(),
+                                   missing=colander.drop
+                                   )
     timestamp = colander.SchemaNode(colander.Int(),
                                     preparer=_prepare_date,
                                     missing=colander.drop
                                     )
-    section = colander.SchemaNode(colander.String())
+    section = colander.SchemaNode(colander.String(),
+                                  missing=colander.drop
+                                  )
+
     fetchedAt = colander.SchemaNode(colander.Int(),
                                     preparer=_prepare_date,
                                     missing=colander.drop
