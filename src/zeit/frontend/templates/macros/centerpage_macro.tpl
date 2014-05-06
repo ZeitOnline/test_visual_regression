@@ -41,3 +41,22 @@
     </div>
     {% if withlink -%}</a>{%- endif %}
 {%- endmacro %}
+
+{% macro teaser_sharing_card(teaser) -%}
+    <div class="card__slider">
+        <div class="card__slide js-slide-card">
+            <div class="card__sharing-icons">
+                <a href="http://twitter.com/home?status={{request.url|e}}"
+                    class="card__sharing-icon js-stop-propagation js-has-popup icon-twitter" target="_blank" data-width="600" data-height="460" title="Auf Twitter teilen"></a>
+
+                <a href="https://plus.google.com/share?url={{request.url|e}}"
+                    class="card__sharing-icon js-stop-propagation js-has-popup icon-google" target="_blank" data-width="600" data-height="460" title="Auf Google+ teilen"></a>
+
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{request.url|e}}"
+                    class="card__sharing-icon js-stop-propagation js-has-popup icon-facebook" target="_blank" data-width="600" data-height="460" title="Auf Facebook teilen"></a>
+
+                <a href="mailto:?subject={{teaser.teaserTitle}}&amp;body={{request.url|e}}" class="card__sharing-icon js-stop-propagation icon-mail" title="Per Mail senden"></a>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

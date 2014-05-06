@@ -24,6 +24,13 @@ define(['jquery'], function() {
     };
 
    /**
+     * Stop event propagation
+     */
+    var stopPropagation = function(e) {
+        e.stopPropagation();
+    };
+
+   /**
      * Initialize flipping cards
      */
     var init = function() {
@@ -31,6 +38,7 @@ define(['jquery'], function() {
 
         node.on('click', '.js-flip-card', flipCard);
         node.on('click', '.js-slide-card', slideCard);
+        node.on('click', '.js-stop-propagation', stopPropagation);
     };
 
     return {
