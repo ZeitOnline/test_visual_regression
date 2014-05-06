@@ -120,7 +120,7 @@
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title}}">
-    <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
+    <meta property="og:description" content="{{obj.subtitle}}">
     <meta property="og:url" content="{{request.host}}{{request.path_info}}">
 
     {% if obj.sharing_img %}
@@ -394,7 +394,7 @@
                 </div>
                 <div>
                     <ul>
-                        <li>Bildrechte</li>
+                        <!-- <li>Bildrechte</li> -->
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>

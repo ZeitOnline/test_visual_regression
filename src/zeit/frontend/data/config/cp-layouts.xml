@@ -224,5 +224,48 @@
         areas="teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
+
+    <layout
+        id="zmo-card-citation"
+        title="ZMO Karte Zitat"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-picture"
+        title="ZMO Karte mit Bild"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-read"
+        title="ZMO Karte Flip'n'Read"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-share-read"
+        title="ZMO Karte Share'n'Read"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-share"
+        title="ZMO Karte Flip'n'Share"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-flip"
+        title="ZMO Karte Flip'n'Flip"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
 </layouts>
 

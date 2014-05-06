@@ -290,7 +290,7 @@ def translate_url(context, url):
 
 
 def format_date(obj, type='short'):
-    formats = {'long': "dd. MMMM yyyy, H:mm 'Uhr'", 'short': "dd. MMMM yyyy"}
+    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
@@ -391,13 +391,16 @@ default_images_sizes = {
     'zmo-medium': (330, 100),
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
+    'zmo-card-picture': (320, 480),
 }
 
 
 def default_image_url(image,
                       image_pattern='default'):
     try:
-        if hasattr(image, 'layout'):
+        if image_pattern != 'default':
+            width, height = default_images_sizes.get(image_pattern, (640, 480))
+        elif hasattr(image, 'layout'):
             width, height = default_images_sizes.get(image.layout, (640, 480))
         else:
             width, height = default_images_sizes.get(image_pattern, (640, 480))

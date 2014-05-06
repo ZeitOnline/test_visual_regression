@@ -34,6 +34,11 @@ settings = {
         'data',
         'comments'
     ),
+    'agatho_host': u'file://%s/' % path.join(
+        path.dirname(path.abspath(frontend.__file__)),
+        'data',
+        'comments'
+    ),
     'linkreach_host': u'file://%s/' % path.join(
         path.dirname(path.abspath(frontend.__file__)),
         'data',
@@ -123,12 +128,13 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     from zeit.frontend.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['community_host'])
+    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
+    # TODO(T.B.): Is settings['community_host'] still needed?
     return LinkReach(settings['community_host'], settings['linkreach_host'])
 
 
