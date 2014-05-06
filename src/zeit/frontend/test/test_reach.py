@@ -91,4 +91,4 @@ def test_counts_per_url_are_fetchable(linkreach):
 
 def test_unreachable_url_fails_gracefully(linkreach):
     data = linkreach.get_counts_by_url('bar')
-    assert {'googleplus', 'twitter', 'facebook'}.issubset(data)
+    assert data == {}
