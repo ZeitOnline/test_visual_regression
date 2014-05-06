@@ -8,6 +8,11 @@ Change log for zeit.frontend
 - Adapted test-config
 - quickfix MTB behaviour in Webkit browsers
 - Adapted test-config.
+- fix logo for internet exploder 8
+- fix longform in ie8
+- quickfix MTB behaviour in Webkit browsers
+- Adapted test-config.
+- improve comment area button wrapping
 
 0.4.6 (2014-05-06)
 ------------------

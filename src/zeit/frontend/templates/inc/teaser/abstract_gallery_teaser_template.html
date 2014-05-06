@@ -9,9 +9,11 @@ Will not be called by itself.
     {%- set image = get_teaser_image(teaser_block, teaser) %}
     {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
     {% block asset %}
+    <a href="{{teaser.uniqueId | translate_url}}">
         <div class="scaled-image">
             {{ lama.insert_responsive_image(image) }}
         </div>
+    </a>
     {% endblock %}
     <div class="{{self.additional_css_class()}}__wrap">
         <span class="icon-galerie-icon-white"></span>
