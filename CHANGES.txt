@@ -1,16 +1,30 @@
 Change log for zeit.frontend
 ============================
 
-0.4.5 (unreleased)
+0.4.7 (unreleased)
 ------------------
 
 - use in config defined agatho_host (and not community_host) for agatho requests
 - use in config defined timeout for agatho requests
+- Adapted test-config.
+
+
+0.4.6 (2014-05-06)
+------------------
+
+- that community fix
+
+
+0.4.5 (2014-05-06)
+------------------
+
+- bufixing
 
 
 0.4.4 (2014-05-05)
 ------------------
 
+- fix footer, IE9 Bug, underlining of fullwidth teaser title  
 - fix ad zone in noscript
 - fix adzones for new ressorts
 - fix breadcrumbs for new ressorts

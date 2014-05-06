@@ -4,6 +4,7 @@ import string
 from datetime import datetime
 from lxml import etree
 import requests
+from lxml.etree import XMLSyntaxError
 import zeit.cms.interfaces
 
 
@@ -20,10 +21,13 @@ class Agatho(object):
     def collection_get(self, unique_id):
         try:
             response = requests.get('%s%s' % (self.entry_point, path_of_article(unique_id)), timeout=self.timeout)
-        except:  # yes, we really do want to catch *all* exceptions here!
+        except: # yes, we really do want to catch *all* exceptions here!
             return None
         if response.ok:
-            return _place_answers_under_parent(etree.fromstring(response.content))
+            try:
+                return _place_answers_under_parent(etree.fromstring(response.content))
+            except(IOError, XMLSyntaxError):
+                return None
         else:
             return None
 
