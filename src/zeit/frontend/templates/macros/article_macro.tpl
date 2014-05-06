@@ -282,27 +282,41 @@
     </article>
 {%- endmacro %}
 
-{% macro comments(comments) -%}
-    {% if comments is not none -%}
+{% macro comments(obj, request) -%}
+    {% if obj.comments is not none -%}
     <div class="article__socialbox tc" id="js-social-services">
         <div class="article__sharing">
+            {% if obj.linkreach.total -%}
             <div class="article__sharing__item article__sharing__sum">
-                <span class="article__sharing__total">47</span>
-                <span class="article__sharing__unit">Tsd.</span>
+                <span class="article__sharing__total">{{ obj.linkreach.total[0] }}</span>
+                <span class="article__sharing__unit">{{ obj.linkreach.total[1] }}</span>
             </div>
+            {%- endif %}
             <div class="article__sharing__services blind">
-                <a class="article__sharing__item">
+                <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{view.article_url}}&amp;p[images][0]={{obj.sharing_img.video_still or obj.sharing_img|default_image_url}}&amp;p[title]={{obj.title}}&amp;p[summary]={{obj.subtitle}}"
+                    target="_blank"
+                    class="article__sharing__item js-has-popup"
+                    data-width="600"
+                    data-height="300">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
-                    <span class="article__sharing__services__text">8,2 Tsd</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                <a class="article__sharing__item">
+                 <a href="http://twitter.com/home?status={{view.article_url}}"
+                    target="_blank"
+                    class="article__sharing__item js-has-popup"
+                    data-width="600"
+                    data-height="300">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-                    <span class="article__sharing__services__text">6,7 Tsd</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a class="article__sharing__item">
-                    <span class="article__sharing__services__icon icon-sharebox-google"></span>
-                    <span class="article__sharing__services__text">877</span>
-                </a>
+                <a href="https://plus.google.com/share?url={{view.article_url}}"
+                   target="_blank"
+                   class="article__sharing__item js-has-popup"
+                   data-width="480"
+                   data-height="350">
+                   <span class="article__sharing__services__icon icon-sharebox-google"></span>
+                   <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
+               </a>
             </div>
             <div class="article__sharing__item">
                 <a class="article__sharing__link js-toggle-sharing">
@@ -315,7 +329,7 @@
         <div class="article__comments-trigger">
             <a class="article__comments-trigger__link js-comments-trigger">
                 <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
-                <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+                <span class="article__comments-trigger__text">{% if obj.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
             </a>
         </div>
     </div>
@@ -382,7 +396,7 @@
         </script>
         <script type="text/template" id="js-report-comment-template">
             {% if request.app_info.authenticated -%}
-            <form action="{{comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
+            <form action="{{obj.comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
