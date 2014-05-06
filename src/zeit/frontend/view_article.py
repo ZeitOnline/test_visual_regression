@@ -296,9 +296,13 @@ class Article(zeit.frontend.view.Content):
         reach = LinkReach(None, linkreach)
         raw = reach.get_counts_by_url(self.article_url)
         total = raw.pop('total', 0)
-        counts = {'total': total} if total >= 10 else {}
-        counts.update([(k, v.get('total', 0)) for k, v in raw.items()])
-        return dict([(k, unitize(v)) for k, v in counts.items()])
+        counts = {'total': unitize(total)} if total >= 10 else {}
+        for k, v in raw.items():
+            try:
+                counts[k] = unitize(v['total'])
+            except:
+                continue
+        return counts
 
     @property
     def tracking_type(self):
