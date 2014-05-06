@@ -1,15 +1,22 @@
 Change log for zeit.frontend
 ============================
 
-0.4.5 (unreleased)
+0.4.6 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
 
+0.4.5 (2014-05-06)
+------------------
+
+- bufixing
+
+
 0.4.4 (2014-05-05)
 ------------------
 
+- fix footer, IE9 Bug, underlining of fullwidth teaser title  
 - fix ad zone in noscript
 - fix adzones for new ressorts
 - fix breadcrumbs for new ressorts
