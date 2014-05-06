@@ -31,6 +31,7 @@ class LinkReach(object):
         self.linkreach = linkreach
 
     def fetch_service(self, service, limit, section='zeit-magazin'):
+        """Compile a list of popular articles for a specific service."""
         if section not in self.sections:
             raise UnavailableSectionException('No section named: ' + section)
 
@@ -48,6 +49,7 @@ class LinkReach(object):
         return DataSequence().deserialize(json.load(response))
 
     def fetch_comments(self, limit, section='zeit-magazin'):
+        """Compile a list of most commented on articles."""
         if section not in self.sections:
             raise UnavailableSectionException('No section named: ' + section)
 
@@ -84,6 +86,16 @@ class LinkReach(object):
             item_list.append(item)
 
         return DataSequence().deserialize(item_list)
+
+    def get_counts_by_url(self, url):
+        """Get share counts for all services for a specific URL."""
+        params = urllib.urlencode({'url': url})
+        url = '%s/reach?%s' % (self.linkreach, params)
+        try:
+            response = urllib2.urlopen(url, timeout=4).read()
+            return json.loads(response)
+        except (urllib2.HTTPError, urllib2.URLError, ValueError):
+            return {}
 
 
 def _prepare_date(value):
