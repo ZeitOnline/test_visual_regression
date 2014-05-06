@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from zeit.frontend.reach import DataSequence
 from zeit.frontend.reach import Entry
-from zeit.frontend.reach import LinkReach
 import datetime
 import pytest
 import zeit.frontend.reach
@@ -79,6 +78,17 @@ def test_data_for_googleplus_should_be_fetched(linkreach):
     data = linkreach.fetch_service('googleplus', 3)
     assert len(data) == 3
 
+
 def test_data_for_comments_should_be_fetched(application, linkreach):
     data = linkreach.fetch_comments(3)
     assert len(data) == 3
+
+
+def test_counts_per_url_are_fetchable(linkreach):
+    data = linkreach.get_counts_by_url('foo')
+    assert {'googleplus', 'twitter', 'facebook'}.issubset(data)
+
+
+def test_unreachable_url_fails_gracefully(linkreach):
+    data = linkreach.get_counts_by_url('bar')
+    assert data == {}

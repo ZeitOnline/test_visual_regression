@@ -1,8 +1,7 @@
-from babel.dates import get_timezone
 from datetime import date
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
-from zeit.cms.workflow.interfaces import IPublishInfo
+from zeit.frontend.reach import LinkReach
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
@@ -280,6 +279,26 @@ class Article(zeit.frontend.view.Content):
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
                           request=self.request)
+
+    @property
+    def linkreach(self):
+        def unitize(n):
+            if n <= 999:
+                return str(n), ''
+            elif n <= 9999:
+                return ','.join(list(str(n))[:2]), 'Tsd.'
+            elif n <= 999999:
+                return str(n / 1000), 'Tsd.'
+            else:
+                return str(n / 1000000), 'Mio.'
+
+        linkreach = self.request.registry.settings.linkreach_host
+        reach = LinkReach(None, linkreach)
+        raw = reach.get_counts_by_url(self.article_url)
+        total = raw.pop('total', 0)
+        counts = {'total': total} if total >= 10 else {}
+        counts.update([(k, v.get('total', 0)) for k, v in raw.items()])
+        return dict([(k, unitize(v)) for k, v in counts.items()])
 
     @property
     def tracking_type(self):
