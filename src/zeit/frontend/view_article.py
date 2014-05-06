@@ -310,24 +310,6 @@ class Article(zeit.frontend.view.Content):
             return 'Artikel'
 
     @property
-    def type(self):
-        return type(self.context).__name__.lower()
-
-    @property
-    def ressort(self):
-        if self.context.ressort:
-            return self.context.ressort.lower()
-        else:
-            return ''
-
-    @property
-    def sub_ressort(self):
-        if self.context.sub_ressort:
-            return self.context.sub_ressort.lower()
-        else:
-            return ''
-
-    @property
     def text_length(self):
         return self.context.textLength
 

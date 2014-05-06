@@ -31,6 +31,24 @@ class Base(object):
         return {}
 
     @property
+    def type(self):
+        return type(self.context).__name__.lower()
+
+    @property
+    def ressort(self):
+        if self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+    @property
+    def sub_ressort(self):
+        if self.context.sub_ressort:
+            return self.context.sub_ressort.lower()
+        else:
+            return ''
+
+    @property
     def banner_channel(self):
         channel = ''
         if self.ressort:
@@ -41,7 +59,9 @@ class Base(object):
         if self.sub_ressort:
             channel += "/" + self.sub_ressort.replace('-', 'und', 1)
         if self.type:
-            channel += "/" + self.type
+            # TODO: zone type gallery after launch
+            mytype = self.type.replace('gallery','article')
+            channel += "/" + mytype
         return channel
 
     def banner(self, tile):
