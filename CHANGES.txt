@@ -4,8 +4,14 @@ Change log for zeit.frontend
 0.4.8 (unreleased)
 ------------------
 - new square teaser logic
-- Fallback for alt/title attribute 
+
+- fix banner on galleries
+
+- Fallback for alt/title attribute
+
 - Make link-reach more failsafe
+
+- make logo zeit link work internaly by adding www
 
 0.4.7 (2014-05-06)
 ------------------
@@ -26,6 +32,7 @@ Change log for zeit.frontend
 - improve comment area button wrapping
 - add TiemannLight fontface
 - add flipcards
+- failsafe-ing linkreach
 
 
 0.4.6 (2014-05-06)

@@ -148,7 +148,8 @@
             var figCaptionSizing = function( image ) {
                 var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
                 figCaptions.each(function( index ) {
-                    var media = image || $( this ).prev().find('.figure__media'),
+                    var previous = $( this ).prev().find('.figure__media'),
+                    media = image || previous,
                     imageWidth = media.width(),
                     imageHeight = media.height();
                     if( $(this).parents('.gallery').size() > 0) {
@@ -158,8 +159,10 @@
                             $( this ).css('padding-right', '30%');
                         }
                     } else {
-                        if(imageWidth <= imageHeight) {
-                            $( this ).css("max-width", imageWidth);
+                        if( previous.attr('src') === media.attr('src') ) {
+                            if(imageWidth <= imageHeight) {
+                                $( this ).css("max-width", imageWidth);
+                            }
                         }
                     }
                 });
