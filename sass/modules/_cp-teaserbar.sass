@@ -1,3 +1,5 @@
+$teaserbar_teaser_max_width: em(270px)
+
 .cp__teaserbar__wrap
     @extend .mtb__wrap
 
@@ -8,6 +10,9 @@
 // start: teasers //
 
 .cp__teaserbar__teasers__wrap
-    @extend .mtb__teasers__wrap
+    +justify-children-horizontally('div')
+    div
+        max-width: $teaserbar_teaser_max_width
+        vertical-align: top
 
 // end: teasers //
