@@ -56,6 +56,10 @@
 	margin-bottom: $large
 	a
 		+link-colors($grey--dark, grey--dark, $grey--dark, $grey--dark, $grey--dark)
+		+transition(none)
+		+on-interaction
+			border-bottom: 0px
+			text-decoration: none
 
 .paginator__dash
 	color: $charcoal

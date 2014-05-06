@@ -1,10 +1,16 @@
 Change log for zeit.frontend
 ============================
 
-0.4.7 (unreleased)
+0.4.8 (unreleased)
 ------------------
+- new square teaser logic
 
 - Fallback for alt/title attribute 
+
+0.4.7 (2014-05-06)
+------------------
+
+- add teaserbar capabilities to centerpage
 - add author portrait-box to articles
 - Adapted test-config
 - quickfix MTB behaviour in Webkit browsers
@@ -20,6 +26,7 @@ Change log for zeit.frontend
 - improve comment area button wrapping
 - add TiemannLight fontface
 - add flipcards
+
 
 0.4.6 (2014-05-06)
 ------------------
