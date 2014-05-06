@@ -14,12 +14,6 @@
   @else if $style == normal
     font-style: normal
 
-=cassise($weight: bold)
-  @if $weight == bold
-    font-family: "cassise_modernfatface", $serif-fallbacks
-    font-weight: normal
-    line-height: $base-line-height*0.95
-
 =tablet($weight: regular)
   @if $weight == regular
     font-family: "TabletGothic", $sans-fallbacks
@@ -48,9 +42,6 @@
 
 .tablet-bold
   +tablet(bold)
-
-.cassise-bold
-  +cassise(bold)
 
 .franziska
   +franziska(regular, normal)
