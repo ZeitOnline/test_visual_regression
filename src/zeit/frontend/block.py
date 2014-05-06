@@ -1,6 +1,6 @@
 # coding: utf-8
 import PIL
-from lxml import etree
+from lxml import etree, html
 from grokcore.component import adapter, implementer
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
@@ -57,6 +57,22 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IPortraitbox)
+class Portraitbox(object):
+
+    def __init__(self, model_block):
+        ref = model_block.references
+        if ref is None:
+            return None
+        self.text = self._author_text(model_block.references.text)
+        self.name = model_block.references.name
+
+    def _author_text(self, pbox):
+        # TODO: Highly fragile, we need to find a better solution
+        # Apparently we don't have a root element
+        p_text = html.fragments_fromstring(pbox)[0]
+        return etree.tostring(p_text)
 
 class BaseImage(object):
 
