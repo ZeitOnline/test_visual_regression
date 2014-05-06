@@ -27,8 +27,10 @@ define(['jquery'], function() {
      * Initialize flipping cards
      */
     var init = function() {
-        $('main').on('click', '.js-flip-card', flipCard);
-        $('main').on('click', '.js-slide-card', slideCard);
+        var node = $('main');
+
+        node.on('click', '.js-flip-card', flipCard);
+        node.on('click', '.js-slide-card', slideCard);
     };
 
     return {
