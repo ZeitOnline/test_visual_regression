@@ -31,6 +31,7 @@ class Article(zeit.frontend.view.Content):
     advertising_enabled = True
     main_nav_full_width = False
     is_longform = False
+    _linkreach = None
     page_nr = 1
 
     def __call__(self):
@@ -282,27 +283,31 @@ class Article(zeit.frontend.view.Content):
 
     @property
     def linkreach(self):
-        def unitize(n):
-            if n <= 999:
-                return str(n), ''
-            elif n <= 9999:
-                return ','.join(list(str(n))[:2]), 'Tsd.'
-            elif n <= 999999:
-                return str(n / 1000), 'Tsd.'
-            else:
-                return str(n / 1000000), 'Mio.'
+        if self._linkreach is None:
 
-        linkreach = self.request.registry.settings.linkreach_host
-        reach = LinkReach(None, linkreach)
-        raw = reach.get_counts_by_url(self.article_url)
-        total = raw.pop('total', 0)
-        counts = {'total': unitize(total)} if total >= 10 else {}
-        for k, v in raw.items():
-            try:
-                counts[k] = unitize(v['total'])
-            except:
-                continue
-        return counts
+            def unitize(n):
+                if n <= 999:
+                    return str(n), ''
+                elif n <= 9999:
+                    return ','.join(list(str(n))[:2]), 'Tsd.'
+                elif n <= 999999:
+                    return str(n / 1000), 'Tsd.'
+                else:
+                    return str(n / 1000000), 'Mio.'
+
+            linkreach = self.request.registry.settings.linkreach_host
+            reach = LinkReach(None, linkreach)
+            raw = reach.get_counts_by_url(self.article_url)
+            total = raw.pop('total', 0)
+            counts = {'total': unitize(total)} if total >= 10 else {}
+            for k, v in raw.items():
+                try:
+                    counts[k] = unitize(v['total'])
+                except:
+                    continue
+            self._linkreach = counts
+
+        return self._linkreach
 
     @property
     def tracking_type(self):
