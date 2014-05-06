@@ -4,9 +4,12 @@ Change log for zeit.frontend
 0.4.8 (unreleased)
 ------------------
 - new square teaser logic
+
 - fix banner on galleries
 
-- Fallback for alt/title attribute 
+- Fallback for alt/title attribute
+
+- Make link-reach more failsafe
 
 - make logo zeit link work internaly by adding www
 
