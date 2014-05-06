@@ -7,3 +7,14 @@ $fix-mqs-h: 48em
 
 @import screen
 @import "base/textonly"
+
+// fixes for IE8:
+// we've decided as Microsoft dropped support of IE8
+// recently, not to fix many bugs in IE8 but to fallback
+// as much as possible. Some fixes though are applied
+// to logos and completely utter things
+.lt-ie9
+    .main-nav__logo__img
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/zeit-logo--magazin.png',sizingMethod='scale')
+    .icon-zm-logo--white
+        background: none !important
