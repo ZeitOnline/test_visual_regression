@@ -26,6 +26,7 @@ Change log for zeit.frontend
 - improve comment area button wrapping
 - add TiemannLight fontface
 - add flipcards
+- failsafe-ing linkreach
 
 
 0.4.6 (2014-05-06)
