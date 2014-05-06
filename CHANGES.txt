@@ -36,7 +36,6 @@ Change log for zeit.frontend
 
 0.4.5 (2014-05-06)
 ------------------
->>>>>>> master
 
 - bufixing
 
