@@ -75,7 +75,12 @@
     +tablet(bold)
     font-size: $font-m
     a, a:visited
+        text-decoration: none
         color: $black
+        +transition(none)
+        +on-interaction
+            border-bottom: 0px
+            text-decoration: none
 
 .cp__buzz__service__list__entry__score
     color: $grey

@@ -50,13 +50,12 @@
                     {% endif %}
                 {% endblock article_comments %}
 
-                {% block article_nextread %}
-                    {{ blocks.focussed_nextread(view.focussed_nextread) }}
-                {% endblock article_nextread %}
-
             </div>
         </div>
     </article>
+    {% block article_nextread %}
+        {{ blocks.focussed_nextread(view.focussed_nextread) }}
+    {% endblock article_nextread %}
     <!-- seo article date modification -->
 
     {% if view.context.product.id not in ['TGS', 'ZEI', 'ZMLB'] %}
