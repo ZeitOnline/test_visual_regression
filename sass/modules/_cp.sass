@@ -14,6 +14,9 @@ $cp__comment__count-width: em(60px)
 	text-align: center
 	display: block
 
+.cp__title ~ .main > .cp__lead-full__wrap
+	margin-top: em_to_rem($medium)
+
 //hide breadcrumbs for cp
 .for-centerpage
 	.main-nav
@@ -63,7 +66,7 @@ $cp__comment__count-width: em(60px)
 	span
 		display: block
 	margin-bottom: $compact
-		
+
 .cp__buttons__image
 	overflow: hidden
 	height: $cp__buttons__image-height*1.5
@@ -108,8 +111,8 @@ $cp__comment__count-width: em(60px)
 	margin-top: $compact
 	margin-bottom: 0
 	width: 100%
-	display: inline-block
-		
+	display: inline-block		
+
 .cp__buttons__large__image
 	@extend .cp__buttons__image
 	height: $cp__buttons__large__image-height

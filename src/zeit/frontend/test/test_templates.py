@@ -72,7 +72,7 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
         'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li>Bildrechte</li>'\
+        '</ul></div><div><ul><!-- <li>Bildrechte</li> -->'\
         '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
