@@ -26,6 +26,7 @@
     <width>800</width>
     <height>50</height>
     <dcopt>ist</dcopt>
+    <diuqilon>True</diuqilon>
     <min_width>768</min_width>
   </place>
   <place number="4" active="true">
