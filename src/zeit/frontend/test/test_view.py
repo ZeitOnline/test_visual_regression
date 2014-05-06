@@ -84,6 +84,7 @@ def test_linkreach_property_should_be_set(application, app_settings):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     request = mock.Mock()
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    request.traversed = ('artikel', '03')
     article_view = view_article.Article(context, request)
     assert isinstance(article_view.linkreach, dict)
 
@@ -95,6 +96,7 @@ def test_linkreach_property_should_fetch_correct_data(testserver,
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
     article_view = view_article.Article(context, request)
     article_view.request.url = 'foo'
+    article_view.request.traversed = ('foo')
     assert article_view.linkreach['total'] == ('1,1', 'Tsd.')
 
 
