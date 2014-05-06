@@ -4,6 +4,7 @@ Change log for zeit.frontend
 0.4.7 (unreleased)
 ------------------
 
+- quickfix MTB behaviour in Webkit browsers
 - Adapted test-config.
 - improve comment area button wrapping
 
