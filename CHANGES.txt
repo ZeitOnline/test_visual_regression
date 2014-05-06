@@ -3,9 +3,7 @@ Change log for zeit.frontend
 
 0.4.8 (unreleased)
 ------------------
-
-- Nothing changed yet.
-
+- new square teaser logic
 
 0.4.7 (2014-05-06)
 ------------------
