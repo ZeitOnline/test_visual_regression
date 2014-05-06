@@ -3,11 +3,11 @@ $mtb_teaser_width: em(270px)
 .mtb__wrap
     clear: left
     width: 100%
-    padding: $compact 0 $compact 0
+    // padding: $compact 0 $compact 0
 
 .mtb
     width: 88%
-    margin: 0 auto $big auto
+    margin: 0 auto $medium auto
 
     +respond-min-max($break-1, $break-3)
         width: 2*$mtb_teaser_width + $compact // two teaser columns, one margin
@@ -17,7 +17,7 @@ $mtb_teaser_width: em(270px)
 .mtb__divider
     border-top: $dblhair solid $black
     height: 0
-    margin: 0 $compact $small $compact
+    margin: $compact $compact $small $compact
     +respond-min($break-1)
         margin-bottom: $medium
 
