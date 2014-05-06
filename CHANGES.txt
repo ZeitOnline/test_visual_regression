@@ -16,6 +16,8 @@ Change log for zeit.frontend
 - Adapted test-config.
 - improve comment area button wrapping
 - add TiemannLight fontface
+- new square teaser logic
+
 
 0.4.6 (2014-05-06)
 ------------------
