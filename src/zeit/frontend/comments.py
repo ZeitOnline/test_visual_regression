@@ -3,7 +3,7 @@ import urlparse
 import string
 from datetime import datetime
 from lxml import etree
-from lxml.etree from XMLSyntaxError
+from lxml.etree import XMLSyntaxError
 import zeit.cms.interfaces
 
 
