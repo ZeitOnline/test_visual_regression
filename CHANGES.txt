@@ -4,6 +4,10 @@ Change log for zeit.frontend
 0.4.7 (unreleased)
 ------------------
 
+- add author portrait-box to articles
+- Adapted test-config
+- quickfix MTB behaviour in Webkit browsers
+- Adapted test-config.
 - article share counters connected to linkreach
 - clean up sharing and tracking URLs in templates
 - fix logo for internet exploder 8
@@ -22,7 +26,6 @@ Change log for zeit.frontend
 ------------------
 
 - bufixing
-
 
 0.4.4 (2014-05-05)
 ------------------
