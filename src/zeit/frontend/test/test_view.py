@@ -199,14 +199,15 @@ def test_artikel05_should_have_header_image(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
     assert '<div class="article__head-wrap">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
-    assert '<img class="article__main-image--longform' in browser.contents
+    assert 'class="article__main-image--longform' in browser.contents
 
 
 def test_column_should_have_header_image(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert '<div class="article__column__headerimage">' in browser.contents
     assert '<div class="scaled-image">' in browser.contents
-    assert '<img class=" figure__media"' in browser.contents
+    assert '<img alt="Die ist der image sub text\n" title="Die ist der image'\
+           ' sub text\n" class=" figure__media"' in browser.contents
 
 def test_column_should_not_have_header_image(testserver):
     browser = Browser('%s/artikel/standardkolumne-ohne-bild-beispiel' % testserver.url)

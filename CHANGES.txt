@@ -5,6 +5,8 @@ Change log for zeit.frontend
 ------------------
 - new square teaser logic
 
+- Fallback for alt/title attribute 
+
 0.4.7 (2014-05-06)
 ------------------
 

@@ -99,17 +99,23 @@ class Image(BaseImage):
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout
+        self.attr_title = _inline_html(xml.find('bu'))
+        self.attr_alt = _inline_html(xml.find('bu'))
         if model_block.references:
             self.image = model_block.references.target
             self.src = self.image and self.image.uniqueId
             self.uniqueId = self.image and self.image.uniqueId
-            self.attr_title = model_block.references.title
-            self.attr_alt = model_block.references.alt
+            if model_block.references.title:
+                self.attr_title = model_block.references.title
+            if model_block.references.alt:
+                self.attr_alt = model_block.references.alt
         else:
             self.image = None
             self.src = None
-            self.attr_title = None
-            self.attr_alt = None
+        if self.attr_title == None:
+            self.attr_title = ''
+        if self.attr_alt == None:
+            self.attr_alt = ''
 
 
 @implementer(IFrontendHeaderBlock)
