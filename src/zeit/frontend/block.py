@@ -112,6 +112,10 @@ class Image(BaseImage):
         else:
             self.image = None
             self.src = None
+        if self.attr_title == None:
+            self.attr_title = ''
+        if self.attr_alt == None:
+            self.attr_alt = ''
 
 
 @implementer(IFrontendHeaderBlock)
