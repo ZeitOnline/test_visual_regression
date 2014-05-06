@@ -5,41 +5,27 @@
     overflow: hidden
     width: 100%
     margin-bottom: $compact
-    & > .scaled-image
-        @extend %cp__lead
+    & a > .scaled-image
         @extend %cp__lead--dark
         img
             position: absolute
             top: -25%
             left: 0%
             width: 100%
-    a
-        +link
-            color: $white
-            text-decoration: none
-        +on-interaction
-            color: $white
-        .cp__teaser__gallery__kicker
-            +on-interaction
-                text-decoration: none
-        .cp__teaser__gallery__title
-            +on-interaction
-                text-decoration: underline
     +respond-min($break-1)
         display: block
     +respond-min($break-2)
         height: auto
         max-height: 386px
-        & > .scaled-image img
+        & a > .scaled-image img
             max-height: 386px
             position: static
             top: auto
             left: auto
     +respond-min($break-3)
         max-height: 386px
-        & > .scaled-image img
+        & a > .scaled-image img
             max-height: 386px
-
 
 .cp__teaser__gallery__wrap
     bottom: 0
@@ -53,6 +39,20 @@
         position: absolute
         top: -40px
         width: 40px
+    a
+        +link
+            color: $white
+            text-decoration: none
+        +on-interaction
+            color: $white
+        .cp__teaser__gallery__kicker
+            +on-interaction
+                text-decoration: none
+        .cp__teaser__gallery__title
+            +on-interaction
+                text-decoration: underline
+    +respond-max($break-2)
+        background: transparentize($black, 0.35)
 
 .cp__teaser__gallery__kicker
     @extend %copy
