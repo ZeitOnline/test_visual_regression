@@ -46,7 +46,7 @@
 
                 {% block article_comments %}
                     {% if view.comments %}
-                        {{ blocks.comments(view.comments) }}
+                        {{ blocks.comments(view, request) }}
                     {% endif %}
                 {% endblock article_comments %}
 

@@ -108,6 +108,19 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         output += line.strip()
     assert markup == output
 
+def test_macro_portraitbox_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    obj = {'name': 'name', 'text': 'text'}
+
+    markup = '<figure class="portraitbox figure-stamp">' \
+        '<div class="portraitbox-heading">name</div>' \
+        'text</figure>'
+    lines = tpl.module.portraitbox(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
 
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
