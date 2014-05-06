@@ -1,7 +1,13 @@
 Change log for zeit.frontend
 ============================
 
-0.4.4 (unreleased)
+0.4.5 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+0.4.4 (2014-05-05)
 ------------------
 
 - fix ad zone in noscript
