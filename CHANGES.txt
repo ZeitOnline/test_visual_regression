@@ -7,6 +7,8 @@ Change log for zeit.frontend
 
 - Fallback for alt/title attribute 
 
+- make logo zeit link work internaly by adding www
+
 0.4.7 (2014-05-06)
 ------------------
 
