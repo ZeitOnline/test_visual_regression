@@ -89,7 +89,7 @@ class LinkReach(object):
                 score = comments_per_unique_id(self.stats_path)[rel_path]
             except KeyError:
                 # Ignore item if comment count lookup fails.
-                continue
+                score = 0
 
             item = dict(location=rel_path,
                         score=score,
