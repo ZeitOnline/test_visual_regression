@@ -57,35 +57,50 @@ class LinkReach(object):
             raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
         try:
-            url = 'http://xml.zeit.de/cms/work/import/feeds/most_comments_%s.rss'
+            url = 'http://xml.zeit.de/import/feeds/most_comments_%s.rss'
             feed = zeit.cms.interfaces.ICMSContent(url % section)
         except TypeError:
             return []
-        item_list = []
 
-        for rss_node in feed.xml.xpath('/rss/channel/item')[:limit]:
+        output = []
+
+        iterator = iter(feed.xml.xpath('/rss/channel/item'))
+
+        while len(output) < limit:
+            # Compile list of most commented on articles.
+
+            try:
+                rss_node = iterator.next()
+            except StopIteration:
+                # Abort compiling comment list if feed is exhausted.
+                break
+
             web_path = rss_node.xpath('guid/text()')[0]
             rel_path = web_path[18:]
             xml_path = 'http://xml.zeit.de' + rel_path
 
             try:
-                # Ignore item if CMS lookup fails.
                 article = zeit.cms.interfaces.ICMSContent(xml_path)
             except TypeError:
+                # Ignore item if CMS lookup fails.
                 continue
 
-            comment_stats = comments_per_unique_id(self.stats_path)
+            try:
+                score = comments_per_unique_id(self.stats_path)[rel_path]
+            except KeyError:
+                # Ignore item if comment count lookup fails.
+                continue
 
             item = dict(location=rel_path,
-                        score=comment_stats.get(xml_path, 0),
+                        score=score,
                         supertitle=article.supertitle,
                         title=article.title,
                         subtitle=article.subtitle,
                         section=article.ressort
                         )
-            item_list.append(item)
+            output.append(item)
 
-        return DataSequence().deserialize(item_list)
+        return DataSequence().deserialize(output)
 
     def get_counts_by_url(self, url):
         """Get share counts for all services for a specific URL."""
@@ -110,11 +125,11 @@ class Entry(colander.MappingSchema):
                                 missing=colander.drop
                                 )
     location = colander.SchemaNode(colander.String(),
-                                missing=colander.drop
-                                )
+                                   missing=colander.drop
+                                   )
     supertitle = colander.SchemaNode(colander.String(),
-                                missing=colander.drop
-                                )
+                                     missing=colander.drop
+                                     )
     title = colander.SchemaNode(colander.String(),
                                 missing=colander.drop
                                 )

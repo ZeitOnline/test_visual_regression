@@ -560,7 +560,7 @@ def test_article01_should_not_have_a_focussed_nextread(application):
 
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
-    request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
+    request.registry.settings.node_comment_statistics = 'data/node-comment-statistics.xml'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = view_centerpage.Centerpage(cp, request)
     view() #trigger __call__ method
