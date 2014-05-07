@@ -363,7 +363,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         src2_val = \
             'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
         src_img = \
-            'http://www.zeit.de/live0-backend/multimedia/'\
+            'http://live0.zeit.de/multimedia/'\
             'videos/3035864892001.jpg'
 
         # structure
