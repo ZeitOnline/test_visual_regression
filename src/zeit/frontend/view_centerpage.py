@@ -68,8 +68,7 @@ class Centerpage(zeit.frontend.view.Base):
     def pagetitle(self):
         # ToDo(T.B.) should be, doesn't work
         # return self.context.html-meta-title
-        return 'Lebensart - Mode, Essen und Trinken, ' + \
-               'Partnerschaft | ZEIT ONLINE'
+        return 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
 
     @property
     def pagetitle_in_body(self):
@@ -79,7 +78,7 @@ class Centerpage(zeit.frontend.view.Base):
     def pagedescription(self):
         # ToDo(T.B.) should be self.context.html-meta-title, doesn't work
         # return self.context.html-meta-title
-        output = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+        output = 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
         return output
 
     @property

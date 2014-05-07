@@ -518,7 +518,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
           '"og:description" content="subtitle">',
-          '<meta property="og:url" content="test.de/myurl">']
+          '<meta property="og:url" content="http://test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
              '<meta class="scaled-image" name="twitter:image" content="']
