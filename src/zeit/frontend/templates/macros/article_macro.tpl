@@ -271,7 +271,7 @@
     <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{comment.cid}}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
-            <img src="{{comment.img_url}}" class="comment__head__img" alt="" />
+            <span class="comment__head__avatar" style="background-image: url('{{comment.img_url}}')"></span>
             {% endif -%}
             <div class="comment__head__meta">
                 <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
