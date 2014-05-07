@@ -262,7 +262,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 }
 
                 // ensure maximum viewport
-                if (windowTop < commentsTop) {
+                if (windowTop < commentsTop && windowBottom < commentsBottom) {
                     $('html, body').animate({
                         scrollTop: Math.floor(commentsTop)
                     }, scrollDuration);
@@ -283,7 +283,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 }
 
                 // ensure maximum viewport
-                if (windowBottom > commentsBottom) {
+                if (windowTop > commentsTop && windowBottom > commentsBottom) {
                     $('html, body').animate({
                         scrollTop: Math.floor(commentsBottom - clientHeight)
                     }, scrollDuration);
