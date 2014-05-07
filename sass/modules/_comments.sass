@@ -156,12 +156,14 @@
     font-size: $font-ml
     margin-bottom: $little
 
-.comment__head__img
+.comment__head__avatar
     +inline-block
     +border-radius(50%)
-    max-width: em(40px)
-    max-height: em(40px)
+    width: em(40px)
+    height: em(40px)
     margin-right: $thin
+    background-position: 50% 38% // golden ratio
+    +background-size(cover)
 
 .comment__head__meta
     +inline-block
