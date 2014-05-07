@@ -7,7 +7,7 @@ Available attributes:
 #}
 {% set captions = {"twitter": ("Auf Twitter", "Tweets"),
                   "facebook": ("Auf Facebook", "Likes"),
-                  "comments": ("Kommentiert", "Kommentare")} %}
+                  "comments": ("Kommentiert", "Empfehlungen")} %}
 
 <div class="cp__buzz">
     <div class="cp__buzz__divider">
@@ -28,9 +28,11 @@ Available attributes:
                     <p class="cp__buzz__service__list__entry__title">
                         <a href="{{ article.location }}">{{ article.title }}</a>
                     </p>
+                    {% if article.score %}
                     <p class="cp__buzz__service__list__entry__score">
                         {{ article.score }} {{ captions[service][1] }}
                     </p>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
