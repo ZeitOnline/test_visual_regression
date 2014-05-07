@@ -48,8 +48,7 @@ def test_centerpage_should_have_correct_page_title(
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     title = driver.title.strip()
-    assert title == 'Lebensart - Mode, Essen und Trinken' \
-                    ', Partnerschaft | ZEIT ONLINE'
+    assert title == u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
 
 
 def test_centerpage_should_have_page_meta_description(
@@ -58,7 +57,7 @@ def test_centerpage_should_have_page_meta_description(
     driver.get('%s/centerpage/lebensart' % testserver.url)
     meta_description_tag = driver.find_element_by_xpath(
         '//meta[@name="description"]')
-    teststring = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+    teststring = u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
     assert meta_description_tag.get_attribute("content").strip() == teststring
 
 
