@@ -5,6 +5,8 @@ Change log for zeit.frontend
 -------------------
 
 - [HOTFIX] ignore missing comment counts
+- fix card-sharing links
+- fix comments scrolling
 
 
 0.4.9 (2014-05-07)
