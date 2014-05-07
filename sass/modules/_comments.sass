@@ -50,6 +50,8 @@
     font-size: em(11px)
     color: $black
 
+$comments-min-width: $comments__break-outside - $max-page-width
+
 .comments
     +tablet
     z-index: 20
@@ -59,19 +61,16 @@
     +respond-min($break-1)
         margin-left: -$page-padding
         margin-right: -$page-padding
-    +respond-max($comments__break-overlap)
-        width: auto !important
     +respond-min($comments__break-overlap)
         +box-shadow
         +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
         overflow: hidden
         margin: 0
         position: absolute
-        top: 5.25em
+        top: 4em
         height: 100%
         right: -$page-padding
-        min-width: em(300px)
-        max-width: em(700px)
+        min-width: $comments-min-width
         width: 100%
         background-color: $white
     +respond-min($comments__break-outside)
@@ -81,8 +80,8 @@
         right: auto
         left: em(980px) - $page-padding
         border-left: 1px dotted $grey--light
-        width: em(300px)
-        background-color: $white
+        width: $comments-min-width
+        max-width: em(700px)
     &.show-older-trigger
         .comments__button__older
             display: block
