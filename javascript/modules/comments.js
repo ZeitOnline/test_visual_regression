@@ -9,6 +9,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $commentsActiveList = $('#js-comments-body .tabs__content.is-active .comments__list'),
         currentOffset = 0,
         slideDuration = 300,
+        scrollDuration = 1000, // in sync with CSS animation speed
         paginated = false,
         cache = {},
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
@@ -17,12 +18,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * handles comment pagination
      */
     var calculatePagination = function() {
-        var documentWidth = getCachedValue('documentWidth');
+        var clientWidth = getCachedValue('clientWidth');
 
         $comments.removeClass('show-newer-trigger show-older-trigger');
 
         // handle tablet/desktop size with paginated comments
-        if (documentWidth >= 768) {
+        if (clientWidth >= 768) {
             var commentsScrollHeight = getHiddenProperty($comments, 'scrollHeight');
 
             // detect whether we even need pagination
@@ -189,11 +190,11 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Initialize layout
      */
     var initLayout = function() {
-        var documentWidth = getCachedValue('documentWidth');
+        var clientWidth = getCachedValue('clientWidth');
 
-        if (documentWidth >= 1280) {
+        if (clientWidth >= 1280) {
             // on big screens find out how much outside space there is
-            var commentsWidth = documentWidth - $page.outerWidth();
+            var commentsWidth = clientWidth - $page.outerWidth();
             // restrict width of comments
             if (commentsWidth > 700) {
                 commentsWidth = 700;
@@ -224,10 +225,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var scrollComments = function(e) {
         var direction      = e.target.getAttribute('data-direction'),
+            clientHeight   = getCachedValue('clientHeight'),
             windowTop      = $(window).scrollTop(),
-            windowBottom   = windowTop + document.documentElement.clientHeight,
+            windowBottom   = windowTop + clientHeight,
             commentsHeight = getCachedValue('commentsHeight'),
             commentsTop    = getCachedValue('commentsTop'),
+            commentsBottom = getCachedValue('commentsBottom'),
             visibleTop     = getCachedValue('visibleTop'),
             visibleBottom  = getCachedValue('visibleBottom'),
             start = visibleTop,
@@ -262,7 +265,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 if (windowTop < commentsTop) {
                     $('html, body').animate({
                         scrollTop: Math.floor(commentsTop)
-                    }, 1000);
+                    }, scrollDuration);
                 }
 
                 break;
@@ -277,6 +280,13 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 if (Math.abs(newOffset) + commentsHeight > listHeight) {
                     newOffset = -listHeight + Math.ceil(commentsHeight); // never scroll too far
                     $comments.removeClass('show-older-trigger');
+                }
+
+                // ensure maximum viewport
+                if (windowBottom > commentsBottom) {
+                    $('html, body').animate({
+                        scrollTop: Math.floor(commentsBottom - clientHeight)
+                    }, scrollDuration);
                 }
         }
 
@@ -342,6 +352,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             case 'buttonUpHeight':
             case 'commentsHeight':
             case 'commentsTop':
+            case 'commentsBottom':
             case 'visibleTop':
             case 'visibleBottom':
                 var $buttonUp   = $('#js-comments-button-up'),
@@ -350,12 +361,17 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 cache.buttonUpHeight = $buttonUp.height();
                 cache.commentsHeight = $comments.height() - $commentsBody.position().top;
                 cache.commentsTop    = $commentsBody.offset().top;
+                cache.commentsBottom = cache.commentsTop + cache.commentsHeight;
                 cache.visibleTop     = cache.commentsTop + cache.buttonUpHeight;
                 cache.visibleBottom  = cache.commentsTop + cache.commentsHeight - $buttonDown.height();
                 break;
 
-            case 'documentWidth':
-                cache.documentWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
+            case 'clientWidth':
+                cache.clientWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
+                break;
+
+            case 'clientHeight':
+                cache.clientHeight = document.documentElement.clientHeight || document.body.clientHeight || $(window).height();
                 break;
         }
 
