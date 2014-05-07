@@ -53,23 +53,16 @@
     margin-left: $small
 
 .breadcrumbs__list
-  display: inline !important
-  padding: 0
-  margin: 0
+  display: inline
   color: $grey
   a
-    display: inline !important
-    +respond-min($nav__break__full-menu)
-      +link-colors($grey, $grey, $grey, $grey, $grey)
-    border-bottom: none
-    border-bottom-width: 0
-    padding: 0
+    +link-colors($grey, $grey, $grey, $grey, $grey)
     margin-right: $thin
     margin-left: $thin
-    &:hover
-      color: #232323
+    +on-interaction
+      border-bottom-color: $grey
 
 .breadcrumbs__list__item
-  display: inline !important
+  display: inline
   &:first-child a
     margin-left: 0
