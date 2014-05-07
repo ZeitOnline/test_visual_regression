@@ -5,6 +5,7 @@ Change log for zeit.frontend
 -------------------
 
 - fix metadata and og:url
+- improved responsivness for mobile-devices
 
 
 0.4.10 (2014-05-07)
