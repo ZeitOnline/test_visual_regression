@@ -543,6 +543,7 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
     request = mock.Mock()
     request.registry.settings.community_host = app_settings['community_host']
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    request.registry.settings.node_comment_statistics = app_settings['node_comment_statistics']
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = zeit.frontend.view_centerpage.Centerpage(cp, request)

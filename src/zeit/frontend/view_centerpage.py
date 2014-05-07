@@ -22,7 +22,7 @@ class Centerpage(zeit.frontend.view.Base):
 
     def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
-        stats_path = self.request.registry.settings.node_comment_statistics_path
+        stats_path = self.request.registry.settings.node_comment_statistics
         self._unique_id_comments = comments.comments_per_unique_id(stats_path)
         return super(Centerpage, self).__call__()
 
@@ -59,7 +59,7 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def is_hp(self):
-        if self.request.path == '/'+self.request.registry.settings.hp:
+        if self.request.path == '/' + self.request.registry.settings.hp:
             return True
         else:
             return False
@@ -112,8 +112,8 @@ class Centerpage(zeit.frontend.view.Base):
 
     def teaser_get_commentcount(self, uniqueId):
         try:
-            count = \
-                self._unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
+            index = '/' + urlparse.urlparse(uniqueId).path[1:]
+            count = self._unique_id_comments[index]
             if int(count) >= 15:
                 return count
         except KeyError:
@@ -173,18 +173,21 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_buzz(self):
-        stats_path = self.request.registry.settings.node_comment_statistics_path
+        stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
         reach = LinkReach(stats_path, linkreach)
         try:
-            buzz = dict(twitter=reach.fetch_service('twitter', 3),
+            return dict(twitter=reach.fetch_service('twitter', 3),
                         facebook=reach.fetch_service('facebook', 3),
                         comments=reach.fetch_comments(3)
-                   )
-            return buzz
+                        )
         except:
-            log.error('Cant reach link-reach')
-        return dict(twitter=[],facebook=[],comments=[])
+            log.error('Cant reach linkreach')
+
+        return dict(twitter=[],
+                    facebook=[],
+                    comments=[]
+                    )
 
     @property
     def ressort(self):

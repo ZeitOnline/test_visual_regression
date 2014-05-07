@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix buzz module comment column, node_comment_statistics naming
 
 
 0.4.8 (2014-05-06)
