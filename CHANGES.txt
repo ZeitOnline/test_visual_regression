@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.10 (unreleased)
 -------------------
 
-- ignore missing comment counts
+- [HOTFIX] ignore missing comment counts
 
 
 0.4.9 (2014-05-07)
