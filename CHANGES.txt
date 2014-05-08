@@ -1,10 +1,31 @@
 Change log for zeit.frontend
 ============================
 
-0.4.9 (unreleased)
-------------------
+0.4.12 (unreleased)
+-------------------
 
 - remove gradients for mobile
+
+
+0.4.11 (2014-05-07)
+-------------------
+
+- fix metadata and og:url
+- improved responsivness for mobile-devices
+
+
+0.4.10 (2014-05-07)
+-------------------
+
+- [HOTFIX] ignore missing comment counts
+- fix card-sharing links
+- fix comments scrolling
+
+
+0.4.9 (2014-05-07)
+------------------
+
+- fix buzz module comment column, node_comment_statistics naming
 
 
 0.4.8 (2014-05-06)

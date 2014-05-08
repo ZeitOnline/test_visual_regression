@@ -48,8 +48,7 @@ def test_centerpage_should_have_correct_page_title(
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     title = driver.title.strip()
-    assert title == 'Lebensart - Mode, Essen und Trinken' \
-                    ', Partnerschaft | ZEIT ONLINE'
+    assert title == u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
 
 
 def test_centerpage_should_have_page_meta_description(
@@ -58,7 +57,7 @@ def test_centerpage_should_have_page_meta_description(
     driver.get('%s/centerpage/lebensart' % testserver.url)
     meta_description_tag = driver.find_element_by_xpath(
         '//meta[@name="description"]')
-    teststring = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+    teststring = u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
     assert meta_description_tag.get_attribute("content").strip() == teststring
 
 
@@ -363,7 +362,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         src2_val = \
             'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
         src_img = \
-            'http://www.zeit.de/live0-backend/multimedia/'\
+            'http://live0.zeit.de/multimedia/'\
             'videos/3035864892001.jpg'
 
         # structure
@@ -543,6 +542,7 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
     request = mock.Mock()
     request.registry.settings.community_host = app_settings['community_host']
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    request.registry.settings.node_comment_statistics = app_settings['node_comment_statistics']
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = zeit.frontend.view_centerpage.Centerpage(cp, request)

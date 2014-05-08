@@ -48,7 +48,7 @@ settings = {
     'proxy_url': '',
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
-    'node_comment_statistics_path': 'data/node-comment-statistics.xml',
+    'node_comment_statistics': 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
 
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
@@ -135,8 +135,8 @@ def agatho():
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
-    # TODO(T.B.): Is settings['community_host'] still needed?
-    return LinkReach(settings['community_host'], settings['linkreach_host'])
+    return LinkReach(settings['node_comment_statistics'],
+                     settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')

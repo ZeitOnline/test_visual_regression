@@ -119,9 +119,9 @@
     <meta property="og:site_name" content="ZEIT ONLINE">
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{obj.title}}">
-    <meta property="og:description" content="{{obj.subtitle}}">
-    <meta property="og:url" content="{{obj.article_url or request.host + request.path_info}}">
+    <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
+    <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
+    <meta property="og:url" content="{{obj.article_url or 'http://' + request.host + request.path_info}}">
 
     {% if obj.sharing_img %}
         {% if obj.sharing_img.video_still %}

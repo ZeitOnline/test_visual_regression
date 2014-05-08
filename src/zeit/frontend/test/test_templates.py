@@ -487,7 +487,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
     img = '<img '
     fallback = '<img class="article__main-image--longform'\
-        ' video--fallback" src="http://www.zeit.de/live0-backend/'\
+        ' video--fallback" src="http://live0.zeit.de/'\
         'multimedia/videos/1.jpg'
     lines = tpl.module.headervideo(obj).splitlines()
     output = ""
@@ -518,7 +518,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
           '"og:description" content="subtitle">',
-          '<meta property="og:url" content="test.de/myurl">']
+          '<meta property="og:url" content="http://test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
              '<meta class="scaled-image" name="twitter:image" content="']

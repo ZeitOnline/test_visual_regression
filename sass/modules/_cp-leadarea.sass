@@ -48,6 +48,15 @@ $cp__lead__wrap-width: 65%
 		margin: auto
 		min-height: 100%
 		width: 100%
+	.video--fallback
+		@media only screen and (orientation : portrait)
+			left: -100%
+			min-width: 300%
+		+respond-min($break-0)
+			@media only screen and (orientation : portrait)
+				left: -50%
+				min-width: 200%
+		
 
 .cp__lead__title
 	@extend %cp__link--light
