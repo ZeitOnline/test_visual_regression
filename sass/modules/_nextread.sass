@@ -5,51 +5,26 @@ $nextread-image-height: 172px
 $nextread-minimal-height: em(165px)
 $nextread-maximal-height: em(320px)
 
-%link-grey
+%link-dark
 	a
-		+link
-			text-decoration: none
-		+on-interaction
-			.article__nextread__supertitle
-				color: $black
+		+link-colors($black, $black, $black, $black, $black)
 
-%link-white
+%link-light
 	a
-		+link
-			color: $white
-			text-decoration: none
-			span
-				color: $white
-		+on-interaction
-			color: $white
-			span
-				color: $white
+		+link-colors($white, $white, $white, $white, $white)
 
-
-%nextread-text
-	.article__nextread__supertitle
-		+respond-min($break-1)
-			text-align: center
-	.article__nextread__title
-		+respond-min($break-1)
-			font-size: $font-ml
-			text-align: center
-		+respond-min($break-2)
-			+padded
-			font-size: $font-xxl
 
 .article__nextread
-	@extend %meta
-	background: $nextread-background
+	+unpadded
+	+tablet(bold)
 	color: $black
+	background-color: $nextread-background
 	border-top: 1px solid $nextread-bordercolor
 	margin-top: $huge
 	padding-bottom: $huge
-	text-transform: none
 
 .article__nextread__lead
-	+tablet(bold)
-	font-size: $font-ml
+	font-size: $font-m
 	letter-spacing: $hair
 	padding: $medium 0
 	text-align: center
@@ -59,20 +34,21 @@ $nextread-maximal-height: em(320px)
 
 .article__nextread__supertitle
 	@extend %supertitle
-	@extend %font-m
-	color: $black
+	font-size: $font-s
 	display: block
 	padding-bottom: $micro
 
 .article__nextread__title
-	font-size: $font-ml
-	color: $black
 	display: block
+	font-size: $font-l
 	letter-spacing: 1px
+	+respond-min($break-1)
+		font-size: $font-xl
+	+respond-min($break-2)
+		font-size: $font-xxl
 
 .nextread-base
-	@extend %link-grey
-	@extend %nextread-text
+	@extend %link-dark
 	position: relative
 	img
 		height: auto
@@ -82,7 +58,6 @@ $nextread-maximal-height: em(320px)
 			display: table-cell
 			height: $nextread-image-height
 			width: $nextread-image-width
-		+respond-min($break-4)
 	.article__nextread__body
 		background: $white
 		margin: 0 auto
@@ -106,8 +81,7 @@ $nextread-maximal-height: em(320px)
 				padding: 0
 
 .nextread-minimal
-	@extend %link-grey
-	@extend %nextread-text
+	@extend %link-dark
 	.article__nextread__body
 		background: $white
 		margin: 0 auto
@@ -118,8 +92,7 @@ $nextread-maximal-height: em(320px)
 
 
 .nextread-maximal
-	@extend %link-white
-	@extend %nextread-text
+	@extend %link-light
 	+respond-min($break-1)
 		padding-left: $medium
 		padding-right: $medium
@@ -128,7 +101,7 @@ $nextread-maximal-height: em(320px)
 		display: table
 		height: $nextread-minimal-height
 		width: 100%
-		+respond-min($break-2)
+		+respond-min($break-1)
 			height: $nextread-minimal-height * 1.5
 		+respond-min($break-2)
 			height: $nextread-maximal-height
