@@ -22,6 +22,10 @@ Change log for zeit.frontend
 
 - Increase breakpoint for expanded comment area
 
+0.4.12 (broken)
+--------------
+
+- do not use it
 
 0.4.11 (2014-05-07)
 -------------------
