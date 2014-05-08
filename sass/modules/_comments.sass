@@ -71,6 +71,7 @@ $comments-min-width: $comments__break-outside - $max-page-width
         height: 100%
         right: -$page-padding
         min-width: $comments-min-width
+        max-width: em(700px)
         width: 100%
         background-color: $white
     +respond-min($comments__break-outside)
@@ -81,7 +82,6 @@ $comments-min-width: $comments__break-outside - $max-page-width
         left: em(980px) - $page-padding
         border-left: 1px dotted $grey--light
         width: $comments-min-width
-        max-width: em(700px)
     &.show-older-trigger
         .comments__button__older
             display: block
