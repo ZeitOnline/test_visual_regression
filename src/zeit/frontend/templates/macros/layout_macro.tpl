@@ -139,13 +139,12 @@
 {% macro iqd_init() -%}
 <script type="text/javascript">
     // negative keyword 'diuqilon'
-    // todo: if we get a billboard, we need more options (NB)
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     window.diuqilon = (w < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
-        iqdRessort: '',
+        iqdRessort: 'zeitmz',
         ord: Math.random()*10000000000000000,
         iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
         iqdCountSkyReq: parseInt(0,10),
@@ -154,7 +153,7 @@
     // IQD variable test
     window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
     window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
-    window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
+    window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=')> -1) ? iqd_Domain.split('iqadtest=')[1] : 'iqlive';
     // ]]>
 </script>
 {%- endmacro %}
@@ -233,7 +232,7 @@
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
                         <a href="http://www.zeit.de/index"
-                        class="is-standalone-link" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">» ZEIT ONLINE</a>
+                        class="is-standalone-link" id="hp.zm.topnav.centerpages.zon.{{request.path_info}}">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">

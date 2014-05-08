@@ -117,6 +117,8 @@ def comment_as_dict(comment, request):
 
     if comment.xpath('author/@picture'):
         picture_url = request.registry.settings.community_host + '/' + comment.xpath('author/@picture')[0]
+    if comment.xpath('author/@url'):
+        profile_url = request.registry.settings.community_host + comment.xpath('author/@url')[0]
     if comment.xpath('content/text()'):
         content = comment.xpath('content/text()')[0]
     else:
@@ -125,6 +127,7 @@ def comment_as_dict(comment, request):
         indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
+        userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
         timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
                            int(comment.xpath('date/month/text()')[0]),
