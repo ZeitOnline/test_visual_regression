@@ -5,6 +5,7 @@ Change log for zeit.frontend
 -------------------
 
 - Increase breakpoint for expanded comment area
+- smaller ui tweaks
 - Fix comment report URL to target community host
 
 
