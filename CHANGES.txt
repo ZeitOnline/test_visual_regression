@@ -10,11 +10,14 @@ Change log for zeit.frontend
 
 - Links to user profilpages from usernames at comments
 
+- gallery pager width fixed
+
 
 0.4.11 (2014-05-07)
 -------------------
 
 - fix metadata and og:url
+
 - improved responsivness for mobile-devices
 
 
@@ -22,7 +25,9 @@ Change log for zeit.frontend
 -------------------
 
 - [HOTFIX] ignore missing comment counts
+
 - fix card-sharing links
+
 - fix comments scrolling
 
 
