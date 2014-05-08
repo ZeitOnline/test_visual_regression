@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.12 (unreleased)
 -------------------
 
-- remove gradients for mobile
+- switch from box-shadow plugin to background-image plugin
 
 
 0.4.11 (2014-05-07)
