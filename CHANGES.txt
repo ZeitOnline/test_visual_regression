@@ -10,6 +10,10 @@ Change log for zeit.frontend
 
 - gallery pager width fixed
 
+- fix clickcode in navigation
+
+- add desired changes to iqdVarPack
+
 
 0.4.11 (2014-05-07)
 -------------------
