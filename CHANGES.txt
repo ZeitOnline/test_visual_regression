@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix comment report URL to target community host
 
 
 0.4.11 (2014-05-07)
