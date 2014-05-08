@@ -1,13 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-[A (unreleased)
-----------------
-
-- Nothing changed yet.
-
-
-0.4.12 (2014-05-08)
+0.4.13 (unreleased)
 -------------------
 
 - switch from box-shadow plugin to background-image plugin
