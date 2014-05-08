@@ -652,7 +652,7 @@ def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
              'var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + string,
              'document.write("<img src=',
              '</script',
-             '<img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
+             '<img alt="" class="visuallyhidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
              + string]
     lines = tpl.module.ivw_ver1_tracking(string).splitlines()
     output = ""
