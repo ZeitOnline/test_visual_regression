@@ -4,15 +4,28 @@ Change log for zeit.frontend
 0.4.12 (unreleased)
 -------------------
 
-- Increase breakpoint for expanded comment area
+- switch from box-shadow plugin to background-image plugin
+
 - smaller ui tweaks
+
 - Fix comment report URL to target community host
+
+- Links to user profilpages from usernames at comments
+
+- gallery pager width fixed
+
+- fix clickcode in navigation
+
+- add desired changes to iqdVarPack
+
+- Increase breakpoint for expanded comment area
 
 
 0.4.11 (2014-05-07)
 -------------------
 
 - fix metadata and og:url
+
 - improved responsivness for mobile-devices
 
 
@@ -20,7 +33,9 @@ Change log for zeit.frontend
 -------------------
 
 - [HOTFIX] ignore missing comment counts
+
 - fix card-sharing links
+
 - fix comments scrolling
 
 
