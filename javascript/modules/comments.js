@@ -42,7 +42,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     /**
      * Reply to comment
      */
-    var replyToComment = function() {
+    var replyToComment = function(e) {
+        e.preventDefault();
+
         var cid  = this.getAttribute('data-cid'),
             comment = $(this).closest('article'),
             form = comment.find('.js-reply-form');
@@ -64,7 +66,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     /**
      * Report comment
      */
-    var reportComment = function() {
+    var reportComment = function(e) {
+        e.preventDefault();
+
         var cid  = this.getAttribute('data-cid'),
             comment = $(this).closest('article'),
             form = comment.find('.js-report-form'),
@@ -182,7 +186,11 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     /**
      * Toggle comments
      */
-    var toggleComments = function() {
+    var toggleComments = function(e) {
+        if (e.type === 'touchstart') {
+            e.preventDefault();
+        }
+
         $(document.body).toggleClass('show-comments');
     };
 
@@ -222,6 +230,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Scroll comments list
      */
     var scrollComments = function(e) {
+        e.preventDefault();
+
         var direction      = e.target.getAttribute('data-direction'),
             clientHeight   = getCachedValue('clientHeight'),
             windowTop      = $(window).scrollTop(),
@@ -294,7 +304,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     /**
      * Ensure visibility of linked comment
      */
-    var showComment = function(event, onload) {
+    var showComment = function(e, onload) {
         var anchor = window.location.hash.slice(1); // remove '#'
 
             if (/^cid-\d/.test(anchor)) {
@@ -307,7 +317,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 }
 
                 if (onload) {
-                    toggleComments();
+                    toggleComments(e);
                 }
 
                 // links from "recommented comments"
@@ -418,12 +428,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         initLayout();
 
         // register event handlers
-        $socialServices.on('click', '.js-comments-trigger', toggleComments);
-        $commentsBody.on('click', '.js-reply-to-comment', replyToComment);
-        $commentsBody.on('click', '.js-report-comment', reportComment);
-        $commentsBody.on('click', '.js-cancel-report', cancelReport);
-        $commentsBody.on('click', '.js-submit-report', submitReport);
-        $comments.on('click', '.js-scroll-comments', scrollComments);
+        $socialServices.on('touchstart click', '.js-comments-trigger', toggleComments);
+        $commentsBody.on('touchstart click', '.js-reply-to-comment', replyToComment);
+        $commentsBody.on('touchstart click', '.js-report-comment', reportComment);
+        $commentsBody.on('touchstart click', '.js-cancel-report', cancelReport);
+        $commentsBody.on('touchstart click', '.js-submit-report', submitReport);
+        $comments.on('touchstart click', '.js-scroll-comments', scrollComments);
         $comments.on(inputEvent, '.js-required', enableForm);
         $(window).on('resize', updateLayout);
         $(window).on('hashchange', showComment);
