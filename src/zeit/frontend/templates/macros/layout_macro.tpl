@@ -309,7 +309,7 @@
     <script type="text/javascript">
         var Z_IVW_RESSORT = "{{channel}}";
         var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
-        document.write("<img class=\"visuallyhidden\" src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"\" width=\"1\" height=\"1\" />");
+        document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" class=\"visuallyhidden\" alt=\"\" width=\"1\" height=\"1\" />");
     </script>
     <noscript>
         <img alt="" class="visuallyhidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
