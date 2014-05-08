@@ -274,7 +274,7 @@
             <span class="comment__head__avatar" style="background-image: url('{{comment.img_url}}')"></span>
             {% endif -%}
             <div class="comment__head__meta">
-                <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
+                <a class="comment__head__meta__name" href="{{comment.userprofile_url}}">{{comment.name|e}}</a>
                 <a href="#{{comment.cid}}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{comment.timestamp | format_date_ago()}}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{comment.role}}</div>

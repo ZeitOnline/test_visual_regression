@@ -9,6 +9,8 @@ Change log for zeit.frontend
 
 - Fix comment report URL to target community host
 
+- Links to user profilpages from usernames at comments
+
 - gallery pager width fixed
 
 - fix clickcode in navigation
