@@ -21,7 +21,7 @@
             border-color: $grey--light $grey--light transparent transparent
 
 .article__comments-trigger__link
-    color: $black
+    +link-colors($black, $black, $black, $black, $black)
     border-bottom: none
     cursor: pointer
     display: block
@@ -48,7 +48,6 @@
 .article__comments-trigger__text
     +tablet(bold)
     font-size: em(11px)
-    color: $black
 
 $comments-min-width: $comments__break-outside - $max-page-width
 
