@@ -5,6 +5,8 @@ Change log for zeit.frontend
 -------------------
 
 - switch from box-shadow plugin to background-image plugin
+- smaller ui tweaks
+- Fix comment report URL to target community host
 
 
 0.4.11 (2014-05-07)

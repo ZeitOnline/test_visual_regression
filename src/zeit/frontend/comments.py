@@ -152,7 +152,7 @@ def get_thread(unique_id, request):
                 nid=thread.xpath('/comments/nid')[0].text,
                 # TODO: these urls should point to ourselves, not to the 'back-backend'
                 comment_post_url="%s/agatho/thread%s?destination=%s" % (request.registry.settings.agatho_host, request.path, request.url),
-                comment_report_url="%s/services/json" % (request.registry.settings.agatho_host))
+                comment_report_url="%s/services/json" % (request.registry.settings.community_host))
         except AssertionError:
             return None
     else:
