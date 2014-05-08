@@ -99,6 +99,8 @@ $comments-min-width: $comments__break-outside - $max-page-width
     padding-bottom: $large
 
 .comments__list
+    +respond-max($comments__break-overlap)
+        top: 0px !important
     +transition(top 1s)
     +padded
     padding-bottom: $large
