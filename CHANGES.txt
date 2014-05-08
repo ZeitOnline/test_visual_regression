@@ -20,6 +20,8 @@ Change log for zeit.frontend
 
 - add desired changes to iqdVarPack
 
+- Increase breakpoint for expanded comment area
+
 
 0.4.11 (2014-05-07)
 -------------------

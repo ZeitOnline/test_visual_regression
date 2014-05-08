@@ -28,7 +28,7 @@
     padding: $micro $small
     +respond-min($comments__break-overlap)
         padding: 12px $little 7px
-    &:hover
+    .no-touch &:hover
         opacity: 0.5
 
 .article__comments-trigger__count
@@ -48,7 +48,8 @@
 .article__comments-trigger__text
     +tablet(bold)
     font-size: em(11px)
-    color: $black
+
+$comments-min-width: $comments__break-outside - $max-page-width
 
 .comments
     +tablet
@@ -59,30 +60,27 @@
     +respond-min($break-1)
         margin-left: -$page-padding
         margin-right: -$page-padding
-    +respond-max($comments__break-overlap)
-        width: auto !important
     +respond-min($comments__break-overlap)
         +box-shadow
         +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
         overflow: hidden
         margin: 0
         position: absolute
-        top: 5.25em
+        top: 4em
         height: 100%
         right: -$page-padding
-        min-width: em(300px)
+        min-width: $comments-min-width
         max-width: em(700px)
         width: 100%
         background-color: $white
     +respond-min($comments__break-outside)
         +box-shadow(none)
         +animation('comments_outside_move_in' 0.25s ease-in-out 1 0s)
-        top: 0
+        top: 0px
         right: auto
         left: em(980px) - $page-padding
         border-left: 1px dotted $grey--light
-        width: em(300px)
-        background-color: $white
+        width: $comments-min-width
     &.show-older-trigger
         .comments__button__older
             display: block
@@ -208,7 +206,7 @@
     border: none
     width: 20px
     height: 20px
-    &:hover
+    .no-touch &:hover
         background-position: 0px -20px
 
 .comment__form--login
