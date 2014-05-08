@@ -232,7 +232,7 @@
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
                         <a href="http://www.zeit.de/index"
-                        class="is-standalone-link" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">» ZEIT ONLINE</a>
+                        class="is-standalone-link" id="hp.zm.topnav.centerpages.zon.{{request.path_info}}">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
