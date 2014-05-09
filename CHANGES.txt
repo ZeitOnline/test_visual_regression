@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.4.14 (unreleased)
 -------------------
 
+- Add mixin for box-shadow and fix box-shadow in longform
+
 - Fix comment section height for article with nextread
 
 - 5 instead of 15 comments for commentcount bubble
