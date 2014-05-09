@@ -44,7 +44,7 @@ setup(
         'zeit.find',
         'zeit.intrafind',
         'zeit.magazin',
-        'zeit.newsletter >= 1.0.0.dev0',
+        'zeit.newsletter >= 1.0.0b2',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',

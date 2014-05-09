@@ -238,6 +238,8 @@ class InlineGallery(object):
 @adapter(zeit.newsletter.interfaces.IGroup)
 class NewsletterGroup(object):
 
+    type = 'group'
+
     def __init__(self, context):
         self.context = context
         self.title = context.title
@@ -289,6 +291,24 @@ class NewsletterTeaser(object):
 
     def __getattr__(self, name):
         return getattr(self.context.reference, name)
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.newsletter.interfaces.IAdvertisement)
+class NewsletterAdvertisement(object):
+
+    type = 'advertisement'
+
+    def __init__(self, context):
+        self.context = context
+        self.title = context.title
+        self.text = context.text
+        self.url = context.href
+
+    @property
+    def image(self):
+        return self.context.image.uniqueId.replace(
+            'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 
 
 def _raw_html(xml):
