@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add caching headers.
 
 
 0.5 (2014-05-09)
