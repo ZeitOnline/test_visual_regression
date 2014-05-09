@@ -569,3 +569,8 @@ def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_assetXXX')
     assert comment_count is None
+
+
+def test_caching_headers_should_be_set(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert browser.headers['cache-control'] == 'max-age=300'
