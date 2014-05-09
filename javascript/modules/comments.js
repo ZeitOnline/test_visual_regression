@@ -22,6 +22,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         var commentsCss = getCachedValue('commentsCss');
 
         $comments.removeClass('show-newer-trigger show-older-trigger');
+        paginated = false;
 
         // handle tablet/desktop size with paginated comments
         if (commentsCss.position === 'absolute') {

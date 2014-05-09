@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.4.14 (unreleased)
 -------------------
 
+- Fix comment section height for article with nextread
+
 - 5 instead of 15 comments for commentcount bubble
 
 
