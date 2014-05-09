@@ -1,8 +1,8 @@
 Change log for zeit.frontend
 ============================
 
-0.4.14 (unreleased)
--------------------
+0.5 (2014-05-09)
+----------------
 
 - Add mixin for box-shadow and fix box-shadow in longform
 
