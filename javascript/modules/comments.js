@@ -189,7 +189,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
 
         $body.toggleClass('show-comments');
 
-        // attach event on page only if comments are shown
+        // attach event handler function on page only if comments are shown
         if ($body.hasClass('show-comments')) {
             $page.on(startEvent, hideComments);
         } else {
