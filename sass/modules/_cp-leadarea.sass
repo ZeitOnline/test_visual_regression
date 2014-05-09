@@ -98,7 +98,7 @@ $cp__lead__wrap-width: 65%
 	@extend %cp__lead--light
 	@extend %cp__lead-assets
 
-.cp__lead-leader__title__wrap, %cp__lead-leader__title__wrap
+.cp__lead-leader__title__wrap
 	position: absolute
 	overflow: hidden
 	bottom: 0
@@ -107,7 +107,6 @@ $cp__lead__wrap-width: 65%
 	z-index: 2
 
 .cp__lead-leader__title__wrap--dark
-	@extend %cp__lead-leader__title__wrap
 	color: white
 	.cp__lead__title
 		@extend %cp__link--dark
@@ -117,7 +116,6 @@ $cp__lead__wrap-width: 65%
 		@extend %cp__link--dark
 
 .cp__lead-leader__title__wrap--light
-	@extend %cp__lead-leader__title__wrap
 	.cp__lead__title
 		@extend %cp__link--light
 	.cp__lead__subtitle
@@ -147,7 +145,7 @@ $cp__lead__wrap-width: 65%
 	@extend %cp__lead--light
 	@extend %cp__lead-assets
 
-.cp__lead-full__title__wrap, %cp__lead-full__title__wrap
+.cp__lead-full__title__wrap
 	position: absolute
 	overflow: hidden
 	text-align: center
@@ -157,14 +155,12 @@ $cp__lead__wrap-width: 65%
 	z-index: 2
 
 .cp__lead-full__title__wrap--dark
-	@extend %cp__lead-full__title__wrap
 	.cp__lead__title
 		@extend %cp__link--dark
 	.cp__lead__subtitle
 		@extend %cp__link--dark
 
 .cp__lead-full__title__wrap--light
-	@extend %cp__lead-full__title__wrap
 	.cp__lead__title
 		@extend %cp__link--light
 	.cp__lead__subtitle
