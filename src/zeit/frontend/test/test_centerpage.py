@@ -368,7 +368,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap--dark' == \
+        assert 'cp__lead-full__title__wrap cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert 'cp__lead__title' == unicode(h1.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
