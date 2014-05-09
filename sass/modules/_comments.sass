@@ -53,13 +53,9 @@ $comments-min-width: $comments__break-outside - $max-page-width
 
 .comments
     +tablet
+    +unpadded
     z-index: 20
     display: none
-    margin-left: -$page-padding--small
-    margin-right: -$page-padding--small
-    +respond-min($break-1)
-        margin-left: -$page-padding
-        margin-right: -$page-padding
     +respond-min($comments__break-overlap)
         +box-shadow
         +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
