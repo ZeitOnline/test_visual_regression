@@ -113,7 +113,7 @@ class Centerpage(zeit.frontend.view.Base):
         try:
             index = '/' + urlparse.urlparse(uniqueId).path[1:]
             count = self._unique_id_comments[index]
-            if int(count) >= 15:
+            if int(count) >= 5:
                 return count
         except KeyError:
             return None
