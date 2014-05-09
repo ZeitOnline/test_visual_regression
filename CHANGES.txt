@@ -8,6 +8,8 @@ Change log for zeit.frontend
 
 - 5 instead of 15 comments for commentcount bubble
 
+- combine link elements arount teaser supertitle and title
+
 
 0.4.13 (2014-05-08)
 -------------------
