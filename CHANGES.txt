@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.4.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix comment section height for article with nextread
 
 
 0.4.13 (2014-05-08)
