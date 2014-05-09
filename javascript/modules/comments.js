@@ -185,7 +185,16 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Toggle comments
      */
     var toggleComments = function() {
-        $(document.body).toggleClass('show-comments');
+        var $body = $(document.body);
+
+        $body.toggleClass('show-comments');
+
+        // attach event on page only if comments are shown
+        if ($body.hasClass('show-comments')) {
+            $page.on(startEvent, hideComments);
+        } else {
+            $page.off(startEvent, hideComments);
+        }
     };
 
     /**
@@ -219,6 +228,19 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         initLayout();
 
     }, 250); // Maximum run of once per 250 milliseconds
+
+    /**
+     * Hide Comments
+     */
+    var hideComments = function(e) {
+        var $target = $(e.target),
+            triggerClick = $target.closest('.js-comments-trigger').length,
+            commentsClick = $target.closest('#js-comments').length;
+
+        if (!triggerClick && !commentsClick) {
+            $(document.body).removeClass('show-comments');
+        }
+    };
 
     /**
      * Scroll comments list
