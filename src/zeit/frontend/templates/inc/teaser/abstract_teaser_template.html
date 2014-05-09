@@ -11,16 +11,14 @@ Available attributes:
 <div class='{{self.wrapper_class()}}'>
     {% block asset %}{% endblock %}
     <span class="{{self.title_wrapper_class()}}">
-        <span class="cp__buttons__supertitle">
-            <a href="{{teaser.uniqueId | translate_url}}">
+        <a href="{{teaser.uniqueId | translate_url}}">
+            <span class="cp__buttons__supertitle">
                 {{teaser.teaserSupertitle | hide_none}}
-            </a>
-        </span>
-        <span class="{{self.title_class()}}">
-            <a href="{{teaser.uniqueId | translate_url}}">
+            </span>
+            <span class="{{self.title_class()}}">
                 {{teaser.teaserTitle}}
-            </a>
-        </span>
+            </span>
+        </a>
         {% if self.hide_subtitle() != 'true' %}
             <span class="cp__buttons__subtitle">
               {{teaser.teaserText | hide_none}}
