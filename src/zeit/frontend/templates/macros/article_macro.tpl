@@ -298,7 +298,7 @@
     <div class="article__socialbox tc" id="js-social-services">
         <div class="article__sharing">
             {% if obj.linkreach.total -%}
-            <div class="article__sharing__item article__sharing__sum">
+            <div class="article__sharing__item article__sharing__sum js-toggle-sharing">
                 <span class="article__sharing__total">{{ obj.linkreach.total[0] }}</span>
                 <span class="article__sharing__unit">{{ obj.linkreach.total[1] }}</span>
             </div>
