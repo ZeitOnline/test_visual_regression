@@ -210,7 +210,7 @@ class HTTPLoader(jinja2.BaseLoader):
             parts = urlparse.urlparse(self.url)
             return (
                 pkg_resources.resource_string(
-                    parts.netloc, parts.path[1:] + template),
+                    parts.netloc, parts.path[1:] + template).decode('utf-8'),
                 template, lambda: True)
 
         url = self.url + template
