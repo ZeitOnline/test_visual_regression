@@ -3,29 +3,14 @@ $cp__lead-full-height: em(550px)
 $cp__lead-full-video-max-width: em(1000px)
 $cp__lead__wrap-width: 65%
 
+//placeholder selectors
+%cp__lead--dark
+	+fake-box-shadow-inset($black)
+
+%cp__lead--light
+	+fake-box-shadow-inset($white)
+
 //standard classes for cp lead area
-.cp__lead, %cp__lead
-	&:after
-		content: ''
-		position: absolute
-		z-index: 1
-		height: 100%
-		width: 200%
-		left: -50%
-		top: 0px
-
-.cp__lead--dark, %cp__lead--dark
-	@extend %cp__lead
-	background-color: $black
-	&:after
-		@include background-image(linear-gradient(rgba(255, 255, 255, 0) 200px, rgba(0, 0, 0, 0.7)))
-
-.cp__lead--light, %cp__lead--light
-	@extend %cp__lead
-	background-color: $white
-	&:after
-		@include background-image(linear-gradient(rgba(255, 255, 255, 0) 200px, rgba(255, 255, 255, 0.7)))
-
 .cp__lead-assets, %cp__lead-assets
 	overflow: hidden
 	position: relative
