@@ -898,9 +898,7 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
 
     markup = '<span class="main-nav__section__without_trigger">'\
         '<a href="www.zeit.de/login?destination=test"'\
-        ' id="drupal_login">Anmelden</a>/<a href="www.zeit.de/'\
-        'register?destination=test" id="drupal_register">'\
-        'Registrieren</a></span>'
+        ' id="drupal_login">Anmelden</a></span>'
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
     output = ""
@@ -932,7 +930,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request.app_info.authenticated = None
     markup = '<div class="main-nav__menu__content '\
         'main-nav--logged-out" id="js-main-nav-content">'
-    unlogged = 'Registrieren'
+    unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ""
     for line in lines:
