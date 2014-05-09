@@ -5,11 +5,11 @@ $nextread-image-height: 172px
 $nextread-minimal-height: em(165px)
 $nextread-maximal-height: em(320px)
 
-%link-dark
+%nextread-link-dark
 	a
 		+link-colors($black, $black, $black, $black, $black)
 
-%link-light
+%nextread-link-light
 	a
 		+link-colors($white, $white, $white, $white, $white)
 
@@ -48,7 +48,7 @@ $nextread-maximal-height: em(320px)
 		font-size: $font-xxl
 
 .nextread-base
-	@extend %link-dark
+	@extend %nextread-link-dark
 	position: relative
 	img
 		height: auto
@@ -81,7 +81,7 @@ $nextread-maximal-height: em(320px)
 				padding: 0
 
 .nextread-minimal
-	@extend %link-dark
+	@extend %nextread-link-dark
 	.article__nextread__body
 		background: $white
 		margin: 0 auto
@@ -92,7 +92,7 @@ $nextread-maximal-height: em(320px)
 
 
 .nextread-maximal
-	@extend %link-light
+	@extend %nextread-link-light
 	+respond-min($break-1)
 		padding-left: $medium
 		padding-right: $medium
