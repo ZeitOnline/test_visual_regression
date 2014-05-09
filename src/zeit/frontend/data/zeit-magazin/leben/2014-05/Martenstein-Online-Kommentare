@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-kaiserin-sisi" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="2014-04-30T07:50:00+00:00" expires="">
+        <supertitle py:pytype="str">Harald Martenstein</supertitle>
+        <teaser_supertitle py:pytype="str">Kolumne Martenstein</teaser_supertitle>
+        <title py:pytype="str">Über seine Lieblingskaiserin</title>
+        <text py:pytype="str">Unser Kolumnist besucht die Gruft, in der Sisi liegt. Wussten Sie, dass die Kaiserin mit rohem Rindfleisch auf dem Gesicht nächtigte?</text>
+        <description py:pytype="str">Unser Kolumnist besucht die Gruft, in der Sisi liegt. Wussten Sie, dass die Kaiserin mit rohem Rindfleisch auf dem Gesicht nächtigte?</description>
+        <byline py:pytype="str">von Harald Martenstein</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-19/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" align="left" publication-date="" expires="">
+          <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
+          <copyright py:pytype="str">© Fengel</copyright>
+        </image>
+      </reference>
+    </nextread>
+    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2014-05/teaser-martenstein-fengel-neu/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Martin Fengel</copyright>
+    </image>
+    <rankedTags>
+      <tag py:pytype="str" uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" url_value="internet" type="free">Internet</tag>
+      <tag py:pytype="str" uuid="796e3ffb-4c03-4aa7-a6be-0397158ea1aa" url_value="kommentarkultur" type="free">Kommentarkultur</tag>
+    </rankedTags>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-05-07T10:22:39.078500+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-05-06T15:22:07.564150+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-05-07T10:38:30.303671+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-05-06T16:59:15.680662+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-05-07T10:00:46.533592+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.exner</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">5681686ac36f4b79884bce368a0dd252</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Martenstein</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">leben</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">1525</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9856c7f1-9c8d-44a6-a0fb-0adeb10e5bf5}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">19</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Harald Martenstein</supertitle>
+    <title>Über das Verfassen von Onlinekommentaren</title>
+    <subtitle/>
+    <division type="page">
+      <image src="http://xml.zeit.de/zeit-magazin/leben/2014-05/teaser-martenstein-fengel-neu/teaser-martenstein-fengel-neu-zmo-small.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+        <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <copyright py:pytype="str">© Martin Fengel</copyright>
+      </image>
+      <p>Lassen Sie uns ganz offen miteinander reden, ja? Im Netz geht das wunderbar einfach. Zu den Errungenschaften des Netzes gehört der Leserkommentar, der an jeden Artikel angehängt werden kann, als Lob, oder als Kritik, oder als Anmerkung.</p>
+      <p>Wir, die Journalistinnen und Journalisten, müssen sich da vieles anhören. Sogar Grobheiten, manchmal! Nicht selten ist die Kritik der Leser natürlich zutreffend. Und manchmal sehen wir das sogar ein.</p>
+      <p>Ab Mittwoch möchte ich täglich auf einen Leserkommentar auf <a class="" href="http://www.zeit.de/zeit-magazin" target="_blank">ZEITmagazin ONLINE</a> antworten. Die Kommentare müssen sich nicht auf eine <a class="" href="http://www.zeit.de/serie/martenstein" target="_blank">meiner Kolumnen</a> beziehen. Ich suche einen Kommentar aus, der meiner Ansicht nach dringend eine Antwort braucht.</p>
+      <p>Ich habe trotz diesbezüglicher Bitten verschiedener Redaktionen bisher niemals direkt auf Netzkommentare geantwortet, da ich die neue literarische Form "Leserkommentar" skeptisch beurteile. Es handelt sich bei Leserkommentaren meist um Taten, die im Affekt begangen werden. Ein guter Text braucht, ähnlich wie Wein, eine gewisse Zeit zur Reifung, diese Zeit sind die Kommentatoren nur selten bereit aufzuwenden. Da aber fast immer die Schwäche einer Textgattung gleichzeitig ihre Stärke ist – dies näher zu begründen ist mir zu zeitaufwendig –, hoffe ich auf wütende, beleidigte oder unsachliche Kommentare, die ich gerne in gleicher Tonlage zu beantworten bereit bin.</p>
+      <p>Dass dieser Kommentar eines Kommentars auch wieder kommentiert werden kann, versteht sich wohl von selbst.<br/></p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Harald Martenstein</supertitle>
+    <title>Über das Verfassen von Onlinekommentaren</title>
+    <text>Bislang hat Harald Martenstein es immer abgelehnt, auf Leserkommentare zu reagieren. Auf ZEITmagazin ONLINE antwortet er ab jetzt, zwei Wochen lang, jeden Tag. </text>
+  </teaser>
+</article>
