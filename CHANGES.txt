@@ -1,15 +1,35 @@
 Change log for zeit.frontend
 ============================
 
-0.2.18 (unreleased)
+0.3 (unreleased)
+----------------
+
+- Rendering for the daily newsletter.
+
+
+0.2.20 (2014-04-17)
 -------------------
 
+- add new footer and change link color
+- Add new ZMO teaser and image formats
+
+
+0.2.19 (2014-04-15)
+-------------------
+
+- imporove linkreach_url configuration
+
+
+0.2.18 (2014-04-15)
+-------------------
+
+- do article cleanup (hide tags, rework header2, restyle caption, capitalize genre, small style changes)
 - add cp buttons
 - add cp lead area main structure
 - add fullwidth teaser video/ audio
 - add leading teaser with image
 - add backend functionality for linkreach service
-- Rendering for the daily newsletter.
+- add feature: reply to comment
 
 
 0.2.17 (2014-04-09)

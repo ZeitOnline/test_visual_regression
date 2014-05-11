@@ -8,46 +8,6 @@ def screen_size(request):
     return request.param
 
 
-def test_compact_main_nav(selenium_driver, testserver, screen_size):
-    # run twice, once for small screens, once for large
-    driver = selenium_driver
-
-    # set to small size on first run
-    small_screen = screen_size[2]
-    driver.set_window_size(screen_size[0], screen_size[1])
-
-    driver.get('%s/artikel/05' % testserver.url)
-
-    nav_list = driver.find_elements_by_class_name('main-nav')
-    main_nav = driver.find_elements_by_class_name('main-nav')[0]
-    logo = main_nav.find_element_by_class_name('main-nav__logo__img')
-    sharing = main_nav.find_element_by_class_name('main-nav__sharing')
-    buttons = sharing.find_elements_by_class_name('main-nav__sharing__item')
-    twitter = sharing.find_element_by_class_name('icon-twitter')
-    facebook = sharing.find_element_by_class_name('icon-facebook')
-    google = sharing.find_element_by_class_name('icon-google')
-
-    # there's exactly one navigation
-    assert(len(nav_list) == 1)
-
-    # navigation is visible
-    assert(main_nav.is_displayed())
-
-    # there is a logo
-    assert(logo.is_displayed())
-
-    # sharing is visible
-    assert(sharing.is_displayed())
-
-    # sharing has three buttons
-    assert(len(buttons) == 3)
-
-    # twitter, facebook and google buttons are visible
-    assert(twitter.is_displayed())
-    assert(facebook.is_displayed())
-    assert(google.is_displayed())
-
-
 def test_main_nav(selenium_driver, testserver, screen_size):
     # run twice, once for small screens, once for large
     driver = selenium_driver

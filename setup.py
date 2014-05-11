@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.2.18.dev0',
+    version='0.3.0.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
@@ -27,6 +27,7 @@ setup(
         'repoze.vhm',
         'requests',
         'setuptools',
+        'zc.iso8601',
         'zeit.cms',
         'zeit.connector >= 2.3.3.dev0',
         'zeit.content.article',
@@ -45,6 +46,7 @@ setup(
         'zeit.intrafind',
         'zeit.magazin',
         'zeit.newsletter >= 1.0.0b2.dev0',
+        'zeit.wysiwyg',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',

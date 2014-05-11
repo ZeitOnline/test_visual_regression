@@ -35,6 +35,14 @@ $article-content-max-width: 660px
         +max-width-rem(208px)
         margin: $medium $medium $medium auto
 
+.dancing_fonts, %dancing_fonts
+  -moz-font-feature-settings: "onum" 1
+  -moz-font-feature-settings: "onum=1" 
+  -ms-font-feature-settings: "onum" 1 
+  -o-font-feature-settings: "onum" 1 
+  -webkit-font-feature-settings: "onum" 1
+  font-feature-settings: "onum" 1
+
 // hacked for longform launch
 // todo: delete when possible (NB)
 div.figure-full-width
@@ -109,8 +117,7 @@ figure
       display: block
       width: 100%
     .figure__caption, figcaption
-      +max-width-rem(695px) // hacked for longform launch (NB)
-      //+max-width-rem($article-content-max-width)
+      +max-width-rem($article-content-max-width)
       margin-left: auto
       margin-right: auto
       +respond-min($break-3)

@@ -27,11 +27,11 @@
                 } else {
                     viewport_meta.setAttribute( 'content', viewports.standard);
                 }
-                
+
             };
             viewport_set();
-            window.onresize = function() { 
-                viewport_set(); 
+            window.onresize = function() {
+                viewport_set();
             };
         </script>
         {% endif %}
@@ -93,9 +93,9 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama.adplace(view.banner['superbanner']) }}
+                        {{ lama.adplace(view.banner(1)) }}
                         <div id="iqd_rightAd">
-                            {{ lama.adplace(view.banner['skyscraper']) }}
+                            {{ lama.adplace(view.banner(2)) }}
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
             <main role="main" class="main">
                 {%  block content %}{% endblock content %}
             </main>
-            {{lama.main_footer(view.context.current_year, request)}}
+            {{lama.main_footer()}}
 
         </div>
 
