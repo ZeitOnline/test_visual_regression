@@ -30,7 +30,65 @@ class Base(object):
     def __call__(self):
         return {}
 
+    @property
+    def type(self):
+        return type(self.context).__name__.lower()
+
+    @property
+    def ressort(self):
+        if self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+    @property
+    def sub_ressort(self):
+        if self.context.sub_ressort:
+            return self.context.sub_ressort.lower()
+        else:
+            return ''
+
+    @property
+    def banner_channel(self):
+        channel = ''
+        if self.ressort:
+            myressort = self.ressort.replace('zeit-magazin','zeitmz')
+            # TODO: end discrepance between testing and live ressports!
+            myressort = myressort.replace('lebensart','zeitmz')
+            channel += myressort
+        if self.sub_ressort:
+            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
+        if self.type:
+            # TODO: zone type gallery after launch
+            mytype = self.type.replace('gallery','article')
+            channel += "/" + mytype
+        return channel
+
+    def banner(self, tile):
+        try:
+            return zeit.frontend.banner.banner_list[tile - 1]
+        except IndexError:
+            return None
+
 class Content(Base):
+    _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+                   'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+                   'leben': (
+                       'Leben',
+                       'http://www.zeit.de/zeit-magazin/leben/index',
+                       'myid2',
+                   ),
+                   'mode-design': (
+                       'Mode & Design',
+                       'http://www.zeit.de/zeit-magazin/mode-design/index',
+                       'myid3',
+                   ),
+                   'essen-trinken': (
+                       'Essen & Trinken',
+                       'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+                       'myid4',
+                   ), }
+
     @property
     def title(self):
         return self.context.title
@@ -107,6 +165,20 @@ class Content(Base):
     @property
     def show_date_format_seo(self):
         return self._get_date_format()
+
+    @property
+    def breadcrumb(self):
+        crumb = self._navigation
+        l = [crumb['start']]
+        l.append(crumb['zmo'])
+        if self.context.ressort in crumb:
+            l.append(crumb[self.context.ressort])
+        if self.context.sub_ressort in crumb:
+            l.append(crumb[self.context.sub_ressort])
+        if self.title:
+            l.append((self.title, ''))
+        return l
+
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(Base):

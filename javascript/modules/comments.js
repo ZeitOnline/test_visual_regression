@@ -9,20 +9,23 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $commentsActiveList = $('#js-comments-body .tabs__content.is-active .comments__list'),
         currentOffset = 0,
         slideDuration = 300,
+        scrollDuration = 1000, // in sync with CSS animation speed
         paginated = false,
         cache = {},
+        startEvent = ('ontouchstart' in window) ? 'touchstart' : 'click',
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
     /**
      * handles comment pagination
      */
     var calculatePagination = function() {
-        var documentWidth = getCachedValue('documentWidth');
+        var commentsCss = getCachedValue('commentsCss');
 
         $comments.removeClass('show-newer-trigger show-older-trigger');
+        paginated = false;
 
         // handle tablet/desktop size with paginated comments
-        if (documentWidth >= 768) {
+        if (commentsCss.position === 'absolute') {
             var commentsScrollHeight = getHiddenProperty($comments, 'scrollHeight');
 
             // detect whether we even need pagination
@@ -189,15 +192,13 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Initialize layout
      */
     var initLayout = function() {
-        var documentWidth = getCachedValue('documentWidth');
+        var commentsCss = getCachedValue('commentsCss');
 
-        if (documentWidth >= 1280) {
+        if (commentsCss.top === '0px') {
             // on big screens find out how much outside space there is
-            var commentsWidth = documentWidth - $page.outerWidth();
-            // restrict width of comments
-            if (commentsWidth > 700) {
-                commentsWidth = 700;
-            }
+            var clientWidth = getCachedValue('clientWidth'),
+                commentsWidth = clientWidth - $page.outerWidth();
+
             $comments.css('width', commentsWidth);
         } else {
             // mobile case: show full width comments
@@ -224,10 +225,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      */
     var scrollComments = function(e) {
         var direction      = e.target.getAttribute('data-direction'),
+            clientHeight   = getCachedValue('clientHeight'),
             windowTop      = $(window).scrollTop(),
-            windowBottom   = windowTop + document.documentElement.clientHeight,
+            windowBottom   = windowTop + clientHeight,
             commentsHeight = getCachedValue('commentsHeight'),
             commentsTop    = getCachedValue('commentsTop'),
+            commentsBottom = getCachedValue('commentsBottom'),
             visibleTop     = getCachedValue('visibleTop'),
             visibleBottom  = getCachedValue('visibleBottom'),
             start = visibleTop,
@@ -259,10 +262,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 }
 
                 // ensure maximum viewport
-                if (windowTop < commentsTop) {
+                if (windowTop < commentsTop && windowBottom < commentsBottom) {
                     $('html, body').animate({
                         scrollTop: Math.floor(commentsTop)
-                    }, 1000);
+                    }, scrollDuration);
                 }
 
                 break;
@@ -278,6 +281,13 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                     newOffset = -listHeight + Math.ceil(commentsHeight); // never scroll too far
                     $comments.removeClass('show-older-trigger');
                 }
+
+                // ensure maximum viewport
+                if (windowTop > commentsTop && windowBottom > commentsBottom) {
+                    $('html, body').animate({
+                        scrollTop: Math.floor(commentsBottom - clientHeight)
+                    }, scrollDuration);
+                }
         }
 
         setCurrentOffset(newOffset);
@@ -286,7 +296,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
     /**
      * Ensure visibility of linked comment
      */
-    var showComment = function(event, onload) {
+    var showComment = function(e, onload) {
         var anchor = window.location.hash.slice(1); // remove '#'
 
             if (/^cid-\d/.test(anchor)) {
@@ -342,6 +352,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
             case 'buttonUpHeight':
             case 'commentsHeight':
             case 'commentsTop':
+            case 'commentsBottom':
             case 'visibleTop':
             case 'visibleBottom':
                 var $buttonUp   = $('#js-comments-button-up'),
@@ -350,12 +361,21 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
                 cache.buttonUpHeight = $buttonUp.height();
                 cache.commentsHeight = $comments.height() - $commentsBody.position().top;
                 cache.commentsTop    = $commentsBody.offset().top;
+                cache.commentsBottom = cache.commentsTop + cache.commentsHeight;
                 cache.visibleTop     = cache.commentsTop + cache.buttonUpHeight;
                 cache.visibleBottom  = cache.commentsTop + cache.commentsHeight - $buttonDown.height();
                 break;
 
-            case 'documentWidth':
-                cache.documentWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
+            case 'clientWidth':
+                cache.clientWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
+                break;
+
+            case 'clientHeight':
+                cache.clientHeight = document.documentElement.clientHeight || document.body.clientHeight || $(window).height();
+                break;
+
+            case 'commentsCss':
+                cache.commentsCss = $comments.css(['top', 'position']);
                 break;
         }
 
@@ -400,12 +420,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         initLayout();
 
         // register event handlers
-        $socialServices.on('click', '.js-comments-trigger', toggleComments);
-        $commentsBody.on('click', '.js-reply-to-comment', replyToComment);
-        $commentsBody.on('click', '.js-report-comment', reportComment);
-        $commentsBody.on('click', '.js-cancel-report', cancelReport);
-        $commentsBody.on('click', '.js-submit-report', submitReport);
-        $comments.on('click', '.js-scroll-comments', scrollComments);
+        $socialServices.on(startEvent, '.js-comments-trigger', toggleComments);
+        $commentsBody.on(startEvent, '.js-reply-to-comment', replyToComment);
+        $commentsBody.on(startEvent, '.js-report-comment', reportComment);
+        $commentsBody.on(startEvent, '.js-cancel-report', cancelReport);
+        $commentsBody.on(startEvent, '.js-submit-report', submitReport);
+        $comments.on(startEvent, '.js-scroll-comments', scrollComments);
         $comments.on(inputEvent, '.js-required', enableForm);
         $(window).on('resize', updateLayout);
         $(window).on('hashchange', showComment);

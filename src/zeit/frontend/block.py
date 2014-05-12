@@ -1,6 +1,6 @@
 # coding: utf-8
 from grokcore.component import adapter, implementer
-from lxml import etree
+from lxml import etree, html
 import PIL
 import logging
 import os.path
@@ -60,6 +60,23 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IPortraitbox)
+class Portraitbox(object):
+
+    def __init__(self, model_block):
+        ref = model_block.references
+        if ref is None:
+            return None
+        self.text = self._author_text(model_block.references.text)
+        self.name = model_block.references.name
+
+    def _author_text(self, pbox):
+        # TODO: Highly fragile, we need to find a better solution
+        # Apparently we don't have a root element
+        p_text = html.fragments_fromstring(pbox)[0]
+        return etree.tostring(p_text)
+
 class BaseImage(object):
 
     @property
@@ -85,17 +102,23 @@ class Image(BaseImage):
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout
+        self.attr_title = _inline_html(xml.find('bu'))
+        self.attr_alt = _inline_html(xml.find('bu'))
         if model_block.references:
             self.image = model_block.references.target
             self.src = self.image and self.image.uniqueId
             self.uniqueId = self.image and self.image.uniqueId
-            self.attr_title = model_block.references.title
-            self.attr_alt = model_block.references.alt
+            if model_block.references.title:
+                self.attr_title = model_block.references.title
+            if model_block.references.alt:
+                self.attr_alt = model_block.references.alt
         else:
             self.image = None
             self.src = None
-            self.attr_title = None
-            self.attr_alt = None
+        if self.attr_title == None:
+            self.attr_title = ''
+        if self.attr_alt == None:
+            self.attr_alt = ''
 
 
 @implementer(IFrontendHeaderBlock)
@@ -155,7 +178,9 @@ class _Video(object):
             return None
         self.renditions = model_block.video.renditions
         self.video_still = model_block.video.video_still
+        self.title = model_block.video.title
         self.description = model_block.video.subtitle
+        self.title = model_block.video.title
         self.id = model_block.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 
@@ -330,7 +355,7 @@ def _raw_html(xml):
 
 
 def _inline_html(xml):
-    allowed_elements = "a|span|strong|img|em|sup|sub|caption"
+    allowed_elements = "a|span|strong|img|em|sup|sub|caption|br"
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">

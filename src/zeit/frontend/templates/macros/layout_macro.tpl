@@ -37,7 +37,7 @@
         <script type="text/javascript">
 
             var Z_WT_KENNUNG =
-            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path_info}}"; // content id
+            "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online./{{'/'.join(request.traversed or ())}}"; // content id
 
             var webtrekk = {
                 linkTrack : "standard",
@@ -87,15 +87,18 @@
     <meta name="date" content="{{ view.date_first_released_meta }}"/>
 {%- endmacro %}
 {% macro breadcrumbs(crumbs) -%}
+
     <div class="breadcrumbs-wrap">
         <div class="breadcrumbs" id="js-breadcrumbs">
             <div class="breadcrumbs__list-wrap">
                 <div class="breadcrumbs__list">
                     {% for crumb in crumbs %}
                         <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-                            <a href="{{crumb[1]}}" itemprop="url">
-                                <span itemprop="title">{{crumb[0]}}</span>
-                            </a>
+                            {% if crumb[1] != '' %}
+                                <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
+                            {% else %}
+                                <span itemprop="title">&nbsp;&nbsp;{{crumb[0]}}</span>
+                            {% endif %}
                         </div>
                         {% if not loop.last %}
                           &rsaquo;
@@ -107,7 +110,7 @@
     </div>
 {%- endmacro %}
 
-{% macro sharing_meta(obj,request) -%}
+{% macro sharing_meta(obj, request) -%}
     <meta name="twitter:card" content="{{obj.twitter_card_type}}">
     <meta name="twitter:site" content="@zeitonline">
     <meta name="twitter:creator" content="@zeitonline">
@@ -116,9 +119,9 @@
     <meta property="og:site_name" content="ZEIT ONLINE">
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{obj.title}}">
-    <meta property="og:description" itemprop="description" content="{{obj.subtitle}}">
-    <meta property="og:url" content="{{request.host}}{{request.path_info}}">
+    <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
+    <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
+    <meta property="og:url" content="{{obj.article_url or 'http://' + request.host + request.path_info}}">
 
     {% if obj.sharing_img %}
         {% if obj.sharing_img.video_still %}
@@ -136,13 +139,12 @@
 {% macro iqd_init() -%}
 <script type="text/javascript">
     // negative keyword 'diuqilon'
-    // todo: if we get a billboard, we need more options (NB)
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     window.diuqilon = (w < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
-        iqdRessort: '',
+        iqdRessort: 'zeitmz',
         ord: Math.random()*10000000000000000,
         iqdSiteInfo: [[980, 0, 0], [0, 0, 980], [0, 0, 980], ['center', 'fullBodyBg'], ['y', 'y', 'y']],
         iqdCountSkyReq: parseInt(0,10),
@@ -151,7 +153,7 @@
     // IQD variable test
     window.iqd_Loc = (window.top===window.self) ? window.location : parent.location;
     window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
-    window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=true')> -1) ? 'iqadtest' : 'iqlive';
+    window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=')> -1) ? iqd_Domain.split('iqadtest=')[1] : 'iqlive';
     // ]]>
 </script>
 {%- endmacro %}
@@ -198,13 +200,13 @@
 </script>
 {%- endmacro %}
 
-{% macro main_nav(is_full_width) -%}
+{% macro main_nav(is_full_width,request) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE"></span>
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -212,53 +214,52 @@
                     <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
-                <div class="main-nav__menu__content" id="js-main-nav-content">
+                {% if request.app_info.authenticated %}
+                    <div class="main-nav__menu__content main-nav--logged-in" id="js-main-nav-content">
+                {%- else -%}
+                    <div class="main-nav__menu__content main-nav--logged-out" id="js-main-nav-content">
+                {%- endif -%}
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__section__content is-always-open" id="js-main-nav-ressorts-slider-container">
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
                             <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
                             <div class="main-nav__section__content__wrap" id="js-main-nav-ressorts-slider-strip">
-                                <a href="#">Mode</a>
-                                <a href="#">Essen & Trinken</a>
-                                <a href="#">Veganes Leben</a>
-                                <a href="#">Wochenmarkt</a>
-                                <a href="#">Design</a>
-                                <a href="#">Gesellschaft</a>
-                                <a href="#">Bartpflege</a>
+                                <a href="http://{{request.host}}/zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode.{{request.path_info}}">Mode & Design</a>
+                                <a href="http://{{request.host}}/zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen.{{request.path_info}}">Essen & Trinken</a>
+                                <a href="http://{{request.host}}/zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben.{{request.path_info}}">Leben</a>
                             </div>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
-                        <a href="http://zeit.de"
-                        class="is-standalone-link">» ZEIT ONLINE</a>
+                        <a href="http://www.zeit.de/index"
+                        class="is-standalone-link" id="hp.zm.topnav.centerpages.zon.{{request.path_info}}">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
-                            <a href="#">Abo</a>
-                            <a href="#">Shop</a>
-                            <a href="#">ePaper</a>
+                            <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo">Abo</a>
+                            <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=42&et_lid=175&et_sub=Startseite_header" id="hp.zm.topnav.links.shop">Shop</a>
+                            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.ePaper">ePaper</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__service">
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__section__content__wrap">
-                                <a href="#">ZEITCampus</a>
-                                <a href="#">ZEITGeschichte</a>
-                                <a href="#">ZEITWissen</a>
-                                <a href="#">Partnersuche</a>
-                                <a href="#">Immobilien</a>
-                                <a href="#">Automarkt</a>
-                                <a href="#">Jobs</a>
-                                <a href="#">Reiseangebote</a>
-                                <a href="#">Apps</a>
-                                <a href="#">Audio</a>
-                                <a href="#">Archiv</a>
-                                <a href="#">Spiele</a>
+                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.centerpages.service.campus.{{request.path_info}}">ZEITCampus</a>
+                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.centerpages.service.geschichte.{{request.path_info}}">ZEITGeschichte</a>
+                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.centerpages.service.wissen.{{request.path_info}}">ZEITWissen</a>
+                                <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.centerpages.service.partnersuche.{{request.path_info}}">Partnersuche</a>
+                                <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.centerpages.service.immobilien.{{request.path_info}}">Immobilien</a>
+                                <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.centerpages.service.automarkt.{{request.path_info}}">Automarkt</a>
+                                <a href="http://jobs.zeit.de/" id="hp.zm.topnav.centerpages.service.jobs.{{request.path_info}}">Jobs</a>
+                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.zm.topnav.centerpages.service.apps.{{request.path_info}}">Apps</a>
+                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.zm.topnav.centerpages.service.audio.{{request.path_info}}">Audio</a>
+                                <a href="http://www.zeit.de/archiv" id="hp.zm.topnav.centerpages.service.archiv.{{request.path_info}}">Archiv</a>
+                                <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.centerpages.service.spiele.{{request.path_info}}">Spiele</a>
                             </div>
                         </div>
                     </div>
-                    <div class="main-nav__section main-nav__search">
+                    <!-- <div class="main-nav__section main-nav__search">
                         <span class="main-nav__section__trigger icon-search">Suche</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__search__form">
@@ -266,12 +267,12 @@
                                 <input class="main-nav__search__submit" type="submit" value="Suchen">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="main-nav__section main-nav__community">
                         {% if request.app_info.authenticated %}
-                            {{ head_user_is_logged_in_true() }}
+                            {{ head_user_is_logged_in_true(request) }}
                         {%- else -%}
-                            {{ head_user_is_logged_in_false() }}
+                            {{ head_user_is_logged_in_false(request) }}
                         {%- endif -%}
                     </div>
                 </div>
@@ -280,25 +281,23 @@
     </nav>
 {%- endmacro %}
 
-{% macro head_user_is_logged_in_true()  %}
+{% macro head_user_is_logged_in_true(request)  %}
     <span class="main-nav__section__trigger">
         {% if request.app_info.user.picture %}
-            <img src="{{ request.app_info.community_host }}{{ request.app_info.user.picture }}" class="main-nav__community__avatar">
+            <span class="main-nav__community__icon--pic" style="background-image: url({{ request.app_info.community_host }}{{ request.app_info.user.picture }})"></span>
         {%- else -%}
-            <span>X</span> <!-- ToDo(T.B.) - Dummycode, tbd by frontend (see https://zeit-online.atlassian.net/browse/ZMO-580#comment-24209) -->
+            <span class="main-nav__community__icon icon-avatar-std"></span>
         {%- endif -%}
-        Community
     </span>
     <div class="main-nav__section__content">
-        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">Account</a>
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}">Logout</a>
+        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="drupal_account">Account</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="drupal_logout">Logout</a>
     </div>
 {%- endmacro %}
 
-{% macro head_user_is_logged_in_false()  %}
-    <span class="main-nav__section__trigger">
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a> /
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
+{% macro head_user_is_logged_in_false(request)  %}
+    <span class="main-nav__section__without_trigger">
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="drupal_login">Anmelden</a>
     </span>
 {%- endmacro %}
 
@@ -309,10 +308,10 @@
     <script type="text/javascript">
         var Z_IVW_RESSORT = "{{channel}}";
         var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}}";
-        document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" alt=\"\" width=\"1\" height=\"1\" />");
+        document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" class=\"visuallyhidden\" alt=\"\" width=\"1\" height=\"1\" />");
     </script>
     <noscript>
-        <img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
+        <img alt="" class="visuallyhidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{channel}};" height="1" width="1" />
     </noscript>
 {%- endmacro %}
 
@@ -394,7 +393,7 @@
                 </div>
                 <div>
                     <ul>
-                        <li>Bildrechte</li>
+                        <!-- <li>Bildrechte</li> -->
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
@@ -407,23 +406,24 @@
     </footer>
 {%- endmacro %}
 
-{% macro adplace(banner, pagetype='article') -%}
+{% macro adplace(banner, banner_channel) -%}
     {%set kw = 'zeitonline,zeitmz' %}
+    {% set pagetype = 'centerpage' if 'centerpage' in banner_channel else 'article' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}}">
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}} ad__min__{{banner.min_width}}">
         {% if banner.label -%}
         <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
         {%- endif %}
         <div class="ad__{{banner.name}}__inner">
             <script type="text/javascript">
-                if( window.innerWidth > {{ banner.min_width|default(0) }} ) {
-                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/zolmz;dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                if( window.zmo_actual_load_width > {{ banner.min_width|default(0) }} ) {
+                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
             <noscript>
             <div>
-                <a href="http://ad.de.doubleclick.net/jump/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
-                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/zolmz;tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
+                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
             </a></div>
             </noscript>
         </div>
@@ -433,10 +433,10 @@
 {% macro main_nav_compact(obj,request) -%}
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -462,22 +462,23 @@
 {%- endmacro %}
 
 {% macro insert_responsive_image(image, image_class) %}
+
+    {% set alt = ''%}
+    {% set title = ''%}
+
+    {% if image.alt %}
+        {% set alt = image.alt %}
+        {% set title = image.title %}
+    {% elif image.attr_alt %}
+        {% set alt = image.attr_alt %}
+        {% set title = image.attr_title %}
+    {% endif %}
+
     <!--[if gt IE 9]>-->
         <noscript data-ratio="{{image.ratio}}">
     <!--<![endif]-->
-            <img alt="{{image.alt}}" title="{{image.title}}" class="{{image_class}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+            <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
     <!--[if gt IE 9]>-->
         </noscript>
     <!--<![endif]-->
 {% endmacro %}
-
-{% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
-    {% if withlink -%}<a href="{{teaser.uniqueId | translate_url}}">{%- endif %}
-    <div class="{{ additional_css_class | default('teaser') }}__kicker">
-        {{teaser.teaserSupertitle}}
-    </div>
-    <div class="{{ additional_css_class | default('teaser') }}__title">
-        {{teaser.teaserTitle}}
-    </div>
-    {% if withlink -%}</a>{%- endif %}
-{%- endmacro %}

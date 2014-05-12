@@ -1,0 +1,28 @@
+{#
+
+default teaser template to inherit from.
+
+Available attributes:
+    teaser_block
+    teaser
+
+#}
+
+<div class='{{self.wrapper_class()}}'>
+    {% block asset %}{% endblock %}
+    <span class="{{self.title_wrapper_class()}}">
+        <a href="{{teaser.uniqueId | translate_url}}">
+            <span class="cp__buttons__supertitle">
+                {{teaser.teaserSupertitle | hide_none}}
+            </span>
+            <span class="{{self.title_class()}}">
+                {{teaser.teaserTitle}}
+            </span>
+        </a>
+        {% if self.hide_subtitle() != 'true' %}
+            <span class="cp__buttons__subtitle">
+              {{teaser.teaserText | hide_none}}
+            </span>
+        {% endif %}
+    </span>
+</div>

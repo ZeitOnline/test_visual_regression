@@ -18,22 +18,67 @@ log = logging.getLogger(__name__)
              renderer='templates/centerpage.html')
 class Centerpage(zeit.frontend.view.Base):
 
+    advertising_enabled = True
+
+    def __call__(self):
+        self.context.advertising_enabled = self.advertising_enabled
+        stats_path = self.request.registry.settings.node_comment_statistics
+        self._unique_id_comments = comments.comments_per_unique_id(stats_path)
+        return super(Centerpage, self).__call__()
+
+    def __init__(self, context, request):
+        super(Centerpage, self).__init__(context, request)
+        try:
+            mtb_teaserbar = self.context['teaser-mosaic'].values()[0]
+            if mtb_teaserbar.layout.id == 'zmo-mtb':
+                self._monothematic_block = mtb_teaserbar
+        except IndexError:
+            log.error('no monothematic block present')
+            self._monothematic_block = None
+        try:
+            zmo_teaserbar = self.context['teaser-mosaic'].values()[1]
+            if zmo_teaserbar.layout.id == 'zmo-teaser-bar':
+                self._teaserbar = zmo_teaserbar
+        except IndexError:
+            log.error('no teaserbar present')
+            self._teaserbar = None
+
+    @property
+    def monothematic_block(self):
+        if self._monothematic_block is not None:
+            return self._monothematic_block
+
+    @property
+    def teaserbar(self):
+        if self._teaserbar is not None:
+            return self._teaserbar
+
     @property
     def type(self):
         return type(self.context).__name__.lower()
 
     @property
+    def is_hp(self):
+        if self.request.path == '/' + self.request.registry.settings.hp:
+            return True
+        else:
+            return False
+
+    @property
     def pagetitle(self):
         # ToDo(T.B.) should be, doesn't work
         # return self.context.html-meta-title
-        return 'Lebensart - Mode, Essen und Trinken, ' + \
-               'Partnerschaft | ZEIT ONLINE'
+        return 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
+
+    @property
+    def pagetitle_in_body(self):
+        return self.context.title
 
     @property
     def pagedescription(self):
         # ToDo(T.B.) should be self.context.html-meta-title, doesn't work
         # return self.context.html-meta-title
-        output = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+        output = 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
         return output
 
     @property
@@ -65,12 +110,10 @@ class Centerpage(zeit.frontend.view.Base):
         return teaser_list
 
     def teaser_get_commentcount(self, uniqueId):
-        stats_path = self.request.registry.settings.node_comment_statistics_path
-        unique_id_comments = comments.comments_per_unique_id(stats_path)
         try:
-            count = \
-                unique_id_comments['/'+urlparse.urlparse(uniqueId).path[1:]]
-            if int(count) >= 15:
+            index = '/' + urlparse.urlparse(uniqueId).path[1:]
+            count = self._unique_id_comments[index]
+            if int(count) >= 5:
                 return count
         except KeyError:
             return None
@@ -129,17 +172,32 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def area_buzz(self):
-        stats_path = self.request.registry.settings.node_comment_statistics_path
+        stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
         reach = LinkReach(stats_path, linkreach)
-        buzz = dict(twitter=reach.fetch_service('twitter', 3),
-                    facebook=reach.fetch_service('facebook', 3),
-                    comments=reach.fetch_comments(3)
-                    )
-        return buzz
-
-    def banner(self, tile):
         try:
-            return zeit.frontend.banner.banner_list[tile - 1]
-        except IndexError:
-            return None
+            return dict(twitter=reach.fetch_service('twitter', 3),
+                        facebook=reach.fetch_service('facebook', 3),
+                        comments=reach.fetch_comments(3)
+                        )
+        except:
+            log.error('Cant reach linkreach')
+
+        return dict(twitter=[],
+                    facebook=[],
+                    comments=[]
+                    )
+
+    @property
+    def ressort(self):
+        if self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+    @property
+    def sub_ressort(self):
+        if self.context.sub_ressort:
+            return self.context.sub_ressort.lower()
+        else:
+            return ''

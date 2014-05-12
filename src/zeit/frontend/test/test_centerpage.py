@@ -22,13 +22,31 @@ def monkeyreq(monkeypatch):
     monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
+def test_homepage_should_have_buzz_module_centerpage_should_not(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/index' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.cp__buzz')) == 1
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.cp__buzz')) == 0
+
+# commented out for first launch (as)
+# def test_centerpage_should_have_pagetitle_in_body_but_hp_not(
+#         selenium_driver, testserver):
+#     driver = selenium_driver
+#     driver.get('%s/zeit-magazin/index' % testserver.url)
+#     assert len(driver.find_elements_by_css_selector('.cp__title')) == 0
+#     driver.get('%s/centerpage/lebensart' % testserver.url)
+#     pagetitle_in_body = driver.find_elements_by_css_selector('.cp__title')
+#     assert pagetitle_in_body[0].text.strip() == "ZMO"
+
+
 def test_centerpage_should_have_correct_page_title(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     title = driver.title.strip()
-    assert title == 'Lebensart - Mode, Essen und Trinken' \
-                    ', Partnerschaft | ZEIT ONLINE'
+    assert title == u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
 
 
 def test_centerpage_should_have_page_meta_description(
@@ -37,7 +55,7 @@ def test_centerpage_should_have_page_meta_description(
     driver.get('%s/centerpage/lebensart' % testserver.url)
     meta_description_tag = driver.find_element_by_xpath(
         '//meta[@name="description"]')
-    teststring = 'Die Lust am Leben: Aktuelle Berichte, Ratgeber und...'
+    teststring = u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
     assert meta_description_tag.get_attribute("content").strip() == teststring
 
 
@@ -157,6 +175,8 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
                          'bitblt-.*/' +
                          'katzencontent-zmo-square-large.jpg',
                          img.get_attribute("src"))
+        print img.get_attribute("alt")
+        print img.get_attribute("title")
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -185,7 +205,7 @@ def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) >= 2
+        assert len(link_wrap) >= 1
 
 
 def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
@@ -218,7 +238,7 @@ def test_cp_button_has_expected_structure(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 2
+        assert len(link_wrap) == 1
 
 
 def test_cp_button_has_expected_text_content(selenium_driver, testserver):
@@ -255,6 +275,52 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
                 'localhost:6543/centerpage/article_image_asset'
 
 
+def test_cp_large_button_has_expected_structure(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__large__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        text_wrap = element.find_elements_by_css_selector(
+            ".cp__buttons__large__title__wrap")
+        link_wrap = element.find_elements_by_tag_name(
+            "a")
+        assert len(text_wrap) != 0
+        assert len(link_wrap) == 2
+
+
+def test_cp_large_button_has_expected_text_content(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__buttons__large__title__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        supertitle = element.find_element_by_css_selector(
+            ".cp__buttons__supertitle")
+        title = element.find_element_by_css_selector(
+            ".cp__buttons__large__title")
+        assert unicode(supertitle.text) == u'Serie Gesellschaftskritik'
+        assert unicode(title.text) == u'\u00DCBER SCHLECHTE LAUNE'
+
+
+def test_cp_large_button_has_expected_links(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__buttons__large__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        link_wrap = element.find_elements_by_tag_name("a")
+        print link_wrap
+        assert len(link_wrap) != 0
+        for link in link_wrap:
+            assert re.search(
+                'http://.*/zeit-magazin/test-cp/' +
+                'gesellschaftskritik-grumpy-cat',
+                link.get_attribute("href"))
+
+
 def test_cp_should_have_informatives_ad_at_3rd_place(
         selenium_driver, testserver):
     driver = selenium_driver
@@ -267,7 +333,7 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
     assert add == 'cp__buttons__ad'
     mr = elements[2].find_element_by_css_selector(
         "#iqadtile7").get_attribute("class")
-    assert mr == "ad__tile_7 ad__on__centerpage ad__width_300"
+    assert mr == "ad__tile_7 ad__on__centerpage ad__width_300 ad__min__768"
 
 
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
@@ -289,19 +355,19 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             teaser.find_element_by_xpath('//source[2]').get_attribute("src")
 
         src1_val = \
-            'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/' \
-            '927/18140073001_3035897844001_Beitrag-' \
-            'Skispringen-f-r-Anf-nger.mp4'
+            'http://brightcove.vo.llnwd.net/pd15/media/18140073001/'\
+            '201401/1105/18140073001_3035966678001_Beitrag'\
+            '-Skispringen-f-r-Anf-nger.mp4'
         src2_val = \
             'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
         src_img = \
-            'http://www.zeit.de/live0-backend/multimedia/'\
+            'http://live0.zeit.de/multimedia/'\
             'videos/3035864892001.jpg'
 
         # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap--dark' == \
+        assert 'cp__lead-full__title__wrap cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert 'cp__lead__title' == unicode(h1.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
@@ -312,7 +378,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'Es leben die Skispringenden Sportredakteure!' == \
             unicode(subtitle.text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert u'\u00BBund der Titel dazu\u00AB' == unicode(h1.text)
+        assert u'und der Titel dazu' == unicode(h1.text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
@@ -345,7 +411,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert len(title_wrap) != 0
 
         assert re.search(image_pattern, img.get_attribute("src"))
-        assert unicode(h1.text) == u'\u00BBArticle Image Asset Titel\u00AB'
+        assert unicode(h1.text) == u'Article Image Asset Titel'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\
@@ -475,8 +541,12 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
     request = mock.Mock()
     request.registry.settings.community_host = app_settings['community_host']
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    request.registry.settings.node_comment_statistics = app_settings['node_comment_statistics']
 
-    buzz = view_centerpage.Centerpage('', request).area_buzz
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, request)
+
+    buzz = view.area_buzz
     assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
     assert len(buzz['facebook']) == 3
     assert len(buzz['twitter']) == 3
@@ -593,3 +663,15 @@ def test_cp_teaser_should_have_comment_count(selenium_driver, testserver):
     comments = wrap[0].text
     assert len(wrap) != 0
     assert comments == '22'
+
+
+def test_centerpage_should_have_monothematic_block(application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.monothematic_block) == 6
+
+
+def test_centerpage_should_have_no_monothematic_block(application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/lebensart')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.monothematic_block is None

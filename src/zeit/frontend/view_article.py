@@ -1,8 +1,7 @@
-from babel.dates import get_timezone
 from datetime import date
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
-from zeit.cms.workflow.interfaces import IPublishInfo
+from zeit.frontend.reach import LinkReach
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
@@ -22,20 +21,6 @@ from .comments import get_thread
 log = logging.getLogger(__name__)
 
 
-_navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/index', 'myid_zmo'),
-               'lebensart': (
-                   'ZEIT Magazin',
-                   'http://www.zeit.de/magazin/index',
-                   'myid2',
-               ),
-               'mode': (
-                   'Mode',
-                   'http://www.zeit.de/magazin/lebensart/index',
-                   'myid3',
-               ), }
-
-
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -46,6 +31,7 @@ class Article(zeit.frontend.view.Content):
     advertising_enabled = True
     main_nav_full_width = False
     is_longform = False
+    _linkreach = None
     page_nr = 1
 
     def __call__(self):
@@ -291,21 +277,37 @@ class Article(zeit.frontend.view.Content):
         except IndexError:
             return None
 
-    @property
-    def breadcrumb(self):
-        l = [_navigation['start']]
-        l.append(_navigation['zmo'])
-        if self.context.ressort in _navigation:
-            l.append(_navigation[self.context.ressort])
-        if self.context.sub_ressort in _navigation:
-            l.append(_navigation[self.context.sub_ressort])
-        if self.title:
-            l.append((self.title, 'http://localhost'))
-        return l
-
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
                           request=self.request)
+
+    @property
+    def linkreach(self):
+        if self._linkreach is None:
+
+            def unitize(n):
+                if n <= 999:
+                    return str(n), ''
+                elif n <= 9999:
+                    return ','.join(list(str(n))[:2]), 'Tsd.'
+                elif n <= 999999:
+                    return str(n / 1000), 'Tsd.'
+                else:
+                    return str(n / 1000000), 'Mio.'
+
+            linkreach = self.request.registry.settings.linkreach_host
+            reach = LinkReach(None, linkreach)
+            raw = reach.get_counts_by_url(self.article_url)
+            total = raw.pop('total', 0)
+            counts = {'total': unitize(total)} if total >= 10 else {}
+            for k, v in raw.items():
+                try:
+                    counts[k] = unitize(v['total'])
+                except:
+                    continue
+            self._linkreach = counts
+
+        return self._linkreach
 
     @property
     def tracking_type(self):
@@ -313,43 +315,8 @@ class Article(zeit.frontend.view.Content):
             return 'Artikel'
 
     @property
-    def type(self):
-        return type(self.context).__name__.lower()
-
-    @property
-    def ressort(self):
-        if self.context.ressort:
-            return self.context.ressort.lower()
-        else:
-            return ''
-
-    @property
-    def sub_ressort(self):
-        if self.context.sub_ressort:
-            return self.context.sub_ressort.lower()
-        else:
-            return ''
-
-    @property
     def text_length(self):
         return self.context.textLength
-
-    @property
-    def banner_channel(self):
-        channel = ''
-        if self.ressort:
-            channel += self.ressort
-        if self.sub_ressort:
-            channel += "/" + self.sub_ressort
-        if self.type:
-            channel += "/" + self.type
-        return channel
-
-    def banner(self, tile):
-        try:
-            return zeit.frontend.banner.banner_list[tile - 1]
-        except IndexError:
-            return None
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

@@ -5,13 +5,20 @@
 
 %ad__label
     color: $charcoal
-    font-size: $font-xs--px
+    font-size: $font-xxs
+    +tablet()
     letter-spacing: 2px
     text-align: left
     text-transform: uppercase
 
 %ad__inner
     margin: 0 auto
+
+// hide all desktop ads
+.ad__min__768
+    display: none
+    +respond-min(em(769px))
+        display: block
 
 // mobile
 .iqd_mobile__adplace
@@ -30,8 +37,8 @@
         padding: $small 0
     +respond-min($break-3)
         border: none
-        float: left
-        margin: 0 $medium $compact 0
+        float: right
+        margin: 0 0 $compact $medium
         max-width: 300px
         padding: 0
     object
@@ -54,6 +61,9 @@
 .ad__tile_7.ad__on__centerpage // tile 7 on cp
     @extend %ad__mr
     margin: 0 auto $compact auto
+    .ad__tile_7__label,
+    .ad__tile_8__label
+        display: none
     +respond-min($break-2)
         padding: 0
         border: none
@@ -66,4 +76,12 @@
 .ad__tile_4__inner, .ad__tile_7__inner, .ad__tile_8__inner
     @extend %ad__mr__inner
 
+.ad__tile_3
+    width: 940px
+    margin: 0 auto
+    padding-top: em(4px)
+
+.ad__tile_3__label
+    @extend %ad__label
+    text-align: right
 

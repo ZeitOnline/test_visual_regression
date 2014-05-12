@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
+      <tag ns11:pytype="str" uuid="043df8f5-d42a-43db-82c7-c4900d96034c" url_value="sissi-kaiserin-von-oesterreich" type="Person">Sissi Kaiserin von Österreich</tag>
+      <tag type="Location" score="1" uuid="7a683a87-3ab0-48ad-b719-e3b375a8b6b5" url_value="wien">Wien</tag>
+    </rankedTags>
+    <references/>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-19/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
+      <copyright py:pytype="str">© Fengel</copyright>
+    </image>
+    <nextread>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/17/harald-martenstein" year="2014" issue="17" ressort="zeit-magazin" contenttype="article" publication-date="2014-04-16T07:47:00+00:00" expires="">
+        <supertitle py:pytype="str">Harald Martenstein</supertitle>
+        <teaser_supertitle py:pytype="str">Kolumne Martenstein</teaser_supertitle>
+        <title py:pytype="str">Über Intimbehaarung</title>
+        <text py:pytype="str">Schauspielerin Christine Kaufmann setzt sich für mehr Schamhaare ein. Und unser Kolumnist staunt, über was man alles diskutieren kann.</text>
+        <description py:pytype="str">Schauspielerin Christine Kaufmann setzt sich für mehr Schamhaare ein. Und unser Kolumnist staunt, über was man alles diskutieren kann.</description>
+        <byline py:pytype="str">von Harald Martenstein</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/martenstein-intimbehaarung-2/" type="jpg" align="left" publication-date="" expires="">
+          <bu xsi:nil="true"/>
+          <copyright py:pytype="str">© Fengel</copyright>
+        </image>
+      </reference>
+    </nextread>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2119544</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-05-06T17:26:39.158587+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-04-30T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-05-06T17:27:48.419667+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-05-06T13:40:59.003962+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">30.04.2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-19-Martenstein-19</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">martenstein</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Martenstein 19</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-05-04T09:20:40.037128+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">Martenstein 19</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">6</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">942c21a3d107466d9c023b22683c8e62</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">383224721</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2014-04-30T07:50:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-19</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Martenstein</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">leben</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3751</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ce67abaf-59c5-4c6d-a6c7-c6b11b5b9ae2}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">19</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Harald Martenstein</supertitle>
+    <title>Über seine Lieblingskaiserin</title>
+    <byline>von Harald Martenstein</byline>
+    <division type="page">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-19/martenstein-19-zmo-landscape-large.jpg" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" align="left" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+        <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
+        <copyright py:pytype="str">© Fengel</copyright>
+      </image>
+      <p>Dreams Are My Reality. In Wien wollte ich wieder einmal die <a class="" href="http://www.kaisergruft.at/" target="_blank">Kapuzinergruft</a> besuchen, hauptsächlich wegen meiner Kaiserin. Sisi bedeutet für mich als Persönlichkeit das, was Robert De Niro für Martin Scorsese bedeutet. Sie liegt dort in einem Sarkophag, neben ihrem Franzl, dem Kaiser, und ihrem einzigen Sohn, dem labilen Kronprinzen Rudolf.</p>
+      <p>Eigentlich will ich was anderes erzählen. Aber eines muss ich noch loswerden: In reiferen Jahren ließ Sisi sich oft mit ihrer Jacht im Mittelmeer ziellos umherfahren, allein. Wenn Sturm aufkam, mussten die Matrosen die immer noch betörend schöne Sisi mit Tauen an den Mast binden und dann direktemang in den Sturm hineinsegeln, volles Risiko. Wenn die eisige Gischt sie gepeitscht hat, wenn Brecher ihre zarten Glieder durchschüttelten und der wilde Sturm ihr hemmungslos im kastanienbraunen Kaiserinnenhaar wühlte, empfand Sisi das als erotisch anregend. Es lebe die Monarchie.</p>
+      <p>Auch dies ist interessant: Vor genau 125 Jahren, 1889, hat Sisis Sohn Rudolf sich in Schloss Mayerling erschossen. Vorher hat er noch schnell seine Geliebte erschossen, die 17-jährige Baroness Mary Vetsera. Rudolf wäre vielleicht ein Reformkaiser geworden, er war im Geiste liberal. Andererseits hatte er im Geiste auch diese extrem schwere Schacke. Ursprünglich wollte Rudolf, der auf Befehl seines Vaters eine belgische Prinzessin geheiratet hatte, dass sich seine Hauptgeliebte Mizzi Kaspar gemeinsam mit ihm umbringt. Hauptgeliebte Mizzi weigerte sich, das finde ich nachvollziehbar. Rudolf verbrachte die Nacht mit Mizzi, am Morgen fuhr er nach Mayerling und starb dann eben mit der etwas weniger renitenten Baroness Mary. Mizzi lebte noch jahrzehntelang und hat niemals auch nur ein einziges Interview gegeben. So diskrete Frauen gibt es heute nicht mehr.</p>
+      <p>Faszinierenderweise wiederholt sich die Geschichte von Mizzi und Mary dann bei Sisi. Auch Sisi stirbt anstelle einer anderen Person. Der Anarchist Luigi Lucheni wollte in Genf unbedingt den Prinzen von Orléans erdolchen. Das war sein größter Wunsch. Als der Prinz, ein eher flatterhafter Charakter mit wenig Termindisziplin, am vorgesehenen Tatort einfach nicht auftauchte, hat er, mehr oder weniger zufällig, die Kaiserin erdolcht.</p>
+      <p>Ich weiß viel über Sisi. Wenn Sisi sich die Haare waschen ließ, dauerte das immer einen vollen Tag. Nachts legte sie sich rohes Rindfleisch aufs Gesicht. Angeblich ist das gut für die Haut. Vielleicht mochte sie auch nur das fleischige Gefühl. Ihr Gewicht und den Umfang ihrer Waden ließ sie drei Mal täglich kontrollieren, das sollte ich besser auch tun. Sisi hat durchaus gerne Süßigkeiten gegessen, anschließend aß sie dann lange gar nichts.</p>
+      <p>Ich habe minutenlang vor dem Eingang zu Sisis Grab gestanden und gezögert. Ich befand mich an der letzten Wegmarke des Lebens. Der erste Schultag. Abitur. Der erste Job, Kinder, Ehen, all diese Sachen gehen einem durch den Kopf, das läuft alles ab wie ein Film im Zeitraffer. Jeder muss da durch. Ich erzähle es nur, weil jeder da durchmuss. Wie fühlt es sich an? Ich würde sagen, es fühlt sich an wie ein rohes Stück Rindfleisch.</p>
+      <p>Einige Wochen vorher hätte ich es bereits machen können, beim Skilaufen. Ich hätte gedurft. Aber ich war mental noch nicht bereit. Außerdem standen hinter mir zu viele Leute. Ich mochte das nicht, mit all diesen Leuten.</p>
+      <p>Dann habe ich mir, am Eingang zur Kapuzinergruft, zum ersten Mal eine Eintrittskarte zum Seniorentarif gekauft. 4,50 Euro statt 5,50 Euro. Wir leben in einer kleinen Zeit.</p>
+      <p>
+        <em>Harald Martenstein ist Redakteur des <a class="" href="http://www.tagesspiegel.de/" target="_blank" title="externer Link">Tagesspiegels</a>.</em>
+      </p>
+      <p>
+        <em>Diesen Artikel finden Sie als Audiodatei im Premiumbereich unter <a class="" href="https://premium.zeit.de/node/12415" target="_blank">www.zeit.de/audio</a></em>
+      </p>
+    </division>
+    <image-credits>Illustration Fengel</image-credits>
+    <subtitle/>
+  </body>
+  <teaser>
+    <title>Über seine Lieblingskaiserin</title>
+    <supertitle>Kolumne Martenstein</supertitle>
+    <text>Unser Kolumnist besucht die Gruft, in der Sisi liegt. Wussten Sie, dass die Kaiserin mit rohem Rindfleisch auf dem Gesicht nächtigte?</text>
+  </teaser>
+</article>

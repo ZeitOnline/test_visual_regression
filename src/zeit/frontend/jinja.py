@@ -34,7 +34,7 @@ def translate_url(context, url):
 
 
 def format_date(obj, type='short'):
-    formats = {'long': "dd. MMMM yyyy, H:mm 'Uhr'", 'short': "dd. MMMM yyyy"}
+    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
@@ -135,13 +135,16 @@ default_images_sizes = {
     'zmo-medium': (330, 100),
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
+    'zmo-card-picture': (320, 480),
 }
 
 
 def default_image_url(image,
                       image_pattern='default'):
     try:
-        if hasattr(image, 'layout'):
+        if image_pattern != 'default':
+            width, height = default_images_sizes.get(image_pattern, (640, 480))
+        elif hasattr(image, 'layout'):
             width, height = default_images_sizes.get(image.layout, (640, 480))
         else:
             width, height = default_images_sizes.get(image_pattern, (640, 480))
@@ -157,6 +160,7 @@ def default_image_url(image,
         path = '/'.join(parts)
         url = urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
+
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
@@ -191,7 +195,7 @@ def most_sufficient_teaser_image(teaser_block,
         raise KeyError(asset_type)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
-    image_base_name = re.split('/', asset.uniqueId)[-1]
+    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:

@@ -31,6 +31,7 @@ class LinkReach(object):
         self.linkreach = linkreach
 
     def fetch_service(self, service, limit, section='zeit-magazin'):
+        """Compile a list of popular articles for a specific service."""
         if section not in self.sections:
             raise UnavailableSectionException('No section named: ' + section)
 
@@ -48,40 +49,68 @@ class LinkReach(object):
         return DataSequence().deserialize(json.load(response))
 
     def fetch_comments(self, limit, section='zeit-magazin'):
+        """Compile a list of most commented on articles."""
         if section not in self.sections:
             raise UnavailableSectionException('No section named: ' + section)
 
         if not 0 < limit < 10:
             raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
 
-        url = 'http://xml.zeit.de/cms/work/import/feeds/most_comments_%s.rss'
-        feed = zeit.cms.interfaces.ICMSContent(url % section)
+        try:
+            url = 'http://xml.zeit.de/import/feeds/most_comments_%s.rss'
+            feed = zeit.cms.interfaces.ICMSContent(url % section)
+        except TypeError:
+            return []
 
-        item_list = []
+        output = []
 
-        for rss_node in feed.xml.xpath('/rss/channel/item')[:limit]:
+        iterator = iter(feed.xml.xpath('/rss/channel/item'))
+
+        while len(output) < limit:
+            # Compile list of most commented on articles.
+
+            try:
+                rss_node = iterator.next()
+            except StopIteration:
+                # Abort compiling comment list if feed is exhausted.
+                break
+
             web_path = rss_node.xpath('guid/text()')[0]
             rel_path = web_path[18:]
             xml_path = 'http://xml.zeit.de' + rel_path
 
             try:
-                # Ignore item if CMS lookup fails.
                 article = zeit.cms.interfaces.ICMSContent(xml_path)
             except TypeError:
+                # Ignore item if CMS lookup fails.
                 continue
 
-            comment_stats = comments_per_unique_id(self.stats_path)
+            try:
+                score = comments_per_unique_id(self.stats_path)[rel_path]
+            except KeyError:
+                # Ignore item if comment count lookup fails.
+                score = 0
 
             item = dict(location=rel_path,
-                        score=comment_stats.get(xml_path, 0),
+                        score=score,
                         supertitle=article.supertitle,
                         title=article.title,
                         subtitle=article.subtitle,
                         section=article.ressort
                         )
-            item_list.append(item)
+            output.append(item)
 
-        return DataSequence().deserialize(item_list)
+        return DataSequence().deserialize(output)
+
+    def get_counts_by_url(self, url):
+        """Get share counts for all services for a specific URL."""
+        params = urllib.urlencode({'url': url})
+        url = '%s/reach?%s' % (self.linkreach, params)
+        try:
+            response = urllib2.urlopen(url, timeout=4).read()
+            return json.loads(response)
+        except (urllib2.HTTPError, urllib2.URLError, ValueError):
+            return {}
 
 
 def _prepare_date(value):
@@ -92,16 +121,29 @@ def _prepare_date(value):
 
 
 class Entry(colander.MappingSchema):
-    score = colander.SchemaNode(colander.Int())
-    location = colander.SchemaNode(colander.String())
-    supertitle = colander.SchemaNode(colander.String())
-    title = colander.SchemaNode(colander.String())
-    subtitle = colander.SchemaNode(colander.String())
+    score = colander.SchemaNode(colander.Int(),
+                                missing=colander.drop
+                                )
+    location = colander.SchemaNode(colander.String(),
+                                   missing=colander.drop
+                                   )
+    supertitle = colander.SchemaNode(colander.String(),
+                                     missing=colander.drop
+                                     )
+    title = colander.SchemaNode(colander.String(),
+                                missing=colander.drop
+                                )
+    subtitle = colander.SchemaNode(colander.String(),
+                                   missing=colander.drop
+                                   )
     timestamp = colander.SchemaNode(colander.Int(),
                                     preparer=_prepare_date,
                                     missing=colander.drop
                                     )
-    section = colander.SchemaNode(colander.String())
+    section = colander.SchemaNode(colander.String(),
+                                  missing=colander.drop
+                                  )
+
     fetchedAt = colander.SchemaNode(colander.Int(),
                                     preparer=_prepare_date,
                                     missing=colander.drop

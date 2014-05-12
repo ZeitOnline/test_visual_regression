@@ -17,36 +17,38 @@
                     {% include "templates/inc/headers/article_header_sequelpages.html" ignore missing with context %}
                 {% endif %}
             {% endblock article_header %}
-            <div class="article__body">
-                {% block article_pages %}
-                    <div class="article__page">
-                        {{ render_page(view.current_page) }}
-                    </div>
-                {% endblock article_pages %}
+            <div class="article__body-wrap">
+                <div class="article__body">
+                    {% block article_pages %}
+                        <div class="article__page">
+                            {{ render_page(view.current_page) }}
+                        </div>
+                    {% endblock article_pages %}
 
 
-                {% block article_pagination %}
-                    {% if view.pagination %}
-                        {{ blocks.print_pagination( view.pagination ) }}
-                    {% endif %}
-                {% endblock article_pagination %}
+                    {% block article_pagination %}
+                        {% if view.pagination %}
+                            {{ blocks.print_pagination( view.pagination ) }}
+                        {% endif %}
+                    {% endblock article_pagination %}
 
-                <!-- commented ou as not mvp, has to be reworked after first launch (as) -->
-                <!-- {% if view.rankedTags %} -->
-                <!-- <div class="article__tags is-constrained is-centered">
-                    <span class="article__tags__title">Tags</span>
-                    {% for tag in view.rankedTags %}
-                      <a href="#{{ tag.url_value }}">{{ tag.label }}</a>
-                      {% if not loop.last %}
-                          ,
-                      {% endif %}
-                    {% endfor %}
-                </div> -->
-                <!-- {% endif %} -->
+                    <!-- commented ou as not mvp, has to be reworked after first launch (as) -->
+                    <!-- {% if view.rankedTags %} -->
+                    <!-- <div class="article__tags is-constrained is-centered">
+                        <span class="article__tags__title">Tags</span>
+                        {% for tag in view.rankedTags %}
+                          <a href="#{{ tag.url_value }}">{{ tag.label }}</a>
+                          {% if not loop.last %}
+                              ,
+                          {% endif %}
+                        {% endfor %}
+                    </div> -->
+                    <!-- {% endif %} -->
+                </div>
 
                 {% block article_comments %}
                     {% if view.comments %}
-                        {{ blocks.comments(view.comments) }}
+                        {{ blocks.comments(view, request) }}
                     {% endif %}
                 {% endblock article_comments %}
 
@@ -58,8 +60,11 @@
         </div>
     </article>
     <!-- seo article date modification -->
-    {% block article_publishdate %}
-        {{blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
-    {% endblock article_publishdate %}
+
+    {% if view.context.product.id not in ['TGS', 'ZEI', 'ZMLB'] %}
+        {% block article_publishdate %}
+            {{blocks.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo)}}
+        {% endblock article_publishdate %}
+    {% endif %}
 
 {% endblock content %}

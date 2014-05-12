@@ -62,7 +62,7 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
         'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li>Bildrechte</li>'\
+        '</ul></div><div><ul><!-- <li>Bildrechte</li> -->'\
         '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
@@ -93,6 +93,19 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
         '</a></div></div></div></div></div>'
     lines = tpl.module.breadcrumbs(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert markup == output
+
+def test_macro_portraitbox_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    obj = {'name': 'name', 'text': 'text'}
+
+    markup = '<figure class="portraitbox figure-stamp">' \
+        '<div class="portraitbox-heading">name</div>' \
+        'text</figure>'
+    lines = tpl.module.portraitbox(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -176,7 +189,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    m = '<h3 class="article__subheading is-constrained is-centered">xy</h3>'
+    m = '<h2 class="article__subheading is-constrained is-centered">xy</h2>'
     assert m == output
 
 
@@ -227,55 +240,55 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-xl-header',
             'css': 'figure-header',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-medium-left',
             'css': 'figure-horizontal',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-medium-right',
             'css': 'figure-horizontal--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-medium-center', 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
             'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-right',
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-left', 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-large-center',
             'css': 'figure-full-width',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            {'layout': 'zmo-small-right', 'align': False,
             'css': 'figure-stamp--right',
             'caption': 'test', 'copyright': 'test',
-            'attr_alt': 'My alt content',
-            'attr_title': 'My title content'},
+            'alt': 'My alt content',
+            'title': 'My title content'},
            ]
 
     class Image(object):
@@ -294,25 +307,23 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         pyramid.threadlocal, 'get_current_request', get_current_request)
 
     for el in obj:
-        print el['css']
-        print el['layout']
         lines = tpl.module.image(Image(el)).splitlines()
         output = ""
         for line in lines:
             output += line.strip()
         markup = '<figure class="%s"><div class="scaled-image">' \
-                 '<!--\[if gte IE 9\]> --><noscript data-ratio="">' \
-                 '<!-- <!\[endif\]--><img alt="%s" title="%s" ' \
-                 'class="figure__media" ' \
+                 '<!--\[if gt IE 9\]>--><noscript data-ratio="">' \
+                 '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
+                 'class=" figure__media" ' \
                  'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
-                 'data-ratio=""><!--\[if gte IE 9\]> --></noscript>' \
-                 '<!-- <!\[endif\]--></div><figcaption ' \
+                 'data-ratio=""><!--\[if gt IE 9\]>--></noscript>' \
+                 '<!--<!\[endif\]--></div><figcaption ' \
                  'class="figure__caption">test<span ' \
                  'class="figure__copyright">test</span>' \
                  '</figcaption></figure>' \
-                 % (el['css'], el['attr_alt'], el['attr_title'])
-        assert match(markup, output)
+                 % (el['css'], el['alt'], el['title'])
 
+        assert match(markup, output)
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
@@ -320,6 +331,9 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     obj.caption = 'test'
     obj.copyright = 'test'
     obj.src = 'test.gif'
+    obj.ratio = 1
+    obj.alt = "test"
+    obj.title = "test"
 
     lines = tpl.module.headerimage(obj).splitlines()
     output = ""
@@ -327,10 +341,10 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
         output += line.strip()
 
     start = '<div class="scaled-image is-pixelperfect">' \
-            '<!--[if gte IE 9]> --><noscript><!-- <![endif]-->' \
-            '<img class="article__main-image--longform" src="'
+            '<!--[if gt IE 9]>--><noscript data-ratio="1"><!--<![endif]-->' \
+            '<img alt="test" title="test" class="article__main-image--longform figure__media" src="'
+    end = '--></noscript><!--<![endif]--></div>testtest'
 
-    end = '--></noscript><!-- <![endif]--></div>testtest'
     assert output.startswith(start)
     assert output.endswith(end)
 
@@ -406,14 +420,17 @@ def test_macro_video_should_produce_markup(jinja2_env):
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
-           'description': 'test', 'format': ''}
+           'description': 'test', 'format': '', 'title': 'title'}
     fig = '<figure class="figure is-constrained is-centered" data-video="1">'
-    img = '<img class="figure__media" src="pic.jpg">'
+    img = '<img class="figure__media" src="pic.jpg" alt="Video: title"'\
+        ' title="Video: title">'
+
     cap = '<figcaption class="figure__caption">test</figcaption>'
     lines = tpl.module.video(obj).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
+
     assert fig in output
     assert img in output
     assert cap in output
@@ -460,7 +477,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
     img = '<img '
     fallback = '<img class="article__main-image--longform'\
-        ' video--fallback" src="http://www.zeit.de/live0-backend/'\
+        ' video--fallback" src="http://live0.zeit.de/'\
         'multimedia/videos/1.jpg'
     lines = tpl.module.headervideo(obj).splitlines()
     output = ""
@@ -490,8 +507,8 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="fb:admins" content="595098294">',
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
-          '"og:description" itemprop="description" content="subtitle">',
-          '<meta property="og:url" content="test.de/myurl">']
+          '"og:description" content="subtitle">',
+          '<meta property="og:url" content="http://test.de/myurl">']
     image = ['<meta property="og:image" class="scaled-image" content="',
              '<link itemprop="image" class="scaled-image" rel="image_src"',
              '<meta class="scaled-image" name="twitter:image" content="']
@@ -625,7 +642,7 @@ def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
              'var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + string,
              'document.write("<img src=',
              '</script',
-             '<img alt="" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
+             '<img alt="" class="visuallyhidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
              + string]
     lines = tpl.module.ivw_ver1_tracking(string).splitlines()
     output = ""
@@ -670,7 +687,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'min_width': 768}
     num = '123456789'
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
-             'adj/zeitonline/zolmz;dcopt=ist;tile=1;\' + n_pbt + \';' \
+             'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
              'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
              '/javascript"><\/script>\');'
@@ -756,7 +773,7 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(jinja2_
 
 def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
@@ -771,10 +788,27 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     assert '<div class="teaser__kicker">SUPATITLE</div>' in output
     assert '<div class="teaser__title">TITLE</div>' in output
 
+def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
+    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+    teaser = Mock()
+    teaser.teaserSupertitle = None
+    teaser.supertitle = "FALLBACK"
+
+    teaser.teaserTitle = "TITLE"
+    teaser.uniqueId = "ID"
+
+    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'FALLBACK' in output
+
 
 def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
@@ -800,3 +834,97 @@ def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
         output += line.strip()
 
     assert markup in output
+
+
+def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    request = Mock()
+    request.app_info.user.picture = None
+
+    #no pic
+    markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
+
+    lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+
+    #pic
+    request = Mock()
+    request.app_info.community_host = 'www.zeit.de/'
+    request.app_info.user.picture = 'test.jpg'
+    request.app_info.user.uid = 1
+    request.app_info.community_paths.logout = 'logout'
+    request.url = 'test'
+
+    markup = '<span class="main-nav__community__icon--pic"'\
+        ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
+    account = '<a href="www.zeit.de/user/1"'\
+        ' id="drupal_account">Account</a>'
+    logout = '<a href="www.zeit.de/logout?destination=test"'\
+        ' id="drupal_logout">Logout</a>'
+
+    lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+    assert account in output
+    assert logout in output
+
+
+def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    request = Mock()
+    request.app_info.community_host = 'www.zeit.de/'
+    request.app_info.community_paths.login = 'login'
+    request.app_info.community_paths.register = 'register'
+    request.url = 'test'
+
+    markup = '<span class="main-nav__section__without_trigger">'\
+        '<a href="www.zeit.de/login?destination=test"'\
+        ' id="drupal_login">Anmelden</a></span>'
+
+    lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+
+
+def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    request = Mock()
+
+    #logged in
+    request.app_info.authenticated = 'true'
+    markup = '<div class="main-nav__menu__content '\
+        'main-nav--logged-in" id="js-main-nav-content">'
+    logged = 'Account'
+    lines = tpl.module.main_nav('true', request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+    assert logged in output
+
+    #logged out
+    request.app_info.authenticated = None
+    markup = '<div class="main-nav__menu__content '\
+        'main-nav--logged-out" id="js-main-nav-content">'
+    unlogged = 'Anmelden'
+    lines = tpl.module.main_nav('true', request).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert markup in output
+    assert unlogged in output

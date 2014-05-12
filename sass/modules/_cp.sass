@@ -1,7 +1,21 @@
 //main cp styles
 $cp__buttons__image-height: em(165px)
+$cp__buttons__large__image-height: em(330px)
 $cp__comment__count-height: em(50px)
 $cp__comment__count-width: em(60px)
+
+.cp__title
+	margin-top: $petite
+	margin-bottom: $petite
+	letter-spacing: 0.3em
+	text-transform: uppercase
+	font-size: $font-xl
+	font-family: "TiemannLight", serif
+	text-align: center
+	display: block
+
+.cp__title ~ .main > .cp__lead-full__wrap
+	margin-top: em_to_rem($medium)
 
 //hide breadcrumbs for cp
 .for-centerpage
@@ -47,11 +61,12 @@ $cp__comment__count-width: em(60px)
 //teaser type button
 .cp__buttons__wrap, %cp__buttons__wrap
 	position: relative
+	display: inline-block
 	width: 100%
 	span
 		display: block
 	margin-bottom: $compact
-		
+
 .cp__buttons__image
 	overflow: hidden
 	height: $cp__buttons__image-height*1.5
@@ -75,7 +90,7 @@ $cp__comment__count-width: em(60px)
 	letter-spacing: $hair
 
 .cp__buttons__title
-	@extend %cp__link--light--underlined
+	@extend %cp__link--light
 	+tablet(bold)
 	line-height: $petite
 	color: $black
@@ -88,6 +103,29 @@ $cp__comment__count-width: em(60px)
 	line-height: $junior
 	color: $black
 	font-size: $font-s
+
+//teaser type large button
+.cp__buttons__large__wrap
+	@extend %cp__buttons__wrap
+	padding-top: 0 !important
+	margin-top: $compact
+	margin-bottom: 0
+	width: 100%
+	display: inline-block		
+
+.cp__buttons__large__image
+	@extend .cp__buttons__image
+	height: $cp__buttons__large__image-height
+	+respond-min($break-2)
+		height: $cp__buttons__large__image-height
+
+.cp__buttons__large__title__wrap
+	@extend .cp__buttons__title__wrap
+	text-align: center
+
+.cp__buttons__large__title
+	@extend .cp__buttons__title
+	text-transform: uppercase
 
 //comments
 .cp__comment__count__wrap

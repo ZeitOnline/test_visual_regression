@@ -1,7 +1,10 @@
 from grokcore.component import adapter, implementer
+from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
+from zeit.frontend.gallery import IGallery
+from zeit.frontend.gallery import IProductGallery
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import logging
 import os.path
@@ -19,6 +22,7 @@ import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
+import zope.interface
 
 
 log = logging.getLogger(__name__)
@@ -293,6 +297,11 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 if IArticleTemplateSettings(context).template == 'column':
                     zope.interface.alsoProvides(context,
                                                 IColumnArticle)
+            elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
+                if IGalleryMetadata(context).type == 'zmo-product':
+                    zope.interface.alsoProvides(context, IProductGallery)
+                else:
+                    zope.interface.alsoProvides(context, IGallery)
             return self._change_viewname(tdict)
         except OSError as e:
             if e.errno == 2:

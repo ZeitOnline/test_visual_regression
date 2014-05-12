@@ -1,7 +1,7 @@
 {% import 'templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
-    {{lama.adplace(item)}}
+    {{lama.adplace(item, view.banner_channel)}}
 {%- endmacro %}
 
 {% macro supertitle() -%}
@@ -15,17 +15,19 @@
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
     <div class="article__head__subtitle">
         <p>
-            {% if with_quotes %}
-                »{{view.subtitle}}«
-            {% else %}
-                {{view.subtitle}}
-            {% endif %}
-            {% if include_meta and view.genre %}
-                {{view.genre|title}}
-            {% endif %}
-            {% if include_meta and view.authors %}
-                {{ meta_author(view.authors, titlecase=view.genre==None) }}
-            {% endif %}
+            <strong>
+                {% if with_quotes %}
+                    »{{view.subtitle}}«
+                {% else %}
+                    {{view.subtitle}}
+                {% endif %}
+                {% if include_meta and view.genre %}
+                    {{view.genre|title}}
+                {% endif %}
+                {% if include_meta and view.authors %}
+                    {{ meta_author(view.authors, titlecase=view.genre==None) }}
+                {% endif %}
+            </strong>
         </p>
     </div>
 {%- endmacro %}
@@ -34,6 +36,17 @@
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
+{%- endmacro %}
+
+{% macro portraitbox(obj) -%}
+    {% if obj.name and obj.name %}
+        <figure class="portraitbox figure-stamp">
+            <div class="portraitbox-heading">
+                {{obj.name}}
+            </div>
+            {{obj.text | safe}}
+        </figure>
+    {% endif %}
 {%- endmacro %}
 
 {% macro subpage_chapter(number, subtitle, class) -%}
@@ -83,9 +96,9 @@
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h3 class="article__subheading is-constrained is-centered">
+    <h2 class="article__subheading is-constrained is-centered">
         {{ intertitle|striptags }}
-    </h3>
+    </h2>
 {%- endmacro %}
 
 {% macro raw(obj) -%}
@@ -148,13 +161,7 @@
         {% endif %}
         ">
             <div class="scaled-image">
-                <!--[if gte IE 9]> -->
-                <noscript data-ratio="{{obj.ratio}}">
-                <!-- <![endif]-->
-                        <img alt="{{obj.attr_alt}}" title="{{obj.attr_title}}" class="figure__media" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
-                <!--[if gte IE 9]> -->
-                </noscript>
-                <!-- <![endif]-->
+                {{ lama.insert_responsive_image(obj) }}
             </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
@@ -171,26 +178,14 @@
 
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
-        <!--[if gte IE 9]> -->
-        <noscript>
-        <!-- <![endif]-->
-            <img class="article__main-image--longform" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}">
-        <!--[if gte IE 9]> -->
-        </noscript>
-        <!-- <![endif]-->
+        {{ lama.insert_responsive_image(obj,'article__main-image--longform') }}
     </div>{{obj.caption}}{{obj.copyright}}
 {%- endmacro %}
 
 {% macro columnimage(obj) -%}
     <div class="article__column__headerimage">
         <div class="scaled-image">
-            <!--[if gte IE 9]> -->
-            <noscript data-ratio="{{obj.ratio}}">
-            <!-- <![endif]-->
-                    <img class="figure__media" alt="{{obj.attr_alt|default('')}}" title="{{obj.attr_title|default('')}}" src="{{obj | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{obj.ratio}}">
-            <!--[if gte IE 9]> -->
-            </noscript>
-            <!-- <![endif]-->
+            {{ lama.insert_responsive_image(obj) }}
         </div>
     </div>
 {%- endmacro %}
@@ -252,7 +247,7 @@
              figure is-constrained is-centered
         {% endif %}" data-video="{{obj.id}}">
             <div class="video__still">
-                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}">
+                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
                 <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
@@ -268,7 +263,7 @@
                 <source src="{{obj.source}}" type="video/mp4">
                 <source src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.webm" type="video/webm">
         </video>
-        <img class="article__main-image--longform video--fallback" src="http://www.zeit.de/live0-backend/multimedia/videos/{{obj.id}}.jpg">
+        <img class="article__main-image--longform video--fallback" src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.jpg" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
     </div>
 {%- endmacro %}
 
@@ -276,10 +271,10 @@
     <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{comment.cid}}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
-            <img src="{{comment.img_url}}" class="comment__head__img" alt="" />
+            <span class="comment__head__avatar" style="background-image: url('{{comment.img_url}}')"></span>
             {% endif -%}
             <div class="comment__head__meta">
-                <strong class="comment__head__meta__name">{{comment.name|e}}</strong>
+                <a class="comment__head__meta__name" href="{{comment.userprofile_url}}">{{comment.name|e}}</a>
                 <a href="#{{comment.cid}}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{comment.timestamp | format_date_ago()}}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{comment.role}}</div>
@@ -298,27 +293,41 @@
     </article>
 {%- endmacro %}
 
-{% macro comments(comments) -%}
-    {% if comments is not none -%}
+{% macro comments(obj, request) -%}
+    {% if obj.comments is not none -%}
     <div class="article__socialbox tc" id="js-social-services">
         <div class="article__sharing">
+            {% if obj.linkreach.total -%}
             <div class="article__sharing__item article__sharing__sum">
-                <span class="article__sharing__total">47</span>
-                <span class="article__sharing__unit">Tsd.</span>
+                <span class="article__sharing__total">{{ obj.linkreach.total[0] }}</span>
+                <span class="article__sharing__unit">{{ obj.linkreach.total[1] }}</span>
             </div>
+            {%- endif %}
             <div class="article__sharing__services blind">
-                <a class="article__sharing__item">
+                <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{view.article_url}}&amp;p[images][0]={{obj.sharing_img.video_still or obj.sharing_img|default_image_url}}&amp;p[title]={{obj.title}}&amp;p[summary]={{obj.subtitle}}"
+                    target="_blank"
+                    class="article__sharing__item js-has-popup"
+                    data-width="600"
+                    data-height="300">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
-                    <span class="article__sharing__services__text">8,2 Tsd</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                <a class="article__sharing__item">
+                 <a href="http://twitter.com/home?status={{view.article_url}}"
+                    target="_blank"
+                    class="article__sharing__item js-has-popup"
+                    data-width="600"
+                    data-height="300">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-                    <span class="article__sharing__services__text">6,7 Tsd</span>
+                    <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a class="article__sharing__item">
-                    <span class="article__sharing__services__icon icon-sharebox-google"></span>
-                    <span class="article__sharing__services__text">877</span>
-                </a>
+                <a href="https://plus.google.com/share?url={{view.article_url}}"
+                   target="_blank"
+                   class="article__sharing__item js-has-popup"
+                   data-width="480"
+                   data-height="350">
+                   <span class="article__sharing__services__icon icon-sharebox-google"></span>
+                   <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
+               </a>
             </div>
             <div class="article__sharing__item">
                 <a class="article__sharing__link js-toggle-sharing">
@@ -330,18 +339,18 @@
 
         <div class="article__comments-trigger">
             <a class="article__comments-trigger__link js-comments-trigger">
-                <span class="article__comments-trigger__count icon-sharebox-close">{{comments['comment_count']}}</span>
-                <span class="article__comments-trigger__text">{% if comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+                <span class="article__comments-trigger__count icon-sharebox-close">{{obj.comments.comment_count}}</span>
+                <span class="article__comments-trigger__text">{% if obj.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
             </a>
         </div>
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
             {% if request.app_info.authenticated -%}
-            <form action="{{comments['comment_post_url']}}" method="POST" class="comment__form" id="js-comments-form">
+            <form action="{{obj.comments.comment_post_url}}" method="POST" class="comment__form" id="js-comments-form">
                 <p>
                     <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
-                    <input type="hidden" name="nid" value="{{comments['nid']}}">
+                    <input type="hidden" name="nid" value="{{obj.comments.nid}}">
                     <input type="hidden" name="pid" value="">
                     <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
                 </p>
@@ -368,14 +377,14 @@
             <div class="comments__body" id="js-comments-body">
                 <div class="tabs__content is-active">
                     <div class="comments__list" id="tab1">
-                        {% for commentdict in comments['comments'] %}
+                        {% for commentdict in obj.comments.comments %}
                             {{ comment(commentdict, false) }}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="tabs__content">
                     <div class="comments__list" id="tab2">
-                        {% for commentdict in comments['comments'] %}
+                        {% for commentdict in obj.comments.comments %}
                             {% if commentdict['recommended'] -%}
                                 {{ comment(commentdict, true) }}
                             {%- endif %}
@@ -398,7 +407,7 @@
         </script>
         <script type="text/template" id="js-report-comment-template">
             {% if request.app_info.authenticated -%}
-            <form action="{{comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
+            <form action="{{obj.comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
@@ -444,9 +453,9 @@
             var content = el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){
-                    el[0].innerHTML = '{{publish_date}}<span>zuletzt aktualisiert am ' + content + '</span>';
+                    el[0].innerHTML = '{{publish_date}} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
                 }else{
-                    el[0].innerHTML = '{{publish_date}}<span>editiert: ' + content + '</span>';
+                    el[0].innerHTML = '{{publish_date}} —<br><span>editiert: ' + content + '</span>';
                 }
             }
         </script>

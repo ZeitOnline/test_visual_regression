@@ -33,11 +33,11 @@
         <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
         <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
-        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Digital</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
         <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
         <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
-        <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Internet</attribute>
+        <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">leben</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">gallery</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery">standalone</attribute>
         <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
@@ -63,6 +63,18 @@
         <column layout="left"/>
         <column layout="right">
             <container>
+                <block name="02-shomei-tomatsu.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Mathias Modica ist DJ, Musiker und Co-Chef des Münchner Labels Gomma. Er lässt sich von Frank Zappa inspirieren.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/02-shomei-tomatsu.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Mathias Modica für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/02-shomei-tomatsu.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Mathias Modica für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
                 <block name="01-desktop-schreibtisch-computer-digital.jpg">
                     <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                     <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Nicole Zepter ist Chefredakteurin des Magazins &quot;The Germans&quot;, das hier ist ihr Schreibtisch. Zepter findet Blassrosa &quot;beruhigend&quot;.</caption>
@@ -75,16 +87,15 @@
                         <copyright>© Nicole Zepter für ZEITmagazin</copyright>
                     </thumbnail>
                 </block>
-                <block name="02-shomei-tomatsu.jpg">
-                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Mathias Modica ist DJ, Musiker und Co-Chef des Münchner Labels Gomma. Er lässt sich von Frank Zappa inspirieren.</caption>
-                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/02-shomei-tomatsu.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <bu/>
-                        <copyright>© Mathias Modica für ZEITmagazin</copyright>
+                <block layout="hidden" name="13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
+                    <bu xsi:nil="true"/>
+                    <copyright py:pytype="str">©</copyright>
                     </image>
-                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/02-shomei-tomatsu.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <bu/>
-                        <copyright>© Mathias Modica für ZEITmagazin</copyright>
+                    <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
+                    <bu xsi:nil="true"/>
+                    <copyright py:pytype="str">©</copyright>
                     </thumbnail>
                 </block>
                 <block name="03-desktop-schreibtisch-computer-digital.jpg">

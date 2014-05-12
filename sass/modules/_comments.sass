@@ -28,7 +28,7 @@
     padding: $micro $small
     +respond-min($comments__break-overlap)
         padding: 12px $little 7px
-    &:hover
+    .no-touch &:hover
         opacity: 0.5
 
 .article__comments-trigger__count
@@ -48,41 +48,35 @@
 .article__comments-trigger__text
     +tablet(bold)
     font-size: em(11px)
-    color: $black
+
+$comments-min-width: $comments__break-outside - $max-page-width
 
 .comments
     +tablet
+    +unpadded
     z-index: 20
     display: none
-    margin-left: -$page-padding--small
-    margin-right: -$page-padding--small
-    +respond-min($break-1)
-        margin-left: -$page-padding
-        margin-right: -$page-padding
-    +respond-max($comments__break-overlap)
-        width: auto !important
     +respond-min($comments__break-overlap)
         +box-shadow
         +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
         overflow: hidden
         margin: 0
         position: absolute
-        top: 5.25em
+        top: 4em
         height: 100%
         right: -$page-padding
-        min-width: em(300px)
+        min-width: $comments-min-width
         max-width: em(700px)
         width: 100%
         background-color: $white
     +respond-min($comments__break-outside)
         +box-shadow(none)
         +animation('comments_outside_move_in' 0.25s ease-in-out 1 0s)
-        top: 0
+        top: 0px
         right: auto
         left: em(980px) - $page-padding
         border-left: 1px dotted $grey--light
-        width: em(300px)
-        background-color: $white
+        width: $comments-min-width
     &.show-older-trigger
         .comments__button__older
             display: block
@@ -101,6 +95,8 @@
     padding-bottom: $large
 
 .comments__list
+    +respond-max($comments__break-overlap)
+        top: 0px !important
     +transition(top 1s)
     +padded
     padding-bottom: $large
@@ -156,20 +152,24 @@
     font-size: $font-ml
     margin-bottom: $little
 
-.comment__head__img
+.comment__head__avatar
     +inline-block
     +border-radius(50%)
-    max-width: em(40px)
-    max-height: em(40px)
+    width: em(40px)
+    height: em(40px)
     margin-right: $thin
+    background-position: 50% 38% // golden ratio
+    background-repeat: no-repeat
+    +background-size(cover)
 
 .comment__head__meta
     +inline-block
 
 .comment__head__meta__name
     +tablet(bold)
-    color: $grey--mid-dark
     margin-right: $fine
+    border-bottom: none
+    +link-colors ($grey--mid-dark,$grey--mid-dark,$grey--mid-dark,$grey--mid-dark,$grey--mid-dark)
 
 .comment__head__meta__label
     display: block
@@ -177,6 +177,7 @@
     color: $grey
 
 .comment__head__meta__date
+    border-bottom: none
     +inline-block
     +link-colors($grey, $grey, $grey, $grey, $grey)
     +on-interaction
@@ -187,7 +188,7 @@
 
 
 .comment__body
-    font-size: $font-ml
+    font-size: $font-m
 
 
 .comment__tools
@@ -203,13 +204,13 @@
     border: none
     width: 20px
     height: 20px
-    &:hover
+    .no-touch &:hover
         background-position: 0px -20px
 
 .comment__form--login
     text-align: center
-    .button + .button
-        margin-left: 15px
+    .button
+        margin: $thin 15px 0 0
 
 .comments__body
     .comment__form
@@ -221,7 +222,7 @@
         border-bottom-style: none
 
 .comment__form__wrap
-    padding: $compact 0 $medium
+    padding: $compact 0 $compact
 
 .comment__form__note
     color: $charcoal

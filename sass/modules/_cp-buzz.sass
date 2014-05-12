@@ -5,7 +5,7 @@
         +visuallyhidden
     +tablet(regular)
     clear: left
-    padding: 0 $compact $compact $compact
+    padding: $compact
     width: 100%
 
 .cp__buzz__header
@@ -51,6 +51,7 @@
     padding: 0 $fine
 
 .cp__buzz__service__list__entry
+    min-height: 69px
     margin-bottom: $compact
     padding-left: $medium
     position: relative
@@ -61,11 +62,12 @@
 .cp__buzz__service__list__entry:before
     content: counter(buzz-list)
     counter-increment: buzz-list
-    font-family: "Tiemann", serif
+    font-family: "TiemannLight", serif
     font-size: $font-xxxl
     position: absolute
     left: 0
-    top: 0
+    top: -0.075em
+    line-height: 1
 
 .cp__buzz__service__list__entry__supertitle
     font-size: $font-s
@@ -75,7 +77,12 @@
     +tablet(bold)
     font-size: $font-m
     a, a:visited
+        text-decoration: none
         color: $black
+        +transition(none)
+        +on-interaction
+            border-bottom: 0px
+            text-decoration: none
 
 .cp__buzz__service__list__entry__score
     color: $grey

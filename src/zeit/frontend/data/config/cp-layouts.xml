@@ -6,223 +6,266 @@
         image_pattern="540x304"
         areas="lead-1 lead"
         />
-    <layout 
+    <layout
         id="leader-two-columns"
         title="Großer Teaser mit zwei Spalten"
         image_pattern="540x304"
         areas="lead-1"
         columns="2"
         />
-    <layout 
+    <layout
         id="leader-fullwidth"
         title="Vollbreiter Aufmacher"
         image_pattern="940x400"
         areas="lead-1"
         />
-    <layout 
+    <layout
         id="leader-upright"
         title="Großer Teaser mit Hochkant-Bild und Teaserliste"
         image_pattern="148x222"
         areas="lead-1"
         />
-    <layout 
-        id="text-teaser" 
-        title="Teaser ohne Bild" 
+    <layout
+        id="text-teaser"
+        title="Teaser ohne Bild"
         areas="lead"
         />
-    <layout 
+    <layout
         id="archive-print-volume"
         title="Ausgabenteaser im Printarchiv"
         image_pattern="184x84"
         areas="lead"
         />
-    <layout 
+    <layout
         id="archive-print-year"
         title="Jahresteaser im Printarchiv"
         image_pattern="184x84"
         areas="lead"
         />
-    <layout 
+    <layout
         id="buttons"
         title="Kleiner Teaser mit kleinem Bild und Teaserliste"
         image_pattern="148x84"
         areas="lead"
         default="true"
         />
-    <layout 
+    <layout
         id="buttons-fullwidth"
         title="Vollbreiter Teaser mit mittlerem Bild und Teaserliste"
         image_pattern="540x304"
         areas="lead"
         />
-    <layout 
+    <layout
         id="two-side-by-side"
         title="Zwei kleine Teaser mit Bild"
         image_pattern="175x99"
         areas="informatives"
         />
-    <layout 
+    <layout
         id="large"
         title="Großer Teaser mit Bild und Teaserliste"
         image_pattern="368x220"
         areas="informatives"
         default="true"
         />
-    <layout 
+    <layout
         id="ressort"
         title="Ressort Teaser mit Teaserliste"
         image_pattern="220x124"
         areas="teaser-mosaic"
         default="true"
         />
-    <layout 
+    <layout
         id="short"
         title="Kurzteaser"
         areas="teaser-mosaic informatives"
         />
-    <layout 
+    <layout
         id="date"
         title="Datumsteaser"
         areas="teaser-mosaic informatives"
         />
-    <layout 
+    <layout
         id="parquet-regular"
         title="Parkett – standard"
         image_positions="true"
         areas="teaser-mosaic"
         />
-    <layout 
+    <layout
         id="parquet-large"
         title="Parkett – großer Aufmacher"
         image_pattern="540x304"
         image_positions="true"
         areas="teaser-mosaic"
         />
-    <layout 
+    <layout
         id="parquet-verlag"
         title="Parkett – Verlagsangebot"
         image_pattern="220x124"
         image_positions="true"
         areas="teaser-mosaic"
         />
-    <layout 
+    <layout
         id="parquet-printteaser"
         title="Parkett – Print-Teaser/Blick in die Zeit"
         image_pattern="220x124"
         image_positions="true"
         areas="teaser-mosaic"
         />
-    <layout 
+    <layout
         id="hamburg-buttons"
         title="Hamburgseiten: 'Knöpfe' mit kleinem Bild und Werbung rechts"
         image_pattern="148x84"
         areas="lead"
         />
-    
-    
-    
-    <layout 
+
+
+
+    <layout
         id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher"
         image_pattern="zmo-landscape-large"
         areas="lead-1"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
         image_pattern="zmo-landscape-large"
         areas="lead-1 lead"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-square-large"
         title="ZMO großes Quadrat"
         image_pattern="zmo-square-large"
-        areas="lead-1"
+        areas="lead-1 lead"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-square-large-light"
         title="ZMO großes Quadrat (helles Bild)"
         image_pattern="zmo-square-large"
         areas="lead-1 lead"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-upright-large"
         title="ZMO großer Teaser hochkant"
         image_pattern="zmo-lead-upright"
         areas="lead-1 lead"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-upright-large-light"
         title="ZMO großer Teaser hochkant (helles Bild)"
         image_pattern="zmo-lead-upright"
         areas="lead-1 lead"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
         image_pattern="zmo-landscape-large"
         areas="lead-1 lead teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-landscape-large-photo"
         title="ZMO großer Teaser 16:9 Fotokolumne"
         image_pattern="zmo-landscape-large"
         areas="lead teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-landscape-small"
         title="ZMO kleiner Teaser 16:9"
         image_pattern="zmo-landscape-small"
-        areas="lead informatives"
+        areas="lead informatives teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-gallery-upright"
         title="ZMO Fotostrecke hochkant"
         image_pattern="zmo-upright"
         areas="informatives"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-mtb-upright"
         title="ZMO monothematischer Block hochkant"
         image_pattern="zmo-upright"
         areas="teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-mtb-square"
         title="ZMO monothematischer Block quadratisch"
-        image_pattern="zmo-square"
+        image_pattern="zmo-square-large"
         areas="teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-    
-    <layout 
+
+    <layout
         id="zmo-product-square"
         title="ZMO Produkt quadratisch (mini)"
         image_pattern="zmo-square-small"
         areas="teaser-mosaic"
         available="zeit.magazin.interfaces.IZMOContent"
-    />   
+    />
+
+    <layout
+        id="zmo-card-citation"
+        title="ZMO Karte Zitat"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-picture"
+        title="ZMO Karte mit Bild"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-read"
+        title="ZMO Karte Flip'n'Read"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-share-read"
+        title="ZMO Karte Share'n'Read"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-share"
+        title="ZMO Karte Flip'n'Share"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-flip"
+        title="ZMO Karte Flip'n'Flip"
+        image_pattern="zmo-card-picture"
+        areas="teaser-mosaic informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
 </layouts>
 

@@ -1,16 +1,10 @@
 %pagerlink
 	display: block
 	color: $grey--mid
-	-webkit-transition: none
-	-moz-transition: none
-	-o-transition: none
-	transition: none
-	&:link, &:hover, &:active, &:focus
-		border-bottom: none
-		text-decoration: none
-	&:link, &:visited
+	border-bottom: none
+	+link
 		color: $grey--mid
-	&:hover
+	+on-interaction
 		+tablet(bold)
 		line-height: $medium
 
@@ -35,7 +29,7 @@
 		background-position: 50% 50%
 		background-size: 36%
 		text-indent: -50000em
-		&:hover
+		+on-interaction
 			background-color: $grey--dark
 	span
 		display: block
@@ -54,6 +48,7 @@
 	color: $grey--dark
 	text-align: center
 	margin-bottom: $large
+	border-bottom: none
 	a
 		+link-colors($grey--dark, grey--dark, $grey--dark, $grey--dark, $grey--dark)
 
@@ -63,9 +58,8 @@
 .article__pager
 	list-style: none
 	text-align: center
-	padding-bottom: $large
-	border-bottom: $hair solid $grey--light
-	padding-left: 0px
+	margin: 0 0 $large 0
+	padding: 0
 
 .article__pager__prev
 	@extend %pager
@@ -76,14 +70,13 @@
 
 .article__pager__number.is-current
 	a
-		&:link, &:visited, &:active
+		+link
 			color: $charcoal
 			cursor: default
-		&:hover
+		+on-interaction
 			+tablet
 			line-height: $medium
 
 .article__pager__next
 	@extend %pager
 	@extend %pagerarrow
-

@@ -75,7 +75,7 @@
         <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
         <script type="text/javascript" src="{{request.asset_url('js/libs/iqd/adam.js')}}"></script>
         {% if view.context.advertising_enabled %}
-            <!--[if gte IE 9]> -->
+            <!--[if gt IE 9]>-->
             <script src="{{request.asset_url('js/libs/iqd/sasmobile.js')}}"></script>
             <!-- <![endif]-->
         {% endif %}
@@ -98,9 +98,9 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama.adplace(view.banner(1)) }}
+                        {{ lama.adplace(view.banner(1), view.banner_channel) }}
                         <div id="iqd_rightAd">
-                            {{ lama.adplace(view.banner(2)) }}
+                            {{ lama.adplace(view.banner(2), view.banner_channel) }}
                         </div>
                     </div>
                 </div>
@@ -112,8 +112,15 @@
         {% endblock page_wrap_inner %}
 
                 {% block navigation %}
-                    {{ lama.main_nav(view.context.main_nav_full_width) }}
+                    {{ lama.main_nav(view.context.main_nav_full_width,request) }}
                 {% endblock navigation %}
+
+                {% if view.context.advertising_enabled %}
+                    {{ lama.adplace(view.banner(3), view.banner_channel) }}
+                {% endif %}
+
+                {% block page_title %}
+                {% endblock page_title %}
 
                 <main role="main" class="main">
                     {%  block content %}{% endblock content %}
@@ -145,7 +152,7 @@
 
         <script data-main="{{request.asset_url('js/main')}}" src="{{request.asset_url('js/libs/require.js')}}"></script>
         <script type="text/javascript">
-            var sas_pageid = '54114/391248',
+            var sas_pageid = '32375/445608',
             sas_formatid = 13500,
             sas_target = '';
             if( typeof window.sasmobile === 'function' && zmo_is_mobile_view ) {

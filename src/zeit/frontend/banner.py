@@ -48,7 +48,7 @@ def make_banner_list(banner_config):
     root = objectify.fromstring(file.read())
     for place in root.place:
         try:
-            sizes = place.multiple_sizes.split(',').strip()
+            sizes = str(place.multiple_sizes).strip().split(',')
         except AttributeError:
             sizes = [str(place.width) + 'x' + str(place.height)]
         try:
@@ -61,5 +61,5 @@ def make_banner_list(banner_config):
             adlabel = None
         banner_list.append(Place(
             place.tile, sizes, diuqilon, adlabel,
-            min_width=0, active=place.get('active'), dcopt=place.dcopt))
+            min_width=place.min_width, active=place.get('active'), dcopt=place.dcopt))
     return sorted(banner_list, key=lambda place: place.tile)

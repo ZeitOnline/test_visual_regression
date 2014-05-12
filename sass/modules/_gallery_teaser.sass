@@ -5,11 +5,40 @@
     overflow: hidden
     width: 100%
     margin-bottom: $compact
-    & > .scaled-image img
+    & a > .scaled-image
+        +fake-box-shadow-inset($black)
+        img
+            position: absolute
+            top: -25%
+            left: 0%
+            width: 100%
+    +respond-min($break-1)
+        display: block
+    +respond-min($break-2)
+        height: auto
+        max-height: 386px
+        & a > .scaled-image img
+            max-height: 386px
+            position: static
+            top: auto
+            left: auto
+    +respond-min($break-3)
+        max-height: 386px
+        & a > .scaled-image img
+            max-height: 386px
+
+.cp__teaser__gallery__wrap
+    bottom: 0
+    padding: $tiny $petite $compact $petite
+    position: absolute
+    width: 100%
+    z-index: 2
+    .icon-galerie-icon-white
+        display: inline-block
+        height: 30px
         position: absolute
-        top: -25%
-        left: 0%
-        width: 100%
+        top: -40px
+        width: 40px
     a
         +link
             color: $white
@@ -21,36 +50,7 @@
                 text-decoration: none
         .cp__teaser__gallery__title
             +on-interaction
-                text-decoration: underline
-    +respond-min($break-1)
-        display: block
-    +respond-min($break-2)
-        height: auto
-        max-height: 386px
-        & > .scaled-image img
-            max-height: 386px
-            position: static
-            top: auto
-            left: auto
-    +respond-min($break-3)
-        max-height: 386px
-        & > .scaled-image img
-            max-height: 386px
-
-
-.cp__teaser__gallery__wrap
-    background: #000
-    background: transparentize($black, 0.35)
-    bottom: 0
-    padding: $tiny $petite $compact $petite
-    position: absolute
-    width: 100%
-    .icon-galerie-icon-white
-        display: inline-block
-        height: 30px
-        position: absolute
-        top: -40px
-        width: 40px
+                text-decoration: none
 
 .cp__teaser__gallery__kicker
     @extend %copy

@@ -24,12 +24,16 @@ settings = {
 
     'community_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/comments'),
+    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/linkreach/api'),
 
     'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
 
-    'node_comment_statistics_path': 'data/node-comment-statistics.xml',
+    'community_host_timeout_secs': '10',
+    'hp': 'zeit-magazin/index',
+    'node_comment_statistics': 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
 
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
@@ -61,8 +65,12 @@ settings = {
         'egg://zeit.frontend/data/config/article-related-layouts.xml'),
     'vivi_zeit.content.cp_block-layout-source': (
         'egg://zeit.frontend/data/config/cp-layouts.xml'),
+    'vivi_zeit.content.cp_bar-layout-source': (
+        'egg://zeit.frontend/config/cp-bar-layouts.xml'),
     'vivi_zeit.frontend_banner-source': (
         'egg://zeit.frontend/data/config/banner.xml'),
+    'vivi_zeit.content.gallery_gallery-types-url': (
+        'egg://zeit.frontend/data/config/gallery-types.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 }
@@ -108,14 +116,15 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     from zeit.frontend.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['community_host'])
+    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
 
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
-    return LinkReach(settings['community_host'], settings['linkreach_host'])
+    return LinkReach(settings['node_comment_statistics'],
+                     settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')

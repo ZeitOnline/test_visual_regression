@@ -17,6 +17,18 @@
   min-width: $px
   min-width: rem($px)
 
+=fake-box-shadow-inset($color: $black, $orientation: 0deg, $length: 400px)
+  background-color: $color
+  &:after
+    content: ''
+    position: absolute
+    z-index: 1
+    height: 100%
+    width: 200%
+    left: -50%
+    top: 0px
+    +background-image(linear-gradient($orientation, rgba($color, 0.7) 0%, rgba($color, 0) $length))
+
 =no-user-select
   -webkit-touch-callout: none
   -webkit-user-select: none
@@ -25,12 +37,21 @@
   -ms-user-select: none
   user-select: none
 
+// if you change this, please change =unpadded accordingly
 =padded
   padding-left: $page-padding--small
   padding-right: $page-padding--small
   +respond-min($break-1)
     padding-left: $page-padding
     padding-right: $page-padding
+
+// should be =padded inverted
+=unpadded
+  margin-left: -$page-padding--small
+  margin-right: -$page-padding--small
+  +respond-min($break-1)
+    margin-left: -$page-padding
+    margin-right: -$page-padding
 
 =bleed($max: $medium-content-width + 2*$gutter)
   margin-left: -$page-padding--small

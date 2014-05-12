@@ -1,5 +1,5 @@
 from urllib2 import HTTPError
-from zeit.content.article.edit.reference import Gallery
+from zeit.content.article.edit.reference import Gallery, Portraitbox
 from zeit.frontend import view
 from zeit.frontend import view_article, view_centerpage
 from zeit.frontend.block import InlineGalleryImage
@@ -13,54 +13,94 @@ import zeit.cms.interfaces
 
 def test_breadcumb_should_produce_expected_data():
     context = mock.Mock()
-    context.ressort = 'mode'
-    context.sub_ressort = 'lebensart'
+    context.ressort = 'zeit-magazin'
+    context.sub_ressort = 'mode-design'
     context.title = 'This is my title'
 
-    view_article._navigation = {
-        'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-        'zmo': ('ZEIT Magazin', 'http://www.zeit.de/magazin/index', 'myid2'),
-        'lebensart': ('lebensart',
-                      'http://www.zeit.de/magazin/lebensart/index',
-                      'myid3'),
-        'mode': ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'), }
+    view_article._navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+               'leben': (
+                   'Leben',
+                   'http://www.zeit.de/zeit-magazin/leben/index',
+                   'myid2',
+               ),
+               'mode-design': (
+                   'Mode & Design',
+                   'http://www.zeit.de/zeit-magazin/mode-design/index',
+                   'myid3',
+               ),
+               'essen-trinken': (
+                   'Essen & Trinken',
+                   'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+                   'myid4',
+               ), }
 
     article = view_article.Article(context, '')
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
-        ('ZEIT Magazin', 'http://www.zeit.de/magazin/index', 'myid2'),
-        ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'),
-        ('lebensart', 'http://www.zeit.de/magazin/lebensart/index',
-            'myid3'),
-        ('This is my title', 'http://localhost'), ]
+        ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+        ('Mode & Design', 'http://www.zeit.de/zeit-magazin/mode-design/index', 'myid3'),
+        ('This is my title', ''), ]
 
     assert article.breadcrumb == l
 
 
 def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context = mock.Mock()
-    context.ressort = 'modex'
+    context.ressort = 'zeit-magazin'
     context.sub_ressort = 'lebensartx'
     context.title = 'This is my title'
 
-    view_article._navigation = {
-        'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-        'zmo': ('ZEIT Magazin', 'http://www.zeit.de/magazin/index', 'myid2'),
-        'lebensart': ('lebensart',
-                      'http://www.zeit.de/magazin/lebensart/index',
-                      'myid3'),
-        'mode': ('mode', 'http://www.zeit.de/magazin/mode/index', 'myid4'), }
+    view_article._navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
+               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+               'leben': (
+                   'Leben',
+                   'http://www.zeit.de/zeit-magazin/leben/index',
+                   'myid2',
+               ),
+               'mode-design': (
+                   'Mode & Design',
+                   'http://www.zeit.de/zeit-magazin/mode-design/index',
+                   'myid3',
+               ),
+               'essen-trinken': (
+                   'Essen & Trinken',
+                   'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+                   'myid4',
+               ), }
 
     article = view_article.Article(context, '')
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
-        ('ZEIT Magazin', 'http://www.zeit.de/magazin/index',
-            'myid2'),
-        ('This is my title', 'http://localhost'), ]
+        ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+        ('This is my title', ''), ]
 
     assert article.breadcrumb == l
+
+
+def test_linkreach_property_should_be_set(application, app_settings):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    request = mock.Mock()
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    article_view = view_article.Article(context, request)
+    article_view.request.url = 'artikel/03'
+    article_view.request.traversed = ('foo',)
+    article_view.request.route_url = lambda *args: ''
+    assert isinstance(article_view.linkreach, dict)
+
+
+def test_linkreach_property_should_fetch_correct_data(testserver,
+                                                      app_settings):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    request = mock.Mock()
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
+    article_view = view_article.Article(context, request)
+    article_view.request.url = 'foo'
+    article_view.request.traversed = ('foo',)
+    article_view.request.route_url = lambda *args: ''
+    assert article_view.linkreach['total'] == ('1,1', 'Tsd.')
 
 
 def test_header_img_should_be_first_image_of_content_blocks(application):
@@ -68,6 +108,12 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     article_view = view_article.Article(context, '')
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
+
+def test_article_should_have_author_box(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/autorenbox')
+    article_view = view_article.Article(context, '')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article_view.context)
+    assert type(body.values()[2]) == Portraitbox
 
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
@@ -153,14 +199,19 @@ def test_artikel05_should_have_header_image(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
     assert '<div class="article__head-wrap">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect">' in browser.contents
-    assert '<img class="article__main-image--longform' in browser.contents
+    assert 'class="article__main-image--longform' in browser.contents
 
 
 def test_column_should_have_header_image(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert '<div class="article__column__headerimage">' in browser.contents
     assert '<div class="scaled-image">' in browser.contents
-    assert '<img class="figure__media"' in browser.contents
+    assert '<img alt="Die ist der image sub text\n" title="Die ist der image'\
+           ' sub text\n" class=" figure__media"' in browser.contents
+
+def test_column_should_not_have_header_image(testserver):
+    browser = Browser('%s/artikel/standardkolumne-ohne-bild-beispiel' % testserver.url)
+    assert '<div class="article__column__headerimage">' not in browser.contents
 
 
 def test_health_check_should_response_and_have_status_200(testserver):
@@ -207,7 +258,7 @@ def test_artikel02_has_mode_sub_ressort(testserver):
 def test_artikel02_has_correct_banner_channel(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, '')
-    assert article_view.banner_channel == 'lebensart/mode/article'
+    assert article_view.banner_channel == 'zeitmz/mode/article'
 
 
 def test_artikel05_has_rankedTagsList(testserver):
@@ -509,8 +560,10 @@ def test_article01_should_not_have_a_focussed_nextread(application):
 
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
-    request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
-    view = view_centerpage.Centerpage('', request)
+    request.registry.settings.node_comment_statistics = 'data/node-comment-statistics.xml'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    view = view_centerpage.Centerpage(cp, request)
+    view() #trigger __call__ method
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
