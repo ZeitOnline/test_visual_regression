@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.1 (unreleased)
 ------------------
 
+- Add caching headers.
+
 - Increase clickable area of social sharing links
 
 

@@ -26,6 +26,7 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self.request.response.cache_expires(300)
 
     def __call__(self):
         return {}

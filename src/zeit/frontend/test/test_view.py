@@ -35,7 +35,7 @@ def test_breadcumb_should_produce_expected_data():
                    'myid4',
                ), }
 
-    article = view_article.Article(context, '')
+    article = view_article.Article(context, mock.Mock())
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
@@ -70,7 +70,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
                    'myid4',
                ), }
 
-    article = view_article.Article(context, '')
+    article = view_article.Article(context, mock.Mock())
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
@@ -105,27 +105,27 @@ def test_linkreach_property_should_fetch_correct_data(testserver,
 
 def test_header_img_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
 
 def test_article_should_have_author_box(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/autorenbox')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     body = zeit.content.article.edit.interfaces.IEditableBody(article_view.context)
     assert type(body.values()[2]) == Portraitbox
 
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.header_img is None
 
 
 def test_header_video_should_be_first_video_of_content_blocks(application):
     vid_url = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     url = 'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/' \
         '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights' \
         '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4'
@@ -134,20 +134,20 @@ def test_header_video_should_be_first_video_of_content_blocks(application):
 
 def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.header_video is None
 
 
 def test_header_elem_should_be_img_if_there_is_a_header_img(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert type(article_view.header_elem) == zeit.frontend.block.HeaderImageStandard
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
     xml = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(xml)
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert type(article_view.header_elem) == zeit.frontend.block.HeaderVideo
 
 
@@ -239,45 +239,45 @@ def test_content_should_have_type(testserver):
 
 def test_tracking_type_is_provided(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.tracking_type == 'Artikel'
 
 
 def test_artikel02_has_lebensart_ressort(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.ressort == 'lebensart'
 
 
 def test_artikel02_has_mode_sub_ressort(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.sub_ressort == 'mode'
 
 
 def test_artikel02_has_correct_banner_channel(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.banner_channel == 'zeitmz/mode/article'
 
 
 def test_artikel05_has_rankedTagsList(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.rankedTagsList is not None
     assert article_view.rankedTagsList != ''
 
 
 def test_artikel05_has_set_text_length(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.text_length is not None
 
 
 def test_article05_has_correct_dates(testserver):
     # updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.date_last_published_semantic.isoformat() ==\
         '2013-11-03T08:10:00.626737+01:00'
     assert article_view.date_first_released.isoformat() ==\
@@ -289,7 +289,7 @@ def test_article05_has_correct_dates(testserver):
 def test_article03_has_correct_dates(testserver):
     # not updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.date_first_released.isoformat() ==\
         '2013-07-30T17:20:50.176115+02:00'
     assert article_view.show_article_date.isoformat() ==\
@@ -299,7 +299,7 @@ def test_article03_has_correct_dates(testserver):
 def test_article09_has_correct_date_formats(testserver):
     # print article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.show_date_format == 'long'
     assert article_view.show_date_format_seo == 'short'
 
@@ -307,7 +307,7 @@ def test_article09_has_correct_date_formats(testserver):
 def test_article10_has_correct_date_formats(testserver):
     # online article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.show_date_format == 'long'
     assert article_view.show_date_format_seo == 'long'
 
@@ -315,7 +315,7 @@ def test_article10_has_correct_date_formats(testserver):
 def test_article08_has_first_author(testserver):
     xml = 'http://xml.zeit.de/artikel/08'
     context = zeit.cms.interfaces.ICMSContent(xml)
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.authors[0]['name'] == u'Anne Mustermann'
     assert article_view.authors[0]['suffix'] == ' und'
     assert article_view.authors[0]['prefix'] == ' von'
@@ -325,7 +325,7 @@ def test_article08_has_first_author(testserver):
 def test_article08_has_second_author(testserver):
     xml = 'http://xml.zeit.de/artikel/08'
     context = zeit.cms.interfaces.ICMSContent(xml)
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.authors[1]['name'] == u'Oliver Fritsch'
     assert article_view.authors[1]['suffix'] == ''
     assert article_view.authors[1]['prefix'] == ''
@@ -335,67 +335,67 @@ def test_article08_has_second_author(testserver):
 def test_article08_has_correct_genre(testserver):
     # 'ein'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.genre == 'ein Kommentar'
 
 
 def test_article09_has_correct_genre(testserver):
     # 'eine'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.genre == 'eine Glosse'
 
 
 def test_article05_has_no_genre(testserver):
     # no genre
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.genre is None
 
 
 def test_article08_has_correct_source(testserver):
     # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.source == 'DIE ZEIT Nr. 26/2008'
 
 
 def test_article10_has_correct_source(testserver):
     # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.source == 'golem.de'
 
 
 def test_article03_has_empty_source(testserver):
     # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.source is None
 
 
 def test_article01__has_correct_twitter_card_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.twitter_card_type == 'summary'
 
 
 def test_article05_has_correct_twitter_card_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
 def test_article01_has_correct_sharing_img_src(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.sharing_img.src == \
         'http://xml.zeit.de/exampleimages/artikel/01/01.jpg'
 
 
 def test_article06_has_correct_sharing_img_video_still(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/06')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.sharing_img.video_still == \
         'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/' \
         '201401/3097/18140073001_3094729885001_7x.jpg'
@@ -542,7 +542,7 @@ def test_pagination_prev_page_url_on_first_page_is_none(testserver):
 
 def test_article09_should_have_a_focussed_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     nextread = article_view.focussed_nextread
     assert nextread is not None
     assert isinstance(nextread['article'],
@@ -553,7 +553,7 @@ def test_article09_should_have_a_focussed_nextread(application):
 
 def test_article01_should_not_have_a_focussed_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, mock.Mock())
     nextread = article_view.focussed_nextread
     assert nextread is None
 
@@ -569,3 +569,8 @@ def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
     comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_assetXXX')
     assert comment_count is None
+
+
+def test_caching_headers_should_be_set(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert browser.headers['cache-control'] == 'max-age=300'
