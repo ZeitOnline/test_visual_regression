@@ -207,7 +207,7 @@ def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) >= 2
+        assert len(link_wrap) >= 1
 
 
 def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
@@ -240,7 +240,7 @@ def test_cp_button_has_expected_structure(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 2
+        assert len(link_wrap) == 1
 
 
 def test_cp_button_has_expected_text_content(selenium_driver, testserver):
@@ -288,7 +288,7 @@ def test_cp_large_button_has_expected_structure(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
 
 
 def test_cp_large_button_has_expected_text_content(
@@ -368,7 +368,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap--dark' == \
+        assert 'cp__lead-full__title__wrap cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert 'cp__lead__title' == unicode(h1.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
