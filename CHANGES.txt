@@ -4,7 +4,9 @@ Change log for zeit.frontend
 0.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix gallery HTML title
+
+- default supertitle and title to empty instead of "None"
 
 
 0.5 (2014-05-09)
