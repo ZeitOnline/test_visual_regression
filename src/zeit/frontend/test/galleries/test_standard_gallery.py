@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from zope.testbrowser.browser import Browser
 
 
 def test_standard_gallery_is_there(selenium_driver, testserver):
@@ -83,3 +84,17 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
     except:
         print "Timeout Gallery Script"
         assert False
+
+
+def test_gallery_with_supertitle_has_html_title(browser, testserver):
+    browser = Browser('%s/galerien/fs-desktop-schreibtisch-computer' % (
+        testserver.url))
+    assert '<title>Desktop-Bilder: Das hab ich auf dem Schirm</title>' \
+        in browser.contents
+
+
+def test_gallery_without_supertitle_has_html_title(browser, testserver):
+    browser = Browser('%s/galerien/bg-automesse-detroit-2014-usa' % (
+        testserver.url))
+    assert '<title>Automesse Detroit 2014 US-Hersteller</title>' \
+        in browser.contents
