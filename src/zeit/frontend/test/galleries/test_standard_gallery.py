@@ -1,8 +1,8 @@
-import pytest
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from zope.testbrowser.browser import Browser
+
 
 def test_standard_gallery_is_there(selenium_driver, testserver):
     driver = selenium_driver
@@ -11,11 +11,13 @@ def test_standard_gallery_is_there(selenium_driver, testserver):
     elem = driver.find_element_by_css_selector(selector)
     assert elem
 
+
 def test_gallery_should_have_buttons(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper")))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
         nextselector = ".bx-next"
         prevselector = ".bx-prev"
         # test navigation buttons
@@ -27,11 +29,13 @@ def test_gallery_should_have_buttons(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
 
+
 def test_gallery_buttons_are_clickable(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper")))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
         onextselector = ".bx-overlay-next"
         oprevselector = ".bx-overlay-prev"
         onextbutton = driver.find_element_by_css_selector(onextselector)
@@ -42,15 +46,20 @@ def test_gallery_buttons_are_clickable(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
 
+
 def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper")))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
         driver.set_window_size(560, 900)
-        elemNextDisplay = driver.execute_script('return $(".bx-overlay-next").css("display")')
-        elemPrevDisplay = driver.execute_script('return $(".bx-overlay-next").css("display")')
-        elemCaptionDisplay = driver.execute_script('return $(".figure__caption").css("display")')
+        script = 'return $(".bx-overlay-next").css("display")'
+        elemNextDisplay = driver.execute_script(script)
+        script = 'return $(".bx-overlay-next").css("display")'
+        elemPrevDisplay = driver.execute_script(script)
+        script = 'return $(".figure__caption").css("display")'
+        elemCaptionDisplay = driver.execute_script(script)
         assert elemNextDisplay == "none"
         assert elemPrevDisplay == "none"
         assert elemCaptionDisplay == "none"
@@ -58,17 +67,34 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
 
+
 def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper")))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
         driver.set_window_size(560, 900)
         figselector = ".inline-gallery .figure-full-width"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
-        elemNextDisplay = driver.execute_script('return $(".bx-overlay-next").css("display")')
+        script = 'return $(".bx-overlay-next").css("display")'
+        elemNextDisplay = driver.execute_script(script)
         assert elemNextDisplay != "none"
     except:
         print "Timeout Gallery Script"
         assert False
+
+
+def test_gallery_with_supertitle_has_html_title(browser, testserver):
+    browser = Browser('%s/galerien/fs-desktop-schreibtisch-computer' % (
+        testserver.url))
+    assert '<title>Desktop-Bilder: Das hab ich auf dem Schirm</title>' \
+        in browser.contents
+
+
+def test_gallery_without_supertitle_has_html_title(browser, testserver):
+    browser = Browser('%s/galerien/bg-automesse-detroit-2014-usa' % (
+        testserver.url))
+    assert '<title>Automesse Detroit 2014 US-Hersteller</title>' \
+        in browser.contents

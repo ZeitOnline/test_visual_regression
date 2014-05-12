@@ -6,6 +6,14 @@ Change log for zeit.frontend
 
 - Hide comments on click out of the comments section
 
+- Add caching headers.
+
+- Increase clickable area of social sharing links
+
+- fix gallery HTML title
+
+- default supertitle and title to empty instead of "None"
+
 
 0.5 (2014-05-09)
 ----------------

@@ -3,6 +3,7 @@ from zeit.frontend import view
 from zeit.frontend import view_article
 from zeit.frontend.banner import Place
 import zeit.cms.interfaces
+from mock import Mock
 from zope.testbrowser.browser import Browser
 
 
@@ -26,13 +27,13 @@ def test_banner_list_should_be_sorted(testserver):
 
 def test_banner_view_should_return_Place_if_tile_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, Mock())
     assert isinstance(article_view.banner(1), zeit.frontend.banner.Place)
 
 
 def test_banner_view_should_return_None_if_tile_is_not_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, '')
+    article_view = view_article.Article(context, Mock())
     assert article_view.banner(999) is None
 
 

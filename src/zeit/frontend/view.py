@@ -26,6 +26,7 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self.request.response.cache_expires(300)
 
     def __call__(self):
         return {}
@@ -100,6 +101,16 @@ class Content(Base):
     @property
     def supertitle(self):
         return self.context.supertitle
+
+    @property
+    def pagetitle(self):
+        # Fallback gracefully if title or supertitle is missing.
+        tokens = (self.context.supertitle, self.context.title)
+        return ': '.join([t for t in tokens if t])
+
+    @property
+    def pagedescription(self):
+        return self.context.subtitle
 
     @property
     def rankedTags(self):
