@@ -572,7 +572,7 @@ def test_centerpages_produces_no_error(selenium_driver, testserver):
 def test_cp_lead_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, '')
+    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
     lead1_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#'\
         'lead/id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
@@ -586,7 +586,7 @@ def test_cp_lead_should_have_correct_first_block(application):
 def test_cp_lead_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, '')
+    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
     lead2_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-cc6bbea3-1337-42f5-8fe1-01c9c4476600'
@@ -600,7 +600,7 @@ def test_cp_lead_should_have_correct_second_block(application):
 def test_cp_lead_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, '')
+    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
     lead_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo#lead/'\
         'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
@@ -614,7 +614,7 @@ def test_cp_lead_should_have_no_blocks(application):
 def test_cp_informatives_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, '')
+    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives1_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
@@ -629,7 +629,7 @@ def test_cp_informatives_should_have_correct_first_block(application):
 def test_cp_informatives_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, '')
+    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives2_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
@@ -644,7 +644,7 @@ def test_cp_informatives_should_have_correct_second_block(application):
 def test_cp_informatives_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, '')
+    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'

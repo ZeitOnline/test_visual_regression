@@ -5,11 +5,11 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <h2 class="article__head__supertitle">{{ view.supertitle }}</h2>
+  <h2 class="article__head__supertitle">{{ view.supertitle  | hide_none }}</h2>
 {%- endmacro %}
 
 {% macro title() -%}
-  <h1 class="article__head__title">{{view.title}}</h1>
+  <h1 class="article__head__title">{{ view.title | hide_none }}</h1>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
@@ -298,35 +298,23 @@
     <div class="article__socialbox tc" id="js-social-services">
         <div class="article__sharing">
             {% if obj.linkreach.total -%}
-            <div class="article__sharing__item article__sharing__sum">
+            <div class="article__sharing__item article__sharing__sum js-toggle-sharing">
                 <span class="article__sharing__total">{{ obj.linkreach.total[0] }}</span>
                 <span class="article__sharing__unit">{{ obj.linkreach.total[1] }}</span>
             </div>
             {%- endif %}
             <div class="article__sharing__services blind">
-                <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{view.article_url}}&amp;p[images][0]={{obj.sharing_img.video_still or obj.sharing_img|default_image_url}}&amp;p[title]={{obj.title}}&amp;p[summary]={{obj.subtitle}}"
-                    target="_blank"
-                    class="article__sharing__item js-has-popup"
-                    data-width="600"
-                    data-height="300">
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{view.article_url|e}}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                 <a href="http://twitter.com/home?status={{view.article_url}}"
-                    target="_blank"
-                    class="article__sharing__item js-has-popup"
-                    data-width="600"
-                    data-height="300">
+                <a href="http://twitter.com/home?status={{view.article_url|e}}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a href="https://plus.google.com/share?url={{view.article_url}}"
-                   target="_blank"
-                   class="article__sharing__item js-has-popup"
-                   data-width="480"
-                   data-height="350">
-                   <span class="article__sharing__services__icon icon-sharebox-google"></span>
-                   <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
+                <a href="https://plus.google.com/share?url={{view.article_url|e}}" target="_blank" class="article__sharing__item">
+                    <span class="article__sharing__services__icon icon-sharebox-google"></span>
+                    <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
                </a>
             </div>
             <div class="article__sharing__item">

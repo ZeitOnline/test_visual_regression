@@ -59,17 +59,6 @@ class Article(zeit.frontend.view.Content):
         return layout if layout is not None else "default"
 
     @property
-    def pagetitle(self):
-        if self.context.supertitle:
-            return self.context.supertitle + ': ' + self.context.title
-        else:
-            return self.context.title
-
-    @property
-    def pagedescription(self):
-        return self.context.subtitle
-
-    @property
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
 

@@ -4,6 +4,14 @@ Change log for zeit.frontend
 0.6 (unreleased)
 ------------------
 
+- Add caching headers.
+
+- Increase clickable area of social sharing links
+
+- fix gallery HTML title
+
+- default supertitle and title to empty instead of "None"
+
 - Rendering for the daily newsletter.
 
 
