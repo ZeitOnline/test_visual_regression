@@ -102,6 +102,16 @@ class Content(Base):
         return self.context.supertitle
 
     @property
+    def pagetitle(self):
+        # Fallback gracefully if title or supertitle is missing.
+        tokens = (self.context.supertitle, self.context.title)
+        return ': '.join([t for t in tokens if t])
+
+    @property
+    def pagedescription(self):
+        return self.context.subtitle
+
+    @property
     def rankedTags(self):
         return self.context.keywords
 
