@@ -28,6 +28,16 @@ $nav__section-border: 1px solid $grey--mid
     margin-bottom: 0
     z-index: 100000 // absurd high z-index to overrule ads and such
     margin-top: 0
+  &.is-compact
+    left: 0
+    top: 0
+    height: $nav__row-height
+    +respond-min($nav__break__full-menu)
+      height: $nav__row-height
+    .no-touch &
+      position: fixed
+      ~ .main
+        margin-top: $nav__row-height
   +respond-min($nav__break__full-menu)
     height: $nav__row-height * 2
     background-color: $grey--mid-dark
@@ -66,6 +76,9 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     width: em($nav__logo-full-width) + 2*$small
     border-bottom: $nav__section-border !important
+    .is-compact &
+      border-bottom: none !important
+
 
 .main-nav__logo__wrap
   width: $nav__logo-mobile-width
@@ -100,6 +113,9 @@ $nav__section-border: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     background: none
     border-bottom: $nav__section-border
+    .is-compact &
+      border-bottom: none
+
 
 .main-nav__menu__head
   height: 100%
@@ -402,7 +418,7 @@ $nav__section-border: 1px solid $grey--mid
         overflow-x: auto
         overflow-y: hidden
       .main-nav__section__content__wrap
-        +transition(left, 0.2s)
+        +transition(left 0.2s)
         position: absolute
         left: 0
         height: 100%

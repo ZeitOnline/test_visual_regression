@@ -57,6 +57,21 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/artikel/01" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Flüchtlinge</supertitle>
+        <teaser_supertitle xsi:nil="true"/>
+        <title xsi:nil="true"/>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+          <display_name py:pytype="str">Carolin Emcke</display_name>
+          <location>Eisenhüttenstadt</location>
+        </author>
+      </reference>
+    </nextread>
   </head>
   <body>
     <supertitle>Candys</supertitle>

@@ -1,7 +1,7 @@
 from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery
 from zeit.frontend import view
-from zeit.frontend import view_article
+from zeit.frontend import view_article, view_centerpage
 from zeit.frontend.block import InlineGalleryImage
 from zope.testbrowser.browser import Browser
 from pyramid.httpexceptions import HTTPNotFound
@@ -156,6 +156,13 @@ def test_artikel05_should_have_header_image(testserver):
     assert '<img class="article__main-image--longform' in browser.contents
 
 
+def test_column_should_have_header_image(testserver):
+    browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
+    assert '<div class="article__column__headerimage">' in browser.contents
+    assert '<div class="scaled-image">' in browser.contents
+    assert '<img class="figure__media"' in browser.contents
+
+
 def test_health_check_should_response_and_have_status_200(testserver):
     browser = Browser('%s/health_check' % testserver.url)
     assert browser.headers['Content-Length'] == '2'
@@ -217,7 +224,7 @@ def test_artikel05_has_set_text_length(testserver):
 
 
 def test_article05_has_correct_dates(testserver):
-    #updated article
+    # updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, '')
     assert article_view.date_last_published_semantic.isoformat() ==\
@@ -229,7 +236,7 @@ def test_article05_has_correct_dates(testserver):
 
 
 def test_article03_has_correct_dates(testserver):
-    #not updated article
+    # not updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = view_article.Article(context, '')
     assert article_view.date_first_released.isoformat() ==\
@@ -239,7 +246,7 @@ def test_article03_has_correct_dates(testserver):
 
 
 def test_article09_has_correct_date_formats(testserver):
-    #print article, updated
+    # print article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     article_view = view_article.Article(context, '')
     assert article_view.show_date_format == 'long'
@@ -247,7 +254,7 @@ def test_article09_has_correct_date_formats(testserver):
 
 
 def test_article10_has_correct_date_formats(testserver):
-    #online article, updated
+    # online article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = view_article.Article(context, '')
     assert article_view.show_date_format == 'long'
@@ -296,21 +303,21 @@ def test_article05_has_no_genre(testserver):
 
 
 def test_article08_has_correct_source(testserver):
-    #print source
+    # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = view_article.Article(context, '')
     assert article_view.source == 'DIE ZEIT Nr. 26/2008'
 
 
 def test_article10_has_correct_source(testserver):
-    #online source
+    # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = view_article.Article(context, '')
     assert article_view.source == 'golem.de'
 
 
 def test_article03_has_empty_source(testserver):
-    #zon source
+    # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = view_article.Article(context, '')
     assert article_view.source is None
@@ -365,7 +372,7 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
-    page.request.path_info = u'article/03/seite-5'
+    page.request.path_info = u'article/03/seite-9'
     with pytest.raises(HTTPNotFound):
         page()
 
@@ -385,7 +392,7 @@ def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-3'
     page()
-    assert len(page.pages) == 3
+    assert len(page.pages) == 7
 
 
 def test_ArticlePage_komplett_should_show_all_pages(testserver):
@@ -402,7 +409,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 2
-    assert view.pagination['total'] == 3
+    assert view.pagination['total'] == 7
     assert view.pagination['next_page_title'] == (u'Sogar die eckige Flasche kommt zur\xfcck')
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
@@ -411,7 +418,7 @@ def test_pagination_dict_should_have_correct_entries(testserver):
     view.request.route_url.return_value = '/'
 
     assert view.pagination['current'] == 1
-    assert view.pagination['total'] == 3
+    assert view.pagination['total'] == 7
     assert view.pagination['next_page_title'] == (u'Sogar die runde Flasche kommt zur\xfcck')
 
 
@@ -456,7 +463,7 @@ def test_pagination_next_page_url_is_working(testserver):
 
 
 def test_pagination_next_page_url_on_last_page_is_none(testserver):
-    browser = Browser('%s/artikel/03/seite-3' % testserver.url)
+    browser = Browser('%s/artikel/03/seite-7' % testserver.url)
     content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
 
     assert content in browser.contents
@@ -482,4 +489,30 @@ def test_pagination_prev_page_url_on_first_page_is_none(testserver):
     assert view.pagination['prev_page_url'] is None
 
 
+def test_article09_should_have_a_focussed_nextread(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article_view = view_article.Article(context, '')
+    nextread = article_view.focussed_nextread
+    assert nextread is not None
+    assert isinstance(nextread['article'],
+                      zeit.content.article.article.Article)
+    assert nextread['image']['uniqueId'] is None
+    assert nextread['layout'] == 'minimal'
 
+
+def test_article01_should_not_have_a_focussed_nextread(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view_article.Article(context, '')
+    nextread = article_view.focussed_nextread
+    assert nextread is None
+
+
+def test_cp_teaser_with_comments_should_get_comments_count(testserver):
+    request = mock.Mock()
+    request.registry.settings.node_comment_statistics_path = 'data/node-comment-statistics.xml'
+    view = view_centerpage.Centerpage('', request)
+    comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
+    assert comment_count == '22'
+    # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
+    comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_assetXXX')
+    assert comment_count is None

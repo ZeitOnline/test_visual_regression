@@ -32,19 +32,19 @@ require.config({
 require([
 	'modules/errors',
 	'modules/fontloader_body',
-	'modules/breadcrumbs',
 	'modules/main-nav',
 	'modules/tabs',
 	'modules/comments',
+	'modules/sharing',
 	'modules/images',
 	'modules/photocluster',
-], function( errors, fontloader_body, breadcrumbs, main_nav, tabs, comments, images, photocluster) {
+], function( errors, fontloader_body, main_nav, tabs, comments, sharing, images, photocluster) {
 	errors.init();
 	fontloader_body.init();
-	breadcrumbs.init();
 	main_nav.init();
 	tabs.init();
 	comments.init();
+	sharing.init();
 	photocluster.init();
 	images.init();
 });
@@ -63,7 +63,7 @@ require([
 	$( "figure[data-video]" ).switchVideo();
 	$( "div[data-backgroundvideo]" ).backgroundVideo();
 	$( "a.js-has-popup" ).enablePopups();
-	$( "main" ).animateScroll({selector: "a[href^='#']"});
+	$( "main" ).animateScroll({selector: '.js-scroll'});
 	$( "a.icon-paginierungs-pfeil-links").hover(function(){
 		$(this).removeClass('icon-paginierungs-pfeil-links');
 		$(this).addClass('icon-paginierungs-pfeil-links-hover');

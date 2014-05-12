@@ -23,7 +23,7 @@
 	 * @memberOf jQuery
 	 */
 	/**
-	 * Prepares the inline gallery and adds some extra features 
+	 * Prepares the inline gallery and adds some extra features
 	 * @class inlinegallery
 	 * @memberOf jQuery.fn
 	 * @param  {object} defaults	configuration object, overwriting presetted options
@@ -38,9 +38,10 @@
 			nextText: "Zum nächsten Bild",
 			prevText: "Zum vorigen Bild",
 			infiniteLoop: true,
-			hideControlOnEnd: false
+			hideControlOnEnd: false,
+            adaptiveHeight: true,
 		}, defaults);
-		
+
 		return this.each(function(){
 			var slider = $( this ).bxSlider( options ),
 				ffw = $('<a class="bx-overlay-next icon-pfeil-rechts" href="">Ein Bild vor</a>'),
@@ -62,7 +63,7 @@
 			$(".bx-next").addClass('icon-pfeil-rechts');
 			$(".bx-prev").addClass('icon-pfeil-links');
 
-			$(".figure__media", this).mouseenter(function() {
+			$(".scaled-image", this).mouseenter(function() {
 				$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
 			}).mouseleave(function() {
 				$(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
@@ -71,12 +72,82 @@
 			$(this).on("scaling_ready", function(e) {
 				slider.redrawSlider();
 				/* add hover-class for button display */
-				$(".figure__media", this).mouseenter(function() {
+				$(".scaled-image", this).mouseenter(function() {
 					$(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
 				}).mouseleave(function() {
 					$(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
 				});
 			});
-		});
-	};
+
+            var mqMobile = window.matchMedia( "(max-width: 576px)" );
+            var figures = $('.gallery .inline-gallery .figure-full-width');
+
+            var originalCaptionTexts = [];
+            figures.each(function( index ) {
+                originalCaptionTexts.push($( this ).find('.figure__caption__text').text());
+            });
+
+            function addPagerToCaption(){
+                figures.each(function( index ) {
+                    var captionText = $( this ).find('.figure__caption__text').text();
+                    $( this ).find('.figure__caption__text').html(index + '/' + (figures.length-2) + " " + captionText );
+                });
+            }
+
+            function removePagerFromCaption(){
+                figures.each(function( index ) {
+                    $( this ).find('.figure__caption__text').html( originalCaptionTexts[index] );
+                });
+            }
+
+            if (mqMobile.matches) {
+                addPagerToCaption();
+                figures.on("click", function(){
+                    figures.find('.figure__caption').toggle();
+                    $('.bx-overlay-next, .bx-overlay-prev').toggle();
+                });
+            }
+
+            mqMobile.addListener(function(){
+                if (mqMobile.matches) {
+                    addPagerToCaption();
+                    $('.bx-overlay-next, .bx-overlay-prev').hide();
+                    figures.find('.figure__caption').hide();
+                    figures.on("click", function(){
+                        figures.find('.figure__caption').toggle();
+                        $('.bx-overlay-next, .bx-overlay-prev').toggle();
+                    });
+                } else {
+                    removePagerFromCaption();
+                    figures.find('.figure__caption').show();
+                    $('.bx-overlay-next, .bx-overlay-prev').show();
+                    figures.unbind();
+                }
+            });
+
+            //for portrait mode images, set max height
+            var figMedia = $('.inline-gallery .figure-full-width .figure__media');
+            figMedia.each(function( index ) {
+                var imageWidth = $( this ).width();
+                var imageHeight = $( this ).height();
+                if(imageWidth <= imageHeight) {
+                    $( this ).css('max-width', '100%');
+                    $( this ).css('max-height', '620px');
+                    $( this ).css('width', 'auto');
+                    $( this ).css('height', 'auto');
+                    $( this ).css("margin", '0 auto');
+                }
+            });
+
+            var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
+            figCaptions.each(function( index ) {
+                var imageWidth = $( this ).prev().find('.figure__media').width();
+                $( this ).width(imageWidth);
+                $( this ).css("max-width", imageWidth);
+                if(imageWidth > 520) {
+                    $( this ).css('padding-right', '30%');
+                }
+            });
+        });
+    };
 })(jQuery);

@@ -1,8 +1,7 @@
+// extender
 %ad
     background-color: $white
     color: $charcoal
-    text-align: center
-
 
 %ad__label
     color: $charcoal
@@ -11,8 +10,18 @@
     text-align: left
     text-transform: uppercase
 
-.ad__tile_4
-    font-size: 1.125em
+%ad__inner
+    margin: 0 auto
+
+// mobile
+.iqd_mobile__adplace
+    width: 320px
+    margin: 0 auto
+
+
+// medium rectangles
+%ad__mr
+    @extend %ad
     margin: $large auto
     +respond-min($break-1)
         border-top: 1px solid $charcoal
@@ -28,12 +37,33 @@
     object
         display: block
 
-.ad__tile_4__label
+%ad__mr__label
     @extend %ad__label
     width: 300px
     margin: 0 auto
 
-.ad__tile_4__inner
+%ad__mr__inner
+    @extend %ad__inner
     width: 300px
-    margin: 0 auto
+
+
+// adplaces
+.ad__tile_4, .ad__tile_7, .ad__tile_8
+    @extend %ad__mr
+
+.ad__tile_7.ad__on__centerpage // tile 7 on cp
+    @extend %ad__mr
+    margin: 0 auto $compact auto
+    +respond-min($break-2)
+        padding: 0
+        border: none
+    +respond-min($break-3)
+        float: none
+
+.ad__tile_4__label, .ad__tile_7__label, .ad__tile_8__label
+    @extend %ad__mr__label
+
+.ad__tile_4__inner, .ad__tile_7__inner, .ad__tile_8__inner
+    @extend %ad__mr__inner
+
 

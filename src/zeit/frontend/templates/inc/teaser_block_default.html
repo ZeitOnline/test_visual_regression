@@ -18,11 +18,11 @@ Available attributes:
 	teaser_block
 
 #}
-<div class='teaser_block__default'>
-    {% for teaser in teaser_block %}
-        {% include get_teaser_template(
-            teaser_block.layout.id,
-            teaser | block_type,
-            teaser | auto_select_asset | block_type) ignore missing %}
-    {% endfor %}
-</div>
+
+{% for teaser in teaser_block %}
+	{% include get_teaser_template(
+		teaser_block.layout.id,
+		teaser | block_type,
+		teaser | auto_select_asset | block_type,
+		'templates/inc/teaser/teaser_') ignore missing %}
+{% endfor %}

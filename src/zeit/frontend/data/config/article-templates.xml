@@ -1,44 +1,32 @@
 <templates>
   <template name="article">
     <title>Artikel</title>
-    <header name="default">
-      <title>Standard</title>
-    </header>
-    <header name="traum">
-      <title>Traum</title>
+    <header name="inside">
+      <title>Standardartikel</title>
     </header>
     <header name="text-only">
-      <title>Nur Text</title>
+      <title>Artikel ohne Bild</title>
     </header>
     <header name="leinwand">
-      <title>Leinwand</title>
-    </header>
-    <header name="briefmarke">
-      <title>Briefmarke</title>
+      <title>Artikel mit großem Bild</title>
     </header>
     <header name="mode">
-      <title>Mode</title>
+      <title>Artikel Mode / Hochformat</title>
     </header>
   </template>
-
+  
   <template name="longform">
     <title>Longform</title>
   </template>
-
+  
   <template name="short">
     <title>Kurzformat</title>
   </template>
-
+  
   <template name="column">
     <title>Kolumne</title>
-    <header name="default">
+    <header name="briefmarke">
       <title>Standard</title>
-    </header>
-    <header name="vonanachb">
-      <title>Von A nach B</title>
-    </header>
-    <header name="heiter">
-      <title>Heiter bis glücklich</title>
     </header>
     <header name="martenstein">
       <title>Martenstein</title>

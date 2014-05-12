@@ -60,10 +60,17 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+class BaseImage(object):
+
+    @property
+    def ratio(self):
+        width, height = PIL.Image.open(self.image.open()).size
+        return float(width) / float(height)
+
 
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IImage)
-class Image(object):
+class Image(BaseImage):
 
     def __new__(cls, model_block):
         if (model_block.layout == 'zmo-xl-header' or
@@ -89,11 +96,6 @@ class Image(object):
             self.src = None
             self.attr_title = None
             self.attr_alt = None
-
-    @property
-    def ratio(self):
-        width, height = PIL.Image.open(self.image.open()).size
-        return float(width) / float(height)
 
 
 @implementer(IFrontendHeaderBlock)

@@ -14,6 +14,7 @@ import requests
 import urlparse
 import zeit.cms.interfaces
 import zeit.frontend.centerpage
+import zope.component
 
 
 log = logging.getLogger(__name__)
@@ -37,38 +38,41 @@ def format_date(obj, type='short'):
     return format_datetime(obj, formats[type], locale="de_De")
 
 
-def format_date_ago(
-        dt, precision=2, past_tense='vor {}', future_tense='in {}'):
+def format_date_ago(dt, precision=2, past_tense='vor {}',
+                    future_tense='in {}'):
     # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
-    if type(dt) is not type(timedelta()):
+    if not isinstance(dt, type(timedelta())):
         delta = datetime.now() - dt
 
     the_tense = past_tense
     if delta < timedelta(0):
         the_tense = future_tense
 
-    delta = abs( delta )
+    delta = abs(delta)
     d = {
-        'Jahr'   : int(delta.days / 365),
-        'Tag'    : int(delta.days % 365),
-        'Stunde'   : int(delta.seconds / 3600),
-        'Minute' : int(delta.seconds / 60) % 60,
-        'Sekunde' : delta.seconds % 60
+        'Jahr': int(delta.days / 365),
+        'Tag': int(delta.days % 365),
+        'Stunde': int(delta.seconds / 3600),
+        'Minute': int(delta.seconds / 60) % 60,
+        'Sekunde': delta.seconds % 60
     }
     hlist = []
     count = 0
-    units = ( 'Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde' )
-    units_plural = { 'Jahr':'Jahren', 'Tag':'Tagen', 'Stunde':'Stunden', 'Minute':'Minuten', 'Sekunde':'Sekunden'}
+    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
+    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
+                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
     for unit in units:
         unit_displayed = unit
-        if count >= precision: break # met precision
-        if d[ unit ] == 0: continue # skip 0's
-        if d[ unit ] != 1:
+        if count >= precision:
+            break  # met precision
+        if d[unit] == 0:
+            continue  # skip 0's
+        if d[unit] != 1:
             unit_displayed = units_plural[unit]
-        hlist.append( '%s %s' % ( d[unit], unit_displayed ) )
+        hlist.append('%s %s' % (d[unit], unit_displayed))
         count += 1
-    human_delta = ', '.join( hlist )
+    human_delta = ', '.join(hlist)
     return the_tense.format(human_delta)
 
 
@@ -102,6 +106,18 @@ default_images_sizes = {
     'default': (200, 300),
     'large': (800, 600),
     'small': (200, 300),
+    'upright': (320, 480),
+    'zmo-xl-header': (460, 306),
+    'zmo-xl': (460, 306),
+    'zmo-medium-left': (225, 125),
+    'zmo-medium-center': (225, 125),
+    'zmo-medium-right': (225, 125),
+    'zmo-large-left': (225, 125),
+    'zmo-large-center': (225, 125),
+    'zmo-large-right': (225, 125),
+    'zmo-small-left': (225, 125),
+    'zmo-small-center': (225, 125),
+    'zmo-small-right': (225, 125),
     '540x304': (290, 163),
     '940x400': (470, 200),
     '148x84': (74, 42),
@@ -109,32 +125,16 @@ default_images_sizes = {
     '368x110': (160, 48),
     '368x220': (160, 96),
     '180x101': (90, 50),
-    'teaser_classic': (150, 84),
-    'teaser_tile': (150, 150),
-    'teaser_series_landscape': (320, 213),
-    'teaser_series_square': (320, 320),
-    'teaser_series_portrait': (320, 480),
-    'teaser_column_dream': (320, 400),
-    'teaser_column_snap_landscape': (320, 180),
-    'teaser_column_snap_portrait': (320, 480),
-    'article_tiny_landscape': (150, 100),
-    'article_tiny_portrait': (150, 225),
-    'article_lead': (460, 368),
-    'article_small_landscape': (225, 150),
-    'article_small_portrait': (225, 337),
-    'article_medium_landscape': (330, 220),
-    'article_medium_portrait': (330, 495),
-    'article_large_landscape': (460, 306),
-    'article_large_portrait': (460, 690),
-    'nextread_large': (460, 259),
-    'nextread_medium': (330, 220),
-    'hp_lead_square': (320, 320),
-    'hp_lead_portrait': (320, 432),
-    'hp_lead_superspecial': (490, 275),
-    'special_thumbnail': (50, 50),
-    'special_column': (150, 100),
-    'special_dream': (460, 575),
-    'special_longread': (800, 450)
+    'zmo-landscape-large': (460, 306),
+    'zmo-landscape-small': (225, 125),
+    'zmo-square-large': (200, 200),
+    'zmo-square-small': (50, 50),
+    'zmo-lead-upright': (320, 480),
+    'zmo-upright': (320, 432),
+    'zmo-large': (460, 200),
+    'zmo-medium': (330, 100),
+    'zmo-small': (200, 50),
+    'zmo-x-small': (100, 25),
 }
 
 
@@ -195,7 +195,9 @@ def most_sufficient_teaser_image(teaser_block,
     image_id = '%s/%s-%s.%s' % \
         (asset.uniqueId, image_base_name, image_pattern, file_type)
     try:
-        teaser_image = zeit.cms.interfaces.ICMSContent(image_id)
+        teaser_image = zope.component.getMultiAdapter(
+            (asset, zeit.cms.interfaces.ICMSContent(image_id)),
+            zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
         return None

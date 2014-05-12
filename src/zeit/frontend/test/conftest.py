@@ -22,14 +22,16 @@ settings = {
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
 
-    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+    'community_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/linkreach/api'),
 
     'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
 
+    'node_comment_statistics_path': 'data/node-comment-statistics.xml',
     'connector_type': 'filesystem',
+
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
 
     'vivi_zeit.cms_keyword-configuration': (
@@ -106,13 +108,14 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     from zeit.frontend.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+    return Agatho(agatho_url='%s/agatho/thread/' % settings['community_host'])
+
 
 
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
-    return LinkReach(linkreach_host=settings['linkreach_host'])
+    return LinkReach(settings['community_host'], settings['linkreach_host'])
 
 
 @pytest.fixture(scope='session')

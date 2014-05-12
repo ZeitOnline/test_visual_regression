@@ -33,13 +33,34 @@ class Page(object):
     def __iter__(self):
         return iter(self.blocks)
 
+##
+#
+# Injecting banner code in page.blocks
+# counts and injects only after paragraphs (2nd actually)
+# alternating tile 7 and 8 are injected
+#
+##
+def _inject_banner_code(pages, advertising_enabled):
+    _tile = [7, 8]  # banner tiles in articles
+    _p = 2  # paragraph to insert ad after
 
-def _inject_banner_code(pages):
-    _tile = 4 # banner tile in articles
-    _p = 3 # paragraph to insert ad before
-    for index, page in enumerate(pages, start=1):
-        if index % 2 != 0 and len(page.blocks) > 2:
-            page.blocks.insert(_p, zeit.frontend.banner.banner_list[_tile-1])
+    if(advertising_enabled):
+        for index, page in enumerate(pages, start=1):
+            paragraphs = filter(
+                lambda b: isinstance(
+                    b, zeit.frontend.block.Paragraph), page.blocks)
+            if index % 2 != 0 and len(paragraphs) > _p + 1:
+                try:
+                    _para = paragraphs[_p]
+                    for i, block in enumerate(page.blocks):
+                        if _para == block:
+                            tilenumber = _tile[0] - 1
+                            page.blocks.insert(
+                                i, zeit.frontend.banner.banner_list[tilenumber])
+                            _tile.reverse()
+                            break
+                except IndexError:
+                    pass
     return pages
 
 
@@ -47,6 +68,10 @@ def _inject_banner_code(pages):
 @implementer(zeit.frontend.interfaces.IPages)
 def pages_of_article(context):
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
+    try:
+        advertising_enabled = context.advertising_enabled
+    except AttributeError:
+        advertising_enabled = True
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
     first_division = body._get_element_for_node(first_division)
@@ -60,7 +85,7 @@ def pages_of_article(context):
             pages.append(page)
         else:
             page.append(block)
-    return _inject_banner_code(pages)
+    return _inject_banner_code(pages, advertising_enabled)
 
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
@@ -68,4 +93,8 @@ class ILongformArticle(zeit.content.article.interfaces.IArticle):
 
 
 class IShortformArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+
+class IColumnArticle(zeit.content.article.interfaces.IArticle):
     pass

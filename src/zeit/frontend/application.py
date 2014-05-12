@@ -1,4 +1,5 @@
 from grokcore.component import adapter, implementer
+from zeit.frontend.article import IColumnArticle
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
 from zeit.magazin.interfaces import IArticleTemplateSettings
@@ -88,6 +89,17 @@ class Application(object):
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+
+        from pyramid.authorization import ACLAuthorizationPolicy
+        from .security import CommunityAuthenticationPolicy
+        import pyramid_beaker
+        config.include("pyramid_beaker")
+        session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
+        config.set_session_factory(session_factory)
+        config.set_authentication_policy(CommunityAuthenticationPolicy())
+        config.set_authorization_policy(ACLAuthorizationPolicy())
+        from zeit.frontend.appinfo import assemble_app_info
+        config.add_request_method(assemble_app_info, 'app_info', reify=True)
         return config
 
     def get_repository(self, request):
@@ -278,8 +290,11 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, ILongformArticle)
                 if IArticleTemplateSettings(context).template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
+                if IArticleTemplateSettings(context).template == 'column':
+                    zope.interface.alsoProvides(context,
+                                                IColumnArticle)
             return self._change_viewname(tdict)
-        except OSError, e:
+        except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
 

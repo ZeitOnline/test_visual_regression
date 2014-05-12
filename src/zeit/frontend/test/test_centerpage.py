@@ -1,9 +1,9 @@
 from zeit.frontend import view_centerpage
 from zeit.frontend.jinja import create_image_url
 from zeit.frontend.jinja import default_image_url
-from zeit.frontend.jinja import get_image_metadata
 from zeit.frontend.jinja import most_sufficient_teaser_image
 from zeit.frontend.jinja import most_sufficient_teaser_tpl
+from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
 import pytest
@@ -69,29 +69,29 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(testserver):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.auto_select_asset(context)
-    assert type(asset) == zeit.content.gallery.gallery.Gallery
+    assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_an_image(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.auto_select_asset(context)
-    assert type(asset) == zeit.content.image.imagegroup.ImageGroup
+    assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video(testserver):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.auto_select_asset(context)
-    assert type(asset) == zeit.content.video.video.Video
+    assert isinstance(asset, zeit.content.video.video.Video)
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     article = 'http://xml.zeit.de/centerpage/article_video_asset_2'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.auto_select_asset(context)
-    assert type(asset[0]) == zeit.content.video.video.Video
-    assert type(asset[1]) == zeit.content.video.video.Video
+    assert isinstance(asset[0], zeit.content.video.video.Video)
+    assert isinstance(asset[1], zeit.content.video.video.Video)
 
 
 def test_cp_area_lead_has_expected_structure(selenium_driver, testserver):
@@ -115,11 +115,11 @@ def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__title__wrap")
+            ".cp__lead-leader__title__wrap--dark")
         link_wrap = element.find_elements_by_tag_name(
             "a")
         image_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__image")
+            ".cp__lead-leader__image--dark")
         assert len(text_wrap) != 0
         assert len(link_wrap) == 3
         assert len(image_wrap) != 0
@@ -129,7 +129,7 @@ def test_cp_leadteaser_has_expected_text_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__title__wrap")
+        ".cp__lead-leader__title__wrap--dark")
     assert len(wrap) != 0
     for element in wrap:
         supertitle = element.find_element_by_css_selector(
@@ -148,15 +148,15 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__image")
+        ".cp__lead-leader__image--dark")
     assert len(wrap) != 0
     for element in wrap:
         img = element.find_element_by_tag_name(
             "img")
-        assert img.get_attribute("src") == 'http://'\
-            'localhost:6543/centerpage/katzencontent/'\
-            'bitblt-290x163-6f23eb21841c68a24ccd3e4c753ff985aef5a0b9/'\
-            'katzencontent-540x304.jpg'
+        assert re.search('http://.*/centerpage/katzencontent/' +
+                         'bitblt-.*/' +
+                         'katzencontent-zmo-square-large.jpg',
+                         img.get_attribute("src"))
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -184,11 +184,8 @@ def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
             ".cp__buttons__title__wrap")
         link_wrap = element.find_elements_by_tag_name(
             "a")
-        image_wrap = element.find_elements_by_css_selector(
-            ".cp__buttons__image")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
-        assert len(image_wrap) != 0
+        assert len(link_wrap) >= 2
 
 
 def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
@@ -200,10 +197,12 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
     for element in wrap:
         img = element.find_element_by_tag_name(
             "img")
-        assert img.get_attribute("src") == 'http://'\
-            'localhost:6543/centerpage/katzencontent/'\
-            'bitblt-74x42-466d08ab7d9e8cc7182af9503b5e4e26f7899607/'\
-            'katzencontent-148x84.jpg'
+
+        image_pattern = \
+            'http://.*/centerpage/katzencontent/'\
+            'bitblt-.*'\
+            '/katzencontent-zmo-landscape-small.jpg'
+        assert re.search(image_pattern, img.get_attribute("src"))
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -249,10 +248,26 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        assert len(link_wrap) == 3
+        print link_wrap
+        assert len(link_wrap) != 0
         for link in link_wrap:
             assert link.get_attribute("href") == 'http://'\
                 'localhost:6543/centerpage/article_image_asset'
+
+
+def test_cp_should_have_informatives_ad_at_3rd_place(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__lead__informatives__wrap")
+    assert len(wrap) != 0
+    elements = wrap[0].find_elements_by_tag_name("div")
+    add = elements[2].get_attribute("class")
+    assert add == 'cp__buttons__ad'
+    mr = elements[2].find_element_by_css_selector(
+        "#iqadtile7").get_attribute("class")
+    assert mr == "ad__tile_7 ad__on__centerpage ad__width_300"
 
 
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
@@ -261,7 +276,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
     assert len(wrap) != 0
     for teaser in wrap:
-        vid_wrap = teaser.find_element_by_class_name("cp__lead-full")
+        vid_wrap = teaser.find_element_by_class_name("cp__lead-full--dark")
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
@@ -278,31 +293,30 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             '927/18140073001_3035897844001_Beitrag-' \
             'Skispringen-f-r-Anf-nger.mp4'
         src2_val = \
-            'http://opendata.zeit.de/zmo-videos/3035864892001.webm'
+            'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
         src_img = \
-            'http://brightcove.vo.llnwd.net/d21/unsecured/media/' \
-            '18140073001/201401/2713/18140073001_3035871869001' \
-            '_Skispringen.jpg?pubId=18140073001'
+            'http://www.zeit.de/live0-backend/multimedia/'\
+            'videos/3035864892001.jpg'
 
-        #structure
+        # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap' == \
+        assert 'cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert 'cp__lead__title' == unicode(h1.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
 
-        #content
+        # content
         assert '3035864892001' == \
             unicode(vid_wrap.get_attribute("data-backgroundvideo"))
         assert 'Es leben die Skispringenden Sportredakteure!' == \
             unicode(subtitle.text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert u'\u00ABund der Titel dazu\u00BB' == unicode(h1.text)
+        assert u'\u00BBund der Titel dazu\u00AB' == unicode(h1.text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
-        #links
+        # links
         assert len(a) == 3
         for link in a:
             assert link.get_attribute("href") == 'http://localhost'\
@@ -315,24 +329,23 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
     assert len(wrap) != 0
     for teaser in wrap:
-        img_wrap = teaser.find_elements_by_class_name("cp__lead-full")
+        img_wrap = teaser.find_elements_by_class_name("cp__lead-full--dark")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_elements_by_tag_name("header")
         h1 = teaser.find_element_by_tag_name("h1")
         a = teaser.find_elements_by_tag_name("a")
         subtitle = teaser.find_element_by_tag_name("span")
-        src_img = \
-            'http://localhost:6543/centerpage/katzencontent/'\
-            'bitblt-470x200-70300116b0be03fac91bbbe494056273'\
-            'b87988c2/katzencontent-940x400.jpg'
+        image_pattern = \
+            'http://.*/centerpage/katzencontent/'\
+            'bitblt-.*'\
+            '/katzencontent-zmo-landscape-large.jpg'
 
-        #structure
+        # structure
         assert len(img_wrap) != 0
         assert len(title_wrap) != 0
 
-        #content
-        assert src_img == unicode(img.get_attribute("src"))
-        assert unicode(h1.text) == u'\u00ABArticle Image Asset Titel\u00BB'
+        assert re.search(image_pattern, img.get_attribute("src"))
+        assert unicode(h1.text) == u'\u00BBArticle Image Asset Titel\u00AB'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\
@@ -340,11 +353,23 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
-        #links
+        # links
         assert len(a) == 3
         for link in a:
             assert link.get_attribute("href") == 'http://localhost'\
                 ':6543/centerpage/article_image_asset'
+
+
+def test_teaser_light_versions_are_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    teaser = driver.find_elements_by_css_selector(".cp__lead-full--light")
+    assert len(teaser) != 0
+
+    driver.get('%s/centerpage/lebensart-2' % testserver.url)
+    teaser = driver.find_elements_by_css_selector(
+        ".cp__lead-leader__image--light")
+    assert len(teaser) != 0
 
 
 def test_get_image_asset_should_return_image_asset(testserver):
@@ -352,7 +377,7 @@ def test_get_image_asset_should_return_image_asset(testserver):
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.get_image_asset(
         context)
-    assert type(asset) == zeit.content.image.imagegroup.ImageGroup
+    assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
 def test_get_gallery_asset_should_return_gallery_asset(testserver):
@@ -360,7 +385,7 @@ def test_get_gallery_asset_should_return_gallery_asset(testserver):
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.get_gallery_asset(
         context)
-    assert type(asset) == zeit.content.gallery.gallery.Gallery
+    assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
 def test_get_video_asset_should_return_video_asset(testserver):
@@ -368,7 +393,7 @@ def test_get_video_asset_should_return_video_asset(testserver):
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.frontend.centerpage.get_video_asset(
         context)
-    assert type(asset) == zeit.content.video.video.Video
+    assert isinstance(asset, zeit.content.video.video.Video)
 
 
 def test_default_image_url_should_return_default_image_size(
@@ -379,7 +404,7 @@ def test_default_image_url_should_return_default_image_size(
     image_url = default_image_url(image)
     assert re.search(
         'http://example.com/centerpage/katzencontent/'
-        'bitblt-200x300-.*/katzencontent-180x101.jpg',
+        'bitblt-.*-.*/katzencontent-180x101.jpg',
         image_url)
 
 
@@ -391,7 +416,7 @@ def test_default_image_url_should_return_available_image_size(
     image_url = default_image_url(image)
     assert re.search(
         'http://example.com/centerpage/katzencontent/'
-        'bitblt-200x300-.*/katzencontent-180x101.jpg',
+        'bitblt-.*-.*/katzencontent-180x101.jpg',
         image_url)
 
 
@@ -405,12 +430,10 @@ def test_default_teaser_should_return_default_teaser_image(testserver):
     cp = 'http://xml.zeit.de/centerpage/lebensart'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
-
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
-
     teaser_img = most_sufficient_teaser_image(teaser_block, article_context)
-    assert zeit.content.image.interfaces.IImage.providedBy(teaser_img)
+    assert zeit.frontend.interfaces.ITeaserImage.providedBy(teaser_img)
 
 
 def test_teaser_image_url_should_be_created(
@@ -427,28 +450,146 @@ def test_teaser_image_url_should_be_created(
     image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(
         "http://example.com/centerpage/katzencontent/"
-        "bitblt-290x163.*katzencontent-540x304.jpg",
+        "bitblt-.*katzencontent-zmo-square-large.jpg",
         image_url)
 
 
-def test_image_metadata_should_be_accessible(testserver):
-    cp = 'http://xml.zeit.de/centerpage/lebensart'
+def test_teaser_image_should_be_created_from_image_group_and_image(testserver):
+    import zeit.cms.interfaces
+    img = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'
+                                          'katzencontent/katzencontent'
+                                          '-148x84.jpg')
+    imgrp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'
+                                            'katzencontent/')
+    teaser_image = getMultiAdapter(
+        (imgrp, img),
+        zeit.frontend.interfaces.ITeaserImage)
+
+    assert teaser_image.caption == 'Die ist der image sub text '
+    assert teaser_image.src == img.uniqueId
+    assert teaser_image.attr_alt == 'Die ist der Alttest'
+    assert teaser_image.attr_title == 'Katze!'
+
+
+def test_get_reaches_from_centerpage_view(application, app_settings):
+    request = mock.Mock()
+    request.registry.settings.community_host = app_settings['community_host']
+    request.registry.settings.linkreach_host = app_settings['linkreach_host']
+
+    buzz = view_centerpage.Centerpage('', request).area_buzz
+    assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
+    assert len(buzz['facebook']) == 3
+    assert len(buzz['twitter']) == 3
+    assert len(buzz['comments']) == 3
+
+
+def test_centerpages_produces_no_error(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/cp_with_video_lead' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/lebensart-2' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+
+
+def test_cp_lead_should_have_correct_first_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    teaser_block = cp_context['lead'][0]
-
-    article = 'http://xml.zeit.de/centerpage/article_image_asset'
-    article_context = zeit.cms.interfaces.ICMSContent(article)
-
-    teaser_img = most_sufficient_teaser_image(teaser_block, article_context)
-    img_meta = get_image_metadata(teaser_img)
-    assert zeit.content.image.interfaces.IImageMetadata.providedBy(img_meta)
-    assert img_meta.title == u'Katze!'
-    assert img_meta.alt == u'Die ist der Alttest'
-    assert img_meta.caption == u'Die ist der image sub text'
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    lead1_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#'\
+        'lead/id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    lead1_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
+        'id-eae7c703-98e9-491a-a30d-c1c5cebd2371'
+    assert lead1_first_block == cp_view.area_lead1[0].uniqueId
+    assert lead1_last_block == cp_view.area_lead1[3].uniqueId
 
 
-def test_get_reaches_from_centerpage_view(dummy_request):
-    view = view_centerpage.Centerpage('', dummy_request)
-    assert len(view.global_twitter_shares) == 10
-    assert len(view.global_googleplus_shares) == 10
-    assert len(view.global_facebook_shares) == 10
+def test_cp_lead_should_have_correct_second_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    lead2_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
+        'id-cc6bbea3-1337-42f5-8fe1-01c9c4476600'
+    lead2_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
+        'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    assert lead2_first_block == cp_view.area_lead2[0].uniqueId
+    assert lead2_last_block == cp_view.area_lead2[1].uniqueId
+
+
+def test_cp_lead_should_have_no_blocks(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    lead_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo#lead/'\
+        'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    lead_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
+        'zeit-magazin/test-cp/test-cp-zmo#lead/'\
+        'id-48962e5e-cdbe-4148-a12c-17724cd0e96b'
+    assert lead_first_block == cp_view.area_lead1[0].uniqueId
+    assert lead_last_block == cp_view.area_lead1[3].uniqueId
+
+
+def test_cp_informatives_should_have_correct_first_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    informatives1_first_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+    informatives1_last_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-bff224c9-088e-40d4-987d-9d986de804bd'
+
+    assert informatives1_first_block == cp_view.area_informatives1[0].uniqueId
+    assert informatives1_last_block == cp_view.area_informatives1[1].uniqueId
+
+
+def test_cp_informatives_should_have_correct_second_block(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    informatives2_first_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
+    informatives2_last_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
+        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+
+    assert informatives2_first_block == cp_view.area_informatives2[0].uniqueId
+    assert informatives2_last_block == cp_view.area_informatives2[1].uniqueId
+
+
+def test_cp_informatives_should_have_no_blocks(application):
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    cp_view = view_centerpage.Centerpage(cp_context, '')
+    informatives_first_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
+        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+    informatives_last_block = 'http://block.vivi.zeit.de/'\
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
+        '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
+
+    assert informatives_first_block == cp_view.area_informatives1[0].uniqueId
+    assert informatives_last_block == cp_view.area_informatives1[2].uniqueId
+
+
+def test_cp_teaser_should_have_comment_count(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__comment__count__wrap")
+    comments = wrap[0].text
+    assert len(wrap) != 0
+    assert comments == '22'

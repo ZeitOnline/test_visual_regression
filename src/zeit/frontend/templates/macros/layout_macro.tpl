@@ -20,7 +20,7 @@
 {% macro cc_tracking(channel) -%}
 <!-- cc tracking -->
     <script type="text/javascript">
-        document.write('<img alt="" height="1" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'" width="1" >');
+        document.write('<img alt="" class="visuallyhidden" src="http://cc.zeit.de/cc.gif?banner-channel={{channel}}&r='+escape(document.referrer)+'&rand='+Math.random()*10000000000000000+'">');
     </script>
 {%- endmacro %}
 
@@ -86,14 +86,17 @@
     {% endif %}
     <meta name="date" content="{{ view.date_first_released_meta }}"/>
 {%- endmacro %}
-{% macro breadcrumbs(crumbs, is_full_width) -%}
-    <div class="breadcrumbs-wrap {% if is_full_width %}is-full-width{% endif %}">
+{% macro breadcrumbs(crumbs) -%}
+    <div class="breadcrumbs-wrap">
         <div class="breadcrumbs" id="js-breadcrumbs">
-            <div class="breadcrumbs__trigger" id="js-breadcrumbs__trigger" data-alternate="Schlie&szlig;en">Wo bin ich?</div>
-            <div class="breadcrumbs__list">
-                <div class="breadcrumbs__list__item" itemprop="breadcrumb">
+            <div class="breadcrumbs__list-wrap">
+                <div class="breadcrumbs__list">
                     {% for crumb in crumbs %}
-                        <a href="{{crumb[1]}}">{{crumb[0]}}</a>
+                        <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href="{{crumb[1]}}" itemprop="url">
+                                <span itemprop="title">{{crumb[0]}}</span>
+                            </a>
+                        </div>
                         {% if not loop.last %}
                           &rsaquo;
                         {% endif %}
@@ -134,7 +137,8 @@
 <script type="text/javascript">
     // negative keyword 'diuqilon'
     // todo: if we get a billboard, we need more options (NB)
-    window.diuqilon = (window.innerWidth < 1024) ? ',diuqilon' : '';
+    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    window.diuqilon = (w < 1024) ? ',diuqilon' : '';
     // IQD varPack
     window.IQD_varPack = {
         iqdSite: 'zol',
@@ -194,13 +198,13 @@
 </script>
 {%- endmacro %}
 
-{% macro main_nav(breadcrumb, is_full_width) -%}
+{% macro main_nav(is_full_width) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://zeit.de/magazin" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE"></span>
                 </div>
             </a>
             <div class="main-nav__menu">
@@ -264,24 +268,38 @@
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__community">
-                        <span class="main-nav__section__trigger">
-                            <img src="/img/exner.jpg" class="main-nav__community__avatar">
-                            Community
-                        </span>
-                        <div class="main-nav__section__content">
-                            <a href="#">Account</a>
-                            <a href="#">Logout</a>
-                        </div>
-                    </div>
-                    <div class="main-nav__section main-nav__breadcrumbs">
-                        <div class="main-nav__section__content is-always-open">
-                            {{ breadcrumbs(breadcrumb, is_full_width) }}
-                        </div>
+                        {% if request.app_info.authenticated %}
+                            {{ head_user_is_logged_in_true() }}
+                        {%- else -%}
+                            {{ head_user_is_logged_in_false() }}
+                        {%- endif -%}
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+{%- endmacro %}
+
+{% macro head_user_is_logged_in_true()  %}
+    <span class="main-nav__section__trigger">
+        {% if request.app_info.user.picture %}
+            <img src="{{ request.app_info.community_host }}{{ request.app_info.user.picture }}" class="main-nav__community__avatar">
+        {%- else -%}
+            <span>X</span> <!-- ToDo(T.B.) - Dummycode, tbd by frontend (see https://zeit-online.atlassian.net/browse/ZMO-580#comment-24209) -->
+        {%- endif -%}
+        Community
+    </span>
+    <div class="main-nav__section__content">
+        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">Account</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}">Logout</a>
+    </div>
+{%- endmacro %}
+
+{% macro head_user_is_logged_in_false()  %}
+    <span class="main-nav__section__trigger">
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}">Anmelden</a> /
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url }}">Registrieren</a>
+    </span>
 {%- endmacro %}
 
 {% macro ivw_ver1_tracking(channel) -%}
@@ -365,7 +383,7 @@
         <div class="main-footer__box is-constrained is-centered">
             <div class="main-footer__ZM">
                 <span class="main-footer__ZM__img icon-zm-logo--white"></span>
-            </div>     
+            </div>
             <div class="main-footer__links">
                 <div>
                     <ul>
@@ -389,10 +407,10 @@
     </footer>
 {%- endmacro %}
 
-{% macro adplace(banner) -%}
+{% macro adplace(banner, pagetype='article') -%}
     {%set kw = 'zeitonline,zeitmz' %}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__width_{{banner.noscript_width_height[0]}}">
+    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}}">
         {% if banner.label -%}
         <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
         {%- endif %}
@@ -410,4 +428,56 @@
             </noscript>
         </div>
     </div>
+{%- endmacro %}
+
+{% macro main_nav_compact(obj,request) -%}
+    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
+        <div class="main-nav__wrap">
+            <a href="http://www.zeit.de" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="Zeit Online">
+                <div class="main-nav__logo__wrap">
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="Nachrichten auf ZEIT ONLINE" alt="Nachrichten auf ZEIT ONLINE" />
+                </div>
+            </a>
+            <div class="main-nav__menu">
+                <aside class="main-nav__sharing scaled-image">
+                    <a
+                    href="http://twitter.com/home?status={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-twitter" data-width="600" data-height="300">Auf Twitter teilen</a>
+
+                    {%- if obj.sharing_img.video_still -%}
+                        <a
+                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img.video_still}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
+                    {%- else -%}
+                        <a
+                        href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{request.host}}{{request.path_info}}&p[images][0]={{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}&p[title]={{obj.title}}&p[summary]={{obj.subtitle}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-facebook" data-width="600" data-height="300">Auf Facebook teilen</a>
+                    {%- endif -%}
+
+                    <a
+                    href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}" target="_blank" class="main-nav__sharing__item js-has-popup icon-google" data-width="480" data-height="350">Auf Google+ teilen</a>
+                </aside>
+            </div>
+        </div>
+    </nav>
+
+{%- endmacro %}
+
+{% macro insert_responsive_image(image, image_class) %}
+    <!--[if gt IE 9]>-->
+        <noscript data-ratio="{{image.ratio}}">
+    <!--<![endif]-->
+            <img alt="{{image.alt}}" title="{{image.title}}" class="{{image_class}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+    <!--[if gt IE 9]>-->
+        </noscript>
+    <!--<![endif]-->
+{% endmacro %}
+
+{% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
+    {% if withlink -%}<a href="{{teaser.uniqueId | translate_url}}">{%- endif %}
+    <div class="{{ additional_css_class | default('teaser') }}__kicker">
+        {{teaser.teaserSupertitle}}
+    </div>
+    <div class="{{ additional_css_class | default('teaser') }}__title">
+        {{teaser.teaserTitle}}
+    </div>
+    {% if withlink -%}</a>{%- endif %}
 {%- endmacro %}

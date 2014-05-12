@@ -11,18 +11,23 @@
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
         <title>{{view.pagetitle}}</title>
         <meta name='description' content='{{view.pagedescription}}'>
-        <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
+        {% if view.rankedTagsList %}
+            <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
+        {% endif %}
         <meta name="robots" content="index,follow,noodp,noydir,noarchive">
         <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
         {% if view.context.advertising_enabled %}
         <script>
+            var zmo_actual_load_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            var zmo_mobile_width = 768;
+            var zmo_is_mobile_view = window.zmo_actual_load_width < window.zmo_mobile_width;
             var viewport_meta = document.getElementById('viewport-meta');
             var viewports = {
                     standard: viewport_meta.getAttribute('content'),
                     landscape: 'width=1280'
                 };
             var viewport_set = function() {
-                if ( screen.width == 768 && Math.abs(window.orientation) == 90 ) {
+                if ( screen.width == window.zmo_mobile_width && Math.abs(window.orientation) == 90 ) {
                     viewport_meta.setAttribute( 'content', viewports.landscape );
                 } else {
                     viewport_meta.setAttribute( 'content', viewports.standard);
@@ -86,8 +91,8 @@
 
         <div class="page-wrap">
 
-            {% if view.context.advertising_enabled %}
-            <div class="iqdplace">
+        {% if view.context.advertising_enabled %}
+            <div class="iqd_mobile__adplace">
                 <div id="sas_13500"></div>
             </div>
             <div id="iqd_mainAd" >
@@ -100,18 +105,25 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
+        {% endif %}
 
-            {% block page_wrap_inner %}
-                <div class="page-wrap--inner" id="js-page-wrap-inner">
-                {{ lama.main_nav(view.breadcrumb, view.context.main_nav_full_width) }}
-            {% endblock page_wrap_inner %}
+        {% block page_wrap_inner %}
+            <div class="page-wrap--inner" id="js-page-wrap-inner">
+        {% endblock page_wrap_inner %}
 
-            <main role="main" class="main">
-                {%  block content %}{% endblock content %}
-            </main>
-            {{lama.main_footer()}}
+                {% block navigation %}
+                    {{ lama.main_nav(view.context.main_nav_full_width) }}
+                {% endblock navigation %}
 
+                <main role="main" class="main">
+                    {%  block content %}{% endblock content %}
+                </main>
+
+                {{ lama.breadcrumbs(view.breadcrumb) }}
+
+                {{lama.main_footer()}}
+
+            </div><!-- end: #js-page-wrap-inner -->
         </div>
 
         <div id="iqdLastNode">
@@ -136,7 +148,7 @@
             var sas_pageid = '54114/391248',
             sas_formatid = 13500,
             sas_target = '';
-            if( typeof window.sasmobile === 'function') {
+            if( typeof window.sasmobile === 'function' && zmo_is_mobile_view ) {
                 window.sasmobile(sas_pageid,sas_formatid,sas_target);
             }
         </script>
