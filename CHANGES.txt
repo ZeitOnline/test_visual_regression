@@ -1,10 +1,16 @@
 Change log for zeit.frontend
 ============================
 
-0.5.1 (unreleased)
+0.5.2 (unreleased)
 ------------------
 
 - Hide comments on click out of the comments section
+
+
+0.5.1 (2014-05-13)
+------------------
+
+- Fix compass linear-gradient bug
 
 - Add caching headers.
 
