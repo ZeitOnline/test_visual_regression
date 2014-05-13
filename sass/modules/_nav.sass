@@ -561,10 +561,10 @@ $icon-avatar-std-size: em(40px)
         pointer-events: none
         width: 80px
       &:before
-        +background-image(linear-gradient(left, rgba($black, 0), rgba($black, 0.6)))
+        +simple-gradient(to left, rgba($black, 0.6), rgba($black, 0))
         right: 100%
       &:after
-        +background-image(linear-gradient(left, rgba($black, 0.6), rgba($black, 0)))
+        +simple-gradient(to right, rgba($black, 0.6), rgba($black, 0))
         left: 100%
   .main-nav__community
     .main-nav__section__content
