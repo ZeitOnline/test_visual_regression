@@ -14,6 +14,8 @@ Change log for zeit.frontend
 
 - default supertitle and title to empty instead of "None"
 
+- implement redirect objects
+
 
 0.5 (2014-05-09)
 ----------------
