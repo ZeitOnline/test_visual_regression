@@ -8,17 +8,17 @@ Available attributes:
 #}
 
 <div class="cp__lead-full__wrap">
-	{% block asset %}{% endblock %}
+    {% block asset %}{% endblock %}
     <header class="cp__lead-full__title__wrap cp__lead-full__title__wrap--light">
-		<h1 class="cp__lead__title">
-			<a href="{{teaser.uniqueId | translate_url}}">
-				«{{teaser.teaserTitle}}»
-	      	</a>
-      	</h1>
-      	<span class="cp__lead__subtitle">
-			<a href="{{teaser.uniqueId | translate_url}}">
-				{{teaser.teaserText}}
-			</a>
-		</span>
-	</header>
+        <h2 class="cp__lead__title">
+            <a href="{{teaser.uniqueId | translate_url}}">
+                «{{teaser.teaserTitle}}»
+            </a>
+        </h2>
+        <span class="cp__lead__subtitle">
+            <a href="{{teaser.uniqueId | translate_url}}">
+                {{teaser.teaserText}}
+            </a>
+        </span>
+    </header>
 </div>

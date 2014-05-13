@@ -205,9 +205,9 @@
         <div class="main-nav__wrap">
             <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
                 <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN"></span>
-                </div>
+                <h1 class="main-nav__logo__wrap">
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN">ZEITmagazin ONLINE</span>
+                </h1>
             </a>
             <div class="main-nav__menu">
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
@@ -435,9 +435,9 @@
         <div class="main-nav__wrap">
             <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
                 <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN"></span>
-                </div>
+                <h1 class="main-nav__logo__wrap">
+                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN">ZEITmagazin ONLINE</span>
+                </h1>
             </a>
             <div class="main-nav__menu">
                 <aside class="main-nav__sharing scaled-image">
