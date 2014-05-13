@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- implement redirect objects
 
 
 0.5.1 (2014-05-13)
