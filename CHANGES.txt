@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - Hide comments on click out of the comments section
 
+- implement redirect objects
+
 
 0.5.1 (2014-05-13)
 ------------------
