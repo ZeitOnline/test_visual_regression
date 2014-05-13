@@ -18,8 +18,8 @@
 				video.css({"top": ($element.height() - video.height())/2 + "px"});
 				
 				/* prevents the video from glitching */
-				if( $element.attr('data-backgroundvideo') ){
-					video.removeAttr("poster");
+				if( $element.attr( "data-backgroundvideo" ) ){
+					video.removeAttr( "poster" );
 				}
 			},
 
@@ -31,18 +31,18 @@
 			var $element = $( this );
 			var video = $element.find( "video" );
 
-			$(video).on('play', function() {
+			$( video ).on( "play", function() {
 				$element.find( ".video--fallback" ).hide();
-				$(video).show();
+				$( video ).show();
 			});
 			
 			//set initial position of video
-			$( window ).on("load", function(){
+			$( window ).on( "load", function(){
 				el.setVideoPosition( $element );
 			});
 
 			//reset video position on resize
-			$( window ).on("resize", function(){
+			$( window ).on( "resize", function(){
 				el.setVideoPosition( $element );
 			});
 
