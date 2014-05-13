@@ -10,6 +10,7 @@ import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
 import zeit.frontend.view
+import zeit.seo
 
 log = logging.getLogger(__name__)
 
