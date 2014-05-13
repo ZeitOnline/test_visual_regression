@@ -15,9 +15,9 @@ Available attributes:
             <span class="cp__buttons__supertitle">
                 {{teaser.teaserSupertitle | hide_none}}
             </span>
-            <span class="{{self.title_class()}}">
+            <h2 class="{{self.title_class()}}">
                 {{teaser.teaserTitle}}
-            </span>
+            </h2>
         </a>
         {% if self.hide_subtitle() != 'true' %}
             <span class="cp__buttons__subtitle">

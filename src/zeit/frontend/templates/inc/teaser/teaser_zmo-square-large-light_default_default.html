@@ -9,8 +9,6 @@ Available attributes:
 {% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 {% import 'templates/macros/layout_macro.tpl' as lama with context%}
 
-
-
 <div class="cp__lead-leader__wrap">
     {%- set image = get_teaser_image(teaser_block, teaser) %}
 
@@ -20,19 +18,19 @@ Available attributes:
         {{ lama.insert_responsive_image(image) }}
         </div>
     </a>
-  <header class="cp__lead-leader__title__wrap cp__lead-leader__title__wrap--light">
-      <span class="cp__lead__supertitle">
-        <a href="{{teaser.uniqueId | translate_url}}">
-          {{teaser.teaserSupertitle}}
-        </a>
-      </span>
-      <h1 class="cp__lead__title">
-        <a href="{{teaser.uniqueId | translate_url}}">
-          {{teaser.teaserTitle}}
-        </a>
-      </h1>
-    <span class="cp__lead__subtitle">
-      {{teaser.teaserText}}
-    </span>
-  </header>
+    <header class="cp__lead-leader__title__wrap cp__lead-leader__title__wrap--light">
+        <span class="cp__lead__supertitle">
+            <a href="{{teaser.uniqueId | translate_url}}">
+                {{teaser.teaserSupertitle}}
+            </a>
+        </span>
+        <h2 class="cp__lead__title">
+            <a href="{{teaser.uniqueId | translate_url}}">
+                {{teaser.teaserTitle}}
+            </a>
+        </h2>
+        <span class="cp__lead__subtitle">
+            {{teaser.teaserText}}
+        </span>
+    </header>
 </div>
