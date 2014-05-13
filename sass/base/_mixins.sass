@@ -65,17 +65,20 @@
   background-image:      -o-linear-gradient($opposite-direction, $start-color $start-point, $end-color $end-point)
   background-image:         linear-gradient($direction, $start-color $start-point, $end-color $end-point)
 
-=fake-box-shadow-inset($color: $black, $orientation: 0deg, $length: 400px)
+=fake-box-shadow-inset($color: $black, $direction: to top, $length: 60%)
   background-color: $color
+  position: relative
   &:after
     content: ''
     position: absolute
     z-index: 1
     height: 100%
-    width: 200%
-    left: -50%
+    width: 100%
+    left: 0px
     top: 0px
-    +background-image(linear-gradient($orientation, rgba($color, 0.7) 0%, rgba($color, 0) $length))
+    +simple-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length)
+    // reenable as soon as compass bug is fixed
+    // +background-image(linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length))
 
 =no-user-select
   -webkit-touch-callout: none
