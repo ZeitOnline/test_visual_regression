@@ -22,7 +22,7 @@ def auto_select_asset(teaser):
 
 def get_video_asset(teaser):
     video = zeit.content.video.interfaces.IVideoAsset(teaser)
-    
+
     if video.video is not None:
         video.video.highest_rendition = _get_video_source(video.video)
 
@@ -31,6 +31,7 @@ def get_video_asset(teaser):
         return [video.video, video.video_2]
 
     return video.video
+
 
 def _get_video_source(self):
     try:
@@ -44,6 +45,7 @@ def _get_video_source(self):
     except TypeError:
         return self.flv_url
 
+
 def get_gallery_asset(teaser):
     gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)
     return gallery.gallery
@@ -52,9 +54,6 @@ def get_gallery_asset(teaser):
 def get_image_asset(teaser):
     image = zeit.content.image.interfaces.IImages(teaser)
     return image.image
-
-
-
 
 
 @implementer(zeit.frontend.interfaces.ITeaserImage)
