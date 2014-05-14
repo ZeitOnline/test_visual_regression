@@ -293,11 +293,10 @@ def translate_url(context, url):
 
 @jinja2.contextfilter
 def create_url(context, obj):
-    content = zeit.cms.interfaces.ICMSContent(obj)
-    if zeit.content.link.interfaces.ILink.providedBy(content):
-        return content.url
+    if zeit.content.link.interfaces.ILink.providedBy(obj):
+        return obj.url
     else:
-        return translate_url(context, content.uniqueId)
+        return translate_url(context, obj.uniqueId)
 
 
 def format_date(obj, type='short'):
