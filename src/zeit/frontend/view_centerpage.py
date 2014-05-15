@@ -67,9 +67,13 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagetitle(self):
-        # ToDo(T.B.) should be, doesn't work
-        # return self.context.html-meta-title
-        return 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        pagetitle = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        if self.context.title:
+            pagetitle = self.context.title
+        if seo.html_title:
+            pagetitle = seo.html_title
+        return pagetitle
 
     @property
     def pagetitle_in_body(self):
@@ -77,10 +81,14 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagedescription(self):
-        # ToDo(T.B.) should be self.context.html-meta-title, doesn't work
-        # return self.context.html-meta-title
-        output = 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
-        return output
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        pagedescription = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        if self.context.title:
+            pagedescription = self.context.subtitle
+        if seo.html_title:
+            pagedescription = seo.html_description
+        return pagedescription
+
 
     @property
     def rankedTags(self):
