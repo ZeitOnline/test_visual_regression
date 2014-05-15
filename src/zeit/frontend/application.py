@@ -13,6 +13,7 @@ from zeit.frontend.gallery import IGallery
 from zeit.frontend.gallery import IProductGallery
 from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings
+import base64
 import itertools
 import jinja2
 import logging
@@ -68,6 +69,10 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
+        pkg = pkg_resources.get_distribution('zeit.frontend')
+        version_b64 = base64.b64encode(pkg.version)
+        self.settings['version_hash'] = version_b64.replace('=', '-')
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
@@ -95,10 +100,14 @@ class Application(object):
                 request.application_url, request.registry.settings.get(
                     'asset_prefix', ''))
             if path == '/':
-                return request.route_url('home', **kw)
-            if ':' not in path:
-                path = 'zeit.frontend:' + path
-            return request.static_url(path, **kw)
+                url = request.route_url('home', **kw)
+            else:
+                prefix = '' if ':' in path else 'zeit.frontend:'
+                url = request.static_url(prefix + path, **kw)
+            if url.rsplit('.', 1)[-1] in ('css', 'js'):
+                url += '?' + request.registry.settings.get('version_hash', '')
+            return url
+
         config.add_request_method(asset_url)
 
         config.set_root_factory(self.get_repository)
@@ -108,7 +117,8 @@ class Application(object):
         from .security import CommunityAuthenticationPolicy
         import pyramid_beaker
         config.include("pyramid_beaker")
-        session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
+        session_factory = pyramid_beaker.session_factory_from_settings(
+            self.settings)
         config.set_session_factory(session_factory)
         config.set_authentication_policy(CommunityAuthenticationPolicy())
         config.set_authorization_policy(ACLAuthorizationPolicy())
