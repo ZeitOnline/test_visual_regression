@@ -26,7 +26,7 @@
 //   +linear-gradient(45deg, red, blue, yellow, white)
 =linear-gradient($direction, $colors...)
   $directions: fix-gradient-direction($direction)
-  $image: linear-gradient(nth($directions, 2), $colors)
+  $image: linear-gradient(nth($directions, 2), $colors...)
   @if $experimental-support-for-svg and prefixed(-svg, $image)
     background-image: -svg($image)
     background-size: 100%
@@ -38,7 +38,7 @@
     background-image: -moz($image)
   @if $experimental-support-for-opera and prefixed(-o, $image)
     background-image: -o($image)
-  background-image: linear-gradient(nth($directions, 1), $colors)
+  background-image: linear-gradient(nth($directions, 1), $colors...)
 
 =fake-box-shadow-inset($color: $black, $direction: to top, $length: 60%)
   background-color: $color
