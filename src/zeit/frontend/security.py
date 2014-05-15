@@ -29,6 +29,11 @@ class CommunityAuthenticationPolicy(SessionAuthenticationPolicy):
             user_info = get_community_user_info(request)
             request.session[ZMO_USER_KEY] = user_info
 
+        # drupal 6 gives anonymous users a session and uid==0
+        # in some cases they where authenticated here, but they should not be!
+        if int(user_info['uid']) == 0:
+            return None
+
         return user_info['uid']
 
 
