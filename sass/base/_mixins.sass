@@ -80,6 +80,15 @@
     // reenable as soon as compass bug is fixed
     // +background-image(linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length))
 
+// Overwrite Compass mixin
+// Fixes misbehaviour in Compass 0.12.6
+// Fixed in Compass master (coming in v1.0)
+// @todo: Remove vendor prefixes?
+=border-radius($radius...)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  border-radius:         $radius
+
 =no-user-select
   -webkit-touch-callout: none
   -webkit-user-select: none
