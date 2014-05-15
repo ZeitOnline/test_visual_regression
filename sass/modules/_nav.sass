@@ -593,36 +593,19 @@ $icon-avatar-std-size: em(40px)
     .main-nav__section__content
       left: auto !important
       right: 0
-    .main-nav__community__icon,
-    .main-nav__community__icon--pic
+    .main-nav__community__icon
       position: absolute
       right: em(16px)
       top: em(8px)
-  img
-    +border-radius(50%)
-    +respond-max($nav__break__full-menu)
-      +inline-block
-      max-width: em(30px)
-      margin-top: -$micro
-      margin-right: $fine
-    +respond-min($nav__break__full-menu)
-      padding: $thin
-
 
 .main-nav__community__icon
   display: block
-  background-size: contain
   width: $icon-avatar-std-size
   height: $icon-avatar-std-size
   background-repeat: no-repeat
-
-
-.main-nav__community__icon--pic
-  @extend .main-nav__community__icon
-  background-position: center
-  background-size: cover
-  background-repeat: no-repeat
-  +border-radius($icon-avatar-std-size/2)
+  background-position: 50% 38% // golden ratio for portrait pictures
+  +background-size(cover)
+  +border-radius(50%)
 
 
 .main-nav__breadcrumbs

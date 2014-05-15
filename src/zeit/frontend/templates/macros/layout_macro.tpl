@@ -284,7 +284,7 @@
 {% macro head_user_is_logged_in_true(request)  %}
     <span class="main-nav__section__trigger">
         {% if request.app_info.user.picture %}
-            <span class="main-nav__community__icon--pic" style="background-image: url({{ request.app_info.community_host }}{{ request.app_info.user.picture }})"></span>
+            <span class="main-nav__community__icon" style="background-image: url({{ request.app_info.community_host }}{{ request.app_info.user.picture }})"></span>
         {%- else -%}
             <span class="main-nav__community__icon icon-avatar-std"></span>
         {%- endif -%}

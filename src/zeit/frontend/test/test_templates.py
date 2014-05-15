@@ -870,7 +870,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request.app_info.community_paths.logout = 'logout'
     request.url = 'test'
 
-    markup = '<span class="main-nav__community__icon--pic"'\
+    markup = '<span class="main-nav__community__icon"'\
         ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
     account = '<a href="www.zeit.de/user/1"'\
         ' id="drupal_account">Account</a>'
