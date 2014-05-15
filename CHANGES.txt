@@ -1,7 +1,19 @@
 Change log for zeit.frontend
 ============================
 
-0.5.1 (unreleased)
+0.5.3 (unreleased)
+------------------
+
+- userid > 0 for authentification
+
+
+0.5.2 (2014-05-14)
+------------------
+
+- implement redirect objects
+
+
+0.5.1 (2014-05-13)
 ------------------
 
 - Fix compass linear-gradient bug

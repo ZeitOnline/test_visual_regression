@@ -192,6 +192,23 @@
               <display_name py:pytype="str">Wolfgang Schmidbauer</display_name>
             </author>
           </block>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview-2" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview-2" year="2014" issue="20" ressort="Kultur" author="Jan Freitag" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" date-last-modified="2014-05-12T17:43:39+00:00" date-first-released="2014-05-12T17:44:38.819643+00:00" date-last-published="2014-05-12T17:44:38.819643+00:00" last-semantic-change="2014-05-12T17:43:20.853704+00:00">
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <supertitle py:pytype="str">Tonträger-Blog</supertitle>
+            <teaser_supertitle xsi:nil="true"/>
+            <title py:pytype="str">Tanz' mit Deinem Blues</title>
+            <text py:pytype="str">Das Schweizer Synthiepopduo Klaus Johann Grobe fährt der zeitgenössischen Spaßdiktatur elegant in die Parade. Sein Debütalbum findet die gute Laune in der schlechten.</text>
+            <description py:pytype="str">Das Schweizer Synthiepopduo Klaus Johann Grobe fährt der zeitgenössischen Spaßdiktatur elegant in die Parade. Sein Debütalbum findet die gute Laune in der schlechten.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/paar-abgewendet-streit/" type="jpg" title="Emotionale Kälte" alt="Paar steht abgewendet nebeneinander" align="left" publication-date="" expires="">
+              <bu py:pytype="str">Tanz' mit Deinem Blues</bu>
+              <copyright py:pytype="str" link="http://www.photocase.de/milchhonig">© milchhonig / photocase.de</copyright>
+            </image>
+          </block>
         </container>
       </region>
       <region area="informatives">
