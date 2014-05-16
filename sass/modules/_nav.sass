@@ -6,13 +6,13 @@ $nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
 $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
 $nav__section-border: 1px solid $grey--mid
-$nav__community--logged-out-width: em(80px)
-$main-nav__all-ressorts-position-right-logged-out: em(220px)
-$main-nav__all-ressorts-position-right-logged-in: em(180px)
-$main-nav__service-position-right-logged-out: em(106px)
-$main-nav__service-position-right-logged-in: em(64px)
-$icon-avatar-std-size: em(40px)
-
+$nav__community--logged-in-width: em(64px)
+$nav__community--logged-out-width: em(106px)
+$main-nav__service-position-right-logged-in: $nav__community--logged-in-width
+$main-nav__service-position-right-logged-out: $nav__community--logged-out-width
+$main-nav__all-ressorts-position-right-logged-in: $nav__community--logged-in-width + em(118px)
+$main-nav__all-ressorts-position-right-logged-out: $nav__community--logged-out-width + em(118px)
+$icon-avatar-std-size: em(32px)
 
 .is-small-screen-only
   display: block !important
@@ -31,7 +31,8 @@ $icon-avatar-std-size: em(40px)
   width: 100%
   max-width: $max-page-width
   margin: 0 auto
-  background-color: $grey--mid
+  color: $white
+  background-color: $grey--mid-dark
   &.is-full-width
     max-width: none
     margin-bottom: 0
@@ -49,13 +50,10 @@ $icon-avatar-std-size: em(40px)
         margin-top: $nav__row-height
   +respond-min($nav__break__full-menu)
     height: $nav__row-height * 2
-    background-color: $grey--mid-dark
   a
     +link-colors($white, $white, $white, $white, $white)
     +tablet
     border-width: 0
-    +respond-min($nav__break__full-menu)
-      margin-bottom: $fine
     &.is-active
       opacity: 0.5
 
@@ -77,11 +75,7 @@ $icon-avatar-std-size: em(40px)
   float: left
   width: $nav__row-height
   height: $nav__row-height
-  color: $white
-  background-color: $grey--mid-dark
   margin-right: 1px
-  border: none
-  margin-bottom: 0 !important
   position: relative
   overflow: hidden
   +respond-min($nav__break__full-menu)
@@ -123,9 +117,7 @@ $icon-avatar-std-size: em(40px)
 .main-nav__menu
   overflow: hidden
   height: $nav__row-height
-  background-color: $grey--mid-dark
   +respond-min($nav__break__full-menu)
-    background: none
     border-bottom: $nav__section-border
     .is-compact &
       border-bottom: none
@@ -144,7 +136,6 @@ $icon-avatar-std-size: em(40px)
   +tablet
   +inline-block
   +no-user-select
-  color: $white
   font-size: $font-s
   letter-spacing: 1px
   float: left
@@ -206,9 +197,8 @@ $icon-avatar-std-size: em(40px)
 .main-nav__menu__content__current-ressort
   +tablet
   font-size: $font-s
-  background-color: $grey--mid-dark
-  display: block
   letter-spacing: 1px
+  display: block
   padding: $small
   +respond-max($nav__break__full-menu)
     border-bottom: $nav__section-border !important
@@ -223,24 +213,21 @@ $icon-avatar-std-size: em(40px)
   border-bottom: 1px solid $grey--mid
   +respond-min($nav__break__full-menu)
     border: none
-    background-color: $grey--mid-dark
     height: $nav__row-height
-
 
 .main-nav__section__trigger
   +tablet
   +no-user-select
-  color: $white
-  font-size: $font-s
-  letter-spacing: 1px
   cursor: pointer
-  background-color: $grey--mid-dark
   padding: $small
   display: block
   +respond-min($nav__break__full-menu)
     padding: 0
     height: 100%
 
+.main-nav__section__text
+  font-size: $font-s
+  letter-spacing: 1px
 
 .main-nav__section__content
   display: none
@@ -260,13 +247,13 @@ $icon-avatar-std-size: em(40px)
     display: block
     padding: $micro 0
   +respond-max($nav__break__full-menu)
-    a
-      padding: $thin 0
-    .main-nav__ressorts &
-      a
-        +inline-block
-        vertical-align: top
-        width: 100%
+    // a
+    //   padding: $thin 0
+    // .main-nav__ressorts &
+    //   a
+    //     +inline-block
+    //     vertical-align: top
+    //     width: 100%
   +respond-min($nav__break__full-menu)
     padding: $small $compact $compact $compact
     min-width: em(120px)
@@ -285,10 +272,10 @@ $icon-avatar-std-size: em(40px)
   .main-nav__community &
     +respond-min($nav__break__full-menu)
       padding-bottom: $micro !important
-    .main-nav__section__content
-      height: 100%
-      +respond-min($nav__break__full-menu)
-        padding-bottom: $micro !important
+    // .main-nav__section__content // <- .main-nav__section__content is never inside .main-nav__section__content - this will never apply
+    //   height: 100%
+    //   +respond-min($nav__break__full-menu)
+    //     padding-bottom: $micro !important
 
 =nav__open-submenu
   display: block
@@ -344,8 +331,6 @@ $icon-avatar-std-size: em(40px)
     margin-right: $small
     &:last-child
       margin-right: 0
-    a
-      padding: 0
   +respond-max($nav__break__full-menu)
     border: none
     .main-nav__section__content
@@ -367,7 +352,6 @@ $icon-avatar-std-size: em(40px)
     overflow: hidden
     a
       margin-top: $hair
-      margin-bottom: 0
     .main-nav__section__content
       padding-right: $small
 
@@ -383,11 +367,11 @@ $icon-avatar-std-size: em(40px)
 
 .is-standalone-link
   font-size: $font-s
+  letter-spacing: 1px
   border-top: 1px solid $grey--mid-dark
   border-bottom: 1px solid $grey--mid-dark
   border-width: 1px !important
   display: block
-  letter-spacing: 1px
   +on-interaction
     border-color: $grey--mid-dark
   +respond-max($nav__break__full-menu)
@@ -396,15 +380,6 @@ $icon-avatar-std-size: em(40px)
     height: $nav__row-height
     line-height: em_to_rem($nav__row-height) !important
     line-height: $nav__row-height--px !important
-
-
-.main-nav__service
-  .main-nav__section__trigger
-    padding-right: $compact
-    background-position: right center
-  +respond-max($nav__break__full-menu)
-    .main-nav__section__trigger
-      background: none
 
 
 .main-nav__ressorts
@@ -455,7 +430,6 @@ $icon-avatar-std-size: em(40px)
       +inline-block
       margin-right: $small
       margin-top: $hair
-      margin-bottom: 0
       &:last-child
         margin-right: 0
 
@@ -494,6 +468,12 @@ $icon-avatar-std-size: em(40px)
     .main-nav__section__content
       left: auto !important
       right: 0
+  .main-nav__section__trigger
+    padding-right: $compact
+    background-position: right center
+  +respond-max($nav__break__full-menu)
+    .main-nav__section__trigger
+      background: none
 
 
 .main-nav__search
@@ -545,7 +525,8 @@ $icon-avatar-std-size: em(40px)
 
 +respond-min($nav__break__full-menu)
   .main-nav__service,
-  .main-nav__search
+  .main-nav__search,
+  .main-nav__community
     border-bottom: $nav__section-border
     .main-nav__section__trigger
       line-height: $nav__row-height--px
@@ -559,47 +540,33 @@ $icon-avatar-std-size: em(40px)
         height: $nav__row-height
         top: 0
         pointer-events: none
-        width: 80px
       &:before
         +simple-gradient(to left, rgba($black, 0.6), rgba($black, 0))
         right: 100%
+        width: 80px
+  .main-nav__service
+    .main-nav__section__content
       &:after
         +simple-gradient(to right, rgba($black, 0.6), rgba($black, 0))
         left: 100%
-  .main-nav__community
-    .main-nav__section__content
-      &:after
-        background: none
-        width: 0
+        width: 80px
 
 
 .main-nav__community
   +respond-min($nav__break__full-menu)
     position: absolute
-    right: 0
-    padding: 0 $small
-    left: auto
+    padding: 0 em(16px)
     top: 0
-    border-bottom: $nav__section-border
-    .main-nav__section__trigger
-      line-height: $nav__row-height--px
-      background: none
-      padding-top: $hair*2
-      width: $nav__row-height
-      height: auto
-      max-width: $nav__row-height
-      max-height: $nav__row-height
-      overflow: hidden
+    left: auto
+    right: 0
+    width: $nav__community--logged-in-width
     .main-nav__section__content
       left: auto !important
       right: 0
-    .main-nav__community__icon
-      position: absolute
-      right: em(16px)
-      top: em(8px)
 
 .main-nav__community__icon
-  display: block
+  +inline-block
+  vertical-align: middle
   width: $icon-avatar-std-size
   height: $icon-avatar-std-size
   background-repeat: no-repeat
