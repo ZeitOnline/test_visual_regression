@@ -3,6 +3,7 @@ from pyramid.authentication import SessionAuthenticationPolicy
 from webob import Request
 from lxml import etree
 from wsgiproxy.exactproxy import proxy_exact_request
+from socket import error as SocketError
 
 ZMO_USER_KEY = 'zmo-user'
 
@@ -42,16 +43,19 @@ def get_community_user_info(request):
     Returns additional information from the Community backend by injecting the Cookie
     that Community has set when the user logged in there.
     """
+    user_info = dict(uid=0, name=None, picture=None)
     community_request = Request.blank(
         'user/xml',
         base_url=request.registry.settings['community_host'],
         accept='application/xml')
     # inject existing Cookie
     community_request.headers['Cookie'] = request.headers['Cookie']
-    community_response = community_request.get_response(proxy_exact_request)
+    try:
+        community_response = community_request.get_response(proxy_exact_request)
+    except SocketError:
+        return user_info
     # parse XML resonse and construct a dictionary from it
     xml_info = etree.fromstring(community_response.body)
-    user_info = dict()
-    for key in ['uid', 'name', 'picture']:
+    for key in user_info:
         user_info[key] = xml_info.xpath('//user/%s' % key)[0].text
     return user_info
