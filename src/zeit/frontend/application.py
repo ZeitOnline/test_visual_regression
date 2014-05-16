@@ -8,6 +8,7 @@ from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
+from zeit.frontend.centerpage import get_all_assets
 from zeit.frontend.centerpage import get_image_asset
 from zeit.frontend.gallery import IGallery
 from zeit.frontend.gallery import IProductGallery
@@ -141,6 +142,7 @@ class Application(object):
         jinja.filters['translate_url'] = translate_url
         jinja.filters['default_image_url'] = default_image_url
         jinja.filters['auto_select_asset'] = auto_select_asset
+        jinja.filters['get_all_assets'] = get_all_assets
         jinja.filters['obj_debug'] = obj_debug
         jinja.filters['substring_from'] = substring_from
         jinja.filters['hide_none'] = hide_none
@@ -429,10 +431,10 @@ def most_sufficient_teaser_tpl(block_layout,
                                prefix='templates/inc/teaser/teaser_',
                                suffix='.html',
                                separator='_'):
-
     types = (block_layout, content_type, asset)
-    defaults = ('default', 'default', 'default')
-    zipped = zip(types, defaults)
+    default = ('default',)
+    iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
+    zipped = (t + default if iterable(t) else (t,) + default for t in types)
 
     combinations = [t for t in itertools.product(*zipped)]
     func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
