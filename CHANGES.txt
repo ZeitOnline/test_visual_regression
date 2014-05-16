@@ -18,6 +18,9 @@ Change log for zeit.frontend
 0.5.1 (2014-05-13)
 ------------------
 
+
+- change background video mechanism (load of video/ fallback)
+
 - Fix compass linear-gradient bug
 
 - Add caching headers.
