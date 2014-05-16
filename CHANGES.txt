@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - userid > 0 for authentification
 
+- Bust caches on version increments by appending hashes
+
 
 0.5.2 (2014-05-14)
 ------------------
