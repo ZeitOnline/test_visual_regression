@@ -70,8 +70,7 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         pkg = pkg_resources.get_distribution('zeit.frontend')
-        version_b64 = base64.b64encode(pkg.version)
-        self.settings['version_hash'] = version_b64.replace('=', '-')
+        self.settings['version_hash'] = base64.b16encode(pkg.version).lower()
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
