@@ -4,8 +4,8 @@ define(['jquery'], function() {
   var $main_nav_trigger = $('#js-main-nav-trigger');
   var $main_nav_content = $('#js-main-nav-content');
   var $main_nav_sections = $('.main-nav__section');
-  var $main_nav_section_triggers = $('.main-nav__section__trigger');
-  var $main_nav_section_contents = $('.main-nav__section__content:not(.is-always-open)');
+  var $main_nav_section_triggers = $('.js-main-nav-section-trigger');
+  var $main_nav_section_contents = $('.js-main-nav-section-content');
   var $main_nav = $('#js-main-nav');
   var $ressort_slider_container;
   var $ressort_slider_strip;

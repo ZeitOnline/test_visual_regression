@@ -242,8 +242,8 @@
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__service">
-                        <span class="main-nav__section__trigger icon-arrow-down">Service</span>
-                        <div class="main-nav__section__content">
+                        <span class="main-nav__section__trigger icon-arrow-down js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span></span>
+                        <div class="main-nav__section__content js-main-nav-section-content">
                             <div class="main-nav__section__content__wrap">
                                 <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.centerpages.service.campus.{{request.path_info}}">ZEITCampus</a>
                                 <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.centerpages.service.geschichte.{{request.path_info}}">ZEITGeschichte</a>
@@ -260,8 +260,8 @@
                         </div>
                     </div>
                     <!-- <div class="main-nav__section main-nav__search">
-                        <span class="main-nav__section__trigger icon-search">Suche</span>
-                        <div class="main-nav__section__content">
+                        <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
+                        <div class="main-nav__section__content js-main-nav-section-content">
                             <div class="main-nav__search__form">
                                 <input class="main-nav__search__input" type="text" size="20" placeholder="Suchbegriff …">
                                 <input class="main-nav__search__submit" type="submit" value="Suchen">
@@ -282,14 +282,14 @@
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_true(request)  %}
-    <span class="main-nav__section__trigger">
+    <span class="main-nav__section__trigger js-main-nav-section-trigger">
         {% if request.app_info.user.picture %}
             <span class="main-nav__community__icon" style="background-image: url({{ request.app_info.community_host }}{{ request.app_info.user.picture }})"></span>
         {%- else -%}
             <span class="main-nav__community__icon icon-avatar-std"></span>
         {%- endif -%}
     </span>
-    <div class="main-nav__section__content">
+    <div class="main-nav__section__content js-main-nav-section-content">
         <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="drupal_account">Account</a>
         <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="drupal_logout">Logout</a>
     </div>
