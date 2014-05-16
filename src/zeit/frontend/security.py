@@ -9,9 +9,8 @@ ZMO_USER_KEY = 'zmo-user'
 
 
 class CommunityAuthenticationPolicy(SessionAuthenticationPolicy):
-    """
-    An authentication policy that queries the Community backend for user validation
-    and additional user data and stores the result in the session.
+    """An authentication policy that queries the Community backend for user
+    validation and additional user data and stores the result in the session.
     """
 
     def authenticated_userid(self, request):
@@ -22,9 +21,11 @@ class CommunityAuthenticationPolicy(SessionAuthenticationPolicy):
             if ZMO_USER_KEY in request.session:
                 del request.session[ZMO_USER_KEY]
             return None
- 
-        # if we have a community cookie for the current user, store/retrieve the user info in/from the session
-        if ZMO_USER_KEY in request.session and drupal_id == request.session[ZMO_USER_KEY].get('uid'):
+
+        # if we have a community cookie for the current user, store/retrieve
+        # the user info in/from the session
+        if ZMO_USER_KEY in request.session and drupal_id == \
+                request.session[ZMO_USER_KEY].get('uid'):
             user_info = request.session[ZMO_USER_KEY]
         else:
             user_info = get_community_user_info(request)
@@ -39,9 +40,8 @@ class CommunityAuthenticationPolicy(SessionAuthenticationPolicy):
 
 
 def get_community_user_info(request):
-    """
-    Returns additional information from the Community backend by injecting the Cookie
-    that Community has set when the user logged in there.
+    """Returns additional information from the Community backend by injecting
+    the Cookie that Community has set when the user logged in there.
     """
     user_info = dict(uid=0, name=None, picture=None)
     community_request = Request.blank(
@@ -51,7 +51,8 @@ def get_community_user_info(request):
     # inject existing Cookie
     community_request.headers['Cookie'] = request.headers['Cookie']
     try:
-        community_response = community_request.get_response(proxy_exact_request)
+        community_response = community_request.get_response(
+            proxy_exact_request)
     except SocketError:
         return user_info
     # parse XML resonse and construct a dictionary from it
