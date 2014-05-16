@@ -224,8 +224,8 @@
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
                             <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
                             <div class="main-nav__section__content__wrap" id="js-main-nav-ressorts-slider-strip">
-                                <a href="http://{{request.host}}/zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode.{{request.path_info}}">Mode & Design</a>
-                                <a href="http://{{request.host}}/zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen.{{request.path_info}}">Essen & Trinken</a>
+                                <a href="http://{{request.host}}/zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode.{{request.path_info}}">Mode &amp; Design</a>
+                                <a href="http://{{request.host}}/zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen.{{request.path_info}}">Essen &amp; Trinken</a>
                                 <a href="http://{{request.host}}/zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben.{{request.path_info}}">Leben</a>
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
                             <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo">Abo</a>
-                            <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=42&et_lid=175&et_sub=Startseite_header" id="hp.zm.topnav.links.shop">Shop</a>
+                            <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.zm.topnav.links.shop">Shop</a>
                             <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.ePaper">ePaper</a>
                         </div>
                     </div>
