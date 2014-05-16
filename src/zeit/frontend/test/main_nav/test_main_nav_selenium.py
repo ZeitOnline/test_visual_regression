@@ -59,7 +59,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     driver.get('%s/artikel/01' % testserver.url)
 
     class_trig = "main-nav__section__trigger"
-    class_no_trig = "main-nav__section__without_trigger"
     class_cont = "main-nav__section__content"
     class_input = "main-nav__search__input"
     class_button = "main-nav__search__submit"
@@ -81,7 +80,7 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     service_links = service_cont.find_elements_by_tag_name('a')
 
     community = main_nav.find_element_by_class_name('main-nav__community')
-    community_trig = community.find_element_by_class_name(class_no_trig)
+    community_trig = community.find_element_by_class_name(class_trig)
 
     # there's exactly one navigation
     assert(len(nav_list) == 1)

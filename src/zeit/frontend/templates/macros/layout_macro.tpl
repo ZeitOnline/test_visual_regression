@@ -296,8 +296,8 @@
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false(request)  %}
-    <span class="main-nav__section__without_trigger">
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="drupal_login">Anmelden</a>
+    <span class="main-nav__section__trigger">
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="drupal_login" class="main-nav__section__text">Anmelden</a>
     </span>
 {%- endmacro %}
 

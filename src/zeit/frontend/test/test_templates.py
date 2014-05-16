@@ -896,9 +896,9 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     request.app_info.community_paths.register = 'register'
     request.url = 'test'
 
-    markup = '<span class="main-nav__section__without_trigger">'\
+    markup = '<span class="main-nav__section__trigger">'\
         '<a href="www.zeit.de/login?destination=test"'\
-        ' id="drupal_login">Anmelden</a></span>'
+        ' id="drupal_login" class="main-nav__section__text">Anmelden</a></span>'
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
     output = ""

@@ -643,14 +643,9 @@ $icon-avatar-std-size: em(40px)
 
 //special values for logged out status
 .main-nav--logged-out
-  .main-nav__section__without_trigger
-    @extend .main-nav__section__trigger
   .main-nav__community
-    .main-nav__section__without_trigger
-      width: $nav__community--logged-out-width
-      max-width: $nav__community--logged-out-width
+    width: $nav__community--logged-out-width
   .main-nav__all-ressorts
-    +respond-min($nav__break__full-menu)
-      right: $main-nav__all-ressorts-position-right-logged-out
+    right: $main-nav__all-ressorts-position-right-logged-out
   .main-nav__service
     right: $main-nav__service-position-right-logged-out
