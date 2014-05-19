@@ -43,8 +43,11 @@ def is_block(obj, b_type):
 
 def block_type(obj):
     if obj is None:
-        return "no_block"
-    return type(obj).__name__.lower()
+        return 'no_block'
+    elif isinstance(obj, tuple):
+        return tuple(block_type(o) for o in obj)
+    else:
+        return type(obj).__name__.lower()
 
 
 @implementer(IFrontendBlock)

@@ -114,6 +114,26 @@ def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
         'templates/inc/teaser/teaser_default_default_default.html']
     result = most_sufficient_teaser_tpl('lead', 'article', 'video')
     assert result == should
+    should = [
+        'templates/inc/teaser/teaser_lead_article_video.html',
+        'templates/inc/teaser/teaser_lead_article_gallery.html',
+        'templates/inc/teaser/teaser_lead_article_imagegroup.html',
+        'templates/inc/teaser/teaser_lead_article_default.html',
+        'templates/inc/teaser/teaser_lead_default_video.html',
+        'templates/inc/teaser/teaser_lead_default_gallery.html',
+        'templates/inc/teaser/teaser_lead_default_imagegroup.html',
+        'templates/inc/teaser/teaser_lead_default_default.html',
+        'templates/inc/teaser/teaser_default_article_video.html',
+        'templates/inc/teaser/teaser_default_article_gallery.html',
+        'templates/inc/teaser/teaser_default_article_imagegroup.html',
+        'templates/inc/teaser/teaser_default_article_default.html',
+        'templates/inc/teaser/teaser_default_default_video.html',
+        'templates/inc/teaser/teaser_default_default_gallery.html',
+        'templates/inc/teaser/teaser_default_default_imagegroup.html',
+        'templates/inc/teaser/teaser_default_default_default.html']
+    assets = ('video', 'gallery', 'imagegroup')
+    result = most_sufficient_teaser_tpl('lead', 'article', assets)
+    assert result == should
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(testserver):

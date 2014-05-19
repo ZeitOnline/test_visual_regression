@@ -6,9 +6,15 @@ Change log for zeit.frontend
 
 - userid > 0 for authentification
 
+- Slightly darken body background
+
+- Improve template selection logic
+
 
 0.5.2 (2014-05-14)
 ------------------
+
+- Hide comments on click out of the comments section
 
 - implement redirect objects
 
