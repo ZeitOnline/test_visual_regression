@@ -10,6 +10,8 @@ Change log for zeit.frontend
 
 - Hide mtb title and subtitle tag if non-existent
 
+- Hide various teaser title contents if non-existent
+
 - Improve template selection logic
 
 
