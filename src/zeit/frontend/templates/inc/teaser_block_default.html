@@ -23,6 +23,6 @@ Available attributes:
 	{% include get_teaser_template(
 		teaser_block.layout.id,
 		teaser | block_type,
-		teaser | auto_select_asset | block_type,
+		teaser | get_all_assets | block_type,
 		'templates/inc/teaser/teaser_') ignore missing %}
 {% endfor %}
