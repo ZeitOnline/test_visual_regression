@@ -12,12 +12,12 @@ Available attributes:
     <header class="cp__lead-full__title__wrap cp__lead-full__title__wrap--light">
         <h2 class="cp__lead__title">
             <a href="{{teaser.uniqueId | translate_url}}">
-                «{{teaser.teaserTitle}}»
+                «{{teaser.teaserTitle | hide_none}}»
             </a>
         </h2>
         <span class="cp__lead__subtitle">
             <a href="{{teaser.uniqueId | translate_url}}">
-                {{teaser.teaserText}}
+                {{teaser.teaserText | hide_none}}
             </a>
         </span>
     </header>

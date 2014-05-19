@@ -21,16 +21,16 @@ Available attributes:
     <header class="cp__lead-leader__title__wrap cp__lead-leader__title__wrap--dark">
         <span class="cp__lead__supertitle">
             <a href="{{teaser.uniqueId | translate_url}}">
-              {{teaser.teaserSupertitle}}
+              {{teaser.teaserSupertitle | hide_none}}
             </a>
         </span>
         <h2 class="cp__lead__title">
             <a href="{{teaser.uniqueId | translate_url}}">
-                {{teaser.teaserTitle}}
+                {{teaser.teaserTitle | hide_none}}
             </a>
         </h2>
         <span class="cp__lead__subtitle">
-            {{teaser.teaserText}}
+            {{teaser.teaserText | hide_none}}
         </span>
     </header>
 </div>

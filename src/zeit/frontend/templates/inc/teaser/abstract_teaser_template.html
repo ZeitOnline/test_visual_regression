@@ -16,7 +16,7 @@ Available attributes:
                 {{teaser.teaserSupertitle | hide_none}}
             </span>
             <h2 class="{{self.title_class()}}">
-                {{teaser.teaserTitle}}
+                {{teaser.teaserTitle | hide_none}}
             </h2>
         </a>
         {% if self.hide_subtitle() != 'true' %}
