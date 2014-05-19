@@ -9,8 +9,13 @@ Available attributes:
 <div class="mtb__wrap" id="mtb">
     <div class="mtb__divider"></div>
     <div class="mtb">
-        <div class="mtb__title">{{view.monothematic_block.supertitle | hide_none}}</div>
-        <div class="mtb__subtitle">{{view.monothematic_block.teaserText | hide_none}}</div>
+        {% if view.monothematic_block.supertitle %}
+        <div class="mtb__title">{{view.monothematic_block.supertitle}}</div>
+        {% endif %}
+        {% if view.monothematic_block.teaserText %}
+        <div class="mtb__subtitle">{{view.monothematic_block.teaserText}}</div>
+        {% endif %}
+
         <div class="mtb__teasers__wrap">
             {% for teaser_block in view.monothematic_block.values() -%}
                 {% if teaser_block.type != 'placeholder' %}
