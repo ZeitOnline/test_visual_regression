@@ -8,6 +8,8 @@ Change log for zeit.frontend
 
 - Slightly darken body background
 
+- Hide mtb title and subtitle tag if non-existent
+
 
 0.5.2 (2014-05-14)
 ------------------
