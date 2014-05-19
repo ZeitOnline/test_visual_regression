@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- make responsive fallback image more adaptive
+
 - userid > 0 for authentification
 
 - Slightly darken body background
