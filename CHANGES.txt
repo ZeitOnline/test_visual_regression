@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- change background video mechanism (load of video/ fallback)
+
 - userid > 0 for authentification
 
 - Slightly darken body background
@@ -21,9 +23,6 @@ Change log for zeit.frontend
 
 0.5.1 (2014-05-13)
 ------------------
-
-
-- change background video mechanism (load of video/ fallback)
 
 - Fix compass linear-gradient bug
 
