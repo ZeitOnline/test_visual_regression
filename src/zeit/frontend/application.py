@@ -26,6 +26,7 @@ import re
 import urlparse
 import zeit.cms.interfaces
 import zeit.connector
+import zeit.content.link.interfaces
 import zeit.frontend
 import zeit.frontend.banner
 import zeit.frontend.block
@@ -140,6 +141,7 @@ class Application(object):
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
+        jinja.filters['create_url'] = create_url
         jinja.filters['default_image_url'] = default_image_url
         jinja.filters['auto_select_asset'] = auto_select_asset
         jinja.filters['get_all_assets'] = get_all_assets
@@ -290,6 +292,14 @@ def translate_url(context, url):
         return url
 
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+
+
+@jinja2.contextfilter
+def create_url(context, obj):
+    if zeit.content.link.interfaces.ILink.providedBy(obj):
+        return obj.url
+    else:
+        return translate_url(context, obj.uniqueId)
 
 
 def format_date(obj, type='short'):
