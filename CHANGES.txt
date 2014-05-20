@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- adapt images in informative teaser, to get correct ratio
+
 - change background video mechanism (load of video/ fallback)
 
 - userid > 0 for authentification
