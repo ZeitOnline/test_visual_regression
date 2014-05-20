@@ -168,6 +168,17 @@
                 });
             };
 
+            //integrate tracking
+            $( '.bx-wrapper' ).find( 'a' ).on( 'click', function(){
+                var class_name = $( this ).attr( 'class' );
+                var next = /^bx.+next/;
+                var prev = /^bx.+prev/;
+                if( next.exec(class_name) || prev.exec(class_name) ){
+                    //TODO: integrate desired counter - current mode names = "bgSlider" : "biga" (as)
+                    //window.clickCount.all('biga');
+                }
+            });
+
             figCaptionSizing();
             slider.redrawSlider();
         });

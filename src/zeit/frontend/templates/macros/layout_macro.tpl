@@ -1,4 +1,57 @@
 
+{% macro click_tracking( banner_channel ) -%}
+<!-- click tracking -->
+        <script type="text/javascript">
+            var clickCount = {
+                get_channel: function(){
+                    //set banner_channel
+                    var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : ''
+                    return( channel );
+                },
+                webtrekk: function ( mode ) {
+                    //webtrekk
+                    if( typeof mode == 'undefined' ) return;
+                    if( window.wt !== undefined ) {
+                        if( window.wt.sendinfo !== undefined ) window.wt.sendinfo( {linkId: mode} );
+                    }
+                },
+                ga: function( mode ) {
+                    //google analytics
+                    if( window._gaq !== undefined ){
+                        _gaq.push( ['_trackEvent', mode, "click"] );
+                    }
+                },
+                ivw: function() {
+                    //ivw version 1
+                    if( window.Z_IVW_RESSORT !== undefined ) {
+                        var click = jQuery("<img>").attr( "src", 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + ';?r=' + escape(document.referrer) + '&d=' + Math.random() * 100000).width(1).height(1).addClass( 'ivw-aja-pixel' );
+                    }
+                    // ivw version 2
+                    if( typeof iom !== 'undefined' && typeof iam_data !== 'undefined' ) {
+                        iom.c(iam_data,1);
+                    }
+                },
+                cc: function(){
+                    //cc tracking
+                    var bc = this.get_channel();
+                    var ccimg = document.createElement( 'img' );
+                    var src = 'http://cc.zeit.de/cc.gif?banner-channel=' + bc + '&r=' + escape( document.referrer ) + '&rand=' + Math.random() * 10000000000000000;
+                    ccimg.src = src;
+                },
+                all: function( mode ){
+                    //start all tracking functions 
+                    if( mode ){
+                        this.webtrekk( mode );
+                        this.ga( mode );
+                    }
+
+                    this.cc();
+                    this.ivw();
+                } 
+            }
+        </script>
+{%- endmacro %}
+
 {% macro ga_tracking() -%}
 <!-- ga tracking -->
         <script type="text/javascript">

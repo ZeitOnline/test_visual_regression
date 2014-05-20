@@ -938,3 +938,21 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     assert markup in output
     assert unlogged in output
+
+
+def test_macro_click_tracking_should_produce_correct_js(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    lines = tpl.module.click_tracking('test').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'var clickCount = {' in output
+    assert 'get_channel: function(){' in output
+    assert "var channel = 'test' != 'False' ? 'test' : ''" in output
+    assert 'webtrekk: function ( mode ) {' in output
+    assert 'ga: function( mode ) {' in output
+    assert 'ivw: function() {' in output
+    assert 'cc: function(){' in output
+    assert 'all: function( mode ){' in output
