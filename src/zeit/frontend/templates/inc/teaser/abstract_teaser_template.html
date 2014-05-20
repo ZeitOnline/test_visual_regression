@@ -11,7 +11,7 @@ Available attributes:
 <div class='{{self.wrapper_class()}}'>
     {% block asset %}{% endblock %}
     <span class="{{self.title_wrapper_class()}}">
-        <a href="{{teaser.uniqueId | translate_url}}">
+        <a href="{{teaser | create_url}}">
             <span class="cp__buttons__supertitle">
                 {{teaser.teaserSupertitle | hide_none}}
             </span>

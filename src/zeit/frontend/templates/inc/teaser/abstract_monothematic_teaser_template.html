@@ -12,7 +12,7 @@ Available attributes:
 
 <div class="mtb__teaser">
     {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
-    <a href="{{teaser.uniqueId | translate_url}}">
+    <a href="{{teaser | create_url}}">
         <div class="scaled-image">
             {{ layout_macro.insert_responsive_image(image, 'mtb__teaser__image') }}
         </div>
