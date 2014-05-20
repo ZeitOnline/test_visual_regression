@@ -48,6 +48,7 @@ setup(
         'zeit.intrafind',
         'zeit.magazin',
         'zeit.wysiwyg',
+        'zeit.seo',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
