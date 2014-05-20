@@ -14,7 +14,7 @@ Available attributes:
     <div class="card" style="background-color: #{{teaser_block.background_color}}; background-image: url({{image | default_image_url(image_pattern=teaser_block.layout.image_pattern) }});">
         <h2 class="card__title">{{teaser.teaserSupertitle}}</h2>
         <div class="card__text card__text--with-bg">{{teaser.teaserTitle}}</div>
-        <a href="{{teaser.uniqueId | translate_url}}" class="card__button">Lesen</a>
+        <a href="{{teaser | create_url}}" class="card__button">Lesen</a>
     </div>
 </div>
 {% endblock card_deck %}

@@ -11,12 +11,12 @@ Available attributes:
     {% block asset %}{% endblock %}
     <header class="cp__lead-full__title__wrap cp__lead-full__title__wrap--light">
         <h2 class="cp__lead__title">
-            <a href="{{teaser.uniqueId | translate_url}}">
+            <a href="{{teaser | create_url}}">
                 «{{teaser.teaserTitle}}»
             </a>
         </h2>
         <span class="cp__lead__subtitle">
-            <a href="{{teaser.uniqueId | translate_url}}">
+            <a href="{{teaser | create_url}}">
                 {{teaser.teaserText}}
             </a>
         </span>
