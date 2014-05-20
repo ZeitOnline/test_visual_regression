@@ -55,8 +55,11 @@ def get_community_user_info(request):
             proxy_exact_request)
     except SocketError:
         return user_info
-    # parse XML resonse and construct a dictionary from it
-    xml_info = etree.fromstring(community_response.body)
+    try:
+        # parse XML response and construct a dictionary from it
+        xml_info = etree.fromstring(community_response.body)
+    except etree.XMLSyntaxError:
+        return user_info
     for key in user_info:
         user_info[key] = xml_info.xpath('//user/%s' % key)[0].text
     return user_info

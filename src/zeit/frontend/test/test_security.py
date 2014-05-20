@@ -1,6 +1,9 @@
 from mock import patch, MagicMock
 from pytest import fixture
+from zeit.frontend.comments import get_thread
 from zeit.frontend.security import CommunityAuthenticationPolicy, ZMO_USER_KEY
+from zeit.frontend.security import get_community_user_info
+
 
 @fixture
 def policy():
