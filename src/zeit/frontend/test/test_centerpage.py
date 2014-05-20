@@ -47,7 +47,7 @@ def test_centerpage_should_have_correct_page_title(
         selenium_driver, testserver):
     driver = selenium_driver
     # SEO information are given:
-    driver.get('%s/centerpage/index_neu_seotest' % testserver.url)
+    driver.get('%s/zeit-magazin/index' % testserver.url)
     title = driver.title.strip()
     assert title == u'My Test SEO - ZEITmagazin ONLINE'
     # No SEO information are given:
@@ -67,10 +67,10 @@ def test_centerpage_should_have_page_meta_description(
     teststring = u'ZMO CP'
     assert meta_description_tag.get_attribute("content").strip() == teststring
     # SEO descitiion is given
-    driver.get('%s/centerpage/index_neu_seotest' % testserver.url)
+    driver.get('%s/zeit-magazin/index' % testserver.url)
     meta_description_tag = driver.find_element_by_xpath(
         '//meta[@name="description"]')
-    teststring = u'My Test SEO - Desciption is in da house'
+    teststring = u'My Test SEO - ZEITmagazin ONLINE ist die emotionale Seite von ZEIT ONLINE. Hier finden Sie tagesaktuellen Magazinjournalismus zu Mode, Design, Essen, Trinken und Leben.'
     assert meta_description_tag.get_attribute("content").strip() == teststring
 
 
