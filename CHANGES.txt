@@ -10,6 +10,10 @@ Change log for zeit.frontend
 
 - Slightly darken body background
 
+- Hide mtb title and subtitle tag if non-existent
+
+- Hide various teaser title contents if non-existent
+
 - Improve template selection logic
 
 - Gracefully handle missing community backend
