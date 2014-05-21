@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- make responsive fallback image more adaptive
+
 - adapt images in informative teaser, to get correct ratio
 
 - cards.js: use stopImmediatePropagation instead of stopPropagation
