@@ -4,11 +4,23 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- cards.js: use stopImmediatePropagation instead of stopPropagation
+
+- change background video mechanism (load of video/ fallback)
+
 - userid > 0 for authentification
+
+- Slightly darken body background
+
+- Improve template selection logic
+
+- Gracefully handle missing community backend
 
 
 0.5.2 (2014-05-14)
 ------------------
+
+- Hide comments on click out of the comments section
 
 - implement redirect objects
 
