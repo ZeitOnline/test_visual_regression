@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from mock import patch
 from pytest import fixture, yield_fixture, mark
-from zeit.frontend.security import ZMO_USER_KEY
 from zeit.frontend.appinfo import get_app_info, assemble_app_info
+from zeit.frontend.security import ZMO_USER_KEY
 
 
 @fixture

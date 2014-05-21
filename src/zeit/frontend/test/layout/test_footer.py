@@ -1,4 +1,4 @@
-import pytest
+# -*- coding: utf-8 -*-
 from zope.testbrowser.browser import Browser
 
 

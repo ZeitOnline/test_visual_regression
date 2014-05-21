@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import zeit.cms.interfaces
-from pytest import raises
 from zope.testbrowser.browser import Browser
+import zeit.cms.interfaces
 
 
 def test_product_gallery_should_render_according_to_type(testserver):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pyramid.interfaces
 import pyramid.testing
 import zeit.frontend.application
