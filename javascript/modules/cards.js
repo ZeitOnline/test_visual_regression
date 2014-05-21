@@ -27,7 +27,7 @@ define(['jquery'], function() {
      * Stop event propagation
      */
     var stopPropagation = function(e) {
-        e.stopPropagation();
+        e.stopImmediatePropagation();
     };
 
    /**
