@@ -140,7 +140,7 @@ return $.bridget;
 }
 
 // transport
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'jquery-bridget/jquery.bridget',[ 'jquery' ], defineBridget );
 } else {
@@ -153,7 +153,7 @@ if ( typeof define === 'function' && define.amd && false ) {
 /*!
  * classie - class helper functions
  * from bonzo https://github.com/ded/bonzo
- *
+ * 
  * classie.has( elem, 'my-class' ) -> true/false
  * classie.add( elem, 'my-new-class' )
  * classie.remove( elem, 'my-unwanted-class' )
@@ -221,7 +221,7 @@ var classie = {
 };
 
 // transport
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'classie/classie',classie );
 } else {
@@ -271,7 +271,7 @@ function getStyleProperty( propName ) {
 }
 
 // transport
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'get-style-property/get-style-property',[],function() {
     return getStyleProperty;
@@ -488,7 +488,7 @@ return getSize;
 }
 
 // transport
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD for RequireJS
   define( 'get-size/get-size',[ 'get-style-property/get-style-property' ], defineGetSize );
 } else if ( typeof exports === 'object' ) {
@@ -571,7 +571,7 @@ var eventie = {
 
 // ----- module definition ----- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'eventie/eventie',eventie );
 } else if ( typeof exports === 'object' ) {
@@ -642,7 +642,7 @@ function defineDocReady( eventie ) {
 }
 
 // transport
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   // if RequireJS, then doc is already ready
   docReady.isReady = typeof requirejs === 'function';
@@ -662,7 +662,7 @@ if ( typeof define === 'function' && define.amd && false ) {
  */
 
 (function () {
-
+	
 
 	/**
 	 * Class for managing events.
@@ -1114,7 +1114,7 @@ if ( typeof define === 'function' && define.amd && false ) {
 	};
 
 	// Expose the class either via AMD, CommonJS or the global object
-	if (typeof define === 'function' && define.amd && false) {
+	if (typeof define === 'function' && define.amd) {
 		define('eventEmitter/EventEmitter',[],function () {
 			return EventEmitter;
 		});
@@ -1140,7 +1140,7 @@ if ( typeof define === 'function' && define.amd && false ) {
 
 ( function( global, ElemProto ) {
 
-
+  
 
   var matchesMethod = ( function() {
     // check un-prefixed
@@ -1218,7 +1218,7 @@ if ( typeof define === 'function' && define.amd && false ) {
   }
 
   // transport
-  if ( typeof define === 'function' && define.amd && false ) {
+  if ( typeof define === 'function' && define.amd ) {
     // AMD
     define( 'matches-selector/matches-selector',[],function() {
       return matchesSelector;
@@ -1735,7 +1735,7 @@ return Item;
 
 // -------------------------- transport -------------------------- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'outlayer/item',[
       'eventEmitter/EventEmitter',
@@ -2726,7 +2726,7 @@ return Outlayer;
 
 // -------------------------- transport -------------------------- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'outlayer/outlayer',[
       'eventie/eventie',
@@ -2900,7 +2900,7 @@ return Rect;
 
 // -------------------------- transport -------------------------- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'packery/js/rect',rectDefinition );
 } else {
@@ -3057,7 +3057,7 @@ return Packer;
 
 // -------------------------- transport -------------------------- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'packery/js/packer',[ './rect' ], packerDefinition );
 } else {
@@ -3215,7 +3215,7 @@ return Item;
 
 // -------------------------- transport -------------------------- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( 'packery/js/item',[
       'get-style-property/get-style-property',
@@ -3679,7 +3679,7 @@ return Packery;
 
 // -------------------------- transport -------------------------- //
 
-if ( typeof define === 'function' && define.amd && false ) {
+if ( typeof define === 'function' && define.amd ) {
   // AMD
   define( [
       'classie/classie',

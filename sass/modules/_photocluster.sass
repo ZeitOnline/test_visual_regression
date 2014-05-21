@@ -1,20 +1,16 @@
 .photocluster
-  position: relative
-  padding: 0
-  margin: 0
+    position: relative
 
 .photocluster__item
-  padding: 5px
-  margin: 0
-  width: 100%
-  &.size-s
-    +respond-min($break-1)
-      width: 25%
-  &.size-m
-    +respond-min($break-1)
-      width: 50%
-  &.size-l
-    +respond-min($break-1)
-      width: 50%
-  img
+    padding: 0 5px
+    margin-bottom: 10px
     width: 100%
+    +respond-min($break-1)
+        &.size-s
+            width: 25%
+        &.size-m
+            width: 50%
+        &.size-l
+            width: 50%
+    img
+        width: 100%
