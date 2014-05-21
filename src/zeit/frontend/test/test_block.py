@@ -53,7 +53,7 @@ def test_header_video_should_not_be_created_if_layout_does_not_fit():
     model_block.video.uniqueId = 'foo'
 
     h_video = HeaderVideo(model_block)
-    assert h_video == None
+    assert h_video is None
 
 
 def test_header_image_should_be_created_if_layout_is_zmo_header():
@@ -70,19 +70,20 @@ def test_header_image_should_not_be_created_if_layout_does_not_fit():
     model_block.is_empty = False
 
     h_image = HeaderImage(model_block)
-    assert h_image == None
+    assert h_image is None
+
 
 def test_image_should_be_None_if_is_empty_is_True():
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-noheader'
     model_block.is_empty = True
     image = Image(model_block)
-    assert image == None
+    assert image is None
+
 
 def test_image_should_be_Fail_if_is_empty_doesnot_exist():
     model_block = mock.Mock(spec=('layout',))
     model_block.layout = 'zmo-xl-header'
     model_block.is_empty = None
     image = Image(model_block)
-    assert image == None
-
+    assert image is None

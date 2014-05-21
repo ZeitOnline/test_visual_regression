@@ -1,17 +1,23 @@
 from pytest import fixture, mark
 from zeit.frontend.comments import get_thread
 
-unique_id = u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
+unique_id = u'http://xml.zeit.de/politik/deutschland/'\
+    '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets'
 
 
 @fixture
 def xml_comment(agatho):
-    return agatho.collection_get(u'http://xml.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets').xpath('//comment')[0]
+    return agatho.collection_get(
+        u'http://xml.zeit.de/politik/deutschland/2013-07/'
+        'wahlbeobachter-portraets/'
+        'wahlbeobachter-portraets').xpath('//comment')[0]
 
 
 @fixture
 def xml_local_comment(agatho):
-    return agatho.collection_get(u'http://localhost:8888/agatho/thread/artikel/03').xpath('//comment')[0]
+    return agatho.collection_get(
+        u'http://localhost:8888/agatho/'
+        'thread/artikel/03').xpath('//comment')[0]
 
 
 #def test_agatho_collection_get(agatho):
@@ -36,13 +42,16 @@ def xml_local_comment(agatho):
 #    assert thread_as_json['comment_count'] == 41
 
 
-def test_dict_with_article_paths_and_comment_counts_should_be_created(testserver):
+def test_dict_with_article_paths_and_comment_counts_should_be_created(
+        testserver):
     from zeit.frontend.comments import comments_per_unique_id
-    # if request on node-comment-statistics fails nevertheless a dict should be return value:
+    # if request on node-comment-statistics fails
+    # nevertheless a dict should be return value:
     stats_path = 'data/node-comment-statistics.xmlxxx'
     comment_count_dict = comments_per_unique_id(stats_path)
     assert type(comment_count_dict) is dict
-    # for test article path on existing node-comment-statistics we expect the correct commentcount:
+    # for test article path on existing node-comment-statistics
+    # we expect the correct commentcount:
     stats_path = 'data/node-comment-statistics.xml'
     comment_count_dict = comments_per_unique_id(stats_path)
     comments_in_article = comment_count_dict['/centerpage/article_image_asset']
