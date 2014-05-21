@@ -6,11 +6,17 @@ Change log for zeit.frontend
 
 - make responsive fallback image more adaptive
 
+- cards.js: use stopImmediatePropagation instead of stopPropagation
+
+- change background video mechanism (load of video/ fallback)
+
 - userid > 0 for authentification
 
 - Slightly darken body background
 
 - Improve template selection logic
+
+- Gracefully handle missing community backend
 
 
 0.5.2 (2014-05-14)
@@ -23,9 +29,6 @@ Change log for zeit.frontend
 
 0.5.1 (2014-05-13)
 ------------------
-
-
-- change background video mechanism (load of video/ fallback)
 
 - Fix compass linear-gradient bug
 
