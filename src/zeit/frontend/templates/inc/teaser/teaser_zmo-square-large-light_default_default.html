@@ -26,11 +26,11 @@ Available attributes:
         </span>
         <h2 class="cp__lead__title">
             <a href="{{teaser | create_url}}">
-                {{teaser.teaserTitle}}
+                {{teaser.teaserTitle | hide_none}}
             </a>
         </h2>
         <span class="cp__lead__subtitle">
-            {{teaser.teaserText}}
+            {{teaser.teaserText | hide_none}}
         </span>
     </header>
 </div>
