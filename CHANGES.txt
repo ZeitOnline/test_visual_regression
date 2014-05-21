@@ -6,15 +6,27 @@ Change log for zeit.frontend
 
 - rework testing to make it more performant and PEP-8 conform
 
+- make responsive fallback image more adaptive
+
+- adapt images in informative teaser, to get correct ratio
+
+- cards.js: use stopImmediatePropagation instead of stopPropagation
+
 - change background video mechanism (load of video/ fallback)
 
 - userid > 0 for authentification
 
 - Slightly darken body background
 
+- Hide mtb title and subtitle tag if non-existent
+
+- Hide various teaser title contents if non-existent
+
 - Improve template selection logic
 
 - Gracefully handle missing community backend
+
+- Improve linear-gradient mixin
 
 
 0.5.2 (2014-05-14)
