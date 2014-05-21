@@ -7,8 +7,6 @@ def test_ad_keyword_diuqilon(selenium_driver, testserver):
     diuqilon = driver.execute_script("return window.diuqilon")
     height = driver.execute_script("return screen.height")
     width = driver.execute_script("return window.innerWidth")
-    print height
-    print width
     # ipad
     assert diuqilon == ',diuqilon'
     driver.set_window_size(1024, 768)
