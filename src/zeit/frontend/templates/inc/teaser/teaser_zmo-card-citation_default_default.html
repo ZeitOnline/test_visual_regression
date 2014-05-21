@@ -15,7 +15,7 @@ Available attributes:
         <h2 class="card__title">{{teaser.teaserSupertitle}}</h2>
         <div class="card__text">{{teaser.teaserText}}</div>
         <div class="card__author">{{teaser.teaserTitle}}</div>
-        <a href="{{teaser.uniqueId | translate_url}}" class="card__button">Lesen</a>
+        <a href="{{teaser | create_url}}" class="card__button">Lesen</a>
     </div>
 </div>
 {% endblock card_deck %}
