@@ -16,6 +16,8 @@ Change log for zeit.frontend
 
 - userid > 0 for authentification
 
+- Bust caches on version increments by appending hashes
+
 - Slightly darken body background
 
 - Hide mtb title and subtitle tag if non-existent
