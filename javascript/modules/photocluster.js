@@ -26,7 +26,7 @@ define(['require', 'jquery'], function(require, $) {
             // To use Packery as a jQuery plugin with RequireJS, you’ll need to run jQuery bridget.
             // @see http://packery.metafizzy.co/appendix.html#requirejs
             require( [
-                'libs/packery.pkgd',
+                'libs/packery.pkgd.min',
                 'jquery-bridget/jquery.bridget'
             ], function( Packery, bridget ) {
                 // make Packery a jQuery plugin

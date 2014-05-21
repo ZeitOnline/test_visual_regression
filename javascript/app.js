@@ -9,7 +9,7 @@ require.config({
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
 		"bxSlider": "libs/jquery.bxslider",
-		"jquery-bridget/jquery.bridget": "libs/packery.pkgd"
+		"jquery-bridget/jquery.bridget": "libs/packery.pkgd.min"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
