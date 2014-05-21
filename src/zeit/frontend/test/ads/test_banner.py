@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from mock import Mock
-from zeit.frontend import view  # NOQA
 from zeit.frontend import view_article
 from zeit.frontend.banner import Place
 from zope.testbrowser.browser import Browser
