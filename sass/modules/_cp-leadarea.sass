@@ -23,6 +23,7 @@ $cp__lead__wrap-width: 65%
 		min-width: 100%
 		min-height: 100%
 		max-width: $cp__lead-full-video-max-width
+		display: none
 	img
 		position: absolute
 		top: 0
@@ -32,14 +33,14 @@ $cp__lead__wrap-width: 65%
 		min-height: 100%
 		width: 100%
 	.video--fallback
+		display: inline
 		@media only screen and (orientation : portrait)
-			left: -100%
-			min-width: 300%
-		+respond-min($break-0)
-			@media only screen and (orientation : portrait)
-				left: -50%
-				min-width: 200%
-
+			left: -50%
+			min-width: 200%
+		+respond-max($break-1)
+			@media only screen
+				left: -100%
+				min-width: 300%
 
 .cp__lead__title
 	@extend %cp__link--light

@@ -28,16 +28,16 @@
 {%- endmacro %}
 
 {% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
-    {% if withlink -%}<a href="{{teaser.uniqueId | translate_url}}">{%- endif %}
+    {% if withlink -%}<a href="{{teaser | create_url}}">{%- endif %}
     <div class="{{ additional_css_class | default('teaser') }}__kicker">
-        {% if teaser.teaserSupertitle is not none %}
+        {% if teaser.teaserSupertitle %}
             {{teaser.teaserSupertitle | hide_none}}
         {% else %}
             {{teaser.supertitle | hide_none }}
         {% endif %}
     </div>
     <div class="{{ additional_css_class | default('teaser') }}__title">
-        {{teaser.teaserTitle}}
+        {{teaser.teaserTitle | hide_none}}
     </div>
     {% if withlink -%}</a>{%- endif %}
 {%- endmacro %}
@@ -46,16 +46,16 @@
     <div class="card__slider">
         <div class="card__slide js-slide-card">
             <div class="card__sharing-icons">
-                <a href="http://twitter.com/home?status={{teaser.uniqueId | translate_url | e}}"
+                <a href="http://twitter.com/home?status={{teaser | create_url | e}}"
                     class="card__sharing-icon js-stop-propagation icon-twitter" target="_blank" title="Auf Twitter teilen"></a>
 
-                <a href="https://plus.google.com/share?url={{teaser.uniqueId | translate_url | e}}"
+                <a href="https://plus.google.com/share?url={{teaser | create_url | e}}"
                     class="card__sharing-icon js-stop-propagation icon-google" target="_blank" title="Auf Google+ teilen"></a>
 
-                <a href="http://www.facebook.com/sharer/sharer.php?u={{teaser.uniqueId | translate_url | e}}"
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{teaser | create_url | e}}"
                     class="card__sharing-icon js-stop-propagation icon-facebook" target="_blank" title="Auf Facebook teilen"></a>
 
-                <a href="mailto:?subject={{teaser.teaserTitle}}&amp;body={{teaser.uniqueId | translate_url | e}}" class="card__sharing-icon js-stop-propagation icon-mail" title="Per Mail senden"></a>
+                <a href="mailto:?subject={{teaser.teaserTitle}}&amp;body={{teaser | create_url | e}}" class="card__sharing-icon js-stop-propagation icon-mail" title="Per Mail senden"></a>
             </div>
         </div>
     </div>

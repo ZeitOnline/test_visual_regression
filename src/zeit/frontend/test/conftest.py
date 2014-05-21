@@ -140,6 +140,28 @@ def testserver(application, request):
     return server
 
 
+@pytest.fixture(scope='session', params=[503])
+def http_testserver(request):
+    from pyramid.config import Configurator
+    from pyramid.response import Response
+
+    def hello_world(r):
+        resp = Response(status=request.param)
+        return resp
+
+    config = Configurator()
+    config.add_route('any', '/*url')
+    config.add_view(hello_world, route_name='any')
+    app = config.make_wsgi_app()
+
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 8889  # XXX Why not use the default (random) port?
+    server.wsgi_app = app
+    server.setUp()
+    request.addfinalizer(server.tearDown)
+    return server
+
+
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
     if request.param == 'firefox':

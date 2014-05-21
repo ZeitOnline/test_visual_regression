@@ -81,6 +81,26 @@ def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
         'templates/inc/teaser/teaser_default_default_default.html']
     result = most_sufficient_teaser_tpl('lead', 'article', 'video')
     assert result == should
+    should = [
+        'templates/inc/teaser/teaser_lead_article_video.html',
+        'templates/inc/teaser/teaser_lead_article_gallery.html',
+        'templates/inc/teaser/teaser_lead_article_imagegroup.html',
+        'templates/inc/teaser/teaser_lead_article_default.html',
+        'templates/inc/teaser/teaser_lead_default_video.html',
+        'templates/inc/teaser/teaser_lead_default_gallery.html',
+        'templates/inc/teaser/teaser_lead_default_imagegroup.html',
+        'templates/inc/teaser/teaser_lead_default_default.html',
+        'templates/inc/teaser/teaser_default_article_video.html',
+        'templates/inc/teaser/teaser_default_article_gallery.html',
+        'templates/inc/teaser/teaser_default_article_imagegroup.html',
+        'templates/inc/teaser/teaser_default_article_default.html',
+        'templates/inc/teaser/teaser_default_default_video.html',
+        'templates/inc/teaser/teaser_default_default_gallery.html',
+        'templates/inc/teaser/teaser_default_default_imagegroup.html',
+        'templates/inc/teaser/teaser_default_default_default.html']
+    assets = ('video', 'gallery', 'imagegroup')
+    result = most_sufficient_teaser_tpl('lead', 'article', assets)
+    assert result == should
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(testserver):
@@ -346,7 +366,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
-        h1 = teaser.find_element_by_tag_name("h1")
+        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
         subtitle = teaser.find_element_by_tag_name("span")
         source1 = \
@@ -369,7 +389,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'video--fallback' == unicode(img.get_attribute("class"))
         assert 'cp__lead-full__title__wrap cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
-        assert 'cp__lead__title' == unicode(h1.get_attribute("class"))
+        assert 'cp__lead__title' == unicode(h2.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
 
         # content
@@ -378,7 +398,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'Es leben die Skispringenden Sportredakteure!' == \
             unicode(subtitle.text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert u'und der Titel dazu' == unicode(h1.text)
+        assert u'und der Titel dazu' == unicode(h2.text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
@@ -398,7 +418,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         img_wrap = teaser.find_elements_by_class_name("cp__lead-full--dark")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_elements_by_tag_name("header")
-        h1 = teaser.find_element_by_tag_name("h1")
+        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
         subtitle = teaser.find_element_by_tag_name("span")
         image_pattern = \
@@ -411,7 +431,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert len(title_wrap) != 0
 
         assert re.search(image_pattern, img.get_attribute("src"))
-        assert unicode(h1.text) == u'Article Image Asset Titel'
+        assert unicode(h2.text) == u'Article Image Asset Titel'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\

@@ -17,17 +17,43 @@
   min-width: $px
   min-width: rem($px)
 
-=fake-box-shadow-inset($color: $black, $orientation: 0deg, $length: 400px)
+// Generate linear gradient, expects new W3C syntax for CSS gradients ([to bottom | 0deg = to top] vs. [top | 0deg = left])
+// but handles old syntax for directions too ("top")
+// Fixes bug in Compass 0.12.6
+// Usage:
+//   +linear-gradient(top, #f00, transparent)
+//   +linear-gradient(to bottom right, #f00 0%, #ff0 50%, #fff 100%)
+//   +linear-gradient(45deg, red, blue, yellow, white)
+=linear-gradient($direction, $colors...)
+  $directions: fix-gradient-direction($direction)
+  $image: linear-gradient(nth($directions, 2), $colors...)
+  @if $experimental-support-for-svg and prefixed(-svg, $image)
+    background-image: -svg($image)
+    background-size: 100%
+  @if $support-for-original-webkit-gradients and prefixed(-owg, $image)
+    background-image: -owg($image)
+  @if $experimental-support-for-webkit and prefixed(-webkit, $image)
+    background-image: -webkit($image)
+  @if $experimental-support-for-mozilla and prefixed(-moz, $image)
+    background-image: -moz($image)
+  @if $experimental-support-for-opera and prefixed(-o, $image)
+    background-image: -o($image)
+  background-image: linear-gradient(nth($directions, 1), $colors...)
+
+=fake-box-shadow-inset($color: $black, $direction: to top, $length: 60%)
   background-color: $color
+  position: relative
   &:after
     content: ''
     position: absolute
     z-index: 1
     height: 100%
-    width: 200%
-    left: -50%
+    width: 100%
+    left: 0px
     top: 0px
-    +background-image(linear-gradient($orientation, rgba($color, 0.7) 0%, rgba($color, 0) $length))
+    +linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length)
+    // reenable as soon as compass bug is fixed
+    // +background-image(linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length))
 
 =no-user-select
   -webkit-touch-callout: none

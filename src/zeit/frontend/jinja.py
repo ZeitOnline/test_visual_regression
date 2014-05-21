@@ -13,6 +13,7 @@ import re
 import requests
 import urlparse
 import zeit.cms.interfaces
+import zeit.content.link.interfaces
 import zeit.frontend.centerpage
 import zope.component
 
@@ -31,6 +32,14 @@ def translate_url(context, url):
         return url
 
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+
+
+@jinja2.contextfilter
+def create_url(context, obj):
+    if zeit.content.link.interfaces.ILink.providedBy(obj):
+        return obj.url
+    else:
+        return translate_url(context, obj.uniqueId)
 
 
 def format_date(obj, type='short'):
@@ -172,10 +181,10 @@ def most_sufficient_teaser_tpl(block_layout,
                                prefix='templates/inc/teaser/teaser_',
                                suffix='.html',
                                separator='_'):
-
     types = (block_layout, content_type, asset)
-    defaults = ('default', 'default', 'default')
-    zipped = zip(types, defaults)
+    default = ('default',)
+    iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
+    zipped = (t + default if iterable(t) else (t,) + default for t in types)
 
     combinations = [t for t in itertools.product(*zipped)]
     func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)

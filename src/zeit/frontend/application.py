@@ -6,6 +6,7 @@ from zeit.frontend.article import IShortformArticle
 from zeit.frontend.gallery import IGallery
 from zeit.frontend.gallery import IProductGallery
 from zeit.magazin.interfaces import IArticleTemplateSettings
+import base64
 import logging
 import os.path
 import pkg_resources
@@ -58,6 +59,9 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
+        pkg = pkg_resources.get_distribution('zeit.frontend')
+        self.settings['version_hash'] = base64.b16encode(pkg.version).lower()
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
@@ -85,10 +89,14 @@ class Application(object):
                 request.application_url, request.registry.settings.get(
                     'asset_prefix', ''))
             if path == '/':
-                return request.route_url('home', **kw)
-            if ':' not in path:
-                path = 'zeit.frontend:' + path
-            return request.static_url(path, **kw)
+                url = request.route_url('home', **kw)
+            else:
+                prefix = '' if ':' in path else 'zeit.frontend:'
+                url = request.static_url(prefix + path, **kw)
+            if url.rsplit('.', 1)[-1] in ('css', 'js'):
+                url += '?' + request.registry.settings.get('version_hash', '')
+            return url
+
         config.add_request_method(asset_url)
 
         config.set_root_factory(self.get_repository)
@@ -98,7 +106,8 @@ class Application(object):
         from .security import CommunityAuthenticationPolicy
         import pyramid_beaker
         config.include("pyramid_beaker")
-        session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
+        session_factory = pyramid_beaker.session_factory_from_settings(
+            self.settings)
         config.set_session_factory(session_factory)
         config.set_authentication_policy(CommunityAuthenticationPolicy())
         config.set_authorization_policy(ACLAuthorizationPolicy())
@@ -141,13 +150,20 @@ class Application(object):
         # XXX Use scanning to register filters instead of listing them here
         # again.
         jinja.filters['block_type'] = zeit.frontend.block.block_type
+        for name in [
+                'auto_select_asset', 'get_all_assets',
+                ]:
+            jinja.filters[name] = getattr(zeit.frontend.centerpage, name)
+
         jinja.filters['auto_select_asset'] = (
             zeit.frontend.centerpage.auto_select_asset)
         for name in [
                 'format_date', 'format_date_ago',
                 'replace_list_seperator', 'translate_url',
                 'default_image_url', 'get_image_metadata',
-                'obj_debug', 'substring_from', 'hide_none']:
+                'obj_debug', 'substring_from', 'hide_none',
+                'create_url',
+                ]:
             jinja.filters[name] = getattr(zeit.frontend.jinja, name)
 
         return jinja

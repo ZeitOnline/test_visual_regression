@@ -1,4 +1,4 @@
-/* global console, define, _ */
+/* global console, define, Modernizr, _ */
 define(['jquery', 'underscore', 'modules/tabs'], function() {
 
     var $socialServices = $('#js-social-services'),
@@ -7,6 +7,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         $commentsTabsHead = $('#js-comments-tabs-head'),
         $commentsBody = $('#js-comments-body'),
         $commentsActiveList = $('#js-comments-body .tabs__content.is-active .comments__list'),
+        DOM_VK_ESCAPE = 27,
         currentOffset = 0,
         slideDuration = 300,
         scrollDuration = 1000, // in sync with CSS animation speed
@@ -185,7 +186,22 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
      * Toggle comments
      */
     var toggleComments = function() {
-        $(document.body).toggleClass('show-comments');
+        var $body = $(document.body);
+
+        $body.toggleClass('show-comments');
+
+        // attach event handler function on page, but only for devices without touch support
+        // we can not check reliably for real mouse events here, because e.g. Mobile Safari emulates mouse events
+        if (! Modernizr.touch) {
+            // and only if comments are shown
+            if ($body.hasClass('show-comments')) {
+                $page.on('mousedown', hideComments);
+                $(window).on('keydown', escapeComments);
+            } else {
+                $page.off('mousedown', hideComments);
+                $(window).off('keydown', escapeComments);
+            }
+        }
     };
 
     /**
@@ -219,6 +235,31 @@ define(['jquery', 'underscore', 'modules/tabs'], function() {
         initLayout();
 
     }, 250); // Maximum run of once per 250 milliseconds
+
+    /**
+     * Close comments on click outside the comments section
+     */
+    var hideComments = function(e) {
+        var $target = $(e.target),
+            triggerClick = $target.closest('.js-comments-trigger').length,
+            commentsClick = $target.closest('#js-comments').length;
+
+        if (!triggerClick && !commentsClick) {
+            toggleComments();
+        }
+    };
+
+    /**
+     * Close comments on <ESCAPE>
+     */
+    var escapeComments = function(e) {
+        // do nothing if there is another key involved
+        if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return; }
+
+        if (e.keyCode === DOM_VK_ESCAPE) {
+            toggleComments();
+        }
+    };
 
     /**
      * Scroll comments list
