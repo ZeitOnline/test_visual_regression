@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def test_background_video_html(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/06' % testserver.url)

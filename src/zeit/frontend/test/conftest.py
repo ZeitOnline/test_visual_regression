@@ -1,14 +1,15 @@
+# -*- coding: utf-8 -*-
+from os import path
+from os.path import abspath, dirname, join, sep
 from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
-from os import path
-from os.path import abspath, dirname, join, sep
-import pytest
-import pyramid.config
-import zeit.frontend.application
 from zeit import frontend
+import pyramid.config
+import pytest
+import zeit.frontend.application
 
 
 def test_asset_path(*parts):
