@@ -151,6 +151,11 @@
         {{lama.webtrekk_tracking(view,request)}}
         {{lama.click_tracking(view.banner_channel)}}
 
+        <script>
+            var require = {
+                urlArgs: "v={{request.registry.settings.version_hash | hide_none}}"
+            };
+        </script>
         <script data-main="{{request.asset_url('js/main')}}" src="{{request.asset_url('js/libs/require.js')}}"></script>
         <script type="text/javascript">
             var sas_pageid = '32375/445608',

@@ -174,8 +174,8 @@
                 var next = /^bx.+next/;
                 var prev = /^bx.+prev/;
                 if( next.exec(class_name) || prev.exec(class_name) ){
-                    //TODO: integrate desired counter - current mode names = "bgSlider" : "biga" (as)
-                    //window.clickCount.all('biga');
+                    window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
+                    window.clickCount.ga('hp.zm.slidegallery.showslide.');
                 }
             });
 

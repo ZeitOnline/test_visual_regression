@@ -8,16 +8,21 @@
                     var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : ''
                     return( channel );
                 },
+                addPath: function( mode ){
+                    return( mode + '{{request.path_info}}' );
+                },
                 webtrekk: function ( mode ) {
                     //webtrekk
                     if( typeof mode == 'undefined' ) return;
                     if( window.wt !== undefined ) {
+                        mode = this.addPath( mode );
                         if( window.wt.sendinfo !== undefined ) window.wt.sendinfo( {linkId: mode} );
                     }
                 },
                 ga: function( mode ) {
                     //google analytics
                     if( window._gaq !== undefined ){
+                        mode = this.addPath( mode );
                         _gaq.push( ['_trackEvent', mode, "click"] );
                     }
                 },
@@ -40,6 +45,7 @@
                 },
                 all: function( mode ){
                     //start all tracking functions 
+                    
                     if( mode ){
                         this.webtrekk( mode );
                         this.ga( mode );

@@ -17,53 +17,28 @@
   min-width: $px
   min-width: rem($px)
 
-// Generate 2 color gradient, expects new W3C syntax for CSS gradients ([to bottom | 0deg = to top] vs. [top | 0deg = left])
+// Generate linear gradient, expects new W3C syntax for CSS gradients ([to bottom | 0deg = to top] vs. [top | 0deg = left])
 // but handles old syntax for directions too ("top")
 // Fixes bug in Compass 0.12.6
 // Usage:
-// - +simple-gradient(top, #f00, transparent)
-// - +simple-gradient(to bottom right, #f00 0%, #fff 50%)
-// - +simple-gradient(45deg, red, blue)
-=simple-gradient($direction-or-angle, $from, $to)
-  $start-color: $from
-  $start-point: 0%
-  $end-color: $to
-  $end-point: 100%
-
-  @if type-of($from) == list
-    $start-color: nth($from, 1)
-    $start-point: nth($from, 2)
-
-  @if type-of($to) == list
-    $end-color: nth($to, 1)
-    $end-point: nth($to, 2)
-
-  $direction: compact()
-  $opposite-direction: compact()
-
-  @if nth($direction-or-angle, 1) == 'to'
-    $direction: $direction-or-angle
-    $opposite-direction: opposite-position(nth($direction-or-angle, 2))
-    @if length($direction-or-angle) > 2
-      $opposite-direction: append($opposite-direction, opposite-position(nth($direction-or-angle, 3)), space)
-  @else if unit($direction-or-angle) == deg // slightly overengineered but works for all but old-webkit-gradient
-    $direction: $direction-or-angle
-    $opposite-direction: abs($direction-or-angle - 450) % 360
-  @else
-    $direction: append($direction, to, space)
-    @each $pos in $direction-or-angle
-      $direction: append($direction, opposite-position($pos), space)
-    $opposite-direction: $direction-or-angle
-
-  @if type-of($direction-or-angle) != number and length($opposite-direction) == 1
-    @if index(left right, $opposite-direction)
-      background-image: -webkit-gradient(linear, $opposite-direction top, opposite-position($opposite-direction) top, color-stop($start-point, $start-color), color-stop($end-point, $end-color))
-    @else
-      background-image: -webkit-gradient(linear, left $opposite-direction, left opposite-position($opposite-direction), color-stop($start-point, $start-color), color-stop($end-point, $end-color))
-  background-image: -webkit-linear-gradient($opposite-direction, $start-color $start-point, $end-color $end-point)
-  background-image:    -moz-linear-gradient($opposite-direction, $start-color $start-point, $end-color $end-point)
-  background-image:      -o-linear-gradient($opposite-direction, $start-color $start-point, $end-color $end-point)
-  background-image:         linear-gradient($direction, $start-color $start-point, $end-color $end-point)
+//   +linear-gradient(top, #f00, transparent)
+//   +linear-gradient(to bottom right, #f00 0%, #ff0 50%, #fff 100%)
+//   +linear-gradient(45deg, red, blue, yellow, white)
+=linear-gradient($direction, $colors...)
+  $directions: fix-gradient-direction($direction)
+  $image: linear-gradient(nth($directions, 2), $colors...)
+  @if $experimental-support-for-svg and prefixed(-svg, $image)
+    background-image: -svg($image)
+    background-size: 100%
+  @if $support-for-original-webkit-gradients and prefixed(-owg, $image)
+    background-image: -owg($image)
+  @if $experimental-support-for-webkit and prefixed(-webkit, $image)
+    background-image: -webkit($image)
+  @if $experimental-support-for-mozilla and prefixed(-moz, $image)
+    background-image: -moz($image)
+  @if $experimental-support-for-opera and prefixed(-o, $image)
+    background-image: -o($image)
+  background-image: linear-gradient(nth($directions, 1), $colors...)
 
 =fake-box-shadow-inset($color: $black, $direction: to top, $length: 60%)
   background-color: $color
@@ -76,7 +51,7 @@
     width: 100%
     left: 0px
     top: 0px
-    +simple-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length)
+    +linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length)
     // reenable as soon as compass bug is fixed
     // +background-image(linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length))
 
