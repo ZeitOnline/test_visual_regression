@@ -128,7 +128,6 @@ class Centerpage(zeit.frontend.view.Base):
             log.error('no meta_robots present')
         return meta_robots
 
-
     @property
     def area_lead(self):
         teaser_list = self.context['lead'].values()

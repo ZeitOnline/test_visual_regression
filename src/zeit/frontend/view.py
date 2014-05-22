@@ -1,5 +1,4 @@
 from babel.dates import get_timezone
-from datetime import date
 from pyramid.response import Response
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
@@ -53,15 +52,15 @@ class Base(object):
     def banner_channel(self):
         channel = ''
         if self.ressort:
-            myressort = self.ressort.replace('zeit-magazin','zeitmz')
+            myressort = self.ressort.replace('zeit-magazin', 'zeitmz')
             # TODO: end discrepance between testing and live ressports!
-            myressort = myressort.replace('lebensart','zeitmz')
+            myressort = myressort.replace('lebensart', 'zeitmz')
             channel += myressort
         if self.sub_ressort:
             channel += "/" + self.sub_ressort.replace('-', 'und', 1)
         if self.type:
             # TODO: zone type gallery after launch
-            mytype = self.type.replace('gallery','article')
+            mytype = self.type.replace('gallery', 'article')
             channel += "/" + mytype
         return channel
 
@@ -71,9 +70,14 @@ class Base(object):
         except IndexError:
             return None
 
+
 class Content(Base):
     _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-                   'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
+                   'zmo': (
+                       'ZEIT Magazin',
+                       'http://www.zeit.de/zeit-magazin/index',
+                       'myid_zmo',
+                   ),
                    'leben': (
                        'Leben',
                        'http://www.zeit.de/zeit-magazin/leben/index',
