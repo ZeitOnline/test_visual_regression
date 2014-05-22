@@ -4,8 +4,6 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
-- introduce clear class to clear floating
-
 - small css cleanup
 
 - rework testing to make it more performant and PEP-8 conform
