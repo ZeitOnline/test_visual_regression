@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from zeit.cms.interfaces import ICMSContent
 from zeit.wysiwyg.interfaces import IHTMLContent
 
