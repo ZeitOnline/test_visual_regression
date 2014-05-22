@@ -1,4 +1,4 @@
-/* global console, alert, Modernizr */
+/* global console */
 (function( $ ){
 
 	/**
