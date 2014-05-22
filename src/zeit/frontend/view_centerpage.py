@@ -10,6 +10,7 @@ import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
 import zeit.frontend.view
+import zeit.seo
 
 log = logging.getLogger(__name__)
 
@@ -66,9 +67,19 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagetitle(self):
-        # ToDo(T.B.) should be, doesn't work
-        # return self.context.html-meta-title
-        return 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        pagetitle = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        try:
+            if self.context.title:
+                pagetitle = self.context.title
+        except AttributeError:
+            log.error('no title present')
+        try:
+            if seo.html_title:
+                pagetitle = seo.html_title
+        except AttributeError:
+            log.error('no seo.html_title present')
+        return pagetitle
 
     @property
     def pagetitle_in_body(self):
@@ -76,26 +87,47 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagedescription(self):
-        # ToDo(T.B.) should be self.context.html-meta-title, doesn't work
-        # return self.context.html-meta-title
-        output = 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
-        return output
-
-    @property
-    def rankedTags(self):
-        # ToDo(T.B.) keywords are empty
-        return self.context.keywords
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        pagedescription = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        try:
+            if self.context.title:
+                pagedescription = self.context.subtitle
+        except AttributeError:
+            log.error('no subtitle present')
+        try:
+            if seo.html_title:
+                pagedescription = seo.html_description
+        except AttributeError:
+            log.error('no no seo.html_description present')
+        return pagedescription
 
     @property
     def rankedTagsList(self):
-        keyword_list = ''
-        if self.rankedTags:
-            # ToDo(T.B.) keywords are empty
-            for keyword in self.context.keywords:
-                keyword_list += keyword.label + ';'
-            return keyword_list[:-1]
-        else:
-            return 'ZEIT ONLINE, ZEIT MAGAZIN'
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        pagekeywords = 'ZEIT, DIE ZEIT, ZEIT MAGAZIN, ZEIT ONLINE, Essen, Trinken, Leben, Mode, Design'
+        try:
+            if self.context.keywords:
+                pagekeywords = self.context.keywords
+        except AttributeError:
+            log.error('no keywords present')
+        try:
+            if seo.rankedTags:
+                pagekeywords = seo.rankedTags
+        except AttributeError:
+            log.error('no ranked tags present')
+        return pagekeywords
+
+    @property
+    def metaRobots(self):
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        meta_robots = 'index,follow,noodp,noydir,noarchive'
+        try:
+            if seo.meta_robots:
+                meta_robots = seo.meta_robots
+        except AttributeError:
+            log.error('no meta_robots present')
+        return meta_robots
+
 
     @property
     def area_lead(self):

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/test-cp/index</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fb0b5297-05c2-449f-b566-6605bbed59c8}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">erde</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+  <attribute>
+    <rankedTags ns="http://namespaces.zeit.de/CMS/tagging">
+      <rankedTags>
+        <tag>Google Earth</tag>
+        <tag>Googleplus</tag>
+        <tag>Google Chrome</tag>
+        <tag>Google Buzz</tag>
+      </rankedTags>
+    </rankedTags>
+  </attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-05-19T15:00:04.119582+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">My Test SEO - ZEITmagazin ONLINE ist die emotionale Seite von ZEIT ONLINE. Hier finden Sie tagesaktuellen Magazinjournalismus zu Mode &amp; Design, Essen &amp; Trinken und Leben.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-05-15T15:58:28.789783+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">befb08cb-5610-4ed7-bf01-c3480b7a9819 da901302-f600-401d-8702-ff5208f76895 3dcdf653-9ea9-44b0-9fd1-bad033187448 f4d12323-b90a-4119-8824-107c4859e5b8</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">My Test SEO - ZEITmagazin ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-robots">myrobot</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled">8b6494e0-03b7-4d1d-aff3-7f4f9251f27e</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-05-19T15:00:04Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">75945</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Mon, 19 May 2014 15:00:04 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"362c6e-128a9-4f9c204ab84ce"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
