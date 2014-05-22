@@ -27,21 +27,22 @@ def test_breadcumb_should_produce_expected_data():
         'zmo': (
             'ZEIT Magazin',
             'http://www.zeit.de/zeit-magazin/index',
-            'myid_zmo'),
+            'myid_zmo'
+        ),
         'leben': (
             'Leben',
             'http://www.zeit.de/zeit-magazin/leben/index',
-            'myid2',
+            'myid2'
         ),
         'mode-design': (
             'Mode & Design',
             'http://www.zeit.de/zeit-magazin/mode-design/index',
-            'myid3',
+            'myid3'
         ),
         'essen-trinken': (
             'Essen & Trinken',
             'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-            'myid4',
+            'myid4'
         )
     }
 
@@ -77,17 +78,17 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
         'leben': (
             'Leben',
             'http://www.zeit.de/zeit-magazin/leben/index',
-            'myid2',
+            'myid2'
         ),
         'mode-design': (
             'Mode & Design',
             'http://www.zeit.de/zeit-magazin/mode-design/index',
-            'myid3',
+            'myid3'
         ),
         'essen-trinken': (
             'Essen & Trinken',
             'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-            'myid4',
+            'myid4'
         )
     }
 

@@ -101,16 +101,14 @@ def test_article_has_correct_page_title(testserver):
         ' zweite Chance verdient' in browser.contents
 
 
-def test_article_without_supertitle_has_correct_page_title(
-        testserver):
+def test_article_without_supertitle_has_correct_page_title(testserver):
     browser = Browser('%s/artikel/03a' % testserver.url)
     assert '<title>'\
         'Der Chianti hat eine'\
         ' zweite Chance verdient' in browser.contents
 
 
-def test_article_has_correct_page_meta_description(
-        testserver):
+def test_article_has_correct_page_meta_description(testserver):
     browser = Browser('%s/artikel/03' % testserver.url)
     assert '<meta name="description" '\
         'content="Erst Heilsbringer, dann Massenware:'\
