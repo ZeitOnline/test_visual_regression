@@ -1,5 +1,6 @@
 //styles for lead area within cp
 $cp__lead-full-height: em(550px)
+$cp__lead-extended-height: em(826px)
 $cp__lead-full-video-max-width: em(1000px)
 $cp__lead__wrap-width: 65%
 
@@ -81,7 +82,6 @@ $cp__lead__wrap-width: 65%
 .cp__lead-leader__wrap
 	position: relative
 	overflow: hidden
-	height: $cp__lead-full-height
 	margin-top: $small
 	margin-bottom: $small
 	background-color: $black
@@ -90,6 +90,12 @@ $cp__lead__wrap-width: 65%
 	+respond-min($break-2)
 		margin-top: $compact
 		margin-bottom: $compact
+
+.cp__lead-leader__wrap--square
+	height: $cp__lead-full-height
+
+.cp__lead-leader__wrap--upright
+	height: $cp__lead-extended-height
 
 .cp__lead-leader__image--dark
 	@extend %cp__lead--dark
