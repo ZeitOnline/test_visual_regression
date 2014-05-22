@@ -2,7 +2,7 @@
 (function($){
 
 	/**
-	 * generate popup 
+	 * generate popup
 	 */
 	$.fn.enablePopups = function() {
 

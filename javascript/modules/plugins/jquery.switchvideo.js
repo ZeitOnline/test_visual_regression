@@ -12,7 +12,7 @@
 			 * @param {Object} that
 			 */
 			buildPlayer: function( that ){
-				
+
 				if( el.id ){
 					var playerObj = '<div class="video__wrapper" data-video='+el.id+'><div style="display:none"></div>' +
 					'<object id="myExperience' +el.id+ '" class="BrightcoveExperience">' +
@@ -28,7 +28,7 @@
 					'<param name="@videoPlayer" value="' +el.id+ '" />' +
 					'<param name="autoStart" value="true" />' +
 					'</object></div>';
-		
+
 					var parent = $( that ).parent();
 					parent.empty();
 					parent.css({ 'width': '100%', 'float': 'none' });
