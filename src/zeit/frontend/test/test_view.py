@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
+from pyramid.httpexceptions import HTTPNotFound
 from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery, Portraitbox
 from zeit.frontend import view
 from zeit.frontend import view_article, view_centerpage
 from zeit.frontend.block import InlineGalleryImage
 from zope.testbrowser.browser import Browser
-from pyramid.httpexceptions import HTTPNotFound
 import mock
 import pytest
 import requests
@@ -17,30 +18,41 @@ def test_breadcumb_should_produce_expected_data():
     context.sub_ressort = 'mode-design'
     context.title = 'This is my title'
 
-    view_article._navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
-               'leben': (
-                   'Leben',
-                   'http://www.zeit.de/zeit-magazin/leben/index',
-                   'myid2',
-               ),
-               'mode-design': (
-                   'Mode & Design',
-                   'http://www.zeit.de/zeit-magazin/mode-design/index',
-                   'myid3',
-               ),
-               'essen-trinken': (
-                   'Essen & Trinken',
-                   'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-                   'myid4',
-               ), }
+    view_article._navigation = {
+        'start': (
+            'Start',
+            'http://www.zeit.de/index',
+            'myid1'
+        ),
+        'zmo': (
+            'ZEIT Magazin',
+            'http://www.zeit.de/zeit-magazin/index',
+            'myid_zmo'
+        ),
+        'leben': (
+            'Leben',
+            'http://www.zeit.de/zeit-magazin/leben/index',
+            'myid2'
+        ),
+        'mode-design': (
+            'Mode & Design',
+            'http://www.zeit.de/zeit-magazin/mode-design/index',
+            'myid3'
+        ),
+        'essen-trinken': (
+            'Essen & Trinken',
+            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+            'myid4'
+        )
+    }
 
     article = view_article.Article(context, mock.Mock())
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
         ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
-        ('Mode & Design', 'http://www.zeit.de/zeit-magazin/mode-design/index', 'myid3'),
+        ('Mode & Design', 'http://www.zeit.de/zeit-magazin/mode-design/index',
+            'myid3'),
         ('This is my title', ''), ]
 
     assert article.breadcrumb == l
@@ -52,23 +64,33 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context.sub_ressort = 'lebensartx'
     context.title = 'This is my title'
 
-    view_article._navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-               'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
-               'leben': (
-                   'Leben',
-                   'http://www.zeit.de/zeit-magazin/leben/index',
-                   'myid2',
-               ),
-               'mode-design': (
-                   'Mode & Design',
-                   'http://www.zeit.de/zeit-magazin/mode-design/index',
-                   'myid3',
-               ),
-               'essen-trinken': (
-                   'Essen & Trinken',
-                   'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-                   'myid4',
-               ), }
+    view_article._navigation = {
+        'start': (
+            'Start',
+            'http://www.zeit.de/index',
+            'myid1'
+        ),
+        'zmo': (
+            'ZEIT Magazin',
+            'http://www.zeit.de/zeit-magazin/index',
+            'myid_zmo'
+        ),
+        'leben': (
+            'Leben',
+            'http://www.zeit.de/zeit-magazin/leben/index',
+            'myid2'
+        ),
+        'mode-design': (
+            'Mode & Design',
+            'http://www.zeit.de/zeit-magazin/mode-design/index',
+            'myid3'
+        ),
+        'essen-trinken': (
+            'Essen & Trinken',
+            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+            'myid4'
+        )
+    }
 
     article = view_article.Article(context, mock.Mock())
 
@@ -109,10 +131,13 @@ def test_header_img_should_be_first_image_of_content_blocks(application):
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
 
+
 def test_article_should_have_author_box(testserver):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/autorenbox')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/autorenbox')
     article_view = view_article.Article(context, mock.Mock())
-    body = zeit.content.article.edit.interfaces.IEditableBody(article_view.context)
+    body = zeit.content.article.edit.interfaces.IEditableBody(
+        article_view.context)
     assert type(body.values()[2]) == Portraitbox
 
 
@@ -141,7 +166,8 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
 def test_header_elem_should_be_img_if_there_is_a_header_img(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, mock.Mock())
-    assert type(article_view.header_elem) == zeit.frontend.block.HeaderImageStandard
+    assert type(article_view.header_elem) == \
+        zeit.frontend.block.HeaderImageStandard
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
@@ -209,8 +235,10 @@ def test_column_should_have_header_image(testserver):
     assert '<img alt="Die ist der image sub text\n" title="Die ist der image'\
            ' sub text\n" class=" figure__media"' in browser.contents
 
+
 def test_column_should_not_have_header_image(testserver):
-    browser = Browser('%s/artikel/standardkolumne-ohne-bild-beispiel' % testserver.url)
+    browser = Browser('%s/artikel/standardkolumne-ohne-bild-beispiel' %
+                      testserver.url)
     assert '<div class="article__column__headerimage">' not in browser.contents
 
 
@@ -461,7 +489,8 @@ def test_pagination_dict_should_have_correct_entries(testserver):
 
     assert view.pagination['current'] == 2
     assert view.pagination['total'] == 7
-    assert view.pagination['next_page_title'] == (u'Sogar die eckige Flasche kommt zur\xfcck')
+    assert view.pagination['next_page_title'] == (
+        u'Sogar die eckige Flasche kommt zur\xfcck')
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = view_article.Article(article, mock.Mock())
@@ -470,7 +499,8 @@ def test_pagination_dict_should_have_correct_entries(testserver):
 
     assert view.pagination['current'] == 1
     assert view.pagination['total'] == 7
-    assert view.pagination['next_page_title'] == (u'Sogar die runde Flasche kommt zur\xfcck')
+    assert view.pagination['next_page_title'] == (
+        u'Sogar die runde Flasche kommt zur\xfcck')
 
 
 def test_pagination_next_title_should_be_in_html(testserver):
@@ -479,7 +509,8 @@ def test_pagination_next_title_should_be_in_html(testserver):
     assert 'Sogar die eckige Flasche kommt' in browser.contents
 
 
-def test_pagination_urls_list_should_have_correct_entries_paged_article(testserver):
+def test_pagination_urls_list_should_have_correct_entries_paged_article(
+        testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
 
     view = view_article.ArticlePage(article, mock.Mock())
@@ -492,7 +523,8 @@ def test_pagination_urls_list_should_have_correct_entries_paged_article(testserv
     assert view.pages_urls[2] == '/artikel/03/seite-3'
 
 
-def test_pagination_urls_list_should_have_correct_entries_single_article(testserver):
+def test_pagination_urls_list_should_have_correct_entries_single_article(
+        testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
 
     view = view_article.ArticlePage(article, mock.Mock())
@@ -560,14 +592,19 @@ def test_article01_should_not_have_a_focussed_nextread(application):
 
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
-    request.registry.settings.node_comment_statistics = 'data/node-comment-statistics.xml'
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    request.registry.settings.node_comment_statistics = \
+        'data/node-comment-statistics.xml'
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = view_centerpage.Centerpage(cp, request)
-    view() #trigger __call__ method
-    comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_asset')
+    view()  # trigger __call__ method
+    comment_count = view.teaser_get_commentcount(
+        'http://xml.zeit.de/centerpage/article_image_asset')
     assert comment_count == '22'
-    # For teaser uniquId with no entry in node-comment-statistics teaser_get_commentcount should return None
-    comment_count = view.teaser_get_commentcount('http://xml.zeit.de/centerpage/article_image_assetXXX')
+    # For teaser uniquId with no entry in node-comment-statistics
+    # teaser_get_commentcount should return None
+    comment_count = view.teaser_get_commentcount(
+        'http://xml.zeit.de/centerpage/article_image_assetXXX')
     assert comment_count is None
 
 
