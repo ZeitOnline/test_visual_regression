@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- introduce clear class to clear floating
+
 - make responsive fallback image more adaptive
 
 - adapt images in informative teaser, to get correct ratio
