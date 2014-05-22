@@ -1,36 +1,12 @@
 {#
 
-imagegroup teaser template for zmo-square-large
+Imagegroup teaser template for zmo-square-large
 
 Available attributes:
     teaser
 
 #}
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
-{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 
-<div class="cp__lead-leader__wrap">
-    {%- set image = get_teaser_image(teaser_block, teaser) %}
-
-    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
-    <a href="{{teaser | create_url}}">
-        <div class="scaled-image is-pixelperfect cp__lead-leader__image--light" data-wrap=".cp__lead-leader__wrap">
-        {{ lama.insert_responsive_image(image) }}
-        </div>
-    </a>
-    <header class="cp__lead-leader__title__wrap cp__lead-leader__title__wrap--light">
-        <span class="cp__lead__supertitle">
-            <a href="{{teaser | create_url}}">
-                {{teaser.teaserSupertitle}}
-            </a>
-        </span>
-        <h2 class="cp__lead__title">
-            <a href="{{teaser | create_url}}">
-                {{teaser.teaserTitle | hide_none}}
-            </a>
-        </h2>
-        <span class="cp__lead__subtitle">
-            {{teaser.teaserText | hide_none}}
-        </span>
-    </header>
-</div>
+{% extends "templates/inc/teaser/abstract_large_teaser_template.html" -%}
+{%block format %}square{% endblock %}
+{%block shade %}light{% endblock %}

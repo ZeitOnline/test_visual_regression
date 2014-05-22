@@ -1,11 +1,12 @@
 {#
 
-teaser template for light, large upright teasers
+Teaser template for light, large upright teasers
 
 Available attributes:
     teaser
 
 #}
 
-{% extends "templates/inc/teaser/abstract_teaser_template.html" -%}
-{%block additional_css_class %}cp__teaser__upright-large--light{% endblock %}
+{% extends "templates/inc/teaser/abstract_large_teaser_template.html" -%}
+{%block format %}upright{% endblock %}
+{%block shade %}light{% endblock %}
