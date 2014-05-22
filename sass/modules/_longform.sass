@@ -20,8 +20,6 @@ $longform-header-max-height: 1400px
     +respond-min($break-1)
       font-size: $font-xxl
     +respond-min($break-2)
-      margin-bottom: 0
-      margin-bottom: $fine
       font-size: $font-xxxl
     +respond-min($break-4)
       font-size: $font-xxxxl
@@ -43,9 +41,6 @@ $longform-header-max-height: 1400px
       +respond-min($break-3)
         font-size: $font-xl
 
-  .article__wrap
-    padding-top: 0
-    margin-top: 0
   p
     max-width: 38.88em
     +respond-min($break-3)
@@ -112,12 +107,6 @@ $longform-header-max-height: 1400px
     width: 100%
     &.video--fallback
       display: inline
-      position: absolute
-      top: 0
-      right: 0
-      bottom: 0
-      margin: auto
-      min-height: 100%
       @media only screen and (orientation : portrait)
         left: -50%
         min-width: 200%
