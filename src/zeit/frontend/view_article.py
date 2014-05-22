@@ -15,6 +15,7 @@ import zeit.content.cp.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
+import zeit.frontend.view
 import pyramid.httpexceptions
 from .comments import get_thread
 
