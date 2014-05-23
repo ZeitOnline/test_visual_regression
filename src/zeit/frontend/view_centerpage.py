@@ -104,20 +104,16 @@ class Centerpage(zeit.frontend.view.Base):
         return pagedescription
 
     @property
+    def rankedTags(self):
+        return self.context.keywords
+
+    @property
     def rankedTagsList(self):
-        seo = zeit.seo.interfaces.ISEO(self.context)
-        pagekeywords = 'ZEIT, DIE ZEIT, ZEIT MAGAZIN, ZEIT ONLINE, Essen, Trinken, Leben, Mode, Design'
-        try:
-            if self.context.keywords:
-                pagekeywords = self.context.keywords
-        except AttributeError:
-            log.error('no keywords present')
-        try:
-            if seo.rankedTags:
-                pagekeywords = seo.rankedTags
-        except AttributeError:
-            log.error('no ranked tags present')
-        return pagekeywords
+        if self.rankedTags:
+            return ';'.join([rt.label for rt in self.rankedTags])
+        else:
+            default_tags = [self.context.ressort, self.context.sub_ressort]
+            return ';'.join([dt for dt in default_tags if dt])
 
     @property
     def metaRobots(self):

@@ -122,13 +122,11 @@ class Content(Base):
 
     @property
     def rankedTagsList(self):
-        keyword_list = ''
         if self.rankedTags:
-            for keyword in self.context.keywords:
-                keyword_list += keyword.label + ';'
-            return keyword_list[:-1]
+            return ';'.join([rt.label for rt in self.rankedTags])
         else:
-            return ''
+            default_tags = [self.context.ressort, self.context.sub_ressort]
+            return ';'.join([dt for dt in default_tags if dt])
 
     @property
     def show_article_date(self):
