@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from mock import patch, MagicMock
 from pytest import fixture
 from zeit.frontend.comments import get_thread
@@ -33,8 +34,11 @@ def test_session_cache_cleared_when_id_changes(policy, dummy_request):
     dummy_request.session[ZMO_USER_KEY] = dict(uid=42, name='s3crit')
     with patch('zeit.frontend.security.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
-        mocked_response.body = '''<user><uid>457322</uid><name>test-friedbert</name><mail>test-friedbert@example.com</mail><picture/><roles><role>authenticated user</role></roles><profile/></user>
-        '''
+        mocked_response.body = (
+            '<user><uid>457322</uid><name>test-friedbert</name><mail>'
+            'test-friedbert@example.com</mail><picture/><roles><role>'
+            'authenticated user</role></roles><profile/></user>'
+        )
         mocked_getter.return_value = mocked_response
         dummy_request.cookies['drupal-userid'] = 23
         dummy_request.headers['Cookie'] = ''
@@ -45,8 +49,11 @@ def test_session_cache_cleared_when_id_changes(policy, dummy_request):
 def test_empty_cache_triggers_backend_fills_cache(policy, dummy_request):
     with patch('zeit.frontend.security.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
-        mocked_response.body = '''<user><uid>457322</uid><name>test-friedbert</name><mail>test-friedbert@example.com</mail><picture/><roles><role>authenticated user</role></roles><profile/></user>
-        '''
+        mocked_response.body = (
+            '<user><uid>457322</uid><name>test-friedbert</name><mail>'
+            'test-friedbert@example.com</mail><picture/><roles><role>'
+            'authenticated user</role></roles><profile/></user>'
+        )
         mocked_getter.return_value = mocked_response
         dummy_request.cookies['drupal-userid'] = 23
         dummy_request.headers['Cookie'] = ''
