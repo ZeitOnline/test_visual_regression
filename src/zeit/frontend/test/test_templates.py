@@ -881,9 +881,9 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     markup = '<span class="main-nav__community__icon--pic"'\
         ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
     account = '<a href="www.zeit.de/user/1"'\
-        ' id="drupal_account">Account</a>'
+        ' id="hp.zm.topnav.community.account">Account</a>'
     logout = '<a href="www.zeit.de/logout?destination=test"'\
-        ' id="drupal_logout">Logout</a>'
+        ' id="hp.zm.topnav.community.logout">Logout</a>'
 
     lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
     output = ""
@@ -906,7 +906,7 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
 
     markup = '<span class="main-nav__section__without_trigger">'\
         '<a href="www.zeit.de/login?destination=test"'\
-        ' id="drupal_login">Anmelden</a></span>'
+        ' id="hp.zm.topnav.community.login">Anmelden</a></span>'
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
     output = ""
