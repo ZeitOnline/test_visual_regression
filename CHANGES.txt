@@ -32,7 +32,7 @@ Change log for zeit.frontend
 
 - Improve linear-gradient mixin
 
-- Implement large portrait teasers
+- Implement large upright and square teasers
 
 
 0.5.2 (2014-05-14)
