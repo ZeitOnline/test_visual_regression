@@ -245,17 +245,17 @@
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__section__content__wrap">
-                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.centerpages.service.campus.{{request.path_info}}">ZEITCampus</a>
-                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.centerpages.service.geschichte.{{request.path_info}}">ZEITGeschichte</a>
-                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.centerpages.service.wissen.{{request.path_info}}">ZEITWissen</a>
-                                <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.centerpages.service.partnersuche.{{request.path_info}}">Partnersuche</a>
-                                <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.centerpages.service.immobilien.{{request.path_info}}">Immobilien</a>
-                                <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.centerpages.service.automarkt.{{request.path_info}}">Automarkt</a>
-                                <a href="http://jobs.zeit.de/" id="hp.zm.topnav.centerpages.service.jobs.{{request.path_info}}">Jobs</a>
-                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.zm.topnav.centerpages.service.apps.{{request.path_info}}">Apps</a>
-                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.zm.topnav.centerpages.service.audio.{{request.path_info}}">Audio</a>
-                                <a href="http://www.zeit.de/archiv" id="hp.zm.topnav.centerpages.service.archiv.{{request.path_info}}">Archiv</a>
-                                <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.centerpages.service.spiele.{{request.path_info}}">Spiele</a>
+                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.centerpages.service.campus./campus/index">ZEITCampus</a>
+                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.centerpages.service.geschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
+                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.centerpages.service.wissen./wissen/zeit-wissen/index">ZEITWissen</a>
+                                <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.centerpages.service.partnersuche./angebote/partnersuche/index">Partnersuche</a>
+                                <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.centerpages.service.immobilien.//zeit.immowelt.de">Immobilien</a>
+                                <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.centerpages.service.automarkt.//automarkt.zeit.de">Automarkt</a>
+                                <a href="http://jobs.zeit.de/" id="hp.zm.topnav.centerpages.service.jobs.//jobs.zeit.de">Jobs</a>
+                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.zm.topnav.centerpages.service.apps.//premium.zeit.de/abo/appsios">Apps</a>
+                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.zm.topnav.centerpages.service.audio.//premium.zeit.de/abo/digitalpaket5">Audio</a>
+                                <a href="http://www.zeit.de/archiv" id="hp.zm.topnav.centerpages.service.archiv./archiv">Archiv</a>
+                                <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.centerpages.service.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
                     </div>
