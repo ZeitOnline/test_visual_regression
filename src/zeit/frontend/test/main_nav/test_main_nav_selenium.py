@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pytest
 
 screen_sizes = ((320, 480, True), (1024, 768, False))
@@ -13,7 +14,6 @@ def test_compact_main_nav(selenium_driver, testserver, screen_size):
     driver = selenium_driver
 
     # set to small size on first run
-    small_screen = screen_size[2]
     driver.set_window_size(screen_size[0], screen_size[1])
 
     driver.get('%s/artikel/05' % testserver.url)
@@ -60,8 +60,8 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     class_trig = "main-nav__section__trigger"
     class_cont = "main-nav__section__content"
-    class_input = "main-nav__search__input"
-    class_button = "main-nav__search__submit"
+    # class_input = "main-nav__search__input"
+    # class_button = "main-nav__search__submit"
 
     nav_list = driver.find_elements_by_id('js-main-nav')
     main_nav = driver.find_elements_by_id('js-main-nav')[0]
@@ -79,8 +79,8 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     service_cont = service.find_element_by_class_name(class_cont)
     service_links = service_cont.find_elements_by_tag_name('a')
 
-    community = main_nav.find_element_by_class_name('main-nav__community')
-    community_trig = community.find_element_by_class_name(class_trig)
+    # community = main_nav.find_element_by_class_name('main-nav__community')
+    # community_trig = community.find_element_by_class_name(class_trig)
 
     # there's exactly one navigation
     assert(len(nav_list) == 1)

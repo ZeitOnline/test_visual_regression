@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 from zeit.frontend import view_centerpage
-from zope.component import getMultiAdapter
+from zeit.frontend.application import create_image_url
 from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
-from zeit.frontend.application import create_image_url
+from zope.component import getMultiAdapter
+from zope.testbrowser.browser import Browser
 import mock
 import pyramid.threadlocal
 import pytest
@@ -25,12 +27,11 @@ def monkeyreq(monkeypatch):
 
 
 def test_homepage_should_have_buzz_module_centerpage_should_not(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/index' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.cp__buzz')) == 1
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.cp__buzz')) == 0
+        testserver):
+    browser = Browser('%s/zeit-magazin/index' % testserver.url)
+    assert '<div class="cp__buzz">' in browser.contents
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<div class="cp__buzz">' not in browser.contents
 
 # commented out for first launch (as)
 # def test_centerpage_should_have_pagetitle_in_body_but_hp_not(
@@ -43,32 +44,23 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 #     assert pagetitle_in_body[0].text.strip() == "ZMO"
 
 
-def test_centerpage_should_have_correct_page_title(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    title = driver.title.strip()
-    assert title == u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
+def test_centerpage_should_have_correct_page_title(testserver):
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<title>ZEITmagazin ONLINE - Mode&amp;Design, '\
+        'Essen&amp;Trinken, Leben</title>' in browser.contents
 
 
-def test_centerpage_should_have_page_meta_description(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    meta_description_tag = driver.find_element_by_xpath(
-        '//meta[@name="description"]')
-    teststring = u'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
-    assert meta_description_tag.get_attribute("content").strip() == teststring
+def test_centerpage_should_have_page_meta_description(testserver):
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<meta name="description" content="ZEITmagazin '\
+        'ONLINE - Mode&amp;Design, Essen&amp;Trinken,'\
+        ' Leben">' in browser.contents
 
 
-def test_centerpage_should_have_page_meta_keywords(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    meta_description_tag = driver.find_element_by_xpath(
-        '//meta[@name="keywords"]')
-    teststring = u'ZEIT ONLINE, ZEIT MAGAZIN'
-    assert meta_description_tag.get_attribute("content").strip() == teststring
+def test_centerpage_should_have_page_meta_keywords(testserver):
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<meta name="keywords" content="ZEIT ONLINE, '\
+        'ZEIT MAGAZIN">' in browser.contents
 
 
 def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
@@ -82,6 +74,26 @@ def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
         'templates/inc/teaser/teaser_default_default_video.html',
         'templates/inc/teaser/teaser_default_default_default.html']
     result = most_sufficient_teaser_tpl('lead', 'article', 'video')
+    assert result == should
+    should = [
+        'templates/inc/teaser/teaser_lead_article_video.html',
+        'templates/inc/teaser/teaser_lead_article_gallery.html',
+        'templates/inc/teaser/teaser_lead_article_imagegroup.html',
+        'templates/inc/teaser/teaser_lead_article_default.html',
+        'templates/inc/teaser/teaser_lead_default_video.html',
+        'templates/inc/teaser/teaser_lead_default_gallery.html',
+        'templates/inc/teaser/teaser_lead_default_imagegroup.html',
+        'templates/inc/teaser/teaser_lead_default_default.html',
+        'templates/inc/teaser/teaser_default_article_video.html',
+        'templates/inc/teaser/teaser_default_article_gallery.html',
+        'templates/inc/teaser/teaser_default_article_imagegroup.html',
+        'templates/inc/teaser/teaser_default_article_default.html',
+        'templates/inc/teaser/teaser_default_default_video.html',
+        'templates/inc/teaser/teaser_default_default_gallery.html',
+        'templates/inc/teaser/teaser_default_default_imagegroup.html',
+        'templates/inc/teaser/teaser_default_default_default.html']
+    assets = ('video', 'gallery', 'imagegroup')
+    result = most_sufficient_teaser_tpl('lead', 'article', assets)
     assert result == should
 
 
@@ -114,18 +126,15 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     assert isinstance(asset[1], zeit.content.video.video.Video)
 
 
-def test_cp_area_lead_has_expected_structure(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".main")
-    assert len(wrap) != 0
-    for element in wrap:
-        main_lead_wrap = element.find_elements_by_css_selector(
-            ".cp__lead__wrap")
-        inf_lead_wrap = element.find_elements_by_css_selector(
-            ".cp__lead__informatives__wrap")
-        assert len(main_lead_wrap) != 0
-        assert len(inf_lead_wrap) != 0
+def test_cp_has_lead_area(testserver):
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    print browser.contents
+    assert '<div class="cp__lead__wrap">' in browser.contents
+
+
+def test_cp_has_informatives_area(testserver):
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<div class="cp__lead__informatives__wrap">' in browser.contents
 
 
 def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
@@ -368,7 +377,8 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         # structure
         assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap cp__lead-full__title__wrap--dark' == \
+        assert 'cp__lead-full__title__wrap'\
+            ' cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert 'cp__lead__title' == unicode(h2.get_attribute("class"))
         assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
@@ -427,16 +437,17 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
                 ':6543/centerpage/article_image_asset'
 
 
-def test_teaser_light_versions_are_working(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    teaser = driver.find_elements_by_css_selector(".cp__lead-full--light")
-    assert len(teaser) != 0
+def test_lead_full_light_version_is_working(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    assert '<div class="scaled-image is-pixelperfect cp__lead-full--light"'\
+        ' data-wrap=".cp__lead-full__wrap">' in browser.contents
 
-    driver.get('%s/centerpage/lebensart-2' % testserver.url)
-    teaser = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__image--light")
-    assert len(teaser) != 0
+
+def test_lead_leader_light_version_is_working(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<div class="scaled-image is-pixelperfect '\
+        'cp__lead-leader__image--light" '\
+        'data-wrap=".cp__lead-leader__wrap">' in browser.contents
 
 
 def test_get_image_asset_should_return_image_asset(testserver):
@@ -542,9 +553,11 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
     request = mock.Mock()
     request.registry.settings.community_host = app_settings['community_host']
     request.registry.settings.linkreach_host = app_settings['linkreach_host']
-    request.registry.settings.node_comment_statistics = app_settings['node_comment_statistics']
+    request.registry.settings.node_comment_statistics = app_settings[
+        'node_comment_statistics']
 
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = zeit.frontend.view_centerpage.Centerpage(cp, request)
 
     buzz = view.area_buzz
@@ -554,20 +567,26 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
     assert len(buzz['comments']) == 3
 
 
-def test_centerpages_produces_no_error(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/centerpage/cp_with_video_lead' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/centerpage/lebensart-2' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+def test_centerpages_produces_no_error(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-3' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-4' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser(
+        '%s/zeit-magazin/test-cp/with-teaserbar' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/centerpage/cp_with_image_lead' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/centerpage/cp_with_video_lead' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<div class="page-wrap">' in browser.contents
 
 
 def test_cp_lead_should_have_correct_first_block(application):
@@ -657,22 +676,22 @@ def test_cp_informatives_should_have_no_blocks(application):
     assert informatives_last_block == cp_view.area_informatives1[2].uniqueId
 
 
-def test_cp_teaser_should_have_comment_count(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__comment__count__wrap")
-    comments = wrap[0].text
-    assert len(wrap) != 0
-    assert comments == '22'
+def test_cp_teaser_should_have_comment_count(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    print browser.contents
+    assert '<span class="cp__comment__count__wrap'\
+        ' icon-comments-count">22</span>' in browser.contents
 
 
 def test_centerpage_should_have_monothematic_block(application):
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
     assert len(view.monothematic_block) == 6
 
 
 def test_centerpage_should_have_no_monothematic_block(application):
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/lebensart')
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/lebensart')
     view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.monothematic_block is None

@@ -1,14 +1,15 @@
+# -*- coding: utf-8 -*-
+from os import path
+from os.path import abspath, dirname, join, sep
 from pyramid.testing import setUp, tearDown, DummyRequest
 from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
-from os import path
-from os.path import abspath, dirname, join, sep
-import pytest
-import pyramid.config
-import zeit.frontend.application
 from zeit import frontend
+import pyramid.config
+import pytest
+import zeit.frontend.application
 
 
 def test_asset_path(*parts):
@@ -142,6 +143,26 @@ def linkreach():
 @pytest.fixture(scope='session')
 def testserver(application, request):
     server = WSGIServer(application=application, port="6543")
+    server.start()
+    request.addfinalizer(server.stop)
+    return server
+
+
+@pytest.fixture(scope='session', params=[503])
+def http_testserver(request):
+    from pyramid.config import Configurator
+    from pyramid.response import Response
+
+    def hello_world(r):
+        resp = Response(status=request.param)
+        return resp
+
+    config = Configurator()
+    config.add_route('any', '/*url')
+    config.add_view(hello_world, route_name='any')
+    app = config.make_wsgi_app()
+
+    server = WSGIServer(application=app, port='8889')
     server.start()
     request.addfinalizer(server.stop)
     return server

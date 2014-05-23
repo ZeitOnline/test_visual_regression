@@ -8,11 +8,13 @@ from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.centerpage import auto_select_asset
+from zeit.frontend.centerpage import get_all_assets
 from zeit.frontend.centerpage import get_image_asset
 from zeit.frontend.gallery import IGallery
 from zeit.frontend.gallery import IProductGallery
 from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings
+import base64
 import itertools
 import jinja2
 import logging
@@ -25,6 +27,7 @@ import re
 import urlparse
 import zeit.cms.interfaces
 import zeit.connector
+import zeit.content.link.interfaces
 import zeit.frontend
 import zeit.frontend.banner
 import zeit.frontend.block
@@ -68,6 +71,9 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
+        pkg = pkg_resources.get_distribution('zeit.frontend')
+        self.settings['version_hash'] = base64.b16encode(pkg.version).lower()
+
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
             registry=registry)
@@ -95,10 +101,14 @@ class Application(object):
                 request.application_url, request.registry.settings.get(
                     'asset_prefix', ''))
             if path == '/':
-                return request.route_url('home', **kw)
-            if ':' not in path:
-                path = 'zeit.frontend:' + path
-            return request.static_url(path, **kw)
+                url = request.route_url('home', **kw)
+            else:
+                prefix = '' if ':' in path else 'zeit.frontend:'
+                url = request.static_url(prefix + path, **kw)
+            if url.rsplit('.', 1)[-1] in ('css', 'js'):
+                url += '?' + request.registry.settings.get('version_hash', '')
+            return url
+
         config.add_request_method(asset_url)
 
         config.set_root_factory(self.get_repository)
@@ -108,7 +118,8 @@ class Application(object):
         from .security import CommunityAuthenticationPolicy
         import pyramid_beaker
         config.include("pyramid_beaker")
-        session_factory = pyramid_beaker.session_factory_from_settings(self.settings)
+        session_factory = pyramid_beaker.session_factory_from_settings(
+            self.settings)
         config.set_session_factory(session_factory)
         config.set_authentication_policy(CommunityAuthenticationPolicy())
         config.set_authorization_policy(ACLAuthorizationPolicy())
@@ -138,8 +149,10 @@ class Application(object):
         jinja.filters['replace_list_seperator'] = replace_list_seperator
         jinja.filters['block_type'] = zeit.frontend.block.block_type
         jinja.filters['translate_url'] = translate_url
+        jinja.filters['create_url'] = create_url
         jinja.filters['default_image_url'] = default_image_url
         jinja.filters['auto_select_asset'] = auto_select_asset
+        jinja.filters['get_all_assets'] = get_all_assets
         jinja.filters['obj_debug'] = obj_debug
         jinja.filters['substring_from'] = substring_from
         jinja.filters['hide_none'] = hide_none
@@ -289,6 +302,14 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
+@jinja2.contextfilter
+def create_url(context, obj):
+    if zeit.content.link.interfaces.ILink.providedBy(obj):
+        return obj.url
+    else:
+        return translate_url(context, obj.uniqueId)
+
+
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
     return format_datetime(obj, formats[type], locale="de_De")
@@ -428,10 +449,10 @@ def most_sufficient_teaser_tpl(block_layout,
                                prefix='templates/inc/teaser/teaser_',
                                suffix='.html',
                                separator='_'):
-
     types = (block_layout, content_type, asset)
-    defaults = ('default', 'default', 'default')
-    zipped = zip(types, defaults)
+    default = ('default',)
+    iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
+    zipped = (t + default if iterable(t) else (t,) + default for t in types)
 
     combinations = [t for t in itertools.product(*zipped)]
     func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
