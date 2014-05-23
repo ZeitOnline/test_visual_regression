@@ -4,6 +4,12 @@ Change log for zeit.frontend
 0.5.3 (unreleased)
 ------------------
 
+- change navi tracking ids according to ZMO-712
+
+- small css cleanup
+
+- rework testing to make it more performant and PEP-8 conform
+
 - make responsive fallback image more adaptive
 
 - adapt images in informative teaser, to get correct ratio

@@ -1,14 +1,13 @@
+# -*- coding: utf-8 -*-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from zope.testbrowser.browser import Browser
 
 
-def test_inline_gallery_is_there(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
-    selector = ".inline-gallery"
-    elem = driver.find_element_by_css_selector(selector)
-    assert elem
+def test_inline_gallery_is_there(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    assert '<div class="inline-gallery"' in browser.contents
 
 
 def test_inline_gallery_buttons(selenium_driver, testserver):
