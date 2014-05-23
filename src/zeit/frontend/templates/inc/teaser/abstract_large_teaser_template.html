@@ -14,7 +14,7 @@ Available attributes:
 
     {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
     <a href="{{teaser | create_url}}">
-        <div class="scaled-image is-pixelperfect cp__lead-leader__image--{{ self.shade() }}" data-wrap=".cp__lead-leader__wrap">
+        <div class="scaled-image is-pixelperfect cp__lead-leader__image cp__lead-leader__image--{{ self.shade() }}" data-wrap=".cp__lead-leader__wrap">
             {{ lama.insert_responsive_image(image) }}
         </div>
     </a>

@@ -1,8 +1,8 @@
 //styles for lead area within cp
 $cp__lead-full-height: em(550px)
-$cp__lead-extended-height: em(826px)
-$cp__lead-full-video-max-width: em(1000px)
 $cp__lead__wrap-width: 65%
+$cp__lead-large-teaser-size: ($max-page-width * 0.65) - (2 * $compact)
+$cp__lead-full-video-max-width: em(1000px)
 
 //placeholder selectors
 %cp__lead--dark
@@ -90,12 +90,30 @@ $cp__lead__wrap-width: 65%
 	+respond-min($break-2)
 		margin-top: $compact
 		margin-bottom: $compact
+		width: $cp__lead-large-teaser-size
+
+/* If viewport lengths are supported, try to retain correct aspect ratios. */
+.cssvwunit
+	.cp__lead-leader__wrap--square
+		+respond-max($break-2)
+			height: 100vw
+	.cp__lead-leader__wrap--upright
+		+respond-max($break-2)
+			height: 135vw
 
 .cp__lead-leader__wrap--square
-	height: $cp__lead-full-height
+	height: $cp__lead-large-teaser-size
+	+respond-max($break-2)
+		height: ($break-2 + $break-1) / 2
+	+respond-max($break-1)
+		height: ($break-1 + $break-2) / 2
 
 .cp__lead-leader__wrap--upright
-	height: $cp__lead-extended-height
+	height: $cp__lead-large-teaser-size * 1.35
+	+respond-max($break-2)
+		height: ($break-2 + $break-1) * 0.675
+	+respond-max($break-1)
+		height: ($break-1 + $break-0) * 0.675
 
 .cp__lead-leader__image--dark
 	@extend %cp__lead--dark
