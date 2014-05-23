@@ -68,7 +68,8 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def pagetitle(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
-        pagetitle = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        pagetitle = \
+            'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         try:
             if self.context.title:
                 pagetitle = self.context.title
@@ -88,7 +89,8 @@ class Centerpage(zeit.frontend.view.Base):
     @property
     def pagedescription(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
-        pagedescription = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        pagedescription = \
+            'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         try:
             if self.context.title:
                 pagedescription = self.context.subtitle
