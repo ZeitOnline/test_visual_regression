@@ -237,16 +237,16 @@
                         <div class="main-nav__section__content is-always-open">
                             <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo.//www.zeitabo.de">Abo</a>
                             <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.zm.topnav.links.shop.//shop.zeit.de">Shop</a>
-                            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.ePaper.//premium.zeit.de">ePaper</a>
+                            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.epaper.//premium.zeit.de">ePaper</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__service">
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__section__content__wrap">
-                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.links.campus./campus/index">ZEITCampus</a>
-                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.links.geschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
-                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.links.wissen./wissen/zeit-wissen/index">ZEITWissen</a>
+                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
+                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
+                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index">ZEITWissen</a>
                                 <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.links.partnersuche./angebote/partnersuche/index">Partnersuche</a>
                                 <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.links.immobilien.//zeit.immowelt.de">Immobilien</a>
                                 <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.links.automarkt.//automarkt.zeit.de">Automarkt</a>
