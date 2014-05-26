@@ -64,7 +64,7 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     # class_button = "main-nav__search__submit"
 
     nav_list = driver.find_elements_by_id('js-main-nav')
-    main_nav = driver.find_elements_by_id('js-main-nav')[0]
+    main_nav = driver.find_element_by_id('js-main-nav')
     trigger = driver.find_element_by_id('js-main-nav-trigger')
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
     logo = main_nav.find_element_by_class_name('main-nav__logo__img')
