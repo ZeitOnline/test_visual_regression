@@ -71,7 +71,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
     res_content = res.find_element_by_class_name('main-nav__ressorts__slider')
-    print dir(res_content)
     res_links = res_content.find_elements_by_tag_name('a')
 
     service = main_nav.find_element_by_class_name('main-nav__service')
@@ -87,12 +86,13 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     # navigation is visible
     assert(main_nav.is_displayed())
-    assert(trigger.is_displayed())
 
     # menu is initially hidden on mobile, but visible on desktop
     if small_screen:
+        assert(trigger.is_displayed())
         assert(not menu.is_displayed())
     else:
+        assert(not trigger.is_displayed())
         assert(menu.is_displayed())
 
     # menu can be opened by click
