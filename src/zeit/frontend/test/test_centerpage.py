@@ -56,7 +56,8 @@ def test_centerpage_should_have_page_meta_description(testserver):
 
 def test_centerpage_should_have_page_meta_keywords(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="keywords" content="Lebensart">' in browser.contents
+    assert '<meta name="keywords" content="Lebensart, Leben">' \
+        in browser.contents
 
 
 def test_centerpage_should_have_page_meta_robots_information(
