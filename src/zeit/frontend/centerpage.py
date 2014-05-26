@@ -41,9 +41,7 @@ def _get_video_source(self):
             if highest_rendition.frame_width < rendition.frame_width:
                 highest_rendition = rendition
         return highest_rendition.url
-    except AttributeError:
-        return self.flv_url
-    except TypeError:
+    except (AttributeError, IndexError, TypeError):
         return self.flv_url
 
 
