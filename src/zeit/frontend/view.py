@@ -113,16 +113,17 @@ class Content(Base):
         if seo.html_title:
             return seo.html_title
         tokens = (self.context.supertitle, self.context.title)
-        if not len(tokens):
-            return default
-        return ': '.join([t for t in tokens if t])
+        return ': '.join([t for t in tokens if t]) or default
 
     @property
     def pagedescription(self):
+        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         seo = zeit.seo.interfaces.ISEO(self.context)
         if seo.html_description:
             return seo.html_description
-        return getattr(self.context, 'subtitle', None)
+        if self.context.subtitle:
+            return self.context.subtitle
+        return default
 
     @property
     def rankedTags(self):

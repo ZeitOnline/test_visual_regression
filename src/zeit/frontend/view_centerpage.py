@@ -67,20 +67,12 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagetitle(self):
+        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         seo = zeit.seo.interfaces.ISEO(self.context)
-        pagetitle = \
-            'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        try:
-            if self.context.title:
-                pagetitle = self.context.title
-        except AttributeError:
-            log.error('no title present')
-        try:
-            if seo.html_title:
-                pagetitle = seo.html_title
-        except AttributeError:
-            log.error('no seo.html_title present')
-        return pagetitle
+        if seo.html_title:
+            return seo.html_title
+        tokens = (self.context.supertitle, self.context.title)
+        return ': '.join([t for t in tokens if t]) or default
 
     @property
     def pagetitle_in_body(self):
@@ -88,20 +80,13 @@ class Centerpage(zeit.frontend.view.Base):
 
     @property
     def pagedescription(self):
+        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         seo = zeit.seo.interfaces.ISEO(self.context)
-        pagedescription = \
-            'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        try:
-            if self.context.title:
-                pagedescription = self.context.subtitle
-        except AttributeError:
-            log.error('no subtitle present')
-        try:
-            if seo.html_title:
-                pagedescription = seo.html_description
-        except AttributeError:
-            log.error('no no seo.html_description present')
-        return pagedescription
+        if seo.html_description:
+            return seo.html_description
+        if self.context.subtitle:
+            return self.context.subtitle
+        return default
 
     @property
     def rankedTags(self):
