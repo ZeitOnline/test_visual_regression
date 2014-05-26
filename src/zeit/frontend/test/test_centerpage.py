@@ -49,9 +49,20 @@ def test_centerpage_should_have_correct_page_title(testserver):
     assert '<title>ZMO</title>' in browser.contents
 
 
+def test_centerpage_should_have_correct_seo_title(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<title>SEO title</title>' in browser.contents
+
+
 def test_centerpage_should_have_page_meta_description(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
     assert '<meta name="description" content="ZMO CP">' in browser.contents
+
+
+def test_centerpage_should_have_seo_description(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<meta name="description" content="SEO description">' \
+        in browser.contents
 
 
 def test_centerpage_should_have_page_meta_keywords(testserver):
