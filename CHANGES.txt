@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.5.3 (unreleased)
+0.5.3 (2014-05-26)
 ------------------
 
 - change navi tracking ids according to ZMO-712
