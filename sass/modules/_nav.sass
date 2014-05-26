@@ -13,15 +13,6 @@ $nav__section-border: 1px solid $nav__border-color
 $icon-avatar-std-size: em(32px)
 
 
-// .is-small-screen-only
-//   +respond-min($nav__break__full-menu)
-//     display: none
-
-// .is-large-screen-only
-//   +respond-max($nav__break__full-menu)
-//     display: none
-
-
 .main-nav
     +tablet
     line-height: $nav__row-height--px
@@ -44,16 +35,6 @@ $icon-avatar-std-size: em(32px)
         +link-colors($white, $white, $white, $white, $white)
         &.is-active
             opacity: 0.5
-
-
-.main-nav__wrap
-    +respond-min($nav__break__full-menu)
-        max-width: $max-page-width
-        margin: 0 auto
-        position: relative
-        .is-full-width &
-            max-width: $max-longform-width - $page-padding*2
-            +box-shadow(0 -1px 0 1px $grey--mid)
 
 
 .main-nav__logo
@@ -144,7 +125,6 @@ $icon-avatar-std-size: em(32px)
     border-top: 2px solid $nav__border-color
     +respond-min($nav__break__full-menu)
         border: none
-        // height: $nav__row-height
     a
         font-size: $font-s
         letter-spacing: 1px
@@ -177,6 +157,9 @@ $icon-avatar-std-size: em(32px)
     z-index: 10
     width: em(300px)
 
+//*****************
+// DESKTOP STYLES *
+//*****************
 
 +respond-min($nav__break__full-menu)
     .has-hover
@@ -205,6 +188,46 @@ $icon-avatar-std-size: em(32px)
         border-bottom: 1px solid $nav__background-color
         z-index: 3
 
+    .main-nav__service,
+    .main-nav__community
+        .main-nav__section__content
+            &:before, &:after
+                position: absolute
+                content: ''
+                height: $nav__row-height
+                top: 0
+                pointer-events: none
+            &:before
+                +linear-gradient(to left, rgba($black, 0.6), rgba($black, 0))
+                right: 100%
+                width: 80px
+    .main-nav__service
+        .main-nav__section__content
+            &:after
+                +linear-gradient(to right, rgba($black, 0.6), rgba($black, 0))
+                left: 100%
+                width: 80px
+
+    .main-nav__wrap
+        max-width: $max-page-width
+        margin: 0 auto
+        position: relative
+        .is-full-width &
+            max-width: $max-longform-width - $page-padding*2
+            +box-shadow(0 -1px 0 1px $grey--mid)
+
+    .main-nav__aside
+        position: absolute
+        top: 0
+        right: 0
+        .main-nav__section
+            float: left
+            position: relative
+            padding: 0 em(16px)
+            & + .main-nav__section
+                border-left: $nav__section-border
+
+
 
 .main-nav__service-primary
     border-top: none
@@ -223,7 +246,14 @@ $icon-avatar-std-size: em(32px)
             margin-right: $small
 
 
-.main-nav__all-ressorts
+.main-nav__only-small
+    +respond-min($nav__break__full-menu)
+        display: none
+
+.main-nav__only-full
+    +respond-max($nav__break__full-menu)
+        display: none
+
 
 
 .main-nav__ressorts
@@ -297,18 +327,6 @@ $icon-avatar-std-size: em(32px)
     right: 0
 
 
-+respond-min($nav__break__full-menu)
-    .main-nav__aside
-        position: absolute
-        top: 0
-        right: 0
-        .main-nav__section
-            float: left
-            position: relative
-            padding: 0 $small // XXX delete double
-            & + .main-nav__section
-                border-left: $nav__section-border
-
 .main-nav__service
     a
         +inline-block
@@ -317,7 +335,7 @@ $icon-avatar-std-size: em(32px)
         &:nth-child(2n)
             padding-left: $small
     .main-nav__section__trigger
-        padding-right: $compact
+        padding-right: em(26px)
         background-position: right center
     +respond-max($nav__break__full-menu)
         .main-nav__section__trigger
@@ -326,62 +344,31 @@ $icon-avatar-std-size: em(32px)
 
 .main-nav__search
     input
-        +inline-block
-        +border-radius(0)
         font-size: $font-s
-        margin-top: $thin*0.9
         vertical-align: middle
         border: none
-        padding: $hair $thin
+        padding: 0 $thin
         height: $nav__row-height - $thin
     input[type=text]
-        margin-left: $hair
         background-color: $grey--mid
     input[type=submit]
-        margin-right: $hair*1.3
-        background-color: $grey
         color: $white
+        background-color: $grey
         padding: 0 $small
     +respond-min($nav__break__full-menu)
         &.has-open-menu
             border-left: none
         .main-nav__section__content
-            // left: auto
-            // top: 0
-            // right: $nav__row-height
-            // height: $nav__row-height
-            // white-space: nowrap
-            // border-bottom: $nav__section-border
+            top: 0
+            right: 100%
+            white-space: nowrap
         .main-nav__section__trigger
             +hide-text
             background-position: center center
-            width: $nav__row-height--px
-            width: rem($nav__row-height--px)
+            width: em(18px)
     +respond-max($nav__break__full-menu)
         .main-nav__section__trigger
             background: none
-
-
-+respond-min($nav__break__full-menu)
-    .main-nav__service,
-    .main-nav__community
-        .main-nav__section__content
-            &:before, &:after
-                position: absolute
-                content: ''
-                height: $nav__row-height
-                top: 0
-                pointer-events: none
-            &:before
-                +linear-gradient(to left, rgba($black, 0.6), rgba($black, 0))
-                right: 100%
-                width: 80px
-    .main-nav__service
-        .main-nav__section__content
-            &:after
-                +linear-gradient(to right, rgba($black, 0.6), rgba($black, 0))
-                left: 100%
-                width: 80px
 
 
 .main-nav__community
