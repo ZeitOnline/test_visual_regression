@@ -5,7 +5,7 @@ from zeit.frontend.application import default_image_url
 from zeit.frontend.application import most_sufficient_teaser_image
 from zeit.frontend.application import most_sufficient_teaser_tpl
 from zope.component import getMultiAdapter
-from zope.testbrowser.browser import Browser
+from zeit.frontend.test import Browser
 import mock
 import pyramid.threadlocal
 import pytest

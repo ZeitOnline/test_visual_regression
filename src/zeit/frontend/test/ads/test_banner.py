@@ -2,7 +2,7 @@
 from mock import Mock
 from zeit.frontend import view_article
 from zeit.frontend.banner import Place
-from zope.testbrowser.browser import Browser
+from zeit.frontend.test import Browser
 import pytest
 import zeit.cms.interfaces
 
