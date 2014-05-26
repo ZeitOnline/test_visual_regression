@@ -226,18 +226,16 @@
                             </div>
                         </div>
                     </div>
-<!--
-                    <div class="main-nav__section main-nav__all-ressorts">
-                        <a href="http://www.zeit.de/index" class="is-standalone-link" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
+                    <div class="main-nav__section main-nav__only-small">
+                        <a href="http://www.zeit.de/index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                     </div>
- -->
                     <div class="main-nav__section main-nav__service-primary">
                         <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo.//www.zeitabo.de">Abo</a>
                         <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.zm.topnav.links.shop.//shop.zeit.de">Shop</a>
                         <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.epaper.//premium.zeit.de">ePaper</a>
                     </div>
                     <div class="main-nav__aside">
-                        <div class="main-nav__section main-nav__all-ressorts">
+                        <div class="main-nav__section main-nav__only-full">
                             <a href="http://www.zeit.de/index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                         </div>
                         <div class="main-nav__section main-nav__service">
@@ -256,15 +254,15 @@
                                 <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
-                        <!-- <div class="main-nav__section main-nav__search">
+                        <div class="main-nav__section main-nav__search">
                             <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
                             <div class="main-nav__section__content js-main-nav-section-content">
-                                <div class="main-nav__search__form">
-                                    <input class="main-nav__search__input" type="text" size="20" placeholder="Suchbegriff …">
+                                <form action="http://www.zeit.de/suche/index" role="search" method="get" class="main-nav__search__form">
+                                    <input class="main-nav__search__input" type="text" size="20" placeholder="Suchbegriff …" tabindex="1">
                                     <input class="main-nav__search__submit" type="submit" value="Suchen">
-                                </div>
+                                </form>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="main-nav__section main-nav__community">
                             {% if request.app_info.authenticated %}
                                 {{ head_user_is_logged_in_true(request) }}
