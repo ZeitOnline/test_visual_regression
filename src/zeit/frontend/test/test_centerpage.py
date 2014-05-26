@@ -46,21 +46,17 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 
 def test_centerpage_should_have_correct_page_title(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZEITmagazin ONLINE - Mode&amp;Design, '\
-        'Essen&amp;Trinken, Leben</title>' in browser.contents
+    assert '<title>ZMO</title>' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_description(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="description" content="ZEITmagazin '\
-        'ONLINE - Mode&amp;Design, Essen&amp;Trinken,'\
-        ' Leben">' in browser.contents
+    assert '<meta name="description" content="ZMO CP">' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_keywords(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="keywords" content="ZEIT ONLINE, '\
-        'ZEIT MAGAZIN">' in browser.contents
+    assert '<meta name="keywords" content="Lebensart">' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_robots_information(
