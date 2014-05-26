@@ -214,11 +214,7 @@
                     <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
-                {% if request.app_info.authenticated %}
-                    <div class="main-nav__menu__content main-nav--logged-in" id="js-main-nav-content">
-                {%- else -%}
-                    <div class="main-nav__menu__content main-nav--logged-out" id="js-main-nav-content">
-                {%- endif -%}
+                <div class="main-nav__menu__content" id="js-main-nav-content">
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__section__content is-always-open" id="js-main-nav-ressorts-slider-container">
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>

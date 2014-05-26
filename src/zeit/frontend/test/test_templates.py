@@ -923,8 +923,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     # logged in
     request.app_info.authenticated = 'true'
-    markup = '<div class="main-nav__menu__content '\
-        'main-nav--logged-in" id="js-main-nav-content">'
+    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ""
@@ -936,8 +935,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     # logged out
     request.app_info.authenticated = None
-    markup = '<div class="main-nav__menu__content '\
-        'main-nav--logged-out" id="js-main-nav-content">'
+    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ""
