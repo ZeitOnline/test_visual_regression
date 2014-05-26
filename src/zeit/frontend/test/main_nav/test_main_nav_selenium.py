@@ -65,12 +65,12 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     nav_list = driver.find_elements_by_id('js-main-nav')
     main_nav = driver.find_elements_by_id('js-main-nav')[0]
-    trigger = main_nav.find_element_by_class_name('main-nav__menu__head')
+    trigger = driver.find_element_by_id('js-main-nav-trigger')
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
     logo = main_nav.find_element_by_class_name('main-nav__logo__img')
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
-    res_content = res.find_element_by_class_name(class_cont)
+    res_content = res.find_element_by_class_name('main-nav__ressorts__slider')
     print dir(res_content)
     res_links = res_content.find_elements_by_tag_name('a')
 
