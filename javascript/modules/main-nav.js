@@ -96,9 +96,6 @@ define(['jquery'], function() {
       $open_menu_container = $(this).parent().toggleClass('has-open-menu');
     });
 
-    // move current ressort link to all-ressorts drop down
-    $('#js-main-nav-all-ressorts-content').prepend($('#js-main-nav-current-ressort').detach());
-
     // init topics/ressort slider if necessary
     init_desktop_ressort_slider();
   };
