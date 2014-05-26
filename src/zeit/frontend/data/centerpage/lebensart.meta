@@ -36,4 +36,7 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
+  <rankedTags ns="">
+    <tag uuid="bc86aa49-768a-4830-8812-6032d27676ax" url_value="pinguin" type="free">Pinguin</tag>
+  </rankedTags>
 </head>
