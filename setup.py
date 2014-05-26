@@ -61,6 +61,7 @@ setup(
     },
     extras_require={
         'test': [
+            'cssselect',
             'mock',
             'webtest',
             'pytest',
@@ -69,7 +70,7 @@ setup(
             'selenium',
             'waitress',
             'webtest',
-            'zope.testbrowser',
+            'zope.testbrowser == 4.0.4',
         ],
     },
     setup_requires=['setuptools_git'],
