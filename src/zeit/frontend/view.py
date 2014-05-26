@@ -108,13 +108,21 @@ class Content(Base):
 
     @property
     def pagetitle(self):
-        # Fallback gracefully if title or supertitle is missing.
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        if seo.html_title:
+            return seo.html_title
         tokens = (self.context.supertitle, self.context.title)
+        if not len(tokens):
+            return default
         return ': '.join([t for t in tokens if t])
 
     @property
     def pagedescription(self):
-        return self.context.subtitle
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        if seo.html_description:
+            return seo.html_description
+        return getattr(self.context, 'subtitle', None)
 
     @property
     def rankedTags(self):
