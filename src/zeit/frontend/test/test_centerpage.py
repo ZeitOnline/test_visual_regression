@@ -46,7 +46,7 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 
 def test_centerpage_should_have_correct_page_title(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZMO</title>' in browser.contents
+    assert '<title>ZMO CP: ZMO</title>' in browser.contents
 
 
 def test_centerpage_should_have_correct_seo_title(testserver):
@@ -67,7 +67,7 @@ def test_centerpage_should_have_seo_description(testserver):
 
 def test_centerpage_should_have_default_keywords(testserver):
     # Default means ressort and sub ressort respectively
-    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
     assert '<meta name="keywords" content="Lebensart, Leben">' \
         in browser.contents
 
