@@ -463,7 +463,7 @@ def test_lead_full_light_version_is_working(testserver):
 def test_lead_leader_light_version_is_working(testserver):
     browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
     assert '<div class="scaled-image is-pixelperfect '\
-        'cp__lead-leader__image--light" '\
+        'cp__lead-leader__image cp__lead-leader__image--light" '\
         'data-wrap=".cp__lead-leader__wrap">' in browser.contents
 
 
