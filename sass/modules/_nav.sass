@@ -111,6 +111,8 @@ $icon-avatar-std-size: em(32px)
 .main-nav__menu__content
     display: none
     position: absolute
+    left: 0
+    padding-left: $nav__row-height + em(1px)
     z-index: 5
     width: 100%
     &.is-open
@@ -123,8 +125,10 @@ $icon-avatar-std-size: em(32px)
 .main-nav__section
     background-color: $nav__background-color
     border-top: 2px solid $nav__border-color
+    padding: 0 em(26px)
     +respond-min($nav__break__full-menu)
         border: none
+        padding: 0
     a
         font-size: $font-s
         letter-spacing: 1px
@@ -140,46 +144,36 @@ $icon-avatar-std-size: em(32px)
 
 .main-nav__section__content
     display: none
-    min-width: em(120px)
     background-color: $nav__background-color
     &.is-open
         display: block
+    a
+        display: block
 
-
-=nav__open-submenu
-    display: block
-    right: 0
-    top: 100%
-    top: -moz-calc(100% + 1px)
-    top: -webkit-calc(100% + 1px)
-    top: calc(100% + 1px)
-    position: absolute
-    z-index: 10
-    width: em(300px)
 
 //*****************
 // DESKTOP STYLES *
 //*****************
 
 +respond-min($nav__break__full-menu)
+    .main-nav__section__content
+        position: absolute
+        right: 0
+        top: 100%
+        top: -webkit-calc(100% + 1px)
+        top: -moz-calc(100% + 1px)
+        top: calc(100% + 1px)
+        z-index: 10
+        padding: em(4px) em(26px)
+        line-height: 3
+
     .has-hover
         .main-nav__service,
         .main-nav__search,
         .main-nav__community
             .main-nav__section__trigger:hover + .main-nav__section__content,
             .main-nav__section__content:hover
-                +nav__open-submenu
-
-    .main-nav__section__content.is-open
-        +nav__open-submenu
-
-    .main-nav__community
-        .main-nav__section__content.is-open
-            width: em(100px)
-
-    .main-nav__search
-        .main-nav__section__content.is-open
-            width: auto
+                display: block
 
     .has-hover .main-nav__service:hover,
     .has-hover .main-nav__community:hover,
@@ -207,6 +201,7 @@ $icon-avatar-std-size: em(32px)
                 +linear-gradient(to right, rgba($black, 0.6), rgba($black, 0))
                 left: 100%
                 width: 80px
+            width: em(300px)
 
     .main-nav__wrap
         max-width: $max-page-width
@@ -229,13 +224,17 @@ $icon-avatar-std-size: em(32px)
 
 
 
+//****************
+// PRIMARY LINKS *
+//****************
+
 .main-nav__service-primary
     border-top: none
-    +respond-max($nav__break__full-menu)
-        a
-            border-top: 2px solid $nav__border-color
-            display: block
-            // padding: $small
+    padding: 0
+    a
+        border-top: 2px solid $nav__border-color
+        display: block
+        padding: 0 em(26px)
     +respond-min($nav__break__full-menu)
         position: absolute
         top: $nav__row-height--px + 1px
@@ -243,6 +242,9 @@ $icon-avatar-std-size: em(32px)
         z-index: 3
         text-align: right
         a
+            border-top: none
+            display: inline
+            padding: 0
             margin-right: $small
 
 
@@ -256,8 +258,18 @@ $icon-avatar-std-size: em(32px)
 
 
 
-.main-nav__ressorts
-    +respond-min($nav__break__full-menu)
+//***********
+// RESSORTS *
+//***********
+
++respond-max($nav__break__full-menu)
+    .main-nav__ressorts
+        line-height: 3
+        a
+            display: block
+
++respond-min($nav__break__full-menu)
+    .main-nav__ressorts
         border-top: $nav__section-border
         position: absolute
         top: $nav__row-height
@@ -268,31 +280,6 @@ $icon-avatar-std-size: em(32px)
         z-index: 2
         padding-right: $nav__service-primary-full-width
         white-space: nowrap
-        .main-nav__ressorts__slider
-            position: relative
-            height: 100%
-            margin-left: $small
-            overflow: hidden
-            .no-js &
-                overflow: auto
-                overflow-x: auto
-                overflow-y: hidden
-            .main-nav__ressorts__slider-strip
-                +transition(left 0.2s)
-                position: absolute
-                left: 0
-                height: 100%
-            .has-topic-slider &
-                padding-right: $small*3
-                overflow: hidden
-                &:after
-                    content: ''
-                    position: absolute
-                    height: 100%
-                    width: $small*3
-                    background-color: $nav__background-color
-                    z-index: 5
-                    right: 0
         a
             +inline-block
             margin-right: $small
@@ -302,6 +289,31 @@ $icon-avatar-std-size: em(32px)
                 color: white
             &:last-child
                 margin-right: 0
+    .main-nav__ressorts__slider
+        position: relative
+        height: 100%
+        margin-left: $small
+        overflow: hidden
+        .no-js &
+            overflow: auto
+            overflow-x: auto
+            overflow-y: hidden
+        .has-topic-slider &
+            padding-right: $small*3
+            overflow: hidden
+            &:after
+                content: ''
+                position: absolute
+                height: 100%
+                width: $small*3
+                background-color: $nav__background-color
+                z-index: 5
+                right: 0
+    .main-nav__ressorts__slider-strip
+        +transition(left 0.2s)
+        position: absolute
+        left: 0
+        height: 100%
 
 
 .main-nav__ressorts__slider-arrow--left,
@@ -327,6 +339,10 @@ $icon-avatar-std-size: em(32px)
     right: 0
 
 
+//****************
+// SERVICE LINKS *
+//****************
+
 .main-nav__service
     a
         +inline-block
@@ -341,6 +357,10 @@ $icon-avatar-std-size: em(32px)
         .main-nav__section__trigger
             background: none
 
+
+//*********
+// SEARCH *
+//*********
 
 .main-nav__search
     input
@@ -362,6 +382,8 @@ $icon-avatar-std-size: em(32px)
             top: 0
             right: 100%
             white-space: nowrap
+            line-height: inherit
+            padding: 0
         .main-nav__section__trigger
             +hide-text
             background-position: center center
@@ -370,6 +392,10 @@ $icon-avatar-std-size: em(32px)
         .main-nav__section__trigger
             background: none
 
+
+//************
+// COMMUNITY *
+//************
 
 .main-nav__community
 
@@ -384,6 +410,10 @@ $icon-avatar-std-size: em(32px)
     +border-radius(50%)
 
 
+//***********
+// LONGFORM *
+//***********
+
 .main-nav__sharing
     float: right
 
@@ -393,6 +423,7 @@ $icon-avatar-std-size: em(32px)
     width: $nav__row-height
     height: $nav__row-height
     border-left: $nav__section-border
+    +box-sizing(content-box)
     background-position: center center
     +transition(background-color)
     +on-interaction

@@ -211,7 +211,7 @@
             </a>
             <div class="main-nav__menu">
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
-                    <div class="main-nav__menu__head__headline">hallo</div>
+                    <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
@@ -292,9 +292,7 @@
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false(request)  %}
-    <span class="main-nav__section__trigger">
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
-    </span>
+    <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
 {%- endmacro %}
 
 {% macro ivw_ver1_tracking(channel) -%}
