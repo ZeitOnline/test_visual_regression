@@ -4,7 +4,11 @@ Change log for zeit.frontend
 0.5.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make SEO available for zeit.frontend
+
+- Add SEO title and description for cps to HTML
+
+- Add Keywords / Tags to HTML
 
 
 0.5.3 (2014-05-26)
