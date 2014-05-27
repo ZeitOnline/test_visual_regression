@@ -36,7 +36,7 @@ Change log for zeit.frontend
 
 - Implement large upright and square teasers
 
-- Extend testbrowser to support cssselect
+- ZMO-792: Extend testbrowser to support cssselect
 
 
 0.5.2 (2014-05-14)
