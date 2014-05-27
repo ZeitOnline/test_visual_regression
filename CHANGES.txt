@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.4 (unreleased)
 ------------------
 
+- ZMO-792: Extend testbrowser to support cssselect
+
 - Update underscore.js to version 1.6.0
 
 - Javascript code cleanup
