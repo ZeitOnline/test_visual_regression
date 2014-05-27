@@ -254,6 +254,7 @@
                                 <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
+<!--
                         <div class="main-nav__section main-nav__search">
                             <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
                             <div class="main-nav__section__content js-main-nav-section-content">
@@ -263,6 +264,7 @@
                                 </form>
                             </div>
                         </div>
+-->
                         <div class="main-nav__section main-nav__community">
                             {% if request.app_info.authenticated %}
                                 {{ head_user_is_logged_in_true(request) }}
