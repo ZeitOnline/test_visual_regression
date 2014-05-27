@@ -267,9 +267,7 @@ def test_artikel_header_header6_should_have_correct_source(testserver):
 
 def test_artikel_header_standardkolumne_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
-
-    assert '<header class="article__head '\
-        'article__head--column">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--column')
 
 
 def test_artikel_header_sequelpage_should_have_correct_source(testserver):
