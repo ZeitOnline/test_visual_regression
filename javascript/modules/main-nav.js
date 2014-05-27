@@ -8,13 +8,12 @@ define(['jquery'], function() {
     var $open_menu_container;
     var mobile_menu_open = false;
     var full_nav_breakpoint = 768;
-    var has_mobile_nav; // will be filled in init_mobile_nav/init_desktop_nav
+    var has_mobile_nav; // will be filled in initMobileNav/initDesktopNav
 
     /**
-     * [init_mobile_nav description]
-     * @return {[type]}
+     * Initialize navigation for small screens
      */
-    var init_mobile_nav = function() {
+    var initMobileNav = function() {
         has_mobile_nav = true;
 
         // enable hamburger
@@ -28,10 +27,9 @@ define(['jquery'], function() {
     };
 
     /**
-     * [init_desktop_ressort_slider description]
-     * @return {[type]}
+     * Initialize ressort slider
      */
-    var init_desktop_ressort_slider = function() {
+    var initRessortSlider = function() {
         var $ressort_slider_container = $('#js-main-nav-ressorts-slider-container');
         var $ressort_slider_strip = $('#js-main-nav-ressorts-slider-strip');
         var hidden_offset = $ressort_slider_strip.outerWidth() - $ressort_slider_container.width();
@@ -56,21 +54,20 @@ define(['jquery'], function() {
     };
 
     /**
-     * [init_desktop_nav description]
-     * @return {[type]}
+     * Initialize navigation for bigger screens
      */
-    var init_desktop_nav = function() {
+    var initDesktopNav = function() {
         has_mobile_nav = false;
 
         // init topics/ressort slider if necessary
-        init_desktop_ressort_slider();
+        initRessortSlider();
     };
 
     /**
-     * [close_open_menu description]
-     * @return {[type]}
+     * Close open menu
+     * @param {object} e - event object
      */
-    var close_open_menu = function(e) {
+    var closeOpenMenu = function(e) {
         if (has_mobile_nav) {
             if (mobile_menu_open && ! $(e.target).closest('.is-open').length) {
                 // close mobile nav when open
@@ -115,8 +112,7 @@ define(['jquery'], function() {
     };
 
     /**
-     * [init description]
-     * @return {[type]}
+     * Initialize navigation
      */
     var init = function() {
         // disable hover fallback
@@ -127,20 +123,20 @@ define(['jquery'], function() {
 
         // init nav depending on screen size
         if ($main_nav_trigger.is(':visible')) {
-            init_mobile_nav();
+            initMobileNav();
         } else {
-            init_desktop_nav();
+            initDesktopNav();
         }
 
         // close all menus whenever user clicks anywhere else
-        $(document.body).on('click', close_open_menu);
+        $(document.body).on('click', closeOpenMenu);
 
         // deliver the right navigation type on window resize
         $(window).resize(function() {
             if ( !has_mobile_nav && $main_nav_trigger.is(':visible') ) {
-                init_mobile_nav();
+                initMobileNav();
             } else if ( has_mobile_nav && $main_nav_trigger.is(':hidden') ) {
-                init_desktop_nav();
+                initDesktopNav();
             }
         });
     };
