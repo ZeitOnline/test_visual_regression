@@ -10,6 +10,12 @@ Change log for zeit.frontend
 
 - ZMO-679: Add Keywords / Tags to HTML
 
+- ZMO-792: Extend testbrowser to support cssselect
+
+- Update underscore.js to version 1.6.0
+
+- Javascript code cleanup
+
 
 0.5.3 (2014-05-26)
 ------------------
