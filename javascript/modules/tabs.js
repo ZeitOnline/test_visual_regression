@@ -1,4 +1,4 @@
-/* global console, define, alert */
+/* global console, define */
 
 define(['jquery'], function() {
 

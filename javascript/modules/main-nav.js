@@ -1,4 +1,4 @@
-/* global console, define, alert */
+/* global console, define */
 define(['jquery'], function() {
 
   var $main_nav_trigger = $('#js-main-nav-trigger');
