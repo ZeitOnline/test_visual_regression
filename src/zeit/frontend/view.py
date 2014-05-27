@@ -74,10 +74,6 @@ class Base(object):
         return self.context.title
 
     @property
-    def subtitle(self):
-        return self.context.subtitle
-
-    @property
     def supertitle(self):
         return self.context.supertitle
 
@@ -87,7 +83,7 @@ class Base(object):
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         if seo.html_title:
             return seo.html_title
-        tokens = (self.context.supertitle, self.context.title)
+        tokens = (self.supertitle, self.title)
         return ': '.join([t for t in tokens if t]) or default
 
     @property
@@ -141,6 +137,10 @@ class Content(Base):
             'myid4',
         )
     }
+
+    @property
+    def subtitle(self):
+        return self.context.subtitle
 
     @property
     def show_article_date(self):
