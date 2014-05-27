@@ -2,7 +2,7 @@
 from StringIO import StringIO
 from zeit.content.article.article import Article
 from zeit.frontend.interfaces import IPages
-from zope.testbrowser.browser import Browser
+from zeit.frontend.test import Browser
 
 
 def test_IPages_contains_blocks(application):
@@ -186,46 +186,46 @@ def test_article10_has_correct_online_source(testserver):
 def test_article08_has_correct_print_source(testserver):
     # print source
     browser = Browser('%s/artikel/08' % testserver.url)
-    assert '<span class="article__head__meta__source">'\
-        'DIE ZEIT Nr. 26/2008</span>' in browser.contents
+    meta_source = browser.cssselect('span.article__head__meta__source')[0]
+    assert 'DIE ZEIT Nr. 26/2008' in meta_source.text_content()
 
 
 def test_article_1_10_produce_no_error(testserver):
     browser = Browser('%s/artikel/01' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/02' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/03' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/04' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/05' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/06' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/07' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/08' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/09' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/10' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
 
 
 def test_header_articles_produce_no_error(testserver):
     browser = Browser('%s/artikel/header1' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header2' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header3' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header4' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header5' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header6' % testserver.url)
-    assert '<div class="article__wrap">' in browser.contents
+    assert browser.cssselect('div.article__wrap')
 
 
 def test_article_header2_has_correct_subtitle(testserver):
@@ -236,46 +236,42 @@ def test_article_header2_has_correct_subtitle(testserver):
 
 def test_artikel_header_header1_should_have_correct_header_source(testserver):
     browser = Browser('%s/artikel/header1' % testserver.url)
-    assert '<h1 class="article__head__title">' in browser.contents
+    assert browser.cssselect('h1.article__head__title')
 
 
 def test_artikel_header_header2_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header2' % testserver.url)
-    assert '<header class="article__head '\
-        'article__head--traum">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--traum')
 
 
 def test_artikel_header_header3_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header3' % testserver.url)
-    assert '<header class="article__head '\
-        'article__head--text-only">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--text-only')
 
 
 def test_artikel_header_header4_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header4' % testserver.url)
-    assert '<header class="article__head '\
-        'article__head--stamp is-constrained">' in browser.contents
+    assert browser.cssselect(
+        'header.article__head.article__head--stamp.is-constrained')
 
 
 def test_artikel_header_header5_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header5' % testserver.url)
-    assert '<header class="article__head '\
-        'article__head--leinwand">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--leinwand')
 
 
 def test_artikel_header_header6_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header6' % testserver.url)
-    assert '<header class="article__head '\
-        'article__head--mode">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--mode')
 
 
 def test_artikel_header_standardkolumne_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
+
     assert '<header class="article__head '\
         'article__head--column">' in browser.contents
 
 
 def test_artikel_header_sequelpage_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/03/seite-2' % testserver.url)
-    assert '<header class="article__head '\
-        'article__head--sequel">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--sequel')
