@@ -32,6 +32,11 @@
     $.fn.inlinegallery = function( defaults ) {
 
         var options = $.extend({
+            onSlideAfter: function(){
+                // integrate tracking
+                window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
+                window.clickCount.ga('hp.zm.slidegallery.showslide.');
+            },
             slideSelector: '.figure-full-width',
             easing: 'ease-in-out',
             pagerType: "short",
@@ -167,17 +172,6 @@
                     }
                 });
             };
-
-            //integrate tracking
-            $( '.bx-wrapper' ).find( 'a' ).on( 'click', function(){
-                var class_name = $( this ).attr( 'class' );
-                var next = /^bx.+next/;
-                var prev = /^bx.+prev/;
-                if( next.exec(class_name) || prev.exec(class_name) ){
-                    window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
-                    window.clickCount.ga('hp.zm.slidegallery.showslide.');
-                }
-            });
 
             figCaptionSizing();
             slider.redrawSlider();
