@@ -4,6 +4,12 @@ Change log for zeit.frontend
 0.5.4 (unreleased)
 ------------------
 
+- Enable site search
+
+- Refactor navigation styles and event handlers
+
+- Simplify border-radius mixin
+
 - ZMO-792: Extend testbrowser to support cssselect
 
 - Update underscore.js to version 1.6.0
