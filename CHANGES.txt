@@ -4,11 +4,11 @@ Change log for zeit.frontend
 0.5.4 (unreleased)
 ------------------
 
-- Make SEO available for zeit.frontend
+- ZMO-679: Make SEO available for zeit.frontend
 
-- Add SEO title and description for cps to HTML
+- ZMO-679: Add SEO title and description for cps and articles to HTML
 
-- Add Keywords / Tags to HTML
+- ZMO-679: Add Keywords / Tags to HTML
 
 
 0.5.3 (2014-05-26)
