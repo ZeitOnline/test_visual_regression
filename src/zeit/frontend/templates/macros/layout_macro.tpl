@@ -258,7 +258,7 @@
                             <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
                             <div class="main-nav__section__content js-main-nav-section-content">
                                 <form action="http://www.zeit.de/suche/index" role="search" method="get" class="main-nav__search__form">
-                                    <input class="main-nav__search__input" type="text" size="20" placeholder="Suchbegriff …" tabindex="1">
+                                    <input class="main-nav__search__input" type="text" name="q" size="20" placeholder="Suchbegriff …">
                                     <input class="main-nav__search__submit" type="submit" value="Suchen">
                                 </form>
                             </div>
