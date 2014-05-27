@@ -69,30 +69,6 @@ class Base(object):
         except IndexError:
             return None
 
-
-class Content(Base):
-    _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-                   'zmo': (
-                       'ZEIT Magazin',
-                       'http://www.zeit.de/zeit-magazin/index',
-                       'myid_zmo',
-                   ),
-                   'leben': (
-                       'Leben',
-                       'http://www.zeit.de/zeit-magazin/leben/index',
-                       'myid2',
-                   ),
-                   'mode-design': (
-                       'Mode & Design',
-                       'http://www.zeit.de/zeit-magazin/mode-design/index',
-                       'myid3',
-                   ),
-                   'essen-trinken': (
-                       'Essen & Trinken',
-                       'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-                       'myid4',
-                   ), }
-
     @property
     def title(self):
         return self.context.title
@@ -135,6 +111,36 @@ class Content(Base):
         else:
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
+
+
+class Content(Base):
+    _navigation = {
+        'start': (
+            'Start',
+            'http://www.zeit.de/index',
+            'myid1'
+        ),
+        'zmo': (
+            'ZEIT Magazin',
+            'http://www.zeit.de/zeit-magazin/index',
+            'myid_zmo',
+        ),
+        'leben': (
+            'Leben',
+            'http://www.zeit.de/zeit-magazin/leben/index',
+            'myid2',
+        ),
+        'mode-design': (
+            'Mode & Design',
+            'http://www.zeit.de/zeit-magazin/mode-design/index',
+            'myid3',
+        ),
+        'essen-trinken': (
+            'Essen & Trinken',
+            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+            'myid4',
+        )
+    }
 
     @property
     def show_article_date(self):

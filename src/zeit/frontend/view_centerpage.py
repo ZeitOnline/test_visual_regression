@@ -55,50 +55,11 @@ class Centerpage(zeit.frontend.view.Base):
             return self._teaserbar
 
     @property
-    def type(self):
-        return type(self.context).__name__.lower()
-
-    @property
     def is_hp(self):
         if self.request.path == '/' + self.request.registry.settings.hp:
             return True
         else:
             return False
-
-    @property
-    def pagetitle(self):
-        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        seo = zeit.seo.interfaces.ISEO(self.context)
-        if seo.html_title:
-            return seo.html_title
-        tokens = (self.context.supertitle, self.context.title)
-        return ': '.join([t for t in tokens if t]) or default
-
-    @property
-    def pagetitle_in_body(self):
-        return self.context.title
-
-    @property
-    def pagedescription(self):
-        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        seo = zeit.seo.interfaces.ISEO(self.context)
-        if seo.html_description:
-            return seo.html_description
-        if self.context.subtitle:
-            return self.context.subtitle
-        return default
-
-    @property
-    def rankedTags(self):
-        return self.context.keywords
-
-    @property
-    def rankedTagsList(self):
-        if self.rankedTags:
-            return ';'.join([rt.label for rt in self.rankedTags])
-        else:
-            default_tags = [self.context.ressort, self.context.sub_ressort]
-            return ';'.join([dt for dt in default_tags if dt])
 
     @property
     def metaRobots(self):
@@ -189,29 +150,11 @@ class Centerpage(zeit.frontend.view.Base):
         stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
         reach = LinkReach(stats_path, linkreach)
+        buzz = dict(twitter=[], facebook=[], comments=[])
         try:
-            return dict(twitter=reach.fetch_service('twitter', 3),
-                        facebook=reach.fetch_service('facebook', 3),
-                        comments=reach.fetch_comments(3)
-                        )
+            buzz['twitter'] = reach.fetch_service('twitter', 3)
+            buzz['facebook'] = reach.fetch_service('facebook', 3)
+            buzz['comments'] = reach.fetch_comments(3)
         except:
             log.error('Cant reach linkreach')
-
-        return dict(twitter=[],
-                    facebook=[],
-                    comments=[]
-                    )
-
-    @property
-    def ressort(self):
-        if self.context.ressort:
-            return self.context.ressort.lower()
-        else:
-            return ''
-
-    @property
-    def sub_ressort(self):
-        if self.context.sub_ressort:
-            return self.context.sub_ressort.lower()
-        else:
-            return ''
+        return buzz
