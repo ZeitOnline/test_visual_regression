@@ -164,7 +164,7 @@ $icon-avatar-std-size: em(32px)
         top: -moz-calc(100% + 1px)
         top: calc(100% + 1px)
         z-index: 10
-        padding: em(4px) em(26px)
+        padding: $micro em(26px)
         line-height: 3
 
     .has-hover
@@ -264,6 +264,8 @@ $icon-avatar-std-size: em(32px)
 
 +respond-max($nav__break__full-menu)
     .main-nav__ressorts
+        padding-top: $micro
+        padding-bottom: $micro
         line-height: 3
         a
             display: block
