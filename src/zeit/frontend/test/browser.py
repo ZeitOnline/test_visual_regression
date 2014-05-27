@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import cssselect
 import lxml.html
 import zope.testbrowser.browser
