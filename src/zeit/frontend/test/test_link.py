@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from zope.testbrowser.browser import Browser
+from zeit.frontend.test import Browser
 import zeit.cms.interfaces
 
 
