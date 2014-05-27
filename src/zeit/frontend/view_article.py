@@ -5,7 +5,6 @@ from zeit.frontend.reach import LinkReach
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
-from zeit.content.image.interfaces import IImageMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
 from zope.component import providedBy
 import logging
@@ -247,25 +246,20 @@ class Article(zeit.frontend.view.Content):
 
     @property
     def focussed_nextread(self):
-        nextread = INextRead(self.context)
-        try:
-            related = nextread.nextread[0]
-            try:
-                _layout = related.nextread_layout
-            except AttributeError:
-                _layout = 'base'
-            try:
-                image = related.main_image
-                image = {
-                    'uniqueId': image.uniqueId,
-                    'caption': (related.main_image_block.custom_caption
-                                or IImageMetadata(image).caption)}
-            except AttributeError:
-                image = {'uniqueId': None}
-                _layout = 'minimal'
-            return {'layout': _layout, 'article': related, 'image': image}
-        except IndexError:
+        """Compile a dictionary of nextread attributes with sensible
+        fallbacks."""
+
+        nextread_context = INextRead(self.context).nextread
+        if not len(nextread_context):
             return None
+
+        nextread = nextread_context[0]
+        layout = getattr(nextread, 'nextread_layout', 'base')
+        image = getattr(nextread.main_image, 'target', None)
+        ratio = reduce(lambda x, y: float(x) / y, image.getImageSize())
+
+        return {'layout': layout, 'article': nextread, 'image': image,
+                'ratio': ratio}
 
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
