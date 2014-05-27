@@ -1,8 +1,8 @@
-/* global console, alert */
+/* global console */
 (function($){
 
 	/**
-	 * generate popup 
+	 * generate popup
 	 */
 	$.fn.enablePopups = function() {
 

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from zope.testbrowser.browser import Browser
+from zeit.frontend.test import Browser
 
 
 def test_standard_gallery_is_there(selenium_driver, testserver):
