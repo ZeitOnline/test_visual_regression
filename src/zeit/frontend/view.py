@@ -19,7 +19,6 @@ log = logging.getLogger(__name__)
 
 
 class Base(object):
-
     """Base class for all views."""
 
     def __init__(self, context, request):
@@ -53,13 +52,13 @@ class Base(object):
         channel = ''
         if self.ressort:
             myressort = self.ressort.replace('zeit-magazin', 'zeitmz')
-            # TODO: end discrepance between testing and live ressports!
+            # TODO: End discrepancy between testing and live ressorts!
             myressort = myressort.replace('lebensart', 'zeitmz')
             channel += myressort
         if self.sub_ressort:
             channel += "/" + self.sub_ressort.replace('-', 'und', 1)
         if self.type:
-            # TODO: zone type gallery after launch
+            # TODO: Zone type gallery after launch
             mytype = self.type.replace('gallery', 'article')
             channel += "/" + mytype
         return channel
