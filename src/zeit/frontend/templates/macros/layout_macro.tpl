@@ -3,8 +3,8 @@
 <!-- click tracking -->
         <script type="text/javascript">
             var clickCount = {
-                get_channel: function() {
-                    // set banner_channel
+                getChannel: function() {
+                    // set banner channel
                     var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : '';
                     return channel;
                 },
@@ -42,9 +42,8 @@
                 },
                 cc: function() {
                     // cc tracking
-                    var bc = this.get_channel();
+                    var bc = this.getChannel();
                     var img = document.createElement('img');
-
                     img.src = 'http://cc.zeit.de/cc.gif?banner-channel=' + bc + '&amp;r=' + escape(document.referrer) + '&amp;rand=' + Math.random() * 10000000000000000;
                 },
                 all: function(id) {
