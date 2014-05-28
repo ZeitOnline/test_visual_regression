@@ -957,7 +957,7 @@ def test_macro_click_tracking_should_produce_correct_js(jinja2_env):
         output += line.strip()
 
     assert 'var clickCount = {' in output
-    assert 'get_channel: function() {' in output
+    assert 'getChannel: function() {' in output
     assert "var channel = 'test' != 'False' ? 'test' : ''" in output
     assert 'webtrekk: function(id) {' in output
     assert 'ga: function(id) {' in output
