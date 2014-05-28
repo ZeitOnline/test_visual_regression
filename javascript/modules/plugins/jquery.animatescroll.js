@@ -19,7 +19,7 @@
          * return to chain jQuery functions
          */
         return this.each(function() {
-            $(this).on('touchstart click', options.selector, function(e) {
+            $(this).on('click', options.selector, function(e) {
                 var anchor = this.hash.slice(1), // remove '#'
                     target,
                     attribute;
