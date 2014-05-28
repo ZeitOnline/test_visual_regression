@@ -10,6 +10,7 @@ import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 import zeit.frontend.article
 import zeit.frontend.view
+import zeit.seo
 
 log = logging.getLogger(__name__)
 
@@ -54,10 +55,6 @@ class Centerpage(zeit.frontend.view.Base):
             return self._teaserbar
 
     @property
-    def type(self):
-        return type(self.context).__name__.lower()
-
-    @property
     def is_hp(self):
         if self.request.path == '/' + self.request.registry.settings.hp:
             return True
@@ -65,37 +62,15 @@ class Centerpage(zeit.frontend.view.Base):
             return False
 
     @property
-    def pagetitle(self):
-        # ToDo(T.B.) should be, doesn't work
-        # return self.context.html-meta-title
-        return 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
-
-    @property
-    def pagetitle_in_body(self):
-        return self.context.title
-
-    @property
-    def pagedescription(self):
-        # ToDo(T.B.) should be self.context.html-meta-title, doesn't work
-        # return self.context.html-meta-title
-        output = 'ZEITmagazin ONLINE - Mode&Design, Essen&Trinken, Leben'
-        return output
-
-    @property
-    def rankedTags(self):
-        # ToDo(T.B.) keywords are empty
-        return self.context.keywords
-
-    @property
-    def rankedTagsList(self):
-        keyword_list = ''
-        if self.rankedTags:
-            # ToDo(T.B.) keywords are empty
-            for keyword in self.context.keywords:
-                keyword_list += keyword.label + ';'
-            return keyword_list[:-1]
-        else:
-            return 'ZEIT ONLINE, ZEIT MAGAZIN'
+    def metaRobots(self):
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        meta_robots = 'index,follow,noodp,noydir,noarchive'
+        try:
+            if seo.meta_robots:
+                meta_robots = seo.meta_robots
+        except AttributeError:
+            log.error('no meta_robots present')
+        return meta_robots
 
     @property
     def area_lead(self):
@@ -175,29 +150,11 @@ class Centerpage(zeit.frontend.view.Base):
         stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
         reach = LinkReach(stats_path, linkreach)
+        buzz = dict(twitter=[], facebook=[], comments=[])
         try:
-            return dict(twitter=reach.fetch_service('twitter', 3),
-                        facebook=reach.fetch_service('facebook', 3),
-                        comments=reach.fetch_comments(3)
-                        )
+            buzz['twitter'] = reach.fetch_service('twitter', 3)
+            buzz['facebook'] = reach.fetch_service('facebook', 3)
+            buzz['comments'] = reach.fetch_comments(3)
         except:
             log.error('Cant reach linkreach')
-
-        return dict(twitter=[],
-                    facebook=[],
-                    comments=[]
-                    )
-
-    @property
-    def ressort(self):
-        if self.context.ressort:
-            return self.context.ressort.lower()
-        else:
-            return ''
-
-    @property
-    def sub_ressort(self):
-        if self.context.sub_ressort:
-            return self.context.sub_ressort.lower()
-        else:
-            return ''
+        return buzz

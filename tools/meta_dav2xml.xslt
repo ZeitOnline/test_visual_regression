@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:D="DAV:" 
+  xmlns:ns3="http://namespaces.zeit.de/CMS/tagging" 
   >
 
   <xsl:template match="/">
@@ -13,28 +14,27 @@
   <xsl:template match="D:response">
     <xsl:apply-templates select="D:href" />
     <xsl:apply-templates select="D:propstat/D:prop" />
-    <xsl:apply-templates select="D:propstat/D:prop//rankedTags" />
   </xsl:template>
 
   <xsl:template match="D:href">
     <xsl:call-template name="attribute" />
   </xsl:template>
 
-  <xsl:template match="D:response/*">
+  <xsl:template match="D:prop/*[not(ns3:rankedTags)]">
     <xsl:call-template name="attribute" />
   </xsl:template>
 
-  <xsl:template match="D:prop/*[not(rankedTags)]">
-    <xsl:call-template name="attribute" />
-  </xsl:template>
-
-  <xsl:template match="D:prop//rankedTags">
-    <rankedTags>
-      <xsl:attribute name="ns">
-        <xsl:value-of select ="namespace-uri()" />
-      </xsl:attribute>
-      <xsl:apply-templates />
-    </rankedTags>
+  <xsl:template match="//D:propstat/D:prop/ns3:rankedTags/ns3:rankedTags">
+    <attribute>
+      <rankedTags>
+        <xsl:attribute name="ns">
+          <xsl:value-of select ="namespace-uri()" />
+        </xsl:attribute>
+        <rankedTags>
+          <xsl:apply-templates />
+        </rankedTags>
+      </rankedTags>
+    </attribute>
   </xsl:template>
 
   <xsl:template name="attribute">
@@ -56,7 +56,7 @@
     </attribute>
   </xsl:template>
 
-  <xsl:template match="//rankedTags/tag">
+  <xsl:template match="//ns3:rankedTags/ns3:rankedTags/tag">
     <tag>
       <xsl:value-of select="." />
     </tag>
