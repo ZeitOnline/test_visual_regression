@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.5.4 (unreleased)
 ------------------
 
+- ZMO-671: Add click tracking API, used in gallery slider
+
 - ZMO-679: Make SEO available for zeit.frontend
 
 - ZMO-679: Add SEO title and description for cps and articles to HTML

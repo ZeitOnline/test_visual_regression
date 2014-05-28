@@ -286,3 +286,9 @@ def test_artikel_header_standardkolumne_should_have_correct_source(testserver):
 def test_artikel_header_sequelpage_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/03/seite-2' % testserver.url)
     assert browser.cssselect('header.article__head.article__head--sequel')
+
+
+def test_gallery_should_have_clickCounter_functions(testserver):
+    browser = Browser(
+        '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    assert 'var clickCount = {' in browser.contents
