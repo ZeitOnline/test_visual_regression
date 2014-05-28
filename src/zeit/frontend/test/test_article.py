@@ -108,6 +108,11 @@ def test_article_without_supertitle_has_correct_page_title(testserver):
         ' zweite Chance verdient' in browser.contents
 
 
+def test_article_should_have_correct_seo_title(testserver):
+    browser = Browser('%s/artikel/04' % testserver.url)
+    assert '<title>SEO title</title>' in browser.contents
+
+
 def test_article_has_correct_page_meta_description(testserver):
     browser = Browser('%s/artikel/03' % testserver.url)
     assert '<meta name="description" '\
@@ -115,6 +120,12 @@ def test_article_has_correct_page_meta_description(testserver):
         ' Der Chianti ist tief gefallen. Doch'\
         ' engagierte Winzer retten dem Wein in der'\
         ' Bastflasche die Ehre. ">' in browser.contents
+
+
+def test_article_should_have_correct_seo_description(testserver):
+    browser = Browser('%s/artikel/04' % testserver.url)
+    assert '<meta name="description" content="SEO description">' \
+        in browser.contents
 
 
 def test_article_has_correct_page_meta_keywords(testserver):
