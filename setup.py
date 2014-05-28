@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.5.3.dev0',
+    version='0.5.4.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
@@ -61,6 +61,7 @@ setup(
     },
     extras_require={
         'test': [
+            'cssselect',
             'mock',
             'webtest',
             'pytest',
@@ -69,7 +70,7 @@ setup(
             'selenium',
             'waitress',
             'webtest',
-            'zope.testbrowser',
+            'zope.testbrowser == 4.0.4',
         ],
     },
     setup_requires=['setuptools_git'],
