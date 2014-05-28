@@ -1,4 +1,65 @@
 
+{% macro click_tracking( banner_channel ) -%}
+<!-- click tracking -->
+        <script type="text/javascript">
+            var clickCount = {
+                getChannel: function() {
+                    // set banner channel
+                    var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : '';
+                    return channel;
+                },
+                addPath: function(id) {
+                    return id + window.location.pathname;
+                },
+                webtrekk: function(id) {
+                    // webtrekk
+                    if (typeof id === 'undefined') return;
+                    if (typeof wt !== 'undefined' && typeof wt.sendinfo === 'function') {
+                        id = this.addPath(id);
+                        wt.sendinfo({linkId: id});
+                    }
+                },
+                ga: function(id) {
+                    // google analytics
+                    if (typeof _gaq !== 'undefined') {
+                        id = this.addPath(id);
+                        _gaq.push(['_trackEvent', id, 'click']);
+                    }
+                },
+                ivw: function() {
+                    // ivw version 1
+                    if ('Z_IVW_RESSORT' in window) {
+                        var img = document.createElement('img');
+                        img.src = 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + '?r=' + escape(document.referrer) + '&amp;d=' + Math.random() * 100000);
+                        img.width = 1;
+                        img.height = 1;
+                        img.className = 'ivw-aja-pixel';
+                    }
+                    // ivw version 2
+                    if (typeof iom !== 'undefined' && typeof iam_data !== 'undefined') {
+                        iom.c(iam_data,1);
+                    }
+                },
+                cc: function() {
+                    // cc tracking
+                    var bc = this.getChannel();
+                    var img = document.createElement('img');
+                    img.src = 'http://cc.zeit.de/cc.gif?banner-channel=' + bc + '&amp;r=' + escape(document.referrer) + '&amp;rand=' + Math.random() * 10000000000000000;
+                },
+                all: function(id) {
+                    // start all tracking functions
+                    if (id) {
+                        this.webtrekk(id);
+                        this.ga(id);
+                    }
+
+                    this.cc();
+                    this.ivw();
+                }
+            }
+        </script>
+{%- endmacro %}
+
 {% macro ga_tracking() -%}
 <!-- ga tracking -->
         <script type="text/javascript">

@@ -1,5 +1,4 @@
 from babel.dates import get_timezone
-from datetime import date
 from pyramid.response import Response
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
@@ -20,7 +19,6 @@ log = logging.getLogger(__name__)
 
 
 class Base(object):
-
     """Base class for all views."""
 
     def __init__(self, context, request):
@@ -53,15 +51,15 @@ class Base(object):
     def banner_channel(self):
         channel = ''
         if self.ressort:
-            myressort = self.ressort.replace('zeit-magazin','zeitmz')
-            # TODO: end discrepance between testing and live ressports!
-            myressort = myressort.replace('lebensart','zeitmz')
+            myressort = self.ressort.replace('zeit-magazin', 'zeitmz')
+            # TODO: End discrepancy between testing and live ressorts!
+            myressort = myressort.replace('lebensart', 'zeitmz')
             channel += myressort
         if self.sub_ressort:
             channel += "/" + self.sub_ressort.replace('-', 'und', 1)
         if self.type:
-            # TODO: zone type gallery after launch
-            mytype = self.type.replace('gallery','article')
+            # TODO: Zone type gallery after launch
+            mytype = self.type.replace('gallery', 'article')
             channel += "/" + mytype
         return channel
 
@@ -71,32 +69,9 @@ class Base(object):
         except IndexError:
             return None
 
-class Content(Base):
-    _navigation = {'start': ('Start', 'http://www.zeit.de/index', 'myid1'),
-                   'zmo': ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
-                   'leben': (
-                       'Leben',
-                       'http://www.zeit.de/zeit-magazin/leben/index',
-                       'myid2',
-                   ),
-                   'mode-design': (
-                       'Mode & Design',
-                       'http://www.zeit.de/zeit-magazin/mode-design/index',
-                       'myid3',
-                   ),
-                   'essen-trinken': (
-                       'Essen & Trinken',
-                       'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-                       'myid4',
-                   ), }
-
     @property
     def title(self):
         return self.context.title
-
-    @property
-    def subtitle(self):
-        return self.context.subtitle
 
     @property
     def supertitle(self):
@@ -104,13 +79,22 @@ class Content(Base):
 
     @property
     def pagetitle(self):
-        # Fallback gracefully if title or supertitle is missing.
-        tokens = (self.context.supertitle, self.context.title)
-        return ': '.join([t for t in tokens if t])
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        if seo.html_title:
+            return seo.html_title
+        tokens = (self.supertitle, self.title)
+        return ': '.join([t for t in tokens if t]) or default
 
     @property
     def pagedescription(self):
-        return self.context.subtitle
+        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        seo = zeit.seo.interfaces.ISEO(self.context)
+        if seo.html_description:
+            return seo.html_description
+        if self.context.subtitle:
+            return self.context.subtitle
+        return default
 
     @property
     def rankedTags(self):
@@ -118,13 +102,45 @@ class Content(Base):
 
     @property
     def rankedTagsList(self):
-        keyword_list = ''
         if self.rankedTags:
-            for keyword in self.context.keywords:
-                keyword_list += keyword.label + ';'
-            return keyword_list[:-1]
+            return ';'.join([rt.label for rt in self.rankedTags])
         else:
-            return ''
+            default_tags = [self.context.ressort, self.context.sub_ressort]
+            return ';'.join([dt for dt in default_tags if dt])
+
+
+class Content(Base):
+    _navigation = {
+        'start': (
+            'Start',
+            'http://www.zeit.de/index',
+            'myid1'
+        ),
+        'zmo': (
+            'ZEIT Magazin',
+            'http://www.zeit.de/zeit-magazin/index',
+            'myid_zmo',
+        ),
+        'leben': (
+            'Leben',
+            'http://www.zeit.de/zeit-magazin/leben/index',
+            'myid2',
+        ),
+        'mode-design': (
+            'Mode & Design',
+            'http://www.zeit.de/zeit-magazin/mode-design/index',
+            'myid3',
+        ),
+        'essen-trinken': (
+            'Essen & Trinken',
+            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+            'myid4',
+        )
+    }
+
+    @property
+    def subtitle(self):
+        return self.context.subtitle
 
     @property
     def show_article_date(self):
