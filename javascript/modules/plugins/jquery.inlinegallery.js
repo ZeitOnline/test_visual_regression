@@ -34,8 +34,10 @@
         var options = $.extend({
             onSlideAfter: function(){
                 // integrate tracking
-                window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
-                window.clickCount.ga('hp.zm.slidegallery.showslide.');
+                if ('clickCount' in window) {
+                    window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
+                    window.clickCount.ga('hp.zm.slidegallery.showslide.');
+                }
             },
             slideSelector: '.figure-full-width',
             easing: 'ease-in-out',
