@@ -75,7 +75,7 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
         driver.set_window_size(560, 900)
-        figselector = ".inline-gallery .figure-full-width"
+        figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
         script = 'return $(".bx-overlay-next").css("display")'
