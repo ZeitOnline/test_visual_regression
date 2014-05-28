@@ -3,57 +3,60 @@
 <!-- click tracking -->
         <script type="text/javascript">
             var clickCount = {
-                get_channel: function(){
-                    //set banner_channel
-                    var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : ''
-                    return( channel );
+                get_channel: function() {
+                    // set banner_channel
+                    var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : '';
+                    return channel;
                 },
-                addPath: function( mode ){
-                    return( mode + '{{request.path_info}}' );
+                addPath: function(id) {
+                    return id + window.location.pathname;
                 },
-                webtrekk: function ( mode ) {
-                    //webtrekk
-                    if( typeof mode == 'undefined' ) return;
-                    if( window.wt !== undefined ) {
-                        mode = this.addPath( mode );
-                        if( window.wt.sendinfo !== undefined ) window.wt.sendinfo( {linkId: mode} );
+                webtrekk: function(id) {
+                    // webtrekk
+                    if (typeof id === 'undefined') return;
+                    if (typeof wt !== 'undefined' && typeof wt.sendinfo === 'function') {
+                        id = this.addPath(id);
+                        wt.sendinfo({linkId: id});
                     }
                 },
-                ga: function( mode ) {
-                    //google analytics
-                    if( window._gaq !== undefined ){
-                        mode = this.addPath( mode );
-                        _gaq.push( ['_trackEvent', mode, "click"] );
+                ga: function(id) {
+                    // google analytics
+                    if (typeof _gaq !== 'undefined') {
+                        id = this.addPath(id);
+                        _gaq.push(['_trackEvent', id, 'click']);
                     }
                 },
                 ivw: function() {
-                    //ivw version 1
-                    if( window.Z_IVW_RESSORT !== undefined ) {
-                        var click = jQuery("<img>").attr( "src", 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + ';?r=' + escape(document.referrer) + '&d=' + Math.random() * 100000).width(1).height(1).addClass( 'ivw-aja-pixel' );
+                    // ivw version 1
+                    if ('Z_IVW_RESSORT' in window) {
+                        var img = document.createElement('img');
+                        img.src = 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + '?r=' + escape(document.referrer) + '&amp;d=' + Math.random() * 100000);
+                        img.width = 1;
+                        img.height = 1;
+                        img.className = 'ivw-aja-pixel';
                     }
                     // ivw version 2
-                    if( typeof iom !== 'undefined' && typeof iam_data !== 'undefined' ) {
+                    if (typeof iom !== 'undefined' && typeof iam_data !== 'undefined') {
                         iom.c(iam_data,1);
                     }
                 },
-                cc: function(){
-                    //cc tracking
+                cc: function() {
+                    // cc tracking
                     var bc = this.get_channel();
-                    var ccimg = document.createElement( 'img' );
-                    var src = 'http://cc.zeit.de/cc.gif?banner-channel=' + bc + '&r=' + escape( document.referrer ) + '&rand=' + Math.random() * 10000000000000000;
-                    ccimg.src = src;
+                    var img = document.createElement('img');
+
+                    img.src = 'http://cc.zeit.de/cc.gif?banner-channel=' + bc + '&amp;r=' + escape(document.referrer) + '&amp;rand=' + Math.random() * 10000000000000000;
                 },
-                all: function( mode ){
-                    //start all tracking functions 
-                    
-                    if( mode ){
-                        this.webtrekk( mode );
-                        this.ga( mode );
+                all: function(id) {
+                    // start all tracking functions
+                    if (id) {
+                        this.webtrekk(id);
+                        this.ga(id);
                     }
 
                     this.cc();
                     this.ivw();
-                } 
+                }
             }
         </script>
 {%- endmacro %}
