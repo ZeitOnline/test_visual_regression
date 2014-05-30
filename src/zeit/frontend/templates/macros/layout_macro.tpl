@@ -436,9 +436,7 @@
 {% macro main_footer() -%}
     <footer class="main-footer">
         <div class="main-footer__box is-constrained is-centered">
-            <div class="main-footer__ZM">
-                <span class="main-footer__ZM__img icon-zm-logo--white"></span>
-            </div>
+            <div class="main-footer__logo icon-zm-logo--white"></div>
             <div class="main-footer__links">
                 <div>
                     <ul>
