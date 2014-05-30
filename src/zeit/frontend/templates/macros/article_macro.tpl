@@ -209,27 +209,6 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro focussed_nextread( nextread ) -%}
-    {%-if nextread -%}
-    <aside class="article__nextread nextread-{{ nextread.layout }} is-centered">
-        <div class="article__nextread__lead">Lesen Sie jetzt:</div>
-        <a title="{{ nextread.article.supertitle }}: {{ nextread.article.title }}" href="{{ nextread.article.uniqueId | translate_url }}">
-            <div class="article__nextread__body is-centered" {% if nextread.layout == "maximal" %} style="background-image:url({{ nextread.image.uniqueId }});" {% endif %}>
-            {% if nextread.layout == "base" and nextread.image %}
-                <div class="scaled-image">
-                    {{ lama.insert_responsive_image(nextread.image) }}
-                </div>
-            {% endif %}
-                <div class="article__nextread__article">
-                    <span class="article__nextread__supertitle">{{ nextread.article.supertitle }}</span>
-                    <span class="article__nextread__title">{{ nextread.article.title }}</span>
-                </div>
-            </div>
-        </a>
-    </aside>
-    {%- endif -%}
-{%- endmacro %}
-
 {% macro video(obj) -%}
     {% if obj.id and obj.format != 'zmo-xl-header' -%}
         <figure class="
