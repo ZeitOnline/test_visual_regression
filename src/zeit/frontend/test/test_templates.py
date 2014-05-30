@@ -95,13 +95,12 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
-    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs"' \
-        ' id="js-breadcrumbs"><div class="breadcrumbs__list-wrap">' \
-        '<div class="breadcrumbs__list">' \
+    markup = '<div class="breadcrumbs">' \
+        '<div class="breadcrumbs__list is-constrained is-centered">' \
         '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
         ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
         '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
-        '</a></div></div></div></div></div>'
+        '</a></div></div></div>'
     lines = tpl.module.breadcrumbs(obj).splitlines()
     output = ""
     for line in lines:

@@ -147,26 +147,22 @@
     {% endif %}
     <meta name="date" content="{{ view.date_first_released_meta }}"/>
 {%- endmacro %}
-{% macro breadcrumbs(crumbs) -%}
 
-    <div class="breadcrumbs-wrap">
-        <div class="breadcrumbs" id="js-breadcrumbs">
-            <div class="breadcrumbs__list-wrap">
-                <div class="breadcrumbs__list">
-                    {% for crumb in crumbs %}
-                        <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-                            {% if crumb[1] != '' %}
-                                <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
-                            {% else %}
-                                <span itemprop="title">&nbsp;&nbsp;{{crumb[0]}}</span>
-                            {% endif %}
-                        </div>
-                        {% if not loop.last %}
-                          &rsaquo;
-                        {% endif %}
-                    {% endfor %}
+{% macro breadcrumbs(crumbs) -%}
+    <div class="breadcrumbs">
+        <div class="breadcrumbs__list is-constrained is-centered">
+            {% for crumb in crumbs -%}
+                <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                {% if crumb[1] != '' -%}
+                    <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
+                {% else -%}
+                    <span itemprop="title">{{crumb[0]}}</span>
+                {% endif -%}
                 </div>
-            </div>
+                {% if not loop.last -%}
+                &rsaquo;
+                {% endif -%}
+            {% endfor -%}
         </div>
     </div>
 {%- endmacro %}
