@@ -5,7 +5,8 @@ from zeit.frontend.reach import LinkReach
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
-from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
+from zeit.magazin.interfaces import IArticleTemplateSettings
+from zeit.frontend.interfaces import INextreadTeaserBlock
 from zope.component import providedBy
 import logging
 import zeit.connector.connector
@@ -245,21 +246,11 @@ class Article(zeit.frontend.view.Content):
         return None  # XXX not implemented in zeit.content.article yet
 
     @property
-    def focussed_nextread(self):
-        """Compile a dictionary of nextread attributes with sensible
-        fallbacks."""
-
-        nextread_context = INextRead(self.context).nextread
-        if not len(nextread_context):
-            return None
-
-        nextread = nextread_context[0]
-        layout = getattr(nextread, 'nextread_layout', 'base')
-        image = getattr(nextread.main_image, 'target', None)
-        ratio = reduce(lambda x, y: float(x) / y, image.getImageSize())
-
-        return {'layout': layout, 'article': nextread, 'image': image,
-                'ratio': ratio}
+    def nextread(self):
+        nextread = INextreadTeaserBlock(self.context)
+        if not len(nextread.teasers):
+            nextread = None
+        return nextread
 
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
