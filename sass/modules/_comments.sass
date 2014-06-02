@@ -86,6 +86,19 @@ $comments-min-width: $comments__break-outside - $max-page-width
         &:last-child
             margin-bottom: 0
 
+.comments--animated
+    +transition-property(transform, opacity, visibility)
+    +transition-duration(0) // duration for "disappear"
+    +transition-timing-function(ease-in-out)
+    +transform-origin(left, top)
+    +respond-min($comments__break-overlap)
+        display: block // needed for working transition
+        opacity: 0
+        visibility: hidden
+    +respond-min-max($comments__break-overlap, $comments__break-outside)
+        +transform(translateX(-100px))
+    +respond-min($comments__break-outside)
+        +transform(scale(0))
 
 .comments__head
     +padded
@@ -260,14 +273,23 @@ $comments-min-width: $comments__break-outside - $max-page-width
     width: em(40px)
     height: em(40px)
 
-.show-comments .page-wrap--inner
-    +respond-min($comments__break-outside)
-        +translateZ(0)
-        left: 0
-        margin-left: 0
-        z-index: 2000
+.show-comments
     .comments
         display: block
+    .comments--animated
+        +transition-duration(.25s) // duration for "appear"
+        +respond-min($comments__break-overlap)
+            +transform(translateX(0))
+            opacity: 1
+            visibility: visible
+        +respond-min($comments__break-outside)
+            +transform(scale(1))
+    .page-wrap--inner
+        +respond-min($comments__break-outside)
+            +translateZ(0)
+            left: 0
+            margin-left: 0
+            z-index: 2000
 
 #iqd_mainAd
     +transition(all 1s)

@@ -476,6 +476,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
             // setTimeout needed for FF bug with linked element inside block having overflow:hidden
             window.setTimeout(function(){
                showComment(e, true);
+               $comments.addClass('comments--animated');
            }, 1);
         });
 
