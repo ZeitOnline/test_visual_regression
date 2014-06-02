@@ -57,8 +57,6 @@ $comments-min-width: $comments__break-outside - $max-page-width
     z-index: 20
     display: none
     +respond-min($comments__break-overlap)
-        +box-shadow
-        +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
         overflow: hidden
         margin: 0
         position: absolute
@@ -69,9 +67,9 @@ $comments-min-width: $comments__break-outside - $max-page-width
         max-width: em(700px)
         width: 100%
         background-color: $white
+    +respond-min-max($comments__break-overlap, $comments__break-outside)
+        +box-shadow
     +respond-min($comments__break-outside)
-        +box-shadow(none)
-        +animation('comments_outside_move_in' 0.25s ease-in-out 1 0s)
         top: 0px
         right: auto
         left: em(980px) - $page-padding
