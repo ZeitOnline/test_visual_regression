@@ -482,6 +482,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
 
         // handle tab switch: recalculate comment metrics for new comment list
         $commentsTabsHead.on('click', '.tabs__head__tab', function(e) {
+            if (e.target.text === 'Ausgewählte' && 'pushState' in history) {
+                history.pushState('', document.title, location.pathname + location.search);
+            }
+
             $commentsActiveList = $(e.target.hash);
             currentOffset = parseInt($commentsActiveList.css('top'), 10);
             calculatePagination();
