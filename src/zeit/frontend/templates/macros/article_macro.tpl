@@ -141,7 +141,6 @@
 {%- endmacro %}
 
 {% macro image(obj) -%}
-<h1>{{ obj.__class__ }}</h1>
     <figure class="
         {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
             figure-full-width
