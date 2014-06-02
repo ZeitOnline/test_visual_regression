@@ -59,6 +59,8 @@
         <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">SEO description</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">SEO title</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>

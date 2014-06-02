@@ -1,10 +1,36 @@
 Change log for zeit.frontend
 ============================
 
-0.6 (unreleased)
-----------------
+0.5.4 (unreleased)
+------------------
+
+- ZMO-671: Add click tracking API, used in gallery slider
+
+- ZMO-679: Make SEO available for zeit.frontend
+
+- ZMO-679: Add SEO title and description for cps and articles to HTML
+
+- ZMO-679: Add Keywords / Tags to HTML
+
+- ZMO-679: Reduce duplicate code in view classes
+
+- ZMO-792: Extend testbrowser to support cssselect
+
+- Update underscore.js to version 1.6.0
+
+- Javascript code cleanup
 
 - Rendering for the daily newsletter.
+
+
+0.5.3 (2014-05-26)
+------------------
+
+- change navi tracking ids according to ZMO-712
+
+- small css cleanup
+
+- rework testing to make it more performant and PEP-8 conform
 
 - make responsive fallback image more adaptive
 
@@ -29,6 +55,8 @@ Change log for zeit.frontend
 - Gracefully handle missing community backend
 
 - Improve linear-gradient mixin
+
+- Implement large upright and square teasers
 
 
 0.5.2 (2014-05-14)

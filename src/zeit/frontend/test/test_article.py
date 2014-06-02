@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from StringIO import StringIO
 from zeit.content.article.article import Article
 from zeit.frontend.interfaces import IPages
-from zope.testbrowser.browser import Browser
+from zeit.frontend.test import Browser
 
 
 def test_IPages_contains_blocks(application):
@@ -25,72 +26,40 @@ def test_IPages_contains_blocks(application):
     assert 'Zweite' == pages[1].teaser
 
 
-def test_article_has_valid_twitter_meta_tags(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    title = driver.find_element_by_class_name('article__head__title').text.strip()
-    path = "//div[@class='article__head__subtitle']/p"
-    desc = driver.find_element_by_xpath(path).text.strip()
-
-    for meta in driver.find_elements_by_tag_name('meta'):
-        if meta.get_attribute("name") == 'twitter:card':
-            assert 'summary' == unicode(meta.get_attribute("content"))
-        if meta.get_attribute("name") == 'twitter:site':
-            assert '@zeitonline' == unicode(meta.get_attribute("content"))
-        if meta.get_attribute("name") == 'twitter:creator':
-            assert '@zeitonline' == unicode(meta.get_attribute("content"))
-        if meta.get_attribute("name") == 'twitter:title':
-            assert unicode(title) == \
-                unicode(meta.get_attribute("content").strip())
-        if meta.get_attribute("name") == 'twitter:description':
-            assert unicode(desc.strip(' Von Anne Mustermann')) == \
-                unicode(meta.get_attribute("content").strip())
-        if meta.get_attribute("name") == 'twitter:image':
-            assert 'scaled-image' == unicode(meta.get_attribute("class"))
+def test_article_has_valid_twitter_meta_tags(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert '<meta name="twitter:card" content="summary">' in browser.contents
+    assert '<meta name="twitter:site"'\
+        ' content="@zeitonline">' in browser.contents
+    assert '<meta name="twitter:creator"'\
+        ' content="@zeitonline">' in browser.contents
+    assert '<meta name="twitter:title"'\
+        ' content="Der Chianti hat eine'\
+        ' zweite Chance verdient">' in browser.contents
+    assert '<meta name="twitter:description"'\
+        ' content="Erst Heilsbringer, dann Massenware:'\
+        ' Der Chianti ist tief gefallen. Doch engagierte Winzer'\
+        ' retten dem Wein in der Bastflasche die Ehre. ">' in browser.contents
+    assert '<meta class="scaled-image"'\
+        ' name="twitter:image"' in browser.contents
 
 
-def test_article_has_all_twitter_meta_tags(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    driver.find_element_by_xpath("//meta[@name='twitter:card']")
-    driver.find_element_by_xpath("//meta[@name='twitter:site']")
-    driver.find_element_by_xpath("//meta[@name='twitter:creator']")
-    driver.find_element_by_xpath("//meta[@name='twitter:title']")
-    driver.find_element_by_xpath("//meta[@name='twitter:description']")
-
-
-def test_article_has_valid_facebook_meta_tags(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    title = driver.find_element_by_class_name('article__head__title').text.strip()
-    path = "//div[@class='article__head__subtitle']/p"
-    desc = driver.find_element_by_xpath(path).text.strip()
-
-    for meta in driver.find_elements_by_tag_name('meta'):
-        if meta.get_attribute("property") == 'og:site_name':
-            assert 'ZEIT ONLINE' == unicode(meta.get_attribute("content"))
-        if meta.get_attribute("property") == 'fb:admins':
-            assert '595098294' == unicode(meta.get_attribute("content"))
-        if meta.get_attribute("property") == 'og:type':
-            assert 'article' == unicode(meta.get_attribute("content"))
-        if meta.get_attribute("property") == 'og:title':
-            assert unicode(title) == \
-                unicode(meta.get_attribute("content").strip())
-        if meta.get_attribute("property") == 'og:description':
-            assert unicode(desc.strip(' Von Anne Mustermann')) == \
-                unicode(meta.get_attribute("content").strip())
-        if meta.get_attribute("property") == 'og:image':
-            assert 'scaled-image' == unicode(meta.get_attribute("class"))
-
-
-def test_article_has_all_facebook_meta_tags(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    driver.find_element_by_xpath("//meta[@property='og:site_name']")
-    driver.find_element_by_xpath("//meta[@property='fb:admins']")
-    driver.find_element_by_xpath("//meta[@property='og:type']")
-    driver.find_element_by_xpath("//meta[@property='og:title']")
-    driver.find_element_by_xpath("//meta[@property='og:description']")
+def test_article_has_valid_facebook_meta_tags(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert '<meta property="og:site_name" '\
+        'content="ZEIT ONLINE">' in browser.contents
+    assert '<meta property="fb:admins"'\
+        ' content="595098294">' in browser.contents
+    assert '<meta property="og:type"'\
+        ' content="article">' in browser.contents
+    assert '<meta property="og:title"'\
+        ' content="Der Chianti hat eine'\
+        ' zweite Chance verdient">' in browser.contents
+    assert '<meta property="og:description"'\
+        ' content="Erst Heilsbringer, dann Massenware:'\
+        ' Der Chianti ist tief gefallen. Doch engagierte Winzer'\
+        ' retten dem Wein in der Bastflasche die Ehre. ">' in browser.contents
+    assert '<meta property="og:image" class="scaled-image"' in browser.contents
 
 
 def test_all_tracking_pixel_are_send(selenium_driver, testserver):
@@ -125,80 +94,79 @@ def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     assert content == "mobzeit"
 
 
-def test_article_has_correct_page_title(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    title = driver.title.strip()
-    assert title == 'Kolumne Die Ausleser: Der Chianti hat eine zweite Chance verdient'
+def test_article_has_correct_page_title(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert '<title>Kolumne Die Ausleser:'\
+        ' Der Chianti hat eine'\
+        ' zweite Chance verdient' in browser.contents
 
 
-def test_article_without_supertitle_has_correct_page_title(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03a' % testserver.url)
-    title = driver.title.strip()
-    assert title == 'Der Chianti hat eine zweite Chance verdient'
+def test_article_without_supertitle_has_correct_page_title(testserver):
+    browser = Browser('%s/artikel/03a' % testserver.url)
+    assert '<title>'\
+        'Der Chianti hat eine'\
+        ' zweite Chance verdient' in browser.contents
 
 
-def test_article_has_correct_page_meta_description(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    meta_description_tag = driver.find_element_by_xpath('//meta[@name="description"]')
-    teststring = 'Erst Heilsbringer, dann Massenware: Der Chianti ist tief gefallen. ' \
-                 'Doch engagierte Winzer retten dem Wein in der Bastflasche die Ehre.'
-    assert meta_description_tag.get_attribute("content").strip() == teststring
+def test_article_should_have_correct_seo_title(testserver):
+    browser = Browser('%s/artikel/04' % testserver.url)
+    assert '<title>SEO title</title>' in browser.contents
 
 
-def test_article_has_correct_page_meta_keywords(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    meta_description_tag = driver.find_element_by_xpath('//meta[@name="keywords"]')
-    teststring = u'Wein, Italien, Toskana, Bologna, Bozen, Florenz, T\xfcbingen'
-    assert meta_description_tag.get_attribute("content").strip() == teststring
+def test_article_has_correct_page_meta_description(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert '<meta name="description" '\
+        'content="Erst Heilsbringer, dann Massenware:'\
+        ' Der Chianti ist tief gefallen. Doch'\
+        ' engagierte Winzer retten dem Wein in der'\
+        ' Bastflasche die Ehre. ">' in browser.contents
 
 
-def test_article08_has_correct_date(selenium_driver, testserver):
+def test_article_should_have_correct_seo_description(testserver):
+    browser = Browser('%s/artikel/04' % testserver.url)
+    assert '<meta name="description" content="SEO description">' \
+        in browser.contents
+
+
+def test_article_has_correct_page_meta_keywords(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert '<meta name="keywords" content="Wein, Italien,'\
+        ' Toskana, Bologna, Bozen, Florenz, Tübingen">' in browser.contents
+
+
+def test_article08_has_correct_date(testserver):
     # not updated print article
-    driver = selenium_driver
-    driver.get('%s/artikel/08' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__date')\
-        .text.strip()
-    assert text == '19. FEBRUAR 2014'
+    browser = Browser('%s/artikel/08' % testserver.url)
+    assert '<span class="article__head__meta__date">'\
+        '19. Februar 2014</span>' in browser.contents
 
 
-def test_article09_has_correct_date(selenium_driver, testserver):
+def test_article09_has_correct_date(testserver):
     # updated print article
-    driver = selenium_driver
-    driver.get('%s/artikel/09' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__date')\
-        .text.strip()
-    assert text == u'4. M\xc4RZ 2014, 14:35 UHR'
+    browser = Browser('%s/artikel/09' % testserver.url)
+    assert '<span class="article__head__meta__date">'\
+        '4. März 2014, 14:35 Uhr</span>' in browser.contents
 
 
-def test_article03_has_correct_date(selenium_driver, testserver):
+def test_article03_has_correct_date(testserver):
     # not updated online article
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__date')\
-        .text.strip()
-    assert text == u'30. JULI 2013, 17:20 UHR'
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert '<span class="article__head__meta__date">'\
+        '30. Juli 2013, 17:20 Uhr</span>' in browser.contents
 
 
-def test_article10_has_correct_date(selenium_driver, testserver):
+def test_article10_has_correct_date(testserver):
     # updated online article
-    driver = selenium_driver
-    driver.get('%s/artikel/10' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__date')\
-        .text.strip()
-    assert text == u'20. FEBRUAR 2014, 17:59 UHR'
+    browser = Browser('%s/artikel/10' % testserver.url)
+    assert '<span class="article__head__meta__date">'\
+        '20. Februar 2014, 17:59 Uhr</span>' in browser.contents
 
 
-def test_article05_has_correct_date(selenium_driver, testserver):
+def test_article05_has_correct_date(testserver):
     # longform
-    driver = selenium_driver
-    driver.get('%s/artikel/05' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__date')\
-        .text.strip()
-    assert text == u'3. NOVEMBER 2013'
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert '<span class="article__head__meta__date">'\
+        '3. November 2013</span>' in browser.contents
 
 
 def test_print_article_has_no_last_changed_date(testserver):
@@ -213,109 +181,114 @@ def test_online_article_has_last_changed_date(testserver):
     assert '1. Oktober 2013, 16:38 Uhr' in article
 
 
-def test_article03_has_no_source(selenium_driver, testserver):
+def test_article03_has_no_source(testserver):
     # zon source
-    driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
-    class_name = '.article__head__meta__source'
-    assert len(driver.find_elements_by_css_selector(class_name)) == 0
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert 'article__head__meta__source' not in browser.contents
 
 
-def test_article10_has_correct_online_source(selenium_driver, testserver):
+def test_article10_has_correct_online_source(testserver):
     # online source
-    driver = selenium_driver
-    driver.get('%s/artikel/10' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__source')\
-        .text.strip()
-    assert text == 'GOLEM.DE'
+    browser = Browser('%s/artikel/10' % testserver.url)
+    assert '<span class="article__head__meta__source">'\
+        'golem.de</span>' in browser.contents
 
 
-def test_article08_has_correct_print_source(selenium_driver, testserver):
+def test_article08_has_correct_print_source(testserver):
     # print source
-    driver = selenium_driver
-    driver.get('%s/artikel/08' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta__source')\
-        .text.strip()
-    assert text == 'DIE ZEIT NR. 26/2008'
+    browser = Browser('%s/artikel/08' % testserver.url)
+    meta_source = browser.cssselect('span.article__head__meta__source')[0]
+    assert 'DIE ZEIT Nr. 26/2008' in meta_source.text_content()
 
 
-def test_article08_has_correct_author_text(selenium_driver, testserver):
-    # print source
-    driver = selenium_driver
-    driver.get('%s/artikel/08' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__meta')\
-        .text.strip()
-    assert text == 'DIE ZEIT NR. 26/2008 19. FEBRUAR 2014'
+def test_article_1_10_produce_no_error(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/02' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/04' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/06' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/07' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/08' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/09' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/10' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
 
 
-def test_article_1_10_produces_no_error(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/02' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/03' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/04' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/05' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/06' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/07' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/08' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/09' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
-    driver.get('%s/artikel/10' % testserver.url)
-    assert len(driver.find_elements_by_css_selector('.page-wrap')) != 0
+def test_header_articles_produce_no_error(testserver):
+    browser = Browser('%s/artikel/header1' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/header2' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/header3' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/header4' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/header5' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/header6' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
 
 
-def test_article_header2_has_correct_subtitle(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/header2' % testserver.url)
-    text = driver.find_element_by_class_name('article__head__subtitle')\
-        .text.strip()
-    assert text == u'Wie viele Fl\u00FCchtlingskinder bin '\
-        u'ich eine Suchende, Getriebene.'
+def test_article_header2_has_correct_subtitle(testserver):
+    browser = Browser('%s/artikel/header2' % testserver.url)
+    assert 'Wie viele Flüchtlingskinder bin '\
+        'ich eine Suchende, Getriebene.' in browser.contents
 
 
 def test_artikel_header_header1_should_have_correct_header_source(testserver):
     browser = Browser('%s/artikel/header1' % testserver.url)
-    assert '<h1 class="article__head__title">' in browser.contents
+    assert browser.cssselect('h1.article__head__title')
 
 
 def test_artikel_header_header2_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header2' % testserver.url)
-    assert '<header class="article__head article__head--traum">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--traum')
 
 
 def test_artikel_header_header3_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header3' % testserver.url)
-    assert '<header class="article__head article__head--text-only">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--text-only')
 
 
 def test_artikel_header_header4_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header4' % testserver.url)
-    assert '<header class="article__head article__head--stamp is-constrained">' in browser.contents
+    assert browser.cssselect(
+        'header.article__head.article__head--stamp.is-constrained')
 
 
 def test_artikel_header_header5_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header5' % testserver.url)
-    assert '<header class="article__head article__head--leinwand">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--leinwand')
 
 
 def test_artikel_header_header6_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/header6' % testserver.url)
-    assert '<header class="article__head article__head--mode">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--mode')
 
 
 def test_artikel_header_standardkolumne_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
-    assert '<header class="article__head article__head--column">' in browser.contents
+
+    assert '<header class="article__head '\
+        'article__head--column">' in browser.contents
 
 
 def test_artikel_header_sequelpage_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/03/seite-2' % testserver.url)
-    assert '<header class="article__head article__head--sequel">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--sequel')
+
+
+def test_gallery_should_have_clickCounter_functions(testserver):
+    browser = Browser(
+        '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    assert 'var clickCount = {' in browser.contents

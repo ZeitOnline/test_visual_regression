@@ -1,11 +1,19 @@
+# -*- coding: utf-8 -*-
+from os.path import abspath, dirname, join
 from pyramid.testing import setUp, tearDown, DummyRequest
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
 import gocept.httpserverlayer.wsgi
 import pkg_resources
-import pytest
 import zeit.frontend.application
+import pytest
+
+
+def test_asset_path(*parts):
+    """ Return full file-system path for given test asset path. """
+    from zeit import frontend
+    return abspath(join(dirname(frontend.__file__), 'data', *parts))
 
 
 def test_asset(path):

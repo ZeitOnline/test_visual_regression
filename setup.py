@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.6.dev0',
+    version='0.5.4.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
@@ -49,6 +49,7 @@ setup(
         'zeit.magazin',
         'zeit.newsletter >= 1.0.0b2.dev0',
         'zeit.wysiwyg',
+        'zeit.seo',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
@@ -63,6 +64,7 @@ setup(
     extras_require={
         'test': [
             'gocept.httpserverlayer',
+            'cssselect',
             'mock',
             'webtest',
             'pytest',

@@ -1,4 +1,65 @@
 
+{% macro click_tracking( banner_channel ) -%}
+<!-- click tracking -->
+        <script type="text/javascript">
+            var clickCount = {
+                getChannel: function() {
+                    // set banner channel
+                    var channel = '{{banner_channel}}' != 'False' ? '{{banner_channel}}' : '';
+                    return channel;
+                },
+                addPath: function(id) {
+                    return id + window.location.pathname;
+                },
+                webtrekk: function(id) {
+                    // webtrekk
+                    if (typeof id === 'undefined') return;
+                    if (typeof wt !== 'undefined' && typeof wt.sendinfo === 'function') {
+                        id = this.addPath(id);
+                        wt.sendinfo({linkId: id});
+                    }
+                },
+                ga: function(id) {
+                    // google analytics
+                    if (typeof _gaq !== 'undefined') {
+                        id = this.addPath(id);
+                        _gaq.push(['_trackEvent', id, 'click']);
+                    }
+                },
+                ivw: function() {
+                    // ivw version 1
+                    if ('Z_IVW_RESSORT' in window) {
+                        var img = document.createElement('img');
+                        img.src = 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + '?r=' + escape(document.referrer) + '&amp;d=' + Math.random() * 100000);
+                        img.width = 1;
+                        img.height = 1;
+                        img.className = 'ivw-aja-pixel';
+                    }
+                    // ivw version 2
+                    if (typeof iom !== 'undefined' && typeof iam_data !== 'undefined') {
+                        iom.c(iam_data,1);
+                    }
+                },
+                cc: function() {
+                    // cc tracking
+                    var bc = this.getChannel();
+                    var img = document.createElement('img');
+                    img.src = 'http://cc.zeit.de/cc.gif?banner-channel=' + bc + '&amp;r=' + escape(document.referrer) + '&amp;rand=' + Math.random() * 10000000000000000;
+                },
+                all: function(id) {
+                    // start all tracking functions
+                    if (id) {
+                        this.webtrekk(id);
+                        this.ga(id);
+                    }
+
+                    this.cc();
+                    this.ivw();
+                }
+            }
+        </script>
+{%- endmacro %}
+
 {% macro ga_tracking() -%}
 <!-- ga tracking -->
         <script type="text/javascript">
@@ -203,7 +264,7 @@
 {% macro main_nav(is_full_width,request) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
+            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <h1 class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN">ZEITmagazin ONLINE</span>
@@ -224,38 +285,37 @@
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
                             <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
                             <div class="main-nav__section__content__wrap" id="js-main-nav-ressorts-slider-strip">
-                                <a href="http://{{request.host}}/zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode.{{request.path_info}}">Mode & Design</a>
-                                <a href="http://{{request.host}}/zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen.{{request.path_info}}">Essen & Trinken</a>
-                                <a href="http://{{request.host}}/zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben.{{request.path_info}}">Leben</a>
+                                <a href="http://{{request.host}}/zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
+                                <a href="http://{{request.host}}/zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
+                                <a href="http://{{request.host}}/zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
                             </div>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__all-ressorts">
-                        <a href="http://www.zeit.de/index"
-                        class="is-standalone-link" id="hp.zm.topnav.centerpages.zon.{{request.path_info}}">» ZEIT ONLINE</a>
+                        <a href="http://www.zeit.de/index" class="is-standalone-link" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <div class="main-nav__section__content is-always-open">
-                            <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo">Abo</a>
-                            <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=42&et_lid=175&et_sub=Startseite_header" id="hp.zm.topnav.links.shop">Shop</a>
-                            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.ePaper">ePaper</a>
+                            <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo.//www.zeitabo.de">Abo</a>
+                            <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.zm.topnav.links.shop.//shop.zeit.de">Shop</a>
+                            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.epaper.//premium.zeit.de">ePaper</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__service">
                         <span class="main-nav__section__trigger icon-arrow-down">Service</span>
                         <div class="main-nav__section__content">
                             <div class="main-nav__section__content__wrap">
-                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.centerpages.service.campus.{{request.path_info}}">ZEITCampus</a>
-                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.centerpages.service.geschichte.{{request.path_info}}">ZEITGeschichte</a>
-                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.centerpages.service.wissen.{{request.path_info}}">ZEITWissen</a>
-                                <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.centerpages.service.partnersuche.{{request.path_info}}">Partnersuche</a>
-                                <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.centerpages.service.immobilien.{{request.path_info}}">Immobilien</a>
-                                <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.centerpages.service.automarkt.{{request.path_info}}">Automarkt</a>
-                                <a href="http://jobs.zeit.de/" id="hp.zm.topnav.centerpages.service.jobs.{{request.path_info}}">Jobs</a>
-                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.zm.topnav.centerpages.service.apps.{{request.path_info}}">Apps</a>
-                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.zm.topnav.centerpages.service.audio.{{request.path_info}}">Audio</a>
-                                <a href="http://www.zeit.de/archiv" id="hp.zm.topnav.centerpages.service.archiv.{{request.path_info}}">Archiv</a>
-                                <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.centerpages.service.spiele.{{request.path_info}}">Spiele</a>
+                                <a href="http://www.zeit.de/campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
+                                <a href="http://www.zeit.de/wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
+                                <a href="http://www.zeit.de/wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index">ZEITWissen</a>
+                                <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.links.partnersuche./angebote/partnersuche/index">Partnersuche</a>
+                                <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.links.immobilien.//zeit.immowelt.de">Immobilien</a>
+                                <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.links.automarkt.//automarkt.zeit.de">Automarkt</a>
+                                <a href="http://jobs.zeit.de/" id="hp.zm.topnav.links.jobs.//jobs.zeit.de">Jobs</a>
+                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.zm.topnav.links.apps.//premium.zeit.de/abo/appsios">Apps</a>
+                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.zm.topnav.links.audio.//premium.zeit.de/abo/digitalpaket5">Audio</a>
+                                <a href="http://www.zeit.de/archiv" id="hp.zm.topnav.links.archiv./archiv">Archiv</a>
+                                <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
                     </div>
@@ -290,14 +350,14 @@
         {%- endif -%}
     </span>
     <div class="main-nav__section__content">
-        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="drupal_account">Account</a>
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="drupal_logout">Logout</a>
+        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
     </div>
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false(request)  %}
     <span class="main-nav__section__without_trigger">
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="drupal_login">Anmelden</a>
+        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
     </span>
 {%- endmacro %}
 
@@ -433,7 +493,7 @@
 {% macro main_nav_compact(obj,request) -%}
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.centerpages.logo.{{request.path_info}}">
+            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <h1 class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITMAGAZIN" alt="ZEITMAGAZIN">ZEITmagazin ONLINE</span>

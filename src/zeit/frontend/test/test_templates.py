@@ -2,6 +2,7 @@
 from mock import Mock
 from re import match
 import pyramid.threadlocal
+import pyramid.config
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
@@ -98,6 +99,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         output += line.strip()
     assert markup == output
 
+
 def test_macro_portraitbox_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     obj = {'name': 'name', 'text': 'text'}
@@ -123,12 +125,12 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     fake_page.teaser = 'Erster'
 
     # assert normal markup
-    markup = (u'%s<div class="article__subpage-index__item"><span class="'
+    markup = (
+        u'%s<div class="article__subpage-index__item"><span class="'
         'article__subpage-index__item__count">1 &mdash; </span><span class="'
         'article__subpage-index__item__title-wrap"><a href="#kapitel1" class="'
-        'article__subpage-index__item__title js-scroll">Erster</a></span></div>'
-        '</div>'
-        ) % (markup_standart)
+        'article__subpage-index__item__title js-scroll">Erster</a></span>'
+        '</div></div>') % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -138,7 +140,8 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert active markup
     css_active = 'article__subpage-active'
-    markup_active = (u'%s<div class="article__subpage-index__item"><span '
+    markup_active = (
+        u'%s<div class="article__subpage-index__item"><span '
         'class="article__subpage-index__item__count">1 &mdash; </span><span '
         'class="article__subpage-index__item__title-wrap"><span class="'
         'article__subpage-index__item__title %s">Erster</span></span></div>'
@@ -325,6 +328,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
         assert match(markup, output)
 
+
 def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     obj = Mock()
@@ -342,7 +346,8 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
     start = '<div class="scaled-image is-pixelperfect">' \
             '<!--[if gt IE 9]>--><noscript data-ratio="1"><!--<![endif]-->' \
-            '<img alt="test" title="test" class="article__main-image--longform figure__media" src="'
+            '<img alt="test" title="test" class="article__main-image--' \
+            'longform figure__media" src="'
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)
@@ -352,10 +357,10 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     test_class = 'test'
-    authors = [{'prefix': 'Von', 'href': 'www.zeit.de',
-            'name': 'Tom', 'location': ', Bern', 'suffix': 'und'},
-           {'prefix': '', 'href': '',
-            'name': 'Anna', 'location': '', 'suffix': ''}]
+    authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
+                'location': ', Bern', 'suffix': 'und'},
+               {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
+                'suffix': ''}]
     markup = 'Von<a href="www.zeit.de" class="test">Tom</a>, Bern' \
              'und<span class="test">Anna</span>'
     lines = tpl.module.meta_author(authors, test_class).splitlines()
@@ -642,8 +647,8 @@ def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
              'var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + string,
              'document.write("<img src=',
              '</script',
-             '<img alt="" class="visuallyhidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/'
-             + string]
+             ('<img alt="" class="visuallyhidden" src="http://zeitonl.ivwbox.'
+              'de/cgi-bin/ivw/CP/') + string]
     lines = tpl.module.ivw_ver1_tracking(string).splitlines()
     output = ""
     for line in lines:
@@ -685,12 +690,11 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'noscript_width_height': ('728', '90'),
               'diuqilon': True,
               'min_width': 768}
-    num = '123456789'
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
              'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
              'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
-             '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type="text' \
-             '/javascript"><\/script>\');'
+             '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type=' \
+             '"text/javascript"><\/script>\');'
     lines = tpl.module.adplace(banner).splitlines()
     output = ""
     for line in lines:
@@ -756,7 +760,9 @@ def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
     assert 'title="TITLE"' in output
     assert '<!--<![endif]-->' in output
 
-def test_macro_insert_responsive_image_should_produce_alternative_markup(jinja2_env):
+
+def test_macro_insert_responsive_image_should_produce_alternative_markup(
+        jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     image = Mock()
     image.alt = 'ALT'
@@ -788,6 +794,7 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     assert '<div class="teaser__kicker">SUPATITLE</div>' in output
     assert '<div class="teaser__title">TITLE</div>' in output
 
+
 def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
@@ -806,7 +813,8 @@ def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
     assert 'FALLBACK' in output
 
 
-def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_env):
+def test_macro_teaser_supertitle_title_should_produce_alternative_markup(
+        jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = Mock()
@@ -814,7 +822,8 @@ def test_macro_teaser_supertitle_title_should_produce_alternative_markup(jinja2_
     teaser.teaserTitle = "TITLE"
     teaser.uniqueId = "ID"
 
-    lines = tpl.module.teaser_supertitle_title(teaser, 'CLASS', withlink=False).splitlines()
+    lines = tpl.module.teaser_supertitle_title(teaser, 'CLASS',
+                                               withlink=False).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -842,7 +851,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request = Mock()
     request.app_info.user.picture = None
 
-    #no pic
+    # no pic
     markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
 
     lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
@@ -852,7 +861,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
 
     assert markup in output
 
-    #pic
+    # pic
     request = Mock()
     request.app_info.community_host = 'www.zeit.de/'
     request.app_info.user.picture = 'test.jpg'
@@ -863,9 +872,9 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     markup = '<span class="main-nav__community__icon--pic"'\
         ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
     account = '<a href="www.zeit.de/user/1"'\
-        ' id="drupal_account">Account</a>'
+        ' id="hp.zm.topnav.community.account">Account</a>'
     logout = '<a href="www.zeit.de/logout?destination=test"'\
-        ' id="drupal_logout">Logout</a>'
+        ' id="hp.zm.topnav.community.logout">Logout</a>'
 
     lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
     output = ""
@@ -888,7 +897,7 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
 
     markup = '<span class="main-nav__section__without_trigger">'\
         '<a href="www.zeit.de/login?destination=test"'\
-        ' id="drupal_login">Anmelden</a></span>'
+        ' id="hp.zm.topnav.community.login">Anmelden</a></span>'
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
     output = ""
@@ -903,7 +912,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     request = Mock()
 
-    #logged in
+    # logged in
     request.app_info.authenticated = 'true'
     markup = '<div class="main-nav__menu__content '\
         'main-nav--logged-in" id="js-main-nav-content">'
@@ -916,7 +925,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     assert markup in output
     assert logged in output
 
-    #logged out
+    # logged out
     request.app_info.authenticated = None
     markup = '<div class="main-nav__menu__content '\
         'main-nav--logged-out" id="js-main-nav-content">'
@@ -928,3 +937,21 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     assert markup in output
     assert unlogged in output
+
+
+def test_macro_click_tracking_should_produce_correct_js(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    lines = tpl.module.click_tracking('test').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert 'var clickCount = {' in output
+    assert 'getChannel: function() {' in output
+    assert "var channel = 'test' != 'False' ? 'test' : ''" in output
+    assert 'webtrekk: function(id) {' in output
+    assert 'ga: function(id) {' in output
+    assert 'ivw: function() {' in output
+    assert 'cc: function() {' in output
+    assert 'all: function(id) {' in output
