@@ -11,4 +11,7 @@
     provides="zeit.cms.repository.interfaces.IRepository"
     />
 
+  <adapter factory="zeit.seo.seo.SEO" />
+  <adapter factory="zeit.seo.seo.seo_dav_properties" />
+
 </configure>
