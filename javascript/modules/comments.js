@@ -482,7 +482,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
 
         // handle tab switch: recalculate comment metrics for new comment list
         $commentsTabsHead.on('click', '.tabs__head__tab', function(e) {
-            if (e.target.text === 'Ausgewählte' && 'pushState' in history) {
+            if (e.target.hash === '#tab2' && 'pushState' in history) {
                 history.pushState('', document.title, location.pathname + location.search);
             }
 
