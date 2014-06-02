@@ -2,7 +2,7 @@ import gocept.httpserverlayer.static
 import os
 import pytest
 import time
-import zeit.frontend.jinja
+import zeit.frontend.utils
 
 
 @pytest.fixture(scope='session')
@@ -23,7 +23,7 @@ def template_server(template_server_session):
 def test_retrieves_template_via_http(template_server):
     open(template_server['documentroot'] + '/foo.html', 'w').write('foo')
 
-    loader = zeit.frontend.jinja.HTTPLoader(template_server.url)
+    loader = zeit.frontend.utils.HTTPLoader(template_server.url)
     UNUSED_ENVIRONMENT = None
     source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
     assert 'foo' == source
@@ -37,7 +37,7 @@ def test_checks_uptodate_using_last_modified_header(template_server):
     template = template_server['documentroot'] + '/foo.html'
     open(template, 'w').write('foo')
 
-    loader = zeit.frontend.jinja.HTTPLoader(template_server.url)
+    loader = zeit.frontend.utils.HTTPLoader(template_server.url)
     UNUSED_ENVIRONMENT = None
     source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
 
@@ -48,7 +48,7 @@ def test_checks_uptodate_using_last_modified_header(template_server):
 
 
 def test_no_url_configured_yields_error_message():
-    loader = zeit.frontend.jinja.HTTPLoader(url=None)
+    loader = zeit.frontend.utils.HTTPLoader(url=None)
     UNUSED_ENVIRONMENT = None
     source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
     assert 'load_template_from_dav_url' in source

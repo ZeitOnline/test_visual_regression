@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from zeit.frontend import view_centerpage
-from zeit.frontend.jinja import create_image_url
-from zeit.frontend.jinja import default_image_url
-from zeit.frontend.jinja import most_sufficient_teaser_image
-from zeit.frontend.jinja import most_sufficient_teaser_tpl
+from zeit.frontend.utils import create_image_url
+from zeit.frontend.utils import default_image_url
+from zeit.frontend.utils import most_sufficient_teaser_image
+from zeit.frontend.utils import most_sufficient_teaser_tpl
 from zope.component import getMultiAdapter
 from zeit.frontend.test import Browser
 import mock
