@@ -20,12 +20,15 @@ class Agatho(object):
 
     def collection_get(self, unique_id):
         try:
-            response = requests.get('%s%s' % (self.entry_point, path_of_article(unique_id)), timeout=self.timeout)
-        except: # yes, we really do want to catch *all* exceptions here!
+            response = requests.get(
+                '%s%s' % (self.entry_point, path_of_article(unique_id)),
+                timeout=self.timeout)
+        except:  # yes, we really do want to catch *all* exceptions here!
             return None
         if response.ok:
             try:
-                return _place_answers_under_parent(etree.fromstring(response.content))
+                return _place_answers_under_parent(
+                    etree.fromstring(response.content))
             except(IOError, XMLSyntaxError):
                 return None
         else:
@@ -123,6 +126,7 @@ def comment_as_dict(comment, request):
         content = comment.xpath('content/text()')[0]
     else:
         content = '[fehler]'
+
     return dict(
         indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
