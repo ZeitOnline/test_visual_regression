@@ -20,6 +20,8 @@ Change log for zeit.frontend
 
 - Javascript code cleanup
 
+- Improve test for responsive tap buttons in gallery slider
+
 - Rendering for the daily newsletter.
 
 
