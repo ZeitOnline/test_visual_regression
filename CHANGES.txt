@@ -6,6 +6,16 @@ Change log for zeit.frontend
 
 - ZMO-771: Add missing images to nextread
 
+- ZMO-671: Add click tracking API, used in gallery slider
+
+- ZMO-679: Make SEO available for zeit.frontend
+
+- ZMO-679: Add SEO title and description for cps and articles to HTML
+
+- ZMO-679: Add Keywords / Tags to HTML
+
+- ZMO-679: Reduce duplicate code in view classes
+
 - ZMO-792: Extend testbrowser to support cssselect
 
 - Update underscore.js to version 1.6.0

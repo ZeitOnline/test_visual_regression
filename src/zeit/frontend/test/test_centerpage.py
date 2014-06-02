@@ -46,21 +46,53 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 
 def test_centerpage_should_have_correct_page_title(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZEITmagazin ONLINE - Mode&amp;Design, '\
-        'Essen&amp;Trinken, Leben</title>' in browser.contents
+    assert '<title>ZMO CP: ZMO</title>' in browser.contents
+
+
+def test_centerpage_should_have_correct_seo_title(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<title>SEO title</title>' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_description(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="description" content="ZEITmagazin '\
-        'ONLINE - Mode&amp;Design, Essen&amp;Trinken,'\
-        ' Leben">' in browser.contents
+    assert '<meta name="description" content="ZMO CP">' in browser.contents
+
+
+def test_centerpage_should_have_seo_description(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<meta name="description" content="SEO description">' \
+        in browser.contents
+
+
+def test_centerpage_should_have_default_keywords(testserver):
+    # Default means ressort and sub ressort respectively
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<meta name="keywords" content="Lebensart, Leben">' \
+        in browser.contents
 
 
 def test_centerpage_should_have_page_meta_keywords(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="keywords" content="ZEIT ONLINE, '\
-        'ZEIT MAGAZIN">' in browser.contents
+    assert '<meta name="keywords" content="Pinguin">' \
+        in browser.contents
+
+
+def test_centerpage_should_have_page_meta_robots_information(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    # SEO robots information is given
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    meta_robots_tag = driver.find_element_by_xpath(
+        '//meta[@name="robots"]')
+    teststring = u'my, personal, seo, robots, information'
+    assert meta_robots_tag.get_attribute("content").strip() == teststring
+    # No SEO robots information is given
+    driver.get('%s/zeit-magazin/index' % testserver.url)
+    meta_robots_tag = driver.find_element_by_xpath(
+        '//meta[@name="robots"]')
+    teststring = u'index,follow,noodp,noydir,noarchive'
+    assert meta_robots_tag.get_attribute("content").strip() == teststring
 
 
 def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
