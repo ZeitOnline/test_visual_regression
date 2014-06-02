@@ -309,10 +309,10 @@ def test_nextread_teaser_blocks_has_correct_layout_id(application):
     nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 09" has a base nextread layout.'
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/07')
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
     assert nextread.layout.id == 'maximal', \
-        '"Artikel 07" has a maximal nextread layout.'
+        '"Artikel 03" has a maximal nextread layout.'
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/01')
     nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
@@ -341,7 +341,7 @@ def test_nextread_base_layout_has_image_element_if_available(testserver):
 
 
 def test_nextread_maximal_layout_has_image_background_if_available(testserver):
-    browser = Browser('%s/artikel/07' % testserver.url)
+    browser = Browser('%s/artikel/03' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
     assert 'katzencontent.jpg' in nextread.attrib.get('style'), \
         'The teaser image should be set as a background for "maximal" teasers.'
