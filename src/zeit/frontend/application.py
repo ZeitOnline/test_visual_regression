@@ -1,41 +1,29 @@
-from babel.dates import format_datetime
-from datetime import datetime
-from datetime import timedelta
 from grokcore.component import adapter, implementer
-from repoze.bitblt.transform import compute_signature
-from urlparse import urlsplit, urlunsplit
+from zeit.content.gallery.interfaces import IGalleryMetadata
+from zeit.frontend.article import IColumnArticle
 from zeit.frontend.article import ILongformArticle
 from zeit.frontend.article import IShortformArticle
-from zeit.frontend.article import IColumnArticle
-from zeit.frontend.centerpage import auto_select_asset
-from zeit.frontend.centerpage import get_all_assets
-from zeit.frontend.centerpage import get_image_asset
 from zeit.frontend.gallery import IGallery
 from zeit.frontend.gallery import IProductGallery
-from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import base64
-import itertools
-import jinja2
 import logging
 import os.path
 import pkg_resources
 import pyramid.config
-import pyramid.threadlocal
 import pyramid_jinja2
-import re
 import urlparse
-import zeit.cms.interfaces
 import zeit.connector
-import zeit.content.link.interfaces
 import zeit.frontend
 import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.centerpage
+import zeit.frontend.utils
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
+import zope.interface
 
 
 log = logging.getLogger(__name__)
@@ -139,25 +127,45 @@ class Application(object):
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         jinja = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
-        jinja.globals.update(zeit.frontend.navigation.get_sets())
-        jinja.globals['create_image_url'] = create_image_url
-        jinja.globals['get_teaser_image'] = most_sufficient_teaser_image
-        jinja.globals['get_teaser_template'] = most_sufficient_teaser_tpl
-        jinja.tests['elem'] = zeit.frontend.block.is_block
-        jinja.filters['format_date'] = format_date
-        jinja.filters['format_date_ago'] = format_date_ago
-        jinja.filters['replace_list_seperator'] = replace_list_seperator
-        jinja.filters['block_type'] = zeit.frontend.block.block_type
-        jinja.filters['translate_url'] = translate_url
-        jinja.filters['create_url'] = create_url
-        jinja.filters['default_image_url'] = default_image_url
-        jinja.filters['auto_select_asset'] = auto_select_asset
-        jinja.filters['get_all_assets'] = get_all_assets
-        jinja.filters['obj_debug'] = obj_debug
-        jinja.filters['substring_from'] = substring_from
-        jinja.filters['hide_none'] = hide_none
-        jinja.filters['get_image_metadata'] = get_image_metadata
+
+        default_loader = jinja.loader
+        jinja.loader = zeit.frontend.utils.PrefixLoader({
+            None: default_loader,
+            'dav': zeit.frontend.utils.HTTPLoader(self.settings.get(
+                'load_template_from_dav_url'))
+        }, delimiter='://')
+
         jinja.trim_blocks = True
+
+        jinja.globals.update(zeit.frontend.navigation.get_sets())
+        jinja.globals['get_teaser_template'] = (
+            zeit.frontend.utils.most_sufficient_teaser_tpl)
+        jinja.globals['get_teaser_image'] = (
+            zeit.frontend.utils.most_sufficient_teaser_image)
+        jinja.globals['create_image_url'] = (
+            zeit.frontend.utils.create_image_url)
+
+        jinja.tests['elem'] = zeit.frontend.block.is_block
+
+        # XXX Use scanning to register filters instead of listing them here
+        # again.
+        jinja.filters['block_type'] = zeit.frontend.block.block_type
+        for name in [
+                'auto_select_asset', 'get_all_assets',
+                ]:
+            jinja.filters[name] = getattr(zeit.frontend.centerpage, name)
+
+        jinja.filters['auto_select_asset'] = (
+            zeit.frontend.centerpage.auto_select_asset)
+        for name in [
+                'format_date', 'format_date_ago',
+                'replace_list_seperator', 'translate_url',
+                'default_image_url', 'get_image_metadata',
+                'obj_debug', 'substring_from', 'hide_none',
+                'create_url',
+                ]:
+            jinja.filters[name] = getattr(zeit.frontend.utils, name)
+
         return jinja
 
     def configure_zca(self):
@@ -287,216 +295,6 @@ def join_url_path(base, path):
     path = os.path.join(parts.path, path)
     return urlparse.urlunsplit(
         (parts[0], parts[1], path, parts[3], parts[4]))
-
-
-@jinja2.contextfilter
-def translate_url(context, url):
-    if url is None:
-        return None
-    # XXX Is it really not possible to get to the actual template variables
-    # (like context, view, request) through the jinja2 context?!??
-    request = pyramid.threadlocal.get_current_request()
-    if request is None:  # XXX should only happen in tests
-        return url
-
-    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
-
-
-@jinja2.contextfilter
-def create_url(context, obj):
-    if zeit.content.link.interfaces.ILink.providedBy(obj):
-        return obj.url
-    else:
-        return translate_url(context, obj.uniqueId)
-
-
-def format_date(obj, type='short'):
-    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
-    return format_datetime(obj, formats[type], locale="de_De")
-
-
-def format_date_ago(dt, precision=2, past_tense='vor {}',
-                    future_tense='in {}'):
-
-    # customization of https://bitbucket.org/russellballestrini/ago :)
-    delta = dt
-    if not isinstance(dt, type(timedelta())):
-        delta = datetime.now() - dt
-
-    the_tense = past_tense
-    if delta < timedelta(0):
-        the_tense = future_tense
-
-    delta = abs(delta)
-    d = {
-        'Jahr': int(delta.days / 365),
-        'Tag': int(delta.days % 365),
-        'Stunde': int(delta.seconds / 3600),
-        'Minute': int(delta.seconds / 60) % 60,
-        'Sekunde': delta.seconds % 60
-    }
-    hlist = []
-    count = 0
-    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
-    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
-                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
-    for unit in units:
-        unit_displayed = unit
-        if count >= precision:
-            break  # met precision
-        if d[unit] == 0:
-            continue  # skip 0's
-        if d[unit] != 1:
-            unit_displayed = units_plural[unit]
-        hlist.append('%s %s' % (d[unit], unit_displayed))
-        count += 1
-    human_delta = ', '.join(hlist)
-    return the_tense.format(human_delta)
-
-
-def obj_debug(value):
-    try:
-        res = []
-        for k in dir(value):
-            res.append('%r : %r;' % (k, getattr(value, k)))
-        return '\n'.join(res)
-    except AttributeError:
-        return False
-
-
-def substring_from(string, find):
-    return string.split(find)[-1]
-
-
-def hide_none(string):
-    if string is None:
-        return ''
-    else:
-        return string
-
-
-def replace_list_seperator(semicolonseperatedlist, seperator):
-    return semicolonseperatedlist.replace(';', seperator)
-
-# definition of default images sizes per layout context
-default_images_sizes = {
-    'default': (200, 300),
-    'large': (800, 600),
-    'small': (200, 300),
-    'upright': (320, 480),
-    'zmo-xl-header': (460, 306),
-    'zmo-xl': (460, 306),
-    'zmo-medium-left': (225, 125),
-    'zmo-medium-center': (225, 125),
-    'zmo-medium-right': (225, 125),
-    'zmo-large-left': (225, 125),
-    'zmo-large-center': (225, 125),
-    'zmo-large-right': (225, 125),
-    'zmo-small-left': (225, 125),
-    'zmo-small-center': (225, 125),
-    'zmo-small-right': (225, 125),
-    '540x304': (290, 163),
-    '940x400': (470, 200),
-    '148x84': (74, 42),
-    '220x124': (110, 62),
-    '368x110': (160, 48),
-    '368x220': (160, 96),
-    '180x101': (90, 50),
-    'zmo-landscape-large': (460, 306),
-    'zmo-landscape-small': (225, 125),
-    'zmo-square-large': (200, 200),
-    'zmo-square-small': (50, 50),
-    'zmo-lead-upright': (320, 480),
-    'zmo-upright': (320, 432),
-    'zmo-large': (460, 200),
-    'zmo-medium': (330, 100),
-    'zmo-small': (200, 50),
-    'zmo-x-small': (100, 25),
-    'zmo-card-picture': (320, 480),
-}
-
-
-def default_image_url(image,
-                      image_pattern='default'):
-    try:
-        if image_pattern != 'default':
-            width, height = default_images_sizes.get(image_pattern, (640, 480))
-        elif hasattr(image, 'layout'):
-            width, height = default_images_sizes.get(image.layout, (640, 480))
-        else:
-            width, height = default_images_sizes.get(image_pattern, (640, 480))
-        # TODO: use secret from settings?
-        signature = compute_signature(width, height, 'time')
-
-        if image.uniqueId is None:
-            return None
-
-        scheme, netloc, path, query, fragment = urlsplit(image.uniqueId)
-        parts = path.split('/')
-        parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
-        path = '/'.join(parts)
-        url = urlunsplit((scheme, netloc, path, query, fragment))
-        request = pyramid.threadlocal.get_current_request()
-
-        return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
-    except:
-        log.debug('Cannot produce a default URL for %s', image)
-
-
-def most_sufficient_teaser_tpl(block_layout,
-                               content_type,
-                               asset,
-                               prefix='templates/inc/teaser/teaser_',
-                               suffix='.html',
-                               separator='_'):
-    types = (block_layout, content_type, asset)
-    default = ('default',)
-    iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
-    zipped = (t + default if iterable(t) else (t,) + default for t in types)
-
-    combinations = [t for t in itertools.product(*zipped)]
-    func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-    return map(func, combinations)
-
-
-def most_sufficient_teaser_image(teaser_block,
-                                 teaser,
-                                 asset_type=None,
-                                 file_type='jpg'):
-    image_pattern = teaser_block.layout.image_pattern
-    if asset_type is None:
-        asset = auto_select_asset(teaser)
-    elif asset_type == 'image':
-        asset = get_image_asset(teaser)
-    else:
-        raise KeyError(asset_type)
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return None
-    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
-    image_id = '%s/%s-%s.%s' % \
-        (asset.uniqueId, image_base_name, image_pattern, file_type)
-    try:
-        teaser_image = zope.component.getMultiAdapter(
-            (asset, zeit.cms.interfaces.ICMSContent(image_id)),
-            zeit.frontend.interfaces.ITeaserImage)
-        return teaser_image
-    except TypeError:
-        return None
-
-
-def create_image_url(teaser_block, image):
-    image_pattern = teaser_block.layout.image_pattern
-    image_url = default_image_url(
-        image, image_pattern=image_pattern)
-    return image_url
-
-
-def get_image_metadata(image):
-    try:
-        image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
-        return image_metadata
-    except TypeError:
-        return None
 
 
 @adapter(zeit.cms.repository.interfaces.IRepository)
