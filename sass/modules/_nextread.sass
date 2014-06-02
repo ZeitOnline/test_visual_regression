@@ -1,6 +1,6 @@
 $nextread-background: #f7f7f7
 $nextread-bordercolor: #eee
-$nextread-image-width: 260px
+$nextread-teaser-width: 260px
 $nextread-image-height: 172px
 $nextread-minimal-height: em(165px)
 $nextread-maximal-height: em(320px)
@@ -20,81 +20,80 @@ $nextread-maximal-height: em(320px)
 	background-color: $nextread-background
 	border-top: 1px solid $nextread-bordercolor
 	margin-top: $huge
-	padding-bottom: $huge
+	padding-bottom: $mediumhuge
 	+respond-max($break-2)
 		margin-top: $petite
-		padding-bottom: $big
+		padding-bottom: $large
 
 .article__nextread__lead
 	font-size: $font-m
 	letter-spacing: $hair
-	padding: $medium 0
+	margin: $big 0 $junior
 	text-align: center
 	text-transform: uppercase
 
 .article__nextread__wrap
+	text-align: center
 	+respond-max($break-2)
-		text-align: center
+		width: $nextread-teaser-width
+		margin: 0 auto
 
 .article__nextread__supertitle
 	@extend %supertitle
 	font-size: $font-s
 	display: block
-	padding-bottom: $micro
-	+respond-max($break-2)
-		padding: 0
-		margin: $small 0 $micro
+	margin: $small 0 $micro
+	text-align: left
 
 .article__nextread__title
 	display: block
 	font-size: $font-l
 	letter-spacing: 1px
+	text-align: left
 	+respond-min($break-1)
 		font-size: $font-xl
 	+respond-min($break-2)
 		font-size: $font-xxl
 
-.nextread-base
-	@extend %nextread-link-dark
-	position: relative
+.article__nextread__img
+	display: table-cell
 	img
 		height: auto
 		display: block
 		width: 100%
 		+respond-min($break-2)
 			height: $nextread-image-height
-			width: $nextread-image-width
+			width: $nextread-teaser-width
+
+.nextread-base
+	@extend %nextread-link-dark
+	position: relative
 	.article__nextread__body
-		margin: 0 auto
+		display: inline-block
+		margin: $large auto $junior
 		max-width: $medium-content-width
-		+respond-min($break-2)
-			display: table
-			height: $nextread-image-height
+	.article__nextread__body--multi
+		margin: $junior
 	.article__nextread__body--single
 		+respond-min($break-2)
+			display: table
 			background: $white
 			width: 80%
-		+respond-max($break-2)
-			display: inline-block
-	.article__nextread__body--multi
-		+respond-min($break-2)
-			width: 90%
-	.article__nextread__img
-		display: table-cell
-	.article__nextread__article
-		padding: 0
-		text-align: left
-		+respond-min($break-2)
-			display: table-cell
-			vertical-align: top
-			padding: $medium $thin $thin $medium
-			.article__nextread__title
-				font-size: $font-xl
-				padding: 0
-				text-align: left
-			.article__nextread__supertitle
-				text-align: left
-				padding: 0
+		.article__nextread__article
+			padding: 0
+			+respond-min($break-1)
+				.article__nextread__title
+					font-size: $font-xl
+			+respond-min($break-2)
+				display: table-cell
+				vertical-align: top
+				padding: $medium $thin $thin $medium
+				.article__nextread__title
+					font-size: $font-xl
+					padding: 0
+				.article__nextread__supertitle
+					margin: $micro 0
+					padding: 0
 
 .nextread-minimal
 	@extend %nextread-link-dark
@@ -103,9 +102,9 @@ $nextread-maximal-height: em(320px)
 		margin: 0 auto
 		padding: $medium
 		width: 80%
-	.article__nextread__article
+	.article__nextread__title,
+	.article__nextread__supertitle
 		text-align: center
-
 
 .nextread-maximal
 	@extend %nextread-link-light
@@ -114,7 +113,6 @@ $nextread-maximal-height: em(320px)
 		padding-right: $medium
 	.article__nextread__body
 		+background-size(cover)
-		display: table
 		height: $nextread-minimal-height
 		width: 100%
 		+respond-min($break-1)
@@ -122,10 +120,15 @@ $nextread-maximal-height: em(320px)
 		+respond-min($break-2)
 			height: $nextread-maximal-height
 	.article__nextread__article
-		display: table-cell
-		padding: 0 $small
+		height: 100%
+	.article__nextread__supertitle
+		padding-top: $medium
+		+respond-min($break-2)
+			padding-top: $huge
+	.article__nextread__supertitle,
+	.article__nextread__title
 		text-align: center
-		vertical-align: middle
+		width: 100%
 	.article__nextread__title
 		font-size: $font-xl
 		+respond-min($break-1)
