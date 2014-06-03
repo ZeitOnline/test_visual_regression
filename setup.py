@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.6',
+    version='0.7.dev0',
     author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
     author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
                   ron.drongowski@zeit.de, anika.szuppa@zeit.de',
