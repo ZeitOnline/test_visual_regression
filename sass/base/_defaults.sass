@@ -1,29 +1,21 @@
 *
-  +box-sizing(border-box)
+    +box-sizing(border-box)
 
 html
 
 body
-  +franziska
-  font-size: $font-m
-  line-height: $base-line-height
-  color: $color-text
-  margin: 0
-  padding: 0
+    +franziska
+    font-size: $font-m
+    line-height: $base-line-height
+    color: $color-text
+    margin: 0
+    padding: 0
 
 img
-  max-width: 100%
-  height: auto
-  display: block
+    max-width: 100%
+    height: auto
+    display: block
 
 a
-  +link-colors($color-link--default, $color-link--default, $color-link--default, $color-link--default, $color-link--default)
-  +transition(border-color 0.2s)
-  border-bottom: 1px solid transparent
-  border-bottom: 1px solid rgba($color-link--default, 0)
-  padding-bottom: -0.05em
-  text-decoration: none
-  +on-interaction
+    +link-colors($color-link--default, $color-link--hover, $color-link--hover, $color-link--default, $color-link--hover)
     text-decoration: none
-    border-color: $color-link--hover
-    color: $color-link--hover

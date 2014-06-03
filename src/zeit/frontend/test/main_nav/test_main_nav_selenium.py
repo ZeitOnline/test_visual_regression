@@ -59,20 +59,18 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     driver.get('%s/artikel/01' % testserver.url)
 
     class_trig = "main-nav__section__trigger"
-    # class_no_trig = "main-nav__section__without_trigger"
     class_cont = "main-nav__section__content"
     # class_input = "main-nav__search__input"
     # class_button = "main-nav__search__submit"
 
     nav_list = driver.find_elements_by_id('js-main-nav')
-    main_nav = driver.find_elements_by_id('js-main-nav')[0]
-    trigger = main_nav.find_element_by_class_name('main-nav__menu__head')
+    main_nav = driver.find_element_by_id('js-main-nav')
+    trigger = driver.find_element_by_id('js-main-nav-trigger')
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
     logo = main_nav.find_element_by_class_name('main-nav__logo__img')
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
-    res_content = res.find_element_by_class_name(class_cont)
-    print dir(res_content)
+    res_content = res.find_element_by_class_name('main-nav__ressorts__slider')
     res_links = res_content.find_elements_by_tag_name('a')
 
     service = main_nav.find_element_by_class_name('main-nav__service')
@@ -81,19 +79,20 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     service_links = service_cont.find_elements_by_tag_name('a')
 
     # community = main_nav.find_element_by_class_name('main-nav__community')
-    # community_trig = community.find_element_by_class_name(class_no_trig)
+    # community_trig = community.find_element_by_class_name(class_trig)
 
     # there's exactly one navigation
     assert(len(nav_list) == 1)
 
     # navigation is visible
     assert(main_nav.is_displayed())
-    assert(trigger.is_displayed())
 
     # menu is initially hidden on mobile, but visible on desktop
     if small_screen:
+        assert(trigger.is_displayed())
         assert(not menu.is_displayed())
     else:
+        assert(not trigger.is_displayed())
         assert(menu.is_displayed())
 
     # menu can be opened by click
