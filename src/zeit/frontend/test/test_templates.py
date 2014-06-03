@@ -869,7 +869,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request.app_info.community_paths.logout = 'logout'
     request.url = 'test'
 
-    markup = '<span class="main-nav__community__icon--pic"'\
+    markup = '<span class="main-nav__community__icon"'\
         ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
     account = '<a href="www.zeit.de/user/1"'\
         ' id="hp.zm.topnav.community.account">Account</a>'
@@ -895,9 +895,8 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     request.app_info.community_paths.register = 'register'
     request.url = 'test'
 
-    markup = '<span class="main-nav__section__without_trigger">'\
-        '<a href="www.zeit.de/login?destination=test"'\
-        ' id="hp.zm.topnav.community.login">Anmelden</a></span>'
+    markup = '<a href="www.zeit.de/login?destination=test"'\
+        ' id="hp.zm.topnav.community.login">Anmelden</a>'
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
     output = ""
@@ -914,8 +913,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     # logged in
     request.app_info.authenticated = 'true'
-    markup = '<div class="main-nav__menu__content '\
-        'main-nav--logged-in" id="js-main-nav-content">'
+    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ""
@@ -927,8 +925,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
     # logged out
     request.app_info.authenticated = None
-    markup = '<div class="main-nav__menu__content '\
-        'main-nav--logged-out" id="js-main-nav-content">'
+    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ""

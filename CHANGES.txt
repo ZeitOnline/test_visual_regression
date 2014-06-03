@@ -1,8 +1,16 @@
 Change log for zeit.frontend
 ============================
 
-0.5.4 (unreleased)
-------------------
+0.7 (unreleased)
+----------------
+
+- Refactor navigation styles and event handlers
+
+- Simplify border-radius mixin
+
+
+0.6 (2014-06-03)
+----------------
 
 - add bottom padding to billboard ad
 
