@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from zeit.frontend.test import Browser
+from zeit.frontend.template import create_url
 import zeit.cms.interfaces
 
 
@@ -18,5 +19,4 @@ def test_link_object_teaser_should_lead_directly_to_destination(testserver):
 def test_create_url_filter_should_create_correct_url(testserver):
     path = '/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview'
     obj = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de%s-2' % path)
-    from zeit.frontend.utils import create_url
     assert create_url(None, obj) == 'http://www.zeit.de' + path

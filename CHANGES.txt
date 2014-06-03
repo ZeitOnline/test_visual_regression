@@ -18,6 +18,8 @@ Change log for zeit.frontend
 
 - ZMO-792: Extend testbrowser to support cssselect
 
+- Rename zeit.frontend.utils to .templates
+
 - Update underscore.js to version 1.6.0
 
 - Javascript code cleanup
