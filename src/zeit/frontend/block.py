@@ -39,7 +39,7 @@ class IFrontendHeaderBlock(zope.interface.Interface):
 # die Macros sollten durch die IFrontendBlock-Objekte selbst festgelegt
 # werden. Das API jedes der BlockItem-Objekte muß ja ohnehin zum jeweiligen
 # Macro passen.
-def is_block(obj, b_type):
+def elem(obj, b_type):
     o_type = block_type(obj)
     return IFrontendBlock.providedBy(obj) and o_type == b_type
 
