@@ -547,7 +547,7 @@ def test_pagination_next_page_url_is_working(testserver):
 
 def test_pagination_next_page_url_on_last_page_is_none(testserver):
     browser = Browser('%s/artikel/03/seite-7' % testserver.url)
-    content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
+    content = '<span class="icon-pagination-next">Vor</span>'
 
     assert content in browser.contents
 

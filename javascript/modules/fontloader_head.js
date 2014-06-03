@@ -10,13 +10,13 @@ window.FontLoader = (function(ZMO) {
 			identifier: 'base',
 			selector: null,
 			path: ZMO.home + 'css/standalone-fonts/base.css',
-			version: "2.0"
+			version: "2.1"
 		},
 		{
 			identifier: 'quotes',
 			selector: '.quote, .quote--loud',
 			path: ZMO.home + 'css/standalone-fonts/quotes.css',
-			version: "2.0"
+			version: "2.1"
 		}
 	];
 

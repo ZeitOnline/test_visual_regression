@@ -18,7 +18,7 @@ import zeit.frontend
 import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.centerpage
-import zeit.frontend.utils
+import zeit.frontend.template
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -129,9 +129,9 @@ class Application(object):
             pyramid_jinja2.IJinja2Environment)
 
         default_loader = jinja.loader
-        jinja.loader = zeit.frontend.utils.PrefixLoader({
+        jinja.loader = zeit.frontend.template.PrefixLoader({
             None: default_loader,
-            'dav': zeit.frontend.utils.HTTPLoader(self.settings.get(
+            'dav': zeit.frontend.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
@@ -139,11 +139,11 @@ class Application(object):
 
         jinja.globals.update(zeit.frontend.navigation.get_sets())
         jinja.globals['get_teaser_template'] = (
-            zeit.frontend.utils.most_sufficient_teaser_tpl)
+            zeit.frontend.template.most_sufficient_teaser_tpl)
         jinja.globals['get_teaser_image'] = (
-            zeit.frontend.utils.most_sufficient_teaser_image)
+            zeit.frontend.template.most_sufficient_teaser_image)
         jinja.globals['create_image_url'] = (
-            zeit.frontend.utils.create_image_url)
+            zeit.frontend.template.create_image_url)
 
         jinja.tests['elem'] = zeit.frontend.block.is_block
 
@@ -164,7 +164,7 @@ class Application(object):
                 'obj_debug', 'substring_from', 'hide_none',
                 'create_url',
                 ]:
-            jinja.filters[name] = getattr(zeit.frontend.utils, name)
+            jinja.filters[name] = getattr(zeit.frontend.template, name)
 
         return jinja
 
