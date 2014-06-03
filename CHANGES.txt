@@ -4,7 +4,9 @@ Change log for zeit.frontend
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Refactor navigation styles and event handlers
+
+- Simplify border-radius mixin
 
 
 0.6 (2014-06-03)
