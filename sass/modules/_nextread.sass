@@ -74,6 +74,8 @@ $nextread-maximal-height: em(320px)
 		max-width: $medium-content-width
 	.article__nextread__body--multi
 		margin: $junior
+		.article__nextread__title
+			font-size: $font-l
 	.article__nextread__body--single
 		+respond-min($break-2)
 			display: table
@@ -94,6 +96,14 @@ $nextread-maximal-height: em(320px)
 				.article__nextread__supertitle
 					margin: $micro 0
 					padding: 0
+	.article__nextread__body--no-img
+		.article__nextread__article--single
+			+respond-min($break-2)
+				display: block
+				padding: $medium
+			.article__nextread__title,
+			.article__nextread__supertitle
+				text-align: center
 
 .nextread-minimal
 	@extend %nextread-link-dark
