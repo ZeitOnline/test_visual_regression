@@ -1,5 +1,5 @@
 from pyramid.view import view_config
-from zeit.frontend.utils import translate_url
+from zeit.frontend.template import translate_url
 import pytz
 import zc.iso8601.parse
 import zeit.content.image.interfaces
