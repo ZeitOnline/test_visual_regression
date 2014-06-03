@@ -52,10 +52,9 @@
                     {% endif %}
                 {% endblock article_comments %}
 
-                {% block article_nextread %}
-                    {{ blocks.focussed_nextread(view.focussed_nextread) }}
-                {% endblock article_nextread %}
-
+                {% if view.nextread %}
+                    {%- include "templates/inc/article_area_nextread.html" ignore missing -%}
+                {% endif %}
             </div>
         </div>
     </article>

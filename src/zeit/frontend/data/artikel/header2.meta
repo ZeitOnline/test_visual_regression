@@ -15,6 +15,7 @@
   <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
   <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
   <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">minimal</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-27T13:41:24.553806+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Quelle</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>

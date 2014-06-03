@@ -14,6 +14,10 @@ Change log for zeit.frontend
 0.6 (2014-06-03)
 ----------------
 
+- ZMO-771: Add missing images to nextread
+
+- ZMO-771: Implement nextread as teaser block with different layouts
+
 - ZMO-671: Add click tracking API, used in gallery slider
 
 - ZMO-679: Make SEO available for zeit.frontend
