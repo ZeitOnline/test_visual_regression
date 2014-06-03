@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from zeit.frontend import view_centerpage
-from zeit.frontend.application import create_image_url
-from zeit.frontend.application import default_image_url
-from zeit.frontend.application import most_sufficient_teaser_image
-from zeit.frontend.application import most_sufficient_teaser_tpl
+from zeit.frontend.template import create_image_url
+from zeit.frontend.template import default_image_url
+from zeit.frontend.template import most_sufficient_teaser_image
+from zeit.frontend.template import most_sufficient_teaser_tpl
 from zope.component import getMultiAdapter
 from zeit.frontend.test import Browser
 import mock
@@ -12,8 +12,6 @@ import pytest
 import re
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
-import zeit.frontend.interfaces
-import zeit.frontend.view_centerpage
 
 
 @pytest.fixture
@@ -46,21 +44,53 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 
 def test_centerpage_should_have_correct_page_title(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZEITmagazin ONLINE - Mode&amp;Design, '\
-        'Essen&amp;Trinken, Leben</title>' in browser.contents
+    assert '<title>ZMO CP: ZMO</title>' in browser.contents
+
+
+def test_centerpage_should_have_correct_seo_title(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<title>SEO title</title>' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_description(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="description" content="ZEITmagazin '\
-        'ONLINE - Mode&amp;Design, Essen&amp;Trinken,'\
-        ' Leben">' in browser.contents
+    assert '<meta name="description" content="ZMO CP">' in browser.contents
+
+
+def test_centerpage_should_have_seo_description(testserver):
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<meta name="description" content="SEO description">' \
+        in browser.contents
+
+
+def test_centerpage_should_have_default_keywords(testserver):
+    # Default means ressort and sub ressort respectively
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<meta name="keywords" content="Lebensart, Leben">' \
+        in browser.contents
 
 
 def test_centerpage_should_have_page_meta_keywords(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="keywords" content="ZEIT ONLINE, '\
-        'ZEIT MAGAZIN">' in browser.contents
+    assert '<meta name="keywords" content="Pinguin">' \
+        in browser.contents
+
+
+def test_centerpage_should_have_page_meta_robots_information(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    # SEO robots information is given
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    meta_robots_tag = driver.find_element_by_xpath(
+        '//meta[@name="robots"]')
+    teststring = u'my, personal, seo, robots, information'
+    assert meta_robots_tag.get_attribute("content").strip() == teststring
+    # No SEO robots information is given
+    driver.get('%s/zeit-magazin/index' % testserver.url)
+    meta_robots_tag = driver.find_element_by_xpath(
+        '//meta[@name="robots"]')
+    teststring = u'index,follow,noodp,noydir,noarchive'
+    assert meta_robots_tag.get_attribute("content").strip() == teststring
 
 
 def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
@@ -202,7 +232,7 @@ def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
         assert len(link_wrap) == 3
         for link in link_wrap:
             assert link.get_attribute("href") == 'http://'\
-                '127.0.0.1:6543/centerpage/article_image_asset'
+                'localhost:6543/centerpage/article_image_asset'
 
 
 def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
@@ -283,7 +313,7 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
         assert len(link_wrap) != 0
         for link in link_wrap:
             assert link.get_attribute("href") == 'http://'\
-                '127.0.0.1:6543/centerpage/article_image_asset'
+                'localhost:6543/centerpage/article_image_asset'
 
 
 def test_cp_large_button_has_expected_structure(selenium_driver, testserver):
@@ -326,9 +356,10 @@ def test_cp_large_button_has_expected_links(selenium_driver, testserver):
         print link_wrap
         assert len(link_wrap) != 0
         for link in link_wrap:
-            assert link.get_attribute("href") == 'http://'\
-                '127.0.0.1:6543/zeit-magazin/test-cp/'\
-                'gesellschaftskritik-grumpy-cat'
+            assert re.search(
+                'http://.*/zeit-magazin/test-cp/' +
+                'gesellschaftskritik-grumpy-cat',
+                link.get_attribute("href"))
 
 
 def test_cp_should_have_informatives_ad_at_3rd_place(
@@ -396,7 +427,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         # links
         assert len(a) == 3
         for link in a:
-            assert link.get_attribute("href") == 'http://127.0.0.1'\
+            assert link.get_attribute("href") == 'http://localhost'\
                 ':6543/centerpage/article_video_asset'
 
 
@@ -433,7 +464,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         # links
         assert len(a) == 3
         for link in a:
-            assert link.get_attribute("href") == 'http://127.0.0.1'\
+            assert link.get_attribute("href") == 'http://localhost'\
                 ':6543/centerpage/article_image_asset'
 
 

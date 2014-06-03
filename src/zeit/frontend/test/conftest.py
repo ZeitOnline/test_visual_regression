@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-from os import path
-from os.path import abspath, dirname, join, sep
+from os.path import abspath, dirname, join
 from pyramid.testing import setUp, tearDown, DummyRequest
-from pytest_localserver.http import WSGIServer
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
-from zeit import frontend
-import pyramid.config
-import pytest
+import gocept.httpserverlayer.wsgi
+import pkg_resources
 import zeit.frontend.application
+import pytest
 
 
 def test_asset_path(*parts):
@@ -20,33 +18,27 @@ def test_asset_path(*parts):
 
 def test_asset(path):
     """ Return file-object for given test asset path. """
-    return open(test_asset_path(*path.split(sep)), 'rb')
+    return open(pkg_resources.resource_filename(
+        'zeit.frontend', 'data' + path), 'rb')
 
 
 settings = {
     'pyramid.reload_templates': 'false',
+
     'pyramid.debug_authorization': 'false',
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
 
-    'community_host': u'file://%s/' % path.join(
-        path.dirname(path.abspath(frontend.__file__)),
-        'data',
-        'comments'
-    ),
-    'agatho_host': u'file://%s/' % path.join(
-        path.dirname(path.abspath(frontend.__file__)),
-        'data',
-        'comments'
-    ),
-    'linkreach_host': u'file://%s/' % path.join(
-        path.dirname(path.abspath(frontend.__file__)),
-        'data',
-        'linkreach',
-        'api',
-    ),
-    'proxy_url': '',
+    'community_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/comments'),
+    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/comments'),
+    'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.frontend', 'data/linkreach/api'),
+
+    'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
+
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
     'node_comment_statistics': 'data/node-comment-statistics.xml',
@@ -86,7 +78,9 @@ settings = {
     'vivi_zeit.frontend_banner-source': (
         'egg://zeit.frontend/data/config/banner.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
-        'egg://zeit.frontend/data/config/gallery-types.xml')
+        'egg://zeit.frontend/data/config/gallery-types.xml'),
+
+    'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 }
 
 
@@ -97,9 +91,9 @@ browsers = {
 
 
 @pytest.fixture(scope="module")
-def jinja2_env(request):
+def jinja2_env():
     app = zeit.frontend.application.Application()
-    app.config = pyramid.config.Configurator()
+    app.configure_pyramid()
     return app.configure_jinja()
 
 
@@ -133,6 +127,7 @@ def agatho():
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
+
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach
@@ -142,9 +137,14 @@ def linkreach():
 
 @pytest.fixture(scope='session')
 def testserver(application, request):
-    server = WSGIServer(application=application, port="6543")
-    server.start()
-    request.addfinalizer(server.stop)
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6543  # XXX Why not use the default (random) port?
+    server.wsgi_app = application
+    server.setUp()
+    # Convenience / compatibility with pytest-localserver which was used here
+    # previously.
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
     return server
 
 
@@ -162,9 +162,11 @@ def http_testserver(request):
     config.add_view(hello_world, route_name='any')
     app = config.make_wsgi_app()
 
-    server = WSGIServer(application=app, port='8889')
-    server.start()
-    request.addfinalizer(server.stop)
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 8889  # XXX Why not use the default (random) port?
+    server.wsgi_app = app
+    server.setUp()
+    request.addfinalizer(server.tearDown)
     return server
 
 

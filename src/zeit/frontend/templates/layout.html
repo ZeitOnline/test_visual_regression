@@ -14,7 +14,7 @@
         {% if view.rankedTagsList %}
             <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
         {% endif %}
-        <meta name="robots" content="index,follow,noodp,noydir,noarchive">
+        <meta name="robots" content="{{view.metaRobots}}">
         <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
         {% if view.context.advertising_enabled %}
         <script>
@@ -149,6 +149,7 @@
         {{lama.cc_tracking(view.banner_channel)}}
         {{lama.meetrics_tracking()}}
         {{lama.webtrekk_tracking(view,request)}}
+        {{lama.click_tracking(view.banner_channel)}}
 
         <script>
             var require = {

@@ -1,11 +1,14 @@
 # coding: utf-8
-import PIL
-from lxml import etree, html
 from grokcore.component import adapter, implementer
+from lxml import etree, html
+import PIL
+import logging
+import os.path
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
+import zeit.content.video.interfaces
+import zeit.newsletter.interfaces
 import zope.interface
-import logging
 
 
 # Since this interface is an implementation detail rather than part of the API
@@ -260,6 +263,83 @@ class InlineGallery(object):
             if(entry.layout != 'hidden'):
                 my_items.append(InlineGalleryImage(entry))
         return my_items
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.newsletter.interfaces.IGroup)
+class NewsletterGroup(object):
+
+    type = 'group'
+
+    def __init__(self, context):
+        self.context = context
+        self.title = context.title
+
+    def values(self):
+        return [IFrontendBlock(x) for x in self.context.values()]
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.newsletter.interfaces.ITeaser)
+class NewsletterTeaser(object):
+
+    autoplay = None
+
+    def __init__(self, context):
+        self.context = context
+        if zeit.content.video.interfaces.IVideoContent.providedBy(
+                context.reference):
+            self.more = 'Video starten'
+            self.autoplay = True
+        else:
+            self.more = 'weiterlesen'
+
+    @property
+    def image(self):
+        if zeit.content.video.interfaces.IVideoContent.providedBy(
+                self.context.reference):
+            return self.context.reference.thumbnail
+        images = zeit.content.image.interfaces.IImages(
+            self.context.reference, None)
+        group = (images is not None) and images.image
+        if group is None:
+            return None
+        # XXX An actual API for selecting a size would be nice.
+        for name in group:
+            basename, ext = os.path.splitext(name)
+            if basename.endswith('148x84'):
+                image = group[name]
+                return image.uniqueId.replace(
+                    'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
+
+    @property
+    def url(self):
+        url = self.uniqueId.replace(
+            'http://xml.zeit.de/', 'http://www.zeit.de/', 1)
+        if self.autoplay:
+            url += '#autoplay'
+        return url
+
+    def __getattr__(self, name):
+        return getattr(self.context.reference, name)
+
+
+@implementer(IFrontendBlock)
+@adapter(zeit.newsletter.interfaces.IAdvertisement)
+class NewsletterAdvertisement(object):
+
+    type = 'advertisement'
+
+    def __init__(self, context):
+        self.context = context
+        self.title = context.title
+        self.text = context.text
+        self.url = context.href
+
+    @property
+    def image(self):
+        return self.context.image.uniqueId.replace(
+            'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 
 
 def _raw_html(xml):

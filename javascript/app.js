@@ -1,4 +1,4 @@
-/* globals require, define, packery, console */
+/* globals require, define, console */
 
 // configuration section for require js
 require.config({
@@ -9,7 +9,7 @@ require.config({
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
 		"bxSlider": "libs/jquery.bxslider",
-		"packery": "libs/packery.pkgd"
+		"jquery-bridget/jquery.bridget": "libs/packery.pkgd.min"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
@@ -66,18 +66,4 @@ require([
 	$( "div[data-backgroundvideo]" ).backgroundVideo();
 	$( "a.js-has-popup" ).enablePopups();
 	$( "main" ).animateScroll({selector: '.js-scroll'});
-	$( "a.icon-paginierungs-pfeil-links").hover(function(){
-		$(this).removeClass('icon-paginierungs-pfeil-links');
-		$(this).addClass('icon-paginierungs-pfeil-links-hover');
-	}, function(){
-		$(this).removeClass('icon-paginierungs-pfeil-links-hover');
-		$(this).addClass('icon-paginierungs-pfeil-links');
-	});
-	$( "a.icon-paginierungs-pfeil-rechts").hover(function(){
-		$(this).removeClass('icon-paginierungs-pfeil-rechts');
-		$(this).addClass('icon-paginierungs-pfeil-rechts-hover');
-	}, function(){
-		$(this).removeClass('icon-paginierungs-pfeil-rechts-hover');
-		$(this).addClass('icon-paginierungs-pfeil-rechts');
-	});
 });

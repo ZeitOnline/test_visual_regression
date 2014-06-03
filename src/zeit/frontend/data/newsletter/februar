@@ -1,0 +1,20 @@
+<newsletter xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/meta" name="type">newsletter</attribute>
+  </head>
+  <body>
+    <region cp:type="group" module="group">
+      <head>
+        <title>Politik</title>
+      </head>
+      <container cp:type="teaser" module="teaser">
+        <block href="http://xml.zeit.de/artikel/01">
+        </block>
+      </container>
+      <container cp:type="teaser" module="teaser">
+        <block href="http://xml.zeit.de/artikel/02">
+        </block>
+      </container>
+    </region>
+  </body>
+</newsletter>
