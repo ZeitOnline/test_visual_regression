@@ -1,8 +1,8 @@
 Change log for zeit.frontend
 ============================
 
-0.5.4 (unreleased)
-------------------
+0.6 (2014-06-03)
+----------------
 
 - ZMO-671: Add click tracking API, used in gallery slider
 
