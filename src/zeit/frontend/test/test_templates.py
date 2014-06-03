@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
 from mock import Mock
 from re import match
-import pyramid.config
 import pyramid.threadlocal
-import pytest
-import zeit.frontend.application
-
-
-@pytest.fixture(scope="module")
-def jinja2_env(request):
-    app = zeit.frontend.application.Application()
-    app.config = pyramid.config.Configurator()
-    return app.configure_jinja()
+import pyramid.config
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
