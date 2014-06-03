@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.7 (unreleased)
 ----------------
 
+- ZMO-789: Add bottom padding to billboard ad
+
 - Refactor navigation styles and event handlers
 
 - Simplify border-radius mixin
@@ -11,8 +13,6 @@ Change log for zeit.frontend
 
 0.6 (2014-06-03)
 ----------------
-
-- add bottom padding to billboard ad
 
 - ZMO-671: Add click tracking API, used in gallery slider
 
