@@ -193,6 +193,10 @@ module.exports = function(grunt) {
 			css: {
 				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
+			},
+			grunticon: {
+				files: [project.sourceDir + 'sass/icons/*.svg'],
+				tasks: ['grunticon']
 			}
 		}
 	});

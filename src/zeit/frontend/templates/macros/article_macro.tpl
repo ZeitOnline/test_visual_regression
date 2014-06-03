@@ -457,16 +457,14 @@
         <div class="paginator__a11y__title is-audible" id="pagination-title" style="display:none">Seitennavigation</div> <!-- nach unsichtbar verschieben -->
         {% if pagination.next_page_title -%}
             <div class="article__pagination__nexttitle">
-                <a href="{{pagination.next_page_url}}">Auf Seite {{pagination.current + 1}} <span class="paginator__dash">—</span> {{pagination.next_page_title}}</a>
+                <a href="{{pagination.next_page_url}}">Auf Seite {{pagination.current + 1}} <span class="article__pagination__dash">—</span> {{pagination.next_page_title}}</a>
             </div>
         {%- endif %}
         <ul class="article__pager">
             {% if pagination.prev_page_url %}
-                <li class="article__pager__prev">
-                    <a class="icon-paginierungs-pfeil-links" href="{{pagination.prev_page_url}}">Zurück</a>
-                </li>
+                <li class="article__pager__prev"><a class="icon-pagination-previous" href="{{pagination.prev_page_url}}">Zurück</a></li>
             {% else %}
-                <li class="article__pager__prev is-inactive"><span class="icon-paginierungs-pfeil-links-inaktiv">Zurück</span></li>
+                <li class="article__pager__prev is-inactive"><span class="icon-pagination-previous">Zurück</span></li>
             {% endif %}
 
             {% for url in pagination.pages_urls -%}
@@ -476,9 +474,9 @@
 
 
             {% if pagination.next_page_url %}
-                <li class="article__pager__next"><a class="icon-paginierungs-pfeil-rechts" href="{{pagination.next_page_url}}">Vor</a></li>
+                <li class="article__pager__next"><a class="icon-pagination-next" href="{{pagination.next_page_url}}">Vor</a></li>
             {% else %}
-                <li class="article__pager__next is-inactive"><span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span></li>
+                <li class="article__pager__next is-inactive"><span class="icon-pagination-next">Vor</span></li>
             {% endif %}
         </ul>
     </div>

@@ -1,53 +1,14 @@
-=franziska($weight: regular, $style: normal)
-  line-height: $base-line-height
-  @if $weight == regular
+=franziska
     font-family: "FranziskaWebPro", $serif-fallbacks
-    font-weight: 400
-  @else if $weight == semibold
-    font-family: "FranziskaWebPro-Demibold", $serif-fallbacks
-    font-weight: 700
-    line-height: $base-line-height*0.9
-  @if $style == italic
-    font-family: "FranziskaWebPro-Italic", $serif-fallbacks
-    font-weight: 400
-    font-style: italic
-  @else if $style == normal
-    font-style: normal
 
 =tablet($weight: regular)
-  @if $weight == regular
     font-family: "TabletGothic", $sans-fallbacks
-    font-weight: normal
-    line-height: $base-line-height
-  @else if $weight == bold
-    font-family: "TabletGothic-Bold", $sans-fallbacks
-    font-weight: normal
-    line-height: $base-line-height*0.8
-  @else if $weight == fat
-    font-family: "TabletGothic-ExtraBold", $sans-fallbacks
-    font-weight: normal
-    line-height: $base-line-height*0.8
-  @else if $weight == thin
-    font-family: "TabletGothicCompressed-Thin", $sans-fallbacks
-    font-weight: normal
-    line-height: $base-line-height*0.9
-  font-weight: normal
-  font-style: normal
 
-.tablet
-  +tablet(regular)
-
-.tablet-thin
-  +tablet(thin)
-
-.tablet-bold
-  +tablet(bold)
-
-.franziska
-  +franziska(regular, normal)
-
-.franziska-italic
-  +franziska(regular, italic)
-
-.franziska-semibold
-  +franziska(semibold, normal)
+    @if $weight == bold
+        font-weight: bold
+    @else if $weight == fat
+        font-weight: 900
+    @else if $weight == thin
+        font-weight: 200
+    @else
+        font-weight: normal

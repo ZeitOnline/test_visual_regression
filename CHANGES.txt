@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-735: Enable comment deep links in webkit
 
+- ZMO-789: Add bottom padding to billboard ad
+
 - Refactor navigation styles and event handlers
 
 - Simplify border-radius mixin
