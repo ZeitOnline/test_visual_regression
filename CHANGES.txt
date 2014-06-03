@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-789: Add bottom padding to billboard ad
 
+- ZMO-796: Set output method to html for raw tags
+
 - Refactor navigation styles and event handlers
 
 - Simplify border-radius mixin
