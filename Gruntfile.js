@@ -128,7 +128,7 @@ module.exports = function(grunt) {
 
 		jsdoc: {
 			dist : {
-				src: [project.sourceDir + 'javascript/modules/**/*.js'], 
+				src: [project.sourceDir + 'javascript/modules/**/*.js'],
 				options: {
 					destination: project.sourceDir + 'javascript/documentation'
 				}
@@ -194,6 +194,10 @@ module.exports = function(grunt) {
 			css: {
 				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
+			},
+			grunticon: {
+				files: [project.sourceDir + 'sass/icons/*.svg'],
+				tasks: ['grunticon']
 			}
 		}
 	});

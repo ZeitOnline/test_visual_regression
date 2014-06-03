@@ -1,57 +1,49 @@
 .main-footer
-  +tablet
-  display: block
-  background-color: $grey--mid-dark
-  text-align: center
-  padding: $petite $small $wide $small
+    +tablet
+    background-color: $grey--mid-dark
+    padding: $petite $small $medium
+    +padded
 
 .main-footer__box
-  font-size: $font-xxs
-  +respond-min($break-1)
-    font-size: $font-xs
-    margin-left: 5%
-  +respond-min($break-2)
-    margin-left: em(214px)
+    +clearfix
 
-.main-footer__ZM
-  height: $wide
-  +respond-min($break-0)
-    height: $big
-    float: left
-
-.main-footer__ZM__img
-  display: block
-  width: 41px
-  height: 20px
-  background-size: contain
-  margin-right: $little
-  opacity: 0.3
-  margin-top: $micro
+.main-footer__logo
+    width: 41px
+    height: 20px
+    background-size: contain
+    margin: $micro $little $compact 0
+    opacity: 0.3
 
 .main-footer__links
-  color: $grey
-  text-align: left
-  //Verlag schouldnt have a dot
-  div:first-child
-    li:first-child
-      &:after
-        content: ''
-  ul
-    list-style-type: none
-    margin: 0
-    padding: 0
-    li
-      display: inline
-      &:after
-        content: '•'
-        margin: 0 $tiny 0 $tiny
-      &:last-child:after
-        content: ''
-  a
-    +on-interaction
-      text-decoration: none
-      border-color: $color-link--default
-      color: $color-link--default
-  +respond-min($break-0)
-    margin-left: $little
-    float: left
+    color: $grey
+    font-size: $font-xxs
+    ul
+        list-style-type: none
+        margin: 0
+        padding: 0
+        li
+            display: inline
+            &:after
+                content: '•'
+                margin: 0 $tiny 0 $tiny
+            &:last-child:after
+                content: ''
+    //Verlag schouldnt have a dot
+    div:first-child
+        li:first-child
+            &:after
+                content: ''
+    a
+        +on-interaction
+            border-color: $color-link--default
+            color: $color-link--default
+
++respond-min($break-0)
+    .main-footer__logo
+        float: left
+        margin-bottom: 0
+    .main-footer__links
+        float: left
+        margin-left: $little
+        font-size: $font-xs
+

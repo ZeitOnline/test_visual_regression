@@ -56,9 +56,8 @@ def test_macro_footer_should_produce_markup(jinja2_env):
     # assert normal markup
     markup = '<footer class="main-footer">'\
         '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__ZM">'\
-        '<span class="main-footer__ZM__img icon-zm-logo--white"></span>'\
-        '</div><div class="main-footer__links"><div><ul><li>VERLAG</li>'\
+        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
+        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
         '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
@@ -86,13 +85,12 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
-    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs"' \
-        ' id="js-breadcrumbs"><div class="breadcrumbs__list-wrap">' \
-        '<div class="breadcrumbs__list">' \
+    markup = '<div class="breadcrumbs">' \
+        '<div class="breadcrumbs__list is-constrained is-centered">' \
         '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
         ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
         '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
-        '</a></div></div></div></div></div>'
+        '</a></div></div></div>'
     lines = tpl.module.breadcrumbs(obj).splitlines()
     output = ""
     for line in lines:
