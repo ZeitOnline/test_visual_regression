@@ -343,7 +343,7 @@ def test_nextread_base_layout_has_image_element_if_available(testserver):
 def test_nextread_maximal_layout_has_image_background_if_available(testserver):
     browser = Browser('%s/artikel/03' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'katzencontent.jpg' in nextread.attrib.get('style'), \
+    assert 'parfait-zmo-nextread.jpg' in nextread.attrib.get('style'), \
         'The teaser image should be set as a background for "maximal" teasers.'
     browser = Browser('%s/artikel/08' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]

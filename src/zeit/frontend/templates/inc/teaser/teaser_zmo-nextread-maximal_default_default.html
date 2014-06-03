@@ -15,6 +15,6 @@ Available attributes:
     {% if image %}
         background-image: url({{image | default_image_url | default('http://placehold.it/160x90', true)}});
     {% else %}
-        color: #000;
+        background-color: #252525;
     {% endif %}
 {% endblock %}
