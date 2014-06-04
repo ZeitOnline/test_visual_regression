@@ -117,7 +117,6 @@ def _get_navigation():
     root = tree.getroot()
     top_formate = root.xpath('list[@id="top-formate"]')[0]
     sitemap = root.xpath('list[@id="sitemap"]')[0]
-    print "FOOOOOO"
     return top_formate, sitemap
 
 top_formate, sitemap = _get_navigation()
