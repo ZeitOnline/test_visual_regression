@@ -289,7 +289,6 @@ $comments-min-width: $comments__break-outside - $max-page-width
             +transform(scale(1))
     .page-wrap--inner
         +respond-min($comments__break-outside)
-            +translateZ(0)
             left: 0
             margin-left: 0
             z-index: 2000
@@ -299,11 +298,9 @@ $comments-min-width: $comments__break-outside - $max-page-width
 
 .show-comments #iqd_align_Ad
     +respond-min($comments__break-outside)
-        +translateZ(0)
         margin-left: 0
         #iqdSkyscraperLeft
             display: none !important
         #iqdSkyscraper, #iqdSkyscraperRight
-            +translateZ(0)
             position: absolute !important
             left: $max-page-width !important
