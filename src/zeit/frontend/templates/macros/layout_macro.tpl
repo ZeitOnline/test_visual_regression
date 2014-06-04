@@ -120,7 +120,11 @@
                 wt.customParameter = {
                     1: "{{obj.authorsList}}",
                     2: "{{obj.banner_channel}}",
-                    3: "{{obj.pagination.current}}/{{obj.pagination.total}}",
+                    {% if obj.pagination -%}
+                        3: "{{obj.pagination.current}}/{{obj.pagination.total}}",
+                    {% else -%}
+                        3: "1/1",
+                    {% endif %}
                     4: "{{obj.rankedTagsList}}",
                     6: "{{obj.text_length}}",
                     7: "",
@@ -133,7 +137,7 @@
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
-            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cp1={{obj.authorsList}}&amp;cp2={{obj.banner_channel}}&amp;cp3={{obj.pagination.current}}/{{obj.pagination.total}}&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}"></div>
+            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cp1={{obj.authorsList}}&amp;cp2={{obj.banner_channel}}&amp;cp3={%if obj.pagination%}{{obj.pagination.current}}/{{obj.pagination.total}}{% else %}1/1{% endif %}&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}"></div>
         </noscript>
 {%- endmacro %}
 

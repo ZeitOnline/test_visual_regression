@@ -95,6 +95,14 @@ def test_article03_has_correct_webtrekk_values(testserver):
     assert '2: "Artikel",' in browser.contents
     assert '3: "lebensart",' in browser.contents
     assert '4: "Online"' in browser.contents
+    assert 'http://zeit01.webtrekk.net/981949533494636/wt.pl?' \
+        'p=311,redaktion.lebensart.essen-trinken..Artikel.online./' \
+        'artikel/03/seite-2,0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;' \
+        'cg2=Artikel&amp;cg3=lebensart&amp;cg4=Online&amp;' \
+        'cp1=Anne Mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;' \
+        'cp3=2/7&amp;cp4=Wein;Italien;Toskana;Bologna;Bozen;' \
+        'Florenz;Tübingen&amp;cp6=4952&amp;cp7=&amp;' \
+        'cp9=zeitmz/essenundtrinken/article' in browser.contents
 
 
 def test_article08_has_correct_webtrekk_values(testserver):
@@ -110,6 +118,13 @@ def test_article08_has_correct_webtrekk_values(testserver):
     assert '2: "Artikel",' in browser.contents
     assert '3: "politik",' in browser.contents
     assert '4: "Online"' in browser.contents
+    assert 'http://zeit01.webtrekk.net/981949533494636/wt.pl?' \
+        'p=311,redaktion.politik...Artikel.online./artikel/' \
+        '08,0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2=Artikel&amp;' \
+        'cg3=politik&amp;cg4=Online&amp;' \
+        'cp1=Anne Mustermann;Oliver Fritsch&amp;' \
+        'cp2=politik/article&amp;cp3=1/1&amp;cp4=Politik&amp;cp6=2833&amp;' \
+        'cp7=&amp;cp9=politik/article' in browser.contents
 
 
 def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
