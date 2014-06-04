@@ -141,35 +141,37 @@
 {%- endmacro %}
 
 {% macro image(obj) -%}
-    <figure class="
-        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
-            figure-full-width
-        {% elif obj.layout == 'zmo-xl-header' %}
-            figure-header
-        {% elif obj.layout == 'zmo-medium-left' %}
-            figure-horizontal
-        {% elif obj.layout == 'zmo-medium-right' %}
-            figure-horizontal--right
-        {% elif obj.layout == 'zmo-medium-center' %}
-            figure is-constrained is-centered
-        {% elif obj.layout == 'zmo-small-left' %}
-            figure-stamp
-        {% elif obj.layout == 'zmo-small-right' %}
-            figure-stamp--right
-        {% else %}
-            figure-stamp
-        {% endif %}
-        ">
-            <div class="scaled-image">
-                {{ lama.insert_responsive_image(obj) }}
-            </div>
-            <figcaption class="figure__caption">
-                {{obj.caption}}
-                {% if obj.copyright != '©' %}
-                <span class="figure__copyright">{{obj.copyright}}</span>
-                {% endif %}
-            </figcaption>
-    </figure>
+    {% if obj | default_image_url %}
+        <figure class="
+            {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
+                figure-full-width
+            {% elif obj.layout == 'zmo-xl-header' %}
+                figure-header
+            {% elif obj.layout == 'zmo-medium-left' %}
+                figure-horizontal
+            {% elif obj.layout == 'zmo-medium-right' %}
+                figure-horizontal--right
+            {% elif obj.layout == 'zmo-medium-center' %}
+                figure is-constrained is-centered
+            {% elif obj.layout == 'zmo-small-left' %}
+                figure-stamp
+            {% elif obj.layout == 'zmo-small-right' %}
+                figure-stamp--right
+            {% else %}
+                figure-stamp
+            {% endif %}
+            ">
+                <div class="scaled-image">
+                    {{ lama.insert_responsive_image(obj) }}
+                </div>
+                <figcaption class="figure__caption">
+                    {{obj.caption}}
+                    {% if obj.copyright != '©' %}
+                    <span class="figure__copyright">{{obj.copyright}}</span>
+                    {% endif %}
+                </figcaption>
+        </figure>
+    {% endif %}
 {%- endmacro %}
 
 {% macro inlinegalleryimage(obj) -%}
