@@ -22,7 +22,6 @@
 
 .article__comments-trigger__link
     color: $black
-    border-bottom: none
     cursor: pointer
     display: block
     padding: $micro $small
@@ -182,8 +181,7 @@ $comments-min-width: $comments__break-outside - $max-page-width
 .comment__head__meta__name
     font-weight: bold
     margin-right: $fine
-    border-bottom: none
-    +link-colors ($grey--mid-dark,$grey--mid-dark,$grey--mid-dark,$grey--mid-dark,$grey--mid-dark)
+    color: $grey--mid-dark
 
 .comment__head__meta__label
     display: block
@@ -191,11 +189,8 @@ $comments-min-width: $comments__break-outside - $max-page-width
     color: $grey
 
 .comment__head__meta__date
-    border-bottom: none
     +inline-block
-    +link-colors($grey, $grey, $grey, $grey, $grey)
-    +on-interaction
-        border-color: $grey
+    color: $grey
     &:before
         margin-right: $fine
         content: "—"
@@ -215,7 +210,6 @@ $comments-min-width: $comments__break-outside - $max-page-width
     +hide-text
     cursor: pointer
     margin-left: $small
-    border: none
     width: 20px
     height: 20px
     .no-touch &:hover
