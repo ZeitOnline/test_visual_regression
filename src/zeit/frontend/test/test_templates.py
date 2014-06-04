@@ -553,14 +553,19 @@ def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
 
 def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    obj = {'ressort': 'lebensart',
-           'sub_ressort': 'mode',
-           'type': 'article',
-           'tracking_type': 'Artikel',
-           'authorsList': 'Martin Mustermann',
-           'banner_channel': 'lebensart/mode/article',
-           'text_length': 1000,
-           'rankedTagsList': 'test;test'}
+
+    obj = Mock()
+    obj.ressort = 'lebensart'
+    obj.sub_ressort = 'mode'
+    obj.type = 'article'
+    obj.tracking_type = 'Artikel'
+    obj.authorsList = 'Martin Mustermann'
+    obj.banner_channel = 'lebensart/mode/article'
+    obj.text_length = 1000
+    obj.rankedTagsList = 'test;test'
+    obj.pagination.current = 1
+    obj.pagination.total = 2
+
     request = {'path_info': '/test/test'}
     el_def = ['<script',
               'src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"',
@@ -571,7 +576,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
               ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0" +
               "&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart" +
               "&amp;cg4=Online&amp;cp1=Martin Mustermann" +
-              "&amp;cp2=lebensart/mode/article&amp;cp3=1&amp;cp4=test;test" +
+              "&amp;cp2=lebensart/mode/article&amp;cp3=1/2&amp;cp4=test;test" +
               "&amp;cp6=1000&amp;cp7=&amp;cp9=lebensart/mode/article"]
     el_cont = ['1: "Redaktion"',
                '2: "Artikel"',
@@ -579,7 +584,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
                '4: "Online"']
     el_cust = ['1: "Martin Mustermann"',
                '2: "lebensart/mode/article"',
-               '3: "1/1"',
+               '3: "1/2"',
                '4: "test;test"',
                '6: "1000"',
                '7: ""',
