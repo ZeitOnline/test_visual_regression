@@ -597,8 +597,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
            'sub_ressort': 'mode',
            'type': 'article',
            'tracking_type': 'Artikel',
-           'author': {
-               'name': 'Martin Mustermann'},
+           'authorsList': 'Martin Mustermann',
            'banner_channel': 'lebensart/mode/article',
            'text_length': 1000,
            'rankedTagsList': 'test;test'}

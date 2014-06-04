@@ -80,6 +80,37 @@ def test_all_tracking_pixel_are_send(selenium_driver, testserver):
         "//img[starts-with(@src,'http://zeitonl.ivwbox.de')]")
 
 
+def test_article03_has_correct_webtrekk_values(testserver):
+    browser = Browser('%s/artikel/03/seite-2' % testserver.url)
+    assert '1: "Anne Mustermann",' in browser.contents
+    assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
+    assert '3: "2/7",' in browser.contents
+    assert '4: "Wein;Italien;Toskana;Bologna;Bozen;Florenz;Tübingen",' \
+        in browser.contents
+    assert '6: "4952",' in browser.contents
+    assert '7: "",' in browser.contents
+    assert '9: "zeitmz/essenundtrinken/article"' in browser.contents
+    assert '1: "Redaktion",' in browser.contents
+    assert '2: "Artikel",' in browser.contents
+    assert '3: "lebensart",' in browser.contents
+    assert '4: "Online"' in browser.contents
+
+
+def test_article08_has_correct_webtrekk_values(testserver):
+    browser = Browser('%s/artikel/08' % testserver.url)
+    assert '1: "Anne Mustermann;Oliver Fritsch",' in browser.contents
+    assert '2: "politik/article",' in browser.contents
+    assert '3: "1/1",' in browser.contents
+    assert '4: "Politik",' in browser.contents
+    assert '6: "2833",' in browser.contents
+    assert '7: "",' in browser.contents
+    assert '9: "politik/article"' in browser.contents
+    assert '1: "Redaktion",' in browser.contents
+    assert '2: "Artikel",' in browser.contents
+    assert '3: "politik",' in browser.contents
+    assert '4: "Online"' in browser.contents
+
+
 def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     driver = selenium_driver
     # ipad landscape
