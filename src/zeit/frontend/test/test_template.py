@@ -1,7 +1,11 @@
-import gocept.httpserverlayer.static
 import os
-import pytest
 import time
+
+import gocept.httpserverlayer.static
+import mock
+import pytest
+
+import zeit.cms.interfaces
 import zeit.frontend.template
 
 
@@ -48,3 +52,25 @@ def test_no_url_configured_yields_error_message():
     UNUSED_ENVIRONMENT = None
     source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
     assert 'load_template_from_dav_url' in source
+
+
+def test_get_teaser_image(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/article_video_asset_2'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert isinstance(image, zeit.frontend.centerpage.TeaserImage), \
+        'Article with video asset should produce a teaser image.'
+    assert 'katzencontent-zmo-large.jpg' in image.src
+
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de'
+        '/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert isinstance(image, zeit.frontend.centerpage.TeaserImage), \
+        'Article with image asset should produce a teaser image.'
+    assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
