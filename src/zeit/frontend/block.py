@@ -350,7 +350,7 @@ def _raw_html(xml):
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-            <xsl:output method="xml"
+            <xsl:output method="html"
                         omit-xml-declaration="yes" />
           <xsl:template match="raw">
             <xsl:copy-of select="*" />
