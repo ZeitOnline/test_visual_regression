@@ -29,10 +29,6 @@ def test_retrieves_template_via_http(template_server):
     assert 'foo' == source
 
 
-def touch(filename, time):
-    os.utime(filename, (time, time))
-
-
 def test_checks_uptodate_using_last_modified_header(template_server):
     template = template_server['documentroot'] + '/foo.html'
     open(template, 'w').write('foo')
@@ -43,7 +39,7 @@ def test_checks_uptodate_using_last_modified_header(template_server):
 
     assert uptodate()
     later = time.time() + 1
-    touch(template, later)
+    os.utime(template, (later, later))
     assert not uptodate()
 
 
