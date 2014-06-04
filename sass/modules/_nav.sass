@@ -31,6 +31,10 @@ $icon-avatar-std-size: em(32px)
             top: 0
             ~ .main
                 margin-top: $nav__row-height
+    +respond-min($nav__break__full-menu)
+        height: em($nav__row-height--px * 2 + 1)
+        &.is-compact
+            height: auto
     a
         +link-colors($white, $white, $white, $white, $white)
 

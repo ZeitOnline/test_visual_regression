@@ -18,6 +18,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-02-19T12:53:04.640131+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-03-04T13:38:38.502761+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-03-04T13:35:24.375593+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">base</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
@@ -58,8 +59,8 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
     <nextread>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/artikel/01" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Flüchtlinge</supertitle>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+        <supertitle>Kochen für Gäste</supertitle>
         <teaser_supertitle xsi:nil="true"/>
         <title xsi:nil="true"/>
         <text xsi:nil="true"/>
@@ -67,7 +68,7 @@
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
-          <display_name py:pytype="str">Carolin Emcke</display_name>
+          <display_name>Carolin Emcke</display_name>
           <location>Eisenhüttenstadt</location>
         </author>
       </reference>

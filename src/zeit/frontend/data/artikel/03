@@ -47,6 +47,7 @@
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-30T15:20:50.176115+00:00</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-06T09:46:23.626917+00:00</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-30T15:19:57.331279+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">maximal</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
         <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
@@ -86,6 +87,21 @@
         &lt;/arguments&gt;
       &lt;/initialized_object&gt;
     &lt;/pickle&gt;</attribute>
+        <nextread>
+          <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/artikel/01" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+            <supertitle>Flüchtlinge</supertitle>
+            <teaser_supertitle xsi:nil="true"/>
+            <title xsi:nil="true"/>
+            <text xsi:nil="true"/>
+            <description xsi:nil="true"/>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+              <display_name>Carolin Emcke</display_name>
+              <location>Eisenhüttenstadt</location>
+            </author>
+          </reference>
+        </nextread>
     </head>
     <body>
         <supertitle>Kolumne Die Ausleser</supertitle>

@@ -56,9 +56,8 @@ def test_macro_footer_should_produce_markup(jinja2_env):
     # assert normal markup
     markup = '<footer class="main-footer">'\
         '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__ZM">'\
-        '<span class="main-footer__ZM__img icon-zm-logo--white"></span>'\
-        '</div><div class="main-footer__links"><div><ul><li>VERLAG</li>'\
+        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
+        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
         '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
@@ -86,13 +85,12 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
-    markup = '<div class="breadcrumbs-wrap"><div class="breadcrumbs"' \
-        ' id="js-breadcrumbs"><div class="breadcrumbs__list-wrap">' \
-        '<div class="breadcrumbs__list">' \
+    markup = '<div class="breadcrumbs">' \
+        '<div class="breadcrumbs__list is-constrained is-centered">' \
         '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
         ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
         '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
-        '</a></div></div></div></div></div>'
+        '</a></div></div></div>'
     lines = tpl.module.breadcrumbs(obj).splitlines()
     output = ""
     for line in lines:
@@ -378,46 +376,6 @@ def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     for line in lines:
         output += line.strip()
     assert '' == output
-
-
-def test_macro_focussed_nextread_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
-
-    article = Mock()
-    article.supertitle = "SUPER"
-    article.title = "TITLE"
-    article.uniqueId = "LINK"
-    article.copyright = "CP"
-
-    nextread = {
-        'image': {
-            'uniqueId': "http://images.zeit.de/k-b/k-b-540x304.jpg",
-            'caption': "BU",
-        },
-        'layout': "base",
-        'article': article,
-    }
-
-    m = '<aside class="article__nextread nextread-base is-centered">'
-    i = 'title="BU" alt="BU" src="http://images.zeit.de/k-b/k-b-540x304.jpg">'
-    s = '<span class="article__nextread__supertitle">SUPER</span>'
-    t = '<span class="article__nextread__title">TITLE</span>'
-    l = '<a title="SUPER: TITLE" href="LINK">'
-    assert m in tpl.module.focussed_nextread(nextread)
-    assert i in tpl.module.focussed_nextread(nextread)
-    assert s in tpl.module.focussed_nextread(nextread)
-    assert t in tpl.module.focussed_nextread(nextread)
-    assert l in tpl.module.focussed_nextread(nextread)
-
-    nextread['layout'] = "maximal"
-    m = '<aside class="article__nextread nextread-maximal is-centered">'
-    bi = '<div class="article__nextread__body is-centered" style='
-    assert m in tpl.module.focussed_nextread(nextread)
-    assert bi in tpl.module.focussed_nextread(nextread)
-
-    nextread['layout'] = "minimal"
-    m = '<aside class="article__nextread nextread-minimal is-centered">'
-    assert m in tpl.module.focussed_nextread(nextread)
 
 
 def test_macro_video_should_produce_markup(jinja2_env):

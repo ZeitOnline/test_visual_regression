@@ -66,18 +66,4 @@ require([
 	$( "div[data-backgroundvideo]" ).backgroundVideo();
 	$( "a.js-has-popup" ).enablePopups();
 	$( "main" ).animateScroll({selector: '.js-scroll'});
-	$( "a.icon-paginierungs-pfeil-links").hover(function(){
-		$(this).removeClass('icon-paginierungs-pfeil-links');
-		$(this).addClass('icon-paginierungs-pfeil-links-hover');
-	}, function(){
-		$(this).removeClass('icon-paginierungs-pfeil-links-hover');
-		$(this).addClass('icon-paginierungs-pfeil-links');
-	});
-	$( "a.icon-paginierungs-pfeil-rechts").hover(function(){
-		$(this).removeClass('icon-paginierungs-pfeil-rechts');
-		$(this).addClass('icon-paginierungs-pfeil-rechts-hover');
-	}, function(){
-		$(this).removeClass('icon-paginierungs-pfeil-rechts-hover');
-		$(this).addClass('icon-paginierungs-pfeil-rechts');
-	});
 });
