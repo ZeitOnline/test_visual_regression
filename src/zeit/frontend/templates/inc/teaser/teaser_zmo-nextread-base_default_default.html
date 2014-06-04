@@ -1,0 +1,20 @@
+{#
+
+Template for nextread teasers in a base layout
+
+Available attributes:
+    image
+    lama
+    teaser
+    teaser_block
+
+#}
+{% extends "templates/inc/teaser/abstract_nextread_teaser_template.html" %}
+
+{% block scaled_image %}
+    {% if image %}
+        <div class="scaled-image article__nextread__img article__nextread__img--{{ teaser_block.multitude }}">
+            {{ lama.insert_responsive_image(image) }}
+        </div>
+    {% endif %}
+{% endblock %}

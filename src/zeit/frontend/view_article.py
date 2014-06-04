@@ -5,8 +5,8 @@ from zeit.frontend.reach import LinkReach
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
-from zeit.content.image.interfaces import IImageMetadata
-from zeit.magazin.interfaces import IArticleTemplateSettings, INextRead
+from zeit.magazin.interfaces import IArticleTemplateSettings
+from zeit.frontend.interfaces import INextreadTeaserBlock
 from zope.component import providedBy
 import logging
 import zeit.connector.connector
@@ -253,26 +253,11 @@ class Article(zeit.frontend.view.Content):
         return None  # XXX not implemented in zeit.content.article yet
 
     @property
-    def focussed_nextread(self):
-        nextread = INextRead(self.context)
-        try:
-            related = nextread.nextread[0]
-            try:
-                _layout = related.nextread_layout
-            except AttributeError:
-                _layout = 'base'
-            try:
-                image = related.main_image
-                image = {
-                    'uniqueId': image.uniqueId,
-                    'caption': (related.main_image_block.custom_caption
-                                or IImageMetadata(image).caption)}
-            except AttributeError:
-                image = {'uniqueId': None}
-                _layout = 'minimal'
-            return {'layout': _layout, 'article': related, 'image': image}
-        except IndexError:
-            return None
+    def nextread(self):
+        nextread = INextreadTeaserBlock(self.context)
+        if not len(nextread.teasers):
+            nextread = None
+        return nextread
 
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,

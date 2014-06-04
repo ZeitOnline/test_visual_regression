@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-789: Add bottom padding to billboard ad
 
+- ZMO-796: Set output method to html for raw tags
+
 - Refactor navigation styles and event handlers
 
 - Simplify border-radius mixin
@@ -13,6 +15,10 @@ Change log for zeit.frontend
 
 0.6 (2014-06-03)
 ----------------
+
+- ZMO-771: Add missing images to nextread
+
+- ZMO-771: Implement nextread as teaser block with different layouts
 
 - ZMO-671: Add click tracking API, used in gallery slider
 

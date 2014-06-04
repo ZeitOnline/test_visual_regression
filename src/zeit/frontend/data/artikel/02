@@ -49,6 +49,7 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-12T07:21:39.625053+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-02T06:00:00+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-12T07:22:41.634012+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">maximal</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">02.10.2013</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://apache.org/dav/props/" name="executable">F</attribute>
@@ -86,6 +87,21 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:06598b35-2e0a-44f4-b49a-983d14ea4a66}</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">41</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <nextread>
+          <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+            <supertitle>Kochen für Gäste</supertitle>
+            <teaser_supertitle xsi:nil="true"/>
+            <title xsi:nil="true"/>
+            <text xsi:nil="true"/>
+            <description xsi:nil="true"/>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+              <display_name>Carolin Emcke</display_name>
+              <location>Eisenhüttenstadt</location>
+            </author>
+          </reference>
+        </nextread>
     </head>
     <body>
         <supertitle>Modetheoretikerin Barbara Vinken</supertitle>

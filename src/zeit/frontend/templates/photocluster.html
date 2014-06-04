@@ -210,7 +210,9 @@
                     </div>
                 </div>
 
-                {{ blocks.focussed_nextread(view.focussed_nextread) }}
+                {% if view.nextread %}
+                    {%- include "templates/inc/article_area_nextread.html" ignore missing -%}
+                {% endif %}
 
             </div>
         </div>

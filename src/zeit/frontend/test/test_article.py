@@ -3,6 +3,7 @@ from StringIO import StringIO
 from zeit.content.article.article import Article
 from zeit.frontend.interfaces import IPages
 from zeit.frontend.test import Browser
+import zeit.cms.interfaces
 
 
 def test_IPages_contains_blocks(application):
@@ -309,9 +310,7 @@ def test_artikel_header_header6_should_have_correct_source(testserver):
 
 def test_artikel_header_standardkolumne_should_have_correct_source(testserver):
     browser = Browser('%s/artikel/standardkolumne-beispiel' % testserver.url)
-
-    assert '<header class="article__head '\
-        'article__head--column">' in browser.contents
+    assert browser.cssselect('header.article__head.article__head--column')
 
 
 def test_artikel_header_sequelpage_should_have_correct_source(testserver):
@@ -323,3 +322,61 @@ def test_gallery_should_have_clickCounter_functions(testserver):
     browser = Browser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     assert 'var clickCount = {' in browser.contents
+
+
+def test_nextread_teaser_block_has_teasers_available(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    assert isinstance(nextread.teasers, tuple), \
+        'The "teasers" attribute should return a tuple.'
+    assert len(nextread.teasers) == 1, \
+        '"Artikel 09" has exactly one nextread.'
+    assert all(map(lambda a: isinstance(a, Article), nextread.teasers)), \
+        'All nextread teasers should be articles.'
+
+
+def test_nextread_teaser_blocks_has_correct_layout_id(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    assert nextread.layout.id == 'base', \
+        '"Artikel 09" has a base nextread layout.'
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    assert nextread.layout.id == 'maximal', \
+        '"Artikel 03" has a maximal nextread layout.'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/01')
+    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    assert nextread.layout.id == 'base', \
+        '"Artikel 01" has no nextread layout, should fallback to base.'
+
+
+def test_nextread_teaser_block_teasers_is_accessable(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    assert all(teaser for teaser in nextread), \
+        'Nextread block should iterate over its teasers.'
+    assert nextread[0], \
+        'Nextread block should expose its teasers via index.'
+
+
+def test_nextread_base_layout_has_image_element_if_available(testserver):
+    browser = Browser('%s/artikel/09' % testserver.url)
+    nextread = browser.cssselect('div.article__nextread__body')[0]
+    assert len(nextread.cssselect('img')) == 1, \
+        'There should be exactly one image tag in a "base" nextread teaser.'
+    browser = Browser('%s/artikel/10' % testserver.url)
+    nextread = browser.cssselect('div.article__nextread__body')[0]
+    assert len(nextread.cssselect('img')) == 0, \
+        'The nextread of "Artikel 10" has no teaser image asset.'
+
+
+def test_nextread_maximal_layout_has_image_background_if_available(testserver):
+    browser = Browser('%s/artikel/08' % testserver.url)
+    nextread = browser.cssselect('div.article__nextread__body')[0]
+    assert 'background-image' in nextread.attrib.get('style'), \
+        'The teaser image should be set as a background for "maximal" teasers.'
+    browser = Browser('%s/artikel/03' % testserver.url)
+    nextread = browser.cssselect('div.article__nextread__body')[0]
+    assert 'background-image' not in nextread.attrib.get('style'), \
+        'The nextread of "Artikel 03" has no teaser image asset.'

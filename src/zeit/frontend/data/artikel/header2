@@ -17,6 +17,7 @@
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">minimal</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
@@ -53,6 +54,21 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+        <supertitle>Kochen für Gäste</supertitle>
+        <teaser_supertitle xsi:nil="true"/>
+        <title xsi:nil="true"/>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+          <display_name>Carolin Emcke</display_name>
+          <location>Eisenhüttenstadt</location>
+        </author>
+      </reference>
+    </nextread>
   </head>
   <body>
     <supertitle>Ich habe einen Traum</supertitle>
