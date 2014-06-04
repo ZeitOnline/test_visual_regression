@@ -118,9 +118,9 @@
 
             {% if obj.type == 'article' -%}
                 wt.customParameter = {
-                    1: "{% if obj.author %}{{obj.author.name}}{% endif %}",
+                    1: "{{obj.authorsList}}",
                     2: "{{obj.banner_channel}}",
-                    3: "1/1",
+                    3: "{{obj.pagination.current}}/{{obj.pagination.total}}",
                     4: "{{obj.rankedTagsList}}",
                     6: "{{obj.text_length}}",
                     7: "",
