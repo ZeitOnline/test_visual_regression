@@ -204,22 +204,14 @@ def get_teaser_template(block_layout,
     return map(func, combinations)
 
 
-def get_teaser_image(teaser_block,
-                     teaser,
-                     asset_type=None,
-                     file_type='jpg'):
-    image_pattern = teaser_block.layout.image_pattern
-    if asset_type is None:
-        asset = zeit.frontend.centerpage.auto_select_asset(teaser)
-    elif asset_type == 'image':
-        asset = zeit.frontend.centerpage.get_image_asset(teaser)
-    else:
-        raise KeyError(asset_type)
+def get_teaser_image(teaser_block, teaser):
+    asset = zeit.frontend.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
+
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
-    image_id = '%s/%s-%s.%s' % \
-        (asset.uniqueId, image_base_name, image_pattern, file_type)
+    image_id = '%s/%s-%s.jpg' % \
+        (asset.uniqueId, image_base_name, teaser_block.layout.image_pattern)
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
