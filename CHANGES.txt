@@ -1,6 +1,12 @@
 Change log for zeit.frontend
 ============================
 
+0.6.1 (2014-06-05)
+----------------
+
+- ZMO-795: Scale CP lead image proportionally
+
+
 0.6 (2014-06-03)
 ----------------
 
