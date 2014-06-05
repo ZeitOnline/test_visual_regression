@@ -264,6 +264,13 @@ class Article(zeit.frontend.view.Content):
                           request=self.request)
 
     @property
+    def serie(self):
+        if self.context.serie:
+            return self.context.serie.lower()
+        else:
+            return ''
+
+    @property
     def linkreach(self):
         if self._linkreach is None:
 

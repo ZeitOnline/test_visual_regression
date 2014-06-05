@@ -43,7 +43,8 @@ def create_url(context, obj):
 
 
 def format_date(obj, type='short'):
-    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
+    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
+               'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
@@ -104,7 +105,6 @@ def hide_none(string):
         return ''
     else:
         return string
-
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
