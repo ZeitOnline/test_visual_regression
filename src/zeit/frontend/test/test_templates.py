@@ -3,7 +3,6 @@ from mock import Mock
 from re import match
 import pyramid.threadlocal
 import pyramid.config
-import time
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
