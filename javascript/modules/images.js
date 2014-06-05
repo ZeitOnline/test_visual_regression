@@ -23,16 +23,19 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * @param  {[type]} width
      * @param  {[type]} height
      */
-    var rescale_one = function(image, subsequent, width, height) {
+    var rescaleOne = function(image, subsequent, width, height) {
         var $img = $(image);
         width = width || $img.width();
-        if (subsequent && $img.parents('.is-pixelperfect').length) {
+        if (subsequent && $img.closest('.is-pixelperfect').length) {
             // get the parent height, don’t use ratio to update pixelperfect img
             // it also possible to pass the height delivering element via data-wrap
-            if( $img.parent().attr('data-wrap') ){
-                height = $($img.parent().attr('data-wrap')).height();
-            }else{
-                height = $img.parent().parent().height();
+            var selector = $img.parent().attr('data-wrap'),
+                wrapper = selector ? $img.closest(selector) : [];
+
+            if (wrapper.length) {
+                height = wrapper.innerHeight();
+            } else {
+                height = $img.parent().parent().innerHeight();
             }
 
         } else {
@@ -40,20 +43,17 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             //height = height || $img.height() || Math.round(width / $img.data('ratio'));
             height = height || Math.round(width / $img.data('ratio'));
         }
+
         var token = prefix(width, height);
         var src = image.src || $img.data('src');
         image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
-        // add event triggering to tell the world
-        $(image).on("load", function(e){
-            $(this).trigger("scaling_ready");
-        });
     };
 
     /**
      * rescale all images
      * @param  {[type]} e
      */
-    var rescale_all = function(e) {
+    var rescaleAll = function(e) {
         if (!e) {
             // initial case, no images there yet, so create them
             $('.scaled-image > noscript').each(function() {
@@ -63,32 +63,43 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
                 markup = markup.replace('src="', 'data-src="');
                 $parent.html(markup);
                 var $imgs = $parent.find('img');
-                var height = 0;
                 var width = 0;
+                var height = 0;
                 $imgs.each(function() {
+                    var $img = $(this);
+
+                    // add event triggering to tell the world
+                    $img.on('load', function(e) {
+                        $img.trigger('scaling_ready');
+                    });
+
                     if ($parent.hasClass('is-pixelperfect')) {
+                        var selector = $img.parent().attr('data-wrap'),
+                            wrapper = selector ? $img.closest(selector) : [];
 
                         // use explicit width and height from responsive image parent element or data-wrap element
-                        if( $(this).parent().attr('data-wrap') ){
-                            height = $($(this).parent().attr('data-wrap')).height();
-                            width = $($(this).parent().attr('data-wrap')).width();
-                        }else{
-                            height = $parent.parent().height();
-                            width = $parent.parent().width();
+                        if (wrapper.length) {
+                            width  = wrapper.width();
+                            height = wrapper.innerHeight();
+                        } else {
+                            width  = $parent.width();
+                            height = $parent.innerHeight();
                         }
 
-                        rescale_one(this, false, width, height);
+                        rescaleOne(this, false, width, height);
                     } else {
                         // determine size of image from width + ratio of original image
-                        rescale_one(this, false);
+                        rescaleOne(this, false);
                     }
-                    resp_imgs.push($imgs[0]);
+
+                    resp_imgs.push(this);
                 });
+
             });
         } else {
             // rescale after resize, images already set up, just update
-            for(var i=0; i<resp_imgs.length; i++) {
-                rescale_one(resp_imgs[i], true);
+            for (var i = 0; i < resp_imgs.length; i++) {
+                rescaleOne(resp_imgs[i], true);
             }
         }
     };
@@ -97,9 +108,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * init scaling
      */
     var init = function() {
-        rescale_all();
-        var lazy_rescale_all = _.debounce(rescale_all, 1000);
-        $(window).on('resize', lazy_rescale_all);
+        rescaleAll();
+        var lazy_rescaleAll = _.debounce(rescaleAll, 1000);
+        $(window).on('resize', lazy_rescaleAll);
     };
 
     return {
