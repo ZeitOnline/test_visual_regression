@@ -2,6 +2,11 @@ Change log for zeit.frontend
 ============================
 
 0.7 (unreleased)
+! Nicht releasen, ohne PR #355 (ZMO 735) und #363 (ZMO 795) zu berücksichtigen!
++ ZMO 735 fixed ein Problem mit der Navigationshöhe, dass durch
+  "Refactor navigation styles and event handlers" eingeführt wurde (in v0.7)
++ ZMO 795 fixed ein Problem mit CP Teasern, dass durch
+  "Implement large upright and square teasers" eingeführt wurde (in v0.5.3)
 ----------------
 
 - ZMO-789: Add bottom padding to billboard ad
