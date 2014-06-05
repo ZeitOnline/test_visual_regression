@@ -425,7 +425,6 @@ def test_macro_video_should_produce_markup(jinja2_env):
         output = ""
         for line in lines:
             output += line.strip()
-        print lines
         assert el['fig'] in output
 
 
@@ -499,11 +498,9 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    print output
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
-        print img
         assert img in output
 
 
@@ -601,7 +598,6 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
                '7: ""',
                '9: "lebensart/mode/article"']
     lines = tpl.module.webtrekk_tracking(obj, request).splitlines()
-    print lines
     output = ""
     for line in lines:
         output += line.strip()
@@ -645,7 +641,7 @@ def test_macro_webtrekk_tracking_should_produces_correct_cp_markup(jinja2_env):
               "mode/article&amp;cg9="]
 
     lines = tpl.module.webtrekk_tracking(obj, request).splitlines()
-    print lines
+
     output = ""
     for line in lines:
         output += line.strip()
