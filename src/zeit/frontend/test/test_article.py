@@ -83,7 +83,6 @@ def test_all_tracking_pixel_are_send(selenium_driver, testserver):
 
 def test_article03_has_correct_webtrekk_values(testserver):
     browser = Browser('%s/artikel/03/seite-2' % testserver.url)
-    print browser.contents
     assert '1: "Anne Mustermann",' in browser.contents
     assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '3: "2/7",' in browser.contents
