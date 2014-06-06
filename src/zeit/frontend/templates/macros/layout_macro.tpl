@@ -422,9 +422,11 @@
         iqd_wlCusRecStr[i] =  (iqd_wlCusRec[i] > 0) ? iqd_wlCus[i] + '=1' : iqd_wlCus[i] + '=0';
     }
     document.write('<scr'+'ipt>n_pbt += iqd_wlCusRecStr.join("\;");</scr'+'ipt>');
+
     if (window.Krux.adaudience.dfppKeyValues){
         document.write('<scr'+'ipt>n_pbt += ";" + window.Krux.adaudience.dfppKeyValues;</scr'+'ipt>');
     }
+
     // ]]>
 </script>
 <script>n_pbt = n_pbt.substr(0,1150);</script>
@@ -518,11 +520,11 @@
         {% set title = image.attr_title %}
     {% endif %}
 
-    <!--[if gt IE 9]>-->
+    <!--[if gt IE 8]><!-->
         <noscript data-ratio="{{image.ratio}}">
     <!--<![endif]-->
             <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
-    <!--[if gt IE 9]>-->
+    <!--[if gt IE 8]><!-->
         </noscript>
     <!--<![endif]-->
 {% endmacro %}
