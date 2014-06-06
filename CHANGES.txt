@@ -7,6 +7,10 @@ Change log for zeit.frontend
   "Refactor navigation styles and event handlers" eingeführt wurde (in v0.7)
 ----------------
 
+- ZMO-808: enable responsive image for gt IE8
+
+- hotfix: invalid js in ivw caller script
+
 - ZMO-789: Add bottom padding to billboard ad
 
 - ZMO-796: Set output method to html for raw tags
