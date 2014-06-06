@@ -193,7 +193,8 @@ def most_sufficient_teaser_tpl(block_layout,
 def most_sufficient_teaser_image(teaser_block,
                                  teaser,
                                  asset_type=None,
-                                 file_type='jpg'):
+                                 file_type='jpg',
+                                 unique_id=None):
     image_pattern = teaser_block.layout.image_pattern
     if asset_type is None:
         asset = zeit.frontend.centerpage.auto_select_asset(teaser)
@@ -203,16 +204,20 @@ def most_sufficient_teaser_image(teaser_block,
         raise KeyError(asset_type)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return None
-    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
+    if not unique_id:
+        unique_id = asset.uniqueId
+    image_base_name = re.split('/', unique_id.strip('/'))[-1]
     image_id = '%s/%s-%s.%s' % \
-        (asset.uniqueId, image_base_name, image_pattern, file_type)
+        (unique_id, image_base_name, image_pattern, file_type)
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
-        return None
+        unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
+        return most_sufficient_teaser_image(
+            teaser_block, teaser, unique_id=unique_id)
 
 
 def create_image_url(teaser_block, image):

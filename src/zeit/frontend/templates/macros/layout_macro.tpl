@@ -518,13 +518,11 @@
         {% set title = image.attr_title %}
     {% endif %}
 
-    {% set img_src = image | default_image_url %}
-
-    {% if img_src %}
+    {% if image %}
         <!--[if gt IE 9]>-->
             <noscript data-ratio="{{image.ratio}}">
         <!--<![endif]-->
-                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{img_src}}" data-ratio="{{image.ratio}}">
+                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
         <!--[if gt IE 9]>-->
             </noscript>
         <!--<![endif]-->
