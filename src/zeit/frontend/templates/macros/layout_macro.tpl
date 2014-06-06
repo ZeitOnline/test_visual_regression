@@ -30,7 +30,7 @@
                     // ivw version 1
                     if ('Z_IVW_RESSORT' in window) {
                         var img = document.createElement('img');
-                        img.src = 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + '?r=' + escape(document.referrer) + '&amp;d=' + Math.random() * 100000);
+                        img.src = 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + '?r=' + escape(document.referrer) + '&amp;d=' + (Math.random() * 100000);
                         img.width = 1;
                         img.height = 1;
                         img.className = 'ivw-aja-pixel';
