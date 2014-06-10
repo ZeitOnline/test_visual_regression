@@ -195,17 +195,21 @@ def most_sufficient_teaser_image(teaser_block,
                                  asset_type=None,
                                  file_type='jpg',
                                  unique_id=None):
-    image_pattern = teaser_block.layout.image_pattern
-    if asset_type is None:
+    default_images = 'http://xml.zeit.de/centerpage/katzencontent/'
+    if unique_id:
+        asset = zeit.cms.interfaces.ICMSContent(unique_id)
+    elif asset_type is None:
         asset = zeit.frontend.centerpage.auto_select_asset(teaser)
     elif asset_type == 'image':
         asset = zeit.frontend.centerpage.get_image_asset(teaser)
     else:
         raise KeyError(asset_type)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return None
+        return most_sufficient_teaser_image(
+            teaser_block, teaser, unique_id=default_images)
     if not unique_id:
         unique_id = asset.uniqueId
+    image_pattern = teaser_block.layout.image_pattern
     image_base_name = re.split('/', unique_id.strip('/'))[-1]
     image_id = '%s/%s-%s.%s' % \
         (unique_id, image_base_name, image_pattern, file_type)
@@ -215,9 +219,8 @@ def most_sufficient_teaser_image(teaser_block,
             zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
-        unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
         return most_sufficient_teaser_image(
-            teaser_block, teaser, unique_id=unique_id)
+            teaser_block, teaser, unique_id=default_images)
 
 
 def create_image_url(teaser_block, image):
