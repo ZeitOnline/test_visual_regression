@@ -1,8 +1,39 @@
 Change log for zeit.frontend
 ============================
 
-0.5.4 (unreleased)
+0.7 (unreleased)
+! Bitte nicht releasen, ohne PR #355 (ZMO 735) zu berücksichtigen!
++ ZMO 735 fixed ein Problem mit der Navigationshöhe, dass durch
+  "Refactor navigation styles and event handlers" eingeführt wurde (in v0.7)
+----------------
+
+- ZMO-735: Enable comment deep links in webkit
+
+- ZMO-789: Add bottom padding to billboard ad
+
+- ZMO-796: Set output method to html for raw tags
+
+- ZMO-769: Ensure teaser image even for articles with video assets
+
+- Rewrite jinja initialization
+
+- ZMO-771: Add missing images to nextread
+
+- ZMO-771: Implement nextread as teaser block with different layouts
+
+- Refactor navigation styles and event handlers
+
+- Simplify border-radius mixin
+
+
+0.6.1 (2014-06-05)
 ------------------
+
+- ZMO-795: Scale CP lead image proportionally
+
+
+0.6 (2014-06-03)
+----------------
 
 - ZMO-671: Add click tracking API, used in gallery slider
 
@@ -16,9 +47,13 @@ Change log for zeit.frontend
 
 - ZMO-792: Extend testbrowser to support cssselect
 
+- Rename zeit.frontend.utils to .templates
+
 - Update underscore.js to version 1.6.0
 
 - Javascript code cleanup
+
+- Improve test for responsive tap buttons in gallery slider
 
 - Rendering for the daily newsletter.
 

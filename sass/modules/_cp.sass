@@ -19,9 +19,7 @@ $cp__comment__count-width: em(60px)
 
 //hide breadcrumbs for cp
 .for-centerpage
-	.main-nav
-		margin-bottom: 0px
-	.breadcrumbs-wrap
+	.breadcrumbs
 		display: none
 	.main
 		overflow: hidden
@@ -30,33 +28,21 @@ $cp__comment__count-width: em(60px)
 //standard classes for cp
 .cp__link--light, %cp__link--light
 	a
-		+link-colors($black, $black, $black, $black, $black)
-		text-decoration: none
-		+transition(none)
-		+on-interaction
-			border-bottom: 0px
-			text-decoration: none
+		color: $black
 
 .cp__link--light--underlined, %cp__link--light--underlined
 	a
-		+link-colors($black, $black, $black, $black, $black)
-		text-decoration: none
-		+on-interaction
-			text-decoration: none
-			border-color: $black
-			border-bottom-width: $dblhair
+		color: $black
+		+animated-interaction($black)
 
 .cp__link--dark, %cp__link--dark
-	@extend %cp__link--light
 	a
-		+link-colors($white, $white, $white, $white, $white)
+		color: $white
 
 .cp__link--dark--underlined, %cp__link--dark--underlined
-	@extend %cp__link--light--underlined
 	a
-		+link-colors($white, $white, $white, $white, $white)
-		+on-interaction
-			border-color: $white
+		color: $white
+		+animated-interaction($white)
 
 //teaser type button
 .cp__buttons__wrap, %cp__buttons__wrap
@@ -111,7 +97,7 @@ $cp__comment__count-width: em(60px)
 	margin-top: $compact
 	margin-bottom: 0
 	width: 100%
-	display: inline-block		
+	display: inline-block
 
 .cp__buttons__large__image
 	@extend .cp__buttons__image

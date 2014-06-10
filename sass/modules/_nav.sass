@@ -1,673 +1,432 @@
-//$nav__row-height--px and $nav__row-height was moved to constants
+// variables
+$nav__row-height--px: 50px
+$nav__row-height: em($nav__row-height--px)
 $nav__break__full-menu: em(768px)
-$nav__logo-mobile-width: 76px/2
-$nav__logo-mobile-height: 40px/2
+$nav__logo-mobile-width: 38px
+$nav__logo-mobile-height: 20px
 $nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
 $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
 $nav__service-primary-full-width: 200px
-$nav__section-border: 1px solid $grey--mid
-$nav__community--logged-out-width: em(80px)
-$main-nav__all-ressorts-position-right-logged-out: em(220px)
-$main-nav__all-ressorts-position-right-logged-in: em(180px)
-$main-nav__service-position-right-logged-out: em(106px)
-$main-nav__service-position-right-logged-in: em(64px)
-$icon-avatar-std-size: em(40px)
-
-
-.is-small-screen-only
-  display: block !important
-  +respond-min($nav__break__full-menu)
-    display: none !important
-
-
-.is-large-screen-only
-  display: none !important
-  +respond-min($nav__break__full-menu)
-    display: block !important
+$nav__background-color: $grey--mid-dark
+$nav__border-color: $grey--mid
+$nav__section-border: 1px solid $nav__border-color
+$icon-avatar-std-size: em(32px)
 
 
 .main-nav
-  position: relative
-  width: 100%
-  max-width: $max-page-width
-  margin: 0 auto
-  background-color: $grey--mid
-  &.is-full-width
-    max-width: none
-    margin-bottom: 0
-    z-index: 100000 // absurd high z-index to overrule ads and such
-    margin-top: 0
-  &.is-compact
-    left: 0
-    top: 0
-    height: $nav__row-height
-    +respond-min($nav__break__full-menu)
-      height: $nav__row-height
-    .no-touch &
-      position: fixed
-      ~ .main
-        margin-top: $nav__row-height
-  +respond-min($nav__break__full-menu)
-    height: $nav__row-height * 2
-    background-color: $grey--mid-dark
-  a
-    +link-colors($white, $white, $white, $white, $white)
     +tablet
-    border-width: 0
-    +respond-min($nav__break__full-menu)
-      margin-bottom: $fine
-    &.is-active
-      opacity: 0.5
-
-
-.main-nav__wrap
-  +respond-min($nav__break__full-menu)
+    line-height: $nav__row-height--px
+    width: 100%
     max-width: $max-page-width
     margin: 0 auto
-    height: 100%
-    position: relative
-    .is-full-width &
-      max-width: $max-longform-width - $page-padding*2
-      +respond-min($max-longform-width - $page-padding*2)
-        border-left: $nav__section-border
-        border-right: $nav__section-border
+    color: $white
+    background-color: $nav__background-color
+    &.is-full-width
+        max-width: none
+        z-index: 100000 // absurd high z-index to overrule ads and such
+    &.is-compact
+        .no-touch &
+            position: fixed
+            left: 0
+            top: 0
+            ~ .main
+                margin-top: $nav__row-height
+    +respond-min($nav__break__full-menu)
+        height: em($nav__row-height--px * 2 + 1)
+        &.is-compact
+            height: auto
+    a
+        +link-colors($white, $white, $white, $white, $white)
 
 
 .main-nav__logo
-  float: left
-  width: $nav__row-height
-  height: $nav__row-height
-  color: $white
-  background-color: $grey--mid-dark
-  margin-right: 1px
-  border: none
-  margin-bottom: 0 !important
-  position: relative
-  overflow: hidden
-  +respond-min($nav__break__full-menu)
-    width: em($nav__logo-full-width) + 2*$small
-    border-bottom: $nav__section-border !important
-    .is-compact &
-      border-bottom: none !important
+    float: left
 
 
 .main-nav__logo__wrap
-  width: $nav__logo-mobile-width
-  height: $nav__logo-mobile-height
-  position: absolute
-  left: 50%
-  top: 50%
-  margin-left: -$nav__logo-mobile-width/2
-  margin-top: -$nav__logo-mobile-height/2
-  +respond-min($nav__break__full-menu)
-    margin-left: -$nav__logo-full-width/2
-    margin-top: -$nav__logo-full-height/2
-    width: $nav__logo-full-width
-    height: $nav__logo-full-height
+    margin: 0
+    font-size: 1em
+    width: $nav__row-height
+    height: $nav__row-height
+    border-right: $nav__section-border
+    +box-sizing(content-box)
+    text-align: center
+    +respond-min($nav__break__full-menu)
+        padding: 0 1em
+        width: auto
 
 
 .main-nav__logo__img
-  display: block
-  text-indent: -5000em
-  width: $nav__logo-mobile-width
-  height: $nav__logo-mobile-height
-  &.icon-zm-logo--white
+    display: inline-block
+    +hide-text
+    width: $nav__logo-mobile-width
+    height: $nav__logo-mobile-height
     background-size: contain
-  +respond-min($nav__break__full-menu)
-    background: url('../img/zeit-logo--magazin.png') no-repeat
-    background-size: contain
-    width: $nav__logo-full-width
-    height: $nav__logo-full-height
+    vertical-align: middle
+    +respond-min($nav__break__full-menu)
+        background-image: url('../img/zeit-logo--magazin.png')
+        width: $nav__logo-full-width
+        height: $nav__logo-full-height
 
 
 .main-nav__menu
-  overflow: hidden
-  height: $nav__row-height
-  background-color: $grey--mid-dark
-  +respond-min($nav__break__full-menu)
-    background: none
-    border-bottom: $nav__section-border
-    .is-compact &
-      border-bottom: none
+    overflow: hidden
+    height: $nav__row-height // needed?
 
 
 .main-nav__menu__head
-  height: 100%
-  cursor: pointer
-  text-align: right
-  +respond-min($nav__break__full-menu)
-    border-left: $nav__section-border
-    cursor: default
+    text-align: right
+    padding: 0 $small
+    cursor: pointer
+    +respond-min($nav__break__full-menu)
+        display: none
 
 
 .main-nav__menu__head__headline
-  +tablet
-  +inline-block
-  +no-user-select
-  color: $white
-  font-size: $font-s
-  letter-spacing: 1px
-  float: left
-  height: 100%
-  margin-left: $small
-  line-height: $nav__row-height--px
-  line-height: em_to_rem($nav__row-height)
-  +respond-min($nav__break__full-menu)
-    display: none
+    +inline-block
+    +no-user-select
+    font-size: $font-s
+    letter-spacing: 1px
+    float: left
 
 
 .main-nav__menu__head__hamburger
-  +hide-text
-  +inline-block
-  width: 25px
-  height: 3px
-  right: $small
-  top: $nav__row-height/5
-  background-color: $white
-  margin: 3px 0
-  overflow: visible
-  position: relative
-  &:before, &:after
-    position: absolute
-    width: 100%
+    +inline-block
+    text-indent: -119999px
+    text-align: left
+    width: 25px
     height: 3px
-    left: 0
-    color: red
-    content: ''
-    display: block
-    border: 0 solid $white
-  &:before
-    border-top-width: 3px
-    top: -8px
-  &:after
-    bottom: -8px
-    border-bottom-width: 3px
-  +respond-min($nav__break__full-menu)
-    display: none
+    background-color: $white
+    position: relative
+    &:before, &:after
+        position: absolute
+        width: 100%
+        content: ''
+        display: block
+        border-top: 3px solid $white
+    &:before
+        top: -8px
+    &:after
+        bottom: -8px
 
 
 .main-nav__menu__content
-  display: none
-  position: absolute
-  left: 1px
-  z-index: 5
-  width: 100%
-  width: -moz-calc(100% - 1px)
-  width: -webkit-calc(100% - 1px)
-  width: calc(100% - 1px)
-  padding-left: $nav__row-height
-  &.is-open
-    display: block
-  +respond-min($nav__break__full-menu)
-    display: block
-    position: static
-
-
-.main-nav__menu__content__current-ressort
-  +tablet
-  font-size: $font-s
-  background-color: $grey--mid-dark
-  display: block
-  letter-spacing: 1px
-  padding: $small
-  +respond-max($nav__break__full-menu)
-    border-bottom: $nav__section-border !important
-    border-top: $nav__section-border !important
-  +respond-min($nav__break__full-menu)
-    padding-bottom: $small !important
+    display: none
+    position: absolute
+    left: 0
+    padding-left: $nav__row-height + em(1px)
+    z-index: 5
+    width: 100%
+    &.is-open
+        display: block
+    +respond-min($nav__break__full-menu)
+        display: block
+        position: static
 
 
 .main-nav__section
-  background-color: $grey--mid-dark
-  border-top: 1px solid $grey--mid
-  border-bottom: 1px solid $grey--mid
-  +respond-min($nav__break__full-menu)
-    border: none
-    background-color: $grey--mid-dark
-    height: $nav__row-height
-
+    background-color: $nav__background-color
+    border-top: 2px solid $nav__border-color
+    padding: 0 em(26px)
+    +respond-min($nav__break__full-menu)
+        border: none
+        padding: 0
+    a
+        font-size: $font-s
+        letter-spacing: 1px
 
 .main-nav__section__trigger
-  +tablet
-  +no-user-select
-  color: $white
-  font-size: $font-s
-  letter-spacing: 1px
-  cursor: pointer
-  background-color: $grey--mid-dark
-  padding: $small
-  display: block
-  +respond-min($nav__break__full-menu)
-    padding: 0
-    height: 100%
-
-
-.main-nav__section__content
-  display: none
-  padding: $small
-  +respond-max($nav__break__full-menu)
-    padding-top: 0
-  &.is-always-open, &.is-open
-    padding-top: $small
+    +no-user-select
+    cursor: pointer
     display: block
-  &.is-open
-    +respond-max($nav__break__full-menu)
-      padding-top: 0
-      padding-bottom: $thin
-  a
+
+.main-nav__section__text
     font-size: $font-s
     letter-spacing: 1px
-    display: block
-    padding: $micro 0
-  +respond-max($nav__break__full-menu)
+
+.main-nav__section__content
+    display: none
+    background-color: $nav__background-color
+    &.is-open
+        display: block
     a
-      padding: $thin 0
-    .main-nav__ressorts &
-      a
-        +inline-block
-        vertical-align: top
-        width: 100%
-  +respond-min($nav__break__full-menu)
-    padding: $small $compact $compact $compact
-    min-width: em(120px)
-    background-color: $grey--mid-dark
-    .main-nav__ressorts &,
-    .main-nav__service-primary &,
-      padding: $fine
-  .main-nav__service &
-    .main-nav__section__content__wrap a
-      +inline-block
-      vertical-align: top
-      width: 48%
-      &:nth-child(2n)
-        padding-left: $small
-  .main-nav__service &,
-  .main-nav__community &
-    +respond-min($nav__break__full-menu)
-      padding-bottom: $micro !important
-    .main-nav__section__content
-      height: 100%
-      +respond-min($nav__break__full-menu)
-        padding-bottom: $micro !important
+        display: block
 
-=nav__open-submenu
-  display: block
-  left: 0
-  top: 100%
-  top: -moz-calc(100% + 1px)
-  top: -webkit-calc(100% + 1px)
-  top: calc(100% + 1px)
-  position: absolute
-  z-index: 10
-  width: em(300px)
-  .main-nav__service-primary &
-    left: auto
-    right: 0
-    width: 100%
-  .main-nav__ressorts &
-    position: static
 
+//*****************
+// DESKTOP STYLES *
+//*****************
 
 +respond-min($nav__break__full-menu)
-  .has-hover
+    .main-nav__section__content
+        position: absolute
+        right: 0
+        top: 100%
+        top: -webkit-calc(100% + 1px)
+        top: -moz-calc(100% + 1px)
+        top: calc(100% + 1px)
+        z-index: 10
+        padding: $tiny em(26px)
+        line-height: 3
+
+    .has-hover
+        .main-nav__service,
+        .main-nav__search,
+        .main-nav__community
+            .main-nav__section__trigger:hover + .main-nav__section__content,
+            .main-nav__section__content:hover
+                display: block
+
+    .has-hover .main-nav__service:hover,
+    .has-hover .main-nav__community:hover,
+    .main-nav__service.has-open-menu,
+    .main-nav__community.has-open-menu
+        border-bottom: 1px solid $nav__background-color
+        z-index: 3
+
     .main-nav__service,
-    .main-nav__search,
     .main-nav__community
-      .main-nav__section__trigger:hover + .main-nav__section__content,
-      .main-nav__section__content:hover
-        +nav__open-submenu
+        .main-nav__section__content
+            &:before, &:after
+                position: absolute
+                content: ''
+                height: $nav__row-height
+                top: 0
+                pointer-events: none
+            &:before
+                +linear-gradient(to left, rgba($black, 0.6), rgba($black, 0))
+                right: 100%
+                width: 80px
+    .main-nav__service
+        .main-nav__section__content
+            &:after
+                +linear-gradient(to right, rgba($black, 0.6), rgba($black, 0))
+                left: 100%
+                width: 80px
+            width: em(300px)
 
-  .main-nav__service,
-  .main-nav__search,
-  .main-nav__community
-    .main-nav__section__content.is-open
-      +nav__open-submenu
+    .main-nav__wrap
+        max-width: $max-page-width
+        margin: 0 auto
+        position: relative
+        .is-full-width &
+            max-width: $max-longform-width - $page-padding*2
+            +box-shadow(0 -1px 0 1px $grey--mid)
 
-  .main-nav__community
-    .main-nav__section__content.is-open
-      width: em(100px)
-
-  .main-nav__search
-    .main-nav__section__content.is-open
-      width: auto
-
-  .has-hover .main-nav__service:hover,
-  .has-hover .main-nav__community:hover,
-  .main-nav__service.has-open-menu,
-  .main-nav__community.has-open-menu
-    border-bottom-color: $grey--mid-dark
+    .main-nav__aside
+        position: absolute
+        top: 0
+        right: 0
+        .main-nav__section
+            float: left
+            position: relative
+            padding: 0 em(16px)
+            & + .main-nav__section
+                border-left: $nav__section-border
 
 
-.main-nav__service-primary
-  a
-    +inline-block
-    margin-right: $small
-    &:last-child
-      margin-right: 0
-    a
-      padding: 0
-  +respond-max($nav__break__full-menu)
-    border: none
-    .main-nav__section__content
-      padding: 0
-      a
+
+//***********
+// RESSORTS *
+//***********
+
++respond-max($nav__break__full-menu)
+    .main-nav__ressorts
+        padding-top: $tiny
+        padding-bottom: $tiny
+        line-height: 3
+        a
+            display: block
+
++respond-min($nav__break__full-menu)
+    .main-nav__ressorts
         border-top: $nav__section-border
-        border-bottom: $nav__section-border
-        display: block
-        margin-right: 0
-        padding: $small
-  +respond-min($nav__break__full-menu)
-    position: absolute
-    top: $nav__row-height
-    right: 0
-    z-index: 3
-    left: auto
-    text-align: right
-    width: $nav__service-primary-full-width
-    overflow: hidden
-    a
-      margin-top: $hair
-      margin-bottom: 0
-    .main-nav__section__content
-      padding-right: $small
-
-
-.main-nav__all-ressorts
-  +respond-min($nav__break__full-menu)
-    position: absolute
-    border-bottom: $nav__section-border
-    right: $main-nav__all-ressorts-position-right-logged-in
-    top: 0
-    padding: 0 $small
-
-
-.is-standalone-link
-  font-size: $font-s
-  border-top: 1px solid $grey--mid-dark
-  border-bottom: 1px solid $grey--mid-dark
-  border-width: 1px !important
-  display: block
-  letter-spacing: 1px
-  +on-interaction
-    border-color: $grey--mid-dark
-  +respond-max($nav__break__full-menu)
-    padding: $small
-  +respond-min($nav__break__full-menu)
-    height: $nav__row-height
-    line-height: em_to_rem($nav__row-height) !important
-    line-height: $nav__row-height--px !important
-
-
-.main-nav__service
-  .main-nav__section__trigger
-    padding-right: $compact
-    background-position: right center
-  +respond-max($nav__break__full-menu)
-    .main-nav__section__trigger
-      background: none
-
-
-.main-nav__ressorts
-  +respond-max($nav__break__full-menu)
-    border-top-width: 2px !important
-  +respond-min($nav__break__full-menu)
-    position: absolute
-    top: $nav__row-height
-    left: 0
-    overflow: hidden
-    width: 100%
-    z-index: 2
-    padding-right: $nav__service-primary-full-width
-    white-space: nowrap
-    .main-nav__section__content
-      position: relative
-      height: 100%
-      margin-left: $small
-      padding: 0
-      overflow: hidden
-      .no-js &
-        overflow: auto
-        overflow-x: auto
-        overflow-y: hidden
-      .main-nav__section__content__wrap
+        position: absolute
+        top: $nav__row-height
+        left: 0
+        overflow: hidden
+        width: 100%
+        z-index: 2
+        padding-right: $nav__service-primary-full-width
+        white-space: nowrap
+        a
+            +inline-block
+            margin-right: $small
+            &:link
+                color: $greyish-white
+            &:hover, &:active
+                color: white
+            &:last-child
+                margin-right: 0
+    .main-nav__ressorts__slider
+        position: relative
+        height: $nav__row-height
+        margin-left: $small
+        overflow: hidden
+        .no-js &
+            overflow: auto
+            overflow-x: auto
+            overflow-y: hidden
+        .has-topic-slider &
+            padding-right: $small*3
+            overflow: hidden
+            &:after
+                content: ''
+                position: absolute
+                height: 100%
+                width: $small*3
+                background-color: $nav__background-color
+                z-index: 5
+                right: 0
+    .main-nav__ressorts__slider-strip
         +transition(left 0.2s)
         position: absolute
         left: 0
         height: 100%
-        padding: $fine 0
-        a
-          &:link
-            color: $greyish-white
-          &:hover, &:active
-            color: white
-      .has-topic-slider &
-        padding-right: $small*3
-        overflow: hidden
-        &:after
-          content: ''
-          position: absolute
-          height: 100%
-          width: $small*3
-          background-color: $grey--mid-dark
-          z-index: 5
-          right: 0
-    a
-      +inline-block
-      margin-right: $small
-      margin-top: $hair
-      margin-bottom: 0
-      &:last-child
-        margin-right: 0
 
 
 .main-nav__ressorts__slider-arrow--left,
 .main-nav__ressorts__slider-arrow--right
-  width: $small
-  height: $nav__row-height
-  position: absolute
-  z-index: 10
-  background-position: center center
-  display: none
-  cursor: pointer
-  .has-topic-slider &
-    +respond-min($nav__break__full-menu)
-      display: block
-  &.is-inactive
-    opacity: 0.5
-    cursor: default
+    width: $small
+    height: $nav__row-height
+    position: absolute
+    z-index: 10
+    background-position: center center
+    display: none
+    cursor: pointer
+    .has-topic-slider &
+        +respond-min($nav__break__full-menu)
+            display: block
+    &.is-inactive
+        opacity: 0.5
+        cursor: default
 
 
 .main-nav__ressorts__slider-arrow--left
-  right: $small
+    right: $small
 .main-nav__ressorts__slider-arrow--right
-  right: 0
+    right: 0
 
+
+//****************
+// PRIMARY LINKS *
+//****************
+
+.main-nav__service-primary
+    border-top: none
+    padding: 0
+    a
+        border-top: 2px solid $nav__border-color
+        display: block
+        padding: 0 em(26px)
+    +respond-min($nav__break__full-menu)
+        position: absolute
+        top: $nav__row-height--px + 1px
+        right: 0
+        height: $nav__row-height
+        z-index: 3
+        text-align: right
+        a
+            border-top: none
+            display: inline
+            padding: 0
+            margin-right: $small
+
+
+.main-nav__only-small
+    +respond-min($nav__break__full-menu)
+        display: none
+
+.main-nav__only-full
+    +respond-max($nav__break__full-menu)
+        display: none
+
+
+//****************
+// SERVICE LINKS *
+//****************
 
 .main-nav__service
-  +respond-min($nav__break__full-menu)
-    border-left: $nav__section-border
-    border-right: $nav__section-border
-    position: absolute
-    right: $main-nav__service-position-right-logged-in
-    top: 0
-    padding: 0 $small
-    .main-nav__section__content
-      left: auto !important
-      right: 0
+    a
+        +inline-block
+        vertical-align: top
+        width: 48%
+        &:nth-child(2n)
+            padding-left: $small
+    .main-nav__section__trigger
+        padding-right: em(26px)
+        background-position: right center
+    +respond-max($nav__break__full-menu)
+        .main-nav__section__trigger
+            background: none
 
+
+//*********
+// SEARCH *
+//*********
 
 .main-nav__search
-  input
-    +tablet
-    +inline-block
-    +border-radius(0)
-    font-size: $font-s
-    margin-top: $thin*0.9
-    vertical-align: middle
-    border: none
-    padding: $hair $thin
-    height: $nav__row-height - $thin
-  input[type=text]
-    margin-left: $hair
-    background-color: $grey--mid
-  input[type=submit]
-    margin-right: $hair*1.3
-    background-color: $grey
-    color: $white
-    padding: 0 $small
-  +respond-min($nav__break__full-menu)
-    position: absolute
-    border-left: $nav__section-border
-    border-right: $nav__section-border
-    padding: 0
-    right: $nav__row-height + em(14px)
-    top: 0
-    &.has-open-menu
-      border-left: none
-    .main-nav__section__content
-      left: auto !important
-      top: 0 !important
-      height: $nav__row-height
-      padding: 0
-      padding-left: $thin/2
-      right: $nav__row-height
-      white-space: nowrap
-      border-bottom: $nav__section-border
-    .main-nav__section__trigger
-      +hide-text
-      background-position: center center
-      width: $nav__row-height--px
-      width: em_to_rem($nav__row-height)
-  +respond-max($nav__break__full-menu)
-    .main-nav__section__trigger
-      background: none
-
-
-+respond-min($nav__break__full-menu)
-  .main-nav__service,
-  .main-nav__search
-    border-bottom: $nav__section-border
-    .main-nav__section__trigger
-      line-height: $nav__row-height--px
-      line-height: em_to_rem($nav__row-height)
-  .main-nav__service,
-  .main-nav__community
-    .main-nav__section__content
-      &:before, &:after
-        position: absolute
-        content: ''
-        height: $nav__row-height
-        top: 0
-        pointer-events: none
-        width: 80px
-      &:before
-        +linear-gradient(to left, rgba($black, 0.6), rgba($black, 0))
-        right: 100%
-      &:after
-        +linear-gradient(to right, rgba($black, 0.6), rgba($black, 0))
-        left: 100%
-  .main-nav__community
-    .main-nav__section__content
-      &:after
-        background: none
-        width: 0
-
-
-.main-nav__community
-  +respond-min($nav__break__full-menu)
-    position: absolute
-    right: 0
-    padding: 0 $small
-    left: auto
-    top: 0
-    border-bottom: $nav__section-border
-    .main-nav__section__trigger
-      line-height: $nav__row-height--px
-      background: none
-      padding-top: $hair*2
-      width: $nav__row-height
-      height: auto
-      max-width: $nav__row-height
-      max-height: $nav__row-height
-      overflow: hidden
-    .main-nav__section__content
-      left: auto !important
-      right: 0
-    .main-nav__community__icon,
-    .main-nav__community__icon--pic
-      position: absolute
-      right: em(16px)
-      top: em(8px)
-  img
-    +border-radius(50%)
-    +respond-max($nav__break__full-menu)
-      +inline-block
-      max-width: em(30px)
-      margin-top: -$micro
-      margin-right: $fine
+    input
+        font-size: $font-s
+        vertical-align: middle
+        border: none
+        padding: 0 $thin
+        height: $nav__row-height - $thin
+    input[type=text]
+        color: $white
+        background-color: $grey--mid
+    input[type=submit]
+        color: $white
+        background-color: $grey
+        padding: 0 $small
     +respond-min($nav__break__full-menu)
-      padding: $thin
+        &.has-open-menu
+            border-left: none
+        .main-nav__section__content
+            top: 0
+            right: 100%
+            white-space: nowrap
+            line-height: inherit
+            padding: 0
+        .main-nav__section__trigger
+            +hide-text
+            background-position: center center
+            width: em(18px)
+    +respond-max($nav__break__full-menu)
+        .main-nav__section__trigger
+            background: none
 
+
+//************
+// COMMUNITY *
+//************
 
 .main-nav__community__icon
-  display: block
-  background-size: contain
-  width: $icon-avatar-std-size
-  height: $icon-avatar-std-size
-  background-repeat: no-repeat
+    +inline-block
+    vertical-align: middle
+    width: $icon-avatar-std-size
+    height: $icon-avatar-std-size
+    background-repeat: no-repeat
+    background-position: 50% 38% // golden ratio for portrait pictures
+    +background-size(cover)
+    +border-radius(50%)
 
 
-.main-nav__community__icon--pic
-  @extend .main-nav__community__icon
-  background-position: center
-  background-size: cover
-  background-repeat: no-repeat
-  +border-radius($icon-avatar-std-size/2)
-
-
-.main-nav__breadcrumbs
-  +respond-max($nav__break__full-menu)
-    background-color: $grey--dark
-    border-bottom: none
-    .breadcrumbs__list
-      padding: 0
-      margin: 0
-  +respond-min($nav__break__full-menu)
-    position: absolute
-    left: 0
-    background: none
-    width: 100%
-    top: 2*$nav__row-height
-    padding: 0
-    .main-nav__section__content
-      background: none
-      padding: 0
+//***********
+// LONGFORM *
+//***********
 
 .main-nav__sharing
-  float: right
+    float: right
 
 .main-nav__sharing__item
-  +hide-text
-  +inline-block
-  +transition(background)
-  background-position: center center
-  width: $nav__row-height
-  +on-interaction
-    background-color: $grey--mid
-
-  height: $nav__row-height
-  border-left: $nav__section-border !important
-
-//special values for logged out status
-.main-nav--logged-out
-  .main-nav__section__without_trigger
-    @extend .main-nav__section__trigger
-  .main-nav__community
-    .main-nav__section__without_trigger
-      width: $nav__community--logged-out-width
-      max-width: $nav__community--logged-out-width
-  .main-nav__all-ressorts
-    +respond-min($nav__break__full-menu)
-      right: $main-nav__all-ressorts-position-right-logged-out
-  .main-nav__service
-    right: $main-nav__service-position-right-logged-out
+    +hide-text
+    float: left
+    width: $nav__row-height
+    height: $nav__row-height
+    border-left: $nav__section-border
+    +box-sizing(content-box)
+    background-position: center center
+    +transition(background-color)
+    +on-interaction
+        background-color: $grey--mid

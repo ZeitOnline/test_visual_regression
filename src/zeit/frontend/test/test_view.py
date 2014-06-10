@@ -547,7 +547,7 @@ def test_pagination_next_page_url_is_working(testserver):
 
 def test_pagination_next_page_url_on_last_page_is_none(testserver):
     browser = Browser('%s/artikel/03/seite-7' % testserver.url)
-    content = '<span class="icon-paginierungs-pfeil-rechts-inaktiv">Vor</span>'
+    content = '<span class="icon-pagination-next">Vor</span>'
 
     assert content in browser.contents
 
@@ -572,22 +572,16 @@ def test_pagination_prev_page_url_on_first_page_is_none(testserver):
     assert view.pagination['prev_page_url'] is None
 
 
-def test_article09_should_have_a_focussed_nextread(application):
+def test_article09_should_have_a_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    article_view = view_article.Article(context, mock.Mock())
-    nextread = article_view.focussed_nextread
-    assert nextread is not None
-    assert isinstance(nextread['article'],
-                      zeit.content.article.article.Article)
-    assert nextread['image']['uniqueId'] is None
-    assert nextread['layout'] == 'minimal'
+    view = view_article.Article(context, mock.Mock())
+    assert view.nextread is not None
 
 
-def test_article01_should_not_have_a_focussed_nextread(application):
+def test_article01_should_not_have_a_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = view_article.Article(context, mock.Mock())
-    nextread = article_view.focussed_nextread
-    assert nextread is None
+    view = view_article.Article(context, mock.Mock())
+    assert view.nextread is None
 
 
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):

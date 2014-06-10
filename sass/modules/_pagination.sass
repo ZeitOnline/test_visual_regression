@@ -1,82 +1,64 @@
-%pagerlink
-	display: block
-	color: $grey--mid
-	border-bottom: none
-	+link
-		color: $grey--mid
-	+on-interaction
-		+tablet(bold)
-		line-height: $medium
+$pagination-icon-width: 21px
+$pagination-icon-height: 32px
 
 %pager
-	+tablet
-	font-size: $font-s
-	+inline-block
-	line-height: $medium
-	margin: 0 $small
-	min-width: $junior
-	min-height: $medium
-	text-align: center
-	vertical-align: center
-	color: $grey--mid
-	a
-		@extend %pagerlink
-
-%pagerarrow
-	a
-		@extend %pagerlink
-		background-color: $grey--light
-		background-position: 50% 50%
-		background-size: 36%
-		text-indent: -50000em
-		+on-interaction
-			background-color: $grey--dark
-	span
-		display: block
-		background-color: $grey--bright
-		color: $grey--light
-		background-position: 50% 50%
-		background-size: 36%
-		text-indent: -50000em
-
+    +inline-block
+    line-height: $pagination-icon-height
+    margin: 0 $small
+    padding: 0
+    min-width: $pagination-icon-width
+    min-height: $pagination-icon-height
+    text-align: center
+    color: $grey--mid
 
 .article__pagination
-	padding-top: $mediumhuge
+    +tablet
+    padding-top: $mediumhuge
 
 .article__pagination__nexttitle
-	+tablet(bold)
-	color: $grey--dark
-	text-align: center
-	margin-bottom: $large
-	border-bottom: none
-	a
-		+link-colors($grey--dark, grey--dark, $grey--dark, $grey--dark, $grey--dark)
+    font-weight: bold
+    color: $grey--dark
+    text-align: center
+    margin-bottom: $large
+    a
+        +link-colors($grey--dark, $grey--dark, $grey--dark, $grey--dark, $grey--dark)
 
-.paginator__dash
-	color: $charcoal
+.article__pagination__dash
+    color: $charcoal
 
 .article__pager
-	list-style: none
-	text-align: center
-	margin: 0 0 $large 0
-	padding: 0
-
-.article__pager__prev
-	@extend %pager
-	@extend %pagerarrow
+    list-style: none
+    text-align: center
+    margin: 0 0 $large 0
+    padding: 0
 
 .article__pager__number
-	@extend %pager
+    @extend %pager
+    a
+        font-size: $font-s
+        display: block
+        color: $grey--mid
+        +link
+            color: $grey--mid
 
-.article__pager__number.is-current
-	a
-		+link
-			color: $charcoal
-			cursor: default
-		+on-interaction
-			+tablet
-			line-height: $medium
+        &.is-current
+            cursor: default
+            color: $charcoal
+        &:not(.is-current)
+            +on-interaction
+                font-weight: bold
 
+.article__pager__prev,
 .article__pager__next
-	@extend %pager
-	@extend %pagerarrow
+    @extend %pager
+    a,
+    span
+        display: block
+        text-indent: -50000em
+        background-color: $grey--light
+    a
+        +on-interaction
+            background-color: $grey--dark
+            background-position: 0% 100%
+    &.is-inactive
+        opacity: .4

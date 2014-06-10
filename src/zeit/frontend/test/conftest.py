@@ -127,7 +127,6 @@ def agatho():
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
-
 @pytest.fixture
 def linkreach():
     from zeit.frontend.reach import LinkReach

@@ -9,5 +9,5 @@ def test_footer_exists(testserver):
 
 def test_footer_has_logo(testserver):
     browser = Browser('%s/artikel/01' % testserver.url)
-    assert '<span class="main-footer__ZM__img'\
-        ' icon-zm-logo--white"></span>' in browser.contents
+    assert '<div class="main-footer__logo'\
+        ' icon-zm-logo--white"></div>' in browser.contents

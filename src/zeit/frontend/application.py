@@ -18,7 +18,7 @@ import zeit.frontend
 import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.centerpage
-import zeit.frontend.utils
+import zeit.frontend.template
 import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
@@ -129,42 +129,37 @@ class Application(object):
             pyramid_jinja2.IJinja2Environment)
 
         default_loader = jinja.loader
-        jinja.loader = zeit.frontend.utils.PrefixLoader({
+        jinja.loader = zeit.frontend.template.PrefixLoader({
             None: default_loader,
-            'dav': zeit.frontend.utils.HTTPLoader(self.settings.get(
+            'dav': zeit.frontend.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
         jinja.trim_blocks = True
 
-        jinja.globals.update(zeit.frontend.navigation.get_sets())
-        jinja.globals['get_teaser_template'] = (
-            zeit.frontend.utils.most_sufficient_teaser_tpl)
-        jinja.globals['get_teaser_image'] = (
-            zeit.frontend.utils.most_sufficient_teaser_image)
-        jinja.globals['create_image_url'] = (
-            zeit.frontend.utils.create_image_url)
+        # Copy arbitrary names from a source module to a destination dict.
+        copy = lambda src, dest, *names: [dest.__setitem__(
+            n, getattr(src, n)) for n in names]
 
-        jinja.tests['elem'] = zeit.frontend.block.is_block
-
-        # XXX Use scanning to register filters instead of listing them here
-        # again.
-        jinja.filters['block_type'] = zeit.frontend.block.block_type
-        for name in [
-                'auto_select_asset', 'get_all_assets',
-                ]:
-            jinja.filters[name] = getattr(zeit.frontend.centerpage, name)
-
-        jinja.filters['auto_select_asset'] = (
-            zeit.frontend.centerpage.auto_select_asset)
-        for name in [
-                'format_date', 'format_date_ago',
-                'replace_list_seperator', 'translate_url',
-                'default_image_url', 'get_image_metadata',
-                'obj_debug', 'substring_from', 'hide_none',
-                'create_url',
-                ]:
-            jinja.filters[name] = getattr(zeit.frontend.utils, name)
+        copy(zeit.frontend.template, jinja.globals,
+             'create_image_url', 'get_teaser_image',
+             'get_teaser_template', 'sitemap', 'top_formate'
+             )
+        copy(zeit.frontend.block, jinja.tests,
+             'elem'
+             )
+        copy(zeit.frontend.block, jinja.filters,
+             'block_type'
+             )
+        copy(zeit.frontend.centerpage, jinja.filters,
+             'auto_select_asset', 'get_all_assets'
+             )
+        copy(zeit.frontend.template, jinja.filters,
+             'create_url', 'default_image_url', 'format_date',
+             'format_date_ago', 'get_image_metadata', 'hide_none',
+             'obj_debug', 'replace_list_seperator', 'substring_from',
+             'translate_url'
+             )
 
         return jinja
 

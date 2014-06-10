@@ -26,14 +26,10 @@ $longform-header-max-height: 1400px
 
   .article__head__subtitle
     margin-bottom: 0
-    strong
-      +tablet(bold)
     p
-      +tablet(bold)
       max-width: 25em
       color: $grey--dark
       text-align: center
-      line-height: 1.5
       font-size: $font-ml
       margin-bottom: 0 !important
       +respond-min($break-2)
@@ -192,12 +188,6 @@ $longform-header-max-height: 1400px
     margin-top: $thin
     +respond-min($break-2)
       display: inline
-    a
-      &:link, &:visited
-        color: $grey
-        text-decoration: none
-      +on-interaction
-        border-color: $grey
     .article__subpage-active
       color: $black
 

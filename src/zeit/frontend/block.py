@@ -7,6 +7,8 @@ import os.path
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+import zeit.frontend.interfaces
+import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 import zope.interface
 
@@ -39,7 +41,7 @@ class IFrontendHeaderBlock(zope.interface.Interface):
 # die Macros sollten durch die IFrontendBlock-Objekte selbst festgelegt
 # werden. Das API jedes der BlockItem-Objekte muß ja ohnehin zum jeweiligen
 # Macro passen.
-def is_block(obj, b_type):
+def elem(obj, b_type):
     o_type = block_type(obj)
     return IFrontendBlock.providedBy(obj) and o_type == b_type
 
@@ -63,6 +65,7 @@ class Paragraph(object):
     def __str__(self):
         return unicode(self.html)
 
+
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(object):
@@ -79,6 +82,7 @@ class Portraitbox(object):
         # Apparently we don't have a root element
         p_text = html.fragments_fromstring(pbox)[0]
         return etree.tostring(p_text)
+
 
 class BaseImage(object):
 
@@ -118,9 +122,9 @@ class Image(BaseImage):
         else:
             self.image = None
             self.src = None
-        if self.attr_title == None:
+        if self.attr_title is None:
             self.attr_title = ''
-        if self.attr_alt == None:
+        if self.attr_alt is None:
             self.attr_alt = ''
 
 
@@ -346,7 +350,7 @@ def _raw_html(xml):
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-            <xsl:output method="xml"
+            <xsl:output method="html"
                         omit-xml-declaration="yes" />
           <xsl:template match="raw">
             <xsl:copy-of select="*" />
@@ -433,3 +437,36 @@ def _inline_html(xml):
         return transform(xml)
     except TypeError:
         return None
+
+
+class NextreadLayout(object):
+    """Implementation to match layout sources from centerpages."""
+
+    def __init__(self, **kwargs):
+        self.id = kwargs.get('id')
+        self.image_pattern = 'zmo-nextread'
+
+
+@implementer(zeit.frontend.interfaces.INextreadTeaserBlock)
+@adapter(zeit.content.article.interfaces.IArticle)
+class NextreadTeaserBlock(object):
+    """Teaser block for nextread teasers in articles."""
+
+    def __init__(self, context):
+        self.teasers = zeit.magazin.interfaces.INextRead(
+            context).nextread
+        layout_id = zeit.magazin.interfaces.IRelatedLayout(
+            context).nextread_layout or 'base'
+        self.layout = NextreadLayout(id=layout_id)
+        # TODO: Nextread lead should be configurable with ZMO-185.
+        self.lead = 'Lesen Sie jetzt:'
+        self.multitude = 'multi' if len(self) - 1 else 'single'
+
+    def __iter__(self):
+        return iter(self.teasers)
+
+    def __getitem__(self, index):
+        return self.teasers[index]
+
+    def __len__(self):
+        return len(self.teasers)

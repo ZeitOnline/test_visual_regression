@@ -1,68 +1,22 @@
-.breadcrumbs-wrap
-  +respond-max($nav__break__full-menu)
-    display: none
-
 .breadcrumbs
-  +respond-min($nav__break__full-menu)
-    +inline-block
+    +tablet
+    padding: $thin $small
+    +padded
     background-color: $grey--mid-dark
     border-bottom: 1px solid $grey--dark
-    width: 100%
-  &.is-active, .no-js &
-    width: 100%
-
-.breadcrumbs__trigger
-  +tablet
-  +inline-block
-  +no-user-select
-  cursor: pointer
-  font-size: $font-xs
-  padding: $micro $thin
-  padding-top: 0
-  margin: $micro $micro 0 $micro
-  color: $grey
-  +respond-min($nav__break__full-menu)
-  +respond-max($nav__break__full-menu)
-    display: none
-  &:after
-    content: ' ›'
-    +respond-min($nav__break__full-menu)
-      font-size: $font-xl
-    margin-right: $micro
-  .no-js &
-    display: none
-  .is-active &
-    margin-right: 0
-    &:after
-      content: ''
-      margin-left: 0
-
-.breadcrumbs__list-wrap
-  +tablet
-  vertical-align: top
-  padding: $thin
-  margin: 0 $micro 0 $micro
-  list-style-type: none
-  +respond-min($break-1)
-    margin-left: 5%
-  +respond-min($nav__break__full-menu)
-    margin-left: em(228px)
-    font-size: $font-xs
-  .is-active &
-    +inline-block
-    margin-left: $small
+    +respond-max($nav__break__full-menu)
+        display: none
 
 .breadcrumbs__list
-  display: inline
-  color: $grey
-  a
-    +link-colors($grey, $grey, $grey, $grey, $grey)
-    margin-right: $thin
-    margin-left: $thin
-    +on-interaction
-      border-bottom-color: $grey
+    color: $grey
+    font-size: $font-xs
+    vertical-align: top
+    a
+        color: $grey
+        +animated-interaction($grey)
 
 .breadcrumbs__list__item
-  display: inline
-  &:first-child a
-    margin-left: 0
+    display: inline
+    margin: 0 $thin
+    &:first-child
+        margin-left: 0

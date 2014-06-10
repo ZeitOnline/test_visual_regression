@@ -59,7 +59,6 @@ module.exports = function(grunt) {
 				imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
 				javascriptsPath: "js", // todo: map to the right path
 				sassDir: project.sourceDir + 'sass',
-				require: ['animation'],
 				raw: 'preferred_syntax=:sass\n'
 			},
 			dev: {
@@ -128,7 +127,7 @@ module.exports = function(grunt) {
 
 		jsdoc: {
 			dist : {
-				src: [project.sourceDir + 'javascript/modules/**/*.js'], 
+				src: [project.sourceDir + 'javascript/modules/**/*.js'],
 				options: {
 					destination: project.sourceDir + 'javascript/documentation'
 				}
@@ -194,6 +193,10 @@ module.exports = function(grunt) {
 			css: {
 				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
 				tasks: ['compass:dev']
+			},
+			grunticon: {
+				files: [project.sourceDir + 'sass/icons/*.svg'],
+				tasks: ['grunticon']
 			}
 		}
 	});
