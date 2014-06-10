@@ -1,4 +1,3 @@
-from lxml import etree
 from lxml import objectify
 import urllib2
 import zeit.frontend.interfaces
@@ -61,5 +60,6 @@ def make_banner_list(banner_config):
             adlabel = None
         banner_list.append(Place(
             place.tile, sizes, diuqilon, adlabel,
-            min_width=place.min_width, active=place.get('active'), dcopt=place.dcopt))
+            min_width=place.min_width, active=place.get('active'),
+            dcopt=place.dcopt))
     return sorted(banner_list, key=lambda place: place.tile)

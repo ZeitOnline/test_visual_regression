@@ -13,6 +13,10 @@ Change log for zeit.frontend
 
 - ZMO-796: Set output method to html for raw tags
 
+- ZMO-769: Ensure teaser image even for articles with video assets
+
+- Rewrite jinja initialization
+
 - ZMO-771: Add missing images to nextread
 
 - ZMO-771: Implement nextread as teaser block with different layouts
