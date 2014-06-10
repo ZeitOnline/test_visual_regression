@@ -476,11 +476,16 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
             // setTimeout needed for FF bug with linked element inside block having overflow:hidden
             window.setTimeout(function(){
                showComment(e, true);
+               $comments.addClass('comments--animated');
            }, 1);
         });
 
         // handle tab switch: recalculate comment metrics for new comment list
         $commentsTabsHead.on('click', '.tabs__head__tab', function(e) {
+            if (e.target.hash === '#tab2' && 'pushState' in history) {
+                history.pushState('', document.title, location.pathname + location.search);
+            }
+
             $commentsActiveList = $(e.target.hash);
             currentOffset = parseInt($commentsActiveList.css('top'), 10);
             calculatePagination();

@@ -167,3 +167,11 @@
 
   & > #{$elements-selector}
     +inline-block
+
+=animated-interaction($color: $color-link--hover)
+  +transition(border-color .2s)
+  border-bottom: 1px solid transparent
+  border-bottom: 1px solid rgba($color, 0)
+  +on-interaction
+    color: $color
+    border-color: $color
