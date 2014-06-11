@@ -13,12 +13,12 @@
     </author>
     <references>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2014/09/stimmts-himalayasalz" year="2014" issue="9" ressort="Wissen" author="Christoph Drösser" contenttype="article" publication-date="2014-02-27T01:06:00+00:00" expires="">
-        <supertitle py:pytype="str">Kolumne Stimmt's?</supertitle>
-        <teaser_supertitle py:pytype="str">Kolumne Stimmt's?</teaser_supertitle>
-        <title py:pytype="str">Ist Himalayasalz besonders gesund?</title>
-        <text py:pytype="str">Das Himalayasalz stammt dem Namen nach vom höchsten Ort der Erde. Außergewöhnlich soll das rosafarbene Mineral sein. Doch nur wenige der Versprechungen sind wahr. </text>
-        <description py:pytype="str">Das Himalayasalz stammt dem Namen nach vom höchsten Ort der Erde. Außergewöhnlich soll das rosafarbene Mineral sein. Doch nur wenige der Versprechungen sind wahr. </description>
-        <byline py:pytype="str">von Christoph Drösser</byline>
+        <supertitle py:pytype="str">Artikel ohne Assets</supertitle>
+        <teaser_supertitle py:pytype="str">Artikel ohne Assets</teaser_supertitle>
+        <title py:pytype="str">Artikel ohne Assets</title>
+        <text py:pytype="str">Artikel ohne Assets</text>
+        <description py:pytype="str">Artikel ohne Assets</description>
+        <byline py:pytype="str"></byline>
         <breadcrumb_title py:pytype="str">Stimmt's? Ist Himalayasalz besonders gesund?</breadcrumb_title>
         <author href="http://xml.zeit.de/autoren/D/Christoph_Droesser/index.xml" publication-date="" expires="">
           <display_name py:pytype="str">Christoph Drösser</display_name>
@@ -146,8 +146,8 @@
       "Wochenmarkt" fotografiert</caption>
     <caption>Die Jugend ist auch nicht mehr das, was sie mal war: Verspeist Paprikasuppe, statt die
       Revolte zu planen</caption>
-    <supertitle>Kochen mit Freunden</supertitle>
-    <subtitle>Safran, Salzzitronen, Anis, Bulgur – ein paar ungewöhnliche Zutaten genügen, damit Ihre Freunde und Sie selbst glauben können, Sie seien ein guter Koch.</subtitle>
+    <supertitle>Artikel ohne Assets</supertitle>
+    <subtitle>Artikel ohne Assets</subtitle>
     <division xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="page" teaser="Libanesischer Aniskuchen">
       <image src="http://xml.zeit.de/zeit-magazin/essen-trinken/2014-05/Aniskuchen-kochen-freunde-inline/Aniskuchen-kochen-freunde-inline-zmo-landscape-large.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-small-left" is_empty="False" set-manually="True">
         <bu py:pytype="str">Ein Kuchen ohne Butter und Eier, dafür mit Kurkuma, auch Gelbwurz genannt</bu>
