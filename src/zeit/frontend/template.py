@@ -19,6 +19,7 @@ import zeit.frontend.centerpage
 import zope.component
 
 log = logging.getLogger(__name__)
+default_teaser_images = None  # Set during startup through application.py
 
 
 @jinja2.contextfilter
@@ -205,14 +206,14 @@ def get_teaser_template(block_layout,
 
 
 def get_teaser_image(teaser_block, teaser, unique_id=None):
-    default_images = 'http://xml.zeit.de/centerpage/katzencontent/'
     if unique_id:
         asset = zeit.cms.interfaces.ICMSContent(unique_id)
     else:
         asset = zeit.frontend.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return get_teaser_image(
-            teaser_block, teaser, unique_id=default_images)
+            teaser_block, teaser,
+            unique_id=zeit.frontend.template.default_teaser_images)
     if not unique_id:
             unique_id = asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
@@ -225,7 +226,8 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         return teaser_image
     except TypeError:
         return get_teaser_image(
-            teaser_block, teaser, unique_id=default_images)
+            teaser_block, teaser,
+            unique_id=zeit.frontend.template.default_teaser_images)
 
 
 def create_image_url(teaser_block, image):
