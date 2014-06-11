@@ -12,9 +12,8 @@
     font-size: $font-xs
     vertical-align: top
     a
-        +link-colors($grey, $grey, $grey, $grey, $grey)
-        +on-interaction
-            border-bottom-color: $grey
+        color: $grey
+        +animated-interaction($grey)
 
 .breadcrumbs__list__item
     display: inline

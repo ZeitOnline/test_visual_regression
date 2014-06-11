@@ -1,5 +1,6 @@
 from babel.dates import format_datetime
 from datetime import datetime, timedelta
+from lxml import objectify
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 import email.utils
@@ -16,7 +17,6 @@ import zeit.cms.interfaces
 import zeit.content.link.interfaces
 import zeit.frontend.centerpage
 import zope.component
-
 
 log = logging.getLogger(__name__)
 
@@ -109,6 +109,20 @@ def hide_none(string):
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
+
+def _get_navigation():
+    navigation = pkg_resources.resource_filename(
+        __name__, 'data/navigation.xml')
+    tree = objectify.parse(navigation)
+    root = tree.getroot()
+    top_formate = root.xpath('list[@id="top-formate"]')[0]
+    sitemap = root.xpath('list[@id="sitemap"]')[0]
+    return top_formate, sitemap
+
+top_formate, sitemap = _get_navigation()
+del _get_navigation
+
+
 # definition of default images sizes per layout context
 default_images_sizes = {
     'default': (200, 300),
@@ -174,12 +188,12 @@ def default_image_url(image,
         log.debug('Cannot produce a default URL for %s', image)
 
 
-def most_sufficient_teaser_tpl(block_layout,
-                               content_type,
-                               asset,
-                               prefix='templates/inc/teaser/teaser_',
-                               suffix='.html',
-                               separator='_'):
+def get_teaser_template(block_layout,
+                        content_type,
+                        asset,
+                        prefix='templates/inc/teaser/teaser_',
+                        suffix='.html',
+                        separator='_'):
     types = (block_layout, content_type, asset)
     default = ('default',)
     iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
@@ -190,36 +204,27 @@ def most_sufficient_teaser_tpl(block_layout,
     return map(func, combinations)
 
 
-def most_sufficient_teaser_image(teaser_block,
-                                 teaser,
-                                 asset_type=None,
-                                 file_type='jpg',
-                                 unique_id=None):
+def get_teaser_image(teaser_block, teaser, unique_id=None):
     default_images = 'http://xml.zeit.de/centerpage/katzencontent/'
     if unique_id:
         asset = zeit.cms.interfaces.ICMSContent(unique_id)
-    elif asset_type is None:
-        asset = zeit.frontend.centerpage.auto_select_asset(teaser)
-    elif asset_type == 'image':
-        asset = zeit.frontend.centerpage.get_image_asset(teaser)
     else:
-        raise KeyError(asset_type)
+        asset = zeit.frontend.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return most_sufficient_teaser_image(
+        return get_teaser_image(
             teaser_block, teaser, unique_id=default_images)
     if not unique_id:
-        unique_id = asset.uniqueId
-    image_pattern = teaser_block.layout.image_pattern
-    image_base_name = re.split('/', unique_id.strip('/'))[-1]
-    image_id = '%s/%s-%s.%s' % \
-        (unique_id, image_base_name, image_pattern, file_type)
+            unique_id = asset.uniqueId
+    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
+    image_id = '%s/%s-%s.jpg' % \
+        (unique_id, image_base_name, teaser_block.layout.image_pattern)
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
-        return most_sufficient_teaser_image(
+        return get_teaser_image(
             teaser_block, teaser, unique_id=default_images)
 
 

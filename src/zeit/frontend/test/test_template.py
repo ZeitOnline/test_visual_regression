@@ -1,7 +1,11 @@
-import gocept.httpserverlayer.static
 import os
-import pytest
 import time
+
+import gocept.httpserverlayer.static
+import mock
+import pytest
+
+import zeit.cms.interfaces
 import zeit.frontend.template
 
 
@@ -29,10 +33,6 @@ def test_retrieves_template_via_http(template_server):
     assert 'foo' == source
 
 
-def touch(filename, time):
-    os.utime(filename, (time, time))
-
-
 def test_checks_uptodate_using_last_modified_header(template_server):
     template = template_server['documentroot'] + '/foo.html'
     open(template, 'w').write('foo')
@@ -43,7 +43,7 @@ def test_checks_uptodate_using_last_modified_header(template_server):
 
     assert uptodate()
     later = time.time() + 1
-    touch(template, later)
+    os.utime(template, (later, later))
     assert not uptodate()
 
 
@@ -52,3 +52,25 @@ def test_no_url_configured_yields_error_message():
     UNUSED_ENVIRONMENT = None
     source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
     assert 'load_template_from_dav_url' in source
+
+
+def test_get_teaser_image(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/article_video_asset_2'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert isinstance(image, zeit.frontend.centerpage.TeaserImage), \
+        'Article with video asset should produce a teaser image.'
+    assert 'katzencontent-zmo-large.jpg' in image.src
+
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de'
+        '/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert isinstance(image, zeit.frontend.centerpage.TeaserImage), \
+        'Article with image asset should produce a teaser image.'
+    assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src

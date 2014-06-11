@@ -34,9 +34,8 @@
             &:after
                 content: ''
     a
-        +on-interaction
-            border-color: $color-link--default
-            color: $color-link--default
+        color: $grey
+        +animated-interaction($grey)
 
 +respond-min($break-0)
     .main-footer__logo
