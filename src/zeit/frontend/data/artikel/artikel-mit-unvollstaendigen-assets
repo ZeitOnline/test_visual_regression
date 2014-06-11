@@ -100,7 +100,7 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <title>Die perfekte Illusion</title>
+    <title>Artikel mit unvollstaendigen Assets</title>
     <byline>von Elisabeth Raether</byline>
     <division type="page">
       <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/frau-isst-suppe-2-zmo-landscape-large.jpg" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00" layout="zmo-medium-center" is_empty="False">
@@ -170,7 +170,7 @@
     </division>
   </body>
   <teaser>
-    <title>Die perfekte Illusion</title>
+    <title>Artikel mit unvollstaendigen Assets</title>
     <supertitle>Raffiniert kochen</supertitle>
     <text>Safran, Salzzitronen, Anis, Bulgur – ein paar ungewöhnliche Zutaten genügen, damit Ihre Freunde und Sie selbst glauben können, Sie seien ein guter Koch.</text>
   </teaser>

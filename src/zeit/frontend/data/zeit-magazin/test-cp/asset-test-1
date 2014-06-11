@@ -101,7 +101,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
             <title py:pytype="str">Heimlich vegetarisch</title>
@@ -119,7 +119,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
+          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
             <teaser_supertitle py:pytype="str">Raffiniert kochen</teaser_supertitle>
             <title py:pytype="str">Die perfekte Illusion</title>
@@ -158,7 +158,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
             <title py:pytype="str">Heimlich vegetarisch</title>
@@ -176,7 +176,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-48962e5e-cdbe-4148-a12c-17724cd0e96b">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Liebeskolumne</supertitle>
             <teaser_supertitle py:pytype="str">Liebeskolumne</teaser_supertitle>
             <title py:pytype="str">Ist sie zu rational?</title>
@@ -239,7 +239,7 @@
            <cp_extra id="zmo-seperator-for-cps"/>
          </container>
         <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d">
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen</supertitle>
             <teaser_supertitle py:pytype="str">Kochen</teaser_supertitle>
             <title py:pytype="str">Probier's mal mit Gemütlichkeit</title>
