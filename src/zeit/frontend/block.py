@@ -106,6 +106,7 @@ class Image(BaseImage):
         # TODO: don't use XML but adapt an Image and use it's metadata
         xml = model_block.xml
         self.align = xml.get('align')
+        self.href = xml.get('href')
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout

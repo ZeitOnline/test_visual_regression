@@ -161,7 +161,7 @@
         {% endif %}
         ">
             <div class="scaled-image">
-                {{ lama.insert_responsive_image(obj) }}
+                {{ lama.insert_responsive_image(obj,'','article') }}
             </div>
             <figcaption class="figure__caption">
                 {{obj.caption}}
