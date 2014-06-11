@@ -8,19 +8,8 @@ Available attributes:
 
 #}
 
-{% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% extends "templates/inc/teaser/abstract_teaser_template.html" -%}
-
-{% block asset %}
-{%- set image = get_teaser_image(teaser_block, teaser) %}
-
-<a href="{{teaser | create_url}}">
-    <div class="scaled-image is-pixelperfect cp__buttons__image" data-wrap=".cp__buttons__image">
-        {{ lama.insert_responsive_image(image) }}
-    </div>
-</a>
-{% endblock %}
-
+{%block teaser_layout %}cp__buttons__image"{% endblock %}
 {%block wrapper_class %}cp__buttons__wrap{% endblock %}
 {%block title_wrapper_class %}cp__buttons__title__wrap{% endblock %}
 {%block title_class %}cp__buttons__title{% endblock %}
