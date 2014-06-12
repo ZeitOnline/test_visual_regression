@@ -400,7 +400,7 @@
         <div class="inline-gallery">
             {% for item in obj.items() %}
                 <!-- Gallery-Items as block.image(obj) -->
-               {{ inlinegalleryimage(item) }}
+                {{ inlinegalleryimage(item, loop) }}
             {% endfor %}
         </div>
     </div>
