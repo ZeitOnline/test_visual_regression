@@ -141,25 +141,25 @@
 {%- endmacro %}
 
 {% macro image(obj) -%}
-    {% if obj | default_image_url %}
+    {% if obj | default_image_url -%}
         <figure class="
-            {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
+            {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
                 figure-full-width
-            {% elif obj.layout == 'zmo-xl-header' %}
+            {%- elif obj.layout == 'zmo-xl-header' -%}
                 figure-header
-            {% elif obj.layout == 'zmo-medium-left' %}
+            {%- elif obj.layout == 'zmo-medium-left' -%}
                 figure-horizontal
-            {% elif obj.layout == 'zmo-medium-right' %}
+            {%- elif obj.layout == 'zmo-medium-right' -%}
                 figure-horizontal--right
-            {% elif obj.layout == 'zmo-medium-center' %}
+            {%- elif obj.layout == 'zmo-medium-center' -%}
                 figure is-constrained is-centered
-            {% elif obj.layout == 'zmo-small-left' %}
+            {%- elif obj.layout == 'zmo-small-left' -%}
                 figure-stamp
-            {% elif obj.layout == 'zmo-small-right' %}
+            {%- elif obj.layout == 'zmo-small-right' -%}
                 figure-stamp--right
-            {% else %}
+            {%- else -%}
                 figure-stamp
-            {% endif %}
+            {%- endif -%}
             ">
                 <div class="scaled-image">
                     {{ lama.insert_responsive_image(obj) }}
@@ -171,7 +171,7 @@
                     {% endif %}
                 </figcaption>
         </figure>
-    {% endif %}
+    {%- endif %}
 {%- endmacro %}
 
 {% macro inlinegalleryimage(obj) -%}
