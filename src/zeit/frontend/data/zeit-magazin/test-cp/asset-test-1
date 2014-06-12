@@ -64,24 +64,6 @@
             </author>
           </block>
         </container>
-        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-            <supertitle py:pytype="str">Kochen für Gäste</supertitle>
-            <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
-            <title py:pytype="str">Heimlich vegetarisch</title>
-            <text py:pytype="str">Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</text>
-            <description py:pytype="str">Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</description>
-            <byline py:pytype="str">von Elisabeth Raether</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00">
-              <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
-              <copyright py:pytype="str">© Silvio Knezevic</copyright>
-            </image>
-            <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-              <display_name py:pytype="str">Elisabeth Raether</display_name>
-            </author>
-          </block>
-        </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371">
           <block href="http://xml.zeit.de/artikel/artikel-mit-unvollstaendigen-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-unvollstaendigen-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
@@ -94,6 +76,24 @@
             <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00">
               <bu py:pytype="str">Paprikasuppe löffelweise</bu>
               <copyright py:pytype="str">© Jason Lowe</copyright>
+            </image>
+            <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+              <display_name py:pytype="str">Elisabeth Raether</display_name>
+            </author>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
+          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+            <supertitle py:pytype="str">Kochen für Gäste</supertitle>
+            <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
+            <title py:pytype="str">Heimlich vegetarisch</title>
+            <text py:pytype="str">Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</text>
+            <description py:pytype="str">Wenn Gäste kommen, muss Fleisch auf den Tisch. So haben wir es von der Nachkriegsgeneration gelernt. Aber wir machen es anders: Ein vegetarisches Menü</description>
+            <byline py:pytype="str">von Elisabeth Raether</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00">
+              <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
+              <copyright py:pytype="str">© Silvio Knezevic</copyright>
             </image>
             <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
               <display_name py:pytype="str">Elisabeth Raether</display_name>

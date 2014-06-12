@@ -42,6 +42,8 @@ settings = {
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
     'node_comment_statistics': 'data/node-comment-statistics.xml',
+    'default_teaser_images': (
+        'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
     'connector_type': 'filesystem',
 
     'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',

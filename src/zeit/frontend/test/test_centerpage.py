@@ -726,3 +726,27 @@ def test_centerpage_should_have_no_monothematic_block(application):
         'http://xml.zeit.de/centerpage/lebensart')
     view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.monothematic_block is None
+
+
+def test_default_asset_for_teaser_lead(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__lead-full--light img')[0]
+    assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
+
+
+def test_default_asset_for_teaser_buttons(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__buttons__image img')[0]
+    assert 'teaser_image-zmo-landscape-small.jpg' in img.attrib.get('src')
+
+
+def test_default_asset_for_teaser_buttons_large(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__buttons__large__image img')[0]
+    assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
+
+
+def test_default_asset_for_teaser_gallery(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__teaser__gallery a div img')[0]
+    assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')
