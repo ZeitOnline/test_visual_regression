@@ -151,7 +151,7 @@ class Article(zeit.frontend.view.Content):
 
     @property
     def sharing_img(self):
-        # Hier schlägt das Bildergruppenproblem für das Aufmacherbild durch
+        # Hier schlaegt das Bildergruppenproblem fuer das Aufmacherbild durch
         if self.header_img is not None:
             return self.header_img
         if self.header_video is not None:
@@ -204,6 +204,8 @@ class Article(zeit.frontend.view.Content):
     @property
     def twitter_card_type(self):
         if IArticleTemplateSettings(self.context).template == 'longform':
+            return 'summary_large_image'
+        if IArticleTemplateSettings(self.context).template == 'ich-bin-ein-normaler-artikel':
             return 'summary_large_image'
         else:
             return 'summary'
