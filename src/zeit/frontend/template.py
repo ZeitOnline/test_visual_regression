@@ -214,20 +214,24 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         return get_teaser_image(
             teaser_block, teaser,
             unique_id=zeit.frontend.template.default_teaser_images)
-    if not unique_id:
-            unique_id = asset.uniqueId
+    asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
     image_id = '%s/%s-%s.jpg' % \
-        (unique_id, image_base_name, teaser_block.layout.image_pattern)
+        (asset_id, image_base_name, teaser_block.layout.image_pattern)
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
-        return get_teaser_image(
-            teaser_block, teaser,
-            unique_id=zeit.frontend.template.default_teaser_images)
+        # Don't fallback when an unique_id is given explicitly in order to
+        # prevent infinite recursion.
+        if unique_id:
+            return None
+        else:
+            return get_teaser_image(
+                teaser_block, teaser,
+                unique_id=zeit.frontend.template.default_teaser_images)
 
 
 def create_image_url(teaser_block, image):
