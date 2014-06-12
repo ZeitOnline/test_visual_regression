@@ -151,6 +151,7 @@ class Article(zeit.frontend.view.Content):
 
     @property
     def sharing_img(self):
+        # Hier schlägt das Bildergruppenproblem für das Aufmacherbild durch
         if self.header_img is not None:
             return self.header_img
         if self.header_video is not None:
