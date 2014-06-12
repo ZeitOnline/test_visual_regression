@@ -186,9 +186,9 @@
             <link itemprop="image" rel="image_src" href="{{obj.sharing_img.video_still}}">
             <meta name="twitter:image" content="{{obj.sharing_img.video_still}}">
         {% else %}
-            <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
-            <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-            <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
+            <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url(image_pattern='og-image') |  default('http://placehold.it/160x90', true)}}">
+            <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url(image_pattern='og-image') | translate_url | default('http://placehold.it/160x90', true)}}">
+            <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url(image_pattern='twitter-image') | default('http://placehold.it/160x90', true)}}">
         {% endif %}
     {% endif %}
 {%- endmacro %}
