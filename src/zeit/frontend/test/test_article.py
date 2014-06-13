@@ -365,3 +365,11 @@ def test_article_with_fictitious_imgs_should_not_render_img_contnr(testserver):
     browser = Browser(
         '%s/artikel/artikel-mit-fiktiven-assets' % testserver.url)
     assert not browser.cssselect('div.article__page figure.figure-stamp')
+
+
+def test_article03_has_linked_image(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    output = ""
+    for line in browser.contents.splitlines():
+        output += line.strip()
+    assert '<a href="http://www.test.de"><img alt="Immer' in output

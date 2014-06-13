@@ -161,15 +161,15 @@
                 figure-stamp
             {%- endif -%}
             ">
-                <div class="scaled-image">
-                    {{ lama.insert_responsive_image(obj) }}
-                </div>
-                <figcaption class="figure__caption">
-                    {{obj.caption}}
-                    {% if obj.copyright != '©' %}
-                    <span class="figure__copyright">{{obj.copyright}}</span>
-                    {% endif %}
-                </figcaption>
+            <div class="scaled-image">
+                {{ lama.insert_responsive_image(obj, None, 'article') }}
+            </div>
+            <figcaption class="figure__caption">
+                {{obj.caption}}
+                {% if obj.copyright != '©' %}
+                <span class="figure__copyright">{{obj.copyright}}</span>
+                {% endif %}
+            </figcaption>
         </figure>
     {%- endif %}
 {%- endmacro %}
