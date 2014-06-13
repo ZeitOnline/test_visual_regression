@@ -524,7 +524,7 @@
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
         {% endif %} 
-                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %} 
