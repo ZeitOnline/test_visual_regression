@@ -95,6 +95,7 @@ browsers = {
 @pytest.fixture(scope="module")
 def jinja2_env():
     app = zeit.frontend.application.Application()
+    app.settings = zeit.frontend.test.conftest.settings
     app.configure_pyramid()
     return app.configure_jinja()
 
