@@ -2,15 +2,11 @@ Change log for zeit.frontend
 ============================
 
 0.8 (unreleased)
-!!!!!!!!!!!!!!!!
+----------------
 
-- Nothing changed yet.
-
+- HOTFIX: Remove forgotten import of removed module
 
 0.7 (2014-06-13)
-! Bitte nicht releasen, ohne PR #355 (ZMO 735) zu berücksichtigen!
-+ ZMO 735 fixed ein Problem mit der Navigationshöhe, dass durch
-  "Refactor navigation styles and event handlers" eingeführt wurde (in v0.7)
 ----------------
 
 - ZMO-810: add possibility to link in-article images

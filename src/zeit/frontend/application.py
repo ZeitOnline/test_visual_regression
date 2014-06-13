@@ -19,7 +19,6 @@ import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.centerpage
 import zeit.frontend.template
-import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
