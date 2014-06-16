@@ -4,6 +4,9 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
+- ZMO-805: round images size values, just in case a browser
+  (like chrome canary) delivers floats
+
 - ZMO-765: modify webtrekk data and adapt testing
 
 
