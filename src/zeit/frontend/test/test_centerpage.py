@@ -253,7 +253,7 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__buttons__image")
+        ".cp__lead__wrap .cp__buttons__image")
     assert len(wrap) != 0
     for element in wrap:
         img = element.find_element_by_tag_name(
@@ -274,12 +274,14 @@ def test_cp_button_has_expected_structure(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
     assert len(wrap) != 0
     for element in wrap:
-        text_wrap = element.find_elements_by_css_selector(
-            ".cp__buttons__title__wrap")
-        link_wrap = element.find_elements_by_tag_name(
-            "a")
-        assert len(text_wrap) != 0
-        assert len(link_wrap) == 1
+        assert element.find_elements_by_xpath("a")
+        assert element.find_elements_by_xpath(
+            "a/div/img[@class=' figure__media']")
+        assert element.find_elements_by_xpath(
+            "span[@class='cp__buttons__title__wrap']")
+        assert element.find_elements_by_xpath("span/a")
+        assert element.find_elements_by_xpath(
+            "span/span[@class='cp__buttons__subtitle']")
 
 
 def test_cp_button_has_expected_text_content(selenium_driver, testserver):
@@ -362,6 +364,58 @@ def test_cp_large_button_has_expected_links(selenium_driver, testserver):
                 link.get_attribute("href"))
 
 
+def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__teaser__gallery__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        text_wrap = element.find_elements_by_css_selector(
+            ".cp__teaser__gallery")
+        link_wrap = element.find_elements_by_tag_name(
+            "a")
+        image_wrap = element.find_elements_by_css_selector(
+            ".scaled-image")
+        assert len(text_wrap) != 0
+        assert len(link_wrap) == 2
+        assert len(image_wrap) != 0
+
+
+def test_cp_gallery_teaser_has_expected_text_content(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__teaser__gallery")
+    assert len(wrap) != 0
+    for element in wrap:
+        supertitle = element.find_element_by_css_selector(
+            ".cp__teaser__gallery__supertitle")
+        title = element.find_element_by_css_selector(
+            ".cp__teaser__gallery__title")
+        assert unicode(supertitle.text) == u'Article Image Asset Spitzmarke'
+        assert unicode(title.text) == u'Article Image Asset Titel'
+
+
+def test_gallery_teaser_has_expected_img_content(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__teaser__gallery__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        img = element.find_element_by_tag_name(
+            "img")
+        assert re.search('http://.*/centerpage/katzencontent/' +
+                         'bitblt-.*/' +
+                         'katzencontent-zmo-upright.jpg',
+                         img.get_attribute("src"))
+        print img.get_attribute("alt")
+        print img.get_attribute("title")
+        assert img.get_attribute("alt") == 'Die ist der Alttest'
+        assert img.get_attribute("title") == 'Katze!'
+
+
 def test_cp_should_have_informatives_ad_at_3rd_place(
         selenium_driver, testserver):
     driver = selenium_driver
@@ -369,7 +423,7 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
     wrap = driver.find_elements_by_css_selector(
         ".cp__lead__informatives__wrap")
     assert len(wrap) != 0
-    elements = wrap[0].find_elements_by_tag_name("div")
+    elements = wrap[0].find_elements_by_xpath("div")
     add = elements[2].get_attribute("class")
     assert add == 'cp__buttons__ad'
     mr = elements[2].find_element_by_css_selector(
@@ -726,3 +780,27 @@ def test_centerpage_should_have_no_monothematic_block(application):
         'http://xml.zeit.de/centerpage/lebensart')
     view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.monothematic_block is None
+
+
+def test_default_asset_for_teaser_lead(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__lead-full--light img')[0]
+    assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
+
+
+def test_default_asset_for_teaser_buttons(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__buttons__image img')[0]
+    assert 'teaser_image-zmo-landscape-small.jpg' in img.attrib.get('src')
+
+
+def test_default_asset_for_teaser_buttons_large(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__buttons__large__image img')[0]
+    assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
+
+
+def test_default_asset_for_teaser_gallery(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+    img = browser.cssselect('div.cp__teaser__gallery a div img')[0]
+    assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')

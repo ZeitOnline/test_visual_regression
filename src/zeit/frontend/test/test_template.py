@@ -74,3 +74,31 @@ def test_get_teaser_image(testserver):
     assert isinstance(image, zeit.frontend.centerpage.TeaserImage), \
         'Article with image asset should produce a teaser image.'
     assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
+
+
+def test_get_teaser_image_should_utilize_unique_id(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/article_video_asset_2'
+    )
+    unique_id = \
+        'http://xml.zeit.de/centerpage/katzencontent/'
+    image = zeit.frontend.template.get_teaser_image(
+        teaser_block, teaser, unique_id=unique_id)
+    assert image.uniqueId == (
+        'http://xml.zeit.de/centerpage/'
+        'katzencontent/katzencontent-zmo-large.jpg')
+
+
+def test_get_teaser_image_should_utilize_fallback_image(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/artikel-ohne-assets'
+    )
+    image = zeit.frontend.template.get_teaser_image(
+        teaser_block, teaser)
+    assert image.uniqueId == (
+        'http://xml.zeit.de/zeit-magazin/'
+        'default/teaser_image/teaser_image-zmo-large.jpg')

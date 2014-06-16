@@ -433,6 +433,22 @@ def test_nextread_maximal_layout_has_image_background_if_available(testserver):
         'The nextread of "Artikel 03" has no teaser image asset.'
 
 
+def test_article_with_images_should_render_image_container(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert browser.cssselect('div.article__page figure.figure-stamp')
+
+
+def test_article_without_images_should_not_render_image_container(testserver):
+    browser = Browser('%s/artikel/artikel-ohne-assets' % testserver.url)
+    assert not browser.cssselect('div.article__page figure.figure-stamp')
+
+
+def test_article_with_fictitious_imgs_should_not_render_img_contnr(testserver):
+    browser = Browser(
+        '%s/artikel/artikel-mit-fiktiven-assets' % testserver.url)
+    assert not browser.cssselect('div.article__page figure.figure-stamp')
+
+
 def test_article03_has_linked_image(testserver):
     browser = Browser('%s/artikel/03' % testserver.url)
     output = ""
