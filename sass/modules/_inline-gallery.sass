@@ -1,12 +1,21 @@
+.inline-gallery__wrap
+    margin: 0 auto em(60px)
+
+.figure__caption__pager
+    +respond-min($break-1)
+        display: none
+
 // reset from bxSlider
 .bx-wrapper
     position: relative
-    margin: 0 auto 60px
-    padding: em(50px) 0 0 0
     +has-layout()
+    .figure__media,
     img
-        max-width: 100%
-        display: block
+        width: auto
+        max-height: 620px
+        margin: 0 auto
+    +respond-min($break-1)
+        padding-top: $large
 
     // figure elements in bxSlide
     figure
@@ -16,16 +25,16 @@
     .figure__caption
         color: $grey--mid
         padding: 0
-        margin: $small auto 0 !important
+        margin: $small auto 0
+        max-width: none
+        +respond-min($break-1)
+            padding-right: 30%
     .figure__caption__copyright
         color: $charcoal
         a
             +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
             +on-interaction
-                text-decoration: none
                 border-color: $charcoal
-            &:focus
-                outline: 0
 
 // controls
 .bx-pager
@@ -43,10 +52,12 @@
     position: absolute
     top: 0
     right: 0
+    +respond-max($break-1)
+        display: none
 .bx-controls-direction
     +inline-block
-.bx-next,
-.bx-prev
+.bx-prev,
+.bx-next
     +inline-block
     width: $gallery-button-radius
     height: $gallery-button-radius
@@ -61,28 +72,55 @@
     +opacity(0.3)
     &:hover
         +opacity(0.7)
+    &:focus
+        outline: 0
     &.disabled
         +opacity(0.1)
-.bx-overlay-next,
-.bx-overlay-prev
-    $overlaysize: $gallery-button-radius * 2
+.bx-overlay-prev,
+.bx-overlay-next
     @extend .bx-next
-    width: $overlaysize
-    height: $overlaysize
+    margin: 0
     position: absolute
-    z-index: 9999
-    top: 50%
-    margin-top: -$gallery-button-radius
-    outline: 0
-    +opacity(0)
+    top: em(10px)
+    +respond-min($break-1)
+        top: 50%
+        margin-top: -$gallery-button-radius
+        width: $gallery-button-radius * 2
+        height: $gallery-button-radius * 2
+        +opacity(0)
+.bx-overlay-prev
+    left: em(10px)
 .bx-overlay-next
     right: em(10px)
 
 .bx-viewport
     +on-interaction
-        ~ .bx-overlay-next,
-        ~ .bx-overlay-prev
+        .bx-overlay-prev,
+        .bx-overlay-next
             +opacity(0.3)
+
+.bx-zone-prev,
+.bx-zone-next
+    width: 15%
+    height: 20%
+    position: absolute
+    z-index: 9999
+    cursor: pointer
+    display: none
+    // background-color: rgba(255,0,0,.1)
+    +respond-min($break-1)
+        width: 50%
+        height: 90%
+        display: block
+.bx-zone-prev
+    &:hover
+        .bx-overlay-prev
+            +opacity(0.7)
+.bx-zone-next
+    right: 0
+    &:hover
+        .bx-overlay-next
+            +opacity(0.7)
 
 // elements not in actual use
 .bx-controls-auto,

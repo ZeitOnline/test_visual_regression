@@ -41,13 +41,6 @@ $article-content-max-width: 660px
   -webkit-font-feature-settings: "onum" 1
   font-feature-settings: "onum" 1
 
-// hacked for longform launch
-// todo: delete when possible (NB)
-div.figure-full-width
-  width: 100%
-  max-width: em(910px)
-  margin: 0 auto
-
 figure
   width: 100%
   margin-bottom: $medium
@@ -72,105 +65,91 @@ figure
       height: 100%
       left: 0
       top: 0
-  &.figure-horizontal, &.figure-horizontal--right
-    +pie-clearfix
+.figure-horizontal, .figure-horizontal--right
+  +pie-clearfix
+  .figure__media, img
+    +max-width-rem($article-content-max-width)
+    width: 100%
+    display: block
+    +respond-min($break-1)
+      +inline-block
+      width: 60%
+    +respond-min($break-2)
+      width: 71.74%
+  .figure__caption, figcaption
+    +respond-min($break-1)
+      +inline-block
+      padding-top: 5%
+      width: 40%
+    +respond-min($break-2)
+      width: 28.26%
+.figure-horizontal
+  +respond-min($break-1)
     .figure__media, img
-      +max-width-rem($article-content-max-width)
-      width: 100%
-      display: block
-      +respond-min($break-1)
-        +inline-block
-        width: 60%
-      +respond-min($break-2)
-        width: 71.74%
+      float: left
     .figure__caption, figcaption
-      +respond-min($break-1)
-        +inline-block
-        padding-top: 5%
-        width: 40%
-      +respond-min($break-2)
-        width: 28.26%
-  &.figure-horizontal
-    +respond-min($break-1)
-      .figure__media, img
-        float: left
-      .figure__caption, figcaption
-        float: right
-        padding-left: $gutter
-  &.figure-horizontal--right
-    +respond-min($break-1)
-      .figure__media, img
-        float: right
-      .figure__caption, figcaption
-        float: left
-        padding-right: $gutter
-  // hacked for longform-launch
-  // todo: make responsible by height (NB)
-  &.figure-full-width
-    width: 100% //100%
-    max-width: em(910px)
+      float: right
+      padding-left: $gutter
+.figure-horizontal--right
+  +respond-min($break-1)
+    .figure__media, img
+      float: right
+    .figure__caption, figcaption
+      float: left
+      padding-right: $gutter
+// hacked for longform-launch
+// todo: make responsible by height (NB)
+.figure-full-width
+  width: 100% //100%
+  // max-width: em(910px)
+  margin-left: auto
+  margin-right: auto
+  .figure__media, img
+    display: block
+    width: 100%
+  .figure__caption, figcaption
+    +max-width-rem($article-content-max-width)
     margin-left: auto
     margin-right: auto
+    +respond-min($break-3)
+      padding-right: 10%
+.figure-stamp, .figure-stamp--right
+  margin: $thin auto $small auto
+  overflow: hidden
+  .video__still
+    width: 40%
+    margin: 0 $gutter $gutter/2 0
+    float: left
+    .video__button
+      width: 50px
+      height: 50px
     .figure__media, img
-      display: block
       width: 100%
-    .figure__caption, figcaption
-      +max-width-rem($article-content-max-width)
-      margin-left: auto
-      margin-right: auto
-      +respond-min($break-3)
-        padding-right: 10%
-  &.figure-stamp, &.figure-stamp--right
-    margin: $thin auto $small auto
-    overflow: hidden
+      float: none
+      margin: 0
+  .figure__media, img
+    margin: 0 $gutter $gutter/2 0
+    max-width: em(240px)
+    float: left
+    width: 40%
+  +respond-min($break-2)
+    max-width: em(240px)
+    margin: $thin $gutter $large 0
+    float: left
     .video__still
-      width: 40%
-      margin: 0 $gutter $gutter/2 0
-      float: left
+      width: 100%
+      margin: 0
+      float: none
       .video__button
-        width: 50px
-        height: 50px
+        width: 65px
+        height: 65px
       .figure__media, img
-        width: 100%
-        float: none
-        margin: 0
-    .figure__media, img
-      margin: 0 $gutter $gutter/2 0
-      max-width: em(240px)
-      float: left
-      width: 40%
-    +respond-min($break-2)
-      max-width: em(240px)
-      margin: $thin $gutter $large 0
-      float: left
-      .video__still
-        width: 100%
-        margin: 0
-        float: none
-        .video__button
-          width: 65px
-          height: 65px
-        .figure__media, img
-          margin-bottom: $gutter
-      .figure__media, img
-        float: none
         margin-bottom: $gutter
-        width: 100%
-  &.figure-stamp--right
-    +respond-min($break-2)
-      margin: $thin 0 $gutter $gutter
-      float: right
-  &.author-stamp
-    text-align: center
     .figure__media, img
-      +border-radius(50%)
-      +inline-block
-      +max-width-rem(70px)
-      margin-bottom: $small
-      +respond-min($break-0)
-        +max-width-rem(100px)
-    .figure__caption
-      +max-width-rem(400px)
-      text-align: left
-      +respond-max($break-2)
-        margin-top: $fine
+      float: none
+      margin-bottom: $gutter
+      width: 100%
+.figure-stamp--right
+  +respond-min($break-2)
+    margin: $thin 0 $gutter $gutter
+    float: right

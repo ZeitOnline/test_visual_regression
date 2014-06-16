@@ -1,5 +1,6 @@
 {% extends "templates/article.html" %}
 {% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context %}
 
 {% block article_header %}
     <div class="article__head-wrap">
@@ -12,28 +13,28 @@
 
 {% block article_pages %}
 <div class="gallery">
-    <div class="figure figure-full-width">
-        <div class="inline-gallery">
-            {% for image in view.images %}
-                {% set image_meta = image | get_image_metadata %}
-                {% set copyright = image_meta.copyrights[0] %}
-                {% if image.layout != "hidden" %}
-                    <figure class="figure-full-width">
-                        <div class="scaled-image">
-                            <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
-                        </div>
-                        {% if image.caption %}
-                        <figcaption class="figure__caption">
-                            <span class="figure__caption__text">{{image.caption}}</span>
-                            {% if image_meta.copyrights %}
-                                <span class="figure__caption__copyright">{{copyright[0]}}</span>
-                            {% endif %}
-                        </figcaption>
-                        {% endif %}
-                    </figure>
-                {% endif %}
-            {% endfor %}
-        </div>
+    <div class="inline-gallery">
+        {% for image in view.images -%}
+            {% set image_meta = image | get_image_metadata -%}
+            {% set copyright = image_meta.copyrights[0] -%}
+            {% if image.layout != "hidden" -%}
+                <figure class="figure-full-width">
+                    <div class="scaled-image">
+                        {#{ lama.insert_responsive_image(image.image) }#}
+                        <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
+                    </div>
+                    {% if image.caption -%}
+                    <figcaption class="figure__caption">
+                        <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
+                        {{image.caption}}
+                        {% if image_meta.copyrights -%}
+                            <span class="figure__caption__copyright">{{copyright[0]}}</span>
+                        {% endif -%}
+                    </figcaption>
+                    {% endif -%}
+                </figure>
+            {% endif -%}
+        {% endfor -%}
     </div>
 </div>
 <div class="gallery__info">
