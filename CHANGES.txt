@@ -19,7 +19,6 @@ Change log for zeit.frontend
 ----------------
 
 - ZMO-810: add possibility to link in-article images
->>>>>>> master
 
 - ZMO-735: Enable comment deep links in webkit
 
