@@ -4,19 +4,21 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
-- hotfix: invalid js in ivw caller script
+- hotfix: Invalid js in ivw caller script
 
-- hotfix: fix broken test in master
+- hotfix: Fix broken test in master
 
 - ZMO-808: enable responsive image for gt IE8
 
-- ZMO-812: make gallery upright teaser fully responsive, add is-pixelperfect
+- ZMO-808: Enable responsive image for gt IE8
+
+- ZMO-812: Make gallery upright teaser fully responsive, add is-pixelperfect
   functionality and standarsize css
 
-- ZMO-805: round images size values, just in case a browser
+- ZMO-805: Round images size values, just in case a browser
   (like chrome canary) delivers floats
 
-- ZMO-765: modify webtrekk data and adapt testing
+- ZMO-765: Modify webtrekk data and adapt testing
 
 - Rename test images with strange unicode characters
 
