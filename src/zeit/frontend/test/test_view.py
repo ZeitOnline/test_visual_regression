@@ -199,7 +199,7 @@ def test_inline_gallery_should_have_images(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     frontend_gallery = zeit.frontend.block.InlineGallery(body.values()[14])
-    assert type(frontend_gallery.items()[3]) == InlineGalleryImage
+    assert all(type(i) is InlineGalleryImage for i in frontend_gallery.items())
 
     gallery_image = frontend_gallery.items()[4]
     assert gallery_image.src == \
