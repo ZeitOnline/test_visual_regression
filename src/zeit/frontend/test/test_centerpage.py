@@ -362,6 +362,58 @@ def test_cp_large_button_has_expected_links(selenium_driver, testserver):
                 link.get_attribute("href"))
 
 
+def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp__teaser__gallery__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        text_wrap = element.find_elements_by_css_selector(
+            ".cp__teaser__gallery")
+        link_wrap = element.find_elements_by_tag_name(
+            "a")
+        image_wrap = element.find_elements_by_css_selector(
+            ".scaled-image")
+        assert len(text_wrap) != 0
+        assert len(link_wrap) == 2
+        assert len(image_wrap) != 0
+
+
+def test_cp_gallery_teaser_has_expected_text_content(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__teaser__gallery")
+    assert len(wrap) != 0
+    for element in wrap:
+        supertitle = element.find_element_by_css_selector(
+            ".cp__teaser__gallery__supertitle")
+        title = element.find_element_by_css_selector(
+            ".cp__teaser__gallery__title")
+        assert unicode(supertitle.text) == u'Article Image Asset Spitzmarke'
+        assert unicode(title.text) == u'Article Image Asset Titel'
+
+
+def test_gallery_teaser_has_expected_img_content(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/lebensart' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(
+        ".cp__teaser__gallery__wrap")
+    assert len(wrap) != 0
+    for element in wrap:
+        img = element.find_element_by_tag_name(
+            "img")
+        assert re.search('http://.*/centerpage/katzencontent/' +
+                         'bitblt-.*/' +
+                         'katzencontent-zmo-upright.jpg',
+                         img.get_attribute("src"))
+        print img.get_attribute("alt")
+        print img.get_attribute("title")
+        assert img.get_attribute("alt") == 'Die ist der Alttest'
+        assert img.get_attribute("title") == 'Katze!'
+
+
 def test_cp_should_have_informatives_ad_at_3rd_place(
         selenium_driver, testserver):
     driver = selenium_driver

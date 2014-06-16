@@ -765,7 +765,7 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
         output += line.strip()
 
     assert '<a href="ID">' in output
-    assert '<div class="teaser__kicker">SUPATITLE</div>' in output
+    assert '<div class="teaser__supertitle">SUPATITLE</div>' in output
     assert '<div class="teaser__title">TITLE</div>' in output
 
 
@@ -803,7 +803,7 @@ def test_macro_teaser_supertitle_title_should_produce_alternative_markup(
         output += line.strip()
 
     assert '<a href="ID">' not in output
-    assert '<div class="CLASS__kicker">SUPATITLE</div>' in output
+    assert '<div class="CLASS__supertitle">SUPATITLE</div>' in output
     assert '<div class="CLASS__title">TITLE</div>' in output
 
 
