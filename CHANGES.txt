@@ -8,7 +8,7 @@ Change log for zeit.frontend
 
 - hotfix: Fix broken test in master
 
-- ZMO-808: enable responsive image for gt IE8
+- hotfix: Verify nextread layout ids
 
 - ZMO-808: Enable responsive image for gt IE8
 
