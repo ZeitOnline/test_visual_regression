@@ -6,6 +6,11 @@ Change log for zeit.frontend
 
 - ZMO-812: make gallery upright teaser fully responsive, add is-pixelperfect functionality and standarsize css
 
+- ZMO-805: round images size values, just in case a browser
+  (like chrome canary) delivers floats
+
+- ZMO-765: modify webtrekk data and adapt testing
+
 
 0.7.1 (2014-06-13)
 ------------------

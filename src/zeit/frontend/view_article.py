@@ -201,6 +201,13 @@ class Article(zeit.frontend.view.Content):
             return None
 
     @property
+    def authorsList(self):
+        if self.authors:
+            return ';'.join([rt['name'] for rt in self.authors])
+        else:
+            return ''
+
+    @property
     def twitter_card_type(self):
         if IArticleTemplateSettings(self.context).template == 'longform':
             return 'summary_large_image'
@@ -255,6 +262,13 @@ class Article(zeit.frontend.view.Content):
     def _comments(self):
         return get_thread(unique_id=self.context.uniqueId,
                           request=self.request)
+
+    @property
+    def serie(self):
+        if self.context.serie:
+            return self.context.serie.lower()
+        else:
+            return ''
 
     @property
     def linkreach(self):
