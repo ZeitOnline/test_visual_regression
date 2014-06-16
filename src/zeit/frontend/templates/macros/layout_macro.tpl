@@ -97,6 +97,17 @@
         <script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
         <script type="text/javascript">
 
+            {% set date = '' -%}
+            {% set pagination = '' -%}
+
+            {% if obj.date_first_released -%}
+                {% set date = obj.date_first_released | format_date('short_num') -%}
+            {% endif -%}
+
+            {% if obj.pagination -%}
+                {% set pagination = obj.pagination.current ~'/'~ obj.pagination.total -%}
+            {% endif -%}
+
             var Z_WT_KENNUNG =
             "redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online./{{'/'.join(request.traversed or ())}}"; // content id
 
@@ -113,14 +124,19 @@
                 1: "Redaktion",
                 2: "{{obj.tracking_type}}",
                 3: "{{obj.ressort}}",
-                4: "Online"
+                4: "Online",
+                5: "{{obj.sub_ressort}}",
+                6: "{{obj.serie}}",
+                7: "{{request.path_info | substring_from('/')}}",
+                8: "{{obj.banner_channel}}",
+                9: "{{date}}"
             };
 
             {% if obj.type == 'article' -%}
                 wt.customParameter = {
-                    1: "{% if obj.author %}{{obj.author.name}}{% endif %}",
+                    1: "{{obj.authorsList}}",
                     2: "{{obj.banner_channel}}",
-                    3: "1/1",
+                    3: "{{pagination}}",
                     4: "{{obj.rankedTagsList}}",
                     6: "{{obj.text_length}}",
                     7: "",
@@ -133,7 +149,7 @@
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
-            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cp1={% if obj.author %}{{obj.author.name}}{% endif %}&amp;cp2={{obj.banner_channel}}&amp;cp3=1&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}"></div>
+            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cg5={{obj.sub_ressort}}&amp;cg6=&amp;cg7={{request.path_info | substring_from('/')}}&amp;cg8={{obj.banner_channel}}&amp;cg9={{date}}{% if obj.type == 'article' -%}&amp;cp1={{obj.authorsList}}&amp;cp2={{obj.banner_channel}}&amp;cp3={{pagination}}&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}{% endif -%}"></div>
         </noscript>
 {%- endmacro %}
 
@@ -505,7 +521,7 @@
 
 {%- endmacro %}
 
-{% macro insert_responsive_image(image, image_class) %}
+{% macro insert_responsive_image(image, image_class, page_type) %}
 
     {% set alt = ''%}
     {% set title = ''%}
@@ -521,7 +537,13 @@
     <!--[if gt IE 9]>-->
         <noscript data-ratio="{{image.ratio}}">
     <!--<![endif]-->
-            <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('')}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+        {% if page_type == 'article' and image.href %}
+            <a href="{{image.href}}">
+        {% endif %} 
+                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url | default('http://placehold.it/160x90', true)}}" data-ratio="{{image.ratio}}">
+        {% if page_type == 'article' and image.href %}
+            </a>
+        {% endif %} 
     <!--[if gt IE 9]>-->
         </noscript>
     <!--<![endif]-->
