@@ -81,6 +81,88 @@ def test_all_tracking_pixel_are_send(selenium_driver, testserver):
         "//img[starts-with(@src,'http://zeitonl.ivwbox.de')]")
 
 
+def test_article03_has_correct_webtrekk_values(testserver):
+    browser = Browser('%s/artikel/03/seite-2' % testserver.url)
+    assert '1: "Anne Mustermann",' in browser.contents
+    assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
+    assert '3: "2/7",' in browser.contents
+    assert '4: "Wein;Italien;Toskana;Bologna;Bozen;Florenz;Tübingen",' \
+        in browser.contents
+    assert '6: "4952",' in browser.contents
+    assert '7: "",' in browser.contents
+    assert '9: "zeitmz/essenundtrinken/article"' in browser.contents
+    assert '1: "Redaktion",' in browser.contents
+    assert '2: "Artikel",' in browser.contents
+    assert '3: "lebensart",' in browser.contents
+    assert '4: "Online"' in browser.contents
+
+    assert '5: "essen-trinken",' in browser.contents
+    assert '6: "weinkolumne",' in browser.contents
+    assert '7: "seite-2",' in browser.contents
+    assert '8: "zeitmz/essenundtrinken/article",' in \
+        browser.contents
+    assert '9: "2013-07-30"' in browser.contents
+    assert 'http://zeit01.webtrekk.net/981949533494636/' \
+        'wt.pl?p=311,redaktion.lebensart.essen-trinken..' \
+        'Artikel.online./artikel/03/seite-2,0,0,0,0,0,0,0,0' \
+        '&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart' \
+        '&amp;cg4=Online&amp;cg5=essen-trinken&amp;cg6=&amp;' \
+        'cg7=seite-2&amp;cg8=zeitmz/essenundtrinken/article' \
+        '&amp;cg9=2013-07-30&amp;cp1=Anne Mustermann&amp;' \
+        'cp2=zeitmz/essenundtrinken/article&amp;cp3=2/7' \
+        '&amp;cp4=Wein;Italien;Toskana;Bologna;Bozen;Florenz;' \
+        'Tübingen&amp;cp6=4952&amp;cp7=&amp;' \
+        'cp9=zeitmz/essenundtrinken/article' in browser.contents
+
+
+def test_article08_has_correct_webtrekk_values(testserver):
+    browser = Browser('%s/artikel/08' % testserver.url)
+    assert '1: "Anne Mustermann;Oliver Fritsch",' in browser.contents
+    assert '2: "politik/article",' in browser.contents
+    assert '3: "1/1",' in browser.contents
+    assert '4: "Politik",' in browser.contents
+    assert '6: "2833",' in browser.contents
+    assert '7: "",' in browser.contents
+    assert '9: "politik/article"' in browser.contents
+    assert '1: "Redaktion",' in browser.contents
+    assert '2: "Artikel",' in browser.contents
+    assert '3: "politik",' in browser.contents
+    assert '4: "Online"' in browser.contents
+    assert '5: "",' in browser.contents
+    assert '6: "",' in browser.contents
+    assert '7: "08",' in browser.contents
+    assert '8: "politik/article",' in browser.contents
+    assert '9: "2014-02-19"' in browser.contents
+    assert 'http://zeit01.webtrekk.net/981949533494636/' \
+        'wt.pl?p=311,redaktion.politik...Artikel.online./' \
+        'artikel/08,0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;' \
+        'cg2=Artikel&amp;cg3=politik&amp;cg4=Online&amp;' \
+        'cg5=&amp;cg6=&amp;cg7=08&amp;cg8=politik/article&amp;' \
+        'cg9=2014-02-19&amp;cp1=Anne Mustermann;Oliver Fritsch&amp;' \
+        'cp2=politik/article&amp;cp3=1/1&amp;cp4=Politik&amp;' \
+        'cp6=2833&amp;cp7=&amp;cp9=politik/article' in browser.contents
+
+
+def test_cp_has_correct_webtrekk_values(testserver):
+    browser = Browser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    assert '1: "Redaktion",' in browser.contents
+    assert '2: "Centerpage",' in browser.contents
+    assert '3: "lebensart",' in browser.contents
+    assert '4: "Online",' in browser.contents
+    assert '5: "",' in browser.contents
+    assert '6: "",' in browser.contents
+    assert '7: "test-cp-zmo",' in browser.contents
+    assert '8: "zeitmz/centerpage",' in browser.contents
+    assert '9: ""' in browser.contents
+    assert 'wt.pl?p=311,redaktion.lebensart...' \
+        'Centerpage.online./zeit-magazin/test-cp/test-cp-zmo,' \
+        '0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2=Centerpage&amp;' \
+        'cg3=lebensart&amp;cg4=Online&amp;cg5=&amp;cg6=&amp;' \
+        'cg7=test-cp-zmo&amp;' \
+        'cg8=zeitmz/centerpage&amp;cg9=' in browser.contents
+
+
 def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     driver = selenium_driver
     # ipad landscape

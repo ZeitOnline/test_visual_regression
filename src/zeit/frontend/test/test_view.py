@@ -296,6 +296,18 @@ def test_artikel05_has_rankedTagsList(testserver):
     assert article_view.rankedTagsList != ''
 
 
+def test_artikel01_has_correct_authorsList(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view_article.Article(context, mock.Mock())
+    assert article_view.authorsList == 'Anne Mustermann'
+
+
+def test_artikel08_has_correct_authorsList(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = view_article.Article(context, mock.Mock())
+    assert article_view.authorsList == 'Anne Mustermann;Oliver Fritsch'
+
+
 def test_artikel05_has_set_text_length(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = view_article.Article(context, mock.Mock())
