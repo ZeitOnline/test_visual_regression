@@ -201,7 +201,7 @@ def test_inline_gallery_should_have_images(testserver):
     frontend_gallery = zeit.frontend.block.InlineGallery(body.values()[14])
     assert type(frontend_gallery.items()[3]) == InlineGalleryImage
 
-    gallery_image = frontend_gallery.items()[3]
+    gallery_image = frontend_gallery.items()[4]
     assert gallery_image.src == \
         u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
         '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
