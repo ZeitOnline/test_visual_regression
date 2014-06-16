@@ -8,14 +8,3 @@ Available attributes:
 
 #}
 {% extends "templates/inc/teaser/teaser_zmo-leader-fullwidth_default_default.html" -%}
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
-{% import 'templates/macros/layout_macro.tpl' as lama with context%}
-
-{% block asset %}
-{%- set image = get_teaser_image(teaser_block, teaser) %}
-<a href="{{teaser | create_url}}">
-    <div class="scaled-image is-pixelperfect cp__lead-full--dark" data-wrap=".cp__lead-full__wrap">
-        {{ lama.insert_responsive_image(image) }}
-    </div>
-</a>
-{% endblock %}
