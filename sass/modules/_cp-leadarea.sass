@@ -3,13 +3,6 @@ $cp__lead-full-height: em(550px)
 $cp__lead__wrap-width: 65%
 $cp__lead-full-video-max-width: em(1000px)
 
-//placeholder selectors
-%cp__lead--dark
-	+fake-box-shadow-inset($black)
-
-%cp__lead--light
-	+fake-box-shadow-inset($white)
-
 //standard classes for cp lead area
 .cp__lead-assets, %cp__lead-assets
 	overflow: hidden
@@ -103,10 +96,10 @@ $cp__lead-full-video-max-width: em(1000px)
 	@extend %cp__lead-assets
 
 .cp__lead-leader__image--dark
-	@extend %cp__lead--dark
+	@extend %cp__shadow--dark
 
 .cp__lead-leader__image--light
-	@extend %cp__lead--light
+	@extend %cp__shadow--light
 
 .cp__lead-leader__title__wrap
 	position: absolute
@@ -133,11 +126,6 @@ $cp__lead-full-video-max-width: em(1000px)
 	.cp__lead__supertitle
 		@extend %cp__link--light
 
-// commented out prelaunch: fix for slow gradient handling on android
-// background-color: $white
-// background-color: transparentize($white, 0.35)
-//	+respond-min($break-2)
-//		background-color: transparent
 
 //teaser type full (fullwidth leader)
 .cp__lead-full__wrap
@@ -148,11 +136,11 @@ $cp__lead-full-video-max-width: em(1000px)
 	background-color: $black
 
 .cp__lead-full--dark
-	@extend %cp__lead--dark
+	@extend %cp__shadow--dark
 	@extend %cp__lead-assets
 
 .cp__lead-full--light
-	@extend %cp__lead--light
+	@extend %cp__shadow--light
 	@extend %cp__lead-assets
 
 .cp__lead-full__title__wrap

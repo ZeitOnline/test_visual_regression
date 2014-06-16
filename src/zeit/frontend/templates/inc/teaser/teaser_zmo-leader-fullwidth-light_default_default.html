@@ -7,8 +7,17 @@ Available attributes:
 
 #}
 
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
+
 <div class="cp__lead-full__wrap">
-    {% block asset %}{% endblock %}
+    {% block asset %}
+    {%- set image = get_teaser_image(teaser_block, teaser) %}
+    <a href="{{teaser | create_url}}">
+        <div class="scaled-image is-pixelperfect cp__lead-full--light" data-wrap=".cp__lead-full__wrap">
+            {{ lama.insert_responsive_image(image) }}
+        </div>
+    </a>
+    {% endblock %}
     <header class="cp__lead-full__title__wrap cp__lead-full__title__wrap--light">
         <h2 class="cp__lead__title">
             <a href="{{teaser | create_url}}">

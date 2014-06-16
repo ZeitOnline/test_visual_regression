@@ -59,7 +59,6 @@ module.exports = function(grunt) {
 				imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
 				javascriptsPath: "js", // todo: map to the right path
 				sassDir: project.sourceDir + 'sass',
-				require: ['animation'],
 				raw: 'preferred_syntax=:sass\n'
 			},
 			dev: {

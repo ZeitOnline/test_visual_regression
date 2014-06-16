@@ -1,5 +1,6 @@
 from babel.dates import format_datetime
 from datetime import datetime, timedelta
+from lxml import objectify
 from repoze.bitblt.transform import compute_signature
 from urlparse import urlsplit, urlunsplit
 import email.utils
@@ -17,8 +18,8 @@ import zeit.content.link.interfaces
 import zeit.frontend.centerpage
 import zope.component
 
-
 log = logging.getLogger(__name__)
+default_teaser_images = None  # Set during startup through application.py
 
 
 @jinja2.contextfilter
@@ -43,7 +44,8 @@ def create_url(context, obj):
 
 
 def format_date(obj, type='short'):
-    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
+    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
+               'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
@@ -106,9 +108,22 @@ def hide_none(string):
         return string
 
 
-
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
+
+
+def _get_navigation():
+    navigation = pkg_resources.resource_filename(
+        __name__, 'data/navigation.xml')
+    tree = objectify.parse(navigation)
+    root = tree.getroot()
+    top_formate = root.xpath('list[@id="top-formate"]')[0]
+    sitemap = root.xpath('list[@id="sitemap"]')[0]
+    return top_formate, sitemap
+
+top_formate, sitemap = _get_navigation()
+del _get_navigation
+
 
 # definition of default images sizes per layout context
 default_images_sizes = {
@@ -175,12 +190,12 @@ def default_image_url(image,
         log.debug('Cannot produce a default URL for %s', image)
 
 
-def most_sufficient_teaser_tpl(block_layout,
-                               content_type,
-                               asset,
-                               prefix='templates/inc/teaser/teaser_',
-                               suffix='.html',
-                               separator='_'):
+def get_teaser_template(block_layout,
+                        content_type,
+                        asset,
+                        prefix='templates/inc/teaser/teaser_',
+                        suffix='.html',
+                        separator='_'):
     types = (block_layout, content_type, asset)
     default = ('default',)
     iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
@@ -191,29 +206,33 @@ def most_sufficient_teaser_tpl(block_layout,
     return map(func, combinations)
 
 
-def most_sufficient_teaser_image(teaser_block,
-                                 teaser,
-                                 asset_type=None,
-                                 file_type='jpg'):
-    image_pattern = teaser_block.layout.image_pattern
-    if asset_type is None:
-        asset = zeit.frontend.centerpage.auto_select_asset(teaser)
-    elif asset_type == 'image':
-        asset = zeit.frontend.centerpage.get_image_asset(teaser)
+def get_teaser_image(teaser_block, teaser, unique_id=None):
+    if unique_id:
+        asset = zeit.cms.interfaces.ICMSContent(unique_id)
     else:
-        raise KeyError(asset_type)
+        asset = zeit.frontend.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return None
+        return get_teaser_image(
+            teaser_block, teaser,
+            unique_id=zeit.frontend.template.default_teaser_images)
+    asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
-    image_id = '%s/%s-%s.%s' % \
-        (asset.uniqueId, image_base_name, image_pattern, file_type)
+    image_id = '%s/%s-%s.jpg' % \
+        (asset_id, image_base_name, teaser_block.layout.image_pattern)
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
-        return None
+        # Don't fallback when an unique_id is given explicitly in order to
+        # prevent infinite recursion.
+        if unique_id:
+            return None
+        else:
+            return get_teaser_image(
+                teaser_block, teaser,
+                unique_id=zeit.frontend.template.default_teaser_images)
 
 
 def create_image_url(teaser_block, image):
