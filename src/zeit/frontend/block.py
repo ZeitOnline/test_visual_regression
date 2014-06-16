@@ -456,8 +456,11 @@ class NextreadTeaserBlock(object):
     def __init__(self, context):
         self.teasers = zeit.magazin.interfaces.INextRead(
             context).nextread
-        layout_id = zeit.magazin.interfaces.IRelatedLayout(
-            context).nextread_layout or 'base'
+
+        # Select layout id from a list of possible values, default to "base".
+        layout_id = (
+            lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
+            zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
         self.layout = NextreadLayout(id=layout_id)
         # TODO: Nextread lead should be configurable with ZMO-185.
         self.lead = 'Lesen Sie jetzt:'
