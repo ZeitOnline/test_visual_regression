@@ -1,8 +1,6 @@
 from grokcore.component import adapter, implementer
 from zeit.frontend.block import IFrontendBlock
 import logging
-import pyramid.interfaces
-import pyramid.traversal
 import zeit.cms.repository.interfaces
 import zeit.content.article
 import zeit.content.article.article
@@ -10,7 +8,6 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.frontend.interfaces
 import zope.interface
-import pyramid.httpexceptions
 import zeit.content.article.interfaces
 
 
@@ -33,14 +30,11 @@ class Page(object):
     def __iter__(self):
         return iter(self.blocks)
 
-##
-#
-# Injecting banner code in page.blocks
-# counts and injects only after paragraphs (2nd actually)
-# tile 7 and 8 are injected
-#
-##
+
 def _inject_banner_code(pages, advertising_enabled):
+    """Injecting banner code in page.blocks counts and injects only after
+    paragraphs (2nd actually) tile 7 and 8 are injected"""
+
     _tile_list = [7, 8]  # banner tiles in articles
     _possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
 

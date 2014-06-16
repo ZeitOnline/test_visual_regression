@@ -786,6 +786,22 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(
     assert 'class="CLASS figure__media' in output
 
 
+def test_macro_insert_responsive_image_should_produce_linked_image(
+        jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    image = Mock()
+    image.href = 'http://www.test.de'
+    page_type = 'article'
+
+    lines = tpl.module.insert_responsive_image(
+        image, '', page_type).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<a href="http://www.test.de">' in output
+
+
 def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')

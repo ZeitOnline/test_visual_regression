@@ -22,7 +22,6 @@
 
 .article__comments-trigger__link
     color: $black
-    border-bottom: none
     cursor: pointer
     display: block
     padding: $micro $small
@@ -57,21 +56,19 @@ $comments-min-width: $comments__break-outside - $max-page-width
     z-index: 20
     display: none
     +respond-min($comments__break-overlap)
-        +box-shadow
-        +animation('comments_overlap_move_in' 0.25s ease-in-out 1 0s)
         overflow: hidden
         margin: 0
         position: absolute
         top: 4em
-        height: 100%
         right: -$page-padding
         min-width: $comments-min-width
         max-width: em(700px)
         width: 100%
+        height: 100%
         background-color: $white
+    +respond-min-max($comments__break-overlap, $comments__break-outside)
+        +box-shadow
     +respond-min($comments__break-outside)
-        +box-shadow(none)
-        +animation('comments_outside_move_in' 0.25s ease-in-out 1 0s)
         top: 0px
         right: auto
         left: em(980px) - $page-padding
@@ -88,6 +85,19 @@ $comments-min-width: $comments__break-outside - $max-page-width
         &:last-child
             margin-bottom: 0
 
+.comments--animated
+    +transition-property(transform, opacity, visibility)
+    +transition-duration(0) // duration for "disappear"
+    +transition-timing-function(ease-in-out)
+    +transform-origin(left, top)
+    +respond-min($comments__break-overlap)
+        display: block // needed for working transition
+        opacity: 0
+        visibility: hidden
+    +respond-min-max($comments__break-overlap, $comments__break-outside)
+        +transform(translateX(-100px))
+    +respond-min($comments__break-outside)
+        +transform(scale(0))
 
 .comments__head
     +padded
@@ -146,6 +156,9 @@ $comments-min-width: $comments__break-outside - $max-page-width
         .comment__head,
         .comment__body
             padding-left: $large
+    &:target
+        background-color: #ffffdd
+        background-image: repeating-linear-gradient(135deg, transparent, transparent 21px, rgba(255,255,255,.5) 21px, rgba(255,255,255,.5) 42px)
 
 
 .comment__head
@@ -168,8 +181,7 @@ $comments-min-width: $comments__break-outside - $max-page-width
 .comment__head__meta__name
     font-weight: bold
     margin-right: $fine
-    border-bottom: none
-    +link-colors ($grey--mid-dark,$grey--mid-dark,$grey--mid-dark,$grey--mid-dark,$grey--mid-dark)
+    color: $grey--mid-dark
 
 .comment__head__meta__label
     display: block
@@ -177,11 +189,8 @@ $comments-min-width: $comments__break-outside - $max-page-width
     color: $grey
 
 .comment__head__meta__date
-    border-bottom: none
     +inline-block
-    +link-colors($grey, $grey, $grey, $grey, $grey)
-    +on-interaction
-        border-color: $grey
+    color: $grey
     &:before
         margin-right: $fine
         content: "—"
@@ -201,7 +210,6 @@ $comments-min-width: $comments__break-outside - $max-page-width
     +hide-text
     cursor: pointer
     margin-left: $small
-    border: none
     width: 20px
     height: 20px
     .no-touch &:hover
@@ -262,25 +270,31 @@ $comments-min-width: $comments__break-outside - $max-page-width
     width: em(40px)
     height: em(40px)
 
-.show-comments .page-wrap--inner
-    +respond-min($comments__break-outside)
-        +translateZ(0)
-        left: 0
-        margin-left: 0
-        z-index: 2000
+.show-comments
     .comments
         display: block
+    .comments--animated
+        +transition-duration(.25s) // duration for "appear"
+        +respond-min($comments__break-overlap)
+            +transform(translateX(0))
+            opacity: 1
+            visibility: visible
+        +respond-min($comments__break-outside)
+            +transform(scale(1))
+    .page-wrap--inner
+        +respond-min($comments__break-outside)
+            left: 0
+            margin-left: 0
+            z-index: 2000
 
 #iqd_mainAd
     +transition(all 1s)
 
 .show-comments #iqd_align_Ad
     +respond-min($comments__break-outside)
-        +translateZ(0)
         margin-left: 0
         #iqdSkyscraperLeft
             display: none !important
         #iqdSkyscraper, #iqdSkyscraperRight
-            +translateZ(0)
             position: absolute !important
             left: $max-page-width !important

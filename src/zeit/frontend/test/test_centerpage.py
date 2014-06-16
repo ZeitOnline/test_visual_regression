@@ -2,8 +2,8 @@
 from zeit.frontend import view_centerpage
 from zeit.frontend.template import create_image_url
 from zeit.frontend.template import default_image_url
-from zeit.frontend.template import most_sufficient_teaser_image
-from zeit.frontend.template import most_sufficient_teaser_tpl
+from zeit.frontend.template import get_teaser_image
+from zeit.frontend.template import get_teaser_template
 from zope.component import getMultiAdapter
 from zeit.frontend.test import Browser
 import mock
@@ -93,7 +93,7 @@ def test_centerpage_should_have_page_meta_robots_information(
     assert meta_robots_tag.get_attribute("content").strip() == teststring
 
 
-def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
+def test_get_teaser_template_should_produce_correct_combinations():
     should = [
         'templates/inc/teaser/teaser_lead_article_video.html',
         'templates/inc/teaser/teaser_lead_article_default.html',
@@ -103,7 +103,7 @@ def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
         'templates/inc/teaser/teaser_default_article_default.html',
         'templates/inc/teaser/teaser_default_default_video.html',
         'templates/inc/teaser/teaser_default_default_default.html']
-    result = most_sufficient_teaser_tpl('lead', 'article', 'video')
+    result = get_teaser_template('lead', 'article', 'video')
     assert result == should
     should = [
         'templates/inc/teaser/teaser_lead_article_video.html',
@@ -123,7 +123,7 @@ def test_most_sufficient_teaser_tpl_should_produce_correct_combinations():
         'templates/inc/teaser/teaser_default_default_imagegroup.html',
         'templates/inc/teaser/teaser_default_default_default.html']
     assets = ('video', 'gallery', 'imagegroup')
-    result = most_sufficient_teaser_tpl('lead', 'article', assets)
+    result = get_teaser_template('lead', 'article', assets)
     assert result == should
 
 
@@ -541,7 +541,7 @@ def test_default_teaser_should_return_default_teaser_image(testserver):
     teaser_block = cp_context['lead'][0]
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
-    teaser_img = most_sufficient_teaser_image(teaser_block, article_context)
+    teaser_img = get_teaser_image(teaser_block, article_context)
     assert zeit.frontend.interfaces.ITeaserImage.providedBy(teaser_img)
 
 
@@ -554,7 +554,7 @@ def test_teaser_image_url_should_be_created(
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
 
-    teaser_image = most_sufficient_teaser_image(teaser_block, article_context)
+    teaser_image = get_teaser_image(teaser_block, article_context)
 
     image_url = create_image_url(teaser_block, teaser_image)
     assert re.search(

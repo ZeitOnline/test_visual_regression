@@ -431,3 +431,11 @@ def test_nextread_maximal_layout_has_image_background_if_available(testserver):
     nextread = browser.cssselect('div.article__nextread__body')[0]
     assert 'background-image' not in nextread.attrib.get('style'), \
         'The nextread of "Artikel 03" has no teaser image asset.'
+
+
+def test_article03_has_linked_image(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    output = ""
+    for line in browser.contents.splitlines():
+        output += line.strip()
+    assert '<a href="http://www.test.de"><img alt="Immer' in output
