@@ -438,9 +438,11 @@
         iqd_wlCusRecStr[i] =  (iqd_wlCusRec[i] > 0) ? iqd_wlCus[i] + '=1' : iqd_wlCus[i] + '=0';
     }
     document.write('<scr'+'ipt>n_pbt += iqd_wlCusRecStr.join("\;");</scr'+'ipt>');
+
     if (window.Krux.adaudience.dfppKeyValues){
         document.write('<scr'+'ipt>n_pbt += ";" + window.Krux.adaudience.dfppKeyValues;</scr'+'ipt>');
     }
+
     // ]]>
 </script>
 <script>n_pbt = n_pbt.substr(0,1150);</script>
@@ -535,7 +537,7 @@
     {% endif %}
 
     {% if image %}
-        <!--[if gt IE 9]>-->
+        <!--[if gt IE 8]><!-->
             <noscript data-ratio="{{image.ratio}}">
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
@@ -545,7 +547,7 @@
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}
-        <!--[if gt IE 9]>-->
+        <!--[if gt IE 8]><!-->
             </noscript>
         <!--<![endif]-->
     {% endif %}
