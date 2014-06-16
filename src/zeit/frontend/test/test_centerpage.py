@@ -802,5 +802,5 @@ def test_default_asset_for_teaser_buttons_large(testserver):
 
 def test_default_asset_for_teaser_gallery(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
-    img = browser.cssselect('div.cp__teaser__gallery a div img')[0]
+    img = browser.cssselect('div.cp__teaser__gallery__wrap a div img')[0]
     assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')
