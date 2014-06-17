@@ -228,6 +228,51 @@
     window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
     window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=')> -1) ? iqd_Domain.split('iqadtest=')[1] : 'iqlive';
     // ]]>
+
+    //IQD mobile testing
+    nuggad.init({"rptn-url": nugghost}, function(api) {
+        if(typeof nuggtg!="undefined" && nuggtg!=""){
+            api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
+        }else{
+            api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
+        }
+    });
+
+    var iqd_testkw = (function () {
+        var loc, domain, testkw, vars;
+        loc = (window.top === window.self) ? window.location : window.top.location;
+        domain = loc.href.toLowerCase();
+        vars = {};
+        domain.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+            vars[key] = value;
+        });
+        testkw = vars.iqdkw;
+        return testkw;
+    }());
+</script>
+{%- endmacro %}
+
+{% macro iqd_init_mobile() -%}
+<script type="text/javascript">
+    iqd = (function () {
+        var iq_callAdsCounter = 0;
+        function iq_callAds() {
+            sas_tsn = sas_gtsf();
+            sas_mfb = 1;
+            if (typeof n_pbt !== 'undefined' || iq_callAdsCounter > 5) {
+                // hier ad calls einfuegen
+                sas_target = typeof iqd_testkw != 'undefined' ? iqd_testkw + ';' : ''; /* test keyword targeting */
+                sas_target += window.n_pbt || ''; // nuggad Targeting
+                sasmobile('32375/445608', 13500, sas_target);
+                sasmobile('32375/445608', 13501, sas_target);
+                // optional weitere adcalls 
+            } else {
+                window.setTimeout(iq_callAds, 200);
+                iq_callAdsCounter += 1;
+            }
+        }
+        return {callAds: iq_callAds};
+    }());
 </script>
 {%- endmacro %}
 
@@ -416,6 +461,16 @@
     var n_pbt = "";
     nuggtg = encodeURIComponent(IVW.split("CP/")[1]);
     document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/rc?nuggn=223088769&nuggsid=4168690&nuggtg='+nuggtg+'"><\/scr'+'ipt>');
+</script>
+{%- endmacro %}
+
+{% macro iqd_nuggad_mobile() -%}
+<script type="text/javascript">
+    var nuggn="480104072";
+    var nuggsid="1206341050";
+    var nugghost="http://gwp.nuggad.net";
+
+    document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/javascripts/nuggad-ls.js"><\/scr'+'ipt>');
 </script>
 {%- endmacro %}
 
