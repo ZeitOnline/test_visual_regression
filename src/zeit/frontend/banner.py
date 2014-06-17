@@ -58,8 +58,12 @@ def make_banner_list(banner_config):
             adlabel = place.adlabel
         except AttributeError:
             adlabel = None
+        try:
+            dcopt = place.dcopt
+        except AttributeError:
+            dcopt = None
         banner_list.append(Place(
             place.tile, sizes, diuqilon, adlabel,
             min_width=place.min_width, active=place.get('active'),
-            dcopt=place.dcopt))
+            dcopt=dcopt))
     return sorted(banner_list, key=lambda place: place.tile)
