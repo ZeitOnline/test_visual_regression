@@ -28,6 +28,8 @@ Change log for zeit.frontend
 
 - ZMO-819: Strip obsolete dcopt from banner.xml
 
+- ZMO-822: Add ftg_iq.min.js
+
 - Rename test images with strange unicode characters
 
 - Improve view performance by caching properties
