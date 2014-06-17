@@ -433,6 +433,13 @@ def test_nextread_maximal_layout_has_image_background_if_available(testserver):
         'The nextread of "Artikel 03" has no teaser image asset.'
 
 
+def test_nextread_should_fallback_to_default_layout(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    assert nextread.layout.id == 'base', \
+        '"Artikel 02" has invalid nextread layout, should fallback to base.'
+
+
 def test_article_with_images_should_render_image_container(testserver):
     browser = Browser('%s/artikel/03' % testserver.url)
     assert browser.cssselect('div.article__page figure.figure-stamp')
