@@ -22,6 +22,8 @@ Change log for zeit.frontend
 
 - ZMO-820: Add additional slotsize for adplace
 
+- ZMO-819: Strip obsolete dcopt from banner.xml
+
 - Rename test images with strange unicode characters
 
 

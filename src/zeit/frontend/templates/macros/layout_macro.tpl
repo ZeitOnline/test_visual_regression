@@ -486,7 +486,7 @@
         <div class="ad__{{banner.name}}__inner">
             <script type="text/javascript">
                 if( window.zmo_actual_load_width > {{ banner.min_width|default(0) }} ) {
-                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};{% if banner.dcopt -%}dcopt={{banner.dcopt}};{%- endif %}tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
             <noscript>
