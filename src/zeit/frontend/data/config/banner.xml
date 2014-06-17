@@ -15,7 +15,6 @@
     <tile>2</tile>
     <width>120</width>
     <height>600</height>
-    <dcopt>ist</dcopt>
     <diuqilon>True</diuqilon>
     <min_width>768</min_width>
   </place>
@@ -25,7 +24,6 @@
     <multiple_sizes>800x50,940x250</multiple_sizes>
     <width>800</width>
     <height>50</height>
-    <dcopt>ist</dcopt>
     <diuqilon>True</diuqilon>
     <min_width>768</min_width>
   </place>
@@ -34,7 +32,6 @@
     <tile>4</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -43,7 +40,6 @@
     <tile>5</tile>
     <width>400</width>
     <height>400</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -52,7 +48,6 @@
     <tile>6</tile>
     <width>100</width>
     <height>100</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -62,7 +57,6 @@
     <tile>7</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -72,7 +66,6 @@
     <tile>8</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -82,7 +75,6 @@
     <tile>9</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -92,7 +84,6 @@
     <tile>10</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
   </place-->
   <!--place number="11" active="true">
@@ -101,7 +92,6 @@
     <tile>11</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
   </place-->
   <place number="12" active="true">
@@ -109,7 +99,6 @@
     <tile>12</tile>
     <width>940</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -119,7 +108,6 @@
     <tile>13</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -129,7 +117,6 @@
     <tile>14</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -139,7 +126,6 @@
     <tile>15</tile>
     <width>300</width>
     <height>250</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -148,7 +134,6 @@
     <tile>16</tile>
     <width>940</width>
     <height>50</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
@@ -157,7 +142,6 @@
     <tile>17</tile>
     <width>615</width>
     <height>615</height>
-    <dcopt>ist</dcopt>
     <adlabel>Anzeige</adlabel>
     <min_width>768</min_width>
   </place>
