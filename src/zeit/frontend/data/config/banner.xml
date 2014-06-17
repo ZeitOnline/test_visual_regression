@@ -60,6 +60,7 @@
     <name>info-mr-1</name>
     <type>mediumrectangle</type>
     <tile>7</tile>
+    <multiple_sizes>300x250,300x600</multiple_sizes>
     <width>300</width>
     <height>250</height>
     <dcopt>ist</dcopt>
