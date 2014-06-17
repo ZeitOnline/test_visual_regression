@@ -20,6 +20,8 @@ Change log for zeit.frontend
 
 - ZMO-765: Modify webtrekk data and adapt testing
 
+- ZMO-819: Strip obsolete dcopt from banner.xml
+
 - Rename test images with strange unicode characters
 
 
