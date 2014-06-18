@@ -19,7 +19,6 @@ import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.centerpage
 import zeit.frontend.template
-import zeit.frontend.navigation
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
@@ -101,6 +100,9 @@ class Application(object):
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+
+        zeit.frontend.template.default_teaser_images = \
+            self.settings['default_teaser_images']
 
         from pyramid.authorization import ACLAuthorizationPolicy
         from .security import CommunityAuthenticationPolicy

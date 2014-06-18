@@ -106,6 +106,7 @@ class Image(BaseImage):
         # TODO: don't use XML but adapt an Image and use it's metadata
         xml = model_block.xml
         self.align = xml.get('align')
+        self.href = xml.get('href')
         self.caption = _inline_html(xml.find('bu'))
         self.copyright = _inline_html(xml.find('copyright'))
         self.layout = model_block.layout
@@ -455,8 +456,11 @@ class NextreadTeaserBlock(object):
     def __init__(self, context):
         self.teasers = zeit.magazin.interfaces.INextRead(
             context).nextread
-        layout_id = zeit.magazin.interfaces.IRelatedLayout(
-            context).nextread_layout or 'base'
+
+        # Select layout id from a list of possible values, default to "base".
+        layout_id = (
+            lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
+            zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
         self.layout = NextreadLayout(id=layout_id)
         # TODO: Nextread lead should be configurable with ZMO-185.
         self.lead = 'Lesen Sie jetzt:'

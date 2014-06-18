@@ -199,9 +199,9 @@ def test_inline_gallery_should_have_images(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     frontend_gallery = zeit.frontend.block.InlineGallery(body.values()[14])
-    assert type(frontend_gallery.items()[3]) == InlineGalleryImage
+    assert all(type(i) is InlineGalleryImage for i in frontend_gallery.items())
 
-    gallery_image = frontend_gallery.items()[3]
+    gallery_image = frontend_gallery.items()[4]
     assert gallery_image.src == \
         u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
         '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
@@ -294,6 +294,18 @@ def test_artikel05_has_rankedTagsList(testserver):
     article_view = view_article.Article(context, mock.Mock())
     assert article_view.rankedTagsList is not None
     assert article_view.rankedTagsList != ''
+
+
+def test_artikel01_has_correct_authorsList(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = view_article.Article(context, mock.Mock())
+    assert article_view.authorsList == 'Anne Mustermann'
+
+
+def test_artikel08_has_correct_authorsList(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = view_article.Article(context, mock.Mock())
+    assert article_view.authorsList == 'Anne Mustermann;Oliver Fritsch'
 
 
 def test_artikel05_has_set_text_length(testserver):

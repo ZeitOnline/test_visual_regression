@@ -8,8 +8,19 @@ Available attributes:
 
 #}
 
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
+{%- set image = get_teaser_image(teaser_block, teaser) %}
+
 <div class='{{self.wrapper_class()}}'>
-    {% block asset %}{% endblock %}
+   {% block asset %}
+   {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
+   <a href="{{teaser | create_url}}">
+       <div class="scaled-image is-pixelperfect {{self.teaser_layout()}}" data-wrap=".{{self.teaser_layout()}}">
+           {{ lama.insert_responsive_image(image) }}
+       </div>
+   </a>
+   {% endblock %}
     <span class="{{self.title_wrapper_class()}}">
         <a href="{{teaser | create_url}}">
             <span class="cp__buttons__supertitle">

@@ -44,7 +44,7 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             height = height || Math.round(width / $img.data('ratio'));
         }
 
-        var token = prefix(width, height);
+        var token = prefix(Math.ceil(width), Math.ceil(height));
         var src = image.src || $img.data('src');
         image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
     };

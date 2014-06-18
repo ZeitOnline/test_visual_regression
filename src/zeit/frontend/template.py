@@ -19,6 +19,7 @@ import zeit.frontend.centerpage
 import zope.component
 
 log = logging.getLogger(__name__)
+default_teaser_images = None  # Set during startup through application.py
 
 
 @jinja2.contextfilter
@@ -43,7 +44,8 @@ def create_url(context, obj):
 
 
 def format_date(obj, type='short'):
-    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'", 'short': "d. MMMM yyyy"}
+    formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
+               'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
@@ -204,21 +206,33 @@ def get_teaser_template(block_layout,
     return map(func, combinations)
 
 
-def get_teaser_image(teaser_block, teaser):
-    asset = zeit.frontend.centerpage.get_image_asset(teaser)
+def get_teaser_image(teaser_block, teaser, unique_id=None):
+    if unique_id:
+        asset = zeit.cms.interfaces.ICMSContent(unique_id)
+    else:
+        asset = zeit.frontend.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return None
-
+        return get_teaser_image(
+            teaser_block, teaser,
+            unique_id=zeit.frontend.template.default_teaser_images)
+    asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
     image_id = '%s/%s-%s.jpg' % \
-        (asset.uniqueId, image_base_name, teaser_block.layout.image_pattern)
+        (asset_id, image_base_name, teaser_block.layout.image_pattern)
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.frontend.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
-        return None
+        # Don't fallback when an unique_id is given explicitly in order to
+        # prevent infinite recursion.
+        if unique_id:
+            return None
+        else:
+            return get_teaser_image(
+                teaser_block, teaser,
+                unique_id=zeit.frontend.template.default_teaser_images)
 
 
 def create_image_url(teaser_block, image):

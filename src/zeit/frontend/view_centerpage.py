@@ -158,3 +158,8 @@ class Centerpage(zeit.frontend.view.Base):
         except:
             log.error('Cant reach linkreach')
         return buzz
+
+    @property
+    def tracking_type(self):
+        if type(self.context).__name__.lower() == 'centerpage':
+            return 'Centerpage'
