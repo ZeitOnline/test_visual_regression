@@ -140,7 +140,7 @@
     </div>
 {%- endmacro %}
 
-{% macro image(obj) -%}
+{% macro image(obj, loop) -%}
     {% if obj | default_image_url -%}
         <figure class="
             {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
@@ -165,6 +165,9 @@
                 {{ lama.insert_responsive_image(obj, None, 'article') }}
             </div>
             <figcaption class="figure__caption">
+                {% if loop -%}
+                <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
+                {% endif -%}
                 {{obj.caption}}
                 {% if obj.copyright != '©' %}
                 <span class="figure__copyright">{{obj.copyright}}</span>
@@ -174,8 +177,8 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro inlinegalleryimage(obj) -%}
-    {{ image(obj) }}
+{% macro inlinegalleryimage(obj, loop) -%}
+    {{ image(obj, loop) }}
 {%- endmacro %}
 
 {% macro headerimage(obj) -%}
@@ -398,11 +401,10 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="figure figure-full-width">
+    <div class="inline-gallery__wrap">
         <div class="inline-gallery">
             {% for item in obj.items() %}
-                <!-- Gallery-Items as block.image(obj) -->
-               {{ inlinegalleryimage(item) }}
+                {{ inlinegalleryimage(item, loop) }}
             {% endfor %}
         </div>
     </div>

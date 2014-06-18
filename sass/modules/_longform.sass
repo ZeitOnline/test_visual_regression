@@ -9,7 +9,7 @@ $longform-header-offset: 80px
 $longform-header-min-height: 400px
 $longform-header-max-height: 1400px
 
-.article.article--longform
+.article--longform
   padding: 0
   max-width: none
 
@@ -289,43 +289,42 @@ $longform-header-max-height: 1400px
       max-width: $longform-content-max-width*1.13
       max-width: rem($longform-content-max-width)*1.13
 
-  figure
-    // &.figure-full-width
-    //   .figure__caption, figcaption
-    //     +max-width-rem($longform-content-max-width)
-    &.figure-horizontal, &.figure-horizontal--right
-      +max-width-rem($longform-inline-max-width)
-      margin-left: auto
-      margin-right: auto
-      +respond-min(em($bp-adjust-horizontal-figures--2))
-        position: relative
-        width: 100%
-        .figure__media, img
-          float: none
-          width: 100%
-        .figure__caption, figcaption
-          +max-width-rem(240px)
-          width: em(200px)
-          position: absolute
-          left: 100%
-          padding-left: $gutter
-          top: 0
-          float: none
-      +respond-min(em($bp-adjust-horizontal-figures--3))
-        .figure__caption, figcaption
-          width: em(220px)
-      +respond-min(em($bp-adjust-horizontal-figures--4))
-        .figure__caption, figcaption
-          width: 100%
+  .figure-horizontal, .figure-horizontal--right
+    +max-width-rem($longform-inline-max-width)
+    margin-left: auto
+    margin-right: auto
+    +respond-min(em($bp-adjust-horizontal-figures--2))
+      position: relative
+      width: 100%
       .figure__media, img
-        +max-width-rem($longform-inline-max-width)
+        float: none
+        width: 100%
       .figure__caption, figcaption
-    &.figure-horizontal--right
-      +respond-min(em($bp-adjust-horizontal-figures--2))
-        .figure__caption, figcaption
-          right: 100%
-          left: auto
-    &.figure-full-width
+        +max-width-rem(240px)
+        width: em(200px)
+        position: absolute
+        left: 100%
+        padding-left: $gutter
+        top: 0
+        float: none
+    +respond-min(em($bp-adjust-horizontal-figures--3))
       .figure__caption, figcaption
-        +max-width-rem($longform-image-caption-max-width)
+        width: em(220px)
+    +respond-min(em($bp-adjust-horizontal-figures--4))
+      .figure__caption, figcaption
+        width: 100%
+    .figure__media, img
+      +max-width-rem($longform-inline-max-width)
+  .figure-horizontal--right
+    +respond-min(em($bp-adjust-horizontal-figures--2))
+      .figure__caption, figcaption
+        right: 100%
+        left: auto
+  .figure-full-width
+    .figure__caption, figcaption
+      +max-width-rem($longform-image-caption-max-width)
+      padding-right: 0
+
+  .inline-gallery__wrap
+    max-width: em($longform-inline-max-width)
 
