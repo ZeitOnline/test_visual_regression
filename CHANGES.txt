@@ -30,6 +30,8 @@ Change log for zeit.frontend
 
 - Rename test images with strange unicode characters
 
+- Improve view performance by caching properties
+
 
 0.7.1 (2014-06-13)
 ------------------
