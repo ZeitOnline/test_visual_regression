@@ -32,6 +32,11 @@ class IPlace(zope.interface.Interface):
     be filled with a banner.
     """
 
+class IIqdMobileList(zope.interface.Interface):
+
+    """A set of iqd ids for a certain ressort.
+    """
+
 
 class IBannerlist(zope.interface.Interface):
 

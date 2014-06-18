@@ -24,7 +24,6 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        import pdb;pdb.set_trace();
         self.request.response.cache_expires(300)
 
     def __call__(self):
@@ -108,6 +107,23 @@ class Base(object):
         else:
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
+
+    @property
+    def iqd_mobile_settings(self):
+        iqd_ids = zeit.frontend.banner.iqd_mobile_ids
+        import pdb;pdb.set_trace();
+        for iqd_id in iqd_ids:
+            if self.is_hp:
+                return iqd_id['hp']
+            elif iqd_id.ressort == self.ressort:
+                return iqd_id[self.type]
+
+    @property
+    def is_hp(self):
+        if self.request.path == '/' + self.request.registry.settings.hp:
+            return True
+        else:
+            return False
 
 
 class Content(Base):

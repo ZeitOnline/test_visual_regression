@@ -252,7 +252,7 @@
 </script>
 {%- endmacro %}
 
-{% macro iqd_init_mobile() -%}
+{% macro iqd_init_mobile(obj) -%}
 <script type="text/javascript">
     iqd = (function () {
         var iq_callAdsCounter = 0;

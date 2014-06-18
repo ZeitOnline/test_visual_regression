@@ -81,7 +81,7 @@
         {% endif %}
         {{lama.iqd_nuggad_mobile()}}
         {{lama.iqd_init()}}
-        {{lama.iqd_init_mobile()}}
+        {{lama.iqd_init_mobile(view.iqd_mobile_settings)}}
         {{lama.iqd_krux_head()}}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
@@ -168,6 +168,7 @@
         <script data-main="{{request.asset_url('js/main')}}" src="{{request.asset_url('js/libs/require.js')}}"></script>
         <script type="text/javascript">
             if( typeof window.sasmobile === 'function' && zmo_is_mobile_view ) {
+                {{view.iqd_mobile_settings}}
                 iqd.callAds();
             }
         </script>
