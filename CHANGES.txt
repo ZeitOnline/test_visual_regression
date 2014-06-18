@@ -4,6 +4,10 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
+- ZMO-690 Add clickable overlay for galleries
+  + Add keyboard navigation for galleries
+  + Update bxSlider
+
 - hotfix: Invalid js in ivw caller script
 
 - hotfix: Fix broken test in master
