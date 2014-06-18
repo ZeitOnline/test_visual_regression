@@ -263,9 +263,19 @@
                 // hier ad calls einfuegen
                 sas_target = typeof iqd_testkw != 'undefined' ? iqd_testkw + ';' : ''; /* test keyword targeting */
                 sas_target += window.n_pbt || ''; // nuggad Targeting
-                sasmobile('32375/445608', 13500, sas_target);
-                sasmobile('32375/445608', 13501, sas_target);
-                // optional weitere adcalls 
+
+                {% if obj.top -%}
+                    sasmobile('32375/{{obj.top}}', 13500, sas_target);
+                {% endif -%}
+
+                {% if obj.middle -%}
+                    sasmobile('32375/{{obj.middle}}', 13557, sas_target);
+                {% endif -%}
+
+                {% if obj.bottom -%}
+                    sasmobile('32375/{{obj.bottom}}', 13501, sas_target);
+                {% endif -%}
+
             } else {
                 window.setTimeout(iq_callAds, 200);
                 iq_callAdsCounter += 1;

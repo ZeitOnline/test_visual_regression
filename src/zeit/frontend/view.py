@@ -111,12 +111,11 @@ class Base(object):
     @property
     def iqd_mobile_settings(self):
         iqd_ids = zeit.frontend.banner.iqd_mobile_ids
-        import pdb;pdb.set_trace();
         for iqd_id in iqd_ids:
-            if self.is_hp:
-                return iqd_id['hp']
-            elif iqd_id.ressort == self.ressort:
-                return iqd_id[self.type]
+            if iqd_id.ressort == 'hp' and self.is_hp:
+                return getattr(iqd_id, self.type)
+            elif iqd_id.ressort == self.sub_ressort:
+                return getattr(iqd_id, self.type)
 
     @property
     def is_hp(self):

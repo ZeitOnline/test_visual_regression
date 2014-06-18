@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <iqd_ids>
+	<iqd_id ressort="hp">
+		<centerpage top="445608" bottom="445608"></centerpage>
+	</iqd_id>
 	<iqd_id ressort="leben">
 		<centerpage top="445622" bottom="445622"></centerpage>
 		<gallery top="445624"></gallery>
@@ -14,8 +17,5 @@
 		<centerpage top="445611" bottom="445611"></centerpage>
 		<gallery top="445613"></gallery>
 		<article top="445612" middle="445612" bottom="445612"></article>
-	</iqd_id>
-	<iqd_id ressort="hp">
-		<centerpage top="445608" bottom="445608"></centerpage>
 	</iqd_id>
 </iqd_ids>

@@ -40,9 +40,9 @@ class Place(object):
 class IqdMobileList(object):
 
     def __init__(self, iqd_id):
-        self.cp = {}
+        self.centerpage = {}
         self.gallery = {}
-        self.default = {}
+        self.article = {}
         self.ressort = iqd_id.get('ressort')
         self.centerpage['top'] = iqd_id.centerpage.get('top')
         self.centerpage['bottom'] = iqd_id.centerpage.get('bottom')
@@ -50,7 +50,6 @@ class IqdMobileList(object):
         self.article['top'] = iqd_id.article.get('top')
         self.article['middle'] = iqd_id.article.get('middle')
         self.article['bottom'] = iqd_id.article.get('bottom')
-
 
 banner_list = None
 iqd_mobile_ids = None
