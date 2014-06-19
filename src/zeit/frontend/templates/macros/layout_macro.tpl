@@ -479,7 +479,6 @@
     var nuggn="480104072";
     var nuggsid="1206341050";
     var nugghost="http://gwp.nuggad.net";
-
     document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/javascripts/nuggad-ls.js"><\/scr'+'ipt>');
 </script>
 {%- endmacro %}
