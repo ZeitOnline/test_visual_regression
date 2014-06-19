@@ -28,6 +28,12 @@ Change log for zeit.frontend
 
 - ZMO-819: Strip obsolete dcopt from banner.xml
 
+- ZMO-705: Partially reorganize centerpage areas
+
+- ZMO-705: Add sequencing layer for teaser lists/blocks/bars/etc
+
+- ZMO-705: Add image copyright support for centerpages
+
 - Rename test images with strange unicode characters
 
 - Improve view performance by caching properties
