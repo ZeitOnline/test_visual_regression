@@ -41,8 +41,7 @@ def test_article_has_valid_twitter_meta_tags(testserver):
         ' content="Erst Heilsbringer, dann Massenware:'\
         ' Der Chianti ist tief gefallen. Doch engagierte Winzer'\
         ' retten dem Wein in der Bastflasche die Ehre. ">' in browser.contents
-    assert '<meta class="scaled-image"'\
-        ' name="twitter:image"' in browser.contents
+    assert '<meta name="twitter:image"' in browser.contents
 
 
 def test_article_has_valid_facebook_meta_tags(testserver):
@@ -60,7 +59,7 @@ def test_article_has_valid_facebook_meta_tags(testserver):
         ' content="Erst Heilsbringer, dann Massenware:'\
         ' Der Chianti ist tief gefallen. Doch engagierte Winzer'\
         ' retten dem Wein in der Bastflasche die Ehre. ">' in browser.contents
-    assert '<meta property="og:image" class="scaled-image"' in browser.contents
+    assert '<meta property="og:image" ' in browser.contents
 
 
 def test_all_tracking_pixel_are_send(selenium_driver, testserver):

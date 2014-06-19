@@ -471,9 +471,9 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="og:title" content="title">',
           '<meta property="og:description" content="subtitle">',
           '<meta property="og:url" content="http://test.de/myurl">']
-    image = ['<meta property="og:image" class="scaled-image" content="',
-             '<link itemprop="image" class="scaled-image" rel="image_src"',
-             '<meta class="scaled-image" name="twitter:image" content="']
+    image = ['<meta property="og:image" content="',
+             '<link itemprop="image" rel="image_src"',
+             '<meta name="twitter:image" content="']
     lines = tpl.module.sharing_meta(obj, request).splitlines()
     output = ""
     for line in lines:
