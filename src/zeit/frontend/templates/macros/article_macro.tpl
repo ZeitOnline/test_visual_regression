@@ -2,6 +2,7 @@
 
 {% macro place(item) -%}
     {{lama.adplace(item, view.banner_channel)}}
+    {{lama.adplace_middle_mobile(item)}}
 {%- endmacro %}
 
 {% macro supertitle() -%}

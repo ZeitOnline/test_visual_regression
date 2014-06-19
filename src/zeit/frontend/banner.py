@@ -44,12 +44,19 @@ class IqdMobileList(object):
         self.gallery = {}
         self.article = {}
         self.ressort = iqd_id.get('ressort')
-        self.centerpage['top'] = iqd_id.centerpage.get('top')
-        self.centerpage['bottom'] = iqd_id.centerpage.get('bottom')
-        self.gallery['top'] = iqd_id.gallery.get('top')
-        self.article['top'] = iqd_id.article.get('top')
-        self.article['middle'] = iqd_id.article.get('middle')
-        self.article['bottom'] = iqd_id.article.get('bottom')
+        # set ids for alle page types
+        self.set_ids(iqd_id, 'centerpage')
+        self.set_ids(iqd_id, 'gallery')
+        self.set_ids(iqd_id, 'article')
+
+
+    def set_ids(self, iqd_id, page_type):
+        if hasattr(iqd_id, page_type):
+            #set ids for all positions
+            getattr(self, page_type)['top'] = getattr(iqd_id, page_type).get('top')
+            getattr(self, page_type)['middle'] = getattr(iqd_id, page_type).get('middle')
+            getattr(self, page_type)['bottom'] = getattr(iqd_id, page_type).get('bottom')
+
 
 banner_list = None
 iqd_mobile_ids = None

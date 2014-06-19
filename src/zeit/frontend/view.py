@@ -109,20 +109,20 @@ class Base(object):
             return ';'.join([dt for dt in default_tags if dt])
 
     @property
-    def iqd_mobile_settings(self):
-        iqd_ids = zeit.frontend.banner.iqd_mobile_ids
-        for iqd_id in iqd_ids:
-            if iqd_id.ressort == 'hp' and self.is_hp:
-                return getattr(iqd_id, self.type)
-            elif iqd_id.ressort == self.sub_ressort:
-                return getattr(iqd_id, self.type)
-
-    @property
     def is_hp(self):
         if self.request.path == '/' + self.request.registry.settings.hp:
             return True
         else:
             return False
+
+    @property
+    def iqd_mobile_settings(self):
+        iqd_ids = zeit.frontend.banner.iqd_mobile_ids
+        for iqd_id in iqd_ids:
+            if iqd_id.ressort == 'hp' and self.is_hp:
+                return getattr(iqd_id, 'centerpage')
+            elif iqd_id.ressort == self.sub_ressort:
+                return getattr(iqd_id, self.type)
 
 
 class Content(Base):

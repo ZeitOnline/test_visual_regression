@@ -564,6 +564,15 @@
     </div>
 {%- endmacro %}
 
+{% macro adplace_middle_mobile(item) -%}
+    {% if item.tile == 7 -%}
+    <!-- only integrate onces as equivalent to desktop tile 7 -->
+        <div class="iqd_mobile__adplace">
+            <div id="sas_13557"></div>
+        </div>
+    {%- endif %}
+{%- endmacro %}
+
 {% macro main_nav_compact(obj,request) -%}
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
