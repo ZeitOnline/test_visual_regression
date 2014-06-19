@@ -140,40 +140,45 @@
     </div>
 {%- endmacro %}
 
-{% macro image(obj) -%}
-    <figure class="
-        {% if obj.layout == 'large' or obj.layout == 'zmo-large-center' %}
-            figure-full-width
-        {% elif obj.layout == 'zmo-xl-header' %}
-            figure-header
-        {% elif obj.layout == 'zmo-medium-left' %}
-            figure-horizontal
-        {% elif obj.layout == 'zmo-medium-right' %}
-            figure-horizontal--right
-        {% elif obj.layout == 'zmo-medium-center' %}
-            figure is-constrained is-centered
-        {% elif obj.layout == 'zmo-small-left' %}
-            figure-stamp
-        {% elif obj.layout == 'zmo-small-right' %}
-            figure-stamp--right
-        {% else %}
-            figure-stamp
-        {% endif %}
-        ">
+{% macro image(obj, loop) -%}
+    {% if obj | default_image_url -%}
+        <figure class="
+            {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
+                figure-full-width
+            {%- elif obj.layout == 'zmo-xl-header' -%}
+                figure-header
+            {%- elif obj.layout == 'zmo-medium-left' -%}
+                figure-horizontal
+            {%- elif obj.layout == 'zmo-medium-right' -%}
+                figure-horizontal--right
+            {%- elif obj.layout == 'zmo-medium-center' -%}
+                figure is-constrained is-centered
+            {%- elif obj.layout == 'zmo-small-left' -%}
+                figure-stamp
+            {%- elif obj.layout == 'zmo-small-right' -%}
+                figure-stamp--right
+            {%- else -%}
+                figure-stamp
+            {%- endif -%}
+            ">
             <div class="scaled-image">
-                {{ lama.insert_responsive_image(obj) }}
+                {{ lama.insert_responsive_image(obj, None, 'article') }}
             </div>
             <figcaption class="figure__caption">
+                {% if loop -%}
+                <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
+                {% endif -%}
                 {{obj.caption}}
                 {% if obj.copyright != '©' %}
                 <span class="figure__copyright">{{obj.copyright}}</span>
                 {% endif %}
             </figcaption>
-    </figure>
+        </figure>
+    {%- endif %}
 {%- endmacro %}
 
-{% macro inlinegalleryimage(obj) -%}
-    {{ image(obj) }}
+{% macro inlinegalleryimage(obj, loop) -%}
+    {{ image(obj, loop) }}
 {%- endmacro %}
 
 {% macro headerimage(obj) -%}
@@ -396,11 +401,10 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj) -%}
-    <div class="figure figure-full-width">
+    <div class="inline-gallery__wrap">
         <div class="inline-gallery">
             {% for item in obj.items() %}
-                <!-- Gallery-Items as block.image(obj) -->
-               {{ inlinegalleryimage(item) }}
+                {{ inlinegalleryimage(item, loop) }}
             {% endfor %}
         </div>
     </div>

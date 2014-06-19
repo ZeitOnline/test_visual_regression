@@ -25,24 +25,21 @@ $cp__comment__count-width: em(60px)
 		overflow: hidden
 		+tablet()
 
-//standard classes for cp
-.cp__link--light, %cp__link--light
+//standard link classes for cp
+%cp__link--light
 	a
-		color: $black
+		+link-colors($black, $black, $black, $black, $black)
 
-.cp__link--light--underlined, %cp__link--light--underlined
+%cp__link--dark
 	a
-		color: $black
-		+animated-interaction($black)
+		+link-colors($white, $white, $white, $white, $white)
 
-.cp__link--dark, %cp__link--dark
-	a
-		color: $white
+//standart shadow classes for cp
+%cp__shadow--dark
+	+fake-box-shadow-inset($black)
 
-.cp__link--dark--underlined, %cp__link--dark--underlined
-	a
-		color: $white
-		+animated-interaction($white)
+%cp__shadow--light
+	+fake-box-shadow-inset($white)
 
 //teaser type button
 .cp__buttons__wrap, %cp__buttons__wrap
@@ -66,7 +63,7 @@ $cp__comment__count-width: em(60px)
 .cp__buttons__title__wrap
 	display: block
 
-.cp__buttons__supertitle
+.cp__buttons__supertitle, %cp__buttons__supertitle
 	@extend %cp__link--light
 	@extend %copy
 	margin-bottom: $micro
@@ -75,7 +72,7 @@ $cp__comment__count-width: em(60px)
 	font-size: $font-s
 	letter-spacing: $hair
 
-.cp__buttons__title
+.cp__buttons__title, %cp__buttons__title
 	@extend %cp__link--light
 	+tablet(bold)
 	line-height: $petite

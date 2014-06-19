@@ -54,15 +54,12 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
         driver.set_window_size(560, 900)
-        script = 'return $(".bx-overlay-next").css("display")'
-        elemNextDisplay = driver.execute_script(script)
-        script = 'return $(".bx-overlay-next").css("display")'
-        elemPrevDisplay = driver.execute_script(script)
-        script = 'return $(".figure__caption").css("display")'
-        elemCaptionDisplay = driver.execute_script(script)
-        assert elemNextDisplay == "none"
-        assert elemPrevDisplay == "none"
-        assert elemCaptionDisplay == "none"
+        bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
+        bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
+        caption = driver.find_element_by_css_selector(".figure__caption")
+        assert not bigButtonPrev.is_displayed()
+        assert not bigButtonNext.is_displayed()
+        assert not caption.is_displayed()
     except:
         print "Timeout Gallery Script"
         assert False

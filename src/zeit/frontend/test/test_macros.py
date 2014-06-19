@@ -313,11 +313,11 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         for line in lines:
             output += line.strip()
         markup = '<figure class="%s"><div class="scaled-image">' \
-                 '<!--\[if gt IE 9\]>--><noscript data-ratio="">' \
+                 '<!--\[if gt IE 8\]><!--><noscript>' \
                  '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
                  'class=" figure__media" ' \
                  'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
-                 'data-ratio=""><!--\[if gt IE 9\]>--></noscript>' \
+                 'data-ratio=""><!--\[if gt IE 8\]><!--></noscript>' \
                  '<!--<!\[endif\]--></div><figcaption ' \
                  'class="figure__caption">test<span ' \
                  'class="figure__copyright">test</span>' \
@@ -343,7 +343,7 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
         output += line.strip()
 
     start = '<div class="scaled-image is-pixelperfect">' \
-            '<!--[if gt IE 9]>--><noscript data-ratio="1"><!--<![endif]-->' \
+            '<!--[if gt IE 8]><!--><noscript><!--<![endif]-->' \
             '<img alt="test" title="test" class="article__main-image--' \
             'longform figure__media" src="'
     end = '--></noscript><!--<![endif]--></div>testtest'
@@ -424,7 +424,6 @@ def test_macro_video_should_produce_markup(jinja2_env):
         output = ""
         for line in lines:
             output += line.strip()
-        print lines
         assert el['fig'] in output
 
 
@@ -498,11 +497,9 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    print output
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
-        print img
         assert img in output
 
 
@@ -553,34 +550,48 @@ def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
 
 def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    obj = {'ressort': 'lebensart',
-           'sub_ressort': 'mode',
-           'type': 'article',
-           'tracking_type': 'Artikel',
-           'author': {
-               'name': 'Martin Mustermann'},
-           'banner_channel': 'lebensart/mode/article',
-           'text_length': 1000,
-           'rankedTagsList': 'test;test'}
-    request = {'path_info': '/test/test'}
+
+    obj = Mock()
+    obj.ressort = 'lebensart'
+    obj.sub_ressort = 'mode'
+    obj.type = 'article'
+    obj.tracking_type = 'Artikel'
+    obj.authorsList = 'Martin Mustermann'
+    obj.banner_channel = 'lebensart/mode/article'
+    obj.text_length = 1000
+    obj.rankedTagsList = 'test;test'
+    obj.pagination.current = 1
+    obj.pagination.total = 2
+    obj.serie = 'test'
+    obj.date_first_released = False
+
+    request = {'path_info': '/test/test1'}
+
     el_def = ['<script',
               'src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"',
               "</script",
               "wt.sendinfo();",
               "http://zeit01.webtrekk.net/" +
-              "981949533494636/wt.pl?p=311,redaktion" +
-              ".lebensart.mode..Artikel.online./test/test,0,0,0,0,0,0,0,0" +
-              "&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart" +
-              "&amp;cg4=Online&amp;cp1=Martin Mustermann" +
-              "&amp;cp2=lebensart/mode/article&amp;cp3=1&amp;cp4=test;test" +
+              "981949533494636/wt.pl?p=311,redaktion.lebensart.mode" +
+              "..Artikel.online./test/test1,0,0,0,0,0,0,0,0&amp;" +
+              "cg1=Redaktion&amp;cg2=Artikel&amp;" +
+              "cg3=lebensart&amp;cg4=Online" +
+              "&amp;cg5=mode&amp;cg6=&amp;cg7=test1&amp;cg8=lebensart/" +
+              "mode/article&amp;cg9=&amp;cp1=Martin Mustermann&amp;" +
+              "cp2=lebensart/mode/article&amp;cp3=1/2&amp;cp4=test;test" +
               "&amp;cp6=1000&amp;cp7=&amp;cp9=lebensart/mode/article"]
     el_cont = ['1: "Redaktion"',
                '2: "Artikel"',
                '3: "lebensart"',
-               '4: "Online"']
+               '4: "Online"',
+               '5: "mode"',
+               '6: "test"',
+               '7: "test1"',
+               '8: "lebensart/mode/article"',
+               '9: ""']
     el_cust = ['1: "Martin Mustermann"',
                '2: "lebensart/mode/article"',
-               '3: "1/1"',
+               '3: "1/2"',
                '4: "test;test"',
                '6: "1000"',
                '7: ""',
@@ -594,6 +605,46 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
     for el in el_cont:
         assert el in output
     for el in el_cust:
+        assert el in output
+
+
+def test_macro_webtrekk_tracking_should_produces_correct_cp_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+
+    obj = Mock()
+    obj.ressort = 'lebensart'
+    obj.sub_ressort = 'mode'
+    obj.type = 'centerpage'
+    obj.tracking_type = 'Centerpage'
+    obj.authorsList = 'Martin Mustermann'
+    obj.banner_channel = 'lebensart/mode/article'
+    obj.text_length = 1000
+    obj.rankedTagsList = 'test;test'
+    obj.pagination.current = 1
+    obj.pagination.total = 2
+    obj.serie = 'test'
+    obj.date_first_released = False
+
+    request = {'path_info': '/test/test1'}
+
+    el_def = ['<script',
+              'src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"',
+              "</script",
+              "wt.sendinfo();",
+              "http://zeit01.webtrekk.net/" +
+              "981949533494636/wt.pl?p=311,redaktion.lebensart.mode" +
+              "..Centerpage.online./test/test1,0,0,0,0,0,0,0,0&amp;" +
+              "cg1=Redaktion&amp;cg2=Centerpage&amp;" +
+              "cg3=lebensart&amp;cg4=Online" +
+              "&amp;cg5=mode&amp;cg6=&amp;cg7=test1&amp;cg8=lebensart/" +
+              "mode/article&amp;cg9="]
+
+    lines = tpl.module.webtrekk_tracking(obj, request).splitlines()
+
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in el_def:
         assert el in output
 
 
@@ -713,7 +764,7 @@ def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
     for line in lines:
         output += line.strip()
 
-    assert '<!--[if gt IE 9]>-->' in output
+    assert '<!--[if gt IE 8]><!-->' in output
     assert '<img alt="ALT"' in output
     assert 'title="TITLE"' in output
     assert '<!--<![endif]-->' in output
@@ -735,6 +786,22 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(
     assert 'class="CLASS figure__media' in output
 
 
+def test_macro_insert_responsive_image_should_produce_linked_image(
+        jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    image = Mock()
+    image.href = 'http://www.test.de'
+    page_type = 'article'
+
+    lines = tpl.module.insert_responsive_image(
+        image, '', page_type).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<a href="http://www.test.de">' in output
+
+
 def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
@@ -749,7 +816,7 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
         output += line.strip()
 
     assert '<a href="ID">' in output
-    assert '<div class="teaser__kicker">SUPATITLE</div>' in output
+    assert '<div class="teaser__supertitle">SUPATITLE</div>' in output
     assert '<div class="teaser__title">TITLE</div>' in output
 
 
@@ -787,7 +854,7 @@ def test_macro_teaser_supertitle_title_should_produce_alternative_markup(
         output += line.strip()
 
     assert '<a href="ID">' not in output
-    assert '<div class="CLASS__kicker">SUPATITLE</div>' in output
+    assert '<div class="CLASS__supertitle">SUPATITLE</div>' in output
     assert '<div class="CLASS__title">TITLE</div>' in output
 
 

@@ -1,4 +1,5 @@
 from datetime import date
+from pyramid.decorator import reify
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
 from zeit.frontend.reach import LinkReach
@@ -49,37 +50,37 @@ class Article(zeit.frontend.view.Content):
                                       request=self.request)
         return {}
 
-    @property
+    @reify
     def template(self):
         template = IArticleTemplateSettings(self.context).template
         return template if template is not None else "default"
 
-    @property
+    @reify
     def header_layout(self):
         layout = IArticleTemplateSettings(self.context).header_layout
         return layout if layout is not None else "default"
 
-    @property
+    @reify
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
 
-    @property
+    @reify
     def current_page(self):
         return self.pages[0]
 
-    @property
+    @reify
     def next_title(self):
         try:
             return self.pages[self.page_nr].teaser
         except (IndexError):
             return ''
 
-    @property
+    @reify
     def article_url(self):
         path = '/'.join(self.request.traversed)
         return self.request.route_url('home') + path
 
-    @property
+    @reify
     def pages_urls(self):
         _pages_urls = []
         for number in range(0, len(self.pages)):
@@ -89,20 +90,20 @@ class Article(zeit.frontend.view.Content):
             _pages_urls.append(url)
         return _pages_urls
 
-    @property
+    @reify
     def next_page_url(self):
         _actual_index = self.page_nr - 1
         total = len(self.pages)
         return self.pages_urls[_actual_index + 1] \
             if _actual_index + 1 < total else None
 
-    @property
+    @reify
     def prev_page_url(self):
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index - 1] \
             if actual_index - 1 >= 0 else None
 
-    @property
+    @reify
     def pagination(self):
         return {
             'current': self.page_nr,
@@ -114,7 +115,7 @@ class Article(zeit.frontend.view.Content):
             'prev_page_url': self.prev_page_url
         }
 
-    @property
+    @reify
     def _select_first_body_obj(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
@@ -125,31 +126,31 @@ class Article(zeit.frontend.view.Content):
         except OSError:
             log.debug("Object does not exist.")
 
-    @property
+    @reify
     def header_img(self):
         obj = self._select_first_body_obj
         if IImage in providedBy(obj):
             return zeit.frontend.block.HeaderImageStandard(obj)
 
-    @property
+    @reify
     def header_video(self):
         obj = self._select_first_body_obj
         if IVideo in providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
 
-    @property
+    @reify
     def first_img(self):
         obj = self._select_first_body_obj
         if IImage in providedBy(obj):
             return self._create_obj(zeit.frontend.block.Image, obj)
 
-    @property
+    @reify
     def header_elem(self):
         if self.header_video is not None:
             return self.header_video
         return self.header_img
 
-    @property
+    @reify
     def sharing_img(self):
         # Hier schlaegt das Bildergruppenproblem fuer das Aufmacherbild durch
         if self.header_img is not None:
@@ -176,7 +177,7 @@ class Article(zeit.frontend.view.Content):
             != 'longform' else '',
         }
 
-    @property
+    @reify
     def authors(self):
         authorList = []
         try:
@@ -201,7 +202,14 @@ class Article(zeit.frontend.view.Content):
         except (IndexError, OSError):
             return None
 
-    @property
+    @reify
+    def authorsList(self):
+        if self.authors:
+            return ';'.join([rt['name'] for rt in self.authors])
+        else:
+            return ''
+
+    @reify
     def twitter_card_type(self):
         if IArticleTemplateSettings(self.context).template == 'longform':
             return 'summary_large_image'
@@ -210,7 +218,7 @@ class Article(zeit.frontend.view.Content):
         else:
             return 'summary'
 
-    @property
+    @reify
     def genre(self):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
@@ -225,7 +233,7 @@ class Article(zeit.frontend.view.Content):
         else:
             return None
 
-    @property
+    @reify
     def source(self):
         # TODO: find sth more elegant (as)
         # 1. dont know why source stays empty if default value wasnt changed
@@ -244,11 +252,11 @@ class Article(zeit.frontend.view.Content):
             source = self.context.product_text
         return self.context.copyrights or source
 
-    @property
+    @reify
     def location(self):
         return None  # XXX not implemented in zeit.content.article yet
 
-    @property
+    @reify
     def nextread(self):
         nextread = INextreadTeaserBlock(self.context)
         if not len(nextread.teasers):
@@ -259,7 +267,14 @@ class Article(zeit.frontend.view.Content):
         return get_thread(unique_id=self.context.uniqueId,
                           request=self.request)
 
-    @property
+    @reify
+    def serie(self):
+        if self.context.serie:
+            return self.context.serie.lower()
+        else:
+            return ''
+
+    @reify
     def linkreach(self):
         if self._linkreach is None:
 
@@ -287,12 +302,12 @@ class Article(zeit.frontend.view.Content):
 
         return self._linkreach
 
-    @property
+    @reify
     def tracking_type(self):
         if type(self.context).__name__.lower() == 'article':
             return 'Artikel'
 
-    @property
+    @reify
     def text_length(self):
         return self.context.textLength
 
@@ -314,7 +329,7 @@ class ArticlePage(Article):
             raise pyramid.httpexceptions.HTTPNotFound()
         return {}
 
-    @property
+    @reify
     def page_nr(self):
         try:
             n = int(self.request.path_info.split("/")[-1][6:])
@@ -324,11 +339,11 @@ class ArticlePage(Article):
         except (IndexError, ValueError):
             raise pyramid.httpexceptions.HTTPNotFound()
 
-    @property
+    @reify
     def current_page(self):
         return zeit.frontend.interfaces.IPages(self.context)[self.page_nr - 1]
 
-    @property
+    @reify
     def next_title(self):
         try:
             page = zeit.frontend.interfaces.IPages(self.context)[self.page_nr]
@@ -345,7 +360,7 @@ class LongformArticle(Article):
     main_nav_full_width = True
     is_longform = True
 
-    @property
+    @reify
     def header_img(self):
         obj = self._select_first_body_obj
         if IImage in providedBy(obj):
@@ -369,7 +384,7 @@ class ColumnArticle(Article):
              renderer='templates/teaser.html')
 class Teaser(Article):
 
-    @property
+    @reify
     def teaser_text(self):
         """docstring for teaser"""
         return self.context.teaser

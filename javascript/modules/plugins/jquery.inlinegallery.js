@@ -29,10 +29,10 @@
      * @param  {object} defaults    configuration object, overwriting presetted options
      * @return {object} jQuery-Object for chaining
      */
-    $.fn.inlinegallery = function( defaults ) {
+    $.fn.inlinegallery = function(defaults) {
 
         var options = $.extend({
-            onSlideAfter: function(){
+            onSlideAfter: function() {
                 // integrate tracking
                 if ('clickCount' in window) {
                     window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
@@ -41,142 +41,142 @@
             },
             slideSelector: '.figure-full-width',
             easing: 'ease-in-out',
-            pagerType: "short",
-            nextText: "Zum nächsten Bild",
-            prevText: "Zum vorigen Bild",
+            pagerType: 'short',
+            nextText: 'Zum nächsten Bild',
+            prevText: 'Zum vorigen Bild',
             infiniteLoop: true,
             hideControlOnEnd: false,
             adaptiveHeight: true
         }, defaults);
 
-        return this.each(function(){
-            var slider = $( this ).bxSlider( options ),
-                ffw = $('<a class="bx-overlay-next icon-pfeil-rechts" href="">Ein Bild vor</a>'),
-                rwd = $('<a class="bx-overlay-prev icon-pfeil-links" href="">Ein Bild zurück</a>');
+        // check if any part of the element is inside viewport
+        var isElementInViewport = function (el) {
 
-            /* additional buttons on image */
-            $(this).parent().parent().append(ffw);
-            $(this).parent().parent().append(rwd);
-            $(ffw).on("click", function(evt){
-                evt.preventDefault();
-                slider.goToNextSlide();
-            });
-            $(rwd).on("click", function(evt){
-                evt.preventDefault();
-                slider.goToPrevSlide();
-            });
-
-            /* add icons to existing gallery buttons */
-            $(".bx-next").addClass('icon-pfeil-rechts');
-            $(".bx-prev").addClass('icon-pfeil-links');
-
-            $(".scaled-image", this).mouseenter(function() {
-                $(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
-            }).mouseleave(function() {
-                $(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
-            });
-
-            $(this).on("scaling_ready", function(e) {
-                slider.redrawSlider();
-                figInMediaRes();
-                figCaptionSizing( $(e.target) );
-                /* add hover-class for button display */
-                $(".scaled-image", this).mouseenter(function() {
-                    $(this).parents('.bx-wrapper').addClass("bx-wrapper-hovered");
-                }).mouseleave(function() {
-                    $(this).parents('.bx-wrapper').removeClass("bx-wrapper-hovered");
-                });
-            });
-
-            var mqMobile = window.matchMedia( "(max-width: 576px)" );
-            var figures = $('.gallery .inline-gallery .figure-full-width');
-
-            var originalCaptionTexts = [];
-            figures.each(function( index ) {
-                originalCaptionTexts.push($( this ).find('.figure__caption__text').text());
-            });
-
-            function addPagerToCaption(){
-                figures.each(function( index ) {
-                    var captionText = $( this ).find('.figure__caption__text').text();
-                    $( this ).find('.figure__caption__text').html(index + '/' + (figures.length-2) + " " + captionText );
-                });
+            // special bonus for those using jQuery
+            if (el instanceof jQuery) {
+                el = el[0];
             }
 
-            function removePagerFromCaption(){
-                figures.each(function( index ) {
-                    $( this ).find('.figure__caption__text').html( originalCaptionTexts[index] );
-                });
+            if (!el.getBoundingClientRect) {
+                return false;
             }
+
+            var rect = el.getBoundingClientRect(),
+                windowWidth  = window.innerWidth  || document.documentElement.clientWidth,  /* or $(window).width()  */
+                windowHeight = window.innerHeight || document.documentElement.clientHeight; /* or $(window).height() */
+
+            return !(
+                rect.top > windowHeight ||
+                rect.bottom < 0 ||
+                rect.left > windowWidth ||
+                rect.right < 0
+            );
+        };
+
+        return this.each(function() {
+            var gallery = $(this),
+                galleryWidth = gallery.width(),
+                figures = gallery.find('.figure-full-width'),
+                figcaptions = gallery.find('.figure__caption'),
+                backButton = $('<div class="bx-zone-prev"><a class="bx-overlay-prev icon-pfeil-links">Ein Bild zurück</a></div>'),
+                nextButton = $('<div class="bx-zone-next"><a class="bx-overlay-next icon-pfeil-rechts">Ein Bild vor</a></div>'),
+                buttons = backButton.add(nextButton),
+                DOM_VK_LEFT = 37,
+                DOM_VK_RIGHT = 39,
+                slider = {},
+                sliderViewport;
+
+            // enable keyboard navigation
+            var handleKeydown = function(e) {
+                // do nothing if there is another key involved
+                if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return; }
+
+                switch (e.keyCode) {
+                    case DOM_VK_RIGHT:
+                        if (isElementInViewport(sliderViewport)) {
+                            slider.goToNextSlide();
+                        }
+                        break;
+                    case DOM_VK_LEFT:
+                        if (isElementInViewport(sliderViewport)) {
+                            slider.goToPrevSlide();
+                        }
+                        break;
+                }
+            };
+
+            $(window).on('keydown', handleKeydown);
+
+            gallery.on('scaling_ready', function(e) {
+                figCaptionSize($(e.target));
+                // slider.redrawSlider();
+            });
+
+            var hideOverlays = function() {
+                buttons.hide();
+                figcaptions.hide();
+                figures.on('click', function() {
+                    figcaptions.toggle();
+                    buttons.toggle();
+                });
+            };
+
+            var mqMobile = window.matchMedia('(max-width: 576px)');
 
             if (mqMobile.matches) {
-                addPagerToCaption();
-                figures.on("click", function(){
-                    figures.find('.figure__caption').toggle();
-                    $('.bx-overlay-next, .bx-overlay-prev').toggle();
-                });
+                hideOverlays();
             }
 
-            mqMobile.addListener(function(){
+            mqMobile.addListener(function() {
                 if (mqMobile.matches) {
-                    addPagerToCaption();
-                    $('.bx-overlay-next, .bx-overlay-prev').hide();
-                    figures.find('.figure__caption').hide();
-                    figures.on("click", function(){
-                        figures.find('.figure__caption').toggle();
-                        $('.bx-overlay-next, .bx-overlay-prev').toggle();
-                    });
+                    hideOverlays();
                 } else {
-                    removePagerFromCaption();
-                    figures.find('.figure__caption').show();
-                    $('.bx-overlay-next, .bx-overlay-prev').show();
-                    figures.unbind();
+                    figcaptions.show();
+                    buttons.show();
+                    figures.off('click');
                 }
             });
 
-            var figInMediaRes = function() {
-                //for portrait mode images, set max height
-                var figMedia = $('.inline-gallery .figure-full-width .figure__media');
-                figMedia.each(function( index ) {
-                    var imageWidth = $( this ).width();
-                    var imageHeight = $( this ).height();
-                    if(imageWidth <= imageHeight) {
-                        $( this ).css('max-width', '100%');
-                        $( this ).css('max-height', '620px');
-                        $( this ).css('width', 'auto');
-                        $( this ).css('height', 'auto');
-                        $( this ).css("margin", '0 auto');
-                    }
+            var figCaptionSize = function(image, figcaption) {
+                var caption = figcaption || image.closest('figure').find('figcaption'),
+                    imageWidth = image.width();
+
+                if (caption.length && imageWidth > 24 && imageWidth < galleryWidth) {
+                    caption.css({
+                        'max-width': imageWidth + 'px',
+                        'padding-right': 0
+                    });
+                }
+            };
+
+            var figCaptionSizing = function() {
+                figcaptions.each(function() {
+                    var caption = $(this),
+                        image = caption.prev().find('.figure__media');
+
+                    figCaptionSize(image, caption);
                 });
             };
 
-            figInMediaRes();
+            options.onSliderLoad = function() {
+                figCaptionSizing();
 
-            var figCaptionSizing = function( image ) {
-                var figCaptions = $('.inline-gallery .figure-full-width .figure__caption');
-                figCaptions.each(function( index ) {
-                    var previous = $( this ).prev().find('.figure__media'),
-                    media = image || previous,
-                    imageWidth = media.width(),
-                    imageHeight = media.height();
-                    if( $(this).parents('.gallery').size() > 0) {
-                        $( this ).width(imageWidth);
-                        $( this ).css("max-width", imageWidth);
-                        if(imageWidth > 520) {
-                            $( this ).css('padding-right', '30%');
-                        }
-                    } else {
-                        if( previous.attr('src') === media.attr('src') ) {
-                            if(imageWidth <= imageHeight) {
-                                $( this ).css("max-width", imageWidth);
-                            }
-                        }
-                    }
-                });
+                sliderViewport = gallery.parent();
+
+                /* additional buttons on image */
+                nextButton.insertAfter(gallery).on('click', function() { slider.goToNextSlide(); });
+                backButton.insertAfter(gallery).on('click', function() { slider.goToPrevSlide(); });
+
+                /* add icons to existing gallery buttons */
+                $('.bx-next').addClass('icon-pfeil-rechts');
+                $('.bx-prev').addClass('icon-pfeil-links');
             };
 
-            figCaptionSizing();
-            slider.redrawSlider();
+            options.onSliderResize = function() {
+                galleryWidth = gallery.width();
+            };
+
+            slider = gallery.bxSlider(options);
         });
     };
 })(jQuery);
