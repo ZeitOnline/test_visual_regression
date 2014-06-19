@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from zeit.frontend import view_centerpage
 from zeit.frontend.template import create_image_url
 from zeit.frontend.template import default_image_url
 from zeit.frontend.template import get_teaser_image
 from zeit.frontend.template import get_teaser_template
 from zope.component import getMultiAdapter
 from zeit.frontend.test import Browser
+import zeit.frontend.view_centerpage
 import mock
 import pyramid.threadlocal
 import pytest
@@ -77,20 +77,15 @@ def test_centerpage_should_have_page_meta_keywords(testserver):
 
 
 def test_centerpage_should_have_page_meta_robots_information(
-        selenium_driver, testserver):
-    driver = selenium_driver
+        browser, testserver):
     # SEO robots information is given
-    driver.get('%s/centerpage/lebensart' % testserver.url)
-    meta_robots_tag = driver.find_element_by_xpath(
-        '//meta[@name="robots"]')
-    teststring = u'my, personal, seo, robots, information'
-    assert meta_robots_tag.get_attribute("content").strip() == teststring
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
+    assert 'my, personal, seo, robots, information' in meta_robots
     # No SEO robots information is given
-    driver.get('%s/zeit-magazin/index' % testserver.url)
-    meta_robots_tag = driver.find_element_by_xpath(
-        '//meta[@name="robots"]')
-    teststring = u'index,follow,noodp,noydir,noarchive'
-    assert meta_robots_tag.get_attribute("content").strip() == teststring
+    browser = Browser('%s/zeit-magazin/index' % testserver.url)
+    meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
+    assert 'index,follow,noodp,noydir,noarchive' in meta_robots
 
 
 def test_get_teaser_template_should_produce_correct_combinations():
@@ -165,6 +160,13 @@ def test_cp_has_lead_area(testserver):
 def test_cp_has_informatives_area(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
     assert '<div class="cp__lead__informatives__wrap">' in browser.contents
+
+
+def test_cp_lead_areas_are_available(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/lebensart')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.area_lead)
 
 
 def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
@@ -677,49 +679,49 @@ def test_centerpages_produces_no_error(testserver):
 def test_cp_lead_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
     lead1_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#'\
         'lead/id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
     lead1_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-eae7c703-98e9-491a-a30d-c1c5cebd2371'
-    assert lead1_first_block == cp_view.area_lead1[0].uniqueId
-    assert lead1_last_block == cp_view.area_lead1[3].uniqueId
+    assert lead1_first_block == cp_view.area_lead_1[0].uniqueId
+    assert lead1_last_block == cp_view.area_lead_1[3].uniqueId
 
 
 def test_cp_lead_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
     lead2_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-cc6bbea3-1337-42f5-8fe1-01c9c4476600'
     lead2_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
-    assert lead2_first_block == cp_view.area_lead2[0].uniqueId
-    assert lead2_last_block == cp_view.area_lead2[1].uniqueId
+    assert lead2_first_block == cp_view.area_lead_2[0].uniqueId
+    assert lead2_last_block == cp_view.area_lead_2[1].uniqueId
 
 
 def test_cp_lead_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
     lead_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo#lead/'\
         'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
     lead_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo#lead/'\
         'id-48962e5e-cdbe-4148-a12c-17724cd0e96b'
-    assert lead_first_block == cp_view.area_lead1[0].uniqueId
-    assert lead_last_block == cp_view.area_lead1[3].uniqueId
+    assert lead_first_block == cp_view.area_lead_1[0].uniqueId
+    assert lead_last_block == cp_view.area_lead_1[3].uniqueId
 
 
 def test_cp_informatives_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives1_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
@@ -727,14 +729,14 @@ def test_cp_informatives_should_have_correct_first_block(application):
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-bff224c9-088e-40d4-987d-9d986de804bd'
 
-    assert informatives1_first_block == cp_view.area_informatives1[0].uniqueId
-    assert informatives1_last_block == cp_view.area_informatives1[1].uniqueId
+    assert informatives1_first_block == cp_view.area_informatives_1[0].uniqueId
+    assert informatives1_last_block == cp_view.area_informatives_1[1].uniqueId
 
 
 def test_cp_informatives_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives2_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
@@ -742,14 +744,14 @@ def test_cp_informatives_should_have_correct_second_block(application):
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
 
-    assert informatives2_first_block == cp_view.area_informatives2[0].uniqueId
-    assert informatives2_last_block == cp_view.area_informatives2[1].uniqueId
+    assert informatives2_first_block == cp_view.area_informatives_2[0].uniqueId
+    assert informatives2_last_block == cp_view.area_informatives_2[1].uniqueId
 
 
 def test_cp_informatives_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
@@ -757,8 +759,8 @@ def test_cp_informatives_should_have_no_blocks(application):
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
         '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
 
-    assert informatives_first_block == cp_view.area_informatives1[0].uniqueId
-    assert informatives_last_block == cp_view.area_informatives1[2].uniqueId
+    assert informatives_first_block == cp_view.area_informatives_1[0].uniqueId
+    assert informatives_last_block == cp_view.area_informatives_1[2].uniqueId
 
 
 def test_cp_teaser_should_have_comment_count(testserver):

@@ -462,7 +462,7 @@
                 </div>
                 <div>
                     <ul>
-                        <!-- <li>Bildrechte</li> -->
+                        <li><a href="#" onclick="alert('open');">Bildrechte</a></li>
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
@@ -473,6 +473,34 @@
             </div>
         </div>
     </footer>
+{%- endmacro %}
+
+{% macro copyrights(cr_list) -%}
+    <div class="copyrights">
+        <span class="copyrights__close copyrights__close--cross">
+            <a href="#" onclick="alert('close');">X</a>
+        </span>
+        <span class="copyrights__title">
+            Bildrechte auf dieser Seite
+        </span>
+        <ol class="copyrights__wrapper">
+            {%- for cr in cr_list -%}
+            <li class="copyrights__entry">
+                <img class="copyrights__entry__image" src="{{ cr.image }}" height="100">
+                <span class="copyrights__entry__label">
+                    {%- if cr.link -%}
+                        <a href="{{ cr.link }}">{{ cr.label }}</a>
+                    {%- else -%}
+                        {{ cr.label }}
+                    {%- endif -%}
+                </span>
+            </li>
+            {%- endfor -%}
+        </ol>
+        <span class="copyrights__close copyrights__close--label">
+            <a href="#" onclick="alert('close');">Bereich schließen</a>
+        </span>
+    </div>
 {%- endmacro %}
 
 {% macro adplace(banner, banner_channel) -%}
