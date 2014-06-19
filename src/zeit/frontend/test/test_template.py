@@ -91,6 +91,19 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
         'katzencontent/katzencontent-zmo-large.jpg')
 
 
+def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/article_video_asset_2'
+    )
+    unique_id = \
+        'http://xml.zeit.de/moep/moepmoep/moep'
+    image = zeit.frontend.template.get_teaser_image(
+        teaser_block, teaser, unique_id=unique_id)
+    assert image is None
+
+
 def test_get_teaser_image_should_utilize_fallback_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
