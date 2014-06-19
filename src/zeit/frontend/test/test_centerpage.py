@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
+import re
+
+import mock
+import pyramid.threadlocal
+import pytest
+from zope.component import getMultiAdapter
+
+import zeit.cms.interfaces
+import zeit.content.gallery.gallery
+
 from zeit.frontend.template import create_image_url
 from zeit.frontend.template import default_image_url
 from zeit.frontend.template import get_teaser_image
 from zeit.frontend.template import get_teaser_template
-from zope.component import getMultiAdapter
 from zeit.frontend.test import Browser
+
 import zeit.frontend.view_centerpage
-import mock
-import pyramid.threadlocal
-import pytest
-import re
-import zeit.cms.interfaces
-import zeit.content.gallery.gallery
 
 
 @pytest.fixture

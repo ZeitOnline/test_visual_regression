@@ -1,9 +1,11 @@
 from grokcore.component import adapter, implementer
-import zeit.content.image.interfaces
+
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+
 import zeit.frontend.block
 import zeit.frontend.interfaces
 
