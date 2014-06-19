@@ -32,6 +32,9 @@ class LinkReach(object):
 
     def fetch_service(self, service, limit, section='zeit-magazin'):
         """Compile a list of popular articles for a specific service."""
+        if service == 'comments':
+            return self.fetch_comments(limit, section=section)
+
         if section not in self.sections:
             raise UnavailableSectionException('No section named: ' + section)
 
