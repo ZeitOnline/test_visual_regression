@@ -618,12 +618,12 @@ def test_caching_headers_should_be_set(testserver):
     assert browser.headers['cache-control'] == 'max-age=300'
 
 
-def test_iqd_mobile_settings_in_are_set(testserver):
-    # tested just for article here, all possible combinations
+def test_iqd_mobile_settings_are_filled(testserver):
+    # tested just as examlpe for an article here, all possible combinations
     # are tested in test_banner.py integration tests
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     view = view_article.Article(article, mock.Mock())
-    assert view.iqd_mobile_settings.get('top') = 445612
-    assert view.iqd_mobile_settings.get('middle') = 445612
-    assert view.iqd_mobile_settings.get('bottom') = 445612
+    assert view.iqd_mobile_settings.get('top') == '445612'
+    assert view.iqd_mobile_settings.get('middle') == '445612'
+    assert view.iqd_mobile_settings.get('bottom') == '445612'
 
