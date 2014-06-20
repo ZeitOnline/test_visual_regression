@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+from lxml import etree
 from os.path import abspath, dirname, join
 from pyramid.testing import setUp, tearDown, DummyRequest
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
+from zeit.frontend.comments import path_of_article, _place_answers_under_parent
 import gocept.httpserverlayer.wsgi
 import pkg_resources
-import zeit.frontend.application
 import pytest
+import zeit.frontend.application
 
 
 def test_asset_path(*parts):
@@ -195,6 +197,17 @@ def browser(application):
     """ Returns an instance of `webtest.TestApp`. """
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
+
+
+@pytest.fixture
+def monkeyagatho(monkeypatch):
+    def collection_get(self, unique_id):
+        response = etree.parse(
+            '%s%s' % (self.entry_point, path_of_article(unique_id)))
+        return _place_answers_under_parent(response)
+
+    monkeypatch.setattr(
+        zeit.frontend.comments.Agatho, 'collection_get', collection_get)
 
 
 class TestApp(TestAppBase):
