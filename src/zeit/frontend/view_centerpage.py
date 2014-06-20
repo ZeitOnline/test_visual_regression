@@ -1,4 +1,5 @@
 from pyramid.view import view_config
+from pyramid.decorator import reify
 from zeit.frontend.reach import LinkReach
 import comments
 import logging
@@ -44,17 +45,28 @@ class Centerpage(zeit.frontend.view.Base):
             log.error('no teaserbar present')
             self._teaserbar = None
 
-    @property
+    @reify
     def monothematic_block(self):
         if self._monothematic_block is not None:
             return self._monothematic_block
 
-    @property
+    @reify
     def teaserbar(self):
         if self._teaserbar is not None:
             return self._teaserbar
 
+<<<<<<< HEAD
     @property
+=======
+    @reify
+    def is_hp(self):
+        if self.request.path == '/' + self.request.registry.settings.hp:
+            return True
+        else:
+            return False
+
+    @reify
+>>>>>>> master
     def metaRobots(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
         meta_robots = 'index,follow,noodp,noydir,noarchive'
@@ -65,7 +77,7 @@ class Centerpage(zeit.frontend.view.Base):
             log.error('no meta_robots present')
         return meta_robots
 
-    @property
+    @reify
     def area_lead(self):
         teaser_list = self.context['lead'].values()
         for teaser in teaser_list:
@@ -86,7 +98,7 @@ class Centerpage(zeit.frontend.view.Base):
         except KeyError:
             return None
 
-    @property
+    @reify
     def area_lead1(self):
         teaser_list = self.seperator('before', self.area_lead)
         if teaser_list:
@@ -94,16 +106,16 @@ class Centerpage(zeit.frontend.view.Base):
         else:
             return self.area_lead
 
-    @property
+    @reify
     def area_lead2(self):
         return self.seperator('after', self.area_lead)
 
-    @property
+    @reify
     def area_informatives(self):
         teaser_list = self.context['informatives'].values()
         return teaser_list
 
-    @property
+    @reify
     def area_informatives1(self):
         teaser_list = self.seperator('before', self.area_informatives)
         if teaser_list:
@@ -111,7 +123,7 @@ class Centerpage(zeit.frontend.view.Base):
         else:
             return self.area_informatives
 
-    @property
+    @reify
     def area_informatives2(self):
         return self.seperator('after', self.area_informatives)
 
@@ -131,14 +143,14 @@ class Centerpage(zeit.frontend.view.Base):
                 pass
         return False
 
-    @property
+    @reify
     def area_lead_full_teaser(self):
         for teaser_block in self.context['lead'].values():
             if (teaser_block.layout.id == 'zmo-leader-fullwidth' or
                     teaser_block.layout.id == 'zmo-leader-fullwidth-light'):
                 return teaser_block
 
-    @property
+    @reify
     def area_buzz(self):
         stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
@@ -152,7 +164,7 @@ class Centerpage(zeit.frontend.view.Base):
             log.error('Cant reach linkreach')
         return buzz
 
-    @property
+    @reify
     def tracking_type(self):
         if type(self.context).__name__.lower() == 'centerpage':
             return 'Centerpage'

@@ -549,7 +549,7 @@
         <div class="ad__{{banner.name}}__inner">
             <script type="text/javascript">
                 if( window.zmo_actual_load_width > {{ banner.min_width|default(0) }} ) {
-                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};dcopt={{banner.dcopt}};tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};{% if banner.dcopt -%}dcopt={{banner.dcopt}};{%- endif %}tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
             <noscript>
@@ -610,12 +610,17 @@
 
     {% if image %}
         <!--[if gt IE 8]><!-->
-            <noscript data-ratio="{{image.ratio}}">
+            <noscript>
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
+<<<<<<< HEAD
         {% endif %} 
                 <img {% if alt %}alt="{{alt}}" {% endif %}{% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
+=======
+        {% endif %}
+                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
+>>>>>>> master
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}

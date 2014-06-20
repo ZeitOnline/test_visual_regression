@@ -6,17 +6,35 @@ Change log for zeit.frontend
 
 - ZMO-798: add mobile ad-id xml and integrate new banner codes for mobile ads
 
-- ZMO-808: enable responsive image for gt IE8
+- ZMO-690 Add clickable overlay for galleries
+  + Add keyboard navigation for galleries
+  + Update bxSlider
 
-- hotfix: invalid js in ivw caller script
+- hotfix: Invalid js in ivw caller script
 
-- ZMO-812: make gallery upright teaser fully responsive, add is-pixelperfect
+- hotfix: Fix broken test in master
+
+- hotfix: Verify nextread layout ids
+
+- ZMO-808: Enable responsive image for gt IE8
+
+- ZMO-812: Make gallery upright teaser fully responsive, add is-pixelperfect
   functionality and standarsize css
 
-- ZMO-805: round images size values, just in case a browser
+- ZMO-805: Round images size values, just in case a browser
   (like chrome canary) delivers floats
 
-- ZMO-765: modify webtrekk data and adapt testing
+- ZMO-765: Modify webtrekk data and adapt testing
+
+- ZMO-820: Add additional slotsize for adplace
+
+- ZMO-819: Strip obsolete dcopt from banner.xml
+
+- ZMO-822: Add ftg_iq.min.js
+
+- Rename test images with strange unicode characters
+
+- Improve view performance by caching properties
 
 
 0.7.1 (2014-06-13)

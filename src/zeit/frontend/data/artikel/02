@@ -49,7 +49,7 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-12T07:21:39.625053+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-02T06:00:00+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-12T07:22:41.634012+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">maximal</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">moep</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">02.10.2013</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://apache.org/dav/props/" name="executable">F</attribute>
