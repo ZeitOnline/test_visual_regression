@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
+- ZMO-802 Make slider galleries behave static by request
+
 - ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
