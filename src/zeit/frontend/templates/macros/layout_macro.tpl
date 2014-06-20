@@ -1,4 +1,3 @@
-
 {% macro click_tracking( banner_channel ) -%}
 <!-- click tracking -->
         <script type="text/javascript">

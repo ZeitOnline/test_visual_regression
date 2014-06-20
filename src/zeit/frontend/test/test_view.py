@@ -277,16 +277,16 @@ def test_artikel02_has_lebensart_ressort(testserver):
     assert article_view.ressort == 'lebensart'
 
 
-def test_artikel02_has_mode_sub_ressort(testserver):
+def test_artikel02_has_leben_sub_ressort(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, mock.Mock())
-    assert article_view.sub_ressort == 'mode'
+    assert article_view.sub_ressort == 'leben'
 
 
 def test_artikel02_has_correct_banner_channel(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = view_article.Article(context, mock.Mock())
-    assert article_view.banner_channel == 'zeitmz/mode/article'
+    assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
 def test_artikel05_has_rankedTagsList(testserver):
@@ -580,7 +580,6 @@ def test_pagination_prev_page_url_on_first_page_is_none(testserver):
     view = view_article.Article(article, mock.Mock())
     view.request.traversed = ('artikel', '03')
     view.request.route_url.return_value = '/'
-
     assert view.pagination['prev_page_url'] is None
 
 

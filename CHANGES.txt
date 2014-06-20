@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
+- ZMO-798: add mobile ad-id xml and integrate new banner codes for mobile ads
+
 - ZMO-808: enable responsive image for gt IE8
 
 - hotfix: invalid js in ivw caller script

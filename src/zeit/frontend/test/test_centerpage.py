@@ -66,7 +66,8 @@ def test_centerpage_should_have_seo_description(testserver):
 def test_centerpage_should_have_default_keywords(testserver):
     # Default means ressort and sub ressort respectively
     browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="keywords" content="Lebensart, Leben">' \
+    print browser.contents
+    assert '<meta name="keywords" content="Lebensart, mode-design">' \
         in browser.contents
 
 
