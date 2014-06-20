@@ -110,10 +110,13 @@ class Base(object):
 
     @property
     def is_hp(self):
-        if self.request.path == '/' + self.request.registry.settings.hp:
-            return True
-        else:
-            return False
+        try:
+            if self.request.path == '/' + self.request.registry.settings.hp:
+                return True
+            else:
+                return False
+        except:
+            pass
 
     @property
     def iqd_mobile_settings(self):

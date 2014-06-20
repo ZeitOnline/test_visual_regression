@@ -163,3 +163,11 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_leben(
     browser = Browser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     assert "sasmobile('32375/445624', 13500, sas_target);" in browser.contents
+
+
+#test for hp
+def test_banner_mobile_should_request_with_correct_data_at_hp(
+        testserver):
+    browser = Browser('%s/zeit-magazin/index' % testserver.url)
+    assert "sasmobile('32375/445608', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445608', 13501, sas_target);" in browser.contents
