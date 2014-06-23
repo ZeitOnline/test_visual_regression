@@ -14,7 +14,6 @@ import zeit.content.image.interfaces
 import zeit.frontend.article
 import zope.component
 import urllib2
-import re
 
 log = logging.getLogger(__name__)
 
