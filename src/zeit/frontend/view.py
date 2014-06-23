@@ -14,6 +14,7 @@ import zeit.content.image.interfaces
 import zeit.frontend.article
 import zope.component
 import urllib2
+import re
 
 log = logging.getLogger(__name__)
 
@@ -25,6 +26,17 @@ class Base(object):
         self.context = context
         self.request = request
         self.request.response.cache_expires(300)
+
+    def __iter__(self):
+        prop_list = {}
+        for p in dir(self):
+            val = getattr(self, p)
+            if p.find('__') == -1 and isinstance(val, str):
+                    try:
+                        prop_list[p] = ''
+                    except:
+                        pass
+        return iter(prop_list)
 
     def __call__(self):
         return {}

@@ -617,3 +617,70 @@ def test_cp_teaser_with_comments_should_get_comments_count(testserver):
 def test_caching_headers_should_be_set(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
     assert browser.headers['cache-control'] == 'max-age=300'
+
+
+def test_article_should_have_correct_js_view(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    bc = "window.ZMO.view['banner_channel'] = 'zeitmz/modeunddesign/article';"
+    sdfs = "window.ZMO.view['show_date_format_seo'] = 'short';"
+    hd = "window.ZMO.view['header_layout'] = 'default';"
+    sdf = "window.ZMO.view['show_date_format'] = 'long';"
+    r = "window.ZMO.view['ressort'] = 'zeit-magazin';"
+    sr = "window.ZMO.view['sub_ressort'] = 'mode-design';"
+    dfrm = "window.ZMO.view['date_first_released_meta'] = "\
+        "'2013-09-26T06:00:00+00:00';"
+    tct = "window.ZMO.view['twitter_card_type'] = 'summary';"
+    s = "window.ZMO.view['serie'] = 'testserie';"
+    tt = "window.ZMO.view['tracking_type'] = 'Artikel';"
+    t = "window.ZMO.view['template'] = 'default';"
+    ty = "window.ZMO.view['type'] = 'article';"
+    nt = "window.ZMO.view['next_title'] = '';"
+    assert bc in browser.contents
+    assert sdfs in browser.contents
+    assert hd in browser.contents
+    assert sdf in browser.contents
+    assert r in browser.contents
+    assert sr in browser.contents
+    assert dfrm in browser.contents
+    assert tct in browser.contents
+    assert s in browser.contents
+    assert tt in browser.contents
+    assert t in browser.contents
+    assert ty in browser.contents
+    assert nt in browser.contents
+
+
+def test_centerpage_should_have_correct_js_view(testserver):
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    bc = "window.ZMO.view['banner_channel'] = 'zeitmz/leben/centerpage';"
+    r = "window.ZMO.view['ressort'] = 'lebensart';"
+    sr = "window.ZMO.view['sub_ressort'] = 'leben';"
+    tt = "window.ZMO.view['tracking_type'] = 'Centerpage';"
+    ty = "window.ZMO.view['type'] = 'centerpage';"
+    assert bc in browser.contents
+    assert r in browser.contents
+    assert sr in browser.contents
+    assert tt in browser.contents
+    assert ty in browser.contents
+
+
+def test_gallery_should_have_correct_js_view(testserver):
+    browser = Browser(
+        '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    bc = "window.ZMO.view['banner_channel'] = 'zeitmz/leben/article';"
+    sdfs = "window.ZMO.view['show_date_format_seo'] = 'long';"
+    rtl = "window.ZMO.view['rankedTagsList'] = 'zeit-magazin;leben';"
+    sdf = "window.ZMO.view['show_date_format'] = 'long';"
+    dfrm = "window.ZMO.view['date_first_released_meta'] = "\
+        "'2014-04-02T15:30:07.109680+00:00';"
+    sr = "window.ZMO.view['sub_ressort'] = 'leben';"
+    r = "window.ZMO.view['ressort'] = 'zeit-magazin';"
+    ty = "window.ZMO.view['type'] = 'gallery';"
+    assert bc in browser.contents
+    assert sdfs in browser.contents
+    assert rtl in browser.contents
+    assert sdf in browser.contents
+    assert dfrm in browser.contents
+    assert r in browser.contents
+    assert sr in browser.contents
+    assert ty in browser.contents

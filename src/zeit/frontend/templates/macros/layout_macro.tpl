@@ -1,4 +1,3 @@
-
 {% macro click_tracking( banner_channel ) -%}
 <!-- click tracking -->
         <script type="text/javascript">
@@ -551,4 +550,17 @@
             </noscript>
         <!--<![endif]-->
     {% endif %}
+{% endmacro %}
+
+{% macro build_js_view( view, request ) %}
+    <script>
+        window.ZMO = window.ZMO || {};
+        window.ZMO.home = "{{request.asset_url('/')}}";
+        window.ZMO.view = {};
+        try{
+            {% for key in view %}
+                window.ZMO.view['{{key}}'] = '{{view[key]}}';
+            {% endfor %}
+        }catch(e){}
+    </script>
 {% endmacro %}
