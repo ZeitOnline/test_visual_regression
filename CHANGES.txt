@@ -4,8 +4,6 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
-- integrate macro to transfer string view values to global js object
-
 - ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
@@ -35,6 +33,8 @@ Change log for zeit.frontend
 - Rename test images with strange unicode characters
 
 - Improve view performance by caching properties
+
+- Integrate macro to transfer string view values to global js object
 
 
 0.7.1 (2014-06-13)
