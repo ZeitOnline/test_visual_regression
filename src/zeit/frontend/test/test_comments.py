@@ -45,6 +45,17 @@ def test_get_entire_thread(dummy_request, monkeyagatho):
     assert thread_as_json['comment_count'] == 41
 
 
+def test_paging_should_not_affect_comment_threads(
+        dummy_request, monkeyagatho):
+    from zeit.frontend.comments import get_thread
+    dummy_request.path = 'http://xml.zeit.de/artikel/01/seite-2'
+    dummy_request.traversed = ('artikel', '01')
+    thread_as_json = get_thread(unique_id, dummy_request)
+    assert thread_as_json['comments'][0]['name'] == 'claudiaE'
+    assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
+    assert thread_as_json['comment_count'] == 41
+
+
 def test_dict_with_article_paths_and_comment_counts_should_be_created(
         testserver):
     from zeit.frontend.comments import comments_per_unique_id
