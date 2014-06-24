@@ -27,17 +27,10 @@ class Base(object):
         self.request.response.cache_expires(300)
 
     def __iter__(self):
-        prop_list = {}
-        try:
-            for p in dir(self):
-                if p.find('__') == -1 and isinstance(getattr(self, p), str):
-                        try:
-                            prop_list[p] = ''
-                        except:
-                            pass
-        except:
-            pass
-        return iter(prop_list)
+        for key in dir(self):
+            if '__' not in key and isinstance(
+                    getattr(self, key, None), basestring):
+                yield key
 
     def __call__(self):
         return {}
