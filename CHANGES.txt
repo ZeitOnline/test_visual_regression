@@ -30,6 +30,8 @@ Change log for zeit.frontend
 
 - ZMO-822: Add ftg_iq.min.js
 
+- ZMO-823: Fix comments for article paging
+
 - Rename test images with strange unicode characters
 
 - Improve view performance by caching properties
