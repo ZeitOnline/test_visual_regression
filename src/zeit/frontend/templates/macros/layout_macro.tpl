@@ -558,14 +558,12 @@
         window.ZMO.home = "{{request.asset_url('/')}}";
         window.ZMO.view = {};
 
-        try{
-            {% for key in view %}
-                window.ZMO.view['{{key}}'] = '{{view[key]}}';
-            {% endfor %}
-        }catch(e){}
+        {% for key in view %}
+            window.ZMO.view['{{key}}'] = '{{view[key]}}';
+        {% endfor %}
 
         /* use to get view values savely */
-        window.ZMO.view.get = function(key){
+        window.ZMO.view.hide_undefined = function(key){
             var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
             return( val )
         }
