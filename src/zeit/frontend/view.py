@@ -28,13 +28,15 @@ class Base(object):
 
     def __iter__(self):
         prop_list = {}
-        for p in dir(self):
-            val = getattr(self, p)
-            if p.find('__') == -1 and isinstance(val, str):
-                    try:
-                        prop_list[p] = ''
-                    except:
-                        pass
+        try:
+            for p in dir(self):
+                if p.find('__') == -1 and isinstance(getattr(self, p), str):
+                        try:
+                            prop_list[p] = ''
+                        except:
+                            pass
+        except:
+            pass
         return iter(prop_list)
 
     def __call__(self):

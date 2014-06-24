@@ -557,10 +557,18 @@
         window.ZMO = window.ZMO || {};
         window.ZMO.home = "{{request.asset_url('/')}}";
         window.ZMO.view = {};
+
         try{
             {% for key in view %}
                 window.ZMO.view['{{key}}'] = '{{view[key]}}';
             {% endfor %}
         }catch(e){}
+
+        /* use to get view values savely */
+        window.ZMO.view.get = function(key){
+            var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
+            return( val )
+        }
+        alert(window.ZMO.view.get('banner_channel'));
     </script>
 {% endmacro %}
