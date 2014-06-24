@@ -1,4 +1,3 @@
-import logging
 import urlparse
 
 from pyramid.decorator import reify
@@ -19,11 +18,8 @@ import zeit.frontend.reach
 import zeit.frontend.template
 import zeit.frontend.view
 
-log = logging.getLogger(__name__)
-
 
 def register_copyrights(func):
-    # TODO: Does this decorator stop exception propagation?
     def wrapped(self):
         container = func(self)
         if not container:
@@ -46,10 +42,7 @@ class Centerpage(zeit.frontend.view.Base):
 
     def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
-        stats_path = self.request.registry.settings.node_comment_statistics
-        self._unique_id_comments = \
-            zeit.frontend.comments.comments_per_unique_id(stats_path)
-        return super(Centerpage, self).__call__()
+        return {}
 
     def insert_seperator(self, position, obj):
         teaser_list = obj
@@ -69,7 +62,8 @@ class Centerpage(zeit.frontend.view.Base):
     def teaser_get_commentcount(self, uniqueId):
         try:
             index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = self._unique_id_comments[index]
+            count = zeit.frontend.comments.comments_per_unique_id(
+                self.request.registry.settings.node_comment_statistics)[index]
             if int(count) >= 5:
                 return count
         except KeyError:
@@ -82,13 +76,12 @@ class Centerpage(zeit.frontend.view.Base):
     @reify
     def meta_robots(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
-        meta_robots = 'index,follow,noodp,noydir,noarchive'
         try:
             if seo.meta_robots:
-                meta_robots = seo.meta_robots
+                return seo.meta_robots
         except AttributeError:
-            log.error('no meta_robots present')
-        return meta_robots
+            pass
+        return 'index,follow,noodp,noydir,noarchive'
 
     @reify
     def tracking_type(self):
@@ -145,7 +138,6 @@ class Centerpage(zeit.frontend.view.Base):
                     return teaser_block
             except AttributeError:
                 continue
-        return None
 
     @reify
     def area_informatives(self):
@@ -172,7 +164,6 @@ class Centerpage(zeit.frontend.view.Base):
             try:
                 teaser_list = reach.fetch_service(service, 3)
             except:
-                log.error('Can\'t fetch linkreach service %s.' % service)
                 teaser_list = []
             teaser_dict[service] = teaser_list
         return teaser_dict
