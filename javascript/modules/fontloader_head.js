@@ -14,12 +14,6 @@ window.FontLoader = (function(ZMO) {
                 selector: null,
                 path: ZMO.home + 'css/standalone-fonts/base.css',
                 version: "2.1"
-            },
-            {
-                identifier: 'quotes',
-                selector: '.quote, .quote--loud',
-                path: ZMO.home + 'css/standalone-fonts/quotes.css',
-                version: "2.1"
             }
         ],
         linkTag = document.getElementsByTagName('link')[0],
