@@ -569,6 +569,5 @@
             var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
             return( val )
         }
-        alert(window.ZMO.view.get('banner_channel'));
     </script>
 {% endmacro %}
