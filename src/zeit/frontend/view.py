@@ -26,6 +26,12 @@ class Base(object):
         self.request = request
         self.request.response.cache_expires(300)
 
+    def __iter__(self):
+        for key in dir(self):
+            if '__' not in key and isinstance(
+                    getattr(self, key, None), basestring):
+                yield key
+
     def __call__(self):
         return {}
 
