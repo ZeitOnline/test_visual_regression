@@ -36,7 +36,30 @@ class Place(object):
         self.noscript_width_height = self.sizes[0].split('x')
 
 
+@zope.interface.implementer(zeit.frontend.interfaces.IIqdMobileList)
+class IqdMobileList(object):
+
+    def __init__(self, iqd_id):
+        self.centerpage = {}
+        self.gallery = {}
+        self.article = {}
+        self.ressort = iqd_id.get('ressort')
+        # set ids for alle page types
+        self.set_ids(iqd_id, 'centerpage')
+        self.set_ids(iqd_id, 'gallery')
+        self.set_ids(iqd_id, 'article')
+
+
+    def set_ids(self, iqd_id, page_type):
+        if hasattr(iqd_id, page_type):
+            #set ids for all positions
+            getattr(self, page_type)['top'] = getattr(iqd_id, page_type).get('top')
+            getattr(self, page_type)['middle'] = getattr(iqd_id, page_type).get('middle')
+            getattr(self, page_type)['bottom'] = getattr(iqd_id, page_type).get('bottom')
+
+
 banner_list = None
+iqd_mobile_ids = None
 
 
 def make_banner_list(banner_config):
@@ -67,3 +90,17 @@ def make_banner_list(banner_config):
             min_width=place.min_width, active=place.get('active'),
             dcopt=dcopt))
     return sorted(banner_list, key=lambda place: place.tile)
+
+
+def make_iqd_mobile_ids(banner_config):
+    if not banner_config:
+        return []
+    iqd_mobile_ids = []
+    file = urllib2.urlopen(banner_config)
+    root = objectify.fromstring(file.read())
+    for iqd_id in root.iqd_id:
+        try:
+            iqd_mobile_ids.append(IqdMobileList(iqd_id))
+        except:
+            pass
+    return iqd_mobile_ids

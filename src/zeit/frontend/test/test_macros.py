@@ -711,6 +711,73 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     assert markup in output
 
 
+def test_macro_iqd_init_prepares_mobile_testing(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    elems = ['nuggad.init({"rptn-url": nugghost}, function(api) {',
+             'var iqd_testkw = (function () {',
+             'return testkw;']
+    lines = tpl.module.iqd_init().splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_iqd_init_mobile_produces_banner_calls(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    elems = ["sasmobile('32375/1', 13500, sas_target);",
+             "sasmobile('32375/2', 13557, sas_target);",
+             "sasmobile('32375/3', 13501, sas_target);"]
+    obj = Mock()
+    obj.top = 1
+    obj.middle = 2
+    obj.bottom = 3
+    lines = tpl.module.iqd_init_mobile(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_macro_iqd_nuggad_mobile_produces_js(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    elems = ['var nuggn="480104072";',
+             'var nuggsid="1206341050";',
+             'var nugghost="http://gwp.nuggad.net";',
+             "document.write('<scr'+'ipt"]
+    lines = tpl.module.iqd_nuggad_mobile().splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_adplace_middle_mobile_produces_html(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    elems = ['<div class="iqd_mobile__adplace">',
+             '<div id="sas_13557"></div>']
+    obj = Mock()
+    obj.tile = 7
+    lines = tpl.module.adplace_middle_mobile(obj).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    for el in elems:
+        assert el in output
+
+
+def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    lines = tpl.module.adplace_middle_mobile(False).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert "" == output
+
+
 def test_add_publish_date_generates_script(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
