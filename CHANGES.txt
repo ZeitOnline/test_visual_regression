@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-799 Refactor font loader script
 
+- ZMO-821 Fix fireplace ad content height in conjunction with slider galleries
+
 - ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
