@@ -36,6 +36,8 @@ Change log for zeit.frontend
 
 - Improve view performance by caching properties
 
+- Integrate macro to transfer string view values to global js object
+
 
 0.7.1 (2014-06-13)
 ------------------

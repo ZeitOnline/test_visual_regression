@@ -40,10 +40,7 @@
             };
         </script>
         {% endif %}
-        <script>
-            window.ZMO = window.ZMO || {};
-            window.ZMO.home = "{{request.asset_url('/')}}";
-        </script>
+        {{lama.build_js_view(view,request)}}
         <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
         <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
         <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
