@@ -37,9 +37,10 @@ require([
 	'modules/comments',
 	'modules/sharing',
 	'modules/cards',
+	'modules/copyrights',
 	'modules/images',
 	'modules/photocluster',
-], function( errors, fontloader_body, main_nav, tabs, comments, sharing, cards, images, photocluster) {
+], function( errors, fontloader_body, main_nav, tabs, comments, sharing, cards, copyrights, images, photocluster) {
 	errors.init();
 	fontloader_body.init();
 	main_nav.init();
@@ -47,6 +48,7 @@ require([
 	comments.init();
 	sharing.init();
 	cards.init();
+	copyrights.init();
 	photocluster.init();
 	images.init();
 });
