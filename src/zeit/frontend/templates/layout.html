@@ -126,9 +126,11 @@
 
                 {{ lama.breadcrumbs(view.breadcrumb) }}
 
-                {{ lama.main_footer() }}
+                {{ lama.main_footer(view) }}
 
-                {{ lama.copyrights(view.copyrights) }}
+                {% if view.copyrights -%}
+                    {{ lama.copyrights(view.copyrights) }}
+                {%- endif %}
 
             </div><!-- end: #js-page-wrap-inner -->
         </div>

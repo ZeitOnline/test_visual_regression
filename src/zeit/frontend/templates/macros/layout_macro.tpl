@@ -447,7 +447,7 @@
 <script>n_pbt = n_pbt.substr(0,1150);</script>
 {%- endmacro %}
 
-{% macro main_footer() -%}
+{% macro main_footer(view) -%}
     <footer class="main-footer">
         <div class="main-footer__box is-constrained is-centered">
             <div class="main-footer__logo icon-zm-logo--white"></div>
@@ -461,7 +461,7 @@
                 </div>
                 <div>
                     <ul>
-                        <li><a href="#" onclick="alert('open');">Bildrechte</a></li>
+                        {% if view.copyrights %}<li><span class="js-toggle-copyrights">Bildrechte</span></li>{% endif -%}
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
@@ -476,29 +476,26 @@
 
 {% macro copyrights(cr_list) -%}
     <div class="copyrights">
-        <span class="copyrights__close copyrights__close--cross">
-            <a href="#" onclick="alert('close');">X</a>
-        </span>
-        <span class="copyrights__title">
-            Bildrechte auf dieser Seite
-        </span>
-        <ol class="copyrights__wrapper">
-            {%- for cr in cr_list -%}
-            <li class="copyrights__entry">
-                <img class="copyrights__entry__image" src="{{ cr.image }}" height="100">
-                <span class="copyrights__entry__label">
-                    {%- if cr.link -%}
-                        <a href="{{ cr.link }}">{{ cr.label }}</a>
-                    {%- else -%}
-                        {{ cr.label }}
-                    {%- endif -%}
-                </span>
-            </li>
-            {%- endfor -%}
-        </ol>
-        <span class="copyrights__close copyrights__close--label">
-            <a href="#" onclick="alert('close');">Bereich schließen</a>
-        </span>
+        <span class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></span>
+        <section class="copyrights__wrapper is-centered is-constrained">
+            <span class="copyrights__title">Bildrechte auf dieser Seite</span>
+            <ul class="copyrights__list">
+                {%- for cr in cr_list -%}
+                <li class="copyrights__entry">
+                    <div class="copyrights__entry__image" style="background-image: url({{ cr.image }});"></div>
+                    <span class="copyrights__entry__label">
+                        {%- if cr.link -%}
+                            <a href="{{ cr.link }}">{{ cr.label }}</a>
+                        {%- else -%}
+                            {{ cr.label }}
+                        {%- endif -%}
+                    </span>
+                </li>
+                {%- endfor -%}
+            </ul>
+        </section>
+        <span class="js-toggle-copyrights copyrights__close copyrights__close--label">Bereich schließen</span>
+        <div style="clear:both"></div>
     </div>
 {%- endmacro %}
 
