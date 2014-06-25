@@ -14,7 +14,6 @@ from zeit.frontend.template import default_image_url
 from zeit.frontend.template import get_teaser_image
 from zeit.frontend.template import get_teaser_template
 from zeit.frontend.test import Browser
-from zeit.frontend.view_centerpage import register_copyrights
 import zeit.frontend.centerpage
 import zeit.frontend.view_centerpage
 
@@ -811,81 +810,3 @@ def test_default_asset_for_teaser_gallery(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
     img = browser.cssselect('div.cp__teaser__gallery__wrap a div img')[0]
     assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')
-
-
-@pytest.fixture
-def view_factory(application):
-    """A factory function to create dummy view classes with an `area` property
-    that can be configured by providing an `area_getter` function. The `area`
-    is decorated with zeit.frontend.view_centerpage.register_copyrights.
-    """
-    def wrapped(area_getter):
-        cp = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-        view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
-
-        view_class = type('View', (object,), {
-            '_copyrights': {},
-            'context': view.context,
-            'area': property(register_copyrights(area_getter))}
-        )
-        view = view_class()
-        view.area  # Trigger copyright registration
-        return view
-    return wrapped
-
-
-def test_teaser_list_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: s.context['lead'].values())
-    # There are 8 unique teasers in the lead area, however, only 5 unique
-    # teaser images are used.
-    assert len(view._copyrights) == 5
-
-
-def test_teaser_block_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: s.context['lead'].values()[0])
-    assert len(view._copyrights) == 1
-
-
-def test_auto_pilot_teaser_block_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: s.context['informatives'][1])
-    assert len(view._copyrights) == 1
-
-
-def test_teaser_bar_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: s.context['teaser-mosaic'].values()[0])
-    # There are 6 unique teasers in the teaser mosaic, however, one image
-    # is used twice.
-    assert len(view._copyrights) == 5
-
-
-def test_teaser_dict_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: {'foo': s.context['lead'][0]})
-    assert len(view._copyrights) == 1
-
-
-def test_nested_teaser_sequence_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: {'foo': {'bla': s.context['lead'][0]}})
-    assert len(view._copyrights) == 1
-
-
-def test_mixed_teaser_sequence_should_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: {'foo': s.context['lead'][0],
-                                   'bla': s.context['informatives'][1],
-                                   'meh': s.context['lead'].values()})
-    assert len(view._copyrights) == 6  # 6 unique teaser images expected.
-
-
-def test_empty_sequences_should_not_resolve_copyrights(view_factory):
-    view = view_factory(lambda s: None)
-    assert len(view._copyrights) == 0
-    view = view_factory(lambda s: [])
-    assert len(view._copyrights) == 0
-    view = view_factory(lambda s: {})
-    assert len(view._copyrights) == 0
-
-
-def test_centerpage_copyrights_are_rendered_correcly(testserver):
-    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    # 5 Unique teaser images with copyright information expected.
-    assert len(browser.cssselect('div.copyrights ol li')) == 5
