@@ -1,6 +1,8 @@
 Change log for zeit.frontend
 ============================
 
+[!] Achtung: bitte nicht releasen, ohne ZMO-831 zu fixen.
+
 0.8 (unreleased)
 ----------------
 
