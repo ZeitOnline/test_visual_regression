@@ -1,19 +1,16 @@
 Change log for zeit.frontend
 ============================
 
-[!] Achtung: bitte nicht releasen, ohne ZMO-831 zu fixen.
-
-[!] Achtung: bitte nicht releasen, ohne ZMO-832 zu untersuchen.
-
-
 0.8 (unreleased)
 ----------------
 
-- hotfix: write filter to make view property transfer save
+- ZMO-832: Handle responsive images with undefined width
 
-- ZMO-799 Refactor font loader script
+- hotfix: write filter to make view property transfer save (ZMO-831)
 
-- ZMO-821 Fix fireplace ad content height in conjunction with slider galleries
+- ZMO-799: Refactor font loader script
+
+- ZMO-821: Fix fireplace ad content height in conjunction with slider galleries
 
 - ZMO-798: add mobile ad-id xml and integrate new banner codes for mobile ads
 
