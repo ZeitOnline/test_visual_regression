@@ -26,6 +26,13 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     var rescaleOne = function(image, subsequent, width, height) {
         var $img = $(image);
         width = width || $img.width();
+
+        // workaround for width = 'auto'
+        if (!width) {
+            width = $img.width('100%').width();
+            $img.width('');
+        }
+
         if (subsequent && $img.closest('.is-pixelperfect').length) {
             // get the parent height, don’t use ratio to update pixelperfect img
             // it also possible to pass the height delivering element via data-wrap
