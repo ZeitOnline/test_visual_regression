@@ -40,6 +40,8 @@ Change log for zeit.frontend
 
 - ZMO-822: Add ftg_iq.min.js
 
+- ZMO-833: Display header image copyrights on hover state
+
 - Rename test images with strange unicode characters
 
 - Improve view performance by caching properties
