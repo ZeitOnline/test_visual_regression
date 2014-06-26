@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
+- ZMO-835: Fix slider galleries for IE < 10
+
 - ZMO-832: Handle responsive images with undefined width
 
 - hotfix: write filter to make view property transfer save (ZMO-831)
