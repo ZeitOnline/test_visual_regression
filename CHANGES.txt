@@ -9,6 +9,8 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
+- hotfix: write filter to make view property transfer save
+
 - ZMO-799 Refactor font loader script
 
 - ZMO-821 Fix fireplace ad content height in conjunction with slider galleries
