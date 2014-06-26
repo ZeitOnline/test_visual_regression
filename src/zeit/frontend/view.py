@@ -127,11 +127,9 @@ class Base(object):
     @property
     def iqd_mobile_settings(self):
         iqd_ids = zeit.frontend.banner.iqd_mobile_ids
-        for iqd_id in iqd_ids:
-            if iqd_id.ressort == 'hp' and self.is_hp:
-                return getattr(iqd_id, 'centerpage')
-            elif iqd_id.ressort == self.sub_ressort:
-                return getattr(iqd_id, self.type)
+        if self.is_hp:
+            return getattr(iqd_ids['hp'], 'centerpage')
+        return getattr(iqd_ids[self.sub_ressort], self.type, 'default')
 
 
 class Content(Base):

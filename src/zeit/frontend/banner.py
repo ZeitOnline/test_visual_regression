@@ -100,7 +100,7 @@ def make_banner_list(banner_config):
 def make_iqd_mobile_ids(banner_config):
     if not banner_config:
         return []
-    iqd_mobile_ids = []
+    iqd_mobile_ids = {}
     try:
         banner_file = urllib2.urlopen(banner_config)
     except urllib2.URLError:
@@ -108,7 +108,7 @@ def make_iqd_mobile_ids(banner_config):
     root = objectify.fromstring(banner_file.read())
     for iqd_id in root.iqd_id:
         try:
-            iqd_mobile_ids.append(IqdMobileList(iqd_id))
+            iqd_mobile_ids[iqd_id.get('ressort')] = IqdMobileList(iqd_id)
         except:
             pass
     return iqd_mobile_ids
