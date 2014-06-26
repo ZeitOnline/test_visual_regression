@@ -49,13 +49,15 @@ class IqdMobileList(object):
         self.set_ids(iqd_id, 'gallery')
         self.set_ids(iqd_id, 'article')
 
-
     def set_ids(self, iqd_id, page_type):
         if hasattr(iqd_id, page_type):
             #set ids for all positions
-            getattr(self, page_type)['top'] = getattr(iqd_id, page_type).get('top')
-            getattr(self, page_type)['middle'] = getattr(iqd_id, page_type).get('middle')
-            getattr(self, page_type)['bottom'] = getattr(iqd_id, page_type).get('bottom')
+            getattr(self, page_type)['top'] = \
+                getattr(iqd_id, page_type).get('top')
+            getattr(self, page_type)['middle'] = \
+                getattr(iqd_id, page_type).get('middle')
+            getattr(self, page_type)['bottom'] = \
+                getattr(iqd_id, page_type).get('bottom')
 
 
 banner_list = None
