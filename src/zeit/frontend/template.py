@@ -17,6 +17,7 @@ import zeit.cms.interfaces
 import zeit.content.link.interfaces
 import zeit.frontend.centerpage
 import zope.component
+import re
 
 log = logging.getLogger(__name__)
 default_teaser_images = None  # Set during startup through application.py
@@ -106,6 +107,10 @@ def hide_none(string):
         return ''
     else:
         return string
+
+
+def remove_break(string):
+    return re.sub('\n','',string)
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
@@ -211,7 +216,10 @@ def get_teaser_template(block_layout,
 
 def get_teaser_image(teaser_block, teaser, unique_id=None):
     if unique_id:
-        asset = zeit.cms.interfaces.ICMSContent(unique_id)
+        try:
+            asset = zeit.cms.interfaces.ICMSContent(unique_id)
+        except TypeError:
+            return None
     else:
         asset = zeit.frontend.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):

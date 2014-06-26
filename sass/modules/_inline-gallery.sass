@@ -1,6 +1,12 @@
 .inline-gallery__wrap
     margin: 0 auto em(60px)
 
+.inline-gallery
+    .figure__media
+        width: auto
+        max-height: 620px
+        margin: 0 auto
+
 .figure__caption__pager
     +respond-min($break-1)
         display: none
@@ -9,11 +15,6 @@
 .bx-wrapper
     position: relative
     +has-layout()
-    .figure__media,
-    img
-        width: auto
-        max-height: 620px
-        margin: 0 auto
     +respond-min($break-1)
         padding-top: $large
 

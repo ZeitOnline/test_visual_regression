@@ -1,8 +1,19 @@
 Change log for zeit.frontend
 ============================
 
+[!] Achtung: bitte nicht releasen, ohne ZMO-831 zu fixen.
+
+[!] Achtung: bitte nicht releasen, ohne ZMO-832 zu untersuchen.
+
+
 0.8 (unreleased)
 ----------------
+
+- hotfix: write filter to make view property transfer save
+
+- ZMO-799 Refactor font loader script
+
+- ZMO-821 Fix fireplace ad content height in conjunction with slider galleries
 
 - ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
@@ -28,9 +39,13 @@ Change log for zeit.frontend
 
 - ZMO-819: Strip obsolete dcopt from banner.xml
 
+- ZMO-822: Add ftg_iq.min.js
+
 - Rename test images with strange unicode characters
 
 - Improve view performance by caching properties
+
+- Integrate macro to transfer string view values to global js object
 
 
 0.7.1 (2014-06-13)
