@@ -229,13 +229,14 @@
     // ]]>
 
     //IQD mobile testing
-    nuggad.init({"rptn-url": nugghost}, function(api) {
-        if(typeof nuggtg!="undefined" && nuggtg!=""){
-            api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
-        }else{
-            api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
-        }
-    });
+    // TODO check with iqd if it can be deleted entirely (as)
+    // nuggad.init({"rptn-url": nugghost}, function(api) {
+    //     if(typeof nuggtg!="undefined" && nuggtg!=""){
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
+    //     }else{
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
+    //     }
+    // });
 
     var iqd_testkw = (function () {
         var loc, domain, testkw, vars;
@@ -474,6 +475,7 @@
 {%- endmacro %}
 
 {% macro iqd_nuggad_mobile() -%}
+<!-- TODO: not in use yet, check with IQD if can be deleted entirerly (as) -->
 <script type="text/javascript">
     var nuggn="480104072";
     var nuggsid="1206341050";
