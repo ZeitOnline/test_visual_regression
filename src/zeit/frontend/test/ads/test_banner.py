@@ -115,6 +115,12 @@ def test_banner_mobile_should_request_with_correct_data_in_article_essen(
     assert "sasmobile('32375/445618', 13501, sas_target);" in browser.contents
 
 
+def test_banner_mobile_should_fallback_for_articles_without_sub_ressort(
+        testserver):
+    browser = Browser('%s/artikel/09' % testserver.url)
+    assert "sasmobile('" not in browser.contents
+
+
 #tests for cps
 def test_banner_mobile_should_request_with_correct_data_in_cp_leben(
         testserver):

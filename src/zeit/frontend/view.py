@@ -129,7 +129,10 @@ class Base(object):
         iqd_ids = zeit.frontend.banner.iqd_mobile_ids
         if self.is_hp:
             return getattr(iqd_ids['hp'], 'centerpage')
-        return getattr(iqd_ids[self.sub_ressort], self.type, 'default')
+        elif self.sub_ressort:
+            return getattr(iqd_ids[self.sub_ressort], self.type, 'default')
+        else:
+            return {}
 
 
 class Content(Base):
