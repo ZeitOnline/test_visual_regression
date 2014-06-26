@@ -43,11 +43,13 @@ class IqdMobileList(object):
         self.centerpage = {}
         self.gallery = {}
         self.article = {}
+        self.default = {}
         self.ressort = iqd_id.get('ressort')
         # set ids for alle page types
         self.set_ids(iqd_id, 'centerpage')
         self.set_ids(iqd_id, 'gallery')
         self.set_ids(iqd_id, 'article')
+        self.set_ids(iqd_id, 'default')
 
     def set_ids(self, iqd_id, page_type):
         if hasattr(iqd_id, page_type):

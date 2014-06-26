@@ -37,6 +37,19 @@ def test_banner_view_should_return_None_if_tile_is_not_present(application):
     assert article_view.banner(999) is None
 
 
+def test_banner_should_fallback_on_not_registered_banner_types(testserver):
+    class Moep(zeit.frontend.view_article.Article):
+        @property
+        def type(self):
+            return 'moep'
+
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    moep_view = Moep(context, Mock())
+    expected = getattr(
+        zeit.frontend.banner.iqd_mobile_ids[context.sub_ressort], 'default')
+    assert moep_view.iqd_mobile_settings == expected
+
+
 def test_banner_should_not_be_displayed_on_short_pages(testserver):
     browser = Browser('%s/artikel/header2' % testserver.url)
     assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \

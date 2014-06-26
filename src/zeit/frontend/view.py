@@ -129,9 +129,10 @@ class Base(object):
         iqd_ids = zeit.frontend.banner.iqd_mobile_ids
         if self.is_hp:
             return getattr(iqd_ids['hp'], 'centerpage')
-        elif self.sub_ressort:
-            return getattr(iqd_ids[self.sub_ressort], self.type, 'default')
-        else:
+        try:
+            return getattr(iqd_ids[self.sub_ressort], self.type,
+                           getattr(iqd_ids[self.sub_ressort], 'default'))
+        except KeyError:
             return {}
 
 
