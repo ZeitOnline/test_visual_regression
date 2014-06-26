@@ -168,7 +168,7 @@
                 {% if loop -%}
                 <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
                 {% endif -%}
-                {{obj.caption}}
+                <span class="figure__caption__text">{{obj.caption}}</span>
                 {% if obj.copyright != '©' %}
                 <span class="figure__copyright">{{obj.copyright}}</span>
                 {% endif %}
