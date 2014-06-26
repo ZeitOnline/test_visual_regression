@@ -68,8 +68,11 @@ def make_banner_list(banner_config):
     if not banner_config:
         return []
     banner_list = []
-    file = urllib2.urlopen(banner_config)
-    root = objectify.fromstring(file.read())
+    try:
+        banner_file = urllib2.urlopen(banner_config)
+    except urllib2.URLError:
+        return banner_list
+    root = objectify.fromstring(banner_file.read())
     for place in root.place:
         try:
             sizes = str(place.multiple_sizes).strip().split(',')
@@ -98,8 +101,11 @@ def make_iqd_mobile_ids(banner_config):
     if not banner_config:
         return []
     iqd_mobile_ids = []
-    file = urllib2.urlopen(banner_config)
-    root = objectify.fromstring(file.read())
+    try:
+        banner_file = urllib2.urlopen(banner_config)
+    except urllib2.URLError:
+        return iqd_mobile_ids
+    root = objectify.fromstring(banner_file.read())
     for iqd_id in root.iqd_id:
         try:
             iqd_mobile_ids.append(IqdMobileList(iqd_id))
