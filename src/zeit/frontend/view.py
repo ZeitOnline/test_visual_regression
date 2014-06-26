@@ -29,7 +29,7 @@ class Base(object):
     def __iter__(self):
         for key in dir(self):
             if '__' not in key and isinstance(
-                    getattr(self, key, None), basestring):
+                    getattr(self, key, None), str):
                 yield key
 
     def __call__(self):

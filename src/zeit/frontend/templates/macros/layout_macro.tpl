@@ -632,7 +632,7 @@
         window.ZMO.view = {};
 
         {% for key in view %}
-            window.ZMO.view['{{key}}'] = '{{view[key]}}';
+            window.ZMO.view['{{key|remove_break}}'] = '{{view[key]|remove_break}}';
         {% endfor %}
 
         /* use to get view values savely */

@@ -164,7 +164,7 @@ class Application(object):
              'create_url', 'default_image_url', 'format_date',
              'format_date_ago', 'get_image_metadata', 'hide_none',
              'obj_debug', 'replace_list_seperator', 'substring_from',
-             'translate_url'
+             'translate_url', 'remove_break'
              )
 
         return jinja
