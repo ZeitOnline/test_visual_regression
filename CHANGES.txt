@@ -12,7 +12,9 @@ Change log for zeit.frontend
 
 - ZMO-821: Fix fireplace ad content height in conjunction with slider galleries
 
-- ZMO-690: Add clickable overlay for galleries
+- ZMO-798: add mobile ad-id xml and integrate new banner codes for mobile ads
+
+- ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
 

@@ -36,15 +36,45 @@ class Place(object):
         self.noscript_width_height = self.sizes[0].split('x')
 
 
+@zope.interface.implementer(zeit.frontend.interfaces.IIqdMobileList)
+class IqdMobileList(object):
+
+    def __init__(self, iqd_id):
+        self.centerpage = {}
+        self.gallery = {}
+        self.article = {}
+        self.default = {}
+        self.ressort = iqd_id.get('ressort')
+        # set ids for alle page types
+        self.set_ids(iqd_id, 'centerpage')
+        self.set_ids(iqd_id, 'gallery')
+        self.set_ids(iqd_id, 'article')
+        self.set_ids(iqd_id, 'default')
+
+    def set_ids(self, iqd_id, page_type):
+        if hasattr(iqd_id, page_type):
+            #set ids for all positions
+            getattr(self, page_type)['top'] = \
+                getattr(iqd_id, page_type).get('top')
+            getattr(self, page_type)['middle'] = \
+                getattr(iqd_id, page_type).get('middle')
+            getattr(self, page_type)['bottom'] = \
+                getattr(iqd_id, page_type).get('bottom')
+
+
 banner_list = None
+iqd_mobile_ids = None
 
 
 def make_banner_list(banner_config):
     if not banner_config:
         return []
     banner_list = []
-    file = urllib2.urlopen(banner_config)
-    root = objectify.fromstring(file.read())
+    try:
+        banner_file = urllib2.urlopen(banner_config)
+    except urllib2.URLError:
+        return banner_list
+    root = objectify.fromstring(banner_file.read())
     for place in root.place:
         try:
             sizes = str(place.multiple_sizes).strip().split(',')
@@ -67,3 +97,20 @@ def make_banner_list(banner_config):
             min_width=place.min_width, active=place.get('active'),
             dcopt=dcopt))
     return sorted(banner_list, key=lambda place: place.tile)
+
+
+def make_iqd_mobile_ids(banner_config):
+    if not banner_config:
+        return []
+    iqd_mobile_ids = {}
+    try:
+        banner_file = urllib2.urlopen(banner_config)
+    except urllib2.URLError:
+        return iqd_mobile_ids
+    root = objectify.fromstring(banner_file.read())
+    for iqd_id in root.iqd_id:
+        try:
+            iqd_mobile_ids[iqd_id.get('ressort')] = IqdMobileList(iqd_id)
+        except:
+            pass
+    return iqd_mobile_ids

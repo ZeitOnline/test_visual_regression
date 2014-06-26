@@ -56,13 +56,6 @@ class Centerpage(zeit.frontend.view.Base):
             return self._teaserbar
 
     @reify
-    def is_hp(self):
-        if self.request.path == '/' + self.request.registry.settings.hp:
-            return True
-        else:
-            return False
-
-    @reify
     def metaRobots(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
         meta_robots = 'index,follow,noodp,noydir,noarchive'
