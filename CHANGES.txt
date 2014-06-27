@@ -4,9 +4,15 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
-- ZMO-832: Handle responsive images with undefined width
+- HOTFIX: write filter to make view property transfer save (ZMO-831)
 
-- hotfix: write filter to make view property transfer save (ZMO-831)
+- HOTFIX: Invalid js in ivw caller script
+
+- HOTFIX: Fix broken test in master
+
+- HOTFIX: Verify nextread layout ids
+
+- ZMO-832: Handle responsive images with undefined width
 
 - ZMO-799: Refactor font loader script
 
@@ -17,12 +23,6 @@ Change log for zeit.frontend
 - ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
-
-- hotfix: Invalid js in ivw caller script
-
-- hotfix: Fix broken test in master
-
-- hotfix: Verify nextread layout ids
 
 - ZMO-808: Enable responsive image for gt IE8
 
