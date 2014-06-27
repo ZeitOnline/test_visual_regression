@@ -70,6 +70,10 @@ class Centerpage(zeit.frontend.view.Base):
             return
 
     @reify
+    def is_hp(self):
+        return self.request.path == '/' + self.request.registry.settings.hp
+
+    @reify
     def meta_robots(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
         try:
