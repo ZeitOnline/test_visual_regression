@@ -70,7 +70,7 @@ def test_centerpage_should_have_seo_description(testserver):
 def test_centerpage_should_have_default_keywords(testserver):
     # Default means ressort and sub ressort respectively
     browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="keywords" content="Lebensart, Leben">' \
+    assert '<meta name="keywords" content="Lebensart, mode-design">' \
         in browser.contents
 
 
@@ -157,7 +157,6 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
 
 def test_cp_has_lead_area(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    print browser.contents
     assert '<div class="cp__lead__wrap">' in browser.contents
 
 
@@ -222,8 +221,6 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
                          'bitblt-.*/' +
                          'katzencontent-zmo-square-large.jpg',
                          img.get_attribute("src"))
-        print img.get_attribute("alt")
-        print img.get_attribute("title")
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -317,7 +314,6 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        print link_wrap
         assert len(link_wrap) != 0
         for link in link_wrap:
             assert link.get_attribute("href") == 'http://'\
@@ -361,7 +357,6 @@ def test_cp_large_button_has_expected_links(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        print link_wrap
         assert len(link_wrap) != 0
         for link in link_wrap:
             assert re.search(
@@ -416,8 +411,6 @@ def test_gallery_teaser_has_expected_img_content(selenium_driver, testserver):
                          'bitblt-.*/' +
                          'katzencontent-zmo-upright.jpg',
                          img.get_attribute("src"))
-        print img.get_attribute("alt")
-        print img.get_attribute("title")
         assert img.get_attribute("alt") == 'Die ist der Alttest'
         assert img.get_attribute("title") == 'Katze!'
 
@@ -769,7 +762,6 @@ def test_cp_informatives_should_have_no_blocks(application):
 
 def test_cp_teaser_should_have_comment_count(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    print browser.contents
     assert '<span class="cp__comment__count__wrap'\
         ' icon-comments-count">22</span>' in browser.contents
 

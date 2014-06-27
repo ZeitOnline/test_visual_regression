@@ -1,26 +1,34 @@
 Change log for zeit.frontend
 ============================
 
-0.8 (unreleased)
+0.9 (unreleased)
 ----------------
 
-- ZMO-832: Handle responsive images with undefined width
+- Nothing changed yet.
 
-- hotfix: write filter to make view property transfer save (ZMO-831)
+
+0.8 (2014-06-27)
+----------------
+
+- HOTFIX: write filter to make view property transfer save (ZMO-831)
+
+- HOTFIX: Invalid js in ivw caller script
+
+- HOTFIX: Fix broken test in master
+
+- HOTFIX: Verify nextread layout ids
+
+- ZMO-832: Handle responsive images with undefined width
 
 - ZMO-799: Refactor font loader script
 
 - ZMO-821: Fix fireplace ad content height in conjunction with slider galleries
 
-- ZMO-690: Add clickable overlay for galleries
+- ZMO-798: add mobile ad-id xml and integrate new banner codes for mobile ads
+
+- ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
-
-- hotfix: Invalid js in ivw caller script
-
-- hotfix: Fix broken test in master
-
-- hotfix: Verify nextread layout ids
 
 - ZMO-808: Enable responsive image for gt IE8
 
@@ -43,6 +51,8 @@ Change log for zeit.frontend
 - ZMO-705: Add image copyright support for centerpages
 
 - ZMO-822: Add ftg_iq.min.js
+
+- ZMO-833: Display header image copyrights on hover state
 
 - Rename test images with strange unicode characters
 
