@@ -113,17 +113,11 @@ class Base(object):
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
 
-    @property
+    @reify
     def is_hp(self):
-        try:
-            if self.request.path == '/' + self.request.registry.settings.hp:
-                return True
-            else:
-                return False
-        except:
-            pass
+        return self.request.path == '/' + self.request.registry.settings.hp
 
-    @property
+    @reify
     def iqd_mobile_settings(self):
         iqd_ids = zeit.frontend.banner.iqd_mobile_ids
         if self.is_hp:
