@@ -1,3 +1,8 @@
+$copyrights__entry__image-height: 54px
+$copyrights__entry__image-width: 96px
+$copyrights__close--cross-size: 13px
+$copyrights__close--label-height: em(22px)
+
 .copyrights
     +tablet
     background-color: $grey--dark
@@ -11,8 +16,8 @@
     background-repeat: no-repeat
     background-size: cover
     display: inline-block
-    height: 54px
-    width: 96px
+    height: $copyrights__entry__image-height
+    width: $copyrights__entry__image-width
 
 .copyrights__close
     float: right
@@ -20,14 +25,15 @@
     cursor: pointer
 
 .copyrights__close--cross
-    height: 13px
-    width: 13px
+    height: $copyrights__close--cross-size
+    width: $copyrights__close--cross-size
     &:hover
         opacity: 0.6
 
 .copyrights__close--label
     +animated-interaction($grey)
     margin-top: 0
+    height: $copyrights__close--label-height
 
 .copyrights__title
     color: $grey--bright
@@ -52,7 +58,6 @@
     word-wrap: break-word
 
 .copyrights__entry__label a
-    +animated-interaction($grey)
     +on-interaction
         color: $grey
 
