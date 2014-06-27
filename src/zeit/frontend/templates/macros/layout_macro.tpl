@@ -527,7 +527,7 @@
                 </div>
                 <div>
                     <ul>
-                        {% if view.copyrights %}<li><span class="js-toggle-copyrights">Bildrechte</span></li>{% endif -%}
+                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif %}
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
@@ -542,9 +542,9 @@
 
 {% macro copyrights(cr_list) -%}
     <div class="copyrights">
-        <span class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></span>
+        <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
         <section class="copyrights__wrapper is-centered is-constrained">
-            <span class="copyrights__title">Bildrechte auf dieser Seite</span>
+            <span class="copyrights__title">{% if not cr_list %}Keine {% endif %}Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">
                 {%- for cr in cr_list -%}
                 <li class="copyrights__entry">
@@ -560,7 +560,7 @@
                 {%- endfor -%}
             </ul>
         </section>
-        <span class="js-toggle-copyrights copyrights__close copyrights__close--label">Bereich schließen</span>
+        <a class="js-toggle-copyrights copyrights__close copyrights__close--label">Bereich schließen</a>
         <div style="clear:both"></div>
     </div>
 {%- endmacro %}
