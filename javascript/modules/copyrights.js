@@ -7,6 +7,8 @@ define(['jquery'], function() {
     var toggleCopyrights = function(e) {
         var area = $('.copyrights');
 
+        e.preventDefault();
+
         area.slideToggle('slow');
     };
 
@@ -15,6 +17,8 @@ define(['jquery'], function() {
      */
     var scrollToBottom = function(e) {
         var target = $('html,body');
+
+        e.preventDefault();
 
         target.animate({scrollTop: target.height()}, 1000);
     };
