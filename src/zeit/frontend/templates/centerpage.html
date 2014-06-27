@@ -19,12 +19,12 @@ Available attributes:
 {% endblock page_wrap_inner %}
 
 {%  block content %}
-    {%- include "templates/inc/cp_area_lead_full.html" ignore missing -%}
-    {%- include "templates/inc/cp_area_lead-1.html" ignore missing -%}
+    {%- include "templates/inc/cp_area_lead_full_teaser.html" ignore missing -%}
+    {%- include "templates/inc/cp_area_lead_1.html" ignore missing -%}
     {% if view.is_hp %}
         {%- include "templates/inc/cp_buzz.html" ignore missing -%}
     {% endif %}
-    {%- include "templates/inc/cp_area_lead-2.html" ignore missing -%}
+    {%- include "templates/inc/cp_area_lead_2.html" ignore missing -%}
     {% if view.monothematic_block %}
         {%- include "templates/inc/cp_area_monothematicblock.html" ignore missing -%}
     {% endif %}
