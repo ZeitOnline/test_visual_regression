@@ -1,7 +1,7 @@
 /* global console, define */
 define(['jquery'], function() {
 
-   /**
+    /**
      * Toggle copyrights area
      */
     var toggleCopyrights = function(e) {
@@ -10,7 +10,7 @@ define(['jquery'], function() {
         area.slideToggle('slow');
     };
 
-   /**
+    /**
      * Scroll to bottom of page
      */
     var scrollToBottom = function(e) {
@@ -19,7 +19,7 @@ define(['jquery'], function() {
         target.animate({scrollTop: target.height()}, 1000);
     };
 
-   /**
+    /**
      * Initialize copyrights toggling
      */
     var init = function() {
