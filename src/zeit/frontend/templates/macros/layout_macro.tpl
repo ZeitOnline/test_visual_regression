@@ -527,7 +527,7 @@
                 </div>
                 <div>
                     <ul>
-                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif %}
+                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
