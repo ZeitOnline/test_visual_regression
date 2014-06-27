@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from mock import Mock
-from re import match
+import re
+
+import mock
 import pyramid.threadlocal
 import pyramid.config
+import lxml
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
@@ -62,7 +64,8 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
         'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><!-- <li>Bildrechte</li> -->'\
+        '</ul></div><div><ul><li><span class="js-toggle-copyrights">'\
+        'Bildrechte</span></li>'\
         '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
@@ -74,7 +77,9 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
         '</ul></div></div></div></footer>'
 
-    lines = tpl.module.main_footer().splitlines()
+    view = mock.Mock()
+    view.copyrights = True
+    lines = tpl.module.main_footer(view).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -300,7 +305,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             vars(self).update(data)
 
     def get_current_request():
-        request = Mock()
+        request = mock.Mock()
         request.route_url.return_value = 'http://localhost/'
         return request
 
@@ -325,12 +330,12 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                  '</figcaption></figure>' \
                  % (el['css'], el['alt'], el['title'])
 
-        assert match(markup, output)
+        assert re.match(markup, output)
 
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
-    obj = Mock()
+    obj = mock.Mock()
     obj.caption = 'test'
     obj.copyright = 'test'
     obj.src = 'test.gif'
@@ -552,7 +557,7 @@ def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
 def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
-    obj = Mock()
+    obj = mock.Mock()
     obj.ressort = 'lebensart'
     obj.sub_ressort = 'mode'
     obj.type = 'article'
@@ -612,7 +617,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
 def test_macro_webtrekk_tracking_should_produces_correct_cp_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
-    obj = Mock()
+    obj = mock.Mock()
     obj.ressort = 'lebensart'
     obj.sub_ressort = 'mode'
     obj.type = 'centerpage'
@@ -822,7 +827,7 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
 
 def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    image = Mock()
+    image = mock.Mock()
     image.alt = 'ALT'
     image.title = 'TITLE'
     image.src = 'SRC'
@@ -841,7 +846,7 @@ def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
 def test_macro_insert_responsive_image_should_produce_alternative_markup(
         jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    image = Mock()
+    image = mock.Mock()
     image.alt = 'ALT'
     image.title = 'TITLE'
     image.src = 'SRC'
@@ -857,7 +862,7 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(
 def test_macro_insert_responsive_image_should_produce_linked_image(
         jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    image = Mock()
+    image = mock.Mock()
     image.href = 'http://www.test.de'
     page_type = 'article'
 
@@ -873,7 +878,7 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
 def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
-    teaser = Mock()
+    teaser = mock.Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
     teaser.uniqueId = "ID"
@@ -891,7 +896,7 @@ def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
 def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
-    teaser = Mock()
+    teaser = mock.Mock()
     teaser.teaserSupertitle = None
     teaser.supertitle = "FALLBACK"
 
@@ -910,7 +915,7 @@ def test_macro_teaser_supertitle_title_should_produce_alternative_markup(
         jinja2_env):
     # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
-    teaser = Mock()
+    teaser = mock.Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
     teaser.uniqueId = "ID"
@@ -941,7 +946,7 @@ def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
 def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
-    request = Mock()
+    request = mock.Mock()
     request.app_info.user.picture = None
 
     # no pic
@@ -955,7 +960,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     assert markup in output
 
     # pic
-    request = Mock()
+    request = mock.Mock()
     request.app_info.community_host = 'www.zeit.de/'
     request.app_info.user.picture = 'test.jpg'
     request.app_info.user.uid = 1
@@ -982,7 +987,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
 def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
-    request = Mock()
+    request = mock.Mock()
     request.app_info.community_host = 'www.zeit.de/'
     request.app_info.community_paths.login = 'login'
     request.app_info.community_paths.register = 'register'
@@ -1002,7 +1007,7 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
 def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
-    request = Mock()
+    request = mock.Mock()
 
     # logged in
     request.app_info.authenticated = 'true'
@@ -1045,3 +1050,33 @@ def test_macro_click_tracking_should_produce_correct_js(jinja2_env):
     assert 'ivw: function() {' in output
     assert 'cc: function() {' in output
     assert 'all: function(id) {' in output
+
+
+def test_macro_copyrights(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
+    copyrights = [
+        dict(
+            image=('http://localhost:9090/exampleimages/'
+                   'artikel/mode.jpg'),
+            label='Lorem ipsum Cillum laborum cupidatat officia.',
+            link='http://www.zeit.de'
+        ),
+        dict(
+            image=('http://localhost:9090/exampleimages/'
+                   'artikel/briefmarke.jpg'),
+            label='Lorem ipsum Ut dolor quis pariatur occaecat.',
+            link=None
+        )
+    ]
+    snippet = lxml.html.fromstring(tpl.module.copyrights(copyrights))
+
+    assert len(snippet.cssselect('li.copyrights__entry')) == 2, \
+        'Two copyright entries should be contained in the list.'
+
+    assert snippet.cssselect('li.copyrights__entry:nth-child(1) '
+                             'span.copyrights__entry__label a'), \
+        'The first entry should produce a link element.'
+
+    assert not snippet.cssselect('li.copyrights__entry:nth-child(2) '
+                                 'span.copyrights__entry__label a'), \
+        'The second entry should not produce a link element.'

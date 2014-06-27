@@ -1,0 +1,60 @@
+.copyrights
+    +tablet
+    background-color: $grey--dark
+    color: $grey
+    font-size: $font-xs
+    padding: 0 $petite
+    display: none
+
+.copyrights__entry__image
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover
+    display: inline-block
+    height: 54px
+    width: 96px
+
+.copyrights__close
+    float: right
+    margin: $petite 0 $petite $petite
+    cursor: pointer
+
+.copyrights__close--cross
+    height: 13px
+    width: 13px
+    &:hover
+        opacity: 0.6
+
+.copyrights__close--label
+    +animated-interaction($grey)
+    margin-top: 0
+
+.copyrights__title
+    color: $grey--bright
+    font-size: $font-l
+
+.copyrights__list
+    margin: $compact 0 0
+    padding: 0
+
+.copyrights__entry
+    list-style: none
+    margin-bottom: $little
+
+.copyrights__entry:last-child
+    margin-bottom: 0
+
+.copyrights__entry__label
+    display: inline-block
+    max-width: 70%
+    padding: $tiny $little
+    vertical-align: top
+    word-wrap: break-word
+
+.copyrights__entry__label a
+    +animated-interaction($grey)
+    +on-interaction
+        color: $grey
+
+.copyrights__wrapper
+    padding: $compact 0 0

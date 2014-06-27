@@ -12,9 +12,9 @@
         <title>{{view.pagetitle}}</title>
         <meta name="description" content="{{view.pagedescription}}">
         {% if view.rankedTagsList -%}
-        <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
-        {% endif -%}
-        <meta name="robots" content="{{view.metaRobots}}">
+            <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
+        {%- endif %}
+        <meta name="robots" content="{{view.meta_robots}}">
         <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
 
         {% if view.context.advertising_enabled %}
@@ -130,7 +130,11 @@
 
                 {{ lama.breadcrumbs(view.breadcrumb) }}
 
-                {{lama.main_footer()}}
+                {{ lama.main_footer(view) }}
+
+                {% if view.copyrights -%}
+                    {{ lama.copyrights(view.copyrights) }}
+                {%- endif %}
 
             </div><!-- end: #js-page-wrap-inner -->
 
