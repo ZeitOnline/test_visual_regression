@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from mock import Mock
+import mock
 from zeit.frontend import view_article
 from zeit.frontend.banner import Place
 from zeit.frontend.test import Browser
@@ -27,13 +27,13 @@ def test_banner_list_should_be_sorted(testserver):
 
 def test_banner_view_should_return_Place_if_tile_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, Mock())
+    article_view = view_article.Article(context, mock.Mock())
     assert isinstance(article_view.banner(1), zeit.frontend.banner.Place)
 
 
 def test_banner_view_should_return_None_if_tile_is_not_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, Mock())
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.banner(999) is None
 
 
@@ -44,7 +44,7 @@ def test_banner_should_fallback_on_not_registered_banner_types(testserver):
             return 'moep'
 
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    moep_view = Moep(context, Mock())
+    moep_view = Moep(context, mock.MagicMock(return_value=''))
     expected = getattr(
         zeit.frontend.banner.iqd_mobile_ids[context.sub_ressort], 'default')
     assert moep_view.iqd_mobile_settings == expected

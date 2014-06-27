@@ -634,7 +634,7 @@ def test_article_should_have_correct_js_view(testserver):
     assert "window.ZMO.view['tracking_type'] = 'Artikel';" in bc
     assert "window.ZMO.view['template'] = 'default';" in bc
     assert "window.ZMO.view['type'] = 'article';" in bc
-    assert "window.ZMO.view['next_title'] = '';" in bc
+    assert "window.ZMO.view['next_title']" not in bc
 
 
 def test_centerpage_should_have_correct_js_view(testserver):
@@ -665,7 +665,7 @@ def test_iqd_mobile_settings_are_filled(testserver):
     # tested just as examlpe for an article here, all possible combinations
     # are tested in test_banner.py integration tests
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    view = view_article.Article(article, mock.Mock())
+    view = view_article.Article(article, mock.MagicMock(return_value=''))
     assert view.iqd_mobile_settings.get('top') == '445612'
     assert view.iqd_mobile_settings.get('middle') == '445612'
     assert view.iqd_mobile_settings.get('bottom') == '445612'

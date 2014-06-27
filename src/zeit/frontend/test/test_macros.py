@@ -64,8 +64,8 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
         'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><span class="js-toggle-copyrights">'\
-        'Bildrechte</span></li>'\
+        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
+        'Bildrechte</a></li>'\
         '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
@@ -735,7 +735,7 @@ def test_macro_iqd_init_mobile_produces_banner_calls(jinja2_env):
     elems = ["sasmobile('32375/1', 13500, sas_target);",
              "sasmobile('32375/2', 13557, sas_target);",
              "sasmobile('32375/3', 13501, sas_target);"]
-    obj = Mock()
+    obj = mock.Mock()
     obj.top = 1
     obj.middle = 2
     obj.bottom = 3
@@ -765,7 +765,7 @@ def test_adplace_middle_mobile_produces_html(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     elems = ['<div class="iqd_mobile__adplace">',
              '<div id="sas_13557"></div>']
-    obj = Mock()
+    obj = mock.Mock()
     obj.tile = 7
     lines = tpl.module.adplace_middle_mobile(obj).splitlines()
     output = ""
