@@ -4,11 +4,15 @@ Change log for zeit.frontend
 0.8 (unreleased)
 ----------------
 
-- ZMO-799 Refactor font loader script
+- ZMO-832: Handle responsive images with undefined width
 
-- ZMO-821 Fix fireplace ad content height in conjunction with slider galleries
+- hotfix: write filter to make view property transfer save (ZMO-831)
 
-- ZMO-690 Add clickable overlay for galleries
+- ZMO-799: Refactor font loader script
+
+- ZMO-821: Fix fireplace ad content height in conjunction with slider galleries
+
+- ZMO-690: Add clickable overlay for galleries
   + Add keyboard navigation for galleries
   + Update bxSlider
 
