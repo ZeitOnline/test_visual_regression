@@ -125,7 +125,7 @@
                 3: "{{obj.ressort}}",
                 4: "Online",
                 5: "{{obj.sub_ressort}}",
-                6: "{{obj.serie}}",
+                6: "{{obj.serie | hide_none}}",
                 7: "{{request.path_info | substring_from('/')}}",
                 8: "{{obj.banner_channel}}",
                 9: "{{date}}"
@@ -133,7 +133,7 @@
 
             {% if obj.type == 'article' -%}
                 wt.customParameter = {
-                    1: "{{obj.authorsList}}",
+                    1: "{{obj.authorsList | hide_none}}",
                     2: "{{obj.banner_channel}}",
                     3: "{{pagination}}",
                     4: "{{obj.rankedTagsList}}",
