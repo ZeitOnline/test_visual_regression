@@ -26,6 +26,18 @@ import zeit.frontend.view
 log = logging.getLogger(__name__)
 
 
+def register_copyrights(func):
+    def wrapped(self):
+        container = func(self)
+        if container:
+            for t in zeit.frontend.interfaces.ITeaserSequence(container):
+                if not t.image:
+                    continue
+                self._copyrights.setdefault(t.image.image_group, t.image)
+        return container
+    return wrapped
+
+
 @view_config(context=zeit.content.article.interfaces.IArticle,
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -37,6 +49,10 @@ class Article(zeit.frontend.view.Content):
     main_nav_full_width = False
     is_longform = False
     page_nr = 1
+
+    def __init__(self, *args, **kwargs):
+        super(Article, self).__init__(*args, **kwargs)
+        self._copyrights = {}
 
     def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
@@ -256,6 +272,7 @@ class Article(zeit.frontend.view.Content):
         return None  # XXX not implemented in zeit.content.article yet
 
     @reify
+    @register_copyrights
     def nextread(self):
         nextread = INextreadTeaserBlock(self.context)
         if not len(nextread.teasers):
@@ -305,6 +322,24 @@ class Article(zeit.frontend.view.Content):
     @reify
     def text_length(self):
         return self.context.textLength
+
+    @reify
+    def copyrights(self):
+        teaser_list = []
+        for teaser in self._copyrights.itervalues():
+            if len(teaser.copyright[0][0]) <= 1:
+                # Drop teaser if no copyright text is assigned.
+                continue
+            teaser_list.append(
+                dict(
+                    label=teaser.copyright[0][0],
+                    image=zeit.frontend.template.translate_url(
+                        self.context, teaser.src),
+                    link=teaser.copyright[0][1],
+                    nofollow=teaser.copyright[0][2]
+                )
+            )
+        return sorted(teaser_list, key=lambda k: k['label'])
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

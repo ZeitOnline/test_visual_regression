@@ -9,6 +9,7 @@ import zeit.content.article.interfaces
 import zeit.frontend.interfaces
 import zope.interface
 import zeit.content.article.interfaces
+import zeit.frontend.centerpage
 
 
 log = logging.getLogger(__name__)
@@ -91,4 +92,11 @@ class IShortformArticle(zeit.content.article.interfaces.IArticle):
 
 
 class IColumnArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+
+@implementer(zeit.frontend.interfaces.ITeaserSequence)
+@adapter(zeit.frontend.interfaces.INextreadTeaserBlock)
+class NextreadTeaserBlock(zeit.frontend.centerpage.TeaserBlock):
+
     pass
