@@ -71,7 +71,7 @@
                     {% if loop.index == number %}
                         <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
                     {% else %}
-                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{  page.teaser  }}</a>
+                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ page.teaser }}</a>
                     {% endif %}
                 </span>
             </div>

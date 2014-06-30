@@ -29,7 +29,7 @@ class IFrontendBlock(zope.interface.Interface):
 
 class IFrontendHeaderBlock(zope.interface.Interface):
 
-    """ A HeaderBlock identifies elements that appear only in headers of
+    """A HeaderBlock identifies elements that appear only in headers of
     the content.
     """
 
@@ -201,9 +201,9 @@ class BaseVideo(object):
                     highest_rendition = rendition
             return highest_rendition.url
         except AttributeError:
-            logging.exception("no renditions set")
+            logging.exception('No renditions set')
         except TypeError:
-            logging.exception("renditions are propably empty")
+            logging.exception('Renditions are propably empty')
 
 
 @implementer(IFrontendBlock)
@@ -236,7 +236,7 @@ class InlineGalleryImage(Image):
 
     def __init__(self, item):
         self.caption = item.caption
-        self.layout = "large"  # item.layout
+        self.layout = 'large'  # item.layout
         self.title = item.title
         self.text = item.text
 
@@ -457,7 +457,7 @@ class NextreadTeaserBlock(object):
         self.teasers = zeit.magazin.interfaces.INextRead(
             context).nextread
 
-        # Select layout id from a list of possible values, default to "base".
+        # Select layout id from a list of possible values, default to 'base'.
         layout_id = (
             lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
             zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
