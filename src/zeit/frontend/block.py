@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 from grokcore.component import adapter, implementer
 from lxml import etree, html
 import PIL
@@ -179,7 +179,7 @@ class Citation(object):
         self.layout = model_block.layout
 
 
-class _Video(object):
+class BaseVideo(object):
 
     def __init__(self, model_block):
         if getattr(model_block, 'video', None) is None:
@@ -208,7 +208,7 @@ class _Video(object):
 
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(_Video):
+class Video(BaseVideo):
 
     def __new__(cls, model_block):
         if model_block.layout == 'zmo-xl-header':
@@ -221,7 +221,7 @@ class Video(_Video):
 
 @implementer(IFrontendHeaderBlock)
 @adapter(zeit.content.article.edit.interfaces.IVideo)
-class HeaderVideo(_Video):
+class HeaderVideo(BaseVideo):
 
     def __new__(cls, model_block):
         if model_block.layout != 'zmo-xl-header':

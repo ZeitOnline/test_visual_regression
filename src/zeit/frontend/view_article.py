@@ -128,7 +128,7 @@ class Article(zeit.frontend.view.Content):
         }
 
     @reify
-    def select_first_body_obj(self):
+    def first_asset(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
 
@@ -140,19 +140,19 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def header_img(self):
-        obj = self.select_first_body_obj
+        obj = self.first_asset
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return zeit.frontend.block.HeaderImageStandard(obj)
 
     @reify
     def header_video(self):
-        obj = self.select_first_body_obj
+        obj = self.first_asset
         if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
 
     @reify
     def first_img(self):
-        obj = self.select_first_body_obj
+        obj = self.first_asset
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.frontend.block.Image, obj)
 
@@ -377,7 +377,7 @@ class LongformArticle(Article):
 
     @reify
     def header_img(self):
-        obj = self.select_first_body_obj
+        obj = self.first_asset
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderImage, obj)
 
