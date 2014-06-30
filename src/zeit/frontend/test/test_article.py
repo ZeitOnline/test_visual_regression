@@ -462,3 +462,10 @@ def test_article03_has_linked_image(testserver):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<a href="http://www.test.de"><img alt="Immer' in output
+
+
+def test_article02_uses_esi(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/02' % testserver.url)
+    blog = driver.find_elements_by_id("livedesk-root")
+    assert len(blog) != 0

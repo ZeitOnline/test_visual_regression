@@ -9,6 +9,7 @@
 
 {% block content %}
     <article class="article" id="js-article">
+        {{ blocks.add_esi_src() }}
         <div class="article__wrap">
             {% block article_header %}
                 {% if view.current_page.number == 0 %}

@@ -465,3 +465,13 @@
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
+
+
+{% macro add_esi_src( src='http://www.zeit.de/liveblog-backend/100.html' ) -%}
+    <esi:include src="{{src}}"></esi:include>
+    <esi:remove>
+        <div data-type="esi-content"></div>
+    </esi:remove>
+{%- endmacro %}
+
+

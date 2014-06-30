@@ -1080,3 +1080,16 @@ def test_macro_copyrights(jinja2_env):
     assert not snippet.cssselect('li.copyrights__entry:nth-child(2) '
                                  'span.copyrights__entry__label a'), \
         'The second entry should not produce a link element.'
+
+
+def test_macro_add_esi_src_produces_html(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    lines = tpl.module.add_esi_src('http://www.zeit.de').splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<esi:include src="http://www.zeit.de"></esi:include>' in output
+    assert '<esi:remove>' in output
+    assert '<div data-type="esi-content"></div>' in output
+    assert '</esi:remove>' in output
