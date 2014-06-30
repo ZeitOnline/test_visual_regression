@@ -6,34 +6,23 @@ from pyramid.renderers import render_to_response
 from pyramid.view import view_config
 import pyramid.httpexceptions
 
-import zeit.content.article.edit.interfaces
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector.connector
 import zeit.connector.interfaces
+import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
-import zeit.frontend.interfaces
-import zeit.frontend.reach
+from zeit.frontend.view_centerpage import register_copyrights
 import zeit.frontend.article
 import zeit.frontend.comments
+import zeit.frontend.interfaces
+import zeit.frontend.reach
 import zeit.frontend.view
 
 log = logging.getLogger(__name__)
-
-
-def register_copyrights(func):
-    def wrapped(self):
-        container = func(self)
-        if container:
-            for t in zeit.frontend.interfaces.ITeaserSequence(container):
-                if not t.image:
-                    continue
-                self._copyrights.setdefault(t.image.image_group, t.image)
-        return container
-    return wrapped
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
