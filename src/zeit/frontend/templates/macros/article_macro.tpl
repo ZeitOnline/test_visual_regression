@@ -468,10 +468,12 @@
 
 
 {% macro add_esi_src( src='http://www.zeit.de/liveblog-backend/100.html' ) -%}
-    <esi:include src="{{src}}"></esi:include>
-    <esi:remove>
-        <div data-type="esi-content"></div>
-    </esi:remove>
+    <div class="wrapper__esi-content"> 
+        <esi:include src="{{src}}"></esi:include>
+        <esi:remove>
+            <div data-type="esi-content"></div>
+        </esi:remove>
+    </div>
 {%- endmacro %}
 
 
