@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- HOTFIX: make iter view more strict
 
 
 0.8 (2014-06-27)
