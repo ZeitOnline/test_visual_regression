@@ -112,7 +112,7 @@ def hide_none(string):
 
 
 def remove_break(string):
-    return re.sub('\n','',string)
+    return re.sub('\n', '', string)
 
 
 def replace_list_seperator(semicolonseperatedlist, seperator):
@@ -185,11 +185,12 @@ def default_image_url(image,
         if image.uniqueId is None:
             return None
 
-        scheme, netloc, path, query, fragment = urlsplit(image.uniqueId)
+        scheme, netloc, path, query, fragment = urlparse.urlsplit(
+            image.uniqueId)
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
-        url = urlunsplit((scheme, netloc, path, query, fragment))
+        url = urlparse.urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
 
         return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)

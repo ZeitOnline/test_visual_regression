@@ -363,7 +363,7 @@ def _raw_html(xml):
 
 
 def _inline_html(xml):
-    allowed_elements = "a|span|strong|img|em|sup|sub|caption|br"
+    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">

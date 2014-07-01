@@ -167,7 +167,7 @@
             </div>
             <figcaption class="figure__caption">
                 {% if loop -%}
-                <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
+                <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
                 <span class="figure__caption__text">{{obj.caption}}</span>
                 {% if obj.copyright != '©' %}
@@ -184,8 +184,8 @@
 
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
-        {{ lama.insert_responsive_image(obj,'article__main-image--longform') }}
-    </div>{{obj.caption}}{{obj.copyright}}
+        {{ lama.insert_responsive_image(obj, 'article__main-image--longform') }}
+    </div>{{ obj.caption }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro columnimage(obj) -%}

@@ -95,6 +95,10 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
+class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+
 @implementer(zeit.frontend.interfaces.ITeaserSequence)
 @adapter(zeit.frontend.interfaces.INextreadTeaserBlock)
 class NextreadTeaserBlock(zeit.frontend.centerpage.TeaserBlock):

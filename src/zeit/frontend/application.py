@@ -310,13 +310,15 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             tdict = super(RepositoryTraverser, self).__call__(request)
             context = tdict['context']
             if zeit.content.article.interfaces.IArticle.providedBy(context):
-                if IArticleTemplateSettings(context).template == 'longform':
+                template = IArticleTemplateSettings(context).template
+                if template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
-                if IArticleTemplateSettings(context).template == 'short':
+                elif template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
-                if IArticleTemplateSettings(context).template == 'column':
-                    zope.interface.alsoProvides(context,
-                                                IColumnArticle)
+                elif template == 'column':
+                    zope.interface.alsoProvides(context, IColumnArticle)
+                elif template == 'photocluster':
+                    zope.interface.alsoProvides(context, IPhotoclusterArticle)
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
                     zope.interface.alsoProvides(context, IProductGallery)
