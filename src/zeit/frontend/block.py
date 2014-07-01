@@ -123,7 +123,6 @@ class Image(BaseImage):
         else:
             self.image = None
             self.src = None
-            self.uniqueId = model_block.uniqueId
 
 
 @implementer(IFrontendHeaderBlock)
