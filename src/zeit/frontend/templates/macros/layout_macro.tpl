@@ -544,7 +544,7 @@
     <div class="copyrights">
         <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
         <section class="copyrights__wrapper is-centered is-constrained">
-            <span class="copyrights__title">{% if not cr_list %}Keine {% endif %}Bildrechte auf dieser Seite</span>
+            <span class="copyrights__title">Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">
                 {%- for cr in cr_list -%}
                 <li class="copyrights__entry">

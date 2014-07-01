@@ -27,9 +27,8 @@ def register_copyrights(func):
         container = func(self)
         if container:
             for t in zeit.frontend.interfaces.ITeaserSequence(container):
-                if not t.image:
-                    continue
-                self._copyrights.setdefault(t.image.image_group, t.image)
+                if t.image:
+                    self._copyrights.setdefault(t.image.image_group, t.image)
         return container
     return wrapped
 

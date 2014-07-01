@@ -87,9 +87,8 @@ class Article(zeit.frontend.view.Content):
     @reify
     def next_page_url(self):
         actual_index = self.page_nr - 1
-        total = len(self.pages)
         return self.pages_urls[actual_index + 1] \
-            if actual_index + 1 < total else None
+            if actual_index + 1 < len(self.pages) else None
 
     @reify
     def prev_page_url(self):
@@ -110,7 +109,7 @@ class Article(zeit.frontend.view.Content):
         }
 
     @reify
-    def first_asset(self):
+    def first_body_obj(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
 
@@ -122,7 +121,7 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def header_img(self):
-        obj = self.first_asset
+        obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             img = zeit.frontend.block.HeaderImageStandard(obj)
             img and self._copyrights.setdefault(img.uniqueId, img)
@@ -130,13 +129,13 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def header_video(self):
-        obj = self.first_asset
+        obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
 
     @reify
     def first_img(self):
-        obj = self.first_asset
+        obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.frontend.block.Image, obj)
 
@@ -248,7 +247,7 @@ class Article(zeit.frontend.view.Content):
     @property
     def nextread(self):
         nextread = zeit.frontend.interfaces.INextreadTeaserBlock(self.context)
-        if not len(nextread.teasers):
+        if not nextread.teasers:
             return
         if nextread.layout != 'minimal':
             for i in zeit.frontend.interfaces.ITeaserSequence(nextread):
@@ -368,7 +367,7 @@ class LongformArticle(Article):
 
     @reify
     def header_img(self):
-        obj = self.first_asset
+        obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderImage, obj)
 
