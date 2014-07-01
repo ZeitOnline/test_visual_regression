@@ -1,23 +1,25 @@
-from babel.dates import format_datetime
 from datetime import datetime, timedelta
-from lxml import objectify
-from repoze.bitblt.transform import compute_signature
-from urlparse import urlsplit, urlunsplit
 import email.utils
 import itertools
-import jinja2
 import logging
 import pkg_resources
+import re
+import urlparse
+
+from babel.dates import format_datetime
+from lxml import objectify
+from repoze.bitblt.transform import compute_signature
+import jinja2
 import pyramid.threadlocal
 import pytz
-import re
 import requests
-import urlparse
+import zope.component
+
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+
 import zeit.frontend.centerpage
-import zope.component
-import re
+
 
 log = logging.getLogger(__name__)
 default_teaser_images = None  # Set during startup through application.py

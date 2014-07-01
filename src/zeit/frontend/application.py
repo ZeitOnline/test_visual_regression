@@ -1,29 +1,32 @@
-from grokcore.component import adapter, implementer
-from zeit.content.gallery.interfaces import IGalleryMetadata
-from zeit.frontend.article import IColumnArticle
-from zeit.frontend.article import ILongformArticle
-from zeit.frontend.article import IShortformArticle
-from zeit.frontend.gallery import IGallery
-from zeit.frontend.gallery import IProductGallery
-from zeit.magazin.interfaces import IArticleTemplateSettings
 import base64
 import logging
 import os.path
+import urlparse
 import pkg_resources
+
+from grokcore.component import adapter, implementer
 import pyramid.config
 import pyramid_jinja2
-import urlparse
-import zeit.connector
-import zeit.frontend
-import zeit.frontend.banner
-import zeit.frontend.block
-import zeit.frontend.centerpage
-import zeit.frontend.template
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
 
+from zeit.content.gallery.interfaces import IGalleryMetadata
+from zeit.magazin.interfaces import IArticleTemplateSettings
+import zeit.connector
+
+from zeit.frontend.article import IColumnArticle
+from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IPhotoclusterArticle
+from zeit.frontend.article import IShortformArticle
+from zeit.frontend.gallery import IGallery
+from zeit.frontend.gallery import IProductGallery
+import zeit.frontend
+import zeit.frontend.banner
+import zeit.frontend.block
+import zeit.frontend.centerpage
+import zeit.frontend.template
 
 log = logging.getLogger(__name__)
 
