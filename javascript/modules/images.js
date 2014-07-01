@@ -115,9 +115,19 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * init scaling
      */
     var init = function() {
-        rescaleAll();
-        var lazy_rescaleAll = _.debounce(rescaleAll, 1000);
-        $(window).on('resize', lazy_rescaleAll);
+        // rescaleAll();
+        // var lazy_rescaleAll = _.debounce(rescaleAll, 1000);
+        // $(window).on('resize', lazy_rescaleAll);
+        
+        $('.scaled-image > noscript').each(function(){
+
+            var test = $(this);
+            var img = $(this).text();
+            var parent = $(this).parent();
+            //parent.html(img);
+            $('#debug').text('test4:' + parent.html());
+        });
+
     };
 
     return {
