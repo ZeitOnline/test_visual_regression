@@ -124,7 +124,9 @@ class Article(zeit.frontend.view.Content):
     def header_img(self):
         obj = self.first_asset
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return zeit.frontend.block.HeaderImageStandard(obj)
+            img = zeit.frontend.block.HeaderImageStandard(obj)
+            img and self._copyrights.setdefault(img.uniqueId, img)
+            return img
 
     @reify
     def header_video(self):
@@ -243,12 +245,15 @@ class Article(zeit.frontend.view.Content):
     def location(self):
         return None  # XXX not implemented in zeit.content.article yet
 
-    @reify
-    @register_copyrights
+    @property
     def nextread(self):
         nextread = zeit.frontend.interfaces.INextreadTeaserBlock(self.context)
         if not len(nextread.teasers):
-            nextread = None
+            return
+        if nextread.layout != 'minimal':
+            for i in zeit.frontend.interfaces.ITeaserSequence(nextread):
+                i.image and self._copyrights.setdefault(
+                    i.image.image_group, i.image)
         return nextread
 
     @reify
@@ -294,23 +299,27 @@ class Article(zeit.frontend.view.Content):
     def text_length(self):
         return self.context.textLength
 
-    @reify
+    @property
     def copyrights(self):
-        teaser_list = []
-        for teaser in self._copyrights.itervalues():
-            if len(teaser.copyright[0][0]) <= 1:
-                # Drop teaser if no copyright text is assigned.
+        for i in (self.is_longform and itertools.chain(*self.pages) or
+                  self.current_page):
+            if hasattr(i, 'copyright'):
+                self._copyrights.setdefault(i.uniqueId, i)
+
+        cr_list = []
+        for i in self._copyrights.itervalues():
+            if len(i.copyright[0][0]) <= 1:
                 continue
-            teaser_list.append(
+            cr_list.append(
                 dict(
-                    label=teaser.copyright[0][0],
+                    label=i.copyright[0][0],
                     image=zeit.frontend.template.translate_url(
-                        self.context, teaser.src),
-                    link=teaser.copyright[0][1],
-                    nofollow=teaser.copyright[0][2]
+                        self.context, i.src),
+                    link=i.copyright[0][1],
+                    nofollow=i.copyright[0][2]
                 )
             )
-        return sorted(teaser_list, key=lambda k: k['label'])
+        return sorted(cr_list, key=lambda k: k['label'])
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

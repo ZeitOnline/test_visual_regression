@@ -169,9 +169,9 @@
                 {% if loop -%}
                 <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__caption__text">{{obj.caption}}</span>
-                {% if obj.copyright != '©' %}
-                <span class="figure__copyright">{{obj.copyright}}</span>
+                <span class="figure__caption__text">{{ obj.caption }}</span>
+                {% if obj.copyright[0][0] != '©' %}
+                <span class="figure__copyright">{{ obj.copyright[0][0] }}</span>
                 {% endif %}
             </figcaption>
         </figure>

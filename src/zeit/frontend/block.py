@@ -108,7 +108,7 @@ class Image(BaseImage):
         self.align = xml.get('align')
         self.href = xml.get('href')
         self.caption = _inline_html(xml.find('bu'))
-        self.copyright = _inline_html(xml.find('copyright'))
+        self.copyright = ((xml.find('copyright').text, None, False),)
         self.layout = model_block.layout
         self.attr_title = _inline_html(xml.find('bu'))
         self.attr_alt = _inline_html(xml.find('bu'))
@@ -123,10 +123,7 @@ class Image(BaseImage):
         else:
             self.image = None
             self.src = None
-        if self.attr_title is None:
-            self.attr_title = ''
-        if self.attr_alt is None:
-            self.attr_alt = ''
+            self.uniqueId = model_block.uniqueId
 
 
 @implementer(IFrontendHeaderBlock)
@@ -446,6 +443,12 @@ class NextreadLayout(object):
     def __init__(self, **kwargs):
         self.id = kwargs.get('id')
         self.image_pattern = 'zmo-nextread'
+
+    def __eq__(self, value):
+        return self.id == value
+
+    def __ne__(self, value):
+        return self.id != value
 
 
 @implementer(zeit.frontend.interfaces.INextreadTeaserBlock)
