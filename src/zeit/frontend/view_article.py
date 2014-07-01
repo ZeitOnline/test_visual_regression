@@ -45,12 +45,6 @@ class Article(zeit.frontend.view.Content):
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
-
-        if IArticleTemplateSettings(self.context).template == 'photocluster':
-            self.context.advertising_enabled = False
-            return render_to_response('templates/photocluster.html',
-                                      {'view': self},
-                                      request=self.request)
         return {}
 
     @reify
@@ -380,6 +374,14 @@ class ShortformArticle(Article):
              renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
+
+
+@view_config(context=zeit.frontend.article.IPhotoclusterArticle,
+             renderer='templates/photocluster.html')
+class PhotoclusterArticle(Article):
+
+    advertising_enabled = False
+    copyrights = []
 
 
 @view_config(name='teaser',
