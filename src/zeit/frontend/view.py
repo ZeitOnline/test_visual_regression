@@ -26,11 +26,6 @@ class Base(object):
         self.request = request
         self.request.response.cache_expires(300)
 
-    def __iter__(self):
-    # extend if needed
-        return iter(['banner_channel',
-                    'ressort', 'sub_ressort', 'type'])
-
     def __call__(self):
         return {}
 
@@ -72,6 +67,11 @@ class Base(object):
             return zeit.frontend.banner.banner_list[tile - 1]
         except IndexError:
             return None
+
+    @reify
+    def js_vars(self):
+        for name in ('banner_channel', 'ressort', 'sub_ressort', 'type'):
+            yield name, getattr(self, name, '')
 
     @reify
     def title(self):
