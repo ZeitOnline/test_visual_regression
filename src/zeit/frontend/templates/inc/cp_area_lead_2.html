@@ -8,12 +8,12 @@ Available attributes:
 {% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 
 <div class="cp__lead__wrap">
-    {% if view.area_lead2 %}
-        {{ cp.include_cp_block(view.area_lead2) }}
+    {% if view.area_lead_2 %}
+        {{ cp.include_cp_block(view.area_lead_2) }}
     {% endif %}
 </div>
 <div class="cp__lead__informatives__wrap">
-    {% if view.area_informatives2 %}
-        {{ cp.include_cp_block(view.area_informatives2) }}
+    {% if view.area_informatives_2 %}
+        {{ cp.include_cp_block(view.area_informatives_2) }}
     {% endif %}
 </div>

@@ -170,6 +170,9 @@
                 /* add icons to existing gallery buttons */
                 $('.bx-next').addClass('icon-pfeil-rechts');
                 $('.bx-prev').addClass('icon-pfeil-links');
+
+                // fix ad columns
+                $('#iqdBackgroundLeft, #iqdBackgroundRight').css({height: document.body.offsetHeight + 'px'});
             };
 
             options.onSliderResize = function() {

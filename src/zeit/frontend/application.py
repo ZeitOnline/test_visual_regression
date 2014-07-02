@@ -50,6 +50,10 @@ class Application(object):
             self.settings.get('vivi_zeit.frontend_banner-source', ''))
         zeit.frontend.banner.banner_list = \
             zeit.frontend.banner.make_banner_list(banner_source)
+        iqd_mobile_ids_source = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
+        zeit.frontend.banner.iqd_mobile_ids = \
+            zeit.frontend.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -160,7 +164,7 @@ class Application(object):
              'create_url', 'default_image_url', 'format_date',
              'format_date_ago', 'get_image_metadata', 'hide_none',
              'obj_debug', 'replace_list_seperator', 'substring_from',
-             'translate_url'
+             'translate_url', 'remove_break'
              )
 
         return jinja

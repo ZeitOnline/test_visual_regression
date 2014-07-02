@@ -1,4 +1,3 @@
-
 {% macro click_tracking( banner_channel ) -%}
 <!-- click tracking -->
         <script type="text/javascript">
@@ -228,6 +227,62 @@
     window.iqd_Domain = window.iqd_Loc.href.toLowerCase();
     window.iqd_TestKW = (window.iqd_Domain.indexOf('iqadtest=')> -1) ? iqd_Domain.split('iqadtest=')[1] : 'iqlive';
     // ]]>
+
+    //IQD mobile testing
+    // TODO check with iqd if it can be deleted entirely (as)
+    // nuggad.init({"rptn-url": nugghost}, function(api) {
+    //     if(typeof nuggtg!="undefined" && nuggtg!=""){
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
+    //     }else{
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
+    //     }
+    // });
+
+    var iqd_testkw = (function () {
+        var loc, domain, testkw, vars;
+        loc = (window.top === window.self) ? window.location : window.top.location;
+        domain = loc.href.toLowerCase();
+        vars = {};
+        domain.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+            vars[key] = value;
+        });
+        testkw = vars.iqdkw;
+        return testkw;
+    }());
+</script>
+{%- endmacro %}
+
+{% macro iqd_init_mobile(obj) -%}
+<script type="text/javascript">
+    iqd = (function () {
+        var iq_callAdsCounter = 0;
+        function iq_callAds() {
+            sas_tsn = sas_gtsf();
+            sas_mfb = 1;
+            if (typeof n_pbt !== 'undefined' || iq_callAdsCounter > 5) {
+                // hier ad calls einfuegen
+                sas_target = typeof iqd_testkw != 'undefined' ? iqd_testkw + ';' : ''; /* test keyword targeting */
+                sas_target += window.n_pbt || ''; // nuggad Targeting
+
+                {% if obj.top -%}
+                    sasmobile('32375/{{obj.top}}', 13500, sas_target);
+                {% endif -%}
+
+                {% if obj.middle -%}
+                    sasmobile('32375/{{obj.middle}}', 13557, sas_target);
+                {% endif -%}
+
+                {% if obj.bottom -%}
+                    sasmobile('32375/{{obj.bottom}}', 13501, sas_target);
+                {% endif -%}
+
+            } else {
+                window.setTimeout(iq_callAds, 200);
+                iq_callAdsCounter += 1;
+            }
+        }
+        return {callAds: iq_callAds};
+    }());
 </script>
 {%- endmacro %}
 
@@ -419,6 +474,16 @@
 </script>
 {%- endmacro %}
 
+{% macro iqd_nuggad_mobile() -%}
+<!-- TODO: not in use yet, check with IQD if can be deleted entirerly (as) -->
+<script type="text/javascript">
+    var nuggn="480104072";
+    var nuggsid="1206341050";
+    var nugghost="http://gwp.nuggad.net";
+    document.write('<scr'+'ipt type="text/javascript" src="http://gwp.nuggad.net/javascripts/nuggad-ls.js"><\/scr'+'ipt>');
+</script>
+{%- endmacro %}
+
 {% macro iqd_krux_body() -%}
 <script type="text/javascript">
     // <![CDATA[
@@ -448,7 +513,7 @@
 <script>n_pbt = n_pbt.substr(0,1150);</script>
 {%- endmacro %}
 
-{% macro main_footer() -%}
+{% macro main_footer(view) -%}
     <footer class="main-footer">
         <div class="main-footer__box is-constrained is-centered">
             <div class="main-footer__logo icon-zm-logo--white"></div>
@@ -462,7 +527,7 @@
                 </div>
                 <div>
                     <ul>
-                        <!-- <li>Bildrechte</li> -->
+                        {% if view.copyrights %}<li><span class="js-toggle-copyrights">Bildrechte</span></li>{% endif -%}
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
@@ -473,6 +538,31 @@
             </div>
         </div>
     </footer>
+{%- endmacro %}
+
+{% macro copyrights(cr_list) -%}
+    <div class="copyrights">
+        <span class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></span>
+        <section class="copyrights__wrapper is-centered is-constrained">
+            <span class="copyrights__title">Bildrechte auf dieser Seite</span>
+            <ul class="copyrights__list">
+                {%- for cr in cr_list -%}
+                <li class="copyrights__entry">
+                    <div class="copyrights__entry__image" style="background-image: url({{ cr.image }});"></div>
+                    <span class="copyrights__entry__label">
+                        {%- if cr.link -%}
+                            <a href="{{ cr.link }}">{{ cr.label }}</a>
+                        {%- else -%}
+                            {{ cr.label }}
+                        {%- endif -%}
+                    </span>
+                </li>
+                {%- endfor -%}
+            </ul>
+        </section>
+        <span class="js-toggle-copyrights copyrights__close copyrights__close--label">Bereich schließen</span>
+        <div style="clear:both"></div>
+    </div>
 {%- endmacro %}
 
 {% macro adplace(banner, banner_channel) -%}
@@ -497,6 +587,15 @@
             </noscript>
         </div>
     </div>
+{%- endmacro %}
+
+{% macro adplace_middle_mobile(item) -%}
+    {% if item.tile == 7 -%}
+    <!-- only integrate onces as equivalent to desktop tile 7 -->
+        <div class="iqd_mobile__adplace">
+            <div id="sas_13557"></div>
+        </div>
+    {%- endif %}
 {%- endmacro %}
 
 {% macro main_nav_compact(obj,request) -%}
@@ -542,8 +641,8 @@
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
-        {% endif %}
-                <img {% if alt %}alt="{{alt}}"{% endif %}{% if title %} title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
+        {% endif %} 
+                <img {% if alt %}alt="{{alt}}" {% endif %}{% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}
@@ -551,4 +650,22 @@
             </noscript>
         <!--<![endif]-->
     {% endif %}
+{% endmacro %}
+
+{% macro build_js_view( view, request ) %}
+    <script>
+        window.ZMO = window.ZMO || {};
+        window.ZMO.home = "{{request.asset_url('/')}}";
+        window.ZMO.view = {};
+
+        {% for key in view %}
+            window.ZMO.view['{{key|remove_break}}'] = '{{view[key]|remove_break}}';
+        {% endfor %}
+
+        /* use to get view values savely */
+        window.ZMO.view.hide_undefined = function(key){
+            var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
+            return( val )
+        }
+    </script>
 {% endmacro %}

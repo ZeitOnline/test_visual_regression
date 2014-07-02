@@ -1,24 +1,27 @@
-from datetime import date
+import datetime
+import logging
+
 from pyramid.decorator import reify
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
-from zeit.frontend.reach import LinkReach
+from zope.component import providedBy
+import pyramid.httpexceptions
+
 from zeit.content.article.edit.interfaces import IImage
 from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
-from zeit.frontend.interfaces import INextreadTeaserBlock
-from zope.component import providedBy
-import logging
 import zeit.connector.connector
 import zeit.connector.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.article.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
+
+from zeit.frontend.interfaces import INextreadTeaserBlock
+from zeit.frontend.reach import LinkReach
 import zeit.frontend.article
+import zeit.frontend.comments
 import zeit.frontend.view
-import pyramid.httpexceptions
-from .comments import get_thread
 
 log = logging.getLogger(__name__)
 
@@ -33,32 +36,31 @@ class Article(zeit.frontend.view.Content):
     advertising_enabled = True
     main_nav_full_width = False
     is_longform = False
-    _linkreach = None
     page_nr = 1
 
     def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
-        self.context.current_year = date.today().year
+        self.context.current_year = datetime.date.today().year
         self.comments = self._comments()
 
         if IArticleTemplateSettings(self.context).template == 'photocluster':
             self.context.advertising_enabled = False
             return render_to_response('templates/photocluster.html',
-                                      {"view": self},
+                                      {'view': self},
                                       request=self.request)
         return {}
 
     @reify
     def template(self):
         template = IArticleTemplateSettings(self.context).template
-        return template if template is not None else "default"
+        return template if template is not None else 'default'
 
     @reify
     def header_layout(self):
         layout = IArticleTemplateSettings(self.context).header_layout
-        return layout if layout is not None else "default"
+        return layout if layout is not None else 'default'
 
     @reify
     def pages(self):
@@ -124,7 +126,7 @@ class Article(zeit.frontend.view.Content):
         try:
             return _cls(obj)
         except OSError:
-            log.debug("Object does not exist.")
+            log.debug('Object does not exist.')
 
     @reify
     def header_img(self):
@@ -170,7 +172,7 @@ class Article(zeit.frontend.view.Content):
             'href': author.uniqueId if author else None,
             'suffix': '',
             'prefix': '',
-            'location': ", " + IAuthorReference(author_ref).location
+            'location': ', ' + IAuthorReference(author_ref).location
             if IAuthorReference(author_ref).location and
             IArticleTemplateSettings(self.context).template
             != 'longform' else '',
@@ -193,9 +195,9 @@ class Article(zeit.frontend.view.Content):
                             result['prefix'] = ' von'
                     # add suffix
                     if index == len(author_ref) - 2:
-                        result['suffix'] = " und"
+                        result['suffix'] = ' und'
                     elif index < len(author_ref) - 1:
-                        result['suffix'] = ", "
+                        result['suffix'] = ', '
                     authorList.append(result)
             return authorList
         except (IndexError, OSError):
@@ -226,7 +228,7 @@ class Article(zeit.frontend.view.Content):
            (self.context.genre == 'analyse'):
             prefix = 'eine'
         if self.context.genre:
-            return prefix + " " + self.context.genre.title()
+            return prefix + ' ' + self.context.genre.title()
         else:
             return None
 
@@ -261,8 +263,8 @@ class Article(zeit.frontend.view.Content):
         return nextread
 
     def _comments(self):
-        return get_thread(unique_id=self.context.uniqueId,
-                          request=self.request)
+        return zeit.frontend.comments.get_thread(
+            unique_id=self.context.uniqueId, request=self.request)
 
     @reify
     def serie(self):
@@ -273,35 +275,31 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def linkreach(self):
-        if self._linkreach is None:
+        def unitize(n):
+            if n <= 999:
+                return str(n), ''
+            elif n <= 9999:
+                return ','.join(list(str(n))[:2]), 'Tsd.'
+            elif n <= 999999:
+                return str(n / 1000), 'Tsd.'
+            else:
+                return str(n / 1000000), 'Mio.'
 
-            def unitize(n):
-                if n <= 999:
-                    return str(n), ''
-                elif n <= 9999:
-                    return ','.join(list(str(n))[:2]), 'Tsd.'
-                elif n <= 999999:
-                    return str(n / 1000), 'Tsd.'
-                else:
-                    return str(n / 1000000), 'Mio.'
-
-            linkreach = self.request.registry.settings.linkreach_host
-            reach = LinkReach(None, linkreach)
-            raw = reach.get_counts_by_url(self.article_url)
-            total = raw.pop('total', 0)
-            counts = {'total': unitize(total)} if total >= 10 else {}
-            for k, v in raw.items():
-                try:
-                    counts[k] = unitize(v['total'])
-                except:
-                    continue
-            self._linkreach = counts
-
-        return self._linkreach
+        linkreach = self.request.registry.settings.linkreach_host
+        reach = LinkReach(None, linkreach)
+        raw = reach.get_counts_by_url(self.article_url)
+        total = raw.pop('total', 0)
+        counts = {'total': unitize(total)} if total >= 10 else {}
+        for k, v in raw.items():
+            try:
+                counts[k] = unitize(v['total'])
+            except:
+                continue
+        return counts
 
     @reify
     def tracking_type(self):
-        if type(self.context).__name__.lower() == 'article':
+        if self.type == 'article':
             return 'Artikel'
 
     @reify
@@ -329,7 +327,7 @@ class ArticlePage(Article):
     @reify
     def page_nr(self):
         try:
-            n = int(self.request.path_info.split("/")[-1][6:])
+            n = int(self.request.path_info.split('/')[-1][6:])
             if n == 1:
                 raise pyramid.httpexceptions.HTTPNotFound()
             return n
@@ -345,7 +343,7 @@ class ArticlePage(Article):
         try:
             page = zeit.frontend.interfaces.IPages(self.context)[self.page_nr]
             return page.teaser
-        except (IndexError):
+        except IndexError:
             return ''
 
 
@@ -383,5 +381,4 @@ class Teaser(Article):
 
     @reify
     def teaser_text(self):
-        """docstring for teaser"""
         return self.context.teaser
