@@ -622,19 +622,9 @@ def test_article_should_have_correct_js_view(testserver):
     bc = Browser('%s/artikel/01' % testserver.url).contents
     assert "window.ZMO.view['banner_channel'] = 'zeitmz/modeunddesign" \
         "/article';" in bc
-    assert "window.ZMO.view['show_date_format_seo'] = 'short';" in bc
-    assert "window.ZMO.view['header_layout'] = 'default';" in bc
-    assert "window.ZMO.view['show_date_format'] = 'long';" in bc
     assert "window.ZMO.view['ressort'] = 'zeit-magazin';" in bc
     assert "window.ZMO.view['sub_ressort'] = 'mode-design';" in bc
-    assert "window.ZMO.view['date_first_released_meta'] = " \
-        "'2013-09-26T06:00:00+00:00';" in bc
-    assert "window.ZMO.view['twitter_card_type'] = 'summary';" in bc
-    assert "window.ZMO.view['serie'] = 'testserie';" in bc
-    assert "window.ZMO.view['tracking_type'] = 'Artikel';" in bc
-    assert "window.ZMO.view['template'] = 'default';" in bc
     assert "window.ZMO.view['type'] = 'article';" in bc
-    assert "window.ZMO.view['next_title']" not in bc
 
 
 def test_centerpage_should_have_correct_js_view(testserver):
@@ -643,7 +633,6 @@ def test_centerpage_should_have_correct_js_view(testserver):
         in bc
     assert "window.ZMO.view['ressort'] = 'lebensart';" in bc
     assert "window.ZMO.view['sub_ressort'] = 'leben';" in bc
-    assert "window.ZMO.view['tracking_type'] = 'Centerpage';" in bc
     assert "window.ZMO.view['type'] = 'centerpage';" in bc
 
 
@@ -651,11 +640,6 @@ def test_gallery_should_have_correct_js_view(testserver):
     bc = Browser('%s/galerien/fs-desktop-schreibtisch-computer' %
                  testserver.url).contents
     assert "window.ZMO.view['banner_channel'] = 'zeitmz/leben/article';" in bc
-    assert "window.ZMO.view['show_date_format_seo'] = 'long';" in bc
-    assert "window.ZMO.view['rankedTagsList'] = 'zeit-magazin;leben';" in bc
-    assert "window.ZMO.view['show_date_format'] = 'long';" in bc
-    assert "window.ZMO.view['date_first_released_meta'] = " \
-        "'2014-04-02T15:30:07.109680+00:00';" in bc
     assert "window.ZMO.view['sub_ressort'] = 'leben';" in bc
     assert "window.ZMO.view['ressort'] = 'zeit-magazin';" in bc
     assert "window.ZMO.view['type'] = 'gallery';" in bc

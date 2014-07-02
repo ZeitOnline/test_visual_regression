@@ -27,10 +27,9 @@ class Base(object):
         self.request.response.cache_expires(300)
 
     def __iter__(self):
-        for key in dir(self):
-            if '__' not in key and isinstance(
-                    getattr(self, key, None), str):
-                yield key
+    # extend if needed
+        return iter(['banner_channel',
+                    'ressort', 'sub_ressort', 'type'])
 
     def __call__(self):
         return {}
