@@ -51,7 +51,7 @@ class Application(object):
         zeit.frontend.banner.banner_list = \
             zeit.frontend.banner.make_banner_list(banner_source)
         iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('iqd_mobile_ids', ''))
+            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
         zeit.frontend.banner.iqd_mobile_ids = \
             zeit.frontend.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
 

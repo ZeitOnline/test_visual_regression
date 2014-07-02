@@ -4,7 +4,13 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- HOTFIX: change iqd-id variable
+
+- ZMO-705: Partially reorganize view properties
+
+- ZMO-705: Add sequencing layer for teaser lists/blocks/bars/etc
+
+- ZMO-705: Add image copyright support for centerpages
 
 
 0.8 (2014-06-27)
@@ -43,12 +49,6 @@ Change log for zeit.frontend
 - ZMO-820: Add additional slotsize for adplace
 
 - ZMO-819: Strip obsolete dcopt from banner.xml
-
-- ZMO-705: Partially reorganize view properties
-
-- ZMO-705: Add sequencing layer for teaser lists/blocks/bars/etc
-
-- ZMO-705: Add image copyright support for centerpages
 
 - ZMO-822: Add ftg_iq.min.js
 
