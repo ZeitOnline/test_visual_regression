@@ -114,7 +114,11 @@ class Base(object):
 
     @reify
     def is_hp(self):
-        return self.request.path == '/' + self.request.registry.settings.hp
+        try:
+            return self.request.path == (
+                '/' + self.request.registry.settings.hp)
+        except AttributeError:
+            return False
 
     @reify
     def iqd_mobile_settings(self):
