@@ -95,20 +95,20 @@ def test_copyright_entries_are_rendered_correcly(testserver):
 def test_copyright_entry_images_are_rendered_correctly(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert ('/zeit-magazin/2014/17/lamm-aubergine/'
-            'lamm-aubergine-zmo-upright.jpg') in browser.cssselect(
+            'lamm-aubergine-zmo-landscape-large.jpg') in browser.cssselect(
         '.copyrights__entry__image')[0].attrib['style']
 
 
 def test_copyright_entry_labels_are_rendered_correctly(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert u'© Jason Merritt/Getty Images' in browser.cssselect(
-        '.copyrights__entry__label')[2].text
+        'span.copyrights__entry__label')[2].text
 
 
 def test_copyright_entry_links_are_rendered_correctly(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert 'http://www.photocase.de/milchhonig' in browser.cssselect(
-        '.copyrights__entry__label a')[0].attrib['href']
+        'span.copyrights__entry__label a')[0].attrib['href']
 
 
 def test_copyright_area_toggles_correctly(selenium_driver, testserver):
@@ -136,7 +136,8 @@ def test_nextread_teaser_images_show_up_in_copyrights(testserver):
 
 def test_minimal_nextread_teaser_does_not_show_up_in_copyrights(testserver):
     browser = Browser('%s/artikel/header2' % testserver.url)
-    assert not browser.cssselect('div.copyrights__entry__image')
+    assert all(['pistazienparfait-zmo-nextread.jpg' not in img.attrib['style']
+               for img in browser.cssselect('div.copyrights__entry__image')])
 
 
 def test_missing_nextread_image_does_not_show_up_in_copyrights(testserver):
