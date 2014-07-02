@@ -12,6 +12,8 @@ Change log for zeit.frontend
 
 - ZMO-705: Add image copyright support for centerpages
 
+- ZMO-823: Fix comments for article paging
+
 
 0.8 (2014-06-27)
 ----------------
