@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- HOTFIX: change iqd-id variable
+
 - ZMO-705: Partially reorganize view properties
 
 - ZMO-705: Add sequencing layer for teaser lists/blocks/bars/etc
