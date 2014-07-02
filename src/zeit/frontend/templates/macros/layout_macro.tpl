@@ -551,7 +551,7 @@
                     <div class="copyrights__entry__image" style="background-image: url({{ cr.image }});"></div>
                     <span class="copyrights__entry__label">
                         {%- if cr.link -%}
-                            <a href="{{ cr.link }}">{{ cr.label }}</a>
+                            <a href="{{ cr.link }}"{% if cr.nofollow %} rel="nofollow"{% endif %}>{{ cr.label }}</a>
                         {%- else -%}
                             {{ cr.label }}
                         {%- endif -%}

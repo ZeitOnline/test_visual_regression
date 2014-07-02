@@ -161,11 +161,18 @@ def test_copyright_entry_has_correct_label(testserver):
 
 
 def test_copyright_entry_has_correct_link(testserver):
-    raise NotImplementedError()
+    browser = Browser('%s/artikel/header5' % testserver.url)
+    assert (browser.cssselect('span.copyrights__entry__label a')[0].attrib.get(
+        'href') == 'http://foo.de')
+    browser = Browser('%s/artikel/header6' % testserver.url)
+    assert not browser.cssselect('span.copyrights__entry__label a')
 
 
 def test_copyright_entry_has_correct_nofollow_attr(testserver):
-    raise NotImplementedError()
+    browser = Browser('%s/artikel/06' % testserver.url)
+    links = browser.cssselect('span.copyrights__entry__label a')
+    assert links[0].attrib.get('rel', '') == 'nofollow'
+    assert not links[1].attrib.get('rel', False)
 
 
 def test_inline_images_in_longform_show_up_in_copyrights(testserver):

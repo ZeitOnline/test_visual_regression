@@ -108,7 +108,9 @@ class Image(BaseImage):
         self.align = xml.get('align')
         self.href = xml.get('href')
         self.caption = _inline_html(xml.find('bu'))
-        self.copyright = ((xml.find('copyright').text, None, False),)
+        cr = xml.find('copyright')
+        rel = cr.attrib.get('rel', '') == 'nofollow'
+        self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
         self.layout = model_block.layout
         self.attr_title = _inline_html(xml.find('bu'))
         self.attr_alt = _inline_html(xml.find('bu'))
