@@ -60,7 +60,8 @@ settings = {
     'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
-    'iqd_mobile_ids': ('egg://zeit.frontend/data/config/iqd-mobile-ids.xml'),
+    'vivi_zeit.frontend_iqd-mobile-ids': (
+        'egg://zeit.frontend/data/config/iqd-mobile-ids.xml'),
     'vivi_zeit.content.article_genre-url': (
         'egg://zeit.frontend/data/config/article-genres.xml'),
     'vivi_zeit.content.article_image-layout-source': (

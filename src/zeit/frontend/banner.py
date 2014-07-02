@@ -101,7 +101,7 @@ def make_banner_list(banner_config):
 
 def make_iqd_mobile_ids(banner_config):
     if not banner_config:
-        return []
+        return {}
     iqd_mobile_ids = {}
     try:
         banner_file = urllib2.urlopen(banner_config)
