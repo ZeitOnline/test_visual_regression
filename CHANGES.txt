@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- HOTFIX: make iter view more strict
+- HOTFIX: deprecate view.__iter__ in favour of separate property 
 
 - HOTFIX: change iqd-id variable
 
