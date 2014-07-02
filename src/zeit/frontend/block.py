@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 from grokcore.component import adapter, implementer
 from lxml import etree, html
 import PIL
@@ -29,7 +29,7 @@ class IFrontendBlock(zope.interface.Interface):
 
 class IFrontendHeaderBlock(zope.interface.Interface):
 
-    """ A HeaderBlock identifies elements that appear only in headers of
+    """A HeaderBlock identifies elements that appear only in headers of
     the content.
     """
 
@@ -108,7 +108,9 @@ class Image(BaseImage):
         self.align = xml.get('align')
         self.href = xml.get('href')
         self.caption = _inline_html(xml.find('bu'))
-        self.copyright = _inline_html(xml.find('copyright'))
+        cr = xml.find('copyright')
+        rel = cr.attrib.get('rel', '') == 'nofollow'
+        self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
         self.layout = model_block.layout
         self.attr_title = _inline_html(xml.find('bu'))
         self.attr_alt = _inline_html(xml.find('bu'))
@@ -123,10 +125,6 @@ class Image(BaseImage):
         else:
             self.image = None
             self.src = None
-        if self.attr_title is None:
-            self.attr_title = ''
-        if self.attr_alt is None:
-            self.attr_alt = ''
 
 
 @implementer(IFrontendHeaderBlock)
@@ -179,7 +177,7 @@ class Citation(object):
         self.layout = model_block.layout
 
 
-class _Video(object):
+class BaseVideo(object):
 
     def __init__(self, model_block):
         if getattr(model_block, 'video', None) is None:
@@ -201,14 +199,14 @@ class _Video(object):
                     highest_rendition = rendition
             return highest_rendition.url
         except AttributeError:
-            logging.exception("no renditions set")
+            logging.exception('No renditions set')
         except TypeError:
-            logging.exception("renditions are propably empty")
+            logging.exception('Renditions are propably empty')
 
 
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(_Video):
+class Video(BaseVideo):
 
     def __new__(cls, model_block):
         if model_block.layout == 'zmo-xl-header':
@@ -221,7 +219,7 @@ class Video(_Video):
 
 @implementer(IFrontendHeaderBlock)
 @adapter(zeit.content.article.edit.interfaces.IVideo)
-class HeaderVideo(_Video):
+class HeaderVideo(BaseVideo):
 
     def __new__(cls, model_block):
         if model_block.layout != 'zmo-xl-header':
@@ -236,7 +234,7 @@ class InlineGalleryImage(Image):
 
     def __init__(self, item):
         self.caption = item.caption
-        self.layout = "large"  # item.layout
+        self.layout = 'large'  # item.layout
         self.title = item.title
         self.text = item.text
 
@@ -363,7 +361,7 @@ def _raw_html(xml):
 
 
 def _inline_html(xml):
-    allowed_elements = "a|span|strong|img|em|sup|sub|caption|br"
+    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
     filter_xslt = etree.XML('''
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -447,6 +445,12 @@ class NextreadLayout(object):
         self.id = kwargs.get('id')
         self.image_pattern = 'zmo-nextread'
 
+    def __eq__(self, value):
+        return self.id == value
+
+    def __ne__(self, value):
+        return self.id != value
+
 
 @implementer(zeit.frontend.interfaces.INextreadTeaserBlock)
 @adapter(zeit.content.article.interfaces.IArticle)
@@ -457,7 +461,7 @@ class NextreadTeaserBlock(object):
         self.teasers = zeit.magazin.interfaces.INextRead(
             context).nextread
 
-        # Select layout id from a list of possible values, default to "base".
+        # Select layout id from a list of possible values, default to 'base'.
         layout_id = (
             lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
             zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)

@@ -119,11 +119,11 @@ def comment_as_dict(comment, request):
                        if '%s_%s' % (role, gender) in roles_words]
 
     if comment.xpath('author/@picture'):
-        picture_url = request.registry.settings.community_host \
-            + '/' + comment.xpath('author/@picture')[0]
+        picture_url = (request.registry.settings.community_host + '/' +
+                       comment.xpath('author/@picture')[0])
     if comment.xpath('author/@url'):
-        profile_url = request.registry.settings.community_host \
-            + comment.xpath('author/@url')[0]
+        profile_url = (request.registry.settings.community_host +
+                       comment.xpath('author/@url')[0])
     if comment.xpath('content/text()'):
         content = comment.xpath('content/text()')[0]
     else:
@@ -153,7 +153,8 @@ def get_thread(unique_id, request):
         return None
     api = Agatho(
         agatho_url='%s/agatho/thread/' % request.registry.settings.agatho_host,
-        timeout=float(request.registry.settings.community_host_timeout_secs))
+        timeout=float(request.registry.settings.community_host_timeout_secs)
+    )
     thread = api.collection_get(unique_id)
     if thread is not None:
         try:

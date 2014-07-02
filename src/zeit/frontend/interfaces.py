@@ -28,6 +28,7 @@ class IPlace(zope.interface.Interface):
     """A place is a space on the website, which can be filled with a banner.
     """
 
+
 class IIqdMobileList(zope.interface.Interface):
 
     """A set of iqd ids for a certain ressort.

@@ -64,8 +64,8 @@ def test_macro_footer_should_produce_markup(jinja2_env):
         'Mediadaten</a></li><li><a href="'\
         'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
         'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><span class="js-toggle-copyrights">'\
-        'Bildrechte</span></li>'\
+        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
+        'Bildrechte</a></li>'\
         '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
@@ -245,54 +245,54 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-xl-header',
             'css': 'figure-header',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-medium-left',
             'css': 'figure-horizontal',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-medium-right',
             'css': 'figure-horizontal--right',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-medium-center', 'css': 'figure '
             'is-constrained is-centered', 'caption': 'test',
-            'copyright': 'test',
+            'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-small-right',
             'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-small-left', 'css': 'figure-stamp',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-large-center',
             'css': 'figure-full-width',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            {'layout': 'zmo-small-right', 'align': False,
             'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': 'test',
+            'caption': 'test', 'copyright': (('test', None, False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            ]

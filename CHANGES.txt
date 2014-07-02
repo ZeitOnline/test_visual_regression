@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- HOTFIX: deprecate view.__iter__ in favour of separate property
+
 - HOTFIX: change iqd-id variable
 
 - ZMO-705: Partially reorganize view properties
@@ -11,6 +13,8 @@ Change log for zeit.frontend
 - ZMO-705: Add sequencing layer for teaser lists/blocks/bars/etc
 
 - ZMO-705: Add image copyright support for centerpages
+
+- ZMO-836: Add copyrights for nextread teasers, inline images and headers
 
 - ZMO-823: Fix comments for article paging
 
