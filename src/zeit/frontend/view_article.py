@@ -369,7 +369,10 @@ class LongformArticle(Article):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return self._create_obj(zeit.frontend.block.HeaderImage, obj)
+            img = self._create_obj(zeit.frontend.block.HeaderImage, obj)
+            if img:
+                self._copyrights.setdefault(img.uniqueId, img)
+            return img
 
 
 @view_config(context=zeit.frontend.article.IShortformArticle,
