@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- ZMO-457: hide image spaces for browsers that can not work with noscript
+
 - HOTFIX: change iqd-id variable
 
 - ZMO-705: Partially reorganize view properties
