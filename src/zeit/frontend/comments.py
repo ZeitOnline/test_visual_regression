@@ -131,8 +131,8 @@ def comment_as_dict(comment, request):
 
     return dict(
         indented=bool(len(comment.xpath('inreply'))),
-        recommended=bool(len(
-            comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
+        recommended=bool(
+            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
@@ -159,15 +159,17 @@ def get_thread(unique_id, request):
     if thread is not None:
         try:
             return dict(
-                comments=[comment_as_dict(comment, request) for comment in
-                          thread.xpath('//comment')],
-                comment_count=int(thread.xpath('/comments/comment_count'
-                                               )[0].text),
+                comments=[
+                    comment_as_dict(comment, request)
+                    for comment in thread.xpath('//comment')],
+                comment_count=int(
+                    thread.xpath('/comments/comment_count')[0].text),
                 nid=thread.xpath('/comments/nid')[0].text,
                 # TODO: these urls should point to ourselves,
                 # not to the 'back-backend'
-                comment_post_url="%s/agatho/thread%s?destination=%s" % (
-                    request.registry.settings.agatho_host, request.path,
+                comment_post_url="%s/agatho/thread/%s?destination=%s" % (
+                    request.registry.settings.agatho_host,
+                    '/'.join(request.traversed),
                     request.url),
                 comment_report_url="%s/services/json" % (
                     request.registry.settings.community_host))

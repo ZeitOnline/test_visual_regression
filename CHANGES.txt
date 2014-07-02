@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- HOTFIX: deprecate view.__iter__ in favour of separate property 
+- HOTFIX: deprecate view.__iter__ in favour of separate property
 
 - HOTFIX: change iqd-id variable
 
@@ -15,6 +15,8 @@ Change log for zeit.frontend
 - ZMO-705: Add image copyright support for centerpages
 
 - ZMO-836: Add copyrights for nextread teasers, inline images and headers
+
+- ZMO-823: Fix comments for article paging
 
 
 0.8 (2014-06-27)
