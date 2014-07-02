@@ -124,7 +124,8 @@ class Article(zeit.frontend.view.Content):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             img = zeit.frontend.block.HeaderImageStandard(obj)
-            img and self._copyrights.setdefault(img.uniqueId, img)
+            if img:
+                self._copyrights.setdefault(img.uniqueId, img)
             return img
 
     @reify
@@ -307,17 +308,16 @@ class Article(zeit.frontend.view.Content):
 
         cr_list = []
         for i in self._copyrights.itervalues():
-            if len(i.copyright[0][0]) <= 1:
-                continue
-            cr_list.append(
-                dict(
-                    label=i.copyright[0][0],
-                    image=zeit.frontend.template.translate_url(
-                        self.context, i.src),
-                    link=i.copyright[0][1],
-                    nofollow=i.copyright[0][2]
+            if len(i.copyright[0][0]) > 1:
+                cr_list.append(
+                    dict(
+                        label=i.copyright[0][0],
+                        image=zeit.frontend.template.translate_url(
+                            self.context, i.src),
+                        link=i.copyright[0][1],
+                        nofollow=i.copyright[0][2]
+                    )
                 )
-            )
         return sorted(cr_list, key=lambda k: k['label'])
 
 
