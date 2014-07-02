@@ -303,7 +303,7 @@ class Article(zeit.frontend.view.Content):
     def copyrights(self):
         for i in (self.is_longform and itertools.chain(*self.pages) or
                   self.current_page):
-            if hasattr(i, 'copyright'):
+            if hasattr(i, 'copyright') and hasattr(i, 'uniqueId'):
                 self._copyrights.setdefault(i.uniqueId, i)
 
         cr_list = []
