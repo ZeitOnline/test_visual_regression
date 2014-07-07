@@ -20,9 +20,13 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * hide allocated image spaces and comments, if noscript has no content
      * @param  {object} $wrapper image area containing noscript
      */
-    var hideImages = function( $img_wrapper ){
-        $img_wrapper.height( 'auto' );
-        $('.cp__comment__count__wrap').hide();
+    var hideImages = function( $img_wrapper, alt_source ){
+        if( alt_source ){
+            $img_wrapper.html('<img src="'+alt_source+'"/>');
+        }else{
+            $img_wrapper.height( 'auto' );
+            $('.cp__comment__count__wrap').hide();
+        }
     };
 
     /**
@@ -117,7 +121,7 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
                 }else{
                 // noscript doesn't has any content we can read (which might happen in older browsers)
                 // therefore we have to hide allocated image spaces
-                    hideImages( $parent );
+                    hideImages( $parent, $noscript.attr('data-src'));
                 }
 
             });
