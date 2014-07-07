@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- ZMO-457: hide image spaces for browsers that can not work with noscript
+- ZMO-457: show standart image for browsers that can not work with noscript
 
 
 0.8.1 (2014-07-04)

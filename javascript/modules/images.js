@@ -17,15 +17,16 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * hide allocated image spaces and comments, if noscript has no content
+     * use standart image or hide allocated image spaces and comments
+     * if noscript has no content
      * @param  {object} $wrapper image area containing noscript
      */
     var hideImages = function( $img_wrapper, alt_source ){
-        if( alt_source ){
-            $img_wrapper.html('<img src="'+alt_source+'"/>');
+        if ( alt_source ){
+            $img_wrapper.html( '<img src="' +alt_source+ '"/>' );
         }else{
             $img_wrapper.height( 'auto' );
-            $('.cp__comment__count__wrap').hide();
+            $( '.cp__comment__count__wrap' ).hide();
         }
     };
 
