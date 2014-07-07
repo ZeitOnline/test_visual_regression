@@ -23,7 +23,12 @@ def assemble_app_info(request):
     return dict(result)
 
 
-app_info = Service(name='appinfo', path='/-/', renderer='json', accept='application/json')
+app_info = Service(
+    name='appinfo',
+    path='/-/',
+    renderer='json',
+    accept='application/json'
+)
 
 
 @app_info.get()

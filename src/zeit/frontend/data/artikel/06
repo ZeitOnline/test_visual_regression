@@ -153,8 +153,8 @@
         <division type="page" teaser="Kein zeitlos sicheres Geschäft mehr">
         <image align="right" src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
         <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
-                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
-            </image>
+            <copyright link="http://johannes.zeit.de" rel="nofollow">© Johannes Eisele</copyright>
+        </image>
             <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
       Hamburger Vermessungstechniker, die auf den schnurgeraden Alleen ihre Infrarotgeräte
       justieren, anhand des Biologen, der seit einem Jahr die Bäume zählt und noch nicht weit
@@ -176,7 +176,7 @@
       und pflegeleicht.</p>
       <image align="left" src="http://xml.zeit.de/exampleimages/artikel/05/r1.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
         <bu>Ein Streetart-Plakat der Künstlerin Gerlinde Meyer im Leipziger Stadtteil Plagwitz</bu>
-        <copyright>© Pia Volk</copyright>
+        <copyright link="http://pia.zeit.de">© Pia Volk</copyright>
     </image>
             <p>Auf Planquadrat N 4, im barockprächtigen Verwaltungsgebäude, das wie ein kolonialer
       Regierungssitz am Westtor von Ohlsdorf liegt, reden die Friedhofsmanager schon von

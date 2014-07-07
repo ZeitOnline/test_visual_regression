@@ -45,7 +45,7 @@ class IqdMobileList(object):
         self.article = {}
         self.default = {}
         self.ressort = iqd_id.get('ressort')
-        # set ids for alle page types
+        # Set ids for alle page types
         self.set_ids(iqd_id, 'centerpage')
         self.set_ids(iqd_id, 'gallery')
         self.set_ids(iqd_id, 'article')
@@ -53,7 +53,7 @@ class IqdMobileList(object):
 
     def set_ids(self, iqd_id, page_type):
         if hasattr(iqd_id, page_type):
-            #set ids for all positions
+            # Set ids for all positions
             getattr(self, page_type)['top'] = \
                 getattr(iqd_id, page_type).get('top')
             getattr(self, page_type)['middle'] = \
@@ -101,7 +101,7 @@ def make_banner_list(banner_config):
 
 def make_iqd_mobile_ids(banner_config):
     if not banner_config:
-        return []
+        return {}
     iqd_mobile_ids = {}
     try:
         banner_file = urllib2.urlopen(banner_config)

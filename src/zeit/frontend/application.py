@@ -1,29 +1,32 @@
-from grokcore.component import adapter, implementer
-from zeit.content.gallery.interfaces import IGalleryMetadata
-from zeit.frontend.article import IColumnArticle
-from zeit.frontend.article import ILongformArticle
-from zeit.frontend.article import IShortformArticle
-from zeit.frontend.gallery import IGallery
-from zeit.frontend.gallery import IProductGallery
-from zeit.magazin.interfaces import IArticleTemplateSettings
 import base64
 import logging
 import os.path
+import urlparse
 import pkg_resources
+
+from grokcore.component import adapter, implementer
 import pyramid.config
 import pyramid_jinja2
-import urlparse
-import zeit.connector
-import zeit.frontend
-import zeit.frontend.banner
-import zeit.frontend.block
-import zeit.frontend.centerpage
-import zeit.frontend.template
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
 
+from zeit.content.gallery.interfaces import IGalleryMetadata
+from zeit.magazin.interfaces import IArticleTemplateSettings
+import zeit.connector
+
+from zeit.frontend.article import IColumnArticle
+from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IPhotoclusterArticle
+from zeit.frontend.article import IShortformArticle
+from zeit.frontend.gallery import IGallery
+from zeit.frontend.gallery import IProductGallery
+import zeit.frontend
+import zeit.frontend.banner
+import zeit.frontend.block
+import zeit.frontend.centerpage
+import zeit.frontend.template
 
 log = logging.getLogger(__name__)
 
@@ -51,7 +54,7 @@ class Application(object):
         zeit.frontend.banner.banner_list = \
             zeit.frontend.banner.make_banner_list(banner_source)
         iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('iqd_mobile_ids', ''))
+            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
         zeit.frontend.banner.iqd_mobile_ids = \
             zeit.frontend.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
 
@@ -307,13 +310,15 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             tdict = super(RepositoryTraverser, self).__call__(request)
             context = tdict['context']
             if zeit.content.article.interfaces.IArticle.providedBy(context):
-                if IArticleTemplateSettings(context).template == 'longform':
+                template = IArticleTemplateSettings(context).template
+                if template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
-                if IArticleTemplateSettings(context).template == 'short':
+                elif template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
-                if IArticleTemplateSettings(context).template == 'column':
-                    zope.interface.alsoProvides(context,
-                                                IColumnArticle)
+                elif template == 'column':
+                    zope.interface.alsoProvides(context, IColumnArticle)
+                elif template == 'photocluster':
+                    zope.interface.alsoProvides(context, IPhotoclusterArticle)
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
                     zope.interface.alsoProvides(context, IProductGallery)
