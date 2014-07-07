@@ -1,7 +1,9 @@
-import zeit.frontend.gallery
-import zeit.wysiwyg.interfaces
 from pyramid.decorator import reify
 from pyramid.view import view_config
+
+import zeit.wysiwyg.interfaces
+
+import zeit.frontend.gallery
 
 
 @view_config(context=zeit.frontend.gallery.IGallery,

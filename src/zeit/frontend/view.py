@@ -1,21 +1,21 @@
-from babel.dates import get_timezone
-from pyramid.response import Response
-from pyramid.view import notfound_view_config
-from pyramid.view import view_config
-from zeit.cms.workflow.interfaces import IPublishInfo
-import logging
 import os.path
-import pyramid.response
-import zeit.connector.connector
-import zeit.connector.interfaces
-import zeit.content.cp.interfaces
-import zeit.content.article.interfaces
-import zeit.content.image.interfaces
-import zeit.frontend.article
-import zope.component
 import urllib2
 
-log = logging.getLogger(__name__)
+from babel.dates import get_timezone
+from pyramid.decorator import reify
+from pyramid.view import notfound_view_config
+from pyramid.view import view_config
+import pyramid.response
+import zope.component
+
+import zeit.cms.workflow.interfaces
+import zeit.connector.connector
+import zeit.connector.interfaces
+import zeit.content.article.interfaces
+import zeit.content.cp.interfaces
+import zeit.content.image.interfaces
+
+import zeit.frontend.article
 
 
 class Base(object):
@@ -26,34 +26,28 @@ class Base(object):
         self.request = request
         self.request.response.cache_expires(300)
 
-    def __iter__(self):
-        for key in dir(self):
-            if '__' not in key and isinstance(
-                    getattr(self, key, None), str):
-                yield key
-
     def __call__(self):
         return {}
 
-    @property
+    @reify
     def type(self):
         return type(self.context).__name__.lower()
 
-    @property
+    @reify
     def ressort(self):
         if self.context.ressort:
             return self.context.ressort.lower()
         else:
             return ''
 
-    @property
+    @reify
     def sub_ressort(self):
         if self.context.sub_ressort:
             return self.context.sub_ressort.lower()
         else:
             return ''
 
-    @property
+    @reify
     def banner_channel(self):
         channel = ''
         if self.ressort:
@@ -62,11 +56,10 @@ class Base(object):
             myressort = myressort.replace('lebensart', 'zeitmz')
             channel += myressort
         if self.sub_ressort:
-            channel += "/" + self.sub_ressort.replace('-', 'und', 1)
+            channel += '/' + self.sub_ressort.replace('-', 'und', 1)
         if self.type:
             # TODO: Zone type gallery after launch
-            mytype = self.type.replace('gallery', 'article')
-            channel += "/" + mytype
+            channel += '/' + self.type.replace('gallery', 'article')
         return channel
 
     def banner(self, tile):
@@ -75,15 +68,20 @@ class Base(object):
         except IndexError:
             return None
 
-    @property
+    @reify
+    def js_vars(self):
+        for name in ('banner_channel', 'ressort', 'sub_ressort', 'type'):
+            yield name, getattr(self, name, '')
+
+    @reify
     def title(self):
         return self.context.title
 
-    @property
+    @reify
     def supertitle(self):
         return self.context.supertitle
 
-    @property
+    @reify
     def pagetitle(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
@@ -92,7 +90,7 @@ class Base(object):
         tokens = (self.supertitle, self.title)
         return ': '.join([t for t in tokens if t]) or default
 
-    @property
+    @reify
     def pagedescription(self):
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         seo = zeit.seo.interfaces.ISEO(self.context)
@@ -102,17 +100,36 @@ class Base(object):
             return self.context.subtitle
         return default
 
-    @property
+    @reify
     def rankedTags(self):
         return self.context.keywords
 
-    @property
+    @reify
     def rankedTagsList(self):
         if self.rankedTags:
             return ';'.join([rt.label for rt in self.rankedTags])
         else:
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
+
+    @reify
+    def is_hp(self):
+        try:
+            return self.request.path == (
+                '/' + self.request.registry.settings.hp)
+        except AttributeError:
+            return False
+
+    @reify
+    def iqd_mobile_settings(self):
+        iqd_ids = zeit.frontend.banner.iqd_mobile_ids
+        if self.is_hp:
+            return getattr(iqd_ids['hp'], 'centerpage')
+        try:
+            return getattr(iqd_ids[self.sub_ressort], self.type,
+                           getattr(iqd_ids[self.sub_ressort], 'default'))
+        except KeyError:
+            return {}
 
 
 class Content(Base):
@@ -144,62 +161,58 @@ class Content(Base):
         )
     }
 
-    @property
+    @reify
     def subtitle(self):
         return self.context.subtitle
 
-    @property
+    @reify
     def show_article_date(self):
-        if self.date_last_published_semantic:
-            return self.date_last_published_semantic
-        else:
-            return self.date_first_released
+        return self.date_last_published_semantic or self.date_first_released
 
-    @property
+    @reify
     def date_first_released(self):
         tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
         if date:
             return date.astimezone(tz)
 
-    @property
+    @reify
     def date_first_released_meta(self):
-        return IPublishInfo(
+        return zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released.isoformat()
 
-    @property
+    @reify
     def date_last_published_semantic(self):
         tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(self.context).date_last_published_semantic
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_last_published_semantic
         if self.date_first_released is not None and date is not None:
             if date > self.date_first_released:
                 return date.astimezone(tz)
             else:
                 return None
 
-    def _get_date_format(self):
+    @reify
+    def date_format(self):
         if self.context.product:
             if self.context.product.id == 'ZEI' or \
                self.context.product.id == 'ZMLB':
                 return 'short'
-            else:
-                return 'long'
-        else:
-            return 'long'
+        return 'long'
 
-    @property
+    @reify
     def show_date_format(self):
         if self.date_last_published_semantic:
             return 'long'
         else:
-            return self._get_date_format()
+            return self.date_format
 
-    @property
+    @reify
     def show_date_format_seo(self):
-        return self._get_date_format()
+        return self.date_format
 
-    @property
+    @reify
     def breadcrumb(self):
         crumb = self._navigation
         l = [crumb['start']]
@@ -246,7 +259,7 @@ class Image(Base):
 
 @view_config(route_name='health_check')
 def health_check(request):
-    return Response('OK', 200)
+    return pyramid.response.Response('OK', 200)
 
 
 @notfound_view_config(request_method='GET')
@@ -255,7 +268,7 @@ def notfound_get(request):
         request = urllib2.Request('http://www.zeit.de/error/404')
         response = urllib2.urlopen(request, timeout=4)
         html = response.read()
-        return Response(html, status='404 Not Found')
+        return pyramid.response.Response(html, status='404 Not Found')
     except urllib2.URLError:
-        return Response('Status 404:Dokument nicht gefunden.',
-                        status='404 Not Found')
+        return pyramid.response.Response('Status 404:Dokument nicht gefunden.',
+                                         status='404 Not Found')
