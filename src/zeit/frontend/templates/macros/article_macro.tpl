@@ -467,8 +467,8 @@
 {% endmacro %}
 
 
-{% macro add_esi_src( src='http://www.zeit.de/liveblog-backend/100.html' ) -%}
-    <div class="wrapper__esi-content"> 
+{% macro add_esi_src( src='http://zeit.sd-demo.sourcefabric.org/content/seo/1.html' ) -%}
+    <div class="wrapper__esi-content is-constrained is-centered"> 
         <esi:include src="{{src}}"></esi:include>
         <esi:remove>
             <div data-type="esi-content"></div>
