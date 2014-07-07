@@ -26,12 +26,6 @@ class Base(object):
         self.request = request
         self.request.response.cache_expires(300)
 
-    def __iter__(self):
-        for key in dir(self):
-            if '__' not in key and isinstance(
-                    getattr(self, key, None), str):
-                yield key
-
     def __call__(self):
         return {}
 
@@ -75,6 +69,11 @@ class Base(object):
             return None
 
     @reify
+    def js_vars(self):
+        for name in ('banner_channel', 'ressort', 'sub_ressort', 'type'):
+            yield name, getattr(self, name, '')
+
+    @reify
     def title(self):
         return self.context.title
 
@@ -113,17 +112,15 @@ class Base(object):
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
 
-    @property
+    @reify
     def is_hp(self):
         try:
-            if self.request.path == '/' + self.request.registry.settings.hp:
-                return True
-            else:
-                return False
-        except:
-            pass
+            return self.request.path == (
+                '/' + self.request.registry.settings.hp)
+        except AttributeError:
+            return False
 
-    @property
+    @reify
     def iqd_mobile_settings(self):
         iqd_ids = zeit.frontend.banner.iqd_mobile_ids
         if self.is_hp:
@@ -170,10 +167,7 @@ class Content(Base):
 
     @reify
     def show_article_date(self):
-        if self.date_last_published_semantic:
-            return self.date_last_published_semantic
-        else:
-            return self.date_first_released
+        return self.date_last_published_semantic or self.date_first_released
 
     @reify
     def date_first_released(self):
@@ -199,26 +193,24 @@ class Content(Base):
             else:
                 return None
 
-    def _get_date_format(self):
+    @reify
+    def date_format(self):
         if self.context.product:
             if self.context.product.id == 'ZEI' or \
                self.context.product.id == 'ZMLB':
                 return 'short'
-            else:
-                return 'long'
-        else:
-            return 'long'
+        return 'long'
 
     @reify
     def show_date_format(self):
         if self.date_last_published_semantic:
             return 'long'
         else:
-            return self._get_date_format()
+            return self.date_format
 
     @reify
     def show_date_format_seo(self):
-        return self._get_date_format()
+        return self.date_format
 
     @reify
     def breadcrumb(self):

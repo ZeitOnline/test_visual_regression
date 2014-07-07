@@ -20,12 +20,15 @@ import zeit.frontend.view
 
 
 def register_copyrights(func):
+    """A decorator that registers all teaser image copyrights it finds in the
+    teaser container the decorated method (or property) returns.
+    """
     def wrapped(self):
         container = func(self)
-        if not container:
-            return container
-        for teaser in zeit.frontend.interfaces.ITeaserSequence(container):
-            self._copyrights.setdefault(teaser.image.image_group, teaser.image)
+        if container:
+            for t in zeit.frontend.interfaces.ITeaserSequence(container):
+                if t.image:
+                    self._copyrights.setdefault(t.image.image_group, t.image)
         return container
     return wrapped
 

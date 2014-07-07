@@ -125,7 +125,7 @@
                 3: "{{obj.ressort}}",
                 4: "Online",
                 5: "{{obj.sub_ressort}}",
-                6: "{{obj.serie}}",
+                6: "{{obj.serie | hide_none}}",
                 7: "{{request.path_info | substring_from('/')}}",
                 8: "{{obj.banner_channel}}",
                 9: "{{date}}"
@@ -133,7 +133,7 @@
 
             {% if obj.type == 'article' -%}
                 wt.customParameter = {
-                    1: "{{obj.authorsList}}",
+                    1: "{{obj.authorsList | hide_none}}",
                     2: "{{obj.banner_channel}}",
                     3: "{{pagination}}",
                     4: "{{obj.rankedTagsList}}",
@@ -527,7 +527,7 @@
                 </div>
                 <div>
                     <ul>
-                        {% if view.copyrights %}<li><span class="js-toggle-copyrights">Bildrechte</span></li>{% endif -%}
+                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
                         <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
                         <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
                         <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
@@ -542,7 +542,7 @@
 
 {% macro copyrights(cr_list) -%}
     <div class="copyrights">
-        <span class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></span>
+        <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
         <section class="copyrights__wrapper is-centered is-constrained">
             <span class="copyrights__title">Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">
@@ -551,7 +551,7 @@
                     <div class="copyrights__entry__image" style="background-image: url({{ cr.image }});"></div>
                     <span class="copyrights__entry__label">
                         {%- if cr.link -%}
-                            <a href="{{ cr.link }}">{{ cr.label }}</a>
+                            <a href="{{ cr.link }}"{% if cr.nofollow %} rel="nofollow"{% endif %}>{{ cr.label }}</a>
                         {%- else -%}
                             {{ cr.label }}
                         {%- endif -%}
@@ -560,7 +560,7 @@
                 {%- endfor -%}
             </ul>
         </section>
-        <span class="js-toggle-copyrights copyrights__close copyrights__close--label">Bereich schließen</span>
+        <a class="js-toggle-copyrights copyrights__close copyrights__close--label">Bereich schließen</a>
         <div style="clear:both"></div>
     </div>
 {%- endmacro %}
@@ -658,9 +658,9 @@
         window.ZMO.home = "{{request.asset_url('/')}}";
         window.ZMO.view = {};
 
-        {% for key in view %}
-            window.ZMO.view['{{key|remove_break}}'] = '{{view[key]|remove_break}}';
-        {% endfor %}
+        {% for key, value in view.js_vars -%}
+            window.ZMO.view['{{ key }}'] = '{{ value|remove_break }}';
+        {%- endfor %}
 
         /* use to get view values savely */
         window.ZMO.view.hide_undefined = function(key){

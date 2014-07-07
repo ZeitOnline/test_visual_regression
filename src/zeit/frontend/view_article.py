@@ -1,26 +1,24 @@
 import datetime
+import itertools
 import logging
 
 from pyramid.decorator import reify
-from pyramid.renderers import render_to_response
 from pyramid.view import view_config
-from zope.component import providedBy
 import pyramid.httpexceptions
 
-from zeit.content.article.edit.interfaces import IImage
-from zeit.content.article.edit.interfaces import IVideo
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector.connector
 import zeit.connector.interfaces
+import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
-from zeit.frontend.interfaces import INextreadTeaserBlock
-from zeit.frontend.reach import LinkReach
 import zeit.frontend.article
 import zeit.frontend.comments
+import zeit.frontend.interfaces
+import zeit.frontend.reach
 import zeit.frontend.view
 
 log = logging.getLogger(__name__)
@@ -34,33 +32,29 @@ log = logging.getLogger(__name__)
 class Article(zeit.frontend.view.Content):
 
     advertising_enabled = True
-    main_nav_full_width = False
     is_longform = False
+    main_nav_full_width = False
     page_nr = 1
+
+    def __init__(self, *args, **kwargs):
+        super(Article, self).__init__(*args, **kwargs)
+        self._copyrights = {}
 
     def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
-        self.comments = self._comments()
-
-        if IArticleTemplateSettings(self.context).template == 'photocluster':
-            self.context.advertising_enabled = False
-            return render_to_response('templates/photocluster.html',
-                                      {'view': self},
-                                      request=self.request)
         return {}
 
     @reify
     def template(self):
-        template = IArticleTemplateSettings(self.context).template
-        return template if template is not None else 'default'
+        return IArticleTemplateSettings(self.context).template or 'default'
 
     @reify
     def header_layout(self):
-        layout = IArticleTemplateSettings(self.context).header_layout
-        return layout if layout is not None else 'default'
+        return IArticleTemplateSettings(self.context).header_layout or \
+            'default'
 
     @reify
     def pages(self):
@@ -72,10 +66,8 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def next_title(self):
-        try:
+        if self.page_nr < len(self.pages):
             return self.pages[self.page_nr].teaser
-        except (IndexError):
-            return ''
 
     @reify
     def article_url(self):
@@ -84,20 +76,19 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def pages_urls(self):
-        _pages_urls = []
+        urls = []
         for number in range(0, len(self.pages)):
             url = self.article_url
             if number > 0:
                 url += '/seite-' + str(number + 1)
-            _pages_urls.append(url)
-        return _pages_urls
+            urls.append(url)
+        return urls
 
     @reify
     def next_page_url(self):
-        _actual_index = self.page_nr - 1
-        total = len(self.pages)
-        return self.pages_urls[_actual_index + 1] \
-            if _actual_index + 1 < total else None
+        actual_index = self.page_nr - 1
+        return self.pages_urls[actual_index + 1] \
+            if actual_index + 1 < len(self.pages) else None
 
     @reify
     def prev_page_url(self):
@@ -118,7 +109,7 @@ class Article(zeit.frontend.view.Content):
         }
 
     @reify
-    def _select_first_body_obj(self):
+    def first_body_obj(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
 
@@ -130,27 +121,28 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def header_img(self):
-        obj = self._select_first_body_obj
-        if IImage in providedBy(obj):
-            return zeit.frontend.block.HeaderImageStandard(obj)
+        obj = self.first_body_obj
+        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
+            img = zeit.frontend.block.HeaderImageStandard(obj)
+            if img:
+                self._copyrights.setdefault(img.uniqueId, img)
+            return img
 
     @reify
     def header_video(self):
-        obj = self._select_first_body_obj
-        if IVideo in providedBy(obj):
+        obj = self.first_body_obj
+        if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
 
     @reify
     def first_img(self):
-        obj = self._select_first_body_obj
-        if IImage in providedBy(obj):
+        obj = self.first_body_obj
+        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.frontend.block.Image, obj)
 
     @reify
     def header_elem(self):
-        if self.header_video is not None:
-            return self.header_video
-        return self.header_img
+        return self.header_video or self.header_img
 
     @reify
     def sharing_img(self):
@@ -207,8 +199,6 @@ class Article(zeit.frontend.view.Content):
     def authorsList(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
-        else:
-            return ''
 
     @reify
     def twitter_card_type(self):
@@ -255,14 +245,19 @@ class Article(zeit.frontend.view.Content):
     def location(self):
         return None  # XXX not implemented in zeit.content.article yet
 
-    @reify
+    @property
     def nextread(self):
-        nextread = INextreadTeaserBlock(self.context)
-        if not len(nextread.teasers):
-            nextread = None
+        nextread = zeit.frontend.interfaces.INextreadTeaserBlock(self.context)
+        if not nextread.teasers:
+            return
+        if nextread.layout != 'minimal':
+            for i in zeit.frontend.interfaces.ITeaserSequence(nextread):
+                i.image and self._copyrights.setdefault(
+                    i.image.image_group, i.image)
         return nextread
 
-    def _comments(self):
+    @reify
+    def comments(self):
         return zeit.frontend.comments.get_thread(
             unique_id=self.context.uniqueId, request=self.request)
 
@@ -270,8 +265,6 @@ class Article(zeit.frontend.view.Content):
     def serie(self):
         if self.context.serie:
             return self.context.serie.lower()
-        else:
-            return ''
 
     @reify
     def linkreach(self):
@@ -286,7 +279,7 @@ class Article(zeit.frontend.view.Content):
                 return str(n / 1000000), 'Mio.'
 
         linkreach = self.request.registry.settings.linkreach_host
-        reach = LinkReach(None, linkreach)
+        reach = zeit.frontend.reach.LinkReach(None, linkreach)
         raw = reach.get_counts_by_url(self.article_url)
         total = raw.pop('total', 0)
         counts = {'total': unitize(total)} if total >= 10 else {}
@@ -306,6 +299,27 @@ class Article(zeit.frontend.view.Content):
     def text_length(self):
         return self.context.textLength
 
+    @property
+    def copyrights(self):
+        for i in (self.is_longform and itertools.chain(*self.pages) or
+                  self.current_page):
+            if hasattr(i, 'copyright') and hasattr(i, 'uniqueId'):
+                self._copyrights.setdefault(i.uniqueId, i)
+
+        cr_list = []
+        for i in self._copyrights.itervalues():
+            if len(i.copyright[0][0]) > 1:
+                cr_list.append(
+                    dict(
+                        label=i.copyright[0][0],
+                        image=zeit.frontend.template.translate_url(
+                            self.context, i.src),
+                        link=i.copyright[0][1],
+                        nofollow=i.copyright[0][2]
+                    )
+                )
+        return sorted(cr_list, key=lambda k: k['label'])
+
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='seite',
@@ -318,9 +332,7 @@ class ArticlePage(Article):
         if self.request.view_name == 'komplettansicht':
             return {}
 
-        pages_in_article = len(self.pages)
-
-        if self.page_nr > pages_in_article:
+        if self.page_nr > len(self.pages):
             raise pyramid.httpexceptions.HTTPNotFound()
         return {}
 
@@ -340,11 +352,9 @@ class ArticlePage(Article):
 
     @reify
     def next_title(self):
-        try:
-            page = zeit.frontend.interfaces.IPages(self.context)[self.page_nr]
-            return page.teaser
-        except IndexError:
-            return ''
+        pages = zeit.frontend.interfaces.IPages(self.context)
+        if self.page_nr < len(pages):
+            return pages[self.page_nr].teaser
 
 
 @view_config(context=zeit.frontend.article.ILongformArticle,
@@ -357,9 +367,12 @@ class LongformArticle(Article):
 
     @reify
     def header_img(self):
-        obj = self._select_first_body_obj
-        if IImage in providedBy(obj):
-            return self._create_obj(zeit.frontend.block.HeaderImage, obj)
+        obj = self.first_body_obj
+        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
+            img = self._create_obj(zeit.frontend.block.HeaderImage, obj)
+            if img:
+                self._copyrights.setdefault(img.uniqueId, img)
+            return img
 
 
 @view_config(context=zeit.frontend.article.IShortformArticle,
@@ -372,6 +385,14 @@ class ShortformArticle(Article):
              renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
+
+
+@view_config(context=zeit.frontend.article.IPhotoclusterArticle,
+             renderer='templates/photocluster.html')
+class PhotoclusterArticle(Article):
+
+    advertising_enabled = False
+    copyrights = []
 
 
 @view_config(name='teaser',
