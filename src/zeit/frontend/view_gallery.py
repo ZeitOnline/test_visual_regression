@@ -18,7 +18,7 @@ class Gallery(zeit.frontend.view.Content):
 
     @reify
     def images(self):
-        return [self.context[i] for i in self.context]
+        return zeit.frontend.gallery.standalone(self.context)
 
     @reify
     def galleryText(self):
