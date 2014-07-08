@@ -2,6 +2,7 @@
 
 {% macro place(item) -%}
     {{lama.adplace(item, view.banner_channel)}}
+    {{lama.adplace_middle_mobile(item)}}
 {%- endmacro %}
 
 {% macro supertitle() -%}
@@ -70,7 +71,7 @@
                     {% if loop.index == number %}
                         <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
                     {% else %}
-                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{  page.teaser  }}</a>
+                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ page.teaser }}</a>
                     {% endif %}
                 </span>
             </div>
@@ -166,11 +167,11 @@
             </div>
             <figcaption class="figure__caption">
                 {% if loop -%}
-                <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
+                <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                {{obj.caption}}
-                {% if obj.copyright != '©' %}
-                <span class="figure__copyright">{{obj.copyright}}</span>
+                <span class="figure__caption__text">{{ obj.caption }}</span>
+                {% if obj.copyright[0][0] != '©' %}
+                <span class="figure__copyright">{{ obj.copyright[0][0] }}</span>
                 {% endif %}
             </figcaption>
         </figure>
@@ -183,8 +184,8 @@
 
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
-        {{ lama.insert_responsive_image(obj,'article__main-image--longform') }}
-    </div>{{obj.caption}}{{obj.copyright}}
+        {{ lama.insert_responsive_image(obj, 'article__main-image--longform') }}
+    </div>{{ obj.caption }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro columnimage(obj) -%}

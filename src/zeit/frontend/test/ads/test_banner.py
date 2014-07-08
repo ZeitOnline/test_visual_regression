@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from mock import Mock
+import mock
 from zeit.frontend import view_article
 from zeit.frontend.banner import Place
 from zeit.frontend.test import Browser
@@ -27,14 +27,27 @@ def test_banner_list_should_be_sorted(testserver):
 
 def test_banner_view_should_return_Place_if_tile_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, Mock())
+    article_view = view_article.Article(context, mock.Mock())
     assert isinstance(article_view.banner(1), zeit.frontend.banner.Place)
 
 
 def test_banner_view_should_return_None_if_tile_is_not_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = view_article.Article(context, Mock())
+    article_view = view_article.Article(context, mock.Mock())
     assert article_view.banner(999) is None
+
+
+def test_banner_should_fallback_on_not_registered_banner_types(testserver):
+    class Moep(zeit.frontend.view_article.Article):
+        @property
+        def type(self):
+            return 'moep'
+
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    moep_view = Moep(context, mock.MagicMock(return_value=''))
+    expected = getattr(
+        zeit.frontend.banner.iqd_mobile_ids[context.sub_ressort], 'default')
+    assert moep_view.iqd_mobile_settings == expected
 
 
 def test_banner_should_not_be_displayed_on_short_pages(testserver):
@@ -87,7 +100,93 @@ def test_banner_view_should_be_displayed_on_succeeding_pages(testserver):
             'ad__width_300 ad__min__768">') not in browser.contents
 
 
-def test_banner_mobile_should_request_with_correct_data(testserver):
+# Tests for articles
+def test_banner_mobile_should_request_with_correct_data_in_article_mode(
+        testserver):
+    # Ressort mode-design
     browser = Browser('%s/artikel/01' % testserver.url)
-    assert "var sas_pageid = '32375/445608'" in browser.contents
-    assert "sas_formatid = 13500," in browser.contents
+    assert "sasmobile('32375/445612', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445612', 13557, sas_target);" in browser.contents
+    assert "sasmobile('32375/445612', 13501, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data_in_article_leben(
+        testserver):
+    # Ressort leben
+    browser = Browser('%s/artikel/02' % testserver.url)
+    assert "sasmobile('32375/445623', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445623', 13557, sas_target);" in browser.contents
+    assert "sasmobile('32375/445623', 13501, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data_in_article_essen(
+        testserver):
+    # Ressort essen-trinken
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert "sasmobile('32375/445618', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445618', 13557, sas_target);" in browser.contents
+    assert "sasmobile('32375/445618', 13501, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_fallback_for_articles_without_sub_ressort(
+        testserver):
+    browser = Browser('%s/artikel/09' % testserver.url)
+    assert "sasmobile('" not in browser.contents
+
+
+# Tests for cps
+def test_banner_mobile_should_request_with_correct_data_in_cp_leben(
+        testserver):
+    # Ressort leben
+    browser = Browser('%s/centerpage/lebensart' % testserver.url)
+    assert "sasmobile('32375/445622', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445622', 13501, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data_in_cp_mode(
+        testserver):
+    # Ressort mode-design
+    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert "sasmobile('32375/445611', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445611', 13501, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data_in_cp_essen(
+        testserver):
+    # Ressort essen-trinken
+    browser = Browser('%s/centerpage/lebensart-3' % testserver.url)
+    assert "sasmobile('32375/445616', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445616', 13501, sas_target);" in browser.contents
+
+
+# Tests for galleries
+def test_banner_mobile_should_request_with_correct_data_in_gallery_mode(
+        testserver):
+    # Ressort mode-design
+    browser = Browser(
+        '%s/galerien/fs-desktop-schreibtisch-computer-3' % testserver.url)
+    assert "sasmobile('32375/445613', 13500, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data_in_gallery_essen(
+        testserver):
+    # Ressort essen-trinken
+    browser = Browser(
+        '%s/galerien/fs-desktop-schreibtisch-computer-2' % testserver.url)
+    assert "sasmobile('32375/445619', 13500, sas_target);" in browser.contents
+
+
+def test_banner_mobile_should_request_with_correct_data_in_gallery_leben(
+        testserver):
+    # Ressort leben
+    browser = Browser(
+        '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    assert "sasmobile('32375/445624', 13500, sas_target);" in browser.contents
+
+
+# Test for hp
+def test_banner_mobile_should_request_with_correct_data_at_hp(
+        testserver):
+    browser = Browser('%s/zeit-magazin/index' % testserver.url)
+    assert "sasmobile('32375/445608', 13500, sas_target);" in browser.contents
+    assert "sasmobile('32375/445608', 13501, sas_target);" in browser.contents

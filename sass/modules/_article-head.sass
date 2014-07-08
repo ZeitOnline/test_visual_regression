@@ -66,9 +66,24 @@ $standard-header-image-max-width: 31.25em
   figure
     margin-top: 0
     margin-bottom: 0
+    position: relative
   .figure__caption
-    display: none
-    text-align: right
+    position: absolute
+    bottom: 0
+    background: rgba(0, 0, 0, 0.5)
+    width: 100%
+    padding: $thin
+    font-size: $font-xs
+    opacity: 0.0
+    +transition(opacity .2s linear)
+    .figure__caption__text
+      display: none
+    .figure__copyright
+      color: $grey--light
+      display: block
+  &:hover
+    .figure__caption
+      opacity: 1.0
 
 .article__head__meta
   @extend %meta
@@ -86,11 +101,6 @@ $standard-header-image-max-width: 31.25em
   display: block
   margin-bottom: $fine
 
-.article__head__meta__genre
-.article__head__meta__location
-.article__head__meta__author
-
 .article__head__meta__source
   &:after
     content: ' — '
-
