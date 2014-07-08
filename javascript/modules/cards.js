@@ -1,7 +1,7 @@
 /* global console, define */
 define(['jquery'], function() {
 
-   /**
+    /**
      * Flip card
      */
     var flipCard = function(e) {
@@ -12,7 +12,7 @@ define(['jquery'], function() {
         deck.toggleClass('js-flipped');
     };
 
-   /**
+    /**
      * Slide card
      */
     var slideCard = function(e) {
@@ -23,14 +23,14 @@ define(['jquery'], function() {
         deck.toggleClass('js-slid');
     };
 
-   /**
+    /**
      * Stop event propagation
      */
     var stopPropagation = function(e) {
         e.stopImmediatePropagation();
     };
 
-   /**
+    /**
      * Initialize flipping cards
      */
     var init = function() {

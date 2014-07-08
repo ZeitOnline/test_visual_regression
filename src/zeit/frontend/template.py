@@ -1,22 +1,25 @@
-from babel.dates import format_datetime
 from datetime import datetime, timedelta
-from lxml import objectify
-from repoze.bitblt.transform import compute_signature
-from urlparse import urlsplit, urlunsplit
 import email.utils
 import itertools
-import jinja2
 import logging
 import pkg_resources
+import re
+import urlparse
+
+from babel.dates import format_datetime
+from lxml import objectify
+from repoze.bitblt.transform import compute_signature
+import jinja2
 import pyramid.threadlocal
 import pytz
-import re
 import requests
-import urlparse
+import zope.component
+
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+
 import zeit.frontend.centerpage
-import zope.component
+
 
 log = logging.getLogger(__name__)
 default_teaser_images = None  # Set during startup through application.py
@@ -108,6 +111,10 @@ def hide_none(string):
         return string
 
 
+def remove_break(string):
+    return re.sub('\n', '', string)
+
+
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
@@ -178,14 +185,15 @@ def default_image_url(image,
         if image.uniqueId is None:
             return None
 
-        scheme, netloc, path, query, fragment = urlsplit(image.uniqueId)
+        scheme, netloc, path, query, fragment = urlparse.urlsplit(
+            image.uniqueId)
         parts = path.split('/')
         parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
         path = '/'.join(parts)
-        url = urlunsplit((scheme, netloc, path, query, fragment))
+        url = urlparse.urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
 
-        return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+        return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
 

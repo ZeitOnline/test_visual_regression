@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
-import colander
 import datetime
-import urllib2
-import urllib
 import json
+import urllib
+import urllib2
+
+import babel.dates
+import colander
+
 import zeit.cms.interfaces
-from babel.dates import get_timezone
-from comments import comments_per_unique_id
+
+import zeit.frontend.comments
 
 
 class UnavailableSectionException(Exception):
@@ -32,6 +34,9 @@ class LinkReach(object):
 
     def fetch_service(self, service, limit, section='zeit-magazin'):
         """Compile a list of popular articles for a specific service."""
+        if service == 'comments':
+            return self.fetch_comments(limit, section=section)
+
         if section not in self.sections:
             raise UnavailableSectionException('No section named: ' + section)
 
@@ -86,7 +91,8 @@ class LinkReach(object):
                 continue
 
             try:
-                score = comments_per_unique_id(self.stats_path)[rel_path]
+                score = zeit.frontend.comments.comments_per_unique_id(
+                    self.stats_path)[rel_path]
             except KeyError:
                 # Ignore item if comment count lookup fails.
                 score = 0
@@ -116,7 +122,7 @@ class LinkReach(object):
 def _prepare_date(value):
     if not isinstance(value, int):
         return None
-    tz = get_timezone('Europe/Berlin')
+    tz = babel.dates.get_timezone('Europe/Berlin')
     return datetime.datetime.fromtimestamp(value / 1000, tz)
 
 
