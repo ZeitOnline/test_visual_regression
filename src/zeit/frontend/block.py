@@ -54,8 +54,6 @@ def block_type(obj):
         return 'no_block'
     elif isinstance(obj, tuple):
         return tuple(block_type(o) for o in obj)
-    elif hasattr(obj, '__block__'):
-        return obj.__block__
     else:
         return type(obj).__name__.lower()
 
