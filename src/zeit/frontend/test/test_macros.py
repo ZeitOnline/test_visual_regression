@@ -763,7 +763,7 @@ def test_macro_iqd_nuggad_mobile_produces_js(jinja2_env):
 
 def test_adplace_middle_mobile_produces_html(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    elems = ['<div class="iqd_mobile__adplace">',
+    elems = ['<div class="iqd_mobile__adplace--middle">',
              '<div id="sas_13557"></div>']
     obj = mock.Mock()
     obj.tile = 7
