@@ -46,8 +46,7 @@ class GalleryImage(zeit.frontend.block.Image):
         # TODO: get complete list of copyrights with links et al
         # this just returns the first copyright without link
         # mvp it is
-        self.copyright = [copyright[0]
-                          for copyright in image_meta.copyrights][0]
+        self.copyright = [c[0] for c in image_meta.copyrights][0]
         self.alt = image_meta.alt
         self.align = image_meta.alignment
 

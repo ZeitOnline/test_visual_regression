@@ -18,6 +18,7 @@ class Gallery(zeit.frontend.view.Content):
 
     @reify
     def images(self):
+        # TODO: Why does this not work with zope interfaces?
         return zeit.frontend.gallery.standalone(self.context)
 
     @reify

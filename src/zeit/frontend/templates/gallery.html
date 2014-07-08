@@ -16,7 +16,9 @@
     <div class="inline-gallery">
         {% for image in view.images.itervalues() -%}
             <figure class="figure-full-width">
-                <img alt="{{ image.alt|hide_none }}" title="{{ image.title|hide_none }}" class="figure__media" src="{{ image.uniqueId|translate_url }}">
+                <div class="scaled-image">
+                    {{ lama.insert_responsive_image(image, 'figure__media') }}
+                </div>
                 {% if image.caption -%}
                     <figcaption class="figure__caption">
                         <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>

@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+from lxml import etree
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 from zeit.frontend.test import Browser
 
 
@@ -95,3 +98,10 @@ def test_gallery_without_supertitle_has_html_title(browser, testserver):
         testserver.url))
     assert '<title>Automesse Detroit 2014 US-Hersteller</title>' \
         in browser.contents
+
+
+def test_standalone_gallery_uses_responsive_images_with_ratio(testserver):
+    browser = Browser('%s/galerien/fs-desktop-schreibtisch-computer' % (
+        testserver.url))
+    image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
+    assert 'data-ratio="0.743405275779"' in etree.tostring(image)
