@@ -14,27 +14,20 @@
 {% block article_pages %}
 <div class="gallery">
     <div class="inline-gallery">
-        {% for image in view.images -%}
-            {% set image_meta = image | get_image_metadata -%}
-            {% set copyright = image_meta.copyrights[0] -%}
-            {% if image.layout != "hidden" -%}
-                <figure class="figure-full-width">
-                    <div class="scaled-image">
-                        {#{ lama.insert_responsive_image(image.image) }#}
-                        <img alt="" title="" class="figure__media" src="{{image.image.uniqueId | translate_url}}">
-                    </div>
-                    {% if image.caption -%}
+        {% for image in view.images.itervalues() -%}
+            <figure class="figure-full-width">
+                <img alt="{{ image.alt|hide_none }}" title="{{ image.title|hide_none }}" class="figure__media" src="{{ image.uniqueId|translate_url }}">
+                {% if image.caption -%}
                     <figcaption class="figure__caption">
-                        <span class="figure__caption__pager">{{loop.index}}/{{loop.length}}</span>
-                        {{image.caption}}
-                        {% if image_meta.copyrights -%}
-                            <span class="figure__caption__copyright">{{copyright[0]}}</span>
-                        {% endif -%}
+                        <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
+                        {{ image.caption }}
+                        {% if image.copyright -%}
+                            <span class="figure__caption__copyright">{{ image.copyright }}</span>
+                        {%- endif %}
                     </figcaption>
-                    {% endif -%}
-                </figure>
-            {% endif -%}
-        {% endfor -%}
+                {%- endif %}
+            </figure>
+        {%- endfor %}
     </div>
 </div>
 <div class="gallery__info">

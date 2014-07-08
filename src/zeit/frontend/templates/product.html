@@ -26,15 +26,15 @@
     </div>
 
     <div class="product__wrap">
-        {% for image in view.images %}
+        {% for image in view.images.itervalues() %}
             <figure class="product__wrap__entry">
-                {% set image_meta = image | get_image_metadata %}
-                {% set copyright = image_meta.copyrights[0] %}
-                <img alt="" title="" class="product__image" src="{{image.image.uniqueId | translate_url}}">
+                <div class="scaled-image">
+                    {{ lama.insert_responsive_image(image, 'product__image', 'article') }}
+                </div>
                 <figcaption class="product__caption">
                     <div class="product__caption__text">{{ image.caption }}</div>
-                    {% if image_meta.copyrights %}
-                        <span class="product__caption__copyright">{{ copyright[0] }}</span>
+                    {% if image.copyright %}
+                        <span class="product__caption__copyright">{{ image.copyright }}</span>
                     {% endif %}
                 </figcaption>
             </figure>

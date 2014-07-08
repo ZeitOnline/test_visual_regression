@@ -404,8 +404,8 @@
 {% macro inlinegallery(obj) -%}
     <div class="inline-gallery__wrap">
         <div class="inline-gallery">
-            {% for item in obj.items() %}
-                {{ inlinegalleryimage(item, loop) }}
+            {% for entry in obj.itervalues() %}
+                {{ inlinegalleryimage(entry, loop) }}
             {% endfor %}
         </div>
     </div>
