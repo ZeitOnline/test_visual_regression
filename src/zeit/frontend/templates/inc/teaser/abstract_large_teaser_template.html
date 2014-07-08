@@ -19,15 +19,17 @@ Available attributes:
         </div>
     </a>
     <header class="cp__lead-leader__title__wrap cp__lead-leader__title__wrap--{{ self.shade() }}">
-        <span class="cp__lead__supertitle">
-            <a href="{{teaser | create_url}}">
-                {{ teaser.teaserSupertitle }}
-            </a>
-        </span>
-        <h2 class="cp__lead__title">
-            <a href="{{teaser | create_url}}">
-                {{ teaser.teaserTitle | hide_none }}
-            </a>
+        <h2>
+            <div class="cp__lead__supertitle">
+                <a href="{{teaser | create_url}}">
+                    {{ teaser.teaserSupertitle }}
+                </a>
+            </div>
+            <div class="cp__lead__title">
+                <a href="{{teaser | create_url}}">
+                    {{ teaser.teaserTitle | hide_none }}
+                </a>
+            </div>
         </h2>
         <span class="cp__lead__subtitle">
             {{ teaser.teaserText | hide_none }}

@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- integrate h2 to teaser and h1 for article supertitle/title combination
 
 
 0.8.1 (2014-07-04)
