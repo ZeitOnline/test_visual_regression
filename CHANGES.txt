@@ -6,6 +6,9 @@ Change log for zeit.frontend
 
 - ZMO-802 Make slider galleries static by request
 
+- ZMO-849: Make margins invisible if there's no ad and center middle ad for
+  small breakpoints
+
 
 0.8.1 (2014-07-04)
 ------------------
