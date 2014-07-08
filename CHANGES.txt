@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZMO-850: Meta class for view callables ensures iterable return types.
 
 
 0.8.1 (2014-07-04)
