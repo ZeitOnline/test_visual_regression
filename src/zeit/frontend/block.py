@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
+import logging
+import os.path
+
 from grokcore.component import adapter, implementer
 from lxml import etree, html
 import PIL
-import logging
-import os.path
+import zope.interface
+
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
-import zeit.frontend.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
-import zope.interface
+
+import zeit.frontend.interfaces
 
 
 # Since this interface is an implementation detail rather than part of the API

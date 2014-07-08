@@ -4,7 +4,7 @@ from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery, Portraitbox
 from zeit.frontend import view
 from zeit.frontend import view_article, view_centerpage
-from zeit.frontend.block import InlineGalleryImage
+from zeit.frontend.gallery import IGalleryImage
 from zeit.frontend.test import Browser
 import mock
 import pytest
