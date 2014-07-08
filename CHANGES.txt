@@ -6,7 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-835: Fix slider galleries for IE < 10
 
-- Nothing changed yet.
+- ZMO-849: Make margins invisible if there's no ad and center middle ad for
+  small breakpoints
 
 
 0.8.1 (2014-07-04)
