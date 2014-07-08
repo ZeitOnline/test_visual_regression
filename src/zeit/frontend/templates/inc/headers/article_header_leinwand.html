@@ -4,8 +4,10 @@
     <header class="article__head article__head--leinwand">
       {{ blocks[view.header_elem|block_type](view.header_elem) }}
       <div class="is-constrained">
-        {{ blocks.supertitle() }}
-        {{ blocks.title() }}
+        <h1>
+          {{ blocks.supertitle() }}
+          {{ blocks.title() }}
+        </h1>
         {{ blocks.subtitle(include_meta=True) }}
         <span class="article__head__meta-wrap">
           <span class="article__head__meta">
