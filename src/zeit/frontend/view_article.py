@@ -39,13 +39,10 @@ class Article(zeit.frontend.view.Content):
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self._copyrights = {}
-
-    def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
-        return {}
 
     @reify
     def template(self):
@@ -327,21 +324,15 @@ class Article(zeit.frontend.view.Content):
              renderer='templates/article.html')
 class ArticlePage(Article):
 
-    def __call__(self):
-        super(ArticlePage, self).__call__()
-        if self.request.view_name == 'komplettansicht':
-            return {}
-
-        if self.page_nr > len(self.pages):
-            raise pyramid.httpexceptions.HTTPNotFound()
-        return {}
-
     @reify
     def page_nr(self):
         try:
             n = int(self.request.path_info.split('/')[-1][6:])
             if n == 1:
                 raise pyramid.httpexceptions.HTTPNotFound()
+            elif n > len(self.pages):
+                if self.request.view_name != 'komplettansicht':
+                    raise pyramid.httpexceptions.HTTPNotFound()
             return n
         except (IndexError, ValueError):
             raise pyramid.httpexceptions.HTTPNotFound()
