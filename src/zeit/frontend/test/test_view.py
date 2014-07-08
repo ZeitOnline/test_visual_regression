@@ -198,15 +198,15 @@ def test_inline_gallery_should_be_contained_in_body(testserver):
 def test_inline_gallery_should_have_images(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    frontend_gallery = zeit.frontend.block.InlineGallery(body.values()[14])
-    assert all(type(i) is InlineGalleryImage for i in frontend_gallery.items())
+    gallery = zeit.frontend.block.IFrontendBlock(body.values()[14])
+    assert all(IGalleryImage.providedBy(i) for i in gallery.itervalues())
 
-    gallery_image = frontend_gallery.items()[4]
-    assert gallery_image.src == \
+    image = gallery.values()[4]
+    assert image.src == \
         u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
         '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
-    assert gallery_image.alt is None
-    assert gallery_image.copyright == u'\xa9'
+    assert image.alt is None
+    assert image.copyright == u'\xa9'
 
 
 def test_article_request_should_have_body_element(testserver):
