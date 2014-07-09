@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- ZMO-848: fix chapter box within longform (ff issue)
+
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
   small breakpoints
 

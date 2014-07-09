@@ -120,7 +120,7 @@ def test_macro_portraitbox_should_produce_markup(jinja2_env):
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
-    markup_standart = ('<div class="%s"><div class="article__subpage-index__'
+    markup_standart = ('<div class="%s figure-stamp"><div class="article__subpage-index__'
                        'title">&uuml;bersicht</div>') % css_index
 
     fake_page = type('Dummy', (object,), {})
