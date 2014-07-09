@@ -7,6 +7,7 @@ Change log for zeit.frontend
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
   small breakpoints
 
+- ZMO-776: add optional links to in-article image copyrights 
 
 0.8.1 (2014-07-04)
 ------------------
