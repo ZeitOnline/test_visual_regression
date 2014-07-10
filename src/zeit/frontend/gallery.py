@@ -42,13 +42,20 @@ class GalleryImage(zeit.frontend.block.Image):
             self.src = item.image.uniqueId
             self.uniqueId = item.image.uniqueId
             self.image = item.image
-        image_meta = zeit.content.image.interfaces.IImageMetadata(item)
-        # TODO: get complete list of copyrights with links et al
-        # this just returns the first copyright without link
-        # mvp it is
-        self.copyright = [c[0] for c in image_meta.copyrights][0]
-        self.alt = image_meta.alt
-        self.align = image_meta.alignment
+
+        def fix_uc(s):
+            # Fix misrepresentation of latin-1 chars in unicode strings.
+            if isinstance(s, unicode):
+                try:
+                    s = s.encode('latin-1', 'backslashreplace').decode('utf-8')
+                except UnicodeDecodeError:
+                    pass
+            return s
+
+        meta = zeit.content.image.interfaces.IImageMetadata(item)
+        self.copyright = list((fix_uc(i[0]),) + i[1:] for i in meta.copyrights)
+        self.alt = meta.alt
+        self.align = meta.alignment
 
 
 class Gallery(collections.OrderedDict):
