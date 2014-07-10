@@ -17,7 +17,7 @@
         {% for image in view.images.itervalues() -%}
             <figure class="figure-full-width">
                 <div class="scaled-image">
-                    {{ lama.insert_responsive_image(image, 'figure__media') }}
+                    {{ lama.insert_responsive_image(image) }}
                 </div>
                 {% if image.caption -%}
                     <figcaption class="figure__caption">
