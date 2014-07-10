@@ -78,9 +78,10 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
-        script = 'return $(".bx-overlay-next").css("display")'
-        elemNextDisplay = driver.execute_script(script)
-        assert elemNextDisplay != "none"
+        bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
+        bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
+        assert bigButtonPrev.is_displayed()
+        assert bigButtonNext.is_displayed()
     except:
         print "Timeout Gallery Script"
         assert False
