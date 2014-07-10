@@ -206,7 +206,7 @@ def test_inline_gallery_should_have_images(testserver):
         u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
         '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
     assert image.alt is None
-    assert image.copyright == u'\xa9'
+    assert image.copyright[0][0] == u'\xa9'
 
 
 def test_article_request_should_have_body_element(testserver):
