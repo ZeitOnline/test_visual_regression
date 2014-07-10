@@ -1,5 +1,5 @@
 {% extends "templates/article.html" %}
-{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/article_macro.tpl' as blocks with context %}
 
 {% block article_header %}
     <div class="article__head-wrap">
@@ -11,11 +11,10 @@
 {% endblock article_header %}
 
 {% block article_pages %}
-
 <div class="product">
     <div class="product__info">
         <div class="product__description">
-            {{ view.galleryText | safe }}
+            {{ view.galleryText|safe }}
         </div>
         <div class="article__head__meta">
             <div class="article__head__meta__date">
@@ -33,13 +32,12 @@
                 </div>
                 <figcaption class="product__caption">
                     <div class="product__caption__text">{{ image.caption }}</div>
-                    {% if image.copyright %}
-                        <span class="product__caption__copyright">{{ image.copyright }}</span>
-                    {% endif %}
+                    {% if image.copyright[0][0] != '©' -%}
+                        <span class="product__caption__copyright">{{ image.copyright[0][0] }}</span>
+                    {%- endif %}
                 </figcaption>
             </figure>
         {% endfor %}
     </div>
 </div>
-
 {% endblock article_pages %}

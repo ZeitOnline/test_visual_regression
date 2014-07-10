@@ -178,10 +178,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro inlinegalleryimage(obj, loop) -%}
-    {{ image(obj, loop) }}
-{%- endmacro %}
-
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect">
         {{ lama.insert_responsive_image(obj, 'article__main-image--longform') }}
@@ -401,12 +397,12 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro inlinegallery(obj) -%}
-    <div class="inline-gallery__wrap">
+{% macro inlinegallery(obj, wrapper_class='inline-gallery__wrap') -%}
+    <div class="{{ wrapper_class }}">
         <div class="inline-gallery">
-            {% for entry in obj.itervalues() %}
-                {{ inlinegalleryimage(entry, loop) }}
-            {% endfor %}
+            {% for entry in obj.itervalues() -%}
+                {{ image(entry, loop) }}
+            {%- endfor %}
         </div>
     </div>
 {%- endmacro %}
