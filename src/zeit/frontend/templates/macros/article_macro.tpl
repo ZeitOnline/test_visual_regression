@@ -171,7 +171,15 @@
                 {% endif -%}
                 <span class="figure__caption__text">{{ obj.caption }}</span>
                 {% if obj.copyright[0][0] != '©' %}
-                <span class="figure__copyright">{{ obj.copyright[0][0] }}</span>
+                <span class="figure__copyright">
+                {% if obj.copyright[0][1] %}
+                    <a href="{{obj.copyright[0][1]}}" target="_blank">
+                {% endif %} 
+                        {{ obj.copyright[0][0] }}
+                {% if obj.copyright[0][1] %}
+                    </a>
+                {% endif %} 
+                </span>
                 {% endif %}
             </figcaption>
         </figure>
