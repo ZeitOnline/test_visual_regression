@@ -4,16 +4,28 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- ZMO-851: Don't show visited link color within buzz modul
+
+- ZMO-816: Integrate h2 to teaser and h1 for article supertitle/title combination
+
+- ZMO-835: Fix slider galleries for IE < 10
+
+- ZMO-850: Meta class for view callables ensures iterable return types.
+
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
   small breakpoints
+
+- ZMO-776: Add optional links to in-article image copyrights
+
+- ZMO-839: Add copyrights for galleries
 
 
 0.8.1 (2014-07-04)
 ------------------
 
-- HOTFIX: deprecate view.__iter__ in favour of separate property
+- HOTFIX: Deprecate view.__iter__ in favour of separate property
 
-- HOTFIX: change iqd-id variable
+- HOTFIX: Change iqd-id variable
 
 - ZMO-705: Partially reorganize view properties
 
@@ -29,7 +41,7 @@ Change log for zeit.frontend
 0.8 (2014-06-27)
 ----------------
 
-- HOTFIX: write filter to make view property transfer save (ZMO-831)
+- HOTFIX: Write filter to make view property transfer save (ZMO-831)
 
 - HOTFIX: Invalid js in ivw caller script
 
@@ -43,7 +55,7 @@ Change log for zeit.frontend
 
 - ZMO-821: Fix fireplace ad content height in conjunction with slider galleries
 
-- ZMO-798: add mobile ad-id xml and integrate new banner codes for mobile ads
+- ZMO-798: Add mobile ad-id xml and integrate new banner codes for mobile ads
 
 - ZMO-690 Add clickable overlay for galleries
   + Add keyboard navigation for galleries

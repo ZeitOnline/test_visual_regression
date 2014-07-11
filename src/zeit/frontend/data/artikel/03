@@ -112,7 +112,7 @@
             src="http://xml.zeit.de/exampleimages/artikel/03/01.jpg"
             href="http://www.test.de" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
                 <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
-                <copyright>© Reuters/Alessandro Bianchi</copyright>
+                <copyright link="http://foo.de">© Reuters/Alessandro Bianchi</copyright>
             </image>
             <p>Es waren die Jahre nach 1968. Eine Karawane von klapprigen R4s, Enten und VW-Bussen überquerte die Alpen bei <entity idref="Bozen" entity_type="Location" url_value="orte/bozen">Bozen</entity> und ergoss sich hinter <entity idref="Bologna" entity_type="Location" url_value="orte/bologna">Bologna</entity> ratternd und klappernd in das toskanische Hügelland. An den Lenkrädern saßen diskussionsgestählte Studenten mit Vollbärten und Gesellschaftswissenschaftlerinnen, die <a href="http://www.zeit.de/lebensart/mode/2013-06/ausstellung-lingerie-francaise-dessous" target="_blank" class="">dem verpönten BH</a> für immer abgeschworen hatten. <br/>
         </p>

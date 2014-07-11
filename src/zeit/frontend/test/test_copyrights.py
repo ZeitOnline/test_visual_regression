@@ -198,3 +198,19 @@ def test_existing_header_image_shows_up_in_copyrights(testserver):
 def test_missing_header_image_does_not_show_up_in_copyrights(testserver):
     browser = Browser('%s/artikel/header3' % testserver.url)
     assert not browser.cssselect('div.copyrights__entry')
+
+
+def test_gallery_image_should_show_up_in_copyrights(testserver):
+    browser = Browser(
+        '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url)
+    expected = (
+        '/galerien/bg-automesse-detroit-2014-usa-bilder/'
+        '02-shomei-tomatsu.jpg')
+    assert expected in browser.cssselect(
+        'div.copyrights__entry__image')[0].attrib['style']
+
+
+def test_only_gallery_images_with_cr_should_show_up_in_copyrights(testserver):
+    browser = Browser(
+        '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url)
+    assert len(browser.cssselect('ul.copyrights__list li')) == 1

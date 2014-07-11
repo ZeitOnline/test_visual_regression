@@ -40,7 +40,6 @@
                 }
             },
             slideSelector: '.figure-full-width',
-            easing: 'ease-in-out',
             pagerType: 'short',
             nextText: 'Zum nächsten Bild',
             prevText: 'Zum vorigen Bild',
@@ -84,7 +83,8 @@
                 DOM_VK_LEFT = 37,
                 DOM_VK_RIGHT = 39,
                 slider = {},
-                sliderViewport;
+                sliderViewport,
+                mq;
 
             // enable keyboard navigation
             var handleKeydown = function(e) {
@@ -121,21 +121,23 @@
                 });
             };
 
-            var mqMobile = window.matchMedia('(max-width: 576px)');
+            if (window.matchMedia) {
+                mq = window.matchMedia('(max-width: 576px)');
 
-            if (mqMobile.matches) {
-                hideOverlays();
-            }
-
-            mqMobile.addListener(function() {
-                if (mqMobile.matches) {
+                if (mq.matches) {
                     hideOverlays();
-                } else {
-                    figcaptions.show();
-                    buttons.show();
-                    figures.off('click');
                 }
-            });
+
+                mq.addListener(function() {
+                    if (mq.matches) {
+                        hideOverlays();
+                    } else {
+                        figcaptions.show();
+                        buttons.show();
+                        figures.off('click');
+                    }
+                });
+            }
 
             var figCaptionSize = function(image, figcaption) {
                 var caption = figcaption || image.closest('figure').find('figcaption'),
