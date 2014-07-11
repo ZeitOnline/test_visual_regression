@@ -18,16 +18,28 @@ import zeit.content.image.interfaces
 import zeit.frontend.article
 
 
+class MetaView(type):
+    """Meta class for view callables that ensures the return type is a dict."""
+
+    def __new__(cls, name, bases, dct):
+        def ensure_dict(func):
+            def wrapped(self):
+                v = func(self)
+                return {} if v is None else v
+            return wrapped
+        dct['__call__'] = ensure_dict(dct.get('__call__', lambda self: {}))
+        return super(MetaView, cls).__new__(cls, name, bases, dct)
+
+
 class Base(object):
     """Base class for all views."""
+
+    __metaclass__ = MetaView
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
         self.request.response.cache_expires(300)
-
-    def __call__(self):
-        return {}
 
     @reify
     def type(self):
@@ -196,8 +208,7 @@ class Content(Base):
     @reify
     def date_format(self):
         if self.context.product:
-            if self.context.product.id == 'ZEI' or \
-               self.context.product.id == 'ZMLB':
+            if self.context.product.id in ('ZEI', 'ZMLB'):
                 return 'short'
         return 'long'
 
