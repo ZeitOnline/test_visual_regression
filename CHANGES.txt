@@ -6,7 +6,7 @@ Change log for zeit.frontend
 
 - ZMO-851: Don't show visited link color within buzz modul
 
-- ZMO-816: integrate h2 to teaser and h1 for article supertitle/title combination
+- ZMO-816: Integrate h2 to teaser and h1 for article supertitle/title combination
 
 - ZMO-835: Fix slider galleries for IE < 10
 
@@ -14,6 +14,8 @@ Change log for zeit.frontend
 
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
   small breakpoints
+
+- ZMO-776: Add optional links to in-article image copyrights
 
 - ZMO-839: Add copyrights for galleries
 
