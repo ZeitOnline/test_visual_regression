@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- ZMO-835: Fix slider galleries for IE < 10
+
 - ZMO-850: Meta class for view callables ensures iterable return types.
 
 - ZMO-851: don't show visited link color within buzz modul
