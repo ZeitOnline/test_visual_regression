@@ -19,7 +19,9 @@
 				{{ blocks[view.header_elem|block_type](view.header_elem) }}
 
 				<header class="article__title-wrap">
-					{{ blocks.title() }}
+					<h1>
+						{{ blocks.title() }}
+					</h1>
 					<div class="article__head__meta">
 						{{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
 						{{ blocks.meta_author(view.authors) }}

@@ -307,6 +307,34 @@ def test_article_1_10_produce_no_error(testserver):
     assert browser.cssselect('div.article__wrap')
 
 
+def test_article_1_10_have_correct_h1(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/02' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/03' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/04' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/05' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    browser = Browser('%s/artikel/06' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    browser = Browser('%s/artikel/08' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/09' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/10' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+
+
 def test_header_articles_produce_no_error(testserver):
     browser = Browser('%s/artikel/header1' % testserver.url)
     assert browser.cssselect('div.article__wrap')
@@ -322,6 +350,26 @@ def test_header_articles_produce_no_error(testserver):
     assert browser.cssselect('div.article__wrap')
 
 
+def test_header_articles_have_correct_h1(testserver):
+    browser = Browser('%s/artikel/header1' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/header2' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/header3' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/header4' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    browser = Browser('%s/artikel/header5' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+    browser = Browser('%s/artikel/header6' % testserver.url)
+    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1>div.article__head__supertitle')
+
+
 def test_article_header2_has_correct_subtitle(testserver):
     browser = Browser('%s/artikel/header2' % testserver.url)
     assert 'Wie viele Flüchtlingskinder bin '\
@@ -330,7 +378,7 @@ def test_article_header2_has_correct_subtitle(testserver):
 
 def test_artikel_header_header1_should_have_correct_header_source(testserver):
     browser = Browser('%s/artikel/header1' % testserver.url)
-    assert browser.cssselect('h1.article__head__title')
+    assert browser.cssselect('h1>.article__head__title')
 
 
 def test_artikel_header_header2_should_have_correct_source(testserver):

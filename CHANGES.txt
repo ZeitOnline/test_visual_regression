@@ -4,7 +4,11 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
-- ZMO-802 Make slider galleries static by request
+- ZMO-802: Make slider galleries static by request
+
+- ZMO-816: integrate h2 to teaser and h1 for article supertitle/title combination
+
+- ZMO-835: Fix slider galleries for IE < 10
 
 - ZMO-850: Meta class for view callables ensures iterable return types.
 

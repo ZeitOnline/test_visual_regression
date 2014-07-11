@@ -26,18 +26,20 @@
 {%- endmacro %}
 
 {% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
-    {% if withlink -%}<a href="{{teaser | create_url}}">{%- endif %}
-    <div class="{{ additional_css_class | default('teaser') }}__supertitle">
-        {% if teaser.teaserSupertitle %}
-            {{teaser.teaserSupertitle | hide_none}}
-        {% else %}
-            {{teaser.supertitle | hide_none }}
-        {% endif %}
-    </div>
-    <div class="{{ additional_css_class | default('teaser') }}__title">
-        {{teaser.teaserTitle | hide_none}}
-    </div>
-    {% if withlink -%}</a>{%- endif %}
+    <h2>
+        {% if withlink -%}<a href="{{teaser | create_url}}">{%- endif %}
+        <div class="{{ additional_css_class | default('teaser') }}__supertitle">
+            {% if teaser.teaserSupertitle %}
+                {{teaser.teaserSupertitle | hide_none}}
+            {% else %}
+                {{teaser.supertitle | hide_none }}
+            {% endif %}
+        </div>
+        <div class="{{ additional_css_class | default('teaser') }}__title">
+            {{teaser.teaserTitle | hide_none}}
+        </div>
+        {% if withlink -%}</a>{%- endif %}
+    </h2>
 {%- endmacro %}
 
 {% macro teaser_sharing_card(teaser) -%}
