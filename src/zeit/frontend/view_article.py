@@ -19,6 +19,7 @@ import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces
 import zeit.frontend.reach
+import zeit.frontend.template
 import zeit.frontend.view
 
 log = logging.getLogger(__name__)
@@ -145,8 +146,16 @@ class Article(zeit.frontend.view.Content):
         return self.header_video or self.header_img
 
     @reify
+    def image_group(self):
+        try:
+            group = zeit.content.image.interfaces.IImages(self.context).image
+            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
+                return group
+        except TypeError:
+            return
+
+    @reify
     def sharing_img(self):
-        # Hier schlaegt das Bildergruppenproblem fuer das Aufmacherbild durch
         if self.header_img is not None:
             return self.header_img
         if self.header_video is not None:
