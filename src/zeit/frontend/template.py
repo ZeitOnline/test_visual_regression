@@ -222,6 +222,67 @@ def get_image_scales(scale_source):
         yield name, (width, height)
 
 
+def closest_substitute_image(image_group,
+                             image_pattern='default',
+                             force_orientation=False):
+    """Returns the image from an image group, that most closely matches the
+    target image pattern. Larger resolutions are always favored over smaller
+    ones and the image orientation matching may be enforced.
+
+    :param image_group: Image Group instance that provides
+                        zeit.content.image.interfaces.IImageGroup
+    :param image_pattern: String representation of the target pattern ID.
+    :param force_orientation: Boolean wether orientation of substitute image
+                              must match that of target pattern.
+    :returns: Unique ID of most suitable substitute image.
+
+    Usage as jinja filter:
+    {{ my_image_group|closest_substitute_image('my-desired-pattern') }}
+
+    """
+
+    def orientation(x, y):
+        return (x > y and 'L') or (x == y and 'S') or (x < y and 'P')
+
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
+        return
+
+    # Overwrite the default image sizes with entries from the scale.xml file.
+    defaults = default_images_sizes.copy()
+    defaults.update(image_scales)
+
+    # Determine the image size correlating to the provided pattern.
+    target_size = defaults.get(image_pattern)
+    target_orientation = orientation(*target_size)
+
+    candidates = []
+    # Aggregate a list of images from the image group.
+    for name, img in image_group.items():
+        size = img.getImageSize()
+        if force_orientation and orientation(*size) == target_orientation:
+            candidates.append((name, size))
+        elif not force_orientation:
+            candidates.append((name, size))
+
+    if force_orientation and not candidates:
+        # Fallback to other orientations if no images were found.
+        return closest_substitute_image(
+            image_group, image_pattern=image_pattern, force_orientation=0)
+
+    # Inject the target scale into the list of available scales to find the
+    # closest matching scales. It is removed after sorting the candidates.
+    target_scale = ('__target__', target_size)
+    candidates.append(target_scale)
+    candidates = sorted(candidates, key=lambda i: i[1][0] * i[1][1])
+    target_idx = candidates.index(target_scale)
+    candidates.pop(target_idx)
+    # Select the candidate that is preferably one step larger than the target
+    # and fallback to the next smallest image.
+    substitute = candidates[target_idx - 1:target_idx + 1][-1][0]
+
+    return image_group.get(substitute).uniqueId
+
+
 def get_teaser_template(block_layout,
                         content_type,
                         asset,

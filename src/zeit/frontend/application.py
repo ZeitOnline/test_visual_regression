@@ -168,10 +168,10 @@ class Application(object):
              'auto_select_asset', 'get_all_assets'
              )
         copy(zeit.frontend.template, jinja.filters,
-             'create_url', 'default_image_url', 'format_date',
-             'format_date_ago', 'get_image_metadata', 'hide_none',
-             'obj_debug', 'replace_list_seperator', 'substring_from',
-             'translate_url', 'remove_break'
+             'closest_substitute_image', 'create_url', 'default_image_url',
+             'format_date', 'format_date_ago', 'get_image_metadata',
+             'hide_none', 'obj_debug', 'replace_list_seperator',
+             'substring_from', 'translate_url', 'remove_break'
              )
 
         return jinja
