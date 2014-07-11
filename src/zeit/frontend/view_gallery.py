@@ -24,6 +24,25 @@ class Gallery(zeit.frontend.view.Content):
     def galleryText(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
+    @property
+    def copyrights(self):
+        teaser_list = []
+        for i in self.images:
+            image_meta = zeit.content.image.interfaces.IImageMetadata(i)
+            if len(image_meta.copyrights[0][0]) <= 1:
+                # Drop teaser if no copyright text is assigned.
+                continue
+            teaser_list.append(
+                dict(
+                    label=image_meta.copyrights[0][0],
+                    image=zeit.frontend.template.translate_url(
+                        self.context, i.image.uniqueId),
+                    link=image_meta.copyrights[0][1],
+                    nofollow=image_meta.copyrights[0][2]
+                )
+            )
+        return sorted(teaser_list, key=lambda k: k['label'])
+
 
 @view_config(context=zeit.frontend.gallery.IProductGallery,
              renderer='templates/product.html')
