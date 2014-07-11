@@ -12,9 +12,9 @@ class Gallery(zeit.frontend.view.Content):
 
     advertising_enabled = True
 
-    def __call__(self):
+    def __init__(self, *args, **kwargs):
+        super(Gallery, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.advertising_enabled
-        return {}
 
     @reify
     def images(self):
