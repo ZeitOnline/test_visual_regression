@@ -64,6 +64,8 @@ settings = {
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
     'vivi_zeit.frontend_iqd-mobile-ids': (
         'egg://zeit.frontend/data/config/iqd-mobile-ids.xml'),
+    'vivi_zeit.frontend_image-scales': (
+        'egg://zeit.frontend/data/config/scales.xml'),
     'vivi_zeit.content.article_genre-url': (
         'egg://zeit.frontend/data/config/article-genres.xml'),
     'vivi_zeit.content.article_image-layout-source': (

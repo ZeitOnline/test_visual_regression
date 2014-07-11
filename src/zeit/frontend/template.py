@@ -7,6 +7,7 @@ import re
 import urlparse
 
 from babel.dates import format_datetime
+import urllib2
 from lxml import objectify
 from repoze.bitblt.transform import compute_signature
 import jinja2
@@ -22,7 +23,10 @@ import zeit.frontend.centerpage
 
 
 log = logging.getLogger(__name__)
-default_teaser_images = None  # Set during startup through application.py
+
+# Set during startup through application.py
+default_teaser_images = None
+image_scales = None
 
 
 @jinja2.contextfilter
@@ -199,6 +203,23 @@ def default_image_url(image,
         return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
+
+
+def get_image_scales(scale_source):
+    def to_int(value):
+        return int(re.sub('[^0-9]', '', '0' + str(value)))
+
+    if not scale_source:
+        return
+    try:
+        fileobject = urllib2.urlopen(scale_source)
+    except urllib2.URLError:
+        return
+    for scale in objectify.fromstring(fileobject.read()).iter():
+        name = scale.attrib.get('name')
+        width = to_int(scale.attrib.get('width'))
+        height = to_int(scale.attrib.get('height'))
+        yield name, (width, height)
 
 
 def get_teaser_template(block_layout,

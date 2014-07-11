@@ -111,6 +111,10 @@ class Application(object):
         zeit.frontend.template.default_teaser_images = \
             self.settings['default_teaser_images']
 
+        zeit.frontend.template.image_scales = dict(
+            zeit.frontend.template.get_image_scales(
+                self.settings['vivi_zeit.frontend_image-scales']))
+
         from pyramid.authorization import ACLAuthorizationPolicy
         from .security import CommunityAuthenticationPolicy
         import pyramid_beaker
