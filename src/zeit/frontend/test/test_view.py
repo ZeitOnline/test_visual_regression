@@ -10,6 +10,51 @@ import mock
 import pytest
 import requests
 import zeit.cms.interfaces
+from pyramid.response import Response
+
+
+def test_base_view_produces_acceptable_return_type():
+    class BaseView(view.Base):
+        """This view class does not implement a __call__ method."""
+
+        pass
+
+    obj = BaseView(mock.Mock(), mock.Mock())
+    assert type(type(obj)) is view.MetaView, 'The type MetaView is used.'
+    assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
+
+
+def test_response_view_produces_acceptable_return_type():
+    class ResponseView(view.Base):
+        """This view class explicitly returns a pyramid response."""
+
+        def __call__(self):
+            return Response('OK', 200)
+
+    obj = ResponseView(mock.Mock(), mock.Mock())
+    assert isinstance(obj(), Response), 'ResponseView retains its return type.'
+
+
+def test_none_view_produces_acceptable_return_type():
+    class NoneView(view.Base):
+        """This view class implicitly returns None."""
+
+        def __call__(self):
+            pass
+
+    obj = NoneView(mock.Mock(), mock.Mock())
+    assert hasattr(obj(), '__iter__'), 'NoneView returns an iterable type.'
+
+
+def test_dict_view_produces_acceptable_return_value():
+    class DictView(view.Base):
+        """This view class returns a dictionary."""
+
+        def __call__(self):
+            return {'bar': 1}
+
+    obj = DictView(mock.Mock(), mock.Mock())
+    assert obj() == {'bar': 1}, 'DictView retains its return value.'
 
 
 def test_breadcumb_should_produce_expected_data():
