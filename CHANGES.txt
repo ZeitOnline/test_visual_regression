@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-802 Make slider galleries static by request
 
+- ZMO-851: don't show visited link color within buzz modul
+
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
   small breakpoints
 
