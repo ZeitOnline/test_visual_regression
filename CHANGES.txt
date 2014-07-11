@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.9 (unreleased)
 ----------------
 
+- ZMO-718: add link to all elements of a teaser and simplify structure
+
 - ZMO-851: Don't show visited link color within buzz modul
 
 - ZMO-816: integrate h2 to teaser and h1 for article supertitle/title combination
