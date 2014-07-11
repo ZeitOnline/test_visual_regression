@@ -42,10 +42,7 @@ class Centerpage(zeit.frontend.view.Base):
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
         self._copyrights = {}
-
-    def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
-        return {}
 
     def insert_seperator(self, position, obj):
         teaser_list = obj
