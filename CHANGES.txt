@@ -8,7 +8,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.9 (unreleased)
 ----------------
 
-- ZMO-659: Integrate ul/li structure for lonform index box
+- ZMO-659: Integrate ul/li structure for longform index box
 
 - ZMO-851: Don't show visited link color within buzz modul
 
