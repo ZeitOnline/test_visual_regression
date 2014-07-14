@@ -64,7 +64,7 @@
     {% if subtitle %}
         <div class="{{ index_class }}">
         <div class="article__subpage-index__title">&uuml;bersicht</div>
-        <ul>
+        <ol>
             {% for page in pages if page.teaser %}
                 <li class="article__subpage-index__item">
                     <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
@@ -77,7 +77,7 @@
                     </span>
                 </li>
             {% endfor %}
-        </ul>
+        </ol>
     </div>
     {% endif %}
 {%- endmacro %}

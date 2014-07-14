@@ -121,7 +121,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
     markup_standart = ('<div class="%s"><div class="article__subpage-index__'
-                       'title">&uuml;bersicht</div><ul>') % css_index
+                       'title">&uuml;bersicht</div><ol>') % css_index
 
     fake_page = type('Dummy', (object,), {})
     fake_page.number = 1
@@ -133,7 +133,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
         'article__subpage-index__item__count">1 &mdash; </span><span class="'
         'article__subpage-index__item__title-wrap"><a href="#kapitel1" class="'
         'article__subpage-index__item__title js-scroll">Erster</a></span>'
-        '</li></ul></div>') % (markup_standart)
+        '</li></ol></div>') % (markup_standart)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -148,7 +148,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
         'class="article__subpage-index__item__count">1 &mdash; </span><span '
         'class="article__subpage-index__item__title-wrap"><span class="'
         'article__subpage-index__item__title %s">Erster</span></span></li>'
-        '</ul></div>') % (markup_standart, css_active)
+        '</ol></div>') % (markup_standart, css_active)
     lines_active = tpl.module.subpage_index(
         [fake_page], 'Title', 1, css_index, css_active).splitlines()
     output_active = ""
