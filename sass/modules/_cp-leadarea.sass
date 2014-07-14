@@ -38,14 +38,17 @@ $cp__lead-full-video-max-width: em(1000px)
 				min-width: 300%
 
 .cp__lead__title
-	@extend %cp__link--light
-	+tablet(bold)
-	margin: 0 0 $tiny
-	font-size: $font-xxl
-	line-height: $petite
-	letter-spacing: $hair
-	+respond-min($break-2)
-		font-size: $font-xxxl
+	a
+		@extend %cp__link--light
+		+tablet(bold)
+		margin: 0 0 $tiny
+		font-size: $font-xl
+		line-height: $petite
+		letter-spacing: $hair
+		+respond-min($break-0)
+			font-size: $font-xxl
+		+respond-min($break-2)
+			font-size: $font-xxxl
 
 .cp__lead__subtitle
 	@extend %cp__link--light
@@ -155,16 +158,12 @@ $cp__lead-full-video-max-width: em(1000px)
 .cp__lead-full__title__wrap--dark
 	.cp__lead__title
 		@extend %cp__link--dark
-		font-size: $font-xxxl
-		font-weight: bold
 	.cp__lead__subtitle
 		@extend %cp__link--dark
 
 .cp__lead-full__title__wrap--light
 	.cp__lead__title
 		@extend %cp__link--light
-		font-size: $font-xxxl
-		font-weight: bold
 	.cp__lead__subtitle
 		@extend %cp__link--light
 
