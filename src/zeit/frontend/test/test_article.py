@@ -510,3 +510,32 @@ def test_article03_has_linked_image(testserver):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<a href="http://www.test.de"><img alt="Immer' in output
+
+
+def test_article_has_linked_copyright(testserver):
+    browser = Browser('%s/artikel/03' % testserver.url)
+    output = ""
+    for line in browser.contents.splitlines():
+        output += line.strip()
+    assert '<span class="figure__copyright">' \
+        '<a href="http://foo.de" target="_blank">' \
+        '© Reuters/Alessandro Bianchi' in output
+
+
+def test_longform_has_linked_copyright(testserver):
+    browser = Browser('%s/artikel/05' % testserver.url)
+    output = ""
+    for line in browser.contents.splitlines():
+        output += line.strip()
+    assert '<span class="figure__copyright">' \
+        '<a href="http://foo.de" target="_blank">' \
+        '© Johannes Eisele/AFP/Getty Images' in output
+
+
+def test_header_has_linked_copyright(testserver):
+    browser = Browser('%s/artikel/header1' % testserver.url)
+    output = ""
+    for line in browser.contents.splitlines():
+        output += line.strip()
+    assert '<span class="figure__copyright">' \
+        '<a href="http://foo.de" target="_blank">©foo' in output
