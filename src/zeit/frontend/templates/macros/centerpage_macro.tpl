@@ -28,6 +28,7 @@
 {% macro teaser_supertitle_title(teaser, additional_css_class, withlink=True) -%}
     <h2>
         {% if withlink -%}<a href="{{teaser | create_url}}">{%- endif %}
+        <span class="icon-galerie-icon-white"></span>
         <div class="{{ additional_css_class | default('teaser') }}__supertitle">
             {% if teaser.teaserSupertitle %}
                 {{teaser.teaserSupertitle | hide_none}}

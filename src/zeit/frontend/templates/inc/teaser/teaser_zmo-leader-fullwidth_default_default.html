@@ -19,15 +19,13 @@ Available attributes:
     </a>
     {% endblock %}
     <header class="cp__lead-full__title__wrap cp__lead-full__title__wrap--dark">
-        <h2 class="cp__lead__title">
-            <a href="{{teaser | create_url}}">
+        <a href="{{teaser | create_url}}">
+            <h2 class="cp__lead__title">
                 {{teaser.teaserTitle}}
-            </a>
-        </h2>
-        <span class="cp__lead__subtitle">
-            <a href="{{teaser | create_url}}">
+            </h2>
+            <span class="cp__lead__subtitle">
                 {{teaser.teaserText | hide_none}}
-            </a>
-        </span>
+            </span>
+        </a>
     </header>
 </div>
