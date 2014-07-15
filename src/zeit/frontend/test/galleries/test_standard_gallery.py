@@ -75,9 +75,12 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
         # needed to fix a strange bug for consecutive execution of
-        # test_buttons_should_not_be_visible_mobile and this test
+        # test_buttons_should_not_be_visible_mobile() and this test
+        # TODO: this test fails without a window.resize event. Why?
+        # Findings: needs resizeWindow() -> redrawSlider() -> setSlidePosition()
+        # -> setPositionProperty() from jquery.bxslider.js
         driver.set_window_size(1024, 768)
-        # set window size again
+        # set window size for mobile
         driver.set_window_size(560, 900)
         figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
