@@ -49,8 +49,9 @@
         }, defaults);
 
         var singleGallery = null,
-            ressort = document.body.getAttribute( 'data-ressort' ),
-            viewType = document.body.getAttribute( 'data-type' ),
+
+            ressort = window.ZMO.view.ressort,
+            viewType = window.ZMO.view.type,
             query = /slide=(\d+)/.exec( location.search.slice( 1 ) ),
             start;
 
