@@ -1,11 +1,11 @@
-/* global console */
+/* global console, $blocked */
 
 /**
  * @fileOverview  Inline-Gallery preparation and evokation script
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function($) {
+(function( $ ) {
     /**
      * See (http://jquery.com/).
      * @name jQuery
@@ -29,14 +29,14 @@
      * @param  {object} defaults    configuration object, overwriting presetted options
      * @return {object} jQuery-Object for chaining
      */
-    $.fn.inlinegallery = function(defaults) {
+    $.fn.inlinegallery = function( defaults ) {
 
         var options = $.extend({
             onSlideAfter: function() {
                 // integrate tracking
-                if ('clickCount' in window) {
-                    window.clickCount.webtrekk('hp.zm.slidegallery.showslide.');
-                    window.clickCount.ga('hp.zm.slidegallery.showslide.');
+                if ( 'clickCount' in window ) {
+                    window.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
+                    window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
                 }
             },
             slideSelector: '.figure-full-width',
@@ -48,21 +48,63 @@
             adaptiveHeight: true
         }, defaults);
 
+        var singleGallery = null,
+
+            ressort = window.ZMO.view.ressort,
+            viewType = window.ZMO.view.type,
+            query = /slide=(\d+)/.exec( location.search.slice( 1 ) ),
+            start;
+
+        if ( query ) {
+            if ( ( start = parseInt( query[1], 10 ) ) > 1 ) {
+                options.startSlide = start - 1;
+            }
+        }
+
+        $.ajax({
+            url: 'http://scripts.zeit.de/static/js/gallery.blocked.ressorts.js',
+            dataType: 'script',
+            success: function() {
+                var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
+                    isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
+
+                if ( singleGallery && isStatic ) {
+                    singleGallery.goToSlide = function( slideIndex, direction ) {
+                        var total = singleGallery.getSlideCount(),
+                            next = ( total + slideIndex ) % total,
+                            search = '',
+                            prefix = '?';
+
+                        if ( queryString ) {
+                            search = '?' + queryString;
+                            prefix = '&';
+                        }
+
+                        if ( next ) {
+                            search += prefix + 'slide=' + ( next + 1 );
+                        }
+
+                        location.search = search;
+                    };
+                }
+            }
+        });
+
         // check if any part of the element is inside viewport
-        var isElementInViewport = function (el) {
+        var isElementInViewport = function( el ) {
 
             // special bonus for those using jQuery
-            if (el instanceof jQuery) {
+            if ( el instanceof jQuery ) {
                 el = el[0];
             }
 
-            if (!el.getBoundingClientRect) {
+            if ( !el.getBoundingClientRect ) {
                 return false;
             }
 
             var rect = el.getBoundingClientRect(),
-                windowWidth  = window.innerWidth  || document.documentElement.clientWidth,  /* or $(window).width()  */
-                windowHeight = window.innerHeight || document.documentElement.clientHeight; /* or $(window).height() */
+                windowWidth  = window.innerWidth  || document.documentElement.clientWidth,  /* or $( window ).width()  */
+                windowHeight = window.innerHeight || document.documentElement.clientHeight; /* or $( window ).height() */
 
             return !(
                 rect.top > windowHeight ||
@@ -72,14 +114,14 @@
             );
         };
 
-        return this.each(function() {
-            var gallery = $(this),
+        return this.each( function() {
+            var gallery = $( this ),
                 galleryWidth = gallery.width(),
-                figures = gallery.find('.figure-full-width'),
-                figcaptions = gallery.find('.figure__caption'),
-                backButton = $('<div class="bx-zone-prev"><a class="bx-overlay-prev icon-pfeil-links">Ein Bild zurück</a></div>'),
-                nextButton = $('<div class="bx-zone-next"><a class="bx-overlay-next icon-pfeil-rechts">Ein Bild vor</a></div>'),
-                buttons = backButton.add(nextButton),
+                figures = gallery.find( '.figure-full-width' ),
+                figcaptions = gallery.find( '.figure__caption' ),
+                backButton = $( '<div class="bx-zone-prev"><a class="bx-overlay-prev icon-pfeil-links">Ein Bild zurück</a></div>' ),
+                nextButton = $( '<div class="bx-zone-next"><a class="bx-overlay-next icon-pfeil-rechts">Ein Bild vor</a></div>' ),
+                buttons = backButton.add( nextButton ),
                 DOM_VK_LEFT = 37,
                 DOM_VK_RIGHT = 39,
                 slider = {},
@@ -87,63 +129,63 @@
                 mq;
 
             // enable keyboard navigation
-            var handleKeydown = function(e) {
+            var handleKeydown = function( e ) {
                 // do nothing if there is another key involved
-                if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return; }
+                if ( e.altKey || e.shiftKey || e.ctrlKey || e.metaKey ) { return; }
 
-                switch (e.keyCode) {
+                switch ( e.keyCode ) {
                     case DOM_VK_RIGHT:
-                        if (isElementInViewport(sliderViewport)) {
+                        if ( isElementInViewport( sliderViewport ) ) {
                             slider.goToNextSlide();
                         }
                         break;
                     case DOM_VK_LEFT:
-                        if (isElementInViewport(sliderViewport)) {
+                        if ( isElementInViewport( sliderViewport ) ) {
                             slider.goToPrevSlide();
                         }
                         break;
                 }
             };
 
-            $(window).on('keydown', handleKeydown);
+            $( window ).on( 'keydown', handleKeydown );
 
-            gallery.on('scaling_ready', function(e) {
-                figCaptionSize($(e.target));
+            gallery.on( 'scaling_ready', function( e ) {
+                figCaptionSize( $( e.target ) );
                 // slider.redrawSlider();
             });
 
             var hideOverlays = function() {
                 buttons.hide();
                 figcaptions.hide();
-                figures.on('click', function() {
+                figures.on( 'click', function() {
                     figcaptions.toggle();
                     buttons.toggle();
                 });
             };
 
-            if (window.matchMedia) {
-                mq = window.matchMedia('(max-width: 576px)');
+            if ( window.matchMedia ) {
+                mq = window.matchMedia( '(max-width: 576px)' );
 
-                if (mq.matches) {
+                if ( mq.matches ) {
                     hideOverlays();
                 }
 
-                mq.addListener(function() {
-                    if (mq.matches) {
+                mq.addListener( function() {
+                    if ( mq.matches ) {
                         hideOverlays();
                     } else {
                         figcaptions.show();
                         buttons.show();
-                        figures.off('click');
+                        figures.off( 'click' );
                     }
                 });
             }
 
-            var figCaptionSize = function(image, figcaption) {
-                var caption = figcaption || image.closest('figure').find('figcaption'),
+            var figCaptionSize = function( image, figcaption ) {
+                var caption = figcaption || image.closest( 'figure' ).find( 'figcaption' ),
                     imageWidth = image.width();
 
-                if (caption.length && imageWidth > 24 && imageWidth < galleryWidth) {
+                if ( caption.length && imageWidth > 24 && imageWidth < galleryWidth ) {
                     caption.css({
                         'max-width': imageWidth + 'px',
                         'padding-right': 0
@@ -152,11 +194,11 @@
             };
 
             var figCaptionSizing = function() {
-                figcaptions.each(function() {
-                    var caption = $(this),
-                        image = caption.prev().find('.figure__media');
+                figcaptions.each( function() {
+                    var caption = $( this ),
+                        image = caption.prev().find( '.figure__media' );
 
-                    figCaptionSize(image, caption);
+                    figCaptionSize( image, caption );
                 });
             };
 
@@ -166,22 +208,27 @@
                 sliderViewport = gallery.parent();
 
                 /* additional buttons on image */
-                nextButton.insertAfter(gallery).on('click', function() { slider.goToNextSlide(); });
-                backButton.insertAfter(gallery).on('click', function() { slider.goToPrevSlide(); });
+                nextButton.insertAfter( gallery ).on( 'click', function() { slider.goToNextSlide(); } );
+                backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
 
                 /* add icons to existing gallery buttons */
-                $('.bx-next').addClass('icon-pfeil-rechts');
-                $('.bx-prev').addClass('icon-pfeil-links');
+                $( '.bx-next' ).addClass( 'icon-pfeil-rechts' );
+                $( '.bx-prev' ).addClass( 'icon-pfeil-links' );
 
                 // fix ad columns
-                $('#iqdBackgroundLeft, #iqdBackgroundRight').css({height: document.body.offsetHeight + 'px'});
+                $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( {height: document.body.offsetHeight + 'px'} );
             };
 
             options.onSliderResize = function() {
                 galleryWidth = gallery.width();
             };
 
-            slider = gallery.bxSlider(options);
+            slider = gallery.bxSlider( options );
+
+            // make element available for AJAX response
+            if ( viewType === 'gallery' ) {
+                singleGallery = slider;
+            }
         });
     };
-})(jQuery);
+})( jQuery );
