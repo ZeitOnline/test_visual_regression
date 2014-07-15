@@ -6,11 +6,11 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <h2 class="article__head__supertitle">{{ view.supertitle  | hide_none }}</h2>
+  <div class="article__head__supertitle">{{ view.supertitle  | hide_none }}</div>
 {%- endmacro %}
 
 {% macro title() -%}
-  <h1 class="article__head__title">{{ view.title | hide_none }}</h1>
+  <div class="article__head__title">{{ view.title | hide_none }}</div>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
@@ -171,7 +171,15 @@
                 {% endif -%}
                 <span class="figure__caption__text">{{ obj.caption }}</span>
                 {% if obj.copyright[0][0] != '©' %}
-                <span class="figure__copyright">{{ obj.copyright[0][0] }}</span>
+                <span class="figure__copyright">
+                {% if obj.copyright[0][1] %}
+                    <a href="{{obj.copyright[0][1]}}" target="_blank">
+                {% endif %} 
+                        {{ obj.copyright[0][0] }}
+                {% if obj.copyright[0][1] %}
+                    </a>
+                {% endif %} 
+                </span>
                 {% endif %}
             </figcaption>
         </figure>

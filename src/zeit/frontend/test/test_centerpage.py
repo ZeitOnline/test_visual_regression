@@ -282,7 +282,7 @@ def test_cp_button_has_expected_structure(selenium_driver, testserver):
             "a/div/img[@class=' figure__media']")
         assert element.find_elements_by_xpath(
             "span[@class='cp__buttons__title__wrap']")
-        assert element.find_elements_by_xpath("span/a")
+        assert element.find_elements_by_xpath("span/h2/a")
         assert element.find_elements_by_xpath(
             "span/span[@class='cp__buttons__subtitle']")
 
