@@ -292,7 +292,8 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             'title': 'My title content'},
            {'layout': 'zmo-small-right', 'align': False,
             'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': (('test', None, False),),
+            'caption': 'test',
+            'copyright': (('test', 'http://www.test.de', False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            ]
@@ -317,6 +318,11 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         output = ""
         for line in lines:
             output += line.strip()
+        if el['copyright'][0][1]:
+            cr = '<a href="' + el['copyright'][0][1] + \
+                '" target="_blank">' + el['copyright'][0][0] + '</a>'
+        else:
+            cr = el['copyright'][0][0]
         markup = '<figure class="%s"><div class="scaled-image">' \
                  '<!--\[if gt IE 8\]><!--><noscript>' \
                  '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
@@ -326,9 +332,9 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                  '<!--<!\[endif\]--></div><figcaption ' \
                  'class="figure__caption"><span ' \
                  'class="figure__caption__text">test</span><span ' \
-                 'class="figure__copyright">test</span>' \
+                 'class="figure__copyright">%s</span>' \
                  '</figcaption></figure>' \
-                 % (el['css'], el['alt'], el['title'])
+                 % (el['css'], el['alt'], el['title'], cr)
 
         assert re.match(markup, output)
 

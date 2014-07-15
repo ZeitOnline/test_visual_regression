@@ -119,7 +119,7 @@
         <division type="page">
             <image src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
-                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
+                <copyright link="http://foo.de">© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Auch der Tod hat in Deutschland ein exaktes Maß. 213 Zentimeter lang, 83
       Zentimeter breit und 170 Zentimeter tief muss die Grube werden, die Artur und Jürgen an diesem
@@ -156,7 +156,7 @@
         <division type="page" teaser="Kein zeitlos sicheres Geschäft mehr">
         <image src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="zmo-small-right" is_empty="False" alt="My 05er alt" title="my 05er title">
         <bu>Ein Mann in Leipzig XXXXXXXX vor dem "Bau Büro"</bu>
-                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
+                <copyright link="http://foo.de">© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
       Hamburger Vermessungstechniker, die auf den schnurgeraden Alleen ihre Infrarotgeräte

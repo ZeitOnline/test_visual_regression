@@ -185,7 +185,7 @@ def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
         image_wrap = element.find_elements_by_css_selector(
             ".cp__lead-leader__image--dark")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
         assert len(image_wrap) != 0
 
 
@@ -232,7 +232,7 @@ def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
         for link in link_wrap:
             assert link.get_attribute("href") == 'http://'\
                 'localhost:6543/centerpage/article_image_asset'
@@ -282,9 +282,9 @@ def test_cp_button_has_expected_structure(selenium_driver, testserver):
             "a/div/img[@class=' figure__media']")
         assert element.find_elements_by_xpath(
             "span[@class='cp__buttons__title__wrap']")
-        assert element.find_elements_by_xpath("span/a")
+        assert element.find_elements_by_xpath("span/a/h2")
         assert element.find_elements_by_xpath(
-            "span/span[@class='cp__buttons__subtitle']")
+            "span/a/span[@class='cp__buttons__subtitle']")
 
 
 def test_cp_button_has_expected_text_content(selenium_driver, testserver):
@@ -478,7 +478,7 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert src2_val == unicode(source2)
 
         # links
-        assert len(a) == 3
+        assert len(a) == 2
         for link in a:
             assert link.get_attribute("href") == 'http://localhost'\
                 ':6543/centerpage/article_video_asset'
@@ -515,7 +515,7 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert img.get_attribute("title") == 'Katze!'
 
         # links
-        assert len(a) == 3
+        assert len(a) == 2
         for link in a:
             assert link.get_attribute("href") == 'http://localhost'\
                 ':6543/centerpage/article_image_asset'

@@ -6,9 +6,20 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.frontend',
     version='0.9.dev0',
-    author=u'Thomas Baumann, Nico Brünjes, Ron Drongowski, Anika Szuppa',
-    author_email='thomas.baumann@zeit.de, nico.bruenjes@zeit.de, \
-                  ron.drongowski@zeit.de, anika.szuppa@zeit.de',
+    author=(
+        'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
+        'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
+        'Malte Modrow, Wolfgang Schnerring, Arne Seemann, Moritz Stoltenburg, '
+        'Anika Szuppa, Christian Zagrodnick, Andreas Zeidler'
+    ),
+    author_email=(
+        'thomas.baumann@zeit.de, nico.bruenjes@zeit.de, '
+        'nicolas.drebenstedt@zeit.de, ron.drongowski@zeit.de, '
+        'dominik.hoppe@zeit.de, marco.kaiser@zeit.de, ich@harry-k.de, '
+        'tom@tomster.org, tl@gocept.com, malte.modrow@zeit.de, ws@gocept.com, '
+        'arne.seemann@zeit.de, moritz.stoltenburg@zeit.de, '
+        'anika.szuppa@zeit.de, cz@gocept.de, az@zitc.de'
+    ),
     install_requires=[
         'Babel',
         'cornice >= 0.16.2',
