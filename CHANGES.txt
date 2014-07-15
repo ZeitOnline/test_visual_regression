@@ -1,14 +1,20 @@
 Change log for zeit.frontend
 ============================
 
+NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
+https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
+
+
 0.9 (unreleased)
 ----------------
 
 - ZMO-718: add link to all elements of a teaser and simplify structure
 
+- ZMO-802: Make slider galleries static by request
+
 - ZMO-851: Don't show visited link color within buzz modul
 
-- ZMO-816: integrate h2 to teaser and h1 for article supertitle/title combination
+- ZMO-816: Integrate h2 to teaser and h1 for article supertitle/title combination
 
 - ZMO-835: Fix slider galleries for IE < 10
 
@@ -16,6 +22,8 @@ Change log for zeit.frontend
 
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
   small breakpoints
+
+- ZMO-776: Add optional links to in-article image copyrights
 
 - ZMO-839: Add copyrights for galleries
 
