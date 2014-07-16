@@ -3,7 +3,7 @@ from lxml import etree
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.common.exceptions import TimeoutException
 from zeit.frontend.test import Browser
 
 
@@ -77,8 +77,9 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         # needed to fix a strange bug for consecutive execution of
         # test_buttons_should_not_be_visible_mobile() and this test
         # TODO: this test fails without a window.resize event. Why?
-        # Findings: needs resizeWindow() -> redrawSlider() -> setSlidePosition()
-        # -> setPositionProperty() from jquery.bxslider.js
+        # Findings: needs resizeWindow() -> redrawSlider()
+        # -> setSlidePosition() -> setPositionProperty()
+        # from jquery.bxslider.js
         driver.set_window_size(1024, 768)
         # set window size for mobile
         driver.set_window_size(560, 900)
@@ -98,21 +99,21 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
     gallery_url = ("%s/galerien/fs-desktop-schreibtisch-computer"
                    % testserver.url)
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1024, 768)
     driver.get("%s?%s" % (gallery_url, "gallery=static"))
     try:
-        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
         WebDriverWait(driver, 10).until(cond)
+    except TimeoutException:
+        print "Timeout Gallery Script"
+        assert False
+    else:
         buttonNext = driver.find_element_by_css_selector(".bx-next")
         buttonNext.click()
         selector = ".inline-gallery figure:not(.bx-clone):nth-child(2)"
         slide = driver.find_element_by_css_selector(selector)
-        assert driver.current_url == ("%s?%s"
-                                      % (gallery_url, "gallery=static&slide=2"))
+        assert driver.current_url == gallery_url + "?gallery=static&slide=2"
         assert slide.is_displayed()
-    except:
-        print "Timeout Gallery Script"
-        assert False
 
 
 def test_gallery_with_supertitle_has_html_title(browser, testserver):

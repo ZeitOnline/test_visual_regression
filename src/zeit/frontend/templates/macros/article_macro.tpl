@@ -64,18 +64,20 @@
     {% if subtitle %}
         <div class="{{ index_class }}">
         <div class="article__subpage-index__title">&uuml;bersicht</div>
-        {% for page in pages if page.teaser %}
-            <div class="article__subpage-index__item">
-                <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
-                <span class="article__subpage-index__item__title-wrap">
-                    {% if loop.index == number %}
-                        <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
-                    {% else %}
-                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ page.teaser }}</a>
-                    {% endif %}
-                </span>
-            </div>
-        {% endfor %}
+        <ol>
+            {% for page in pages if page.teaser %}
+                <li class="article__subpage-index__item">
+                    <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
+                    <span class="article__subpage-index__item__title-wrap">
+                        {% if loop.index == number %}
+                            <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
+                        {% else %}
+                            <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ page.teaser }}</a>
+                        {% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ol>
     </div>
     {% endif %}
 {%- endmacro %}
