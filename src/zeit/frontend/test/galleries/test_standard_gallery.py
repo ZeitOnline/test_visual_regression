@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from zeit.frontend.test import Browser
 
 
@@ -87,11 +88,15 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
     gallery_url = ("%s/galerien/fs-desktop-schreibtisch-computer"
                    % testserver.url)
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1024, 768)
     driver.get("%s?%s" % (gallery_url, "gallery=static"))
     try:
-        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
         WebDriverWait(driver, 10).until(cond)
+    except TimeoutException:
+        print "Timeout Gallery Script"
+        assert False
+    else:
         buttonNext = driver.find_element_by_css_selector(".bx-next")
         buttonNext.click()
         selector = ".inline-gallery figure:not(.bx-clone):nth-child(2)"
@@ -99,9 +104,6 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
         assert driver.current_url == ("%s?%s"
                                       % (gallery_url, "gallery=static&slide=2"))
         assert slide.is_displayed()
-    except:
-        print "Timeout Gallery Script"
-        assert False
 
 
 def test_gallery_with_supertitle_has_html_title(browser, testserver):
