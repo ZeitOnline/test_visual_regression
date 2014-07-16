@@ -442,7 +442,8 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         title_wrap = teaser.find_element_by_tag_name("header")
         h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
-        subtitle = teaser.find_element_by_tag_name("span")
+        title = teaser.find_elements_by_class_name("cp__lead__title")
+        subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
         source1 = \
             teaser.find_element_by_xpath('//source[1]').get_attribute("src")
         source2 = \
@@ -464,16 +465,16 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         assert 'cp__lead-full__title__wrap'\
             ' cp__lead-full__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
-        assert 'cp__lead__title' == unicode(h2.get_attribute("class"))
-        assert 'cp__lead__subtitle' == unicode(subtitle.get_attribute("class"))
+        assert len(title) == 1
+        assert len(subtitle) == 1
 
         # content
         assert '3035864892001' == \
             unicode(vid_wrap.get_attribute("data-backgroundvideo"))
         assert 'Es leben die Skispringenden Sportredakteure!' == \
-            unicode(subtitle.text)
+            unicode(subtitle[0].text)
         assert src_img == unicode(img.get_attribute("src"))
-        assert u'und der Titel dazu' == unicode(h2.text)
+        assert u'und der Titel dazu' == unicode(title[0].text)
         assert src1_val == unicode(source1)
         assert src2_val == unicode(source2)
 
@@ -495,7 +496,8 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         title_wrap = teaser.find_elements_by_tag_name("header")
         h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
-        subtitle = teaser.find_element_by_tag_name("span")
+        title = teaser.find_elements_by_class_name("cp__lead__title")
+        subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
         image_pattern = \
             'http://.*/centerpage/katzencontent/'\
             'bitblt-.*'\
@@ -506,8 +508,8 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         assert len(title_wrap) != 0
 
         assert re.search(image_pattern, img.get_attribute("src"))
-        assert unicode(h2.text) == u'Article Image Asset Titel'
-        assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
+        assert unicode(title[0].text) == u'Article Image Asset Titel'
+        assert unicode(subtitle[0].text) == u'Dies k\u00F6nnte'\
             ' z.B. lorem ipsum sein.'\
             ' Oder was anderes nicht ganz so langweiliges,'\
             ' zum Katzenbild passen.'
