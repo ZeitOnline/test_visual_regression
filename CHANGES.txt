@@ -11,6 +11,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 - ZMO-855: Put in one more breakpoint for .cp__lead__title class, to make really 
   long words like Weltmeisterschaft fit on mobile screens as well
 
+- ZMO-659: Integrate ul/li structure for longform index box
+
 - ZMO-718: add link to all elements of a teaser and simplify structure
 
 - ZMO-802: Make slider galleries static by request

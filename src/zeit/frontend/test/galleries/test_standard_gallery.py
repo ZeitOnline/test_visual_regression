@@ -88,10 +88,10 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
     gallery_url = ("%s/galerien/fs-desktop-schreibtisch-computer"
                    % testserver.url)
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1024, 768)
     driver.get("%s?%s" % (gallery_url, "gallery=static"))
     try:
-        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
         WebDriverWait(driver, 10).until(cond)
     except TimeoutException:
         print "Timeout Gallery Script"
