@@ -10,6 +10,10 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-659: Integrate ul/li structure for longform index box
 
+- ZMO-718: add link to all elements of a teaser and simplify structure
+
+- ZMO-802: Make slider galleries static by request
+
 - ZMO-851: Don't show visited link color within buzz modul
 
 - ZMO-816: Integrate h2 to teaser and h1 for article supertitle/title combination

@@ -38,7 +38,6 @@ $cp__lead-full-video-max-width: em(1000px)
 				min-width: 300%
 
 .cp__lead__title
-	@extend %cp__link--light
 	+tablet(bold)
 	margin: 0 0 $tiny
 	font-size: $font-xxl
@@ -48,7 +47,6 @@ $cp__lead-full-video-max-width: em(1000px)
 		font-size: $font-xxxl
 
 .cp__lead__subtitle
-	@extend %cp__link--light
 	@extend %copy
 	font-size: $font-m
 	line-height: $petite
@@ -56,7 +54,6 @@ $cp__lead-full-video-max-width: em(1000px)
 		font-size: $font-ml
 
 .cp__lead__supertitle
-	@extend %cp__link--light
 	@extend %copy
 	line-height: $medium
 	font-size: $font-s
@@ -110,22 +107,10 @@ $cp__lead-full-video-max-width: em(1000px)
 	z-index: 2
 
 .cp__lead-leader__title__wrap--dark
-	color: white
-	.cp__lead__title
-		@extend %cp__link--dark
-	.cp__lead__subtitle
-		@extend %cp__link--dark
-	.cp__lead__supertitle
-		@extend %cp__link--dark
+	@extend %cp__link--dark
 
 .cp__lead-leader__title__wrap--light
-	.cp__lead__title
-		@extend %cp__link--light
-	.cp__lead__subtitle
-		@extend %cp__link--light
-	.cp__lead__supertitle
-		@extend %cp__link--light
-
+	@extend %cp__link--light
 
 //teaser type full (fullwidth leader)
 .cp__lead-full__wrap
@@ -153,20 +138,16 @@ $cp__lead-full-video-max-width: em(1000px)
 	z-index: 2
 
 .cp__lead-full__title__wrap--dark
+	@extend %cp__link--dark
 	.cp__lead__title
-		@extend %cp__link--dark
 		font-size: $font-xxxl
 		font-weight: bold
-	.cp__lead__subtitle
-		@extend %cp__link--dark
 
 .cp__lead-full__title__wrap--light
+	@extend %cp__link--light
 	.cp__lead__title
-		@extend %cp__link--light
 		font-size: $font-xxxl
 		font-weight: bold
-	.cp__lead__subtitle
-		@extend %cp__link--light
 
 //some button adaptions for leadarea only
 .cp__lead__wrap
