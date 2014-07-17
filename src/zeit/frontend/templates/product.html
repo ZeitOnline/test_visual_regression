@@ -1,5 +1,5 @@
 {% extends "templates/article.html" %}
-{% import 'templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'templates/macros/article_macro.tpl' as blocks with context %}
 
 {% block article_header %}
     <div class="article__head-wrap">
@@ -11,11 +11,10 @@
 {% endblock article_header %}
 
 {% block article_pages %}
-
 <div class="product">
     <div class="product__info">
         <div class="product__description">
-            {{ view.galleryText | safe }}
+            {{ view.galleryText|safe }}
         </div>
         <div class="article__head__meta">
             <div class="article__head__meta__date">
@@ -26,20 +25,19 @@
     </div>
 
     <div class="product__wrap">
-        {% for image in view.images %}
+        {% for image in view.images.itervalues() %}
             <figure class="product__wrap__entry">
-                {% set image_meta = image | get_image_metadata %}
-                {% set copyright = image_meta.copyrights[0] %}
-                <img alt="" title="" class="product__image" src="{{image.image.uniqueId | translate_url}}">
+                <div class="scaled-image">
+                    {{ lama.insert_responsive_image(image, 'product__image', 'article') }}
+                </div>
                 <figcaption class="product__caption">
                     <div class="product__caption__text">{{ image.caption }}</div>
-                    {% if image_meta.copyrights %}
-                        <span class="product__caption__copyright">{{ copyright[0] }}</span>
-                    {% endif %}
+                    {% if image.copyright[0][0] != '©' -%}
+                        <span class="product__caption__copyright">{{ image.copyright[0][0] }}</span>
+                    {%- endif %}
                 </figcaption>
             </figure>
         {% endfor %}
     </div>
 </div>
-
 {% endblock article_pages %}
