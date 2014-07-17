@@ -52,37 +52,34 @@ def test_gallery_buttons_are_clickable(selenium_driver, testserver):
 
 def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
     driver = selenium_driver
+    driver.set_window_size(560, 900)
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
-        driver.set_window_size(560, 900)
+    except TimeoutException:
+        print "Timeout Gallery Script"
+        assert False
+    else:
         bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
         caption = driver.find_element_by_css_selector(".figure__caption")
         assert not bigButtonPrev.is_displayed()
         assert not bigButtonNext.is_displayed()
         assert not caption.is_displayed()
-    except:
-        print "Timeout Gallery Script"
-        assert False
 
 
 def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
     driver = selenium_driver
+    driver.set_window_size(560, 900)
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
-        # needed to fix a strange bug for consecutive execution of
-        # test_buttons_should_not_be_visible_mobile() and this test
-        # TODO: this test fails without a window.resize event. Why?
-        # Findings: needs resizeWindow() -> redrawSlider()
-        # -> setSlidePosition() -> setPositionProperty()
-        # from jquery.bxslider.js
-        driver.set_window_size(1024, 768)
-        # set window size for mobile
-        driver.set_window_size(560, 900)
+    except TimeoutException:
+        print "Timeout Gallery Script"
+        assert False
+    else:
         figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
@@ -90,9 +87,6 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
         assert bigButtonPrev.is_displayed()
         assert bigButtonNext.is_displayed()
-    except:
-        print "Timeout Gallery Script"
-        assert False
 
 
 def test_standard_gallery_is_static(selenium_driver, testserver):
