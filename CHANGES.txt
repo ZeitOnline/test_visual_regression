@@ -5,7 +5,7 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.9 (unreleased)
+0.9 (2014-07-17)
 ----------------
 
 - ZMO-848: fix chapter box within longform (ff issue)
