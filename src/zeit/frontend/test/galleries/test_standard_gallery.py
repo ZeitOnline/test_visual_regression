@@ -61,6 +61,9 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
     else:
+        # This test is showing the last (or .bx-clone) slide, not the first one.
+        # Not reproducible in the browser and unexplainable for now, since #400.
+        # driver.save_screenshot("/tmp/test_buttons_should_not_be_visible_mobile.png")
         bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
         caption = driver.find_element_by_css_selector(".figure__caption")
@@ -80,6 +83,16 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
     else:
+        # TODO: this test fails without a window.resize event.
+        # Findings:
+        # needs resizeWindow() -> redrawSlider() -> setSlidePosition()
+        # -> setPositionProperty() from jquery.bxslider.js (basically a reset)
+        # both test_buttons_* tests are showing the last (or .bx-clone) slide,
+        # not the first one. Unreproducible in the browser, introduced in #400.
+        driver.set_window_size(1024, 768)
+        # set window size for mobile again
+        driver.set_window_size(560, 900)
+        # driver.save_screenshot("/tmp/test_buttons_should_be_visible_on_tap_mobile.png")
         figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
