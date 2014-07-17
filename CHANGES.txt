@@ -5,8 +5,8 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.10 (unreleased)
------------------
+0.9.1 (2014-07-17)
+------------------
 
 - HOTFIX: fix video display in videobackground on cached video (ff issue)
 
