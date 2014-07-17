@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.10 (unreleased)
 -----------------
 
+- HOTFIX: fix video display in videobackground on cached video (ff issue)
+
 - HOTFIX: Adjust longform article head wrapper height
 
 - HOTFIX: Fix card kicker styling
