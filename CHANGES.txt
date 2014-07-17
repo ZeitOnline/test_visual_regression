@@ -5,8 +5,27 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.9 (unreleased)
+0.10 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+0.9 (2014-07-17)
 ----------------
+
+- ZMO-848: fix chapter box within longform (ff issue)
+
+- HOTFIX: prevent crashing header images, when being depublished
+
+- ZMO-813: Unify gallery classes and support gallery image ratios.
+
+- ZMO-855: Put in one more breakpoint for .cp__lead__title class, to make really 
+  long words like Weltmeisterschaft fit on mobile screens as well
+
+- ZMO-659: Integrate ul/li structure for longform index box
+
+- ZMO-718: add link to all elements of a teaser and simplify structure
 
 - ZMO-802: Make slider galleries static by request
 
