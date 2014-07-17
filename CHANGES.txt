@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.9 (unreleased)
 ----------------
 
+- ZMO-848: fix chapter box within longform (ff issue)
+
 - HOTFIX: prevent crashing header images, when being depublished
 
 - ZMO-813: Unify gallery classes and support gallery image ratios.
