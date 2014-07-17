@@ -1,4 +1,4 @@
-/* global console, Modernizr */
+/* global console */
 (function( $ ){
 
 	/**
@@ -31,7 +31,7 @@
 			var $element = $( this );
 			var video = $element.find( "video" );
 
-			Modernizr.addTest( "autoplay", function(){
+			$( video ).on( "play", function() {
 				$element.find( ".video--fallback" ).hide();
 				$( video ).show();
 			});
