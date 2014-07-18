@@ -460,7 +460,6 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             'videos/3035864892001.jpg'
 
         # structure
-        assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback' == unicode(img.get_attribute("class"))
         assert 'cp__lead-full__title__wrap'\
             ' cp__lead-full__title__wrap--dark' == \

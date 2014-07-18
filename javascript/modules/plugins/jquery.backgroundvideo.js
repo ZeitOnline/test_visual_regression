@@ -31,20 +31,16 @@
 			var $element = $( this );
 			var video = $element.find( "video" );
 
-			// video already playing?
-			if( $(video).get(0).currentTime > 0 ) {
-				$element.find( ".video--fallback" ).hide();
-				$( video ).show();
-			}
+			//set video position
+			el.setVideoPosition( $element );
 
+			//start video
+			$(video).get(0).play();
+
+			//on video play, hide image and show video
 			$( video ).on( "play", function() {
-				$element.find( ".video--fallback" ).hide();
+				$element.find( ".video--fallback" ).fadeOut();
 				$( video ).show();
-			});
-
-			//set initial position of video
-			$( window ).on( "load", function(){
-				el.setVideoPosition( $element );
 			});
 
 			//reset video position on resize

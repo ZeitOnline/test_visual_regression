@@ -10,6 +10,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - VIV-347: Fix guard clause logic for newsletter images
 
+- ZMO-860: Start bg video from js to prevent firefox bug
+
 
 0.9.1 (2014-07-17)
 ------------------
