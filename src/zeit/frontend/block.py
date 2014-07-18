@@ -280,7 +280,7 @@ class NewsletterTeaser(object):
             return self.context.reference.thumbnail
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
-        group = (images is not None) and images.image
+        group = images.image if images is not None else None
         if group is None:
             return None
         # XXX An actual API for selecting a size would be nice.
