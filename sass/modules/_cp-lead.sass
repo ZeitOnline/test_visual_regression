@@ -1,0 +1,24 @@
+//styles for lead area within cp
+$cp_lead__wrap-width: 65%
+
+//wrapper lead area
+.cp_lead__wrap
+	+justify-children-horizontally('.cp_button--small')
+	width: 100%
+	+respond-min($break-2)
+		float: left
+		width: $cp_lead__wrap-width
+		padding: 0 $compact 0 $compact
+	.cp_button--small
+		vertical-align: top !important
+		width: 100%
+		padding: 0 $compact 0 $compact
+		margin-top: $compact
+		margin-bottom: 0
+		+respond-min($break-2)
+			width: 48%
+			padding: 0 0 0 0
+		.cp_comment__count__wrap
+			right: $big
+			+respond-min($break-2)
+				right: $little	

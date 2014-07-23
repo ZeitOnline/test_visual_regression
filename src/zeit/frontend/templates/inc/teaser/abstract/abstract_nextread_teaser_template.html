@@ -1,0 +1,22 @@
+{#
+
+Default teaser template for nextread teasers
+
+Available attributes:
+    lama
+    teaser
+    teaser_block
+
+#}
+{% import 'templates/macros/layout_macro.tpl' as lama with context %}
+
+{% set image = get_teaser_image(teaser_block, teaser) %}
+<div class="article__nextread__body article__nextread__body--{{ teaser_block.multitude }}{% if not image %} article__nextread__body--no-img{% endif %}" style="{% block body_styles %}{% endblock %}">
+    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | translate_url }}">
+        {% block scaled_image %}{% endblock %}
+        <div class="article__nextread__article article__nextread__article--{{ teaser_block.multitude }}">
+            <span class="article__nextread__supertitle">{{ teaser.supertitle }}</span>
+            <span class="article__nextread__title">{{ teaser.title }}</span>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,22 @@
+{#
+
+teaser template for citation card
+
+Available attributes:
+    teaser_block
+    teaser
+
+#}
+{%- extends "templates/inc/teaser/abstract/abstract_card_teaser_template.html" -%}
+
+{% block card_deck %}
+<div class="card__deck">
+    <div class="card" style="background-color: #{{teaser_block.background_color}}; background-image: url({{image | default_image_url(image_pattern=teaser_block.layout.image_pattern) }});">
+        <h2>
+            <div class="card__title">{{teaser.teaserSupertitle}}</div>
+        </h2>
+        <div class="card__text card__text--with-bg">{{teaser.teaserTitle}}</div>
+        <a href="{{teaser | create_url}}" class="card__button">Lesen</a>
+    </div>
+</div>
+{% endblock card_deck %}

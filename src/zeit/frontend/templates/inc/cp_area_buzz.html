@@ -1,0 +1,42 @@
+{#
+
+This is the main template for the buzz module.
+
+Available attributes:
+    zeit.frontend.view_centerpage.Centerpage
+#}
+{% set captions = {"twitter": ("Auf Twitter", "Tweets"),
+                  "facebook": ("Auf Facebook", "Empfehlungen"),
+                  "comments": ("Kommentiert", "Kommentare")} %}
+
+<div class="cp_buzz">
+    <div class="cp_buzz__divider">
+        <span class="cp_buzz__header">Beliebt und angesagt</span>
+    </div>
+    {% for service, articles in view.area_buzz.items() %}
+    <div class="cp_buzz__service">
+        <div class="cp_buzz__header">
+            <div class="cp_buzz__icon icon-buzz-{{ service }}"></div>
+            <div class="cp_buzz__caption">{{ captions[service][0] }}</div>
+        </div>
+        <div class="cp_buzz__service__list">
+            {% for article in articles %}
+                <div class="cp_buzz__service__list__entry">
+                    <p class="cp_buzz__service__list__entry__supertitle">
+                        {{ article.supertitle }}
+                    </p>
+                    <p class="cp_buzz__service__list__entry__title">
+                        <a href="{{ article.location }}">{{ article.title }}</a>
+                    </p>
+                    {% if article.score %}
+                    <p class="cp_buzz__service__list__entry__score">
+                        {{ article.score }} {{ captions[service][1] }}
+                    </p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="cp_buzz__divider"></div>
+</div>

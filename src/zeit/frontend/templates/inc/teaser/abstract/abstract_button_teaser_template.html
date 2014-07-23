@@ -1,0 +1,37 @@
+{#
+
+default teaser template to inherit from.
+
+Available attributes:
+    teaser_block
+    teaser
+
+all calling Templates have to provide:
+    subtitle: to define display of subtitle ('true'/ 'false')
+    format: to define type of button (eg. 'small'/ 'large'/ 'large-photo'/ 'gallery')
+    supertitle: to define display of supertitle ('true'/ 'false')
+    icon: define display of optional asset icon ('true'/ 'false')
+    image_class: define optional class for images (eg. extra behaviour mtb)
+#}
+
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
+{% import 'templates/macros/layout_macro.tpl' as lama with context%}
+
+{%- set image = get_teaser_image(teaser_block, teaser) %}
+
+<div class='cp_button cp_button--{{ self.format() }}'>  
+    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
+    <a href="{{teaser | create_url}}">
+        <!-- call image asset -->
+        {% if self.image_class() != 'false' -%}
+            <div class="scaled-image">
+                {{ lama.insert_responsive_image(image, self.image_class()) }}
+        {% else -%}
+            <div class="scaled-image is-pixelperfect cp_button__image" data-wrap=".cp_button__image">
+                {{ lama.insert_responsive_image(image) }}
+        {% endif -%} 
+            </div>
+    </a>
+    <!-- call teaser text -->
+    {{ cp.teaser_text_block(teaser, 'button', 'none', self.supertitle(), self.subtitle(), self.icon()) }}
+</div>
