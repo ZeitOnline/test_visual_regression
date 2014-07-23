@@ -5,19 +5,12 @@ This is the teaserbar template for the context type "centerpage".
 Available attributes:
     zeit.frontend.view_centerpage.Centerpage
 #}
-<div class="cp__teaserbar__wrap">
-    <div class="cp__teaserbar">
-        <div class="cp__teaserbar__teasers__wrap">
-            {% for teaser_block in view.teaserbar.values() -%}
-                {% if teaser_block.type != 'placeholder' %}
-                    {% for teaser in teaser_block %}
-                            {% include get_teaser_template(
-                                teaser_block.layout.id,
-                                teaser | block_type,
-                                teaser | get_all_assets | block_type) ignore missing %}
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
+
+<div class="cp_teaserbar__wrap">
+    <div class="cp_teaserbar">
+        <div class="cp_teaserbar__teasers__wrap">
+            {{ cp.include_teaser_block(view.teaserbar.values()) }}
         </div>
-    </div><!-- end: .cp__teaserbar__wrap -->
+    </div><!-- end: .cp_teaserbar__wrap -->
 </div>

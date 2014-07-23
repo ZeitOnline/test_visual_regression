@@ -5,14 +5,6 @@ This is the main fullwidth teaser template for the context type "centerpage".
 Available attributes:
 	zeit.frontend.view_centerpage.Centerpage
 #}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 
-{%- set teaser_block = view.area_lead_full_teaser %}
-{%- if teaser_block %}
-	{%-
-	   set teaser_blocks = [
-	        'templates/inc/teaser_block_' + teaser_block.layout.id + '.html',
-	        'templates/inc/teaser_block_default.html'
-	        ]
-	%}
-	{% include teaser_blocks ignore missing %}
-{%- endif %}
+{{ cp.include_teaser(view.area_lead_full_teaser) }}

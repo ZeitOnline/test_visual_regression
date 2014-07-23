@@ -6,17 +6,13 @@ Available attributes:
     zeit.frontend.view_article.Article as view
 
 #}
+{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 
 {% set teaser_block = view.nextread %}
 
 <aside class="article__nextread nextread-{{ teaser_block.layout.id }} is-centered">
     <div class="article__nextread__lead">{{ teaser_block.lead }}</div>
     <div class="article__nextread__wrap">
-    {% for teaser in teaser_block %}
-        {% include get_teaser_template(
-            'zmo-nextread-' + teaser_block.layout.id,
-            teaser | block_type,
-            teaser | get_all_assets | block_type) ignore missing %}
-    {% endfor %}
+        {{ cp.include_teaser(teaser_block, 'zmo-nextread-') }}
     </div>
 </aside>
