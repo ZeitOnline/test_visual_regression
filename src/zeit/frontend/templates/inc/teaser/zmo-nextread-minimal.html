@@ -1,12 +1,13 @@
 {#
 
-Template for nextread teasers in a minimal layout
+Teaser template for nextread teasers in a minimal layout
 
-Available attributes:
-    image
-    lama
-    teaser
-    teaser_block
+Parameters:
+	teaser_image: to define display of teaser image
+	bg_image: to define display of background image
 
 #}
+
 {% extends "templates/inc/teaser/abstract/abstract_nextread_teaser_template.html" %}
+{%block teaser_image %}false{% endblock %}
+{%block bg_image %}false{% endblock %}

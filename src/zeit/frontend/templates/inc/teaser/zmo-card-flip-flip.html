@@ -8,6 +8,13 @@ Available attributes:
 
 #}
 {%- extends "templates/inc/teaser/abstract/abstract_card_teaser_template.html" -%}
+{%block card_class%}card--front{% endblock %}
+{%block bg_image%}true{% endblock %}
+{%block text_class%}card__text--with-bg{% endblock %}
+{%block teaser_text%}{{teaser.teaserTitle}}{% endblock %}
+{%block flip%}true{% endblock %}
+{%block read%}{% endblock %}
+{%block back%}true{% endblock %}
 
 {% block card_deck %}
 <div class="card__deck">

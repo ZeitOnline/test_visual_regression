@@ -33,6 +33,7 @@
 
     {% if teaser_block -%}
         {% for teaser in teaser_block %}
+            {{teaser_block.layout.id}}
             {% include ['templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html', 'templates/inc/teaser/default.html'] ignore missing %}
         {% endfor %}
     {% endif %}

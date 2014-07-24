@@ -9,10 +9,49 @@ Available attributes:
 #}
 {%- set image = get_teaser_image(teaser_block, teaser) -%}
 
+{% set card_style = 'background-color: #' + teaser_block.background_color + ';' %}
+
+<!-- if we have to display a bg image, prepare it here -->
+{% if self.bg_image() == 'true' %}
+    {% if image %}
+        {% set card_style = card_style + ' background-image: url(' + image | default_image_url(image_pattern=teaser_block.layout.image_pattern) + ')' %}
+    {% endif %}
+{% endif %}
+
 <div class="cp_button cp_button--card">
 
     <div class="card__wrap">
-        {% block card_deck %}{% endblock card_deck %}
+        
+        <div class="card__deck">
+		    <div class="card {{ self.card_class() }}" style="{{ card_style }}">
+		        <h2>
+		            <div class="card__title">{{teaser.teaserSupertitle}}</div>
+		        </h2>
+		        <div class="card__text {{ self.text_class() }}">{{ self.teaser_text() }}</div>
+
+		        {% if self.flip() == 'true' %}
+		        	<a href="{{teaser | create_url}}" class="card__button js-flip-card">Drehen</a>
+		        {% endif %}
+
+		        {% if self.read() == 'true' %}
+			        <div class="card__author">{{teaser.teaserTitle}}</div>
+			        <a href="{{teaser | create_url}}" class="card__button">Lesen</a>
+			    {% endif %}
+		    </div>
+
+		    {% if self.back() == 'true' %}
+			    <div class="card card--back" style="background-color: #{{teaser_block.background_color}};">
+			        <h2>
+			            <div class="card__title">{{teaser.teaserSupertitle}}</div>
+			        </h2>
+			        <div class="card__text">{{teaser.teaserText}}</div>
+			        <a href="{{teaser | create_url}}" class="card__button js-flip-card">Drehen</a>
+			    </div>
+			{% endif %}
+
+		</div>
+
     </div>
 
 </div>
+

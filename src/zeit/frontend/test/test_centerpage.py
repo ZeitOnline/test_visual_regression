@@ -273,7 +273,7 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
 
 def test_cp_button_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--small")
     assert len(wrap) != 0
     for element in wrap:

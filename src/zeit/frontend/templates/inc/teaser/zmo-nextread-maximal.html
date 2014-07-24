@@ -1,20 +1,13 @@
 {#
 
-Template for nextread teasers in a maximal layout
+Teaser template for nextread teasers in maximal layout
 
-Available attributes:
-    image
-    lama
-    teaser
-    teaser_block
+Parameters:
+	teaser_image: to define display of teaser image
+	bg_image: to define display of background image
 
 #}
-{% extends "templates/inc/teaser/abstract/abstract_nextread_teaser_template.html" %}
 
-{% block body_styles %}
-    {% if image %}
-        background-image: url({{image | default_image_url | default('http://placehold.it/160x90', true)}});
-    {% else %}
-        background-color: #252525;
-    {% endif %}
-{% endblock %}
+{% extends "templates/inc/teaser/abstract/abstract_nextread_teaser_template.html" %}
+{%block teaser_image %}false{% endblock %}
+{%block bg_image %}true{% endblock %}
