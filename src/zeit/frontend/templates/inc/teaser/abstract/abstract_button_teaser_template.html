@@ -24,16 +24,19 @@ all calling Templates have to provide:
 <div class='cp_button cp_button--{{ self.format() }}'>  
     {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
     <a href="{{teaser | create_url}}">
-        <!-- call image asset -->
+
         {% if self.image_class() != 'false' -%}
+            <!-- call image asset with optional class -->
             <div class="scaled-image">
                 {{ lama.insert_responsive_image(image, self.image_class()) }}
         {% else -%}
+            <!-- call standart image asset -->
             <div class="scaled-image is-pixelperfect cp_button__image" data-wrap=".cp_button__image">
                 {{ lama.insert_responsive_image(image) }}
         {% endif -%} 
             </div>
     </a>
+    
     <!-- call teaser text -->
     {{ cp.teaser_text_block(teaser, 'button', 'none', self.supertitle(), self.subtitle(), self.icon()) }}
 </div>

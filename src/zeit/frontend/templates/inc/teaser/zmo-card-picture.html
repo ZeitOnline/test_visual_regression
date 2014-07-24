@@ -1,29 +1,27 @@
 {#
 
-teaser template for citation card
+teaser template for picture card
 
 Available attributes:
-    teaser_block
     teaser
 
+Parameters:
+    card_class: to define optional front card class
+    bg_image: to define background image for card
+    text_class: to define optional class for card text
+    teaser_text: to define content of card text
+    author: to define if author is displayed
+    front_action: to define button action for front side of card
+    back_class: to define optional back card class
+    back_action: to define button action for back side of card
 #}
+
 {%- extends "templates/inc/teaser/abstract/abstract_card_teaser_template.html" -%}
 {%block card_class%}{% endblock %}
-{%block bg_image%}{% endblock %}
-{%block text_class%}{% endblock %}
-{%block teaser_text%}{% endblock %}
-{%block flip%}{% endblock %}
-{%block read%}{% endblock %}
-{%block back%}{% endblock %}
-
-{% block card_deck %}
-<div class="card__deck">
-    <div class="card" style="background-color: #{{teaser_block.background_color}}; background-image: url({{image | default_image_url(image_pattern=teaser_block.layout.image_pattern) }});">
-        <h2>
-            <div class="card__title">{{teaser.teaserSupertitle}}</div>
-        </h2>
-        <div class="card__text card__text--with-bg">{{teaser.teaserTitle}}</div>
-        <a href="{{teaser | create_url}}" class="card__button">Lesen</a>
-    </div>
-</div>
-{% endblock card_deck %}
+{%block bg_image%}true{% endblock %}
+{%block text_class%}card__text--with-bg{% endblock %}
+{%block teaser_text%}{{teaser.teaserTitle}}{% endblock %}
+{%block author%}{% endblock %}
+{%block front_action%}read{% endblock %}
+{%block back_class%}{% endblock %}
+{%block back_action%}{% endblock %}

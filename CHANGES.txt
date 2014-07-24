@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.10 (unreleased)
 -----------------
 
+- ZMO-864: refactor Teaser structure (inlcuding CSS) 
+
 - VIV-347: Fix guard clause logic for newsletter images
 
 

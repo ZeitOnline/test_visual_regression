@@ -33,7 +33,6 @@
 
     {% if teaser_block -%}
         {% for teaser in teaser_block %}
-            {{teaser_block.layout.id}}
             {% include ['templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html', 'templates/inc/teaser/default.html'] ignore missing %}
         {% endfor %}
     {% endif %}
@@ -97,4 +96,24 @@
             </div>
         </div>
     </div>
+{%- endmacro %}
+
+{% macro teaser_card_front_action(action, url) -%}
+    {% if action == 'flip' %}
+        <a href="{{url}}" class="card__button js-flip-card">Drehen</a>
+    {% elif action == 'share' %}
+            <a href="{{url}}" class="card__button js-slide-card">Teilen</a>
+    {% else %}
+        <a href="{{url}}" class="card__button">Lesen</a>
+    {% endif %}
+{%- endmacro %}
+
+{% macro teaser_card_back_action(action, url) -%}
+    {% if action == 'flip' %}
+        <a href="{{url}}" class="card__button js-flip-card">Drehen</a>
+    {% elif  action == 'share' %}
+        <a href="{{url}}" class="card__button js-slide-card js-stop-propagation">Teilen</a>
+    {% else %}
+        <a href="{{url}}" class="card__button js-stop-propagation">Lesen</a>
+    {% endif %}
 {%- endmacro %}
