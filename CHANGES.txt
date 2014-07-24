@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.10 (unreleased)
 -----------------
 
+- HOTFIX: Cope with missing or empty copyright attribute and hide empty caption
+
 - VIV-347: Fix guard clause logic for newsletter images
 
 
