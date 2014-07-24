@@ -49,7 +49,7 @@ all calling Templates have to provide:
 		        {{ cp.teaser_card_front_action(self.front_action(), teaser | create_url) }}
 		    </div>
 
-		    <!-- back of card -->
+			<!-- back of card -->
 		    {% if self.front_action() == 'flip' %}
 			    <div class="card card--back {{ self.back_class() }}" style="background-color: #{{teaser_block.background_color}};">
 			        <h2>

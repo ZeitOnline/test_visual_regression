@@ -1095,3 +1095,14 @@ def test_macro_copyrights(jinja2_env):
     assert not snippet.cssselect('li.copyrights__entry:nth-child(2) '
                                  'span.copyrights__entry__label a'), \
         'The second entry should not produce a link element.'
+
+
+def test_macro_include_cp_ad_produces_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+
+    lines = tpl.module.include_cp_ad().splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert '<div class="cp_button--ad">' in output

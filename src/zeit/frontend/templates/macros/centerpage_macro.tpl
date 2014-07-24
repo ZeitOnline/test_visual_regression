@@ -39,8 +39,10 @@
 {%- endmacro %}
 
 {% macro include_cp_ad() -%}
-    <div class='cp_button--ad'>
-        {{ lama.adplace(view.banner(7), view.banner_channel) }}
+    <div class="cp_button--ad">
+        {% if view %}
+            {{ lama.adplace(view.banner(7), view.banner_channel) }}
+        {% endif %}
     </div>
 {%- endmacro %}
 
