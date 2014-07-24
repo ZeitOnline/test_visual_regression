@@ -23,18 +23,24 @@ all calling Templates have to provide:
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
 <div class="cp_leader cp_leader--{{ self.format() }}">
-    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
-    <a href="{{teaser | create_url}}">
+    
+    <!-- call comment box -->
+    {% if self.format() != 'full' %}
+         {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
+    {% endif %}
 
-        {% if asset[0] == 'video' %}
-            <!-- call video asset -->
-            {%- set obj = teaser | auto_select_asset %}
-            {{ blocks.headervideo(obj, 'cp_leader__asset cp_leader__asset--' + self.shade(), '') }}
-        {% else %}
-            <!-- call image asset -->
-            <div class="scaled-image is-pixelperfect cp_leader__asset cp_leader__asset--{{ self.shade() }}" data-wrap=".cp_leader">
-                {{ lama.insert_responsive_image(image) }}
-            </div>
+    <a href="{{teaser | create_url}}">
+        {% if asset %}
+            {% if asset[0] == 'video' %}
+                <!-- call video asset -->
+                {%- set obj = teaser | auto_select_asset %}
+                {{ blocks.headervideo(obj, 'cp_leader__asset cp_leader__asset--' + self.shade(), '') }}
+            {% else %}
+                <!-- call image asset -->
+                <div class="scaled-image is-pixelperfect cp_leader__asset cp_leader__asset--{{ self.shade() }}" data-wrap=".cp_leader">
+                    {{ lama.insert_responsive_image(image) }}
+                </div>
+            {% endif %}
         {% endif %}
     </a>
     <!-- call teaser text -->
