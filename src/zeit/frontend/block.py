@@ -74,11 +74,9 @@ class Paragraph(object):
 class Portraitbox(object):
 
     def __init__(self, model_block):
-        ref = model_block.references
-        if ref is None:
-            return None
-        self.text = self._author_text(model_block.references.text)
-        self.name = model_block.references.name
+        if model_block.references is not None:
+            self.text = self._author_text(model_block.references.text)
+            self.name = model_block.references.name
 
     def _author_text(self, pbox):
         # TODO: Highly fragile, we need to find a better solution

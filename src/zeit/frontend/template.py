@@ -7,7 +7,6 @@ import re
 import urlparse
 
 from babel.dates import format_datetime
-from lxml import objectify
 from repoze.bitblt.transform import compute_signature
 import jinja2
 import pyramid.threadlocal
@@ -17,8 +16,6 @@ import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
-
-import zeit.frontend.centerpage
 
 
 log = logging.getLogger(__name__)
@@ -39,11 +36,11 @@ def translate_url(context, url):
 
 
 @jinja2.contextfilter
-def create_url(context, obj):
+def create_url(obj):
     if zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
     else:
-        return translate_url(context, obj.uniqueId)
+        return translate_url(obj.uniqueId)
 
 
 def format_date(obj, type='short'):
@@ -111,25 +108,14 @@ def hide_none(string):
         return string
 
 
+@register_filter
 def remove_break(string):
     return re.sub('\n', '', string)
 
 
+@register_filter
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
-
-
-def _get_navigation():
-    navigation = pkg_resources.resource_filename(
-        __name__, 'data/navigation.xml')
-    tree = objectify.parse(navigation)
-    root = tree.getroot()
-    top_formate = root.xpath('list[@id="top-formate"]')[0]
-    sitemap = root.xpath('list[@id="sitemap"]')[0]
-    return top_formate, sitemap
-
-top_formate, sitemap = _get_navigation()
-del _get_navigation
 
 
 # definition of default images sizes per layout context
@@ -215,6 +201,7 @@ def get_teaser_template(block_layout,
 
 
 def get_teaser_image(teaser_block, teaser, unique_id=None):
+    import zeit.frontend.centerpage
     if unique_id:
         try:
             asset = zeit.cms.interfaces.ICMSContent(unique_id)

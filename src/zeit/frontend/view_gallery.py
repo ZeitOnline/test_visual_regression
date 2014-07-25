@@ -37,7 +37,7 @@ class Gallery(zeit.frontend.view.Content):
                 dict(
                     label=image_meta.copyrights[0][0],
                     image=zeit.frontend.template.translate_url(
-                        self.context, i.image.uniqueId),
+                        i.image.uniqueId),
                     link=image_meta.copyrights[0][1],
                     nofollow=image_meta.copyrights[0][2]
                 )
