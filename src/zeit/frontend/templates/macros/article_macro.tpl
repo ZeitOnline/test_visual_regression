@@ -171,16 +171,16 @@
                 {% if loop -%}
                 <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__caption__text">{{ obj.caption }}</span>
-                {% if obj.copyright[0][0] != '©' %}
+                <span class="figure__caption__text">{{ obj.caption|hide_none }}</span>
+                {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
-                {% if obj.copyright[0][1] %}
+                    {%- if obj.copyright[0][1] -%}
                     <a href="{{obj.copyright[0][1]}}" target="_blank">
-                {% endif %} 
+                    {%- endif -%}
                         {{ obj.copyright[0][0] }}
-                {% if obj.copyright[0][1] %}
+                    {%- if obj.copyright[0][1] -%}
                     </a>
-                {% endif %} 
+                    {%- endif -%}
                 </span>
                 {% endif %}
             </figcaption>
