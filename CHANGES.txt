@@ -20,6 +20,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-860: Start bg video from js to prevent firefox bug
 
+- ZMO-861: add new teaserformat for light bg video
+
 
 0.9.1 (2014-07-17)
 ------------------
