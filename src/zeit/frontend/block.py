@@ -13,6 +13,7 @@ import zeit.content.video.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
+from zeit.frontend.template import register_test, register_filter
 import zeit.frontend.interfaces
 
 
@@ -44,11 +45,13 @@ class IFrontendHeaderBlock(zope.interface.Interface):
 # die Macros sollten durch die IFrontendBlock-Objekte selbst festgelegt
 # werden. Das API jedes der BlockItem-Objekte muß ja ohnehin zum jeweiligen
 # Macro passen.
+@register_test
 def elem(obj, b_type):
     o_type = block_type(obj)
     return IFrontendBlock.providedBy(obj) and o_type == b_type
 
 
+@register_filter
 def block_type(obj):
     if obj is None:
         return 'no_block'

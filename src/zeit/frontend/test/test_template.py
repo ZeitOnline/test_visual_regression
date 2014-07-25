@@ -4,6 +4,7 @@ import time
 import gocept.httpserverlayer.static
 import mock
 import pytest
+import venusian
 
 import zeit.cms.interfaces
 import zeit.frontend.template
