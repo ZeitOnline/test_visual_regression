@@ -31,6 +31,12 @@
 			var $element = $( this );
 			var video = $element.find( "video" );
 
+			// video already playing?
+			if( $(video).get(0).currentTime > 0 ) {
+				$element.find( ".video--fallback" ).hide();
+				$( video ).show();
+			}
+
 			$( video ).on( "play", function() {
 				$element.find( ".video--fallback" ).hide();
 				$( video ).show();

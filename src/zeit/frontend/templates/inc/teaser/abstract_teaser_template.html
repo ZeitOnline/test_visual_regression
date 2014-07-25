@@ -13,29 +13,29 @@ Available attributes:
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
 <div class='{{self.wrapper_class()}}'>
-   {% block asset %}
-   {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
-   <a href="{{teaser | create_url}}">
-       <div class="scaled-image is-pixelperfect {{self.teaser_layout()}}" data-wrap=".{{self.teaser_layout()}}">
-           {{ lama.insert_responsive_image(image) }}
-       </div>
-   </a>
-   {% endblock %}
+    {% block asset %}
+    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
+    <a href="{{teaser | create_url}}">
+        <div class="scaled-image is-pixelperfect {{self.teaser_layout()}}" data-wrap=".{{self.teaser_layout()}}">
+            {{ lama.insert_responsive_image(image) }}
+        </div>
+    </a>
+    {% endblock %}
     <span class="{{self.title_wrapper_class()}}">
-      <h2>
         <a href="{{teaser | create_url}}">
-            <div class="cp__buttons__supertitle">
-                {{teaser.teaserSupertitle | hide_none}}
-            </div>
-            <div class="{{self.title_class()}}">
-                {{teaser.teaserTitle | hide_none}}
-            </div>
+            <h2>
+                <div class="cp__buttons__supertitle">
+                    {{teaser.teaserSupertitle | hide_none}}
+                </div>
+                <div class="{{self.title_class()}}">
+                    {{teaser.teaserTitle | hide_none}}
+                </div>
+            </h2>
+            {% if self.hide_subtitle() != 'true' %}
+            <span class="cp__buttons__subtitle">
+                {{teaser.teaserText | hide_none}}
+            </span>
+            {% endif %}
         </a>
-      </h2>
-      {% if self.hide_subtitle() != 'true' %}
-        <span class="cp__buttons__subtitle">
-          {{teaser.teaserText | hide_none}}
-        </span>
-      {% endif %}
     </span>
 </div>

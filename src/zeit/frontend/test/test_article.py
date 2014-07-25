@@ -345,6 +345,8 @@ def test_header_articles_produce_no_error(testserver):
     assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header5' % testserver.url)
     assert browser.cssselect('div.article__wrap')
+    browser = Browser('%s/artikel/header5-2' % testserver.url)
+    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/header6' % testserver.url)
     assert browser.cssselect('div.article__wrap')
 

@@ -62,20 +62,22 @@
 
 {% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
-        <div class="{{ index_class }}">
+        <div class="{{ index_class }} figure-stamp">
         <div class="article__subpage-index__title">&uuml;bersicht</div>
-        {% for page in pages if page.teaser %}
-            <div class="article__subpage-index__item">
-                <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
-                <span class="article__subpage-index__item__title-wrap">
-                    {% if loop.index == number %}
-                        <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
-                    {% else %}
-                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ page.teaser }}</a>
-                    {% endif %}
-                </span>
-            </div>
-        {% endfor %}
+        <ol>
+            {% for page in pages if page.teaser %}
+                <li class="article__subpage-index__item">
+                    <span class="article__subpage-index__item__count">{{ page.number }} &mdash; </span>
+                    <span class="article__subpage-index__item__title-wrap">
+                        {% if loop.index == number %}
+                            <span class="article__subpage-index__item__title {{ active_class }}">{{ page.teaser }}</span>
+                        {% else %}
+                            <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ page.teaser }}</a>
+                        {% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ol>
     </div>
     {% endif %}
 {%- endmacro %}
@@ -169,25 +171,21 @@
                 {% if loop -%}
                 <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__caption__text">{{ obj.caption }}</span>
-                {% if obj.copyright[0][0] != '©' %}
+                <span class="figure__caption__text">{{ obj.caption|hide_none }}</span>
+                {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
-                {% if obj.copyright[0][1] %}
+                    {%- if obj.copyright[0][1] -%}
                     <a href="{{obj.copyright[0][1]}}" target="_blank">
-                {% endif %} 
+                    {%- endif -%}
                         {{ obj.copyright[0][0] }}
-                {% if obj.copyright[0][1] %}
+                    {%- if obj.copyright[0][1] -%}
                     </a>
-                {% endif %} 
+                    {%- endif -%}
                 </span>
                 {% endif %}
             </figcaption>
         </figure>
     {%- endif %}
-{%- endmacro %}
-
-{% macro inlinegalleryimage(obj, loop) -%}
-    {{ image(obj, loop) }}
 {%- endmacro %}
 
 {% macro headerimage(obj) -%}
@@ -409,12 +407,12 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro inlinegallery(obj) -%}
-    <div class="inline-gallery__wrap">
+{% macro inlinegallery(obj, wrapper_class='inline-gallery__wrap') -%}
+    <div class="{{ wrapper_class }}">
         <div class="inline-gallery">
-            {% for item in obj.items() %}
-                {{ inlinegalleryimage(item, loop) }}
-            {% endfor %}
+            {% for entry in obj.itervalues() -%}
+                {{ image(entry, loop) }}
+            {%- endfor %}
         </div>
     </div>
 {%- endmacro %}

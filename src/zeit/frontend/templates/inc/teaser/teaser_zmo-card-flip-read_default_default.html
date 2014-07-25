@@ -12,12 +12,16 @@ Available attributes:
 {% block card_deck %}
 <div class="card__deck">
     <div class="card card--front" style="background-color: #{{teaser_block.background_color}}; background-image: url({{image | default_image_url(image_pattern=teaser_block.layout.image_pattern) }});">
-        <h2 class="card__title">{{teaser.teaserSupertitle}}</h2>
+        <h2>
+            <div class="card__title">{{teaser.teaserSupertitle}}</div>
+        </h2>
         <div class="card__text card__text--with-bg">{{teaser.teaserTitle}}</div>
         <a href="{{teaser | create_url}}" class="card__button js-flip-card">Drehen</a>
     </div>
     <div class="card card--back js-flip-card" style="background-color: #{{teaser_block.background_color}};">
-        <h2 class="card__title">{{teaser.teaserSupertitle}}</h2>
+        <h2>
+            <div class="card__title">{{teaser.teaserSupertitle}}</div>
+        </h2>
         <div class="card__text">{{teaser.teaserText}}</div>
         <a href="{{teaser | create_url}}" class="card__button js-stop-propagation">Lesen</a>
     </div>

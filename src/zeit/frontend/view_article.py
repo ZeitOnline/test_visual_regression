@@ -123,7 +123,10 @@ class Article(zeit.frontend.view.Content):
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             img = zeit.frontend.block.HeaderImageStandard(obj)
             if img:
-                self._copyrights.setdefault(img.uniqueId, img)
+                try:
+                    self._copyrights.setdefault(img.uniqueId, img)
+                except AttributeError:
+                    pass
             return img
 
     @reify

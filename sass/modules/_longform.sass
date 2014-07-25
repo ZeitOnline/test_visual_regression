@@ -5,7 +5,7 @@ $bp-adjust-horizontal-figures--1: 1120px
 $bp-adjust-horizontal-figures--2: 1320px
 $bp-adjust-horizontal-figures--3: 1385px
 $bp-adjust-horizontal-figures--4: 1450px
-$longform-header-offset: 80px
+$longform-header-offset: 50px
 $longform-header-min-height: 400px
 $longform-header-max-height: 1400px
 
@@ -178,18 +178,20 @@ $longform-header-max-height: 1400px
       top: -$large
       border-bottom: 0px
 
+  //there is a strange ff rendering bug, therefore
+  //we have an earlier breakpoint for index
   .article__subpage-index
     +tablet
     display: none
-    max-width: em(240px)
     padding: 0 $small
-    margin-right: $gutter*2
-    float: left
-    margin-top: $thin
-    +respond-min($break-2)
+    min-width: $stamp-width
+    +respond-min($break-870)
       display: inline
     .article__subpage-active
       color: $black
+    ol
+      padding: 0
+      margin: 0
 
   .article__subpage-index__title
     text-transform: uppercase
@@ -327,4 +329,3 @@ $longform-header-max-height: 1400px
 
   .inline-gallery__wrap
     max-width: em($longform-inline-max-width)
-
