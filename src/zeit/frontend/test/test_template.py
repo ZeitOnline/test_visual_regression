@@ -115,3 +115,21 @@ def test_get_teaser_image_should_utilize_fallback_image(testserver):
     assert image.uniqueId == (
         'http://xml.zeit.de/zeit-magazin/'
         'default/teaser_image/teaser_image-zmo-large.jpg')
+
+
+def test_jinja_env_registrator_registers_only_after_scanning(testserver):
+    jinja = mock.Mock()
+    jinja.foo = {}
+
+    register_foo = zeit.frontend.template.JinjaEnvRegistrator('foo')
+    do_foo = register_foo(lambda: 42)
+    globals()['do_foo'] = do_foo
+
+    assert do_foo() == 42
+    assert jinja.foo == {}
+
+    scanner = venusian.Scanner(env=jinja)
+    scanner.scan(zeit.frontend.test.test_template, categories=('jinja',),)
+
+    assert do_foo() == 42
+    assert 'do_foo' in jinja.foo
