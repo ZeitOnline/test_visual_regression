@@ -1,4 +1,4 @@
-/* global console */
+/* global console, Modernizr */
 (function( $ ){
 
 	/**
@@ -35,7 +35,9 @@
 			el.setVideoPosition( $element );
 
 			//start video
-			$(video).get(0).play();
+			if ( Modernizr.video ) {
+				$(video).get(0).play();
+			}
 
 			//on video play, hide image and show video
 			$( video ).on( "play", function() {
