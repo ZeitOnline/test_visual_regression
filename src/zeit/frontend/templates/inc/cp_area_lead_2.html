@@ -5,7 +5,8 @@ This is the second part template for the context type "centerpage".
 Available attributes:
 	zeit.frontend.view_centerpage.Centerpage
 #}
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
+
+{%- import 'templates/macros/centerpage_macro.tpl' as cp with context -%}
 
 <div class="cp_lead__wrap">
 	{{ cp.include_teaser_block(view.area_lead_2) }}
