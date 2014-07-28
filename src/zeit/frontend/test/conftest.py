@@ -10,6 +10,8 @@ import gocept.httpserverlayer.wsgi
 import pkg_resources
 import pytest
 import zeit.frontend.application
+import zope.interface
+import zeit.content.image.interfaces
 
 
 def test_asset_path(*parts):
@@ -211,6 +213,31 @@ def monkeyagatho(monkeypatch):
 
     monkeypatch.setattr(
         zeit.frontend.comments.Agatho, 'collection_get', collection_get)
+
+
+@pytest.fixture
+def image_group_factory():
+    class MockImageGroup(dict):
+        zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
+        masterimage = None
+
+    class MockRepositoryImage(object):
+        def __init__(self, size, name):
+            self._size = size
+            self.uniqueId = name
+            self.masterimage = None
+
+        def getImageSize(self):
+            return self._size
+
+    def factory(*args, **kwargs):
+        image_group = MockImageGroup()
+        arg_dict = zip([('img-%s' % i) for i in range(len(args))], args)
+        for name, size in arg_dict + kwargs.items():
+            image_group[name] = MockRepositoryImage(size, name)
+        return image_group
+
+    return factory
 
 
 class TestApp(TestAppBase):
