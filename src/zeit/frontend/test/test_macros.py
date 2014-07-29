@@ -940,7 +940,6 @@ def test_macro_teaser_text_block_should_produce_alternative_markup(
 
     assert '<header class="cp_button__title__wrap '\
         'cp_button__title__wrap--dark">' in output
-    assert '<span class="icon-galerie-icon-white"></span>' in output
     assert '<div class="cp_button__supertitle' not in output
     assert '<div class="cp_button__title">TITLE</div>' in output
     assert '<div class="cp_button__subtitle' not in output

@@ -743,7 +743,7 @@ def test_cp_informatives_should_have_correct_second_block(application):
         '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
     informatives2_last_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
-        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+        '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9ddshjdsjkdsjk'
 
     assert informatives2_first_block == cp_view.area_informatives_2[0].uniqueId
     assert informatives2_last_block == cp_view.area_informatives_2[1].uniqueId
@@ -806,3 +806,17 @@ def test_default_asset_for_teaser_gallery(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
     img = browser.cssselect('div.cp_button--gallery a div img')[0]
     assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')
+
+
+def test_cp_has_gallery_icon_for_gallery_upright_teaser(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    icon = browser.cssselect(
+        'div.cp_button--gallery .cp_button__title__wrap a span')[0]
+    assert 'icon-galerie-icon-white' in icon.attrib.get('class')
+
+
+def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    icon = browser.cssselect(
+        'div.cp_button--gallery .cp_button__title__wrap a span')
+    assert len(icon) == 1
