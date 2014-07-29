@@ -30,11 +30,12 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * images.js: use standard image or hide allocated image spaces and
      * comments if noscript has no content
      * @function hideImages
-     * @param  {object} wrapper image area containing noscript
+     * @param  {object} img_wrapper image area containing noscript
+     * @param  {string} alt_source alternative image source
      */
     var hideImages = function( $img_wrapper, alt_source ){
         if ( alt_source ){
-            $img_wrapper.html( '<img src="' +alt_source+ '"/>' );
+            $img_wrapper.html( '<img src="' + alt_source + '"/>' );
         }else{
             $img_wrapper.height( 'auto' );
             $( '.cp__comment__count__wrap' ).hide();
