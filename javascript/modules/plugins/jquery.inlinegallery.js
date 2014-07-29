@@ -1,7 +1,7 @@
 /* global console, $blocked */
 
 /**
- * @fileOverview  Inline-Gallery preparation and evokation script
+ * @fileOverview jQuery Plugin for Inline-Gallery
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
@@ -26,7 +26,7 @@
      * Prepares the inline gallery and adds some extra features
      * @class inlinegallery
      * @memberOf jQuery.fn
-     * @param  {object} defaults    configuration object, overwriting presetted options
+     * @param  {object} defaults configuration object, overwriting presetted options
      * @return {object} jQuery-Object for chaining
      */
     $.fn.inlinegallery = function( defaults ) {
