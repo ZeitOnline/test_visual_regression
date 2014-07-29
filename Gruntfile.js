@@ -115,7 +115,7 @@ module.exports = function(grunt) {
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
 				ignores: [
 					project.sourceDir + 'javascript/libs/**/*',
-					project.sourceDir + 'javascript/documentation'
+					project.sourceDir + 'javascript/documentation/**/*'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
