@@ -1,4 +1,13 @@
 /* global console, define */
+
+/**
+ * @fileOverview Module for navigation actions
+ * @version  0.1
+ */
+/**
+ * main_nav.js: module for main navigation
+ * @module main_nav
+ */
 define(['jquery'], function() {
 
     var $main_nav_trigger = $('#js-main-nav-trigger');
@@ -11,7 +20,8 @@ define(['jquery'], function() {
     var has_mobile_nav; // will be filled in initMobileNav/initDesktopNav
 
     /**
-     * Initialize navigation for small screens
+     * main-nav.js: initialize navigation for small screens
+     * @function initMobileNav
      */
     var initMobileNav = function() {
         has_mobile_nav = true;
@@ -27,7 +37,8 @@ define(['jquery'], function() {
     };
 
     /**
-     * Initialize ressort slider
+     * main-nav.js: initialize ressort slider
+     * @function initRessortSlider
      */
     var initRessortSlider = function() {
         var $ressort_slider_container = $('#js-main-nav-ressorts-slider-container');
@@ -54,7 +65,8 @@ define(['jquery'], function() {
     };
 
     /**
-     * Initialize navigation for bigger screens
+     * main-nav.js: initialize navigation for bigger screens
+     * @function initDesktopNav
      */
     var initDesktopNav = function() {
         has_mobile_nav = false;
@@ -64,8 +76,9 @@ define(['jquery'], function() {
     };
 
     /**
-     * Close open menu
-     * @param {object} e - event object
+     * main-nav.js: close open menu
+     * @function closeOpenMenu
+     * @param  {object} e event object
      */
     var closeOpenMenu = function(e) {
         if (has_mobile_nav) {
@@ -86,8 +99,9 @@ define(['jquery'], function() {
     };
 
     /**
-     * Toggle section dropdown menu
-     * @param {object} e - event object
+     * main-nav.js: toggle section dropdown menu
+     * @function toggleSectionMenu
+     * @param  {object} e event object
      */
     var toggleSectionMenu = function(e) {
         e.preventDefault();
@@ -112,7 +126,8 @@ define(['jquery'], function() {
     };
 
     /**
-     * Initialize navigation
+     * main-nav.js: initialize navigation
+     * @function init
      */
     var init = function() {
         // disable hover fallback

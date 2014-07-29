@@ -1,11 +1,18 @@
 /* global console, define */
 
+/**
+ * @fileOverview Module for Tabs
+ * @version  0.1
+ */
+/**
+ * tabs.js: module for tabs
+ * @module tabs
+ */
 define(['jquery'], function() {
-
   /**
-   * [init description]
-   * @return {[type]}
-   */
+  * tabs.js: initialize tabs
+  * @function init
+  */
   var init = function() {
     var $tabs = $('.tabs');
     $tabs.each(function(idx, container) {

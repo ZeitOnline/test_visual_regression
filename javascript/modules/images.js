@@ -1,13 +1,23 @@
 /* global console, define */
+
+/**
+ * @fileOverview Module for responsive images
+ * @version  0.1
+ */
+/**
+ * images.js: module for images
+ * @module images
+ */
 define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
 
     var resp_imgs = [];
 
     /**
-     * [prefix description]
-     * @param  {[type]} width
-     * @param  {[type]} height
-     * @return {[type]}
+     * images.js: create prefix
+     * @function prefix
+     * @param  {integer} width width of image
+     * @param  {integer} height height of image
+     * @return {string} prefix string for image path
      */
     var prefix = function(width, height) {
         var key = width + ':' + height + ':time';
@@ -17,11 +27,12 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * rescale one image
-     * @param  {[type]} image
-     * @param  {[type]} subsequent
-     * @param  {[type]} width
-     * @param  {[type]} height
+     * images.js: rescale one image
+     * @function rescaleOne
+     * @param  {object} image image object
+     * @param  {boolean} subsequent
+     * @param  {integer} width width of image
+     * @param  {integer} height height of image
      */
     var rescaleOne = function(image, subsequent, width, height) {
         var $img = $(image);
@@ -46,8 +57,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             }
 
         } else {
-            //ToDo (T.B.) $img.height() has a wrong value if alt attribute is set in image
-            //height = height || $img.height() || Math.round(width / $img.data('ratio'));
+            /**
+             * @todo (T.B.) $img.height() has a wrong value if alt attribute is set in image
+             */
             height = height || Math.round(width / $img.data('ratio'));
         }
 
@@ -57,8 +69,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * rescale all images
-     * @param  {[type]} e
+     * images.js: rescale all images
+     * @function rescaleAll
+     * @param  {object} e event object
      */
     var rescaleAll = function(e) {
         if (!e) {
@@ -112,7 +125,8 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * init scaling
+     * images.js: init scaling
+     * @function init
      */
     var init = function() {
         rescaleAll();
