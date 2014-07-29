@@ -120,8 +120,9 @@ def test_macro_portraitbox_should_produce_markup(jinja2_env):
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
-    markup_standart = ('<div class="%s"><div class="article__subpage-index__'
-                       'title">&uuml;bersicht</div>') % css_index
+    markup_standard = ('<div class="%s figure-stamp">'
+                       '<div class="article__subpage-index__title">'
+                       '&uuml;bersicht</div><ol>') % css_index
 
     fake_page = type('Dummy', (object,), {})
     fake_page.number = 1
@@ -129,11 +130,11 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
     # assert normal markup
     markup = (
-        u'%s<div class="article__subpage-index__item"><span class="'
+        u'%s<li class="article__subpage-index__item"><span class="'
         'article__subpage-index__item__count">1 &mdash; </span><span class="'
         'article__subpage-index__item__title-wrap"><a href="#kapitel1" class="'
         'article__subpage-index__item__title js-scroll">Erster</a></span>'
-        '</div></div>') % (markup_standart)
+        '</li></ol></div>') % (markup_standard)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
     output = ""
@@ -144,11 +145,11 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
     # assert active markup
     css_active = 'article__subpage-active'
     markup_active = (
-        u'%s<div class="article__subpage-index__item"><span '
+        u'%s<li class="article__subpage-index__item"><span '
         'class="article__subpage-index__item__count">1 &mdash; </span><span '
         'class="article__subpage-index__item__title-wrap"><span class="'
-        'article__subpage-index__item__title %s">Erster</span></span></div>'
-        '</div>') % (markup_standart, css_active)
+        'article__subpage-index__item__title %s">Erster</span></span></li>'
+        '</ol></div>') % (markup_standard, css_active)
     lines_active = tpl.module.subpage_index(
         [fake_page], 'Title', 1, css_index, css_active).splitlines()
     output_active = ""
@@ -292,7 +293,8 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
             'title': 'My title content'},
            {'layout': 'zmo-small-right', 'align': False,
             'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': (('test', None, False),),
+            'caption': 'test',
+            'copyright': (('test', 'http://www.test.de', False),),
             'alt': 'My alt content',
             'title': 'My title content'},
            ]
@@ -317,6 +319,11 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         output = ""
         for line in lines:
             output += line.strip()
+        if el['copyright'][0][1]:
+            cr = '<a href="' + el['copyright'][0][1] + \
+                '" target="_blank">' + el['copyright'][0][0] + '</a>'
+        else:
+            cr = el['copyright'][0][0]
         markup = '<figure class="%s"><div class="scaled-image">' \
                  '<!--\[if gt IE 8\]><!--><noscript' \
                  ' data-src=' \
@@ -328,9 +335,9 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                  '<!--<!\[endif\]--></div><figcaption ' \
                  'class="figure__caption"><span ' \
                  'class="figure__caption__text">test</span><span ' \
-                 'class="figure__copyright">test</span>' \
+                 'class="figure__copyright">%s</span>' \
                  '</figcaption></figure>' \
-                 % (el['css'], el['alt'], el['title'])
+                 % (el['css'], el['alt'], el['title'], cr)
 
         assert re.match(markup, output)
 
@@ -767,7 +774,7 @@ def test_macro_iqd_nuggad_mobile_produces_js(jinja2_env):
 
 def test_adplace_middle_mobile_produces_html(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-    elems = ['<div class="iqd_mobile__adplace">',
+    elems = ['<div class="iqd_mobile__adplace--middle">',
              '<div id="sas_13557"></div>']
     obj = mock.Mock()
     obj.tile = 7

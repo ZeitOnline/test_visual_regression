@@ -2,14 +2,16 @@
 
 <div class="article__head-wrap">
     <header class="article__head article__head--mode">
-      {{ blocks[view.header_elem|block_type](view.header_elem) }}
-      <div class="wrap">
-        {{ blocks.supertitle() }}
-        {{ blocks.title() }}
-        <span class="article__head__meta">
-          {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
-        </span>
-        {{ blocks.subtitle(include_meta=True) }}
-      </div>
+        {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        <div class="wrap">
+            <h1>
+                {{ blocks.supertitle() }}
+                {{ blocks.title() }}
+            </h1>
+            <span class="article__head__meta">
+                {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+            </span>
+            {{ blocks.subtitle(include_meta=True) }}
+        </div>
     </header>
 </div>

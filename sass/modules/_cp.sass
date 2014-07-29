@@ -17,13 +17,18 @@ $cp__comment__count-width: em(60px)
 .cp__title ~ .main > .cp__lead-full__wrap
 	margin-top: em_to_rem($medium)
 
-//hide breadcrumbs for cp
+//hide breadcrumbs for cp and normalize h2
 .for-centerpage
 	.breadcrumbs
 		display: none
 	.main
 		overflow: hidden
 		+tablet()
+	h2
+		font-size: 1em
+		font-weight: normal
+		margin: 0
+
 
 //standard link classes for cp
 %cp__link--light

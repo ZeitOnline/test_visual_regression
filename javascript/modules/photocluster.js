@@ -1,7 +1,19 @@
 /* global console, define */
 
+/**
+ * @fileOverview Module Photocluster
+ * @version  0.1
+ */
+/**
+ * photocluster.js: module for photocluster
+ * @module photocluster
+ */
 define(['require', 'jquery'], function(require, $) {
 
+    /**
+     * photocluster.js: initialize photocluster
+     * @function init
+     */
     var init = function() {
         var $cluster = $('.photocluster');
 
@@ -23,8 +35,10 @@ define(['require', 'jquery'], function(require, $) {
                 }
             });
 
-            // To use Packery as a jQuery plugin with RequireJS, you’ll need to run jQuery bridget.
-            // @see http://packery.metafizzy.co/appendix.html#requirejs
+            /**
+             * photocluster.js: use Packery as a jQuery plugin with RequireJS, you’ll need to run jQuery bridget.
+             * @tutorial http://packery.metafizzy.co/appendix.html#requirejs
+             */
             require( [
                 'libs/packery.pkgd.min',
                 'jquery-bridget/jquery.bridget'

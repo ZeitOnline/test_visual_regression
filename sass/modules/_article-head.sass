@@ -29,6 +29,12 @@ $standard-header-image-max-width: 31.25em
   a
     +animated-interaction($color-link--hover)
 
+//normalize h1 font
+.article__head-wrap
+  h1
+    font-size: 1em
+    font-weight: normal
+
 .article__head__supertitle
   @extend %supertitle
   font-size: $font-m
@@ -81,6 +87,9 @@ $standard-header-image-max-width: 31.25em
     .figure__copyright
       color: $grey--light
       display: block
+      a
+        +link-colors($grey--light, $grey--light, $grey--light, $grey--light, $grey--light)
+        border: 0
   &:hover
     .figure__caption
       opacity: 1.0

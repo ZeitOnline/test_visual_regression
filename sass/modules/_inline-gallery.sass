@@ -7,6 +7,15 @@
         max-height: 620px
         margin: 0 auto
 
+// appear just after bxSlider initialisation
+// needed for "static" galleries
+html.js
+    .inline-gallery
+        visibility: hidden
+    .bx-wrapper
+        .inline-gallery
+            visibility: visible
+
 .figure__caption__pager
     +respond-min($break-1)
         display: none
