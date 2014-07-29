@@ -1,4 +1,4 @@
-/* global console */
+/* global console, Modernizr */
 
 /**
  * @fileOverview jQuery Plugin for Background Video
@@ -52,21 +52,19 @@
 			var $element = $( this );
 			var video = $element.find( "video" );
 
-			// video already playing?
-			if( $(video).get(0).currentTime > 0 ) {
-				$element.find( ".video--fallback" ).hide();
-				$( video ).show();
+			//set video position
+			el.setVideoPosition( $element );
+
+			//start video
+			if ( Modernizr.video ) {
+				$(video).get(0).play();
 			}
 
-			//event on video play
-			$( video ).on( "play", function() {
-				$element.find( ".video--fallback" ).hide();
-				$( video ).show();
-			});
+			//on video play, hide image and show video
 
-			//set initial position of video
-			$( window ).on( "load", function(){
-				el.setVideoPosition( $element );
+			$( video ).on( "play", function() {
+				$element.find( ".video--fallback" ).fadeOut();
+				$( video ).show();
 			});
 
 			//reset video position on resize

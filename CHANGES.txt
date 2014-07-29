@@ -12,6 +12,10 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-457: show standart image for browsers that can not work with noscript
 
+- ZMO-860: Start bg video from js to prevent firefox bug
+
+- ZMO-861: add new teaserformat for light bg video
+
 
 0.9.2 (2014-07-24)
 ------------------

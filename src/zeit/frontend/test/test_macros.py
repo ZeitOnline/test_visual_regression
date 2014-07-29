@@ -450,7 +450,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     # assert default video
     obj = {'source': 'test.mp4', 'id': 1}
     wrapper = '<div data-backgroundvideo="1'
-    video = '<video preload="auto" autoplay="true" '\
+    video = '<video preload="auto" '\
             'loop="loop" muted="muted" volume="0"'
     source = '<source src="test.mp4'
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
