@@ -637,7 +637,7 @@
 
     {% if image %}
         <!--[if gt IE 8]><!-->
-            <noscript>
+            <noscript data-src="{{image | default_image_url}}">
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">

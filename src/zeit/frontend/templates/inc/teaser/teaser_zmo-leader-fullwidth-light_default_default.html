@@ -9,11 +9,11 @@ Available attributes:
 
 {% import 'templates/macros/layout_macro.tpl' as lama with context%}
 
-<div class="cp__lead-full__wrap">
+<div class="cp__lead-full__wrap cp__lead-full--light">
     {% block asset %}
     {%- set image = get_teaser_image(teaser_block, teaser) %}
     <a href="{{teaser | create_url}}">
-        <div class="scaled-image is-pixelperfect cp__lead-full--light" data-wrap=".cp__lead-full__wrap">
+        <div class="scaled-image is-pixelperfect" data-wrap=".cp__lead-full__wrap">
             {{ lama.insert_responsive_image(image) }}
         </div>
     </a>

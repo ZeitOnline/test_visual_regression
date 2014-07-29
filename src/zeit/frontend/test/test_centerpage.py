@@ -183,7 +183,7 @@ def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name(
             "a")
         image_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__image--dark")
+            ".cp__lead-leader__image")
         assert len(text_wrap) != 0
         assert len(link_wrap) == 2
         assert len(image_wrap) != 0
@@ -440,7 +440,6 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
-        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
         title = teaser.find_elements_by_class_name("cp__lead__title")
         subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
@@ -491,10 +490,9 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
     assert len(wrap) != 0
     for teaser in wrap:
-        img_wrap = teaser.find_elements_by_class_name("cp__lead-full--dark")
+        img_wrap = teaser.find_elements_by_tag_name("div")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_elements_by_tag_name("header")
-        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
         title = teaser.find_elements_by_class_name("cp__lead__title")
         subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
@@ -525,14 +523,19 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
 
 def test_lead_full_light_version_is_working(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    assert '<div class="scaled-image is-pixelperfect cp__lead-full--light"'\
+    assert '<div class="cp__lead-full__wrap '\
+        'cp__lead-full--light">' in browser.contents
+    assert '<div class="scaled-image is-pixelperfect"'\
         ' data-wrap=".cp__lead-full__wrap">' in browser.contents
 
 
 def test_lead_leader_light_version_is_working(testserver):
     browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<div class="cp__lead-leader__wrap '\
+        'cp__lead-leader__wrap--square '\
+        'cp__lead-leader__image--light">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect '\
-        'cp__lead-leader__image cp__lead-leader__image--light" '\
+        'cp__lead-leader__image" '\
         'data-wrap=".cp__lead-leader__wrap">' in browser.contents
 
 
