@@ -360,8 +360,8 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     start = '<div class="scaled-image is-pixelperfect">' \
             '<!--[if gt IE 8]><!--><noscript'
     middle = '><!--<![endif]-->' \
-            '<img alt="test" title="test" class="article__main-image--' \
-            'longform figure__media" src="'
+             '<img alt="test" title="test" class="article__main-image--' \
+             'longform figure__media" src="'
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)
