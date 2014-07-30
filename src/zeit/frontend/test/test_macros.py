@@ -1082,14 +1082,17 @@ def test_macro_copyrights(jinja2_env):
         'The second entry should not produce a link element.'
 
 
-def test_macro_add_esi_src_produces_html(jinja2_env):
+def test_macro_liveblog_produces_html(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
-    lines = tpl.module.add_esi_src('http://www.zeit.de').splitlines()
+    liveblog = mock.Mock()
+    liveblog.blog_id = '999'
+    lines = tpl.module.liveblog(liveblog).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
 
-    assert '<esi:include src="http://www.zeit.de"></esi:include>' in output
+    assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
+            'onerror="continue"></esi:include>') in output
     assert '<esi:remove>' in output
     assert '<div data-type="esi-content"></div>' in output
     assert '</esi:remove>' in output

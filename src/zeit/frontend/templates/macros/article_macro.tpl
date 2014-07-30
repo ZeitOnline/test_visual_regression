@@ -33,6 +33,17 @@
     </div>
 {%- endmacro %}
 
+{% macro liveblog(obj) -%}
+    {% if obj.blog_id -%}
+        <div class="wrapper__esi-content is-constrained is-centered">
+            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue"></esi:include>
+            <esi:remove>
+                <div data-type="esi-content"></div>
+            </esi:remove>
+        </div>
+    {%- endif %}
+{%- endmacro %}
+
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
@@ -465,15 +476,3 @@
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
-
-
-{% macro add_esi_src( src='http://zeit.sd-demo.sourcefabric.org/content/seo/1.html' ) -%}
-    <div class="wrapper__esi-content is-constrained is-centered"> 
-        <esi:include src="{{src}}"></esi:include>
-        <esi:remove>
-            <div data-type="esi-content"></div>
-        </esi:remove>
-    </div>
-{%- endmacro %}
-
-

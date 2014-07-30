@@ -46,9 +46,6 @@
                     <!-- {% endif %} -->
                 </div>
 
-                <!-- TODO: remove after full esi integration is in (as) -->
-                {{ blocks.add_esi_src() }}
-
                 {% block article_comments %}
                     {% if view.comments %}
                         {{ blocks.comments(view, request) }}
