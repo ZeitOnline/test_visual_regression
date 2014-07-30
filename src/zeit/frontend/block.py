@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
+import logging
+import os.path
+
 from grokcore.component import adapter, implementer
 from lxml import etree, html
 import PIL
-import logging
-import os.path
+import zope.interface
+
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
-import zeit.frontend.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
-import zope.interface
+
+import zeit.frontend.interfaces
 
 
 # Since this interface is an implementation detail rather than part of the API
@@ -238,42 +241,15 @@ class HeaderVideo(BaseVideo):
         super(HeaderVideo, self).__init__(model_block)
 
 
-class InlineGalleryImage(Image):
-
-    def __init__(self, item):
-        self.caption = item.caption
-        self.layout = 'large'  # item.layout
-        self.title = item.title
-        self.text = item.text
-
-        if hasattr(item, 'image'):
-            self.src = item.image.uniqueId
-            self.uniqueId = item.image.uniqueId
-            self.image = item.image
-        image_meta = zeit.content.image.interfaces.IImageMetadata(item)
-        # TODO: get complete list of copyrights with links et al
-        # this just returns the first copyright without link
-        # mvp it is
-        self.copyright = [copyright[0]
-                          for copyright in image_meta.copyrights][0]
-        self.alt = image_meta.alt
-        self.align = image_meta.alignment
-
-
 @implementer(IFrontendBlock)
 @adapter(zeit.content.article.edit.interfaces.IGallery)
-class InlineGallery(object):
-
-    def __init__(self, model_block):
-        self._gallery_items = model_block.references.items
-
-    def items(self):
-        my_items = []
-        for item in self._gallery_items():
-            src, entry = item
-            if(entry.layout != 'hidden'):
-                my_items.append(InlineGalleryImage(entry))
-        return my_items
+def inlinegallery(context):
+    # Inline galleries are created dynamically via this factory because
+    # they inherit from zeit.frontend.gallery.Gallery. Declaring a regular
+    # class would introduce a circular dependency.
+    from zeit.frontend.gallery import Gallery
+    cls = type('Inlinegallery', (Gallery,), {})
+    return cls(context.references)
 
 
 @implementer(IFrontendBlock)
@@ -312,7 +288,7 @@ class NewsletterTeaser(object):
             return self.context.reference.thumbnail
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
-        group = (images is not None) and images.image
+        group = images.image if images is not None else None
         if group is None:
             return None
         # XXX An actual API for selecting a size would be nice.

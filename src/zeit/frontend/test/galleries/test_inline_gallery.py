@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from lxml import etree
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
 from zeit.frontend.test import Browser
 
 
@@ -42,3 +44,9 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
     except:
         print "Timeout Gallery Script"
         assert False
+
+
+def test_inline_gallery_uses_responsive_images_with_ratio(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
+    assert 'data-ratio="1.77914110429"' in etree.tostring(image)

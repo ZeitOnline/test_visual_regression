@@ -1,16 +1,38 @@
 /* global console */
-(function( $ ){
 
-	/**
-	 * plugin to integrate video player
-	 */
+/**
+ * @fileOverview jQuery Plugin for Video Insertion
+ * @author anika.szuppa@zeit.de
+ * @version  0.1
+ */
+(function( $ ){
+    /**
+     * See (http://jquery.com/).
+     * @name jQuery
+     * @alias $
+     * @class jQuery Library
+     * See the jQuery Library  (http://jquery.com/) for full details.  This just
+     * documents the function and classes that are added to jQuery by this plug-in.
+     */
+    /**
+     * See (http://jquery.com/)
+     * @name fn
+     * @class jQuery Library
+     * See the jQuery Library  (http://jquery.com/) for full details.  This just
+     * documents the function and classes that are added to jQuery by this plug-in.
+     * @memberOf jQuery
+     */
+    /**
+     * Switches between preview image and video player
+     * @class switchVideo
+     * @memberOf jQuery.fn
+     * @return {object} jQuery-Object for chaining
+     */
 	$.fn.switchVideo = function() {
 
 		var el = {
-			/**
-			 * build html for player object
-			 * @param {Object} that
-			 */
+
+			//build html for player object
 			buildPlayer: function( that ){
 
 				if( el.id ){
@@ -36,17 +58,11 @@
 					window.brightcove.createExperiences();
 				}
 			},
-			/**
-			 * grab video id from meta data and store it
-			 * @param  {Object} that
-			 */
+			//grab video id from meta data and store it
 			buildId: function( that ){
 				el.id = $( that ).closest( "figure[data-video]" ).attr( "data-video" );
 			},
-			/**
-			 * add show/hide event for video still image and button
-			 * @param {Object} that
-			 */
+			//add show/hide event for video still image and button
 			addEvent: function( that ){
 				$( that ).find( "img, .video__button" ).on( "click", function( ev ){
 					ev.preventDefault();
@@ -54,10 +70,7 @@
 					el.buildPlayer( this );
 				});
 			},
-			/**
-			 * add play button to image
-			 * @param {Object} that
-			 */
+			//add play button to image
 			addButton: function( that ){
 				if( el.id ){
 					$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
@@ -66,10 +79,8 @@
 			id: false
 		};
 
-		/**
-		 * run through data-video elements
-		 */
-		$(this).each(function(){
+		//run through data-video elements and return object
+		return this.each( function() {
 			el.buildId( this );
 			el.addButton( this );
 			el.addEvent( this );

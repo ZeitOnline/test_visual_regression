@@ -592,7 +592,7 @@
 {% macro adplace_middle_mobile(item) -%}
     {% if item.tile == 7 -%}
     <!-- only integrate onces as equivalent to desktop tile 7 -->
-        <div class="iqd_mobile__adplace">
+        <div class="iqd_mobile__adplace--middle">
             <div id="sas_13557"></div>
         </div>
     {%- endif %}
@@ -637,7 +637,7 @@
 
     {% if image %}
         <!--[if gt IE 8]><!-->
-            <noscript>
+            <noscript data-src="{{image | default_image_url}}">
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">

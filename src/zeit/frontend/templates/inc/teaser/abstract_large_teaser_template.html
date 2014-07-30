@@ -9,28 +9,28 @@ Available attributes:
 {% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 {% import 'templates/macros/layout_macro.tpl' as lama with context%}
 
-<div class="cp__lead-leader__wrap cp__lead-leader__wrap--{{ self.format() }}">
+<div class="cp__lead-leader__wrap cp__lead-leader__wrap--{{ self.format() }} cp__lead-leader__image--{{ self.shade() }}">
     {%- set image = get_teaser_image(teaser_block, teaser) %}
 
     {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
     <a href="{{teaser | create_url}}">
-        <div class="scaled-image is-pixelperfect cp__lead-leader__image cp__lead-leader__image--{{ self.shade() }}" data-wrap=".cp__lead-leader__wrap">
+        <div class="scaled-image is-pixelperfect cp__lead-leader__image" data-wrap=".cp__lead-leader__wrap">
             {{ lama.insert_responsive_image(image) }}
         </div>
     </a>
     <header class="cp__lead-leader__title__wrap cp__lead-leader__title__wrap--{{ self.shade() }}">
-        <span class="cp__lead__supertitle">
-            <a href="{{teaser | create_url}}">
-                {{ teaser.teaserSupertitle }}
-            </a>
-        </span>
-        <h2 class="cp__lead__title">
-            <a href="{{teaser | create_url}}">
-                {{ teaser.teaserTitle | hide_none }}
-            </a>
-        </h2>
-        <span class="cp__lead__subtitle">
-            {{ teaser.teaserText | hide_none }}
-        </span>
+        <a href="{{teaser | create_url}}">
+            <h2>
+                <div class="cp__lead__supertitle">
+                    {{ teaser.teaserSupertitle }}
+                </div>
+                <div class="cp__lead__title">
+                    {{ teaser.teaserTitle | hide_none }}
+                </div>
+            </h2>
+            <span class="cp__lead__subtitle">
+                {{ teaser.teaserText | hide_none }}
+            </span>
+        </a>
     </header>
 </div>

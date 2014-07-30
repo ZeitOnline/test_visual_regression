@@ -12,17 +12,38 @@ class Gallery(zeit.frontend.view.Content):
 
     advertising_enabled = True
 
-    def __call__(self):
+    def __init__(self, *args, **kwargs):
+        super(Gallery, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.advertising_enabled
-        return {}
 
     @reify
     def images(self):
-        return [self.context[i] for i in self.context]
+        # TODO: Why does this not work with zope interfaces?
+        return zeit.frontend.gallery.standalone(self.context)
 
     @reify
     def galleryText(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
+
+    @property
+    def copyrights(self):
+        teaser_list = []
+        for i in self.images.values():
+            image_meta = zeit.content.image.interfaces.IImageMetadata(i.image)
+            if (len(image_meta.copyrights) < 1 or
+                    len(image_meta.copyrights[0][0]) <= 1):
+                # Drop teaser if no copyright text is assigned.
+                continue
+            teaser_list.append(
+                dict(
+                    label=image_meta.copyrights[0][0],
+                    image=zeit.frontend.template.translate_url(
+                        self.context, i.image.uniqueId),
+                    link=image_meta.copyrights[0][1],
+                    nofollow=image_meta.copyrights[0][2]
+                )
+            )
+        return sorted(teaser_list, key=lambda k: k['label'])
 
 
 @view_config(context=zeit.frontend.gallery.IProductGallery,

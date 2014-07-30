@@ -39,13 +39,10 @@ class Article(zeit.frontend.view.Content):
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self._copyrights = {}
-
-    def __call__(self):
         self.context.advertising_enabled = self.advertising_enabled
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
-        return {}
 
     @reify
     def template(self):
@@ -125,7 +122,10 @@ class Article(zeit.frontend.view.Content):
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             img = zeit.frontend.block.HeaderImageStandard(obj)
             if img:
-                self._copyrights.setdefault(img.uniqueId, img)
+                try:
+                    self._copyrights.setdefault(img.uniqueId, img)
+                except AttributeError:
+                    pass
             return img
 
     @reify
@@ -329,12 +329,9 @@ class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-        if self.request.view_name == 'komplettansicht':
-            return {}
-
-        if self.page_nr > len(self.pages):
+        if (self.request.view_name != 'komplettansicht') and (
+                self.page_nr > len(self.pages)):
             raise pyramid.httpexceptions.HTTPNotFound()
-        return {}
 
     @reify
     def page_nr(self):

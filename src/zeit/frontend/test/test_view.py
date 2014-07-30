@@ -4,12 +4,57 @@ from urllib2 import HTTPError
 from zeit.content.article.edit.reference import Gallery, Portraitbox
 from zeit.frontend import view
 from zeit.frontend import view_article, view_centerpage
-from zeit.frontend.block import InlineGalleryImage
+from zeit.frontend.gallery import IGalleryImage
 from zeit.frontend.test import Browser
 import mock
 import pytest
 import requests
 import zeit.cms.interfaces
+from pyramid.response import Response
+
+
+def test_base_view_produces_acceptable_return_type():
+    class BaseView(view.Base):
+        """This view class does not implement a __call__ method."""
+
+        pass
+
+    obj = BaseView(mock.Mock(), mock.Mock())
+    assert type(type(obj)) is view.MetaView, 'The type MetaView is used.'
+    assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
+
+
+def test_response_view_produces_acceptable_return_type():
+    class ResponseView(view.Base):
+        """This view class explicitly returns a pyramid response."""
+
+        def __call__(self):
+            return Response('OK', 200)
+
+    obj = ResponseView(mock.Mock(), mock.Mock())
+    assert isinstance(obj(), Response), 'ResponseView retains its return type.'
+
+
+def test_none_view_produces_acceptable_return_type():
+    class NoneView(view.Base):
+        """This view class implicitly returns None."""
+
+        def __call__(self):
+            pass
+
+    obj = NoneView(mock.Mock(), mock.Mock())
+    assert hasattr(obj(), '__iter__'), 'NoneView returns an iterable type.'
+
+
+def test_dict_view_produces_acceptable_return_value():
+    class DictView(view.Base):
+        """This view class returns a dictionary."""
+
+        def __call__(self):
+            return {'bar': 1}
+
+    obj = DictView(mock.Mock(), mock.Mock())
+    assert obj() == {'bar': 1}, 'DictView retains its return value.'
 
 
 def test_breadcumb_should_produce_expected_data():
@@ -198,20 +243,21 @@ def test_inline_gallery_should_be_contained_in_body(testserver):
 def test_inline_gallery_should_have_images(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    frontend_gallery = zeit.frontend.block.InlineGallery(body.values()[14])
-    assert all(type(i) is InlineGalleryImage for i in frontend_gallery.items())
+    gallery = zeit.frontend.block.IFrontendBlock(body.values()[14])
+    assert all(IGalleryImage.providedBy(i) for i in gallery.itervalues())
 
-    gallery_image = frontend_gallery.items()[4]
-    assert gallery_image.src == \
+    image = gallery.values()[4]
+    assert image.src == \
         u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
         '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
-    assert gallery_image.alt is None
-    assert gallery_image.copyright == u'\xa9'
+    assert image.alt is None
+    assert image.copyright[0][0] == u'\xa9'
 
 
 def test_article_request_should_have_body_element(testserver):
     browser = Browser('%s/artikel/05' % testserver.url)
-    assert '<body itemscope itemtype="http://schema.org/WebPage">'\
+    assert '<body itemscope itemtype="http://schema.org/WebPage"'\
+        '>'\
         in browser.contents
     assert '</body>' in browser.contents
 
