@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import email.utils
 import itertools
 import logging
+import mimetypes
 import pkg_resources
 import re
 import urlparse
@@ -228,8 +229,15 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
             unique_id=zeit.frontend.template.default_teaser_images)
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
-    image_id = '%s/%s-%s.jpg' % \
-        (asset_id, image_base_name, teaser_block.layout.image_pattern)
+
+    sample_image = asset.values().next()  # Assumes all images in this group
+                                          # have the same mimetype.
+    ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
+        mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
+
+    image_id = '%s/%s-%s.%s' % \
+        (asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
+
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
