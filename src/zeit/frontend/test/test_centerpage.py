@@ -441,7 +441,6 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
-        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
         title = teaser.find_elements_by_class_name("cp_leader__title")
         subtitle = teaser.find_elements_by_class_name("cp_leader__subtitle")
@@ -461,10 +460,62 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             'videos/3035864892001.jpg'
 
         # structure
-        assert 'true' == unicode(vid.get_attribute("autoplay"))
         assert 'video--fallback ' == unicode(img.get_attribute("class"))
         assert 'cp_leader__title__wrap'\
             ' cp_leader__title__wrap--dark' == \
+            unicode(title_wrap.get_attribute("class"))
+        assert len(title) == 1
+        assert len(subtitle) == 1
+
+        # content
+        assert '3035864892001' == \
+            unicode(vid_wrap.get_attribute("data-backgroundvideo"))
+        assert 'Es leben die Skispringenden Sportredakteure!' == \
+            unicode(subtitle[0].text)
+        assert src_img == unicode(img.get_attribute("src"))
+        assert u'und der Titel dazu' == unicode(title[0].text)
+        assert src1_val == unicode(source1)
+        assert src2_val == unicode(source2)
+
+        # links
+        assert len(a) == 2
+        for link in a:
+            assert link.get_attribute("href") == 'http://localhost'\
+                ':6543/centerpage/article_video_asset'
+
+
+def test_cp_with_video_lead_light_has_correct_markup(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/centerpage/cp_with_video_lead-2' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp_leader--full")
+    assert len(wrap) != 0
+    for teaser in wrap:
+        vid_wrap = teaser.find_element_by_class_name("cp_leader__asset--light")
+        vid = teaser.find_element_by_tag_name("video")
+        img = teaser.find_element_by_tag_name("img")
+        title_wrap = teaser.find_element_by_tag_name("header")
+        a = teaser.find_elements_by_tag_name("a")
+        title = teaser.find_elements_by_class_name("cp_leader__title")
+        subtitle = teaser.find_elements_by_class_name("cp_leader__subtitle")
+        source1 = \
+            teaser.find_element_by_xpath('//source[1]').get_attribute("src")
+        source2 = \
+            teaser.find_element_by_xpath('//source[2]').get_attribute("src")
+
+        src1_val = \
+            'http://brightcove.vo.llnwd.net/pd15/media/18140073001/'\
+            '201401/1105/18140073001_3035966678001_Beitrag'\
+            '-Skispringen-f-r-Anf-nger.mp4'
+        src2_val = \
+            'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
+        src_img = \
+            'http://live0.zeit.de/multimedia/'\
+            'videos/3035864892001.jpg'
+
+        # structure
+        assert 'cp_leader__title__wrap'\
+            ' cp_leader__title__wrap--light' == \
             unicode(title_wrap.get_attribute("class"))
         assert len(title) == 1
         assert len(subtitle) == 1
@@ -495,7 +546,6 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
         img_wrap = teaser.find_elements_by_class_name("cp_leader__asset--dark")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_elements_by_tag_name("header")
-        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
         title = teaser.find_elements_by_class_name("cp_leader__title")
         subtitle = teaser.find_elements_by_class_name("cp_leader__subtitle")
@@ -533,6 +583,9 @@ def test_lead_full_light_version_is_working(testserver):
 
 def test_lead_leader_light_version_is_working(testserver):
     browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
+    assert '<div class="cp__lead-leader__wrap '\
+        'cp__lead-leader__wrap--square '\
+        'cp__lead-leader__image--light">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect '\
         'cp_leader__asset cp_leader__asset--light" '\
         'data-wrap=".cp_leader">' in browser.contents

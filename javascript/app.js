@@ -1,5 +1,10 @@
 /* globals require, define, console */
 
+/**
+ * @fileOverview Require.js Config File
+ * @version  0.1
+ */
+
 // configuration section for require js
 require.config({
 	// Require.js allows us to configure shortcut alias

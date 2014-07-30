@@ -325,7 +325,9 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         else:
             cr = el['copyright'][0][0]
         markup = '<figure class="%s"><div class="scaled-image">' \
-                 '<!--\[if gt IE 8\]><!--><noscript>' \
+                 '<!--\[if gt IE 8\]><!--><noscript' \
+                 ' data-src=' \
+                 '"/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg">' \
                  '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
                  'class=" figure__media" ' \
                  'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
@@ -356,12 +358,14 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
         output += line.strip()
 
     start = '<div class="scaled-image is-pixelperfect">' \
-            '<!--[if gt IE 8]><!--><noscript><!--<![endif]-->' \
-            '<img alt="test" title="test" class="article__main-image--' \
-            'longform figure__media" src="'
+            '<!--[if gt IE 8]><!--><noscript'
+    middle = '><!--<![endif]-->' \
+             '<img alt="test" title="test" class="article__main-image--' \
+             'longform figure__media" src="'
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)
+    assert middle in output
     assert output.endswith(end)
 
 
@@ -446,7 +450,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     # assert default video
     obj = {'highest_rendition': 'test.mp4', 'id': 1}
     wrapper = '<div data-backgroundvideo="1'
-    video = '<video preload="auto" autoplay="true" '\
+    video = '<video preload="auto" '\
             'loop="loop" muted="muted" volume="0"'
     source = '<source src="test.mp4'
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'

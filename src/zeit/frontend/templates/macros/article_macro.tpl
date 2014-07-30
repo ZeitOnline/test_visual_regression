@@ -252,7 +252,7 @@
     {% endif %}
 
     <div data-backgroundvideo="{{id}}" class="{{wrap_class}}">
-        <video preload="auto" autoplay="true" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
+        <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
             <source src="{{obj.highest_rendition}}" type="video/mp4">
             <source src="http://live0.zeit.de/multimedia/videos/{{id}}.webm" type="video/webm">
         </video>

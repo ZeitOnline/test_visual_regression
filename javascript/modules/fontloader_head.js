@@ -1,7 +1,13 @@
 /* global console */
 
 /**
- * font loader setup
+ * @fileOverview Namespace Fontloader
+ * @version  0.1
+ */
+/**
+ * fontloader_head.js: namespace for FontLoader
+ * @namespace FontLoader
+ * @param  {object} ZMO
  */
 window.FontLoader = (function(ZMO) {
     // privates
@@ -44,7 +50,7 @@ window.FontLoader = (function(ZMO) {
         }
     };
 
-    // load fonts from localstorage or queue up for lazy loading
+    //initialize 
     var init = function() {
         // run through all font packs in the dictionary
         fontDictionary.forEach(function(pack) {
