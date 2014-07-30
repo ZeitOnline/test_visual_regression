@@ -16,6 +16,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-861: add new teaserformat for light bg video
 
+- ZMO-774: Add PNG support for teaser images
+
 
 0.9.2 (2014-07-24)
 ------------------
