@@ -581,16 +581,6 @@ def test_lead_full_light_version_is_working(testserver):
         ' cp_leader__asset--light" data-wrap=".cp_leader">' in browser.contents
 
 
-def test_lead_leader_light_version_is_working(testserver):
-    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<div class="cp__lead-leader__wrap '\
-        'cp__lead-leader__wrap--square '\
-        'cp__lead-leader__image--light">' in browser.contents
-    assert '<div class="scaled-image is-pixelperfect '\
-        'cp_leader__asset cp_leader__asset--light" '\
-        'data-wrap=".cp_leader">' in browser.contents
-
-
 def test_get_image_asset_should_return_image_asset(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
