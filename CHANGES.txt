@@ -8,6 +8,9 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.10 (unreleased)
 -----------------
 
+- ZMO-766: add clickable teaser comment count (comment section will be
+  shown in article)
+
 - ZMO-864: refactor Teaser structure (inlcuding CSS) 
 
 - ZMO-814: make gallery icon appear for gallery teaser only
