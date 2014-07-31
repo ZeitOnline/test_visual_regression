@@ -48,7 +48,7 @@
 
 {% macro comments_count(comments, url) -%}
     {% if comments %}
-        <a href="{{ url }}?show_comments=true">
+        <a href="{{ url }}#show_comments">
             <span class="cp_comment__count__wrap icon-comments-count">{{comments}}</span>
         </a>
     {% endif %}

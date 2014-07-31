@@ -532,7 +532,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
         $(window).on('hashchange', showComment);
 
         //trigger opener when url parameter is provided
-        if ( window.location.search.indexOf( 'show_comments=true' ) !== -1 ){
+        if ( window.location.hash === '#show_comments' ){
             $( '.js-comments-trigger' ).trigger( startEvent );
         }
 
