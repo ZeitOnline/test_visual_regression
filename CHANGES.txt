@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.10 (unreleased)
 -----------------
 
+- ZMO-830: repair desktop/mobile ad switch
+
 - ZMO-846: comment all js files in jsdoc style
 
 - ZMO-457: show standart image for browsers that can not work with noscript
