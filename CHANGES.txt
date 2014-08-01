@@ -16,6 +16,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-861: add new teaserformat for light bg video
 
+- ZMO-774: Add PNG support for teaser images
+
 - ZMO-857: Update tracking IDs in nav section
 
 
