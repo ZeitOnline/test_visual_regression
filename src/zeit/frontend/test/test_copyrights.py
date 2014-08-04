@@ -10,6 +10,8 @@ from zeit.frontend.test import Browser
 from zeit.frontend.view_centerpage import register_copyrights
 import zeit.frontend.view_article
 import zeit.frontend.view_centerpage
+import zeit.frontend.interfaces
+import zeit.frontend.centerpage
 
 
 @pytest.fixture
@@ -220,4 +222,11 @@ def test_centerpage_gracefully_skips_malformed_copyrights(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart-2')
     view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
-    assert len(view.copyrights)
+
+    group = 'http://xml.zeit.de/centerpage/katzencontent/'
+    image = zeit.frontend.centerpage.TeaserImage(
+        zeit.cms.interfaces.ICMSContent(group),
+        zeit.cms.interfaces.ICMSContent(group + 'katzencontent-180x101.jpg'))
+
+    image.copyright, view._copyrights = [], {image.image_group: image}
+    assert view.copyrights is not None
