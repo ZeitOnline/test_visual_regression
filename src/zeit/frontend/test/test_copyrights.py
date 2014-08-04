@@ -214,3 +214,10 @@ def test_only_gallery_images_with_cr_should_show_up_in_copyrights(testserver):
     browser = Browser(
         '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url)
     assert len(browser.cssselect('ul.copyrights__list li')) == 1
+
+
+def test_centerpage_gracefully_skips_malformed_copyrights(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/lebensart-2')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.copyrights)
