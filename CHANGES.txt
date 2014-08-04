@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.10 (unreleased)
 -----------------
 
+- HOTFIX: Repair broken cp on malformed or empty teaser copyright
+
 - ZMO-874: fix webview bug within fontloader 
 
 - ZMO-846: comment all js files in jsdoc style
