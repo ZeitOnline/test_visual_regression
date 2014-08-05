@@ -10,6 +10,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-778: prevent flashing comment button
 
+- ZMO-879: delete double timestamp in gallery and products.html
+
 - ZMO-846: comment all js files in jsdoc style
 
 - ZMO-457: show standart image for browsers that can not work with noscript
@@ -17,6 +19,18 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 - ZMO-860: Start bg video from js to prevent firefox bug
 
 - ZMO-861: add new teaserformat for light bg video
+
+- ZMO-774: Add PNG support for teaser images
+
+- ZMO-857: Update tracking IDs in nav section
+
+
+0.9.3 (2014-08-04)
+------------------
+
+- HOTFIX: Repair broken cp on malformed or empty teaser copyright
+
+- ZMO-874: fix webview bug within fontloader 
 
 
 0.9.2 (2014-07-24)

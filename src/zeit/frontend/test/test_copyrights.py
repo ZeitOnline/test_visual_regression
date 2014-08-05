@@ -10,6 +10,8 @@ from zeit.frontend.test import Browser
 from zeit.frontend.view_centerpage import register_copyrights
 import zeit.frontend.view_article
 import zeit.frontend.view_centerpage
+import zeit.frontend.interfaces
+import zeit.frontend.centerpage
 
 
 @pytest.fixture
@@ -214,3 +216,17 @@ def test_only_gallery_images_with_cr_should_show_up_in_copyrights(testserver):
     browser = Browser(
         '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url)
     assert len(browser.cssselect('ul.copyrights__list li')) == 1
+
+
+def test_centerpage_gracefully_skips_malformed_copyrights(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/lebensart-2')
+    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+
+    group = 'http://xml.zeit.de/centerpage/katzencontent/'
+    image = zeit.frontend.centerpage.TeaserImage(
+        zeit.cms.interfaces.ICMSContent(group),
+        zeit.cms.interfaces.ICMSContent(group + 'katzencontent-180x101.jpg'))
+
+    image.copyright, view._copyrights = [], {image.image_group: image}
+    assert view.copyrights is not None

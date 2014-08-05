@@ -172,7 +172,7 @@ class Centerpage(zeit.frontend.view.Base):
     def copyrights(self):
         teaser_list = []
         for teaser in self._copyrights.itervalues():
-            if len(teaser.copyright[0][0]) <= 1:
+            if not len(teaser.copyright) or len(teaser.copyright[0][0]) <= 1:
                 # Drop teaser if no copyright text is assigned.
                 continue
             teaser_list.append(
