@@ -5,7 +5,7 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.10 (unreleased)
+0.10 (2014-08-05)
 -----------------
 
 - ZMO-778: Prevent flashing comment button
