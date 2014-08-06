@@ -434,7 +434,7 @@
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
             var el = document.getElementsByClassName('article__head__meta__date');
-            var content = el[0].innerText;
+            var content = el[0].textContent != undefined ? el[0].textContent : el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){
                     el[0].innerHTML = '{{publish_date}} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
