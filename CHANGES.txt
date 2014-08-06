@@ -8,7 +8,9 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-864: refactor Teaser structure (inlcuding CSS) 
+
+- ZMO-814: make gallery icon appear for gallery teaser only
 
 
 0.10 (2014-08-05)

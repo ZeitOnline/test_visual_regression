@@ -1,10 +1,10 @@
 //main cp styles
-$cp__buttons__image-height: em(165px)
-$cp__buttons__large__image-height: em(330px)
-$cp__comment__count-height: em(50px)
-$cp__comment__count-width: em(60px)
+$cp_comment__count-height: em(50px)
+$cp_comment__count-width: em(60px)
+$icon-galerie-icon-white-height: em(30px)
+$icon-galerie-icon-white-width: em(40px)
 
-.cp__title
+.cp_title
 	margin-top: $petite
 	margin-bottom: $petite
 	letter-spacing: 0.3em
@@ -14,7 +14,7 @@ $cp__comment__count-width: em(60px)
 	text-align: center
 	display: block
 
-.cp__title ~ .main > .cp__lead-full__wrap
+.cp_title ~ .main > .cp_lead-full__wrap
 	margin-top: em_to_rem($medium)
 
 //hide breadcrumbs for cp and normalize h2
@@ -31,102 +31,39 @@ $cp__comment__count-width: em(60px)
 
 
 //standard link classes for cp
-%cp__link--light
+%cp_link--light
 	a
 		+link-colors($black, $black, $black, $black, $black)
 
-%cp__link--dark
+%cp_link--dark
 	a
 		+link-colors($white, $white, $white, $white, $white)
 
 //standart shadow classes for cp
-%cp__shadow--dark
-	background-color: $black
+%cp_shadow--dark
 	+fake-box-shadow-inset($black)
 
-%cp__shadow--light
-	background-color: $white
+%cp_shadow--light
 	+fake-box-shadow-inset($white)
 
-//teaser type button
-.cp__buttons__wrap, %cp__buttons__wrap
-	position: relative
-	display: inline-block
-	width: 100%
-	span
-		display: block
-	margin-bottom: $compact
-
-.cp__buttons__image
-	overflow: hidden
-	height: $cp__buttons__image-height*1.5
-	margin-bottom: $small
-	img
-		width: 100%
-		height: 100%
-	+respond-min($break-2)
-		height: $cp__buttons__image-height
-
-.cp__buttons__title__wrap
-	display: block
-
-.cp__buttons__supertitle, %cp__buttons__supertitle
-	@extend %cp__link--light
-	@extend %copy
-	margin-bottom: $micro
-	line-height: $petite
-	color: $black
-	font-size: $font-s
-	letter-spacing: $hair
-
-.cp__buttons__title, %cp__buttons__title
-	@extend %cp__link--light
-	+tablet(bold)
-	line-height: $petite
-	color: $black
-	font-size: $font-ml
-	margin: 0 0 $thin 0
-
-.cp__buttons__subtitle
-	@extend %cp__link--light
-	@extend %copy
-	line-height: $junior
-	color: $black
-	font-size: $font-s
-
-//teaser type large button
-.cp__buttons__large__wrap
-	@extend %cp__buttons__wrap
-	padding-top: 0 !important
-	margin-top: $compact
-	margin-bottom: 0
-	width: 100%
-	display: inline-block
-
-.cp__buttons__large__image
-	@extend .cp__buttons__image
-	height: $cp__buttons__large__image-height
-	+respond-min($break-2)
-		height: $cp__buttons__large__image-height
-
-.cp__buttons__large__title__wrap
-	@extend .cp__buttons__title__wrap
-	text-align: center
-
-.cp__buttons__large__title
-	@extend .cp__buttons__title
-	text-transform: uppercase
-
 //comments
-.cp__comment__count__wrap
+.cp_comment__count__wrap
 	font-size: $little
 	color: $white
 	position: absolute
 	text-align: center
 	padding-right: $micro
 	padding-top: $thin
-	height: $cp__comment__count-height
-	width: $cp__comment__count-width
+	height: $cp_comment__count-height
+	width: $cp_comment__count-width
 	right: $little
 	top: $small
 	z-index: 3
+
+//icons
+.icon-galerie-icon-white
+	display: inline-block
+	height: $icon-galerie-icon-white-height
+	width: $icon-galerie-icon-white-width
+	position: absolute
+	top: -$medium

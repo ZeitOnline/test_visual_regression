@@ -1,63 +1,14 @@
-$cp__lead__informatives__wrap-width: 35%
-$cp__buttons__image-height--inf: em(185px)
-$cp__teaser__gallery-height: em(386px)
-$icon-galerie-icon-white-height: em(30px)
-$icon-galerie-icon-white-width: em(40px)
+$cp_informatives__wrap-width: 35%
+$cp_buttons__image-height--inf: em(185px)
 
 //wrapper informatives area
-.cp__lead__informatives__wrap
+.cp_informatives__wrap
 	padding: 0 $compact 0 $compact
 	width: 100%
 	+respond-min($break-2)
 		float: left
 		padding: $compact $compact 0 0
-		width: $cp__lead__informatives__wrap-width
-	.cp__buttons__image
+		width: $cp_informatives__wrap-width
+	.cp_buttons__image
 		+respond-min($break-2)
-			height: $cp__buttons__image-height--inf
-
-//gallery upright teaser
-.cp__teaser__gallery__wrap
-	background-color: $black
-	height: $cp__teaser__gallery-height
-	position: relative
-	overflow: hidden
-	width: 100%
-	margin-bottom: $compact
-	& a > .scaled-image
-		height: $cp__teaser__gallery-height
-		@extend %cp__shadow--dark
-		img
-			position: absolute
-			top: 0
-			right: 0
-			margin: auto
-			min-height: 100%
-			width: 100%
-
-.cp__teaser__gallery
-	@extend %cp__link--dark
-	bottom: 0
-	padding: $tiny $petite $compact $petite
-	position: absolute
-	width: 100%
-	z-index: 2
-	.icon-galerie-icon-white
-		display: inline-block
-		height: $icon-galerie-icon-white-height
-		width: $icon-galerie-icon-white-width
-		position: absolute
-		top: -$medium
-
-.cp__teaser__gallery__supertitle
-	@extend %cp__buttons__supertitle
-	margin-bottom: $tiny
-	color: $white
-	letter-spacing: 0
-
-.cp__teaser__gallery__title
-	@extend %cp__buttons__title
-	color: $white
-	margin: 0
-	text-shadow: rgba(255,255,255,.01) 0 -1px 1px
-	-webkit-font-smoothing: antialiased
+			height: $cp_buttons__image-height--inf
