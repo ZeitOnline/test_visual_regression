@@ -54,6 +54,9 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(560, 900)
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    # This test is showing the last (or .bx-clone) slide, not the first one.
+    # Not reproducible in the browser and unexplainable for now, since #400.
+    # driver.save_screenshot("/tmp/buttons_should_not_be_visible_mobile.png")
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
@@ -61,9 +64,6 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
     else:
-        # This test is showing the last (or .bx-clone) slide, not the first one.
-        # Not reproducible in the browser and unexplainable for now, since #400.
-        # driver.save_screenshot("/tmp/test_buttons_should_not_be_visible_mobile.png")
         bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
         caption = driver.find_element_by_css_selector(".figure__caption")

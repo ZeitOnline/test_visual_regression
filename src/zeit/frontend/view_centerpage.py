@@ -1,5 +1,3 @@
-import urlparse
-
 from pyramid.decorator import reify
 from pyramid.view import view_config
 
@@ -58,16 +56,6 @@ class Centerpage(zeit.frontend.view.Base):
                     return teaser_list
             except:
                 continue
-
-    def teaser_get_commentcount(self, uniqueId):
-        try:
-            index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = zeit.frontend.comments.comments_per_unique_id(
-                self.request.registry.settings.node_comment_statistics)[index]
-            if int(count) >= 5:
-                return count
-        except KeyError:
-            return
 
     @reify
     def is_hp(self):
@@ -172,7 +160,7 @@ class Centerpage(zeit.frontend.view.Base):
     def copyrights(self):
         teaser_list = []
         for teaser in self._copyrights.itervalues():
-            if len(teaser.copyright[0][0]) <= 1:
+            if not len(teaser.copyright) or len(teaser.copyright[0][0]) <= 1:
                 # Drop teaser if no copyright text is assigned.
                 continue
             teaser_list.append(

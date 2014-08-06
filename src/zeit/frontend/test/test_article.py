@@ -258,10 +258,29 @@ def test_print_article_has_no_last_changed_date(testserver):
     assert '26. September 2013<span>editiert' not in article
 
 
-def test_online_article_has_last_changed_date(testserver):
+def test_online_article_has_last_changed_date(selenium_driver, testserver):
     # online articles should include the last semantic change date
-    article = Browser('%s/artikel/04' % testserver.url).contents
-    assert '1. Oktober 2013, 16:38 Uhr' in article
+    driver = selenium_driver
+    driver.get('%s/artikel/10' % testserver.url)
+    meta_date = driver.find_element_by_class_name("article__head__meta__date")
+    assert 'ZULETZT AKTUALISIERT AM 20. FEBRUAR 2014, '\
+        '17:59 UHR' in meta_date.text
+
+
+def test_product_page_has_last_changed_date(selenium_driver, testserver):
+    # product pages should include the last semantic change date
+    driver = selenium_driver
+    driver.get('%s/produkte/katzen-cafe-london' % testserver.url)
+    meta_date = driver.find_element_by_class_name("article__head__meta__date")
+    assert 'ZULETZT AKTUALISIERT AM 31. JULI 2014, 22:21 UHR' in meta_date.text
+
+
+def test_gallery_has_last_changed_date(selenium_driver, testserver):
+    # galleries should include the last semantic change date
+    driver = selenium_driver
+    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    meta_date = driver.find_element_by_class_name("article__head__meta__date")
+    assert 'ZULETZT AKTUALISIERT AM 3. APRIL 2014, 16:17 UHR' in meta_date.text
 
 
 def test_article03_has_no_source(testserver):
@@ -512,6 +531,13 @@ def test_article03_has_linked_image(testserver):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<a href="http://www.test.de"><img alt="Immer' in output
+
+
+def test_article02_uses_esi(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/02' % testserver.url)
+    blog = driver.find_elements_by_id("livedesk-root")
+    assert len(blog) != 0
 
 
 def test_article_has_linked_copyright(testserver):

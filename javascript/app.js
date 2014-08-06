@@ -14,7 +14,8 @@ require.config({
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
 		"bxSlider": "libs/jquery.bxslider",
-		"jquery-bridget/jquery.bridget": "libs/packery.pkgd.min"
+		"jquery-bridget/jquery.bridget": "libs/packery.pkgd.min",
+		"esiparser": "libs/esiparser"
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
@@ -25,6 +26,7 @@ require.config({
 		'modules/plugins/jquery.backgroundvideo': ['jquery'],
 		'modules/plugins/jquery.enablepopups': ['jquery'],
 		'modules/plugins/jquery.animatescroll': ['jquery'],
+		'modules/plugins/jquery.parseesi': ['jquery','esiparser'],
 		'sjcl': {
 			exports: 'sjcl'
 		}
@@ -66,11 +68,13 @@ require([
 	'modules/plugins/jquery.switchvideo',
 	'modules/plugins/jquery.backgroundvideo',
 	'modules/plugins/jquery.enablepopups',
-	'modules/plugins/jquery.animatescroll'
+	'modules/plugins/jquery.animatescroll',
+	'modules/plugins/jquery.parseesi'
 ], function () {
 	$( ".inline-gallery" ).inlinegallery();
 	$( "figure[data-video]" ).switchVideo();
 	$( "div[data-backgroundvideo]" ).backgroundVideo();
 	$( "a.js-has-popup" ).enablePopups();
 	$( "main" ).animateScroll({selector: '.js-scroll'});
+	$( "div[data-type = 'esi-content']" ).parseEsi();
 });

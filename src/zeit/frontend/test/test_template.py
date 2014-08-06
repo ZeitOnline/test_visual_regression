@@ -134,3 +134,20 @@ def test_jinja_env_registrator_registers_only_after_scanning(testserver):
 
     assert do_foo() == 42
     assert 'do_foo' in jinja.foo
+
+
+def test_get_teaser_image_should_determine_mimetype_autonomously(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-card-flip-flip'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/card-flip-flip'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert image.uniqueId.split('.')[-1] == 'png'
+
+    teaser_block.layout.image_pattern = 'zmo-card-picture'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/card-picture'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert image.uniqueId.split('.')[-1] == 'jpg'

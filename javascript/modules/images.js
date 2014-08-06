@@ -27,6 +27,22 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
+     * images.js: use standard image or hide allocated image spaces and
+     * comments if noscript has no content
+     * @function hideImages
+     * @param  {object} img_wrapper image area containing noscript
+     * @param  {string} alt_source alternative image source
+     */
+    var hideImages = function( $img_wrapper, alt_source ){
+        if ( alt_source ){
+            $img_wrapper.html( '<img src="' + alt_source + '"/>' );
+        }else{
+            $img_wrapper.height( 'auto' );
+            $( '.cp__comment__count__wrap' ).hide();
+        }
+    };
+
+    /**
      * images.js: rescale one image
      * @function rescaleOne
      * @param  {object} image image object
@@ -80,40 +96,49 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
                 var $noscript = $(this);
                 var $parent = $noscript.parent();
                 var markup = $noscript.text();
-                markup = markup.replace('src="', 'data-src="');
-                $parent.html(markup);
-                var $imgs = $parent.find('img');
-                var width = 0;
-                var height = 0;
-                $imgs.each(function() {
-                    var $img = $(this);
 
-                    // add event triggering to tell the world
-                    $img.on('load', function(e) {
-                        $img.trigger('scaling_ready');
-                    });
+                if ( markup.trim() !== '' ){
 
-                    if ($parent.hasClass('is-pixelperfect')) {
-                        var selector = $img.parent().attr('data-wrap'),
-                            wrapper = selector ? $img.closest(selector) : [];
+                    markup = markup.replace('src="', 'data-src="');
+                    $parent.html(markup);
+                    var $imgs = $parent.find('img');
+                    var width = 0;
+                    var height = 0;
+                    $imgs.each(function() {
+                        var $img = $(this);
 
-                        // use explicit width and height from responsive image parent element or data-wrap element
-                        if (wrapper.length) {
-                            width  = wrapper.width();
-                            height = wrapper.innerHeight();
+                        // add event triggering to tell the world
+                        $img.on('load', function(e) {
+                            $img.trigger('scaling_ready');
+                        });
+
+                        if ($parent.hasClass('is-pixelperfect')) {
+                            var selector = $img.parent().attr('data-wrap'),
+                                wrapper = selector ? $img.closest(selector) : [];
+
+                            // use explicit width and height from responsive image parent element or data-wrap element
+                            if (wrapper.length) {
+                                width  = wrapper.width();
+                                height = wrapper.innerHeight();
+                            } else {
+                                width  = $parent.width();
+                                height = $parent.innerHeight();
+                            }
+
+                            rescaleOne(this, false, width, height);
                         } else {
-                            width  = $parent.width();
-                            height = $parent.innerHeight();
+                            // determine size of image from width + ratio of original image
+                            rescaleOne(this, false);
                         }
 
-                        rescaleOne(this, false, width, height);
-                    } else {
-                        // determine size of image from width + ratio of original image
-                        rescaleOne(this, false);
-                    }
+                        resp_imgs.push(this);
+                    });
 
-                    resp_imgs.push(this);
-                });
+                }else{
+                // noscript doesn't has any content we can read (which might happen in older browsers)
+                // therefore we have to hide allocated image spaces
+                    hideImages( $parent, $noscript.attr('data-src'));
+                }
 
             });
         } else {

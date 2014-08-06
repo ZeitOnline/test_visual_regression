@@ -5,12 +5,75 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.10 (unreleased)
------------------
+0.11.3 (unreleased)
+-------------------
 
 - ZMO-871: Scan for decorated Jinja filters, tests and globals
 
-- ZMO-846: comment all js files in jsdoc style
+
+0.11.2 (2014-08-06)
+-------------------
+
+- HOTFIX: Use innerText optional to textContent for writing 
+          update date in article
+
+
+0.11.1 (2014-08-06)
+-------------------
+
+- HOTFIX: Catch unset background color of teaser block
+
+
+0.11 (2014-08-06)
+-----------------
+
+- ZMO-864: Refactor Teaser structure (inlcuding CSS) 
+
+- ZMO-814: Make gallery icon appear for gallery teaser only
+
+
+0.11.1 (2014-08-06)
+-------------------
+
+- HOTFIX: Catch unset background color of teaser block
+
+
+0.11 (2014-08-06)
+-----------------
+
+- ZMO-864: refactor Teaser structure (inlcuding CSS) 
+
+- ZMO-814: make gallery icon appear for gallery teaser only
+
+
+0.10 (2014-08-05)
+-----------------
+
+- ZMO-778: Prevent flashing comment button
+
+- ZMO-879: Delete double timestamp in gallery and products.html
+
+- ZMO-846: Comment all js files in jsdoc style
+
+- ZMO-457: Show standart image for browsers that can not work with noscript
+
+- ZMO-860: Start bg video from js to prevent firefox bug
+
+- ZMO-861: Add new teaserformat for light bg video
+
+- ZMO-774: Add PNG support for teaser images
+
+- ZMO-857: Update tracking IDs in nav section
+
+- ZMO-829: Integrate esi marco to display liveblogs
+
+
+0.9.3 (2014-08-04)
+------------------
+
+- HOTFIX: Repair broken cp on malformed or empty teaser copyright
+
+- ZMO-874: Fix webview bug within fontloader 
 
 
 0.9.2 (2014-07-24)
@@ -24,7 +87,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.9.1 (2014-07-17)
 ------------------
 
-- HOTFIX: fix video display in videobackground on cached video (ff issue)
+- HOTFIX: Fix video display in videobackground on cached video (ff issue)
 
 - HOTFIX: Adjust longform article head wrapper height
 
@@ -34,18 +97,18 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.9 (2014-07-17)
 ----------------
 
-- ZMO-848: fix chapter box within longform (ff issue)
+- ZMO-848: Fix chapter box within longform (ff issue)
 
-- HOTFIX: prevent crashing header images, when being depublished
+- HOTFIX: Prevent crashing header images, when being depublished
 
 - ZMO-813: Unify gallery classes and support gallery image ratios.
 
 - ZMO-855: Put in one more breakpoint for .cp__lead__title class, to make really 
-  long words like Weltmeisterschaft fit on mobile screens as well
+           long words like Weltmeisterschaft fit on mobile screens as well
 
 - ZMO-659: Integrate ul/li structure for longform index box
 
-- ZMO-718: add link to all elements of a teaser and simplify structure
+- ZMO-718: Add link to all elements of a teaser and simplify structure
 
 - ZMO-802: Make slider galleries static by request
 
@@ -58,7 +121,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 - ZMO-850: Meta class for view callables ensures iterable return types.
 
 - ZMO-849: Make margins invisible if there's no ad and center middle ad for
-  small breakpoints
+           small breakpoints
 
 - ZMO-776: Add optional links to in-article image copyrights
 
@@ -102,17 +165,16 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-798: Add mobile ad-id xml and integrate new banner codes for mobile ads
 
-- ZMO-690 Add clickable overlay for galleries
-  + Add keyboard navigation for galleries
-  + Update bxSlider
+- ZMO-690: Add clickable overlay for galleries and keyboard navigation for galleries.
+           Update bxSlider
 
 - ZMO-808: Enable responsive image for gt IE8
 
 - ZMO-812: Make gallery upright teaser fully responsive, add is-pixelperfect
-  functionality and standarsize css
+           functionality and standarsize css
 
-- ZMO-805: Round images size values, just in case a browser
-  (like chrome canary) delivers floats
+- ZMO-805: Round images size values, just in case a browser (like chrome
+           canary) delivers floats
 
 - ZMO-765: Modify webtrekk data and adapt testing
 
@@ -124,11 +186,11 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-833: Display header image copyrights on hover state
 
-- Rename test images with strange unicode characters
+- FIX: Rename test images with strange unicode characters
 
-- Improve view performance by caching properties
+- FIX: Improve view performance by caching properties
 
-- Integrate macro to transfer string view values to global js object
+- FIX: Integrate macro to transfer string view values to global js object
 
 
 0.7.1 (2014-06-13)
@@ -152,15 +214,15 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-769: Ensure teaser image even for articles with video assets
 
-- Rewrite jinja initialization
-
 - ZMO-771: Add missing images to nextread
 
 - ZMO-771: Implement nextread as teaser block with different layouts
 
-- Refactor navigation styles and event handlers
+- FIX: Refactor navigation styles and event handlers
 
-- Simplify border-radius mixin
+- FIX: Simplify border-radius mixin
+
+- FIX: Rewrite jinja initialization
 
 
 0.6.1 (2014-06-05)
@@ -184,35 +246,35 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-792: Extend testbrowser to support cssselect
 
-- Rename zeit.frontend.utils to .templates
+- FIX: Rename zeit.frontend.utils to .templates
 
-- Update underscore.js to version 1.6.0
+- FIX: Update underscore.js to version 1.6.0
 
-- Javascript code cleanup
+- FIX: Javascript code cleanup
 
-- Improve test for responsive tap buttons in gallery slider
+- FIX: Improve test for responsive tap buttons in gallery slider
 
-- Rendering for the daily newsletter.
+- FIX: Rendering for the daily newsletter.
 
 
 0.5.3 (2014-05-26)
 ------------------
 
-- change navi tracking ids according to ZMO-712
+- Change navi tracking ids according to ZMO-712
 
-- small css cleanup
+- Small css cleanup
 
-- rework testing to make it more performant and PEP-8 conform
+- Rework testing to make it more performant and PEP-8 conform
 
-- make responsive fallback image more adaptive
+- Make responsive fallback image more adaptive
 
-- adapt images in informative teaser, to get correct ratio
+- Adapt images in informative teaser, to get correct ratio
 
-- cards.js: use stopImmediatePropagation instead of stopPropagation
+- Cards.js: use stopImmediatePropagation instead of stopPropagation
 
-- change background video mechanism (load of video/ fallback)
+- Change background video mechanism (load of video/ fallback)
 
-- userid > 0 for authentification
+- Userid > 0 for authentification
 
 - Bust caches on version increments by appending hashes
 
@@ -236,7 +298,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - Hide comments on click out of the comments section
 
-- implement redirect objects
+- Implement redirect objects
 
 
 0.5.1 (2014-05-13)
@@ -248,9 +310,9 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - Increase clickable area of social sharing links
 
-- fix gallery HTML title
+- Fix gallery HTML title
 
-- default supertitle and title to empty instead of "None"
+- Default supertitle and title to empty instead of "None"
 
 
 0.5 (2014-05-09)
@@ -258,228 +320,304 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - Add mixin for box-shadow and fix box-shadow in longform
 
-- remove registration link from main nav
+- Remove registration link from main nav
 
 - Fix comment section height for article with nextread
 
 - 5 instead of 15 comments for commentcount bubble
 
-- combine link elements arount teaser supertitle and title
+- Combine link elements arount teaser supertitle and title
 
 
 0.4.13 (2014-05-08)
 -------------------
 
-- switch from box-shadow plugin to background-image plugin
+- Switch from box-shadow plugin to background-image plugin
 
-- smaller ui tweaks
+- Smaller ui tweaks
 
 - Fix comment report URL to target community host
 
-- remove guilliments from author line on cp cards
+- Remove guilliments from author line on cp cards
 
 - Links to user profilpages from usernames at comments
 
-- gallery pager width fixed
+- Gallery pager width fixed
 
-- fix clickcode in navigation
+- Fix clickcode in navigation
 
-- add desired changes to iqdVarPack
+- Add desired changes to iqdVarPack
 
 - Increase breakpoint for expanded comment area
 
 0.4.12 (broken)
 --------------
 
-- do not use it
+- Do not use it
 
 0.4.11 (2014-05-07)
 -------------------
 
-- fix metadata and og:url
+- Fix metadata and og:url
 
-- improved responsivness for mobile-devices
+- Improved responsivness for mobile-devices
 
 
 0.4.10 (2014-05-07)
 -------------------
 
-- [HOTFIX] ignore missing comment counts
+- Hotfix ignore missing comment counts
 
-- fix card-sharing links
+- Fix card-sharing links
 
-- fix comments scrolling
+- Fix comments scrolling
 
 
 0.4.9 (2014-05-07)
 ------------------
 
-- fix buzz module comment column, node_comment_statistics naming
+- Fix buzz module comment column, node_comment_statistics naming
 
 
 0.4.8 (2014-05-06)
 ------------------
-- new square teaser logic
 
-- fix banner on galleries
+- New square teaser logic
+
+- Fix banner on galleries
 
 - Fallback for alt/title attribute
 
 - Make link-reach more failsafe
 
-- make logo zeit link work internaly by adding www
+- Make logo zeit link work internaly by adding www
+
 
 0.4.7 (2014-05-06)
 ------------------
 
-- add teaserbar capabilities to centerpage
-- add author portrait-box to articles
+- Add teaserbar capabilities to centerpage
+
+- Add author portrait-box to articles
+
 - Adapted test-config
-- quickfix MTB behaviour in Webkit browsers
-- use in config defined agatho_host (and not community_host) for agatho requests
-- use in config defined timeout for agatho requests
+
+- Quickfix MTB behaviour in Webkit browsers
+
+- Use in config defined agatho_host (and not community_host) for agatho requests
+
+- Use in config defined timeout for agatho requests
+
 - Adapted test-config.
-- article share counters connected to linkreach
-- clean up sharing and tracking URLs in templates
-- fix logo for internet exploder 8
-- fix longform in ie8
-- quickfix MTB behaviour in Webkit browsers
+
+- Article share counters connected to linkreach
+
+- Clean up sharing and tracking URLs in templates
+
+- Fix logo for internet exploder 8
+
+- Fix longform in ie8
+
+- Quickfix MTB behaviour in Webkit browsers
+
 - Adapted test-config.
-- improve comment area button wrapping
-- add TiemannLight fontface
-- add flipcards
-- failsafe-ing linkreach
+
+- Improve comment area button wrapping
+
+- Add TiemannLight fontface
+
+- Add flipcards
+
+- Failsafe-ing linkreach
 
 
 0.4.6 (2014-05-06)
 ------------------
 
-- that community fix
+- That community fix
 
 
 0.4.5 (2014-05-06)
 ------------------
 
-- bufixing
+- Bufixing
+
 
 0.4.4 (2014-05-05)
 ------------------
 
-- fix footer, IE9 Bug, underlining of fullwidth teaser title
-- fix ad zone in noscript
-- fix adzones for new ressorts
-- fix breadcrumbs for new ressorts
+- Fix footer, IE9 Bug, underlining of fullwidth teaser title
+
+- Fix ad zone in noscript
+
+- Fix adzones for new ressorts
+
+- Fix breadcrumbs for new ressorts
 
 
 0.4.3 (2014-05-04)
 ------------------
 
-- allow br-tags as inline html
-- add zone information to adplaces
-- add banner place 3
+- Allow br-tags as inline html
+
+- Add zone information to adplaces
+
+- Add banner place 3
 
 
 0.4.2 (2014-05-03)
 ------------------
 
-- adjust padding bewteen buzz box and lead area
+- Adjust padding bewteen buzz box and lead area
 
 
 0.4.1 (2014-05-02)
 ------------------
 
-- correct links and community functions within navigation
-- add large teaser (gallery and default format)
-- add monothematic block (MTB)
-- make comments in reach more failsafe
-- template for product galleries
+- Correct links and community functions within navigation
+
+- Add large teaser (gallery and default format)
+
+- Add monothematic block (MTB)
+
+- Make comments in reach more failsafe
+
+- Template for product galleries
 
 
 0.4.0 (2014-04-30)
 ------------------
 
-- add comment counter for teaser
-- add new module gallery teaser
-- split informatives and lead area according to seperator cp extra
-- prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo
-- root background video webm and image file load to live0
-- integrate invert functionality for teasers
-- correct teaser layouts
-- in article ads alternate now tile 7 and 8 instead of 4
-- fix some ad issues
-- enhanced comment section inluding inline replies and reports,
+- Add comment counter for teaser
+
+- Add new module gallery teaser
+
+- Split informatives and lead area according to seperator cp extra
+
+- Prepare teaser templates for zmo-landscape-large and zmo-landscape-large-photo
+
+- Root background video webm and image file load to live0
+
+- Integrate invert functionality for teasers
+
+- Correct teaser layouts
+
+- In article ads alternate now tile 7 and 8 instead of 4
+
+- Fix some ad issues
+
+- Enhanced comment section inluding inline replies and reports,
   new scrolling behavior, animated anchor links and more
-- template for sharebox (fb, twitter, g+)
+
+- Template for sharebox (fb, twitter, g+)
+
 
 
 0.3.0 (2014-04-29)
 ------------------
 
-- add different markup for login and anonymous state in Header
-- change teaser template structure
-- add responsivesness for leadarea teasers
-- integrate ad space in cp
-- integrate informative area in cp
+- Add different markup for login and anonymous state in Header
+
+- Change teaser template structure
+
+- Add responsivesness for leadarea teasers
+
+- Integrate ad space in cp
+
+- Integrate informative area in cp
+
 - Add Multiadapter for TeaserImage.
-- new layouts for zmo-teaser-blocks
-- new format: Standardkolumnenformat
-- fix for too much ads
-- respecting advertising_enabled switch
-- add banner tile to cp informatives
-- implement buzz module
-- add a page header to sequel pages
-- fix subtitle case sensitivity
-- fix nextread typography
-- provide comment counts for teasers and most commented lists
+
+- New layouts for zmo-teaser-blocks
+
+- New format: Standardkolumnenformat
+
+- Fix for too much ads
+
+- Respecting advertising_enabled switch
+
+- Add banner tile to cp informatives
+
+- Implement buzz module
+
+- Add a page header to sequel pages
+
+- Fix subtitle case sensitivity
+
+- Fix nextread typography
+
+- Provide comment counts for teasers and most commented lists
 
 
 0.2.20 (2014-04-17)
 -------------------
 
-- add new footer and change link color
+- Add new footer and change link color
+
 - Add new ZMO teaser and image formats
 
 
 0.2.19 (2014-04-15)
 -------------------
 
-- imporove linkreach_url configuration
+- Imporove linkreach_url configuration
 
 
 0.2.18 (2014-04-15)
 -------------------
 
-- do article cleanup (hide tags, rework header2, restyle caption, capitalize genre, small style changes)
-- add cp buttons
-- add cp lead area main structure
-- add fullwidth teaser video/ audio
-- add leading teaser with image
-- add backend functionality for linkreach service
-- add feature: reply to comment
+- Do article cleanup (hide tags, rework header2, restyle caption,
+  capitalize genre, small style changes)
+
+- Add cp buttons
+
+- Add cp lead area main structure
+
+- Add fullwidth teaser video/ audio
+
+- Add leading teaser with image
+
+- Add backend functionality for linkreach service
+
+- Add feature: reply to comment
 
 
 0.2.17 (2014-04-09)
 -------------------
 
 - Change ordering of comments.
+
 - Autoselect images, that fit the teaser-block
+
 - Add article headers
+
 
 0.2.16 (2014-03-25)
 -------------------
 
 - Add a method to load teaser_blocks and teasers
+
 - Implement pagination from backend
+
 - Register views for Article Pages
+
 - Add a tool for downloading resources from CMS.
+
 - Refactor inheritance logic for longform
+
 - Add basic structure for Centerpages
+
 - Refactor template logic for macros. The are now located in
   templates/macro and named [type]_macro.tpl
-- fix Headerimage Glitch on iOS
-- add date, source, genre testing
-- fix author issue and add testing
-- implement pagination in frontend
+
+- Fix Headerimage Glitch on iOS
+
+- Add date, source, genre testing
+
+- Fix author issue and add testing
+
+- Implement pagination in frontend
+
 - Adjust for running inside the CMS process for previews.
 
 
@@ -492,26 +630,26 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.2.14 (2014-02-27)
 -------------------
 
-- hotfix: Fix Link in Logo and for webtrekk.
+- Hotfix link in logo and for webtrekk.
 
 
 0.2.13 (2014-02-27)
 -------------------
 
-- hotfix: We had wrong sharing urls (Changelog entry forgotten in original
-  comit).
+- Hotfix wrong sharing urls (Changelog entry forgotten in original comit).
 
 
 0.2.12 (2014-02-27)
 -------------------
 
-- the forgotten hotfix...
+- The forgotten hotfix...
 
 
 0.2.11 (2014-02-27)
 -------------------
 
-- hotfix the width of inline galleries to em(910p)x
+- Hotfix the width of inline galleries to em(910p)x
+
 
 0.2.10 (2014-02-26)
 -------------------
@@ -522,15 +660,23 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.2.9 (2014-02-26)
 ------------------
 
-- remove unessecary code
-- add health_check url
-- add video_still for sharing if header has video
-- remove title tag in logo
-- fix missing proxy-url in fontloader
-- hack seo data into template
-- change inline gallery size
-- fix diverse bugs
-- fix fallback image in video header
+- Remove unessecary code
+
+- Add health_check url
+
+- Add video_still for sharing if header has video
+
+- Remove title tag in logo
+
+- Fix missing proxy-url in fontloader
+
+- Hack seo data into template
+
+- Change inline gallery size
+
+- Fix diverse bugs
+
+- Fix fallback image in video header
 
 
 0.2.8 (2014-02-25)
@@ -549,14 +695,22 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 ------------------
 
 - Load logo if behind prefixed proxy.
+
 - Produce a different url for images (with prefix)
-- translated url goes to whatever is the host
-- change backgroundvideo mobile fallback
-- force removal of video poster attribute after loading to avoid glitch
-- adds text-only stylesheet for ie7
-- compress css
-- add favicon
-- fix gallery bu bug
+
+- Translated url goes to whatever is the host
+
+- Change backgroundvideo mobile fallback
+
+- Force removal of video poster attribute after loading to avoid glitch
+
+- Adds text-only stylesheet for ie7
+
+- Compress css
+
+- Add favicon
+
+- Fix gallery bu bug
 
 
 0.2.5 (2014-02-25)
@@ -592,7 +746,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.2.2.1 (2014-02-22)
 --------------------
 
-- change Manifest in for rcursive include.
+- Change Manifest in for rcursive include.
 
 
 0.2.2 (2014-02-22)
@@ -604,33 +758,53 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.2.1 (2014-02-22)
 ------------------
 
-- Changed Styling of Longform Header (including Title, Subtitle, Author, Date styling) (#ZMO-462)
-- newest iqd scripts for user tracking
-- cleaned up iqd script section
+- Changed Styling of Longform Header (including Title, Subtitle, Author,
+  Date styling) (ZMO-462)
+
+- Newest iqd scripts for user tracking
+
+- Cleaned up iqd script section
 
 
 0.2 (2014-02-21)
 ----------------
 
 - Cleaned up inheritance mechanisms between article views and their longform
-  variant. (#ZMO-281)
+  variant. (ZMO-281)
+
 - Gruntfile ready for production
-- alt title attributes work
-- webm video source on opendata.zeit.de
-- raw elements work on articles
+
+- Alt title attributes work
+
+- Webm video source on opendata.zeit.de
+
+- Raw elements work on articles
+
 - Better handling for authors
-- minor bugfixes for longform article
-- bugfixing in inlinegallery
-- enable ivw mobile switch
-- better tests for HeaderImage.
-- hacking back images to IE 8/7
-- adapt template to support new image/video formats from vivi config files
-- better imageformats
+
+- Minor bugfixes for longform article
+
+- Bugfixing in inlinegallery
+
+- Enable ivw mobile switch
+
+- Better tests for HeaderImage.
+
+- Hacking back images to IE 8/7
+
+- Adapt template to support new image/video formats from vivi config files
+
+- Better imageformats
+
 - Put inclusion of the transaction-management tween in application code.
-- updates version of grunticon to 1.0.0
-- do not load sasmobile.js on IE < 9
-- bugfix viewport script for ipad landscape
-- fix headerimage in IE < 9
+
+- Updates version of grunticon to 1.0.0
+
+- Do not load sasmobile.js on IE < 9
+
+- Bugfix viewport script for ipad landscape
+
+- Fix headerimage in IE < 9
 
 
 0.1 (2014-02-12)

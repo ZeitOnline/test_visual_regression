@@ -88,6 +88,14 @@ class Portraitbox(object):
         return etree.tostring(p_text)
 
 
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.ILiveblog)
+class Liveblog(object):
+
+    def __init__(self, model_block):
+        self.blog_id = model_block.blog_id
+
+
 class BaseImage(object):
 
     @property
@@ -195,7 +203,7 @@ class BaseVideo(object):
         self.format = model_block.layout
 
     @property
-    def source(self):
+    def highest_rendition(self):
         try:
             highest_rendition = self.renditions[0]
             for rendition in self.renditions:

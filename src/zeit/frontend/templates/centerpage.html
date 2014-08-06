@@ -10,7 +10,7 @@ Available attributes:
 
 {% block page_title %}
     <!-- {% if view.is_hp == False %}
-        <span class="cp__title">{{ view.title }}</span>
+        <span class="cp_title">{{ view.title }}</span>
     {% endif %} -->
 {% endblock page_title %}
 
@@ -22,7 +22,7 @@ Available attributes:
     {%- include "templates/inc/cp_area_lead_full_teaser.html" ignore missing -%}
     {%- include "templates/inc/cp_area_lead_1.html" ignore missing -%}
     {% if view.is_hp %}
-        {%- include "templates/inc/cp_buzz.html" ignore missing -%}
+        {%- include "templates/inc/cp_area_buzz.html" ignore missing -%}
     {% endif %}
     {%- include "templates/inc/cp_area_lead_2.html" ignore missing -%}
     {% if view.monothematic_block %}
