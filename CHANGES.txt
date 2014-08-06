@@ -8,7 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: use innerText optional to textContent for writing 
+  update date in article
 
 
 0.10 (2014-08-05)
