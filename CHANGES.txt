@@ -6,7 +6,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
 0.11.2 (unreleased)
------------------
+-------------------
 
 - HOTFIX: Use innerText optional to textContent for writing 
           update date in article
@@ -24,6 +24,20 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 - ZMO-864: Refactor Teaser structure (inlcuding CSS) 
 
 - ZMO-814: Make gallery icon appear for gallery teaser only
+
+
+0.11.1 (2014-08-06)
+-------------------
+
+- HOTFIX: Catch unset background color of teaser block
+
+
+0.11 (2014-08-06)
+-----------------
+
+- ZMO-864: refactor Teaser structure (inlcuding CSS) 
+
+- ZMO-814: make gallery icon appear for gallery teaser only
 
 
 0.10 (2014-08-05)
