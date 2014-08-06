@@ -1109,3 +1109,19 @@ def test_macro_include_cp_ad_produces_markup(jinja2_env):
         output += line.strip()
 
     assert '<div class="cp_button--ad">' in output
+
+
+def test_macro_liveblog_produces_html(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    liveblog = mock.Mock()
+    liveblog.blog_id = '999'
+    lines = tpl.module.liveblog(liveblog).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+
+    assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
+            'onerror="continue"></esi:include>') in output
+    assert '<esi:remove>' in output
+    assert '<div data-type="esi-content"></div>' in output
+    assert '</esi:remove>' in output
