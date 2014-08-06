@@ -1,6 +1,7 @@
-import urlparse
+import logging
 import os.path
 import urllib2
+import urlparse
 
 from babel.dates import get_timezone
 from pyramid.decorator import reify
@@ -18,6 +19,8 @@ import zeit.content.image.interfaces
 
 import zeit.frontend.article
 import zeit.frontend.comments
+
+log = logging.getLogger(__name__)
 
 
 class MetaView(type):
@@ -107,17 +110,23 @@ class Base(object):
 
     @reify
     def pagetitle(self):
-        seo = zeit.seo.interfaces.ISEO(self.context)
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+            if seo.html_title:
+                return seo.html_title
+        except TypeError:
+            pass
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        if seo.html_title:
-            return seo.html_title
         tokens = (self.supertitle, self.title)
         return ': '.join([t for t in tokens if t]) or default
 
     @reify
     def pagedescription(self):
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        seo = zeit.seo.interfaces.ISEO(self.context)
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+        except TypeError:
+            return default
         if seo.html_description:
             return seo.html_description
         if self.context.subtitle:
@@ -283,6 +292,13 @@ class Image(Base):
 @view_config(route_name='health_check')
 def health_check(request):
     return pyramid.response.Response('OK', 200)
+
+
+@view_config(context=Exception, renderer='templates/error.html')
+class ExceptionView(Base):
+    def __init__(self, context, request):
+        log.exception('%s: %s at %s' % (context.__class__.__name__,
+                      context.message, request.path))
 
 
 @notfound_view_config(request_method='GET')
