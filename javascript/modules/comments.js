@@ -207,7 +207,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
      * comments.js: toggle comments
      * @function toggleComments
      */
-    var toggleComments = function() {
+    var toggleComments = function(e) {
+
+        e.preventDefault();
+
         var $body = $(document.body);
 
         $body.toggleClass('show-comments');

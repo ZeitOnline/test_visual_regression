@@ -54,8 +54,14 @@ window.FontLoader = (function(ZMO) {
     var init = function() {
         // run through all font packs in the dictionary
         fontDictionary.forEach(function(pack) {
-            var data = localStorage.getItem(fl.getFontKey(pack)),
+
+            var data = false,
+                version = false;
+
+            if ( localStorage ){
+                data = localStorage.getItem(fl.getFontKey(pack));
                 version = localStorage.getItem(fl.getVersionKey(pack));
+            }
 
             if (data && pack.version === version) {
                 // font is in localstorage, drop data in style tag immediately

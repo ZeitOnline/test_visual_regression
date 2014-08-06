@@ -33,6 +33,17 @@
     </div>
 {%- endmacro %}
 
+{% macro liveblog(obj) -%}
+    {% if obj.blog_id -%}
+        <div class="wrapper__esi-content is-constrained is-centered">
+            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue"></esi:include>
+            <esi:remove>
+                <div data-type="esi-content"></div>
+            </esi:remove>
+        </div>
+    {%- endif %}
+{%- endmacro %}
+
 {% macro paragraph(html, class) -%}
     <p class="is-constrained is-centered">
         {{ html | safe}}
