@@ -1,5 +1,3 @@
-import urlparse
-
 from pyramid.decorator import reify
 from pyramid.view import view_config
 
@@ -58,16 +56,6 @@ class Centerpage(zeit.frontend.view.Base):
                     return teaser_list
             except:
                 continue
-
-    def teaser_get_commentcount(self, uniqueId):
-        try:
-            index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = zeit.frontend.comments.comments_per_unique_id(
-                self.request.registry.settings.node_comment_statistics)[index]
-            if int(count) >= 5:
-                return count
-        except KeyError:
-            return
 
     @reify
     def is_hp(self):

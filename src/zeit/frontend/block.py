@@ -202,7 +202,7 @@ class BaseVideo(object):
         self.format = model_block.layout
 
     @property
-    def source(self):
+    def highest_rendition(self):
         try:
             highest_rendition = self.renditions[0]
             for rendition in self.renditions:

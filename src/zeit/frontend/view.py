@@ -1,3 +1,4 @@
+import urlparse
 import os.path
 import urllib2
 
@@ -16,6 +17,7 @@ import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
 import zeit.frontend.article
+import zeit.frontend.comments
 
 
 class MetaView(type):
@@ -40,6 +42,16 @@ class Base(object):
         self.context = context
         self.request = request
         self.request.response.cache_expires(300)
+
+    def teaser_get_commentcount(self, uniqueId):
+        try:
+            index = '/' + urlparse.urlparse(uniqueId).path[1:]
+            count = zeit.frontend.comments.comments_per_unique_id(
+                self.request.registry.settings.node_comment_statistics)[index]
+            if int(count) >= 5:
+                return count
+        except KeyError:
+            return
 
     @reify
     def type(self):
