@@ -8,7 +8,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-877: make inline galleries work in IE11 again
 
 
 0.10 (2014-08-05)
