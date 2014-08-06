@@ -185,7 +185,7 @@ def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
         image_wrap = element.find_elements_by_css_selector(
             ".cp_leader__asset--dark")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 2
+        assert len(link_wrap) == 3
         assert len(image_wrap) != 0
 
 
@@ -232,10 +232,10 @@ def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        assert len(link_wrap) == 2
+        assert len(link_wrap) == 3
         for link in link_wrap:
-            assert link.get_attribute("href") == 'http://'\
-                'localhost:6543/centerpage/article_image_asset'
+            assert link.get_attribute("href") in 'http://'\
+                'localhost:6543/centerpage/article_image_asset#show_comments'
 
 
 def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
@@ -316,8 +316,8 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
         link_wrap = element.find_elements_by_tag_name("a")
         assert len(link_wrap) != 0
         for link in link_wrap:
-            assert link.get_attribute("href") == 'http://'\
-                'localhost:6543/centerpage/article_image_asset'
+            assert link.get_attribute("href") in 'http://'\
+                'localhost:6543/centerpage/article_image_asset#show_comments'
 
 
 def test_cp_large_photo_button_has_expected_structure(
@@ -332,7 +332,7 @@ def test_cp_large_photo_button_has_expected_structure(
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 2
+        assert len(link_wrap) == 3
 
 
 def test_cp_large_photo_button_has_expected_text_content(
@@ -379,7 +379,7 @@ def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
         image_wrap = element.find_elements_by_css_selector(
             ".scaled-image")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 2
+        assert len(link_wrap) == 3
         assert len(image_wrap) != 0
 
 
