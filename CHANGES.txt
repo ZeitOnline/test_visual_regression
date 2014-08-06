@@ -5,7 +5,7 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.11.2 (unreleased)
+0.11.2 (2014-08-06)
 -------------------
 
 - HOTFIX: Use innerText optional to textContent for writing 
