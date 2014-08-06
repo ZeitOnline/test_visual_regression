@@ -21,7 +21,12 @@ All calling templates have to provide:
 {% import 'templates/macros/centerpage_macro.tpl' as cp with context %}
 
 {% set image = get_teaser_image(teaser_block, teaser) -%}
-{% set card_style = 'background-color: #' + teaser_block.background_color + ';' -%}
+
+{% if teaser_block.background_color %}
+    {% set card_style = 'background-color: #' + teaser_block.background_color + ';' -%}
+{% else %}
+    {% set card_style = '' }
+{% endif %}
 
 {# if we have to display a bg image, prepare it here #}
 {% if self.bg_image() == 'true' %}
