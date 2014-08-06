@@ -17,9 +17,7 @@
             {{ view.galleryText|safe }}
         </div>
         <div class="article__head__meta">
-            <div class="article__head__meta__date">
-                {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
-            </div>
+            {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
         </div>
     </div>
 

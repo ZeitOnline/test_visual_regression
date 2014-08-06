@@ -4,11 +4,11 @@ This is the nextread area at the bottom of an article.
 
 Available attributes:
     zeit.frontend.view_article.Article as view
-
 #}
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 
-{% set teaser_block = view.nextread %}
+{%- import 'templates/macros/centerpage_macro.tpl' as cp with context -%}
+
+{%- set teaser_block = view.nextread -%}
 
 <aside class="article__nextread nextread-{{ teaser_block.layout.id }} is-centered">
     <div class="article__nextread__lead">{{ teaser_block.lead }}</div>
