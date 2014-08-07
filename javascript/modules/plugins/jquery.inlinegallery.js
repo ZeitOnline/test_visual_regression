@@ -217,6 +217,14 @@
 
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( {height: document.body.offsetHeight + 'px'} );
+
+                //if bx-viewport height can't be measured (ZMO-870), we don't set it
+                var firstImage = $( '.bx-viewport' ).find( 'img' ).get( 1 ),
+                    firstImageHeight = $( firstImage ).height();
+
+                if ( $( '.bx-viewport' ).height() < firstImageHeight || firstImageHeight === 0 ){
+                    $( '.bx-viewport' ).css( 'height', '' );
+                }
             };
 
             options.onSliderResize = function() {

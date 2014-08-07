@@ -8,7 +8,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZMO-870: handle viewport measuring bug in inline galleries
 
 
 0.11.2 (2014-08-06)
