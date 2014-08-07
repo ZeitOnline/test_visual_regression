@@ -40,7 +40,7 @@
     background-image: -o($image)
   background-image: linear-gradient(nth($directions, 1), $colors...)
 
-=fake-box-shadow-inset($color: $black, $direction: to top, $length: 60%)
+=fake-box-shadow-inset($color: $black, $perc: 0.7, $direction: to top, $length: 60%)
   background-color: $color
   position: relative
   &:after
@@ -51,7 +51,7 @@
     width: 100%
     left: 0px
     top: 0px
-    +linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length)
+    +linear-gradient($direction, rgba($color, $perc) 0%, rgba($color, 0) $length)
     // reenable as soon as compass bug is fixed
     // +background-image(linear-gradient($direction, rgba($color, 0.7) 0%, rgba($color, 0) $length))
 
