@@ -8,7 +8,9 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11.3 (unreleased)
 -------------------
 
-- HOTFIX: make informative small teaser images a bit taller
+- HOTFIX: Make informative small teaser images a bit taller
+
+- HOTFIX: Correct cp__ to cp_ in images.js
 
 
 0.11.2 (2014-08-06)
