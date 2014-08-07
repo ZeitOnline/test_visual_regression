@@ -149,9 +149,22 @@
 
             $( window ).on( 'keydown', handleKeydown );
 
-            gallery.on( 'scaling_ready', function( e ) {
+            figures.on( 'scaling_ready', function( e ) {
+                var currentSlide;
+
                 figCaptionSize( $( e.target ) );
-                // slider.redrawSlider();
+
+                // if the slider loaded before the image
+                if ( slider.getCurrentSlideElement ) {
+                    currentSlide = slider.getCurrentSlideElement();
+                    // if loaded image is inside current active slide
+                    if ( currentSlide.get(0) === this ) {
+                        // adjust height if necessary
+                        if ( sliderViewport && sliderViewport.height() < currentSlide.height() ) {
+                            sliderViewport.height( currentSlide.height() );
+                        }
+                    }
+                }
             });
 
             var hideOverlays = function() {
@@ -217,14 +230,6 @@
 
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( {height: document.body.offsetHeight + 'px'} );
-
-                //if bx-viewport height can't be measured (ZMO-870), we don't set it
-                var firstImage = $( '.bx-viewport' ).find( 'img' ).get( 1 ),
-                    firstImageHeight = $( firstImage ).height();
-
-                if ( $( '.bx-viewport' ).height() < firstImageHeight || firstImageHeight === 0 ){
-                    $( '.bx-viewport' ).css( 'height', '' );
-                }
             };
 
             options.onSliderResize = function() {
