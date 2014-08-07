@@ -8,6 +8,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11.4 (unreleased)
 -------------------
 
+- HOTFIX: adapt margins and settle on 0.8 gradient for everything
+
 - HOTFIX: make gradient a bit darker and change fullwidth teaser to display: block
 
 
