@@ -5,12 +5,22 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.11.4 (unreleased)
+0.11.5 (unreleased)
 -------------------
 
+<<<<<<< HEAD
 - HOTFIX: adapt margins and settle on 0.8 gradient for everything
 
 - HOTFIX: make gradient a bit darker and change fullwidth teaser to display: block
+=======
+- Nothing changed yet.
+
+
+0.11.4 (2014-08-07)
+-------------------
+
+- HOTFIX: Make gradient a bit darker and change fullwidth teaser to display: block
+>>>>>>> cf2a100bf353a442200d2d4e83645602ca6e546a
 
 
 0.11.3 (2014-08-07)
