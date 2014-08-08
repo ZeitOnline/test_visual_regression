@@ -5,10 +5,28 @@ NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 
-0.11.3 (unreleased)
+0.11.5 (unreleased)
 -------------------
 
+- HOTFIX: adapt margins and settle on 0.8 gradient for everything
+
 - ZMO-871: Scan for decorated Jinja filters, tests and globals
+
+
+0.11.4 (2014-08-07)
+-------------------
+
+- HOTFIX: Make gradient a bit darker and change fullwidth teaser to display: block
+
+
+0.11.3 (2014-08-07)
+-------------------
+
+- HOTFIX: Make informative small teaser images a bit taller
+
+- HOTFIX: Correct cp__ to cp_ in images.js
+
+- HOTFIX: Activate supertitle for zmo-landscape-large teaser
 
 
 0.11.2 (2014-08-06)
@@ -16,20 +34,6 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - HOTFIX: Use innerText optional to textContent for writing 
           update date in article
-
-
-0.11.1 (2014-08-06)
--------------------
-
-- HOTFIX: Catch unset background color of teaser block
-
-
-0.11 (2014-08-06)
------------------
-
-- ZMO-864: Refactor Teaser structure (inlcuding CSS) 
-
-- ZMO-814: Make gallery icon appear for gallery teaser only
 
 
 0.11.1 (2014-08-06)
