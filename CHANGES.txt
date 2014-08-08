@@ -12,6 +12,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-871: Scan for decorated Jinja filters, tests and globals
 
+- HOTFIX: remove unnecissary div tag from gallery meta
+
 
 0.11.4 (2014-08-07)
 -------------------
