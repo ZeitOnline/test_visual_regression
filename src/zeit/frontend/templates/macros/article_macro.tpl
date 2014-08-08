@@ -426,6 +426,10 @@
 {%- endmacro %}
 
 {% macro inlinegallery(obj, wrapper_class='inline-gallery__wrap') -%}
+    {{ photocluster(obj) }}
+{%- endmacro %}
+
+{% macro inlinegallery_orig(obj, wrapper_class='inline-gallery__wrap') -%}
     <div class="{{ wrapper_class }}">
         <div class="inline-gallery">
             {% for entry in obj.itervalues() -%}
@@ -488,4 +492,19 @@
 
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
+{% endmacro %}
+
+
+{% macro photocluster(obj) %}
+<div class="photocluster__wrap">
+    <div class="photocluster">
+        {% for entry in obj.itervalues() -%}
+            <div class="photocluster__item">
+                <div class="scaled-image">
+                     {{ lama.insert_responsive_image(entry) }}
+                </div>
+            </div>
+        {%- endfor %}
+    </div>
+</div>
 {% endmacro %}
