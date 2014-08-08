@@ -5,6 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
+    url='https://github.com/ZeitOnline/friedbert',
     version='0.11.5.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
