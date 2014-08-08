@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.frontend',
-    version='0.11.5',
+    version='0.11.6.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
