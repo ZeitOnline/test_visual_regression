@@ -38,7 +38,7 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             $img_wrapper.html( '<img src="' + alt_source + '"/>' );
         }else{
             $img_wrapper.height( 'auto' );
-            $( '.cp__comment__count__wrap' ).hide();
+            $( '.cp_comment__count__wrap' ).hide();
         }
     };
 
