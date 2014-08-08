@@ -4,13 +4,16 @@ Change log for zeit.frontend
 NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
-
-0.11.5 (unreleased)
+0.11.6 (unreleased)
 -------------------
 
-- HOTFIX: adapt margins and settle on 0.8 gradient for everything
-
 - ZMO-871: Scan for decorated Jinja filters, tests and globals
+
+
+0.11.5 (2014-08-08)
+-------------------
+
+- HOTFIX: Adapt margins and settle on 0.8 gradient for everything
 
 
 0.11.4 (2014-08-07)
