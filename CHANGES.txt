@@ -4,8 +4,8 @@ Change log for zeit.frontend
 NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
-0.12 (unreleased)
--------------------
+0.12 (2014-08-11)
+-----------------
 
 - ZMO-870: Handle webkit bug measuring inline gallery height
 
