@@ -536,13 +536,17 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
         $(window).on('resize', updateLayout);
         $(window).on('hashchange', showComment);
 
-        //trigger opener when url parameter is provided
-        if ( window.location.hash === '#show_comments' ){
-            $( '.js-comments-trigger' ).trigger( startEvent );
-        }
-
         // on document ready: check for url hash to enable anchor links and return urls
         $(function(e) {
+            // trigger opener when url parameter is provided
+            if ( window.location.hash === '#show_comments' ){
+                toggleComments();
+
+                $('html, body').stop().animate({
+                    scrollTop: $comments.offset().top
+                }, 500);
+            }
+
             // setTimeout needed for FF bug with linked element inside block having overflow:hidden
             window.setTimeout(function(){
                showComment(e, true);
