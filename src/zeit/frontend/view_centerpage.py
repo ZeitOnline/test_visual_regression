@@ -166,8 +166,7 @@ class Centerpage(zeit.frontend.view.Base):
             teaser_list.append(
                 dict(
                     label=teaser.copyright[0][0],
-                    image=zeit.frontend.template.translate_url(
-                        self.context, teaser.src),
+                    image=zeit.frontend.template.translate_url(teaser.src),
                     link=teaser.copyright[0][1],
                     nofollow=teaser.copyright[0][2]
                 )

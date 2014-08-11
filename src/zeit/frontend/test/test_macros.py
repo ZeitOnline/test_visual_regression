@@ -1102,12 +1102,10 @@ def test_macro_copyrights(jinja2_env):
 
 def test_macro_include_cp_ad_produces_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
-
     lines = tpl.module.include_cp_ad().splitlines()
     output = ""
     for line in lines:
         output += line.strip()
-
     assert '<div class="cp_button--ad">' in output
 
 
@@ -1119,7 +1117,6 @@ def test_macro_liveblog_produces_html(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-
     assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
             'onerror="continue"></esi:include>') in output
     assert '<esi:remove>' in output
