@@ -9,9 +9,13 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-870: Handle webkit bug measuring inline gallery height
 
-- ZMO-871: Scan for decorated Jinja filters, tests and globals
+- ZMO-766: Make comment count in teasers clickable
 
 - HOTFIX: Remove unnecessary div tag from gallery meta
+
+- ZMO-877: make inline galleries work in IE11 again
+
+- ZMO-871: Scan for decorated Jinja filters, tests and globals
 
 
 0.11.5 (2014-08-08)

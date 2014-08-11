@@ -22,7 +22,8 @@ All calling templates have to provide:
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
 <div class='cp_button cp_button--{{ self.format() }}'>  
-    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId)) }}
+
+    {{ cp.comments_count(view.teaser_get_commentcount(teaser.uniqueId), teaser | create_url) }}
     <a href="{{ teaser|create_url }}">
 
         {% if self.image_class() != 'false' -%}
