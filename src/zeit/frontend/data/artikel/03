@@ -29,6 +29,22 @@
                     <copyright>© Eric Feferberg/AFP/Getty Images</copyright>
                 </image>
             </reference>
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-2" year="2012" issue="47" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
+                <badges>
+                    <badge>gallery</badge>
+                </badges>
+                <supertitle>Freunde von Freunden</supertitle>
+                <title>Fischgrät, Brennholz, Schiefertafel</title>
+                <text>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
+Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</text>
+                <description>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
+Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</description>
+                <byline />
+                <image title="Tobias Petri Teaser" base-id="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-teaser-2/" type="jpg" publication-date="" expires="">
+                    <bu />
+                    <copyright>© Christoph Schaller für Freunde von Freunden</copyright>
+                </image>
+            </reference>
         </references>
         <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-chianti/" type="jpg" publication-date="" expires="">
             <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
@@ -443,6 +459,13 @@
 <p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
 <p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
 <p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<gallery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
+                <supertitle />
+                <title>Automesse Detroit 2014 US-Hersteller</title>
+                <text />
+                <description />
+                <byline />
+            </gallery>
 </division>
 </body>
 <teaser>
