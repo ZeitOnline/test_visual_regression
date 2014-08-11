@@ -209,7 +209,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
      */
     var toggleComments = function(e) {
 
-        e.preventDefault();
+        if ( e ) {
+            e.preventDefault();
+        }
 
         var $body = $(document.body);
 
