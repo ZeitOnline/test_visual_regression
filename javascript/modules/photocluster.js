@@ -29,10 +29,9 @@ define(['require', 'jquery'], function(require, $) {
                 // find responsive image container within packery block
                 var $rimg = $photo.find('img, noscript').eq(0);
                 if ($rimg.length === 1) {
-                    console.debug( $photo );
                     // adjust height of packery block to ratio of image
                     // TODO: debounced recalculation on resize (see images.js for example)
-                    // $photo.css('height', $photo.width()/$rimg.data('ratio'));
+                    $photo.css('height', $photo.width()/$rimg.data('ratio'));
                 }
             });
 

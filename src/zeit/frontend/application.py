@@ -317,8 +317,6 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, IShortformArticle)
                 elif template == 'column':
                     zope.interface.alsoProvides(context, IColumnArticle)
-                elif template == 'photocluster':
-                    zope.interface.alsoProvides(context, IPhotoclusterArticle)
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
                     zope.interface.alsoProvides(context, IProductGallery)
