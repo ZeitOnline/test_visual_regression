@@ -498,6 +498,7 @@
 {% macro photocluster(obj) %}
 <div class="photocluster__wrap">
     <div class="photocluster">
+    {% if obj %}
         {% for entry in obj.itervalues() -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
@@ -505,6 +506,7 @@
                 </div>
             </div>
         {%- endfor %}
+    {% endif %}
     </div>
 </div>
 {% endmacro %}
