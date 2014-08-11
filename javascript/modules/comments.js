@@ -371,7 +371,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
      * comments.js: ensure visibility of linked comment
      * @function showComment
      * @param  {object} e      event object
-     * @param  {boolean} onload 
+     * @param  {boolean} onload
      */
     var showComment = function(e, onload) {
         var anchor = window.location.hash.slice(1); // remove '#'
@@ -471,7 +471,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     /**
      * comments.js: get hidden property
      * @function getHiddenProperty
-     * @param  {object} element 
+     * @param  {object} element
      * @param  {string} property
      * @return {integer}
      */
@@ -486,7 +486,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     /**
      * comments.js: set current offset
      * @function setCurrentOffset
-     * @param  {integer} offset 
+     * @param  {integer} offset
      */
     var setCurrentOffset = function(offset) {
         offset = Math.round(offset);
