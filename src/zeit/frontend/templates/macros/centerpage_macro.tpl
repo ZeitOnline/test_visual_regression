@@ -46,9 +46,11 @@
     </div>
 {%- endmacro %}
 
-{% macro comments_count(comments) -%}
+{% macro comments_count(comments, url) -%}
     {% if comments %}
-        <span class="cp_comment__count__wrap icon-comments-count">{{comments}}</span>
+        <a href="{{ url }}#show_comments">
+            <span class="cp_comment__count__wrap icon-comments-count">{{comments}}</span>
+        </a>
     {% endif %}
 {%- endmacro %}
 

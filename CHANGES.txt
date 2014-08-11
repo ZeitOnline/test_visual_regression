@@ -7,6 +7,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.11.6 (unreleased)
 -------------------
 
+- ZMO-766: Make comment count in teasers clickable
+
 - HOTFIX: Remove unnecessary div tag from gallery meta
 
 - ZMO-877: make inline galleries work in IE11 again
