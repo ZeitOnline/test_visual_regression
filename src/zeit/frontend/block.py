@@ -13,6 +13,7 @@ import zeit.content.video.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
+from zeit.frontend.template import register_test, register_filter
 import zeit.frontend.interfaces
 
 
@@ -44,11 +45,13 @@ class IFrontendHeaderBlock(zope.interface.Interface):
 # die Macros sollten durch die IFrontendBlock-Objekte selbst festgelegt
 # werden. Das API jedes der BlockItem-Objekte muß ja ohnehin zum jeweiligen
 # Macro passen.
+@register_test
 def elem(obj, b_type):
     o_type = block_type(obj)
     return IFrontendBlock.providedBy(obj) and o_type == b_type
 
 
+@register_filter
 def block_type(obj):
     if obj is None:
         return 'no_block'
@@ -74,11 +77,9 @@ class Paragraph(object):
 class Portraitbox(object):
 
     def __init__(self, model_block):
-        ref = model_block.references
-        if ref is None:
-            return None
-        self.text = self._author_text(model_block.references.text)
-        self.name = model_block.references.name
+        if model_block.references is not None:
+            self.text = self._author_text(model_block.references.text)
+            self.name = model_block.references.name
 
     def _author_text(self, pbox):
         # TODO: Highly fragile, we need to find a better solution
@@ -202,7 +203,7 @@ class BaseVideo(object):
         self.format = model_block.layout
 
     @property
-    def source(self):
+    def highest_rendition(self):
         try:
             highest_rendition = self.renditions[0]
             for rendition in self.renditions:

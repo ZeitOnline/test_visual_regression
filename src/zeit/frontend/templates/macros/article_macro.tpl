@@ -254,13 +254,20 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro headervideo(obj) -%}
-    <div data-backgroundvideo="{{obj.id}}" class="article__main-video--longform">
+{% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='article__main-image--longform') -%}
+    
+    {% if obj.id is not defined -%}
+        {% set id = obj.uniqueId|substring_from('/') %}
+    {% else -%}
+        {% set id = obj.id %}
+    {% endif %}
+
+    <div data-backgroundvideo="{{id}}" class="{{wrap_class}}">
         <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
-                <source src="{{obj.source}}" type="video/mp4">
-                <source src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.webm" type="video/webm">
+            <source src="{{obj.highest_rendition}}" type="video/mp4">
+            <source src="http://live0.zeit.de/multimedia/videos/{{id}}.webm" type="video/webm">
         </video>
-        <img class="article__main-image--longform video--fallback" src="http://live0.zeit.de/multimedia/videos/{{obj.id}}.jpg" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
+        <img class="video--fallback {{img_class}}" src="http://live0.zeit.de/multimedia/videos/{{id}}.jpg" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
     </div>
 {%- endmacro %}
 
@@ -434,7 +441,7 @@
         <script type="text/javascript">
         //due to seo reasons, original publish date is added later
             var el = document.getElementsByClassName('article__head__meta__date');
-            var content = el[0].innerText;
+            var content = el[0].textContent != undefined ? el[0].textContent : el[0].innerText;
             if( content != undefined ){
                 if( '{{format}}' === 'long' ){
                     el[0].innerHTML = '{{publish_date}} —<br><span>zuletzt aktualisiert am ' + content + '</span>';

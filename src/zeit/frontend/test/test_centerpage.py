@@ -31,18 +31,18 @@ def monkeyreq(monkeypatch):
 def test_homepage_should_have_buzz_module_centerpage_should_not(
         testserver):
     browser = Browser('%s/zeit-magazin/index' % testserver.url)
-    assert '<div class="cp__buzz">' in browser.contents
+    assert '<div class="cp_buzz">' in browser.contents
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<div class="cp__buzz">' not in browser.contents
+    assert '<div class="cp_buzz">' not in browser.contents
 
 # commented out for first launch (as)
 # def test_centerpage_should_have_pagetitle_in_body_but_hp_not(
 #         selenium_driver, testserver):
 #     driver = selenium_driver
 #     driver.get('%s/zeit-magazin/index' % testserver.url)
-#     assert len(driver.find_elements_by_css_selector('.cp__title')) == 0
+#     assert len(driver.find_elements_by_css_selector('.cp_title')) == 0
 #     driver.get('%s/centerpage/lebensart' % testserver.url)
-#     pagetitle_in_body = driver.find_elements_by_css_selector('.cp__title')
+#     pagetitle_in_body = driver.find_elements_by_css_selector('.cp_title')
 #     assert pagetitle_in_body[0].text.strip() == "ZMO"
 
 
@@ -157,12 +157,12 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
 
 def test_cp_has_lead_area(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<div class="cp__lead__wrap">' in browser.contents
+    assert '<div class="cp_lead__wrap">' in browser.contents
 
 
 def test_cp_has_informatives_area(testserver):
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert '<div class="cp__lead__informatives__wrap">' in browser.contents
+    assert '<div class="cp_informatives__wrap">' in browser.contents
 
 
 def test_cp_lead_areas_are_available(application):
@@ -175,15 +175,15 @@ def test_cp_lead_areas_are_available(application):
 def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__lead-leader__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_leader")
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__title__wrap--dark")
+            ".cp_leader__title__wrap--dark")
         link_wrap = element.find_elements_by_tag_name(
             "a")
         image_wrap = element.find_elements_by_css_selector(
-            ".cp__lead-leader__image")
+            ".cp_leader__asset--dark")
         assert len(text_wrap) != 0
         assert len(link_wrap) == 2
         assert len(image_wrap) != 0
@@ -193,13 +193,13 @@ def test_cp_leadteaser_has_expected_text_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__title__wrap--dark")
+        ".cp_leader__title__wrap--dark")
     assert len(wrap) != 0
     for element in wrap:
         supertitle = element.find_element_by_css_selector(
-            ".cp__lead__supertitle")
-        title = element.find_element_by_css_selector(".cp__lead__title")
-        subtitle = element.find_element_by_css_selector(".cp__lead__subtitle")
+            ".cp_leader__supertitle")
+        title = element.find_element_by_css_selector(".cp_leader__title")
+        subtitle = element.find_element_by_css_selector(".cp_leader__subtitle")
         assert unicode(supertitle.text) == u'Article Image Asset Spitzmarke'
         assert unicode(title.text) == u'Article Image Asset Titel'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
@@ -212,7 +212,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead-leader__image--dark")
+        ".cp_leader__asset--dark")
     assert len(wrap) != 0
     for element in wrap:
         img = element.find_element_by_tag_name(
@@ -228,7 +228,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
 def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__lead-leader__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_leader")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
@@ -241,11 +241,11 @@ def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
 def test_cp_img_button_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_button")
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp__buttons__title__wrap")
+            ".cp_button__title__wrap")
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
@@ -256,7 +256,7 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead__wrap .cp__buttons__image")
+        ".cp_lead__wrap .cp_button__image")
     assert len(wrap) != 0
     for element in wrap:
         img = element.find_element_by_tag_name(
@@ -273,32 +273,32 @@ def test_cp_img_button_has_expected_img_content(selenium_driver, testserver):
 
 def test_cp_button_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".cp_button--small")
     assert len(wrap) != 0
     for element in wrap:
         assert element.find_elements_by_xpath("a")
         assert element.find_elements_by_xpath(
             "a/div/img[@class=' figure__media']")
+        assert element.find_elements_by_css_selector(
+            ".cp_button__title__wrap")
+        assert element.find_elements_by_xpath("header/a/h2")
         assert element.find_elements_by_xpath(
-            "span[@class='cp__buttons__title__wrap']")
-        assert element.find_elements_by_xpath("span/a/h2")
-        assert element.find_elements_by_xpath(
-            "span/a/span[@class='cp__buttons__subtitle']")
+            "header/a/span[@class='cp_button__subtitle']")
 
 
 def test_cp_button_has_expected_text_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__buttons__title__wrap")
+        ".cp_button--small")
     assert len(wrap) != 0
     for element in wrap:
         supertitle = element.find_element_by_css_selector(
-            ".cp__buttons__supertitle")
-        title = element.find_element_by_css_selector(".cp__buttons__title")
+            ".cp_button__supertitle")
+        title = element.find_element_by_css_selector(".cp_button__title")
         subtitle = element.find_element_by_css_selector(
-            ".cp__buttons__subtitle")
+            ".cp_button__subtitle")
         assert unicode(supertitle.text) == u'Article Image Asset Spitzmarke'
         assert unicode(title.text) == u'Article Image Asset Titel'
         assert unicode(subtitle.text) == u'Dies k\u00F6nnte'\
@@ -310,7 +310,7 @@ def test_cp_button_has_expected_text_content(selenium_driver, testserver):
 def test_cp_button_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_button--small")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
@@ -320,40 +320,41 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
                 'localhost:6543/centerpage/article_image_asset'
 
 
-def test_cp_large_button_has_expected_structure(selenium_driver, testserver):
+def test_cp_large_photo_button_has_expected_structure(
+        selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__large__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_button--large-photo")
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp__buttons__large__title__wrap")
+            ".cp_button__title__wrap")
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
         assert len(link_wrap) == 2
 
 
-def test_cp_large_button_has_expected_text_content(
+def test_cp_large_photo_button_has_expected_text_content(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__buttons__large__title__wrap")
+        ".cp_button--large-photo")
     assert len(wrap) != 0
     for element in wrap:
         supertitle = element.find_element_by_css_selector(
-            ".cp__buttons__supertitle")
+            ".cp_button__supertitle")
         title = element.find_element_by_css_selector(
-            ".cp__buttons__large__title")
+            ".cp_button__title")
         assert unicode(supertitle.text) == u'Serie Gesellschaftskritik'
         assert unicode(title.text) == u'\u00DCBER SCHLECHTE LAUNE'
 
 
-def test_cp_large_button_has_expected_links(selenium_driver, testserver):
+def test_cp_large_photo_button_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__buttons__large__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_button--large-photo")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
@@ -368,11 +369,11 @@ def test_cp_large_button_has_expected_links(selenium_driver, testserver):
 def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__teaser__gallery__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_button--gallery")
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp__teaser__gallery")
+            ".cp_button__title__wrap")
         link_wrap = element.find_elements_by_tag_name(
             "a")
         image_wrap = element.find_elements_by_css_selector(
@@ -387,13 +388,13 @@ def test_cp_gallery_teaser_has_expected_text_content(
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__teaser__gallery")
+        ".cp_button--gallery")
     assert len(wrap) != 0
     for element in wrap:
         supertitle = element.find_element_by_css_selector(
-            ".cp__teaser__gallery__supertitle")
+            ".cp_button__supertitle")
         title = element.find_element_by_css_selector(
-            ".cp__teaser__gallery__title")
+            ".cp_button__title")
         assert unicode(supertitle.text) == u'Article Image Asset Spitzmarke'
         assert unicode(title.text) == u'Article Image Asset Titel'
 
@@ -402,7 +403,7 @@ def test_gallery_teaser_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__teaser__gallery__wrap")
+        ".cp_button--gallery")
     assert len(wrap) != 0
     for element in wrap:
         img = element.find_element_by_tag_name(
@@ -420,11 +421,11 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     wrap = driver.find_elements_by_css_selector(
-        ".cp__lead__informatives__wrap")
+        ".cp_informatives__wrap")
     assert len(wrap) != 0
     elements = wrap[0].find_elements_by_xpath("div")
     add = elements[2].get_attribute("class")
-    assert add == 'cp__buttons__ad'
+    assert add == 'cp_button--ad'
     mr = elements[2].find_element_by_css_selector(
         "#iqadtile7").get_attribute("class")
     assert mr == "ad__tile_7 ad__on__centerpage ad__width_300 ad__min__768"
@@ -433,16 +434,16 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/cp_with_video_lead' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_leader--full")
     assert len(wrap) != 0
     for teaser in wrap:
-        vid_wrap = teaser.find_element_by_class_name("cp__lead-full--dark")
+        vid_wrap = teaser.find_element_by_class_name("cp_leader__asset--dark")
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
         a = teaser.find_elements_by_tag_name("a")
-        title = teaser.find_elements_by_class_name("cp__lead__title")
-        subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
+        title = teaser.find_elements_by_class_name("cp_leader__title")
+        subtitle = teaser.find_elements_by_class_name("cp_leader__subtitle")
         source1 = \
             teaser.find_element_by_xpath('//source[1]').get_attribute("src")
         source2 = \
@@ -459,9 +460,9 @@ def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
             'videos/3035864892001.jpg'
 
         # structure
-        assert 'video--fallback' == unicode(img.get_attribute("class"))
-        assert 'cp__lead-full__title__wrap'\
-            ' cp__lead-full__title__wrap--dark' == \
+        assert 'video--fallback ' == unicode(img.get_attribute("class"))
+        assert 'cp_leader__title__wrap'\
+            ' cp_leader__title__wrap--dark' == \
             unicode(title_wrap.get_attribute("class"))
         assert len(title) == 1
         assert len(subtitle) == 1
@@ -487,17 +488,16 @@ def test_cp_with_video_lead_light_has_correct_markup(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/cp_with_video_lead-2' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_leader--full")
     assert len(wrap) != 0
     for teaser in wrap:
-        vid_wrap = teaser.find_element_by_class_name("cp__lead-full--light")
+        vid_wrap = teaser.find_element_by_class_name("cp_leader__asset--light")
         vid = teaser.find_element_by_tag_name("video")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_element_by_tag_name("header")
-        h2 = teaser.find_element_by_tag_name("h2")
         a = teaser.find_elements_by_tag_name("a")
-        title = teaser.find_elements_by_class_name("cp__lead__title")
-        subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
+        title = teaser.find_elements_by_class_name("cp_leader__title")
+        subtitle = teaser.find_elements_by_class_name("cp_leader__subtitle")
         source1 = \
             teaser.find_element_by_xpath('//source[1]').get_attribute("src")
         source2 = \
@@ -514,8 +514,8 @@ def test_cp_with_video_lead_light_has_correct_markup(
             'videos/3035864892001.jpg'
 
         # structure
-        assert 'cp__lead-full__title__wrap'\
-            ' cp__lead-full__title__wrap--light' == \
+        assert 'cp_leader__title__wrap'\
+            ' cp_leader__title__wrap--light' == \
             unicode(title_wrap.get_attribute("class"))
         assert len(title) == 1
         assert len(subtitle) == 1
@@ -540,15 +540,15 @@ def test_cp_with_video_lead_light_has_correct_markup(
 def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/cp_with_image_lead' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp__lead-full__wrap")
+    wrap = driver.find_elements_by_css_selector(".cp_leader--full")
     assert len(wrap) != 0
     for teaser in wrap:
-        img_wrap = teaser.find_elements_by_tag_name("div")
+        img_wrap = teaser.find_elements_by_class_name("cp_leader__asset--dark")
         img = teaser.find_element_by_tag_name("img")
         title_wrap = teaser.find_elements_by_tag_name("header")
         a = teaser.find_elements_by_tag_name("a")
-        title = teaser.find_elements_by_class_name("cp__lead__title")
-        subtitle = teaser.find_elements_by_class_name("cp__lead__subtitle")
+        title = teaser.find_elements_by_class_name("cp_leader__title")
+        subtitle = teaser.find_elements_by_class_name("cp_leader__subtitle")
         image_pattern = \
             'http://.*/centerpage/katzencontent/'\
             'bitblt-.*'\
@@ -576,20 +576,9 @@ def test_cp_with_image_lead_has_correct_markup(selenium_driver, testserver):
 
 def test_lead_full_light_version_is_working(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
-    assert '<div class="cp__lead-full__wrap '\
-        'cp__lead-full--light">' in browser.contents
-    assert '<div class="scaled-image is-pixelperfect"'\
-        ' data-wrap=".cp__lead-full__wrap">' in browser.contents
-
-
-def test_lead_leader_light_version_is_working(testserver):
-    browser = Browser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<div class="cp__lead-leader__wrap '\
-        'cp__lead-leader__wrap--square '\
-        'cp__lead-leader__image--light">' in browser.contents
-    assert '<div class="scaled-image is-pixelperfect '\
-        'cp__lead-leader__image" '\
-        'data-wrap=".cp__lead-leader__wrap">' in browser.contents
+    assert '<div class="cp_leader cp_leader--full">' in browser.contents
+    assert '<div class="scaled-image is-pixelperfect cp_leader__asset'\
+        ' cp_leader__asset--light" data-wrap=".cp_leader">' in browser.contents
 
 
 def test_get_image_asset_should_return_image_asset(testserver):
@@ -797,7 +786,7 @@ def test_cp_informatives_should_have_correct_second_block(application):
         '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
     informatives2_last_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
-        '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
+        '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9ddshjdsjkdsjk'
 
     assert informatives2_first_block == cp_view.area_informatives_2[0].uniqueId
     assert informatives2_last_block == cp_view.area_informatives_2[1].uniqueId
@@ -820,7 +809,7 @@ def test_cp_informatives_should_have_no_blocks(application):
 
 def test_cp_teaser_should_have_comment_count(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    assert '<span class="cp__comment__count__wrap'\
+    assert '<span class="cp_comment__count__wrap'\
         ' icon-comments-count">22</span>' in browser.contents
 
 
@@ -840,23 +829,37 @@ def test_centerpage_should_have_no_monothematic_block(application):
 
 def test_default_asset_for_teaser_lead(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
-    img = browser.cssselect('div.cp__lead-full--light img')[0]
+    img = browser.cssselect('div.cp_leader--full .cp_leader__asset img')[0]
     assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
 
 
 def test_default_asset_for_teaser_buttons(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
-    img = browser.cssselect('div.cp__buttons__image img')[0]
+    img = browser.cssselect('div.cp_button__image img')[0]
     assert 'teaser_image-zmo-landscape-small.jpg' in img.attrib.get('src')
 
 
 def test_default_asset_for_teaser_buttons_large(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
-    img = browser.cssselect('div.cp__buttons__large__image img')[0]
+    img = browser.cssselect('div.cp_button--large .cp_button__image img')[0]
     assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
 
 
 def test_default_asset_for_teaser_gallery(testserver):
     browser = Browser('%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
-    img = browser.cssselect('div.cp__teaser__gallery__wrap a div img')[0]
+    img = browser.cssselect('div.cp_button--gallery a div img')[0]
     assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')
+
+
+def test_cp_has_gallery_icon_for_gallery_upright_teaser(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    icon = browser.cssselect(
+        'div.cp_button--gallery .cp_button__title__wrap a span')[0]
+    assert 'icon-galerie-icon-white' in icon.attrib.get('class')
+
+
+def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(testserver):
+    browser = Browser('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    icon = browser.cssselect(
+        'div.cp_button--gallery .cp_button__title__wrap a span')
+    assert len(icon) == 1
