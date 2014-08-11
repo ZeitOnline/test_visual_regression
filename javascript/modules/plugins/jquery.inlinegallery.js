@@ -185,7 +185,7 @@
                 var caption = figcaption || image.closest( 'figure' ).find( 'figcaption' ),
                     imageWidth = image.width();
 
-                if ( caption.length && imageWidth > 24 && imageWidth < galleryWidth ) {
+                if ( caption.length && imageWidth > 30 && imageWidth < galleryWidth ) {
                     caption.css({
                         'max-width': imageWidth + 'px',
                         'padding-right': 0

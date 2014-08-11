@@ -38,7 +38,7 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             $img_wrapper.html( '<img src="' + alt_source + '"/>' );
         }else{
             $img_wrapper.height( 'auto' );
-            $( '.cp__comment__count__wrap' ).hide();
+            $( '.cp_comment__count__wrap' ).hide();
         }
     };
 
@@ -51,11 +51,18 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * @param  {integer} height height of image
      */
     var rescaleOne = function(image, subsequent, width, height) {
-        var $img = $(image);
+        var $img = $(image),
+            ie_width = false;
+
         width = width || $img.width();
 
+        //ie workarround to detect auto width
+        if ( image.currentStyle ){
+            ie_width = image.currentStyle.width;
+        }
+
         // workaround for width = 'auto'
-        if (!width) {
+        if (!width || ie_width === 'auto') {
             width = $img.width('100%').width();
             $img.width('');
         }
