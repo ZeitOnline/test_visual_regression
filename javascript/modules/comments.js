@@ -389,7 +389,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
                     toggleComments();
                 }
 
-                // links from "recommented comments"
+                // links from "recommended comments"
                 if (hidden) {
                     $commentsTabsHead.find('.tabs__head__tab:first').click();
                 }
