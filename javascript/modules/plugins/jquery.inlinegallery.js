@@ -149,9 +149,22 @@
 
             $( window ).on( 'keydown', handleKeydown );
 
-            gallery.on( 'scaling_ready', function( e ) {
+            figures.on( 'scaling_ready', function( e ) {
+                var currentSlide;
+
                 figCaptionSize( $( e.target ) );
-                // slider.redrawSlider();
+
+                // if the slider loaded before the image
+                if ( slider.getCurrentSlideElement ) {
+                    currentSlide = slider.getCurrentSlideElement();
+                    // if loaded image is inside current active slide
+                    if ( currentSlide.get(0) === this ) {
+                        // adjust height if necessary
+                        if ( sliderViewport && sliderViewport.height() < currentSlide.height() ) {
+                            sliderViewport.height( currentSlide.height() );
+                        }
+                    }
+                }
             });
 
             var hideOverlays = function() {
