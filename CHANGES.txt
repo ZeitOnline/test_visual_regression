@@ -7,15 +7,11 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-830: repair desktop/mobile ad switch
 
 
 0.12 (2014-08-11)
 -----------------
-
-- ZMO-830: repair desktop/mobile ad switch
-
-- ZMO-846: comment all js files in jsdoc style
 
 - ZMO-870: Handle webkit bug measuring inline gallery height
 
@@ -79,7 +75,6 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 - ZMO-879: Delete double timestamp in gallery and products.html
 
 - ZMO-846: Comment all js files in jsdoc style
->>>>>>> master
 
 - ZMO-457: Show standart image for browsers that can not work with noscript
 
