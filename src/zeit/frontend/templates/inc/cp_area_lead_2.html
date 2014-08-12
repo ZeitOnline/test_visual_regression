@@ -5,15 +5,12 @@ This is the second part template for the context type "centerpage".
 Available attributes:
 	zeit.frontend.view_centerpage.Centerpage
 #}
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context%}
 
-<div class="cp__lead__wrap">
-    {% if view.area_lead_2 %}
-        {{ cp.include_cp_block(view.area_lead_2) }}
-    {% endif %}
+{%- import 'templates/macros/centerpage_macro.tpl' as cp with context -%}
+
+<div class="cp_lead__wrap">
+	{{ cp.include_teaser_block(view.area_lead_2) }}
 </div>
-<div class="cp__lead__informatives__wrap">
-    {% if view.area_informatives_2 %}
-        {{ cp.include_cp_block(view.area_informatives_2) }}
-    {% endif %}
+<div class="cp_informatives__wrap">
+	{{ cp.include_teaser_block(view.area_informatives_2) }}
 </div>

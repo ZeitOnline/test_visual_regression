@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/test-cp/meine-testkarte-bildergruppe/" type="png" align="left" publication-date="" expires="">
+    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/test-cp/eine-transparente-banane/" type="png" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
       <copyright py:pytype="str">© Zeit</copyright>
     </image>
@@ -55,7 +55,7 @@
     <title>Meine Überschrift</title>
     <subtitle>Unterzeile</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-magazin/test-cp/meine-testkarte-bildergruppe/" type="png" align="left" publication-date="" expires="" layout="large" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-magazin/test-cp/eine-transparente-banane/" type="png" align="left" publication-date="" expires="" layout="large" is_empty="False">
         <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
         <copyright py:pytype="str">© Zeit</copyright>
       </image>

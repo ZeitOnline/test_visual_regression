@@ -207,7 +207,12 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
      * comments.js: toggle comments
      * @function toggleComments
      */
-    var toggleComments = function() {
+    var toggleComments = function(e) {
+
+        if ( e ) {
+            e.preventDefault();
+        }
+
         var $body = $(document.body);
 
         $body.toggleClass('show-comments');
@@ -368,7 +373,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
      * comments.js: ensure visibility of linked comment
      * @function showComment
      * @param  {object} e      event object
-     * @param  {boolean} onload 
+     * @param  {boolean} onload
      */
     var showComment = function(e, onload) {
         var anchor = window.location.hash.slice(1); // remove '#'
@@ -386,7 +391,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
                     toggleComments();
                 }
 
-                // links from "recommented comments"
+                // links from "recommended comments"
                 if (hidden) {
                     $commentsTabsHead.find('.tabs__head__tab:first').click();
                 }
@@ -468,7 +473,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     /**
      * comments.js: get hidden property
      * @function getHiddenProperty
-     * @param  {object} element 
+     * @param  {object} element
      * @param  {string} property
      * @return {integer}
      */
@@ -483,7 +488,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     /**
      * comments.js: set current offset
      * @function setCurrentOffset
-     * @param  {integer} offset 
+     * @param  {integer} offset
      */
     var setCurrentOffset = function(offset) {
         offset = Math.round(offset);
@@ -533,6 +538,15 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
 
         // on document ready: check for url hash to enable anchor links and return urls
         $(function(e) {
+            // trigger opener when url parameter is provided
+            if ( window.location.hash === '#show_comments' ){
+                toggleComments();
+
+                $('html, body').stop().animate({
+                    scrollTop: $comments.offset().top
+                }, 500);
+            }
+
             // setTimeout needed for FF bug with linked element inside block having overflow:hidden
             window.setTimeout(function(){
                showComment(e, true);

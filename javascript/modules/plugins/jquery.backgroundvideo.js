@@ -61,7 +61,6 @@
 			}
 
 			//on video play, hide image and show video
-
 			$( video ).on( "play", function() {
 				$element.find( ".video--fallback" ).fadeOut();
 				$( video ).show();

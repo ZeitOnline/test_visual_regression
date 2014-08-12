@@ -21,7 +21,7 @@
         <script>
             var zmo_actual_load_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
             var zmo_mobile_width = 768;
-            var zmo_is_mobile_view = window.zmo_actual_load_width <= window.zmo_mobile_width;
+            var zmo_is_mobile_view = window.zmo_actual_load_width < window.zmo_mobile_width;
             var viewport_meta = document.getElementById('viewport-meta');
             var viewports = {
                     standard: viewport_meta.getAttribute('content'),

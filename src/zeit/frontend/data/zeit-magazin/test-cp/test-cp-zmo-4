@@ -219,7 +219,7 @@
             <description py:pytype="str">Mein Teasertext</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/zeit-magazin/test-cp/meine-testkarte-bildergruppe/" type="png" align="left" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/test-cp/eine-transparente-banane/" type="png" align="left" publication-date="" expires="">
               <bu xsi:nil="true"/>
               <copyright py:pytype="str">© Zeit</copyright>
             </image>
