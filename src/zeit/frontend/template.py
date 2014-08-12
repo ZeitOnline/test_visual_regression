@@ -10,6 +10,9 @@ import urlparse
 from babel.dates import format_datetime
 from repoze.bitblt.transform import compute_signature
 import jinja2
+import jinja2.environment
+import jinja2.runtime
+import jinja2.utils
 import pyramid.threadlocal
 import pytz
 import requests
@@ -56,6 +59,43 @@ def JinjaEnvRegistrator(env_attr):
 register_filter = JinjaEnvRegistrator('filters')
 register_global = JinjaEnvRegistrator('globals')
 register_test = JinjaEnvRegistrator('tests')
+
+
+class Undefined(jinja2.runtime.Undefined):
+
+    def __html__(self):
+        return jinja2.utils.Markup('moo')
+
+    @jinja2.utils.internalcode
+    def _fail_with_undefined_error(self, *args, **kw):
+        pass
+
+    @jinja2.utils.internalcode
+    def __getattr__(self, name):
+        return self.__class__()
+
+
+class Environment(jinja2.environment.Environment):
+
+    def __init__(self, **kw):
+        kw['undefined'] = Undefined
+        super(Environment, self).__init__(**kw)
+
+    def handle_exception(self, exc_info, **kw):
+        print '_%s' % ([exc_info] + kw.items())
+
+    def _getter(self, func, obj, name):
+        try:
+            return getattr(super(Environment, self), func)(obj, name)
+        except BaseException, e:
+            print e
+            return self.undefined(obj, name)
+
+    def getitem(self, obj, argument):
+        return self._getter('getitem', obj, argument)
+
+    def getattr(self, obj, attribute):
+        return self._getter('getattr', obj, attribute)
 
 
 @register_filter
