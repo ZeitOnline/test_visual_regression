@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import mock
+
 from zeit.content.article.article import Article
+import zeit.cms.interfaces
+
 from zeit.frontend.interfaces import IPages
 from zeit.frontend.test import Browser
-import zeit.cms.interfaces
+import zeit.frontend.view_article
 
 
 def test_IPages_contains_blocks(application):
@@ -567,3 +571,17 @@ def test_header_has_linked_copyright(testserver):
         output += line.strip()
     assert '<span class="figure__copyright">' \
         '<a href="http://foo.de" target="_blank">©foo' in output
+
+
+def test_article_view_has_leadtime_set_if_article_provides_it(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    view = zeit.frontend.view_article.Article(article, mock.Mock())
+    assert view.leadtime.start
+    assert view.leadtime.end
+
+
+def test_article_view_has_no_leadtime_if_the_attribute_is_missing(testserver):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    view = zeit.frontend.view_article.Article(article, mock.Mock())
+    assert view.leadtime.start is None
+    assert view.leadtime.end is None

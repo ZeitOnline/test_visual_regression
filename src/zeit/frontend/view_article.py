@@ -45,6 +45,13 @@ class Article(zeit.frontend.view.Content):
         self.context.current_year = datetime.date.today().year
 
     @reify
+    def leadtime(self):
+        try:
+            return zeit.content.cp.interfaces.ILeadTime(self.context)
+        except TypeError:
+            return
+
+    @reify
     def template(self):
         return IArticleTemplateSettings(self.context).template or 'default'
 
