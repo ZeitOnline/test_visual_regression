@@ -11,6 +11,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-887: Define script URL instead of module ID for RequireJS entry point
 
+- ZMO-886: Implement backend part of article leadtime attributes
+
 
 0.12 (2014-08-11)
 -----------------
