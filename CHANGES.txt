@@ -4,8 +4,8 @@ Change log for zeit.frontend
 NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
 https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
-0.12.1 (unreleased)
------------------
+0.12.1 (2014-08-12)
+-------------------
 
 - ZMO-830: Repair desktop/mobile ad switch (ticket still isn't fixed entirely yet)
 
