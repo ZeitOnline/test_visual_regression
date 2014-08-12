@@ -7,7 +7,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.13 (unreleased)
 -----------------
 
-- ZMO-830: repair desktop/mobile ad switch
+- ZMO-830: Repair desktop/mobile ad switch
 
 
 0.12 (2014-08-11)
@@ -21,7 +21,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - HOTFIX: Remove unnecessary div tag from gallery meta
 
-- ZMO-877: make inline galleries work in IE11 again
+- ZMO-877: Make inline galleries work in IE11 again
 
 
 0.11.5 (2014-08-08)
