@@ -1,4 +1,3 @@
-$mtb_teaser_width: em(270px)
 
 .mtb__wrap
     clear: left
@@ -7,7 +6,7 @@ $mtb_teaser_width: em(270px)
 
 .mtb
     width: 88%
-    margin: 0 auto $medium auto
+    margin: 0 auto $compact auto
 
     +respond-min-max($break-1, $break-3)
         width: 2*$mtb_teaser_width + $compact // two teaser columns, one margin
@@ -41,11 +40,9 @@ $mtb_teaser_width: em(270px)
     line-height: 1.25
     margin-bottom: $medium
 
-
 // start: teasers //
-
 .mtb__teasers__wrap
-    +justify-children-horizontally('.mtb__teaser')
+    +justify-children-horizontally('.cp_button--mtb')
 
 .csscolumns .mtb__teasers__wrap
     +respond-min($break-1)
@@ -66,22 +63,12 @@ $mtb_teaser_width: em(270px)
         -o-column-gap: $medium
         column-gap: $medium
 
-.mtb__teaser
-    // left/right margins are not needed, due to justified inline-block
-    margin: 0 0 $big 0
-    position: relative
-    vertical-align: top !important
-    width: 100%
-
-    +respond-min($break-1)
-        width: $mtb_teaser_width
-
 .mtb__teaser__title
-    @extend %cp__buttons__title
+    @extend %cp_button__title
     margin-bottom: 0
 
 .mtb__teaser__supertitle
-    @extend %cp__buttons__supertitle
+    @extend %cp_button__supertitle
 
 .mtb__teaser__image
     width: 100%

@@ -17,10 +17,7 @@
             {{ view.galleryText|safe }}
         </div>
         <div class="article__head__meta">
-            <div class="article__head__meta__date">
-                {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
-                {{ blocks.add_publish_date(view.date_last_published_semantic,view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
-            </div>
+            {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
         </div>
     </div>
 

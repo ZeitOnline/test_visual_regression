@@ -5,6 +5,7 @@ import urlparse
 import pkg_resources
 
 from grokcore.component import adapter, implementer
+from venusian import Scanner
 import pyramid.config
 import pyramid_jinja2
 import zope.app.appsetup.product
@@ -150,29 +151,11 @@ class Application(object):
 
         jinja.trim_blocks = True
 
-        # Copy arbitrary names from a source module to a destination dict.
-        copy = lambda src, dest, *names: [dest.__setitem__(
-            n, getattr(src, n)) for n in names]
-
-        copy(zeit.frontend.template, jinja.globals,
-             'create_image_url', 'get_teaser_image',
-             'get_teaser_template', 'sitemap', 'top_formate'
-             )
-        copy(zeit.frontend.block, jinja.tests,
-             'elem'
-             )
-        copy(zeit.frontend.block, jinja.filters,
-             'block_type'
-             )
-        copy(zeit.frontend.centerpage, jinja.filters,
-             'auto_select_asset', 'get_all_assets'
-             )
-        copy(zeit.frontend.template, jinja.filters,
-             'closest_substitute_image', 'create_url', 'default_image_url',
-             'format_date', 'format_date_ago', 'get_image_metadata',
-             'hide_none', 'obj_debug', 'replace_list_seperator',
-             'substring_from', 'translate_url', 'remove_break'
-             )
+        Scanner(env=jinja).scan(
+            zeit.frontend,
+            categories=('jinja',),
+            ignore=self.DONT_SCAN
+        )
 
         return jinja
 

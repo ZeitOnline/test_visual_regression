@@ -35,7 +35,7 @@ def test_video_html(selenium_driver, testserver):
                 "data-video") == video.get_attribute("data-video")
 
 
-def test_video_source_should_be_highes_rendition_url():
+def test_video_source_should_be_highest_rendition_url():
     model_block = Mock()
     rend_1 = Mock()
     rend_1.frame_width = 460
@@ -53,11 +53,11 @@ def test_video_source_should_be_highes_rendition_url():
     model_block.video.renditions = [rend_1, rend_2, rend_3]
     video = Video(model_block)
 
-    assert video.source == "http://rend_2"
+    assert video.highest_rendition == "http://rend_2"
 
     model_block.video.renditions = None
     video = Video(model_block)
-    assert video.source is None
+    assert video.highest_rendition is None
 
 
 def test_header_video_should_be_created_if_layout_is_zmo_header():

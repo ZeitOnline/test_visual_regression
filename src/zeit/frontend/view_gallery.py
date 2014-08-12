@@ -30,14 +30,15 @@ class Gallery(zeit.frontend.view.Content):
         teaser_list = []
         for i in self.images.values():
             image_meta = zeit.content.image.interfaces.IImageMetadata(i.image)
-            if len(image_meta.copyrights) < 1 or len(image_meta.copyrights[0][0]) <= 1:
+            if (len(image_meta.copyrights) < 1 or
+                    len(image_meta.copyrights[0][0]) <= 1):
                 # Drop teaser if no copyright text is assigned.
                 continue
             teaser_list.append(
                 dict(
                     label=image_meta.copyrights[0][0],
                     image=zeit.frontend.template.translate_url(
-                        self.context, i.image.uniqueId),
+                        i.image.uniqueId),
                     link=image_meta.copyrights[0][1],
                     nofollow=image_meta.copyrights[0][2]
                 )

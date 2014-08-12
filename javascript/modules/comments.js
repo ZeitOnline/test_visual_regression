@@ -1,4 +1,13 @@
 /* global console, define, Modernizr */
+
+/**
+ * @fileOverview Module for comments
+ * @version  0.1
+ */
+/**
+ * comments.js: module for comments
+ * @module comments
+ */
 define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
 
     var $socialServices = $('#js-social-services'),
@@ -17,7 +26,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
     /**
-     * handles comment pagination
+     * comments.js: handles comment pagination
+     * @function calculatePagination
      */
     var calculatePagination = function() {
         var commentsCss = getCachedValue('commentsCss');
@@ -43,7 +53,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Reply to comment
+     * comments.js: reply to comment
+     * @function replyToComment
      */
     var replyToComment = function() {
         var cid  = this.getAttribute('data-cid'),
@@ -65,7 +76,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Report comment
+     * comments.js: report comment
+     * @function reportComment
      */
     var reportComment = function() {
         var cid  = this.getAttribute('data-cid'),
@@ -89,7 +101,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Show form
+     * comments.js: show form
+     * @function showForm
+     * @param  {object} form    jQuery object
+     * @param  {object} comment jQuery object
      */
     var showForm = function(form, comment) {
         var checkHeight = false;
@@ -116,7 +131,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Cancel report
+     * comments.js: cancel report
+     * @function cancelReport
+     * @param  {object} e event object
      */
     var cancelReport = function(e) {
         e.preventDefault();
@@ -125,7 +142,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Submit report
+     * comments.js: submit report
+     * @function submitReport
+     * @param  {object} e event object
      */
     var submitReport = function(e) {
         e.preventDefault();
@@ -174,7 +193,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Enable form submit button
+     * comments.js: enable form submit button
+     * @function enableForm
+     * @param  {object} e event object
      */
     var enableForm = function() {
         var blank = /^\s*$/.test(this.value);
@@ -183,9 +204,15 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Toggle comments
+     * comments.js: toggle comments
+     * @function toggleComments
      */
-    var toggleComments = function() {
+    var toggleComments = function(e) {
+
+        if ( e ) {
+            e.preventDefault();
+        }
+
         var $body = $(document.body);
 
         $body.toggleClass('show-comments');
@@ -205,7 +232,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Initialize layout
+     * comments.js: initialize layout
+     * @function initLayout
      */
     var initLayout = function() {
         var commentsCss = getCachedValue('commentsCss');
@@ -226,7 +254,8 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Update layout, debounced
+     * comments.js: update layout
+     * @function updateLayout
      */
     var updateLayout = _.debounce(function(e) {
         // invalidate cache
@@ -237,7 +266,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     }, 250); // Maximum run of once per 250 milliseconds
 
     /**
-     * Close comments on click outside the comments section
+     * comments.js: close comments on click outside the comments section
+     * @function hideComments
+     * @param  {object} e event object
      */
     var hideComments = function(e) {
         var $target = $(e.target),
@@ -250,7 +281,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Close comments on <ESCAPE>
+     * comments.js: close comments on <ESCAPE>
+     * @function escapeComments
+     * @param  {object} e event object
      */
     var escapeComments = function(e) {
         // do nothing if there is another key involved
@@ -262,7 +295,9 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Scroll comments list
+     * comments.js: scroll comments list
+     * @function scrollComments
+     * @param  {object} e event object
      */
     var scrollComments = function(e) {
         var direction      = e.target.getAttribute('data-direction'),
@@ -335,7 +370,10 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
     };
 
     /**
-     * Ensure visibility of linked comment
+     * comments.js: ensure visibility of linked comment
+     * @function showComment
+     * @param  {object} e      event object
+     * @param  {boolean} onload
      */
     var showComment = function(e, onload) {
         var anchor = window.location.hash.slice(1); // remove '#'
@@ -353,7 +391,7 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
                     toggleComments();
                 }
 
-                // links from "recommented comments"
+                // links from "recommended comments"
                 if (hidden) {
                     $commentsTabsHead.find('.tabs__head__tab:first').click();
                 }
@@ -381,8 +419,13 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
             }
     };
 
+    //helper functions
+
     /**
-     * Helper functions
+     * comments.js: get cached values
+     * @function getCachedValue
+     * @param  {string} key
+     * @return {object}
      */
     var getCachedValue = function(key) {
         if (key in cache) {
@@ -427,6 +470,13 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
         return null;
     };
 
+    /**
+     * comments.js: get hidden property
+     * @function getHiddenProperty
+     * @param  {object} element
+     * @param  {string} property
+     * @return {integer}
+     */
     var getHiddenProperty = function(element, property) {
         element.css('display', 'block');
         var value = element.prop(property);
@@ -435,22 +485,37 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
         return value;
     };
 
+    /**
+     * comments.js: set current offset
+     * @function setCurrentOffset
+     * @param  {integer} offset
+     */
     var setCurrentOffset = function(offset) {
         offset = Math.round(offset);
         $commentsActiveList.css('top', offset);
         currentOffset = offset;
     };
 
+    /**
+     * comments.js: hide other forms
+     * @function hideOtherForms
+     */
     var hideOtherForms = function() {
         $commentsBody.find('form').filter(':visible').slideToggle(slideDuration);
     };
 
+    /**
+     * comments.js: generate jsonp number
+     * @function generateJSONPNumber
+     * @return {integer}
+     */
     var generateJSONPNumber = function() {
         return (1361462065627 + Math.floor(Math.random()*101));
     };
 
     /**
-     * Initialize comment section
+     * comments.js: initialize
+     * @function init
      */
     var init = function() {
 
@@ -473,6 +538,15 @@ define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
 
         // on document ready: check for url hash to enable anchor links and return urls
         $(function(e) {
+            // trigger opener when url parameter is provided
+            if ( window.location.hash === '#show_comments' ){
+                toggleComments();
+
+                $('html, body').stop().animate({
+                    scrollTop: $comments.offset().top
+                }, 500);
+            }
+
             // setTimeout needed for FF bug with linked element inside block having overflow:hidden
             window.setTimeout(function(){
                showComment(e, true);

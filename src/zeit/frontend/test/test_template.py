@@ -4,6 +4,7 @@ import time
 import gocept.httpserverlayer.static
 import mock
 import pytest
+import venusian
 
 import zeit.cms.interfaces
 import zeit.frontend.template
@@ -153,3 +154,38 @@ def test_substitute_image_returns_closest_match_within_image_group(
         image_group, 'zmo-lead-upright')
     assert 'moo' in zeit.frontend.template.closest_substitute_image(
         image_group, 'zmo-square-small', force_orientation=True)
+
+
+def test_jinja_env_registrator_registers_only_after_scanning(testserver):
+    jinja = mock.Mock()
+    jinja.foo = {}
+
+    register_foo = zeit.frontend.template.JinjaEnvRegistrator('foo')
+    do_foo = register_foo(lambda: 42)
+    globals()['do_foo'] = do_foo
+
+    assert do_foo() == 42
+    assert jinja.foo == {}
+
+    scanner = venusian.Scanner(env=jinja)
+    scanner.scan(zeit.frontend.test.test_template, categories=('jinja',),)
+
+    assert do_foo() == 42
+    assert 'do_foo' in jinja.foo
+
+
+def test_get_teaser_image_should_determine_mimetype_autonomously(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-card-flip-flip'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/card-flip-flip'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert image.uniqueId.split('.')[-1] == 'png'
+
+    teaser_block.layout.image_pattern = 'zmo-card-picture'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/card-picture'
+    )
+    image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
+    assert image.uniqueId.split('.')[-1] == 'jpg'

@@ -324,8 +324,7 @@ class Article(zeit.frontend.view.Content):
                 cr_list.append(
                     dict(
                         label=i.copyright[0][0],
-                        image=zeit.frontend.template.translate_url(
-                            self.context, i.src),
+                        image=zeit.frontend.template.translate_url(i.src),
                         link=i.copyright[0][1],
                         nofollow=i.copyright[0][2]
                     )
