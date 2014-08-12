@@ -9,6 +9,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-830: Repair desktop/mobile ad switch
 
+- ZMO-887: Define script URL instead of module ID for RequireJS entry point
+
 
 0.12 (2014-08-11)
 -----------------
