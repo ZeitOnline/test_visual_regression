@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
+import mock
+import pkg_resources
 import pyramid.httpexceptions
+import pyramid.response
+import pytest
+import requests
+import urllib2
+import zeit.cms.interfaces
+
 import zeit.content.article.edit.reference
 import zeit.frontend
 import zeit.frontend.gallery
 import zeit.frontend.test
 import zeit.frontend.view
 import zeit.frontend.view_article
-import mock
-import pkg_resources
-import pytest
-import requests
-import urllib2
-import zeit.cms.interfaces
-import pyramid.response
 
 
 def test_base_view_produces_acceptable_return_type():
@@ -201,9 +202,9 @@ def test_header_video_should_be_first_video_of_content_blocks(application):
     vid_url = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    url = 'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/' \
-        '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights' \
-        '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4'
+    url = ('http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/'
+           '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights'
+           '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
     assert article_view.header_video.highest_rendition == url
 
 
@@ -216,8 +217,8 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
 def test_header_elem_should_be_img_if_there_is_a_header_img(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert type(article_view.header_elem) == \
-        zeit.frontend.block.HeaderImageStandard
+    assert type(article_view.header_elem) == (
+        zeit.frontend.block.HeaderImageStandard)
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
@@ -255,18 +256,18 @@ def test_inline_gallery_should_have_images(testserver):
         for i in gallery.itervalues())
 
     image = gallery.values()[4]
-    assert image.src == \
-        u'http://xml.zeit.de/galerien/bg-automesse-detroit'\
-        '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg'
+    assert image.src == (
+        u'http://xml.zeit.de/galerien/bg-automesse-detroit'
+        '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg')
     assert image.alt is None
     assert image.copyright[0][0] == u'\xa9'
 
 
 def test_article_request_should_have_body_element(testserver):
     browser = zeit.frontend.test.Browser('%s/artikel/05' % testserver.url)
-    assert '<body itemscope itemtype="http://schema.org/WebPage"'\
-        '>'\
-        in browser.contents
+    assert (
+        '<body itemscope itemtype="http://schema.org/WebPage">'
+        ) in browser.contents
     assert '</body>' in browser.contents
 
 
@@ -287,8 +288,8 @@ def test_column_should_have_header_image(testserver):
         '%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert '<div class="article__column__headerimage">' in browser.contents
     assert '<div class="scaled-image">' in browser.contents
-    assert '<img alt="Die ist der image sub text\n" title="Die ist der image'\
-           ' sub text\n" class=" figure__media"' in browser.contents
+    assert ('<img alt="Die ist der image sub text\n" title="Die ist der image'
+            ' sub text\n" class=" figure__media"') in browser.contents
 
 
 def test_column_should_not_have_header_image(testserver):
@@ -373,22 +374,22 @@ def test_article05_has_correct_dates(testserver):
     # updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.date_last_published_semantic.isoformat() ==\
-        '2013-11-03T08:10:00.626737+01:00'
-    assert article_view.date_first_released.isoformat() ==\
-        '2013-10-24T08:00:00+02:00'
-    assert article_view.show_article_date.isoformat() ==\
-        '2013-11-03T08:10:00.626737+01:00'
+    assert article_view.date_last_published_semantic.isoformat() == (
+        '2013-11-03T08:10:00.626737+01:00')
+    assert article_view.date_first_released.isoformat() == (
+        '2013-10-24T08:00:00+02:00')
+    assert article_view.show_article_date.isoformat() == (
+        '2013-11-03T08:10:00.626737+01:00')
 
 
 def test_article03_has_correct_dates(testserver):
     # not updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.date_first_released.isoformat() ==\
-        '2013-07-30T17:20:50.176115+02:00'
-    assert article_view.show_article_date.isoformat() ==\
-        '2013-07-30T17:20:50.176115+02:00'
+    assert article_view.date_first_released.isoformat() == (
+        '2013-07-30T17:20:50.176115+02:00')
+    assert article_view.show_article_date.isoformat() == (
+        '2013-07-30T17:20:50.176115+02:00')
 
 
 def test_article09_has_correct_date_formats(testserver):
@@ -484,16 +485,16 @@ def test_article05_has_correct_twitter_card_type(testserver):
 def test_article01_has_correct_sharing_img_src(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.sharing_img.src == \
-        'http://xml.zeit.de/exampleimages/artikel/01/group/01.jpg'
+    assert article_view.sharing_img.src == (
+        'http://xml.zeit.de/exampleimages/artikel/01/group/01.jpg')
 
 
 def test_article06_has_correct_sharing_img_video_still(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/06')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.sharing_img.video_still == \
-        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/' \
-        '201401/3097/18140073001_3094729885001_7x.jpg'
+    assert article_view.sharing_img.video_still == (
+        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/'
+        '201401/3097/18140073001_3094729885001_7x.jpg')
 
 
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
@@ -655,8 +656,8 @@ def test_article01_should_not_have_a_nextread(application):
 
 def test_cp_teaser_with_comments_should_get_comments_count(testserver):
     request = mock.Mock()
-    request.registry.settings.node_comment_statistics = \
-        'data/node-comment-statistics.xml'
+    request.registry.settings.node_comment_statistics = (
+        'data/node-comment-statistics.xml')
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = zeit.frontend.view_centerpage.Centerpage(cp, request)
@@ -678,8 +679,8 @@ def test_caching_headers_should_be_set(testserver):
 
 def test_article_should_have_correct_js_view(testserver):
     bc = zeit.frontend.test.Browser('%s/artikel/01' % testserver.url).contents
-    assert "window.ZMO.view['banner_channel'] = 'zeitmz/modeunddesign" \
-        "/article';" in bc
+    assert ("window.ZMO.view['banner_channel'] = 'zeitmz/modeunddesign"
+            "/article';") in bc
     assert "window.ZMO.view['ressort'] = 'zeit-magazin';" in bc
     assert "window.ZMO.view['sub_ressort'] = 'mode-design';" in bc
     assert "window.ZMO.view['type'] = 'article';" in bc
@@ -688,8 +689,9 @@ def test_article_should_have_correct_js_view(testserver):
 def test_centerpage_should_have_correct_js_view(testserver):
     bc = zeit.frontend.test.Browser(
         '%s/centerpage/lebensart' % testserver.url).contents
-    assert "window.ZMO.view['banner_channel'] = 'zeitmz/leben/centerpage';" \
-        in bc
+    assert (
+        "window.ZMO.view['banner_channel'] = 'zeitmz/leben/centerpage';"
+        ) in bc
     assert "window.ZMO.view['ressort'] = 'lebensart';" in bc
     assert "window.ZMO.view['sub_ressort'] = 'leben';" in bc
     assert "window.ZMO.view['type'] = 'centerpage';" in bc
