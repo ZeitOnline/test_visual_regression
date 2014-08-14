@@ -699,3 +699,11 @@ def test_iqd_mobile_settings_are_filled(testserver):
     assert view.iqd_mobile_settings.get('top') == '445612'
     assert view.iqd_mobile_settings.get('middle') == '445612'
     assert view.iqd_mobile_settings.get('bottom') == '445612'
+
+
+def test_http_header_should_contain_zmo_version(testserver):
+    pkg = pkg_resources.get_distribution('zeit.frontend')
+    pkg_version = pkg.version
+    head_version = requests.head(
+        testserver.url + "/zeit-magazin/index").headers['x-zmoversion']
+    assert pkg_version == head_version
