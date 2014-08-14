@@ -200,8 +200,8 @@ default_images_sizes = {
     'zmo-x-small': (100, 25),
     'zmo-card-picture': (320, 480),
     'og-image': (600, 315),
-    'twitter-image': (120, 120),  # summary
-    'twitter-image-src': (560, 300),  # summary_large_image
+    'twitter-image_small': (120, 120),  # summary
+    'twitter-image-large': (560, 300),  # summary_large_image, photo
 }
 
 
@@ -232,6 +232,17 @@ def default_image_url(image,
         return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
+
+
+@register_filter
+def sharing_image_url(image_group,
+                      image_pattern):
+    sharing_image = closest_substitute_image(image_group, image_pattern)
+
+    if not sharing_image:
+        return
+
+    return default_image_url(sharing_image, image_pattern)
 
 
 def get_image_scales(scale_source):
@@ -300,7 +311,7 @@ def closest_substitute_image(image_group,
     candidates.pop(idx)
 
     # Select the candidate that is preferably one size larger than the target.
-    return image_group.get(candidates[:idx + 1][-1][0]).uniqueId
+    return image_group.get(candidates[:idx + 1][-1][0])
 
 
 @register_global

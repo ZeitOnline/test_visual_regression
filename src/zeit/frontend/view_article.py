@@ -212,12 +212,9 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def twitter_card_type(self):
-        if IArticleTemplateSettings(self.context).template == 'longform':
-            return 'summary_large_image'
-        if IArticleTemplateSettings(self.context).template == 'ich-bin-ein-normaler-artikel':
-            return 'summary_large_image'
-        else:
-            return 'summary'
+        # TODO: use reasonable value depending on content type or template
+        # summary_large_image, photo, gallery
+        return 'summary_large_image'
 
     @reify
     def genre(self):
