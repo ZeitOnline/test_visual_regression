@@ -6,7 +6,7 @@ import jinja2.runtime
 
 import zeit.frontend.template
 import zeit.frontend.view_article
-from zeit.frontend.test import Browser
+from zeit.frontend.test import Browser, Raiser
 
 
 def test_error_page_renders_on_internal_server_error(monkeypatch, testserver):
@@ -25,22 +25,10 @@ def test_error_page_renders_on_internal_server_error(monkeypatch, testserver):
 
 
 def test_error_page_does_not_render_on_not_found_error(testserver):
-    browser = Browser('%s/centerpage/lifestyle' % testserver.url)
-    assert 'Dokument nicht gefunden' in browser.cssselect('h1')[0].text
-
-
-class BadClass(object):
-    @property
-    def attr_err(self):
-        raise AttributeError
-
-    @property
-    def exception(self):
-        raise Exception
-
-self = jinja2.runtime.TemplateReference(
-    jinja2.environment.Template('')
-)
+    # Sadly, we can't use our test browser here, because mechanize throws
+    # exceptions if it sees a 404.
+    resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
+    assert 'Dokument nicht gefunden' in resp.text
 
 
 @pytest.mark.parametrize('markup,assertion,kw', [
