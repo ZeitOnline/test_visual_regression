@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-import jinja2.environment
-import jinja2.runtime
+import requests
 
 import zeit.frontend.template
 import zeit.frontend.view_article
@@ -32,21 +31,6 @@ def test_error_page_does_not_render_on_not_found_error(testserver):
 
 
 @pytest.mark.parametrize('markup,assertion,kw', [
-    ('{% bad %}',
-     'Unknown tags',
-     {}),
-    ('{% if %}',
-     'Incomplete control statements',
-     {}),
-    ('{% for bad in [] %} foo {% endif %}',
-     'Inconsistent tag structure',
-     {}),
-    ('{% - if bad %} foo {% endif + %}',
-     'Misuse of whitespace control',
-     {}),
-    ('{% block good %} foo {% endblock bad %}',
-     'Miscaptioned end-tags',
-     {}),
     ('{{ bad }}',
      'Unknown variables',
      {}),
@@ -62,12 +46,12 @@ def test_error_page_does_not_render_on_not_found_error(testserver):
     ('{{ good.bad }}',
      'Accessing an unknown attribute of an object',
      {'good': object()}),
-    ('{{ good.attr_err }}',
-     'AttributeErrors hidden in a property',
-     {'good': BadClass()}),
-    ('{{ good.exception }}',
+    ('{{ good.attribute_error }}',
+     'AttributeErors hidden in a property',
+     {'good': Raiser()}),
+    ('{{ good.standard_error }}',
      'Raising generic Exceptions in a property',
-     {'good': BadClass()}),
+     {'good': Raiser()}),
     ('{{ good.bad() }}',
      'Calling an unknown method of an object',
      {'good': object()}),
@@ -133,7 +117,7 @@ def test_error_page_does_not_render_on_not_found_error(testserver):
      {}),
     ('{{ self.bad() }}',
      'Referencing unknown parent template',
-     {'self': self}),
+     {}),
     ('{{ lipsum(bad=True) }}',
      'Calling builtin function with wrong signature',
      {}),
