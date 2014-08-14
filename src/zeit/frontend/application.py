@@ -49,6 +49,10 @@ class Application(object):
         self.configure()
         return self.make_wsgi_app(global_config)
 
+    @property
+    def DEBUG(self):
+        return self.settings.get('debugtoolbar.enabled', 'false') == 'true'
+
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
@@ -95,6 +99,10 @@ class Application(object):
 
         # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
+        if not self.DEBUG:
+            config.add_view(view=zeit.frontend.view.ExceptionView,
+                            context=Exception,
+                            renderer='templates/error.html')
 
         def asset_url(request, path, **kw):
             kw['_app_url'] = join_url_path(
@@ -144,7 +152,7 @@ class Application(object):
 
         env.trim_blocks = True
 
-        if self.settings.get('debugtoolbar.enabled', 'false') == 'true':
+        if not self.DEBUG:
             # If the application is not running in debug mode: overlay the
             # jinja environment with a custom, more fault tolerant one.
             env.__class__ = zeit.frontend.template.Environment

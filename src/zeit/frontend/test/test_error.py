@@ -19,6 +19,9 @@ def test_error_page_renders_on_internal_server_error(monkeypatch, testserver):
         property(fget=fget)
     )
 
+    testserver.wsgi_app
+    __import__('pdb').set_trace()
+
     browser = Browser('%s/centerpage/lebensart' % testserver.url)
     assert 'Internal Server Error' in browser.cssselect('h1')[0].text
 

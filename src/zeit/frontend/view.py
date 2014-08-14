@@ -294,7 +294,6 @@ def health_check(request):
     return pyramid.response.Response('OK', 200)
 
 
-@view_config(context=Exception, renderer='templates/error.html')
 class ExceptionView(Base):
     def __init__(self, context, request):
         log.exception('%s: %s at %s' % (context.__class__.__name__,
