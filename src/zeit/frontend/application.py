@@ -135,25 +135,31 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
-        jinja = self.config.registry.getUtility(
+        env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
 
-        default_loader = jinja.loader
-        jinja.loader = zeit.frontend.template.PrefixLoader({
+        env.trim_blocks = True
+
+        if self.settings.get('debugtoolbar.enabled', 'false') == 'true':
+            # If the application is not running in debug mode: overlay the
+            # jinja environment with a custom, more fault tolerant one.
+            env.__class__ = zeit.frontend.template.Environment
+            env = env.overlay()
+
+        default_loader = env.loader
+        env.loader = zeit.frontend.template.PrefixLoader({
             None: default_loader,
             'dav': zeit.frontend.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
-        jinja.trim_blocks = True
-
-        Scanner(env=jinja).scan(
+        Scanner(env=env).scan(
             zeit.frontend,
             categories=('jinja',),
             ignore=self.DONT_SCAN
         )
 
-        return jinja
+        return env
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
