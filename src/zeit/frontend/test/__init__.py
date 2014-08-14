@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import exceptions
 
-from .browser import Browser  # NOQA
+from .browser import Browser
 
-__all__ = ['Browser, Raiser']
+__all__ = ['Browser', 'Raiser']
 
 
 class Raiser(object):
