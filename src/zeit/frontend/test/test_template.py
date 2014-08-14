@@ -150,10 +150,12 @@ def test_substitute_image_returns_closest_match_within_image_group(
         application, image_group_factory):
     image_group = image_group_factory(foo=(148, 102), moo=(142, 142),
                                       boo=(350, 500), meh=(90, 146))
+    # zmo-lead-upright: (320, 480)
+    # zmo-square-small: (50, 50)
     assert 'boo' in zeit.frontend.template.closest_substitute_image(
-        image_group, 'zmo-lead-upright')
+        image_group, 'zmo-lead-upright').uniqueId
     assert 'moo' in zeit.frontend.template.closest_substitute_image(
-        image_group, 'zmo-square-small', force_orientation=True)
+        image_group, 'zmo-square-small', force_orientation=True).uniqueId
 
 
 def test_jinja_env_registrator_registers_only_after_scanning(testserver):

@@ -52,7 +52,7 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
             </reference>
         </references>
         <attribute name='artbox_gallery' ns='http://namespaces.zeit.de/CMS/document'>http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa</attribute>
-        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/01/group/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00">
+        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00">
             <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
             <copyright>© Andreas Gebert/dpa</copyright>
         </image>

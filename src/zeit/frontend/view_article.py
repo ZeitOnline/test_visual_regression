@@ -154,14 +154,15 @@ class Article(zeit.frontend.view.Content):
         except TypeError:
             return
 
-    @reify
-    def sharing_img(self):
-        if self.header_img is not None:
-            return self.header_img
-        if self.header_video is not None:
-            return self.header_video
-        else:
-            return self.first_img
+    # deprecated
+    # @reify
+    # def sharing_img(self):
+    #     if self.header_img is not None:
+    #         return self.header_img
+    #     if self.header_video is not None:
+    #         return self.header_video
+    #     else:
+    #         return self.first_img
 
     def _get_author(self, index):
         try:

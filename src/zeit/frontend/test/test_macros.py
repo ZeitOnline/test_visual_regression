@@ -476,10 +476,10 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
     # test usual
-    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
-           'twitter_card_type': 'summary'}
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'image_group': 'true',
+           'twitter_card_type': 'summary_large_image'}
     request = {'host': 'test.de', 'path_info': '/myurl'}
-    twitter = ['<meta name="twitter:card" content="summary">',
+    twitter = ['<meta name="twitter:card" content="summary_large_image">',
                '<meta name="twitter:site" content="@zeitonline">',
                '<meta name="twitter:creator" content="@zeitonline">',
                '<meta name="twitter:title" content="title">',
@@ -492,30 +492,13 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="og:url" content="http://test.de/myurl">']
     image = ['<meta property="og:image" content="',
              '<link itemprop="image" rel="image_src"',
-             '<meta name="twitter:image" content="']
+             '<meta name="twitter:image:src" content="']
     lines = tpl.module.sharing_meta(obj, request).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
     for fb_meta in fb:
         assert fb_meta in output
-    for twitter_meta in twitter:
-        assert twitter_meta in output
-    for img in image:
-        assert img in output
-
-    # test video still is set as sharing img
-    obj = {'title': 'title', 'subtitle': 'subtitle',
-           'sharing_img': {'video_still': 'true'},
-           'twitter_card_type': 'summary_large_image'}
-    twitter = ['<meta name="twitter:card" content="summary_large_image">']
-    image = ['<meta property="og:image" content="',
-             '<link itemprop="image" rel="image_src"',
-             '<meta name="twitter:image" content="']
-    lines = tpl.module.sharing_meta(obj, request).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
