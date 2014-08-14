@@ -97,8 +97,6 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
 
-        # ToDo: Is this still needed. Can it be removed?
-        config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
         if not self.DEBUG:
             config.add_view(view=zeit.frontend.view.ExceptionView,
                             context=Exception,
