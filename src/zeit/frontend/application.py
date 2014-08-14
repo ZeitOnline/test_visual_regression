@@ -4,9 +4,12 @@ import os.path
 import urlparse
 import pkg_resources
 
-from grokcore.component import adapter, implementer
+from grokcore.component import adapter
+from grokcore.component import implementer
 from venusian import Scanner
+import pyramid.authorization
 import pyramid.config
+import pyramid_beaker
 import pyramid_jinja2
 import zope.app.appsetup.product
 import zope.component
@@ -24,9 +27,11 @@ from zeit.frontend.article import IShortformArticle
 from zeit.frontend.gallery import IGallery
 from zeit.frontend.gallery import IProductGallery
 import zeit.frontend
+import zeit.frontend.appinfo
 import zeit.frontend.banner
 import zeit.frontend.block
 import zeit.frontend.centerpage
+import zeit.frontend.security
 import zeit.frontend.template
 
 log = logging.getLogger(__name__)
@@ -52,12 +57,12 @@ class Application(object):
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.frontend_banner-source', ''))
-        zeit.frontend.banner.banner_list = \
-            zeit.frontend.banner.make_banner_list(banner_source)
+        zeit.frontend.banner.banner_list = (
+            zeit.frontend.banner.make_banner_list(banner_source))
         iqd_mobile_ids_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
-        zeit.frontend.banner.iqd_mobile_ids = \
-            zeit.frontend.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
+        zeit.frontend.banner.iqd_mobile_ids = (
+            zeit.frontend.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -76,7 +81,7 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
-        self.config.include("cornice")
+        self.config.include('cornice')
 
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
@@ -109,20 +114,19 @@ class Application(object):
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
 
-        zeit.frontend.template.default_teaser_images = \
-            self.settings['default_teaser_images']
+        zeit.frontend.template.default_teaser_images = (
+            self.settings['default_teaser_images'])
 
-        from pyramid.authorization import ACLAuthorizationPolicy
-        from .security import CommunityAuthenticationPolicy
-        import pyramid_beaker
-        config.include("pyramid_beaker")
+        config.include('pyramid_beaker')
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)
         config.set_session_factory(session_factory)
-        config.set_authentication_policy(CommunityAuthenticationPolicy())
-        config.set_authorization_policy(ACLAuthorizationPolicy())
-        from zeit.frontend.appinfo import assemble_app_info
-        config.add_request_method(assemble_app_info, 'app_info', reify=True)
+        config.set_authentication_policy(
+            zeit.frontend.security.CommunityAuthenticationPolicy())
+        config.set_authorization_policy(
+            pyramid.authorization.ACLAuthorizationPolicy())
+        config.add_request_method(
+            zeit.frontend.appinfo.assemble_app_info, 'app_info', reify=True)
         return config
 
     def get_repository(self, request):
@@ -256,7 +260,6 @@ factory = Application()
 
 
 class URLPrefixMiddleware(object):
-
     """Removes a path prefix from the PATH_INFO if it is present.
     We use this so that if an ``asset_prefix`` is configured, we respond
     correctly for URLs both with and without the asset_prefix -- otherwise
