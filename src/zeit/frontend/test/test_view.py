@@ -229,7 +229,8 @@ def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):
 
 
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):
-    r = requests.get(testserver.url + '/exampleimages/artikel/01/group/01.jpg')
+    r = requests.get(testserver.url +
+        '/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg')
     assert r.headers['content-type'] == 'image/jpeg'
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
 
