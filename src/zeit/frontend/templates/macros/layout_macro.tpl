@@ -234,7 +234,7 @@
     //     if(typeof nuggtg!="undefined" && nuggtg!=""){
     //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
     //     }else{
-    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });
     //     }
     // });
 
@@ -641,7 +641,7 @@
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
-        {% endif %} 
+        {% endif %}
                 <img {% if alt %}alt="{{alt}}" {% endif %}{% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
         {% if page_type == 'article' and image.href %}
             </a>

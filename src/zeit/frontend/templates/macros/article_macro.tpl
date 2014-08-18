@@ -255,7 +255,7 @@
 {%- endmacro %}
 
 {% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='article__main-image--longform') -%}
-    
+
     {% if obj.id is not defined -%}
         {% set id = obj.uniqueId|substring_from('/') %}
     {% else -%}
