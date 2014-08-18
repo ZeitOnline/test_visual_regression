@@ -35,7 +35,8 @@ def test_gallery_should_have_buttons(selenium_driver, testserver):
 
 def test_gallery_buttons_are_clickable(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    driver.get('%s/galerien/fs-desktop-schreibtisch-computer?%s'
+               % (testserver.url, "gallery=dynamic"))
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
