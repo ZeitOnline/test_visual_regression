@@ -655,17 +655,18 @@
 {% macro build_js_view( view, request ) %}
     <script>
         window.ZMO = window.ZMO || {};
-        window.ZMO.home = "{{request.asset_url('/')}}";
-        window.ZMO.view = {};
+        window.ZMO.home = '{{ request.asset_url("/") }}';
+        window.ZMO.view = {
 
-        {% for key, value in view.js_vars -%}
-            window.ZMO.view['{{ key }}'] = '{{ value|remove_break }}';
-        {%- endfor %}
+            {% for key, value in view.js_vars -%}
+                '{{ key }}': '{{ value|remove_break }}',
+            {% endfor -%}
 
-        /* use to get view values savely */
-        window.ZMO.view.hide_undefined = function(key){
-            var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
-            return( val )
-        }
+            {# use to get view values savely #}
+
+            get: function( key ) {
+                return this[key] ? this[key] : '';
+            }
+        };
     </script>
 {% endmacro %}
