@@ -42,6 +42,8 @@ class Base(object):
         self.context = context
         self.request = request
         self.request.response.cache_expires(300)
+        self.request.response.headers.add(
+            'X-ZMOVersion', self.request.registry.settings.zmo_version)
 
     def teaser_get_commentcount(self, uniqueId):
         try:

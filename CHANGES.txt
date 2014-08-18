@@ -7,7 +7,11 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.12.2 (unreleased)
 -------------------
 
+- ZMO-878: Show twitter card for galleries
+
 - ZMO-811: Choose appropriate social sharing image
+
+- ZMO-885: Add ZMO-Version to HTTP Header
 
 
 0.12.1 (2014-08-12)
@@ -21,13 +25,13 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.12 (2014-08-11)
 -----------------
 
+- HOTFIX: Remove unnecessary div tag from gallery meta
+
 - ZMO-870: Handle webkit bug measuring inline gallery height
 
 - ZMO-871: Scan for decorated Jinja filters, tests and globals
 
 - ZMO-766: Make comment count in teasers clickable
-
-- HOTFIX: Remove unnecessary div tag from gallery meta
 
 - ZMO-877: Make inline galleries work in IE11 again
 
@@ -116,7 +120,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.9.1 (2014-07-17)
 ------------------
 
-- HOTFIX: Fix video display in videobackground on cached video (ff issue)
+- HOTFIX: Fix video display in videobackground on cached video (FF issue)
 
 - HOTFIX: Adjust longform article head wrapper height
 
@@ -126,9 +130,9 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.9 (2014-07-17)
 ----------------
 
-- ZMO-848: Fix chapter box within longform (ff issue)
-
 - HOTFIX: Prevent crashing header images, when being depublished
+
+- ZMO-848: Fix chapter box within longform (FF issue)
 
 - ZMO-813: Unify gallery classes and support gallery image ratios.
 
