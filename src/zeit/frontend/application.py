@@ -76,7 +76,9 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         pkg = pkg_resources.get_distribution('zeit.frontend')
-        self.settings['version_hash'] = base64.b16encode(pkg.version).lower()
+        pkg_version = pkg.version
+        self.settings['zmo_version'] = pkg_version
+        self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
