@@ -1,1 +1,1 @@
-var $blocked = [''];
+var $blocked = [];
