@@ -7,6 +7,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.12.2 (unreleased)
 -------------------
 
+- ZMO 895: Add URL parameter debug flag to force dynamic galleries
+
 - ZMO-885: Add ZMO-Version to HTTP Header
 
 
