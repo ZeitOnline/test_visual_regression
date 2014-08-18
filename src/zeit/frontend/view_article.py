@@ -145,15 +145,6 @@ class Article(zeit.frontend.view.Content):
     def header_elem(self):
         return self.header_video or self.header_img
 
-    @reify
-    def image_group(self):
-        try:
-            group = zeit.content.image.interfaces.IImages(self.context).image
-            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
-                return group
-        except TypeError:
-            return
-
     # deprecated
     # @reify
     # def sharing_img(self):
@@ -210,12 +201,6 @@ class Article(zeit.frontend.view.Content):
     def authorsList(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
-
-    @reify
-    def twitter_card_type(self):
-        # TODO: use reasonable value depending on content type or template
-        # summary_large_image, photo, gallery
-        return 'summary_large_image'
 
     @reify
     def genre(self):
