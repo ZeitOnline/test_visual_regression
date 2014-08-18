@@ -360,6 +360,7 @@ class HTTPLoader(jinja2.BaseLoader):
 
     def get_source(self, environment, template):
         if not self.url:
+            # XXX: Why doesn't this throw an exception?
             return (
                 'ERROR: load_template_from_dav_url not configured',
                 template, lambda: True)

@@ -150,18 +150,18 @@ class Application(object):
 
         env.trim_blocks = True
 
-        if not self.DEBUG:
-            # If the application is not running in debug mode: overlay the
-            # jinja environment with a custom, more fault tolerant one.
-            env.__class__ = zeit.frontend.template.Environment
-            env = env.overlay()
-
         default_loader = env.loader
         env.loader = zeit.frontend.template.PrefixLoader({
             None: default_loader,
             'dav': zeit.frontend.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
+
+        if not self.DEBUG:
+            # If the application is not running in debug mode: overlay the
+            # jinja environment with a custom, more fault tolerant one.
+            env.__class__ = zeit.frontend.template.Environment
+            env = env.overlay()
 
         Scanner(env=env).scan(
             zeit.frontend,
