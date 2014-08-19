@@ -1,11 +1,12 @@
 from pyramid.view import view_config
-from zeit.frontend.template import translate_url
 import pytz
 import zc.iso8601.parse
+
 import zeit.content.image.interfaces
-import zeit.frontend.view
 import zeit.wysiwyg.html
 
+import zeit.frontend.template
+import zeit.frontend.view_image
 
 # Monkey-patches to zeit.wysiwyg to remove Zope-isms.
 # These only concern the direction XML->HTML, since that's the one we need.
@@ -18,7 +19,7 @@ zeit.wysiwyg.html.ConversionStep.__init__ = init_without_request
 
 
 def pyramid_url(self, obj):
-    return translate_url(None, obj.uniqueId)
+    return zeit.frontend.template.translate_url(None, obj.uniqueId)
 zeit.wysiwyg.html.ConversionStep.url = pyramid_url
 
 
@@ -37,7 +38,7 @@ zeit.wysiwyg.html.ConversionStep.datetime_to_html = datetime_to_html
 
 
 @view_config(context=zeit.content.image.interfaces.IImage, name='@@raw')
-class ImageView(zeit.frontend.view.Image):
+class ImageView(zeit.frontend.view_image.Image):
     """Since zeit.wysiwyg.html.ImageStep.to_html insists on creating
     an URL that ends in '/@@raw', we need to oblige.
 
