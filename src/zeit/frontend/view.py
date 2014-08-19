@@ -9,7 +9,7 @@ from pyramid.decorator import reify
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
 import pyramid.response
-import zope.component
+import requests
 
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
@@ -282,12 +282,11 @@ class service_unavailable(object):
 
 
 @notfound_view_config(request_method='GET')
-def notfound_get(request):
+def not_found(request):
     try:
-        request = urllib2.Request('http://www.zeit.de/error/404')
-        response = urllib2.urlopen(request, timeout=4)
-        html = response.read()
-        return pyramid.response.Response(html, status='404 Not Found')
-    except urllib2.URLError:
-        return pyramid.response.Response('Status 404:Dokument nicht gefunden.',
-                                         status='404 Not Found')
+        body = requests.get('http://www.zeit.de/error/404',
+                            timeout=4.0).text
+    except requests.exceptions.RequestException:
+        body = 'Status 404: Dokument nicht gefunden.'
+    finally:
+        return pyramid.response.Response(body, 404)
