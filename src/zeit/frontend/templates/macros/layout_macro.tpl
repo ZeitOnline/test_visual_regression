@@ -656,6 +656,7 @@
     <script>
         window.ZMO = window.ZMO || {};
         window.ZMO.home = '{{ request.asset_url("/") }}';
+        window.ZMO.scriptsURL = '{{ request.app_info.scripts_url|hide_none }}';
         window.ZMO.view = {
 
             {% for key, value in view.js_vars -%}
