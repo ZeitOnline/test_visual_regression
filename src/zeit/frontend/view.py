@@ -248,6 +248,13 @@ class Content(Base):
             l.append((self.title, ''))
         return l
 
+    @reify
+    def leadtime(self):
+        try:
+            return zeit.content.cp.interfaces.ILeadTime(self.context)
+        except TypeError:
+            return
+
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(Base):

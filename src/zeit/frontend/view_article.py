@@ -12,7 +12,6 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
 import zeit.frontend.article
@@ -43,13 +42,6 @@ class Article(zeit.frontend.view.Content):
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
-
-    @reify
-    def leadtime(self):
-        try:
-            return zeit.content.cp.interfaces.ILeadTime(self.context)
-        except TypeError:
-            return
 
     @reify
     def template(self):
