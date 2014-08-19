@@ -1,36 +1,30 @@
 # -*- coding: utf-8 -*-
-
 import pytest
 import requests
 
+from zeit.frontend.test import Raiser, raise_exc
+from zeit.frontend.test.conftest import testserver as server
+from zeit.frontend.view_centerpage import Centerpage
 import zeit.frontend.template
-import zeit.frontend.view_article
-from zeit.frontend.test import Browser, Raiser
 
 
-def test_error_page_renders_on_internal_server_error(monkeypatch, testserver):
-
-    def fget(self):
-        raise Exception
-
-    monkeypatch.setattr(
-        zeit.frontend.view_centerpage.Centerpage,
-        'is_hp',
-        property(fget=fget)
-    )
-
-    testserver.wsgi_app
-    __import__('pdb').set_trace()
-
-    browser = Browser('%s/centerpage/lebensart' % testserver.url)
-    assert 'Internal Server Error' in browser.cssselect('h1')[0].text
-
-
-def test_error_page_does_not_render_on_not_found_error(testserver):
-    # Sadly, we can't use our test browser here, because mechanize throws
-    # exceptions if it sees a 404.
+def test_url_path_not_found_renders_404(testserver):
     resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
-    assert 'Dokument nicht gefunden' in resp.text
+    assert u'Dokument nicht gefunden' in resp.text
+
+
+def test_uncaught_exception_renders_500(app_settings, monkeypatch, request):
+    app_settings['debug.show_exceptions'] = ''
+    application = zeit.frontend.application.Application()
+    factory = pytest.fixture(scope='function')(server)
+
+    testserver = factory(application({}, **app_settings), request)
+
+    monkeypatch.setattr(Centerpage, 'title',
+                        property(lambda self: raise_exc(Exception)))
+
+    resp = requests.get('%s/centerpage/lebensart' % testserver.url)
+    assert u'Dokument zurzeit nicht verfügbar' in resp.text
 
 
 @pytest.mark.parametrize('markup,assertion,kw', [
