@@ -49,10 +49,6 @@ class Application(object):
         self.configure()
         return self.make_wsgi_app(global_config)
 
-    @property
-    def DEBUG(self):
-        return self.settings.get('debugtoolbar.enabled', 'false') == 'true'
-
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
@@ -99,10 +95,9 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.frontend:img/')
         config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
 
-        if not self.DEBUG:
-            config.add_view(view=zeit.frontend.view.ExceptionView,
-                            context=Exception,
-                            renderer='templates/error.html')
+        if not self.settings.get('debug.show_exceptions'):
+            config.add_view(view=zeit.frontend.view.service_unavailable,
+                            context=Exception)
 
         def asset_url(request, path, **kw):
             kw['_app_url'] = join_url_path(
@@ -159,7 +154,7 @@ class Application(object):
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
-        if not self.DEBUG:
+        if not self.settings.get('debug.propagate_jinja_errors'):
             # If the application is not running in debug mode: overlay the
             # jinja environment with a custom, more fault tolerant one.
             env.__class__ = zeit.frontend.template.Environment
