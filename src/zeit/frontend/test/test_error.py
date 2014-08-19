@@ -3,7 +3,6 @@ import pytest
 import requests
 
 from zeit.frontend.test import Raiser, raise_exc
-from zeit.frontend.test.conftest import testserver as server
 from zeit.frontend.view_centerpage import Centerpage
 import zeit.frontend.template
 
@@ -13,17 +12,11 @@ def test_url_path_not_found_renders_404(testserver):
     assert u'Dokument nicht gefunden' in resp.text
 
 
-def test_uncaught_exception_renders_500(app_settings, monkeypatch, request):
-    app_settings['debug.show_exceptions'] = ''
-    application = zeit.frontend.application.Application()
-    factory = pytest.fixture(scope='function')(server)
-
-    testserver = factory(application({}, **app_settings), request)
-
+def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
     monkeypatch.setattr(Centerpage, 'title',
                         property(lambda self: raise_exc(Exception)))
 
-    resp = requests.get('%s/centerpage/lebensart' % testserver.url)
+    resp = requests.get('%s/centerpage/lebensart' % debug_testserver.url)
     assert u'Dokument zurzeit nicht verfügbar' in resp.text
 
 

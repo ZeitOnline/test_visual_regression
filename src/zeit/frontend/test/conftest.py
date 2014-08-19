@@ -105,6 +105,14 @@ def application():
     return ImageTransformationMiddleware(app, secret='time')
 
 
+@pytest.fixture(scope='session')
+def debug_application():
+    app_settings = settings.copy()
+    app_settings['debug.show_exceptions'] = ''
+    app = zeit.frontend.application.Application()({}, **app_settings)
+    return ImageTransformationMiddleware(app, secret='time')
+
+
 @pytest.fixture
 def config(request):
     config = setUp(settings=settings)
@@ -134,11 +142,20 @@ def linkreach():
 @pytest.fixture(scope='session')
 def testserver(application, request):
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6543  # XXX Why not use the default (random) port?
+    server.port = 6543
     server.wsgi_app = application
     server.setUp()
-    # Convenience / compatibility with pytest-localserver which was used here
-    # previously.
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
+    return server
+
+
+@pytest.fixture(scope='session')
+def debug_testserver(debug_application, request):
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6547
+    server.wsgi_app = debug_application
+    server.setUp()
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server
