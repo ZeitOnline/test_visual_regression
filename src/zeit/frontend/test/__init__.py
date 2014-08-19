@@ -3,7 +3,7 @@ import exceptions
 
 from .browser import Browser
 
-__all__ = ['Browser', 'Raiser']
+__all__ = ['Browser', 'Raiser', 'raise_exc']
 
 
 class Raiser(object):
@@ -20,3 +20,9 @@ class Raiser(object):
         if not hasattr(exceptions, cls):
             return super(Raiser, self).__getattr__(name)
         raise getattr(exceptions, cls)()
+
+
+def raise_exc(exc, *args):
+    """Helper function for raising exceptions without using the builtin
+    `raise` statement."""
+    raise exc(*args)
