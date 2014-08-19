@@ -128,6 +128,7 @@ def format_date_ago(dt, precision=2, past_tense='vor {}',
 
 @register_filter
 def obj_debug(value):
+    try:
         res = []
         for k in dir(value):
             res.append('%r : %r;' % (k, getattr(value, k)))
