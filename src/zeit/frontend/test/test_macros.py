@@ -719,11 +719,14 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'diuqilon': True,
               'min_width': 768}
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
-             'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
-             'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
+             'adj/zeitonline/zeitmz/centerpage;dcopt=ist;tile=1;\' + n_pbt ' \
+             '+ \';sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\' + iqd_TestKW ' \
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type=' \
              '"text/javascript"><\/script>\');'
-    lines = tpl.module.adplace(banner).splitlines()
+    view = mock.Mock()
+    view.is_top_of_mind = False
+    view.banner_channel = 'zeitmz/centerpage'
+    lines = tpl.module.adplace(banner, view).splitlines()
     output = ""
     for line in lines:
         output += line.strip()

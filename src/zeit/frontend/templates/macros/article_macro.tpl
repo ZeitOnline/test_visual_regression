@@ -1,7 +1,7 @@
 {% import 'templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
-    {{lama.adplace(item, view.banner_channel)}}
+    {{lama.adplace(item, view)}}
     {{lama.adplace_middle_mobile(item)}}
 {%- endmacro %}
 
