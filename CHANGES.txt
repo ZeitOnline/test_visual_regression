@@ -11,6 +11,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-811: Choose appropriate social sharing image
 
+- ZMO-895: Add URL parameter debug flag to force dynamic galleries
+
 - ZMO-885: Add ZMO-Version to HTTP Header
 
 
