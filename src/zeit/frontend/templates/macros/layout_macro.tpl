@@ -234,7 +234,7 @@
     //     if(typeof nuggtg!="undefined" && nuggtg!=""){
     //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
     //     }else{
-    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });
     //     }
     // });
 
@@ -641,7 +641,7 @@
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
-        {% endif %} 
+        {% endif %}
                 <img {% if alt %}alt="{{alt}}" {% endif %}{% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
         {% if page_type == 'article' and image.href %}
             </a>
@@ -655,17 +655,18 @@
 {% macro build_js_view( view, request ) %}
     <script>
         window.ZMO = window.ZMO || {};
-        window.ZMO.home = "{{request.asset_url('/')}}";
-        window.ZMO.view = {};
+        window.ZMO.home = '{{ request.asset_url("/") }}';
+        window.ZMO.view = {
 
-        {% for key, value in view.js_vars -%}
-            window.ZMO.view['{{ key }}'] = '{{ value|remove_break }}';
-        {%- endfor %}
+            {% for key, value in view.js_vars -%}
+                '{{ key }}': '{{ value|remove_break }}',
+            {% endfor -%}
 
-        /* use to get view values savely */
-        window.ZMO.view.hide_undefined = function(key){
-            var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
-            return( val )
-        }
+            {# use to get view values savely #}
+
+            get: function( key ) {
+                return this[key] ? this[key] : '';
+            }
+        };
     </script>
 {% endmacro %}
