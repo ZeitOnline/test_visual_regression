@@ -1,27 +1,16 @@
 # -*- coding: utf-8 -*-
-from lxml import etree
-from os.path import abspath, dirname, join
-from pyramid.testing import setUp, tearDown, DummyRequest
-from repoze.bitblt.processor import ImageTransformationMiddleware
-from selenium import webdriver
-from webtest import TestApp as TestAppBase
-from zeit.frontend.comments import path_of_article, _place_answers_under_parent
-import gocept.httpserverlayer.wsgi
 import pkg_resources
 import pytest
+
+from lxml import etree
+from pyramid.testing import setUp, tearDown, DummyRequest
+from repoze.bitblt.processor import ImageTransformationMiddleware
+import gocept.httpserverlayer.wsgi
+import selenium.webdriver
+import webtest
+
 import zeit.frontend.application
-
-
-def test_asset_path(*parts):
-    """ Return full file-system path for given test asset path. """
-    from zeit import frontend
-    return abspath(join(dirname(frontend.__file__), 'data', *parts))
-
-
-def test_asset(path):
-    """ Return file-object for given test asset path. """
-    return open(pkg_resources.resource_filename(
-        'zeit.frontend', 'data' + path), 'rb')
+import zeit.frontend.comments
 
 
 settings = {
@@ -86,26 +75,28 @@ settings = {
         'egg://zeit.frontend/data/config/gallery-types.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
+
+    'debug.show_exceptions': 'True',
+    'debug.propagate_jinja_errors': 'True'
 }
 
 
 browsers = {
-    'firefox': webdriver.Firefox
-    # 'phantomjs': webdriver.PhantomJS,
+    'firefox': selenium.webdriver.Firefox
 }
-
-
-@pytest.fixture(scope="module")
-def jinja2_env():
-    app = zeit.frontend.application.Application()
-    app.settings = zeit.frontend.test.conftest.settings
-    app.configure_pyramid()
-    return app.configure_jinja()
 
 
 @pytest.fixture
 def app_settings():
     return settings.copy()
+
+
+@pytest.fixture(scope='module')
+def jinja2_env():
+    app = zeit.frontend.application.Application()
+    app.settings = settings.copy()
+    app.configure_pyramid()
+    return app.configure_jinja()
 
 
 @pytest.fixture(scope='session')
@@ -178,43 +169,42 @@ def http_testserver(request):
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
     if request.param == 'firefox':
-        profile = webdriver.FirefoxProfile()
+        profile = selenium.webdriver.FirefoxProfile()
         profile.set_preference('network.http.use-cache', False)
-        b = browsers[request.param](firefox_profile=profile)
+        browser = browsers[request.param](firefox_profile=profile)
     else:
-        b = browsers[request.param]()
+        browser = browsers[request.param]()
 
-    request.addfinalizer(lambda *args: b.quit())
-    return b
+    request.addfinalizer(lambda *args: browser.quit())
+    return browser
 
 
 @pytest.fixture
 def asset():
-    return test_asset
+    """Return file-object for given test asset path."""
+    return lambda path: open(pkg_resources.resource_filename(
+        'zeit.frontend', 'data' + path), 'rb')
 
 
 @pytest.fixture
 def browser(application):
-    """ Returns an instance of `webtest.TestApp`. """
-    extra_environ = dict(HTTP_HOST='example.com')
-    return TestApp(application, extra_environ=extra_environ)
+    """Returns an instance of `webtest.TestApp`."""
+    class TestApp(webtest.TestApp):
+        def get_json(self, url, params=None, headers=None, *args, **kw):
+            if headers is None:
+                headers = {}
+            headers['Accept'] = 'application/json'
+            return self.get(url, params, headers, *args, **kw)
+
+    return TestApp(application, extra_environ={'HTTP_HOST': 'example.com'})
 
 
 @pytest.fixture
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
-        response = etree.parse(
-            '%s%s' % (self.entry_point, path_of_article(unique_id)))
-        return _place_answers_under_parent(response)
+        path = zeit.frontend.comments.path_of_article(unique_id)
+        response = etree.parse(''.join([self.entry_point, path]))
+        return zeit.frontend.comments._place_answers_under_parent(response)
 
     monkeypatch.setattr(
         zeit.frontend.comments.Agatho, 'collection_get', collection_get)
-
-
-class TestApp(TestAppBase):
-
-    def get_json(self, url, params=None, headers=None, *args, **kw):
-        if headers is None:
-            headers = {}
-        headers['Accept'] = 'application/json'
-        return self.get(url, params, headers, *args, **kw)
