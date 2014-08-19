@@ -14,6 +14,7 @@ def assemble_app_info(request):
     else:
         result['authenticated'] = False
     result['user'] = request.session.get(ZMO_USER_KEY, dict())
+    result['scripts_url'] = request.registry.settings.scripts_url
     result['community_host'] = request.registry.settings.community_host + '/'
     result['community_paths'] = {'login': 'user/login',
                                  'register': 'user/register',

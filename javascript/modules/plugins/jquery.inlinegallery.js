@@ -49,11 +49,15 @@
         }, defaults);
 
         var singleGallery = null,
-
             ressort = window.ZMO.view.ressort,
             viewType = window.ZMO.view.type,
+            galleryType = /[\\?&]gallery=([^&#]*)/.exec( location.search ),
             query = /slide=(\d+)/.exec( location.search.slice( 1 ) ),
             start;
+
+        if ( galleryType ) {
+            galleryType = galleryType[1];
+        }
 
         if ( query ) {
             if ( ( start = parseInt( query[1], 10 ) ) > 1 ) {
@@ -61,34 +65,36 @@
             }
         }
 
-        $.ajax({
-            url: 'http://scripts.zeit.de/static/js/gallery.blocked.ressorts.js',
-            dataType: 'script',
-            success: function() {
-                var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
-                    isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
+        if (galleryType !== 'dynamic') {
+            $.ajax({
+                url: window.ZMO.scriptsURL + '/gallery.blocked.ressorts.js',
+                dataType: 'script',
+                success: function() {
+                    var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
+                        isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
 
-                if ( singleGallery && isStatic ) {
-                    singleGallery.goToSlide = function( slideIndex, direction ) {
-                        var total = singleGallery.getSlideCount(),
-                            next = ( total + slideIndex ) % total,
-                            search = '',
-                            prefix = '?';
+                    if ( singleGallery && isStatic ) {
+                        singleGallery.goToSlide = function( slideIndex, direction ) {
+                            var total = singleGallery.getSlideCount(),
+                                next = ( total + slideIndex ) % total,
+                                search = '',
+                                prefix = '?';
 
-                        if ( queryString ) {
-                            search = '?' + queryString;
-                            prefix = '&';
-                        }
+                            if ( queryString ) {
+                                search = '?' + queryString;
+                                prefix = '&';
+                            }
 
-                        if ( next ) {
-                            search += prefix + 'slide=' + ( next + 1 );
-                        }
+                            if ( next ) {
+                                search += prefix + 'slide=' + ( next + 1 );
+                            }
 
-                        location.search = search;
-                    };
+                            location.search = search;
+                        };
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // check if any part of the element is inside viewport
         var isElementInViewport = function( el ) {

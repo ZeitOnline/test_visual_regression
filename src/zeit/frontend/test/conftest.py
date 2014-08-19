@@ -21,6 +21,8 @@ settings = {
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
 
+    'scripts_url': '/js/static',
+
     'community_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.frontend', 'data/comments'),
     'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
