@@ -7,6 +7,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.12.2 (unreleased)
 -------------------
 
+- ZMO-876: Use appropriate layout for sharing of portrait images
+
 - ZMO-878: Show twitter card for galleries
 
 - ZMO-811: Choose appropriate social sharing image
