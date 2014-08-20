@@ -250,6 +250,21 @@ class Content(Base):
             l.append((self.title, ''))
         return l
 
+    @reify
+    def twitter_card_type(self):
+        # TODO: use reasonable value depending on content type or template
+        # summary_large_image, photo, gallery
+        return 'summary_large_image'
+
+    @reify
+    def image_group(self):
+        try:
+            group = zeit.content.image.interfaces.IImages(self.context).image
+            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
+                return group
+        except TypeError:
+            return
+
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(Base):

@@ -28,25 +28,23 @@ def test_IPages_contains_blocks(application):
 
 
 def test_article_has_valid_twitter_meta_tags(testserver):
-    browser = Browser('%s/artikel/03' % testserver.url)
-    assert '<meta name="twitter:card" content="summary">' in browser.contents
+    browser = Browser('%s/artikel/01' % testserver.url)
+    assert '<meta name="twitter:card" content="summary_large_image">' in browser.contents
     assert '<meta name="twitter:site"'\
         ' content="@zeitonline">' in browser.contents
     assert '<meta name="twitter:creator"'\
         ' content="@zeitonline">' in browser.contents
     assert '<meta name="twitter:title"'\
-        ' content="Der Chianti hat eine'\
-        ' zweite Chance verdient">' in browser.contents
+        ' content="Mei, is des traurig!">' in browser.contents
     assert '<meta name="twitter:description"'\
-        ' content="Erst Heilsbringer, dann Massenware:'\
-        ' Der Chianti ist tief gefallen. Doch engagierte Winzer'\
-        ' retten dem Wein in der Bastflasche die Ehre. ">' in browser.contents
-    assert '<meta class="scaled-image"'\
-        ' name="twitter:image"' in browser.contents
+        ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
+        ' Was erzählt uns das über die Gentrifizierung?'\
+        ' Ein Erklärungsversuch.">' in browser.contents
+    assert '<meta name="twitter:image:src"' in browser.contents
 
 
 def test_article_has_valid_facebook_meta_tags(testserver):
-    browser = Browser('%s/artikel/03' % testserver.url)
+    browser = Browser('%s/artikel/01' % testserver.url)
     assert '<meta property="og:site_name" '\
         'content="ZEIT ONLINE">' in browser.contents
     assert '<meta property="fb:admins"'\
@@ -54,13 +52,12 @@ def test_article_has_valid_facebook_meta_tags(testserver):
     assert '<meta property="og:type"'\
         ' content="article">' in browser.contents
     assert '<meta property="og:title"'\
-        ' content="Der Chianti hat eine'\
-        ' zweite Chance verdient">' in browser.contents
+        ' content="Mei, is des traurig!">' in browser.contents
     assert '<meta property="og:description"'\
-        ' content="Erst Heilsbringer, dann Massenware:'\
-        ' Der Chianti ist tief gefallen. Doch engagierte Winzer'\
-        ' retten dem Wein in der Bastflasche die Ehre. ">' in browser.contents
-    assert '<meta property="og:image" class="scaled-image"' in browser.contents
+        ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
+        ' Was erzählt uns das über die Gentrifizierung?'\
+        ' Ein Erklärungsversuch.">' in browser.contents
+    assert '<meta property="og:image" ' in browser.contents
 
 
 def test_all_tracking_pixel_are_send(selenium_driver, testserver):

@@ -235,7 +235,8 @@ def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):
 
 
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):
-    r = requests.get(testserver.url + '/exampleimages/artikel/01/group/01.jpg')
+    r = requests.get(testserver.url +
+        '/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg')
     assert r.headers['content-type'] == 'image/jpeg'
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
 
@@ -470,31 +471,34 @@ def test_article03_has_empty_source(testserver):
     assert article_view.source is None
 
 
-def test_article01__has_correct_twitter_card_type(testserver):
+def test_article_has_correct_twitter_card_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.twitter_card_type == 'summary'
+    assert article_view.twitter_card_type == 'summary_large_image'
 
 
-def test_article05_has_correct_twitter_card_type(testserver):
+def test_longform_has_correct_twitter_card_type(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
-def test_article01_has_correct_sharing_img_src(testserver):
+def test_article_has_correct_image_group(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.sharing_img.src == (
-        'http://xml.zeit.de/exampleimages/artikel/01/group/01.jpg')
+    assert article_view.image_group.uniqueId == \
+        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube'
 
 
-def test_article06_has_correct_sharing_img_video_still(testserver):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/06')
+def test_article_has_correct_sharing_image(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.frontend.view_article.Article(context, mock.Mock())
-    assert article_view.sharing_img.video_still == (
-        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/'
-        '201401/3097/18140073001_3094729885001_7x.jpg')
+    assert zeit.frontend.template.closest_substitute_image(
+        article_view.image_group, 'og-image').uniqueId == \
+        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg'
+    assert zeit.frontend.template.closest_substitute_image(
+        article_view.image_group, 'twitter-image-large').uniqueId == \
+        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg'
 
 
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
