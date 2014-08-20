@@ -194,18 +194,15 @@
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
     <meta property="og:url" content="{{obj.article_url or 'http://' + request.host + request.path_info}}">
-
-    {% if obj.sharing_img %}
-        {% if obj.sharing_img.video_still %}
-            <meta property="og:image" content="{{obj.sharing_img.video_still}}">
-            <link itemprop="image" rel="image_src" href="{{obj.sharing_img.video_still}}">
-            <meta name="twitter:image" content="{{obj.sharing_img.video_still}}">
-        {% else %}
-            <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
-            <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-            <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
-        {% endif %}
-    {% endif %}
+    {% if obj.image_group -%}
+        <meta property="og:image" content="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
+        <link itemprop="image" rel="image_src" href="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
+        {% if obj.twitter_card_type == 'summary' -%}
+            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-small') }}">
+        {% else -%}
+            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-large') }}">
+        {% endif -%}
+    {% endif -%}
 {%- endmacro %}
 
 {% macro iqd_init() -%}
@@ -658,17 +655,19 @@
 {% macro build_js_view( view, request ) %}
     <script>
         window.ZMO = window.ZMO || {};
-        window.ZMO.home = "{{request.asset_url('/')}}";
-        window.ZMO.view = {};
+        window.ZMO.home = '{{ request.asset_url("/") }}';
+        window.ZMO.scriptsURL = '{{ request.app_info.scripts_url|hide_none }}';
+        window.ZMO.view = {
 
-        {% for key, value in view.js_vars -%}
-            window.ZMO.view['{{ key }}'] = '{{ value|remove_break }}';
-        {%- endfor %}
+            {% for key, value in view.js_vars -%}
+                '{{ key }}': '{{ value|remove_break }}',
+            {% endfor -%}
 
-        /* use to get view values savely */
-        window.ZMO.view.hide_undefined = function(key){
-            var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
-            return( val )
-        }
+            {# use to get view values savely #}
+
+            get: function( key ) {
+                return this[key] ? this[key] : '';
+            }
+        };
     </script>
 {% endmacro %}

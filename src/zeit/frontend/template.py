@@ -6,9 +6,11 @@ import mimetypes
 import pkg_resources
 import re
 import time
+import urllib2
 import urlparse
 
 from babel.dates import format_datetime
+from lxml import objectify
 from repoze.bitblt.transform import compute_signature
 import jinja2
 import pyramid.threadlocal
@@ -22,7 +24,10 @@ import zeit.content.link.interfaces
 
 
 log = logging.getLogger(__name__)
-default_teaser_images = None  # Set during startup through application.py
+
+# Set during startup through application.py
+default_teaser_images = None
+image_scales = None
 
 
 def JinjaEnvRegistrator(env_attr):
@@ -209,6 +214,9 @@ default_images_sizes = {
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
     'zmo-card-picture': (320, 480),
+    'og-image': (600, 315),
+    'twitter-image_small': (120, 120),  # summary
+    'twitter-image-large': (560, 300),  # summary_large_image, photo
 }
 
 
@@ -239,6 +247,86 @@ def default_image_url(image,
         return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
     except:
         log.debug('Cannot produce a default URL for %s', image)
+
+
+@register_filter
+def sharing_image_url(image_group,
+                      image_pattern):
+    sharing_image = closest_substitute_image(image_group, image_pattern)
+
+    if not sharing_image:
+        return
+
+    return default_image_url(sharing_image, image_pattern)
+
+
+def get_image_scales(scale_source):
+    def to_int(value):
+        return int(re.sub('[^0-9]', '', '0' + str(value)))
+
+    if not scale_source:
+        return
+    try:
+        fileobject = urllib2.urlopen(scale_source)
+    except urllib2.URLError:
+        return
+    for scale in objectify.fromstring(fileobject.read()).iter():
+        name = scale.attrib.get('name')
+        width = to_int(scale.attrib.get('width'))
+        height = to_int(scale.attrib.get('height'))
+        yield name, (width, height)
+
+
+@register_filter
+def closest_substitute_image(image_group,
+                             image_pattern,
+                             force_orientation=False):
+    """Returns the image from an image group, that most closely matches the
+    target image pattern. Larger resolutions are always favored over smaller
+    ones and the image orientation matching may be enforced.
+
+    Usage as jinja filter:
+
+        {{ my_image_group|closest_substitute_image('my-desired-pattern') }}
+
+    :param image_group: Image Group instance that provides
+                        zeit.content.image.interfaces.IImageGroup
+    :param image_pattern: String representation of the target pattern ID.
+    :param force_orientation: Boolean wether orientation of substitute image
+                              must match that of target pattern.
+    :returns: Unique ID of most suitable substitute image.
+    """
+
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
+        return
+    elif image_pattern in image_group:
+        return image_group.get(image_pattern)
+
+    # Determine the image size correlating to the provided pattern.
+    s_size = (image_scales.get(image_pattern) or
+              default_images_sizes.get(image_pattern))
+
+    if not s_size:
+        return
+
+    orientation = lambda x, y: (x > y) << 1 | (x < y)  # Binary hashing
+
+    # Aggregate a list of images from the image group with a target separator.
+    candidates = [(image_pattern, s_size)]
+    for name, img in image_group.items():
+        size = img.getImageSize()
+        if not force_orientation or orientation(*size) == orientation(*s_size):
+            candidates.append((name, size))
+
+    if len(candidates) == 1:
+        return
+
+    candidates = sorted(candidates, key=lambda i: i[1][0] * i[1][1])
+    idx = candidates.index((image_pattern, s_size))
+    candidates.pop(idx)
+
+    # Select the candidate that is preferably one size larger than the target.
+    return image_group.get(candidates[:idx + 1][-1][0])
 
 
 @register_global

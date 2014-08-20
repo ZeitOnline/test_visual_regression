@@ -67,7 +67,9 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         pkg = pkg_resources.get_distribution('zeit.frontend')
-        self.settings['version_hash'] = base64.b16encode(pkg.version).lower()
+        pkg_version = pkg.version
+        self.settings['zmo_version'] = pkg_version
+        self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
@@ -111,6 +113,10 @@ class Application(object):
 
         zeit.frontend.template.default_teaser_images = \
             self.settings['default_teaser_images']
+
+        zeit.frontend.template.image_scales = dict(
+            zeit.frontend.template.get_image_scales(
+                self.settings['vivi_zeit.frontend_image-scales']))
 
         from pyramid.authorization import ACLAuthorizationPolicy
         from .security import CommunityAuthenticationPolicy

@@ -43,6 +43,8 @@ class Base(object):
         self.context = context
         self.request = request
         self.request.response.cache_expires(300)
+        self.request.response.headers.add(
+            'X-ZMOVersion', self.request.registry.settings.zmo_version)
 
     def teaser_get_commentcount(self, uniqueId):
         try:
@@ -263,7 +265,8 @@ class Content(Base):
             if self.leadtime.start.date() == today:
                 return True
             # start = yesterday and no end
-            elif self.leadtime.start.date() == yesterday and not self.leadtime.end:
+            elif (self.leadtime.start.date() == yesterday
+                  and not self.leadtime.end):
                 return True
         if self.leadtime.end:
             # end = today
@@ -275,6 +278,20 @@ class Content(Base):
     def leadtime(self):
         try:
             return zeit.content.cp.interfaces.ILeadTime(self.context)
+        except TypeError:
+            return
+
+    def twitter_card_type(self):
+        # TODO: use reasonable value depending on content type or template
+        # summary_large_image, photo, gallery
+        return 'summary_large_image'
+
+    @reify
+    def image_group(self):
+        try:
+            group = zeit.content.image.interfaces.IImages(self.context).image
+            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
+                return group
         except TypeError:
             return
 
