@@ -1,8 +1,8 @@
 Change log for zeit.frontend
 ============================
 
-0.12.2 (unreleased)
--------------------
+0.13 (2014-08-20)
+-----------------
 
 - ZMO-876: Use appropriate layout for sharing of portrait images
 
