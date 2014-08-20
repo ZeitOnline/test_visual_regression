@@ -11,6 +11,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 
 - ZMO-885: Add ZMO-Version to HTTP Header
 
+- FIX: Patch reify decorator to deliver accurate traceback
+
 
 0.12.1 (2014-08-12)
 -------------------
