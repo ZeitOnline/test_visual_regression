@@ -7,7 +7,7 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 0.12.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZMO-509: implement photocluster
 
 
 0.12.1 (2014-08-12)

@@ -253,6 +253,18 @@ def inlinegallery(context):
     return cls(context.references)
 
 
+# TODO: implement correctly, at the moment inlinegallery will be overwritten
+@implementer(IFrontendBlock)
+@adapter(zeit.content.article.edit.interfaces.IGallery)
+def photocluster(context):
+    # Inline galleries are created dynamically via this factory because
+    # they inherit from zeit.frontend.gallery.Gallery. Declaring a regular
+    # class would introduce a circular dependency.
+    from zeit.frontend.gallery import Gallery
+    cls = type('Photocluster', (Gallery,), {})
+    return cls(context.references)
+
+
 @implementer(IFrontendBlock)
 @adapter(zeit.newsletter.interfaces.IGroup)
 class NewsletterGroup(object):

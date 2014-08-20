@@ -316,8 +316,6 @@ def test_article_1_10_produce_no_error(testserver):
     assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/06' % testserver.url)
     assert browser.cssselect('div.article__wrap')
-    browser = Browser('%s/artikel/07' % testserver.url)
-    assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/08' % testserver.url)
     assert browser.cssselect('div.article__wrap')
     browser = Browser('%s/artikel/09' % testserver.url)

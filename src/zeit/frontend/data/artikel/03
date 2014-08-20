@@ -29,6 +29,22 @@
                     <copyright>© Eric Feferberg/AFP/Getty Images</copyright>
                 </image>
             </reference>
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-2" year="2012" issue="47" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
+                <badges>
+                    <badge>gallery</badge>
+                </badges>
+                <supertitle>Freunde von Freunden</supertitle>
+                <title>Fischgrät, Brennholz, Schiefertafel</title>
+                <text>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
+Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</text>
+                <description>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
+Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</description>
+                <byline />
+                <image title="Tobias Petri Teaser" base-id="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-teaser-2/" type="jpg" publication-date="" expires="">
+                    <bu />
+                    <copyright>© Christoph Schaller für Freunde von Freunden</copyright>
+                </image>
+            </reference>
         </references>
         <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-chianti/" type="jpg" publication-date="" expires="">
             <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
@@ -410,6 +426,13 @@
 <p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
 <p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
 <p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
+<gallery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
+                <supertitle />
+                <title>Automesse Detroit 2014 US-Hersteller</title>
+                <text />
+                <description>Diese Bildergalerie ist verdammt klasse!</description>
+                <byline />
+            </gallery>
 </division>
 <division type="page" teaser="Sogar die runde Flasche kommt zurück">
 <p>Was den Inhalt angeht, spielt beim Chianti die Rebsorte Sangiovese die Hauptrolle. Eine wundervolle Traube, die allerdings auch eine zickige Diva sein kann. In manchen Jahren reift sie nur aus, wenn man ihr bis weit in den Oktober hinein Zeit dafür lässt. Mitunter ist der Sangiovese deshalb ein richtig herber Brocken, hart und unnachgiebig, das Gegenteil eines gefälligen Schmeichelweins. Manche Winzer mischen den Sangiovese mit 25 Prozent bekannten Weichmachern wie Merlot, Cabernet Sauvignon oder Syrah, doch rauben diese Transfusionen dem Chianti seine eigentliche Stärke. Mit seiner direkten und kernigen Art passt der Sangiovese perfekt zu den aromatischen Gerichten der bäuerlichen Küche der Toskana, er flankiert das Säuerliche reifer Tomaten und veredelt den Geschmack von Bohnen und Speck. </p>
