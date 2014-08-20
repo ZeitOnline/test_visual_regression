@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import pkg_resources
-import pytest
 
+import pytest
+import plone.testing.zca
+import zope.browserpage.metaconfigure
 from lxml import etree
 from pyramid.testing import setUp, tearDown, DummyRequest
 from repoze.bitblt.processor import ImageTransformationMiddleware
@@ -102,13 +104,19 @@ def jinja2_env():
 
 
 @pytest.fixture(scope='session')
-def application():
+def application(request):
+    plone.testing.zca.pushGlobalRegistry()
+    zope.browserpage.metaconfigure.clear()
+    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app = zeit.frontend.application.Application()({}, **settings)
     return ImageTransformationMiddleware(app, secret='time')
 
 
 @pytest.fixture(scope='session')
-def debug_application():
+def debug_application(request):
+    plone.testing.zca.pushGlobalRegistry()
+    zope.browserpage.metaconfigure.clear()
+    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app_settings = settings.copy()
     app_settings['debug.show_exceptions'] = ''
     app = zeit.frontend.application.Application()({}, **app_settings)
