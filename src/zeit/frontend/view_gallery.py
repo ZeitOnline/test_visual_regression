@@ -1,8 +1,8 @@
-from pyramid.decorator import reify
 from pyramid.view import view_config
 
 import zeit.wysiwyg.interfaces
 
+from zeit.frontend.decorator import reify
 import zeit.frontend.gallery
 
 

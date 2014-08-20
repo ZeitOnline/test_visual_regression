@@ -13,49 +13,15 @@ import jinja2
 import pyramid.threadlocal
 import pytz
 import requests
-import venusian
 import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
 
+from zeit.frontend.decorator import register_filter, register_global
 
 log = logging.getLogger(__name__)
 default_teaser_images = None  # Set during startup through application.py
-
-
-def JinjaEnvRegistrator(env_attr):
-    """Factory function that returns a decorator configured to register a given
-    environment attribute to the jinja context.
-
-    :param str env_attr: Attribute name the returned decorator should register
-    :returns: Decorator that registers functions to the jinja context
-    :rtype: types.FunctionType
-    """
-    def registrator(func):
-        """This decorator is non-destructive, meaning it does not replace the
-        decorated function with a wrapped one. Instead, a callback is attached
-        to the venusian scanner that is triggered at application startup.
-
-        :internal:
-        """
-        def callback(scanner, name, obj):
-            """Venusian callback that registers the decorated function under
-            its `func_name` to the jinja `env_attr` passed to the registrator
-            factory.
-
-            :internal:
-            """
-            if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
-                scanner.env.__dict__[env_attr][name] = obj
-        venusian.attach(func, callback, category='jinja')
-        return func
-    return registrator
-
-
-register_filter = JinjaEnvRegistrator('filters')
-register_global = JinjaEnvRegistrator('globals')
-register_test = JinjaEnvRegistrator('tests')
 
 
 @register_filter

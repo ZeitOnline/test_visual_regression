@@ -6,7 +6,7 @@ import zeit.content.gallery.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 
-from zeit.frontend.template import register_filter
+from zeit.frontend.decorator import register_filter
 import zeit.frontend.block
 import zeit.frontend.interfaces
 

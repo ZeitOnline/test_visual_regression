@@ -2,7 +2,6 @@ import datetime
 import itertools
 import logging
 
-from pyramid.decorator import reify
 from pyramid.view import view_config
 import pyramid.httpexceptions
 
@@ -15,6 +14,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
+from zeit.frontend.decorator import reify
 import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces

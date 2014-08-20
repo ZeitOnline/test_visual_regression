@@ -13,7 +13,7 @@ import zeit.content.video.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
-from zeit.frontend.template import register_test, register_filter
+from zeit.frontend.decorator import register_test, register_filter
 import zeit.frontend.interfaces
 
 

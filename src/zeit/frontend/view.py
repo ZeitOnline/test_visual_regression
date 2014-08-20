@@ -3,7 +3,6 @@ import os.path
 import urllib2
 
 from babel.dates import get_timezone
-from pyramid.decorator import reify
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
 import pyramid.response
@@ -16,6 +15,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
+from zeit.frontend.decorator import reify
 import zeit.frontend.article
 import zeit.frontend.comments
 
@@ -205,8 +205,10 @@ class Content(Base):
 
     @reify
     def date_first_released_meta(self):
-        return zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released.isoformat()
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_first_released
+        if date:
+            return date.isoformat()
 
     @reify
     def date_last_published_semantic(self):
@@ -216,8 +218,6 @@ class Content(Base):
         if self.date_first_released is not None and date is not None:
             if date > self.date_first_released:
                 return date.astimezone(tz)
-            else:
-                return None
 
     @reify
     def date_format(self):

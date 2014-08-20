@@ -8,6 +8,7 @@ import venusian
 
 import zeit.cms.interfaces
 import zeit.frontend.template
+import zeit.frontend.decorator
 
 
 @pytest.fixture(scope='session')
@@ -122,7 +123,7 @@ def test_jinja_env_registrator_registers_only_after_scanning(testserver):
     jinja = mock.Mock()
     jinja.foo = {}
 
-    register_foo = zeit.frontend.template.JinjaEnvRegistrator('foo')
+    register_foo = zeit.frontend.decorator.JinjaEnvRegistrator('foo')
     do_foo = register_foo(lambda: 42)
     globals()['do_foo'] = do_foo
 

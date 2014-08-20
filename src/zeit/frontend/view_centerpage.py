@@ -1,4 +1,3 @@
-from pyramid.decorator import reify
 from pyramid.view import view_config
 
 import zeit.cms.interfaces
@@ -9,26 +8,13 @@ import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.seo
 
+from zeit.frontend.decorator import register_copyrights, reify
 import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces
 import zeit.frontend.reach
 import zeit.frontend.template
 import zeit.frontend.view
-
-
-def register_copyrights(func):
-    """A decorator that registers all teaser image copyrights it finds in the
-    teaser container the decorated method (or property) returns.
-    """
-    def wrapped(self):
-        container = func(self)
-        if container:
-            for t in zeit.frontend.interfaces.ITeaserSequence(container):
-                if t.image:
-                    self._copyrights.setdefault(t.image.image_group, t.image)
-        return container
-    return wrapped
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
