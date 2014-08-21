@@ -68,6 +68,18 @@ $icon-avatar-std-size: em(32px)
         width: $nav__logo-full-width
         height: $nav__logo-full-height
 
+.main-nav__logo__zonimg
+    display: inline-block
+    +hide-text
+    width: 20px
+    height: $nav__logo-mobile-height
+    background-size: contain
+    vertical-align: middle
+    +respond-min($nav__break__full-menu)
+        background-image: url('icons/png/logo.png')
+        width: $nav__logo-full-width
+        height: $nav__logo-full-height
+
 
 .main-nav__menu
     overflow: hidden
