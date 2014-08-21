@@ -302,7 +302,12 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             context = tdict['context']
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 template = IArticleTemplateSettings(context).template
-                if template == 'longform':
+                # ToDo: Remove when Longform will be generally used on
+                # www.zeit.de. By then do not forget to remove marker
+                # interfaces from uniqueID http://xml.zeit.de/feature (RD)
+                if request.path[:9] == '/feature/':
+                    zope.interface.alsoProvides(context, IFeatureLongform)
+                elif template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
                 elif template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
@@ -311,11 +316,6 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 elif template == 'photocluster':
                     zope.interface.alsoProvides(context, IPhotoclusterArticle)
 
-                # ToDo: Remove when Longform will be generally used on
-                # www.zeit.de. By then do not forget to remove marker
-                # interfaces from uniqueID http://xml.zeit.de/feature (RD)
-                elif request.path[:9] == '/feature/':
-                    zope.interface.alsoProvides(context, IFeatureLongform)
 
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
