@@ -281,6 +281,7 @@ class Content(Base):
         except TypeError:
             return
 
+    @reify
     def twitter_card_type(self):
         # TODO: use reasonable value depending on content type or template
         # summary_large_image, photo, gallery
