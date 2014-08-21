@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-838: Catch linkreach outage more elegantly
 
 
 0.13 (2014-08-20)
