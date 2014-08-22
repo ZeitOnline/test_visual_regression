@@ -1,7 +1,7 @@
 {% import 'templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
-    {{lama.adplace(item, view.banner_channel)}}
+    {{lama.adplace(item, view)}}
     {{lama.adplace_middle_mobile(item)}}
 {%- endmacro %}
 
@@ -255,7 +255,7 @@
 {%- endmacro %}
 
 {% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='article__main-image--longform') -%}
-    
+
     {% if obj.id is not defined -%}
         {% set id = obj.uniqueId|substring_from('/') %}
     {% else -%}

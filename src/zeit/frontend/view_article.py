@@ -12,7 +12,6 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
 import zeit.frontend.article

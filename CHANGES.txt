@@ -4,7 +4,9 @@ Change log for zeit.frontend
 0.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-886: Include Top of Mind ad keyword for lead stories
+
+- ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
 
 
 0.13 (2014-08-20)
@@ -27,6 +29,8 @@ Change log for zeit.frontend
 - ZMO-830: Repair desktop/mobile ad switch (ticket still isn't fixed entirely yet)
 
 - ZMO-887: Define script URL instead of module ID for RequireJS entry point
+
+- ZMO-886: Implement backend part of article leadtime attributes
 
 
 0.12 (2014-08-11)

@@ -5,6 +5,7 @@ import logging
 import mimetypes
 import pkg_resources
 import re
+import time
 import urllib2
 import urlparse
 
@@ -139,6 +140,20 @@ def obj_debug(value):
         return '\n'.join(res)
     except AttributeError:
         return False
+
+
+def strftime(t, format):
+    """Return a string formatted version of a Python time representation. Can
+    be either a time tuple, a time.struct_time or datetime.datetime instance.
+    """
+    try:
+        if isinstance(t, time.struct_time) or isinstance(t, tuple):
+            return time.strftime(format, t)
+        elif isinstance(t, datetime):
+            return t.strftime(format)
+    except (AttributeError, TypeError, ValueError):
+        pass
+    return ''
 
 
 @register_filter
