@@ -242,6 +242,13 @@ def image_group_factory():
     return factory
 
 
+@pytest.fixture
+def my_traverser(application):
+    root = zope.component.getUtility(
+            zeit.cms.repository.interfaces.IRepository)
+    return zeit.frontend.application.RepositoryTraverser(root)
+
+
 class TestApp(TestAppBase):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
