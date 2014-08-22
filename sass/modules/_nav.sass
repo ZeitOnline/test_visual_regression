@@ -6,6 +6,12 @@ $nav__logo-mobile-width: 38px
 $nav__logo-mobile-height: 20px
 $nav__logo-full-width: image-width('zeit-logo--magazin.png')/2
 $nav__logo-full-height: image-height('zeit-logo--magazin.png')/2
+
+$nav__logo-mobile-zon-width: 25px
+$nav__logo-mobile-zon-height: 25px
+$nav__logo-full-zon-width: 235.5px
+$nav__logo-full-zon-height: 25px
+
 $nav__service-primary-full-width: 200px
 $nav__background-color: $grey--mid-dark
 $nav__border-color: $grey--mid
@@ -71,14 +77,14 @@ $icon-avatar-std-size: em(32px)
 .main-nav__logo__zonimg
     display: inline-block
     +hide-text
-    width: 20px
-    height: $nav__logo-mobile-height
+    width: $nav__logo-mobile-zon-width
+    height: $nav__logo-mobile-zon-height
     background-size: contain
     vertical-align: middle
     +respond-min($nav__break__full-menu)
         background-image: url('icons/png/logo.png')
-        width: $nav__logo-full-width
-        height: $nav__logo-full-height
+        width: $nav__logo-full-zon-width
+        height: $nav__logo-full-zon-height
 
 
 .main-nav__menu
