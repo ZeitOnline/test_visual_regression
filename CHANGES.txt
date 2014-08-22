@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-886: Include Top of Mind ad keyword for lead stories
 
+- ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
+
 
 0.13 (2014-08-20)
 -----------------
@@ -15,8 +17,6 @@ Change log for zeit.frontend
 - ZMO-878: Show twitter card for galleries
 
 - ZMO-811: Choose appropriate social sharing image
-
-- ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
 
 - ZMO-895: Add URL parameter debug flag to force dynamic galleries
 
