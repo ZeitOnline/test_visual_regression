@@ -258,8 +258,8 @@ class Content(Base):
     @reify
     def is_lead_story(self):
         tz = get_timezone('Europe/Berlin')
-        today = datetime.date.today().astimezone(tz)
-        yesterday = (today - datetime.timedelta(days=1)).astimezone(tz)
+        today = datetime.datetime.now(tz).date()
+        yesterday = (today - datetime.timedelta(days=1))
 
         if self.leadtime.start:
             # start = today
