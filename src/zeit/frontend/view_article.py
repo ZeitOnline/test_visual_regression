@@ -12,13 +12,13 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
 import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces
 import zeit.frontend.reach
+import zeit.frontend.template
 import zeit.frontend.view
 
 log = logging.getLogger(__name__)
@@ -144,14 +144,15 @@ class Article(zeit.frontend.view.Content):
     def header_elem(self):
         return self.header_video or self.header_img
 
-    @reify
-    def sharing_img(self):
-        if self.header_img is not None:
-            return self.header_img
-        if self.header_video is not None:
-            return self.header_video
-        else:
-            return self.first_img
+    # deprecated
+    # @reify
+    # def sharing_img(self):
+    #     if self.header_img is not None:
+    #         return self.header_img
+    #     if self.header_video is not None:
+    #         return self.header_video
+    #     else:
+    #         return self.first_img
 
     def _get_author(self, index):
         try:
@@ -199,13 +200,6 @@ class Article(zeit.frontend.view.Content):
     def authorsList(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
-
-    @reify
-    def twitter_card_type(self):
-        if IArticleTemplateSettings(self.context).template == 'longform':
-            return 'summary_large_image'
-        else:
-            return 'summary'
 
     @reify
     def genre(self):

@@ -194,18 +194,15 @@
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
     <meta property="og:url" content="{{obj.article_url or 'http://' + request.host + request.path_info}}">
-
-    {% if obj.sharing_img %}
-        {% if obj.sharing_img.video_still %}
-            <meta property="og:image" content="{{obj.sharing_img.video_still}}">
-            <link itemprop="image" rel="image_src" href="{{obj.sharing_img.video_still}}">
-            <meta name="twitter:image" content="{{obj.sharing_img.video_still}}">
-        {% else %}
-            <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
-            <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-            <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
-        {% endif %}
-    {% endif %}
+    {% if obj.image_group -%}
+        <meta property="og:image" content="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
+        <link itemprop="image" rel="image_src" href="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
+        {% if obj.twitter_card_type == 'summary' -%}
+            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-small') }}">
+        {% else -%}
+            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-large') }}">
+        {% endif -%}
+    {% endif -%}
 {%- endmacro %}
 
 {% macro iqd_init() -%}
@@ -565,24 +562,27 @@
     </div>
 {%- endmacro %}
 
-{% macro adplace(banner, banner_channel) -%}
-    {%set kw = 'zeitonline,zeitmz' %}
-    {% set pagetype = 'centerpage' if 'centerpage' in banner_channel else 'article' %}
+{% macro adplace( banner, view ) -%}
+    {% set kw = 'iqadtile' ~ banner.tile ~ ',zeitonline,zeitmz' -%}
+    {% if view.is_top_of_mind -%}
+        {% set kw = kw ~ ',ToM' -%}
+    {% endif -%}
+    {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}} ad__min__{{banner.min_width}}">
+    <div id="iqadtile{{ banner.tile }}" class="ad__{{ banner.name }} ad__on__{{ pagetype }} ad__width_{{ banner.noscript_width_height[0] }} ad__min__{{ banner.min_width }}">
         {% if banner.label -%}
-        <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
-        {%- endif %}
-        <div class="ad__{{banner.name}}__inner">
+        <div class="ad__{{ banner.name }}__label">{{ banner.label }}</div>
+        {% endif -%}
+        <div class="ad__{{ banner.name }}__inner">
             <script type="text/javascript">
-                if( window.zmo_actual_load_width >= {{ banner.min_width|default(0) }} ) {
-                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};{% if banner.dcopt -%}dcopt={{banner.dcopt}};{%- endif %}tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                if ( window.zmo_actual_load_width >= {{ banner.min_width|default(0) }} ) {
+                    document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{ view.banner_channel }}{% if banner.dcopt %};dcopt={{ banner.dcopt }}{% endif %};tile={{ banner.tile }};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw={{ kw }},' + iqd_TestKW {% if banner.diuqilon %}+ window.diuqilon {% endif %}+ ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
             <noscript>
             <div>
-                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
-                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" rel="nofollow">
+                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{ banner.noscript_width_height[1] }}" alt="">
             </a></div>
             </noscript>
         </div>

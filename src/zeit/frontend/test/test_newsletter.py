@@ -7,7 +7,7 @@ def test_renders_image(application):
     assert 'http://www.zeit.de/artikel/01' in b.contents
     assert 'http://www.zeit.de/artikel/02' in b.contents
     assert ('http://images.zeit.de/exampleimages/artikel/01'
-            '/group/group-148x84.jpg' in b.contents)
+            '/schoppenstube/schoppenstube-148x84.jpg' in b.contents)
 
 
 def test_plaintext_format_has_proper_contenttype(application):
