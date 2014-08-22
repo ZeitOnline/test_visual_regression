@@ -569,7 +569,6 @@
     {% endif -%}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <h3>{{ kw }}</h3>
     <div id="iqadtile{{ banner.tile }}" class="ad__{{ banner.name }} ad__on__{{ pagetype }} ad__width_{{ banner.noscript_width_height[0] }} ad__min__{{ banner.min_width }}">
         {% if banner.label -%}
         <div class="ad__{{ banner.name }}__label">{{ banner.label }}</div>
