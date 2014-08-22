@@ -5,8 +5,8 @@ import pkg_resources
 import pyramid.interfaces
 import pyramid.testing
 import pytest
+import requests
 
-from zeit.frontend.test import Browser
 import zeit.frontend.application
 
 
@@ -51,19 +51,48 @@ def test_asset_url_appends_version_hash_where_needed(app_request):
             request.asset_url('img/favicon.ico'))
 
 
+def test_acceptable_pagination_should_not_redirect(testserver):
+    resp = requests.get('%s/artikel/03/seite-3' % testserver.url,
+                        allow_redirects=False)
+    assert resp.url == '%s/artikel/03/seite-3' % testserver.url
+    assert resp.status_code == 200
+
+
+def test_malformed_view_spec_should_produce_404_page(testserver):
+    resp = requests.get('%s/artikel/03/moep' % testserver.url,
+                        allow_redirects=False)
+    assert resp.url == '%s/artikel/03/moep' % testserver.url
+    assert resp.status_code == 404
+
+
 def test_out_of_scope_pagination_should_redirect_to_article_base(testserver):
-    browser = Browser('%s/artikel/03/seite-0' % testserver.url)
-    assert browser.url == '%s/artikel/03' % testserver.url
+    resp = requests.get('%s/artikel/03/seite-0' % testserver.url,
+                        allow_redirects=False)
+    assert resp.headers['location'] == '%s/artikel/03' % testserver.url
+    assert resp.status_code == 302
 
-    browser = Browser('%s/artikel/03/seite-8' % testserver.url)
-    assert browser.url == '%s/artikel/03' % testserver.url
+    resp = requests.get('%s/artikel/03/seite-8' % testserver.url,
+                        allow_redirects=False)
+    assert resp.headers['location'] == '%s/artikel/03' % testserver.url
+    assert resp.status_code == 302
 
 
-def test_non_numeric_paginaton_should_redirect_to_article_base(testserver):
-    browser = Browser('%s/artikel/03/seite-abc' % testserver.url)
-    assert browser.url == '%s/artikel/03' % testserver.url
+def test_malformed_paginaton_should_redirect_to_article_base(testserver):
+    resp = requests.get('%s/artikel/03/seite-abc' % testserver.url,
+                        allow_redirects=False)
+    assert resp.headers['location'] == '%s/artikel/03' % testserver.url
+    assert resp.status_code == 301
 
 
 def test_missing_pagination_spec_should_redirect_to_article_base(testserver):
-    browser = Browser('%s/artikel/03/seite-' % testserver.url)
-    assert browser.url == '%s/artikel/03' % testserver.url
+    resp = requests.get('%s/artikel/03/seite-' % testserver.url,
+                        allow_redirects=False)
+    assert resp.headers['location'] == '%s/artikel/03' % testserver.url
+    assert resp.status_code == 301
+
+
+def test_salvageable_pagination_should_redirect_to_article_page(testserver):
+    resp = requests.get('%s/artikel/03/seite-7.html' % testserver.url,
+                        allow_redirects=False)
+    assert resp.headers['location'] == '%s/artikel/03/seite-7' % testserver.url
+    assert resp.status_code == 302
