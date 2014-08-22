@@ -318,7 +318,7 @@ class ArticlePage(Article):
     def __call__(self):
         super(ArticlePage, self).__call__()
         if (self.request.view_name != 'komplettansicht') and not (
-                0 < self.page_nr < len(self.pages)):
+                0 < self.page_nr <= len(self.pages)):
             raise pyramid.httpexceptions.HTTPFound(self.resource_url)
 
     @reify
