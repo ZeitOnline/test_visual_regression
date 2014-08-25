@@ -1,3 +1,4 @@
+import datetime
 import os
 import time
 
@@ -191,3 +192,14 @@ def test_get_teaser_image_should_determine_mimetype_autonomously(testserver):
     )
     image = zeit.frontend.template.get_teaser_image(teaser_block, teaser)
     assert image.uniqueId.split('.')[-1] == 'jpg'
+
+
+def test_filter_strftime_works_as_expected():
+    strftime = zeit.frontend.template.strftime
+    now = datetime.datetime.now()
+    localtime = time.localtime()
+    assert strftime('foo', '%s') == ''
+    assert strftime((2014, 01, 01), '%s') == ''
+    assert strftime(tuple(now.timetuple()), '%s') == now.strftime('%s')
+    assert strftime(now, '%s') == now.strftime('%s')
+    assert strftime(localtime, '%s') == time.strftime('%s', localtime)
