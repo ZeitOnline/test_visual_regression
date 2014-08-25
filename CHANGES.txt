@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-886: Include Top of Mind ad keyword for lead stories
 
+- ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
+
 - ZMO-882: Validate page numbers and trigger redirects
 
 
