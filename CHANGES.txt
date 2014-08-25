@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.14 (unreleased)
 -----------------
 
+- ZMO-856: Adjust z-index of teaser comment count
+
 - ZMO-886: Include Top of Mind ad keyword for lead stories
 
 - ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
