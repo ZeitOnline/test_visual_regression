@@ -572,8 +572,7 @@ def test_header_has_linked_copyright(testserver):
 
 def test_feature_longform_should_have_zon_logo_classes(testserver):
     browser = Browser('%s/feature/feature_longform' % testserver.url)
-    assert browser.cssselect('span.main-nav__logo__zonimg')
-    assert browser.cssselect('span.icon-zo-logo--white')
+    assert browser.cssselect('.main-nav__logo__img.icon-zo-logo--white')
     logolink = browser.cssselect('a.main-nav__logo')
     assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
 
