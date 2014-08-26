@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import mock
+import lxml.html
 import pkg_resources
 import pyramid.httpexceptions
 import pyramid.response
@@ -728,3 +729,19 @@ def test_http_header_should_contain_zmo_version(testserver):
     head_version = requests.head(
         testserver.url + "/zeit-magazin/index").headers['x-zmoversion']
     assert pkg_version == head_version
+
+def test_feature_longform_template_should_have_zon_logo_classes(jinja2_env):
+    tpl = jinja2_env.get_template('templates/feature_longform.html')
+
+    # jinja2 has a blocks attribute which generates a stream,
+    # if called with context. We can use it with a html parser.
+    html_str = " ".join(list(tpl.blocks['longform_logo']({})))
+    html = lxml.html.fromstring(html_str)
+    elem = html.cssselect('.main-nav__logo__img.icon-zo-logo--white')[0]
+    assert elem.text == 'ZEIT ONLINE'
+    assert elem.get('title') == 'ZEIT ONLINE'
+
+    elem =  html.cssselect('.main-nav__logo')[0]
+    assert elem.get('href') == 'http://www.zeit.de/index'
+
+
