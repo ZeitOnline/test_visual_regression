@@ -730,7 +730,7 @@ def test_http_header_should_contain_zmo_version(testserver):
         testserver.url + "/zeit-magazin/index").headers['x-zmoversion']
     assert pkg_version == head_version
 
-def test_feature_longform_template_should_have_zon_logo_classes(jinja2_env):
+def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
     tpl = jinja2_env.get_template('templates/feature_longform.html')
 
     # jinja2 has a blocks attribute which generates a stream,
@@ -743,5 +743,11 @@ def test_feature_longform_template_should_have_zon_logo_classes(jinja2_env):
 
     elem =  html.cssselect('.main-nav__logo')[0]
     assert elem.get('href') == 'http://www.zeit.de/index'
+
+def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
+    tpl = jinja2_env.get_template('templates/feature_longform.html')
+    html_str = " ".join(list(tpl.blocks['footer_logo']({})))
+    html = lxml.html.fromstring(html_str)
+    assert len(html.cssselect('.main-footer__logo.icon-zo-logo--white')) == 1
 
 
