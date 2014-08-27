@@ -40,19 +40,21 @@ define(['require', 'jquery'], function(require, $) {
              * @tutorial http://packery.metafizzy.co/appendix.html#requirejs
              */
             require( [
-                'libs/packery.pkgd.min',
-                'jquery-bridget/jquery.bridget'
-            ], function( Packery, bridget ) {
-                // make Packery a jQuery plugin
-                bridget( 'packery', Packery );
+                'libs/freewall'
+            ], function( freewall ) {
 
-                // initialize packery
-                $cluster.packery({
-                    itemSelector: '.photocluster__item',
-                    gutter: 0
+                var wall = new freewall(".photocluster");
+                wall.reset({
+                    selector: '.photocluster__item',
+                    animate: true,
+                    cellW: 200,
+                    cellH: 'auto',
+                    onResize: function() {
+                        wall.fitWidth();
+                    }
                 });
+                wall.fitWidth();
             });
-
         }
     };
 
