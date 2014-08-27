@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.14 (unreleased)
 -----------------
 
+- FIX: Change footer link for "Rechte + Lizenzen"
+
 - ZMO-892: Implement specialized Header/Footer with ZON-Logo
 
 - ZMO-838: Catch linkreach outage more elegantly
