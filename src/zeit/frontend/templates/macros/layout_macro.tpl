@@ -502,7 +502,7 @@
     }
     document.write('<scr'+'ipt>n_pbt += iqd_wlCusRecStr.join("\;");</scr'+'ipt>');
 
-    if (window.Krux.adaudience.dfppKeyValues){
+    if ( window.Krux && window.Krux.adaudience && window.Krux.adaudience.dfppKeyValues ) {
         document.write('<scr'+'ipt>n_pbt += ";" + window.Krux.adaudience.dfppKeyValues;</scr'+'ipt>');
     }
 
