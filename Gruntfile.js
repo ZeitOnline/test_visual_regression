@@ -89,13 +89,14 @@ module.exports = function(grunt) {
 			}
 		},
 
-		//copy scripts
+		// copy files
 		copy: {
-			default: {
-				files: [
-					//copy non concatinated scripts
-					{ expand: true, cwd: project.sourceDir + 'javascript', src: ['**'], dest: project.codeDir + 'js/' }
-				]
+			// copy non concatenated scripts
+			scripts: {
+				expand: true,
+				cwd: project.sourceDir + 'javascript',
+				src: ['**'],
+				dest: project.codeDir + 'js/'
 			}
 		},
 
@@ -191,7 +192,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
-				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
+				files: [project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/*.scss'],
 				tasks: ['compass:dev']
 			},
 			grunticon: {

@@ -86,6 +86,10 @@ def pages_of_article(context):
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
+#ToDo: Please remove when we have Longforms for ICMSContent
+class IFeatureLongform(zeit.content.article.interfaces.IArticle):
+    pass
+
 
 class IShortformArticle(zeit.content.article.interfaces.IArticle):
     pass

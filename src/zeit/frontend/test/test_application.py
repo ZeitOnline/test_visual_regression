@@ -3,11 +3,14 @@ import base64
 import pkg_resources
 
 import pyramid.interfaces
+import pyramid.request
 import pyramid.testing
+import pyramid.traversal
 import pytest
 import requests
 
 import zeit.frontend.application
+import zope.component
 
 
 @pytest.fixture
@@ -49,6 +52,11 @@ def test_asset_url_appends_version_hash_where_needed(app_request):
             request.asset_url('js/app.js'))
     assert ('http://example.com/assets/img/favicon.ico' ==
             request.asset_url('img/favicon.ico'))
+
+def test_feature_longform_should_be_discovered_during_traversal(my_traverser):
+    req = pyramid.request.Request.blank('/feature/feature_longform')
+    tdict = my_traverser(req)
+    assert zeit.frontend.article.IFeatureLongform.providedBy(tdict['context'])
 
 
 def test_acceptable_pagination_should_not_redirect(testserver):

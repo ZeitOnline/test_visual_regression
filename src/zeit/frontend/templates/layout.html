@@ -129,7 +129,34 @@
 
                 {{ lama.breadcrumbs(view.breadcrumb) }}
 
-                {{ lama.main_footer(view) }}
+                {% block footer %}
+                    <footer class="main-footer">
+                        <div class="main-footer__box is-constrained is-centered">
+                            {% block footer_logo %}
+                                <div class="main-footer__logo icon-logo-zmo-small"></div>
+                            {% endblock footer_logo %}
+                            <div class="main-footer__links">
+                                <div>
+                                    <ul>
+                                        <li>VERLAG</li>
+                                        <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
+                                        <li><a href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul>
+                                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
+                                        <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
+                                        <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
+                                        <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
+                                        <li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>
+                                        <li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                {% endblock footer %}
 
                 {% if view.copyrights -%}
                     {{ lama.copyrights(view.copyrights) }}

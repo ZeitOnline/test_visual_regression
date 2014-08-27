@@ -331,7 +331,8 @@
             <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <h1 class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
+                    <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
+                    <span class="main-nav__logo__img icon-logo-zmo-small"></span>
                 </h1>
             </a>
             <div class="main-nav__menu">
@@ -501,40 +502,13 @@
     }
     document.write('<scr'+'ipt>n_pbt += iqd_wlCusRecStr.join("\;");</scr'+'ipt>');
 
-    if (window.Krux.adaudience.dfppKeyValues){
+    if ( window.Krux && window.Krux.adaudience && window.Krux.adaudience.dfppKeyValues ) {
         document.write('<scr'+'ipt>n_pbt += ";" + window.Krux.adaudience.dfppKeyValues;</scr'+'ipt>');
     }
 
     // ]]>
 </script>
 <script>n_pbt = n_pbt.substr(0,1150);</script>
-{%- endmacro %}
-
-{% macro main_footer(view) -%}
-    <footer class="main-footer">
-        <div class="main-footer__box is-constrained is-centered">
-            <div class="main-footer__logo icon-zm-logo--white"></div>
-            <div class="main-footer__links">
-                <div>
-                    <ul>
-                        <li>VERLAG</li>
-                        <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
-                        <li><a href="http://www.zeitverlag.de/presse/rechte-und-lizenzen">Rechte &amp; Lizenzen</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
-                        <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
-                        <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
-                        <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
-                        <li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>
-                        <li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 {%- endmacro %}
 
 {% macro copyrights(cr_list) -%}
@@ -596,30 +570,6 @@
             <div id="sas_13557"></div>
         </div>
     {%- endif %}
-{%- endmacro %}
-
-{% macro main_nav_compact(obj,request) -%}
-    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <div class="main-nav__wrap">
-            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
-                <meta itemprop="name" content="Zeit Online">
-                <h1 class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
-                </h1>
-            </a>
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-twitter" title="Auf Twitter teilen">Auf Twitter teilen</a>
-                    <a href="http://www.facebook.com/sharer/sharer.php?u={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-facebook" title="Auf Facebook teilen">Auf Facebook teilen</a>
-                    <a href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-google" title="Auf Google+ teilen">Auf Google+ teilen</a>
-                </aside>
-            </div>
-        </div>
-    </nav>
-
 {%- endmacro %}
 
 {% macro insert_responsive_image(image, image_class, page_type) %}

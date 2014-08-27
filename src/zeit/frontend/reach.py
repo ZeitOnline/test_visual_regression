@@ -49,9 +49,13 @@ class LinkReach(object):
         params = urllib.urlencode({'limit': limit, 'section': section})
         url = '%s/zonrank/%s?%s' % (self.linkreach, service, params)
 
-        response = urllib2.urlopen(url, timeout=4)
+        try:
+            response = urllib2.urlopen(url, timeout=4)
+            response = json.load(response)
+        except (urllib2.HTTPError, urllib2.URLError, ValueError):
+            return []
 
-        return DataSequence().deserialize(json.load(response))
+        return DataSequence().deserialize(response)
 
     def fetch_comments(self, limit, section='zeit-magazin'):
         """Compile a list of most commented on articles."""

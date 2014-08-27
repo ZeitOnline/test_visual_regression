@@ -365,6 +365,12 @@ class LongformArticle(Article):
             return img
 
 
+@view_config(context=zeit.frontend.article.IFeatureLongform,
+             renderer='templates/feature_longform.html')
+class FeatureLongform(LongformArticle):
+    pass
+
+
 @view_config(context=zeit.frontend.article.IShortformArticle,
              renderer='templates/shortform.html')
 class ShortformArticle(Article):
