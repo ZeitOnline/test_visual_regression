@@ -250,7 +250,7 @@ def test_footer_should_have_expected_markup(testserver):
     # assert normal markup
     expect = '<footer class="main-footer">'\
         '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
+        '<div class="main-footer__logo icon-logo-zmo-small"></div>'\
         '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
         '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
         'Mediadaten</a></li><li><a href="'\
@@ -768,7 +768,7 @@ def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
     # if called with context. We can use it with a html parser.
     html_str = " ".join(list(tpl.blocks['longform_logo']({})))
     html = lxml.html.fromstring(html_str)
-    elem = html.cssselect('.main-nav__logo__img.icon-zo-logo--white')[0]
+    elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
     assert elem.text == 'ZEIT ONLINE'
     assert elem.get('title') == 'ZEIT ONLINE'
 
@@ -779,6 +779,6 @@ def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
     tpl = jinja2_env.get_template('templates/feature_longform.html')
     html_str = " ".join(list(tpl.blocks['footer_logo']({})))
     html = lxml.html.fromstring(html_str)
-    assert len(html.cssselect('.main-footer__logo.icon-zo-logo--white')) == 1
+    assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
 
 
