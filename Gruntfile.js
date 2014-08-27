@@ -187,7 +187,7 @@ module.exports = function(grunt) {
 		// watch here
 		watch: {
 			js: {
-				files: ['<%= jshint.target.src %>'],
+				files: ['<%= jshint.target.src %>', '<%= jshint.options.ignores %>'],
 				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
