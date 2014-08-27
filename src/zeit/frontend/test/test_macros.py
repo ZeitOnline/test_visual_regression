@@ -52,40 +52,6 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_chapter(0, '', '')
 
 
-def test_macro_footer_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-
-    # assert normal markup
-    markup = '<footer class="main-footer">'\
-        '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
-        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
-        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
-        'Mediadaten</a></li><li><a href="'\
-        'http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">'\
-        'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
-        'Bildrechte</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
-        'Datenschutz</a></li>'\
-        '<li><a href="'\
-        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
-        'onlinewerbung.html">Cookies</a></li>'\
-        '<li><a href="http://www.zeit.de/administratives/'\
-        'agb-kommentare-artikel">AGB</a></li>'\
-        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
-        '</ul></div></div></div></footer>'
-
-    view = mock.Mock()
-    view.copyrights = True
-    lines = tpl.module.main_footer(view).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
