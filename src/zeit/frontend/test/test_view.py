@@ -16,6 +16,8 @@ import zeit.frontend.test
 import zeit.frontend.view
 import zeit.frontend.view_article
 
+from zeit.frontend.test import Browser
+
 
 def test_base_view_produces_acceptable_return_type():
     class BaseView(zeit.frontend.view.Base):
@@ -240,6 +242,35 @@ def test_image_view_returns_image_data_for_filesystem_connector(testserver):
         '/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg')
     assert r.headers['content-type'] == 'image/jpeg'
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
+
+
+def test_footer_should_have_expected_markup(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    elem = browser.cssselect('footer.main-footer')[0]
+    # assert normal markup
+    expect = '<footer class="main-footer">'\
+        '<div class="main-footer__box is-constrained is-centered">'\
+        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
+        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
+        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
+        'Mediadaten</a></li><li><a href="'\
+        'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
+        'Rechte &amp; Lizenzen</a></li>'\
+        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
+        'Bildrechte</a></li>'\
+        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
+        'Datenschutz</a></li>'\
+        '<li><a href="'\
+        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
+        'onlinewerbung.html">Cookies</a></li>'\
+        '<li><a href="http://www.zeit.de/administratives/'\
+        'agb-kommentare-artikel">AGB</a></li>'\
+        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
+        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
+        '</ul></div></div></div></footer>'
+    got = [s.strip() for s in lxml.html.tostring(elem).splitlines()]
+    got = "".join(got)
+    assert expect == got
 
 
 def test_inline_gallery_should_be_contained_in_body(testserver):

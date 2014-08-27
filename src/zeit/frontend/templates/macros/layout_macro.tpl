@@ -510,33 +510,6 @@
 <script>n_pbt = n_pbt.substr(0,1150);</script>
 {%- endmacro %}
 
-{% macro main_footer(view) -%}
-    <footer class="main-footer">
-        <div class="main-footer__box is-constrained is-centered">
-            <div class="main-footer__logo icon-zm-logo--white"></div>
-            <div class="main-footer__links">
-                <div>
-                    <ul>
-                        <li>VERLAG</li>
-                        <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
-                        <li><a href="http://www.zeitverlag.de/presse/rechte-und-lizenzen">Rechte &amp; Lizenzen</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
-                        <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
-                        <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
-                        <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
-                        <li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>
-                        <li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-{%- endmacro %}
-
 {% macro copyrights(cr_list) -%}
     <div class="copyrights">
         <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
