@@ -253,8 +253,8 @@ def test_footer_should_have_expected_markup(testserver):
         '<div class="main-footer__logo icon-logo-zmo-small"></div>'\
         '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
         '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
-        'Mediadaten</a></li><li><a href="'\
-        'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
+        'Mediadaten</a></li><li><a href="http://www.zeit-verlagsgruppe.de'\
+        '/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">'\
         'Rechte &amp; Lizenzen</a></li>'\
         '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
         'Bildrechte</a></li>'\
