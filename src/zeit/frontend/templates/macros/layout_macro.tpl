@@ -462,7 +462,7 @@
            iam_data.st = "mobzeit";
         }
 
-        if ( typeof iom !== 'undefined' && typeof iam_data !== 'undefined' ) {
+        if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
             iom.c( iam_data, 1 );
         }
     </script>
