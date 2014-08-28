@@ -498,7 +498,7 @@
         {% for entry in obj.itervalues() -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
-                     {{ lama.insert_responsive_image(entry) }}
+                    {{ lama.insert_responsive_image(entry) }}
                 </div>
             </div>
         {%- endfor %}

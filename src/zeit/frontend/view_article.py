@@ -43,6 +43,17 @@ class Article(zeit.frontend.view.Content):
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
+        # XXX: This NEEDS to be changed. No, really, fix it!
+        # Be careful, read ahead on your own responsibility.
+        # Do not copy this at all cost, do not memorize.
+        if self.header_layout == "photocluster":
+            for page in self.pages:
+                for index in range(len(page)):
+                    if issubclass(
+                            type(page[index]), zeit.frontend.gallery.Gallery):
+                        cls = type('Photocluster',
+                                   (zeit.frontend.gallery.Gallery,), {})
+                        page[index] = cls(page[index])
 
     @reify
     def template(self):
