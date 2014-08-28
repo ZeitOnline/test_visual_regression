@@ -1,10 +1,22 @@
 /* global console, define */
 
+/**
+ * @fileOverview Module Fontloader
+ * @version  0.1
+ */
+/**
+ * fontloader_body.js: module for fonts
+ * @module fontloader_body
+ */
 define(['jquery'], function($) {
     var fl = window.FontLoader;
 
+    /**
+     * fontloader_body.js: fetch font data asynchronously from the server and store it in local storage
+     * @function fetchCSS
+     * @param  {object} pack
+     */
     var fetchCSS = function(pack) {
-        // fetch font data asynchronously from the server and store it in local storage
         $.ajax({
             url: pack.path,
             success: function (data) {
@@ -16,6 +28,10 @@ define(['jquery'], function($) {
         });
     };
 
+    /**
+     * fontloader_body.js: initialize 
+     * @function init
+     */
     var init = function() {
         if (fl.enabled) {
             // lazy load queued fonts after document ready

@@ -5,6 +5,7 @@ import urlparse
 import pkg_resources
 
 from grokcore.component import adapter, implementer
+from venusian import Scanner
 import pyramid.config
 import pyramid_jinja2
 import zope.app.appsetup.product
@@ -18,6 +19,7 @@ import zeit.connector
 
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IFeatureLongform
 from zeit.frontend.article import IPhotoclusterArticle
 from zeit.frontend.article import IShortformArticle
 from zeit.frontend.gallery import IGallery
@@ -66,7 +68,9 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         pkg = pkg_resources.get_distribution('zeit.frontend')
-        self.settings['version_hash'] = base64.b16encode(pkg.version).lower()
+        pkg_version = pkg.version
+        self.settings['zmo_version'] = pkg_version
+        self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
@@ -111,6 +115,10 @@ class Application(object):
         zeit.frontend.template.default_teaser_images = \
             self.settings['default_teaser_images']
 
+        zeit.frontend.template.image_scales = dict(
+            zeit.frontend.template.get_image_scales(
+                self.settings['vivi_zeit.frontend_image-scales']))
+
         from pyramid.authorization import ACLAuthorizationPolicy
         from .security import CommunityAuthenticationPolicy
         import pyramid_beaker
@@ -146,29 +154,11 @@ class Application(object):
 
         jinja.trim_blocks = True
 
-        # Copy arbitrary names from a source module to a destination dict.
-        copy = lambda src, dest, *names: [dest.__setitem__(
-            n, getattr(src, n)) for n in names]
-
-        copy(zeit.frontend.template, jinja.globals,
-             'create_image_url', 'get_teaser_image',
-             'get_teaser_template', 'sitemap', 'top_formate'
-             )
-        copy(zeit.frontend.block, jinja.tests,
-             'elem'
-             )
-        copy(zeit.frontend.block, jinja.filters,
-             'block_type'
-             )
-        copy(zeit.frontend.centerpage, jinja.filters,
-             'auto_select_asset', 'get_all_assets'
-             )
-        copy(zeit.frontend.template, jinja.filters,
-             'create_url', 'default_image_url', 'format_date',
-             'format_date_ago', 'get_image_metadata', 'hide_none',
-             'obj_debug', 'replace_list_seperator', 'substring_from',
-             'translate_url', 'remove_break'
-             )
+        Scanner(env=jinja).scan(
+            zeit.frontend,
+            categories=('jinja',),
+            ignore=self.DONT_SCAN
+        )
 
         return jinja
 
@@ -308,10 +298,16 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def __call__(self, request):
         try:
             tdict = super(RepositoryTraverser, self).__call__(request)
+
             context = tdict['context']
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 template = IArticleTemplateSettings(context).template
-                if template == 'longform':
+                # ToDo: Remove when Longform will be generally used on
+                # www.zeit.de. By then do not forget to remove marker
+                # interfaces from uniqueID http://xml.zeit.de/feature (RD)
+                if request.path[:9] == '/feature/':
+                    zope.interface.alsoProvides(context, IFeatureLongform)
+                elif template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
                 elif template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)
@@ -319,6 +315,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, IColumnArticle)
                 elif template == 'photocluster':
                     zope.interface.alsoProvides(context, IPhotoclusterArticle)
+
+
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
                     zope.interface.alsoProvides(context, IProductGallery)

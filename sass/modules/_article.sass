@@ -17,6 +17,7 @@
 .article__page
     @extend %copy
     +pie-clearfix
+    padding-bottom: $huge
     p:first-of-type
         +respond-min($comments__break-overlap)
             padding-right: em(80px)
@@ -43,17 +44,20 @@
     margin-top: $compact !important
 
 .article__tags
-    @extend %meta
-    @extend .article__head__meta
-    font-size: $font-s
-    margin-top: $large
+    +tablet
+    letter-spacing: 1px
+    text-align: center
     text-transform: uppercase
+    color: $charcoal
+    padding: $twice 0
+    border-top: 1px solid $grey--bright
     a
-        +link-colors($charcoal, $red, $charcoal, $charcoal, $charcoal)
+        font-size: $font-xs
+        +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
 
 .article__tags__title
-    +tablet(bold)
-    margin-left: $micro
+    font-size: $font-xs
+    font-weight: bold
     margin-right: $fine
     color: $grey
 

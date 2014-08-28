@@ -2,8 +2,11 @@ from datetime import datetime, timedelta
 import email.utils
 import itertools
 import logging
+import mimetypes
 import pkg_resources
 import re
+import time
+import urllib2
 import urlparse
 
 from babel.dates import format_datetime
@@ -13,20 +16,56 @@ import jinja2
 import pyramid.threadlocal
 import pytz
 import requests
+import venusian
 import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
 
-import zeit.frontend.centerpage
-
 
 log = logging.getLogger(__name__)
-default_teaser_images = None  # Set during startup through application.py
+
+# Set during startup through application.py
+default_teaser_images = None
+image_scales = None
 
 
-@jinja2.contextfilter
-def translate_url(context, url):
+def JinjaEnvRegistrator(env_attr):
+    """Factory function that returns a decorator configured to register a given
+    environment attribute to the jinja context.
+
+    :param str env_attr: Attribute name the returned decorator should register
+    :returns: Decorator that registers functions to the jinja context
+    :rtype: types.FunctionType
+    """
+    def registrator(func):
+        """This decorator is non-destructive, meaning it does not replace the
+        decorated function with a wrapped one. Instead, a callback is attached
+        to the venusian scanner that is triggered at application startup.
+
+        :internal:
+        """
+        def callback(scanner, name, obj):
+            """Venusian callback that registers the decorated function under
+            its `func_name` to the jinja `env_attr` passed to the registrator
+            factory.
+
+            :internal:
+            """
+            if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
+                scanner.env.__dict__[env_attr][name] = obj
+        venusian.attach(func, callback, category='jinja')
+        return func
+    return registrator
+
+
+register_filter = JinjaEnvRegistrator('filters')
+register_global = JinjaEnvRegistrator('globals')
+register_test = JinjaEnvRegistrator('tests')
+
+
+@register_filter
+def translate_url(url):
     if url is None:
         return None
     # XXX Is it really not possible to get to the actual template variables
@@ -38,20 +77,22 @@ def translate_url(context, url):
     return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
 
 
-@jinja2.contextfilter
-def create_url(context, obj):
+@register_filter
+def create_url(obj):
     if zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
     else:
-        return translate_url(context, obj.uniqueId)
+        return translate_url(obj.uniqueId)
 
 
+@register_filter
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
     return format_datetime(obj, formats[type], locale="de_De")
 
 
+@register_filter
 def format_date_ago(dt, precision=2, past_tense='vor {}',
                     future_tense='in {}'):
     # customization of https://bitbucket.org/russellballestrini/ago :)
@@ -90,6 +131,7 @@ def format_date_ago(dt, precision=2, past_tense='vor {}',
     return the_tense.format(human_delta)
 
 
+@register_filter
 def obj_debug(value):
     try:
         res = []
@@ -100,10 +142,26 @@ def obj_debug(value):
         return False
 
 
+def strftime(t, format):
+    """Return a string formatted version of a Python time representation. Can
+    be either a time tuple, a time.struct_time or datetime.datetime instance.
+    """
+    try:
+        if isinstance(t, time.struct_time) or isinstance(t, tuple):
+            return time.strftime(format, t)
+        elif isinstance(t, datetime):
+            return t.strftime(format)
+    except (AttributeError, TypeError, ValueError):
+        pass
+    return ''
+
+
+@register_filter
 def substring_from(string, find):
     return string.split(find)[-1]
 
 
+@register_filter
 def hide_none(string):
     if string is None:
         return ''
@@ -111,25 +169,14 @@ def hide_none(string):
         return string
 
 
+@register_filter
 def remove_break(string):
     return re.sub('\n', '', string)
 
 
+@register_filter
 def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
-
-
-def _get_navigation():
-    navigation = pkg_resources.resource_filename(
-        __name__, 'data/navigation.xml')
-    tree = objectify.parse(navigation)
-    root = tree.getroot()
-    top_formate = root.xpath('list[@id="top-formate"]')[0]
-    sitemap = root.xpath('list[@id="sitemap"]')[0]
-    return top_formate, sitemap
-
-top_formate, sitemap = _get_navigation()
-del _get_navigation
 
 
 # definition of default images sizes per layout context
@@ -167,9 +214,13 @@ default_images_sizes = {
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
     'zmo-card-picture': (320, 480),
+    'og-image': (600, 315),
+    'twitter-image_small': (120, 120),  # summary
+    'twitter-image-large': (560, 300),  # summary_large_image, photo
 }
 
 
+@register_filter
 def default_image_url(image,
                       image_pattern='default'):
     try:
@@ -198,6 +249,87 @@ def default_image_url(image,
         log.debug('Cannot produce a default URL for %s', image)
 
 
+@register_filter
+def sharing_image_url(image_group,
+                      image_pattern):
+    sharing_image = closest_substitute_image(image_group, image_pattern)
+
+    if not sharing_image:
+        return
+
+    return default_image_url(sharing_image, image_pattern)
+
+
+def get_image_scales(scale_source):
+    def to_int(value):
+        return int(re.sub('[^0-9]', '', '0' + str(value)))
+
+    if not scale_source:
+        return
+    try:
+        fileobject = urllib2.urlopen(scale_source)
+    except urllib2.URLError:
+        return
+    for scale in objectify.fromstring(fileobject.read()).iter():
+        name = scale.attrib.get('name')
+        width = to_int(scale.attrib.get('width'))
+        height = to_int(scale.attrib.get('height'))
+        yield name, (width, height)
+
+
+@register_filter
+def closest_substitute_image(image_group,
+                             image_pattern,
+                             force_orientation=False):
+    """Returns the image from an image group, that most closely matches the
+    target image pattern. Larger resolutions are always favored over smaller
+    ones and the image orientation matching may be enforced.
+
+    Usage as jinja filter:
+
+        {{ my_image_group|closest_substitute_image('my-desired-pattern') }}
+
+    :param image_group: Image Group instance that provides
+                        zeit.content.image.interfaces.IImageGroup
+    :param image_pattern: String representation of the target pattern ID.
+    :param force_orientation: Boolean wether orientation of substitute image
+                              must match that of target pattern.
+    :returns: Unique ID of most suitable substitute image.
+    """
+
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
+        return
+    elif image_pattern in image_group:
+        return image_group.get(image_pattern)
+
+    # Determine the image size correlating to the provided pattern.
+    s_size = (image_scales.get(image_pattern) or
+              default_images_sizes.get(image_pattern))
+
+    if not s_size:
+        return
+
+    orientation = lambda x, y: (x > y) << 1 | (x < y)  # Binary hashing
+
+    # Aggregate a list of images from the image group with a target separator.
+    candidates = [(image_pattern, s_size)]
+    for name, img in image_group.items():
+        size = img.getImageSize()
+        if not force_orientation or orientation(*size) == orientation(*s_size):
+            candidates.append((name, size))
+
+    if len(candidates) == 1:
+        return
+
+    candidates = sorted(candidates, key=lambda i: i[1][0] * i[1][1])
+    idx = candidates.index((image_pattern, s_size))
+    candidates.pop(idx)
+
+    # Select the candidate that is preferably one size larger than the target.
+    return image_group.get(candidates[:idx + 1][-1][0])
+
+
+@register_global
 def get_teaser_template(block_layout,
                         content_type,
                         asset,
@@ -214,7 +346,9 @@ def get_teaser_template(block_layout,
     return map(func, combinations)
 
 
+@register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
+    import zeit.frontend.centerpage
     if unique_id:
         try:
             asset = zeit.cms.interfaces.ICMSContent(unique_id)
@@ -228,8 +362,15 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
             unique_id=zeit.frontend.template.default_teaser_images)
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
-    image_id = '%s/%s-%s.jpg' % \
-        (asset_id, image_base_name, teaser_block.layout.image_pattern)
+
+    sample_image = asset.values().next()  # Assumes all images in this group
+                                          # have the same mimetype.
+    ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
+        mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
+
+    image_id = '%s/%s-%s.%s' % \
+        (asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
+
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
@@ -246,6 +387,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
                 unique_id=zeit.frontend.template.default_teaser_images)
 
 
+@register_global
 def create_image_url(teaser_block, image):
     image_pattern = teaser_block.layout.image_pattern
     image_url = default_image_url(
@@ -253,6 +395,7 @@ def create_image_url(teaser_block, image):
     return image_url
 
 
+@register_filter
 def get_image_metadata(image):
     try:
         image_metadata = zeit.content.image.interfaces.IImageMetadata(image)

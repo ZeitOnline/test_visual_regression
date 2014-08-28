@@ -194,18 +194,15 @@
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
     <meta property="og:url" content="{{obj.article_url or 'http://' + request.host + request.path_info}}">
-
-    {% if obj.sharing_img %}
-        {% if obj.sharing_img.video_still %}
-            <meta property="og:image" content="{{obj.sharing_img.video_still}}">
-            <link itemprop="image" rel="image_src" href="{{obj.sharing_img.video_still}}">
-            <meta name="twitter:image" content="{{obj.sharing_img.video_still}}">
-        {% else %}
-            <meta property="og:image" class="scaled-image" content="{{obj.sharing_img | default_image_url |  default('http://placehold.it/160x90', true)}}">
-            <link itemprop="image" class="scaled-image" rel="image_src" href="{{obj.sharing_img | default_image_url | translate_url | default('http://placehold.it/160x90', true)}}">
-            <meta class="scaled-image" name="twitter:image" content="{{obj.sharing_img | default_image_url | default('http://placehold.it/160x90', true)}}">
-        {% endif %}
-    {% endif %}
+    {% if obj.image_group -%}
+        <meta property="og:image" content="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
+        <link itemprop="image" rel="image_src" href="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
+        {% if obj.twitter_card_type == 'summary' -%}
+            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-small') }}">
+        {% else -%}
+            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-large') }}">
+        {% endif -%}
+    {% endif -%}
 {%- endmacro %}
 
 {% macro iqd_init() -%}
@@ -234,7 +231,7 @@
     //     if(typeof nuggtg!="undefined" && nuggtg!=""){
     //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
     //     }else{
-    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });  
+    //         api.rc({"nuggn": nuggn, "nuggsid": nuggsid });
     //     }
     // });
 
@@ -334,7 +331,8 @@
             <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <h1 class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
+                    <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
+                    <span class="main-nav__logo__img icon-logo-zmo-small"></span>
                 </h1>
             </a>
             <div class="main-nav__menu">
@@ -360,7 +358,7 @@
                     <div class="main-nav__section main-nav__service-primary">
                         <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo.//www.zeitabo.de">Abo</a>
                         <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.zm.topnav.links.shop.//shop.zeit.de">Shop</a>
-                        <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.zm.topnav.links.epaper.//premium.zeit.de">ePaper</a>
+                        <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zmo.fix.dach.text.epaper" id="hp.zm.topnav.links.epaper.//premium.zeit.de">ePaper</a>
                     </div>
                     <div class="main-nav__aside">
                         <div class="main-nav__section main-nav__only-full">
@@ -376,8 +374,8 @@
                                 <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.links.immobilien.//zeit.immowelt.de">Immobilien</a>
                                 <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.links.automarkt.//automarkt.zeit.de">Automarkt</a>
                                 <a href="http://jobs.zeit.de/" id="hp.zm.topnav.links.jobs.//jobs.zeit.de">Jobs</a>
-                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.zm.topnav.links.apps.//premium.zeit.de/abo/appsios">Apps</a>
-                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.zm.topnav.links.audio.//premium.zeit.de/abo/digitalpaket5">Audio</a>
+                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zmo.fix.dach.text.apps" id="hp.zm.topnav.links.apps.//premium.zeit.de/abo/appsios">Apps</a>
+                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zmo.fix.dach.text.audio" id="hp.zm.topnav.links.audio.//premium.zeit.de/abo/digitalpaket5">Audio</a>
                                 <a href="http://www.zeit.de/archiv" id="hp.zm.topnav.links.archiv./archiv">Archiv</a>
                                 <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
@@ -504,40 +502,13 @@
     }
     document.write('<scr'+'ipt>n_pbt += iqd_wlCusRecStr.join("\;");</scr'+'ipt>');
 
-    if (window.Krux.adaudience.dfppKeyValues){
+    if ( window.Krux && window.Krux.adaudience && window.Krux.adaudience.dfppKeyValues ) {
         document.write('<scr'+'ipt>n_pbt += ";" + window.Krux.adaudience.dfppKeyValues;</scr'+'ipt>');
     }
 
     // ]]>
 </script>
 <script>n_pbt = n_pbt.substr(0,1150);</script>
-{%- endmacro %}
-
-{% macro main_footer(view) -%}
-    <footer class="main-footer">
-        <div class="main-footer__box is-constrained is-centered">
-            <div class="main-footer__logo icon-zm-logo--white"></div>
-            <div class="main-footer__links">
-                <div>
-                    <ul>
-                        <li>VERLAG</li>
-                        <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
-                        <li><a href="http://www.zeitverlag.de/presse/rechte-und-lizenzen">Rechte &amp; Lizenzen</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
-                        <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
-                        <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
-                        <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
-                        <li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>
-                        <li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 {%- endmacro %}
 
 {% macro copyrights(cr_list) -%}
@@ -565,24 +536,27 @@
     </div>
 {%- endmacro %}
 
-{% macro adplace(banner, banner_channel) -%}
-    {%set kw = 'zeitonline,zeitmz' %}
-    {% set pagetype = 'centerpage' if 'centerpage' in banner_channel else 'article' %}
+{% macro adplace( banner, view ) -%}
+    {% set kw = 'iqadtile' ~ banner.tile ~ ',zeitonline,zeitmz' -%}
+    {% if view.is_top_of_mind -%}
+        {% set kw = kw ~ ',ToM' -%}
+    {% endif -%}
+    {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{banner.tile}}" class="ad__{{banner.name}} ad__on__{{pagetype}} ad__width_{{banner.noscript_width_height[0]}} ad__min__{{banner.min_width}}">
+    <div id="iqadtile{{ banner.tile }}" class="ad__{{ banner.name }} ad__on__{{ pagetype }} ad__width_{{ banner.noscript_width_height[0] }} ad__min__{{ banner.min_width }}">
         {% if banner.label -%}
-        <div class="ad__{{banner.name}}__label">{{ banner.label }}</div>
-        {%- endif %}
-        <div class="ad__{{banner.name}}__inner">
+        <div class="ad__{{ banner.name }}__label">{{ banner.label }}</div>
+        {% endif -%}
+        <div class="ad__{{ banner.name }}__inner">
             <script type="text/javascript">
-                if( window.zmo_actual_load_width > {{ banner.min_width|default(0) }} ) {
-                document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{banner_channel}};{% if banner.dcopt -%}dcopt={{banner.dcopt}};{%- endif %}tile={{banner.tile}};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}},'+ iqd_TestKW + {% if banner.diuqilon -%}window.diuqilon{%- else -%}''{%- endif %} + ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                if ( window.zmo_actual_load_width >= {{ banner.min_width|default(0) }} ) {
+                    document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{ view.banner_channel }}{% if banner.dcopt %};dcopt={{ banner.dcopt }}{% endif %};tile={{ banner.tile }};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw={{ kw }},' + iqd_TestKW {% if banner.diuqilon %}+ window.diuqilon {% endif %}+ ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
             <noscript>
             <div>
-                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw=iqadtile{{banner.tile}},{{kw}};ord=123456789?" rel="nofollow">
-                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{banner_channel}};tile={{banner.tile}};sz={{ banner.sizes|join(',') }};kw={{banner.tile}},{{kw}};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{banner.noscript_width_height[1]}}" alt="">
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" rel="nofollow">
+                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{ banner.noscript_width_height[1] }}" alt="">
             </a></div>
             </noscript>
         </div>
@@ -596,30 +570,6 @@
             <div id="sas_13557"></div>
         </div>
     {%- endif %}
-{%- endmacro %}
-
-{% macro main_nav_compact(obj,request) -%}
-    <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <div class="main-nav__wrap">
-            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
-                <meta itemprop="name" content="Zeit Online">
-                <h1 class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-zm-logo--white" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
-                </h1>
-            </a>
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-twitter" title="Auf Twitter teilen">Auf Twitter teilen</a>
-                    <a href="http://www.facebook.com/sharer/sharer.php?u={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-facebook" title="Auf Facebook teilen">Auf Facebook teilen</a>
-                    <a href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-google" title="Auf Google+ teilen">Auf Google+ teilen</a>
-                </aside>
-            </div>
-        </div>
-    </nav>
-
 {%- endmacro %}
 
 {% macro insert_responsive_image(image, image_class, page_type) %}
@@ -637,11 +587,11 @@
 
     {% if image %}
         <!--[if gt IE 8]><!-->
-            <noscript>
+            <noscript data-src="{{image | default_image_url}}">
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
-        {% endif %} 
+        {% endif %}
                 <img {% if alt %}alt="{{alt}}" {% endif %}{% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
         {% if page_type == 'article' and image.href %}
             </a>
@@ -655,17 +605,19 @@
 {% macro build_js_view( view, request ) %}
     <script>
         window.ZMO = window.ZMO || {};
-        window.ZMO.home = "{{request.asset_url('/')}}";
-        window.ZMO.view = {};
+        window.ZMO.home = '{{ request.asset_url("/") }}';
+        window.ZMO.scriptsURL = '{{ request.app_info.scripts_url|hide_none }}';
+        window.ZMO.view = {
 
-        {% for key, value in view.js_vars -%}
-            window.ZMO.view['{{ key }}'] = '{{ value|remove_break }}';
-        {%- endfor %}
+            {% for key, value in view.js_vars -%}
+                '{{ key }}': '{{ value|remove_break }}',
+            {% endfor -%}
 
-        /* use to get view values savely */
-        window.ZMO.view.hide_undefined = function(key){
-            var val = window.ZMO.view[key] ? window.ZMO.view[key] : '';
-            return( val )
-        }
+            {# use to get view values savely #}
+
+            get: function( key ) {
+                return this[key] ? this[key] : '';
+            }
+        };
     </script>
 {% endmacro %}

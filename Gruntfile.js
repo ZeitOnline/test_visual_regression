@@ -89,13 +89,14 @@ module.exports = function(grunt) {
 			}
 		},
 
-		//copy scripts
+		// copy files
 		copy: {
-			default: {
-				files: [
-					//copy non concatinated scripts
-					{ expand: true, cwd: project.sourceDir + 'javascript', src: ['**'], dest: project.codeDir + 'js/' }
-				]
+			// copy non concatenated scripts
+			scripts: {
+				expand: true,
+				cwd: project.sourceDir + 'javascript',
+				src: ['**'],
+				dest: project.codeDir + 'js/'
 			}
 		},
 
@@ -115,7 +116,7 @@ module.exports = function(grunt) {
 				undef: true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
 				ignores: [
 					project.sourceDir + 'javascript/libs/**/*',
-					project.sourceDir + 'javascript/documentation'
+					project.sourceDir + 'javascript/documentation/**/*'
 				],
 				// devel: true, // accept console etc.
 				// phantom: true // phatom js globals
@@ -191,7 +192,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
-				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
+				files: [project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/*.scss'],
 				tasks: ['compass:dev']
 			},
 			grunticon: {

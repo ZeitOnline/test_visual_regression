@@ -52,40 +52,6 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_chapter(0, '', '')
 
 
-def test_macro_footer_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-
-    # assert normal markup
-    markup = '<footer class="main-footer">'\
-        '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
-        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
-        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
-        'Mediadaten</a></li><li><a href="'\
-        'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
-        'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
-        'Bildrechte</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
-        'Datenschutz</a></li>'\
-        '<li><a href="'\
-        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
-        'onlinewerbung.html">Cookies</a></li>'\
-        '<li><a href="http://www.zeit.de/administratives/'\
-        'agb-kommentare-artikel">AGB</a></li>'\
-        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
-        '</ul></div></div></div></footer>'
-
-    view = mock.Mock()
-    view.copyrights = True
-    lines = tpl.module.main_footer(view).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
@@ -325,7 +291,9 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
         else:
             cr = el['copyright'][0][0]
         markup = '<figure class="%s"><div class="scaled-image">' \
-                 '<!--\[if gt IE 8\]><!--><noscript>' \
+                 '<!--\[if gt IE 8\]><!--><noscript' \
+                 ' data-src=' \
+                 '"/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg">' \
                  '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
                  'class=" figure__media" ' \
                  'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
@@ -356,12 +324,14 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
         output += line.strip()
 
     start = '<div class="scaled-image is-pixelperfect">' \
-            '<!--[if gt IE 8]><!--><noscript><!--<![endif]-->' \
-            '<img alt="test" title="test" class="article__main-image--' \
-            'longform figure__media" src="'
+            '<!--[if gt IE 8]><!--><noscript'
+    middle = '><!--<![endif]-->' \
+             '<img alt="test" title="test" class="article__main-image--' \
+             'longform figure__media" src="'
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)
+    assert middle in output
     assert output.endswith(end)
 
 
@@ -444,15 +414,15 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
 
     # assert default video
-    obj = {'source': 'test.mp4', 'id': 1}
+    obj = {'highest_rendition': 'test.mp4', 'id': 1}
     wrapper = '<div data-backgroundvideo="1'
-    video = '<video preload="auto" autoplay="true" '\
+    video = '<video preload="auto" '\
             'loop="loop" muted="muted" volume="0"'
     source = '<source src="test.mp4'
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
     img = '<img '
-    fallback = '<img class="article__main-image--longform'\
-        ' video--fallback" src="http://live0.zeit.de/'\
+    fallback = '<img class="video--fallback'\
+        ' article__main-image--longform" src="http://live0.zeit.de/'\
         'multimedia/videos/1.jpg'
     lines = tpl.module.headervideo(obj).splitlines()
     output = ""
@@ -463,6 +433,8 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert source in output
     assert source_webm in output
     assert img in output
+    print fallback
+    print output
     assert fallback in output
 
 
@@ -470,10 +442,10 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
     # test usual
-    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
-           'twitter_card_type': 'summary'}
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'image_group': 'true',
+           'twitter_card_type': 'summary_large_image'}
     request = {'host': 'test.de', 'path_info': '/myurl'}
-    twitter = ['<meta name="twitter:card" content="summary">',
+    twitter = ['<meta name="twitter:card" content="summary_large_image">',
                '<meta name="twitter:site" content="@zeitonline">',
                '<meta name="twitter:creator" content="@zeitonline">',
                '<meta name="twitter:title" content="title">',
@@ -482,34 +454,17 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="fb:admins" content="595098294">',
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
-          '"og:description" content="subtitle">',
+          '<meta property="og:description" content="subtitle">',
           '<meta property="og:url" content="http://test.de/myurl">']
-    image = ['<meta property="og:image" class="scaled-image" content="',
-             '<link itemprop="image" class="scaled-image" rel="image_src"',
-             '<meta class="scaled-image" name="twitter:image" content="']
+    image = ['<meta property="og:image" content="',
+             '<link itemprop="image" rel="image_src"',
+             '<meta name="twitter:image:src" content="']
     lines = tpl.module.sharing_meta(obj, request).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
     for fb_meta in fb:
         assert fb_meta in output
-    for twitter_meta in twitter:
-        assert twitter_meta in output
-    for img in image:
-        assert img in output
-
-    # test video still is set as sharing img
-    obj = {'title': 'title', 'subtitle': 'subtitle',
-           'sharing_img': {'video_still': 'true'},
-           'twitter_card_type': 'summary_large_image'}
-    twitter = ['<meta name="twitter:card" content="summary_large_image">']
-    image = ['<meta property="og:image" content="',
-             '<link itemprop="image" rel="image_src"',
-             '<meta name="twitter:image" content="']
-    lines = tpl.module.sharing_meta(obj, request).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
@@ -713,11 +668,14 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'diuqilon': True,
               'min_width': 768}
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
-             'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
-             'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
+             'adj/zeitonline/zeitmz/centerpage;dcopt=ist;tile=1;\' + n_pbt ' \
+             '+ \';sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\' + iqd_TestKW ' \
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type=' \
              '"text/javascript"><\/script>\');'
-    lines = tpl.module.adplace(banner).splitlines()
+    view = mock.Mock()
+    view.is_top_of_mind = False
+    view.banner_channel = 'zeitmz/centerpage'
+    lines = tpl.module.adplace(banner, view).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -882,26 +840,30 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
     assert '<a href="http://www.test.de">' in output
 
 
-def test_macro_teaser_supertitle_title_should_produce_markup(jinja2_env):
-    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
+    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = mock.Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
+    teaser.teaserText = "TEXT"
     teaser.uniqueId = "ID"
 
-    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    lines = tpl.module.teaser_text_block(teaser).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
 
-    assert '<a href="ID">' in output
-    assert '<div class="teaser__supertitle">SUPATITLE</div>' in output
-    assert '<div class="teaser__title">TITLE</div>' in output
+    assert '<header class="cp_leader__title__wrap '\
+        'cp_leader__title__wrap--none">' in output
+    assert '<a href="ID"><h2>' in output
+    assert '<div class="cp_leader__supertitle">SUPATITLE</div>' in output
+    assert '<div class="cp_leader__title">TITLE</div>' in output
+    assert '<span class="cp_leader__subtitle">TEXT</span>' in output
 
 
-def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
-    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
+    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = mock.Mock()
     teaser.teaserSupertitle = None
@@ -910,7 +872,7 @@ def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
     teaser.teaserTitle = "TITLE"
     teaser.uniqueId = "ID"
 
-    lines = tpl.module.teaser_supertitle_title(teaser).splitlines()
+    lines = tpl.module.teaser_text_block(teaser).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
@@ -918,29 +880,30 @@ def test_macro_teaser_supertitle_should_fallback_to_supertitle(jinja2_env):
     assert 'FALLBACK' in output
 
 
-def test_macro_teaser_supertitle_title_should_produce_alternative_markup(
+def test_macro_teaser_text_block_should_produce_alternative_markup(
         jinja2_env):
-    # teaser_supertitle_title(teaser, additional_css_class, withlink=True)
+    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
     teaser = mock.Mock()
-    teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
     teaser.uniqueId = "ID"
 
-    lines = tpl.module.teaser_supertitle_title(teaser, 'CLASS',
-                                               withlink=False).splitlines()
+    lines = tpl.module.teaser_text_block(
+        teaser, 'button', 'dark', 'false', 'false', 'true').splitlines()
     output = ""
     for line in lines:
         output += line.strip()
 
-    assert '<a href="ID">' not in output
-    assert '<div class="CLASS__supertitle">SUPATITLE</div>' in output
-    assert '<div class="CLASS__title">TITLE</div>' in output
+    assert '<header class="cp_button__title__wrap '\
+        'cp_button__title__wrap--dark">' in output
+    assert '<div class="cp_button__supertitle' not in output
+    assert '<div class="cp_button__title">TITLE</div>' in output
+    assert '<div class="cp_button__subtitle' not in output
 
 
 def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
-    markup = '<span class="cp__comment__count__wrap '\
+    markup = '<span class="cp_comment__count__wrap '\
         'icon-comments-count">3</span>'
     lines = tpl.module.comments_count(3).splitlines()
     output = ""
@@ -1087,3 +1050,27 @@ def test_macro_copyrights(jinja2_env):
     assert not snippet.cssselect('li.copyrights__entry:nth-child(2) '
                                  'span.copyrights__entry__label a'), \
         'The second entry should not produce a link element.'
+
+
+def test_macro_include_cp_ad_produces_markup(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/centerpage_macro.tpl')
+    lines = tpl.module.include_cp_ad().splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert '<div class="cp_button--ad">' in output
+
+
+def test_macro_liveblog_produces_html(jinja2_env):
+    tpl = jinja2_env.get_template('templates/macros/article_macro.tpl')
+    liveblog = mock.Mock()
+    liveblog.blog_id = '999'
+    lines = tpl.module.liveblog(liveblog).splitlines()
+    output = ""
+    for line in lines:
+        output += line.strip()
+    assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
+            'onerror="continue"></esi:include>') in output
+    assert '<esi:remove>' in output
+    assert '<div data-type="esi-content"></div>' in output
+    assert '</esi:remove>' in output

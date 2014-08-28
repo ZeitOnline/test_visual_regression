@@ -1,5 +1,3 @@
-import urlparse
-
 import lxml.etree
 from pyramid.decorator import reify
 from pyramid.view import view_config
@@ -59,16 +57,6 @@ class Centerpage(zeit.frontend.view.Base):
                     return teaser_list
             except:
                 continue
-
-    def teaser_get_commentcount(self, uniqueId):
-        try:
-            index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = zeit.frontend.comments.comments_per_unique_id(
-                self.request.registry.settings.node_comment_statistics)[index]
-            if int(count) >= 5:
-                return count
-        except KeyError:
-            return
 
     @reify
     def is_hp(self):
@@ -162,25 +150,20 @@ class Centerpage(zeit.frontend.view.Base):
         reach = zeit.frontend.reach.LinkReach(stats_path, linkreach)
         teaser_dict = {}
         for service in ('twitter', 'facebook', 'comments'):
-            try:
-                teaser_list = reach.fetch_service(service, 3)
-            except:
-                teaser_list = []
-            teaser_dict[service] = teaser_list
+            teaser_dict[service] = reach.fetch_service(service, 3)
         return teaser_dict
 
     @reify
     def copyrights(self):
         teaser_list = []
         for teaser in self._copyrights.itervalues():
-            if len(teaser.copyright[0][0]) <= 1:
+            if not len(teaser.copyright) or len(teaser.copyright[0][0]) <= 1:
                 # Drop teaser if no copyright text is assigned.
                 continue
             teaser_list.append(
                 dict(
                     label=teaser.copyright[0][0],
-                    image=zeit.frontend.template.translate_url(
-                        self.context, teaser.src),
+                    image=zeit.frontend.template.translate_url(teaser.src),
                     link=teaser.copyright[0][1],
                     nofollow=teaser.copyright[0][2]
                 )

@@ -21,39 +21,23 @@ def test_gallery_should_have_buttons(selenium_driver, testserver):
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
+    except TimeoutException:
+        print "Timeout Gallery Script"
+        assert False
+    else:
+        # test navigation buttons
         nextselector = ".bx-next"
         prevselector = ".bx-prev"
-        # test navigation buttons
         nextbutton = driver.find_element_by_css_selector(nextselector)
         prevbutton = driver.find_element_by_css_selector(prevselector)
         assert nextbutton
         assert prevbutton
-    except:
-        print "Timeout Gallery Script"
-        assert False
 
 
 def test_gallery_buttons_are_clickable(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
-    try:
-        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
-        WebDriverWait(driver, 10).until(cond)
-        onextselector = ".bx-overlay-next"
-        oprevselector = ".bx-overlay-prev"
-        onextbutton = driver.find_element_by_css_selector(onextselector)
-        oprevbutton = driver.find_element_by_css_selector(oprevselector)
-        onextbutton.click()
-        oprevbutton.click()
-    except:
-        print "Timeout Gallery Script"
-        assert False
-
-
-def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(560, 900)
-    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    driver.get('%s/galerien/fs-desktop-schreibtisch-computer?%s'
+               % (testserver.url, "gallery=dynamic"))
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
@@ -61,9 +45,28 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         print "Timeout Gallery Script"
         assert False
     else:
-        # This test is showing the last (or .bx-clone) slide, not the first one.
-        # Not reproducible in the browser and unexplainable for now, since #400.
-        # driver.save_screenshot("/tmp/test_buttons_should_not_be_visible_mobile.png")
+        onextselector = ".bx-overlay-next"
+        oprevselector = ".bx-overlay-prev"
+        onextbutton = driver.find_element_by_css_selector(onextselector)
+        oprevbutton = driver.find_element_by_css_selector(oprevselector)
+        onextbutton.click()
+        oprevbutton.click()
+
+
+def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(560, 900)
+    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    # This test is showing the last (or .bx-clone) slide, not the first one.
+    # Not reproducible in the browser and unexplainable for now, since #400.
+    # driver.save_screenshot("/tmp/buttons_should_not_be_visible_mobile.png")
+    try:
+        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
+    except TimeoutException:
+        print "Timeout Gallery Script"
+        assert False
+    else:
         bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
         caption = driver.find_element_by_css_selector(".figure__caption")

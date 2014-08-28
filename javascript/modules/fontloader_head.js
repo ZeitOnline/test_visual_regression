@@ -1,7 +1,13 @@
 /* global console */
 
 /**
- * font loader setup
+ * @fileOverview Namespace Fontloader
+ * @version  0.1
+ */
+/**
+ * fontloader_head.js: namespace for FontLoader
+ * @namespace FontLoader
+ * @param  {object} ZMO
  */
 window.FontLoader = (function(ZMO) {
     // privates
@@ -44,12 +50,18 @@ window.FontLoader = (function(ZMO) {
         }
     };
 
-    // load fonts from localstorage or queue up for lazy loading
+    //initialize 
     var init = function() {
         // run through all font packs in the dictionary
         fontDictionary.forEach(function(pack) {
-            var data = localStorage.getItem(fl.getFontKey(pack)),
+
+            var data = false,
+                version = false;
+
+            if ( localStorage ){
+                data = localStorage.getItem(fl.getFontKey(pack));
                 version = localStorage.getItem(fl.getVersionKey(pack));
+            }
 
             if (data && pack.version === version) {
                 // font is in localstorage, drop data in style tag immediately

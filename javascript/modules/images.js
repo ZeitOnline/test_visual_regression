@@ -1,13 +1,23 @@
 /* global console, define */
+
+/**
+ * @fileOverview Module for responsive images
+ * @version  0.1
+ */
+/**
+ * images.js: module for images
+ * @module images
+ */
 define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
 
     var resp_imgs = [];
 
     /**
-     * [prefix description]
-     * @param  {[type]} width
-     * @param  {[type]} height
-     * @return {[type]}
+     * images.js: create prefix
+     * @function prefix
+     * @param  {integer} width width of image
+     * @param  {integer} height height of image
+     * @return {string} prefix string for image path
      */
     var prefix = function(width, height) {
         var key = width + ':' + height + ':time';
@@ -17,18 +27,42 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * rescale one image
-     * @param  {[type]} image
-     * @param  {[type]} subsequent
-     * @param  {[type]} width
-     * @param  {[type]} height
+     * images.js: use standard image or hide allocated image spaces and
+     * comments if noscript has no content
+     * @function hideImages
+     * @param  {object} img_wrapper image area containing noscript
+     * @param  {string} alt_source alternative image source
+     */
+    var hideImages = function( $img_wrapper, alt_source ){
+        if ( alt_source ){
+            $img_wrapper.html( '<img src="' + alt_source + '"/>' );
+        }else{
+            $img_wrapper.height( 'auto' );
+            $( '.cp_comment__count__wrap' ).hide();
+        }
+    };
+
+    /**
+     * images.js: rescale one image
+     * @function rescaleOne
+     * @param  {object} image image object
+     * @param  {boolean} subsequent
+     * @param  {integer} width width of image
+     * @param  {integer} height height of image
      */
     var rescaleOne = function(image, subsequent, width, height) {
-        var $img = $(image);
+        var $img = $(image),
+            ie_width = false;
+
         width = width || $img.width();
 
+        //ie workarround to detect auto width
+        if ( image.currentStyle ){
+            ie_width = image.currentStyle.width;
+        }
+
         // workaround for width = 'auto'
-        if (!width) {
+        if (!width || ie_width === 'auto') {
             width = $img.width('100%').width();
             $img.width('');
         }
@@ -46,8 +80,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             }
 
         } else {
-            //ToDo (T.B.) $img.height() has a wrong value if alt attribute is set in image
-            //height = height || $img.height() || Math.round(width / $img.data('ratio'));
+            /**
+             * @todo (T.B.) $img.height() has a wrong value if alt attribute is set in image
+             */
             height = height || Math.round(width / $img.data('ratio'));
         }
 
@@ -57,8 +92,9 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * rescale all images
-     * @param  {[type]} e
+     * images.js: rescale all images
+     * @function rescaleAll
+     * @param  {object} e event object
      */
     var rescaleAll = function(e) {
         if (!e) {
@@ -67,40 +103,49 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
                 var $noscript = $(this);
                 var $parent = $noscript.parent();
                 var markup = $noscript.text();
-                markup = markup.replace('src="', 'data-src="');
-                $parent.html(markup);
-                var $imgs = $parent.find('img');
-                var width = 0;
-                var height = 0;
-                $imgs.each(function() {
-                    var $img = $(this);
 
-                    // add event triggering to tell the world
-                    $img.on('load', function(e) {
-                        $img.trigger('scaling_ready');
-                    });
+                if ( markup.trim() !== '' ){
 
-                    if ($parent.hasClass('is-pixelperfect')) {
-                        var selector = $img.parent().attr('data-wrap'),
-                            wrapper = selector ? $img.closest(selector) : [];
+                    markup = markup.replace('src="', 'data-src="');
+                    $parent.html(markup);
+                    var $imgs = $parent.find('img');
+                    var width = 0;
+                    var height = 0;
+                    $imgs.each(function() {
+                        var $img = $(this);
 
-                        // use explicit width and height from responsive image parent element or data-wrap element
-                        if (wrapper.length) {
-                            width  = wrapper.width();
-                            height = wrapper.innerHeight();
+                        // add event triggering to tell the world
+                        $img.on('load', function(e) {
+                            $img.trigger('scaling_ready');
+                        });
+
+                        if ($parent.hasClass('is-pixelperfect')) {
+                            var selector = $img.parent().attr('data-wrap'),
+                                wrapper = selector ? $img.closest(selector) : [];
+
+                            // use explicit width and height from responsive image parent element or data-wrap element
+                            if (wrapper.length) {
+                                width  = wrapper.width();
+                                height = wrapper.innerHeight();
+                            } else {
+                                width  = $parent.width();
+                                height = $parent.innerHeight();
+                            }
+
+                            rescaleOne(this, false, width, height);
                         } else {
-                            width  = $parent.width();
-                            height = $parent.innerHeight();
+                            // determine size of image from width + ratio of original image
+                            rescaleOne(this, false);
                         }
 
-                        rescaleOne(this, false, width, height);
-                    } else {
-                        // determine size of image from width + ratio of original image
-                        rescaleOne(this, false);
-                    }
+                        resp_imgs.push(this);
+                    });
 
-                    resp_imgs.push(this);
-                });
+                }else{
+                // noscript doesn't has any content we can read (which might happen in older browsers)
+                // therefore we have to hide allocated image spaces
+                    hideImages( $parent, $noscript.attr('data-src'));
+                }
 
             });
         } else {
@@ -112,7 +157,8 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
     };
 
     /**
-     * init scaling
+     * images.js: init scaling
+     * @function init
      */
     var init = function() {
         rescaleAll();

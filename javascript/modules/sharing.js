@@ -1,13 +1,23 @@
 /* global console, define */
+
+/**
+ * @fileOverview Module for sharing functionality
+ * @version  0.1
+ */
+/**
+ * sharing.js: module for sharing
+ * @module sharing
+ */
 define(['jquery'], function() {
 
     var $socialServices = $('#js-social-services');
 
     /**
-     * Toggle sharing box
+     * sharing.js: toggle sharing box
+     * @function toggleSharing
      */
     var toggleSharing = function() {
-        $(this)
+        $socialServices
             .find('.article__sharing__icon')
             .toggleClass('icon-sharebox-share')
             .toggleClass('icon-sharebox-close');
@@ -15,7 +25,8 @@ define(['jquery'], function() {
     };
 
     /**
-     * Initialize sharing section
+     * sharing.js: initialize sharing section
+     * @function init
      */
     var init = function() {
         // register event handlers

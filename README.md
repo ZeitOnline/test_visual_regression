@@ -1,10 +1,9 @@
-..
 ZMO on Friedbert
 =================
-## Testing Batou-Updating 1
+
 ## Initiales Setup Pyramid-App
 
-Zunächst Repo clonen
+Zunächst das Repository clonen
 
 	git clone git@github.com:ZeitOnline/friedbert
 
@@ -28,18 +27,15 @@ Nach folgendem Aufruf lauscht die App auf Port 9090
 
 Folgende URL liefert eine erste Sicht auf einen Artikel
 
-    http://localhost:9090/politik/deutschland/2013-07/wahlbeobachter-portraets
+    http://localhost:9090/artikel/01
 
-Die Option --reload sorgt dafür, dass bei editiertem Code der Server neu gestartet wird
+Die Option `--reload` sorgt dafür, dass bei editiertem Code der Server neu gestartet wird
 
 	bin/pserve frontend.ini --reload
 
 ## Initiales Setup Frontend
 
-Nach Ausführung obiger Schritte wird zur Frontendentwicklung ein weiteres Toolset benötigt.
-
-### Was Du brauchst
-
+Nach Ausführung obiger Schritte wird zur Frontendentwicklung ein weiteres Toolset benötigt, bestehend aus:
 
 - [node](http://nodejs.org/)
 - [grunt](http://gruntjs.com/)
@@ -64,16 +60,6 @@ Dadurch werden ein Verzeichnis `node_modules` angelegt. Dies bitte nicht anfasse
 
 Konfigurationsänderungen und -updates sind durch das Anpassen der package.json, vor allem aber der Gruntfile.js umzusetzen.
 
-Ist alles fertig installiert, kann mit
+Ist alles fertig installiert, kann mit diesem Kommando der Grunt Watchdemon gestartet werden
 
     grunt watch
-
-der Grunt Watchdemon gestartet werden. Weitere Befehle werden sein:
-
-    grunt dist
-
-oder
-
-    grunt stage
-
-sind aber noch nicht Teil dieses Pakets.
