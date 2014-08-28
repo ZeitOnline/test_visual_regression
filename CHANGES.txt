@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.14 (unreleased)
 -----------------
 
+- ZMO-883: Fix iOS bug initially showing last slide of inline gallery
+
 - FIX: Change footer link for "Rechte + Lizenzen"
 
 - ZMO-892: Implement specialized Header/Footer with ZON-Logo
