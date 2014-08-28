@@ -16,7 +16,6 @@ module.exports = function(grunt) {
 		name: '<%= pkg.name %>-<%= pkg.version%>',
 		binDir: './',
 		codeDir: './src/zeit/frontend/',
-		jqueryVersion: 'jquery-1.10.2.min.js',
 		sourceDir: './',
 		rubyVersion: '1.9.3',
 		tasks: {
