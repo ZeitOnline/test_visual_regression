@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import mock
+import lxml.html
 import pkg_resources
 import pyramid.httpexceptions
 import pyramid.response
@@ -14,6 +15,8 @@ import zeit.frontend.gallery
 import zeit.frontend.test
 import zeit.frontend.view
 import zeit.frontend.view_article
+
+from zeit.frontend.test import Browser
 
 
 def test_base_view_produces_acceptable_return_type():
@@ -239,6 +242,35 @@ def test_image_view_returns_image_data_for_filesystem_connector(testserver):
         '/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg')
     assert r.headers['content-type'] == 'image/jpeg'
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
+
+
+def test_footer_should_have_expected_markup(testserver):
+    browser = Browser('%s/artikel/01' % testserver.url)
+    elem = browser.cssselect('footer.main-footer')[0]
+    # assert normal markup
+    expect = '<footer class="main-footer">'\
+        '<div class="main-footer__box is-constrained is-centered">'\
+        '<div class="main-footer__logo icon-logo-zmo-small"></div>'\
+        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
+        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
+        'Mediadaten</a></li><li><a href="http://www.zeit-verlagsgruppe.de'\
+        '/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">'\
+        'Rechte &amp; Lizenzen</a></li>'\
+        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
+        'Bildrechte</a></li>'\
+        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
+        'Datenschutz</a></li>'\
+        '<li><a href="'\
+        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
+        'onlinewerbung.html">Cookies</a></li>'\
+        '<li><a href="http://www.zeit.de/administratives/'\
+        'agb-kommentare-artikel">AGB</a></li>'\
+        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
+        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
+        '</ul></div></div></div></footer>'
+    got = [s.strip() for s in lxml.html.tostring(elem).splitlines()]
+    got = "".join(got)
+    assert expect == got
 
 
 def test_inline_gallery_should_be_contained_in_body(testserver):
@@ -728,3 +760,25 @@ def test_http_header_should_contain_zmo_version(testserver):
     head_version = requests.head(
         testserver.url + "/zeit-magazin/index").headers['x-zmoversion']
     assert pkg_version == head_version
+
+def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
+    tpl = jinja2_env.get_template('templates/feature_longform.html')
+
+    # jinja2 has a blocks attribute which generates a stream,
+    # if called with context. We can use it with a html parser.
+    html_str = " ".join(list(tpl.blocks['longform_logo']({})))
+    html = lxml.html.fromstring(html_str)
+    elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
+    assert elem.text == 'ZEIT ONLINE'
+    assert elem.get('title') == 'ZEIT ONLINE'
+
+    elem =  html.cssselect('.main-nav__logo')[0]
+    assert elem.get('href') == 'http://www.zeit.de/index'
+
+def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
+    tpl = jinja2_env.get_template('templates/feature_longform.html')
+    html_str = " ".join(list(tpl.blocks['footer_logo']({})))
+    html = lxml.html.fromstring(html_str)
+    assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
+
+

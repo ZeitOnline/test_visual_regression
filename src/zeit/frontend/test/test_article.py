@@ -570,6 +570,13 @@ def test_header_has_linked_copyright(testserver):
         '<a href="http://foo.de" target="_blank">©foo' in output
 
 
+def test_feature_longform_should_have_zon_logo_classes(testserver):
+    browser = Browser('%s/feature/feature_longform' % testserver.url)
+    assert browser.cssselect('.main-nav__logo__img.icon-logo-zon-small')
+    logolink = browser.cssselect('a.main-nav__logo')
+    assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
+
+
 def test_article_view_has_leadtime_set_if_article_provides_it(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     view = zeit.frontend.view_article.Article(article, mock.Mock())
