@@ -275,8 +275,10 @@
         </block>
       </container>
     </column>
-    <title>Automesse Detroit 2014 US-Hersteller</title>
-    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+    <title>Outomesse Detroit 2014 US-Hersteller</title>
+    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <p>Diese Karosserien stimulieren Auge und Geist zugleich.</p>
+    </text>
   </body>
   <teaser>
     <title>Automesse Detroit 2014 US-Hersteller</title>
