@@ -97,8 +97,10 @@ class Base(object):
 
     @reify
     def js_vars(self):
+        values = []
         for name in ('banner_channel', 'ressort', 'sub_ressort', 'type'):
-            yield name, getattr(self, name, '')
+            values.append((name, getattr(self, name, '')))
+        return values
 
     @reify
     def title(self):
