@@ -48,7 +48,7 @@
     <cluster area="feature">
       <region area="lead" automatic="True">
         <query>
-          <raw>((type:(article)) AND NOT ressort:(News) AND NOT product_text:(News))</raw>
+          <condition type="Channel" py:pytype="str">Wirtschaft Boerse</condition>
         </query>
         <container cp:type="auto-teaser" module="leader" cp:__name__="id-0b6f3d4c-7d98-4def-9867-9b4353069741"/>
         <container cp:type="auto-teaser" module="buttons" cp:__name__="id-3530bbb4-4d6a-4131-b716-93731b16b5a1"/>
@@ -56,6 +56,7 @@
         <container cp:type="auto-teaser" module="buttons" cp:__name__="id-be6ad66a-9104-4763-bc17-4888037eedb6"/>
         <container cp:type="auto-teaser" module="buttons" cp:__name__="id-74f318e7-225b-43db-92d8-c2a4ef7f1196"/>
       </region>
+      <region area="informatives"></region>
     </cluster>
     <cluster area="teaser-mosaic"/>
     <supertitle>ZMO CP</supertitle>
