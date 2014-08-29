@@ -62,7 +62,6 @@ setup(
         'zeit.newsletter >= 1.0.0b2.dev0',
         'zeit.wysiwyg',
         'zeit.seo',
-        'zeit.solr',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
