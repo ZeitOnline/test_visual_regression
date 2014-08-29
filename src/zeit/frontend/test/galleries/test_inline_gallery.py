@@ -55,7 +55,7 @@ def test_inline_gallery_uses_responsive_images_with_ratio(testserver):
 
 def test_photocluster_has_expected_markup(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
+    driver.get('%s/artikel/cluster-beispiel' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".photocluster")
     assert len(wrap) != 0
     for element in wrap:
@@ -69,7 +69,7 @@ def test_photocluster_has_expected_markup(selenium_driver, testserver):
 
 def test_photocluster_has_expected_content(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/03' % testserver.url)
+    driver.get('%s/artikel/cluster-beispiel' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".photocluster")
     assert len(wrap) != 0
     for element in wrap:
