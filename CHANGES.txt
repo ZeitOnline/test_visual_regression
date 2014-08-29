@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.14 (unreleased)
+0.14 (2014-08-29)
 -----------------
 
 - FIX: Change footer link for "Rechte + Lizenzen"
