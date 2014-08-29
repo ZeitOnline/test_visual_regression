@@ -395,7 +395,7 @@ class PhotoclusterArticle(Article):
                         type(page[index]), zeit.frontend.gallery.Gallery):
                     cls = type('Photocluster',
                                (zeit.frontend.gallery.Gallery,), {})
-                    page[index] = cls(page[index])
+                    page[index] = cls(page[index].context)
 
 
 @view_config(name='teaser',

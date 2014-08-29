@@ -63,9 +63,15 @@ class Gallery(collections.OrderedDict):
     def __init__(self, context):
         super(Gallery, self).__init__([(k, IGalleryImage(v)) for k, v in
                                       context.items() if v.layout != 'hidden'])
+        self.context = context
 
     def __repr__(self):
         return object.__repr__(self)
+
+    @property
+    def galleryText(self):
+        return zeit.wysiwyg.interfaces.IHTMLContent(
+            self.context).html
 
 
 @implementer(IGallery)

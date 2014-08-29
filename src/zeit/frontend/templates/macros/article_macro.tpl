@@ -504,5 +504,6 @@
         {%- endfor %}
     {% endif %}
     </div>
+    <span class="cluster__caption__text">{{ obj.galleryText | safe }}</span>
 </div>
 {% endmacro %}
