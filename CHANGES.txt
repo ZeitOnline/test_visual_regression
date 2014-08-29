@@ -16,6 +16,8 @@ Change log for zeit.frontend
 
 - ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
 
+- VIV-440: Add XML view for automatic centerpages
+
 
 0.13 (2014-08-20)
 -----------------
