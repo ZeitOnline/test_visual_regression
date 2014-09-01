@@ -537,11 +537,9 @@
 {%- endmacro %}
 
 {% macro adplace( banner, view ) -%}
-    {% set kw = 'iqadtile' ~ banner.tile ~ ',zeitonline,zeitmz' -%}
-    {% if view.is_top_of_mind -%}
-        {% set kw = kw ~ ',ToM' -%}
-    {% endif -%}
+    {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
+    {% if view.context.advertising_enabled -%}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
     <div id="iqadtile{{ banner.tile }}" class="ad__{{ banner.name }} ad__on__{{ pagetype }} ad__width_{{ banner.noscript_width_height[0] }} ad__min__{{ banner.min_width }}">
         {% if banner.label -%}
@@ -561,6 +559,7 @@
             </noscript>
         </div>
     </div>
+    {%- endif %}
 {%- endmacro %}
 
 {% macro adplace_middle_mobile(item) -%}

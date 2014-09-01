@@ -89,6 +89,15 @@ class Base(object):
             channel += '/' + self.type.replace('gallery', 'article')
         return channel
 
+    @reify
+    def adwords(self):
+        keywords = ['zeitonline', 'zeitmz']
+        if self.is_top_of_mind:
+            keywords.append('ToM')
+        if self.is_longform:
+            keywords.extend(['noiqdband', 'longform'])
+        return keywords
+
     def banner(self, tile):
         try:
             return zeit.frontend.banner.banner_list[tile - 1]
