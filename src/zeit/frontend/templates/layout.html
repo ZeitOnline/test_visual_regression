@@ -15,33 +15,52 @@
             <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
         {%- endif %}
         <meta name="robots" content="{{view.meta_robots}}">
-        <meta id="viewport-meta" content='width=device-width, initial-scale=1.0, maximum-scale=3' name='viewport'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3" id="viewport-meta">
 
-        {% if view.context.advertising_enabled %}
         <script>
-            var zmo_actual_load_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-            var zmo_mobile_width = 768;
-            var zmo_is_mobile_view = window.zmo_actual_load_width < window.zmo_mobile_width;
-            var viewport_meta = document.getElementById('viewport-meta');
-            var viewports = {
-                    standard: viewport_meta.getAttribute('content'),
-                    landscape: 'width=1280'
-                };
-            var viewport_set = function() {
-                if ( screen.width == window.zmo_mobile_width && Math.abs(window.orientation) == 90 ) {
-                    viewport_meta.setAttribute( 'content', viewports.landscape );
-                } else {
-                    viewport_meta.setAttribute( 'content', viewports.standard);
-                }
+            window.ZMO = {
+                home: '{{ request.asset_url("/") }}',
+                scriptsURL: '{{ request.app_info.scripts_url|hide_none }}',
+                view: {
+                    {% for key, value in view.js_vars -%}
+                        '{{ key }}': '{{ value|remove_break }}',
+                    {% endfor -%}
 
+                    {# use to get view values savely #}
+
+                    get: function( key ) {
+                        return this[key] ? this[key] : '';
+                    }
+                },
+                clientWidth: Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+                mobileWidth: 768,
+                isMobileView: function() {
+                    return this.clientWidth < this.mobileWidth;
+                },
+                viewport: {
+                    meta: document.getElementById('viewport-meta'),
+                    standard: document.getElementById('viewport-meta').getAttribute('content'),
+                    landscape: 'width=1280',
+                    set: function() {
+                        if ( screen.width === window.ZMO.mobileWidth && Math.abs( window.orientation ) === 90 ) {
+                            this.meta.setAttribute( 'content', this.landscape );
+                        } else {
+                            this.meta.setAttribute( 'content', this.standard );
+                        }
+                    }
+                }
             };
-            viewport_set();
-            window.onresize = function() {
-                viewport_set();
-            };
+
+        {%- if view.context.advertising_enabled %}
+            window.ZMO.viewport.set();
+
+            if ( window.addEventListener ) {
+                window.addEventListener( 'resize', window.ZMO.viewport.set, false );
+            }
+        {%- endif %}
+
         </script>
-        {% endif %}
-        {{lama.build_js_view(view,request)}}
+
         <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
         <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
         <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
@@ -198,7 +217,7 @@
         </script>
         <script data-main="{{request.asset_url('js/main.js')}}" src="{{request.asset_url('js/libs/require.js')}}"></script>
         <script type="text/javascript">
-            if( typeof window.sasmobile === 'function' && zmo_is_mobile_view ) {
+            if( typeof window.sasmobile === 'function' && window.ZMO.isMobileView() ) {
                 iqd.callAds();
             }
         </script>
