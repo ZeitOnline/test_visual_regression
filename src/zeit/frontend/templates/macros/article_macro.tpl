@@ -504,6 +504,10 @@
         {%- endfor %}
     {% endif %}
     </div>
-    <span class="cluster__caption__text">{{ obj.galleryText | safe }}</span>
+    <div class="photocluster__caption is-constrained is-centered">
+        <div class="photocluster__caption__text">
+            {{ obj.galleryText | safe }}
+        </div>
+    </div>
 </div>
 {% endmacro %}
