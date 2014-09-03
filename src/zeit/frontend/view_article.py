@@ -387,8 +387,15 @@ class ColumnArticle(Article):
              renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 
-    advertising_enabled = False
-    copyrights = []
+    def __init__(self, *args, **kwargs):
+        super(PhotoclusterArticle, self).__init__(*args, **kwargs)
+        for page in self.pages:
+            for index in range(len(page)):
+                if issubclass(
+                        type(page[index]), zeit.frontend.gallery.Gallery):
+                    cls = type('Photocluster',
+                               (zeit.frontend.gallery.Gallery,), {})
+                    page[index] = cls(page[index].context)
 
 
 @view_config(name='teaser',
