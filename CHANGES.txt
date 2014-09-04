@@ -1,8 +1,8 @@
 Change log for zeit.frontend
 ============================
 
-0.16 (unreleased)
------------------
+0.15.1 (2014-09-04)
+-------------------
 
 - HOTFIX: translate_url takes only one argument
 
