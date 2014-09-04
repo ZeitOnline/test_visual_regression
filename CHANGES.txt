@@ -1,7 +1,13 @@
 Change log for zeit.frontend
 ============================
 
-0.15 (unreleased)
+0.16 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+0.15 (2014-09-03)
 -----------------
 
 - ZMO-509: implement photocluster
