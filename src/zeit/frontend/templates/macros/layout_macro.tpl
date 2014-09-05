@@ -545,6 +545,7 @@
         {% if banner.label -%}
         <div class="ad__{{ banner.name }}__label">{{ banner.label }}</div>
         {% endif -%}
+        <h1>{{ kw }}</h1>
         <div class="ad__{{ banner.name }}__inner">
             <script type="text/javascript">
                 if ( window.ZMO.clientWidth >= {{ banner.min_width|default(0) }} ) {
