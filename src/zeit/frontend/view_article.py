@@ -351,7 +351,7 @@ class ArticlePage(Article):
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    advertising_enabled = False
+    advertising_enabled = True
     main_nav_full_width = True
     is_longform = True
 
