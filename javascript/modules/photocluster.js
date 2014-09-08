@@ -34,7 +34,7 @@ define(['require', 'jquery'], function(require, $) {
             require( [
                 'libs/freewall'
             ], function( freewall ) {
-                var wall = new freewall(".photocluster");
+                var wall = new freewall('.photocluster');
                 wall.reset({
                     selector: '.photocluster__item',
                     animate: true,
