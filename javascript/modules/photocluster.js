@@ -45,6 +45,10 @@ define(['require', 'jquery'], function(require, $) {
                     }
                 });
                 wall.fitWidth();
+
+                $cluster.on( 'scaling_ready', function() {
+                    wall.fitWidth();
+                });
             });
         }
     };
