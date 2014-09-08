@@ -32,12 +32,16 @@ class Page(object):
         return iter(self.blocks)
 
 
-def _inject_banner_code(pages, advertising_enabled):
+def _inject_banner_code(pages, advertising_enabled, is_longform):
     """Injecting banner code in page.blocks counts and injects only after
     paragraphs (2nd actually) tile 7 and 8 are injected"""
 
     _tile_list = [7, 8]  # banner tiles in articles
     _possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
+
+    if (is_longform):
+        _tile_list = [8]
+        _possible_paragraphs = [5]
 
     if(advertising_enabled):
         for page in pages:
@@ -67,6 +71,10 @@ def pages_of_article(context):
         advertising_enabled = context.advertising_enabled
     except AttributeError:
         advertising_enabled = True
+    try:
+        is_longform = context.is_longform
+    except AttributeError:
+        is_longform = False
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
     first_division = body._get_element_for_node(first_division)
@@ -80,7 +88,7 @@ def pages_of_article(context):
             pages.append(page)
         else:
             page.append(block)
-    return _inject_banner_code(pages, advertising_enabled)
+    return _inject_banner_code(pages, advertising_enabled, is_longform)
 
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):

@@ -94,7 +94,8 @@ class Base(object):
     @reify
     def adwords(self):
         keywords = ['zeitonline']
-        if 'zeit-magazin' in self.ressort:
+        # TODO: End discrepancy between testing and live ressorts? see banner_channel
+        if 'zeit-magazin' in self.ressort or 'zeitmz' in self.banner_channel:
             keywords.append('zeitmz')
         if self.is_top_of_mind:
             keywords.append('ToM')
