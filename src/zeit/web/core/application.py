@@ -17,18 +17,18 @@ from zeit.content.gallery.interfaces import IGalleryMetadata
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector
 
-from zeit.frontend.article import IColumnArticle
-from zeit.frontend.article import ILongformArticle
-from zeit.frontend.article import IFeatureLongform
-from zeit.frontend.article import IPhotoclusterArticle
-from zeit.frontend.article import IShortformArticle
-from zeit.frontend.gallery import IGallery
-from zeit.frontend.gallery import IProductGallery
-import zeit.frontend
-import zeit.frontend.banner
-import zeit.frontend.block
-import zeit.frontend.centerpage
-import zeit.frontend.template
+from zeit.web.core.article import IColumnArticle
+from zeit.web.core.article import ILongformArticle
+from zeit.web.core.article import IFeatureLongform
+from zeit.web.core.article import IPhotoclusterArticle
+from zeit.web.core.article import IShortformArticle
+from zeit.web.core.gallery import IGallery
+from zeit.web.core.gallery import IProductGallery
+import zeit.web.core
+import zeit.web.core.banner
+import zeit.web.core.block
+import zeit.web.core.centerpage
+import zeit.web.core.template
 
 log = logging.getLogger(__name__)
 
@@ -52,13 +52,13 @@ class Application(object):
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_banner-source', ''))
-        zeit.frontend.banner.banner_list = \
-            zeit.frontend.banner.make_banner_list(banner_source)
+            self.settings.get('vivi_zeit.web.core_banner-source', ''))
+        zeit.web.core.banner.banner_list = \
+            zeit.web.core.banner.make_banner_list(banner_source)
         iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
-        zeit.frontend.banner.iqd_mobile_ids = \
-            zeit.frontend.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
+            self.settings.get('vivi_zeit.web.core_iqd-mobile-ids', ''))
+        zeit.web.core.banner.iqd_mobile_ids = \
+            zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -67,7 +67,7 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
-        pkg = pkg_resources.get_distribution('zeit.frontend')
+        pkg = pkg_resources.get_distribution('zeit.web.core')
         pkg_version = pkg.version
         self.settings['zmo_version'] = pkg_version
         self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
@@ -86,13 +86,13 @@ class Application(object):
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('health_check', '/health_check')
-        config.add_static_view(name='css', path='zeit.frontend:css/')
-        config.add_static_view(name='js', path='zeit.frontend:js/')
-        config.add_static_view(name='img', path='zeit.frontend:img/')
-        config.add_static_view(name='fonts', path='zeit.frontend:fonts/')
+        config.add_static_view(name='css', path='zeit.web.core:css/')
+        config.add_static_view(name='js', path='zeit.web.core:js/')
+        config.add_static_view(name='img', path='zeit.web.core:img/')
+        config.add_static_view(name='fonts', path='zeit.web.core:fonts/')
 
         # ToDo: Is this still needed. Can it be removed?
-        config.add_static_view(name='mocks', path='zeit.frontend:dummy_html/')
+        config.add_static_view(name='mocks', path='zeit.web.core:dummy_html/')
 
         def asset_url(request, path, **kw):
             kw['_app_url'] = join_url_path(
@@ -101,7 +101,7 @@ class Application(object):
             if path == '/':
                 url = request.route_url('home', **kw)
             else:
-                prefix = '' if ':' in path else 'zeit.frontend:'
+                prefix = '' if ':' in path else 'zeit.web.core:'
                 url = request.static_url(prefix + path, **kw)
             if url.rsplit('.', 1)[-1] in ('css', 'js'):
                 url += '?' + request.registry.settings.get('version_hash', '')
@@ -110,14 +110,14 @@ class Application(object):
         config.add_request_method(asset_url)
 
         config.set_root_factory(self.get_repository)
-        config.scan(package=zeit.frontend, ignore=self.DONT_SCAN)
+        config.scan(package=zeit.web.core, ignore=self.DONT_SCAN)
 
-        zeit.frontend.template.default_teaser_images = \
+        zeit.web.core.template.default_teaser_images = \
             self.settings['default_teaser_images']
 
-        zeit.frontend.template.image_scales = dict(
-            zeit.frontend.template.get_image_scales(
-                self.settings['vivi_zeit.frontend_image-scales']))
+        zeit.web.core.template.image_scales = dict(
+            zeit.web.core.template.get_image_scales(
+                self.settings['vivi_zeit.web.core_image-scales']))
 
         from pyramid.authorization import ACLAuthorizationPolicy
         from .security import CommunityAuthenticationPolicy
@@ -128,7 +128,7 @@ class Application(object):
         config.set_session_factory(session_factory)
         config.set_authentication_policy(CommunityAuthenticationPolicy())
         config.set_authorization_policy(ACLAuthorizationPolicy())
-        from zeit.frontend.appinfo import assemble_app_info
+        from zeit.web.core.appinfo import assemble_app_info
         config.add_request_method(assemble_app_info, 'app_info', reify=True)
         return config
 
@@ -146,16 +146,16 @@ class Application(object):
             pyramid_jinja2.IJinja2Environment)
 
         default_loader = jinja.loader
-        jinja.loader = zeit.frontend.template.PrefixLoader({
+        jinja.loader = zeit.web.core.template.PrefixLoader({
             None: default_loader,
-            'dav': zeit.frontend.template.HTTPLoader(self.settings.get(
+            'dav': zeit.web.core.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
         jinja.trim_blocks = True
 
         Scanner(env=jinja).scan(
-            zeit.frontend,
+            zeit.web.core,
             categories=('jinja',),
             ignore=self.DONT_SCAN
         )
@@ -169,7 +169,7 @@ class Application(object):
         self.configure_product_config()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
-        zope.configuration.xmlconfig.include(context, package=zeit.frontend)
+        zope.configuration.xmlconfig.include(context, package=zeit.web.core)
         self.configure_connector(context)
         context.execute_actions()
 
@@ -190,7 +190,7 @@ class Application(object):
         Requires the following naming convention in the ini file:
             vivi_<PACKAGE>_<SETTING> = <VALUE>
         for example
-            vivi_zeit.connector_repository-path = egg://zeit.frontend/data
+            vivi_zeit.connector_repository-path = egg://zeit.web.core/data
 
         (XXX This is based on the assumption that vivi never uses an underscore
         in a SETTING name.)
@@ -315,7 +315,6 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, IColumnArticle)
                 elif template == 'photocluster':
                     zope.interface.alsoProvides(context, IPhotoclusterArticle)
-
 
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
