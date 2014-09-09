@@ -10,12 +10,12 @@ import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.seo
 
-import zeit.frontend.article
-import zeit.frontend.comments
-import zeit.frontend.interfaces
-import zeit.frontend.reach
-import zeit.frontend.template
-import zeit.frontend.view
+import zeit.web.core.article
+import zeit.web.core.comments
+import zeit.web.core.interfaces
+import zeit.web.core.reach
+import zeit.web.core.template
+import zeit.web.core.view
 
 
 def register_copyrights(func):
@@ -25,7 +25,7 @@ def register_copyrights(func):
     def wrapped(self):
         container = func(self)
         if container:
-            for t in zeit.frontend.interfaces.ITeaserSequence(container):
+            for t in zeit.web.core.interfaces.ITeaserSequence(container):
                 if t.image:
                     self._copyrights.setdefault(t.image.image_group, t.image)
         return container
@@ -34,7 +34,7 @@ def register_copyrights(func):
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              renderer='templates/centerpage.html')
-class Centerpage(zeit.frontend.view.Base):
+class Centerpage(zeit.web.core.view.Base):
 
     advertising_enabled = True
 
@@ -147,7 +147,7 @@ class Centerpage(zeit.frontend.view.Base):
     def area_buzz(self):
         stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
-        reach = zeit.frontend.reach.LinkReach(stats_path, linkreach)
+        reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
         teaser_dict = {}
         for service in ('twitter', 'facebook', 'comments'):
             teaser_dict[service] = reach.fetch_service(service, 3)
@@ -163,7 +163,7 @@ class Centerpage(zeit.frontend.view.Base):
             teaser_list.append(
                 dict(
                     label=teaser.copyright[0][0],
-                    image=zeit.frontend.template.translate_url(teaser.src),
+                    image=zeit.web.core.template.translate_url(teaser.src),
                     link=teaser.copyright[0][1],
                     nofollow=teaser.copyright[0][2]
                 )
@@ -173,7 +173,7 @@ class Centerpage(zeit.frontend.view.Base):
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              name='xml', renderer='string')
-class XMLView(zeit.frontend.view.Base):
+class XMLView(zeit.web.core.view.Base):
 
     def __call__(self):
         xml = zeit.content.cp.interfaces.IRenderedXML(self.context)

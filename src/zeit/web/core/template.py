@@ -348,18 +348,18 @@ def get_teaser_template(block_layout,
 
 @register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
-    import zeit.frontend.centerpage
+    import zeit.web.core.centerpage
     if unique_id:
         try:
             asset = zeit.cms.interfaces.ICMSContent(unique_id)
         except TypeError:
             return None
     else:
-        asset = zeit.frontend.centerpage.get_image_asset(teaser)
+        asset = zeit.web.core.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return get_teaser_image(
             teaser_block, teaser,
-            unique_id=zeit.frontend.template.default_teaser_images)
+            unique_id=zeit.web.core.template.default_teaser_images)
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
@@ -374,7 +374,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
-            zeit.frontend.interfaces.ITeaserImage)
+            zeit.web.core.interfaces.ITeaserImage)
         return teaser_image
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to
@@ -384,7 +384,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         else:
             return get_teaser_image(
                 teaser_block, teaser,
-                unique_id=zeit.frontend.template.default_teaser_images)
+                unique_id=zeit.web.core.template.default_teaser_images)
 
 
 @register_global
@@ -431,6 +431,7 @@ class HTTPLoader(jinja2.BaseLoader):
 
 
 class CompareModifiedHeader(object):
+
     """Compares a stored timestamp against the current Last-Modified header."""
 
     def __init__(self, url, timestamp):
@@ -460,6 +461,7 @@ class CompareModifiedHeader(object):
 
 
 class PrefixLoader(jinja2.BaseLoader):
+
     """Tweaked version of jinja2.PrefixLoader that defaults to prefix None
     if the requested path contains no prefix delimiter.
     """

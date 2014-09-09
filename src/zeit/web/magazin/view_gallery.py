@@ -3,12 +3,12 @@ from pyramid.view import view_config
 
 import zeit.wysiwyg.interfaces
 
-import zeit.frontend.gallery
+import zeit.web.core.gallery
 
 
-@view_config(context=zeit.frontend.gallery.IGallery,
+@view_config(context=zeit.web.core.gallery.IGallery,
              renderer='templates/gallery.html')
-class Gallery(zeit.frontend.view.Content):
+class Gallery(zeit.web.core.view.Content):
 
     advertising_enabled = True
 
@@ -19,7 +19,7 @@ class Gallery(zeit.frontend.view.Content):
     @reify
     def images(self):
         # TODO: Why does this not work with zope interfaces?
-        return zeit.frontend.gallery.standalone(self.context)
+        return zeit.web.core.gallery.standalone(self.context)
 
     @reify
     def galleryText(self):
@@ -37,7 +37,7 @@ class Gallery(zeit.frontend.view.Content):
             teaser_list.append(
                 dict(
                     label=image_meta.copyrights[0][0],
-                    image=zeit.frontend.template.translate_url(
+                    image=zeit.web.core.template.translate_url(
                         i.image.uniqueId),
                     link=image_meta.copyrights[0][1],
                     nofollow=image_meta.copyrights[0][2]
@@ -46,7 +46,7 @@ class Gallery(zeit.frontend.view.Content):
         return sorted(teaser_list, key=lambda k: k['label'])
 
 
-@view_config(context=zeit.frontend.gallery.IProductGallery,
+@view_config(context=zeit.web.core.gallery.IProductGallery,
              renderer='templates/product.html')
 class ProductGallery(Gallery):
     pass

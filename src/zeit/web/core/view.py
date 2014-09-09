@@ -17,11 +17,12 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
-import zeit.frontend.article
-import zeit.frontend.comments
+import zeit.web.core.article
+import zeit.web.core.comments
 
 
 class MetaView(type):
+
     """Meta class for view callables that ensures the return type is a dict."""
 
     def __new__(cls, name, bases, dct):
@@ -35,6 +36,7 @@ class MetaView(type):
 
 
 class Base(object):
+
     """Base class for all views."""
 
     __metaclass__ = MetaView
@@ -49,7 +51,7 @@ class Base(object):
     def teaser_get_commentcount(self, uniqueId):
         try:
             index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = zeit.frontend.comments.comments_per_unique_id(
+            count = zeit.web.core.comments.comments_per_unique_id(
                 self.request.registry.settings.node_comment_statistics)[index]
             if int(count) >= 5:
                 return count
@@ -91,7 +93,7 @@ class Base(object):
 
     def banner(self, tile):
         try:
-            return zeit.frontend.banner.banner_list[tile - 1]
+            return zeit.web.core.banner.banner_list[tile - 1]
         except IndexError:
             return None
 
@@ -149,7 +151,7 @@ class Base(object):
 
     @reify
     def iqd_mobile_settings(self):
-        iqd_ids = zeit.frontend.banner.iqd_mobile_ids
+        iqd_ids = zeit.web.core.banner.iqd_mobile_ids
         if self.is_hp:
             return getattr(iqd_ids['hp'], 'centerpage')
         try:

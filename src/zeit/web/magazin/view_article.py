@@ -14,12 +14,12 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 
-import zeit.frontend.article
-import zeit.frontend.comments
-import zeit.frontend.interfaces
-import zeit.frontend.reach
-import zeit.frontend.template
-import zeit.frontend.view
+import zeit.web.core.article
+import zeit.web.core.comments
+import zeit.web.core.interfaces
+import zeit.web.core.reach
+import zeit.web.core.template
+import zeit.web.core.view
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ log = logging.getLogger(__name__)
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='komplettansicht',
              renderer='templates/article_komplett.html')
-class Article(zeit.frontend.view.Content):
+class Article(zeit.web.core.view.Content):
 
     advertising_enabled = True
     is_longform = False
@@ -55,7 +55,7 @@ class Article(zeit.frontend.view.Content):
 
     @reify
     def pages(self):
-        return zeit.frontend.interfaces.IPages(self.context)
+        return zeit.web.core.interfaces.IPages(self.context)
 
     @reify
     def current_page(self):
@@ -120,7 +120,7 @@ class Article(zeit.frontend.view.Content):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = zeit.frontend.block.HeaderImageStandard(obj)
+            img = zeit.web.core.block.HeaderImageStandard(obj)
             if img:
                 try:
                     self._copyrights.setdefault(img.uniqueId, img)
@@ -132,13 +132,13 @@ class Article(zeit.frontend.view.Content):
     def header_video(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
-            return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
+            return self._create_obj(zeit.web.core.block.HeaderVideo, obj)
 
     @reify
     def first_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return self._create_obj(zeit.frontend.block.Image, obj)
+            return self._create_obj(zeit.web.core.block.Image, obj)
 
     @reify
     def header_elem(self):
@@ -241,18 +241,18 @@ class Article(zeit.frontend.view.Content):
 
     @property
     def nextread(self):
-        nextread = zeit.frontend.interfaces.INextreadTeaserBlock(self.context)
+        nextread = zeit.web.core.interfaces.INextreadTeaserBlock(self.context)
         if not nextread.teasers:
             return
         if nextread.layout != 'minimal':
-            for i in zeit.frontend.interfaces.ITeaserSequence(nextread):
+            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
                 i.image and self._copyrights.setdefault(
                     i.image.image_group, i.image)
         return nextread
 
     @reify
     def comments(self):
-        return zeit.frontend.comments.get_thread(
+        return zeit.web.core.comments.get_thread(
             unique_id=self.context.uniqueId, request=self.request)
 
     @reify
@@ -273,7 +273,7 @@ class Article(zeit.frontend.view.Content):
                 return str(n / 1000000), 'Mio.'
 
         linkreach = self.request.registry.settings.linkreach_host
-        reach = zeit.frontend.reach.LinkReach(None, linkreach)
+        reach = zeit.web.core.reach.LinkReach(None, linkreach)
         raw = reach.get_counts_by_url(self.article_url)
         total = raw.pop('total', 0)
         counts = {'total': unitize(total)} if total >= 10 else {}
@@ -306,7 +306,7 @@ class Article(zeit.frontend.view.Content):
                 cr_list.append(
                     dict(
                         label=i.copyright[0][0],
-                        image=zeit.frontend.template.translate_url(i.src),
+                        image=zeit.web.core.template.translate_url(i.src),
                         link=i.copyright[0][1],
                         nofollow=i.copyright[0][2]
                     )
@@ -338,16 +338,16 @@ class ArticlePage(Article):
 
     @reify
     def current_page(self):
-        return zeit.frontend.interfaces.IPages(self.context)[self.page_nr - 1]
+        return zeit.web.core.interfaces.IPages(self.context)[self.page_nr - 1]
 
     @reify
     def next_title(self):
-        pages = zeit.frontend.interfaces.IPages(self.context)
+        pages = zeit.web.core.interfaces.IPages(self.context)
         if self.page_nr < len(pages):
             return pages[self.page_nr].teaser
 
 
-@view_config(context=zeit.frontend.article.ILongformArticle,
+@view_config(context=zeit.web.core.article.ILongformArticle,
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
@@ -359,31 +359,31 @@ class LongformArticle(Article):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = self._create_obj(zeit.frontend.block.HeaderImage, obj)
+            img = self._create_obj(zeit.web.core.block.HeaderImage, obj)
             if img:
                 self._copyrights.setdefault(img.uniqueId, img)
             return img
 
 
-@view_config(context=zeit.frontend.article.IFeatureLongform,
+@view_config(context=zeit.web.core.article.IFeatureLongform,
              renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
     pass
 
 
-@view_config(context=zeit.frontend.article.IShortformArticle,
+@view_config(context=zeit.web.core.article.IShortformArticle,
              renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass
 
 
-@view_config(context=zeit.frontend.article.IColumnArticle,
+@view_config(context=zeit.web.core.article.IColumnArticle,
              renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
 
 
-@view_config(context=zeit.frontend.article.IPhotoclusterArticle,
+@view_config(context=zeit.web.core.article.IPhotoclusterArticle,
              renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 
@@ -392,9 +392,9 @@ class PhotoclusterArticle(Article):
         for page in self.pages:
             for index in range(len(page)):
                 if issubclass(
-                        type(page[index]), zeit.frontend.gallery.Gallery):
+                        type(page[index]), zeit.web.core.gallery.Gallery):
                     cls = type('Photocluster',
-                               (zeit.frontend.gallery.Gallery,), {})
+                               (zeit.web.core.gallery.Gallery,), {})
                     page[index] = cls(page[index].context)
 
 

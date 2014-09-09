@@ -8,7 +8,7 @@ import colander
 
 import zeit.cms.interfaces
 
-import zeit.frontend.comments
+import zeit.web.core.comments
 
 
 class UnavailableSectionException(Exception):
@@ -95,7 +95,7 @@ class LinkReach(object):
                 continue
 
             try:
-                score = zeit.frontend.comments.comments_per_unique_id(
+                score = zeit.web.core.comments.comments_per_unique_id(
                     self.stats_path)[rel_path]
             except KeyError:
                 # Ignore item if comment count lookup fails.

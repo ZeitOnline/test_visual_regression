@@ -1,8 +1,8 @@
 from babel.dates import get_timezone
 from pyramid.view import view_config
 from zeit.cms.workflow.interfaces import IPublishInfo
-from zeit.frontend.block import IFrontendBlock
-import zeit.frontend.view
+from zeit.web.core.block import IFrontendBlock
+import zeit.web.core.view
 import zeit.newsletter.interfaces
 
 
@@ -11,7 +11,7 @@ import zeit.newsletter.interfaces
 @view_config(context=zeit.newsletter.interfaces.INewsletter,
              request_param='format=txt',
              renderer='dav://newsletter_text.html')
-class Newsletter(zeit.frontend.view.Base):
+class Newsletter(zeit.web.core.view.Base):
 
     def __call__(self):
         if self.request.params.get('format') == 'txt':
