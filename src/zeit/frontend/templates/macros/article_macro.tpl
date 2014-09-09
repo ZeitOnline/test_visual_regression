@@ -489,3 +489,25 @@
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
 {% endmacro %}
+
+
+{% macro photocluster(obj) %}
+<div class="photocluster__wrap">
+    <div class="photocluster">
+    {% if obj %}
+        {% for entry in obj.itervalues() -%}
+            <div class="photocluster__item">
+                <div class="scaled-image">
+                    {{ lama.insert_responsive_image(entry) }}
+                </div>
+            </div>
+        {%- endfor %}
+    {% endif %}
+    </div>
+    <div class="photocluster__caption is-constrained is-centered">
+        <div class="photocluster__caption__text">
+            {{ obj.galleryText | safe }}
+        </div>
+    </div>
+</div>
+{% endmacro %}

@@ -26,33 +26,26 @@ define(['require', 'jquery'], function(require, $) {
                 var $photo = $(photo);
                 // add random sizing class
                 $photo.addClass(classes[Math.floor(Math.random()*classes.length)]);
-                // find responsive image container within packery block
-                var $rimg = $photo.find('img, noscript').eq(0);
-                if ($rimg.length === 1) {
-                    // adjust height of packery block to ratio of image
-                    // TODO: debounced recalculation on resize (see images.js for example)
-                    $photo.css('height', $photo.width()/$rimg.data('ratio'));
-                }
             });
 
             /**
-             * photocluster.js: use Packery as a jQuery plugin with RequireJS, you’ll need to run jQuery bridget.
-             * @tutorial http://packery.metafizzy.co/appendix.html#requirejs
+             * require photocluster library
              */
             require( [
-                'libs/packery.pkgd.min',
-                'jquery-bridget/jquery.bridget'
-            ], function( Packery, bridget ) {
-                // make Packery a jQuery plugin
-                bridget( 'packery', Packery );
-
-                // initialize packery
-                $cluster.packery({
-                    itemSelector: '.photocluster__item',
-                    gutter: 0
+                'libs/freewall'
+            ], function( freewall ) {
+                var wall = new freewall(".photocluster");
+                wall.reset({
+                    selector: '.photocluster__item',
+                    animate: true,
+                    cellW: 200,
+                    cellH: 'auto',
+                    onResize: function() {
+                        wall.fitWidth();
+                    }
                 });
+                wall.fitWidth();
             });
-
         }
     };
 

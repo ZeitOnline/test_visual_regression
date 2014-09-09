@@ -1,3 +1,4 @@
+import lxml.etree
 from pyramid.decorator import reify
 from pyramid.view import view_config
 
@@ -168,3 +169,12 @@ class Centerpage(zeit.frontend.view.Base):
                 )
             )
         return sorted(teaser_list, key=lambda k: k['label'])
+
+
+@view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             name='xml', renderer='string')
+class XMLView(zeit.frontend.view.Base):
+
+    def __call__(self):
+        xml = zeit.content.cp.interfaces.IRenderedXML(self.context)
+        return lxml.etree.tostring(xml, pretty_print=True)
