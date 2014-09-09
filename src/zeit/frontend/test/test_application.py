@@ -73,16 +73,18 @@ def test_malformed_view_spec_should_produce_404_page(testserver):
     assert resp.status_code == 404
 
 
-def test_out_of_scope_pagination_should_redirect_to_article_base(testserver):
+def test_page_zero_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/artikel/03/seite-0' % testserver.url,
                         allow_redirects=False)
     assert resp.headers['location'] == '%s/artikel/03' % testserver.url
-    assert resp.status_code == 302
+    assert resp.status_code == 301
 
+
+def test_out_of_scope_pagination_should_produce_404_page(testserver):
     resp = requests.get('%s/artikel/03/seite-8' % testserver.url,
                         allow_redirects=False)
-    assert resp.headers['location'] == '%s/artikel/03' % testserver.url
-    assert resp.status_code == 302
+    assert resp.url == '%s/artikel/03/seite-8' % testserver.url
+    assert resp.status_code == 404
 
 
 def test_malformed_paginaton_should_redirect_to_article_base(testserver):
@@ -103,4 +105,4 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     resp = requests.get('%s/artikel/03/seite-7.html' % testserver.url,
                         allow_redirects=False)
     assert resp.headers['location'] == '%s/artikel/03/seite-7' % testserver.url
-    assert resp.status_code == 302
+    assert resp.status_code == 301

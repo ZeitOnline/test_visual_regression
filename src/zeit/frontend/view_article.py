@@ -317,9 +317,8 @@ class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-        if (self.request.view_name != 'komplettansicht') and not (
-                0 < self.page_nr <= len(self.pages)):
-            raise pyramid.httpexceptions.HTTPFound(self.resource_url)
+        if (self.request.view_name != 'komplettansicht') and self.page_nr == 0:
+            raise pyramid.httpexceptions.HTTPMovedPermanently(self.resource_url)
 
     @reify
     def page_nr(self):
@@ -327,13 +326,14 @@ class ArticlePage(Article):
             spec = self.request.path_info.split('/')[-1][6:]
             number = int(re.sub('[^0-9]', '', spec))
         except (AssertionError, IndexError, ValueError):
-            raise pyramid.httpexceptions.HTTPMovedPermanently(
-                self.resource_url)
+            raise pyramid.httpexceptions.HTTPMovedPermanently(self.resource_url)
         else:
             if len(str(number)) != len(spec):
                 # Make sure /seite-007 is redirected to /seite-7
-                raise pyramid.httpexceptions.HTTPFound('%s/%s-%s' % (
+                raise pyramid.httpexceptions.HTTPMovedPermanently('%s/%s-%s' % (
                     self.resource_url, self.request.view_name, number))
+            elif number > len(self.pages):
+                raise pyramid.httpexceptions.HTTPNotFound()
             return number
 
     @reify
