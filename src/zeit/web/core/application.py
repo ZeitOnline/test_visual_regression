@@ -86,10 +86,10 @@ class Application(object):
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('health_check', '/health_check')
-        config.add_static_view(name='css', path='zeit.web.core:css/')
-        config.add_static_view(name='js', path='zeit.web.core:js/')
-        config.add_static_view(name='img', path='zeit.web.core:img/')
-        config.add_static_view(name='fonts', path='zeit.web.core:fonts/')
+        config.add_static_view(name='css', path='zeit.web.static:css/zmo/')
+        config.add_static_view(name='js', path='zeit.web.static:js/')
+        config.add_static_view(name='img', path='zeit.web.static:img/zmo/')
+        config.add_static_view(name='fonts', path='zeit.web.static:fonts/zmo/')
 
         # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.web.core:dummy_html/')
