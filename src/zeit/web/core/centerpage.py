@@ -6,9 +6,9 @@ import zeit.content.gallery.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 
-from zeit.frontend.template import register_filter
-import zeit.frontend.block
-import zeit.frontend.interfaces
+from zeit.web.core.template import register_filter
+import zeit.web.core.block
+import zeit.web.core.interfaces
 
 
 @register_filter
@@ -92,21 +92,21 @@ class TeaserSequence(object):
 
     def _resolve_child(self, item):
         try:
-            sub_seq = zeit.frontend.interfaces.ITeaserSequence(item)
+            sub_seq = zeit.web.core.interfaces.ITeaserSequence(item)
             self.sequence += sub_seq.sequence
             self.refs += sub_seq.refs
             return
         except TypeError:
             pass
         try:
-            self.sequence.append(zeit.frontend.centerpage.Teaser(
+            self.sequence.append(zeit.web.core.centerpage.Teaser(
                 self.context, item))
             self.refs.append(self.context)
         except TypeError:
             pass
 
 
-@implementer(zeit.frontend.interfaces.ITeaserSequence)
+@implementer(zeit.web.core.interfaces.ITeaserSequence)
 @adapter(list)
 class TeaserList(TeaserSequence):
 
@@ -116,21 +116,21 @@ class TeaserList(TeaserSequence):
             self._resolve_child(item)
 
 
-@implementer(zeit.frontend.interfaces.ITeaserSequence)
+@implementer(zeit.web.core.interfaces.ITeaserSequence)
 @adapter(zeit.content.cp.interfaces.ITeaserBlock)
 class TeaserBlock(TeaserList):
 
     pass
 
 
-@implementer(zeit.frontend.interfaces.ITeaserSequence)
+@implementer(zeit.web.core.interfaces.ITeaserSequence)
 @adapter(zeit.content.cp.interfaces.IAutoPilotTeaserBlock)
 class AutoPilotTeaserBlock(TeaserBlock):
 
     pass
 
 
-@implementer(zeit.frontend.interfaces.ITeaserSequence)
+@implementer(zeit.web.core.interfaces.ITeaserSequence)
 @adapter(dict)
 class TeaserDict(TeaserSequence):
 
@@ -140,28 +140,28 @@ class TeaserDict(TeaserSequence):
             self._resolve_child(item)
 
 
-@implementer(zeit.frontend.interfaces.ITeaserSequence)
+@implementer(zeit.web.core.interfaces.ITeaserSequence)
 @adapter(zeit.content.cp.interfaces.ITeaserBar)
 class TeaserBar(TeaserDict):
 
     pass
 
 
-@implementer(zeit.frontend.interfaces.ITeaser)
+@implementer(zeit.web.core.interfaces.ITeaser)
 @adapter(TeaserSequence, zeit.cms.interfaces.ICMSContent)
 class Teaser(object):
 
     def __init__(self, block, context):
         self.video = None
         self.gallery = None
-        self.image = zeit.frontend.template.get_teaser_image(block, context)
+        self.image = zeit.web.core.template.get_teaser_image(block, context)
         self.context = context
 
 
-@implementer(zeit.frontend.interfaces.ITeaserImage)
+@implementer(zeit.web.core.interfaces.ITeaserImage)
 @adapter(zeit.content.image.interfaces.IImageGroup,
          zeit.content.image.interfaces.IImage)
-class TeaserImage(zeit.frontend.block.BaseImage):
+class TeaserImage(zeit.web.core.block.BaseImage):
 
     def __init__(self, image_group, image):
         meta = zeit.content.image.interfaces.IImageMetadata(image_group)

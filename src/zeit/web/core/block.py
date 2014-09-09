@@ -13,12 +13,12 @@ import zeit.content.video.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
-from zeit.frontend.template import register_test, register_filter
-import zeit.frontend.interfaces
+from zeit.web.core.template import register_test, register_filter
+import zeit.web.core.interfaces
 
 
 # Since this interface is an implementation detail rather than part of the API
-# of zeit.frontend, it makes more sense to keep it within the Python module
+# of zeit.web.core, it makes more sense to keep it within the Python module
 # that deals with the concept of blocks rather than within a separate
 # interfaces module.
 class IFrontendBlock(zope.interface.Interface):
@@ -246,9 +246,9 @@ class HeaderVideo(BaseVideo):
 @adapter(zeit.content.article.edit.interfaces.IGallery)
 def inlinegallery(context):
     # Inline galleries are created dynamically via this factory because
-    # they inherit from zeit.frontend.gallery.Gallery. Declaring a regular
+    # they inherit from zeit.web.core.gallery.Gallery. Declaring a regular
     # class would introduce a circular dependency.
-    from zeit.frontend.gallery import Gallery
+    from zeit.web.core.gallery import Gallery
     cls = type('Inlinegallery', (Gallery,), {})
     return cls(context.references)
 
@@ -424,6 +424,7 @@ def _inline_html(xml):
 
 
 class NextreadLayout(object):
+
     """Implementation to match layout sources from centerpages."""
 
     def __init__(self, **kwargs):
@@ -437,9 +438,10 @@ class NextreadLayout(object):
         return self.id != value
 
 
-@implementer(zeit.frontend.interfaces.INextreadTeaserBlock)
+@implementer(zeit.web.core.interfaces.INextreadTeaserBlock)
 @adapter(zeit.content.article.interfaces.IArticle)
 class NextreadTeaserBlock(object):
+
     """Teaser block for nextread teasers in articles."""
 
     def __init__(self, context):

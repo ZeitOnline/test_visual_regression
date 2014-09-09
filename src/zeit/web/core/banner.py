@@ -1,6 +1,6 @@
 from lxml import objectify
 import urllib2
-import zeit.frontend.interfaces
+import zeit.web.core.interfaces
 import zope.interface
 
 #
@@ -18,7 +18,7 @@ import zope.interface
 #
 
 
-@zope.interface.implementer(zeit.frontend.interfaces.IPlace)
+@zope.interface.implementer(zeit.web.core.interfaces.IPlace)
 class Place(object):
 
     def __init__(self, tile, sizes, diuqilon, label,
@@ -36,7 +36,7 @@ class Place(object):
         self.noscript_width_height = self.sizes[0].split('x')
 
 
-@zope.interface.implementer(zeit.frontend.interfaces.IIqdMobileList)
+@zope.interface.implementer(zeit.web.core.interfaces.IIqdMobileList)
 class IqdMobileList(object):
 
     def __init__(self, iqd_id):
