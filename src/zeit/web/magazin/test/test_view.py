@@ -21,18 +21,20 @@ from zeit.web.core.test import Browser
 
 def test_base_view_produces_acceptable_return_type():
     class BaseView(zeit.web.core.view.Base):
+
         """This view class does not implement a __call__ method."""
 
         pass
 
     obj = BaseView(mock.Mock(), mock.Mock())
-    assert type(type(obj)) is zeit.web.core.view.MetaView, (
+    assert isinstance(type(obj), zeit.web.core.view.MetaView), (
         'The type MetaView is used.')
     assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
 
 
 def test_response_view_produces_acceptable_return_type():
     class ResponseView(zeit.web.core.view.Base):
+
         """This view class explicitly returns a pyramid response."""
 
         def __call__(self):
@@ -45,6 +47,7 @@ def test_response_view_produces_acceptable_return_type():
 
 def test_none_view_produces_acceptable_return_type():
     class NoneView(zeit.web.core.view.Base):
+
         """This view class implicitly returns None."""
 
         def __call__(self):
@@ -56,6 +59,7 @@ def test_none_view_produces_acceptable_return_type():
 
 def test_dict_view_produces_acceptable_return_value():
     class DictView(zeit.web.core.view.Base):
+
         """This view class returns a dictionary."""
 
         def __call__(self):
@@ -191,8 +195,8 @@ def test_article_should_have_author_box(testserver):
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     body = zeit.content.article.edit.interfaces.IEditableBody(
         article_view.context)
-    assert type(body.values()[2]) == (
-        zeit.content.article.edit.reference.Portraitbox)
+    assert isinstance(body.values()[2], (
+        zeit.content.article.edit.reference.Portraitbox))
 
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
@@ -220,15 +224,16 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
 def test_header_elem_should_be_img_if_there_is_a_header_img(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert type(article_view.header_elem) == (
-        zeit.web.core.block.HeaderImageStandard)
+    assert isinstance(article_view.header_elem, (
+        zeit.web.core.block.HeaderImageStandard))
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
     xml = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(xml)
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert type(article_view.header_elem) == zeit.web.core.block.HeaderVideo
+    assert isinstance(
+        article_view.header_elem, zeit.web.core.block.HeaderVideo)
 
 
 def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):
@@ -239,7 +244,8 @@ def test_header_image_should_be_none_if_adapted_as_regular_image(testserver):
 
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):
     r = requests.get(testserver.url +
-        '/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg')
+                     '/exampleimages/artikel/01/'
+                     'schoppenstube/schoppenstube-540x304.jpg')
     assert r.headers['content-type'] == 'image/jpeg'
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
 
@@ -277,7 +283,8 @@ def test_inline_gallery_should_be_contained_in_body(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert (
-        type(body.values()[14]) == zeit.content.article.edit.reference.Gallery)
+        isinstance(body.values()[14],
+                   zeit.content.article.edit.reference.Gallery))
 
 
 def test_inline_gallery_should_have_images(testserver):
@@ -298,9 +305,8 @@ def test_inline_gallery_should_have_images(testserver):
 
 def test_article_request_should_have_body_element(testserver):
     browser = zeit.web.core.test.Browser('%s/artikel/05' % testserver.url)
-    assert (
-        '<body itemscope itemtype="http://schema.org/WebPage">'
-        ) in browser.contents
+    assert ('<body itemscope itemtype='
+            '"http://schema.org/WebPage">') in browser.contents
     assert '</body>' in browser.contents
 
 
@@ -526,11 +532,13 @@ def test_article_has_correct_sharing_image(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert zeit.web.core.template.closest_substitute_image(
-        article_view.image_group, 'og-image').uniqueId == \
-        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg'
+        article_view.image_group, 'og-image').uniqueId == (
+        'http://xml.zeit.de/exampleimages/artikel/01/'
+        'schoppenstube/schoppenstube-540x304.jpg')
     assert zeit.web.core.template.closest_substitute_image(
-        article_view.image_group, 'twitter-image-large').uniqueId == \
-        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/schoppenstube-540x304.jpg'
+        article_view.image_group, 'twitter-image-large').uniqueId == (
+        'http://xml.zeit.de/exampleimages/artikel/01/'
+        'schoppenstube/schoppenstube-540x304.jpg')
 
 
 def test_ArticlePage_should_throw_404_if_page_is_nan(testserver):
@@ -761,8 +769,10 @@ def test_http_header_should_contain_zmo_version(testserver):
         testserver.url + "/zeit-magazin/index").headers['x-zmoversion']
     assert pkg_version == head_version
 
+
 def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.magazin.web:templatesfeature_longform.html')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/feature_longform.html')
 
     # jinja2 has a blocks attribute which generates a stream,
     # if called with context. We can use it with a html parser.
@@ -772,13 +782,13 @@ def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
     assert elem.text == 'ZEIT ONLINE'
     assert elem.get('title') == 'ZEIT ONLINE'
 
-    elem =  html.cssselect('.main-nav__logo')[0]
+    elem = html.cssselect('.main-nav__logo')[0]
     assert elem.get('href') == 'http://www.zeit.de/index'
 
+
 def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.magazin.web:templatesfeature_longform.html')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/feature_longform.html')
     html_str = " ".join(list(tpl.blocks['footer_logo']({})))
     html = lxml.html.fromstring(html_str)
     assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
-
-

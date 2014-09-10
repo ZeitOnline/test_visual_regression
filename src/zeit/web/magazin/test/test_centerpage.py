@@ -94,33 +94,33 @@ def test_centerpage_should_have_page_meta_robots_information(
 
 def test_get_teaser_template_should_produce_correct_combinations():
     should = [
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_default.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_default.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_default.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_default.html']
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_article_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_article_default.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_default_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_default_default.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_article_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_article_default.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_default_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_default_default.html']
     result = get_teaser_template('lead', 'article', 'video')
     assert result == should
     should = [
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_gallery.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_imagegroup.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_default.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_gallery.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_imagegroup.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_default.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_gallery.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_imagegroup.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_default.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_video.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_gallery.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_imagegroup.html',
-        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_default.html']
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_article_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_article_gallery.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_article_imagegroup.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_article_default.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_default_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_default_gallery.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_default_imagegroup.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_lead_default_default.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_article_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_article_gallery.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_article_imagegroup.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_article_default.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_default_video.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_default_gallery.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_default_imagegroup.html',
+        'zeit.web.magazin:templates/inc/teaser/teaser_default_default_default.html']
     assets = ('video', 'gallery', 'imagegroup')
     result = get_teaser_template('lead', 'article', assets)
     assert result == should
