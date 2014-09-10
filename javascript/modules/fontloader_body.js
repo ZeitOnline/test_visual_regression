@@ -29,7 +29,7 @@ define(['jquery'], function($) {
     };
 
     /**
-     * fontloader_body.js: initialize 
+     * fontloader_body.js: initialize
      * @function init
      */
     var init = function() {

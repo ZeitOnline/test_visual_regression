@@ -50,7 +50,7 @@ window.FontLoader = (function(ZMO) {
         }
     };
 
-    //initialize 
+    // initialize
     var init = function() {
         // run through all font packs in the dictionary
         fontDictionary.forEach(function(pack) {

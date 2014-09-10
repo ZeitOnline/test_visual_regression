@@ -12,7 +12,7 @@ define(['jquery'], function() {
 
     /**
      * cards.js: flip card
-     * @function flipCard 
+     * @function flipCard
      * @param {object} e event object
      */
     var flipCard = function(e) {
