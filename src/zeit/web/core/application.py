@@ -87,10 +87,10 @@ class Application(object):
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('health_check', '/health_check')
-        config.add_static_view(name='css', path='zeit.web.static:css/zmo/')
+        config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
-        config.add_static_view(name='img', path='zeit.web.static:img/zmo/')
-        config.add_static_view(name='fonts', path='zeit.web.static:fonts/zmo/')
+        config.add_static_view(name='img', path='zeit.web.static:img/')
+        config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
 
         # ToDo: Is this still needed. Can it be removed?
         config.add_static_view(name='mocks', path='zeit.web.core:dummy_html/')
@@ -102,7 +102,7 @@ class Application(object):
             if path == '/':
                 url = request.route_url('home', **kw)
             else:
-                prefix = '' if ':' in path else 'zeit.web.core:'
+                prefix = '' if ':' in path else 'zeit.web.static:'
                 url = request.static_url(prefix + path, **kw)
             if url.rsplit('.', 1)[-1] in ('css', 'js'):
                 url += '?' + request.registry.settings.get('version_hash', '')
