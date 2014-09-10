@@ -1,17 +1,19 @@
 {
-	"name": "ZEIT Frontend Components",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"jquery": "^1",
-		"normalize.css": "^3.0.1",
-		"requirejs": "^2.1.15",
-		"underscore": "^1.6.0",
-		"modernizr": "~2.8.3"
-	},
-	"exportsOverride": {
-		"modernizr": {
-			"js": "modernizr.js"
-		}
-	}
+  "name": "ZEIT Frontend Components",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "freewall": "^1.0.4",
+    "jquery": "^1",
+    "modernizr": "^2.8.3",
+    "normalize.css": "^3.0.1",
+    "requirejs": "^2.1.15",
+    "sjcl": "^1.0.0",
+    "underscore": "^1.6.0"
+  },
+  "exportsOverride": {
+    "modernizr": {
+      "js": "modernizr.js"
+    }
+  }
 }
