@@ -18,10 +18,10 @@ require.config({
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
 	shim: {
-		"bxSlider" : ['jquery'],
-		"modules/plugins/jquery.inlinegallery": ["bxSlider", "jquery"],
-		'modules/plugins/jquery.switchvideo': ["jquery"],
-		'modules/plugins/jquery.backgroundvideo': ['jquery'],
+		'bxSlider' : ['jquery'],
+		'modules/plugins/jquery.inlinegallery': ['bxSlider', 'jquery'],
+		'modules/plugins/jquery.switchvideo': ['jquery'],
+		'modules/plugins/jquery.backgroundvideo': ['jquery', 'modernizr'],
 		'modules/plugins/jquery.enablepopups': ['jquery'],
 		'modules/plugins/jquery.animatescroll': ['jquery'],
 		'modules/plugins/jquery.parseesi': ['jquery','esiparser'],
@@ -73,10 +73,10 @@ require([
 	'modules/plugins/jquery.animatescroll',
 	'modules/plugins/jquery.parseesi'
 ], function () {
-	$( ".inline-gallery" ).inlinegallery();
-	$( "figure[data-video]" ).switchVideo();
-	$( "div[data-backgroundvideo]" ).backgroundVideo();
-	$( "a.js-has-popup" ).enablePopups();
-	$( "main" ).animateScroll({selector: '.js-scroll'});
-	$( "div[data-type = 'esi-content']" ).parseEsi();
+	$( '.inline-gallery' ).inlinegallery();
+	$( 'figure[data-video]' ).switchVideo();
+	$( 'div[data-backgroundvideo]' ).backgroundVideo();
+	$( 'a.js-has-popup' ).enablePopups();
+	$( 'main' ).animateScroll({selector: '.js-scroll'});
+	$( 'div[data-type = "esi-content"]' ).parseEsi();
 });
