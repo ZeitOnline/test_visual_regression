@@ -52,13 +52,14 @@ class Application(object):
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web.core_banner-source', ''))
+            self.settings.get('vivi_zeit.frontend_banner-source', ''))
         zeit.web.core.banner.banner_list = \
             zeit.web.core.banner.make_banner_list(banner_source)
         iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web.core_iqd-mobile-ids', ''))
+            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = \
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
+
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -67,7 +68,7 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
-        pkg = pkg_resources.get_distribution('zeit.web.core')
+        pkg = pkg_resources.get_distribution('zeit.frontend')
         pkg_version = pkg.version
         self.settings['zmo_version'] = pkg_version
         self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
@@ -110,14 +111,14 @@ class Application(object):
         config.add_request_method(asset_url)
 
         config.set_root_factory(self.get_repository)
-        config.scan(package=zeit.web.core, ignore=self.DONT_SCAN)
+        config.scan(package=zeit.web, ignore=self.DONT_SCAN)
 
         zeit.web.core.template.default_teaser_images = \
             self.settings['default_teaser_images']
 
         zeit.web.core.template.image_scales = dict(
             zeit.web.core.template.get_image_scales(
-                self.settings['vivi_zeit.web.core_image-scales']))
+                self.settings['vivi_zeit.frontend_image-scales']))
 
         from pyramid.authorization import ACLAuthorizationPolicy
         from .security import CommunityAuthenticationPolicy
