@@ -1,4 +1,4 @@
-{% import 'templates/macros/layout_macro.tpl' as lama with context %}
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro include_teaser_block(obj) -%}
     {% if obj -%}
@@ -33,7 +33,7 @@
 
     {% if teaser_block -%}
         {% for teaser in teaser_block %}
-            {% include ['templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html', 'templates/inc/teaser/default.html'] ignore missing %}
+            {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html', 'zeit.web.magazin:templates/inc/teaser/default.html'] ignore missing %}
         {% endfor %}
     {% endif %}
 {%- endmacro %}

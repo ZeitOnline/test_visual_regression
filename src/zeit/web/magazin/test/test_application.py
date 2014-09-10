@@ -6,14 +6,14 @@ import pyramid.request
 import pyramid.testing
 import pyramid.traversal
 import pytest
-import zeit.frontend.application
+import zeit.web.core.application
 import zope.component
 
 
 @pytest.fixture
 def app_request(app_settings):
     app_settings['asset_prefix'] = '/assets'
-    app = zeit.frontend.application.Application()
+    app = zeit.web.core.application.Application()
     app.settings = app_settings
     config = app.configure_pyramid()
     config.commit()
@@ -53,4 +53,4 @@ def test_asset_url_appends_version_hash_where_needed(app_request):
 def test_feature_longform_should_be_discovered_during_traversal(my_traverser):
     req = pyramid.request.Request.blank('/feature/feature_longform')
     tdict = my_traverser(req)
-    assert zeit.frontend.article.IFeatureLongform.providedBy(tdict['context'])
+    assert zeit.web.core.article.IFeatureLongform.providedBy(tdict['context'])

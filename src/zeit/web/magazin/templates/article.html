@@ -12,9 +12,9 @@
         <div class="article__wrap">
             {% block article_header %}
                 {% if view.current_page.number == 0 %}
-                    {% include "templates/inc/headers/article_header_"+view.header_layout+".html" ignore missing with context %}
+                    {% include "zeit.web.magazin:templates/inc/headers/article_header_"+view.header_layout+".html" ignore missing with context %}
                 {% else %}
-                    {% include "templates/inc/headers/article_header_sequelpages.html" ignore missing with context %}
+                    {% include "zeit.web.magazin:templates/inc/headers/article_header_sequelpages.html" ignore missing with context %}
                 {% endif %}
             {% endblock article_header %}
             <div class="article__body-wrap">
@@ -51,7 +51,7 @@
                 {% endblock article_comments %}
 
                 {% if view.nextread %}
-                    {%- include "templates/inc/article_area_nextread.html" ignore missing -%}
+                    {%- include "zeit.web.magazin:templates/inc/article_area_nextread.html" ignore missing -%}
                 {% endif %}
             </div>
         </div>

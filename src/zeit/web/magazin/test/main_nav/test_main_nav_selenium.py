@@ -21,8 +21,10 @@ def test_compact_main_nav(selenium_driver, testserver, screen_size):
 
     nav_list = driver.find_elements_by_class_name('main-nav')
     main_nav = driver.find_elements_by_class_name('main-nav')[0]
-    logo_small = main_nav.find_element_by_css_selector('.main-nav__logo__img.icon-logo-zmo-small')
-    logo_large = main_nav.find_element_by_css_selector('.main-nav__logo__img.icon-logo-zmo-large')
+    logo_small = main_nav.find_element_by_css_selector(
+        '.main-nav__logo__img.icon-logo-zmo-small')
+    logo_large = main_nav.find_element_by_css_selector(
+        '.main-nav__logo__img.icon-logo-zmo-large')
     sharing = main_nav.find_element_by_class_name('main-nav__sharing')
     buttons = sharing.find_elements_by_class_name('main-nav__sharing__item')
     twitter = sharing.find_element_by_class_name('icon-twitter')
@@ -74,8 +76,10 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     main_nav = driver.find_element_by_id('js-main-nav')
     trigger = driver.find_element_by_id('js-main-nav-trigger')
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
-    logo_small = main_nav.find_element_by_css_selector('.main-nav__logo__img.icon-logo-zmo-small')
-    logo_large = main_nav.find_element_by_css_selector('.main-nav__logo__img.icon-logo-zmo-large')
+    logo_small = main_nav.find_element_by_css_selector(
+        '.main-nav__logo__img.icon-logo-zmo-small')
+    logo_large = main_nav.find_element_by_css_selector(
+        '.main-nav__logo__img.icon-logo-zmo-large')
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
     res_content = res.find_element_by_class_name('main-nav__ressorts__slider')

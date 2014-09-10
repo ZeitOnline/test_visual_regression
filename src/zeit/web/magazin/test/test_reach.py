@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from zeit.frontend.reach import DataSequence
-from zeit.frontend.reach import Entry
+from zeit.web.core.reach import DataSequence
+from zeit.web.core.reach import Entry
 import datetime
 import pytest
-import zeit.frontend.reach
+import zeit.web.core.reach
 
 
 entry_data = {
@@ -42,25 +42,25 @@ def test_data_sequence_for_linkreach_should_deserialize():
 
 
 def test_unavailable_service_should_throw_exception(linkreach):
-    with pytest.raises(zeit.frontend.reach.UnavailableServiceException):
+    with pytest.raises(zeit.web.core.reach.UnavailableServiceException):
         linkreach.fetch_service('foo', 3)
 
 
 def test_unavailable_section_should_throw_exceptions(linkreach):
-    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+    with pytest.raises(zeit.web.core.reach.UnavailableSectionException):
         linkreach.fetch_comments(3, section='foo')
-    with pytest.raises(zeit.frontend.reach.UnavailableSectionException):
+    with pytest.raises(zeit.web.core.reach.UnavailableSectionException):
         linkreach.fetch_service('twitter', 3, section='foo')
 
 
 def test_out_of_bounds_limits_should_throw_exceptions(linkreach):
-    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+    with pytest.raises(zeit.web.core.reach.LimitOutOfBoundsException):
         linkreach.fetch_comments(0)
-    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+    with pytest.raises(zeit.web.core.reach.LimitOutOfBoundsException):
         linkreach.fetch_comments(99)
-    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+    with pytest.raises(zeit.web.core.reach.LimitOutOfBoundsException):
         linkreach.fetch_service('twitter', 0)
-    with pytest.raises(zeit.frontend.reach.LimitOutOfBoundsException):
+    with pytest.raises(zeit.web.core.reach.LimitOutOfBoundsException):
         linkreach.fetch_service('twitter', 99)
 
 

@@ -9,13 +9,13 @@ from zope.component import getMultiAdapter
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
 
-from zeit.frontend.template import create_image_url
-from zeit.frontend.template import default_image_url
-from zeit.frontend.template import get_teaser_image
-from zeit.frontend.template import get_teaser_template
-from zeit.frontend.test import Browser
-import zeit.frontend.centerpage
-import zeit.frontend.view_centerpage
+from zeit.web.core.template import create_image_url
+from zeit.web.core.template import default_image_url
+from zeit.web.core.template import get_teaser_image
+from zeit.web.core.template import get_teaser_template
+from zeit.web.core.test import Browser
+import zeit.web.core.centerpage
+import zeit.web.magazin.view_centerpage
 
 
 @pytest.fixture
@@ -94,33 +94,33 @@ def test_centerpage_should_have_page_meta_robots_information(
 
 def test_get_teaser_template_should_produce_correct_combinations():
     should = [
-        'templates/inc/teaser/teaser_lead_article_video.html',
-        'templates/inc/teaser/teaser_lead_article_default.html',
-        'templates/inc/teaser/teaser_lead_default_video.html',
-        'templates/inc/teaser/teaser_lead_default_default.html',
-        'templates/inc/teaser/teaser_default_article_video.html',
-        'templates/inc/teaser/teaser_default_article_default.html',
-        'templates/inc/teaser/teaser_default_default_video.html',
-        'templates/inc/teaser/teaser_default_default_default.html']
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_default.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_default.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_default.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_default.html']
     result = get_teaser_template('lead', 'article', 'video')
     assert result == should
     should = [
-        'templates/inc/teaser/teaser_lead_article_video.html',
-        'templates/inc/teaser/teaser_lead_article_gallery.html',
-        'templates/inc/teaser/teaser_lead_article_imagegroup.html',
-        'templates/inc/teaser/teaser_lead_article_default.html',
-        'templates/inc/teaser/teaser_lead_default_video.html',
-        'templates/inc/teaser/teaser_lead_default_gallery.html',
-        'templates/inc/teaser/teaser_lead_default_imagegroup.html',
-        'templates/inc/teaser/teaser_lead_default_default.html',
-        'templates/inc/teaser/teaser_default_article_video.html',
-        'templates/inc/teaser/teaser_default_article_gallery.html',
-        'templates/inc/teaser/teaser_default_article_imagegroup.html',
-        'templates/inc/teaser/teaser_default_article_default.html',
-        'templates/inc/teaser/teaser_default_default_video.html',
-        'templates/inc/teaser/teaser_default_default_gallery.html',
-        'templates/inc/teaser/teaser_default_default_imagegroup.html',
-        'templates/inc/teaser/teaser_default_default_default.html']
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_gallery.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_imagegroup.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_article_default.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_gallery.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_imagegroup.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_lead_default_default.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_gallery.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_imagegroup.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_article_default.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_video.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_gallery.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_imagegroup.html',
+        'zeit.magazin.web:templatesinc/teaser/teaser_default_default_default.html']
     assets = ('video', 'gallery', 'imagegroup')
     result = get_teaser_template('lead', 'article', assets)
     assert result == should
@@ -129,28 +129,28 @@ def test_get_teaser_template_should_produce_correct_combinations():
 def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(testserver):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_an_image(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video(testserver):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.video.video.Video)
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(testserver):
     article = 'http://xml.zeit.de/centerpage/article_video_asset_2'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.auto_select_asset(context)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset[0], zeit.content.video.video.Video)
     assert isinstance(asset[1], zeit.content.video.video.Video)
 
@@ -168,7 +168,7 @@ def test_cp_has_informatives_area(testserver):
 def test_cp_lead_areas_are_available(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart')
-    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert len(view.area_lead)
 
 
@@ -584,7 +584,7 @@ def test_lead_full_light_version_is_working(testserver):
 def test_get_image_asset_should_return_image_asset(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.get_image_asset(
+    asset = zeit.web.core.centerpage.get_image_asset(
         context)
     assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
@@ -592,7 +592,7 @@ def test_get_image_asset_should_return_image_asset(testserver):
 def test_get_gallery_asset_should_return_gallery_asset(testserver):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.get_gallery_asset(
+    asset = zeit.web.core.centerpage.get_gallery_asset(
         context)
     assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
@@ -600,7 +600,7 @@ def test_get_gallery_asset_should_return_gallery_asset(testserver):
 def test_get_video_asset_should_return_video_asset(testserver):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.frontend.centerpage.get_video_asset(
+    asset = zeit.web.core.centerpage.get_video_asset(
         context)
     assert isinstance(asset, zeit.content.video.video.Video)
 
@@ -642,7 +642,7 @@ def test_default_teaser_should_return_default_teaser_image(testserver):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     article_context = zeit.cms.interfaces.ICMSContent(article)
     teaser_img = get_teaser_image(teaser_block, article_context)
-    assert zeit.frontend.interfaces.ITeaserImage.providedBy(teaser_img)
+    assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
 
 
 def test_teaser_image_url_should_be_created(
@@ -672,7 +672,7 @@ def test_teaser_image_should_be_created_from_image_group_and_image(testserver):
                                             'katzencontent/')
     teaser_image = getMultiAdapter(
         (imgrp, img),
-        zeit.frontend.interfaces.ITeaserImage)
+        zeit.web.core.interfaces.ITeaserImage)
 
     assert teaser_image.caption == 'Die ist der image sub text '
     assert teaser_image.src == img.uniqueId
@@ -689,7 +689,7 @@ def test_get_reaches_from_centerpage_view(application, app_settings):
 
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.frontend.view_centerpage.Centerpage(cp, request)
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, request)
 
     buzz = view.area_buzz
     assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
@@ -723,7 +723,7 @@ def test_centerpages_produces_no_error(testserver):
 def test_cp_lead_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.web.magazin.view_centerpage.Centerpage(cp_context, mock.Mock())
     lead1_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#'\
         'lead/id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
@@ -737,7 +737,7 @@ def test_cp_lead_should_have_correct_first_block(application):
 def test_cp_lead_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.web.magazin.view_centerpage.Centerpage(cp_context, mock.Mock())
     lead2_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-cc6bbea3-1337-42f5-8fe1-01c9c4476600'
@@ -751,7 +751,7 @@ def test_cp_lead_should_have_correct_second_block(application):
 def test_cp_lead_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.web.magazin.view_centerpage.Centerpage(cp_context, mock.Mock())
     lead_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo#lead/'\
         'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
@@ -765,7 +765,7 @@ def test_cp_lead_should_have_no_blocks(application):
 def test_cp_informatives_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.web.magazin.view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives1_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
@@ -780,7 +780,7 @@ def test_cp_informatives_should_have_correct_first_block(application):
 def test_cp_informatives_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.web.magazin.view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives2_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'\
         '#informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d'
@@ -795,7 +795,7 @@ def test_cp_informatives_should_have_correct_second_block(application):
 def test_cp_informatives_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.frontend.view_centerpage.Centerpage(cp_context, mock.Mock())
+    cp_view = zeit.web.magazin.view_centerpage.Centerpage(cp_context, mock.Mock())
     informatives_first_block = 'http://block.vivi.zeit.de/'\
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'\
         '#informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5'
@@ -816,14 +816,14 @@ def test_cp_teaser_should_have_comment_count(testserver):
 def test_centerpage_should_have_monothematic_block(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert len(view.monothematic_block) == 6
 
 
 def test_centerpage_should_have_no_monothematic_block(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart')
-    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.monothematic_block is None
 
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from mock import Mock
-from zeit.frontend.block import HeaderVideo
-from zeit.frontend.block import Video
+from zeit.web.core.block import HeaderVideo
+from zeit.web.core.block import Video
 
 
 def test_video_html(selenium_driver, testserver):

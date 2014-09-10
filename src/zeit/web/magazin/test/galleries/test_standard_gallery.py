@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from zeit.frontend.test import Browser
+from zeit.web.core.test import Browser
 
 
 def test_standard_gallery_is_there(selenium_driver, testserver):

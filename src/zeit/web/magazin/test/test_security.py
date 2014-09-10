@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from mock import patch, MagicMock
 from pytest import fixture
-from zeit.frontend.comments import get_thread
-from zeit.frontend.security import CommunityAuthenticationPolicy, ZMO_USER_KEY
-from zeit.frontend.security import get_community_user_info
+from zeit.web.core.comments import get_thread
+from zeit.web.core.security import CommunityAuthenticationPolicy, ZMO_USER_KEY
+from zeit.web.core.security import get_community_user_info
 
 
 @fixture
@@ -32,7 +32,7 @@ def test_session_cache_cleared_when_id_changes(policy, dummy_request):
     dummy_request.cookies['drupal-userid'] = 23
     # session still contains old user id and sensitive information
     dummy_request.session[ZMO_USER_KEY] = dict(uid=42, name='s3crit')
-    with patch('zeit.frontend.security.Request.get_response') as mocked_getter:
+    with patch('zeit.web.core.security.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
         mocked_response.body = (
             '<user><uid>457322</uid><name>test-friedbert</name><mail>'
@@ -47,7 +47,7 @@ def test_session_cache_cleared_when_id_changes(policy, dummy_request):
 
 
 def test_empty_cache_triggers_backend_fills_cache(policy, dummy_request):
-    with patch('zeit.frontend.security.Request.get_response') as mocked_getter:
+    with patch('zeit.web.core.security.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
         mocked_response.body = (
             '<user><uid>457322</uid><name>test-friedbert</name><mail>'

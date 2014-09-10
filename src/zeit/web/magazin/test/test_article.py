@@ -5,9 +5,9 @@ import mock
 from zeit.content.article.article import Article
 import zeit.cms.interfaces
 
-from zeit.frontend.interfaces import IPages
-from zeit.frontend.test import Browser
-import zeit.frontend.view_article
+from zeit.web.core.interfaces import IPages
+from zeit.web.core.test import Browser
+import zeit.web.magazin.view_article
 
 
 def test_IPages_contains_blocks(application):
@@ -445,7 +445,7 @@ def test_gallery_should_have_clickCounter_functions(testserver):
 
 def test_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextreadTeaserBlock(context)
     assert isinstance(nextread.teasers, tuple), \
         'The "teasers" attribute should return a tuple.'
     assert len(nextread.teasers) == 1, \
@@ -456,23 +456,23 @@ def test_nextread_teaser_block_has_teasers_available(application):
 
 def test_nextread_teaser_blocks_has_correct_layout_id(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextreadTeaserBlock(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 09" has a base nextread layout.'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextreadTeaserBlock(context)
     assert nextread.layout.id == 'maximal', \
         '"Artikel 03" has a maximal nextread layout.'
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/01')
-    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextreadTeaserBlock(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 01" has no nextread layout, should fallback to base.'
 
 
 def test_nextread_teaser_block_teasers_is_accessable(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextreadTeaserBlock(context)
     assert all(teaser for teaser in nextread), \
         'Nextread block should iterate over its teasers.'
     assert nextread[0], \
@@ -503,7 +503,7 @@ def test_nextread_maximal_layout_has_image_background_if_available(testserver):
 
 def test_nextread_should_fallback_to_default_layout(testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    nextread = zeit.frontend.interfaces.INextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextreadTeaserBlock(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 02" has invalid nextread layout, should fallback to base.'
 
@@ -577,13 +577,13 @@ def test_feature_longform_should_have_zon_logo_classes(testserver):
 
 def test_article_view_has_leadtime_set_if_article_provides_it(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
-    view = zeit.frontend.view_article.Article(article, mock.Mock())
+    view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start
     assert view.leadtime.end
 
 
 def test_article_view_has_no_leadtime_if_the_attribute_is_missing(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    view = zeit.frontend.view_article.Article(article, mock.Mock())
+    view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start is None
     assert view.leadtime.end is None

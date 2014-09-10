@@ -16,8 +16,8 @@ All calling templates have to provide:
     image_class: define optional class for images (eg. extra behaviour mtb)
 #}
 
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context %}
-{% import 'templates/macros/layout_macro.tpl' as lama with context %}
+{% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 

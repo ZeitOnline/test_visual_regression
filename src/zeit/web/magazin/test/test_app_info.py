@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from mock import patch
 from pytest import fixture, yield_fixture, mark
-from zeit.frontend.appinfo import get_app_info, assemble_app_info
-from zeit.frontend.security import ZMO_USER_KEY
+from zeit.web.core.appinfo import get_app_info, assemble_app_info
+from zeit.web.core.security import ZMO_USER_KEY
 
 
 @fixture
@@ -19,8 +19,8 @@ def app_info(request, dummy_request):
     """
     username = request.keywords['user'].args[0]
     with patch(
-            'zeit.frontend.appinfo.authenticated_userid') as mocked_user_info:
-        from zeit.frontend.data import MOCK_USER_DATA
+            'zeit.web.core.appinfo.authenticated_userid') as mocked_user_info:
+        from zeit.web.core.data import MOCK_USER_DATA
         userinfo = MOCK_USER_DATA.get(username)
         dummy_request.cookies['drupal-userid'] = userinfo['uid']
         dummy_request.session[ZMO_USER_KEY] = userinfo

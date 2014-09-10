@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from zeit.frontend.block import _inline_html
-from zeit.frontend.block import HeaderImage
-from zeit.frontend.block import HeaderVideo
-from zeit.frontend.block import Image
-from zeit.frontend.block import Video
+from zeit.web.core.block import _inline_html
+from zeit.web.core.block import HeaderImage
+from zeit.web.core.block import HeaderVideo
+from zeit.web.core.block import Image
+from zeit.web.core.block import Video
 import lxml.etree
 import mock
 

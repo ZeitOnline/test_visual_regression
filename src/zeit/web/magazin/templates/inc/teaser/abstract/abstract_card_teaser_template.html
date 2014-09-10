@@ -18,7 +18,7 @@ All calling templates have to provide:
     back_action: to define button action for back side of card ('read', 'share', 'flip')
 #}
 
-{% import 'templates/macros/centerpage_macro.tpl' as cp with context %}
+{% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 
 {% set image = get_teaser_image(teaser_block, teaser) -%}
 

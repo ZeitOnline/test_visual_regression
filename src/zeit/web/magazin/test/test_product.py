@@ -2,7 +2,7 @@
 from lxml import etree
 import zeit.cms.interfaces
 
-from zeit.frontend.test import Browser
+from zeit.web.core.test import Browser
 
 
 def test_product_gallery_should_render_according_to_type(testserver):

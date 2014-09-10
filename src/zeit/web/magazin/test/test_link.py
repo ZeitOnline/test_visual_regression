@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from zeit.frontend.test import Browser
-from zeit.frontend.template import create_url
+from zeit.web.core.test import Browser
+from zeit.web.core.template import create_url
 import zeit.cms.interfaces
 
 

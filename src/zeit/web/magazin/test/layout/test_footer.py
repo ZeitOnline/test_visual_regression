@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from zeit.frontend.test import Browser
+from zeit.web.core.test import Browser
 
 
 def test_footer_exists(testserver):

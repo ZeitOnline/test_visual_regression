@@ -6,24 +6,24 @@ import pytest
 
 import zeit.cms.interfaces
 
-from zeit.frontend.test import Browser
-from zeit.frontend.view_centerpage import register_copyrights
-import zeit.frontend.view_article
-import zeit.frontend.view_centerpage
-import zeit.frontend.interfaces
-import zeit.frontend.centerpage
+from zeit.web.core.test import Browser
+from zeit.web.magazin.view_centerpage import register_copyrights
+import zeit.web.magazin.view_article
+import zeit.web.magazin.view_centerpage
+import zeit.web.core.interfaces
+import zeit.web.core.centerpage
 
 
 @pytest.fixture
 def cp_factory(application):
     """A factory function to create dummy cp views with an `area` property
     that can be configured by providing an `area_getter` function. The `area`
-    is decorated with zeit.frontend.view_centerpage.register_copyrights.
+    is decorated with zeit.web.magazin.view_centerpage.register_copyrights.
     """
     def wrapped(area_getter):
         cp = zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-        view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+        view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
 
         view_class = type('View', (object,), {
             '_copyrights': {},
@@ -156,8 +156,8 @@ def test_copyright_entry_has_correct_label(testserver):
     browser = Browser('%s/artikel/04' % testserver.url)
     labels = browser.cssselect('span.copyrights__entry__label')
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
-    page = zeit.frontend.view_article.Article(article, mock.Mock()).pages[0]
-    images = [i for i in page if isinstance(i, zeit.frontend.block.Image)]
+    page = zeit.web.magazin.view_article.Article(article, mock.Mock()).pages[0]
+    images = [i for i in page if isinstance(i, zeit.web.core.block.Image)]
     sorted_imgs = sorted(images, key=lambda i: i.copyright[0][0])
     for i in range(len(sorted_imgs)):
         assert sorted_imgs[i].copyright[0][0] == labels[i].text
@@ -221,10 +221,10 @@ def test_only_gallery_images_with_cr_should_show_up_in_copyrights(testserver):
 def test_centerpage_gracefully_skips_malformed_copyrights(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart-2')
-    view = zeit.frontend.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
 
     group = 'http://xml.zeit.de/centerpage/katzencontent/'
-    image = zeit.frontend.centerpage.TeaserImage(
+    image = zeit.web.core.centerpage.TeaserImage(
         zeit.cms.interfaces.ICMSContent(group),
         zeit.cms.interfaces.ICMSContent(group + 'katzencontent-180x101.jpg'))
 
