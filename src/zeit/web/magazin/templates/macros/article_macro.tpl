@@ -1,4 +1,4 @@
-{% import 'templates/macros/layout_macro.tpl' as lama with context %}
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
     {{lama.adplace(item, view)}}
