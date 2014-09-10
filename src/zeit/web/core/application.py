@@ -35,7 +35,9 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_SCAN = ['zeit.web.magazin.test', 'zeit.web.core.preview']
+    DONT_SCAN = ['zeit.web.core.test',
+                 'zeit.web.magazin.test',
+                 'zeit.web.core.preview']
 
     def __init__(self):
         self.settings = {}
