@@ -1,21 +1,21 @@
 from grokcore.component import adapter, implementer
-from zeit.frontend.block import IFrontendBlock
+from zeit.web.core.block import IFrontendBlock
 import logging
 import zeit.cms.repository.interfaces
 import zeit.content.article
 import zeit.content.article.article
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.frontend.interfaces
+import zeit.web.core.interfaces
 import zope.interface
 import zeit.content.article.interfaces
-import zeit.frontend.centerpage
+import zeit.web.core.centerpage
 
 
 log = logging.getLogger(__name__)
 
 
-@zope.interface.implementer(zeit.frontend.interfaces.IPage)
+@zope.interface.implementer(zeit.web.core.interfaces.IPage)
 class Page(object):
 
     def __init__(self, division):
@@ -56,7 +56,7 @@ def _inject_banner_code(pages, advertising_enabled):
             for index, pp in enumerate(_possible_paragraphs):
                 paragraphs = filter(
                     lambda b: isinstance(
-                        b, zeit.frontend.block.Paragraph), page.blocks)
+                        b, zeit.web.core.block.Paragraph), page.blocks)
                 if len(paragraphs) > pp + 1:
                     try:
                         _para = paragraphs[pp]
@@ -64,7 +64,7 @@ def _inject_banner_code(pages, advertising_enabled):
                             if _para == block:
                                 t = _tile_list[index] - 1
                                 page.blocks.insert(
-                                    i, zeit.frontend.banner.banner_list[t])
+                                    i, zeit.web.core.banner.banner_list[t])
                                 break
                     except IndexError:
                         pass
@@ -72,7 +72,7 @@ def _inject_banner_code(pages, advertising_enabled):
 
 
 @adapter(zeit.content.article.interfaces.IArticle)
-@implementer(zeit.frontend.interfaces.IPages)
+@implementer(zeit.web.core.interfaces.IPages)
 def pages_of_article(context):
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     try:
@@ -98,7 +98,9 @@ def pages_of_article(context):
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
-#ToDo: Please remove when we have Longforms for ICMSContent
+# ToDo: Please remove when we have Longforms for ICMSContent
+
+
 class IFeatureLongform(zeit.content.article.interfaces.IArticle):
     pass
 
@@ -115,8 +117,8 @@ class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
-@implementer(zeit.frontend.interfaces.ITeaserSequence)
-@adapter(zeit.frontend.interfaces.INextreadTeaserBlock)
-class NextreadTeaserBlock(zeit.frontend.centerpage.TeaserBlock):
+@implementer(zeit.web.core.interfaces.ITeaserSequence)
+@adapter(zeit.web.core.interfaces.INextreadTeaserBlock)
+class NextreadTeaserBlock(zeit.web.core.centerpage.TeaserBlock):
 
     pass

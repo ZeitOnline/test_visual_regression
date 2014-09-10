@@ -1,10 +1,10 @@
 import pyramid.events
-import zeit.frontend.application
+import zeit.web.core.application
 import zope.component
 import zope.processlifetime
 
 
-class Application(zeit.frontend.application.Application):
+class Application(zeit.web.core.application.Application):
 
     DONT_SCAN = ['.testing', '.test']
 

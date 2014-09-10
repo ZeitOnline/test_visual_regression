@@ -8,7 +8,7 @@ import zeit.content.image.interfaces
 import zeit.content.image.image
 import zeit.content.gallery.gallery
 
-import zeit.frontend.block
+import zeit.web.core.block
 
 # Custom interface classes to destinguish between regular galleries (inline
 # or standalone) and product galleries.
@@ -30,7 +30,7 @@ class IGalleryImage(zope.interface.Interface):
 
 @implementer(IGalleryImage)
 @adapter(zeit.content.gallery.interfaces.IGalleryEntry)
-class GalleryImage(zeit.frontend.block.Image):
+class GalleryImage(zeit.web.core.block.Image):
 
     def __init__(self, item):
         self.caption = item.caption
