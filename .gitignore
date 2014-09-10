@@ -6,6 +6,7 @@
 /bower_components/
 /node_modules/
 javascript/documentation
+sass/icons-minified
 setuptools_git-*
 src/*.egg-info
 src/zeit/frontend/css

@@ -19,9 +19,10 @@ module.exports = function(grunt) {
 		codeDir: "./src/zeit/frontend/",
 		rubyVersion: "1.9.3",
 		tasks: {
-			production: ["bower", "modernizr", "jshint", "requirejs:dist", "compass:dist", "copy", "grunticon"],
-			development: ["bower", "modernizr", "jshint", "requirejs:dist", "compass:dev", "copy", "grunticon"],
-			docs: ["jsdoc", "sftp-deploy"]
+			production: ["bower", "modernizr", "jshint", "requirejs:dist", "compass:dist", "copy", "icons"],
+			development: ["bower", "modernizr", "jshint", "requirejs:dev", "compass:dev", "copy", "icons"],
+			docs: ["jsdoc", "sftp-deploy"],
+			icons: ["svgmin", "grunticon"],
 		}
 	};
 
@@ -172,11 +173,22 @@ module.exports = function(grunt) {
 			}
 		},
 
-		grunticon: {
+		svgmin: {
 			dist: {
 				files: [{
 					expand: true,
 					cwd: project.sourceDir + "sass/icons",
+					src: ["*.svg"],
+					dest: project.sourceDir + "sass/icons-minified"
+				}]
+			}
+		},
+
+		grunticon: {
+			dist: {
+				files: [{
+					expand: true,
+					cwd: project.sourceDir + "sass/icons-minified",
 					src: ["*.svg", "*.png"],
 					dest: project.codeDir + "/css/icons"
 				}],
@@ -246,16 +258,16 @@ module.exports = function(grunt) {
 		// watch here
 		watch: {
 			js: {
-				files: ["<%= jshint.target.src %>"],
+				files: ["<%= jshint.dist.src %>"],
 				tasks: ["jshint", "requirejs:dev", "copy"],
 			},
-			css: {
-				files: [project.sourceDir + "sass/**/*.sass", project.sourceDir + "sass/**/*.scss"],
+			compass: {
+				files: ["<%= compass.options.sassDir %>" + "/**/*"],
 				tasks: ["compass:dev"]
 			},
-			grunticon: {
+			icons: {
 				files: [project.sourceDir + "sass/icons/*.svg"],
-				tasks: ["grunticon"]
+				tasks: ["icons"]
 			}
 		}
 	});
@@ -271,11 +283,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-jsdoc");
 	grunt.loadNpmTasks("grunt-modernizr");
 	grunt.loadNpmTasks("grunt-sftp-deploy");
+	grunt.loadNpmTasks("grunt-svgmin");
 
 	// register tasks here
 	grunt.registerTask("default", project.tasks.production);
 	grunt.registerTask("production", project.tasks.production);
 	grunt.registerTask("dev", project.tasks.development);
 	grunt.registerTask("docs", project.tasks.docs);
+	grunt.registerTask("icons", project.tasks.icons);
 
 };
