@@ -16,7 +16,6 @@ define(['jquery'], function() {
     var $open_menu;
     var $open_menu_container;
     var mobile_menu_open = false;
-    var full_nav_breakpoint = 768;
     var has_mobile_nav; // will be filled in initMobileNav/initDesktopNav
 
     /**
