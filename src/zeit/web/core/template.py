@@ -333,7 +333,7 @@ def closest_substitute_image(image_group,
 def get_teaser_template(block_layout,
                         content_type,
                         asset,
-                        prefix='templates/inc/teaser/teaser_',
+                        prefix='zeit.web.magazin:templates/inc/teaser/teaser_',
                         suffix='.html',
                         separator='_'):
     types = (block_layout, content_type, asset)
