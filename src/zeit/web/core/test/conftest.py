@@ -5,25 +5,25 @@ from pyramid.testing import setUp, tearDown, DummyRequest
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
-from zeit.frontend.comments import path_of_article, _place_answers_under_parent
+from zeit.web.core.comments import path_of_article, _place_answers_under_parent
 import gocept.httpserverlayer.wsgi
 import pkg_resources
 import pytest
-import zeit.frontend.application
+import zeit.web.core.application
 import zope.interface
 import zeit.content.image.interfaces
 
 
 def test_asset_path(*parts):
     """ Return full file-system path for given test asset path. """
-    from zeit import frontend
-    return abspath(join(dirname(frontend.__file__), 'data', *parts))
+    from zeit.web import core
+    return abspath(join(dirname(core.__file__), 'data', *parts))
 
 
 def test_asset(path):
     """ Return file-object for given test asset path. """
     return open(pkg_resources.resource_filename(
-        'zeit.frontend', 'data' + path), 'rb')
+        'zeit.web.core', 'data' + path), 'rb')
 
 
 settings = {
@@ -37,13 +37,13 @@ settings = {
     'scripts_url': '/js/static',
 
     'community_host': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.frontend', 'data/comments'),
+        'zeit.web.core', 'data/comments'),
     'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.frontend', 'data/comments'),
+        'zeit.web.core', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.frontend', 'data/linkreach/api'),
+        'zeit.web.core', 'data/linkreach/api'),
 
-    'load_template_from_dav_url': 'egg://zeit.frontend/test/newsletter',
+    'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
 
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
@@ -52,7 +52,7 @@ settings = {
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
     'connector_type': 'filesystem',
 
-    'vivi_zeit.connector_repository-path': 'egg://zeit.frontend/data',
+    'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
     'vivi_zeit.cms_keyword-configuration': (
         'egg://zeit.cms.tagging.tests/keywords_config.xml'),
@@ -67,29 +67,29 @@ settings = {
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
     'vivi_zeit.frontend_iqd-mobile-ids': (
-        'egg://zeit.frontend/data/config/iqd-mobile-ids.xml'),
+        'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
     'vivi_zeit.frontend_image-scales': (
-        'egg://zeit.frontend/data/config/scales.xml'),
+        'egg://zeit.web.core/data/config/scales.xml'),
     'vivi_zeit.content.article_genre-url': (
-        'egg://zeit.frontend/data/config/article-genres.xml'),
+        'egg://zeit.web.core/data/config/article-genres.xml'),
     'vivi_zeit.content.article_image-layout-source': (
-        'egg://zeit.frontend/data/config/article-image-layouts.xml'),
+        'egg://zeit.web.core/data/config/article-image-layouts.xml'),
     'vivi_zeit.content.article_video-layout-source': (
-        'egg://zeit.frontend/data/config/article-video-layouts.xml'),
+        'egg://zeit.web.core/data/config/article-video-layouts.xml'),
     'vivi_zeit.content.article_htmlblock-layout-source': (
-        'egg://zeit.frontend/data/config/article-htmlblock-layouts.xml'),
+        'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
     'vivi_zeit.magazin_article-template-source': (
-        'egg://zeit.frontend/data/config/article-templates.xml'),
+        'egg://zeit.web.core/data/config/article-templates.xml'),
     'vivi_zeit.magazin_article-related-layout-source': (
-        'egg://zeit.frontend/data/config/article-related-layouts.xml'),
+        'egg://zeit.web.core/data/config/article-related-layouts.xml'),
     'vivi_zeit.content.cp_block-layout-source': (
-        'egg://zeit.frontend/data/config/cp-layouts.xml'),
+        'egg://zeit.web.core/data/config/cp-layouts.xml'),
     'vivi_zeit.content.cp_bar-layout-source': (
-        'egg://zeit.frontend/config/cp-bar-layouts.xml'),
+        'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
     'vivi_zeit.frontend_banner-source': (
-        'egg://zeit.frontend/data/config/banner.xml'),
+        'egg://zeit.web.core/data/config/banner.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
-        'egg://zeit.frontend/data/config/gallery-types.xml'),
+        'egg://zeit.web.core/data/config/gallery-types.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
@@ -105,8 +105,8 @@ browsers = {
 
 @pytest.fixture(scope="module")
 def jinja2_env():
-    app = zeit.frontend.application.Application()
-    app.settings = zeit.frontend.test.conftest.settings
+    app = zeit.web.core.application.Application()
+    app.settings = zeit.web.core.test.conftest.settings
     app.configure_pyramid()
     return app.configure_jinja()
 
@@ -118,7 +118,7 @@ def app_settings():
 
 @pytest.fixture(scope='session')
 def application():
-    app = zeit.frontend.application.Application()({}, **settings)
+    app = zeit.web.core.application.Application()({}, **settings)
     return ImageTransformationMiddleware(app, secret='time')
 
 
@@ -137,13 +137,13 @@ def dummy_request(request, config):
 
 @pytest.fixture
 def agatho():
-    from zeit.frontend.comments import Agatho
+    from zeit.web.core.comments import Agatho
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
 @pytest.fixture
 def linkreach():
-    from zeit.frontend.reach import LinkReach
+    from zeit.web.core.reach import LinkReach
     return LinkReach(settings['node_comment_statistics'],
                      settings['linkreach_host'])
 
@@ -216,7 +216,7 @@ def monkeyagatho(monkeypatch):
         return _place_answers_under_parent(response)
 
     monkeypatch.setattr(
-        zeit.frontend.comments.Agatho, 'collection_get', collection_get)
+        zeit.web.core.comments.Agatho, 'collection_get', collection_get)
 
 
 @pytest.fixture
@@ -248,7 +248,7 @@ def image_group_factory():
 def my_traverser(application):
     root = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
-    return zeit.frontend.application.RepositoryTraverser(root)
+    return zeit.web.core.application.RepositoryTraverser(root)
 
 
 class TestApp(TestAppBase):
