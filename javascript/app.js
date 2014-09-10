@@ -8,12 +8,13 @@ require.config({
 	// Require.js allows us to configure shortcut alias
 	// e.g. if you'll require jQuery later, you can refer to it as 'jquery'
 	paths: {
-		"jquery": "libs/jquery-1.10.2.min",
-		"sjcl": "libs/sjcl",
-		"underscore": "libs/underscore-min",
-		"bxSlider": "libs/jquery.bxslider",
-		"jquery-bridget/jquery.bridget": "libs/packery.pkgd.min",
-		"esiparser": "libs/esiparser"
+		'jquery': 'vendor/jquery',
+		'underscore': 'vendor/underscore',
+		'freewall': 'vendor/freewall',
+		'sjcl': 'libs/sjcl',
+		'modernizr': 'libs/modernizr-custom',
+		'bxSlider': 'libs/jquery.bxslider',
+		'esiparser': 'libs/esiparser'
 	},
 	// a shim is need for jQuery Plugins to load
 	// add the name or path and an array of required scripts
@@ -28,12 +29,16 @@ require.config({
 		'sjcl': {
 			exports: 'sjcl'
 		},
-		'libs/freewall': {
+		'freewall': {
 			deps: ['jquery'],
 			exports: 'freewall'
 		}
 	}
 });
+
+// A hack for Modernizr and AMD.
+// This lets Modernizr be in the <head> and also compatible with other modules.
+define('modernizr', [], window.Modernizr);
 
 // required plain vanilla ja programs here
 // the order in the array and the function names have to correlate

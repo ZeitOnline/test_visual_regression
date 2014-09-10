@@ -99,6 +99,7 @@ module.exports = function(grunt) {
 
 		// copy files
 		copy: {
+			// copy plain CSS files
 			css: {
 				expand: true,
 				cwd: project.sourceDir + "sass",
