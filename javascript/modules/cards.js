@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module for flipping cards
  * @version  0.1

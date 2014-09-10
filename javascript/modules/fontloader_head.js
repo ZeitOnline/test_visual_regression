@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview Namespace Fontloader
  * @version  0.1

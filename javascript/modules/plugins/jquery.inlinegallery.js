@@ -1,4 +1,4 @@
-/* global console, $blocked */
+/* global $blocked */
 
 /**
  * @fileOverview jQuery Plugin for Inline-Gallery

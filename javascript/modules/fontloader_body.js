@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module Fontloader
  * @version  0.1

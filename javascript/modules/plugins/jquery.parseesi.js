@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin to activate esi parser
  * @author anika.szuppa@zeit.de

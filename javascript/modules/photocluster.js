@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module Photocluster
  * @version  0.1

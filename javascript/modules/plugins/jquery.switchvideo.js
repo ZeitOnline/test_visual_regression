@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for Video Insertion
  * @author anika.szuppa@zeit.de

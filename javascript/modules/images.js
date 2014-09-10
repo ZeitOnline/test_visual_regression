@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module for responsive images
  * @version  0.1

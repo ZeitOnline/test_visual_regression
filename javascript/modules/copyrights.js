@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module for copyrights
  * @version  0.1

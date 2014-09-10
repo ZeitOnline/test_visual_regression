@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for Popups
  * @version  0.1

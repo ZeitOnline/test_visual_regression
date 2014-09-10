@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for animated scrolling
  * @version  0.1

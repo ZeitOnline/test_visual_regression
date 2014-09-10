@@ -1,5 +1,3 @@
-/* global console, define, Modernizr */
-
 /**
  * @fileOverview Module for comments
  * @version  0.1
@@ -8,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define(['jquery', 'underscore', 'modules/tabs'], function($, _) {
+define(['jquery', 'modernizr', 'underscore', 'modules/tabs'], function($, Modernizr, _) {
 
     var $socialServices = $('#js-social-services'),
         $comments = $('#js-comments'),

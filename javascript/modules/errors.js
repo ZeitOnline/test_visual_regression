@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module for errors
  * @version  0.1

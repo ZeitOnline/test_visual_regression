@@ -1,11 +1,9 @@
-/* global console, Modernizr */
-
 /**
  * @fileOverview jQuery Plugin for Background Video
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-(function( $ ){
+(function( $, Modernizr ){
 	/**
      * See (http://jquery.com/).
      * @name jQuery
@@ -75,4 +73,4 @@
 
 	};
 
-})( jQuery );
+})( jQuery, window.Modernizr );

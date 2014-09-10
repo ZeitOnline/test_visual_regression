@@ -1,5 +1,3 @@
-/* globals require, define, console */
-
 /**
  * @fileOverview Require.js Config File
  * @version  0.1

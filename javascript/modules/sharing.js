@@ -1,5 +1,3 @@
-/* global console, define */
-
 /**
  * @fileOverview Module for sharing functionality
  * @version  0.1
