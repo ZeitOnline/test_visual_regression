@@ -281,6 +281,7 @@ def maybe_convert_egg_url(url):
     if not url.startswith('egg://'):
         return url
     parts = urlparse.urlparse(url)
+
     return 'file://' + pkg_resources.resource_filename(
         parts.netloc, parts.path[1:])
 
