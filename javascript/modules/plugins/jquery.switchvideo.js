@@ -60,11 +60,11 @@
 			},
 			//grab video id from meta data and store it
 			buildId: function( that ){
-				el.id = $( that ).closest( "figure[data-video]" ).attr( "data-video" );
+				el.id = $( that ).closest( 'figure[data-video]' ).attr( 'data-video' );
 			},
 			//add show/hide event for video still image and button
 			addEvent: function( that ){
-				$( that ).find( "img, .video__button" ).on( "click", function( ev ){
+				$( that ).find( 'img, .video__button' ).on( 'click', function( ev ){
 					ev.preventDefault();
 					el.buildId( this );
 					el.buildPlayer( this );

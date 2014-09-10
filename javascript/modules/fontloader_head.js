@@ -19,12 +19,12 @@ window.FontLoader = (function(ZMO) {
                 identifier: 'base',
                 selector: null,
                 path: ZMO.home + 'css/standalone-fonts/base.css',
-                version: "2.1"
+                version: '2.1'
             }
         ],
         linkTag = document.getElementsByTagName('link')[0],
         // detect modern browsers that support woff
-        isModernBrowser = ('querySelector' in document) && ('localStorage' in window) && ('addEventListener' in window) && Array.prototype.forEach && (document.documentElement.className.indexOf( "lt-ie9" ) === -1);
+        isModernBrowser = ('querySelector' in document) && ('localStorage' in window) && ('addEventListener' in window) && Array.prototype.forEach && (document.documentElement.className.indexOf( 'lt-ie9' ) === -1);
 
     // module object
     var fl = {
