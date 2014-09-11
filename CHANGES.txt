@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-883: Fix iOS bug initially showing last slide of inline gallery
 
 
 0.15 (2014-09-03)
@@ -15,8 +15,6 @@ Change log for zeit.frontend
 
 0.14 (2014-08-29)
 -----------------
-
-- ZMO-883: Fix iOS bug initially showing last slide of inline gallery
 
 - FIX: Change footer link for "Rechte + Lizenzen"
 
