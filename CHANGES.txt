@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-919: Recalculate photocluster on image load
 
 
 0.15.1 (2014-09-04)
