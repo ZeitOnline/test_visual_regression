@@ -29,6 +29,10 @@ require.config({
 		'modules/plugins/jquery.parseesi': ['jquery','esiparser'],
 		'sjcl': {
 			exports: 'sjcl'
+		},
+		'libs/freewall': {
+			deps: ['jquery'],
+			exports: 'freewall'
 		}
 	}
 });

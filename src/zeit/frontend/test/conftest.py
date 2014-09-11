@@ -92,6 +92,8 @@ settings = {
         'egg://zeit.frontend/data/config/gallery-types.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
+
+    'vivi_zeit.solr_solr-url': 'http://mock.solr'
 }
 
 
@@ -245,7 +247,7 @@ def image_group_factory():
 @pytest.fixture
 def my_traverser(application):
     root = zope.component.getUtility(
-            zeit.cms.repository.interfaces.IRepository)
+        zeit.cms.repository.interfaces.IRepository)
     return zeit.frontend.application.RepositoryTraverser(root)
 
 
