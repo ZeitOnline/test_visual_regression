@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZON-893: Add adwords and adtiles to longform articles
 
+- ZMO-919: Recalculate photocluster on image load
+
 
 0.15 (2014-09-03)
 -----------------
