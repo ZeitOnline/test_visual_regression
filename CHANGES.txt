@@ -1,7 +1,19 @@
 Change log for zeit.frontend
 ============================
 
-0.14 (unreleased)
+0.16 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+0.15 (2014-09-03)
+-----------------
+
+- ZMO-509: implement photocluster
+
+
+0.14 (2014-08-29)
 -----------------
 
 - ZMO-883: Fix iOS bug initially showing last slide of inline gallery
@@ -17,6 +29,8 @@ Change log for zeit.frontend
 - ZMO-886: Include Top of Mind ad keyword for lead stories
 
 - ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
+
+- VIV-440: Add XML view for automatic centerpages
 
 
 0.13 (2014-08-20)
