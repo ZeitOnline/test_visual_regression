@@ -15,7 +15,7 @@ def test_banner_channel_for_gallery(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
     view = zeit.frontend.view_gallery.Gallery(context, mock.Mock())
-    assert view.banner_channel == 'zeitmz/modeunddesign/article'
+    assert view.banner_channel == 'zeitmz/leben/article'
 
 def test_banner_channel_for_longform(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
