@@ -708,7 +708,7 @@ def test_cp_teaser_with_comments_should_get_comments_count(
         testserver, testbrowser):
     request = mock.Mock()
     request.registry.settings.node_comment_statistics = (
-        'data/node-comment-statistics.xml')
+        'community/node-comment-statistics.xml')
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, request)
@@ -719,7 +719,7 @@ def test_cp_teaser_with_comments_should_get_comments_count(
     # For teaser uniquId with no entry in node-comment-statistics
     # teaser_get_commentcount should return None
     comment_count = view.teaser_get_commentcount(
-        'http://xml.zeit.de/centerpage/article_image_assetXXX')
+        'http://xml.zeit.de/does_not_exist')
     assert comment_count is None
 
 
