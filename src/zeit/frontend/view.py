@@ -84,12 +84,12 @@ class Base(object):
             channel += myressort
         if self.sub_ressort:
             channel += '/' + self.sub_ressort.replace('-', 'und', 1)
-        if self.is_longform:
-            channel += '/longform'
-        elif self.type:
-            # TODO: Zone type gallery after launch
-            channel += '/' + self.type.replace('gallery', 'article')
+        channel += '/' + self.banner_type
         return channel
+
+    @reify
+    def banner_type(self):
+        return self.type
 
     @reify
     def adwords(self):
@@ -99,8 +99,6 @@ class Base(object):
             keywords.append('zeitmz')
         if self.is_top_of_mind:
             keywords.append('ToM')
-        if self.is_longform:
-            keywords.extend(['longform', 'noiqdband'])
         return keywords
 
     def banner(self, tile):
@@ -267,7 +265,7 @@ class Content(Base):
 
     @reify
     def is_top_of_mind(self):
-        return not self.is_longform and self.is_lead_story
+        return self.is_lead_story
 
     @reify
     def is_lead_story(self):

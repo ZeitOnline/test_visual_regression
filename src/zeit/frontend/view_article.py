@@ -364,6 +364,20 @@ class LongformArticle(Article):
                 self._copyrights.setdefault(img.uniqueId, img)
             return img
 
+    @reify
+    def adwords(self):
+        keywords = super(LongformArticle, self).adwords
+        keywords.extend(['longform', 'noiqdband'])
+        return keywords
+
+    @reify
+    def is_top_of_mind(self):
+        return False
+
+    @reify
+    def banner_type(self):
+        return 'longform'
+
 
 @view_config(context=zeit.frontend.article.IFeatureLongform,
              renderer='templates/feature_longform.html')
