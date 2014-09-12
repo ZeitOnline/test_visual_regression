@@ -644,7 +644,7 @@ def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
              '"cp" : "lebensart/mode/bild-text"',
              '"sv" : "ke"',
              '"co" : "URL: /test/test"',
-             'iom.c(iam_data,1);'
+             'iom.c( iam_data, 1 );',
              '</script']
     lines = tpl.module.ivw_ver2_tracking(obj, request).splitlines()
     output = ""

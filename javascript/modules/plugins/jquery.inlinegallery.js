@@ -1,4 +1,4 @@
-/* global console, $blocked */
+/* global console, $blocked, WebKitCSSMatrix */
 
 /**
  * @fileOverview jQuery Plugin for Inline-Gallery
@@ -222,6 +222,20 @@
             };
 
             options.onSliderLoad = function() {
+                // check for iOS bug not setting position correctly
+                if ( 'WebKitCSSMatrix' in window ) {
+                    var matrix = new WebKitCSSMatrix( gallery.css('transform') );
+
+                    // bxSlider got the position of the first slide wrong,
+                    // because the cloned last slide did not load until now
+                    if ( matrix.m41 === 0 ) {
+                        gallery.find( '.bx-clone img' ).eq( 0 ).on( 'load', function( e ) {
+                            $( this ).off( e );
+                            slider.reloadSlider();
+                        });
+                    }
+                }
+
                 figCaptionSizing();
 
                 sliderViewport = gallery.parent();

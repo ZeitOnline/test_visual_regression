@@ -16,7 +16,6 @@ module.exports = function(grunt) {
 		name: '<%= pkg.name %>-<%= pkg.version%>',
 		binDir: './',
 		codeDir: './src/zeit/frontend/',
-		jqueryVersion: 'jquery-1.10.2.min.js',
 		sourceDir: './',
 		rubyVersion: '1.9.3',
 		tasks: {
@@ -188,7 +187,7 @@ module.exports = function(grunt) {
 		// watch here
 		watch: {
 			js: {
-				files: ['<%= jshint.target.src %>'],
+				files: ['<%= jshint.target.src %>', '<%= jshint.options.ignores %>'],
 				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
