@@ -180,7 +180,7 @@ def get_thread(unique_id, request):
 
 
 from cornice.resource import resource, view
-from zeit.frontend import COMMENT_COLLECTION_PATH, COMMENT_PATH
+from zeit.web.core import COMMENT_COLLECTION_PATH, COMMENT_PATH
 
 
 def unique_id_factory(request):

@@ -541,25 +541,6 @@ def test_article_has_correct_sharing_image(testserver, testbrowser):
         'schoppenstube/schoppenstube-540x304.jpg')
 
 
-def test_ArticlePage_should_throw_404_if_page_is_nan(testserver, testbrowser):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
-    page.request.registry.settings = {}
-    page.request.path_info = 'article/03/seite-x'
-    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
-        page()
-
-
-def test_ArticlePage_should_throw_404_if_no_page_in_path(
-        testserver, testbrowser):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
-    page.request.registry.settings = {}
-    page.request.path_info = 'article/03/seite-'
-    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
-        page()
-
-
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(
         testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
@@ -570,18 +551,7 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(
         page()
 
 
-def test_ArticlePage_should_not_work_if_view_name_is_seite_1(
-        testserver, testbrowser):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
-    page.request.registry.settings = {}
-    page.request.path_info = u'article/03/seite-1'
-    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
-        page()
-
-
-def test_ArticlePage_should_work_if_pages_from_request_fit(
-        testserver, testbrowser):
+def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
