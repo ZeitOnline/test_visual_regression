@@ -3,6 +3,9 @@
 {% import 'templates/macros/layout_macro.tpl' as lama with context%}
 {% import 'templates/article.html' as article with context %}
 
+{% block adplace_top %}
+{% endblock adplace_top %}
+
 {% block page_wrap_inner %}
 	<div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
 {% endblock page_wrap_inner %}
@@ -32,6 +35,9 @@
         </div>
     </nav>
 {% endblock navigation %}
+
+{% block adplace_billboard %}
+{% endblock adplace_billboard %}
 
 {% block content %}
 	<article class="article article--longform">
@@ -75,3 +81,6 @@
 		</div>
 	</article>
 {% endblock content %}
+
+{% block adplace_floor %}
+{% endblock adplace_floor %}
