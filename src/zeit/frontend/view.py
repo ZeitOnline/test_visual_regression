@@ -94,11 +94,9 @@ class Base(object):
     @reify
     def adwords(self):
         keywords = ['zeitonline']
-        # TODO: End discrepancy between testing and live ressorts? see banner_channel
-        if 'zeit-magazin' in self.ressort or 'zeitmz' in self.banner_channel:
+        # TODO: End discrepancy between testing and live ressorts!
+        if self.ressort in ['zeit-magazin', 'lebensart']:
             keywords.append('zeitmz')
-        if self.is_top_of_mind:
-            keywords.append('ToM')
         return keywords
 
     def banner(self, tile):
@@ -262,6 +260,13 @@ class Content(Base):
         if self.title:
             l.append((self.title, ''))
         return l
+
+    @reify
+    def adwords(self):
+        keywords = super(Content, self).adwords
+        if self.is_top_of_mind:
+            keywords.append('ToM')
+        return keywords
 
     @reify
     def is_top_of_mind(self):
