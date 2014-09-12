@@ -1,4 +1,4 @@
-//Wrapper function with one parameter
+// Wrapper function with one parameter
 module.exports = function(grunt) {
 	"use strict";
 
@@ -35,8 +35,6 @@ module.exports = function(grunt) {
 			grunt.log.writeln("You're using Ruby " + stdout);
 		}
 	});
-
-	var path = require("path");
 
 	// configuration
 	grunt.initConfig({
