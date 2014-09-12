@@ -317,23 +317,30 @@ class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-        if self.page_nr == 0:
-            raise pyramid.httpexceptions.HTTPMovedPermanently(self.resource_url)
+        self._validate_and_determine_page_nr()
 
     @reify
     def page_nr(self):
+        return self._validate_and_determine_page_nr()
+
+    def _validate_and_determine_page_nr(self):
         try:
             spec = self.request.path_info.split('/')[-1][6:]
             number = int(re.sub('[^0-9]', '', spec))
         except (AssertionError, IndexError, ValueError):
-            raise pyramid.httpexceptions.HTTPMovedPermanently(self.resource_url)
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                self.resource_url)
         else:
             if len(str(number)) != len(spec):
                 # Make sure /seite-007 is redirected to /seite-7
-                raise pyramid.httpexceptions.HTTPMovedPermanently('%s/%s-%s' % (
-                    self.resource_url, self.request.view_name, number))
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    '%s/%s-%s' % (
+                        self.resource_url, self.request.view_name, number))
             elif number > len(self.pages):
                 raise pyramid.httpexceptions.HTTPNotFound()
+            elif number == 0:
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    self.resource_url)
             return number
 
     @reify
