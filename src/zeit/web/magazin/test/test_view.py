@@ -233,13 +233,15 @@ def test_header_elem_should_be_video_if_there_is_a_header_video(application):
         article_view.header_elem, zeit.web.core.block.HeaderVideo)
 
 
-def test_header_image_should_be_none_if_adapted_as_regular_image(testserver, testbrowser):
+def test_header_image_should_be_none_if_adapted_as_regular_image(
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert zeit.web.core.block.Image(body.values()[0]) is None
 
 
-def test_image_view_returns_image_data_for_filesystem_connector(testserver, testbrowser):
+def test_image_view_returns_image_data_for_filesystem_connector(
+        testserver, testbrowser):
     r = requests.get(testserver.url +
                      '/exampleimages/artikel/01/'
                      'schoppenstube/schoppenstube-540x304.jpg')
@@ -334,7 +336,8 @@ def test_column_should_not_have_header_image(testserver, testbrowser):
     assert '<div class="article__column__headerimage">' not in browser.contents
 
 
-def test_health_check_should_response_and_have_status_200(testserver, testbrowser):
+def test_health_check_should_response_and_have_status_200(
+        testserver, testbrowser):
     browser = testbrowser('%s/health_check' % testserver.url)
     assert browser.headers['Content-Length'] == '2'
     resp = zeit.web.core.view.health_check('request')
@@ -547,7 +550,8 @@ def test_ArticlePage_should_throw_404_if_page_is_nan(testserver, testbrowser):
         page()
 
 
-def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver, testbrowser):
+def test_ArticlePage_should_throw_404_if_no_page_in_path(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -556,7 +560,8 @@ def test_ArticlePage_should_throw_404_if_no_page_in_path(testserver, testbrowser
         page()
 
 
-def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver, testbrowser):
+def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -565,7 +570,8 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(testserver, testb
         page()
 
 
-def test_ArticlePage_should_not_work_if_view_name_is_seite_1(testserver, testbrowser):
+def test_ArticlePage_should_not_work_if_view_name_is_seite_1(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -574,7 +580,8 @@ def test_ArticlePage_should_not_work_if_view_name_is_seite_1(testserver, testbro
         page()
 
 
-def test_ArticlePage_should_work_if_pages_from_request_fit(testserver, testbrowser):
+def test_ArticlePage_should_work_if_pages_from_request_fit(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -656,7 +663,8 @@ def test_pagination_next_page_url_is_working(testserver, testbrowser):
     assert view.pagination['next_page_url'] == '/artikel/03/seite-2'
 
 
-def test_pagination_next_page_url_on_last_page_is_none(testserver, testbrowser):
+def test_pagination_next_page_url_on_last_page_is_none(
+        testserver, testbrowser):
     browser = testbrowser(
         '%s/artikel/03/seite-7' % testserver.url)
     content = '<span class="icon-pagination-next">Vor</span>'
@@ -675,7 +683,8 @@ def test_pagination_prev_page_url_is_working(testserver, testbrowser):
     assert view.pagination['prev_page_url'] == u'/artikel/03'
 
 
-def test_pagination_prev_page_url_on_first_page_is_none(testserver, testbrowser):
+def test_pagination_prev_page_url_on_first_page_is_none(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     view.request.traversed = ('artikel', '03')
@@ -695,7 +704,8 @@ def test_article01_should_not_have_a_nextread(application):
     assert view.nextread is None
 
 
-def test_cp_teaser_with_comments_should_get_comments_count(testserver, testbrowser):
+def test_cp_teaser_with_comments_should_get_comments_count(
+        testserver, testbrowser):
     request = mock.Mock()
     request.registry.settings.node_comment_statistics = (
         'data/node-comment-statistics.xml')

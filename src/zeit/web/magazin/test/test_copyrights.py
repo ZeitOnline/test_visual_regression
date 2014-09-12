@@ -88,26 +88,32 @@ def test_empty_sequences_should_not_resolve_copyrights(cp_factory):
 
 
 def test_copyright_entries_are_rendered_correcly(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     # 5 Unique teaser images with copyright information expected.
     assert len(browser.cssselect('.copyrights__entry')) == 5
 
 
-def test_copyright_entry_images_are_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+def test_copyright_entry_images_are_rendered_correctly(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert ('/zeit-magazin/2014/17/lamm-aubergine/'
             'lamm-aubergine-zmo-landscape-large.jpg') in browser.cssselect(
         '.copyrights__entry__image')[0].attrib['style']
 
 
-def test_copyright_entry_labels_are_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+def test_copyright_entry_labels_are_rendered_correctly(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert u'© Jason Merritt/Getty Images' in browser.cssselect(
         'span.copyrights__entry__label')[2].text
 
 
 def test_copyright_entry_links_are_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert 'http://www.photocase.de/milchhonig' in browser.cssselect(
         'span.copyrights__entry__label a')[0].attrib['href']
 
@@ -135,18 +141,21 @@ def test_nextread_teaser_images_show_up_in_copyrights(testserver, testbrowser):
         'div.copyrights__entry__image')[0].attrib['style']
 
 
-def test_minimal_nextread_teaser_does_not_show_up_in_copyrights(testserver, testbrowser):
+def test_minimal_nextread_teaser_does_not_show_up_in_copyrights(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/header2' % testserver.url)
     assert all(['pistazienparfait-zmo-nextread.jpg' not in img.attrib['style']
                for img in browser.cssselect('div.copyrights__entry__image')])
 
 
-def test_missing_nextread_image_does_not_show_up_in_copyrights(testserver, testbrowser):
+def test_missing_nextread_image_does_not_show_up_in_copyrights(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/02' % testserver.url)
     assert len(browser.cssselect('div.copyrights__entry__image')) == 1
 
 
-def test_inline_images_in_article_show_up_in_copyrights(testserver, testbrowser):
+def test_inline_images_in_article_show_up_in_copyrights(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/04' % testserver.url)
     assert len(browser.cssselect('div.copyrights__entry__image')) == 4
 
@@ -177,7 +186,8 @@ def test_copyright_entry_has_correct_nofollow_attr(testserver, testbrowser):
     assert not links[1].attrib.get('rel', False)
 
 
-def test_inline_images_in_longform_show_up_in_copyrights(testserver, testbrowser):
+def test_inline_images_in_longform_show_up_in_copyrights(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/06' % testserver.url)
     assert len(browser.cssselect('div.copyrights__entry__image')) == 2
     browser = testbrowser('%s/artikel/05' % testserver.url)
@@ -196,7 +206,8 @@ def test_existing_header_image_shows_up_in_copyrights(testserver, testbrowser):
         'div.copyrights__entry__image')[0].attrib['style']
 
 
-def test_missing_header_image_does_not_show_up_in_copyrights(testserver, testbrowser):
+def test_missing_header_image_does_not_show_up_in_copyrights(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/header3' % testserver.url)
     assert not browser.cssselect('div.copyrights__entry')
 
@@ -211,13 +222,15 @@ def test_gallery_image_should_show_up_in_copyrights(testserver, testbrowser):
         'div.copyrights__entry__image')[0].attrib['style']
 
 
-def test_only_gallery_images_with_cr_should_show_up_in_copyrights(testserver, testbrowser):
+def test_only_gallery_images_with_cr_should_show_up_in_copyrights(
+        testserver, testbrowser):
     browser = testbrowser(
         '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url)
     assert len(browser.cssselect('ul.copyrights__list li')) == 1
 
 
-def test_centerpage_gracefully_skips_malformed_copyrights(testserver, testbrowser):
+def test_centerpage_gracefully_skips_malformed_copyrights(
+        testserver, testbrowser):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart-2')
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())

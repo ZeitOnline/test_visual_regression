@@ -8,7 +8,8 @@ import lxml
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
     lines = tpl.module.paragraph(html).splitlines()
     output = ""
@@ -20,7 +21,8 @@ def test_macro_p_should_produce_markup(jinja2_env):
 
 
 def test_macro_raw_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     css_class = 'raw'
     markup = '<div class="%s">'\
         '<blink>ZEIT ONLINE</blink>'\
@@ -34,7 +36,8 @@ def test_macro_raw_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     css_class = 'article__subpage-chapter'
 
     # assert normal markup
@@ -53,7 +56,8 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
     markup = '<div class="breadcrumbs">' \
@@ -70,7 +74,8 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
 
 
 def test_macro_portraitbox_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     obj = {'name': 'name', 'text': 'text'}
 
     markup = '<figure class="portraitbox figure-stamp">' \
@@ -84,7 +89,8 @@ def test_macro_portraitbox_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     css_index = 'article__subpage-index'
     markup_standard = ('<div class="%s figure-stamp">'
                        '<div class="article__subpage-index__title">'
@@ -128,7 +134,8 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
 
 
 def test_macro_subpage_head_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     css_class = 'article__subpage-head'
 
     # assert normal markup
@@ -145,7 +152,8 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
 
 def test_macro_source_date_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     markup = '<span class="article__head__meta__source">' \
         'zon</span><span class="article__head__meta__date">01.01.2013' \
         '</span>'
@@ -157,7 +165,8 @@ def test_macro_source_date_should_produce_markup(jinja2_env):
 
 
 def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     lines = tpl.module.intertitle("xy").splitlines()
     output = ""
     for line in lines:
@@ -167,7 +176,8 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
 
 
 def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
 
     # assert normal quote
     obj = {'layout': 'quote', 'attribution': 'Autor',
@@ -195,7 +205,8 @@ def test_macro_citation_should_produce_valid_markup(jinja2_env):
 
 
 def test_macro_advertising_should_produce_script(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
 
     # test normal
     ad = {'type': 'rectangle'}
@@ -209,7 +220,8 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
 
 def test_image_should_produce_markup(jinja2_env, monkeypatch):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
 
     obj = [{'layout': 'large', 'css': 'figure-full-width',
             'caption': 'test', 'copyright': (('test', None, False),),
@@ -309,7 +321,8 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     obj = mock.Mock()
     obj.caption = 'test'
     obj.copyright = 'test'
@@ -336,7 +349,8 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
 
 def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     test_class = 'test'
     authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
                 'location': ', Bern', 'suffix': 'und'},
@@ -352,7 +366,8 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
 
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     authors = []
     lines = tpl.module.meta_author(authors).splitlines()
     output = ""
@@ -362,7 +377,8 @@ def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
 
 
 def test_macro_video_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
 
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
@@ -411,7 +427,8 @@ def test_macro_video_should_produce_markup(jinja2_env):
 
 
 def test_macro_headervideo_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
 
     # assert default video
     obj = {'highest_rendition': 'test.mp4', 'id': 1}
@@ -439,7 +456,8 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
 
 
 def test_macro_sharing_meta_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     # test usual
     obj = {'title': 'title', 'subtitle': 'subtitle', 'image_group': 'true',
@@ -472,7 +490,8 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
 
 
 def test_macro_ga_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     elems = ["<script",
              "_gaq.push(['_setAccount'",
              "_gaq.push(['_setDomainName'",
@@ -488,7 +507,8 @@ def test_macro_ga_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_cc_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     string = "lebensart/mode/article"
     elems = ['<script',
              'src="http://cc.zeit.de/cc.gif?banner-channel=' + string,
@@ -502,7 +522,8 @@ def test_macro_cc_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     elems = ['<script',
              'src="http://scripts.zeit.de/js/rsa.js"',
              'loadMWA208571()',
@@ -517,7 +538,8 @@ def test_macro_meetrics_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     obj = mock.Mock()
     obj.ressort = 'lebensart'
@@ -577,7 +599,8 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_webtrekk_tracking_should_produces_correct_cp_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     obj = mock.Mock()
     obj.ressort = 'lebensart'
@@ -617,7 +640,8 @@ def test_macro_webtrekk_tracking_should_produces_correct_cp_markup(jinja2_env):
 
 
 def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     string = "lebensart/mode/article"
     elems = ['<script',
              'var Z_IVW_RESSORT = "' + string,
@@ -635,7 +659,8 @@ def test_macro_ivw_ver1_tracking_should_produce_markup(jinja2_env):
 
 
 def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     obj = {'ressort': 'lebensart',
            'sub_ressort': 'mode'}
     request = {'path_info': '/test/test'}
@@ -658,7 +683,8 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
     # todo: after importing banner.xml to the system
     # make multiple tests from this
     # with all standard banner
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     banner = {'name': 'superbanner',
               'tile': '1',
               'sizes': ['728x90'],
@@ -683,7 +709,8 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
 
 
 def test_macro_iqd_init_prepares_mobile_testing(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     elems = ['nuggad.init({"rptn-url": nugghost}, function(api) {',
              'var iqd_testkw = (function () {',
              'return testkw;']
@@ -696,7 +723,8 @@ def test_macro_iqd_init_prepares_mobile_testing(jinja2_env):
 
 
 def test_macro_iqd_init_mobile_produces_banner_calls(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     elems = ["sasmobile('32375/1', 13500, sas_target);",
              "sasmobile('32375/2', 13557, sas_target);",
              "sasmobile('32375/3', 13501, sas_target);"]
@@ -713,7 +741,8 @@ def test_macro_iqd_init_mobile_produces_banner_calls(jinja2_env):
 
 
 def test_macro_iqd_nuggad_mobile_produces_js(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     elems = ['var nuggn="480104072";',
              'var nuggsid="1206341050";',
              'var nugghost="http://gwp.nuggad.net";',
@@ -727,7 +756,8 @@ def test_macro_iqd_nuggad_mobile_produces_js(jinja2_env):
 
 
 def test_adplace_middle_mobile_produces_html(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     elems = ['<div class="iqd_mobile__adplace--middle">',
              '<div id="sas_13557"></div>']
     obj = mock.Mock()
@@ -741,7 +771,8 @@ def test_adplace_middle_mobile_produces_html(jinja2_env):
 
 
 def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     lines = tpl.module.adplace_middle_mobile(False).splitlines()
     output = ""
     for line in lines:
@@ -750,7 +781,8 @@ def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
 
 
 def test_add_publish_date_generates_script(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
 
     obj = [{'lm': None,
             'pd': '1.Januar2014',
@@ -768,7 +800,8 @@ def test_add_publish_date_generates_script(jinja2_env):
 
 
 def test_date_meta_should_produce_metatags(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     obj = [{'date_last_published_semantic': '',
             'date_first_released_meta': '1.1.2011',
@@ -786,12 +819,14 @@ def test_date_meta_should_produce_metatags(jinja2_env):
 
 
 def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''
 
 
 def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     image = mock.Mock()
     image.alt = 'ALT'
     image.title = 'TITLE'
@@ -810,7 +845,8 @@ def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
 
 def test_macro_insert_responsive_image_should_produce_alternative_markup(
         jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     image = mock.Mock()
     image.alt = 'ALT'
     image.title = 'TITLE'
@@ -826,7 +862,8 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(
 
 def test_macro_insert_responsive_image_should_produce_linked_image(
         jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     image = mock.Mock()
     image.href = 'http://www.test.de'
     page_type = 'article'
@@ -842,7 +879,8 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
 
 def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
     # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/centerpage_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     teaser = mock.Mock()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
@@ -864,7 +902,8 @@ def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
 
 def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
     # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/centerpage_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     teaser = mock.Mock()
     teaser.teaserSupertitle = None
     teaser.supertitle = "FALLBACK"
@@ -883,7 +922,8 @@ def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
 def test_macro_teaser_text_block_should_produce_alternative_markup(
         jinja2_env):
     # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/centerpage_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     teaser = mock.Mock()
     teaser.teaserTitle = "TITLE"
     teaser.uniqueId = "ID"
@@ -902,7 +942,8 @@ def test_macro_teaser_text_block_should_produce_alternative_markup(
 
 
 def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/centerpage_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     markup = '<span class="cp_comment__count__wrap '\
         'icon-comments-count">3</span>'
     lines = tpl.module.comments_count(3).splitlines()
@@ -914,7 +955,8 @@ def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
 
 
 def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
     request.app_info.user.picture = None
@@ -955,7 +997,8 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
 
 
 def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
     request.app_info.community_host = 'www.zeit.de/'
@@ -975,7 +1018,8 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
 
 
 def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
 
@@ -1005,7 +1049,8 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
 
 
 def test_macro_click_tracking_should_produce_correct_js(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     lines = tpl.module.click_tracking('test').splitlines()
     output = ""
@@ -1023,7 +1068,8 @@ def test_macro_click_tracking_should_produce_correct_js(jinja2_env):
 
 
 def test_macro_copyrights(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/layout_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
     copyrights = [
         dict(
             image=('http://localhost:9090/exampleimages/'
@@ -1053,7 +1099,8 @@ def test_macro_copyrights(jinja2_env):
 
 
 def test_macro_include_cp_ad_produces_markup(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/centerpage_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     lines = tpl.module.include_cp_ad().splitlines()
     output = ""
     for line in lines:
@@ -1062,7 +1109,8 @@ def test_macro_include_cp_ad_produces_markup(jinja2_env):
 
 
 def test_macro_liveblog_produces_html(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     liveblog = mock.Mock()
     liveblog.blog_id = '999'
     lines = tpl.module.liveblog(liveblog).splitlines()

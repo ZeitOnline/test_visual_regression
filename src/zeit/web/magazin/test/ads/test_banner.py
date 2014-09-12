@@ -36,7 +36,8 @@ def test_banner_view_should_return_None_if_tile_is_not_present(application):
     assert article_view.banner(999) is None
 
 
-def test_banner_should_fallback_on_not_registered_banner_types(testserver, testbrowser):
+def test_banner_should_fallback_on_not_registered_banner_types(
+        testserver, testbrowser):
     class Moep(zeit.web.magazin.view_article.Article):
 
         @property
@@ -50,13 +51,15 @@ def test_banner_should_fallback_on_not_registered_banner_types(testserver, testb
     assert moep_view.iqd_mobile_settings == expected
 
 
-def test_banner_should_not_be_displayed_on_short_pages(testserver, testbrowser):
+def test_banner_should_not_be_displayed_on_short_pages(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/header2' % testserver.url)
     assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
         not in browser.contents
 
 
-def test_banner_should_not_be_displayed_on_disabled_pages(testserver, testbrowser):
+def test_banner_should_not_be_displayed_on_disabled_pages(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/05' % testserver.url)
     assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
         not in browser.contents
@@ -88,7 +91,8 @@ def test_banner_tile3_should_be_displayed_on_pages(testserver, testbrowser):
             'ad__width_800 ad__min__768">') in browser.contents
 
 
-def test_banner_view_should_be_displayed_on_succeeding_pages(testserver, testbrowser):
+def test_banner_view_should_be_displayed_on_succeeding_pages(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
     assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
             'ad__width_300 ad__min__768">') not in browser.contents

@@ -94,7 +94,8 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         driver.set_window_size(1024, 768)
         # set window size for mobile again
         driver.set_window_size(560, 900)
-        # driver.save_screenshot("/tmp/test_buttons_should_be_visible_on_tap_mobile.png")
+        # driver.save_screenshot(
+        #    "/tmp/test_buttons_should_be_visible_on_tap_mobile.png")
         figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()

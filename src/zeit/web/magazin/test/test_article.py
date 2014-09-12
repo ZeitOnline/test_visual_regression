@@ -32,7 +32,9 @@ def test_IPages_contains_blocks(application):
 
 def test_article_has_valid_twitter_meta_tags(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
-    assert '<meta name="twitter:card" content="summary_large_image">' in browser.contents
+    assert (
+        '<meta name="twitter:card" content="summary_large_image">'
+        in browser.contents)
     assert '<meta name="twitter:site"'\
         ' content="@zeitonline">' in browser.contents
     assert '<meta name="twitter:creator"'\
@@ -414,28 +416,34 @@ def test_artikel_header_header3_should_have_correct_source(
     assert browser.cssselect('header.article__head.article__head--text-only')
 
 
-def test_artikel_header_header4_should_have_correct_source(testserver, testbrowser):
+def test_artikel_header_header4_should_have_correct_source(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/header4' % testserver.url)
     assert browser.cssselect(
         'header.article__head.article__head--stamp.is-constrained')
 
 
-def test_artikel_header_header5_should_have_correct_source(testserver, testbrowser):
+def test_artikel_header_header5_should_have_correct_source(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/header5' % testserver.url)
     assert browser.cssselect('header.article__head.article__head--leinwand')
 
 
-def test_artikel_header_header6_should_have_correct_source(testserver, testbrowser):
+def test_artikel_header_header6_should_have_correct_source(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/header6' % testserver.url)
     assert browser.cssselect('header.article__head.article__head--mode')
 
 
-def test_artikel_header_standardkolumne_should_have_correct_source(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/standardkolumne-beispiel' % testserver.url)
+def test_artikel_header_standardkolumne_should_have_correct_source(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert browser.cssselect('header.article__head.article__head--column')
 
 
-def test_artikel_header_sequelpage_should_have_correct_source(testserver, testbrowser):
+def test_artikel_header_sequelpage_should_have_correct_source(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
     assert browser.cssselect('header.article__head.article__head--sequel')
 
@@ -482,7 +490,8 @@ def test_nextread_teaser_block_teasers_is_accessable(application):
         'Nextread block should expose its teasers via index.'
 
 
-def test_nextread_base_layout_has_image_element_if_available(testserver, testbrowser):
+def test_nextread_base_layout_has_image_element_if_available(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/09' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
     assert len(nextread.cssselect('img')) == 1, \
@@ -493,7 +502,8 @@ def test_nextread_base_layout_has_image_element_if_available(testserver, testbro
         'The nextread of "Artikel 10" has no teaser image asset.'
 
 
-def test_nextread_maximal_layout_has_image_background_if_available(testserver, testbrowser):
+def test_nextread_maximal_layout_has_image_background_if_available(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/08' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
     assert 'background-image' in nextread.attrib.get('style'), \
@@ -511,17 +521,20 @@ def test_nextread_should_fallback_to_default_layout(testserver, testbrowser):
         '"Artikel 02" has invalid nextread layout, should fallback to base.'
 
 
-def test_article_with_images_should_render_image_container(testserver, testbrowser):
+def test_article_with_images_should_render_image_container(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/03' % testserver.url)
     assert browser.cssselect('div.article__page figure.figure-stamp')
 
 
-def test_article_without_images_should_not_render_image_container(testserver, testbrowser):
+def test_article_without_images_should_not_render_image_container(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/artikel-ohne-assets' % testserver.url)
     assert not browser.cssselect('div.article__page figure.figure-stamp')
 
 
-def test_article_with_fictitious_imgs_should_not_render_img_contnr(testserver, testbrowser):
+def test_article_with_fictitious_imgs_should_not_render_img_contnr(
+        testserver, testbrowser):
     browser = testbrowser(
         '%s/artikel/artikel-mit-fiktiven-assets' % testserver.url)
     assert not browser.cssselect('div.article__page figure.figure-stamp')
@@ -571,21 +584,24 @@ def test_header_has_linked_copyright(testserver, testbrowser):
         '<a href="http://foo.de" target="_blank">©foo' in output
 
 
-def test_feature_longform_should_have_zon_logo_classes(testserver, testbrowser):
+def test_feature_longform_should_have_zon_logo_classes(
+        testserver, testbrowser):
     browser = testbrowser('%s/feature/feature_longform' % testserver.url)
     assert browser.cssselect('.main-nav__logo__img.icon-logo-zon-small')
     logolink = browser.cssselect('a.main-nav__logo')
     assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
 
 
-def test_article_view_has_leadtime_set_if_article_provides_it(testserver, testbrowser):
+def test_article_view_has_leadtime_set_if_article_provides_it(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start
     assert view.leadtime.end
 
 
-def test_article_view_has_no_leadtime_if_the_attribute_is_missing(testserver, testbrowser):
+def test_article_view_has_no_leadtime_if_the_attribute_is_missing(
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start is None
