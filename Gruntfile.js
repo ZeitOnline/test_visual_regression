@@ -176,7 +176,7 @@ module.exports = function(grunt) {
 					expand: true,
 					cwd: project.sourceDir + "sass/icons",
 					src: ['*.svg', '*.png'],
-					dest: project.codeDir + "/css/icons"
+					dest: project.codeDir + "/css/zmo/icons"
 				}],
 				options: {
 					defaultWidth: "100px",
