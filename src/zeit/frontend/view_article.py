@@ -317,7 +317,7 @@ class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-        if (self.request.view_name != 'komplettansicht') and self.page_nr == 0:
+        if self.page_nr == 0:
             raise pyramid.httpexceptions.HTTPMovedPermanently(self.resource_url)
 
     @reify
