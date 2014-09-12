@@ -1,6 +1,7 @@
 import datetime
 import itertools
 import logging
+import re
 
 from pyramid.decorator import reify
 from pyramid.view import view_config
@@ -144,15 +145,9 @@ class Article(zeit.frontend.view.Content):
     def header_elem(self):
         return self.header_video or self.header_img
 
-    # deprecated
-    # @reify
-    # def sharing_img(self):
-    #     if self.header_img is not None:
-    #         return self.header_img
-    #     if self.header_video is not None:
-    #         return self.header_video
-    #     else:
-    #         return self.first_img
+    @reify
+    def resource_url(self):
+        return self.request.resource_url(self.context).rstrip('/')
 
     def _get_author(self, index):
         try:
@@ -316,25 +311,37 @@ class Article(zeit.frontend.view.Content):
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='seite',
-             path_info='.*seite-[0-9]+$',
+             path_info='.*seite-(.*)',
              renderer='templates/article.html')
 class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-        if (self.request.view_name != 'komplettansicht') and (
-                self.page_nr > len(self.pages)):
-            raise pyramid.httpexceptions.HTTPNotFound()
+        self._validate_and_determine_page_nr()
 
     @reify
     def page_nr(self):
+        return self._validate_and_determine_page_nr()
+
+    def _validate_and_determine_page_nr(self):
         try:
-            n = int(self.request.path_info.split('/')[-1][6:])
-            if n == 1:
+            spec = self.request.path_info.split('/')[-1][6:]
+            number = int(re.sub('[^0-9]', '', spec))
+        except (AssertionError, IndexError, ValueError):
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                self.resource_url)
+        else:
+            if len(str(number)) != len(spec):
+                # Make sure /seite-007 is redirected to /seite-7
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    '%s/%s-%s' % (
+                        self.resource_url, self.request.view_name, number))
+            elif number > len(self.pages):
                 raise pyramid.httpexceptions.HTTPNotFound()
-            return n
-        except (IndexError, ValueError):
-            raise pyramid.httpexceptions.HTTPNotFound()
+            elif number == 0:
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    self.resource_url)
+            return number
 
     @reify
     def current_page(self):
