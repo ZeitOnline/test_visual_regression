@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.16 (unreleased)
 -----------------
 
+- ZMO-883: Fix iOS bug initially showing last slide of inline gallery
+
 - ZMO-919: Recalculate photocluster on image load
 
 
