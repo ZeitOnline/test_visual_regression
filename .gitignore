@@ -4,9 +4,11 @@
 .Python
 .sass-cache
 /bower_components/
+/javascript/documentation/
+/javascript/vendor/
 /node_modules/
-javascript/documentation
-sass/icons-minified
+/sass/icons-minified/
+/sass/vendor/
 setuptools_git-*
 src/*.egg-info
 src/zeit/frontend/css
