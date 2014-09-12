@@ -120,9 +120,9 @@ module.exports = function(grunt) {
 			options: {
 				jshintrc: ".jshintrc",
 				ignores: [
-					"javascript/libs/**/*",
-					"javascript/vendor/**/*",
-					"javascript/documentation/**/*"
+					project.sourceDir + "javascript/libs/**/*",
+					project.sourceDir + "javascript/vendor/**/*",
+					project.sourceDir + "javascript/documentation/**/*"
 				]
 			},
 			dist: {
