@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZMO-882: Validate page numbers and trigger redirects
 
+- ZMO-919: Recalculate photocluster on image load
+
 
 0.15 (2014-09-03)
 -----------------
