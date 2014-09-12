@@ -7,7 +7,8 @@
 /javascript/documentation/
 /javascript/vendor/
 /node_modules/
-/sass/icons-minified/
+/sass/web.magazin/icons-minified/
+/sass/web.site/icons-minified/
 /sass/vendor/
 setuptools_git-*
 src/*.egg-info

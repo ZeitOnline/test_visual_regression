@@ -75,7 +75,7 @@ module.exports = function(grunt) {
 			options: {
 				cssDir: project.codeDir + "css",
 				fontsPath: project.codeDir + "fonts",
-				httpPath: "/", // todo: adjust this later in project
+				httpPath: "/",
 				imagesPath: project.codeDir + "img",
 				javascriptsPath: project.codeDir + "js",
 				sassDir: project.sourceDir + "sass",
@@ -90,8 +90,8 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				options: {
-					environment: "production",
 					force: true,
+					environment: "production",
 					outputStyle: "compressed",
 				}
 			}
@@ -175,27 +175,55 @@ module.exports = function(grunt) {
 		},
 
 		svgmin: {
-			dist: {
-				files: [{
-					expand: true,
-					cwd: project.sourceDir + "sass/icons",
-					src: ["*.svg"],
-					dest: project.sourceDir + "sass/icons-minified"
-				}]
+			magazin: {
+				expand: true,
+				cwd: project.sourceDir + "sass/web.magazin/icons",
+				src: ["*.svg"],
+				dest: project.sourceDir + "sass/web.magazin/icons-minified"
+			},
+			website: {
+				expand: true,
+				cwd: project.sourceDir + "sass/web.site/icons",
+				src: ["*.svg"],
+				dest: project.sourceDir + "sass/web.site/icons-minified"
 			}
 		},
 
 		grunticon: {
-			dist: {
+			options: {
+				defaultWidth: "100px",
+				defaultHeight: "100px"
+			},
+			magazin: {
 				files: [{
 					expand: true,
-					cwd: project.sourceDir + "sass/icons-minified",
+					cwd: "<%= svgmin.magazin.dest %>",
 					src: ["*.svg", "*.png"],
 					dest: project.codeDir + "/css/icons"
 				}],
 				options: {
-					defaultWidth: "100px",
-					defaultHeight: "100px"
+					datasvgcss: "magazin.data.svg.css",
+					datapngcss: "magazin.data.png.css",
+					urlpngcss: "magazin.fallback.css",
+					previewhtml: "magazin.preview.html",
+					loadersnippet: "magazin.loader.js",
+					pngfolder: "magazin"
+				}
+			},
+			website: {
+				files: [{
+					expand: true,
+					cwd: "<%= svgmin.website.dest %>",
+					src: ["*.svg", "*.png"],
+					dest: project.codeDir + "/css/icons"
+				}],
+				options: {
+					datasvgcss: "site.data.svg.css",
+					datapngcss: "site.data.png.css",
+					urlpngcss: "site.fallback.css",
+					previewhtml: "site.preview.html",
+					loadersnippet: "site.loader.js",
+					pngfolder: "site"
 				}
 			}
 		},
@@ -256,7 +284,7 @@ module.exports = function(grunt) {
 
 		},
 
-		// watch here
+		// watch dog
 		watch: {
 			js: {
 				files: ["<%= jshint.dist.src %>"],
@@ -267,10 +295,25 @@ module.exports = function(grunt) {
 				tasks: ["compass:dev"]
 			},
 			icons: {
-				files: [project.sourceDir + "sass/icons/*.svg"],
+				files: [project.sourceDir + "sass/**/*.svg"],
 				tasks: ["icons"]
+			},
+			config: {
+				files: [
+					project.sourceDir + ".jshintrc",
+					project.sourceDir + "bower.json",
+					project.sourceDir + "Gruntfile.js"
+				],
+				options: {
+					reload: true
+				}
 			}
 		}
+	});
+
+	// on watch events configure jshint:all to only run on changed file
+	grunt.event.on('watch', function(action, filepath) {
+		grunt.config('jshint.all.src', filepath);
 	});
 
 	// load node modules
