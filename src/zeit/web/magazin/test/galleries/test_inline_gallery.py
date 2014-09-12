@@ -5,11 +5,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from zeit.web.core.test import Browser
 
-
-def test_inline_gallery_is_there(testserver):
-    browser = Browser('%s/artikel/01' % testserver.url)
+def test_inline_gallery_is_there(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/01' % testserver.url)
     assert '<div class="inline-gallery"' in browser.contents
 
 
@@ -47,8 +45,9 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
         assert False
 
 
-def test_inline_gallery_uses_responsive_images_with_ratio(testserver):
-    browser = Browser('%s/artikel/01' % testserver.url)
+def test_inline_gallery_uses_responsive_images_with_ratio(
+        testserver, testbrowser):
+    browser = testbrowser('%s/artikel/01' % testserver.url)
     image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
     assert 'data-ratio="1.77914110429"' in etree.tostring(image)
 
