@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from zeit.web.core.test import Browser
 
 
 def test_standard_gallery_is_there(selenium_driver, testserver):
@@ -126,22 +125,25 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
         assert slide.is_displayed()
 
 
-def test_gallery_with_supertitle_has_html_title(browser, testserver):
-    browser = Browser('%s/galerien/fs-desktop-schreibtisch-computer' % (
+def test_gallery_with_supertitle_has_html_title(
+        appbrowser, testserver, testbrowser):
+    browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
         testserver.url))
     assert '<title>Desktop-Bilder: Das hab ich auf dem Schirm</title>' \
         in browser.contents
 
 
-def test_gallery_without_supertitle_has_html_title(browser, testserver):
-    browser = Browser('%s/galerien/bg-automesse-detroit-2014-usa' % (
+def test_gallery_without_supertitle_has_html_title(
+        appbrowser, testserver, testbrowser):
+    browser = testbrowser('%s/galerien/bg-automesse-detroit-2014-usa' % (
         testserver.url))
     assert '<title>Automesse Detroit 2014 US-Hersteller</title>' \
         in browser.contents
 
 
-def test_standalone_gallery_uses_responsive_images_with_ratio(testserver):
-    browser = Browser('%s/galerien/fs-desktop-schreibtisch-computer' % (
+def test_standalone_gallery_uses_responsive_images_with_ratio(
+        testserver, testbrowser):
+    browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
         testserver.url))
     image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
     assert 'data-ratio="0.743405275779"' in etree.tostring(image)

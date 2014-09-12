@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
-from lxml import etree
 from os.path import abspath, dirname, join
+
 from pyramid.testing import setUp, tearDown, DummyRequest
 from repoze.bitblt.processor import ImageTransformationMiddleware
 from selenium import webdriver
 from webtest import TestApp as TestAppBase
-from zeit.web.core.comments import path_of_article, _place_answers_under_parent
+import cssselect
 import gocept.httpserverlayer.wsgi
+import lxml.etree
+import lxml.html
 import pkg_resources
 import pytest
-import zeit.web.core.application
 import zope.interface
+import zope.testbrowser.browser
+
+from zeit.web.core.comments import path_of_article, _place_answers_under_parent
 import zeit.content.image.interfaces
+import zeit.web.core.application
 
 
 def test_asset_path(*parts):
@@ -106,7 +111,7 @@ browsers = {
 @pytest.fixture(scope="module")
 def jinja2_env():
     app = zeit.web.core.application.Application()
-    app.settings = zeit.web.core.test.conftest.settings
+    app.settings = settings
     app.configure_pyramid()
     return app.configure_jinja()
 
@@ -202,7 +207,7 @@ def asset():
 
 
 @pytest.fixture
-def browser(application):
+def appbrowser(application):
     """ Returns an instance of `webtest.TestApp`. """
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
@@ -211,7 +216,7 @@ def browser(application):
 @pytest.fixture
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
-        response = etree.parse(
+        response = lxml.etree.parse(
             '%s%s' % (self.entry_point, path_of_article(unique_id)))
         return _place_answers_under_parent(response)
 
@@ -251,6 +256,11 @@ def my_traverser(application):
     return zeit.web.core.application.RepositoryTraverser(root)
 
 
+@pytest.fixture
+def testbrowser(request):
+    return Browser
+
+
 class TestApp(TestAppBase):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
@@ -258,3 +268,45 @@ class TestApp(TestAppBase):
             headers = {}
         headers['Accept'] = 'application/json'
         return self.get(url, params, headers, *args, **kw)
+
+
+class Browser(zope.testbrowser.browser.Browser):
+    """Custom testbrowser class that allows direct access to CSS selection on
+    its content.
+
+    Usage examples:
+
+    # Create test browser
+    browser = Browser('/foo/bar')
+    # Test only one h1 exists
+    assert len(browser.cssselect('h1.only-once')) == 1
+    # Test all divs contain at least one span
+    divs = browser.cssselect('div')
+    assert all(map(lambda d: d.cssselect('span'), divs))
+    # Test the third paragraph has two links with class batz
+    paragraph = browser.cssselect('p')[2]
+    assert len(paragraph.cssselect('a.batz')) == 2
+
+    """
+
+    _translator = None
+
+    def __init__(self, *args, **kwargs):
+        """Call base constructor and cache a translator instance."""
+        super(Browser, self).__init__(*args, **kwargs)
+        self._translator = cssselect.HTMLTranslator()
+
+    def cssselect(self, selector):
+        """Return a list of lxml.HTMLElement instances that match a given CSS
+        selector."""
+        xpath = self._translator.css_to_xpath(selector)
+        if self.document is not None:
+            return self.document.xpath(xpath)
+        return None
+
+    @property
+    def document(self):
+        """Return an lxml.html.HtmlElement instance of the response body."""
+        if self.contents is not None:
+            return lxml.html.document_fromstring(self.contents)
+        return None
