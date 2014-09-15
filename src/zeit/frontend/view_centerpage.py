@@ -1,5 +1,4 @@
 import lxml.etree
-from pyramid.decorator import reify
 from pyramid.view import view_config
 
 import zeit.cms.interfaces
@@ -10,26 +9,13 @@ import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.seo
 
+import zeit.frontend
 import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces
 import zeit.frontend.reach
 import zeit.frontend.template
 import zeit.frontend.view
-
-
-def register_copyrights(func):
-    """A decorator that registers all teaser image copyrights it finds in the
-    teaser container the decorated method (or property) returns.
-    """
-    def wrapped(self):
-        container = func(self)
-        if container:
-            for t in zeit.frontend.interfaces.ITeaserSequence(container):
-                if t.image:
-                    self._copyrights.setdefault(t.image.image_group, t.image)
-        return container
-    return wrapped
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
@@ -58,11 +44,11 @@ class Centerpage(zeit.frontend.view.Base):
             except:
                 continue
 
-    @reify
+    @zeit.frontend.reify
     def is_hp(self):
         return self.request.path == '/' + self.request.registry.settings.hp
 
-    @reify
+    @zeit.frontend.reify
     def meta_robots(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
         try:
@@ -72,12 +58,12 @@ class Centerpage(zeit.frontend.view.Base):
             pass
         return 'index,follow,noodp,noydir,noarchive'
 
-    @reify
+    @zeit.frontend.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def monothematic_block(self):
         try:
             mtb_teaserbar = self.context['teaser-mosaic'].values()[0]
@@ -86,8 +72,8 @@ class Centerpage(zeit.frontend.view.Base):
         except IndexError:
             return
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def teaserbar(self):
         try:
             zmo_teaserbar = self.context['teaser-mosaic'].values()[1]
@@ -96,7 +82,7 @@ class Centerpage(zeit.frontend.view.Base):
         except IndexError:
             return
 
-    @reify
+    @zeit.frontend.reify
     def area_lead(self):
         teaser_list = self.context['lead'].values()
         for teaser in teaser_list:
@@ -107,19 +93,19 @@ class Centerpage(zeit.frontend.view.Base):
                 continue
         return teaser_list
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def area_lead_1(self):
         return self.insert_seperator('before', self.area_lead) or \
             self.area_lead
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def area_lead_2(self):
         return self.insert_seperator('after', self.area_lead)
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def area_lead_full_teaser(self):
         for teaser_block in self.context['lead'].values():
             try:
@@ -128,22 +114,22 @@ class Centerpage(zeit.frontend.view.Base):
             except AttributeError:
                 continue
 
-    @reify
+    @zeit.frontend.reify
     def area_informatives(self):
         return self.context['informatives'].values()
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def area_informatives_1(self):
         return self.insert_seperator('before', self.area_informatives) or \
             self.area_informatives
 
-    @reify
-    @register_copyrights
+    @zeit.frontend.reify
+    @zeit.frontend.register_copyrights
     def area_informatives_2(self):
         return self.insert_seperator('after', self.area_informatives)
 
-    @reify
+    @zeit.frontend.reify
     def area_buzz(self):
         stats_path = self.request.registry.settings.node_comment_statistics
         linkreach = self.request.registry.settings.linkreach_host
@@ -153,7 +139,7 @@ class Centerpage(zeit.frontend.view.Base):
             teaser_dict[service] = reach.fetch_service(service, 3)
         return teaser_dict
 
-    @reify
+    @zeit.frontend.reify
     def copyrights(self):
         teaser_list = []
         for teaser in self._copyrights.itervalues():

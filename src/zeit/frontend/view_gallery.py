@@ -1,8 +1,8 @@
-from pyramid.decorator import reify
 from pyramid.view import view_config
 
 import zeit.wysiwyg.interfaces
 
+import zeit.frontend
 import zeit.frontend.gallery
 
 
@@ -16,16 +16,16 @@ class Gallery(zeit.frontend.view.Content):
         super(Gallery, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.advertising_enabled
 
-    @reify
+    @zeit.frontend.reify
     def images(self):
         # TODO: Why does this not work with zope interfaces?
         return zeit.frontend.gallery.standalone(self.context)
 
-    @reify
+    @zeit.frontend.reify
     def galleryText(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
-    @reify
+    @zeit.frontend.reify
     def banner_type(self):
         return 'article'
 
