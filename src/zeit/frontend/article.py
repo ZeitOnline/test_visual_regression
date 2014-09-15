@@ -48,32 +48,40 @@ def _inject_banner_code(pages, advertising_enabled, is_longform):
     """Injecting banner code in page.blocks counts and injects only after
     paragraphs (2nd actually) tile 7 and 8 are injected"""
 
-    _tile_list = [7, 8]  # banner tiles in articles
-    _possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
+    tile_list = [7, 8]  # banner tiles in articles
+    possible_pages = [i for i in xrange(1, len(pages)+1)]
+    possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
 
     if (is_longform):
-        _tile_list = [8]
-        _possible_paragraphs = [5]
+        tile_list = [8]
+        possible_pages = [1, 2]
+        possible_paragraphs = [5]
 
-    if(advertising_enabled):
-        for page in pages:
-            for index, pp in enumerate(_possible_paragraphs):
-                paragraphs = filter(
-                    lambda b: isinstance(
-                        b, zeit.frontend.block.Paragraph), page.blocks)
-                if len(paragraphs) > pp + 1:
-                    try:
-                        _para = paragraphs[pp]
-                        for i, block in enumerate(page.blocks):
-                            if _para == block:
-                                t = _tile_list[index] - 1
-                                page.blocks.insert(
-                                    i, zeit.frontend.banner.banner_list[t])
-                                break
-                    except IndexError:
-                        pass
+    if (advertising_enabled):
+        for i, page in enumerate(pages, start=1):
+            if i in possible_pages:
+                _place_adtag_by_paragraph(page,
+                                          tile_list,
+                                          possible_paragraphs)
     return pages
 
+
+def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
+    paragraphs = filter(
+        lambda b: isinstance(b, zeit.frontend.block.Paragraph), page.blocks)
+
+    for index, pp in enumerate(possible_paragraphs):
+        if len(paragraphs) > pp + 1:
+            try:
+                _para = paragraphs[pp]
+                for i, block in enumerate(page.blocks):
+                    if _para == block:
+                        t = tile_list[index] - 1
+                        page.blocks.insert(
+                            i, zeit.frontend.banner.banner_list[t])
+                        break
+            except IndexError:
+                pass
 
 @adapter(zeit.content.article.interfaces.IArticle)
 @implementer(zeit.frontend.interfaces.IPages)
