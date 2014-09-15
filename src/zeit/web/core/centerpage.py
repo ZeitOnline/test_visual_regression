@@ -6,12 +6,12 @@ import zeit.content.gallery.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 
-from zeit.web.core.template import register_filter
+import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 
 
-@register_filter
+@zeit.web.register_filter
 def get_all_assets(teaser):
     assets = (get_video_asset(teaser),
               get_gallery_asset(teaser),
@@ -19,7 +19,7 @@ def get_all_assets(teaser):
     return tuple(a for a in assets if a)
 
 
-@register_filter
+@zeit.web.register_filter
 def auto_select_asset(teaser):
     assets = get_all_assets(teaser)
     if len(assets):

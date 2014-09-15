@@ -699,7 +699,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type=' \
              '"text/javascript"><\/script>\');'
     view = mock.Mock()
-    view.is_top_of_mind = False
+    view.adwords = ['zeitonline', 'zeitmz']
     view.banner_channel = 'zeitmz/centerpage'
     lines = tpl.module.adplace(banner, view).splitlines()
     output = ""

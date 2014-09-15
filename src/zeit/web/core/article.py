@@ -1,15 +1,17 @@
-from grokcore.component import adapter, implementer
-from zeit.web.core.block import IFrontendBlock
 import logging
+
+from grokcore.component import adapter, implementer
+import zope.interface
+
 import zeit.cms.repository.interfaces
 import zeit.content.article
 import zeit.content.article.article
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.web.core.interfaces
-import zope.interface
-import zeit.content.article.interfaces
+
+import zeit.web.core.block
 import zeit.web.core.centerpage
+import zeit.web.core.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -39,36 +41,49 @@ class Page(object):
         del self.blocks[key]
 
     def append(self, block):
-        block = IFrontendBlock(block, None)
+        block = zeit.web.core.block.IFrontendBlock(block, None)
         if block is not None:
             self.blocks.append(block)
 
 
-def _inject_banner_code(pages, advertising_enabled):
+def _inject_banner_code(pages, advertising_enabled, is_longform):
     """Injecting banner code in page.blocks counts and injects only after
     paragraphs (2nd actually) tile 7 and 8 are injected"""
 
-    _tile_list = [7, 8]  # banner tiles in articles
-    _possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
+    tile_list = [7, 8]  # banner tiles in articles
+    possible_pages = [i for i in xrange(1, len(pages) + 1)]
+    possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
 
-    if(advertising_enabled):
-        for page in pages:
-            for index, pp in enumerate(_possible_paragraphs):
-                paragraphs = filter(
-                    lambda b: isinstance(
-                        b, zeit.web.core.block.Paragraph), page.blocks)
-                if len(paragraphs) > pp + 1:
-                    try:
-                        _para = paragraphs[pp]
-                        for i, block in enumerate(page.blocks):
-                            if _para == block:
-                                t = _tile_list[index] - 1
-                                page.blocks.insert(
-                                    i, zeit.web.core.banner.banner_list[t])
-                                break
-                    except IndexError:
-                        pass
+    if is_longform:
+        tile_list = [8]
+        possible_pages = [2]  # page 1 is somehow the "intro text"
+        possible_paragraphs = [5]
+
+    if advertising_enabled:
+        for i, page in enumerate(pages, start=1):
+            if i in possible_pages:
+                _place_adtag_by_paragraph(page,
+                                          tile_list,
+                                          possible_paragraphs)
     return pages
+
+
+def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
+    paragraphs = filter(
+        lambda b: isinstance(b, zeit.frontend.block.Paragraph), page.blocks)
+
+    for index, pp in enumerate(possible_paragraphs):
+        if len(paragraphs) > pp + 1:
+            try:
+                _para = paragraphs[pp]
+                for i, block in enumerate(page.blocks):
+                    if _para == block:
+                        t = tile_list[index] - 1
+                        page.blocks.insert(
+                            i, zeit.frontend.banner.banner_list[t])
+                        break
+            except IndexError:
+                pass
 
 
 @adapter(zeit.content.article.interfaces.IArticle)
@@ -79,6 +94,10 @@ def pages_of_article(context):
         advertising_enabled = context.advertising_enabled
     except AttributeError:
         advertising_enabled = True
+    try:
+        is_longform = context.is_longform
+    except AttributeError:
+        is_longform = False
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
     first_division = body._get_element_for_node(first_division)
@@ -92,13 +111,12 @@ def pages_of_article(context):
             pages.append(page)
         else:
             page.append(block)
-    return _inject_banner_code(pages, advertising_enabled)
+    return _inject_banner_code(pages, advertising_enabled, is_longform)
 
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
+    # TODO: Please remove when we have Longforms for ICMSContent
     pass
-
-# ToDo: Please remove when we have Longforms for ICMSContent
 
 
 class IFeatureLongform(zeit.content.article.interfaces.IArticle):
@@ -120,5 +138,4 @@ class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
 @implementer(zeit.web.core.interfaces.ITeaserSequence)
 @adapter(zeit.web.core.interfaces.INextreadTeaserBlock)
 class NextreadTeaserBlock(zeit.web.core.centerpage.TeaserBlock):
-
     pass

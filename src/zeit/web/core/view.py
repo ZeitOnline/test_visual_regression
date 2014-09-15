@@ -3,10 +3,9 @@ import urlparse
 import os.path
 import urllib2
 
-from babel.dates import get_timezone
-from pyramid.decorator import reify
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
+import babel.dates
 import pyramid.response
 import zope.component
 
@@ -17,6 +16,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
+import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 
@@ -58,25 +58,25 @@ class Base(object):
         except KeyError:
             return
 
-    @reify
+    @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
 
-    @reify
+    @zeit.web.reify
     def ressort(self):
         if self.context.ressort:
             return self.context.ressort.lower()
         else:
             return ''
 
-    @reify
+    @zeit.web.reify
     def sub_ressort(self):
         if self.context.sub_ressort:
             return self.context.sub_ressort.lower()
         else:
             return ''
 
-    @reify
+    @zeit.web.reify
     def banner_channel(self):
         channel = ''
         if self.ressort:
@@ -86,10 +86,20 @@ class Base(object):
             channel += myressort
         if self.sub_ressort:
             channel += '/' + self.sub_ressort.replace('-', 'und', 1)
-        if self.type:
-            # TODO: Zone type gallery after launch
-            channel += '/' + self.type.replace('gallery', 'article')
+        channel += '/' + self.banner_type
         return channel
+
+    @zeit.web.reify
+    def banner_type(self):
+        return self.type
+
+    @zeit.web.reify
+    def adwords(self):
+        keywords = ['zeitonline']
+        # TODO: End discrepancy between testing and live ressorts!
+        if self.ressort in ['zeit-magazin', 'lebensart']:
+            keywords.append('zeitmz')
+        return keywords
 
     def banner(self, tile):
         try:
@@ -97,20 +107,20 @@ class Base(object):
         except IndexError:
             return None
 
-    @reify
+    @zeit.web.reify
     def js_vars(self):
-        for name in ('banner_channel', 'ressort', 'sub_ressort', 'type'):
-            yield name, getattr(self, name, '')
+        names = ('banner_channel', 'ressort', 'sub_ressort', 'type')
+        return [(name, getattr(self, name, '')) for name in names]
 
-    @reify
+    @zeit.web.reify
     def title(self):
         return self.context.title
 
-    @reify
+    @zeit.web.reify
     def supertitle(self):
         return self.context.supertitle
 
-    @reify
+    @zeit.web.reify
     def pagetitle(self):
         seo = zeit.seo.interfaces.ISEO(self.context)
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
@@ -119,7 +129,7 @@ class Base(object):
         tokens = (self.supertitle, self.title)
         return ': '.join([t for t in tokens if t]) or default
 
-    @reify
+    @zeit.web.reify
     def pagedescription(self):
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         seo = zeit.seo.interfaces.ISEO(self.context)
@@ -129,11 +139,11 @@ class Base(object):
             return self.context.subtitle
         return default
 
-    @reify
+    @zeit.web.reify
     def rankedTags(self):
         return self.context.keywords
 
-    @reify
+    @zeit.web.reify
     def rankedTagsList(self):
         if self.rankedTags:
             return ';'.join([rt.label for rt in self.rankedTags])
@@ -141,7 +151,7 @@ class Base(object):
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
 
-    @reify
+    @zeit.web.reify
     def is_hp(self):
         try:
             return self.request.path == (
@@ -149,7 +159,7 @@ class Base(object):
         except AttributeError:
             return False
 
-    @reify
+    @zeit.web.reify
     def iqd_mobile_settings(self):
         iqd_ids = zeit.web.core.banner.iqd_mobile_ids
         if self.is_hp:
@@ -190,57 +200,59 @@ class Content(Base):
         )
     }
 
-    @reify
+    is_longform = False
+
+    @zeit.web.reify
     def subtitle(self):
         return self.context.subtitle
 
-    @reify
+    @zeit.web.reify
     def show_article_date(self):
         return self.date_last_published_semantic or self.date_first_released
 
-    @reify
+    @zeit.web.reify
     def date_first_released(self):
-        tz = get_timezone('Europe/Berlin')
+        tz = babel.dates.get_timezone('Europe/Berlin')
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
         if date:
             return date.astimezone(tz)
 
-    @reify
+    @zeit.web.reify
     def date_first_released_meta(self):
-        return zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released.isoformat()
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_first_released
+        if date:
+            return date.isoformat()
 
-    @reify
+    @zeit.web.reify
     def date_last_published_semantic(self):
-        tz = get_timezone('Europe/Berlin')
+        tz = babel.dates.get_timezone('Europe/Berlin')
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_last_published_semantic
         if self.date_first_released is not None and date is not None:
             if date > self.date_first_released:
                 return date.astimezone(tz)
-            else:
-                return None
 
-    @reify
+    @zeit.web.reify
     def date_format(self):
         if self.context.product:
             if self.context.product.id in ('ZEI', 'ZMLB'):
                 return 'short'
         return 'long'
 
-    @reify
+    @zeit.web.reify
     def show_date_format(self):
         if self.date_last_published_semantic:
             return 'long'
         else:
             return self.date_format
 
-    @reify
+    @zeit.web.reify
     def show_date_format_seo(self):
         return self.date_format
 
-    @reify
+    @zeit.web.reify
     def breadcrumb(self):
         crumb = self._navigation
         l = [crumb['start']]
@@ -253,13 +265,20 @@ class Content(Base):
             l.append((self.title, ''))
         return l
 
-    @reify
-    def is_top_of_mind(self):
-        return not self.is_longform and self.is_lead_story
+    @zeit.web.reify
+    def adwords(self):
+        keywords = super(Content, self).adwords
+        if self.is_top_of_mind:
+            keywords.append('ToM')
+        return keywords
 
-    @reify
+    @zeit.web.reify
+    def is_top_of_mind(self):
+        return self.is_lead_story
+
+    @zeit.web.reify
     def is_lead_story(self):
-        tz = get_timezone('Europe/Berlin')
+        tz = babel.dates.get_timezone('Europe/Berlin')
         today = datetime.datetime.now(tz).date()
         yesterday = (today - datetime.timedelta(days=1))
 
@@ -277,20 +296,20 @@ class Content(Base):
                 return True
         return False
 
-    @reify
+    @zeit.web.reify
     def leadtime(self):
         try:
             return zeit.content.cp.interfaces.ILeadTime(self.context)
         except TypeError:
             return
 
-    @reify
+    @zeit.web.reify
     def twitter_card_type(self):
         # TODO: use reasonable value depending on content type or template
         # summary_large_image, photo, gallery
         return 'summary_large_image'
 
-    @reify
+    @zeit.web.reify
     def image_group(self):
         try:
             group = zeit.content.image.interfaces.IImages(self.context).image

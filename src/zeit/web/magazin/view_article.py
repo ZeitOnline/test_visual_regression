@@ -3,7 +3,6 @@ import itertools
 import logging
 import re
 
-from pyramid.decorator import reify
 from pyramid.view import view_config
 import pyramid.httpexceptions
 
@@ -15,12 +14,14 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 
+import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
+
 
 log = logging.getLogger(__name__)
 
@@ -45,34 +46,34 @@ class Article(zeit.web.core.view.Content):
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
 
-    @reify
+    @zeit.web.reify
     def template(self):
         return IArticleTemplateSettings(self.context).template or 'default'
 
-    @reify
+    @zeit.web.reify
     def header_layout(self):
         return IArticleTemplateSettings(self.context).header_layout or \
             'default'
 
-    @reify
+    @zeit.web.reify
     def pages(self):
         return zeit.web.core.interfaces.IPages(self.context)
 
-    @reify
+    @zeit.web.reify
     def current_page(self):
         return self.pages[0]
 
-    @reify
+    @zeit.web.reify
     def next_title(self):
         if self.page_nr < len(self.pages):
             return self.pages[self.page_nr].teaser
 
-    @reify
+    @zeit.web.reify
     def article_url(self):
         path = '/'.join(self.request.traversed)
         return self.request.route_url('home') + path
 
-    @reify
+    @zeit.web.reify
     def pages_urls(self):
         urls = []
         for number in range(0, len(self.pages)):
@@ -82,19 +83,19 @@ class Article(zeit.web.core.view.Content):
             urls.append(url)
         return urls
 
-    @reify
+    @zeit.web.reify
     def next_page_url(self):
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index + 1] \
             if actual_index + 1 < len(self.pages) else None
 
-    @reify
+    @zeit.web.reify
     def prev_page_url(self):
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index - 1] \
             if actual_index - 1 >= 0 else None
 
-    @reify
+    @zeit.web.reify
     def pagination(self):
         return {
             'current': self.page_nr,
@@ -106,7 +107,7 @@ class Article(zeit.web.core.view.Content):
             'prev_page_url': self.prev_page_url
         }
 
-    @reify
+    @zeit.web.reify
     def first_body_obj(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
@@ -117,7 +118,7 @@ class Article(zeit.web.core.view.Content):
         except OSError:
             log.debug('Object does not exist.')
 
-    @reify
+    @zeit.web.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
@@ -129,23 +130,23 @@ class Article(zeit.web.core.view.Content):
                     pass
             return img
 
-    @reify
+    @zeit.web.reify
     def header_video(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
             return self._create_obj(zeit.web.core.block.HeaderVideo, obj)
 
-    @reify
+    @zeit.web.reify
     def first_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.web.core.block.Image, obj)
 
-    @reify
+    @zeit.web.reify
     def header_elem(self):
         return self.header_video or self.header_img
 
-    @reify
+    @zeit.web.reify
     def resource_url(self):
         return self.request.resource_url(self.context).rstrip('/')
 
@@ -166,7 +167,7 @@ class Article(zeit.web.core.view.Content):
             != 'longform' else '',
         }
 
-    @reify
+    @zeit.web.reify
     def authors(self):
         authorList = []
         try:
@@ -191,12 +192,12 @@ class Article(zeit.web.core.view.Content):
         except (IndexError, OSError):
             return None
 
-    @reify
+    @zeit.web.reify
     def authorsList(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
 
-    @reify
+    @zeit.web.reify
     def genre(self):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
@@ -211,7 +212,7 @@ class Article(zeit.web.core.view.Content):
         else:
             return None
 
-    @reify
+    @zeit.web.reify
     def source(self):
         # TODO: find sth more elegant (as)
         # 1. dont know why source stays empty if default value wasnt changed
@@ -230,7 +231,7 @@ class Article(zeit.web.core.view.Content):
             source = self.context.product_text
         return self.context.copyrights or source
 
-    @reify
+    @zeit.web.reify
     def location(self):
         return None  # XXX not implemented in zeit.content.article yet
 
@@ -245,17 +246,17 @@ class Article(zeit.web.core.view.Content):
                     i.image.image_group, i.image)
         return nextread
 
-    @reify
+    @zeit.web.reify
     def comments(self):
         return zeit.web.core.comments.get_thread(
             unique_id=self.context.uniqueId, request=self.request)
 
-    @reify
+    @zeit.web.reify
     def serie(self):
         if self.context.serie:
             return self.context.serie.lower()
 
-    @reify
+    @zeit.web.reify
     def linkreach(self):
         def unitize(n):
             if n <= 999:
@@ -279,12 +280,12 @@ class Article(zeit.web.core.view.Content):
                 continue
         return counts
 
-    @reify
+    @zeit.web.reify
     def tracking_type(self):
         if self.type == 'article':
             return 'Artikel'
 
-    @reify
+    @zeit.web.reify
     def text_length(self):
         return self.context.textLength
 
@@ -319,7 +320,7 @@ class ArticlePage(Article):
         super(ArticlePage, self).__call__()
         self._validate_and_determine_page_nr()
 
-    @reify
+    @zeit.web.reify
     def page_nr(self):
         return self._validate_and_determine_page_nr()
 
@@ -343,11 +344,11 @@ class ArticlePage(Article):
                     self.resource_url)
             return number
 
-    @reify
+    @zeit.web.reify
     def current_page(self):
         return zeit.web.core.interfaces.IPages(self.context)[self.page_nr - 1]
 
-    @reify
+    @zeit.web.reify
     def next_title(self):
         pages = zeit.web.core.interfaces.IPages(self.context)
         if self.page_nr < len(pages):
@@ -358,11 +359,11 @@ class ArticlePage(Article):
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    advertising_enabled = False
+    advertising_enabled = True
     main_nav_full_width = True
     is_longform = True
 
-    @reify
+    @zeit.web.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
@@ -370,6 +371,20 @@ class LongformArticle(Article):
             if img:
                 self._copyrights.setdefault(img.uniqueId, img)
             return img
+
+    @zeit.web.reify
+    def adwords(self):
+        keywords = super(LongformArticle, self).adwords
+        keywords.extend(['longform', 'noiqdband'])
+        return keywords
+
+    @zeit.web.reify
+    def is_top_of_mind(self):
+        return False
+
+    @zeit.web.reify
+    def banner_type(self):
+        return 'longform'
 
 
 @view_config(context=zeit.web.core.article.IFeatureLongform,
@@ -410,6 +425,6 @@ class PhotoclusterArticle(Article):
              renderer='templates/teaser.html')
 class Teaser(Article):
 
-    @reify
+    @zeit.web.reify
     def teaser_text(self):
         return self.context.teaser

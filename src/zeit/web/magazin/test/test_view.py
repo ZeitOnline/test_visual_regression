@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
-import mock
-import lxml.html
 import pkg_resources
+import urllib2
+
+import lxml.html
+import mock
 import pyramid.httpexceptions
 import pyramid.response
 import pytest
 import requests
-import urllib2
-import zeit.cms.interfaces
 
+import zeit.cms.interfaces
 import zeit.content.article.edit.reference
+
 import zeit.web.core
 import zeit.web.core.gallery
+import zeit.web.core.test
 import zeit.web.core.view
 import zeit.web.magazin.view_article
 
@@ -698,9 +701,9 @@ def test_caching_headers_should_be_set(testserver, testbrowser):
     assert browser.headers['cache-control'] == 'max-age=300'
 
 
-def test_article_should_have_correct_js_view(testserver, testbrowser):
-    bc = testbrowser('%s/artikel/01' % testserver.url).contents
-    assert "window.ZMO.view = {" in bc
+def test_article_should_have_correct_js_view(testserver):
+    bc = zeit.web.core.test.Browser('%s/artikel/01' % testserver.url).contents
+    assert "window.ZMO = {" in bc
     assert "'banner_channel': 'zeitmz/modeunddesign/article'," in bc
     assert "'ressort': 'zeit-magazin'," in bc
     assert "'sub_ressort': 'mode-design'," in bc
@@ -710,7 +713,7 @@ def test_article_should_have_correct_js_view(testserver, testbrowser):
 def test_centerpage_should_have_correct_js_view(testserver, testbrowser):
     bc = testbrowser(
         '%s/centerpage/lebensart' % testserver.url).contents
-    assert "window.ZMO.view = {" in bc
+    assert "window.ZMO = {" in bc
     assert "'banner_channel': 'zeitmz/leben/centerpage'," in bc
     assert "'ressort': 'lebensart'," in bc
     assert "'sub_ressort': 'leben'," in bc
@@ -721,7 +724,7 @@ def test_gallery_should_have_correct_js_view(testserver, testbrowser):
     b = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     bc = b.contents
-    assert "window.ZMO.view = {" in bc
+    assert "window.ZMO = {" in bc
     assert "'banner_channel': 'zeitmz/leben/article'," in bc
     assert "'sub_ressort': 'leben'," in bc
     assert "'ressort': 'zeit-magazin'," in bc

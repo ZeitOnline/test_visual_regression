@@ -6,7 +6,7 @@ import pytest
 
 import zeit.cms.interfaces
 
-from zeit.web.magazin.view_centerpage import register_copyrights
+import zeit.web
 import zeit.web.magazin.view_article
 import zeit.web.magazin.view_centerpage
 import zeit.web.core.interfaces
@@ -17,7 +17,7 @@ import zeit.web.core.centerpage
 def cp_factory(application):
     """A factory function to create dummy cp views with an `area` property
     that can be configured by providing an `area_getter` function. The `area`
-    is decorated with zeit.web.magazin.view_centerpage.register_copyrights.
+    is decorated with zeit.web.register_copyrights.
     """
     def wrapped(area_getter):
         cp = zeit.cms.interfaces.ICMSContent(
@@ -27,7 +27,7 @@ def cp_factory(application):
         view_class = type('View', (object,), {
             '_copyrights': {},
             'context': view.context,
-            'area': property(register_copyrights(area_getter))}
+            'area': property(zeit.web.register_copyrights(area_getter))}
         )
         view = view_class()
         # Copyright registration needs to be triggered by accessing the
