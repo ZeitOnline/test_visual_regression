@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-0.16 (unreleased)
+0.16 (2014-09-15)
 -----------------
 
 - ZON-893: Add adwords and adtiles to longform articles
