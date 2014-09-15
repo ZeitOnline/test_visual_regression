@@ -210,7 +210,7 @@ def test_inject_banner_code_should_be_inserted_on_certain_pages():
         zeit.frontend.article, "_place_adtag_by_paragraph") as mock_method:
         mock_method.return_value = True
         zeit.frontend.article._inject_banner_code(pages, True, True)
-        assert mock_method.call_count == 2
+        assert mock_method.call_count == 1
 
 def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
     tile_list = [0]
