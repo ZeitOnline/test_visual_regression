@@ -16,7 +16,6 @@ module.exports = function(grunt) {
 		name: '<%= pkg.name %>-<%= pkg.version%>',
 		binDir: './',
 		codeDir: './src/zeit/frontend/',
-		jqueryVersion: 'jquery-1.10.2.min.js',
 		sourceDir: './',
 		rubyVersion: '1.9.3',
 		tasks: {
@@ -89,13 +88,14 @@ module.exports = function(grunt) {
 			}
 		},
 
-		//copy scripts
+		// copy files
 		copy: {
-			default: {
-				files: [
-					//copy non concatinated scripts
-					{ expand: true, cwd: project.sourceDir + 'javascript', src: ['**'], dest: project.codeDir + 'js/' }
-				]
+			// copy non concatenated scripts
+			scripts: {
+				expand: true,
+				cwd: project.sourceDir + 'javascript',
+				src: ['**'],
+				dest: project.codeDir + 'js/'
 			}
 		},
 
@@ -187,11 +187,11 @@ module.exports = function(grunt) {
 		// watch here
 		watch: {
 			js: {
-				files: ['<%= jshint.target.src %>'],
+				files: ['<%= jshint.target.src %>', '<%= jshint.options.ignores %>'],
 				tasks: ['jshint', 'requirejs:dev', 'copy'],
 			},
 			css: {
-				files: [project.sourceDir + 'sass/*.sass', project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/**/*.sass', project.sourceDir + 'sass/*.scss', project.sourceDir + 'sass/**/*.scss', project.sourceDir + 'sass/**/**/*.scss'],
+				files: [project.sourceDir + 'sass/**/*.sass', project.sourceDir + 'sass/**/*.scss'],
 				tasks: ['compass:dev']
 			},
 			grunticon: {

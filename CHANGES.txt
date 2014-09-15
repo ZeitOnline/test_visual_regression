@@ -1,11 +1,48 @@
 Change log for zeit.frontend
 ============================
 
-NOTE: When merging ZMO-811, also update default branch of friedbert deployment.
-https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
+0.16 (unreleased)
+-----------------
 
-0.12.2 (unreleased)
--------------------
+- ZMO-882: Validate page numbers and trigger redirects
+
+- ZMO-883: Fix iOS bug initially showing last slide of inline gallery
+
+- ZMO-919: Recalculate photocluster on image load
+
+
+0.15 (2014-09-03)
+-----------------
+
+- ZMO-509: implement photocluster
+
+
+0.14 (2014-08-29)
+-----------------
+
+- FIX: Change footer link for "Rechte + Lizenzen"
+
+- ZMO-892: Implement specialized Header/Footer with ZON-Logo
+
+- ZMO-838: Catch linkreach outage more elegantly
+
+- ZMO-856: Adjust z-index of teaser comment count
+
+- ZMO-886: Include Top of Mind ad keyword for lead stories
+
+- ZMO-826: Adjust spacing for article, pagination, tags, comments and nextread
+
+- VIV-440: Add XML view for automatic centerpages
+
+
+0.13 (2014-08-20)
+-----------------
+
+- ZMO-876: Use appropriate layout for sharing of portrait images
+
+- ZMO-878: Show twitter card for galleries
+
+- ZMO-811: Choose appropriate social sharing image
 
 - ZMO-895: Add URL parameter debug flag to force dynamic galleries
 
@@ -20,6 +57,8 @@ https://bitbucket.org/zeitonline/zeit.friedbert.deployment/branch/image-scales
 - ZMO-830: Repair desktop/mobile ad switch (ticket still isn't fixed entirely yet)
 
 - ZMO-887: Define script URL instead of module ID for RequireJS entry point
+
+- ZMO-886: Implement backend part of article leadtime attributes
 
 
 0.12 (2014-08-11)

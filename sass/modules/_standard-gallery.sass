@@ -1,10 +1,13 @@
 .gallery
     background-color: $grey--light
-    margin-bottom: em(40px)
+    margin-top: $compact
+    margin-bottom: $compact
     // disable padding
     margin-left: -$page-padding--small
     margin-right: -$page-padding--small
     +respond-min($break-1)
+        margin-top: $big
+        margin-bottom: $big
         margin-left: -$page-padding
         margin-right: -$page-padding
         padding: $compact $page-padding
@@ -28,8 +31,7 @@
                 color: $white
 
 .gallery__description
-    +tablet
-    font-size: $font-s
+    margin-bottom: $compact
 
 .gallery__info
     margin: 0 auto

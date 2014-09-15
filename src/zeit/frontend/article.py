@@ -23,13 +23,25 @@ class Page(object):
         self.teaser = division.teaser or ''
         self.blocks = []
 
+    def __iter__(self):
+        return iter(self.blocks)
+
+    def __len__(self):
+        return len(self.blocks)
+
+    def __getitem__(self, key):
+        return self.blocks[key]
+
+    def __setitem__(self, key, value):
+        self.blocks[key] = value
+
+    def __delitem__(self, key):
+        del self.blocks[key]
+
     def append(self, block):
         block = IFrontendBlock(block, None)
         if block is not None:
             self.blocks.append(block)
-
-    def __iter__(self):
-        return iter(self.blocks)
 
 
 def _inject_banner_code(pages, advertising_enabled):
@@ -84,6 +96,10 @@ def pages_of_article(context):
 
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+#ToDo: Please remove when we have Longforms for ICMSContent
+class IFeatureLongform(zeit.content.article.interfaces.IArticle):
     pass
 
 

@@ -52,40 +52,6 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_chapter(0, '', '')
 
 
-def test_macro_footer_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
-
-    # assert normal markup
-    markup = '<footer class="main-footer">'\
-        '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__logo icon-zm-logo--white"></div>'\
-        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
-        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
-        'Mediadaten</a></li><li><a href="'\
-        'http://www.zeitverlag.de/presse/rechte-und-lizenzen">'\
-        'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
-        'Bildrechte</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
-        'Datenschutz</a></li>'\
-        '<li><a href="'\
-        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
-        'onlinewerbung.html">Cookies</a></li>'\
-        '<li><a href="http://www.zeit.de/administratives/'\
-        'agb-kommentare-artikel">AGB</a></li>'\
-        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
-        '</ul></div></div></div></footer>'
-
-    view = mock.Mock()
-    view.copyrights = True
-    lines = tpl.module.main_footer(view).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
@@ -476,10 +442,10 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template('templates/macros/layout_macro.tpl')
 
     # test usual
-    obj = {'title': 'title', 'subtitle': 'subtitle', 'sharing_img': 'true',
-           'twitter_card_type': 'summary'}
+    obj = {'title': 'title', 'subtitle': 'subtitle', 'image_group': 'true',
+           'twitter_card_type': 'summary_large_image'}
     request = {'host': 'test.de', 'path_info': '/myurl'}
-    twitter = ['<meta name="twitter:card" content="summary">',
+    twitter = ['<meta name="twitter:card" content="summary_large_image">',
                '<meta name="twitter:site" content="@zeitonline">',
                '<meta name="twitter:creator" content="@zeitonline">',
                '<meta name="twitter:title" content="title">',
@@ -488,34 +454,17 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
           '<meta property="fb:admins" content="595098294">',
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
-          '"og:description" content="subtitle">',
+          '<meta property="og:description" content="subtitle">',
           '<meta property="og:url" content="http://test.de/myurl">']
-    image = ['<meta property="og:image" class="scaled-image" content="',
-             '<link itemprop="image" class="scaled-image" rel="image_src"',
-             '<meta class="scaled-image" name="twitter:image" content="']
+    image = ['<meta property="og:image" content="',
+             '<link itemprop="image" rel="image_src"',
+             '<meta name="twitter:image:src" content="']
     lines = tpl.module.sharing_meta(obj, request).splitlines()
     output = ""
     for line in lines:
         output += line.strip()
     for fb_meta in fb:
         assert fb_meta in output
-    for twitter_meta in twitter:
-        assert twitter_meta in output
-    for img in image:
-        assert img in output
-
-    # test video still is set as sharing img
-    obj = {'title': 'title', 'subtitle': 'subtitle',
-           'sharing_img': {'video_still': 'true'},
-           'twitter_card_type': 'summary_large_image'}
-    twitter = ['<meta name="twitter:card" content="summary_large_image">']
-    image = ['<meta property="og:image" content="',
-             '<link itemprop="image" rel="image_src"',
-             '<meta name="twitter:image" content="']
-    lines = tpl.module.sharing_meta(obj, request).splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
     for twitter_meta in twitter:
         assert twitter_meta in output
     for img in image:
@@ -695,7 +644,7 @@ def test_macro_ivw_ver2_tracking_should_produce_markup(jinja2_env):
              '"cp" : "lebensart/mode/bild-text"',
              '"sv" : "ke"',
              '"co" : "URL: /test/test"',
-             'iom.c(iam_data,1);'
+             'iom.c( iam_data, 1 );',
              '</script']
     lines = tpl.module.ivw_ver2_tracking(obj, request).splitlines()
     output = ""
@@ -719,11 +668,14 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'diuqilon': True,
               'min_width': 768}
     markup = 'document.write(\'<script src="http://ad.de.doubleclick.net/' \
-             'adj/zeitonline/;dcopt=ist;tile=1;\' + n_pbt + \';' \
-             'sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\'+ iqd_TestKW ' \
+             'adj/zeitonline/zeitmz/centerpage;dcopt=ist;tile=1;\' + n_pbt ' \
+             '+ \';sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\' + iqd_TestKW ' \
              '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type=' \
              '"text/javascript"><\/script>\');'
-    lines = tpl.module.adplace(banner).splitlines()
+    view = mock.Mock()
+    view.is_top_of_mind = False
+    view.banner_channel = 'zeitmz/centerpage'
+    lines = tpl.module.adplace(banner, view).splitlines()
     output = ""
     for line in lines:
         output += line.strip()

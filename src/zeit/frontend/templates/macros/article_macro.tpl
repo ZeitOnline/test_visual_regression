@@ -1,7 +1,7 @@
 {% import 'templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
-    {{lama.adplace(item, view.banner_channel)}}
+    {{lama.adplace(item, view)}}
     {{lama.adplace_middle_mobile(item)}}
 {%- endmacro %}
 
@@ -255,7 +255,7 @@
 {%- endmacro %}
 
 {% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='article__main-image--longform') -%}
-    
+
     {% if obj.id is not defined -%}
         {% set id = obj.uniqueId|substring_from('/') %}
     {% else -%}
@@ -488,4 +488,26 @@
 
 <!-- We use this, if for some reason or block is None -->
 {% macro no_block(obj) %}
+{% endmacro %}
+
+
+{% macro photocluster(obj) %}
+<div class="photocluster__wrap">
+    <div class="photocluster">
+    {% if obj %}
+        {% for entry in obj.itervalues() -%}
+            <div class="photocluster__item">
+                <div class="scaled-image">
+                    {{ lama.insert_responsive_image(entry) }}
+                </div>
+            </div>
+        {%- endfor %}
+    {% endif %}
+    </div>
+    <div class="photocluster__caption is-constrained is-centered">
+        <div class="photocluster__caption__text">
+            {{ obj.galleryText | safe }}
+        </div>
+    </div>
+</div>
 {% endmacro %}
