@@ -15,7 +15,8 @@ module.exports = function(grunt) {
 	var project = {
 		name: '<%= pkg.name %>-<%= pkg.version%>',
 		binDir: './',
-		codeDir: './src/zeit/frontend/',
+		codeDir: './src/zeit/web/static/',
+		jqueryVersion: 'jquery-1.10.2.min.js',
 		sourceDir: './',
 		rubyVersion: '1.9.3',
 		tasks: {
@@ -52,10 +53,10 @@ module.exports = function(grunt) {
 			// general options
 			options: {
 				binPath: project.binDir + 'compass',
-				cssDir: project.codeDir + 'css',
-				fontsPath: project.codeDir + 'fonts',
+				cssDir: project.codeDir + 'css/zmo',
+				fontsPath: project.codeDir + 'fonts/zmo',
 				httpPath: "/", // todo: adjust this later in project
-				imagesPath: project.sourceDir + "src/zeit/frontend/img", // todo: adjust this later in project
+				imagesPath: project.sourceDir + "src/zeit/web/static/img/zmo", // todo: adjust this later in project
 				javascriptsPath: "js", // todo: map to the right path
 				sassDir: project.sourceDir + 'sass',
 				raw: 'preferred_syntax=:sass\n'
@@ -175,7 +176,7 @@ module.exports = function(grunt) {
 					expand: true,
 					cwd: project.sourceDir + "sass/icons",
 					src: ['*.svg', '*.png'],
-					dest: project.codeDir + "/css/icons"
+					dest: project.codeDir + "/css/zmo/icons"
 				}],
 				options: {
 					defaultWidth: "100px",
