@@ -10,11 +10,10 @@ require.config({
 	// Require.js allows us to configure shortcut alias
 	// e.g. if you'll require jQuery later, you can refer to it as 'jquery'
 	paths: {
-		"jquery": "libs/jquery-1.10.2.min",
+		"jquery": "libs/jquery-1.11.1.min",
 		"sjcl": "libs/sjcl",
 		"underscore": "libs/underscore-min",
 		"bxSlider": "libs/jquery.bxslider",
-		"jquery-bridget/jquery.bridget": "libs/packery.pkgd.min",
 		"esiparser": "libs/esiparser"
 	},
 	// a shim is need for jQuery Plugins to load
@@ -29,6 +28,10 @@ require.config({
 		'modules/plugins/jquery.parseesi': ['jquery','esiparser'],
 		'sjcl': {
 			exports: 'sjcl'
+		},
+		'libs/freewall': {
+			deps: ['jquery'],
+			exports: 'freewall'
 		}
 	}
 });

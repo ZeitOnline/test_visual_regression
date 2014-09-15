@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-
+import datetime
 import urlparse
 
 from babel.dates import get_timezone
@@ -259,6 +259,52 @@ class Content(Base):
         if self.title:
             l.append((self.title, ''))
         return l
+
+    @reify
+    def is_top_of_mind(self):
+        return not self.is_longform and self.is_lead_story
+
+    @reify
+    def is_lead_story(self):
+        tz = get_timezone('Europe/Berlin')
+        today = datetime.datetime.now(tz).date()
+        yesterday = (today - datetime.timedelta(days=1))
+
+        if self.leadtime.start:
+            # start = today
+            if self.leadtime.start.date() == today:
+                return True
+            # start = yesterday and no end
+            elif (self.leadtime.start.date() == yesterday
+                  and not self.leadtime.end):
+                return True
+        if self.leadtime.end:
+            # end = today
+            if self.leadtime.end.date() == today:
+                return True
+        return False
+
+    @reify
+    def leadtime(self):
+        try:
+            return zeit.content.cp.interfaces.ILeadTime(self.context)
+        except TypeError:
+            return
+
+    @reify
+    def twitter_card_type(self):
+        # TODO: use reasonable value depending on content type or template
+        # summary_large_image, photo, gallery
+        return 'summary_large_image'
+
+    @reify
+    def image_group(self):
+        try:
+            group = zeit.content.image.interfaces.IImages(self.context).image
+            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
+                return group
+        except TypeError:
+            return
 
 
 @view_config(route_name='health_check')

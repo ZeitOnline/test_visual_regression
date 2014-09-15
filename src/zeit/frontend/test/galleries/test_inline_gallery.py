@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 from lxml import etree
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -50,3 +51,40 @@ def test_inline_gallery_uses_responsive_images_with_ratio(testserver):
     browser = Browser('%s/artikel/01' % testserver.url)
     image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
     assert 'data-ratio="1.77914110429"' in etree.tostring(image)
+
+
+def test_photocluster_has_expected_markup(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/cluster-beispiel' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".photocluster")
+    assert len(wrap) != 0
+    for element in wrap:
+        img_wrap = element.find_elements_by_css_selector(
+            ".photocluster__item")
+        imgs = element.find_elements_by_tag_name(
+            "img")
+        assert len(img_wrap) == 7
+        assert len(imgs) == 7
+
+
+def test_photocluster_has_expected_content(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/cluster-beispiel' % testserver.url)
+    wrap = driver.find_elements_by_css_selector(".photocluster")
+    assert len(wrap) != 0
+    for element in wrap:
+        imgs = element.find_elements_by_tag_name(
+            "img")
+        # first image
+        assert re.search('http://.*/galerien/' +
+                         'bg-automesse-detroit-2014-usa-bilder/' +
+                         'bitblt-.*/' +
+                         '462507429-540x304.jpg',
+                         imgs[0].get_attribute("src"))
+        # last image
+        print imgs[6].get_attribute("src")
+        assert re.search('http://.*/galerien/' +
+                         'bg-automesse-detroit-2014-usa-bilder/' +
+                         'bitblt-.*/' +
+                         'Audi_allroad-540x304.jpg',
+                         imgs[6].get_attribute("src"))

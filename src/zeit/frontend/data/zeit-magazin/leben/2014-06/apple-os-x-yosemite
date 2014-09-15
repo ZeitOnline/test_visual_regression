@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/W/Rabea_Weihser/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Rabea Weihser</display_name>
+    </author>
+    <image base-id="http://xml.zeit.de/zeit-magazin/leben/2014-06/tim-cook/" type="jpg" title="Tim Cook" alt="Tim Cook" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Apples Tim Cook</bu>
+      <copyright py:pytype="str">© REUTERS/Robert Galbraith</copyright>
+    </image>
+    <references/>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/leben/2014-05/ralf-moeller-selfie-cannes-stallone" year="2014" issue="22" ressort="zeit-magazin" author="Anna Kemper" contenttype="article" publication-date="" expires="">
+        <supertitle py:pytype="str">Gesellschaftskritik</supertitle>
+        <teaser_supertitle py:pytype="str">Gesellschaftskritik</teaser_supertitle>
+        <title py:pytype="str">Kuck mal, wer da knipst</title>
+        <text py:pytype="str">So misslungen, dass es fast schon wieder süß ist: Ralf Möller macht ein Selfie mit Männern, die Selfies machen. Und erfindet eine neue Kategorie der Selbstdarstellung. </text>
+        <description py:pytype="str">So misslungen, dass es fast schon wieder süß ist: Ralf Möller macht ein Selfie mit Männern, die Selfies machen. Und erfindet eine neue Kategorie der Selbstdarstellung. </description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/leben/2014-05/ralf-moeller-selfie-teaser/" type="jpg" alt="Selfie: Ralf Möller in Cannes" align="left" publication-date="" expires="">
+          <bu py:pytype="str">Selfie: Ralf Möller in Cannes</bu>
+          <copyright py:pytype="str">@ Ralf Möller/Facebook </copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/K/Anna_Kemper/index.xml" publication-date="" expires="">
+          <display_name py:pytype="str">Anna Kemper</display_name>
+        </author>
+      </reference>
+    </nextread>
+    <rankedTags>
+      <tag py:pytype="str" uuid="0daa66b9-9e1c-48b0-b84b-0676c42fe127" url_value="silicon-valley" type="Location">Silicon Valley</tag>
+      <tag py:pytype="str" uuid="bbac7123-682d-4345-a4cd-43bcca37407f" url_value="apple" type="Organization">Apple</tag>
+      <tag type="Organization" score="5" uuid="a7335b48-6cc1-4814-8623-80ec6537c6f0" url_value="puma">Puma</tag>
+      <tag type="free" score="4" uuid="97ace102-c85a-46ba-8b3d-ed1f4173ae8e" url_value="hollywood">Hollywood</tag>
+      <tag type="free" score="4" uuid="af849065-cf7f-4e39-83a0-64b0557dc5fa" url_value="jaguar">Jaguar</tag>
+      <tag type="free" score="4" uuid="a292e2d3-728d-4da0-a741-7e7ee59be5c1" url_value="loewe">Loewe</tag>
+      <tag type="free" score="4" uuid="c971fd34-0324-4ac4-ab5f-531e447c6381" url_value="unesco-weltkulturerbe">Unesco-Weltkulturerbe</tag>
+      <tag type="Location" score="1" uuid="08a08f5a-c9c8-4e01-9f71-4b3a01dc0f9d" url_value="kalifornien">Kalifornien</tag>
+    </rankedTags>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Rabea Weihser</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-06-04T09:00:11.595407+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-06-04T04:53:31.589469+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-06-04T09:01:37.621453+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-06-04T08:38:14.026568+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="genre">glosse</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">OS X 10.10 heißt das Apple-Wunder oder auch OS X Yosemite. Messias Tim Cook öffnet die Pforten zum Paradies. Die Gesellschaftskritik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">OS X 10.10: Ein Paradies aus Silizium</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-06-04T08:37:39.641624+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">900a7def6fd74a64b0e8daa6cf2d8b63</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Gesellschaftskritik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">leben</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="template">column</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2478</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5f9603fb-bfc7-4efe-88c8-0ec95f15d32b}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Gesellschaftskritik</supertitle>
+    <title>Ein Paradies aus Silizium</title>
+    <subtitle>Apples Messias Tim Cook bringt frohe Kunde. Yosemite heißt das neue Mac-Betriebssystem. Der Name beweist: Dieses Technologie-Imperium ist Gottes Werk.</subtitle>
+    <division type="page">
+      <image src="http://xml.zeit.de/zeit-magazin/leben/2014-06/tim-cook/tim-cook-zmo-landscape-small.jpg" type="jpg" title="Tim Cook" alt="Tim Cook" align="left" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+        <bu py:pytype="str">Apples Tim Cook</bu>
+        <copyright py:pytype="str">© REUTERS/Robert Galbraith</copyright>
+      </image>
+      <p>Josemait ist ein schlimmes Wort. Alle deutschen Mittelstufenschüler träumen bös davon in der Nacht vorm Englischdiktat. Wenn die Lehrerin einen Satz mit Jussämittieh bildet und aus der Lautsprache nur Buchstabensalat auf Papier wird.<br/></p>
+      <p>Alle deutschen Mittelstufenschüler können die Gebete einstellen, denn der gute Gott von Kalifornien hat sie erhört. Der Messias Tim Cook bringt frohe Kunde: <a class="" href="http://www.zeit.de/digital/mobil/2014-06/apple-keynote-ios8-macosx-yosemite" target="_blank">Yosemite ist in der Welt</a>, auf dass alle Völker der Erde diesen Namen preisen und niemals mehr falsch buchstabieren. Was früher einen läppischen Nationalpark bezeichnete, wird nun überschrieben von Apples neuem Betriebssystem OS X 10.10. </p>
+      <p>Der wirkungsmächtigste Technologiekonzern unter der Sonne hat unser aller Leben verändert. Die Wischtechnik, die einst als orange-blaue Ungeheuerlichkeit in Kiffer-WGs ihr Unwesen trieb, hat Apple einfach umprogrammiert zur wichtigsten Alltagsgeste der Gegenwart. Dann zog die platinenblonde <a class="" href="http://www.zeit.de/kultur/2011-11/siri-glosse" target="_blank">Sekretärin Siri</a> ein in die mobilen Büros der Entscheider. Eine Roboterfrau für jeden – das konnte sich sogar <a class="" href="http://www.zeit.de/2014/12/spike-jonze-regisseur-her" target="_blank">Hollywood nicht schöner ausdenken</a>. Jetzt öffnet Apple die Tore zum Paradies, im Volksmund OS X Yosemite.</p>
+      <p>Dort tummeln sich all die Kodiakbären, Affenweibchen, Pumas, Jaguare, Panther, Tiger, Leoparden, Schneeleoparden, Löwen, Berglöwen und Kälber, die der gute Gott von Kalifornien in den vergangenen Jahren aus Lehm und Silizium geformt hat, und laben sich an Äpfeln der Unschuld. Ein Firmenimperium als munterer Bauernhof, die endgültige Versöhnung von Natur und Technik. </p>
+      <p>Und vor allem der teleologische Gottesbeweis schlechthin. Apples Betriebssysteme werden immer besser, immer schneller, dahinter muss ein guter Geist stecken. Dessen Ziel ist auch definiert: Apple erhebt den Anspruch, eine 3.081 Quadratkilometer große Firmenzentrale am Rande der Sierra Nevada zu bauen und Unesco-Weltkulturerbe zu werden. Dafür werden ein paar Mammutbäume fallen, Yosemite heißt auf Miwok-Indianisch nicht umsonst "diejenigen, die töten". Aber das wischen wir mal schnell beiseite.</p>
+      <p>Zurück zu unseren freundlichen Pubertierenden. Der gestrige Englischtest lief okay, aber irgendein Informatikstreber musste wieder aus der Reihe tanzen. Jetzt will der Religionslehrer mit seinen Eltern sprechen. Der arme Junge schrieb iOSemite.<br/></p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Gesellschaftskritik</supertitle>
+    <title>Ein Paradies aus Silizium</title>
+    <text>Apples Messias Tim Cook bringt frohe Kunde. Yosemite heißt das neue Mac-Betriebssystem. Der Name beweist: Dieses Technologie-Imperium ist Gottes Werk.</text>
+  </teaser>
+</article>

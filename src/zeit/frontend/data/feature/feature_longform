@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <article>
     <head>
-        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
+        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Henning Sußebach</display_name>
         </author>
         <rankedTags xmlns:ns12="http://codespeak.net/lxml/objectify/pytype">
@@ -22,10 +22,6 @@
                 <text>Der spätmoderne Mensch überlässt sein letztes Stündlein nicht länger Gott oder dem Schicksal. Er will das Sterben so gezielt gestalten wie seinen Lebenslauf. </text>
                 <description>Der spätmoderne Mensch überlässt sein letztes Stündlein nicht länger Gott oder dem Schicksal. Er will das Sterben so gezielt gestalten wie seinen Lebenslauf. </description>
                 <byline />
-                <image align="left" title="EKG" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-10/EKG/" type="jpg" publication-date="" expires="">
-                    <bu />
-                    <copyright>© Fabrizio Bensch/Reuters</copyright>
-                </image>
             </reference>
             <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2012/46/Essay-Tod-Leben" year="2012" issue="46" ressort="Wissen" author="Christian Schüle" contenttype="article" publication-date="2012-11-15T01:39:15+00:00" expires="">
                 <supertitle>Umgang mit dem Tod</supertitle>
@@ -33,17 +29,17 @@
                 <text>Der Mensch lässt sich seinen Tod nicht mehr aus der Hand nehmen. Was lange Tabu war, ist in der Mitte der Gesellschaft angekommen. Ein Essay übers Sterben von C. Schüle</text>
                 <description>Der Mensch lässt sich seinen Tod nicht mehr aus der Hand nehmen. Was lange Tabu war, ist in der Mitte der Gesellschaft angekommen. Ein Essay übers Sterben von C. Schüle</description>
                 <byline>VON CHRISTIAN SCHÜLE</byline>
-                <image align="left" alt="Auf das Sterben vorbereitet: Eine todkranke Frau wird in einem Hospiz in den Arm genommen." title="Hospiz Sterben Tod " base-id="http://xml.zeit.de/wissen/gesundheit/2012-11/hospiz-sterben/" type="jpg" publication-date="" expires="">
+                <image layout="zmo-medium-large" alt="Auf das Sterben vorbereitet: Eine todkranke Frau wird in einem Hospiz in den Arm genommen." title="Hospiz Sterben Tod " base-id="http://xml.zeit.de/wissen/gesundheit/2012-11/hospiz-sterben/" type="jpg" publication-date="" expires="">
                     <bu>Auf das Sterben vorbereitet: Eine todkranke Frau wird in einem Hospiz in den Arm genommen.</bu>
                     <copyright>©  John Moore/Getty Images</copyright>
                 </image>
             </reference>
         </references>
-        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/gesellschaft/2013-10/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
+        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/gesellschaft/2013-10/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
             <bu>Einäscherung</bu>
             <copyright>© Benne Ochs</copyright>
         </image>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="template">photocluster</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="template">longform</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">1585573</attribute>
@@ -121,7 +117,10 @@
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
-            <video format="zmo-xl-header" is_empty="True" href="http://xml.zeit.de/video/2014-01/1953013471001" expires=""/>
+            <image src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">
+                <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
+                <copyright link="http://foo.de">© Johannes Eisele/AFP/Getty Images</copyright>
+            </image>
             <p>Auch der Tod hat in Deutschland ein exaktes Maß. 213 Zentimeter lang, 83
       Zentimeter breit und 170 Zentimeter tief muss die Grube werden, die Artur und Jürgen an diesem
       Morgen schaufeln, abgeschirmt von Rhododendren und im Schutz der frühen Stunde. Auf dem alten,
@@ -132,7 +131,7 @@
       schnauzbärtiger Schweiger, die Baggerschaufel in den Boden beißen. Gras zerreißt. Mäuse
       fliehen. Ein Frosch springt in die Büsche. Nach zwanzig Zentimetern winden sich erste
       Würmer.</p>
-      <video format="zmo-small" is_empty="True" href="http://xml.zeit.de/video/2014-01/3035864892001" expires=""/>
+      <video format="zmo-small-left" is_empty="True" href="http://xml.zeit.de/video/2014-01/3035864892001" expires=""/>
             <p>"Da kommt noch mehr", sagt Artur und stützt sich auf den Spaten.</p>
             <p>Noch mehr? Auf Grabplatz M13-377 liegen Schicksale in Schichten. Eine alte Zink-Urne, die wie
       ein Blindgänger im Boden schlief – Deckelprägung "Rudolph S..., gest. 27. 5. 1961" – und die
@@ -155,9 +154,9 @@
         <image-credits>Fotos (S. 16 + 17): Benne Ochs für DIE ZEIT/www.benneochs.de</image-credits>
         <supertitle>Friedhof Hamburg-Ohlsdorf</supertitle>
         <division type="page" teaser="Kein zeitlos sicheres Geschäft mehr">
-        <image align="right" src="/img/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
-        <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
-                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
+        <image src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="zmo-small-right" is_empty="False" alt="My 05er alt" title="my 05er title">
+        <bu>Ein Mann in Leipzig XXXXXXXX vor dem "Bau Büro"</bu>
+                <copyright link="http://foo.de">© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
             <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
       Hamburger Vermessungstechniker, die auf den schnurgeraden Alleen ihre Infrarotgeräte
@@ -178,7 +177,7 @@
       Menschen – im Zeitalter der Individualisierung – nicht mehr nach dem Raster der Reihengräber
       richten wollen. Und weil andere am liebsten spurlos verschwinden möchten, jedenfalls preiswert
       und pflegeleicht.</p>
-      <image align="left" src="/img/artikel/05/r1.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/05/r1.jpg" type="jpg" publication-date="" expires="" layout="zmo-small-left" is_empty="False">
         <bu>Ein Streetart-Plakat der Künstlerin Gerlinde Meyer im Leipziger Stadtteil Plagwitz</bu>
         <copyright>© Pia Volk</copyright>
     </image>
@@ -229,7 +228,7 @@
         . Und von der "schwarzen Null", die Hamburg
       am Ende jedes Jahres von ihm sehen will.
       </p>
-      <image align="left" src="/img/artikel/05/03.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/05/03.jpg" type="jpg" publication-date="" expires="" layout="zmo-large-center" is_empty="False">
       <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -247,7 +246,7 @@
       jener Jahrgänge sterben, die früh damit angefangen haben, länger zu leben? Ein Grund ist auch:
       Die Menschen ziehen jung in die Stadt. Wenn sie alt werden, wandern sie ins Umland ab und
       sterben dort.</p>
-      <video format="zmo-large" is_empty="True" href="http://xml.zeit.de/video/2014-01/3089721834001" expires=""/>
+      <video format="zmo-large-left" is_empty="True" href="http://xml.zeit.de/video/2014-01/3089721834001" expires=""/>
             <p>Manchmal, wenn die Toten ausbleiben, ruft Purwin bei den Bestattern an und fragt, wie es bei
       denen aussehe. "Wenn ich dann höre: ›Hier hat seit Wochen das Telefon nicht mehr geklingelt‹ –
       dann weiß ich wenigstens, es liegt nicht an uns."</p>
@@ -305,7 +304,7 @@
 
 
 
-            <image align="left" src="/img/artikel/05/r4.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="zmo-medium-center" is_empty="False">
+            <image src="http://xml.zeit.de/exampleimages/artikel/05/r4.jpg"  type="jpg" publication-date="" expires="" layout="zmo-medium-left" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -352,7 +351,7 @@
       blockiert zu haben scheint. Zwischen Buchs- und Eibenhecken stecken moosgrüne Schilder mit der
       Aufschrift: "Weitere Informationen, auch über die Möglichkeit einer Reservierung, erhalten Sie
       im Beratungszentrum und unter 040/593880."</p>
-      <image align="left" src="/img/artikel/05/r2.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/05/r2.jpg"  type="jpg" publication-date="" expires="" layout="zmo-large-right" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>
@@ -372,7 +371,7 @@
         von dem Geschäftsführer
       Purwin sprach.
       </p>
-            <image align="right" src="/img/artikel/05/r3.jpg" base-id="http://xml.zeit.de/lebensart/2013-10/leipzig/" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+            <image src="http://xml.zeit.de/exampleimages/artikel/05/r3.jpg"  type="jpg" publication-date="" expires="" layout="zmo-large-left" is_empty="False">
                 <bu>Leipzig Hauptbahnhof ist mit einer Grundfläche von 83.640 Quadratmetern der flächenmäßig größte Kopfbahnhof Europas.</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
             </image>

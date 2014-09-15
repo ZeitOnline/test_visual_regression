@@ -1,6 +1,7 @@
 import datetime
 import itertools
 import logging
+import re
 
 from pyramid.decorator import reify
 from pyramid.view import view_config
@@ -12,13 +13,13 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 
 import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces
 import zeit.frontend.reach
+import zeit.frontend.template
 import zeit.frontend.view
 
 log = logging.getLogger(__name__)
@@ -145,13 +146,8 @@ class Article(zeit.frontend.view.Content):
         return self.header_video or self.header_img
 
     @reify
-    def sharing_img(self):
-        if self.header_img is not None:
-            return self.header_img
-        if self.header_video is not None:
-            return self.header_video
-        else:
-            return self.first_img
+    def resource_url(self):
+        return self.request.resource_url(self.context).rstrip('/')
 
     def _get_author(self, index):
         try:
@@ -199,13 +195,6 @@ class Article(zeit.frontend.view.Content):
     def authorsList(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
-
-    @reify
-    def twitter_card_type(self):
-        if IArticleTemplateSettings(self.context).template == 'longform':
-            return 'summary_large_image'
-        else:
-            return 'summary'
 
     @reify
     def genre(self):
@@ -322,25 +311,37 @@ class Article(zeit.frontend.view.Content):
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='seite',
-             path_info='.*seite-[0-9]+$',
+             path_info='.*seite-(.*)',
              renderer='templates/article.html')
 class ArticlePage(Article):
 
     def __call__(self):
         super(ArticlePage, self).__call__()
-        if (self.request.view_name != 'komplettansicht') and (
-                self.page_nr > len(self.pages)):
-            raise pyramid.httpexceptions.HTTPNotFound()
+        self._validate_and_determine_page_nr()
 
     @reify
     def page_nr(self):
+        return self._validate_and_determine_page_nr()
+
+    def _validate_and_determine_page_nr(self):
         try:
-            n = int(self.request.path_info.split('/')[-1][6:])
-            if n == 1:
+            spec = self.request.path_info.split('/')[-1][6:]
+            number = int(re.sub('[^0-9]', '', spec))
+        except (AssertionError, IndexError, ValueError):
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                self.resource_url)
+        else:
+            if len(str(number)) != len(spec):
+                # Make sure /seite-007 is redirected to /seite-7
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    '%s/%s-%s' % (
+                        self.resource_url, self.request.view_name, number))
+            elif number > len(self.pages):
                 raise pyramid.httpexceptions.HTTPNotFound()
-            return n
-        except (IndexError, ValueError):
-            raise pyramid.httpexceptions.HTTPNotFound()
+            elif number == 0:
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    self.resource_url)
+            return number
 
     @reify
     def current_page(self):
@@ -371,6 +372,12 @@ class LongformArticle(Article):
             return img
 
 
+@view_config(context=zeit.frontend.article.IFeatureLongform,
+             renderer='templates/feature_longform.html')
+class FeatureLongform(LongformArticle):
+    pass
+
+
 @view_config(context=zeit.frontend.article.IShortformArticle,
              renderer='templates/shortform.html')
 class ShortformArticle(Article):
@@ -387,8 +394,15 @@ class ColumnArticle(Article):
              renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 
-    advertising_enabled = False
-    copyrights = []
+    def __init__(self, *args, **kwargs):
+        super(PhotoclusterArticle, self).__init__(*args, **kwargs)
+        for page in self.pages:
+            for index in range(len(page)):
+                if issubclass(
+                        type(page[index]), zeit.frontend.gallery.Gallery):
+                    cls = type('Photocluster',
+                               (zeit.frontend.gallery.Gallery,), {})
+                    page[index] = cls(page[index].context)
 
 
 @view_config(name='teaser',

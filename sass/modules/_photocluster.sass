@@ -1,16 +1,37 @@
+.photocluster__wrap
+    @extend .gallery
+
 .photocluster
     position: relative
+    overflow: hidden
 
 .photocluster__item
-    padding: 0 5px
-    margin-bottom: 10px
-    width: 100%
     +respond-min($break-1)
         &.size-s
             width: 25%
         &.size-m
-            width: 50%
+            width: 33.3333%
         &.size-l
             width: 50%
     img
         width: 100%
+
+.photocluster__caption
+    +tablet
+    border-width: 1px 0
+    border-style: solid
+    border-color: #fff
+    padding: $junior 0
+    margin-top: $compact
+    +respond-max($break-1)
+        padding-left: $page-padding--small
+        padding-right: $page-padding--small
+    +respond-min($break-3)
+        margin-top: $large
+
+.photocluster__caption__text
+    p
+        font-size: $font-m
+        max-width: none
+    p:last-child
+        margin: 0

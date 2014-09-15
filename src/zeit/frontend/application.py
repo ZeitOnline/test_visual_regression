@@ -22,6 +22,7 @@ import zeit.connector
 
 from zeit.frontend.article import IColumnArticle
 from zeit.frontend.article import ILongformArticle
+from zeit.frontend.article import IFeatureLongform
 from zeit.frontend.article import IPhotoclusterArticle
 from zeit.frontend.article import IShortformArticle
 from zeit.frontend.gallery import IGallery
@@ -121,6 +122,10 @@ class Application(object):
             self.settings['default_teaser_images'])
 
         config.include('pyramid_beaker')
+        zeit.frontend.template.image_scales = dict(
+            zeit.frontend.template.get_image_scales(
+                self.settings['vivi_zeit.frontend_image-scales']))
+
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)
         config.set_session_factory(session_factory)
@@ -303,10 +308,16 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def __call__(self, request):
         try:
             tdict = super(RepositoryTraverser, self).__call__(request)
+
             context = tdict['context']
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 template = IArticleTemplateSettings(context).template
-                if template == 'longform':
+                # ToDo: Remove when Longform will be generally used on
+                # www.zeit.de. By then do not forget to remove marker
+                # interfaces from uniqueID http://xml.zeit.de/feature (RD)
+                if request.path[:9] == '/feature/':
+                    zope.interface.alsoProvides(context, IFeatureLongform)
+                elif template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
                 elif template == 'short':
                     zope.interface.alsoProvides(context, IShortformArticle)

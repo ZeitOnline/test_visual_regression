@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 import pkg_resources
 
-import pytest
-import plone.testing.zca
-import zope.browserpage.metaconfigure
-from lxml import etree
-from pyramid.testing import setUp, tearDown, DummyRequest
-from repoze.bitblt.processor import ImageTransformationMiddleware
+import lxml.etree
+import pyramid.testing
+import repoze.bitblt.processor.ImageTransformationMiddleware
 import gocept.httpserverlayer.wsgi
+import plone.testing.zca
+import pytest
 import selenium.webdriver
 import webtest
+import zope.browserpage.metaconfigure
+import zope.interface
+
+import zeit.content.image.interfaces
 
 import zeit.frontend.application
 import zeit.frontend.comments
@@ -57,6 +60,8 @@ settings = {
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
     'vivi_zeit.frontend_iqd-mobile-ids': (
         'egg://zeit.frontend/data/config/iqd-mobile-ids.xml'),
+    'vivi_zeit.frontend_image-scales': (
+        'egg://zeit.frontend/data/config/scales.xml'),
     'vivi_zeit.content.article_genre-url': (
         'egg://zeit.frontend/data/config/article-genres.xml'),
     'vivi_zeit.content.article_image-layout-source': (
@@ -79,6 +84,8 @@ settings = {
         'egg://zeit.frontend/data/config/gallery-types.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
+
+    'vivi_zeit.solr_solr-url': 'http://mock.solr',
 
     'debug.show_exceptions': 'True',
     'debug.propagate_jinja_errors': 'True'
@@ -108,8 +115,10 @@ def application(request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    app = zeit.frontend.application.Application()({}, **settings)
-    return ImageTransformationMiddleware(app, secret='time')
+    return repoze.bitblt.processor.ImageTransformationMiddleware(
+        zeit.frontend.application.Application()({}, **settings),
+        secret='time'
+    )
 
 
 @pytest.fixture(scope='session')
@@ -119,20 +128,23 @@ def debug_application(request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app_settings = settings.copy()
     app_settings['debug.show_exceptions'] = ''
-    app = zeit.frontend.application.Application()({}, **app_settings)
-    return ImageTransformationMiddleware(app, secret='time')
+    return repoze.bitblt.processor.ImageTransformationMiddleware(
+        zeit.frontend.application.Application()({}, **app_settings),
+        secret='time'
+    )
 
 
 @pytest.fixture
 def config(request):
-    config = setUp(settings=settings)
-    request.addfinalizer(tearDown)
+    config = pyramid.testing.setUp(settings=settings)
+    request.addfinalizer(pyramid.testing.tearDown)
     return config
 
 
 @pytest.fixture
 def dummy_request(request, config):
-    config.manager.get()['request'] = req = DummyRequest(is_xhr=False)
+    req = pyramid.testing.DummyRequest(is_xhr=False)
+    config.manager.get()['request'] = req
     return req
 
 
@@ -230,8 +242,49 @@ def browser(application):
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
         path = zeit.frontend.comments.path_of_article(unique_id)
-        response = etree.parse(''.join([self.entry_point, path]))
+        response = lxml.etree.parse(''.join([self.entry_point, path]))
         return zeit.frontend.comments._place_answers_under_parent(response)
 
     monkeypatch.setattr(
         zeit.frontend.comments.Agatho, 'collection_get', collection_get)
+
+
+@pytest.fixture
+def image_group_factory():
+    class MockImageGroup(dict):
+        zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
+        masterimage = None
+
+    class MockRepositoryImage(object):
+        def __init__(self, size, name):
+            self._size = size
+            self.uniqueId = name
+            self.masterimage = None
+
+        def getImageSize(self):
+            return self._size
+
+    def factory(*args, **kwargs):
+        image_group = MockImageGroup()
+        arg_dict = zip([('img-%s' % i) for i in range(len(args))], args)
+        for name, size in arg_dict + kwargs.items():
+            image_group[name] = MockRepositoryImage(size, name)
+        return image_group
+
+    return factory
+
+
+@pytest.fixture
+def my_traverser(application):
+    root = zope.component.getUtility(
+        zeit.cms.repository.interfaces.IRepository)
+    return zeit.frontend.application.RepositoryTraverser(root)
+
+
+class TestApp(webtest.TestApp):
+
+    def get_json(self, url, params=None, headers=None, *args, **kw):
+        if headers is None:
+            headers = {}
+        headers['Accept'] = 'application/json'
+        return self.get(url, params, headers, *args, **kw)

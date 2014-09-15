@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.frontend',
     url='https://github.com/ZeitOnline/friedbert',
-    version='0.12.2.dev0',
+    version='0.16.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -47,7 +47,7 @@ setup(
         'zeit.connector >= 2.3.3.dev0',
         'zeit.content.article',
         'zeit.content.author',
-        'zeit.content.cp',
+        'zeit.content.cp >= 2.6.1',
         'zeit.content.gallery',
         'zeit.content.image',
         'zeit.content.infobox',
@@ -63,6 +63,7 @@ setup(
         'zeit.newsletter >= 1.0.0b2.dev0',
         'zeit.wysiwyg',
         'zeit.seo',
+        'zeit.solr',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
