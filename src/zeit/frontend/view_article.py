@@ -358,7 +358,7 @@ class ArticlePage(Article):
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    advertising_enabled = False
+    advertising_enabled = True
     main_nav_full_width = True
     is_longform = True
 
@@ -370,6 +370,20 @@ class LongformArticle(Article):
             if img:
                 self._copyrights.setdefault(img.uniqueId, img)
             return img
+
+    @reify
+    def adwords(self):
+        keywords = super(LongformArticle, self).adwords
+        keywords.extend(['longform', 'noiqdband'])
+        return keywords
+
+    @reify
+    def is_top_of_mind(self):
+        return False
+
+    @reify
+    def banner_type(self):
+        return 'longform'
 
 
 @view_config(context=zeit.frontend.article.IFeatureLongform,

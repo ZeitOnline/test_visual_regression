@@ -25,6 +25,10 @@ class Gallery(zeit.frontend.view.Content):
     def galleryText(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
+    @reify
+    def banner_type(self):
+        return 'article'
+
     @property
     def copyrights(self):
         teaser_list = []

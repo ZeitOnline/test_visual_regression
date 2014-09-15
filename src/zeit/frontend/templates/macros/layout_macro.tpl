@@ -541,11 +541,9 @@
 {%- endmacro %}
 
 {% macro adplace( banner, view ) -%}
-    {% set kw = 'iqadtile' ~ banner.tile ~ ',zeitonline,zeitmz' -%}
-    {% if view.is_top_of_mind -%}
-        {% set kw = kw ~ ',ToM' -%}
-    {% endif -%}
+    {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
+    {% if view.context.advertising_enabled -%}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
     <div id="iqadtile{{ banner.tile }}" class="ad__{{ banner.name }} ad__on__{{ pagetype }} ad__width_{{ banner.noscript_width_height[0] }} ad__min__{{ banner.min_width }}">
         {% if banner.label -%}
@@ -553,7 +551,7 @@
         {% endif -%}
         <div class="ad__{{ banner.name }}__inner">
             <script type="text/javascript">
-                if ( window.zmo_actual_load_width >= {{ banner.min_width|default(0) }} ) {
+                if ( window.ZMO.clientWidth >= {{ banner.min_width|default(0) }} ) {
                     document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{ view.banner_channel }}{% if banner.dcopt %};dcopt={{ banner.dcopt }}{% endif %};tile={{ banner.tile }};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw={{ kw }},' + iqd_TestKW {% if banner.diuqilon %}+ window.diuqilon {% endif %}+ ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
@@ -565,6 +563,7 @@
             </noscript>
         </div>
     </div>
+    {%- endif %}
 {%- endmacro %}
 
 {% macro adplace_middle_mobile(item) -%}
@@ -604,24 +603,4 @@
             </noscript>
         <!--<![endif]-->
     {% endif %}
-{% endmacro %}
-
-{% macro build_js_view( view, request ) %}
-    <script>
-        window.ZMO = window.ZMO || {};
-        window.ZMO.home = '{{ request.asset_url("/") }}';
-        window.ZMO.scriptsURL = '{{ request.app_info.scripts_url|hide_none }}';
-        window.ZMO.view = {
-
-            {% for key, value in view.js_vars -%}
-                '{{ key }}': '{{ value|remove_break }}',
-            {% endfor -%}
-
-            {# use to get view values savely #}
-
-            get: function( key ) {
-                return this[key] ? this[key] : '';
-            }
-        };
-    </script>
 {% endmacro %}
