@@ -11,7 +11,7 @@ require.config({
 		'jquery': 'vendor/jquery',
 		'underscore': 'vendor/underscore',
 		'freewall': 'vendor/freewall',
-		'sjcl': 'libs/sjcl',
+		'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
 		'modernizr': 'libs/modernizr-custom',
 		'bxSlider': 'libs/jquery.bxslider',
 		'esiparser': 'libs/esiparser'
