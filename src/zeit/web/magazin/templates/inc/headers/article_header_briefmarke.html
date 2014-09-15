@@ -1,0 +1,19 @@
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
+
+<div class="article__head-wrap">
+    <header class="article__head article__head--stamp is-constrained">
+        <div class="article__head__stamp-wrap">
+            {{ blocks[view.header_elem|block_type](view.header_elem) }}
+            {{ blocks.supertitle() }}
+        </div>
+        <h1>
+            {{ blocks.title() }}
+        </h1>
+        {{ blocks.subtitle(include_meta=True) }}
+        <span class="article__head__meta-wrap">
+            <span class="article__head__meta">
+                {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+            </span>
+        </span>
+    </header>
+</div>

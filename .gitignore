@@ -12,7 +12,7 @@
 /sass/vendor/
 setuptools_git-*
 src/*.egg-info
-src/zeit/frontend/css
-src/zeit/frontend/js
+src/zeit/web/static/css
+src/zeit/web/static/js
 tools/resource
 tools/resource.meta

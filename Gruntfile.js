@@ -15,8 +15,9 @@ module.exports = function(grunt) {
 	// local variables
 	var project = {
 		name: "<%= pkg.name %>-<%= pkg.version%>",
+		binDir: './',
 		sourceDir: "./",
-		codeDir: "./src/zeit/frontend/",
+		codeDir: "./src/zeit/web/static/",
 		rubyVersion: "1.9.3",
 		tasks: {
 			production: ["bower", "modernizr", "jshint", "requirejs:dist", "compass:dist", "copy", "icons"],
@@ -71,6 +72,7 @@ module.exports = function(grunt) {
 		compass: {
 			// general options
 			options: {
+				binPath: project.binDir + 'compass',
 				cssDir: project.codeDir + "css",
 				fontsPath: project.codeDir + "fonts",
 				httpPath: "/",
