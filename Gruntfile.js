@@ -103,14 +103,14 @@ module.exports = function(grunt) {
 				cwd: project.sourceDir + "sass",
 				src: "vendor/*.css",
 				dest: project.codeDir + "css/"
-			},
-			// copy non concatenated scripts, exclude app.js
-			scripts: {
-				expand: true,
-				cwd: project.sourceDir + "javascript",
-				src: ["**", "!app.js"],
-				dest: project.codeDir + "js/"
 			}
+			// copy non concatenated scripts, exclude app.js
+			// scripts: {
+			// 	expand: true,
+			// 	cwd: project.sourceDir + "javascript",
+			// 	src: ["**", "!app.js"],
+			// 	dest: project.codeDir + "js/"
+			// }
 		},
 
 		// project wide javascript hinting rules
@@ -152,21 +152,32 @@ module.exports = function(grunt) {
 
 		requirejs: {
 			options: {
-				keepBuildDir: true,
-				baseUrl: project.sourceDir + "javascript/",
-				mainConfigFile: project.sourceDir + "javascript/app.js",
-				out: project.codeDir + "js/main.js",
-				name: "app",
-				generateSourceMaps: true,
-				preserveLicenseComments: false
+				// keepBuildDir: true,
+				baseUrl: project.sourceDir + "javascript",
+				mainConfigFile: project.sourceDir + "javascript/config.js",
+				preserveLicenseComments: false,
+				logLevel: 1,
+				dir: project.codeDir + "js",
+				modules: [
+					{
+						name: "magazin"
+					},
+					{
+						name: "site"
+					}
+				]
 			},
 			dev: {
 				options: {
+					useSourceUrl: true,
+					generateSourceMaps: true,
 					optimize: "none"
 				}
 			},
 			dist: {
 				options: {
+					useSourceUrl: false,
+					generateSourceMaps: false,
 					optimize: "uglify2"
 				}
 			}

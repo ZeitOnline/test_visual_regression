@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define(['jquery', 'modernizr', 'underscore', 'modules/tabs'], function($, Modernizr, _) {
+define(['jquery', 'modernizr', 'underscore', 'web.magazin/tabs'], function($, Modernizr, _) {
 
     var $socialServices = $('#js-social-services'),
         $comments = $('#js-comments'),

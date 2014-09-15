@@ -60,7 +60,7 @@
         {{lama.sharing_meta(view,request)}}
 
         <script src="{{request.asset_url('js/libs/modernizr-custom.js')}}"></script>
-        <script src="{{request.asset_url('js/modules/fontloader_head.js')}}"></script>
+        <script src="{{request.asset_url('js/web.magazin/fontloader_head.js')}}"></script>
 
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
@@ -196,7 +196,7 @@
                 urlArgs: "v={{request.registry.settings.version_hash | hide_none}}"
             };
         </script>
-        <script data-main="{{request.asset_url('js/main.js')}}" src="{{request.asset_url('js/vendor/require.js')}}"></script>
+        <script data-main="{{request.asset_url('js/magazin.js')}}" src="{{request.asset_url('js/vendor/require.js')}}"></script>
         <script type="text/javascript">
             if( typeof window.sasmobile === 'function' && zmo_is_mobile_view ) {
                 iqd.callAds();
