@@ -54,7 +54,7 @@ def _inject_banner_code(pages, advertising_enabled, is_longform):
 
     if (is_longform):
         tile_list = [8]
-        possible_pages = [1, 2]
+        possible_pages = [2] # page 1 is somehow the "intro text"
         possible_paragraphs = [5]
 
     if (advertising_enabled):
