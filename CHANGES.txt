@@ -4,7 +4,11 @@ Change log for zeit.frontend
 0.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZMO-882: Validate page numbers and trigger redirects
+
+- ZMO-883: Fix iOS bug initially showing last slide of inline gallery
+
+- ZMO-919: Recalculate photocluster on image load
 
 
 0.15 (2014-09-03)

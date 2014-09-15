@@ -116,22 +116,23 @@
                 linkTrackAttribute: "id"
             };
 
-            var wt = new webtrekkV3(webtrekk);
+            if ( typeof webtrekkV3 === 'function' ) {
+                var wt = new webtrekkV3(webtrekk);
 
-            wt.cookie = "1"; // (3|1, 1st or 3rd party cookie)
-            wt.contentGroup = {
-                1: "Redaktion",
-                2: "{{obj.tracking_type}}",
-                3: "{{obj.ressort}}",
-                4: "Online",
-                5: "{{obj.sub_ressort}}",
-                6: "{{obj.serie | hide_none}}",
-                7: "{{request.path_info | substring_from('/')}}",
-                8: "{{obj.banner_channel}}",
-                9: "{{date}}"
-            };
+                wt.cookie = "1"; // (3|1, 1st or 3rd party cookie)
+                wt.contentGroup = {
+                    1: "Redaktion",
+                    2: "{{obj.tracking_type}}",
+                    3: "{{obj.ressort}}",
+                    4: "Online",
+                    5: "{{obj.sub_ressort}}",
+                    6: "{{obj.serie | hide_none}}",
+                    7: "{{request.path_info | substring_from('/')}}",
+                    8: "{{obj.banner_channel}}",
+                    9: "{{date}}"
+                };
 
-            {% if obj.type == 'article' -%}
+                {% if obj.type == 'article' -%}
                 wt.customParameter = {
                     1: "{{obj.authorsList | hide_none}}",
                     2: "{{obj.banner_channel}}",
@@ -141,10 +142,11 @@
                     7: "",
                     9: "{{obj.banner_channel}}"
                 };
-             {%- endif %}
+                {% endif -%}
 
-            wt.contentId = Z_WT_KENNUNG;
-            wt.sendinfo();
+                wt.contentId = Z_WT_KENNUNG;
+                wt.sendinfo();
+            }
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
@@ -460,7 +462,9 @@
            iam_data.st = "mobzeit";
         }
 
-        iom.c(iam_data,1);
+        if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
+            iom.c( iam_data, 1 );
+        }
     </script>
 {%- endmacro %}
 
@@ -485,7 +489,7 @@
 {% macro iqd_krux_body() -%}
 <script type="text/javascript">
     // <![CDATA[
-    var YLP = yl.YpResult || "";
+    var YLP = ( 'yl' in window && yl.YpResult ) ? yl.YpResult : "";
     var ylpid = [21752, 21754, 21759, 21987];
     var ylpid2 = [6069, 3039, 5641, 8504];
     try { var ylpsky = YLP.get(ylpid[0]).id; } catch(e) { ylpsky = 0; }
@@ -592,7 +596,7 @@
         {% if page_type == 'article' and image.href %}
             <a href="{{image.href}}">
         {% endif %}
-                <img {% if alt %}alt="{{alt}}" {% endif %}{% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
+                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}

@@ -296,7 +296,7 @@ module.exports = function(grunt) {
 		// watch dog
 		watch: {
 			js: {
-				files: ["<%= jshint.dist.src %>"],
+				files: ["<%= jshint.dist.src %>", "<%= jshint.options.ignores %>"],
 				tasks: ["jshint", "requirejs:dev", "copy"],
 			},
 			compass: {
