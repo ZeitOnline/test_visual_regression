@@ -4,7 +4,7 @@ import pyramid
 import pyramid.decorator
 import venusian
 
-import zeit.frontend.interfaces
+import zeit.web.core.interfaces
 
 
 def JinjaEnvRegistrator(env_attr):
@@ -43,7 +43,7 @@ def register_copyrights(func):
     def wrapped(self):
         container = func(self)
         if container:
-            for t in zeit.frontend.interfaces.ITeaserSequence(container):
+            for t in zeit.web.core.interfaces.ITeaserSequence(container):
                 if t.image:
                     self._copyrights.setdefault(t.image.image_group, t.image)
         return container

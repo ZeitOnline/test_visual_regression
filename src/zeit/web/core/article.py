@@ -70,7 +70,7 @@ def _inject_banner_code(pages, advertising_enabled, is_longform):
 
 def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
-        lambda b: isinstance(b, zeit.frontend.block.Paragraph), page.blocks)
+        lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
 
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
@@ -80,7 +80,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                     if _para == block:
                         t = tile_list[index] - 1
                         page.blocks.insert(
-                            i, zeit.frontend.banner.banner_list[t])
+                            i, zeit.web.core.banner.banner_list[t])
                         break
             except IndexError:
                 pass
