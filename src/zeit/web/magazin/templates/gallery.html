@@ -1,0 +1,23 @@
+{% extends 'zeit.web.magazin:templates/article.html' %}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
+
+{% block article_header -%}
+    <div class="article__head-wrap">
+        <header class="article__head article__head--default">
+            {{ blocks.supertitle() }}
+            {{ blocks.title() }}
+        </header>
+    </div>
+{%- endblock article_header %}
+
+{% block article_pages -%}
+    {{ blocks.inlinegallery(view.images, wrapper_class='gallery') }}
+    <div class="article__page gallery__info">
+        <div class="gallery__description">
+            {{ view.galleryText|safe }}
+        </div>
+        <div class="article__head__meta">
+            {{ blocks.source_date(view.show_article_date|format_date(view.show_date_format), view.source) }}
+        </div>
+    </div>
+{%- endblock article_pages %}

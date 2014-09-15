@@ -71,8 +71,8 @@ setup(
     ],
     entry_points={
         'paste.app_factory': [
-            'main=zeit.frontend.application:factory',
-            'preview=zeit.frontend.preview:factory',
+            'main=zeit.web.core.application:factory',
+            'preview=zeit.web.core.preview:factory',
         ],
     },
     extras_require={

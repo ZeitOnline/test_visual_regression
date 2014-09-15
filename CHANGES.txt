@@ -8,6 +8,8 @@ Change log for zeit.frontend
 
 - ZMO-880: Improve rendering robustness
 
+- ZON-923: Split zeit.frontend into three sub-packages
+
 - FIX: Patch reify decorator to deliver accurate traceback
 
 
