@@ -190,3 +190,39 @@ def test_banner_mobile_should_request_with_correct_data_at_hp(
     browser = Browser('%s/zeit-magazin/index' % testserver.url)
     assert "sasmobile('32375/445608', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445608', 13501, sas_target);" in browser.contents
+
+
+def test_inject_banner_code_should_be_inserted_on_all_pages():
+    total = 10
+    pages = [mock.Mock() for i in xrange(total)]
+
+    with mock.patch.object(
+        zeit.frontend.article, "_place_adtag_by_paragraph") as mock_method:
+        mock_method.return_value = True
+        zeit.frontend.article._inject_banner_code(pages, True, False)
+        assert mock_method.call_count == total
+
+def test_inject_banner_code_should_be_inserted_on_certain_pages():
+    total = 10
+    pages = [mock.Mock() for i in xrange(total)]
+
+    with mock.patch.object(
+        zeit.frontend.article, "_place_adtag_by_paragraph") as mock_method:
+        mock_method.return_value = True
+        zeit.frontend.article._inject_banner_code(pages, True, True)
+        assert mock_method.call_count == 1
+
+def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
+    tile_list = [0]
+    possible_paragraphs = [1]
+    banner_list = [mock.Mock()]
+
+    monkeypatch.setattr(zeit.frontend.banner, "banner_list", banner_list)
+    page = mock.Mock()
+    p = zeit.frontend.block.Paragraph
+    # we need at least three paragraphs to insert AFTER 1st (before 2nd)
+    page.blocks = [p(mock.Mock()), p(mock.Mock()), p(mock.Mock())]
+    zeit.frontend.article._place_adtag_by_paragraph(
+        page, tile_list, possible_paragraphs)
+
+    assert isinstance(page.blocks[1], mock.Mock)

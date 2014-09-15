@@ -1,8 +1,20 @@
 Change log for zeit.frontend
 ============================
 
-0.16 (unreleased)
+0.17 (unreleased)
 -----------------
+
+- ZMO-880: Serve ZON 503 page on internal server error
+
+- ZMO-880: Improve rendering robustness
+
+- FIX: Patch reify decorator to deliver accurate traceback
+
+
+0.16 (2014-09-15)
+-----------------
+
+- ZON-893: Add adwords and adtiles to longform articles
 
 - ZMO-882: Validate page numbers and trigger redirects
 
@@ -10,9 +22,11 @@ Change log for zeit.frontend
 
 - ZMO-919: Recalculate photocluster on image load
 
-- ZMO-880: Serve ZON 503 page on internal server error
 
-- ZMO-880: Improve rendering robustness
+0.15.1 (2014-09-04)
+-------------------
+
+- HOTFIX: translate_url takes only one argument
 
 
 0.15 (2014-09-03)
