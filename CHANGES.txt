@@ -10,7 +10,7 @@ Change log for zeit.frontend
 
 - ZMO-919: Recalculate photocluster on image load
 
-- FIX: Customize reify to fix misleading AttributeError tracebacks
+- FIX: Patch reify decorator to deliver accurate traceback
 
 
 0.15 (2014-09-03)
@@ -49,8 +49,6 @@ Change log for zeit.frontend
 - ZMO-895: Add URL parameter debug flag to force dynamic galleries
 
 - ZMO-885: Add ZMO-Version to HTTP Header
-
-- FIX: Patch reify decorator to deliver accurate traceback
 
 
 0.12.1 (2014-08-12)
