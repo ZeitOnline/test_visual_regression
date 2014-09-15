@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import babel.dates
+import datetime
 import mock
-# import datetime
-# from babel.dates import get_timezone
 
 import zeit.cms.interfaces
 import zeit.frontend.view_article
@@ -14,15 +14,15 @@ def test_adwords_for_article(application):
     adwords = ','.join(view.adwords)
     assert adwords == 'zeitonline,zeitmz'
 
-# def test_adwords_for_lead_article(application):
-#     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-#     view = zeit.frontend.view_article.Article(context, mock.Mock())
-#     tz = get_timezone('Europe/Berlin')
-#     today = datetime.datetime.now(tz).isoformat()
-#     print today
-#     view.leadtime.start = today
-#     adwords = ','.join(view.adwords)
-#     assert adwords == 'zeitonline,zeitmz,ToM'
+def test_adwords_for_lead_article(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    view = zeit.frontend.view_article.Article(context, mock.Mock())
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    today = datetime.datetime.now(tz)
+    view.leadtime = mock.Mock()
+    view.leadtime.start = today
+    adwords = ','.join(view.adwords)
+    assert adwords == 'zeitonline,zeitmz,ToM'
 
 def test_adwords_for_longform(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
