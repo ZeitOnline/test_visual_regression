@@ -1,6 +1,7 @@
 import sys
 
 import pyramid
+import pyramid.decorator
 import venusian
 
 import zeit.frontend.interfaces
@@ -33,11 +34,6 @@ def JinjaEnvRegistrator(env_attr):
         venusian.attach(func, callback, category='jinja')
         return func
     return registrator
-
-
-register_filter = JinjaEnvRegistrator('filters')
-register_global = JinjaEnvRegistrator('globals')
-register_test = JinjaEnvRegistrator('tests')
 
 
 def register_copyrights(func):

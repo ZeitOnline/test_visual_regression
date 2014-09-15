@@ -14,7 +14,7 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 
-from zeit.frontend.decorator import reify
+import zeit.frontend
 import zeit.frontend.article
 import zeit.frontend.comments
 import zeit.frontend.interfaces
@@ -45,34 +45,34 @@ class Article(zeit.frontend.view.Content):
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
 
-    @reify
+    @zeit.frontend.reify
     def template(self):
         return IArticleTemplateSettings(self.context).template or 'default'
 
-    @reify
+    @zeit.frontend.reify
     def header_layout(self):
         return IArticleTemplateSettings(self.context).header_layout or \
             'default'
 
-    @reify
+    @zeit.frontend.reify
     def pages(self):
         return zeit.frontend.interfaces.IPages(self.context)
 
-    @reify
+    @zeit.frontend.reify
     def current_page(self):
         return self.pages[0]
 
-    @reify
+    @zeit.frontend.reify
     def next_title(self):
         if self.page_nr < len(self.pages):
             return self.pages[self.page_nr].teaser
 
-    @reify
+    @zeit.frontend.reify
     def article_url(self):
         path = '/'.join(self.request.traversed)
         return self.request.route_url('home') + path
 
-    @reify
+    @zeit.frontend.reify
     def pages_urls(self):
         urls = []
         for number in range(0, len(self.pages)):
@@ -82,19 +82,19 @@ class Article(zeit.frontend.view.Content):
             urls.append(url)
         return urls
 
-    @reify
+    @zeit.frontend.reify
     def next_page_url(self):
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index + 1] \
             if actual_index + 1 < len(self.pages) else None
 
-    @reify
+    @zeit.frontend.reify
     def prev_page_url(self):
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index - 1] \
             if actual_index - 1 >= 0 else None
 
-    @reify
+    @zeit.frontend.reify
     def pagination(self):
         return {
             'current': self.page_nr,
@@ -106,7 +106,7 @@ class Article(zeit.frontend.view.Content):
             'prev_page_url': self.prev_page_url
         }
 
-    @reify
+    @zeit.frontend.reify
     def first_body_obj(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
@@ -117,7 +117,7 @@ class Article(zeit.frontend.view.Content):
         except OSError:
             log.debug('Object does not exist.')
 
-    @reify
+    @zeit.frontend.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
@@ -129,23 +129,23 @@ class Article(zeit.frontend.view.Content):
                     pass
             return img
 
-    @reify
+    @zeit.frontend.reify
     def header_video(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
             return self._create_obj(zeit.frontend.block.HeaderVideo, obj)
 
-    @reify
+    @zeit.frontend.reify
     def first_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
             return self._create_obj(zeit.frontend.block.Image, obj)
 
-    @reify
+    @zeit.frontend.reify
     def header_elem(self):
         return self.header_video or self.header_img
 
-    @reify
+    @zeit.frontend.reify
     def resource_url(self):
         return self.request.resource_url(self.context).rstrip('/')
 
@@ -166,7 +166,7 @@ class Article(zeit.frontend.view.Content):
             != 'longform' else '',
         }
 
-    @reify
+    @zeit.frontend.reify
     def authors(self):
         authorList = []
         try:
@@ -191,12 +191,12 @@ class Article(zeit.frontend.view.Content):
         except (IndexError, OSError):
             return None
 
-    @reify
+    @zeit.frontend.reify
     def authorsList(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
 
-    @reify
+    @zeit.frontend.reify
     def genre(self):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
@@ -211,7 +211,7 @@ class Article(zeit.frontend.view.Content):
         else:
             return None
 
-    @reify
+    @zeit.frontend.reify
     def source(self):
         # TODO: find sth more elegant (as)
         # 1. dont know why source stays empty if default value wasnt changed
@@ -230,7 +230,7 @@ class Article(zeit.frontend.view.Content):
             source = self.context.product_text
         return self.context.copyrights or source
 
-    @reify
+    @zeit.frontend.reify
     def location(self):
         return None  # XXX not implemented in zeit.content.article yet
 
@@ -245,17 +245,17 @@ class Article(zeit.frontend.view.Content):
                     i.image.image_group, i.image)
         return nextread
 
-    @reify
+    @zeit.frontend.reify
     def comments(self):
         return zeit.frontend.comments.get_thread(
             unique_id=self.context.uniqueId, request=self.request)
 
-    @reify
+    @zeit.frontend.reify
     def serie(self):
         if self.context.serie:
             return self.context.serie.lower()
 
-    @reify
+    @zeit.frontend.reify
     def linkreach(self):
         def unitize(n):
             if n <= 999:
@@ -279,12 +279,12 @@ class Article(zeit.frontend.view.Content):
                 continue
         return counts
 
-    @reify
+    @zeit.frontend.reify
     def tracking_type(self):
         if self.type == 'article':
             return 'Artikel'
 
-    @reify
+    @zeit.frontend.reify
     def text_length(self):
         return self.context.textLength
 
@@ -319,7 +319,7 @@ class ArticlePage(Article):
         super(ArticlePage, self).__call__()
         self._validate_and_determine_page_nr()
 
-    @reify
+    @zeit.frontend.reify
     def page_nr(self):
         return self._validate_and_determine_page_nr()
 
@@ -343,11 +343,11 @@ class ArticlePage(Article):
                     self.resource_url)
             return number
 
-    @reify
+    @zeit.frontend.reify
     def current_page(self):
         return zeit.frontend.interfaces.IPages(self.context)[self.page_nr - 1]
 
-    @reify
+    @zeit.frontend.reify
     def next_title(self):
         pages = zeit.frontend.interfaces.IPages(self.context)
         if self.page_nr < len(pages):
@@ -362,7 +362,7 @@ class LongformArticle(Article):
     main_nav_full_width = True
     is_longform = True
 
-    @reify
+    @zeit.frontend.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
@@ -410,6 +410,6 @@ class PhotoclusterArticle(Article):
              renderer='templates/teaser.html')
 class Teaser(Article):
 
-    @reify
+    @zeit.frontend.reify
     def teaser_text(self):
         return self.context.teaser
