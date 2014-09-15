@@ -84,10 +84,20 @@ class Base(object):
             channel += myressort
         if self.sub_ressort:
             channel += '/' + self.sub_ressort.replace('-', 'und', 1)
-        if self.type:
-            # TODO: Zone type gallery after launch
-            channel += '/' + self.type.replace('gallery', 'article')
+        channel += '/' + self.banner_type
         return channel
+
+    @zeit.frontend.reify
+    def banner_type(self):
+        return self.type
+
+    @zeit.frontend.reify
+    def adwords(self):
+        keywords = ['zeitonline']
+        # TODO: End discrepancy between testing and live ressorts!
+        if self.ressort in ['zeit-magazin', 'lebensart']:
+            keywords.append('zeitmz')
+        return keywords
 
     def banner(self, tile):
         try:
@@ -97,8 +107,8 @@ class Base(object):
 
     @zeit.frontend.reify
     def js_vars(self):
-        for name in ('banner_channel', 'ressort', 'sub_ressort', 'type'):
-            yield name, getattr(self, name, '')
+        names = ('banner_channel', 'ressort', 'sub_ressort', 'type')
+        return [(name, getattr(self, name, '')) for name in names]
 
     @zeit.frontend.reify
     def title(self):
@@ -254,8 +264,15 @@ class Content(Base):
         return l
 
     @zeit.frontend.reify
+    def adwords(self):
+        keywords = super(Content, self).adwords
+        if self.is_top_of_mind:
+            keywords.append('ToM')
+        return keywords
+
+    @zeit.frontend.reify
     def is_top_of_mind(self):
-        return not self.is_longform and self.is_lead_story
+        return self.is_lead_story
 
     @zeit.frontend.reify
     def is_lead_story(self):
