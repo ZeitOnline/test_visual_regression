@@ -4,7 +4,7 @@ Change log for zeit.frontend
 0.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Patch reify decorator to deliver accurate traceback
 
 
 0.16 (2014-09-15)
@@ -17,8 +17,6 @@ Change log for zeit.frontend
 - ZMO-883: Fix iOS bug initially showing last slide of inline gallery
 
 - ZMO-919: Recalculate photocluster on image load
-
-- FIX: Patch reify decorator to deliver accurate traceback
 
 
 0.15.1 (2014-09-04)
