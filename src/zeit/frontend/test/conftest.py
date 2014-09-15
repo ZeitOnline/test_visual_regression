@@ -3,7 +3,7 @@ import pkg_resources
 
 import lxml.etree
 import pyramid.testing
-import repoze.bitblt.processor.ImageTransformationMiddleware
+import repoze.bitblt.processor
 import gocept.httpserverlayer.wsgi
 import plone.testing.zca
 import pytest
