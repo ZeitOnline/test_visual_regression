@@ -10,6 +10,10 @@ Change log for zeit.frontend
 
 - ZMO-919: Recalculate photocluster on image load
 
+- ZMO-880: Serve ZON 503 page on internal server error
+
+- ZMO-880: Improve rendering robustness
+
 
 0.15 (2014-09-03)
 -----------------
