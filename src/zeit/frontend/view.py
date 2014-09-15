@@ -188,6 +188,8 @@ class Content(Base):
         )
     }
 
+    is_longform = False
+
     @reify
     def subtitle(self):
         return self.context.subtitle
