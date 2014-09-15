@@ -363,8 +363,9 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
-    sample_image = asset.values().next()  # Assumes all images in this group
-                                          # have the same mimetype.
+    # Assumes all images in this group have the same mimetype.
+    sample_image = asset.values().next()
+
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 

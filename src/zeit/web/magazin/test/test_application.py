@@ -10,8 +10,6 @@ import pytest
 import zeit.web.core.application
 import requests
 
-import zope.component
-
 
 @pytest.fixture
 def app_request(app_settings):

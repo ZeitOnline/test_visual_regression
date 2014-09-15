@@ -62,7 +62,6 @@ class Application(object):
         zeit.web.core.banner.iqd_mobile_ids = \
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
 
-
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
