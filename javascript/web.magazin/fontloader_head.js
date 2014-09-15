@@ -16,7 +16,7 @@ window.FontLoader = (function(ZMO) {
             {
                 identifier: 'base',
                 selector: null,
-                path: ZMO.home + 'css/fonts/magazin.css',
+                path: ZMO.home + 'css/web.magazin/fonts.css',
                 version: '2.1'
             }
         ],
