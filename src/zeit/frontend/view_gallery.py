@@ -25,7 +25,7 @@ class Gallery(zeit.frontend.view.Content):
     def galleryText(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
-    @reify
+    @zeit.frontend.reify
     def banner_type(self):
         return 'article'
 

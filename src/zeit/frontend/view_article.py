@@ -371,17 +371,17 @@ class LongformArticle(Article):
                 self._copyrights.setdefault(img.uniqueId, img)
             return img
 
-    @reify
+    @zeit.frontend.reify
     def adwords(self):
         keywords = super(LongformArticle, self).adwords
         keywords.extend(['longform', 'noiqdband'])
         return keywords
 
-    @reify
+    @zeit.frontend.reify
     def is_top_of_mind(self):
         return False
 
-    @reify
+    @zeit.frontend.reify
     def banner_type(self):
         return 'longform'
 
