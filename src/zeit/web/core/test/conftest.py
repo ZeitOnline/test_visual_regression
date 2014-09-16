@@ -123,8 +123,11 @@ def app_settings():
 
 @pytest.fixture(scope='session')
 def application():
-    app = zeit.web.core.application.Application()({}, **settings)
-    return ImageTransformationMiddleware(app, secret='time')
+    factory = zeit.web.core.application.Application()
+    app = factory({}, **settings)
+    wsgi = ImageTransformationMiddleware(app, secret='time')
+    wsgi.zeit_app = factory
+    return wsgi
 
 
 @pytest.fixture
