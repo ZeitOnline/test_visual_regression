@@ -57,7 +57,7 @@
             window.ZMO.viewport.set();
 
             if ( window.addEventListener ) {
-                window.addEventListener( 'resize', window.ZMO.viewport.set, false );
+                window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
             }
         {%- endif %}
 
