@@ -116,16 +116,18 @@ class Image(BaseImage):
 
     def __init__(self, model_block):
         # TODO: don't use XML but adapt an Image and use it's metadata
-        xml = model_block.xml
-        self.align = xml.get('align')
-        self.href = xml.get('href')
-        self.caption = _inline_html(xml.find('bu'))
-        cr = xml.find('copyright')
-        rel = cr.attrib.get('rel', '') == 'nofollow'
-        self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
         self.layout = model_block.layout
-        self.attr_title = _inline_html(xml.find('bu'))
-        self.attr_alt = _inline_html(xml.find('bu'))
+
+        if model_block.xml:
+            self.align = model_block.xml.get('align')
+            self.href = model_block.xml.get('href')
+            self.caption = _inline_html(model_block.xml.find('bu'))
+            cr = model_block.xml.find('copyright')
+            rel = cr.attrib.get('rel', '') == 'nofollow'
+            self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
+            self.attr_title = _inline_html(model_block.xml.find('bu'))
+            self.attr_alt = _inline_html(model_block.xml.find('bu'))
+
         if model_block.references:
             self.image = model_block.references.target
             self.src = self.image and self.image.uniqueId
@@ -299,6 +301,15 @@ class NewsletterTeaser(object):
                 image = group[name]
                 return image.uniqueId.replace(
                     'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
+
+    @property
+    def videos(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(
+            self.context.reference)
+        return [IFrontendBlock(element)
+                for element in body.values()
+                if zeit.content.article.edit.interfaces.IVideo.providedBy(
+                    element)]
 
     @property
     def url(self):
