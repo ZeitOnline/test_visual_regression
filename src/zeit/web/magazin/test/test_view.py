@@ -14,7 +14,6 @@ import zeit.content.article.edit.reference
 
 import zeit.web.core
 import zeit.web.core.gallery
-import zeit.web.core.test
 import zeit.web.core.view
 import zeit.web.magazin.view_article
 

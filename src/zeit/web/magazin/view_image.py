@@ -7,11 +7,11 @@ import zope.component
 import zeit.connector.interfaces
 import zeit.content.image.interfaces
 
-import zeit.frontend.view
+import zeit.web.core.view
 
 
 @view_config(context=zeit.content.image.interfaces.IImage)
-class Image(zeit.frontend.view.Base):
+class Image(zeit.web.core.view.Base):
 
     def __call__(self):
         connector = zope.component.getUtility(

@@ -100,7 +100,7 @@ class Application(object):
         config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
 
         if not self.settings.get('debug.show_exceptions'):
-            config.add_view(view=zeit.frontend.view.service_unavailable,
+            config.add_view(view=zeit.web.core.view.service_unavailable,
                             context=Exception)
 
         def asset_url(request, path, **kw):
@@ -137,7 +137,7 @@ class Application(object):
         config.set_authentication_policy(
             zeit.web.core.security.CommunityAuthenticationPolicy())
         config.set_authorization_policy(
-            zeit.web.core.security.ACLAuthorizationPolicy())
+            pyramid.authorization.ACLAuthorizationPolicy())
 
         config.add_request_method(zeit.web.core.appinfo.assemble_app_info,
                                   'app_info', reify=True)
@@ -160,7 +160,7 @@ class Application(object):
         env.trim_blocks = True
 
         default_loader = env.loader
-        env.loader = zeit.frontend.template.PrefixLoader({
+        env.loader = zeit.web.core.template.PrefixLoader({
             None: default_loader,
             'dav': zeit.web.core.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
@@ -169,7 +169,7 @@ class Application(object):
         if not self.settings.get('debug.propagate_jinja_errors'):
             # If the application is not running in debug mode: overlay the
             # jinja environment with a custom, more fault tolerant one.
-            env.__class__ = zeit.frontend.template.Environment
+            env.__class__ = zeit.web.core.template.Environment
             env = env.overlay()
 
         Scanner(env=env).scan(

@@ -1,10 +1,26 @@
 # -*- coding: utf-8 -*-
+import exceptions
 import pytest
 import requests
 
-from zeit.frontend.test import Raiser, raise_exc
-from zeit.frontend.view_centerpage import Centerpage
-import zeit.frontend.template
+from zeit.web.magazin.view_centerpage import Centerpage
+import zeit.web.core.template
+
+
+class Raiser(object):
+    """Testing purpose class for raising any of Python's builtin exceptions.
+    Properties with a camel-cased variant of the exception's name raise the
+    corresponding Exception on access.
+    Usage examples:
+
+        Raiser().key_error
+        Raiser().system_exit
+    """
+    def __getattr__(self, name):
+        cls = ''.join(x.capitalize() or '_' for x in name.split('_'))
+        if not hasattr(exceptions, cls):
+            return super(Raiser, self).__getattr__(name)
+        raise getattr(exceptions, cls)()
 
 
 def test_url_path_not_found_renders_404(testserver):
@@ -13,6 +29,11 @@ def test_url_path_not_found_renders_404(testserver):
 
 
 def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
+    def raise_exc(exc, *args):
+        """Helper function for raising exceptions without using the builtin
+        `raise` statement."""
+        raise exc(*args)
+
     monkeypatch.setattr(Centerpage, 'title',
                         property(lambda self: raise_exc(Exception)))
 
@@ -116,7 +137,7 @@ def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
      {})
 ])
 def test_failsafe_rendering(markup, assertion, kw):
-    env = zeit.frontend.template.Environment()
+    env = zeit.web.core.template.Environment()
     tpl = env.from_string(markup)
     condition = isinstance(tpl.render(**kw), basestring)
     assert condition, assertion + ' should not bother friedbert.'

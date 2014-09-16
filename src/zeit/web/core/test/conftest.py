@@ -132,7 +132,7 @@ def application(request):
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     return repoze.bitblt.processor.ImageTransformationMiddleware(
-        zeit.frontend.application.Application()({}, **settings),
+        zeit.web.core.application.Application()({}, **settings),
         secret='time'
     )
 
@@ -145,7 +145,7 @@ def debug_application(request):
     app_settings = settings.copy()
     app_settings['debug.show_exceptions'] = ''
     return repoze.bitblt.processor.ImageTransformationMiddleware(
-        zeit.frontend.application.Application()({}, **app_settings),
+        zeit.web.core.application.Application()({}, **app_settings),
         secret='time'
     )
 
@@ -235,13 +235,6 @@ def selenium_driver(request):
 
 
 @pytest.fixture
-def asset():
-    """Return file-object for given test asset path."""
-    return lambda path: open(pkg_resources.resource_filename(
-        'zeit.frontend', 'data' + path), 'rb')
-
-
-@pytest.fixture
 def appbrowser(application):
     """Returns an instance of `webtest.TestApp`."""
     extra_environ = dict(HTTP_HOST='example.com')
@@ -253,7 +246,7 @@ def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
         path = zeit.web.core.comments.path_of_article(unique_id)
         response = lxml.etree.parse(''.join([self.entry_point, path]))
-        return zeit.frontend.comments._place_answers_under_parent(response)
+        return zeit.web.core.comments._place_answers_under_parent(response)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Agatho, 'collection_get', collection_get)
