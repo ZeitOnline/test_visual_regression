@@ -301,6 +301,15 @@ class NewsletterTeaser(object):
                     'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 
     @property
+    def videos(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(
+            self.context.reference)
+        return [IFrontendBlock(element)
+                for element in body.values()
+                if zeit.content.article.edit.interfaces.IVideo.providedBy(
+                    element)]
+
+    @property
     def url(self):
         url = self.uniqueId.replace(
             'http://xml.zeit.de/', 'http://www.zeit.de/', 1)
