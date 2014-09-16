@@ -6,7 +6,7 @@
  * images.js: module for images
  * @module images
  */
-define([ 'sjcl', 'jquery', 'underscore' ], function( sjcl, $, _ ) {
+define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
 
     var images = [],
 
@@ -162,8 +162,8 @@ define([ 'sjcl', 'jquery', 'underscore' ], function( sjcl, $, _ ) {
      */
     init = function() {
         rescaleAll();
-        var debouncedRescaleAll = _.debounce( rescaleAll, 1000 );
-        $( window ).on( 'resize', debouncedRescaleAll );
+
+        $( window ).on( 'resize', $.debounce( rescaleAll, 1000 ) );
     };
 
     return {

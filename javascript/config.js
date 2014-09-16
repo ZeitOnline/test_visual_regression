@@ -13,12 +13,14 @@ require.config({
         'freewall': 'vendor/freewall',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'libs/jquery.bxslider',
-        'esiparser': 'libs/esiparser'
+        'esiparser': 'libs/esiparser',
+        'jquery.debounce': 'web.core/plugins/jquery.debounce'
     },
     // a shim is need for jQuery Plugins to load
     // add the name or path and an array of required scripts
     shim: {
         'bxSlider': [ 'jquery' ],
+        'jquery.debounce': [ 'jquery' ],
         'web.magazin/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery' ],
         'web.magazin/plugins/jquery.switchvideo': [ 'jquery' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],

@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define(['jquery', 'modernizr', 'underscore', 'web.magazin/tabs'], function($, Modernizr, _) {
+define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], function( $, Modernizr ) {
 
     var $socialServices = $('#js-social-services'),
         $comments = $('#js-comments'),
@@ -81,18 +81,11 @@ define(['jquery', 'modernizr', 'underscore', 'web.magazin/tabs'], function($, Mo
         var cid  = this.getAttribute('data-cid'),
             comment = $(this).closest('article'),
             form = comment.find('.js-report-form'),
-            template, templateData;
+            template;
 
         if ( ! form.length ) {
-            template = _.template(
-                $('#js-report-comment-template').html()
-            );
-
-            templateData = {
-                commentId: cid
-            };
-
-            form = $(template(templateData)).addClass('js-report-form').appendTo(comment);
+            template = $('#js-report-comment-template').html().replace( /<% commentId %>/, cid );
+            form = $(template).addClass('js-report-form').appendTo(comment);
         }
 
         showForm(form, comment);
@@ -255,7 +248,7 @@ define(['jquery', 'modernizr', 'underscore', 'web.magazin/tabs'], function($, Mo
      * comments.js: update layout
      * @function updateLayout
      */
-    var updateLayout = _.debounce(function(e) {
+    var updateLayout = $.debounce(function(e) {
         // invalidate cache
         cache = {};
 
