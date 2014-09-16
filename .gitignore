@@ -3,6 +3,7 @@
 .DS_Store
 .Python
 .sass-cache
+.ftppass
 /bower_components/
 /javascript/documentation/
 /javascript/vendor/
