@@ -12,7 +12,6 @@ require.config({
         'underscore': 'vendor/underscore',
         'freewall': 'vendor/freewall',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
-        'modernizr': 'libs/modernizr-custom',
         'bxSlider': 'libs/jquery.bxslider',
         'esiparser': 'libs/esiparser'
     },
@@ -34,7 +33,3 @@ require.config({
         }
     }
 });
-
-// A hack for Modernizr and AMD.
-// This lets Modernizr be in the <head> and also compatible with other modules.
-define('modernizr', [], window.Modernizr);

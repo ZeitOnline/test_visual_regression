@@ -9,6 +9,10 @@ require.config({
     }
 });
 
+// A hack for Modernizr and AMD.
+// This lets Modernizr be in the <head> and also compatible with other modules.
+define('modernizr', [], window.Modernizr);
+
 // required plain vanilla JS programs here
 // the order in the array and the function names have to correlate
 // which is quite disturbing in my book…
