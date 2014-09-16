@@ -29,6 +29,7 @@ setup(
         'iso8601',
         'lxml',
         'martian',
+        'plone.testing [zca]',
         'pyramid',
         'pyramid_beaker',
         'pyramid_jinja2',
