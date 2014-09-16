@@ -1,6 +1,7 @@
 import base64
 import logging
 import os.path
+import re
 import urlparse
 import pkg_resources
 
@@ -35,9 +36,9 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_SCAN = ['zeit.web.core.test',
-                 'zeit.web.magazin.test',
-                 'zeit.web.core.preview']
+    DONT_SCAN_TESTS = [re.compile('test$').search]
+    DONT_SCAN = DONT_SCAN_TESTS + [
+        'zeit.web.core.preview']
 
     def __init__(self):
         self.settings = {}
