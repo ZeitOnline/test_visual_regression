@@ -1,0 +1,15 @@
+{
+	"preset": "jquery",
+	"validateQuoteMarks": true,
+
+	// a positive integer or "\t"
+	"validateIndentation": 4,
+
+	// true or "onevar"
+	"requireMultipleVarDecl": true,
+
+	"maximumLineLength": 140
+
+	// "all" for strict mode, "allButNested" ignores nested brackets in a row.
+	// "requireSpacesInsideParentheses": "allButNested"
+}

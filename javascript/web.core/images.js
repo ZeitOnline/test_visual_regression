@@ -6,9 +6,9 @@
  * images.js: module for images
  * @module images
  */
-define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
+define([ 'sjcl', 'jquery', 'underscore' ], function( sjcl, $, _ ) {
 
-    var resp_imgs = [];
+    var images = [],
 
     /**
      * images.js: create prefix
@@ -17,28 +17,29 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * @param  {integer} height height of image
      * @return {string} prefix string for image path
      */
-    var prefix = function(width, height) {
-        var key = width + ':' + height + ':time';
-        var out = sjcl.hash.sha1.hash(key);
-        var digest = sjcl.codec.hex.fromBits(out);
+    prefix = function( width, height ) {
+        var key = width + ':' + height + ':time',
+            out = sjcl.hash.sha1.hash( key ),
+            digest = sjcl.codec.hex.fromBits( out );
+
         return '/bitblt-' + width + 'x' + height + '-' + digest;
-    };
+    },
 
     /**
      * images.js: use standard image or hide allocated image spaces and
      * comments if noscript has no content
      * @function hideImages
-     * @param  {object} img_wrapper image area containing noscript
-     * @param  {string} alt_source alternative image source
+     * @param  {object} imageWrapper image area containing noscript
+     * @param  {string} altSource alternative image source
      */
-    var hideImages = function( $img_wrapper, alt_source ){
-        if ( alt_source ){
-            $img_wrapper.html( '<img src="' + alt_source + '"/>' );
-        }else{
-            $img_wrapper.height( 'auto' );
+    hideImages = function( $imageWrapper, altSource ) {
+        if ( altSource ) {
+            $imageWrapper.html( '<img src="' + altSource + '"/>' );
+        } else {
+            $imageWrapper.height( 'auto' );
             $( '.cp_comment__count__wrap' ).hide();
         }
-    };
+    },
 
     /**
      * images.js: rescale one image
@@ -48,30 +49,31 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
      * @param  {integer} width width of image
      * @param  {integer} height height of image
      */
-    var rescaleOne = function(image, subsequent, width, height) {
-        var $img = $(image),
-            ie_width = false;
+    rescaleOne = function( image, subsequent, width, height ) {
+        var $img = $( image ),
+            msieWidth = false,
+            token, source, selector, wrapper;
 
         width = width || $img.width();
 
         //ie workarround to detect auto width
-        if ( image.currentStyle ){
-            ie_width = image.currentStyle.width;
+        if ( image.currentStyle ) {
+            msieWidth = image.currentStyle.width;
         }
 
         // workaround for width = 'auto'
-        if (!width || ie_width === 'auto') {
-            width = $img.width('100%').width();
-            $img.width('');
+        if ( !width || msieWidth === 'auto' ) {
+            width = $img.width( '100%' ).width();
+            $img.width( '' );
         }
 
-        if (subsequent && $img.closest('.is-pixelperfect').length) {
+        if ( subsequent && $img.closest( '.is-pixelperfect' ).length ) {
             // get the parent height, don’t use ratio to update pixelperfect img
             // it also possible to pass the height delivering element via data-wrap
-            var selector = $img.parent().attr('data-wrap'),
-                wrapper = selector ? $img.closest(selector) : [];
+            selector = $img.parent().attr( 'data-wrap' );
+            wrapper = selector ? $img.closest( selector ) : [];
 
-            if (wrapper.length) {
+            if ( wrapper.length ) {
                 height = wrapper.innerHeight();
             } else {
                 height = $img.parent().parent().innerHeight();
@@ -81,48 +83,48 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
             /**
              * @todo (T.B.) $img.height() has a wrong value if alt attribute is set in image
              */
-            height = height || Math.round(width / $img.data('ratio'));
+            height = height || Math.round( width / $img.data( 'ratio' ) );
         }
 
-        var token = prefix(Math.ceil(width), Math.ceil(height));
-        var src = image.src || $img.data('src');
-        image.src = src.replace(/\/bitblt-\d+x\d+-[a-z0-9]+/, token);
-    };
+        token = prefix( Math.ceil( width ), Math.ceil( height ) );
+        source = image.src || $img.data( 'src' );
+        image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
+    },
 
     /**
      * images.js: rescale all images
      * @function rescaleAll
      * @param  {object} e event object
      */
-    var rescaleAll = function(e) {
-        if (!e) {
+    rescaleAll = function( e ) {
+        if ( !e ) {
             // initial case, no images there yet, so create them
-            $('.scaled-image > noscript').each(function() {
-                var $noscript = $(this);
-                var $parent = $noscript.parent();
-                var markup = $noscript.text();
+            $( '.scaled-image > noscript' ).each( function() {
+                var $noscript = $( this ),
+                    $parent = $noscript.parent(),
+                    markup = $noscript.text();
 
-                if ( markup.trim() !== '' ){
+                if ( markup.trim() !== '' ) {
 
-                    markup = markup.replace('src="', 'data-src="');
-                    $parent.html(markup);
-                    var $imgs = $parent.find('img');
-                    var width = 0;
-                    var height = 0;
-                    $imgs.each(function() {
-                        var $img = $(this);
+                    markup = markup.replace( 'src="', 'data-src="' );
+                    $parent.html( markup );
+                    var $imgs = $parent.find( 'img' ),
+                        width = 0,
+                        height = 0;
+                    $imgs.each( function() {
+                        var $img = $( this );
 
                         // add event triggering to tell the world
-                        $img.on('load', function(e) {
-                            $img.trigger('scaling_ready');
+                        $img.on( 'load', function( e ) {
+                            $img.trigger( 'scaling_ready' );
                         });
 
-                        if ($parent.hasClass('is-pixelperfect')) {
-                            var selector = $img.parent().attr('data-wrap'),
-                                wrapper = selector ? $img.closest(selector) : [];
+                        if ( $parent.hasClass( 'is-pixelperfect' ) ) {
+                            var selector = $img.parent().attr( 'data-wrap' ),
+                                wrapper = selector ? $img.closest( selector ) : [];
 
-                            // use explicit width and height from responsive image parent element or data-wrap element
-                            if (wrapper.length) {
+                            // use explicit width and height from parent or data-wrap element
+                            if ( wrapper.length ) {
                                 width  = wrapper.width();
                                 height = wrapper.innerHeight();
                             } else {
@@ -130,38 +132,38 @@ define(['sjcl', 'jquery', 'underscore'], function(sjcl, $, _) {
                                 height = $parent.innerHeight();
                             }
 
-                            rescaleOne(this, false, width, height);
+                            rescaleOne( this, false, width, height );
                         } else {
                             // determine size of image from width + ratio of original image
-                            rescaleOne(this, false);
+                            rescaleOne( this, false );
                         }
 
-                        resp_imgs.push(this);
+                        images.push( this );
                     });
 
-                }else{
-                // noscript doesn't has any content we can read (which might happen in older browsers)
+                } else {
+                // noscript doesn't has any content we can read (might happen in older browsers)
                 // therefore we have to hide allocated image spaces
-                    hideImages( $parent, $noscript.attr('data-src'));
+                    hideImages( $parent, $noscript.attr( 'data-src' ));
                 }
 
             });
         } else {
             // rescale after resize, images already set up, just update
-            for (var i = 0; i < resp_imgs.length; i++) {
-                rescaleOne(resp_imgs[i], true);
+            for ( var i = 0; i < images.length; i++ ) {
+                rescaleOne( images[i], true );
             }
         }
-    };
+    },
 
     /**
      * images.js: init scaling
      * @function init
      */
-    var init = function() {
+    init = function() {
         rescaleAll();
-        var lazy_rescaleAll = _.debounce(rescaleAll, 1000);
-        $(window).on('resize', lazy_rescaleAll);
+        var debouncedRescaleAll = _.debounce( rescaleAll, 1000 );
+        $( window ).on( 'resize', debouncedRescaleAll );
     };
 
     return {

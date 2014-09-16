@@ -3,9 +3,11 @@
  * @version  0.1
  */
 
-// required plain vanilla ja programs here
+// required plain vanilla JS programs here
 require([
-	'web.core/images'
-], function( images ) {
-	images.init();
+    'web.core/images',
+    'web.site/nav',
+], function( images, nav ) {
+    images.init();
+    nav.init();
 });

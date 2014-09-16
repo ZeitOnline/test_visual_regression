@@ -15,6 +15,7 @@
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-grunticon": "^1.2.13",
+    "grunt-jscs": "^0.7.1",
     "grunt-jsdoc": "~0.5.7",
     "grunt-modernizr": "~0.5.2",
     "grunt-sftp-deploy": "~0.2.1",
