@@ -3,14 +3,14 @@
  * @version  0.1
  */
 /**
- * fontloader_body.js: module for fonts
- * @module fontloader_body
+ * fontloader-body.js: module for fonts
+ * @module fontloader
  */
 define(['jquery'], function($) {
     var fl = window.FontLoader;
 
     /**
-     * fontloader_body.js: fetch font data asynchronously from the server and store it in local storage
+     * fontloader-body.js: fetch font data asynchronously from the server and store it in local storage
      * @function fetchCSS
      * @param  {object} pack
      */
@@ -27,7 +27,7 @@ define(['jquery'], function($) {
     };
 
     /**
-     * fontloader_body.js: initialize
+     * fontloader-body.js: initialize
      * @function init
      */
     var init = function() {

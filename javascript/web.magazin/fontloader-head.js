@@ -3,7 +3,7 @@
  * @version  0.1
  */
 /**
- * fontloader_head.js: namespace for FontLoader
+ * fontloader-head.js: namespace for FontLoader
  * @namespace FontLoader
  * @param  {object} ZMO
  */

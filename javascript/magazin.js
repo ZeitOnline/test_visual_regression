@@ -15,7 +15,7 @@ require.config({
 require([
     'web.core/images',
     'web.magazin/errors',
-    'web.magazin/fontloader',
+    'web.magazin/fontloader-body',
     'web.magazin/main-nav',
     'web.magazin/tabs',
     'web.magazin/comments',
