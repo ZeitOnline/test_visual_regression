@@ -13,11 +13,16 @@ from babel.dates import format_datetime
 from lxml import objectify
 from repoze.bitblt.transform import compute_signature
 import jinja2
+import jinja2.environment
+import jinja2.runtime
+import jinja2.utils
+import jinja2.nodes
 import pyramid.threadlocal
 import pytz
 import requests
 import zope.component
 
+from zeit.web.core.utils import defaultdict
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
 
@@ -29,6 +34,51 @@ log = logging.getLogger(__name__)
 # Set during startup through application.py
 default_teaser_images = None
 image_scales = None
+
+
+class Undefined(jinja2.runtime.Undefined):
+    """Custom jinja Undefined class that represents unresolvable template
+    statements and expressions. It ignores undefined errors, ensures it is
+    printable and returns further Undefined objects if indexed or called.
+    """
+
+    def __html__(self):
+        return jinja2.utils.Markup()
+
+    @jinja2.utils.internalcode
+    def _fail_with_undefined_error(self, *args, **kw):
+        pass
+
+    __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
+
+
+class Environment(jinja2.environment.Environment):
+    """Custom jinja Environment class that uses our custom Undefined class as
+    fallback for unknown filters, globals, tests, object-attributes and -items.
+    This way, most flaws and faults in view classes can be caught and affected
+    areas can be ommited from the rendered output.
+    """
+
+    def __init__(self, undefined=Undefined, **kw):
+        super(Environment, self).__init__(undefined=undefined, **kw)
+        self.filters = defaultdict(self.undefined, self.filters)
+        self.globals = defaultdict(self.undefined, self.globals)
+        self.tests = defaultdict(self.undefined, self.tests)
+
+    def handle_exception(self, *args, **kw):
+        return self.undefined().__html__()
+
+    def __getsth__(self, func, obj, name):
+        try:
+            return getattr(super(Environment, self), func)(obj, name)
+        except BaseException:
+            return self.undefined(obj, name)
+
+    def getitem(self, obj, argument):
+        return self.__getsth__('getitem', obj, argument)
+
+    def getattr(self, obj, attribute):
+        return self.__getsth__('getattr', obj, attribute)
 
 
 @zeit.web.register_filter
@@ -381,6 +431,7 @@ class HTTPLoader(jinja2.BaseLoader):
 
     def get_source(self, environment, template):
         if not self.url:
+            # XXX: Why doesn't this throw an exception?
             return (
                 'ERROR: load_template_from_dav_url not configured',
                 template, lambda: True)

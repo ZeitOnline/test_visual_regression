@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
+
+import logging
 import datetime
 import urlparse
-import os.path
-import urllib2
 
 from pyramid.view import notfound_view_config
 from pyramid.view import view_config
 import babel.dates
 import pyramid.response
-import zope.component
+import requests
 
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
@@ -19,6 +20,8 @@ import zeit.content.image.interfaces
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
+
+log = logging.getLogger(__name__)
 
 
 class MetaView(type):
@@ -122,17 +125,23 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
-        seo = zeit.seo.interfaces.ISEO(self.context)
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+            if seo.html_title:
+                return seo.html_title
+        except TypeError:
+            pass
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        if seo.html_title:
-            return seo.html_title
         tokens = (self.supertitle, self.title)
         return ': '.join([t for t in tokens if t]) or default
 
     @zeit.web.reify
     def pagedescription(self):
         default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
-        seo = zeit.seo.interfaces.ISEO(self.context)
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+        except TypeError:
+            return default
         if seo.html_description:
             return seo.html_description
         if self.context.subtitle:
@@ -319,49 +328,32 @@ class Content(Base):
             return
 
 
-@view_config(context=zeit.content.image.interfaces.IImage)
-class Image(Base):
-
-    def __call__(self):
-        connector = zope.component.getUtility(
-            zeit.connector.interfaces.IConnector)
-        if not isinstance(connector, zeit.connector.connector.Connector):
-            # Default case: filesystem. We can avoid loading the image
-            # contents into memory here, and instead simply tell the web server
-            # to stream out the file by giving its absolute path.
-            repository_path = connector.repository_path
-            if not repository_path.endswith('/'):
-                repository_path += '/'
-            response = pyramid.response.FileResponse(
-                self.context.uniqueId.replace(
-                    'http://xml.zeit.de/', repository_path),
-                content_type=self.context.mimeType)
-        else:
-            # Special case for DAV (preview environment)
-            response = self.request.response
-            response.app_iter = pyramid.response.FileIter(self.context.open())
-
-        # Workaround for <https://github.com/Pylons/webob/issues/130>
-        response.content_type = self.context.mimeType.encode('utf-8')
-        response.headers['Content-Type'] = response.content_type
-        response.headers['Content-Length'] = str(self.context.size)
-        response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
-            os.path.basename(self.context.uniqueId).encode('utf8'))
-        return response
-
-
 @view_config(route_name='health_check')
 def health_check(request):
     return pyramid.response.Response('OK', 200)
 
 
+class service_unavailable(object):
+    def __init__(self, context, request):
+        log.exception('%s: %s at %s' % (context.__class__.__name__,
+                      context.message, request.path))
+
+    def __call__(self):
+        try:
+            body = requests.get('http://phpscripts.zeit.de/503.html',
+                                timeout=4.0).text
+        except requests.exceptions.RequestException:
+            body = 'Status 503: Dokument zurzeit nicht verfügbar.'
+        finally:
+            return pyramid.response.Response(body, 503)
+
+
 @notfound_view_config(request_method='GET')
-def notfound_get(request):
+def not_found(request):
     try:
-        request = urllib2.Request('http://www.zeit.de/error/404')
-        response = urllib2.urlopen(request, timeout=4)
-        html = response.read()
-        return pyramid.response.Response(html, status='404 Not Found')
-    except urllib2.URLError:
-        return pyramid.response.Response('Status 404:Dokument nicht gefunden.',
-                                         status='404 Not Found')
+        body = requests.get('http://www.zeit.de/error/404',
+                            timeout=4.0).text
+    except requests.exceptions.RequestException:
+        body = 'Status 404: Dokument nicht gefunden.'
+    finally:
+        return pyramid.response.Response(body, 404)

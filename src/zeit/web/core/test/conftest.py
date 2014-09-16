@@ -1,34 +1,26 @@
 # -*- coding: utf-8 -*-
 from os.path import abspath, dirname, join
+import pkg_resources
 
-from pyramid.testing import setUp, tearDown, DummyRequest
-from repoze.bitblt.processor import ImageTransformationMiddleware
-from selenium import webdriver
-from webtest import TestApp as TestAppBase
 import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.etree
 import lxml.html
-import pkg_resources
+
+import plone.testing.zca
+import pyramid.testing
 import pytest
+import repoze.bitblt.processor
+import selenium.webdriver
+import webtest
+import zope.browserpage.metaconfigure
 import zope.interface
 import zope.testbrowser.browser
 
-from zeit.web.core.comments import path_of_article, _place_answers_under_parent
 import zeit.content.image.interfaces
+
+import zeit.web.core
 import zeit.web.core.application
-
-
-def test_asset_path(*parts):
-    """ Return full file-system path for given test asset path. """
-    from zeit.web import core
-    return abspath(join(dirname(core.__file__), 'data', *parts))
-
-
-def test_asset(path):
-    """ Return file-object for given test asset path. """
-    return open(pkg_resources.resource_filename(
-        'zeit.web.core', 'data' + path), 'rb')
 
 
 settings = {
@@ -98,22 +90,27 @@ settings = {
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
-    'vivi_zeit.solr_solr-url': 'http://mock.solr'
+    'vivi_zeit.solr_solr-url': 'http://mock.solr',
+
+    'debug.show_exceptions': 'True',
+    'debug.propagate_jinja_errors': 'True'
 }
 
 
 browsers = {
-    'firefox': webdriver.Firefox
-    # 'phantomjs': webdriver.PhantomJS,
+    'firefox': selenium.webdriver.Firefox
 }
 
 
-@pytest.fixture(scope="module")
-def jinja2_env():
-    app = zeit.web.core.application.Application()
-    app.settings = settings
-    app.configure_pyramid()
-    return app.configure_jinja()
+def test_asset_path(*parts):
+    """Return full file-system path for given test asset path."""
+    return abspath(join(dirname(zeit.web.core.__file__), 'data', *parts))
+
+
+def test_asset(path):
+    """Return file-object for given test asset path."""
+    return open(pkg_resources.resource_filename(
+        'zeit.web.core', 'data' + path), 'rb')
 
 
 @pytest.fixture
@@ -121,25 +118,50 @@ def app_settings():
     return settings.copy()
 
 
+@pytest.fixture(scope='module')
+def jinja2_env():
+    app = zeit.web.core.application.Application()
+    app.settings = settings.copy()
+    app.configure_pyramid()
+    return app.configure_jinja()
+
+
 @pytest.fixture(scope='session')
-def application():
+def application(request):
+    plone.testing.zca.pushGlobalRegistry()
+    zope.browserpage.metaconfigure.clear()
+    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **settings)
-    wsgi = ImageTransformationMiddleware(app, secret='time')
+    wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(app, secret='time')
     wsgi.zeit_app = factory
     return wsgi
 
 
+@pytest.fixture(scope='session')
+def debug_application(request):
+    plone.testing.zca.pushGlobalRegistry()
+    zope.browserpage.metaconfigure.clear()
+    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
+    app_settings = settings.copy()
+    app_settings['debug.show_exceptions'] = ''
+    return repoze.bitblt.processor.ImageTransformationMiddleware(
+        zeit.web.core.application.Application()({}, **app_settings),
+        secret='time'
+    )
+
+
 @pytest.fixture
 def config(request):
-    config = setUp(settings=settings)
-    request.addfinalizer(tearDown)
+    config = pyramid.testing.setUp(settings=settings)
+    request.addfinalizer(pyramid.testing.tearDown)
     return config
 
 
 @pytest.fixture
 def dummy_request(request, config):
-    config.manager.get()['request'] = req = DummyRequest(is_xhr=False)
+    req = pyramid.testing.DummyRequest(is_xhr=False)
+    config.manager.get()['request'] = req
     return req
 
 
@@ -159,11 +181,20 @@ def linkreach():
 @pytest.fixture(scope='session')
 def testserver(application, request):
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6543  # XXX Why not use the default (random) port?
+    server.port = 6543
     server.wsgi_app = application
     server.setUp()
-    # Convenience / compatibility with pytest-localserver which was used here
-    # previously.
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
+    return server
+
+
+@pytest.fixture(scope='session')
+def debug_testserver(debug_application, request):
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6547
+    server.wsgi_app = debug_application
+    server.setUp()
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server
@@ -194,24 +225,19 @@ def http_testserver(request):
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
     if request.param == 'firefox':
-        profile = webdriver.FirefoxProfile()
+        profile = selenium.webdriver.FirefoxProfile()
         profile.set_preference('network.http.use-cache', False)
-        b = browsers[request.param](firefox_profile=profile)
+        browser = browsers[request.param](firefox_profile=profile)
     else:
-        b = browsers[request.param]()
+        browser = browsers[request.param]()
 
-    request.addfinalizer(lambda *args: b.quit())
-    return b
-
-
-@pytest.fixture
-def asset():
-    return test_asset
+    request.addfinalizer(lambda *args: browser.quit())
+    return browser
 
 
 @pytest.fixture
 def appbrowser(application):
-    """ Returns an instance of `webtest.TestApp`. """
+    """Returns an instance of `webtest.TestApp`."""
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
 
@@ -219,9 +245,9 @@ def appbrowser(application):
 @pytest.fixture
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
-        response = lxml.etree.parse(
-            '%s%s' % (self.entry_point, path_of_article(unique_id)))
-        return _place_answers_under_parent(response)
+        path = zeit.web.core.comments.path_of_article(unique_id)
+        response = lxml.etree.parse(''.join([self.entry_point, path]))
+        return zeit.web.core.comments._place_answers_under_parent(response)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Agatho, 'collection_get', collection_get)
@@ -264,7 +290,7 @@ def testbrowser(request):
     return Browser
 
 
-class TestApp(TestAppBase):
+class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
         if headers is None:
