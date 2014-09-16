@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - BUG-7: Feature-Longform should be rendered on preview path with right logo (reapplied)
 
+- BUG-8: Breadcrumbs for feature longform
+
 - ZMO-880: Serve ZON 503 page on internal server error
 
 - ZMO-880: Improve rendering robustness
