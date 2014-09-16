@@ -9,42 +9,34 @@
 
     $.extend({
         /**
-         * Creates a function that delays the invocation of `fn` until after `timeout`
-         * milliseconds have elapsed since the last time it was invoked. If `invokeAsap`
+         * Creates a function that delays the invocation of `func` until after `wait`
+         * milliseconds have elapsed since the last time it was invoked. If `immediate`
          * is passed, trigger the function on the leading edge, instead of the trailing.
          * @memberOf jQuery
          * @category Function
-         * @param {Function} fn The function to debounce.
-         * @param {number} timeout The number of milliseconds to delay.
-         * @param {boolean} [invokeAsap] invoke `fn` on the leading edge of the timeout
+         * @param {Function} func The function to debounce.
+         * @param {number} wait The number of milliseconds to delay.
+         * @param {boolean} [immediate] invoke `func` on the leading edge of the timeout
          */
-        debounce: function(fn, timeout, invokeAsap, context) {
-
-            if (arguments.length === 3 && typeof invokeAsap !== 'boolean') {
-                context = invokeAsap;
-                invokeAsap = false;
-            }
-
-            var timer;
+        debounce: function(func, wait, immediate) {
+            var timeout;
 
             return function() {
+                var context = this,
+                    args = arguments;
 
-                var args = arguments;
-                context = context || this;
-
-                if (invokeAsap && !timer) {
-                    fn.apply(context, args);
+                if (timeout) {
+                    clearTimeout(timeout);
+                } else if (immediate) {
+                    func.apply(context, args);
                 }
 
-                clearTimeout(timer);
-
-                timer = setTimeout(function() {
-                    if (!invokeAsap) {
-                        fn.apply(context, args);
+                timeout = setTimeout(function() {
+                    timeout = null;
+                    if (!immediate) {
+                        func.apply(context, args);
                     }
-
-                    timer = null;
-                }, timeout);
+                }, wait);
             };
         }
     });
