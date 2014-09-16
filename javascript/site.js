@@ -6,7 +6,7 @@
 // required plain vanilla JS programs here
 require([
     'web.core/images',
-    'web.site/nav',
+    'web.site/nav'
 ], function( images, nav ) {
     images.init();
     nav.init();

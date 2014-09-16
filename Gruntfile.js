@@ -129,6 +129,7 @@ module.exports = function(grunt) {
             // restrain to zeit.web.site for the moment
             dist: {
                 src: [
+                    project.sourceDir + 'javascript/*.js',
                     project.sourceDir + 'javascript/web.core/**/*.js',
                     project.sourceDir + 'javascript/web.site/**/*.js'
                 ]

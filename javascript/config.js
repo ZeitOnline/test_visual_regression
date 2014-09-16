@@ -19,17 +19,17 @@ require.config({
     // a shim is need for jQuery Plugins to load
     // add the name or path and an array of required scripts
     shim: {
-        'bxSlider' : ['jquery'],
-        'web.magazin/plugins/jquery.inlinegallery': ['bxSlider', 'jquery'],
-        'web.magazin/plugins/jquery.switchvideo': ['jquery'],
-        'web.magazin/plugins/jquery.backgroundvideo': ['jquery', 'modernizr'],
-        'web.magazin/plugins/jquery.animatescroll': ['jquery'],
-        'web.magazin/plugins/jquery.parseesi': ['jquery','esiparser'],
+        'bxSlider': [ 'jquery' ],
+        'web.magazin/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery' ],
+        'web.magazin/plugins/jquery.switchvideo': [ 'jquery' ],
+        'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
+        'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
+        'web.magazin/plugins/jquery.parseesi': [ 'jquery', 'esiparser' ],
         'sjcl': {
             exports: 'sjcl'
         },
         'freewall': {
-            deps: ['jquery'],
+            deps: [ 'jquery' ],
             exports: 'freewall'
         }
     }

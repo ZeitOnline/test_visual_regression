@@ -15,18 +15,18 @@ require.config({
 require([
     'web.core/images',
     'web.magazin/errors',
-    'web.magazin/fontloader_body',
+    'web.magazin/fontloader',
     'web.magazin/main-nav',
     'web.magazin/tabs',
     'web.magazin/comments',
     'web.magazin/sharing',
     'web.magazin/cards',
     'web.magazin/copyrights',
-    'web.magazin/photocluster',
-], function( images, errors, fontloader_body, main_nav, tabs, comments, sharing, cards, copyrights, photocluster) {
+    'web.magazin/photocluster'
+], function( images, errors, fontloader, nav, tabs, comments, sharing, cards, copyrights, photocluster ) {
     errors.init();
-    fontloader_body.init();
-    main_nav.init();
+    fontloader.init();
+    nav.init();
     tabs.init();
     comments.init();
     sharing.init();
@@ -45,10 +45,10 @@ require([
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.animatescroll',
     'web.magazin/plugins/jquery.parseesi'
-], function () {
+], function() {
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
-    $( 'main' ).animateScroll({selector: '.js-scroll'});
+    $( 'main' ).animateScroll({ selector: '.js-scroll' });
     $( 'div[data-type = "esi-content"]' ).parseEsi();
 });
