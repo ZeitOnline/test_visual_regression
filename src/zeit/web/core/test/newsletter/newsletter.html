@@ -4,6 +4,9 @@
         {% if teaser.image %}
             {{teaser.image}}
         {% endif %}
+        {% for video in teaser.videos %}
+            {{video.title}}
+        {% endfor %}
         {{teaser.title}}: {{teaser.url}}
     {% endfor %}
 {% endfor %}

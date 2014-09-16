@@ -6,9 +6,19 @@ Change log for zeit.frontend
 
 - BUG-7: Feature-Longform should be rendered on preview path with right logo
 
+- ZMO-880: Serve ZON 503 page on internal server error
+
+- ZMO-880: Improve rendering robustness
+
 - ZON-923: Split zeit.frontend into three sub-packages
 
 - FIX: Patch reify decorator to deliver accurate traceback
+
+
+0.16.1 (2014-09-16)
+-------------------
+
+- HOTFIX: Fix corrupted image xml handling
 
 
 0.16 (2014-09-15)

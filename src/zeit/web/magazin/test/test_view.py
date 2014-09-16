@@ -14,7 +14,6 @@ import zeit.content.article.edit.reference
 
 import zeit.web.core
 import zeit.web.core.gallery
-import zeit.web.core.test
 import zeit.web.core.view
 import zeit.web.magazin.view_article
 
@@ -701,8 +700,8 @@ def test_caching_headers_should_be_set(testserver, testbrowser):
     assert browser.headers['cache-control'] == 'max-age=300'
 
 
-def test_article_should_have_correct_js_view(testserver):
-    bc = zeit.web.core.test.Browser('%s/artikel/01' % testserver.url).contents
+def test_article_should_have_correct_js_view(testbrowser, testserver):
+    bc = testbrowser('%s/artikel/01' % testserver.url).contents
     assert "window.ZMO = {" in bc
     assert "'banner_channel': 'zeitmz/modeunddesign/article'," in bc
     assert "'ressort': 'zeit-magazin'," in bc
