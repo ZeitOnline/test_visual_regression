@@ -47,9 +47,9 @@ module.exports = function(grunt) {
         bower: {
             install: {
                 options: {
-                    targetDir: '.',
-                    // layout: 'byType',
+                    targetDir: project.sourceDir,
                     layout: function(type, component, source) {
+                        // type seems useless - use cheesy quickfix
                         var target = 'javascript/vendor';
 
                         if (/\.css$/.test(source)) {
