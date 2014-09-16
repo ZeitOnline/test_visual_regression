@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.17 (unreleased)
 -----------------
 
+- BUG-7: Feature-Longform should be rendered on preview path with right logo
+
 - ZON-923: Split zeit.frontend into three sub-packages
 
 - FIX: Patch reify decorator to deliver accurate traceback
