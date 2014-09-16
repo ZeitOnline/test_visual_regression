@@ -3,12 +3,6 @@
  * @version  0.1
  */
 
-require.config({
-    paths: {
-        'web.magazin/tabs': 'web.magazin/tabs'
-    }
-});
-
 // A hack for Modernizr and AMD.
 // This lets Modernizr be in the <head> and also compatible with other modules.
 define('modernizr', [], window.Modernizr);
