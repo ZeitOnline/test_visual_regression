@@ -1,4 +1,5 @@
 import pyramid.events
+import re
 import zeit.web.core.application
 import zope.component
 import zope.processlifetime
@@ -6,7 +7,7 @@ import zope.processlifetime
 
 class Application(zeit.web.core.application.Application):
 
-    DONT_SCAN = ['.testing', '.test']
+    DONT_SCAN = zeit.web.core.application.Application.DONT_SCAN_TESTS
 
     def configure_zca(self):
         # ZCA setup is done by preview.zcml, which is included by the CMS
