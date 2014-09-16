@@ -9,7 +9,6 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
-        'underscore': 'vendor/underscore',
         'freewall': 'vendor/freewall',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'libs/jquery.bxslider',
