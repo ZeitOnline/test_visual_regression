@@ -5,9 +5,12 @@ import re
 import urlparse
 import pkg_resources
 
-from grokcore.component import adapter, implementer
+from grokcore.component import adapter
+from grokcore.component import implementer
 from venusian import Scanner
+import pyramid.authorization
 import pyramid.config
+import pyramid_beaker
 import pyramid_jinja2
 import zope.app.appsetup.product
 import zope.component
@@ -19,17 +22,20 @@ from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector
 
 from zeit.web.core.article import IColumnArticle
-from zeit.web.core.article import ILongformArticle
 from zeit.web.core.article import IFeatureLongform
+from zeit.web.core.article import ILongformArticle
 from zeit.web.core.article import IPhotoclusterArticle
 from zeit.web.core.article import IShortformArticle
 from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
+import zeit.web.core.appinfo
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
+import zeit.web.core.security
 import zeit.web.core.template
+
 
 log = logging.getLogger(__name__)
 
@@ -56,12 +62,12 @@ class Application(object):
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.frontend_banner-source', ''))
-        zeit.web.core.banner.banner_list = \
-            zeit.web.core.banner.make_banner_list(banner_source)
+        zeit.web.core.banner.banner_list = (
+            zeit.web.core.banner.make_banner_list(banner_source))
         iqd_mobile_ids_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
-        zeit.web.core.banner.iqd_mobile_ids = \
-            zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source)
+        zeit.web.core.banner.iqd_mobile_ids = (
+            zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -82,7 +88,7 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
-        self.config.include("cornice")
+        self.config.include('cornice')
 
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
@@ -94,8 +100,9 @@ class Application(object):
         config.add_static_view(name='img', path='zeit.web.static:img/')
         config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
 
-        # ToDo: Is this still needed. Can it be removed?
-        config.add_static_view(name='mocks', path='zeit.web.core:dummy_html/')
+        if not self.settings.get('debug.show_exceptions'):
+            config.add_view(view=zeit.web.core.view.service_unavailable,
+                            context=Exception)
 
         def asset_url(request, path, **kw):
             kw['_app_url'] = join_url_path(
@@ -115,24 +122,27 @@ class Application(object):
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
 
-        zeit.web.core.template.default_teaser_images = \
-            self.settings['default_teaser_images']
+        config.include('pyramid_beaker')
+
+        zeit.web.core.template.default_teaser_images = (
+            self.settings['default_teaser_images'])
 
         zeit.web.core.template.image_scales = dict(
             zeit.web.core.template.get_image_scales(
                 self.settings['vivi_zeit.frontend_image-scales']))
 
-        from pyramid.authorization import ACLAuthorizationPolicy
-        from .security import CommunityAuthenticationPolicy
-        import pyramid_beaker
-        config.include("pyramid_beaker")
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)
         config.set_session_factory(session_factory)
-        config.set_authentication_policy(CommunityAuthenticationPolicy())
-        config.set_authorization_policy(ACLAuthorizationPolicy())
-        from zeit.web.core.appinfo import assemble_app_info
-        config.add_request_method(assemble_app_info, 'app_info', reify=True)
+
+        config.set_authentication_policy(
+            zeit.web.core.security.CommunityAuthenticationPolicy())
+        config.set_authorization_policy(
+            pyramid.authorization.ACLAuthorizationPolicy())
+
+        config.add_request_method(zeit.web.core.appinfo.assemble_app_info,
+                                  'app_info', reify=True)
+
         return config
 
     def get_repository(self, request):
@@ -145,25 +155,31 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
-        jinja = self.config.registry.getUtility(
+        env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
 
-        default_loader = jinja.loader
-        jinja.loader = zeit.web.core.template.PrefixLoader({
+        env.trim_blocks = True
+
+        default_loader = env.loader
+        env.loader = zeit.web.core.template.PrefixLoader({
             None: default_loader,
             'dav': zeit.web.core.template.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
-        jinja.trim_blocks = True
+        if not self.settings.get('debug.propagate_jinja_errors'):
+            # If the application is not running in debug mode: overlay the
+            # jinja environment with a custom, more fault tolerant one.
+            env.__class__ = zeit.web.core.template.Environment
+            env = env.overlay()
 
-        Scanner(env=jinja).scan(
+        Scanner(env=env).scan(
             zeit.web.core,
             categories=('jinja',),
             ignore=self.DONT_SCAN
         )
 
-        return jinja
+        return env
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
@@ -260,7 +276,6 @@ factory = Application()
 
 
 class URLPrefixMiddleware(object):
-
     """Removes a path prefix from the PATH_INFO if it is present.
     We use this so that if an ``asset_prefix`` is configured, we respond
     correctly for URLs both with and without the asset_prefix -- otherwise
@@ -319,7 +334,6 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                     zope.interface.alsoProvides(context, IColumnArticle)
                 elif template == 'photocluster':
                     zope.interface.alsoProvides(context, IPhotoclusterArticle)
-
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
                 if IGalleryMetadata(context).type == 'zmo-product':
                     zope.interface.alsoProvides(context, IProductGallery)
