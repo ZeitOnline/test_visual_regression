@@ -149,8 +149,9 @@
                     {%  block content %}{% endblock content %}
                 </main>
 
-                {{ lama.breadcrumbs(view.breadcrumb) }}
-
+                {% block breadcrumbs %}
+                    {{ lama.breadcrumbs(view.breadcrumb) }}
+                {% endblock breadcrumbs %}
                 {% block footer %}
                     <footer class="main-footer">
                         <div class="main-footer__box is-constrained is-centered">
