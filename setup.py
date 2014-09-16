@@ -35,6 +35,7 @@ setup(
         'pyramid_tm',
         'pyramid_debugtoolbar',
         'pyramid_mako',
+        'pyramid_zodbconn',
         'pytz',
         'repoze.bitblt',
         'repoze.vhm',
