@@ -16,7 +16,7 @@ Change log for zeit.frontend
 0.16.1 (2014-09-16)
 -------------------
 
-- BUG-8: Fix corrupted image xml handling
+- BUG-10: Fix corrupted image xml handling
 
 
 0.16 (2014-09-15)
