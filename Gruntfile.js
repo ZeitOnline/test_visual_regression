@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         compass: {
             // general options
             options: {
-                // binPath: project.binDir + 'compass',
+                bundleExec: true,
                 cssDir: project.codeDir + 'css',
                 fontsPath: project.codeDir + 'fonts',
                 httpPath: '/',
