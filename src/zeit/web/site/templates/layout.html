@@ -25,13 +25,14 @@
 	<link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
 	<!--[if lte IE 8]>
-		<link href="{{request.asset_url('css/zon/all-old-ie.css')}}" media="screen" rel="stylesheet" type="text/css" />
+		<link href="{{request.asset_url('css/web.site/all-old-ie.css')}}" media="screen" rel="stylesheet" type="text/css" />
 	<![endif]-->
 	<!--[if gt IE 8]><!-->
-		<link href="{{request.asset_url('css/zon/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
+		<link href="{{request.asset_url('css/web.site/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
 	<!--<![endif]-->
 
 	<!-- Scriptkram Head -->
+	<script src="{{request.asset_url('js/libs/modernizr-custom.js')}}"></script>
 
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -47,5 +48,11 @@
 			<footer class="footer" role="contentinfo"></footer>
 		</div>
 	</div>
+	<script>
+		var require = {
+			urlArgs: "v={{request.registry.settings.version_hash | hide_none}}"
+		};
+	</script>
+	<script data-main="{{request.asset_url('js/site.js')}}" src="{{request.asset_url('js/vendor/require.js')}}"></script>
 </body>
 </html>
