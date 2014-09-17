@@ -16,6 +16,7 @@ def test_adwords_for_article(application):
     adwords = ','.join(view.adwords)
     assert adwords == 'zeitonline,zeitmz'
 
+
 def test_adwords_for_lead_article(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
@@ -26,11 +27,13 @@ def test_adwords_for_lead_article(application):
     adwords = ','.join(view.adwords)
     assert adwords == 'zeitonline,zeitmz,ToM'
 
+
 def test_adwords_for_longform(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     view = zeit.web.magazin.view_article.LongformArticle(context, mock.Mock())
     adwords = ','.join(view.adwords)
     assert adwords == 'zeitonline,zeitmz,longform,noiqdband'
+
 
 def test_adwords_for_feature_longform(application):
     context = zeit.cms.interfaces.ICMSContent(
@@ -38,6 +41,7 @@ def test_adwords_for_feature_longform(application):
     view = zeit.web.magazin.view_article.FeatureLongform(context, mock.Mock())
     adwords = ','.join(view.adwords)
     assert adwords == 'zeitonline,longform,noiqdband'
+
 
 def test_adwords_for_centerpage(application):
     context = zeit.cms.interfaces.ICMSContent(

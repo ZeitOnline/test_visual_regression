@@ -4,9 +4,21 @@ Change log for zeit.frontend
 0.17 (unreleased)
 -----------------
 
+- ZON-927: Configure grunt tasks
+
+- ZMO-880: Serve ZON 503 page on internal server error
+
+- ZMO-880: Improve rendering robustness
+
 - ZON-923: Split zeit.frontend into three sub-packages
 
 - FIX: Patch reify decorator to deliver accurate traceback
+
+
+0.16.1 (2014-09-16)
+-------------------
+
+- BUG-10: Fix corrupted image xml handling
 
 
 0.16 (2014-09-15)

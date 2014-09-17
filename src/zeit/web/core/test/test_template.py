@@ -1,5 +1,6 @@
 import datetime
 import os
+import sys
 import time
 
 import gocept.httpserverlayer.static
@@ -173,7 +174,7 @@ def test_jinja_env_registrator_registers_only_after_scanning(testserver):
     assert jinja.foo == {}
 
     scanner = venusian.Scanner(env=jinja)
-    scanner.scan(zeit.web.core.test.test_template, categories=('jinja',),)
+    scanner.scan(sys.modules[__name__], categories=('jinja',),)
 
     assert do_foo() == 42
     assert 'do_foo' in jinja.foo
