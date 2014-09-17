@@ -1,0 +1,31 @@
+{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp with context %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama with context %}
+
+{%- set image = get_teaser_image(teaser_block, teaser) %}
+{% set commentcount = view.teaser_get_commentcount(teaser.uniqueId) %}
+
+<article class="teaser teaser--{{ self.format() }}">
+    <h2 class="teaser__heading">
+        <a class="teaser__combined-link" title="{{ teaser.kicker }} – {{ teaser.title }}" href="{{ teaser|create_url }}">
+            <span class="teaser__kicker">{{ teaser.kicker }}</span>
+            <span class="teaser__title">{{ teaser.title }}</span>
+        </a>
+    </h2>
+    {% if image != false %}
+    <figure class="teaser__media">
+        <a class="teaser__media-link" title="{{ teaser.kicker }} – {{ teaser.title }}" href="{{ teaser|create_url }}">
+            <img class="teaser__media-item" alt="{{ teaser.kicker }} – {{ teaser.title }}" src="">
+        </a>
+    </figure>
+    {% endif %}
+    <div class="teaser__container">
+        <p class="teaser__text">{{ teaser.teaserText }}</p>
+        <div class="teaser__byline">{{ teaser.infoline }}</div>
+        <div class="teaser__metadata">
+            <time class="teaser__datetime" datetime="{{ teaser.dateTime }}">{{ teaser.relativeTime }}</time>
+            {% if commentcount > 0 %}
+            <a class="teaser__commentcount" href="{{ teaser|create_url }}#comments" title="{{commentcount}} Kommentare">{{commentcount}} Kommentare</a>
+            {% endif %}
+        </div>
+    </div>
+</article>
