@@ -1,0 +1,228 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama with context %}
+<!DOCTYPE html>
+<!--[if lt IE 8]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 ie nurtext" lang="de"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9 ie" lang="de"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 ie" lang="de"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class='no-js modern-browser' lang='de'>
+<!--<![endif]-->
+    <head>
+        <meta charset='utf-8'>
+        <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+        <title>{{view.pagetitle}}</title>
+        <meta name="description" content="{{view.pagedescription}}">
+        {% if view.rankedTagsList -%}
+            <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
+        {%- endif %}
+        <meta name="robots" content="{{view.meta_robots}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" id="viewport-meta">
+
+        <script>
+            window.ZMO = {
+                home: '{{ request.asset_url("/") }}',
+                scriptsURL: '{{ request.app_info.scripts_url|hide_none }}',
+                view: {
+                    {% for key, value in view.js_vars -%}
+                        '{{ key }}': '{{ value|remove_break }}',
+                    {% endfor -%}
+
+                    {# use to get view values savely #}
+
+                    get: function( key ) {
+                        return this[key] ? this[key] : '';
+                    }
+                },
+                clientWidth: Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+                mobileWidth: 768,
+                isMobileView: function() {
+                    return this.clientWidth < this.mobileWidth;
+                },
+                viewport: {
+                    meta: document.getElementById('viewport-meta'),
+                    standard: document.getElementById('viewport-meta').getAttribute('content'),
+                    landscape: 'width=1280',
+                    set: function() {
+                        if ( screen.width === window.ZMO.mobileWidth && Math.abs( window.orientation ) === 90 ) {
+                            this.meta.setAttribute( 'content', this.landscape );
+                        } else {
+                            this.meta.setAttribute( 'content', this.standard );
+                        }
+                    }
+                }
+            };
+
+        {%- if view.context.advertising_enabled %}
+
+
+            window.ZMO.viewport.set();
+
+            if ( window.addEventListener ) {
+                window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
+            }
+        {%- endif %}
+
+        </script>
+
+        <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
+        <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+        <!--[if lte IE 8]>
+            <link href="{{request.asset_url('css/web.magazin/all-old-ie.css')}}" media="screen" rel="stylesheet" type="text/css" />
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link href="{{request.asset_url('css/web.magazin/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
+        <!--<![endif]-->
+        <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
+
+        <!-- date metadata -->
+        {{lama.date_meta(view)}}
+
+        <!-- sharing metadata -->
+        {{lama.sharing_meta(view,request)}}
+
+        <script src="{{request.asset_url('js/libs/modernizr-custom.js')}}"></script>
+        <script src="{{request.asset_url('js/web.magazin/fontloader-head.js')}}"></script>
+
+        <script>
+            /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+            window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
+            grunticon( [ "{{request.asset_url('css/icons/magazin.data.svg.css')}}", "{{request.asset_url('css/icons/magazin.data.png.css')}}", "{{request.asset_url('css/icons/magazin.fallback.css')}}" ] );
+        </script>
+        <noscript>
+            <link href="{{request.asset_url('css/icons/magazin.fallback.css')}}" rel="stylesheet">
+        </noscript>
+        <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
+        <script type="text/javascript" src="{{request.asset_url('js/libs/iqd/adam.js')}}"></script>
+        <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
+        {% if view.context.advertising_enabled %}
+            <!--[if gt IE 9]>-->
+            <script src="{{request.asset_url('js/libs/iqd/sasmobile.js')}}"></script>
+            <!-- <![endif]-->
+        {% endif %}
+
+        {{lama.iqd_init()}}
+        {{lama.iqd_init_mobile(view.iqd_mobile_settings)}}
+        {{lama.iqd_krux_head()}}
+    </head>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        <!-- tracking at top -->
+        {{lama.ivw_ver2_tracking(view,request)}}
+        {{lama.ivw_ver1_tracking(view.banner_channel)}}
+        {{lama.iqd_nuggad()}}
+        {{lama.iqd_krux_body()}}
+
+        <div class="page-wrap">
+
+        {% block adplace_top %}
+            <!-- mobile ad at top -->
+            <div class="iqd_mobile__adplace">
+                <div id="sas_13500"></div>
+            </div>
+            <div id="iqd_mainAd" >
+                <div id="iqd_align_Ad">
+                    <div id="iqd_topAd">
+                        {{ lama.adplace(view.banner(1), view) }}
+                        <div id="iqd_rightAd">
+                            {{ lama.adplace(view.banner(2), view) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock adplace_top %}
+
+        {% block page_wrap_inner %}
+            <div class="page-wrap--inner" id="js-page-wrap-inner">
+        {% endblock page_wrap_inner %}
+
+                {% block navigation %}
+                    {{ lama.main_nav(view.context.main_nav_full_width,request) }}
+                {% endblock navigation %}
+
+                {% block adplace_billboard %}
+                    {{ lama.adplace(view.banner(3), view) }}
+                {% endblock adplace_billboard %}
+
+                {% block page_title %}
+                {% endblock page_title %}
+
+                <main role="main" class="main">
+                    {%  block content %}{% endblock content %}
+                </main>
+
+                {{ lama.breadcrumbs(view.breadcrumb) }}
+
+                {% block footer %}
+                    <footer class="main-footer">
+                        <div class="main-footer__box is-constrained is-centered">
+                            {% block footer_logo %}
+                                <div class="main-footer__logo icon-logo-zmo-small"></div>
+                            {% endblock footer_logo %}
+                            <div class="main-footer__links">
+                                <div>
+                                    <ul>
+                                        <li>VERLAG</li>
+                                        <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
+                                        <li><a href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul>
+                                        {% if view.copyrights %}<li><a class="js-toggle-copyrights">Bildrechte</a></li>{% endif -%}
+                                        <li><a href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</a></li>
+                                        <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</a></li>
+                                        <li><a href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</a></li>
+                                        <li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>
+                                        <li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                {% endblock footer %}
+
+                {% if view.copyrights -%}
+                    {{ lama.copyrights(view.copyrights) }}
+                {%- endif %}
+
+            </div><!-- end: #js-page-wrap-inner -->
+
+        {% block adplace_floor %}
+            <!-- mobile ad at bottom -->
+            <div class="iqd_mobile__adplace">
+                <div id="sas_13501"></div>
+            </div>
+        {% endblock adplace_floor %}
+
+        </div>
+
+        <div id="iqdLastNode">
+            <script type="text/javascript">
+                var IQDComplete = {
+                    init : function() {
+                        return true;
+                    }
+                };
+            </script>
+        </div>
+        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+
+        <!-- tracking at end -->
+        {{lama.ga_tracking()}}
+        {{lama.cc_tracking(view.banner_channel)}}
+        {{lama.meetrics_tracking()}}
+        {{lama.webtrekk_tracking(view,request)}}
+        {{lama.click_tracking(view.banner_channel)}}
+
+        <script>
+            var require = {
+                urlArgs: "v={{request.registry.settings.version_hash | hide_none}}"
+            };
+        </script>
+        <script data-main="{{request.asset_url('js/magazin.js')}}" src="{{request.asset_url('js/vendor/require.js')}}"></script>
+        <script type="text/javascript">
+            if( typeof window.sasmobile === 'function' && window.ZMO.isMobileView() ) {
+                iqd.callAds();
+            }
+        </script>
+    </body>
+</html>
