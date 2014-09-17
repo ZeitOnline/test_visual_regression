@@ -7,8 +7,8 @@ import zeit.content.cp.interfaces
 import zeit.web.core.view
 
 
-# @view_config(context=zeit.content.cp.interfaces.ICenterPage,
-#              renderer='templates/centerpage.html')
+@view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view.Base):
     """Main view class for ZEIT ONLINE centerpages."""
 
