@@ -5,47 +5,47 @@
 <!--[if IE 8]> <html lang="de" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="de" class="no-js"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <!-- http-equiv='X-UA-Compatible' via Server -->
-    <title>{{view.pagetitle}}</title>
-    <meta name="description" content="{{view.pagedescription}}">
-    {% if view.rankedTagsList -%}
-        <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
-    {%- endif %}
-    <meta name="robots" content="{{view.meta_robots}}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<!-- http-equiv='X-UA-Compatible' via Server -->
+	<title>{{view.pagetitle}}</title>
+	<meta name="description" content="{{view.pagedescription}}">
+	{% if view.rankedTagsList -%}
+		<meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
+	{%- endif %}
+	<meta name="robots" content="{{view.meta_robots}}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="apple-itunes-app" content="app-id=448633376">
-    <meta name="author" content="ZEIT ONLINE GmbH, Hamburg, Germany">
-    <meta name="application-name" content="ZEIT ONLINE">
-    <meta name="msapplication-TileImage" content="http://images.zeit.de/static/img/zo-icon-win8-144x144.png">
-    <meta name="msapplication-TileColor" content="#e6e6e6">
-    <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
-    <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+	<meta name="apple-itunes-app" content="app-id=448633376">
+	<meta name="author" content="ZEIT ONLINE GmbH, Hamburg, Germany">
+	<meta name="application-name" content="ZEIT ONLINE">
+	<meta name="msapplication-TileImage" content="http://images.zeit.de/static/img/zo-icon-win8-144x144.png">
+	<meta name="msapplication-TileColor" content="#e6e6e6">
+	<link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
+	<link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
-    <!--[if lte IE 8]>
-        <link href="{{request.asset_url('css/zon/all-old-ie.css')}}" media="screen" rel="stylesheet" type="text/css" />
-    <![endif]-->
-    <!--[if gt IE 8]><!-->
-        <link href="{{request.asset_url('css/zon/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
-    <!--<![endif]-->
+	<!--[if lte IE 8]>
+		<link href="{{request.asset_url('css/zon/all-old-ie.css')}}" media="screen" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+		<link href="{{request.asset_url('css/zon/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
+	<!--<![endif]-->
 
-    <!-- Scriptkram Head -->
+	<!-- Scriptkram Head -->
 
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
-    {% block skiplink %}
-    <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
-    {% endblock skiplink %}
-    <div class="page">
-        <div class="content">
-            <header class="header" role="banner"></header>
-            <main class="main" id="main" role="main">
-                {%  block main %}Hallo Welt{% endblock main %}
-            </main>
-            <footer class="footer" role="contentinfo"></footer>
-        </div>
-    </div>
-    </body>
+	{% block skiplink %}
+	<a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+	{% endblock skiplink %}
+	<div class="page">
+		<div class="content">
+			<header class="header" role="banner"></header>
+			<main class="main" id="main" role="main">
+				{%  block main %}Hallo Welt{% endblock main %}
+			</main>
+			<footer class="footer" role="contentinfo"></footer>
+		</div>
+	</div>
+</body>
 </html>
