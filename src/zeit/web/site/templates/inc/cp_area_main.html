@@ -1,1 +1,5 @@
-<!-- keepme -->
+{%- import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp with context -%}
+
+<div class="teaser-collection">
+    {{ cp.include_teaser_block(view.area_main) }}
+</div>
