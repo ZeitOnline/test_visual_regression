@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.frontend',
     url='https://github.com/ZeitOnline/friedbert',
-    version='0.16.dev0',
+    version='0.17.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -29,6 +29,7 @@ setup(
         'iso8601',
         'lxml',
         'martian',
+        'plone.testing [zca]',
         'pyramid',
         'pyramid_beaker',
         'pyramid_jinja2',
@@ -71,8 +72,8 @@ setup(
     ],
     entry_points={
         'paste.app_factory': [
-            'main=zeit.frontend.application:factory',
-            'preview=zeit.frontend.preview:factory',
+            'main=zeit.web.core.application:factory',
+            'preview=zeit.web.core.preview:factory',
         ],
     },
     extras_require={

@@ -1,9 +1,0 @@
-{% for group in view.body %}
-    {{group.title}}
-    {% for teaser in group.values() %}
-        {% if teaser.image %}
-            {{teaser.image}}
-        {% endif %}
-        {{teaser.title}}: {{teaser.url}}
-    {% endfor %}
-{% endfor %}
