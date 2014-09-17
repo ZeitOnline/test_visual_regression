@@ -9,7 +9,6 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
-        'freewall': 'vendor/freewall',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'libs/jquery.bxslider',
         'esiparser': 'libs/esiparser',
@@ -28,7 +27,8 @@ require.config({
         'sjcl': {
             exports: 'sjcl'
         },
-        'freewall': {
+        // to require the script at runtime we must use the full path
+        'vendor/freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'
         }
