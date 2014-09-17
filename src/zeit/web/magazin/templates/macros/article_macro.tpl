@@ -407,7 +407,7 @@
                 </p>
                 <p class="comment__form__actions">
                     <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
-                    <input type="hidden" name="content_id" value="<%- commentId %>">
+                    <input type="hidden" name="content_id" value="<% commentId %>">
                     <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
                 </p>
             </form>

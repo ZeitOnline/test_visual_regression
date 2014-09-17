@@ -1,0 +1,27 @@
+{
+	"browser": true, // set browser enviroment
+	"curly": true, // require curly braces around control structure
+	"eqeqeq": true, // prohibits the use of == and != in favor of === and !==
+	"forin": true, // requires all for in loops to filter object's items
+	"immed": true, // prohibits the use of immediate function invocations without wrapping them in parentheses
+	"indent": 4, // tabsize should be 4 spaces
+	"jquery": true, // set jquery globals
+	"latedef": true, // never use vars before they are defined
+	"noarg": true, // prohibits the use of arguments.caller and arguments.callee
+	"quotmark": true,	// enforces the consistency of quotation marks.
+							// true if you don't want to enforce one particular style but want some consistency
+							// "single" if you want to allow only single quotes
+							// "double" if you want to allow only double quotes
+	"undef": true, // just use defined var, If your variable is defined in another file, you can use /*global ... */ directive to tell JSHint about it
+	// "unused": true, // warn when you define and never use your variables
+	"globals": {
+		// AMD
+		"module":     true,
+		"require":    true,
+		"requirejs":  true,
+		"define":     true,
+
+		// Environments
+		"console":    true
+	}
+}

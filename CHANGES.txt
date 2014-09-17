@@ -4,6 +4,8 @@ Change log for zeit.frontend
 0.17 (unreleased)
 -----------------
 
+- ZON-927: Configure grunt tasks
+
 - ZMO-880: Serve ZON 503 page on internal server error
 
 - ZMO-880: Improve rendering robustness
