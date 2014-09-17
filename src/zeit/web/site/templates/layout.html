@@ -31,8 +31,26 @@
 		<link href="{{request.asset_url('css/web.site/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
 	<!--<![endif]-->
 
+	{%- include "zeit.web.site:templates/inc/meta/date.html" ignore missing -%}
+	{%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
+
+	{# Modernizr -#}
+	<script src="{{ request.asset_url('js/libs/modernizr-custom.js') }}"></script>
+	{# Grunticon SVG -#}
+	<script>
+		{% include "zeit.web.static:css/icons/grunticon.loader.js" %}
+
+		grunticon([
+			"{{ request.asset_url('css/icons/site.data.svg.css') }}",
+			"{{ request.asset_url('css/icons/site.data.png.css') }}",
+			"{{ request.asset_url('css/icons/site.fallback.css') }}"
+		]);
+	</script>
+	<noscript>
+		<link href="{{ request.asset_url('css/icons/site.fallback.css') }}" rel="stylesheet">
+	</noscript>
+
 	<!-- Scriptkram Head -->
-	<script src="{{request.asset_url('js/libs/modernizr-custom.js')}}"></script>
 
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">

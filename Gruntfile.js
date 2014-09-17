@@ -212,6 +212,7 @@ module.exports = function(grunt) {
 
         grunticon: {
             options: {
+                loadersnippet: 'grunticon.loader.js',
                 defaultWidth: '100px',
                 defaultHeight: '100px'
             },
@@ -227,7 +228,6 @@ module.exports = function(grunt) {
                     datapngcss: 'magazin.data.png.css',
                     urlpngcss: 'magazin.fallback.css',
                     previewhtml: 'magazin.preview.html',
-                    loadersnippet: 'magazin.loader.js',
                     pngfolder: 'magazin'
                 }
             },
@@ -243,7 +243,6 @@ module.exports = function(grunt) {
                     datapngcss: 'site.data.png.css',
                     urlpngcss: 'site.fallback.css',
                     previewhtml: 'site.preview.html',
-                    loadersnippet: 'site.loader.js',
                     pngfolder: 'site'
                 }
             }
