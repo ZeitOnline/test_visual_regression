@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 from hashlib import sha1
-from PIL import Image
 from StringIO import StringIO
 
+from PIL import Image
 
-def test_image_download(appbrowser, asset):
+import zeit.cms.interfaces
+
+
+def test_image_download(appbrowser):
     path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
     result = appbrowser.get(path)
-    assert ''.join(result.app_iter) == asset(path).read()
+    image = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/' + path)
+    assert ''.join(result.app_iter) == image.open().read()
     assert result.headers['Content-Length'] == '4843'
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers[
         'Content-Disposition'] == 'inline; filename="bnd-148x84.jpg"'
 
 
-def test_scaled_image_download(appbrowser, asset):
+def test_scaled_image_download(appbrowser):
     path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
     signature = sha1('80:60:time').hexdigest()      # we know the secret! :)
     result = appbrowser.get('/bitblt-80x60-' + signature + path)
@@ -26,7 +30,7 @@ def test_scaled_image_download(appbrowser, asset):
         'Content-Disposition'] == 'inline; filename="bnd-148x84.jpg"'
 
 
-def test_scaled_image_download_with_bad_signature(appbrowser, asset):
+def test_scaled_image_download_with_bad_signature(appbrowser):
     path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
     signature = sha1('80:60:foobar').hexdigest()      # we know the secret! :)
     result = appbrowser.get('/bitblt-80x60-' + signature + path)
