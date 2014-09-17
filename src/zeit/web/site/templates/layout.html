@@ -7,12 +7,12 @@
 <head>
 	<meta charset="utf-8">
 	<!-- http-equiv='X-UA-Compatible' via Server -->
-	<title>{{view.pagetitle}}</title>
-	<meta name="description" content="{{view.pagedescription}}">
+	<title>{{ view.pagetitle }}</title>
+	<meta name="description" content="{{ view.pagedescription }}">
 	{% if view.rankedTagsList -%}
-		<meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
+		<meta name="keywords" content="{{ view.rankedTagsList | replace_list_seperator(', ') }}">
 	{%- endif %}
-	<meta name="robots" content="{{view.meta_robots}}">
+	<meta name="robots" content="{{ view.meta_robots }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<meta name="apple-itunes-app" content="app-id=448633376">
@@ -25,10 +25,10 @@
 	<link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
 	<!--[if lte IE 8]>
-		<link href="{{request.asset_url('css/web.site/all-old-ie.css')}}" media="screen" rel="stylesheet" type="text/css" />
+		<link href="{{ request.asset_url('css/web.site/all-old-ie.css') }}" media="screen" rel="stylesheet" type="text/css">
 	<![endif]-->
 	<!--[if gt IE 8]><!-->
-		<link href="{{request.asset_url('css/web.site/screen.css')}}" media="screen" rel="stylesheet" type="text/css" />
+		<link href="{{ request.asset_url('css/web.site/screen.css') }}" media="screen" rel="stylesheet" type="text/css">
 	<!--<![endif]-->
 
 	{%- include "zeit.web.site:templates/inc/meta/date.html" ignore missing -%}
@@ -61,16 +61,16 @@
 		<div class="content">
 			<header class="header" role="banner"></header>
 			<main class="main" id="main" role="main">
-				{%  block main %}Hallo Welt{% endblock main %}
+				{% block main %}Hallo Welt{% endblock main %}
 			</main>
 			<footer class="footer" role="contentinfo"></footer>
 		</div>
 	</div>
 	<script>
 		var require = {
-			urlArgs: "v={{request.registry.settings.version_hash | hide_none}}"
+			urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
 		};
 	</script>
-	<script data-main="{{request.asset_url('js/site.js')}}" src="{{request.asset_url('js/vendor/require.js')}}"></script>
+	<script data-main="{{ request.asset_url('js/site.js') }}" src="{{ request.asset_url('js/vendor/require.js') }}"></script>
 </body>
 </html>
