@@ -8,7 +8,7 @@
 
 .teaser
     +pie-clearfix
-    padding: em(20px) 0
+    padding: $petite 0
     border-bottom: 1px solid #ccc
     +respond-min($break-tablet-portrait)
         border-bottom: none
@@ -18,13 +18,13 @@
 
 .teaser--small
     +respond-min($break-phablet)
-        padding: em(20px) 0 em(20px) $teaser-image-phablet-width + em(20px)
+        padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
         position: relative
-    // padding: em(20px) 0 em(20px) $teaser-image-width + em(20px)
+    // padding: $petite 0 $petite $teaser-image-width + $petite
 
 .teaser__heading
     font-size: 1em
-    margin-bottom: em(22px)
+    margin: 0 0 em(22px) 0
 
 .teaser__combined-link
     color: $color-text
@@ -70,7 +70,7 @@
         display: block
         position: absolute
         left: 0
-        top: em(20px)
+        top: $petite
         width: $teaser-image-phablet-width
 
 .teaser__media--small[data-showimagemobile="true"]
