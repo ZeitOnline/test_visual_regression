@@ -1,0 +1,16 @@
+*
+	+box-sizing(border-box)
+
+body
+	background: $color-body-bg
+	margin: 0
+	padding: 0
+
+.content
+	background: $color-page-bg // we need background here, if page is colored
+	width: 100%
+	+respond-min($break-tablet-portrait)
+		width: $break-tablet-portrait-px
+	+respond-min($break-desktop)
+		margin: 0 auto
+		width: $break-desktop-px
