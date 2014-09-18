@@ -1,0 +1,21 @@
+*
+    +box-sizing(border-box)
+
+html
+
+body
+    +tablet
+    font-size: $font-m
+    line-height: $base-line-height
+    color: $color-text
+    margin: 0
+    padding: 0
+
+img
+    max-width: 100%
+    height: auto
+    display: block
+
+a
+    +link-colors($color-link--default, $color-link--hover, $color-link--hover, $color-link--default, $color-link--hover)
+    text-decoration: none
