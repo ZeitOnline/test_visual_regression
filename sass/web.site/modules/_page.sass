@@ -8,9 +8,13 @@ body
 
 .content
 	background: $color-page-bg // we need background here, if page is colored
+	min-width: 300px
 	width: 100%
 	+respond-min($break-tablet-portrait)
 		width: $break-tablet-portrait-px
 	+respond-min($break-desktop)
 		margin: 0 auto
 		width: $break-desktop-px
+
+.main
+	padding: 0 $petite
