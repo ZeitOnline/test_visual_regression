@@ -56,10 +56,15 @@
 <body itemscope itemtype="http://schema.org/WebPage">
 	{% block skiplink %}
 	<a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+	<hr>
 	{% endblock skiplink %}
 	<div class="page">
 		<div class="content">
-			<header class="header" role="banner"></header>
+			<header class="header" role="banner">
+				{% block navigation %}
+					{{ lama.main_nav(view.context.main_nav_full_width,request) }}
+				{% endblock navigation %}
+			</header>
 			<main class="main" id="main" role="main">
 				{% block main %}Hallo Welt{% endblock main %}
 			</main>
