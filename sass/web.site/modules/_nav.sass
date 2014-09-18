@@ -218,12 +218,13 @@ $zon-comminity-icon-size: em(20px)
 		flex-wrap: wrap
 		justify-content: space-between
 		li
-			width: $zon-classifieds-width
+			width: 50%
 			text-align: left
+			margin: 0
 	+respond-min($break-phablet-min)
 		ul
 			li
-				width: $zon-classifieds-width-phablet
+				width: 33%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
 		order: 20
@@ -233,6 +234,7 @@ $zon-comminity-icon-size: em(20px)
 			display: inline-block
 			li
 				width: auto
+				margin-right: $little
 				&:nth-child(n+4)
 					display: none
 		.main_nav__classifieds__more
