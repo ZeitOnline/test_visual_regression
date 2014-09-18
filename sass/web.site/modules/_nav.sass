@@ -1,0 +1,407 @@
+//new variables
+
+//colors
+$zon_grey: #7C7C7C
+$zon_light_grey: #CCC
+$zon_darker_grey: #EEE
+$zon_dark_grey: #444
+$zon_grey: #AAA
+
+//fonts
+$font-xxxs: em(9px)
+$font-11px: em(11px)
+
+//breakpoints
+$break-phablet-min: em(520px)
+$break-tablet-min: em(768px)
+$break-desktop-min: em(980px)
+
+//sizes
+$main_nav_new_height: em(180px)
+$zon-logo-width: em(347px)
+$zon-logo-height: em(38px)
+$zon-logo-width-small: em(231px)
+$zon-logo-height-small: em(26px)
+$zon-bar-height-phablet-px: 54px
+$zon-bar-height-phablet: em($zon-bar-height-phablet-px)
+$zon-search-bar-height-phablet: em(70px)
+$zon-search-bar-width: em(250px)
+$zon-burger-size: em(37px)
+$zon-classifieds-width: em(120px)
+$zon-classifieds-height: em(50px)
+$zon-classifieds-width-phablet: em(180px)
+$zon-search-width: em(120px)
+$zon-search-square-size: em(35px)
+$zon-search-image-square-size: em(20px)
+$zon-comminity-icon-size: em(20px)
+
+//TODO:
+//change name to main_nav later
+//add new svgs to new repo
+//use compass flexbox
+
+//basic style for nav box
+.main_nav_new
+	display: flex
+	flex-wrap: wrap
+	width: 100%
+	padding: 0 0 $fine 0
+	+tablet()
+	+respond-min($break-tablet-min)
+		padding: $fine $petite $fine $petite
+
+%main_nav_icons
+	display: block
+	background-size: contain
+	background-position: 50% 50%
+
+%main_nav_links
+	display: inline-block
+	ul
+		list-style: none
+		padding: 0px
+		margin: 0px
+		li
+			display: inline-block
+			margin-right: $little
+	width: 100%
+	a
+		+link-colors($black, $black, $black, $black, $black)
+	+respond-min($break-tablet-min)
+		width: auto
+		font-size: $font-xxxs
+		letter-spacing: $hair
+		text-transform: uppercase
+		color: $zon_grey
+		a
+			+link-colors($zon_grey, $zon_grey, $zon_grey, $zon_grey, $zon_grey)
+
+%main_nav__topics
+	+tablet(bold)
+	margin: $petite 0 $petite 0
+	font-size: $font-11px
+	text-transform: uppercase
+	letter-spacing: $hair
+	color: $zon_dark_grey
+	display: none
+	+respond-min($break-tablet-min)
+		display: inline-block
+
+%main_nav_button
+	+hide-text
+	display: inline-block
+	width: $zon-search-square-size
+	height: $zon-search-square-size
+	line-height: $zon-search-square-size
+	border: $hair solid $zon_light_grey
+	background-color: $white
+	vertical-align: middle
+	position: relative
+	+respond-min($break-tablet-min)
+		vertical-align: bottom
+
+//box 1: logo
+.logo_bar
+	+add_nav_bar_style($zon-bar-height-phablet)
+	display: flex
+	justify-content: space-between
+	order: 10
+	margin: 0
+	width: 100%
+	+respond-min($break-tablet-min)
+		+remove_nav_bar_style()
+		order: 40
+		width: $zon-logo-width
+		margin: $twice 0 $twice 0
+
+.logo_bar__menue
+	display: inline-block
+	width: $big
+	border-left: $hair solid $zon_light_grey
+	+hover_nav_icon()
+	+respond-min($break-tablet-min)
+		display: none
+
+.logo_bar__menue__image
+	@extend %main_nav_icons
+	width: $petite
+	height: $petite
+	margin: $little 0 0 $little
+
+.logo_bar__image
+	display: inline-block
+	a
+		+hide-text
+		@extend %main_nav_icons
+		margin: $fine 0 0 0
+		width: $zon-logo-width-small
+		height: $zon-logo-height-small
+		+respond-min($break-tablet-min)
+			margin: 0
+			width: $zon-logo-width
+			height: $zon-logo-height
+
+//box 2: community
+.main_nav__community
+	@extend %main_nav_links
+	+add_nav_bar_style($zon-bar-height-phablet)
+	line-height: $zon-bar-height-phablet
+	order: 20
+	text-align: left
+	+respond-min($break-tablet-min)
+		+remove_nav_bar_style()
+		order: 30
+		width: 10%
+		text-align: right
+		color: $black
+		display: inline-block
+
+.main_nav__community__image
+	@extend %main_nav_icons
+	display: inline-block
+	width: $zon-comminity-icon-size
+	height: $zon-comminity-icon-size
+	position: relative
+	top: $micro
+	+respond-min($break-tablet-min)
+		display: none
+
+//box 3: ressorts
+.main_nav__ressorts
+	width: 100%
+	order: 30
+	+respond-min($break-tablet-min)
+		order: 60
+
+//box 4: services
+.main_nav__services
+	@extend %main_nav_links
+	+add_nav_bar_style($zon-bar-height-phablet,true)
+	line-height: $zon-bar-height-phablet
+	order: 40
+	ul
+		display: flex
+		justify-content: space-between
+		text-align: center
+		height: em($zon-bar-height-phablet-px - 1)
+		li
+			flex-grow: 1
+			&:nth-child(n+4)
+				display: none
+			&:nth-child(2)
+				border-left: $hair solid $zon_light_grey
+				border-right: $hair solid $zon_light_grey
+	+respond-min($break-tablet-min)
+		+remove_nav_bar_style()
+		order: 10
+		width: 55%
+		text-align: left
+		ul
+			display: inline-block
+			height: auto
+			li
+				&:nth-child(n+4)
+					display: inline-block
+				&:nth-child(2)
+					border: 0
+
+//box 5: classifieds
+.main_nav__classifieds
+	@extend %main_nav_links
+	+add_nav_bar_style(auto)
+	line-height: $zon-classifieds-height
+	order: 50
+	.main_nav__classifieds__more
+		display: none
+	ul
+		display: flex
+		flex-wrap: wrap
+		justify-content: space-between
+		li
+			width: $zon-classifieds-width
+			text-align: left
+	+respond-min($break-phablet-min)
+		ul
+			li
+				width: $zon-classifieds-width-phablet
+	+respond-min($break-tablet-min)
+		+remove_nav_bar_style()
+		order: 20
+		width: 35%
+		text-align: right
+		ul
+			display: inline-block
+			li
+				width: auto
+				&:nth-child(n+4)
+					display: none
+		.main_nav__classifieds__more
+			display: inline
+			+hover_nav_icon(inline-block)
+	+respond-min($break-desktop-min)
+		ul
+			li
+				width: auto
+
+.main_nav__classifieds__more__image
+	@extend %main_nav_icons
+	display: inline-block
+	width: 7px
+	height: 5px
+
+//box 6: search
+.main_nav__search
+	+add_nav_bar_style($zon-search-bar-height-phablet)
+	line-height: $zon-search-bar-height-phablet
+	text-align: left
+	order: 60
+	margin: 0
+	width: 100%
+	+respond-min($break-tablet-min)
+		+remove_nav_bar_style()
+		order: 50
+		text-align: right
+		margin: $twice 0 $twice 0
+		line-height: $zon-search-square-size
+	+respond-min($break-desktop-min)
+		width: $zon-search-bar-width
+
+.search
+	label
+		display: none
+
+.search__input
+	display: inline-block
+	width: 80%
+	height: $zon-search-square-size - $dblhair
+	background-color: $white
+	padding: 0
+	border: $hair solid $zon_light_grey
+	+tablet()
+	font-size: $font-m
+	color: $zon_grey
+	padding-left: $fine
+	&:focus
+		outline-width: 0
+		color: $zon_dark_grey
+	+respond-min($break-tablet-min)
+		display: none
+	+respond-min($break-desktop-min)
+		display: inline-block
+		width: $zon-search-width
+
+.search__button
+	@extend %main_nav_button
+	+hover_nav_icon(block,$zon_darker_grey)
+	left: $micro
+	border-top-left-radius: $micro
+	border-bottom-left-radius: $micro
+	&:hover
+		background-color: $zon_darker_grey
+	+respond-min($break-tablet-min)
+		border-radius: $micro
+	+respond-min($break-desktop-min)
+		border-top-right-radius: 0
+		border-bottom-right-radius: 0
+
+.search__button__image
+	@extend %main_nav_icons
+	width: $zon-search-image-square-size
+	height: $zon-search-image-square-size
+
+.search__close
+	@extend %main_nav_button
+	display: none
+	right: $micro
+	border-top-right-radius: $micro
+	border-bottom-right-radius: $micro
+
+.search__close__image
+	@extend %main_nav_icons
+	width: $zon-search-image-square-size
+	height: $zon-search-image-square-size
+
+//box 7: topics
+.main_nav__tags
+	@extend %main_nav__topics
+	width: 70%
+	text-align: left
+	order: 70
+	ul
+		width: 80%
+		display: inline-block
+		list-style: none
+		padding: 0px
+		margin: 0px
+		li
+			+tablet(normal)
+			display: inline-block
+			margin-left: $little
+			border: $dblhair solid $zon_light_grey
+			border-radius: $tiny
+			padding: $micro
+			position: relative
+			top: -$micro
+
+.main_nav__tags__label
+	width: 20%
+	vertical-align: top
+	display: inline-block
+
+//box 8: date
+.main_nav__date
+	@extend %main_nav__topics
+	width: 30%
+	text-align: right
+	order: 80
+
+//box 9: special teaser
+.main_nav__teaser
+	display: none
+	+respond-min($break-tablet-min)
+		display: inline-block
+		order: 45
+		flex-grow: 1
+		margin: $twice $twice
+
+/* primary navigation (ressorts and stuff) */
+
+.primary-nav
+	+columns(2)
+	+tablet()
+	font-size: 16px
+	padding: 0 0 0 $petite
+
+	+respond-min($break-phablet-min)
+		+columns(3)
+	+respond-min($break-tablet-min)
+		+columns(auto)
+		border-bottom: 1px solid $zon_light_grey
+		border-top: 1px solid $zon_light_grey
+		display: block
+		font-size: 14px
+		padding: 0
+
+.primary-nav__item
+	color: $black
+	display: block // needed for css columns
+	line-height: 2.5
+
+	+respond-min($break-tablet-min)
+		display: inline-block
+		margin: 0 0 0 14px
+
+.primary-nav__link
+	display: inline-block
+	&:link, &:visited
+		color: inherit
+
+.primary-nav__link--current
+	font-weight: bold
+
+.primary-nav__link:hover,
+.primary-nav__link--current
+	+respond-min($break-tablet-min)
+		+box-shadow(inset 0px -3px 0px 0px $zon_light_grey) // w3c style box-shadow syntax
+
+/* END: primary navigation */
