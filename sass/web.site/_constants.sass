@@ -3,18 +3,35 @@ $base-line-height: 1.5
 $headline-line-height: 1.4
 $meta-line-height: 1.7
 
-// import core variables
+// nico's breakpoints to be replaced by arne/anika model
+$break-desktop-px: 980px
+$break-tablet-portrait-px: 768px
+$break-phablet-px: 520px
+$break-smartphone-px: 320px
+$break-desktop: em($break-desktop-px - 1)
+$break-tablet-portrait: em($break-tablet-portrait-px - 1)
+$break-phablet: em($break-phablet-px - 1)
+$break-smartphone: em($break-smartphone-px - 1)
+
+// teaser
+$teaser-image-phablet-width: em(150px)
+$teaser-image-desktop-width: em(260px)
+
+// colors
+$zon-red: #b91109
+
 @import "../constants"
 
 // semantic colors
-$color-page-bg:             $white
-$color-text:                $black
-$color-canvas-bg:           $white
-$color-quote:               $grey--dark
-$color-link--default:       $grey
-$color-link--hover:         $black
-$color-input:               $grey--mid
-$color-input-bg:            $grey--light
+$color-page-bg: $white
+$color-text: $black
+$color-text-highlighted: $zon-red
+$color-canvas-bg: $white
+$color-quote: $grey--dark
+$color-link--default: $grey
+$color-link--hover: $black
+$color-input: $grey--mid
+$color-input-bg: $grey--light
 
 $color-button:              $white
 $color-button--hover:       $white
