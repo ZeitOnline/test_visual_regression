@@ -1,110 +1,112 @@
 // just a helper until we introduce the real structure
 .teasers
-    width: 100%
-    +respond-min($break-tablet-portrait)
-        width: em(480px)
-    +respond-min($break-desktop)
-        width: em(620px)
+	width: 100%
+	+respond-min($break-tablet-portrait)
+		width: em(480px)
+	+respond-min($break-desktop)
+		width: em(620px)
 
 .teaser
-    +pie-clearfix
-    padding: $petite 0
-    border-bottom: 1px solid #ccc
-    +respond-min($break-tablet-portrait)
-        border-bottom: none
+	+pie-clearfix
+	padding: $petite 0
+	border-bottom: 1px solid #ccc
+	+respond-min($break-tablet-portrait)
+		border-bottom: none
 
 .teaser--small
-    border-bottom: none
+	border-bottom: none
 
 .teaser--small
-    +respond-min($break-phablet)
-        padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
-        position: relative
-    // padding: $petite 0 $petite $teaser-image-width + $petite
+	+respond-min($break-phablet)
+		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
+		position: relative
+	// padding: $petite 0 $petite $teaser-image-width + $petite
 
 .teaser__heading
-    font-size: 1em
-    margin: 0 0 em(22px) 0
+	font-size: 1em
+	margin: 0 0 em(22px) 0
 
 .teaser__combined-link
-    color: $color-text
-    text-decoration: none
-    &:link > .teaser__kicker,
-    &:visited > .teaser__kicker
-        color: $color-text-highlighted
-    &:link > .teaser__title,
-    &:visited > .teaser__title
-        color: $color-text
-    &:hover
-        text-decoration: none
-        & > .teaser__title
-            text-decoration: underline
+	color: $color-text
+	text-decoration: none
+	&:link > .teaser__kicker,
+	&:visited > .teaser__kicker
+		color: $color-text-highlighted
+	&:link > .teaser__title,
+	&:visited > .teaser__title
+		color: $color-text
+	&:hover
+		text-decoration: none
+		& > .teaser__title
+			text-decoration: underline
 
 .teaser__kicker
-    display: block
-    font-family: TabletGothic
-    font-size: em(14px)
-    font-weight: bold
-    margin-bottom: rem(10px)
+	display: block
+	font-family: TabletGothic
+	font-size: em(14px)
+	font-weight: bold
+	margin-bottom: rem(10px)
 
 .teaser__title
-    display: block
-    font-family: FranziskaWebPro
-    font-size: em(25px)
-    font-weight: bold
-    line-height: 1.15
-    +respond-min($break-tablet-portrait)
-        font-size: em(31px)
+	display: block
+	font-family: FranziskaWebPro
+	font-size: em(25px)
+	font-weight: bold
+	line-height: 1.15
+	+respond-min($break-tablet-portrait)
+		font-size: em(31px)
 
 .teaser__title--small
-    font-size: em(22px)
-    +respond-min($break-tablet-portrait)
-        font-size: em(22px)
+	font-size: em(22px)
+	+respond-min($break-tablet-portrait)
+		font-size: em(22px)
 
 .teaser__media
-    margin: 0 0 em(15px) 0
+	margin: 0 0 em(15px) 0
 
 .teaser__media--small
-    display: none
-    +respond-min($break-phablet)
-        display: block
-        position: absolute
-        left: 0
-        top: $petite
-        width: $teaser-image-phablet-width
+	display: none
+	+respond-min($break-phablet)
+		display: block
+		position: absolute
+		left: 0
+		top: $petite
+		width: $teaser-image-phablet-width
 
 .teaser__media--small[data-showimagemobile="true"]
-    display: block
+	display: block
 
 .teaser__media-link
 .teaser__media-item
-    max-width: 100%
+	height: auto
+	max-width: 100%
+	width: 100%
 
 .teaser__media-item--small
-    max-width: 100%
-    //width: $teaser-image-width
+	max-width: 100%
+	//width: $teaser-image-width
 
 .teaser__container
 .teaser__text
-    font-family: TabletGothic
-    font-size: em(16px)
-    line-height: 1.4
-    margin-bottom: rem(8px)
+	font-family: TabletGothic
+	font-size: em(16px)
+	line-height: 1.4
+	margin-bottom: rem(8px)
 .teaser__byline
-    font-family: FranziskaWebPro
-    font-size: em(15px)
-    font-style: italic
-    margin-bottom: rem(12px)
+	font-family: FranziskaWebPro
+	font-size: em(15px)
+	font-style: italic
+	margin-bottom: rem(12px)
 
 .teaser__metadata
-    font-family: TabletGothic
-    font-size: em(13px)
-    font-weight: bold
+	font-family: TabletGothic
+	font-size: em(13px)
+	font-weight: bold
 .teaser__datetime
-    &:link, &:visited
-        border-bottom: 1px solid #ccc
-        color: inherit
-        text-decoration: none
+	&:link, &:visited
+		border-bottom: 1px solid #ccc
+		color: inherit
+		text-decoration: none
 .teaser__commentcount
-    @extend .teaser__datetime
-    margin-left: 10px
+	@extend .teaser__datetime
+	margin-left: 10px
