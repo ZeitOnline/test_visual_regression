@@ -6,8 +6,6 @@ Change log for zeit.frontend
 
 - ZON-927: Configure grunt tasks
 
-- BUG-8: Breadcrumbs for feature longform
-
 - ZMO-880: Serve ZON 503 page on internal server error
 
 - ZMO-880: Improve rendering robustness
