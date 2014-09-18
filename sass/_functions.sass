@@ -1,5 +1,13 @@
-@function em($px)
-	@return $px/16px * 1em
+/**
+ * Get font-size in point size (em)
+ * @function  em
+ * @param     $font-size {Number} font size in pixel
+ * @param     $contex    {Number} base font size in pixel
+ * @return    {Number} font-size in em
+ */
+
+@function em($font-size, $context: $base-font-size)
+	@return $font-size / $context + 0em
 
 @function rem($px)
 	@return $px/16px * 1rem
