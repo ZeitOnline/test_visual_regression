@@ -368,8 +368,9 @@ $zon-search-square-size: em(35px)
 .primary-nav
 	+columns(2)
 	font-size: 16px
-	letter-spacing: 1px // needed? in primary-nav generally?
+	letter-spacing: 1px
 	padding: 0 0 0 $petite
+	+pie-clearfix
 
 	+respond-min($break-phablet-min)
 		+columns(3)
@@ -387,8 +388,8 @@ $zon-search-square-size: em(35px)
 	line-height: 2.5714
 
 	+respond-min($break-tablet-min)
-		display: inline-block
-		margin: 0 0 0 14px
+		float: left
+		margin-left: 14px
 
 	&:last-child
 		line-height: 2.0625
