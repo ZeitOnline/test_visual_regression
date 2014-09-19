@@ -1,57 +1,58 @@
 <video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<head>
-<renditions>
-<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1177/18140073001_3035898001001_Beitrag-Skispringen-f-r-Anf-nger.mp4" frame_width="720"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1105/18140073001_3035966678001_Beitrag-Skispringen-f-r-Anf-nger.mp4" frame_width="1280"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1841/18140073001_3035888094001_Beitrag-Skispringen-f-r-Anf-nger.mp4" frame_width="400"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/2777/18140073001_3035896381001_Beitrag-Skispringen-f-r-Anf-nger.mp4" frame_width="640"/>
-<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/927/18140073001_3035897844001_Beitrag-Skispringen-f-r-Anf-nger.mp4" frame_width="480"/>
-</renditions>
-<references/>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-01-14T09:04:00.746614+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-01-14T08:58:59+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-01-14T09:05:00.984909+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-01-14T09:01:29.305396+00:00</attribute>
-<attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="flv_url">
-http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/927/18140073001_3035897844001_Beitrag-Skispringen-f-r-Anf-nger.mp4
-</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/brightcove" name="id">3035864892001</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-01-14T09:01:25+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.brightcove</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="thumbnail">
-http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/2679/18140073001_3035892451001_Skispringen.jpg?pubId=18140073001
-</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">video</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:28acec5a-f79e-4d24-b1c8-ca9a52264d95}</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="video_still">
-http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/2713/18140073001_3035871869001_Skispringen.jpg?pubId=18140073001
-</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">
-<pickle> <initialized_object> <klass> <global name="Provides" module="zope.interface.declarations"/> </klass> <arguments> <tuple> <global name="Video" module="zeit.content.video.video"/> <global name="Interface" module="zope.interface"/> <global name="IZONContent" module="zeit.cms.section.interfaces"/> </tuple> </arguments> </initialized_object> </pickle>
-</attribute>
-</head>
-<body>
-<subtitle>
-Vor den Olympischen Spielen in Sotschi probieren wir Wintersportarten selbst aus. Diesmal: Skispringen
-</subtitle>
-<title>
-ZEIT ONLINE-Sportreporter Christian Spiller übt Skispringen
-</title>
-<supertitle>Reporter On Ice</supertitle>
-</body>
-<teaser>
-<text>
-Vor den Olympischen Spielen in Sotschi probieren wir Wintersportarten selbst aus. Diesmal: Skispringen
-</text>
-</teaser>
+    <head>
+        <renditions>
+            <rendition frame_width="720" url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1177/18140073001_3035898001001_Beitrag-Skispringen-f-r-Anf-nger.mp4"/>
+            <rendition frame_width="1280" url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1105/18140073001_3035966678001_Beitrag-Skispringen-f-r-Anf-nger.mp4"/>
+            <rendition frame_width="400" url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1841/18140073001_3035888094001_Beitrag-Skispringen-f-r-Anf-nger.mp4"/>
+            <rendition frame_width="640" url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/2777/18140073001_3035896381001_Beitrag-Skispringen-f-r-Anf-nger.mp4"/>
+            <rendition frame_width="480" url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/927/18140073001_3035897844001_Beitrag-Skispringen-f-r-Anf-nger.mp4"/>
+        </renditions>
+        <references/>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-01-14T09:04:00.746614+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-01-14T08:58:59+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-01-14T09:05:00.984909+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-01-14T09:01:29.305396+00:00</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="flv_url" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/927/18140073001_3035897844001_Beitrag-Skispringen-f-r-Anf-nger.mp4</attribute>
+        <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="id" ns="http://namespaces.zeit.de/CMS/brightcove">3035864892001</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-01-14T09:01:25+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">zope.brightcove</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Sport</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="thumbnail" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/2679/18140073001_3035892451001_Skispringen.jpg?pubId=18140073001</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">video</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:28acec5a-f79e-4d24-b1c8-ca9a52264d95}</attribute>
+        <attribute name="video_still" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/2713/18140073001_3035871869001_Skispringen.jpg?pubId=18140073001</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">
+            <pickle>
+                <initialized_object>
+                    <klass>
+                        <global module="zope.interface.declarations" name="Provides"/>
+                    </klass>
+                    <arguments>
+                        <tuple>
+                            <global module="zeit.content.video.video" name="Video"/>
+                            <global module="zope.interface" name="Interface"/>
+                            <global module="zeit.magazin.interfaces" name="IZMOContent"/>
+                        </tuple>
+                    </arguments>
+                </initialized_object>
+            </pickle>
+        </attribute>
+    </head>
+    <body>
+        <subtitle>Vor den Olympischen Spielen in Sotschi probieren wir Wintersportarten selbst aus. Diesmal: Skispringen</subtitle>
+        <title>ZEIT ONLINE-Sportreporter Christian Spiller übt Skispringen</title>
+        <supertitle>Reporter On Ice</supertitle>
+    </body>
+    <teaser>
+        <text>Vor den Olympischen Spielen in Sotschi probieren wir Wintersportarten selbst aus. Diesmal: Skispringen</text>
+    </teaser>
 </video>

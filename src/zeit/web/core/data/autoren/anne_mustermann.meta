@@ -16,7 +16,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.behrens</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2010-08-16</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Author" module="zeit.content.author.author"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Author" module="zeit.content.author.author"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2009-04-21T09:27:11.232869+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="archivtyp">Autorenseite</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c5520263-4393-43d3-b6a9-3d390e12ad11}</attribute>

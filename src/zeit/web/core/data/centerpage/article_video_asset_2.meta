@@ -3,7 +3,6 @@
   <attribute ns="DAV:" name="href">/cms/work/centerpage/article_video_asset_2</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-03-17T12:50:26.206282+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-17T12:50:23.259718+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
@@ -40,7 +39,7 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
-  <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name="Provides" module="zope.interface.declarations"/&gt;

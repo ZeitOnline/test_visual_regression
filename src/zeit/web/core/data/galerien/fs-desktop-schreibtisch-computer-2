@@ -53,7 +53,7 @@
                         &lt;tuple&gt;
                             &lt;global module=&quot;zeit.content.gallery.gallery&quot; name=&quot;Gallery&quot;/&gt;
                             &lt;global module=&quot;zope.interface&quot; name=&quot;Interface&quot;/&gt;
-                            &lt;global module=&quot;zeit.cms.section.interfaces&quot; name=&quot;IZMOContent&quot;/&gt;
+                            &lt;global module=&quot;zeit.magazin.interfaces&quot; name=&quot;IZMOContent&quot;/&gt;
                         &lt;/tuple&gt;
                     &lt;/arguments&gt;
                 &lt;/initialized_object&gt;
