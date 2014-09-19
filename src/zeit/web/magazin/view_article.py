@@ -4,6 +4,7 @@ import logging
 import re
 
 from pyramid.view import view_config
+from pyramid.decorator import reify
 import pyramid.httpexceptions
 
 from zeit.content.author.interfaces import IAuthorReference
@@ -390,7 +391,17 @@ class LongformArticle(Article):
 @view_config(context=zeit.web.core.article.IFeatureLongform,
              renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
-    pass
+    @reify
+    def breadcrumb(self):
+        crumb = self._navigation
+        l = [crumb['start']]
+        if self.context.ressort in crumb:
+            l.append(crumb[self.context.ressort])
+        if self.context.sub_ressort in crumb:
+            l.append(crumb[self.context.sub_ressort])
+        if self.title:
+            l.append((self.title, ''))
+        return l
 
 
 @view_config(context=zeit.web.core.article.IShortformArticle,
