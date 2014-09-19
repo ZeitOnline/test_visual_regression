@@ -1,6 +1,12 @@
 Change log for zeit.frontend
 ============================
 
+1.1 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
 1.0 (2014-09-19)
 ----------------
 
