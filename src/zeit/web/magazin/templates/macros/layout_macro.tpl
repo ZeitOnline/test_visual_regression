@@ -150,7 +150,7 @@
         </script>
         <noscript>
             <div><img alt="" width="1" height="1"
-            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.tracking_type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cg5={{obj.sub_ressort}}&amp;cg6=&amp;cg7={{request.path_info | substring_from('/')}}&amp;cg8={{obj.banner_channel}}&amp;cg9={{date}}{% if obj.type == 'article' -%}&amp;cp1={{obj.authorsList}}&amp;cp2={{obj.banner_channel}}&amp;cp3={{pagination}}&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}{% endif -%}"></div>
+            src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{obj.ressort}}.{{obj.sub_ressort}}..{{obj.type}}.online.{{request.path_info}},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{obj.tracking_type}}&amp;cg3={{obj.ressort}}&amp;cg4=Online&amp;cg5={{obj.sub_ressort}}&amp;cg6=&amp;cg7={{request.path_info | substring_from('/')}}&amp;cg8={{obj.banner_channel}}&amp;cg9={{date}}{% if obj.type == 'article' -%}&amp;cp1={{obj.authorsList}}&amp;cp2={{obj.banner_channel}}&amp;cp3={{pagination}}&amp;cp4={{obj.rankedTagsList}}&amp;cp6={{obj.text_length}}&amp;cp7=&amp;cp9={{obj.banner_channel}}{% endif -%}"></div>
         </noscript>
 {%- endmacro %}
 
