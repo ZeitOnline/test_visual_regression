@@ -7,7 +7,7 @@
  */
 (function( $ ) {
     /**
-    * See (http://jquery.com/). ffd
+    * See (http://jquery.com/)
     * @name jQuery
     * @alias $
     * @class jQuery Library
