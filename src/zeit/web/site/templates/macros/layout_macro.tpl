@@ -184,6 +184,6 @@
     </ul>
 {%- endmacro %}
 
-{% macro main_nav_date() -%}
-    3. September 2014 10:50 Uhr
+{% macro main_nav_date(date='3. September 2014 10:50 Uhr') -%}
+    {{ date }}
 {%- endmacro %}

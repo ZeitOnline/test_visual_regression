@@ -24,6 +24,7 @@ require.config({
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
         'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
         'web.magazin/plugins/jquery.parseesi': [ 'jquery', 'esiparser' ],
+        'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },

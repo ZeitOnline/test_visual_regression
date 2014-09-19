@@ -4,6 +4,26 @@ Change log for zeit.frontend
 0.17 (unreleased)
 -----------------
 
+- ZON-931: Build search HTML and CSS main framework
+
+- ZON-932: Implement navigation search module
+
+- ZON-933: Integrate logo
+
+- ZON-934: Add community link to navigation
+
+- ZON-935: add puplishers bar part 1
+
+- ZON-936: add puplishers bar part 2
+
+- ZON-950: integrate navigation into new friedbert structure
+
+- ZON-959: style mobile navigation view
+
+- ZON-973: add new icon assets for navigation
+
+- ZON-975: add and style tagbar under navigation
+
 - ZON-927: Configure grunt tasks
 
 - ZMO-880: Serve ZON 503 page on internal server error
