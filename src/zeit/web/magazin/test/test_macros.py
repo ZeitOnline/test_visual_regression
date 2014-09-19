@@ -563,7 +563,7 @@ def test_macro_webtrekk_tracking_should_produce_markup(jinja2_env):
               "wt.sendinfo();",
               "http://zeit01.webtrekk.net/" +
               "981949533494636/wt.pl?p=311,redaktion.lebensart.mode" +
-              "..Artikel.online./test/test1,0,0,0,0,0,0,0,0&amp;" +
+              "..article.online./test/test1,0,0,0,0,0,0,0,0&amp;" +
               "cg1=Redaktion&amp;cg2=Artikel&amp;" +
               "cg3=lebensart&amp;cg4=Online" +
               "&amp;cg5=mode&amp;cg6=&amp;cg7=test1&amp;cg8=lebensart/" +
@@ -624,7 +624,7 @@ def test_macro_webtrekk_tracking_should_produces_correct_cp_markup(jinja2_env):
               "wt.sendinfo();",
               "http://zeit01.webtrekk.net/" +
               "981949533494636/wt.pl?p=311,redaktion.lebensart.mode" +
-              "..Centerpage.online./test/test1,0,0,0,0,0,0,0,0&amp;" +
+              "..centerpage.online./test/test1,0,0,0,0,0,0,0,0&amp;" +
               "cg1=Redaktion&amp;cg2=Centerpage&amp;" +
               "cg3=lebensart&amp;cg4=Online" +
               "&amp;cg5=mode&amp;cg6=&amp;cg7=test1&amp;cg8=lebensart/" +

@@ -12,6 +12,8 @@ Change log for zeit.frontend
 
 - ZON-923: Split zeit.frontend into three sub-packages
 
+- BUG-11: Adjust SEO content ID in noscript tag
+
 - FIX: Patch reify decorator to deliver accurate traceback
 
 
