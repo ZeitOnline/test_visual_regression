@@ -77,7 +77,6 @@ $zon-search-square-size: em(35px)
 
 //TODO: fix letter-spacing em value
 %main_nav__topics
-	+tablet(bold)
 	margin: $micro 0 $petite 0
 	font-size: $font-11px
 	text-transform: uppercase
@@ -285,7 +284,6 @@ $zon-search-square-size: em(35px)
 	background-color: $white
 	padding: 0
 	border: $hair solid $zon_light_grey
-	+tablet()
 	font-size: $font-m
 	color: $zon_grey
 	padding-left: $fine
@@ -348,7 +346,6 @@ $zon-search-square-size: em(35px)
 		padding: 0px
 		margin: 0px
 		li
-			+tablet(normal)
 			display: inline-block
 			margin-left: $little
 			border: $dblhair solid $zon_light_grey
@@ -358,12 +355,13 @@ $zon-search-square-size: em(35px)
 			top: -$micro
 
 .main_nav__tags__label
+	font-weight: bold
 	vertical-align: top
 
 //box 8: date
 .main_nav__date
 	@extend %main_nav__topics
-	+tablet()
+	font-weight: bold
 	width: 30%
 	text-align: right
 	order: 80
@@ -381,7 +379,6 @@ $zon-search-square-size: em(35px)
 
 .primary-nav
 	+columns(2)
-	+tablet()
 	font-size: 16px
 	padding: 0 0 0 $petite
 
