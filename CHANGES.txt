@@ -1,8 +1,8 @@
 Change log for zeit.frontend
 ============================
 
-0.17 (unreleased)
------------------
+1.0 (2014-09-19)
+----------------
 
 - ZON-995: Graft zeit.web.static for egg releases
 
