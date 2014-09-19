@@ -23,13 +23,17 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 
+import zeit.web.magazin.view
+
 
 log = logging.getLogger(__name__)
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              name='komplettansicht',
              renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view.Content):
@@ -312,6 +316,7 @@ class Article(zeit.web.core.view.Content):
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              name='seite',
              path_info='.*seite-(.*)',
              renderer='templates/article.html')
@@ -357,6 +362,7 @@ class ArticlePage(Article):
 
 
 @view_config(context=zeit.web.core.article.ILongformArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
@@ -389,6 +395,7 @@ class LongformArticle(Article):
 
 
 @view_config(context=zeit.web.core.article.IFeatureLongform,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
     @reify
@@ -405,18 +412,21 @@ class FeatureLongform(LongformArticle):
 
 
 @view_config(context=zeit.web.core.article.IShortformArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass
 
 
 @view_config(context=zeit.web.core.article.IColumnArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
 
 
 @view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 
@@ -433,6 +443,7 @@ class PhotoclusterArticle(Article):
 
 @view_config(name='teaser',
              context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/teaser.html')
 class Teaser(Article):
 

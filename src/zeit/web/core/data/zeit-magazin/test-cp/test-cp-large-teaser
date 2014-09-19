@@ -66,7 +66,7 @@
             <breadcrumb_title xsi:nil="true"/>
             <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
-              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
+              <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>
@@ -88,7 +88,7 @@
             <breadcrumb_title xsi:nil="true"/>
             <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
-              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
+              <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>
@@ -110,7 +110,7 @@
             <breadcrumb_title xsi:nil="true"/>
             <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
-              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
+              <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>
@@ -132,7 +132,7 @@
             <breadcrumb_title xsi:nil="true"/>
             <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
-              <copyright py:pytype="str" link="http://foo.de">©foo</copyright>
+              <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>

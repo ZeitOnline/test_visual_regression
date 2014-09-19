@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <image-layouts>
-  <!-- these should use zeit.cms.section.interfaces.IZONContent,
-       change it once the working copies had a chance to settle.
-   -->
   <layout id="small" available="zeit.cms.interfaces.ICMSContent">schmal</layout>
   <!-- default value must not use available -->
   <layout id="large">vollbreit</layout>
