@@ -381,6 +381,7 @@ $zon-search-square-size: em(35px)
 .primary-nav
 	+columns(2)
 	font-size: 16px
+	letter-spacing: 1px // needed? in primary-nav generally?
 	padding: 0 0 0 $petite
 
 	+respond-min($break-phablet-min)
@@ -396,11 +397,27 @@ $zon-search-square-size: em(35px)
 .primary-nav__item
 	color: $black
 	display: block // needed for css columns
-	line-height: 2.5
+	line-height: 2.5714
 
 	+respond-min($break-tablet-min)
 		display: inline-block
 		margin: 0 0 0 14px
+
+	&:last-child
+		line-height: 2.0625
+		+respond-min($break-tablet-min)
+			font-size: 12px
+			float: right
+			margin-top: 5px
+
+		.primary-nav__link
+			color: $white
+			background-color: $zon_dark_grey
+			padding: 0 10px
+			border-radius: 2px
+			&:hover
+				+box-shadow(none)
+				background-color: $zon_light_grey
 
 .primary-nav__link
 	display: inline-block

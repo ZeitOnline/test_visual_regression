@@ -169,6 +169,9 @@
             <li class="primary-nav__item">
                 <a class="primary-nav__link" href="#">Spiele</a>
             </li>
+            <li class="primary-nav__item">
+                <a class="primary-nav__link" href="#">ZEITmagazin</a>
+            </li>
         </ul>
     </nav>
 {%- endmacro %}
