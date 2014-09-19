@@ -58,7 +58,7 @@
             }
         };
 
-        //run through data-video elements and return object
+        //run through search element and return object
         return this.each( function() {
             el.bindSearchFormEvents( this );
         });
