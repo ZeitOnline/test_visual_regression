@@ -18,6 +18,8 @@ Change log for zeit.frontend
 
 - ZON-969: Register ZMO views with custom predicates
 
+- ZON-939: Add last semantic change property to ZON CP
+
 - FIX: Patch reify decorator to deliver accurate traceback
 
 
