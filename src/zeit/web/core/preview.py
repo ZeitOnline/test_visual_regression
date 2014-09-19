@@ -1,5 +1,4 @@
 import pyramid.events
-import re
 import zeit.web.core.application
 import zope.component
 import zope.processlifetime
