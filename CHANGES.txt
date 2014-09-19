@@ -17,6 +17,14 @@ Change log for zeit.frontend
 - FIX: Patch reify decorator to deliver accurate traceback
 
 
+0.16.2 (2014-09-16)
+-------------------
+
+- BUG-7: Feature-Longform should be rendered on preview path with right logo
+
+- BUG-8: Breadcrumbs for feature longform
+
+
 0.16.1 (2014-09-16)
 -------------------
 

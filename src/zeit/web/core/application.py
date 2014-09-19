@@ -324,7 +324,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 # ToDo: Remove when Longform will be generally used on
                 # www.zeit.de. By then do not forget to remove marker
                 # interfaces from uniqueID http://xml.zeit.de/feature (RD)
-                if request.path[:9] == '/feature/':
+                path = urlparse.urlparse(context.uniqueId).path
+                if path[:9] == '/feature/':
                     zope.interface.alsoProvides(context, IFeatureLongform)
                 elif template == 'longform':
                     zope.interface.alsoProvides(context, ILongformArticle)
