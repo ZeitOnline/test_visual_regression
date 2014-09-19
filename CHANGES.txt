@@ -3,6 +3,13 @@ Change log for zeit.frontend
 
 0.17 (unreleased)
 -----------------
+- ZON-944: HTML scaffold
+
+- ZON-977: Module teaser (demo)
+
+- ZON-978: Module small teaser (demo)
+
+- ZON-954: Differences between teasers
 
 - ZON-931: Build search HTML and CSS main framework
 
