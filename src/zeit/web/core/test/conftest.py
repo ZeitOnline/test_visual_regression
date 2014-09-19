@@ -131,10 +131,11 @@ def application(request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    return repoze.bitblt.processor.ImageTransformationMiddleware(
-        zeit.web.core.application.Application()({}, **settings),
-        secret='time'
-    )
+    factory = zeit.web.core.application.Application()
+    app = factory({}, **settings)
+    wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(app, secret='time')
+    wsgi.zeit_app = factory
+    return wsgi
 
 
 @pytest.fixture(scope='session')
