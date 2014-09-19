@@ -14,6 +14,8 @@ Change log for zeit.frontend
 
 - BUG-11: Adjust SEO content ID in noscript tag
 
+- ZON-969: Register ZMO views with custom predicates
+
 - FIX: Patch reify decorator to deliver accurate traceback
 
 
