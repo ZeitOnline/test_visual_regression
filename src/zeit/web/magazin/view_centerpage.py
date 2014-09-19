@@ -8,6 +8,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.seo
+import zeit.magazin.interfaces
 
 import zeit.web.core.article
 import zeit.web.core.comments
@@ -16,8 +17,11 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 
+import zeit.web.magazin.view
+
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view.Base):
 
@@ -157,7 +161,8 @@ class Centerpage(zeit.web.core.view.Base):
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
-             name='xml', renderer='string')
+             name='xml',
+             renderer='string')
 class XMLView(zeit.web.core.view.Base):
 
     def __call__(self):
