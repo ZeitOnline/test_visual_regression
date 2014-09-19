@@ -12,6 +12,7 @@ import pyramid.authorization
 import pyramid.config
 import pyramid_beaker
 import pyramid_jinja2
+import pyramid_zodbconn
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
@@ -90,6 +91,9 @@ class Application(object):
         self.configure_jinja()
         self.config.include('cornice')
 
+        if self.settings.get('zodbconn.uri'):
+            self.config.include('pyramid_zodbconn')
+
         log.debug('Configuring Pyramid')
         config.add_route('json', 'json/*traverse')
         config.add_route('comments', '/-comments/collection/*traverse')
@@ -146,6 +150,15 @@ class Application(object):
         return config
 
     def get_repository(self, request):
+        if self.settings.get('zodbconn.uri'):
+            connection = pyramid_zodbconn.get_connection(request)
+            root = connection.root()
+            # We probably should not hardcode the name, but use
+            # ZopePublication.root_name instead, but since the name is not ever
+            # going to be changed, we can safely skip the dependency on
+            # zope.app.publication.
+            root_folder = root.get('Application', None)
+            zope.component.hooks.setSite(root_folder)
         return zope.component.getUtility(
             zeit.cms.repository.interfaces.IRepository)
 
@@ -186,6 +199,7 @@ class Application(object):
         configure.zcml file."""
         log.debug('Configuring ZCA')
         self.configure_product_config()
+        zope.component.hooks.setHooks()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.web.core)
@@ -193,6 +207,10 @@ class Application(object):
         context.execute_actions()
 
     def configure_connector(self, context):
+        if not self.settings.get('zodbconn.uri'):
+            zope.component.provideUtility(
+                zeit.cms.repository.repository.Repository(),
+                zeit.cms.repository.interfaces.IRepository)
         typ = self.settings['connector_type']
         allowed = ('dav', 'tbcdav', 'filesystem')
         if typ not in allowed:
