@@ -1,6 +1,6 @@
 <!-- new nav -->
 {% macro main_nav(is_full_width,request) -%}
-    <nav class="main_nav_new">
+    <nav class="main_nav">
 
         <!-- logo -->
         <div class="logo_bar">

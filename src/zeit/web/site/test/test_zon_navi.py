@@ -16,7 +16,7 @@ def test_macro_main_nav_produce_markup(jinja2_env):
     output = ""
     for line in lines:
         output += line.strip()
-    wrapper = '<nav class="main_nav_new">'
+    wrapper = '<nav class="main_nav">'
     logo_image = '<div class="logo_bar__image">'
     logo_menue = '<div class="logo_bar__menue">'
     teaser = '<div class="main_nav__teaser">'
@@ -237,7 +237,7 @@ def test_article_has_valid_main_nav_structure(testserver, testbrowser):
     output = ""
     for line in lines:
         output += line.strip()
-    assert '<nav class="main_nav_new">' in output
+    assert '<nav class="main_nav">' in output
     assert '<div class="logo_bar__image">' in output
     assert '<div class="logo_bar__menue">' in output
     assert '<div class="main_nav__teaser">' in output
