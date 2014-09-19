@@ -133,7 +133,8 @@ def application(request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **settings)
-    wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(app, secret='time')
+    wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
+        app, secret='time')
     wsgi.zeit_app = factory
     return wsgi
 

@@ -1,8 +1,9 @@
 Change log for zeit.frontend
 ============================
 
-0.17 (unreleased)
------------------
+1.1 (unreleased)
+----------------
+
 - ZON-944: HTML scaffold
 
 - ZON-977: Module teaser (demo)
@@ -19,17 +20,23 @@ Change log for zeit.frontend
 
 - ZON-934: Add community link to navigation
 
-- ZON-935: add puplishers bar part 1
+- ZON-935: Add puplishers bar part 1
 
-- ZON-936: add puplishers bar part 2
+- ZON-936: Add puplishers bar part 2
 
-- ZON-950: integrate navigation into new friedbert structure
+- ZON-950: Integrate navigation into new friedbert structure
 
-- ZON-959: style mobile navigation view
+- ZON-959: Style mobile navigation view
 
-- ZON-973: add new icon assets for navigation
+- ZON-973: Add new icon assets for navigation
 
-- ZON-975: add and style tagbar under navigation
+- ZON-975: Add and style tagbar under navigation
+
+
+1.0 (2014-09-19)
+----------------
+
+- ZON-995: Graft zeit.web.static for egg releases
 
 - ZON-927: Configure grunt tasks
 
