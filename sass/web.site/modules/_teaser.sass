@@ -1,26 +1,25 @@
 // just a helper until we introduce the real structure
 .teasers
 	width: 100%
-	+respond-min($break-tablet-portrait)
+	+respond-min($break-tablet-min)
 		width: em(480px)
-	+respond-min($break-desktop)
+	+respond-min($break-desktop-min)
 		width: em(620px)
 
 .teaser
 	+pie-clearfix
 	padding: $petite 0
 	border-bottom: 1px solid #ccc
-	+respond-min($break-tablet-portrait)
+	+respond-min($break-tablet-min)
 		border-bottom: none
 
 .teaser--small
 	border-bottom: none
 
 .teaser--small
-	+respond-min($break-phablet)
+	+respond-min($break-phablet-min)
 		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
 		position: relative
-	// padding: $petite 0 $petite $teaser-image-width + $petite
 
 .teaser__heading
 	font-size: 1em
@@ -53,12 +52,12 @@
 	font-size: em(25px)
 	font-weight: bold
 	line-height: 1.15
-	+respond-min($break-tablet-portrait)
+	+respond-min($break-tablet-min)
 		font-size: em(31px)
 
 .teaser__title--small
 	font-size: em(22px)
-	+respond-min($break-tablet-portrait)
+	+respond-min($break-tablet-min)
 		font-size: em(22px)
 
 .teaser__media
@@ -66,8 +65,8 @@
 
 .teaser__media--small
 	display: none
-	+respond-min($break-phablet)
-		display: block
+	+respond-min($break-phablet-min)
+		display: inline-block
 		position: absolute
 		left: 0
 		top: $petite

@@ -53,7 +53,6 @@ $zon-search-square-size: em(35px)
 
 //TODO: fix letter-spacing em value
 %main_nav__topics
-	+tablet(bold)
 	margin: $micro 0 $petite 0
 	font-size: $font-11px
 	text-transform: uppercase
@@ -265,12 +264,12 @@ $zon-search-square-size: em(35px)
 	background-color: $white
 	padding: 0
 	border: $hair solid $zon_light_grey
-	+tablet()
 	font-size: $font-m
 	color: $zon_grey
 	padding-left: $fine
 	border-top-right-radius: $micro
 	border-bottom-right-radius: $micro
+	vertical-align: middle
 	&:focus
 		outline-width: 0
 		color: $zon_dark_grey
@@ -335,7 +334,6 @@ $zon-search-square-size: em(35px)
 		padding: 0px
 		margin: 0px
 		li
-			+tablet(normal)
 			display: inline-block
 			margin-left: $little
 			border: $dblhair solid $zon_light_grey
@@ -345,12 +343,13 @@ $zon-search-square-size: em(35px)
 			top: -$micro
 
 .main_nav__tags__label
+	font-weight: bold
 	vertical-align: top
 
 //box 8: date
 .main_nav__date
 	@extend %main_nav__topics
-	+tablet()
+	font-weight: bold
 	width: 30%
 	text-align: right
 	order: 80
@@ -368,8 +367,8 @@ $zon-search-square-size: em(35px)
 
 .primary-nav
 	+columns(2)
-	+tablet()
 	font-size: 16px
+	letter-spacing: 1px // needed? in primary-nav generally?
 	padding: 0 0 0 $petite
 
 	+respond-min($break-phablet-min)
@@ -385,11 +384,27 @@ $zon-search-square-size: em(35px)
 .primary-nav__item
 	color: $black
 	display: block // needed for css columns
-	line-height: 2.5
+	line-height: 2.5714
 
 	+respond-min($break-tablet-min)
 		display: inline-block
 		margin: 0 0 0 14px
+
+	&:last-child
+		line-height: 2.0625
+		+respond-min($break-tablet-min)
+			font-size: 12px
+			float: right
+			margin-top: 5px
+
+		.primary-nav__link
+			color: $white
+			background-color: $zon_dark_grey
+			padding: 0 10px
+			border-radius: 2px
+			&:hover
+				+box-shadow(none)
+				background-color: $zon_light_grey
 
 .primary-nav__link
 	display: inline-block

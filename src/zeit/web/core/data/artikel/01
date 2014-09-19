@@ -109,6 +109,21 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:a798c5df-ee19-42aa-b8a5-2afa05ea3506}</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">40</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name="Article" module="zeit.content.article.article"/&gt;
+            &lt;global name="Interface" module="zope.interface"/&gt;
+            &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+            &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
     </head>
     <body>
         <title>Mei, is des traurig!</title>

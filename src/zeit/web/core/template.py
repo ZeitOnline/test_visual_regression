@@ -159,6 +159,7 @@ def obj_debug(value):
         return False
 
 
+@zeit.web.register_filter
 def strftime(t, format):
     """Return a string formatted version of a Python time representation. Can
     be either a time tuple, a time.struct_time or datetime.datetime instance.

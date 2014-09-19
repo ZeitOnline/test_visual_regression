@@ -106,7 +106,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '9: "2013-07-30"' in browser.contents
     assert 'http://zeit01.webtrekk.net/981949533494636/' \
         'wt.pl?p=311,redaktion.lebensart.essen-trinken..' \
-        'Artikel.online./artikel/03/seite-2,0,0,0,0,0,0,0,0' \
+        'article.online./artikel/03/seite-2,0,0,0,0,0,0,0,0' \
         '&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart' \
         '&amp;cg4=Online&amp;cg5=essen-trinken&amp;cg6=&amp;' \
         'cg7=seite-2&amp;cg8=zeitmz/essenundtrinken/article' \
@@ -136,7 +136,7 @@ def test_article08_has_correct_webtrekk_values(testserver, testbrowser):
     assert '8: "politik/article",' in browser.contents
     assert '9: "2014-02-19"' in browser.contents
     assert 'http://zeit01.webtrekk.net/981949533494636/' \
-        'wt.pl?p=311,redaktion.politik...Artikel.online./' \
+        'wt.pl?p=311,redaktion.politik...article.online./' \
         'artikel/08,0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;' \
         'cg2=Artikel&amp;cg3=politik&amp;cg4=Online&amp;' \
         'cg5=&amp;cg6=&amp;cg7=08&amp;cg8=politik/article&amp;' \
@@ -158,7 +158,7 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
     assert 'wt.pl?p=311,redaktion.lebensart...' \
-        'Centerpage.online./zeit-magazin/test-cp/test-cp-zmo,' \
+        'centerpage.online./zeit-magazin/test-cp/test-cp-zmo,' \
         '0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2=Centerpage&amp;' \
         'cg3=lebensart&amp;cg4=Online&amp;cg5=&amp;cg6=&amp;' \
         'cg7=test-cp-zmo&amp;' \

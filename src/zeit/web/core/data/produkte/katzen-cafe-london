@@ -23,7 +23,7 @@
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/reisen/2012-06/CG-London-Shoreditch-High-Street/" type="jpg" title="Shoreditch High Street" alt="An der Shoreditch High Street stoßen East End und City of London aneinander." align="left" publication-date="" expires="">
           <bu py:pytype="str">An der Shoreditch High Street stoßen East End und City of London aneinander.</bu>
-          <copyright py:pytype="str" link="http://andreaartz.com/">© Andrea Artz für DIE ZEIT</copyright>
+          <copyright link="http://andreaartz.com/">© Andrea Artz für DIE ZEIT</copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/C/Karin_Ceballos_Betancur/index" publication-date="" expires="">
           <display_name py:pytype="str">Karin Ceballos Betancur</display_name>
@@ -50,46 +50,46 @@
       </reference>
     </references>
     <rankedTags xmlns:ns4="http://namespaces.zeit.de/CMS/tagging">
-      <tag py:pytype="str" uuid="f887047f-c2a3-4fa9-8ba9-05d5d2ea7976" url_value="london" type="Location">London</tag>
-      <tag py:pytype="str" uuid="6a959691-27c5-48b2-96b6-fb3abc30f4ef" url_value="caf%C3%A9" type="free">Café</tag>
-      <tag py:pytype="str" uuid="c62c0ec4-4710-4c45-a41f-837f390f75a9" url_value="katzen" type="free">Katzen</tag>
+      <tag uuid="f887047f-c2a3-4fa9-8ba9-05d5d2ea7976" url_value="london" type="Location">London</tag>
+      <tag uuid="6a959691-27c5-48b2-96b6-fb3abc30f4ef" url_value="caf%C3%A9" type="free">Café</tag>
+      <tag uuid="c62c0ec4-4710-4c45-a41f-837f390f75a9" url_value="katzen" type="free">Katzen</tag>
     </rankedTags>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-08-01T11:57:32.867224+00:00</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-07-31T19:39:10.121338+00:00</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-08-01T11:58:40.860409+00:00</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-07-31T20:21:35.643584+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
-    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-28T11:24:33.461686+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.kmueller</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Reisen</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">zmo-product</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:599c64f7-a1b9-43da-a36f-2acd68897cbf}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-28T11:24:33.461686+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.kmueller</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Reisen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">zmo-product</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:599c64f7-a1b9-43da-a36f-2acd68897cbf}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name="Provides" module="zope.interface.declarations"/&gt;
@@ -98,7 +98,7 @@
       &lt;tuple&gt;
         &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
