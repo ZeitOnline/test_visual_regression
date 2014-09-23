@@ -61,7 +61,7 @@
 		<div class="content">
 			<header class="header" role="banner">
 				{% block navigation %}
-					{{ lama.main_nav(view.context.main_nav_full_width,request) }}
+					{%- include "zeit.web.site:templates/inc/nav_main.html" ignore missing -%}
 				{% endblock navigation %}
 			</header>
 			<main class="main" id="main" role="main">
