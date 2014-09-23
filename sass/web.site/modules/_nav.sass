@@ -16,8 +16,8 @@ $zon-search-square-size: em(35px)
 
 //basic style for nav box
 .main_nav
-	display: flex
-	flex-wrap: wrap
+	+display-flex()
+	+flex-wrap(wrap)
 	width: 100%
 	padding: 0 0 $fine 0
 	+tablet()
@@ -50,7 +50,6 @@ $zon-search-square-size: em(35px)
 		a
 			+link-colors($zon_mid_grey, $zon_dark_grey, $zon_mid_grey, $zon_mid_grey, $zon_mid_grey)
 
-//TODO: fix letter-spacing em value
 %main_nav__topics
 	margin: $micro 0 $petite 0
 	font-size: $font-11px
@@ -81,8 +80,8 @@ $zon-search-square-size: em(35px)
 //box 1: logo
 .logo_bar
 	+add_nav_bar_style($zon-bar-height-phablet)
-	display: flex
-	justify-content: space-between
+	+display-flex()
+	+justify-content(space-between)
 	order: 10
 	margin: 0
 	width: 100%
@@ -160,8 +159,8 @@ $zon-search-square-size: em(35px)
 	order: 40
 	padding-left: 0
 	ul
-		display: flex
-		justify-content: space-between
+		+display-flex()
+		+justify-content(space-between)
 		text-align: center
 		height: em($zon-bar-height-phablet-px - 1)
 		li
@@ -197,9 +196,9 @@ $zon-search-square-size: em(35px)
 	.main_nav__classifieds__more
 		display: none
 	ul
-		display: flex
-		flex-wrap: wrap
-		justify-content: space-between
+		+display-flex()
+		+flex-wrap(wrap)
+		+justify-content(space-between)
 		li
 			width: 50%
 			text-align: left
@@ -258,7 +257,7 @@ $zon-search-square-size: em(35px)
 
 .search__input
 	display: inline-block
-	width: 80%
+	width: 70%
 	height: $zon-search-square-size - $dblhair
 	background-color: $white
 	padding: 0
@@ -320,12 +319,11 @@ $zon-search-square-size: em(35px)
 	height: $small
 
 //box 7: topics
-//TODO: fix em padding to use variables (as)
 .main_nav__tags
 	@extend %main_nav__topics
-	width: 70%
 	text-align: left
 	order: 70
+	width: 80%
 	ul
 		width: 80%
 		display: inline-block
@@ -345,12 +343,13 @@ $zon-search-square-size: em(35px)
 	font-weight: bold
 	vertical-align: top
 	display: inline-block
+	width: 20%
 
 //box 8: date
 .main_nav__date
 	@extend %main_nav__topics
 	font-weight: bold
-	width: 30%
+	width: 20%
 	text-align: right
 	order: 80
 
@@ -358,9 +357,9 @@ $zon-search-square-size: em(35px)
 .main_nav__teaser
 	display: none
 	+respond-min($break-tablet-min)
-		display: inline-block
+		display: inline
 		order: 45
-		flex-grow: 1
+		+flex-grow(1)
 		margin: $twice $twice
 
 /* primary navigation (ressorts and stuff) */
