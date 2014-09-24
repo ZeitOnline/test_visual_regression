@@ -146,37 +146,35 @@ def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
         "A div for the burger menu is missing."
 
 
-def test_macro_main_nav_search_produce_markup(jinja2_env):
+def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_search().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    form = '<form accept-charset="utf-8" method="get"' \
-        ' class="search" role="search" ' \
-        'action="http://www.zeit.de/suche/index">'
-    label = '<label for="q" class="hideme">suchen</label>'
-    button = '<button class="search__button"' \
-        ' type="submit" tabindex="2">'
-    icon = '<span class="icon-zon-logo-navigation_suche' \
-        ' search__button__image main_nav__icon--plain"></span>'
-    icon_hover = '<span class="icon-zon-logo-navigation_suche-hover' \
-        ' search__button__image main_nav__icon--hover"></span>'
-    input_box = '<input class="search__input" id="q" name="q"' \
-        ' type="search" placeholder="Suche" tabindex="1">'
-    button_close = '<button class="search__close"' \
-        ' type="submit" tabindex="2">'
-    icon_close = '<span class="icon-zon-logo-navigation_close-small' \
-        ' search__close__image"></span>'
-    assert form in output
-    assert label in output
-    assert button in output
-    assert icon in output
-    assert icon_hover in output
-    assert input_box in output
-    assert button_close in output
-    assert icon_close in output
+        'zeit.web.site:templates/inc/nav_main.html')
+    html_str = tpl.module.main_nav_search()
+    html = lxml.html.fromstring(html_str).cssselect
+
+    assert html('form.search'
+        '[accept-charset="utf-8"]'
+        '[method="get"]'
+        '[role="search"]'
+        '[action="http://www.zeit.de/suche/index"]')[0] is not None,\
+        'Form element is not present'
+    assert html('label.hideme[for="q"]')[0] is not None,\
+        'Hide me label is not present'
+    assert html('button.search__button[type="submit"][tabindex="2"]')[0]\
+        is not None, 'No search button present'
+    assert html('span.icon-zon-logo-navigation_suche'
+        '.search__button__image.main_nav__icon--plain')[0] is not None, (
+        'No search logo present')
+    assert html('span.icon-zon-logo-navigation_suche-hover'
+        '.search__button__image.main_nav__icon--hover')[0] is not None, (
+        'No icon-hover present')
+    assert html('input.search__input[id="q"][name="q"]'
+        '[type="search"][placeholder="Suche"][tabindex="1"]')[0] is not None, (
+        'No search input present')
+    assert html('button.search__close[type="submit"]'
+        '[tabindex="2"]')[0] is not None, 'No close button present'
+    assert html('span.icon-zon-logo-navigation_close-small.'
+        'search__close__image')[0] is not None, 'No close icon present'
 
 
 def test_macro_main_nav_ressorts_produce_markup(jinja2_env):
