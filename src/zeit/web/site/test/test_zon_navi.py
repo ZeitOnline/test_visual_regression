@@ -213,27 +213,16 @@ def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
 
 # integration testing
 
-def test_article_has_valid_main_nav_structure(testserver, testbrowser):
+def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<nav class="main_nav">' in output
-    assert '<div class="logo_bar__image">' in output
-    assert '<div class="logo_bar__menue">' in output
-    assert '<div class="main_nav__teaser">' in output
-    assert '<div class="main_nav__community"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__ressorts"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__services"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__classifieds"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__search"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__tags">' in output
+    html = browser.cssselect
+    print browser.contents
+    assert len(html('nav.main_nav')) == 1, 'Nav main_nav is not present.'
+    assert len(html('div.logo_bar__image')) == 1, 'Logo bar image not present.'
+    assert len(html('div.logo_bar__menue')) == 1, 'Menu bar is not present.'
+    assert len(html('div.main_nav__teaser')) == 1, 'Nav teaser not present.'
+    assert len(html('div.main_nav__community[data-dropdown="true"]')) == 1, (
+        'Data dropdown not present')
 
 
 def test_article_has_valid_services_structure(testserver, testbrowser):
