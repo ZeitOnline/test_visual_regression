@@ -229,166 +229,128 @@ def test_article_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
     print browser.contents
-    assert len(html('#hp.global.topnav.links.abo')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.abo"]')) == 1, (
         'Abo link not present.')
-    assert len(html('#hp.global.topnav.links.shop')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.shop"]')) == 1, (
         'Shop link is not present')
-    assert len(html('#hp.global.topnav.links.epaper')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.epaper"]')) == 1, (
         'E-Paper link is not present.')
-    assert len(html('#hp.global.topnav.links.audio')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.audio"]')) == 1, (
         'Audio link is not present.')
-    assert len(html('#hp.global.topnav.links.apps')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.apps"]')) == 1, (
         'App link is not present.')
-    assert len(html('#hp.global.topnav.links.archiv')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.archiv"]')) == 1, (
         'Archiv link is not present')
 
 
-def test_article_should_habe_valid_classifieds_structure(testserver,
+def test_article_should_have_valid_classifieds_structure(testserver,
                                                          testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
     print browser.contents
-    assert len(html('#hp.global.topnav.links.jobs')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.jobs"]')) == 1, (
         'Job link is not present.')
-    assert len(html('#hp.global.topnav.links.partnersuche')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.partnersuche"]')) == 1, (
         'Link partnersuche is not present.')
-    assert len(html('#hp.global.topnav.links.immobilien')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.immobilien"]')) == 1, (
         'Link immobilien is not present')
-    assert len(html('#hp.global.topnav.links.automarkt')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.automarkt"]')) == 1, (
         'Link automarkt is not present')
 
 
 def test_article_has_valid_community_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<a href="http://community.zeit.de/user/login?' in output
-    assert '<span class="main_nav__community__image' in output
-    assert 'Anmelden' in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html(
+        'a[href="http://community.zeit.de/user/login?"]') is not None, (
+        'Link to login form is invalid')
+    assert html('span.main_nav__community__image') is not None, (
+        'span.main_nav__community__image is invalid')
+    assert 'Anmelden' in lxml.etree.tostring(
+        html('a[id="drupal_login"]')[0]), (
+        'Link to login has invalid label')
 
 
 def test_article_has_valid_logo_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<a href="http://www.zeit.de/index"' \
-        ' title="Nachrichten auf ZEIT ONLINE"' \
-        ' class="icon-zon-logo-desktop" ' \
-        'id="hp.global.topnav.centerpages.logo">' in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('a.icon-zon-logo-desktop'
+                '[href="http://www.zeit.de/index"]'
+                '[title="Nachrichten auf ZEIT ONLINE"]'
+                '[id="hp.global.topnav.centerpages.logo"]') is not None, (
+        'Element a.icon-zon-logo-desktop is invalid')
 
 
 def test_article_has_valid_burger_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--plain ' \
-        'icon-zon-logo-navigation_menu"></div>' in output
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--hover' \
-        ' icon-zon-logo-navigation_menu-hover"></div>' in output
-
-
-def test_article_has_valid_burger_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--plain ' \
-        'icon-zon-logo-navigation_menu"></div>' in output
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--hover' \
-        ' icon-zon-logo-navigation_menu-hover"></div>' in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('div.logo_bar__menue__image'
+                '.main_nav__icon--plain'
+                '.icon-zon-logo-navigation_menu') is not None, (
+        'Element div.main_nav__icon--plain is invalid')
+    assert html('div.logo_bar__menue__image'
+                '.main_nav__icon--hover'
+                '.icon-zon-logo-navigation_menu-hover') is not None, (
+        'Element .main_nav__icon--hover is invalid')
 
 
 def test_article_has_valid_search_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    form = '<form accept-charset="utf-8" method="get"' \
-        ' class="search" role="search" ' \
-        'action="http://www.zeit.de/suche/index">'
-    label = '<label for="q" class="hideme">suchen</label>'
-    button = '<button class="search__button"' \
-        ' type="submit" tabindex="2">'
-    icon = '<span class="icon-zon-logo-navigation_suche' \
-        ' search__button__image main_nav__icon--plain"></span>'
-    icon_hover = '<span class="icon-zon-logo-navigation_suche-hover' \
-        ' search__button__image main_nav__icon--hover"></span>'
-    input_box = '<input class="search__input" id="q" name="q"' \
-        ' type="search" placeholder="Suche" tabindex="1">'
-    button_close = '<button class="search__close"' \
-        ' type="submit" tabindex="2">'
-    icon_close = '<span class="icon-zon-logo-navigation_close-small' \
-        ' search__close__image"></span>'
-    assert form in output
-    assert label in output
-    assert button in output
-    assert icon in output
-    assert icon_hover in output
-    assert input_box in output
-    assert button_close in output
-    assert icon_close in output
-
-
-def test_article_has_valid_ressort_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    markup = '<nav role="navigation"><ul class="primary-nav">' \
-        '<li class="primary-nav__item"><a class="primary-nav__link" ' \
-        'href="#">Politik</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link primary-nav__link--current" ' \
-        'href="#">Gesellschaft</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Wirtschaft</a>' \
-        '</li><li class="primary-nav__item"><a class="primary-nav__link" ' \
-        'href="#">Kultur</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Wissen</a>' \
-        '</li><li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Digital</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Studium</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Karriere</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Reise</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Sport</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Spiele</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">ZEITmagazin</a></li></ul></nav>'
-    assert markup in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('form.search'
+                '[accept-charset="utf-8"]'
+                '[method="get"]'
+                '[role="search"]'
+                '[action="http://www.zeit.de/suche/index"]') is not None, (
+        'Element form.search is invalid')
+    assert html('label.hideme[for="q"]') is not None, (
+        'label.hideme is invalid')
+    assert html('label.hideme[for="q"]')[0].text == 'suchen', (
+        'Element label.hideme has wrong text')
+    assert html('button.search__button'
+                '[type="submit"]'
+                '[tabindex="2"]') is not None, (
+        'Element button.search__button is invalid')
+    assert html('span.icon-zon-logo-navigation_suche.search__button__image'
+                '.main_nav__icon--plain') is not None, (
+        'Element span in invalid')
+    assert html('span.icon-zon-logo-navigation_suche-hover'
+                '.search__button__image'
+                '.main_nav__icon--hover')[0].text is None, (
+        'Element span is not empty')
+    assert html('input.search__input'
+                '[id="q"]'
+                '[name="q"]'
+                '[type="search"]'
+                '[placeholder="Suche"]'
+                '[tabindex="1"]') is not None, (
+        'Element input.search__input is invalid')
+    assert html('button.search__close'
+                '[type="submit"]'
+                '[tabindex="2"]') is not None, (
+        'Element button.search__close is invalid')
+    assert html('span.icon-zon-logo-navigation_close-small'
+                '.search__close__image')[0].text is None, (
+        'Element span.icon-zon-logo-navigation_close-small is not empty')
 
 
 def test_article_has_valid_tag_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    title = '<span class="main_nav__tags__label">Schwerpunkte'
-    ul_list = '<ul>'
-    assert title in output
-    assert ul_list in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert 'Schwerpunkte' in html('span.main_nav__tags__label')[0].text, (
+        'Element main_nav__tags__label is invalid')
+    assert html('ul'), 'Missing ul'
 
 
 def test_article_has_valid_nav_date_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
     date = '3. September 2014 10:50 Uhr'
-    assert date in output
-
-# selenium test resizing
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('div.main_nav__date')[0].text == date, (
+        'Date is invalid')
