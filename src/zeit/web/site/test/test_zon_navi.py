@@ -43,80 +43,72 @@ def test_nav_services_macro_should_have_expected_links(jinja2_env):
         'zeit.web.site:templates/inc/nav_main.html')
     html_str = tpl.module.main_nav_services()
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('li > a[href="http://www.zeitabo.de/?mcwt=2009_07_0002"]')\
+    assert html('li > a[href="http://www.zeitabo.de/?mcwt=2009_07_0002"]')[0]\
         is not None, 'No link for zeitabo.de'
-    assert html('li > a[href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;'
-        'et_lid=175&amp;et_sub=Startseite_header"]'\
-        '[id="hp.global.topnav.links.shop"]') is not None,\
+    assert html('li > a[href="http://shop.zeit.de?et=l6VVNm&et_cid=42&'
+        'et_lid=175&et_sub=Startseite_header"]'
+        '[id="hp.global.topnav.links.shop"]')[0] is not None,\
         'No link for shop.zeit.de'
-    assert html('li > a[href="https://premium.zeit.de/?wt_mc=pm.intern.fix.'\
-        'zeitde.fix.dach.text.epaper"][id="hp.global.topnav.links.epaper"]')\
+    assert html('li > a[href="https://premium.zeit.de/?wt_mc=pm.intern.fix.'
+        'zeitde.fix.dach.text.epaper"]'
+        '[id="hp.global.topnav.links.epaper"]')[0]\
         is not None, 'No link for premium.zeit.de'
-    assert html('li > a[href="https://premium.zeit.de/abo/digitalpaket5' \
-        '?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio"][id="hp.global.'\
-        'topnav.links.audio"]')\
-        is not None, 'No link for premium.zeit.de AUDIO'
-    assert html('li > a[href="https://premium.zeit.de/abo/appsios?' \
-        'wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps"][id="hp.global.topnav'\
-        '.links.apps"]') is not None, 'No link for premium.zeit.de APPS'
+    assert html('li > a[href="https://premium.zeit.de/abo/digitalpaket5'
+        '?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio"][id="hp.global.'
+        'topnav.links.audio"]')[0] is not None,\
+        'No link for premium.zeit.de AUDIO'
+    assert html('li > a[href="https://premium.zeit.de/abo/appsios?'
+        'wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps"][id="hp.global.topnav'
+        '.links.apps"]')[0] is not None, 'No link for premium.zeit.de APPS'
     assert html('li > a[href="http://www.zeit.de/archiv"][id="hp.global.'\
-        'topnav.links.archiv"]') is not None, 'No link for Archiv'
+        'topnav.links.archiv"]')[0] is not None, 'No link for Archiv'
 
 
-def test_macro_main_nav_classifieds_produce_markup(jinja2_env):
+def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_classifieds().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    jobs = '<li><a href="http://jobs.zeit.de/"' \
-        ' id="hp.global.topnav.links.jobs">Jobs</a></li>'
-    psuche = '<li><a href="http://www.zeit.de/angebote/partnersuche/index?' \
-        'pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID"' \
-        ' id="hp.global.topnav.links.partnersuche">Partnersuche</a></li>'
-    more = '<li class="main_nav__classifieds__more">'
-    immo = '<li><a href="http://zeit.immowelt.de/" rel="nofollow"' \
-        ' id="hp.global.topnav.links.immobilien">Immobilien</a></li>'
-    markt = '<li><a href="http://automarkt.zeit.de/"' \
-        ' id="hp.global.topnav.links.automarkt">Automarkt</a></li>'
-    assert jobs in output
-    assert psuche in output
-    assert more in output
-    assert immo in output
-    assert markt in output
+        'zeit.web.site:templates/inc/nav_main.html')
+    html_str = tpl.module.main_nav_classifieds()
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('li > a[href="http://jobs.zeit.de/"]'
+        '[id="hp.global.topnav.links.jobs"')[0]\
+        is not None, 'No link for job.zeit.de'
+    assert html('li > a[href="http://www.zeit.de/angebote/partnersuche/index?'
+        'pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID"]'
+        '[id="hp.global.topnav.links.partnersuche"]')[0] is not None,\
+        'Link for partnersuche not present'
+    assert len(html('li.main_nav__classifieds__more')) == 1, 'No classifieds'
+    assert html('li > a[href="http://zeit.immowelt.de/"]'
+        '[id="hp.global.topnav.links.immobilien"][rel="nofollow"]')[0]\
+        is not None, 'No link for zeit.immowelt.de'
+    assert html('li > a[href="http://automarkt.zeit.de/"]'
+        '[id="hp.global.topnav.links.automarkt"]')[0]\
+        is not None, 'No link for Automarkt'
 
 
-def test_macro_main_nav_community_produce_markup(jinja2_env):
+def test_nav_community_macro_should_render_a_login(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_community().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    link = '<a href="http://community.zeit.de/user/login?' \
-        'destination=http://www.zeit.de/index"' \
-        ' rel="nofollow" class="user" id="drupal_login">'
-    logo = '<span class="main_nav__community__image' \
-        ' icon-zon-logo-navigation_login"></span>'
-    text = 'Anmelden'
-    assert link in output
-    assert logo in output
-    assert text in output
+        'zeit.web.site:templates/inc/nav_main.tpl')
+    html_str = tpl.module.main_nav_community()
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('li > a'
+        '[href="http://community.zeit.de/user/login?destination='
+        'http://www.zeit.de/index"]'
+        '[rel="nofollow"]'
+        '[class="user"]'
+        '[id="drupal_login"')[0] is not None, 'Community login is missing'
 
 
-def test_macro_main_nav_logo_produce_markup(jinja2_env):
+def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_logo().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    link = '<a href="http://www.zeit.de/index"' \
-        ' title="Nachrichten auf ZEIT ONLINE"' \
-        ' class="icon-zon-logo-desktop" ' \
-        'id="hp.global.topnav.centerpages.logo">'
-    assert link in output
+        'zeit.web.site:templates/inc/nav_main.tpl')
+    html_str = tpl.module.main_nav_logo()
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('a[href="http://www.zeit.de/index"]'
+        '[title="Nachrichten auf ZEIT ONLINE"]'
+        '[class="icon-zon-logo-desktop"]'
+        '[id="hp.global.topnav.centerpages.logo"]')[0] is not None,\
+        'Logo link is missing'
+
 
 
 def test_macro_main_nav_burger_produce_markup(jinja2_env):
