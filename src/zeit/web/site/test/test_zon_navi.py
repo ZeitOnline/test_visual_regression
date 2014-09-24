@@ -229,32 +229,32 @@ def test_article_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
     print browser.contents
-    assert len(html('#hp.global.topnav.links.abo')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.abo"]')) == 1, (
         'Abo link not present.')
-    assert len(html('#hp.global.topnav.links.shop')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.shop"]')) == 1, (
         'Shop link is not present')
-    assert len(html('#hp.global.topnav.links.epaper')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.epaper"]')) == 1, (
         'E-Paper link is not present.')
-    assert len(html('#hp.global.topnav.links.audio')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.audio"]')) == 1, (
         'Audio link is not present.')
-    assert len(html('#hp.global.topnav.links.apps')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.apps"]')) == 1, (
         'App link is not present.')
-    assert len(html('#hp.global.topnav.links.archiv')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.archiv"]')) == 1, (
         'Archiv link is not present')
 
 
-def test_article_should_habe_valid_classifieds_structure(testserver,
+def test_article_should_have_valid_classifieds_structure(testserver,
                                                          testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
     print browser.contents
-    assert len(html('#hp.global.topnav.links.jobs')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.jobs"]')) == 1, (
         'Job link is not present.')
-    assert len(html('#hp.global.topnav.links.partnersuche')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.partnersuche"]')) == 1, (
         'Link partnersuche is not present.')
-    assert len(html('#hp.global.topnav.links.immobilien')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.immobilien"]')) == 1, (
         'Link immobilien is not present')
-    assert len(html('#hp.global.topnav.links.automarkt')) == 1, (
+    assert len(html('a[id="hp.global.topnav.links.automarkt"]')) == 1, (
         'Link automarkt is not present')
 
 
