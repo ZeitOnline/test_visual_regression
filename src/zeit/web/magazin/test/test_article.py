@@ -65,22 +65,22 @@ def test_article_has_valid_facebook_meta_tags(testserver, testbrowser):
     assert '<meta property="og:image" ' in browser.contents
 
 
-def test_all_tracking_pixel_are_send(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/artikel/05' % testserver.url)
-    driver.find_element_by_xpath(
-        "//script[@src='http://www.google-analytics.com/ga.js']")
-    driver.find_element_by_xpath(
-        "//script[@src='http://scripts.zeit.de/js/rsa.js']")
-    driver.find_element_by_xpath(
-        "//script[@src='http://scripts.zeit.de/static/js/" +
-        "webtrekk/webtrekk_v3.js']")
-    driver.find_element_by_xpath(
-        "//script[@src='https://script.ioam.de/iam.js']")
-    driver.find_element_by_xpath(
-        "//img[starts-with(@src,'http://cc.zeit.de/cc.gif')]")
-    driver.find_element_by_xpath(
-        "//img[starts-with(@src,'http://zeitonl.ivwbox.de')]")
+def test_all_tracking_pixel_are_send(testbrowser, testserver):
+    browser = testbrowser('%s/artikel/05' % testserver.url)
+
+    assert browser.contents.xpath(
+        '//script[@src=\'http://www.google-analytics.com/ga.js\']')
+    assert browser.contents.xpath(
+        '//script[@src=\'http://scripts.zeit.de/js/rsa.js\']')
+    assert browser.contents.xpath(
+        '//script[@src=\'http://scripts.zeit.de/static/js/'
+        'webtrekk/webtrekk_v3.js\']')
+    assert browser.contents.xpath(
+        '//script[@src=\'https://script.ioam.de/iam.js\']')
+    assert browser.contents.xpath(
+        '//img[starts-with(@src,\'http://cc.zeit.de/cc.gif\')]')
+    assert browser.contents.xpath(
+        '//img[starts-with(@src,\'http://zeitonl.ivwbox.de\')]')
 
 
 def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
