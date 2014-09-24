@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<navigation>
+  <ressort>
+    <link href="http://xml.zeit.de/index" label="start">Start</link>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/politik/index" id="politik">Politik</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/politik/deutschland/index" id="deutschland">Deutschland</link>
+      <link href="http://xml.zeit.de/politik/ausland/index" id="ausland">Ausland</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/wirtschaft/index" label="wirtschaft">Wirtschaft</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/wirtschaft/unternehmen/index" label="unternehmen">Unternehmen</link>
+      <link href="http://xml.zeit.de/wirtschaft/geldanlage/index" label="geldanlage">Geldanlage</link>
+      <link href="http://xml.zeit.de/wirtschaft/boerse/index" label="boerse">Börse</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/meinung/index" label="meinung">Meinung</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/gesellschaft/index" label="gesellschaft">Gesellschaft</link>
+      <link href="http://xml.zeit.de/gesellschaft/zeitgeschehen/index" label="zeitgeschehen">Zeitgeschehen</link>
+      <link href="http://xml.zeit.de/gesellschaft/familie/index" label="familie">Familie</link>
+      <link href="http://xml.zeit.de/gesellschaft/schule/index" label="schule">Schule</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/kultur/index" label="kultur">Kultur</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/kultur/literatur/index" label="literatur">Literatur</link>
+      <link href="http://xml.zeit.de/kultur/film/index" label="film">Film &amp; TV</link>
+      <link href="http://xml.zeit.de/kultur/musik/index" label="musik">Musik</link>
+      <link href="http://xml.zeit.de/kultur/kunst/index" label="kunst">Kunst</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/wissen/index" label="wissen">Wissen</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/wissen/gesundheit/index" label="gesundheit">Gesundheit</link>
+      <link href="http://xml.zeit.de/wissen/umwelt/index" label="umwelt">Umwelt</link>
+      <link href="http://xml.zeit.de/wissen/geschichte/index" label="geschichte">Geschichte</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/digital/index" label="digital">Digital</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/digital/internet/index" label="internet">Internet</link>
+      <link href="http://xml.zeit.de/digital/datenschutz/index" label="datenschutz">Datenschutz</link>
+      <link href="http://xml.zeit.de/digital/mobil/index" label="mobil">Mobil</link>
+      <link href="http://xml.zeit.de/digital/games/index" label="games">Games</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/studium/index" label="studium">Studium</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/studium/uni-leben/index" label="uni-leben">Uni-Leben</link>
+      <link href="http://xml.zeit.de/studium/hochschule/index" label="hochschule">Hochschule</link>
+      <link href="http://ranking.zeit.de/" label="rankings">Uni-Rankings</link>
+      <link href="http://xml.zeit.de/studium/studiengaenge" label="studiengaenge">Studiengänge</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/karriere/index" label="karriere">Karriere</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/karriere/bewerbung/index" label="bewerbung">Bewerbung</link>
+      <link href="http://xml.zeit.de/karriere/beruf/index" label="beruf">Beruf</link>
+      <link>
+        <hr/>
+        <span>Verlagsangebot</span>
+      </link>
+      <link href="http://jobs.zeit.de/" label="beruf">Stellenmarkt</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/lebensart/index" label="lebensart">Lebensart</link>
+    <subressorts>
+      <link href="http://xml.zeit.de/lebensart/mode/index" label="mode">Mode</link>
+      <link href="http://xml.zeit.de/lebensart/essen-trinken/index" label="essen-trinken">Essen &amp; Trinken</link>
+      <link href="http://xml.zeit.de/lebensart/partnerschaft/index" label="partnerschaft">Partnerschaft</link>
+    </subressorts>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/reisen/index" label="reisen">Reisen</link>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/mobilitaet/index" label="mobilitaet">Mobilität</link>
+  </ressort>
+  <ressort>
+    <link href="http://xml.zeit.de/sport/index" label="sport">Sport</link>
+  </ressort>
+  <list id="news-ressorts">
+    <item number="1" label="">Politik</item>
+    <item number="2" label="">Wirtschaft</item>
+    <item number="3" label="">Meinung</item>
+    <item number="4" label="">Gesellschaft</item>
+    <item number="5" label="">Kultur</item>
+    <item number="6" label="">Wissen</item>
+    <item number="7" label="">Digital</item>
+    <item number="8" label="">Studium</item>
+    <item number="9" label="">Karriere</item>
+    <item number="10" label="">Lebensart</item>
+    <item number="11" label="">Reisen</item>
+    <item number="12" label="">Mobilität</item>
+    <item number="13" label="">Sport</item>
+  </list>
+  <list id="print-ressorts">
+    <item number="1" label="">Politik</item>
+    <item number="2" label="">Dossier</item>
+    <item number="3" label="">Wirtschaft</item>
+    <item number="4" label="">Wissen</item>
+    <item number="5" label="">Feuilleton</item>
+    <item number="6" label="">Literatur</item>
+    <item number="7" label="">Reisen</item>
+    <item number="8" label="">Chancen</item>
+    <item number="9" label="">Zeitläufte</item>
+    <item number="10" label="">ZEIT Magazin</item>
+  </list>
+  <list id="legacy-ressorts">
+    <item ressort="auto">mobilitaet</item>
+  </list>
+</navigation>
