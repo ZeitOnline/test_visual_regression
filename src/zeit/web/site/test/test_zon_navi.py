@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import lxml
-
+import pytest
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
@@ -396,4 +396,66 @@ def test_article_has_valid_nav_date_structure(testserver, testbrowser):
     date = '3. September 2014 10:50 Uhr'
     assert date in output
 
-# selenium test resizing
+# selenium test
+
+screen_sizes = ((320, 480, True), (520, 960, True),
+                (768, 1024, False), (980, 1024, False))
+
+@pytest.fixture(scope='session', params=screen_sizes)
+def screen_size(request):
+    return request.param
+
+def test_zon_main_nav_has_correct_structure(selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    small_screen = screen_size[2]
+    screen_width = screen_size[0]
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/centerpage/zeitonline' % testserver.url)
+
+    main_nav = driver.find_elements_by_class_name('main_nav')[0]
+    logo_bar__image = driver.find_elements_by_class_name('logo_bar__image')[0]
+    search__button = driver.find_elements_by_class_name('search__button')[0]
+    search__input = driver.find_elements_by_class_name('search__input')[0]
+    main_nav__community = driver.find_elements_by_class_name('main_nav__community')[0]
+    logo_bar__menue = driver.find_elements_by_class_name('logo_bar__menue')[0]
+    main_nav__tags = driver.find_elements_by_class_name('main_nav__tags')[0]
+    main_nav__ressorts = driver.find_elements_by_class_name('main_nav__ressorts')[0]
+    main_nav__date = driver.find_elements_by_class_name('main_nav__date')[0]
+    main_nav__services = driver.find_elements_by_class_name('main_nav__services')[0]
+    main_nav__classifieds = driver.find_elements_by_class_name('main_nav__classifieds')[0]
+
+    # navigation is visible in all sizes
+    assert(main_nav.is_displayed())
+    #logo is visible in all sizes
+    assert(logo_bar__image.is_displayed())
+    #search button is visible in all sizes
+    assert(search__button.is_displayed())
+    #community link is visible in all sizes
+    assert(main_nav__community.is_displayed())
+    #ressort bar is visible in all sizes
+    assert(main_nav__ressorts.is_displayed())
+    #service bar is visible in all sizes
+    assert(main_nav__services.is_displayed())
+    #classifieds bar is visible in all sizes
+    assert(main_nav__classifieds.is_displayed())
+
+    if small_screen:
+        #burger menue is visible
+        assert(logo_bar__menue.is_displayed())
+        #tags are hidden
+        assert(main_nav__tags.is_displayed() == False)
+        #date bar is hidden
+        assert(main_nav__date.is_displayed() == False)
+        #last 3 services aren't shown
+        serv_li = main_nav__services.find_elements_by_tag_name('li')
+        assert(serv_li[3].is_displayed() == False)
+        assert(serv_li[4].is_displayed() == False)
+        assert(serv_li[5].is_displayed() == False)
+
+    if screen_width == 768:
+        #test search input is hidden in tablet mode
+        assert(search__input.is_displayed() == False)
+
+def test_nav_search_is_working_as_expected(selenium_driver, testserver, screen_size):
+
