@@ -15,3 +15,12 @@ require([
     images.init();
     nav.init();
 });
+
+// add required jQuery-Plugins that are writte with AMD header here
+// make a shim of them first
+// plugins that require plugins need to make this requirement in the shim-section of config
+require([
+    'web.site/plugins/jquery.togglesearch'
+], function() {
+    $( '.main_nav__search' ).toggleSearch();
+});

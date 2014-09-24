@@ -4,7 +4,33 @@ Change log for zeit.frontend
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-944: HTML scaffold
+
+- ZON-977: Module teaser (demo)
+
+- ZON-978: Module small teaser (demo)
+
+- ZON-954: Differences between teasers
+
+- ZON-931: Build search HTML and CSS main framework
+
+- ZON-932: Implement navigation search module
+
+- ZON-933: Integrate logo
+
+- ZON-934: Add community link to navigation
+
+- ZON-935: Add puplishers bar part 1
+
+- ZON-936: Add puplishers bar part 2
+
+- ZON-950: Integrate navigation into new friedbert structure
+
+- ZON-959: Style mobile navigation view
+
+- ZON-973: Add new icon assets for navigation
+
+- ZON-975: Add and style tagbar under navigation
 
 
 1.0 (2014-09-19)

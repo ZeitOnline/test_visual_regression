@@ -1,0 +1,130 @@
+// just a helper until we introduce the real structure
+.teasers
+	width: 100%
+	+respond-min($break-tablet-min)
+		width: em(480px)
+	+respond-min($break-desktop-min)
+		width: em(620px)
+
+.teaser
+	+pie-clearfix
+	padding: $petite 0
+	border-bottom: 1px solid #ccc
+	+respond-min($break-tablet-min)
+		border-bottom: none
+
+.teaser--small
+	border-bottom: none
+
+.teaser--small.teaser--hasmedia
+	position: relative
+	+respond-min($break-phablet-min)
+		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+	+respond-min($break-tablet-min)
+		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
+	+respond-min($break-desktop-min)
+		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+
+.teaser__heading
+	font-size: 1em
+	margin: 0 0 em(10px) 0
+
+.teaser__heading--hasmedia
+	margin: 0 0 em(22px) 0
+
+.teaser__heading__small
+	margin: 0 0 $thin 0
+
+.teaser__combined-link
+	color: $color-text
+	text-decoration: none
+	&:link > .teaser__kicker,
+	&:visited > .teaser__kicker
+		color: $color-text-highlighted
+	&:link > .teaser__title,
+	&:visited > .teaser__title
+		color: $color-text
+	&:hover
+		text-decoration: none
+		& > .teaser__title
+			text-decoration: underline
+
+.teaser__kicker
+	display: block
+	font-family: TabletGothic
+	font-size: $font-s
+	font-weight: bold
+	letter-spacing: $standard-letter-spacing
+	margin-bottom: em(4px, $font-s--px)
+
+.teaser__title
+	display: block
+	font-family: FranziskaWebPro
+	font-size: em(25px)
+	font-weight: bold
+	line-height: 1.15
+	+respond-min($break-tablet-min)
+		font-size: em(31px)
+
+.teaser__title--small
+	font-size: em(22px)
+	+respond-min($break-tablet-min)
+		font-size: em(22px)
+
+.teaser__media
+	margin: 0 0 em(15px) 0
+
+.teaser__media--small
+	display: none
+	width: 100%
+	+respond-min($break-phablet-min)
+		display: inline-block
+		position: absolute
+		left: 0
+		top: $petite
+		width: $teaser-image-desktop-width
+	+respond-min($break-tablet-min)
+		width: $teaser-image-phablet-width
+	+respond-min($break-desktop-min)
+		width: $teaser-image-desktop-width
+
+.teaser__media--small[data-showimagemobile="true"]
+	display: block
+
+.teaser__media-link
+.teaser__media-item
+	height: auto
+	max-width: 100%
+	width: 100%
+
+.teaser__media-item--small
+	max-width: 100%
+	//width: $teaser-image-width
+
+.teaser__container
+.teaser__text
+	line-height: 1.4
+	margin: 0 0 $thin 0
+
+.teaser__byline
+	font-family: FranziskaWebPro
+	font-size: em(15px)
+	font-style: italic
+	margin-bottom: rem(6px)
+
+.teaser__metadata
+	font-size: em(13px)
+	font-weight: bold
+	letter-spacing: $standard-letter-spacing
+
+.teaser__datetime
+	&:link, &:visited
+		border-bottom: 1px solid #ccc
+		color: inherit
+		text-decoration: none
+	&:hover
+		border-bottom: 1px solid #777
+
+.teaser__commentcount
+	@extend .teaser__datetime
+	margin-left: 10px
