@@ -179,30 +179,15 @@ def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
 
 def test_macro_main_nav_ressorts_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_ressorts().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    markup = '<nav role="navigation"><ul class="primary-nav">' \
-        '<li class="primary-nav__item"><a class="primary-nav__link" ' \
-        'href="#">Politik</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link primary-nav__link--current" ' \
-        'href="#">Gesellschaft</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Wirtschaft</a>' \
-        '</li><li class="primary-nav__item"><a class="primary-nav__link" ' \
-        'href="#">Kultur</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Wissen</a>' \
-        '</li><li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Digital</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Studium</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Karriere</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Reise</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Sport</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Spiele</a></li></ul></nav>'
-    assert markup == output
+        'zeit.web.site:templates/inc/nav_main.html')
+    html_str = tpl.module.main_nav_ressorts()
+    html = lxml.html.fromstring(html_str).cssselect
+
+    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
+    assert len(html('ul li.primary-nav__item')) > 1
+    assert len(html('ul li.primary-nav__item a.primary-nav__link')) == (
+                len(html('ul li.primary-nav__item'))), (
+                'Links must have same length a list items.')
 
 
 def test_macro_main_nav_tags_produce_markup(jinja2_env):
