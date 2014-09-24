@@ -11,4 +11,9 @@
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
-&lt;/pickle&gt;</attribute></head><body><cluster area="feature"><region area="lead"><container cp:type="teaser" module="buttons" cp:__name__="id-515c89be-7817-4655-a9f5-046e12e7cc87"/></region><region area="informatives"><container cp:type="cpextra" module="mostread" cp:__name__="5860ae76-cdff-4625-b69c-ce7108b86526"><cp_extra id="mostread"/></container><container cp:type="cpextra" module="mostcommented" cp:__name__="90612fd4-da48-4b56-9b73-19fc1975868c"><cp_extra id="mostcommented"/></container></region></cluster><cluster area="teaser-mosaic"/><title>aad_test_cp</title></body><feed/></centerpage>
+&lt;/pickle&gt;</attribute></head>
+<body>
+<cluster area="feature">
+<region area="lead">
+<container cp:type="teaser" module="buttons" cp:__name__="id-515c89be-7817-4655-a9f5-046e12e7cc87"/>
+</region><region area="informatives"><container cp:type="cpextra" module="mostread" cp:__name__="5860ae76-cdff-4625-b69c-ce7108b86526"><cp_extra id="mostread"/></container><container cp:type="cpextra" module="mostcommented" cp:__name__="90612fd4-da48-4b56-9b73-19fc1975868c"><cp_extra id="mostcommented"/></container></region></cluster><cluster area="teaser-mosaic"/><title>aad_test_cp</title></body><feed/></centerpage>

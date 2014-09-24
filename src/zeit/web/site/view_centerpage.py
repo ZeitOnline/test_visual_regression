@@ -20,3 +20,13 @@ class Centerpage(zeit.web.core.view.Base):
 
         # TODO: Implement actual timestamp.
         return datetime.datetime.now()
+
+
+    @zeit.web.reify
+    def area_main(self):
+        """Filter teaser with layout from teaser list.
+        :rtype: list
+        """
+        return filter(
+            lambda x: hasattr(x,'layout') and hasattr(x.layout,'id'),
+            self.context['lead'].values())

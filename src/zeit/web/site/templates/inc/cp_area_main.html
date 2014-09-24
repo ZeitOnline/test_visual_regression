@@ -1,8 +1,10 @@
-{# %- import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp with context -% #}
-
 <div class="teaser-collection">
-    {# cp.include_teaser_block(view.area_main) #}
     <div class="teasers">
+        {% for teaser_block in view.area_main -%}
+              {#  {{ include_teaser(teaser_block) }} #}
+              {{ teaser_block.layout.id }}
+              XXXXXXXX
+        {% endfor %}
 
     	{# Grosser Teaser mit Bild #}
         {% include "zeit.web.site:templates/inc/teaser/zon-large.tpl" %}
