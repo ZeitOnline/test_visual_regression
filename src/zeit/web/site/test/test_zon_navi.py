@@ -11,7 +11,7 @@ import lxml
 
 def test_macro_main_nav_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
+        'zeit.web.site:templates/inc/nav_main.html')
     lines = tpl.module.main_nav().splitlines()
     output = ""
     for line in lines:
