@@ -4,6 +4,8 @@ Change log for zeit.frontend
 1.1 (unreleased)
 ----------------
 
+- ZON-994: Add extented selenium testing for navigation
+
 - ZON-944: HTML scaffold
 
 - ZON-977: Module teaser (demo)

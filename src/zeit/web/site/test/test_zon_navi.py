@@ -2,6 +2,7 @@
 import lxml
 import pytest
 
+
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/nav_main.html')
@@ -213,199 +214,161 @@ def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
 
 # integration testing
 
-def test_article_has_valid_main_nav_structure(testserver, testbrowser):
+def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<nav class="main_nav">' in output
-    assert '<div class="logo_bar__image">' in output
-    assert '<div class="logo_bar__menue">' in output
-    assert '<div class="main_nav__teaser">' in output
-    assert '<div class="main_nav__community"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__ressorts"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__services"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__classifieds"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__search"' \
-        ' data-dropdown="true">' in output
-    assert '<div class="main_nav__tags">' in output
+    html = browser.cssselect
+    print browser.contents
+    assert len(html('nav.main_nav')) == 1, 'Nav main_nav is not present.'
+    assert len(html('div.logo_bar__image')) == 1, 'Logo bar image not present.'
+    assert len(html('div.logo_bar__menue')) == 1, 'Menu bar is not present.'
+    assert len(html('div.main_nav__teaser')) == 1, 'Nav teaser not present.'
+    assert len(html('div.main_nav__community[data-dropdown="true"]')) == 1, (
+        'Data dropdown not present')
 
 
-def test_article_has_valid_services_structure(testserver, testbrowser):
+def test_article_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert 'id="hp.global.topnav.links.abo">Abo</a>' in output
-    assert 'id="hp.global.topnav.links.shop">Shop</a>' in output
-    assert 'id="hp.global.topnav.links.epaper">E-Paper</a>' in output
-    assert 'id="hp.global.topnav.links.audio">Audio</a>' in output
-    assert 'id="hp.global.topnav.links.apps">Apps</a>' in output
-    assert 'id="hp.global.topnav.links.archiv">Archiv</a>' in output
+    html = browser.cssselect
+    print browser.contents
+    assert len(html('a[id="hp.global.topnav.links.abo"]')) == 1, (
+        'Abo link not present.')
+    assert len(html('a[id="hp.global.topnav.links.shop"]')) == 1, (
+        'Shop link is not present')
+    assert len(html('a[id="hp.global.topnav.links.epaper"]')) == 1, (
+        'E-Paper link is not present.')
+    assert len(html('a[id="hp.global.topnav.links.audio"]')) == 1, (
+        'Audio link is not present.')
+    assert len(html('a[id="hp.global.topnav.links.apps"]')) == 1, (
+        'App link is not present.')
+    assert len(html('a[id="hp.global.topnav.links.archiv"]')) == 1, (
+        'Archiv link is not present')
 
 
-def test_article_has_valid_classifieds_structure(testserver, testbrowser):
+def test_article_should_have_valid_classifieds_structure(testserver,
+                                                         testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert 'id="hp.global.topnav.links.jobs">Jobs</a>' in output
-    assert 'id="hp.global.topnav.links.partnersuche">' \
-        'Partnersuche</a>' in output
-    assert 'id="hp.global.topnav.links.immobilien">Immobilien</a>' in output
-    assert 'id="hp.global.topnav.links.automarkt">Automarkt</a>' in output
+    html = browser.cssselect
+    print browser.contents
+    assert len(html('a[id="hp.global.topnav.links.jobs"]')) == 1, (
+        'Job link is not present.')
+    assert len(html('a[id="hp.global.topnav.links.partnersuche"]')) == 1, (
+        'Link partnersuche is not present.')
+    assert len(html('a[id="hp.global.topnav.links.immobilien"]')) == 1, (
+        'Link immobilien is not present')
+    assert len(html('a[id="hp.global.topnav.links.automarkt"]')) == 1, (
+        'Link automarkt is not present')
 
 
 def test_article_has_valid_community_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<a href="http://community.zeit.de/user/login?' in output
-    assert '<span class="main_nav__community__image' in output
-    assert 'Anmelden' in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html(
+        'a[href="http://community.zeit.de/user/login?"]') is not None, (
+        'Link to login form is invalid')
+    assert html('span.main_nav__community__image') is not None, (
+        'span.main_nav__community__image is invalid')
+    assert 'Anmelden' in lxml.etree.tostring(
+        html('a[id="drupal_login"]')[0]), (
+        'Link to login has invalid label')
 
 
 def test_article_has_valid_logo_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<a href="http://www.zeit.de/index"' \
-        ' title="Nachrichten auf ZEIT ONLINE"' \
-        ' class="icon-zon-logo-desktop" ' \
-        'id="hp.global.topnav.centerpages.logo">' in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('a.icon-zon-logo-desktop'
+                '[href="http://www.zeit.de/index"]'
+                '[title="Nachrichten auf ZEIT ONLINE"]'
+                '[id="hp.global.topnav.centerpages.logo"]') is not None, (
+        'Element a.icon-zon-logo-desktop is invalid')
 
 
 def test_article_has_valid_burger_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--plain ' \
-        'icon-zon-logo-navigation_menu"></div>' in output
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--hover' \
-        ' icon-zon-logo-navigation_menu-hover"></div>' in output
-
-
-def test_article_has_valid_burger_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--plain ' \
-        'icon-zon-logo-navigation_menu"></div>' in output
-    assert '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--hover' \
-        ' icon-zon-logo-navigation_menu-hover"></div>' in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('div.logo_bar__menue__image'
+                '.main_nav__icon--plain'
+                '.icon-zon-logo-navigation_menu') is not None, (
+        'Element div.main_nav__icon--plain is invalid')
+    assert html('div.logo_bar__menue__image'
+                '.main_nav__icon--hover'
+                '.icon-zon-logo-navigation_menu-hover') is not None, (
+        'Element .main_nav__icon--hover is invalid')
 
 
 def test_article_has_valid_search_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    form = '<form accept-charset="utf-8" method="get"' \
-        ' class="search" role="search" ' \
-        'action="http://www.zeit.de/suche/index">'
-    label = '<label for="q" class="hideme">suchen</label>'
-    button = '<button class="search__button"' \
-        ' type="submit" tabindex="2">'
-    icon = '<span class="icon-zon-logo-navigation_suche' \
-        ' search__button__image main_nav__icon--plain"></span>'
-    icon_hover = '<span class="icon-zon-logo-navigation_suche-hover' \
-        ' search__button__image main_nav__icon--hover"></span>'
-    input_box = '<input class="search__input" id="q" name="q"' \
-        ' type="search" placeholder="Suche" tabindex="1">'
-    button_close = '<button class="search__close"' \
-        ' type="submit" tabindex="2">'
-    icon_close = '<span class="icon-zon-logo-navigation_close-small' \
-        ' search__close__image"></span>'
-    assert form in output
-    assert label in output
-    assert button in output
-    assert icon in output
-    assert icon_hover in output
-    assert input_box in output
-    assert button_close in output
-    assert icon_close in output
-
-
-def test_article_has_valid_ressort_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    markup = '<nav role="navigation"><ul class="primary-nav">' \
-        '<li class="primary-nav__item"><a class="primary-nav__link" ' \
-        'href="#">Politik</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link primary-nav__link--current" ' \
-        'href="#">Gesellschaft</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Wirtschaft</a>' \
-        '</li><li class="primary-nav__item"><a class="primary-nav__link" ' \
-        'href="#">Kultur</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Wissen</a>' \
-        '</li><li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Digital</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Studium</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Karriere</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Reise</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">Sport</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Spiele</a></li>' \
-        '<li class="primary-nav__item"><a class="primary-nav__link"' \
-        ' href="#">ZEITmagazin</a></li></ul></nav>'
-    assert markup in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('form.search'
+                '[accept-charset="utf-8"]'
+                '[method="get"]'
+                '[role="search"]'
+                '[action="http://www.zeit.de/suche/index"]') is not None, (
+        'Element form.search is invalid')
+    assert html('label.hideme[for="q"]') is not None, (
+        'label.hideme is invalid')
+    assert html('label.hideme[for="q"]')[0].text == 'suchen', (
+        'Element label.hideme has wrong text')
+    assert html('button.search__button'
+                '[type="submit"]'
+                '[tabindex="2"]') is not None, (
+        'Element button.search__button is invalid')
+    assert html('span.icon-zon-logo-navigation_suche.search__button__image'
+                '.main_nav__icon--plain') is not None, (
+        'Element span in invalid')
+    assert html('span.icon-zon-logo-navigation_suche-hover'
+                '.search__button__image'
+                '.main_nav__icon--hover')[0].text is None, (
+        'Element span is not empty')
+    assert html('input.search__input'
+                '[id="q"]'
+                '[name="q"]'
+                '[type="search"]'
+                '[placeholder="Suche"]'
+                '[tabindex="1"]') is not None, (
+        'Element input.search__input is invalid')
+    assert html('button.search__close'
+                '[type="submit"]'
+                '[tabindex="2"]') is not None, (
+        'Element button.search__close is invalid')
+    assert html('span.icon-zon-logo-navigation_close-small'
+                '.search__close__image')[0].text is None, (
+        'Element span.icon-zon-logo-navigation_close-small is not empty')
 
 
 def test_article_has_valid_tag_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    title = '<span class="main_nav__tags__label">Schwerpunkte'
-    ul_list = '<ul>'
-    assert title in output
-    assert ul_list in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert 'Schwerpunkte' in html('span.main_nav__tags__label')[0].text, (
+        'Element main_nav__tags__label is invalid')
+    assert html('ul'), 'Missing ul'
 
 
 def test_article_has_valid_nav_date_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
     date = '3. September 2014 10:50 Uhr'
-    assert date in output
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('div.main_nav__date')[0].text == date, (
+        'Date is invalid')
 
 # selenium test
 
 screen_sizes = ((320, 480, True), (520, 960, True),
                 (768, 1024, False), (980, 1024, False))
 
+
 @pytest.fixture(scope='session', params=screen_sizes)
 def screen_size(request):
     return request.param
 
-def test_zon_main_nav_has_correct_structure(selenium_driver, testserver, screen_size):
+
+def test_zon_main_nav_has_correct_structure(
+        selenium_driver, testserver, screen_size):
 
     driver = selenium_driver
     small_screen = screen_size[2]
@@ -417,45 +380,75 @@ def test_zon_main_nav_has_correct_structure(selenium_driver, testserver, screen_
     logo_bar__image = driver.find_elements_by_class_name('logo_bar__image')[0]
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
-    main_nav__community = driver.find_elements_by_class_name('main_nav__community')[0]
+    main_nav__community = driver.find_elements_by_class_name(
+        'main_nav__community')[0]
     logo_bar__menue = driver.find_elements_by_class_name('logo_bar__menue')[0]
     main_nav__tags = driver.find_elements_by_class_name('main_nav__tags')[0]
-    main_nav__ressorts = driver.find_elements_by_class_name('main_nav__ressorts')[0]
+    main_nav__ressorts = driver.find_elements_by_class_name(
+        'main_nav__ressorts')[0]
     main_nav__date = driver.find_elements_by_class_name('main_nav__date')[0]
-    main_nav__services = driver.find_elements_by_class_name('main_nav__services')[0]
-    main_nav__classifieds = driver.find_elements_by_class_name('main_nav__classifieds')[0]
+    main_nav__services = driver.find_elements_by_class_name(
+        'main_nav__services')[0]
+    main_nav__classifieds = driver.find_elements_by_class_name(
+        'main_nav__classifieds')[0]
 
     # navigation is visible in all sizes
     assert(main_nav.is_displayed())
-    #logo is visible in all sizes
+    # logo is visible in all sizes
     assert(logo_bar__image.is_displayed())
-    #search button is visible in all sizes
+    # search button is visible in all sizes
     assert(search__button.is_displayed())
-    #community link is visible in all sizes
+    # community link is visible in all sizes
     assert(main_nav__community.is_displayed())
-    #ressort bar is visible in all sizes
+    # ressort bar is visible in all sizes
     assert(main_nav__ressorts.is_displayed())
-    #service bar is visible in all sizes
+    # service bar is visible in all sizes
     assert(main_nav__services.is_displayed())
-    #classifieds bar is visible in all sizes
+    # classifieds bar is visible in all sizes
     assert(main_nav__classifieds.is_displayed())
 
     if small_screen:
-        #burger menue is visible
+        # burger menue is visible
         assert(logo_bar__menue.is_displayed())
-        #tags are hidden
-        assert(main_nav__tags.is_displayed() == False)
-        #date bar is hidden
-        assert(main_nav__date.is_displayed() == False)
-        #last 3 services aren't shown
+        # tags are hidden
+        assert(main_nav__tags.is_displayed() is False)
+        # date bar is hidden
+        assert(main_nav__date.is_displayed() is False)
+        # last 3 services aren't shown
         serv_li = main_nav__services.find_elements_by_tag_name('li')
-        assert(serv_li[3].is_displayed() == False)
-        assert(serv_li[4].is_displayed() == False)
-        assert(serv_li[5].is_displayed() == False)
+        assert(serv_li[3].is_displayed() is False)
+        assert(serv_li[4].is_displayed() is False)
+        assert(serv_li[5].is_displayed() is False)
 
     if screen_width == 768:
-        #test search input is hidden in tablet mode
-        assert(search__input.is_displayed() == False)
+        # test search input is hidden in tablet mode
+        assert(search__input.is_displayed() is False)
 
-def test_nav_search_is_working_as_expected(selenium_driver, testserver, screen_size):
 
+def test_nav_search_is_working_as_expected(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    small_screen = screen_size[2]
+    screen_width = screen_size[0]
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/centerpage/zeitonline' % testserver.url)
+
+    search__button = driver.find_elements_by_class_name('search__button')[0]
+    search__input = driver.find_elements_by_class_name('search__input')[0]
+    search__close = driver.find_elements_by_class_name('search__close')[0]
+
+    if screen_width == 768:
+        # test search input is shown after button click
+        search__button.click()
+        assert(search__input.is_displayed())
+        # test search input is hidden after close click
+        search__close.click()
+        assert(search__input.is_displayed() is False)
+        search__button.click()
+
+    # test if search is performed
+    search__input.send_keys("test")
+    search__button.click()
+
+    assert driver.current_url == 'http://www.zeit.de/suche/index?q=test'
