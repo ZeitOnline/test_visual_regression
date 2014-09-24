@@ -225,31 +225,37 @@ def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
         'Data dropdown not present')
 
 
-def test_article_has_valid_services_structure(testserver, testbrowser):
+def test_article_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert 'id="hp.global.topnav.links.abo">Abo</a>' in output
-    assert 'id="hp.global.topnav.links.shop">Shop</a>' in output
-    assert 'id="hp.global.topnav.links.epaper">E-Paper</a>' in output
-    assert 'id="hp.global.topnav.links.audio">Audio</a>' in output
-    assert 'id="hp.global.topnav.links.apps">Apps</a>' in output
-    assert 'id="hp.global.topnav.links.archiv">Archiv</a>' in output
+    html = browser.cssselect
+    print browser.contents
+    assert len(html('#hp.global.topnav.links.abo')) == 1, (
+        'Abo link not present.')
+    assert len(html('#hp.global.topnav.links.shop')) == 1, (
+        'Shop link is not present')
+    assert len(html('#hp.global.topnav.links.epaper')) == 1, (
+        'E-Paper link is not present.')
+    assert len(html('#hp.global.topnav.links.audio')) == 1, (
+        'Audio link is not present.')
+    assert len(html('#hp.global.topnav.links.apps')) == 1, (
+        'App link is not present.')
+    assert len(html('#hp.global.topnav.links.archiv')) == 1, (
+        'Archiv link is not present')
 
 
-def test_article_has_valid_classifieds_structure(testserver, testbrowser):
+def test_article_should_habe_valid_classifieds_structure(testserver,
+                                                         testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    lines = browser.contents.splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    assert 'id="hp.global.topnav.links.jobs">Jobs</a>' in output
-    assert 'id="hp.global.topnav.links.partnersuche">' \
-        'Partnersuche</a>' in output
-    assert 'id="hp.global.topnav.links.immobilien">Immobilien</a>' in output
-    assert 'id="hp.global.topnav.links.automarkt">Automarkt</a>' in output
+    html = browser.cssselect
+    print browser.contents
+    assert len(html('#hp.global.topnav.links.jobs')) == 1, (
+        'Job link is not present.')
+    assert len(html('#hp.global.topnav.links.partnersuche')) == 1, (
+        'Link partnersuche is not present.')
+    assert len(html('#hp.global.topnav.links.immobilien')) == 1, (
+        'Link immobilien is not present')
+    assert len(html('#hp.global.topnav.links.automarkt')) == 1, (
+        'Link automarkt is not present')
 
 
 def test_article_has_valid_community_structure(testserver, testbrowser):
