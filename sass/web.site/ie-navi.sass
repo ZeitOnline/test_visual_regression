@@ -6,25 +6,30 @@
 // navigation
 // we have to do some nav remodelling for IE8/9 as it doesnt support flexbox
 
-.lt-ie9
-    .main_nav__search
-        position: relative
-        width: 100%
-        margin: 0
-        top: -300px
-    .main_nav__classifieds
-        width: 44%
-    .main_nav__community
-        width: 90%
-
+.lt-ie9,
 .lt-ie10
     .main_nav__search
         position: relative
         width: 100%
         margin: 0
-        top: -250px
-    .main_nav__classifieds
-        width: 44%
     .main_nav__community
         width: 90%
+    .main_nav__classifieds
+        width: 50%
+    .main_nav__services
+        width: 49%
+
+.lt-ie9
+    .main_nav
+        min-width: $break-desktop-min
+    .main_nav__search
+        top: -250px
+    .main_nav__classifieds__more
+        display: none
+    .main_nav__date
+        font-size: $font-xxs
+
+.lt-ie10
+    .main_nav__search
+        top: -200px
 
