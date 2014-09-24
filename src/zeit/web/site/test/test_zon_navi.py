@@ -9,33 +9,53 @@ import lxml
 #macro testing
 
 
-def test_macro_main_nav_produce_markup(jinja2_env):
+def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    wrapper = '<nav class="main_nav">'
-    logo_image = '<div class="logo_bar__image">'
-    logo_menue = '<div class="logo_bar__menue">'
-    teaser = '<div class="main_nav__teaser">'
-    community = '<div class="main_nav__community" data-dropdown="true">'
-    ressorts = '<div class="main_nav__ressorts" data-dropdown="true">'
-    services = '<div class="main_nav__services" data-dropdown="true">'
-    classifieds = '<div class="main_nav__classifieds" data-dropdown="true">'
-    search = '<div class="main_nav__search" data-dropdown="true">'
-    tags = '<div class="main_nav__tags">'
-    assert wrapper in output
-    assert logo_image in output
-    assert logo_menue in output
-    assert teaser in output
-    assert community in output
-    assert ressorts in output
-    assert services in output
-    assert classifieds in output
-    assert search in output
-    assert tags in output
+        'zeit.web.site:templates/inc/nav_main.html')
+    html_str = tpl.render()
+    html = lxml.html.fromstring(html_str).cssselect
+    # elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
+    assert len(html('nav.main_nav')) == 1,\
+        'just one .main_nav should be present'
+
+    assert len(html('nav.main_nav > div')) == 9,\
+        'nine divs within .main_nav'
+
+    assert '</div><div class="main_nav__date"' in html_str,\
+        'don\'t break line here, due to inline-block state'
+
+    assert len(html('nav.main_nav > div.logo_bar > div.logo_bar__image')) == 1,\
+        'just one .logo_bar__image'
+
+    assert len(html('nav.main_nav > div.logo_bar > div.logo_bar__menue')) == 1,\
+        'just one .logo_bar__menue'
+
+    assert len(html('nav.main_nav > div.main_nav__teaser')) == 1,\
+        'just one .main_nav__teaser'
+
+    assert len(html('nav.main_nav > div.main_nav__community[data-dropdown="true"]')) == 1,\
+        'just one .main_nav__community w/ data-dropdown=true'
+
+    assert len(html('nav.main_nav > div.main_nav__ressorts[data-dropdown="true"]')) == 1,\
+        'just one .main_nav__ressorts w/ data-dropdown=true'
+
+    assert len(html('nav.main_nav > div.main_nav__services[data-dropdown="true"]')) == 1,\
+        'just one .main_nav__services w/ data-dropdown=true'
+
+    assert len(html('nav.main_nav > div.main_nav__classifieds[data-dropdown="true"]')) == 1,\
+        'just one .main_nav__classifieds w/ data-dropdown=true'
+
+    assert len(html('nav.main_nav > div.main_nav__search[data-dropdown="true"]')) == 1,\
+        'just one .main_nav__search w/ data-dropdown=true'
+
+    assert len(html('nav.main_nav > div.main_nav__tags')) == 1,\
+        'just one .main_nav__tags'
+
+    assert len(html('nav.main_nav > div.main_nav__date')) == 1,\
+        'just one .main_nav__date'
+
+
+
 
 
 def test_nav_services_macro_should_have_expected_links(jinja2_env):
