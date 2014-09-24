@@ -1,0 +1,30 @@
+@import "utils"
+@import "functions"
+@import "constants"
+@import "mixins"
+
+// navigation
+// we have to do some nav remodelling for IE8/9 as it doesnt support flexbox
+
+.lt-ie9
+    .main_nav__search
+        position: relative
+        width: 100%
+        margin: 0
+        top: -300px
+    .main_nav__classifieds
+        width: 44%
+    .main_nav__community
+        width: 90%
+
+.lt-ie10
+    .main_nav__search
+        position: relative
+        width: 100%
+        margin: 0
+        top: -250px
+    .main_nav__classifieds
+        width: 44%
+    .main_nav__community
+        width: 90%
+
