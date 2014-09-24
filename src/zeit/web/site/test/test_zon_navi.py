@@ -14,7 +14,6 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
         'zeit.web.site:templates/inc/nav_main.html')
     html_str = tpl.render()
     html = lxml.html.fromstring(html_str).cssselect
-    # elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
     assert len(html('nav.main_nav')) == 1,\
         'just one .main_nav should be present'
 
@@ -24,28 +23,33 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
     assert '</div><div class="main_nav__date"' in html_str,\
         'don\'t break line here, due to inline-block state'
 
-    assert len(html('nav.main_nav > div.logo_bar > div.logo_bar__image')) == 1,\
-        'just one .logo_bar__image'
+    assert len(html('nav.main_nav > div.logo_bar >'
+        'div.logo_bar__image')) == 1, 'just one .logo_bar__image'
 
-    assert len(html('nav.main_nav > div.logo_bar > div.logo_bar__menue')) == 1,\
-        'just one .logo_bar__menue'
+    assert len(html('nav.main_nav > div.logo_bar >'
+        'div.logo_bar__menue')) == 1, 'just one .logo_bar__menue'
 
     assert len(html('nav.main_nav > div.main_nav__teaser')) == 1,\
         'just one .main_nav__teaser'
 
-    assert len(html('nav.main_nav > div.main_nav__community[data-dropdown="true"]')) == 1,\
+    assert len(html('nav.main_nav > div.main_nav__community'
+        '[data-dropdown="true"]')) == 1,\
         'just one .main_nav__community w/ data-dropdown=true'
 
-    assert len(html('nav.main_nav > div.main_nav__ressorts[data-dropdown="true"]')) == 1,\
+    assert len(html('nav.main_nav > div.main_nav__ressorts'
+        '[data-dropdown="true"]')) == 1,\
         'just one .main_nav__ressorts w/ data-dropdown=true'
 
-    assert len(html('nav.main_nav > div.main_nav__services[data-dropdown="true"]')) == 1,\
+    assert len(html('nav.main_nav > div.main_nav__services'
+        '[data-dropdown="true"]')) == 1,\
         'just one .main_nav__services w/ data-dropdown=true'
 
-    assert len(html('nav.main_nav > div.main_nav__classifieds[data-dropdown="true"]')) == 1,\
+    assert len(html('nav.main_nav > div.main_nav__classifieds'
+        '[data-dropdown="true"]')) == 1,\
         'just one .main_nav__classifieds w/ data-dropdown=true'
 
-    assert len(html('nav.main_nav > div.main_nav__search[data-dropdown="true"]')) == 1,\
+    assert len(html('nav.main_nav > div.main_nav__search'
+        '[data-dropdown="true"]')) == 1,\
         'just one .main_nav__search w/ data-dropdown=true'
 
     assert len(html('nav.main_nav > div.main_nav__tags')) == 1,\
@@ -53,9 +57,6 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
 
     assert len(html('nav.main_nav > div.main_nav__date')) == 1,\
         'just one .main_nav__date'
-
-
-
 
 
 def test_nav_services_macro_should_have_expected_links(jinja2_env):
@@ -90,7 +91,7 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
     html_str = tpl.module.main_nav_classifieds()
     html = lxml.html.fromstring(html_str).cssselect
     assert html('li > a[href="http://jobs.zeit.de/"]'
-        '[id="hp.global.topnav.links.jobs"')[0]\
+        '[id="hp.global.topnav.links.jobs"]')[0]\
         is not None, 'No link for job.zeit.de'
     assert html('li > a[href="http://www.zeit.de/angebote/partnersuche/index?'
         'pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID"]'
@@ -107,20 +108,20 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
 
 def test_nav_community_macro_should_render_a_login(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.tpl')
+        'zeit.web.site:templates/inc/nav_main.html')
     html_str = tpl.module.main_nav_community()
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('li > a'
-        '[href="http://community.zeit.de/user/login?destination='
+    print html_str
+    assert html('a[href="http://community.zeit.de/user/login?destination='
         'http://www.zeit.de/index"]'
         '[rel="nofollow"]'
         '[class="user"]'
-        '[id="drupal_login"')[0] is not None, 'Community login is missing'
+        '[id="drupal_login"]')[0] is not None, 'Community login is missing'
 
 
 def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.tpl')
+        'zeit.web.site:templates/inc/nav_main.html')
     html_str = tpl.module.main_nav_logo()
     html = lxml.html.fromstring(html_str).cssselect
     assert html('a[href="http://www.zeit.de/index"]'
@@ -128,7 +129,6 @@ def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
         '[class="icon-zon-logo-desktop"]'
         '[id="hp.global.topnav.centerpages.logo"]')[0] is not None,\
         'Logo link is missing'
-
 
 
 def test_macro_main_nav_burger_produce_markup(jinja2_env):
