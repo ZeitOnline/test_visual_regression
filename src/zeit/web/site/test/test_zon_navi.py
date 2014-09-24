@@ -38,35 +38,29 @@ def test_macro_main_nav_produce_markup(jinja2_env):
     assert tags in output
 
 
-def test_macro_main_nav_services_produce_markup(jinja2_env):
+def test_nav_services_macro_should_have_expected_links(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_services().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    abo = '<li><a href="http://www.zeitabo.de/?mcwt=2009_07_0002"' \
-        ' id="hp.global.topnav.links.abo">Abo</a></li>'
-    shop = '<li><a href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;' \
-        'et_lid=175&amp;et_sub=Startseite_header"' \
-        ' id="hp.global.topnav.links.shop">Shop</a></li>'
-    epaper = '<li><a href="https://premium.zeit.de/?' \
-        'wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper"' \
-        ' id="hp.global.topnav.links.epaper">E-Paper</a></li>'
-    audio = '<li><a href="https://premium.zeit.de/abo/digitalpaket5' \
-        '?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio"' \
-        ' id="hp.global.topnav.links.audio">Audio</a></li>'
-    apps = '<li><a href="https://premium.zeit.de/abo/appsios?' \
-        'wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps"' \
-        ' id="hp.global.topnav.links.apps">Apps</a></li>'
-    archiv = '<li><a href="http://www.zeit.de/archiv"' \
-        ' id="hp.global.topnav.links.archiv">Archiv</a></li>'
-    assert abo in output
-    assert shop in output
-    assert epaper in output
-    assert audio in output
-    assert apps in output
-    assert archiv in output
+        'zeit.web.site:templates/inc/nav_main.html')
+    html_str = tpl.module.main_nav_services()
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('li > a[href="http://www.zeitabo.de/?mcwt=2009_07_0002"]')\
+        is not None, 'No link for zeitabo.de'
+    assert html('li > a[href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;'
+        'et_lid=175&amp;et_sub=Startseite_header"]'\
+        '[id="hp.global.topnav.links.shop"]') is not None,\
+        'No link for shop.zeit.de'
+    assert html('li > a[href="https://premium.zeit.de/?wt_mc=pm.intern.fix.'\
+        'zeitde.fix.dach.text.epaper"][id="hp.global.topnav.links.epaper"]')\
+        is not None, 'No link for premium.zeit.de'
+    assert html('li > a[href="https://premium.zeit.de/abo/digitalpaket5' \
+        '?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio"][id="hp.global.'\
+        'topnav.links.audio"]')\
+        is not None, 'No link for premium.zeit.de AUDIO'
+    assert html('li > a[href="https://premium.zeit.de/abo/appsios?' \
+        'wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps"][id="hp.global.topnav'\
+        '.links.apps"]') is not None, 'No link for premium.zeit.de APPS'
+    assert html('li > a[href="http://www.zeit.de/archiv"][id="hp.global.'\
+        'topnav.links.archiv"]') is not None, 'No link for Archiv'
 
 
 def test_macro_main_nav_classifieds_produce_markup(jinja2_env):
