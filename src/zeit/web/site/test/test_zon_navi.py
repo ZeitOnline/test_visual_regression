@@ -131,23 +131,19 @@ def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
         'Logo link is missing'
 
 
-def test_macro_main_nav_burger_produce_markup(jinja2_env):
+def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/layout_macro.tpl')
-    lines = tpl.module.main_nav_burger().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    link = '<a href="#">'
-    logo = '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--plain ' \
-        'icon-zon-logo-navigation_menu"></div>'
-    logo_hover = '<div class="logo_bar__menue__image' \
-        ' main_nav__icon--hover' \
-        ' icon-zon-logo-navigation_menu-hover"></div>'
-    assert link in output
-    assert logo in output
-    assert logo_hover in output
+        'zeit.web.site:templates/inc/nav_main.html')
+    html_str = tpl.module.main_nav_burger()
+    html = lxml.html.fromstring(html_str).cssselect
+    print html_str
+    assert html('a[href="#"]')[0] is not None, 'An empty link is not present'
+    assert len(html('div.logo_bar__menue__image.main_nav__icon--plain'
+        '.icon-zon-logo-navigation_menu')) == 1,\
+        'Logo for bar menu is not present'
+    assert len(html('div.logo_bar__menue__image'
+        '.main_nav__icon--hover.icon-zon-logo-navigation_menu-hover')) == 1,\
+        "A div for the burger menu is missing."
 
 
 def test_macro_main_nav_search_produce_markup(jinja2_env):
