@@ -214,7 +214,7 @@ def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
 # integration testing
 
 def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
     print browser.contents
     assert len(html('nav.main_nav')) == 1, 'Nav main_nav is not present.'
@@ -226,7 +226,7 @@ def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_services_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -240,7 +240,7 @@ def test_article_has_valid_services_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_classifieds_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -253,7 +253,7 @@ def test_article_has_valid_classifieds_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_community_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -264,7 +264,7 @@ def test_article_has_valid_community_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_logo_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -276,7 +276,7 @@ def test_article_has_valid_logo_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_burger_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -290,7 +290,7 @@ def test_article_has_valid_burger_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_burger_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -304,7 +304,7 @@ def test_article_has_valid_burger_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_search_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -336,7 +336,7 @@ def test_article_has_valid_search_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_ressort_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -358,12 +358,14 @@ def test_article_has_valid_ressort_structure(testserver, testbrowser):
         '<a class="primary-nav__link" href="#">Reise</a></li>' \
         '<li class="primary-nav__item"><a class="primary-nav__link"' \
         ' href="#">Sport</a></li><li class="primary-nav__item">' \
-        '<a class="primary-nav__link" href="#">Spiele</a></li></ul></nav>'
+        '<a class="primary-nav__link" href="#">Spiele</a></li>' \
+        '<li class="primary-nav__item"><a class="primary-nav__link"' \
+        ' href="#">ZEITmagazin</a></li></ul></nav>'
     assert markup in output
 
 
 def test_article_has_valid_tag_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
@@ -375,7 +377,7 @@ def test_article_has_valid_tag_structure(testserver, testbrowser):
 
 
 def test_article_has_valid_nav_date_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     lines = browser.contents.splitlines()
     output = ""
     for line in lines:
