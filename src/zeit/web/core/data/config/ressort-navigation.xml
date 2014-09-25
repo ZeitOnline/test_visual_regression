@@ -91,34 +91,4 @@
   <section>
     <link href="http://xml.zeit.de/sport/index" id="sport">Sport</link>
   </section>
-  <list id="news-sections">
-    <item number="1" id="">Politik</item>
-    <item number="2" id="">Wirtschaft</item>
-    <item number="3" id="">Meinung</item>
-    <item number="4" id="">Gesellschaft</item>
-    <item number="5" id="">Kultur</item>
-    <item number="6" id="">Wissen</item>
-    <item number="7" id="">Digital</item>
-    <item number="8" id="">Studium</item>
-    <item number="9" id="">Karriere</item>
-    <item number="10" id="">Lebensart</item>
-    <item number="11" id="">Reisen</item>
-    <item number="12" id="">Mobilität</item>
-    <item number="13" id="">Sport</item>
-  </list>
-  <list id="print-sections">
-    <item number="1" id="">Politik</item>
-    <item number="2" id="">Dossier</item>
-    <item number="3" id="">Wirtschaft</item>
-    <item number="4" id="">Wissen</item>
-    <item number="5" id="">Feuilleton</item>
-    <item number="6" id="">Literatur</item>
-    <item number="7" id="">Reisen</item>
-    <item number="8" id="">Chancen</item>
-    <item number="9" id="">Zeitläufte</item>
-    <item number="10" id="">ZEIT Magazin</item>
-  </list>
-  <list id="legacy-sections">
-    <item section="auto">mobilitaet</item>
-  </list>
 </navigation>
