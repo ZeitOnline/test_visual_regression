@@ -20,9 +20,8 @@ require([
     'web.magazin/sharing',
     'web.magazin/cards',
     'web.magazin/copyrights',
-    'web.magazin/photocluster',
-    'web.magazin/wrapper_handling'
-], function( images, errors, fontloader, nav, tabs, comments, sharing, cards, copyrights, photocluster, wrapperHandling ) {
+    'web.magazin/photocluster'
+], function( images, errors, fontloader, nav, tabs, comments, sharing, cards, copyrights, photocluster ) {
     errors.init();
     fontloader.init();
     nav.init();
@@ -32,7 +31,6 @@ require([
     cards.init();
     copyrights.init();
     photocluster.init();
-    wrapperHandling.init();
     images.init();
 });
 
