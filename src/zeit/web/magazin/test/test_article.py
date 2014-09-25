@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 import mock
 
 from zeit.content.article.article import Article
@@ -65,23 +69,26 @@ def test_article_has_valid_facebook_meta_tags(testserver, testbrowser):
     assert '<meta property="og:image" ' in browser.contents
 
 
-def test_all_tracking_pixel_are_send(selenium_driver, testserver):
+def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
     selenium_driver.get('%s/artikel/05' % testserver.url)
 
-    assert selenium_driver.find_element_by_xpath(
+    locate_by_selector = lambda xp: WebDriverWait(selenium_driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xp)))
+
+    assert locate_by_selector(
         '//script[@src=\'//stats.g.doubleclick.net/dc.js\']')
-    assert selenium_driver.find_element_by_xpath(
+    assert locate_by_selector(
         '//script[@src=\'//www.googletagmanager.com/gtm.js?id=GTM-TQGX6J\']')
-    assert selenium_driver.find_element_by_xpath(
+    assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/js/rsa.js\']')
-    assert selenium_driver.find_element_by_xpath(
+    assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/static/js/'
         'webtrekk/webtrekk_v3.js\']')
-    assert selenium_driver.find_element_by_xpath(
+    assert locate_by_selector(
         '//script[@src=\'https://script.ioam.de/iam.js\']')
-    assert selenium_driver.find_element_by_xpath(
+    assert locate_by_selector(
         '//img[starts-with(@src,\'http://cc.zeit.de/cc.gif\')]')
-    assert selenium_driver.find_element_by_xpath(
+    assert locate_by_selector(
         '//img[starts-with(@src,\'http://zeitonl.ivwbox.de\')]')
 
 
