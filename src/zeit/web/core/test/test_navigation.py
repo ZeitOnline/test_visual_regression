@@ -1,3 +1,4 @@
+import zeit.web.core.application
 import zeit.web.core.navigation
 
 
@@ -29,3 +30,12 @@ def test_navigation_items_should_be_addable_to_navigation():
     assert nav['inner_foo'].item_id == 'inner_foo'
     assert nav['inner_foo'].text == 'inner_bla'
     assert nav['inner_foo'].href == 'inner_fasel'
+
+
+# This may break on config changes, so we might add some dummy data.
+def test_make_navigation_should_register_navigation_items(app_settings):
+    navigation_config = zeit.web.core.application.maybe_convert_egg_url(
+        app_settings['vivi_zeit.frontend_navigation'])
+    navigation = zeit.web.core.navigation.make_navigation(navigation_config)
+    assert navigation['politik'].href == 'http://xml.zeit.de/politik/index'
+    assert navigation['politik']['deutschland'].text == 'Deutschland'
