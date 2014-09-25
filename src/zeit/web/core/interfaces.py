@@ -30,7 +30,6 @@ class IPlace(zope.interface.Interface):
 
 
 class IIqdMobileList(zope.interface.Interface):
-
     """A set of iqd ids for a certain ressort.
     """
 
