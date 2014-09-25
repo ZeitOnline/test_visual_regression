@@ -2,6 +2,10 @@ import zope.interface
 import zope.interface.common.sequence
 
 
+class INavigation(zope.interface.Interface):
+    """A navigation bar linking to different sections and sub sections"""
+
+
 class IPages(zope.interface.common.sequence.IReadSequence):
     """List of the <division>s of an zeit.content.article.interfaces.IArticle
     """
