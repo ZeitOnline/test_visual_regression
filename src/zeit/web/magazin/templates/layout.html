@@ -1,4 +1,5 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context%}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 <!DOCTYPE html>
 <!--[if lt IE 8]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 ie nurtext" lang="de"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9 ie" lang="de"> <![endif]-->
@@ -227,6 +228,6 @@
         </script>
 
         <!-- handler for wrapper app modifications -->
-        {{lama.wrapper_handling()}}
+        {{lama_core.wrapper_handling()}}
     </body>
 </html>
