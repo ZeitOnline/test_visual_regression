@@ -4,15 +4,16 @@
  
     <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}}">
         {% block teaser_link %}
-        <a class="teaser__combined-link" title="Olympische Spiele 2024 - Deutsche wünschen sich gemeinsame Bewerbung von Berlin und Hamburg" href="http://www.zeit.de/sport/2014-09/umfrage-olympische-spiele-berlin-hamburg">
+        <a class="teaser__combined-link" title="{{ teaser.teaserSupertitle }}- {{
+        teaser.teaserTitle }}" href="{{ teaser.uniqueId }}">
             {% block teaser_kicker %}
-            <span class="teaser__kicker">Olympische Spiele 2024</span>
+            <span class="teaser__kicker">{{ teaser.teaserSupertitle }}</span>
             {% endblock %}
             {% block teaser_title %}
-            <span class="teaser__title">Deutsche wünschen sich gemeinsame Bewerbung von Berlin und Hamburg</span>
+            <span class="teaser__title">{{ teaser.teaserTitle }}</span>
             {% endblock %}
         </a>
-        {% endblock %}        
+        {% endblock %}
     </h2>
 
     {% block teaser_media_position_b %} {% endblock %}
@@ -20,10 +21,10 @@
     {% block teaser_container %}
     <div class="teaser__container">
         {% block teaser_text %}
-        <p class="teaser__text">Berlin und Hamburg sollen sich nicht einzeln, sondern zusammen für die Olympischen Spiele 2024 bewerben, so eine Umfrage von ZEIT ONLINE.</p>
+        <p class="teaser__text"> {{ teaser.teaserText }}</p>
         {% endblock %}
         {% block teaser_byline %}
-        <div class="teaser__byline">Von Christian Spiller</div>
+        <div class="teaser__byline"> ToDo: Insert byline here </div>
         {% endblock %}
         {% block teaser_metadata %}
         <div class="teaser__metadata">
