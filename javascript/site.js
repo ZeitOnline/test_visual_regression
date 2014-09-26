@@ -21,8 +21,10 @@ require([
 // plugins that require plugins need to make this requirement in the shim-section of config
 require([
     'web.site/plugins/jquery.togglesearch',
-    'web.site/plugins/jquery.togglenavi'
+    'web.site/plugins/jquery.togglenavi',
+    'web.site/plugins/jquery.adaptivenav'
 ], function() {
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
+    $( '.primary-nav' ).adaptToSpace();
 });
