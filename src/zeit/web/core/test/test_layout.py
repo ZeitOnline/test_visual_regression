@@ -12,11 +12,11 @@ def test_macro_wrapper_handling_produce_markup(jinja2_env):
     func_cookie = 'function getCookie'
     func_ressort = 'getRessort: function()'
     func_hide = 'hideZMOHeader: function( $nav )'
-    func_margin = 'hideZMOHeader: function( $nav )'
-    obj_wrapper = 'setHeaderMargin: function( _density_independant_pixels )'
-    assert script_tag in output
-    assert func_cookie in output
-    assert func_ressort in output
-    assert func_hide in output
-    assert func_margin in output
-    assert obj_wrapper in output
+    func_margin = 'setHeaderMargin: function( _density_independant_pixels )'
+    obj_wrapper = 'window.wrapper'
+    assert script_tag in output, 'Script tag exists'
+    assert func_cookie in output, 'getCookie function exists'
+    assert func_ressort in output, 'getRessort function exists'
+    assert func_hide in output, 'hideZMOHeader function exists'
+    assert func_margin in output, 'setHeaderMargin function exists'
+    assert obj_wrapper in output, 'wrapper object exists'
