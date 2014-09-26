@@ -1,0 +1,60 @@
+<script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
+<script type="text/javascript">
+    {# XXX: Please, only set variables in jinja where absolutely needed. #}
+
+    {% set date = '' -%}
+    {% set pagination = '' -%}
+
+    {% if view.date_first_released -%}
+        {% set date = view.date_first_released | format_date('short_num') -%}
+    {% endif -%}
+
+    {% if view.pagination -%}
+        {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
+    {% endif -%}
+
+    var Z_WT_KENNUNG = "redaktion.{{ view.ressort  }}.{{ view.sub_ressort }}..{{ view.type }}.online./{{ '/'.join(request.traversed or ()) }}";
+
+    var webtrekk = {
+        linkTrack : "standard",
+        heatmap : "0",
+        linkTrackAttribute: "id"
+    };
+
+    if ( typeof webtrekkV3 === "function" ) {
+        var wt = new webtrekkV3(webtrekk);
+
+        wt.cookie = "1";
+        wt.contentGroup = {
+            1: "Redaktion",
+            2: "{{ view.tracking_type }}",
+            3: "{{ view.ressort }}",
+            4: "Online",
+            5: "{{ view.sub_ressort }}",
+            6: "{{ view.serie | hide_none }}",
+            7: "{{ request.path_info | substring_from('/') }}",
+            8: "{{ view.banner_channel }}",
+            9: "{{ date }}"
+        };
+
+        {% if view.type == "article" -%}
+        wt.customParameter = {
+            1: "{{ view.authorsList | hide_none }}",
+            2: "{{ view.banner_channel }}",
+            3: "{{ pagination }}",
+            4: "{{ view.rankedTagsList }}",
+            6: "{{ view.text_length }}",
+            7: "",
+            9: "{{ view.banner_channel }}"
+        };
+        {% endif -%}
+
+        wt.contentId = Z_WT_KENNUNG;
+        wt.sendinfo();
+    }
+</script>
+<noscript>
+    <div>
+        <img alt="" width="1" height="1" src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{ view.ressort }}.{{ view.sub_ressort }}..{{ view.type }}.online.{{ request.path_info }},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{ view.tracking_type }}&amp;cg3={{ view.ressort }}&amp;cg4=Online&amp;cg5={{ view.sub_ressort }}&amp;cg6=&amp;cg7={{ request.path_info | substring_from('/') }}&amp;cg8={{ view.banner_channel }}&amp;cg9={{ date }}{% if view.type == 'article' -%}&amp;cp1={{ view.authorsList }}&amp;cp2={{ view.banner_channel }}&amp;cp3={{ pagination }}&amp;cp4={{ view.rankedTagsList }}&amp;cp6={{ view.text_length }}&amp;cp7=&amp;cp9={{ view.banner_channel }}{% endif -%}">
+    </div>
+</noscript>

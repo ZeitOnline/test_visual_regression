@@ -41,7 +41,7 @@
 	<script src="{{ request.asset_url('js/libs/modernizr-custom.js') }}"></script>
 	{# Grunticon SVG -#}
 	<script>
-		{% include "zeit.web.static:css/icons/grunticon.loader.js" %}
+		{%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
 
 		grunticon([
 			"{{ request.asset_url('css/icons/site.data.svg.css') }}",

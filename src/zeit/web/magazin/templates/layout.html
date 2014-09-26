@@ -53,7 +53,6 @@
 
         {%- if view.context.advertising_enabled %}
 
-
             window.ZMO.viewport.set();
 
             if ( window.addEventListener ) {
@@ -100,16 +99,15 @@
             <!-- <![endif]-->
         {% endif %}
 
-        {{lama.iqd_init()}}
-        {{lama.iqd_init_mobile(view.iqd_mobile_settings)}}
-        {{lama.iqd_krux_head()}}
+        {% include "zeit.web.core:templates/inc/tracking/iqd_head.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/iqd_krux_head.html" ignore missing %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
         <!-- tracking at top -->
-        {{lama.ivw_ver2_tracking(view,request)}}
-        {{lama.ivw_ver1_tracking(view.banner_channel)}}
-        {{lama.iqd_nuggad()}}
-        {{lama.iqd_krux_body()}}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver1.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/iqd_nuggad.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/iqd_krux.html" ignore missing %}
 
         <div class="page-wrap">
 
@@ -208,18 +206,18 @@
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         <!-- tracking at end -->
-        {{lama.ga_tracking()}}
-        {{lama.cc_tracking(view.banner_channel)}}
-        {{lama.meetrics_tracking()}}
-        {{lama.webtrekk_tracking(view,request)}}
-        {{lama.click_tracking(view.banner_channel)}}
+        {% include "zeit.web.core:templates/inc/tracking/google.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/clickcount.html" ignore missing %}
 
-        <script>
+        <script type="text/javascript">
             var require = {
-                urlArgs: "v={{request.registry.settings.version_hash | hide_none}}"
+                urlArgs: "v={{ request.registry.settings.version_hash|hide_none }}"
             };
         </script>
-        <script data-main="{{request.asset_url('js/magazin.js')}}" src="{{request.asset_url('js/vendor/require.js')}}"></script>
+        <script type="text/javascript" data-main="{{ request.asset_url('js/magazin.js') }}" src="{{ request.asset_url('js/vendor/require.js') }}"></script>
         <script type="text/javascript">
             if( typeof window.sasmobile === 'function' && window.ZMO.isMobileView() ) {
                 iqd.callAds();
