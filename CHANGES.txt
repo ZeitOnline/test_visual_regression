@@ -7,6 +7,10 @@ Change log for zeit.frontend
 - ZON-904: Add Wrapper API to enable small modifications
            when ZMO is called from within wrapper
 
+- ZON-972: Add navigation styles for IE
+
+- ZON-994: Add extented selenium testing for navigation
+
 - ZON-944: HTML scaffold
 
 - ZON-977: Module teaser (demo)
@@ -34,6 +38,8 @@ Change log for zeit.frontend
 - ZON-973: Add new icon assets for navigation
 
 - ZON-975: Add and style tagbar under navigation
+
+- WEB-344: Adjust GA, add GTM snippets
 
 
 1.0 (2014-09-19)

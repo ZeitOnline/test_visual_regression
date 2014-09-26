@@ -1,0 +1,60 @@
+@import "utils"
+@import "functions"
+@import "constants"
+@import "mixins"
+
+// navigation
+// we have to do some nav remodelling for IE8/9 as it doesnt support flexbox
+
+.lt-ie9,
+.lt-ie10
+    .main_nav__search
+        position: relative
+        width: 100%
+        margin: 0
+    .main_nav__community
+        width: 90%
+
+.lt-ie9
+    .main_nav
+        min-width: $break-desktop-min
+    .main_nav__search
+        top: -250px
+    .main_nav__classifieds__more
+        display: none
+    .main_nav__date
+        font-size: $font-xxs
+    .main_nav__classifieds
+        width: 50%
+    .main_nav__services
+        width: 49%
+
+.lt-ie10
+    .main_nav__search
+        +respond-min($break-tablet-min)
+            top: -235px
+        +respond-min($break-desktop-min)
+            top: -200px
+    .main_nav__services
+        +respond-max($break-tablet-min)
+            ul > li
+                width: 30%
+    .main_nav__classifieds
+        +respond-min($break-tablet-min)
+            width: 44%
+    .main_nav__community
+        +respond-max(em(768px))
+            width: 100%
+    .logo_bar
+        +respond-max($break-tablet-min)
+            text-align: right
+    .logo_bar__image
+        +respond-max($break-tablet-min)
+            position: absolute
+            top: 5px
+            left: 20px
+    .logo_bar__menue
+        height: $zon-bar-height-phablet-px
+
+
+
