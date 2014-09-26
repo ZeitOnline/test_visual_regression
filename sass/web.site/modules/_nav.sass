@@ -403,21 +403,6 @@ $zon-search-square-size: em(35px)
 		float: left
 		margin-left: 14px
 
-	&:last-child
-		line-height: 2.0625
-		+respond-min($break-tablet-min)
-			font-size: 12px
-			float: right
-			margin-top: 5px
-
-		.primary-nav__link
-			color: $white
-			background-color: $zon_dark_grey
-			padding: 0 10px
-			border-radius: 2px
-			&:hover
-				+box-shadow(none)
-				background-color: $zon_light_grey
 
 .primary-nav__link
 	display: inline-block
@@ -431,5 +416,21 @@ $zon-search-square-size: em(35px)
 .primary-nav__link--current
 	+respond-min($break-tablet-min)
 		+box-shadow(inset 0px -3px 0px 0px $zon_light_grey) // w3c style box-shadow syntax
+
+.primary-nav__item--featured
+	line-height: 2.0625
+	+respond-min($break-tablet-min)
+		font-size: 12px
+		float: right
+		margin-top: 5px
+
+	.primary-nav__link
+		+link-colors($white)
+		background-color: $zon_dark_grey
+		padding: 0 10px
+		border-radius: 2px
+		&:hover
+			+box-shadow(none)
+			background-color: $zon_light_grey
 
 /* END: primary navigation */
