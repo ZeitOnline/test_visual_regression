@@ -1,4 +1,4 @@
-{% macro wrapper_handling() -%}
+{% macro wrapper_handling( obj ) -%}
 
 <!-- wrapper handling -->
 <script type="text/javascript">
@@ -31,7 +31,12 @@
     window.wrapper = {
         // provide ressort
         getRessort: function() {
-            return  'Zeit Magazin';
+            var ressort = '{{ obj.ressort }}';
+            if( ressort == 'lebensart' ){
+                return  'Zeit Magazin';
+            }else{
+                return ressort.charAt(0).toUpperCase() + ressort.slice(1);
+            }
         },
         // hide zmo navi header
         hideZMOHeader: function( $nav ){
