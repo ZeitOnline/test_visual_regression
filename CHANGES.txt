@@ -4,6 +4,9 @@ Change log for zeit.frontend
 1.1 (unreleased)
 ----------------
 
+- ZON-904: Add Wrapper API to enable small modifications
+           when ZMO is called from within wrapper
+
 - ZON-972: Add navigation styles for IE
 
 - ZON-994: Add extented selenium testing for navigation
