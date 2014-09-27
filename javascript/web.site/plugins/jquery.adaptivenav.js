@@ -39,9 +39,7 @@
                 threshold = navigationContainerWidth - featuredItem - 70,
                 $dropdownMenuHTML = $( '<li data-feature="dropdown" class="primary-nav__item">' +
                     '   <a class="primary-nav__link" href="#">mehr</a>' +
-                    '   <ul class="primary-nav__list">' +
-                    '       <li class="primary-nav__item">me dropdown</li>' +
-                    '   </ul>' +
+                    '   <ul class="primary-nav__list"></ul>' +
                     '</li>' ),
                 $appendableList = $dropdownMenuHTML.find( '.primary-nav__list' )[0],
                 $allPrimaryNavItems = $this.children( '.primary-nav__item' ),

@@ -440,8 +440,12 @@ $zon-search-square-size: em(35px)
 .main_nav *[data-feature='dropdown']
 	position: relative
 	.primary-nav__list
+		background: $white
 		display: none
-	& .primary-nav__link:after
+		padding-left: 0
+		border: $zon_light_grey
+		box-shadow: 0 5px 8px rgba(0,0,0,0.05)
+	& > .primary-nav__link:after
 		display: inline-block // needed for "rotate on hover"
 		margin-left: $tiny
 		content: "\25BE" // Unicode for ▾
@@ -452,7 +456,8 @@ $zon-search-square-size: em(35px)
 			display: block
 			position: absolute
 			& > .primary-nav__item
-				display: inline-block
+				display: block
+				width: 100%
 			
 
 
