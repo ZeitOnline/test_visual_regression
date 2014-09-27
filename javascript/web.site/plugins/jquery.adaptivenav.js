@@ -37,8 +37,8 @@
                 featuredItem = $this.children( '.primary-nav__item--featured' ).outerWidth(true),
                 navWidthWIP = 0,
                 threshold = navigationContainerWidth - featuredItem - 70,
-                $dropdownMenuHTML = $( '<li class="primary-nav__item">' +
-                    '   <a class="primary-nav__link" data-feature="dropdown" href="#">mehr</a>' +
+                $dropdownMenuHTML = $( '<li data-feature="dropdown" class="primary-nav__item">' +
+                    '   <a class="primary-nav__link" href="#">mehr</a>' +
                     '   <ul class="primary-nav__list">' +
                     '       <li class="primary-nav__item">me dropdown</li>' +
                     '   </ul>' +
