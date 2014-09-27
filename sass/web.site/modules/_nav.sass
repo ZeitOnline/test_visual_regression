@@ -375,6 +375,7 @@ $zon-search-square-size: em(35px)
 		+flex-grow(1)
 		margin: $petite
 
+
 /* primary navigation (ressorts and stuff) */
 
 .primary-nav
@@ -401,7 +402,7 @@ $zon-search-square-size: em(35px)
 
 	+respond-min($break-tablet-min)
 		float: left
-		margin-left: 14px
+		padding-left: 14px
 
 
 .primary-nav__link
@@ -416,6 +417,7 @@ $zon-search-square-size: em(35px)
 .primary-nav__link--current
 	+respond-min($break-tablet-min)
 		+box-shadow(inset 0px -3px 0px 0px $zon_light_grey) // w3c style box-shadow syntax
+
 
 .primary-nav__item--featured
 	line-height: 2.0625
@@ -433,4 +435,37 @@ $zon-search-square-size: em(35px)
 			+box-shadow(none)
 			background-color: $zon_light_grey
 
+
+
+.main_nav *[data-feature='dropdown']
+	position: relative
+	.primary-nav__list
+		display: none
+	& .primary-nav__link:after
+		display: inline-block // needed for "rotate on hover"
+		margin-left: $tiny
+		content: "\25BE" // Unicode for ▾
+	&:hover
+		&:after
+			+rotate(180deg)
+		& > .primary-nav__list
+			display: block
+			position: absolute
+			& > .primary-nav__item
+				display: inline-block
+			
+
+
+// .primary-nav__item:hover > .primary-nav__list
+// 	visibility: visible
+// 	& > .primary-nav__item
+// 		visibility: visible
+
+
+
+
+
+.js .primary-nav > .primary-nav__item:nth-child(n+6):not([class~='primary-nav__item--featured']) // descendant selector to limit scope!
+	+respond-min($break-tablet-min)
+		display: none
 /* END: primary navigation */
