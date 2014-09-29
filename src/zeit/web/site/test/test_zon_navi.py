@@ -396,16 +396,6 @@ def test_zon_main_nav_has_correct_structure(
     assert(main_nav.is_displayed())
     # logo is visible in all sizes
     assert(logo_bar__image.is_displayed())
-    # search button is visible in all sizes
-    assert(search__button.is_displayed())
-    # community link is visible in all sizes
-    assert(main_nav__community.is_displayed())
-    # ressort bar is visible in all sizes
-    assert(main_nav__ressorts.is_displayed())
-    # service bar is visible in all sizes
-    assert(main_nav__services.is_displayed())
-    # classifieds bar is visible in all sizes
-    assert(main_nav__classifieds.is_displayed())
 
     if small_screen:
         # burger menue is visible
@@ -419,6 +409,17 @@ def test_zon_main_nav_has_correct_structure(
         assert(serv_li[3].is_displayed() is False)
         assert(serv_li[4].is_displayed() is False)
         assert(serv_li[5].is_displayed() is False)
+    else:
+        # search button is visible in desktop mode
+        assert(search__button.is_displayed())
+        # community link is visible in desktop mode
+        assert(main_nav__community.is_displayed())
+        # ressort bar is visible in desktop mode
+        assert(main_nav__ressorts.is_displayed())
+        # service bar is visible in desktop mode
+        assert(main_nav__services.is_displayed())
+        # classifieds bar is visible in desktop mode
+        assert(main_nav__classifieds.is_displayed())
 
     if screen_width == 768:
         # test search input is hidden in tablet mode
