@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-1.1 (unreleased)
+1.1 (2014-09-29)
 ----------------
 
 - Hotfix: use subressorts for wrapper
