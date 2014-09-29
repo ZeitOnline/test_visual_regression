@@ -2,9 +2,6 @@
 import lxml
 import pytest
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
@@ -479,14 +476,14 @@ def test_nav_burger_menue_is_working_as_expected(
         'main_nav__classifieds')
     main_nav__search = driver.find_element_by_class_name('main_nav__search')
 
-    #test main elements are displayed
+    # test main elements are displayed
     assert(logo_bar__menue.is_displayed()), 'Logo bar is not displayed'
     assert(menu__button.is_displayed()), 'Menue button is not displayed'
     assert(icon_burger.is_displayed()), 'Burger Icon is not displayed'
 
     menu__button.click()
 
-    #test element states after menue button is clicked
+    # test element states after menue button is clicked
     assert(main_nav__community.is_displayed()), (
         'Community bar is not displayed')
     assert(main_nav__ressorts.is_displayed()), (
@@ -498,14 +495,14 @@ def test_nav_burger_menue_is_working_as_expected(
     assert(main_nav__search.is_displayed()), (
         'Search bar is not displayed')
 
-    #test close button is displayed
+    # test close button is displayed
     icon_close = logo_bar__menue.find_element_by_class_name(
         'icon-zon-logo-navigation_close-hover')
     assert(icon_close.is_displayed()), 'Closing Icon is not displayed'
 
     menu__button.click()
 
-    #test element states after menue button is clicked again
+    # test element states after menue button is clicked again
     assert(main_nav__community.is_displayed() is False), (
         'Community bar is displayed')
     assert(main_nav__ressorts.is_displayed() is False), (
