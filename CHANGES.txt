@@ -4,7 +4,10 @@ Change log for zeit.frontend
 1.1 (unreleased)
 ----------------
 
-- ZON-904: Add Selenium Testing
+- ZON-904: Add Wrapper Selenium Testing
+
+1.0.1 (2014-09-26)
+------------------
 
 - ZON-904: Add Wrapper API to enable small modifications
            when ZMO is called from within wrapper
