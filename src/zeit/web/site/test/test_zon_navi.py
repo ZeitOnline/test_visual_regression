@@ -437,6 +437,8 @@ def test_nav_search_is_working_as_expected(
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
     search__close = driver.find_elements_by_class_name('search__close')[0]
+    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
+    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
 
     if screen_width == 768:
         # test search input is shown after button click
@@ -446,6 +448,10 @@ def test_nav_search_is_working_as_expected(
         search__close.click()
         assert(search__input.is_displayed() is False)
         search__button.click()
+
+    # open search for mobile
+    if screen_width < 768:
+        menu__button.click()
 
     # test if search is performed
     search__input.send_keys("test")
