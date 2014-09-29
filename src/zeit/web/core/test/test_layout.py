@@ -1,22 +1,43 @@
 # -*- coding: utf-8 -*-
 
 
-def test_macro_wrapper_handling_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/layout_macro.tpl')
-    lines = tpl.module.wrapper_handling().splitlines()
-    output = ""
-    for line in lines:
-        output += line.strip()
-    script_tag = '<script type="text/javascript">'
-    func_cookie = 'function getCookie'
-    func_ressort = 'getRessort: function()'
-    func_hide = 'hideZMOHeader: function( $nav )'
-    func_margin = 'setHeaderMargin: function( _density_independant_pixels )'
-    obj_wrapper = 'window.wrapper'
-    assert script_tag in output, 'Script tag doesnt exists'
-    assert func_cookie in output, 'getCookie function doesnt exists'
-    assert func_ressort in output, 'getRessort function doesnt exists'
-    assert func_hide in output, 'hideZMOHeader function doesnt exists'
-    assert func_margin in output, 'setHeaderMargin function doesnt exists'
-    assert obj_wrapper in output, 'wrapper object doesnt exists'
+def test_wrapper_functions_are_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+
+    # test window.wrapper object exists
+    obj = driver.execute_script("return typeof(window.wrapper)")
+    assert obj == "object", 'window.wrapper object doesnt exists'
+
+    # test ressort
+    ressort = driver.execute_script("return window.wrapper.getRessort()")
+    assert ressort == "Zeit Magazin", 'Ressort is not Zeit Magazin'
+
+    # test zmo header is hidden and spacer displayed
+    driver.execute_script("window.wrapper.setHeaderMargin(111)")
+    main_nav = driver.find_element_by_class_name('main-nav')
+    spacer = driver.find_element_by_id('wrapper_spacer_header')
+    assert(main_nav.is_displayed() is False), 'Main nav is not hidden'
+    assert(spacer.is_displayed()), 'Spacer is not displayed'
+
+
+def test_wrapper_functions_are_working_for_features(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('%s/feature/feature_longform' % testserver.url)
+
+    # test window.wrapper object exists
+    obj = driver.execute_script("return typeof(window.wrapper)")
+    assert obj == "object", 'window.wrapper object doesnt exists'
+
+    # test ressort
+    ressort = driver.execute_script("return window.wrapper.getRessort()")
+    assert ressort == "Gesellschaft", 'Ressort is not Gesellschaft'
+
+    # test zmo header is hidden and spacer displayed
+    driver.execute_script("window.wrapper.setHeaderMargin(111)")
+    main_nav = driver.find_element_by_class_name('main-nav')
+    spacer = driver.find_element_by_id('wrapper_spacer_header')
+    assert(main_nav.is_displayed() is False), 'Main nav is not hidden'
+    assert(spacer.is_displayed()), 'Spacer is not displayed'
