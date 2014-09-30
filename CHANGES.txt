@@ -4,7 +4,8 @@ Change log for zeit.frontend
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Hotfix: fix wrong $base-line-height due to compass bug and
+          override new normalize.css value for figure elements
 
 
 1.1 (2014-09-29)
