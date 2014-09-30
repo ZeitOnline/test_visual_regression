@@ -25,6 +25,7 @@ require.config({
         'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
         'web.magazin/plugins/jquery.parseesi': [ 'jquery', 'esiparser' ],
         'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
+        'web.site/plugins/jquery.togglenavi': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },

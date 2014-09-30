@@ -12,7 +12,8 @@ $zon-classifieds-width-phablet: em(180px)
 $zon-search-width: em(120px)
 $zon-search-square-size: em(35px)
 
-//basic style for nav box
+// basic style for nav box
+// important is important here, as we have to overwrite js toggling
 .main_nav
 	+display-flex()
 	+flex-wrap(wrap)
@@ -21,6 +22,10 @@ $zon-search-square-size: em(35px)
 	+tablet()
 	+respond-min($break-tablet-min)
 		padding: $fine $petite $fine $petite
+	& > *[data-dropdown="true"]
+		display: none
+		+respond-min($break-tablet-min)
+			display: inline-block !important
 
 %main_nav_icons
 	display: block
@@ -189,6 +194,7 @@ $zon-search-square-size: em(35px)
 .main_nav__classifieds
 	@extend %main_nav_links
 	+add_nav_bar_style(auto)
+	padding-left: $petite
 	line-height: $zon-classifieds-height
 	order: 50
 	.main_nav__classifieds__more
@@ -210,6 +216,7 @@ $zon-search-square-size: em(35px)
 		order: 20
 		width: 38%
 		text-align: right
+		padding-left: auto
 		ul
 			margin-right: $petite
 			display: inline-block

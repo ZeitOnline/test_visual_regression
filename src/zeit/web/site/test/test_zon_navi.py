@@ -396,16 +396,6 @@ def test_zon_main_nav_has_correct_structure(
     assert(main_nav.is_displayed())
     # logo is visible in all sizes
     assert(logo_bar__image.is_displayed())
-    # search button is visible in all sizes
-    assert(search__button.is_displayed())
-    # community link is visible in all sizes
-    assert(main_nav__community.is_displayed())
-    # ressort bar is visible in all sizes
-    assert(main_nav__ressorts.is_displayed())
-    # service bar is visible in all sizes
-    assert(main_nav__services.is_displayed())
-    # classifieds bar is visible in all sizes
-    assert(main_nav__classifieds.is_displayed())
 
     if small_screen:
         # burger menue is visible
@@ -419,6 +409,17 @@ def test_zon_main_nav_has_correct_structure(
         assert(serv_li[3].is_displayed() is False)
         assert(serv_li[4].is_displayed() is False)
         assert(serv_li[5].is_displayed() is False)
+    else:
+        # search button is visible in desktop mode
+        assert(search__button.is_displayed())
+        # community link is visible in desktop mode
+        assert(main_nav__community.is_displayed())
+        # ressort bar is visible in desktop mode
+        assert(main_nav__ressorts.is_displayed())
+        # service bar is visible in desktop mode
+        assert(main_nav__services.is_displayed())
+        # classifieds bar is visible in desktop mode
+        assert(main_nav__classifieds.is_displayed())
 
     if screen_width == 768:
         # test search input is hidden in tablet mode
@@ -437,6 +438,8 @@ def test_nav_search_is_working_as_expected(
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
     search__close = driver.find_elements_by_class_name('search__close')[0]
+    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
+    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
 
     if screen_width == 768:
         # test search input is shown after button click
@@ -447,8 +450,73 @@ def test_nav_search_is_working_as_expected(
         assert(search__input.is_displayed() is False)
         search__button.click()
 
+    # open search for mobile
+    if screen_width < 768:
+        menu__button.click()
+
     # test if search is performed
     search__input.send_keys("test")
     search__button.click()
 
     assert driver.current_url == 'http://www.zeit.de/suche/index?q=test'
+
+
+def test_nav_burger_menue_is_working_as_expected(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/centerpage/zeitonline' % testserver.url)
+
+    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
+    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    icon_burger = logo_bar__menue.find_element_by_class_name(
+        'icon-zon-logo-navigation_menu')
+
+    main_nav__community = driver.find_element_by_class_name(
+        'main_nav__community')
+    main_nav__ressorts = driver.find_element_by_class_name(
+        'main_nav__ressorts')
+    main_nav__services = driver.find_element_by_class_name(
+        'main_nav__services')
+    main_nav__classifieds = driver.find_element_by_class_name(
+        'main_nav__classifieds')
+    main_nav__search = driver.find_element_by_class_name('main_nav__search')
+
+    # test main elements are displayed
+    assert(logo_bar__menue.is_displayed()), 'Logo bar is not displayed'
+    assert(menu__button.is_displayed()), 'Menue button is not displayed'
+    assert(icon_burger.is_displayed()), 'Burger Icon is not displayed'
+
+    menu__button.click()
+
+    # test element states after menue button is clicked
+    assert(main_nav__community.is_displayed()), (
+        'Community bar is not displayed')
+    assert(main_nav__ressorts.is_displayed()), (
+        'Ressort bar is not displayed')
+    assert(main_nav__services.is_displayed()), (
+        'Services bar is not displayed')
+    assert(main_nav__classifieds.is_displayed()), (
+        'Classifieds bar is not displayed')
+    assert(main_nav__search.is_displayed()), (
+        'Search bar is not displayed')
+
+    # test close button is displayed
+    icon_close = logo_bar__menue.find_element_by_class_name(
+        'icon-zon-logo-navigation_close-hover')
+    assert(icon_close.is_displayed()), 'Closing Icon is not displayed'
+
+    menu__button.click()
+
+    # test element states after menue button is clicked again
+    assert(main_nav__community.is_displayed() is False), (
+        'Community bar is displayed')
+    assert(main_nav__ressorts.is_displayed() is False), (
+        'Ressort bar is not displayed')
+    assert(main_nav__services.is_displayed() is False), (
+        'Services bar is not displayed')
+    assert(main_nav__classifieds.is_displayed() is False), (
+        'Classifieds bar is not displayed')
+    assert(main_nav__search.is_displayed() is False), (
+        'Search bar is not displayed')
