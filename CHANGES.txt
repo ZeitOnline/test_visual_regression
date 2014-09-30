@@ -6,6 +6,10 @@ Change log for zeit.frontend
 
 - ZON-904: Add Wrapper Selenium Testing
 
+- ZON-939: Add last semantic change property to ZON CP
+
+>>>>>>> master
+
 1.1.1 (2014-09-30)
 ------------------
 
