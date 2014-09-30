@@ -6,6 +6,17 @@ Change log for zeit.frontend
 
 - BUG-25: Remove clearing from standard assets
 
+- ZON-904: Add Wrapper Selenium Testing
+
+- ZON-939: Add last semantic change property to ZON CP
+
+
+1.1.1 (2014-09-30)
+------------------
+
+- Hotfix: fix wrong $base-line-height due to compass bug and
+          override new normalize.css value for figure elements
+
 
 1.1 (2014-09-29)
 ----------------
