@@ -39,9 +39,7 @@ $article-content-max-width: 660px
 
 figure
   width: 100%
-  margin-bottom: $medium
-  margin-top: $medium
-  clear: both
+  margin: $medium 0
   .figure__media, img
     max-width: 100%
     width: 100%
@@ -132,6 +130,7 @@ figure
     max-width: em(240px)
     margin: $thin $gutter $large 0
     float: left
+    clear: left
     .video__still
       width: 100%
       margin: 0
@@ -149,3 +148,4 @@ figure
   +respond-min($break-2)
     margin: $thin 0 $gutter $gutter
     float: right
+    clear: right

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 
 from pyramid.view import view_config
 
@@ -15,13 +14,13 @@ class Centerpage(zeit.web.core.view.Base):
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
-    def date_last_modified(self):
-        """Timestamp representing the last update made to the centerpage.
+    def last_semantic_change(self):
+        """Timestamp representing the last semantic change of the centerpage.
         :rtype: datetime.datetime
         """
 
-        # TODO: Implement actual timestamp.
-        return datetime.datetime.now()
+        return zeit.cms.content.interfaces.ISemanticChange(
+            self.context).last_semantic_change
 
     @zeit.web.reify
     def area_main(self):
