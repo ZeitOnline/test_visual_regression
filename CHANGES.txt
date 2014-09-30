@@ -1,8 +1,68 @@
 Change log for zeit.frontend
 ============================
 
-0.17 (unreleased)
------------------
+1.2 (unreleased)
+----------------
+
+- ZON-939: Add last semantic change property to ZON CP
+
+
+1.1.1 (2014-09-30)
+------------------
+
+- Hotfix: fix wrong $base-line-height due to compass bug and
+          override new normalize.css value for figure elements
+
+
+1.1 (2014-09-29)
+----------------
+
+- Hotfix: use subressorts for wrapper
+
+
+1.0.1 (2014-09-26)
+------------------
+
+- ZON-904: Add Wrapper API to enable small modifications
+           when ZMO is called from within wrapper
+
+- ZON-972: Add navigation styles for IE
+
+- ZON-994: Add extented selenium testing for navigation
+
+- ZON-944: HTML scaffold
+
+- ZON-977: Module teaser (demo)
+
+- ZON-978: Module small teaser (demo)
+
+- ZON-954: Differences between teasers
+
+- ZON-931: Build search HTML and CSS main framework
+
+- ZON-932: Implement navigation search module
+
+- ZON-933: Integrate logo
+
+- ZON-934: Add community link to navigation
+
+- ZON-935: Add puplishers bar part 1
+
+- ZON-936: Add puplishers bar part 2
+
+- ZON-950: Integrate navigation into new friedbert structure
+
+- ZON-959: Style mobile navigation view
+
+- ZON-973: Add new icon assets for navigation
+
+- ZON-975: Add and style tagbar under navigation
+
+- WEB-344: Adjust GA, add GTM snippets
+
+
+1.0 (2014-09-19)
+----------------
 
 - ZON-995: Graft zeit.web.static for egg releases
 
@@ -17,8 +77,6 @@ Change log for zeit.frontend
 - BUG-11: Adjust SEO content ID in noscript tag
 
 - ZON-969: Register ZMO views with custom predicates
-
-- ZON-939: Add last semantic change property to ZON CP
 
 - FIX: Patch reify decorator to deliver accurate traceback
 

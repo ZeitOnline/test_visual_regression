@@ -156,3 +156,43 @@
 		font-weight: 200
 	@else
 		font-weight: normal
+
+
+/* mixins for navigation/header */
+
+=add_nav_bar_style($height,$double: false)
+	height: $height
+	border-bottom: $hair solid $zon_light_grey
+	width: 100%
+	padding-left: $fine
+	@if $double
+		border-top: $hair solid $zon_light_grey
+
+=remove_nav_bar_style()
+	height: auto
+	border: 0
+	width: auto
+	padding-left: 0
+
+=hover_nav_icon($display:block,$bgcolor:#FFF)
+	.main_nav__icon--hover
+		display: none
+	a
+		display: $display
+		&:hover
+			.main_nav__icon--hover
+				display: $display
+				background-color: $bgcolor
+			.main_nav__icon--plain
+				display: none
+
+/* END: mixins for navigation/header */
+
+// pseudo classes
+%off-screen
+	height: 1px
+	left: -10000px
+	overflow: hidden
+	position: absolute
+	top: auto
+	width: 1px

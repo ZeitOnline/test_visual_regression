@@ -9,7 +9,6 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
-        'freewall': 'vendor/freewall',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'libs/jquery.bxslider',
         'esiparser': 'libs/esiparser',
@@ -25,10 +24,12 @@ require.config({
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
         'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
         'web.magazin/plugins/jquery.parseesi': [ 'jquery', 'esiparser' ],
+        'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },
-        'freewall': {
+        // to require the script at runtime we must use the full path
+        'vendor/freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'
         }
