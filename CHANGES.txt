@@ -8,7 +8,9 @@ Change log for zeit.frontend
 
 - ZON-939: Add last semantic change property to ZON CP
 
->>>>>>> master
+- BUG-18: no tile2 in ipad portrait mode
+
+- fix changes.txt
 
 1.1.1 (2014-09-30)
 ------------------
