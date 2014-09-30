@@ -4,17 +4,19 @@ Change log for zeit.frontend
 1.2 (unreleased)
 ----------------
 
+- ZON-976: Add Open/ Closing functionality for mobile menue
+
 - ZON-904: Add Wrapper Selenium Testing
 
 - ZON-939: Add last semantic change property to ZON CP
 
->>>>>>> master
 
 1.1.1 (2014-09-30)
 ------------------
 
 - Hotfix: fix wrong $base-line-height due to compass bug and
           override new normalize.css value for figure elements
+>>>>>>> master
 
 
 1.1 (2014-09-29)
