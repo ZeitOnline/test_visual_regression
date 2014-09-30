@@ -13,7 +13,7 @@ $zon-search-width: em(120px)
 $zon-search-square-size: em(35px)
 
 // basic style for nav box
-// important is imprtant here, as we have to overwrite js toggling
+// important is important here, as we have to overwrite js toggling
 .main_nav
 	+display-flex()
 	+flex-wrap(wrap)
@@ -25,7 +25,7 @@ $zon-search-square-size: em(35px)
 	& > *[data-dropdown="true"]
 		display: none
 		+respond-min($break-tablet-min)
-			display: inline !important
+			display: inline-block !important
 
 %main_nav_icons
 	display: block
