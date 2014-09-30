@@ -59,3 +59,21 @@ def test_var_Krux_isset(selenium_driver, testserver):
     driver.get('%s/artikel/01' % testserver.url)
     krux = driver.execute_script("return typeof window.Krux")
     assert krux == "function"
+
+
+def test_ad_tile2_ommitted_in_portrait(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(768, 1024)
+    driver.get('%s/artikel/01' % testserver.url)
+    script = 'return $(".ad__on__article:eq(1)").find("script").size()'
+    scripts = driver.execute_script(script)
+    assert scripts == 1
+
+
+def test_ad_tile2_not_ommitted_in_landscape(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/artikel/01' % testserver.url)
+    script = 'return $(".ad__on__article:eq(1)").find("script").size()'
+    scripts = driver.execute_script(script)
+    assert scripts > 1
