@@ -4,7 +4,7 @@ Change log for zeit.frontend
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-939: Add last semantic change property to ZON CP
 
 
 1.1.1 (2014-09-30)
