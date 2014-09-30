@@ -129,6 +129,40 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
         'No comment text present')
 
 
+def test_teasers_should_be_rendered_correctly(testserver, testbrowser):
+    browser = testbrowser(
+            '%s/zeit-online/main-teaser-setup' % testserver.url)
 
+    articles = browser.cssselect('#main .teaser-collection .teasers article')
+    assert len(articles) == 3, 'We expect 3 articles here'
 
+def test_responsive_image_should_render_correctly(testserver, testbrowser):
+    browser = testbrowser(
+            '%s/zeit-online/main-teaser-setup' % testserver.url)
 
+    image = browser.cssselect('#main .teaser-collection'
+        ' .teasers article:first-of-type figure.teaser__media.scaled-image'
+        ' a.teaser__media-link img.teaser__media-item')
+    assert len(image) == 1, 'Only one image for first article'
+
+def test_image_should_be_on_position_b(testserver, testbrowser):
+    browser = testbrowser(
+            '%s/zeit-online/main-teaser-setup' % testserver.url)
+    articles = browser.cssselect('#main .teaser-collection .teasers article')
+
+    assert articles[0][1].tag == 'figure', 'An img should be on this position'
+
+def test_image_should_be_on_position_a(testserver, testbrowser):
+    browser = testbrowser(
+            '%s/zeit-online/main-teaser-setup' % testserver.url)
+    articles = browser.cssselect('#main .teaser-collection .teasers article')
+
+    assert articles[1][0].tag == 'figure',  'An img should be on this position'
+
+def test_responsive_image_should_have_noscript(testserver, testbrowser):
+    browser = testbrowser(
+            '%s/zeit-online/main-teaser-setup' % testserver.url)
+
+    noscript = browser.cssselect('#main .teaser-collection .teasers'
+        ' article figure noscript')
+    assert len(noscript) == 2, 'No noscript areas found'
