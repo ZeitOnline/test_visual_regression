@@ -120,10 +120,18 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
     else:
         buttonNext = driver.find_element_by_css_selector(".bx-next")
         buttonNext.click()
-        selector = ".inline-gallery figure:not(.bx-clone):nth-child(2)"
-        slide = driver.find_element_by_css_selector(selector)
-        assert driver.current_url == gallery_url + "?gallery=static&slide=2"
-        assert slide.is_displayed()
+        try:
+            cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
+            WebDriverWait(driver, 10).until(cond)
+        except TimeoutException:
+            print "Timeout Gallery Script"
+            assert False
+        else:
+            selector = ".inline-gallery figure:not(.bx-clone):nth-child(2)"
+            slide = driver.find_element_by_css_selector(selector)
+            assert driver.current_url == gallery_url + "?gallery=static&slide=2"
+            assert slide.is_displayed()
+
 
 
 def test_gallery_with_supertitle_has_html_title(
