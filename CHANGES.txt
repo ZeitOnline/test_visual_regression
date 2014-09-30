@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - BUG-25: Remove clearing from standard assets
 
+- ZON-976: Add Open/ Closing functionality for mobile menue
+
 - ZON-904: Add Wrapper Selenium Testing
 
 - ZON-939: Add last semantic change property to ZON CP
