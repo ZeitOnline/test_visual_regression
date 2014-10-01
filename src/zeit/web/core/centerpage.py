@@ -56,6 +56,7 @@ def get_gallery_asset(teaser):
     return gallery.gallery
 
 
+@zeit.web.register_filter
 def get_image_asset(teaser):
     image = zeit.content.image.interfaces.IImages(teaser)
     return image.image
