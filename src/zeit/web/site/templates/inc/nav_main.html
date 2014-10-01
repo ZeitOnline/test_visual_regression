@@ -131,7 +131,9 @@
         {% set section = navigation[i] %}
         <li class="primary-nav__item">
             <a class="primary-nav__link" href="{{ section.href }}">{{ section.text }}</a>
-            {{ main_nav_sub_section(section) }}
+            {% if section.has_children() -%}
+                {{ main_nav_sub_section(section) }}
+            {%- endif %}
         </li>
         {%- endfor %}
     </ul>

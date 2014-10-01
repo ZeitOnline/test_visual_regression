@@ -28,6 +28,9 @@ class Navigation(object):
     def __delitem__(self, key):
         del self.navigation_items[key]
 
+    def has_children(self):
+        return True if len(self.navigation_items) > 0 else False
+
 
 @zope.interface.implementer(zeit.web.core.interfaces.INavigationItem)
 class NavigationItem(Navigation):
