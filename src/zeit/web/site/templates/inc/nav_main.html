@@ -106,44 +106,7 @@
 
 {% macro main_nav_ressorts() -%}
     <nav role="navigation">
-        <ul class="primary-nav">
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Politik</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link primary-nav__link--current" href="#">Gesellschaft</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Wirtschaft</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Kultur</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Wissen</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Digital</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Studium</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Karriere</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Reise</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Sport</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">Spiele</a>
-            </li>
-            <li class="primary-nav__item">
-                <a class="primary-nav__link" href="#">ZEITmagazin</a>
-            </li>
-        </ul>
+        {{ main_nav_section(view.navigation) }}
     </nav>
 {%- endmacro %}
 
@@ -160,6 +123,29 @@
 
 {% macro main_nav_date(date='3. September 2014 10:50 Uhr') -%}
     {{ date }}
+{%- endmacro %}
+
+{% macro main_nav_section(navigation) -%}
+    <ul class="primary-nav">
+        {% for i in navigation -%}
+        {% set section = navigation[i] %}
+        <li class="primary-nav__item">
+            <a class="primary-nav__link" href="{{ section.href }}">{{ section.text }}</a>
+            {{ main_nav_sub_section(section) }}
+        </li>
+        {%- endfor %}
+    </ul>
+{%- endmacro %}
+
+{% macro main_nav_sub_section(section) -%}
+    <ul class="primary-nav__list">
+        {% for i in section -%}
+        {% set sub_section = section[i] %}
+        <li class="primary-nav__item">
+            <a class="primary-nav__link" href="{{ sub_section.href }}">{{ sub_section.text }}</a>
+        </li>
+        {%- endfor %}
+    </ul>
 {%- endmacro %}
 
 <nav class="main_nav">
