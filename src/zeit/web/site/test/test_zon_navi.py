@@ -198,8 +198,9 @@ def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
 def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/navigation.tpl')
-    links = [('Label 1', 'http://link_1'), ('Label 2', 'http://link_2'),
-        ('Label 3', 'http://link_3')]
+    links = [('Label 1', 'http://link_1'),
+             ('Label 2', 'http://link_2'),
+             ('Label 3', 'http://link_3')]
     title = 'my title'
     html_str = tpl.module.main_nav_tags(title, links)
     html = lxml.html.fromstring(html_str).cssselect
@@ -210,6 +211,7 @@ def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     assert html('ul li a')[0].attrib['href'] == 'http://link_1'
     assert html('ul li a')[0].attrib['title'] == 'Label 1'
     assert html('ul li a')[0].text == 'Label 1'
+
 
 def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
     # ToDo: Maybe fill this function with more sense?
@@ -437,7 +439,6 @@ def test_nav_search_is_working_as_expected(
         selenium_driver, testserver, screen_size):
 
     driver = selenium_driver
-    small_screen = screen_size[2]
     screen_width = screen_size[0]
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/centerpage/zeitonline' % testserver.url)

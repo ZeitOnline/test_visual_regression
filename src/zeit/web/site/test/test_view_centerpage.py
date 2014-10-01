@@ -119,6 +119,7 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
         'No datetime attrib present')
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
+
     assert teaser_co.attrib['href'] == teaser.uniqueId+'#comments', (
         'No comment link present')
 
@@ -202,4 +203,5 @@ def test_centerpage_view_should_have_topic_links():
     view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
 
     assert view.topiclinks == [('Label 1', 'http://link_1'),
-        ('Label 2', 'http://link_2'), ('Label 3', 'http://link_3')]
+                               ('Label 2', 'http://link_2'),
+                               ('Label 3', 'http://link_3')]
