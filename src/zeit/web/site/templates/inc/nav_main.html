@@ -1,3 +1,21 @@
+{% macro main_nav_ressorts(navigation=None, nav_class=None) -%}
+    <nav role="navigation">
+        {% set navigation = navigation or view.navigation %}
+        {% set nav_class = nav_class or 'primary-nav' %}
+        <ul class="{{ nav_class }}">
+            {% for i in navigation -%}
+            {% set section = navigation[i] %}
+            <li class="{{ nav_class }}__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
+                <a class="primary-nav__link" href="{{ section.href | translate_url }}">{{ section.text }}</a>
+                {% if section.has_children() -%}
+                    {{ main_nav_ressorts(section, 'dropdown') }}
+                {%- endif %}
+            </li>
+            {%- endfor %}
+        </ul>
+    </nav>
+{%- endmacro %}
+
 {% macro main_nav_services(navigation=None, nav_css=None) -%}
     {% set navigation = navigation or view.navigation_services %}
     <ul>
@@ -60,24 +78,6 @@
             <span class="icon-zon-logo-navigation_close-small search__close__image"></span>
         </button>
     </form>
-{%- endmacro %}
-
-{% macro main_nav_ressorts(navigation=None, nav_class=None) -%}
-    <nav role="navigation">
-        {% set navigation = navigation or view.navigation %}
-        {% set nav_class = nav_class or 'primary-nav' %}
-        <ul class="{{ nav_class }}">
-            {% for i in navigation -%}
-            {% set section = navigation[i] %}
-            <li class="{{ nav_class }}__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
-                <a class="primary-nav__link" href="{{ section.href | translate_url }}">{{ section.text }}</a>
-                {% if section.has_children() -%}
-                    {{ main_nav_ressorts(section, 'dropdown') }}
-                {%- endif %}
-            </li>
-            {%- endfor %}
-        </ul>
-    </nav>
 {%- endmacro %}
 
 {% macro main_nav_tags() -%}
