@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-1.2 (unreleased)
+1.2 (2014-10-01)
 ----------------
 
 - BUG-25: Remove clearing from standard assets
