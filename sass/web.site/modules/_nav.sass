@@ -380,17 +380,16 @@ $zon-search-square-size: em(35px)
 
 .primary-nav
 	+columns(2)
+	+pie-clearfix
 	font-size: 16px
 	letter-spacing: 1px
 	padding: 0 0 0 $petite
-	+pie-clearfix
 
 	+respond-min($break-phablet-min)
 		+columns(3)
 	+respond-min($break-tablet-min)
 		+columns(auto)
 		border-bottom: 1px solid $zon_light_grey
-		border-top: 1px solid $zon_light_grey
 		display: block
 		font-size: 14px
 		padding: 0
@@ -458,7 +457,7 @@ $zon-search-square-size: em(35px)
 			& > .primary-nav__item
 				display: block
 				width: 100%
-			
+
 
 
 // .primary-nav__item:hover > .primary-nav__list
