@@ -1,3 +1,5 @@
+import collections
+
 import lxml.objectify
 import urllib2
 import zope.interface
@@ -9,7 +11,7 @@ import zeit.web.core.interfaces
 class Navigation(object):
 
     def __init__(self):
-        self.navigation_items = {}
+        self.navigation_items = collections.OrderedDict()
 
     def __contains__(self, item):
         return item in self.navigation_items
