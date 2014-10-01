@@ -116,6 +116,10 @@ class Base(object):
         return [(name, getattr(self, name, '')) for name in names]
 
     @zeit.web.reify
+    def navigation(self):
+        return zeit.web.core.navigation.navigation
+
+    @zeit.web.reify
     def title(self):
         return self.context.title
 
