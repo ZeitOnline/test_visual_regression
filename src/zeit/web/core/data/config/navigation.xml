@@ -1,156 +1,147 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link href="http://xml.zeit.de/index" id="start">Start</link>
-  </section>
-  <section>
-    <link href="http://xml.zeit.de/politik/index" id="politik">Politik</link>
+    <link href="http://www.zeit.de/politik/index" id="politik">Politik</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/politik/deutschland/index" id="deutschland">Deutschland</link>
+        <link href="http://www.zeit.de/politik/deutschland/index" id="deutschland">Deutschland</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/politik/ausland/index" id="ausland">Ausland</link>
+        <link href="http://www.zeit.de/politik/ausland/index" id="ausland">Ausland</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/wirtschaft/index" id="wirtschaft">Wirtschaft</link>
+    <link href="http://www.zeit.de/gesellschaft/index" id="gesellschaft">Gesellschaft</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/wirtschaft/unternehmen/index" id="unternehmen">Unternehmen</link>
+        <link href="http://www.zeit.de/gesellschaft/zeitgeschehen/index" id="zeitgeschehen">Zeitgeschehen</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/wirtschaft/geldanlage/index" id="geldanlage">Geldanlage</link>
+        <link href="http://www.zeit.de/gesellschaft/familie/index" id="familie">Familie</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/wirtschaft/boerse/index" id="boerse">Börse</link>
+        <link href="http://www.zeit.de/gesellschaft/schule/index" id="schule">Schule</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/meinung/index" id="meinung">Meinung</link>
+    <link href="http://www.zeit.de/wirtschaft/index" id="wirtschaft">Wirtschaft</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/gesellschaft/index" id="gesellschaft">Gesellschaft</link>
+        <link href="http://www.zeit.de/wirtschaft/unternehmen/index" id="unternehmen">Unternehmen</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/gesellschaft/zeitgeschehen/index" id="zeitgeschehen">Zeitgeschehen</link>
+        <link href="http://www.zeit.de/wirtschaft/geldanlage/index" id="geldanlage">Geldanlage</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/gesellschaft/familie/index" id="familie">Familie</link>
-      </sub_section>
-      <sub_section>
-        <link href="http://xml.zeit.de/gesellschaft/schule/index" id="schule">Schule</link>
+        <link href="http://www.zeit.de/wirtschaft/boerse/index" id="boerse">Börse</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/kultur/index" id="kultur">Kultur</link>
+    <link href="http://www.zeit.de/kultur/index" id="kultur">Kultur</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/literatur/index" id="literatur">Literatur</link>
+        <link href="http://www.zeit.de/kultur/literatur/index" id="literatur">Literatur</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/film/index" id="film">Film &amp; TV</link>
+        <link href="http://www.zeit.de/kultur/film/index" id="film">Film &amp; TV</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/musik/index" id="musik">Musik</link>
+        <link href="http://www.zeit.de/kultur/musik/index" id="musik">Musik</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/kunst/index" id="kunst">Kunst</link>
+        <link href="http://www.zeit.de/kultur/kunst/index" id="kunst">Kunst</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/wissen/index" id="wissen">Wissen</link>
+    <link href="http://www.zeit.de/wissen/index" id="wissen">Wissen</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/wissen/gesundheit/index" id="gesundheit">Gesundheit</link>
+        <link href="http://www.zeit.de/wissen/gesundheit/index" id="gesundheit">Gesundheit</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/wissen/umwelt/index" id="umwelt">Umwelt</link>
+        <link href="http://www.zeit.de/wissen/umwelt/index" id="umwelt">Umwelt</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/wissen/geschichte/index" id="geschichte">Geschichte</link>
+        <link href="http://www.zeit.de/wissen/geschichte/index" id="geschichte">Geschichte</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/digital/index" id="digital">Digital</link>
+    <link href="http://www.zeit.de/digital/index" id="digital">Digital</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/digital/internet/index" id="internet">Internet</link>
+        <link href="http://www.zeit.de/digital/internet/index" id="internet">Internet</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/digital/datenschutz/index" id="datenschutz">Datenschutz</link>
+        <link href="http://www.zeit.de/digital/datenschutz/index" id="datenschutz">Datenschutz</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/digital/mobil/index" id="mobil">Mobil</link>
+        <link href="http://www.zeit.de/digital/mobil/index" id="mobil">Mobil</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/digital/games/index" id="games">Games</link>
+        <link href="http://www.zeit.de/digital/games/index" id="games">Games</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/studium/index" id="studium">Studium</link>
+    <link href="http://www.zeit.de/studium/index" id="studium">Studium</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/studium/uni-leben/index" id="uni-leben">Uni-Leben</link>
+        <link href="http://www.zeit.de/studium/uni-leben/index" id="uni-leben">Uni-Leben</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/studium/hochschule/index" id="hochschule">Hochschule</link>
+        <link href="http://www.zeit.de/studium/hochschule/index" id="hochschule">Hochschule</link>
       </sub_section>
       <sub_section>
         <link href="http://ranking.zeit.de/" id="rankings">Uni-Rankings</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/studium/studiengaenge" id="studiengaenge">Studiengänge</link>
+        <link href="http://www.zeit.de/studium/studiengaenge" id="studiengaenge">Studiengänge</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/karriere/index" id="karriere">Karriere</link>
+    <link href="http://www.zeit.de/karriere/index" id="karriere">Karriere</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/karriere/bewerbung/index" id="bewerbung">Bewerbung</link>
+        <link href="http://www.zeit.de/karriere/bewerbung/index" id="bewerbung">Bewerbung</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/karriere/beruf/index" id="beruf">Beruf</link>
+        <link href="http://www.zeit.de/karriere/beruf/index" id="beruf">Beruf</link>
       </sub_section>
       <sub_section>
-        <link>
-          <hr/>
-          <span>Verlagsangebot</span>
-        </link>
-      </sub_section>
-      <sub_section>
-        <link href="http://jobs.zeit.de/" id="beruf">Stellenmarkt</link>
+        <link href="http://jobs.zeit.de/" id="stellenmarkt">Stellenmarkt</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/lebensart/index" id="lebensart">Lebensart</link>
+    <link href="http://www.zeit.de/reisen/index" id="reisen">Reise</link>
+  </section>
+  <section>
+    <link href="http://www.zeit.de/sport/index" id="sport">Sport</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/lebensart/mode/index" id="mode">Mode</link>
+        <link href="http://www.zeit.de/sport/index" id="fussball">Fußball</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/lebensart/essen-trinken/index" id="essen-trinken">Essen &amp; Trinken</link>
+        <link href="http://www.zeit.de/sport/index" id="bundesliga">Bundesliga</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/lebensart/partnerschaft/index" id="partnerschaft">Partnerschaft</link>
+        <link href="http://www.zeit.de/sport/index" id="live-ticker">Live-Ticker</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/reisen/index" id="reisen">Reisen</link>
+    <link href="http://www.zeit.de/mobilitaet/index" id="mobilitaet">Mobilität</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/mobilitaet/index" id="mobilitaet">Mobilität</link>
+    <link href="http://www.zeit.de/hamburg/index" id="hamburg">Hamburg</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/sport/index" id="sport">Sport</link>
+    <link href="http://www.zeit.de/zeit-magazin/index" id="zeitmagazin">ZEITmagazin</link>
   </section>
 </navigation>
