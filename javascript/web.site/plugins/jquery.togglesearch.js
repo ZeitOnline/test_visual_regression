@@ -33,27 +33,37 @@
         var el = {
             bindSearchFormEvents: function( that ) {
                 var $input = $( that ).find( '.search__input' ),
-                    $buttonSearch = $( that ).find( '.search__button' ),
-                    $buttonClose = $( that ).find( '.search__close' );
+                    $button = $( that ).find( '.search__button' );
 
                 //event for pressed search button
-                $buttonSearch.on( 'click', function( event ) {
+                $button.on( 'click', function( event ) {
                     //only applies if input is hidden
                     if ( $input.is( ':hidden' ) ) {
                         event.preventDefault();
-                        $input.show();
-                        $buttonClose.show();
-                        $buttonSearch.addClass( 'search__button--left-only' );
+                        $input.addClass( 'search__input--visible' );
+                        $button.addClass( 'search__button--right-only' );
                     }
+                    event.stopPropagation();
                 });
 
                 //event for pressed close button
-                $buttonClose.on( 'click', function( event ) {
-                    event.preventDefault();
-                    $input.hide();
-                    $buttonClose.hide();
-                    $buttonSearch.removeClass( 'search__button--left-only' );
-                    $buttonSearch.addClass( 'search__button--round' );
+                $( document ).on( 'click', function( event ) {
+                    //test if element was already clicked open
+                    if ( $input.hasClass( 'search__input--visible' ) ){
+                        //test if click wasn't on input
+                        if ( $( event.target ).attr( 'class' ) !== $input.attr( 'class' ) ){
+                            $input.removeClass( 'search__input--visible' );
+                            $button.removeClass( 'search__button--right-only' );
+                            $button.addClass( 'search__button--round' );
+                        }
+                    }
+                });
+
+                //event to reset clickable state when resized
+                $( window ).on( 'resize', function() {
+                    $input.removeClass( 'search__input--visible' );
+                    $button.removeClass( 'search__button--round' );
+                    $button.removeClass( 'search__button--right-only' );
                 });
             }
         };
