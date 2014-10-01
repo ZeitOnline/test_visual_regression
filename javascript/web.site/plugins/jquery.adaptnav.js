@@ -40,15 +40,13 @@
                 this.$nav = $that;
                 this.$feature = el.$nav.find( '.primary-nav__item--featured' );
 
-                //do modifications
-                if ( el.isDesktop() && el.$nav ) {
-                    //build new list and append
-                    el.buildAppendList();
-                    el.appendListToDom();
-                }
+                el.renderAdaptiveNav();
 
-                //bind event for resizing
-                el.bindResizeEvent();
+                //make adaption on resize possible too
+                $( window ).on( 'resize', function() {
+                    el.renderAdaptiveNav();
+                });
+
             },
             isDesktop: function() {
                 return ( $( '.logo_bar__menue, .main_nav' ).is( ':hidden' ) );
@@ -106,17 +104,11 @@
                 el.$items.css( 'display', 'block' );
 
             },
-            bindResizeEvent: function() {
-            //make adaption on resize possible too
-
-                $( window ).on( 'resize', function() {
-
-                    if ( el.isDesktop() ) {
-                        el.buildAppendList();
-                        el.appendListToDom();
-                    }
-                });
-
+            renderAdaptiveNav: function() {
+                if ( el.isDesktop() && el.$nav ) {
+                    el.buildAppendList();
+                    el.appendListToDom();
+                }
             }
         };
 
