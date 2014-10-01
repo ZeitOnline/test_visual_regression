@@ -1,6 +1,6 @@
 {% block teaser %}
 <article class="teaser {% block teaser_modifier %}{% endblock %}">
-    {% block teaser_media_position_a %} {%endblock%}
+    {% block teaser_media_position_before_title %} {%endblock%}
 
     <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}}">
         {% block teaser_link %}
@@ -15,7 +15,7 @@
         {% endblock %}
     </h2>
 
-    {% block teaser_media_position_b %} {% endblock %}
+    {% block teaser_media_position_after_title %} {% endblock %}
 
     {% block teaser_container %}
     <div class="teaser__container">

@@ -52,11 +52,11 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
 
     assert 'teaser' in tpl.blocks, 'No block named teaser'
     assert 'teaser_modifier' in tpl.blocks, 'No teaser_modifier block'
-    assert 'teaser_media_position_a' in tpl.blocks, (
-        'No block named teaser_media_position_a')
+    assert 'teaser_media_position_before_title' in tpl.blocks, (
+        'No block named teaser_media_position_before_title')
     assert 'teaser_link' in tpl.blocks, 'No teaser_link block'
-    assert 'teaser_media_position_b' in tpl.blocks, (
-        'No block named teaser_media_position_b')
+    assert 'teaser_media_position_after_title' in tpl.blocks, (
+        'No block named teaser_media_position_after_title')
     assert 'teaser_container' in tpl.blocks, (
         'No block named teaser_container')
     assert 'teaser_text' in tpl.blocks, (
