@@ -125,26 +125,16 @@
     {{ date }}
 {%- endmacro %}
 
-{% macro main_nav_section(navigation) -%}
-    <ul class="primary-nav">
+{% macro main_nav_section(navigation, nav_class=None) -%}
+	{% set nav_class = nav_class or 'primary-nav' %}
+    <ul class="{{ nav_class }}">
         {% for i in navigation -%}
         {% set section = navigation[i] %}
         <li class="primary-nav__item">
             <a class="primary-nav__link" data-id="{{ section.item_id }}" href="{{ section.href }}">{{ section.text }}</a>
             {% if section.has_children() -%}
-                {{ main_nav_sub_section(section) }}
+                {{ main_nav_section(section, 'primary-nav__list') }}
             {%- endif %}
-        </li>
-        {%- endfor %}
-    </ul>
-{%- endmacro %}
-
-{% macro main_nav_sub_section(section) -%}
-    <ul class="primary-nav__list">
-        {% for i in section -%}
-        {% set sub_section = section[i] %}
-        <li class="primary-nav__item">
-            <a class="primary-nav__link" data-id="{{ sub_section.item_id }}" href="{{ sub_section.href }}">{{ sub_section.text }}</a>
         </li>
         {%- endfor %}
     </ul>
