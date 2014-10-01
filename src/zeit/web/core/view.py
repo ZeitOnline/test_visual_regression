@@ -120,8 +120,8 @@ class Base(object):
         return zeit.web.core.navigation.navigation
 
     @zeit.web.reify
-    def services_navigation(self):
-        return zeit.web.core.navigation.services_navigation
+    def navigation_services(self):
+        return zeit.web.core.navigation.navigation_services
 
     @zeit.web.reify
     def title(self):

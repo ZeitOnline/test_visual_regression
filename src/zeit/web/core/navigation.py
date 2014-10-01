@@ -43,7 +43,7 @@ class NavigationItem(Navigation):
 
 
 navigation = None
-services_navigation = None
+navigation_services = None
 
 
 def make_navigation(navigation_config):
