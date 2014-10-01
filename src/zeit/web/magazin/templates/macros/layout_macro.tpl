@@ -185,7 +185,12 @@
         {% endif -%}
         <div class="ad__{{ banner.name }}__inner">
             <script type="text/javascript">
-                if ( window.ZMO.clientWidth >= {{ banner.min_width|default(0) }} ) {
+                if (
+                    window.ZMO.clientWidth >= {{ banner.min_width|default(0) }}
+                    {% if banner.tile == 2 %}
+                    && window.ZMO.clientWidth != window.ZMO.mobileWidth
+                    {% endif %}
+                ) {
                     document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{ view.banner_channel }}{% if banner.dcopt %};dcopt={{ banner.dcopt }}{% endif %};tile={{ banner.tile }};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw={{ kw }},' + iqd_TestKW {% if banner.diuqilon %}+ window.diuqilon {% endif %}+ ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
                 }
             </script>
