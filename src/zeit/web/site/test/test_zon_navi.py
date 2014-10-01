@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import lxml
 import pytest
+import mock
 
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/nav_main.html')
-    html_str = tpl.render()
+    html_str = tpl.render(view=mock.MagicMock())
     html = lxml.html.fromstring(html_str).cssselect
     assert len(html('nav.main_nav')) == 1, (
         'just one .main_nav should be present')
@@ -55,7 +56,7 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
 
 def test_nav_services_macro_should_have_expected_links(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_services()
     html = lxml.html.fromstring(html_str).cssselect
     assert html('li > a[href="http://www.zeitabo.de/'
@@ -85,7 +86,7 @@ def test_nav_services_macro_should_have_expected_links(jinja2_env):
 
 def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_classifieds()
     html = lxml.html.fromstring(html_str).cssselect
     assert html('li > a[href="http://jobs.zeit.de/"]'
@@ -107,7 +108,7 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
 
 def test_nav_community_macro_should_render_a_login(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_community()
     html = lxml.html.fromstring(html_str).cssselect
     print html_str
@@ -121,7 +122,7 @@ def test_nav_community_macro_should_render_a_login(jinja2_env):
 
 def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_logo()
     html = lxml.html.fromstring(html_str).cssselect
     assert html('a[href="http://www.zeit.de/index"]'
@@ -133,7 +134,7 @@ def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
 
 def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_burger()
     html = lxml.html.fromstring(html_str).cssselect
     print html_str
@@ -149,7 +150,7 @@ def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
 
 def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_search()
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -183,7 +184,7 @@ def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
 
 def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_ressorts()
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -196,18 +197,24 @@ def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
 
 def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
-    html_str = tpl.module.main_nav_tags()
+        'zeit.web.site:templates/macros/navigation.tpl')
+    links = [('Label 1', 'http://link_1'), ('Label 2', 'http://link_2'),
+        ('Label 3', 'http://link_3')]
+    title = 'my title'
+    html_str = tpl.module.main_nav_tags(title, links)
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('span.main_nav__tags__label')[0] is not None, (
+    assert html('span.main_nav__tags__label')[0].text == 'my title', (
         'Label span is not present')
     assert html('ul')[0] is not None, 'A list for the tags is not present.'
-
+    assert len(html('ul li')) == 3, 'We expect 3 items in this list'
+    assert html('ul li a')[0].attrib['href'] == 'http://link_1'
+    assert html('ul li a')[0].attrib['title'] == 'Label 1'
+    assert html('ul li a')[0].text == 'Label 1'
 
 def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
     # ToDo: Maybe fill this function with more sense?
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
+        'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_date('Mein Datum')
     assert html_str == 'Mein Datum'
 
