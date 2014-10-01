@@ -26,7 +26,7 @@ require.config({
         'web.magazin/plugins/jquery.parseesi': [ 'jquery', 'esiparser' ],
         'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
         'web.site/plugins/jquery.togglenavi': [ 'jquery' ],
-        'web.site/plugins/jquery.adaptivenav': [ 'jquery' ],
+        'web.site/plugins/jquery.adaptnav': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },

@@ -22,7 +22,7 @@ require([
 require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.togglenavi',
-    'web.site/plugins/jquery.adaptivenav'
+    'web.site/plugins/jquery.adaptnav'
 ], function() {
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
