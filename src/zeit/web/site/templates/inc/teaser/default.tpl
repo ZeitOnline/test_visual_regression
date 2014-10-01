@@ -1,8 +1,8 @@
 {% block teaser %}
 <article class="teaser {% block teaser_modifier %}{% endblock %}">
-    {% block teaser_media_position_before_title %} {%endblock%}
+    {% block teaser_media_position_before_title %}{% endblock %}
 
-    <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}}">
+    <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}">
         {% block teaser_link %}
         <a class="teaser__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
             {% block teaser_kicker %}
@@ -15,7 +15,7 @@
         {% endblock %}
     </h2>
 
-    {% block teaser_media_position_after_title %} {% endblock %}
+    {% block teaser_media_position_after_title %}{% endblock %}
 
     {% block teaser_container %}
     <div class="teaser__container">
