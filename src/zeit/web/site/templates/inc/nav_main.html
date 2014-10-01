@@ -1,35 +1,16 @@
-{% macro main_nav_services() -%}
-	{{ main_nav_services_section(view.navigation_services) }}
-{%- endmacro %}
-
-{% macro main_nav_classifieds() -%}
+{% macro main_nav_services(navigation=None, nav_css=None) -%}
+    {% set navigation = navigation or view.navigation_services %}
     <ul>
+        {% for i in navigation -%}
+        {% set section = navigation[i] %}
+        {% set section_has_children = navigation[i] %}
         <li>
-            <a href="http://jobs.zeit.de/" id="hp.global.topnav.links.jobs">
-                Jobs
-            </a>
+            <a id="{{ section.item_id }}" href="{{ section.href | translate_url }}">{{ section.text }}</a>
+            {% if section.has_children() -%}
+                {{ main_nav_services(section, 'dropdown') }}
+            {%- endif %}
         </li>
-        <li>
-            <a href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.global.topnav.links.partnersuche">
-                Partnersuche
-            </a>
-        </li>
-        <li class="main_nav__classifieds__more">
-            <a href="#">
-                mehr
-                <span class="main_nav__classifieds__more__image main_nav__icon--plain icon-zon-logo-navigation_dropdown"></span><span class="main_nav__classifieds__more__image main_nav__icon--hover icon-zon-logo-navigation_dropdown-hover"></span>
-            </a>
-        </li>
-        <li>
-            <a href="http://zeit.immowelt.de/" rel="nofollow" id="hp.global.topnav.links.immobilien">
-                Immobilien
-            </a>
-        </li>
-        <li>
-            <a href="http://automarkt.zeit.de/" id="hp.global.topnav.links.automarkt">
-                Automarkt
-            </a>
-        </li>
+        {%- endfor %}
     </ul>
 {%- endmacro %}
 
@@ -73,9 +54,21 @@
     </form>
 {%- endmacro %}
 
-{% macro main_nav_ressorts() -%}
+{% macro main_nav_ressorts(navigation=None, nav_class=None) -%}
     <nav role="navigation">
-        {{ main_nav_section(view.navigation) }}
+        {% set navigation = navigation or view.navigation %}
+        {% set nav_class = nav_class or 'primary-nav' %}
+        <ul class="{{ nav_class }}">
+            {% for i in navigation -%}
+            {% set section = navigation[i] %}
+            <li class="{{ nav_class }}__item"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
+                <a class="primary-nav__link" data-id="{{ section.item_id }}" href="{{ section.href | translate_url }}">{{ section.text }}</a>
+                {% if section.has_children() -%}
+                    {{ main_nav_ressorts(section, 'dropdown') }}
+                {%- endif %}
+            </li>
+            {%- endfor %}
+        </ul>
     </nav>
 {%- endmacro %}
 
@@ -92,35 +85,6 @@
 
 {% macro main_nav_date(date='3. September 2014 10:50 Uhr') -%}
     {{ date }}
-{%- endmacro %}
-
-{% macro main_nav_section(navigation, nav_class=None) -%}
-    {% set nav_class = nav_class or 'primary-nav' %}
-    <ul class="{{ nav_class }}">
-        {% for i in navigation -%}
-        {% set section = navigation[i] %}
-        <li class="{{ nav_class }}__item">
-            <a class="primary-nav__link" data-id="{{ section.item_id }}" href="{{ section.href | translate_url }}">{{ section.text }}</a>
-            {% if section.has_children() -%}
-                {{ main_nav_section(section, 'dropdown') }}
-            {%- endif %}
-        </li>
-        {%- endfor %}
-    </ul>
-{%- endmacro %}
-
-{% macro main_nav_services_section(navigation) -%}
-    <ul>
-        {% for i in navigation -%}
-        {% set section = navigation[i] %}
-        <li>
-            <a id="{{ section.item_id }}" href="{{ section.href | translate_url }}">{{ section.text }}</a>
-            {% if section.has_children() -%}
-                {{ main_nav_services_section(section, 'primary-nav__list') }}
-            {%- endif %}
-        </li>
-        {%- endfor %}
-    </ul>
 {%- endmacro %}
 
 <nav class="main_nav">
