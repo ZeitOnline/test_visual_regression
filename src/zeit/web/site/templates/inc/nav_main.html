@@ -14,6 +14,14 @@
     </ul>
 {%- endmacro %}
 
+{% macro main_nav_classifieds(navigation=None) -%}
+    {#
+        Currently there is no difference from navigation services,
+        so we call the services macro instead.
+    #}
+    {{ main_nav_services(view.navigation_classifieds) }}
+{%- endmacro %}
+
 {% macro main_nav_community() -%}
     <a href="http://community.zeit.de/user/login?destination=http://www.zeit.de/index" rel="nofollow" class="user" id="drupal_login">
         <span class="main_nav__community__image icon-zon-logo-navigation_login"></span>

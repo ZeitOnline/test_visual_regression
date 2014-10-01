@@ -81,6 +81,11 @@ class Application(object):
         zeit.web.core.navigation.navigation_services = (
             zeit.web.core.navigation.make_navigation(
                 navigation_services_config))
+        navigation_classifieds_config = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_navigation-classifieds', ''))
+        zeit.web.core.navigation.navigation_classifieds = (
+            zeit.web.core.navigation.make_navigation(
+                navigation_classifieds_config))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(

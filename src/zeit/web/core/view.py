@@ -124,6 +124,10 @@ class Base(object):
         return zeit.web.core.navigation.navigation_services
 
     @zeit.web.reify
+    def navigation_classifieds(self):
+        return zeit.web.core.navigation.navigation_classifieds
+
+    @zeit.web.reify
     def title(self):
         return self.context.title
 
