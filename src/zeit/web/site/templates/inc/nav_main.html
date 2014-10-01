@@ -1,36 +1,5 @@
 {% macro main_nav_services() -%}
-    <ul>
-        <li>
-            <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.global.topnav.links.abo">
-                Abo
-            </a>
-        </li>
-        <li>
-            <a href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.global.topnav.links.shop">
-                Shop
-            </a>
-        </li>
-        <li>
-            <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.global.topnav.links.epaper">
-                E-Paper
-            </a>
-        </li>
-        <li>
-            <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.global.topnav.links.audio">
-                Audio
-            </a>
-        </li>
-        <li>
-            <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.global.topnav.links.apps">
-                Apps
-            </a>
-        </li>
-        <li>
-            <a href="http://www.zeit.de/archiv" id="hp.global.topnav.links.archiv">
-                Archiv
-            </a>
-        </li>
-    </ul>
+	{{ main_nav_services_section(view.services_navigation) }}
 {%- endmacro %}
 
 {% macro main_nav_classifieds() -%}
@@ -137,6 +106,17 @@
             {%- endif %}
         </li>
         {%- endfor %}
+    </ul>
+{%- endmacro %}
+
+{% macro main_nav_services_section(navigation) -%}
+    <ul>
+        {% for i in navigation -%}
+        {% set section = navigation[i] %}
+        <li>
+            <a id="{{ section.item_id }}" href="{{ section.href | translate_url }}">{{ section.text }}</a>
+        </li>
+		{%- endfor %}
     </ul>
 {%- endmacro %}
 
