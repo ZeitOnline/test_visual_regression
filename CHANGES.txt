@@ -4,6 +4,8 @@ Change log for zeit.frontend
 1.2 (unreleased)
 ----------------
 
+- ZON-1009: implement new search field
+
 - BUG-25: Remove clearing from standard assets
 
 - ZON-976: Add Open/ Closing functionality for mobile menue
