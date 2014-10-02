@@ -32,3 +32,24 @@ class Centerpage(zeit.web.core.view.Base):
                 hasattr(x.layout, 'id') and x.layout.id and len(x) > 0),
             self.context['lead'].values())
         return [(i.layout.id, next(i.__iter__()), i) for i in blocks]
+
+    @zeit.web.reify
+    def topiclink_title(self):
+        """Cache topiclink_title
+        : rtype: string
+        """
+        return self.context.topiclink_title if (
+            self.context.topiclink_title is not None) else 'Schwerpunkte'
+
+    @zeit.web.reify
+    def topiclinks(self):
+        """Filter and restructure all topiclinks and labels
+        : rtype: dict
+        """
+        link_list = []
+        for i in xrange(1, 4):
+            label = getattr(self.context, 'topiclink_label_%s' % i, None)
+            link = getattr(self.context, 'topiclink_url_%s' % i, None)
+            if label is not None and link is not None:
+                link_list.append((label, link))
+        return link_list
