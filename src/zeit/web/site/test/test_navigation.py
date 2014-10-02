@@ -138,7 +138,7 @@ def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
     html_str = tpl.module.main_nav_burger()
     html = lxml.html.fromstring(html_str).cssselect
     print html_str
-    assert html('a[href="#"]')[0] is not None, 'An empty link is not present'
+    assert html('a')[0] is not None, 'An empty link is not present'
     assert len(html('div.logo_bar__menue__image.main_nav__icon--plain'
                     '.icon-zon-logo-navigation_menu')) == 1, (
         'Logo for bar menu is not present')
@@ -176,10 +176,6 @@ def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
                 '[type="search"][placeholder="Suche"]'
                 '[tabindex="1"]')[0] is not None, (
         'No search input present')
-    assert html('button.search__close[type="submit"]'
-                '[tabindex="2"]')[0] is not None, 'No close button present'
-    assert html('span.icon-zon-logo-navigation_close-small.'
-                'search__close__image')[0] is not None, 'No close icon present'
 
 
 def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
@@ -347,13 +343,6 @@ def test_article_has_valid_search_structure(testserver, testbrowser):
                 '[placeholder="Suche"]'
                 '[tabindex="1"]') is not None, (
         'Element input.search__input is invalid')
-    assert html('button.search__close'
-                '[type="submit"]'
-                '[tabindex="2"]') is not None, (
-        'Element button.search__close is invalid')
-    assert html('span.icon-zon-logo-navigation_close-small'
-                '.search__close__image')[0].text is None, (
-        'Element span.icon-zon-logo-navigation_close-small is not empty')
 
 
 def test_article_has_valid_tag_structure(testserver, testbrowser):
@@ -453,17 +442,23 @@ def test_nav_search_is_working_as_expected(
 
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
-    search__close = driver.find_elements_by_class_name('search__close')[0]
     logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
     menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    document = driver.find_element_by_class_name('page')
 
     if screen_width == 768:
         # test search input is shown after button click
         search__button.click()
-        assert(search__input.is_displayed())
-        # test search input is hidden after close click
-        search__close.click()
-        assert(search__input.is_displayed() is False)
+        assert(search__input.is_displayed()), 'Input is not displayed'
+        # test search input is not hidden after click in input
+        search__input.click()
+        assert(search__input.is_displayed()), 'Input is not displayed'
+        # test search input is hidden after button click, if its empty
+        search__button.click()
+        assert(search__input.is_displayed() is False), 'Input is displayed'
+        # test search input is hidden after click somewhere else
+        document.click()
+        assert(search__input.is_displayed() is False), 'Input is displayed'
         search__button.click()
 
     # open search for mobile
@@ -474,7 +469,8 @@ def test_nav_search_is_working_as_expected(
     search__input.send_keys("test")
     search__button.click()
 
-    assert driver.current_url == 'http://www.zeit.de/suche/index?q=test'
+    assert driver.current_url == 'http://www.zeit.de/suche/index?q=test', (
+        'Search wasnt performed')
 
 
 def test_nav_burger_menue_is_working_as_expected(

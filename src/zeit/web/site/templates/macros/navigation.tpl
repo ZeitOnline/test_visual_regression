@@ -54,33 +54,20 @@
 {% macro main_nav_search() -%}
     <form accept-charset="utf-8" method="get" class="search" role="search" action="http://www.zeit.de/suche/index">
         <label for="q" class="hideme">suchen</label>
+        <input class="search__input" id="q" name="q" type="search" placeholder="Suche" tabindex="1">
         <button class="search__button" type="submit" tabindex="2">
-            <a href="#">
+            <a>
                 <span class="icon-zon-logo-navigation_suche search__button__image main_nav__icon--plain"></span>
                 <span class="icon-zon-logo-navigation_suche-hover search__button__image main_nav__icon--hover"></span>
             </a>
         </button>
-        <input class="search__input" id="q" name="q" type="search" placeholder="Suche" tabindex="1">
-        <button class="search__close" type="submit" tabindex="2">
-            <span class="icon-zon-logo-navigation_close-small search__close__image"></span>
-        </button>
     </form>
-{%- endmacro %}
-
-{% macro main_nav_tags() -%}
-    <!-- be careful with line break: display-block alignment -->
-    <span class="main_nav__tags__label">
-        Schwerpunkte
-    </span><ul>
-        <li>Ukraine Krise</li>
-        <li>Kämpfe im Irak</li>
-        <li>Wahl in Sachsen</li>
-    </ul>
 {%- endmacro %}
 
 {% macro main_nav_date(date='3. September 2014 10:50 Uhr') -%}
     {{ date }}
 {%- endmacro %}
+
 {% macro main_nav_tags(title, links) -%}
     <!-- be careful with line break: display-block alignment -->
     <span class="main_nav__tags__label">{{ title }}</span><ul>
@@ -90,48 +77,4 @@
             </li>
         {% endfor %}
     </ul>
-{%- endmacro %}
-
-{% macro main_nav_community() -%}
-    <a href="http://community.zeit.de/user/login?destination=http://www.zeit.de/index" rel="nofollow" class="user" id="drupal_login">
-        <span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
-        Anmelden
-    </a>
-{%- endmacro %}
-
-{% macro main_nav_logo() -%}
-    <a href="http://www.zeit.de/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
-        <!--start: title-->Nachrichten auf ZEIT ONLINE<!--end: title-->
-    </a>
-{%- endmacro %}
-
-{% macro main_nav_burger() -%}
-    <a href="#">
-        <div class="logo_bar__menue__image main_nav__icon--plain icon-zon-logo-navigation_menu"></div>
-        <div class="logo_bar__menue__image main_nav__icon--hover icon-zon-logo-navigation_menu-hover"></div>
-    </a>
-{%- endmacro %}
-
-{% macro main_nav_teaser() -%}
-    <!-- planned special teaser -->
-{%- endmacro %}
-
-{% macro main_nav_search() -%}
-    <form accept-charset="utf-8" method="get" class="search" role="search" action="http://www.zeit.de/suche/index">
-        <label for="q" class="hideme">suchen</label>
-        <button class="search__button" type="submit" tabindex="2">
-            <a href="#">
-                <span class="icon-zon-logo-navigation_suche search__button__image main_nav__icon--plain"></span>
-                <span class="icon-zon-logo-navigation_suche-hover search__button__image main_nav__icon--hover"></span>
-            </a>
-        </button>
-        <input class="search__input" id="q" name="q" type="search" placeholder="Suche" tabindex="1">
-        <button class="search__close" type="submit" tabindex="2">
-            <span class="icon-zon-logo-navigation_close-small search__close__image"></span>
-        </button>
-    </form>
-{%- endmacro %}
-
-{% macro main_nav_date(date='3. September 2014 10:50 Uhr') -%}
-    {{ date }}
 {%- endmacro %}
