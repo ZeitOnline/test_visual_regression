@@ -436,9 +436,9 @@ $zon-search-square-size: em(35px)
 
 
 
-.main_nav *[data-feature='dropdown']
+.main_nav [data-feature='dropdown']
 	position: relative
-	.primary-nav__list
+	.dropdown
 		background: $white
 		display: none
 		padding-left: 0
@@ -449,12 +449,13 @@ $zon-search-square-size: em(35px)
 		margin-left: $tiny
 		content: "\25BE" // Unicode for ▾
 	&:hover
-		&:after
+		& > .primary-nav__link:after
 			+rotate(180deg)
-		& > .primary-nav__list
+		& > .dropdown
 			display: block
 			position: absolute
-			& > .primary-nav__item
+			z-index: 1
+			& > .dropdown__item
 				display: block
 				width: 100%
 
