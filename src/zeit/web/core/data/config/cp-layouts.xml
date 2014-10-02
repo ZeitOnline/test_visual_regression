@@ -1,5 +1,21 @@
 <?xml version="1.0"?>
 <layouts>
+    <!-- Teaser formats for new ZON-Centerpages -->
+    <layout
+        id="zon-large"
+        title="Großer Teaser"
+        image_pattern="zon-large"
+        areas="lead-1 lead"
+        />
+    <layout
+        id="zon-small"
+        title="kleiner Teaser"
+        image_pattern="zon-thumbnail"
+        areas="lead"
+        />
+
+
+    <!-- Legacy teaser formats -->
     <layout
         id="leader"
         title="Großer Teaser mit Bild und Teaserliste"
@@ -17,12 +33,6 @@
         id="leader-fullwidth"
         title="Vollbreiter Aufmacher"
         image_pattern="940x400"
-        areas="lead-1"
-        />
-    <layout
-        id="leader-upright"
-        title="Großer Teaser mit Hochkant-Bild und Teaserliste"
-        image_pattern="148x222"
         areas="lead-1"
         />
     <layout
