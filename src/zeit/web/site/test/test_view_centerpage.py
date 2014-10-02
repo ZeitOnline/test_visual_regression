@@ -119,6 +119,7 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
         'No datetime attrib present')
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
+
     assert teaser_co.attrib['href'] == teaser.uniqueId+'#comments', (
         'No comment link present')
 
@@ -171,3 +172,36 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
     noscript = browser.cssselect(
         '#main .teaser-collection .teasers article figure noscript')
     assert len(noscript) == 2, 'No noscript areas found'
+
+
+def test_topiclinks_title_schould_have_a_value_and_default_value():
+    mycp = mock.Mock()
+    mycp.topiclink_title = 'My Title'
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+
+    assert view.topiclink_title == 'My Title', 'There is no title present'
+
+    mycp = mock.Mock()
+    mycp.topiclink_title = None
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+
+    assert view.topiclink_title == 'Schwerpunkte', 'There is no title present'
+
+
+def test_centerpage_view_should_have_topic_links():
+
+    mycp = mock.Mock()
+
+    mycp.topiclink_title = 'My Title'
+    mycp.topiclink_label_1 = 'Label 1'
+    mycp.topiclink_url_1 = 'http://link_1'
+    mycp.topiclink_label_2 = 'Label 2'
+    mycp.topiclink_url_2 = 'http://link_2'
+    mycp.topiclink_label_3 = 'Label 3'
+    mycp.topiclink_url_3 = 'http://link_3'
+
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+
+    assert view.topiclinks == [('Label 1', 'http://link_1'),
+                               ('Label 2', 'http://link_2'),
+                               ('Label 3', 'http://link_3')]
