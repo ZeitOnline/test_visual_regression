@@ -37,12 +37,17 @@
 
                 //event for pressed search button
                 $button.on( 'click', function( event ) {
-                    //only applies if input is hidden
+                    event.preventDefault();
+
                     if ( $input.is( ':hidden' ) ) {
-                        event.preventDefault();
+                    //only applies if input is hidden
                         $input.addClass( 'search__input--visible' );
                         $button.addClass( 'search__button--right-only' );
+                    } else if ( $input.hasClass( 'search__input--visible' ) && !$input.val() ){
+                    //if input is empty we wanne hide it when search button is pressed again
+                        return;
                     }
+
                     event.stopPropagation();
                 });
 
