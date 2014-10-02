@@ -1,7 +1,6 @@
 {% macro main_nav_tags(title, links) -%}
     <!-- be careful with line break: display-block alignment -->
-    <span class="main_nav__tags__label">{{ title }}</span>
-    <ul>
+    <span class="main_nav__tags__label">{{ title }}</span><ul>
         {% for label, link in links %}
             <li>
                 <a href='{{link}}' title='{{label}}'>{{label}}</a>

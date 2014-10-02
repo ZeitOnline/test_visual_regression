@@ -10,6 +10,8 @@ Change log for zeit.frontend
 1.2 (2014-10-01)
 ----------------
 
+- ZON-1010: Polish navigation
+
 - ZON-941: Implement topic links
 
 - BUG-25: Remove clearing from standard assets
