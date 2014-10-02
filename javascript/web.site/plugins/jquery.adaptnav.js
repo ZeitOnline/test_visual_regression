@@ -34,19 +34,57 @@
             $feature: false,
             $items: false,
             $html: false,
+            $moreList: false,
+            $moreListItems: false,
             init: function( $that ) {
 
                 //set globals
                 this.$nav = $that;
+                this.$items = el.$nav.children( '.primary-nav__item' ).not( '*[data-id="more-dropdown"]' );
                 this.$feature = el.$nav.find( '.primary-nav__item--featured' );
 
-                el.renderAdaptiveNav();
+                /* el.renderAdaptiveNav();
 
                 //make adaption on resize possible too
                 $( window ).on( 'resize', function() {
                     el.renderAdaptiveNav();
-                });
+                }); */
 
+                this.$moreList = el.$nav.find( '.primary-nav__item[data-id="more-dropdown"]');
+                this.$moreListItems = el.$moreList.find( '.dropdown > .dropdown__item');
+
+                this.toggleNavItems();
+                this.$nav.toggleClass( 'primary-nav--js-no-overflow' );
+
+                //make adaption on resize possible too
+                $( window ).on( 'resize', function() {
+                    el.toggleNavItems();
+                });
+            },
+            toggleNavItems: function() {
+
+                // make sure to *not* fire on mobile
+                if ( el.isDesktop() && el.$nav ) {
+                    var navWidth = 0,
+                        threshold = el.getAvailableWidth();
+
+                    // shall the item be displayed?
+                    el.$items.each(function() {
+                        var $navItem = $(this),
+                            itemId = $navItem.data( 'id' ),
+                            $dropdownItem = el.$moreListItems.filter( '[data-id="' + itemId + '"]' );
+
+                        navWidth += $navItem.outerWidth();
+
+                        if ( navWidth < threshold ) {
+                            $navItem.show();
+                            $dropdownItem.hide();
+                        } else {
+                            $navItem.hide();
+                            $dropdownItem.show();
+                        }
+                    });
+                }
             },
             isDesktop: function() {
                 return ( $( '.logo_bar__menue, .main_nav' ).is( ':hidden' ) );
@@ -55,11 +93,11 @@
 
                 el.$html = $( '<li data-feature="dropdown" class="primary-nav__item">' +
                                 '   <a class="primary-nav__link" href="#">mehr</a>' +
-                                '   <ul class="primary-nav__list"></ul>' +
+                                '   <ul class="dropdown"></ul>' +
                                 '</li>' );
 
                 //reset nav if necessary
-                el.$nav.find( 'li[data-feature="dropdown"]' ).remove();
+                // el.$nav.find( 'li[data-feature="dropdown"]' ).remove(); // TODO: Arne CHECK
 
                 //set items
                 el.$items = el.$nav.children( '.primary-nav__item' ).not( '.primary-nav__item--featured' );
@@ -80,7 +118,7 @@
 
                 var navWidth = 0,
                     threshold = el.getAvailableWidth(),
-                    $appendList = el.$html.find( '.primary-nav__list' );
+                    $appendList = el.$html.find( '.dropdown' );
 
                 //append items to new menue
                 el.$items.each(function() {
@@ -106,8 +144,8 @@
             },
             renderAdaptiveNav: function() {
                 if ( el.isDesktop() && el.$nav ) {
-                    el.buildAppendList();
-                    el.appendListToDom();
+                    // el.buildAppendList();
+                    // el.appendListToDom();
                 }
             }
         };

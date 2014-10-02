@@ -393,6 +393,10 @@ $zon-search-square-size: em(35px)
 		display: block
 		font-size: 14px
 		padding: 0
+	[data-id='more-dropdown']
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
 
 .primary-nav__item
 	color: $black
@@ -444,33 +448,28 @@ $zon-search-square-size: em(35px)
 		padding-left: 0
 		border: $zon_light_grey
 		box-shadow: 0 5px 8px rgba(0,0,0,0.05)
-	& > .primary-nav__link:after
-		display: inline-block // needed for "rotate on hover"
-		margin-left: $tiny
-		content: "\25BE" // Unicode for ▾
-	&:hover
-		& > .primary-nav__link:after
-			+rotate(180deg)
-		& > .dropdown
-			display: block
-			position: absolute
-			z-index: 1
-			& > .dropdown__item
-				display: block
-				width: 100%
-
-
-
-// .primary-nav__item:hover > .primary-nav__list
-// 	visibility: visible
-// 	& > .primary-nav__item
-// 		visibility: visible
-
-
-
-
-
-.js .primary-nav > .primary-nav__item:nth-child(n+6):not([class~='primary-nav__item--featured']) // descendant selector to limit scope!
 	+respond-min($break-tablet-min)
-		display: none
+		& > .primary-nav__link:after
+			display: inline-block // needed for "rotate on hover"
+			margin-left: $tiny
+			content: "\25BE" // Unicode for ▾
+		&:hover
+			& > .primary-nav__link:after
+				+rotate(180deg)
+			& > .dropdown
+				display: block
+				position: absolute
+				z-index: 1
+				& > .dropdown__item
+					display: block
+					width: 100%
+
+
+.js .primary-nav--js-no-overflow
+	+respond-min($break-tablet-min)
+		max-height: 36px
+		overflow: hidden
+.no-js .primary-nav [data-id='more-dropdown']
+	display: none
+
 /* END: primary navigation */
