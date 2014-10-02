@@ -272,53 +272,46 @@ $zon-search-square-size: em(35px)
 	font-size: $font-m
 	color: $zon_grey
 	padding-left: $fine
-	border-top-right-radius: $micro
-	border-bottom-right-radius: $micro
+	border-top-left-radius: $micro
+	border-bottom-left-radius: $micro
 	vertical-align: middle
 	&:focus
 		outline-width: 0
 		color: $zon_dark_grey
 	+respond-min($break-tablet-min)
 		display: none
-		border-radius: 0
 		width: $zon-search-width
 	+respond-min($break-desktop-min)
-		border-top-right-radius: $micro
-		border-bottom-right-radius: $micro
 		display: inline-block
+
+.search__input--visible
+	display: inline-block
 
 .search__button
 	@extend %main_nav_button
 	+hover_nav_icon(block,$zon_lighter_grey)
-	left: $micro
-	border-top-left-radius: $micro
-	border-bottom-left-radius: $micro
+	right: $tiny
+	border-top-right-radius: $micro
+	border-bottom-right-radius: $micro
 	+respond-min($break-tablet-min)
 		border-radius: $micro
 	+respond-min($break-desktop-min)
-		border-top-right-radius: 0
-		border-bottom-right-radius: 0
+		border-top-left-radius: 0
+		border-bottom-left-radius: 0
 
 .search__button--round
 	border-radius: $micro
 
-.search__button--left-only
-	border-top-right-radius: 0
-	border-bottom-right-radius: 0
-	border-top-left-radius: $micro
-	border-bottom-left-radius: $micro
+.search__button--right-only
+	border-top-left-radius: 0
+	border-bottom-left-radius: 0
+	border-top-right-radius: $micro
+	border-bottom-right-radius: $micro
 
 .search__button__image
 	@extend %main_nav_icons
 	width: $small
 	height: $small
-
-.search__close
-	@extend %main_nav_button
-	display: none
-	right: $tiny
-	border-top-right-radius: $micro
-	border-bottom-right-radius: $micro
 
 .search__close__image
 	@extend %main_nav_icons
