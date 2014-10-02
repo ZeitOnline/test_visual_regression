@@ -1,5 +1,4 @@
 {% macro main_nav(navigation, nav_class=None) -%}
-    {% set navigation = navigation or view.navigation %}
     {% set nav_class = nav_class or 'main-nav' %}
     <ul class="{{ nav_class }}">
         {% for i in navigation -%}
