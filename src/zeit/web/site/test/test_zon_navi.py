@@ -437,6 +437,9 @@ def test_nav_search_is_working_as_expected(
         # test search input is not hidden after click in input
         search__input.click()
         assert(search__input.is_displayed()), 'Input is not displayed'
+        # test search input is hidden after button click, if its empty
+        search__button.click()
+        assert(search__input.is_displayed() is False), 'Input is displayed'
         # test search input is hidden after click somewhere else
         document.click()
         assert(search__input.is_displayed() is False), 'Input is displayed'
