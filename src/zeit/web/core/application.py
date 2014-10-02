@@ -59,6 +59,7 @@ class Application(object):
         self.configure_zca()
         self.configure_pyramid()
         self.configure_banner()
+        self.configure_navigation()
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
@@ -69,6 +70,22 @@ class Application(object):
             self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
+
+    def configure_navigation(self):
+        navigation_config = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_navigation', ''))
+        zeit.web.core.navigation.navigation = (
+            zeit.web.core.navigation.make_navigation(navigation_config))
+        navigation_services_config = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_navigation-services', ''))
+        zeit.web.core.navigation.navigation_services = (
+            zeit.web.core.navigation.make_navigation(
+                navigation_services_config))
+        navigation_classifieds_config = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_navigation-classifieds', ''))
+        zeit.web.core.navigation.navigation_classifieds = (
+            zeit.web.core.navigation.make_navigation(
+                navigation_classifieds_config))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
