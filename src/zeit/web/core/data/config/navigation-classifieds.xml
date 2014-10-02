@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<navigation>
+  <section>
+    <link href="http://jobs.zeit.de/" id="hp.global.topnav.links.jobs">Jobs</link>
+  </section>
+  <section>
+    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.global.topnav.links.partnersuche">Partnersuche</link>
+  </section>
+  <section>
+    <link href="#" id="hp.global.topnav.links.mehr">mehr</link>
+    <sub_sections>
+        <sub_section>
+            <link href="#" id="moep">Moep</link>
+        </sub_section>
+    </sub_sections>
+  </section>
+  <section>
+    <link href="http://zeit.immowelt.de/" id="hp.global.topnav.links.immobilien" rel="nofollow">Immobilien</link>
+  </section>
+  <section>
+    <link href="http://automarkt.zeit.de/" id="hp.global.topnav.links.automarkt">Automarkt</link>
+  </section>
+</navigation>

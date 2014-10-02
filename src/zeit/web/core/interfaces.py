@@ -2,6 +2,21 @@ import zope.interface
 import zope.interface.common.sequence
 
 
+class INavigation(zope.interface.Interface):
+    """A navigation bar containing navigation items"""
+
+    navigation_items = zope.interface.Attribute('navigation_items')
+
+
+class INavigationItem(zope.interface.Interface):
+    """Navigation items linking to different sections and sub sections"""
+
+    href = zope.interface.Attribute('href')
+    item_id = zope.interface.Attribute('item_id')
+    navigation_items = zope.interface.Attribute('navigation_items')
+    text = zope.interface.Attribute('text')
+
+
 class IPages(zope.interface.common.sequence.IReadSequence):
     """List of the <division>s of an zeit.content.article.interfaces.IArticle
     """
@@ -30,7 +45,6 @@ class IPlace(zope.interface.Interface):
 
 
 class IIqdMobileList(zope.interface.Interface):
-
     """A set of iqd ids for a certain ressort.
     """
 

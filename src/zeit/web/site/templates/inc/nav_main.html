@@ -1,6 +1,5 @@
 {% import 'zeit.web.site:templates/macros/navigation.tpl' as nav %}
 
-
 <nav class="main_nav">
 
     <!-- logo -->
@@ -15,12 +14,12 @@
     <div class="main_nav__community" data-dropdown="true">{{
     nav.main_nav_community() }}</div>
     <div class="main_nav__ressorts" data-dropdown="true">
-            {{ nav.main_nav_ressorts() }}
+            {{ nav.main_nav_ressorts(view.navigation) }}
     </div>
     <div class="main_nav__services" data-dropdown="true">{{
-    nav.main_nav_services() }}</div>
+    nav.main_nav_services(view.navigation_services) }}</div>
     <div class="main_nav__classifieds" data-dropdown="true">{{
-    nav.main_nav_classifieds() }}</div>
+    nav.main_nav_classifieds(view.navigation_classifieds) }}</div>
     <div class="main_nav__search" data-dropdown="true">{{ nav.main_nav_search() }}</div>
     <!-- wrap end -->
     <!-- please don't break line here, due to inline-block state -->

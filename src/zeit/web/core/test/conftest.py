@@ -85,6 +85,12 @@ settings = {
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
     'vivi_zeit.frontend_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
+    'vivi_zeit.frontend_navigation': (
+        'egg://zeit.web.core/data/config/navigation.xml'),
+    'vivi_zeit.frontend_navigation-services': (
+        'egg://zeit.web.core/data/config/navigation-services.xml'),
+    'vivi_zeit.frontend_navigation-classifieds': (
+        'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),
 
