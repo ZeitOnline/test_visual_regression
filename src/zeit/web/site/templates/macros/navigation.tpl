@@ -1,6 +1,6 @@
 {% macro main_nav(navigation, nav_class=None) -%}
     {% set nav_class = nav_class or 'main-nav' %}
-    <ul class="{{ nav_class }}">
+    <ul class="{{ nav_class }}{% if nav_class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}">
         {% for i in navigation -%}
         {% set section = navigation[i] %}
         <li class="{{ nav_class }}__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
@@ -10,6 +10,20 @@
             {%- endif %}
         </li>
         {%- endfor %}
+        <li class="{{ nav_class }}__item" data-feature="dropdown" data-id="more-dropdown">
+            <a class="{{ nav_class }}__link" href="#">mehr</a>
+            <ul class="dropdown">
+                {% for i in navigation -%}
+                {% set section = navigation[i] %}
+                <li class="dropdown__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
+                    <a class="dropdown__link" href="{{ section.href | translate_url }}">{{ section.text }}</a>
+                    {% if section.has_children() -%}
+                        {{ main_nav(section, 'dropdown') }}
+                    {%- endif %}
+                </li>
+                {%- endfor %}
+            </ul>
+        </li>
     </ul>
 {%- endmacro %}
 
