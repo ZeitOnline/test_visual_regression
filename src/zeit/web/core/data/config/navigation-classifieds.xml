@@ -10,7 +10,10 @@
     <link href="#" id="hp.global.topnav.links.mehr">mehr</link>
     <sub_sections>
         <sub_section>
-            <link href="#" id="moep">Moep</link>
+            <link href="http://zeit.immowelt.de/" id="hp.global.topnav.links.immobilien" rel="nofollow">Immobilien</link>
+        </sub_section>
+        <sub_section>
+            <link href="http://automarkt.zeit.de/" id="hp.global.topnav.links.automarkt">Automarkt</link>
         </sub_section>
     </sub_sections>
   </section>
