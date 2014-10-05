@@ -443,26 +443,38 @@ $zon-search-square-size: em(35px)
 .main_nav [data-feature='dropdown']
 	position: relative
 	.dropdown
-		background: $white
 		display: none
+		background: $white
 		padding-left: 0
 		border: $zon_light_grey
-		box-shadow: 0 5px 8px rgba(0,0,0,0.05)
+		+box-shadow(0 5px 8px rgba(0,0,0,0.05))
 	+respond-min($break-tablet-min)
 		& > .primary-nav__link:after
 			display: inline-block // needed for "rotate on hover"
 			margin-left: $tiny
 			content: "\25BE" // Unicode for ▾
 		&:hover
-			& > .primary-nav__link:after
-				+rotate(180deg)
+			& > .primary-nav__link
+				&:hover
+					+box-shadow(none)
+				&:after
+					+rotate(180deg)
 			& > .dropdown
+				+border-radius(4px, 4px)
+				border: 1px solid $zon_light_grey
 				display: block
 				position: absolute
+				left: -10px
 				z-index: 1
 				& > .dropdown__item
 					display: block
 					width: 100%
+					padding-left: 10px
+					padding-right: 10px
+					&:hover
+						background-color: $gainsboro
+					& > .dropdown__link
+						+link-colors($black)
 
 
 .js .primary-nav--js-no-overflow
