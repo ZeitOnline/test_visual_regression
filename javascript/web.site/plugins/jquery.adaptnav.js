@@ -54,9 +54,9 @@
                 this.$moreListItems = el.$moreList.find( '.dropdown > .dropdown__item');
 
                 this.toggleNavItems();
-                this.$nav.toggleClass( 'primary-nav--js-no-overflow' );
+                this.$nav.removeClass( 'primary-nav--js-no-overflow' );
 
-                //make adaption on resize possible too
+                //make adaption on resize possible, too
                 $( window ).on( 'resize', function() {
                     el.toggleNavItems();
                 });
@@ -84,6 +84,9 @@
                             $dropdownItem.show();
                         }
                     });
+                } else {
+                    // show all top sections on mobile
+                    el.$items.show();
                 }
             },
             isDesktop: function() {
