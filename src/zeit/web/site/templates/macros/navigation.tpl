@@ -40,7 +40,7 @@
 {%- endmacro %}
 
 {% macro main_nav_classifieds(navigation) -%}
-    {{ main_nav(navigation, 'primary-nav-classifieds') }}
+    {{ main_nav(navigation, 'main-nav-classifieds') }}
 {%- endmacro %}
 
 {% macro main_nav_community() -%}

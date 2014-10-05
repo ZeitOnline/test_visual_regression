@@ -199,9 +199,9 @@ $zon-search-square-size: em(35px)
 	padding-left: $petite
 	line-height: $zon-classifieds-height
 	order: 50
-	.main_nav__classifieds__more
+	& [data-feature='dropdown']
 		display: none
-	ul
+	& > ul
 		+display-flex()
 		+flex-wrap(wrap)
 		+justify-content(space-between)
@@ -219,27 +219,27 @@ $zon-search-square-size: em(35px)
 		width: 38%
 		text-align: right
 		padding-left: auto
-		ul
+		& > ul
 			margin-right: $petite
 			display: inline-block
-			li
+			& > li
 				width: auto
 				margin-right: $little
 				&:nth-child(n+4)
 					display: none
-		.main_nav__classifieds__more
-			display: inline
-			+hover_nav_icon(inline-block)
+		& [data-feature='dropdown']
+			display: inline-block
+			// +hover_nav_icon(inline-block)
 	+respond-min($break-desktop-min)
 		ul
 			li
 				width: auto
 
-.main_nav__classifieds__more__image
-	@extend %main_nav_icons
-	display: inline-block
-	width: 7px
-	height: 5px
+// .main_nav__classifieds__more__image
+// 	@extend %main_nav_icons
+// 	display: inline-block
+// 	width: 7px
+// 	height: 5px
 
 //box 6: search
 .main_nav__search
@@ -440,17 +440,18 @@ $zon-search-square-size: em(35px)
 
 
 
+/* Module: Dropdown */
+
 .main_nav [data-feature='dropdown']
 	position: relative
 	+respond-min($break-tablet-min)
-		& > .primary-nav__link:after
+		& > a:after
 			display: inline-block // needed for "rotate on hover"
 			margin-left: $tiny
 			content: "\25BE" // Unicode for ▾
 		&:hover
-			& > .primary-nav__link
-				&:hover
-					+box-shadow(none)
+			& > a
+				+box-shadow(none)
 				&:after
 					+rotate(180deg)
 			& > .dropdown
@@ -490,13 +491,15 @@ $zon-search-square-size: em(35px)
 				padding-left: 20px
 
 
-
-
 .js .primary-nav--js-no-overflow
 	+respond-min($break-tablet-min)
 		max-height: 36px
 		overflow: hidden
+
 .no-js .primary-nav [data-id='more-dropdown']
 	display: none
+
+/* END: Module: Dropdown */
+
 
 /* END: primary navigation */
