@@ -13,7 +13,7 @@
   </section>
   <section>
     <link href="http://xml.zeit.de/gesellschaft/index" id="gesellschaft">Gesellschaft</link>
-    <sub_sections>
+    <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/gesellschaft/zeitgeschehen/index" id="zeitgeschehen">Zeitgeschehen</link>
       </sub_section>
@@ -23,11 +23,11 @@
       <sub_section>
         <link href="http://xml.zeit.de/gesellschaft/schule/index" id="schule">Schule</link>
       </sub_section>
-    </sub_sections>
+    </sub_sections> -->
   </section>
   <section>
     <link href="http://xml.zeit.de/wirtschaft/index" id="wirtschaft">Wirtschaft</link>
-    <sub_sections>
+<!--     <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/wirtschaft/unternehmen/index" id="unternehmen">Unternehmen</link>
       </sub_section>
@@ -37,7 +37,7 @@
       <sub_section>
         <link href="http://xml.zeit.de/wirtschaft/boerse/index" id="boerse">Börse</link>
       </sub_section>
-    </sub_sections>
+    </sub_sections> -->
   </section>
   <section>
     <link href="http://xml.zeit.de/kultur/index" id="kultur">Kultur</link>
@@ -58,7 +58,7 @@
   </section>
   <section>
     <link href="http://xml.zeit.de/wissen/index" id="wissen">Wissen</link>
-    <sub_sections>
+<!--     <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/wissen/gesundheit/index" id="gesundheit">Gesundheit</link>
       </sub_section>
@@ -68,7 +68,7 @@
       <sub_section>
         <link href="http://xml.zeit.de/wissen/geschichte/index" id="geschichte">Geschichte</link>
       </sub_section>
-    </sub_sections>
+    </sub_sections> -->
   </section>
   <section>
     <link href="http://xml.zeit.de/digital/index" id="digital">Digital</link>
