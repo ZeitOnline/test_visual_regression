@@ -442,12 +442,6 @@ $zon-search-square-size: em(35px)
 
 .main_nav [data-feature='dropdown']
 	position: relative
-	.dropdown
-		display: none
-		background: $white
-		padding-left: 0
-		border: $zon_light_grey
-		+box-shadow(0 5px 8px rgba(0,0,0,0.05))
 	+respond-min($break-tablet-min)
 		& > .primary-nav__link:after
 			display: inline-block // needed for "rotate on hover"
@@ -460,21 +454,42 @@ $zon-search-square-size: em(35px)
 				&:after
 					+rotate(180deg)
 			& > .dropdown
-				+border-radius(4px, 4px)
-				border: 1px solid $zon_light_grey
 				display: block
-				position: absolute
-				left: -10px
 				z-index: 1
-				& > .dropdown__item
-					display: block
-					width: 100%
-					padding-left: 10px
-					padding-right: 10px
-					&:hover
-						background-color: $gainsboro
-					& > .dropdown__link
-						+link-colors($black)
+
+// the dropdown is only present on tablet and desktop
+// therefore all styling is scoped in a media query
+.dropdown
+	display: none
+	+respond-min($break-tablet-min)
+		+border-radius(4px, 4px)
+		+box-shadow(0 5px 8px rgba(0,0,0,0.05))
+		background: $white
+		border: $zon_light_grey
+		border: 1px solid $zon_light_grey
+		left: -10px
+		padding-left: 0
+		position: absolute
+		.dropdown__item
+			display: block // get rid of bullet points
+			& > .dropdown__link
+				+link-colors($black)
+				display: block
+				width: 100%
+				padding: 0 10px 0 10px
+				&:hover
+					background-color: $gainsboro
+		// dropdowns can contain dropdowns
+		.dropdown
+			+box-shadow(none)
+			border: none
+			display: block
+			left: 0
+			position: relative
+			.dropdown__link
+				padding-left: 20px
+
+
 
 
 .js .primary-nav--js-no-overflow
