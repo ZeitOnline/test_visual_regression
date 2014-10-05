@@ -10,6 +10,7 @@
             {%- endif %}
         </li>
         {%- endfor %}
+        {% if nav_class == 'primary-nav' %}
         <li class="{{ nav_class }}__item" data-feature="dropdown" data-id="more-dropdown">
             <a class="{{ nav_class }}__link" href="#">mehr</a>
             <ul class="dropdown">
@@ -24,6 +25,7 @@
                 {%- endfor %}
             </ul>
         </li>
+        {% endif %}
     </ul>
 {%- endmacro %}
 
