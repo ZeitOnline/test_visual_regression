@@ -135,13 +135,13 @@
       </sub_section>
     </sub_sections>
   </section>
-  <section>
+<!--   <section>
     <link href="http://xml.zeit.de/mobilitaet/index" id="mobilitaet">Mobilität</link>
-  </section>
+  </section> -->
   <section>
     <link href="http://xml.zeit.de/hamburg/index" id="hamburg">Hamburg</link>
   </section>
-  <section>
+<!--   <section>
     <link href="http://xml.zeit.de/zeit-magazin/index" id="zeitmagazin">ZEITmagazin</link>
-  </section>
+  </section> -->
 </navigation>
