@@ -43,8 +43,7 @@ log = logging.getLogger(__name__)
 class Application(object):
 
     DONT_SCAN_TESTS = [re.compile('test$').search]
-    DONT_SCAN = DONT_SCAN_TESTS + [
-        'zeit.web.core.preview']
+    DONT_SCAN = DONT_SCAN_TESTS + ['zeit.web.core.preview']
 
     def __init__(self):
         self.settings = {}
@@ -277,12 +276,12 @@ class Application(object):
         and the last entry is closest to the WSGI server.
 
         Each entry is a tuple (spec, protocol, name, arguments).
-        The default meaning is to load an entry point called ``name`` of type
-        ``protocol`` from the package ``spec`` and load it, passing
-        ``arguments`` as kw parameters (thus, arguments must be a dict).
+        The default meaning is to load an entry point called `name` of type
+        `protocol` from the package `spec` and load it, passing
+        `arguments` as kw parameters (thus, arguments must be a dict).
 
-        If ``protocol`` is 'factory', then instead of an entry point the method
-        of this object with the name ``spec`` is called, passing ``arguments``
+        If `protocol` is 'factory', then instead of an entry point the method
+        of this object with the name `spec` is called, passing `arguments`
         as kw parameters.
 
         """
@@ -311,10 +310,10 @@ factory = Application()
 
 class URLPrefixMiddleware(object):
     """Removes a path prefix from the PATH_INFO if it is present.
-    We use this so that if an ``asset_prefix`` is configured, we respond
+    We use this so that if an `asset_prefix` is configured, we respond
     correctly for URLs both with and without the asset_prefix -- otherwise
     the reverse proxy in front of us would need to rewrite URLs with
-    ``asset_prefix`` to strip it.
+    `asset_prefix` to strip it.
     """
 
     def __init__(self, app, prefix):
