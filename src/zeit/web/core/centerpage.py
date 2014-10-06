@@ -24,42 +24,41 @@ def auto_select_asset(teaser):
     assets = get_all_assets(teaser)
     if len(assets):
         return assets[0]
-    return None
 
 
 def get_video_asset(teaser):
-    video = zeit.content.video.interfaces.IVideoAsset(teaser)
 
-    if video.video is not None:
-        video.video.highest_rendition = _get_video_source(video.video)
+    def get_video_source(self):
+        try:
+            highest_rendition = self.renditions[0]
+            for rendition in self.renditions:
+                if highest_rendition.frame_width < rendition.frame_width:
+                    highest_rendition = rendition
+            return highest_rendition.url
+        except (AttributeError, IndexError, TypeError):
+            return self.flv_url
 
-    if video.video_2 is not None and video.video is not None:
-        video.video_2.highest_rendition = _get_video_source(video.video_2)
-        return [video.video, video.video_2]
+    asset = zeit.content.video.interfaces.IVideoAsset(teaser)
 
-    return video.video
+    if asset.video is not None:
+        asset.video.highest_rendition = get_video_source(asset.video)
 
+    if asset.video_2 is not None and asset.video is not None:
+        asset.video_2.highest_rendition = get_video_source(asset.video_2)
+        return [asset.video, asset.video_2]
 
-def _get_video_source(self):
-    try:
-        highest_rendition = self.renditions[0]
-        for rendition in self.renditions:
-            if highest_rendition.frame_width < rendition.frame_width:
-                highest_rendition = rendition
-        return highest_rendition.url
-    except (AttributeError, IndexError, TypeError):
-        return self.flv_url
+    return asset.video
 
 
 def get_gallery_asset(teaser):
-    gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)
-    return gallery.gallery
+    asset = zeit.content.gallery.interfaces.IGalleryReference(teaser)
+    return asset.gallery
 
 
 @zeit.web.register_filter
 def get_image_asset(teaser):
-    image = zeit.content.image.interfaces.IImages(teaser)
-    return image.image
+    asset = zeit.content.image.interfaces.IImages(teaser)
+    return asset.image
 
 
 class TeaserSequence(object):

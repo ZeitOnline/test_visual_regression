@@ -91,7 +91,7 @@ def translate_url(url):
     if request is None:  # XXX should only happen in tests
         return url
 
-    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+    return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
 
 
 @zeit.web.register_filter

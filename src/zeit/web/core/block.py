@@ -18,10 +18,6 @@ import zeit.web
 import zeit.web.core.interfaces
 
 
-# Since this interface is an implementation detail rather than part of the API
-# of zeit.web.core, it makes more sense to keep it within the Python module
-# that deals with the concept of blocks rather than within a separate
-# interfaces module.
 class IFrontendBlock(zope.interface.Interface):
 
     """An item that provides data from an article-body block to a Jinja macro.
@@ -39,25 +35,19 @@ class IFrontendHeaderBlock(zope.interface.Interface):
     """
 
 
-# Vorläufige Konvention: Die Frontend-Repräsentation eines Blocks
-# implementiert IFrontendBlock, und der kleingeschriebene Klassenname ist
-# gerade die Typ-Kennung, auf die article.html in der Fallunterscheidung für
-# das Macro prüft. Die Fallunterscheidung sollte idealerweise wegfallen, und
-# die Macros sollten durch die IFrontendBlock-Objekte selbst festgelegt
-# werden. Das API jedes der BlockItem-Objekte muß ja ohnehin zum jeweiligen
-# Macro passen.
-@zeit.web.register_test
-def elem(obj, b_type):
-    o_type = block_type(obj)
-    return IFrontendBlock.providedBy(obj) and o_type == b_type
-
-
 @zeit.web.register_filter
 def block_type(obj):
+    """Outputs the class name in lower case format of one or multiple block
+    elements.
+
+    :param obj: list, str or tuple
+    :rtype: list, str or tuple
+    """
+
     if obj is None:
         return 'no_block'
-    elif isinstance(obj, tuple):
-        return tuple(block_type(o) for o in obj)
+    elif isinstance(obj, list) or isinstance(obj, tuple):
+        return obj.__class__(block_type(o) for o in obj)
     else:
         return type(obj).__name__.lower()
 

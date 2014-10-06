@@ -69,15 +69,15 @@ setup(
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
-        'zope.processlifetime',
+        'zope.processlifetime'
     ],
     description='This package is all about ZEIT ONLINE website delivery.',
     long_description=open('README.md', 'r').read(),
     entry_points={
         'paste.app_factory': [
             'main=zeit.web.core.application:factory',
-            'preview=zeit.web.core.preview:factory',
-        ],
+            'preview=zeit.web.core.preview:factory'
+        ]
     },
     extras_require={
         'test': [
@@ -90,8 +90,8 @@ setup(
             'selenium',
             'waitress',
             'webtest',
-            'zope.testbrowser [wsgi]',
-        ],
+            'zope.testbrowser [wsgi]'
+        ]
     },
     setup_requires=['setuptools_git'],
     namespace_packages=['zeit'],
