@@ -111,7 +111,7 @@ class Image(BaseImage):
     def __new__(cls, model_block):
         if (model_block.layout == 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
-            return None
+            return
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
@@ -148,7 +148,7 @@ class HeaderImage(Image):
     def __new__(cls, model_block):
         if (model_block.layout != 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
-            return None
+            return
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
@@ -195,7 +195,7 @@ class BaseVideo(object):
 
     def __init__(self, model_block):
         if getattr(model_block, 'video', None) is None:
-            return None
+            return
         self.renditions = model_block.video.renditions
         self.video_still = model_block.video.video_still
         self.title = model_block.video.title
@@ -224,7 +224,7 @@ class Video(BaseVideo):
 
     def __new__(cls, model_block):
         if model_block.layout == 'zmo-xl-header':
-            return None
+            return
         return super(Video, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
@@ -237,7 +237,7 @@ class HeaderVideo(BaseVideo):
 
     def __new__(cls, model_block):
         if model_block.layout != 'zmo-xl-header':
-            return None
+            return
         return super(HeaderVideo, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
@@ -293,7 +293,7 @@ class NewsletterTeaser(object):
             self.context.reference, None)
         group = images.image if images is not None else None
         if group is None:
-            return None
+            return
         # XXX An actual API for selecting a size would be nice.
         for name in group:
             basename, ext = os.path.splitext(name)
@@ -431,7 +431,7 @@ def _inline_html(xml):
         transform = etree.XSLT(filter_xslt)
         return transform(xml)
     except TypeError:
-        return None
+        return
 
 
 class NextreadLayout(object):
