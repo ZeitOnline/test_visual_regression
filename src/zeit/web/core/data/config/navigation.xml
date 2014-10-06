@@ -131,7 +131,7 @@
         <link href="http://xml.zeit.de/sport/index" id="bundesliga">Bundesliga</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/sport/index" id="live-ticker">Live-Ticker</link>
+        <link href="http://xml.zeit.de/sport/index" id="live-ticker">Live&#8209;Ticker</link>
       </sub_section>
     </sub_sections>
   </section>
