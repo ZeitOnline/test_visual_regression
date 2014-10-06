@@ -2,7 +2,7 @@
 from mock import patch, MagicMock
 from pytest import fixture
 from zeit.web.core.comments import get_thread
-from zeit.web.core.security import CommunityAuthenticationPolicy, ZMO_USER_KEY
+from zeit.web.core.security import CommunityAuthenticationPolicy
 from zeit.web.core.security import get_community_user_info
 
 
@@ -16,23 +16,23 @@ def test_cookieless_request_returns_nothing(policy, dummy_request):
 
 
 def test_cookieless_request_clears_session(policy, dummy_request):
-    dummy_request.session[ZMO_USER_KEY] = dict(uid='bar')
+    dummy_request.session['zmo-user'] = dict(uid='bar')
     policy.authenticated_userid(dummy_request)
-    assert ZMO_USER_KEY not in dummy_request.session
+    assert 'zmo-user' not in dummy_request.session
 
 
 def test_session_cache_has_precedence(policy, dummy_request):
     dummy_request.cookies['drupal-userid'] = 23
-    dummy_request.session[ZMO_USER_KEY] = dict(uid=23, name='s3crit')
+    dummy_request.session['zmo-user'] = dict(uid=23, name='s3crit')
     assert policy.authenticated_userid(dummy_request) == 23
-    assert dummy_request.session[ZMO_USER_KEY]['name'] == 's3crit'
+    assert dummy_request.session['zmo-user']['name'] == 's3crit'
 
 
 def test_session_cache_cleared_when_id_changes(policy, dummy_request):
     dummy_request.cookies['drupal-userid'] = 23
     # session still contains old user id and sensitive information
-    dummy_request.session[ZMO_USER_KEY] = dict(uid=42, name='s3crit')
-    with patch('zeit.web.core.security.Request.get_response') as mocked_getter:
+    dummy_request.session['zmo-user'] = dict(uid=42, name='s3crit')
+    with patch('webob.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
         mocked_response.body = (
             '<user><uid>457322</uid><name>test-friedbert</name><mail>'
@@ -43,11 +43,11 @@ def test_session_cache_cleared_when_id_changes(policy, dummy_request):
         dummy_request.cookies['drupal-userid'] = 23
         dummy_request.headers['Cookie'] = ''
         assert policy.authenticated_userid(dummy_request) == '457322'
-        assert dummy_request.session[ZMO_USER_KEY]['name'] == 'test-friedbert'
+        assert dummy_request.session['zmo-user']['name'] == 'test-friedbert'
 
 
 def test_empty_cache_triggers_backend_fills_cache(policy, dummy_request):
-    with patch('zeit.web.core.security.Request.get_response') as mocked_getter:
+    with patch('webob.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
         mocked_response.body = (
             '<user><uid>457322</uid><name>test-friedbert</name><mail>'
@@ -57,9 +57,9 @@ def test_empty_cache_triggers_backend_fills_cache(policy, dummy_request):
         mocked_getter.return_value = mocked_response
         dummy_request.cookies['drupal-userid'] = 23
         dummy_request.headers['Cookie'] = ''
-        assert ZMO_USER_KEY not in dummy_request.session
+        assert 'zmo-user' not in dummy_request.session
         assert policy.authenticated_userid(dummy_request) == '457322'
-        assert dummy_request.session[ZMO_USER_KEY]['name'] == 'test-friedbert'
+        assert dummy_request.session['zmo-user']['name'] == 'test-friedbert'
 
 
 def test_unreachable_agatho_should_not_produce_error():

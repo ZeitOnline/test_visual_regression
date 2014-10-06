@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+import datetime
 import email.utils
 import itertools
 import logging
@@ -9,24 +9,24 @@ import time
 import urllib2
 import urlparse
 
-from babel.dates import format_datetime
-from lxml import objectify
-from repoze.bitblt.transform import compute_signature
-import jinja2
+import babel.dates
 import jinja2.environment
+import jinja2.loaders
+import jinja2.nodes
 import jinja2.runtime
 import jinja2.utils
-import jinja2.nodes
+import lxml.objectify
 import pyramid.threadlocal
 import pytz
+import repoze.bitblt.transform
 import requests
 import zope.component
 
-from zeit.web.core.utils import defaultdict
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
@@ -61,9 +61,9 @@ class Environment(jinja2.environment.Environment):
 
     def __init__(self, undefined=Undefined, **kw):
         super(Environment, self).__init__(undefined=undefined, **kw)
-        self.filters = defaultdict(self.undefined, self.filters)
-        self.globals = defaultdict(self.undefined, self.globals)
-        self.tests = defaultdict(self.undefined, self.tests)
+        self.filters = zeit.web.core.utils.defaultdict(undefined, self.filters)
+        self.globals = zeit.web.core.utils.defaultdict(undefined, self.globals)
+        self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
     def handle_exception(self, *args, **kw):
         return self.undefined().__html__()
@@ -106,7 +106,7 @@ def create_url(obj):
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
-    return format_datetime(obj, formats[type], locale="de_De")
+    return babel.dates.format_datetime(obj, formats[type], locale="de_De")
 
 
 @zeit.web.register_filter
@@ -114,11 +114,11 @@ def format_date_ago(dt, precision=2, past_tense='vor {}',
                     future_tense='in {}'):
     # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
-    if not isinstance(dt, type(timedelta())):
-        delta = datetime.now() - dt
+    if not isinstance(dt, datetime.timedelta):
+        delta = datetime.datetime.now() - dt
 
     the_tense = past_tense
-    if delta < timedelta(0):
+    if delta < datetime.timedelta(0):
         the_tense = future_tense
 
     delta = abs(delta)
@@ -167,7 +167,7 @@ def strftime(t, format):
     try:
         if isinstance(t, time.struct_time) or isinstance(t, tuple):
             return time.strftime(format, t)
-        elif isinstance(t, datetime):
+        elif isinstance(t, datetime.datetime):
             return t.strftime(format)
     except (AttributeError, TypeError, ValueError):
         pass
@@ -249,7 +249,8 @@ def default_image_url(image,
         else:
             width, height = default_images_sizes.get(image_pattern, (640, 480))
         # TODO: use secret from settings?
-        signature = compute_signature(width, height, 'time')
+        signature = repoze.bitblt.transform.compute_signature(
+            width, height, 'time')
 
         if image.uniqueId is None:
             return None
@@ -288,7 +289,7 @@ def get_image_scales(scale_source):
         fileobject = urllib2.urlopen(scale_source)
     except urllib2.URLError:
         return
-    for scale in objectify.fromstring(fileobject.read()).iter():
+    for scale in lxml.objectify.fromstring(fileobject.read()).iter():
         name = scale.attrib.get('name')
         width = to_int(scale.attrib.get('width'))
         height = to_int(scale.attrib.get('height'))
@@ -423,7 +424,7 @@ def get_image_metadata(image):
         return None
 
 
-class HTTPLoader(jinja2.BaseLoader):
+class HTTPLoader(jinja2.loaders.BaseLoader):
 
     def __init__(self, url):
         self.url = url
@@ -475,7 +476,7 @@ class CompareModifiedHeader(object):
         # deals with RFC822 timestamps. This solution is sponsored by
         # <https://stackoverflow.com/questions/1568856>.
         if timestamp:
-            return datetime.fromtimestamp(
+            return datetime.datetime.fromtimestamp(
                 email.utils.mktime_tz(email.utils.parsedate_tz(timestamp)),
                 pytz.utc)
 

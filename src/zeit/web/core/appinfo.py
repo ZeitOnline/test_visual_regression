@@ -1,19 +1,17 @@
-from cornice.service import Service
-from pyramid.security import authenticated_userid
-from pyramid.settings import asbool
-
-from .security import ZMO_USER_KEY
+import cornice.service
+import pyramid.security
+import pyramid.settings
 
 
 def assemble_app_info(request):
     settings = request.registry.settings
-    result = dict(debug=asbool(settings.get('debug', False)))
-    userid = authenticated_userid(request)
+    result = dict(debug=pyramid.settings.asbool(settings.get('debug', False)))
+    userid = pyramid.security.authenticated_userid(request)
     if userid:
         result['authenticated'] = True
     else:
         result['authenticated'] = False
-    result['user'] = request.session.get(ZMO_USER_KEY, dict())
+    result['user'] = request.session.get('zmo-user', dict())
     result['scripts_url'] = request.registry.settings.scripts_url
     result['community_host'] = request.registry.settings.community_host + '/'
     result['community_paths'] = {'login': 'user/login',
@@ -24,7 +22,7 @@ def assemble_app_info(request):
     return dict(result)
 
 
-app_info = Service(
+app_info = cornice.service.Service(
     name='appinfo',
     path='/-/',
     renderer='json',

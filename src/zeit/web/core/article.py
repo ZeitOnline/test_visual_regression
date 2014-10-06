@@ -1,6 +1,4 @@
-import logging
-
-from grokcore.component import adapter, implementer
+import grokcore.component
 import zope.interface
 
 import zeit.cms.repository.interfaces
@@ -12,9 +10,6 @@ import zeit.content.article.interfaces
 import zeit.web.core.block
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
-
-
-log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -86,8 +81,8 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                 pass
 
 
-@adapter(zeit.content.article.interfaces.IArticle)
-@implementer(zeit.web.core.interfaces.IPages)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(zeit.web.core.interfaces.IPages)
 def pages_of_article(context):
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     try:
@@ -135,7 +130,7 @@ class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
-@implementer(zeit.web.core.interfaces.ITeaserSequence)
-@adapter(zeit.web.core.interfaces.INextreadTeaserBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
+@grokcore.component.adapter(zeit.web.core.interfaces.INextreadTeaserBlock)
 class NextreadTeaserBlock(zeit.web.core.centerpage.TeaserBlock):
     pass

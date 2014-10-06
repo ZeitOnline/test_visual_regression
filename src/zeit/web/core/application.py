@@ -5,22 +5,21 @@ import re
 import urlparse
 import pkg_resources
 
-from grokcore.component import adapter
-from grokcore.component import implementer
-from venusian import Scanner
+import grokcore.component
 import pyramid.authorization
 import pyramid.config
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
+import venusian
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
 
-from zeit.content.gallery.interfaces import IGalleryMetadata
-from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector
+import zeit.content.gallery.interfaces
+import zeit.magazin.interfaces
 
 from zeit.web.core.article import IColumnArticle
 from zeit.web.core.article import IFeatureLongform
@@ -203,7 +202,7 @@ class Application(object):
             env.__class__ = zeit.web.core.template.Environment
             env = env.overlay()
 
-        Scanner(env=env).scan(
+        venusian.Scanner(env=env).scan(
             zeit.web.core,
             categories=('jinja',),
             ignore=self.DONT_SCAN
@@ -345,8 +344,8 @@ def join_url_path(base, path):
         (parts[0], parts[1], path, parts[3], parts[4]))
 
 
-@adapter(zeit.cms.repository.interfaces.IRepository)
-@implementer(pyramid.interfaces.ITraverser)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IRepository)
+@grokcore.component.implementer(pyramid.interfaces.ITraverser)
 class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
     def __call__(self, request):
@@ -355,7 +354,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
             context = tdict['context']
             if zeit.content.article.interfaces.IArticle.providedBy(context):
-                template = IArticleTemplateSettings(context).template
+                template = zeit.magazin.interfaces.IArticleTemplateSettings(
+                    context).template
                 # ToDo: Remove when Longform will be generally used on
                 # www.zeit.de. By then do not forget to remove marker
                 # interfaces from uniqueID http://xml.zeit.de/feature (RD)
@@ -371,7 +371,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 elif template == 'photocluster':
                     zope.interface.alsoProvides(context, IPhotoclusterArticle)
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
-                if IGalleryMetadata(context).type == 'zmo-product':
+                ctx = zeit.content.gallery.interfaces.IGalleryMetadata(context)
+                if ctx.type == 'zmo-product':
                     zope.interface.alsoProvides(context, IProductGallery)
                 else:
                     zope.interface.alsoProvides(context, IGallery)

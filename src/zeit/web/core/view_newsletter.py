@@ -1,16 +1,18 @@
-from babel.dates import get_timezone
-from pyramid.view import view_config
-from zeit.cms.workflow.interfaces import IPublishInfo
-from zeit.web.core.block import IFrontendBlock
-import zeit.web.core.view
+import babel.dates
+import pyramid.view
+
+import zeit.cms.workflow.interfaces
 import zeit.newsletter.interfaces
 
+import zeit.web.core.block
+import zeit.web.core.view
 
-@view_config(context=zeit.newsletter.interfaces.INewsletter,
-             renderer='dav://newsletter.html')
-@view_config(context=zeit.newsletter.interfaces.INewsletter,
-             request_param='format=txt',
-             renderer='dav://newsletter_text.html')
+
+@pyramid.view.view_config(context=zeit.newsletter.interfaces.INewsletter,
+                          renderer='dav://newsletter.html')
+@pyramid.view.view_config(context=zeit.newsletter.interfaces.INewsletter,
+                          request_param='format=txt',
+                          renderer='dav://newsletter_text.html')
 class Newsletter(zeit.web.core.view.Base):
 
     def __call__(self):
@@ -20,11 +22,13 @@ class Newsletter(zeit.web.core.view.Base):
 
     @property
     def date_first_released(self):
-        tz = get_timezone('Europe/Berlin')
-        date = IPublishInfo(self.context).date_first_released
+        timezone = babel.dates.get_timezone('Europe/Berlin')
+        context = zeit.cms.workflow.interfaces.IPublishInfo(self.context)
+        date = context.date_first_released
         if date:
-            return date.astimezone(tz)
+            return date.astimezone(timezone)
 
     @property
     def body(self):
-        return [IFrontendBlock(x) for x in self.context.body.values()]
+        return [zeit.web.core.block.IFrontendBlock(x) for x in
+                self.context.body.values()]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os.path import abspath, dirname, join
+import os.path
 import pkg_resources
 
 import cssselect
@@ -110,7 +110,9 @@ browsers = {
 
 def test_asset_path(*parts):
     """Return full file-system path for given test asset path."""
-    return abspath(join(dirname(zeit.web.core.__file__), 'data', *parts))
+    return os.path.abspath(
+        os.path.join(os.path.dirname(zeit.web.core.__file__), 'data', *parts)
+    )
 
 
 def test_asset(path):

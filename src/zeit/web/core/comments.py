@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+import datetime
 import string
 import urlparse
 
-from cornice.resource import resource, view
+import cornice.resource
 import lxml.etree
 import requests
 
@@ -132,6 +132,9 @@ def comment_as_dict(comment, request):
     else:
         content = '[fehler]'
 
+    dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
+           'date/hour/text()', 'date/minute/text()')
+
     return dict(
         indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(
@@ -139,11 +142,7 @@ def comment_as_dict(comment, request):
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
-        timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
-                           int(comment.xpath('date/month/text()')[0]),
-                           int(comment.xpath('date/day/text()')[0]),
-                           int(comment.xpath('date/hour/text()')[0]),
-                           int(comment.xpath('date/minute/text()')[0])),
+        timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(role_labels),
         cid=comment.xpath('./@id')[0])
@@ -188,16 +187,15 @@ def unique_id_factory(request):
     return '/'.join(string)
 
 
-@resource(collection_path='/-/comments/collection/*',
-          path='/-/comments/{cid}',
-          factory=unique_id_factory)
+@cornice.resource.resource(collection_path='/-/comments/collection/*',
+                           path='/-/comments/{cid}', factory=unique_id_factory)
 class Comment(object):
 
     def __init__(self, context, request):
         self.unique_id = context
         self.request = request
 
-    @view(renderer='json')
+    @cornice.resource.view(renderer='json')
     def collection_get(self):
         return get_thread(self.unique_id, self.request)
 

@@ -2,8 +2,9 @@
 import logging
 import os.path
 
-from grokcore.component import adapter, implementer
-from lxml import etree, html
+import grokcore.component
+import lxml.etree
+import lxml.html
 import PIL
 import zope.interface
 
@@ -61,8 +62,8 @@ def block_type(obj):
         return type(obj).__name__.lower()
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IParagraph)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IParagraph)
 class Paragraph(object):
 
     def __init__(self, model_block):
@@ -72,8 +73,8 @@ class Paragraph(object):
         return unicode(self.html)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IPortraitbox)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(object):
 
     def __init__(self, model_block):
@@ -84,12 +85,12 @@ class Portraitbox(object):
     def _author_text(self, pbox):
         # TODO: Highly fragile, we need to find a better solution
         # Apparently we don't have a root element
-        p_text = html.fragments_fromstring(pbox)[0]
-        return etree.tostring(p_text)
+        p_text = lxml.html.fragments_fromstring(pbox)[0]
+        return lxml.etree.tostring(p_text)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.ILiveblog)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 class Liveblog(object):
 
     def __init__(self, model_block):
@@ -104,8 +105,8 @@ class BaseImage(object):
         return float(width) / float(height)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IImage)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(BaseImage):
 
     def __new__(cls, model_block):
@@ -141,8 +142,8 @@ class Image(BaseImage):
             self.src = None
 
 
-@implementer(IFrontendHeaderBlock)
-@adapter(zeit.content.article.edit.interfaces.IImage)
+@grokcore.component.implementer(IFrontendHeaderBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
@@ -155,14 +156,14 @@ class HeaderImage(Image):
         super(HeaderImage, self).__init__(model_block)
 
 
-@implementer(IFrontendHeaderBlock)
-@adapter(zeit.content.article.edit.interfaces.IImage)
+@grokcore.component.implementer(IFrontendHeaderBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImageStandard(HeaderImage):
     pass
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IIntertitle)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IIntertitle)
 class Intertitle(object):
 
     def __init__(self, model_block):
@@ -172,16 +173,16 @@ class Intertitle(object):
         return self.text
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IRawXML)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawXML)
 class Raw(object):
 
     def __init__(self, model_block):
         self.xml = _raw_html(model_block.xml)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.ICitation)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
 class Citation(object):
 
     def __init__(self, model_block):
@@ -218,8 +219,8 @@ class BaseVideo(object):
             logging.exception('Renditions are propably empty')
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IVideo)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
 class Video(BaseVideo):
 
     def __new__(cls, model_block):
@@ -231,8 +232,8 @@ class Video(BaseVideo):
         super(Video, self).__init__(model_block)
 
 
-@implementer(IFrontendHeaderBlock)
-@adapter(zeit.content.article.edit.interfaces.IVideo)
+@grokcore.component.implementer(IFrontendHeaderBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
 class HeaderVideo(BaseVideo):
 
     def __new__(cls, model_block):
@@ -244,8 +245,8 @@ class HeaderVideo(BaseVideo):
         super(HeaderVideo, self).__init__(model_block)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.content.article.edit.interfaces.IGallery)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IGallery)
 def inlinegallery(context):
     # Inline galleries are created dynamically via this factory because
     # they inherit from zeit.web.core.gallery.Gallery. Declaring a regular
@@ -255,8 +256,8 @@ def inlinegallery(context):
     return cls(context.references)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.newsletter.interfaces.IGroup)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.newsletter.interfaces.IGroup)
 class NewsletterGroup(object):
 
     type = 'group'
@@ -269,8 +270,8 @@ class NewsletterGroup(object):
         return [IFrontendBlock(x) for x in self.context.values()]
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.newsletter.interfaces.ITeaser)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.newsletter.interfaces.ITeaser)
 class NewsletterTeaser(object):
 
     autoplay = None
@@ -323,8 +324,8 @@ class NewsletterTeaser(object):
         return getattr(self.context.reference, name)
 
 
-@implementer(IFrontendBlock)
-@adapter(zeit.newsletter.interfaces.IAdvertisement)
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.newsletter.interfaces.IAdvertisement)
 class NewsletterAdvertisement(object):
 
     type = 'advertisement'
@@ -342,7 +343,7 @@ class NewsletterAdvertisement(object):
 
 
 def _raw_html(xml):
-    filter_xslt = etree.XML('''
+    filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             <xsl:output method="html"
@@ -351,14 +352,14 @@ def _raw_html(xml):
             <xsl:copy-of select="*" />
           </xsl:template>
         </xsl:stylesheet>
-    ''')
-    transform = etree.XSLT(filter_xslt)
+    """)
+    transform = lxml.etree.XSLT(filter_xslt)
     return transform(xml)
 
 
 def _inline_html(xml):
     allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
-    filter_xslt = etree.XML('''
+    filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             <xsl:output method="xml"
@@ -426,9 +427,9 @@ def _inline_html(xml):
               </xsl:attribute>
             </xsl:template>
           <xsl:template match="@*" />
-        </xsl:stylesheet>''' % (allowed_elements))
+        </xsl:stylesheet>""" % (allowed_elements))
     try:
-        transform = etree.XSLT(filter_xslt)
+        transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)
     except TypeError:
         return
@@ -449,8 +450,8 @@ class NextreadLayout(object):
         return self.id != value
 
 
-@implementer(zeit.web.core.interfaces.INextreadTeaserBlock)
-@adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(zeit.web.core.interfaces.INextreadTeaserBlock)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class NextreadTeaserBlock(object):
 
     """Teaser block for nextread teasers in articles."""
