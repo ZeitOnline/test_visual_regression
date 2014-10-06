@@ -85,12 +85,12 @@ $zon-search-square-size: em(35px)
 	+add_nav_bar_style($zon-bar-height-phablet)
 	+display-flex()
 	+justify-content(space-between)
-	order: 10
+	+order(10)
 	margin: 0
 	width: 100%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
-		order: 40
+		+order(40)
 		width: $zon-logo-width
 		margin: $petite 0 $petite 0
 
@@ -126,11 +126,11 @@ $zon-search-square-size: em(35px)
 	@extend %main_nav_links
 	+add_nav_bar_style($zon-bar-height-phablet)
 	line-height: $zon-bar-height-phablet
-	order: 20
+	+order(20)
 	text-align: left
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
-		order: 30
+		+order(30)
 		width: 7%
 		text-align: right
 		display: inline-block
@@ -152,16 +152,16 @@ $zon-search-square-size: em(35px)
 //box 3: ressorts
 .main_nav__ressorts
 	width: 100%
-	order: 30
+	+order(30)
 	+respond-min($break-tablet-min)
-		order: 60
+		+order(60)
 
 //box 4: services
 .main_nav__services
 	@extend %main_nav_links
 	+add_nav_bar_style($zon-bar-height-phablet,true)
 	line-height: $zon-bar-height-phablet
-	order: 40
+	+order(40)
 	padding-left: 0
 	ul
 		+display-flex()
@@ -178,7 +178,7 @@ $zon-search-square-size: em(35px)
 				border-right: $hair solid $zon_light_grey
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
-		order: 10
+		+order(10)
 		width: 55%
 		text-align: left
 		ul
@@ -198,7 +198,7 @@ $zon-search-square-size: em(35px)
 	+add_nav_bar_style(auto)
 	padding-left: $petite
 	line-height: $zon-classifieds-height
-	order: 50
+	+order(50)
 	& [data-feature='dropdown']
 		display: none
 	& > ul
@@ -215,7 +215,7 @@ $zon-search-square-size: em(35px)
 				width: 33%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
-		order: 20
+		+order(20)
 		width: 38%
 		text-align: right
 		padding-left: auto
@@ -246,12 +246,12 @@ $zon-search-square-size: em(35px)
 	+add_nav_bar_style($zon-search-bar-height-phablet)
 	line-height: $zon-search-bar-height-phablet
 	text-align: left
-	order: 60
+	+order(60)
 	margin: 0
 	width: 100%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
-		order: 50
+		+order(50)
 		text-align: right
 		margin: $petite 0 0 0
 		line-height: $zon-search-square-size
@@ -322,7 +322,7 @@ $zon-search-square-size: em(35px)
 .main_nav__tags
 	@extend %main_nav__topics
 	text-align: left
-	order: 70
+	+order(70)
 	width: 75%
 	+respond-min($break-desktop-min)
 		width: 80%
@@ -362,7 +362,7 @@ $zon-search-square-size: em(35px)
 	font-weight: bold
 	width: 25%
 	text-align: right
-	order: 80
+	+order(80)
 	+respond-min($break-desktop-min)
 		width: 20%
 
@@ -371,7 +371,7 @@ $zon-search-square-size: em(35px)
 	display: none
 	+respond-min($break-tablet-min)
 		display: inline
-		order: 45
+		+order(45)
 		+flex-grow(1)
 		margin: $petite
 
