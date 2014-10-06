@@ -31,6 +31,8 @@
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:deea5ce3-46fa-45a7-887b-95b5727f68d1}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">yes</attribute>
+
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;

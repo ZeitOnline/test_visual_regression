@@ -5,9 +5,11 @@ from pyramid.view import view_config
 import zeit.content.cp.interfaces
 
 import zeit.web.core.view
+import zeit.web.site.view
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             custom_predicates=(zeit.web.site.view.is_zon_content,),
              renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view.Base):
 
@@ -27,6 +29,7 @@ class Centerpage(zeit.web.core.view.Base):
         """Filter teaser with layout from teaser list.
         :rtype: dict
         """
+
         blocks = filter(
             lambda x: hasattr(x, 'layout') and x.layout and (
                 hasattr(x.layout, 'id') and x.layout.id and len(x) > 0),
