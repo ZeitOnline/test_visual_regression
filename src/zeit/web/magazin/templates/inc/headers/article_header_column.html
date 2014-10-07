@@ -1,4 +1,5 @@
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
+
 <div class="article__head-wrap">
     <header class="article__head article__head--column">
         <div class="is-constrained">
@@ -14,7 +15,7 @@
             {% endif %}
             <span class="article__head__meta-wrap">
                 <span class="article__head__meta">
-                    {{ blocks.source_date(view.show_article_date | format_date(view.show_date_format), view.source) }}
+                    {{ blocks.source_date(view.show_article_date|format_date(view.show_date_format), view.source) }}
                 </span>
             </span>
         </div>
