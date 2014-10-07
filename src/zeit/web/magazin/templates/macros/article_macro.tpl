@@ -205,14 +205,6 @@
     </div>{{ obj.caption }}{{ obj.copyright }}
 {%- endmacro %}
 
-{% macro columnimage(obj) -%}
-    <div class="article__column__headerimage">
-        <div class="scaled-image">
-            {{ lama.insert_responsive_image(obj) }}
-        </div>
-    </div>
-{%- endmacro %}
-
 {% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
     {%- if authors -%}
         {%- for author in authors -%}

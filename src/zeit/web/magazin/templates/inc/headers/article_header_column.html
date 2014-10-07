@@ -11,7 +11,9 @@
                 {{ blocks.meta_author(view.authors) }}
             </div>
             {% if view.header_img %}
-                {{ blocks.columnimage(view.header_img) }}
+                <div class="article__column__headerimage">
+                    {{ blocks[view.header_elem|block_type](view.header_elem) }}
+                </div>
             {% endif %}
             <span class="article__head__meta-wrap">
                 <span class="article__head__meta">
