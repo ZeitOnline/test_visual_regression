@@ -3,6 +3,7 @@ import mock
 import pyramid.scripts.pviews
 
 import zeit.cms.interfaces
+
 import zeit.web.site.view_centerpage
 
 
@@ -27,7 +28,6 @@ def test_custom_predicate_should_only_match_website_content(application):
     request = mock.Mock()
     assert view_wrapper.__predicates__[0](context, request), (
         'The predicate does not work for ZON content')
-
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/index')
@@ -63,12 +63,10 @@ def test_custom_predicate_should_only_match_zmo_content(application):
     assert view_wrapper.__predicates__[0](context, request), (
         'The predicate does not work for ZMO content')
 
-
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zeitonline')
     assert view_wrapper.__predicates__[0](context, request) is False, (
         'The predicate should not work for ZON Content')
-
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zmo_zon_matching')
