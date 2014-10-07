@@ -36,6 +36,17 @@ class Centerpage(zeit.web.core.view.Base):
         return [(i.layout.id, next(i.__iter__()), i) for i in blocks]
 
     @zeit.web.reify
+    def area_buzz(self):
+        # XXX: Mock buzzy article data.
+        from zeit.cms.interfaces import ICMSContent as ic
+        from zeit.web.core.utils import nslist
+
+        area = nslist(ic('http://xml.zeit.de/artikel/0%s' % i)
+                      for i in range(1, 4))
+        area.layout = 'area_buzz_topread'
+        return area
+
+    @zeit.web.reify
     def topiclink_title(self):
         """Cache topiclink_title
         : rtype: string
