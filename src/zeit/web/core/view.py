@@ -106,7 +106,7 @@ class Base(object):
         try:
             return zeit.web.core.banner.banner_list[tile - 1]
         except IndexError:
-            return None
+            return
 
     @zeit.web.reify
     def js_vars(self):

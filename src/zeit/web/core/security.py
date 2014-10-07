@@ -19,7 +19,7 @@ class CommunityAuthenticationPolicy(
             # Avoid stale session data by making sure it's deleted
             if 'zmo-user' in request.session:
                 del request.session['zmo-user']
-            return None
+            return
 
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
@@ -33,7 +33,7 @@ class CommunityAuthenticationPolicy(
         # Drupal 6 gives anonymous users a session and uid==0
         # in some cases they where authenticated here, but they should not be!
         if int(user_info['uid']) == 0:
-            return None
+            return
 
         return user_info['uid']
 

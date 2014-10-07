@@ -84,7 +84,7 @@ class Environment(jinja2.environment.Environment):
 @zeit.web.register_filter
 def translate_url(url):
     if url is None:
-        return None
+        return
     # XXX Is it really not possible to get to the actual template variables
     # (like context, view, request) through the jinja2 context?!??
     request = pyramid.threadlocal.get_current_request()
@@ -253,7 +253,7 @@ def default_image_url(image,
             width, height, 'time')
 
         if image.uniqueId is None:
-            return None
+            return
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(
             image.uniqueId)
@@ -372,7 +372,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         try:
             asset = zeit.cms.interfaces.ICMSContent(unique_id)
         except TypeError:
-            return None
+            return
     else:
         asset = zeit.web.core.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
@@ -399,9 +399,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to
         # prevent infinite recursion.
-        if unique_id:
-            return None
-        else:
+        if not unique_id:
             return get_teaser_image(
                 teaser_block, teaser,
                 unique_id=zeit.web.core.template.default_teaser_images)
@@ -421,7 +419,7 @@ def get_image_metadata(image):
         image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
         return image_metadata
     except TypeError:
-        return None
+        return
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):

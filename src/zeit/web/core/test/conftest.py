@@ -340,11 +340,9 @@ class Browser(zope.testbrowser.browser.Browser):
         xpath = self._translator.css_to_xpath(selector)
         if self.document is not None:
             return self.document.xpath(xpath)
-        return None
 
     @property
     def document(self):
         """Return an lxml.html.HtmlElement instance of the response body."""
         if self.contents is not None:
             return lxml.html.document_fromstring(self.contents)
-        return None
