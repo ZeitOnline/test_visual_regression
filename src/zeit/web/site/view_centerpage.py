@@ -49,15 +49,14 @@ class Centerpage(zeit.web.core.view.Base):
     @zeit.web.reify
     def topiclink_title(self):
         """Cache topiclink_title
-        : rtype: string
+        :rtype: string
         """
-        return self.context.topiclink_title if (
-            self.context.topiclink_title is not None) else 'Schwerpunkte'
+        return self.context.topiclink_title or 'Schwerpunkte'
 
     @zeit.web.reify
     def topiclinks(self):
         """Filter and restructure all topiclinks and labels
-        : rtype: dict
+        :rtype: dict
         """
         link_list = []
         for i in xrange(1, 4):
