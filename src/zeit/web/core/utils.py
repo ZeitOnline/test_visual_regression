@@ -23,3 +23,24 @@ class defaultdict(collections.defaultdict):
     def __contains__(self, name):
         """Instances of defaultdict will pretend to contain all keys."""
         return True
+
+
+class nslist(list, object):
+    """New style list class that also supports basic attribute access
+    and manipulation."""
+
+    pass
+
+
+class nstuple(tuple, object):
+    """New style tuple class that also supports basic attribute access
+    and manipulation."""
+
+    pass
+
+
+class nsdict(dict, object):
+    """New style dict class that also supports basic attribute access
+    and manipulation."""
+
+    pass
