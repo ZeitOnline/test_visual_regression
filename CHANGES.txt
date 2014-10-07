@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-1.3 (unreleased)
+1.3 (2014-10-07)
 ----------------
 
 - ZON-1009: Implement new search field
