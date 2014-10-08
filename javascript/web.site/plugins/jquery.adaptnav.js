@@ -3,6 +3,7 @@
 /**
  * @fileOverview jQuery Plugin to adapt the primary navigation to limited horizontal space
  * @author arne.seemann@zeit.de
+ * @author anika.szuppa@zeit.de
  * @version  0.1
  */
 (function( $ ) {
@@ -23,9 +24,10 @@
     * @memberOf jQuery
     */
     /**
-    * Switches between hidden and viewable search input fiels
-    * @class adaptToSpace
-    * @memberOf jQuery.fn
+     * Hides sections in the primary navigation and makes them accessible in the
+     * dropdown of the "more"-section
+     * @class adaptToSpace
+     * @memberOf jQuery.fn
     */
     $.fn.adaptToSpace = function() {
 
@@ -85,14 +87,13 @@
                 }
             },
             isDesktop: function() {
+                // check that some "mobile only"-divs aren't visible
                 return ( $( '.logo_bar__menue, .main_nav' ).is( ':hidden' ) );
             },
             getAvailableWidth: function() {
-            //get size available in navi
-
+                //get size available in navi
                 var featureWidth = el.$feature.outerWidth( true );
                 return ( el.$nav.width() - featureWidth - 70 );
-
             }
         };
 
