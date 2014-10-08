@@ -29,9 +29,19 @@ class Centerpage(zeit.web.core.view.Base):
         """
         blocks = filter(
             lambda x: hasattr(x, 'layout') and x.layout and (
-                hasattr(x.layout, 'id') and x.layout.id and len(x) > 0),
+                hasattr(x.layout, 'id') and x.layout.id and len(x) > 0
+                and x.layout.id != 'zon-fullwidth'),
             self.context['lead'].values())
         return [(i.layout.id, next(i.__iter__()), i) for i in blocks]
+
+    @zeit.web.reify
+    def area_fullwidth(self):
+        for teaser_block in self.context['lead'].values():
+            try:
+                if 'zon-fullwidth' in teaser_block.layout.id:
+                    return [(teaser_block.layout.id, next(teaser_block.__iter__()), teaser_block)]
+            except AttributeError:
+                continue
 
     @zeit.web.reify
     def topiclink_title(self):
