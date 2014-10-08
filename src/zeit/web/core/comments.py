@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-import urlparse
+import datetime
 import string
-from datetime import datetime
-from lxml import etree
+import urlparse
+
+import cornice.resource
+import lxml.etree
 import requests
-from lxml.etree import XMLSyntaxError
+
 import zeit.cms.interfaces
 
 
@@ -24,19 +26,19 @@ class Agatho(object):
                 '%s%s' % (self.entry_point, path_of_article(unique_id)),
                 timeout=self.timeout)
         except:  # yes, we really do want to catch *all* exceptions here!
-            return None
+            return
         if response.ok:
             try:
                 return _place_answers_under_parent(
-                    etree.fromstring(response.content))
-            except(IOError, XMLSyntaxError):
-                return None
+                    lxml.etree.fromstring(response.content))
+            except(IOError, lxml.etree.XMLSyntaxError):
+                return
         else:
-            return None
+            return
 
 
 def _place_answers_under_parent(xml):
-    filter_xslt = etree.XML('''
+    filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             <xsl:output method="xml"
@@ -91,30 +93,31 @@ def _place_answers_under_parent(xml):
           </xsl:template>
 
         </xsl:stylesheet>
-    ''')
-    transform = etree.XSLT(filter_xslt)
+    """)
+    transform = lxml.etree.XSLT(filter_xslt)
     return transform(xml)
 
 
 def comment_as_dict(comment, request):
-    """ expects an lxml element representing an agatho comment and returns a
-    dict representation """
+    """Expects an lxml element representing an agatho comment and returns a
+    dict representation."""
+
     picture_url = None
     role_labels = []
     gender = 'undefined'
     if comment.xpath('author/@roles'):
-        roles = string.split(comment.xpath('author/@roles')[0], ",")
+        roles = string.split(comment.xpath('author/@roles')[0], ',')
         try:
             gender = comment.xpath('author/@sex')[0]
         except IndexError:
             pass
-        roles_words = {"author_weiblich": "Redaktion",
-                       u"author_männlich": "Redaktion",
-                       u"author_undefined": "Redaktion",
-                       "expert_weiblich": "Expertin",
-                       u"expert_männlich": "Experte",
-                       "freelancer_weiblich": "Freie Autorin",
-                       u"freelancer_männlich": "Freier Autor"}
+        roles_words = {u'author_weiblich': 'Redaktion',
+                       u'author_männlich': 'Redaktion',
+                       u'author_undefined': 'Redaktion',
+                       u'expert_weiblich': 'Expertin',
+                       u'expert_männlich': 'Experte',
+                       u'freelancer_weiblich': 'Freie Autorin',
+                       u'freelancer_männlich': 'Freier Autor'}
         role_labels = [roles_words['%s_%s' % (role, gender)] for role in roles
                        if '%s_%s' % (role, gender) in roles_words]
 
@@ -129,6 +132,9 @@ def comment_as_dict(comment, request):
     else:
         content = '[fehler]'
 
+    dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
+           'date/hour/text()', 'date/minute/text()')
+
     return dict(
         indented=bool(len(comment.xpath('inreply'))),
         recommended=bool(
@@ -136,21 +142,18 @@ def comment_as_dict(comment, request):
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
-        timestamp=datetime(int(comment.xpath('date/year/text()')[0]),
-                           int(comment.xpath('date/month/text()')[0]),
-                           int(comment.xpath('date/day/text()')[0]),
-                           int(comment.xpath('date/hour/text()')[0]),
-                           int(comment.xpath('date/minute/text()')[0])),
+        timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(role_labels),
         cid=comment.xpath('./@id')[0])
 
 
 def get_thread(unique_id, request):
-    """ return a dict representation of the
-        comment thread of the given article"""
+    """Return a dict representation of the comment thread of the given
+    article."""
+
     if 'agatho_host' not in request.registry.settings:
-        return None
+        return
     api = Agatho(
         agatho_url='%s/agatho/thread/' % request.registry.settings.agatho_host,
         timeout=float(request.registry.settings.community_host_timeout_secs)
@@ -167,37 +170,32 @@ def get_thread(unique_id, request):
                 nid=thread.xpath('/comments/nid')[0].text,
                 # TODO: these urls should point to ourselves,
                 # not to the 'back-backend'
-                comment_post_url="%s/agatho/thread/%s?destination=%s" % (
+                comment_post_url='%s/agatho/thread/%s?destination=%s' % (
                     request.registry.settings.agatho_host,
                     '/'.join(request.traversed),
                     request.url),
-                comment_report_url="%s/services/json" % (
+                comment_report_url='%s/services/json' % (
                     request.registry.settings.community_host))
         except AssertionError:
-            return None
+            return
     else:
-        return None
-
-
-from cornice.resource import resource, view
-from zeit.web.core import COMMENT_COLLECTION_PATH, COMMENT_PATH
+        return
 
 
 def unique_id_factory(request):
-    str = [u'http://xml.zeit.de'] + list(request.matchdict['subpath'])
-    return '/'.join(str)
+    string = ['http://xml.zeit.de'] + list(request.matchdict['subpath'])
+    return '/'.join(string)
 
 
-@resource(collection_path=COMMENT_COLLECTION_PATH,
-          path=COMMENT_PATH,
-          factory=unique_id_factory)
+@cornice.resource.resource(collection_path='/-/comments/collection/*',
+                           path='/-/comments/{cid}', factory=unique_id_factory)
 class Comment(object):
 
     def __init__(self, context, request):
         self.unique_id = context
         self.request = request
 
-    @view(renderer='json')
+    @cornice.resource.view(renderer='json')
     def collection_get(self):
         return get_thread(self.unique_id, self.request)
 
@@ -206,7 +204,7 @@ def comments_per_unique_id(stats_path):
     try:
         node_comment_statistics_file = zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/' + stats_path)
-        node_comment_statistics = etree.fromstring(
+        node_comment_statistics = lxml.etree.fromstring(
             node_comment_statistics_file.data.encode())
         nodes = node_comment_statistics.xpath('/nodes/node')
         return {node.values()[0]: node.values()[1] for node in nodes}

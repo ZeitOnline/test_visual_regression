@@ -32,7 +32,7 @@ class IPage(zope.interface.Interface):
     teaser = zope.interface.Attribute('Page teaser')
 
     def __iter__(self):
-        """iterate over our blocks"""
+        """Iterate over our blocks"""
 
 
 class ITeaserImage(zope.interface.Interface):

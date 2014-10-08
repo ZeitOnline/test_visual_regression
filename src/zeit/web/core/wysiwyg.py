@@ -1,4 +1,4 @@
-from pyramid.view import view_config
+import pyramid.view
 import pytz
 import zc.iso8601.parse
 
@@ -39,7 +39,8 @@ def datetime_to_html(self, dt_string):
 zeit.wysiwyg.html.ConversionStep.datetime_to_html = datetime_to_html
 
 
-@view_config(context=zeit.content.image.interfaces.IImage, name='@@raw')
+@pyramid.view.view_config(context=zeit.content.image.interfaces.IImage,
+                          name='@@raw')
 class ImageView(zeit.web.magazin.view_image.Image):
     """Since zeit.wysiwyg.html.ImageStep.to_html insists on creating
     an URL that ends in '/@@raw', we need to oblige.

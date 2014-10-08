@@ -1,7 +1,13 @@
 Change log for zeit.frontend
 ============================
 
-1.3 (unreleased)
+1.4 (unreleased)
+----------------
+
+- ZON-1016: New views and predicates for ZON-Content and their view-callables
+
+
+1.3 (2014-10-07)
 ----------------
 
 - ZON-1009: Implement new search field
@@ -11,6 +17,8 @@ Change log for zeit.frontend
 - ZON-1010: Polish navigation
 
 - ZON-941: Implement topic links
+
+- BUG-27: Fix missing copyright hover info for column headers
 
 
 1.2 (2014-10-01)
@@ -24,20 +32,20 @@ Change log for zeit.frontend
 
 - ZON-939: Add last semantic change property to ZON CP
 
-- BUG-18: no tile2 in ipad portrait mode
+- BUG-18: No tile2 in ipad portrait mode
 
 
 1.1.1 (2014-09-30)
 ------------------
 
-- Hotfix: fix wrong $base-line-height due to compass bug and
+- HOTFIX: Fix wrong $base-line-height due to compass bug and
           override new normalize.css value for figure elements
 
 
 1.1 (2014-09-29)
 ----------------
 
-- Hotfix: use subressorts for wrapper
+- HOTFIX: Use subressorts for wrapper
 
 
 1.0.1 (2014-09-26)

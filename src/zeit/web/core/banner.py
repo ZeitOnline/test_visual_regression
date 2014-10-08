@@ -1,25 +1,25 @@
-from lxml import objectify
 import urllib2
-import zeit.web.core.interfaces
+
+import lxml.objectify
 import zope.interface
 
-#
-# A place is a space on the website, which can
-#   be filled with a banner
-#
-# @param string tile tilenumber as supplied in iqd speech
-# @param array sizes in the form 'widthxheight' i.e. '728x90'
-# @param bool diuqilon sets negative keyword targeting
-# @param string label Label to be shown above the ad
-# @keyparam int min_width window width negativ keyword targeting
-#               is applied to, defaults to 0 (no min-width)
-# @keyparam bool active deactivate the place by configuration if needed
-# @keyparam string dcopt iqd keyword, defaults to 'ist'
-#
+import zeit.web.core.interfaces
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPlace)
 class Place(object):
+
+    """A place is a space on the website, which can be filled with a banner.
+
+    :param str tile: Tilenumber as supplied in iqd speech
+    :param list sizes: In the form 'widthxheight' i.e. '728x90'
+    :param bool diuqilon: Sets negative keyword targeting
+    :param str label: Label to be shown above the ad
+    :keyword int min_width: Window width negativ keyword targeting
+                            is applied to, defaults to 0 (no min-width)
+    :keyword bool active: Deactivate the place by configuration if needed
+    :keyword str dcopt: Iqd keyword, defaults to 'ist'
+    """
 
     def __init__(self, tile, sizes, diuqilon, label,
                  min_width=0, active=True, dcopt='ist'):
@@ -32,7 +32,7 @@ class Place(object):
         if label is not None:
             self.label = label
         if not isinstance(self.sizes, list) or self.sizes[0] is None:
-            raise IndexError("Invalid Sizes Array")
+            raise IndexError('Invalid sizes array')
         self.noscript_width_height = self.sizes[0].split('x')
 
 
@@ -74,7 +74,7 @@ def make_banner_list(banner_config):
         banner_file = urllib2.urlopen(banner_config)
     except urllib2.URLError:
         return banner_list
-    root = objectify.fromstring(banner_file.read())
+    root = lxml.objectify.fromstring(banner_file.read())
     for place in root.place:
         try:
             sizes = str(place.multiple_sizes).strip().split(',')
@@ -107,7 +107,7 @@ def make_iqd_mobile_ids(banner_config):
         banner_file = urllib2.urlopen(banner_config)
     except urllib2.URLError:
         return iqd_mobile_ids
-    root = objectify.fromstring(banner_file.read())
+    root = lxml.objectify.fromstring(banner_file.read())
     for iqd_id in root.iqd_id:
         try:
             iqd_mobile_ids[iqd_id.get('ressort')] = IqdMobileList(iqd_id)
