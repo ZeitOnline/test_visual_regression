@@ -179,7 +179,8 @@ class Application(object):
 
     def configure_jinja(self):
         """Sets up names and filters that will be available for all
-        templates."""
+        templates.
+        """
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
@@ -211,7 +212,8 @@ class Application(object):
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
-        configure.zcml file."""
+        configure.zcml file.
+        """
         log.debug('Configuring ZCA')
         self.configure_product_config()
         zope.component.hooks.setHooks()
@@ -249,7 +251,6 @@ class Application(object):
 
         For convenience we resolve egg:// URLs using pkg_resources into file://
         URLs. This functionality should probably move to vivi, see VIV-288.
-
         """
         for key, value in self.settings.items():
             if not key.startswith('vivi_'):
@@ -283,7 +284,6 @@ class Application(object):
         If `protocol` is 'factory', then instead of an entry point the method
         of this object with the name `spec` is called, passing `arguments`
         as kw parameters.
-
         """
         return [
             ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),

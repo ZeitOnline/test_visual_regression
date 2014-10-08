@@ -31,7 +31,7 @@ class Centerpage(zeit.web.core.view.Base):
             lambda x: hasattr(x, 'layout') and x.layout and (
                 hasattr(x.layout, 'id') and x.layout.id and len(x) > 0),
             self.context['lead'].values())
-        return list((i.layout.id, next(i.__iter__()), i) for i in blocks)
+        return [(i.layout.id, next(i.__iter__()), i) for i in blocks]
 
     @zeit.web.reify
     def topiclink_title(self):
