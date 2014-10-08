@@ -547,10 +547,10 @@ def test_primary_nav_should_resize_to_fit(
 
     more_dropdown = driver.find_element_by_css_selector(
         '[data-id="more-dropdown"]')
-    hamburg_nav_item = driver.find_element_by_css_selector(
-        '[data-id="hamburg"]')
-    hamburg_more_dropdown_item = driver.find_element_by_css_selector(
-        '[data-id="more-dropdown"] [data-id="hamburg"]')
+    chosen_nav_item = driver.find_element_by_css_selector(
+        '[data-id="sport"]')
+    chosen_more_dropdown_item = driver.find_element_by_css_selector(
+        '[data-id="more-dropdown"] [data-id="sport"]')
 
     logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
     menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
@@ -558,14 +558,21 @@ def test_primary_nav_should_resize_to_fit(
 
     assert (more_dropdown.is_displayed() is False), (
         '[on mobile] more dropdown is not displayed')
-    assert hamburg_nav_item.is_displayed(), (
-        '[on mobile] last regular section "Hamburg" should be visible')
+    assert chosen_nav_item.is_displayed(), (
+        '[on mobile] chosen nav item should be visible in open navigation')
 
     # tablet
     driver.set_window_size(768, 1024)
 
-    assert (hamburg_nav_item.is_displayed() is False), (
-        '[on tablet] last regular section "Hamburg" should be hidden')
+    assert (chosen_nav_item.is_displayed() is False), (
+        '[on tablet] chosen nav item should be hidden')
     actions.move_to_element(more_dropdown).perform()
-    assert hamburg_more_dropdown_item.is_displayed(), (
-        '[on tablet] "Hamburg" should be visible in more-dropdown on :hover')
+    assert chosen_more_dropdown_item.is_displayed(), (
+        '[on tablet] chosen nav item should be visible'
+        ' in more-dropdown on :hover')
+
+    # desktop
+    driver.set_window_size(980, 1024)
+
+    assert chosen_nav_item.is_displayed(), (
+        '[on desktop] chosen nav item should be visible')
