@@ -62,7 +62,6 @@ def test_no_url_configured_yields_error_message():
 def test_get_teaser_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
-
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
@@ -84,7 +83,6 @@ def test_get_teaser_image(testserver):
 def test_get_teaser_image_should_set_image_pattern(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
-
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
