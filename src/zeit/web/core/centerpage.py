@@ -173,6 +173,7 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.copyright = meta.copyrights
         self.image = image
         self.image_group = image_group.uniqueId
+        self.image_pattern = 'default'
         self.layout = ''
         self.src = image.uniqueId
         self.title = meta.title

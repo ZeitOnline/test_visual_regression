@@ -242,6 +242,7 @@ default_images_sizes = {
 def default_image_url(image,
                       image_pattern='default'):
     try:
+        image_pattern = getattr(image, 'image_pattern', image_pattern)
         if image_pattern != 'default':
             width, height = default_images_sizes.get(image_pattern, (640, 480))
         elif hasattr(image, 'layout'):
@@ -395,6 +396,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.web.core.interfaces.ITeaserImage)
+        teaser_image.image_pattern = teaser_block.layout.image_pattern
         return teaser_image
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to

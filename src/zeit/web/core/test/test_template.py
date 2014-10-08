@@ -81,6 +81,17 @@ def test_get_teaser_image(testserver):
     assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
 
 
+def test_get_teaser_image_should_set_image_pattern(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/article_video_asset_2'
+    )
+    image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
+    assert image.image_pattern == 'zmo-large'
+
+
 def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
