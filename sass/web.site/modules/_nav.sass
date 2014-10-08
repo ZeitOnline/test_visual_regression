@@ -381,17 +381,17 @@ $zon-search-square-size: em(35px)
 .primary-nav
 	+columns(2)
 	+pie-clearfix
-	font-size: 16px
-	letter-spacing: 1px
+	font-size: $font-m
+	letter-spacing: $hair
 	padding: 0 0 0 $petite
 
 	+respond-min($break-phablet-min)
 		+columns(3)
 	+respond-min($break-tablet-min)
 		+columns(auto)
-		border-bottom: 1px solid $zon_light_grey
+		border-bottom: $dblhair solid $zon_light_grey
 		display: block
-		font-size: 14px
+		font-size: $font-s
 		padding: 0
 	[data-id='more-dropdown']
 		display: none
@@ -405,7 +405,7 @@ $zon-search-square-size: em(35px)
 
 	+respond-min($break-tablet-min)
 		float: left
-		padding-right: 14px
+		padding-right: $little
 
 
 .primary-nav__link
@@ -425,16 +425,16 @@ $zon-search-square-size: em(35px)
 .primary-nav__item--featured
 	line-height: 2.0625
 	+respond-min($break-tablet-min)
-		font-size: 12px
+		font-size: $font-s
 		float: right
-		margin-top: 5px
+		margin-top: $tiny
 		padding-right: 0
 
 	.primary-nav__link
 		+link-colors($white)
 		background-color: $zon_dark_grey
-		padding: 0 10px
-		border-radius: 2px
+		padding: 0 $fine
+		border-radius: $dblhair
 		&:hover
 			+box-shadow(none)
 			background-color: $zon_light_grey
@@ -464,12 +464,12 @@ $zon-search-square-size: em(35px)
 .dropdown
 	display: none
 	+respond-min($break-tablet-min)
-		+border-radius(4px, 4px)
-		+box-shadow(0 5px 8px rgba(0,0,0,0.05))
+		+border-radius($micro, $micro)
+		+box-shadow(0 $micro $thin rgba(0,0,0,0.05))
 		background: $white
 		border: $zon_light_grey
-		border: 1px solid $zon_light_grey
-		left: -10px
+		border: $dblhair solid $zon_light_grey
+		left: -$fine
 		padding-left: 0
 		position: absolute
 		.dropdown__item
@@ -479,7 +479,7 @@ $zon-search-square-size: em(35px)
 				+link-colors($black)
 				display: block
 				width: 100%
-				padding: 0 10px 0 10px
+				padding: 0 $fine 0 $fine
 				&:after
 					content: ""
 					margin-left: 0
@@ -493,12 +493,12 @@ $zon-search-square-size: em(35px)
 			left: 0
 			position: relative
 			.dropdown__link
-				padding-left: 20px
+				padding-left: $petite
 
 
 .js .primary-nav--js-no-overflow
 	+respond-min($break-tablet-min)
-		max-height: 36px
+		max-height: $medium
 		overflow: hidden
 
 .no-js .primary-nav [data-id='more-dropdown']
