@@ -23,3 +23,14 @@ class defaultdict(collections.defaultdict):
     def __contains__(self, name):
         """Instances of defaultdict will pretend to contain all keys."""
         return True
+
+
+def fix_misrepresented_latin(val):
+    """Fix misrepresentation of latin-1 chars in unicode strings."""
+
+    if isinstance(val, unicode):
+        try:
+            val = val.encode('latin-1', 'backslashreplace').decode('utf-8')
+        except UnicodeDecodeError:
+            pass
+    return val

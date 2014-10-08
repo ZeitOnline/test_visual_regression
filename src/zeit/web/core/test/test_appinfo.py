@@ -2,7 +2,6 @@
 from mock import patch
 from pytest import fixture, yield_fixture, mark
 from zeit.web.core.appinfo import get_app_info, assemble_app_info
-from zeit.web.core.security import ZMO_USER_KEY
 
 
 @fixture
@@ -13,17 +12,15 @@ def app_info_request(dummy_request):
 
 @yield_fixture
 def app_info(request, dummy_request):
-    """
-    mocks a the userinfo that the appinfo method gets with
-    data from the marked mocked user
-    """
+    """Mocks a the userinfo that the appinfo method gets with
+    data from the marked mocked user."""
+
     username = request.keywords['user'].args[0]
-    with patch(
-            'zeit.web.core.appinfo.authenticated_userid') as mocked_user_info:
+    with patch('pyramid.security.authenticated_userid') as mocked_user_info:
         from zeit.web.core.data import MOCK_USER_DATA
         userinfo = MOCK_USER_DATA.get(username)
         dummy_request.cookies['drupal-userid'] = userinfo['uid']
-        dummy_request.session[ZMO_USER_KEY] = userinfo
+        dummy_request.session['zmo-user'] = userinfo
         mocked_user_info.return_value = userinfo['uid']
         yield username
 

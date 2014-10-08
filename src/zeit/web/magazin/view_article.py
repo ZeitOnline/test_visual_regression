@@ -195,7 +195,7 @@ class Article(zeit.web.core.view.Content):
                     authorList.append(result)
             return authorList
         except (IndexError, OSError):
-            return None
+            return
 
     @zeit.web.reify
     def authorsList(self):
@@ -214,8 +214,6 @@ class Article(zeit.web.core.view.Content):
             prefix = 'eine'
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
-        else:
-            return None
 
     @zeit.web.reify
     def source(self):
@@ -238,7 +236,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def location(self):
-        return None  # XXX not implemented in zeit.content.article yet
+        return  # XXX not implemented in zeit.content.article yet
 
     @property
     def nextread(self):

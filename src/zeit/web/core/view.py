@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-
 import logging
 import datetime
 import urlparse
 
-from pyramid.view import notfound_view_config
-from pyramid.view import view_config
+import pyramid.view
 import babel.dates
 import pyramid.response
 import requests
@@ -108,7 +106,7 @@ class Base(object):
         try:
             return zeit.web.core.banner.banner_list[tile - 1]
         except IndexError:
-            return None
+            return
 
     @zeit.web.reify
     def js_vars(self):
@@ -340,7 +338,7 @@ class Content(Base):
             return
 
 
-@view_config(route_name='health_check')
+@pyramid.view.view_config(route_name='health_check')
 def health_check(request):
     return pyramid.response.Response('OK', 200)
 
@@ -360,7 +358,7 @@ class service_unavailable(object):
             return pyramid.response.Response(body, 503)
 
 
-@notfound_view_config(request_method='GET')
+@pyramid.view.notfound_view_config(request_method='GET')
 def not_found(request):
     try:
         body = requests.get('http://www.zeit.de/error/404',
