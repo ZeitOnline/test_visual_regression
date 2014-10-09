@@ -3,10 +3,11 @@
 
 from setuptools import setup, find_packages
 
+
 setup(
     name='zeit.frontend',
     url='https://github.com/ZeitOnline/friedbert',
-    version='1.4.dev0',
+    version='1.5.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -68,13 +69,15 @@ setup(
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
-        'zope.processlifetime',
+        'zope.processlifetime'
     ],
+    description='This package is all about ZEIT ONLINE website delivery.',
+    long_description=open('README.md', 'r').read(),
     entry_points={
         'paste.app_factory': [
             'main=zeit.web.core.application:factory',
-            'preview=zeit.web.core.preview:factory',
-        ],
+            'preview=zeit.web.core.preview:factory'
+        ]
     },
     extras_require={
         'test': [
@@ -87,8 +90,8 @@ setup(
             'selenium',
             'waitress',
             'webtest',
-            'zope.testbrowser [wsgi]',
-        ],
+            'zope.testbrowser [wsgi]'
+        ]
     },
     setup_requires=['setuptools_git'],
     namespace_packages=['zeit'],
@@ -96,4 +99,16 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
+    keywords='web wsgi pyramid zope',
+    license='Proprietary license',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Framework :: Pyramid',
+        'Framework :: Zope3',
+        'Intended Audience :: Developers',
+        'License :: Other/Proprietary License',
+        'Operating System :: Unix',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Internet :: WWW/HTTP :: WSGI'
+    ]
 )

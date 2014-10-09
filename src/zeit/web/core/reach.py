@@ -125,7 +125,7 @@ class LinkReach(object):
 
 def _prepare_date(value):
     if not isinstance(value, int):
-        return None
+        return
     tz = babel.dates.get_timezone('Europe/Berlin')
     return datetime.datetime.fromtimestamp(value / 1000, tz)
 

@@ -21,8 +21,7 @@ def test_gallery_should_have_buttons(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
     except TimeoutException:
-        print "Timeout Gallery Script"
-        assert False
+        assert False, 'Timeout gallery script'
     else:
         # test navigation buttons
         nextselector = ".bx-next"
@@ -41,8 +40,7 @@ def test_gallery_buttons_are_clickable(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
     except TimeoutException:
-        print "Timeout Gallery Script"
-        assert False
+        assert False, 'Timeout gallery script'
     else:
         onextselector = ".bx-overlay-next"
         oprevselector = ".bx-overlay-prev"
@@ -63,8 +61,7 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
     except TimeoutException:
-        print "Timeout Gallery Script"
-        assert False
+        assert False, 'Timeout gallery script'
     else:
         bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
@@ -82,8 +79,7 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
     except TimeoutException:
-        print "Timeout Gallery Script"
-        assert False
+        assert False, 'Timeout gallery script'
     else:
         # TODO: this test fails without a window.resize event.
         # Findings:
@@ -106,17 +102,15 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
 
 
 def test_standard_gallery_is_static(selenium_driver, testserver):
-    gallery_url = ("%s/galerien/fs-desktop-schreibtisch-computer"
-                   % testserver.url)
+    url = ("%s/galerien/fs-desktop-schreibtisch-computer" % testserver.url)
     driver = selenium_driver
     driver.set_window_size(1024, 768)
-    driver.get("%s?%s" % (gallery_url, "gallery=static"))
+    driver.get("%s?%s" % (url, "gallery=static"))
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
         WebDriverWait(driver, 10).until(cond)
     except TimeoutException:
-        print "Timeout Gallery Script"
-        assert False
+        assert False, 'Timeout gallery script'
     else:
         buttonNext = driver.find_element_by_css_selector(".bx-next")
         buttonNext.click()
@@ -124,30 +118,28 @@ def test_standard_gallery_is_static(selenium_driver, testserver):
             cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
             WebDriverWait(driver, 10).until(cond)
         except TimeoutException:
-            print "Timeout Gallery Script"
-            assert False
+            assert False, 'Timeout gallery script'
         else:
             selector = ".inline-gallery figure:not(.bx-clone):nth-child(2)"
             slide = driver.find_element_by_css_selector(selector)
-            assert driver.current_url == gallery_url + "?gallery=static&slide=2"
+            assert driver.current_url == url + "?gallery=static&slide=2"
             assert slide.is_displayed()
-
 
 
 def test_gallery_with_supertitle_has_html_title(
         appbrowser, testserver, testbrowser):
     browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
         testserver.url))
-    assert '<title>Desktop-Bilder: Das hab ich auf dem Schirm</title>' \
-        in browser.contents
+    assert ('<title>Desktop-Bilder: Das hab ich auf dem Schirm</title>'
+            in browser.contents)
 
 
 def test_gallery_without_supertitle_has_html_title(
         appbrowser, testserver, testbrowser):
     browser = testbrowser('%s/galerien/bg-automesse-detroit-2014-usa' % (
         testserver.url))
-    assert '<title>Automesse Detroit 2014 US-Hersteller</title>' \
-        in browser.contents
+    assert ('<title>Automesse Detroit 2014 US-Hersteller</title>'
+            in browser.contents)
 
 
 def test_standalone_gallery_uses_responsive_images_with_ratio(

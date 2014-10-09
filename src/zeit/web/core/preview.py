@@ -1,7 +1,8 @@
 import pyramid.events
-import zeit.web.core.application
 import zope.component
 import zope.processlifetime
+
+import zeit.web.core.application
 
 
 class Application(zeit.web.core.application.Application):

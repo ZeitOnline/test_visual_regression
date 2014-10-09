@@ -2,7 +2,9 @@
 import lxml
 import pytest
 import mock
+
 import zeit.web.core.navigation
+import selenium.webdriver
 
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
@@ -10,6 +12,7 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
         'zeit.web.site:templates/inc/nav_main.html')
     html_str = tpl.render(view=mock.MagicMock())
     html = lxml.html.fromstring(html_str).cssselect
+
     assert len(html('nav.main_nav')) == 1, (
         'just one .main_nav should be present')
 
@@ -71,6 +74,7 @@ def test_nav_services_macro_should_have_expected_links(jinja2_env):
             'http://shop.zeit.de?et=l6VVNm&et_cid=42&et_lid=175'))
     html_str = tpl.module.main_nav_services(nav)
     html = lxml.html.fromstring(html_str).cssselect
+
     assert html('li > a[href="http://www.zeitabo.de/'
                 '?mcwt=2009_07_0002"]')[0] is not None, (
         'No link for zeitabo.de')
@@ -96,6 +100,7 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
         'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_classifieds(nav)
     html = lxml.html.fromstring(html_str).cssselect
+
     assert html('li[data-id="hp.global.topnav.links.jobs"]'
                 '> a[href="http://jobs.zeit.de/"]'
                 '')[0] is not None, (
@@ -111,7 +116,7 @@ def test_nav_community_macro_should_render_a_login(jinja2_env):
         'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_community()
     html = lxml.html.fromstring(html_str).cssselect
-    print html_str
+
     assert html('a[href="http://community.zeit.de/user/login?destination='
                 'http://www.zeit.de/index"]'
                 '[rel="nofollow"]'
@@ -125,6 +130,7 @@ def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
         'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_logo()
     html = lxml.html.fromstring(html_str).cssselect
+
     assert html('a[href="http://www.zeit.de/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]'
                 '[class="icon-zon-logo-desktop"]'
@@ -137,7 +143,7 @@ def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
         'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_burger()
     html = lxml.html.fromstring(html_str).cssselect
-    print html_str
+
     assert html('a')[0] is not None, 'An empty link is not present'
     assert len(html('div.logo_bar__menue__image.main_nav__icon--plain'
                     '.icon-zon-logo-navigation_menu')) == 1, (
@@ -211,6 +217,7 @@ def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     title = 'my title'
     html_str = tpl.module.main_nav_tags(title, links)
     html = lxml.html.fromstring(html_str).cssselect
+
     assert html('span.main_nav__tags__label')[0].text == 'my title', (
         'Label span is not present')
     assert html('ul')[0] is not None, 'A list for the tags is not present.'
@@ -225,6 +232,7 @@ def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/navigation.tpl')
     html_str = tpl.module.main_nav_date('Mein Datum')
+
     assert html_str == 'Mein Datum'
 
 
@@ -233,7 +241,7 @@ def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
 def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
-    print browser.contents
+
     assert len(html('nav.main_nav')) == 1, 'Nav main_nav is not present.'
     assert len(html('div.logo_bar__image')) == 1, 'Logo bar image not present.'
     assert len(html('div.logo_bar__menue')) == 1, 'Menu bar is not present.'
@@ -245,7 +253,7 @@ def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
 def test_article_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
-    print browser.contents
+
     assert len(html('li[data-id="hp.global.topnav.links.abo"]')) == 1, (
         'Abo link not present.')
     assert len(html('li[data-id="hp.global.topnav.links.shop"]')) == 1, (
@@ -262,7 +270,7 @@ def test_article_should_have_valid_classifieds_structure(testserver,
                                                          testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
-    print browser.contents
+
     assert len(html('li[data-id="hp.global.topnav.links.jobs"] > a')) == 1, (
         'Job link is not present.')
     assert len(html(
@@ -443,7 +451,7 @@ def test_nav_search_is_working_as_expected(
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
     logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
-    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    menue__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
     document = driver.find_element_by_class_name('page')
 
     if screen_width == 768:
@@ -463,7 +471,7 @@ def test_nav_search_is_working_as_expected(
 
     # open search for mobile
     if screen_width < 768:
-        menu__button.click()
+        menue__button.click()
 
     # test if search is performed
     search__input.send_keys("test")
@@ -481,7 +489,7 @@ def test_nav_burger_menue_is_working_as_expected(
     driver.get('%s/centerpage/zeitonline' % testserver.url)
 
     logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
-    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    menue__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
     icon_burger = logo_bar__menue.find_element_by_class_name(
         'icon-zon-logo-navigation_menu')
 
@@ -497,10 +505,10 @@ def test_nav_burger_menue_is_working_as_expected(
 
     # test main elements are displayed
     assert(logo_bar__menue.is_displayed()), 'Logo bar is not displayed'
-    assert(menu__button.is_displayed()), 'Menue button is not displayed'
+    assert(menue__button.is_displayed()), 'Menue button is not displayed'
     assert(icon_burger.is_displayed()), 'Burger Icon is not displayed'
 
-    menu__button.click()
+    menue__button.click()
 
     # test element states after menue button is clicked
     assert(main_nav__community.is_displayed()), (
@@ -519,7 +527,7 @@ def test_nav_burger_menue_is_working_as_expected(
         'icon-zon-logo-navigation_close-hover')
     assert(icon_close.is_displayed()), 'Closing Icon is not displayed'
 
-    menu__button.click()
+    menue__button.click()
 
     # test element states after menue button is clicked again
     assert(main_nav__community.is_displayed() is False), (
@@ -532,3 +540,46 @@ def test_nav_burger_menue_is_working_as_expected(
         'Classifieds bar is not displayed')
     assert(main_nav__search.is_displayed() is False), (
         'Search bar is not displayed')
+
+
+def test_primary_nav_should_resize_to_fit(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    actions = selenium.webdriver.ActionChains(driver)
+    driver.get('%s/centerpage/zeitonline' % testserver.url)
+
+    # mobile
+    driver.set_window_size(320, 480)
+
+    more_dropdown = driver.find_element_by_css_selector(
+        '[data-id="more-dropdown"]')
+    chosen_nav_item = driver.find_element_by_css_selector(
+        '[data-id="sport"]')
+    chosen_more_dropdown_item = driver.find_element_by_css_selector(
+        '[data-id="more-dropdown"] [data-id="sport"]')
+
+    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
+    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    menu__button.click()
+
+    assert (more_dropdown.is_displayed() is False), (
+        '[on mobile] more dropdown is not displayed')
+    assert chosen_nav_item.is_displayed(), (
+        '[on mobile] chosen nav item should be visible in open navigation')
+
+    # tablet
+    driver.set_window_size(768, 1024)
+
+    assert (chosen_nav_item.is_displayed() is False), (
+        '[on tablet] chosen nav item should be hidden')
+    actions.move_to_element(more_dropdown).perform()
+    assert chosen_more_dropdown_item.is_displayed(), (
+        '[on tablet] chosen nav item should be visible'
+        ' in more-dropdown on :hover')
+
+    # desktop
+    driver.set_window_size(980, 1024)
+
+    assert chosen_nav_item.is_displayed(), (
+        '[on desktop] chosen nav item should be visible')

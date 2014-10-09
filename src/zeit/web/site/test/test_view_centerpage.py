@@ -83,7 +83,7 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
 
     html_str = tpl.render(teaser=teaser)
     html = lxml.html.fromstring(html_str).cssselect
-    print html_str
+
     assert len(html('article.teaser h2.teaser__heading')) == 1, (
         'No headline is present')
 
@@ -119,7 +119,7 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
-    assert teaser_co.attrib['href'] == teaser.uniqueId+'#comments', (
+    assert teaser_co.attrib['href'] == teaser.uniqueId + '#comments', (
         'No comment link present')
 
     assert teaser_co.attrib['title'] == '9 Kommentare', (
@@ -161,7 +161,7 @@ def test_image_should_be_on_position_a(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
     articles = browser.cssselect('#main .teaser-collection .teasers article')
 
-    assert articles[1][0].tag == 'figure',  'An img should be on this position'
+    assert articles[1][0].tag == 'figure', 'An img should be on this position'
 
 
 def test_responsive_image_should_have_noscript(testserver, testbrowser):

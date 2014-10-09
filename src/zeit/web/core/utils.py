@@ -29,6 +29,17 @@ class defaultdict(collections.defaultdict):
         return True
 
 
+def fix_misrepresented_latin(val):
+    """Fix misrepresentation of latin-1 chars in unicode strings."""
+
+    if isinstance(val, unicode):
+        try:
+            val = val.encode('latin-1', 'backslashreplace').decode('utf-8')
+        except UnicodeDecodeError:
+            pass
+    return val
+
+
 class nsmixin:
     """New style magic attribute methods as a mixin class."""
 

@@ -51,8 +51,9 @@ class Centerpage(zeit.web.core.view.Base):
     @zeit.web.reify
     def topiclink_title(self):
         """Cache topiclink_title
-        :rtype: string
+        :rtype: str
         """
+
         return self.context.topiclink_title or 'Schwerpunkte'
 
     @zeit.web.reify
@@ -60,6 +61,7 @@ class Centerpage(zeit.web.core.view.Base):
         """Filter and restructure all topiclinks and labels
         :rtype: dict
         """
+
         link_list = []
         for i in xrange(1, 4):
             label = getattr(self.context, 'topiclink_label_%s' % i, None)
