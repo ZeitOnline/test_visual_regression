@@ -4,6 +4,7 @@ import pytest
 import mock
 
 import zeit.web.core.navigation
+import selenium.webdriver
 
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
@@ -539,3 +540,46 @@ def test_nav_burger_menue_is_working_as_expected(
         'Classifieds bar is not displayed')
     assert(main_nav__search.is_displayed() is False), (
         'Search bar is not displayed')
+
+
+def test_primary_nav_should_resize_to_fit(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    actions = selenium.webdriver.ActionChains(driver)
+    driver.get('%s/centerpage/zeitonline' % testserver.url)
+
+    # mobile
+    driver.set_window_size(320, 480)
+
+    more_dropdown = driver.find_element_by_css_selector(
+        '[data-id="more-dropdown"]')
+    chosen_nav_item = driver.find_element_by_css_selector(
+        '[data-id="sport"]')
+    chosen_more_dropdown_item = driver.find_element_by_css_selector(
+        '[data-id="more-dropdown"] [data-id="sport"]')
+
+    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
+    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    menu__button.click()
+
+    assert (more_dropdown.is_displayed() is False), (
+        '[on mobile] more dropdown is not displayed')
+    assert chosen_nav_item.is_displayed(), (
+        '[on mobile] chosen nav item should be visible in open navigation')
+
+    # tablet
+    driver.set_window_size(768, 1024)
+
+    assert (chosen_nav_item.is_displayed() is False), (
+        '[on tablet] chosen nav item should be hidden')
+    actions.move_to_element(more_dropdown).perform()
+    assert chosen_more_dropdown_item.is_displayed(), (
+        '[on tablet] chosen nav item should be visible'
+        ' in more-dropdown on :hover')
+
+    # desktop
+    driver.set_window_size(980, 1024)
+
+    assert chosen_nav_item.is_displayed(), (
+        '[on desktop] chosen nav item should be visible')
