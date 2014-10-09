@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZON-1046: Markup and style for topreads buzzbox
 
+- ZON-1059: Provide teaser images with image pattern from teaser block
+
 
 1.4 (2014-10-09)
 ----------------
