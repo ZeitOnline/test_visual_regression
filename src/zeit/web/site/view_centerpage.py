@@ -42,6 +42,7 @@ class Centerpage(zeit.web.core.view.Base):
                     return [(teaser_block.layout.id, next(teaser_block.__iter__()), teaser_block)]
             except AttributeError:
                 continue
+        return []
 
     @zeit.web.reify
     def topiclink_title(self):
