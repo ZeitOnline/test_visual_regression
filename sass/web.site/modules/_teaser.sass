@@ -1,4 +1,8 @@
 // just a helper until we introduce the real structure
+
+$zon-teaser-standart-width: em(480px)
+$zon-teaser-standart-height: em(620px)
+
 .teasers
 	width: 100%
 	+respond-min($break-tablet-min)
@@ -9,7 +13,7 @@
 .teaser
 	+pie-clearfix
 	padding: $petite 0
-	border-bottom: 1px solid #ccc
+	border-bottom: $hair solid #ccc
 	+respond-min($break-tablet-min)
 		border-bottom: none
 
@@ -25,12 +29,20 @@
 	+respond-min($break-desktop-min)
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
 
+.teaser--iscentered
+	text-align: center
+
 .teaser__heading
 	font-size: 1em
-	margin: 0 0 em(10px) 0
+	margin: 0 0 $fine 0
 
 .teaser__heading--hasmedia
-	margin: 0 0 em(22px) 0
+	margin: 0 0 $petite 0
+
+.teaser__heading--issized
+	width: 70%
+	margin-left: auto
+	margin-right: auto
 
 .teaser__heading__small
 	margin: 0 0 $thin 0
@@ -60,19 +72,19 @@
 .teaser__title
 	display: block
 	font-family: FranziskaWebPro
-	font-size: em(25px)
+	font-size: $font-xl--rem
 	font-weight: bold
 	line-height: 1.15
 	+respond-min($break-tablet-min)
-		font-size: em(31px)
+		font-size: $font-xxl--rem
 
 .teaser__title--small
-	font-size: em(22px)
+	font-size: $font-l--rem
 	+respond-min($break-tablet-min)
-		font-size: em(22px)
+		font-size: $font-l--rem
 
 .teaser__media
-	margin: 0 0 em(15px) 0
+	margin: 0 0 $little 0
 
 .teaser__media--small
 	display: none
@@ -99,7 +111,6 @@
 
 .teaser__media-item--small
 	max-width: 100%
-	//width: $teaser-image-width
 
 .teaser__container
 .teaser__text
@@ -117,6 +128,9 @@
 	font-weight: bold
 	letter-spacing: $standard-letter-spacing
 
+.teaser__metadata--ishead
+	margin-top: $fine
+
 .teaser__datetime
 	&:link, &:visited
 		border-bottom: 1px solid #ccc
@@ -127,4 +141,9 @@
 
 .teaser__commentcount
 	@extend .teaser__datetime
-	margin-left: 10px
+	margin-left: $fine
+
+.teaser__container--issized
+	width: 70%
+	margin: $junior auto
+
