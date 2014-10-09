@@ -39,11 +39,13 @@ class Centerpage(zeit.web.core.view.Base):
     def area_buzz(self):
         # XXX: Mock buzzy article data.
         from zeit.cms.interfaces import ICMSContent as ic
-        from zeit.web.core.utils import nslist
-
+        from zeit.web.core.utils import nslist, nsunicode
         area = nslist(ic('http://xml.zeit.de/artikel/0%s' % i)
-                      for i in range(1, 4))
-        area.layout = 'area_buzz_topread'
+                      for i in __import__('random').sample(range(1, 10), 3))
+
+        area.layout = nsunicode('buzz-topreads')
+        area.layout.id = nsunicode('topreads')
+        area.header = nsunicode('Meistgelesen')
         return area
 
     @zeit.web.reify
