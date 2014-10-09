@@ -1,7 +1,7 @@
 Change log for zeit.frontend
 ============================
 
-1.4 (unreleased)
+1.4 (2014-10-09)
 ----------------
 
 - ZON-1016: New views and predicates for ZON-Content and their view-callables
