@@ -118,7 +118,7 @@ class Image(BaseImage):
         # TODO: don't use XML but adapt an Image and use it's metadata
         self.layout = model_block.layout
 
-        if model_block.xml:
+        if model_block.xml is not None:
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
             self.caption = _inline_html(model_block.xml.find('bu'))
@@ -128,13 +128,13 @@ class Image(BaseImage):
             self.attr_title = _inline_html(model_block.xml.find('bu'))
             self.attr_alt = _inline_html(model_block.xml.find('bu'))
 
-        if model_block.references:
+        if model_block.references is not None:
             self.image = model_block.references.target
             self.src = self.image and self.image.uniqueId
             self.uniqueId = self.image and self.image.uniqueId
-            if model_block.references.title:
+            if model_block.references.title is not None:
                 self.attr_title = model_block.references.title
-            if model_block.references.alt:
+            if model_block.references.alt is not None:
                 self.attr_alt = model_block.references.alt
         else:
             self.image = None
