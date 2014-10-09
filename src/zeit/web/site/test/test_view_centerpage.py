@@ -130,6 +130,25 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
         'No comment text present')
 
 
+def test_fullwidth_teaser_should_be_rendered_correctly(
+        testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/fullwidth-teaser' % testserver.url)
+
+    teaser_box = browser.cssselect('.fullwidth_teasers')
+    teaser = browser.cssselect('.teaser.teaser--hasmedia.teaser--iscentered')
+    meta_head = browser.cssselect('.teaser__metadata.teaser__metadata--ishead')
+    meta_def = browser.cssselect('.teaser__metadata:last-child')[0]
+
+    assert len(teaser_box) == 1, 'No fullwidth teaser box'
+    assert len(teaser) == 1, 'No fullwidth teaser'
+    assert len(meta_head) == 1, 'No teaser metadata in head'
+    assert meta_def.get('class') == (
+        'teaser__metadata teaser__metadata--ishead',
+        'Metadata on last position is not hidden')
+
+
 def test_teasers_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
