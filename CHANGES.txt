@@ -4,7 +4,7 @@ Change log for zeit.frontend
 1.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-1046: Markup and style for topreads buzzbox
 
 
 1.4 (2014-10-09)
