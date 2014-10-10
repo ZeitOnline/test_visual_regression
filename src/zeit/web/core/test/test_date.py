@@ -1,74 +1,17 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+import pytest
+
 import zeit.web.core.date
 
 
-def test_babelfy_days_from_timedelta_should_return_babelfied_days():
-    base_date = zeit.web.core.date.parse_date(
+babel_date = zeit.web.core.date.BabelDate(
+    zeit.web.core.date.parse_date(
+        '2014-10-09T19:22:00.1+00:00'),
+    zeit.web.core.date.parse_date(
         '2014-10-07T14:42:00.1+00:00')
-    date = zeit.web.core.date.parse_date(
-        '2014-10-09T19:22:00.1+00:00')
-    delta = date - base_date
-    babel_hours = zeit.web.core.date._babelfy_days_from_timedelta(delta)
-    assert babel_hours == '2 Tage'
-
-
-def test_babelfy_days_from_timedelta_should_default_to_none():
-    babel_days = zeit.web.core.date._babelfy_days_from_timedelta(
-        'timemachine')
-    assert babel_days is None
-
-
-def test_babelfy_hours_from_timedelta_should_return_babelfied_hours():
-    base_date = zeit.web.core.date.parse_date(
-        '2014-10-09T14:42:00.1+00:00')
-    date = zeit.web.core.date.parse_date(
-        '2014-10-09T19:22:00.1+00:00')
-    delta = date - base_date
-    babel_hours = zeit.web.core.date._babelfy_hours_from_timedelta(delta)
-    assert babel_hours == '4 Stunden'
-
-
-def test_babelfy_hours_from_timedelta_should_default_to_none():
-    babel_hours = zeit.web.core.date._babelfy_hours_from_timedelta(
-        'timemachine')
-    assert babel_hours is None
-
-
-def test_babelfy_minutes_from_timedelta_should_return_babelfied_minutes():
-    base_date = zeit.web.core.date.parse_date(
-        '2014-10-09T14:42:00.1+00:00')
-    date = zeit.web.core.date.parse_date(
-        '2014-10-09T19:22:00.1+00:00')
-    delta = date - base_date
-    babel_hours = zeit.web.core.date._babelfy_minutes_from_timedelta(delta)
-    assert babel_hours == '40 Minuten'
-
-
-def test_babelfy_minutes_from_timedelta_should_default_to_none():
-    babel_minutes = zeit.web.core.date._babelfy_minutes_from_timedelta(
-        'timemachine')
-    assert babel_minutes is None
-
-
-def test_get_babelfied_delta_time_should_return_delta_time_dict():
-    base_date = zeit.web.core.date.parse_date(
-        '2014-10-07T14:42:00.1+00:00')
-    date = zeit.web.core.date.parse_date(
-        '2014-10-09T19:22:00.1+00:00')
-    delta = zeit.web.core.date._get_babelfied_delta_time(date, base_date)
-    assert delta == {
-        'days': u'2 Tage',
-        'hours': u'4 Stunden',
-        'minutes': u'40 Minuten'}
-
-
-def test_get_babelfied_delta_time_should_return_none_on_invalid_date():
-    date = zeit.web.core.date.parse_date(
-        'timemachine')
-    delta = zeit.web.core.date._get_babelfied_delta_time(date)
-    assert delta is None
+)
 
 
 def test_parse_date_should_parse_iso_date():
@@ -90,3 +33,37 @@ def test_parse_date_should_return_none_on_invalid_date():
     date = 'timemachine'
     parsed_date = zeit.web.core.date.parse_date(date)
     assert parsed_date is None
+
+
+def test_babel_date_should_store_delta_time():
+    assert type(babel_date.delta) == datetime.timedelta
+    assert babel_date.delta == datetime.timedelta(2, 16800)
+
+
+def test_babel_days_entity_should_raise_type_error_on_invalid_param():
+    with pytest.raises(TypeError):
+        zeit.web.core.date.BabelDaysEntity('timemachine')
+
+
+def test_babel_days_entity_should_be_created():
+    bde = zeit.web.core.date.BabelDaysEntity(babel_date.delta)
+    assert bde.number == 2
+    assert bde.text == '2 Tage'
+
+
+def test_babel_hours_entity_should_be_created():
+    bhe = zeit.web.core.date.BabelHoursEntity(babel_date.delta)
+    assert bhe.number == 4
+    assert bhe.text == '4 Stunden'
+
+
+def test_babel_minutes_entity_should_be_created():
+    bme = zeit.web.core.date.BabelMinutesEntity(babel_date.delta)
+    assert bme.number == 40
+    assert bme.text == '40 Minuten'
+
+
+def test_get_babelfied_delta_time_should_define_date_entities():
+    babel_date._get_babelfied_delta_time()
+    assert babel_date.hours.number == 4
+    assert babel_date.minutes.text == '40 Minuten'

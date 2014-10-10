@@ -2,58 +2,14 @@
 import datetime
 
 import babel.dates
+import grokcore.component
+
+import zeit.web.core.interfaces
 
 
+# Will be made configurable with ZON-1038
+limit = {'days': '3', 'hours': '8'}
 locale = 'de_DE'
-
-
-def _babelfy_days_from_timedelta(delta):
-    try:
-        return (babel.dates.format_timedelta(
-            babel.dates.timedelta(days=delta.days), locale=locale))
-    except AttributeError:
-        return
-
-
-def _babelfy_hours_from_timedelta(delta):
-    try:
-        hours = delta.seconds / 3600
-        return (babel.dates.format_timedelta(
-            babel.dates.timedelta(hours=hours), locale=locale))
-    except AttributeError:
-        return
-
-
-def _babelfy_minutes_from_timedelta(delta):
-    try:
-        minutes = (delta.seconds % 3600) / 60
-        return (babel.dates.format_timedelta(
-            babel.dates.timedelta(minutes=minutes), locale=locale))
-    except AttributeError:
-        return
-
-
-def _get_babelfied_delta_time(date, base_date=datetime.datetime.utcnow()):
-    # Since babel does round timedeltas inconveniently,
-    # we need to perform some calculations manually.
-    try:
-        delta = date - base_date
-        babel_delta = {
-            'days': _babelfy_days_from_timedelta(delta),
-            'hours': _babelfy_hours_from_timedelta(delta),
-            'minutes': _babelfy_minutes_from_timedelta(delta),
-        }
-        return babel_delta
-    except TypeError:
-        return
-
-
-def _filter_delta_time(delta):
-    pass
-
-
-def _stringify_delta_time(delta):
-    pass
 
 
 def parse_date(date,
@@ -64,8 +20,72 @@ def parse_date(date,
         return
 
 
-def time_since_modification(date):
-    # delta = _build_delta_time(date)
-    # filtered_delta = _filter_delta_time(delta)
-    # stringified_delta = _stringify_delta_time(delta)
-    pass
+@grokcore.component.implementer(zeit.web.core.interfaces.IBabelDateEntity)
+class BabelDateEntity(object):
+
+    def __init__(self, delta):
+        if not isinstance(delta, datetime.timedelta):
+            raise TypeError
+        self.delta = delta
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IBabelDaysEntity)
+class BabelDaysEntity(BabelDateEntity):
+
+    def __init__(self, delta):
+        super(BabelDaysEntity, self).__init__(delta)
+        self.number = self.delta.days
+        self.text = babel.dates.format_timedelta(
+            babel.dates.timedelta(days=self.delta.days), locale=locale)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IBabelHoursEntity)
+class BabelHoursEntity(BabelDateEntity):
+
+    def __init__(self, delta):
+        # Since babel does round timedeltas inconveniently,
+        # we need to perform some calculations manually.
+        super(BabelHoursEntity, self).__init__(delta)
+        hours = self.delta.seconds / 3600
+        self.number = hours
+        self.text = babel.dates.format_timedelta(
+            babel.dates.timedelta(hours=hours), locale=locale)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IBabelMinutesEntity)
+class BabelMinutesEntity(BabelDateEntity):
+
+    def __init__(self, delta):
+        # Since babel does round timedeltas inconveniently,
+        # we need to perform some calculations manually.
+        super(BabelMinutesEntity, self).__init__(delta)
+        minutes = (self.delta.seconds % 3600) / 60
+        self.number = minutes
+        self.text = babel.dates.format_timedelta(
+            babel.dates.timedelta(minutes=minutes), locale=locale)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IBabelDate)
+class BabelDate(object):
+
+    def __init__(self, date, base_date=datetime.datetime.utcnow()):
+        self.date = date
+        self.base_date = base_date
+        self.delta = self.date - self.base_date
+
+    def _get_babelfied_delta_time(self):
+        self.days = zeit.web.core.date.BabelDaysEntity(self.delta)
+        self.hours = zeit.web.core.date.BabelHoursEntity(self.delta)
+        self.minutes = zeit.web.core.date.BabelMinutesEntity(self.delta)
+
+    def _filter_delta_time(self):
+        pass
+
+    def _stringify_delta_time(self):
+        pass
+
+    def get_time_since_modification(self):
+        self._get_babelfied_delta_time()
+        self._filter_delta_time()
+        self._stringify_delta_time()
+        return
