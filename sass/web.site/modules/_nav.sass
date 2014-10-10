@@ -457,12 +457,11 @@ $zon-search-square-size: em(35px)
 .dropdown
 	display: none
 	+respond-min($break-tablet-min)
-		+border-radius($micro, $micro)
 		+box-shadow(0 $micro $thin rgba(0,0,0,0.05))
 		background: $white
-		border: $zon_light_grey
 		border: $dblhair solid $zon_light_grey
 		left: -$fine
+		min-width: $mediumhuge
 		padding-left: 0
 		position: absolute
 		.dropdown__item
