@@ -4,7 +4,7 @@ Change log for zeit.frontend
 1.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-1018: Render a render-with header on unrederable content
 
 
 1.4 (2014-10-09)
