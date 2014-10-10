@@ -7,6 +7,11 @@ import babel.dates
 locale = 'de_DE'
 
 
+def _babelfy_days_from_timedelta(delta):
+    return (babel.dates.format_timedelta(
+        babel.dates.timedelta(days=delta.days), locale=locale))
+
+
 def _babelfy_hours_from_timedelta(delta):
     hours = delta.seconds / 3600
     return (babel.dates.format_timedelta(
@@ -33,6 +38,7 @@ def get_time_delta(date, base_date=datetime.datetime.utcnow()):
     try:
         delta = date - base_date
         babel_delta = {
+            'days': _babelfy_days_from_timedelta(delta),
             'hours': _babelfy_hours_from_timedelta(delta),
             'minutes': _babelfy_minutes_from_timedelta(delta),
         }
