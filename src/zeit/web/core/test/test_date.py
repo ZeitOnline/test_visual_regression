@@ -25,12 +25,12 @@ def test_parse_date_should_return_none_on_invalid_date():
     assert parsed_date is None
 
 
-def test_get_time_delta_should_return_time_delta():
+def test_get_babelfied_delta_time_should_return_delta_time_dict():
     base_date = zeit.web.core.date.parse_date(
         '2014-10-07T14:42:00.1+00:00')
     date = zeit.web.core.date.parse_date(
         '2014-10-09T19:22:00.1+00:00')
-    delta = zeit.web.core.date.get_time_delta(date, base_date)
+    delta = zeit.web.core.date._get_babelfied_delta_time(date, base_date)
     assert delta == {
         'days': u'2 Tage',
         'hours': u'4 Stunden',
@@ -40,7 +40,7 @@ def test_get_time_delta_should_return_time_delta():
 def test_get_time_delta_should_return_none_on_invalid_date():
     date = zeit.web.core.date.parse_date(
         'timemachine')
-    delta = zeit.web.core.date.get_time_delta(date)
+    delta = zeit.web.core.date._get_babelfied_delta_time(date)
     assert delta is None
 
 

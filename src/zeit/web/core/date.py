@@ -33,15 +33,7 @@ def _babelfy_minutes_from_timedelta(delta):
         return
 
 
-def parse_date(date,
-               date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
-    try:
-        return datetime.datetime.strptime(date, date_format)
-    except ValueError:
-        return
-
-
-def get_time_delta(date, base_date=datetime.datetime.utcnow()):
+def _get_babelfied_delta_time(date, base_date=datetime.datetime.utcnow()):
     # Since babel does round timedeltas inconveniently,
     # we need to perform some calculations manually.
     try:
@@ -54,3 +46,26 @@ def get_time_delta(date, base_date=datetime.datetime.utcnow()):
         return babel_delta
     except TypeError:
         return
+
+
+def _filter_delta_time(delta):
+    pass
+
+
+def _stringify_delta_time(delta):
+    pass
+
+
+def parse_date(date,
+               date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
+    try:
+        return datetime.datetime.strptime(date, date_format)
+    except ValueError:
+        return
+
+
+def time_since_modification(date):
+    # delta = _build_delta_time(date)
+    # filtered_delta = _filter_delta_time(delta)
+    # stringified_delta = _stringify_delta_time(delta)
+    pass
