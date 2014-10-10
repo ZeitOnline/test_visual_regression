@@ -6,6 +6,8 @@ Change log for zeit.frontend
 
 - ZON-1018: Render a render-with header on unrederable content
 
+- ZON-1059: Provide teaser images with image pattern from teaser block
+
 
 1.4 (2014-10-09)
 ----------------
