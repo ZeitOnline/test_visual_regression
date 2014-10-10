@@ -36,18 +36,32 @@ class Centerpage(zeit.web.core.view.Base):
         return [(i.layout.id, next(i.__iter__()), i) for i in blocks]
 
     @zeit.web.reify
+    def area_buzz(self):
+        # XXX: Mock buzzy article data.
+        from zeit.cms.interfaces import ICMSContent as ic
+        from zeit.web.core.utils import nslist, nsunicode
+        area = nslist(ic('http://xml.zeit.de/artikel/0%s' % i)
+                      for i in __import__('random').sample(range(1, 10), 3))
+
+        area.layout = nsunicode('buzz-topreads')
+        area.layout.id = nsunicode('topreads')
+        area.header = nsunicode('Meistgelesen')
+        return area
+
+    @zeit.web.reify
     def topiclink_title(self):
         """Cache topiclink_title
         :rtype: str
         """
-        return self.context.topiclink_title if (
-            self.context.topiclink_title is not None) else 'Schwerpunkte'
+
+        return self.context.topiclink_title or 'Schwerpunkte'
 
     @zeit.web.reify
     def topiclinks(self):
         """Filter and restructure all topiclinks and labels
         :rtype: dict
         """
+
         link_list = []
         for i in xrange(1, 4):
             label = getattr(self.context, 'topiclink_label_%s' % i, None)

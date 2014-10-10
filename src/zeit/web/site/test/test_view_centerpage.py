@@ -129,11 +129,11 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
         'No comment text present')
 
 
-def test_teasers_should_be_rendered_correctly(testserver, testbrowser):
+def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    articles = browser.cssselect('#main .teaser-collection .teasers article')
+    articles = browser.cssselect('.teaser-collection--main .teasers article')
     assert len(articles) == 3, 'We expect 3 articles here'
 
 

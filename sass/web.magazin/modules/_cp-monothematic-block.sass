@@ -9,9 +9,9 @@
     margin: 0 auto $compact auto
 
     +respond-min-max($break-1, $break-3)
-        width: 2*$mtb_teaser_width + $compact // two teaser columns, one margin
+        width: 2*$mtb-teaser-width + $compact // two teaser columns, one margin
     +respond-min($break-3)
-        width: 3*$mtb_teaser_width + 2*$big // three teaser columns, two margins
+        width: 3*$mtb-teaser-width + 2*$big // three teaser columns, two margins
 
 .mtb__divider
     border-top: $dblhair solid $black
@@ -46,11 +46,11 @@
 
 .csscolumns .mtb__teasers__wrap
     +respond-min($break-1)
-        // -webkit-columns: $mtb_teaser_width
-        -moz-columns: $mtb_teaser_width
-        -ms-columns: $mtb_teaser_width
-        -o-columns: $mtb_teaser_width
-        columns: $mtb_teaser_width
+        // -webkit-columns: $mtb-teaser-width
+        -moz-columns: $mtb-teaser-width
+        -ms-columns: $mtb-teaser-width
+        -o-columns: $mtb-teaser-width
+        columns: $mtb-teaser-width
         // -webkit-column-gap: $petite
         -moz-column-gap: $petite
         -ms-column-gap: $petite
