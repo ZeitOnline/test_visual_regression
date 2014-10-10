@@ -262,6 +262,7 @@ $zon-search-square-size: em(35px)
 	background-color: $white
 	padding: 0
 	border: $hair solid $zon_light_grey
+	border-right: none
 	font-size: $font-m
 	color: $zon_grey
 	padding-left: $fine
@@ -283,7 +284,6 @@ $zon-search-square-size: em(35px)
 .search__button
 	@extend %main_nav_button
 	+hover_nav_icon(block,$zon_lighter_grey)
-	right: $tiny
 	border-top-right-radius: $micro
 	border-bottom-right-radius: $micro
 	+respond-min($break-tablet-min)
