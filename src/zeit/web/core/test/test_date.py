@@ -39,3 +39,23 @@ def test_get_time_delta_should_return_none_on_invalid_date():
         'timemachine')
     delta = zeit.web.core.date.get_time_delta(date)
     assert delta is None
+
+
+def test_babelfy_hours_from_timedelta_should_return_babelfied_hours():
+    base_date = zeit.web.core.date.parse_date(
+        '2014-10-09T14:42:00.1+00:00')
+    date = zeit.web.core.date.parse_date(
+        '2014-10-09T19:22:00.1+00:00')
+    delta = date - base_date
+    babel_hours = zeit.web.core.date._babelfy_hours_from_timedelta(delta)
+    assert babel_hours == '4 Stunden'
+
+
+def test_babelfy_minutes_from_timedelta_should_return_babelfied_minutes():
+    base_date = zeit.web.core.date.parse_date(
+        '2014-10-09T14:42:00.1+00:00')
+    date = zeit.web.core.date.parse_date(
+        '2014-10-09T19:22:00.1+00:00')
+    delta = date - base_date
+    babel_hours = zeit.web.core.date._babelfy_minutes_from_timedelta(delta)
+    assert babel_hours == '40 Minuten'
