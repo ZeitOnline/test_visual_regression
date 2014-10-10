@@ -8,20 +8,29 @@ locale = 'de_DE'
 
 
 def _babelfy_days_from_timedelta(delta):
-    return (babel.dates.format_timedelta(
-        babel.dates.timedelta(days=delta.days), locale=locale))
+    try:
+        return (babel.dates.format_timedelta(
+            babel.dates.timedelta(days=delta.days), locale=locale))
+    except AttributeError:
+        return
 
 
 def _babelfy_hours_from_timedelta(delta):
-    hours = delta.seconds / 3600
-    return (babel.dates.format_timedelta(
-        babel.dates.timedelta(hours=hours), locale=locale))
+    try:
+        hours = delta.seconds / 3600
+        return (babel.dates.format_timedelta(
+            babel.dates.timedelta(hours=hours), locale=locale))
+    except AttributeError:
+        return
 
 
 def _babelfy_minutes_from_timedelta(delta):
-    minutes = (delta.seconds % 3600) / 60
-    return (babel.dates.format_timedelta(
-        babel.dates.timedelta(minutes=minutes), locale=locale))
+    try:
+        minutes = (delta.seconds % 3600) / 60
+        return (babel.dates.format_timedelta(
+            babel.dates.timedelta(minutes=minutes), locale=locale))
+    except AttributeError:
+        return
 
 
 def parse_date(date,

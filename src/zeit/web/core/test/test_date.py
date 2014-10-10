@@ -54,6 +54,12 @@ def test_babelfy_days_from_timedelta_should_return_babelfied_days():
     assert babel_hours == '2 Tage'
 
 
+def test_babelfy_days_from_timedelta_should_default_to_none():
+    babel_days = zeit.web.core.date._babelfy_days_from_timedelta(
+        'timemachine')
+    assert babel_days is None
+
+
 def test_babelfy_hours_from_timedelta_should_return_babelfied_hours():
     base_date = zeit.web.core.date.parse_date(
         '2014-10-09T14:42:00.1+00:00')
@@ -64,6 +70,12 @@ def test_babelfy_hours_from_timedelta_should_return_babelfied_hours():
     assert babel_hours == '4 Stunden'
 
 
+def test_babelfy_hours_from_timedelta_should_default_to_none():
+    babel_hours = zeit.web.core.date._babelfy_hours_from_timedelta(
+        'timemachine')
+    assert babel_hours is None
+
+
 def test_babelfy_minutes_from_timedelta_should_return_babelfied_minutes():
     base_date = zeit.web.core.date.parse_date(
         '2014-10-09T14:42:00.1+00:00')
@@ -72,3 +84,9 @@ def test_babelfy_minutes_from_timedelta_should_return_babelfied_minutes():
     delta = date - base_date
     babel_hours = zeit.web.core.date._babelfy_minutes_from_timedelta(delta)
     assert babel_hours == '40 Minuten'
+
+
+def test_babelfy_minutes_from_timedelta_should_default_to_none():
+    babel_minutes = zeit.web.core.date._babelfy_minutes_from_timedelta(
+        'timemachine')
+    assert babel_minutes is None
