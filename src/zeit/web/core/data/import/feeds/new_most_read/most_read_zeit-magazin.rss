@@ -27,19 +27,5 @@
             <category>Work-Life-Balance</category>
             <guid isPermaLink="false">{urn:uuid:c49aeaaa-58c6-475d-a8e5-9bd562c9c5d9}</guid>
         </item>
-        <item>
-            <title>Der mit dem Migrantenstempel</title>
-            <link>/artikel/04</link>
-            <description>Aufsteiger, Araber, Gebetsmuffel, &quot;Buschkowsky light&quot;: Raed Saleh bewirbt sich als Nachfolger Klaus Wowereits. Der Berliner Kandidat der SPD macht weltweit Schlagzeilen.</description>
-            <category>Raed Saleh</category>
-            <guid isPermaLink="false">{urn:uuid:4faceb15-820e-45ae-ac56-fe5fe8ad0c54}</guid>
-        </item>
-        <item>
-            <title>Schäuble nennt AfD eine Schande für Deutschland</title>
-            <link>/artikel/05</link>
-            <description>Der CDU-Politiker hat erneut seinen Unmut über die Alternative für Deutschland kundgetan. Die schnippische Antwort von AfD-Chef Lucke kam umgehend.</description>
-            <category>&quot;Alternative für Deutschland&quot;</category>
-            <guid isPermaLink="false">{urn:uuid:0d372002-0336-4a12-ac7b-fc95f93440a6}</guid>
-        </item>
     </channel>
 </rss>
