@@ -3,6 +3,8 @@ from pyramid.view import view_config
 
 import zeit.content.cp.interfaces
 
+import zeit.web.core.reach
+import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.site.view
 
@@ -36,16 +38,32 @@ class Centerpage(zeit.web.core.view.Base):
         return [(i.layout.id, next(i.__iter__()), i) for i in blocks]
 
     @zeit.web.reify
-    def area_buzz(self):
-        # XXX: Mock buzzy article data.
-        from zeit.cms.interfaces import ICMSContent as ic
-        from zeit.web.core.utils import nslist, nsunicode
-        area = nslist(ic('http://xml.zeit.de/artikel/0%s' % i)
-                      for i in __import__('random').sample(range(1, 10), 3))
+    def area_buzz_mostread(self):
+        stats_path = self.request.registry.settings.node_comment_statistics
+        linkreach = self.request.registry.settings.linkreach_host
+        reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
 
-        area.layout = nsunicode('buzz-topreads')
-        area.layout.id = nsunicode('topreads')
-        area.header = nsunicode('Meistgelesen')
+        area = zeit.web.core.utils.nslist(
+            reach.fetch('mostread', self.ressort, 3))
+
+        area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
+        area.layout.id = zeit.web.core.utils.nsunicode('mostread')
+        area.header = zeit.web.core.utils.nsunicode('Meistgelesen')
+        return area
+
+    @zeit.web.reify
+    def area_buzz_facebook(self):
+        # XXX: Nasty repitition.
+        stats_path = self.request.registry.settings.node_comment_statistics
+        linkreach = self.request.registry.settings.linkreach_host
+        reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
+
+        area = zeit.web.core.utils.nslist(
+            reach.fetch('facebook', self.ressort, 3))
+
+        area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
+        area.layout.id = zeit.web.core.utils.nsunicode('facebook')
+        area.header = zeit.web.core.utils.nsunicode('Meistempfohlen')
         return area
 
     @zeit.web.reify
