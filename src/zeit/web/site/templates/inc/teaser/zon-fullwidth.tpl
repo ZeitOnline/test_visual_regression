@@ -7,7 +7,7 @@
 {% block teaser_media_position_after_title %}
     {% include "zeit.web.site:templates/inc/teaser_asset/"+
         teaser | auto_select_asset | block_type +
-        "-zon-large.tpl" ignore missing with context %}
+        "-zon-fullwidth.tpl" ignore missing with context %}
 {% endblock %}
 
 {% block teaser_metadata_head %}

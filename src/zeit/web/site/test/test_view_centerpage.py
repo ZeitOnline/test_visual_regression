@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 import lxml
 import mock
-
+import pytest
 import zeit.web.site.view_centerpage
+
+
+screen_sizes = ((320, 480, True), (520, 960, True),
+                (768, 1024, False), (980, 1024, False))
+
+
+@pytest.fixture(scope='session', params=screen_sizes)
+def screen_size(request):
+    return request.param
 
 
 def test_area_main_should_filter_teasers():
@@ -145,6 +154,38 @@ def test_fullwidth_teaser_should_be_rendered_correctly(
     assert len(meta_head) == 1, 'No teaser metadata in head'
     assert meta_def.get('class') == 'teaser__metadata ' \
         'teaser__metadata--ishead', ('Metadata on last position is not hidden')
+
+
+def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    box = driver.find_elements_by_class_name('fullwidth_teasers')[0]
+    header = box.find_elements_by_class_name('teaser__heading--issized')[0]
+    img = box.find_elements_by_class_name('teaser__media--fullwidth_mobile')[0]
+    text = box.find_elements_by_class_name('teaser__container--issized')[0]
+
+    if screen_size[0] == 320:
+    # test mobile css settings
+        assert header.value_of_css_property('text-align') == 'start'
+        assert header.value_of_css_property('width') == '295px'
+        assert text.value_of_css_property('text-align') == 'start'
+        assert text.value_of_css_property('width') == '295px'
+        assert img.value_of_css_property('margin-left') == '-20px'
+    elif screen_size[0] == 520:
+    # test phablet css settings
+        assert header.value_of_css_property('text-align') == 'center'
+        assert header.value_of_css_property('width') == '336px'
+        assert text.value_of_css_property('text-align') == 'start'
+        assert text.value_of_css_property('width') == '336px'
+        assert img.value_of_css_property('margin-left') == '-20px'
+    else:
+    # test desktop and tablet css settings
+        assert header.value_of_css_property('text-align') == 'center'
+        assert text.value_of_css_property('text-align') == 'center'
+        assert img.value_of_css_property('margin-left') == '0px'
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):

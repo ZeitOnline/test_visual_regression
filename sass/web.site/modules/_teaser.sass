@@ -13,7 +13,7 @@ $zon-teaser-standart-height: em(620px)
 .teaser
 	+pie-clearfix
 	padding: $petite 0
-	border-bottom: $hair solid #ccc
+	border-bottom: 1px solid #ccc
 	+respond-min($break-tablet-min)
 		border-bottom: none
 
@@ -30,7 +30,12 @@ $zon-teaser-standart-height: em(620px)
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
 
 .teaser--iscentered
-	text-align: center
+	.teaser__heading
+		+respond-min($break-phablet-min)
+			text-align: center
+	.teaser__container
+		+respond-min($break-tablet-min)
+			text-align: center
 
 .teaser__heading
 	font-size: 1em
@@ -40,9 +45,10 @@ $zon-teaser-standart-height: em(620px)
 	margin: 0 0 $petite 0
 
 .teaser__heading--issized
-	width: 70%
-	margin-left: auto
-	margin-right: auto
+	+respond-min($break-phablet-min)
+		width: 70%
+		margin-left: auto
+		margin-right: auto
 
 .teaser__heading__small
 	margin: 0 0 $thin 0
@@ -103,6 +109,13 @@ $zon-teaser-standart-height: em(620px)
 .teaser__media--small[data-showimagemobile="true"]
 	display: block
 
+.teaser__media--fullwidth_mobile
+	margin-left: -$petite
+	margin-right: -$petite
+	+respond-min($break-tablet-min)
+		margin-left: 0
+		margin-right: 0
+
 .teaser__media-link
 .teaser__media-item
 	height: auto
@@ -144,6 +157,7 @@ $zon-teaser-standart-height: em(620px)
 	margin-left: $fine
 
 .teaser__container--issized
-	width: 70%
-	margin: $junior auto
+	+respond-min($break-phablet-min)
+		width: 70%
+		margin: $junior auto
 
