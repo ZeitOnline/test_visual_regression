@@ -63,7 +63,7 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_text')
     assert 'teaser_byline' in tpl.blocks, (
         'No block named teaser_byline')
-    assert 'teaser_metadata' in tpl.blocks, (
+    assert 'teaser_metadata_default' in tpl.blocks, (
         'No block named teaser_metadata')
     assert 'teaser_datetime' in tpl.blocks, (
         'No block named teaser_datetime')
