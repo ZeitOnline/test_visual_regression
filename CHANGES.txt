@@ -4,6 +4,8 @@ Change log for zeit.frontend
 1.5 (unreleased)
 ----------------
 
+- ZON-915: Implement fullwidth teaser
+
 - ZON-1046: Markup and style for topreads buzzbox
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
@@ -19,8 +21,6 @@ Change log for zeit.frontend
 
 1.3 (2014-10-07)
 ----------------
-
-- ZON-915: Implement fullwidth teaser
 
 - ZON-1009: Implement new search field
 
