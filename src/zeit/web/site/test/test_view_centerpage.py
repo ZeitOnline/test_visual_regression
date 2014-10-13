@@ -168,24 +168,29 @@ def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
     text = box.find_elements_by_class_name('teaser__container--issized')[0]
 
     if screen_size[0] == 320:
-    # test mobile css settings
-        assert header.value_of_css_property('text-align') == 'start'
-        assert header.value_of_css_property('width') == '295px'
-        assert text.value_of_css_property('text-align') == 'start'
-        assert text.value_of_css_property('width') == '295px'
-        assert img.value_of_css_property('margin-left') == '-20px'
+        # test mobile css settings
+        assert header.value_of_css_property('text-align') == 'start', (
+            'text-align value of teaser header is not correct')
+        assert text.value_of_css_property('text-align') == 'start', (
+            'text-align value of teaser text is not correct')
+        assert img.value_of_css_property('margin-left') == '-20px', (
+            'margin-left value of teaser image is not correct')
     elif screen_size[0] == 520:
-    # test phablet css settings
-        assert header.value_of_css_property('text-align') == 'center'
-        assert header.value_of_css_property('width') == '336px'
-        assert text.value_of_css_property('text-align') == 'start'
-        assert text.value_of_css_property('width') == '336px'
-        assert img.value_of_css_property('margin-left') == '-20px'
+        # test phablet css settings
+        assert header.value_of_css_property('text-align') == 'center', (
+            'text-align value of teaser header is not correct')
+        assert text.value_of_css_property('text-align') == 'start', (
+            'text-align value of teaser text is not correct')
+        assert img.value_of_css_property('margin-left') == '-20px', (
+            'margin-left value of teaser image is not correct')
     else:
-    # test desktop and tablet css settings
-        assert header.value_of_css_property('text-align') == 'center'
-        assert text.value_of_css_property('text-align') == 'center'
-        assert img.value_of_css_property('margin-left') == '0px'
+        # test desktop and tablet css settings
+        assert header.value_of_css_property('text-align') == 'center', (
+            'text-align value of teaser header is not correct')
+        assert text.value_of_css_property('text-align') == 'center', (
+            'text-align value of teaser text is not correct')
+        assert img.value_of_css_property('margin-left') == '0px', (
+            'margin-left value of teaser image is not correct')
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
