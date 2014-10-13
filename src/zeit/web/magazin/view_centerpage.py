@@ -139,7 +139,7 @@ class Centerpage(zeit.web.core.view.Base):
         reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
         teaser_dict = {}
         for service in ('twitter', 'facebook', 'comments'):
-            teaser_dict[service] = reach.fetch_service(service, 3)
+            teaser_dict[service] = reach.fetch(service, 'zeit-magazin', 3)
         return teaser_dict
 
     @zeit.web.reify
