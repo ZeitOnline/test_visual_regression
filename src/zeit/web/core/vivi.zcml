@@ -1,35 +1,32 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-  <exclude package="zeit.cms.sitecontrol" />
-  <exclude package="zeit.cms.tagging.browser" />
-  <exclude package="zeit.find.browser" />
-  <exclude package="zeit.edit.browser" />
-  <include package="zeit.cms" />
+    <exclude package="zeit.cms.sitecontrol" />
+    <exclude package="zeit.cms.tagging.browser" />
+    <exclude package="zeit.find.browser" />
+    <exclude package="zeit.edit.browser" />
+    <include package="zeit.cms" />
 
-  <exclude package="zeit.workflow.browser" />
-  <include package="zeit.workflow" />
+    <exclude package="zeit.workflow.browser" />
+    <include package="zeit.workflow" />
 
-  <exclude package="zeit.content.article.edit.browser" />
-  <exclude package="zeit.content.article.browser" />
-  <include package="zeit.content.article" />
-  <include package="zeit.content.image" />
-  <include package="zeit.content.link" />
-  <include package="zeit.content.text" />
-  <!-- <include package="zeit.content.rawxml" /> -->
-  <include package="zeit.content.quiz" />
-  <include package="zeit.content.author" />
-  <include package="zeit.content.gallery" />
-  <include package="zeit.content.infobox" />
-  <include package="zeit.content.portraitbox" />
-  <include package="zeit.content.video" />
-  <exclude package="zeit.content.cp.browser" />
-  <include package="zeit.content.cp" />
-  <include package="zeit.intrafind" />
-  <include package="zeit.magazin" />
-  <include package="zeit.newsletter" />
-  <include package="zeit.solr" />
-  <include package="zeit.wysiwyg" />
-
-  <!-- <include package="zeit.seo" /> -->
+    <exclude package="zeit.content.article.edit.browser" />
+    <exclude package="zeit.content.article.browser" />
+    <include package="zeit.content.article" />
+    <include package="zeit.content.image" />
+    <include package="zeit.content.link" />
+    <include package="zeit.content.text" />
+    <include package="zeit.content.quiz" />
+    <include package="zeit.content.author" />
+    <include package="zeit.content.gallery" />
+    <include package="zeit.content.infobox" />
+    <include package="zeit.content.portraitbox" />
+    <include package="zeit.content.video" />
+    <exclude package="zeit.content.cp.browser" />
+    <include package="zeit.content.cp" />
+    <include package="zeit.intrafind" />
+    <include package="zeit.magazin" />
+    <include package="zeit.newsletter" />
+    <include package="zeit.solr" />
+    <include package="zeit.wysiwyg" />
 
 </configure>

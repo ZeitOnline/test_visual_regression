@@ -1,10 +1,14 @@
 import collections
 
+__all__ = ['defaultdict', 'nslist', 'nstuple', 'nsdict', 'nsset', 'nsstr',
+           'nsunicode']
+
 
 class defaultdict(collections.defaultdict):
     """Extension of stdlib's defaultdict that overwrites its `get` method and
     behaviour of the `in` operator.
     """
+
     def get(self, key, *args):
         """If the key cannot be found, return the (optional) function scope
         default or the defaultdict instances default.
@@ -21,5 +25,59 @@ class defaultdict(collections.defaultdict):
         return self.__getitem__(key)
 
     def __contains__(self, name):
-        """Instances of defaultdict will pretend to contain all keys."""
+        """Instances of defaultdict will pretend to contain any key."""
         return True
+
+
+def fix_misrepresented_latin(val):
+    """Fix misrepresentation of latin-1 chars in unicode strings."""
+
+    if isinstance(val, unicode):
+        try:
+            val = val.encode('latin-1', 'backslashreplace').decode('utf-8')
+        except UnicodeDecodeError:
+            pass
+    return val
+
+
+class nsmixin:
+    """New style magic attribute methods as a mixin class."""
+
+    __setattr__ = object.__setattr__
+    __delattr__ = object.__delattr__
+
+
+class nslist(list, nsmixin):
+    """New style list class with attribute access and manipulation."""
+
+    pass
+
+
+class nstuple(tuple, nsmixin):
+    """New style tuple class with attribute access and manipulation."""
+
+    pass
+
+
+class nsdict(dict, nsmixin):
+    """New style dictionary class with attribute access and manipulation."""
+
+    pass
+
+
+class nsset(set, nsmixin):
+    """New style set class with attribute access and manipulation."""
+
+    pass
+
+
+class nsstr(str, nsmixin):
+    """New style string class with attribute access and manipulation."""
+
+    pass
+
+
+class nsunicode(unicode, nsmixin):
+    """New style unicode class with attribute access and manipulation."""
+
+    pass

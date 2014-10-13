@@ -450,8 +450,6 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert source in output
     assert source_webm in output
     assert img in output
-    print fallback
-    print output
     assert fallback in output
 
 

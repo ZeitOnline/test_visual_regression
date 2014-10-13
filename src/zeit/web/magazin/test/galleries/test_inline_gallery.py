@@ -41,8 +41,7 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
         # opacity should have changed
         assert elemOpacity != elemOpacityLater
     except:
-        print "Timeout Gallery Script"
-        assert False
+        assert False, 'Timeout gallery script'
 
 
 def test_inline_gallery_uses_responsive_images_with_ratio(
@@ -72,8 +71,7 @@ def test_photocluster_has_expected_content(selenium_driver, testserver):
     wrap = driver.find_elements_by_css_selector(".photocluster")
     assert len(wrap) != 0
     for element in wrap:
-        imgs = element.find_elements_by_tag_name(
-            "img")
+        imgs = element.find_elements_by_tag_name("img")
         # first image
         assert re.search('http://.*/galerien/' +
                          'bg-automesse-detroit-2014-usa-bilder/' +
@@ -81,7 +79,6 @@ def test_photocluster_has_expected_content(selenium_driver, testserver):
                          '462507429-540x304.jpg',
                          imgs[0].get_attribute("src"))
         # last image
-        print imgs[6].get_attribute("src")
         assert re.search('http://.*/galerien/' +
                          'bg-automesse-detroit-2014-usa-bilder/' +
                          'bitblt-.*/' +

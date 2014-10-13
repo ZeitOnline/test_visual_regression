@@ -1,6 +1,6 @@
 {% macro main_nav(navigation, nav_class=None) -%}
     {% set nav_class = nav_class or 'main-nav' %}
-    <ul class="{{ nav_class }}">
+    <ul class="{{ nav_class }}{% if nav_class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}">
         {% for i in navigation -%}
         {% set section = navigation[i] %}
         <li class="{{ nav_class }}__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
@@ -10,6 +10,16 @@
             {%- endif %}
         </li>
         {%- endfor %}
+        {% if nav_class == 'primary-nav' %}
+        {# copy all nav-sections to more-dropdown as well #}
+        <li class="{{ nav_class }}__item" data-id="more-dropdown" data-feature="dropdown">
+            <a class="{{ nav_class }}__link" href="#">mehr</a>
+            {{ main_nav(navigation, 'dropdown') }}
+        </li>
+        <li class="primary-nav__item primary-nav__item--featured">
+            <a class="primary-nav__link" href="#">ZEITmagazin</a>
+        </li>
+        {% endif %}
     </ul>
 {%- endmacro %}
 
@@ -24,7 +34,7 @@
 {%- endmacro %}
 
 {% macro main_nav_classifieds(navigation) -%}
-    {{ main_nav(navigation, 'primary-nav-classifieds') }}
+    {{ main_nav(navigation, 'main-nav-classifieds') }}
 {%- endmacro %}
 
 {% macro main_nav_community() -%}

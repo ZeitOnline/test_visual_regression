@@ -1,4 +1,4 @@
-from grokcore.component import adapter, implementer
+import grokcore.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -24,42 +24,41 @@ def auto_select_asset(teaser):
     assets = get_all_assets(teaser)
     if len(assets):
         return assets[0]
-    return None
 
 
 def get_video_asset(teaser):
-    video = zeit.content.video.interfaces.IVideoAsset(teaser)
 
-    if video.video is not None:
-        video.video.highest_rendition = _get_video_source(video.video)
+    def get_video_source(self):
+        try:
+            highest_rendition = self.renditions[0]
+            for rendition in self.renditions:
+                if highest_rendition.frame_width < rendition.frame_width:
+                    highest_rendition = rendition
+            return highest_rendition.url
+        except (AttributeError, IndexError, TypeError):
+            return self.flv_url
 
-    if video.video_2 is not None and video.video is not None:
-        video.video_2.highest_rendition = _get_video_source(video.video_2)
-        return [video.video, video.video_2]
+    asset = zeit.content.video.interfaces.IVideoAsset(teaser)
 
-    return video.video
+    if asset.video is not None:
+        asset.video.highest_rendition = get_video_source(asset.video)
 
+    if asset.video_2 is not None and asset.video is not None:
+        asset.video_2.highest_rendition = get_video_source(asset.video_2)
+        return [asset.video, asset.video_2]
 
-def _get_video_source(self):
-    try:
-        highest_rendition = self.renditions[0]
-        for rendition in self.renditions:
-            if highest_rendition.frame_width < rendition.frame_width:
-                highest_rendition = rendition
-        return highest_rendition.url
-    except (AttributeError, IndexError, TypeError):
-        return self.flv_url
+    return asset.video
 
 
 def get_gallery_asset(teaser):
-    gallery = zeit.content.gallery.interfaces.IGalleryReference(teaser)
-    return gallery.gallery
+    asset = zeit.content.gallery.interfaces.IGalleryReference(teaser)
+    return asset.gallery
 
 
 @zeit.web.register_filter
 def get_image_asset(teaser):
-    image = zeit.content.image.interfaces.IImages(teaser)
-    return image.image
+    asset = zeit.content.image.interfaces.IImages(teaser)
+    return asset.image
 
 
 class TeaserSequence(object):
@@ -107,8 +106,8 @@ class TeaserSequence(object):
             pass
 
 
-@implementer(zeit.web.core.interfaces.ITeaserSequence)
-@adapter(list)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
+@grokcore.component.adapter(list)
 class TeaserList(TeaserSequence):
 
     def __init__(self, context):
@@ -117,22 +116,22 @@ class TeaserList(TeaserSequence):
             self._resolve_child(item)
 
 
-@implementer(zeit.web.core.interfaces.ITeaserSequence)
-@adapter(zeit.content.cp.interfaces.ITeaserBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
 class TeaserBlock(TeaserList):
 
     pass
 
 
-@implementer(zeit.web.core.interfaces.ITeaserSequence)
-@adapter(zeit.content.cp.interfaces.IAutoPilotTeaserBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
+@grokcore.component.adapter(zeit.content.cp.interfaces.IAutoPilotTeaserBlock)
 class AutoPilotTeaserBlock(TeaserBlock):
 
     pass
 
 
-@implementer(zeit.web.core.interfaces.ITeaserSequence)
-@adapter(dict)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
+@grokcore.component.adapter(dict)
 class TeaserDict(TeaserSequence):
 
     def __init__(self, context):
@@ -141,15 +140,15 @@ class TeaserDict(TeaserSequence):
             self._resolve_child(item)
 
 
-@implementer(zeit.web.core.interfaces.ITeaserSequence)
-@adapter(zeit.content.cp.interfaces.ITeaserBar)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBar)
 class TeaserBar(TeaserDict):
 
     pass
 
 
-@implementer(zeit.web.core.interfaces.ITeaser)
-@adapter(TeaserSequence, zeit.cms.interfaces.ICMSContent)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaser)
+@grokcore.component.adapter(TeaserSequence, zeit.cms.interfaces.ICMSContent)
 class Teaser(object):
 
     def __init__(self, block, context):
@@ -159,9 +158,9 @@ class Teaser(object):
         self.context = context
 
 
-@implementer(zeit.web.core.interfaces.ITeaserImage)
-@adapter(zeit.content.image.interfaces.IImageGroup,
-         zeit.content.image.interfaces.IImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.adapter(zeit.content.image.interfaces.IImageGroup,
+                            zeit.content.image.interfaces.IImage)
 class TeaserImage(zeit.web.core.block.BaseImage):
 
     def __init__(self, image_group, image):
@@ -174,6 +173,7 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.copyright = meta.copyrights
         self.image = image
         self.image_group = image_group.uniqueId
+        self.image_pattern = 'default'
         self.layout = ''
         self.src = image.uniqueId
         self.title = meta.title

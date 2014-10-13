@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os.path import abspath, dirname, join
+import os.path
 import pkg_resources
 
 import cssselect
@@ -110,7 +110,9 @@ browsers = {
 
 def test_asset_path(*parts):
     """Return full file-system path for given test asset path."""
-    return abspath(join(dirname(zeit.web.core.__file__), 'data', *parts))
+    return os.path.abspath(
+        os.path.join(os.path.dirname(zeit.web.core.__file__), 'data', *parts)
+    )
 
 
 def test_asset(path):
@@ -338,11 +340,9 @@ class Browser(zope.testbrowser.browser.Browser):
         xpath = self._translator.css_to_xpath(selector)
         if self.document is not None:
             return self.document.xpath(xpath)
-        return None
 
     @property
     def document(self):
         """Return an lxml.html.HtmlElement instance of the response body."""
         if self.contents is not None:
             return lxml.html.document_fromstring(self.contents)
-        return None

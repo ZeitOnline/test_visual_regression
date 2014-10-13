@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+import datetime
 import email.utils
 import itertools
 import logging
@@ -9,24 +9,24 @@ import time
 import urllib2
 import urlparse
 
-from babel.dates import format_datetime
-from lxml import objectify
-from repoze.bitblt.transform import compute_signature
-import jinja2
+import babel.dates
 import jinja2.environment
+import jinja2.loaders
+import jinja2.nodes
 import jinja2.runtime
 import jinja2.utils
-import jinja2.nodes
+import lxml.objectify
 import pyramid.threadlocal
 import pytz
+import repoze.bitblt.transform
 import requests
 import zope.component
 
-from zeit.web.core.utils import defaultdict
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
@@ -61,9 +61,9 @@ class Environment(jinja2.environment.Environment):
 
     def __init__(self, undefined=Undefined, **kw):
         super(Environment, self).__init__(undefined=undefined, **kw)
-        self.filters = defaultdict(self.undefined, self.filters)
-        self.globals = defaultdict(self.undefined, self.globals)
-        self.tests = defaultdict(self.undefined, self.tests)
+        self.filters = zeit.web.core.utils.defaultdict(undefined, self.filters)
+        self.globals = zeit.web.core.utils.defaultdict(undefined, self.globals)
+        self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
     def handle_exception(self, *args, **kw):
         return self.undefined().__html__()
@@ -84,14 +84,14 @@ class Environment(jinja2.environment.Environment):
 @zeit.web.register_filter
 def translate_url(url):
     if url is None:
-        return None
+        return
     # XXX Is it really not possible to get to the actual template variables
     # (like context, view, request) through the jinja2 context?!??
     request = pyramid.threadlocal.get_current_request()
     if request is None:  # XXX should only happen in tests
         return url
 
-    return url.replace("http://xml.zeit.de/", request.route_url('home'), 1)
+    return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
 
 
 @zeit.web.register_filter
@@ -106,7 +106,7 @@ def create_url(obj):
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
-    return format_datetime(obj, formats[type], locale="de_De")
+    return babel.dates.format_datetime(obj, formats[type], locale="de_De")
 
 
 @zeit.web.register_filter
@@ -114,11 +114,11 @@ def format_date_ago(dt, precision=2, past_tense='vor {}',
                     future_tense='in {}'):
     # customization of https://bitbucket.org/russellballestrini/ago :)
     delta = dt
-    if not isinstance(dt, type(timedelta())):
-        delta = datetime.now() - dt
+    if not isinstance(dt, datetime.timedelta):
+        delta = datetime.datetime.now() - dt
 
     the_tense = past_tense
-    if delta < timedelta(0):
+    if delta < datetime.timedelta(0):
         the_tense = future_tense
 
     delta = abs(delta)
@@ -167,7 +167,7 @@ def strftime(t, format):
     try:
         if isinstance(t, time.struct_time) or isinstance(t, tuple):
             return time.strftime(format, t)
-        elif isinstance(t, datetime):
+        elif isinstance(t, datetime.datetime):
             return t.strftime(format)
     except (AttributeError, TypeError, ValueError):
         pass
@@ -242,6 +242,7 @@ default_images_sizes = {
 def default_image_url(image,
                       image_pattern='default'):
     try:
+        image_pattern = getattr(image, 'image_pattern', image_pattern)
         if image_pattern != 'default':
             width, height = default_images_sizes.get(image_pattern, (640, 480))
         elif hasattr(image, 'layout'):
@@ -249,10 +250,11 @@ def default_image_url(image,
         else:
             width, height = default_images_sizes.get(image_pattern, (640, 480))
         # TODO: use secret from settings?
-        signature = compute_signature(width, height, 'time')
+        signature = repoze.bitblt.transform.compute_signature(
+            width, height, 'time')
 
         if image.uniqueId is None:
-            return None
+            return
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(
             image.uniqueId)
@@ -288,7 +290,7 @@ def get_image_scales(scale_source):
         fileobject = urllib2.urlopen(scale_source)
     except urllib2.URLError:
         return
-    for scale in objectify.fromstring(fileobject.read()).iter():
+    for scale in lxml.objectify.fromstring(fileobject.read()).iter():
         name = scale.attrib.get('name')
         width = to_int(scale.attrib.get('width'))
         height = to_int(scale.attrib.get('height'))
@@ -371,7 +373,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         try:
             asset = zeit.cms.interfaces.ICMSContent(unique_id)
         except TypeError:
-            return None
+            return
     else:
         asset = zeit.web.core.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
@@ -394,13 +396,12 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.web.core.interfaces.ITeaserImage)
+        teaser_image.image_pattern = teaser_block.layout.image_pattern
         return teaser_image
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to
         # prevent infinite recursion.
-        if unique_id:
-            return None
-        else:
+        if not unique_id:
             return get_teaser_image(
                 teaser_block, teaser,
                 unique_id=zeit.web.core.template.default_teaser_images)
@@ -420,10 +421,10 @@ def get_image_metadata(image):
         image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
         return image_metadata
     except TypeError:
-        return None
+        return
 
 
-class HTTPLoader(jinja2.BaseLoader):
+class HTTPLoader(jinja2.loaders.BaseLoader):
 
     def __init__(self, url):
         self.url = url
@@ -475,7 +476,7 @@ class CompareModifiedHeader(object):
         # deals with RFC822 timestamps. This solution is sponsored by
         # <https://stackoverflow.com/questions/1568856>.
         if timestamp:
-            return datetime.fromtimestamp(
+            return datetime.datetime.fromtimestamp(
                 email.utils.mktime_tz(email.utils.parsedate_tz(timestamp)),
                 pytz.utc)
 
