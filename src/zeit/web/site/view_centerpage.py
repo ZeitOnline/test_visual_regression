@@ -39,13 +39,7 @@ class Centerpage(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_buzz_mostread(self):
-        stats_path = self.request.registry.settings.node_comment_statistics
-        linkreach = self.request.registry.settings.linkreach_host
-        reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
-
-        area = zeit.web.core.utils.nslist(
-            reach.fetch('mostread', self.ressort, 3))
-
+        area = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
         area.layout.id = zeit.web.core.utils.nsunicode('mostread')
         area.header = zeit.web.core.utils.nsunicode('Meistgelesen')
@@ -53,14 +47,7 @@ class Centerpage(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_buzz_facebook(self):
-        # XXX: Nasty repitition.
-        stats_path = self.request.registry.settings.node_comment_statistics
-        linkreach = self.request.registry.settings.linkreach_host
-        reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
-
-        area = zeit.web.core.utils.nslist(
-            reach.fetch('facebook', self.ressort, 3))
-
+        area = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
         area.header = zeit.web.core.utils.nsunicode('Meistempfohlen')
