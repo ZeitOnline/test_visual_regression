@@ -8,6 +8,8 @@ Change log for zeit.frontend
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
 
+- ZON-1047: Connect linkreach data to buzz teaser collection (feat. ZON-1052)
+
 
 1.4 (2014-10-09)
 ----------------
