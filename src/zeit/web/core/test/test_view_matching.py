@@ -74,6 +74,7 @@ def test_custom_predicate_should_only_match_zmo_content(application):
         'The predicate should not work for ZMO Content, if '
         'rebrush_website_content is set to True.')
 
+
 def test_content_should_be_rendered_with_render_with_header(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry

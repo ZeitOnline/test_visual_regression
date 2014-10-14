@@ -376,5 +376,5 @@ def not_found(request):
 @pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 def generate_render_with_header(context, request):
-    return pyramid.response.Response('OK', 200,
-        headerlist = [('X-render-with', 'default')])
+    return pyramid.response.Response(
+        'OK', 200, headerlist=[('X-render-with', 'default')])
