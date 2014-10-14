@@ -180,13 +180,6 @@ def agatho():
     return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
-@pytest.fixture
-def linkreach():
-    from zeit.web.core.reach import LinkReach
-    return LinkReach(settings['node_comment_statistics'],
-                     settings['linkreach_host'])
-
-
 @pytest.fixture(scope='session')
 def testserver(application, request):
     server = gocept.httpserverlayer.wsgi.Layer()
