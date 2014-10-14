@@ -262,6 +262,7 @@ $zon-search-square-size: em(35px)
 	background-color: $white
 	padding: 0
 	border: $hair solid $zon_light_grey
+	border-right: none
 	font-size: $font-m
 	color: $zon_grey
 	padding-left: $fine
@@ -283,7 +284,6 @@ $zon-search-square-size: em(35px)
 .search__button
 	@extend %main_nav_button
 	+hover_nav_icon(block,$zon_lighter_grey)
-	right: $tiny
 	border-top-right-radius: $micro
 	border-bottom-right-radius: $micro
 	+respond-min($break-tablet-min)
@@ -424,10 +424,10 @@ $zon-search-square-size: em(35px)
 		padding-right: 0
 
 	.primary-nav__link
+		+border-radius(3px)
 		+link-colors($white)
 		background-color: $zon_dark_grey
 		padding: 0 $fine
-		border-radius: $dblhair
 		&:hover
 			+box-shadow(none)
 			background-color: $zon_light_grey
@@ -457,12 +457,11 @@ $zon-search-square-size: em(35px)
 .dropdown
 	display: none
 	+respond-min($break-tablet-min)
-		+border-radius($micro, $micro)
 		+box-shadow(0 $micro $thin rgba(0,0,0,0.05))
 		background: $white
-		border: $zon_light_grey
 		border: $dblhair solid $zon_light_grey
 		left: -$fine
+		min-width: $mediumhuge
 		padding-left: 0
 		position: absolute
 		.dropdown__item

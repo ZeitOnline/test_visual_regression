@@ -10,6 +10,8 @@ Change log for zeit.frontend
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
 
+- FIX: Some small optical tweaks to nav area
+
 
 1.4 (2014-10-09)
 ----------------
