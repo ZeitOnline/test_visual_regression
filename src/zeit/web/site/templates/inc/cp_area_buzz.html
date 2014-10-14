@@ -5,7 +5,7 @@
     <div class="teasers teasers--buzz">
         {% for teaser in view.area_buzz_mostread -%}
             {% set index = loop.index %}
-            {% set layout = view.area_buzz.layout %}
+            {% set layout = view.area_buzz_mostread.layout %}
             {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
                         "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
         {% endfor %}
@@ -13,7 +13,7 @@
     </div>
         {% for teaser in view.area_buzz_facebook -%}
             {% set index = teaser.score %}
-            {% set layout = view.area_buzz.layout %}
+            {% set layout = view.area_buzz_facebook.layout %}
             {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
                         "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
         {% endfor %}
