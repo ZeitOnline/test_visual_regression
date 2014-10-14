@@ -7,6 +7,7 @@ import zope.component
 import zeit.cms.interfaces
 
 import zeit.web
+import zeit.web.core.application
 import zeit.web.core.comments
 import zeit.web.core.utils
 
@@ -39,8 +40,10 @@ def index_score(**ctx):
 class Fetcher(object):
 
     @zeit.web.reify
-    def settings(self):
-        return zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    def _linkreach_host(self):
+        zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return zeit.web.core.application.maybe_convert_egg_url(
+            zwcs.get('linkreach_host', ''))
 
     def __call__(self, service, target, limit=3):
         """Compile a list of popular articles for a specific service.
@@ -56,9 +59,11 @@ class Fetcher(object):
 
         if not 0 < limit < 20:
             raise ValueError('Limit must be between 0 and 10.')
+
         if service in ('path',):
             return self._fetch_path(target)
-        if service in ('comments',):
+
+        elif service in ('comments',):
             postfix = target and '_' + target or ''
             feed = 'most_comments%s.rss' % postfix
             return self._fetch_feed(feed, limit, score_hook=comment_score)
@@ -84,9 +89,8 @@ class Fetcher(object):
         :rtype: list
         """
 
-        host = self.settings.get('linkreach_host')
         params = urllib.urlencode({'limit': limit, 'section': section})
-        url = '%s/zonrank/%s?%s' % (host, service, params)
+        url = '%s/zonrank/%s?%s' % (self._linkreach_host, service, params)
 
         output = zeit.web.core.utils.nslist()
 
@@ -161,7 +165,7 @@ class Fetcher(object):
         """Get share counts for all services for a specific content item."""
 
         params = urllib.urlencode({'url': path})
-        url = '%s/reach?%s' % (self.settings.get('linkreach_host'), params)
+        url = '%s/reach?%s' % (self._linkreach_host, params)
 
         output = zeit.web.core.utils.nsdict()
 
