@@ -2,12 +2,16 @@ import json
 import urllib
 import urllib2
 
+import zope.component
+
 import zeit.cms.interfaces
 
+import zeit.web
 import zeit.web.core.comments
+import zeit.web.core.utils
 
 
-__all__ = ['LinkReach']
+__all__ = ['fetch']
 
 
 def comment_score(**ctx):
@@ -17,9 +21,8 @@ def comment_score(**ctx):
     :internal:
     """
 
-    stats_path = ctx['self'].stats_path
-    stats = zeit.web.core.comments.comments_per_unique_id(stats_path)
-    reverse = dict(reversed(i) for i in stats.iteritems())
+    comments = zeit.web.core.comments.comments_per_unique_id()
+    reverse = dict(reversed(i) for i in comments.iteritems())
     return reverse.get(ctx['path'], 0)
 
 
@@ -33,18 +36,19 @@ def index_score(**ctx):
     return len(ctx.get('output', ())) + 1
 
 
-class LinkReach(object):
+class Fetcher(object):
 
-    def __init__(self, stats_path, linkreach):
-        self.stats_path = stats_path
-        self.linkreach = linkreach
+    @zeit.web.reify
+    def settings(self):
+        return zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-    def fetch(self, service, section, limit):
+    def __call__(self, service, target, limit=3):
         """Compile a list of popular articles for a specific service.
 
         :param str service: One of (comments, mostread, mostsend, twitter,
-                        facebook, googleplus)
-        :param str section: A valid ZEIT ONLINE section as a lowercased string.
+                        facebook, googleplus, path)
+        :param str target: A valid ZEIT ONLINE section as a lowercased string
+                           or content path (if service equals `path`)
         :param int limit: Maximum amount of articles to fetch. Should be < 20.
         :returns: List of zeit.cms.interfaces.ICMSContent objects.
         :raises: ValueError
@@ -52,21 +56,22 @@ class LinkReach(object):
 
         if not 0 < limit < 20:
             raise ValueError('Limit must be between 0 and 10.')
-
+        if service in ('path',):
+            return self._fetch_path(target)
         if service in ('comments',):
-            postfix = section and '_' + section or ''
+            postfix = target and '_' + target or ''
             feed = 'most_comments%s.rss' % postfix
             return self._fetch_feed(feed, limit, score_hook=comment_score)
 
         elif service in ('mostread', 'mostsend'):
-            # Translate to unseparated to underscored term so we can maintain
-            # a consistent naming in templates.
+            # Translate unseparated to underscored term, so we can maintain
+            # a consistent naming scheme in our templates.
             service = service.replace('most', 'most_')
-            feed = 'new_%s/%s_%s.rss' % (service, service, section or 'all')
+            feed = 'new_%s/%s_%s.rss' % (service, service, target or 'all')
             return self._fetch_feed(feed, limit, score_hook=index_score)
 
         elif service in ('twitter', 'facebook', 'googleplus'):
-            return self._fetch_social(service, section, limit)
+            return self._fetch_social(service, target, limit)
 
         else:
             raise ValueError('No service named: ' + service)
@@ -79,9 +84,11 @@ class LinkReach(object):
         :rtype: list
         """
 
+        host = self.settings.get('linkreach_host')
         params = urllib.urlencode({'limit': limit, 'section': section})
-        url = '%s/zonrank/%s?%s' % (self.linkreach, service, params)
-        output = []
+        url = '%s/zonrank/%s?%s' % (host, service, params)
+
+        output = zeit.web.core.utils.nslist()
 
         try:
             raw = urllib2.urlopen(url, timeout=5)
@@ -90,8 +97,7 @@ class LinkReach(object):
             return output
 
         for item in response:
-            path = item.get('location', '')
-            uri = str(zeit.cms.interfaces.ID_NAMESPACE.strip('/') + path)
+            uri = 'http://xml.zeit.de' + item.get('location', '')
 
             try:
                 article = zeit.cms.interfaces.ICMSContent(uri)
@@ -115,7 +121,7 @@ class LinkReach(object):
         :rtype: list
         """
 
-        output = []
+        output = zeit.web.core.utils.nslist()
 
         try:
             url = 'http://xml.zeit.de/import/feeds/%s' % feed
@@ -151,12 +157,20 @@ class LinkReach(object):
 
         return output
 
-    def get_counts_by_url(self, url):
-        """Get share counts for all services for a specific URL."""
-        params = urllib.urlencode({'url': url})
-        url = '%s/reach?%s' % (self.linkreach, params)
+    def _fetch_path(self, path):
+        """Get share counts for all services for a specific content item."""
+
+        params = urllib.urlencode({'url': path})
+        url = '%s/reach?%s' % (self.settings.get('linkreach_host'), params)
+
+        output = zeit.web.core.utils.nsdict()
+
         try:
             response = urllib2.urlopen(url, timeout=5).read()
-            return json.loads(response)
+            output.update(json.loads(response))
         except (urllib2.HTTPError, urllib2.URLError, ValueError):
-            return {}
+            pass
+
+        return output
+
+fetch = Fetcher()
