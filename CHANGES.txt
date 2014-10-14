@@ -1,14 +1,16 @@
-Change log for zeit.frontend
-============================
+Change log for zeit.web
+=======================
 
 1.5 (unreleased)
 ----------------
 
-- ZON-915: Implement fullwidth teaser
+- ZON-1018: Render a render-with header on unrederable content
 
 - ZON-1046: Markup and style for topreads buzzbox
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
+
+- ZON-915: Implement fullwidth teaser
 
 - FIX: Some small optical tweaks to nav area
 
@@ -24,29 +26,29 @@ Change log for zeit.frontend
 1.3 (2014-10-07)
 ----------------
 
-- ZON-1009: Implement new search field
+- BUG-27: Fix missing copyright hover info for column headers
 
-- ZON-929: Implement configurable navigation
+- ZON-1009: Implement new search field
 
 - ZON-1010: Polish navigation
 
-- ZON-941: Implement topic links
+- ZON-929: Implement configurable navigation
 
-- BUG-27: Fix missing copyright hover info for column headers
+- ZON-941: Implement topic links
 
 
 1.2 (2014-10-01)
 ----------------
 
-- BUG-25: Remove clearing from standard assets
+- BUG-18: No tile2 in ipad portrait mode
 
-- ZON-976: Add Open/ Closing functionality for mobile menue
+- BUG-25: Remove clearing from standard assets
 
 - ZON-904: Add Wrapper Selenium Testing
 
 - ZON-939: Add last semantic change property to ZON CP
 
-- BUG-18: No tile2 in ipad portrait mode
+- ZON-976: Add Open/ Closing functionality for mobile menue
 
 
 1.1.1 (2014-09-30)
@@ -65,20 +67,10 @@ Change log for zeit.frontend
 1.0.1 (2014-09-26)
 ------------------
 
+- WEB-344: Adjust GA, add GTM snippets
+
 - ZON-904: Add Wrapper API to enable small modifications
            when ZMO is called from within wrapper
-
-- ZON-972: Add navigation styles for IE
-
-- ZON-994: Add extented selenium testing for navigation
-
-- ZON-944: HTML scaffold
-
-- ZON-977: Module teaser (demo)
-
-- ZON-978: Module small teaser (demo)
-
-- ZON-954: Differences between teasers
 
 - ZON-931: Build search HTML and CSS main framework
 
@@ -92,33 +84,43 @@ Change log for zeit.frontend
 
 - ZON-936: Add puplishers bar part 2
 
+- ZON-944: HTML scaffold
+
 - ZON-950: Integrate navigation into new friedbert structure
 
+- ZON-954: Differences between teasers
+
 - ZON-959: Style mobile navigation view
+
+- ZON-972: Add navigation styles for IE
 
 - ZON-973: Add new icon assets for navigation
 
 - ZON-975: Add and style tagbar under navigation
 
-- WEB-344: Adjust GA, add GTM snippets
+- ZON-977: Module teaser (demo)
+
+- ZON-978: Module small teaser (demo)
+
+- ZON-994: Add extented selenium testing for navigation
 
 
 1.0 (2014-09-19)
 ----------------
 
-- ZON-995: Graft zeit.web.static for egg releases
-
-- ZON-927: Configure grunt tasks
-
-- ZMO-880: Serve ZON 503 page on internal server error
+- BUG-11: Adjust SEO content ID in noscript tag
 
 - ZMO-880: Improve rendering robustness
 
+- ZMO-880: Serve ZON 503 page on internal server error
+
 - ZON-923: Split zeit.frontend into three sub-packages
 
-- BUG-11: Adjust SEO content ID in noscript tag
+- ZON-927: Configure grunt tasks
 
 - ZON-969: Register ZMO views with custom predicates
+
+- ZON-995: Graft zeit.web.static for egg releases
 
 - FIX: Patch reify decorator to deliver accurate traceback
 
