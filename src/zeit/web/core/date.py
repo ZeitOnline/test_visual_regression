@@ -2,7 +2,7 @@
 import datetime
 
 import babel.dates
-import grokcore.component
+import zope.interface
 
 import zeit.web.core.interfaces
 
@@ -20,7 +20,7 @@ def parse_date(date,
         return
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)
+@zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)
 class DeltaTimeEntity(object):
 
     def __init__(self, delta):
@@ -31,7 +31,7 @@ class DeltaTimeEntity(object):
         self.text = None
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IDeltaDaysEntity)
+@zope.interface.implementer(zeit.web.core.interfaces.IDeltaDaysEntity)
 class DeltaDaysEntity(DeltaTimeEntity):
 
     def __init__(self, delta):
@@ -44,7 +44,7 @@ class DeltaDaysEntity(DeltaTimeEntity):
         self.text = date_text.replace('Tage', 'Tagen', 1)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IDeltaHoursEntity)
+@zope.interface.implementer(zeit.web.core.interfaces.IDeltaHoursEntity)
 class DeltaHoursEntity(DeltaTimeEntity):
 
     def __init__(self, delta):
@@ -57,7 +57,7 @@ class DeltaHoursEntity(DeltaTimeEntity):
             babel.dates.timedelta(hours=hours), locale=locale)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IDeltaMinutesEntity)
+@zope.interface.implementer(zeit.web.core.interfaces.IDeltaMinutesEntity)
 class DeltaMinutesEntity(DeltaTimeEntity):
 
     def __init__(self, delta):
@@ -70,7 +70,7 @@ class DeltaMinutesEntity(DeltaTimeEntity):
             babel.dates.timedelta(minutes=minutes), locale=locale)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IDeltaTime)
+@zope.interface.implementer(zeit.web.core.interfaces.IDeltaTime)
 class DeltaTime(object):
 
     def __init__(self, date, base_date=datetime.datetime.utcnow()):
