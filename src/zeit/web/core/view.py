@@ -18,6 +18,7 @@ import zeit.content.image.interfaces
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
+import zeit.web.core.date
 
 log = logging.getLogger(__name__)
 
@@ -378,3 +379,19 @@ def not_found(request):
 def generate_render_with_header(context, request):
     return pyramid.response.Response(
         'OK', 200, headerlist=[('X-render-with', 'default')])
+
+
+@pyramid.view.view_config(route_name='json_delta_time', renderer='json')
+def json_delta_time(request):
+    date = request.GET.get('date', None)
+    if date is None:
+        return pyramid.response.Response(
+            'Missing parameter: date', 412)
+    base_date = request.GET.get('base_date', None)
+    parsed_date = zeit.web.core.date.parse_date(date)
+    if parsed_date is None:
+        return pyramid.response.Response(
+            'Invalid parameter: date', 412)
+    parsed_base_date = zeit.web.core.date.parse_date(base_date)
+    dt = zeit.web.core.date.DeltaTime(parsed_date, parsed_base_date)
+    return {'delta_time': {'text': dt.get_time_since_modification()}}

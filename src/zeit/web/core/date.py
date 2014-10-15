@@ -73,7 +73,9 @@ class DeltaMinutesEntity(DeltaTimeEntity):
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTime)
 class DeltaTime(object):
 
-    def __init__(self, date, base_date=datetime.datetime.utcnow()):
+    def __init__(self, date, base_date=None):
+        if base_date is None:
+            base_date = datetime.datetime.utcnow()
         self.date = date
         self.base_date = base_date
         self.delta = self.date - self.base_date
