@@ -8,7 +8,7 @@ import zeit.web.core.interfaces
 
 
 # Will be made configurable with ZON-1038
-limit = {'days': '3', 'hours': '8'}
+limit = {'days': 3, 'hours': 8}
 locale = 'de_DE'
 
 
@@ -79,7 +79,11 @@ class BabelDate(object):
         self.minutes = zeit.web.core.date.BabelMinutesEntity(self.delta)
 
     def _filter_delta_time(self):
-        pass
+        if self.days.number >= limit['days']:
+            self.hours = None
+            self.minutes = None
+        elif self.hours.number >= limit['hours']:
+            self.minutes = None
 
     def _stringify_delta_time(self):
         pass

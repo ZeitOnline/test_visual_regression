@@ -67,3 +67,31 @@ def test_get_babelfied_delta_time_should_define_date_entities():
     babel_date._get_babelfied_delta_time()
     assert babel_date.hours.number == 4
     assert babel_date.minutes.text == '40 Minuten'
+
+
+def test_filter_delta_time_should_modify_date_on_exceeding_hours_limit():
+    limited_date = zeit.web.core.date.BabelDate(
+        zeit.web.core.date.parse_date(
+            '2014-10-09T19:22:00.1+00:00'),
+        zeit.web.core.date.parse_date(
+            '2014-10-09T10:42:00.1+00:00')
+    )
+    limited_date._get_babelfied_delta_time()
+    limited_date._filter_delta_time()
+    assert limited_date.minutes is None
+    assert limited_date.hours.number == 8
+    assert limited_date.days.number == 0
+
+
+def test_filter_delta_time_should_modify_date_on_exceeding_days_limit():
+    limited_date = zeit.web.core.date.BabelDate(
+        zeit.web.core.date.parse_date(
+            '2014-10-09T19:22:00.1+00:00'),
+        zeit.web.core.date.parse_date(
+            '2014-10-05T14:42:00.1+00:00')
+    )
+    limited_date._get_babelfied_delta_time()
+    limited_date._filter_delta_time()
+    assert limited_date.minutes is None
+    assert limited_date.hours is None
+    assert limited_date.days.number == 4
