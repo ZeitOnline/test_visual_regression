@@ -152,8 +152,10 @@ def test_fullwidth_teaser_should_be_rendered_correctly(
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
     assert len(teaser) == 1, 'No fullwidth teaser'
     assert len(meta_head) == 1, 'No teaser metadata in head'
-    assert meta_def.get('class') == 'teaser__metadata ' \
-        'teaser__metadata--ishead', ('Metadata on last position is not hidden')
+    assert meta_def.get('class') == (
+        'teaser__metadata teaser__metadata--ishead'), (
+        'Metadata on last position is not hidden'
+    )
 
 
 def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
