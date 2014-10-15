@@ -356,3 +356,14 @@ def not_found(request):
         body = 'Status 404: Dokument nicht gefunden.'
     finally:
         return pyramid.response.Response(body, 404)
+
+
+# For some reason we are not able to register ICMSContent on this.
+# We have to register this on every content-view.
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+def generate_render_with_header(context, request):
+    return pyramid.response.Response(
+        'OK', 200, headerlist=[('X-render-with', 'default')])
