@@ -2,12 +2,11 @@
     <div class="fullwidth_teasers">
         {% for layout, teaser, block in view.area_fullwidth -%}
               {% include
-                    ["zeit.web.site:templates/inc/teaser/"+layout+".tpl",
+                    ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
                      "zeit.web.site:templates/inc/teaser/default.tpl"] %}
         {% endfor %}
     </div>
     <div class="teasers teasers--main">
-
         {% for layout, teaser, block in view.area_main -%}
               {% include
                     ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
