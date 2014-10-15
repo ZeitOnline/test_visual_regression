@@ -123,3 +123,12 @@ def test_stringify_delta_time_should_ignore_values_of_zero():
 def test_get_time_since_modification_should_return_delta_time_string():
     stringified_dt = delta_time.get_time_since_modification()
     assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'
+
+
+def test_delta_time_should_default_to_now_for_base_date():
+    dt = zeit.web.core.date.DeltaTime(
+        zeit.web.core.date.parse_date(
+            '2014-10-09T19:22:00.1+00:00'))
+    dt_until_now = dt.get_time_since_modification()
+    assert dt_until_now is not None
+    assert dt_until_now != ''
