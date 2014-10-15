@@ -145,9 +145,12 @@ def test_fullwidth_teaser_should_be_rendered_correctly(
         '%s/zeit-online/fullwidth-teaser' % testserver.url)
 
     teaser_box = browser.cssselect('.fullwidth_teasers')
-    teaser = browser.cssselect('.teaser.teaser--hasmedia.teaser--iscentered')
-    meta_head = browser.cssselect('.teaser__metadata.teaser__metadata--ishead')
-    meta_def = browser.cssselect('.teaser__metadata:last-child')[0]
+    teaser = browser.cssselect('.fullwidth_teasers '
+                               '.teaser.teaser--hasmedia.teaser--iscentered')
+    meta_head = browser.cssselect('.fullwidth_teasers '
+                                  '.teaser__metadata.teaser__metadata--ishead')
+    meta_def = browser.cssselect('.fullwidth_teasers '
+                                 '.teaser__metadata:last-child')[0]
 
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
     assert len(teaser) == 1, 'No fullwidth teaser'
@@ -191,6 +194,53 @@ def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
             'text-align value of teaser text is not correct')
         assert img.value_of_css_property('margin-left') == '0px', (
             'margin-left value of teaser image is not correct')
+
+
+def test_fullwidth_onimage_teaser_should_be_rendered_correctly(
+        testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+
+    teaser_box = browser.cssselect('.fullwidth_teasers')
+    img = browser.cssselect('.fullwidth_teasers > '
+                            '.teaser__media.'
+                            'teaser__media--hasshadow.scaled-image')
+    teaser = browser.cssselect('.fullwidth_teasers > '
+                               '.teaser.teaser--ispositioned.teaser--islight')
+    inlineByline = browser.cssselect('.fullwidth_teasers '
+                                     '.teaser__text > .teaser__byline'
+                                     '.teaser__byline--isinline')
+    meta = browser.cssselect('.fullwidth_teasers .teaser__metadata')
+
+    assert len(teaser_box) == 1, 'No fullwidth teaser box'
+    assert len(img) == 1, 'No fullwidth image'
+    assert len(teaser) == 1, 'No fullwidth teaser'
+    assert len(inlineByline) == 1, 'No inline byline in fullwidth teaser'
+    assert len(meta) == 1, 'No teaser metadata in fullwidth teaser'
+
+
+def test_fullwidth_onimage_teaser_has_right_layout_in_all_screen_sizes(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+    box = driver.find_elements_by_class_name('fullwidth_teasers')[0]
+    byline = box.find_elements_by_class_name('teaser__byline--isinline')[0]
+    img = box.find_elements_by_class_name('teaser__media-item')[0]
+    teaser = box.find_elements_by_class_name('teaser--ispositioned')[0]
+
+    assert box.is_displayed(), 'Fullwidth box is not displayed'
+    assert img.is_displayed(), 'Fullwidth teaser image is not displayed'
+    assert teaser.is_displayed(), 'Fullwidth teaser text is not displayed'
+
+    if screen_size[0] == 320:
+        # test byline mobile
+        assert byline.is_displayed() is False, 'Byline is displayed'
+    else:
+        # test byline desktop, phablet and tablet
+        assert byline.is_displayed(), 'Byline is not displayed'
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
