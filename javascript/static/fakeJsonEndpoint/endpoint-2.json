@@ -1,13 +1,13 @@
 {
   "feed": [
     {
-      "http://localhost:9090/zeit-online/cp-content/article-01": {
+      "http://xml.zeit.de/zeit-online/cp-content/article-01": {
         "comments": "22 Kommentare",
-        "time": "vor 3 Minuten"
+        "time": "vor 2 Minuten"
       },
-      "http://localhost:9090/zeit-online/cp-content/article-02": {
+      "http://xml.zeit.de/zeit-online/cp-content/article-02": {
         "comments": "54 Kommentare",
-        "time": "vor 3 Minuten"
+        "time": "vor 2 Minuten"
       }
     }
   ]

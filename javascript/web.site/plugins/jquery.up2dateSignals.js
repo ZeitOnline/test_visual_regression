@@ -1,7 +1,7 @@
 /* global console */
 
 /**
- * @fileOverview jQuery Plugin for animating text chunks
+ * @fileOverview jQuery Plugin for updating and animated text chunks
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
@@ -23,56 +23,86 @@
     * @memberOf jQuery
     */
     /**
-    * Animates any given text chunk from dom value to new value
-    * @class animateText
+    * Polls JSON Endpoint for text updates, and animates the into the dom
+    * @class up2dateSignals
     * @memberOf jQuery.fn
+    * @requires blast.js
     * @return {object} jQuery-Object for chaining
+    * @todo remove faked endpoints and count in favor of real data
+    *
     */
-    $.fn.animateText = function( options ) {
-        // extend default values with delivered options
+    $.fn.up2dateSignals = function( options ) {
+
         var defaults = $.extend({
+            pollingTime: 30 * 1000, // 30 sec.
             inEffect: { opacity: 0 },
             inVelocity: 500,
             outEffect: { opacity: 1 },
             outVelocity: 500
         }, options),
-        textanimation = function( elem, text ) {
+        // remove this, when the real endpoint is in use
+        fakecounter = 1,
+        // recursive long polling function
+        // works with comet server too, I'd say
+        // polls the json endpoint and triggers the animation
+        poll = function() {
+            setTimeout(function() {
+                $.ajax({
+                    // replace with real endpoint
+                    url: '/js/static/fakeJsonEndpoint/endpoint-' + fakecounter + '.json',
+                    success: function( data ) {
+                        $.each(data.feed[0], function(name, object) {
+                            // update dates
+                            $('[data-uniqueId=\'' + name + '\']')
+                            .find( '.teaser__datetime' )
+                            .trigger( 'signals:update', object.time );
+                            // update comments
+                            $('[data-uniqueId=\'' + name + '\']')
+                            .find( '.teaser__commentcount' )
+                            .trigger( 'signals:update', object.comments );
+                        });
+                        // remove this when real endpoint is in use
+                        fakecounter = fakecounter < 6 ? fakecounter + 1 : 1;
+                    }, dataType: 'json',
+                    complete: function() {
+                        poll();
+                    }
+                });
+            }, defaults.pollingTime);
+        },
+        textAnimation = function( elem, text ) {
             text = text || elem.text();
-            var textarr = text.split( ' ' ),
+            var textArr = text.split(' '),
             elems = elem.blast({
                 delimiter: 'word',
                 aria: true,
                 generateValueClass: true
+            }),
+            elemsToAnimate = [];
+            elems.each( function( i, n ) {
+                if ( $(n).text() !== textArr[i] ) {
+                    elemsToAnimate.push( i );
+                }
             });
-
-            //
-            // elemsToAnimate = [];
-
-            // elems.each( function( i, n ) {
-            //     if ( $(n).text() !== textarr[i] ) {
-            //         elemsToAnimate.push( i );
-            //     }
-            // });
-
-            // elems.each( function( i, n ) {
-            //     if ( $.inArray(i, elemsToAnimate) > -1 ) {
-            //         $(n).animate( defaults.inEffect, defaults.inVelocity, function() {
-            //             $(this)
-            //             .html( textarr[i] )
-            //             .delay( 10 )
-            //             .animate( defaults.outEffect, defaults.outVelocity);
-            //         });
-            //     }
-            // });
+            elems.each( function( i, n ) {
+                if ( $.inArray(i, elemsToAnimate) > -1 ) {
+                    $(n).animate( defaults.inEffect, defaults.inVelocity, function() {
+                        $(this)
+                        .html( textArr[i] )
+                        .delay( 10 )
+                        .animate( defaults.outEffect, defaults.outVelocity);
+                    });
+                }
+            });
         };
-        //run through search element and return object
+
         return this.each( function() {
-            // var counter = 1,
-            // $that = $(this),
-            // interval = window.setInterval(function() {
-            //     counter++;
-            //     textanimation( $that, 'vor ' + counter + ' Minuten' );
-            // }, 10000);
+
+            poll();
+
+            $( '.teaser__datetime, .teaser__commentcount' ).bind('signals:update', function( event, data ) {
+                textAnimation( $(event.target), data );
+            });
 
         });
     };
