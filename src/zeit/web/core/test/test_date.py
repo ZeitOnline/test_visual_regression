@@ -35,6 +35,11 @@ def test_parse_date_should_return_none_on_invalid_date():
     assert parsed_date is None
 
 
+def test_parse_date_should_return_none_without_date():
+    parsed_date = zeit.web.core.date.parse_date(None)
+    assert parsed_date is None
+
+
 def test_delta_time_should_store_delta_time():
     assert type(delta_time.delta) == datetime.timedelta
     assert delta_time.delta == datetime.timedelta(2, 16800)

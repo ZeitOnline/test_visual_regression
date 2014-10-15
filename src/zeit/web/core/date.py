@@ -16,7 +16,7 @@ def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
     try:
         return datetime.datetime.strptime(date, date_format)
-    except ValueError:
+    except (TypeError, ValueError):
         return
 
 
