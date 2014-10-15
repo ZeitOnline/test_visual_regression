@@ -5,6 +5,7 @@ $zon-teaser-standart-height: em(620px)
 $zon-fullwidth-image-height: em(528px)
 
 .teasers
+	position: relative
 	width: 100%
 	+respond-min($break-tablet-min)
 		width: em(480px)
@@ -17,6 +18,8 @@ $zon-fullwidth-image-height: em(528px)
 		width: 100%
 		height: $zon-fullwidth-image-height
 		margin-top: $petite
+		.teaser__media-item
+			max-height: $zon-fullwidth-image-height
 
 .teaser
 	+pie-clearfix
@@ -64,6 +67,7 @@ $zon-fullwidth-image-height: em(528px)
 	.teaser__metadata
 		a, .teaser__datetime:hover
 			border: 0
+		font-weight: normal
 
 .teaser__heading
 	font-size: 1em
