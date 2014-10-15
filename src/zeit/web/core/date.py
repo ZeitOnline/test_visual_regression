@@ -93,7 +93,7 @@ class DeltaTime(object):
     def _stringify_delta_time(self):
         return ' '.join(
             i.text for i in (self.days, self.hours, self.minutes)
-            if i is not None)
+            if i is not None and i.number != 0)
 
     def get_time_since_modification(self):
         self._get_babelfied_delta_time()
