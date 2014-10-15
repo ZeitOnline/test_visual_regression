@@ -1,0 +1,14 @@
+{
+  "feed": [
+    {
+      "http://localhost:9090/zeit-online/cp-content/article-01": {
+        "comments": "14 Kommentare",
+        "time": "vor 2 Minuten"
+      },
+      "http://localhost:9090/zeit-online/cp-content/article-02": {
+        "comments": "26 Kommentare",
+        "time": "vor 2 Minuten"
+      }
+    }
+  ]
+}
