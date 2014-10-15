@@ -1,3 +1,5 @@
+{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
+
 {% block teaser %}
 <article class="teaser {% block teaser_modifier %}{% endblock %}"  data-uniqueId="{{ teaser.uniqueId }}">
     {% block teaser_media_position_before_title %}{% endblock %}
@@ -13,29 +15,32 @@
             {% endblock %}
         </a>
         {% endblock %}
+
+        {% block teaser_metadata_head %}{% endblock %}
     </h2>
 
     {% block teaser_media_position_after_title %}{% endblock %}
 
     {% block teaser_container %}
-    <div class="teaser__container">
+    <div class="teaser__container {% block teaser_container_modifier %}{% endblock %}">
         {% block teaser_text %}
         <p class="teaser__text">{{ teaser.teaserText }}</p>
         {% endblock %}
         {% block teaser_byline %}
         <div class="teaser__byline">ToDo: Insert byline here</div>
         {% endblock %}
-        {% block teaser_metadata %}
+        {% block teaser_metadata_default %}
         <div class="teaser__metadata">
             {% block teaser_datetime %}
-            <time class="teaser__datetime" datetime="2014-09-11 13:16">vor 1 Minute</time>
+                {{ cp.include_teaser_datetime() }}
             {% endblock %}
             {% block teaser_commentcount%}
-            <a class="teaser__commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
+                {{ cp.include_teaser_commentcount(teaser) }}
             {% endblock %}
         </div>
         {% endblock %}
     </div>
-{% endblock %}
+    {% endblock %}
+
 </article>
 {% endblock %}

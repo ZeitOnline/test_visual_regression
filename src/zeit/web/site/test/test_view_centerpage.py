@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 import lxml
 import mock
-
+import pytest
 import zeit.web.site.view_centerpage
+
+
+screen_sizes = ((320, 480, True), (520, 960, True),
+                (768, 1024, False), (980, 1024, False))
+
+
+@pytest.fixture(scope='session', params=screen_sizes)
+def screen_size(request):
+    return request.param
 
 
 def test_area_main_should_filter_teasers():
@@ -63,7 +72,7 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_text')
     assert 'teaser_byline' in tpl.blocks, (
         'No block named teaser_byline')
-    assert 'teaser_metadata' in tpl.blocks, (
+    assert 'teaser_metadata_default' in tpl.blocks, (
         'No block named teaser_metadata')
     assert 'teaser_datetime' in tpl.blocks, (
         'No block named teaser_datetime')
@@ -127,6 +136,63 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
 
     assert teaser_co.text == '9 Kommentare', (
         'No comment text present')
+
+
+def test_fullwidth_teaser_should_be_rendered_correctly(
+        testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/fullwidth-teaser' % testserver.url)
+
+    teaser_box = browser.cssselect('.fullwidth_teasers')
+    teaser = browser.cssselect('.teaser.teaser--hasmedia.teaser--iscentered')
+    meta_head = browser.cssselect('.teaser__metadata.teaser__metadata--ishead')
+    meta_def = browser.cssselect('.teaser__metadata:last-child')[0]
+
+    assert len(teaser_box) == 1, 'No fullwidth teaser box'
+    assert len(teaser) == 1, 'No fullwidth teaser'
+    assert len(meta_head) == 1, 'No teaser metadata in head'
+    assert meta_def.get('class') == (
+        'teaser__metadata teaser__metadata--ishead'), (
+        'Metadata on last position is not hidden'
+    )
+
+
+def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    box = driver.find_elements_by_class_name('fullwidth_teasers')[0]
+    header = box.find_elements_by_class_name('teaser__heading--issized')[0]
+    img = box.find_elements_by_class_name('teaser__media--fullwidth_mobile')[0]
+    text = box.find_elements_by_class_name('teaser__container--issized')[0]
+
+    if screen_size[0] == 320:
+        # test mobile css settings
+        assert header.value_of_css_property('text-align') == 'start', (
+            'text-align value of teaser header is not correct')
+        assert text.value_of_css_property('text-align') == 'start', (
+            'text-align value of teaser text is not correct')
+        assert img.value_of_css_property('margin-left') == '-20px', (
+            'margin-left value of teaser image is not correct')
+    elif screen_size[0] == 520:
+        # test phablet css settings
+        assert header.value_of_css_property('text-align') == 'center', (
+            'text-align value of teaser header is not correct')
+        assert text.value_of_css_property('text-align') == 'start', (
+            'text-align value of teaser text is not correct')
+        assert img.value_of_css_property('margin-left') == '-20px', (
+            'margin-left value of teaser image is not correct')
+    else:
+        # test desktop and tablet css settings
+        assert header.value_of_css_property('text-align') == 'center', (
+            'text-align value of teaser header is not correct')
+        assert text.value_of_css_property('text-align') == 'center', (
+            'text-align value of teaser text is not correct')
+        assert img.value_of_css_property('margin-left') == '0px', (
+            'margin-left value of teaser image is not correct')
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):

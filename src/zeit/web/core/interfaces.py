@@ -2,6 +2,42 @@ import zope.interface
 import zope.interface.common.sequence
 
 
+class IDeltaTime(zope.interface.Interface):
+    """A date that has been processed through babel which is actually used
+    for delta time representations.
+    """
+
+    days = zope.interface.Attribute(
+        'A delta days entity')
+    hours = zope.interface.Attribute(
+        'A delta hours entity')
+    minutes = zope.interface.Attribute(
+        'A delta minutes entity')
+
+
+class IDeltaTimeEntity(zope.interface.Interface):
+    """An entity of a babelfied date from a delta time"""
+
+    delta = zope.interface.Attribute(
+        'A delta time as base for delta time derivates')
+    number = zope.interface.Attribute(
+        'An integer representation of a delta time')
+    text = zope.interface.Attribute(
+        'A text representation of a delta time')
+
+
+class IDeltaDaysEntity(IDeltaTimeEntity):
+    """A babelfied days entity from a delta time"""
+
+
+class IDeltaHoursEntity(IDeltaTimeEntity):
+    """A babelfied hours entity from a delta time"""
+
+
+class IDeltaMinutesEntity(IDeltaTimeEntity):
+    """An babelfied minutes entity from a delta time"""
+
+
 class INavigation(zope.interface.Interface):
     """A navigation bar containing navigation items"""
 
