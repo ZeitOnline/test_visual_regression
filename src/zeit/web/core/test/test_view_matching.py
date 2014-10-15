@@ -73,3 +73,20 @@ def test_custom_predicate_should_only_match_zmo_content(application):
     assert view_wrapper.__predicates__[0](context, request) is False, (
         'The predicate should not work for ZMO Content, if '
         'rebrush_website_content is set to True.')
+
+
+def test_content_should_be_rendered_with_render_with_header(application):
+    pviews = pyramid.scripts.pviews.PViewsCommand([])
+    registry = application.zeit_app.config.registry
+    views = pviews._find_view(
+        '/zeit-online/render-with-header', registry).views
+
+    def render_with_view(pviews):
+        for view in pviews:
+            if view[1].__dict__['__original_view__'] == (
+                    zeit.web.core.view.generate_render_with_header):
+                return view[1]
+
+    view_wrapper = render_with_view(views)
+    assert view_wrapper is not None, (
+        'We do not have a render-with view')

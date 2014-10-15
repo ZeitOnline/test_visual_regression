@@ -5,7 +5,7 @@
     <!--[if gt IE 8]><!-->
     <noscript data-src="{{ image | default_image_url }}">
     <!--<![endif]-->
-        <a class="{% block mediablock_link %}{% endblock %}" title="{{ image.attr_title | default('') }}" href="{{ image.href }}">
+        <a class="{% block mediablock_link %}{% endblock %}" title="{{ image.attr_title | default('') }}" href="{{ teaser.uniqueId | translate_url }}">
             <img class="{% block mediablock_item %}{% endblock %}" alt="{{ image.attr_title }}"  src="{{ image | default_image_url }}" data-ratio="{{ image.ratio }}">
         </a>
     <!--[if gt IE 8]><!-->
