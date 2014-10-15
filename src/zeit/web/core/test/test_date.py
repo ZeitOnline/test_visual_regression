@@ -48,7 +48,7 @@ def test_babel_days_entity_should_raise_type_error_on_invalid_param():
 def test_babel_days_entity_should_be_created():
     bde = zeit.web.core.date.BabelDaysEntity(babel_date.delta)
     assert bde.number == 2
-    assert bde.text == '2 Tage'
+    assert bde.text == '2 Tagen'
 
 
 def test_babel_hours_entity_should_be_created():
@@ -95,3 +95,14 @@ def test_filter_delta_time_should_modify_date_on_exceeding_days_limit():
     assert limited_date.minutes is None
     assert limited_date.hours is None
     assert limited_date.days.number == 4
+
+
+def test_stringify_delta_time_should_return_string_representation_of_delta():
+    babel_date._get_babelfied_delta_time()
+    stringified_dt = babel_date._stringify_delta_time()
+    assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'
+
+
+def test_get_time_since_modification_should_return_delta_time_string():
+    stringified_dt = babel_date.get_time_since_modification()
+    assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'

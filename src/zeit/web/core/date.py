@@ -35,8 +35,11 @@ class BabelDaysEntity(BabelDateEntity):
     def __init__(self, delta):
         super(BabelDaysEntity, self).__init__(delta)
         self.number = self.delta.days
-        self.text = babel.dates.format_timedelta(
+        date_text = babel.dates.format_timedelta(
             babel.dates.timedelta(days=self.delta.days), locale=locale)
+        # Dirty hack, since babel does not understand
+        # german cases (as in Kasus)
+        self.text = date_text.replace('Tage', 'Tagen', 1)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IBabelHoursEntity)
@@ -86,10 +89,12 @@ class BabelDate(object):
             self.minutes = None
 
     def _stringify_delta_time(self):
-        pass
+        return ' '.join(
+            i.text for i in (self.days, self.hours, self.minutes)
+            if i is not None)
 
     def get_time_since_modification(self):
         self._get_babelfied_delta_time()
         self._filter_delta_time()
-        self._stringify_delta_time()
-        return
+        stringified_dt = self._stringify_delta_time()
+        return stringified_dt
