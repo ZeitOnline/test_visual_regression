@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-import logging
 import datetime
+import json
+import logging
 import urlparse
 
-import pyramid.view
 import babel.dates
 import pyramid.response
+import pyramid.view
 import requests
 
 import zeit.cms.workflow.interfaces
@@ -383,15 +384,49 @@ def generate_render_with_header(context, request):
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')
 def json_delta_time(request):
+    unique_id = request.GET.get('unique_id', None)
     date = request.GET.get('date', None)
-    if date is None:
-        return pyramid.response.Response(
-            'Missing parameter: date', 412)
     base_date = request.GET.get('base_date', None)
+    if unique_id is not None:
+        return json_delta_time_from_unique_id(request, unique_id, base_date)
+    elif date is not None:
+        return json_delta_time_from_date(date, base_date)
+    else:
+        return pyramid.response.Response(
+            'Missing parameter: uniqueId or date', 412)
+
+
+def json_delta_time_from_date(date, base_date):
     parsed_date = zeit.web.core.date.parse_date(date)
     if parsed_date is None:
         return pyramid.response.Response(
             'Invalid parameter: date', 412)
     parsed_base_date = zeit.web.core.date.parse_date(base_date)
     dt = zeit.web.core.date.DeltaTime(parsed_date, parsed_base_date)
-    return {'delta_time': {'text': dt.get_time_since_modification()}}
+    return json.dumps(
+        {'delta_time': {'time': dt.get_time_since_modification()}})
+
+
+def json_delta_time_from_unique_id(request, unique_id, base_date):
+    try:
+        content = zeit.cms.interfaces.ICMSContent(unique_id)
+        cp = zeit.web.site.view_centerpage.Centerpage(content, request)
+    except TypeError:
+        return pyramid.response.Response(
+            'Invalid resource', 500)
+    json_dt = {'delta_time': []}
+    for teaser in cp.area_main:
+        # 1. Try to get date_last_published_semantic
+        # 2. Try to get date_last_published
+        # 3. Default to None
+        mod_date = getattr(
+            zeit.cms.workflow.interfaces.IPublishInfo(teaser[1]),
+            'date_last_published_semantic', getattr(
+                zeit.cms.workflow.interfaces.IPublishInfo(teaser[1]),
+                'date_last_published', None))
+        if mod_date is None:
+            continue
+        dt = zeit.web.core.date.DeltaTime(mod_date.replace(tzinfo=None))
+        json_dt['delta_time'].append(
+            {teaser[1].uniqueId: {'time': dt.get_time_since_modification()}})
+    return json.dumps(json_dt)
