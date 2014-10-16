@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import json
 import logging
 
 import babel.dates
@@ -393,8 +392,7 @@ def json_delta_time_from_date(date, parsed_base_date):
         return pyramid.response.Response(
             'Invalid parameter: date', 412)
     dt = zeit.web.core.date.DeltaTime(parsed_date, parsed_base_date)
-    return json.dumps(
-        {'delta_time': {'time': dt.get_time_since_modification()}})
+    return {'delta_time': {'time': dt.get_time_since_modification()}}
 
 
 def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
@@ -420,4 +418,4 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
             mod_date.replace(tzinfo=None), parsed_base_date)
         json_dt['delta_time'].append(
             {teaser[1].uniqueId: {'time': dt.get_time_since_modification()}})
-    return json.dumps(json_dt)
+    return json_dt
