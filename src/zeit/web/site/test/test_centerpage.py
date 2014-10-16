@@ -28,5 +28,5 @@ def test_buzz_facebook_should_render_with_correct_scores(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
     assert len(browser.cssselect('.teaser--buzz-facebook')) == 3
-    media = browser.cssselect('.annotated-icon--buzz-facebook .label')
+    media = browser.cssselect('.annotated-icon--buzz-facebook .annotated-icon__label')
     assert [int(m.text.strip('\n    ')) for m in media] == [16674, 5780, 2391]
