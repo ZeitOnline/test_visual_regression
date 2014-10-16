@@ -1,6 +1,9 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
+
+{% block teaser_media_position_before_teaser %}{% endblock %}
+
 <article class="teaser {% block teaser_modifier %}{% endblock %}">
     {% block teaser_media_position_before_title %}{% endblock %}
 
@@ -24,10 +27,10 @@
     {% block teaser_container %}
     <div class="teaser__container {% block teaser_container_modifier %}{% endblock %}">
         {% block teaser_text %}
-        <p class="teaser__text">{{ teaser.teaserText }}</p>
+        <p class="teaser__text">{{ teaser.teaserText }}{% block teaser_byline_inner %}{% endblock %}</p>
         {% endblock %}
         {% block teaser_byline %}
-        <div class="teaser__byline">ToDo: Insert byline here</div>
+            {{ cp.include_teaser_byline(teaser) }}
         {% endblock %}
         {% block teaser_metadata_default %}
         <div class="teaser__metadata">

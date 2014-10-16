@@ -51,16 +51,6 @@ class Base(object):
         self.request.response.headers.add(
             'X-ZMOVersion', self.request.registry.settings.zmo_version)
 
-    def teaser_get_commentcount(self, uniqueId):
-        try:
-            index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = zeit.web.core.comments.comments_per_unique_id(
-                self.request.registry.settings.node_comment_statistics)[index]
-            if int(count) >= 5:
-                return count
-        except KeyError:
-            return
-
     @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()

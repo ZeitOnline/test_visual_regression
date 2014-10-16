@@ -1,164 +1,180 @@
-import datetime
 import json
 import urllib
 import urllib2
 
-import babel.dates
-import colander
+import zope.component
 
 import zeit.cms.interfaces
 
+import zeit.web
+import zeit.web.core.application
 import zeit.web.core.comments
+import zeit.web.core.utils
 
 
-class UnavailableSectionException(Exception):
-    pass
+__all__ = ['fetch']
 
 
-class UnavailableServiceException(Exception):
-    pass
+def comment_score(**ctx):
+    """Hook function to assign a score by an articles comment count.
+
+    :param ctx: Linkreach._fetch_feed locals context
+    :internal:
+    """
+
+    comments = zeit.web.core.comments.comments_per_unique_id()
+    reverse = dict(reversed(i) for i in comments.iteritems())
+    return reverse.get(ctx['path'], 0)
 
 
-class LimitOutOfBoundsException(Exception):
-    pass
+def index_score(**ctx):
+    """Hook function to assign a score by an articles index.
+
+    :param ctx: Linkreach._fetch_feed locals context
+    :internal:
+    """
+
+    return len(ctx.get('output', ())) + 1
 
 
-class LinkReach(object):
+class Fetcher(object):
 
-    services = ['twitter', 'facebook', 'googleplus']
-    sections = ['zeit-magazin']
+    @zeit.web.reify
+    def _linkreach_host(self):
+        zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return zeit.web.core.application.maybe_convert_egg_url(
+            zwcs.get('linkreach_host', ''))
 
-    def __init__(self, stats_path, linkreach):
-        self.stats_path = stats_path
-        self.linkreach = linkreach
+    def __call__(self, service, target, limit=3):
+        """Compile a list of popular articles for a specific service.
 
-    def fetch_service(self, service, limit, section='zeit-magazin'):
-        """Compile a list of popular articles for a specific service."""
-        if service == 'comments':
-            return self.fetch_comments(limit, section=section)
+        :param str service: One of (comments, mostread, mostsend, twitter,
+                        facebook, googleplus, path)
+        :param str target: A valid ZEIT ONLINE section as a lowercased string
+                           or content path (if service equals `path`)
+        :param int limit: Maximum amount of articles to fetch. Should be < 20.
+        :returns: List of zeit.cms.interfaces.ICMSContent objects.
+        :raises: ValueError
+        """
 
-        if section not in self.sections:
-            raise UnavailableSectionException('No section named: ' + section)
+        if not 0 < limit < 20:
+            raise ValueError('Limit must be between 0 and 10.')
 
-        if service not in self.services:
-            raise UnavailableServiceException('No service named: ' + service)
+        if service in ('path',):
+            return self._fetch_path(target)
 
-        if not 0 < limit < 10:
-            raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
+        elif service in ('comments',):
+            postfix = target and '_' + target or ''
+            feed = 'most_comments%s.rss' % postfix
+            return self._fetch_feed(feed, limit, score_hook=comment_score)
+
+        elif service in ('mostread', 'mostsend'):
+            # Translate unseparated to underscored term, so we can maintain
+            # a consistent naming scheme in our templates.
+            service = service.replace('most', 'most_')
+            feed = 'new_%s/%s_%s.rss' % (service, service, target or 'all')
+            return self._fetch_feed(feed, limit, score_hook=index_score)
+
+        elif service in ('twitter', 'facebook', 'googleplus'):
+            return self._fetch_social(service, target, limit)
+
+        else:
+            raise ValueError('No service named: ' + service)
+
+    def _fetch_social(self, service, section, limit):
+        """Compile a list of articles popular on a social media network.
+
+        :param str service: Service ID, one of (facebook, twitter, googleplus)
+        :param int limit: Maximum amount of articles to fetch.
+        :rtype: list
+        """
 
         params = urllib.urlencode({'limit': limit, 'section': section})
-        url = '%s/zonrank/%s?%s' % (self.linkreach, service, params)
+        url = '%s/zonrank/%s?%s' % (self._linkreach_host, service, params)
+
+        output = zeit.web.core.utils.nslist()
 
         try:
-            response = urllib2.urlopen(url, timeout=4)
-            response = json.load(response)
+            raw = urllib2.urlopen(url, timeout=5)
+            response = json.load(raw)
         except (urllib2.HTTPError, urllib2.URLError, ValueError):
-            return []
+            return output
 
-        return DataSequence().deserialize(response)
+        for item in response:
+            uri = 'http://xml.zeit.de' + item.get('location', '')
 
-    def fetch_comments(self, limit, section='zeit-magazin'):
-        """Compile a list of most commented on articles."""
-        if section not in self.sections:
-            raise UnavailableSectionException('No section named: ' + section)
+            try:
+                article = zeit.cms.interfaces.ICMSContent(uri)
+            except UserWarning:  # TypeError:
+                # Ignore item if CMS lookup fails.
+                continue
 
-        if not 0 < limit < 10:
-            raise LimitOutOfBoundsException('Limit must be between 0 and 10.')
+            article.score = item.get('score', 0)
+
+            output.append(article)
+
+        return output
+
+    def _fetch_feed(self, feed, limit, score_hook=lambda **ctx: 0):
+        """Compile a list of articles from an RSS feed.
+
+        :param str feed: Name of feed located in {DAV}/import/feeds/
+        :param int limit: Maximum amount of articles to fetch.
+        :param score_hook: Callable to provide article score. Should accept
+                           context keyword args.
+        :rtype: list
+        """
+
+        output = zeit.web.core.utils.nslist()
 
         try:
-            url = 'http://xml.zeit.de/import/feeds/most_comments_%s.rss'
-            feed = zeit.cms.interfaces.ICMSContent(url % section)
+            url = 'http://xml.zeit.de/import/feeds/%s' % feed
+            feed = zeit.cms.interfaces.ICMSContent(url)
         except TypeError:
-            return []
-
-        output = []
+            # Return empty-handed if feed is unavailable.
+            return output
 
         iterator = iter(feed.xml.xpath('/rss/channel/item'))
 
         while len(output) < limit:
-            # Compile list of most commented on articles.
-
             try:
                 rss_node = iterator.next()
             except StopIteration:
-                # Abort compiling comment list if feed is exhausted.
+                # Abort compiling article list if feed is exhausted.
                 break
 
-            web_path = rss_node.xpath('guid/text()')[0]
-            rel_path = web_path[18:]
-            xml_path = 'http://xml.zeit.de' + rel_path
+            links = rss_node.xpath('link/text()')
+            if not len(links):
+                continue
+            path = links[0].replace('http://www.zeit.de', '', 1)
+            uri = str(zeit.cms.interfaces.ID_NAMESPACE.strip('/') + path)
 
             try:
-                article = zeit.cms.interfaces.ICMSContent(xml_path)
+                article = zeit.cms.interfaces.ICMSContent(uri)
             except TypeError:
                 # Ignore item if CMS lookup fails.
                 continue
 
-            try:
-                score = zeit.web.core.comments.comments_per_unique_id(
-                    self.stats_path)[rel_path]
-            except KeyError:
-                # Ignore item if comment count lookup fails.
-                score = 0
+            article.score = score_hook(**locals())
 
-            item = dict(location=rel_path,
-                        score=score,
-                        supertitle=article.supertitle,
-                        title=article.title,
-                        subtitle=article.subtitle,
-                        section=article.ressort
-                        )
-            output.append(item)
+            output.append(article)
 
-        return DataSequence().deserialize(output)
+        return output
 
-    def get_counts_by_url(self, url):
-        """Get share counts for all services for a specific URL."""
-        params = urllib.urlencode({'url': url})
-        url = '%s/reach?%s' % (self.linkreach, params)
+    def _fetch_path(self, path):
+        """Get share counts for all services for a specific content item."""
+
+        params = urllib.urlencode({'url': path})
+        url = '%s/reach?%s' % (self._linkreach_host, params)
+
+        output = zeit.web.core.utils.nsdict()
+
         try:
-            response = urllib2.urlopen(url, timeout=4).read()
-            return json.loads(response)
+            response = urllib2.urlopen(url, timeout=5).read()
+            output.update(json.loads(response))
         except (urllib2.HTTPError, urllib2.URLError, ValueError):
-            return {}
+            pass
 
+        return output
 
-def _prepare_date(value):
-    if not isinstance(value, int):
-        return
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    return datetime.datetime.fromtimestamp(value / 1000, tz)
-
-
-class Entry(colander.MappingSchema):
-    score = colander.SchemaNode(colander.Int(),
-                                missing=colander.drop
-                                )
-    location = colander.SchemaNode(colander.String(),
-                                   missing=colander.drop
-                                   )
-    supertitle = colander.SchemaNode(colander.String(),
-                                     missing=colander.drop
-                                     )
-    title = colander.SchemaNode(colander.String(),
-                                missing=colander.drop
-                                )
-    subtitle = colander.SchemaNode(colander.String(),
-                                   missing=colander.drop
-                                   )
-    timestamp = colander.SchemaNode(colander.Int(),
-                                    preparer=_prepare_date,
-                                    missing=colander.drop
-                                    )
-    section = colander.SchemaNode(colander.String(),
-                                  missing=colander.drop
-                                  )
-
-    fetchedAt = colander.SchemaNode(colander.Int(),
-                                    preparer=_prepare_date,
-                                    missing=colander.drop
-                                    )
-
-
-class DataSequence(colander.SequenceSchema):
-    entry = Entry()
+fetch = Fetcher()

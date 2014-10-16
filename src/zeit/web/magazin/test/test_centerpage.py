@@ -640,7 +640,7 @@ def test_default_image_url_should_return_None_when_no_uniqueId_is_given(
 
 
 def test_default_teaser_should_return_default_teaser_image(
-        testserver, testbrowser):
+        application, testserver, testbrowser):
     cp = 'http://xml.zeit.de/centerpage/lebensart'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
@@ -826,8 +826,9 @@ def test_cp_informatives_should_have_no_blocks(application):
 def test_cp_teaser_should_have_comment_count(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    assert '<span class="cp_comment__count__wrap'\
-        ' icon-comments-count">22</span>' in browser.contents
+    counts = browser.cssselect(
+        'span.cp_comment__count__wrap.icon-comments-count')
+    assert int(counts[0].text) == 150
 
 
 def test_centerpage_should_have_monothematic_block(application):
