@@ -1,6 +1,8 @@
 import pytest
 import urllib2
 
+import zeit.web.core.date
+
 
 def test_json_delta_time_from_date_should_return_delta_time(testserver,
                                                             testbrowser):
@@ -30,7 +32,11 @@ def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
 
 
 def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
-                                                                 testbrowser):
+                                                                 testbrowser,
+                                                                 monkeypatch):
+    now = zeit.web.core.date.parse_date('2014-10-18T16:53:59.780412+00:00')
+    monkeypatch.setattr(zeit.web.core.date, 'utcnow', lambda: now)
+
     browser = testbrowser(
         '{}/json/delta_time?'
         'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
@@ -38,9 +44,9 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
     assert browser.contents == (
         '{"delta_time": ['
         '{"http://xml.zeit.de/zeit-online/cp-content/article-01": '
-        '{"time": "vor 2 Tagen 23 Stunden"}}, '
+        '{"time": "vor 4 Tagen 22 Stunden"}}, '
         '{"http://xml.zeit.de/zeit-online/cp-content/article-02": '
-        '{"time": "vor 2 Tagen 23 Stunden"}}]}')
+        '{"time": "vor 4 Tagen 22 Stunden"}}]}')
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(

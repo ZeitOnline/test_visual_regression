@@ -12,6 +12,12 @@ limit = {'days': 3, 'hours': 8}
 locale = 'de_DE'
 
 
+def utcnow():
+    # XXX Wrapper function needed on module level, because we need to patch
+    #     it in tests.
+    datetime.datetime.utcnow()
+
+
 def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
     try:
@@ -78,7 +84,7 @@ class DeltaTime(object):
 
     def __init__(self, date, base_date=None):
         self.date = date
-        self.base_date = base_date or datetime.datetime.utcnow()
+        self.base_date = base_date or utcnow()
         self.delta = self.date - self.base_date
 
     def _get_babelfied_delta_time(self):
