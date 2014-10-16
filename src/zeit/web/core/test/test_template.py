@@ -215,3 +215,14 @@ def test_filter_strftime_works_as_expected():
     assert strftime(tuple(now.timetuple()), '%s') == now.strftime('%s')
     assert strftime(now, '%s') == now.strftime('%s')
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
+
+
+def test_cp_teaser_with_comments_should_get_count(testserver, testbrowser):
+    comment_count = zeit.web.core.template.get_teaser_commentcount(
+        'http://xml.zeit.de/centerpage/article_image_asset')
+    assert comment_count == '125'
+    # For teaser uniquId with no entry in node-comment-statistics
+    # teaser_get_commentcount should return None
+    comment_count = zeit.web.core.template.get_teaser_commentcount(
+        'http://xml.zeit.de/does_not_exist')
+    assert comment_count is None

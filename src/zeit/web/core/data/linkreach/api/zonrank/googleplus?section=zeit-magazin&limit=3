@@ -1,6 +1,6 @@
 [
     {
-        "location": "/digital/internet/2014-04/google-street-view-veraltet",
+        "location": "/artikel/04",
         "score": "182",
         "supertitle": "Google",
         "title": "Street View zeigt eine längst vergangene Welt",
@@ -10,7 +10,7 @@
         "fetchedAt": 1396855803276
     },
     {
-        "location": "/wirtschaft/2014-04/hartmut-mehdorn-flughafen-ber-brandschutz-siemens",
+        "location": "/artikel/05",
         "score": "75",
         "supertitle": "Flughafen Berlin ",
         "title": "BER könnte Baugenehmigung verlieren",
@@ -20,7 +20,7 @@
         "fetchedAt": 1397034902070
     },
     {
-        "location": "/gesellschaft/zeitgeschehen/2014-04/afghanistan-fotografin-niedringhaus-tod",
+        "location": "/artikel/06",
         "score": "69",
         "supertitle": "Anja Niedringhaus",
         "title": "Deutsche Fotografin in Afghanistan erschossen",
