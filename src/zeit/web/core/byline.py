@@ -16,14 +16,16 @@ class IRenderByline(zope.interface.Interface):
 @grokcore.component.implementer(IRenderByline)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class RenderByline(object):
-
+    # ToDo: This should be configured by a XMLSource
+    # So far the given Simple-XML-Source in vivi does not offer
+    # what we need.
     genre = ['glosse', 'reportage', 'nachricht', 'analyse']
     display_fe = ['glosse', 'kommentar', 'leserartikel', 'gastbeitrag',
                   'interview']
     eine_n = lambda self, x: 'Eine ' if x in self.genre else 'Ein '
-    byline = []
 
     def __init__(self, content):
+        self.byline = []
         self._genre(content)
         self._von(content)
         self._interview_exception(content)
