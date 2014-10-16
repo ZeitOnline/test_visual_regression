@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-915: Implement fullwidth teaser
 
+- ZON-1051: Markup and style for facebook buzzbox
+
 - FIX: Some small optical tweaks to nav area
 
 
