@@ -2,7 +2,6 @@
 import datetime
 import json
 import logging
-import urlparse
 
 import babel.dates
 import pyramid.response
@@ -377,27 +376,28 @@ def json_delta_time(request):
     unique_id = request.GET.get('unique_id', None)
     date = request.GET.get('date', None)
     base_date = request.GET.get('base_date', None)
+    parsed_base_date = zeit.web.core.date.parse_date(base_date)
     if unique_id is not None:
-        return json_delta_time_from_unique_id(request, unique_id, base_date)
+        return json_delta_time_from_unique_id(
+            request, unique_id, parsed_base_date)
     elif date is not None:
-        return json_delta_time_from_date(date, base_date)
+        return json_delta_time_from_date(date, parsed_base_date)
     else:
         return pyramid.response.Response(
             'Missing parameter: uniqueId or date', 412)
 
 
-def json_delta_time_from_date(date, base_date):
+def json_delta_time_from_date(date, parsed_base_date):
     parsed_date = zeit.web.core.date.parse_date(date)
     if parsed_date is None:
         return pyramid.response.Response(
             'Invalid parameter: date', 412)
-    parsed_base_date = zeit.web.core.date.parse_date(base_date)
     dt = zeit.web.core.date.DeltaTime(parsed_date, parsed_base_date)
     return json.dumps(
         {'delta_time': {'time': dt.get_time_since_modification()}})
 
 
-def json_delta_time_from_unique_id(request, unique_id, base_date):
+def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     try:
         content = zeit.cms.interfaces.ICMSContent(unique_id)
         cp = zeit.web.site.view_centerpage.Centerpage(content, request)
@@ -416,7 +416,8 @@ def json_delta_time_from_unique_id(request, unique_id, base_date):
                 'date_last_published', None))
         if mod_date is None:
             continue
-        dt = zeit.web.core.date.DeltaTime(mod_date.replace(tzinfo=None))
+        dt = zeit.web.core.date.DeltaTime(
+            mod_date.replace(tzinfo=None), parsed_base_date)
         json_dt['delta_time'].append(
             {teaser[1].uniqueId: {'time': dt.get_time_since_modification()}})
     return json.dumps(json_dt)

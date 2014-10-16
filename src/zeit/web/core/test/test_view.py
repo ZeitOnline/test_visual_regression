@@ -54,3 +54,12 @@ def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
     with pytest.raises(urllib2.HTTPError):
         testbrowser('{}/json/delta_time?unique_id='
                     'http://xml.zeit.de/artikel/01'.format(testserver.url))
+
+
+def test_json_delta_time_from_unique_id_should_use_custom_base_time(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '{}/json/delta_time?base_date=2014-10-14T09%3A06%3A45.95%2B00%3A00&'
+        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
+            testserver.url))
+    assert 'vor 1 Tag 5 Stunden 47 Minuten' in browser.contents
