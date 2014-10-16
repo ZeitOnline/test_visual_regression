@@ -81,11 +81,11 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(jinja2_env):
+def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
-    teaser = mock.Mock()
+    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     teaser.uniqueId = 'http://xml.zeit.de/myhref'
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
@@ -116,7 +116,7 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
     assert teaser_text.text == 'teaserText', 'No teaser text'
 
     teaser_byline = html('div.teaser__container > span.teaser__byline')[0]
-    assert teaser_byline.text == 'ToDo: Insert byline here', (
+    assert teaser_byline.text == 'Von Anne Mustermann', (
         'No byline present')
 
     assert len(html('div.teaser__container > div.teaser__metadata')) == 1, (
@@ -239,10 +239,10 @@ def test_fullwidth_onimage_teaser_has_right_layout_in_all_screen_sizes(
 
     if screen_size[0] == 320:
         # test byline mobile
-        assert byline.is_displayed() is False, 'Byline is displayed'
+        assert byline.is_displayed() is False, 'Mobile byline is displayed'
     else:
         # test byline desktop, phablet and tablet
-        assert byline.is_displayed(), 'Byline is not displayed'
+        assert byline.is_displayed(), 'Desktop byline is not displayed'
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):

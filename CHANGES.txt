@@ -14,7 +14,11 @@ Change log for zeit.web
 
 - ZON-1047: Connect linkreach data to buzz teaser collection (feat. ZON-1052)
 
+- ZON-1032: Provide byline module
+
 - ZON-915: Implement fullwidth teaser
+
+- ZON-1051: Markup and style for facebook buzzbox
 
 - FIX: Some small optical tweaks to nav area
 
