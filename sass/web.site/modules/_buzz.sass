@@ -1,11 +1,14 @@
 $buzz-box-width: em(280px)
 $buzz-box-header-width: em(240px)
 
+.teaser-collection.teaser-collection--buzz
+	padding: $petite 0
+
 .teaser-collection.teaser-collection--buzz,
 .teasers.teasers--buzz
 	width: 100%
-	+respond-min($break-phablet-min)
-		width: $buzz-box-width
+	+respond-min($break-tablet-min)
+		max-width: $buzz-box-width
 
 .teaser-collection__heading.teaser-collection__heading--buzz
 	+tablet(bold)
@@ -37,6 +40,7 @@ $buzz-box-header-width: em(240px)
 
 .teaser__media.teaser__media--buzz
 	+tiemann
+	width: 10%
 	display: inline-block
 	vertical-align: top
 	font-size: $font-mxl
@@ -45,5 +49,6 @@ $buzz-box-header-width: em(240px)
 
 .teaser__heading.teaser__heading--buzz
 	display: inline-block
+	width: 80%
 	max-width: $buzz-box-header-width
 	margin: 0 0 0 $little
