@@ -31,5 +31,5 @@
 {%- endmacro %}
 
 {% macro include_teaser_byline(teaser, modifier='') -%}
-    <span class="teaser__byline {{modifier}}">ToDo: Insert byline here</span>
+    <span class="teaser__byline {{modifier}}">{{ teaser | render_byline }}</span>
 {%- endmacro %}

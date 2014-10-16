@@ -5,12 +5,19 @@ import zope.interface
 
 import zeit.content.article.interfaces
 
+import zeit.web
+
 
 class IRenderByline(zope.interface.Interface):
 
     '''A string representation of information on
     author, genre, location of a ICMSContent resource
     '''
+
+
+@zeit.web.register_filter
+def render_byline(content):
+    return unicode(IRenderByline(content))
 
 
 @grokcore.component.implementer(IRenderByline)
