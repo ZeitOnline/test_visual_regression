@@ -26,7 +26,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Administratives</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Zeit-Magazin</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
