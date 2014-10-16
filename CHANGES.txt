@@ -8,6 +8,8 @@ Change log for zeit.frontend
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
 
+- ZON-1032: Provide byline module
+
 
 1.4 (2014-10-09)
 ----------------
