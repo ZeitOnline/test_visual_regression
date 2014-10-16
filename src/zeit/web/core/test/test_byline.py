@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import zeit.cms.interfaces
 import mock
+import pytest
+
+import zeit.cms.interfaces
 
 import zeit.web.core.byline
-import pytest
 
 
 def test_byline_should_be_represented_by_a_string(application):
@@ -14,16 +15,17 @@ def test_byline_should_be_represented_by_a_string(application):
                                'Berlin und Oliver Fritsch, London')
 
 
-@pytest.fixture()
-def patched_byline(monkeypatch):
-    def init(x):
-        return
+@pytest.fixture(scope='function')
+def patched_byline(request, monkeypatch):
+    def init(self):
+        self.byline = []
     monkeypatch.setattr(zeit.web.core.byline.RenderByline, '__init__', init)
     return zeit.web.core.byline.RenderByline
 
 
 def test_byline_should_have_genres_if_provided(patched_byline):
     byline = patched_byline()
+
     content = mock.Mock()
     content.genre = 'glosse'
     content.title = lambda x: 'glosse'
