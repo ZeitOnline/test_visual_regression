@@ -1,6 +1,6 @@
 [
     {
-        "location": "/sport/2014-04/dortmund-madrid-wunder-aus",
+        "location": "/artikel/header1",
         "score": "16674",
         "supertitle": "Borussia Dortmund",
         "title": "Das schönste Aus aller Zeiten",
@@ -10,7 +10,7 @@
         "fetchedAt": 1397028602741
     },
     {
-        "location": "/wirtschaft/unternehmen/2014-04/lebensmittel-einzelhandel-konsum-nachhaltig",
+        "location": "/artikel/header2",
         "score": "5780",
         "supertitle": "Lebensmittel",
         "title": "Verpackungsfrei einkaufen",
@@ -20,7 +20,7 @@
         "fetchedAt": 1396882202702
     },
     {
-        "location": "/gesellschaft/2014-03/pflichtbewusstsein-selbstverwirklichung",
+        "location": "/artikel/header3",
         "score": "2391",
         "supertitle": "PflichtbewusstseinThemenwoche Perfektes Leben",
         "title": "Du bist schuld",

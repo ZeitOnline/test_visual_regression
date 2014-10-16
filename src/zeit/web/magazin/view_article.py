@@ -271,9 +271,7 @@ class Article(zeit.web.core.view.Content):
             else:
                 return str(n / 1000000), 'Mio.'
 
-        linkreach = self.request.registry.settings.linkreach_host
-        reach = zeit.web.core.reach.LinkReach(None, linkreach)
-        raw = reach.get_counts_by_url(self.article_url)
+        raw = zeit.web.core.reach.fetch('path', self.article_url)
         total = raw.pop('total', 0)
         counts = {'total': unitize(total)} if total >= 10 else {}
         for k, v in raw.items():

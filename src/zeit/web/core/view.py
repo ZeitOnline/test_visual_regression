@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
 import datetime
-import urlparse
 
 import pyramid.view
 import babel.dates
@@ -48,16 +47,6 @@ class Base(object):
         self.request.response.cache_expires(300)
         self.request.response.headers.add(
             'X-ZMOVersion', self.request.registry.settings.zmo_version)
-
-    def teaser_get_commentcount(self, uniqueId):
-        try:
-            index = '/' + urlparse.urlparse(uniqueId).path[1:]
-            count = zeit.web.core.comments.comments_per_unique_id(
-                self.request.registry.settings.node_comment_statistics)[index]
-            if int(count) >= 5:
-                return count
-        except KeyError:
-            return
 
     @zeit.web.reify
     def type(self):
@@ -367,3 +356,14 @@ def not_found(request):
         body = 'Status 404: Dokument nicht gefunden.'
     finally:
         return pyramid.response.Response(body, 404)
+
+
+# For some reason we are not able to register ICMSContent on this.
+# We have to register this on every content-view.
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+def generate_render_with_header(context, request):
+    return pyramid.response.Response(
+        'OK', 200, headerlist=[('X-render-with', 'default')])

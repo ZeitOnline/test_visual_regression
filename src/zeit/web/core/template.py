@@ -27,6 +27,7 @@ import zeit.content.link.interfaces
 
 import zeit.web
 import zeit.web.core.utils
+import zeit.web.core.comments
 
 
 log = logging.getLogger(__name__)
@@ -347,6 +348,14 @@ def closest_substitute_image(image_group,
 
     # Select the candidate that is preferably one size larger than the target.
     return image_group.get(candidates[:idx + 1][-1][0])
+
+
+@zeit.web.register_global
+def get_teaser_commentcount(uniqueId):
+    index = '/' + urlparse.urlparse(uniqueId).path[1:]
+    count = zeit.web.core.comments.comments_per_unique_id().get(index, 0)
+    if int(count) >= 5:
+        return count
 
 
 @zeit.web.register_global

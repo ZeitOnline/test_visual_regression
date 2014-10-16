@@ -61,10 +61,9 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
     from zeit.web.core.comments import comments_per_unique_id
     # if request on node-comment-statistics fails
     # nevertheless a dict should be return value:
-    stats_path = 'community/node-comment-statistics.xml'
-    comment_count_dict = comments_per_unique_id(stats_path)
+    comment_count_dict = comments_per_unique_id()
     assert isinstance(comment_count_dict, dict)
     # for test article path on existing node-comment-statistics
     # we expect the correct commentcount:
     comments_in_article = comment_count_dict['/centerpage/article_image_asset']
-    assert comments_in_article == '22'
+    assert comments_in_article == '125'
