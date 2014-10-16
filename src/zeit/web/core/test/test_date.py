@@ -105,7 +105,7 @@ def test_filter_delta_time_should_modify_date_on_exceeding_days_limit():
 def test_stringify_delta_time_should_return_string_representation_of_delta():
     delta_time._get_babelfied_delta_time()
     stringified_dt = delta_time._stringify_delta_time()
-    assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'
+    assert stringified_dt == 'vor 2 Tagen 4 Stunden 40 Minuten'
 
 
 def test_stringify_delta_time_should_ignore_values_of_zero():
@@ -117,12 +117,12 @@ def test_stringify_delta_time_should_ignore_values_of_zero():
     )
     limited_date._get_babelfied_delta_time()
     stringified_dt = limited_date._stringify_delta_time()
-    assert stringified_dt == '1 Tag 40 Minuten'
+    assert stringified_dt == 'vor 1 Tag 40 Minuten'
 
 
 def test_get_time_since_modification_should_return_delta_time_string():
     stringified_dt = delta_time.get_time_since_modification()
-    assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'
+    assert stringified_dt == 'vor 2 Tagen 4 Stunden 40 Minuten'
 
 
 def test_delta_time_should_default_to_now_for_base_date():

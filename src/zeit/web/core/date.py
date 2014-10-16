@@ -74,10 +74,8 @@ class DeltaMinutesEntity(DeltaTimeEntity):
 class DeltaTime(object):
 
     def __init__(self, date, base_date=None):
-        if base_date is None:
-            base_date = datetime.datetime.utcnow()
         self.date = date
-        self.base_date = base_date
+        self.base_date = base_date or datetime.datetime.utcnow()
         self.delta = self.date - self.base_date
 
     def _get_babelfied_delta_time(self):
@@ -93,7 +91,7 @@ class DeltaTime(object):
             self.minutes = None
 
     def _stringify_delta_time(self):
-        return ' '.join(
+        return 'vor ' + ' '.join(
             i.text for i in (self.days, self.hours, self.minutes)
             if i is not None and i.number != 0)
 
