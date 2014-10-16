@@ -48,19 +48,20 @@ $buzz-box-width: em(280px)
 	line-height: $font-mxl--px
 	margin: 0
 
-.teaser__media.annotated-icon.annotated-icon--buzz-facebook
+.annotated-icon.annotated-icon--buzz-facebook
 	margin: $thin 0 0 0
-	.label
-		+tablet(thin)
-		font-size: $little
-		vertical-align: text-bottom
-		margin-left: $thin
 	.icon-buzz-facebook, .label
 		display: inline-block
 	.icon-buzz-facebook
 		height: $small
 		width: $small
 		background-size: contain
+
+.annotated-icon__label
+	+tablet(thin)
+	font-size: $little
+	vertical-align: text-bottom
+	margin-left: $thin
 
 .teaser__heading.teaser__heading--buzz
 	display: inline-block
