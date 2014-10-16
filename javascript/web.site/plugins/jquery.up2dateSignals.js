@@ -42,14 +42,23 @@
         }, options),
         // remove this, when the real endpoint is in use
         fakecounter = 1,
-        // recursive long polling function
-        // works with comet server too, I'd say
-        // polls the json endpoint and triggers the animation
+        /**
+         * recursive long polling function
+         * works with comet(ish) server too, I'd say
+         * polls JSON endpoint
+         * @fires singals:update
+         * @todo remove fake endpoint and counter
+         */
         poll = function() {
             setTimeout(function() {
                 $.ajax({
                     // replace with real endpoint
                     url: '/js/static/fakeJsonEndpoint/endpoint-' + fakecounter + '.json',
+                    /**
+                     * on successful request emit events
+                     * @param  {object} data the objectified json pulled from endpoint
+                     * @fires   singals:update
+                     */
                     success: function( data ) {
                         $.each(data.feed[0], function(name, object) {
                             // update dates
@@ -64,27 +73,33 @@
                         // remove this when real endpoint is in use
                         fakecounter = fakecounter < 6 ? fakecounter + 1 : 1;
                     }, dataType: 'json',
-                    complete: function() {
-                        poll();
-                    }
+                    /**
+                     * on completion go recursive
+                     */
+                    complete: poll
                 });
             }, defaults.pollingTime);
         },
-        textAnimation = function( elem, text ) {
-            text = text || elem.text();
+        /**
+         * takes new text to animate
+         * @param  {array} $elem jQuery Object Array
+         * @param  {string} text text to change
+         */
+        textAnimation = function( $elem, text ) {
+            text = text || $elem.text();
             var textArr = text.split(' '),
-            elems = elem.blast({
+            $elems = $elem.blast({
                 delimiter: 'word',
                 aria: true,
                 generateValueClass: true
             }),
             elemsToAnimate = [];
-            elems.each( function( i, n ) {
+            $elems.each( function( i, n ) {
                 if ( $(n).text() !== textArr[i] ) {
                     elemsToAnimate.push( i );
                 }
             });
-            elems.each( function( i, n ) {
+            $elems.each( function( i, n ) {
                 if ( $.inArray(i, elemsToAnimate) > -1 ) {
                     $(n).animate( defaults.inEffect, defaults.inVelocity, function() {
                         $(this)
@@ -99,7 +114,12 @@
         return this.each( function() {
 
             poll();
-
+            /**
+             * bind event on diverse elements
+             * @param  {object} event the dom event object
+             * @param  {string} data  new text supplied by the trigger
+             * @event  signals:update
+             */
             $( '.teaser__datetime, .teaser__commentcount' ).bind('signals:update', function( event, data ) {
                 textAnimation( $(event.target), data );
             });
