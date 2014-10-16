@@ -1,3 +1,4 @@
+import pyramid.interfaces
 import zope.interface
 import zope.interface.common.sequence
 
@@ -106,3 +107,7 @@ class ITeaserSequence(zope.interface.Interface):
     context = zope.interface.Attribute('context')
     sequence = zope.interface.Attribute('sequence')
     refs = zope.interface.Attribute('refs')
+
+
+class ISettings(pyramid.interfaces.ISettings):
+    pass
