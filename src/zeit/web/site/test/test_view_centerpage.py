@@ -2,6 +2,7 @@
 import lxml
 import mock
 import pytest
+
 import zeit.web.site.view_centerpage
 
 
