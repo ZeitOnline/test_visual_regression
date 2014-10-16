@@ -38,7 +38,8 @@ class DeltaDaysEntity(DeltaTimeEntity):
         super(DeltaDaysEntity, self).__init__(delta)
         self.number = self.delta.days
         date_text = babel.dates.format_timedelta(
-            babel.dates.timedelta(days=self.delta.days), locale=locale)
+            babel.dates.timedelta(days=self.delta.days),
+            threshold=1, locale=locale)
         # Dirty hack, since babel does not understand
         # german cases (as in Kasus)
         self.text = date_text.replace('Tage', 'Tagen', 1)
@@ -54,7 +55,8 @@ class DeltaHoursEntity(DeltaTimeEntity):
         hours = self.delta.seconds / 3600
         self.number = hours
         self.text = babel.dates.format_timedelta(
-            babel.dates.timedelta(hours=hours), locale=locale)
+            babel.dates.timedelta(hours=hours),
+            threshold=1, locale=locale)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaMinutesEntity)
@@ -67,7 +69,8 @@ class DeltaMinutesEntity(DeltaTimeEntity):
         minutes = (self.delta.seconds % 3600) / 60
         self.number = minutes
         self.text = babel.dates.format_timedelta(
-            babel.dates.timedelta(minutes=minutes), locale=locale)
+            babel.dates.timedelta(minutes=minutes),
+            threshold=1, locale=locale)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTime)
