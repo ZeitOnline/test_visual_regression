@@ -1,4 +1,5 @@
 <div class="teaser-collection teaser-collection--buzz">
+    {% if view.area_buzz_facebook|length %}
     <div class="teaser-collection__heading teaser-collection__heading--buzz">
         {{ view.area_buzz_mostread.header }}
     </div>
@@ -10,9 +11,11 @@
                         "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
         {% endfor %}
     </div>
+    {% endif %}
 </div>
 
 <div class="teaser-collection teaser-collection--buzz">
+    {% if view.area_buzz_facebook|length %}
     <div class="teaser-collection__heading teaser-collection__heading--buzz">
         {{ view.area_buzz_facebook.header }}
     </div>
@@ -24,4 +27,5 @@
                         "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
         {% endfor %}
     </div>
+    {% endif %}
 </div>
