@@ -4,6 +4,8 @@ Change log for zeit.web
 1.5 (unreleased)
 ----------------
 
+- ZON-1045: add columns to cp and fix small teaser mobile image issue
+
 - ZON-987: add fullwidth teaser with text on image
 
 - ZON-1018: Render a render-with header on unrederable content
