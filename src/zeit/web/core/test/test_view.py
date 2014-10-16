@@ -47,3 +47,10 @@ def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
         testserver, testbrowser):
     with pytest.raises(urllib2.HTTPError):
         testbrowser('{}/json/delta_time?unique_id=foo'.format(testserver.url))
+
+
+def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
+        testserver, testbrowser):
+    with pytest.raises(urllib2.HTTPError):
+        testbrowser('{}/json/delta_time?unique_id='
+                    'http://xml.zeit.de/artikel/01'.format(testserver.url))
