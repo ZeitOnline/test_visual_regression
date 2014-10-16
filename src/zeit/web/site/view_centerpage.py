@@ -43,7 +43,8 @@ class Centerpage(zeit.web.core.view.Base):
     def area_fullwidth(self):
         for teaser_block in self.context['lead'].values():
             try:
-                if ('zon-fullwidth' in teaser_block.layout.id) or ('zon-fullwidth-onimage' in teaser_block.layout.id):
+                if (('zon-fullwidth' in teaser_block.layout.id) or
+                        ('zon-fullwidth-onimage' in teaser_block.layout.id)):
                     return [(teaser_block.layout.id, iter(teaser_block).next(),
                             teaser_block)]
             except AttributeError:
