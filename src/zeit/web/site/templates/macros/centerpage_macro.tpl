@@ -21,3 +21,12 @@
         {% endfor %}
     {% endif %}
 {%- endmacro %}
+
+{% macro include_teaser_datetime() -%}
+    <time class="teaser__datetime" datetime="2014-09-11 13:16">vor 1 Minute</time>
+{%- endmacro %}
+
+{% macro include_teaser_commentcount(teaser) -%}
+    <a class="teaser__commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
+{%- endmacro %}
+

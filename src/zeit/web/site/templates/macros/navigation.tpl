@@ -64,8 +64,8 @@
 {% macro main_nav_search() -%}
     <form accept-charset="utf-8" method="get" class="search" role="search" action="http://www.zeit.de/suche/index">
         <label for="q" class="hideme">suchen</label>
-        <input class="search__input" id="q" name="q" type="search" placeholder="Suche" tabindex="1">
-        <button class="search__button" type="submit" tabindex="2">
+        {# please don't break line here, due to inline-block state #}
+        <input class="search__input" id="q" name="q" type="search" placeholder="Suche" tabindex="1"><button class="search__button" type="submit" tabindex="2">
             <a>
                 <span class="icon-zon-logo-navigation_suche search__button__image main_nav__icon--plain"></span>
                 <span class="icon-zon-logo-navigation_suche-hover search__button__image main_nav__icon--hover"></span>
