@@ -4,6 +4,7 @@
 .Python
 .sass-cache
 .ftppass
+.cache/
 /bower_components/
 /javascript/documentation/
 /javascript/vendor/

@@ -1,7 +1,7 @@
 [
 
     {
-        "location": "/sport/2014-04/dortmund-madrid-wunder-aus",
+        "location": "/artikel/07",
         "score": "202",
         "supertitle": "Borussia Dortmund",
         "title": "Das schönste Aus aller Zeiten",
@@ -11,7 +11,7 @@
         "fetchedAt": 1397028602741
     },
     {
-        "location": "/gesellschaft/zeitgeschehen/2014-04/afghanistan-fotografin-niedringhaus-tod",
+        "location": "/artikel/08",
         "score": "153",
         "supertitle": "Anja Niedringhaus",
         "title": "Deutsche Fotografin in Afghanistan erschossen",
@@ -21,7 +21,7 @@
         "fetchedAt": 1396599902574
     },
     {
-        "location": "/digital/datenschutz/2014-04/vorratsdatenspeicherung-europaeischer-gerichtshof-eugh",
+        "location": "/artikel/09",
         "score": "142",
         "supertitle": "EU",
         "title": "Gerichtshof kippt Richtlinie zur Vorratsdatenspeicherung",

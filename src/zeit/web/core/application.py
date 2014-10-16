@@ -16,6 +16,7 @@ import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
+import zope.interface.declarations
 
 import zeit.connector
 import zeit.content.gallery.interfaces
@@ -29,6 +30,7 @@ from zeit.web.core.article import IShortformArticle
 from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
+import zeit.web.core.interfaces
 import zeit.web.core.appinfo
 import zeit.web.core.banner
 import zeit.web.core.block
@@ -49,6 +51,10 @@ class Application(object):
         self.settings = {}
 
     def __call__(self, global_config, **settings):
+        settings = pyramid.config.settings.Settings(d=settings)
+        interface = zeit.web.core.interfaces.ISettings
+        zope.interface.declarations.alsoProvides(settings, interface)
+        zope.component.provideUtility(settings, interface)
         self.settings.update(settings)
         self.configure()
         return self.make_wsgi_app(global_config)

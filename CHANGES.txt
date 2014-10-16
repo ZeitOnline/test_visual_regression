@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
 
+- ZON-1047: Connect linkreach data to buzz teaser collection (feat. ZON-1052)
+
 - ZON-915: Implement fullwidth teaser
 
 - FIX: Some small optical tweaks to nav area
