@@ -1,10 +1,13 @@
 $buzz-box-width: em(280px)
 
+.teaser-collection.teaser-collection--buzz
+	padding: $petite 0
+
 .teaser-collection.teaser-collection--buzz,
 .teasers.teasers--buzz
 	width: 100%
-	+respond-min($break-phablet-min)
-		width: $buzz-box-width
+	+respond-min($break-tablet-min)
+		max-width: $buzz-box-width
 
 .teaser-collection__heading.teaser-collection__heading--buzz
 	+tablet(bold)
@@ -33,15 +36,16 @@ $buzz-box-width: em(280px)
 		font-size: $font-xs
 
 .teaser.teaser--buzz-facebook
-	margin-left: $petite--px
+	margin-left: 0
 	+respond-min($break-phablet-min)
-		margin-left: 0
+		margin-left: $petite--px
 
 .teaser.teaser--buzz:not(:last-child)
 	margin-bottom: $small
 
 .teaser__media.numeric.numeric--buzz-mostread
 	+tiemann
+	width: 10%
 	display: inline-block
 	vertical-align: top
 	font-size: $font-mxl
@@ -65,7 +69,8 @@ $buzz-box-width: em(280px)
 
 .teaser__heading.teaser__heading--buzz
 	display: inline-block
-	margin: 0
+	width: 80%
+	max-width: $buzz-box-width - $hefty
 
 .teaser__heading.teaser__heading--buzz-mostread
 	max-width: $buzz-box-width - $hefty

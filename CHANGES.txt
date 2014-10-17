@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1039: Provide JSON endpoint for delta time
 
+- ZON-1045: Add columns to cp and fix small teaser mobile image issue
+
 - ZON-1018: Render a render-with header on unrederable content
 
 - ZON-1046: Markup and style for topreads buzzbox
@@ -23,6 +25,8 @@ Change log for zeit.web
 - ZON-915: Implement fullwidth teaser
 
 - ZON-1051: Markup and style for facebook buzzbox
+
+- ZON-1043: Implement comment count json endpoint
 
 - FIX: Some small optical tweaks to nav area
 

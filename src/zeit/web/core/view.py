@@ -383,7 +383,7 @@ def json_delta_time(request):
         return json_delta_time_from_date(date, parsed_base_date)
     else:
         return pyramid.response.Response(
-            'Missing parameter: uniqueId or date', 412)
+            'Missing parameter: unique_id or date', 412)
 
 
 def json_delta_time_from_date(date, parsed_base_date):
@@ -419,3 +419,38 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
         json_dt['delta_time'].append(
             {teaser[1].uniqueId: {'time': dt.get_time_since_modification()}})
     return json_dt
+
+
+@pyramid.view.view_config(route_name='json_comment_count', renderer='json')
+def json_comment_count(request):
+    unique_id = request.GET.get('unique_id', None)
+    if unique_id is None:
+        return pyramid.response.Response(
+            'Missing value for parameter: unique_id', 412)
+
+    try:
+        context = zeit.cms.interfaces.ICMSContent(unique_id)
+    except TypeError:
+        return pyramid.response.Response(
+            'Invalid value for parameter: unique_id', 412)
+
+    counts = zeit.web.core.comments.comments_per_unique_id()
+
+    articles = []
+    if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
+        cp = zeit.web.site.view_centerpage.Centerpage(context, request)
+        for teaser in cp.area_main:
+            articles.append(teaser[1])
+    else:
+        article = zeit.content.article.interfaces.IArticle(context)
+        articles.append(article)
+
+    def get_count(article):
+        try:
+            uid = article.uniqueId
+            path = uid.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
+            return int(counts.get(path), 0)
+        except (AttributeError, TypeError):
+            return 0
+
+    return {'comment_count': {a.uniqueId: get_count(a) for a in articles}}

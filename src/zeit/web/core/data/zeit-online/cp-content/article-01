@@ -43,6 +43,19 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4e2c9a3b-c89e-4b39-bb04-371fb84dd665}</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
+    <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
+            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <location>Berlin</location>
+    </author>
+    <author expires="" href="http://xml.zeit.de/autoren/author3" publication-date="">
+            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <location>Berlin</location>
+    </author>
+    <author expires="" href="http://xml.zeit.de/autoren/author4" publication-date="">
+            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <location>Berlin</location>
+    </author>
+       
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;

@@ -12,10 +12,19 @@
       <badge>map</badge>
       <badge>video</badge>
     </badges>
-    <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
-      <display_name py:pytype="str">Anne Mustermann</display_name>
-      <location>Berlin</location>
+    <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
+            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <location>St. Francisco</location>
     </author>
+    <author expires="" href="http://xml.zeit.de/autoren/author3" publication-date="">
+            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <location>Lämmershagen</location>
+    </author>
+    <author expires="" href="http://xml.zeit.de/autoren/author4" publication-date="">
+            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <location>Erzgebirge</location>
+    </author>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">interview</attribute> 
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

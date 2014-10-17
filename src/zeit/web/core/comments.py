@@ -204,6 +204,8 @@ class Comment(object):
 
 
 def comments_per_unique_id():
+    # XXX This should be registered as a utility instead of being recalculated
+    #     on every call.
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     uri = 'http://xml.zeit.de/' + conf.get('node_comment_statistics')
 
