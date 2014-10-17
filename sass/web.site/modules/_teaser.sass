@@ -136,9 +136,6 @@ $zon-fullwidth-image-height: em(528px)
 	+respond-min($break-desktop-min)
 		width: $teaser-image-desktop-width
 
-.teaser__media--small[data-showimagemobile="true"]
-	display: block
-
 .teaser__media--hasshadow
 	.mediablock__helper
 		+fake-box-shadow-inset($black, 1)
@@ -204,3 +201,9 @@ $zon-fullwidth-image-height: em(528px)
 .teaser__container--issized-desktop
 	+respond-min($break-tablet-min)
 		width: 70%
+
+// first small teaser in collection displays image in mobile mode
+// TODO: solved with css for now, might have to be adapted later (asz)
+.teaser-collection--main
+	.teaser--small:nth-of-type(1) .teaser__media--small
+		display: block
