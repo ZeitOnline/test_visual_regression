@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.5 (unreleased)
+1.5 (2014-10-17)
 ----------------
 
 - ZON-1044: Interpolate comment counts to compensate for slow ncs refresh rate
