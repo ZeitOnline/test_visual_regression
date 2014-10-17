@@ -4,6 +4,8 @@ Change log for zeit.web
 1.5 (unreleased)
 ----------------
 
+- ZON-1044: Interpolate comment counts to compensate for slow ncs refresh rate
+
 - ZON-913: Plugin reads from JSON Endpoint and animates time and comments
 
 - ZON-987: Add fullwidth teaser with text on image
