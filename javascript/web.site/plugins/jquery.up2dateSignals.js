@@ -37,7 +37,8 @@
             inVelocity: 500,
             outEffect: { opacity: 1 },
             outVelocity: 500,
-            timeEndpoint: 'http://localhost:9090/json/delta_time?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'
+            timeEndpoint: 'http://localhost:9090/json/delta_time?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup',
+            commentsEndpoint: 'http://localhost:9090/json/comment_count?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'
         }, options),
         // remove this, when the real endpoint is in use
         fakecounter = 1,
@@ -50,6 +51,9 @@
          * @param {string} selector to element which is triggered for update
          * @fires singals:update
          * @todo remove fake endpoint and counter
+         * @todo put together apis
+         * @todo delete democode
+         * @todo read endpoint param from data-uniqueID of the body (which is also a todo)
          */
         poll = function( endpoint, interval, selector ) {
             setTimeout(function() {
@@ -63,13 +67,21 @@
                      */
                     success: function( data ) {
                         $.each(data, function(i, name) {
-                            $.each(name, function(i, object) {
-                                // update dates
-                                for ( var name in object ) {
-                                    if (object.hasOwnProperty(name)) {
-                                        $('[data-uniqueId=\'' + name + '\']')
-                                        .find( selector )
-                                        .trigger( 'signals:update', object[name].time );
+                            $.each(name, function(identifier, object) {
+                                // account for differing api
+                                // adds text 'Kommentare' for the sake of the demo
+                                if ( typeof object !== 'object') {
+                                    console.debug(identifier, object);
+                                    $('[data-uniqueId=\'' + identifier + '\']')
+                                    .find( selector )
+                                    .trigger( 'signals:update', object + ' Kommentare' );
+                                } else {
+                                    for ( var name in object ) {
+                                        if (object.hasOwnProperty(name)) {
+                                            $('[data-uniqueId=\'' + name + '\']')
+                                            .find( selector )
+                                            .trigger( 'signals:update', object[name].time );
+                                        }
                                     }
                                 }
                             });
@@ -105,13 +117,14 @@
         return this.each( function() {
 
             poll( defaults.timeEndpoint, 1000 * 60, '.teaser__datetime');
+            poll( defaults.commentsEndpoint, 1000 * 20, '.teaser__commentcount');
             /**
              * bind event on diverse elements
              * @param  {object} event the dom event object
              * @param  {string} data  new text supplied by the trigger
              * @event  signals:update
              */
-            $( '.teaser__datetime' ).bind('signals:update', function( event, data ) {
+            $( '.teaser__datetime, .teaser__commentcount' ).bind('signals:update', function( event, data ) {
                 textAnimation( $(event.target), data );
             });
 
