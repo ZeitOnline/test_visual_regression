@@ -4,7 +4,7 @@ Change log for zeit.web
 1.5 (unreleased)
 ----------------
 
-- ZON-987: add fullwidth teaser with text on image
+- ZON-987: Add fullwidth teaser with text on image
 
 - ZON-1018: Render a render-with header on unrederable content
 
@@ -19,6 +19,8 @@ Change log for zeit.web
 - ZON-915: Implement fullwidth teaser
 
 - ZON-1051: Markup and style for facebook buzzbox
+
+- ZON-1043: Implement comment count json endpoint
 
 - FIX: Some small optical tweaks to nav area
 
