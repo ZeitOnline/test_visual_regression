@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import json
 import os.path
 import pkg_resources
+import urllib
 
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -292,6 +294,15 @@ def testbrowser(request):
     return Browser
 
 
+@pytest.fixture
+def comment_counter(testserver, testbrowser):
+    def get_count(**kw):
+        params = urllib.urlencode(kw)
+        url = '%s/json/comment_count?%s' % (testserver.url, params)
+        return testbrowser(url)
+    return get_count
+
+
 class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
@@ -339,3 +350,9 @@ class Browser(zope.testbrowser.browser.Browser):
         """Return an lxml.html.HtmlElement instance of the response body."""
         if self.contents is not None:
             return lxml.html.document_fromstring(self.contents)
+
+    @property
+    def json(self):
+        """Return a dictionary of the parsed json body if available."""
+        if self.contents is not None:
+            return json.loads(self.contents)
