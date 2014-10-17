@@ -2,6 +2,7 @@
 import lxml
 import mock
 import pytest
+
 import zeit.web.site.view_centerpage
 
 
@@ -80,11 +81,11 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(jinja2_env):
+def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
-    teaser = mock.Mock()
+    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     teaser.uniqueId = 'http://xml.zeit.de/myhref'
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
@@ -115,7 +116,7 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
     assert teaser_text.text == 'teaserText', 'No teaser text'
 
     teaser_byline = html('div.teaser__container > span.teaser__byline')[0]
-    assert teaser_byline.text == 'ToDo: Insert byline here', (
+    assert teaser_byline.text == 'Von Anne Mustermann', (
         'No byline present')
 
     assert len(html('div.teaser__container > div.teaser__metadata')) == 1, (
@@ -138,6 +139,20 @@ def test_default_teaser_should_match_css_selectors(jinja2_env):
         'No comment text present')
 
 
+def test_first_small_teaser_has_image_on_mobile_mode(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+    box = driver.find_elements_by_class_name('teaser-collection')[0]
+    first = box.find_elements_by_class_name('teaser__media--small')[0]
+    second = box.find_elements_by_class_name('teaser__media--small')[1]
+
+    assert first.is_displayed(), 'image is not displayed'
+    assert second.is_displayed() is False, 'image is displayed'
+
+
 def test_fullwidth_teaser_should_be_rendered_correctly(
         testserver, testbrowser):
 
@@ -157,7 +172,7 @@ def test_fullwidth_teaser_should_be_rendered_correctly(
     assert len(meta_head) == 1, 'No teaser metadata in head'
     assert meta_def.get('class') == (
         'teaser__metadata teaser__metadata--ishead'), (
-        'Metadata on last position is not hidden')
+            'Metadata on last position is not hidden')
 
 
 def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
@@ -238,10 +253,10 @@ def test_fullwidth_onimage_teaser_has_right_layout_in_all_screen_sizes(
 
     if screen_size[0] == 320:
         # test byline mobile
-        assert byline.is_displayed() is False, 'Byline is displayed'
+        assert byline.is_displayed() is False, 'Mobile byline is displayed'
     else:
         # test byline desktop, phablet and tablet
-        assert byline.is_displayed(), 'Byline is not displayed'
+        assert byline.is_displayed(), 'Desktop byline is not displayed'
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
@@ -319,3 +334,16 @@ def test_centerpage_view_should_have_topic_links():
     assert view.topiclinks == [('Label 1', 'http://link_1'),
                                ('Label 2', 'http://link_2'),
                                ('Label 3', 'http://link_3')]
+
+
+def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
+    browser = testbrowser(
+        '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+
+    fullwidth = browser.cssselect('.main .main__fullwidth')
+    content = browser.cssselect('.main .main__content')
+    informatives = browser.cssselect('.main .main__informatives')
+
+    assert len(fullwidth) == 1, 'We expect 1 div here'
+    assert len(content) == 1, 'We expect 1 div here'
+    assert len(informatives) == 1, 'We expect 1 div here'

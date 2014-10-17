@@ -116,7 +116,7 @@ class Application(object):
             self.config.include('pyramid_zodbconn')
 
         log.debug('Configuring Pyramid')
-        config.add_route('json', 'json/*traverse')
+        config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('health_check', '/health_check')

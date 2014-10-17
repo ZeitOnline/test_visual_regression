@@ -12,7 +12,6 @@
       <badge>map</badge>
       <badge>video</badge>
     </badges>
-
     <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
             <display_name py:pytype="str">Armin Mustermann</display_name>
             <location>St. Francisco</location>

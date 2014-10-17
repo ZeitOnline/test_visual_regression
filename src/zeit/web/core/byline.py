@@ -10,14 +10,21 @@ import zeit.web
 
 class IRenderByline(zope.interface.Interface):
 
-    '''A string representation of information on
+    """A string representation of information on
     author, genre, location of a ICMSContent resource
-    '''
+    """
 
 
 @zeit.web.register_filter
-def render_byline(content):
-    return unicode(IRenderByline(content))
+def render_byline(article):
+    """Extract a natural language byline composited of authors and locations.
+    The returned object sports an __html__ method and is jinja serializable.
+
+    :param article: Article providing zeit.content.article.IArticle
+    :rtype: zeit.web.core.byline.IRenderByline
+    """
+
+    return unicode(IRenderByline(article))
 
 
 @grokcore.component.implementer(IRenderByline)
@@ -51,7 +58,7 @@ class RenderByline(object):
     def _genre(self, content):
         if content.genre and content.genre in self.display_fe:
             self.byline.append(self.eine_n(content.genre))
-            self.byline.append(content.genre.title()+' ')
+            self.byline.append(content.genre.title() + ' ')
 
     def _von(self, content):
         if self.byline:
@@ -91,8 +98,8 @@ class RenderByline(object):
                             for author in authors]
 
         if len(set(authors_location)) == 1:
-            authors_location = ['' for x in range(len(authors_location)-1)] + (
-                [authors_location[0]])
+            authors_location = (['' for x in range(len(authors_location) - 1)]
+                                + [authors_location[0]])
 
         assert len(authors_str) == len(authors_location)
         return (authors_str, authors_location)

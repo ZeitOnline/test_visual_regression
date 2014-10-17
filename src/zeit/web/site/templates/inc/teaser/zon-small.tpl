@@ -6,5 +6,5 @@
 {% block teaser_media_position_before_title %}
     {% include "zeit.web.site:templates/inc/teaser_asset/"+
         teaser | auto_select_asset | block_type +
-        "-zon-thumbnail.tpl" ignore missing with context %}
+        "_zon-thumbnail.tpl" ignore missing with context %}
 {% endblock %}

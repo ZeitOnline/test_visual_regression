@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from pyramid.view import view_config
+import pyramid.response
+import pyramid.view
 
 import zeit.content.cp.interfaces
 
@@ -9,9 +10,10 @@ import zeit.web.core.view
 import zeit.web.site.view
 
 
-@view_config(context=zeit.content.cp.interfaces.ICenterPage,
-             custom_predicates=(zeit.web.site.view.is_zon_content,),
-             renderer='templates/centerpage.html')
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view.Base):
 
     """Main view class for ZEIT ONLINE centerpages."""
