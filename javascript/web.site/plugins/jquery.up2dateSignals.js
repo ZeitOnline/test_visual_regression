@@ -34,41 +34,46 @@
     $.fn.up2dateSignals = function( options ) {
 
         var defaults = $.extend({
-            pollingTime: 30 * 1000, // 30 sec.
             inEffect: { opacity: 0 },
             inVelocity: 500,
             outEffect: { opacity: 1 },
-            outVelocity: 500
+            outVelocity: 500,
+            timeEndpoint: 'http://localhost:9090/json/delta_time?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'
         }, options),
         // remove this, when the real endpoint is in use
         fakecounter = 1,
         /**
-         * recursive long polling function
+         * recursive polling function
          * works with comet(ish) server too, I'd say
          * polls JSON endpoint
+         * @param {string} endpoint URL to JSON endpoint
+         * @param {Number} interval time in ms between polls
+         * @param {string} selector to element which is triggered for update
          * @fires singals:update
          * @todo remove fake endpoint and counter
          */
-        poll = function() {
+        poll = function( endpoint, interval, selector ) {
             setTimeout(function() {
                 $.ajax({
                     // replace with real endpoint
-                    url: '/js/static/fakeJsonEndpoint/endpoint-' + fakecounter + '.json',
+                    url: endpoint,
                     /**
                      * on successful request emit events
                      * @param  {object} data the objectified json pulled from endpoint
                      * @fires   singals:update
                      */
                     success: function( data ) {
-                        $.each(data.feed[0], function(name, object) {
-                            // update dates
-                            $('[data-uniqueId=\'' + name + '\']')
-                            .find( '.teaser__datetime' )
-                            .trigger( 'signals:update', object.time );
-                            // update comments
-                            $('[data-uniqueId=\'' + name + '\']')
-                            .find( '.teaser__commentcount' )
-                            .trigger( 'signals:update', object.comments );
+                        $.each(data, function(i, name) {
+                            $.each(name, function(i, object) {
+                                // update dates
+                                for ( var name in object ) {
+                                    if (object.hasOwnProperty(name)) {
+                                        $('[data-uniqueId=\'' + name + '\']')
+                                        .find( selector )
+                                        .trigger( 'signals:update', object[name].time );
+                                    }
+                                }
+                            });
                         });
                         // remove this when real endpoint is in use
                         fakecounter = fakecounter < 6 ? fakecounter + 1 : 1;
@@ -76,9 +81,11 @@
                     /**
                      * on completion go recursive
                      */
-                    complete: poll
+                    complete: function() {
+                        poll( endpoint, interval, selector );
+                    }
                 });
-            }, defaults.pollingTime);
+            }, interval);
         },
         /**
          * takes new text to animate
@@ -86,41 +93,26 @@
          * @param  {string} text text to change
          */
         textAnimation = function( $elem, text ) {
-            text = text || $elem.text();
-            var textArr = text.split(' '),
-            $elems = $elem.blast({
-                delimiter: 'word',
-                aria: true,
-                generateValueClass: true
-            }),
-            elemsToAnimate = [];
-            $elems.each( function( i, n ) {
-                if ( $(n).text() !== textArr[i] ) {
-                    elemsToAnimate.push( i );
-                }
-            });
-            $elems.each( function( i, n ) {
-                if ( $.inArray(i, elemsToAnimate) > -1 ) {
-                    $(n).animate( defaults.inEffect, defaults.inVelocity, function() {
-                        $(this)
-                        .html( textArr[i] )
-                        .delay( 10 )
-                        .animate( defaults.outEffect, defaults.outVelocity);
-                    });
-                }
-            });
+            if ( $elem.text() !== text ) {
+                $elem.animate( defaults.inEffect, defaults.inVelocity, function() {
+                    $(this)
+                    .html( text )
+                    .delay( 10 )
+                    .animate( defaults.outEffect, defaults.outVelocity);
+                });
+            }
         };
 
         return this.each( function() {
 
-            poll();
+            poll( defaults.timeEndpoint, 1000 * 60, '.teaser__datetime');
             /**
              * bind event on diverse elements
              * @param  {object} event the dom event object
              * @param  {string} data  new text supplied by the trigger
              * @event  signals:update
              */
-            $( '.teaser__datetime, .teaser__commentcount' ).bind('signals:update', function( event, data ) {
+            $( '.teaser__datetime' ).bind('signals:update', function( event, data ) {
                 textAnimation( $(event.target), data );
             });
 
