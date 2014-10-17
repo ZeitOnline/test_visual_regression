@@ -1,13 +1,9 @@
-$buzz-box-width: em(280px)
-
 .teaser-collection.teaser-collection--buzz
 	padding: $petite 0
 
 .teaser-collection.teaser-collection--buzz,
 .teasers.teasers--buzz
 	width: 100%
-	+respond-min($break-tablet-min)
-		max-width: $buzz-box-width
 
 .teaser-collection__heading.teaser-collection__heading--buzz
 	+tablet(bold)
@@ -35,7 +31,8 @@ $buzz-box-width: em(280px)
 	.teaser__kicker
 		font-size: $font-xs
 
-.teaser.teaser--buzz-facebook
+.teaser.teaser--buzz-facebook,
+.teaser.teaser--buzz-mostread
 	margin-left: 0
 	+respond-min($break-phablet-min)
 		margin-left: $petite--px
@@ -48,7 +45,7 @@ $buzz-box-width: em(280px)
 	width: 10%
 	display: inline-block
 	vertical-align: top
-	font-size: $font-mxl
+	font-size: $font-mxl--px
 	line-height: $font-mxl--px
 	margin: 0
 
@@ -70,8 +67,7 @@ $buzz-box-width: em(280px)
 .teaser__heading.teaser__heading--buzz
 	display: inline-block
 	width: 80%
-	max-width: $buzz-box-width - $hefty
+	margin: 0
 
 .teaser__heading.teaser__heading--buzz-mostread
-	max-width: $buzz-box-width - $hefty
 	margin-left: $little
