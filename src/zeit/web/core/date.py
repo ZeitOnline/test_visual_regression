@@ -15,7 +15,7 @@ locale = 'de_DE'
 def utcnow():
     # XXX Wrapper function needed on module level, because we need to patch
     #     it in tests.
-    datetime.datetime.utcnow()
+    return datetime.datetime.utcnow()
 
 
 def parse_date(date,
