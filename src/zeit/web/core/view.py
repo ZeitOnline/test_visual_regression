@@ -442,7 +442,15 @@ def json_comment_count(request):
         for teaser in cp.area_main:
             articles.append(teaser[1])
     else:
-        articles.append(unique_id)
+        article = zeit.content.article.interfaces.IArticle(context)
+        articles.append(article)
 
-    return {'comment_count': {a.uniqueId: counts.get(a.uniqueId.replace(
-            zeit.cms.interfaces.ID_NAMESPACE, '/'), 0) for a in articles}}
+    def get_count(article):
+        try:
+            uid = article.uniqueId
+            path = uid.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
+            return int(counts.get(path), 0)
+        except (AttributeError, TypeError):
+            return 0
+
+    return {'comment_count': {a.uniqueId: get_count(a) for a in articles}}
