@@ -52,7 +52,6 @@
          * @fires singals:update
          * @todo remove fake endpoint and counter
          * @todo put together apis
-         * @todo delete democode
          * @todo read endpoint param from data-uniqueID of the body (which is also a todo)
          */
         poll = function( endpoint, interval, selector ) {
@@ -69,12 +68,11 @@
                         $.each(data, function(i, name) {
                             $.each(name, function(identifier, object) {
                                 // account for differing api
-                                // adds text 'Kommentare' for the sake of the demo
                                 if ( typeof object !== 'object') {
                                     console.debug(identifier, object);
                                     $('[data-uniqueId=\'' + identifier + '\']')
                                     .find( selector )
-                                    .trigger( 'signals:update', object + ' Kommentare' );
+                                    .trigger( 'signals:update', object );
                                 } else {
                                     for ( var name in object ) {
                                         if (object.hasOwnProperty(name)) {
