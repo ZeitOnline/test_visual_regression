@@ -2,13 +2,24 @@
 
 $zon-teaser-standart-width: em(480px)
 $zon-teaser-standart-height: em(620px)
+$zon-fullwidth-image-height: em(528px)
 
 .teasers
+	position: relative
 	width: 100%
 	+respond-min($break-tablet-min)
 		width: em(480px)
 	+respond-min($break-desktop-min)
 		width: em(620px)
+
+.fullwidth_teasers
+	position: relative
+	.teaser__media--hasshadow
+		width: 100%
+		height: $zon-fullwidth-image-height
+		margin-top: $petite
+		.teaser__media-item
+			max-height: $zon-fullwidth-image-height
 
 .teaser
 	+pie-clearfix
@@ -33,9 +44,30 @@ $zon-teaser-standart-height: em(620px)
 	.teaser__heading
 		+respond-min($break-phablet-min)
 			text-align: center
+			margin-left: auto
+			margin-right: auto
 	.teaser__container
+		margin: $junior auto
 		+respond-min($break-tablet-min)
 			text-align: center
+
+.teaser--ispositioned
+	position: absolute
+	bottom: $fine
+	margin: 0 $petite 0 $petite
+	border: 0
+	overflow: hidden
+
+.teaser--islight
+	color: $white
+	z-index: 1
+	.teaser__kicker,
+	.teaser__title
+		color: $white !important
+	.teaser__metadata
+		a, .teaser__datetime:hover
+			border: 0
+		font-weight: normal
 
 .teaser__heading
 	font-size: 1em
@@ -47,8 +79,6 @@ $zon-teaser-standart-height: em(620px)
 .teaser__heading--issized
 	+respond-min($break-phablet-min)
 		width: 70%
-		margin-left: auto
-		margin-right: auto
 
 .teaser__heading__small
 	margin: 0 0 $thin 0
@@ -106,8 +136,10 @@ $zon-teaser-standart-height: em(620px)
 	+respond-min($break-desktop-min)
 		width: $teaser-image-desktop-width
 
-.teaser__media--small[data-showimagemobile="true"]
-	display: block
+.teaser__media--hasshadow
+	.mediablock__helper
+		+fake-box-shadow-inset($black, 1)
+	background-color: $black
 
 .teaser__media--fullwidth_mobile
 	margin-left: -$petite
@@ -131,10 +163,16 @@ $zon-teaser-standart-height: em(620px)
 	margin: 0 0 $thin 0
 
 .teaser__byline
+	display: block
 	font-family: FranziskaWebPro
 	font-size: em(15px)
 	font-style: italic
 	margin-bottom: rem(6px)
+
+.teaser__byline--isinline
+	display: none
+	+respond-min($break-phablet-min)
+		display: inline
 
 .teaser__metadata
 	font-size: em(13px)
@@ -159,5 +197,13 @@ $zon-teaser-standart-height: em(620px)
 .teaser__container--issized
 	+respond-min($break-phablet-min)
 		width: 70%
-		margin: $junior auto
 
+.teaser__container--issized-desktop
+	+respond-min($break-tablet-min)
+		width: 70%
+
+// first small teaser in collection displays image in mobile mode
+// TODO: solved with css for now, might have to be adapted later (asz)
+.teaser-collection--main
+	.teaser--small:nth-of-type(1) .teaser__media--small
+		display: block

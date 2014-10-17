@@ -30,3 +30,6 @@
     <a class="teaser__commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
 {%- endmacro %}
 
+{% macro include_teaser_byline(teaser, modifier='') -%}
+    <span class="teaser__byline {{modifier}}">{{ teaser | render_byline }}</span>
+{%- endmacro %}

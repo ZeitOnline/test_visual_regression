@@ -134,12 +134,10 @@ class Centerpage(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_buzz(self):
-        stats_path = self.request.registry.settings.node_comment_statistics
-        linkreach = self.request.registry.settings.linkreach_host
-        reach = zeit.web.core.reach.LinkReach(stats_path, linkreach)
         teaser_dict = {}
         for service in ('twitter', 'facebook', 'comments'):
-            teaser_dict[service] = reach.fetch_service(service, 3)
+            teaser_dict[service] = zeit.web.core.reach.fetch(
+                service, 'zeit-magazin', limit=3)
         return teaser_dict
 
     @zeit.web.reify

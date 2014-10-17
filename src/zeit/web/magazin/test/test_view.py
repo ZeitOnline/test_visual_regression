@@ -158,25 +158,20 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     assert article.breadcrumb == l
 
 
-def test_linkreach_property_should_be_set(application, app_settings):
+def test_linkreach_property_should_be_set(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    request = mock.Mock()
-    request.registry.settings.linkreach_host = app_settings['linkreach_host']
-    article_view = zeit.web.magazin.view_article.Article(context, request)
-    article_view.request.url = 'artikel/03'
-    article_view.request.traversed = ('foo',)
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    article_view.request.url = 'index'
+    article_view.request.traversed = ('index',)
     article_view.request.route_url = lambda *args: ''
     assert isinstance(article_view.linkreach, dict)
 
 
-def test_linkreach_property_should_fetch_correct_data(testserver,
-                                                      app_settings):
+def test_linkreach_property_should_fetch_correct_data(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    request = mock.Mock()
-    request.registry.settings.linkreach_host = app_settings['linkreach_host']
-    article_view = zeit.web.magazin.view_article.Article(context, request)
-    article_view.request.url = 'foo'
-    article_view.request.traversed = ('foo',)
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    article_view.request.url = 'index'
+    article_view.request.traversed = ('index',)
     article_view.request.route_url = lambda *args: ''
     assert article_view.linkreach['total'] == ('1,1', 'Tsd.')
 
@@ -674,25 +669,6 @@ def test_article01_should_not_have_a_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert view.nextread is None
-
-
-def test_cp_teaser_with_comments_should_get_comments_count(
-        testserver, testbrowser):
-    request = mock.Mock()
-    request.registry.settings.node_comment_statistics = (
-        'community/node-comment-statistics.xml')
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, request)
-    view()  # trigger __call__ method
-    comment_count = view.teaser_get_commentcount(
-        'http://xml.zeit.de/centerpage/article_image_asset')
-    assert comment_count == '22'
-    # For teaser uniquId with no entry in node-comment-statistics
-    # teaser_get_commentcount should return None
-    comment_count = view.teaser_get_commentcount(
-        'http://xml.zeit.de/does_not_exist')
-    assert comment_count is None
 
 
 def test_caching_headers_should_be_set(testserver, testbrowser):

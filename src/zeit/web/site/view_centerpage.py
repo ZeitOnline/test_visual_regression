@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
-from pyramid.view import view_config
+import pyramid.response
+import pyramid.view
 
 import zeit.content.cp.interfaces
 
+import zeit.web.core.reach
+import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.site.view
 
 
-@view_config(context=zeit.content.cp.interfaces.ICenterPage,
-             custom_predicates=(zeit.web.site.view.is_zon_content,),
-             renderer='templates/centerpage.html')
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view.Base):
 
     """Main view class for ZEIT ONLINE centerpages."""
@@ -32,7 +36,8 @@ class Centerpage(zeit.web.core.view.Base):
         blocks = filter(
             lambda x: hasattr(x, 'layout') and x.layout and (
                 hasattr(x.layout, 'id') and x.layout.id and len(x) > 0
-                and x.layout.id != 'zon-fullwidth'),
+                and x.layout.id != 'zon-fullwidth'
+                and x.layout.id != 'zon-fullwidth-onimage'),
             self.context['lead'].values())
         return [(i.layout.id, iter(i).next(), i) for i in blocks]
 
@@ -40,7 +45,8 @@ class Centerpage(zeit.web.core.view.Base):
     def area_fullwidth(self):
         for teaser_block in self.context['lead'].values():
             try:
-                if 'zon-fullwidth' in teaser_block.layout.id:
+                if (('zon-fullwidth' in teaser_block.layout.id) or
+                        ('zon-fullwidth-onimage' in teaser_block.layout.id)):
                     return [(teaser_block.layout.id, iter(teaser_block).next(),
                             teaser_block)]
             except AttributeError:
@@ -48,16 +54,19 @@ class Centerpage(zeit.web.core.view.Base):
         return []
 
     @zeit.web.reify
-    def area_buzz(self):
-        # XXX: Mock buzzy article data.
-        from zeit.cms.interfaces import ICMSContent as ic
-        from zeit.web.core.utils import nslist, nsunicode
-        area = nslist(ic('http://xml.zeit.de/artikel/0%s' % i)
-                      for i in __import__('random').sample(range(1, 10), 3))
+    def area_buzz_mostread(self):
+        area = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
+        area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
+        area.layout.id = zeit.web.core.utils.nsunicode('mostread')
+        area.header = zeit.web.core.utils.nsunicode('Meistgelesen')
+        return area
 
-        area.layout = nsunicode('buzz-topreads')
-        area.layout.id = nsunicode('topreads')
-        area.header = nsunicode('Meistgelesen')
+    @zeit.web.reify
+    def area_buzz_facebook(self):
+        area = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
+        area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
+        area.layout.id = zeit.web.core.utils.nsunicode('facebook')
+        area.header = zeit.web.core.utils.nsunicode('Meistempfohlen')
         return area
 
     @zeit.web.reify

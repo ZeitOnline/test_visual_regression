@@ -9,6 +9,13 @@ Available attributes:
 {% extends "zeit.web.site:templates/layout.html" %}
 
 {% block main %}
-    {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
-    {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
+    <div class="main__fullwidth">
+        {%- include "zeit.web.site:templates/inc/cp_area_fullwidth.html" ignore missing -%}
+    </div>
+    <div class="main__content">
+        {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
+    </div>
+    <div class="main__informatives">
+        {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
+    </div>
 {% endblock main %}

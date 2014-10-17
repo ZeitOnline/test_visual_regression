@@ -6,8 +6,11 @@ import urlparse
 import cornice.resource
 import lxml.etree
 import requests
+import zope.component
 
 import zeit.cms.interfaces
+
+import zeit.web.core.interfaces
 
 
 def path_of_article(unique_id):
@@ -200,13 +203,14 @@ class Comment(object):
         return get_thread(self.unique_id, self.request)
 
 
-def comments_per_unique_id(stats_path):
+def comments_per_unique_id():
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    uri = 'http://xml.zeit.de/' + conf.get('node_comment_statistics')
+
     try:
-        node_comment_statistics_file = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/' + stats_path)
-        node_comment_statistics = lxml.etree.fromstring(
-            node_comment_statistics_file.data.encode())
-        nodes = node_comment_statistics.xpath('/nodes/node')
-        return {node.values()[0]: node.values()[1] for node in nodes}
-    except:
+        raw = zeit.cms.interfaces.ICMSContent(uri)
+        nodes = lxml.etree.fromstring(raw.data.encode()).xpath('/nodes/node')
+    except (lxml.etree.LxmlError, TypeError):
         return {}
+
+    return {node.values()[1]: node.values()[0] for node in nodes}

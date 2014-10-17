@@ -4,13 +4,23 @@ Change log for zeit.web
 1.5 (unreleased)
 ----------------
 
+- ZON-1045: add columns to cp and fix small teaser mobile image issue
+
+- ZON-987: add fullwidth teaser with text on image
+
 - ZON-1018: Render a render-with header on unrederable content
 
 - ZON-1046: Markup and style for topreads buzzbox
 
 - ZON-1059: Provide teaser images with image pattern from teaser block
 
+- ZON-1047: Connect linkreach data to buzz teaser collection (feat. ZON-1052)
+
+- ZON-1032: Provide byline module
+
 - ZON-915: Implement fullwidth teaser
+
+- ZON-1051: Markup and style for facebook buzzbox
 
 - FIX: Some small optical tweaks to nav area
 

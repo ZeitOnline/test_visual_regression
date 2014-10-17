@@ -1,11 +1,13 @@
 $buzz-box-width: em(280px)
-$buzz-box-header-width: em(240px)
+
+.teaser-collection.teaser-collection--buzz
+	padding: $petite 0
 
 .teaser-collection.teaser-collection--buzz,
 .teasers.teasers--buzz
 	width: 100%
-	+respond-min($break-phablet-min)
-		width: $buzz-box-width
+	+respond-min($break-tablet-min)
+		max-width: $buzz-box-width
 
 .teaser-collection__heading.teaser-collection__heading--buzz
 	+tablet(bold)
@@ -26,24 +28,50 @@ $buzz-box-header-width: em(240px)
 	.teaser__title
 		font-size: $font-s
 		font-weight: normal
+		line-height: $headline-line-height
 		+respond-min($break-phablet-min)
 			font-size: $font-m
 
 	.teaser__kicker
 		font-size: $font-xs
 
+.teaser.teaser--buzz-facebook
+	margin-left: 0
+	+respond-min($break-phablet-min)
+		margin-left: $petite--px
+
 .teaser.teaser--buzz:not(:last-child)
 	margin-bottom: $small
 
-.teaser__media.teaser__media--buzz
+.teaser__media.numeric.numeric--buzz-mostread
 	+tiemann
+	width: 10%
 	display: inline-block
 	vertical-align: top
 	font-size: $font-mxl
 	line-height: $font-mxl--px
 	margin: 0
 
+.annotated-icon.annotated-icon--buzz-facebook
+	margin: $thin 0 0 0
+	.icon-buzz-facebook, .label
+		display: inline-block
+	.icon-buzz-facebook
+		height: $small
+		width: $small
+		background-size: contain
+
+.annotated-icon__label
+	+tablet(thin)
+	font-size: $little
+	vertical-align: text-bottom
+	margin-left: $thin
+
 .teaser__heading.teaser__heading--buzz
 	display: inline-block
-	max-width: $buzz-box-header-width
-	margin: 0 0 0 $little
+	width: 80%
+	max-width: $buzz-box-width - $hefty
+
+.teaser__heading.teaser__heading--buzz-mostread
+	max-width: $buzz-box-width - $hefty
+	margin-left: $little

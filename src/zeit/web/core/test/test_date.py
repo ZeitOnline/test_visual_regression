@@ -35,6 +35,11 @@ def test_parse_date_should_return_none_on_invalid_date():
     assert parsed_date is None
 
 
+def test_parse_date_should_return_none_without_date():
+    parsed_date = zeit.web.core.date.parse_date(None)
+    assert parsed_date is None
+
+
 def test_delta_time_should_store_delta_time():
     assert type(delta_time.delta) == datetime.timedelta
     assert delta_time.delta == datetime.timedelta(2, 16800)
@@ -100,9 +105,30 @@ def test_filter_delta_time_should_modify_date_on_exceeding_days_limit():
 def test_stringify_delta_time_should_return_string_representation_of_delta():
     delta_time._get_babelfied_delta_time()
     stringified_dt = delta_time._stringify_delta_time()
-    assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'
+    assert stringified_dt == 'vor 2 Tagen 4 Stunden 40 Minuten'
+
+
+def test_stringify_delta_time_should_ignore_values_of_zero():
+    limited_date = zeit.web.core.date.DeltaTime(
+        zeit.web.core.date.parse_date(
+            '2014-10-09T19:22:00.1+00:00'),
+        zeit.web.core.date.parse_date(
+            '2014-10-08T18:42:00.1+00:00')
+    )
+    limited_date._get_babelfied_delta_time()
+    stringified_dt = limited_date._stringify_delta_time()
+    assert stringified_dt == 'vor 1 Tag 40 Minuten'
 
 
 def test_get_time_since_modification_should_return_delta_time_string():
     stringified_dt = delta_time.get_time_since_modification()
-    assert stringified_dt == '2 Tagen 4 Stunden 40 Minuten'
+    assert stringified_dt == 'vor 2 Tagen 4 Stunden 40 Minuten'
+
+
+def test_delta_time_should_default_to_now_for_base_date():
+    dt = zeit.web.core.date.DeltaTime(
+        zeit.web.core.date.parse_date(
+            '2014-10-09T19:22:00.1+00:00'))
+    dt_until_now = dt.get_time_since_modification()
+    assert dt_until_now is not None
+    assert dt_until_now != ''
