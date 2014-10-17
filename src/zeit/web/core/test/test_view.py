@@ -8,8 +8,8 @@ def test_json_delta_time_from_date_should_return_delta_time(testserver,
                                                             testbrowser):
     browser = testbrowser(
         '{}/json/delta_time?'
-        'date=2014-10-15T10%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'.format(
+        'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
+        '&base_date=2014-10-15T10%3A06%3A45.950590%2B00%3A00'.format(
             testserver.url))
     assert browser.contents == (
         '{"delta_time": {"time": "vor 1 Tag 1 Stunde"}}')
@@ -34,7 +34,7 @@ def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
 def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
                                                                  testbrowser,
                                                                  monkeypatch):
-    now = zeit.web.core.date.parse_date('2014-10-18T16:53:59.780412+00:00')
+    now = zeit.web.core.date.parse_date('2014-10-17T16:53:59.780412+00:00')
     monkeypatch.setattr(zeit.web.core.date, 'utcnow', lambda: now)
 
     browser = testbrowser(
@@ -44,9 +44,9 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
     assert browser.contents == (
         '{"delta_time": ['
         '{"http://xml.zeit.de/zeit-online/cp-content/article-01": '
-        '{"time": "vor 4 Tagen 22 Stunden"}}, '
+        '{"time": "vor 2 Tagen 2 Stunden"}}, '
         '{"http://xml.zeit.de/zeit-online/cp-content/article-02": '
-        '{"time": "vor 4 Tagen 22 Stunden"}}]}')
+        '{"time": "vor 2 Tagen 2 Stunden"}}]}')
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
@@ -65,7 +65,7 @@ def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
 def test_json_delta_time_from_unique_id_should_use_custom_base_time(
         testserver, testbrowser):
     browser = testbrowser(
-        '{}/json/delta_time?base_date=2014-10-14T09%3A06%3A45.95%2B00%3A00&'
+        '{}/json/delta_time?base_date=2014-10-16T09%3A06%3A45.95%2B00%3A00&'
         'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
             testserver.url))
-    assert 'vor 1 Tag 5 Stunden 47 Minuten' in browser.contents
+    assert 'vor 18 Stunden' in browser.contents

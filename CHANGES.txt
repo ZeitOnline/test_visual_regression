@@ -4,7 +4,13 @@ Change log for zeit.web
 1.5 (unreleased)
 ----------------
 
+- ZON-913: Plugin reads from JSON Endpoint and animates time and comments
+
 - ZON-987: Add fullwidth teaser with text on image
+
+- ZON-1037: Provide backend for delta time calculations
+
+- ZON-1039: Provide JSON endpoint for delta time
 
 - ZON-1045: Add columns to cp and fix small teaser mobile image issue
 

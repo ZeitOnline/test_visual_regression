@@ -4,7 +4,7 @@
 
 {% block teaser_media_position_before_teaser %}{% endblock %}
 
-<article class="teaser {% block teaser_modifier %}{% endblock %}">
+<article class="teaser {% block teaser_modifier %}{% endblock %}" data-uniqueId="{{ teaser.uniqueId }}">
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}">

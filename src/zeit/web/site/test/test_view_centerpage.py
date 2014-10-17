@@ -267,6 +267,15 @@ def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
     assert len(articles) == 3, 'We expect 3 articles here'
 
 
+def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
+    browser = testbrowser(
+        '%s/zeit-online/main-teaser-setup' % testserver.url)
+
+    all_articles = len(browser.cssselect('.teaser'))
+    articles_with_ids = len(browser.cssselect('.teaser[data-uniqueId]'))
+    assert all_articles == articles_with_ids, 'We expect all teasers here'
+
+
 def test_responsive_image_should_render_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
