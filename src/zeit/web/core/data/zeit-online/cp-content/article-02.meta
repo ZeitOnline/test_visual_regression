@@ -31,6 +31,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">glosse</attribute> 
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2014-03-17T11:58:05Z</attribute>
   <attribute ns="DAV:" name="getcontentlength">5331</attribute>
