@@ -4,6 +4,8 @@ Change log for zeit.web
 1.5 (unreleased)
 ----------------
 
+- ZON-913: Plugin reads from JSON Endpoint and animates time and comments
+
 - ZON-987: Add fullwidth teaser with text on image
 
 - ZON-1045: Add columns to cp and fix small teaser mobile image issue

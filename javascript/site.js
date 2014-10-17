@@ -22,9 +22,11 @@ require([
 require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.togglenavi',
-    'web.site/plugins/jquery.adaptnav'
+    'web.site/plugins/jquery.adaptnav',
+    'web.site/plugins/jquery.up2dateSignals'
 ], function() {
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
+    $( 'body' ).up2dateSignals();
 });
