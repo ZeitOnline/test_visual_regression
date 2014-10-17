@@ -8,9 +8,9 @@ import zeit.web.core.date
 
 delta_time = zeit.web.core.date.DeltaTime(
     zeit.web.core.date.parse_date(
-        '2014-10-09T19:22:00.1+00:00'),
+        '2014-10-07T14:42:00.1+00:00'),
     zeit.web.core.date.parse_date(
-        '2014-10-07T14:42:00.1+00:00')
+        '2014-10-09T19:22:00.1+00:00')
 )
 
 
@@ -77,9 +77,9 @@ def test_get_babelfied_delta_time_should_define_date_entities():
 def test_filter_delta_time_should_modify_date_on_exceeding_hours_limit():
     limited_date = zeit.web.core.date.DeltaTime(
         zeit.web.core.date.parse_date(
-            '2014-10-09T19:22:00.1+00:00'),
+            '2014-10-09T10:42:00.1+00:00'),
         zeit.web.core.date.parse_date(
-            '2014-10-09T10:42:00.1+00:00')
+            '2014-10-09T19:22:00.1+00:00')
     )
     limited_date._get_babelfied_delta_time()
     limited_date._filter_delta_time()
@@ -91,9 +91,9 @@ def test_filter_delta_time_should_modify_date_on_exceeding_hours_limit():
 def test_filter_delta_time_should_modify_date_on_exceeding_days_limit():
     limited_date = zeit.web.core.date.DeltaTime(
         zeit.web.core.date.parse_date(
-            '2014-10-09T19:22:00.1+00:00'),
+            '2014-10-05T14:42:00.1+00:00'),
         zeit.web.core.date.parse_date(
-            '2014-10-05T14:42:00.1+00:00')
+            '2014-10-09T19:22:00.1+00:00')
     )
     limited_date._get_babelfied_delta_time()
     limited_date._filter_delta_time()
@@ -111,9 +111,9 @@ def test_stringify_delta_time_should_return_string_representation_of_delta():
 def test_stringify_delta_time_should_ignore_values_of_zero():
     limited_date = zeit.web.core.date.DeltaTime(
         zeit.web.core.date.parse_date(
-            '2014-10-09T19:22:00.1+00:00'),
+            '2014-10-08T18:42:00.1+00:00'),
         zeit.web.core.date.parse_date(
-            '2014-10-08T18:42:00.1+00:00')
+            '2014-10-09T19:22:00.1+00:00')
     )
     limited_date._get_babelfied_delta_time()
     stringified_dt = limited_date._stringify_delta_time()

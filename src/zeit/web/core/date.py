@@ -85,7 +85,7 @@ class DeltaTime(object):
     def __init__(self, date, base_date=None):
         self.date = date
         self.base_date = base_date or utcnow()
-        self.delta = self.date - self.base_date
+        self.delta = self.base_date - self.date
 
     def _get_babelfied_delta_time(self):
         self.days = zeit.web.core.date.DeltaDaysEntity(self.delta)
