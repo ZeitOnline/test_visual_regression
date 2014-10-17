@@ -23,7 +23,6 @@ require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.adaptnav',
-    'jquery.blast',
     'web.site/plugins/jquery.up2dateSignals'
 ], function() {
     $( '.main_nav__search' ).toggleSearch();

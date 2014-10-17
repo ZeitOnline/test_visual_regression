@@ -26,7 +26,6 @@
     * Polls JSON Endpoint for text updates, and animates the into the dom
     * @class up2dateSignals
     * @memberOf jQuery.fn
-    * @requires blast.js
     * @return {object} jQuery-Object for chaining
     * @todo remove faked endpoints and count in favor of real data
     *

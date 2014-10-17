@@ -12,8 +12,7 @@ require.config({
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'libs/jquery.bxslider',
         'esiparser': 'libs/esiparser',
-        'jquery.debounce': 'web.core/plugins/jquery.debounce',
-        'jquery.blast': 'vendor/jquery.blast.min'
+        'jquery.debounce': 'web.core/plugins/jquery.debounce'
     },
     // a shim is need for jQuery Plugins to load
     // add the name or path and an array of required scripts
