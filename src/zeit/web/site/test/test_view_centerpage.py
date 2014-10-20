@@ -276,6 +276,25 @@ def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
     assert all_articles == articles_with_ids, 'We expect all teasers here'
 
 
+def test_main_teasers_should_have_id_attached(testserver, testbrowser):
+    browser = testbrowser(
+        '%s/zeit-online/main-teaser-setup' % testserver.url)
+
+    body = browser.cssselect(
+        'body[data-unique-id="'
+        'http://xml.zeit.de/zeit-online/main-teaser-setup"]')
+    assert len(body) == 1, 'Body element misses data-attribute unique-id'
+
+
+def test_main_teasers_should_have_type_attached(testserver, testbrowser):
+    browser = testbrowser(
+        '%s/zeit-online/main-teaser-setup' % testserver.url)
+
+    body = browser.cssselect(
+        'body[data-page-type="centerpage"]')
+    assert len(body) == 1, 'Body element misses data-attribute page-type'
+
+
 def test_responsive_image_should_render_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
