@@ -37,8 +37,8 @@
             inVelocity: 500,
             outEffect: { opacity: 1 },
             outVelocity: 500,
-            timeEndpoint: 'http://localhost:9090/json/delta_time?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup',
-            commentsEndpoint: 'http://localhost:9090/json/comment_count?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'
+            timeEndpoint: '/json/delta_time?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup',
+            commentsEndpoint: '/json/comment_count?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'
         }, options),
         // remove this, when the real endpoint is in use
         fakecounter = 1,
