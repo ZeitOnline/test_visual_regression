@@ -69,7 +69,6 @@
                             $.each(name, function(identifier, object) {
                                 // account for differing api
                                 if ( typeof object !== 'object') {
-                                    console.debug(identifier, object);
                                     $('[data-uniqueId=\'' + identifier + '\']')
                                     .find( selector )
                                     .trigger( 'signals:update', object );
