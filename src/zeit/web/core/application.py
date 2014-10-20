@@ -149,13 +149,6 @@ class Application(object):
 
         config.include('pyramid_beaker')
 
-        zeit.web.core.template.default_teaser_images = (
-            self.settings['default_teaser_images'])
-
-        zeit.web.core.template.image_scales = dict(
-            zeit.web.core.template.get_image_scales(
-                self.settings['vivi_zeit.frontend_image-scales']))
-
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)
         config.set_session_factory(session_factory)

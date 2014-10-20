@@ -110,4 +110,8 @@ class ITeaserSequence(zope.interface.Interface):
 
 
 class ISettings(pyramid.interfaces.ISettings):
-    pass
+    """Custom interface class to register settings as a utility"""
+
+
+class IImageScales(zope.interface.Interface):
+    """Image scale utility factory"""
