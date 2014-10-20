@@ -37,8 +37,9 @@
             inVelocity: 500,
             outEffect: { opacity: 1 },
             outVelocity: 500,
-            timeEndpoint: '/json/delta_time?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup',
-            commentsEndpoint: '/json/comment_count?unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'
+            uniqueId: $( this ).data('uniqueId'),
+            timeEndpoint: '/json/delta_time?unique_id=',
+            commentsEndpoint: '/json/comment_count?unique_id='
         }, options),
         // remove this, when the real endpoint is in use
         fakecounter = 1,
@@ -58,7 +59,7 @@
             setTimeout(function() {
                 $.ajax({
                     // replace with real endpoint
-                    url: endpoint,
+                    url: endpoint + defaults.uniqueId,
                     /**
                      * on successful request emit events
                      * @param  {object} data the objectified json pulled from endpoint
