@@ -28,5 +28,5 @@ require([
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
-    $( 'body' ).up2dateSignals();
+    $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
 });
