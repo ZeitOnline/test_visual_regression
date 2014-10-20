@@ -4,7 +4,7 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- FIX: Implement image scales as zope utility
 
 
 1.5 (2014-10-17)
