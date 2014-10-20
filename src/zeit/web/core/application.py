@@ -98,10 +98,9 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
-        pkg = pkg_resources.get_distribution('zeit.frontend')
-        pkg_version = pkg.version
-        self.settings['zmo_version'] = pkg_version
-        self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
+        version = pkg_resources.get_distribution('zeit.frontend').version
+        self.settings['zmo_version'] = version
+        self.settings['version_hash'] = base64.b16encode(version).lower()
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
