@@ -4,7 +4,7 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
-- ZON-913: Fix URLs and generalize some attributes on body and teasers tags
+- ZON-913: Fix URLs and generalize some attributes on body and teaser tags
 
 
 1.5 (2014-10-17)
