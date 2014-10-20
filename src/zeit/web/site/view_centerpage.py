@@ -29,32 +29,42 @@ class Centerpage(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_main(self):
-        """Filter teaser with layout from teaser list.
-        :rtype: dict
+        """Return all non-fullwidth teaser blocks with a minimum length of 1.
+        :rtype: list
         """
 
-        blocks = filter(
-            lambda x: hasattr(x, 'layout') and x.layout and (
-                hasattr(x.layout, 'id') and x.layout.id and len(x) > 0
-                and x.layout.id != 'zon-fullwidth'
-                and x.layout.id != 'zon-fullwidth-onimage'),
-            self.context['lead'].values())
-        return [(i.layout.id, iter(i).next(), i) for i in blocks]
+        def valid_block(b):
+            try:
+                return len(b) and b.layout.id and b.layout.id not in (
+                    'zon-fullwidth', 'zon-fullwidth-onimage')
+            except (TypeError, AttributeError):
+                return
+
+        return [(b.layout.id, iter(b).next(), b) for b in
+                self.context['lead'].values() if valid_block(b)]
 
     @zeit.web.reify
     def area_fullwidth(self):
-        for teaser_block in self.context['lead'].values():
+        """Return all fullwidth teaser blocks with a minimum length of 1.
+        :rtype: list
+        """
+
+        def valid_block(b):
             try:
-                if (('zon-fullwidth' in teaser_block.layout.id) or
-                        ('zon-fullwidth-onimage' in teaser_block.layout.id)):
-                    return [(teaser_block.layout.id, iter(teaser_block).next(),
-                            teaser_block)]
-            except AttributeError:
-                continue
-        return []
+                return len(b) and b.layout.id and b.layout.id in (
+                    'zon-fullwidth', 'zon-fullwidth-onimage')
+            except (TypeError, AttributeError):
+                return
+
+        return [(b.layout.id, iter(b).next(), b) for b in
+                self.context['lead'].values() if valid_block(b)]
 
     @zeit.web.reify
     def area_buzz_mostread(self):
+        """Return a pseudo teaser block with the top 3 most read articles.
+        :rtype: zeit.web.core.utils.nslist
+        """
+
         area = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
         area.layout.id = zeit.web.core.utils.nsunicode('mostread')
@@ -63,6 +73,10 @@ class Centerpage(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_buzz_facebook(self):
+        """Return a pseudo teaser block with the top 3 most shared articles.
+        :rtype: zeit.web.core.utils.nslist
+        """
+
         area = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
