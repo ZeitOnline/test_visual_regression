@@ -272,7 +272,7 @@ def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     all_articles = len(browser.cssselect('.teaser'))
-    articles_with_ids = len(browser.cssselect('.teaser[data-uniqueId]'))
+    articles_with_ids = len(browser.cssselect('.teaser[data-unique-id]'))
     assert all_articles == articles_with_ids, 'We expect all teasers here'
 
 

@@ -70,13 +70,13 @@
                             $.each(name, function(identifier, object) {
                                 // account for differing api
                                 if ( typeof object !== 'object') {
-                                    $('[data-uniqueId=\'' + identifier + '\']')
+                                    $('[data-unique-id=\'' + identifier + '\']')
                                     .find( selector )
                                     .trigger( 'signals:update', object );
                                 } else {
                                     for ( var name in object ) {
                                         if (object.hasOwnProperty(name)) {
-                                            $('[data-uniqueId=\'' + name + '\']')
+                                            $('[data-unique-id=\'' + name + '\']')
                                             .find( selector )
                                             .trigger( 'signals:update', object[name].time );
                                         }
