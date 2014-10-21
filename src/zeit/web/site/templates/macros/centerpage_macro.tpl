@@ -22,7 +22,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro include_teaser_datetime() -%}
+{% macro include_teaser_datetime(teaser) -%}
     <time class="teaser__datetime" datetime="2014-09-11 13:16">vor 1 Minute</time>
 {%- endmacro %}
 
