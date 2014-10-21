@@ -145,7 +145,7 @@
     </div>
 {%- endmacro %}
 
-{% macro head_user_is_logged_in_false(request)  %}
+{% macro head_user_is_logged_in_false(request) -%}
     <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
 {%- endmacro %}
 
@@ -174,7 +174,7 @@
     </div>
 {%- endmacro %}
 
-{% macro adplace( banner, view ) -%}
+{% macro adplace(banner, view) -%}
     {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     {% if view.context.advertising_enabled -%}
