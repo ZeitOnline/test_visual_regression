@@ -122,8 +122,8 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     assert len(html('div.teaser__container > div.teaser__metadata')) == 1, (
         'No teaser metadata container')
     teaser_datetime = html('div.teaser__metadata > time.teaser__datetime')[0]
-    assert teaser_datetime.text == 'vor 1 Minute', (
-        'No datetime present')
+    assert len(teaser_datetime.text), 'No datetime present'
+
     assert teaser_datetime.attrib['datetime'] == '2014-09-11 13:16', (
         'No datetime attrib present')
 
