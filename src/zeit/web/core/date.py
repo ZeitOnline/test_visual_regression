@@ -29,11 +29,9 @@ def parse_date(date,
 
 @zeit.web.register_filter
 def mod_date(article):
-    return getattr(
-        zeit.cms.workflow.interfaces.IPublishInfo(article),
-        'date_last_published_semantic', getattr(
-            zeit.cms.workflow.interfaces.IPublishInfo(article),
-            'date_last_published', None))
+    pub_info = zeit.cms.workflow.interfaces.IPublishInfo(article)
+    return (pub_info.date_last_published_semantic or
+            pub_info.date_last_published)
 
 
 @zeit.web.register_global
