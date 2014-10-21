@@ -25,6 +25,12 @@
         image_pattern="zon-large"
         areas="lead"
         />
+    <layout
+        id="zon-column"
+        title="Kolumnenteaser"
+        image_pattern="zon-column"
+        areas="lead"
+        />
 
 
     <!-- Legacy teaser formats -->
