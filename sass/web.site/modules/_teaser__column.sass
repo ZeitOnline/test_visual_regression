@@ -1,0 +1,29 @@
+// teaser__column.sass
+// Styles for the so-called "Kolumnenteaser"
+
+.teaser__column
+	background: $color-column-background
+	padding: $petite
+	margin-bottom: $petite
+	position: relative
+	+respond-min($break-phablet-min)
+		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
+	+respond-min($break-tablet-min)
+		padding: $petite $petite $petite ($teaser-image-phablet-width + $petite)
+	+respond-min($break-desktop-min)
+		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
+
+.teaser__media--overlay
+	display: none
+	margin: 0
+	width: 100%
+	+respond-min($break-phablet-min)
+		bottom: 0
+		display: inline-block
+		left: 0
+		position: absolute
+		width: ($teaser-image-desktop-width - $compact)
+	+respond-min($break-tablet-min)
+		width: $teaser-image-phablet-width
+	+respond-min($break-desktop-min)
+		width: ($teaser-image-desktop-width - $petite)
