@@ -12,7 +12,7 @@
 
 {% block teaser_metadata_head %}
     <div class="teaser__metadata teaser__metadata--ishead">
-        {{ cp.include_teaser_datetime() }}
+        {{ cp.include_teaser_datetime(teaser) }}
         {{ cp.include_teaser_commentcount(teaser) }}
     </div>
 {% endblock %}
