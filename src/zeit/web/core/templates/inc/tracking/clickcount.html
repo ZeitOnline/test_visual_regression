@@ -4,7 +4,6 @@
             // webtrekk
             if (typeof id === 'undefined') return;
             if (typeof wt !== 'undefined' && typeof wt.sendinfo === 'function') {
-                id = this.addPath(id);
                 wt.sendinfo({
                     linkId: id + window.location.pathname
                 });
@@ -13,7 +12,6 @@
         ga: function(id) {
             // google analytics
             if (typeof _gaq !== 'undefined') {
-                id = this.addPath(id);
                 _gaq.push(['_trackEvent', id + window.location.pathname, 'click']);
             }
         },

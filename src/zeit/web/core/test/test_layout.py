@@ -41,3 +41,21 @@ def test_wrapper_functions_are_working_for_features(
     spacer = driver.find_element_by_id('wrapper_spacer_header')
     assert(main_nav.is_displayed() is False), 'Main nav is not hidden'
     assert(spacer.is_displayed()), 'Spacer is not displayed'
+
+
+def test_clickcounter_produces_no_error(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+
+    # test clickcount calls are without errors
+    wt = driver.execute_script("return typeof(window.clickCount.webtrekk(1))")
+    ga = driver.execute_script("return typeof(window.clickCount.ga(1))")
+    ivw = driver.execute_script("return typeof(window.clickCount.ivw())")
+    cc = driver.execute_script("return typeof(window.clickCount.cc())")
+    all_f = driver.execute_script("return typeof(window.clickCount.all(1))")
+
+    errors = driver.execute_script('return window.jsErrors')
+
+    assert not errors
