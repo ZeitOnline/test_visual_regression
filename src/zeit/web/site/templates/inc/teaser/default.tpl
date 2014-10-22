@@ -4,7 +4,7 @@
 
 {% block teaser_media_position_before_teaser %}{% endblock %}
 
-<article class="teaser {% block teaser_modifier %}{% endblock %}" data-uniqueId="{{ teaser.uniqueId }}">
+<article class="teaser {% block teaser_modifier %}{% endblock %}" data-unique-id="{{ teaser.uniqueId }}">
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}">
@@ -35,7 +35,7 @@
         {% block teaser_metadata_default %}
         <div class="teaser__metadata">
             {% block teaser_datetime %}
-                {{ cp.include_teaser_datetime() }}
+                {{ cp.include_teaser_datetime(teaser) }}
             {% endblock %}
             {% block teaser_commentcount%}
                 {{ cp.include_teaser_commentcount(teaser) }}

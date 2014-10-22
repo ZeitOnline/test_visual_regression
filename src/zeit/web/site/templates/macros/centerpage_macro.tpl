@@ -22,8 +22,8 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro include_teaser_datetime() -%}
-    <time class="teaser__datetime" datetime="2014-09-11 13:16">vor 1 Minute</time>
+{% macro include_teaser_datetime(teaser) -%}
+    <time class="teaser__datetime" datetime="{{ teaser | mod_date |strftime('%Y-%m-%d %H:%M') }}">{{ get_delta_time(teaser) | hide_none }}</time>
 {%- endmacro %}
 
 {% macro include_teaser_commentcount(teaser) -%}
