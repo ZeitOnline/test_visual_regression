@@ -86,7 +86,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
     teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    teaser.uniqueId = 'http://xml.zeit.de/myhref'
+    teaser.uniqueId = 'http://xml.zeit.de/artikel/header1'
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
@@ -98,7 +98,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No headline is present')
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == 'http://xml.zeit.de/myhref', (
+    assert link.attrib['href'] == 'http://xml.zeit.de/artikel/header1', (
         'No link is present')
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
         'There is no link title')
@@ -122,9 +122,9 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     assert len(html('div.teaser__container > div.teaser__metadata')) == 1, (
         'No teaser metadata container')
     teaser_datetime = html('div.teaser__metadata > time.teaser__datetime')[0]
-    assert teaser_datetime.text == 'vor 1 Minute', (
-        'No datetime present')
-    assert teaser_datetime.attrib['datetime'] == '2014-09-11 13:16', (
+    assert len(teaser_datetime.text), 'No datetime present'
+
+    assert teaser_datetime.attrib['datetime'] == '2013-10-08 09:25', (
         'No datetime attrib present')
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]

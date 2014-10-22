@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-913: Fix URLs and generalize some attributes on body and teaser tags
 
+- ZON-1040: Render natural language timestamp into markup
+
 
 1.5 (2014-10-17)
 ----------------
