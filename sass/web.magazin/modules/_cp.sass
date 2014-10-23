@@ -1,6 +1,6 @@
 //main cp styles
-$cp_comment__count-height: em(50px)
-$cp_comment__count-width: em(60px)
+$cp_comment__count-height: 40px
+$cp_comment__count-width: 52px
 $icon-galerie-icon-white-height: em(30px)
 $icon-galerie-icon-white-width: em(40px)
 
@@ -47,17 +47,19 @@ $icon-galerie-icon-white-width: em(40px)
 	+fake-box-shadow-inset($white)
 
 //comments
+// please stick to pixel values here, as there is an issue
+// with ems in Android
 .cp_comment__count__wrap
 	font-size: $little
 	color: $white
 	position: absolute
 	text-align: center
-	padding-right: $micro
-	padding-top: $thin
+	padding-right: $micro--px
+	padding-top: $thin--px
 	height: $cp_comment__count-height
 	width: $cp_comment__count-width
-	right: $little
-	top: $small
+	right: $little--px
+	top: $little--px
 	z-index: 2
 
 //icons
