@@ -3,27 +3,98 @@
 
 .teaser__column
 	background: $color-column-background
-	padding: $petite
-	margin-bottom: $petite
+	border-top: none
+	padding: $teaser-column-shadow $petite $petite $petite
+	margin: $teaser-column-topmargin 0 $petite 0
+	margin-left: -$page-padding
+	margin-right: -$page-padding
 	position: relative
-	+respond-min($break-phablet-min)
-		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
+	// next teaser has no border!
+	& + .teaser
+		border-top: none
+	+single-box-shadow(0, $teaser-column-shadow, 0, 0, $color-column-shadow, true)
 	+respond-min($break-tablet-min)
-		padding: $petite $petite $petite ($teaser-image-phablet-width + $petite)
+		margin-left: 0
+		margin-right: 0
 	+respond-min($break-desktop-min)
+		+single-box-shadow(0, 0, 0, 0, $color-column-background)
+		margin: $petite 0 $petite 0
 		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
 
-.teaser__media--overlay
-	display: none
-	margin: 0
-	width: 100%
-	+respond-min($break-phablet-min)
-		bottom: 0
-		display: inline-block
-		left: 0
-		position: absolute
-		width: ($teaser-image-desktop-width - $compact)
-	+respond-min($break-tablet-min)
-		width: $teaser-image-phablet-width
+.teaser__column__series
+	display: inline-block
+	font-size: $little
+	left: $teaser-column-series-position
+	position: absolute
+	text-transform: uppercase
+	top: $small
+	+tablet(bold)
+	a:link &,
+	a:visited &,
+	a:active &,
+	a:hover &
+		color: $grey--mid
 	+respond-min($break-desktop-min)
-		width: ($teaser-image-desktop-width - $petite)
+		display: inline
+		left: auto
+		position: static
+		top: auto
+		&:after
+			content: ' \2022 '
+
+.teaser__heading--bordered
+	padding-top: $petite
+	+respond-min($break-desktop-min)
+		padding-top: 0
+
+.teaser__column__kicker-container
+	+respond-min($break-desktop-min)
+		display: block
+		margin-bottom: em(4px, $font-s--px)
+
+.teaser__column__kicker
+	@extend .teaser__kicker
+	font-weight: 200
+	font-family: TabletGothic
+	+respond-min($break-desktop-min)
+		display: inline
+
+.teaser__column__title
+	@extend .teaser__title
+	font-family: TabletGothic
+	font-size: $font-l
+	font-weight: 700
+	+respond-min($break-desktop-min)
+		font-size: rem($font-xl--px - 1)
+
+.teaser__media--overlay
+	height: $teaser-column-mobile-image-size
+	left: 0
+	margin: 0
+	overflow: hidden
+	position: absolute
+	top: -($teaser-column-mobile-image-size - $teaser-column-shadow)
+	width: $teaser-column-mobile-image-size
+	+respond-min($break-desktop-min)
+		bottom: 0
+		height: 100%
+		left: 0
+		overflow: hidden
+		position: absolute
+		right: 60%
+		top: 0
+		width: 40%
+
+.teaser__byline.teaser__byline--column
+	color: $grey
+	font-family: TabletGothic
+	font-size: 14px
+	font-style: normal
+	font-weight: 200
+	margin-bottom: 0
+
+.teaser__column__metadata
+	@extend .teaser__metadata
+	color: $grey
+	font-size: 14px
+	font-weight: 200
