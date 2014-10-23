@@ -35,7 +35,7 @@
         {% block teaser_metadata_default %}
         <div class="teaser__metadata">
             {% block teaser_datetime %}
-                {{ cp.include_teaser_datetime() }}
+                {{ cp.include_teaser_datetime(teaser) }}
             {% endblock %}
             {% block teaser_commentcount%}
                 {{ cp.include_teaser_commentcount(teaser) }}

@@ -4,6 +4,7 @@ import datetime
 import babel.dates
 import zope.interface
 
+import zeit.web
 import zeit.web.core.interfaces
 
 
@@ -24,6 +25,21 @@ def parse_date(date,
         return datetime.datetime.strptime(date, date_format)
     except (TypeError, ValueError):
         return
+
+
+@zeit.web.register_filter
+def mod_date(article):
+    pub_info = zeit.cms.workflow.interfaces.IPublishInfo(article)
+    return (pub_info.date_last_published_semantic or
+            pub_info.date_last_published)
+
+
+@zeit.web.register_global
+def get_delta_time(article, base_date=None):
+    modification = mod_date(article)
+    if modification is not None:
+        dt = DeltaTime(modification.replace(tzinfo=None), base_date)
+        return dt.get_time_since_modification()
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)

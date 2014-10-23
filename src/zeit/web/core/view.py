@@ -400,24 +400,13 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
         content = zeit.cms.interfaces.ICMSContent(unique_id)
         cp = zeit.web.site.view_centerpage.Centerpage(content, request)
     except TypeError:
-        return pyramid.response.Response(
-            'Invalid resource', 500)
+        return pyramid.response.Response('Invalid resource', 500)
     json_dt = {'delta_time': []}
     for teaser in cp.area_main:
-        # 1. Try to get date_last_published_semantic
-        # 2. Try to get date_last_published
-        # 3. Default to None
-        mod_date = getattr(
-            zeit.cms.workflow.interfaces.IPublishInfo(teaser[1]),
-            'date_last_published_semantic', getattr(
-                zeit.cms.workflow.interfaces.IPublishInfo(teaser[1]),
-                'date_last_published', None))
-        if mod_date is None:
-            continue
-        dt = zeit.web.core.date.DeltaTime(
-            mod_date.replace(tzinfo=None), parsed_base_date)
-        json_dt['delta_time'].append(
-            {teaser[1].uniqueId: {'time': dt.get_time_since_modification()}})
+        time = zeit.web.core.date.get_delta_time(
+            teaser[1], base_date=parsed_base_date)
+        if time:
+            json_dt['delta_time'].append({teaser[1].uniqueId: {'time': time}})
     return json_dt
 
 
