@@ -33,10 +33,10 @@ $zon-fullwidth-image-height: em(528px)
 .teaser--small
 	border-bottom: none
 
-.teaser--small.teaser--hasmedia
+.teaser__series.teaser__series--hasmedia
 	position: relative
 	+respond-min($break-phablet-min)
-		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
 	+respond-min($break-tablet-min)
 		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
 	+respond-min($break-desktop-min)
@@ -132,7 +132,7 @@ $zon-fullwidth-image-height: em(528px)
 		position: absolute
 		left: 0
 		top: $petite
-		width: $teaser-image-desktop-width
+		width: $teaser-image-phablet-width
 	+respond-min($break-tablet-min)
 		width: $teaser-image-phablet-width
 	+respond-min($break-desktop-min)
