@@ -21,20 +21,18 @@ import pytz
 import repoze.bitblt.transform
 import requests
 import zope.component
+import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
-import zeit.web.core.utils
 import zeit.web.core.comments
+import zeit.web.core.interfaces
+import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
-
-# Set during startup through application.py
-default_teaser_images = None
-image_scales = None
 
 
 class Undefined(jinja2.runtime.Undefined):
@@ -281,23 +279,6 @@ def sharing_image_url(image_group,
     return default_image_url(sharing_image, image_pattern)
 
 
-def get_image_scales(scale_source):
-    def to_int(value):
-        return int(re.sub('[^0-9]', '', '0' + str(value)))
-
-    if not scale_source:
-        return
-    try:
-        fileobject = urllib2.urlopen(scale_source)
-    except urllib2.URLError:
-        return
-    for scale in lxml.objectify.fromstring(fileobject.read()).iter():
-        name = scale.attrib.get('name')
-        width = to_int(scale.attrib.get('width'))
-        height = to_int(scale.attrib.get('height'))
-        yield name, (width, height)
-
-
 @zeit.web.register_filter
 def closest_substitute_image(image_group,
                              image_pattern,
@@ -324,7 +305,8 @@ def closest_substitute_image(image_group,
         return image_group.get(image_pattern)
 
     # Determine the image size correlating to the provided pattern.
-    s_size = (image_scales.get(image_pattern) or
+    scales = zope.component.getUtility(zeit.web.core.interfaces.IImageScales)
+    s_size = (scales.get(image_pattern) or
               default_images_sizes.get(image_pattern))
 
     if not s_size:
@@ -378,6 +360,10 @@ def get_teaser_template(block_layout,
 @zeit.web.register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
     import zeit.web.core.centerpage
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    default_id = conf.get('default_teaser_images')
+
     if unique_id:
         try:
             asset = zeit.cms.interfaces.ICMSContent(unique_id)
@@ -386,9 +372,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     else:
         asset = zeit.web.core.centerpage.get_image_asset(teaser)
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return get_teaser_image(
-            teaser_block, teaser,
-            unique_id=zeit.web.core.template.default_teaser_images)
+        return get_teaser_image(teaser_block, teaser, unique_id=default_id)
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
@@ -398,8 +382,8 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 
-    image_id = '%s/%s-%s.%s' % \
-        (asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
+    image_id = '%s/%s-%s.%s' % (
+        asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
 
     try:
         teaser_image = zope.component.getMultiAdapter(
@@ -411,9 +395,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         # Don't fallback when an unique_id is given explicitly in order to
         # prevent infinite recursion.
         if not unique_id:
-            return get_teaser_image(
-                teaser_block, teaser,
-                unique_id=zeit.web.core.template.default_teaser_images)
+            return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
 
 @zeit.web.register_global
@@ -431,6 +413,31 @@ def get_image_metadata(image):
         return image_metadata
     except TypeError:
         return
+
+
+class ImageScales(dict):
+
+    zope.interface.implements(zeit.web.core.interfaces.IImageScales)
+
+    def __init__(self, **kw):
+        def to_int(self, value):
+            return int(re.sub('[^0-9]', '', '0' + str(value)))
+
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        scale_source = conf.get('vivi_zeit.frontend_image-scales')
+
+        if not scale_source:
+            return
+        try:
+            fileobject = urllib2.urlopen(scale_source)
+        except urllib2.URLError:
+            return
+        for scale in lxml.objectify.fromstring(fileobject.read()).iter():
+            name = scale.attrib.get('name')
+            width = to_int(scale.attrib.get('width'))
+            height = to_int(scale.attrib.get('height'))
+            kw[name] = (width, height)
+        dict.__init__(**kw)
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):

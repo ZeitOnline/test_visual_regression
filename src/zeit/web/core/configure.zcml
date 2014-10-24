@@ -2,7 +2,9 @@
 
     <include file="vivi.zcml" />
     <grok:grok exclude="test" package="." />
+
     <adapter factory="zeit.seo.seo.SEO" />
     <adapter factory="zeit.seo.seo.seo_dav_properties" />
 
+    <utility factory="zeit.web.core.template.ImageScales" provides="zeit.web.core.interfaces.IImageScales"/>
 </configure>
