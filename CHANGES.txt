@@ -4,6 +4,8 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
+- BUG-37: Correct comment count css
+
 - BUG-29: fix ClickCount error, that might have leaded to webview bug
 
 - ZON-913: Fix URLs and generalize some attributes on body and teaser tags
