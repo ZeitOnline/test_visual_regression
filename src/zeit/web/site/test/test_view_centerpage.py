@@ -172,7 +172,7 @@ def test_fullwidth_teaser_should_be_rendered_correctly(
     assert len(meta_head) == 1, 'No teaser metadata in head'
     assert meta_def.get('class') == (
         'teaser__metadata teaser__metadata--ishead'), (
-            'Metadata on last position is not hidden')
+        'Metadata on last position is not hidden')
 
 
 def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
@@ -224,15 +224,15 @@ def test_fullwidth_onimage_teaser_should_be_rendered_correctly(
                             'teaser__media--hasshadow.scaled-image')
     teaser = browser.cssselect('.fullwidth_teasers > '
                                '.teaser.teaser--ispositioned.teaser--islight')
-    inlineByline = browser.cssselect('.fullwidth_teasers '
-                                     '.teaser__text > .teaser__byline'
-                                     '.teaser__byline--isinline')
+    inline_byline = browser.cssselect('.fullwidth_teasers '
+                                      '.teaser__text > .teaser__byline'
+                                      '.teaser__byline--isinline')
     meta = browser.cssselect('.fullwidth_teasers .teaser__metadata')
 
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
     assert len(img) == 1, 'No fullwidth image'
     assert len(teaser) == 1, 'No fullwidth teaser'
-    assert len(inlineByline) == 1, 'No inline byline in fullwidth teaser'
+    assert len(inline_byline) == 1, 'No inline byline in fullwidth teaser'
     assert len(meta) == 1, 'No teaser metadata in fullwidth teaser'
 
 

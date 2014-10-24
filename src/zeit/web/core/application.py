@@ -98,10 +98,9 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
-        pkg = pkg_resources.get_distribution('zeit.frontend')
-        pkg_version = pkg.version
-        self.settings['zmo_version'] = pkg_version
-        self.settings['version_hash'] = base64.b16encode(pkg_version).lower()
+        version = pkg_resources.get_distribution('zeit.frontend').version
+        self.settings['zmo_version'] = version
+        self.settings['version_hash'] = base64.b16encode(version).lower()
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,
@@ -149,13 +148,6 @@ class Application(object):
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
 
         config.include('pyramid_beaker')
-
-        zeit.web.core.template.default_teaser_images = (
-            self.settings['default_teaser_images'])
-
-        zeit.web.core.template.image_scales = dict(
-            zeit.web.core.template.get_image_scales(
-                self.settings['vivi_zeit.frontend_image-scales']))
 
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)

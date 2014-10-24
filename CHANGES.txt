@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1040: Render natural language timestamp into markup
 
+- FIX: Implement image scales as zope utility
+
 
 1.5 (2014-10-17)
 ----------------
