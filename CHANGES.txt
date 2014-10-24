@@ -4,6 +4,8 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
+- ZON-916: Add column teaser
+
 - BUG-37: Correct comment count css
 
 - BUG-29: fix ClickCount error, that might have leaded to webview bug
