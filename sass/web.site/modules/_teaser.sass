@@ -24,7 +24,9 @@ $zon-fullwidth-image-height: em(528px)
 .teaser
 	+pie-clearfix
 	padding: $petite 0
-	border-bottom: 1px solid #ccc
+	border-top: 1px solid #ccc
+	&:nth-of-type(1)
+		border-top: none
 	+respond-min($break-tablet-min)
 		border-bottom: none
 
@@ -86,8 +88,8 @@ $zon-fullwidth-image-height: em(528px)
 .teaser__combined-link
 	color: $color-text
 	text-decoration: none
-	&:link > .teaser__kicker,
-	&:visited > .teaser__kicker
+	&:link .teaser__kicker,
+	&:visited .teaser__kicker
 		color: $color-text-highlighted
 	&:link > .teaser__title,
 	&:visited > .teaser__title
