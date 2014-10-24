@@ -375,3 +375,47 @@ def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
     assert len(fullwidth) == 1, 'We expect 1 div here'
     assert len(content) == 1, 'We expect 1 div here'
     assert len(informatives) == 1, 'We expect 1 div here'
+
+
+def test_column_teaser_should_render_series_element(testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/teaser-types-setup' % testserver.url)
+
+    series_element = browser.cssselect(
+        '.teaser__column .teaser__column__series')
+    assert len(series_element) == 1
+    assert series_element[0].text == u'F\xfcnf vor acht'
+
+
+def test_column_teaser_should_have_mobile_layout(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/teaser-types-setup' % testserver.url)
+    img_box = driver.find_elements_by_class_name('teaser__media--overlay')[0]
+    assert img_box.is_displayed(), 'image box is not displayed'
+
+    width_script = 'return $(".teaser__media--overlay").width()'
+    width = driver.execute_script(width_script)
+
+    if screen_size[0] == 320:
+        assert width == 80, 'mobile: imgage box of wrong size'
+    elif screen_size[0] == 520:
+        assert width == 80, 'phablet: imgage box of wrong size'
+    elif screen_size[0] == 768:
+        assert width == 80, 'ipad: imgage box of wrong size'
+    else:
+        assert width > 200, 'desktop: image box of wrong size'
+
+
+def test_column_teaser_should_have_different_font(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.get('%s/zeit-online/teaser-types-setup' % testserver.url)
+
+    font_script = 'return $(".teaser__column__title").css("font-family")'
+    font = driver.execute_script(font_script)
+    assert font == "TabletGothic", 'teaser column font is wrong'
