@@ -1,0 +1,100 @@
+// teaser for series elements
+
+.teaser__series
+	+respond-min($break-phablet-min)
+		border-top: 1px dotted $grey--mid
+		border-bottom: 1px dotted $grey--mid
+		margin-top: $little
+		position: relative
+	+respond-min($break-desktop-min)
+		margin-top: em(16px)
+
+// prevent next teaser from having border
+.teaser__series + .teaser
+	+respond-min($break-phablet-min)
+		border-top: none
+
+.teaser--series.teaser--hasmedia
+	position: relative
+	+respond-min($break-phablet-min)
+		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
+	+respond-min($break-tablet-min)
+		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
+	+respond-min($break-desktop-min)
+		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+
+.teaser__label
+	font-family: TabletGothic
+	font-size: $little
+	font-weight: 200
+	letter-spacing: $standard-letter-spacing
+	line-height: 1
+	margin: 0 0 1em 0
+	text-transform: uppercase
+	+respond-min($break-phablet-min)
+		background: $color-page-bg
+		left: 0
+		padding-right: em(5px, $little--px)
+		position: absolute
+		top: em(-6px, $little--px)
+		+inline-block
+	+respond-min($break-desktop-min)
+		font-size: em(16px)
+		padding-right: em(5px)
+		top: em(-8px, 16px)
+
+.teaser__media--series
+	width: 100%
+	+respond-min($break-phablet-min)
+		display: inline-block
+		position: absolute
+		left: 0
+		top: $petite
+		width: $teaser-image-phablet-width
+	+respond-min($break-tablet-min)
+		width: $teaser-image-phablet-width
+	+respond-min($break-desktop-min)
+		width: $teaser-image-desktop-width
+
+.teaser__series__kicker
+	@extend .teaser__kicker
+	font-size: $font-s--rem
+	font-weight: 200
+
+.teaser__combined-link
+	&:link .teaser__series__kicker,
+	&:visited .teaser__series__kicker
+		color: $color-text-highlighted
+	&:link .teaser__series__title,
+	&:visited .teaser__series__title
+		color: $color-text
+	&:hover
+		text-decoration: none
+		& .teaser__series__title
+			text-decoration: underline
+
+.teaser__series__title
+	display: block
+	font-size: $font-l--rem
+	font-weight: bold
+	line-height: 1.15
+	+respond-min($break-desktop-min)
+		font-size: $font-zon-xl--rem
+
+.teaser__series__text
+	@extend .teaser__text
+	color: $grey--mid
+
+// as macro not BEMable as wished
+// @todo: change macro
+.teaser__series__byline
+	color: $grey
+	font-family: TabletGothic
+	font-style: normal
+	margin-bottom: 0
+
+.teaser__series__metadata
+	@extend .teaser__metadata
+	color: $grey
+	font-size: $font-s--rem
+	font-weight: 200
