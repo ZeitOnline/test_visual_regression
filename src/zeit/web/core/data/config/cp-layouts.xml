@@ -14,7 +14,7 @@
         areas="lead"
         />
     <layout
-        id="zon-small-serie"
+        id="teaser-series"
         title="kleiner Teaser mit Serien-Label"
         image_pattern="zon-thumbnail"
         areas="lead"
