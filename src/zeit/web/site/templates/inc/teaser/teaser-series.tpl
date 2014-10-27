@@ -10,7 +10,3 @@
         teaser | auto_select_asset | block_type +
         "_teaser-series-thumbnail.tpl" ignore missing with context %}
 {% endblock %}
-
-{% block teaser_byline %}
-    {{ cp.include_teaser_byline(teaser, 'teaser-series') }}
-{% endblock %}

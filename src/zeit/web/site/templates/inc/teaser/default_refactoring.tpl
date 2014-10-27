@@ -31,15 +31,15 @@
         <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}{% block teaser_byline_inner %}{% endblock %}</p>
         {% endblock %}
         {% block teaser_byline %}
-            {{ cp.include_teaser_byline(teaser) }}
+            {{ cp.include_teaser_byline(teaser, self.layout()) }}
         {% endblock %}
         {% block teaser_metadata_default %}
         <div class="{{ self.layout() }}__metadata">
             {% block teaser_datetime %}
-                {{ cp.include_teaser_datetime(teaser) }}
+                {{ cp.include_teaser_datetime(teaser, self.layout()) }}
             {% endblock %}
             {% block teaser_commentcount%}
-                {{ cp.include_teaser_commentcount(teaser) }}
+                {{ cp.include_teaser_commentcount(teaser, self.layout()) }}
             {% endblock %}
         </div>
         {% endblock %}

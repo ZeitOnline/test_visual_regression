@@ -22,14 +22,14 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro include_teaser_datetime(teaser, layout='', modifier='') -%}
-    <time class="teaser-{{ layout }}__datetime {{modifier}}" datetime="{{ teaser | mod_date |strftime('%Y-%m-%d %H:%M') }}">{{ get_delta_time(teaser) | hide_none }}</time>
+{% macro include_teaser_datetime(teaser, layout_id='', modifier='') -%}
+    <time class="{{ layout_id }}__datetime {{modifier}}" datetime="{{ teaser | mod_date |strftime('%Y-%m-%d %H:%M') }}">{{ get_delta_time(teaser) | hide_none }}</time>
 {%- endmacro %}
 
-{% macro include_teaser_commentcount(teaser, layout='', modifier='') -%}
-    <a class="teaser-{{ layout }}__commentcount {{modifier}}" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
+{% macro include_teaser_commentcount(teaser, layout_id='', modifier='') -%}
+    <a class="{{ layout_id }}__commentcount {{modifier}}" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
 {%- endmacro %}
 
-{% macro include_teaser_byline(teaser, layout='', modifier='') -%}
-    <span class="teaser-{{ layout }}__byline {{modifier}}">{{ teaser | render_byline }}</span>
+{% macro include_teaser_byline(teaser, layout_id='', modifier='') -%}
+    <span class="{{ layout_id }}__byline {{modifier}}">{{ teaser | render_byline }}</span>
 {%- endmacro %}
