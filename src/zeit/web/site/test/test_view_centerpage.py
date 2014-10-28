@@ -382,7 +382,7 @@ def test_series_teaser_should_render_series_element(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/teaser-serie-setup' % testserver.url)
 
-    series_element = browser.cssselect('.teaser__label--series')
+    series_element = browser.cssselect('.teaser-series__label')
     assert len(series_element) == 1
     assert series_element[0].text == 'Serie: App-Kritik'
 
@@ -393,16 +393,16 @@ def test_series_teaser_should_have_mobile_layout(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
-    img_box = driver.find_elements_by_class_name('teaser__media--series')[0]
+    img_box = driver.find_elements_by_class_name('teaser-series__media')[0]
     assert img_box.is_displayed(), 'image box is not displayed'
 
-    width_script = 'return $(".teaser__media--series").width()'
+    width_script = 'return $(".teaser-series__media").width()'
     width = driver.execute_script(width_script)
 
-    pad_script = 'return $(".teaser__series--hasmedia").css("padding-left")'
+    pad_script = 'return $(".teaser-series--hasmedia").css("padding-left")'
     padding = driver.execute_script(pad_script)
 
-    border_script = 'return $(".teaser__series").css("border-top-style")'
+    border_script = 'return $(".teaser-series").css("border-top-style")'
     border = driver.execute_script(border_script)
 
     if screen_size[0] == 320:
