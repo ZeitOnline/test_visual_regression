@@ -415,6 +415,12 @@ def get_image_metadata(image):
         return
 
 
+@zeit.web.register_global
+def get_google_tag_manager_host():
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return conf.get('google_tag_manager_host')
+
+
 class ImageScales(dict):
 
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
