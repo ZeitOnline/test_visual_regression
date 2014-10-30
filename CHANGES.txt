@@ -4,6 +4,12 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
+- FIX: make google tag manager host configurable for tests
+
+- ZON-1078: Refactor teaser to be BEMish again
+
+- ZON-1078: Add series teaser element
+
 - BUG-37: Correct comment count css
 
 - BUG-29: fix ClickCount error, that might have leaded to webview bug
