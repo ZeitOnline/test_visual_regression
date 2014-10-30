@@ -377,15 +377,15 @@ def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
     assert len(informatives) == 1, 'We expect 1 div here'
 
 
-def test_column_teaser_should_render_series_element(testserver, testbrowser):
+def test_column_teaser_should_render_column_element(testserver, testbrowser):
 
     browser = testbrowser(
         '%s/zeit-online/teaser-types-setup' % testserver.url)
 
-    series_element = browser.cssselect(
+    col_element = browser.cssselect(
         '.teaser__column .teaser__column__series')
-    assert len(series_element) == 1
-    assert series_element[0].text == u'F\xfcnf vor acht'
+    assert len(col_element) == 1
+    assert col_element[0].text == u'F\xfcnf vor acht'
 
 
 def test_column_teaser_should_have_mobile_layout(
@@ -419,3 +419,49 @@ def test_column_teaser_should_have_different_font(
     font_script = 'return $(".teaser__column__title").css("font-family")'
     font = driver.execute_script(font_script)
     assert font == "TabletGothic", 'teaser column font is wrong'
+
+
+def test_series_teaser_should_render_series_element(testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/teaser-serie-setup' % testserver.url)
+
+    series_element = browser.cssselect('.teaser-series__label')
+    assert len(series_element) == 1
+    assert series_element[0].text == 'Serie: App-Kritik'
+
+
+def test_series_teaser_should_have_mobile_layout(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
+    img_box = driver.find_elements_by_class_name('teaser-series__media')[0]
+    assert img_box.is_displayed(), 'image box is not displayed'
+
+    width_script = 'return $(".teaser-series__media").width()'
+    width = driver.execute_script(width_script)
+
+    pad_script = 'return $(".teaser-series--hasmedia").css("padding-left")'
+    padding = driver.execute_script(pad_script)
+
+    border_script = 'return $(".teaser-series").css("border-top-style")'
+    border = driver.execute_script(border_script)
+
+    if screen_size[0] == 320:
+        assert width > 250, 'mobile: imgage box of wrong size'
+        assert padding == u'0px', 'mobile: box layout wrong'
+        assert border == 'solid', 'mobile: border-top wrong'
+    elif screen_size[0] == 520:
+        assert width == 150, 'phablet: imgage box of wrong size'
+        assert padding == u'170px', 'phablet: box layout wrong'
+        assert border == 'dotted', 'phablet: border-top wrong'
+    elif screen_size[0] == 768:
+        assert width == 150, 'ipad: imgage box of wrong size'
+        assert padding == u'170px', 'ipad: box layout wrong'
+        assert border == 'dotted', 'ipad: border-top wrong'
+    else:
+        assert width == 250, 'desktop: image box of wrong size'
+        assert padding == u'270px', 'desktop: box layout wrong'
+        assert border == 'dotted', 'desktop: border-top wrong'

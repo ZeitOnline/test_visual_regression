@@ -14,6 +14,12 @@
         areas="lead"
         />
     <layout
+        id="teaser-series"
+        title="kleiner Teaser mit Serien-Label"
+        image_pattern="zon-thumbnail"
+        areas="lead"
+        />
+    <layout
         id="zon-fullwidth"
         title="vollbreiter Aufmacher"
         image_pattern="zon-large"

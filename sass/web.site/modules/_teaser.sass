@@ -1,27 +1,8 @@
-// just a helper until we introduce the real structure
+/// Teaser Scaffolding
+/// As all teasers should be BEM-Blocks, they need to share
+/// lots of code via placeholder selectors
 
-$zon-teaser-standart-width: em(480px)
-$zon-teaser-standart-height: em(620px)
-$zon-fullwidth-image-height: em(528px)
-
-.teasers
-	position: relative
-	width: 100%
-	+respond-min($break-tablet-min)
-		width: em(480px)
-	+respond-min($break-desktop-min)
-		width: em(620px)
-
-.fullwidth_teasers
-	position: relative
-	.teaser__media--hasshadow
-		width: 100%
-		height: $zon-fullwidth-image-height
-		margin-top: $petite
-		.teaser__media-item
-			max-height: $zon-fullwidth-image-height
-
-.teaser
+%teaser
 	+pie-clearfix
 	padding: $petite 0
 	border-top: 1px solid #ccc
@@ -30,17 +11,107 @@ $zon-fullwidth-image-height: em(528px)
 	+respond-min($break-tablet-min)
 		border-bottom: none
 
-.teaser--small
-	border-bottom: none
-
-.teaser--small.teaser--hasmedia
+%teaser-small-media-placement
 	position: relative
 	+respond-min($break-phablet-min)
-		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
 	+respond-min($break-tablet-min)
 		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
 	+respond-min($break-desktop-min)
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+
+%teaser-small-media
+	display: none
+	width: 100%
+	+respond-min($break-phablet-min)
+		display: inline-block
+		position: absolute
+		left: 0
+		top: $petite
+		width: $teaser-image-phablet-width
+	+respond-min($break-tablet-min)
+		width: $teaser-image-phablet-width
+	+respond-min($break-desktop-min)
+		width: $teaser-image-desktop-width
+
+%teaser-heading
+	font-size: 1em
+	margin: 0 0 $fine 0
+
+%teaser-kicker
+	display: block
+	font-family: TabletGothic
+	font-size: $font-s
+	font-weight: bold
+	letter-spacing: $standard-letter-spacing
+	margin-bottom: em(4px, $font-s--px)
+
+%teaser-combined-link
+	color: $color-text
+	text-decoration: none
+	&:link .teaser__kicker,
+	&:visited .teaser__kicker
+		color: $color-text-highlighted
+	&:link > .teaser__title,
+	&:visited > .teaser__title
+		color: $color-text
+	&:hover
+		text-decoration: none
+		& > .teaser__title
+			text-decoration: underline
+
+%teaser-title
+	display: block
+	font-family: FranziskaWebPro
+	font-size: $font-xl--rem
+	font-weight: bold
+	line-height: 1.15
+	+respond-min($break-tablet-min)
+		font-size: $font-xxl--rem
+
+%teaser-media
+	margin: 0 0 $little 0
+
+%teaser-media-item
+	height: auto
+	max-width: 100%
+	width: 100%
+
+%teaser-text
+	line-height: 1.4
+	margin: 0 0 $thin 0
+
+%teaser-byline
+	display: block
+	font-family: FranziskaWebPro
+	font-size: em(15px)
+	font-style: italic
+	margin-bottom: rem(6px)
+
+%teaser-metadata
+	font-size: em(13px)
+	font-weight: bold
+	letter-spacing: $standard-letter-spacing
+
+%teaser-commentcount
+	margin-left: $fine
+	&:link, &:visited
+		border-bottom: 1px solid #ccc
+		color: inherit
+		text-decoration: none
+	&:hover
+		border-bottom: 1px solid #777
+
+/// @todo: delete class teaser after refactoring is done
+/// @deprecated
+.teaser
+	@extend %teaser
+
+.teaser--small
+	border-bottom: none
+
+.teaser--small.teaser--smallmedia
+	@extend %teaser-small-media-placement
 
 .teaser--iscentered
 	.teaser__heading
@@ -72,13 +143,12 @@ $zon-fullwidth-image-height: em(528px)
 		font-weight: normal
 
 .teaser__heading
-	font-size: 1em
-	margin: 0 0 $fine 0
+	@extend %teaser-heading
 
-.teaser__heading--hasmedia
+.teaser__heading.teaser__heading--hasmedia
 	margin: 0 0 $petite 0
 
-.teaser__heading--issized
+.teaser__heading.teaser__heading--issized
 	+respond-min($break-phablet-min)
 		width: 70%
 
@@ -86,35 +156,13 @@ $zon-fullwidth-image-height: em(528px)
 	margin: 0 0 $thin 0
 
 .teaser__combined-link
-	color: $color-text
-	text-decoration: none
-	&:link .teaser__kicker,
-	&:visited .teaser__kicker
-		color: $color-text-highlighted
-	&:link > .teaser__title,
-	&:visited > .teaser__title
-		color: $color-text
-	&:hover
-		text-decoration: none
-		& > .teaser__title
-			text-decoration: underline
+	@extend %teaser-combined-link
 
 .teaser__kicker
-	display: block
-	font-family: TabletGothic
-	font-size: $font-s
-	font-weight: bold
-	letter-spacing: $standard-letter-spacing
-	margin-bottom: em(4px, $font-s--px)
+	@extend %teaser-kicker
 
 .teaser__title
-	display: block
-	font-family: FranziskaWebPro
-	font-size: $font-xl--rem
-	font-weight: bold
-	line-height: 1.15
-	+respond-min($break-tablet-min)
-		font-size: $font-xxl--rem
+	@extend %teaser-title
 
 .teaser__title--small
 	font-size: $font-l--rem
@@ -122,21 +170,10 @@ $zon-fullwidth-image-height: em(528px)
 		font-size: $font-l--rem
 
 .teaser__media
-	margin: 0 0 $little 0
+	@extend %teaser-media
 
 .teaser__media--small
-	display: none
-	width: 100%
-	+respond-min($break-phablet-min)
-		display: inline-block
-		position: absolute
-		left: 0
-		top: $petite
-		width: $teaser-image-desktop-width
-	+respond-min($break-tablet-min)
-		width: $teaser-image-phablet-width
-	+respond-min($break-desktop-min)
-		width: $teaser-image-desktop-width
+	@extend %teaser-small-media
 
 .teaser__media--hasshadow
 	.mediablock__helper
@@ -150,26 +187,14 @@ $zon-fullwidth-image-height: em(528px)
 		margin-left: 0
 		margin-right: 0
 
-.teaser__media-link
 .teaser__media-item
-	height: auto
-	max-width: 100%
-	width: 100%
+	@extend %teaser-media-item
 
-.teaser__media-item--small
-	max-width: 100%
-
-.teaser__container
 .teaser__text
-	line-height: 1.4
-	margin: 0 0 $thin 0
+	@extend %teaser-text
 
 .teaser__byline
-	display: block
-	font-family: FranziskaWebPro
-	font-size: em(15px)
-	font-style: italic
-	margin-bottom: rem(6px)
+	@extend %teaser-byline
 
 .teaser__byline--isinline
 	display: none
@@ -177,24 +202,13 @@ $zon-fullwidth-image-height: em(528px)
 		display: inline
 
 .teaser__metadata
-	font-size: em(13px)
-	font-weight: 200
-	letter-spacing: $standard-letter-spacing
+	@extend %teaser-metadata
 
 .teaser__metadata--ishead
 	margin-top: $fine
 
-.teaser__datetime
-	&:link, &:visited
-		border-bottom: 1px solid #ccc
-		color: inherit
-		text-decoration: none
-	&:hover
-		border-bottom: 1px solid #777
-
 .teaser__commentcount
-	@extend .teaser__datetime
-	margin-left: $fine
+	@extend %teaser-commentcount
 
 .teaser__container--issized
 	+respond-min($break-phablet-min)

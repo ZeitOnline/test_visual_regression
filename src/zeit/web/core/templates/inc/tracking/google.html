@@ -24,10 +24,10 @@
         j = d.createElement(s),
         dl = l != 'dataLayer' ? '&l=' + l : '';
     j.async = true;
-    j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+    j.src = '//{{get_google_tag_manager_host()}}/gtm.js?id=' + i + dl;
     f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-TQGX6J');
 </script>
 <noscript>
-    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-TQGX6J" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    <iframe src="//{{get_google_tag_manager_host()}}/ns.html?id=GTM-TQGX6J" height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
