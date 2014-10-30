@@ -55,8 +55,8 @@
 		<link href="{{ request.asset_url('css/icons/site.fallback.css') }}" rel="stylesheet">
 	</noscript>
 
-	<!-- Scriptkram Head -->
-
+	{% include "zeit.web.core:templates/inc/tracking/iqd_head.html" ignore missing %}
+	{% include "zeit.web.core:templates/inc/tracking/iqd_krux_head.html" ignore missing %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}">
 	{% block skiplink %}
