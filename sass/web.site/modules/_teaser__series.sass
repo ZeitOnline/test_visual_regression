@@ -11,7 +11,8 @@
 		margin-top: em(16px)
 
 // prevent next teaser from having border
-.teaser-series + .teaser
+.teaser-series + .teaser, // deprecated
+.teaser-series + [data-block-type='teaser'] // new
 	+respond-min($break-phablet-min)
 		border-top: none
 
