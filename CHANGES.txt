@@ -4,6 +4,8 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
+- ZON-1025: the first ads: tile 1 - 3 and tile 7
+
 - FIX: make google tag manager host configurable for tests
 
 - ZON-1078: Refactor teaser to be BEMish again
