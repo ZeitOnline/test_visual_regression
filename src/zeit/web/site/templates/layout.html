@@ -91,6 +91,9 @@
                     {%- include "zeit.web.site:templates/inc/nav_main.html" ignore missing -%}
                 {% endblock navigation %}
             </header>
+            {% block adplace_billboard %}
+                {{ lama_core.adplace(view.banner(3), view) }}
+            {% endblock adplace_billboard %}
             <main class="main" id="main" role="main">
                 {% block main %}Hallo Welt{% endblock main %}
             </main>
