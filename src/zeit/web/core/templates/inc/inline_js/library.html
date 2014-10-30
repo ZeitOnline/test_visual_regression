@@ -1,0 +1,42 @@
+<script>
+    window.ZMO = {
+        home: '{{ request.asset_url("/") }}',
+        scriptsURL: '{{ request.app_info.scripts_url|hide_none }}',
+        view: {
+            {% for key, value in view.js_vars -%}
+                '{{ key }}': '{{ value|remove_break }}',
+            {% endfor -%}
+
+            {# use to get view values savely #}
+
+            get: function( key ) {
+                return this[key] ? this[key] : '';
+            }
+        },
+        clientWidth: Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+        mobileWidth: 768,
+        isMobileView: function() {
+            return this.clientWidth < this.mobileWidth;
+        },
+        viewport: {
+            meta: document.getElementById('viewport-meta'),
+            standard: document.getElementById('viewport-meta').getAttribute('content'),
+            landscape: 'width=1280',
+            set: function() {
+                if ( screen.width === window.ZMO.mobileWidth && Math.abs( window.orientation ) === 90 ) {
+                    this.meta.setAttribute( 'content', this.landscape );
+                } else {
+                    this.meta.setAttribute( 'content', this.standard );
+                }
+            }
+        }
+    };
+
+{%- if view.context.advertising_enabled %}
+    window.ZMO.viewport.set();
+    if ( window.addEventListener ) {
+        window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
+    }
+{%- endif %}
+
+</script>
