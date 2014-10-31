@@ -3,6 +3,7 @@ import exceptions
 import pytest
 import requests
 
+import zeit.web.core.view_centerpage
 from zeit.web.magazin.view_centerpage import Centerpage
 import zeit.web.core.template
 

@@ -4,25 +4,27 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
-- FIX: some font fixes on small teasers
-
-- ZON-916: Add column teaser
-
-- FIX: make google tag manager host configurable for tests
-
-- ZON-1078: Refactor teaser to be BEMish again
-
-- ZON-1078: Add series teaser element
+- BUG-29: Fix ClickCount error, that might have leaded to webview bug
 
 - BUG-37: Correct comment count css
 
-- BUG-29: fix ClickCount error, that might have leaded to webview bug
+- FIX: Implement image scales as zope utility
 
-- ZON-913: Fix URLs and generalize some attributes on body and teaser tags
+- FIX: Make google tag manager host configurable for tests
+
+- FIX: Some font fixes on small teasers
+
+- ZON-1025: The first ads: tile 1 - 3 and tile 7
 
 - ZON-1040: Render natural language timestamp into markup
 
-- FIX: Implement image scales as zope utility
+- ZON-1078: Add series teaser element
+
+- ZON-1078: Refactor teaser to be BEMish again
+
+- ZON-913: Fix URLs and generalize some attributes on body and teaser tags
+
+- ZON-916: Add column teaser
 
 
 1.5 (2014-10-17)
