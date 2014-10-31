@@ -81,3 +81,43 @@
     };
 </script>
 {% endmacro %}
+
+{% macro adplace(banner, view) -%}
+    {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
+    {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
+    {% if view.context.advertising_enabled -%}
+    <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
+    <div id="iqadtile{{ banner.tile }}" class="ad__{{ banner.name }} ad__on__{{ pagetype }} ad__width_{{ banner.noscript_width_height[0] }} ad__min__{{ banner.min_width }}">
+        {% if banner.label -%}
+        <div class="ad__{{ banner.name }}__label">{{ banner.label }}</div>
+        {% endif -%}
+        <div class="ad__{{ banner.name }}__inner">
+            <script type="text/javascript">
+                if (
+                    window.ZMO.clientWidth >= {{ banner.min_width|default(0) }}
+                    {% if banner.tile == 2 %}
+                    && window.ZMO.clientWidth != window.ZMO.mobileWidth
+                    {% endif %}
+                ) {
+                    document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{ view.banner_channel }}{% if banner.dcopt %};dcopt={{ banner.dcopt }}{% endif %};tile={{ banner.tile }};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw={{ kw }},' + iqd_TestKW {% if banner.diuqilon %}+ window.diuqilon {% endif %}+ ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
+                }
+            </script>
+            <noscript>
+            <div>
+                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" rel="nofollow">
+                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{ banner.noscript_width_height[1] }}" alt="">
+            </a></div>
+            </noscript>
+        </div>
+    </div>
+    {%- endif %}
+{%- endmacro %}
+
+{% macro adplace_middle_mobile(item) -%}
+    {% if item.tile == 7 -%}
+    <!-- only integrate onces as equivalent to desktop tile 7 -->
+        <div class="iqd_mobile__adplace--middle">
+            <div id="sas_13557"></div>
+        </div>
+    {%- endif %}
+{%- endmacro %}

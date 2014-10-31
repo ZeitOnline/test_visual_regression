@@ -1,8 +1,9 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
-    {{lama.adplace(item, view)}}
-    {{lama.adplace_middle_mobile(item)}}
+    {{lama_core.adplace(item, view)}}
+    {{lama_core.adplace_middle_mobile(item)}}
 {%- endmacro %}
 
 {% macro supertitle() -%}

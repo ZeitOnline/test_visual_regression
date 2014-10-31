@@ -1,3 +1,4 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro include_teaser_block(obj) -%}
@@ -41,7 +42,7 @@
 {% macro include_cp_ad() -%}
     <div class="cp_button--ad">
         {% if view %}
-            {{ lama.adplace(view.banner(7), view) }}
+            {{ lama_core.adplace(view.banner(7), view) }}
         {% endif %}
     </div>
 {%- endmacro %}
