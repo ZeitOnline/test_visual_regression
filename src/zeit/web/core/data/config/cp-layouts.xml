@@ -13,10 +13,18 @@
         image_pattern="zon-thumbnail"
         areas="lead"
         />
+    <!-- new zon series teaser -->
     <layout
         id="teaser-series"
         title="kleiner Teaser mit Serien-Label"
         image_pattern="zon-thumbnail"
+        areas="lead"
+        />
+    <!-- new zon column teaser -->
+    <layout
+        id="teaser-column"
+        title="Kolumnenteaser"
+        image_pattern="zon-column"
         areas="lead"
         />
     <layout

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/politik/deutschland/2014-10/wirtschaftspolitik-haushalt-infrastruktur-schaeuble-kolonialismus</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_pol&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="rankedTags">Wolfgang Sch&#xE4;ubleWirtschaftspolitikEurop&#xE4;ische ZentralbankOECDDeflationEuropapolitikStabilit&#xE4;tspakt</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-10-21T05:06:53.964259+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-10-21T05:07:53.619066+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Deutschlands Wirtschaftspolitik ist international in der Kritik. Nicht zu Unrecht: Was n&#xFC;tzt es etwa, einen orthodoxen Wirtschaftsgrundsatz wider alle Einw&#xE4;nde und Widerst&#xE4;nde durchzupauken, wenn dar&#xFC;ber die Basis der Europapolitik zerbricht &#x2013; die Zustimmung der V&#xF6;lker zum europ&#xE4;ischen Projekt? Wir Deutschen haben seit 35 Jahren keinen ausgeglichenen Haushalt mehr gehabt. Und in einer Zeit, in der die Europhoben allenthalben Zulauf haben, w&#xE4;re mitleidsloser &#xF6;konomischer Purismus der Tod des politischen Europas. (tis)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-10-21T05:06:49.245555+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Politik Deutschland</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5702</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-10-21T05:07:00.984370+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2014-10-21T05:07:08.753352+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-10-21T05:06:53.764284+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ba8de262-3438-42c3-9f55-ed824f8849b0}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben. (tis)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">7850f18915e34d159813aa3e96cfdd8e</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-10-21T05:07:53.619066+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">F&#xFC;nf vor acht</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">43</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">80969ebecc494a52a0a0226e5c881c8b</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"> d2271bc8-f0fa-49c0-af41-a6d0678a66e0 5943323b-adb4-4cfa-b604-f66a88eb0620 tag://d2271bc8-f0fa-49c0-af41-a6d0678a66e0 4309e8be-0d39-435c-b575-2299daef9092 tag://tag://d2271bc8-f0fa-49c0-af41-a6d0678a66e0 0439328e-b22a-4cd5-a69e-1b86543be613 f4b4f50b-6597-4ab4-8e8e-5d262d3680a5 df72318f-974e-479e-8610-1d6685ea9c83 53b80f1c-b63b-4d54-8509-c0c6a5a6acfc 0c2f93a9-5991-4130-a388-2f9b6bd3d881 fb4f1490-b187-4073-a51f-02bf101a354d f0c02270-9bb3-47da-9fa2-a33f919f75d4 1c8b0c32-1a49-4370-9818-7af636e4b30b</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Theo Sommer</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-10-21T05:06:54Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">21095</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 21 Oct 2014 05:06:54 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"ec8401-5267-505e7ccbc36e1"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
