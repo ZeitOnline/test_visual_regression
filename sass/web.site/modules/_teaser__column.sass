@@ -22,13 +22,34 @@
 // prevent next teaser from having border
 .teaser-column + .teaser // deprecated
 	border-top: none
-.teaser-series + [data-block-type='teaser'] // new
+.teaser-series + *[data-block-type='teaser'] // new
 	border-top: none
 
-.teaser-column.teaser-column--smallmedia
-	@extend %teaser-small-media-placement
+.teaser-column__media
+	height: $teaser-column-mobile-image-size
+	left: 0
+	margin: 0
+	overflow: hidden
+	position: absolute
+	top: -($teaser-column-mobile-image-size - $teaser-column-shadow)
+	width: $teaser-column-mobile-image-size
+	+respond-min($break-desktop-min)
+		bottom: 0
+		height: 100%
+		left: 0
+		overflow: hidden
+		position: absolute
+		right: 60%
+		top: 0
+		width: 40%
 
-.teaser-column.teaser-column__heading--padded
+.teaser-column__media-item
+	@extend %teaser-media-item
+
+.teaser-column__heading
+	@extend %teaser-heading
+
+.teaser-column__heading.teaser-column__heading--padded
 	padding-top: $petite
 	+respond-min($break-desktop-min)
 		padding-top: 0
@@ -46,9 +67,14 @@
 		& .teaser-column__title
 			text-decoration: underline
 
-.teaser__column__series
+.teaser-column__kicker-container
+	+respond-min($break-desktop-min)
+		display: block
+		margin-bottom: em(4px, $font-s--px)
+
+.teaser-column__series
 	display: inline-block
-	font-size: $little
+	font-size: $font-s--rem
 	left: $teaser-column-series-position
 	position: absolute
 	text-transform: uppercase
@@ -67,13 +93,9 @@
 		&:after
 			content: ' \2022 '
 
-.teaser-column__kicker-container
-	+respond-min($break-desktop-min)
-		display: block
-		margin-bottom: em(4px, $font-s--px)
-
 .teaser-column__kicker
 	@extend %teaser-kicker
+	font-size: $font-s--rem
 	font-weight: 200
 	font-family: TabletGothic
 	+respond-min($break-desktop-min)
@@ -87,23 +109,8 @@
 	+respond-min($break-desktop-min)
 		font-size: rem($font-xl--px - 1)
 
-.teaser__media--overlay
-	height: $teaser-column-mobile-image-size
-	left: 0
-	margin: 0
-	overflow: hidden
-	position: absolute
-	top: -($teaser-column-mobile-image-size - $teaser-column-shadow)
-	width: $teaser-column-mobile-image-size
-	+respond-min($break-desktop-min)
-		bottom: 0
-		height: 100%
-		left: 0
-		overflow: hidden
-		position: absolute
-		right: 60%
-		top: 0
-		width: 40%
+.teaser-column__text
+	@extend %teaser-text
 
 .teaser-column__byline
 	color: $grey
@@ -118,3 +125,6 @@
 	color: $grey
 	font-size: 14px
 	font-weight: 200
+
+.teaser-column__commentcount
+	@extend %teaser-commentcount
