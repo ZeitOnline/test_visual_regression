@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.6 (unreleased)
+1.6 (2014-10-31)
 ----------------
 
 - BUG-29: Fix ClickCount error, that might have leaded to webview bug
