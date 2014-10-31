@@ -4,6 +4,8 @@ Change log for zeit.web
 1.6 (unreleased)
 ----------------
 
+- FIX: some font fixes on small teasers
+
 - ZON-916: Add column teaser
 
 - FIX: make google tag manager host configurable for tests
