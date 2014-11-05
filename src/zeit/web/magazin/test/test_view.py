@@ -747,3 +747,18 @@ def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
     html_str = " ".join(list(tpl.blocks['footer_logo']({})))
     html = lxml.html.fromstring(html_str)
     assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
+
+
+def test_advertorial_is_advertorial(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/advertorial')
+    adv = zeit.web.magazin.view.is_advertorial(context, mock.Mock())
+    assert adv is True
+
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.type == 'centerpage'
+
+    cp_context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/index')
+    cp = zeit.web.magazin.view.is_advertorial(cp_context, mock.Mock())
+    assert cp is False
