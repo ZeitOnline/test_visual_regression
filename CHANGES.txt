@@ -4,7 +4,8 @@ Change log for zeit.web
 1.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- BUG-46: depublished imagegroups lead to empty areas
+
 
 
 1.6 (2014-10-31)
