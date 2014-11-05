@@ -1,2 +1,11 @@
 {% extends "zeit.web.magazin:templates/inc/advertorials/default.html" %}
 
+{% block page_title %}
+    {% if view.is_hp == False %}
+        <div class="advertorial-title">
+            <div class="advertorial-title__headline">Hennessy</div>
+            <div class="advertorial-title__text">Dies ist ein Angebot von Hennessy Cognac, die für diesen Inhalt verantwortlich sind.</div>
+        </div>
+    {% endif %}
+{% endblock page_title %}
+
