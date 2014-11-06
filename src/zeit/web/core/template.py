@@ -426,9 +426,6 @@ class ImageScales(dict):
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
     def __init__(self, **kw):
-        def to_int(self, value):
-            return int(re.sub('[^0-9]', '', '0' + str(value)))
-
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         scale_source = conf.get('vivi_zeit.frontend_image-scales')
 
@@ -438,6 +435,10 @@ class ImageScales(dict):
             fileobject = urllib2.urlopen(scale_source)
         except urllib2.URLError:
             return
+
+        def to_int(value):
+            return int(re.sub('[^0-9]', '', '0' + str(value)))
+
         for scale in lxml.objectify.fromstring(fileobject.read()).iter():
             name = scale.attrib.get('name')
             width = to_int(scale.attrib.get('width'))
