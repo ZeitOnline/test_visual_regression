@@ -4,7 +4,7 @@ Change log for zeit.web
 1.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-986: Update gruntfile for zeit.web styleguide
 
 
 1.6 (2014-10-31)
