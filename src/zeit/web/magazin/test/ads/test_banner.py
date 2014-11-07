@@ -60,11 +60,24 @@ def test_banner_should_not_be_displayed_on_short_pages(
         not in browser.contents
 
 
-def test_banner_should_not_be_displayed_on_disabled_pages(
+def test_banner_should_not_be_displayed_on_disabled_article(
         testserver, testbrowser):
-    browser = testbrowser('%s/artikel/05' % testserver.url)
-    assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
-        not in browser.contents
+    # test article with xml banner = no
+    browser = testbrowser('%s/artikel/02' % testserver.url)
+    # no desktop ads
+    assert not browser.cssselect('div[class*="ad__tile_"]')
+    # no mobile ad script
+    assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
+
+
+def test_banner_should_not_be_displayed_on_disabled_cp(
+        testserver, testbrowser):
+    # centerpage without ads
+    browser = testbrowser('%s/centerpage/index-without-ads' % testserver.url)
+    # no desktop ads
+    assert not browser.cssselect('div[class*="ad__tile_"]')
+    # no mobile ad script
+    assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
 
 def test_banner_view_should_be_displayed_on_pages(testserver, testbrowser):
