@@ -85,6 +85,10 @@ class Base(object):
         return self.type
 
     @zeit.web.reify
+    def banner_on(self):
+        return self.context.banner
+
+    @zeit.web.reify
     def adwords(self):
         keywords = ['zeitonline']
         # TODO: End discrepancy between testing and live ressorts!
