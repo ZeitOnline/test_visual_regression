@@ -46,7 +46,7 @@ class Article(zeit.web.core.view.Content):
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self._copyrights = {}
-        self.context.advertising_enabled = self.advertising_enabled
+        self.context.advertising_enabled = self.banner_on
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
@@ -362,7 +362,6 @@ class ArticlePage(Article):
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    advertising_enabled = True
     main_nav_full_width = True
     is_longform = True
 
