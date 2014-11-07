@@ -24,8 +24,8 @@ def test_base_view_produces_acceptable_return_type(application):
         """This view class does not implement a __call__ method."""
 
         pass
-
-    obj = BaseView(zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01'), mock.Mock())
+    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    obj = BaseView(content, mock.Mock())
     assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
 
 

@@ -432,7 +432,7 @@ def json_comment_count(request):
         except (AttributeError, TypeError):
             count = 0
 
-        if not 'no_interpolation' in request.GET:
+        if 'no_interpolation' not in request.GET:
             # XXX: Interpolate comment counts to compensate for slow updates to
             #      the node comment statistics file.
             queue = request.session.pop_flash(queue='cc_throttle')
