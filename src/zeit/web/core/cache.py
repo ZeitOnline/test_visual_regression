@@ -20,25 +20,25 @@ class ICachingTime(zope.interface.Interface):
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 def caching_time_content(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_content'))
+    return int(conf.get('caching_time_content','0'))
 
 
 @grokcore.component.implementer(ICachingTime)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 def caching_time_article(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_article'))
+    return int(conf.get('caching_time_article','0'))
 
 
 @grokcore.component.implementer(ICachingTime)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 def caching_time_cp(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_centerpage'))
+    return int(conf.get('caching_time_centerpage','0'))
 
 
 @grokcore.component.implementer(ICachingTime)
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
 def caching_time_gallery(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_gallery'))
+    return int(conf.get('caching_time_gallery','0'))
