@@ -34,7 +34,10 @@ settings = {
     'pyramid.debug_templates': 'false',
 
     'scripts_url': '/js/static',
-
+    'caching_time_content': '5',
+    'caching_time_article': '10',
+    'caching_time_centerpage': '20',
+    'caching_time_gallery': '40',
     'community_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
     'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
