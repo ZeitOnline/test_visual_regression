@@ -122,3 +122,7 @@
         <a href="{{url}}" class="card__button js-stop-propagation">Lesen</a>
     {% endif %}
 {%- endmacro %}
+
+{% macro advertorial_modifier(product_text, is_advertorial) -%}
+    {% if ( product_text == 'Advertorial' and not is_advertorial ) %} is-advertorial{% endif %}
+{%- endmacro %}

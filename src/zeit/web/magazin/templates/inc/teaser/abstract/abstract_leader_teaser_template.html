@@ -22,8 +22,8 @@ All calling templates have to provide:
 {%- set asset = teaser|get_all_assets|block_type %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
-<div class="cp_leader cp_leader--{{ self.format() }}">
-    
+<div class="cp_leader cp_leader--{{ self.format() }}{{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}">
+
     {# call comment box #}
     {% if self.format() != 'full' %}
          {{ cp.comments_count(get_teaser_commentcount(teaser.uniqueId), teaser | create_url) }}
