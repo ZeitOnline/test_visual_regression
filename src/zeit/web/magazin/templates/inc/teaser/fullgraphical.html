@@ -14,10 +14,10 @@ Parameters:
 
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
-<div class='cp_button cp_button--fullgraphical'>
+<div class='teaser-fullgraphical'>
     <a href="{{ teaser|create_url }}">
-        <div class="scaled-image">
-            {{ lama.insert_responsive_image(image, 'fullgraphical__image') }}
+        <div class="teaser-fullgraphical__media-container scaled-image">
+            {{ lama.insert_responsive_image(image, 'teaser-fullgraphical__media-item') }}
         </div>
     </a>
 </div>
