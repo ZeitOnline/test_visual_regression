@@ -303,5 +303,13 @@
         areas="teaser-mosaic informatives"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+
+    <layout
+        id="fullgraphical"
+        title="Vollgraphischer Block für die Informatives"
+        image_pattern="zmo-square-large"
+        areas="informatives"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
 </layouts>
 

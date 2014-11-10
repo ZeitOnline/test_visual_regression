@@ -123,27 +123,23 @@
           </container>
         </region>
         <region area="informatives">
-          <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-            <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-              <badges>
-                <badge py:pytype="str">audio</badge>
-                <badge py:pytype="str">gallery</badge>
-                <badge py:pytype="str">infographic</badge>
-                <badge py:pytype="str">map</badge>
-                <badge py:pytype="str">video</badge>
-              </badges>
-              <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
-              <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
-              <title py:pytype="str">Article Image Asset Titel</title>
-              <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
-              <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
-              <byline xsi:nil="true"/>
-              <breadcrumb_title xsi:nil="true"/>
-              <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-                <bu py:pytype="str">Die ist der image sub text </bu>
-                <copyright link="http://foo.de">©foo</copyright>
-              </image>
-            </block>
+          <container cp:type="teaser" module="fullgraphical" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
+              <block href="http://xml.zeit.de/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
+                  <supertitle py:pytype="str">Serie Gesellschaftskritik</supertitle>
+                  <teaser_supertitle py:pytype="str">Serie Gesellschaftskritik</teaser_supertitle>
+                  <title py:pytype="str">Über schlechte Laune</title>
+                  <text py:pytype="str">Grumpy Cat ist im Internet ein Star und bringt den Menschen ihr Anrecht auf schlechte Laune zurück. </text>
+                  <description py:pytype="str">Grumpy Cat ist im Internet ein Star und bringt den Menschen ihr Anrecht auf schlechte Laune zurück. </description>
+                  <byline py:pytype="str">von Christine Meffert</byline>
+                  <breadcrumb_title xsi:nil="true"/>
+                  <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/grumpy-cat/" type="jpg" title="Grumpy Cat bei den MTV Movie Awards 2014" alt="Grumpy Cat bei den MTV Movie Awards 2014" align="left" publication-date="" expires="">
+                    <bu py:pytype="str">Grumpy Cat bei den MTV Movie Awards 2014</bu>
+                    <copyright py:pytype="str">© Jason Merritt/Getty Images</copyright>
+                </image>
+                <author href="http://xml.zeit.de/autoren/M/Christine_Meffert/index.xml" publication-date="" expires="">
+                    <display_name py:pytype="str">Christine Meffert</display_name>
+                </author>
+              </block>
           </container>
           <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
             <block href="http://xml.zeit.de/artikel/advertorial" uniqueId="http://xml.zeit.de/artikel/advertorial" year="2014" issue="43" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2014-11-10T09:48:54+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-10T09:48:49.226076+00:00">
@@ -157,20 +153,20 @@
                 <badge py:pytype="str">infographic</badge>
                 <badge py:pytype="str">map</badge>
                 <badge py:pytype="str">video</badge>
-              </badges>
-              <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
-              <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
-              <title py:pytype="str">Article Image Asset Titel</title>
-              <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
-              <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
-              <byline xsi:nil="true"/>
-              <breadcrumb_title xsi:nil="true"/>
-              <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            </badges>
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
                 <bu py:pytype="str">Die ist der image sub text </bu>
                 <copyright link="http://foo.de">©foo</copyright>
-              </image>
-            </block>
-          </container>
+            </image>
+                </block>
+            </container>
         </region>
       </cluster>
       <cluster area="teaser-mosaic"/>
