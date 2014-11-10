@@ -136,6 +136,10 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
             )
         return sorted(teaser_list, key=lambda k: k['label'])
 
+    @zeit.web.reify
+    def is_advertorial(self):
+        return getattr(self.context, 'product_text', None) == 'Advertorial'
+
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              name='xml',
