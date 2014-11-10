@@ -1,0 +1,19 @@
+$advertorial-mark-offset-px: 15px
+$advertorial-mark-offset-em: em(15px)
+
+.cp_button.is-advertorial,
+.cp_leader.is-advertorial
+	padding: $advertorial-mark-offset-px+8px $advertorial-mark-offset-px $advertorial-mark-offset-px $advertorial-mark-offset-px
+	border: 1px solid #d3d3d3
+	&:after
+		content: 'Anzeige'
+		font-family: Verdana
+		font-size: 12px
+		position: absolute
+		text-transform: uppercase
+		top: 5px
+		right: $advertorial-mark-offset-px
+	& a > .scaled-image
+		height: $cp_button-gallery-height - 2.625em
+	& .cp_button__title__wrap
+		bottom: $advertorial-mark-offset-px
