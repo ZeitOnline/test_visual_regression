@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-986: Update gruntfile for zeit.web styleguide
 
+- BUG-46: Depublished imagegroups lead to empty areas
+
 
 1.6 (2014-10-31)
 ----------------

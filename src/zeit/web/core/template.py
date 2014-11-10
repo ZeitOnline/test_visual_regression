@@ -376,6 +376,10 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
+    # if imagegroup has no images, return default image
+    if len(asset.items()) == 0:
+        return get_teaser_image(teaser_block, teaser, unique_id=default_id)
+
     # Assumes all images in this group have the same mimetype.
     sample_image = asset.values().next()
 

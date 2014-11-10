@@ -131,6 +131,19 @@ def test_get_teaser_image_should_utilize_fallback_image(testserver):
         'default/teaser_image/teaser_image-zmo-large.jpg')
 
 
+def test_get_teaser_image_should_render_fallback_for_broken_image(testserver):
+    teaser_block = mock.MagicMock()
+    teaser_block.layout.image_pattern = 'zmo-large'
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/article_with_broken_image_asset'
+    )
+    image = zeit.web.core.template.get_teaser_image(
+        teaser_block, teaser)
+    assert image.uniqueId == (
+        'http://xml.zeit.de/zeit-magazin/'
+        'default/teaser_image/teaser_image-zmo-large.jpg')
+
+
 def test_substitute_image_returns_empty_if_image_group_not_provided(
         application):
     assert not zeit.web.core.template.closest_substitute_image(
