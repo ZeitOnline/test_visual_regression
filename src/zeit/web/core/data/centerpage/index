@@ -68,6 +68,10 @@
             </badges>
           </block>
         </container>
+        <container cp:type="teaser" module="zmo-landscape-large" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
+          <block href="http://xml.zeit.de/artikel/advertorial" uniqueId="http://xml.zeit.de/artikel/advertorial" year="2014" issue="43" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2014-11-10T09:48:54+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-10T09:48:49.226076+00:00">
+          </block>
+        </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
           <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
             <badges>
