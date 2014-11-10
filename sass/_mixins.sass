@@ -21,13 +21,15 @@
 	background-color: $color
 	position: relative
 	&:after
+		bottom: 0
 		content: ''
+		height: auto
+		left: 0
 		position: absolute
+		right: 0
+		top: 0
+		width: auto
 		z-index: 1
-		height: 100%
-		width: 100%
-		left: 0px
-		top: 0px
 		+background-image(linear-gradient($direction, rgba($color, $perc) 0%, rgba($color, 0) $length))
 
 =no-user-select
