@@ -762,3 +762,13 @@ def test_advertorial_is_advertorial(application):
         'http://xml.zeit.de/centerpage/index')
     cp = zeit.web.magazin.view.is_advertorial(cp_context, mock.Mock())
     assert cp is False
+
+
+def test_adv_teaser_on_cp_should_render_modifier(testserver, testbrowser):
+    browser = testbrowser('%s/centerpage/index' % testserver.url)
+    assert browser.cssselect('.is-advertorial')
+
+
+def test_adv_teaser_on_adv_should_not_render_modifier(testserver, testbrowser):
+    browser = testbrowser('%s/centerpage/advertorial' % testserver.url)
+    assert not browser.cssselect('.is-advertorial')
