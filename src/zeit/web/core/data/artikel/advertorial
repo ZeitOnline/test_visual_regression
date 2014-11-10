@@ -8,7 +8,7 @@
       <tag ns10:pytype="str" uuid="1f92f4fd-0b89-4afa-8fb8-9e1aa6522f14" url_value="essen" type="free">Essen</tag>
       <tag type="free" score="4" uuid="4550eda4-243c-446e-a2bb-cc0f1ae77040" url_value="lebensmittelindustrie">Lebensmittelindustrie</tag>
     </rankedTags>
-    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/advertorial-01/" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="" expires="2015-01-28T13:03:50+00:00">
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/advertorial-01/" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="">
       <bu py:pytype="str">Kichererbsensuppe</bu>
       <copyright py:pytype="str">© Silvio Knezevic</copyright>
     </image>
