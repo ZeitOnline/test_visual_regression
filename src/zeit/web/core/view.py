@@ -22,30 +22,18 @@ import zeit.web.core.date
 log = logging.getLogger(__name__)
 
 
-class MetaView(type):
-
-    """Meta class for view callables that ensures the return type is a dict."""
-
-    def __new__(cls, name, bases, dct):
-        def ensure_dict(func):
-            def wrapped(self):
-                v = func(self)
-                return {} if v is None else v
-            return wrapped
-        dct['__call__'] = ensure_dict(dct.get('__call__', lambda self: {}))
-        return super(MetaView, cls).__new__(cls, name, bases, dct)
-
-
 class Base(object):
 
     """Base class for all views."""
 
-    __metaclass__ = MetaView
+    def __call__(self):
+        time = zeit.web.core.cache.ICachingTime(self.context)
+        self.request.response.cache_expires(time)
+        return {}
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.request.response.cache_expires(300)
         self.request.response.headers.add(
             'X-ZMOVersion', self.request.registry.settings.zmo_version)
 
@@ -83,6 +71,15 @@ class Base(object):
     @zeit.web.reify
     def banner_type(self):
         return self.type
+
+    @zeit.web.reify
+    def banner_on(self):
+        # respect the global advertising switch
+        if self.advertising_enabled is False or self.context.banner is False:
+            return False
+        # deliver banner if no banner is defined in xml
+        if self.context.banner is None or self.context.banner is True:
+            return True
 
     @zeit.web.reify
     def adwords(self):
@@ -444,7 +441,7 @@ def json_comment_count(request):
         except (AttributeError, TypeError):
             count = 0
 
-        if not 'no_interpolation' in request.GET:
+        if 'no_interpolation' not in request.GET:
             # XXX: Interpolate comment counts to compensate for slow updates to
             #      the node comment statistics file.
             queue = request.session.pop_flash(queue='cc_throttle')

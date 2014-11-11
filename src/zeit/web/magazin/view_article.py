@@ -46,7 +46,7 @@ class Article(zeit.web.core.view.Content):
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self._copyrights = {}
-        self.context.advertising_enabled = self.advertising_enabled
+        self.context.advertising_enabled = self.banner_on
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
@@ -319,8 +319,9 @@ class Article(zeit.web.core.view.Content):
 class ArticlePage(Article):
 
     def __call__(self):
-        super(ArticlePage, self).__call__()
         self._validate_and_determine_page_nr()
+        super(ArticlePage, self).__call__()
+        return {}
 
     @zeit.web.reify
     def page_nr(self):
@@ -362,7 +363,6 @@ class ArticlePage(Article):
              renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    advertising_enabled = True
     main_nav_full_width = True
     is_longform = True
 

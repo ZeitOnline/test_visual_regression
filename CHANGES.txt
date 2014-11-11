@@ -4,9 +4,11 @@ Change log for zeit.web
 1.7 (unreleased)
 ----------------
 
+- BUG-46: Depublished imagegroups lead to empty areas
+
 - ZON-986: Update gruntfile for zeit.web styleguide
 
-- BUG-46: Depublished imagegroups lead to empty areas
+- ZON-1140: Make caching configurable
 
 
 1.6 (2014-10-31)
