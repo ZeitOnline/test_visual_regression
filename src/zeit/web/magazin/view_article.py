@@ -319,8 +319,9 @@ class Article(zeit.web.core.view.Content):
 class ArticlePage(Article):
 
     def __call__(self):
-        super(ArticlePage, self).__call__()
         self._validate_and_determine_page_nr()
+        super(ArticlePage, self).__call__()
+        return {}
 
     @zeit.web.reify
     def page_nr(self):
