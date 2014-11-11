@@ -9,7 +9,7 @@ class Centerpage(zeit.web.core.view.Base):
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
         self._copyrights = {}
-        self.context.advertising_enabled = self.advertising_enabled
+        self.context.advertising_enabled = self.banner_on
 
     @zeit.web.reify
     def is_hp(self):
