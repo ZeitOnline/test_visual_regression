@@ -6,7 +6,11 @@ Change log for zeit.web
 
 - BUG-46: Depublished imagegroups lead to empty areas
 
+- ZON-898: Add advertorial teaser and templates
+
 - ZON-1140: Make caching configurable
+
+- FIX: Ensure banner setting is respected
 
 
 1.6 (2014-10-31)
