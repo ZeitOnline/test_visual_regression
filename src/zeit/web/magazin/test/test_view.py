@@ -18,16 +18,14 @@ import zeit.web.core.view
 import zeit.web.magazin.view_article
 
 
-def test_base_view_produces_acceptable_return_type():
+def test_base_view_produces_acceptable_return_type(application):
     class BaseView(zeit.web.core.view.Base):
 
         """This view class does not implement a __call__ method."""
 
         pass
-
-    obj = BaseView(mock.Mock(), mock.Mock())
-    assert isinstance(type(obj), zeit.web.core.view.MetaView), (
-        'The type MetaView is used.')
+    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    obj = BaseView(content, mock.Mock())
     assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
 
 
@@ -42,18 +40,6 @@ def test_response_view_produces_acceptable_return_type():
     obj = ResponseView(mock.Mock(), mock.Mock())
     assert isinstance(obj(), pyramid.response.Response), (
         'ResponseView retains its return type.')
-
-
-def test_none_view_produces_acceptable_return_type():
-    class NoneView(zeit.web.core.view.Base):
-
-        """This view class implicitly returns None."""
-
-        def __call__(self):
-            pass
-
-    obj = NoneView(mock.Mock(), mock.Mock())
-    assert hasattr(obj(), '__iter__'), 'NoneView returns an iterable type.'
 
 
 def test_dict_view_produces_acceptable_return_value():
@@ -673,7 +659,7 @@ def test_article01_should_not_have_a_nextread(application):
 
 def test_caching_headers_should_be_set(testserver, testbrowser):
     browser = testbrowser('%s/artikel/05' % testserver.url)
-    assert browser.headers['cache-control'] == 'max-age=300'
+    assert browser.headers['cache-control'] == 'max-age=10'
 
 
 def test_article_should_have_correct_js_view(testbrowser, testserver):
