@@ -21,4 +21,5 @@
     <scale available="zeit.magazin.interfaces.IZMOContent" height="?200" name="zmo-x-small" title="ZMO: XS" width="350"/>
     <scale available="zeit.magazin.interfaces.IZMOContent" height="1150" name="zmo-article-dream" title="ZMO: Artikel Traum" width="920"/>
     <scale available="zeit.magazin.interfaces.IZMOContent" height="1150" name="zmo-card-picture" title="ZMO: Flippende Karten" width="920"/>
+    <scale available="zeit.magazin.interfaces.IZMOContent" height="424" name="zmo-print-cover" title="ZMO: Print Cover" width="315"/>
 </scales>
