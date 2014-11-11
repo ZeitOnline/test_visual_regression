@@ -4,6 +4,8 @@ import zeit.web.core.view
 
 class Centerpage(zeit.web.core.view.Base):
 
+    advertising_enabled = True
+
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
         self._copyrights = {}

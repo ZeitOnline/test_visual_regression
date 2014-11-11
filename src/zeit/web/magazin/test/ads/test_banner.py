@@ -119,6 +119,16 @@ def test_banner_view_should_be_displayed_on_succeeding_pages(
             'ad__width_300 ad__min__768">') not in browser.contents
 
 
+def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
+        testserver, testbrowser):
+    # test article with xml banner is missing
+    browser = testbrowser('%s/artikel/10' % testserver.url)
+    # desktop ads
+    assert browser.cssselect('div[class*="ad__tile_"]')
+    # mobile ad script
+    assert browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
+
+
 # Tests for articles
 def test_banner_mobile_should_request_with_correct_data_in_article_mode(
         testserver, testbrowser):
