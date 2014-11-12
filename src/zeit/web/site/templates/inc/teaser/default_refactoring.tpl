@@ -46,5 +46,7 @@
     </div>
     {% endblock %}
 
+    {% block teaser_media_position_after_container %}{% endblock %}
+
 </article>
 {% endblock %}
