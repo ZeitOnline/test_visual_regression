@@ -36,7 +36,7 @@ log = logging.getLogger(__name__)
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              name='komplettansicht',
              renderer='templates/article_komplett.html')
-class Article(zeit.web.core.view.Content):
+class Article(zeit.web.core.view.Content, zeit.web.magazin.view.Base):
 
     advertising_enabled = True
     is_longform = False

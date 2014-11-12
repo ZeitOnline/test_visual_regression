@@ -128,13 +128,12 @@ class Base(object):
                 return seo.html_title
         except TypeError:
             pass
-        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         tokens = (self.supertitle, self.title)
-        return ': '.join([t for t in tokens if t]) or default
+        return ': '.join([t for t in tokens if t]) or ''
 
     @zeit.web.reify
     def pagedescription(self):
-        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        default = ''
         try:
             seo = zeit.seo.interfaces.ISEO(self.context)
         except TypeError:

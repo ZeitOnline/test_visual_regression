@@ -31,10 +31,10 @@
 {% macro sharing_meta(obj, request) -%}
     <meta name="twitter:card" content="{{obj.twitter_card_type}}">
     <meta name="twitter:site" content="@zeitonline">
-    <meta name="twitter:creator" content="@zeitonline">
+    <meta name="twitter:creator" content="@ZEITmagazin">
     <meta name="twitter:title" content="{{obj.title}}">
     <meta name="twitter:description" content="{{obj.subtitle}}">
-    <meta property="og:site_name" content="ZEIT ONLINE">
+    <meta property="og:site_name" content="ZEITmagazin">
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">

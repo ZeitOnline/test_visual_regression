@@ -7,7 +7,6 @@ import zeit.content.cp.interfaces
 import zeit.web.core.reach
 import zeit.web.core.utils
 import zeit.web.core.view
-import zeit.web.site.view
 
 
 @pyramid.view.view_config(

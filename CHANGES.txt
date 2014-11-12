@@ -4,6 +4,8 @@ Change log for zeit.web
 1.7 (unreleased)
 ----------------
 
+- ZON-842: change ZMO meta data
+
 - BUG-46: Depublished imagegroups lead to empty areas
 
 - ZON-1140: Make caching configurable
