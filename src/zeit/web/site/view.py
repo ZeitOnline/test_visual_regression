@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import zeit.web.magazin.view
-import zeit.web.core.view
 
 
 def is_zon_content(context, request):
