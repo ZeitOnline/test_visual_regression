@@ -57,7 +57,7 @@ def test_centerpage_should_have_correct_seo_title(testserver, testbrowser):
 
 def test_hp_should_have_correct_title(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    assert '<title>My Test SEO - Zeitmagazin</title>' in browser.contents
+    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
