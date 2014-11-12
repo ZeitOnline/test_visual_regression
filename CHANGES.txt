@@ -1,16 +1,23 @@
 Change log for zeit.web
 =======================
 
-1.7 (unreleased)
+1.8 (unreleased)
+----------------
+
+- ZON-898: Add advertorial teaser and templates
+
+- FIX: Ensure banner setting is respected
+
+
+
+1.7 (2014-11-12)
 ----------------
 
 - BUG-46: Depublished imagegroups lead to empty areas
 
-- ZON-898: Add advertorial teaser and templates
-
 - ZON-1140: Make caching configurable
 
-- FIX: Ensure banner setting is respected
+- ZON-1154: Implement ZMO print cover teaser
 
 
 1.6 (2014-10-31)
