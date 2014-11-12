@@ -53,7 +53,7 @@
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">3099892</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Raether</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">zeit-magazin essen-trinken</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
@@ -137,7 +137,7 @@
     <supertitle>Wochenmarkt</supertitle>
     <title>Eine Suppe fürs Volk</title>
     <division type="page">
-      <image src="http://xml.zeit.de/exampleimages/artikel/advertorial-01/kichererbsen-suppe-wochenmarkt-zmo-medium.jpg" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="" expires="2015-01-28T13:03:50+00:00" layout="zmo-xl-header" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/advertorial-01/advertorial-01-zmo-medium.jpg" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="" expires="2015-01-28T13:03:50+00:00" layout="zmo-xl-header" is_empty="False">
         <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Kichererbsensuppe</bu>
         <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Silvio Knezevic</copyright>
       </image>
@@ -156,7 +156,7 @@
         Pfeffer, 1 Zitrone</p>
     </division>
     <image-credits>Foto  Silvio Knezevic</image-credits>
-    <subtitle> </subtitle>
+    <subtitle>Kicher kicher *gnihihi* Angriff der Kichererbsen *hihihoho*</subtitle>
   </body>
   <teaser>
     <title>Eine Suppe fürs Volk</title>

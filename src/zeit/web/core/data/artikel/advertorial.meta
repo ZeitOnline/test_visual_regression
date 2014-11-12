@@ -39,7 +39,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-11-05T23:13:40.777825+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">hennessy</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"> de9b858d-fc8c-46a1-8943-7b422f31e2df 483a2523-0bc2-4665-8b1b-0ceeb52b53d3 eeab42d7-2d83-4634-ab9c-86ec1cd4f378 5d768e2c-d098-4d95-b560-6e6f3074899c 76a89a6e-b5b5-46cd-92f4-a056e6aeaf6b 394da502-148a-452d-850b-f31cb6a606a5 2fb3213e-8da8-4692-9571-4b0da8484891 f0c02270-9bb3-47da-9fa2-a33f919f75d4 32efd1ff-b908-415c-9098-2be8e8924b1f 7b7b0181-8093-4b52-a1df-7061a4ba73c9</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
