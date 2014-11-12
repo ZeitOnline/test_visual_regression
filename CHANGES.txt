@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1140: Make caching configurable
 
+- ZON-1154: Implement ZMO print cover teaser
+
 
 1.6 (2014-10-31)
 ----------------

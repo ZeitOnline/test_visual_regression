@@ -303,5 +303,10 @@
         areas="teaser-mosaic informatives"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+    <layout
+        id="zmo-print-cover"
+        title="ZMO Print Cover"
+        image_pattern="zmo-print-cover"
+        areas="informatives"
+        available="zeit.magazin.interfaces.IZMOContent"/>
 </layouts>
-

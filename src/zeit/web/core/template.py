@@ -231,6 +231,7 @@ default_images_sizes = {
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
     'zmo-card-picture': (320, 480),
+    'zmo-print-cover': (315, 424),
     'og-image': (600, 315),
     'twitter-image_small': (120, 120),  # summary
     'twitter-image-large': (560, 300),  # summary_large_image, photo

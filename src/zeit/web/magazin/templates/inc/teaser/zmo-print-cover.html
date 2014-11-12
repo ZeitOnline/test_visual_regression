@@ -1,6 +1,6 @@
 {#
 
-Teaser template for light, large upright lead teasers
+Teaser template for Zeit Magazin print cover
 
 Parameters:
     format: to define type of leader
@@ -11,7 +11,7 @@ Parameters:
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_leader_teaser_template.html" -%}
 
-{% block format %}upright{% endblock %}
-{% block shade %}light{% endblock %}
+{% block format %}full{% endblock %}
+{% block shade %}darker{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block subtitle %}true{% endblock %}
+{% block subtitle %}false{% endblock %}
