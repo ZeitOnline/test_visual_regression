@@ -34,6 +34,7 @@ Change log for zeit.web
 
 - ZON-916: Add column teaser
 
+
 1.5.1 (2014-10-28)
 ------------------
 
