@@ -33,8 +33,9 @@
         image_pattern="zon-large"
         areas="lead"
         />
+    <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
-        id="zon-fullwidth-onimage"
+        id="teaser-fullwidth"
         title="vollbreiter Aufmacher Text auf Bild"
         image_pattern="zon-large"
         areas="lead"

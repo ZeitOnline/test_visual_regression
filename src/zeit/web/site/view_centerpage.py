@@ -36,7 +36,7 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and b.layout.id not in (
-                    'zon-fullwidth', 'zon-fullwidth-onimage')
+                    'teaser-fullwidth', 'zon-fullwidth')
             except (TypeError, AttributeError):
                 return
 
@@ -52,7 +52,8 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and b.layout.id in (
-                    'zon-fullwidth', 'zon-fullwidth-onimage')
+                    'teaser-fullwidth', 'zon-fullwidth'
+                    )
             except (TypeError, AttributeError):
                 return
 
