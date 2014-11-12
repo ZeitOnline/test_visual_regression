@@ -115,44 +115,11 @@
 .teaser--small.teaser--smallmedia
 	@extend %teaser-small-media-placement
 
-.teaser--iscentered
-	.teaser__heading
-		+respond-min($break-phablet-min)
-			text-align: center
-			margin-left: auto
-			margin-right: auto
-	.teaser__container
-		margin: $junior auto
-		+respond-min($break-tablet-min)
-			text-align: center
-
-.teaser--ispositioned
-	position: absolute
-	bottom: $fine
-	margin: 0 $petite 0 $petite
-	border: 0
-	overflow: hidden
-
-.teaser--islight
-	color: $white
-	z-index: 1
-	.teaser__kicker,
-	.teaser__title
-		color: $white !important
-	.teaser__metadata
-		a, .teaser__datetime:hover
-			border: 0
-		font-weight: normal
-
 .teaser__heading
 	@extend %teaser-heading
 
 .teaser__heading.teaser__heading--hasmedia
 	margin: 0 0 $petite 0
-
-.teaser__heading.teaser__heading--issized
-	+respond-min($break-phablet-min)
-		width: 70%
 
 .teaser__combined-link
 	@extend %teaser-combined-link
@@ -169,18 +136,6 @@
 .teaser__media--small
 	@extend %teaser-small-media
 
-.teaser__media--hasshadow
-	.mediablock__helper
-		+fake-box-shadow-inset($black, 0.8, 50deg, 66%)
-	background-color: $black
-
-.teaser__media--fullwidth_mobile
-	margin-left: -$petite
-	margin-right: -$petite
-	+respond-min($break-tablet-min)
-		margin-left: 0
-		margin-right: 0
-
 .teaser__media-item
 	@extend %teaser-media-item
 
@@ -190,27 +145,11 @@
 .teaser__byline
 	@extend %teaser-byline
 
-.teaser__byline--isinline
-	display: none
-	+respond-min($break-phablet-min)
-		display: inline
-
 .teaser__metadata
 	@extend %teaser-byline
 
-.teaser__metadata--ishead
-	margin-top: $fine
-
 .teaser__commentcount
 	@extend %teaser-commentcount
-
-.teaser__container--issized
-	+respond-min($break-phablet-min)
-		width: 70%
-
-.teaser__container--issized-desktop
-	+respond-min($break-tablet-min)
-		width: 70%
 
 // first small teaser in collection displays image in mobile mode
 // TODO: solved with css for now, might have to be adapted later (asz)

@@ -27,12 +27,6 @@
         image_pattern="zon-column"
         areas="lead"
         />
-    <layout
-        id="zon-fullwidth"
-        title="vollbreiter Aufmacher"
-        image_pattern="zon-large"
-        areas="lead"
-        />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
         id="teaser-fullwidth"
