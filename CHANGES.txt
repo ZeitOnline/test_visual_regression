@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-1061: Style ZMO print cover teaser
 
 
 1.7 (2014-11-12)
@@ -17,8 +17,6 @@ Change log for zeit.web
 - ZON-1140: Make caching configurable
 
 - ZON-1154: Implement ZMO print cover teaser
-
-- ZON-1061: Style ZMO print cover teaser
 
 
 1.6 (2014-10-31)
