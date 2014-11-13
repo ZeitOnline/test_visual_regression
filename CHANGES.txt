@@ -4,6 +4,10 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
+- ZON-1118: polishing teaser: fullwidth teaser
+
+- ZON-1118: polishing teaser: small/standard teaser
+
 - Nothing changed yet.
 
 
