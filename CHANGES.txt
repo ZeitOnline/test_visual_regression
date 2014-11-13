@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
-- BUG-39: correct android em issue with cp lead titles
+- BUG-39: correct android em issue with cp lead subtitles
 
 
 1.7 (2014-11-12)
