@@ -73,7 +73,7 @@
                     var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
                         isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
 
-                    if ( singleGallery && isStatic ) {
+                    if ( singleGallery && isStatic && !window.ZMO.isMobileView() ) {
                         singleGallery.goToSlide = function( slideIndex, direction ) {
                             var total = singleGallery.getSlideCount(),
                                 next = ( total + slideIndex ) % total,
