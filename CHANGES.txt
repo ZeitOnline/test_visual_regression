@@ -4,6 +4,8 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
+- BUG-39: correct android em issue with cp lead subtitles
+
 - ZON-898: Add advertorial teaser and templates
 
 - FIX: Ensure banner setting is respected
