@@ -40,6 +40,22 @@ def fix_misrepresented_latin(val):
     return val
 
 
+def neighborhood(iterable, default=None):
+    """Sliding window generator function that yields a tuple in the form
+    of (prev, item, next).
+    :param iterable: Iterable to cycle through
+    :param default: Default value to yield for undefined neighbors
+    :rtype: types.GeneratorType
+    """
+
+    iterator = iter(iterable)
+    prev, item = default, iterator.next()
+    for next in iterator:
+        yield (prev, item, next)
+        prev, item = item, next
+    yield (prev, item, default)
+
+
 class nsmixin:
     """New style magic attribute methods as a mixin class."""
 
