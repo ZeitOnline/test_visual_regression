@@ -463,10 +463,10 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     request = {'host': 'test.de', 'path_info': '/myurl'}
     twitter = ['<meta name="twitter:card" content="summary_large_image">',
                '<meta name="twitter:site" content="@zeitonline">',
-               '<meta name="twitter:creator" content="@zeitonline">',
+               '<meta name="twitter:creator" content="@ZEITmagazin">',
                '<meta name="twitter:title" content="title">',
                '<meta name="twitter:description" content="subtitle">']
-    fb = ['<meta property="og:site_name" content="ZEIT ONLINE">',
+    fb = ['<meta property="og:site_name" content="ZEITmagazin">',
           '<meta property="fb:admins" content="595098294">',
           '<meta property="og:type" content="article">',
           '<meta property="og:title" content="title">',
