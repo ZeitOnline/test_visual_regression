@@ -259,7 +259,6 @@
                 galleryWidth = gallery.width();
             };
 
-            var reload = true;
             slider = gallery.bxSlider( options );
 
             // make element available for AJAX response
