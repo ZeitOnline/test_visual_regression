@@ -13,11 +13,11 @@ Parameters:
 
 {%- set image = get_teaser_image(teaser_block, teaser) -%}
 
-<div class="cp_button cp_button--darker">
+<div class="cp_button cp_button--cover">
     <a href="{{ teaser | create_url }}">
-        <div class="scaled-image">
+        <div class="scaled-image cp_button__image" data-wrap=".cp_button__image">
             {{ lama.insert_responsive_image(image) }}
         </div>
     </a>
-    {{ cp.teaser_text_block(teaser, 'button', 'darker', 'true', 'false') }}
+    {{ cp.teaser_text_block(teaser, 'button', 'none', 'true', 'false') }}
 </div>
