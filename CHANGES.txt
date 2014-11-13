@@ -9,7 +9,6 @@ Change log for zeit.web
 - FIX: Ensure banner setting is respected
 
 
-
 1.7 (2014-11-12)
 ----------------
 
