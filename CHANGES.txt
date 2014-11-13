@@ -6,11 +6,21 @@ Change log for zeit.web
 
 - BUG-48: exclude mobile galleries from reload, comment out harmful former fix for mobile
 
+- BUG-39: correct android em issue with cp lead subtitles
+
+- ZON-898: Add advertorial teaser and templates
+
+- ZON-842: Add new title and sharing metadata for ZMO
+
+- FIX: Ensure banner setting is respected
+
 
 1.7 (2014-11-12)
 ----------------
 
 - BUG-46: Depublished imagegroups lead to empty areas
+
+- ZON-986: Update gruntfile for zeit.web styleguide
 
 - ZON-1140: Make caching configurable
 

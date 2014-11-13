@@ -21,9 +21,13 @@ import zeit.web.magazin.view
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                                zeit.web.magazin.view.is_advertorial),
+             renderer='templates/advertorial.html')
+@view_config(context=zeit.content.cp.interfaces.ICenterPage,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/centerpage.html')
-class Centerpage(zeit.web.core.view_centerpage.Centerpage):
+class Centerpage(zeit.web.core.view_centerpage.Centerpage, zeit.web.magazin.view.Base):
 
     def insert_seperator(self, position, obj):
         teaser_list = obj
@@ -131,6 +135,10 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
                 )
             )
         return sorted(teaser_list, key=lambda k: k['label'])
+
+    @zeit.web.reify
+    def is_advertorial(self):
+        return getattr(self.context, 'product_text', None) == 'Advertorial'
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
