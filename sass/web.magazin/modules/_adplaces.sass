@@ -9,8 +9,8 @@ $mobile_middle_ad_break_left_margin: $mobile_ad_width + $page-padding--small*2
 
 %ad__label
     color: $charcoal
+    font-family: $font-tabletgothic
     font-size: $font-xxs
-    +tablet
     letter-spacing: 2px
     text-align: left
     text-transform: uppercase
@@ -36,7 +36,7 @@ $mobile_middle_ad_break_left_margin: $mobile_ad_width + $page-padding--small*2
 .iqd_mobile__adplace--middle
     @extend .iqd_mobile__adplace
     +respond-max($mobile_middle_ad_break_left_margin)
-        margin-left: -$page-padding--small 
+        margin-left: -$page-padding--small
 
 // medium rectangles
 %ad__mr

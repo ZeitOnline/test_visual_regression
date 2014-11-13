@@ -11,36 +11,37 @@ Available attributes:
 
 All calling templates have to provide:
     format: to define type of leader (eg. 'upright', 'square', 'full')
-    shade: to define shading ('light', 'dark', 'none')
+    shade: to define shading ('light', 'darker', 'dark', 'none')
     supertitle: to define display of supertitle ('true', 'false')
+    subtitle: to define display of subtitle ('true', 'false')
 #}
 
-{% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
-{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
+{%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
+{%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{%- import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
-{%- set asset = teaser|get_all_assets|block_type %}
+{%- set asset = teaser | get_all_assets | block_type %}
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
-<div class="cp_leader cp_leader--{{ self.format() }}">
-    
-    {# call comment box #}
-    {% if self.format() != 'full' %}
-         {{ cp.comments_count(get_teaser_commentcount(teaser.uniqueId), teaser | create_url) }}
-    {% endif %}
+<div class="cp_leader cp_leader--{{ self.format() }}{{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}">
 
-    <a href="{{ teaser|create_url }}">
-        {% if asset[0] == 'video' %}
+    {# call comment box #}
+    {% if self.format() != 'full' -%}
+         {{ cp.comments_count(get_teaser_commentcount(teaser.uniqueId), teaser | create_url) }}
+    {%- endif %}
+
+    <a href="{{ teaser | create_url }}">
+        {% if asset[0] == 'video' -%}
             {# call video asset #}
-            {%- set obj = teaser|auto_select_asset %}
+            {%- set obj = teaser | auto_select_asset %}
             {{ blocks.headervideo(obj, 'cp_leader__asset cp_leader__asset--' + self.shade(), '') }}
-        {% else %}
+        {%- else -%}
             {# call image asset #}
             <div class="scaled-image is-pixelperfect cp_leader__asset cp_leader__asset--{{ self.shade() }}" data-wrap=".cp_leader">
                 {{ lama.insert_responsive_image(image) }}
             </div>
-        {% endif %}
+        {%- endif %}
     </a>
     {# call teaser text #}
-    {{ cp.teaser_text_block(teaser, 'leader', self.shade(), self.supertitle()) }}
+    {{ cp.teaser_text_block(teaser, 'leader', self.shade(), self.supertitle(), self.subtitle()) }}
 </div>

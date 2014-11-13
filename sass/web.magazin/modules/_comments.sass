@@ -47,16 +47,17 @@
         background-position: center center
 
 .article__comments-trigger__text
-    +tablet(bold)
+    font-family: $font-tabletgothic
     font-size: em(11px)
+    font-weight: bold
 
 $comments-min-width: $comments__break-outside - $max-page-width
 
 .comments
-    +tablet
     +unpadded
-    z-index: 20
     display: none
+    font-family: $font-tabletgothic
+    z-index: 20
     +respond-min($comments__break-overlap)
         overflow: hidden
         margin: 0

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/exampleimages/artikel/02/heft/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-04T20:27:00.135886+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">ZEITmagazin</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-04T20:26:11.048031+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:228ed8a6-16a7-4cc9-b0c7-74c675b2f67b}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-04T20:27:00.135886+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2014-01-03T21:28:07+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="retract_job_id">777717287</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stroebele</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">30921833.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-04T20:21:46.376216+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Andreas Gebert/dpa&lt;/unicode&gt; &lt;none/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-01-03T21:28:42Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 03 Jan 2014 21:28:42 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"6a2bc7-1000-4ef17981bbbbf"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+</head>

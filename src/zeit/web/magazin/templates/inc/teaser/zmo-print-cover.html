@@ -1,0 +1,17 @@
+{#
+
+Teaser template for Zeit Magazin print cover
+
+Parameters:
+    format: to define type of leader
+    shade: to define light/ dark shading
+    supertitle: to define display of supertitle
+    subtitle: to define display of subtitle
+#}
+
+{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_leader_teaser_template.html" -%}
+
+{% block format %}full{% endblock %}
+{% block shade %}darker{% endblock %}
+{% block supertitle %}true{% endblock %}
+{% block subtitle %}false{% endblock %}

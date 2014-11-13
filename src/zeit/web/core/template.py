@@ -65,7 +65,7 @@ class Environment(jinja2.environment.Environment):
         self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
     def handle_exception(self, *args, **kw):
-        return self.undefined().__html__()
+        return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):
         try:
@@ -231,6 +231,7 @@ default_images_sizes = {
     'zmo-small': (200, 50),
     'zmo-x-small': (100, 25),
     'zmo-card-picture': (320, 480),
+    'zmo-print-cover': (315, 424),
     'og-image': (600, 315),
     'twitter-image_small': (120, 120),  # summary
     'twitter-image-large': (560, 300),  # summary_large_image, photo
