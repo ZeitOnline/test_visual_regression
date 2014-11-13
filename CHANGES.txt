@@ -4,7 +4,9 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-898: Add advertorial teaser and templates
+
+- FIX: Ensure banner setting is respected
 
 
 1.7 (2014-11-12)
