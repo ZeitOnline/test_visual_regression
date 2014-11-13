@@ -222,19 +222,22 @@
             };
 
             options.onSliderLoad = function() {
-                // check for iOS bug not setting position correctly
-                if ( 'WebKitCSSMatrix' in window ) {
-                    var matrix = new WebKitCSSMatrix( gallery.css('transform') );
 
-                    // bxSlider got the position of the first slide wrong,
-                    // because the cloned last slide did not load until now
-                    if ( matrix.m41 === 0 ) {
-                        gallery.find( '.bx-clone img' ).eq( 0 ).on( 'load', function( e ) {
-                            $( this ).off( e );
-                            slider.reloadSlider();
-                        });
-                    }
-                }
+                // TODO: has to be fixed, it isn't working but leads to a neverending loop
+                // check for iOS bug not setting position correctly
+                // if ( 'WebKitCSSMatrix' in window ) {
+                //     var matrix = new WebKitCSSMatrix( gallery.css('transform') );
+
+                //     // bxSlider got the position of the first slide wrong,
+                //     // because the cloned last slide did not load until now
+                //     if ( matrix.m41 === 0 ) {
+                //         gallery.find( '.bx-clone img' ).eq( 0 ).on( 'load', function( e ) {
+                //             $( this ).off( 'e' );
+                //             slider.reloadSlider();
+                //         });
+                //     }
+                // }
+
 
                 figCaptionSizing();
 
@@ -256,6 +259,7 @@
                 galleryWidth = gallery.width();
             };
 
+            var reload = true;
             slider = gallery.bxSlider( options );
 
             // make element available for AJAX response
