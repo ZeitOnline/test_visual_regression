@@ -52,7 +52,7 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert markup == output
 
     # assert empty subtitle
-    assert '' == tpl.module.subpage_chapter(0, '', '')
+    assert '' == str(tpl.module.subpage_chapter(0, '', '')).strip()
 
 
 def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
