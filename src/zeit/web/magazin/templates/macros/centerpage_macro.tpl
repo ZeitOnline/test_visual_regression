@@ -124,5 +124,5 @@
 {%- endmacro %}
 
 {% macro advertorial_modifier(product_text, is_advertorial) -%}
-    {% if ( product_text == 'Advertorial' and not is_advertorial ) %} is-advertorial{% endif %}
+    {% if (product_text == 'Advertorial' and not is_advertorial) %} is-advertorial{% endif %}
 {%- endmacro %}
