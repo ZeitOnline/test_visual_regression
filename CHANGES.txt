@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- BUG-39: correct android em issue with cp lead titles
 
 
 1.7 (2014-11-12)

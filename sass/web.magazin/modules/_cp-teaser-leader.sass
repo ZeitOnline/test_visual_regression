@@ -56,12 +56,13 @@ $cp_lead-full-video-max-width: em(1000px)
 	width: 100%
 	z-index: 2
 
+/* used px because of android issues */
 .cp_leader__title
 	font-weight: bold
-	margin: 0 0 $tiny
+	margin: 0 0 $fine--px
 	font-size: $font-xl
-	line-height: $petite
-	letter-spacing: $hair
+	line-height: $medium--px
+	letter-spacing: $dblhair--px
 	+respond-min($break-0)
 		font-size: $font-xxl
 	+respond-min($break-2)
@@ -70,13 +71,13 @@ $cp_lead-full-video-max-width: em(1000px)
 .cp_leader__subtitle
 	@extend %copy
 	font-size: $font-m
-	line-height: $petite
+	line-height: $petite--px
 	+respond-min($break-2)
 		font-size: $font-ml
 
 .cp_leader__supertitle
 	@extend %copy
-	line-height: $medium
+	line-height: $medium--px
 	font-size: $font-s
 	+respond-min($break-2)
 		font-size: $font-ml
