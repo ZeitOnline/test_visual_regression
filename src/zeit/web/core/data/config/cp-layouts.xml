@@ -31,7 +31,7 @@
     <layout
         id="teaser-fullwidth"
         title="vollbreiter Aufmacher Text auf Bild"
-        image_pattern="zon-large"
+        image_pattern="zon-fullwidth"
         areas="lead"
         />
 
