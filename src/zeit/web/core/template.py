@@ -65,7 +65,7 @@ class Environment(jinja2.environment.Environment):
         self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
     def handle_exception(self, *args, **kw):
-        return self.undefined().__html__()
+        return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):
         try:
