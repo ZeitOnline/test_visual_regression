@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- BUG-48: exclude mobile galleries from reload, comment out harmful former fix for mobile
 
 
 1.7 (2014-11-12)
