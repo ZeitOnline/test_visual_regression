@@ -32,7 +32,7 @@
         <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
             <display_name>Susanne Mayer</display_name>
         </author>
-        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/lebensart/mode/2013-10/teaser-vinken-interview/" type="jpg" publication-date="" expires="">
+        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/exampleimages/artikel/02/heft/" type="jpg" publication-date="" expires="">
             <bu>Die Professorin und Autorin Barbara Vinken in einem ihrer Lieblingsstücke, einem kurzen Kleid von Thierry Mugler</bu>
             <copyright>© Sigrid Reinichs</copyright>
         </image>
@@ -40,7 +40,7 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">748779</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="author">Ijoma Mangold;Susanne Mayer</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
@@ -201,8 +201,8 @@
         </division>
     </body>
     <teaser>
-        <title>"Die reizende Inszenierung des Fleisches"</title>
+        <title>Das neue Heft – im Video durchgeblättert</title>
         <text>Warum steht eine elegante Frau unter Verdacht? Hat Mode noch etwas zu sagen? Was fehlt dem Mann im Anzug? Ein Gespräch mit Barbara Vinken, Autorin des Buches "Angezogen"</text>
-        <supertitle>Modetheoretikerin Barbara Vinken</supertitle>
+        <supertitle>ZEITmagazin</supertitle>
     </teaser>
 </article>

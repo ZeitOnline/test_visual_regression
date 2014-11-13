@@ -73,6 +73,15 @@ class Base(object):
         return self.type
 
     @zeit.web.reify
+    def banner_on(self):
+        # respect the global advertising switch
+        if self.advertising_enabled is False or self.context.banner is False:
+            return False
+        # deliver banner if no banner is defined in xml
+        if self.context.banner is None or self.context.banner is True:
+            return True
+
+    @zeit.web.reify
     def adwords(self):
         keywords = ['zeitonline']
         # TODO: End discrepancy between testing and live ressorts!
