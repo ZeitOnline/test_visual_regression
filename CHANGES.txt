@@ -4,6 +4,10 @@ Change log for zeit.web
 1.8 (unreleased)
 ----------------
 
+- ZON-1025: toggle ad page zoom on ZON (but not ZMO)
+
+- ZON-1061: Style ZMO print cover teaser
+
 - ZON-1118: polishing teaser: fullwidth teaser
 
 - ZON-1118: polishing teaser: small/standard teaser
@@ -15,6 +19,12 @@ Change log for zeit.web
 - ZON-842: Add new title and sharing metadata for ZMO
 
 - FIX: Ensure banner setting is respected
+
+
+1.7.1 (2014-11-14)
+------------------
+
+- BUG-53: Fix buzz box score race condition
 
 
 1.7 (2014-11-12)

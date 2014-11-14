@@ -13,7 +13,6 @@ All calling templates have to provide:
     format: to define type of leader (eg. 'upright', 'square', 'full')
     shade: to define shading ('light', 'darker', 'dark', 'none')
     supertitle: to define display of supertitle ('true', 'false')
-    subtitle: to define display of subtitle ('true', 'false')
 #}
 
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
@@ -43,5 +42,5 @@ All calling templates have to provide:
         {%- endif %}
     </a>
     {# call teaser text #}
-    {{ cp.teaser_text_block(teaser, 'leader', self.shade(), self.supertitle(), self.subtitle()) }}
+    {{ cp.teaser_text_block(teaser, 'leader', self.shade(), self.supertitle()) }}
 </div>

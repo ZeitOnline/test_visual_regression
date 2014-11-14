@@ -24,7 +24,7 @@ def comment_score(**ctx):
 
     comments = zeit.web.core.comments.comments_per_unique_id()
     reverse = dict(reversed(i) for i in comments.iteritems())
-    return reverse.get(ctx['path'], 0)
+    return reverse.get(ctx.get('path'), 0)
 
 
 def index_score(**ctx):
@@ -104,12 +104,17 @@ class Fetcher(object):
             uri = 'http://xml.zeit.de' + item.get('location', '')
 
             try:
-                article = zeit.cms.interfaces.ICMSContent(uri)
-            except UserWarning:  # TypeError:
+                content = zeit.cms.interfaces.ICMSContent(uri)
+            except TypeError:
                 # Ignore item if CMS lookup fails.
                 continue
 
-            article.score = item.get('score', 0)
+            article = {
+                'supertitle': content.supertitle,
+                'title': content.title,
+                'uniqueId': content.uniqueId,
+                'score': item.get('score', 0)
+            }
 
             output.append(article)
 
@@ -150,12 +155,17 @@ class Fetcher(object):
             uri = str(zeit.cms.interfaces.ID_NAMESPACE.strip('/') + path)
 
             try:
-                article = zeit.cms.interfaces.ICMSContent(uri)
+                content = zeit.cms.interfaces.ICMSContent(uri)
             except TypeError:
                 # Ignore item if CMS lookup fails.
                 continue
 
-            article.score = score_hook(**locals())
+            article = {
+                'supertitle': content.supertitle,
+                'title': content.title,
+                'uniqueId': content.uniqueId,
+                'score': score_hook(**locals())
+            }
 
             output.append(article)
 

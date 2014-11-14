@@ -37,7 +37,7 @@ class Centerpage(
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and b.layout.id not in (
-                    'teaser-fullwidth', 'zon-fullwidth')
+                    'teaser-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
@@ -53,8 +53,7 @@ class Centerpage(
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and b.layout.id in (
-                    'teaser-fullwidth', 'zon-fullwidth'
-                    )
+                    'teaser-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
