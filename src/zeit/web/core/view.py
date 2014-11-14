@@ -122,19 +122,19 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
+        default = u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten'
         try:
             seo = zeit.seo.interfaces.ISEO(self.context)
             if seo.html_title:
                 return seo.html_title
         except TypeError:
             pass
-        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
         tokens = (self.supertitle, self.title)
         return ': '.join([t for t in tokens if t]) or default
 
     @zeit.web.reify
     def pagedescription(self):
-        default = 'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben'
+        default = u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten'
         try:
             seo = zeit.seo.interfaces.ISEO(self.context)
         except TypeError:

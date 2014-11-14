@@ -47,12 +47,17 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 
 def test_centerpage_should_have_correct_page_title(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZMO CP: ZMO</title>' in browser.contents
+    assert '<title>ZMO CP: ZMO | ZEITmagazin</title>' in browser.contents
 
 
 def test_centerpage_should_have_correct_seo_title(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<title>SEO title</title>' in browser.contents
+    assert '<title>SEO title | ZEITmagazin</title>' in browser.contents
+
+
+def test_hp_should_have_correct_title(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
