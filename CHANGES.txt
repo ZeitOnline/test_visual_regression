@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.7.1 (unreleased)
+1.7.1 (2014-11-14)
 ------------------
 
 - BUG-53: Fix buzz box score race condition
