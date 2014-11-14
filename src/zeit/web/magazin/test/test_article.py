@@ -44,7 +44,7 @@ def test_article_has_valid_twitter_meta_tags(testserver, testbrowser):
     assert '<meta name="twitter:site"'\
         ' content="@zeitonline">' in browser.contents
     assert '<meta name="twitter:creator"'\
-        ' content="@zeitonline">' in browser.contents
+        ' content="@ZEITmagazin">' in browser.contents
     assert '<meta name="twitter:title"'\
         ' content="Mei, is des traurig!">' in browser.contents
     assert '<meta name="twitter:description"'\
@@ -57,7 +57,7 @@ def test_article_has_valid_twitter_meta_tags(testserver, testbrowser):
 def test_article_has_valid_facebook_meta_tags(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert '<meta property="og:site_name" '\
-        'content="ZEIT ONLINE">' in browser.contents
+        'content="ZEITmagazin">' in browser.contents
     assert '<meta property="fb:admins"'\
         ' content="595098294">' in browser.contents
     assert '<meta property="og:type"'\
@@ -211,12 +211,12 @@ def test_article_without_supertitle_has_correct_page_title(
     browser = testbrowser('%s/artikel/03a' % testserver.url)
     assert '<title>'\
         'Der Chianti hat eine'\
-        ' zweite Chance verdient' in browser.contents
+        ' zweite Chance verdient | ZEITmagazin' in browser.contents
 
 
 def test_article_should_have_correct_seo_title(testserver, testbrowser):
     browser = testbrowser('%s/artikel/04' % testserver.url)
-    assert '<title>SEO title</title>' in browser.contents
+    assert '<title>SEO title | ZEITmagazin</title>' in browser.contents
 
 
 def test_article_has_correct_page_meta_description(testserver, testbrowser):

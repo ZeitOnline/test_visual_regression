@@ -30,13 +30,17 @@ log = logging.getLogger(__name__)
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                                zeit.web.magazin.view.is_advertorial),
+             renderer='templates/advertorial.html')
+@view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              name='komplettansicht',
              renderer='templates/article_komplett.html')
-class Article(zeit.web.core.view.Content):
+class Article(zeit.web.core.view.Content, zeit.web.magazin.view.Base):
 
     advertising_enabled = True
     is_longform = False

@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+      <tag ns10:pytype="str" uuid="d449b21b-9101-4cfd-9af9-5abc460d7af7" url_value="gemuese" type="free">Gemüse</tag>
+      <tag ns10:pytype="str" uuid="d7701afc-a69c-4d8f-9aed-423278121c13" url_value="kochrezept" type="free">Kochrezept</tag>
+      <tag ns10:pytype="str" uuid="ed546578-e0a4-4388-abd6-53d590dbf664" url_value="kochen" type="free">Kochen</tag>
+      <tag ns10:pytype="str" uuid="1f92f4fd-0b89-4afa-8fb8-9e1aa6522f14" url_value="essen" type="free">Essen</tag>
+      <tag type="free" score="4" uuid="4550eda4-243c-446e-a2bb-cc0f1ae77040" url_value="lebensmittelindustrie">Lebensmittelindustrie</tag>
+    </rankedTags>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/advertorial-01/" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="">
+      <bu py:pytype="str">Kichererbsensuppe</bu>
+      <copyright py:pytype="str">© Silvio Knezevic</copyright>
+    </image>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+      <display_name py:pytype="str">Elisabeth Raether</display_name>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/42/blutwurst-birne-wochenmarkt" year="2014" issue="42" ressort="zeit-magazin" serie="Wochenmarkt" contenttype="article" publication-date="2014-10-29T23:09:21+00:00" expires="" author="Elisabeth Raether">
+        <supertitle py:pytype="str">Wochenmarkt</supertitle>
+        <title py:pytype="str">Blut und Birne</title>
+        <text py:pytype="str">Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</text>
+        <description py:pytype="str">Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</description>
+        <byline py:pytype="str">von Elisabeth Raether</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/42/blustwurst-birnen/" type="jpg" alt="Wochenmarkt: Für einen kühlen Sonntag" align="left" publication-date="" expires="2015-01-16T15:22:06+00:00">
+          <bu py:pytype="str">Blutwurst mit Birnen</bu>
+          <copyright py:pytype="str">© Silvio Knezevic</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+          <display_name py:pytype="str">Elisabeth Raether</display_name>
+        </author>
+      </reference>
+    </references>
+    <nextread>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/42/blutwurst-birne-wochenmarkt" year="2014" issue="42" ressort="zeit-magazin" serie="Wochenmarkt" contenttype="article" publication-date="2014-10-29T23:09:21+00:00" expires="" author="Elisabeth Raether">
+        <supertitle py:pytype="str">Wochenmarkt</supertitle>
+        <title py:pytype="str">Blut und Birne</title>
+        <text py:pytype="str">Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</text>
+        <description py:pytype="str">Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</description>
+        <byline py:pytype="str">von Elisabeth Raether</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/42/blustwurst-birnen/" type="jpg" alt="Wochenmarkt: Für einen kühlen Sonntag" align="left" publication-date="" expires="2015-01-16T15:22:06+00:00">
+          <bu py:pytype="str">Blutwurst mit Birnen</bu>
+          <copyright py:pytype="str">© Silvio Knezevic</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+          <display_name py:pytype="str">Elisabeth Raether</display_name>
+        </author>
+      </reference>
+    </nextread>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">3099892</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Raether</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">zeit-magazin essen-trinken</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-11-01T15:05:07.181348+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-11-01T15:06:06.781277+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-11-05T23:13:40.006363+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-11-05T23:14:39.691577+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-11-01T15:05:38.700665+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2014-11-01T15:05:51.520006+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.10.2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="header_layout">leinwand</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-43-Wochenmarkt-43</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Wochenmarkt 43</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-11-01T15:04:57.781581+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Eine Kichererbsensuppe muss zwar länger köcheln, als eine Tiefkühlpizza backt – aber dafür hat man ein Erfolgserlebnis. </attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">Wochenmarkt 43</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">98</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/zeit-magazin/2014/43/Wochenmarkt-43</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2014-10-16T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">766e67f92f834c86ab10271ed2cd6f87</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1226956970</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2014-11-05T23:13:38+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-43</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">Wochenmarkt</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">In westlichen Ländern wird so wenig gekocht wie möglich. Diese Kichererbsensuppe wäre ein guter Wiedereinstieg. </attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">hennessy</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">2307</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:21ceafcf-5e0d-40fc-91b2-c421aea086e6}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">43</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Wochenmarkt</supertitle>
+    <title>Eine Suppe fürs Volk</title>
+    <division type="page">
+      <image src="http://xml.zeit.de/exampleimages/artikel/advertorial-01/advertorial-01-zmo-medium.jpg" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="" expires="2015-01-28T13:03:50+00:00" layout="zmo-xl-header" is_empty="False">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Kichererbsensuppe</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Silvio Knezevic</copyright>
+      </image>
+      <p>
+        Sie, liebe Wochenmarkt-Leser, und ich, wir sind die Ausnahme, denn wir kochen gern. Alle Statistiken in allen westlichen Ländern sagen: Es wird so selten wie möglich gekocht. Die Lebensmittelindustrie springt gern ein. Dort, wo die Tradition Frauen nicht zum Kochen nötigt, geben sie das Kochen auf. Der amerikanische Journalist Michael Pollan, dessen Buch
+        <a class="" href="http://www.kunstmann.de/titel-0-0/kochen-1045/" target="_blank"><em>Kochen. Eine Naturgeschichte der Transformation</em></a>
+        gerade auf Deutsch erschienen ist, sagt, das liege auch daran, dass wir heute alles Produktive mit Arbeit gleichsetzten. Es gebe die lähmende Idee, dass man die Herstellung von etwas am besten an andere delegiert. Die einzig legitime Form von Freizeit, Muße und Freiheit sei der Konsum – sich etwas leisten zu können.
+      </p>
+      <p>Schade, aber so ist es. Handgeschriebene Briefe waren ja auch sehr schön. Als ich Pollan neulich in Berlin getroffen habe und ihn nach einem erprobten Rezept für den Herbst fragte, schlug er diese Suppe aus <a class="" href="http://www.zeit.de/2014/10/wochenmarkt-huehnchen-curry" target="_blank">Kichererbsen</a> vor. Die Suppe schmeckt köstlich, und das Rezept ist ein niedrigschwelliges Angebot an diejenigen, die es vielleicht doch mal mit dem Kochen probieren wollen. Man darf sogar eine Konserve benutzen. <a class="" href="http://www.zeit.de/zeit-wissen/2014/05/ernaehrung-lebensmittel-genuss-gewissen" target="_blank">Verbote in der Küche</a> – warum was unmöglich ist, überwacht von Gourmetkritikern – wirken heute vollends albern angesichts der Tatsache, dass so wenige Menschen sich überhaupt fürs Kochen interessieren: eine Predigt vor leeren Bänken.</p>
+      <p>
+        Die Kichererbsen wäscht man unter kaltem Wasser ab und lässt sie abtropfen. Zwiebel in Streifen schneiden und in einem Topf mit etwas Salz und Olivenöl anschwitzen, ungefähr 20 Minuten lang bei niedriger Temperatur (Pollan:
+        <em>"low and slow").</em>
+        Die Kichererbsen dazugeben, so viel Wasser in den Topf gießen, dass sie gerade bedeckt sind. Aufkochen und 1 Stunde lang zugedeckt köcheln lassen, dann ist der Fond schön würzig. Die Suppe auf Teller verteilen, schwarzen Pfeffer daraufgeben sowie etwas Zitronensaft und Olivenöl. Was das Olivenöl betrifft: Ignorieren Sie den Hype, probieren Sie aus, welches Öl Ihnen schmeckt, und verwenden Sie es immer großzügig. <br/></p>
+      <p><strong>Kichererbsensuppe</strong><br/>(für 2 bis 3 Personen)</p>
+      <p><strong>Zutaten –</strong> 1 Zwiebel, Salz, Olivenöl, 2 Dosen Kichererbsen, schwarzer
+        Pfeffer, 1 Zitrone</p>
+    </division>
+    <image-credits>Foto  Silvio Knezevic</image-credits>
+    <subtitle>Kicher kicher *gnihihi* Angriff der Kichererbsen *hihihoho*</subtitle>
+  </body>
+  <teaser>
+    <title>Eine Suppe fürs Volk</title>
+    <supertitle>Wochenmarkt</supertitle>
+    <text>In westlichen Ländern wird so selten wie möglich gekocht. Wer es mal wieder probieren will, könnte eine Kichererbsensuppe zubereiten. Man darf sogar eine Konserve nehmen.</text>
+  </teaser>
+</article>
