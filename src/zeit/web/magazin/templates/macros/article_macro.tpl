@@ -139,7 +139,7 @@
 
 {% macro source_date(date, source) -%}
     {% if source %}
-        <span class="article__head__meta__source">{{ source }}</span>
+        <span class="article__head__meta__source">{{ source }}{% if advertorial_byline %} {{ advertorial_byline }}{% endif %}</span>
     {% endif %}
     <span class="article__head__meta__date">{{ date }}</span>
 {%- endmacro %}

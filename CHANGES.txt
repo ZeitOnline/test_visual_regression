@@ -6,6 +6,18 @@ Change log for zeit.web
 
 - ZON-1061: Style ZMO print cover teaser
 
+- ZON-1118: polishing teaser: fullwidth teaser
+
+- ZON-1118: polishing teaser: small/standard teaser
+
+- BUG-39: correct android em issue with cp lead subtitles
+
+- ZON-898: Add advertorial teaser and templates
+
+- ZON-842: Add new title and sharing metadata for ZMO
+
+- FIX: Ensure banner setting is respected
+
 
 1.7 (2014-11-12)
 ----------------
