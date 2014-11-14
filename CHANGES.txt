@@ -19,6 +19,12 @@ Change log for zeit.web
 - FIX: Ensure banner setting is respected
 
 
+1.7.1 (2014-11-14)
+------------------
+
+- BUG-53: Fix buzz box score race condition
+
+
 1.7 (2014-11-12)
 ----------------
 
