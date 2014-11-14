@@ -35,31 +35,31 @@ def test_out_of_bounds_limits_should_throw_exception():
 def test_data_for_twitter_should_be_fetched(application):
     data = zeit.web.core.reach.fetch('twitter', 'zeit-magazin')
     assert len(data) == 3
-    assert all([hasattr(a, 'title') for a in data])
+    assert all(['title' in a for a in data])
 
 
 def test_data_for_facebook_should_be_fetched(application):
     data = zeit.web.core.reach.fetch('facebook', 'zeit-magazin')
     assert len(data) == 3
-    assert all([hasattr(a, 'title') for a in data])
+    assert all(['title' in a for a in data])
 
 
 def test_data_for_googleplus_should_be_fetched(application):
     data = zeit.web.core.reach.fetch('googleplus', 'zeit-magazin')
     assert len(data) == 3
-    assert all([hasattr(a, 'title') for a in data])
+    assert all(['title' in a for a in data])
 
 
 def test_data_for_comments_should_be_fetched(application):
     data = zeit.web.core.reach.fetch('comments', 'zeit-magazin')
     assert len(data) == 3
-    assert all([hasattr(a, 'title') for a in data])
+    assert all(['title' in a for a in data])
 
 
 def test_data_for_mostread_should_be_fetched(application):
     data = zeit.web.core.reach.fetch('mostread', 'zeit-magazin')
     assert len(data) == 3
-    assert all([hasattr(a, 'title') for a in data])
+    assert all(['title' in a for a in data])
 
 
 def test_counts_per_url_are_fetchable(application):
