@@ -2,29 +2,45 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro place(item) -%}
-    {{lama_core.adplace(item, view)}}
-    {{lama_core.adplace_middle_mobile(item)}}
+    {{ lama_core.adplace(item, view) }}
+    {{ lama_core.adplace_middle_mobile(item) }}
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <div class="article__head__supertitle">{{ view.supertitle  | hide_none }}</div>
+  {#
+    view = {'supertitle': u'Streik der Lokführer'}
+  #}
+  <div class="article__head__supertitle">{{ view.supertitle | hide_none }}</div>
 {%- endmacro %}
 
 {% macro title() -%}
+  {#
+    view = {'title': u'Japan und China kommen sich näher'}
+  #}
   <div class="article__head__title">{{ view.title | hide_none }}</div>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
+  {#
+    include_meta = True
+    with_quotes = True
+    view = {'subtitle': u'Historischer Händedruck: Chinas Präsident Xi und '
+                        u'Japans Premier Abe haben sich in Peking getroffen. '
+                        u'Beide Staaten wollen ihre Beziehungen neu beleben.',
+            'genre': 'Politik',
+            'authors': ['Ursula Finkel', 'Marcel Fassbinder']
+            }
+  #}
     <div class="article__head__subtitle">
         <p>
             <strong>
                 {% if with_quotes %}
-                    »{{view.subtitle}}«
+                    »{{ view.subtitle }}«
                 {% else %}
-                    {{view.subtitle}}
+                    {{ view.subtitle }}
                 {% endif %}
                 {% if include_meta and view.genre %}
-                    {{view.genre|title}}
+                    {{ view.genre | title }}
                 {% endif %}
                 {% if include_meta and view.authors %}
                     {{ meta_author(view.authors, titlecase=view.genre==None) }}
@@ -46,30 +62,48 @@
 {%- endmacro %}
 
 {% macro paragraph(html, class) -%}
+  {#
+    html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '
+            u'deutsches Kulturgut. <b>Dialekte</b> gehören schon immer zu diesem '
+            u'viel durchwanderten und umkämpften Land. Auch die deutsche '
+            u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
+  #}
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}
-    {% if obj.name and obj.name %}
+  {#
+    obj = {'name': u'Herrmann Koser',
+           'text': (u'Herrmann Koser ist ZEITmagazin-Leserin und eine der '
+                    u'meinungsstarken Kommentatoren bei unseren sonntäglichen '
+                    u'Tatort-Diskussionen bei Facebook.')
+           }
+  #}
+    {% if obj.name -%}
         <figure class="portraitbox figure-stamp">
             <div class="portraitbox-heading">
-                {{obj.name}}
+                {{ obj.name }}
             </div>
-            {{obj.text | safe}}
+            {{ obj.text | safe }}
         </figure>
-    {% endif %}
+    {%- endif %}
 {%- endmacro %}
 
 {% macro subpage_chapter(number, subtitle, class) -%}
-    {% if subtitle %}
+  {#
+    number = 4
+    subtitle = (u'Am Potsdamer Platz steigen Ballons der symbolischen '
+                u'Lichtgrenze gen Himmel.')
+  #}
+    {% if subtitle -%}
         <div class="{{ class }}">
             <span>Kapitel {{ number }}</span>
             <span>&mdash; {{ subtitle }} &mdash;</span>
             <span></span>
         </div>
-    {% endif %}
+    {%- endif %}
 {%- endmacro %}
 
 {% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
@@ -105,7 +139,7 @@
 
 {% macro source_date(date, source) -%}
     {% if source %}
-        <span class="article__head__meta__source">{{ source }}</span>
+        <span class="article__head__meta__source">{{ source }}{% if advertorial_byline %} {{ advertorial_byline }}{% endif %}</span>
     {% endif %}
     <span class="article__head__meta__date">{{ date }}</span>
 {%- endmacro %}

@@ -17,18 +17,20 @@
 	min-width: $px
 	min-width: rem($px)
 
-=fake-box-shadow-inset($color: $black, $perc: 0.7, $direction: to top, $length: 60%)
+=fake-box-shadow-inset($color: $black, $alpha_start: 0.7, $alpha_stop: 0.0, $direction: to top, $length: 60%)
 	background-color: $color
 	position: relative
 	&:after
+		bottom: 0
 		content: ''
-		position: absolute
-		z-index: 1
 		height: 100%
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
 		width: 100%
-		left: 0px
-		top: 0px
-		+background-image(linear-gradient($direction, rgba($color, $perc) 0%, rgba($color, 0) $length))
+		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
+		z-index: 1
 
 =no-user-select
 	-webkit-touch-callout: none
@@ -141,21 +143,6 @@
 	+on-interaction
 		color: $color
 		border-color: $color
-
-=franziska
-	font-family: "FranziskaWebPro", $serif-fallbacks
-
-=tablet($weight: regular)
-	font-family: "TabletGothic", $sans-fallbacks
-
-	@if $weight == bold
-		font-weight: bold
-	@else if $weight == fat
-		font-weight: 900
-	@else if $weight == thin
-		font-weight: 200
-	@else
-		font-weight: normal
 
 =tiemann
 	font-family: "TiemannLight", $serif-fallbacks

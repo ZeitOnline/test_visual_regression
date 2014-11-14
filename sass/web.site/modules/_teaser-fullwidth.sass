@@ -1,0 +1,97 @@
+.teaser-fullwidth
+	@extend %teaser
+	background: $black
+	margin: $petite (-$petite)
+	padding: 0
+	position: relative
+	+respond-min($break-tablet-min)
+		background: none
+		margin-top: 0
+	&__media
+		margin: 0
+		width: 100%
+		z-index: 1
+	&__media-container
+		background-color: $black
+		position: relative
+		&:after
+			bottom: 0
+			content: ''
+			left: 0
+			min-height: 100%
+			min-width: 100%
+			position: absolute
+			right: 0
+			top: 0
+			z-index: 1
+			+background-image(linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0.2) 35%, rgba($black, 0)))
+			+respond-min($break-tablet-min)
+				+background-image(linear-gradient(30deg, rgba($black, 0.6) 0%, rgba($black, 0.1) 100%))
+	&__media-item
+		height: auto
+		width: 100%
+	&__inner-helper
+		margin-top: em(-50px)
+		padding: 0 $little $petite $little
+		position: relative
+		z-index: 2
+		+respond-min($break-phablet-min)
+			margin-top: em(-80px)
+		+respond-min($break-tablet-min)
+			bottom: 0
+			left: 0
+			position: absolute
+			margin-top: 0
+			padding: 0 $twice $twice $twice
+			width: em(510px) + (2 * $twice)
+		+respond-min($break-desktop-min)
+			padding: 0 $big $big $big
+			width: em(530px) + (2 * $big)
+	&__heading
+		@extend %teaser-heading
+		position: relative
+	&__kicker
+		@extend %teaser-kicker
+		color: $white
+		letter-spacing: 0.12em
+		margin-bottom: em(6px, 13px)
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-tablet-min)
+			font-size: $font-s
+			margin-bottom: em(6px, $font-s--px)
+	&__title
+		@extend %teaser-title
+		color: $white
+		font-size: $zon-font-m
+		line-height: 1.12
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-phablet-min)
+			font-size: $font-xl
+		+respond-min($break-tablet-min)
+			font-size: $font-mxl
+		+respond-min($break-desktop-min)
+			font-size: em(34px)
+			line-height: 1.232
+	&__container
+		padding: 0
+	&__text
+		@extend %teaser-text
+		-webkit-font-smoothing: antialiased
+		color: $white
+		+respond-min($break-desktop-min)
+			font-size: $font-ml
+	&__byline,
+	&__metadata
+		@extend %teaser-byline
+		-webkit-font-smoothing: antialiased
+		color: $white
+		+respond-min($break-desktop-min)
+			font-size: $font-m
+			letter-spacing: 0.04em
+	&__commentcount
+		margin-left: $fine
+		&:link, &:visited
+			color: inherit
+			border-bottom: 1px solid #999
+		&:hover
+			border-bottom: 1px solid $white

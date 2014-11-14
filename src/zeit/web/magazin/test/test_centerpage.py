@@ -47,12 +47,17 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
 
 def test_centerpage_should_have_correct_page_title(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZMO CP: ZMO</title>' in browser.contents
+    assert '<title>ZMO CP: ZMO | ZEITmagazin</title>' in browser.contents
 
 
 def test_centerpage_should_have_correct_seo_title(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<title>SEO title</title>' in browser.contents
+    assert '<title>SEO title | ZEITmagazin</title>' in browser.contents
+
+
+def test_hp_should_have_correct_title(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in browser.contents
 
 
 def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
@@ -891,29 +896,22 @@ def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(
     assert len(icon) == 1
 
 
-def test_print_cover_teaser_should_have_full_format(testserver, testbrowser):
+def test_print_cover_teaser_should_have_modifier(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     format = browser.cssselect(
-        '.cp_leader.cp_leader--full')
+        '.cp_button.cp_button--cover')
     assert len(format) == 1
-
-
-def test_print_cover_teaser_should_have_darker_shade(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    shade = browser.cssselect(
-        '.cp_leader__title__wrap.cp_leader__title__wrap--darker')
-    assert len(shade) == 1
 
 
 def test_print_cover_teaser_should_have_supertitle(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     supertitle = browser.cssselect(
-        'a[href$="/artikel/02"] h2 .cp_leader__supertitle')
+        'a[href$="/artikel/02"] h2 .cp_button__supertitle')
     assert len(supertitle) == 1
 
 
 def test_print_cover_teaser_should_not_have_subtitle(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     subtitle = browser.cssselect(
-        'a[href$="/artikel/02"] h2 .cp_leader__subtitle')
+        'a[href$="/artikel/02"] h2 .cp_button__subtitle')
     assert len(subtitle) == 0

@@ -21,20 +21,20 @@ All calling templates have to provide:
 
 {%- set image = get_teaser_image(teaser_block, teaser) %}
 
-<div class='cp_button cp_button--{{ self.format() }}'>
+<div class="cp_button cp_button--{{ self.format() }}{{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}">
 
     {{ cp.comments_count(get_teaser_commentcount(teaser.uniqueId), teaser | create_url) }}
-    <a href="{{ teaser|create_url }}">
+    <a href="{{ teaser | create_url }}">
 
         {% if self.image_class() != 'false' -%}
             {# call image asset with optional class #}
             <div class="scaled-image">
                 {{ lama.insert_responsive_image(image, self.image_class()) }}
-        {% else -%}
+        {%- else -%}
             {# call standard image asset #}
             <div class="scaled-image is-pixelperfect cp_button__image" data-wrap=".cp_button__image">
                 {{ lama.insert_responsive_image(image) }}
-        {% endif -%} 
+        {%- endif %}
             </div>
     </a>
 

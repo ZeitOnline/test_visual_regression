@@ -36,15 +36,16 @@
 
 %teaser-heading
 	font-size: 1em
-	margin: 0 0 $fine 0
+	margin: 0 0 $tiny 0
 
 %teaser-kicker
 	display: block
-	font-family: TabletGothic
-	font-size: $font-s
+	font-family: TabletGothicNarrow
+	font-size: $zon-font-s
 	font-weight: bold
-	letter-spacing: $standard-letter-spacing
-	margin-bottom: em(4px, $font-s--px)
+	letter-spacing: $zon-letter-spacing-l
+	line-height: 1.2
+	margin-bottom: em(3px, 13px)
 
 %teaser-combined-link
 	color: $color-text
@@ -62,15 +63,14 @@
 
 %teaser-title
 	display: block
-	font-family: FranziskaWebPro
-	font-size: $font-xl--rem
-	font-weight: bold
-	line-height: 1.15
-	+respond-min($break-tablet-min)
-		font-size: $font-xxl--rem
+	font-family: TabletGothic
+	font-size: $font-l
+	font-weight: 700
+	letter-spacing: $zon-letter-spacing-s
+	line-height: 1.232
 
 %teaser-media
-	margin: 0 0 $little 0
+	margin: 0 0 $petite 0
 
 %teaser-media-item
 	height: auto
@@ -78,15 +78,18 @@
 	width: 100%
 
 %teaser-text
-	line-height: 1.4
+	color: $grey--mid
+	line-height: 1.344
 	margin: 0 0 $thin 0
 
 %teaser-byline
+	color: $grey
 	display: block
-	font-family: FranziskaWebPro
-	font-size: em(15px)
-	font-style: italic
-	margin-bottom: rem(6px)
+	font-family: TabletGothicNarrow
+	font-size: $font-s
+	letter-spacing: $zon-letter-spacing-m
+	margin-bottom: 4px // IE 8 Fallback
+	margin-bottom: rem(4px)
 
 %teaser-metadata
 	font-size: em(13px)
@@ -113,47 +116,11 @@
 .teaser--small.teaser--smallmedia
 	@extend %teaser-small-media-placement
 
-.teaser--iscentered
-	.teaser__heading
-		+respond-min($break-phablet-min)
-			text-align: center
-			margin-left: auto
-			margin-right: auto
-	.teaser__container
-		margin: $junior auto
-		+respond-min($break-tablet-min)
-			text-align: center
-
-.teaser--ispositioned
-	position: absolute
-	bottom: $fine
-	margin: 0 $petite 0 $petite
-	border: 0
-	overflow: hidden
-
-.teaser--islight
-	color: $white
-	z-index: 1
-	.teaser__kicker,
-	.teaser__title
-		color: $white !important
-	.teaser__metadata
-		a, .teaser__datetime:hover
-			border: 0
-		font-weight: normal
-
 .teaser__heading
 	@extend %teaser-heading
 
 .teaser__heading.teaser__heading--hasmedia
 	margin: 0 0 $petite 0
-
-.teaser__heading.teaser__heading--issized
-	+respond-min($break-phablet-min)
-		width: 70%
-
-.teaser__heading__small
-	margin: 0 0 $thin 0
 
 .teaser__combined-link
 	@extend %teaser-combined-link
@@ -164,28 +131,11 @@
 .teaser__title
 	@extend %teaser-title
 
-.teaser__title.teaser__title--small
-	font-size: $font-l--rem
-	+respond-min($break-tablet-min)
-		font-size: $font-zon-xl--rem
-
 .teaser__media
 	@extend %teaser-media
 
 .teaser__media--small
 	@extend %teaser-small-media
-
-.teaser__media--hasshadow
-	.mediablock__helper
-		+fake-box-shadow-inset($black, 1)
-	background-color: $black
-
-.teaser__media--fullwidth_mobile
-	margin-left: -$petite
-	margin-right: -$petite
-	+respond-min($break-tablet-min)
-		margin-left: 0
-		margin-right: 0
 
 .teaser__media-item
 	@extend %teaser-media-item
@@ -196,27 +146,11 @@
 .teaser__byline
 	@extend %teaser-byline
 
-.teaser__byline--isinline
-	display: none
-	+respond-min($break-phablet-min)
-		display: inline
-
 .teaser__metadata
-	@extend %teaser-metadata
-
-.teaser__metadata--ishead
-	margin-top: $fine
+	@extend %teaser-byline
 
 .teaser__commentcount
 	@extend %teaser-commentcount
-
-.teaser__container--issized
-	+respond-min($break-phablet-min)
-		width: 70%
-
-.teaser__container--issized-desktop
-	+respond-min($break-tablet-min)
-		width: 70%
 
 // first small teaser in collection displays image in mobile mode
 // TODO: solved with css for now, might have to be adapted later (asz)

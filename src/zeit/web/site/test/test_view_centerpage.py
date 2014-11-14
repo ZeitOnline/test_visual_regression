@@ -153,110 +153,34 @@ def test_first_small_teaser_has_image_on_mobile_mode(
     assert second.is_displayed() is False, 'image is displayed'
 
 
-def test_fullwidth_teaser_should_be_rendered_correctly(
-        testserver, testbrowser):
+def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
 
-    browser = testbrowser(
-        '%s/zeit-online/fullwidth-teaser' % testserver.url)
+    browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
 
-    teaser_box = browser.cssselect('.fullwidth_teasers')
-    teaser = browser.cssselect('.fullwidth_teasers '
-                               '.teaser.teaser--hasmedia.teaser--iscentered')
-    meta_head = browser.cssselect('.fullwidth_teasers '
-                                  '.teaser__metadata.teaser__metadata--ishead')
-    meta_def = browser.cssselect('.fullwidth_teasers '
-                                 '.teaser__metadata:last-child')[0]
+    teaser_box = browser.cssselect('.teasers-fullwidth')
+    teaser = browser.cssselect('.teaser-fullwidth')
 
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
     assert len(teaser) == 1, 'No fullwidth teaser'
-    assert len(meta_head) == 1, 'No teaser metadata in head'
-    assert meta_def.get('class') == (
-        'teaser__metadata teaser__metadata--ishead'), (
-        'Metadata on last position is not hidden')
 
 
-def test_fullwidth_teaser_has_right_layout_in_all_screen_sizes(
+def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
-
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('fullwidth_teasers')[0]
-    header = box.find_elements_by_class_name('teaser__heading--issized')[0]
-    img = box.find_elements_by_class_name('teaser__media--fullwidth_mobile')[0]
-    text = box.find_elements_by_class_name('teaser__container--issized')[0]
+    teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
+    helper = driver.find_elements_by_class_name(
+        'teaser-fullwidth__inner-helper')[0]
 
-    if screen_size[0] == 320:
-        # test mobile css settings
-        assert header.value_of_css_property('text-align') == 'start', (
-            'text-align value of teaser header is not correct')
-        assert text.value_of_css_property('text-align') == 'start', (
-            'text-align value of teaser text is not correct')
-        assert img.value_of_css_property('margin-left') == '-20px', (
-            'margin-left value of teaser image is not correct')
-    elif screen_size[0] == 520:
-        # test phablet css settings
-        assert header.value_of_css_property('text-align') == 'center', (
-            'text-align value of teaser header is not correct')
-        assert text.value_of_css_property('text-align') == 'start', (
-            'text-align value of teaser text is not correct')
-        assert img.value_of_css_property('margin-left') == '-20px', (
-            'margin-left value of teaser image is not correct')
-    else:
-        # test desktop and tablet css settings
-        assert header.value_of_css_property('text-align') == 'center', (
-            'text-align value of teaser header is not correct')
-        assert text.value_of_css_property('text-align') == 'center', (
-            'text-align value of teaser text is not correct')
-        assert img.value_of_css_property('margin-left') == '0px', (
-            'margin-left value of teaser image is not correct')
+    assert teaser.is_displayed(), 'Fullwidth teaser missing'
+    assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
-
-def test_fullwidth_onimage_teaser_should_be_rendered_correctly(
-        testserver, testbrowser):
-
-    browser = testbrowser(
-        '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-
-    teaser_box = browser.cssselect('.fullwidth_teasers')
-    img = browser.cssselect('.fullwidth_teasers > '
-                            '.teaser__media.'
-                            'teaser__media--hasshadow.scaled-image')
-    teaser = browser.cssselect('.fullwidth_teasers > '
-                               '.teaser.teaser--ispositioned.teaser--islight')
-    inline_byline = browser.cssselect('.fullwidth_teasers '
-                                      '.teaser__text > .teaser__byline'
-                                      '.teaser__byline--isinline')
-    meta = browser.cssselect('.fullwidth_teasers .teaser__metadata')
-
-    assert len(teaser_box) == 1, 'No fullwidth teaser box'
-    assert len(img) == 1, 'No fullwidth image'
-    assert len(teaser) == 1, 'No fullwidth teaser'
-    assert len(inline_byline) == 1, 'No inline byline in fullwidth teaser'
-    assert len(meta) == 1, 'No teaser metadata in fullwidth teaser'
-
-
-def test_fullwidth_onimage_teaser_has_right_layout_in_all_screen_sizes(
-        selenium_driver, testserver, screen_size):
-
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('fullwidth_teasers')[0]
-    byline = box.find_elements_by_class_name('teaser__byline--isinline')[0]
-    img = box.find_elements_by_class_name('teaser__media-item')[0]
-    teaser = box.find_elements_by_class_name('teaser--ispositioned')[0]
-
-    assert box.is_displayed(), 'Fullwidth box is not displayed'
-    assert img.is_displayed(), 'Fullwidth teaser image is not displayed'
-    assert teaser.is_displayed(), 'Fullwidth teaser text is not displayed'
-
-    if screen_size[0] == 320:
-        # test byline mobile
-        assert byline.is_displayed() is False, 'Mobile byline is displayed'
-    else:
-        # test byline desktop, phablet and tablet
-        assert byline.is_displayed(), 'Desktop byline is not displayed'
+    if screen_size[0] == 768:
+        # test ipad width
+        assert helper.size.get('width') == 574
+    elif screen_size[0] == 980:
+        assert helper.size.get('width') == 626
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):

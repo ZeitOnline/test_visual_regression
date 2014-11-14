@@ -22,8 +22,8 @@ $icon-galerie-icon-white-width: em(40px)
 	.breadcrumbs
 		display: none
 	.main
+		font-family: $sans-serif-base-font
 		overflow: hidden
-		+tablet()
 	h2
 		font-size: 1em
 		font-weight: normal
@@ -42,6 +42,9 @@ $icon-galerie-icon-white-width: em(40px)
 //standart shadow classes for cp
 %cp_shadow--dark
 	+fake-box-shadow-inset($black, 0.8)
+
+%cp_shadow--darker
+	+fake-box-shadow-inset($black, 0.8, 0.1)
 
 %cp_shadow--light
 	+fake-box-shadow-inset($white)

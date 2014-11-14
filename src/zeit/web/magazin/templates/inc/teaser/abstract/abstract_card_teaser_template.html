@@ -35,7 +35,7 @@ All calling templates have to provide:
     {% endif %}
 {% endif %}
 
-<div class="cp_button cp_button--card">
+<div class="cp_button cp_button--card{{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}">
     <div class="card__wrap">
         <div class="card__deck">
 
