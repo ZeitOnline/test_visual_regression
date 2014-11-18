@@ -39,3 +39,7 @@ class Base(zeit.web.core.view.Base):
         if self.context.subtitle:
             return self.context.subtitle
         return default
+
+    def banner_toggles(self, name):
+        # no banner toggles in ZMO in the moment
+        return True

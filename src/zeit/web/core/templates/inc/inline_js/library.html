@@ -32,7 +32,7 @@
         }
     };
 
-{%- if view.context.advertising_enabled %}
+{%- if view.context.advertising_enabled and view.banner_toggles('viewport_zoom') %}
     window.ZMO.viewport.set();
     if ( window.addEventListener ) {
         window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
