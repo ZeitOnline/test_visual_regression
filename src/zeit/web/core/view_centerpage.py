@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+import datetime
+from pyramid.view import view_config
+
+import zeit.content.cp.interfaces
+
 import zeit.web.core.view
 
 
@@ -28,3 +33,20 @@ class Centerpage(zeit.web.core.view.Base):
     @zeit.web.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
+
+
+@view_config(context=zeit.content.cp.interfaces.ICenterPage,
+             name='json_update_time',
+             renderer='jsonp')
+class JsonUpdateTimeView(zeit.web.core.view.Base):
+
+    def __call__(self):
+        return {'last_published': self.last_published()}
+
+    def last_published(self):
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_last_published
+        try:
+            return date.isoformat()
+        except AttributeError:
+            return ""
