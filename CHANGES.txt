@@ -4,7 +4,7 @@ Change log for zeit.web
 1.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- WEB-403: Add JSON/P-Endpoint for lastpub time
 
 
 1.8 (2014-11-17)
