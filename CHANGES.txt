@@ -10,6 +10,8 @@ Change log for zeit.web
 1.8 (2014-11-17)
 ----------------
 
+- ZON-1025: toggle ad page zoom on ZON (but not ZMO)
+
 - ZON-1061: Style ZMO print cover teaser
 
 - ZON-1118: polishing teaser: fullwidth teaser
