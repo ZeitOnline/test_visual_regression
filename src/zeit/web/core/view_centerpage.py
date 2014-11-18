@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 from pyramid.view import view_config
 
 import zeit.content.cp.interfaces
@@ -49,4 +48,4 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
         try:
             return date.isoformat()
         except AttributeError:
-            return ""
+            return ''

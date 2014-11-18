@@ -125,7 +125,7 @@ class Application(object):
         config.add_static_view(name='js', path='zeit.web.static:js/')
         config.add_static_view(name='img', path='zeit.web.static:img/')
         config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
-        config.add_renderer('jsonp',pyramid.renderers.JSONP(
+        config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
         if not self.settings.get('debug.show_exceptions'):
