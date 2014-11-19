@@ -56,6 +56,18 @@ class Centerpage(
                 self.context['lead'].values() if valid_block(b)]
 
     @zeit.web.reify
+    def area_parquet(self):
+        def valid_bar(b):
+            try:
+                return b.layout.id and b.layout.id == 'parquet'
+            except (TypeError, AttributeError):
+                return
+
+        teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
+        return sum([b.values() for b in teaser_bars],[])
+
+
+    @zeit.web.reify
     def area_fullwidth(self):
         """Return all fullwidth teaser blocks with a minimum length of 1.
         :rtype: list
