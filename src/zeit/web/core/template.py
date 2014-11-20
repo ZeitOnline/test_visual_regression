@@ -187,6 +187,23 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
+def get_mapped_teaser(layout):
+
+    mapp_layout = 'hide'
+
+    teaserlist = {
+        "zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
+        "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+        "teaser_fullwidth": ['leader-fullwidth']}
+    for new_teaser, old_teaser in teaserlist.iteritems():
+        for teaser_layout in old_teaser:
+            if teaser_layout == layout:
+                mapp_layout = new_teaser
+
+    return mapp_layout
+
+
+@zeit.web.register_filter
 def remove_break(string):
     return re.sub('\n', '', string)
 
