@@ -189,12 +189,16 @@ def hide_none(string):
 @zeit.web.register_filter
 def get_mapped_teaser(layout):
 
-    mapp_layout = 'hide'
+    mapp_layout = layout
 
     teaserlist = {
-        "zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
+        "zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
+        'leader-fullwidth'],
         "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-        "teaser_fullwidth": ['leader-fullwidth']}
+        "hide": ['archive-print-volume', 'archive-print-year',
+        'two-side-by-side', 'ressort', 'leader-upright',
+        'buttons-fullwidth', 'parquet-printteaser',
+        'parquet-verlag']}
     for new_teaser, old_teaser in teaserlist.iteritems():
         for teaser_layout in old_teaser:
             if teaser_layout == layout:

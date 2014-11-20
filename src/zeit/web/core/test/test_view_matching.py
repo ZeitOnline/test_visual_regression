@@ -36,6 +36,7 @@ def test_custom_predicate_should_only_match_website_content(application):
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zmo_zon_matching')
+    import pdb;pdb.set_trace();
     assert view_wrapper.__predicates__[0](context, request) is False, (
         'The predicate should not work for ZMO Content, even if '
         'rebrush_website_content is set to True.')
