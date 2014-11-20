@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1179: add mapping for teaser formats
 
+- Hotfix: Image scales can break the application startup
+
 
 1.8.1 (2014-11-18)
 ------------------

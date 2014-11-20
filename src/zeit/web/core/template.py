@@ -451,7 +451,7 @@ class ImageScales(dict):
 
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
-    def __init__(self, **kw):
+    def __init__(self, *args, **kw):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         scale_source = conf.get('vivi_zeit.frontend_image-scales')
 
@@ -470,7 +470,8 @@ class ImageScales(dict):
             width = to_int(scale.attrib.get('width'))
             height = to_int(scale.attrib.get('height'))
             kw[name] = (width, height)
-        dict.__init__(**kw)
+
+        super(ImageScales, self).__init__(**kw)
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):
