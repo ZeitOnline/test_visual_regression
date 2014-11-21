@@ -5,6 +5,7 @@ import pyramid.view
 import zeit.content.cp.interfaces
 
 import zeit.web.core.reach
+import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.site.view
@@ -36,8 +37,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and b.layout.id not in (
-                    'teaser-fullwidth',)
+                return len(b) and b.layout.id and \
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id) \
+                    not in ('teaser-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
@@ -52,8 +54,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and b.layout.id in (
-                    'teaser-fullwidth',)
+                return len(b) and b.layout.id and \
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
+                        'teaser-fullwidth',)
             except (TypeError, AttributeError):
                 return
 

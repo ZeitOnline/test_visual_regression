@@ -195,6 +195,7 @@ def get_mapped_teaser(layout):
         "zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
         'leader-fullwidth'],
         "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+        "teaser-fullwidth": ['leader-fullwidth'],
         "hide": ['archive-print-volume', 'archive-print-year',
         'two-side-by-side', 'ressort', 'leader-upright',
         'buttons-fullwidth', 'parquet-printteaser',

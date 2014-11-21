@@ -265,6 +265,11 @@ def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
     assert teaser == 'zon-small'
 
 
+def test_teaser_fullwidth_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-fullwidth')
+    assert teaser == 'teaser-fullwidth'
+
+
 def test_hide_teaser_mapping_is_working_as_expected(testserver):
     teaser = zeit.web.core.template.get_mapped_teaser('archive-print-volume')
     assert teaser == 'hide'
