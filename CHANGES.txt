@@ -77,6 +77,12 @@ Change log for zeit.web
 - ZON-916: Add column teaser
 
 
+1.5.1 (2014-10-28)
+------------------
+
+- BUG-44: Catch interface breaking UnknownResource objects
+
+
 1.5 (2014-10-17)
 ----------------
 
