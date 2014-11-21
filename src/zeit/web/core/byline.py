@@ -16,7 +16,7 @@ class IRenderByline(zope.interface.Interface):
 
 
 @zeit.web.register_filter
-def render_byline(article):
+def render_byline(resource):
     """Extract a natural language byline composited of authors and locations.
     The returned object sports an __html__ method and is jinja serializable.
 
@@ -24,7 +24,7 @@ def render_byline(article):
     :rtype: zeit.web.core.byline.IRenderByline
     """
 
-    return unicode(IRenderByline(article))
+    return unicode(IRenderByline(resource))
 
 
 @grokcore.component.implementer(IRenderByline)
