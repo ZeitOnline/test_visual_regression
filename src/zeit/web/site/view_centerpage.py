@@ -63,9 +63,18 @@ class Centerpage(
             except (TypeError, AttributeError):
                 return
 
-        teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
-        return sum([b.values() for b in teaser_bars],[])
+        def valid_blocks(b):
+            try:
+                return b.layout.id and b.layout.id == (
+                    'parquet-large' or 'parquet-regular')
+            except (TypeError, AttributeError):
+                return
 
+        teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
+        teaser_bar_blocks = sum([bar.values() for bar in teaser_bars], [])
+        auto_pilot_teaser_blocks = filter(valid_blocks, teaser_bar_blocks)
+
+        return auto_pilot_teaser_blocks
 
     @zeit.web.reify
     def area_fullwidth(self):
