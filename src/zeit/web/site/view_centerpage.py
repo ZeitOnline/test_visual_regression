@@ -50,7 +50,7 @@ class Centerpage(
         blocks = [(b.layout.id, iter(b).next(), b) for b in
                 self.context['lead'].values() if valid_block(b)]
 
-        return filter(zeit.web.site.view_centerpage.known_content, blocks)
+        return blocks
 
 
     @zeit.web.reify
