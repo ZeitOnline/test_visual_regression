@@ -248,8 +248,6 @@ def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
     assert teaser == 'zon-large'
     teaser = zeit.web.core.template.get_mapped_teaser('leader-panorama')
     assert teaser == 'zon-large'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-fullwidth')
-    assert teaser == 'zon-large'
 
 
 def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
