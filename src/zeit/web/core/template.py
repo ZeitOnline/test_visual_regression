@@ -202,7 +202,7 @@ _t_map = dict(x for k, v in _t_map.iteritems() for x in zip(v, [k] * len(v)))
 
 @zeit.web.register_filter
 def get_mapped_teaser(layout):
-    return _t_map.get(layout, 'default')
+    return _t_map.get(layout, layout)
 
 
 @zeit.web.register_filter
