@@ -8,8 +8,10 @@ def is_zon_content(context, request):
     :rtype: str
     """
 
-    return bool(getattr(context, 'rebrush_website_content', False)) and (
-        not zeit.web.magazin.view.is_zmo_content(context, request))
+    # return bool(getattr(context, 'rebrush_website_content', False)) and (
+    #     not zeit.web.magazin.view.is_zmo_content(context, request))
+
+    return (not zeit.web.magazin.view.is_zmo_content(context, request))
 
 
 class Base(zeit.web.core.view.Base):
