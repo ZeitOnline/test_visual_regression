@@ -65,9 +65,8 @@ class Centerpage(
 
         def valid_blocks(b):
             try:
-                return b.layout.id and b.layout.id == (
-                    'parquet-large' or 'parquet-regular')
-            except (TypeError, AttributeError):
+                return b.layout.id in ('parquet-large', 'parquet-regular')
+            except AttributeError:
                 return
 
         teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
