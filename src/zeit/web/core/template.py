@@ -188,7 +188,7 @@ def hide_none(string):
         return string
 
 
-t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
+_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
                        'leader-fullwidth'],
          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
          "hide": ['archive-print-volume', 'archive-print-year',
@@ -197,12 +197,12 @@ t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
                   'parquet-verlag']}
 
 # Flattens and reverses t_map, so we can easily lookup an layout.
-t_map = dict(x for k, v in t_map.iteritems() for x in zip(v, [k] * len(v)))
+_t_map = dict(x for k, v in t_map.iteritems() for x in zip(v, [k] * len(v)))
 
 
 @zeit.web.register_filter
 def get_mapped_teaser(layout):
-    return t_map.get(layout, 'default')
+    return _t_map.get(layout, 'default')
 
 
 @zeit.web.register_filter
