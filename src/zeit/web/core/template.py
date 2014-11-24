@@ -36,6 +36,7 @@ log = logging.getLogger(__name__)
 
 
 class Undefined(jinja2.runtime.Undefined):
+
     """Custom jinja Undefined class that represents unresolvable template
     statements and expressions. It ignores undefined errors, ensures it is
     printable and returns further Undefined objects if indexed or called.
@@ -52,6 +53,7 @@ class Undefined(jinja2.runtime.Undefined):
 
 
 class Environment(jinja2.environment.Environment):
+
     """Custom jinja Environment class that uses our custom Undefined class as
     fallback for unknown filters, globals, tests, object-attributes and -items.
     This way, most flaws and faults in view classes can be caught and affected
@@ -186,25 +188,21 @@ def hide_none(string):
         return string
 
 
+t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
+                       'leader-fullwidth'],
+         "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+         "hide": ['archive-print-volume', 'archive-print-year',
+                  'two-side-by-side', 'ressort', 'leader-upright',
+                  'buttons-fullwidth', 'parquet-printteaser',
+                  'parquet-verlag']}
+
+# Flattens and reverses t_map, so we can easily lookup an layout.
+t_map = dict(x for k, v in t_map.iteritems() for x in zip(v, [k] * len(v)))
+
+
 @zeit.web.register_filter
 def get_mapped_teaser(layout):
-
-    mapp_layout = layout
-
-    teaserlist = {
-        "zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
-        'leader-fullwidth'],
-        "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-        "hide": ['archive-print-volume', 'archive-print-year',
-        'two-side-by-side', 'ressort', 'leader-upright',
-        'buttons-fullwidth', 'parquet-printteaser',
-        'parquet-verlag']}
-    for new_teaser, old_teaser in teaserlist.iteritems():
-        for teaser_layout in old_teaser:
-            if teaser_layout == layout:
-                mapp_layout = new_teaser
-
-    return mapp_layout
+    return t_map.get(layout, 'default')
 
 
 @zeit.web.register_filter
