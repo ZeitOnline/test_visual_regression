@@ -197,7 +197,7 @@ _t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama',
                   'parquet-verlag']}
 
 # Flattens and reverses t_map, so we can easily lookup an layout.
-_t_map = dict(x for k, v in t_map.iteritems() for x in zip(v, [k] * len(v)))
+_t_map = dict(x for k, v in _t_map.iteritems() for x in zip(v, [k] * len(v)))
 
 
 @zeit.web.register_filter
