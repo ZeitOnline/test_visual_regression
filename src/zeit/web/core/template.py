@@ -366,6 +366,11 @@ def with_mods(elem, *mods):
     return ' '.join([elem] + ['%s--%s' % (elem, m) for m in mods])
 
 
+@zeit.web.register_filter
+def get_attr(*args):
+    return getattr(*args)
+
+
 @zeit.web.register_global
 def get_teaser_commentcount(uniqueId):
     index = '/' + urlparse.urlparse(uniqueId).path[1:]
