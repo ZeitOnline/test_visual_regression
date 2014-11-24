@@ -4,6 +4,10 @@ Change log for zeit.web
 1.8.2 (unreleased)
 ------------------
 
+- ZON-1222: add mapping for fullwidth teaser
+
+- ZON-1179: add mapping for teaser formats
+
 - Hotfix: Image scales can break the application startup
 
 
@@ -75,6 +79,12 @@ Change log for zeit.web
 - ZON-913: Fix URLs and generalize some attributes on body and teaser tags
 
 - ZON-916: Add column teaser
+
+
+1.5.1 (2014-10-28)
+------------------
+
+- BUG-44: Catch interface breaking UnknownResource objects
 
 
 1.5 (2014-10-17)
