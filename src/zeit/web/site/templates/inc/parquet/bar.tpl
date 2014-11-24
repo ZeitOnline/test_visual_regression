@@ -1,14 +1,15 @@
+
 <div class="parquet-row">
 	<div class="parquet-meta">
 		<div class="parquet-meta__title">
-			{{ block.title }}
+			{{ row.title }}
 		</div>
 		<ul class="parquet-meta__topiclinks">
 			<li><a href="" class="parquet-meta__topiclink"></a></li>
 		</ul>
-		{% if block.read_more and block.read_more_url %}
-			<a href="{{ block.read_more_url }}" class="parquet-meta__more-link">
-				{{ block.read_more }}
+		{% if row.read_more and row.read_more_url %}
+			<a href="{{ row.read_more_url }}" class="parquet-meta__more-link">
+				{{ row.read_more }}
 			</a>
 		{% endif %}
 	</div>
