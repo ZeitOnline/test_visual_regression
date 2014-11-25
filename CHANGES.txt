@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: decouple teaser name from css
 
+- BUG-48: exclude mobile galleries from reload, comment out harmful former fix for mobile
+
 - ZON-1220: map old image formats to new teaser image formats
 
 - ZON-1173: add nav headline 'ANZEIGE' and fix some bugs
