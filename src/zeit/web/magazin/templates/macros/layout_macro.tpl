@@ -51,7 +51,7 @@
     {% endif -%}
 {%- endmacro %}
 
-{% macro main_nav(is_full_width,request) -%}
+{% macro main_nav(is_full_width,request,is_advertorial=False) -%}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
@@ -62,8 +62,11 @@
                 </h1>
             </a>
             <div class="main-nav__menu">
+                {% if is_advertorial %}
+                    <div class="advertorial-navigation-title">Anzeige</div>
+                {% endif %}
+
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
-                    <div class="main-nav__menu__head__headline"></div>
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
