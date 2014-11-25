@@ -36,6 +36,7 @@ log = logging.getLogger(__name__)
 
 
 class Undefined(jinja2.runtime.Undefined):
+
     """Custom jinja Undefined class that represents unresolvable template
     statements and expressions. It ignores undefined errors, ensures it is
     printable and returns further Undefined objects if indexed or called.
@@ -52,6 +53,7 @@ class Undefined(jinja2.runtime.Undefined):
 
 
 class Environment(jinja2.environment.Environment):
+
     """Custom jinja Environment class that uses our custom Undefined class as
     fallback for unknown filters, globals, tests, object-attributes and -items.
     This way, most flaws and faults in view classes can be caught and affected
@@ -184,6 +186,23 @@ def hide_none(string):
         return ''
     else:
         return string
+
+
+_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
+          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          "teaser-fullwidth": ['leader-fullwidth'],
+          "hide": ['archive-print-volume', 'archive-print-year',
+                   'two-side-by-side', 'ressort', 'leader-upright',
+                   'buttons-fullwidth', 'parquet-printteaser',
+                   'parquet-verlag']}
+
+# Flattens and reverses t_map, so we can easily lookup an layout.
+_t_map = dict(x for k, v in _t_map.iteritems() for x in zip(v, [k] * len(v)))
+
+
+@zeit.web.register_filter
+def get_mapped_teaser(layout):
+    return _t_map.get(layout, layout)
 
 
 @zeit.web.register_filter
@@ -430,7 +449,7 @@ class ImageScales(dict):
 
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
-    def __init__(self, **kw):
+    def __init__(self, *args, **kw):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         scale_source = conf.get('vivi_zeit.frontend_image-scales')
 
@@ -449,7 +468,8 @@ class ImageScales(dict):
             width = to_int(scale.attrib.get('width'))
             height = to_int(scale.attrib.get('height'))
             kw[name] = (width, height)
-        dict.__init__(**kw)
+
+        super(ImageScales, self).__init__(**kw)
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):

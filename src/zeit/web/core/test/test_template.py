@@ -239,3 +239,49 @@ def test_cp_teaser_with_comments_should_get_count(testserver, testbrowser):
     comment_count = zeit.web.core.template.get_teaser_commentcount(
         'http://xml.zeit.de/does_not_exist')
     assert comment_count is None
+
+
+def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('leader')
+    assert teaser == 'zon-large'
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-two-columns')
+    assert teaser == 'zon-large'
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-panorama')
+    assert teaser == 'zon-large'
+
+
+def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('text-teaser')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('buttons')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('large')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('short')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('date')
+    assert teaser == 'zon-small'
+
+
+def test_teaser_fullwidth_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-fullwidth')
+    assert teaser == 'teaser-fullwidth'
+
+
+def test_hide_teaser_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-volume')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-year')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('two-side-by-side')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('ressort')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-upright')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('buttons-fullwidth')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('parquet-printteaser')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('parquet-verlag')
+    assert teaser == 'hide'

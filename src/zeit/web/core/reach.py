@@ -135,7 +135,10 @@ class Fetcher(object):
         try:
             url = 'http://xml.zeit.de/import/feeds/%s' % feed
             feed = zeit.cms.interfaces.ICMSContent(url)
-        except TypeError:
+            # XXX: If feed is a zeit.cms.repository.interfaces.IUnknownResource
+            #      it breaks the ICMSContent interface!
+            assert hasattr(feed, 'xml')
+        except (AssertionError, TypeError):
             # Return empty-handed if feed is unavailable.
             return output
 
