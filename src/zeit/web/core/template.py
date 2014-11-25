@@ -384,10 +384,7 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
     layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
     layout_image = {
         block.id: block.image_pattern for block in list(layout(None))}
-    try:
-        return layout_image[teaser_layout]
-    except KeyError:
-        return orig_image_pattern
+    return layout_image.get(teaser_layout, orig_image_pattern)
 
 
 @zeit.web.register_global

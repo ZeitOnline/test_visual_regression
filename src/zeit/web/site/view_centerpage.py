@@ -45,7 +45,7 @@ class Centerpage(
             try:
                 return len(b) and b.layout.id and \
                     zeit.web.core.template.get_mapped_teaser(b.layout.id) \
-                    not in ('teaser-fullwidth',)
+                    not in ('zon-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
@@ -65,7 +65,7 @@ class Centerpage(
             try:
                 return len(b) and b.layout.id and \
                     zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
-                        'teaser-fullwidth',)
+                        'zon-fullwidth',)
             except (TypeError, AttributeError):
                 return
 

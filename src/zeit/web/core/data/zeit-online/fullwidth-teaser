@@ -64,7 +64,7 @@
   <body>
     <cluster area="feature">
       <region area="lead">
-        <container cp:type="teaser" module="teaser-fullwidth" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
+        <container cp:type="teaser" module="zon-fullwidth" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
