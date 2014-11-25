@@ -27,16 +27,11 @@
         image_pattern="zon-column"
         areas="lead"
         />
+    <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
-        id="zon-fullwidth"
-        title="vollbreiter Aufmacher"
-        image_pattern="zon-large"
-        areas="lead"
-        />
-    <layout
-        id="zon-fullwidth-onimage"
+        id="teaser-fullwidth"
         title="vollbreiter Aufmacher Text auf Bild"
-        image_pattern="zon-large"
+        image_pattern="zon-fullwidth"
         areas="lead"
         />
 

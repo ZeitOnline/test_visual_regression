@@ -9,8 +9,14 @@
 {% block page_title %}
     {% if view.is_hp == False -%}
         <div class="advertorial-title">
-            <div class="advertorial-title__headline">{% block advertorial_headline %}{% endblock advertorial_headline %}</div>
+            <a href="./index" title="zurück zur Übersicht">
+            	<div class="advertorial-title__headline">{% block advertorial_headline %}{% endblock advertorial_headline %}</div>
+            </a>
             <div class="advertorial-title__text">{% block advertorial_text %}{% endblock advertorial_text %}</div>
         </div>
     {%- endif %}
 {% endblock page_title %}
+
+{% block navigation %}
+    {{ lama.main_nav(view.context.main_nav_full_width,request,True) }}
+{% endblock navigation %}

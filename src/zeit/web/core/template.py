@@ -25,6 +25,7 @@ import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+import zeit.content.cp.layout
 
 import zeit.web
 import zeit.web.core.comments
@@ -36,6 +37,7 @@ log = logging.getLogger(__name__)
 
 
 class Undefined(jinja2.runtime.Undefined):
+
     """Custom jinja Undefined class that represents unresolvable template
     statements and expressions. It ignores undefined errors, ensures it is
     printable and returns further Undefined objects if indexed or called.
@@ -52,6 +54,7 @@ class Undefined(jinja2.runtime.Undefined):
 
 
 class Environment(jinja2.environment.Environment):
+
     """Custom jinja Environment class that uses our custom Undefined class as
     fallback for unknown filters, globals, tests, object-attributes and -items.
     This way, most flaws and faults in view classes can be caught and affected
@@ -186,6 +189,23 @@ def hide_none(string):
         return string
 
 
+_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
+          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          "teaser-fullwidth": ['leader-fullwidth'],
+          "hide": ['archive-print-volume', 'archive-print-year',
+                   'two-side-by-side', 'ressort', 'leader-upright',
+                   'buttons-fullwidth', 'parquet-printteaser',
+                   'parquet-verlag']}
+
+# Flattens and reverses t_map, so we can easily lookup an layout.
+_t_map = dict(x for k, v in _t_map.iteritems() for x in zip(v, [k] * len(v)))
+
+
+@zeit.web.register_filter
+def get_mapped_teaser(layout):
+    return _t_map.get(layout, layout)
+
+
 @zeit.web.register_filter
 def remove_break(string):
     return re.sub('\n', '', string)
@@ -214,6 +234,7 @@ default_images_sizes = {
     'zmo-small-center': (225, 125),
     'zmo-small-right': (225, 125),
     '540x304': (290, 163),
+    '580x148': (290, 163),
     '940x400': (470, 200),
     '148x84': (74, 42),
     '220x124': (110, 62),
@@ -359,6 +380,23 @@ def get_teaser_template(block_layout,
 
 
 @zeit.web.register_global
+def get_image_pattern(teaser_layout, orig_image_pattern):
+    layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
+    layout_image = {
+        block.id: block.image_pattern for block in list(layout(None))}
+    try:
+        return layout_image[teaser_layout]
+    except KeyError:
+        return orig_image_pattern
+
+
+@zeit.web.register_global
+def set_image_id(asset_id, image_base_name, image_pattern, ext):
+    return '%s/%s-%s.%s' % (
+        asset_id, image_base_name, image_pattern, ext)
+
+
+@zeit.web.register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
     import zeit.web.core.centerpage
 
@@ -387,14 +425,23 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 
-    image_id = '%s/%s-%s.%s' % (
-        asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
+    image_pattern = get_image_pattern(
+        get_mapped_teaser(teaser_block.layout.id),
+        teaser_block.layout.image_pattern)
+
+    image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
+
+    try:
+        zeit.cms.interfaces.ICMSContent(image_id)
+    except TypeError:
+        image_pattern = teaser_block.layout.image_pattern
+        image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
 
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.web.core.interfaces.ITeaserImage)
-        teaser_image.image_pattern = teaser_block.layout.image_pattern
+        teaser_image.image_pattern = image_pattern
         return teaser_image
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to
@@ -430,7 +477,7 @@ class ImageScales(dict):
 
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
-    def __init__(self, **kw):
+    def __init__(self, *args, **kw):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         scale_source = conf.get('vivi_zeit.frontend_image-scales')
 
@@ -449,7 +496,8 @@ class ImageScales(dict):
             width = to_int(scale.attrib.get('width'))
             height = to_int(scale.attrib.get('height'))
             kw[name] = (width, height)
-        dict.__init__(**kw)
+
+        super(ImageScales, self).__init__(**kw)
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):

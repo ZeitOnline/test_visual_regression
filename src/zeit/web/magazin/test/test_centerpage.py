@@ -896,29 +896,22 @@ def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(
     assert len(icon) == 1
 
 
-def test_print_cover_teaser_should_have_full_format(testserver, testbrowser):
+def test_print_cover_teaser_should_have_modifier(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     format = browser.cssselect(
-        '.cp_leader.cp_leader--full')
+        '.cp_button.cp_button--cover')
     assert len(format) == 1
-
-
-def test_print_cover_teaser_should_have_darker_shade(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    shade = browser.cssselect(
-        '.cp_leader__title__wrap.cp_leader__title__wrap--darker')
-    assert len(shade) == 1
 
 
 def test_print_cover_teaser_should_have_supertitle(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     supertitle = browser.cssselect(
-        'a[href$="/artikel/02"] h2 .cp_leader__supertitle')
+        'a[href$="/artikel/02"] h2 .cp_button__supertitle')
     assert len(supertitle) == 1
 
 
 def test_print_cover_teaser_should_not_have_subtitle(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     subtitle = browser.cssselect(
-        'a[href$="/artikel/02"] h2 .cp_leader__subtitle')
+        'a[href$="/artikel/02"] h2 .cp_button__subtitle')
     assert len(subtitle) == 0

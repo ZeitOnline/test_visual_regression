@@ -8,6 +8,7 @@ import pkg_resources
 import grokcore.component
 import pyramid.authorization
 import pyramid.config
+import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
@@ -70,6 +71,8 @@ class Application(object):
             self.settings.get('vivi_zeit.frontend_banner-source', ''))
         zeit.web.core.banner.banner_list = (
             zeit.web.core.banner.make_banner_list(banner_source))
+        zeit.web.core.banner.banner_toggles = (
+            zeit.web.core.banner.make_banner_toggles(banner_source))
         iqd_mobile_ids_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
@@ -124,6 +127,8 @@ class Application(object):
         config.add_static_view(name='js', path='zeit.web.static:js/')
         config.add_static_view(name='img', path='zeit.web.static:img/')
         config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
+        config.add_renderer('jsonp', pyramid.renderers.JSONP(
+            param_name='callback'))
 
         if not self.settings.get('debug.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,

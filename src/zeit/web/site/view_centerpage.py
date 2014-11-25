@@ -5,16 +5,24 @@ import pyramid.view
 import zeit.content.cp.interfaces
 
 import zeit.web.core.reach
+import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.site.view
+
+
+def known_content(res):
+    return (zeit.content.article.interfaces.IArticle.providedBy(res[1]) or
+            zeit.content.gallery.interfaces.IGallery.providedBy(res[1]) or
+            zeit.content.video.interfaces.IVideo.providedBy(res[1]))
 
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
-class Centerpage(zeit.web.core.view_centerpage.Centerpage):
+class Centerpage(
+        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
 
     """Main view class for ZEIT ONLINE centerpages."""
 
@@ -35,13 +43,17 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and b.layout.id not in (
-                    'zon-fullwidth', 'zon-fullwidth-onimage')
+                return len(b) and b.layout.id and \
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id) \
+                    not in ('teaser-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
-        return [(b.layout.id, iter(b).next(), b) for b in
+        blocks = [(b.layout.id, iter(b).next(), b) for b in
                 self.context['lead'].values() if valid_block(b)]
+
+        return blocks
+
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -51,8 +63,9 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and b.layout.id in (
-                    'zon-fullwidth', 'zon-fullwidth-onimage')
+                return len(b) and b.layout.id and \
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
+                        'teaser-fullwidth',)
             except (TypeError, AttributeError):
                 return
 

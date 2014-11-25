@@ -627,3 +627,11 @@ def test_article_view_has_no_leadtime_if_the_attribute_is_missing(
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start is None
     assert view.leadtime.end is None
+
+
+def test_advertorial_article_shows_advertorial_marker(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/advertorial' % testserver.url)
+    assert browser.cssselect(
+        '.advertorial-navigation-title')[0].text == 'Anzeige'
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    assert not browser.cssselect('.advertorial-navigation-title')
