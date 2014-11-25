@@ -383,17 +383,25 @@ def get_teaser_template(block_layout,
 def get_image_pattern(teaser_layout, orig_image_pattern):
     layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
     layout_image = {
-        block.id: block.image_pattern for block in list(layout(None))}
-    try:
-        return layout_image[teaser_layout]
-    except KeyError:
-        return orig_image_pattern
+        block.id: [block.image_pattern] for block in list(layout(None))}
+
+    layout_image['zon-small'].extend(layout_image['leader'])
+    return layout_image.get(teaser_layout, [orig_image_pattern])
 
 
 @zeit.web.register_global
 def set_image_id(asset_id, image_base_name, image_pattern, ext):
     return '%s/%s-%s.%s' % (
         asset_id, image_base_name, image_pattern, ext)
+
+def _existing_image(asset_id, image_base_name, image_patterns, ext):
+    for image_pattern in image_patterns:
+        image = set_image_id(asset_id, image_base_name, image_pattern, ext)
+        try:
+            return zeit.cms.interfaces.ICMSContent(image), image_pattern
+        except:
+            pass
+    return (None, None)
 
 
 @zeit.web.register_global
@@ -425,17 +433,18 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 
-    image_pattern = get_image_pattern(
+    image_patterns = get_image_pattern(
         get_mapped_teaser(teaser_block.layout.id),
         teaser_block.layout.image_pattern)
 
-    image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
+    image, image_pattern = _existing_image(asset_id, image_base_name,
+                                           image_patterns, ext)
 
-    try:
-        zeit.cms.interfaces.ICMSContent(image_id)
-    except TypeError:
+    if image is None and image_pattern is None:
         image_pattern = teaser_block.layout.image_pattern
         image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
+    else:
+        image_id = image.uniqueId
 
     try:
         teaser_image = zope.component.getMultiAdapter(
