@@ -25,6 +25,7 @@ import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+import zeit.content.cp.layout
 
 import zeit.web
 import zeit.web.core.comments
@@ -233,6 +234,7 @@ default_images_sizes = {
     'zmo-small-center': (225, 125),
     'zmo-small-right': (225, 125),
     '540x304': (290, 163),
+    '580x148': (290, 163),
     '940x400': (470, 200),
     '148x84': (74, 42),
     '220x124': (110, 62),
@@ -378,6 +380,23 @@ def get_teaser_template(block_layout,
 
 
 @zeit.web.register_global
+def get_image_pattern(teaser_layout, orig_image_pattern):
+    layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
+    layout_image = {
+        block.id: block.image_pattern for block in list(layout(None))}
+    try:
+        return layout_image[teaser_layout]
+    except KeyError:
+        return orig_image_pattern
+
+
+@zeit.web.register_global
+def set_image_id(asset_id, image_base_name, image_pattern, ext):
+    return '%s/%s-%s.%s' % (
+        asset_id, image_base_name, image_pattern, ext)
+
+
+@zeit.web.register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
     import zeit.web.core.centerpage
 
@@ -406,14 +425,23 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 
-    image_id = '%s/%s-%s.%s' % (
-        asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
+    image_pattern = get_image_pattern(
+        get_mapped_teaser(teaser_block.layout.id),
+        teaser_block.layout.image_pattern)
+
+    image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
+
+    try:
+        zeit.cms.interfaces.ICMSContent(image_id)
+    except TypeError:
+        image_pattern = teaser_block.layout.image_pattern
+        image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
 
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.web.core.interfaces.ITeaserImage)
-        teaser_image.image_pattern = teaser_block.layout.image_pattern
+        teaser_image.image_pattern = image_pattern
         return teaser_image
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to
