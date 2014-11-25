@@ -23,7 +23,13 @@
 			</a>
 		{% endif %}
 	</div>
-	<div class="parquet-teasers">
-
-	</div>
+	<ul class="parquet-teasers">
+		{% for teaser in row -%}
+			{% if loop.index <= row.display_amount %}
+              {% include
+                    ["zeit.web.site:templates/inc/teaser/" + row.layout.id | get_mapped_teaser + ".tpl",
+                    "zeit.web.site:templates/inc/teaser/default.tpl"] %}
+			{% endif %}
+        {% endfor %}
+	</ul>
 </div>
