@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-1173: add nav headline 'ANZEIGE' and fix some bugs
 
 
 1.8.1 (2014-11-18)
