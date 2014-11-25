@@ -4,6 +4,8 @@ Change log for zeit.web
 1.8.2 (unreleased)
 ------------------
 
+- ZON-1173: add nav headline 'ANZEIGE' and fix some bugs
+
 - ZON-1222: add mapping for fullwidth teaser
 
 - ZON-1179: add mapping for teaser formats
