@@ -1,0 +1,30 @@
+
+.parquet
+	display: none
+	+respond-min($break-3)
+		display: block
+		margin: 0 (-$petite)
+
+.parquet-row
+	border-top: 1px solid $zon_light_grey
+	font-family: $font-tabletgothic
+
+.parquet-meta
+	background-color: $zon_lighter_grey
+	width: rem(240px)
+	padding: $petite
+	&__title
+		font-size: rem(24px)
+		font-weight: bold
+		letter-spacing: 0.03em
+	&__topic-links
+		list-style: none
+		padding: 0
+	&__topic-link,
+	&__more-link
+		+link-colors($zon_grey)
+		font-size: rem(14px)
+		letter-spacing: 0.03em
+	&__more-link
+		font-weight: bold
+		line-height: 1.334
