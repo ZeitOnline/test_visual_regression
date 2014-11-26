@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-1226: show teaser seperator for mobile only
 
 
 1.8.2 (2014-11-26)
