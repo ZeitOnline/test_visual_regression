@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - Fix: Advertorial: implement module 'fullgraphical' correctly
 
+- ZON-1233: Make assets more fail save
+
 
 1.8.2 (2014-11-26)
 ------------------
