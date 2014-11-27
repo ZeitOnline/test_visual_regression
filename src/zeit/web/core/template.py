@@ -475,6 +475,13 @@ def get_image_metadata(image):
     except TypeError:
         return
 
+@zeit.web.register_global
+def get_repository_image(image):
+    base_image = zeit.web.core.block.BaseImage()
+    base_image.image = image
+    base_image.uniqueId = image.uniqueId
+    return base_image
+
 
 @zeit.web.register_global
 def get_google_tag_manager_host():
