@@ -3,11 +3,13 @@
 {% block teaser_modifier %}teaser-column--smallmedia teaser-column--hasmedia{% endblock %}
 {% block teaser_heading_modifier %}teaser-column__heading--padded{% endblock %}
 
+{% block layout %}teaser-column{% endblock %}
+
 {% block teaser_media_position_before_title %}
     {% set teaser_block_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/teaser_asset/"+
         teaser | auto_select_asset | block_type +
-        "_teaser-column.tpl" ignore missing with context %}
+        "_zon-column.tpl" ignore missing with context %}
 {% endblock %}
 
 {% block teaser_link %}
