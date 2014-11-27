@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1226: show teaser seperator for mobile only
 
+- Fix: Advertorial: implement module 'fullgraphical' correctly
+
 
 1.8.2 (2014-11-26)
 ------------------
