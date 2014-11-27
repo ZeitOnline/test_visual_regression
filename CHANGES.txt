@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.8.2 (unreleased)
+1.8.3 (unreleased)
+------------------
+
+- ZON-1226: show teaser seperator for mobile only
+
+
+1.8.2 (2014-11-26)
 ------------------
 
 - FIX: decouple teaser name from css
@@ -20,6 +26,7 @@ Change log for zeit.web
 
 - ZON-1212: Make rendering more failsave
 
+- ZON-1223: Map teasers with priority list
 
 1.8.1 (2014-11-18)
 ------------------
