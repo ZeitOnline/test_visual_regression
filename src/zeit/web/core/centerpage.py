@@ -10,14 +10,20 @@ import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 
+import logging
+
+log = logging.getLogger(__name__)
 
 @zeit.web.register_filter
 def get_all_assets(teaser):
-    assets = (get_video_asset(teaser),
-              get_gallery_asset(teaser),
-              get_image_asset(teaser))
-    return tuple(a for a in assets if a)
-
+    try:
+        assets = (get_video_asset(teaser),
+                  get_gallery_asset(teaser),
+                  get_image_asset(teaser))
+        return tuple(a for a in assets if a)
+    except TypeError:
+        log.debug('No assets for %s' % teaser.uniqueId)
+        return ()
 
 @zeit.web.register_filter
 def auto_select_asset(teaser):
