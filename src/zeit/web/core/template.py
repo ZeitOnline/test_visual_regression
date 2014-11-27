@@ -191,7 +191,7 @@ def hide_none(string):
 
 _t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
           "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          "teaser-fullwidth": ['leader-fullwidth'],
+          "zon-fullwidth": ['leader-fullwidth'],
           "hide": ['archive-print-volume', 'archive-print-year',
                    'two-side-by-side', 'ressort', 'leader-upright',
                    'buttons-fullwidth', 'parquet-printteaser',

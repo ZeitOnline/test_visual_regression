@@ -10,6 +10,8 @@ Change log for zeit.web
 1.8.2 (2014-11-26)
 ------------------
 
+- FIX: decouple teaser name from css
+
 - BUG-48: exclude mobile galleries from reload, comment out harmful former fix for mobile
 
 - ZON-1220: map old image formats to new teaser image formats
