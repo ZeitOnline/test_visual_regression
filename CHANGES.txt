@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-1109: show tile7 before buzzbox when fullwidth teaser
 
 
 1.8.3 (2014-11-27)
