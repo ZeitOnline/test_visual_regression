@@ -24,7 +24,7 @@
 {%- endmacro %}
 
 {% macro main_nav_ressorts(navigation, nav_class=None) -%}
-    <nav role="navigation">
+    <nav role="navigation" id="primary_nav">
         {{ main_nav(navigation, 'primary-nav') }}
     </nav>
 {%- endmacro %}
@@ -51,7 +51,7 @@
 {%- endmacro %}
 
 {% macro main_nav_burger() -%}
-    <a href="#">
+    <a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
         <div class="logo_bar__menue__image main_nav__icon--plain icon-zon-logo-navigation_menu"></div>
         <div class="logo_bar__menue__image main_nav__icon--hover icon-zon-logo-navigation_menu-hover"></div>
     </a>

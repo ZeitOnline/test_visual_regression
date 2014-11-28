@@ -10,6 +10,12 @@ Change log for zeit.web
 1.8.3 (2014-11-27)
 ------------------
 
+- FIX: Add multiple sizes to some banner places
+
+- BUG-54: Fix falsy use of margin in hamburger icon and improve accessibility
+
+- BUG-55: fix displaced text from fullwith-teaser
+
 - ZON-1226: show teaser seperator for mobile only
 
 - Fix: Advertorial: implement module 'fullgraphical' correctly

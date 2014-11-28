@@ -163,11 +163,12 @@
 	width: auto
 	padding-left: 0
 
-=hover_nav_icon($display:block,$bgcolor:#FFF)
+=hover_nav_icon($display:block,$bgcolor:#FFF, $padding:$small)
 	.main_nav__icon--hover
 		display: none
 	a
 		display: $display
+		padding: $padding
 		&:hover
 			.main_nav__icon--hover
 				display: $display
