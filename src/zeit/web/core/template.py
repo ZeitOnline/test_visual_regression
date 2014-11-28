@@ -191,7 +191,7 @@ def hide_none(string):
 
 _t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
           "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          "teaser-fullwidth": ['leader-fullwidth'],
+          "zon-fullwidth": ['leader-fullwidth'],
           "hide": ['archive-print-volume', 'archive-print-year',
                    'two-side-by-side', 'ressort', 'leader-upright',
                    'buttons-fullwidth', 'parquet-printteaser',
@@ -474,6 +474,13 @@ def get_image_metadata(image):
         return image_metadata
     except TypeError:
         return
+
+@zeit.web.register_global
+def get_repository_image(image):
+    base_image = zeit.web.core.block.BaseImage()
+    base_image.image = image
+    base_image.uniqueId = image.uniqueId
+    return base_image
 
 
 @zeit.web.register_global

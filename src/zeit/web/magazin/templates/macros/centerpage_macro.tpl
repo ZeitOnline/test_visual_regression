@@ -31,11 +31,13 @@
     {% if prefix is not defined -%}
         {% set prefix = '' -%}
     {% endif %}
-
-    {% if teaser_block -%}
+    {% if teaser_block is iterable -%}
         {% for teaser in teaser_block %}
-            {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html', 'zeit.web.magazin:templates/inc/teaser/default.html'] ignore missing %}
+            {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html',
+            'zeit.web.magazin:templates/inc/teaser/default.html'] ignore missing %}
         {% endfor %}
+    {% elif teaser_block.type == 'fullgraphical' %}
+        {% include 'zeit.web.magazin:templates/inc/teaser/' + prefix + teaser_block.type + '.html' %}
     {% endif %}
 {%- endmacro %}
 

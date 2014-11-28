@@ -113,11 +113,12 @@ class Image(BaseImage):
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
             self.caption = _inline_html(model_block.xml.find('bu'))
-            cr = model_block.xml.find('copyright')
-            rel = cr.attrib.get('rel', '') == 'nofollow'
-            self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
             self.attr_title = _inline_html(model_block.xml.find('bu'))
             self.attr_alt = _inline_html(model_block.xml.find('bu'))
+            cr = model_block.xml.find('copyright')
+            if cr is not None:
+                rel = cr.attrib.get('rel', '') == 'nofollow'
+                self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
         if model_block.references:
             self.image = model_block.references.target

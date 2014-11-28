@@ -13,48 +13,48 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
     html_str = tpl.render(view=mock.MagicMock())
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert len(html('nav.main_nav')) == 1, (
+    assert len(html('.main_nav')) == 1, (
         'just one .main_nav should be present')
 
-    assert len(html('nav.main_nav > div')) == 9, (
+    assert len(html('.main_nav > div')) == 9, (
         'nine divs within .main_nav')
 
     assert '</div><div class="main_nav__date"' in html_str, (
         'don\'t break line here, due to inline-block state')
 
-    assert len(html('nav.main_nav > div.logo_bar >'
+    assert len(html('.main_nav > div.logo_bar >'
                     'div.logo_bar__image')) == 1, 'just one .logo_bar__image'
 
-    assert len(html('nav.main_nav > div.logo_bar >'
+    assert len(html('.main_nav > div.logo_bar >'
                     'div.logo_bar__menue')) == 1, 'just one .logo_bar__menue'
 
-    assert len(html('nav.main_nav > div.main_nav__teaser')) == 1, (
+    assert len(html('.main_nav > div.main_nav__teaser')) == 1, (
         'just one .main_nav__teaser')
 
-    assert len(html('nav.main_nav > div.main_nav__community'
+    assert len(html('.main_nav > div.main_nav__community'
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__community w/ data-dropdown=true')
 
-    assert len(html('nav.main_nav > div.main_nav__ressorts'
+    assert len(html('.main_nav > div.main_nav__ressorts'
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__ressorts w/ data-dropdown=true')
 
-    assert len(html('nav.main_nav > div.main_nav__services'
+    assert len(html('.main_nav > div.main_nav__services'
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__services w/ data-dropdown=true')
 
-    assert len(html('nav.main_nav > div.main_nav__classifieds'
+    assert len(html('.main_nav > div.main_nav__classifieds'
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__classifieds w/ data-dropdown=true')
 
-    assert len(html('nav.main_nav > div.main_nav__search'
+    assert len(html('.main_nav > div.main_nav__search'
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__search w/ data-dropdown=true')
 
-    assert len(html('nav.main_nav > div.main_nav__tags')) == 1, (
+    assert len(html('.main_nav > div.main_nav__tags')) == 1, (
         'just one .main_nav__tags')
 
-    assert len(html('nav.main_nav > div.main_nav__date')) == 1, (
+    assert len(html('.main_nav > div.main_nav__date')) == 1, (
         'just one .main_nav__date')
 
 
@@ -242,7 +242,7 @@ def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
-    assert len(html('nav.main_nav')) == 1, 'Nav main_nav is not present.'
+    assert len(html('.main_nav')) == 1, 'Nav main_nav is not present.'
     assert len(html('div.logo_bar__image')) == 1, 'Logo bar image not present.'
     assert len(html('div.logo_bar__menue')) == 1, 'Menu bar is not present.'
     assert len(html('div.main_nav__teaser')) == 1, 'Nav teaser not present.'

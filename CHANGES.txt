@@ -1,16 +1,32 @@
 Change log for zeit.web
 =======================
 
-1.8.3 (unreleased)
+1.8.4 (unreleased)
 ------------------
 
 - ZON-1109: show tile7 before buzzbox when fullwidth teaser
 
+
+1.8.3 (2014-11-27)
+------------------
+
+- FIX: Add multiple sizes to some banner places
+
+- BUG-54: Fix falsy use of margin in hamburger icon and improve accessibility
+
+- BUG-55: fix displaced text from fullwith-teaser
+
 - ZON-1226: show teaser seperator for mobile only
+
+- Fix: Advertorial: implement module 'fullgraphical' correctly
+
+- ZON-1233: Make assets more fail save
 
 
 1.8.2 (2014-11-26)
 ------------------
+
+- FIX: decouple teaser name from css
 
 - BUG-48: exclude mobile galleries from reload, comment out harmful former fix for mobile
 
