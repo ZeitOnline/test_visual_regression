@@ -288,14 +288,13 @@ def test_hide_teaser_mapping_is_working_as_expected(testserver):
 
 
 def test_function_get_image_pattern_is_working_as_expected(testserver):
-
-    #existing formats
+    # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
     assert teaser == ['zon-large']
     teaser = zeit.web.core.template.get_image_pattern('zon-small', 'default')
-    assert teaser == ['zon-thumbnail',  '540x304']
+    assert teaser == ['zon-thumbnail', '540x304']
 
-    #non existing format, returns default
+    # Non existing format, returns default
     teaser = zeit.web.core.template.get_image_pattern(
         'zon-large-none', 'default')
     assert teaser == ['default']

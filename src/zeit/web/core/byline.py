@@ -27,7 +27,7 @@ def render_byline(resource):
     try:
         return unicode(IRenderByline(resource))
     except TypeError:
-       return ''
+        return ''
 
 
 @grokcore.component.implementer(IRenderByline)
@@ -105,7 +105,7 @@ class RenderByline(object):
                                 + [authors_location[0]])
 
         assert len(authors_str) == len(authors_location)
-        return (authors_str, authors_location)
+        return authors_str, authors_location
 
 
 @grokcore.component.implementer(IRenderByline)
