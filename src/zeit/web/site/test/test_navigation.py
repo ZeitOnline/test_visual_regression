@@ -260,8 +260,7 @@ def test_cp_should_have_valid_services_structure(testserver, testbrowser):
         'Archiv link is not present')
 
 
-def test_cp_should_have_valid_classifieds_structure(testserver,
-                                                         testbrowser):
+def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -369,7 +368,7 @@ def test_nav_date_isnt_shown_when_not_exists(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('div.main_nav__date')[0].text == None, (
+    assert html('div.main_nav__date')[0].text is None, (
         'Date shouldnt be shown')
 
 # selenium test
