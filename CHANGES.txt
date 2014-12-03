@@ -4,9 +4,11 @@ Change log for zeit.web
 1.8.4 (unreleased)
 ------------------
 
+- ZON-1250: add last published semantic date to hp
+
 - ZON-1109: show tile7 before buzzbox when fullwidth teaser
 
-- WEB-361: add last_published_semantic to JSON Endpoint 
+- WEB-361: add last_published_semantic to JSON Endpoint
 
 
 1.8.3 (2014-11-27)
