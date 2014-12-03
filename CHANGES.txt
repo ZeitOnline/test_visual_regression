@@ -21,7 +21,6 @@ Change log for zeit.web
 - ZON-1109: Show tile7 before buzzbox when fullwidth teaser
 
 - WEB-361: Add last_published_semantic to JSON Endpoint
->>>>>>> master
 
 
 1.8.3 (2014-11-27)
