@@ -1,12 +1,20 @@
 Change log for zeit.web
 =======================
 
-1.8.4 (unreleased)
+1.8.5 (unreleased)
 ------------------
 
-- ZON-1249: link ZMO Button in ZON navi
+- ZON-1249: Link ZMO Button in ZON navi
 
-- ZON-1109: show tile7 before buzzbox when fullwidth teaser
+
+1.8.4 (2014-12-03)
+------------------
+
+- FIX: Advertorial teaser images
+
+- ZON-1109: Show tile7 before buzzbox when fullwidth teaser
+
+- WEB-361: Add last_published_semantic to JSON Endpoint 
 
 
 1.8.3 (2014-11-27)
@@ -14,13 +22,13 @@ Change log for zeit.web
 
 - FIX: Add multiple sizes to some banner places
 
+- FIX: Advertorial: implement module 'fullgraphical' correctly
+
 - BUG-54: Fix falsy use of margin in hamburger icon and improve accessibility
 
 - BUG-55: fix displaced text from fullwith-teaser
 
 - ZON-1226: show teaser seperator for mobile only
-
-- Fix: Advertorial: implement module 'fullgraphical' correctly
 
 - ZON-1233: Make assets more fail save
 
@@ -28,23 +36,25 @@ Change log for zeit.web
 1.8.2 (2014-11-26)
 ------------------
 
-- FIX: decouple teaser name from css
+- FIX: Decouple teaser name from css
 
-- BUG-48: exclude mobile galleries from reload, comment out harmful former fix for mobile
+- FIX: Image scales can break the application startup
 
-- ZON-1220: map old image formats to new teaser image formats
+- BUG-48: Exclude mobile galleries from reload,
+          comment out harmful former fix for mobile
 
-- ZON-1173: add nav headline 'ANZEIGE' and fix some bugs
+- ZON-1220: Map old image formats to new teaser image formats
 
-- ZON-1222: add mapping for fullwidth teaser
+- ZON-1173: Add nav headline 'ANZEIGE' and fix some bugs
 
-- ZON-1179: add mapping for teaser formats
+- ZON-1222: Add mapping for fullwidth teaser
 
-- Hotfix: Image scales can break the application startup
+- ZON-1179: Add mapping for teaser formats
 
 - ZON-1212: Make rendering more failsave
 
 - ZON-1223: Map teasers with priority list
+
 
 1.8.1 (2014-11-18)
 ------------------
@@ -55,21 +65,21 @@ Change log for zeit.web
 1.8 (2014-11-17)
 ----------------
 
+- FIX: Ensure banner setting is respected
+
+- BUG-39: Correct android em issue with cp lead subtitles
+
 - ZON-1025: toggle ad page zoom on ZON (but not ZMO)
 
 - ZON-1061: Style ZMO print cover teaser
 
-- ZON-1118: polishing teaser: fullwidth teaser
+- ZON-1118: Polishing teaser: fullwidth teaser
 
-- ZON-1118: polishing teaser: small/standard teaser
-
-- BUG-39: correct android em issue with cp lead subtitles
+- ZON-1118: Polishing teaser: small/standard teaser
 
 - ZON-898: Add advertorial teaser and templates
 
 - ZON-842: Add new title and sharing metadata for ZMO
-
-- FIX: Ensure banner setting is respected
 
 
 1.7.1 (2014-11-14)
