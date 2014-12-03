@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1249: Link ZMO Button in ZON navi
 
+- ZON-1244: Hook up snapshot image data source
+
 
 1.8.4 (2014-12-03)
 ------------------
