@@ -97,6 +97,14 @@ class Centerpage(
         return area
 
     @zeit.web.reify
+    def snapshot(self):
+        """Return the centerpage snapshot aka `Momentaufnahme`.
+        :rtype: zeit.content.image.image.RepositoryImage
+        """
+        snapshot = self.context.snapshot
+        return zeit.web.core.interfaces.ITeaserImage(snapshot)
+
+    @zeit.web.reify
     def topiclink_title(self):
         """Cache topiclink_title
         :rtype: str
