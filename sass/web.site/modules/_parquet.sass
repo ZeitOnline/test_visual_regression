@@ -6,13 +6,15 @@
 		margin: 0 (-$petite)
 
 .parquet-row
+	+box-shadow(inset 240px 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
 	border-top: 1px solid $zon_light_grey
 	font-family: $font-tabletgothic
 
 .parquet-meta
-	background-color: $zon_lighter_grey
-	width: rem(240px)
+	+inline-block
 	padding: $petite
+	vertical-align: top
+	width: 24.48%
 	&__title
 		font-size: rem(24px)
 		font-weight: bold
@@ -28,3 +30,8 @@
 	&__more-link
 		font-weight: bold
 		line-height: 1.334
+
+.parquet-teasers
+	+inline-block
+	width: 75.0%
+
