@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.8.4 (unreleased)
+1.8.5 (unreleased)
 ------------------
+
+- Nothing changed yet.
+
+
+1.8.4 (2014-12-03)
+------------------
+
+- Quickfix: advertorial teaser images
 
 - ZON-1109: show tile7 before buzzbox when fullwidth teaser
 
