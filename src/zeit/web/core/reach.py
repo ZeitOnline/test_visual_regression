@@ -23,8 +23,7 @@ def comment_score(**ctx):
     """
 
     comments = zeit.web.core.comments.comments_per_unique_id()
-    reverse = dict(reversed(i) for i in comments.iteritems())
-    return reverse.get(ctx.get('path'), 0)
+    return int(comments.get(ctx.get('path'), 0))
 
 
 def index_score(**ctx):
