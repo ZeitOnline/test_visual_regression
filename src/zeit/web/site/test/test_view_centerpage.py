@@ -146,8 +146,8 @@ def test_first_small_teaser_has_image_on_mobile_mode(
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
     box = driver.find_elements_by_class_name('teaser-collection')[0]
-    first = box.find_elements_by_class_name('teaser__media--small')[0]
-    second = box.find_elements_by_class_name('teaser__media--small')[1]
+    first = box.find_elements_by_class_name('teaser-small__media')[0]
+    second = box.find_elements_by_class_name('teaser-small__media')[1]
 
     assert first.is_displayed(), 'image is not displayed'
     assert second.is_displayed() is False, 'image is displayed'

@@ -22,7 +22,6 @@
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
 
 %teaser-small-media
-	display: none
 	width: 100%
 	+respond-min($break-phablet-min)
 		display: inline-block
@@ -146,9 +145,3 @@
 
 .teaser__commentcount
 	@extend %teaser-commentcount
-
-// first small teaser in collection displays image in mobile mode
-// TODO: solved with css for now, might have to be adapted later (asz)
-.teaser-collection--main
-	.teaser--small:nth-of-type(1) .teaser__media--small
-		display: block
