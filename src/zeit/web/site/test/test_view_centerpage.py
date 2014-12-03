@@ -286,11 +286,11 @@ def test_centerpage_view_should_have_topic_links():
     mycp.topiclink_label_3 = 'Label 3'
     mycp.topiclink_url_3 = 'http://link_3'
 
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    topiclinks = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert view.topiclinks == [('Label 1', 'http://link_1'),
-                               ('Label 2', 'http://link_2'),
-                               ('Label 3', 'http://link_3')]
+    assert topiclinks == [('Label 1', 'http://link_1'),
+                          ('Label 2', 'http://link_2'),
+                          ('Label 3', 'http://link_3')]
 
 
 def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
