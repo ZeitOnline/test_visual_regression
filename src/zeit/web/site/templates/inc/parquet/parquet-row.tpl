@@ -5,16 +5,12 @@
 			{{ row.title }}
 		</div>
 		<ul class="parquet-meta__topic-links">
-			{% for i in [1, 2, 3] %}
-				{% set label = row.referenced_cp | get_attr('topiclink_label_%s' % i) %}
-				{% set link = row.referenced_cp | get_attr('topiclink_url_%s' % i) %}
-				{% if label and link %}
-					<li>
-						<a href="{{link}}" class="parquet-meta__topic-link">
-							{{label}}
-						</a>
-					</li>
-				{% endif %}
+			{% for label, link in topiclinks(row.referenced_cp) %}
+				<li>
+					<a href="{{link}}" class="parquet-meta__topic-link">
+						{{label}}
+					</a>
+				</li>
 			{% endfor %}
 		</ul>
 		{% if row.read_more and row.read_more_url %}
@@ -27,8 +23,10 @@
 		{% for teaser in row -%}
 			{% if loop.index <= row.display_amount %}
               {% include
-                    ["zeit.web.site:templates/inc/teaser/" + row.layout.id | get_mapped_teaser + ".tpl",
-                    "zeit.web.site:templates/inc/teaser/default.tpl"] %}
+                    [
+                    "zeit.web.site:templates/inc/parquet/parquet-regular.tpl",
+                    "zeit.web.site:templates/inc/teaser/default_refactoring.tpl"
+                    ] %}
 			{% endif %}
         {% endfor %}
 	</ul>

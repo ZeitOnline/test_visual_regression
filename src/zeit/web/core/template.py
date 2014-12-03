@@ -380,6 +380,15 @@ def get_teaser_commentcount(uniqueId):
 
 
 @zeit.web.register_global
+def topiclinks(centerpage):
+    try:
+        return zeit.web.core.interfaces.ITopicLink(centerpage)
+    except TypeError:
+        log.debug('object %s could not be adapted' % (
+                  getattr(centerpage, 'uniqueId', '')))
+
+
+@zeit.web.register_global
 def get_teaser_template(block_layout,
                         content_type,
                         asset,
