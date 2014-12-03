@@ -17,7 +17,7 @@
             {{ main_nav(navigation, 'dropdown') }}
         </li>
         <li class="primary-nav__item primary-nav__item--featured">
-            <a class="primary-nav__link" href="#">ZEITmagazin</a>
+            <a class="primary-nav__link" href="http://www.zeit.de/zeit-magazin/index" id="hp.global.topnav.centerpages.zeitmagazin">ZEITmagazin</a>
         </li>
         {% endif %}
     </ul>

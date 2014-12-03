@@ -584,3 +584,26 @@ def test_primary_nav_should_resize_to_fit(
 
     assert chosen_nav_item.is_displayed(), (
         '[on desktop] chosen nav item should be visible')
+
+
+def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('%s/centerpage/zeitonline' % testserver.url)
+
+    zmo_button = driver.find_element_by_class_name(
+        'primary-nav__item--featured')
+    zmo_link = zmo_button.find_element_by_class_name(
+        'primary-nav__link')
+
+    assert zmo_link.get_attribute('href') == \
+        'http://www.zeit.de/zeit-magazin/index', (
+        'zmo link is not set correctly')
+    assert zmo_link.get_attribute('id') == \
+        'hp.global.topnav.centerpages.zeitmagazin', (
+        'zmo tracking is not set correctly')
+
+    zmo_link.click()
+
+    assert driver.current_url == 'http://www.zeit.de/zeit-magazin/index', (
+        'zmo hp wasnt called correctly')
