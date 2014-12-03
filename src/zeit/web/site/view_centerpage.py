@@ -50,10 +50,9 @@ class Centerpage(
                 return
 
         blocks = [(b.layout.id, iter(b).next(), b) for b in
-                self.context['lead'].values() if valid_block(b)]
+                  self.context['lead'].values() if valid_block(b)]
 
         return blocks
-
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -82,6 +81,18 @@ class Centerpage(
         area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
         area.layout.id = zeit.web.core.utils.nsunicode('mostread')
         area.header = zeit.web.core.utils.nsunicode('Meistgelesen')
+        return area
+
+    @zeit.web.reify
+    def area_buzz_comments(self):
+        """Return a pseudo teaser block with the top 3 most commented articles.
+        :rtype: zeit.web.core.utils.nslist
+        """
+
+        area = zeit.web.core.reach.fetch('comments', self.ressort, limit=3)
+        area.layout = zeit.web.core.utils.nsunicode('buzz-comments')
+        area.layout.id = zeit.web.core.utils.nsunicode('comments')
+        area.header = zeit.web.core.utils.nsunicode('Meistkommentiert')
         return area
 
     @zeit.web.reify
