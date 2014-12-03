@@ -4,6 +4,8 @@ Change log for zeit.web
 1.8.4 (unreleased)
 ------------------
 
+- Quickfix: advertorial teaser images
+
 - ZON-1109: show tile7 before buzzbox when fullwidth teaser
 
 - WEB-361: add last_published_semantic to JSON Endpoint 
