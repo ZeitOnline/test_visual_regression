@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.8.4 (unreleased)
+1.8.4 (2014-12-03)
 ------------------
 
 - Quickfix: advertorial teaser images
