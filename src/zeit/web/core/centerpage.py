@@ -14,6 +14,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
+
 @zeit.web.register_filter
 def get_all_assets(teaser):
     try:
@@ -24,6 +25,7 @@ def get_all_assets(teaser):
     except TypeError:
         log.debug('No assets for %s' % teaser.uniqueId)
         return ()
+
 
 @zeit.web.register_filter
 def auto_select_asset(teaser):
@@ -165,6 +167,26 @@ class Teaser(object):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.adapter(zeit.content.image.interfaces.IImage)
+class Image(zeit.web.core.block.BaseImage):
+
+    def __init__(self, image):
+        meta = zeit.content.image.interfaces.IImageMetadata(image)
+        self.align = None
+        self.alt = meta.alt
+        self.attr_alt = meta.alt or meta.caption
+        self.attr_title = meta.title or meta.caption
+        self.caption = meta.caption
+        self.copyright = meta.copyrights
+        self.image = image
+        self.image_group = None
+        self.image_pattern = 'default'
+        self.layout = ''
+        self.src = self.uniqueId = image.uniqueId
+        self.title = meta.title
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImageGroup,
                             zeit.content.image.interfaces.IImage)
 class TeaserImage(zeit.web.core.block.BaseImage):
@@ -181,6 +203,5 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.image_group = image_group.uniqueId
         self.image_pattern = 'default'
         self.layout = ''
-        self.src = image.uniqueId
+        self.src = self.uniqueId = image.uniqueId
         self.title = meta.title
-        self.uniqueId = image.uniqueId
