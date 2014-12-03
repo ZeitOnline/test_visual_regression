@@ -56,6 +56,11 @@ class Fetcher(object):
         :raises: ValueError
         """
 
+        if isinstance(target, basestring):
+            target = target.lower()
+        else:
+            raise TypeError('Buzz target must be a string.')
+
         if not 0 < limit < 20:
             raise ValueError('Limit must be between 0 and 10.')
 
