@@ -40,11 +40,20 @@ class Centerpage(zeit.web.core.view.Base):
 class JsonUpdateTimeView(zeit.web.core.view.Base):
 
     def __call__(self):
-        return {'last_published': self.last_published()}
+        return {'last_published': self.last_published(),
+                'last_published_semantic': self.last_published_semantic()}
 
     def last_published(self):
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_last_published
+        try:
+            return date.isoformat()
+        except AttributeError:
+            return ''
+
+    def last_published_semantic(self):
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_last_published_semantic
         try:
             return date.isoformat()
         except AttributeError:
