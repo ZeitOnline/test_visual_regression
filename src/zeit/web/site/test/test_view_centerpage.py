@@ -225,8 +225,8 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
 
     image = browser.cssselect(
         '#main .teaser-collection .teasers'
-        ' article:first-of-type figure.teaser__media.scaled-image'
-        ' a.teaser__media-link img.teaser__media-item')
+        ' article:first-of-type figure.scaled-image'
+        ' a > img')
     assert len(image) == 1, 'Only one image for first article'
 
 
