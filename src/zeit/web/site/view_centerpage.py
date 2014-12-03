@@ -5,6 +5,7 @@ import logging
 
 import zeit.content.cp.interfaces
 
+import zeit.web.core.interfaces
 import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.utils
@@ -147,14 +148,4 @@ class Centerpage(
 
     @zeit.web.reify
     def topiclinks(self):
-        """Filter and restructure all topiclinks and labels
-        :rtype: dict
-        """
-
-        link_list = []
-        for i in xrange(1, 4):
-            label = getattr(self.context, 'topiclink_label_%s' % i, None)
-            link = getattr(self.context, 'topiclink_url_%s' % i, None)
-            if label is not None and link is not None:
-                link_list.append((label, link))
-        return link_list
+        return zeit.web.core.interfaces.ITopicLink(self.context)
