@@ -38,10 +38,10 @@ def test_footer_should_have_basic_structure(jinja2_env):
 def test_footer_is_displayed(selenium_driver, testserver):
 
     driver = selenium_driver
-    driver.get('%s/zeitonline/index' % testserver.url)
+    driver.get('%s/zeit-online/index' % testserver.url)
 
     footer = driver.find_element_by_class_name(
-        '.footer')
+        'footer')
 
     assert(footer.is_displayed()), (
         'footer isnt displayed')
