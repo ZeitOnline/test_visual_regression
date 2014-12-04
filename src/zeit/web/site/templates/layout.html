@@ -97,7 +97,11 @@
             <main class="main" id="main" role="main">
                 {% block main %}Hallo Welt{% endblock main %}
             </main>
-            <footer class="footer" role="contentinfo"></footer>
+            <footer class="footer" role="contentinfo">
+                {% block footer %}
+                    {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
+                {% endblock footer %}
+            </footer>
         </div>
     </div>
     <script>
