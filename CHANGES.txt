@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-1261: add and style footer basic structure
 
 
 1.8.5 (2014-12-03)
@@ -22,7 +22,7 @@ Change log for zeit.web
 
 - ZON-1109: Show tile7 before buzzbox when fullwidth teaser
 
-- WEB-361: Add last_published_semantic to JSON Endpoint 
+- WEB-361: Add last_published_semantic to JSON Endpoint
 
 
 1.8.3 (2014-11-27)
