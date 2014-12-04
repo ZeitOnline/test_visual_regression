@@ -1,10 +1,18 @@
 Change log for zeit.web
 =======================
 
-1.8.5 (unreleased)
+1.8.6 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.8.5 (2014-12-03)
 ------------------
 
 - ZON-1249: Link ZMO Button in ZON navi
+
+- ZON-1243: Add real connector option, remove tbc
 
 
 1.8.4 (2014-12-03)
