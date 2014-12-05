@@ -1,10 +1,10 @@
 {% for area in (view.area_buzz_mostread, view.area_buzz_facebook, view.area_buzz_comments) -%}
     {% if area | length %}
-    <div class="teaser-collection teaser-collection--buzz">
-        <div class="teaser-collection__heading teaser-collection__heading--buzz">
+    <div class="buzz-box">
+        <div class="buzz-box__heading">
             {{ area.header }}
         </div>
-        <div class="teasers teasers--buzz">
+        <div class="buzz-box__teasers">
             {% for teaser in area -%}
                 {% set score = teaser.score %}
                 {% set layout = area.layout %}

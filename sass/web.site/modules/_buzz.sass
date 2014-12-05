@@ -1,47 +1,55 @@
-.teaser-collection.teaser-collection--buzz
+.buzz-box
 	padding: $petite 0
-
-.teaser-collection.teaser-collection--buzz,
-.teasers.teasers--buzz
 	width: 100%
+	&__heading
+		font-family: $font-tabletgothic
+		font-weight: bold
+		border-bottom: $hair--px solid $zon_light_grey
+		font-size: $font-s
+		letter-spacing: $hair
+		line-height: normal
+		margin-bottom: $small
+		padding-bottom: $small
+		text-align: center
+		text-transform: uppercase
 
-.teaser-collection__heading.teaser-collection__heading--buzz
-	font-family: $font-tabletgothic
-	font-weight: bold
-	border-bottom: $hair--px solid $zon_light_grey
-	font-size: $font-s
-	letter-spacing: $hair
-	line-height: normal
-	margin-bottom: $small
-	padding-bottom: $small
-	text-align: center
-	text-transform: uppercase
-
-.teaser.teaser--buzz
+=buzz-teaser($layout)
+	@extend %teaser
 	margin: 0
 	padding: 0
 	border: none
 
-	.teaser__title
+	+respond-min($break-phablet-min)
+		margin-left: $petite--px
+	&:not(:last-child)
+		margin-bottom: $small
+
+	&__title
+		@extend %teaser-title
 		font-size: $font-s
 		font-weight: normal
 		line-height: $headline-line-height
 		+respond-min($break-phablet-min)
 			font-size: $font-m
 
-	.teaser__kicker
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
 		font-size: $font-xs
 
-.teaser.teaser--buzz
-	margin-left: 0
-	+respond-min($break-phablet-min)
-		margin-left: $petite--px
+	&__heading
+		@extend %teaser-heading
+		display: inline-block
+		width: 80%
+		margin-left: $little
 
-.teaser.teaser--buzz:not(:last-child)
-	margin-bottom: $small
+@each $flavor in comments, facebook, mostread
+	.buzz-#{$flavor}
+		+buzz-teaser(buzz-#{$flavor})
 
-.teaser__media.numeric.numeric--buzz-comments,
-.teaser__media.numeric.numeric--buzz-mostread
+.numeric
 	+tiemann
 	width: 10%
 	display: inline-block
@@ -50,27 +58,16 @@
 	line-height: $font-mxl--px
 	margin: 0
 
-.annotated-icon.annotated-icon--buzz-facebook
+.annotated-icon
 	margin: $thin 0 0 0
-	.icon-buzz-facebook, .label
-		display: inline-block
-	.icon-buzz-facebook
+	&__icon
 		height: $small
 		width: $small
 		background-size: contain
-
-.annotated-icon__label
-	font-family: $font-tabletgothic
-	font-weight: 200
-	font-size: $little
-	vertical-align: text-bottom
-	margin-left: $thin
-
-.teaser__heading.teaser__heading--buzz
-	display: inline-block
-	width: 80%
-	margin: 0
-
-.teaser__heading.teaser__heading--buzz-comments,
-.teaser__heading.teaser__heading--buzz-mostread
-	margin-left: $little
+		display: inline-block
+	&__label
+		font-family: $font-tabletgothic
+		font-weight: 200
+		font-size: $little
+		vertical-align: text-bottom
+		margin-left: $thin

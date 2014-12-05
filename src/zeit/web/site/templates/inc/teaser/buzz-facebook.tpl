@@ -1,8 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
-
-{% block teaser_modifier %}teaser--buzz teaser--{{ layout }}{% endblock %}
-
-{% block teaser_heading_modifier %}teaser__heading--buzz teaser__heading--{{ layout }}{% endblock %}
+{%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
 
 {% block teaser_media_position_after_title %}
     {% include ["zeit.web.site:templates/inc/teaser_asset/annotated-icon_" + layout + ".tpl",
