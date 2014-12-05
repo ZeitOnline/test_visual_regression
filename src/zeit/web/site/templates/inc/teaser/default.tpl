@@ -9,12 +9,12 @@
 
     <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}">
         {% block teaser_link %}
-        <a class="teaser__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
+        <a class="teaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | translate_url }}">
             {% block teaser_kicker %}
-            <span class="teaser__kicker">{{ teaser.teaserSupertitle }}</span>
+            <span class="teaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
             {% endblock %}
             {% block teaser_title %}
-            <span class="teaser__title">{{ teaser.teaserTitle }}</span>
+            <span class="teaser__title">{{ teaser.teaserTitle or teaser.title }}</span>
             {% endblock %}
         </a>
         {% endblock %}

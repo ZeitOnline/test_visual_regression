@@ -51,9 +51,9 @@ def neighborhood(iterable, default=None):
     iterator = iter(iterable)
     prev, item = default, iterator.next()
     for next in iterator:
-        yield (prev, item, next)
+        yield prev, item, next
         prev, item = item, next
-    yield (prev, item, default)
+    yield prev, item, default
 
 
 class nsmixin:
