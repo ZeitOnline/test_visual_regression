@@ -189,10 +189,12 @@ def hide_none(string):
         return string
 
 
-_t_map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
-          'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          'zon-fullwidth': ['leader-fullwidth'],
-          'hide': ['archive-print-volume', 'archive-print-year',
+_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
+          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          "zon-fullwidth": ['leader-fullwidth'],
+          "zon-parquet-large": ['parquet-large'],
+          "zon-parquet-small": ['parquet-regular'],
+          "hide": ['archive-print-volume', 'archive-print-year',
                    'two-side-by-side', 'ressort', 'leader-upright',
                    'buttons-fullwidth', 'parquet-printteaser',
                    'parquet-verlag']}
@@ -412,6 +414,7 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         block.id: [block.image_pattern] for block in list(layout(None))}
 
     layout_image['zon-small'].extend(layout_image['leader'])
+    layout_image['zon-parquet-small'].extend(layout_image['leader'])
     return layout_image.get(teaser_layout, [orig_image_pattern])
 
 
