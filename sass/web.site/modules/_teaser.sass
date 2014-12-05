@@ -41,6 +41,7 @@
 
 %teaser-kicker
 	display: block
+	color: $color-text-highlighted
 	font-family: TabletGothicNarrow
 	font-size: $zon-font-s
 	font-weight: bold
@@ -51,19 +52,18 @@
 %teaser-combined-link
 	color: $color-text
 	text-decoration: none
-	&:link .teaser__kicker,
-	&:visited .teaser__kicker
-		color: $color-text-highlighted
-	&:link > .teaser__title,
-	&:visited > .teaser__title
-		color: $color-text
+	&:link,
+	&:visited
+		color: inherit
 	&:hover
-		text-decoration: none
-		& > .teaser__title
+		span
 			text-decoration: underline
+		span:first-child
+			text-decoration: none
 
 %teaser-title
 	display: block
+	color: $color-text
 	font-family: TabletGothic
 	font-size: $font-l
 	font-weight: 700
@@ -110,12 +110,6 @@
 /// @deprecated
 .teaser
 	@extend %teaser
-
-.teaser--small
-	border-bottom: none
-
-.teaser--small.teaser--smallmedia
-	@extend %teaser-small-media-placement
 
 .teaser__heading
 	@extend %teaser-heading

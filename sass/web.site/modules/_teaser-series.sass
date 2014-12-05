@@ -20,7 +20,7 @@
 	+respond-min($break-phablet-min)
 		border-top: none
 
-.teaser-series.teaser-series--smallmedia
+.teaser-series.teaser-series--hasmedia
 	@extend %teaser-small-media-placement
 
 .teaser-series__label
@@ -62,16 +62,6 @@
 
 .teaser-series__combined-link
 	@extend %teaser-combined-link
-	&:link .teaser-series__kicker,
-	&:visited .teaser-series__kicker
-		color: $color-text-highlighted
-	&:link .teaser-series__title,
-	&:visited .teaser-series__title
-		color: $color-text
-	&:hover
-		text-decoration: none
-		& .teaser-series__title
-			text-decoration: underline
 
 .teaser-series__title
 	display: block
