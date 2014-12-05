@@ -30,7 +30,7 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
     content = driver.execute_script("return document.getElementById('viewport"
                                     "-meta').getAttribute('content')")
     orientation = driver.execute_script("return Math.abs(window.orientation)")
-    if(orientation is 90):
+    if orientation is 90:
         # ipad landscape
         assert 'width=1280' in content
 
@@ -42,7 +42,7 @@ def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
     content = driver.execute_script("return document.getElementById('viewport"
                                     "-meta').getAttribute('content')")
     orientation = driver.execute_script("return Math.abs(window.orientation)")
-    if(orientation is not 90):
+    if orientation is not 90:
         # all other
         assert 'width=device-width' in content
 

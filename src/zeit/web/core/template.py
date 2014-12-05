@@ -394,6 +394,7 @@ def set_image_id(asset_id, image_base_name, image_pattern, ext):
     return '%s/%s-%s.%s' % (
         asset_id, image_base_name, image_pattern, ext)
 
+
 def _existing_image(asset_id, image_base_name, image_patterns, ext):
     for image_pattern in image_patterns:
         image = set_image_id(asset_id, image_base_name, image_pattern, ext)
@@ -401,7 +402,7 @@ def _existing_image(asset_id, image_base_name, image_patterns, ext):
             return zeit.cms.interfaces.ICMSContent(image), image_pattern
         except:
             pass
-    return (None, None)
+    return None, None
 
 
 @zeit.web.register_global
@@ -474,6 +475,7 @@ def get_image_metadata(image):
         return image_metadata
     except TypeError:
         return
+
 
 @zeit.web.register_global
 def get_repository_image(image):
