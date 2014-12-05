@@ -1,7 +1,24 @@
 //sizes
-$footer_logo_min_height: 80px
+$footer_logo_width: 300px
+$footer_logo_width_small: 280px
 $footer_publisher_min_height: 30px
 $footer_links_min_height: 20px
+$footer_button_height: 30px
+$footer_button_width: 150px
+
+%footer_icons
+    display: block
+    background-size: contain
+    background-position: 50% 50%
+
+%footer__publisher_bar
+    min-height: $footer_publisher_min_height
+    padding: $petite 0 $petite 0
+    color: $zon_dark_grey
+    font-size: $font-xs--rem
+    line-height: $twice
+    a
+        +link-colors($zon_dark_grey, $black, $black, $black, $black)
 
 .footer
     width: 100%
@@ -9,29 +26,62 @@ $footer_links_min_height: 20px
     margin-top: $wide
     font-family: $font-tabletgothic
 
-.footer__logo
-    min-height: $footer_logo_min_height
+.footer__logo__image
+    display: inline-block
+    margin-bottom: $petite
+    a
+        +hide-text
+        @extend %footer_icons
+        width: $footer_logo_width_small
+        +respond-min($break-tablet-min)
+            width: $footer_logo_width
 
 .footer__publisher
-    background-color: $zon_light_grey
+    background-color: $zon_lighter_grey
 
 .footer__publisher__inner
-    min-height: $footer_publisher_min_height
-    padding: $petite 0 $petite 0
-    color: $zon_dark_grey
-    font-size: $font-xs--rem
-    line-height: $twice
+    @extend %footer__publisher_bar
+
+.footer__publisher__more
+    @extend %footer__publisher_bar
+    border-top: 1px solid $zon_light_grey
+    +respond-min($break-tablet-min)
+        display: none
+    a
+        &:after
+            +drop_icon()
+        &:hover
+            &:after
+                +rotate(180deg)
 
 .footer__links
-    background-color: $zon_dark_grey
+    background-color: $zon-charcoal
+    padding-bottom: $petite
 
 .footer__links__inner
+    display: none
     min-height: $footer_links_min_height
-    color: $white
-    font-size: $font-xxs--rem
+    color: $zon_grey
+    font-size: $font-xs--rem
     line-height: $petite
     letter-spacing: $hair
-    padding: $petite 0 $junior 0
+    padding-top: 20px
+    a
+        +link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_lighter_grey)
+    +respond-min($break-tablet-min)
+        display: block
 
 .footer__links__button
-    padding-bottom: $petite
+    display: inline-block
+    margin-top: 25px
+    border: $dblhair solid $zon_grey
+    border-radius: 4px
+    height: $footer_button_height
+    width: $footer_button_width
+    color: $zon_light_grey
+    font-size: $font-s--rem
+    line-height: $footer_button_height
+    text-transform: uppercase
+    letter-spacing: 1px
+    cursor: pointer
+
