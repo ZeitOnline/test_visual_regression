@@ -10,7 +10,10 @@ import selenium.webdriver
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/nav_main.html')
-    html_str = tpl.render(view=mock.MagicMock())
+    import datetime
+    mock_view = mock.MagicMock()
+    mock_view.displayed_last_published_semantic = datetime.datetime.now()
+    html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.main_nav')) == 1, (
@@ -227,18 +230,9 @@ def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     assert html('ul li a')[0].text == 'Label 1'
 
 
-def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
-    # ToDo: Maybe fill this function with more sense?
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
-    html_str = tpl.module.main_nav_date('Mein Datum')
-
-    assert html_str == 'Mein Datum'
-
-
 # integration testing
 
-def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
+def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -250,7 +244,7 @@ def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
         'Data dropdown not present')
 
 
-def test_article_should_have_valid_services_structure(testserver, testbrowser):
+def test_cp_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -266,8 +260,7 @@ def test_article_should_have_valid_services_structure(testserver, testbrowser):
         'Archiv link is not present')
 
 
-def test_article_should_have_valid_classifieds_structure(testserver,
-                                                         testbrowser):
+def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -280,7 +273,7 @@ def test_article_should_have_valid_classifieds_structure(testserver,
         'Link mehr is not present')
 
 
-def test_article_has_valid_community_structure(testserver, testbrowser):
+def test_cp_has_valid_community_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -294,7 +287,7 @@ def test_article_has_valid_community_structure(testserver, testbrowser):
         'Link to login has invalid label')
 
 
-def test_article_has_valid_logo_structure(testserver, testbrowser):
+def test_cp_has_valid_logo_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -305,7 +298,7 @@ def test_article_has_valid_logo_structure(testserver, testbrowser):
         'Element a.icon-zon-logo-desktop is invalid')
 
 
-def test_article_has_valid_burger_structure(testserver, testbrowser):
+def test_cp_has_valid_burger_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -319,7 +312,7 @@ def test_article_has_valid_burger_structure(testserver, testbrowser):
         'Element .main_nav__icon--hover is invalid')
 
 
-def test_article_has_valid_search_structure(testserver, testbrowser):
+def test_cp_has_valid_search_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -353,7 +346,7 @@ def test_article_has_valid_search_structure(testserver, testbrowser):
         'Element input.search__input is invalid')
 
 
-def test_article_has_valid_tag_structure(testserver, testbrowser):
+def test_cp_has_valid_tag_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -362,13 +355,21 @@ def test_article_has_valid_tag_structure(testserver, testbrowser):
     assert html('ul'), 'Missing ul'
 
 
-def test_article_has_valid_nav_date_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    date = '3. September 2014 10:50 Uhr'
+def test_cp_has_valid_nav_date_structure(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    date = '3. Dezember 2014, 12:50 Uhr'
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     assert html('div.main_nav__date')[0].text == date, (
         'Date is invalid')
+
+
+def test_nav_date_isnt_shown_when_not_exists(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('div.main_nav__date')[0].text is None, (
+        'Date shouldnt be shown')
 
 # selenium test
 

@@ -10,6 +10,12 @@ Change log for zeit.web
 1.8.5 (2014-12-03)
 ------------------
 
+- ZON-1250: add last published semantic date to hp
+
+- ZON-1109: show tile7 before buzzbox when fullwidth teaser
+
+- WEB-361: add last_published_semantic to JSON Endpoint
+
 - ZON-1249: Link ZMO Button in ZON navi
 
 - ZON-1243: Add real connector option, remove tbc
@@ -22,7 +28,7 @@ Change log for zeit.web
 
 - ZON-1109: Show tile7 before buzzbox when fullwidth teaser
 
-- WEB-361: Add last_published_semantic to JSON Endpoint 
+- WEB-361: Add last_published_semantic to JSON Endpoint
 
 
 1.8.3 (2014-11-27)

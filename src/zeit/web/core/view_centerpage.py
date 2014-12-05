@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
 
+import babel.dates
+
 import zeit.content.cp.interfaces
 
 import zeit.web.core.view
@@ -33,6 +35,10 @@ class Centerpage(zeit.web.core.view.Base):
     def tracking_type(self):
         return type(self.context).__name__.title()
 
+    @zeit.web.reify
+    def displayed_last_published_semantic(self):
+        return form_date(get_last_published_semantic(self.context))
+
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              name='json_update_time',
@@ -52,9 +58,20 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
             return ''
 
     def last_published_semantic(self):
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_last_published_semantic
+        date = get_last_published_semantic(self.context)
         try:
             return date.isoformat()
         except AttributeError:
             return ''
+
+
+def get_last_published_semantic(context):
+    date = zeit.cms.workflow.interfaces.IPublishInfo(
+        context).date_last_published_semantic
+    return date
+
+
+def form_date(date):
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    if date and not (not date):
+        return date.astimezone(tz)
