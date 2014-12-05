@@ -408,37 +408,37 @@ def test_zon_main_nav_has_correct_structure(
         'main_nav__classifieds')[0]
 
     # navigation is visible in all sizes
-    assert(main_nav.is_displayed())
+    assert main_nav.is_displayed()
     # logo is visible in all sizes
-    assert(logo_bar__image.is_displayed())
+    assert logo_bar__image.is_displayed()
 
     if small_screen:
         # burger menue is visible
-        assert(logo_bar__menue.is_displayed())
+        assert logo_bar__menue.is_displayed()
         # tags are hidden
-        assert(main_nav__tags.is_displayed() is False)
+        assert main_nav__tags.is_displayed() is False
         # date bar is hidden
-        assert(main_nav__date.is_displayed() is False)
+        assert main_nav__date.is_displayed() is False
         # last 3 services aren't shown
         serv_li = main_nav__services.find_elements_by_tag_name('li')
-        assert(serv_li[3].is_displayed() is False)
-        assert(serv_li[4].is_displayed() is False)
-        assert(serv_li[5].is_displayed() is False)
+        assert serv_li[3].is_displayed() is False
+        assert serv_li[4].is_displayed() is False
+        assert serv_li[5].is_displayed() is False
     else:
         # search button is visible in desktop mode
-        assert(search__button.is_displayed())
+        assert search__button.is_displayed()
         # community link is visible in desktop mode
-        assert(main_nav__community.is_displayed())
+        assert main_nav__community.is_displayed()
         # ressort bar is visible in desktop mode
-        assert(main_nav__ressorts.is_displayed())
+        assert main_nav__ressorts.is_displayed()
         # service bar is visible in desktop mode
-        assert(main_nav__services.is_displayed())
+        assert main_nav__services.is_displayed()
         # classifieds bar is visible in desktop mode
-        assert(main_nav__classifieds.is_displayed())
+        assert main_nav__classifieds.is_displayed()
 
     if screen_width == 768:
         # test search input is hidden in tablet mode
-        assert(search__input.is_displayed() is False)
+        assert search__input.is_displayed() is False
 
 
 def test_nav_search_is_working_as_expected(
@@ -458,16 +458,16 @@ def test_nav_search_is_working_as_expected(
     if screen_width == 768:
         # test search input is shown after button click
         search__button.click()
-        assert(search__input.is_displayed()), 'Input is not displayed'
+        assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is not hidden after click in input
         search__input.click()
-        assert(search__input.is_displayed()), 'Input is not displayed'
+        assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is hidden after button click, if its empty
         search__button.click()
-        assert(search__input.is_displayed() is False), 'Input is displayed'
+        assert search__input.is_displayed() is False, 'Input is displayed'
         # test search input is hidden after click somewhere else
         document.click()
-        assert(search__input.is_displayed() is False), 'Input is displayed'
+        assert search__input.is_displayed() is False, 'Input is displayed'
         search__button.click()
 
     # open search for mobile
@@ -505,41 +505,41 @@ def test_nav_burger_menue_is_working_as_expected(
     main_nav__search = driver.find_element_by_class_name('main_nav__search')
 
     # test main elements are displayed
-    assert(logo_bar__menue.is_displayed()), 'Logo bar is not displayed'
-    assert(menue__button.is_displayed()), 'Menue button is not displayed'
-    assert(icon_burger.is_displayed()), 'Burger Icon is not displayed'
+    assert logo_bar__menue.is_displayed(), 'Logo bar is not displayed'
+    assert menue__button.is_displayed(), 'Menue button is not displayed'
+    assert icon_burger.is_displayed(), 'Burger Icon is not displayed'
 
     menue__button.click()
 
     # test element states after menue button is clicked
-    assert(main_nav__community.is_displayed()), (
+    assert main_nav__community.is_displayed(), (
         'Community bar is not displayed')
-    assert(main_nav__ressorts.is_displayed()), (
+    assert main_nav__ressorts.is_displayed(), (
         'Ressort bar is not displayed')
-    assert(main_nav__services.is_displayed()), (
+    assert main_nav__services.is_displayed(), (
         'Services bar is not displayed')
-    assert(main_nav__classifieds.is_displayed()), (
+    assert main_nav__classifieds.is_displayed(), (
         'Classifieds bar is not displayed')
-    assert(main_nav__search.is_displayed()), (
+    assert main_nav__search.is_displayed(), (
         'Search bar is not displayed')
 
     # test close button is displayed
     icon_close = logo_bar__menue.find_element_by_class_name(
         'icon-zon-logo-navigation_close-hover')
-    assert(icon_close.is_displayed()), 'Closing Icon is not displayed'
+    assert icon_close.is_displayed(), 'Closing Icon is not displayed'
 
     menue__button.click()
 
     # test element states after menue button is clicked again
-    assert(main_nav__community.is_displayed() is False), (
+    assert main_nav__community.is_displayed() is False, (
         'Community bar is displayed')
-    assert(main_nav__ressorts.is_displayed() is False), (
+    assert main_nav__ressorts.is_displayed() is False, (
         'Ressort bar is not displayed')
-    assert(main_nav__services.is_displayed() is False), (
+    assert main_nav__services.is_displayed() is False, (
         'Services bar is not displayed')
-    assert(main_nav__classifieds.is_displayed() is False), (
+    assert main_nav__classifieds.is_displayed() is False, (
         'Classifieds bar is not displayed')
-    assert(main_nav__search.is_displayed() is False), (
+    assert main_nav__search.is_displayed() is False, (
         'Search bar is not displayed')
 
 
@@ -564,7 +564,7 @@ def test_primary_nav_should_resize_to_fit(
     menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
     menu__button.click()
 
-    assert (more_dropdown.is_displayed() is False), (
+    assert more_dropdown.is_displayed() is False, (
         '[on mobile] more dropdown is not displayed')
     assert chosen_nav_item.is_displayed(), (
         '[on mobile] chosen nav item should be visible in open navigation')
@@ -572,7 +572,7 @@ def test_primary_nav_should_resize_to_fit(
     # tablet
     driver.set_window_size(768, 1024)
 
-    assert (chosen_nav_item.is_displayed() is False), (
+    assert chosen_nav_item.is_displayed() is False, (
         '[on tablet] chosen nav item should be hidden')
     actions.move_to_element(more_dropdown).perform()
     assert chosen_more_dropdown_item.is_displayed(), (

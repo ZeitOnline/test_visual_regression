@@ -27,7 +27,8 @@ import zeit.web.magazin.view
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/centerpage.html')
-class Centerpage(zeit.web.core.view_centerpage.Centerpage, zeit.web.magazin.view.Base):
+class Centerpage(zeit.web.core.view_centerpage.Centerpage,
+                 zeit.web.magazin.view.Base):
 
     def insert_seperator(self, position, obj):
         teaser_list = obj
@@ -114,7 +115,7 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage, zeit.web.magazin.view
     @zeit.web.reify
     def area_buzz(self):
         teaser_dict = {}
-        for service in ('twitter', 'facebook', 'comments'):
+        for service in 'twitter', 'facebook', 'comments':
             teaser_dict[service] = zeit.web.core.reach.fetch(
                 service, 'zeit-magazin', limit=3)
         return teaser_dict
