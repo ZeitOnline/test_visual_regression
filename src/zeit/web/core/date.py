@@ -34,7 +34,8 @@ def mod_date(resource):
         return (pub_info.date_last_published_semantic or
                 pub_info.date_last_published)
     except TypeError:
-        return None
+        return
+
 
 @zeit.web.register_global
 def get_delta_time(article, base_date=None):

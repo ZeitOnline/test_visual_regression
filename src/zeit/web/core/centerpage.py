@@ -14,6 +14,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
+
 @zeit.web.register_filter
 def get_all_assets(teaser):
     try:
@@ -24,6 +25,7 @@ def get_all_assets(teaser):
     except TypeError:
         log.debug('No assets for %s' % teaser.uniqueId)
         return ()
+
 
 @zeit.web.register_filter
 def auto_select_asset(teaser):
