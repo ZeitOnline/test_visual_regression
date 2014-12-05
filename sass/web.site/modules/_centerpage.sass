@@ -1,20 +1,18 @@
-
-.main__fullwidth
-    width: 100%
-    display: block
-
-.main__content
-    width: 100%
-    display: block
-    +respond-min($break-tablet-min)
-        width: 67.686% //68.086% //67%
-        display: inline-block
-
-.main__informatives
-    width: 100%
-    display: block
-    overflow: hidden
-    vertical-align: top
-    +respond-min($break-tablet-min)
-        width: 31.815% //32%
-        display: inline-block
+.main
+	&__fullwidth
+		display: block
+		width: 100%
+	&__content
+		display: block
+		width: 100%
+		+respond-min($break-tablet-min)
+			display: inline-block
+			width: 67.686% //68.086% //67%
+	&__informatives
+		display: block
+		overflow: hidden
+		vertical-align: top
+		width: 100%
+		+respond-min($break-tablet-min)
+			display: inline-block
+			width: 31.815% //32%
