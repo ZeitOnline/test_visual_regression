@@ -6,6 +6,9 @@ Change log for zeit.web
 
 - ZON-1261: add and style footer basic structure
 
+- ZON-1262: add scroll to top button
+
+- ZON-1264: add logo
 
 1.8.5 (2014-12-03)
 ------------------
