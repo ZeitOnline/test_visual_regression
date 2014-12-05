@@ -57,8 +57,8 @@ def test_centerpage_should_have_correct_seo_title(testserver, testbrowser):
 
 def test_hp_should_have_correct_title(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    assert (
-        '<title>My Test SEO - ZEITmagazin ONLINE</title>') in browser.contents
+    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
@@ -68,21 +68,21 @@ def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
 
 def test_centerpage_should_have_seo_description(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="description" content="SEO description">' \
-        in browser.contents
+    assert '<meta name="description" content="SEO description">' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_default_keywords(testserver, testbrowser):
     # Default means ressort and sub ressort respectively
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="keywords" content="Lebensart, mode-design">' \
-        in browser.contents
+    assert '<meta name="keywords" content="Lebensart, mode-design">' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_page_meta_keywords(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="keywords" content="Pinguin">' \
-        in browser.contents
+    assert '<meta name="keywords" content="Pinguin">' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_page_meta_robots_information(

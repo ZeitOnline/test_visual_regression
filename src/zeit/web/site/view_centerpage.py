@@ -49,11 +49,8 @@ class Centerpage(
             except (TypeError, AttributeError):
                 return
 
-        blocks = [(b.layout.id, iter(b).next(), b) for b in
+        return [(b.layout.id, iter(b).next(), b) for b in
                 self.context['lead'].values() if valid_block(b)]
-
-        return blocks
-
 
     @zeit.web.reify
     def area_fullwidth(self):

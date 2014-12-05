@@ -402,7 +402,7 @@ def _existing_image(asset_id, image_base_name, image_patterns, ext):
             return zeit.cms.interfaces.ICMSContent(image), image_pattern
         except:
             pass
-    return (None, None)
+    return None, None
 
 
 @zeit.web.register_global
