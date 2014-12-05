@@ -116,7 +116,7 @@
 {% macro adplace_middle_mobile(item) -%}
     {% if item.tile == 7 -%}
     <!-- only integrate onces as equivalent to desktop tile 7 -->
-        <div class="iqd_mobile__adplace--middle">
+        <div class="iqd-mobile-adplace iqd-mobile-adplace--middle">
             <div id="sas_13557"></div>
         </div>
     {%- endif %}

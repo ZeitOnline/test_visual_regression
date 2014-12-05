@@ -34,7 +34,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
 def test_adplace_middle_mobile_produces_html(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.core:templates/macros/layout_macro.tpl')
-    elems = ['<div class="iqd_mobile__adplace--middle">',
+    elems = ['<div class="iqd-mobile-adplace iqd-mobile-adplace--middle">',
              '<div id="sas_13557"></div>']
     obj = mock.Mock()
     obj.tile = 7

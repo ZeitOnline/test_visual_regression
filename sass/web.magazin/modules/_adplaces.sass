@@ -97,15 +97,13 @@ $mobile_middle_ad_break_left_margin: $mobile_ad_width + $page-padding--small*2
 		display: block
 
 // mobile
-.iqd_mobile__adplace
+.iqd-mobile-adplace
 	width: $mobile_ad_width
 	margin: auto
 	a > *, iframe
 		margin: $fine auto $fine auto
 	+respond-min($desktop_mobile_ad_breakpoint)
 		display: none
-
-.iqd_mobile__adplace--middle
-	@extend .iqd_mobile__adplace
-	+respond-max($mobile_middle_ad_break_left_margin)
-		margin-left: -$page-padding--small
+	&--middle
+		+respond-max($mobile_middle_ad_break_left_margin)
+			margin-left: -$page-padding--small
