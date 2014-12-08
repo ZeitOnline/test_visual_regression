@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-1264: add logo
 
+- ZON-1267: add scroll to top icon
+
 1.8.5 (2014-12-03)
 ------------------
 
