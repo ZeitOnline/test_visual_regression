@@ -6,10 +6,13 @@
         </div>
         <div class="buzz-box__teasers">
             {% for teaser in area -%}
-                {% set score = teaser.score %}
-                {% set layout = area.layout %}
-                {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
-                            "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
+                {% with -%}
+                    {% set layout = area.layout %}
+                    {% set index = loop.index %}
+                    {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
+                                "zeit.web.site:templates/inc/teaser/buzz.tpl",
+                                "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
+                {%- endwith %}
             {%- endfor %}
         </div>
     </div>
