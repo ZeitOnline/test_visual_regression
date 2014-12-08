@@ -10,7 +10,9 @@ Change log for zeit.web
 
 - ZON-1246: All main content teaser use refactored teaser-templates
 
-- ZON-1261: add and style footer basic structure
+- ZON-1261: Add and style footer basic structure
+
+- ZON-1161: Swap ZMO fallback image
 
 
 1.8.5 (2014-12-03)
