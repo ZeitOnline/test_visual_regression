@@ -25,6 +25,9 @@
 		font-weight: bold
 		letter-spacing: 0.03em
 		line-height: 1
+		@at-root a#{&}
+			+on-interaction
+				text-decoration: underline
 
 	&__topic-links
 		list-style: none
@@ -40,6 +43,8 @@
 	&__more-link
 		font-weight: bold
 		line-height: 1.334
+		&:after
+			content: ' \25B8 ' // Black Right-Pointing Small Triangle
 
 .parquet-teasers
 	+inline-block
@@ -65,7 +70,6 @@ $parquet-image-small-width: 174px
 	// 	@extend %teaser-small-media-placement
 	&__media
 		+inline-block
-		background-color: orange
 		width: $parquet-image-small-width
 		margin: 0 $compact $compact 0
 
@@ -76,7 +80,6 @@ $parquet-image-small-width: 174px
 		+inline-block
 		vertical-align: top
 		@extend %teaser-heading
-		// background-color: green
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -89,14 +92,18 @@ $parquet-image-small-width: 174px
 
 	&__text
 		@extend %teaser-text
-		// background-color: violet
 
 	&__byline
 		@extend %teaser-byline
 
+	&__metadata
+		@extend %teaser-byline // no accident
+
+	&__commentcount
+		@extend %teaser-commentcount
+
 	&__container
 		+inline-block
 		margin: 0 0 $compact 0
-		// background-color: yellow
 		max-width: 65%
 		vertical-align: top
