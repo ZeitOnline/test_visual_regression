@@ -17,7 +17,7 @@
             {{ main_nav(navigation, 'dropdown') }}
         </li>
         <li class="primary-nav__item primary-nav__item--featured">
-            <a class="primary-nav__link" href="#">ZEITmagazin</a>
+            <a class="primary-nav__link" href="http://www.zeit.de/zeit-magazin/index" id="hp.global.topnav.centerpages.zeitmagazin">ZEITmagazin</a>
         </li>
         {% endif %}
     </ul>
@@ -74,8 +74,10 @@
     </form>
 {%- endmacro %}
 
-{% macro main_nav_date(date='3. September 2014 10:50 Uhr') -%}
-    {{ date }}
+{% macro main_nav_date(date='') -%}
+    {% if date -%}
+        {{ date | format_date('long') }}
+    {%- endif %}
 {%- endmacro %}
 
 {% macro main_nav_tags(title, links) -%}

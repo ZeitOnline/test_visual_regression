@@ -3,7 +3,6 @@
 	&__media
 		@extend %teaser-media
 		@extend %teaser-small-media
-		display: block
 	&__media-item
 		@extend %teaser-media-item
 	&__heading
@@ -24,3 +23,11 @@
 		@extend %teaser-commentcount
 	&--hasmedia
 		@extend %teaser-small-media-placement
+
+// only first small teaser in collection displays image in mobile mode
+// all others are hidden
+.teaser-collection--main
+	.teaser-small:nth-of-type(1n+2) .teaser-small__media
+		display: none
+		+respond-min($break-phablet-min)
+			display: block

@@ -22,7 +22,6 @@
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
 
 %teaser-small-media
-	display: none
 	width: 100%
 	+respond-min($break-phablet-min)
 		display: inline-block
@@ -105,50 +104,3 @@
 		text-decoration: none
 	&:hover
 		border-bottom: 1px solid #777
-
-/// @todo: delete class teaser after refactoring is done
-/// @deprecated
-.teaser
-	@extend %teaser
-
-.teaser__heading
-	@extend %teaser-heading
-
-.teaser__heading.teaser__heading--hasmedia
-	margin: 0 0 $petite 0
-
-.teaser__combined-link
-	@extend %teaser-combined-link
-
-.teaser__kicker
-	@extend %teaser-kicker
-
-.teaser__title
-	@extend %teaser-title
-
-.teaser__media
-	@extend %teaser-media
-
-.teaser__media--small
-	@extend %teaser-small-media
-
-.teaser__media-item
-	@extend %teaser-media-item
-
-.teaser__text
-	@extend %teaser-text
-
-.teaser__byline
-	@extend %teaser-byline
-
-.teaser__metadata
-	@extend %teaser-byline
-
-.teaser__commentcount
-	@extend %teaser-commentcount
-
-// first small teaser in collection displays image in mobile mode
-// TODO: solved with css for now, might have to be adapted later (asz)
-.teaser-collection--main
-	.teaser--small:nth-of-type(1) .teaser__media--small
-		display: block

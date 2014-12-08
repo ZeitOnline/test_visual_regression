@@ -3,7 +3,7 @@
 {% block layout %}teaser-small{% endblock %}
 
 {% block teaser_modifier -%}
-    {% if get_teaser_image(teaser_block, teaser) %}teaser-small--hasmedia{% endif %}
+    {% if not teaser | get_image_asset is none -%}teaser-small--hasmedia{%- endif %}
 {%- endblock %}
 
 {% block teaser_media_position_before_title %}

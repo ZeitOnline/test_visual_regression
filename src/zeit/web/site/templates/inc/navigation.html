@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/navigation.tpl' as nav %}
+{% import 'zeit.web.site:templates/macros/navigation_macro.tpl' as nav %}
 
 <div class="main_nav">
 
@@ -24,6 +24,6 @@
     <!-- wrap end -->
     <!-- please don't break line here, due to inline-block state -->
     <div class="main_nav__tags">{{ nav.main_nav_tags(view.topiclink_title,
-    view.topiclinks) }}</div><div class="main_nav__date">{{ nav.main_nav_date() }}</div>
+    view.topiclinks) }}</div><div class="main_nav__date">{{ nav.main_nav_date(view.displayed_last_published_semantic) }}</div>
 
 </div>

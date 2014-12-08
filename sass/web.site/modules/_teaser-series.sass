@@ -1,5 +1,4 @@
 // teaser for series elements
-
 .teaser-series
 	@extend %teaser
 	+respond-min($break-phablet-min)
@@ -9,9 +8,67 @@
 		position: relative
 	+respond-min($break-desktop-min)
 		margin-top: em(16px)
+	&__label
+		font-family: TabletGothic
+		font-size: $little
+		font-weight: 200
+		letter-spacing: $standard-letter-spacing
+		line-height: 1
+		margin: 0 0 1em 0
+		text-transform: uppercase
+		+respond-min($break-phablet-min)
+			background: $color-page-bg
+			left: 0
+			padding-right: em(5px, $little--px)
+			position: absolute
+			top: em(-6px, $little--px)
+			+inline-block
+		+respond-min($break-desktop-min)
+			font-size: em(16px)
+			padding-right: em(5px)
+			top: em(-8px, 16px)
+	&__media
+		@extend %teaser-media
+		@extend %teaser-small-media
+		display: block
+	&__media-item
+		@extend %teaser-media-item
+	&__heading
+		@extend %teaser-heading
+		margin: 0 0 $thin 0
+	&__kicker
+		@extend %teaser-kicker
+		font-size: $font-s--rem
+		font-weight: 200
+	&__combined-link
+		@extend %teaser-combined-link
+	&__title
+		display: block
+		font-size: $font-l--rem
+		font-weight: bold
+		line-height: 1.15
+		+respond-min($break-desktop-min)
+			font-size: $font-zon-xl--rem
+	&__text
+		@extend %teaser-text
+		color: $grey--mid
+	&__byline
+		@extend %teaser-byline
+		color: $grey
+		font-family: TabletGothic
+		font-style: normal
+		margin-bottom: 0
+	&__metadata
+		@extend %teaser-metadata
+		color: $grey
+		font-size: $font-s--rem
+		font-weight: 200
+	&__commentcount
+		@extend %teaser-commentcount
+	&--hasmedia
+		@extend %teaser-small-media-placement
 
 // prevent next teaser from having border
-
 .teaser-series + [data-block-type='teaser'] // new
 	+respond-min($break-phablet-min)
 		border-top: none
@@ -19,76 +76,3 @@
 .teaser-series + .teaser, // deprecated
 	+respond-min($break-phablet-min)
 		border-top: none
-
-.teaser-series.teaser-series--hasmedia
-	@extend %teaser-small-media-placement
-
-.teaser-series__label
-	font-family: TabletGothic
-	font-size: $little
-	font-weight: 200
-	letter-spacing: $standard-letter-spacing
-	line-height: 1
-	margin: 0 0 1em 0
-	text-transform: uppercase
-	+respond-min($break-phablet-min)
-		background: $color-page-bg
-		left: 0
-		padding-right: em(5px, $little--px)
-		position: absolute
-		top: em(-6px, $little--px)
-		+inline-block
-	+respond-min($break-desktop-min)
-		font-size: em(16px)
-		padding-right: em(5px)
-		top: em(-8px, 16px)
-
-.teaser-series__media
-	@extend %teaser-media
-	@extend %teaser-small-media
-	display: block
-
-.teaser-series__media-item
-	@extend %teaser-media-item
-
-.teaser-series__heading
-	@extend %teaser-heading
-	margin: 0 0 $thin 0
-
-.teaser-series__kicker
-	@extend %teaser-kicker
-	font-size: $font-s--rem
-	font-weight: 200
-
-.teaser-series__combined-link
-	@extend %teaser-combined-link
-
-.teaser-series__title
-	display: block
-	font-size: $font-l--rem
-	font-weight: bold
-	line-height: 1.15
-	+respond-min($break-desktop-min)
-		font-size: $font-zon-xl--rem
-
-.teaser-series__text
-	@extend %teaser-text
-	color: $grey--mid
-
-// as macro not BEMable as wished
-// @todo: change macro
-.teaser-series__byline
-	@extend %teaser-byline
-	color: $grey
-	font-family: TabletGothic
-	font-style: normal
-	margin-bottom: 0
-
-.teaser-series__metadata
-	@extend %teaser-metadata
-	color: $grey
-	font-size: $font-s--rem
-	font-weight: 200
-
-.teaser-series__commentcount
-	@extend %teaser-commentcount
