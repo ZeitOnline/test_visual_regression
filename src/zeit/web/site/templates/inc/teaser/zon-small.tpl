@@ -3,12 +3,12 @@
 {% block layout %}teaser-small{% endblock %}
 
 {% block teaser_modifier -%}
-    {% if get_teaser_image(block, teaser) %}teaser-small--hasmedia{% endif %}
+    {% if get_teaser_image(teaser_block, teaser) %}teaser-small--hasmedia{% endif %}
 {%- endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set teaser_block_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/"+
+    {% include "zeit.web.site:templates/inc/teaser_asset/" +
         teaser | auto_select_asset | block_type +
         "_zon-thumbnail.tpl" ignore missing with context %}
 {% endblock %}
