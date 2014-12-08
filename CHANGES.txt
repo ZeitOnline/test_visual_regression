@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-1261: add and style footer basic structure
 
 
 1.8.5 (2014-12-03)
