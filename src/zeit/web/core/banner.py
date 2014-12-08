@@ -102,16 +102,16 @@ def make_banner_list(banner_config):
 
 def make_banner_toggles(banner_config):
     if not banner_config:
-        return None
+        return
     try:
         banner_file = urllib2.urlopen(banner_config)
     except urllib2.URLError:
-        return None
+        return
     root = lxml.objectify.fromstring(banner_file.read())
     try:
         return root.toggles
     except AttributeError:
-        return None
+        return
 
 
 def make_iqd_mobile_ids(banner_config):
