@@ -1,36 +1,33 @@
 .buzz-box
-	padding: $petite 0
 	width: 100%
+	max-width: 300px
 	&__heading
+		padding: $fine--px 0
 		font-family: $font-tabletgothic
 		font-weight: bold
 		border-bottom: $hair--px solid $zon_light_grey
 		font-size: $font-s
 		letter-spacing: $hair
 		line-height: normal
-		margin-bottom: $small
-		padding-bottom: $small
 		text-align: center
 		text-transform: uppercase
 
 =buzz-teaser($layout)
 	@extend %teaser
 	margin: 0
-	padding: 0
+	padding: $fine--px 0
+	position: relative
 	border: none
 
 	+respond-min($break-phablet-min)
 		margin-left: $petite--px
-	&:not(:last-child)
-		margin-bottom: $small
 
 	&__title
 		@extend %teaser-title
-		font-size: $font-s
-		font-weight: normal
+		font-size: $font-m--px
+		font-weight: bold
 		line-height: $headline-line-height
-		+respond-min($break-phablet-min)
-			font-size: $font-m
+		color: $zon-charcoal
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -41,25 +38,30 @@
 
 	&__heading
 		@extend %teaser-heading
+		margin: 0 0 0 $compact
 		display: inline-block
-		width: 80%
-		margin-left: $little
 
 @each $flavor in comments, facebook, mostread
 	.buzz-#{$flavor}
 		+buzz-teaser(buzz-#{$flavor})
 
-.numeric
-	+tiemann
-	width: 10%
+.buzz-index
 	display: inline-block
-	vertical-align: top
-	font-size: $font-mxl--px
-	line-height: $font-mxl--px
 	margin: 0
+	position: relative
+	top: 0
+	left: 0
+	&__label
+		width: $small
+		font-size: $font-mxl--px
+		font-family: $font-tabletgothic
+		font-weight: bold
+		color: $grey--mid-dark
+		line-height: $font-mxl--px
 
-.annotated-icon
-	margin: $thin 0 0 0
+.buzz-line
+	display: inline-block
+	margin: $thin 0 0 $compact
 	&__icon
 		height: $small
 		width: $small
@@ -67,7 +69,7 @@
 		display: inline-block
 	&__label
 		font-family: $font-tabletgothic
-		font-weight: 200
 		font-size: $little
-		vertical-align: text-bottom
+		font-weight: 200
 		margin-left: $thin
+		vertical-align: text-bottom
