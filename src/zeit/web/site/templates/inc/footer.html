@@ -1,24 +1,24 @@
 {% import 'zeit.web.site:templates/macros/footer_macro.tpl' as footer %}
 
-<div class="footer__logo">
-    <div class="footer__logo__image">
+<div class="footer-logo">
+    <div class="footer-logo__image">
         {{ footer.footer_logo() }}
     </div>
 </div>
-<div class="footer__publisher">
-    <div class="footer__publisher__inner">
+<div class="footer-publisher">
+    <div class="footer-publisher__inner">
         {{ footer.footer_publisher() }}
     </div>
-    <div class="footer__publisher__more">
+    <div class="footer-publisher__more">
         <a href="#">Mehr</a>
     </div>
 </div>
-<div class="footer__links">
-    <div class="footer__links__inner">
+<div class="footer-links">
+    <div class="footer-links__inner">
         {{ footer.footer_links() }}
     </div>
-    <div class="footer__links__button">
-        {{ footer.footer_button() }}
+    <div class="footer-links__button">
+        {{ footer.footer_button(view) }}
     </div>
 </div>
 

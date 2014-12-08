@@ -28,5 +28,5 @@ require([
     $( '.logo_bar__menue' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
-    $( '.footer__links__button' ).scrollUp();
+    $( '.footer-links__button' ).scrollUp();
 });

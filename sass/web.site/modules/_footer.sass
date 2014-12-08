@@ -1,17 +1,19 @@
 //sizes
-$footer_logo_width: 300px
-$footer_logo_width_small: 280px
-$footer_publisher_min_height: 30px
-$footer_links_min_height: 20px
-$footer_button_height: 30px
-$footer_button_width: 150px
+$footer_logo_width: em(300px)
+$footer_logo_width_small: em(280px)
+$footer_publisher_min_height: em(30px)
+$footer_links_min_height: em(20px)
+$footer_button_height: em(30px)
+$footer_button_width: em(150px)
+$footer_button_icon_height: em(14px)
+$footer_button_icon_width: em(10px)
 
 %footer_icons
     display: block
     background-size: contain
     background-position: 50% 50%
 
-%footer__publisher_bar
+%footer-publisher_bar
     min-height: $footer_publisher_min_height
     padding: $petite 0 $petite 0
     color: $zon_dark_grey
@@ -26,7 +28,7 @@ $footer_button_width: 150px
     margin-top: $wide
     font-family: $font-tabletgothic
 
-.footer__logo__image
+.footer-logo__image
     display: inline-block
     margin-bottom: $petite
     a
@@ -36,14 +38,14 @@ $footer_button_width: 150px
         +respond-min($break-tablet-min)
             width: $footer_logo_width
 
-.footer__publisher
+.footer-publisher
     background-color: $zon_lighter_grey
 
-.footer__publisher__inner
-    @extend %footer__publisher_bar
+.footer-publisher__inner
+    @extend %footer-publisher_bar
 
-.footer__publisher__more
-    @extend %footer__publisher_bar
+.footer-publisher__more
+    @extend %footer-publisher_bar
     border-top: 1px solid $zon_light_grey
     +respond-min($break-tablet-min)
         display: none
@@ -54,11 +56,11 @@ $footer_button_width: 150px
             &:after
                 +rotate(180deg)
 
-.footer__links
+.footer-links
     background-color: $zon-charcoal
     padding-bottom: $petite
 
-.footer__links__inner
+.footer-links__inner
     display: none
     min-height: $footer_links_min_height
     color: $zon_grey
@@ -71,7 +73,7 @@ $footer_button_width: 150px
     +respond-min($break-tablet-min)
         display: block
 
-.footer__links__button
+.footer-links__button
     display: inline-block
     margin-top: 25px
     border: $dblhair solid $zon_grey
@@ -84,4 +86,13 @@ $footer_button_width: 150px
     text-transform: uppercase
     letter-spacing: 1px
     cursor: pointer
+    a
+        +link-colors($zon_light_grey,$zon_light_grey)
+        display: inline-block
+    .icon-top-arrow
+        @extend %footer_icons
+        height: $footer_button_icon_height
+        width: $footer_button_icon_width
+        display: inline-block
+        margin-right: $thin
 

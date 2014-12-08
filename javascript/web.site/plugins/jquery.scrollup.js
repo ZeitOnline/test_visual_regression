@@ -32,12 +32,13 @@
 
         //scroll to top of page
         function scrollToTop(){
-            $( 'html, body' ).animate( { scrollTop: '0px' }, 200 );
+            $( 'html, body' ).animate( { scrollTop: '0px' }, 100 );
         }
 
         //run through search element and return object
         return this.each( function() {
-            $( this ).on( 'click', function() {
+            $( this ).on( 'click', function(e) {
+                e.preventDefault();
                 scrollToTop();
             } );
         });

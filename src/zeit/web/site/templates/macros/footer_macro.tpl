@@ -12,6 +12,6 @@
     Link stuff goes here
 {%- endmacro %}
 
-{% macro footer_button() -%}
-    Nach oben
+{% macro footer_button(view) -%}
+    <div class="icon-top-arrow"></div><a href="?">Nach oben</a>
 {%- endmacro %}
