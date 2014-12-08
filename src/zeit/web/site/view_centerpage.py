@@ -82,6 +82,18 @@ class Centerpage(
         return area
 
     @zeit.web.reify
+    def area_buzz_comments(self):
+        """Return a pseudo teaser block with the top 3 most commented articles.
+        :rtype: zeit.web.core.utils.nslist
+        """
+
+        area = zeit.web.core.reach.fetch('comments', self.ressort, limit=3)
+        area.layout = zeit.web.core.utils.nsunicode('buzz-comments')
+        area.layout.id = zeit.web.core.utils.nsunicode('comments')
+        area.header = zeit.web.core.utils.nsunicode('Meistkommentiert')
+        return area
+
+    @zeit.web.reify
     def area_buzz_facebook(self):
         """Return a pseudo teaser block with the top 3 most shared articles.
         :rtype: zeit.web.core.utils.nslist

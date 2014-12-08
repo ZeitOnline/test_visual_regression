@@ -4,11 +4,23 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-1248: Small teaser functional without image
+
+- ZON-1247: Use BEM Sass styling everywhere
+
+- ZON-1246: All main content teaser use refactored teaser-templates
+
+- ZON-1261: add and style footer basic structure
 
 
 1.8.5 (2014-12-03)
 ------------------
+
+- ZON-1250: add last published semantic date to hp
+
+- ZON-1109: show tile7 before buzzbox when fullwidth teaser
+
+- WEB-361: add last_published_semantic to JSON Endpoint
 
 - ZON-1249: Link ZMO Button in ZON navi
 
@@ -22,7 +34,7 @@ Change log for zeit.web
 
 - ZON-1109: Show tile7 before buzzbox when fullwidth teaser
 
-- WEB-361: Add last_published_semantic to JSON Endpoint 
+- WEB-361: Add last_published_semantic to JSON Endpoint
 
 
 1.8.3 (2014-11-27)

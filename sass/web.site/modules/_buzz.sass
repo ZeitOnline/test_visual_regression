@@ -32,8 +32,7 @@
 	.teaser__kicker
 		font-size: $font-xs
 
-.teaser.teaser--buzz-facebook,
-.teaser.teaser--buzz-mostread
+.teaser.teaser--buzz
 	margin-left: 0
 	+respond-min($break-phablet-min)
 		margin-left: $petite--px
@@ -41,6 +40,7 @@
 .teaser.teaser--buzz:not(:last-child)
 	margin-bottom: $small
 
+.teaser__media.numeric.numeric--buzz-comments,
 .teaser__media.numeric.numeric--buzz-mostread
 	+tiemann
 	width: 10%
@@ -71,5 +71,6 @@
 	width: 80%
 	margin: 0
 
+.teaser__heading.teaser__heading--buzz-comments,
 .teaser__heading.teaser__heading--buzz-mostread
 	margin-left: $little
