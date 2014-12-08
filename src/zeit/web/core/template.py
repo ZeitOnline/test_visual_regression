@@ -189,10 +189,10 @@ def hide_none(string):
         return string
 
 
-_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
-          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          "zon-fullwidth": ['leader-fullwidth'],
-          "hide": ['archive-print-volume', 'archive-print-year',
+_t_map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
+          'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          'zon-fullwidth': ['leader-fullwidth'],
+          'hide': ['archive-print-volume', 'archive-print-year',
                    'two-side-by-side', 'ressort', 'leader-upright',
                    'buttons-fullwidth', 'parquet-printteaser',
                    'parquet-verlag']}
@@ -354,6 +354,16 @@ def closest_substitute_image(image_group,
     return image_group.get(candidates[:idx + 1][-1][0])
 
 
+@zeit.web.register_filter
+def pluralize(num, *forms):
+    return forms[min(len(forms) - 1, num - 1):][0] % num
+
+
+@zeit.web.register_filter
+def with_mods(elem, *mods):
+    return ' '.join([elem] + ['%s--%s' % (elem, m) for m in mods])
+
+
 @zeit.web.register_global
 def get_teaser_commentcount(uniqueId):
     index = '/' + urlparse.urlparse(uniqueId).path[1:]
@@ -393,6 +403,7 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
 def set_image_id(asset_id, image_base_name, image_pattern, ext):
     return '%s/%s-%s.%s' % (
         asset_id, image_base_name, image_pattern, ext)
+
 
 def _existing_image(asset_id, image_base_name, image_patterns, ext):
     for image_pattern in image_patterns:
@@ -474,6 +485,7 @@ def get_image_metadata(image):
         return image_metadata
     except TypeError:
         return
+
 
 @zeit.web.register_global
 def get_repository_image(image):
