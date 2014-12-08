@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import lxml
 import pytest
 import mock
@@ -9,15 +10,16 @@ import selenium.webdriver
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation.html')
-    html_str = tpl.render(view=mock.MagicMock())
+            'zeit.web.site:templates/inc/navigation.html')
+    mock_view = mock.MagicMock()
+    mock_view.displayed_last_published_semantic = datetime.datetime.now()
+    html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.main_nav')) == 1, (
         'just one .main_nav should be present')
 
-    assert len(html('.main_nav > div')) == 9, (
-        'nine divs within .main_nav')
+    assert len(html('.main_nav > div')) == 9, ('nine divs within .main_nav')
 
     assert '</div><div class="main_nav__date"' in html_str, (
         'don\'t break line here, due to inline-block state')
@@ -227,18 +229,9 @@ def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     assert html('ul li a')[0].text == 'Label 1'
 
 
-def test_macro_main_nav_date_should_return_what_was_given(jinja2_env):
-    # ToDo: Maybe fill this function with more sense?
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    html_str = tpl.module.main_nav_date('Mein Datum')
-
-    assert html_str == 'Mein Datum'
-
-
 # integration testing
 
-def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
+def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -250,7 +243,7 @@ def test_article_should_have_valid_main_nav_structure(testserver, testbrowser):
         'Data dropdown not present')
 
 
-def test_article_should_have_valid_services_structure(testserver, testbrowser):
+def test_cp_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -266,8 +259,7 @@ def test_article_should_have_valid_services_structure(testserver, testbrowser):
         'Archiv link is not present')
 
 
-def test_article_should_have_valid_classifieds_structure(testserver,
-                                                         testbrowser):
+def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
@@ -280,7 +272,7 @@ def test_article_should_have_valid_classifieds_structure(testserver,
         'Link mehr is not present')
 
 
-def test_article_has_valid_community_structure(testserver, testbrowser):
+def test_cp_has_valid_community_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -294,7 +286,7 @@ def test_article_has_valid_community_structure(testserver, testbrowser):
         'Link to login has invalid label')
 
 
-def test_article_has_valid_logo_structure(testserver, testbrowser):
+def test_cp_has_valid_logo_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -305,7 +297,7 @@ def test_article_has_valid_logo_structure(testserver, testbrowser):
         'Element a.icon-zon-logo-desktop is invalid')
 
 
-def test_article_has_valid_burger_structure(testserver, testbrowser):
+def test_cp_has_valid_burger_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -319,7 +311,7 @@ def test_article_has_valid_burger_structure(testserver, testbrowser):
         'Element .main_nav__icon--hover is invalid')
 
 
-def test_article_has_valid_search_structure(testserver, testbrowser):
+def test_cp_has_valid_search_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -353,7 +345,7 @@ def test_article_has_valid_search_structure(testserver, testbrowser):
         'Element input.search__input is invalid')
 
 
-def test_article_has_valid_tag_structure(testserver, testbrowser):
+def test_cp_has_valid_tag_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
@@ -362,13 +354,21 @@ def test_article_has_valid_tag_structure(testserver, testbrowser):
     assert html('ul'), 'Missing ul'
 
 
-def test_article_has_valid_nav_date_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    date = '3. September 2014 10:50 Uhr'
+def test_cp_has_valid_nav_date_structure(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    date = '3. Dezember 2014, 12:50 Uhr'
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     assert html('div.main_nav__date')[0].text == date, (
         'Date is invalid')
+
+
+def test_nav_date_isnt_shown_when_not_exists(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    assert html('div.main_nav__date')[0].text is None, (
+        'Date shouldnt be shown')
 
 # selenium test
 
@@ -407,37 +407,37 @@ def test_zon_main_nav_has_correct_structure(
         'main_nav__classifieds')[0]
 
     # navigation is visible in all sizes
-    assert(main_nav.is_displayed())
+    assert main_nav.is_displayed()
     # logo is visible in all sizes
-    assert(logo_bar__image.is_displayed())
+    assert logo_bar__image.is_displayed()
 
     if small_screen:
         # burger menue is visible
-        assert(logo_bar__menue.is_displayed())
+        assert logo_bar__menue.is_displayed()
         # tags are hidden
-        assert(main_nav__tags.is_displayed() is False)
+        assert main_nav__tags.is_displayed() is False
         # date bar is hidden
-        assert(main_nav__date.is_displayed() is False)
+        assert main_nav__date.is_displayed() is False
         # last 3 services aren't shown
         serv_li = main_nav__services.find_elements_by_tag_name('li')
-        assert(serv_li[3].is_displayed() is False)
-        assert(serv_li[4].is_displayed() is False)
-        assert(serv_li[5].is_displayed() is False)
+        assert serv_li[3].is_displayed() is False
+        assert serv_li[4].is_displayed() is False
+        assert serv_li[5].is_displayed() is False
     else:
         # search button is visible in desktop mode
-        assert(search__button.is_displayed())
+        assert search__button.is_displayed()
         # community link is visible in desktop mode
-        assert(main_nav__community.is_displayed())
+        assert main_nav__community.is_displayed()
         # ressort bar is visible in desktop mode
-        assert(main_nav__ressorts.is_displayed())
+        assert main_nav__ressorts.is_displayed()
         # service bar is visible in desktop mode
-        assert(main_nav__services.is_displayed())
+        assert main_nav__services.is_displayed()
         # classifieds bar is visible in desktop mode
-        assert(main_nav__classifieds.is_displayed())
+        assert main_nav__classifieds.is_displayed()
 
     if screen_width == 768:
         # test search input is hidden in tablet mode
-        assert(search__input.is_displayed() is False)
+        assert search__input.is_displayed() is False
 
 
 def test_nav_search_is_working_as_expected(
@@ -457,16 +457,16 @@ def test_nav_search_is_working_as_expected(
     if screen_width == 768:
         # test search input is shown after button click
         search__button.click()
-        assert(search__input.is_displayed()), 'Input is not displayed'
+        assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is not hidden after click in input
         search__input.click()
-        assert(search__input.is_displayed()), 'Input is not displayed'
+        assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is hidden after button click, if its empty
         search__button.click()
-        assert(search__input.is_displayed() is False), 'Input is displayed'
+        assert search__input.is_displayed() is False, 'Input is displayed'
         # test search input is hidden after click somewhere else
         document.click()
-        assert(search__input.is_displayed() is False), 'Input is displayed'
+        assert search__input.is_displayed() is False, 'Input is displayed'
         search__button.click()
 
     # open search for mobile
@@ -504,41 +504,41 @@ def test_nav_burger_menue_is_working_as_expected(
     main_nav__search = driver.find_element_by_class_name('main_nav__search')
 
     # test main elements are displayed
-    assert(logo_bar__menue.is_displayed()), 'Logo bar is not displayed'
-    assert(menue__button.is_displayed()), 'Menue button is not displayed'
-    assert(icon_burger.is_displayed()), 'Burger Icon is not displayed'
+    assert logo_bar__menue.is_displayed(), 'Logo bar is not displayed'
+    assert menue__button.is_displayed(), 'Menue button is not displayed'
+    assert icon_burger.is_displayed(), 'Burger Icon is not displayed'
 
     menue__button.click()
 
     # test element states after menue button is clicked
-    assert(main_nav__community.is_displayed()), (
+    assert main_nav__community.is_displayed(), (
         'Community bar is not displayed')
-    assert(main_nav__ressorts.is_displayed()), (
+    assert main_nav__ressorts.is_displayed(), (
         'Ressort bar is not displayed')
-    assert(main_nav__services.is_displayed()), (
+    assert main_nav__services.is_displayed(), (
         'Services bar is not displayed')
-    assert(main_nav__classifieds.is_displayed()), (
+    assert main_nav__classifieds.is_displayed(), (
         'Classifieds bar is not displayed')
-    assert(main_nav__search.is_displayed()), (
+    assert main_nav__search.is_displayed(), (
         'Search bar is not displayed')
 
     # test close button is displayed
     icon_close = logo_bar__menue.find_element_by_class_name(
         'icon-zon-logo-navigation_close-hover')
-    assert(icon_close.is_displayed()), 'Closing Icon is not displayed'
+    assert icon_close.is_displayed(), 'Closing Icon is not displayed'
 
     menue__button.click()
 
     # test element states after menue button is clicked again
-    assert(main_nav__community.is_displayed() is False), (
+    assert main_nav__community.is_displayed() is False, (
         'Community bar is displayed')
-    assert(main_nav__ressorts.is_displayed() is False), (
+    assert main_nav__ressorts.is_displayed() is False, (
         'Ressort bar is not displayed')
-    assert(main_nav__services.is_displayed() is False), (
+    assert main_nav__services.is_displayed() is False, (
         'Services bar is not displayed')
-    assert(main_nav__classifieds.is_displayed() is False), (
+    assert main_nav__classifieds.is_displayed() is False, (
         'Classifieds bar is not displayed')
-    assert(main_nav__search.is_displayed() is False), (
+    assert main_nav__search.is_displayed() is False, (
         'Search bar is not displayed')
 
 
@@ -563,7 +563,7 @@ def test_primary_nav_should_resize_to_fit(
     menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
     menu__button.click()
 
-    assert (more_dropdown.is_displayed() is False), (
+    assert more_dropdown.is_displayed() is False, (
         '[on mobile] more dropdown is not displayed')
     assert chosen_nav_item.is_displayed(), (
         '[on mobile] chosen nav item should be visible in open navigation')
@@ -571,7 +571,7 @@ def test_primary_nav_should_resize_to_fit(
     # tablet
     driver.set_window_size(768, 1024)
 
-    assert (chosen_nav_item.is_displayed() is False), (
+    assert chosen_nav_item.is_displayed() is False, (
         '[on tablet] chosen nav item should be hidden')
     actions.move_to_element(more_dropdown).perform()
     assert chosen_more_dropdown_item.is_displayed(), (
