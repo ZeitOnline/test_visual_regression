@@ -1,24 +1,29 @@
 
 .parquet
-	display: none
+	display: block
 	+respond-min($break-3)
-		display: block
 		margin: 0 (-$petite)
 
 .parquet-row
 	+box-shadow(inset 240px 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
 	border-top: 1px solid $zon_light_grey
 	font-family: $font-tabletgothic
+	padding: $compact $compact 0 $compact
 
 .parquet-meta
 	+inline-block
-	padding: $petite
+	// padding: $petite
 	vertical-align: top
-	width: 24.48%
+	width: rem(200px)
 	&__title
+		color: $black
+		+link
+			color: $black
+			text-decoration: none
 		font-size: rem(24px)
 		font-weight: bold
 		letter-spacing: 0.03em
+		line-height: 1
 	&__topic-links
 		list-style: none
 		padding: 0
@@ -33,13 +38,39 @@
 
 .parquet-teasers
 	+inline-block
+	margin: 0
 	width: 75.0%
 
-.teaser-parquet
+
+/*
+ * Teaser Styles
+ */
+
+$parquet-image-small-width: 174px
+
+.teaser-parquet-small
 	@extend %teaser
+	padding: 0
+	position: relative
+
+	// &__media
+	// 	@extend %teaser-small-media
+	// 	display: block // TODO: mobile vs. desktop
+	// &--smallmedia
+	// 	@extend %teaser-small-media-placement
+	&__media
+		+inline-block
+		background-color: orange
+		width: $parquet-image-small-width
+		margin: 0 $compact $compact 0
+	&__media-item
+		@extend %teaser-media-item
 
 	&__heading
+		+inline-block
+		vertical-align: top
 		@extend %teaser-heading
+		// background-color: green
 	&__combined-link
 		@extend %teaser-combined-link
 	&__kicker
@@ -48,5 +79,12 @@
 		@extend %teaser-title
 	&__text
 		@extend %teaser-text
+		// background-color: violet
 	&__byline
 		@extend %teaser-byline
+	&__container
+		+inline-block
+		margin: 0 0 $compact 0
+		// background-color: yellow
+		max-width: 65%
+		vertical-align: top
