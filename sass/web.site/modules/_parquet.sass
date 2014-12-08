@@ -15,6 +15,7 @@
 	// padding: $petite
 	vertical-align: top
 	width: rem(200px)
+
 	&__title
 		color: $black
 		+link
@@ -24,14 +25,18 @@
 		font-weight: bold
 		letter-spacing: 0.03em
 		line-height: 1
+
 	&__topic-links
 		list-style: none
 		padding: 0
+
 	&__topic-link,
+
 	&__more-link
 		+link-colors($zon_grey)
 		font-size: rem(14px)
 		letter-spacing: 0.03em
+
 	&__more-link
 		font-weight: bold
 		line-height: 1.334
@@ -63,6 +68,7 @@ $parquet-image-small-width: 174px
 		background-color: orange
 		width: $parquet-image-small-width
 		margin: 0 $compact $compact 0
+
 	&__media-item
 		@extend %teaser-media-item
 
@@ -71,17 +77,23 @@ $parquet-image-small-width: 174px
 		vertical-align: top
 		@extend %teaser-heading
 		// background-color: green
+
 	&__combined-link
 		@extend %teaser-combined-link
+
 	&__kicker
 		@extend %teaser-kicker
+
 	&__title
 		@extend %teaser-title
+
 	&__text
 		@extend %teaser-text
 		// background-color: violet
+
 	&__byline
 		@extend %teaser-byline
+
 	&__container
 		+inline-block
 		margin: 0 0 $compact 0
