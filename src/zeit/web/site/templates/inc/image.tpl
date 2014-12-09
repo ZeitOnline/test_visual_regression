@@ -1,4 +1,4 @@
-{% set image = get_teaser_image(block, teaser) %}
+{% set image = get_teaser_image(teaser_block, teaser) %}
 
 {% if image %}
 <figure class="{% block mediablock %}{% endblock %} scaled-image">

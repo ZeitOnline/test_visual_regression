@@ -189,10 +189,10 @@ def hide_none(string):
         return string
 
 
-_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
-          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          "zon-fullwidth": ['leader-fullwidth'],
-          "hide": ['archive-print-volume', 'archive-print-year',
+_t_map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
+          'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          'zon-fullwidth': ['leader-fullwidth'],
+          'hide': ['archive-print-volume', 'archive-print-year',
                    'two-side-by-side', 'ressort', 'leader-upright',
                    'buttons-fullwidth', 'parquet-printteaser',
                    'parquet-verlag']}
@@ -354,6 +354,16 @@ def closest_substitute_image(image_group,
 
     # Select the candidate that is preferably one size larger than the target.
     return image_group.get(candidates[:idx + 1][-1][0])
+
+
+@zeit.web.register_filter
+def pluralize(num, *forms):
+    return forms[min(len(forms) - 1, num - 1):][0] % num
+
+
+@zeit.web.register_filter
+def with_mods(elem, *mods):
+    return ' '.join([elem] + ['%s--%s' % (elem, m) for m in mods])
 
 
 @zeit.web.register_global

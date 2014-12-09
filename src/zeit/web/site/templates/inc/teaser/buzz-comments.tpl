@@ -1,14 +1,11 @@
-{# TODO: Resolve code duplication with buzz-facebook.tpl #}
+{%- extends "zeit.web.site:templates/inc/teaser/buzz.tpl" -%}
 
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
-
-{% block teaser_modifier %}teaser--buzz teaser--{{ layout }}{% endblock %}
-
-{% block teaser_heading_modifier %}teaser__heading--buzz teaser__heading--{{ layout }}{% endblock %}
-
-{% block teaser_media_position_before_title %}
-    {% include ["zeit.web.site:templates/inc/teaser_asset/numeric_" + layout + ".tpl",
-                "zeit.web.site:templates/inc/teaser_asset/numeric.tpl"] with context %}
+{% block teaser_media_position_after_title %}
+    {% with -%}
+        {% set class = 'buzz-line' %}
+        {% set label = teaser.score | pluralize('%s Kommentar', '%s Kommentare') %}
+        {% set modifier = layout %}
+        {% include ["zeit.web.site:templates/inc/teaser_asset/annotation_" + layout + ".tpl",
+                    "zeit.web.site:templates/inc/teaser_asset/annotation.tpl"] with context %}
+    {%- endwith %}
 {% endblock %}
-
-{% block teaser_container %}{% endblock %}

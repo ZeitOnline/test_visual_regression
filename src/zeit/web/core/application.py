@@ -6,6 +6,7 @@ import urlparse
 import pkg_resources
 
 import grokcore.component
+import jinja2.ext
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
@@ -188,6 +189,8 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
+        self.config.add_jinja2_extension(jinja2.ext.WithExtension)
+
         env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
 
