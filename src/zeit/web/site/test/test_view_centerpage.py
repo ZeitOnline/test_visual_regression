@@ -235,8 +235,7 @@ def test_image_should_be_on_position_b(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
     articles = browser.cssselect('#main .teaser-collection .teasers article')
 
-    assert articles[0][0][1].tag == (
-        'figure', 'An img should be on this position')
+    assert articles[0][0][1].tag == 'figure', 'This position should haz image'
 
 
 def test_image_should_be_on_position_a(testserver, testbrowser):
@@ -386,14 +385,11 @@ def test_series_teaser_should_have_mobile_layout(
 
 
 def test_small_teaser_without_image_has_no_padding_left(
-        selenium_driver, testserver, screen_size):
+        selenium_driver, testserver):
 
     driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.set_window_size(768, 600)
     driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
     teaser = driver.find_element_by_css_selector(
-        '*[data-unique-id*="/article-02"] .teaser-small__container')
-    location = teaser.location
-
-    if screen_size[0] > 768:
-        assert location.x is 20
+        '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
+    assert teaser.location.get('x') is 20
