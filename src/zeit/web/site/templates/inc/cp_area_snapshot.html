@@ -9,7 +9,7 @@
     {% include "zeit.web.site:templates/inc/teaser_asset/snapshot-image.tpl" ignore missing with context %}
     {% if image -%}
     <div class="snapshot-caption">
-        {{ image.title | default('') }} {{ cp.image_copyright(image.copyright, 'snapshot-caption') }}</span>
+        {{ image.title | trim | default('') }} {{ cp.image_copyright(image.copyright, 'snapshot-caption') }}</span>
     </div>
     {%- endif %}
 </div>

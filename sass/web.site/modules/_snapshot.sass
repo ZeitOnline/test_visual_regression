@@ -1,18 +1,52 @@
 .snapshot
+	margin-top: $twice
+	position: relative
 	&__title
+		color: $grey--mid-dark
 		font-family: $font-tabletgothic
-		font-size: $font-l--rem
+		font-size: remify(21px)
 		font-weight: 700
-		margin-bottom: $fine
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1
+		margin-bottom: remify(10px)
 	&__media
-		margin: 0 (-$petite)
+		margin: 0 (-$petite) remify(10px) (-$petite)
 	&__media-item
 		width: 100%
 
 .snapshot-readmore
-	display: none
+	color: $grey--mid
+	display: block
+	font-family: $font-tabletgothic
+	font-size: remify(14px)
+	font-weight: 700
+	letter-spacing: $zon-letter-spacing-s
+	position: absolute
+	right: 0
+	top: 0
+	+link
+		color: $grey--mid
+		text-decoration: none
+	+on-interaction
+		color: $grey
+	&:after
+		content: "❯"
+		font-size: 1.4em
+		line-height: 1
 	&__item
+		display: none
 
 .snapshot-caption
+	color: $grey--mid-dark
+	font-family: $font-tabletgothic
+	font-size: remify(16px)
+	line-height: 1.35em
 	&__link
+		+link
+			color: $zon_mid_grey
+			text-decoration: none
+		+on-interaction
+			color: inherit
+			text-decoration: underline
 	&__item
+		color: $zon_mid_grey
