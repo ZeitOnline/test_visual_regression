@@ -57,14 +57,15 @@ $rem-to-px-base: 16 !default
  * the conversion base for px to rem conversions can be configuried
  * via $rem-to-px-base and defaults to 16 (as in most browsers)
  *
- * based on work of David Walsh: http://davidwalsh.name/rem-px-browser-function-sass
+ * based on work by David Walsh: http://davidwalsh.name/rem-px-browser-function-sass
  *
  * @param  {String} $values One or more px values
  * @return {String} values in rem or px, depending on the configuration
  *
  * @example
  * margin: remify(32px 0 24px 0)
- * returns: margin: 32px 0 24px 0
+ * returns: margin: 2rem 0 1.5rem 0
+ * and for IE: margin: 32px 0 24px 0
  */
 @function remify($values)
 
