@@ -20,7 +20,7 @@ def test_macro_adplace_should_produce_markup(jinja2_env):
               'adj/zeitonline/zeitmz/centerpage;dcopt=ist;tile=1;\' + n_pbt '
               '+ \';sz=728x90;kw=iqadtile1,zeitonline,zeitmz,\' + iqd_TestKW '
               '+ window.diuqilon + \';ord=\' + IQD_varPack.ord + \'?" type='
-              '"text/javascript"><\/script>\');')
+              '"text/javascript"><\\/script>\');')
     view = mock.Mock()
     view.adwords = ['zeitonline', 'zeitmz']
     view.banner_channel = 'zeitmz/centerpage'

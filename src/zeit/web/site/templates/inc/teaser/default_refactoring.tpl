@@ -4,19 +4,19 @@
 
 {% block teaser_media_position_before_teaser %}{% endblock %}
 
-<article class="{% block layout %}{{ layout }}{% endblock %} {% block teaser_modifier %}{% endblock %}" data-block-type="{{ block.type }}" data-unique-id="{{ teaser.uniqueId }}">
+<article class="{% block layout %}{{ layout }}{% endblock %} {% block teaser_modifier %}{% endblock %}"{% if teaser_block %} data-block-type="{{ teaser_block.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}">
 
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
-            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | translate_url }}">
+            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
                 {% block teaser_kicker %}
-                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle }}</span>
                 {% endblock %}
                 {% block teaser_title %}
-                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
+                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</span>
                 {% endblock %}
             </a>
             {% endblock %}
