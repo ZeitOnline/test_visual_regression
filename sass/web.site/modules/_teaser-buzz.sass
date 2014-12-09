@@ -1,33 +1,35 @@
 .buzz-box
 	width: 100%
-	max-width: 300px
+	margin: 0 $hefty 0 $hefty
+
+	+respond-min($break-tablet-min)
+		width: initial
+		margin: 0
+
 	&__heading
-		padding: $fine--px 0
-		font-family: $font-tabletgothic
-		font-weight: bold
 		border-bottom: $hair--px solid $zon_light_grey
+		font-family: $font-tabletgothic
 		font-size: $font-s
+		font-weight: bold
 		letter-spacing: $hair
 		line-height: normal
-		text-align: center
+		margin: 0 0 $fine 0
+		padding: $fine
 		text-transform: uppercase
 
 =buzz-teaser($layout)
 	@extend %teaser
-	margin: 0
-	padding: $fine--px 0
-	position: relative
 	border: none
-
-	+respond-min($break-phablet-min)
-		margin-left: $petite--px
+	margin: 0
+	padding: $fine 0 $fine $hefty
+	position: relative
 
 	&__title
 		@extend %teaser-title
-		font-size: $font-m--px
+		color: $zon-charcoal
+		font-size: $font-m
 		font-weight: bold
 		line-height: $headline-line-height
-		color: $zon-charcoal
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -38,38 +40,38 @@
 
 	&__heading
 		@extend %teaser-heading
-		margin: 0 0 0 $compact
-		display: inline-block
+		margin: 0
 
 @each $flavor in comments, facebook, mostread
 	.buzz-#{$flavor}
 		+buzz-teaser(buzz-#{$flavor})
 
 .buzz-index
-	display: inline-block
+	left: $fine
 	margin: 0
-	position: relative
-	top: 0
-	left: 0
+	position: absolute
+	vertical-align: text-bottom
+
 	&__label
-		width: $small
-		font-size: $font-mxl--px
+		color: $zon-charcoal
 		font-family: $font-tabletgothic
+		font-size: $font-mxl
 		font-weight: bold
-		color: $grey--mid-dark
-		line-height: $font-mxl--px
+		line-height: $font-mxl
+		width: $small
 
 .buzz-line
-	display: inline-block
-	margin: $thin 0 0 $compact
+	margin: $thin 0 0 0
+
 	&__icon
-		height: $small
-		width: $small
 		background-size: contain
 		display: inline-block
+		height: $small
+		width: $small
 	&__label
 		font-family: $font-tabletgothic
 		font-size: $little
 		font-weight: 200
+		letter-spacing: $zon-letter-spacing-s
 		margin-left: $thin
 		vertical-align: text-bottom
