@@ -2,6 +2,7 @@
 import lxml
 import pytest
 import re
+import mock
 
 import selenium.webdriver
 
@@ -9,7 +10,7 @@ import selenium.webdriver
 def test_footer_should_have_basic_structure(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/footer.html')
-    html_str = tpl.render()
+    html_str = tpl.render(view=mock.MagicMock())
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.footer-logo')) == 1, (
@@ -23,9 +24,6 @@ def test_footer_should_have_basic_structure(jinja2_env):
 
     assert len(html('.footer-publisher')) == 1, (
         'just one .footer-publisher')
-
-    assert len(html('.footer-publisher__inner')) == 1, (
-        'just one .footer-publisher__inner')
 
     assert len(html('.footer-publisher__more')) == 1, (
         'just one .footer-publisher__more')
@@ -108,3 +106,39 @@ def test_footer_elments_are_displayed_or_hidden(
     assert(more_link.is_displayed()) is False, (
         'More link isnt displayed')
     assert(inner_link.is_displayed())
+
+
+def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+
+    footer_legal = driver.find_element_by_css_selector(
+        '.footer-publisher__list--islegal')
+
+    footer_angebote = driver.find_element_by_css_selector(
+        '.footer-publisher__list--isangebote')
+
+    footer_verlag = driver.find_element_by_css_selector(
+        '.footer-publisher__list--isverlag')
+
+    assert(footer_legal.is_displayed()), (
+        'Legal Links in Footer arent displayed')
+
+    assert(footer_angebote.is_displayed()), (
+        'Angebote Links in Footer arent displayed')
+
+    assert(footer_verlag.is_displayed()), (
+        'Verlag Links in Footer arent displayed')
+
+    #mobile
+    driver.set_window_size(320, 480)
+
+    assert(footer_legal.is_displayed()), (
+        'Legal Links in Footer arent displayed')
+
+    assert(footer_angebote.is_displayed() is False), (
+        'Angebote Links in Footer are displayed')
+
+    assert(footer_verlag.is_displayed() is False), (
+        'Verlag Links in Footer are displayed')

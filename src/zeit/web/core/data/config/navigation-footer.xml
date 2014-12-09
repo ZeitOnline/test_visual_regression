@@ -4,10 +4,10 @@
     <link id="legal"></link>
     <sub_sections>
       <sub_section>
-        <link id="impressum" href="http://inserieren.zeit.de/zeitads/index.jsf">Impressum</link>
+        <link id="impressum" href="http://www.zeit.de/impressum/index">Impressum</link>
       </sub_section>
       <sub_section>
-        <link id="datenschutz" href="http://www.zeit-verlagsgruppe.de/anzeigen/">Datenschutz</link>
+        <link id="datenschutz" href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</link>
       </sub_section>
     </sub_sections>
   </section>
@@ -27,7 +27,7 @@
         <link id="zeitreisen" href="http://zeitreisen.zeit.de/">ZEIT Reisen</link>
       </sub_section>
       <sub_section>
-        <link id="zeitfuerdieschule" href="http://xml.zeit.de/angebote/schule/index">ZEIT für die Schule</link>
+        <link id="zeitfuerdieschule" href="http://www.zeit.de/angebote/schule/index">ZEIT für die Schule</link>
       </sub_section>
       <sub_section>
         <link id="zeitveranstaltungen" href="http://www.zeitverlag.de/veranstaltungen">ZEIT Veranstaltungen</link>
@@ -38,7 +38,7 @@
       <link id="verlag">Verlag:</link>
       <sub_sections>
         <sub_section>
-          <link id="inserieren" href="http://inserieren.zeit.de/zeitads/index.jsf">Inserieren</link>
+          <link id="inserieren" href="http://inserieren.zeit.de/zeitads/">Inserieren</link>
         </sub_section>
         <sub_section>
           <link id="mediadaten" href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</link>
@@ -50,7 +50,7 @@
           <link id="unternehmen" href="http://www.zeit-verlag.de/">Unternehmen</link>
         </sub_section>
         <sub_section>
-          <link id="rechteundlizenzen" href="http://www.zeitverlag.de/presse/rechte-und-lizenzen">Rechte &amp; Lizenzen</link>
+          <link id="rechteundlizenzen" href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</link>
         </sub_section>
       </sub_sections>
   </section>
