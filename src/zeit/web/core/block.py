@@ -277,20 +277,23 @@ class NewsletterTeaser(object):
             self.more = 'weiterlesen'
 
     @property
-    def image(self):
+    def imagegroup(self):
         if zeit.content.video.interfaces.IVideoContent.providedBy(
                 self.context.reference):
             return self.context.reference.thumbnail
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
-        group = images.image if images is not None else None
-        if group is None:
-            return
+        return images.image if images is not None else None
+
+    @property
+    def image(self):
         # XXX An actual API for selecting a size would be nice.
-        for name in group:
+        if self.imagegroup is None:
+            return
+        for name in self.imagegroup:
             basename, ext = os.path.splitext(name)
             if basename.endswith('148x84'):
-                image = group[name]
+                image = self.imagegroup[name]
                 return image.uniqueId.replace(
                     'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 
