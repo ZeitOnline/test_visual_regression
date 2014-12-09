@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 import lxml
-import pytest
 import re
-
-import selenium.webdriver
 
 
 def test_footer_should_have_basic_structure(jinja2_env):
@@ -53,7 +50,7 @@ def test_footer_logo_macro_links_to_hp(jinja2_env):
         'No link to zeit.de')
 
 
-#integration tests
+# integration tests
 
 def test_footer_is_displayed(selenium_driver, testserver):
 
@@ -79,8 +76,7 @@ def test_footer_button_links_to_same_site(selenium_driver, testserver):
 
     assert re.search(
         'http://.*/zeit-online/index',
-        driver.current_url), (
-            'footer button link is incorrect')
+        driver.current_url), ('footer button link is incorrect')
 
 
 def test_footer_elments_are_displayed_or_hidden(
@@ -95,14 +91,14 @@ def test_footer_elments_are_displayed_or_hidden(
     inner_link = driver.find_element_by_class_name(
         'footer-links__inner')
 
-    #mobile
+    # mobile
     driver.set_window_size(320, 480)
 
     assert(more_link.is_displayed()), (
         'More link isnt displayed')
     assert(inner_link.is_displayed() is False)
 
-    #higher than tablet
+    # higher than tablet
     driver.set_window_size(768, 1024)
 
     assert(more_link.is_displayed()) is False, (
