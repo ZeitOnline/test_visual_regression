@@ -1,5 +1,7 @@
 {% macro footer_logo() -%}
-    Logo goes here
+    <a href="http://www.zeit.de/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
+        <!--start: title-->Nachrichten auf ZEIT ONLINE<!--end: title-->
+    </a>
 {%- endmacro %}
 
 {% macro footer_publisher() -%}
@@ -10,6 +12,6 @@
     Link stuff goes here
 {%- endmacro %}
 
-{% macro footer_button() -%}
-    Button goes here
+{% macro footer_button(view) -%}
+    <div class="icon-top-arrow"></div><a href="?">Nach oben</a>
 {%- endmacro %}

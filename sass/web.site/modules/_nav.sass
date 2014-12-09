@@ -440,9 +440,7 @@ $zon-search-square-size: em(35px)
 	position: relative
 	+respond-min($break-tablet-min)
 		& > a:after
-			display: inline-block // needed for "rotate on hover"
-			margin-left: $tiny
-			content: "\25BE" // Unicode for ▾
+			+drop_icon()
 		&:hover
 			& > a
 				+box-shadow(none)
