@@ -5,25 +5,29 @@
 {%- endmacro %}
 
 {% macro footer_publisher(view) -%}
-
     {% for i in view.navigation_footer -%}
         {% set section = view.navigation_footer[i] %}
-
-        <ul class="footer-publisher__list footer-publisher__list--is{{section.item_id}}">
-            <li class="footer-publisher__item footer-publisher__item--isbold">
-                {{ section.text | hide_none }}
-            </li>
-            {% if section.has_children() -%}
-                {% for j in section -%}
-                    {% set item = section[j] %}
-                    <li class="footer-publisher__item">
-                        <a class="footer-publisher__link" href="{{ item.href | translate_url }}">{{item.text}}</a>
-                    </li>
-                {%- endfor %}
-            {%- endif %}
-        </ul>
+        <div class="footer-publisher__inner footer-publisher__inner--is{{section.item_id}}">
+            <ul class="footer-publisher__list footer-publisher__list--is{{section.item_id}}">
+                <li class="footer-publisher__item footer-publisher__item--isbold">
+                    {{ section.text | hide_none }}
+                </li>
+                {% if section.has_children() -%}
+                    {% for j in section -%}
+                        {% set item = section[j] %}
+                        <li class="footer-publisher__item">
+                            <a class="footer-publisher__link" href="{{ item.href | translate_url }}">{{item.text}}</a>
+                        </li>
+                    {%- endfor %}
+                {%- endif %}
+            </ul>
+        </div>
+        {% if section.item_id == 'legal' %}
+            <div class="footer-publisher__more">
+                <a href="#">Mehr</a>
+            </div>
+        {% endif %}
     {%- endfor %}
-
 {%- endmacro %}
 
 {% macro footer_links() -%}

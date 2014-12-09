@@ -15,12 +15,38 @@ $footer_button_icon_width: em(10px)
 
 %footer-publisher_bar
     min-height: $footer_publisher_min_height
-    padding: $petite $petite $petite $petite
-    color: $zon_dark_grey
     font-size: $font-xs--rem
     line-height: $twice
+    color: $zon_grey
     a
-        +link-colors($zon_dark_grey,$black,$black,$black,$black)
+        +link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
+    text-align: left
+    +respond-min($break-tablet-min)
+        text-align: center
+        color: $zon_dark_grey
+        a
+            +link-colors($zon_dark_grey,$black,$black,$zon_dark_grey,$zon_dark_grey)
+
+%footer-publisher_light
+    background-color: $zon_lighter_grey
+    color: $zon_dark_grey
+    a
+        +link-colors($zon_dark_grey,$black,$black,$zon_dark_grey,$zon_dark_grey)
+
+%footer-publisher_dark
+    color: $zon_grey
+    a
+        +link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
+
+%footer_dot
+    &:after
+        content: '•'
+        font-weight: bold
+        color: $zon_grey
+        margin: 0 $tiny 0 $tiny
+    &:last-child:after
+        content: ''
+        display: inline-block
 
 .footer
     width: 100%
@@ -39,14 +65,47 @@ $footer_button_icon_width: em(10px)
             width: $footer_logo_width
 
 .footer-publisher
-    background-color: $zon_lighter_grey
+    background-color: $zon-charcoal
+    +respond-min($break-tablet-min)
+        background-color: $zon_lighter_grey
 
 .footer-publisher__inner
     @extend %footer-publisher_bar
+    width: 40%
+    display: inline-block
+    vertical-align: top
+    padding: $petite
+    +respond-min($break-phablet-min)
+        padding: $petite $hefty
+    +respond-min($break-tablet-min)
+        width: 100%
+        padding: 0px 0px 0px 0px
+
+.footer-publisher__inner--islegal
+    @extend %footer-publisher_light
+    text-align: center
+    width: 100%
+    font-weight: bold
+    display: block
+    padding: $fine 0 $fine 0
+    .footer-publisher__item
+        display: inline-block
+        @extend %footer_dot
+    .footer-publisher__item--isbold
+        &:after
+            content: ''
+            display: inline-block
+
+.footer-publisher__inner--isverlag
+    padding-bottom: $petite
 
 .footer-publisher__more
     @extend %footer-publisher_bar
+    @extend %footer-publisher_light
+    text-align: center
     border-top: 1px solid $zon_light_grey
+    border-bottom: 1px solid $zon_light_grey
+    padding: $fine 0 $fine 0
     +respond-min($break-tablet-min)
         display: none
     a
@@ -57,33 +116,24 @@ $footer_button_icon_width: em(10px)
                 +rotate(180deg)
 
 .footer-publisher__list
-    display: none
     list-style: none
     padding: 0px
     margin: 0px
-    +respond-min($break-tablet-min)
-        display: inline-block
 
 .footer-publisher__item
     display: inline-block
-    &:after
-        content: '•'
-        font-weight: bold
-        color: $zon_grey
-        margin: 0 $tiny 0 $tiny
-    &:last-child:after
-        content: ''
-        display: inline-block
+    @extend %footer_dot
+    +respond-max($break-tablet-min)
+        display: block
+        &:after
+            content: ''
+            display: inline-block
 
 .footer-publisher__item--isbold
     font-weight: bold
     &:after
         content: ''
         display: inline-block
-
-.footer-publisher__list--islegal
-    font-weight: bold
-    display: block
 
 .footer-links
     background-color: $zon-charcoal
@@ -92,13 +142,11 @@ $footer_button_icon_width: em(10px)
 .footer-links__inner
     display: none
     min-height: $footer_links_min_height
-    color: $zon_grey
     font-size: $font-xs--rem
     line-height: $petite
     letter-spacing: $hair
     padding-top: 20px
-    a
-        +link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_lighter_grey)
+    @extend %footer-publisher_dark
     +respond-min($break-tablet-min)
         display: block
 

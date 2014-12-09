@@ -117,6 +117,10 @@ class Base(object):
         return zeit.web.core.navigation.navigation_footer
 
     @zeit.web.reify
+    def navigation_footer_links(self):
+        return zeit.web.core.navigation.navigation_footer_links
+
+    @zeit.web.reify
     def title(self):
         return self.context.title
 
