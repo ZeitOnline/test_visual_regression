@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pyramid.response
 import pyramid.view
+import logging
 
 import zeit.content.cp.interfaces
 
@@ -9,6 +10,8 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.site.view
+
+log = logging.getLogger(__name__)
 
 
 def known_content(res):
@@ -104,6 +107,15 @@ class Centerpage(
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
         area.header = zeit.web.core.utils.nsunicode('Meistempfohlen')
         return area
+
+    @zeit.web.reify
+    def snapshot(self):
+        """Return the centerpage snapshot aka `Momentaufnahme`.
+        :rtype: zeit.content.image.image.RepositoryImage
+        """
+        snapshot = self.context.snapshot
+        return zeit.web.core.interfaces.ITeaserImage(snapshot) if snapshot is (
+            not None) else None
 
     @zeit.web.reify
     def topiclink_title(self):

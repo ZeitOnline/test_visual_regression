@@ -34,6 +34,12 @@ Change log for zeit.web
 
 - ZON-1249: Link ZMO Button in ZON navi
 
+- ZON-1244: Hook up snapshot image data source
+
+
+1.8.5 (2014-12-03)
+------------------
+
 - ZON-1243: Add real connector option, remove tbc
 
 
