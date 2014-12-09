@@ -9,11 +9,9 @@ define('modernizr', [], window.Modernizr);
 
 // required plain vanilla JS programs here
 require([
-    'web.core/images',
-    'web.site/nav'
+    'web.core/images'
 ], function( images, nav ) {
     images.init();
-    nav.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here
@@ -23,10 +21,12 @@ require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.adaptnav',
-    'web.site/plugins/jquery.up2dateSignals'
+    'web.site/plugins/jquery.up2dateSignals',
+    'web.site/plugins/jquery.scrollup'
 ], function() {
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
+    $( '.footer-links__button' ).scrollUp();
 });

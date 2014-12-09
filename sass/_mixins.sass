@@ -147,6 +147,11 @@
 =tiemann
 	font-family: "TiemannLight", $serif-fallbacks
 
+=drop_icon()
+	display: inline-block // needed for "rotate on hover"
+	margin-left: $tiny
+	content: "\25BE" // Unicode for ▾
+
 /* mixins for navigation/header */
 
 =add_nav_bar_style($height,$double: false)
