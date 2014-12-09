@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Repair tests now that we have a fallback image
 
+- BUG-64: Repair image rendering in newsletters
+
 - ZON-1248: Small teaser functional without image
 
 - ZON-1247: Use BEM Sass styling everywhere

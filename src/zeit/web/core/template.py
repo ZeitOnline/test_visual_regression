@@ -256,6 +256,8 @@ default_images_sizes = {
     'og-image': (600, 315),
     'twitter-image_small': (120, 120),  # summary
     'twitter-image-large': (560, 300),  # summary_large_image, photo
+    'newsletter-540x304': (540, 304),
+    'newsletter-220x124': (220, 124)
 }
 
 
@@ -541,12 +543,13 @@ class HTTPLoader(jinja2.loaders.BaseLoader):
             return (
                 'ERROR: load_template_from_dav_url not configured',
                 template, lambda: True)
+
         if self.url.startswith('egg://'):  # For tests
             parts = urlparse.urlparse(self.url)
             return (
                 pkg_resources.resource_string(
                     parts.netloc, parts.path[1:] + template).decode('utf-8'),
-                template, lambda: True)
+                template, lambda: False)
 
         url = self.url + template
         log.debug('Loading template %r from %s', template, url)
