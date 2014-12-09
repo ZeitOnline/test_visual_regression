@@ -1,7 +1,26 @@
 //sizes
-$footer_logo_min_height: 80px
-$footer_publisher_min_height: 30px
-$footer_links_min_height: 20px
+$footer_logo_width: em(300px)
+$footer_logo_width_small: em(280px)
+$footer_publisher_min_height: em(30px)
+$footer_links_min_height: em(20px)
+$footer_button_height: em(30px)
+$footer_button_width: em(150px)
+$footer_button_icon_height: em(14px)
+$footer_button_icon_width: em(10px)
+
+%footer_icons
+    display: block
+    background-size: contain
+    background-position: 50% 50%
+
+%footer-publisher_bar
+    min-height: $footer_publisher_min_height
+    padding: $petite 0 $petite 0
+    color: $zon_dark_grey
+    font-size: $font-xs--rem
+    line-height: $twice
+    a
+        +link-colors($zon_dark_grey, $black, $black, $black, $black)
 
 .footer
     width: 100%
@@ -9,29 +28,71 @@ $footer_links_min_height: 20px
     margin-top: $wide
     font-family: $font-tabletgothic
 
-.footer__logo
-    min-height: $footer_logo_min_height
+.footer-logo__image
+    display: inline-block
+    margin-bottom: $petite
+    a
+        +hide-text
+        @extend %footer_icons
+        width: $footer_logo_width_small
+        +respond-min($break-tablet-min)
+            width: $footer_logo_width
 
-.footer__publisher
-    background-color: $zon_light_grey
+.footer-publisher
+    background-color: $zon_lighter_grey
 
-.footer__publisher__inner
-    min-height: $footer_publisher_min_height
-    padding: $petite 0 $petite 0
-    color: $zon_dark_grey
-    font-size: $font-xs--rem
-    line-height: $twice
+.footer-publisher__inner
+    @extend %footer-publisher_bar
 
-.footer__links
-    background-color: $zon_dark_grey
+.footer-publisher__more
+    @extend %footer-publisher_bar
+    border-top: 1px solid $zon_light_grey
+    +respond-min($break-tablet-min)
+        display: none
+    a
+        &:after
+            +drop_icon()
+        &:hover
+            &:after
+                +rotate(180deg)
 
-.footer__links__inner
+.footer-links
+    background-color: $zon-charcoal
+    padding-bottom: $petite
+
+.footer-links__inner
+    display: none
     min-height: $footer_links_min_height
-    color: $white
-    font-size: $font-xxs--rem
+    color: $zon_grey
+    font-size: $font-xs--rem
     line-height: $petite
     letter-spacing: $hair
-    padding: $petite 0 $junior 0
+    padding-top: 20px
+    a
+        +link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_lighter_grey)
+    +respond-min($break-tablet-min)
+        display: block
 
-.footer__links__button
-    padding-bottom: $petite
+.footer-links__button
+    display: inline-block
+    margin-top: 25px
+    border: $dblhair solid $zon_grey
+    border-radius: 4px
+    height: $footer_button_height
+    width: $footer_button_width
+    color: $zon_light_grey
+    font-size: $font-s--rem
+    line-height: $footer_button_height
+    text-transform: uppercase
+    letter-spacing: 1px
+    cursor: pointer
+    a
+        +link-colors($zon_light_grey,$zon_light_grey)
+        display: inline-block
+    .icon-top-arrow
+        @extend %footer_icons
+        height: $footer_button_icon_height
+        width: $footer_button_icon_width
+        display: inline-block
+        margin-right: $thin
+

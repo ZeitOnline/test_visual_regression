@@ -18,6 +18,12 @@ Change log for zeit.web
 
 - ZON-1256: Polish buzzbox markup and styles
 
+- ZON-1262: Add scroll to top button
+
+- ZON-1264: Add logo
+
+- ZON-1267: Add scroll to top icon
+
 
 1.8.5 (2014-12-03)
 ------------------
@@ -29,6 +35,12 @@ Change log for zeit.web
 - WEB-361: Add last_published_semantic to JSON Endpoint
 
 - ZON-1249: Link ZMO Button in ZON navi
+
+- ZON-1244: Hook up snapshot image data source
+
+
+1.8.5 (2014-12-03)
+------------------
 
 - ZON-1243: Add real connector option, remove tbc
 
