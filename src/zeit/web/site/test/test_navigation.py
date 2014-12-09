@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import lxml
 import pytest
 import mock
@@ -9,8 +10,7 @@ import selenium.webdriver
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/nav_main.html')
-    import datetime
+            'zeit.web.site:templates/inc/navigation.html')
     mock_view = mock.MagicMock()
     mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
@@ -19,8 +19,7 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
     assert len(html('.main_nav')) == 1, (
         'just one .main_nav should be present')
 
-    assert len(html('.main_nav > div')) == 9, (
-        'nine divs within .main_nav')
+    assert len(html('.main_nav > div')) == 9, ('nine divs within .main_nav')
 
     assert '</div><div class="main_nav__date"' in html_str, (
         'don\'t break line here, due to inline-block state')
@@ -63,7 +62,7 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
 
 def test_nav_services_macro_should_have_expected_links(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     nav = zeit.web.core.navigation.Navigation()
     nav['abo'] = (
         zeit.web.core.navigation.NavigationItem(
@@ -100,7 +99,7 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     html_str = tpl.module.main_nav_classifieds(nav)
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -116,7 +115,7 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
 
 def test_nav_community_macro_should_render_a_login(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     html_str = tpl.module.main_nav_community()
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -130,7 +129,7 @@ def test_nav_community_macro_should_render_a_login(jinja2_env):
 
 def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     html_str = tpl.module.main_nav_logo()
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -143,7 +142,7 @@ def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
 
 def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     html_str = tpl.module.main_nav_burger()
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -159,7 +158,7 @@ def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
 
 def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     html_str = tpl.module.main_nav_search()
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -189,7 +188,7 @@ def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
 
 def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     nav = zeit.web.core.navigation.Navigation()
     nav['hp.global.topnav.links.jobs'] = (
         zeit.web.core.navigation.NavigationItem(
@@ -213,7 +212,7 @@ def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
 
 def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation.tpl')
+        'zeit.web.site:templates/macros/navigation_macro.tpl')
     links = [('Label 1', 'http://link_1'),
              ('Label 2', 'http://link_2'),
              ('Label 3', 'http://link_3')]
