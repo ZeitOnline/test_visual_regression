@@ -43,7 +43,7 @@ def test_buzz_mostread_should_output_correct_titles(
     kicker = browser.cssselect('.buzz-mostread__kicker')[0]
     assert u'Gentrifizierung' in kicker.text
     title = browser.cssselect('.buzz-mostread__title')[1]
-    assert u'Das neue Heft im Video durchgeblättert' in title.text
+    assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
 
 
 def test_buzz_comments_should_render_correct_article_count(
@@ -66,7 +66,7 @@ def test_buzz_comments_should_output_correct_titles(
     kicker = browser.cssselect('.buzz-comments__kicker')[0]
     assert u'Gentrifizierung' in kicker.text
     title = browser.cssselect('.buzz-comments__title')[1]
-    assert u'Das neue Heft im Video durchgeblättert' in title.text
+    assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
 
 
 def test_buzz_facebook_should_render_correct_article_count(
