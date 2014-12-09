@@ -1,9 +1,5 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
 
-{% block teaser_modifier -%}
-    {% if not teaser|get_image_asset is none -%}teaser-series--hasmedia{%- endif %}
-{%- endblock %}
-
 {% block layout %}teaser-series{% endblock %}
 
 {% block teaser_media_position_before_title %}
