@@ -114,8 +114,8 @@ class Centerpage(
         :rtype: zeit.content.image.image.RepositoryImage
         """
         snapshot = self.context.snapshot
-        return zeit.web.core.interfaces.ITeaserImage(snapshot) if snapshot is (
-            not None) else None
+        return zeit.web.core.interfaces.ITeaserImage(snapshot) if (
+            snapshot is not None) else None
 
     @zeit.web.reify
     def topiclink_title(self):
