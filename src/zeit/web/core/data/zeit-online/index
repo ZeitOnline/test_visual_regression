@@ -2,7 +2,10 @@
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
     <header_image/>
-    <snapshot/>
+    <snapshot src="http://xml.zeit.de/exampleimages/artikel/leinwand.jpg" type="jpg" title="Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York" align="left" publication-date="" expires="">
+        <bu>Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York</bu>
+        <copyright>© Lindsay DeDario/Reuters</copyright>
+    </snapshot>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

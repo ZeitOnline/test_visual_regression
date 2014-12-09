@@ -4,6 +4,8 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
+- HOTFIX: repair tests now that we have a fallback image
+
 - ZON-1248: Small teaser functional without image
 
 - ZON-1247: Use BEM Sass styling everywhere
@@ -14,22 +16,29 @@ Change log for zeit.web
 
 - ZON-1161: Swap ZMO fallback image
 
-- ZON-1262: add scroll to top button
+- ZON-1262: Add scroll to top button
 
-- ZON-1264: add logo
+- ZON-1264: Add logo
 
-- ZON-1267: add scroll to top icon
+- ZON-1267: Add scroll to top icon
+
 
 1.8.5 (2014-12-03)
 ------------------
 
-- ZON-1250: add last published semantic date to hp
+- ZON-1250: Add last published semantic date to hp
 
-- ZON-1109: show tile7 before buzzbox when fullwidth teaser
+- ZON-1109: Show tile7 before buzzbox when fullwidth teaser
 
-- WEB-361: add last_published_semantic to JSON Endpoint
+- WEB-361: Add last_published_semantic to JSON Endpoint
 
 - ZON-1249: Link ZMO Button in ZON navi
+
+- ZON-1244: Hook up snapshot image data source
+
+
+1.8.5 (2014-12-03)
+------------------
 
 - ZON-1243: Add real connector option, remove tbc
 
@@ -53,9 +62,9 @@ Change log for zeit.web
 
 - BUG-54: Fix falsy use of margin in hamburger icon and improve accessibility
 
-- BUG-55: fix displaced text from fullwith-teaser
+- BUG-55: Fix displaced text from fullwith-teaser
 
-- ZON-1226: show teaser seperator for mobile only
+- ZON-1226: Show teaser seperator for mobile only
 
 - ZON-1233: Make assets more fail save
 

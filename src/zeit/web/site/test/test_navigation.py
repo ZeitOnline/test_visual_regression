@@ -10,7 +10,7 @@ import selenium.webdriver
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
-            'zeit.web.site:templates/inc/navigation.html')
+        'zeit.web.site:templates/inc/navigation.html')
     mock_view = mock.MagicMock()
     mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
@@ -595,11 +595,11 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
     zmo_link = zmo_button.find_element_by_class_name(
         'primary-nav__link')
 
-    assert zmo_link.get_attribute('href') == \
-        'http://www.zeit.de/zeit-magazin/index', (
+    assert (zmo_link.get_attribute('href') ==
+            'http://www.zeit.de/zeit-magazin/index'), (
         'zmo link is not set correctly')
-    assert zmo_link.get_attribute('id') == \
-        'hp.global.topnav.centerpages.zeitmagazin', (
+    assert (zmo_link.get_attribute('id') ==
+            'hp.global.topnav.centerpages.zeitmagazin'), (
         'zmo tracking is not set correctly')
 
     zmo_link.click()

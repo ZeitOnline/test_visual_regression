@@ -518,7 +518,7 @@ def test_nextread_base_layout_has_image_element_if_available(
         'There should be exactly one image tag in a "base" nextread teaser.'
     browser = testbrowser('%s/artikel/10' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 0, \
+    assert len(nextread.cssselect('img')) == 1, \
         'The nextread of "Artikel 10" has no teaser image asset.'
 
 
@@ -530,7 +530,7 @@ def test_nextread_maximal_layout_has_image_background_if_available(
         'The teaser image should be set as a background for "maximal" teasers.'
     browser = testbrowser('%s/artikel/03' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' not in nextread.attrib.get('style'), \
+    assert 'background-image' in nextread.attrib.get('style'), \
         'The nextread of "Artikel 03" has no teaser image asset.'
 
 
