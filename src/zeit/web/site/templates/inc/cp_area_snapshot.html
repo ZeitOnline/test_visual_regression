@@ -1,9 +1,9 @@
 {% set image = view.snapshot %}
 {% set href = "/kultur/2012-03/fs-momente" %}
 
-<div class="cp-snapshot">
-    <span class="cp-snapshot-title">Momentaufnahme</span>
-    <span class="cp-snapshot-readmore">Gesammelte Momente</span>
-    {% include "zeit.web.site:templates/inc/linked-image_refactoring.tpl" ignore missing with context %}
+<div class="snapshot">
+    <span class="snapshot__title">Momentaufnahme</span>
+    <span class="snapshot__readmore">Gesammelte Momente</span>
+    {% include "zeit.web.site:templates/inc/teaser_asset/snapshot-image.tpl" ignore missing with context %}
     {# TODO: Insert image title, copyright and styles. #}
 </div>
