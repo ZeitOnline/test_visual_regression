@@ -1,0 +1,46 @@
+$parquet-image-large-width: remify(360px)
+
+.teaser-parquet-large
+	@extend %teaser
+	padding: 0
+	position: relative
+
+	&__media
+		+inline-block
+		width: $parquet-image-large-width
+		margin: 0 $compact $compact 0
+
+	&__media-item
+		@extend %teaser-media-item
+
+	&__heading
+		+inline-block
+		vertical-align: top
+		@extend %teaser-heading
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+
+	&__title
+		@extend %teaser-title
+
+	&__text
+		@extend %teaser-text
+
+	&__byline
+		@extend %teaser-byline
+
+	&__metadata
+		@extend %teaser-byline // no accident
+
+	&__commentcount
+		@extend %teaser-commentcount
+
+	&__container
+		+inline-block
+		margin: 0 0 $compact 0
+		max-width: remify(280px)
+		vertical-align: top
