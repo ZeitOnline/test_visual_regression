@@ -19,6 +19,9 @@ def test_footer_should_have_basic_structure(jinja2_env):
     assert len(html('.footer-logo__image')) == 1, (
         'just one .footer-logo__image')
 
+    assert len(html('.footer-publisher__inner')) == 1, (
+        'just one .footer-publisher__inner')
+
     assert len(html('.footer-publisher')) == 1, (
         'just one .footer-publisher')
 
