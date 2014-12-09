@@ -1,9 +1,15 @@
+{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
+
 {% set image = view.snapshot %}
 {% set href = "/kultur/2012-03/fs-momente" %}
 
 <div class="snapshot">
-    <span class="snapshot__title">Momentaufnahme</span>
-    <span class="snapshot__readmore">Gesammelte Momente</span>
+    <div class="snapshot__title">Momentaufnahme</div>
+    <a href="{{ href }}" class="snapshot__readmore">Gesammelte Momente</a>
     {% include "zeit.web.site:templates/inc/teaser_asset/snapshot-image.tpl" ignore missing with context %}
-    {# TODO: Insert image title, copyright and styles. #}
+    {% if image -%}
+    <div class="snapshot-caption">
+        {{ image.title | default('') }} {{ cp.image_copyright(image.copyright, 'snapshot-caption') }}</span>
+    </div>
+    {%- endif %}
 </div>
