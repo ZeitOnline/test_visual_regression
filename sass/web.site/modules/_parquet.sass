@@ -1,5 +1,6 @@
 
 .parquet
+	clear: both
 	display: block
 	+respond-min($break-3)
 		margin: 0 (-$petite)
@@ -14,14 +15,14 @@
 	+inline-block
 	// padding: $petite
 	vertical-align: top
-	width: rem(200px)
+	width: remify(200px)
 
 	&__title
 		color: $black
 		+link
 			color: $black
 			text-decoration: none
-		font-size: rem(24px)
+		font-size: remify(24px)
 		font-weight: bold
 		letter-spacing: 0.03em
 		line-height: 1
@@ -37,7 +38,7 @@
 
 	&__more-link
 		+link-colors($zon_grey)
-		font-size: rem(14px)
+		font-size: remify(14px)
 		letter-spacing: 0.03em
 
 	&__more-link
