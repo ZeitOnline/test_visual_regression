@@ -114,8 +114,8 @@ class Fetcher(object):
                 continue
 
             article = {
-                'supertitle': content.supertitle,
-                'title': content.title,
+                'teaserSupertitle': content.teaserSupertitle,
+                'teaserTitle': content.teaserTitle,
                 'uniqueId': content.uniqueId,
                 'score': item.get('score', 0)
             }
@@ -168,8 +168,8 @@ class Fetcher(object):
                 continue
 
             article = {
-                'supertitle': content.supertitle,
-                'title': content.title,
+                'teaserSupertitle': content.teaserSupertitle,
+                'teaserTitle': content.teaserTitle,
                 'uniqueId': content.uniqueId,
                 'score': score_hook(**locals())
             }
