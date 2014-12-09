@@ -236,15 +236,14 @@ class Content(Base):
         tz = babel.dates.get_timezone('Europe/Berlin')
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_last_published_semantic
-        if self.date_first_released is not None and date is not None:
-            if date > self.date_first_released:
-                return date.astimezone(tz)
+        if (self.date_first_released is not None and date is not None
+                and date > self.date_first_released):
+            return date.astimezone(tz)
 
     @zeit.web.reify
     def date_format(self):
-        if self.context.product:
-            if self.context.product.id in ('ZEI', 'ZMLB'):
-                return 'short'
+        if self.context.product and self.context.product.id in ('ZEI', 'ZMLB'):
+            return 'short'
         return 'long'
 
     @zeit.web.reify
@@ -296,10 +295,9 @@ class Content(Base):
             elif (self.leadtime.start.date() == yesterday
                   and not self.leadtime.end):
                 return True
-        if self.leadtime.end:
+        if self.leadtime.end and self.leadtime.end.date() == today:
             # end = today
-            if self.leadtime.end.date() == today:
-                return True
+            return True
         return False
 
     @zeit.web.reify
