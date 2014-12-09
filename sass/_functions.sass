@@ -83,8 +83,6 @@ $rem-to-px-base: 16 !default
 		$unit : unit($value)
 		$val  : parseInt($value)
 
-		@debug 'rem-to-px-conversion: #{$rem-to-px-conversion}, unit: #{$unit}, old-ie: #{$old-ie}'
-
 		@if ($rem-to-px-conversion and $unit == 'px') // rem not supported / IE style
 			$list: append($list, $value)
 
