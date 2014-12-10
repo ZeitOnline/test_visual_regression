@@ -24,18 +24,26 @@
 	padding: $fine 0 $fine $hefty
 	position: relative
 
+	+on-interaction
+		span
+			text-decoration: none
+
 	&__title
 		@extend %teaser-title
 		color: $zon-charcoal
-		font-size: $font-m
+		font-size: $font-mm
 		font-weight: bold
 		line-height: $headline-line-height
+		+on-interaction
+			color: $zon_mid_grey
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
+		font-family: $font-tabletgothicnarrow
+		font-weight: normal
 		font-size: $font-xs
 
 	&__heading
@@ -53,7 +61,7 @@
 	vertical-align: text-bottom
 
 	&__label
-		color: $zon-charcoal
+		color: $zon_dark_grey
 		font-family: $font-tabletgothic
 		font-size: $font-mxl
 		font-weight: bold
