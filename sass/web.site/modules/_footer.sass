@@ -51,13 +51,14 @@ $footer_button_icon_width: em(10px)
 
 %footer_inner
     width: 40%
-    display: inline-block
+    display: none
     vertical-align: top
     padding: $petite
     +respond-min($break-phablet-min)
         padding: $petite $hefty
     +respond-min($break-tablet-min)
         width: 100%
+        display: inline-block !important
         padding: 0px 0px 0px 0px
 
 %footer_list
@@ -187,6 +188,7 @@ $footer_button_icon_width: em(10px)
     display: none
 
 .footer-links__seperator
+    display: none
     +respond-max($break-tablet-min)
         border-top: 1px solid $zon_grey
 

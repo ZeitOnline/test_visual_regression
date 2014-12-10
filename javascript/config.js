@@ -28,6 +28,7 @@ require.config({
         'web.site/plugins/jquery.togglenavi': [ 'jquery' ],
         'web.site/plugins/jquery.adaptnav': [ 'jquery' ],
         'web.site/plugins/jquery.scrollup': [ 'jquery' ],
+        'web.site/plugins/jquery.extendfooter': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },
