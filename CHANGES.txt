@@ -4,7 +4,9 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
-- HOTFIX: repair tests now that we have a fallback image
+- HOTFIX: Repair tests now that we have a fallback image
+
+- BUG-64: Repair image rendering in newsletters
 
 - ZON-1248: Small teaser functional without image
 
@@ -15,6 +17,8 @@ Change log for zeit.web
 - ZON-1261: Add and style footer basic structure
 
 - ZON-1161: Swap ZMO fallback image
+
+- ZON-1256: Polish buzzbox markup and styles
 
 - ZON-1262: Add scroll to top button
 
@@ -105,7 +109,7 @@ Change log for zeit.web
 
 - BUG-39: Correct android em issue with cp lead subtitles
 
-- ZON-1025: toggle ad page zoom on ZON (but not ZMO)
+- ZON-1025: Toggle ad page zoom on ZON (but not ZMO)
 
 - ZON-1061: Style ZMO print cover teaser
 
