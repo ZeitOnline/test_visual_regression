@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-64: Repair image rendering in newsletters
 
+- ZON-1237: Re-style buzzboxes to appear lighter
+
 - ZON-1263: Add Publisher Bar to Footer
 
 - ZON-1248: Small teaser functional without image
