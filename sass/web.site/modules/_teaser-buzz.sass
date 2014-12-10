@@ -1,0 +1,77 @@
+.buzz-box
+	width: 100%
+	margin: 0 $hefty 0 $hefty
+
+	+respond-min($break-tablet-min)
+		width: initial
+		margin: 0
+
+	&__heading
+		border-bottom: $hair--px solid $zon_light_grey
+		font-family: $font-tabletgothic
+		font-size: $font-s
+		font-weight: bold
+		letter-spacing: $hair
+		line-height: normal
+		margin: 0 0 $fine 0
+		padding: $fine
+		text-transform: uppercase
+
+=buzz-teaser($layout)
+	@extend %teaser
+	border: none
+	margin: 0
+	padding: $fine 0 $fine $hefty
+	position: relative
+
+	&__title
+		@extend %teaser-title
+		color: $zon-charcoal
+		font-size: $font-m
+		font-weight: bold
+		line-height: $headline-line-height
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+		font-size: $font-xs
+
+	&__heading
+		@extend %teaser-heading
+		margin: 0
+
+@each $flavor in comments, facebook, mostread
+	.buzz-#{$flavor}
+		+buzz-teaser(buzz-#{$flavor})
+
+.buzz-index
+	left: $fine
+	margin: 0
+	position: absolute
+	vertical-align: text-bottom
+
+	&__label
+		color: $zon-charcoal
+		font-family: $font-tabletgothic
+		font-size: $font-mxl
+		font-weight: bold
+		line-height: $font-mxl
+		width: $small
+
+.buzz-line
+	margin: $thin 0 0 0
+
+	&__icon
+		background-size: contain
+		display: inline-block
+		height: $small
+		width: $small
+	&__label
+		font-family: $font-tabletgothic
+		font-size: $little
+		font-weight: 200
+		letter-spacing: $zon-letter-spacing-s
+		margin-left: $thin
+		vertical-align: text-bottom

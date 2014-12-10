@@ -2,7 +2,7 @@
     {{group.title}}
     {% for teaser in group.values() %}
         {% if teaser.image %}
-            {{teaser.image}}
+            {{ teaser.image }}
         {% endif %}
         {% for video in teaser.videos %}
             {{video.title}}

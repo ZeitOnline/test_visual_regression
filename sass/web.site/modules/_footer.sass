@@ -38,6 +38,11 @@ $footer_button_icon_width: em(10px)
     a
         +link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
 
+%footer_list
+    list-style: none
+    padding: 0px
+    margin: 0px
+
 %footer_dot
     &:after
         content: '•'
@@ -81,7 +86,7 @@ $footer_button_icon_width: em(10px)
         width: 100%
         padding: 0px 0px 0px 0px
 
-.footer-publisher__inner--islegal
+.footer-publisher__inner--isfirst
     @extend %footer-publisher_light
     text-align: center
     width: 100%
@@ -96,7 +101,7 @@ $footer_button_icon_width: em(10px)
             content: ''
             display: inline-block
 
-.footer-publisher__inner--isverlag
+.footer-publisher__inner--islast
     padding-bottom: $petite
 
 .footer-publisher__more
@@ -116,9 +121,7 @@ $footer_button_icon_width: em(10px)
                 +rotate(180deg)
 
 .footer-publisher__list
-    list-style: none
-    padding: 0px
-    margin: 0px
+    @extend %footer_list
 
 .footer-publisher__item
     display: inline-block
@@ -134,6 +137,9 @@ $footer_button_icon_width: em(10px)
     &:after
         content: ''
         display: inline-block
+
+.footer-links__list
+    @extend %footer_list
 
 .footer-links
     background-color: $zon-charcoal

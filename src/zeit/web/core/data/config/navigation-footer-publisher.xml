@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<navigation>
+  <section>
+    <link id="first"></link>
+    <sub_sections>
+      <sub_section>
+        <link id="impressum" href="http://www.zeit.de/impressum/index">Impressum</link>
+      </sub_section>
+      <sub_section>
+        <link id="datenschutz" href="http://www.zeit.de/hilfe/datenschutz">Datenschutz</link>
+      </sub_section>
+    </sub_sections>
+  </section>
+  <section>
+    <link id="second">Angebote:</link>
+    <sub_sections>
+      <sub_section>
+        <link id="abo" href="http://www.zeitabo.de/?mcwt=2009_07_0002">Abo</link>
+      </sub_section>
+      <sub_section>
+        <link id="shop" href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_footer">Shop</link>
+      </sub_section>
+      <sub_section>
+        <link id="christundwelt" href="http://www.christundwelt.de">Christ &amp; Welt</link>
+      </sub_section>
+      <sub_section>
+        <link id="zeitreisen" href="http://zeitreisen.zeit.de/">ZEIT Reisen</link>
+      </sub_section>
+      <sub_section>
+        <link id="zeitfuerdieschule" href="http://www.zeit.de/angebote/schule/index">ZEIT für die Schule</link>
+      </sub_section>
+      <sub_section>
+        <link id="zeitveranstaltungen" href="http://www.zeitverlag.de/veranstaltungen">ZEIT Veranstaltungen</link>
+      </sub_section>
+    </sub_sections>
+  </section>
+  <section>
+      <link id="last">Verlag:</link>
+      <sub_sections>
+        <sub_section>
+          <link id="inserieren" href="http://inserieren.zeit.de/zeitads/">Inserieren</link>
+        </sub_section>
+        <sub_section>
+          <link id="mediadaten" href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</link>
+        </sub_section>
+        <sub_section>
+          <link id="presse" href="http://www.zeitverlag.de/presse">Presse</link>
+        </sub_section>
+        <sub_section>
+          <link id="unternehmen" href="http://www.zeit-verlag.de/">Unternehmen</link>
+        </sub_section>
+        <sub_section>
+          <link id="rechteundlizenzen" href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</link>
+        </sub_section>
+      </sub_sections>
+  </section>
+</navigation>
