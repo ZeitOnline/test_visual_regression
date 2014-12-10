@@ -23,6 +23,8 @@
             $( defaults.triggerElement ).on( 'inview', function( evt ) {
                 $( that ).addClass('snapshot--blurred');
                 $( that ).show(0, function() {
+                    // change html5 prop "hidden" (which is more accessible)
+                    $( this ).prop('hidden', false);
                     // resize triggers image load
                     $(window).resize();
                     // jscs:disable
