@@ -89,6 +89,9 @@ $rem-to-px-base: 16 !default
 		@else if ($unit == 'px') // conversion to rem
 			$list: append($list, ($val/$rem-to-px-base) + rem)
 
+		@else if ($unit == '') // unitless values, like in 'margin: 0 16px'
+			$list: append($list, $value)
+
 		@else
 			@warn 'There is currently no unit conversion for #{$unit}'
 
