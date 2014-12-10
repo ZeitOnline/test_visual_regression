@@ -38,7 +38,7 @@
     {%- if copyright[0][1] -%}
         <a class="{{ blockname }}__link" href="{{ copyright[0][1] }}" target="_blank">
     {%- endif -%}
-            <span class="{{ blockname }}__item">{{ copyright[0][0] }}</span>
+            <span class="{{ blockname }}__item">©&nbsp;{{ copyright[0][0] | replace('© ', '') }}</span>
     {%- if copyright[0][1] -%}
         </a>
     {%- endif -%}
