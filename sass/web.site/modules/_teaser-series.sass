@@ -30,9 +30,10 @@
 	&__media
 		@extend %teaser-media
 		@extend %teaser-small-media
-		display: block
 	&__media-item
 		@extend %teaser-media-item
+	&__container
+		@extend %teaser-small-container
 	&__heading
 		@extend %teaser-heading
 		margin: 0 0 $thin 0
@@ -65,8 +66,6 @@
 		font-weight: 200
 	&__commentcount
 		@extend %teaser-commentcount
-	&--hasmedia
-		@extend %teaser-small-media-placement
 
 // prevent next teaser from having border
 .teaser-series + [data-block-type='teaser'] // new

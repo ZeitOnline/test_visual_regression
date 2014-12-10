@@ -2,10 +2,6 @@
 
 {% block layout %}teaser-small{% endblock %}
 
-{% block teaser_modifier -%}
-    {% if not teaser | get_image_asset is none -%}teaser-small--hasmedia{%- endif %}
-{%- endblock %}
-
 {% block teaser_media_position_before_title %}
     {% set teaser_block_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/teaser_asset/" +

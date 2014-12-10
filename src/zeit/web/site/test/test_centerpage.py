@@ -95,17 +95,21 @@ def test_buzz_facebook_should_output_correct_titles(
 def test_tile7_is_rendered_on_correct_position(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    informatives = browser.cssselect('.main__informatives div')
-    assert informatives[0].attrib['class'] != (
-        'ad__tile_7 ad__on__centerpage ad__width_300 ad__min__768'), (
-        'There should be no iqadtile7.')
-    assert informatives[9].attrib['id'] == 'iqadtile7', (
+    tile7_on_first_position = browser.cssselect(
+        '.main__informatives > div:first-child[id="iqadtile7"]')
+    tile7_is_present = browser.cssselect(
+        '.main__informatives > div[id="iqadtile7"]')
+
+    assert not tile7_on_first_position, (
+        'There should be no iqadtile7 on the first position.')
+    assert tile7_is_present, (
         'Tile iqadtile7 is not present.')
 
 
 def test_tile7_for_fullwidth_is_rendered_on_correct_position(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    informatives = browser.cssselect('.main__informatives div')
-    assert informatives[0].attrib['id'] == 'iqadtile7', (
-        'Tile iqadtile7 is not present.')
+    tile7_on_first_position = browser.cssselect(
+            '.main__informatives > div:first-child[id="iqadtile7"]')
+    assert tile7_on_first_position, (
+        'Tile iqadtile7 is not present on first position.')
