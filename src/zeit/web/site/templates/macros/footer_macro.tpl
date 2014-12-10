@@ -5,8 +5,8 @@
 {%- endmacro %}
 
 {% macro footer_publisher(view) -%}
-    {% for i in view.navigation_footer -%}
-        {% set section = view.navigation_footer[i] %}
+    {% for i in view.navigation_footer_publisher -%}
+        {% set section = view.navigation_footer_publisher[i] %}
         <div class="footer-publisher__inner footer-publisher__inner--is{{section.item_id}}">
             <ul class="footer-publisher__list footer-publisher__list--is{{section.item_id}}">
                 <li class="footer-publisher__item footer-publisher__item--isbold">

@@ -113,8 +113,8 @@ class Base(object):
         return zeit.web.core.navigation.navigation_classifieds
 
     @zeit.web.reify
-    def navigation_footer(self):
-        return zeit.web.core.navigation.navigation_footer
+    def navigation_footer_publisher(self):
+        return zeit.web.core.navigation.navigation_footer_publisher
 
     @zeit.web.reify
     def navigation_footer_links(self):
