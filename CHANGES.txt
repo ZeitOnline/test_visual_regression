@@ -4,6 +4,10 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
+- ZON-1265: add link bar to footer
+
+- ZON-1268: add "more" functionality to footer
+
 - ZON-1263: Add Publisher Bar to Footer
 
 - HOTFIX: repair tests now that we have a fallback image
