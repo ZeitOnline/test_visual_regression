@@ -81,7 +81,7 @@ class Centerpage(
         area = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
         area.layout.id = zeit.web.core.utils.nsunicode('mostread')
-        area.header = zeit.web.core.utils.nsunicode('Meistgelesen')
+        area.header = zeit.web.core.utils.nsunicode('Meistgelesene Artikel')
         return area
 
     @zeit.web.reify
@@ -105,7 +105,7 @@ class Centerpage(
         area = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
-        area.header = zeit.web.core.utils.nsunicode('Meistempfohlen')
+        area.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
         return area
 
     @zeit.web.reify
