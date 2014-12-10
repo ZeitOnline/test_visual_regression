@@ -19,20 +19,11 @@ def test_footer_should_have_basic_structure(jinja2_env):
     assert len(html('.footer-logo__image')) == 1, (
         'just one .footer-logo__image')
 
-    assert len(html('.footer-publisher__inner')) == 1, (
-        'just one .footer-publisher__inner')
-
     assert len(html('.footer-publisher')) == 1, (
         'just one .footer-publisher')
 
-    assert len(html('.footer-publisher__more')) == 1, (
-        'just one .footer-publisher__more')
-
     assert len(html('.footer-links')) == 1, (
         'just one .footer-links')
-
-    assert len(html('.footer-links__inner')) == 1, (
-        'just one .footer-links__inner')
 
     assert len(html('.footer-links__button')) == 1, (
         'just one .footer-links__button')
@@ -106,13 +97,13 @@ def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
     driver.get('%s/zeit-online/index' % testserver.url)
 
     footer_legal = driver.find_element_by_css_selector(
-        '.footer-publisher__list--islegal')
+        '.footer-publisher__list--isfirst')
 
     footer_angebote = driver.find_element_by_css_selector(
-        '.footer-publisher__list--isangebote')
+        '.footer-publisher__list--issecond')
 
     footer_verlag = driver.find_element_by_css_selector(
-        '.footer-publisher__list--isverlag')
+        '.footer-publisher__list--islast')
 
     more_link = driver.find_element_by_class_name(
         'footer-publisher__more')
