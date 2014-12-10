@@ -2,13 +2,15 @@ $parquet-image-small-width: remify(174px)
 
 .teaser-parquet-small
 	@extend %teaser
-	padding: 0
+	padding: remify($petite--px) 0 0 0
 	position: relative
 
 	&__media
-		+inline-block
-		width: $parquet-image-small-width
-		margin: 0 $junior $junior 0
+		display: none
+		+respond-min($break-tablet-min)
+			+inline-block
+			width: $parquet-image-small-width
+			margin: remify(0 $petite--px $petite--px 0)
 
 	&__media-item
 		@extend %teaser-media-item
@@ -16,7 +18,6 @@ $parquet-image-small-width: remify(174px)
 	&__heading
 		@extend %teaser-heading
 		+inline-block
-		vertical-align: top
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -42,6 +43,5 @@ $parquet-image-small-width: remify(174px)
 
 	&__container
 		+inline-block
-		margin: 0 0 $junior 0
-		max-width: remify(470px)
-		vertical-align: top
+		margin: remify(0 0 $petite--px 0)
+		// max-width: remify(470px)

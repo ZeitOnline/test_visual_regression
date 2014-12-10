@@ -30,7 +30,7 @@
 		font-weight: bold
 		letter-spacing: 0.03em
 		line-height: 1.0
-		margin: 0 (-$page-padding) remify($petite--px) (-$page-padding)
+		margin: 0 (-$page-padding)
 		padding: remify($small--px) $page-padding remify($little--px) $page-padding
 		width: auto
 		@at-root a#{&}
@@ -71,5 +71,6 @@
 .parquet-teasers
 	+inline-block
 	margin: 0
-	width: 78.0%
 	padding: 0
+	+respond-min($break-tablet-min)
+		width: 78.0%
