@@ -120,7 +120,7 @@ def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
     assert(more_link.is_displayed()) is False, (
         'More link isnt displayed')
 
-    #mobile
+    # mobile
     driver.set_window_size(320, 480)
 
     assert(footer_legal.is_displayed()), (
