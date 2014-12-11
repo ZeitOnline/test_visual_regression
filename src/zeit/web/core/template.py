@@ -189,10 +189,10 @@ def hide_none(string):
         return string
 
 
-_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
-          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          "zon-fullwidth": ['leader-fullwidth'],
-          "hide": ['archive-print-volume', 'archive-print-year',
+_t_map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
+          'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          'zon-fullwidth': ['leader-fullwidth'],
+          'hide': ['archive-print-volume', 'archive-print-year',
                    'two-side-by-side', 'ressort', 'leader-upright',
                    'buttons-fullwidth', 'parquet-printteaser',
                    'parquet-verlag']}
@@ -256,6 +256,8 @@ default_images_sizes = {
     'og-image': (600, 315),
     'twitter-image_small': (120, 120),  # summary
     'twitter-image-large': (560, 300),  # summary_large_image, photo
+    'newsletter-540x304': (540, 304),
+    'newsletter-220x124': (220, 124)
 }
 
 
@@ -352,6 +354,16 @@ def closest_substitute_image(image_group,
 
     # Select the candidate that is preferably one size larger than the target.
     return image_group.get(candidates[:idx + 1][-1][0])
+
+
+@zeit.web.register_filter
+def pluralize(num, *forms):
+    return forms[min(len(forms) - 1, num - 1):][0] % num
+
+
+@zeit.web.register_filter
+def with_mods(elem, *mods):
+    return ' '.join([elem] + ['%s--%s' % (elem, m) for m in mods])
 
 
 @zeit.web.register_global
@@ -531,12 +543,13 @@ class HTTPLoader(jinja2.loaders.BaseLoader):
             return (
                 'ERROR: load_template_from_dav_url not configured',
                 template, lambda: True)
+
         if self.url.startswith('egg://'):  # For tests
             parts = urlparse.urlparse(self.url)
             return (
                 pkg_resources.resource_string(
                     parts.netloc, parts.path[1:] + template).decode('utf-8'),
-                template, lambda: True)
+                template, lambda: False)
 
         url = self.url + template
         log.debug('Loading template %r from %s', template, url)

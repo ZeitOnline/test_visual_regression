@@ -6,6 +6,7 @@ import urlparse
 import pkg_resources
 
 import grokcore.component
+import jinja2.ext
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
@@ -93,6 +94,11 @@ class Application(object):
         zeit.web.core.navigation.navigation_classifieds = (
             zeit.web.core.navigation.make_navigation(
                 navigation_classifieds_config))
+        navigation_footer_config = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.frontend_navigation-footer', ''))
+        zeit.web.core.navigation.navigation_footer = (
+            zeit.web.core.navigation.make_navigation(
+                navigation_footer_config))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -188,6 +194,8 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
+        self.config.add_jinja2_extension(jinja2.ext.WithExtension)
+
         env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
 

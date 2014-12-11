@@ -1,9 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
 
 {% block layout %}teaser-large{% endblock %}
-{% block teaser_modifier -%}
-    {% if not teaser|get_image_asset is none -%}teaser-large--hasmedia{%- endif %}
-{%- endblock %}
 
 {% block teaser_media_position_after_title %}
     {% set teaser_block_layout = self.layout() %}

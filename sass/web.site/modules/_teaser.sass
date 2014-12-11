@@ -22,17 +22,22 @@
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
 
 %teaser-small-media
+	vertical-align: top
 	width: 100%
 	+respond-min($break-phablet-min)
-		display: inline-block
-		position: absolute
-		left: 0
-		top: $petite
-		width: $teaser-image-phablet-width
+		display: table-cell
+		padding-right: $petite
+		width: $teaser-image-phablet-width + $petite
 	+respond-min($break-tablet-min)
-		width: $teaser-image-phablet-width
+		width: $teaser-image-phablet-width + $petite
 	+respond-min($break-desktop-min)
-		width: $teaser-image-desktop-width
+		width: $teaser-image-desktop-width + $petite
+
+%teaser-small-container
+	vertical-align: top
+	+respond-min($break-phablet-min)
+		display: table-cell
+		vertical-align: top
 
 %teaser-heading
 	font-size: 1em

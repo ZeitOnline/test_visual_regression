@@ -240,7 +240,7 @@ def test_image_should_be_on_position_b(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
     articles = browser.cssselect('#main .teaser-collection .teasers article')
 
-    assert articles[0][1].tag == 'figure', 'An img should be on this position'
+    assert articles[0][0][1].tag == 'figure', 'This position should haz image'
 
 
 def test_image_should_be_on_position_a(testserver, testbrowser):
@@ -372,27 +372,20 @@ def test_series_teaser_should_have_mobile_layout(
     width_script = 'return $(".teaser-series__media").width()'
     width = driver.execute_script(width_script)
 
-    pad_script = 'return $(".teaser-series--hasmedia").css("padding-left")'
-    padding = driver.execute_script(pad_script)
-
     border_script = 'return $(".teaser-series").css("border-top-style")'
     border = driver.execute_script(border_script)
 
     if screen_size[0] == 320:
         assert width > 250, 'mobile: imgage box of wrong size'
-        assert padding == u'0px', 'mobile: box layout wrong'
         assert border == 'solid', 'mobile: border-top wrong'
     elif screen_size[0] == 520:
         assert width == 150, 'phablet: imgage box of wrong size'
-        assert padding == u'170px', 'phablet: box layout wrong'
         assert border == 'dotted', 'phablet: border-top wrong'
     elif screen_size[0] == 768:
         assert width == 150, 'ipad: imgage box of wrong size'
-        assert padding == u'170px', 'ipad: box layout wrong'
         assert border == 'dotted', 'ipad: border-top wrong'
     else:
         assert width == 250, 'desktop: image box of wrong size'
-        assert padding == u'270px', 'desktop: box layout wrong'
         assert border == 'dotted', 'desktop: border-top wrong'
 
 
@@ -459,3 +452,13 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
     assert u'\xa9\xa0' in copyright[0].text, (
         'Copyright text hast no copyright sign with non breaking space')
 
+
+def test_small_teaser_without_image_has_no_padding_left(
+        selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.set_window_size(768, 600)
+    driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
+    teaser = driver.find_element_by_css_selector(
+        '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
+    assert teaser.location.get('x') is 20
