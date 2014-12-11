@@ -12,7 +12,8 @@ require.config({
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'libs/jquery.bxslider',
         'esiparser': 'libs/esiparser',
-        'jquery.debounce': 'web.core/plugins/jquery.debounce'
+        'jquery.debounce': 'web.core/plugins/jquery.debounce',
+        'inview': 'vendor/jquery.inview'
     },
     // a shim is need for jQuery Plugins to load
     // add the name or path and an array of required scripts
@@ -36,6 +37,11 @@ require.config({
         'vendor/freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'
-        }
+        },
+        'vendor/jquery.inview': {
+            deps: [ 'jquery' ],
+            exports: 'inview'
+        },
+        'web.site/plugins/jquery.snapshot': [ 'jquery', 'inview' ]
     }
 });
