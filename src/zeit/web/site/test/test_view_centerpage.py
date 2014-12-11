@@ -453,6 +453,16 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
         'Copyright text hast no copyright sign with non breaking space')
 
 
+def test_snapshot_should_not_be_display_where_no_snapshot_is_present(
+        testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/main-teaser-setup' % testserver.url)
+
+    assert not browser.cssselect('.snapshot'), (
+        'There is an snaphot on a page which should not have one')
+
+
 def test_small_teaser_without_image_has_no_padding_left(
         selenium_driver, testserver):
 
