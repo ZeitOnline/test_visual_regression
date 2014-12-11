@@ -3,6 +3,11 @@ import lxml
 import mock
 import pytest
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
 import zeit.web.site.view_centerpage
 
 
@@ -382,6 +387,70 @@ def test_series_teaser_should_have_mobile_layout(
     else:
         assert width == 250, 'desktop: image box of wrong size'
         assert border == 'dotted', 'desktop: border-top wrong'
+
+
+def test_snapshot_hidden_on_initial_load(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index' % testserver.url)
+    snapshot = driver.find_element_by_id('snapshot')
+    assert not snapshot.is_displayed(), 'Momentaufnahme is not hidden onload'
+
+
+def test_snapshot_displayed_after_scroll(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.execute_script(
+        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    try:
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+    except TimeoutException:
+        assert False, 'Snapshot not visible after scrolled into view'
+
+
+def test_snapshot_displayed_after_direct_load_with_anchor(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index#snapshot' % testserver.url)
+    try:
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+    except TimeoutException:
+        assert False, 'Snapshot not visible after scrolled into view'
+
+
+def test_snapshot_morelink_text_icon_switch(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.execute_script(
+        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    if screen_size[0] == 320:
+        linkdisplay = driver.execute_script(
+            'return $(".snapshot-readmore__item").css("display")')
+        assert linkdisplay == u'none', 'Linktext not hidden on mobile'
+    else:
+        linkdisplay = driver.execute_script(
+            'return $(".snapshot-readmore__item").css("display")')
+        assert linkdisplay == u'inline', 'Linktext hidden on other than mobile'
+
+
+def test_snapshot_should_display_copyright_with_nonbreaking_space(
+        testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/index' % testserver.url)
+
+    copyright = browser.cssselect('.snapshot-caption__item')
+
+    assert u'\xa9\xa0' in copyright[0].text, (
+        'Copyright text hast no copyright sign with non breaking space')
 
 
 def test_small_teaser_without_image_has_no_padding_left(

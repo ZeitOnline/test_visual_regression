@@ -10,6 +10,10 @@ Change log for zeit.web
 
 - ZON-1268: Add "more" functionality to footer
 
+- ZON-1260: Snapshot, now with design
+
+- ZON-1245: Snapshot lazy loading
+
 - HOTFIX: Repair tests now that we have a fallback image
 
 - BUG-64: Repair image rendering in newsletters
