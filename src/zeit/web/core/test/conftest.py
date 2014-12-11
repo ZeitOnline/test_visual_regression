@@ -97,8 +97,10 @@ settings = {
         'egg://zeit.web.core/data/config/navigation-services.xml'),
     'vivi_zeit.frontend_navigation-classifieds': (
         'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-    'vivi_zeit.frontend_navigation-footer': (
-        'egg://zeit.web.core/data/config/navigation-footer.xml'),
+    'vivi_zeit.frontend_navigation-footer-publisher': (
+        'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
+    'vivi_zeit.frontend_navigation-footer-links': (
+        'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),
 

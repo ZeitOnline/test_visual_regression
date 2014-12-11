@@ -23,6 +23,7 @@ require([
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.up2dateSignals',
     'web.site/plugins/jquery.scrollup',
+    'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.snapshot'
 ], function() {
     $( '.main_nav__search' ).toggleSearch();
@@ -30,5 +31,6 @@ require([
     $( '.primary-nav' ).adaptToSpace();
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
     $( '.footer-links__button' ).scrollUp();
+    $( '.footer-publisher__more' ).extendFooter();
     $( '.snapshot' ).snapshot();
 });

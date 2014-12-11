@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link id="legal"></link>
+    <link id="first"></link>
     <sub_sections>
       <sub_section>
         <link id="impressum" href="http://www.zeit.de/impressum/index">Impressum</link>
@@ -12,7 +12,7 @@
     </sub_sections>
   </section>
   <section>
-    <link id="angebote">Angebote:</link>
+    <link id="second">Angebote:</link>
     <sub_sections>
       <sub_section>
         <link id="abo" href="http://www.zeitabo.de/?mcwt=2009_07_0002">Abo</link>
@@ -35,7 +35,7 @@
     </sub_sections>
   </section>
   <section>
-      <link id="verlag">Verlag:</link>
+      <link id="last">Verlag:</link>
       <sub_sections>
         <sub_section>
           <link id="inserieren" href="http://inserieren.zeit.de/zeitads/">Inserieren</link>

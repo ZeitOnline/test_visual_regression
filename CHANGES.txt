@@ -4,6 +4,10 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
+- ZON-1265: Add link bar to footer
+
+- ZON-1268: Add "more" functionality to footer
+
 - ZON-1260: Snapshot, now with design
 
 - ZON-1245: Snapshot lazy loading
