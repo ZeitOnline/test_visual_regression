@@ -16,8 +16,9 @@
 	display: block
 	vertical-align: top
 	+respond-min($break-tablet-min)
-		+inline-block(top)
-		width: remify(200px)
+		display: table-cell
+		padding-right: remify($petite--px)
+		width: remify(220px)
 
 	&__title
 		+link
@@ -69,8 +70,9 @@
 				content: ' \25B8 ' // Black Right-Pointing Small Triangle
 
 .parquet-teasers
-	+inline-block
+	display: table-cell
+	vertical-align: top
 	margin: 0
 	padding: 0
 	+respond-min($break-tablet-min)
-		width: 78.0%
+		padding: remify(0 $petite--px)
