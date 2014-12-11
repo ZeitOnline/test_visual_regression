@@ -4,6 +4,10 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
+- ZON-1260: Snapshot, now with design
+
+- ZON-1245: Snapshot lazy loading
+
 - HOTFIX: Repair tests now that we have a fallback image
 
 - BUG-64: Repair image rendering in newsletters
