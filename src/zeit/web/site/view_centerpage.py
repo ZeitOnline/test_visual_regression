@@ -60,8 +60,8 @@ class Centerpage(
     def area_parquet(self):
         def valid_bar(b):
             try:
-                return b.layout.id and b.layout.id == 'parquet'
-            except (TypeError, AttributeError):
+                return b.layout.id in ('parquet',)
+            except AttributeError:
                 return
 
         def valid_blocks(b):

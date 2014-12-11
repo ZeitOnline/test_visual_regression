@@ -223,4 +223,4 @@ class TopicLink(object):
             label = getattr(self.centerpage, 'topiclink_label_%s' % i, None)
             link = getattr(self.centerpage, 'topiclink_url_%s' % i, None)
             if label is not None and link is not None:
-                yield (label, link)
+                yield label, link

@@ -5,7 +5,7 @@ import zeit.web.magazin.view
 
 def is_zon_content(context, request):
     """Custom predicate to verify, if this can be rendered via zeit.frontend
-    :rtype: str
+    :rtype: bool
     """
 
     # We might need to evaluate, if we have a rebrush_website_content again at
