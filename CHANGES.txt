@@ -4,6 +4,8 @@ Change log for zeit.web
 1.8.6 (unreleased)
 ------------------
 
+- ZON-1271: Polish footer
+
 - ZON-1265: Add link bar to footer
 
 - ZON-1268: Add "more" functionality to footer
