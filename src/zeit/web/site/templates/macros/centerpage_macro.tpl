@@ -33,3 +33,13 @@
 {% macro include_teaser_byline(teaser, modifier='') -%}
     <span class="teaser__byline {{modifier}}">{{ teaser | render_byline }}</span>
 {%- endmacro %}
+
+{% macro image_copyright(copyright, blockname) -%}
+    {%- if copyright[0][1] -%}
+        <a class="{{ blockname }}__link" href="{{ copyright[0][1] }}" target="_blank">
+    {%- endif -%}
+            <span class="{{ blockname }}__item">©&nbsp;{{ copyright[0][0] | replace('© ', '') }}</span>
+    {%- if copyright[0][1] -%}
+        </a>
+    {%- endif -%}
+{%- endmacro %}
