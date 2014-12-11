@@ -205,3 +205,22 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
         self.title = meta.title
+        self.uniqueId = image.uniqueId
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
+class TopicLink(object):
+    """Filter and restructure all topiclinks and labels
+    :rtype: generator
+    """
+
+    def __init__(self, centerpage):
+        self.centerpage = centerpage
+
+    def __iter__(self):
+        for i in xrange(1, 4):
+            label = getattr(self.centerpage, 'topiclink_label_%s' % i, None)
+            link = getattr(self.centerpage, 'topiclink_url_%s' % i, None)
+            if label is not None and link is not None:
+                yield label, link
