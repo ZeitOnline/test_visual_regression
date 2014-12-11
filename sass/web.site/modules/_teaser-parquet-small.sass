@@ -2,7 +2,7 @@ $parquet-image-small: remify( (174px + $petite--px) )
 
 .teaser-parquet-small
 	@extend %teaser
-	padding: remify($petite--px 0 0 0)
+	padding: remify($petite--px 0)
 	+respond-min($break-tablet-min)
 		padding: remify(0 0 $petite--px 0)
 
@@ -33,5 +33,6 @@ $parquet-image-small: remify( (174px + $petite--px) )
 		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-byline // no accident
+		margin-bottom: 0
 	&__commentcount
 		@extend %teaser-commentcount
