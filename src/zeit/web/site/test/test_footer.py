@@ -100,6 +100,8 @@ def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
     more_link = driver.find_element_by_class_name(
         'footer-publisher__more')
 
+    driver.set_window_size(768, 1024)
+
     assert(len(footer_list) > 0), (
         'footer-publisher__list is not there')
 
@@ -162,6 +164,8 @@ def test_footer_links_structure_is_correct(selenium_driver, testserver):
 
     footer_last = driver.find_element_by_css_selector(
         '.footer-links__list--islast')
+
+    driver.set_window_size(768, 1024)
 
     assert(len(footer_list) > 0), (
         'footer-links__list is not there')
