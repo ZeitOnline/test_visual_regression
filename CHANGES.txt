@@ -4,6 +4,8 @@ Change log for zeit.web
 1.8.7 (unreleased)
 ------------------
 
+- BUG-59: Fix wrong metadata in Feature Longform
+
 - ZON-1271: Polish footer
 
 
