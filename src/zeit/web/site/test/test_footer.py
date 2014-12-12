@@ -71,30 +71,22 @@ def test_footer_button_links_to_same_site(selenium_driver, testserver):
         driver.current_url), ('footer button link is incorrect')
 
 
-def test_footer_elments_are_displayed_or_hidden(
-        selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.get('%s/zeit-online/index' % testserver.url)
-
-    inner_link = driver.find_element_by_class_name(
-        'footer-links__inner')
-
-    # mobile
-    driver.set_window_size(320, 480)
-
-    assert(inner_link.is_displayed() is False)
-
-    # higher than tablet
-    driver.set_window_size(768, 1024)
-
-    assert(inner_link.is_displayed())
-
-
 def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
 
     driver = selenium_driver
     driver.get('%s/zeit-online/index' % testserver.url)
+
+    footer_list = driver.find_elements_by_css_selector(
+        '.footer-publisher__list')
+
+    footer_inner = driver.find_elements_by_css_selector(
+        '.footer-publisher__inner')
+
+    footer_item = driver.find_elements_by_css_selector(
+        '.footer-publisher__item')
+
+    footer_link = driver.find_elements_by_css_selector(
+        '.footer-publisher__link')
 
     footer_legal = driver.find_element_by_css_selector(
         '.footer-publisher__list--isfirst')
@@ -107,6 +99,20 @@ def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
 
     more_link = driver.find_element_by_class_name(
         'footer-publisher__more')
+
+    driver.set_window_size(768, 1024)
+
+    assert(len(footer_list) > 0), (
+        'footer-publisher__list is not there')
+
+    assert(len(footer_item) > 0), (
+        'footer-publisher__item is not there')
+
+    assert(len(footer_inner) > 0), (
+        'footer-publisher__inner is not there')
+
+    assert(len(footer_link) > 0), (
+        'footer-publisher__link is not there')
 
     assert(footer_legal.is_displayed()), (
         'Legal Links in Footer arent displayed')
@@ -134,3 +140,103 @@ def test_footer_publisher_structure_is_correct(selenium_driver, testserver):
 
     assert(more_link.is_displayed()), (
         'More link isnt displayed')
+
+
+def test_footer_links_structure_is_correct(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+
+    footer_list = driver.find_elements_by_css_selector(
+        '.footer-links__list')
+
+    footer_inner = driver.find_elements_by_css_selector(
+        '.footer-links__inner')
+
+    footer_item = driver.find_elements_by_css_selector(
+        '.footer-links__item')
+
+    footer_link = driver.find_elements_by_css_selector(
+        '.footer-links__link')
+
+    footer_first = driver.find_element_by_css_selector(
+        '.footer-links__list--isfirst')
+
+    footer_last = driver.find_element_by_css_selector(
+        '.footer-links__list--islast')
+
+    driver.set_window_size(768, 1024)
+
+    assert(len(footer_list) > 0), (
+        'footer-links__list is not there')
+
+    assert(len(footer_item) > 0), (
+        'footer-links__item is not there')
+
+    assert(len(footer_inner) > 0), (
+        'footer-links__inner is not there')
+
+    assert(len(footer_link) > 0), (
+        'footer-links__link is not there')
+
+    assert(footer_first.is_displayed()), (
+        'First Links in Footer arent displayed')
+
+    assert(footer_last.is_displayed()), (
+        'Last Links in Footer arent displayed')
+
+    # mobile
+    driver.set_window_size(320, 480)
+
+    assert(footer_first.is_displayed() is False), (
+        'First Links in Footer are displayed')
+
+    assert(footer_last.is_displayed() is False), (
+        'Last Links in Footer are displayed')
+
+
+def test_more_button_works_as_expected(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+
+    driver.set_window_size(320, 480)
+
+    more_link = driver.find_element_by_class_name(
+        'footer-publisher__more')
+
+    publisher_first = driver.find_element_by_css_selector(
+        '.footer-publisher__list--issecond')
+
+    publisher_last = driver.find_element_by_css_selector(
+        '.footer-publisher__list--islast')
+
+    links_first = driver.find_element_by_css_selector(
+        '.footer-links__list--isfirst')
+
+    links_last = driver.find_element_by_css_selector(
+        '.footer-links__list--islast')
+
+    # open
+
+    more_link.click()
+
+    assert more_link.text == u'Schließen'
+
+    assert(links_first.is_displayed()), (
+        'First Links in Footer arent displayed')
+
+    assert(links_last.is_displayed()), (
+        'Last Links in Footer arent displayed')
+
+    assert(publisher_first.is_displayed()), (
+        'First Publisher in Footer isnt displayed')
+
+    assert(publisher_last.is_displayed()), (
+        'Last Publisher in Footer isnt displayed')
+
+    # close
+
+    more_link.click()
+
+    assert more_link.text == u'Mehr'

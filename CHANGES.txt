@@ -6,9 +6,15 @@ Change log for zeit.web
 
 - BUG-59: Fix wrong metadata in Feature Longform
 
+- ZON-1271: Polish footer
+
 
 1.8.6 (2014-12-12)
 ------------------
+
+- HOTFIX: Repair tests now that we have a fallback image
+
+- BUG-64: Repair image rendering in newsletters
 
 - ZON-1265: Add link bar to footer
 
@@ -17,10 +23,6 @@ Change log for zeit.web
 - ZON-1260: Snapshot, now with design
 
 - ZON-1245: Snapshot lazy loading
-
-- HOTFIX: Repair tests now that we have a fallback image
-
-- BUG-64: Repair image rendering in newsletters
 
 - ZON-1237: Re-style buzzboxes to appear lighter
 

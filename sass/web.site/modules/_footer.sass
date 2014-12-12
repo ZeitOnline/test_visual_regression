@@ -96,122 +96,109 @@ $footer_button_icon_width: em(10px)
     margin-top: $wide
     font-family: $font-tabletgothic
 
-.footer-logo__image
-    display: inline-block
-    margin-bottom: $petite
-    a
-        +hide-text
-        @extend %footer_icons
-        width: $footer_logo_width_small
-        +respond-min($break-tablet-min)
-            width: $footer_logo_width
+.footer-logo
+    &__image
+        display: inline-block
+        margin-bottom: $petite
+        a
+            +hide-text
+            @extend %footer_icons
+            width: $footer_logo_width_small
+            +respond-min($break-tablet-min)
+                width: $footer_logo_width
 
 .footer-publisher
     background-color: $zon-charcoal
     +respond-min($break-tablet-min)
         background-color: $zon_lighter_grey
-
-.footer-publisher__inner
-    @extend %footer_inner
-    @extend %footer_bar
-    @extend %footer_dark_light_switch
-
-.footer-publisher__list
-    @extend %footer_list
-
-.footer-publisher__item
-    @extend %footer_item
-    @extend %footer_dot
-
-.footer-publisher__inner--isfirst
-    @extend %footer_light
-    text-align: center
-    width: 100%
-    font-weight: bold
-    display: block
-    padding: $fine 0 $fine 0
-    .footer-publisher__item
-        display: inline-block
-        &:after
-            content: '•'
-        &:last-child:after
-            content: ''
-    .footer-publisher__item--isbold
-        &:after
-            content: ''
+    &__inner
+        @extend %footer_inner
+        @extend %footer_bar
+        @extend %footer_dark_light_switch
+    &__list
+        @extend %footer_list
+    &__item
+        @extend %footer_item
+        @extend %footer_dot
+    &__inner--isfirst
+        @extend %footer_light
+        text-align: center
+        width: 100%
+        font-weight: bold
+        display: block
+        padding: $fine 0 $fine 0
+        .footer-publisher__item
             display: inline-block
-
-.footer-publisher__inner--islast
-    padding-bottom: $petite
-
-.footer-publisher__item--isbold
-    @extend %footer_bold
-
-.footer-publisher__more
-    @extend %footer_bar
-    @extend %footer_light
-    text-align: center
-    border-top: 1px solid $zon_light_grey
-    border-bottom: 1px solid $zon_light_grey
-    padding: $fine 0 $fine 0
-    +respond-min($break-tablet-min)
-        display: none
-    a
-        &:after
-            +drop_icon()
-        &:hover
             &:after
-                +rotate(180deg)
+                content: '•'
+            &:last-child:after
+                content: ''
+        .footer-publisher__item--isbold
+            &:after
+                content: ''
+                display: inline-block
+    &__inner--islast
+        padding-bottom: $petite
+    &__item--isbold
+        @extend %footer_bold
+    &__more
+        @extend %footer_bar
+        @extend %footer_light
+        text-align: center
+        border-top: 1px solid $zon_light_grey
+        border-bottom: 1px solid $zon_light_grey
+        padding: $fine 0 $fine 0
+        +respond-min($break-tablet-min)
+            display: none
+        a
+            &:after
+                +drop_icon()
+            &:hover
+                &:after
+                    +rotate(180deg)
 
 .footer-links
     background-color: $zon-charcoal
     border-top: 1px solid $zon_grey
     padding-bottom: $junior
-
-.footer-links__inner
-    @extend %footer_inner
-    @extend %footer_bar
-    @extend %footer_dark
-
-.footer-links__list
-    @extend %footer_list
-
-.footer-links__item
-    @extend %footer_item
-    @extend %footer_dot
-
-.footer-links__inner--isfirst
-    padding-top: $petite
-
-.footer-links__item--isbold
-    @extend %footer_bold
-    display: none
-
-.footer-links__seperator
-    display: none
-    +respond-max($break-tablet-min)
-        border-top: 1px solid $zon_grey
-
-.footer-links__button
-    display: inline-block
-    margin: $junior $large 0 $large
-    border: $dblhair solid $zon_grey
-    border-radius: 4px
-    height: $footer_button_height
-    width: $footer_button_width
-    color: $zon_light_grey
-    font-size: $font-s--rem
-    line-height: $footer_button_height
-    text-transform: uppercase
-    letter-spacing: 1px
-    cursor: pointer
-    a
-        +link-colors($zon_light_grey,$zon_light_grey)
+    &__inner
+        @extend %footer_inner
+        @extend %footer_bar
+        @extend %footer_dark
+    &__list
+        @extend %footer_list
+    &__item
+        @extend %footer_item
+        @extend %footer_dot
+    &__inner--isfirst
+        padding-top: $petite
+    &__item--isbold
+        @extend %footer_bold
+        display: none
+    &__seperator
+        display: none
+        +respond-max($break-tablet-min)
+            border-top: 1px solid $zon_grey
+    &__button
         display: inline-block
-    .icon-top-arrow
-        @extend %footer_icons
-        height: $footer_button_icon_height
-        width: $footer_button_icon_width
-        display: inline-block
-        margin-right: $thin
+        margin: $junior $large 0 $large
+        border: $dblhair solid $zon_grey
+        border-radius: 4px
+        height: $footer_button_height
+        width: $footer_button_width
+        color: $zon_light_grey
+        font-size: $font-s--rem
+        line-height: $footer_button_height
+        text-transform: uppercase
+        letter-spacing: 1px
+        cursor: pointer
+        a
+            +link-colors($zon_light_grey,$zon_light_grey)
+            display: inline-block
+        .icon-top-arrow
+            @extend %footer_icons
+            height: $footer_button_icon_height
+            width: $footer_button_icon_width
+            display: inline-block
+            margin-right: $thin
 
