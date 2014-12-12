@@ -185,7 +185,7 @@ def test_footer_links_structure_is_correct(selenium_driver, testserver):
     assert(footer_last.is_displayed()), (
         'Last Links in Footer arent displayed')
 
-    #mobile
+    # mobile
     driver.set_window_size(320, 480)
 
     assert(footer_first.is_displayed() is False), (
