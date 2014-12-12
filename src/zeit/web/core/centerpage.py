@@ -46,7 +46,10 @@ def get_video_asset(teaser):
         except (AttributeError, IndexError, TypeError):
             return self.flv_url
 
-    asset = zeit.content.video.interfaces.IVideoAsset(teaser)
+    try:
+        asset = zeit.content.video.interfaces.IVideoAsset(teaser)
+    except TypeError:
+        return
 
     if asset.video is not None:
         asset.video.highest_rendition = get_video_source(asset.video)
@@ -59,14 +62,19 @@ def get_video_asset(teaser):
 
 
 def get_gallery_asset(teaser):
-    asset = zeit.content.gallery.interfaces.IGalleryReference(teaser)
-    return asset.gallery
+    try:
+        return zeit.content.gallery.interfaces.IGalleryReference(
+            teaser).gallery
+    except (TypeError, AttributeError):
+        return
 
 
 @zeit.web.register_filter
 def get_image_asset(teaser):
-    asset = zeit.content.image.interfaces.IImages(teaser)
-    return asset.image
+    try:
+        return zeit.content.image.interfaces.IImages(teaser).image
+    except (TypeError, AttributeError):
+        return
 
 
 class TeaserSequence(object):
