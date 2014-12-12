@@ -1,7 +1,7 @@
 .parquet
 	clear: both
 	display: block
-	+respond-min($break-3)
+	+respond-min($break-tablet-min)
 		margin: 0 (-$page-padding)
 
 .parquet-row
@@ -9,6 +9,8 @@
 	+respond-min($break-tablet-min)
 		border-top: 1px solid $zon_light_grey
 		padding: $page-padding remify($petite--px) 0 $page-padding
+		+box-shadow(inset remify(207px) 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
+	+respond-min($break-desktop-min)
 		+box-shadow(inset remify(240px) 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
 
 .parquet-meta
@@ -17,6 +19,8 @@
 	+respond-min($break-tablet-min)
 		display: table-cell
 		padding-right: remify($petite--px)
+		width: remify(187px)
+	+respond-min($break-desktop-min)
 		width: remify(220px)
 
 	&__title
@@ -76,7 +80,7 @@
 			font-weight: bold
 			line-height: 1.334
 			&:after
-				content: ' \25B8 ' // Black Right-Pointing Small Triangle
+				content: ' \25B8 ' // ▸ = Black Right-Pointing Small Triangle
 
 .parquet-teasers
 	display: table-cell

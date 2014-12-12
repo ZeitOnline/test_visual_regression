@@ -1,5 +1,3 @@
-$parquet-image-small: remify( (174px + $petite--px) )
-
 .teaser-parquet-small
 	@extend %teaser
 	padding: remify($petite--px 0)
@@ -10,9 +8,11 @@ $parquet-image-small: remify( (174px + $petite--px) )
 		display: none
 		+respond-min($break-tablet-min)
 			display: table-cell
-			width: $parquet-image-small
 			padding: remify(0 $petite--px $petite--px 0)
 			vertical-align: top
+			width: remify( (158px + $petite--px) )
+		+respond-min($break-desktop-min)
+			width: remify( (174px + $petite--px) )
 
 	&__container
 		@extend %teaser-small-container
