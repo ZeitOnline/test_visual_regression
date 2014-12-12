@@ -4,7 +4,7 @@ Change log for zeit.web
 1.8.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-59: Fix wrong metadata in Feature Longform
 
 
 1.8.6 (2014-12-12)
