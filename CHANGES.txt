@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1271: Polish footer
 
+- ZON-1241: Parquet responsive
+
 
 1.8.6 (2014-12-12)
 ------------------

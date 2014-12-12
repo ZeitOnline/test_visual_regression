@@ -1,8 +1,6 @@
-$parquet-image-large: remify( (360px + $petite--px) )
-
 .teaser-parquet-large
 	@extend %teaser
-	padding: remify($petite--px 0)
+	padding: remify($petite--px) $page-padding
 	+respond-min($break-tablet-min)
 		padding: remify(0 0 $petite--px 0)
 
@@ -16,8 +14,10 @@ $parquet-image-large: remify( (360px + $petite--px) )
 		+respond-min($break-tablet-min)
 			display: table-cell
 			padding: remify(0 $petite--px $petite--px 0)
-			width: $parquet-image-large
 			vertical-align: top
+			width: remify( (158px + $petite--px) )
+		+respond-min($break-desktop-min)
+			width: remify( (360px + $petite--px) )
 
 	&__media-item
 		@extend %teaser-media-item

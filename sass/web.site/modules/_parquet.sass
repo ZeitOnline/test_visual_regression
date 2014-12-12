@@ -1,47 +1,57 @@
 .parquet
 	clear: both
 	display: block
-	+respond-min($break-3)
-		margin: 0 (-$page-padding)
+	margin: 0 (-$page-padding) // parquet has 'full width'
 
 .parquet-row
 	font-family: $font-tabletgothic
 	+respond-min($break-tablet-min)
 		border-top: 1px solid $zon_light_grey
-		padding: $page-padding remify($petite--px) 0 $page-padding
-		+box-shadow(inset remify(240px) 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
 
 .parquet-meta
 	display: block
 	vertical-align: top
+	background-color: $zon_lighter_grey
 	+respond-min($break-tablet-min)
 		display: table-cell
-		padding-right: remify($petite--px)
-		width: remify(220px)
+		padding: remify($petite--px) remify($petite--px) 0 $page-padding
+		width: remify(207px)
+	+respond-min($break-desktop-min)
+		width: remify(240px)
 
 	&__title
 		+link
 			color: inherit
 			text-decoration: none
-		background-color: $zon_lighter_grey
 		color: $zon-charcoal
 		display: block
 		font-size: remify(22px)
 		font-weight: bold
 		letter-spacing: 0.03em
 		line-height: 1.0
-		margin: 0 (-$page-padding)
 		padding: remify($small--px) $page-padding remify($little--px) $page-padding
+		position: relative
 		width: auto
 		@at-root a#{&}
 			+on-interaction
 				text-decoration: underline
 		+respond-min($break-tablet-min)
-			background-color: none
-			font-size: remify(24px)
+			background: none
+			font-size: remify(21px)
 			line-height: 1.0
 			margin: 0
 			padding: 0
+		+respond-min($break-desktop-min)
+			font-size: remify(24px)
+		&:after
+			content: '\203A' // › = Single right-pointing angle quotation mark
+			position: absolute
+			right: remify($petite--px)
+			font-size: remify(32px)
+			top: remify(12px)
+			color: $grey
+			+respond-min($break-tablet-min)
+				content: ''
 
 	&__topic-links
 		display: none
@@ -66,7 +76,7 @@
 			font-weight: bold
 			line-height: 1.334
 			&:after
-				content: ' \25B8 ' // Black Right-Pointing Small Triangle
+				content: ' \25B8 ' // ▸ = Black Right-Pointing Small Triangle
 
 .parquet-teasers
 	display: table-cell
@@ -74,4 +84,4 @@
 	margin: 0
 	padding: 0
 	+respond-min($break-tablet-min)
-		padding: remify(0 $petite--px)
+		padding: remify($petite--px) $page-padding 0 remify($petite--px)
