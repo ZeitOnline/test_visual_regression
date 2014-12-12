@@ -10,7 +10,9 @@
     <head>
         <meta charset='utf-8'>
         <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+        {% block pagetitle %}
         <title>{{view.pagetitle}}</title>
+        {% endblock pagetitle %}
         <meta name="description" content="{{view.pagedescription}}">
         {% if view.rankedTagsList -%}
             <meta name="keywords" content="{{view.rankedTagsList | replace_list_seperator(', ')}}">
@@ -38,8 +40,10 @@
         <!-- date metadata -->
         {{lama.date_meta(view)}}
 
+        {% block sharing_meta -%}
         <!-- sharing metadata -->
         {{lama.sharing_meta(view,request)}}
+        {%- endblock sharing_meta %}
 
         <script src="{{request.asset_url('js/libs/modernizr-custom.js')}}"></script>
         <script src="{{request.asset_url('js/web.magazin/fontloader-head.js')}}"></script>
