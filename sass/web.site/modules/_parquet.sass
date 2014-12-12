@@ -37,10 +37,12 @@
 				text-decoration: underline
 		+respond-min($break-tablet-min)
 			background: none
-			font-size: remify(24px)
+			font-size: remify(21px)
 			line-height: 1.0
 			margin: 0
 			padding: 0
+		+respond-min($break-desktop-min)
+			font-size: remify(24px)
 		&:after
 			content: '\203A' // › = Single right-pointing angle quotation mark
 			position: absolute
