@@ -466,9 +466,12 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 
-    image_patterns = get_image_pattern(
-        get_mapped_teaser(teaser_block.layout.id),
-        teaser_block.layout.image_pattern)
+    try:
+        image_patterns = get_image_pattern(
+            get_mapped_teaser(teaser_block.layout.id),
+            teaser_block.layout.image_pattern)
+    except AttributeError:
+        return
 
     image, image_pattern = _existing_image(asset_id, image_base_name,
                                            image_patterns, ext)
