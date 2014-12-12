@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.8.6 (unreleased)
+1.8.7 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.8.6 (2014-12-12)
 ------------------
 
 - ZON-1265: Add link bar to footer
