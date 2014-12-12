@@ -1,0 +1,77 @@
+.parquet
+	clear: both
+	display: block
+	+respond-min($break-3)
+		margin: 0 (-$page-padding)
+
+.parquet-row
+	font-family: $font-tabletgothic
+	+respond-min($break-tablet-min)
+		border-top: 1px solid $zon_light_grey
+		padding: $page-padding remify($petite--px) 0 $page-padding
+		+box-shadow(inset remify(240px) 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
+
+.parquet-meta
+	display: block
+	vertical-align: top
+	+respond-min($break-tablet-min)
+		display: table-cell
+		padding-right: remify($petite--px)
+		width: remify(220px)
+
+	&__title
+		+link
+			color: inherit
+			text-decoration: none
+		background-color: $zon_lighter_grey
+		color: $zon-charcoal
+		display: block
+		font-size: remify(22px)
+		font-weight: bold
+		letter-spacing: 0.03em
+		line-height: 1.0
+		margin: 0 (-$page-padding)
+		padding: remify($small--px) $page-padding remify($little--px) $page-padding
+		width: auto
+		@at-root a#{&}
+			+on-interaction
+				text-decoration: underline
+		+respond-min($break-tablet-min)
+			background-color: none
+			font-size: remify(24px)
+			line-height: 1.0
+			margin: 0
+			padding: 0
+
+	&__topic-links
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
+			list-style: none
+			padding: 0
+
+	&__topic-link,
+	&__more-link
+		display: none
+		+respond-min($break-tablet-min)
+			+link-colors($zon_grey)
+			display: block
+			font-size: remify(14px)
+			letter-spacing: 0.03em
+
+	&__more-link
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
+			font-weight: bold
+			line-height: 1.334
+			&:after
+				content: ' \25B8 ' // Black Right-Pointing Small Triangle
+
+.parquet-teasers
+	display: table-cell
+	vertical-align: top
+	margin: 0
+	padding: 0
+	+respond-min($break-tablet-min)
+		padding: remify(0 $petite--px)
