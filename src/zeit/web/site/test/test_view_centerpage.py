@@ -286,11 +286,11 @@ def test_centerpage_view_should_have_topic_links():
     mycp.topiclink_label_3 = 'Label 3'
     mycp.topiclink_url_3 = 'http://link_3'
 
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    topiclinks = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert view.topiclinks == [('Label 1', 'http://link_1'),
-                               ('Label 2', 'http://link_2'),
-                               ('Label 3', 'http://link_3')]
+    assert topiclinks == [('Label 1', 'http://link_1'),
+                          ('Label 2', 'http://link_2'),
+                          ('Label 3', 'http://link_3')]
 
 
 def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
@@ -451,6 +451,16 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
 
     assert u'\xa9\xa0' in copyright[0].text, (
         'Copyright text hast no copyright sign with non breaking space')
+
+
+def test_snapshot_should_not_be_display_where_no_snapshot_is_present(
+        testserver, testbrowser):
+
+    browser = testbrowser(
+        '%s/zeit-online/main-teaser-setup' % testserver.url)
+
+    assert not browser.cssselect('.snapshot'), (
+        'There is an snaphot on a page which should not have one')
 
 
 def test_small_teaser_without_image_has_no_padding_left(

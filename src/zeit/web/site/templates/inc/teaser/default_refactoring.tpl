@@ -13,7 +13,7 @@
             {% block teaser_link %}
             <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
                 {% block teaser_kicker %}
-                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle }}</span>
+                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle | hide_none }}</span>
                 {% endblock %}
                 {% block teaser_title %}
                 <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</span>
