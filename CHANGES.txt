@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.8.7 (unreleased)
+1.8.7 (2014-12-12)
 ------------------
 
 - BUG-60: Catch fake entries in get-asset filters
