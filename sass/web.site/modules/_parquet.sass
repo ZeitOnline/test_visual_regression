@@ -8,26 +8,23 @@
 	font-family: $font-tabletgothic
 	+respond-min($break-tablet-min)
 		border-top: 1px solid $zon_light_grey
-		padding: $page-padding remify($petite--px) 0 $page-padding
-		+box-shadow(inset remify(207px) 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
-	+respond-min($break-desktop-min)
-		+box-shadow(inset remify(240px) 0px 0px 0px $zon_lighter_grey) // w3c style box-shadow syntax
 
 .parquet-meta
 	display: block
 	vertical-align: top
+	background-color: $zon_lighter_grey
 	+respond-min($break-tablet-min)
 		display: table-cell
-		padding-right: remify($petite--px)
-		width: remify(187px)
+		padding: remify($petite--px) remify($petite--px) 0 $page-padding
+		width: remify(207px)
 	+respond-min($break-desktop-min)
-		width: remify(220px)
+		width: remify(240px)
 
 	&__title
 		+link
 			color: inherit
 			text-decoration: none
-		background-color: $zon_lighter_grey
+		background-color: $zon_lighter_grey // TODO: can be removed soon
 		color: $zon-charcoal
 		display: block
 		font-size: remify(22px)
@@ -88,4 +85,4 @@
 	margin: 0
 	padding: 0
 	+respond-min($break-tablet-min)
-		padding: remify(0 $petite--px)
+		padding: remify($petite--px) $page-padding 0 remify($petite--px)
