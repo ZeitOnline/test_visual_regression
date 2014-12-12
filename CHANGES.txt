@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-60: Catch fake entries in get-asset filters
 
+- BUG-59: Fix wrong metadata in Feature Longform
+
 - ZON-1271: Polish footer
 
 

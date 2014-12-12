@@ -613,6 +613,20 @@ def test_feature_longform_should_have_zon_logo_classes(
     assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
 
 
+def test_feature_longform_should_have_zonish_title(testserver, testbrowser):
+
+    browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+    title = browser.cssselect('head > title')
+    assert 'ZEIT ONLINE' in title[0].text
+
+
+def test_feature_longform_should_have_zon_twittername(testserver, testbrowser):
+
+    browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+    creator = browser.cssselect('meta[name="twitter:site"]')
+    assert creator[0].values()[1] == '@zeitonline'
+
+
 def test_article_view_has_leadtime_set_if_article_provides_it(
         testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
