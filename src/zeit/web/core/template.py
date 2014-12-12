@@ -431,12 +431,15 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
             return
     else:
         asset = zeit.web.core.centerpage.get_image_asset(teaser)
+
+    # If the asset is not an image group, restart with default image.
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
+
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
-    # if imagegroup has no images, return default image
+    # If imagegroup has no images, return default image
     if len(asset.items()) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 

@@ -66,8 +66,8 @@ def test_get_teaser_image(testserver):
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), \
-        'Article with video asset should produce a teaser image.'
+    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
+        'Article with video asset should produce a teaser image.')
     assert 'katzencontent-zmo-large.jpg' in image.src
 
     teaser = zeit.cms.interfaces.ICMSContent(
@@ -75,8 +75,8 @@ def test_get_teaser_image(testserver):
         '/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), \
-        'Article with image asset should produce a teaser image.'
+    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
+        'Article with image asset should produce a teaser image.')
     assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
 
 
@@ -96,8 +96,7 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
-    unique_id = \
-        'http://xml.zeit.de/centerpage/katzencontent/'
+    unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser, unique_id=unique_id)
     assert image.uniqueId == (
@@ -111,8 +110,7 @@ def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
-    unique_id = \
-        'http://xml.zeit.de/moep/moepmoep/moep'
+    unique_id = 'http://xml.zeit.de/moep/moepmoep/moep'
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser, unique_id=unique_id)
     assert image is None
