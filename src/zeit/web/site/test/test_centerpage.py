@@ -131,3 +131,17 @@ def test_parquet_row_should_have_teasers(application):
     assert len(teasers) == 4, (
         'Parquet row does not contain 4 teasers.')
 
+
+def test_parquet_should_render_desired_amount_of_teasers(
+        testbrowser, testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    desired_amount = view.area_parquet[0].display_amount
+    browser = testbrowser(
+        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    teasers = browser.cssselect('#parquet > .parquet-row:first-child'
+     'article[data-block-type="teaser"]')
+    actual_amount = len(teasers)
+    assert actual_amount == desired_amount, (
+        'Parquet row does not display the right amount of teasers.')
