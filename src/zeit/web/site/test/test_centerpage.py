@@ -113,3 +113,21 @@ def test_tile7_for_fullwidth_is_rendered_on_correct_position(
         '.main__informatives > div:first-child[id="iqadtile7"]')
     assert tile7_on_first_position, (
         'Tile iqadtile7 is not present on first position.')
+
+
+def test_parquet_should_have_rows(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.area_parquet) == 2, (
+        'View has invald number of parquet rows.')
+
+
+def test_parquet_row_should_have_teasers(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    teasers = view.area_parquet[0]
+    assert len(teasers) == 4, (
+        'Parquet row does not contain 4 teasers.')
+
