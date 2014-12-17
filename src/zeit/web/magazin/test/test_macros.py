@@ -453,6 +453,37 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert fallback in output
 
 
+def test_macro_headervideo_handles_video_id_correctly(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
+
+    obj = mock.Mock()
+    obj.id = None
+    obj.uniqueId = None
+
+    # assert empty template
+    lines = tpl.module.headervideo(obj).splitlines()
+    output = ''
+    for line in lines:
+        output += line.strip()
+    assert output.strip() == ''
+
+    # assert set id
+    obj.id = 1
+
+    html = lxml.html.fromstring(tpl.module.headervideo(obj))
+    vid = html.cssselect('div[data-backgroundvideo="1"]')
+    assert len(vid) == 1
+
+    # assert set uniqueid
+    obj = {'uniqueId': '/2'}
+
+    html = lxml.html.fromstring(tpl.module.headervideo(obj))
+    vid = html.cssselect('div[data-backgroundvideo="2"]')
+
+    assert len(vid) == 1
+
+
 def test_macro_sharing_meta_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
