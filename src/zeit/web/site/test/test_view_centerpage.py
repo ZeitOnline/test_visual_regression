@@ -472,3 +472,36 @@ def test_small_teaser_without_image_has_no_padding_left(
     teaser = driver.find_element_by_css_selector(
         '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
     assert teaser.location.get('x') is 20
+
+
+def test_parquet_should_have_rows(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.area_parquet) == 2, (
+        'View has invald number of parquet rows.')
+
+
+def test_parquet_row_should_have_teasers(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    teasers = view.area_parquet[0]
+    assert len(teasers) == 4, (
+        'Parquet row does not contain 4 teasers.')
+
+
+def test_parquet_should_render_desired_amount_of_teasers(
+        testbrowser, testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    desired_amount = view.area_parquet[0].display_amount
+    browser = testbrowser(
+        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    teasers = browser.cssselect(
+        '#parquet > .parquet-row:first-child '
+        'article[data-block-type="teaser"]')
+    actual_amount = len(teasers)
+    assert actual_amount == desired_amount, (
+        'Parquet row does not display the right amount of teasers.')
