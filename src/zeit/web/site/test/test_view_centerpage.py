@@ -505,3 +505,42 @@ def test_parquet_should_render_desired_amount_of_teasers(
     actual_amount = len(teasers)
     assert actual_amount == desired_amount, (
         'Parquet row does not display the right amount of teasers.')
+
+
+def test_parquet_should_display_meta_links_only_on_desktop(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
+
+    topic_links = driver.find_element_by_css_selector(
+        '.parquet-meta__topic-links')
+    more_link = driver.find_element_by_css_selector(
+        '.parquet-meta__more-link')
+
+    driver.set_window_size(520, 960)
+    assert not topic_links.is_displayed(), (
+        'Parquet topic-links should not be displayed on mobile.')
+    assert not more_link.is_displayed(), (
+        'Parquet more-link should not be displayed on mobile.')
+
+    driver.set_window_size(980, 1024)
+    assert topic_links.is_displayed(), (
+        'Parquet topic-links must be displayed on desktop.')
+    assert more_link.is_displayed(), (
+        'Parquet more-link must be displayed on desktop.')
+
+
+def test_parquet_teaser_small_should_show_no_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    small_teaser = driver.find_element_by_css_selector(
+        '.teaser-parquet-small__media')
+
+    driver.set_window_size(320, 480)
+    assert not small_teaser.is_displayed(), (
+        'Small parquet teaser should hide it‘s image on mobile.')
+
+    driver.set_window_size(980, 1024)
+    assert small_teaser.is_displayed(), (
+        'Small parquet teaser must show it‘s image on desktop.')
