@@ -65,6 +65,8 @@
 		color: $white
 		font-size: $zon-font-m
 		line-height: 1.12
+		&:hover
+			color: $white
 		-webkit-font-smoothing: antialiased
 		+respond-min($break-phablet-min)
 			font-size: $font-xl
@@ -87,14 +89,17 @@
 	&__metadata
 		@extend %teaser-byline
 		-webkit-font-smoothing: antialiased
-		color: $white
+		color: $zon_mid_grey
 		+respond-min($break-desktop-min)
-			font-size: $font-m
+			font-size: $font-s--rem
 			letter-spacing: 0.04em
+			margin-bottom: 0px
+	&__datetime
+		@extend %teaser-datetime
 	&__commentcount
-		margin-left: $fine
+		@extend %teaser-commentcount
 		&:link, &:visited
 			color: inherit
-			border-bottom: 1px solid #999
+			border-bottom: 1px solid $zon_dark_grey
 		&:hover
-			border-bottom: 1px solid $white
+			border-bottom: 1px solid $zon_mid_grey

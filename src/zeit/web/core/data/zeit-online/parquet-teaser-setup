@@ -64,6 +64,10 @@
   <body>
     <cluster area="feature">
       <region area="lead">
+        <container cp:type="teaser" module="zon-large" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e14">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-06" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-06" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
         <container cp:type="teaser" module="zon-large" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
@@ -88,7 +92,7 @@
             <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-6/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>
@@ -144,8 +148,8 @@
     </cluster>
     <cluster area="teaser-mosaic">
       <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398a">
-        <container cp:type="teaser" module="parquet-large" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
-          <referenced_cp>http://xml.zeit.de/zeit-online/main-teaser-setup</referenced_cp>
+        <container cp:type="teaser" module="parquet-large" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="3" suppress-image-positions="3,4,5,6">
+          <referenced_cp>http://xml.zeit.de/zeit-online/parquet-teaser-setup</referenced_cp>
           <autopilot>true</autopilot>
           <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
             <xi:fallback>Ziel http://xml.zeit.de/index.lead nicht erreichbar.</xi:fallback>
@@ -160,8 +164,8 @@
         <container cp:type="placeholder" module="placeholder" cp:__name__="id-96d239ff-6922-4ef1-88f1-83a1273c2478"/>
         <container cp:type="placeholder" module="placeholder" cp:__name__="id-5b0d52bd-4beb-4602-b68a-6f00bdcb23c8"/>
       </region>
-      <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398a">
-        <container cp:type="teaser" module="parquet-large" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
+      <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398b">
+        <container cp:type="teaser" module="parquet-regular" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
           <referenced_cp>http://xml.zeit.de/zeit-online/main-teaser-setup</referenced_cp>
           <autopilot>true</autopilot>
           <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">

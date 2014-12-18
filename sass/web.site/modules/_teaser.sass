@@ -61,18 +61,20 @@
 		color: inherit
 	&:hover
 		span
-			text-decoration: underline
+			text-decoration: none
 		span:first-child
 			text-decoration: none
 
 %teaser-title
 	display: block
-	color: $color-text
+	color: $zon-charcoal
 	font-family: TabletGothic
 	font-size: $font-l
 	font-weight: 700
 	letter-spacing: $zon-letter-spacing-s
 	line-height: 1.232
+	&:hover
+		color: $black
 
 %teaser-media
 	margin: 0 0 $petite 0
@@ -84,8 +86,8 @@
 
 %teaser-text
 	color: $grey--mid
-	line-height: 1.344
-	margin: 0 0 $thin 0
+	line-height: 1.4
+	margin: 0 0 $micro 0
 
 %teaser-byline
 	color: $grey
@@ -98,14 +100,19 @@
 
 %teaser-metadata
 	font-size: em(13px)
+	line-height: 1.4
 	font-weight: bold
 	letter-spacing: $standard-letter-spacing
 
+%teaser-datetime
+	&:after
+		content: ' ⧸ '
+		margin: 0 $micro 0 $micro
+
 %teaser-commentcount
-	margin-left: $fine
 	&:link, &:visited
-		border-bottom: 1px solid #ccc
+		border-bottom: 1px solid $zon_lighter_grey
 		color: inherit
 		text-decoration: none
 	&:hover
-		border-bottom: 1px solid #777
+		border-bottom: 1px solid $zon_light_grey

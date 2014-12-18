@@ -472,3 +472,75 @@ def test_small_teaser_without_image_has_no_padding_left(
     teaser = driver.find_element_by_css_selector(
         '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
     assert teaser.location.get('x') is 20
+
+
+def test_parquet_should_have_rows(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert len(view.area_parquet) == 2, (
+        'View has invald number of parquet rows.')
+
+
+def test_parquet_row_should_have_teasers(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    teasers = view.area_parquet[0]
+    assert len(teasers) == 4, (
+        'Parquet row does not contain 4 teasers.')
+
+
+def test_parquet_should_render_desired_amount_of_teasers(
+        testbrowser, testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    desired_amount = view.area_parquet[0].display_amount
+    browser = testbrowser(
+        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    teasers = browser.cssselect(
+        '#parquet > .parquet-row:first-child '
+        'article[data-block-type="teaser"]')
+    actual_amount = len(teasers)
+    assert actual_amount == desired_amount, (
+        'Parquet row does not display the right amount of teasers.')
+
+
+def test_parquet_should_display_meta_links_only_on_desktop(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
+
+    topic_links = driver.find_element_by_css_selector(
+        '.parquet-meta__topic-links')
+    more_link = driver.find_element_by_css_selector(
+        '.parquet-meta__more-link')
+
+    driver.set_window_size(520, 960)
+    assert not topic_links.is_displayed(), (
+        'Parquet topic-links should not be displayed on mobile.')
+    assert not more_link.is_displayed(), (
+        'Parquet more-link should not be displayed on mobile.')
+
+    driver.set_window_size(980, 1024)
+    assert topic_links.is_displayed(), (
+        'Parquet topic-links must be displayed on desktop.')
+    assert more_link.is_displayed(), (
+        'Parquet more-link must be displayed on desktop.')
+
+
+def test_parquet_teaser_small_should_show_no_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    small_teaser = driver.find_element_by_css_selector(
+        '.teaser-parquet-small__media')
+
+    driver.set_window_size(320, 480)
+    assert not small_teaser.is_displayed(), (
+        'Small parquet teaser should hide it‘s image on mobile.')
+
+    driver.set_window_size(980, 1024)
+    assert small_teaser.is_displayed(), (
+        'Small parquet teaser must show it‘s image on desktop.')
