@@ -46,7 +46,7 @@
 	&__combined-link
 		@extend %teaser-combined-link
 	&__series
-		letter-spacing: 0.05
+		letter-spacing: $zon-letter-spacing-l
 		display: inline-block
 		font-family: $font-tabletgothic
 		font-size: $font-xs--rem
@@ -93,6 +93,8 @@
 		color: $grey
 		font-size: 14px
 		font-weight: 200
+	&__datetime
+		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
 	&__kicker-container

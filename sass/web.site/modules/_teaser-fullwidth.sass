@@ -94,8 +94,10 @@
 			font-size: $font-s--rem
 			letter-spacing: 0.04em
 			margin-bottom: 0px
+	&__datetime
+		@extend %teaser-datetime
 	&__commentcount
-		margin-left: $fine
+		@extend %teaser-commentcount
 		&:link, &:visited
 			color: inherit
 			border-bottom: 1px solid $zon_dark_grey

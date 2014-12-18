@@ -46,6 +46,7 @@
 	&__title
 		display: block
 		font-size: $font-l--rem
+		letter-spacing: $zon-letter-spacing-s
 		font-weight: bold
 		line-height: 1.15
 		+respond-min($break-desktop-min)
@@ -64,6 +65,8 @@
 		color: $grey
 		font-size: $font-s--rem
 		font-weight: 200
+	&__datetime
+		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
 

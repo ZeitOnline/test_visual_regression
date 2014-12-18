@@ -104,8 +104,12 @@
 	font-weight: bold
 	letter-spacing: $standard-letter-spacing
 
+%teaser-datetime
+	&:after
+		content: ' ⧸ '
+		margin: 0 $micro 0 $micro
+
 %teaser-commentcount
-	margin-left: $fine
 	&:link, &:visited
 		border-bottom: 1px solid $zon_lighter_grey
 		color: inherit
