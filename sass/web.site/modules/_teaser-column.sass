@@ -46,14 +46,16 @@
 	&__combined-link
 		@extend %teaser-combined-link
 	&__series
+		letter-spacing: $zon-letter-spacing-l
 		display: inline-block
 		font-family: $font-tabletgothic
-		font-size: $font-s--rem
+		font-size: $font-xs--rem
 		font-weight: bold
 		left: $teaser-column-series-position
 		position: absolute
 		text-transform: uppercase
 		top: $small
+		color: $zon-charcoal
 		a:link &,
 		a:visited &,
 		a:active &,
@@ -65,12 +67,9 @@
 			position: static
 			top: auto
 			&:after
-				content: ' \2022 '
+				content: ' ⧸ '
 	&__kicker
 		@extend %teaser-kicker
-		font-size: $font-s--rem
-		font-weight: 200
-		font-family: TabletGothic
 		+respond-min($break-desktop-min)
 			display: inline
 	&__title
@@ -94,6 +93,8 @@
 		color: $grey
 		font-size: 14px
 		font-weight: 200
+	&__datetime
+		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
 	&__kicker-container
