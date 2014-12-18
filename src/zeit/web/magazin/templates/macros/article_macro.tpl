@@ -151,7 +151,7 @@
 {%- endmacro %}
 
 {% macro raw(obj) -%}
-    <div class="raw">{{obj.xml|safe}}</div>
+    <div class="raw">{{ obj.xml|safe }}</div>
 {%- endmacro %}
 
 {% macro citation(obj) -%}
@@ -221,7 +221,7 @@
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
-                    <a href="{{obj.copyright[0][1]}}" target="_blank">
+                    <a href="{{ obj.copyright[0][1] }}" target="_blank">
                     {%- endif -%}
                         {{ obj.copyright[0][0] }}
                     {%- if obj.copyright[0][1] -%}
@@ -244,16 +244,16 @@
     {%- if authors -%}
         {%- for author in authors -%}
             {%- if titlecase -%}
-                {{author.prefix|title}}
+                {{ author.prefix|title }}
             {% else %}
-                {{author.prefix}}
+                {{ author.prefix }}
             {% endif %}
             {%- if author.href -%}
-                <a href="{{author.href|translate_url}}" class="{{class}}">{{author.name}}</a>{{author.location}}
+                <a href="{{ author.href|translate_url }}" class="{{ class }}">{{ author.name }}</a>{{ author.location }}
             {%- else -%}
-                <span class="{{class}}">{{author.name}}{{author.location}}</span>
+                <span class="{{ class }}">{{ author.name }}{{ author.location }}</span>
             {%- endif -%}
-            {{author.suffix}}
+            {{ author.suffix }}
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}
@@ -269,13 +269,13 @@
              figure-stamp--right
         {% else %}
              figure is-constrained is-centered
-        {% endif %}" data-video="{{obj.id}}">
+        {% endif %}" data-video="{{ obj.id }}">
             <div class="video__still">
-                <img class="figure__media" src="{{obj.video_still| default('http://placehold.it/160x90', true)}}" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
+                <img class="figure__media" src="{{ obj.video_still| default('http://placehold.it/160x90', true) }}" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
                 <span class="video__button"></span>
             </div>
             <figcaption class="figure__caption">
-                    {{obj.description}}
+                    {{ obj.description }}
             </figcaption>
         </figure>
     {%- endif %}
@@ -290,38 +290,38 @@
     {% endif %}
 
     {% if id %}
-        <div data-backgroundvideo="{{id}}" class="{{wrap_class}}">
-            <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{obj.video_still}}">
-                <source src="{{obj.highest_rendition}}" type="video/mp4">
-                <source src="http://live0.zeit.de/multimedia/videos/{{id}}.webm" type="video/webm">
+        <div data-backgroundvideo="{{ id }}" class="{{ wrap_class }}">
+            <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{ obj.video_still }}">
+                <source src="{{ obj.highest_rendition }}" type="video/mp4">
+                <source src="http://live0.zeit.de/multimedia/videos/{{ id }}.webm" type="video/webm">
             </video>
-            <img class="video--fallback {{img_class}}" src="http://live0.zeit.de/multimedia/videos/{{id}}.jpg" alt="Video: {{obj.title}}" title="Video: {{obj.title}}">
+            <img class="video--fallback {{ img_class }}" src="http://live0.zeit.de/multimedia/videos/{{ id }}.jpg" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
         </div>
     {% endif %}
 {%- endmacro %}
 
 {% macro comment(comment, featured) -%}
-    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{comment.cid}}"{% endif %}>
+    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{ comment.cid }}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
-            <span class="comment__head__avatar" style="background-image: url('{{comment.img_url}}')"></span>
+            <span class="comment__head__avatar" style="background-image: url('{{ comment.img_url }}')"></span>
             {% endif -%}
             <div class="comment__head__meta">
-                <a class="comment__head__meta__name" href="{{comment.userprofile_url}}">{{comment.name|e}}</a>
-                <a href="#{{comment.cid}}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{comment.timestamp | format_date_ago()}}</a>
+                <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
+                <a href="#{{ comment.cid }}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
                 {% if comment.role -%}
-                <div class="comment__head__meta__label">{{comment.role}}</div>
+                <div class="comment__head__meta__label">{{ comment.role }}</div>
                 {% endif -%}
             </div>
         </div>
         <div class="comment__body">
-            {{comment.text|safe}}
+            {{ comment.text|safe }}
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
+            <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{ comment.cid|replace('cid-', '') }}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {% endif -%}
-            <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
+            <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{ comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
         </aside>
     </article>
 {%- endmacro %}
@@ -337,15 +337,15 @@
             </div>
             {%- endif %}
             <div class="article__sharing__services blind">
-                <a href="http://www.facebook.com/sharer/sharer.php?u={{view.article_url|e}}" target="_blank" class="article__sharing__item">
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url|e }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                <a href="http://twitter.com/home?status={{view.article_url|e}}" target="_blank" class="article__sharing__item">
+                <a href="http://twitter.com/home?status={{ view.article_url|e }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a href="https://plus.google.com/share?url={{view.article_url|e}}" target="_blank" class="article__sharing__item">
+                <a href="https://plus.google.com/share?url={{ view.article_url|e }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-google"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
                </a>
@@ -360,7 +360,7 @@
 
         <div class="article__comments-trigger">
             <a class="article__comments-trigger__link js-comments-trigger">
-                <span class="article__comments-trigger__count icon-sharebox-close">{{obj.comments.comment_count}}</span>
+                <span class="article__comments-trigger__count icon-sharebox-close">{{ obj.comments.comment_count }}</span>
                 <span class="article__comments-trigger__text">{% if obj.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
             </a>
         </div>
@@ -368,14 +368,14 @@
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
             {% if request.app_info.authenticated -%}
-            <form action="{{obj.comments.comment_post_url}}" method="POST" class="comment__form" id="js-comments-form">
+            <form action="{{ obj.comments.comment_post_url }}" method="POST" class="comment__form" id="js-comments-form">
                 <p>
                     <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
-                    <input type="hidden" name="nid" value="{{obj.comments.nid}}">
+                    <input type="hidden" name="nid" value="{{ obj.comments.nid }}">
                     <input type="hidden" name="pid" value="">
-                    <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
+                    <input type="hidden" name="uid" value="{{ request.app_info.user.uid }}">
                 </p>
-                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{request.app_info.community_host}}user/{{request.app_info.user.uid}}">{{request.app_info.user.name|e}}</a></div>
+                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">{{ request.app_info.user.name|e }}</a></div>
                 <div class="comment__form__actions">
                     <input type="submit" class="button" value="Kommentieren" disabled />
                 </div>
@@ -385,8 +385,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
                 </div>
-                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.login}}?destination={{request.url|e}}" class="button">Anmelden</a>
-                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.register}}?destination={{request.url|e}}" class="button">Registrieren</a>
+                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url|e }}" class="button">Anmelden</a>
+                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url|e }}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </div>
@@ -428,14 +428,14 @@
         </script>
         <script type="text/template" id="js-report-comment-template">
             {% if request.app_info.authenticated -%}
-            <form action="{{obj.comments.comment_report_url}}" method="POST" class="comment__form" style="display: none">
+            <form action="{{ obj.comments.comment_report_url }}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
                     Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">
-                    <input type="hidden" name="uid" value="{{request.app_info.user.uid}}">
+                    <input type="hidden" name="uid" value="{{ request.app_info.user.uid }}">
                     <input type="hidden" name="content_id" value="<% commentId %>">
                     <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
                 </p>
@@ -445,8 +445,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
                 </div>
-                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.login}}?destination={{request.url|e}}" class="button">Anmelden</a>
-                <a href="{{request.app_info.community_host}}{{request.app_info.community_paths.register}}?destination={{request.url|e}}" class="button">Registrieren</a>
+                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url|e }}" class="button">Anmelden</a>
+                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url|e }}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </script>
@@ -472,10 +472,10 @@
             var el = document.getElementsByClassName('article__head__meta__date');
             var content = el[0].textContent != undefined ? el[0].textContent : el[0].innerText;
             if( content != undefined ){
-                if( '{{format}}' === 'long' ){
-                    el[0].innerHTML = '{{publish_date}} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
+                if( '{{ format }}' === 'long' ){
+                    el[0].innerHTML = '{{ publish_date }} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
                 }else{
-                    el[0].innerHTML = '{{publish_date}} —<br><span>editiert: ' + content + '</span>';
+                    el[0].innerHTML = '{{ publish_date }} —<br><span>editiert: ' + content + '</span>';
                 }
             }
         </script>
@@ -489,24 +489,24 @@
         <div class="paginator__a11y__title is-audible" id="pagination-title" style="display:none">Seitennavigation</div> <!-- nach unsichtbar verschieben -->
         {% if pagination.next_page_title -%}
             <div class="article__pagination__nexttitle">
-                <a href="{{pagination.next_page_url}}">Auf Seite {{pagination.current + 1}} <span class="article__pagination__dash">—</span> {{pagination.next_page_title}}</a>
+                <a href="{{ pagination.next_page_url }}">Auf Seite {{ pagination.current + 1 }} <span class="article__pagination__dash">—</span> {{ pagination.next_page_title }}</a>
             </div>
         {%- endif %}
         <ul class="article__pager">
             {% if pagination.prev_page_url %}
-                <li class="article__pager__prev"><a class="icon-pagination-previous" href="{{pagination.prev_page_url}}">Zurück</a></li>
+                <li class="article__pager__prev"><a class="icon-pagination-previous" href="{{ pagination.prev_page_url }}">Zurück</a></li>
             {% else %}
                 <li class="article__pager__prev is-inactive"><span class="icon-pagination-previous">Zurück</span></li>
             {% endif %}
 
             {% for url in pagination.pages_urls -%}
                 {% set current_class = "is-current" if loop.index == pagination.current else "" %}
-                <li class="article__pager__number {{current_class}}"><a href="{{url}}">{{loop.index}}</a></li>
+                <li class="article__pager__number {{ current_class }}"><a href="{{ url }}">{{ loop.index }}</a></li>
             {%- endfor %}
 
 
             {% if pagination.next_page_url %}
-                <li class="article__pager__next"><a class="icon-pagination-next" href="{{pagination.next_page_url}}">Vor</a></li>
+                <li class="article__pager__next"><a class="icon-pagination-next" href="{{ pagination.next_page_url }}">Vor</a></li>
             {% else %}
                 <li class="article__pager__next is-inactive"><span class="icon-pagination-next">Vor</span></li>
             {% endif %}
