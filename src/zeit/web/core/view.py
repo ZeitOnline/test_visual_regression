@@ -34,6 +34,10 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self._set_response_headers()
+
+    def _set_response_headers(self):
+        # ZMO Version header
         self.request.response.headers.add(
             'X-ZMOVersion', self.request.registry.settings.zmo_version)
 
