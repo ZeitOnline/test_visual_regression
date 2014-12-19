@@ -41,6 +41,57 @@ class Base(object):
         self.request.response.headers.add(
             'X-ZMOVersion', self.request.registry.settings.zmo_version)
 
+        # C1 headers
+        #
+        # The following rules scream for inconsistency, but have already been
+        # defined for tracking services long ago. :-(
+        # Therefore they are just copied as is from the XSLT backend,
+        # managing HTTP headers until launch.
+        # (e.g. uppercase ressort vs lowercase sub ressort)
+
+        # Additional predefined doc type values
+        c1_add_doc_types = {
+            'video': 'Video',
+            'article': 'Artikel',
+            'gallery': 'Bildergalerie'}
+
+        # Additional predefined section (a.k.a. channel) values
+        c1_add_sections = {
+            'campus': 'Studium',
+            'homepage': 'Homepage',
+        }
+
+        c1_track_headers = {
+            'C1-Track-Origin': lambda: 'web',
+            'C1-Track-Service-ID': lambda: 'zon',
+            'C1-Track-Doc-Type': lambda:
+                c1_add_doc_types.get(self.type, 'Centerpage'),
+            'C1-Track-Content-ID': lambda:
+                '/' + '/'.join(self.request.traversed).encode('utf-8'),
+            'C1-Track-CMS-ID': lambda:
+                zeit.cms.content.interfaces.IUUID(self.context).id,
+            'C1-Track-Channel': lambda:
+                c1_add_sections.get(
+                    self.context.ressort, self.context.ressort),
+            'C1-Track-Sub-Channel': lambda:
+                self.context.sub_ressort,
+            'C1-Track-Heading': lambda:
+                self.context.title.encode('utf-8'),
+            'C1-Track-Kicker': lambda:
+                self.context.supertitle.encode('utf-8')
+        }
+
+        for th_name in c1_track_headers:
+            try:
+                track_header = c1_track_headers[th_name]()
+            except AttributeError:
+                continue
+            if track_header is None:
+                continue
+            self.request.response.headers.add(
+                th_name,
+                track_header)
+
     @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
