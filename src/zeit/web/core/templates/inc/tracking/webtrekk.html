@@ -13,7 +13,7 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    var Z_WT_KENNUNG = "redaktion.{{ view.ressort  }}.{{ view.sub_ressort }}..{{ view.type }}.online./{{ '/'.join(request.traversed or ()) }}";
+    var Z_WT_KENNUNG = "redaktion.{{ view.ressort  }}.{{ view.sub_ressort }}.{{ view.serie }}.{{ view.type }}.online./{{ '/'.join(request.traversed or ()) }}";
 
     var webtrekk = {
         linkTrack : "standard",
@@ -31,7 +31,7 @@
             3: "{{ view.ressort }}",
             4: "Online",
             5: "{{ view.sub_ressort }}",
-            6: "{{ view.serie | hide_none }}",
+            6: "{{ view.serie }}",
             7: "{{ request.path_info | substring_from('/') }}",
             8: "{{ view.banner_channel }}",
             9: "{{ date }}"
