@@ -67,7 +67,7 @@ class Base(object):
             'C1-Track-Doc-Type': lambda:
                 c1_add_doc_types.get(self.type, 'Centerpage'),
             'C1-Track-Content-ID': lambda:
-                '/' + '/'.join(self.request.traversed).encode('utf-8'),
+                '/' + '/'.join(self.request.traversed),
             'C1-Track-CMS-ID': lambda:
                 zeit.cms.content.interfaces.IUUID(self.context).id,
             'C1-Track-Channel': lambda:
@@ -76,9 +76,9 @@ class Base(object):
             'C1-Track-Sub-Channel': lambda:
                 self.context.sub_ressort,
             'C1-Track-Heading': lambda:
-                self.context.title.encode('utf-8'),
+                self.context.title,
             'C1-Track-Kicker': lambda:
-                self.context.supertitle.encode('utf-8')
+                self.context.supertitle
         }
 
         for th_name in c1_track_headers:
@@ -90,7 +90,7 @@ class Base(object):
                 continue
             self.request.response.headers.add(
                 th_name,
-                track_header)
+                track_header.encode('utf-8'))
 
     @zeit.web.reify
     def type(self):
