@@ -4,7 +4,7 @@
 
 	+respond-min($break-tablet-min)
 		width: initial
-		margin: 0
+		margin-bottom: $twice
 
 	&__heading
 		border-bottom: $hair--px solid $zon_light_grey
@@ -34,8 +34,8 @@
 		font-size: $font-mm
 		font-weight: bold
 		line-height: $headline-line-height
-		+on-interaction
-			color: $zon_mid_grey
+		&:hover
+			color: $zon_grey
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -69,14 +69,17 @@
 		width: $small
 
 .buzz-line
-	margin: $thin 0 0 0
+	margin: $micro 0 0 0
 
 	&__icon
 		background-size: contain
 		display: inline-block
 		height: $small
 		width: $small
+		opacity: 0.7
 	&__label
+		color: $zon_grey
+		font-size: $font-xs
 		font-family: $font-tabletgothic
 		font-size: $little
 		font-weight: 200
