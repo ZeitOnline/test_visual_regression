@@ -48,8 +48,8 @@
         },
         hasLocalstorage = function() {
             try {
-                return ('localStorage' in win) && ('setItem' in localStorage)
-            } catch(e) {
+                return ('localStorage' in win) && ('setItem' in localStorage);
+            } catch (e) {
                 return false;
             }
         },
@@ -65,7 +65,7 @@
                 // check against sites
                 var ret = false;
                 $.each( defaults.sites, function( i, n ) {
-                    if( doc.referrer.search(n.regex) > -1 ) {
+                    if ( doc.referrer.search(n.regex) > -1 ) {
                         ret = n.name;
                         return false; // return false to exit loop
                     }
@@ -96,7 +96,7 @@
              * @returns {boolean}
             */
             hasExternalReferrer: function() {
-                return document.referrer && document.referrer.indexOf(location.protocol + "//" + location.host) !== 0;
+                return document.referrer && document.referrer.indexOf(location.protocol + '//' + location.host) !== 0;
             },
             /**
              * checks lookup the count for name and increment it
@@ -145,10 +145,10 @@
         };
 
     $.fn.referrerCount = function( arg ) {
-        if( hasLocalstorage() ) {
+        if ( hasLocalstorage() ) {
             if ( methods[ arg ] ) {
                 return methods[ arg ].apply( this, Array.prototype.slice.call( arguments, 1 ) );
-            } else if ( typeof method === 'object' || ! arg ) {
+            } else if ( typeof method === 'object' || !arg ) {
                 return methods.init.apply( this, arguments );
             } else {
                 $.error( 'Method ' + arg + ' does not exist on jQuery.referrerCount' );
