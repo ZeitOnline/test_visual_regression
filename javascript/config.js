@@ -20,6 +20,7 @@ require.config({
     shim: {
         'bxSlider': [ 'jquery' ],
         'jquery.debounce': [ 'jquery' ],
+        'web.core/plugins/jquery.referrerCount': [ 'jquery' ],
         'web.magazin/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery' ],
         'web.magazin/plugins/jquery.switchvideo': [ 'jquery' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
