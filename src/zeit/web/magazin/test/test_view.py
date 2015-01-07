@@ -508,7 +508,7 @@ def test_article_has_correct_image_group(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.image_group.uniqueId == \
-        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube'
+        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/'
 
 
 def test_article_has_correct_sharing_image(testserver, testbrowser):
