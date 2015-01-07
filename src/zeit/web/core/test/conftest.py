@@ -8,6 +8,7 @@ import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.etree
 import lxml.html
+import mock
 import plone.testing.zca
 import pyramid.testing
 import pytest
@@ -128,6 +129,13 @@ def test_asset(path):
     """Return file-object for given test asset path."""
     return open(pkg_resources.resource_filename(
         'zeit.web.core', 'data' + path), 'rb')
+
+
+@pytest.fixture
+def mocked_view():
+    m = mock.MagicMock()
+    m.traversed = '/'
+    return m
 
 
 @pytest.fixture
