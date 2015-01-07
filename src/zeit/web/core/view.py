@@ -84,7 +84,7 @@ class Base(object):
         for th_name in c1_track_headers:
             try:
                 track_header = c1_track_headers[th_name]()
-            except AttributeError:
+            except (AttributeError, TypeError):
                 continue
             if track_header is None:
                 continue
