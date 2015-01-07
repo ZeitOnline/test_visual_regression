@@ -51,7 +51,7 @@ def test_area_main_should_filter_teasers():
 
     context['lead'].values = create_mocked_teaserblocks
 
-    request = mock.Mock()
+    request = mock.MagicMock()
     cp = zeit.web.site.view_centerpage.Centerpage(context, request)
 
     assert len(cp.area_main) == 2
@@ -260,23 +260,23 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
     assert len(noscript) == 2, 'No noscript areas found'
 
 
-def test_topiclinks_title_schould_have_a_value_and_default_value():
-    mycp = mock.Mock()
+def test_topiclinks_title_should_have_a_value_and_default_value():
+    mycp = mock.MagicMock()
     mycp.topiclink_title = 'My Title'
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.MagicMock())
 
     assert view.topiclink_title == 'My Title', 'There is no title present'
 
-    mycp = mock.Mock()
+    mycp = mock.MagicMock()
     mycp.topiclink_title = None
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.MagicMock())
 
     assert view.topiclink_title == 'Schwerpunkte', 'There is no title present'
 
 
 def test_centerpage_view_should_have_topic_links():
 
-    mycp = mock.Mock()
+    mycp = mock.MagicMock()
 
     mycp.topiclink_title = 'My Title'
     mycp.topiclink_label_1 = 'Label 1'
@@ -477,7 +477,7 @@ def test_small_teaser_without_image_has_no_padding_left(
 def test_parquet_should_have_rows(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.MagicMock())
     assert len(view.area_parquet) == 2, (
         'View has invald number of parquet rows.')
 
@@ -485,7 +485,7 @@ def test_parquet_should_have_rows(application):
 def test_parquet_row_should_have_teasers(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.MagicMock())
     teasers = view.area_parquet[0]
     assert len(teasers) == 4, (
         'Parquet row does not contain 4 teasers.')
@@ -495,7 +495,7 @@ def test_parquet_should_render_desired_amount_of_teasers(
         testbrowser, testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.MagicMock())
     desired_amount = view.area_parquet[0].display_amount
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)

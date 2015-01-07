@@ -54,7 +54,7 @@ def test_dict_view_produces_acceptable_return_value():
     assert obj() == {'bar': 1}, 'DictView retains its return value.'
 
 
-def test_breadcumb_should_produce_expected_data(mocked_view):
+def test_breadcumb_should_produce_expected_data():
     context = mock.Mock()
     context.ressort = 'zeit-magazin'
     context.sub_ressort = 'mode-design'
@@ -88,7 +88,7 @@ def test_breadcumb_should_produce_expected_data(mocked_view):
         )
     }
 
-    article = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article = zeit.web.magazin.view_article.Article(context, mock.MagicMock())
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
@@ -100,8 +100,7 @@ def test_breadcumb_should_produce_expected_data(mocked_view):
     assert article.breadcrumb == l
 
 
-def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
-        mocked_view):
+def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context = mock.Mock()
     context.ressort = 'zeit-magazin'
     context.sub_ressort = 'lebensartx'
@@ -135,7 +134,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
         )
     }
 
-    article = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article = zeit.web.magazin.view_article.Article(context, mock.MagicMock())
 
     l = [
         ('Start', 'http://www.zeit.de/index', 'myid1'),
@@ -145,9 +144,10 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
     assert article.breadcrumb == l
 
 
-def test_linkreach_property_should_be_set(application, mocked_view):
+def test_linkreach_property_should_be_set(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     article_view.request.url = 'index'
     article_view.request.traversed = ('index',)
     article_view.request.route_url = lambda *args: ''
@@ -155,9 +155,10 @@ def test_linkreach_property_should_be_set(application, mocked_view):
 
 
 def test_linkreach_property_should_fetch_correct_data(
-        application, mocked_view):
+        application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     article_view.request.url = 'index'
     article_view.request.traversed = ('index',)
     article_view.request.route_url = lambda *args: ''
@@ -165,17 +166,19 @@ def test_linkreach_property_should_fetch_correct_data(
 
 
 def test_header_img_should_be_first_image_of_content_blocks(
-        application, mocked_view):
+        application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_img.src == url
 
 
-def test_article_should_have_author_box(testserver, testbrowser, mocked_view):
+def test_article_should_have_author_box(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/autorenbox')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     body = zeit.content.article.edit.interfaces.IEditableBody(
         article_view.context)
     assert isinstance(body.values()[2], (
@@ -183,17 +186,19 @@ def test_article_should_have_author_box(testserver, testbrowser, mocked_view):
 
 
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(
-        application, mocked_view):
+        application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.header_img is None
 
 
 def test_header_video_should_be_first_video_of_content_blocks(
-        application, mocked_view):
+        application):
     vid_url = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     url = ('http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/'
            '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights'
            '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
@@ -201,25 +206,28 @@ def test_header_video_should_be_first_video_of_content_blocks(
 
 
 def test_header_video_should_be_none_if_we_have_a_wrong_layout(
-        application, mocked_view):
+        application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.header_video is None
 
 
 def test_header_elem_should_be_img_if_there_is_a_header_img(
-        application, mocked_view):
+        application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert isinstance(article_view.header_elem, (
         zeit.web.core.block.HeaderImageStandard))
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(
-        application, mocked_view):
+        application):
     xml = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(xml)
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert isinstance(
         article_view.header_elem, zeit.web.core.block.HeaderVideo)
 
@@ -351,63 +359,72 @@ def test_content_should_have_type(testserver, testbrowser):
     assert content_type is not None
 
 
-def test_tracking_type_is_provided(testserver, testbrowser, mocked_view):
+def test_tracking_type_is_provided(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.tracking_type == 'Artikel'
 
 
-def test_artikel02_has_lebensart_ressort(testserver, testbrowser, mocked_view):
+def test_artikel02_has_lebensart_ressort(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.ressort == 'lebensart'
 
 
-def test_artikel02_has_leben_sub_ressort(testserver, testbrowser, mocked_view):
+def test_artikel02_has_leben_sub_ressort(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.sub_ressort == 'leben'
 
 
 def test_artikel02_has_correct_banner_channel(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
-def test_artikel05_has_rankedTagsList(testserver, testbrowser, mocked_view):
+def test_artikel05_has_rankedTagsList(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.rankedTagsList is not None
     assert article_view.rankedTagsList != ''
 
 
 def test_artikel01_has_correct_authorsList(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.authorsList == 'Anne Mustermann'
 
 
 def test_artikel08_has_correct_authorsList(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.authorsList == 'Anne Mustermann;Oliver Fritsch'
 
 
 def test_artikel05_has_set_text_length(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.text_length is not None
 
 
-def test_article05_has_correct_dates(testserver, testbrowser, mocked_view):
+def test_article05_has_correct_dates(testserver, testbrowser):
     # updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.date_last_published_semantic.isoformat() == (
         '2013-11-03T08:10:00.626737+01:00')
     assert article_view.date_first_released.isoformat() == (
@@ -416,10 +433,11 @@ def test_article05_has_correct_dates(testserver, testbrowser, mocked_view):
         '2013-11-03T08:10:00.626737+01:00')
 
 
-def test_article03_has_correct_dates(testserver, testbrowser, mocked_view):
+def test_article03_has_correct_dates(testserver, testbrowser):
     # not updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.date_first_released.isoformat() == (
         '2013-07-30T17:20:50.176115+02:00')
     assert article_view.show_article_date.isoformat() == (
@@ -427,110 +445,124 @@ def test_article03_has_correct_dates(testserver, testbrowser, mocked_view):
 
 
 def test_article09_has_correct_date_formats(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     # print article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.show_date_format == 'long'
     assert article_view.show_date_format_seo == 'short'
 
 
 def test_article10_has_correct_date_formats(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     # online article, updated
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.show_date_format == 'long'
     assert article_view.show_date_format_seo == 'long'
 
 
-def test_article08_has_first_author(testserver, testbrowser, mocked_view):
+def test_article08_has_first_author(testserver, testbrowser):
     xml = 'http://xml.zeit.de/artikel/08'
     context = zeit.cms.interfaces.ICMSContent(xml)
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.authors[0]['name'] == u'Anne Mustermann'
     assert article_view.authors[0]['suffix'] == ' und'
     assert article_view.authors[0]['prefix'] == ' von'
     assert article_view.authors[0]['location'] == ', Berlin'
 
 
-def test_article08_has_second_author(testserver, testbrowser, mocked_view):
+def test_article08_has_second_author(testserver, testbrowser):
     xml = 'http://xml.zeit.de/artikel/08'
     context = zeit.cms.interfaces.ICMSContent(xml)
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.authors[1]['name'] == u'Oliver Fritsch'
     assert article_view.authors[1]['suffix'] == ''
     assert article_view.authors[1]['prefix'] == ''
     assert article_view.authors[1]['location'] == ', London'
 
 
-def test_article08_has_correct_genre(testserver, testbrowser, mocked_view):
+def test_article08_has_correct_genre(testserver, testbrowser):
     # 'ein'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.genre == 'ein Kommentar'
 
 
-def test_article09_has_correct_genre(testserver, testbrowser, mocked_view):
+def test_article09_has_correct_genre(testserver, testbrowser):
     # 'eine'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.genre == 'eine Glosse'
 
 
-def test_article05_has_no_genre(testserver, testbrowser, mocked_view):
+def test_article05_has_no_genre(testserver, testbrowser):
     # no genre
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.genre is None
 
 
-def test_article08_has_correct_source(testserver, testbrowser, mocked_view):
+def test_article08_has_correct_source(testserver, testbrowser):
     # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.source == 'DIE ZEIT Nr. 26/2008'
 
 
-def test_article10_has_correct_source(testserver, testbrowser, mocked_view):
+def test_article10_has_correct_source(testserver, testbrowser):
     # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.source == 'golem.de'
 
 
-def test_article03_has_empty_source(testserver, testbrowser, mocked_view):
+def test_article03_has_empty_source(testserver, testbrowser):
     # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.source is None
 
 
 def test_article_has_correct_twitter_card_type(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
 def test_longform_has_correct_twitter_card_type(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
-def test_article_has_correct_image_group(testserver, testbrowser, mocked_view):
+def test_article_has_correct_image_group(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert article_view.image_group.uniqueId == \
         'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube'
 
 
 def test_article_has_correct_sharing_image(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    article_view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert zeit.web.core.template.closest_substitute_image(
         article_view.image_group, 'og-image').uniqueId == (
         'http://xml.zeit.de/exampleimages/artikel/01/'
@@ -542,19 +574,20 @@ def test_article_has_correct_sharing_image(
 
 
 def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    page = zeit.web.magazin.view_article.ArticlePage(article, mocked_view)
+    page = zeit.web.magazin.view_article.ArticlePage(
+        article, mock.MagicMock())
     page.request.registry.settings = {}
     page.request.path_info = u'article/03/seite-9'
     with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
         page()
 
 
-def test_ArticlePage_should_work_if_pages_from_request_fit(
-        testserver, mocked_view):
+def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    page = zeit.web.magazin.view_article.ArticlePage(article, mocked_view)
+    page = zeit.web.magazin.view_article.ArticlePage(
+        article, mock.MagicMock())
     page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-3'
     page()
@@ -568,10 +601,11 @@ def test_ArticlePage_komplett_should_show_all_pages(testserver, testbrowser):
 
 
 def test_pagination_dict_should_have_correct_entries(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
 
-    view = zeit.web.magazin.view_article.ArticlePage(article, mocked_view)
+    view = zeit.web.magazin.view_article.ArticlePage(
+        article, mock.MagicMock())
     view.request.path_info = u'article/03/seite-2'
     view.request.traversed = (u'artikel', u'03')
     view.request.route_url.return_value = '/'
@@ -582,7 +616,8 @@ def test_pagination_dict_should_have_correct_entries(
         u'Sogar die eckige Flasche kommt zur\xfcck')
 
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    view = zeit.web.magazin.view_article.Article(article, mocked_view)
+    view = zeit.web.magazin.view_article.Article(
+        article, mock.MagicMock())
     view.request.traversed = ('artikel', '03')
     view.request.route_url.return_value = '/'
 
@@ -600,10 +635,11 @@ def test_pagination_next_title_should_be_in_html(testserver, testbrowser):
 
 
 def test_pagination_urls_list_should_have_correct_entries_paged_article(
-        testserver, mocked_view):
+        testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
 
-    view = zeit.web.magazin.view_article.ArticlePage(article, mocked_view)
+    view = zeit.web.magazin.view_article.ArticlePage(
+        article, mock.MagicMock())
     view.request.path_info = u'article/03/seite-2'
     view.request.traversed = ('artikel', '03')
     view.request.route_url.return_value = '/'
@@ -614,10 +650,11 @@ def test_pagination_urls_list_should_have_correct_entries_paged_article(
 
 
 def test_pagination_urls_list_should_have_correct_entries_single_article(
-        testserver, mocked_view):
+        testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
 
-    view = zeit.web.magazin.view_article.ArticlePage(article, mocked_view)
+    view = zeit.web.magazin.view_article.ArticlePage(
+        article, mock.MagicMock())
     view.request.path_info = u'article/01'
     view.request.traversed = (u'artikel', u'01')
     view.request.route_url.return_value = '/'
@@ -627,9 +664,10 @@ def test_pagination_urls_list_should_have_correct_entries_single_article(
 
 
 def test_pagination_next_page_url_is_working(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    view = zeit.web.magazin.view_article.Article(article, mocked_view)
+    view = zeit.web.magazin.view_article.Article(
+        article, mock.MagicMock())
     view.request.traversed = (u'artikel', u'03')
     view.request.route_url.return_value = '/'
 
@@ -646,10 +684,11 @@ def test_pagination_next_page_url_on_last_page_is_none(
 
 
 def test_pagination_prev_page_url_is_working(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
 
-    view = zeit.web.magazin.view_article.ArticlePage(article, mocked_view)
+    view = zeit.web.magazin.view_article.ArticlePage(
+        article, mock.MagicMock())
     view.request.path_info = u'article/03/seite-2'
     view.request.traversed = (u'artikel', u'03')
     view.request.route_url.return_value = '/'
@@ -658,23 +697,26 @@ def test_pagination_prev_page_url_is_working(
 
 
 def test_pagination_prev_page_url_on_first_page_is_none(
-        testserver, testbrowser, mocked_view):
+        testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    view = zeit.web.magazin.view_article.Article(article, mocked_view)
+    view = zeit.web.magazin.view_article.Article(
+        article, mock.MagicMock())
     view.request.traversed = ('artikel', '03')
     view.request.route_url.return_value = '/'
     assert view.pagination['prev_page_url'] is None
 
 
-def test_article09_should_have_a_nextread(application, mocked_view):
+def test_article09_should_have_a_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert view.nextread is not None
 
 
-def test_article01_should_not_have_a_nextread(application, mocked_view):
+def test_article01_should_not_have_a_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    view = zeit.web.magazin.view_article.Article(context, mocked_view)
+    view = zeit.web.magazin.view_article.Article(
+        context, mock.MagicMock())
     assert view.nextread is None
 
 
@@ -756,17 +798,20 @@ def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
     assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
 
 
-def test_advertorial_is_advertorial(application, mocked_view):
+def test_advertorial_is_advertorial(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/advertorial')
-    assert zeit.web.magazin.view.is_advertorial(context, mocked_view)
+    assert zeit.web.magazin.view.is_advertorial(
+        context, mock.MagicMock())
 
-    view = zeit.web.magazin.view_centerpage.Centerpage(context, mocked_view)
+    view = zeit.web.magazin.view_centerpage.Centerpage(
+        context, mock.MagicMock())
     assert view.type == 'centerpage'
 
     cp_context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/index')
-    assert not zeit.web.magazin.view.is_advertorial(cp_context, mocked_view)
+    assert not zeit.web.magazin.view.is_advertorial(
+        cp_context, mock.MagicMock())
 
 
 def test_adv_teaser_on_cp_should_render_modifier(testserver, testbrowser):
