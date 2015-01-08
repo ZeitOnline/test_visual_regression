@@ -74,11 +74,11 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
 
 def test_http_header_should_contain_c1_header_fields(testserver, testbrowser):
     c1_track_doc_type = requests.head(
-        testserver.url + "/zeit-magazin/index").headers['c1-track-doc-type']
+        testserver.url + '/zeit-magazin/index').headers['c1-track-doc-type']
     c1_track_channel = requests.head(
-        testserver.url + "/zeit-magazin/index").headers['c1-track-channel']
+        testserver.url + '/zeit-magazin/index').headers['c1-track-channel']
     c1_track_kicker = requests.head(
-        testserver.url + "/artikel/03").headers['c1-track-kicker']
+        testserver.url + '/artikel/03').headers['c1-track-kicker']
     assert c1_track_doc_type == 'Centerpage'
     assert c1_track_channel == 'Lebensart'
     assert c1_track_kicker == 'Kolumne Die Ausleser'
@@ -89,4 +89,4 @@ def test_http_header_should_not_contain_empty_fields(
     with pytest.raises(KeyError):
         requests.head(
             testserver.url +
-            "/zeit-magazin/index").headers['c1-track-sub-channel']
+            '/zeit-magazin/index').headers['c1-track-sub-channel']
