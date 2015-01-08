@@ -6,11 +6,15 @@ Change log for zeit.web
 
 - WEB-407: Add referrerCount Script
 
+- BUG-62: Add series tag to webtrekk Z_WT_KENNUNG
+
 - FRIED-37: XSLT expects uniqueIds of image groups to have a trailing slash.
 
 - BUG-19: Make headervideo more failsave
 
 - ZON-1270: Overall polishing for hp
+
+- LIVECRM-22: Set response headers for CeleraOne
 
 
 1.8.7 (2014-12-12)
