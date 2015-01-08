@@ -4,7 +4,10 @@ Change log for zeit.web
 1.8.8 (unreleased)
 ------------------
 
-- BUG-62: add series tag to webtrekk Z_WT_KENNUNG
+
+- BUG-62: Add series tag to webtrekk Z_WT_KENNUNG
+
+- FRIED-37: XSLT expects uniqueIds of image groups to have a trailing slash.
 
 - BUG-19: Make headervideo more failsave
 
