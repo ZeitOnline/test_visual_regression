@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import lxml
-import re
 import mock
+import pytest
+import re
 
 
 def test_footer_should_have_basic_structure(jinja2_env):
