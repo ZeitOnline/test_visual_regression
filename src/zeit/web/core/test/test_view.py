@@ -1,4 +1,5 @@
 import pytest
+import requests
 import urllib2
 
 import zeit.web.core.date
@@ -69,3 +70,23 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
         'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
             testserver.url))
     assert 'vor 18 Stunden' in browser.contents
+
+
+def test_http_header_should_contain_c1_header_fields(testserver, testbrowser):
+    c1_track_doc_type = requests.head(
+        testserver.url + '/zeit-magazin/index').headers['c1-track-doc-type']
+    c1_track_channel = requests.head(
+        testserver.url + '/zeit-magazin/index').headers['c1-track-channel']
+    c1_track_kicker = requests.head(
+        testserver.url + '/artikel/03').headers['c1-track-kicker']
+    assert c1_track_doc_type == 'Centerpage'
+    assert c1_track_channel == 'Lebensart'
+    assert c1_track_kicker == 'Kolumne Die Ausleser'
+
+
+def test_http_header_should_not_contain_empty_fields(
+        testserver, testbrowser):
+    with pytest.raises(KeyError):
+        requests.head(
+            testserver.url +
+            '/zeit-magazin/index').headers['c1-track-sub-channel']
