@@ -96,6 +96,7 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:244818ef-9642-494c-aa8d-48db553d043a}</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">44</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="serie">Tödliche Keime</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
       &lt;initialized_object&gt;
         &lt;klass&gt;

@@ -260,8 +260,9 @@ class Article(zeit.web.core.view.Content, zeit.web.magazin.view.Base):
 
     @zeit.web.reify
     def serie(self):
-        if self.context.serie:
-            return self.context.serie.lower()
+        if self.context.serie is None:
+            return ''
+        return self.context.serie.replace(' ', '').lower()
 
     @zeit.web.reify
     def linkreach(self):

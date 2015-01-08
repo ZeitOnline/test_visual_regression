@@ -185,6 +185,14 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
         'cg8=zeitmz/centerpage&amp;cg9=' in browser.contents
 
 
+def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
+    browser = testbrowser(
+        '%s/artikel/06' % testserver.url)
+    assert '6: "tödlichekeime",' in browser.contents
+    assert 'redaktion.zeit-magazin..tödlichekeime.' \
+        'article.online./artikel/06' in browser.contents
+
+
 def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     driver = selenium_driver
     # ipad landscape
