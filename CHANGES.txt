@@ -4,6 +4,7 @@ Change log for zeit.web
 1.8.8 (unreleased)
 ------------------
 
+- WEB-407: Add referrerCount Script
 
 - BUG-62: Add series tag to webtrekk Z_WT_KENNUNG
 
