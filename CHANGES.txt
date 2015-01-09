@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.8.8 (unreleased)
+1.8.8 (2015-01-09)
 ------------------
 
 - WEB-407: Add referrerCount Script
