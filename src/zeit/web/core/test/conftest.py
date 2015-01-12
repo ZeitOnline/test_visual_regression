@@ -69,9 +69,9 @@ settings = {
     'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
-    'vivi_zeit.frontend_iqd-mobile-ids': (
+    'vivi_zeit.web_iqd-mobile-ids': (
         'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
-    'vivi_zeit.frontend_image-scales': (
+    'vivi_zeit.web_image-scales': (
         'egg://zeit.web.core/data/config/scales.xml'),
     'vivi_zeit.content.article_genre-url': (
         'egg://zeit.web.core/data/config/article-genres.xml'),
@@ -89,17 +89,17 @@ settings = {
         'egg://zeit.web.core/data/config/cp-layouts.xml'),
     'vivi_zeit.content.cp_bar-layout-source': (
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
-    'vivi_zeit.frontend_banner-source': (
+    'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
-    'vivi_zeit.frontend_navigation': (
+    'vivi_zeit.web_navigation': (
         'egg://zeit.web.core/data/config/navigation.xml'),
-    'vivi_zeit.frontend_navigation-services': (
+    'vivi_zeit.web_navigation-services': (
         'egg://zeit.web.core/data/config/navigation-services.xml'),
-    'vivi_zeit.frontend_navigation-classifieds': (
+    'vivi_zeit.web_navigation-classifieds': (
         'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-    'vivi_zeit.frontend_navigation-footer-publisher': (
+    'vivi_zeit.web_navigation-footer-publisher': (
         'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-    'vivi_zeit.frontend_navigation-footer-links': (
+    'vivi_zeit.web_navigation-footer-links': (
         'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),

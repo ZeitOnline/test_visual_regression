@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Use this to sync content from friedbert machines to your local storage.
+# Use this to sync content from zeit.web machines to your local storage.
 # It syncs content that was modified 21 days ago.
 # usage: bash ./content_sync.sh ~/mysyncfolder
 
-# You will need an acocunt on our cms-backend and on friedbert-prod01 to use
-# this. 
+# You will need an acocunt on our cms-backend and zeit.web production server.
 
 if [ $# -eq 0 ]; then
     echo usage: $0 [path to sync directory]

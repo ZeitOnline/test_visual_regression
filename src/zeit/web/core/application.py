@@ -69,40 +69,40 @@ class Application(object):
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_banner-source', ''))
+            self.settings.get('vivi_zeit.web_banner-source', ''))
         zeit.web.core.banner.banner_list = (
             zeit.web.core.banner.make_banner_list(banner_source))
         zeit.web.core.banner.banner_toggles = (
             zeit.web.core.banner.make_banner_toggles(banner_source))
         iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
+            self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_navigation', ''))
+            self.settings.get('vivi_zeit.web_navigation', ''))
         zeit.web.core.navigation.navigation = (
             zeit.web.core.navigation.make_navigation(navigation_config))
         navigation_services_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_navigation-services', ''))
+            self.settings.get('vivi_zeit.web_navigation-services', ''))
         zeit.web.core.navigation.navigation_services = (
             zeit.web.core.navigation.make_navigation(
                 navigation_services_config))
         navigation_classifieds_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_navigation-classifieds', ''))
+            self.settings.get('vivi_zeit.web_navigation-classifieds', ''))
         zeit.web.core.navigation.navigation_classifieds = (
             zeit.web.core.navigation.make_navigation(
                 navigation_classifieds_config))
         navigation_footer_publisher_config = maybe_convert_egg_url(
             self.settings.get(
-                'vivi_zeit.frontend_navigation-footer-publisher', ''))
+                'vivi_zeit.web_navigation-footer-publisher', ''))
         zeit.web.core.navigation.navigation_footer_publisher = (
             zeit.web.core.navigation.make_navigation(
                 navigation_footer_publisher_config))
         navigation_footer_links_config = maybe_convert_egg_url(
             self.settings.get(
-                'vivi_zeit.frontend_navigation-footer-links', ''))
+                'vivi_zeit.web_navigation-footer-links', ''))
         zeit.web.core.navigation.navigation_footer_links = (
             zeit.web.core.navigation.make_navigation(
                 navigation_footer_links_config))
@@ -114,7 +114,7 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
-        version = pkg_resources.get_distribution('zeit.frontend').version
+        version = pkg_resources.get_distribution('zeit.web').version
         self.settings['zmo_version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 

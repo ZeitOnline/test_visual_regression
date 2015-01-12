@@ -1,7 +1,7 @@
 MOCK_USER_DATA = {
-    'test-friedbert': {
+    'test-user': {
         'uid': '457322',
-        'name': 'test-friedbert',
-        'mail': 'test-friedbert@example.com',
+        'name': 'test-user',
+        'mail': 'test-user@example.com',
     }
 }

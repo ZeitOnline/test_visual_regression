@@ -35,23 +35,23 @@ def test_session_cache_cleared_when_id_changes(policy, dummy_request):
     with patch('webob.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
         mocked_response.body = (
-            '<user><uid>457322</uid><name>test-friedbert</name><mail>'
-            'test-friedbert@example.com</mail><picture/><roles><role>'
+            '<user><uid>457322</uid><name>test-user</name><mail>'
+            'test-user@example.com</mail><picture/><roles><role>'
             'authenticated user</role></roles><profile/></user>'
         )
         mocked_getter.return_value = mocked_response
         dummy_request.cookies['drupal-userid'] = 23
         dummy_request.headers['Cookie'] = ''
         assert policy.authenticated_userid(dummy_request) == '457322'
-        assert dummy_request.session['zmo-user']['name'] == 'test-friedbert'
+        assert dummy_request.session['zmo-user']['name'] == 'test-user'
 
 
 def test_empty_cache_triggers_backend_fills_cache(policy, dummy_request):
     with patch('webob.Request.get_response') as mocked_getter:
         mocked_response = MagicMock()
         mocked_response.body = (
-            '<user><uid>457322</uid><name>test-friedbert</name><mail>'
-            'test-friedbert@example.com</mail><picture/><roles><role>'
+            '<user><uid>457322</uid><name>test-user</name><mail>'
+            'test-user@example.com</mail><picture/><roles><role>'
             'authenticated user</role></roles><profile/></user>'
         )
         mocked_getter.return_value = mocked_response
@@ -59,7 +59,7 @@ def test_empty_cache_triggers_backend_fills_cache(policy, dummy_request):
         dummy_request.headers['Cookie'] = ''
         assert 'zmo-user' not in dummy_request.session
         assert policy.authenticated_userid(dummy_request) == '457322'
-        assert dummy_request.session['zmo-user']['name'] == 'test-friedbert'
+        assert dummy_request.session['zmo-user']['name'] == 'test-user'
 
 
 def test_unreachable_agatho_should_not_produce_error():

@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
     // Monkey patch delete so it allows deleting outside the current
     // directory, which we need since the grunt binary resides in
-    // work/frontend, while the sources are in work/source/zeit.frontend.
+    // work/web, while the sources are in work/source/zeit.web.
     var origDelete = grunt.file.delete;
     grunt.file.delete = function(filepath, options) {
         options = options || {};

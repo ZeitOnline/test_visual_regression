@@ -532,7 +532,7 @@ class ImageScales(dict):
 
     def __init__(self, *args, **kw):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        scale_source = conf.get('vivi_zeit.frontend_image-scales')
+        scale_source = conf.get('vivi_zeit.web_image-scales')
 
         if not scale_source:
             return

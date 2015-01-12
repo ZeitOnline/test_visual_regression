@@ -141,4 +141,4 @@ def test_failsafe_rendering(markup, assertion, kw):
     env = zeit.web.core.template.Environment()
     tpl = env.from_string(markup)
     condition = isinstance(tpl.render(**kw), basestring)
-    assert condition, assertion + ' should not bother friedbert.'
+    assert condition, assertion + ' should not bother zeit.web.'
