@@ -10,7 +10,7 @@ Change log for zeit.web
 1.9 (2015-01-13)
 ----------------
 
-- Nothing changed yet.
+- FIX: Ensure egg is in the same namespace as its modules.
 
 
 1.8.8 (2015-01-09)
