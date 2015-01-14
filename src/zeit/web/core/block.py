@@ -300,7 +300,9 @@ class NewsletterTeaser(object):
     @property
     def videos(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(
-            self.context.reference)
+            self.context.reference, None)
+        if body is None:
+            return []
         return [IFrontendBlock(element)
                 for element in body.values()
                 if zeit.content.article.edit.interfaces.IVideo.providedBy(

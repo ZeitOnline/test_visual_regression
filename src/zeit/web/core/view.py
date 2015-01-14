@@ -396,24 +396,24 @@ class service_unavailable(object):
                       context.message, request.path))
 
     def __call__(self):
+        body = 'Status 503: Dokument zurzeit nicht verfügbar.'
         try:
             body = requests.get('http://phpscripts.zeit.de/503.html',
                                 timeout=4.0).text
         except requests.exceptions.RequestException:
-            body = 'Status 503: Dokument zurzeit nicht verfügbar.'
-        finally:
-            return pyramid.response.Response(body, 503)
+            pass
+        return pyramid.response.Response(body, 503)
 
 
 @pyramid.view.notfound_view_config(request_method='GET')
 def not_found(request):
+    body = 'Status 404: Dokument nicht gefunden.'
     try:
         body = requests.get('http://www.zeit.de/error/404',
                             timeout=4.0).text
     except requests.exceptions.RequestException:
-        body = 'Status 404: Dokument nicht gefunden.'
-    finally:
-        return pyramid.response.Response(body, 404)
+        pass
+    return pyramid.response.Response(body, 404)
 
 
 # For some reason we are not able to register ICMSContent on this.

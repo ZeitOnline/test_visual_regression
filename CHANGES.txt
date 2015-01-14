@@ -1,10 +1,30 @@
 Change log for zeit.web
 =======================
 
-1.9.1 (unreleased)
+1.9.4 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+1.9.3 (2015-01-14)
+------------------
+
+- Nothing changed yet.
+
+
+1.9.2 (2015-01-14)
+------------------
+
+- Nothing changed yet.
+
+
+1.9.1 (2015-01-14)
+------------------
+
+- FIX: Don't assume that Newsletter contains only references to Articles.
+
+- FIX: Repair reference errors in exception views
 
 
 1.9 (2015-01-13)
