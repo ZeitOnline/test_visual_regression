@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Don't assume that Newsletter contains only references to Articles.
 
+- FIX: Repair reference errors in exception views
+
 
 1.9 (2015-01-13)
 ----------------
