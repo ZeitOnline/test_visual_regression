@@ -2,7 +2,30 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 
 {% block main %}
+<p>{{ view.beta_user }}</p>
+<p>{{ view.community_user }}</p>
+<p>{{ view["site_version"] }}</p>
+
     <div class="main__fullwidth">
+        {% if view.beta_user == True %}
+        <div class="beta-toggle">
+            <h1 class="beta-toggle__title">ZEIT ONLINE Beta</h1>
+            <p class="beta-toggle__prose">
+                Hier können Sie die Beta-Nutzung ein oder ausschalten. Lorem
+                ipsum consequat sit non ad nulla officia culpa Excepteur
+                exercitation aute est esse voluptate minim do cillum pariatur
+                fugiat dolor nisi sunt nostrud ea sed ad labore sit Duis in
+                cupidatat dolor tempor mollit adipisicing minim deserunt proident.
+            </p>
+            <form class="beta-toggle__cta" action="{{ view.friedbert_host }}beta" method="POST">
+                <label>
+                    Wollen Sie die ZEIT ONLINE Beta Version nutzen?<br>
+                </label>
+                <input type="radio" name="opt" value="in"{% if view["site_version"] == "opt_in" %} checked{% endif %}> Ja<br>
+                <input type="radio" name="opt" value="out"{% if view["site_version"] == "opt_out" %} checked{% endif %}> Nein<br>
+                <input type="submit" value="Speichern">
+            </form>
+        {% elif view.community_user["uid"] != "0" %}
         <div class="beta-teaser">
             <h1 class="beta-teaser__title">ZEIT ONLINE Beta</h1>
             <p class="beta-teaser__prose">
@@ -13,13 +36,29 @@
                 fugiat dolor nisi sunt nostrud ea sed ad labore sit Duis in
                 cupidatat dolor tempor mollit adipisicing minim deserunt proident.
             </p>
-            <p class="beta-teaser__cta" style="font-size:1.2em;">
+            <p class="beta-teaser__cta">
                 Um sich für einen Beta-Zugang zu bewerben, schicken Sie einfach
-                eine E-Mail an:
-                <a href="mailto:beta@zeit.de" style="outline:2px 4px">
-                    beta@zeit.de
-                </a>
+                eine E-Mail an <a href="mailto:beta@zeit.de">beta@zeit.de</a>.
             </p>
         </div>
+        {% else %}
+         <div class="beta-prompt">
+            <h1 class="beta-prompt__title">ZEIT ONLINE Beta</h1>
+            <p class="beta-prompt__prose">
+                Sehen Sie schon heute das ZEIT ONLINE von morgen oder ein ähnlicher
+                weniger klischeehafter Relaunch Teasertext. Lorem ipsum Consectetur
+                nostrud consequat sit non ad nulla officia culpa Excepteur
+                exercitation aute est esse voluptate minim do cillum pariatur
+                fugiat dolor nisi sunt nostrud ea sed ad labore sit Duis in
+                cupidatat dolor tempor mollit adipisicing minim deserunt proident.
+            </p>
+            <p class="beta-prompt__cta">
+                Die ZEIT ONLINE Beta Version ist nur für angemeldete Community Nutzer
+                zugänglich.
+                <a href="{{ view.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Anmelden</a>
+                <a href="{{ view.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Registrieren</a>
+            </p>
+        </div>
+        {% endif %}
     </div>
 {% endblock main %}
