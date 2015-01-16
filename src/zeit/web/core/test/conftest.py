@@ -303,6 +303,16 @@ def testbrowser(request):
 
 
 @pytest.fixture
+def css_selector(request):
+    def wrapped(selector, document):
+        xpath = cssselect.HTMLTranslator().css_to_xpath(selector)
+        if not isinstance(document, lxml.html.HtmlElement):
+            document = lxml.html.fromstring(document)
+        return document.xpath(xpath)
+    return wrapped
+
+
+@pytest.fixture
 def comment_counter(testserver, testbrowser):
     def get_count(**kw):
         params = urllib.urlencode(kw)
