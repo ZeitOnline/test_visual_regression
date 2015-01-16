@@ -1,1 +1,26 @@
 {% extends "zeit.web.site:templates/layout.html" %}
+{% import 'zeit.web.site:templates/macros/article_macro.tpl' as blocks with context%}
+
+{% macro render_page(page) %}
+  {% for item in page %}
+          {{ blocks[item|block_type](item)}}
+  {% endfor %}
+{% endmacro %}
+
+{% block main %}
+    <article class="article" id="js-article">
+        <div class="article-body">
+            {% block article_pages %}
+                <div class="article-page">
+                    {{ render_page(view.current_page) }}
+                </div>
+            {% endblock article_pages %}
+
+            {% block article_pagination %}
+                {% if view.pagination %}
+                    {{ blocks.print_pagination( view.pagination ) }}
+                {% endif %}
+            {% endblock article_pagination %}
+        </div>
+    </article>
+{% endblock main %}
