@@ -1,3 +1,9 @@
+.article
+	width: auto
+	+respond-min($break-desktop-min)
+		width: remify(660px)
+		margin: auto
+
 .article-heading
 	margin: remify($petite--px) 0
 
@@ -6,12 +12,16 @@
 	display: block
 	font-family: $font-tabletgothic
 	font-size: remify(14px)
+	+respond-min($break-desktop-min)
+		font-size: remify(14px)
 
 .title
 	color: $zon-charcoal
 	display: block
 	font-family: $font-tabletgothic
 	font-size: remify(30px)
+	+respond-min($break-desktop-min)
+		font-size: remify(42px)
 
 .summary
 	color: $zon-charcoal
@@ -19,11 +29,16 @@
 	font-size: remify(18px)
 	line-height: 1.2
 	margin-bottom : remify($petite--px)
+	+respond-min($break-desktop-min)
+		font-size: remify(20px)
 
 .paragraph
 	font-family: $font-franziska
 	font-size: remify(18px)
 	line-height: 1.3
+	margin-bottom: $little
+	+respond-min($break-desktop-min)
+		font-size: remify(20px)
 
 .byline
 	color: $zon-charcoal
@@ -33,4 +48,3 @@
 .byline__author
 	color: $zon-charcoal
 	font-weight: bold
-
