@@ -69,7 +69,7 @@
             u'viel durchwanderten und umkämpften Land. Auch die deutsche '
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
-    <p class="is-constrained is-centered">
+    <p class="paragraph">
         {{ html | safe}}
     </p>
 {%- endmacro %}

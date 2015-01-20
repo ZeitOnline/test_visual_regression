@@ -9,6 +9,22 @@
 
 {% block main %}
     <article class="article" id="js-article">
+        <h1 class="article-heading">
+            <span class="kicker">
+                {{- view.supertitle | hide_none -}}
+            </span>
+            <span class="title">
+                {{- view.title | hide_none -}}
+            </span>
+        </h1>
+        <div class="summary">
+            {{ view.subtitle | hide_none }}
+        </div>
+        <div class="byline">
+            {% if view.authors %}
+                {{ blocks.meta_author(view.authors, class="byline__author") }}
+            {% endif %}
+        </div>
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">
