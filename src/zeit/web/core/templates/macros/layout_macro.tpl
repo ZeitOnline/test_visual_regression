@@ -82,6 +82,21 @@
 </script>
 {% endmacro %}
 
+{% macro adcontroller_adplace(banner, view) -%}
+    {% if view.context.advertising_enabled -%}
+    <div id="iqadtile{{ banner.tile }}" class="ad-{{ banner.name }} ad-{{ banner.name }}--on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
+        {% if banner.label -%}
+        <div class="ad-{{ banner.name }}__label">{{ banner.label }}</div>
+        {% endif -%}
+        <div class="ad-{{ banner.name }}__inner">
+            <script type="text/javascript">
+                 AdController.render('iqadtile{{ banner.tile }}');
+            </script>
+        </div>
+    </div>
+    {% endif -%}
+{% endmacro %}
+
 {% macro adplace(banner, view) -%}
     {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
