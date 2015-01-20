@@ -1,5 +1,6 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
 
 {% macro place(item) -%}
     {{ lama_core.adplace(item, view) }}
@@ -239,24 +240,6 @@
         {{ lama.insert_responsive_image(obj, 'article__main-image--longform') }}
     </div>{{ obj.caption }}{{ obj.copyright }}
 {%- endmacro %}
-
-{% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
-    {%- if authors -%}
-        {%- for author in authors -%}
-            {%- if titlecase -%}
-                {{ author.prefix|title }}
-            {% else %}
-                {{ author.prefix }}
-            {% endif %}
-            {%- if author.href -%}
-                <a href="{{ author.href|translate_url }}" class="{{ class }}">{{ author.name }}</a>{{ author.location }}
-            {%- else -%}
-                <span class="{{ class }}">{{ author.name }}{{ author.location }}</span>
-            {%- endif -%}
-            {{ author.suffix }}
-        {%- endfor -%}
-    {%- endif -%}
-{% endmacro %}
 
 {% macro video(obj) -%}
     {% if obj.id and obj.format != 'zmo-xl-header' -%}
