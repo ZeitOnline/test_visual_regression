@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<playlist xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-01-21T15:08:15.369893+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2013-05-23T10:57:51.039423+00:00</attribute>
+        <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-01-21T15:08:23.703583+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-01-21T15:09:23.657362+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2015-01-21T14:42:12.111287+00:00</attribute>
+        <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="images_added" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-01-21T13:13:38+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">zope.brightcove</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">playlist</attribute>
+        <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:2149746f-8124-4ce4-86e2-cf05725d526a}</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;Playlist&quot; module=&quot;zeit.content.video.playlist&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    </head>
+    <body>
+        <videos>
+            <video contenttype="video" expires="" href="http://xml.zeit.de/video/2014-01/1953013471001" publication-date="" ressort="Digital" type="video" year="2015">
+                <supertitle>Japan</supertitle>
+                <title>Ein Roboter zum Selberbauen</title>
+                <text>Den kleinen Androiden Robi können Kunden selbst zusammenbauen. Doch sie müssen gedultig sein, denn die Einzelteile werden nur nach und nach verkauft.</text>
+                <description>Den kleinen Androiden Robi können Kunden selbst zusammenbauen. Doch sie müssen gedultig sein, denn die Einzelteile werden nur nach und nach verkauft.</description>
+                <byline/>
+                <breadcrumb_title/>
+                <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/1550/18140073001_4001987418001_Bildschirmfoto-2015-01-21-um-10-49-28.jpg?pubId=18140073001"/>
+                <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3346/18140073001_4002059466001_Bildschirmfoto-2015-01-21-um-10-49-28.jpg?pubId=18140073001"/>
+            </video>
+            <video contenttype="video" expires="" href="http://xml.zeit.de/video/2014-01/3035864892001" publication-date="" ressort="Gesellschaft" type="video" year="2015">
+                <supertitle>Islamismus</supertitle>
+                <title>Boko Haram bekennt sich zu Angriff auf Baga</title>
+                <text>Die nigerianische Terrormiliz Boko Haram hat eingeräumt, die Kleinstadt Baga angegriffen zu haben. Dabei sind nach Amnesty-International-Angaben bis zu 2.000 Menschen getötet worden, 20.000 seien auf der Flucht.</text>
+                <description>Die nigerianische Terrormiliz Boko Haram hat eingeräumt, die Kleinstadt Baga angegriffen zu haben. Dabei sind nach Amnesty-International-Angaben bis zu 2.000 Menschen getötet worden, 20.000 seien auf der Flucht.</description>
+                <byline/>
+                <breadcrumb_title/>
+                <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3318/18140073001_4002291299001_video-still-for-video-4002182794001.jpg?pubId=18140073001"/>
+                <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/2318/18140073001_4002291298001_thumbnail-for-video-4002182794001.jpg?pubId=18140073001"/>
+            </video>
+            <video contenttype="video" expires="" href="http://xml.zeit.de/video/2014-01/3089721834001" publication-date="" ressort="Politik" type="video" year="2015">
+                <supertitle>Moderne Heldinnen</supertitle>
+                <title>Zwölf ZEIT-Autorinnen porträtieren zwölf Pionierinnen und Grenzgängerinnen, die zu Unrecht vergessen wurden. Sie alle sprengten die engen Grenzen ihrer Geschlechterrollen.</title>
+                <text>Zwölf ZEIT-Autorinnen porträtieren zwölf Pionierinnen und Grenzgängerinnen, die zu Unrecht vergessen wurden. Sie alle sprengten die engen Grenzen ihrer Geschlechterrollen.</text>
+                <description>Zwölf ZEIT-Autorinnen porträtieren zwölf Pionierinnen und Grenzgängerinnen, die zu Unrecht vergessen wurden. Sie alle sprengten die engen Grenzen ihrer Geschlechterrollen.</description>
+                <byline/>
+                <breadcrumb_title/>
+                <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/26/18140073001_4002387461001_20150121-153801-zdf-heute100sec-still.jpg?pubId=18140073001"/>
+                <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/2206/18140073001_4002387460001_20150121-153801-zdf-heute100sec-thumb.jpg?pubId=18140073001"/>
+            </video>
+        </videos>
+        <title>Video</title>
+    </body>
+    <teaser>
+        <text/>
+    </teaser>
+</playlist>
