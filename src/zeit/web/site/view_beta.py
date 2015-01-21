@@ -16,17 +16,6 @@ log = logging.getLogger(__name__)
     renderer='templates/beta.html')
 class Beta(zeit.web.core.view.Base):
 
-    def __call__(self):
-        beta = self.request.POST.get('opt')
-        if beta in ('in', 'out'):
-            beta = 'beta-opt_{}'.format(beta)
-        elif self.beta_user:
-            beta = 'beta-opt_in'
-        if beta:
-            self.request.session.update({'site_version': beta})
-            return {'site-version': beta}
-        return {}
-
     def __init__(self, context, request):
         self.context = zeit.content.article.article.Article()
         self.request = request
@@ -41,10 +30,15 @@ class Beta(zeit.web.core.view.Base):
 
     @property
     def site_version(self):
-        version = self.request.session.get('site-version')
-
-        if version in ('beta-opt_in', 'beta-opt_out'):
-            return version.lstrip('beta-')
+        original = self.request.session.get('site-version')
+        update = self.request.POST.get('opt')
+        if original in ('beta-opt_in', 'beta-opt_out'):
+            original = original.lstrip('beta-')
+        if update in ('in', 'out'):
+            update = 'opt_{}'.format(update)
+        if update is not None and original != update:
+            self.request.session.update({'site_version': update})
+        return update or original
 
     @property
     def community_host(self):
