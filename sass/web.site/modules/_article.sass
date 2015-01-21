@@ -24,7 +24,7 @@
 		font-size: remify(42px)
 
 .summary
-	color: $zon-charcoal
+	color: $grey--mid
 	font-family: $font-tabletgothic
 	font-size: remify(18px)
 	line-height: 1.2
@@ -41,10 +41,32 @@
 		font-size: remify(20px)
 
 .byline
-	color: $zon-charcoal
+	color: $grey--mid
 	font-family: $font-tabletgothic
 	margin-bottom : remify($petite--px)
 
 .byline__author
-	color: $zon-charcoal
 	font-weight: bold
+	+link
+		color: inherit
+		text-decoration: none
+	+on-interaction
+		text-decoration: underline
+
+.stage--large
+	width: auto
+	margin: 0 (-$page-padding)
+	+respond-min($break-desktop-min)
+		margin: 0 -80px
+		img
+			width: 100% // prevents 'max-width: 100%', blows image up
+
+.figure__caption
+	font-family: $font-franziska
+	font-size: remify(14px)
+	font-style: italic
+	margin: $thin $page-padding 0 $page-padding
+
+	+respond-min($break-desktop-min)
+		margin: $thin remify(80px) 0 remify(80px)
+		font-size: remify(16px)

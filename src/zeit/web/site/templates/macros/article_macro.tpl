@@ -5,7 +5,7 @@
     {% if obj | default_image_url -%}
         <figure class="
             {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
-                figure-full-width
+                stage--large
             {%- endif -%}
             ">
             <div class="scaled-image">
