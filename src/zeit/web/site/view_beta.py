@@ -47,3 +47,8 @@ class Beta(zeit.web.core.view.Base):
     @property
     def friedbert_host(self):
         return self.request.route_url('home')
+
+    @property
+    def beta_teaser_img(self):
+        unique_id = 'http://xml.zeit.de/administratives/beta-teaser.jpg'
+        return unique_id.replace('http://xml.zeit.de/', self.friedbert_host, 1)
