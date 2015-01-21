@@ -1,0 +1,54 @@
+.beta-teaser
+	@extend %teaser
+	margin: 0 auto
+	width: 600px
+
+	&__image
+		width: 100%
+		margin-bottom: 30px
+
+	&__title
+		@extend %teaser-title
+		text-align: center
+
+	&__kicker
+		@extend %teaser-kicker
+		text-align: center
+
+	&__prose
+		text-align: justify
+
+	&__prose,
+	&__cta
+		width: 400px
+		margin: 6px auto
+		color: $zon_grey
+
+	&__cta
+		text-align: center
+
+	&__cta--aligned
+		text-align: left
+
+	&__radio
+		margin-right: 20px
+
+	&__radio,
+	&__label
+		margin-bottom: 6px
+
+	&__button
+		display: block
+		margin: 4px auto
+		border: $dblhair solid $zon_grey
+		border-radius: 4px
+		height: 30px
+		width: 150px
+		font-size: $font-s--rem
+		line-height: 30px
+		color: $zon-charcoal
+		text-align: center
+		background-color: $white
+
+	&__button--inline
+		display: inline-block
