@@ -1,40 +1,133 @@
+import mock
+
 import pytest
-import requests
+
+import zeit.web.site.view_beta
 
 
-@pytest.mark.parametrize('selector,cookies', [
-    ('.beta-prompt', {}),
-    ('.beta-prompt', {'site-version': 'foo'}),
-    ('.beta-toggle', {'site-version': 'opt_in'}),
-    ('.beta-toggle', {'site-version': 'opt_out'})
+def test_anon_user_should_see_login_prompt_on_beta_page(
+        mockcommunity_factory, testserver, testbrowser):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <uid>0</uid>
+        <roles>
+            <role>anonymous user</role>
+        </roles>
+    </user>
+    """
+    mockcommunity_factory(user_xml)
+    browser = testbrowser('{}/beta'.format(testserver.url))
+    assert len(browser.cssselect('a.beta-teaser__button')) == 2
+
+
+def test_community_user_should_see_email_prompt_on_beta_page(
+        mockcommunity_factory, testserver, testbrowser):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <uid>223754</uid>
+        <roles>
+            <role>authenticated user</role>
+        </roles>
+    </user>
+    """
+    mockcommunity_factory(user_xml)
+    browser = testbrowser('{}/beta'.format(testserver.url))
+    assert len(browser.cssselect('a.beta-teaser__button')) == 1
+
+
+def test_beta_user_should_see_toggle_form_on_beta_page(
+        mockcommunity_factory, testserver, testbrowser):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <uid>223754</uid>
+        <roles>
+            <role>authenticated user</role>
+            <role>beta</role>
+        </roles>
+    </user>
+    """
+    mockcommunity_factory(user_xml)
+    browser = testbrowser('{}/beta'.format(testserver.url))
+    assert len(browser.cssselect('input.beta-teaser__button')) == 1
+
+
+def test_beta_view_should_identify_community_user(
+        app_settings, mockcommunity_factory):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <uid>457322</uid>
+        <roles>
+            <role>authenticated user</role>
+        </roles>
+    </user>
+    """
+    mockcommunity_factory(user_xml)
+    request = mock.MagicMock()
+    request.registry.settings = app_settings
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.community_user.get('uid') == '457322'
+
+
+def test_beta_view_should_lookup_beta_role_correctly(
+        app_settings, mockcommunity_factory):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <uid>457322</uid>
+        <roles>
+            <role>authenticated user</role>
+            <role>beta</role>
+        </roles>
+    </user>
+    """
+    mockcommunity_factory(user_xml)
+    request = mock.MagicMock()
+    request.registry.settings = app_settings
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.beta_user is True
+
+
+@pytest.mark.parametrize('version', [
+    'opt_in',
+    'opt_out'
 ])
-def test_beta_view_should_display_info_text_if_missing_cookie(
-        selector, cookies, css_selector, testserver):
-    resp = requests.get('{}/beta'.format(testserver.url),
-                        cookies=cookies)
-    __import__('pdb').set_trace()
-    assert css_selector(selector, resp.content) == 1
+def test_beta_view_should_pass_through_site_version_from_session(version):
+    request = mock.MagicMock()
+    request.session = {'site-version': 'beta-{}'.format(version)}
+    request.POST = {}
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.site_version == version
 
 
-@pytest.mark.parametrize('cookies,opt_in,opt_out', [
-    ({'site-version': 'opt_in'}, 1, 0),
-    ({'site-version': 'opt_out'}, 0, 1)
+@pytest.mark.parametrize('opt,version', [
+    ('in', 'opt_in'),
+    ('in', 'opt_out'),
+    ('out', 'foo'),
+    ('out', '')
 ])
-def test_beta_view_should_correctly_display_toggled_toggle(
-        cookies, opt_in, opt_out, css_selector, testserver):
-    resp = requests.get('{}/beta'.format(testserver.url),
-                        cookies=cookies)
-    toggle = css_selector('.beta-toggle__cta', resp.content)[0]
-    assert len(toggle.cssselect('input[value="opt_in"][checked]')) == opt_in
-    assert len(toggle.cssselect('input[value="opt_out"][checked]')) == opt_out
+def test_beta_view_should_write_updated_site_version_to_session(opt, version):
+    request = mock.MagicMock()
+    request.session = {'site-version': 'beta-{}'.format(version)}
+    request.POST = {'opt': opt}
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.site_version == 'opt_{}'.format(opt)
 
 
-@pytest.mark.parametrize('payload,cookies', [
-    ({'beta': 'opt_in'}, {'site-version': 'beta-opt_in'}),
-    ({'beta': 'opt_out'}, {'site-version': 'beta-opt_out'})
-])
-def test_beta_view_should_correctly_update_cookie_on_post(
-        payload, cookies, css_selector, testserver):
-    resp = requests.get('{}/beta'.format(testserver.url),
-                        data=payload, cookies=cookies)
-    assert css_selector('a', resp.content)
+def test_beta_view_should_provide_correct_community_host(app_settings):
+    request = mock.MagicMock()
+    request.registry.settings = app_settings
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.community_host == app_settings['community_host']
+
+
+def test_beta_view_should_provide_correct_friedbert_host():
+    request = mock.MagicMock()
+    request.route_url = lambda *args: 'foo'
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.friedbert_host == 'foo'
+
+
+def test_beta_view_should_provide_correct_teaser_image():
+    request = mock.MagicMock()
+    request.route_url = lambda *args: 'mock://'
+    view = zeit.web.site.view_beta.Beta(None, request)
+    assert view.beta_teaser_img == 'mock://administratives/beta-teaser.jpg'
