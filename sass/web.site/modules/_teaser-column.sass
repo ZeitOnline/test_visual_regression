@@ -74,9 +74,6 @@
 			display: inline
 	&__title
 		@extend %teaser-title
-		font-family: TabletGothic
-		font-size: $font-l
-		font-weight: 700
 		+respond-min($break-desktop-min)
 			font-size: rem($font-xl--px - 1)
 	&__text
@@ -90,9 +87,6 @@
 		margin-bottom: 0
 	&__metadata
 		@extend %teaser-metadata
-		color: $grey
-		font-size: 14px
-		font-weight: 200
 	&__datetime
 		@extend %teaser-datetime
 	&__commentcount

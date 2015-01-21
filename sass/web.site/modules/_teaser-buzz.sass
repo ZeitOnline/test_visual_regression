@@ -1,9 +1,5 @@
 .buzz-box
-	width: 100%
-	margin: 0 $hefty 0 $hefty
-
 	+respond-min($break-tablet-min)
-		width: initial
 		margin-bottom: $twice
 
 	&__heading
@@ -14,7 +10,7 @@
 		letter-spacing: $hair
 		line-height: normal
 		margin: 0 0 $fine 0
-		padding: $fine
+		padding: remify(10px)
 		text-transform: uppercase
 
 =buzz-teaser($layout)
@@ -30,9 +26,7 @@
 
 	&__title
 		@extend %teaser-title
-		color: $zon-charcoal
 		font-size: $font-mm
-		font-weight: bold
 		line-height: $headline-line-height
 		&:hover
 			color: $zon_grey
@@ -42,7 +36,6 @@
 
 	&__kicker
 		@extend %teaser-kicker
-		font-family: $font-tabletgothicnarrow
 		font-weight: normal
 		font-size: $font-xs
 
@@ -55,7 +48,7 @@
 		+buzz-teaser(buzz-#{$flavor})
 
 .buzz-index
-	left: $fine
+	left: remify(10px)
 	margin: 0
 	position: absolute
 	vertical-align: text-bottom
@@ -81,7 +74,7 @@
 		color: $zon_grey
 		font-size: $font-xs
 		font-family: $font-tabletgothic
-		font-size: $little
+		font-size: $font-s
 		font-weight: 200
 		letter-spacing: $zon-letter-spacing-s
 		margin-left: $thin
