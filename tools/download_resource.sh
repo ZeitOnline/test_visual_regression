@@ -8,7 +8,7 @@
 dav_host='http://vivi-pommes.zeit.de:9000';
 
 if [[ $1 == /* ]]; then
-	echo "ERROR: path should _not_ begin with a '/' ’cause it‘s a subpath of /cms/work/\n"
+	echo "ERROR: path should _not_ begin with a '/' ’cause it‘s a subpath of /cms/work/"
 	exit 128
 fi
 
