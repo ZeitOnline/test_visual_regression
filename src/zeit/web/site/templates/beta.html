@@ -4,7 +4,9 @@
 {% block main %}
     <div class="main__fullwidth">
         <div class="beta-teaser">
+            {% if view.beta_teaser_img %}
             <img class="beta-teaser__image" alt="ZEIT ONLINE Beta Teaser" src="{{ view.beta_teaser_img }}">
+            {% endif %}
             {% if view.beta_user == True %}
             <span class="beta-teaser__kicker">Public Beta</span>
             <span class="beta-teaser__title">ZEIT ONLINE Beta</span>

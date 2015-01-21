@@ -51,4 +51,8 @@ class Beta(zeit.web.core.view.Base):
     @property
     def beta_teaser_img(self):
         unique_id = 'http://xml.zeit.de/administratives/beta-teaser.jpg'
+        try:
+            zeit.cms.interfaces.ICMSContent(unique_id)
+        except TypeError:
+            return
         return unique_id.replace('http://xml.zeit.de/', self.friedbert_host, 1)
