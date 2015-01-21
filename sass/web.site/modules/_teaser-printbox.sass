@@ -1,0 +1,44 @@
+.print-box
+
+	&__heading
+		color: $zon-charcoal
+		border-bottom: 1px solid $zon_lighter_grey
+		font-size: $font-s
+		font-weight: bold
+		letter-spacing: 1px
+		margin: remify(16px) 0
+		padding: remify(5px) remify(10px)
+		text-transform: uppercase
+
+	&__content
+		padding: 0 remify(10px)
+
+	&__title
+		@extend %teaser-title
+		font-size: $font-mxl
+		margin: 0 0 remify(20px)
+
+	&__media-item
+		@extend %teaser-media-item
+
+	&__text
+		@extend %teaser-text
+		margin: $petite 0
+
+	&__button
+		display: block
+		color: $zon-charcoal
+		background-color: $white
+		border: 2px solid $zon_light_grey
+		border-radius: 4px
+		font-size: $font-s
+		font-weight: bold
+		letter-spacing: 1px
+		line-height: normal
+		padding: remify(5px)
+		text-align: center
+		text-transform: uppercase
+
+		&:hover
+			background-color: $zon_lighter_grey
+
