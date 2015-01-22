@@ -1,0 +1,72 @@
+.article
+	width: auto
+	+respond-min($break-desktop-min)
+		width: remify(660px)
+		margin: auto
+
+.article-heading
+	margin: remify($petite--px) 0
+
+.kicker
+	color: $zon-red
+	display: block
+	font-family: $font-tabletgothic
+	font-size: remify(14px)
+	+respond-min($break-desktop-min)
+		font-size: remify(14px)
+
+.title
+	color: $zon-charcoal
+	display: block
+	font-family: $font-tabletgothic
+	font-size: remify(30px)
+	+respond-min($break-desktop-min)
+		font-size: remify(42px)
+
+.summary
+	color: $grey--mid
+	font-family: $font-tabletgothic
+	font-size: remify(18px)
+	line-height: 1.2
+	margin-bottom : remify($petite--px)
+	+respond-min($break-desktop-min)
+		font-size: remify(20px)
+
+.paragraph
+	font-family: $font-franziska
+	font-size: remify(18px)
+	line-height: 1.3
+	margin-bottom: $little
+	+respond-min($break-desktop-min)
+		font-size: remify(20px)
+
+.byline
+	color: $grey--mid
+	font-family: $font-tabletgothic
+	margin-bottom : remify($petite--px)
+
+.byline__author
+	font-weight: bold
+	+link
+		color: inherit
+		text-decoration: none
+	+on-interaction
+		text-decoration: underline
+
+.stage--large
+	width: auto
+	margin: 0 (-$page-padding)
+	+respond-min($break-desktop-min)
+		margin: 0 -80px
+		img
+			width: 100% // prevents 'max-width: 100%', blows image up
+
+.figure__caption
+	font-family: $font-franziska
+	font-size: remify(14px)
+	font-style: italic
+	margin: $thin $page-padding 0 $page-padding
+
+	+respond-min($break-desktop-min)
+		margin: $thin remify(80px) 0 remify(80px)
+		font-size: remify(16px)

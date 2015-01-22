@@ -350,7 +350,7 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
 def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
+        'zeit.web.core:templates/macros/article_macro.tpl')
     test_class = 'test'
     authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
                 'location': ', Bern', 'suffix': 'und'},
@@ -367,7 +367,7 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
+        'zeit.web.core:templates/macros/article_macro.tpl')
     authors = []
     lines = tpl.module.meta_author(authors).splitlines()
     output = ''

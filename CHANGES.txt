@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Output real comment counts in website teasers.
 
+- ZON-1236: Artikel MVP
+
 
 1.9.3 (2015-01-14)
 ------------------
