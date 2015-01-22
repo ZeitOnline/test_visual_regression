@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+    <head>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Nicole Sagener</attribute>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-07-05T15:50:22.284986+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-07-05T14:24:32.799713+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-07-05T15:51:49.221636+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-07-05T14:46:15.268352+00:00</attribute>
+        <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="images_added" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-07-05T15:50:09.149542+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.Online-nachrichten</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Karriere</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">quiz</attribute>
+        <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:b02ba315-e9da-4835-bb54-21b3922b59d1}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">28</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;Quiz&quot; module=&quot;zeit.content.quiz.quiz&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    </head>
+    <body>
+        <supertitle>Quiz</supertitle>
+        <title>Workaholics, macht mal Pause!</title>
+        <subtitle>Lorem ipsum Officia in fugiat ea ad qui irure minim aute occaecat deserunt cupidatat pariatur nostrud et ea dolore.</subtitle>
+    </body>
+    <teaser>
+        <title>Workaholics, macht mal Pause!</title>
+        <text>Lorem ipsum In elit Ut dolor esse quis Ut ad nostrud esse cupidatat ut dolore ut.</text>
+    </teaser>
+    <question name="Question">
+        <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <p>Was ist ein Workaholic?</p>
+        </text>
+        <answer name="Answer">
+            <correct>false</correct>
+            <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <p>Lorem ipsum Ut ut ut irure consequat exercitation reprehenderit quis enim Excepteur velit consequat fugiat.</p>
+            </text>
+        </answer>
+        <answer name="Answer-2">
+            <correct>false</correct>
+            <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <p>Lorem ipsum Pariatur incididunt nisi enim ea consequat dolor cillum velit veniam.</p>
+            </text>
+        </answer>
+        <answer name="Answer-3">
+            <correct>true</correct>
+            <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <p>Lorem ipsum Incididunt tempor nostrud dolore sunt nisi Duis magna fugiat exercitation commodo qui ad Ut ex ut cillum.</p>
+            </text>
+        </answer>
+    </question>
+</quiz>
