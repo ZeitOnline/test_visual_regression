@@ -4,6 +4,7 @@ Change log for zeit.web
 1.9.4 (unreleased)
 ------------------
 
+- ZON-1290: Implement landing page for beta launch
 - ZON-1236: Artikel MVP
 
 

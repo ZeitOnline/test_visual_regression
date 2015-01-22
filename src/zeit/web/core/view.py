@@ -23,7 +23,6 @@ log = logging.getLogger(__name__)
 
 
 class Base(object):
-
     """Base class for all views."""
 
     def __call__(self):
