@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author>
+  <firstname>Wenke</firstname>
+  <lastname>Husmann</lastname>
+  <display_name xmlns:py="http://codespeak.net/lxml/objectify/pytype">Wenke Husmann</display_name>
+  <title xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+  <vgwortid>9701403</vgwortid>
+  <email>wenke.husmann@zeit.de</email>
+  <status xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Online</status>
+</author>

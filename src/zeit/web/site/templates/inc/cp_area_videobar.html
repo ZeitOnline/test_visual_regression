@@ -1,0 +1,10 @@
+<div class="videbar">
+    <span class="videobar__title">Videos auf ZEIT ONLINE</span>
+    {% for video in view.area_videobar.videos %}
+    <div class"video-teaser">
+        <span class"video-teaser__kicker">{{ video.teaserSupertitle | hide_none }}</span>
+        <span class"video-teaser__title">{{ video.teaserTitle | hide_none }}</span>
+        <img class"video-teaser__thumbnail" src="{{ video.thumbnail | hide_none }}">
+    </div>
+    {% endfor %}
+</div>

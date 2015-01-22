@@ -135,6 +135,7 @@ class Application(object):
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
+        config.add_route('beta_toggle', '/beta')
         config.add_route('health_check', '/health_check')
         config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
