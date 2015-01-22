@@ -4,47 +4,15 @@
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo">ZEIT ONLINE</span></h6>
     </header>
 
-<!--     <div class="video-stage-main">
-        <article class="video-large" data_video-id="123456789">
-            <a class="video-large__combined-link" href="http://www.zeit.de/video/einzelseite">
-                <div class="video-large__container">
-                    <img src="" alt="Filmtipp: &quot;Das Verschwinden von Elenor Rickby&quot; mit Jessica Chestain" title="Zum Abspielen des Videos anklicken" class="video-large__still" />
-                    <div class="video-playbutton">
-                        <span class="video-playbutton__icon video-playbutton__icon--play"></span>
-                        <strong class="video-playbutton__text">Video ansehen</strong>
-                        <span class="video-playbutton__time">1:32</span>
-                    </div>
-                </div>
-                <h2 class="video-large-title">
-                    <span class="video-large-title__kicker">Kino</span>
-                    <span class="video-large-title__title">Filmtipp: &quot;Das Verschwinden von Elenor Rickby&quot; mit Jessica Chestain</span>
-                </h2>
-            </a>
-        </article>
-    </div> -->
+    <div class="video-stage-main">
+        {% set video = view.area_videobar.videos[0] %}
+        {% include "zeit.web.site:templates/inc/videobar/video-large.tpl" %}
+    </div>
 
     <div class="video-stage-secondary">
-        <h6 class="video-secondary__title">Die neuesten Videos</h6>
-        {% for video in view.area_videobar.videos %}
-        <article class="video-small" data-video-id="">
-            <a class="video-small__combined-link" href="{{video | create_url}}">
-                <div class="video-small__container">
-                    <img src="{{ video.video_still | hide_none }}" alt="{{video.teaserSupertitle}} {{video.teaserTitle}}" title="Zum Abspielen des Videos anklicken" class="video-small__still" />
-                    <div class="video-playbutton video-playbutton--small">
-                        <span class="video-playbutton__icon video-playbutton__icon--play video-playbutton__icon--small"></span>
-                        <span class="video-playbutton__time video-playbutton__time--small">1:32</span>
-                    </div>
-                </div>
-                <h2 class="video-small-title">
-                    <span class="video-small-title__kicker">
-                        {{- video.teaserSupertitle | hide_none -}}
-                    </span>
-                    <span class="video-small-title__title">
-                        {{- video.teaserTitle | hide_none -}}
-                    </span>
-                </h2>
-            </a>
-        </article>
+        <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
+        {% for video in view.area_videobar.videos[1:] %}
+            {% include "zeit.web.site:templates/inc/videobar/video-small.tpl" %}
         {% endfor %}
     </div>
 
