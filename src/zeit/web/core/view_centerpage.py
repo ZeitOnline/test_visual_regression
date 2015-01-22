@@ -22,16 +22,6 @@ class Centerpage(zeit.web.core.view.Base):
         return self.request.path == '/' + self.request.registry.settings.hp
 
     @zeit.web.reify
-    def meta_robots(self):
-        seo = zeit.seo.interfaces.ISEO(self.context)
-        try:
-            if seo.meta_robots:
-                return seo.meta_robots
-        except AttributeError:
-            pass
-        return 'index,follow,noodp,noydir,noarchive'
-
-    @zeit.web.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
 
