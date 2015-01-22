@@ -5,7 +5,10 @@ Change log for zeit.web
 ------------------
 
 - ZON-1290: Implement landing page for beta launch
+
 - ZON-1236: Artikel MVP
+
+- BUG-163: Move robots property up to base view class
 
 
 1.9.3 (2015-01-14)
