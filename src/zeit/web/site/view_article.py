@@ -37,5 +37,5 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
              name='seite',
              path_info='.*seite-(.*)',
              renderer='templates/article.html')
-class ArticlePage(Article, zeit.web.core.view_article.Article):
+class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
