@@ -360,6 +360,10 @@ def closest_substitute_image(image_group,
 
 @zeit.web.register_filter
 def pluralize(num, *forms):
+    try:
+        num = int(num)
+    except ValueError:
+        num = 0
     return forms[min(len(forms) - 1, num - 1):][0] % num
 
 
