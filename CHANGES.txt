@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Output real comment counts in website teasers.
 
+- ZON-1290: Implement landing page for beta launch
+
 - ZON-1236: Artikel MVP
 
 
