@@ -92,7 +92,12 @@ def test_beta_view_should_lookup_beta_role_correctly(
 ])
 def test_beta_view_should_pass_through_site_version_from_session(version):
     request = mock.MagicMock()
-    request.session = {'site-version': 'beta-{}'.format(version)}
+    request.cookies = {'site-version': 'beta-{}'.format(version)}
+
+    def set_cookie(key, value=''):
+        request.cookies[key] = value
+
+    request.response.set_cookie = set_cookie
     request.POST = {}
     view = zeit.web.site.view_beta.Beta(None, request)
     assert view.site_version == version
@@ -106,7 +111,12 @@ def test_beta_view_should_pass_through_site_version_from_session(version):
 ])
 def test_beta_view_should_write_updated_site_version_to_session(opt, version):
     request = mock.MagicMock()
-    request.session = {'site-version': 'beta-{}'.format(version)}
+    request.cookies = {'site-version': 'beta-{}'.format(version)}
+
+    def set_cookie(key, value=''):
+        request.cookie[key] = value
+
+    request.response.set_cookie = set_cookie
     request.POST = {'opt': opt}
     view = zeit.web.site.view_beta.Beta(None, request)
     assert view.site_version == 'opt_{}'.format(opt)

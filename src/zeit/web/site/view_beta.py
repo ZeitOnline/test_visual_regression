@@ -30,14 +30,16 @@ class Beta(zeit.web.core.view.Base):
 
     @property
     def site_version(self):
-        original = self.request.session.get('site-version')
+        original = self.request.cookies.get('site-version')
         update = self.request.POST.get('opt')
         if original in ('beta-opt_in', 'beta-opt_out'):
             original = original.lstrip('beta-')
         if update in ('in', 'out'):
             update = 'opt_{}'.format(update)
         if update is not None and original != update:
-            self.request.session.update({'site_version': update})
+            self.request.response.set_cookie(
+                'site-version',
+                value='beta-%s' % update)
         return update or original
 
     @property
