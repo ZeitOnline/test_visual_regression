@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import datetime
+import logging
+
+import babel.dates
 import pyramid.response
 import pyramid.view
-import logging
 
 import zeit.content.cp.interfaces
 
@@ -128,6 +131,22 @@ class Centerpage(
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
         area.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
         return area
+
+    @zeit.web.reify
+    def area_printbox(self):
+        """Return the content object for the Printbox or Angebotsbox,
+        considering weekday. Mon-Wed = Angebotsbox, Thu-Sun = Printbox
+        """
+
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        weekday = datetime.datetime.now(tz).weekday()
+
+        if weekday < 3:
+            path = '/var/cms/work/angebote/angebotsbox'
+        else:
+            path = '/var/cms/work/angebote/print-box'
+
+        return weekday
 
     @zeit.web.reify
     def snapshot(self):
