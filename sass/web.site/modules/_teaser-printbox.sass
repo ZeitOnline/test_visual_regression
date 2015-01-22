@@ -1,29 +1,49 @@
 .print-box
-
 	&__heading
 		color: $zon-charcoal
 		border-bottom: 1px solid $color-border
-		font-size: $font-s
+		font-size: $font-ss
 		font-weight: bold
-		letter-spacing: 1px
+		letter-spacing: $zon-letter-spacing-m
 		margin: remify(16px) 0
-		padding: remify(5px) remify(10px)
+		padding: remify(10px)
 		text-transform: uppercase
+
+	&__issue
+		font-weight: normal
 
 	&__content
 		padding: 0 remify(10px)
 
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__content-heading
+		font-size: 1em
+		margin: 1em 0 0.125em
+
+	&__kicker
+		@extend %teaser-kicker
+		font-size: $font-xs
+
 	&__title
 		@extend %teaser-title
-		font-size: $font-mxl
-		margin: 0 0 remify(20px)
+		font-size: $font-ml
+		line-height: 1.4
 
 	&__media-item
 		@extend %teaser-media-item
 
 	&__text
 		@extend %teaser-text
-		margin: $petite 0
+		font-size: $font-mm
+		line-height: 1.4
+		margin: 0 0 remify(8px)
+
+	&__link
+		color: $zon-red
+		display: block
+		font-size: $font-ss
 
 	&__button
 		display: block
@@ -35,10 +55,27 @@
 		font-weight: bold
 		letter-spacing: 1px
 		line-height: normal
+		margin: remify(12px) 0
 		padding: remify(5px)
 		text-align: center
 		text-transform: uppercase
 
 		&:hover
 			background-color: $zon_lighter_grey
+		&::after
+			content: "\25B8"
+			margin-left: 3px
 
+
+.print-box--angebot
+	.print-box
+		&__heading
+			font-size: $font-s
+
+		&__title
+			font-size: $font-mxl
+			margin: 0 0 remify(20px)
+
+		&__text
+			// font-size: $font-m
+			margin: remify(12px) 0
