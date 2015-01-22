@@ -130,6 +130,12 @@ class Centerpage(
         return area
 
     @zeit.web.reify
+    def area_videobar(self):
+        """Return a video playlist object to be displayed on the homepage."""
+        unique_id = 'http://xml.zeit.de/video/playlist/36516804001'
+        return zeit.cms.interfaces.ICMSContent(unique_id)
+
+    @zeit.web.reify
     def snapshot(self):
         """Return the centerpage snapshot aka `Momentaufnahme`.
         :rtype: zeit.content.image.image.RepositoryImage
