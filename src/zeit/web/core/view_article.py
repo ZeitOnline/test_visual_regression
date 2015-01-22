@@ -3,8 +3,6 @@ import itertools
 import logging
 import re
 
-from pyramid.view import view_config
-from pyramid.decorator import reify
 import pyramid.httpexceptions
 
 from zeit.content.author.interfaces import IAuthorReference
