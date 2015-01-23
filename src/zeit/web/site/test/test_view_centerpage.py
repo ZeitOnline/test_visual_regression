@@ -347,7 +347,7 @@ def test_column_teaser_should_have_different_font(
 
     font_script = 'return $(".teaser-column__title").css("font-family")'
     font = driver.execute_script(font_script)
-    assert font == "TabletGothic", 'teaser column font is wrong'
+    assert "TabletGothic" in font, 'teaser column font is wrong'
 
 
 def test_series_teaser_should_render_series_element(testserver, testbrowser):
