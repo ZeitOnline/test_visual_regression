@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1236: Artikel MVP
 
+- BUG-163: Move robots property up to base view class
+
 - ZON-1306: Trigger varnish restart for 404s and unrenderable context.
 
 - ZON-1292: Implement Printbox and Angebotsbox.
