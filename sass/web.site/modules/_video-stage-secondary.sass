@@ -19,3 +19,18 @@
 			text-transform: uppercase
 			letter-spacing: 0.05em
 			margin: $page-padding 0
+
+
+.video-small
+	display: none
+	+respond-min($break-phablet-min)
+		width: 48%
+		&:nth-child(2),
+		&:nth-child(3)
+			// first-child is .video-stage-secondary__title, so it's all off by one
+			display: inline-block
+	+respond-min($break-tablet-min)
+		display: inline-block
+		width: 31.5%
+	+respond-min($break-desktop-min)
+		width: auto
