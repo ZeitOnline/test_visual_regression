@@ -111,7 +111,7 @@
 	::input-placeholder
 		@content
 
-=justify-children-horizontally($elements-selector)
+=justify-children-horizontally($elements-selector, $vertical-alignment: top)
 	text-align: justify
 	text-justify: distribute-all-lines
 	-ms-text-justify: distribute-all-lines
@@ -134,7 +134,7 @@
 		text-align: left // reset text-aling for child-elements
 
 	& > #{$elements-selector}
-		+inline-block
+		+inline-block($vertical-alignment)
 
 =animated-interaction($color: $color-link--hover)
 	+transition(border-color .2s)

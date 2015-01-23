@@ -3,14 +3,13 @@ $cp_lead__wrap-width: 65%
 
 //wrapper lead area
 .cp_lead__wrap
-	+justify-children-horizontally('.cp_button--small')
+	+justify-children-horizontally('.cp_button--small', top)
 	width: 100%
 	+respond-min($break-2)
 		float: left
 		width: $cp_lead__wrap-width
 		padding: 0 $compact 0 $compact
 	.cp_button--small
-		vertical-align: top !important
 		width: 100%
 		padding: 0 $compact 0 $compact
 		margin-top: $compact
