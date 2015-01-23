@@ -183,6 +183,14 @@
 
 /* END: mixins for navigation/header */
 
+=image_text_replacement($display:block, $vertical-align:middle)
+	background-position: 50% 50%
+	background-size: contain
+	display: $display
+	text-indent: -50000em
+	@if $display == inline-block or $display == inline
+		vertical-align: $vertical-align
+
 // pseudo classes
 %off-screen
 	height: 1px
