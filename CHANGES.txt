@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1306: Trigger varnish restart for 404s and unrenderable context.
 
+- ZON-1292: Implement Printbox and Angebotsbox.
+
 
 1.9.3 (2015-01-14)
 ------------------
