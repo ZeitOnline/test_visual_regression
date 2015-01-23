@@ -27,7 +27,11 @@
 {%- endmacro %}
 
 {% macro include_teaser_commentcount(teaser, layout_id='', modifier='') -%}
-    <a class="{{ layout_id }}__commentcount {{modifier}}" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
+    {% set comments = get_teaser_commentcount(teaser.uniqueId) %}
+    {% if comments %}
+    {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
+    <a class="{{ layout_id }}__commentcount {{modifier}}" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
+    {% endif %}
 {%- endmacro %}
 
 {% macro include_teaser_byline(teaser, layout_id='', modifier='') -%}
