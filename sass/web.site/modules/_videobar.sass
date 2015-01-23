@@ -17,7 +17,14 @@
 
 .video-stage-secondary
 	display: none
+	+respond-min($break-phablet-min)
+		display: block
 
+	&__title
+		display: none
+		+respond-min($break-desktop-min)
+			display: block
+			text-transform: uppercase
 
 .video-stage-footer
 
