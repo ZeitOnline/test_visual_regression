@@ -21,5 +21,5 @@ class Base(zeit.web.core.view.Base):
     def banner_toggles(self, name):
         try:
             return bool(zeit.web.core.banner.banner_toggles[name])
-        except IndexError:
+        except (IndexError, TypeError):
             return False
