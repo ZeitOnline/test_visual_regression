@@ -1,0 +1,57 @@
+{% import "zeit.web.site:templates/macros/layout_macro.tpl" as lama_site with context %}
+{% extends "zeit.web.site:templates/layout.html" %}
+
+{% block main %}
+    <div class="main__fullwidth">
+        <div class="beta-teaser">
+            {% if view.beta_teaser_img %}
+            <img class="beta-teaser__image" alt="ZEIT ONLINE Beta Teaser" src="{{ view.beta_teaser_img }}">
+            {% endif %}
+            {% if view.beta_user == True %}
+            <span class="beta-teaser__kicker">Public Beta</span>
+            <span class="beta-teaser__title">ZEIT ONLINE Beta</span>
+            <p class="beta-teaser__prose">
+                Vielen Dank, Sie wurden für die ZEIT Beta freigeschaltet. Sie können an dieser
+                Stelle jederzeit zwischen der neuen und der alten Ansicht wechseln.
+            </p>
+            <form class="beta-teaser__cta beta-teaser__cta--aligned" action="{{ view.friedbert_host }}beta" method="POST">
+                <input class="beta-teaser__radio" type="radio" name="opt" value="in" id="opt-in"{% if view.site_version == "opt_in" %} checked{% endif %}>
+                <label class="beta-teaser__label" for="opt-in">Ich möchte die neue ZEIT Beta sehen</label><br/>
+                <input class="beta-teaser__radio" type="radio" name="opt" value="out" id="opt-out"{% if view.site_version != "opt_in" %} checked{% endif %}>
+                <label class="beta-teaser__label" for="opt-out">Ich möchte die klassische ZEIT sehen</label><br/>
+                <input class="beta-teaser__button" type="submit" value="Speichern">
+            </form>
+            {% elif view.community_user.uid != "0" %}
+            <span class="beta-teaser__kicker">Public Beta</span>
+            <span class="beta-teaser__title">Beta-Zugang beantragen</span>
+            <p class="beta-teaser__prose">
+                Mit unserer neuen Webseite haben wir die Weichen für den Journalismus
+                von morgen gestellt. Um sich für einen Beta-Zugang zu bewerben, schicken Sie
+                einfach eine E-Mail mit ihrem Benutzernamen an <a href="mailto:beta@zeit.de">beta@zeit.de</a>.
+            </p>
+            <div class="beta-teaser__cta">
+                <a class="beta-teaser__button" href="mailto:beta@zeit.de">E-Mail senden</a>
+            </div>
+            {% else %}
+            <span class="beta-teaser__kicker">Public Beta</span>
+            <span class="beta-teaser__title">ZEIT ONLINE Beta</span>
+            <p class="beta-teaser__prose">
+                Mit unserer neuen Webseite haben wir die Weichen für den Journalismus
+                von morgen gestellt. Registrieren Sie sich als Beta-Nutzer, um schon
+                heute neue Artikelformate, bessere Performance und ein aufgeräumteres
+                Design zu genießen.
+            </p>
+            <p class="beta-teaser__prose">
+                <b>Bitte loggen Sie sich ein!</b>
+                Sie benötigen einen ZEIT ONLINE Community Login, um die Beta-Version
+                nutzen zu können. Bitte loggen Sie sich mit Ihren bestehenden Zugangsdaten ein.
+                Wenn Sie noch keinen Account besitzen, können Sie sich hier registrieren.
+            </p>
+            <div class="beta-teaser__cta">
+                <a class="beta-teaser__button beta-teaser__button--inline" href="{{ view.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
+                <a class="beta-teaser__button beta-teaser__button--inline" href="{{ view.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Zur Registrierung</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock main %}

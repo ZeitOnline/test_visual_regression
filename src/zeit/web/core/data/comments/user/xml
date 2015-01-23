@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+    <uid>457322</uid>
+    <name>test-user</name>
+    <mail>test-user@example.com</mail>
+    <picture>0</picture>
+    <roles>
+        <role>authenticated user</role>
+        <role>beta</role>
+    </roles>
+    <profile>
+        <firstname/>
+        <lastname/>
+    </profile>
+</user>

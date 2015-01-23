@@ -5,6 +5,7 @@
 .sass-cache
 .ftppass
 .cache/
+Gemfile.lock
 /bower_components/
 /javascript/documentation/
 /javascript/vendor/

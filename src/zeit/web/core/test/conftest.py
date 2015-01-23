@@ -3,6 +3,8 @@ import json
 import os.path
 import pkg_resources
 import urllib
+import urllib2
+import wsgiref.util
 
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -38,8 +40,7 @@ settings = {
     'caching_time_article': '10',
     'caching_time_centerpage': '20',
     'caching_time_gallery': '40',
-    'community_host': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.web.core', 'data/comments'),
+    'community_host': 'http://localhost:6551/',
     'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
@@ -212,6 +213,36 @@ def debug_testserver(debug_application, request):
     return server
 
 
+@pytest.fixture(scope='function')
+def mockcommunity_factory(request):
+    def factory(response=None):
+        def mock_app(env, start_response):
+            resp = response  # Need to copy response to local scope.
+            if resp is None:
+                resp = wsgiref.util.request_uri(env, include_query=0)
+                if 0:
+                    resp = urllib2.urlopen('file://{}/'.format(
+                        pkg_resources.resource_filename('zeit.web.core',
+                                                        'data/comments',
+                                                        'path'))).read()
+            start_response('200 OK', [])
+            return [resp]
+
+        server = gocept.httpserverlayer.wsgi.Layer()
+        server.port = 6551
+        server.wsgi_app = mock_app
+        server.setUp()
+        server.url = 'http://%s' % server['http_address']
+        request.addfinalizer(server.tearDown)
+        return server
+    return factory
+
+
+@pytest.fixture(scope='function')
+def mockcommunity(request):
+    return mockcommunity_factory(request)
+
+
 @pytest.fixture(scope='session', params=[503])
 def http_testserver(request):
     from pyramid.config import Configurator
@@ -277,7 +308,7 @@ def image_group_factory():
             self.uniqueId = name
             self.masterimage = None
 
-        def getImageSize(self):
+        def getImageSize(self):  # NOQA
             return self._size
 
     def factory(*args, **kwargs):
@@ -300,6 +331,16 @@ def my_traverser(application):
 @pytest.fixture
 def testbrowser(request):
     return Browser
+
+
+@pytest.fixture
+def css_selector(request):
+    def wrapped(selector, document):
+        xpath = cssselect.HTMLTranslator().css_to_xpath(selector)
+        if not isinstance(document, lxml.html.HtmlElement):
+            document = lxml.html.fromstring(document)
+        return document.xpath(xpath)
+    return wrapped
 
 
 @pytest.fixture
