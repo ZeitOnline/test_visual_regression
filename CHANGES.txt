@@ -10,6 +10,8 @@ Change log for zeit.web
 1.10 (2015-01-23)
 -----------------
 
+- FIX: Do not show unstyled video-data
+
 - FIX: Output real comment counts in website teasers.
 
 - ZON-1290: Implement landing page for beta launch
