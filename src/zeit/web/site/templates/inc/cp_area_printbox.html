@@ -1,0 +1,52 @@
+{% set box = view.area_printbox.content -%}
+
+{% if view.area_printbox.printbox -%}
+<aside class="print-box">
+    {% set title = box.supertitle + ' - ' + box.title -%}
+    <div class="print-box__heading">
+        Diese Woche in der Zeit
+        <span class="print-box__issue">Nº {{ box.volume }} / {{ box.year }}</span>
+    </div>
+    <div class="print-box__content">
+        <a href="{{ box.url }}?wt_mc=pm.intern.box.zeitde.fix.probe.homepage.cover.cross" title="{{ title }}">
+            <img class="print-box__media-item" src="http://images.zeit.de/2015/04/packshot-04-320x148.jpg">
+        </a>
+        <a href="{{ box.url }}?wt_mc=pm.intern.box.zeitde.fix.probe.homepage.titel.cross" title="{{ title }}" class="print-box__combined-link">
+            <h2 class="print-box__content-heading">
+                <span class="print-box__kicker">{{ box.supertitle }}</span>
+                <span class="print-box__title">{{ box.title }}</span>
+            </h2>
+            <p class="print-box__text">{{ box.subtitle }}</p>
+        </a>
+        <a href="{{ box.url }}?wt_mc=pm.intern.box.zeitde.fix.probe.homepage.weitere.cross" class="print-box__link">
+            Weitere Themen
+        </a>
+        <a href="{{ box.url }}?wt_mc=pm.intern.box.zeitde.fix.probe.homepage.button.cross">
+            <span class="print-box__button">Mehr erfahren</span>
+        </a>
+        <a href="http://leserservice.zeit.de/diesewoche/DIE-ZEIT-kostenlos-testen/index.php?r=npb" id="intern.box.zeitde.fix.probe.homepage.leserservice.text.cross" class="print-box__link">
+            Testen Sie 3 Wochen die gedruckte ZEIT
+        </a>
+    </div>
+</aside>
+{% else -%}
+<aside class="print-box print-box--angebot">
+    <div class="print-box__heading">
+        {{ box.supertitle }}
+    </div>
+    <div class="print-box__content">
+        <a href="{{ box.url }}?wt_mc=pm.intern.teaser.zeit_de.probeabo.premium_bestellstrecke.angebotsbox.headline&amp;utm_source=pm_intern&amp;utm_medium=teaser&amp;utm_campaign=zeit_de&amp;utm_content=probeabo_premium_bestellstrecke_angebotsbox_headline" title="{{ box.title }}">
+            <h2 class="print-box__title">{{ box.title }}</h2>
+        </a>
+        <a href="{{ box.url }}?wt_mc=pm.intern.teaser.zeit_de.probeabo.premium_bestellstrecke.angebotsbox.coverbild&amp;utm_source=pm_intern&amp;utm_medium=teaser&amp;utm_campaign=zeit_de&amp;utm_content=probeabo_premium_bestellstrecke_angebotsbox_coverbild" title="{{ box.title }}">
+            <img class="print-box__media-item" src="http://images.zeit.de/angebote/bilder-angebotsbox/bild-angebotsbox-03.jpg">
+        </a>
+        <a href="{{ box.url }}?wt_mc=pm.intern.teaser.zeit_de.probeabo.premium_bestellstrecke.angebotsbox.text&amp;utm_source=pm_intern&amp;utm_medium=teaser&amp;utm_campaign=zeit_de&amp;utm_content=probeabo_premium_bestellstrecke_angebotsbox_text" title="{{ box.title }}">
+            <p class="print-box__text">{{ box.subtitle }}</p>
+        </a>
+        <a href="{{ box.url }}?wt_mc=pm.intern.teaser.zeit_de.probeabo.premium_bestellstrecke.angebotsbox.call_to_action&amp;utm_source=pm_intern&amp;utm_medium=teaser&amp;utm_campaign=zeit_de&amp;utm_content=probeabo_premium_bestellstrecke_angebotsbox_call_to_action">
+            <span class="print-box__button">Test-Zugang sichern</span>
+        </a>
+    </div>
+</aside>
+{% endif -%}

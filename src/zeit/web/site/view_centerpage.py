@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-import pyramid.response
-import pyramid.view
+import datetime
 import logging
 
+import babel.dates
+import pyramid.response
+import pyramid.view
+
+import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
 import zeit.web.core.interfaces
@@ -128,6 +132,27 @@ class Centerpage(
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
         area.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
         return area
+
+    @zeit.web.reify
+    def area_printbox(self):
+        """Return the content object for the Printbox or Angebotsbox,
+        considering weekday. Mon-Wed = Angebotsbox, Thu-Sun = Printbox
+        :rtype: dict
+        """
+
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        weekday = datetime.datetime.now(tz).weekday()
+
+        if weekday < 3:
+            uri = 'http://xml.zeit.de/angebote/angebotsbox'
+            printbox = False
+        else:
+            uri = 'http://xml.zeit.de/angebote/print-box'
+            printbox = True
+
+        content = zeit.cms.interfaces.ICMSContent(uri)
+
+        return {'printbox': printbox, 'content': content}
 
     @zeit.web.reify
     def area_videobar(self):

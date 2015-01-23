@@ -136,6 +136,16 @@ class Base(object):
             return True
 
     @zeit.web.reify
+    def meta_robots(self):
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+            if seo.meta_robots:
+                return seo.meta_robots
+        except (AttributeError, TypeError):
+            pass
+        return 'index,follow,noodp,noydir,noarchive'
+
+    @zeit.web.reify
     def adwords(self):
         keywords = ['zeitonline']
         # TODO: End discrepancy between testing and live ressorts!

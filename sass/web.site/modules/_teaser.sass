@@ -68,7 +68,7 @@
 %teaser-title
 	display: block
 	color: $zon-charcoal
-	font-family: TabletGothic
+	font-family: $font-tabletgothic
 	font-size: $font-l
 	font-weight: 700
 	letter-spacing: $zon-letter-spacing-s
@@ -92,20 +92,21 @@
 %teaser-byline
 	color: $grey
 	display: block
-	font-family: TabletGothicNarrow
+	font-family: $font-tabletgothicnarrow
 	font-size: $font-s
 	letter-spacing: $zon-letter-spacing-m
 	margin-bottom: 4px // IE 8 Fallback
 	margin-bottom: rem(4px)
 
 %teaser-metadata
-	font-size: em(13px)
+	color: $grey
+	font-size: $font-s
 	line-height: 1.4
-	font-weight: bold
+	font-weight: 200
 	letter-spacing: $standard-letter-spacing
 
 %teaser-datetime
-	&:after
+	&:not(:last-child):after
 		content: ' ⧸ '
 		margin: 0 $micro 0 $micro
 
