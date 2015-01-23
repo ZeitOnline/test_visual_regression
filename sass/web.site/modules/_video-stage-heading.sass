@@ -1,8 +1,12 @@
 .video-stage-heading
 	display: inline-block
 	font-size: remify(18px)
-	font-weight: bold
+	font-weight: normal
 	line-height: 1.125
 	text-align: center
 	margin: 0
 	padding: remify($small--px) 0
+	&__logo
+		height: auto
+		width: 136px
+		+image_text_replacement(inline-block, text-bottom)
