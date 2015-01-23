@@ -133,7 +133,7 @@
 	& > *
 		text-align: left // reset text-aling for child-elements
 
-	& > #{$elements-selector}
+	@at-root #{$elements-selector}
 		+inline-block($vertical-alignment)
 
 =animated-interaction($color: $color-link--hover)
