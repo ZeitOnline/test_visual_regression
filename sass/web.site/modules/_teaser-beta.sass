@@ -1,11 +1,11 @@
 .beta-teaser
 	@extend %teaser
 	margin: 0 auto
-	max-width: 600px
+	max-width: remify(560px)
 
 	&__image
 		width: 100%
-		margin-bottom: 30px
+		margin-bottom: $twice
 
 	&__title
 		@extend %teaser-title
@@ -20,9 +20,11 @@
 
 	&__prose,
 	&__cta
-		max-width: 400px
-		margin: 6px auto
+		margin: $small auto
 		color: $zon_grey
+		position: relative
+		+respond-min($break-1)
+			padding: 0 $big 0
 
 	&__cta
 		text-align: center
@@ -31,21 +33,22 @@
 		text-align: left
 
 	&__radio
-		margin-right: 20px
+		margin: $bristle $petite $tiny 0
+		position: absolute
 
-	&__radio,
 	&__label
-		margin-bottom: 6px
+		margin: 0 0 $tiny $medium
+		display: block
 
 	&__button
 		display: block
-		margin: 4px auto
+		margin: $micro auto
 		border: $dblhair solid $zon_grey
-		border-radius: 4px
-		height: 30px
-		width: 150px
+		border-radius: $micro
+		height: $twice
+		width: $mediumhuge
 		font-size: $font-s--rem
-		line-height: 30px
+		line-height: $twice
 		color: $zon-charcoal
 		text-align: center
 		background-color: $white
