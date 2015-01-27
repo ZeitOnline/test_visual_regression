@@ -1,14 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.11 (unreleased)
------------------
+1.10.2 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.10.1 (2015-01-23)
+-------------------
 
 - Nothing changed yet.
 
 
 1.10 (2015-01-23)
 -----------------
+
+- FIX: Do not show unstyled video-data
 
 - FIX: Output real comment counts in website teasers.
 
