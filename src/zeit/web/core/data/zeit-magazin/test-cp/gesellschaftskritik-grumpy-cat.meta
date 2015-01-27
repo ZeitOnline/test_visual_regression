@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:">
+  <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+    <tag type="free" url_value="internet" uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" ns10:pytype="str">Internet</tag>
+    <tag url_value="facebook" uuid="ddd1c7c5-1864-4642-818c-c153a2c9ebe5" score="4" type="Organization">Facebook</tag>
+    <tag type="free" url_value="katzen" uuid="c62c0ec4-4710-4c45-a41f-837f390f75a9" ns10:pytype="str">Katzen</tag>
+  </rankedTags>
   <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:289c6f07-710e-42f3-85ad-398a6d08f927}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
@@ -25,11 +30,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">Archivfreigabe</attribute>
-  <rankedTags ns="">
-    <tag>Internet</tag>
-    <tag>Facebook</tag>
-    <tag>Katzen</tag>
-  </rankedTags>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
@@ -68,9 +68,4 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
-  <rankedTags ns="">
-    <tag>Internet</tag>
-    <tag>Facebook</tag>
-    <tag>Katzen</tag>
-  </rankedTags>
 </head>
