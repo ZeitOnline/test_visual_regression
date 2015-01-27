@@ -4,7 +4,7 @@ Change log for zeit.web
 1.10.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HOTFIX: Fix typos and disable visited button state
 
 
 1.10.2 (2015-01-27)
