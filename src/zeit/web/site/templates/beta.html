@@ -9,24 +9,24 @@
             {% endif %}
             {% if view.beta_user == True %}
             <span class="beta-teaser__kicker">Public Beta</span>
-            <span class="beta-teaser__title">ZEIT ONLINE Beta</span>
+            <span class="beta-teaser__title">ZEIT&nbsp;ONLINE Beta</span>
             <p class="beta-teaser__prose">
-                Vielen Dank, dass Sie die Beta-Version von ZEIT ONLINE testen.
+                Vielen Dank, dass Sie die Beta-Version von ZEIT&nbsp;ONLINE testen.
                 Hier können Sie jederzeit zwischen der Beta-Version und der klassischen
                 Ansicht wechseln:
             </p>
             <form id="beta-toggle" class="beta-teaser__cta beta-teaser__cta--aligned" action="{{ view.friedbert_host }}beta" method="POST">
                 <input class="beta-teaser__radio" type="radio" name="opt" value="in" id="opt-in"{% if view.site_version == "opt_in" %} checked{% endif %}>
-                <label class="beta-teaser__label" for="opt-in">Ich möchte die neue Beta-Version von ZEIT ONLINE sehen.</label><br/>
+                <label class="beta-teaser__label" for="opt-in">Ich möchte die neue Beta-Version von ZEIT&nbsp;ONLINE sehen.</label>
                 <input class="beta-teaser__radio" type="radio" name="opt" value="out" id="opt-out"{% if view.site_version != "opt_in" %} checked{% endif %}>
-                <label class="beta-teaser__label" for="opt-out">Ich möchte die klassische Version von ZEIT ONLINE sehen.</label><br/>
+                <label class="beta-teaser__label" for="opt-out">Ich möchte die klassische Version von ZEIT&nbsp;ONLINE sehen.</label>
                 <input id="beta-toggle-submit" class="beta-teaser__button" type="submit" value="Speichern">
             </form>
             {% elif view.community_user.uid != "0" %}
             <span class="beta-teaser__kicker">Public Beta</span>
-            <span class="beta-teaser__title">Beta-Tester von ZEIT ONLINE werden</span>
+            <span class="beta-teaser__title">Beta-Tester von ZEIT&nbsp;ONLINE werden</span>
             <p class="beta-teaser__prose">
-                Wir entwickeln die neue Version von ZEIT ONLINE gemeinsam mit unseren
+                Wir entwickeln die neue Version von ZEIT&nbsp;ONLINE gemeinsam mit unseren
                 Nutzerinnen und Nutzern. Wenn Sie mithelfen wollen, die neue Version zu
                 testen, bevor sie öffentlich zugänglich ist, können Sie sich für einen Beta-
                 Zugang bewerben. Schicken Sie dazu eine E&#x2011;Mail mit ihrem Community-
@@ -38,19 +38,19 @@
             </div>
             {% else %}
             <span class="beta-teaser__kicker">Public Beta</span>
-            <span class="beta-teaser__title">Werden Sie Beta-Tester von ZEIT ONLINE</span>
+            <span class="beta-teaser__title">Werden Sie Beta-Tester von ZEIT&nbsp;ONLINE</span>
             <p class="beta-teaser__prose">
-                Wir entwickeln die neue Version von ZEIT ONLINE gemeinsam mit unseren
+                Wir entwickeln die neue Version von ZEIT&nbsp;ONLINE gemeinsam mit unseren
                 Nutzerinnen und Nutzern. Registrieren Sie sich als Beta-Nutzer, um schon
                 heute neue Artikelformate und ein modernisiertes Design zu genießen. Helfen
-                Sie mit, die neue Version von ZEIT ONLINE zu testen, bevor sie öffentlich
+                Sie mit, die neue Version von ZEIT&nbsp;ONLINE zu testen, bevor sie öffentlich
                 zugänglich ist. Schicken Sie dazu eine E&#x2011;Mail mit ihrem Community-
                 Benutzernamen an
             </p>
             <p class="beta-teaser__prose">
                 <b>Bitte loggen Sie sich ein!</b>
-                Sie benötigen einen Community-Benutzernamen, um die Beta-Version von ZEIT
-                ONLINE testen zu können. Bitte loggen Sie sich mit Ihren bestehenden
+                Sie benötigen einen Community-Benutzernamen, um die Beta-Version von
+                ZEIT&nbsp;ONLINE testen zu können. Bitte loggen Sie sich mit Ihren bestehenden
                 Zugangsdaten ein. Wenn Sie noch kein Benutzerkonto besitzen, können Sie sich
                 hier registrieren.
             </p>
