@@ -14,12 +14,12 @@
                 Vielen Dank, Sie wurden für die ZEIT Beta freigeschaltet. Sie können an dieser
                 Stelle jederzeit zwischen der neuen und der alten Ansicht wechseln.
             </p>
-            <form class="beta-teaser__cta beta-teaser__cta--aligned" action="{{ view.friedbert_host }}beta" method="POST">
+            <form id="beta-toggle" class="beta-teaser__cta beta-teaser__cta--aligned" action="{{ view.friedbert_host }}beta" method="POST">
                 <input class="beta-teaser__radio" type="radio" name="opt" value="in" id="opt-in"{% if view.site_version == "opt_in" %} checked{% endif %}>
                 <label class="beta-teaser__label" for="opt-in">Ich möchte die neue ZEIT Beta sehen</label><br/>
                 <input class="beta-teaser__radio" type="radio" name="opt" value="out" id="opt-out"{% if view.site_version != "opt_in" %} checked{% endif %}>
                 <label class="beta-teaser__label" for="opt-out">Ich möchte die klassische ZEIT sehen</label><br/>
-                <input class="beta-teaser__button" type="submit" value="Speichern">
+                <input id="beta-toggle-submit" class="beta-teaser__button" type="submit" value="Speichern">
             </form>
             {% elif view.community_user.uid != "0" %}
             <span class="beta-teaser__kicker">Public Beta</span>

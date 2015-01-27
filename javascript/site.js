@@ -25,7 +25,8 @@ require([
     'web.site/plugins/jquery.up2dateSignals',
     'web.site/plugins/jquery.scrollup',
     'web.site/plugins/jquery.extendfooter',
-    'web.site/plugins/jquery.snapshot'
+    'web.site/plugins/jquery.snapshot',
+    'web.site/plugins/jquery.toggleBeta'
 ], function() {
     $(window).referrerCount();
     $( '.main_nav__search' ).toggleSearch();
@@ -34,6 +35,7 @@ require([
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
     $( '.footer-publisher__more' ).extendFooter();
     $( '.snapshot' ).snapshot();
+    $( 'form#beta-toggle' ).toggleBeta();
     // comment out till we decide if it should be used and how (as)
     // $( '.footer-links__button' ).scrollUp();
 });
