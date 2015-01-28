@@ -20,6 +20,10 @@ class Beta(zeit.web.core.view.Base):
         self.context = zeit.content.article.article.Article()
         self.request = request
 
+    def __call__(self):
+        self.request.response.cache_expires(0)
+        return {}
+
     @property
     def community_user(self):
         return zeit.web.core.security.get_community_user_info(self.request)
@@ -27,6 +31,10 @@ class Beta(zeit.web.core.view.Base):
     @property
     def beta_user(self):
         return 'beta' in self.community_user.get('roles')
+
+    @property
+    def meta_robots(self):
+        return 'noindex,nofollow,noarchive'
 
     @property
     def site_version(self):

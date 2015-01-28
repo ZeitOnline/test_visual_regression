@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Fix fonts to include data-uri
 
+- HOTFIX: Disable browserside caching for beta page
+
 
 1.10.3 (2015-01-27)
 -------------------
