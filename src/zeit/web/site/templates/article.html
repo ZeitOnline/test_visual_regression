@@ -2,9 +2,9 @@
 {% import 'zeit.web.site:templates/macros/article_macro.tpl' as blocks with context%}
 
 {% macro render_page(page) %}
-  {% for item in page %}
-          {{ blocks[item|block_type](item)}}
-  {% endfor %}
+    {% for item in page %}
+        {{ (blocks[item | block_type] or no_block)(item)}}
+    {% endfor %}
 {% endmacro %}
 
 {% block main %}

@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1349: Switch prinbox by content toggle
 
+- FIX: Stop render breakdown if article block is not found
+
 
 1.10.4 (2015-01-28)
 -------------------
