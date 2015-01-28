@@ -6,8 +6,10 @@ import urlparse
 import pkg_resources
 
 import grokcore.component
+import jinja2.ext
 import pyramid.authorization
 import pyramid.config
+import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
@@ -67,29 +69,43 @@ class Application(object):
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_banner-source', ''))
+            self.settings.get('vivi_zeit.web_banner-source', ''))
         zeit.web.core.banner.banner_list = (
             zeit.web.core.banner.make_banner_list(banner_source))
+        zeit.web.core.banner.banner_toggles = (
+            zeit.web.core.banner.make_banner_toggles(banner_source))
         iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_iqd-mobile-ids', ''))
+            self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_navigation', ''))
+            self.settings.get('vivi_zeit.web_navigation', ''))
         zeit.web.core.navigation.navigation = (
             zeit.web.core.navigation.make_navigation(navigation_config))
         navigation_services_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_navigation-services', ''))
+            self.settings.get('vivi_zeit.web_navigation-services', ''))
         zeit.web.core.navigation.navigation_services = (
             zeit.web.core.navigation.make_navigation(
                 navigation_services_config))
         navigation_classifieds_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.frontend_navigation-classifieds', ''))
+            self.settings.get('vivi_zeit.web_navigation-classifieds', ''))
         zeit.web.core.navigation.navigation_classifieds = (
             zeit.web.core.navigation.make_navigation(
                 navigation_classifieds_config))
+        navigation_footer_publisher_config = maybe_convert_egg_url(
+            self.settings.get(
+                'vivi_zeit.web_navigation-footer-publisher', ''))
+        zeit.web.core.navigation.navigation_footer_publisher = (
+            zeit.web.core.navigation.make_navigation(
+                navigation_footer_publisher_config))
+        navigation_footer_links_config = maybe_convert_egg_url(
+            self.settings.get(
+                'vivi_zeit.web_navigation-footer-links', ''))
+        zeit.web.core.navigation.navigation_footer_links = (
+            zeit.web.core.navigation.make_navigation(
+                navigation_footer_links_config))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -98,7 +114,7 @@ class Application(object):
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             self.settings.get('linkreach_host', ''))
 
-        version = pkg_resources.get_distribution('zeit.frontend').version
+        version = pkg_resources.get_distribution('zeit.web').version
         self.settings['zmo_version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 
@@ -119,11 +135,14 @@ class Application(object):
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
+        config.add_route('beta_toggle', '/beta')
         config.add_route('health_check', '/health_check')
         config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
         config.add_static_view(name='img', path='zeit.web.static:img/')
         config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
+        config.add_renderer('jsonp', pyramid.renderers.JSONP(
+            param_name='callback'))
 
         if not self.settings.get('debug.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
@@ -183,6 +202,8 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
+        self.config.add_jinja2_extension(jinja2.ext.WithExtension)
+
         env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
 
@@ -228,7 +249,7 @@ class Application(object):
                 zeit.cms.repository.repository.Repository(),
                 zeit.cms.repository.interfaces.IRepository)
         typ = self.settings['connector_type']
-        allowed = ('dav', 'tbcdav', 'filesystem')
+        allowed = ('real', 'dav', 'filesystem')
         if typ not in allowed:
             raise ValueError(
                 'Invalid setting connector_type=%s, allowed are {%s}'

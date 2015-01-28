@@ -1,9 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <banner>
+  <toggles>
+    <!-- banner feature toggles: use 0 for off and 1 for on -->
+    <!-- feature-toggle: activate viewport zoom feature True/False -->
+    <viewport_zoom>0</viewport_zoom>
+    <!-- this one is just for testing purposes, plz ignore -->
+    <testing_me>0</testing_me>
+  </toggles>
   <place number="1" active="true">
     <name>superbanner</name>
     <type/>
     <tile>1</tile>
+    <multiple_sizes>728x90,800x250</multiple_sizes>
     <width>728</width>
     <height>90</height>
     <dcopt>ist</dcopt>
@@ -13,6 +21,7 @@
   <place number="2" active="true">
     <name>skyscraper</name>
     <tile>2</tile>
+    <multiple_sizes>120x600,160x600,200x600</multiple_sizes>
     <width>120</width>
     <height>600</height>
     <diuqilon>True</diuqilon>

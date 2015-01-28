@@ -1,0 +1,78 @@
+.buzz-box
+	+respond-min($break-tablet-min)
+		margin-bottom: $twice
+
+	&__heading
+		border-bottom: 1px solid $color-border
+		font-size: $font-s
+		font-weight: bold
+		letter-spacing: 1px
+		line-height: normal
+		margin: 0 0 $fine 0
+		padding: remify(10px)
+		text-transform: uppercase
+
+=buzz-teaser($layout)
+	@extend %teaser
+	border: none
+	margin: 0
+	padding: $fine 0 $fine $hefty
+	position: relative
+
+	+on-interaction
+		span
+			text-decoration: none
+
+	&__title
+		@extend %teaser-title
+		font-size: $font-mm
+		line-height: $headline-line-height
+		&:hover
+			color: $zon_grey
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+		font-weight: normal
+		font-size: $font-xs
+
+	&__heading
+		@extend %teaser-heading
+		margin: 0
+
+@each $flavor in comments, facebook, mostread
+	.buzz-#{$flavor}
+		+buzz-teaser(buzz-#{$flavor})
+
+.buzz-index
+	left: remify(10px)
+	margin: 0
+	position: absolute
+	vertical-align: text-bottom
+
+	&__label
+		color: $zon_dark_grey
+		font-size: $font-mxl
+		font-weight: bold
+		line-height: $font-mxl
+		width: $small
+
+.buzz-line
+	margin: $micro 0 0 0
+
+	&__icon
+		background-size: contain
+		display: inline-block
+		height: $small
+		width: $small
+		opacity: 0.7
+	&__label
+		color: $zon_grey
+		font-size: $font-xs
+		font-size: $font-s
+		font-weight: 200
+		letter-spacing: $zon-letter-spacing-s
+		margin-left: $thin
+		vertical-align: text-bottom

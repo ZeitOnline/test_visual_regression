@@ -17,8 +17,8 @@ def test_wrapper_functions_are_working(selenium_driver, testserver):
     driver.execute_script("window.wrapper.setHeaderMargin(111)")
     main_nav = driver.find_element_by_class_name('main-nav')
     spacer = driver.find_element_by_id('wrapper_spacer_header')
-    assert(main_nav.is_displayed() is False), 'Main nav is not hidden'
-    assert(spacer.is_displayed()), 'Spacer is not displayed'
+    assert main_nav.is_displayed() is False, 'Main nav is not hidden'
+    assert spacer.is_displayed(), 'Spacer is not displayed'
 
 
 def test_wrapper_functions_are_working_for_features(
@@ -39,8 +39,8 @@ def test_wrapper_functions_are_working_for_features(
     driver.execute_script("window.wrapper.setHeaderMargin(111)")
     main_nav = driver.find_element_by_class_name('main-nav')
     spacer = driver.find_element_by_id('wrapper_spacer_header')
-    assert(main_nav.is_displayed() is False), 'Main nav is not hidden'
-    assert(spacer.is_displayed()), 'Spacer is not displayed'
+    assert main_nav.is_displayed() is False, 'Main nav is not hidden'
+    assert spacer.is_displayed(), 'Spacer is not displayed'
 
 
 def test_clickcounter_produces_no_error(

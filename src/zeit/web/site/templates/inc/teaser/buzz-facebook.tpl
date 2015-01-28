@@ -1,12 +1,12 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
-
-{% block teaser_modifier %}teaser--buzz teaser--{{ layout }}{% endblock %}
-
-{% block teaser_heading_modifier %}teaser__heading--buzz teaser__heading--{{ layout }}{% endblock %}
+{%- extends "zeit.web.site:templates/inc/teaser/buzz.tpl" -%}
 
 {% block teaser_media_position_after_title %}
-    {% include ["zeit.web.site:templates/inc/teaser_asset/annotated-icon_" + layout + ".tpl",
-                "zeit.web.site:templates/inc/teaser_asset/annotated-icon.tpl"] with context %}
+    {% with -%}
+        {% set class = 'buzz-line' %}
+        {% set icon = layout %}
+        {% set label = teaser.score %}
+        {% set modifier = layout %}
+        {% include ["zeit.web.site:templates/inc/teaser_asset/annotation_" + layout + ".tpl",
+                    "zeit.web.site:templates/inc/teaser_asset/annotation.tpl"] with context %}
+    {%- endwith %}
 {% endblock %}
-
-{% block teaser_container %}{% endblock %}

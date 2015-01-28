@@ -96,8 +96,8 @@ $zon-search-square-size: em(35px)
 
 .logo_bar__menue
 	display: inline-block
-	width: $big
-	border-left: $hair solid $zon_light_grey
+	width: $zon-bar-height-phablet
+	border-left: 1px solid $zon_light_grey
 	+hover_nav_icon()
 	+respond-min($break-tablet-min)
 		display: none
@@ -106,14 +106,14 @@ $zon-search-square-size: em(35px)
 	@extend %main_nav_icons
 	width: $small
 	height: $small
-	margin: $little 0 0 $little
+	margin: 0
 
 .logo_bar__image
 	display: inline-block
 	a
 		+hide-text
 		@extend %main_nav_icons
-		margin: $fine 0 0 0
+		margin: em(13px) 0 0 0
 		width: $zon-logo-width-small
 		height: $zon-logo-height-small
 		+respond-min($break-tablet-min)
@@ -283,7 +283,7 @@ $zon-search-square-size: em(35px)
 
 .search__button
 	@extend %main_nav_button
-	+hover_nav_icon(block,$zon_lighter_grey)
+	+hover_nav_icon(block,$zon_lighter_grey,0)
 	border-top-right-radius: $micro
 	border-bottom-right-radius: $micro
 	+respond-min($break-tablet-min)
@@ -440,9 +440,7 @@ $zon-search-square-size: em(35px)
 	position: relative
 	+respond-min($break-tablet-min)
 		& > a:after
-			display: inline-block // needed for "rotate on hover"
-			margin-left: $tiny
-			content: "\25BE" // Unicode for ▾
+			+drop_icon()
 		&:hover
 			& > a
 				+box-shadow(none)

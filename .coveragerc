@@ -3,4 +3,4 @@ directory=htdocs/coverage
 
 [run]
 omit = 
-    */zeit/frontend/test/*
+    */zeit/web/test/*

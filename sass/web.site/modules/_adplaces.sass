@@ -2,97 +2,108 @@ $desktop_mobile_ad_breakpoint: em(768px)
 $mobile_ad_width: em(320px)
 $mobile_middle_ad_break_left_margin: $mobile_ad_width + $page-padding--small*2
 
-// extender
-%ad
-    background-color: $white
-    color: $charcoal
-
+// extend these please
 %ad__label
-    color: $charcoal
-    font-family: $font-tabletgothic
-    font-size: $font-xxs
-    letter-spacing: 2px
-    text-align: left
-    text-transform: uppercase
+	color: $charcoal
+	font-family: $font-tabletgothic
+	font-size: $font-xxs
+	letter-spacing: 2px
+	text-align: left
+	text-transform: uppercase
 
-%ad__inner
-    margin: 0 auto
-
-// hide all desktop ads
-.ad__min__768
-    display: none
-    +respond-min($desktop_mobile_ad_breakpoint)
-        display: block
-
-// mobile
-.iqd_mobile__adplace
-    width: $mobile_ad_width
-    margin: auto
-    a > *, iframe
-        margin: $fine auto $fine auto
-    +respond-min($desktop_mobile_ad_breakpoint)
-        display: none
-
-.iqd_mobile__adplace--middle
-    @extend .iqd_mobile__adplace
-    +respond-max($mobile_middle_ad_break_left_margin)
-        margin-left: -$page-padding--small
-
-// medium rectangles
 %ad__mr
-    @extend %ad
-    margin: $large auto
-    +respond-min($break-1)
-        border-top: 1px solid $charcoal
-        border-bottom: 1px solid $charcoal
-        max-width: 41.25rem
-        padding: $small 0
-    +respond-min($break-3)
-        border: none
-        float: right
-        margin: 0 0 $compact $medium
-        max-width: 300px
-        padding: 0
-    object
-        display: block
+	background-color: $white
+	color: $charcoal
+	margin: $large auto
+	+respond-min($break-1)
+		border-top: 1px solid $charcoal
+		border-bottom: 1px solid $charcoal
+		max-width: 41.25rem
+		padding: $small 0
+	+respond-min($break-3)
+		border: none
+		float: right
+		margin: 0 0 $compact $medium
+		max-width: 300px
+		padding: 0
+	object
+		display: block
 
 %ad__mr__label
-    @extend %ad__label
-    width: 300px
-    margin: 0 auto
+	@extend %ad__label
+	width: 300px
+	margin: 0 auto
 
 %ad__mr__inner
-    @extend %ad__inner
-    width: 300px
+	margin: 0 auto
+	width: 300px
 
 
-// adplaces
-.ad__tile_4, .ad__tile_7, .ad__tile_8
-    @extend %ad__mr
+// desktop adplaces
+.ad-tile_3
+	max-width: 940px
+	margin: 0 auto
+	padding: $little 0
+	&__label
+		@extend %ad__label
+		text-align: right
 
-.ad__tile_7.ad__on__centerpage // tile 7 on cp
-    @extend %ad__mr
-    margin: 0 auto $compact auto
-    .ad__tile_7__label,
-    .ad__tile_8__label
-        display: none
-    +respond-min($break-2)
-        padding: 0
-        border: none
-    +respond-min($break-3)
-        float: none
+.ad-tile_4
+	@extend %ad__mr
+	&__label
+		@extend %ad__mr__label
+	&__inner
+		@extend %ad__mr__inner
 
-.ad__tile_4__label, .ad__tile_7__label, .ad__tile_8__label
-    @extend %ad__mr__label
+.ad-tile_7
+	@extend %ad__mr
+	&__label
+		@extend %ad__mr__label
+	&__inner
+		@extend %ad__mr__inner
+	&--on-centerpage
+		margin: 0 auto $compact auto
+		+respond-min($break-2)
+			padding: 0
+			border: none
+		+respond-min($break-3)
+			float: none
+		// a little bit unbemmy, but this would end rather complicated
+		.ad-tile_7__label
+			display: none
 
-.ad__tile_4__inner, .ad__tile_7__inner, .ad__tile_8__inner
-    @extend %ad__mr__inner
+.ad-tile_8
+	@extend %ad__mr
+	&__label
+		@extend %ad__mr__label
+	&__inner
+		@extend %ad__mr__inner
+	&--on-centerpage
+		margin: 0 auto $compact auto
+		+respond-min($break-2)
+			padding: 0
+			border: none
+		+respond-min($break-3)
+			float: none
+		// a little bit unbemmy, but this would end rather complicated
+		.ad-tile_8__label
+			display: none
 
-.ad__tile_3
-    max-width: 940px
-    margin: 0 auto
-    padding: $little 0
 
-.ad__tile_3__label
-    @extend %ad__label
-    text-align: right
+// hide all desktop ads on mobile
+*[data-ad_minwidth='768']
+	display: none
+	+respond-min($desktop_mobile_ad_breakpoint)
+		display: block
+
+// mobile
+.iqd-mobile-adplace
+	width: $mobile_ad_width
+	margin: auto
+	a > *, iframe
+		margin: $fine auto $fine auto
+	+respond-min($desktop_mobile_ad_breakpoint)
+		display: none
+	&--middle
+		+respond-max($mobile_middle_ad_break_left_margin)
+			margin-left: -$page-padding--small

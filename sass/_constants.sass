@@ -4,10 +4,10 @@ $base-line-height: 1.5 !default
 $headline-line-height: 1.4 !default
 $meta-line-height: 1.7 !default
 
-
 // margins/paddings in px
 $hair--px:         1px !default
 $dblhair--px:      2px !default
+$bristle--px:      3px !default
 $micro--px:        4px !default
 $tiny--px:         6px !default
 $thin--px:         8px !default
@@ -30,6 +30,7 @@ $extremhuge--px: 200px !default
 // margins/paddings
 $hair:       em($hair--px)
 $dblhair:    em($dblhair--px)
+$bristle:    em($bristle--px)
 $micro:      em($micro--px)
 $tiny:       em($tiny--px)
 $thin:       em($thin--px)
@@ -52,12 +53,15 @@ $extremhuge: em($extremhuge--px)
 // font sizes in px
 $font-xxs--px:    10px !default
 $font-xs--px:     12px !default
+$font-ss--px:     13px !default
 $font-s--px:      14px !default
+$font-mm--px:     15px !default
 $font-m--px:      16px !default
 $font-ml--px:     18px !default
 $font-l--px:      20px !default
+$font-mxl--px:    22px !default
 $font-xl--px:     24px !default
-$font-mxl--px:    28px !default
+$font-mxxl--px:   28px !default
 $font-xxl--px:    30px !default
 $font-xxxl--px:   40px !default
 $font-xxxxl--px:  50px !default
@@ -66,28 +70,35 @@ $font-xxxxxl--px: 64px !default
 // font sizes in em
 $font-xxs:   em($font-xxs--px)
 $font-xs:    em($font-xs--px)
+$font-ss:    em($font-ss--px)
 $font-s:     em($font-s--px)
+$font-mm:    em($font-mm--px)
 $font-m:     em($font-m--px)
 $font-ml:    em($font-ml--px)
 $font-l:     em($font-l--px)
-$font-xl:    em($font-xl--px)
 $font-mxl:   em($font-mxl--px)
+$font-xl:    em($font-xl--px)
+$font-mxxl:  em($font-mxxl--px)
 $font-xxl:   em($font-xxl--px)
 $font-xxxl:  em($font-xxxl--px)
 $font-xxxxl: em($font-xxxxl--px)
 
 // font sizes in rem
-$font-xxs--rem:   rem($font-xxs--px)
-$font-xs--rem:    rem($font-xs--px)
-$font-s--rem:     rem($font-s--px)
-$font-m--rem:     rem($font-m--px)
-$font-ml--rem:    rem($font-ml--px)
-$font-l--rem:     rem($font-l--px)
-$font-xl--rem:    rem($font-xl--px)
-$font-mxl--rem:   rem($font-mxl--px)
-$font-xxl--rem:   rem($font-xxl--px)
-$font-xxxl--rem:  rem($font-xxxl--px)
-$font-xxxxl--rem: rem($font-xxxxl--px)
+$font-xxs--rem:    remify($font-xxs--px)
+$font-xs--rem:     remify($font-xs--px)
+$font-ss--rem:     remify($font-ss--px)
+$font-s--rem:      remify($font-s--px)
+$font-mm--rem:     remify($font-mm--px)
+$font-m--rem:      remify($font-m--px)
+$font-ml--rem:     remify($font-ml--px)
+$font-l--rem:      remify($font-l--px)
+$font-mxl--rem:    remify($font-mxl--px)
+$font-xl--rem:     remify($font-xl--px)
+$font-mxxl--rem:   remify($font-xxl--px)
+$font-xxl--rem:    remify($font-xxl--px)
+$font-xxxl--rem:   remify($font-xxxl--px)
+$font-xxxxl--rem:  remify($font-xxxxl--px)
+$font-xxxxxl--rem: remify($font-xxxxxl--px)
 
 $sans-fallbacks: "Helvetica Neue", Helvetica, Arial, FreeSans, sans-serif
 $serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif, serif
@@ -161,3 +172,4 @@ $mtb-teaser-width: em(270px)
 // font families
 $font-franziska: "FranziskaWebPro", $serif-fallbacks
 $font-tabletgothic: "TabletGothic", $sans-fallbacks
+$font-tabletgothicnarrow: "TabletGothicNarrow", $sans-fallbacks

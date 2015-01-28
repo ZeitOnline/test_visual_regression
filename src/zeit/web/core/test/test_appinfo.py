@@ -29,7 +29,7 @@ def test_cookieless_request_returns_default(app_info_request):
     assert get_app_info(app_info_request)['authenticated'] is False
 
 
-@mark.user('test-friedbert')
+@mark.user('test-user')
 def test_app_info_contains_user(app_info, app_info_request):
     assert assemble_app_info(
-        app_info_request)['user']['name'] == 'test-friedbert'
+        app_info_request)['user']['name'] == 'test-user'

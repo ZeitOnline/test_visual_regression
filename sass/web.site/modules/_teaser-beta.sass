@@ -1,0 +1,60 @@
+.beta-teaser
+	@extend %teaser
+	margin: 0 auto
+	max-width: remify(560px)
+
+	&__image
+		width: 100%
+		margin-bottom: $twice
+
+	&__title
+		@extend %teaser-title
+		text-align: center
+
+	&__kicker
+		@extend %teaser-kicker
+		text-align: center
+
+	&__prose
+		text-align: justify
+
+	&__prose,
+	&__cta
+		margin: $small auto
+		color: $zon_grey
+		position: relative
+		+respond-min($break-1)
+			padding: 0 $big 0
+
+	&__cta
+		text-align: center
+
+	&__cta--aligned
+		text-align: left
+
+	&__radio
+		margin: $bristle $petite $tiny 0
+		position: absolute
+
+	&__label
+		margin: 0 0 $tiny $medium
+		display: block
+
+	&__button
+		display: block
+		margin: $micro auto
+		border: $dblhair solid $zon_grey
+		border-radius: $micro
+		height: $twice
+		width: $mediumhuge
+		font-size: $font-s--rem
+		line-height: $twice
+		color: $zon-charcoal
+		text-align: center
+		background-color: $white
+
+	&__button:visited
+		color: $zon-charcoal
+
+	&__button--inline
+		display: inline-block

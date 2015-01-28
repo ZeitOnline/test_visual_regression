@@ -66,8 +66,8 @@ def test_get_teaser_image(testserver):
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), \
-        'Article with video asset should produce a teaser image.'
+    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
+        'Article with video asset should produce a teaser image.')
     assert 'katzencontent-zmo-large.jpg' in image.src
 
     teaser = zeit.cms.interfaces.ICMSContent(
@@ -75,8 +75,8 @@ def test_get_teaser_image(testserver):
         '/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), \
-        'Article with image asset should produce a teaser image.'
+    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
+        'Article with image asset should produce a teaser image.')
     assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
 
 
@@ -96,8 +96,7 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
-    unique_id = \
-        'http://xml.zeit.de/centerpage/katzencontent/'
+    unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser, unique_id=unique_id)
     assert image.uniqueId == (
@@ -111,8 +110,7 @@ def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
-    unique_id = \
-        'http://xml.zeit.de/moep/moepmoep/moep'
+    unique_id = 'http://xml.zeit.de/moep/moepmoep/moep'
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser, unique_id=unique_id)
     assert image is None
@@ -239,3 +237,62 @@ def test_cp_teaser_with_comments_should_get_count(testserver, testbrowser):
     comment_count = zeit.web.core.template.get_teaser_commentcount(
         'http://xml.zeit.de/does_not_exist')
     assert comment_count is None
+
+
+def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('leader')
+    assert teaser == 'zon-large'
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-two-columns')
+    assert teaser == 'zon-large'
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-panorama')
+    assert teaser == 'zon-large'
+
+
+def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('text-teaser')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('buttons')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('large')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('short')
+    assert teaser == 'zon-small'
+    teaser = zeit.web.core.template.get_mapped_teaser('date')
+    assert teaser == 'zon-small'
+
+
+def test_teaser_fullwidth_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-fullwidth')
+    assert teaser == 'zon-fullwidth'
+
+
+def test_hide_teaser_mapping_is_working_as_expected(testserver):
+    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-volume')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-year')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('two-side-by-side')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('ressort')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('leader-upright')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('buttons-fullwidth')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('parquet-printteaser')
+    assert teaser == 'hide'
+    teaser = zeit.web.core.template.get_mapped_teaser('parquet-verlag')
+    assert teaser == 'hide'
+
+
+def test_function_get_image_pattern_is_working_as_expected(testserver):
+    # Existing formats
+    teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
+    assert teaser == ['zon-large']
+    teaser = zeit.web.core.template.get_image_pattern('zon-small', 'default')
+    assert teaser == ['zon-thumbnail', '540x304']
+
+    # Non existing format, returns default
+    teaser = zeit.web.core.template.get_image_pattern(
+        'zon-large-none', 'default')
+    assert teaser == ['default']

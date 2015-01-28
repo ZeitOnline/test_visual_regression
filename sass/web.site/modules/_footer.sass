@@ -1,0 +1,203 @@
+//sizes
+$footer_logo_width: em(300px)
+$footer_logo_width_small: em(280px)
+$footer_bar_min_height: em(30px)
+$footer_button_height: em(30px)
+$footer_button_width: em(150px)
+$footer_button_icon_height: em(14px)
+$footer_button_icon_width: em(10px)
+
+%footer_icons
+	display: block
+	background-size: contain
+	background-position: 50% 50%
+
+%footer_bar
+	min-height: $footer_bar_min_height
+	font-size: $font-xs--rem
+	line-height: $twice
+	text-align: left
+	+respond-min($break-tablet-min)
+		text-align: center
+
+
+%footer_dark_light_switch
+	color: $zon_grey
+	a
+		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
+	+respond-min($break-tablet-min)
+		color: $zon_dark_grey
+		a
+			+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $zon_dark_grey)
+
+%footer_light
+	background-color: $zon_lighter_grey
+	color: $zon_dark_grey
+	a
+		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $zon_dark_grey)
+	+respond-min($break-tablet-min)
+		color: $zon_dark_grey
+		a
+			+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $zon_dark_grey)
+
+%footer_dark
+	color: $zon_grey
+	a
+		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
+	+respond-min($break-tablet-min)
+		color: $zon_grey
+		a
+			+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
+
+%footer_inner
+	width: 40%
+	display: none
+	vertical-align: top
+	padding: $petite
+	+respond-min($break-phablet-min)
+		padding: $petite $hefty
+	+respond-min($break-tablet-min)
+		width: 100%
+		display: inline-block !important
+		padding: 0px 0px 0px 0px
+
+%footer_list
+	list-style: none
+	padding: 0px
+	margin: 0px
+
+%footer_item
+	display: inline-block
+
+%footer_dot
+	&:after
+		content: '•'
+		font-weight: bold
+		color: $zon_grey
+		margin: 0 $tiny 0 $tiny
+	&:last-child:after
+		content: ''
+		display: inline-block
+	+respond-max($break-tablet-min)
+		display: block
+		&:after
+			content: ''
+			display: inline-block
+
+%footer_bold
+	font-weight: bold
+	&:after
+		content: ''
+		display: inline-block
+
+.footer
+	width: 100%
+	text-align: center
+	margin-top: $wide
+	font-family: $font-tabletgothic
+
+.footer-logo
+	&__image
+		display: inline-block
+		margin-bottom: $petite
+		a
+			+hide-text
+			@extend %footer_icons
+			width: $footer_logo_width_small
+			+respond-min($break-tablet-min)
+				width: $footer_logo_width
+
+.footer-publisher
+	background-color: $zon-charcoal
+	+respond-min($break-tablet-min)
+		background-color: $zon_lighter_grey
+	&__inner
+		@extend %footer_inner
+		@extend %footer_bar
+		@extend %footer_dark_light_switch
+	&__list
+		@extend %footer_list
+	&__item
+		@extend %footer_item
+		@extend %footer_dot
+	&__inner--isfirst
+		@extend %footer_light
+		text-align: center
+		width: 100%
+		font-weight: bold
+		display: block
+		padding: $fine 0 $fine 0
+		.footer-publisher__item
+			display: inline-block
+			&:after
+				content: '•'
+			&:last-child:after
+				content: ''
+		.footer-publisher__item--isbold
+			&:after
+				content: ''
+				display: inline-block
+	&__inner--islast
+		padding-bottom: $petite
+	&__item--isbold
+		@extend %footer_bold
+	&__more
+		@extend %footer_bar
+		@extend %footer_light
+		text-align: center
+		border-top: 1px solid $zon_light_grey
+		border-bottom: 1px solid $zon_light_grey
+		padding: $fine 0 $fine 0
+		+respond-min($break-tablet-min)
+			display: none
+		a
+			&:after
+				+drop_icon()
+			&:hover
+				&:after
+					+rotate(180deg)
+
+.footer-links
+	background-color: $zon-charcoal
+	border-top: 1px solid $zon_grey
+	padding-bottom: $junior
+	&__inner
+		@extend %footer_inner
+		@extend %footer_bar
+		@extend %footer_dark
+	&__list
+		@extend %footer_list
+	&__item
+		@extend %footer_item
+		@extend %footer_dot
+	&__inner--isfirst
+		padding-top: $petite
+	&__item--isbold
+		@extend %footer_bold
+		display: none
+	&__seperator
+		display: none
+		+respond-max($break-tablet-min)
+			border-top: 1px solid $zon_grey
+	&__button
+		display: inline-block
+		margin: $junior $large 0 $large
+		border: $dblhair solid $zon_grey
+		border-radius: 4px
+		height: $footer_button_height
+		width: $footer_button_width
+		color: $zon_light_grey
+		font-size: $font-s--rem
+		line-height: $footer_button_height
+		text-transform: uppercase
+		letter-spacing: 1px
+		cursor: pointer
+		a
+			+link-colors($zon_light_grey, $zon_light_grey)
+			display: inline-block
+		.icon-top-arrow
+			@extend %footer_icons
+			height: $footer_button_icon_height
+			width: $footer_button_icon_width
+			display: inline-block
+			margin-right: $thin

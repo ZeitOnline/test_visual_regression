@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/exampleimages/advertorial/hennessy-logo/hennessy-logo.JPG</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-11-19T14:29:33.952586+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-11-19T14:28:39.545134+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IMasterImage" module="zeit.content.image.interfaces"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-11-19T14:28:34.007569+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-11-19T14:29:33.952586+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple/&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:74f2e62e-e855-46f2-83a4-7022cc981dfd}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-11-19T14:27:22+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.meyer-hamme</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-11-19T14:28:34Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">26623</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 19 Nov 2014 14:28:34 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e1b0fa-67ff-5083706cfbae2"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

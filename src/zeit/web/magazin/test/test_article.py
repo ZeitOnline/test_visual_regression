@@ -185,6 +185,14 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
         'cg8=zeitmz/centerpage&amp;cg9=' in browser.contents
 
 
+def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
+    browser = testbrowser(
+        '%s/artikel/06' % testserver.url)
+    assert '6: "tödlichekeime",' in browser.contents
+    assert 'redaktion.zeit-magazin..tödlichekeime.' \
+        'article.online./artikel/06' in browser.contents
+
+
 def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
     driver = selenium_driver
     # ipad landscape
@@ -518,7 +526,7 @@ def test_nextread_base_layout_has_image_element_if_available(
         'There should be exactly one image tag in a "base" nextread teaser.'
     browser = testbrowser('%s/artikel/10' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 0, \
+    assert len(nextread.cssselect('img')) == 1, \
         'The nextread of "Artikel 10" has no teaser image asset.'
 
 
@@ -530,7 +538,7 @@ def test_nextread_maximal_layout_has_image_background_if_available(
         'The teaser image should be set as a background for "maximal" teasers.'
     browser = testbrowser('%s/artikel/03' % testserver.url)
     nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' not in nextread.attrib.get('style'), \
+    assert 'background-image' in nextread.attrib.get('style'), \
         'The nextread of "Artikel 03" has no teaser image asset.'
 
 
@@ -613,6 +621,20 @@ def test_feature_longform_should_have_zon_logo_classes(
     assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
 
 
+def test_feature_longform_should_have_zonish_title(testserver, testbrowser):
+
+    browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+    title = browser.cssselect('head > title')
+    assert 'ZEIT ONLINE' in title[0].text
+
+
+def test_feature_longform_should_have_zon_twittername(testserver, testbrowser):
+
+    browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+    creator = browser.cssselect('meta[name="twitter:site"]')
+    assert creator[0].values()[1] == '@zeitonline'
+
+
 def test_article_view_has_leadtime_set_if_article_provides_it(
         testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
@@ -627,3 +649,11 @@ def test_article_view_has_no_leadtime_if_the_attribute_is_missing(
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start is None
     assert view.leadtime.end is None
+
+
+def test_advertorial_article_shows_advertorial_marker(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/advertorial' % testserver.url)
+    assert browser.cssselect(
+        '.advertorial-navigation-title')[0].text == 'Anzeige'
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    assert not browser.cssselect('.advertorial-navigation-title')

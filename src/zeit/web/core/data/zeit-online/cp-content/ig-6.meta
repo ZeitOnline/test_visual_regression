@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-online/cp-content/ig-6/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Jens Leonhard/dpa&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-01-07T15:32:27.927958+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-01-07T15:32:27.927958+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">14822462.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.luedemann</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-01-07T15:31:40.837566+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-01-07T15:30:06.005181+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:1d673b0f-6b7b-47c1-bd10-cb11222a23f0}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Fuchs Rotfuchs Fuchsbandwurm</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Ein junger Rotfuchs ("Vulpes vulpes"), aufgenommen auf einer Waldlichtung im Stadtwald von Frankfurt Oder.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Fuchs Rotfuchs Fuchsbandwurm</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-01-07T15:31:30Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 07 Jan 2014 15:31:30 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e4c0a4-1000-4ef63120d9577"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

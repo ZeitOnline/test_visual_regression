@@ -8,6 +8,7 @@ from zope.component import getMultiAdapter
 
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
+import zeit.cms.syndication.feed
 
 from zeit.web.core.template import create_image_url
 from zeit.web.core.template import default_image_url
@@ -57,7 +58,8 @@ def test_centerpage_should_have_correct_seo_title(testserver, testbrowser):
 
 def test_hp_should_have_correct_title(testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in browser.contents
+    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
@@ -67,21 +69,21 @@ def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
 
 def test_centerpage_should_have_seo_description(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="description" content="SEO description">' \
-        in browser.contents
+    assert '<meta name="description" content="SEO description">' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_default_keywords(testserver, testbrowser):
     # Default means ressort and sub ressort respectively
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="keywords" content="Lebensart, mode-design">' \
-        in browser.contents
+    assert '<meta name="keywords" content="Lebensart, mode-design">' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_page_meta_keywords(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="keywords" content="Pinguin">' \
-        in browser.contents
+    assert '<meta name="keywords" content="Pinguin">' in (
+        browser.contents)
 
 
 def test_centerpage_should_have_page_meta_robots_information(
@@ -437,7 +439,7 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
     assert add == 'cp_button--ad'
     mr = elements[2].find_element_by_css_selector(
         "#iqadtile7").get_attribute("class")
-    assert mr == "ad__tile_7 ad__on__centerpage ad__width_300 ad__min__768"
+    assert mr == "ad-tile_7 ad-tile_7--on-centerpage"
 
 
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
@@ -597,6 +599,11 @@ def test_get_image_asset_should_return_image_asset(testserver, testbrowser):
     assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
+def test_get_image_asset_should_catch_fake_entries(testserver, testbrowser):
+    fake_entry = zeit.cms.syndication.feed.FakeEntry(None, '')
+    assert zeit.web.core.centerpage.get_image_asset(fake_entry) is None
+
+
 def test_get_gallery_asset_should_return_gallery_asset(
         testserver, testbrowser):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
@@ -606,12 +613,22 @@ def test_get_gallery_asset_should_return_gallery_asset(
     assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
+def test_get_gallery_asset_should_catch_fake_entries(testserver, testbrowser):
+    fake_entry = zeit.cms.syndication.feed.FakeEntry(None, '')
+    assert zeit.web.core.centerpage.get_gallery_asset(fake_entry) is None
+
+
 def test_get_video_asset_should_return_video_asset(testserver, testbrowser):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.get_video_asset(
         context)
     assert isinstance(asset, zeit.content.video.video.Video)
+
+
+def test_get_video_asset_should_catch_fake_entries(testserver, testbrowser):
+    fake_entry = zeit.cms.syndication.feed.FakeEntry(None, '')
+    assert zeit.web.core.centerpage.get_video_asset(fake_entry) is None
 
 
 def test_default_image_url_should_return_default_image_size(

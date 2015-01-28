@@ -5,9 +5,9 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='zeit.frontend',
-    url='https://github.com/ZeitOnline/friedbert',
-    version='1.8.dev0',
+    name='zeit.web',
+    url='https://github.com/ZeitOnline/zeit.web',
+    version='1.10.5.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -46,7 +46,7 @@ setup(
         'zc.iso8601',
         'wsgiproxy',
         'zeit.cms',
-        'zeit.connector >= 2.3.3.dev0',
+        'zeit.connector >= 2.4.0.dev0',
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.cp >= 2.6.1',

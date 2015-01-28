@@ -32,10 +32,10 @@ def test_compact_main_nav(selenium_driver, testserver, screen_size):
     google = sharing.find_element_by_class_name('icon-google')
 
     # there's exactly one navigation
-    assert(len(nav_list) == 1)
+    assert len(nav_list) == 1
 
     # navigation is visible
-    assert(main_nav.is_displayed())
+    assert main_nav.is_displayed()
 
     # there is the right logo visible
     if small_screen:
@@ -46,15 +46,15 @@ def test_compact_main_nav(selenium_driver, testserver, screen_size):
         assert logo_large.is_displayed()
 
     # sharing is visible
-    assert(sharing.is_displayed())
+    assert sharing.is_displayed()
 
     # sharing has three buttons
-    assert(len(buttons) == 3)
+    assert len(buttons) == 3
 
     # twitter, facebook and google buttons are visible
-    assert(twitter.is_displayed())
-    assert(facebook.is_displayed())
-    assert(google.is_displayed())
+    assert twitter.is_displayed()
+    assert facebook.is_displayed()
+    assert google.is_displayed()
 
 
 def test_main_nav(selenium_driver, testserver, screen_size):
@@ -94,23 +94,23 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     # community_trig = community.find_element_by_class_name(class_trig)
 
     # there's exactly one navigation
-    assert(len(nav_list) == 1)
+    assert len(nav_list) == 1
 
     # navigation is visible
-    assert(main_nav.is_displayed())
+    assert main_nav.is_displayed()
 
     # menu is initially hidden on mobile, but visible on desktop
     if small_screen:
-        assert(trigger.is_displayed())
-        assert(not menu.is_displayed())
+        assert trigger.is_displayed()
+        assert not menu.is_displayed()
     else:
-        assert(not trigger.is_displayed())
-        assert(menu.is_displayed())
+        assert not trigger.is_displayed()
+        assert menu.is_displayed()
 
     # menu can be opened by click
     if small_screen:
         trigger.click()
-    assert(menu.is_displayed())
+    assert menu.is_displayed()
 
     # there is the right logo visible
     if small_screen:
@@ -121,12 +121,12 @@ def test_main_nav(selenium_driver, testserver, screen_size):
         assert logo_large.is_displayed()
 
     # service is present and can be opened
-    assert(service_trig.is_displayed())
+    assert service_trig.is_displayed()
     service_trig.click()
-    assert(service_cont.is_displayed())
+    assert service_cont.is_displayed()
 
     # service dropdown contains at least one link
-    assert(len(service_links) > 0)
+    assert len(service_links) > 0
 
     # comment out search stuff for now
     # search = main_nav.find_element_by_class_name('main-nav__search')
@@ -135,23 +135,23 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     # search_field = search_cont.find_element_by_class_name(class_input)
     # search_button = search_cont.find_element_by_class_name(class_button)
     # search is present and can be opened
-    # assert(search_trig.is_displayed())
+    # assert search_trig.is_displayed()
     # search_trig.click()
 
     # open search dropdown contains writable input field
     # assert(search_field.is_displayed())
     # search_string = "Keyword"
     # search_field.send_keys(search_string)
-    # assert(search_field.get_attribute("value") == search_string)
+    # assert search_field.get_attribute("value") == search_string
 
     # open search dropdown contains submit button
-    # assert(search_button.is_displayed())
+    # assert search_button.is_displayed()
 
     # comment out community stuff for now
     # community is present and can be opened
-    # assert(community_trig.is_displayed())
+    # assert community_trig.is_displayed()
     # community_trig.click()
 
     # visible sub res + topics
-    assert(res_content.is_displayed())
-    assert(len(res_links) > 0)
+    assert res_content.is_displayed()
+    assert len(res_links) > 0

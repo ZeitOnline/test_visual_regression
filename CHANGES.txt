@@ -1,22 +1,249 @@
 Change log for zeit.web
 =======================
 
-1.8 (unreleased)
+1.10.5 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.10.4 (2015-01-28)
+-------------------
+
+- HOTFIX: Fix fonts to include data-uri
+
+- HOTFIX: Disable browserside caching for beta page
+
+
+1.10.3 (2015-01-27)
+-------------------
+
+- HOTFIX: Fix typos and disable visited button state
+
+
+1.10.2 (2015-01-27)
+-------------------
+
+- ZON-1301: Progressivley enhance beta toggle
+
+- ZON-1339: Adjust wording and styling for beta page
+
+
+1.10.1 (2015-01-23)
+-------------------
+
+- FIX: Remove video html from templates
+
+
+1.10 (2015-01-23)
+-----------------
+
+- FIX: Do not show unstyled video-data
+
+- FIX: Output real comment counts in website teasers.
+
+- ZON-1290: Implement landing page for beta launch
+
+- ZON-1236: Artikel MVP
+
+- BUG-163: Move robots property up to base view class
+
+- ZON-1306: Trigger varnish restart for 404s and unrenderable context.
+
+- ZON-1292: Implement Printbox and Angebotsbox.
+
+
+1.9.3 (2015-01-14)
+------------------
+
+- Nothing changed yet.
+
+
+1.9.2 (2015-01-14)
+------------------
+
+- Nothing changed yet.
+
+
+1.9.1 (2015-01-14)
+------------------
+
+- FIX: Don't assume that Newsletter contains only references to Articles.
+
+- FIX: Repair reference errors in exception views
+
+
+1.9 (2015-01-13)
 ----------------
+
+- FIX: Ensure egg is in the same namespace as its modules.
+
+
+1.8.8 (2015-01-09)
+------------------
+
+- WEB-407: Add referrerCount Script
+
+- BUG-62: Add series tag to webtrekk Z_WT_KENNUNG
+
+- FRIED-37: XSLT expects uniqueIds of image groups to have a trailing slash.
+
+- BUG-19: Make headervideo more failsave
+
+- ZON-1270: Overall polishing for hp
+
+- LIVECRM-22: Set response headers for CeleraOne
+
+
+1.8.7 (2014-12-12)
+------------------
+
+- BUG-60: Catch fake entries in get-asset filters
+
+- BUG-59: Fix wrong metadata in Feature Longform
+
+- ZON-1271: Polish footer
+
+- ZON-1241: Parquet responsive
+
+
+1.8.6 (2014-12-12)
+------------------
+
+- HOTFIX: Repair tests now that we have a fallback image
+
+- BUG-64: Repair image rendering in newsletters
+
+- ZON-1265: Add link bar to footer
+
+- ZON-1268: Add "more" functionality to footer
+
+- ZON-1260: Snapshot, now with design
+
+- ZON-1245: Snapshot lazy loading
+
+- ZON-1237: Re-style buzzboxes to appear lighter
+
+- ZON-1263: Add Publisher Bar to Footer
+
+- ZON-1248: Small teaser functional without image
+
+- ZON-1247: Use BEM Sass styling everywhere
+
+- ZON-1246: All main content teaser use refactored teaser-templates
+
+- ZON-1261: Add and style footer basic structure
+
+- ZON-1161: Swap ZMO fallback image
+
+- ZON-1256: Polish buzzbox markup and styles
+
+- ZON-1262: Add scroll to top button
+
+- ZON-1264: Add logo
+
+- ZON-1267: Add scroll to top icon
+
+
+1.8.5 (2014-12-03)
+------------------
+
+- ZON-1250: Add last published semantic date to hp
+
+- ZON-1109: Show tile7 before buzzbox when fullwidth teaser
+
+- WEB-361: Add last_published_semantic to JSON Endpoint
+
+- ZON-1249: Link ZMO Button in ZON navi
+
+- ZON-1244: Hook up snapshot image data source
+
+
+1.8.5 (2014-12-03)
+------------------
+
+- ZON-1243: Add real connector option, remove tbc
+
+
+1.8.4 (2014-12-03)
+------------------
+
+- FIX: Advertorial teaser images
+
+- ZON-1109: Show tile7 before buzzbox when fullwidth teaser
+
+- WEB-361: Add last_published_semantic to JSON Endpoint
+
+
+1.8.3 (2014-11-27)
+------------------
+
+- FIX: Add multiple sizes to some banner places
+
+- FIX: Advertorial: implement module 'fullgraphical' correctly
+
+- BUG-54: Fix falsy use of margin in hamburger icon and improve accessibility
+
+- BUG-55: Fix displaced text from fullwith-teaser
+
+- ZON-1226: Show teaser seperator for mobile only
+
+- ZON-1233: Make assets more fail save
+
+
+1.8.2 (2014-11-26)
+------------------
+
+- FIX: Decouple teaser name from css
+
+- FIX: Image scales can break the application startup
+
+- BUG-48: Exclude mobile galleries from reload,
+          comment out harmful former fix for mobile
+
+- ZON-1220: Map old image formats to new teaser image formats
+
+- ZON-1173: Add nav headline 'ANZEIGE' and fix some bugs
+
+- ZON-1222: Add mapping for fullwidth teaser
+
+- ZON-1179: Add mapping for teaser formats
+
+- ZON-1212: Make rendering more failsave
+
+- ZON-1223: Map teasers with priority list
+
+
+1.8.1 (2014-11-18)
+------------------
+
+- WEB-403: Add JSON/P-Endpoint for lastpub time
+
+
+1.8 (2014-11-17)
+----------------
+
+- FIX: Ensure banner setting is respected
+
+- BUG-39: Correct android em issue with cp lead subtitles
+
+- ZON-1025: Toggle ad page zoom on ZON (but not ZMO)
 
 - ZON-1061: Style ZMO print cover teaser
 
-- ZON-1118: polishing teaser: fullwidth teaser
+- ZON-1118: Polishing teaser: fullwidth teaser
 
-- ZON-1118: polishing teaser: small/standard teaser
-
-- BUG-39: correct android em issue with cp lead subtitles
+- ZON-1118: Polishing teaser: small/standard teaser
 
 - ZON-898: Add advertorial teaser and templates
 
 - ZON-842: Add new title and sharing metadata for ZMO
 
-- FIX: Ensure banner setting is respected
+
+1.7.1 (2014-11-14)
+------------------
+
+- BUG-53: Fix buzz box score race condition
 
 
 1.7 (2014-11-12)
@@ -55,6 +282,12 @@ Change log for zeit.web
 - ZON-913: Fix URLs and generalize some attributes on body and teaser tags
 
 - ZON-916: Add column teaser
+
+
+1.5.1 (2014-10-28)
+------------------
+
+- BUG-44: Catch interface breaking UnknownResource objects
 
 
 1.5 (2014-10-17)

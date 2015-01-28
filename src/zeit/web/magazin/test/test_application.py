@@ -37,7 +37,7 @@ def test_asset_url_includes_configured_prefix(app_request):
 def test_application_settings_contain_version_hash(app_request):
     app, _ = app_request
     version_hash = app.settings.get('version_hash', '').upper()
-    actual_version = pkg_resources.get_distribution('zeit.frontend').version
+    actual_version = pkg_resources.get_distribution('zeit.web').version
     assert actual_version == base64.b16decode(version_hash)
 
 

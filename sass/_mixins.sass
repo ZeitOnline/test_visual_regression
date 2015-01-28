@@ -147,6 +147,11 @@
 =tiemann
 	font-family: "TiemannLight", $serif-fallbacks
 
+=drop_icon()
+	display: inline-block // needed for "rotate on hover"
+	margin-left: $tiny
+	content: "\25BE" // Unicode for ▾
+
 /* mixins for navigation/header */
 
 =add_nav_bar_style($height,$double: false)
@@ -163,11 +168,12 @@
 	width: auto
 	padding-left: 0
 
-=hover_nav_icon($display:block,$bgcolor:#FFF)
+=hover_nav_icon($display:block,$bgcolor:#FFF, $padding:$small)
 	.main_nav__icon--hover
 		display: none
 	a
 		display: $display
+		padding: $padding
 		&:hover
 			.main_nav__icon--hover
 				display: $display

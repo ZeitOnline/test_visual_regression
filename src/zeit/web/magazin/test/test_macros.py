@@ -12,7 +12,7 @@ def test_macro_p_should_produce_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     html = 'Alles nicht so <em>wichtig</em>, oder?!'
     lines = tpl.module.paragraph(html).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     markup = '<p class="is-constrained is-centered">'
@@ -24,12 +24,12 @@ def test_macro_raw_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     css_class = 'raw'
-    markup = '<div class="%s">'\
-        '<blink>ZEIT ONLINE</blink>'\
-        '</div>' % css_class
+    markup = ('<div class="%s">'
+              '<blink>ZEIT ONLINE</blink>'
+              '</div>' % css_class)
     obj = {'xml': '<blink>ZEIT ONLINE</blink>'}
     lines = tpl.module.raw(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line
         assert markup == output
@@ -41,12 +41,12 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     css_class = 'article__subpage-chapter'
 
     # assert normal markup
-    markup = '<div class="%s">' \
-        '<span>Kapitel 1</span>' \
-        '<span>&mdash; Title &mdash;</span>' \
-        '<span></span></div>' % css_class
+    markup = ('<div class="%s">'
+              '<span>Kapitel 1</span>'
+              '<span>&mdash; Title &mdash;</span>'
+              '<span></span></div>' % css_class)
     lines = tpl.module.subpage_chapter(1, 'Title', css_class).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup == output
@@ -60,14 +60,14 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
     obj = [('text', 'link')]
 
-    markup = '<div class="breadcrumbs">' \
-        '<div class="breadcrumbs__list is-constrained is-centered">' \
-        '<div class="breadcrumbs__list__item" itemscope="itemscope"' \
-        ' itemtype="http://data-vocabulary.org/Breadcrumb">' \
-        '<a href="link" itemprop="url"><span itemprop="title">text</span>' \
-        '</a></div></div></div>'
+    markup = ('<div class="breadcrumbs">'
+              '<div class="breadcrumbs__list is-constrained is-centered">'
+              '<div class="breadcrumbs__list__item" itemscope="itemscope"'
+              ' itemtype="http://data-vocabulary.org/Breadcrumb">'
+              '<a href="link" itemprop="url"><span itemprop="title">text'
+              '</span></a></div></div></div>')
     lines = tpl.module.breadcrumbs(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup == output
@@ -78,11 +78,11 @@ def test_macro_portraitbox_should_produce_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     obj = {'name': 'name', 'text': 'text'}
 
-    markup = '<figure class="portraitbox figure-stamp">' \
-        '<div class="portraitbox-heading">name</div>' \
-        'text</figure>'
+    markup = ('<figure class="portraitbox figure-stamp">'
+              '<div class="portraitbox-heading">name</div>'
+              'text</figure>')
     lines = tpl.module.portraitbox(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup == output
@@ -109,7 +109,7 @@ def test_macro_subpage_index_should_produce_markup(jinja2_env):
         '</li></ol></div>') % (markup_standard)
     lines = tpl.module.subpage_index(
         [fake_page], 'Title', 2, css_index, '').splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup == output
@@ -139,10 +139,10 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     css_class = 'article__subpage-head'
 
     # assert normal markup
-    markup = '<div class="%s">' \
-        '<a name="kapitel1"></a>1 &mdash; Title</div>' % css_class
+    markup = ('<div class="%s">'
+              '<a name="kapitel1"></a>1 &mdash; Title</div>' % css_class)
     lines = tpl.module.subpage_head(1, 'Title', css_class).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup == output
@@ -154,11 +154,11 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 def test_macro_source_date_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
-    markup = '<span class="article__head__meta__source">' \
-        'zon</span><span class="article__head__meta__date">01.01.2013' \
-        '</span>'
+    markup = ('<span class="article__head__meta__source">'
+              'zon</span><span class="article__head__meta__date">01.01.2013'
+              '</span>')
     lines = tpl.module.source_date('01.01.2013', 'zon').splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup == output
@@ -168,7 +168,7 @@ def test_macro_intertitle_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     lines = tpl.module.intertitle("xy").splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     m = '<h2 class="article__subheading is-constrained is-centered">xy</h2>'
@@ -183,24 +183,24 @@ def test_macro_citation_should_produce_valid_markup(jinja2_env):
     obj = {'layout': 'quote', 'attribution': 'Autor',
            'url': 'www.zeit.de', 'text': 'Text'}
     lines = tpl.module.citation(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
-    markup = '<blockquote class="quote"><span class="quote__text">' \
-        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
-        'Autor</a></span></blockquote>'
+    markup = ('<blockquote class="quote"><span class="quote__text">'
+              'Text</span><span class="quote__author"><a href="www.zeit.de">'
+              'Autor</a></span></blockquote>')
     assert markup == output
 
     # assert wider quote
     obj = {'layout': 'wide', 'attribution': 'Autor',
            'url': 'www.zeit.de', 'text': 'Text'}
     lines = tpl.module.citation(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
-    markup = '<blockquote class="quote--wide"><span class="quote__text">' \
-        'Text</span><span class="quote__author"><a href="www.zeit.de">' \
-        'Autor</a></span></blockquote>'
+    markup = ('<blockquote class="quote--wide"><span class="quote__text">'
+              'Text</span><span class="quote__author"><a href="www.zeit.de">'
+              'Autor</a></span></blockquote>')
     assert markup == output
 
 
@@ -294,28 +294,28 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
 
     for el in obj:
         lines = tpl.module.image(Image(el)).splitlines()
-        output = ""
+        output = ''
         for line in lines:
             output += line.strip()
         if el['copyright'][0][1]:
-            cr = '<a href="' + el['copyright'][0][1] + \
-                '" target="_blank">' + el['copyright'][0][0] + '</a>'
+            cr = ('<a href="' + el['copyright'][0][1] +
+                  '" target="_blank">' + el['copyright'][0][0] + '</a>')
         else:
             cr = el['copyright'][0][0]
-        markup = '<figure class="%s"><div class="scaled-image">' \
-                 '<!--\[if gt IE 8\]><!--><noscript' \
-                 ' data-src=' \
-                 '"/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg">' \
-                 '<!--<!\[endif\]--><img alt="%s" title="%s" ' \
-                 'class=" figure__media" ' \
-                 'src="/img/artikel/01/bitblt-\d+x\d+-[a-z0-9]+/01.jpg" ' \
-                 'data-ratio=""><!--\[if gt IE 8\]><!--></noscript>' \
-                 '<!--<!\[endif\]--></div><figcaption ' \
-                 'class="figure__caption"><span ' \
-                 'class="figure__caption__text">test</span><span ' \
-                 'class="figure__copyright">%s</span>' \
-                 '</figcaption></figure>' \
-                 % (el['css'], el['alt'], el['title'], cr)
+        markup = ('<figure class="%s"><div class="scaled-image">'
+                  '<!--\\[if gt IE 8\\]><!--><noscript'
+                  ' data-src='
+                  '"/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg">'
+                  '<!--<!\\[endif\\]--><img alt="%s" title="%s" '
+                  'class=" figure__media" '
+                  'src="/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
+                  'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
+                  '<!--<!\\[endif\\]--></div><figcaption '
+                  'class="figure__caption"><span '
+                  'class="figure__caption__text">test</span><span '
+                  'class="figure__copyright">%s</span>'
+                  '</figcaption></figure>'
+                  % (el['css'], el['alt'], el['title'], cr))
 
         assert re.match(markup, output)
 
@@ -332,15 +332,15 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     obj.title = "test"
 
     lines = tpl.module.headerimage(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
-    start = '<div class="scaled-image is-pixelperfect">' \
-            '<!--[if gt IE 8]><!--><noscript'
-    middle = '><!--<![endif]-->' \
-             '<img alt="test" title="test" class="article__main-image--' \
-             'longform figure__media" src="'
+    start = ('<div class="scaled-image is-pixelperfect">'
+             '<!--[if gt IE 8]><!--><noscript')
+    middle = ('><!--<![endif]-->'
+              '<img alt="test" title="test" class="article__main-image--'
+              'longform figure__media" src="')
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)
@@ -350,16 +350,16 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
 
 def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
+        'zeit.web.core:templates/macros/article_macro.tpl')
     test_class = 'test'
     authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
                 'location': ', Bern', 'suffix': 'und'},
                {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
                 'suffix': ''}]
-    markup = 'Von<a href="www.zeit.de" class="test">Tom</a>, Bern' \
-             'und<span class="test">Anna</span>'
+    markup = ('Von<a href="www.zeit.de" class="test">Tom</a>, Bern'
+              'und<span class="test">Anna</span>')
     lines = tpl.module.meta_author(authors, test_class).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert markup.strip() == output
@@ -367,10 +367,10 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
+        'zeit.web.core:templates/macros/article_macro.tpl')
     authors = []
     lines = tpl.module.meta_author(authors).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert '' == output
@@ -384,12 +384,12 @@ def test_macro_video_should_produce_markup(jinja2_env):
     obj = {'id': '1', 'video_still': 'pic.jpg',
            'description': 'test', 'format': '', 'title': 'title'}
     fig = '<figure class="figure is-constrained is-centered" data-video="1">'
-    img = '<img class="figure__media" src="pic.jpg" alt="Video: title"'\
-        ' title="Video: title">'
+    img = ('<img class="figure__media" src="pic.jpg" alt="Video: title"'
+           ' title="Video: title">')
 
     cap = '<figcaption class="figure__caption">test</figcaption>'
     lines = tpl.module.video(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -420,7 +420,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
 
     for el in obj:
         lines = tpl.module.video(el).splitlines()
-        output = ""
+        output = ''
         for line in lines:
             output += line.strip()
         assert el['fig'] in output
@@ -433,16 +433,16 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     # assert default video
     obj = {'highest_rendition': 'test.mp4', 'id': 1}
     wrapper = '<div data-backgroundvideo="1'
-    video = '<video preload="auto" '\
-            'loop="loop" muted="muted" volume="0"'
+    video = ('<video preload="auto" '
+             'loop="loop" muted="muted" volume="0"')
     source = '<source src="test.mp4'
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
     img = '<img '
-    fallback = '<img class="video--fallback'\
-        ' article__main-image--longform" src="http://live0.zeit.de/'\
-        'multimedia/videos/1.jpg'
+    fallback = ('<img class="video--fallback'
+                ' article__main-image--longform" src="http://live0.zeit.de/'
+                'multimedia/videos/1.jpg')
     lines = tpl.module.headervideo(obj).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert wrapper in output
@@ -451,6 +451,37 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     assert source_webm in output
     assert img in output
     assert fallback in output
+
+
+def test_macro_headervideo_handles_video_id_correctly(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
+
+    obj = mock.Mock()
+    obj.id = None
+    obj.uniqueId = None
+
+    # assert empty template
+    lines = tpl.module.headervideo(obj).splitlines()
+    output = ''
+    for line in lines:
+        output += line.strip()
+    assert output.strip() == ''
+
+    # assert set id
+    obj.id = 1
+
+    html = lxml.html.fromstring(tpl.module.headervideo(obj))
+    vid = html.cssselect('div[data-backgroundvideo="1"]')
+    assert len(vid) == 1
+
+    # assert set uniqueid
+    obj = {'uniqueId': '/2'}
+
+    html = lxml.html.fromstring(tpl.module.headervideo(obj))
+    vid = html.cssselect('div[data-backgroundvideo="2"]')
+
+    assert len(vid) == 1
 
 
 def test_macro_sharing_meta_should_produce_markup(jinja2_env):
@@ -476,7 +507,7 @@ def test_macro_sharing_meta_should_produce_markup(jinja2_env):
              '<link itemprop="image" rel="image_src"',
              '<meta name="twitter:image:src" content="']
     lines = tpl.module.sharing_meta(obj, request).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     for fb_meta in fb:
@@ -500,7 +531,7 @@ def test_add_publish_date_generates_script(jinja2_env):
 
     for el in obj:
         lines = tpl.module.add_publish_date(el['lm'], el['pd']).splitlines()
-        output = ""
+        output = ''
         for line in lines:
             output += line.strip()
         assert el['markup'] in output
@@ -519,7 +550,7 @@ def test_date_meta_should_produce_metatags(jinja2_env):
 
     for el in obj:
         lines = tpl.module.date_meta(el).splitlines()
-        output = ""
+        output = ''
         for line in lines:
             output += line.strip()
         assert el['markup'] in output
@@ -540,7 +571,7 @@ def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
     image.src = 'SRC'
 
     lines = tpl.module.insert_responsive_image(image).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -560,7 +591,7 @@ def test_macro_insert_responsive_image_should_produce_alternative_markup(
     image.src = 'SRC'
 
     lines = tpl.module.insert_responsive_image(image, 'CLASS').splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -577,7 +608,7 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
 
     lines = tpl.module.insert_responsive_image(
         image, '', page_type).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -595,12 +626,12 @@ def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
     teaser.uniqueId = "ID"
 
     lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
-    assert '<header class="cp_leader__title__wrap '\
-        'cp_leader__title__wrap--none">' in output
+    assert ('<header class="cp_leader__title__wrap '
+            'cp_leader__title__wrap--none">') in output
     assert '<a href="ID"><h2>' in output
     assert '<div class="cp_leader__supertitle">SUPATITLE</div>' in output
     assert '<div class="cp_leader__title">TITLE</div>' in output
@@ -619,7 +650,7 @@ def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
     teaser.uniqueId = "ID"
 
     lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -637,12 +668,12 @@ def test_macro_teaser_text_block_should_produce_alternative_markup(
 
     lines = tpl.module.teaser_text_block(
         teaser, 'button', 'dark', 'false', 'false', 'true').splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
-    assert '<header class="cp_button__title__wrap '\
-        'cp_button__title__wrap--dark">' in output
+    assert ('<header class="cp_button__title__wrap '
+            'cp_button__title__wrap--dark">') in output
     assert '<div class="cp_button__supertitle' not in output
     assert '<div class="cp_button__title">TITLE</div>' in output
     assert '<div class="cp_button__subtitle' not in output
@@ -651,10 +682,10 @@ def test_macro_teaser_text_block_should_produce_alternative_markup(
 def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    markup = '<span class="cp_comment__count__wrap '\
-        'icon-comments-count">3</span>'
+    markup = ('<span class="cp_comment__count__wrap '
+              'icon-comments-count">3</span>')
     lines = tpl.module.comments_count(3).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -672,7 +703,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
 
     lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -686,15 +717,15 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request.app_info.community_paths.logout = 'logout'
     request.url = 'test'
 
-    markup = '<span class="main-nav__community__icon"'\
-        ' style="background-image: url(www.zeit.de/test.jpg)"></span>'
-    account = '<a href="www.zeit.de/user/1"'\
-        ' id="hp.zm.topnav.community.account">Account</a>'
-    logout = '<a href="www.zeit.de/logout?destination=test"'\
-        ' id="hp.zm.topnav.community.logout">Logout</a>'
+    markup = ('<span class="main-nav__community__icon"'
+              ' style="background-image: url(www.zeit.de/test.jpg)"></span>')
+    account = ('<a href="www.zeit.de/user/1"'
+               ' id="hp.zm.topnav.community.account">Account</a>')
+    logout = ('<a href="www.zeit.de/logout?destination=test"'
+              ' id="hp.zm.topnav.community.logout">Logout</a>')
 
     lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -713,11 +744,11 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     request.app_info.community_paths.register = 'register'
     request.url = 'test'
 
-    markup = '<a href="www.zeit.de/login?destination=test"'\
-        ' id="hp.zm.topnav.community.login">Anmelden</a>'
+    markup = ('<a href="www.zeit.de/login?destination=test"'
+              ' id="hp.zm.topnav.community.login">Anmelden</a>')
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -735,7 +766,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
     lines = tpl.module.main_nav('true', request).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -747,7 +778,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
 
@@ -774,23 +805,23 @@ def test_macro_copyrights(jinja2_env):
     ]
     snippet = lxml.html.fromstring(tpl.module.copyrights(copyrights))
 
-    assert len(snippet.cssselect('li.copyrights__entry')) == 2, \
-        'Two copyright entries should be contained in the list.'
+    assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
+        'Two copyright entries should be contained in the list.')
 
     assert snippet.cssselect('li.copyrights__entry:nth-child(1) '
-                             'span.copyrights__entry__label a'), \
-        'The first entry should produce a link element.'
+                             'span.copyrights__entry__label a'), (
+        'The first entry should produce a link element.')
 
     assert not snippet.cssselect('li.copyrights__entry:nth-child(2) '
-                                 'span.copyrights__entry__label a'), \
-        'The second entry should not produce a link element.'
+                                 'span.copyrights__entry__label a'), (
+        'The second entry should not produce a link element.')
 
 
 def test_macro_include_cp_ad_produces_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     lines = tpl.module.include_cp_ad().splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert '<div class="cp_button--ad">' in output
@@ -802,7 +833,7 @@ def test_macro_liveblog_produces_html(jinja2_env):
     liveblog = mock.Mock()
     liveblog.blog_id = '999'
     lines = tpl.module.liveblog(liveblog).splitlines()
-    output = ""
+    output = ''
     for line in lines:
         output += line.strip()
     assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '

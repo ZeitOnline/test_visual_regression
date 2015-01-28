@@ -23,7 +23,6 @@ log = logging.getLogger(__name__)
 
 
 class Base(object):
-
     """Base class for all views."""
 
     def __call__(self):
@@ -34,8 +33,63 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self._set_response_headers()
+
+    def _set_response_headers(self):
+        # ZMO Version header
         self.request.response.headers.add(
             'X-ZMOVersion', self.request.registry.settings.zmo_version)
+
+        # C1 headers
+        #
+        # The following rules scream for inconsistency, but have already been
+        # defined for tracking services long ago. :-(
+        # Therefore they are just copied as is from the XSLT backend,
+        # managing HTTP headers until launch.
+        # (e.g. uppercase ressort vs lowercase sub ressort)
+
+        # Additional predefined doc type values
+        c1_add_doc_types = {
+            'video': 'Video',
+            'article': 'Artikel',
+            'gallery': 'Bildergalerie'}
+
+        # Additional predefined section (a.k.a. channel) values
+        c1_add_sections = {
+            'campus': 'Studium',
+            'homepage': 'Homepage',
+        }
+
+        c1_track_headers = {
+            'C1-Track-Origin': lambda: 'web',
+            'C1-Track-Service-ID': lambda: 'zon',
+            'C1-Track-Doc-Type': lambda:
+                c1_add_doc_types.get(self.type, 'Centerpage'),
+            'C1-Track-Content-ID': lambda:
+                '/' + '/'.join(self.request.traversed),
+            'C1-Track-CMS-ID': lambda:
+                zeit.cms.content.interfaces.IUUID(self.context).id,
+            'C1-Track-Channel': lambda:
+                c1_add_sections.get(
+                    self.context.ressort, self.context.ressort),
+            'C1-Track-Sub-Channel': lambda:
+                self.context.sub_ressort,
+            'C1-Track-Heading': lambda:
+                self.context.title,
+            'C1-Track-Kicker': lambda:
+                self.context.supertitle
+        }
+
+        for th_name in c1_track_headers:
+            try:
+                track_header = c1_track_headers[th_name]()
+            except (AttributeError, TypeError):
+                continue
+            if track_header is None:
+                continue
+            self.request.response.headers.add(
+                th_name,
+                track_header.encode('utf-8'))
 
     @zeit.web.reify
     def type(self):
@@ -82,6 +136,16 @@ class Base(object):
             return True
 
     @zeit.web.reify
+    def meta_robots(self):
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+            if seo.meta_robots:
+                return seo.meta_robots
+        except (AttributeError, TypeError):
+            pass
+        return 'index,follow,noodp,noydir,noarchive'
+
+    @zeit.web.reify
     def adwords(self):
         keywords = ['zeitonline']
         # TODO: End discrepancy between testing and live ressorts!
@@ -111,6 +175,14 @@ class Base(object):
     @zeit.web.reify
     def navigation_classifieds(self):
         return zeit.web.core.navigation.navigation_classifieds
+
+    @zeit.web.reify
+    def navigation_footer_publisher(self):
+        return zeit.web.core.navigation.navigation_footer_publisher
+
+    @zeit.web.reify
+    def navigation_footer_links(self):
+        return zeit.web.core.navigation.navigation_footer_links
 
     @zeit.web.reify
     def title(self):
@@ -236,15 +308,14 @@ class Content(Base):
         tz = babel.dates.get_timezone('Europe/Berlin')
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_last_published_semantic
-        if self.date_first_released is not None and date is not None:
-            if date > self.date_first_released:
-                return date.astimezone(tz)
+        if (self.date_first_released is not None and date is not None
+                and date > self.date_first_released):
+            return date.astimezone(tz)
 
     @zeit.web.reify
     def date_format(self):
-        if self.context.product:
-            if self.context.product.id in ('ZEI', 'ZMLB'):
-                return 'short'
+        if self.context.product and self.context.product.id in ('ZEI', 'ZMLB'):
+            return 'short'
         return 'long'
 
     @zeit.web.reify
@@ -296,10 +367,9 @@ class Content(Base):
             elif (self.leadtime.start.date() == yesterday
                   and not self.leadtime.end):
                 return True
-        if self.leadtime.end:
+        if self.leadtime.end and self.leadtime.end.date() == today:
             # end = today
-            if self.leadtime.end.date() == today:
-                return True
+            return True
         return False
 
     @zeit.web.reify
@@ -336,24 +406,19 @@ class service_unavailable(object):
                       context.message, request.path))
 
     def __call__(self):
+        body = 'Status 503: Dokument zurzeit nicht verfügbar.'
         try:
             body = requests.get('http://phpscripts.zeit.de/503.html',
                                 timeout=4.0).text
         except requests.exceptions.RequestException:
-            body = 'Status 503: Dokument zurzeit nicht verfügbar.'
-        finally:
-            return pyramid.response.Response(body, 503)
+            pass
+        return pyramid.response.Response(body, 503)
 
 
 @pyramid.view.notfound_view_config(request_method='GET')
 def not_found(request):
-    try:
-        body = requests.get('http://www.zeit.de/error/404',
-                            timeout=4.0).text
-    except requests.exceptions.RequestException:
-        body = 'Status 404: Dokument nicht gefunden.'
-    finally:
-        return pyramid.response.Response(body, 404)
+    body = 'Status 404: Dokument nicht gefunden.'
+    return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])
 
 
 # For some reason we are not able to register ICMSContent on this.

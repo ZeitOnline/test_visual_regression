@@ -25,6 +25,7 @@ import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+import zeit.content.cp.layout
 
 import zeit.web
 import zeit.web.core.comments
@@ -36,6 +37,7 @@ log = logging.getLogger(__name__)
 
 
 class Undefined(jinja2.runtime.Undefined):
+
     """Custom jinja Undefined class that represents unresolvable template
     statements and expressions. It ignores undefined errors, ensures it is
     printable and returns further Undefined objects if indexed or called.
@@ -52,6 +54,7 @@ class Undefined(jinja2.runtime.Undefined):
 
 
 class Environment(jinja2.environment.Environment):
+
     """Custom jinja Environment class that uses our custom Undefined class as
     fallback for unknown filters, globals, tests, object-attributes and -items.
     This way, most flaws and faults in view classes can be caught and affected
@@ -186,6 +189,25 @@ def hide_none(string):
         return string
 
 
+_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
+          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
+          "zon-fullwidth": ['leader-fullwidth'],
+          "zon-parquet-large": ['parquet-large'],
+          "zon-parquet-small": ['parquet-regular'],
+          "hide": ['archive-print-volume', 'archive-print-year',
+                   'two-side-by-side', 'ressort', 'leader-upright',
+                   'buttons-fullwidth', 'parquet-printteaser',
+                   'parquet-verlag']}
+
+# Flattens and reverses t_map, so we can easily lookup an layout.
+_t_map = dict(x for k, v in _t_map.iteritems() for x in zip(v, [k] * len(v)))
+
+
+@zeit.web.register_filter
+def get_mapped_teaser(layout):
+    return _t_map.get(layout, layout)
+
+
 @zeit.web.register_filter
 def remove_break(string):
     return re.sub('\n', '', string)
@@ -214,6 +236,7 @@ default_images_sizes = {
     'zmo-small-center': (225, 125),
     'zmo-small-right': (225, 125),
     '540x304': (290, 163),
+    '580x148': (290, 163),
     '940x400': (470, 200),
     '148x84': (74, 42),
     '220x124': (110, 62),
@@ -235,6 +258,8 @@ default_images_sizes = {
     'og-image': (600, 315),
     'twitter-image_small': (120, 120),  # summary
     'twitter-image-large': (560, 300),  # summary_large_image, photo
+    'newsletter-540x304': (540, 304),
+    'newsletter-220x124': (220, 124)
 }
 
 
@@ -333,12 +358,40 @@ def closest_substitute_image(image_group,
     return image_group.get(candidates[:idx + 1][-1][0])
 
 
+@zeit.web.register_filter
+def pluralize(num, *forms):
+    try:
+        num = int(num)
+    except ValueError:
+        num = 0
+    return forms[min(len(forms) - 1, num - 1):][0] % num
+
+
+@zeit.web.register_filter
+def with_mods(elem, *mods):
+    return ' '.join([elem] + ['%s--%s' % (elem, m) for m in mods])
+
+
+@zeit.web.register_filter
+def get_attr(*args):
+    return getattr(*args)
+
+
 @zeit.web.register_global
 def get_teaser_commentcount(uniqueId):
     index = '/' + urlparse.urlparse(uniqueId).path[1:]
     count = zeit.web.core.comments.comments_per_unique_id().get(index, 0)
     if int(count) >= 5:
         return count
+
+
+@zeit.web.register_global
+def topiclinks(centerpage):
+    try:
+        return zeit.web.core.interfaces.ITopicLink(centerpage)
+    except TypeError:
+        log.debug('object %s could not be adapted' % (
+                  getattr(centerpage, 'uniqueId', '')))
 
 
 @zeit.web.register_global
@@ -359,6 +412,33 @@ def get_teaser_template(block_layout,
 
 
 @zeit.web.register_global
+def get_image_pattern(teaser_layout, orig_image_pattern):
+    layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
+    layout_image = {
+        block.id: [block.image_pattern] for block in list(layout(None))}
+
+    layout_image['zon-small'].extend(layout_image['leader'])
+    layout_image['zon-parquet-small'].extend(layout_image['leader'])
+    return layout_image.get(teaser_layout, [orig_image_pattern])
+
+
+@zeit.web.register_global
+def set_image_id(asset_id, image_base_name, image_pattern, ext):
+    return '%s/%s-%s.%s' % (
+        asset_id, image_base_name, image_pattern, ext)
+
+
+def _existing_image(asset_id, image_base_name, image_patterns, ext):
+    for image_pattern in image_patterns:
+        image = set_image_id(asset_id, image_base_name, image_pattern, ext)
+        try:
+            return zeit.cms.interfaces.ICMSContent(image), image_pattern
+        except:
+            pass
+    return None, None
+
+
+@zeit.web.register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
     import zeit.web.core.centerpage
 
@@ -372,12 +452,15 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
             return
     else:
         asset = zeit.web.core.centerpage.get_image_asset(teaser)
+
+    # If the asset is not an image group, restart with default image.
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
+
     asset_id = unique_id or asset.uniqueId
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
-    # if imagegroup has no images, return default image
+    # If imagegroup has no images, return default image
     if len(asset.items()) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
@@ -387,14 +470,27 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
 
-    image_id = '%s/%s-%s.%s' % (
-        asset_id, image_base_name, teaser_block.layout.image_pattern, ext)
+    try:
+        image_patterns = get_image_pattern(
+            get_mapped_teaser(teaser_block.layout.id),
+            teaser_block.layout.image_pattern)
+    except AttributeError:
+        return
+
+    image, image_pattern = _existing_image(asset_id, image_base_name,
+                                           image_patterns, ext)
+
+    if image is None and image_pattern is None:
+        image_pattern = teaser_block.layout.image_pattern
+        image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
+    else:
+        image_id = image.uniqueId
 
     try:
         teaser_image = zope.component.getMultiAdapter(
             (asset, zeit.cms.interfaces.ICMSContent(image_id)),
             zeit.web.core.interfaces.ITeaserImage)
-        teaser_image.image_pattern = teaser_block.layout.image_pattern
+        teaser_image.image_pattern = image_pattern
         return teaser_image
     except TypeError:
         # Don't fallback when an unique_id is given explicitly in order to
@@ -421,6 +517,14 @@ def get_image_metadata(image):
 
 
 @zeit.web.register_global
+def get_repository_image(image):
+    base_image = zeit.web.core.block.BaseImage()
+    base_image.image = image
+    base_image.uniqueId = image.uniqueId
+    return base_image
+
+
+@zeit.web.register_global
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
@@ -430,9 +534,9 @@ class ImageScales(dict):
 
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
-    def __init__(self, **kw):
+    def __init__(self, *args, **kw):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        scale_source = conf.get('vivi_zeit.frontend_image-scales')
+        scale_source = conf.get('vivi_zeit.web_image-scales')
 
         if not scale_source:
             return
@@ -449,7 +553,8 @@ class ImageScales(dict):
             width = to_int(scale.attrib.get('width'))
             height = to_int(scale.attrib.get('height'))
             kw[name] = (width, height)
-        dict.__init__(**kw)
+
+        super(ImageScales, self).__init__(**kw)
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):
@@ -465,12 +570,13 @@ class HTTPLoader(jinja2.loaders.BaseLoader):
             return (
                 'ERROR: load_template_from_dav_url not configured',
                 template, lambda: True)
+
         if self.url.startswith('egg://'):  # For tests
             parts = urlparse.urlparse(self.url)
             return (
                 pkg_resources.resource_string(
                     parts.netloc, parts.path[1:] + template).decode('utf-8'),
-                template, lambda: True)
+                template, lambda: False)
 
         url = self.url + template
         log.debug('Loading template %r from %s', template, url)

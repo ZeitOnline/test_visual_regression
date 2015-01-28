@@ -1,4 +1,4 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html lang="de" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html lang="de" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -71,7 +71,7 @@
     <div class="page">
         {% block adplace_top %}
             <!-- mobile ad at top -->
-            <div class="iqd_mobile__adplace">
+            <div class="iqd-mobile-adplace">
                 <div id="sas_13500"></div>
             </div>
             <div id="iqd_mainAd" >
@@ -85,10 +85,10 @@
                 </div>
             </div>
         {% endblock adplace_top %}
-        <div class="content">
+        <div class="page__content">
             <header class="header" role="banner">
                 {% block navigation %}
-                    {%- include "zeit.web.site:templates/inc/nav_main.html" ignore missing -%}
+                    {%- include "zeit.web.site:templates/inc/navigation.html" ignore missing -%}
                 {% endblock navigation %}
             </header>
             {% block adplace_billboard %}
@@ -97,7 +97,11 @@
             <main class="main" id="main" role="main">
                 {% block main %}Hallo Welt{% endblock main %}
             </main>
-            <footer class="footer" role="contentinfo"></footer>
+            <footer class="footer" role="contentinfo">
+                {% block footer %}
+                    {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
+                {% endblock footer %}
+            </footer>
         </div>
     </div>
     <script>

@@ -4,6 +4,7 @@ import grokcore.component
 import zope.interface
 
 import zeit.content.article.interfaces
+import zeit.content.link.interfaces
 
 import zeit.web
 
@@ -16,15 +17,17 @@ class IRenderByline(zope.interface.Interface):
 
 
 @zeit.web.register_filter
-def render_byline(article):
+def render_byline(resource):
     """Extract a natural language byline composited of authors and locations.
     The returned object sports an __html__ method and is jinja serializable.
 
     :param article: Article providing zeit.content.article.IArticle
     :rtype: zeit.web.core.byline.IRenderByline
     """
-
-    return unicode(IRenderByline(article))
+    try:
+        return unicode(IRenderByline(resource))
+    except TypeError:
+        return ''
 
 
 @grokcore.component.implementer(IRenderByline)
@@ -56,7 +59,7 @@ class RenderByline(object):
         return unicode(self.byline)
 
     def _genre(self, content):
-        if content.genre and content.genre in self.display_fe:
+        if getattr(content, 'genre', '') in self.display_fe:
             self.byline.append(self.eine_n(content.genre))
             self.byline.append(content.genre.title() + ' ')
 
@@ -67,8 +70,8 @@ class RenderByline(object):
             self.byline.append('Von ')
 
     def _interview_exception(self, content):
-        if (content.genre and content.genre in self.display_fe and
-                content.genre == 'interview'):
+        if (getattr(content, 'genre', '') in self.display_fe and
+                getattr(content, 'genre', '') == 'interview'):
             self.byline = ['%s: ' % content.genre.title()]
 
     def _author_str(self, content):
@@ -102,7 +105,24 @@ class RenderByline(object):
                                 + [authors_location[0]])
 
         assert len(authors_str) == len(authors_location)
-        return (authors_str, authors_location)
+        return authors_str, authors_location
+
+
+@grokcore.component.implementer(IRenderByline)
+@grokcore.component.adapter(zeit.content.link.interfaces.ILink)
+class RenderLinkByline(RenderByline):
+
+    def __init__(self, content):
+        self.byline = []
+        self._von(content)
+        self._interview_exception(content)
+        self._author_str(content)
+
+
+@grokcore.component.implementer(IRenderByline)
+@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
+class RenderGalleryByline(RenderByline):
+    pass
 
 
 class Author(object):

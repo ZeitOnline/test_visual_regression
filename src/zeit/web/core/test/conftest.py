@@ -3,6 +3,8 @@ import json
 import os.path
 import pkg_resources
 import urllib
+import urllib2
+import wsgiref.util
 
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -38,8 +40,7 @@ settings = {
     'caching_time_article': '10',
     'caching_time_centerpage': '20',
     'caching_time_gallery': '40',
-    'community_host': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.web.core', 'data/comments'),
+    'community_host': 'http://localhost:6551/',
     'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
@@ -69,9 +70,9 @@ settings = {
     'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
-    'vivi_zeit.frontend_iqd-mobile-ids': (
+    'vivi_zeit.web_iqd-mobile-ids': (
         'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
-    'vivi_zeit.frontend_image-scales': (
+    'vivi_zeit.web_image-scales': (
         'egg://zeit.web.core/data/config/scales.xml'),
     'vivi_zeit.content.article_genre-url': (
         'egg://zeit.web.core/data/config/article-genres.xml'),
@@ -89,14 +90,18 @@ settings = {
         'egg://zeit.web.core/data/config/cp-layouts.xml'),
     'vivi_zeit.content.cp_bar-layout-source': (
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
-    'vivi_zeit.frontend_banner-source': (
+    'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
-    'vivi_zeit.frontend_navigation': (
+    'vivi_zeit.web_navigation': (
         'egg://zeit.web.core/data/config/navigation.xml'),
-    'vivi_zeit.frontend_navigation-services': (
+    'vivi_zeit.web_navigation-services': (
         'egg://zeit.web.core/data/config/navigation-services.xml'),
-    'vivi_zeit.frontend_navigation-classifieds': (
+    'vivi_zeit.web_navigation-classifieds': (
         'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
+    'vivi_zeit.web_navigation-footer-publisher': (
+        'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
+    'vivi_zeit.web_navigation-footer-links': (
+        'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),
 
@@ -208,6 +213,36 @@ def debug_testserver(debug_application, request):
     return server
 
 
+@pytest.fixture(scope='function')
+def mockcommunity_factory(request):
+    def factory(response=None):
+        def mock_app(env, start_response):
+            resp = response  # Need to copy response to local scope.
+            if resp is None:
+                resp = wsgiref.util.request_uri(env, include_query=0)
+                if 0:
+                    resp = urllib2.urlopen('file://{}/'.format(
+                        pkg_resources.resource_filename('zeit.web.core',
+                                                        'data/comments',
+                                                        'path'))).read()
+            start_response('200 OK', [])
+            return [resp]
+
+        server = gocept.httpserverlayer.wsgi.Layer()
+        server.port = 6551
+        server.wsgi_app = mock_app
+        server.setUp()
+        server.url = 'http://%s' % server['http_address']
+        request.addfinalizer(server.tearDown)
+        return server
+    return factory
+
+
+@pytest.fixture(scope='function')
+def mockcommunity(request):
+    return mockcommunity_factory(request)
+
+
 @pytest.fixture(scope='session', params=[503])
 def http_testserver(request):
     from pyramid.config import Configurator
@@ -273,7 +308,7 @@ def image_group_factory():
             self.uniqueId = name
             self.masterimage = None
 
-        def getImageSize(self):
+        def getImageSize(self):  # NOQA
             return self._size
 
     def factory(*args, **kwargs):
@@ -296,6 +331,16 @@ def my_traverser(application):
 @pytest.fixture
 def testbrowser(request):
     return Browser
+
+
+@pytest.fixture
+def css_selector(request):
+    def wrapped(selector, document):
+        xpath = cssselect.HTMLTranslator().css_to_xpath(selector)
+        if not isinstance(document, lxml.html.HtmlElement):
+            document = lxml.html.fromstring(document)
+        return document.xpath(xpath)
+    return wrapped
 
 
 @pytest.fixture

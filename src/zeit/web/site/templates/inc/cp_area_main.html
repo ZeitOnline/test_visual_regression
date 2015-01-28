@@ -1,9 +1,8 @@
 <div class="teaser-collection teaser-collection--main">
     <div class="teasers teasers--main">
-        {% for layout, teaser, block in view.area_main -%}
-              {% include
-                    ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
-                     "zeit.web.site:templates/inc/teaser/default.tpl"] %}
+        {% for layout, teaser, teaser_block in view.area_main -%}
+              {% include ["zeit.web.site:templates/inc/teaser/" + layout | get_mapped_teaser + ".tpl",
+                          "zeit.web.site:templates/inc/teaser/default.tpl"] %}
         {% endfor %}
     </div>
 </div>

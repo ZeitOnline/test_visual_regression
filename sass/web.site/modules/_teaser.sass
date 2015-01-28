@@ -10,6 +10,7 @@
 		border-top: none
 	+respond-min($break-tablet-min)
 		border-bottom: none
+		border-top: none
 
 %teaser-small-media-placement
 	position: relative
@@ -21,18 +22,22 @@
 		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
 
 %teaser-small-media
-	display: none
+	vertical-align: top
 	width: 100%
 	+respond-min($break-phablet-min)
-		display: inline-block
-		position: absolute
-		left: 0
-		top: $petite
-		width: $teaser-image-phablet-width
+		display: table-cell
+		padding-right: $petite
+		width: $teaser-image-phablet-width + $petite
 	+respond-min($break-tablet-min)
-		width: $teaser-image-phablet-width
+		width: $teaser-image-phablet-width + $petite
 	+respond-min($break-desktop-min)
-		width: $teaser-image-desktop-width
+		width: $teaser-image-desktop-width + $petite
+
+%teaser-small-container
+	vertical-align: top
+	+respond-min($break-phablet-min)
+		display: table-cell
+		vertical-align: top
 
 %teaser-heading
 	font-size: 1em
@@ -40,7 +45,8 @@
 
 %teaser-kicker
 	display: block
-	font-family: TabletGothicNarrow
+	color: $color-text-highlighted
+	font-family: $font-tabletgothicnarrow
 	font-size: $zon-font-s
 	font-weight: bold
 	letter-spacing: $zon-letter-spacing-l
@@ -50,24 +56,25 @@
 %teaser-combined-link
 	color: $color-text
 	text-decoration: none
-	&:link .teaser__kicker,
-	&:visited .teaser__kicker
-		color: $color-text-highlighted
-	&:link > .teaser__title,
-	&:visited > .teaser__title
-		color: $color-text
+	&:link,
+	&:visited
+		color: inherit
 	&:hover
-		text-decoration: none
-		& > .teaser__title
-			text-decoration: underline
+		span
+			text-decoration: none
+		span:first-child
+			text-decoration: none
 
 %teaser-title
 	display: block
-	font-family: TabletGothic
+	color: $zon-charcoal
+	font-family: $font-tabletgothic
 	font-size: $font-l
 	font-weight: 700
 	letter-spacing: $zon-letter-spacing-s
 	line-height: 1.232
+	&:hover
+		color: $black
 
 %teaser-media
 	margin: 0 0 $petite 0
@@ -79,81 +86,34 @@
 
 %teaser-text
 	color: $grey--mid
-	line-height: 1.344
-	margin: 0 0 $thin 0
+	line-height: 1.4
+	margin: 0 0 $micro 0
 
 %teaser-byline
 	color: $grey
 	display: block
-	font-family: TabletGothicNarrow
+	font-family: $font-tabletgothicnarrow
 	font-size: $font-s
 	letter-spacing: $zon-letter-spacing-m
 	margin-bottom: 4px // IE 8 Fallback
 	margin-bottom: rem(4px)
 
 %teaser-metadata
-	font-size: em(13px)
-	font-weight: bold
+	color: $grey
+	font-size: $font-s
+	line-height: 1.4
+	font-weight: 200
 	letter-spacing: $standard-letter-spacing
 
+%teaser-datetime
+	&:not(:last-child):after
+		content: ' ⧸ '
+		margin: 0 $micro 0 $micro
+
 %teaser-commentcount
-	margin-left: $fine
 	&:link, &:visited
-		border-bottom: 1px solid #ccc
+		border-bottom: 1px solid $zon_lighter_grey
 		color: inherit
 		text-decoration: none
 	&:hover
-		border-bottom: 1px solid #777
-
-/// @todo: delete class teaser after refactoring is done
-/// @deprecated
-.teaser
-	@extend %teaser
-
-.teaser--small
-	border-bottom: none
-
-.teaser--small.teaser--smallmedia
-	@extend %teaser-small-media-placement
-
-.teaser__heading
-	@extend %teaser-heading
-
-.teaser__heading.teaser__heading--hasmedia
-	margin: 0 0 $petite 0
-
-.teaser__combined-link
-	@extend %teaser-combined-link
-
-.teaser__kicker
-	@extend %teaser-kicker
-
-.teaser__title
-	@extend %teaser-title
-
-.teaser__media
-	@extend %teaser-media
-
-.teaser__media--small
-	@extend %teaser-small-media
-
-.teaser__media-item
-	@extend %teaser-media-item
-
-.teaser__text
-	@extend %teaser-text
-
-.teaser__byline
-	@extend %teaser-byline
-
-.teaser__metadata
-	@extend %teaser-byline
-
-.teaser__commentcount
-	@extend %teaser-commentcount
-
-// first small teaser in collection displays image in mobile mode
-// TODO: solved with css for now, might have to be adapted later (asz)
-.teaser-collection--main
-	.teaser--small:nth-of-type(1) .teaser__media--small
-		display: block
+		border-bottom: 1px solid $zon_light_grey

@@ -1,31 +1,22 @@
-<div class="teaser-collection teaser-collection--buzz">
-    {% if view.area_buzz_facebook|length %}
-    <div class="teaser-collection__heading teaser-collection__heading--buzz">
-        {{ view.area_buzz_mostread.header }}
-    </div>
-    <div class="teasers teasers--buzz">
-        {% for teaser in view.area_buzz_mostread -%}
-            {% set score = loop.index %}
-            {% set layout = view.area_buzz_mostread.layout %}
-            {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
-                        "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
-        {% endfor %}
-    </div>
+{% for area in (view.area_buzz_mostread, view.area_buzz_facebook, view.area_buzz_comments) -%}
+    {% if area | length %}
+        {% with -%}
+            {% set layout = area.layout %}
+            <div class="{{ 'buzz-box' | with_mods(layout) }}">
+                <div class="{{ 'buzz-box__heading' | with_mods(layout) }}">
+                    {{ area.header }}
+                </div>
+                <div class="{{ 'buzz-box__teasers' | with_mods(layout) }}">
+                    {% for teaser in area -%}
+                        {% with -%}
+                            {% set index = loop.index %}
+                            {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
+                                        "zeit.web.site:templates/inc/teaser/buzz.tpl",
+                                        "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
+                        {%- endwith %}
+                    {%- endfor %}
+                </div>
+            </div>
+        {%- endwith %}
     {% endif %}
-</div>
-
-<div class="teaser-collection teaser-collection--buzz">
-    {% if view.area_buzz_facebook|length %}
-    <div class="teaser-collection__heading teaser-collection__heading--buzz">
-        {{ view.area_buzz_facebook.header }}
-    </div>
-    <div class="teasers teasers--buzz">
-        {% for teaser in view.area_buzz_facebook -%}
-            {% set score = teaser.score %}
-            {% set layout = view.area_buzz_facebook.layout %}
-            {% include ["zeit.web.site:templates/inc/teaser/" + layout + ".tpl",
-                        "zeit.web.site:templates/inc/teaser/default.tpl"] with context %}
-        {% endfor %}
-    </div>
-    {% endif %}
-</div>
+{%- endfor %}

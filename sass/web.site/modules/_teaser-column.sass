@@ -18,114 +18,86 @@
 		+single-box-shadow(0, 0, 0, 0, $color-column-background)
 		margin: $petite 0 $petite 0
 		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
+	&__media
+		height: $teaser-column-mobile-image-size
+		left: 0
+		margin: 0
+		overflow: hidden
+		position: absolute
+		top: -($teaser-column-mobile-image-size - $teaser-column-shadow)
+		width: $teaser-column-mobile-image-size
+		+respond-min($break-desktop-min)
+			bottom: 0
+			height: 100%
+			left: 0
+			overflow: hidden
+			position: absolute
+			right: 60%
+			top: 0
+			width: 40%
+	&__media-item
+		@extend %teaser-media-item
+	&__heading
+		@extend %teaser-heading
+		&--padded
+			padding-top: $petite
+			+respond-min($break-desktop-min)
+				padding-top: 0
+	&__combined-link
+		@extend %teaser-combined-link
+	&__series
+		letter-spacing: $zon-letter-spacing-l
+		display: inline-block
+		font-family: $font-tabletgothic
+		font-size: $font-xs--rem
+		font-weight: bold
+		left: $teaser-column-series-position
+		position: absolute
+		text-transform: uppercase
+		top: $small
+		color: $zon-charcoal
+		a:link &,
+		a:visited &,
+		a:active &,
+		a:hover &
+			color: $grey--mid
+		+respond-min($break-desktop-min)
+			display: inline
+			left: auto
+			position: static
+			top: auto
+			&:after
+				content: ' ⧸ '
+	&__kicker
+		@extend %teaser-kicker
+		+respond-min($break-desktop-min)
+			display: inline
+	&__title
+		@extend %teaser-title
+		+respond-min($break-desktop-min)
+			font-size: rem($font-xl--px - 1)
+	&__text
+		@extend %teaser-text
+	&__byline
+		color: $grey
+		font-family: TabletGothic
+		font-size: 14px
+		font-style: normal
+		font-weight: 200
+		margin-bottom: 0
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+	&__kicker-container
+		+respond-min($break-desktop-min)
+			display: block
+			margin-bottom: em(4px, $font-s--px)
 
 // prevent next teaser from having border
 .teaser-column + .teaser // deprecated
 	border-top: none
 .teaser-series + *[data-block-type='teaser'] // new
 	border-top: none
-
-.teaser-column__media
-	height: $teaser-column-mobile-image-size
-	left: 0
-	margin: 0
-	overflow: hidden
-	position: absolute
-	top: -($teaser-column-mobile-image-size - $teaser-column-shadow)
-	width: $teaser-column-mobile-image-size
-	+respond-min($break-desktop-min)
-		bottom: 0
-		height: 100%
-		left: 0
-		overflow: hidden
-		position: absolute
-		right: 60%
-		top: 0
-		width: 40%
-
-.teaser-column__media-item
-	@extend %teaser-media-item
-
-.teaser-column__heading
-	@extend %teaser-heading
-
-.teaser-column__heading.teaser-column__heading--padded
-	padding-top: $petite
-	+respond-min($break-desktop-min)
-		padding-top: 0
-
-.teaser-column__combined-link
-	@extend %teaser-combined-link
-	&:link .teaser-column__kicker,
-	&:visited .teaser-column__kicker
-		color: $color-text-highlighted
-	&:link .teaser-scolumn__title,
-	&:visited .teaser-column__title
-		color: $color-text
-	&:hover
-		text-decoration: none
-		& .teaser-column__title
-			text-decoration: underline
-
-.teaser-column__kicker-container
-	+respond-min($break-desktop-min)
-		display: block
-		margin-bottom: em(4px, $font-s--px)
-
-.teaser-column__series
-	display: inline-block
-	font-family: $font-tabletgothic
-	font-size: $font-s--rem
-	font-weight: bold
-	left: $teaser-column-series-position
-	position: absolute
-	text-transform: uppercase
-	top: $small
-	a:link &,
-	a:visited &,
-	a:active &,
-	a:hover &
-		color: $grey--mid
-	+respond-min($break-desktop-min)
-		display: inline
-		left: auto
-		position: static
-		top: auto
-		&:after
-			content: ' \2022 '
-
-.teaser-column__kicker
-	@extend %teaser-kicker
-	font-size: $font-s--rem
-	font-weight: 200
-	font-family: TabletGothic
-	+respond-min($break-desktop-min)
-		display: inline
-
-.teaser-column__title
-	@extend %teaser-title
-	font-family: TabletGothic
-	font-size: $font-l
-	font-weight: 700
-	+respond-min($break-desktop-min)
-		font-size: rem($font-xl--px - 1)
-
-.teaser-column__text
-	@extend %teaser-text
-
-.teaser-column__byline
-	color: $grey
-	font-family: TabletGothic
-	font-size: 14px
-	font-style: normal
-	font-weight: 200
-	margin-bottom: 0
-
-.teaser-column__metadata
-	@extend %teaser-metadata
-	color: $grey
-	font-size: 14px
-	font-weight: 200
-
-.teaser-column__commentcount
-	@extend %teaser-commentcount

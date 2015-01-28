@@ -1,13 +1,9 @@
 .page
-    background: $zon_lighter_grey
-
-.content
-    background: $color-page-bg // we need background here, if page is colored
-    min-width: em(300px)
-    max-width: $break-tablet-min
-    +respond-min($break-desktop-min)
-        margin: 0 auto
-        max-width: $break-desktop-min
-
-.main
-    padding: 0 $page-padding
+	background: #41464D
+	&__content
+		background: $color-page-bg // we need background here, if page is colored
+		min-width: em(300px)
+		max-width: $break-tablet-min
+		+respond-min($break-desktop-min)
+			margin: 0 auto
+			max-width: $break-desktop-min

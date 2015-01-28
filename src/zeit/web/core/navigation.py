@@ -29,7 +29,7 @@ class Navigation(object):
         del self.navigation_items[key]
 
     def has_children(self):
-        return True if len(self.navigation_items) > 0 else False
+        return len(self.navigation_items) > 0
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.INavigationItem)
@@ -45,17 +45,19 @@ class NavigationItem(Navigation):
 navigation = None
 navigation_services = None
 navigation_classifieds = None
+navigation_footer_publisher = None
+navigation_footer_links = None
 
 
 def make_navigation(navigation_config):
-    try:
-        navigation = urllib2.urlopen(navigation_config)
-    except urllib2.URLError:
-        return navigation
-    root = lxml.objectify.fromstring(navigation.read())
-
     navigation = Navigation()
 
+    try:
+        config_file = urllib2.urlopen(navigation_config)
+    except (urllib2.URLError, ValueError):
+        return navigation
+
+    root = lxml.objectify.fromstring(config_file.read())
     _register_navigation_items(navigation, root.xpath('section'))
 
     return navigation

@@ -39,6 +39,12 @@
 
                 //toggle icon and visibility of dropdown elements
                 $buttonMenue.on( 'click', function( event ) {
+                    event.preventDefault();
+                    if ( $buttonMenue.attr('aria-expanded') === 'false' ) {
+                        $buttonMenue.attr('aria-expanded', 'true');
+                    } else if ( $buttonMenue.attr('aria-expanded') === 'true' ) {
+                        $buttonMenue.attr('aria-expanded', 'false');
+                    }
                     $toggleEls.toggle();
                     $.each( icons, function( index, value ) {
                         $( $icons[0] ).toggleClass( value );

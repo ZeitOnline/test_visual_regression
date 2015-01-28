@@ -73,7 +73,7 @@
                     var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
                         isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
 
-                    if ( singleGallery && isStatic ) {
+                    if ( singleGallery && isStatic && !window.ZMO.isMobileView() ) {
                         singleGallery.goToSlide = function( slideIndex, direction ) {
                             var total = singleGallery.getSlideCount(),
                                 next = ( total + slideIndex ) % total,
@@ -222,19 +222,22 @@
             };
 
             options.onSliderLoad = function() {
-                // check for iOS bug not setting position correctly
-                if ( 'WebKitCSSMatrix' in window ) {
-                    var matrix = new WebKitCSSMatrix( gallery.css('transform') );
 
-                    // bxSlider got the position of the first slide wrong,
-                    // because the cloned last slide did not load until now
-                    if ( matrix.m41 === 0 ) {
-                        gallery.find( '.bx-clone img' ).eq( 0 ).on( 'load', function( e ) {
-                            $( this ).off( e );
-                            slider.reloadSlider();
-                        });
-                    }
-                }
+                // TODO: has to be fixed, it isn't working but leads to a neverending loop
+                // check for iOS bug not setting position correctly
+                // if ( 'WebKitCSSMatrix' in window ) {
+                //     var matrix = new WebKitCSSMatrix( gallery.css('transform') );
+
+                //     // bxSlider got the position of the first slide wrong,
+                //     // because the cloned last slide did not load until now
+                //     if ( matrix.m41 === 0 ) {
+                //         gallery.find( '.bx-clone img' ).eq( 0 ).on( 'load', function( e ) {
+                //             $( this ).off( 'e' );
+                //             slider.reloadSlider();
+                //         });
+                //     }
+                // }
+
 
                 figCaptionSizing();
 

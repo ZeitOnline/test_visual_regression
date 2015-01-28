@@ -11,3 +11,14 @@
 
 @import "advertorial/modules/advertorial-title"
 
+.advertorial-navigation-title
+    +inline-block
+    +no-user-select
+    color: #f2e7cb
+    float: left
+    font-family: $font-tabletgothic
+    margin: $dblhair 0 0 $small
+    letter-spacing: 1px
+    text-transform: uppercase
+    +respond-min($nav__break__full-menu)
+        font-size: $font-ml

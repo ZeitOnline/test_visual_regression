@@ -38,12 +38,14 @@ require([
 // make a shim of them first
 // plugins that require plugins need to make this requirement in the shim-section of config
 require([
+    'web.core/plugins/jquery.referrerCount',
     'web.magazin/plugins/jquery.inlinegallery',
     'web.magazin/plugins/jquery.switchvideo',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.animatescroll',
     'web.magazin/plugins/jquery.parseesi'
 ], function() {
+    $(window).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();

@@ -12,10 +12,10 @@ Parameters:
 
 {%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context -%}
 
-{%- set image = get_teaser_image(teaser_block, teaser) -%}
+{%- set image = get_repository_image(teaser_block.image) -%}
 
 <div class='teaser-fullgraphical'>
-    <a href="{{ teaser | create_url }}">
+    <a href="{{ teaser_block.referenced_object | create_url }}">
         <div class="teaser-fullgraphical__media-container scaled-image">
             {{ lama.insert_responsive_image(image, 'teaser-fullgraphical__media-item') }}
         </div>

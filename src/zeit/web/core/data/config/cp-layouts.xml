@@ -15,26 +15,39 @@
         />
     <!-- new zon series teaser -->
     <layout
-        id="teaser-series"
+        id="zon-series"
         title="kleiner Teaser mit Serien-Label"
         image_pattern="zon-thumbnail"
         areas="lead"
         />
     <!-- new zon column teaser -->
     <layout
-        id="teaser-column"
+        id="zon-column"
         title="Kolumnenteaser"
         image_pattern="zon-column"
         areas="lead"
         />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
-        id="teaser-fullwidth"
+        id="zon-fullwidth"
         title="vollbreiter Aufmacher Text auf Bild"
         image_pattern="zon-fullwidth"
         areas="lead"
         />
-
+     <layout
+        id="zon-parquet-large"
+        title="Rebrush 2014: Parkett – großer Teaser"
+        image_pattern="zon-large"
+        image_positions="true"
+        areas="teaser-mosaic"
+        />
+    <layout
+        id="zon-parquet-small"
+        title="Rebrush 2014: Parkett – kleiner Teaser"
+        image_pattern="zon-thumbnail"
+        image_positions="true"
+        areas="teaser-mosaic"
+        />
 
     <!-- Legacy teaser formats -->
     <layout

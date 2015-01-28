@@ -113,11 +113,12 @@ class Image(BaseImage):
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
             self.caption = _inline_html(model_block.xml.find('bu'))
-            cr = model_block.xml.find('copyright')
-            rel = cr.attrib.get('rel', '') == 'nofollow'
-            self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
             self.attr_title = _inline_html(model_block.xml.find('bu'))
             self.attr_alt = _inline_html(model_block.xml.find('bu'))
+            cr = model_block.xml.find('copyright')
+            if cr is not None:
+                rel = cr.attrib.get('rel', '') == 'nofollow'
+                self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
         if model_block.references:
             self.image = model_block.references.target
@@ -276,27 +277,32 @@ class NewsletterTeaser(object):
             self.more = 'weiterlesen'
 
     @property
-    def image(self):
+    def imagegroup(self):
         if zeit.content.video.interfaces.IVideoContent.providedBy(
                 self.context.reference):
             return self.context.reference.thumbnail
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
-        group = images.image if images is not None else None
-        if group is None:
-            return
+        return images.image if images is not None else None
+
+    @property
+    def image(self):
         # XXX An actual API for selecting a size would be nice.
-        for name in group:
+        if self.imagegroup is None:
+            return
+        for name in self.imagegroup:
             basename, ext = os.path.splitext(name)
             if basename.endswith('148x84'):
-                image = group[name]
+                image = self.imagegroup[name]
                 return image.uniqueId.replace(
                     'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 
     @property
     def videos(self):
         body = zeit.content.article.edit.interfaces.IEditableBody(
-            self.context.reference)
+            self.context.reference, None)
+        if body is None:
+            return []
         return [IFrontendBlock(element)
                 for element in body.values()
                 if zeit.content.article.edit.interfaces.IVideo.providedBy(

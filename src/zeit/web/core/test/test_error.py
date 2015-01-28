@@ -24,9 +24,14 @@ class Raiser(object):
         raise getattr(exceptions, cls)()
 
 
-def test_url_path_not_found_renders_404(testserver):
+def test_url_path_not_found_should_render_404(testserver):
     resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
     assert u'Dokument nicht gefunden' in resp.text
+
+
+def test_not_renderable_content_object_should_trigger_restart(testserver):
+    resp = requests.get('%s/quiz-workaholic' % testserver.url)
+    assert resp.headers['x-render-with'] == 'default'
 
 
 def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
@@ -141,4 +146,4 @@ def test_failsafe_rendering(markup, assertion, kw):
     env = zeit.web.core.template.Environment()
     tpl = env.from_string(markup)
     condition = isinstance(tpl.render(**kw), basestring)
-    assert condition, assertion + ' should not bother friedbert.'
+    assert condition, assertion + ' should not bother zeit.web.'

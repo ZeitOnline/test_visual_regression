@@ -24,10 +24,10 @@ Available attributes:
             {% for article in articles %}
                 <div class="cp_buzz__service__list__entry">
                     <p class="cp_buzz__service__list__entry__supertitle">
-                        {{ article.supertitle }}
+                        {{ article.teaserSupertitle or article.supertitle }}
                     </p>
                     <p class="cp_buzz__service__list__entry__title">
-                        <a href="{{ article.uniqueId | translate_url }}">{{ article.title }}</a>
+                        <a href="{{ article.uniqueId | translate_url }}">{{ article.teaserTitle or article.title }}</a>
                     </p>
                     {% if article.score %}
                     <p class="cp_buzz__service__list__entry__score">

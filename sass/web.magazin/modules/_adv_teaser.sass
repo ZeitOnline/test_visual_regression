@@ -13,10 +13,12 @@ $advertorial-mark-offset-em: em(15px)
 		text-transform: uppercase
 		top: 5px
 		right: $advertorial-mark-offset-px
-	& a > .scaled-image
-		height: $cp_button-gallery-height - 2.625em
 	& .cp_button__title__wrap
 		bottom: $advertorial-mark-offset-px
+		width: 90%
+
+.cp_button--gallery.is-advertorial a > .scaled-image
+	height: $cp_button-gallery-height - 2.625em
 
 .cp_button--large.is-advertorial
 	margin-top: 0

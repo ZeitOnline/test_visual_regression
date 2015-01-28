@@ -1,7 +1,7 @@
 {
-  "name": "friedbert",
+  "name": "zeit.web",
   "version": "0.2.0",
-  "description": "friedbert frontend component",
+  "description": "zeit web component",
   "dependencies": {
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ZeitOnline/friedbert.git"
+    "url": "git+ssh://git@github.com/ZeitOnline/zeit.web.git"
   }
 }

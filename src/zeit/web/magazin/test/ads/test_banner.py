@@ -38,6 +38,13 @@ def test_banner_view_should_return_None_if_tile_is_not_present(application):
     assert article_view.banner(999) is None
 
 
+def test_banner_toggles_should_return_value(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    # ZMO always true
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.banner_toggles('testing_me')
+
+
 def test_banner_should_fallback_on_not_registered_banner_types(
         testserver, testbrowser):
     class Moep(zeit.web.magazin.view_article.Article):
@@ -56,8 +63,7 @@ def test_banner_should_fallback_on_not_registered_banner_types(
 def test_banner_should_not_be_displayed_on_short_pages(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/header2' % testserver.url)
-    assert '<div id="iqadtile4" class="ad__tile_4 ad__width_300">' \
-        not in browser.contents
+    assert not browser.cssselect('#iqadtile4')
 
 
 def test_banner_should_not_be_displayed_on_disabled_article(
@@ -65,7 +71,7 @@ def test_banner_should_not_be_displayed_on_disabled_article(
     # test article with xml banner = no
     browser = testbrowser('%s/artikel/02' % testserver.url)
     # no desktop ads
-    assert not browser.cssselect('div[class*="ad__tile_"]')
+    assert not browser.cssselect('div[class*="ad-tile_"]')
     # no mobile ad script
     assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
@@ -75,48 +81,38 @@ def test_banner_should_not_be_displayed_on_disabled_cp(
     # centerpage without ads
     browser = testbrowser('%s/centerpage/index-without-ads' % testserver.url)
     # no desktop ads
-    assert not browser.cssselect('div[class*="ad__tile_"]')
+    assert not browser.cssselect('div[class*="ad-tile_"]')
     # no mobile ad script
     assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
 
 def test_banner_view_should_be_displayed_on_pages(testserver, testbrowser):
     browser = testbrowser('%s/artikel/03' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') in browser.contents
-    assert ('<div id="iqadtile8" class="ad__tile_8 ad__on__article '
-            'ad__width_300 ad__min__768">') in browser.contents
+    assert browser.cssselect('#iqadtile7')
+    assert browser.cssselect('#iqadtile8')
     browser = testbrowser('%s/artikel/03/seite-3' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') in browser.contents
+    assert browser.cssselect('#iqadtile7')
     browser = testbrowser('%s/artikel/03/seite-4' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') in browser.contents
+    assert browser.cssselect('#iqadtile7')
     browser = testbrowser('%s/artikel/03/seite-7' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') in browser.contents
+    assert browser.cssselect('#iqadtile7')
 
 
 def test_banner_tile3_should_be_displayed_on_pages(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
-    assert ('<div id="iqadtile3" class="ad__tile_3 ad__on__article '
-            'ad__width_800 ad__min__768">') in browser.contents
+    assert browser.cssselect('#iqadtile3')
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert ('<div id="iqadtile3" class="ad__tile_3 ad__on__centerpage '
-            'ad__width_800 ad__min__768">') in browser.contents
+    assert browser.cssselect('#iqadtile3')
 
 
 def test_banner_view_should_be_displayed_on_succeeding_pages(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') not in browser.contents
+    assert not browser.cssselect('#iqadtile7')
     browser = testbrowser('%s/artikel/03/seite-5' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') not in browser.contents
+    assert not browser.cssselect('#iqadtile7')
     browser = testbrowser('%s/artikel/03/seite-6' % testserver.url)
-    assert ('<div id="iqadtile7" class="ad__tile_7 ad__on__article '
-            'ad__width_300 ad__min__768">') not in browser.contents
+    assert not browser.cssselect('#iqadtile7')
 
 
 def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
@@ -124,7 +120,7 @@ def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
     # test article with xml banner is missing
     browser = testbrowser('%s/artikel/10' % testserver.url)
     # desktop ads
-    assert browser.cssselect('div[class*="ad__tile_"]')
+    assert browser.cssselect('div[class*="ad-tile_"]')
     # mobile ad script
     assert browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 

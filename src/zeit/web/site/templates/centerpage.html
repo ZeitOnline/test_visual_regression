@@ -6,6 +6,7 @@ Available attributes:
     zeit.web.site.view_centerpage.Centerpage
 
 #}
+{% import "zeit.web.site:templates/macros/layout_macro.tpl" as lama_site with context %}
 {% extends "zeit.web.site:templates/layout.html" %}
 
 {% block main %}
@@ -16,7 +17,20 @@ Available attributes:
         {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
     </div>
     <div class="main__informatives">
+        {{ lama_site.show_informative_ad(view, true) }}
         {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
-        {{ lama_core.adplace(view.banner(7), view) }}
+        {{ lama_site.show_informative_ad(view) }}
+        {%- include "zeit.web.site:templates/inc/cp_area_printbox.html" ignore missing -%}
+    </div>
+    {#
+    <div class="main__videobar">
+        {%- include "zeit.web.site:templates/inc/cp_area_videobar.html" ignore missing -%}
+    </div>
+    #}
+    <div class="main__parquet">
+        {%- include "zeit.web.site:templates/inc/cp_area_parquet.html" ignore missing -%}
+    </div>
+    <div class="main__snapshot">
+        {%- include "zeit.web.site:templates/inc/cp_area_snapshot.html" ignore missing -%}
     </div>
 {% endblock main %}

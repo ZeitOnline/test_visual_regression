@@ -1,9 +1,9 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
 
-{% block teaser_modifier %}teaser--hasmedia{% endblock %}
-{% block teaser_heading_modifier %}teaser__heading--hasmedia{% endblock %}
+{% block layout %}teaser-large{% endblock %}
 
 {% block teaser_media_position_after_title %}
+    {% set teaser_block_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/teaser_asset/"+
         teaser | auto_select_asset | block_type +
         "_zon-large.tpl" ignore missing with context %}

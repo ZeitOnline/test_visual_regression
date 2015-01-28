@@ -115,3 +115,7 @@ class ISettings(pyramid.interfaces.ISettings):
 
 class IImageScales(zope.interface.Interface):
     """Image scale utility factory"""
+
+
+class ITopicLink(zope.interface.Interface):
+    """TopicLink sanitizer"""

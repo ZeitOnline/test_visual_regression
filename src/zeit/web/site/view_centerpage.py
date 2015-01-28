@@ -1,20 +1,36 @@
 # -*- coding: utf-8 -*-
+import datetime
+import logging
+
+import babel.dates
 import pyramid.response
 import pyramid.view
 
+import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
+import zeit.web.core.interfaces
 import zeit.web.core.reach
+import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.site.view
+
+log = logging.getLogger(__name__)
+
+
+def known_content(res):
+    return (zeit.content.article.interfaces.IArticle.providedBy(res[1]) or
+            zeit.content.gallery.interfaces.IGallery.providedBy(res[1]) or
+            zeit.content.video.interfaces.IVideo.providedBy(res[1]))
 
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
-class Centerpage(zeit.web.core.view_centerpage.Centerpage):
+class Centerpage(
+        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
 
     """Main view class for ZEIT ONLINE centerpages."""
 
@@ -35,13 +51,34 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and b.layout.id not in (
-                    'teaser-fullwidth',)
+                return len(b) and b.layout.id and \
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id) \
+                    not in ('zon-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
         return [(b.layout.id, iter(b).next(), b) for b in
                 self.context['lead'].values() if valid_block(b)]
+
+    @zeit.web.reify
+    def area_parquet(self):
+        def valid_bar(b):
+            try:
+                return b.layout.id in ('parquet',)
+            except AttributeError:
+                return
+
+        def valid_blocks(b):
+            try:
+                return b.layout.id in ('parquet-large', 'parquet-regular')
+            except AttributeError:
+                return
+
+        teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
+        teaser_bar_blocks = sum([bar.values() for bar in teaser_bars], [])
+        auto_pilot_teaser_blocks = filter(valid_blocks, teaser_bar_blocks)
+
+        return auto_pilot_teaser_blocks
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -51,8 +88,9 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and b.layout.id in (
-                    'teaser-fullwidth',)
+                return len(b) and b.layout.id and \
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
+                        'zon-fullwidth',)
             except (TypeError, AttributeError):
                 return
 
@@ -68,7 +106,19 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
         area = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
         area.layout.id = zeit.web.core.utils.nsunicode('mostread')
-        area.header = zeit.web.core.utils.nsunicode('Meistgelesen')
+        area.header = zeit.web.core.utils.nsunicode('Meistgelesene Artikel')
+        return area
+
+    @zeit.web.reify
+    def area_buzz_comments(self):
+        """Return a pseudo teaser block with the top 3 most commented articles.
+        :rtype: zeit.web.core.utils.nslist
+        """
+
+        area = zeit.web.core.reach.fetch('comments', self.ressort, limit=3)
+        area.layout = zeit.web.core.utils.nsunicode('buzz-comments')
+        area.layout.id = zeit.web.core.utils.nsunicode('comments')
+        area.header = zeit.web.core.utils.nsunicode('Meistkommentiert')
         return area
 
     @zeit.web.reify
@@ -80,8 +130,44 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
         area = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
         area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
         area.layout.id = zeit.web.core.utils.nsunicode('facebook')
-        area.header = zeit.web.core.utils.nsunicode('Meistempfohlen')
+        area.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
         return area
+
+    @zeit.web.reify
+    def area_printbox(self):
+        """Return the content object for the Printbox or Angebotsbox,
+        considering weekday. Mon-Wed = Angebotsbox, Thu-Sun = Printbox
+        :rtype: dict
+        """
+
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        weekday = datetime.datetime.now(tz).weekday()
+
+        if weekday < 3:
+            uri = 'http://xml.zeit.de/angebote/angebotsbox'
+            printbox = False
+        else:
+            uri = 'http://xml.zeit.de/angebote/print-box'
+            printbox = True
+
+        content = zeit.cms.interfaces.ICMSContent(uri)
+
+        return {'printbox': printbox, 'content': content}
+
+    @zeit.web.reify
+    def area_videobar(self):
+        """Return a video playlist object to be displayed on the homepage."""
+        unique_id = 'http://xml.zeit.de/video/playlist/36516804001'
+        return zeit.cms.interfaces.ICMSContent(unique_id)
+
+    @zeit.web.reify
+    def snapshot(self):
+        """Return the centerpage snapshot aka `Momentaufnahme`.
+        :rtype: zeit.content.image.image.RepositoryImage
+        """
+        snapshot = self.context.snapshot
+        return zeit.web.core.interfaces.ITeaserImage(snapshot) if (
+            snapshot is not None) else None
 
     @zeit.web.reify
     def topiclink_title(self):
@@ -93,14 +179,4 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage):
 
     @zeit.web.reify
     def topiclinks(self):
-        """Filter and restructure all topiclinks and labels
-        :rtype: dict
-        """
-
-        link_list = []
-        for i in xrange(1, 4):
-            label = getattr(self.context, 'topiclink_label_%s' % i, None)
-            link = getattr(self.context, 'topiclink_url_%s' % i, None)
-            if label is not None and link is not None:
-                link_list.append((label, link))
-        return link_list
+        return zeit.web.core.interfaces.ITopicLink(self.context)

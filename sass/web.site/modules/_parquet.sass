@@ -1,0 +1,87 @@
+.parquet
+	clear: both
+	display: block
+	margin: 0 (-$page-padding) // parquet has 'full width'
+
+.parquet-row
+	font-family: $font-tabletgothic
+	+respond-min($break-tablet-min)
+		border-top: 1px solid $zon_light_grey
+
+.parquet-meta
+	display: block
+	vertical-align: top
+	background-color: $zon_lighter_grey
+	+respond-min($break-tablet-min)
+		display: table-cell
+		padding: remify($petite--px) remify($petite--px) 0 $page-padding
+		width: remify(207px)
+	+respond-min($break-desktop-min)
+		width: remify(240px)
+
+	&__title
+		+link
+			color: inherit
+			text-decoration: none
+		color: $zon-charcoal
+		display: block
+		font-size: remify(22px)
+		font-weight: bold
+		letter-spacing: 0.03em
+		line-height: 1.0
+		padding: remify($small--px) $page-padding remify($little--px) $page-padding
+		position: relative
+		width: auto
+		@at-root a#{&}
+			+on-interaction
+				text-decoration: underline
+		+respond-min($break-tablet-min)
+			background: none
+			font-size: remify(21px)
+			line-height: 1.0
+			margin: 0
+			padding: 0
+		+respond-min($break-desktop-min)
+			font-size: remify(24px)
+		&:after
+			content: '\203A' // › = Single right-pointing angle quotation mark
+			position: absolute
+			right: remify($petite--px)
+			font-size: remify(32px)
+			top: remify(12px)
+			color: $grey
+			+respond-min($break-tablet-min)
+				content: ''
+
+	&__topic-links
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
+			list-style: none
+			padding: 0
+
+	&__topic-link,
+	&__more-link
+		display: none
+		+respond-min($break-tablet-min)
+			+link-colors($zon_grey)
+			display: block
+			font-size: remify(14px)
+			letter-spacing: 0.03em
+
+	&__more-link
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
+			font-weight: bold
+			line-height: 1.334
+			&:after
+				content: ' \25B8 ' // ▸ = Black Right-Pointing Small Triangle
+
+.parquet-teasers
+	display: table-cell
+	vertical-align: top
+	margin: 0
+	padding: 0
+	+respond-min($break-tablet-min)
+		padding: remify($petite--px) $page-padding 0 remify($petite--px)

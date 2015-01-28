@@ -68,29 +68,15 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
-        <container cp:type="teaser" module="teaser-series" cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa">
+        <container cp:type="teaser" module="zon-series" cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa">
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" year="2014" issue="44" ressort="Digital" serie="App-Kritik" contenttype="article" publication-date="" expires="" author="Thorsten Schröder" xml:base="digital/index.lead"></block>
         </container>
-        <container cp:type="teaser" module="zon-large" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814f5">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-            <badges>
-              <badge py:pytype="str">audio</badge>
-              <badge py:pytype="str">gallery</badge>
-              <badge py:pytype="str">infographic</badge>
-              <badge py:pytype="str">map</badge>
-              <badge py:pytype="str">video</badge>
-            </badges>
-            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
-            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
-            <title py:pytype="str">Article Image Asset Titel</title>
-            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
-            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
-            <byline xsi:nil="true"/>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-              <bu py:pytype="str">Die ist der image sub text </bu>
-              <copyright link="http://foo.de">©foo</copyright>
-            </image>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e14">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-ohne-bild" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-ohne-bild" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
       </region>

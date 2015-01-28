@@ -1,15 +1,15 @@
-ZMO on Friedbert
-=================
+Zeit Web Project
+================
 
 ## Initiales Setup Pyramid-App
 
 Zunächst das Repository clonen
 
-	git clone git@github.com:ZeitOnline/friedbert
+	git clone git@github.com:ZeitOnline/zeit.web
 
 Ins Verzeichnis wechseln
 
-    cd friedbert
+    cd zeit.web
 
 Per virtualenv die evtl. Systemabhängigkeiten ausknipsen
 
@@ -23,7 +23,7 @@ Setup ausführen als development
 
 Nach folgendem Aufruf lauscht die App auf Port 9090
 
-    bin/pserve frontend.ini
+    bin/pserve web.ini
 
 Folgende URL liefert eine erste Sicht auf einen Artikel
 
@@ -31,11 +31,11 @@ Folgende URL liefert eine erste Sicht auf einen Artikel
 
 Die Option `--reload` sorgt dafür, dass bei editiertem Code der Server neu gestartet wird
 
-	bin/pserve frontend.ini --reload
+	bin/pserve web.ini --reload
 
-## Initiales Setup Frontend
+## Initiales Setup
 
-Nach Ausführung obiger Schritte wird zur Frontendentwicklung ein weiteres Toolset benötigt, bestehend aus:
+Nach Ausführung obiger Schritte wird zur Entwicklung ein weiteres Toolset benötigt, bestehend aus:
 
 - [node](http://nodejs.org/)
 - [grunt](http://gruntjs.com/)
@@ -49,7 +49,7 @@ Wenn node installiert ist, zuerst das Grunt-Commandline-Interface installieren:
 
 Dann eine lokale Kopie von grunt anlegen im Projektverzeichnis:
 
-    cd friedbert
+    cd zeit.web
     npm install grunt --save-dev
 
 Dadurch werden ein Verzeichnis `node_modules` angelegt. Dies bitte nicht anfassen. Werden neue Grunt-Module dem Projekt hinzugefügt, müssen diese ggf. lokal nachinstalliert werden, da die Module nicht ins Repository eingecheckt werden:

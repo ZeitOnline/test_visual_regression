@@ -1,5 +1,5 @@
 {
-  "name": "ZEIT Frontend Components",
+  "name": "ZEIT Web Components",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,7 +8,8 @@
     "modernizr": "2.8.3",
     "normalize.css": "3.0.1",
     "requirejs": "2.1.15",
-    "sjcl": "1.0.0"
+    "sjcl": "1.0.0",
+    "jquery.inview": "1.0.0"
   },
   "exportsOverride": {
     "modernizr": {

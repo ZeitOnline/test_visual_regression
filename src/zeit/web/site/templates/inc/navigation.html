@@ -1,0 +1,29 @@
+{% import 'zeit.web.site:templates/macros/navigation_macro.tpl' as nav %}
+
+<div class="main_nav">
+
+    <!-- logo -->
+    <div class="logo_bar">
+        <div class="logo_bar__image">{{ nav.main_nav_logo() }}</div>
+        <div class="logo_bar__menue">{{ nav.main_nav_burger() }}</div>
+    </div>
+    <!-- special teaser -->
+    <div class="main_nav__teaser">{{ nav.main_nav_teaser() }}</div>
+
+    <!-- wrap start -->
+    <div class="main_nav__community" data-dropdown="true">{{
+    nav.main_nav_community() }}</div>
+    <div class="main_nav__ressorts" data-dropdown="true">
+            {{ nav.main_nav_ressorts(view.navigation) }}
+    </div>
+    <div class="main_nav__services" data-dropdown="true">{{
+    nav.main_nav_services(view.navigation_services) }}</div>
+    <div class="main_nav__classifieds" data-dropdown="true">{{
+    nav.main_nav_classifieds(view.navigation_classifieds) }}</div>
+    <div class="main_nav__search" data-dropdown="true">{{ nav.main_nav_search() }}</div>
+    <!-- wrap end -->
+    <!-- please don't break line here, due to inline-block state -->
+    <div class="main_nav__tags">{{ nav.main_nav_tags(view.topiclink_title,
+    view.topiclinks) }}</div><div class="main_nav__date">{{ nav.main_nav_date(view.displayed_last_published_semantic) }}</div>
+
+</div>

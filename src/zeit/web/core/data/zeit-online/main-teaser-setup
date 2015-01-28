@@ -9,7 +9,7 @@
     </rankedTags>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
@@ -21,6 +21,8 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-05-21T10:58:36.573625+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-11-18T12:18:27.293179+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-11-18T12:18:27.293179+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.dhoppe</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>

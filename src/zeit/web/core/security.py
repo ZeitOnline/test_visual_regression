@@ -1,9 +1,7 @@
-import socket
-import wsgiproxy.exactproxy
+import urllib2
 
 import lxml.etree
 import pyramid.authentication
-import webob
 
 
 class CommunityAuthenticationPolicy(
@@ -23,8 +21,8 @@ class CommunityAuthenticationPolicy(
 
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
-        if 'zmo-user' in request.session and drupal_id == \
-                request.session['zmo-user'].get('uid'):
+        if 'zmo-user' in request.session and drupal_id == (
+                request.session['zmo-user'].get('uid')):
             user_info = request.session['zmo-user']
         else:
             user_info = get_community_user_info(request)
@@ -42,23 +40,32 @@ def get_community_user_info(request):
     """Returns additional information from the Community backend by injecting
     the Cookie that Community has set when the user logged in there.
     """
-    user_info = dict(uid=0, name=None, picture=None)
-    community_request = webob.Request.blank(
-        'user/xml',
-        base_url=request.registry.settings['community_host'],
-        accept='application/xml')
-    # Inject existing Cookie
-    community_request.headers['Cookie'] = request.headers['Cookie']
+
+    user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
+    community_host = request.registry.settings['community_host']
+
+    community_request = urllib2.Request(
+        community_host.rstrip('/') + '/user/xml',
+        headers={'Accept': 'application/xml',
+                 'Cookie': request.headers.get('Cookie', '')})
+
     try:
-        community_response = community_request.get_response(
-            wsgiproxy.exactproxy.proxy_exact_request)
-    except socket.error:
+        community_response = urllib2.urlopen(community_request, timeout=3)
+    except urllib2.URLError:
         return user_info
+
     try:
         # Parse XML response and construct a dictionary from it
-        xml_info = lxml.etree.fromstring(community_response.body)
+        xml_info = lxml.etree.fromstring(community_response.read())
     except lxml.etree.XMLSyntaxError:
         return user_info
-    for key in user_info:
-        user_info[key] = xml_info.xpath('//user/%s' % key)[0].text
+
+    for key in user_info.keys():
+        postfix = 'roles' in key and '/role' or ''
+        elements = xml_info.xpath('//user/{}/text()'.format(key + postfix))
+        if len(elements) == 0:
+            continue
+        elif 'roles' not in key:
+            elements = elements[0]
+        user_info[key] = elements
     return user_info

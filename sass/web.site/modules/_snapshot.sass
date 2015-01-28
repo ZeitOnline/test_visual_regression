@@ -1,0 +1,76 @@
+.snapshot
+	filter: blur(0px)
+	margin-top: $twice
+	opacity: 1
+	position: relative
+	transition: all 2.5s ease-out
+	-webkit-filter: blur(0px)
+	&__title
+		color: $grey--mid-dark
+		font-family: $font-tabletgothic
+		font-size: remify(21px)
+		font-weight: 700
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1
+		margin-bottom: remify(10px)
+		+respond-min($break-desktop-min)
+			font-size: remify(24px)
+	&__media
+		margin: 0 (-$petite) remify(14px) (-$petite)
+		+respond-min($break-desktop-min)
+			margin: 0 0 remify(14px) 0
+	&__media-item
+		width: 100%
+	&--blurred
+		filter: blur(10px)
+		opacity: 0.1
+		-webkit-filter: blur(10px)
+
+.js .snapshot
+	// hide in js capable browser
+	// for lazy loading
+	display: none
+
+.snapshot-readmore
+	color: $grey--mid
+	display: block
+	font-family: $font-tabletgothic
+	font-size: remify(14px)
+	font-weight: 700
+	letter-spacing: $zon-letter-spacing-s
+	line-height: 1
+	position: absolute
+	right: 0
+	top: 0
+	+respond-min($break-phablet-min)
+		top: remify(7px)
+	+link
+		color: $grey--mid
+		text-decoration: none
+	+on-interaction
+		color: $grey
+	&:after
+		content: " ❯"
+		font-size: 1.4em
+		line-height: 1
+		+respond-min($break-phablet-min)
+			content: ""
+	&__item
+		display: none
+		+respond-min($break-phablet-min)
+			display: inline
+
+.snapshot-caption
+	color: $grey--mid-dark
+	font-family: $font-tabletgothic
+	font-size: remify(16px)
+	line-height: 1.35em
+	&__link
+		+link
+			color: $zon_mid_grey
+			text-decoration: none
+		+on-interaction
+			color: inherit
+			text-decoration: underline
+	&__item
+		color: $zon_mid_grey
