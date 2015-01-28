@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.10.4 (unreleased)
+1.10.4 (2015-01-28)
 -------------------
 
 - HOTFIX: Fix fonts to include data-uri
