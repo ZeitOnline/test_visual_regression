@@ -49,8 +49,6 @@
             that.submit();
         });
 
-        $( '#beta-toggle-submit', this ).hide();
-
         return this;
     };
 
