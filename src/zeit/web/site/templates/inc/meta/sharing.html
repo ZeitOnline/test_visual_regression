@@ -8,7 +8,7 @@
 	<meta property="fb:admins" content="595098294">
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="{{ view.title or 'ZEIT ONLINE' }}">
-	<meta property="og:description" content="{{ view.subtitle or 'XXX' }}">
+	<meta property="og:description" content="{{ view.subtitle or '' }}">
 	<meta property="og:url" content="{{ view.article_url or 'http://' + request.host + request.path_info }}">
 	{% if view.image_group -%}
 		<meta property="og:image" content="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">
