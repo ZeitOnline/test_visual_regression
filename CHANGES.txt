@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.10.5 (unreleased)
+1.10.5 (2015-01-28)
 -------------------
 
 - FIX: Stop render breakdown if article block is not found
