@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.10.6 (unreleased)
+1.10.6 (2015-01-28)
 -------------------
 
 - FIX: Release 1.10.5 is messed up because of a mergin error
