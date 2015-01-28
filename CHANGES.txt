@@ -4,7 +4,7 @@ Change log for zeit.web
 1.10.5 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1349: Switch prinbox by content toggle
 
 
 1.10.4 (2015-01-28)

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import datetime
 import logging
 
-import babel.dates
 import pyramid.response
 import pyramid.view
 
@@ -135,22 +133,18 @@ class Centerpage(
 
     @zeit.web.reify
     def area_printbox(self):
-        """Return the content object for the Printbox or Angebotsbox,
-        considering weekday. Mon-Wed = Angebotsbox, Thu-Sun = Printbox
+        """Return the content object for the Printbox or Angebotsbox.
         :rtype: dict
         """
 
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        weekday = datetime.datetime.now(tz).weekday()
-
-        if weekday < 3:
-            uri = 'http://xml.zeit.de/angebote/angebotsbox'
-            printbox = False
-        else:
-            uri = 'http://xml.zeit.de/angebote/print-box'
-            printbox = True
-
+        uri = 'http://xml.zeit.de/angebote/print-box'
         content = zeit.cms.interfaces.ICMSContent(uri)
+        printbox = True
+
+        if content.byline == "mo-mi":
+            uri = 'http://xml.zeit.de/angebote/angebotsbox'
+            content = zeit.cms.interfaces.ICMSContent(uri)
+            printbox = False
 
         return {'printbox': printbox, 'content': content}
 
