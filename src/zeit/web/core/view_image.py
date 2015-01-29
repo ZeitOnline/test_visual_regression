@@ -32,6 +32,7 @@ class Image(zeit.web.core.view.Base):
             response = self.request.response
             response.app_iter = pyramid.response.FileIter(self.context.open())
 
+        # Workaround for <https://github.com/Pylons/webob/issues/130>
         response.content_type = self.context.mimeType.encode('utf-8')
         response.headers['Content-Type'] = response.content_type
         response.headers['Content-Length'] = str(self.context.size)
