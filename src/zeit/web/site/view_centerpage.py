@@ -151,6 +151,8 @@ class Centerpage(
             printbox = True
 
         content = zeit.cms.interfaces.ICMSContent(uri)
+        box = content
+        box.image = zeit.content.image.interfaces.IImages(content).image
 
         return {'printbox': printbox, 'content': content}
 
