@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pyramid.view
 import zeit.web.core.view
 import zeit.web.magazin.view
 
@@ -23,3 +24,10 @@ class Base(zeit.web.core.view.Base):
             return bool(zeit.web.core.banner.banner_toggles[name])
         except (IndexError, TypeError):
             return False
+
+
+@pyramid.view.view_config(
+    route_name='spektrum-kooperation',
+    renderer='templates/inc/parquet/parquet-spektrum.html')
+def spektrum_hp_feed(request):
+    return {'row': {'id': 'my id'}}
