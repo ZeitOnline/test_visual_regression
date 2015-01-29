@@ -234,9 +234,8 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             image.image = zeit.content.image.image.LocalImage()
             file_name = '{}.jpg'.format(image_pattern)
             try:
-                fh = image.image.open('w')
-                fh.write(urllib2.urlopen(src).read())
-                fh.close()
+                with image.image.open('w') as fh:
+                    fh.write(urllib2.urlopen(src, timeout=4).read())
             except IOError:
                 pass
             image.src = src
