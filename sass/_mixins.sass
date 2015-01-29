@@ -111,7 +111,7 @@
 	::input-placeholder
 		@content
 
-=justify-children-horizontally($elements-selector)
+=justify-children-horizontally($elements-selector, $vertical-alignment: top)
 	text-align: justify
 	text-justify: distribute-all-lines
 	-ms-text-justify: distribute-all-lines
@@ -133,8 +133,8 @@
 	& > *
 		text-align: left // reset text-aling for child-elements
 
-	& > #{$elements-selector}
-		+inline-block
+	@at-root #{$elements-selector}
+		+inline-block($vertical-alignment)
 
 =animated-interaction($color: $color-link--hover)
 	+transition(border-color .2s)
@@ -182,6 +182,14 @@
 				display: none
 
 /* END: mixins for navigation/header */
+
+=image_text_replacement($display:block, $vertical-align:middle)
+	background-position: 50% 50%
+	background-size: contain
+	display: $display
+	text-indent: -50000em
+	@if $display == inline-block or $display == inline
+		vertical-align: $vertical-align
 
 // pseudo classes
 %off-screen

@@ -65,6 +65,20 @@
                 <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/26/18140073001_4002387461001_20150121-153801-zdf-heute100sec-still.jpg?pubId=18140073001"/>
                 <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/2206/18140073001_4002387460001_20150121-153801-zdf-heute100sec-thumb.jpg?pubId=18140073001"/>
             </video>
+            <video type="video" href="http://xml.zeit.de/video/2015-01/4004256546001" year="2015" ressort="Digital" contenttype="video" publication-date="" expires="">
+                <supertitle>Künstliche Intelligenz</supertitle>
+                <title>Roboter Myon übernimmt Opernrolle</title>
+                <text>
+                    Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.
+                </text>
+                <description>
+                    Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.
+                </description>
+                <byline/>
+                <breadcrumb_title/>
+                <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3653/18140073001_4004353973001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001"/>
+                <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3339/18140073001_4004249823001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001"/>
+            </video>
         </videos>
         <title>Video</title>
     </body>
