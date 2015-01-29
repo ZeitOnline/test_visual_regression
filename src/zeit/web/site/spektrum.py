@@ -6,7 +6,7 @@ import lxml.etree
 
 class HPFeed(object):
 
-    def __init__(self, content):
+    def __init__(self):
         # zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         # feed_url = zwcs.get('spektrum_hp_feed')
         resp = requests.get('http://www.spektrum.de/alias/rss/zeit-kooperationsfeed/1329411')
@@ -33,9 +33,9 @@ class Teaser(object):
 
     def __init__(self, item):
         for value in item:
-            if item.tag in self._map.keys:
-                setattr(self, map[item.tag], item.text)
-        if ':' in self.title:
+            if item.tag in self._map.keys():
+                setattr(self, self._map[item.tag], item.text)
+        if ':' in self.teaserTitle:
             title = self.teaserTitle
             self.teaserSupertitle = title[:title.find(":")]
             self.teaserTitle = title[title.find(":")+1:]

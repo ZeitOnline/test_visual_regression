@@ -1,8 +1,6 @@
-<h1>{{row.id}}</h1>
-
 <div class="parquet-row parquet-row--spektrum" id="parquet-spektrum">
     <div class="parquet-meta">
-        <a class="parquet-meta__title parquet-meta__title--spektrum" href="http://www.spektrum.de">Spektrum.de</a>
+        <a class="parquet-meta__title parquet-meta__title--spektrum" href="http://spektrum.de">Spektrum.de</a>
         <ul class="parquet-meta__topic-links parquet-meta__topic-links--spektrum">
             <li>
                 <a href="http://www.spektrum.de/astronomie" class="parquet-meta__topic-link">Astronomie</a>
@@ -14,10 +12,27 @@
                 <a href="http://www.spektrum.de/physik" class="parquet-meta__topic-link">Physik</a>
             </li>
         </ul>
-        <a href="http://www.zeit.de/index" class="parquet-meta__more-link parquet-meta__more-link--spektrum">
-            Aktuelles aus der Welt von Wissenschaft und Forschung: Spektrum.de
-        </a>
+        <div class="parquet-meta__more parquet-meta__more--spektrum">
+            Aktuelles aus der Welt von Wissenschaft und Forschung:
+            <a href="http://www.zeit.de/index" class="parquet-meta__more-link parquet-meta__more-link--spektrum">
+                Spektrum.de
+            </a>
+        </div>
     </div>
+    <ul class="parquet-teasers">
+        {% for teaser in row -%}
+            {% if loop.index <= 3 %}
+                {% include ["zeit.web.site:templates/inc/parquet/zon-parquet-small-spektrum.tpl"] %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+
+<h1>{{row.id}}</h1>
+
+<div class="parquet-row parquet-row--spektrum" id="parquet-spektrum">
+
     <ul class="parquet-teasers">
         <article class="teaser-parquet-small " data-block-type="teaser" data-unique-id="http://xml.zeit.de/zeit-online/cp-content/article-01">
             <figure class="teaser-parquet-small__media scaled-image">
