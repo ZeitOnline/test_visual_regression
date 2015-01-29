@@ -10,7 +10,7 @@ $zon-classifieds-width: em(120px)
 $zon-classifieds-height: em(50px)
 $zon-classifieds-width-phablet: em(180px)
 $zon-search-width: em(120px)
-$zon-search-square-size: em(35px)
+$zon-search-square-size: remify(35px)
 
 // basic style for nav box
 // important is important here, as we have to overwrite js toggling
@@ -54,7 +54,7 @@ $zon-search-square-size: em(35px)
 			+link-colors($zon_mid_grey, $zon_dark_grey, $zon_mid_grey, $zon_mid_grey, $zon_mid_grey)
 
 %main_nav__topics
-	margin: $micro 0 $petite 0
+	margin: 0 0 $petite 0
 	font-size: $font-11px
 	text-transform: uppercase
 	letter-spacing: 1px
@@ -69,7 +69,7 @@ $zon-search-square-size: em(35px)
 	width: $zon-search-square-size
 	height: $zon-search-square-size
 	line-height: $zon-search-square-size
-	border: $hair solid $zon_light_grey
+	border: 1px solid $zon_light_grey
 	background-color: $white
 	vertical-align: middle
 	position: relative
@@ -174,8 +174,8 @@ $zon-search-square-size: em(35px)
 			&:nth-child(n+4)
 				display: none
 			&:nth-child(2)
-				border-left: $hair solid $zon_light_grey
-				border-right: $hair solid $zon_light_grey
+				border-left: 1px solid $zon_light_grey
+				border-right: 1px solid $zon_light_grey
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
 		+order(10)
@@ -258,10 +258,10 @@ $zon-search-square-size: em(35px)
 .search__input
 	display: inline-block
 	width: 70%
-	height: $zon-search-square-size - $dblhair
+	height: $zon-search-square-size
 	background-color: $white
 	padding: 0
-	border: $hair solid $zon_light_grey
+	border: 1px solid $zon_light_grey
 	border-right: none
 	font-size: $font-m
 	color: $zon_grey
@@ -274,12 +274,16 @@ $zon-search-square-size: em(35px)
 		color: $zon_dark_grey
 	+respond-min($break-tablet-min)
 		display: none
+		transition: transform 1s
+		transform: translateX($zon-search-width)
 		width: $zon-search-width
 	+respond-min($break-desktop-min)
+		transform: translateX(0)
 		display: inline-block
 
 .search__input--visible
 	display: inline-block
+	transform: translateX(0)
 
 .search__button
 	@extend %main_nav_button
@@ -314,7 +318,6 @@ $zon-search-square-size: em(35px)
 //box 7: topics
 .main_nav__tags
 	@extend %main_nav__topics
-	text-align: left
 	+order(70)
 	width: 75%
 	+respond-min($break-desktop-min)
@@ -323,17 +326,14 @@ $zon-search-square-size: em(35px)
 		width: 80%
 		display: inline-block
 		list-style: none
-		padding: 0px
-		margin: 0px
+		padding: 0
+		margin: 0
 		li
 			display: inline-block
-			margin-left: $little
-			border: $dblhair solid $zon_light_grey
+			border: 1px solid $zon_light_grey
 			border-radius: $tiny
-			padding: 4px 8px 3px 8px
-			position: relative
-			top: -$thin
-			margin-top: $micro
+			margin: 0 0 0 $little
+			padding: 4px 7px 1px
 			&:hover
 				background-color: $zon_lighter_grey
 			a
@@ -343,7 +343,6 @@ $zon-search-square-size: em(35px)
 
 .main_nav__tags__label
 	font-weight: bold
-	vertical-align: top
 	display: inline-block
 	width: 20%
 	+respond-min($break-desktop-min)
@@ -355,6 +354,7 @@ $zon-search-square-size: em(35px)
 	font-weight: bold
 	width: 25%
 	text-align: right
+	padding-top: 4px
 	+order(80)
 	+respond-min($break-desktop-min)
 		width: 20%
@@ -375,7 +375,7 @@ $zon-search-square-size: em(35px)
 	+columns(2)
 	+pie-clearfix
 	font-size: $font-m
-	letter-spacing: $hair
+	letter-spacing: .05em
 	padding: 0 0 0 $petite
 
 	+respond-min($break-phablet-min)
