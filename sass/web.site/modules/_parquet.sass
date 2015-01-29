@@ -7,6 +7,9 @@
 	font-family: $font-tabletgothic
 	+respond-min($break-tablet-min)
 		border-top: 1px solid $zon_light_grey
+	&--spektrum
+		padding-top: remify(60px)
+		position: relative
 
 .parquet-meta
 	display: block
@@ -52,6 +55,27 @@
 			color: $grey
 			+respond-min($break-tablet-min)
 				content: ''
+		&--spektrum
+			+link
+				color: $white
+				text-decoration: none
+			+on-interaction
+				color: $white
+				text-decoration: none
+			background: $spektrum_de_blue
+			color: $white
+			font-family: 'TabletGothicNarrow'
+			display: block
+			height: remify(60px)
+			left: 0
+			line-height: remify(60px)
+			padding-left: $page-padding
+			position: absolute
+			top: 0
+			width: 100%
+			-webkit-font-smoothing: antialiased
+			&:after
+				content: ''
 
 	&__topic-links
 		display: none
@@ -59,6 +83,8 @@
 			display: block
 			list-style: none
 			padding: 0
+		&--spektrum
+			margin-top: 0
 
 	&__topic-link,
 	&__more-link
@@ -77,6 +103,9 @@
 			line-height: 1.334
 			&:after
 				content: ' \25B8 ' // ▸ = Black Right-Pointing Small Triangle
+		&--spektrum
+			+link-colors($spektrum_de_blue, $black, $spektrum_de_blue, $spektrum_de_blue)
+			font-weight: normal
 
 .parquet-teasers
 	display: table-cell
