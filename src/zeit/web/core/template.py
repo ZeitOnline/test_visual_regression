@@ -259,7 +259,9 @@ default_images_sizes = {
     'twitter-image_small': (120, 120),  # summary
     'twitter-image-large': (560, 300),  # summary_large_image, photo
     'newsletter-540x304': (540, 304),
-    'newsletter-220x124': (220, 124)
+    'newsletter-220x124': (220, 124),
+    'brightcove-still': (580, 326),
+    'brightcove-thumbnail': (120, 67)
 }
 
 
@@ -522,6 +524,14 @@ def get_repository_image(image):
     base_image.image = image
     base_image.uniqueId = image.uniqueId
     return base_image
+
+
+@zeit.web.register_filter
+def get_image_group(asset):
+    try:
+        return zeit.content.image.interfaces.IImageGroup(asset)
+    except TypeError:
+        return None
 
 
 @zeit.web.register_global
