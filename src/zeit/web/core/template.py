@@ -290,8 +290,9 @@ def default_image_url(image,
         request = pyramid.threadlocal.get_current_request()
 
         return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
-    except:
-        log.debug('Cannot produce a default URL for %s', image)
+    except Exception, e:
+        log.debug('Cannot produce a default URL for {}. Reason {}'.format(
+                  image, e))
 
 
 @zeit.web.register_filter
@@ -378,8 +379,8 @@ def get_attr(*args):
 
 
 @zeit.web.register_global
-def get_teaser_commentcount(uniqueId):
-    index = '/' + urlparse.urlparse(uniqueId).path[1:]
+def get_teaser_commentcount(unique_id):
+    index = '/' + urlparse.urlparse(unique_id).path[1:]
     count = zeit.web.core.comments.comments_per_unique_id().get(index, 0)
     if int(count) >= 5:
         return count
@@ -510,13 +511,12 @@ def create_image_url(teaser_block, image):
 @zeit.web.register_filter
 def get_image_metadata(image):
     try:
-        image_metadata = zeit.content.image.interfaces.IImageMetadata(image)
-        return image_metadata
+        return zeit.content.image.interfaces.IImageMetadata(image)
     except TypeError:
         return
 
 
-@zeit.web.register_global
+@zeit.web.register_filter
 def get_repository_image(image):
     base_image = zeit.web.core.block.BaseImage()
     base_image.image = image
