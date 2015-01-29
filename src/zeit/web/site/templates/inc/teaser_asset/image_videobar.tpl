@@ -1,0 +1,3 @@
+{%- extends "zeit.web.site:templates/inc/image_refactoring.tpl" -%}
+
+{% block mediablock %}video-teaser__thumbnail{% endblock %}
