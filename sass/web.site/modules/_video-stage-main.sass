@@ -7,3 +7,50 @@
 		display: table-cell
 		padding: remify($wide--px) remify(20px) 0 0
 		width: remify(620px + 20px)
+
+.video-large
+	&__combined-link
+		display: block
+		position: relative
+
+.video-large__combined-link
+	+link
+		color: $white
+
+.video-text-playbutton
+	bottom: $page-padding
+	font-size: remify(14px)
+	left: $page-padding
+	position: absolute
+	&__icon
+		height: remify(10px)
+		margin-right: remify(3px)
+		width: remify(10px)
+		+image_text_replacement(inline-block, text-top)
+	&__time
+		+respond-min($break-phablet-min)
+			&:before
+				content: 'Video ansehen'
+				font-weight: bold
+				letter-spacing: 0.05em
+				padding: 0 remify(4px) 0 0
+				text-transform: uppercase
+
+
+
+.video-large-title
+	bottom: $page-padding
+	left: $page-padding
+	margin: 0 $page-padding 1em 0
+	position: absolute
+	&__kicker
+		display: block
+		font-size: remify(14px)
+		font-weight: normal
+		-webkit-font-smoothing: antialiased
+	&__title
+		display: block
+		font-size: remify(16px)
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-phablet-min)
+			font-size: remify(20px)
