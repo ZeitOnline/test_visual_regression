@@ -33,8 +33,8 @@ class Teaser(object):
 
     def __init__(self, item):
         for value in item:
-            if item.tag in self._map.keys():
-                setattr(self, self._map[item.tag], item.text)
+            if value.tag in self._map.keys():
+                setattr(self, self._map[value.tag], item.text)
         if ':' in self.teaserTitle:
             title = self.teaserTitle
             self.teaserSupertitle = title[:title.find(":")]
