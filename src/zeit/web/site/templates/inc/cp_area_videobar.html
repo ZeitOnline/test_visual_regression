@@ -4,7 +4,8 @@
     <div class"video-teaser">
         <span class"video-teaser__kicker">{{ video.teaserSupertitle | hide_none }}</span>
         <span class"video-teaser__title">{{ video.teaserTitle | hide_none }}</span>
-        <img class"video-teaser__thumbnail" src="{{ video.thumbnail | hide_none }}">
+        {% set image = (video | get_image_group)['still.jpg'] %}
+        {% include "zeit.web.site:templates/inc/teaser_asset/image_videobar.tpl" %}
     </div>
     {% endfor %}
 </div>
