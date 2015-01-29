@@ -1,16 +1,20 @@
+import logging
+import urllib2
+
 import grokcore.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.core.utils
 
-import logging
 
 log = logging.getLogger(__name__)
 
@@ -214,6 +218,36 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.src = self.uniqueId = image.uniqueId
         self.title = meta.title
         self.uniqueId = image.uniqueId
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
+                      zeit.web.core.utils.nsdict):
+
+    def __init__(self, video):
+        super(VideoImageGroup, self).__init__()
+        self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
+        for image_pattern, src in [('still', video.video_still),
+                                   ('thumbnail', video.thumbnail)]:
+            image = zeit.web.core.block.BaseImage()
+            image.image = zeit.content.image.image.LocalImage()
+            file_name = '{}.jpg'.format(image_pattern)
+            try:
+                fh = image.image.open('w')
+                fh.write(urllib2.urlopen(src).read())
+                fh.close()
+            except IOError:
+                pass
+            image.src = src
+            image.mimeType = 'image/jpeg'
+            image.image_pattern = 'brightcove-{}'.format(image_pattern)
+            image.copyright = video.copyrights
+            image.caption = (video.teaserText or '').strip('\n')
+            image.title = (video.teaserTitle or '').strip('\n')
+            image.alt = (video.title or '').strip('\n')
+            image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
+            self[file_name] = image
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
