@@ -30,4 +30,7 @@ class Base(zeit.web.core.view.Base):
     route_name='spektrum-kooperation',
     renderer='templates/inc/parquet/parquet-spektrum.html')
 def spektrum_hp_feed(request):
+    # add CORS header to allow ESI JS drop-in
+    request.response.headers.add(
+        'Access-Control-Allow-Origin', '*')
     return {'row': {'id': 'my id'}}
