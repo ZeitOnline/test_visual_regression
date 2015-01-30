@@ -1,14 +1,19 @@
+import urllib2
+
 import grokcore.component
+import pyramid.httpexceptions
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+import zeit.content.image.image
 
 import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.site.spektrum
 
 import logging
 
@@ -214,6 +219,36 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.src = self.uniqueId = image.uniqueId
         self.title = meta.title
         self.uniqueId = image.uniqueId
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.adapter(zeit.web.site.spektrum.Teaser)
+class SpektrumImage(zeit.web.core.block.BaseImage):
+
+    def __init__(self, context):
+        super(SpektrumImage, self).__init__()
+
+        if context._feed_image is None:
+            raise TypeError('Could not adpat', context,
+                            zeit.content.image.interfaces.ILocalImage)
+
+        self.image = zeit.content.image.image.LocalImage()
+
+        try:
+            with self.image.open('w') as fh:
+                fileobj = urllib2.urlopen(context._feed_image, timeout=4)
+                fh.write(fileobj.read())
+        except IOError:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        _, file_name = context._feed_image.rsplit('/', 1)
+        self.mimeType = 'image/jpeg'
+        self.image_pattern = 'spektrum'
+        self.caption = context.teaserText
+        self.title = context.teaserTitle
+        self.alt = context.teaserTitle
+        self.uniqueId = 'http://xml.zeit.de/spektrum-image{}'.format(
+            context._feed_image.replace('http://www.spektrum.de', ''))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
