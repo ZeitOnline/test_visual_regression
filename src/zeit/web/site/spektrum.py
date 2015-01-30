@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+
 import zope.component
 import requests
 import lxml.etree
 
 import zeit.web.core.interfaces
+
 
 class HPFeed(object):
 
@@ -31,8 +33,8 @@ class HPFeed(object):
 class Teaser(object):
 
     _map = {'title': 'teaserTitle',
-           'description': 'teaserText',
-           'link': 'url'}
+            'description': 'teaserText',
+            'link': 'url'}
 
     def __init__(self, item):
         for value in self._map.values():
@@ -48,5 +50,5 @@ class Teaser(object):
     def _split(self, title):
         if ':' in title:
             return (title[:title.find(":")].strip(),
-                title[title.find(":")+1:].strip())
+                    title[title.find(":")+1:].strip())
         return ('', title)

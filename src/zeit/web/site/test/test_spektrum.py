@@ -18,7 +18,7 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
     assert teaser.teaserTitle == 'Ein Dinosaurier mit einem Hals wie ' + (
         'ein Baukran')
     assert teaser.teaserSupertitle == 'Qijianglong'
-    assert teaser.teaserText ==u'Forscher entdecken ein China die ' + (
+    assert teaser.teaserText == u'Forscher entdecken ein China die ' + (
         u'\xc3\x9cberreste eines bisher unbekannten, ') + (
         u'langhalsigen Dinosauriers.')
 
@@ -29,10 +29,10 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
 def test_spektrum_teaser_object_with_empty_values_should_not_break():
     xml_str = """
         <item>
-        	<title><![CDATA[]]></title>
-		<link><![CDATA[]]></link>
-		<description><![CDATA[]]></description>
-	</item>"""
+            <title><![CDATA[]]></title>
+            <link><![CDATA[]]></link>
+            <description><![CDATA[]]></description>
+        </item>"""
 
     xml = lxml.etree.fromstring(xml_str)
     teaser = zeit.web.site.spektrum.Teaser(xml)
@@ -45,13 +45,13 @@ def test_spektrum_teaser_object_with_empty_values_should_not_break():
 def test_spektrum_title_should_be_colon_splitted():
     xml_str = """
         <item>
-        	<title><![CDATA[]]></title>
-		<link><![CDATA[]]></link>
-		<description><![CDATA[]]></description>
-	</item>"""
+            <title><![CDATA[]]></title>
+            <link><![CDATA[]]></link>
+            <description><![CDATA[]]></description>
+        </item>"""
 
     teaser = zeit.web.site.spektrum.Teaser(lxml.etree.fromstring(xml_str))
-    assert teaser._split('supertitle: title')  == ('supertitle', 'title')
+    assert teaser._split('supertitle: title') == ('supertitle', 'title')
     assert teaser._split('') == ('', '')
     assert teaser._split('title') == ('', 'title')
     assert teaser._split('supertitle:') == ('supertitle', '')
