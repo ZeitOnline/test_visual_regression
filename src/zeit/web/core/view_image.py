@@ -22,7 +22,8 @@ class SpektrumImage(zeit.web.core.view.Base):
 
         response = self.request.response
         response.app_iter = pyramid.response.FileIter(fileobj)
-        response.content_type = 'image/jpeg'
+        response.cache_expires(60 * 60 * 24 * 365)
+        response.content_type = fileobj.headers.get('Content-Type')
         response.headers['Content-Type'] = response.content_type
         response.headers['Content-Disposition'] = (
             'inline; filename="{}"'.format(file_name).encode('utf8'))
