@@ -544,3 +544,11 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver.set_window_size(980, 1024)
     assert small_teaser.is_displayed(), (
         'Small parquet teaser must show it‘s image on desktop.')
+
+
+def test_spektrum_hp_feed_returns_values(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    feed = view.spektrum_hp_feed
+    assert isinstance(feed.get('row'), zeit.web.site.spektrum.HPFeed)
