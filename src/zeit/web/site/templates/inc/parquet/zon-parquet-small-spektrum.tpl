@@ -1,9 +1,17 @@
 <article class="teaser-parquet-small " data-block-type="teaser">
     <figure class="teaser-parquet-small__media scaled-image">
         <div class="teaser-parquet-small__media-container">
-            <a class="teaser-parquet-small__media-link" title="{{teaser.teaserTitle}}" href="{{teaser.url}}">
-                <img class="teaser-parquet-small__media-item" alt="{{teaser.teaserTitle}}" src="{{teaser.image | default_image_url}}">
-            </a>
+            {% if esi_toggle %}
+                <a class="teaser-parquet-small__media-link" title="{{teaser.teaserTitle}}" href="{{teaser.url}}">
+                    <img class="teaser-parquet-small__media-item" alt="{{teaser.teaserTitle}}" src="{{teaser.image | default_image_url}}">
+                </a>
+            {% else %}
+                {% set teaser_block = row %}
+                {% set teaser_block_layout = 'teaser-parquet-small' %}
+                {% include "zeit.web.site:templates/inc/teaser_asset/" +
+                    teaser | auto_select_asset | block_type +
+                    "_zon-thumbnail.tpl" ignore missing with context %}
+            {% endif %}
         </div>
     </figure>
     <div class="teaser-parquet-small__container ">

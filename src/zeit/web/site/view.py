@@ -34,5 +34,6 @@ def spektrum_hp_feed(request):
     request.response.headers.add(
         'Access-Control-Allow-Origin', '*')
     return {
+        'esi_toggle': True,
         'row': zeit.web.site.spektrum.HPFeed()
     }
