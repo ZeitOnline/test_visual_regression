@@ -8,8 +8,8 @@
     </figure>
     <div class="teaser-parquet-small__container ">
         <h2 class="teaser-parquet-small__heading">
-            <a class="teaser-parquet-small__combined-link" title="{{teaser.teaserSuperitle}} - {{teaser.teaserTitle}}" href="{{teaser.url}}">
-                <span class="teaser-parquet-small__kicker teaser-parquet-small__kicker--spektrum">{{teaser.teaserSuperitle}}</span>
+            <a class="teaser-parquet-small__combined-link" title="{{teaser.teaserSupertitle}} - {{teaser.teaserTitle}}" href="{{teaser.url}}">
+                <span class="teaser-parquet-small__kicker teaser-parquet-small__kicker--spektrum">{{teaser.teaserSupertitle}}</span>
                 <span class="teaser-parquet-small__title">{{teaser.teaserTitle}}</span>
             </a>
          </h2>
