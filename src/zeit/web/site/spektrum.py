@@ -20,7 +20,7 @@ class HPFeed(object):
         for item in iterator:
             yield Teaser(item)
 
-    def _fetch_feed():
+    def _fetch_feed(self):
         zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         feed_url = zwcs.get('spektrum_hp_feed')
         resp = requests.get(feed_url)
@@ -47,5 +47,5 @@ class Teaser(object):
     def _split(self, title):
         if ':' in title:
             return (title[:title.find(":")].strip(),
-                    title[title.find(":")+1:].strip())
+                    title[title.find(":") + 1:].strip())
         return ('', title)
