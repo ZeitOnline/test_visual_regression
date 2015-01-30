@@ -4,7 +4,7 @@ Change log for zeit.web
 1.10.7 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1294: Add cacheable brightcove thumbnails
 
 
 1.10.6 (2015-01-28)
