@@ -2,7 +2,7 @@
     <figure class="teaser-parquet-small__media scaled-image">
         <div class="teaser-parquet-small__media-container">
             <a class="teaser-parquet-small__media-link" title="{{teaser.teaserTitle}}" href="{{teaser.url}}">
-                <img class="teaser-parquet-small__media-item" alt="{{teaser.teaserTitle}}" src="{{teaser.image}}">
+                <img class="teaser-parquet-small__media-item" alt="{{teaser.teaserTitle}}" src="{{teaser.image | default_image_url}}">
             </a>
         </div>
     </figure>
