@@ -13,6 +13,6 @@
                 <span class="teaser-parquet-small__title">{{teaser.teaserTitle}}</span>
             </a>
          </h2>
-        <p class="teaser-parquet-small__text">{{teaser.text}}</p>
+        <p class="teaser-parquet-small__text">{{teaser.teaserText}}</p>
     </div>
 </article>
