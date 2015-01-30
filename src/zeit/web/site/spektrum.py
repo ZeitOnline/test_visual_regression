@@ -10,15 +10,12 @@ import zeit.web.core.interfaces
 class HPFeed(object):
 
     def __init__(self):
+        """Generate a list of teasers from an RSS feed.
+        """
+
         self.xml = self._fetch_feed()
 
     def __iter__(self):
-        """Compile a list of teasers from an RSS feed.
-
-        :param lxml.etree feed : RSS 2.0
-        :rtype: dict
-        """
-
         iterator = iter(self.xml.xpath('/rss/channel/item'))
         for item in iterator:
             yield Teaser(item)
