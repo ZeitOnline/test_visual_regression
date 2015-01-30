@@ -49,9 +49,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and \
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id) \
-                    not in ('zon-fullwidth',)
+                return len(b) and b.layout.id and (
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id)
+                    not in ('zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
 
@@ -86,9 +86,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and \
+                return len(b) and b.layout.id and (
                     zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
-                        'zon-fullwidth',)
+                        'zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
 
@@ -141,7 +141,7 @@ class Centerpage(
         content = zeit.cms.interfaces.ICMSContent(uri)
         printbox = True
 
-        if content.byline == "mo-mi":
+        if content.byline == 'mo-mi':
             uri = 'http://xml.zeit.de/angebote/angebotsbox'
             content = zeit.cms.interfaces.ICMSContent(uri)
             printbox = False

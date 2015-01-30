@@ -122,7 +122,7 @@ def test_printbox_is_present_and_considers_byline(testbrowser, testserver):
     prinbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
-    if content.byline == "mo-mi":
+    if content.byline == 'mo-mi':
         assert len(prinbox) == 0
         assert len(anbebotsbox) == 1
     else:
