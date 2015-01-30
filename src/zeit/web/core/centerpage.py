@@ -228,7 +228,7 @@ class SpektrumImage(zeit.web.core.block.BaseImage):
     def __init__(self, context):
         super(SpektrumImage, self).__init__()
 
-        if context._feed_image is None:
+        if context.feed_image is None:
             raise TypeError('Could not adpat', context,
                             zeit.content.image.interfaces.ILocalImage)
 
@@ -236,19 +236,18 @@ class SpektrumImage(zeit.web.core.block.BaseImage):
 
         try:
             with self.image.open('w') as fh:
-                fileobj = urllib2.urlopen(context._feed_image, timeout=4)
+                fileobj = urllib2.urlopen(context.feed_image, timeout=4)
                 fh.write(fileobj.read())
         except IOError:
             raise pyramid.httpexceptions.HTTPNotFound()
 
-        _, file_name = context._feed_image.rsplit('/', 1)
-        self.mimeType = 'image/jpeg'
+        self.mimeType = fileobj.headers.get('Content-Type')
         self.image_pattern = 'spektrum'
         self.caption = context.teaserText
         self.title = context.teaserTitle
         self.alt = context.teaserTitle
         self.uniqueId = 'http://xml.zeit.de/spektrum-image{}'.format(
-            context._feed_image.replace('http://www.spektrum.de', ''))
+            context.feed_image.replace('http://www.spektrum.de', ''))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
