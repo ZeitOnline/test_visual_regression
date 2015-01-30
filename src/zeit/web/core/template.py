@@ -260,7 +260,7 @@ default_images_sizes = {
     'twitter-image-large': (560, 300),  # summary_large_image, photo
     'newsletter-540x304': (540, 304),
     'newsletter-220x124': (220, 124),
-    'spektrum': (320, 180)
+    'spektrum': (220, 124)
 }
 
 
