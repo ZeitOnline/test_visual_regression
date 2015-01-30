@@ -49,4 +49,4 @@ class Teaser(object):
         if ':' in title:
             return (title[:title.find(":")].strip(),
                 title[title.find(":")+1:].strip())
-        return (title, '')
+        return ('', title)

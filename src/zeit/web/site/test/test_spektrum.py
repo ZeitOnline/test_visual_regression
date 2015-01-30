@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-import zeit.web.site.spektrum
 import pkg_resources
 import lxml.etree
+
+import zeit.web.site.spektrum
+
 
 def test_spektrum_teaser_object_should_have_expected_attributes():
     url = pkg_resources.resource_filename(
@@ -23,6 +25,7 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
     assert teaser._feed_image == 'http://www.spektrum.de/fm/912/' + (
         'thumbnails/85885_web.jpg.1616471.jpg')
 
+
 def test_spektrum_teaser_object_with_empty_values_should_not_break():
     xml_str = """
         <item>
@@ -38,9 +41,8 @@ def test_spektrum_teaser_object_with_empty_values_should_not_break():
     assert teaser.teaserTitle == ''
     assert teaser.teaserText == ''
 
-def test_spektrum_title_should_be_colon_splitted():
-    import zeit.web.site.spektrum
 
+def test_spektrum_title_should_be_colon_splitted():
     xml_str = """
         <item>
         	<title><![CDATA[]]></title>
@@ -50,9 +52,7 @@ def test_spektrum_title_should_be_colon_splitted():
 
     teaser = zeit.web.site.spektrum.Teaser(lxml.etree.fromstring(xml_str))
     assert teaser._split('supertitle: title')  == ('supertitle', 'title')
-
     assert teaser._split('') == ('', '')
-    assert teaser._split('title') == ('title', '')
-
-
-
+    assert teaser._split('title') == ('', 'title')
+    assert teaser._split('supertitle:') == ('supertitle', '')
+    assert teaser._split(':title') == ('', 'title')
