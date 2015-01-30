@@ -4,6 +4,8 @@ import zope.component
 import requests
 import lxml.etree
 
+import zeit.content.image.interfaces
+
 import zeit.web.core.interfaces
 
 
@@ -20,7 +22,7 @@ class HPFeed(object):
         for item in iterator:
             yield Teaser(item)
 
-    def _fetch_feed():
+    def _fetch_feed(self):
         zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         feed_url = zwcs.get('spektrum_hp_feed')
         resp = requests.get(feed_url)
@@ -31,9 +33,11 @@ class Teaser(object):
 
     _map = {'title': 'teaserTitle',
             'description': 'teaserText',
-            'link': 'url'}
+            'link': 'url',
+            'guid': 'guid'}
 
     def __init__(self, item):
+        self._feed_image = None
         for value in self._map.values():
             setattr(self, value, '')
         self.teaserSupertitle = ''
@@ -47,5 +51,9 @@ class Teaser(object):
     def _split(self, title):
         if ':' in title:
             return (title[:title.find(":")].strip(),
-                    title[title.find(":")+1:].strip())
+                    title[title.find(":") + 1:].strip())
         return ('', title)
+
+    @property
+    def image(self):
+        return zeit.web.core.interfaces.ITeaserImage(self)
