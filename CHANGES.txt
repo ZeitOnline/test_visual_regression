@@ -1,12 +1,26 @@
 Change log for zeit.web
 =======================
 
-1.10.5 (unreleased)
+1.10.7 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.10.6 (2015-01-28)
+-------------------
+
+- FIX: Release 1.10.5 is messed up because of a mergin error
+
+
+1.10.5 (2015-01-28)
 -------------------
 
 - ZON-1349: Switch prinbox by content toggle
 
 - FIX: Stop render breakdown if article block is not found
+
+- HOTFIX: Minor text- and layout changes to /beta route
 
 
 1.10.4 (2015-01-28)
