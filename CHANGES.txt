@@ -4,7 +4,9 @@ Change log for zeit.web
 1.10.7 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- FIX: Repair block skipping via no_block that produces white pages
+
+- FIX: Punk imagegroup to image conversion into image block class
 
 
 1.10.6 (2015-01-28)
