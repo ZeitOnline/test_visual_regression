@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-#import zope.component
-#import zeit.web.core.interfaces
+import zope.component
 import requests
 import lxml.etree
+
+import zeit.web.core.interfaces
 
 class HPFeed(object):
 
     def __init__(self):
-        # zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        # feed_url = zwcs.get('spektrum_hp_feed')
-        resp = requests.get('http://www.spektrum.de/alias/rss/zeit-kooperationsfeed/1329411')
-        self.xml = lxml.etree.fromstring(resp.content)
+        self.xml = self._fetch_feed()
 
     def __iter__(self):
         """Compile a list of teasers from an RSS feed.
@@ -23,20 +21,32 @@ class HPFeed(object):
         for item in iterator:
             yield Teaser(item)
 
+    def _fetch_feed():
+        zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        feed_url = zwcs.get('spektrum_hp_feed')
+        resp = requests.get(feed_url)
+        return lxml.etree.fromstring(resp.content)
+
 
 class Teaser(object):
 
     _map = {'title': 'teaserTitle',
            'description': 'teaserText',
-           'link': 'url',
-           'enclosure': 'image'}
+           'link': 'url'}
 
     def __init__(self, item):
+        for value in self._map.values():
+            setattr(self, value, '')
+        self.teaserSupertitle = ''
         for value in item:
-            if value.tag in self._map.keys():
-                setattr(self, self._map[value.tag], value.text)
+            if value.tag in self._map.keys() and value.text:
+                setattr(self, self._map[value.tag], value.text.strip())
+            elif value.tag == 'enclosure' and 'url' in value.keys():
+                self._feed_image = value.get('url')
+        self.teaserSuperTitle, self.teaserTitle = self._split(self.teaserTitle)
 
-        if ':' in self.teaserTitle:
-            title = self.teaserTitle
-            self.teaserSupertitle = title[:title.find(":")]
-            self.teaserTitle = title[title.find(":")+1:]
+    def _split(self, title):
+        if ':' in title:
+            return (title[:title.find(":")].strip(),
+                title[title.find(":")+1:].strip())
+        return (title, '')
