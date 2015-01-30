@@ -37,15 +37,18 @@ class Teaser(object):
             'guid': 'guid'}
 
     def __init__(self, item):
-        self._feed_image = None
         for value in self._map.values():
             setattr(self, value, '')
+
+        self.feed_image = None
         self.teaserSupertitle = ''
+
         for value in item:
             if value.tag in self._map.keys() and value.text:
                 setattr(self, self._map[value.tag], value.text.strip())
             elif value.tag == 'enclosure' and 'url' in value.keys():
-                self._feed_image = value.get('url')
+                self.feed_image = value.get('url')
+
         self.teaserSupertitle, self.teaserTitle = self._split(self.teaserTitle)
 
     def _split(self, title):
@@ -56,4 +59,7 @@ class Teaser(object):
 
     @property
     def image(self):
-        return zeit.web.core.interfaces.ITeaserImage(self)
+        try:
+            return zeit.web.core.interfaces.ITeaserImage(self)
+        except TypeError:
+            return
