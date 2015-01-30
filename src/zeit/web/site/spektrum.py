@@ -43,7 +43,7 @@ class Teaser(object):
                 setattr(self, self._map[value.tag], value.text.strip())
             elif value.tag == 'enclosure' and 'url' in value.keys():
                 self._feed_image = value.get('url')
-        self.teaserSuperTitle, self.teaserTitle = self._split(self.teaserTitle)
+        self.teaserSupertitle, self.teaserTitle = self._split(self.teaserTitle)
 
     def _split(self, title):
         if ':' in title:
