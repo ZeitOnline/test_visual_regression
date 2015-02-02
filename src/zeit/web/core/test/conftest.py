@@ -51,7 +51,7 @@ settings = {
 
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
-    'spektrum_hp_feed': 'http://localhost:6551/static/feed.xml',
+    'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -243,7 +243,7 @@ def mockspektrum(request):
 
 
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6551
+    server.port = 6552
     server.wsgi_app = app
     server.setUp()
     server.url = 'http://%s' % server['http_address']
