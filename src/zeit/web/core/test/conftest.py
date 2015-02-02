@@ -193,17 +193,6 @@ def agatho():
 
 
 @pytest.fixture(scope='session')
-def testserver(application, request):
-    server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6543
-    server.wsgi_app = application
-    server.setUp()
-    server.url = 'http://%s' % server['http_address']
-    request.addfinalizer(server.tearDown)
-    return server
-
-
-@pytest.fixture(scope='session')
 def debug_testserver(debug_application, request):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6547
@@ -244,7 +233,7 @@ def mockcommunity(request):
     return mockcommunity_factory(request)
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='session')
 def mockspektrum(request):
 
     from pyramid.config import Configurator
@@ -254,6 +243,17 @@ def mockspektrum(request):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6551
     server.wsgi_app = app
+    server.setUp()
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
+    return server
+
+
+@pytest.fixture(scope='session')
+def testserver(application, request, mockspektrum):
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6543
+    server.wsgi_app = application
     server.setUp()
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)

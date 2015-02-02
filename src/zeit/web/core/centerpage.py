@@ -229,7 +229,7 @@ class SpektrumImage(zeit.web.core.block.BaseImage):
 
         if context.feed_image is None:
             raise TypeError('Could not adpat', context,
-                            zeit.content.image.interfaces.ILocalImage)
+                            zeit.web.core.interfaces.ITeaserImage)
 
         self.image = zeit.content.image.image.LocalImage()
 
