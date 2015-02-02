@@ -51,6 +51,7 @@ settings = {
 
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
+    'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -192,17 +193,6 @@ def agatho():
 
 
 @pytest.fixture(scope='session')
-def testserver(application, request):
-    server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6543
-    server.wsgi_app = application
-    server.setUp()
-    server.url = 'http://%s' % server['http_address']
-    request.addfinalizer(server.tearDown)
-    return server
-
-
-@pytest.fixture(scope='session')
 def debug_testserver(debug_application, request):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6547
@@ -241,6 +231,33 @@ def mockcommunity_factory(request):
 @pytest.fixture(scope='function')
 def mockcommunity(request):
     return mockcommunity_factory(request)
+
+
+@pytest.fixture(scope='session')
+def mockspektrum(request):
+
+    from pyramid.config import Configurator
+    config = Configurator()
+    config.add_static_view('static', 'zeit.web.core:data/spektrum/')
+    app = config.make_wsgi_app()
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6552
+    server.wsgi_app = app
+    server.setUp()
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
+    return server
+
+
+@pytest.fixture(scope='session')
+def testserver(application, request, mockspektrum):
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6543
+    server.wsgi_app = application
+    server.setUp()
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
+    return server
 
 
 @pytest.fixture(scope='session', params=[503])

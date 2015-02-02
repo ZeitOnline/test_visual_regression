@@ -137,6 +137,8 @@ class Application(object):
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
         config.add_route('health_check', '/health_check')
+        config.add_route('spektrum-kooperation', '/spektrum-kooperation')
+        config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
         config.add_static_view(name='img', path='zeit.web.static:img/')
