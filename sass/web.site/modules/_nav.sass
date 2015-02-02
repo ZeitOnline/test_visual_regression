@@ -56,6 +56,7 @@ $zon-search-square-size: remify(35px)
 %main_nav__topics
 	margin: 0 0 $petite 0
 	font-size: $font-11px
+	line-height: 1rem
 	text-transform: uppercase
 	letter-spacing: 1px
 	color: $zon_dark_grey
@@ -427,10 +428,11 @@ $zon-search-square-size: remify(35px)
 		+border-radius(3px)
 		+link-colors($white)
 		background-color: $zon_dark_grey
+		+transition(background-color .15s linear)
 		padding: 0 $fine
 		&:hover
 			+box-shadow(none)
-			background-color: $zon_light_grey
+			background-color: $zon_grey
 
 
 
