@@ -1,11 +1,27 @@
 # -*- coding: utf-8 -*-
+import mock
 import pkg_resources
+import pytest
 
 import lxml.etree
 import requests
 
 import zeit.web.site.spektrum
+import zeit.web.site.view_centerpage
 import zeit.web.core.centerpage
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
+screen_sizes = ((320, 480, True), (520, 960, True),
+                (768, 1024, False), (980, 1024, False))
+
+
+@pytest.fixture(scope='session', params=screen_sizes)
+def screen_size(request):
+    return request.param
 
 
 def test_spektrum_teaser_object_should_have_expected_attributes():
@@ -82,3 +98,45 @@ def test_spektrum_image_should_have_expected_attributes(application):
     assert image.uniqueId.endswith(path)
     assert image.image.size == 18805
     assert image.image.getImageSize() == (180, 120)
+
+
+def test_spektrum_hp_feed_returns_values(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    feed = view.spektrum_hp_feed
+    assert isinstance(feed, zeit.web.site.spektrum.HPFeed)
+
+
+def test_spektrum_parquet_should_render_special_parquet_link(
+        testbrowser, testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    browser = testbrowser(
+        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    teasers = browser.cssselect(
+        '.parquet-meta__more.parquet-meta__more--spektrum')
+    actual_amount = len(teasers)
+    assert actual_amount == 1, (
+        'Parquet row does not display the right amount of spektrum.')
+    text = teasers[0].text
+    assert "Aktuelles aus der Welt von Wissenschaft und Forschung:" in text, (
+        'Spektrum link has not the correct text')
+
+
+def test_sprektrum_parquet_should_display_meta_more(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
+
+    more_link = driver.find_element_by_css_selector(
+        '.parquet-meta__more--spektrum')
+
+    driver.set_window_size(520, 960)
+    assert not more_link.is_displayed(), (
+        'Parquet more-link should not be displayed on mobile.')
+
+    driver.set_window_size(980, 1024)
+    assert more_link.is_displayed(), (
+        'Parquet more-link must be displayed on desktop.')
