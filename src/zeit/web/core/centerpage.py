@@ -222,7 +222,6 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.uniqueId = image.uniqueId
 
 
-<<<<<<< HEAD
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
@@ -250,7 +249,8 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             image.alt = (video.title or '').strip('\n')
             image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
             self[file_name] = image
-=======
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
 @grokcore.component.adapter(zeit.web.site.spektrum.Teaser)
 class SpektrumImage(zeit.web.core.block.BaseImage):
@@ -278,7 +278,6 @@ class SpektrumImage(zeit.web.core.block.BaseImage):
         self.alt = context.teaserTitle
         self.uniqueId = 'http://xml.zeit.de/spektrum-image{}'.format(
             context.feed_image.replace('http://www.spektrum.de', ''))
->>>>>>> master
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
