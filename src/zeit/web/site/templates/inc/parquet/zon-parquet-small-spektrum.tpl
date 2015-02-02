@@ -1,5 +1,6 @@
 <article class="teaser-parquet-small " data-block-type="teaser">
     {% if esi_toggle %}
+        {% if teaser.image %}
         <figure class="teaser-parquet-small__media scaled-image">
             <div class="teaser-parquet-small__media-container">
                 <a class="teaser-parquet-small__media-link" title="{{teaser.teaserTitle}}" href="{{teaser.url}}">
@@ -7,6 +8,7 @@
                 </a>
             </div>
         </figure>
+        {% endif %}
     {% else %}
         {% set teaser_block = row %}
         {% set teaser_block_layout = 'teaser-parquet-small' %}
