@@ -4,7 +4,6 @@ import pkg_resources
 import pytest
 
 import lxml.etree
-import requests
 
 import zeit.web.site.spektrum
 import zeit.web.site.view_centerpage
