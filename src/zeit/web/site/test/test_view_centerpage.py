@@ -551,4 +551,4 @@ def test_spektrum_hp_feed_returns_values(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     feed = view.spektrum_hp_feed
-    assert isinstance(feed.get('row'), zeit.web.site.spektrum.HPFeed)
+    assert isinstance(feed, zeit.web.site.spektrum.HPFeed)

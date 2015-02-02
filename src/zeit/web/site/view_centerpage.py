@@ -186,8 +186,6 @@ class Centerpage(
     @zeit.web.reify
     def spektrum_hp_feed(self):
         try:
-            return {
-                'row': zeit.web.site.spektrum.HPFeed()
-            }
+            return zeit.web.site.spektrum.HPFeed()
         except (TypeError, AttributeError):
             return
