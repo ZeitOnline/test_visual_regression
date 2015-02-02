@@ -249,6 +249,7 @@ $zon-search-square-size: remify(35px)
 		text-align: right
 		margin: $petite 0 0 0
 		line-height: $zon-search-square-size
+		overflow: hidden
 	+respond-min($break-desktop-min)
 		width: $zon-search-bar-width
 
@@ -257,7 +258,7 @@ $zon-search-square-size: remify(35px)
 		display: none
 
 .search__input
-	display: inline-block
+	// display: inline-block
 	width: 70%
 	height: $zon-search-square-size
 	background-color: $white
@@ -274,17 +275,20 @@ $zon-search-square-size: remify(35px)
 		outline-width: 0
 		color: $zon_dark_grey
 	+respond-min($break-tablet-min)
-		display: none
-		transition: transform 1s
-		transform: translateX($zon-search-width)
 		width: $zon-search-width
-	+respond-min($break-desktop-min)
-		transform: translateX(0)
-		display: inline-block
+	+respond-min-max($break-tablet-min, $break-desktop-min)
+		visibility: hidden
+		transition: transform .2s ease-out, visibility .2s
+		transform: translateX($zon-search-width)
 
 .search__input--visible
-	display: inline-block
+	visibility: visible
 	transform: translateX(0)
+	& + .search__button
+		border-top-left-radius: 0
+		border-bottom-left-radius: 0
+		border-top-right-radius: $micro
+		border-bottom-right-radius: $micro
 
 .search__button
 	@extend %main_nav_button
@@ -293,18 +297,10 @@ $zon-search-square-size: remify(35px)
 	border-bottom-right-radius: $micro
 	+respond-min($break-tablet-min)
 		border-radius: $micro
+		box-shadow: $micro 0 0 #fff
 	+respond-min($break-desktop-min)
 		border-top-left-radius: 0
 		border-bottom-left-radius: 0
-
-.search__button--round
-	border-radius: $micro
-
-.search__button--right-only
-	border-top-left-radius: 0
-	border-bottom-left-radius: 0
-	border-top-right-radius: $micro
-	border-bottom-right-radius: $micro
 
 .search__button__image
 	@extend %main_nav_icons
