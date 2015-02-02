@@ -1,7 +1,6 @@
 import urllib2
 
 import grokcore.component
-import pyramid.httpexceptions
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -239,7 +238,7 @@ class SpektrumImage(zeit.web.core.block.BaseImage):
                 fileobj = urllib2.urlopen(context.feed_image, timeout=4)
                 fh.write(fileobj.read())
         except IOError:
-            raise pyramid.httpexceptions.HTTPNotFound()
+            raise TypeError('Image was not found on spektrum server.')
 
         self.mimeType = fileobj.headers.get('Content-Type')
         self.image_pattern = 'spektrum'
