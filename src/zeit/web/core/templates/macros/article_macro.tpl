@@ -16,3 +16,4 @@
     {%- endif -%}
 {% endmacro %}
 
+{% macro no_block(obj) %}{% endmacro %}
