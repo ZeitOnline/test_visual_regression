@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.10.7 (unreleased)
--------------------
+1.11 (2015-02-02)
+-----------------
 
 - ZON-1343: Implement spektrum view, esi snippet and images
 
