@@ -261,7 +261,8 @@ default_images_sizes = {
     'newsletter-540x304': (540, 304),
     'newsletter-220x124': (220, 124),
     'brightcove-still': (580, 326),
-    'brightcove-thumbnail': (120, 67)
+    'brightcove-thumbnail': (120, 67),
+    'spektrum': (220, 124)
 }
 
 

@@ -1,5 +1,11 @@
 <div class="parquet" id="parquet">
     {% for row in view.area_parquet -%}
-        {% include "zeit.web.site:templates/inc/parquet/parquet-row.tpl" %}
+        {# spektrum hp feed sonderlocke #}
+        {% if row.type == 'cpextra' and row.cpextra == 'parquet-spektrum' %}
+            {% set row = view.spektrum_hp_feed %}
+            {% include "zeit.web.site:templates/inc/parquet/parquet-spektrum.html" %}
+        {% else %}
+            {% include "zeit.web.site:templates/inc/parquet/parquet-row.tpl" %}
+        {% endif %}
     {% endfor %}
 </div>
