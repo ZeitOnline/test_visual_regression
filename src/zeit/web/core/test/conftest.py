@@ -51,6 +51,7 @@ settings = {
 
     'community_host_timeout_secs': '10',
     'hp': 'zeit-magazin/index',
+    'spektrum_hp_feed': 'http://localhost:6551/static/feed.xml',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -241,6 +242,24 @@ def mockcommunity_factory(request):
 @pytest.fixture(scope='function')
 def mockcommunity(request):
     return mockcommunity_factory(request)
+
+
+@pytest.fixture(scope='function')
+def mockspektrum(request):
+
+    from pyramid.config import Configurator
+    config = Configurator()
+    config.add_static_view('static', 'zeit.web.core:data/spektrum/')
+    app = config.make_wsgi_app()
+
+
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.port = 6551
+    server.wsgi_app = app
+    server.setUp()
+    server.url = 'http://%s' % server['http_address']
+    request.addfinalizer(server.tearDown)
+    return server
 
 
 @pytest.fixture(scope='session', params=[503])
