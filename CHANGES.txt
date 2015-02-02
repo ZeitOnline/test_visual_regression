@@ -4,7 +4,7 @@ Change log for zeit.web
 1.11.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1270: Polishing HP CSS
 
 
 1.11.2 (2015-02-02)
