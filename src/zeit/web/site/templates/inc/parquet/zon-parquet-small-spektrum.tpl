@@ -1,19 +1,32 @@
 <article class="teaser-parquet-small " data-block-type="teaser">
-    <figure class="teaser-parquet-small__media scaled-image">
-        <div class="teaser-parquet-small__media-container">
-            {% if esi_toggle %}
+    {% if esi_toggle %}
+        <figure class="teaser-parquet-small__media scaled-image">
+            <div class="teaser-parquet-small__media-container">
                 <a class="teaser-parquet-small__media-link" title="{{teaser.teaserTitle}}" href="{{teaser.url}}">
-                    <img class="teaser-parquet-small__media-item" alt="{{teaser.teaserTitle}}" src="{{teaser.image | default_image_url}}">
+                <img class="teaser-parquet-small__media-item" alt="{{teaser.teaserTitle}}" src="{{teaser.image | default_image_url}}">
                 </a>
-            {% else %}
-                {% set teaser_block = row %}
-                {% set teaser_block_layout = 'teaser-parquet-small' %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/" +
-                    teaser | auto_select_asset | block_type +
-                    "_zon-thumbnail.tpl" ignore missing with context %}
-            {% endif %}
-        </div>
-    </figure>
+            </div>
+        </figure>
+    {% else %}
+        {% set teaser_block = row %}
+        {% set teaser_block_layout = 'teaser-parquet-small' %}
+        {% set image = teaser.image %}
+        {% if image %}
+        <figure class="teaser-parquet-small__media scaled-image">
+            <!--[if gt IE 8]><!-->
+            <noscript data-src="{{ image | default_image_url }}">
+            <!--<![endif]-->
+                <div class="teaser-parquet-small__media-container">
+                    <a class="teaser-parquet-small__media-link" title="{{teaser.teaserTitle}}" href="{{teaser.url}}">
+                        <img class="teaser-parquet-small__media-item" alt="{{ image.attr_title }}" src="{{ image | default_image_url }}" data-ratio="{{ image.ratio }}">
+                    </a>
+                </div>
+            <!--[if gt IE 8]><!-->
+            </noscript>
+            <!--<![endif]-->
+        </figure>
+        {% endif %}
+    {% endif %}
     <div class="teaser-parquet-small__container ">
         <h2 class="teaser-parquet-small__heading">
             <a class="teaser-parquet-small__combined-link" title="{{teaser.teaserSupertitle}} - {{teaser.teaserTitle}}" href="{{teaser.url}}">
