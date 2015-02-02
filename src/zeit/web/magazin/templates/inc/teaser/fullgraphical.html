@@ -12,7 +12,7 @@ Parameters:
 
 {%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context -%}
 
-{%- set image = get_repository_image(teaser_block.image) -%}
+{%- set image = teaser_block.image | get_repository_image -%}
 
 <div class='teaser-fullgraphical'>
     <a href="{{ teaser_block.referenced_object | create_url }}">
