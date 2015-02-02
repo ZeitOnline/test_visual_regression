@@ -2,7 +2,6 @@
 import pkg_resources
 
 import lxml.etree
-import requests
 
 import zeit.web.site.spektrum
 import zeit.web.core.centerpage

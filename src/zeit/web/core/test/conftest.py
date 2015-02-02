@@ -251,8 +251,6 @@ def mockspektrum(request):
     config = Configurator()
     config.add_static_view('static', 'zeit.web.core:data/spektrum/')
     app = config.make_wsgi_app()
-
-
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6551
     server.wsgi_app = app

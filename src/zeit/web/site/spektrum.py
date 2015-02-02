@@ -12,8 +12,7 @@ import zeit.web.core.interfaces
 class HPFeed(object):
 
     def __init__(self):
-        """Generate a list of teasers from an RSS feed.
-        """
+        """Generate a list of teasers from an RSS feed."""
 
         self.xml = self._fetch_feed()
 
@@ -53,8 +52,8 @@ class Teaser(object):
 
     def _split(self, title):
         if ':' in title:
-            return (title[:title.find(":")].strip(),
-                    title[title.find(":") + 1:].strip())
+            return (title[:title.find(':')].strip(),
+                    title[title.find(':') + 1:].strip())
         return ('', title)
 
     @property
