@@ -498,11 +498,6 @@
     {% endif %}
 {%- endmacro %}
 
-<!-- We use this, if for some reason or block is None -->
-{% macro no_block(obj) %}
-{% endmacro %}
-
-
 {% macro photocluster(obj) %}
 <div class="photocluster__wrap">
     <div class="photocluster">
