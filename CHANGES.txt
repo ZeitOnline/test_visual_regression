@@ -1,8 +1,26 @@
 Change log for zeit.web
 =======================
 
-1.12 (unreleased)
------------------
+1.11.4 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.11.3 (2015-02-02)
+-------------------
+
+- Nothing changed yet.
+
+
+1.11.2 (2015-02-02)
+-------------------
+
+- Nothing changed yet.
+
+
+1.11.1 (2015-02-02)
+-------------------
 
 - ZON-1332: Initiate comment section
 

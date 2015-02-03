@@ -33,6 +33,7 @@ def spektrum_hp_feed(request):
     # add CORS header to allow ESI JS drop-in
     request.response.headers.add(
         'Access-Control-Allow-Origin', '*')
+    request.response.cache_expires(60)
     return {
         'esi_toggle': True,
         'row': zeit.web.site.spektrum.HPFeed()
