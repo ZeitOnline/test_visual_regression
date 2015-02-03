@@ -70,13 +70,15 @@ class Centerpage(
             try:
                 return b.layout.id in ('parquet-large', 'parquet-regular')
             except AttributeError:
-                return
+                try:
+                    return b.cpextra in ('parquet-spektrum')
+                except AttributeError:
+                    return
 
         teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
         teaser_bar_blocks = sum([bar.values() for bar in teaser_bars], [])
-        auto_pilot_teaser_blocks = filter(valid_blocks, teaser_bar_blocks)
-
-        return auto_pilot_teaser_blocks
+        parquet_teaser_blocks = filter(valid_blocks, teaser_bar_blocks)
+        return parquet_teaser_blocks
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -174,3 +176,10 @@ class Centerpage(
     @zeit.web.reify
     def topiclinks(self):
         return zeit.web.core.interfaces.ITopicLink(self.context)
+
+    @zeit.web.reify
+    def spektrum_hp_feed(self):
+        try:
+            return zeit.web.site.spektrum.HPFeed()
+        except (TypeError, AttributeError):
+            return

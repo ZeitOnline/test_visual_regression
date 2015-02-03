@@ -478,7 +478,7 @@ def test_parquet_should_have_rows(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert len(view.area_parquet) == 2, (
+    assert len(view.area_parquet) == 3, (
         'View has invald number of parquet rows.')
 
 
