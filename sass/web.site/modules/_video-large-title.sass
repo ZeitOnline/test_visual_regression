@@ -1,5 +1,25 @@
 .video-large-title
-	left: $page-padding
+	bottom: $video-title-padding
+	left: $video-title-padding
+	margin: 0 $video-title-padding 1em 0
 	position: absolute
+	z-index: 2
+	+respond-min($break-phablet-min)
+		bottom: remify(42px)
+	+respond-min($break-desktop-min)
+		bottom: auto
+		left: auto
+		position: relative
 	&__kicker
+		display: block
+		font-size: remify(14px)
+		font-weight: normal
+		-webkit-font-smoothing: antialiased
 	&__title
+		display: block
+		font-size: remify(16px)
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-phablet-min)
+			font-size: remify(20px)
+		+respond-min($break-tablet-min)
+			font-size: remify(22px)
