@@ -32,6 +32,23 @@
 		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
 		z-index: 1
 
+=teaser-image-dark-overlay($color: $black)
+	background-color: $color
+	position: relative
+	&:after
+		bottom: 0
+		content: ''
+		left: 0
+		min-height: 100%
+		min-width: 100%
+		position: absolute
+		right: 0
+		top: 0
+		z-index: 1
+		+background-image(linear-gradient(to top, rgba($color, 1) 0%, rgba($color, 0.2) 35%, rgba($color, 0)))
+		+respond-min($break-tablet-min)
+			+background-image(linear-gradient(30deg, rgba($color, 0.6) 0%, rgba($color, 0.1) 100%))
+
 =no-user-select
 	-webkit-touch-callout: none
 	-webkit-user-select: none
