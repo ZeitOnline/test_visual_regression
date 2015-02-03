@@ -1,24 +1,25 @@
 .video-text-playbutton
 	bottom: $video-title-padding
-	display: inline-block
+	color: #777
 	font-size: remify(14px)
 	left: $video-title-padding
 	position: absolute
 	z-index: 2
-	&__icon
-		height: remify(10px)
-		margin-right: remify(3px)
-		width: remify(10px)
-		+image_text_replacement(inline-block, text-top)
-	&__time
+	&:before
+		content: '\25B6' // ▶ = Black right-pointing triangle
+		font-size: 90%
+		padding: 0 remify(4px) 0 0
+		vertical-align: middle
+	&__text
+		display: none
+		font-weight: bold
+		letter-spacing: 0.05em
+		text-transform: uppercase
 		+respond-min($break-phablet-min)
-			&:before
-				content: 'Video ansehen'
-				font-weight: bold
-				letter-spacing: 0.05em
-				padding: 0 remify(4px) 0 0
-				text-transform: uppercase
+			display: inline
+			padding: 0 remify(4px) 0 0
 	&--block
 		+respond-min($break-phablet-min)
+			color: $white
 			+zon-button-dark
 			margin: 0
