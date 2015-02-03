@@ -3,7 +3,7 @@
         {% if teaser.image %}
         <figure class="teaser-parquet-small__media scaled-image">
             <div class="teaser-parquet-small__media-container">
-                <a class="teaser-parquet-small__media-link" title="{{ teaser.teaserTitle }}" href="{{ teaser.url }}">
+                <a {% if track_slug %}id="{{ track_slug }}.3.{{ loop.cycle('a', 'b', 'c') }}.image./index"{% endif %} class="teaser-parquet-small__media-link" title="{{ teaser.teaserTitle }}" href="{{ teaser.url }}">
                 <img class="teaser-parquet-small__media-item" alt="{{ teaser.teaserTitle }}" src="{{ teaser.image | default_image_url }}">
                 </a>
             </div>
@@ -31,7 +31,7 @@
     {% endif %}
     <div class="teaser-parquet-small__container ">
         <h2 class="teaser-parquet-small__heading">
-            <a class="teaser-parquet-small__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.url }}">
+            <a {% if track_slug %}id="{{ track_slug }}.3.{{ loop.cycle('a', 'b', 'c') }}.title./index"{% endif %} class="teaser-parquet-small__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.url }}">
                 <span class="teaser-parquet-small__kicker teaser-parquet-small__kicker--spektrum">{{ teaser.teaserSupertitle }}</span>
                 <span class="teaser-parquet-small__title">{{ teaser.teaserTitle }}</span>
             </a>
