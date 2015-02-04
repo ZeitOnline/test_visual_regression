@@ -4,6 +4,8 @@ Change log for zeit.web
 1.11.4 (unreleased)
 -------------------
 
+- BUG-79: Remove horizontal scrollbars in ZMO responsive screens
+
 - Spektrum.de in parquet: add Webtrekk click-tracking
 
 
