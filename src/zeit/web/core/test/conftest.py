@@ -55,7 +55,7 @@ settings = {
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
-    'connector_type': 'filesystem',
+    'connector_type': 'mock',
 
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
@@ -147,7 +147,7 @@ def jinja2_env():
 
 
 @pytest.fixture(scope='session')
-def application(request):
+def application_session(request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
@@ -157,6 +157,23 @@ def application(request):
         app, secret='time')
     wsgi.zeit_app = factory
     return wsgi
+
+
+@pytest.fixture
+def application(application_session, request):
+    # XXX This is a bit clumsy, but reset_connector needs to be called after
+    # each test (i.e. in 'function' scope). The many diverse fixtures make this
+    # a bit complicated... it's integrated in the most common ones now
+    # (``application`` and ``testbrowser``), but if it's needed elsewhere, it
+    # has to be integrated explicitly.
+    request.addfinalizer(reset_connector)
+    return application_session
+
+
+def reset_connector():
+    connector = zope.component.getUtility(
+        zeit.connector.interfaces.IConnector)
+    connector._reset()
 
 
 @pytest.fixture(scope='session')
@@ -250,10 +267,10 @@ def mockspektrum(request):
 
 
 @pytest.fixture(scope='session')
-def testserver(application, request, mockspektrum):
+def testserver(application_session, request, mockspektrum):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6543
-    server.wsgi_app = application
+    server.wsgi_app = application_session
     server.setUp()
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
@@ -347,6 +364,7 @@ def my_traverser(application):
 
 @pytest.fixture
 def testbrowser(request):
+    request.addfinalizer(reset_connector)
     return Browser
 
 
