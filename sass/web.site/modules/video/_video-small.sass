@@ -1,5 +1,6 @@
 .video-small
 	display: none
+	margin-bottom: $page-padding
 	+respond-min($break-phablet-min)
 		width: 48%
 		// going unBEMmish here, but hiding/displaying 
@@ -20,6 +21,8 @@
 		&:nth-child(2),
 		&:nth-child(3)
 			display: block
+		&:last-child
+			margin-bottom: 0
 	&__combined-link
 		+link
 			color: $white
