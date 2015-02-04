@@ -141,21 +141,19 @@ class Centerpage(
 
         uri = 'http://xml.zeit.de/angebote/print-box'
         content = zeit.cms.interfaces.ICMSContent(uri)
-        printbox = True
+        has_digital_ad = False
 
         if content.byline == 'mo-mi':
             uri = 'http://xml.zeit.de/angebote/angebotsbox'
-            content = zeit.cms.interfaces.ICMSContent(uri)
-            printbox = False
+            has_digital_ad = True
         else:
             uri = 'http://xml.zeit.de/angebote/print-box'
-            printbox = True
 
         content = zeit.cms.interfaces.ICMSContent(uri)
-        box = content
-        box.image = zeit.content.image.interfaces.IImages(content).image
-
-        return {'printbox': printbox, 'content': content}
+        printbox = content
+        printbox.image = zeit.content.image.interfaces.IImages(content).image
+        printbox.has_digital_ad = has_digital_ad
+        return printbox
 
     @zeit.web.reify
     def area_videobar(self):

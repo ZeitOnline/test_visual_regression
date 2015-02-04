@@ -1,6 +1,6 @@
-{% set box = view.area_printbox.content -%}
+{% set box = view.area_printbox -%}
 
-{% if view.area_printbox.printbox -%}
+{% if box.has_digital_ad == False -%}
 <aside class="print-box">
     {% set title = box.supertitle + ' - ' + box.title -%}
     <div class="print-box__heading">
