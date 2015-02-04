@@ -4,7 +4,7 @@ Change log for zeit.web
 1.11.5 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1296: At least, we have a video bar
 
 
 1.11.4 (2015-02-04)
