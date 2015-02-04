@@ -261,7 +261,8 @@ default_images_sizes = {
     'newsletter-540x304': (540, 304),
     'newsletter-220x124': (220, 124),
     'zon-printbox': (320, 234),
-    'zon-printbox-wide': (320, 148)
+    'zon-printbox-wide': (320, 148),
+    'spektrum': (220, 124)
 }
 
 

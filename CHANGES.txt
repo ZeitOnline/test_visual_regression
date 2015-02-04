@@ -1,10 +1,52 @@
 Change log for zeit.web
 =======================
 
-1.10.5 (unreleased)
+1.11.4 (unreleased)
 -------------------
 
 - Nothing changed yet.
+
+
+1.11.3 (2015-02-02)
+-------------------
+
+- Nothing changed yet.
+
+
+1.11.2 (2015-02-02)
+-------------------
+
+- Nothing changed yet.
+
+
+1.11.1 (2015-02-02)
+-------------------
+
+- Nothing changed yet.
+
+
+1.11 (2015-02-02)
+-----------------
+
+- ZON-1343: Implement spektrum view, esi snippet and images
+
+- FIX: Repair block skipping via no_block that produces white pages
+
+- FIX: Punk imagegroup to image conversion into image block class
+
+
+1.10.6 (2015-01-28)
+-------------------
+
+- FIX: Release 1.10.5 is messed up because of a mergin error
+
+
+1.10.5 (2015-01-28)
+-------------------
+
+- FIX: Stop render breakdown if article block is not found
+
+- HOTFIX: Minor text- and layout changes to /beta route
 
 
 1.10.4 (2015-01-28)

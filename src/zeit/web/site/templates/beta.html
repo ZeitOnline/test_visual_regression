@@ -8,7 +8,7 @@
             <img class="beta-teaser__image" alt="ZEIT ONLINE Beta Teaser" src="{{ view.beta_teaser_img }}">
             {% endif %}
             {% if view.beta_user == True %}
-            <span class="beta-teaser__kicker">Public Beta</span>
+            <span class="beta-teaser__kicker">Closed Beta</span>
             <span class="beta-teaser__title">ZEIT&nbsp;ONLINE Beta</span>
             <p class="beta-teaser__prose">
                 Vielen Dank, dass Sie die Beta-Version von ZEIT&nbsp;ONLINE testen.
@@ -23,7 +23,7 @@
                 <input id="beta-toggle-submit" class="beta-teaser__button" type="submit" value="Speichern">
             </form>
             {% elif view.community_user.uid != "0" %}
-            <span class="beta-teaser__kicker">Public Beta</span>
+            <span class="beta-teaser__kicker">Closed Beta</span>
             <span class="beta-teaser__title">Beta-Tester von ZEIT&nbsp;ONLINE werden</span>
             <p class="beta-teaser__prose">
                 Wir entwickeln die neue Version von ZEIT&nbsp;ONLINE gemeinsam mit unseren
@@ -37,7 +37,7 @@
                 senden</a>
             </div>
             {% else %}
-            <span class="beta-teaser__kicker">Public Beta</span>
+            <span class="beta-teaser__kicker">Closed Beta</span>
             <span class="beta-teaser__title">Werden Sie Beta-Tester von ZEIT&nbsp;ONLINE</span>
             <p class="beta-teaser__prose">
                 Wir entwickeln die neue Version von ZEIT&nbsp;ONLINE gemeinsam mit unseren
@@ -55,8 +55,8 @@
                 hier registrieren.
             </p>
             <div class="beta-teaser__cta">
-                <a class="beta-teaser__button beta-teaser__button--inline" href="{{ view.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
-                <a class="beta-teaser__button beta-teaser__button--inline" href="{{ view.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Zur Registrierung</a>
+                <a class="beta-teaser__button" href="{{ view.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
+                <a class="beta-teaser__button" href="{{ view.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Zur Registrierung</a>
             </div>
             {% endif %}
         </div>

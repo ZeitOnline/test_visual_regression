@@ -17,8 +17,10 @@ def app_info(request, dummy_request):
 
     username = request.keywords['user'].args[0]
     with patch('pyramid.security.authenticated_userid') as mocked_user_info:
-        from zeit.web.core.data import MOCK_USER_DATA
-        userinfo = MOCK_USER_DATA.get(username)
+        userinfo = {'uid': '457322',
+                    'name': 'test-user',
+                    'mail': 'test-user@example.com'
+                    }
         dummy_request.cookies['drupal-userid'] = userinfo['uid']
         dummy_request.session['zmo-user'] = userinfo
         mocked_user_info.return_value = userinfo['uid']
