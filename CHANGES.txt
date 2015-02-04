@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.11.4 (unreleased)
+1.11.5 (unreleased)
 -------------------
 
 - ZON-1349: Switch prinbox by content toggle
+
+
+1.11.4 (2015-02-04)
+-------------------
+
+- Spektrum.de in parquet: add Webtrekk click-tracking
 
 
 1.11.3 (2015-02-02)
