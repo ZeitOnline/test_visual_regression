@@ -360,21 +360,6 @@ def health_check(request):
     return pyramid.response.Response('OK', 200)
 
 
-class service_unavailable(object):
-    def __init__(self, context, request):
-        log.exception('%s: %s at %s' % (context.__class__.__name__,
-                      context.message, request.path))
-
-    def __call__(self):
-        body = 'Status 503: Dokument zurzeit nicht verfügbar.'
-        try:
-            body = requests.get('http://phpscripts.zeit.de/503.html',
-                                timeout=4.0).text
-        except requests.exceptions.RequestException:
-            pass
-        return pyramid.response.Response(body, 503)
-
-
 @pyramid.view.notfound_view_config(request_method='GET')
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
