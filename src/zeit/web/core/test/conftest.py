@@ -4,7 +4,6 @@ import os.path
 import pkg_resources
 import urllib
 import urllib2
-import wsgiref.util
 
 import cssselect
 import gocept.httpserverlayer.wsgi
