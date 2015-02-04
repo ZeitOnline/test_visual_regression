@@ -33,7 +33,6 @@ from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
 import zeit.web.core.interfaces
-import zeit.web.core.appinfo
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
