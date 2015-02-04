@@ -125,7 +125,6 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
-        self.config.include('cornice')
 
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
@@ -179,8 +178,8 @@ class Application(object):
         config.set_authorization_policy(
             pyramid.authorization.ACLAuthorizationPolicy())
 
-        config.add_request_method(zeit.web.core.appinfo.assemble_app_info,
-                                  'app_info', reify=True)
+        config.add_request_method(pyramid.security.authenticated_userid,
+                                  'authenticated_userid', reify=True)
 
         return config
 

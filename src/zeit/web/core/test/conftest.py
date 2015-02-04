@@ -9,7 +9,6 @@ import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.etree
 import lxml.html
-
 import plone.testing.zca
 import pyramid.testing
 import pytest
@@ -23,6 +22,7 @@ import zope.testbrowser.browser
 import zeit.content.image.interfaces
 
 import zeit.web.core
+import zeit.web.core.comments
 import zeit.web.core.application
 
 
@@ -187,8 +187,8 @@ def dummy_request(request, config):
 
 @pytest.fixture
 def agatho():
-    from zeit.web.core.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+    return zeit.web.core.comments.Agatho(
+        agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
 @pytest.fixture(scope='session')
