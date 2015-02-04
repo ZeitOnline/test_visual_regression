@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1332: Initiate comment section for ZON articles
 
+- BUG-76: Remove img sizing in ad places
+
 
 1.11.4 (2015-02-04)
 -------------------
