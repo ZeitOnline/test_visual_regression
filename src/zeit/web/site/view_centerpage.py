@@ -144,15 +144,14 @@ class Centerpage(
         has_digital_ad = False
 
         if content.byline == 'mo-mi':
+            # Rewrite content with digital ad box
             uri = 'http://xml.zeit.de/angebote/angebotsbox'
+            content = zeit.cms.interfaces.ICMSContent(uri)
             has_digital_ad = True
-        else:
-            uri = 'http://xml.zeit.de/angebote/print-box'
 
-        content = zeit.cms.interfaces.ICMSContent(uri)
         printbox = content
-        printbox.image = zeit.content.image.interfaces.IImages(content).image
         printbox.has_digital_ad = has_digital_ad
+        printbox.image = zeit.content.image.interfaces.IImages(content).image
         return printbox
 
     @zeit.web.reify
