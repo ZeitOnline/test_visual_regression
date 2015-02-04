@@ -33,7 +33,6 @@ from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
 import zeit.web.core.interfaces
-import zeit.web.core.appinfo
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
@@ -125,7 +124,6 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
-        self.config.include('cornice')
 
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
@@ -183,8 +181,8 @@ class Application(object):
         config.set_authorization_policy(
             pyramid.authorization.ACLAuthorizationPolicy())
 
-        config.add_request_method(zeit.web.core.appinfo.assemble_app_info,
-                                  'app_info', reify=True)
+        config.add_request_method(pyramid.security.authenticated_userid,
+                                  'authenticated_userid', reify=True)
 
         return config
 
@@ -255,7 +253,7 @@ class Application(object):
                 zeit.cms.repository.repository.Repository(),
                 zeit.cms.repository.interfaces.IRepository)
         typ = self.settings['connector_type']
-        allowed = ('real', 'dav', 'filesystem')
+        allowed = ('real', 'dav', 'filesystem', 'mock')
         if typ not in allowed:
             raise ValueError(
                 'Invalid setting connector_type=%s, allowed are {%s}'

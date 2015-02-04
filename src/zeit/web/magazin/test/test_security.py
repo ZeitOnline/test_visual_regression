@@ -16,16 +16,16 @@ def test_cookieless_request_returns_nothing(policy, dummy_request):
 
 
 def test_cookieless_request_clears_session(policy, dummy_request):
-    dummy_request.session['zmo-user'] = dict(uid='bar')
+    dummy_request.session['user'] = dict(uid='bar')
     policy.authenticated_userid(dummy_request)
-    assert 'zmo-user' not in dummy_request.session
+    assert 'user' not in dummy_request.session
 
 
 def test_session_cache_has_precedence(policy, dummy_request):
     dummy_request.cookies['drupal-userid'] = 23
-    dummy_request.session['zmo-user'] = dict(uid=23, name='s3crit')
+    dummy_request.session['user'] = dict(uid=23, name='s3crit')
     assert policy.authenticated_userid(dummy_request) == 23
-    assert dummy_request.session['zmo-user']['name'] == 's3crit'
+    assert dummy_request.session['user']['name'] == 's3crit'
 
 
 def test_session_cache_cleared_when_id_changes(
@@ -42,11 +42,11 @@ def test_session_cache_cleared_when_id_changes(
     mockcommunity_factory(user_xml)
     dummy_request.cookies['drupal-userid'] = 23
     # Session still contains old user id and sensitive information
-    dummy_request.session['zmo-user'] = dict(uid=42, name='s3crit')
+    dummy_request.session['user'] = dict(uid=42, name='s3crit')
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
     assert policy.authenticated_userid(dummy_request) == '457322'
-    assert dummy_request.session['zmo-user']['name'] == 'test-user'
+    assert dummy_request.session['user']['name'] == 'test-user'
 
 
 def test_empty_cache_triggers_backend_fills_cache(
@@ -63,9 +63,9 @@ def test_empty_cache_triggers_backend_fills_cache(
     mockcommunity_factory(user_xml)
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
-    assert 'zmo-user' not in dummy_request.session
+    assert 'user' not in dummy_request.session
     assert policy.authenticated_userid(dummy_request) == '457322'
-    assert dummy_request.session['zmo-user']['name'] == 'test-user'
+    assert dummy_request.session['user']['name'] == 'test-user'
 
 
 def test_unreachable_agatho_should_not_produce_error():

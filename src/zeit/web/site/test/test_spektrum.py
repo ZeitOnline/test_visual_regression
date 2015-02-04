@@ -9,11 +9,6 @@ import zeit.web.site.spektrum
 import zeit.web.site.view_centerpage
 import zeit.web.core.centerpage
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-
 screen_sizes = ((320, 480, True), (520, 960, True),
                 (768, 1024, False), (980, 1024, False))
 
@@ -109,9 +104,6 @@ def test_spektrum_hp_feed_returns_values(application):
 
 def test_spektrum_parquet_should_render_special_parquet_link(
         testbrowser, testserver):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
     teasers = browser.cssselect(

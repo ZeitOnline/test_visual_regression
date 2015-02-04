@@ -1,28 +1,36 @@
 Change log for zeit.web
 =======================
 
-1.11.4 (unreleased)
+1.11.5 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- FIX: Get rid of cornice and app_info overcomplications
+
+- FIX: BUG-76
+
+
+1.11.4 (2015-02-04)
+-------------------
+
+- FIX: Spektrum.de in parquet: add Webtrekk click-tracking
 
 
 1.11.3 (2015-02-02)
 -------------------
 
-- Nothing changed yet.
+- HOTFIX: Repair Spektrum.de parquet links
 
 
 1.11.2 (2015-02-02)
 -------------------
 
-- Nothing changed yet.
+- HOTFIX: Set caching header for spektrum ESI
 
 
 1.11.1 (2015-02-02)
 -------------------
 
-- Nothing changed yet.
+- HOTFIX: Parquet Spektrum.de remove Hirnforschung
 
 
 1.11 (2015-02-02)
