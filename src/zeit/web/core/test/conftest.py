@@ -40,7 +40,7 @@ settings = {
     'caching_time_centerpage': '20',
     'caching_time_gallery': '40',
     'community_host': 'http://localhost:6551/',
-    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+    'agatho_host': u'file://%s' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
@@ -208,12 +208,9 @@ def mockcommunity_factory(request):
         def mock_app(env, start_response):
             resp = response  # Need to copy response to local scope.
             if resp is None:
-                resp = wsgiref.util.request_uri(env, include_query=0)
-                if 0:
-                    resp = urllib2.urlopen('file://{}/'.format(
-                        pkg_resources.resource_filename('zeit.web.core',
-                                                        'data/comments',
-                                                        'path'))).read()
+                resp = urllib2.urlopen('file://{}/'.format(
+                    pkg_resources.resource_filename(
+                        'zeit.web.core', 'data/comments', 'path'))).read()
             start_response('200 OK', [])
             return [resp]
 
