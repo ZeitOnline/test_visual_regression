@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import datetime
 import logging
 
-import babel.dates
 import pyramid.response
 import pyramid.view
 
@@ -51,9 +49,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and \
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id) \
-                    not in ('zon-fullwidth',)
+                return len(b) and b.layout.id and (
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id)
+                    not in ('zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
 
@@ -90,9 +88,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and \
+                return len(b) and b.layout.id and (
                     zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
-                        'zon-fullwidth',)
+                        'zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
 
@@ -137,16 +135,17 @@ class Centerpage(
 
     @zeit.web.reify
     def area_printbox(self):
-        """Return the content object for the Printbox or Angebotsbox,
-        considering weekday. Mon-Wed = Angebotsbox, Thu-Sun = Printbox
+        """Return the content object for the Printbox or Angebotsbox.
         :rtype: dict
         """
 
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        weekday = datetime.datetime.now(tz).weekday()
+        uri = 'http://xml.zeit.de/angebote/print-box'
+        content = zeit.cms.interfaces.ICMSContent(uri)
+        printbox = True
 
-        if weekday < 3:
+        if content.byline == 'mo-mi':
             uri = 'http://xml.zeit.de/angebote/angebotsbox'
+            content = zeit.cms.interfaces.ICMSContent(uri)
             printbox = False
         else:
             uri = 'http://xml.zeit.de/angebote/print-box'
