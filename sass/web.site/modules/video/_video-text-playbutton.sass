@@ -1,6 +1,7 @@
 .video-text-playbutton
 	color: lighten(#777, 20%)
 	font-size: remify(14px)
+	font-weight: 300
 	&:before
 		content: '\25B6' // ▶ = Black right-pointing triangle
 		font-size: 90%
@@ -15,6 +16,8 @@
 			+respond-min($break-phablet-min)
 				display: inline
 				padding: 0 remify(4px) 0 0
+	&__duration
+		font-weight: 300
 	&--block
 		bottom: $video-title-padding
 		left: $video-title-padding

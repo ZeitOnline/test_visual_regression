@@ -6,11 +6,15 @@
 	position: absolute
 	z-index: 2
 	&__kicker
+		color: #ccc
 		display: none
-		// font-size: remify(14px)
-		// font-weight: normal
-		// -webkit-font-smoothing: antialiased
+		font-size: remify(14px)
+		font-weight: normal
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-desktop-min)
+			display: block
 	&__title
+		color: #eee
 		display: inline
 		font-size: remify(14px)
 		-webkit-font-smoothing: antialiased
