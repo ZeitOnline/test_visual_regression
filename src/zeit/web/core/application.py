@@ -249,7 +249,7 @@ class Application(object):
                 zeit.cms.repository.repository.Repository(),
                 zeit.cms.repository.interfaces.IRepository)
         typ = self.settings['connector_type']
-        allowed = ('real', 'dav', 'filesystem')
+        allowed = ('real', 'dav', 'filesystem', 'mock')
         if typ not in allowed:
             raise ValueError(
                 'Invalid setting connector_type=%s, allowed are {%s}'

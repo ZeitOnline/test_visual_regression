@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Get rid of cornice and app_info overcomplications
 
+- FIX: BUG-76
+
 
 1.11.4 (2015-02-04)
 -------------------
