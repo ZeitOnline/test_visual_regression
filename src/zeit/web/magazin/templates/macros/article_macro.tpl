@@ -350,15 +350,15 @@
     </div>
     <section class="comments" id="js-comments">
         <div class="comments__head" id="js-comments-head">
-            {% if request.app_info.authenticated -%}
+            {% if request.authenticated_userid -%}
             <form action="{{ obj.comments.comment_post_url }}" method="POST" class="comment__form" id="js-comments-form">
                 <p>
                     <textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
                     <input type="hidden" name="nid" value="{{ obj.comments.nid }}">
                     <input type="hidden" name="pid" value="">
-                    <input type="hidden" name="uid" value="{{ request.app_info.user.uid }}">
+                    <input type="hidden" name="uid" value="{{ request.session.user.uid }}">
                 </p>
-                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}">{{ request.app_info.user.name|e }}</a></div>
+                <div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a></div>
                 <div class="comment__form__actions">
                     <input type="submit" class="button" value="Kommentieren" disabled />
                 </div>
@@ -368,8 +368,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
                 </div>
-                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url|e }}" class="button">Anmelden</a>
-                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url|e }}" class="button">Registrieren</a>
+                <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
+                <a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </div>
@@ -410,7 +410,7 @@
             </div>
         </script>
         <script type="text/template" id="js-report-comment-template">
-            {% if request.app_info.authenticated -%}
+            {% if request.authenticated_userid -%}
             <form action="{{ obj.comments.comment_report_url }}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
@@ -418,7 +418,7 @@
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">
-                    <input type="hidden" name="uid" value="{{ request.app_info.user.uid }}">
+                    <input type="hidden" name="uid" value="{{ request.session.user.uid }}">
                     <input type="hidden" name="content_id" value="<% commentId %>">
                     <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
                 </p>
@@ -428,8 +428,8 @@
                 <div class="comment__form__wrap">
                     <div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
                 </div>
-                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url|e }}" class="button">Anmelden</a>
-                <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.register }}?destination={{ request.url|e }}" class="button">Registrieren</a>
+                <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
+                <a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
             </form>
             {% endif -%}
         </script>
