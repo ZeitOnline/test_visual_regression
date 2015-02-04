@@ -55,7 +55,7 @@ settings = {
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
-    'connector_type': 'filesystem',
+    'connector_type': 'mock',
 
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
