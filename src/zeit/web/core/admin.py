@@ -14,7 +14,7 @@ def _from_localhost(context, request):
                           custom_predicates=(_from_localhost,))
 def post_comments(request):
     if request.method == 'POST':
-        user = request.session['zmo-user']
+        user = request.session['user']
         uid = user['uid']
         uniqueId = 'http://xml.zeit.de/{}'.format(request.params.get('path'))
 
