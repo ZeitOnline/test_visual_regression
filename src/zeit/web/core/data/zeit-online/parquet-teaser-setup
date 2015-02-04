@@ -54,7 +54,7 @@
             <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
             <topiclink_label_2>Bundeswehr</topiclink_label_2>
             <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
-            <topiclink_label_3>Hongkong</topiclink_label_3>
+            <topiclink_label_3>EinSehrSehrSehrLangerTopiclinkMitHongkongImTitel</topiclink_label_3>
             <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
         </topiclink>
     </topiclinks>
@@ -156,7 +156,7 @@
           </xi:include>
           <topiclinks>
             <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
-            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde Rosetta</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">RaumsondeRosettaHatEinenSehrSehrLangenenWegVorSich</topiclink>
             <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
           </topiclinks>
         </container>
