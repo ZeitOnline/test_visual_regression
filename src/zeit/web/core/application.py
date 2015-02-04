@@ -139,6 +139,10 @@ class Application(object):
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-kooperation', '/spektrum-kooperation')
         config.add_route('spektrum-image', '/spektrum-image/*path')
+
+        # Route to post comments to a communit service
+        config.add_route('post_test_comments', '/admin/test-comments')
+
         config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
         config.add_static_view(name='img', path='zeit.web.static:img/')
