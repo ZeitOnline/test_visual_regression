@@ -114,7 +114,7 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         version = pkg_resources.get_distribution('zeit.web').version
-        self.settings['zmo_version'] = version
+        self.settings['version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 
         self.config = config = pyramid.config.Configurator(
