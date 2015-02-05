@@ -33,7 +33,6 @@ from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
 import zeit.web.core.interfaces
-import zeit.web.core.appinfo
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
@@ -115,7 +114,7 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         version = pkg_resources.get_distribution('zeit.web').version
-        self.settings['zmo_version'] = version
+        self.settings['version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 
         self.config = config = pyramid.config.Configurator(
@@ -125,7 +124,6 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
-        self.config.include('cornice')
 
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
@@ -179,8 +177,8 @@ class Application(object):
         config.set_authorization_policy(
             pyramid.authorization.ACLAuthorizationPolicy())
 
-        config.add_request_method(zeit.web.core.appinfo.assemble_app_info,
-                                  'app_info', reify=True)
+        config.add_request_method(pyramid.security.authenticated_userid,
+                                  'authenticated_userid', reify=True)
 
         return config
 

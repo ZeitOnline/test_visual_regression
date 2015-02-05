@@ -12,6 +12,47 @@ def is_advertorial(context, request):
 
 class Base(zeit.web.core.view.Base):
 
+    _navigation = {
+        'start': (
+            'Start',
+            'http://www.zeit.de/index',
+            'myid1'
+        ),
+        'zmo': (
+            'ZEIT Magazin',
+            'http://www.zeit.de/zeit-magazin/index',
+            'myid_zmo',
+        ),
+        'leben': (
+            'Leben',
+            'http://www.zeit.de/zeit-magazin/leben/index',
+            'myid2',
+        ),
+        'mode-design': (
+            'Mode & Design',
+            'http://www.zeit.de/zeit-magazin/mode-design/index',
+            'myid3',
+        ),
+        'essen-trinken': (
+            'Essen & Trinken',
+            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
+            'myid4',
+        )
+    }
+
+    @zeit.web.reify
+    def breadcrumb(self):
+        crumb = self._navigation
+        l = [crumb['start']]
+        l.append(crumb['zmo'])
+        if self.context.ressort in crumb:
+            l.append(crumb[self.context.ressort])
+        if self.context.sub_ressort in crumb:
+            l.append(crumb[self.context.sub_ressort])
+        if self.title:
+            l.append((self.title, ''))
+        return l
+
     @zeit.web.reify
     def pagetitle(self):
         suffix = ''
