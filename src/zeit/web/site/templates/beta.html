@@ -55,8 +55,8 @@
                 hier registrieren.
             </p>
             <div class="beta-teaser__cta">
-                <a class="beta-teaser__button" href="{{ view.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
-                <a class="beta-teaser__button" href="{{ view.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Zur Registrierung</a>
+                <a class="beta-teaser__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
+                <a class="beta-teaser__button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Zur Registrierung</a>
             </div>
             {% endif %}
         </div>
