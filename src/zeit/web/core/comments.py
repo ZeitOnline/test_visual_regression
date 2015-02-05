@@ -33,7 +33,7 @@ class Agatho(object):
             try:
                 return _place_answers_under_parent(
                     lxml.etree.fromstring(response.content))
-            except(IOError, lxml.etree.XMLSyntaxError):
+            except (IOError, lxml.etree.XMLSyntaxError):
                 return
         else:
             return

@@ -3,8 +3,6 @@ import json
 import os.path
 import pkg_resources
 import urllib
-import urllib2
-import wsgiref.util
 
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -41,7 +39,7 @@ settings = {
     'caching_time_centerpage': '20',
     'caching_time_gallery': '40',
     'community_host': 'http://localhost:6551/',
-    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+    'agatho_host': u'file://%s' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
@@ -224,17 +222,8 @@ def debug_testserver(debug_application, request):
 def mockcommunity_factory(request):
     def factory(response=None):
         def mock_app(env, start_response):
-            resp = response  # Need to copy response to local scope.
-            if resp is None:
-                resp = wsgiref.util.request_uri(env, include_query=0)
-                if 0:
-                    resp = urllib2.urlopen('file://{}/'.format(
-                        pkg_resources.resource_filename('zeit.web.core',
-                                                        'data/comments',
-                                                        'path'))).read()
             start_response('200 OK', [])
-            return [resp]
-
+            return [response]
         server = gocept.httpserverlayer.wsgi.Layer()
         server.port = 6551
         server.wsgi_app = mock_app
@@ -243,11 +232,6 @@ def mockcommunity_factory(request):
         request.addfinalizer(server.tearDown)
         return server
     return factory
-
-
-@pytest.fixture(scope='function')
-def mockcommunity(request):
-    return mockcommunity_factory(request)
 
 
 @pytest.fixture(scope='session')
