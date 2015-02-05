@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-1349: Switch prinbox by content toggle
 
+- ZON-1296: At least, we have a video bar
+
+- FIX: Get rid of cornice and app_info overcomplications
+
 - BUG-79: Remove horizontal scrollbars in ZMO responsive screens
 
 - BUG-76: Remove img sizing in ad places
@@ -44,9 +48,13 @@ Change log for zeit.web
 
 - ZON-1343: Implement spektrum view, esi snippet and images
 
+
+- ZON-1294: Add cacheable brightcove thumbnails
+
 - FIX: Repair block skipping via no_block that produces white pages
 
 - FIX: Punk imagegroup to image conversion into image block class
+
 
 
 1.10.6 (2015-01-28)
