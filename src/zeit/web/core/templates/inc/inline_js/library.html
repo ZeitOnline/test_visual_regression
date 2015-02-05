@@ -1,10 +1,10 @@
 <script>
     window.ZMO = {
         home: '{{ request.asset_url("/") }}',
-        scriptsURL: '{{ request.app_info.scripts_url|hide_none }}',
+        scriptsURL: '{{ request.registry.settings.scripts_url | hide_none }}',
         view: {
             {% for key, value in view.js_vars -%}
-                '{{ key }}': '{{ value|remove_break }}',
+                '{{ key }}': '{{ value | remove_break }}',
             {% endfor -%}
 
             {# use to get view values savely #}

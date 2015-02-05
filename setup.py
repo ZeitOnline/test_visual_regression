@@ -24,7 +24,6 @@ setup(
     ),
     install_requires=[
         'Babel',
-        'cornice >= 0.16.2',
         'colander',
         'grokcore.component',
         'iso8601',
@@ -46,7 +45,7 @@ setup(
         'zc.iso8601',
         'wsgiproxy',
         'zeit.cms',
-        'zeit.connector >= 2.4.0.dev0',
+        'zeit.connector >= 2.6.0.dev0',
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.cp >= 2.6.1',
