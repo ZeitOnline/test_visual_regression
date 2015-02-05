@@ -4,6 +4,8 @@ Change log for zeit.web
 1.11.5 (unreleased)
 -------------------
 
+- ZON-1348: Add image scale for ZON article
+
 - BUG-79: Remove horizontal scrollbars in ZMO responsive screens
 
 - BUG-76: Remove img sizing in ad places
