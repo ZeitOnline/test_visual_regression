@@ -28,21 +28,7 @@
 		width: 100%
 		z-index: 1
 	&__media-container
-		background-color: $black
-		position: relative
-		&:after
-			bottom: 0
-			content: ''
-			left: 0
-			min-height: 100%
-			min-width: 100%
-			position: absolute
-			right: 0
-			top: 0
-			z-index: 1
-			+background-image(linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0.2) 35%, rgba($black, 0)))
-			+respond-min($break-tablet-min)
-				+background-image(linear-gradient(15deg, rgba($black, 0.5) 0%, rgba($black, 0.05) 60%))
+		+teaser-image-dark-overlay
 	&__media-item
 		height: auto
 		width: 100%
