@@ -8,9 +8,13 @@ Change log for zeit.web
 
 - FIX: Get rid of cornice and app_info overcomplications
 
-- ZON-1332: Initiate comment section for ZON articles
+- BUG-79: Remove horizontal scrollbars in ZMO responsive screens
 
 - BUG-76: Remove img sizing in ad places
+
+- ZON-1332: Initiate comment section for ZON articles
+
+- FIX: Get rid of cornice and app_info overcomplications
 
 
 1.11.4 (2015-02-04)

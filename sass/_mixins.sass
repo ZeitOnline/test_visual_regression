@@ -76,19 +76,12 @@
 =bleed($max: $medium-content-width + 2*$gutter)
 	margin-left: -$page-padding--small
 	margin-right: -$page-padding--small
-	width: auto !important
-	figcaption
-		margin-left: $page-padding--small !important
 	+respond-min($break-1)
 		margin-left: -$page-padding
 		margin-right: -$page-padding
-		figcaption
-			margin-left: $page-padding  !important
 	+respond-min($max)
 		margin-left: 0
 		margin-right: 0
-		figcaption
-			margin-left: auto !important
 
 =visuallyhidden
 	border: 0
