@@ -14,6 +14,7 @@
 
 	&__content
 		padding: 0 remify(10px)
+		overflow: hidden
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -21,6 +22,8 @@
 	&__content-heading
 		font-size: 1em
 		margin: 1em 0 0.125em
+		+respond-min($break-phablet-min)
+			margin: 0
 
 	&__kicker
 		@extend %teaser-kicker
@@ -30,6 +33,25 @@
 		@extend %teaser-title
 		font-size: $font-ml
 		line-height: 1.4
+
+	&__media
+		max-width: 320px
+		margin: auto
+		+respond-min($break-phablet-min)
+			float: left
+			padding-right: 1.25em
+			width: 50%
+			margin: 0
+		+respond-min($break-tablet-min)
+			float: none
+			width: auto
+
+	&__container
+		+respond-min($break-phablet-min)
+			display: table-cell
+		+respond-min($break-tablet-min)
+			display: block
+			width: auto
 
 	&__media-item
 		@extend %teaser-media-item
@@ -78,8 +100,19 @@
 			font-size: $font-s
 
 		&__title
-			font-size: $font-mxl
 			margin: 0 0 remify(20px)
+			+respond-min($break-phablet-min)
+				width: 50%
+				float: right
+				margin: 0
+			+respond-min($break-tablet-min)
+				float: none
+				font-size: $font-ml
+				margin: 0 0 remify(20px)
+				position: static
+				width: auto
+			+respond-min($break-desktop-min)
+				font-size: $font-mxl
 
 		&__text
 			// font-size: $font-m
