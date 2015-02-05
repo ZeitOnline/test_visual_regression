@@ -38,7 +38,7 @@ class Base(object):
     def _set_response_headers(self):
         # ZMO Version header
         self.request.response.headers.add(
-            'X-ZMOVersion', self.request.registry.settings.zmo_version)
+            'X-Version', self.request.registry.settings.version)
 
         # C1 headers
         #
@@ -250,33 +250,6 @@ class Base(object):
 
 
 class Content(Base):
-    _navigation = {
-        'start': (
-            'Start',
-            'http://www.zeit.de/index',
-            'myid1'
-        ),
-        'zmo': (
-            'ZEIT Magazin',
-            'http://www.zeit.de/zeit-magazin/index',
-            'myid_zmo',
-        ),
-        'leben': (
-            'Leben',
-            'http://www.zeit.de/zeit-magazin/leben/index',
-            'myid2',
-        ),
-        'mode-design': (
-            'Mode & Design',
-            'http://www.zeit.de/zeit-magazin/mode-design/index',
-            'myid3',
-        ),
-        'essen-trinken': (
-            'Essen & Trinken',
-            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-            'myid4',
-        )
-    }
 
     is_longform = False
 
@@ -328,19 +301,6 @@ class Content(Base):
     @zeit.web.reify
     def show_date_format_seo(self):
         return self.date_format
-
-    @zeit.web.reify
-    def breadcrumb(self):
-        crumb = self._navigation
-        l = [crumb['start']]
-        l.append(crumb['zmo'])
-        if self.context.ressort in crumb:
-            l.append(crumb[self.context.ressort])
-        if self.context.sub_ressort in crumb:
-            l.append(crumb[self.context.sub_ressort])
-        if self.title:
-            l.append((self.title, ''))
-        return l
 
     @zeit.web.reify
     def adwords(self):
