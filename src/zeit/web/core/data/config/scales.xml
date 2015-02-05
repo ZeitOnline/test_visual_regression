@@ -12,7 +12,7 @@
   <!-- ZEIT ONLINE Relaunch Formate -->
   <scale name="zon-thumbnail" width="580" height="326" title="Relaunch 2015: Thumbnail (kleiner Teaser)"/>
   <scale name="zon-large" width="580" height="326" title="Relaunch 2015: großer Teaser"/>
-  <scale name="zon-article-large" width="580" height="326" title="Relaunch 2015: Artikel groß"/>
+  <scale name="zon-article-large" width="820" height="462" title="Relaunch 2015: Artikel groß"/>
   <!-- ZEIT Magazin Online Formate -->
   <scale name="zmo-landscape-large" width="980" height="551" title="ZMO: Quer groß (16:9)" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-landscape-small" width="290" height="163" title="ZMO: Quer klein (16:9)" available="zeit.magazin.interfaces.IZMOContent"/>
