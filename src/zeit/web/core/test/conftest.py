@@ -3,14 +3,11 @@ import json
 import os.path
 import pkg_resources
 import urllib
-import urllib2
-import wsgiref.util
 
 import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.etree
 import lxml.html
-
 import plone.testing.zca
 import pyramid.testing
 import pytest
@@ -24,6 +21,7 @@ import zope.testbrowser.browser
 import zeit.content.image.interfaces
 
 import zeit.web.core
+import zeit.web.core.comments
 import zeit.web.core.application
 
 
@@ -41,7 +39,7 @@ settings = {
     'caching_time_centerpage': '20',
     'caching_time_gallery': '40',
     'community_host': 'http://localhost:6551/',
-    'agatho_host': u'file://%s/' % pkg_resources.resource_filename(
+    'agatho_host': u'file://%s' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
@@ -55,7 +53,7 @@ settings = {
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
-    'connector_type': 'filesystem',
+    'connector_type': 'mock',
 
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
@@ -147,7 +145,7 @@ def jinja2_env():
 
 
 @pytest.fixture(scope='session')
-def application(request):
+def application_session(request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
@@ -157,6 +155,23 @@ def application(request):
         app, secret='time')
     wsgi.zeit_app = factory
     return wsgi
+
+
+@pytest.fixture
+def application(application_session, request):
+    # XXX This is a bit clumsy, but reset_connector needs to be called after
+    # each test (i.e. in 'function' scope). The many diverse fixtures make this
+    # a bit complicated... it's integrated in the most common ones now
+    # (``application`` and ``testbrowser``), but if it's needed elsewhere, it
+    # has to be integrated explicitly.
+    request.addfinalizer(reset_connector)
+    return application_session
+
+
+def reset_connector():
+    connector = zope.component.getUtility(
+        zeit.connector.interfaces.IConnector)
+    connector._reset()
 
 
 @pytest.fixture(scope='session')
@@ -188,8 +203,8 @@ def dummy_request(request, config):
 
 @pytest.fixture
 def agatho():
-    from zeit.web.core.comments import Agatho
-    return Agatho(agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+    return zeit.web.core.comments.Agatho(
+        agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
 @pytest.fixture(scope='session')
@@ -207,17 +222,8 @@ def debug_testserver(debug_application, request):
 def mockcommunity_factory(request):
     def factory(response=None):
         def mock_app(env, start_response):
-            resp = response  # Need to copy response to local scope.
-            if resp is None:
-                resp = wsgiref.util.request_uri(env, include_query=0)
-                if 0:
-                    resp = urllib2.urlopen('file://{}/'.format(
-                        pkg_resources.resource_filename('zeit.web.core',
-                                                        'data/comments',
-                                                        'path'))).read()
             start_response('200 OK', [])
-            return [resp]
-
+            return [response]
         server = gocept.httpserverlayer.wsgi.Layer()
         server.port = 6551
         server.wsgi_app = mock_app
@@ -226,11 +232,6 @@ def mockcommunity_factory(request):
         request.addfinalizer(server.tearDown)
         return server
     return factory
-
-
-@pytest.fixture(scope='function')
-def mockcommunity(request):
-    return mockcommunity_factory(request)
 
 
 @pytest.fixture(scope='session')
@@ -250,10 +251,10 @@ def mockspektrum(request):
 
 
 @pytest.fixture(scope='session')
-def testserver(application, request, mockspektrum):
+def testserver(application_session, request, mockspektrum):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6543
-    server.wsgi_app = application
+    server.wsgi_app = application_session
     server.setUp()
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
@@ -347,6 +348,7 @@ def my_traverser(application):
 
 @pytest.fixture
 def testbrowser(request):
+    request.addfinalizer(reset_connector)
     return Browser
 
 

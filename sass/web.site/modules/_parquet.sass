@@ -17,7 +17,7 @@
 	background-color: $zon_lighter_grey
 	+respond-min($break-tablet-min)
 		display: table-cell
-		padding: remify($petite--px) remify($petite--px) 0 $page-padding
+		padding: $page-padding $page-padding 0 $page-padding
 		width: remify(207px)
 	+respond-min($break-desktop-min)
 		width: remify(240px)
@@ -99,6 +99,10 @@
 			display: block
 			list-style: none
 			padding: 0
+			width: remify(167px)
+		+respond-min($break-desktop-min)
+			width: remify(200px)
+
 		&--spektrum
 			margin-top: 0
 
@@ -110,6 +114,8 @@
 			display: block
 			font-size: remify(14px)
 			letter-spacing: 0.03em
+			text-overflow: ellipsis
+			overflow: hidden
 
 	&__more-link
 		display: none
