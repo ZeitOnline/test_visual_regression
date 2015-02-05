@@ -10,9 +10,8 @@ $teaserbar_teaser_max_width: em(270px)
 // start: teasers //
 
 .cp_teaserbar__teasers__wrap
-    +justify-children-horizontally('div')
+    +justify-children-horizontally('.cp_teaserbar__teasers__wrap > div', top)
     div
-        vertical-align: top
         +respond-min($break-1)
             max-width: $teaserbar_teaser_max_width
 
