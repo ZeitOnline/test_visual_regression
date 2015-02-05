@@ -35,15 +35,17 @@
 		line-height: 1.4
 
 	&__media
-		max-width: 320px
 		margin: auto
+		max-width: 320px
 		+respond-min($break-phablet-min)
 			float: left
+			margin: 1.25em 0 0
 			padding-right: 1.25em
 			width: 50%
-			margin: 0
 		+respond-min($break-tablet-min)
 			float: none
+			margin-bottom: remify(16px)
+			margin-top: 0
 			width: auto
 
 	&__container
@@ -98,6 +100,9 @@
 	.print-box
 		&__heading
 			font-size: $font-s
+
+		&__media
+			margin-bottom: 0
 
 		&__title
 			margin: 0 0 remify(20px)
