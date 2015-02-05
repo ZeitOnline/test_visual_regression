@@ -6,7 +6,9 @@ Change log for zeit.web
 
 - FIX: Get rid of cornice and app_info overcomplications
 
-- FIX: BUG-76
+- ZON-1332: Initiate comment section for ZON articles
+
+- BUG-76: Remove img sizing in ad places
 
 
 1.11.4 (2015-02-04)

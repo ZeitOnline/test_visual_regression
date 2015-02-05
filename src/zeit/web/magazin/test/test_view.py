@@ -703,11 +703,11 @@ def test_iqd_mobile_settings_are_filled(testserver, testbrowser):
     assert view.iqd_mobile_settings.get('bottom') == '445612'
 
 
-def test_http_header_should_contain_zmo_version(testserver, testbrowser):
+def test_http_header_should_contain_version(testserver, testbrowser):
     pkg = pkg_resources.get_distribution('zeit.web')
     pkg_version = pkg.version
     head_version = requests.head(
-        testserver.url + "/zeit-magazin/index").headers['x-zmoversion']
+        testserver.url + "/zeit-magazin/index").headers['x-version']
     assert pkg_version == head_version
 
 
