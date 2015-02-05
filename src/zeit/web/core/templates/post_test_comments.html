@@ -1,17 +1,18 @@
-<html>
-    <head/>
-    <body>
+{% import "zeit.web.site:templates/macros/layout_macro.tpl" as lama_site with context %}
+{% extends "zeit.web.site:templates/layout.html" %}
+{% block main %}
+    <div class="main__fullwidth">
+        <div class="beta-teaser">
+
         <form method='POST'>
             <div>
-            <label>Kommentar</label>
-            <textarea name='comment'> </textarea>
+            <label>Kommentar: </label>
+            <textarea rows="5" cols="70" name='comment'> </textarea>
             </div>
             <div>
-            <label>Für Pfad (z.B.: artikel/01)</label>
+            <label>Für Pfad (z.B.: artikel/01): </label>
             <input type='text' name='path' />
             </div>
             <input type='submit' />
         <form>
-
-<html>
-
+{% endblock main %}
