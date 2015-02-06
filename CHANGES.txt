@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - FIX: Get rid of cornice and app_info overcomplications
 
+- ZON-1351: Implement a basic admin page to post comments for any resource
+
 
 1.11.4 (2015-02-04)
 -------------------
