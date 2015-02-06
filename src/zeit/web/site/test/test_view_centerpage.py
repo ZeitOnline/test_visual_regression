@@ -544,3 +544,12 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver.set_window_size(980, 1024)
     assert small_teaser.is_displayed(), (
         'Small parquet teaser must show it‘s image on desktop.')
+
+
+def test_area_printbox_should_contain_teaser_image(testserver):
+    mycp = mock.Mock()
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view.area_printbox.image
+    isinstance(
+        view.area_printbox.image,
+        zeit.content.image.image.RepositoryImage)

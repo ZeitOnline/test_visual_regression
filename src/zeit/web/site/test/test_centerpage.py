@@ -5,8 +5,6 @@ import re
 
 import mock
 
-import babel.dates
-
 import zeit.cms.interfaces
 
 import zeit.web.site.view_centerpage
@@ -117,14 +115,14 @@ def test_tile7_for_fullwidth_is_rendered_on_correct_position(
         'Tile iqadtile7 is not present on first position.')
 
 
-def test_printbox_is_present_and_considers_weekday(testbrowser, testserver):
+def test_printbox_is_present_and_considers_byline(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    weekday = datetime.datetime.now(tz).weekday()
+    uri = 'http://xml.zeit.de/angebote/print-box'
+    content = zeit.cms.interfaces.ICMSContent(uri)
     prinbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
-    if weekday < 3:
+    if content.byline == 'mo-mi':
         assert len(prinbox) == 0
         assert len(anbebotsbox) == 1
     else:
