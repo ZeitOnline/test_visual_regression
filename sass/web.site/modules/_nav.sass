@@ -276,7 +276,7 @@ $zon-search-square-size: remify(35px)
 		color: $zon_dark_grey
 	+respond-min($break-tablet-min)
 		width: $zon-search-width
-	+respond-min-max($break-tablet-min, $break-desktop-min)
+	+respond-min-max($break-tablet-min, $break-desktop-min - .001em)
 		visibility: hidden
 		transition: transform .2s ease-out, visibility .2s
 		transform: translateX($zon-search-width)
