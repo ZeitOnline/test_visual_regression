@@ -1,0 +1,31 @@
+.video-small
+	display: none
+	margin-bottom: $page-padding
+	+respond-min($break-phablet-min)
+		width: 48%
+		// going unBEMmish here, but hiding/displaying 
+		// by adding another modificator
+		// will be much more complicated on the template side
+		&:nth-child(2),
+		&:nth-child(3)
+			// first-child is .video-stage-secondary__title, so it's all off by one
+			display: inline-block
+	+respond-min($break-tablet-min)
+		display: inline-block
+		width: 31.5%
+	+respond-min($break-desktop-min)
+		display: block
+		width: 100%
+		// just to make sure display: inline-block is overruled
+		// problem introduced by using nth-child before
+		&:nth-child(2),
+		&:nth-child(3)
+			display: block
+		&:last-child
+			margin-bottom: 0
+	&__combined-link
+		+link
+			color: $white
+	&__container
+		display: block
+		position: relative

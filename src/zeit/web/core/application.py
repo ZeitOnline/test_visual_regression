@@ -38,6 +38,7 @@ import zeit.web.core.block
 import zeit.web.core.centerpage
 import zeit.web.core.security
 import zeit.web.core.template
+import zeit.web.site.video_series
 
 
 log = logging.getLogger(__name__)
@@ -64,6 +65,7 @@ class Application(object):
         self.configure_zca()
         self.configure_pyramid()
         self.configure_banner()
+        self.configure_series()
         self.configure_navigation()
 
     def configure_banner(self):
@@ -77,6 +79,12 @@ class Application(object):
             self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
+
+    def configure_series(self):
+        series_source = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.web_series-source', ''))
+        zeit.web.site.video_series.video_series = (
+            zeit.web.site.video_series.get_video_series(series_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
@@ -114,7 +122,7 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         version = pkg_resources.get_distribution('zeit.web').version
-        self.settings['zmo_version'] = version
+        self.settings['version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 
         self.config = config = pyramid.config.Configurator(

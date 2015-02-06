@@ -7,7 +7,7 @@ import zeit.wysiwyg.html
 
 import zeit.web.core.template
 import zeit.web.core.view
-import zeit.web.magazin.view_image
+import zeit.web.core.view_image
 
 
 # Monkey-patches to zeit.wysiwyg to remove Zope-isms.
@@ -41,7 +41,7 @@ zeit.wysiwyg.html.ConversionStep.datetime_to_html = datetime_to_html
 
 @pyramid.view.view_config(context=zeit.content.image.interfaces.IImage,
                           name='@@raw')
-class ImageView(zeit.web.magazin.view_image.Image):
+class ImageView(zeit.web.core.view_image.Image):
     """Since zeit.wysiwyg.html.ImageStep.to_html insists on creating
     an URL that ends in '/@@raw', we need to oblige.
 
