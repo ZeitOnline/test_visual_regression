@@ -9,13 +9,17 @@ import gocept.httpserverlayer.wsgi
 import lxml.etree
 import lxml.html
 import plone.testing.zca
+import plone.testing.zodb
 import pyramid.testing
 import pytest
 import repoze.bitblt.processor
 import selenium.webdriver
+import transaction
 import webtest
 import zope.browserpage.metaconfigure
+import zope.event
 import zope.interface
+import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
@@ -146,6 +150,39 @@ def jinja2_env():
     return app.configure_jinja()
 
 
+class ZODBLayer(plone.testing.zodb.EmptyZODB):
+    """Layer which sets up ZODB to be useable for Zope 3.
+    We need one to use a workingcopy.
+    """
+
+    def setUp(self):
+        super(ZODBLayer, self).setUp()
+        from zope.app.debug import Debugger
+        self['zope_application'] = Debugger(self['zodbDB'])
+        # Cause install generation to run.
+        zope.event.notify(zope.processlifetime.DatabaseOpenedWithRoot(
+            self['zodbDB']))
+        transaction.commit()
+
+    def tearDown(self):
+        del self['zope_application']
+        super(ZODBLayer, self).tearDown()
+
+    def getRootFolder(self):
+        # The name never ever changes, so there's no real need to import it
+        # from zope.app.publication.
+        return self['zodbRoot']['Application']
+
+ZODB_LAYER = ZODBLayer()
+
+
+@pytest.fixture
+def zodb(application_session, request):
+    ZODB_LAYER.testSetUp()
+    request.addfinalizer(ZODB_LAYER.testTearDown)
+    return ZODB_LAYER.getRootFolder()
+
+
 @pytest.fixture(scope='session')
 def application_session(request):
     plone.testing.zca.pushGlobalRegistry()
@@ -153,6 +190,10 @@ def application_session(request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **settings)
+    # ZODB needs to come after ZCML is set up by the Application.
+    # Putting it in here is simpler than adding yet another fixture.
+    ZODB_LAYER.setUp()
+    request.addfinalizer(ZODB_LAYER.tearDown)
     wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
         app, secret='time')
     wsgi.zeit_app = factory
@@ -160,12 +201,13 @@ def application_session(request):
 
 
 @pytest.fixture
-def application(application_session, request):
-    # XXX This is a bit clumsy, but reset_connector needs to be called after
+def application(application_session, zodb, request):
+    # This application_session/application split is a bit clumsy, but some
+    # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
-    # a bit complicated... it's integrated in the most common ones now
-    # (``application`` and ``testbrowser``), but if it's needed elsewhere, it
-    # has to be integrated explicitly.
+    # a bit complicated... it's integrated in the most common ones now (e.g.
+    # ``application``, ``testbrowser``), but if it's needed elsewhere, it has
+    # to be integrated explicitly.
     request.addfinalizer(reset_connector)
     return application_session
 
@@ -174,6 +216,16 @@ def reset_connector():
     connector = zope.component.getUtility(
         zeit.connector.interfaces.IConnector)
     connector._reset()
+
+
+@pytest.fixture
+def workingcopy(application, zodb, request):
+    site = zeit.cms.testing.site(zodb)
+    site.__enter__()
+    interaction = zeit.cms.testing.interaction()
+    interaction.__enter__()
+    request.addfinalizer(lambda: interaction.__exit__(None, None, None))
+    request.addfinalizer(lambda: site.__exit__(None, None, None))
 
 
 @pytest.fixture(scope='session')
@@ -349,8 +401,9 @@ def my_traverser(application):
 
 
 @pytest.fixture
-def testbrowser(request):
-    request.addfinalizer(reset_connector)
+def testbrowser(application):
+    # We require ``application`` here so that stuff is properly isolated
+    # between tests; see comment there for details.
     return Browser
 
 

@@ -5,7 +5,7 @@ import pytest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
 
 import zeit.web.site.view_centerpage
@@ -569,3 +569,10 @@ def test_series_select_should_navigate_away(selenium_driver, testserver):
     assert element
 
 
+def test_area_printbox_should_contain_teaser_image(testserver):
+    mycp = mock.Mock()
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view.area_printbox.image
+    isinstance(
+        view.area_printbox.image,
+        zeit.content.image.image.RepositoryImage)
