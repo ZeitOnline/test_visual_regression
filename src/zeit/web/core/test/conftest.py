@@ -103,6 +103,8 @@ settings = {
         'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),
+    'vivi_zeit.web_series-source': (
+        'egg://zeit.web.core/data/config/series.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
