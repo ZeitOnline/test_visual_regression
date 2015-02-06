@@ -11,6 +11,7 @@ class CommunityAuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
+
         drupal_id = request.cookies.get('drupal-userid')
         # If no community cookie is present, bail out straight away:
         if drupal_id is None:

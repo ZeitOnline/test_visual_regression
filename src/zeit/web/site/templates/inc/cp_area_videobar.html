@@ -1,5 +1,5 @@
 <section class="video-stage" id="video-bar">
-    <!-- html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen -->
+    {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) #}
     <header>
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
@@ -18,37 +18,16 @@
 
     <footer class="video-stage-footer">
         <div class="video-series">
-            <!-- ist so nicht accessible umzusetzen, ohne js auch nicht bedienbar -->
+            {# ist so nicht accessible umzusetzen, ohne js auch nicht bedienbar (NB) #}
             <label for="series_select" class="video-series__label">Videoserien</label>
             <select id="series_select" class="video-series__select" name="serie">
                 <option>Bitte auswählen</option>
-                <option data-url="utopien" value="Utopien">Utopien</option>
-                <option data-url="br" value="BR">BR</option>
-                <option data-url="br-hochschulportraets" value="BR-Hochschulporträts">BR-Hochschulporträts</option>
-                <option data-url="deutsche-kinemathek" value="Deutsche Kinemathek">Deutsche Kinemathek</option>
-                <option data-url="meine-kleine-idee-fuer-europa" value="Meine kleine Idee für Europa">Meine kleine Idee für Europa</option>
-                <option data-url="idee-des-jahres" value="Idee des Jahres">Idee des Jahres</option>
-                <option data-url="die-unverzagten" value="Die Unverzagten">Die Unverzagten</option>
-                <option data-url="bewerbungsfangfragen" value="Bewerbungsfangfragen">Bewerbungsfangfragen</option>
-                <option data-url="kurzfilme" value="Kurzfilme">Kurzfilme</option>
-                <option data-url="talking-fashion" value="Talking Fashion">Talking Fashion</option>
-                <option data-url="filmtipp" value="Filmtipp">Filmtipp</option>
-                <option data-url="rekorder" value="Rekorder">Rekorder</option>
-                <option data-url="rekorder-b-seiten" value="Rekorder B-Seiten">Rekorder B-Seiten</option>
-                <option data-url="die-zeit-tv" value="DIE ZEIT TV">DIE ZEIT TV</option>
-                <option data-url="erklaervideos" value="Erklärvideos">Erklärvideos</option>
-                <option data-url="lesetipp" value="Lesetipp">Lesetipp</option>
-                <option data-url="taktisch-klug" value="Taktisch klug">Taktisch klug</option>
-                <option data-url="thomas-sarbacher-liest" value="Thomas Sarbacher liest">Thomas Sarbacher liest</option>
-                <option data-url="dr-max" value="Dr. Max">Dr. Max</option>
-                <option data-url="helmut-schmidt" value="Helmut Schmidt">Helmut Schmidt</option>
-                <option data-url="zehnseiten" value="Zehnseiten">Zehnseiten</option>
-                <option data-url="zeit-akademie-evolution" value="ZEIT Akademie: Evolution">ZEIT Akademie: Evolution</option>
-                <option data-url="zeit-akademie-philosophie" value="ZEIT Akademie: Philosophie">ZEIT Akademie: Philosophie</option>
-                <option data-url="zeit-akademie-oekonomie" value="ZEIT Akademie: Ökonomie">ZEIT Akademie: Ökonomie</option></select>
+                {% for video in view.video_series_list %}
+                    <option value="{{ video.url }}">{{ video.title }}</option>
+                {% endfor %}
             </select>
         </div>
-        <!-- sind doch gar nicht alle Videos? -->
-        <a class="video-centerpage-link" href="http://www.zeit.de/video">Alle Videos</a>
+        {# Sind doch gar nicht alle Videos? (NB) #}
+        <a class="video-centerpage-link" href="{{ 'http://xml.zeit.de/video' | translate_url }}">Alle Videos</a>
     </footer>
 </section>
