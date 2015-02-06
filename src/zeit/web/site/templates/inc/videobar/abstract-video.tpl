@@ -1,4 +1,4 @@
-<article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="xxxxxxx">
+<article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{video.__name__}}">
     <a class="{{ self.layout() }}__combined-link" href="{{video | create_url}}">
         <div class="{{ self.layout() }}__container">
             {% set image = (video | get_image_group)['still.jpg'] %}
