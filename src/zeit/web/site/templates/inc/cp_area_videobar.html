@@ -1,5 +1,5 @@
 <section class="video-stage" id="video-bar">
-    <!-- html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen -->
+    {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) #}
     <header>
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
@@ -18,16 +18,16 @@
 
     <footer class="video-stage-footer">
         <div class="video-series">
-            <!-- ist so nicht accessible umzusetzen, ohne js auch nicht bedienbar -->
+            {# ist so nicht accessible umzusetzen, ohne js auch nicht bedienbar (NB) #}
             <label for="series_select" class="video-series__label">Videoserien</label>
             <select id="series_select" class="video-series__select" name="serie">
                 <option>Bitte auswählen</option>
                 {% for video in view.video_series_list %}
-                    <option value="{{video.url}}">{{video.title}}</option>
+                    <option value="{{ video.url }}">{{ video.title }}</option>
                 {% endfor %}
             </select>
         </div>
-        <!-- sind doch gar nicht alle Videos? -->
-        <a class="video-centerpage-link" href="{{'http://xml.zeit.de/video'| translate_url}}">Alle Videos</a>
+        {# Sind doch gar nicht alle Videos? (NB) #}
+        <a class="video-centerpage-link" href="{{ 'http://xml.zeit.de/video' | translate_url }}">Alle Videos</a>
     </footer>
 </section>
