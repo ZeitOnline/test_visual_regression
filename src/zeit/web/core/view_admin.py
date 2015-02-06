@@ -9,6 +9,7 @@ import pyramid.httpexceptions
 import lxml.etree
 import urlparse
 
+
 def _from_localhost(context, request):
     return request.client_addr == '127.0.0.1'
 
@@ -43,70 +44,69 @@ class PostComment(zeit.web.core.view.Base):
 
         if request.method == 'POST':
 
-            uniqueId = 'http://xml.zeit.de/{}'.format(
+            unique_id = 'http://xml.zeit.de/{}'.format(
                 request.params.get('path'))
 
             comment_thread = zeit.web.core.comments.get_thread(
-                    unique_id=uniqueId, request=request)
+                unique_id=unique_id, request=request)
             nid = None
             if comment_thread:
                 nid = comment_thread['nid']
             else:
-                nid = self._create_and_load_comment_thread(uniqueId)['nid']
+                nid = self._create_and_load_comment_thread(unique_id)['nid']
             if not nid:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
-                        title='No comment thread',
-                        explanation='No comment thread for {} could be '
-                                    'created.'.format(uniqueId))
+                    title='No comment thread',
+                    explanation='No comment thread for {} could be '
+                                'created.'.format(unique_id))
 
             action_url = '{}/agatho/thread/{}'.format(
                 self.community_host, request.params.get('path'))
 
-            response = requests.post(action_url, data={'nid': nid,
-                                            'uid': uid,
-                                            'comment': request.params.get(
-                                                'comment'),
-                                            'pid': request.params.get('pid')},
-                          cookies=dict(request.cookies))
+            data = {'nid': nid,
+                    'uid': uid,
+                    'comment': request.params.get('comment'),
+                    'pid': request.params.get('pid')}
+            response = requests.post(action_url, data=data,
+                                     cookies=dict(request.cookies))
 
             if response.status_code == 200:
                 self.status.append('A comment for {} was posted'.format(
-                    uniqueId))
+                    unique_id))
             else:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
-                        title='No comment could be posted',
-                        explanation='No comment  for {} could be '
-                                    'posted.'.format(uniqueId))
+                    title='No comment could be posted',
+                    explanation='No comment  for {} could be '
+                                'posted.'.format(unique_id))
 
-
-    def _create_and_load_comment_thread(self, uniqueId):
+    def _create_and_load_comment_thread(self, unique_id):
         content = None
         try:
-            content = zeit.cms.interfaces.ICMSContent(uniqueId)
+            content = zeit.cms.interfaces.ICMSContent(unique_id)
         except TypeError:
             raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='Resource does not exist',
-                    explanation='The resource {} does not exist and there is'
-                                'no comment_thread for it.'.format(uniqueId))
+                title='Resource does not exist',
+                explanation='The resource {} does not exist and there is'
+                            'no comment_thread for it.'.format(unique_id))
 
         xml_str = lxml.etree.tostring(content.xml)
-        headers= {
+        headers = {
             'X-uniqueId': 'http://{}{}'.format(
-                self.request.host, urlparse.urlparse(uniqueId)[2]),
+                self.request.host, urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
         response = requests.post(
-            "{}/agatho/commentsection".format(self.community_host),
+            '{}/agatho/commentsection'.format(self.community_host),
             headers=headers,
             data=xml_str)
 
         if not response.status_code == 204:
-             raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='Comment Section could not be created',
-                    explanation='The comment section for the resource {} '
-                                'could not be created'.format(uniqueId))
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='Comment Section could not be created',
+                explanation='The comment section for the resource {} '
+                            'could not be created'.format(unique_id))
 
         self.status.append('A comment section for {} was created'.format(
-                    uniqueId))
+            unique_id))
 
         return zeit.web.core.comments.get_thread(
-                    unique_id=uniqueId, request=self.request)
+            unique_id=unique_id, request=self.request)
