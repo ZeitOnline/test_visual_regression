@@ -4,6 +4,8 @@ Change log for zeit.web
 1.11.5 (unreleased)
 -------------------
 
+- ZON-1350: Add images to printbox
+
 - ZON-1349: Switch prinbox by content toggle
 
 - ZON-1296: At least, we have a video bar
