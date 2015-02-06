@@ -42,24 +42,40 @@ class PostComment(zeit.web.core.view.Base):
             uniqueId = 'http://xml.zeit.de/{}'.format(
                 request.params.get('path'))
 
-            try:
-                nid = zeit.web.core.comments.get_thread(
-                    unique_id=uniqueId, request=request)['nid']
-            except:
+            comment_thread = zeit.web.core.comments.get_thread(
+                    unique_id=uniqueId, request=request)
+            nid = None
+            if comment_thread:
+                nid = comment_thread['nid']
+            else:
+                nid = self._create_and_load_comment_thread(uniqueId)
+            if not nid:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='No comment thread',
-                    explanation='There was an error loading the '
-                                'comment thread for {}. Please make sure the '
-                                'resource and the thread exist. You can add '
-                                'a thread with the helper scripts you find '
-                                'in the tools directory.'.format(uniqueId))
+                        title='No comment thread',
+                        explanation='No comment thread for {} could be '
+                                    'created.'.format(uniqueId))
 
             zwcs = zope.component.getUtility(
                 zeit.web.core.interfaces.ISettings)
             action_url = '{}/agatho/thread/{}'.format(
                 zwcs.get('community_host'), request.params.get('path'))
+
             requests.post(action_url, data={'nid': nid,
                                             'uid': uid,
                                             'comment': request.params.get(
                                                 'comment'), 'pid': ''},
                           cookies=dict(request.cookies))
+
+    def _create_and_load_comment_thread(self, uniqueId):
+        content = None
+        try:
+            content = zeit.cms.interfaces.ICMSContent(uniqueId)
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                    title='No comment thread',
+                    explanation='There resource {} does not exist and there is'
+                                'no comment_thread for it.'.format(uniqueId))
+
+        #create comment_thread with requests
+        #load comment_thread
+        # return nid
