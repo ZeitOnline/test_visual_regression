@@ -29,7 +29,6 @@ setup(
         'iso8601',
         'lxml',
         'martian',
-        'plone.testing [zca]',
         'pyramid',
         'pyramid_beaker',
         'pyramid_jinja2',
@@ -68,7 +67,7 @@ setup(
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
-        'zope.processlifetime'
+        'zope.processlifetime',
     ],
     description='This package is all about ZEIT ONLINE website delivery.',
     long_description=open('README.md', 'r').read(),
@@ -80,15 +79,17 @@ setup(
     },
     extras_require={
         'test': [
-            'gocept.httpserverlayer',
             'cssselect',
+            'gocept.httpserverlayer',
             'mock',
-            'webtest',
+            'plone.testing [zca,zodb]',
             'pytest',
             'pytest-pep8',
             'selenium',
+            'transaction',
             'waitress',
             'webtest',
+            'zope.event',
             'zope.testbrowser [wsgi]'
         ]
     },
