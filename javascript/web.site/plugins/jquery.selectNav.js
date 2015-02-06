@@ -34,8 +34,10 @@
         return this.each( function() {
             $( this ).on( 'change', function(e) {
                 e.preventDefault();
-                var o = this.options, p = o[o.selectedIndex];
-                window.location.replace('http://www.zeit.de/serie/' + $(p).data('url'), '_top');
+                var value = $(this).find('option:selected').val();
+                if ( value ) {
+                    window.location.replace('http://www.zeit.de/serie/' + value, '_top');
+                }
             } );
         });
     };

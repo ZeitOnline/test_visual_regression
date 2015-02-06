@@ -14,6 +14,7 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
+import zeit.web.site.video_series
 import zeit.web.site.view
 
 log = logging.getLogger(__name__)
@@ -189,3 +190,7 @@ class Centerpage(
             return zeit.web.site.spektrum.HPFeed()
         except (TypeError, AttributeError):
             return
+
+    @zeit.web.reify
+    def video_series_list(self):
+        return zeit.web.site.video_series.video_series

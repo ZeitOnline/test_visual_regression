@@ -544,3 +544,28 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver.set_window_size(980, 1024)
     assert small_teaser.is_displayed(), (
         'Small parquet teaser must show it‘s image on desktop.')
+
+
+def test_video_series_should_be_available(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    video_series = view.video_series_list
+    assert len(video_series) > 0, (
+        'Series object is empty')
+
+
+def test_series_select_should_navigate_away(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+    select = driver.find_element_by_css_selector(
+        '#series_select')
+    for option in select.find_elements_by_tag_name('option'):
+        if option.text == 'Rekorder':
+            option.click()
+            break
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(EC.title_is('Serie: Rekorder | ZEIT ONLINE'))
+    assert element
+
+
