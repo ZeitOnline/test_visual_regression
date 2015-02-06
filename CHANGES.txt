@@ -4,6 +4,8 @@ Change log for zeit.web
 1.11.5 (unreleased)
 -------------------
 
+- ZON-1348: Add image scale for ZON article
+
 - ZON-1350: Add images to printbox
 
 - ZON-1332: Initiate comment section for ZON articles
