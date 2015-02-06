@@ -4,17 +4,17 @@ Change log for zeit.web
 1.11.5 (unreleased)
 -------------------
 
+- ZON-1350: Add images to printbox
+
+- ZON-1332: Initiate comment section for ZON articles
+
 - ZON-1349: Switch prinbox by content toggle
 
 - ZON-1296: At least, we have a video bar
 
-- FIX: Get rid of cornice and app_info overcomplications
-
 - BUG-79: Remove horizontal scrollbars in ZMO responsive screens
 
 - BUG-76: Remove img sizing in ad places
-
-- ZON-1332: Initiate comment section for ZON articles
 
 - FIX: Get rid of cornice and app_info overcomplications
 
