@@ -116,7 +116,8 @@ def test_tile7_for_fullwidth_is_rendered_on_correct_position(
         'Tile iqadtile7 is not present on first position.')
 
 
-def test_printbox_is_present_and_has_digital_offerings(testbrowser, testserver, workingcopy):
+def test_printbox_is_present_and_has_digital_offerings(
+        testbrowser, testserver, workingcopy):
     uri = 'http://xml.zeit.de/angebote/print-box'
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
@@ -128,7 +129,9 @@ def test_printbox_is_present_and_has_digital_offerings(testbrowser, testserver, 
     assert len(prinbox) == 0
     assert len(anbebotsbox) == 1
 
-def test_printbox_is_present_and_has_newsprint_offerings(testbrowser, testserver, workingcopy):
+
+def test_printbox_is_present_and_has_newsprint_offerings(
+        testbrowser, testserver, workingcopy):
     uri = 'http://xml.zeit.de/angebote/print-box'
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
