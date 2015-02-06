@@ -3,16 +3,31 @@
 {% block main %}
     <div class="main__fullwidth">
         <div class="beta-teaser">
-
-        <form method='POST'>
+            {%if view.status%}
             <div>
-            <label>Kommentar: </label>
-            <textarea rows="5" cols="70" name='comment'> </textarea>
+                <h4>POST result</h4>
+                <ul>
+                {% for status in view.status %}
+                    <li>{{status}}</li>
+                {% endfor %}
+                </ul>
             </div>
-            <div>
-            <label>Für Pfad (z.B.: artikel/01): </label>
-            <input type='text' name='path' />
-            </div>
-            <input type='submit' />
-        <form>
+            {%endif%}
+            <form method='POST'>
+                <div>
+                    <label>Kommentar: </label>
+                    <textarea rows="5" cols="70" name='comment'> </textarea>
+                </div>
+                <div>
+                    <input id='path' type='text' name='path' />
+                    <label for='path'> für Pfad (z.B.: artikel/01)</label>
+                </div>
+                <div>
+                    <input id='pid' type='text' name='pid' />
+                    <label for='pid' > Antwort auf (pid)</label>
+                </div>
+                <input type='submit' />
+            <form>
+        </div>
+    </div>
 {% endblock main %}
