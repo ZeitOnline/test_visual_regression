@@ -39,27 +39,8 @@
 		display: block
 
 	&__button
-		background-color: rgba(255,255,255, 0.5)
-		border-radius: 5px
-		border: 2px solid $zon_light_grey
-		color: $grey--mid-dark
-		display: inline-block
-		font-size: remify(13px)
-		font-weight: bold
-		letter-spacing: 0.05em
-		margin: remify($little--px $tiny--px)
-		padding: remify($fine--px $small--px)
-		text-align: center
-		text-transform: uppercase
+		+zon-button-light
 
-		&:hover
-			background-color: rgba(255,255,255, 0.8)
-			border: 2px solid $zon_mid_grey
-			color: $black
-			cursor: pointer
-
-		&:visited
-			color: $zon-charcoal
 
 .js #beta-toggle-submit
 	display: none
