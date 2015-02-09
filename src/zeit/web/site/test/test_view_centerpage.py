@@ -5,7 +5,7 @@ import pytest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
 
 import zeit.web.site.view_centerpage
@@ -478,7 +478,7 @@ def test_parquet_should_have_rows(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert len(view.area_parquet) == 2, (
+    assert len(view.area_parquet) == 3, (
         'View has invald number of parquet rows.')
 
 
@@ -544,3 +544,35 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver.set_window_size(980, 1024)
     assert small_teaser.is_displayed(), (
         'Small parquet teaser must show it‘s image on desktop.')
+
+
+def test_video_series_should_be_available(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    video_series = view.video_series_list
+    assert len(video_series) > 0, (
+        'Series object is empty')
+
+
+def test_series_select_should_navigate_away(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+    select = driver.find_element_by_css_selector(
+        '#series_select')
+    for option in select.find_elements_by_tag_name('option'):
+        if option.text == 'Rekorder':
+            option.click()
+            break
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(EC.title_is('Serie: Rekorder | ZEIT ONLINE'))
+    assert element
+
+
+def test_area_printbox_should_contain_teaser_image(testserver):
+    mycp = mock.Mock()
+    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view.area_printbox.image
+    isinstance(
+        view.area_printbox.image,
+        zeit.content.image.image.RepositoryImage)

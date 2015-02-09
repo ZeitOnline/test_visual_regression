@@ -12,7 +12,7 @@
 			vertical-align: top
 			width: remify( (158px + $petite--px) )
 		+respond-min($break-desktop-min)
-			width: remify( (174px + $petite--px) )
+			width: remify( (220px + $petite--px) )
 
 	&__container
 		@extend %teaser-small-container
@@ -24,6 +24,8 @@
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker
+		&--spektrum
+			color: $spektrum_de_blue
 	&__title
 		@extend %teaser-title
 		font-size: remify(18px)

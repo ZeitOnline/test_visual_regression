@@ -109,7 +109,7 @@
                                 <a href="http://www.zeit.de/spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
-<!--
+                        {#
                         <div class="main-nav__section main-nav__search">
                             <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
                             <div class="main-nav__section__content js-main-nav-section-content">
@@ -119,9 +119,9 @@
                                 </form>
                             </div>
                         </div>
--->
+                        #}
                         <div class="main-nav__section main-nav__community">
-                            {% if request.app_info.authenticated %}
+                            {% if request.authenticated_userid %}
                                 {{ head_user_is_logged_in_true(request) }}
                             {%- else -%}
                                 {{ head_user_is_logged_in_false(request) }}
@@ -136,20 +136,20 @@
 
 {% macro head_user_is_logged_in_true(request)  %}
     <span class="main-nav__section__trigger js-main-nav-section-trigger">
-        {% if request.app_info.user.picture %}
-            <span class="main-nav__community__icon" style="background-image: url({{ request.app_info.community_host }}{{ request.app_info.user.picture }})"></span>
+        {% if request.session.user.picture %}
+            <span class="main-nav__community__icon" style="background-image: url({{ request.registry.settings.community_host }}/{{ request.session.user.picture }})"></span>
         {%- else -%}
             <span class="main-nav__community__icon icon-avatar-std"></span>
         {%- endif -%}
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">
-        <a href="{{ request.app_info.community_host }}user/{{ request.app_info.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
-        <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.logout }}?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
+        <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
+        <a href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
     </div>
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false(request) -%}
-    <a href="{{ request.app_info.community_host }}{{ request.app_info.community_paths.login }}?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
 {%- endmacro %}
 
 {% macro copyrights(cr_list) -%}

@@ -33,12 +33,12 @@ from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
 import zeit.web.core.interfaces
-import zeit.web.core.appinfo
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
 import zeit.web.core.security
 import zeit.web.core.template
+import zeit.web.site.video_series
 
 
 log = logging.getLogger(__name__)
@@ -65,6 +65,7 @@ class Application(object):
         self.configure_zca()
         self.configure_pyramid()
         self.configure_banner()
+        self.configure_series()
         self.configure_navigation()
 
     def configure_banner(self):
@@ -78,6 +79,12 @@ class Application(object):
             self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
+
+    def configure_series(self):
+        series_source = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.web_series-source', ''))
+        zeit.web.site.video_series.video_series = (
+            zeit.web.site.video_series.get_video_series(series_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
@@ -115,7 +122,7 @@ class Application(object):
             self.settings.get('linkreach_host', ''))
 
         version = pkg_resources.get_distribution('zeit.web').version
-        self.settings['zmo_version'] = version
+        self.settings['version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 
         self.config = config = pyramid.config.Configurator(
@@ -125,7 +132,6 @@ class Application(object):
 
         self.config.include('pyramid_tm')
         self.configure_jinja()
-        self.config.include('cornice')
 
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
@@ -137,6 +143,12 @@ class Application(object):
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
         config.add_route('health_check', '/health_check')
+        config.add_route('spektrum-kooperation', '/spektrum-kooperation')
+        config.add_route('spektrum-image', '/spektrum-image/*path')
+
+        # Route to post comments to a communit service
+        config.add_route('post_test_comments', '/admin/test-comments')
+
         config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
         config.add_static_view(name='img', path='zeit.web.static:img/')
@@ -177,8 +189,8 @@ class Application(object):
         config.set_authorization_policy(
             pyramid.authorization.ACLAuthorizationPolicy())
 
-        config.add_request_method(zeit.web.core.appinfo.assemble_app_info,
-                                  'app_info', reify=True)
+        config.add_request_method(pyramid.security.authenticated_userid,
+                                  'authenticated_userid', reify=True)
 
         return config
 
@@ -249,7 +261,7 @@ class Application(object):
                 zeit.cms.repository.repository.Repository(),
                 zeit.cms.repository.interfaces.IRepository)
         typ = self.settings['connector_type']
-        allowed = ('real', 'dav', 'filesystem')
+        allowed = ('real', 'dav', 'filesystem', 'mock')
         if typ not in allowed:
             raise ValueError(
                 'Invalid setting connector_type=%s, allowed are {%s}'

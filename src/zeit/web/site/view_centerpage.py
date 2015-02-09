@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import datetime
 import logging
 
-import babel.dates
 import pyramid.response
 import pyramid.view
 
@@ -14,6 +12,7 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
+import zeit.web.site.video_series
 import zeit.web.site.view
 
 log = logging.getLogger(__name__)
@@ -51,9 +50,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and \
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id) \
-                    not in ('zon-fullwidth',)
+                return len(b) and b.layout.id and (
+                    zeit.web.core.template.get_mapped_teaser(b.layout.id)
+                    not in ('zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
 
@@ -72,13 +71,15 @@ class Centerpage(
             try:
                 return b.layout.id in ('parquet-large', 'parquet-regular')
             except AttributeError:
-                return
+                try:
+                    return b.cpextra in ('parquet-spektrum')
+                except AttributeError:
+                    return
 
         teaser_bars = filter(valid_bar, self.context['teaser-mosaic'].values())
         teaser_bar_blocks = sum([bar.values() for bar in teaser_bars], [])
-        auto_pilot_teaser_blocks = filter(valid_blocks, teaser_bar_blocks)
-
-        return auto_pilot_teaser_blocks
+        parquet_teaser_blocks = filter(valid_blocks, teaser_bar_blocks)
+        return parquet_teaser_blocks
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -88,9 +89,9 @@ class Centerpage(
 
         def valid_block(b):
             try:
-                return len(b) and b.layout.id and \
+                return len(b) and b.layout.id and (
                     zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
-                        'zon-fullwidth',)
+                        'zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
 
@@ -135,24 +136,24 @@ class Centerpage(
 
     @zeit.web.reify
     def area_printbox(self):
-        """Return the content object for the Printbox or Angebotsbox,
-        considering weekday. Mon-Wed = Angebotsbox, Thu-Sun = Printbox
+        """Return the content object for the Printbox or Angebotsbox.
         :rtype: dict
         """
 
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        weekday = datetime.datetime.now(tz).weekday()
-
-        if weekday < 3:
-            uri = 'http://xml.zeit.de/angebote/angebotsbox'
-            printbox = False
-        else:
-            uri = 'http://xml.zeit.de/angebote/print-box'
-            printbox = True
-
+        uri = 'http://xml.zeit.de/angebote/print-box'
         content = zeit.cms.interfaces.ICMSContent(uri)
+        has_digital_ad = False
 
-        return {'printbox': printbox, 'content': content}
+        if content.byline == 'mo-mi':
+            # Rewrite content with digital ad box
+            uri = 'http://xml.zeit.de/angebote/angebotsbox'
+            content = zeit.cms.interfaces.ICMSContent(uri)
+            has_digital_ad = True
+
+        printbox = content
+        printbox.has_digital_ad = has_digital_ad
+        printbox.image = zeit.content.image.interfaces.IImages(content).image
+        return printbox
 
     @zeit.web.reify
     def area_videobar(self):
@@ -180,3 +181,14 @@ class Centerpage(
     @zeit.web.reify
     def topiclinks(self):
         return zeit.web.core.interfaces.ITopicLink(self.context)
+
+    @zeit.web.reify
+    def spektrum_hp_feed(self):
+        try:
+            return zeit.web.site.spektrum.HPFeed()
+        except (TypeError, AttributeError):
+            return
+
+    @zeit.web.reify
+    def video_series_list(self):
+        return zeit.web.site.video_series.video_series

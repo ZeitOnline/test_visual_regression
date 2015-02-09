@@ -11,22 +11,23 @@ class CommunityAuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
+
         drupal_id = request.cookies.get('drupal-userid')
         # If no community cookie is present, bail out straight away:
         if drupal_id is None:
             # Avoid stale session data by making sure it's deleted
-            if 'zmo-user' in request.session:
-                del request.session['zmo-user']
+            if 'user' in request.session:
+                del request.session['user']
             return
 
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
-        if 'zmo-user' in request.session and drupal_id == (
-                request.session['zmo-user'].get('uid')):
-            user_info = request.session['zmo-user']
+        if 'user' in request.session and drupal_id == (
+                request.session['user'].get('uid')):
+            user_info = request.session['user']
         else:
             user_info = get_community_user_info(request)
-            request.session['zmo-user'] = user_info
+            request.session['user'] = user_info
 
         # Drupal 6 gives anonymous users a session and uid==0
         # in some cases they where authenticated here, but they should not be!

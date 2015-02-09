@@ -39,3 +39,22 @@ class Image(zeit.web.core.view.Base):
         response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
             os.path.basename(self.context.uniqueId).encode('utf8'))
         return response
+
+
+@view_config(context=zeit.content.video.interfaces.IVideo,
+             name='imagegroup',
+             path_info='.*imagegroup/(still|thumbnail).jpg')
+class Brightcove(zeit.web.core.view.Base):
+
+    def __call__(self):
+        _, file_name = self.request.path_info.rsplit('/', 1)
+        group = zeit.content.image.interfaces.IImageGroup(self.context)
+        image = group[file_name]
+
+        response = self.request.response
+        response.app_iter = pyramid.response.FileIter(image.image.open())
+        response.content_type = image.mimeType
+        response.headers['Content-Type'] = response.content_type
+        response.headers['Content-Disposition'] = (
+            'inline; filename="{}"'.format(file_name))
+        return response

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pyramid.view
 import zeit.web.core.view
 import zeit.web.magazin.view
 
@@ -23,3 +24,18 @@ class Base(zeit.web.core.view.Base):
             return bool(zeit.web.core.banner.banner_toggles[name])
         except (IndexError, TypeError):
             return False
+
+
+@pyramid.view.view_config(
+    route_name='spektrum-kooperation',
+    renderer='templates/inc/parquet/parquet-spektrum.html')
+def spektrum_hp_feed(request):
+    # add CORS header to allow ESI JS drop-in
+    request.response.headers.add(
+        'Access-Control-Allow-Origin', '*')
+    request.response.cache_expires(60)
+    return {
+        'esi_toggle': True,
+        'row': zeit.web.site.spektrum.HPFeed(),
+        'parquet_position': request.params.get('parquet-position')
+    }

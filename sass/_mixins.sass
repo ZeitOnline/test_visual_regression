@@ -32,6 +32,23 @@
 		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
 		z-index: 1
 
+=teaser-image-dark-overlay($color: $black)
+	background-color: $color
+	position: relative
+	&:after
+		bottom: 0
+		content: ''
+		left: 0
+		min-height: 100%
+		min-width: 100%
+		position: absolute
+		right: 0
+		top: 0
+		z-index: 1
+		+background-image(linear-gradient(to top, rgba($color, 1) 0%, rgba($color, 0.2) 35%, rgba($color, 0)))
+		+respond-min($break-tablet-min)
+			+background-image(linear-gradient(30deg, rgba($color, 0.6) 0%, rgba($color, 0.1) 100%))
+
 =no-user-select
 	-webkit-touch-callout: none
 	-webkit-user-select: none
@@ -59,19 +76,12 @@
 =bleed($max: $medium-content-width + 2*$gutter)
 	margin-left: -$page-padding--small
 	margin-right: -$page-padding--small
-	width: auto !important
-	figcaption
-		margin-left: $page-padding--small !important
 	+respond-min($break-1)
 		margin-left: -$page-padding
 		margin-right: -$page-padding
-		figcaption
-			margin-left: $page-padding  !important
 	+respond-min($max)
 		margin-left: 0
 		margin-right: 0
-		figcaption
-			margin-left: auto !important
 
 =visuallyhidden
 	border: 0
@@ -111,7 +121,7 @@
 	::input-placeholder
 		@content
 
-=justify-children-horizontally($elements-selector)
+=justify-children-horizontally($elements-selector, $vertical-alignment: top)
 	text-align: justify
 	text-justify: distribute-all-lines
 	-ms-text-justify: distribute-all-lines
@@ -133,8 +143,8 @@
 	& > *
 		text-align: left // reset text-aling for child-elements
 
-	& > #{$elements-selector}
-		+inline-block
+	@at-root #{$elements-selector}
+		+inline-block($vertical-alignment)
 
 =animated-interaction($color: $color-link--hover)
 	+transition(border-color .2s)
@@ -182,6 +192,43 @@
 				display: none
 
 /* END: mixins for navigation/header */
+
+=image_text_replacement($display:block, $vertical-align:middle)
+	background-position: 50% 50%
+	background-size: contain
+	display: $display
+	text-indent: -50000em
+	@if $display == inline-block or $display == inline
+		vertical-align: $vertical-align
+
+=zon-button($background-color, $hover-background-color, $border-color, $hover-border-color, $color, $hover-color, $visited-color, $font-size, $margin, $padding)
+	background-color: $background-color
+	border-radius: 5px
+	border: 2px solid $border-color
+	color: $color
+	display: inline-block
+	font-size: $font-size
+	font-weight: bold
+	letter-spacing: 0.05em
+	margin: $margin
+	padding: $padding
+	text-align: center
+	text-transform: uppercase
+	+single-transition(all, 0.15s, ease-in-out)
+	&:hover
+		background-color: $hover-background-color
+		border: 2px solid $hover-border-color
+		color: $hover-color
+		cursor: pointer
+
+	&:visited
+		color: $visited-color
+
+=zon-button-dark
+	+zon-button(rgba(0,0,0, 0.2), rgba(0,0,0, 0.5), $zon_mid_grey, $zon-alto, $zon_lighter_grey, $white, $zon-alto, remify(13px), remify($little--px $tiny--px), remify($fine--px $small--px))
+
+=zon-button-light
+	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $grey--mid-dark, $black, $zon-charcoal, remify(13px), remify($little--px $tiny--px), remify($fine--px $small--px))
 
 // pseudo classes
 %off-screen

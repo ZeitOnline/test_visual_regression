@@ -109,7 +109,7 @@ class Image(BaseImage):
         # TODO: don't use XML but adapt an Image and use it's metadata
         self.layout = model_block.layout
 
-        if model_block.xml:
+        if model_block.xml is not None:
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
             self.caption = _inline_html(model_block.xml.find('bu'))
@@ -120,8 +120,15 @@ class Image(BaseImage):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
+        # XXX: This is a rather unelegant and inflexible!
+        #      But it gets images rolling in beta articles - so wth.
+        target = model_block.references.target
+        if zeit.content.image.interfaces.IImageGroup.providedBy(target):
+            target = zeit.web.core.template.closest_substitute_image(
+                target, 'zon-article-large')
+
         if model_block.references:
-            self.image = model_block.references.target
+            self.image = target
             self.src = self.image and self.image.uniqueId
             self.uniqueId = self.image and self.image.uniqueId
             if model_block.references.title:

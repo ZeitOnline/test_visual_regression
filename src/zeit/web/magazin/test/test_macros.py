@@ -697,7 +697,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
-    request.app_info.user.picture = None
+    request.session.user.picture = None
 
     # no pic
     markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
@@ -711,10 +711,9 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
 
     # pic
     request = mock.Mock()
-    request.app_info.community_host = 'www.zeit.de/'
-    request.app_info.user.picture = 'test.jpg'
-    request.app_info.user.uid = 1
-    request.app_info.community_paths.logout = 'logout'
+    request.registry.settings.community_host = 'www.zeit.de'
+    request.session.user.picture = 'test.jpg'
+    request.session.user.uid = 1
     request.url = 'test'
 
     markup = ('<span class="main-nav__community__icon"'
@@ -739,12 +738,10 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
-    request.app_info.community_host = 'www.zeit.de/'
-    request.app_info.community_paths.login = 'login'
-    request.app_info.community_paths.register = 'register'
+    request.registry.settings.community_host = 'www.zeit.de'
     request.url = 'test'
 
-    markup = ('<a href="www.zeit.de/login?destination=test"'
+    markup = ('<a href="www.zeit.de/user/login?destination=test"'
               ' id="hp.zm.topnav.community.login">Anmelden</a>')
 
     lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
@@ -762,7 +759,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request = mock.Mock()
 
     # logged in
-    request.app_info.authenticated = 'true'
+    request.authenticated_userid = '12345'
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
     lines = tpl.module.main_nav('true', request).splitlines()
@@ -774,7 +771,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     assert logged in output
 
     # logged out
-    request.app_info.authenticated = None
+    request.authenticated_userid = None
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()

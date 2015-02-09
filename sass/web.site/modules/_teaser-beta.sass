@@ -10,13 +10,11 @@
 	&__title
 		@extend %teaser-title
 		text-align: center
+		margin-bottom: remify($compact--px)
 
 	&__kicker
 		@extend %teaser-kicker
 		text-align: center
-
-	&__prose
-		text-align: justify
 
 	&__prose,
 	&__cta
@@ -41,20 +39,27 @@
 		display: block
 
 	&__button
-		display: block
-		margin: $micro auto
-		border: $dblhair solid $zon_grey
-		border-radius: $micro
-		height: $twice
-		width: $mediumhuge
-		font-size: $font-s--rem
-		line-height: $twice
-		color: $zon-charcoal
-		text-align: center
-		background-color: $white
-
-	&__button:visited
-		color: $zon-charcoal
-
-	&__button--inline
+		background-color: rgba(255,255,255, 0.5)
+		border-radius: 5px
+		border: 2px solid $zon_light_grey
+		color: $grey--mid-dark
 		display: inline-block
+		font-size: remify(13px)
+		font-weight: bold
+		letter-spacing: 0.05em
+		margin: remify($little--px $tiny--px)
+		padding: remify($fine--px $small--px)
+		text-align: center
+		text-transform: uppercase
+
+		&:hover
+			background-color: rgba(255,255,255, 0.8)
+			border: 2px solid $zon_mid_grey
+			color: $black
+			cursor: pointer
+
+		&:visited
+			color: $zon-charcoal
+
+.js #beta-toggle-submit
+	display: none

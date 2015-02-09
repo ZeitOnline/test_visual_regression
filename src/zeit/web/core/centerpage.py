@@ -1,16 +1,22 @@
+import logging
+import urllib2
+
 import grokcore.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+import zeit.content.image.image
 
 import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.core.utils
+import zeit.web.site.spektrum
 
-import logging
 
 log = logging.getLogger(__name__)
 
@@ -214,6 +220,64 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.src = self.uniqueId = image.uniqueId
         self.title = meta.title
         self.uniqueId = image.uniqueId
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
+                      zeit.web.core.utils.nsdict):
+
+    def __init__(self, video):
+        super(VideoImageGroup, self).__init__()
+        self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
+        for image_pattern, src in [('still', video.video_still),
+                                   ('thumbnail', video.thumbnail)]:
+            image = zeit.web.core.block.BaseImage()
+            image.image = zeit.content.image.image.LocalImage()
+            file_name = '{}.jpg'.format(image_pattern)
+            try:
+                with image.image.open('w') as fh:
+                    fh.write(urllib2.urlopen(src, timeout=4).read())
+            except IOError:
+                pass
+            image.src = src
+            image.mimeType = 'image/jpeg'
+            image.image_pattern = 'brightcove-{}'.format(image_pattern)
+            image.copyright = video.copyrights
+            image.caption = (video.teaserText or '').strip('\n')
+            image.title = (video.teaserTitle or '').strip('\n')
+            image.alt = (video.title or '').strip('\n')
+            image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
+            self[file_name] = image
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.adapter(zeit.web.site.spektrum.Teaser)
+class SpektrumImage(zeit.web.core.block.BaseImage):
+
+    def __init__(self, context):
+        super(SpektrumImage, self).__init__()
+
+        if context.feed_image is None:
+            raise TypeError('Could not adpat', context,
+                            zeit.web.core.interfaces.ITeaserImage)
+
+        self.image = zeit.content.image.image.LocalImage()
+
+        try:
+            with self.image.open('w') as fh:
+                fileobj = urllib2.urlopen(context.feed_image, timeout=4)
+                fh.write(fileobj.read())
+        except IOError:
+            raise TypeError('Image was not found on spektrum server.')
+
+        self.mimeType = fileobj.headers.get('Content-Type')
+        self.image_pattern = 'spektrum'
+        self.caption = context.teaserText
+        self.title = context.teaserTitle
+        self.alt = context.teaserTitle
+        self.uniqueId = 'http://xml.zeit.de/spektrum-image{}'.format(
+            context.feed_image.replace('http://www.spektrum.de', ''))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)

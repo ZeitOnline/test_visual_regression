@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='1.10.5.dev0',
+    version='1.11.5.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -24,13 +24,11 @@ setup(
     ),
     install_requires=[
         'Babel',
-        'cornice >= 0.16.2',
         'colander',
         'grokcore.component',
         'iso8601',
         'lxml',
         'martian',
-        'plone.testing [zca]',
         'pyramid',
         'pyramid_beaker',
         'pyramid_jinja2',
@@ -46,7 +44,7 @@ setup(
         'zc.iso8601',
         'wsgiproxy',
         'zeit.cms',
-        'zeit.connector >= 2.4.0.dev0',
+        'zeit.connector >= 2.6.0',
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.cp >= 2.6.1',
@@ -62,14 +60,14 @@ setup(
         'zeit.find',
         'zeit.intrafind',
         'zeit.magazin',
-        'zeit.newsletter >= 1.0.0b2.dev0',
+        'zeit.newsletter >= 1.3.1',
         'zeit.wysiwyg',
         'zeit.seo',
         'zeit.solr',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
-        'zope.processlifetime'
+        'zope.processlifetime',
     ],
     description='This package is all about ZEIT ONLINE website delivery.',
     long_description=open('README.md', 'r').read(),
@@ -81,15 +79,17 @@ setup(
     },
     extras_require={
         'test': [
-            'gocept.httpserverlayer',
             'cssselect',
+            'gocept.httpserverlayer',
             'mock',
-            'webtest',
+            'plone.testing [zca,zodb]',
             'pytest',
             'pytest-pep8',
             'selenium',
+            'transaction',
             'waitress',
             'webtest',
+            'zope.event',
             'zope.testbrowser [wsgi]'
         ]
     },

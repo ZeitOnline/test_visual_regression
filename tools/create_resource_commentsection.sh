@@ -1,5 +1,5 @@
-path_to_articles='../src/zeit/web/data/artikel'
-service_add_commentsection='http://localhost:8888/agatho/commentsection'
+path_to_articles='../src/zeit/web/core/data/artikel'
+service_add_commentsection='http://localhost:8989/agatho/commentsection'
 
 ACCESS_LOG=/tmp/update_comments_access.log
 ERROR_LOG=/tmp/update_comments_error.log

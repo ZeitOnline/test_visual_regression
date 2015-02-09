@@ -1,10 +1,10 @@
 {% extends "zeit.web.site:templates/layout.html" %}
-{% import 'zeit.web.site:templates/macros/article_macro.tpl' as blocks with context%}
+{% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
 
 {% macro render_page(page) %}
-  {% for item in page %}
-          {{ blocks[item|block_type](item)}}
-  {% endfor %}
+    {% for item in page %}
+        {{ (blocks[item | block_type] or blocks["no_block"])(item)}}
+    {% endfor %}
 {% endmacro %}
 
 {% block main %}
@@ -37,6 +37,27 @@
                     {{ blocks.print_pagination( view.pagination ) }}
                 {% endif %}
             {% endblock article_pagination %}
+        </div>
+        <div class="comment-section">
+            <span class="comment-section__head">
+                Diskutieren Sie mit.
+            </span>
+            <div class="comment-section__comments">
+                {% if view.comments %}
+                    {% for comment in view.comments.comments[:20] %}
+                        <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="{{ comment.cid }}">
+                            <a class="comment__name" href="{{ comment.userprofile_url }}">{{ comment.name | e }}</a>
+                            <span  class="comment__date">{{ comment.timestamp | format_date_ago() }}</span>
+                            <a  class="comment__anchor" href="#{{ comment.cid }}">Kommentar #{{ loop.index }}</a>
+                            <div class="comment__body">{{ comment.text | safe }}</div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <span class="comment-section__notice">
+                        Noch keine Kommentare.
+                    </span>
+                {% endif %}
+            </div>
         </div>
     </article>
 {% endblock main %}
