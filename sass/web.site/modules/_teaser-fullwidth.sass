@@ -8,6 +8,21 @@
 	+respond-min($break-tablet-min)
 		background: none
 		margin-top: 0
+		&:before
+			content: ''
+			min-height: 100%
+			min-width: 100%
+			position: absolute
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0
+			z-index: 1
+			background-color: rgba(0, 0, 0, .1)
+			opacity: 0
+			+transition(opacity .2s ease-in-out)
+		&:hover:before
+			opacity: 1
 	&__media
 		margin: 0
 		width: 100%
@@ -75,7 +90,6 @@
 	&__metadata
 		@extend %teaser-byline
 		-webkit-font-smoothing: antialiased
-		color: $zon_mid_grey
 		+respond-min($break-desktop-min)
 			font-size: $font-s--rem
 			letter-spacing: 0.04em

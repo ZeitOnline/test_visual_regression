@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import time
 import lxml
 import pytest
 import mock
@@ -453,25 +454,35 @@ def test_nav_search_is_working_as_expected(
     logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
     menue__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
     document = driver.find_element_by_class_name('page')
+    transition_duration = 0.2
 
     if screen_width == 768:
         # test search input is shown after button click
         search__button.click()
+        time.sleep(transition_duration) # wait for animation
         assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is not hidden after click in input
         search__input.click()
         assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is hidden after button click, if its empty
         search__button.click()
+        time.sleep(transition_duration) # wait for animation
         assert search__input.is_displayed() is False, 'Input is displayed'
-        # test search input is hidden after click somewhere else
-        document.click()
-        assert search__input.is_displayed() is False, 'Input is displayed'
+        # test search input is hidden after click somewhere else (show it first)
         search__button.click()
+        time.sleep(transition_duration) # wait for animation
+        document.click()
+        time.sleep(transition_duration) # wait for animation
+        assert search__input.is_displayed() is False, 'Input is displayed'
+
 
     # open search for mobile
     if screen_width < 768:
         menue__button.click()
+    # open search for tablet
+    elif screen_width == 768:
+        search__button.click()
+        time.sleep(transition_duration) # wait for animation
 
     # test if search is performed
     search__input.send_keys("test")

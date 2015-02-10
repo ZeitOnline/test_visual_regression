@@ -4,27 +4,29 @@ Change log for zeit.web
 1.11.5 (unreleased)
 -------------------
 
-- ZON-1348: Add image scale for ZON article
-
-- ZON-1350: Add images to printbox
-
-- ZON-1332: Initiate comment section for ZON articles
-
-- ZON-1349: Switch prinbox by content toggle
+- ZON-1270: Polishing HP CSS
 
 - ZON-1296: At least, we have a video bar
 
 - ZON-1299: Implement series dropdown for video bar
 
-- BUG-79: Remove horizontal scrollbars in ZMO responsive screens
+- ZON-1332: Initiate comment section for ZON articles
+
+- ZON-1348: Add image scale for ZON article
+
+- ZON-1349: Switch prinbox by content toggle
+
+- ZON-1350: Add images to printbox
+
+- ZON-1351: Implement a basic admin page to post comments for any resource
 
 - BUG-76: Remove img sizing in ad places
+
+- BUG-79: Remove horizontal scrollbars in ZMO responsive screens
 
 - BUG-190: Gracefully handle spektrum rss feed outages
 
 - FIX: Get rid of cornice and app_info overcomplications
-
-- ZON-1351: Implement a basic admin page to post comments for any resource
 
 
 1.11.4 (2015-02-04)
