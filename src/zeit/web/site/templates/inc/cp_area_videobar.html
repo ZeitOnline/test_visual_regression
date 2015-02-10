@@ -11,7 +11,7 @@
 
     <div class="video-stage-secondary">
         <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
-        {% for video in view.area_videobar.videos[1:] %}
+        {% for video in view.area_videobar.videos[1:4] %}
             {% include "zeit.web.site:templates/inc/videobar/video-small.tpl" %}
         {% endfor %}
     </div>
