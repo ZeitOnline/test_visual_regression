@@ -131,3 +131,11 @@ def test_sprektrum_parquet_should_display_meta_more(
     driver.set_window_size(980, 1024)
     assert more_link.is_displayed(), (
         'Parquet more-link must be displayed on desktop.')
+
+
+def test_spektrum_area_should_render_empty_if_feed_unavailable(
+        testbrowser, testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.site.spektrum, 'HPFeed', list)
+    browser = testbrowser(
+        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    assert not browser.cssselect('#parquet-spektrum')

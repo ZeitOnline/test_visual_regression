@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - BUG-76: Remove img sizing in ad places
 
+- BUG-190: Gracefully handle spektrum rss feed outages
+
 - FIX: Get rid of cornice and app_info overcomplications
 
 - ZON-1351: Implement a basic admin page to post comments for any resource

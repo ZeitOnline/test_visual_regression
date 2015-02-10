@@ -362,8 +362,7 @@ def health_check(request):
 
 class service_unavailable(object):
     def __init__(self, context, request):
-        log.exception('%s: %s at %s' % (context.__class__.__name__,
-                      context.message, request.path))
+        log.exception('{} at {}'.format(repr(context), request.path))
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
