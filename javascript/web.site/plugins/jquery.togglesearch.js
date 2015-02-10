@@ -35,16 +35,30 @@
                 var $input = $( that ).find( '.search__input' ),
                     $button = $( that ).find( '.search__button' );
 
-                //event for pressed search button
+                function showInput() {
+                    $input.addClass( 'search__input--visible' );
+                    $( document ).on( 'click', resetInput );
+                }
+
+                function resetInput( e ) {
+                    var searchClick = $( e.target ).closest( '.search__input' ).length;
+
+                    // test if click wasn't on input
+                    if ( !searchClick ) {
+                        $input.removeClass( 'search__input--visible' );
+                        $( document ).off( 'click', resetInput );
+                    }
+                }
+
+                // event for pressed search button
                 $button.on( 'click', function( event ) {
 
-                    if ( $input.is( ':hidden' ) ) {
-                    //only applies if input is hidden
+                    if ( $input.css( 'visibility' ) === 'hidden' ) {
+                    // only applies if input is hidden
                         event.preventDefault();
-                        $input.addClass( 'search__input--visible' );
-                        $button.addClass( 'search__button--right-only' );
+                        showInput();
                     } else if ( $input.hasClass( 'search__input--visible' ) && !$input.val() ){
-                    //if input is empty we wanne hide it when search button is pressed again
+                    // if input is empty we wanne hide it when search button is pressed again
                         event.preventDefault();
                         return;
                     }
@@ -52,29 +66,12 @@
                     event.stopPropagation();
                 });
 
-                //event for pressed close button
-                $( document ).on( 'click', function( event ) {
-                    //test if element was already clicked open
-                    if ( $input.hasClass( 'search__input--visible' ) ){
-                        //test if click wasn't on input
-                        if ( $( event.target ).attr( 'class' ) !== $input.attr( 'class' ) ){
-                            $input.removeClass( 'search__input--visible' );
-                            $button.removeClass( 'search__button--right-only' );
-                            $button.addClass( 'search__button--round' );
-                        }
-                    }
-                });
-
-                //event to reset clickable state when resized
-                $( window ).on( 'resize', function() {
-                    $input.removeClass( 'search__input--visible' );
-                    $button.removeClass( 'search__button--round' );
-                    $button.removeClass( 'search__button--right-only' );
-                });
+                // event to reset clickable state when resized
+                $( window ).on( 'resize', this.resetInput );
             }
         };
 
-        //run through search element and return object
+        // run through search element and return object
         return this.each( function() {
             el.bindSearchFormEvents( this );
         });
