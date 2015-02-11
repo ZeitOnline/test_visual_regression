@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.13 (unreleased)
------------------
+1.12.1 (2015-02-11)
+-------------------
 
 - HOTFIX: Reapply spektrum image view gone missing
 
