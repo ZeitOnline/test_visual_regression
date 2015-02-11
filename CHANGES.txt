@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - BUG-79: Remove horizontal scrollbars in ZMO responsive screens
 
+- BUG-190: Gracefully handle spektrum rss feed outages
+
 - FIX: Get rid of cornice and app_info overcomplications
 
 

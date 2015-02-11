@@ -9,23 +9,21 @@ import zeit.content.image.interfaces
 import zeit.web.core.interfaces
 
 
-class HPFeed(object):
+class HPFeed(list):
 
     def __init__(self):
         """Generate a list of teasers from an RSS feed."""
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        feed_url = conf.get('spektrum_hp_feed')
 
-        self.xml = self._fetch_feed()
-
-    def __iter__(self):
-        iterator = iter(self.xml.xpath('/rss/channel/item'))
-        for item in iterator:
-            yield Teaser(item)
-
-    def _fetch_feed(self):
-        zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        feed_url = zwcs.get('spektrum_hp_feed')
-        resp = requests.get(feed_url)
-        return lxml.etree.fromstring(resp.content)
+        try:
+            resp = requests.get(feed_url, timeout=2.0)
+            xml = lxml.etree.fromstring(resp.content)
+            super(HPFeed, self).__init__(
+                Teaser(i) for i in xml.xpath('/rss/channel/item'))
+        except (requests.exceptions.RequestException,
+                lxml.etree.XMLSyntaxError):
+            super(HPFeed, self).__init__()
 
 
 class Teaser(object):
