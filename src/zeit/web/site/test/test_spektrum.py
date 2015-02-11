@@ -4,6 +4,7 @@ import pkg_resources
 import pytest
 
 import lxml.etree
+import requests
 
 import zeit.web.site.spektrum
 import zeit.web.site.view_centerpage
@@ -35,7 +36,7 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
         u'Forscher entdecken ein China die \xc3\x9cberreste eines bisher '
         u'unbekannten, langhalsigen Dinosauriers.')
     assert teaser.feed_image == (
-        'http://localhost:6551/static/images/img1.jpg')
+        'http://localhost:6552/static/images/img1.jpg')
 
 
 def test_spektrum_teaser_object_with_empty_values_should_not_break():
@@ -139,3 +140,41 @@ def test_spektrum_area_should_render_empty_if_feed_unavailable(
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
     assert not browser.cssselect('#parquet-spektrum')
+
+
+def test_spektrum_cooperation_route_should_be_configured(testserver):
+    assert requests.get('%s/spektrum-kooperation' % testserver.url).ok
+
+
+@pytest.mark.parametrize('index,slug', [
+    (0, ('hp.centerpage.teaser.parquet.42.1.a|'
+         'http://www.spektrum.de/astronomie')),
+    (1, ('hp.centerpage.teaser.parquet.42.1.b|'
+         'http://www.spektrum.de/biologie')),
+    (2, ('hp.centerpage.teaser.parquet.42.1.c|'
+         'http://www.spektrum.de/psychologie-hirnforschung'))
+])
+def test_spektrum_topic_links_should_produce_correct_tracking_slugs(
+        index, slug, testbrowser, testserver):
+    browser = testbrowser(
+        '%s/spektrum-kooperation?parquet-position=42' % testserver.url)
+    topiclink = browser.cssselect('.parquet-meta__topic-link')[index]
+    assert topiclink.get('id') == slug
+
+
+@pytest.mark.parametrize('index,img_slug,title_slug', [
+    (0, 'hp.centerpage.teaser.parquet.43.3.a.image',
+        'hp.centerpage.teaser.parquet.43.3.a.title'),
+    (1, 'hp.centerpage.teaser.parquet.43.3.b.image',
+        'hp.centerpage.teaser.parquet.43.3.b.title'),
+    (2, 'hp.centerpage.teaser.parquet.43.3.c.image',
+        'hp.centerpage.teaser.parquet.43.3.c.title')
+])
+def test_spektrum_teasers_should_produce_correct_tracking_slugs(
+        index, img_slug, title_slug, testbrowser, testserver):
+    browser = testbrowser(
+        '%s/spektrum-kooperation?parquet-position=43' % testserver.url)
+    img = browser.cssselect('.teaser-parquet-small__media-link')[index]
+    assert img.get('id').startswith(img_slug)
+    title = browser.cssselect('.teaser-parquet-small__combined-link')[index]
+    assert title.get('id').startswith(title_slug)
