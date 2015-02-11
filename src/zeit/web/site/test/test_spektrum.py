@@ -139,3 +139,43 @@ def test_spektrum_area_should_render_empty_if_feed_unavailable(
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
     assert not browser.cssselect('#parquet-spektrum')
+
+
+def test_spektrum_cooperation_route_should_be_configured(
+        testbrowser, testserver):
+    browser = testbrowser('%s/spektrum-kooperation' % testserver.url)
+    assert browser.status_code == 200
+
+
+@pytest.mark.parametrize('index,slug', [
+    (0, ('hp.centerpage.teaser.parquet.42.1.a|'
+         'http://www.spektrum.de/astronomie')),
+    (1, ('hp.centerpage.teaser.parquet.42.1.b|'
+         'http://www.spektrum.de/biologie')),
+    (2, ('hp.centerpage.teaser.parquet.42.1.c|'
+         'http://www.spektrum.de/psychologie-hirnforschung'))
+])
+def test_spektrum_topic_links_should_produce_correct_tracking_slugs(
+        index, slug, testbrowser, testserver):
+    browser = testbrowser(
+        '%s/spektrum-kooperation?parquet-position=42' % testserver.url)
+    topiclink = browser.cssselect('.parquet-meta__topic-link')[index]
+    assert topiclink.attr['id'] == slug
+
+
+@pytest.mark.parametrize('index,img_slug,title_slug', [
+    (0, 'hp.centerpage.teaser.parquet.43.3.a.image',
+        'hp.centerpage.teaser.parquet.43.3.a.title'),
+    (1, 'hp.centerpage.teaser.parquet.43.3.b.image',
+        'hp.centerpage.teaser.parquet.43.3.b.title'),
+    (2, 'hp.centerpage.teaser.parquet.43.3.c.image',
+        'hp.centerpage.teaser.parquet.43.3.c.title')
+])
+def test_spektrum_teasers_should_produce_correct_tracking_slugs(
+        index, img_slug, title_slug, testbrowser, testserver):
+    browser = testbrowser(
+        '%s/spektrum-kooperation?parquet-position=43' % testserver.url)
+    img = browser.cssselect('.teaser-parquet-small__media-link')[index]
+    assert img.attr['id'].startswith(img_slug)
+    title = browser.cssselect('.teaser-parquet-small__combined-link')[index]
+    assert title.attr['id'].startswith(title_slug)
