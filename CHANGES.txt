@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.11.5 (unreleased)
--------------------
+1.13 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.12 (2015-02-11)
+-----------------
+
+- ZON-1369: beta: add button/link 'to homepage'
 
 - ZON-1270: Polishing HP CSS
 
@@ -23,6 +31,8 @@ Change log for zeit.web
 - BUG-76: Remove img sizing in ad places
 
 - BUG-79: Remove horizontal scrollbars in ZMO responsive screens
+
+- BUG-190: Gracefully handle spektrum rss feed outages
 
 - FIX: Get rid of cornice and app_info overcomplications
 
