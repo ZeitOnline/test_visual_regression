@@ -9,10 +9,8 @@
 	+respond-min($break-desktop-min)
 		margin-top: em(16px)
 	&__label
-		font-family: TabletGothic
-		font-size: $little
-		font-weight: 200
-		letter-spacing: 0.07
+		font-size: $font-s
+		letter-spacing: $zon-letter-spacing-l
 		line-height: 1
 		margin: 0 0 1em 0
 		text-transform: uppercase
@@ -39,27 +37,14 @@
 		margin: 0 0 $thin 0
 	&__kicker
 		@extend %teaser-kicker
-		font-size: $font-s--rem
-		font-weight: 200
 	&__combined-link
 		@extend %teaser-combined-link
 	&__title
-		display: block
-		font-size: $font-l--rem
-		letter-spacing: $zon-letter-spacing-s
-		font-weight: bold
-		line-height: 1.15
-		+respond-min($break-desktop-min)
-			font-size: $font-zon-xl--rem
+		@extend %teaser-title
 	&__text
 		@extend %teaser-text
-		color: $grey--mid
 	&__byline
 		@extend %teaser-byline
-		color: $grey
-		font-family: TabletGothic
-		font-style: normal
-		margin-bottom: 0
 	&__metadata
 		@extend %teaser-metadata
 	&__datetime

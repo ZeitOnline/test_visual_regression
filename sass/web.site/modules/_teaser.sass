@@ -68,7 +68,6 @@
 %teaser-title
 	display: block
 	color: $zon-charcoal
-	font-family: $font-tabletgothic
 	font-size: $font-l
 	font-weight: 700
 	letter-spacing: $zon-letter-spacing-s
@@ -85,25 +84,24 @@
 	width: 100%
 
 %teaser-text
-	color: $grey--mid
+	color: $zon_grey
+	font-size: $font-mm
 	line-height: 1.4
-	margin: 0 0 $micro 0
+	margin: 0 0 remify(4px) 0
 
 %teaser-byline
-	color: $grey
+	color: $zon_mid_grey
 	display: block
-	font-family: $font-tabletgothicnarrow
-	font-size: $font-s
-	letter-spacing: $zon-letter-spacing-m
-	margin-bottom: 4px // IE 8 Fallback
-	margin-bottom: rem(4px)
+	font-size: $font-ss
+	line-height: 1.3846
+	letter-spacing: $zon-letter-spacing-s
+	margin-bottom: remify(4px)
 
 %teaser-metadata
-	color: $grey
-	font-size: $font-s
-	line-height: 1.4
-	font-weight: 200
-	letter-spacing: $standard-letter-spacing
+	color: $zon_mid_grey
+	font-size: $font-ss
+	line-height: 1.3846
+	letter-spacing: $zon-letter-spacing-s
 
 %teaser-datetime
 	&:not(:last-child):after

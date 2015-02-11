@@ -8,26 +8,27 @@
 	+respond-min($break-tablet-min)
 		background: none
 		margin-top: 0
+		&:before
+			content: ''
+			min-height: 100%
+			min-width: 100%
+			position: absolute
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0
+			z-index: 1
+			background-color: rgba(0, 0, 0, .1)
+			opacity: 0
+			+transition(opacity .2s ease-in-out)
+		&:hover:before
+			opacity: 1
 	&__media
 		margin: 0
 		width: 100%
 		z-index: 1
 	&__media-container
-		background-color: $black
-		position: relative
-		&:after
-			bottom: 0
-			content: ''
-			left: 0
-			min-height: 100%
-			min-width: 100%
-			position: absolute
-			right: 0
-			top: 0
-			z-index: 1
-			+background-image(linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0.2) 35%, rgba($black, 0)))
-			+respond-min($break-tablet-min)
-				+background-image(linear-gradient(30deg, rgba($black, 0.6) 0%, rgba($black, 0.1) 100%))
+		+teaser-image-dark-overlay
 	&__media-item
 		height: auto
 		width: 100%
@@ -89,7 +90,6 @@
 	&__metadata
 		@extend %teaser-byline
 		-webkit-font-smoothing: antialiased
-		color: $zon_mid_grey
 		+respond-min($break-desktop-min)
 			font-size: $font-s--rem
 			letter-spacing: 0.04em

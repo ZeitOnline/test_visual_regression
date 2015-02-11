@@ -122,13 +122,6 @@ def test_beta_view_should_write_updated_site_version_to_session(opt, version):
     assert view.site_version == 'opt_{}'.format(opt)
 
 
-def test_beta_view_should_provide_correct_community_host(app_settings):
-    request = mock.MagicMock()
-    request.registry.settings = app_settings
-    view = zeit.web.site.view_beta.Beta(None, request)
-    assert view.community_host == app_settings['community_host']
-
-
 def test_beta_view_should_provide_correct_friedbert_host():
     request = mock.MagicMock()
     request.route_url = lambda *args: 'foo'

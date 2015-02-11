@@ -32,6 +32,7 @@ require.config({
         'web.site/plugins/jquery.scrollup': [ 'jquery' ],
         'web.site/plugins/jquery.extendfooter': [ 'jquery' ],
         'web.site/plugins/jquery.toggleBeta': [ 'jquery' ],
+        'web.site/plugins/jquery.selectNav': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },

@@ -51,10 +51,6 @@ class Beta(zeit.web.core.view.Base):
         return update or original
 
     @property
-    def community_host(self):
-        return self.request.registry.settings.get('community_host')
-
-    @property
     def friedbert_host(self):
         return self.request.route_url('home')
 

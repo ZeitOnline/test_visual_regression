@@ -1,0 +1,25 @@
+.video-large-title
+	bottom: remify(40px)
+	left: $video-title-padding
+	margin: 0
+	position: absolute
+	z-index: 2
+	+respond-min($break-phablet-min)
+		bottom: remify(66px)
+	+respond-min($break-desktop-min)
+		bottom: remify(-66px)
+	&__kicker
+		display: block
+		font-size: remify(14px)
+		font-weight: normal
+		-webkit-font-smoothing: antialiased
+	&__title
+		display: block
+		font-size: remify(16px)
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-phablet-min)
+			font-size: remify(20px)
+		+respond-min($break-tablet-min)
+			font-size: remify(22px)
+	
+	

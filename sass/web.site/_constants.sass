@@ -15,30 +15,24 @@ $teaser-image-desktop-width: em(250px)
 
 // letter-spacing (a half of a pixel)
 $zon-letter-spacing-l: 0.08em
-$zon-letter-spacing-m: 0.04em
+$zon-letter-spacing-m: 0.05em
 $zon-letter-spacing-s: 0.03em
-$standard-letter-spacing: 0.0325em
 
 @import "../constants"
-
-// teaser column
-$color-column-background: $grey--light
-$color-column-shadow: #e4e4e4
-$teaser-column-shadow: 50px
-$teaser-column-series-position: 100px
-$teaser-column-mobile-image-size: 80px
-$teaser-column-topmargin: 40px
 
 // colors
 // for naming inspiration see http://chir.ag/projects/name-that-color/
 $zon-red: #b91109
-$zon-charcoal: #252525
+$zon-charcoal: #313131
 $zon-alto: #dddddd
+$zon-seashell: #f1f1f1
 $zon_dark_grey: #444
 $zon_grey: #777
 $zon_mid_grey: #999
 $zon_light_grey: #CCC
 $zon_lighter_grey: #EEE
+$zon-warm-dark-grey: #e5e5e3
+$zon-warm-grey: #f0f0ed
 
 // spektrum.de
 $spektrum_de_blue: #4d86a4
@@ -56,9 +50,9 @@ $color-input: $grey--mid
 $color-input-bg: $grey--light
 $color-border: $zon-alto
 
-$color-button:              $grey--mid-dark
-$color-button--hover:       $grey--mid-dark
-$color-button--disabled:    $charcoal
+$color-button:              $zon-charcoal
+$color-button--hover:       $zon-charcoal
+$color-button--disabled:    $zon-charcoal
 $color-button-bg:           $white
 $color-button-bg--hover:    $grey--light
 $color-button-bg--disabled: $white
@@ -78,3 +72,5 @@ $zon-bar-height-phablet: em($zon-bar-height-phablet-px)
 
 // margins
 $page-padding: remify($petite--px)
+$video-title-padding--px: 15px
+$video-title-padding: remify($video-title-padding--px)

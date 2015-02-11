@@ -6,13 +6,12 @@
 	transition: all 2.5s ease-out
 	-webkit-filter: blur(0px)
 	&__title
-		color: $grey--mid-dark
-		font-family: $font-tabletgothic
+		color: $zon-charcoal
 		font-size: remify(21px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1
-		margin-bottom: remify(10px)
+		margin-bottom: remify(14px)
 		+respond-min($break-desktop-min)
 			font-size: remify(24px)
 	&__media
@@ -34,7 +33,6 @@
 .snapshot-readmore
 	color: $grey--mid
 	display: block
-	font-family: $font-tabletgothic
 	font-size: remify(14px)
 	font-weight: 700
 	letter-spacing: $zon-letter-spacing-s
@@ -50,19 +48,18 @@
 	+on-interaction
 		color: $grey
 	&:after
-		content: " ❯"
+		content: " \276F"
 		font-size: 1.4em
 		line-height: 1
 		+respond-min($break-phablet-min)
-			content: ""
+			content: " \203A"
+			font-size: 1em
 	&__item
-		display: none
-		+respond-min($break-phablet-min)
-			display: inline
+		+respond-max($break-phablet-min)
+			display: none
 
 .snapshot-caption
-	color: $grey--mid-dark
-	font-family: $font-tabletgothic
+	color: $zon-charcoal
 	font-size: remify(16px)
 	line-height: 1.35em
 	&__link
