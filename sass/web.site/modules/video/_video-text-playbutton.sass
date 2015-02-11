@@ -1,10 +1,7 @@
 .video-text-playbutton
-	+box-shadow(0 0px 30px 10px rgba(0, 0, 0, 0.25))
-	background-color: rgba(0,0,0,0.25)
 	color: lighten(#777, 20%)
 	font-size: remify(14px)
 	font-weight: 300
-	text-shadow: 0 1px 0 black
 	&:before
 		content: '\25B6' // ▶ = Black right-pointing triangle
 		font-size: 90%
@@ -28,7 +25,6 @@
 		z-index: 2
 		+respond-min($break-phablet-min)
 			+zon-button-dark
-			+box-shadow(none)
 			color: $white
 			margin: 0
 	&--inline
