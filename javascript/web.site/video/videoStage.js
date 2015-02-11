@@ -1,10 +1,10 @@
 /**
- * @fileOverview Module for the homepage videoBar
+ * @fileOverview Module for the homepage videoStage
  * @version  0.1
  */
 /**
- * Module for the homepage videoBar
- * @module videoBar
+ * Module for the homepage videoStage
+ * @module videoStage
  */
 define([ 'jquery', 'video' ], function($, video) {
     return {

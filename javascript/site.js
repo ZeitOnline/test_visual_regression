@@ -10,10 +10,10 @@ define('modernizr', [], window.Modernizr);
 // required plain vanilla JS programs here
 require([
     'web.core/images',
-    'web.site/video/videoBar'
-], function( images, videoBar ) {
+    'web.site/video/videoStage'
+], function( images, videoStage ) {
     images.init();
-    videoBar.init();
+    videoStage.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here

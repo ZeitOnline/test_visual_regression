@@ -156,7 +156,7 @@ class Centerpage(
         return printbox
 
     @zeit.web.reify
-    def area_videobar(self):
+    def area_videostage(self):
         """Return a video playlist object to be displayed on the homepage."""
         unique_id = 'http://xml.zeit.de/video/playlist/36516804001'
         return zeit.cms.interfaces.ICMSContent(unique_id)
