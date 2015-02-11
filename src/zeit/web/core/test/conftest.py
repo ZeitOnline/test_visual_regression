@@ -242,9 +242,9 @@ def debug_application(request):
 
 
 @pytest.fixture
-def config(request):
-    config = pyramid.testing.setUp(settings=settings)
-    request.addfinalizer(pyramid.testing.tearDown)
+def config(application, request):
+    config = pyramid.testing.setUp(settings=settings, hook_zca=False)
+    request.addfinalizer(lambda: pyramid.testing.tearDown(unhook_zca=False))
     return config
 
 
