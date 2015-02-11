@@ -14,6 +14,7 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
+import zeit.web.core.view_centerpage
 import zeit.web.site.view
 
 log = logging.getLogger(__name__)
