@@ -4,7 +4,7 @@ Change log for zeit.web
 1.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- DEV-567: Render a centerpage in RSS2.0 format as required for Spektrum.de
 
 
 1.12.2 (2015-02-11)
