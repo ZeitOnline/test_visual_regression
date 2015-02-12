@@ -122,6 +122,9 @@
     <link href="http://xml.zeit.de/reisen/index" id="reisen">Reise</link>
   </section>
   <section>
+    <link href="http://xml.zeit.de/spiele/index" id="reisen">Spiele</link>
+  </section>
+  <section>
     <link href="http://xml.zeit.de/sport/index" id="sport">Sport</link>
     <!-- <sub_sections>
       <sub_section>
