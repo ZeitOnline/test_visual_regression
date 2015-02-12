@@ -13,7 +13,8 @@ require.config({
         'bxSlider': 'libs/jquery.bxslider',
         'esiparser': 'libs/esiparser',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
-        'inview': 'vendor/jquery.inview'
+        'inview': 'vendor/jquery.inview',
+        'video': 'web.site/video/video'
     },
     // a shim is need for jQuery Plugins to load
     // add the name or path and an array of required scripts

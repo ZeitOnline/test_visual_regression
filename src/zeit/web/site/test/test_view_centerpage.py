@@ -555,11 +555,27 @@ def test_video_series_should_be_available(application):
         'Series object is empty')
 
 
+def test_videostage_should_have_right_video_count(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+
+    videos = browser.cssselect('#video-stage article')
+    assert len(videos) == 4, 'We expect 4 videos in video-stage'
+
+
+def test_videos_should_have_video_ids(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+
+    videos = browser.cssselect('#video-stage article')
+    for video in videos:
+        attr = video.attrib
+        videoid = attr.get('data-video-id')
+        assert videoid is not ''
+
+
 def test_series_select_should_navigate_away(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/index' % testserver.url)
-    select = driver.find_element_by_css_selector(
-        '#series_select')
+    select = driver.find_element_by_css_selector('#series_select')
     for option in select.find_elements_by_tag_name('option'):
         if option.text == 'Rekorder':
             option.click()
@@ -567,6 +583,25 @@ def test_series_select_should_navigate_away(selenium_driver, testserver):
     wait = WebDriverWait(driver, 10)
     element = wait.until(EC.title_is('Serie: Rekorder | ZEIT ONLINE'))
     assert element
+
+
+def test_video_stage_video_should_play(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+    article = driver.find_element_by_css_selector(
+        '#video-stage .video-large')
+    videolink = driver.find_element_by_css_selector(
+        '#video-stage .video-large figure')
+    videolink.click()
+    try:
+        player = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, '#video-stage .video-player__iframe'))
+        )
+        assert article.get_attribute(
+            'data-video-id') in player.get_attribute('src')
+    except TimeoutException:
+        assert False, 'Video not visible with 10 seconds'
 
 
 def test_area_printbox_should_contain_teaser_image(testserver):
