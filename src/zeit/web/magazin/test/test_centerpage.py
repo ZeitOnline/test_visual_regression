@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 import re
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
 import pytest
-from zope.component import getMultiAdapter
 
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
@@ -413,10 +416,10 @@ def test_cp_gallery_teaser_has_expected_text_content(
 def test_gallery_teaser_has_expected_img_content(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(
-        ".cp_button--gallery")
-    assert len(wrap) != 0
-    for element in wrap:
+    elem = (By.CLASS_NAME, "cp_button--gallery")
+    cond = expected_conditions.presence_of_element_located(elem)
+    WebDriverWait(driver, 10).until(cond)
+    for element in driver.find_elements_by_css_selector(".cp_button--gallery"):
         img = element.find_element_by_tag_name(
             "img")
         assert re.search('http://.*/centerpage/katzencontent/' +
@@ -431,9 +434,13 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(
-        ".cp_informatives__wrap")
-    assert len(wrap) != 0
+
+    elem = (By.CLASS_NAME, "cp_informatives__wrap")
+    cond = expected_conditions.presence_of_element_located(elem)
+    WebDriverWait(driver, 10).until(cond)
+
+    wrap = driver.find_elements_by_css_selector(".cp_informatives__wrap")
+
     elements = wrap[0].find_elements_by_xpath("div")
     add = elements[2].get_attribute("class")
     assert add == 'cp_button--ad'
@@ -655,10 +662,9 @@ def test_default_image_url_should_return_available_image_size(
         image_url)
 
 
-def test_default_image_url_should_return_None_when_no_uniqueId_is_given(
+def test_default_image_url_should_return_none_when_no_unique_id_is_given(
         testserver, monkeyreq):
-    m = mock.Mock()
-    assert default_image_url(m) is None
+    assert default_image_url(mock.Mock()) is None
 
 
 def test_default_teaser_should_return_default_teaser_image(
