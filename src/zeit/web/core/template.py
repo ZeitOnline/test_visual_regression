@@ -107,7 +107,12 @@ def create_url(obj):
 @zeit.web.register_filter
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
-               'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd"}
+               'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
+               'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ"}
+    # workaround for inadequate format_datetime() parsing
+    # "yyyy-MM-dd'T'HH:mm:ssZZZZZ" or "yyyy-MM-dd'T'HH:mm:ssXXX" is not working
+    if type == 'iso8601':
+        return obj.replace(microsecond=0).isoformat()
     return babel.dates.format_datetime(obj, formats[type], locale="de_De")
 
 
