@@ -228,7 +228,10 @@ def workingcopy(application, zodb, request):
     request.addfinalizer(lambda: site.__exit__(None, None, None))
 
 
-@pytest.fixture(scope='session')
+# XXX Toggling the exception view in an existing application would be much more
+# convenient than having to create an entirely new one just for that purpose,
+# but I can't find a way to temporarily de-register a pyramid view.
+@pytest.fixture
 def debug_application(request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
@@ -242,9 +245,9 @@ def debug_application(request):
 
 
 @pytest.fixture
-def config(request):
-    config = pyramid.testing.setUp(settings=settings)
-    request.addfinalizer(pyramid.testing.tearDown)
+def config(application, request):
+    config = pyramid.testing.setUp(settings=settings, hook_zca=False)
+    request.addfinalizer(lambda: pyramid.testing.tearDown(unhook_zca=False))
     return config
 
 
@@ -261,7 +264,7 @@ def agatho():
         agatho_url='%s/agatho/thread/' % settings['agatho_host'])
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def debug_testserver(debug_application, request):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6547

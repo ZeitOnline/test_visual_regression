@@ -25,6 +25,7 @@
     </div>
     <ul class="parquet-teasers">
         {% for teaser in row[:3] -%}
+            {% set teaser_track_id = loop.cycle('a', 'b', 'c') %}
             {% include ["zeit.web.site:templates/inc/parquet/zon-parquet-small-spektrum.tpl"] %}
         {% endfor %}
     </ul>

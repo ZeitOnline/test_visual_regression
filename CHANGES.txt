@@ -7,6 +7,18 @@ Change log for zeit.web
 - ZON-1297: video-stage completion
 
 
+1.12.2 (2015-02-11)
+-------------------
+
+- HOTFIX: Repair and test spektrum parquet tracking slugs
+
+
+1.12.1 (2015-02-11)
+-------------------
+
+- HOTFIX: Reapply spektrum image view gone missing
+
+
 1.12 (2015-02-11)
 -----------------
 
