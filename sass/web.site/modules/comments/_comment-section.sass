@@ -1,0 +1,20 @@
+=remove-site-padding
+    margin-left: (-$page-padding)
+    margin-right: (-$page-padding)
+
+=restore-site-padding
+    padding-left: $page-padding
+    padding-right: $page-padding
+
+.comment-section
+    +remove-site-padding
+
+    &__head
+        font-size: 24px
+        font-weight: bold
+        margin: 40px 0 0
+        padding: 20px 40px
+        display: block
+        border-top: 2px solid $zon-seashell
+
+    &__comments
