@@ -53,7 +53,7 @@ def test_delta_days_entity_should_raise_type_error_on_invalid_param():
 def test_delta_days_entity_should_be_created():
     bde = zeit.web.core.date.DeltaDaysEntity(delta_time.delta)
     assert bde.number == 2
-    assert bde.text == '2 Tagen'
+    assert bde.text == '2 Tage'
 
 
 def test_delta_hours_entity_should_be_created():

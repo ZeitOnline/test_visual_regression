@@ -63,14 +63,9 @@ class DeltaDaysEntity(DeltaTimeEntity):
     def __init__(self, delta):
         super(DeltaDaysEntity, self).__init__(delta)
         self.number = self.delta.days
-        date_text = babel.dates.format_timedelta(
+        self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(days=self.delta.days),
             threshold=1, locale=locale)
-        # Dirty hack, since babel does not understand
-        # german cases (as in Kasus)
-        # shouldn't this better get applied in _stringify_delta_time? [ms]
-        self.text = date_text.replace('Tage', 'Tagen', 1)
-        self.text = date_text.replace('Monate', 'Monaten', 1)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaHoursEntity)
@@ -127,13 +122,16 @@ class DeltaTime(object):
             self.minutes = None
 
     def _stringify_delta_time(self):
-        prefix = 'vor '
-        human_readable = prefix + ' '.join(
+        human_readable = ' '.join(
             i.text for i in (self.days, self.hours, self.minutes)
             if i is not None and i.number != 0)
-        if human_readable is prefix:
-            human_readable = None
-        return human_readable
+        if human_readable is '':
+            return
+        # Dirty hack, since babel does not understand
+        # german cases (as in Kasus)
+        return 'vor ' + human_readable.replace(
+            'Tage', 'Tagen', 1).replace(
+            'Monate', 'Monaten', 1)
 
     def get_time_since_modification(self):
         self._get_babelfied_delta_time()
