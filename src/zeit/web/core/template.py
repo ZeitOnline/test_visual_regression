@@ -112,7 +112,10 @@ def format_date(obj, type='short'):
     # workaround for inadequate format_datetime() parsing
     # "yyyy-MM-dd'T'HH:mm:ssZZZZZ" or "yyyy-MM-dd'T'HH:mm:ssXXX" is not working
     if type == 'iso8601':
-        return obj.replace(microsecond=0).isoformat()
+        try:
+            return obj.replace(microsecond=0).isoformat()
+        except AttributeError:
+            return
     return babel.dates.format_datetime(obj, formats[type], locale="de_De")
 
 
