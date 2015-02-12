@@ -122,9 +122,6 @@
     <link href="http://xml.zeit.de/reisen/index" id="reisen">Reise</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/spiele/index" id="reisen">Spiele</link>
-  </section>
-  <section>
     <link href="http://xml.zeit.de/sport/index" id="sport">Sport</link>
     <!-- <sub_sections>
       <sub_section>
@@ -137,6 +134,9 @@
         <link href="http://xml.zeit.de/sport/index" id="live-ticker">Live&#8209;Ticker</link>
       </sub_section>
     </sub_sections> -->
+  </section>
+  <section>
+    <link href="http://xml.zeit.de/spiele/index" id="spiele">Spiele</link>
   </section>
   <section>
     <link href="http://xml.zeit.de/mobilitaet/index" id="mobilitaet">Mobilität</link>
