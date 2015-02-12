@@ -46,10 +46,19 @@
                 {% if view.comments %}
                     {% for comment in view.comments.comments[:20] %}
                         <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="{{ comment.cid }}">
-                            <a class="comment__name" href="{{ comment.userprofile_url }}">{{ comment.name | e }}</a>
-                            <span  class="comment__date">{{ comment.timestamp | format_date_ago() }}</span>
-                            <a  class="comment__anchor" href="#{{ comment.cid }}">Kommentar #{{ loop.index }}</a>
-                            <div class="comment__body">{{ comment.text | safe }}</div>
+                            <a class="comment__name" href="{{ comment.userprofile_url }}">
+                                {{ comment.name | e }}
+                            </a>
+                            <a  class="comment__anchor" href="#{{ comment.cid }}">
+                                #{{ loop.index }}
+                            </a>
+                            &nbsp; &ndash; &nbsp;
+                            <span  class="comment__date">
+                                {{ comment.timestamp | format_date_ago() }}
+                            </span>
+                            <div class="comment__body">
+                                {{ comment.text | safe }}
+                            </div>
                         </article>
                     {% endfor %}
                 {% else %}
