@@ -2,6 +2,7 @@
 import mock
 import pkg_resources
 import pytest
+import re
 
 import lxml.etree
 import requests
@@ -178,3 +179,15 @@ def test_spektrum_teasers_should_produce_correct_tracking_slugs(
     assert img.get('id').startswith(img_slug)
     title = browser.cssselect('.teaser-parquet-small__combined-link')[index]
     assert title.get('id').startswith(title_slug)
+
+
+def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
+    feed_url = '%s/centerpage/index/rss-spektrum-flavoured' % testserver.url
+    browser = testbrowser(feed_url)
+    assert browser.headers['Content-Type'].startswith('application/rss+xml')
+    feed = browser.contents
+    assert '<atom:link href="%s"' % feed_url in feed
+    assert ('<link>%s/centerpage/article_image_asset</link>' % testserver.url
+            in feed)
+    assert re.search('<enclosure .* url="%s/centerpage/katzencontent/'
+                     % testserver.url, feed)
