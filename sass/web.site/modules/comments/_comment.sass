@@ -1,18 +1,28 @@
 .comment
-    +restore-site-padding
+    +restore-side-padding
+    border-top: 1px solid $zon_light_grey
+    padding-top: remify($junior--px)
+    padding-bottom: remify($twice--px)
 
     &__name
         color: $zon-red
+        display: block
+        font-size: remify(16px)
         font-weight: bold
-        margin: 10px 20px 0 0
-        display: inline-block
+        margin: 0 20px 0 0
 
     &__date,
     &__anchor
-        color: $zon_grey
+        color: $zon-charcoal
+        font-size: remify(12px)
 
     &__date:after
         content: ", "
 
+    &__body
+        font-size: remify(16px)
+
+
 .comment--indented
-    border-left: $page-padding solid black
+    +box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
+    padding-left: remify($large--px)
