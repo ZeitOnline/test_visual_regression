@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - DEV-567: Render a centerpage in RSS2.0 format as required for Spektrum.de
 
+- ZON-1297: Video-stage completion
+
 
 1.12.2 (2015-02-11)
 -------------------

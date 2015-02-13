@@ -24,8 +24,10 @@
 		position: absolute
 		z-index: 2
 		+respond-min($break-phablet-min)
-			color: $white
 			+zon-button-dark
+			color: $white
 			margin: 0
 	&--inline
 		display: inline
+	&--hidden
+		display: none
