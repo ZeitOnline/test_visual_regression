@@ -23,14 +23,14 @@
 {%- endmacro %}
 
 {% macro include_teaser_datetime(teaser, layout_id='', modifier='') -%}
-    <time class="{{ layout_id }}__datetime {{modifier}}" datetime="{{ teaser | mod_date |strftime('%Y-%m-%d %H:%M') }}">{{ get_delta_time(teaser) | hide_none }}</time>
+    <time class="{{ layout_id }}__datetime {{modifier}} js-update-datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">{{ get_delta_time(teaser) | hide_none }}</time>
 {%- endmacro %}
 
 {% macro include_teaser_commentcount(teaser, layout_id='', modifier='') -%}
     {% set comments = get_teaser_commentcount(teaser.uniqueId) %}
     {% if comments %}
     {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
-    <a class="{{ layout_id }}__commentcount {{modifier}}" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
+    <a class="{{ layout_id }}__commentcount {{modifier}} js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
     {% endif %}
 {%- endmacro %}
 

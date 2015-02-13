@@ -4,6 +4,8 @@ Change log for zeit.web
 1.13 (unreleased)
 -----------------
 
+- ZON-1327: Hide older modification time data
+
 - DEV-567: Render a centerpage in RSS2.0 format as required for Spektrum.de
 
 - ZON-1297: Video-stage completion
