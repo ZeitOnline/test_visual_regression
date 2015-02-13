@@ -107,24 +107,26 @@ class RSSFeed(
         )
         root.append(channel)
         for content in zeit.content.cp.interfaces.ICPFeed(self.context).items:
-            image = zeit.content.image.interfaces.IMasterImage(
-                zeit.content.image.interfaces.IImages(content).image)
-            channel.append(E.item(
+            item = E.item(
                 E.title(content.title),
                 E.link(zeit.web.core.template.create_url(content)),
                 E.description(content.teaserText),
                 E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),
                 E.guid(content.uniqueId, isPermaLink='false'),
-                E.enclosure(
+            )
+            image = zeit.content.image.interfaces.IMasterImage(
+                zeit.content.image.interfaces.IImages(content).image, None)
+            if image is not None:
+                item.append(E.enclosure(
                     url=zeit.web.core.template.default_image_url(
                         image, 'spektrum'),
                     # XXX Incorrect length, since bitblt will resize the image,
                     # but since that happens outside of the application, we
                     # cannot know the real size here.
                     length=str(image.size),
-                    type=image.mimeType)
-            ))
+                    type=image.mimeType))
+            channel.append(item)
         return root
 
 

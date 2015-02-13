@@ -164,6 +164,14 @@
         <copyright link="http://foo.de">©foo</copyright>
       </image>
     </reference>
+    <reference type="intern" href="http://xml.zeit.de/centerpage/article_with_broken_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+      <title py:pytype="str">Article Image Asset Titel</title>
+      <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+      <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+    </reference>
   </feed>
   <teaser>
     <title>ZMO</title>
