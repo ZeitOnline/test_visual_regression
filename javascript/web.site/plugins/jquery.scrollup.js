@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for scrolling to top of site
  * @author anika.szuppa@zeit.de

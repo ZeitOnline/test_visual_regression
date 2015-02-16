@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for updating and animated text chunks
  * @author nico.bruenjes@zeit.de
@@ -28,7 +26,6 @@
     * @memberOf jQuery.fn
     * @return {object} jQuery-Object for chaining
     * @todo remove faked endpoints and count in favor of real data
-    *
     */
     $.fn.up2dateSignals = function( options ) {
 

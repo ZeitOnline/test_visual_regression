@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for select navigation
  * @author nico.bruenjes@zeit.de

@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for toggling the Searchbox
  * @author anika.szuppa@zeit.de

@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for extending footer
  * @author anika.szuppa@zeit.de

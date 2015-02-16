@@ -45,7 +45,7 @@ require([
     'web.magazin/plugins/jquery.animatescroll',
     'web.magazin/plugins/jquery.parseesi'
 ], function() {
-    $(window).referrerCount();
+    $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();

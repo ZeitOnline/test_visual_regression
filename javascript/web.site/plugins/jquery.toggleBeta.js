@@ -12,7 +12,7 @@
 * @author Ron Drongowski
 */
 
-(function( $, win, doc ) {
+(function( $ ) {
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -33,11 +33,9 @@
      * Click submit, when beta state is set
      * @class toggleBeta
      * @memberOf jQuery.fn
-     * @param {string} arg methodname to call from plugin, if ommited, init is called
-     * @param {*} [options…] arguments to methods
     */
 
-    $.fn.toggleBeta = function( arg ) {
+    $.fn.toggleBeta = function() {
 
         var that = this;
 
@@ -52,4 +50,4 @@
         return this;
     };
 
-})( jQuery, window, document );
+})( jQuery );

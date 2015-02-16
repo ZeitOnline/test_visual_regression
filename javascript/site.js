@@ -31,7 +31,7 @@ require([
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.selectNav'
 ], function() {
-    $(window).referrerCount();
+    $( window ).referrerCount();
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
