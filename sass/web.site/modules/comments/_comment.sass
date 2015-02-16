@@ -4,6 +4,9 @@
     padding-top: remify($junior--px)
     padding-bottom: remify($twice--px)
 
+    +respond-min($break-desktop-min)
+        padding: remify($medium--px 160px)
+
     &__name
         color: $zon-red
         display: block
@@ -11,13 +14,15 @@
         font-weight: bold
         margin: 0 20px 0 0
 
+    &__date:before
+        margin-left: 2px
+        color: $zon_light_grey
+        content: '\29F8 ' // ⧸ = Big solidus
+
     &__date,
     &__anchor
-        color: $zon-charcoal
+        color: $zon-grey
         font-size: remify(12px)
-
-    &__date:after
-        content: ", "
 
     &__body
         font-size: remify(16px)
@@ -26,3 +31,8 @@
 .comment--indented
     +box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
     padding-left: remify($large--px)
+    +respond-min($break-desktop-min)
+        +box-shadow(none)
+        padding-left: $page-padding
+        padding-right: 0
+        margin: remify(0 160px)
