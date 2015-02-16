@@ -113,6 +113,8 @@ settings = {
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
     'vivi_zeit.solr_solr-url': 'http://mock.solr',
+    'vivi_zeit.content.cp_cp-types-url': (
+        'egg://zeit.web.core/data/config/cp-types.xml'),
 
     'debug.show_exceptions': 'True',
     'debug.propagate_jinja_errors': 'True'
