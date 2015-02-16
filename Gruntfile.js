@@ -319,7 +319,7 @@ module.exports = function(grunt) {
                 tasks: [ 'lint', 'requirejs:dev' ]
             },
             compass: {
-                files: [ '<%= compass.options.sassDir %>' + '/**/*' ],
+                files: [ '<%= compass.options.sassDir %>' + '/**/*.s{a,c}ss' ],
                 tasks: [ 'compass:dev' ]
             },
             icons: {
