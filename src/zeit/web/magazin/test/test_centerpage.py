@@ -938,3 +938,14 @@ def test_print_cover_teaser_should_not_have_subtitle(testserver, testbrowser):
     subtitle = browser.cssselect(
         'a[href$="/artikel/02"] h2 .cp_button__subtitle')
     assert len(subtitle) == 0
+
+
+def test_homepage_indentifies_itself_as_homepage(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is True
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-large-teaser')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is False
