@@ -143,6 +143,11 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
         return getattr(self.context, 'product_text', None) == 'Advertorial'
 
 
+    @zeit.web.reify
+    def is_hp(self):
+        return self.context.type == 'ZMO'
+
+
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              name='xml',
              renderer='string')
