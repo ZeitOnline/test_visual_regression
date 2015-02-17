@@ -38,35 +38,44 @@
                 {% endif %}
             {% endblock article_pagination %}
         </div>
-        <section class="comment-section" id="comments">
-            <span class="comment-section__head">
+    </article>
+    <section class="comment-section" id="comments">
+        <span class="comment-section__head">
+            {% if view.comments and view.comments.comment_count > 1 %}
+                {{ view.comments.comment_count }} Kommentare
+            {% else %}
                 Diskutieren Sie mit.
-            </span>
-            <div class="comment-section__comments">
-                {% if view.comments %}
-                    {% for comment in view.comments.comments[:20] %}
-                        <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="{{ comment.cid }}">
+            {% endif %}
+        </span>
+        <div class="comment-section__comments">
+            {% if view.comments %}
+                {% for comment in view.comments.comments[:20] %}
+                    <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="cid-{{ comment.cid }}">
+                        {% if comment.img_url %}
+                        <img class="comment__avatar" alt="Avatarbild von {{ comment.name | e }}" src="{{ comment.img_url }}">
+                        {% endif %}
+                        <div class="comment__meta">
                             <a class="comment__name" href="{{ comment.userprofile_url }}">
                                 {{ comment.name | e }}
                             </a>
-                            <a  class="comment__anchor" href="#{{ comment.cid }}">
+                            <a  class="comment__anchor" href="#cid-{{ comment.cid }}">
                                 #{{ loop.index }}
+                                – cid-{{ comment.cid }} in_reply to {{ comment.in_reply }}
                             </a>
-                            &nbsp; &ndash; &nbsp;
                             <span  class="comment__date">
                                 {{ comment.timestamp | format_date_ago() }}
                             </span>
-                            <div class="comment__body">
-                                {{ comment.text | safe }}
-                            </div>
-                        </article>
-                    {% endfor %}
-                {% else %}
-                    <span class="comment-section__notice">
-                        Noch keine Kommentare.
-                    </span>
-                {% endif %}
-            </div>
-        </section>
-    </article>
+                        </div>
+                        <div class="comment__body">
+                            {{ comment.text | safe }}
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <span class="comment-section__notice">
+                    Noch keine Kommentare.
+                </span>
+            {% endif %}
+        </div>
+    </section>
 {% endblock main %}
