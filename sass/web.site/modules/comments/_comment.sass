@@ -41,8 +41,27 @@
 .comment--indented
     +box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
     padding-left: remify($large--px)
+    position: relative
     +respond-min($break-desktop-min)
         +box-shadow(none)
         padding-left: $page-padding
         padding-right: 0
         margin: remify(0 160px)
+
+    // this :before and :after stuff creates a up-facing triangle
+    // to designate the comment which is replied to
+    // source: http://davidwalsh.name/css-triangles
+    &:before,
+    &:after
+        border-bottom: remify(10px) solid transparent
+        border-left: remify(10px) solid transparent // left arrow slant
+        border-right: remify(10px) solid transparent // right arrow slant
+        content: ' '
+        margin-left: remify(14px)
+        position: absolute
+    &:before
+        border-bottom-color: $zon_light_grey
+        top: remify(-10px)
+    &:after
+        border-bottom-color: $white
+        top: remify(-9px)
