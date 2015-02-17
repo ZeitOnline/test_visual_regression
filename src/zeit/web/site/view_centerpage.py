@@ -193,3 +193,12 @@ class Centerpage(
     @zeit.web.reify
     def video_series_list(self):
         return zeit.web.site.video_series.video_series
+
+    @zeit.web.reify
+    def ressort(self):
+        if self.is_hp:
+            return 'homepage'
+        elif self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''

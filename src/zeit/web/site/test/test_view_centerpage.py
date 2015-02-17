@@ -622,3 +622,10 @@ def test_homepage_indentifies_itself_as_homepage(testserver):
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.is_hp is False
+
+
+def test_homepage_ressort_is_homepage(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.ressort == 'homepage'
