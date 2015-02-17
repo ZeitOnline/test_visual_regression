@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.13 (unreleased)
+1.13 (2015-02-17)
 -----------------
 
 - ZON-1327: Hide older modification time data
