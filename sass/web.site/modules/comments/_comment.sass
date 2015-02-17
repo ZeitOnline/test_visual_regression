@@ -3,6 +3,7 @@
     border-top: 1px solid $zon_light_grey
     padding-top: remify($junior--px)
     padding-bottom: remify($twice--px)
+    position: relative
 
     +respond-min($break-desktop-min)
         padding: remify($medium--px 160px)
@@ -34,6 +35,12 @@
         display: inline-block
         font-size: remify(12px)
 
+    &__recommendations
+        color: $zon-red
+        float: right
+        font-size: remify(14px)
+        margin-top: remify($micro--px)
+
     &__body
         font-size: remify(16px)
 
@@ -41,7 +48,7 @@
 .comment--indented
     +box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
     padding-left: remify($large--px)
-    position: relative
+
     +respond-min($break-desktop-min)
         +box-shadow(none)
         padding-left: $page-padding

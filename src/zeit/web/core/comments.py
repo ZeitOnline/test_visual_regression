@@ -88,6 +88,7 @@ def comment_as_dict(comment):
     return dict(
         in_reply=in_reply,
         indented=bool(in_reply),
+        recommendations=len(comment.xpath('flagged[@type="kommentar_empfohlen"]')),
         recommended=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
@@ -100,7 +101,7 @@ def comment_as_dict(comment):
     )
 
 
-def get_thread(unique_id, request, reverse=True):
+def get_thread(unique_id, request, reverse=False):
     """Return a dict representation of the comment thread of the given
     article."""
 
