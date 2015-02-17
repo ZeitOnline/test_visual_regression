@@ -26,26 +26,28 @@
 
         wt.cookie = "1";
         wt.contentGroup = {
-            1: "Redaktion",
-            2: "{{ view.tracking_type }}",
-            3: "{{ view.ressort }}",
-            4: "Online",
-            5: "{{ view.sub_ressort }}",
-            6: "{{ view.serie }}",
-            7: "{{ request.path_info | substring_from('/') }}",
-            8: "{{ view.banner_channel }}",
-            9: "{{ date }}"
+            1: "redaktion", // Zuordnung/Bereich
+            2: "{{ view.tracking_type | lower }}", // Kategorie/Pagetype
+            3: "{{ view.ressort | lower }}", // Ressort
+            4: "online", // Online/Sourcetype
+            5: "{{ view.sub_ressort | lower }}", // Subressort
+            6: "{{ view.serie | lower }}", // Cluster
+            7: "{{ request.path_info | substring_from('/') }}", // doc-path
+            8: "{{ view.banner_channel | lower }}", // Banner-Channel
+            9: "{{ date }}" // First Published
         };
 
         {% if view.type == "article" -%}
         wt.customParameter = {
-            1: "{{ view.authorsList | hide_none }}",
-            2: "{{ view.banner_channel }}",
-            3: "{{ pagination }}",
-            4: "{{ view.rankedTagsList }}",
-            6: "{{ view.text_length }}",
-            7: "",
-            9: "{{ view.banner_channel }}"
+            1: "{{ view.authorsList | lower | hide_none }}", // Autor
+            2: "{{ view.banner_channel | lower }}", // IVW-Code
+            3: "{{ pagination }}", // Seite
+            4: "{{ view.rankedTagsList | lower }}", // Schlagworte
+            5: "{{ view.show_article_date }}", // Last published
+            6: "{{ view.text_length }}", // Textlänge
+            7: "", // Quelle
+            8: "", // Product-Id
+            9: "{{ view.banner_channel | lower }}" // Banner-Channel
         };
         {% endif -%}
 
