@@ -7,21 +7,31 @@
     +respond-min($break-desktop-min)
         padding: remify($medium--px 160px)
 
+
+    &__avatar
+        border-radius: 50%
+        display: inline-block
+        height: remify(50px)
+        margin-right: remify($petite--px)
+        width: remify(50px)
+
+    &__meta
+        display: inline-block
+        vertical-align: top
+
     &__name
-        color: $zon-red
+        +link
+            color: $zon-red
+        +on-interaction
+            text-decoration: underline
         display: block
         font-size: remify(16px)
         font-weight: bold
         margin: 0 20px 0 0
 
-    &__date:before
-        margin-left: 2px
-        color: $zon_light_grey
-        content: '\29F8 ' // ⧸ = Big solidus
-
-    &__date,
-    &__anchor
+    &__date-anchor
         color: $zon-grey
+        display: inline-block
         font-size: remify(12px)
 
     &__body

@@ -58,13 +58,10 @@
                             <a class="comment__name" href="{{ comment.userprofile_url }}">
                                 {{ comment.name | e }}
                             </a>
-                            <a  class="comment__anchor" href="#cid-{{ comment.cid }}">
-                                #{{ loop.index }}
-                                – cid-{{ comment.cid }} in_reply to {{ comment.in_reply }}
+                            <a  class="comment__date-anchor" href="#cid-{{ comment.cid }}">
+                                {# Special-Char: &#10744; = Big solidus #}
+                                #{{ loop.index }} &nbsp;&#10744;&nbsp; {{ comment.timestamp | format_date_ago() }}
                             </a>
-                            <span  class="comment__date">
-                                {{ comment.timestamp | format_date_ago() }}
-                            </span>
                         </div>
                         <div class="comment__body">
                             {{ comment.text | safe }}
