@@ -31,76 +31,14 @@ class Agatho(object):
             return
         if response.ok:
             try:
-                return _place_answers_under_parent(
-                    lxml.etree.fromstring(response.content))
+                return lxml.etree.fromstring(response.content)
             except (IOError, lxml.etree.XMLSyntaxError):
                 return
         else:
             return
 
 
-def _place_answers_under_parent(xml):
-    filter_xslt = lxml.etree.XML("""
-        <xsl:stylesheet version="1.0"
-            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-            <xsl:output method="xml"
-                        omit-xml-declaration="yes" />
-          <xsl:template match="comments">
-            <comments>
-              <xsl:apply-templates select="comment_count" />
-              <xsl:apply-templates select="last_comment_timestamp" />
-              <xsl:apply-templates select="last_comment_name" />
-              <xsl:apply-templates select="last_comment_uid" />
-              <xsl:apply-templates select="nid" />
-              <xsl:apply-templates select="path" />
-              <xsl:apply-templates select="source" />
-              <xsl:apply-templates select="comment">
-                <xsl:sort select="./@id" order="descending" data-type="text" />
-              </xsl:apply-templates>
-            </comments>
-          </xsl:template>
-          <xsl:template match="comments/last_comment_timestamp">
-            <xsl:copy-of select="." />
-          </xsl:template>
-          <xsl:template match="comments/last_comment_name">
-            <xsl:copy-of select="." />
-          </xsl:template>
-          <xsl:template match="comments/last_comment_uid">
-            <xsl:copy-of select="." />
-          </xsl:template>
-          <xsl:template match="comments/comment_count">
-            <xsl:copy-of select="." />
-          </xsl:template>
-          <xsl:template match="nid">
-            <xsl:copy-of select="." />
-          </xsl:template>
-          <xsl:template match="comments/comment">
-          <xsl:variable name="cid"><xsl:value-of select="@id" /></xsl:variable>
-            <xsl:if test="not(inreply)">
-              <xsl:copy-of select="." />
-            </xsl:if>
-            <xsl:apply-templates select="//comment/inreply[@to=$cid]">
-              <xsl:sort select="./@cid" order="ascending" data-type="text" />
-            </xsl:apply-templates>
-          </xsl:template>
-          <xsl:template match="comments/path">
-            <xsl:copy-of select="." />
-          </xsl:template>
-          <xsl:template match="comments/source">
-            <xsl:copy-of select="." />
-          </xsl:template>
-
-          <xsl:template match="//comment/inreply">
-            <xsl:copy-of select=".." />
-          </xsl:template>
-
-        </xsl:stylesheet>
-    """)
-    transform = lxml.etree.XSLT(filter_xslt)
-    return transform(xml)
-
-
-def comment_as_dict(comment, request):
+def comment_as_dict(comment):
     """Expects an lxml element representing an agatho comment and returns a
     dict representation."""
 
@@ -125,13 +63,13 @@ def comment_as_dict(comment, request):
         roles = []
 
     if comment.xpath('author/@picture'):
-        picture_url = (request.registry.settings.community_host + '/' +
-                       comment.xpath('author/@picture')[0])
+        picture_url = comment.xpath('author/@picture')[0]
     else:
         picture_url = None
 
     if comment.xpath('author/@url'):
-        profile_url = (request.registry.settings.community_host +
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        profile_url = (conf.get('community_host', '') +
                        comment.xpath('author/@url')[0])
 
     if comment.xpath('content/text()'):
@@ -139,11 +77,17 @@ def comment_as_dict(comment, request):
     else:
         content = '[fehler]'
 
+    if comment.xpath('inreply/@to'):
+        in_reply = int(comment.xpath('inreply/@to')[0].lstrip('cid-'))
+    else:
+        in_reply = None
+
     dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
            'date/hour/text()', 'date/minute/text()')
 
     return dict(
-        indented=bool(len(comment.xpath('inreply'))),
+        in_reply=in_reply,
+        indented=bool(in_reply),
         recommended=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
@@ -152,11 +96,11 @@ def comment_as_dict(comment, request):
         timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(roles),
-        cid=comment.xpath('./@id')[0]
+        cid=int(comment.xpath('./@id')[0].lstrip('cid-'))
     )
 
 
-def get_thread(unique_id, request):
+def get_thread(unique_id, request, reverse=True):
     """Return a dict representation of the comment thread of the given
     article."""
 
@@ -169,11 +113,19 @@ def get_thread(unique_id, request):
     thread = api.collection_get(unique_id)
     if thread is None:
         return
+
+    # Read more about sorting in multiple passes here:
+    # https://docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
+    comments = list(comment_as_dict(c) for c in thread.xpath('//comment'))
+
+    comments = sorted(comments, key=lambda x: x['cid'])
+
+    comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
+                      reverse=reverse)
+
     try:
         return dict(
-            comments=[
-                comment_as_dict(comment, request)
-                for comment in thread.xpath('//comment')],
+            comments=comments,
             comment_count=int(
                 thread.xpath('/comments/comment_count')[0].text),
             nid=thread.xpath('/comments/nid')[0].text,
@@ -185,7 +137,7 @@ def get_thread(unique_id, request):
                 request.url),
             comment_report_url='%s/services/json' % (
                 request.registry.settings.community_host))
-    except AssertionError:
+    except (IndexError, AttributeError):
         return
 
 

@@ -16,8 +16,7 @@ def test_comment_as_dict(dummy_request, agatho, monkeyagatho):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     comment = agatho.collection_get(unique_id).xpath('//comment')[0]
-    json_comment = zeit.web.core.comments.comment_as_dict(
-        comment, dummy_request)
+    json_comment = zeit.web.core.comments.comment_as_dict(comment)
     assert json_comment['name'] == 'claudiaE'
 
 
