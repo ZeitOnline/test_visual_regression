@@ -45,8 +45,8 @@
             4: "{{ view.rankedTagsList | lower }}", // Schlagworte
             5: "{{ view.show_article_date }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
-            7: "", // Quelle
-            8: "", // Product-Id
+            7: "{{ view.source | hide_none | lower }}", // Quelle
+            8: "{{ view.product_id | hide_none | lower }}", // Product-Id
             9: "{{ view.banner_channel | lower }}" // Banner-Channel
         };
         {% endif -%}

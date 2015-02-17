@@ -248,6 +248,10 @@ class Base(object):
         except KeyError:
             return {}
 
+    @zeit.web.reify
+    def product_id(self):
+        return self.context.product.id
+
 
 class Content(Base):
 
