@@ -250,7 +250,10 @@ class Base(object):
 
     @zeit.web.reify
     def product_id(self):
-        return self.context.product.id
+        try:
+            return self.context.product.id
+        except AttributeError:
+            return None
 
 
 class Content(Base):
