@@ -7,13 +7,18 @@
 // This lets Modernizr be in the <head> and also compatible with other modules.
 define('modernizr', [], window.Modernizr);
 
+// load config first including path and shim config
+require([ 'config' ], function() {});
+
 // required plain vanilla JS programs here
 require([
     'web.core/images',
-    'web.site/video/videoStage'
-], function( images, videoStage ) {
+    'web.site/video/videoStage',
+    'web.site/articledate'
+], function( images, videoStage, articledate ) {
     images.init();
     videoStage.init();
+    articledate.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here
