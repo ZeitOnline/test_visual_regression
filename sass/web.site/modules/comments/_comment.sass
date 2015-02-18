@@ -42,7 +42,33 @@
         margin-top: remify($micro--px)
 
     &__body
-        font-size: remify(16px)
+        font-size: 1rem
+        margin-top: 1rem
+        & > p
+            margin: remify(0 0 10px 0)
+
+    &__reactions
+        display: block
+        font-size: remify(12px)
+        line-height: 1.5
+        margin-top: 2rem
+        +respond-min($break-desktop-min)
+            width: remify(320px)
+
+    &__reaction
+        +inline-block
+        +link
+            color: $zon_mid_grey
+        +on-interaction
+            color: $zon-charcoal
+        letter-spacing: $zon-letter-spacing-s
+        margin-left: 1rem
+        vertical-align: top
+        +respond-min($break-phablet-min)
+            margin-left: 1.5rem
+
+        &:first-child
+            margin-left: 0
 
 
 .comment--indented
@@ -77,28 +103,6 @@
 
 
 
-.comment__reactions
-    display: block
-    font-size: remify(12px)
-    line-height: 1.5
-    +respond-min($break-desktop-min)
-        width: remify(320px)
-
-.comment__reaction
-    +inline-block
-    +link
-        color: $zon-grey
-    +on-interaction
-        color: $zon-charcoal
-    margin-left: remify($twice--px)
-    margin-top: remify($little--px)
-    vertical-align: top
-    +respond-min($break-phablet-min)
-        margin-left: remify($hefty--px)
-
-    &:first-child
-        margin-left: 0
-
 // icons
 .icon-comment-reactions-reply,
 .icon-comment-reactions-report,
@@ -106,9 +110,9 @@
     background-size: 100% 100%
     background-size: contain
     display: inline-block
-    height: remify(16px)
-    opacity: 0.6
-    width: remify(24px)
+    height: 1rem
+    opacity: 0.5
+    width: 1.2rem
     a:hover > &
         opacity: 1.0
 
