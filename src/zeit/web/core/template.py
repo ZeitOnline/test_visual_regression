@@ -1,16 +1,21 @@
+import cProfile
 import datetime
 import email.utils
 import itertools
 import logging
 import mimetypes
+import os
 import pkg_resources
+import pstats
 import re
+import StringIO
 import time
 import urllib2
 import urlparse
 
 import babel.dates
 import jinja2.environment
+import jinja2.ext
 import jinja2.loaders
 import jinja2.nodes
 import jinja2.runtime
@@ -657,3 +662,42 @@ class PrefixLoader(jinja2.BaseLoader):
             # re-raise the exception with the correct fileame here.
             # (the one that includes the prefix)
             raise jinja2.TemplateNotFound(template)
+
+
+class ProfilerExtension(jinja2.ext.Extension):
+
+    tags = set(['profile'])
+
+    def __init__(self, env):
+        super(ProfilerExtension, self).__init__(env)
+        self._profiler = cProfile.Profile()
+
+    def parse(self, parser):
+        token = next(parser.stream)
+        name = '{}-{}_{}'.format(token.value, token.lineno, id(token))
+
+        engage = jinja2.nodes.CallBlock(
+            self.call_method('engage', [token.lineno]), [], [], [])
+        body = parser.parse_statements(
+            ('name:endprofile',), drop_needle=True)
+        disengage = jinja2.nodes.CallBlock(
+            self.call_method('disengage', []), [], [], [])
+        block = jinja2.nodes.Block(
+            name, [engage] + body + [disengage], False)
+
+        return block.set_lineno(token.lineno)
+
+    def engage(self, *args, **kw):
+        color = os.urandom(3).encode('hex')
+        output = '<div style="outline: 3px dashed #{};">'.format(color)
+        self._profiler.enable()
+        return output
+
+    def disengage(self, *args, **kw):
+        self._profiler.disable()
+        stream = StringIO.StringIO()
+        stats = pstats.Stats(self._profiler, stream=stream)
+        cumtime = int(stats.sort_stats('cumtime').total_tt * 1000)
+        output = '<b position: relative; float: right;>{}ms</b></div>'.format(
+            cumtime)
+        return output
