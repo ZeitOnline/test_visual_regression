@@ -10,23 +10,35 @@ Available attributes:
 {% extends "zeit.web.site:templates/layout.html" %}
 
 {% block main %}
+    {% profile %}
     <div class="main__fullwidth">
         {%- include "zeit.web.site:templates/inc/cp_area_fullwidth.html" ignore missing -%}
     </div>
+    {% endprofile %}
+    {% profile %}
     <div class="main__content">
         {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
     </div>
+    {% endprofile %}
+    {% profile %}
     <div class="main__informatives">
         {{ lama_site.show_informative_ad(view, true) }}
         {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
         {{ lama_site.show_informative_ad(view) }}
         {%- include "zeit.web.site:templates/inc/cp_area_printbox.html" ignore missing -%}
     </div>
+    {% endprofile %}
+    {% profile %}
     {%- include "zeit.web.site:templates/inc/cp_area_videostage.html" ignore missing -%}
+    {% endprofile %}
+    {% profile %}
     <div class="main__parquet">
         {%- include "zeit.web.site:templates/inc/cp_area_parquet.html" ignore missing -%}
     </div>
+    {% endprofile %}
+    {% profile %}
     <div class="main__snapshot">
         {%- include "zeit.web.site:templates/inc/cp_area_snapshot.html" ignore missing -%}
     </div>
+    {% endprofile %}
 {% endblock main %}

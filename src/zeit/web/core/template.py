@@ -678,34 +678,38 @@ class ProfilerExtension(jinja2.ext.Extension):
 
     def __init__(self, env):
         super(ProfilerExtension, self).__init__(env)
-        self._profiler = cProfile.Profile()
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if conf.get('debug.enable_profiler'):
+            self._profiler = cProfile.Profile()
+        else:
+            self._profiler = None
 
     def parse(self, parser):
+        active = self._profiler is not None
         token = next(parser.stream)
-        name = '{}-{}_{}'.format(token.value, token.lineno, id(token))
+        name = 'no_{}_{}_{}'.format(
+            token.value, token.lineno, os.urandom(6).encode('hex'))
 
-        engage = jinja2.nodes.CallBlock(
-            self.call_method('engage', [token.lineno]), [], [], [])
-        body = parser.parse_statements(
-            ('name:endprofile',), drop_needle=True)
-        disengage = jinja2.nodes.CallBlock(
-            self.call_method('disengage', []), [], [], [])
-        block = jinja2.nodes.Block(
-            name, [engage] + body + [disengage], False)
+        body = parser.parse_statements(['name:endprofile'], drop_needle=True)
 
-        return block.set_lineno(token.lineno)
+        if active:
+            name = name.lstrip('no_')
+            body.insert(0, jinja2.nodes.CallBlock(
+                self.call_method('engage', []), [], [], []))
+            body.append(jinja2.nodes.CallBlock(
+                self.call_method('disengage', []), [], [], []))
+
+        return jinja2.nodes.Block(name, body, False).set_lineno(token.lineno)
 
     def engage(self, *args, **kw):
         color = os.urandom(3).encode('hex')
-        output = '<div style="outline: 3px dashed #{};">'.format(color)
         self._profiler.enable()
-        return output
+        return '<div style="outline:3px dashed #{};">'.format(color)
 
     def disengage(self, *args, **kw):
         self._profiler.disable()
         stream = StringIO.StringIO()
         stats = pstats.Stats(self._profiler, stream=stream)
-        cumtime = int(stats.sort_stats('cumtime').total_tt * 1000)
-        output = '<b position: relative; float: right;>{}ms</b></div>'.format(
+        cumtime = stats.sort_stats('cumtime').total_tt * 1000
+        return '<b position:relative;float:right;>{:.0f}ms</b></div>'.format(
             cumtime)
-        return output
