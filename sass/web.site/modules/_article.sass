@@ -10,7 +10,6 @@
 .kicker
 	color: $zon-red
 	display: block
-	font-family: $font-tabletgothic
 	font-size: remify(14px)
 	+respond-min($break-desktop-min)
 		font-size: remify(14px)
@@ -18,17 +17,15 @@
 .title
 	color: $zon-charcoal
 	display: block
-	font-family: $font-tabletgothic
 	font-size: remify(30px)
 	+respond-min($break-desktop-min)
 		font-size: remify(42px)
 
 .summary
 	color: $grey--mid
-	font-family: $font-tabletgothic
 	font-size: remify(18px)
 	line-height: 1.2
-	margin-bottom : remify($petite--px)
+	margin-bottom: remify($petite--px)
 	+respond-min($break-desktop-min)
 		font-size: remify(20px)
 
@@ -42,8 +39,7 @@
 
 .byline
 	color: $grey--mid
-	font-family: $font-tabletgothic
-	margin-bottom : remify($petite--px)
+	margin-bottom: remify($petite--px)
 
 .byline__author
 	font-weight: bold
@@ -52,6 +48,12 @@
 		text-decoration: none
 	+on-interaction
 		text-decoration: underline
+
+.metadata
+	color: $zon_mid_grey
+	font-size: remify(14px)
+	letter-spacing: $zon-letter-spacing-s
+	margin-bottom: remify($petite--px)
 
 .stage--large
 	width: auto
