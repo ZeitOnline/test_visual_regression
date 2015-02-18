@@ -72,6 +72,16 @@
                         <div class="comment__body">
                             {{ comment.text | safe }}
                         </div>
+                        <div class="comment__reactions">
+                            <a class="comment__reaction comment__reaction--reply" href="#cid-{{ comment.cid }}">
+                                <span class="icon-comment-reactions-reply"></span> Antworten
+                            </a>
+                            <a class="comment__reaction comment__reaction--report" href="#cid-{{ comment.cid }}">
+                                <span class="icon-comment-reactions-report"></span> Melden
+                            </a>
+                            <a class="comment__reaction comment__reaction--recommend" href="#cid-{{ comment.cid }}">
+                                <span class="icon-comment-reactions-recommend"></span> Empfehlen
+                            </a></div>
                     </article>
                 {% endfor %}
             {% else %}

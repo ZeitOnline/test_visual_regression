@@ -74,3 +74,46 @@
     &:after
         border-bottom-color: $white
         top: remify(-9px)
+
+
+
+.comment__reactions
+    display: block
+    font-size: remify(12px)
+    line-height: 1.5
+    +respond-min($break-desktop-min)
+        width: remify(320px)
+
+.comment__reaction
+    +inline-block
+    +link
+        color: $zon-grey
+    +on-interaction
+        color: $zon-charcoal
+    margin-left: remify($twice--px)
+    margin-top: remify($little--px)
+    vertical-align: top
+    +respond-min($break-phablet-min)
+        margin-left: remify($hefty--px)
+
+    &:first-child
+        margin-left: 0
+
+// icons
+.icon-comment-reactions-reply,
+.icon-comment-reactions-report,
+.icon-comment-reactions-recommend
+    background-size: 100% 100%
+    background-size: contain
+    display: inline-block
+    height: remify(16px)
+    opacity: 0.6
+    width: remify(24px)
+    a:hover > &
+        opacity: 1.0
+
+
+
+
+
+
