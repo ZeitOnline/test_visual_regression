@@ -29,9 +29,6 @@ def test_footer_should_have_basic_structure(jinja2_env):
     assert len(html('.footer-links__button')) == 1, (
         'just one .footer-links__button')
 
-    assert len(html('.icon-top-arrow')) == 1, (
-        'just one .icon-top-arrow')
-
 
 def test_footer_logo_macro_links_to_hp(jinja2_env):
     tpl = jinja2_env.get_template(
