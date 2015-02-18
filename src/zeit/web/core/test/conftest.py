@@ -115,7 +115,8 @@ settings = {
     'vivi_zeit.solr_solr-url': 'http://mock.solr',
 
     'debug.show_exceptions': 'True',
-    'debug.propagate_jinja_errors': 'True'
+    'debug.propagate_jinja_errors': 'True',
+    'debug.propagate_jinja_errors': 'False'
 }
 
 

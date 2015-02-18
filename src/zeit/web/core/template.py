@@ -704,7 +704,8 @@ class ProfilerExtension(jinja2.ext.Extension):
     def engage(self, *args, **kw):
         color = os.urandom(3).encode('hex')
         self._profiler.enable()
-        return '<div style="outline:3px dashed #{};">'.format(color)
+        return '<div class="__pro__" style="outline:3px dashed #{};">'.format(
+            color)
 
     def disengage(self, *args, **kw):
         self._profiler.disable()
