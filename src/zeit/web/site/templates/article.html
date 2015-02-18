@@ -25,6 +25,11 @@
                 {{ blocks.meta_author(view.authors, class="byline__author") }}
             {% endif %}
         </div>
+        <div class="metadata">
+            <time class="encoded-date" datetime="{{ view.show_article_date | format_date('iso8601') }}" data-obfuscated="{{ view.obfuscated_date }}">
+                {{ view.show_article_date | format_date(view.show_date_format) }}
+            </time>
+        </div>
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">

@@ -1,8 +1,10 @@
+import base64
 import datetime
 import itertools
 import logging
 import re
 
+import babel.dates
 import pyramid.httpexceptions
 
 from zeit.content.author.interfaces import IAuthorReference
@@ -281,6 +283,39 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def text_length(self):
         return self.context.textLength
+
+    @zeit.web.reify
+    def obfuscated_date(self):
+        issue = None
+        format = "d. MMMM yyyy, H:mm 'Uhr'"
+        date = babel.dates.format_datetime(
+            self.date_first_released, format, locale="de_De")
+        if self.date_last_published_semantic:
+            date += ' / Zuletzt aktualisiert am ' + babel.dates.format_datetime(
+                self.date_last_published_semantic, format, locale="de_De")
+        if self.context.product:
+            if self.context.product.id in (
+                    'ZEI',  # DIE ZEIT
+                    'ZEAR', # DIE ZEIT Archiv
+                    'ZMLB', # ZEITmagazin
+                    'ZTCS', # ZEIT Campus
+                    'CSRG', # ZEIT CAMPUS Ratgeber
+                    'ZTGS', # ZEIT Geschichte
+                    'ZTWI', # ZEIT Wissen
+
+                    'ZECH', # Zeit Schweiz
+                    'ZEOE', # Zeit Oesterreich
+                    'ZESA', # Zeit im Osten
+
+                ):
+                issue = u'%s N\u00B0\u00A0%d/%d' % (self.context.product_text,
+                    self.context.volume, self.context.year)
+                if self.date_print_published:
+                    issue += u', %s ver\u00F6ffentlicht am' % (
+                        babel.dates.format_date(
+                        self.date_print_published, "d. MMMM yyyy", locale="de_De"))
+        text = ' '.join(i for i in (issue, date) if i is not None)
+        return base64.b64encode(text.encode('latin-1'))
 
     @property
     def copyrights(self):

@@ -262,6 +262,14 @@ class Content(Base):
         return self.date_last_published_semantic or self.date_first_released
 
     @zeit.web.reify
+    def date_print_published(self):
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).print_publish
+        if date:
+            return date.astimezone(tz)
+
+    @zeit.web.reify
     def date_first_released(self):
         tz = babel.dates.get_timezone('Europe/Berlin')
         date = zeit.cms.workflow.interfaces.IPublishInfo(
