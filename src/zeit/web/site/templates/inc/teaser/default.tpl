@@ -1,6 +1,7 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
+{% profile %}
 
 {% block teaser_media_position_before_teaser %}{% endblock %}
 
@@ -46,4 +47,5 @@
     {% endblock %}
 
 </article>
+{% endprofile %}
 {% endblock %}

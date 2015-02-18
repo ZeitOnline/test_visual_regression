@@ -20,14 +20,16 @@ Available attributes:
         {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
     </div>
     {% endprofile %}
-    {% profile %}
     <div class="main__informatives">
+        {% profile %}
         {{ lama_site.show_informative_ad(view, true) }}
         {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
+        {% endprofile %}
+        {% profile %}
         {{ lama_site.show_informative_ad(view) }}
         {%- include "zeit.web.site:templates/inc/cp_area_printbox.html" ignore missing -%}
+        {% endprofile %}
     </div>
-    {% endprofile %}
     {% profile %}
     {%- include "zeit.web.site:templates/inc/cp_area_videostage.html" ignore missing -%}
     {% endprofile %}
