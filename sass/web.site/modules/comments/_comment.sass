@@ -1,105 +1,105 @@
 .comment
-    +restore-side-padding
-    border-top: 1px solid $zon_light_grey
-    padding-top: remify($junior--px)
-    padding-bottom: remify($twice--px)
-    position: relative
+	+restore-side-padding
+	border-top: 1px solid $zon_light_grey
+	padding-top: remify($junior--px)
+	padding-bottom: remify($twice--px)
+	position: relative
 
-    +respond-min($break-desktop-min)
-        padding: remify($medium--px 160px)
+	+respond-min($break-desktop-min)
+		padding: remify($medium--px 160px)
 
 
-    &__avatar
-        border-radius: 50%
-        display: inline-block
-        height: remify(50px)
-        margin-right: remify($petite--px)
-        width: remify(50px)
+	&__avatar
+		border-radius: 50%
+		display: inline-block
+		height: remify(50px)
+		margin-right: remify($petite--px)
+		width: remify(50px)
 
-    &__meta
-        display: inline-block
-        vertical-align: top
+	&__meta
+		display: inline-block
+		vertical-align: top
 
-    &__name
-        +link
-            color: $zon-red
-        +on-interaction
-            text-decoration: underline
-        display: block
-        font-size: remify(16px)
-        font-weight: bold
-        margin: 0 20px 0 0
+	&__name
+		+link
+			color: $zon-red
+		+on-interaction
+			text-decoration: underline
+		display: block
+		font-size: remify(16px)
+		font-weight: bold
+		margin: 0 20px 0 0
 
-    &__date-anchor
-        color: $zon-grey
-        display: inline-block
-        font-size: remify(12px)
+	&__date-anchor
+		color: $zon-grey
+		display: inline-block
+		font-size: remify(12px)
 
-    &__recommendations
-        color: $zon-red
-        float: right
-        font-size: remify(14px)
-        margin-top: remify($micro--px)
+	&__recommendations
+		color: $zon-red
+		float: right
+		font-size: remify(14px)
+		margin-top: remify($micro--px)
 
-    &__body
-        font-size: 1rem
-        margin-top: 1rem
-        & > p
-            margin: remify(0 0 10px 0)
+	&__body
+		font-size: 1rem
+		margin-top: 1rem
+		& > p
+			margin: remify(0 0 10px 0)
 
-    &__reactions
-        display: block
-        font-size: remify(12px)
-        line-height: 1.5
-        margin-top: 2rem
-        +respond-min($break-desktop-min)
-            width: remify(320px)
+	&__reactions
+		display: block
+		font-size: remify(12px)
+		line-height: 1.5
+		margin-top: 2rem
+		+respond-min($break-desktop-min)
+			width: remify(320px)
 
-    &__reaction
-        +inline-block
-        +link
-            color: $zon_mid_grey
-        +on-interaction
-            color: $zon-charcoal
-        letter-spacing: $zon-letter-spacing-s
-        margin-left: 1rem
-        vertical-align: top
-        +respond-min($break-phablet-min)
-            margin-left: 1.5rem
+	&__reaction
+		+inline-block
+		+link
+			color: $zon_mid_grey
+		+on-interaction
+			color: $zon-charcoal
+		letter-spacing: $zon-letter-spacing-s
+		margin-left: 1rem
+		vertical-align: top
+		+respond-min($break-phablet-min)
+			margin-left: 1.5rem
 
-        &:first-child
-            margin-left: 0
+		&:first-child
+			margin-left: 0
 
 
 .comment--indented
-    +box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
-    padding-left: remify($large--px)
+	+box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
+	padding-left: remify($large--px)
 
-    +respond-min($break-desktop-min)
-        +box-shadow(none)
-        padding-left: $page-padding
-        padding-right: 0
-        margin: remify(0 160px)
+	+respond-min($break-desktop-min)
+		+box-shadow(none)
+		padding-left: $page-padding
+		padding-right: 0
+		margin: remify(0 160px)
 
-    // this :before and :after stuff creates a up-facing triangle
-    // to designate the comment which is replied to
-    // source: http://davidwalsh.name/css-triangles
-    &:before,
-    &:after
-        border-bottom: remify(10px) solid transparent
-        border-left: remify(10px) solid transparent // left arrow slant
-        border-right: remify(10px) solid transparent // right arrow slant
-        content: ' '
-        left: remify(70px)
-        position: absolute
-        +respond-min($break-tablet-min)
-            left: remify(34px)
-    &:before
-        border-bottom-color: $zon_light_grey
-        top: remify(-10px)
-    &:after
-        border-bottom-color: $white
-        top: remify(-9px)
+	// this :before and :after stuff creates a up-facing triangle
+	// to designate the comment which is replied to
+	// source: http://davidwalsh.name/css-triangles
+	&:before,
+	&:after
+		border-bottom: remify(10px) solid transparent
+		border-left: remify(10px) solid transparent // left arrow slant
+		border-right: remify(10px) solid transparent // right arrow slant
+		content: ' '
+		left: remify(70px)
+		position: absolute
+		+respond-min($break-tablet-min)
+			left: remify(34px)
+	&:before
+		border-bottom-color: $zon_light_grey
+		top: remify(-10px)
+	&:after
+		border-bottom-color: $white
+		top: remify(-9px)
 
 
 
@@ -107,17 +107,11 @@
 .icon-comment-reactions-reply,
 .icon-comment-reactions-report,
 .icon-comment-reactions-recommend
-    background-size: 100% 100%
-    background-size: contain
-    display: inline-block
-    height: 1rem
-    opacity: 0.5
-    width: 1.2rem
-    a:hover > &
-        opacity: 1.0
-
-
-
-
-
-
+	background-size: 100% 100%
+	background-size: contain
+	display: inline-block
+	height: 1rem
+	opacity: 0.5
+	width: 1.2rem
+	a:hover > &
+		opacity: 1.0

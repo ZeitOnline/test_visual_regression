@@ -1,22 +1,21 @@
 =remove-side-padding
-    margin-left: (-$page-padding)
-    margin-right: (-$page-padding)
+	margin-left: (-$page-padding)
+	margin-right: (-$page-padding)
 
 =restore-side-padding
-    padding-left: $page-padding
-    padding-right: $page-padding
+	padding-left: $page-padding
+	padding-right: $page-padding
 
 .comment-section
-    +remove-side-padding
+	+remove-side-padding
 
-    &__head
-        +restore-side-padding
-        font-size: 24px
-        font-weight: bold
-        margin: 40px 0 0
-        display: block
-        border-top: 2px solid $zon-seashell
-        +respond-min($break-desktop-min)
-            padding: remify($medium--px 160px)
-
-    // &__comments
+	&__head,
+	&__notice
+		+restore-side-padding
+		font-size: 24px
+		font-weight: bold
+		margin: 40px 0 0
+		display: block
+		border-top: 2px solid $zon-seashell
+		+respond-min($break-desktop-min)
+			padding: remify($medium--px 160px)
