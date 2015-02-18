@@ -9,6 +9,7 @@
 
 {% block main %}
     <article class="article" id="js-article">
+        {% profile %}
         <h1 class="article-heading">
             <span class="kicker">
                 {{- view.supertitle | hide_none -}}
@@ -25,6 +26,8 @@
                 {{ blocks.meta_author(view.authors, class="byline__author") }}
             {% endif %}
         </div>
+        {% endprofile %}
+        {% profile %}
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">
@@ -38,6 +41,8 @@
                 {% endif %}
             {% endblock article_pagination %}
         </div>
+        {% endprofile %}
+        {% profile %}
         <div class="comment-section">
             <span class="comment-section__head">
                 Diskutieren Sie mit.
@@ -59,5 +64,6 @@
                 {% endif %}
             </div>
         </div>
+        {% endprofile %}
     </article>
 {% endblock main %}
