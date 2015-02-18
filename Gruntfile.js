@@ -86,6 +86,18 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/all-old-ie.*',
+                        '!' + project.sourceDir + 'sass/**/ie-navi.*'
+                    ],
+                    sourcemap: true,
+                    environment: 'development',
+                    outputStyle: 'expanded'
+                }
+            },
+            'dev-with-ie': {
+                options: {
                     sourcemap: true,
                     environment: 'development',
                     outputStyle: 'expanded'
