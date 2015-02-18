@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.13 (unreleased)
+1.14 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+1.13 (2015-02-17)
+-----------------
+
+- ZON-1327: Hide older modification time data
 
 - DEV-567: Render a centerpage in RSS2.0 format as required for Spektrum.de
 

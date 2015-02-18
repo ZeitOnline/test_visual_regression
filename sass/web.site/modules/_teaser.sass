@@ -104,7 +104,7 @@
 	letter-spacing: $zon-letter-spacing-s
 
 %teaser-datetime
-	&:not(:last-child):after
+	&:not(:last-child):not(:empty):after
 		content: ' ⧸ '
 		margin: 0 $micro 0 $micro
 

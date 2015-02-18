@@ -72,20 +72,21 @@
                                 if ( typeof object !== 'object') {
                                     $('[data-unique-id=\'' + identifier + '\']')
                                     .find( selector )
-                                    .trigger( 'signals:update', object );
+                                    .trigger( 'signals.update', object );
                                 } else {
                                     for ( var name in object ) {
                                         if (object.hasOwnProperty(name)) {
                                             $('[data-unique-id=\'' + name + '\']')
                                             .find( selector )
-                                            .trigger( 'signals:update', object[name].time );
+                                            .trigger( 'signals.update', object[name].time );
                                         }
                                     }
                                 }
                             });
                         });
                         // remove this when real endpoint is in use
-                        fakecounter = fakecounter < 6 ? fakecounter + 1 : 1;
+                        // not in use? [ms]
+                        fakecounter = fakecounter % 6 + 1;
                     }, dataType: 'json',
                     /**
                      * on completion go recursive
@@ -98,13 +99,15 @@
         },
         /**
          * takes new text to animate
-         * @param  {array} $elem jQuery Object Array
+         * @param  {object} event the normalized jQuery event object
          * @param  {string} text text to change
          */
-        textAnimation = function( $elem, text ) {
+        textAnimation = function( event, text ) {
+            var $elem = $( this );
+
             if ( $elem.text() !== text ) {
                 $elem.animate( defaults.inEffect, defaults.inVelocity, function() {
-                    $(this)
+                    $elem
                     .html( text )
                     .delay( 10 )
                     .animate( defaults.outEffect, defaults.outVelocity);
@@ -114,17 +117,13 @@
 
         return this.each( function() {
 
-            poll( defaults.timeEndpoint, 1000 * 60, '.teaser__datetime');
-            poll( defaults.commentsEndpoint, 1000 * 20, '.teaser__commentcount');
+            poll( defaults.timeEndpoint, 1000 * 60, '.js-update-datetime');
+            poll( defaults.commentsEndpoint, 1000 * 20, '.js-update-commentcount');
             /**
              * bind event on diverse elements
-             * @param  {object} event the dom event object
-             * @param  {string} data  new text supplied by the trigger
-             * @event  signals:update
+             * @event  signals.update
              */
-            $( '.teaser__datetime, .teaser__commentcount' ).bind('signals:update', function( event, data ) {
-                textAnimation( $(event.target), data );
-            });
+            $( '.js-update-datetime, .js-update-commentcount' ).on('signals.update', textAnimation);
 
         });
     };
