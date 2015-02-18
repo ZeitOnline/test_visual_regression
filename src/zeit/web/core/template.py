@@ -679,20 +679,17 @@ class ProfilerExtension(jinja2.ext.Extension):
     def __init__(self, env):
         super(ProfilerExtension, self).__init__(env)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        if conf.get('debug.enable_profiler'):
-            self._profiler = cProfile.Profile()
-        else:
-            self._profiler = None
+        self.active = conf.get('debug.enable_profiler')
+        self.profiler = None
 
     def parse(self, parser):
-        active = self._profiler is not None
         token = next(parser.stream)
         name = 'no_{}_{}_{}'.format(
             token.value, token.lineno, os.urandom(6).encode('hex'))
 
         body = parser.parse_statements(['name:endprofile'], drop_needle=True)
 
-        if active:
+        if self.active:
             name = name.lstrip('no_')
             body.insert(0, jinja2.nodes.CallBlock(
                 self.call_method('engage', []), [], [], []))
@@ -703,14 +700,14 @@ class ProfilerExtension(jinja2.ext.Extension):
 
     def engage(self, *args, **kw):
         color = os.urandom(3).encode('hex')
-        self._profiler.enable()
+        self.profiler = cProfile.Profile()
+        self.profiler.enable()
         return '<div class="__pro__" style="outline:3px dashed #{};">'.format(
             color)
 
     def disengage(self, *args, **kw):
-        self._profiler.disable()
+        self.profiler.disable()
         stream = StringIO.StringIO()
-        stats = pstats.Stats(self._profiler, stream=stream)
-        cumtime = stats.sort_stats('cumtime').total_tt * 1000
+        stats = pstats.Stats(self.profiler, stream=stream)
         return '<b position:relative;float:right;>{:.0f}ms</b></div>'.format(
-            cumtime)
+            stats.total_tt * 1000)
