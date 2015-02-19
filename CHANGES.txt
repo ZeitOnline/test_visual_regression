@@ -4,6 +4,8 @@ Change log for zeit.web
 1.14 (unreleased)
 -----------------
 
+- ZON-1429: Dynamicize template links accross ZON and ZMO
+
 - ZON-1424: Polishing mobile experience
 
 - ZON-1392: Style comment section and forms

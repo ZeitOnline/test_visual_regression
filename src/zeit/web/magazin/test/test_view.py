@@ -60,44 +60,20 @@ def test_breadcumb_should_produce_expected_data():
     context.sub_ressort = 'mode-design'
     context.title = 'This is my title'
 
-    zeit.web.magazin.view_article._navigation = {
-        'start': (
-            'Start',
-            'http://www.zeit.de/index',
-            'myid1'
-        ),
-        'zmo': (
-            'ZEIT Magazin',
-            'http://www.zeit.de/zeit-magazin/index',
-            'myid_zmo'
-        ),
-        'leben': (
-            'Leben',
-            'http://www.zeit.de/zeit-magazin/leben/index',
-            'myid2'
-        ),
-        'mode-design': (
-            'Mode & Design',
-            'http://www.zeit.de/zeit-magazin/mode-design/index',
-            'myid3'
-        ),
-        'essen-trinken': (
-            'Essen & Trinken',
-            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-            'myid4'
-        )
-    }
+    request = mock.Mock()
+    request.host = 'foo.bar'
 
-    article = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    article = zeit.web.magazin.view_article.Article(context, request)
 
-    l = [
-        ('Start', 'http://www.zeit.de/index', 'myid1'),
-        ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
-        ('Mode & Design', 'http://www.zeit.de/zeit-magazin/mode-design/index',
+    crumbs = [
+        ('Start', 'http://foo.bar/index', 'myid1'),
+        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index', 'myid_zmo'),
+        ('Mode & Design', 'http://foo.bar/zeit-magazin/mode-design/index',
             'myid3'),
-        ('This is my title', ''), ]
+        ('This is my title', '')
+    ]
 
-    assert article.breadcrumb == l
+    assert article.breadcrumb == crumbs
 
 
 def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
@@ -106,42 +82,18 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context.sub_ressort = 'lebensartx'
     context.title = 'This is my title'
 
-    zeit.web.magazin.view_article._navigation = {
-        'start': (
-            'Start',
-            'http://www.zeit.de/index',
-            'myid1'
-        ),
-        'zmo': (
-            'ZEIT Magazin',
-            'http://www.zeit.de/zeit-magazin/index',
-            'myid_zmo'
-        ),
-        'leben': (
-            'Leben',
-            'http://www.zeit.de/zeit-magazin/leben/index',
-            'myid2'
-        ),
-        'mode-design': (
-            'Mode & Design',
-            'http://www.zeit.de/zeit-magazin/mode-design/index',
-            'myid3'
-        ),
-        'essen-trinken': (
-            'Essen & Trinken',
-            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-            'myid4'
-        )
-    }
+    request = mock.Mock()
+    request.host = 'foo.bar'
 
-    article = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    article = zeit.web.magazin.view_article.Article(context, request)
 
-    l = [
-        ('Start', 'http://www.zeit.de/index', 'myid1'),
-        ('ZEIT Magazin', 'http://www.zeit.de/zeit-magazin/index', 'myid_zmo'),
-        ('This is my title', ''), ]
+    crumbs = [
+        ('Start', 'http://foo.bar/index', 'myid1'),
+        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index', 'myid_zmo'),
+        ('This is my title', '')
+    ]
 
-    assert article.breadcrumb == l
+    assert article.breadcrumb == crumbs
 
 
 def test_linkreach_property_should_be_set(application):
@@ -246,16 +198,16 @@ def test_footer_should_have_expected_markup(testserver, testbrowser):
         'Rechte &amp; Lizenzen</a></li>'\
         '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
         'Bildrechte</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/datenschutz">'\
+        '<li><a href="{0}/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
         '<li><a href="'\
         'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
         'onlinewerbung.html">Cookies</a></li>'\
-        '<li><a href="http://www.zeit.de/administratives/'\
+        '<li><a href="{0}/administratives/'\
         'agb-kommentare-artikel">AGB</a></li>'\
-        '<li><a href="http://www.zeit.de/impressum/index">Impressum</a></li>'\
-        '<li><a href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
-        '</ul></div></div></div></footer>'
+        '<li><a href="{0}/impressum/index">Impressum</a></li>'\
+        '<li><a href="{0}/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
+        '</ul></div></div></div></footer>'.format(testserver.url)
     got = [s.strip() for s in lxml.html.tostring(elem).splitlines()]
     got = "".join(got)
     assert expect == got
@@ -533,7 +485,7 @@ def test_article_has_correct_product_id(testserver):
     assert article_view.product_id is None
 
 
-def test_articlepage_should_throw_404_if_no_pages_are_exceeded(
+def test_article_page_should_throw_404_if_no_pages_are_exceeded(
         testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
@@ -543,7 +495,7 @@ def test_articlepage_should_throw_404_if_no_pages_are_exceeded(
         page()
 
 
-def test_articlepage_should_work_if_pages_from_request_fit(testserver):
+def test_article_page_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -552,7 +504,7 @@ def test_articlepage_should_work_if_pages_from_request_fit(testserver):
     assert len(page.pages) == 7
 
 
-def test_articlepage_komplett_should_show_all_pages(testserver, testbrowser):
+def test_article_page_komplett_should_show_all_pages(testserver, testbrowser):
     browser = testbrowser(
         '%s/artikel/03/komplettansicht' % testserver.url)
     assert 'Chianti ein Comeback wirklich verdient' in browser.contents
@@ -726,14 +678,18 @@ def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
 
     # jinja2 has a blocks attribute which generates a stream,
     # if called with context. We can use it with a html parser.
-    html_str = " ".join(list(tpl.blocks['longform_logo']({})))
+    ctx, request = (mock.Mock(),) * 2
+    request.request.host = 'foo.bar'
+    ctx.resolve = mock.Mock(return_value=request)
+
+    html_str = ' '.join(list(tpl.blocks['longform_logo'](ctx)))
     html = lxml.html.fromstring(html_str)
     elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
     assert elem.text == 'ZEIT ONLINE'
     assert elem.get('title') == 'ZEIT ONLINE'
 
     elem = html.cssselect('.main-nav__logo')[0]
-    assert elem.get('href') == 'http://www.zeit.de/index'
+    assert elem.get('href') == 'http://foo.bar/index'
 
 
 def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):

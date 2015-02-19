@@ -2,7 +2,7 @@
 from StringIO import StringIO
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import mock
 
@@ -15,7 +15,7 @@ import zeit.web.magazin.view_article
 import pytest
 
 
-def test_IPages_contains_blocks(application):
+def test_ipages_contains_blocks(application):
     xml = StringIO("""\
 <article>
   <body>
@@ -479,7 +479,7 @@ def test_artikel_header_sequelpage_should_have_correct_source(
     assert browser.cssselect('header.article__head.article__head--sequel')
 
 
-def test_gallery_should_have_clickCounter_functions(testserver, testbrowser):
+def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     assert 'var clickCount = {' in browser.contents
@@ -621,7 +621,8 @@ def test_feature_longform_should_have_zon_logo_classes(
     browser = testbrowser('%s/feature/feature_longform' % testserver.url)
     assert browser.cssselect('.main-nav__logo__img.icon-logo-zon-small')
     logolink = browser.cssselect('a.main-nav__logo')
-    assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
+    assert logolink[0].attrib['href'] == '{}/index'.format(
+        testserver.url)
 
 
 def test_feature_longform_should_have_zonish_title(testserver, testbrowser):

@@ -54,6 +54,7 @@
 {% macro liveblog(obj) -%}
     {% if obj.blog_id -%}
         <div class="wrapper__esi-content is-constrained is-centered">
+            {# TODO: We should mock the liveblog backend for local testing. #}
             <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue"></esi:include>
             <esi:remove>
                 <div data-type="esi-content"></div>
@@ -407,7 +408,7 @@
             <form action="{{ obj.comments.comment_report_url }}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
-                    Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+                    Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://{{ request.host }}/administratives/2010-03/netiquette">Netiquette</a> zu melden.
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">
