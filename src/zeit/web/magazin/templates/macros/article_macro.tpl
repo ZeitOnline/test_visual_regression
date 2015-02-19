@@ -139,13 +139,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro source_date(date, source) -%}
-    {% if source %}
-        <span class="article__head__meta__source">{{ source }}{% if advertorial_byline %} {{ advertorial_byline }}{% endif %}</span>
-    {% endif %}
-    <span class="article__head__meta__date">{{ date }}</span>
-{%- endmacro %}
-
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading is-constrained is-centered">
         {{ intertitle|striptags }}

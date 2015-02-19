@@ -326,8 +326,8 @@ def test_article03_has_no_source(testserver, testbrowser):
 def test_article10_has_correct_online_source(testserver, testbrowser):
     # online source
     browser = testbrowser('%s/artikel/10' % testserver.url)
-    assert '<span class="article__head__meta__source">'\
-        'golem.de</span>' in browser.contents
+    meta_source = browser.cssselect('span.article__head__meta__source')[0]
+    assert 'Erschienen bei golem.de' in meta_source.text_content()
 
 
 def test_article08_has_correct_print_source(testserver, testbrowser):

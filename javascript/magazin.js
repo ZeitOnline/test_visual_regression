@@ -7,6 +7,9 @@
 // This lets Modernizr be in the <head> and also compatible with other modules.
 define('modernizr', [], window.Modernizr);
 
+// load config first including path and shim config
+require([ 'config' ], function() {});
+
 // required plain vanilla JS programs here
 // the order in the array and the function names have to correlate
 // which is quite disturbing in my book…
@@ -45,7 +48,7 @@ require([
     'web.magazin/plugins/jquery.animatescroll',
     'web.magazin/plugins/jquery.parseesi'
 ], function() {
-    $(window).referrerCount();
+    $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();

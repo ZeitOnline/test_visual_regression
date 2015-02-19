@@ -151,19 +151,6 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_head(1, '', css_class)
 
 
-def test_macro_source_date_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    markup = ('<span class="article__head__meta__source">'
-              'zon</span><span class="article__head__meta__date">01.01.2013'
-              '</span>')
-    lines = tpl.module.source_date('01.01.2013', 'zon').splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
 def test_macro_intertitle_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
@@ -531,25 +518,6 @@ def test_add_publish_date_generates_script(jinja2_env):
 
     for el in obj:
         lines = tpl.module.add_publish_date(el['lm'], el['pd']).splitlines()
-        output = ''
-        for line in lines:
-            output += line.strip()
-        assert el['markup'] in output
-
-
-def test_date_meta_should_produce_metatags(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-
-    obj = [{'date_last_published_semantic': '',
-            'date_first_released_meta': '1.1.2011',
-            'markup': '<meta name="last-modified" content="1.1.2011"/>'},
-           {'date_last_published_semantic': '1.2.2011',
-            'date_first_released_meta': '1.1.2011',
-            'markup': '<meta name="last-modified" content="1.2.2011"/>'}]
-
-    for el in obj:
-        lines = tpl.module.date_meta(el).splitlines()
         output = ''
         for line in lines:
             output += line.strip()

@@ -43,6 +43,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             request=self.request,
             reverse=True)
 
+    @zeit.web.reify
+    def issue_format(self):
+        return u' Nr. %d/%d'
+
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
@@ -83,6 +87,10 @@ class LongformArticle(Article):
     @zeit.web.reify
     def banner_type(self):
         return 'longform'
+
+    @zeit.web.reify
+    def show_date_format(self):
+        return 'short'
 
 
 @view_config(context=zeit.web.core.article.IFeatureLongform,

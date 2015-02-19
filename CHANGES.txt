@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - DEV-567: Add tracking information to links in RSS feed.
 
+- ZON-1280: Print proper article metadata including source and dates
+
 
 1.13 (2015-02-17)
 -----------------

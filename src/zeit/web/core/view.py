@@ -218,13 +218,13 @@ class Base(object):
         return default
 
     @zeit.web.reify
-    def rankedTags(self):
+    def ranked_tags(self):
         return self.context.keywords
 
     @zeit.web.reify
-    def rankedTagsList(self):
-        if self.rankedTags:
-            return ';'.join([rt.label for rt in self.rankedTags])
+    def ranked_tags_list(self):
+        if self.ranked_tags:
+            return ';'.join([rt.label for rt in self.ranked_tags])
         else:
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
@@ -265,8 +265,16 @@ class Content(Base):
         return self.context.subtitle
 
     @zeit.web.reify
-    def show_article_date(self):
+    def date_last_modified(self):
         return self.date_last_published_semantic or self.date_first_released
+
+    @zeit.web.reify
+    def date_print_published(self):
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_print_published
+        if date:
+            return date.astimezone(tz)
 
     @zeit.web.reify
     def date_first_released(self):
@@ -275,13 +283,6 @@ class Content(Base):
             self.context).date_first_released
         if date:
             return date.astimezone(tz)
-
-    @zeit.web.reify
-    def date_first_released_meta(self):
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released
-        if date:
-            return date.isoformat()
 
     @zeit.web.reify
     def date_last_published_semantic(self):
@@ -367,7 +368,7 @@ def health_check(request):
     return pyramid.response.Response('OK', 200)
 
 
-class service_unavailable(object):
+class service_unavailable(object):  # NOQA
     def __init__(self, context, request):
         log.exception('{} at {}'.format(repr(context), request.path))
 

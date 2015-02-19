@@ -1,14 +1,3 @@
-{% macro date_meta(view) -%}
-    {% if view.date_last_published_semantic %}
-        <meta name="last-modified" content="{{ view.date_last_published_semantic }}"/>
-        <meta http-equiv="last-modified" content="{{ view.date_last_published_semantic }}"/>
-    {% else %}
-        <meta name="last-modified" content="{{ view.date_first_released_meta }}"/>
-        <meta http-equiv="last-modified" content="{{ view.date_first_released_meta }}"/>
-    {% endif %}
-    <meta name="date" content="{{ view.date_first_released_meta }}"/>
-{%- endmacro %}
-
 {% macro breadcrumbs(crumbs) -%}
     <div class="breadcrumbs">
         <div class="breadcrumbs__list is-constrained is-centered">
