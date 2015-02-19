@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-1297: Video-stage completion
 
+- ZON-1326: tweak navigation
+
 
 1.12.2 (2015-02-11)
 -------------------
