@@ -476,6 +476,15 @@ def test_article_has_correct_sharing_image(testserver, testbrowser):
         'schoppenstube/schoppenstube-540x304.jpg')
 
 
+def test_article_has_correct_product_id(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.product_id == 'ZEI'
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.product_id is None
+
+
 def test_article_page_should_throw_404_if_no_pages_are_exceeded(
         testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')

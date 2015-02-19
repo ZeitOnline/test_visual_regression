@@ -104,6 +104,7 @@
             </footer>
         </div>
     </div>
+    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     <script>
         var require = {
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"

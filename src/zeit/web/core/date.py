@@ -110,8 +110,8 @@ class DeltaTime(object):
         self.minutes = zeit.web.core.date.DeltaMinutesEntity(self.delta)
 
     def _filter_delta_time(self):
-        if (self.days.number >= hide['days']
-            and self.hours.number + self.days.number * 24 >= hide['hours']):
+        if (self.days.number >= hide['days'] and self.hours.number +
+                self.days.number * 24 >= hide['hours']):
             self.days = None
             self.hours = None
             self.minutes = None
