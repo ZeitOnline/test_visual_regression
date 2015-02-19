@@ -60,11 +60,12 @@
 </script>
 <noscript>
     <div>
-        <img alt="" width="1" height="1" src="{{ "%s.%s.%s..%s.online.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" | 
+        <img alt="" width="1" height="1" src="{{ "%s.%s.%s.%s.%s.online.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" | 
             format(
                 "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion",
                 view.ressort | lower,
                 view.sub_ressort | lower,
+                view.serie | lower,
                 view.type | lower,
                 request.path_info,
                 "redaktion",
