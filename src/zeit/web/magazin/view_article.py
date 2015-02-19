@@ -81,6 +81,10 @@ class LongformArticle(Article):
     def banner_type(self):
         return 'longform'
 
+    @zeit.web.reify
+    def show_date_format(self):
+        return 'short'
+
 
 @view_config(context=zeit.web.core.article.IFeatureLongform,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
