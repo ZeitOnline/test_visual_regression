@@ -52,7 +52,6 @@ settings = {
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
 
     'community_host_timeout_secs': '10',
-    'hp': 'zeit-magazin/index',
     'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
@@ -114,6 +113,8 @@ settings = {
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
     'vivi_zeit.solr_solr-url': 'http://mock.solr',
+    'vivi_zeit.content.cp_cp-types-url': (
+        'egg://zeit.web.core/data/config/cp-types.xml'),
 
     'debug.show_exceptions': 'True',
     'debug.propagate_jinja_errors': 'True'

@@ -218,13 +218,13 @@ class Base(object):
         return default
 
     @zeit.web.reify
-    def rankedTags(self):
+    def ranked_tags(self):
         return self.context.keywords
 
     @zeit.web.reify
-    def rankedTagsList(self):
-        if self.rankedTags:
-            return ';'.join([rt.label for rt in self.rankedTags])
+    def ranked_tags_list(self):
+        if self.ranked_tags:
+            return ';'.join([rt.label for rt in self.ranked_tags])
         else:
             default_tags = [self.context.ressort, self.context.sub_ressort]
             return ';'.join([dt for dt in default_tags if dt])
@@ -247,6 +247,13 @@ class Base(object):
                            getattr(iqd_ids[self.sub_ressort], 'default'))
         except KeyError:
             return {}
+
+    @zeit.web.reify
+    def product_id(self):
+        try:
+            return self.context.product.id
+        except AttributeError:
+            return None
 
 
 class Content(Base):
@@ -361,7 +368,7 @@ def health_check(request):
     return pyramid.response.Response('OK', 200)
 
 
-class service_unavailable(object):
+class service_unavailable(object):  # NOQA
     def __init__(self, context, request):
         log.exception('{} at {}'.format(repr(context), request.path))
 

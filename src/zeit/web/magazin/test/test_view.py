@@ -367,23 +367,23 @@ def test_artikel02_has_correct_banner_channel(testserver, testbrowser):
     assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
-def test_artikel05_has_rankedTagsList(testserver, testbrowser):
+def test_artikel05_has_ranked_tags_list(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.rankedTagsList is not None
-    assert article_view.rankedTagsList != ''
+    assert article_view.ranked_tags_list is not None
+    assert article_view.ranked_tags_list != ''
 
 
-def test_artikel01_has_correct_authorsList(testserver, testbrowser):
+def test_artikel01_has_correct_authors_list(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.authorsList == 'Anne Mustermann'
+    assert article_view.authors_list == 'Anne Mustermann'
 
 
-def test_artikel08_has_correct_authorsList(testserver, testbrowser):
+def test_artikel08_has_correct_authors_list(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.authorsList == 'Anne Mustermann;Oliver Fritsch'
+    assert article_view.authors_list == 'Anne Mustermann;Oliver Fritsch'
 
 
 def test_artikel05_has_set_text_length(testserver, testbrowser):
@@ -524,7 +524,16 @@ def test_article_has_correct_sharing_image(testserver, testbrowser):
         'schoppenstube/schoppenstube-540x304.jpg')
 
 
-def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(
+def test_article_has_correct_product_id(testserver):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.product_id == 'ZEI'
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.product_id is None
+
+
+def test_articlepage_should_throw_404_if_no_pages_are_exceeded(
         testserver, testbrowser):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
@@ -534,7 +543,7 @@ def test_ArticlePage_should_throw_404_if_no_pages_are_exceeded(
         page()
 
 
-def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
+def test_articlepage_should_work_if_pages_from_request_fit(testserver):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -543,7 +552,7 @@ def test_ArticlePage_should_work_if_pages_from_request_fit(testserver):
     assert len(page.pages) == 7
 
 
-def test_ArticlePage_komplett_should_show_all_pages(testserver, testbrowser):
+def test_articlepage_komplett_should_show_all_pages(testserver, testbrowser):
     browser = testbrowser(
         '%s/artikel/03/komplettansicht' % testserver.url)
     assert 'Chianti ein Comeback wirklich verdient' in browser.contents

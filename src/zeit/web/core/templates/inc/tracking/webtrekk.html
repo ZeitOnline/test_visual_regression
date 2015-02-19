@@ -13,7 +13,9 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    var Z_WT_KENNUNG = "redaktion.{{ view.ressort  }}.{{ view.sub_ressort }}.{{ view.serie }}.{{ view.type }}.online./{{ '/'.join(request.traversed or ()) }}";
+    {% set wt_kennung = 'redaktion.' + view.ressort|lower + '.' + view.sub_ressort|lower + '.' + view.serie|lower + '.' + view.type|lower + '.online' %}
+
+    var Z_WT_KENNUNG = "{{ wt_kennung }}|{{ request.host + request.path }}";
 
     var webtrekk = {
         linkTrack : "standard",
@@ -23,29 +25,34 @@
 
     if ( typeof webtrekkV3 === "function" ) {
         var wt = new webtrekkV3(webtrekk);
-
         wt.cookie = "1";
         wt.contentGroup = {
-            1: "Redaktion",
-            2: "{{ view.tracking_type }}",
-            3: "{{ view.ressort }}",
-            4: "Online",
-            5: "{{ view.sub_ressort }}",
-            6: "{{ view.serie }}",
-            7: "{{ request.path_info | substring_from('/') }}",
-            8: "{{ view.banner_channel }}",
-            9: "{{ date }}"
+            1: "redaktion", // Zuordnung/Bereich
+            2: "{{ view.tracking_type | lower }}", // Kategorie/Pagetype
+            3: "{{ view.ressort | lower }}", // Ressort
+            4: "online", // Online/Sourcetype
+            5: "{{ view.sub_ressort | lower }}", // Subressort
+            6: "{{ view.serie | lower }}", // Cluster
+            7: "{{ request.path_info | substring_from('/') }}", // doc-path
+            8: "{{ view.banner_channel | lower }}", // Banner-Channel
+            9: "{{ date }}" // First Published
         };
 
         {% if view.type == "article" -%}
+        ivw_min_width = ivw_min_width || 767;
         wt.customParameter = {
-            1: "{{ view.authors_list | hide_none }}",
-            2: "{{ view.banner_channel }}",
-            3: "{{ pagination }}",
-            4: "{{ view.rankedTagsList }}",
-            6: "{{ view.text_length }}",
-            7: "",
-            9: "{{ view.banner_channel }}"
+            1: "{{ view.authors_list | lower | hide_none }}", // Autor
+            2: "{{ view.banner_channel | lower }}", // IVW-Code
+            3: "{{ pagination }}", // Seite
+            4: "{{ view.ranked_tags_list | lower }}", // Schlagworte
+            5: "{{ view.show_article_date }}", // Last published
+            6: "{{ view.text_length }}", // Textlänge
+            7: "{{ view.source | hide_none | lower }}", // Quelle
+            8: "{{ view.product_id | hide_none | lower }}", // Product-Id
+            9: "{{ view.banner_channel | lower }}", // Banner-Channel
+            10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
+            11: "", // Fehler
+            12: window.innerWidth >= ivw_min_width ? 'desktop.site' : 'mobile.site'
         };
         {% endif -%}
 
@@ -55,6 +62,34 @@
 </script>
 <noscript>
     <div>
-        <img alt="" width="1" height="1" src="http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.{{ view.ressort }}.{{ view.sub_ressort }}..{{ view.type }}.online.{{ request.path_info }},0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2={{ view.tracking_type }}&amp;cg3={{ view.ressort }}&amp;cg4=Online&amp;cg5={{ view.sub_ressort }}&amp;cg6=&amp;cg7={{ request.path_info | substring_from('/') }}&amp;cg8={{ view.banner_channel }}&amp;cg9={{ date }}{% if view.type == 'article' -%}&amp;cp1={{ view.authorsList }}&amp;cp2={{ view.banner_channel }}&amp;cp3={{ pagination }}&amp;cp4={{ view.rankedTagsList }}&amp;cp6={{ view.text_length }}&amp;cp7=&amp;cp9={{ view.banner_channel }}{% endif -%}">
+        <img alt="" width="1" height="1" src="{{ "%s,%s.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" | 
+            format(
+                "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311",
+                wt_kennung,
+                request.path_info,
+                "redaktion",
+                view.tracking_type | lower,
+                view.ressort | lower,
+                "online",
+                view.sub_ressort | lower,
+                view.serie | lower,
+                request.path_info | substring_from('/'),
+                view.banner_channel | lower,
+                date
+            ) 
+        }}{% if view.type == 'article' -%}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s" | format(
+            view.authorsList | lower | hide_none,
+            view.banner_channel | lower,
+            pagination,
+            view.ranked_tags_list | lower,
+            view.show_article_date,
+            view.text_length,
+            view.source | hide_none | lower,
+            view.product_id | hide_none | lower,
+            view.banner_channel | lower,
+            "",
+            "",
+            ""
+        ) }}{% endif -%}" />
     </div>
 </noscript>
