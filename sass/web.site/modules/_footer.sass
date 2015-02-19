@@ -14,10 +14,11 @@ $footer_button_icon_width: em(10px)
 
 %footer_bar
 	min-height: $footer_bar_min_height
-	font-size: $font-xs--rem
-	line-height: $twice
+	font-size: remify(14px)
+	line-height: remify(42px)
 	text-align: left
 	+respond-min($break-tablet-min)
+		line-height: remify(32px)
 		text-align: center
 
 
@@ -180,24 +181,7 @@ $footer_button_icon_width: em(10px)
 		+respond-max($break-tablet-min)
 			border-top: 1px solid $zon_grey
 	&__button
-		display: inline-block
-		margin: $junior $large 0 $large
-		border: $dblhair solid $zon_grey
-		border-radius: 4px
-		height: $footer_button_height
-		width: $footer_button_width
-		color: $zon_light_grey
-		font-size: $font-s--rem
-		line-height: $footer_button_height
-		text-transform: uppercase
-		letter-spacing: 1px
-		cursor: pointer
-		a
-			+link-colors($zon_light_grey, $zon_light_grey)
-			display: inline-block
-		.icon-top-arrow
-			@extend %footer_icons
-			height: $footer_button_icon_height
-			width: $footer_button_icon_width
-			display: inline-block
-			margin-right: $thin
+		padding: remify(18px) 0
+		text-align: center
+	&__linkbutton
+		+zon-button-dark
