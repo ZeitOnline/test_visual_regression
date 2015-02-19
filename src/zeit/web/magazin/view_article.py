@@ -36,7 +36,9 @@ log = logging.getLogger(__name__)
              name='komplettansicht',
              renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
-    pass
+    @zeit.web.reify
+    def issue_format(self):
+        return u' Nr. %d/%d'
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

@@ -258,7 +258,7 @@ class Content(Base):
         return self.context.subtitle
 
     @zeit.web.reify
-    def show_article_date(self):
+    def date_last_modified(self):
         return self.date_last_published_semantic or self.date_first_released
 
     @zeit.web.reify
@@ -276,13 +276,6 @@ class Content(Base):
             self.context).date_first_released
         if date:
             return date.astimezone(tz)
-
-    @zeit.web.reify
-    def date_first_released_meta(self):
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released
-        if date:
-            return date.isoformat()
 
     @zeit.web.reify
     def date_last_published_semantic(self):

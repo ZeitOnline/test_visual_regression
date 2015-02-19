@@ -52,7 +52,7 @@
 						{{ blocks.title() }}
 					</h1>
 					<div class="article__head__meta">
-						{{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
+						{% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
 						{{ blocks.meta_author(view.authors) }}
 					</div>
 				</header>

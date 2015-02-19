@@ -7,6 +7,8 @@ import re
 import babel.dates
 import pyramid.httpexceptions
 
+import zeit.cms.content.sources
+
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector.connector
@@ -209,25 +211,6 @@ class Article(zeit.web.core.view.Content):
             return prefix + ' ' + self.context.genre.title()
 
     @zeit.web.reify
-    def source(self):
-        # TODO: find sth more elegant (as)
-        # 1. dont know why source stays empty if default value wasnt changed
-        # 2. issue/year will only be shown for Z and ZM right now
-        # because there's alway a value in volume and year
-        source = None
-        if self.context.product:
-            if self.context.product.id == 'ZEI' or \
-               self.context.product.id == 'ZMLB':
-                source = self.context.product_text + ' Nr. ' \
-                    + str(self.context.volume) + '/' + \
-                    str(self.context.year)
-            elif self.context.product.id != 'ZEDE':
-                source = self.context.product_text
-        elif self.context.product_text:
-            source = self.context.product_text
-        return self.context.copyrights or source
-
-    @zeit.web.reify
     def location(self):
         return  # XXX not implemented in zeit.content.article yet
 
@@ -286,36 +269,43 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def obfuscated_date(self):
-        issue = None
+        date = ''
         format = "d. MMMM yyyy, H:mm 'Uhr'"
-        date = babel.dates.format_datetime(
+        if self.context.product and self.context.product.show == 'issue':
+            date = u'ver\u00F6ffentlicht am '
+        date += babel.dates.format_datetime(
             self.date_first_released, format, locale="de_De")
         if self.date_last_published_semantic:
-            date += ' / Zuletzt aktualisiert am ' + babel.dates.format_datetime(
-                self.date_last_published_semantic, format, locale="de_De")
-        if self.context.product:
-            if self.context.product.id in (
-                    'ZEI',  # DIE ZEIT
-                    'ZEAR', # DIE ZEIT Archiv
-                    'ZMLB', # ZEITmagazin
-                    'ZTCS', # ZEIT Campus
-                    'CSRG', # ZEIT CAMPUS Ratgeber
-                    'ZTGS', # ZEIT Geschichte
-                    'ZTWI', # ZEIT Wissen
+            date += ' (Zuletzt aktualisiert am ' + babel.dates.format_datetime(
+                self.date_last_published_semantic, format, locale="de_De") + ')'
+        return base64.b64encode(date.encode('latin-1'))
 
-                    'ZECH', # Zeit Schweiz
-                    'ZEOE', # Zeit Oesterreich
-                    'ZESA', # Zeit im Osten
+    @zeit.web.reify
+    def issue_format(self):
+        return u' N\u00B0\u00A0%d/%d'
 
-                ):
-                issue = u'%s N\u00B0\u00A0%d/%d' % (self.context.product_text,
-                    self.context.volume, self.context.year)
-                if self.date_print_published:
-                    issue += u', %s ver\u00F6ffentlicht am' % (
-                        babel.dates.format_date(
-                        self.date_print_published, "d. MMMM yyyy", locale="de_De"))
-        text = ' '.join(i for i in (issue, date) if i is not None)
-        return base64.b64encode(text.encode('latin-1'))
+    @zeit.web.reify
+    def source_label(self):
+        if self.context.product and self.context.product.show:
+            label = self.context.product.label or self.context.product.title
+            if self.context.product.show == 'issue':
+                label += self.issue_format % (self.context.volume,
+                                              self.context.year)
+            return label
+
+    @zeit.web.reify
+    def source_url(self):
+        if self.context.deeplink_url:
+            return self.context.deeplink_url
+        elif self.context.product and self.context.product.show == 'link':
+            return self.context.product.href
+
+    @zeit.web.reify
+    def obfuscated_source(self):
+        if self.context.product and self.context.product.show == 'issue':
+            label = '%s, %s' % (self.source_label, babel.dates.format_date(
+                self.date_print_published, "d. MMMM yyyy", locale="de_De"))
+            return base64.b64encode(label.encode('latin-1'))
 
     @property
     def copyrights(self):

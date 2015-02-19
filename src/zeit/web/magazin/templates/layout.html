@@ -38,7 +38,7 @@
         <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
 
         <!-- date metadata -->
-        {{lama.date_meta(view)}}
+        {%- include "zeit.web.core:templates/inc/meta/date.html" ignore missing -%}
 
         {% block sharing_meta -%}
         <!-- sharing metadata -->

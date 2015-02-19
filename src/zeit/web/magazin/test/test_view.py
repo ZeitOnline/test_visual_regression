@@ -400,7 +400,7 @@ def test_article05_has_correct_dates(testserver, testbrowser):
         '2013-11-03T08:10:00.626737+01:00')
     assert article_view.date_first_released.isoformat() == (
         '2013-10-24T08:00:00+02:00')
-    assert article_view.show_article_date.isoformat() == (
+    assert article_view.date_last_modified.isoformat() == (
         '2013-11-03T08:10:00.626737+01:00')
 
 
@@ -410,7 +410,7 @@ def test_article03_has_correct_dates(testserver, testbrowser):
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.date_first_released.isoformat() == (
         '2013-07-30T17:20:50.176115+02:00')
-    assert article_view.show_article_date.isoformat() == (
+    assert article_view.date_last_modified.isoformat() == (
         '2013-07-30T17:20:50.176115+02:00')
 
 
@@ -475,21 +475,21 @@ def test_article08_has_correct_source(testserver, testbrowser):
     # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.source == 'DIE ZEIT Nr. 26/2008'
+    assert article_view.source_label == 'DIE ZEIT Nr. 26/2008'
 
 
 def test_article10_has_correct_source(testserver, testbrowser):
     # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.source == 'golem.de'
+    assert article_view.source_label == 'Erschienen bei golem.de'
 
 
 def test_article03_has_empty_source(testserver, testbrowser):
     # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.source is None
+    assert article_view.source_label is None
 
 
 def test_article_has_correct_twitter_card_type(testserver, testbrowser):
