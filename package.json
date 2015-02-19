@@ -14,7 +14,7 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-grunticon": "^1.2.13",
+    "grunt-grunticon": "^2.1.2",
     "grunt-jscs": "^0.7.1",
     "grunt-jsdoc": "~0.5.7",
     "grunt-modernizr": "~0.5.2",
