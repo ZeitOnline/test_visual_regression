@@ -9,7 +9,8 @@ import zeit.web.core.interfaces
 
 
 # Will be made configurable with ZON-1038
-limit = {'days': 3, 'hours': 8}
+limit = {'days': 1, 'hours': 1}
+hide = {'days': 0, 'hours': 3}
 locale = 'de_DE'
 
 
@@ -62,12 +63,9 @@ class DeltaDaysEntity(DeltaTimeEntity):
     def __init__(self, delta):
         super(DeltaDaysEntity, self).__init__(delta)
         self.number = self.delta.days
-        date_text = babel.dates.format_timedelta(
+        self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(days=self.delta.days),
             threshold=1, locale=locale)
-        # Dirty hack, since babel does not understand
-        # german cases (as in Kasus)
-        self.text = date_text.replace('Tage', 'Tagen', 1)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaHoursEntity)
@@ -112,16 +110,28 @@ class DeltaTime(object):
         self.minutes = zeit.web.core.date.DeltaMinutesEntity(self.delta)
 
     def _filter_delta_time(self):
-        if self.days.number >= limit['days']:
+        if (self.days.number >= hide['days'] and self.hours.number +
+                self.days.number * 24 >= hide['hours']):
+            self.days = None
             self.hours = None
             self.minutes = None
-        elif self.hours.number >= limit['hours']:
+        elif self.days.number >= limit['days']:
+            self.hours = None
+            self.minutes = None
+        elif self.hours.number + self.days.number * 24 >= limit['hours']:
             self.minutes = None
 
     def _stringify_delta_time(self):
-        return 'vor ' + ' '.join(
+        human_readable = ' '.join(
             i.text for i in (self.days, self.hours, self.minutes)
             if i is not None and i.number != 0)
+        if human_readable is '':
+            return
+        # Dirty hack, since babel does not understand
+        # german cases (as in Kasus)
+        return 'vor ' + human_readable.replace(
+            'Tage', 'Tagen', 1).replace(
+            'Monate', 'Monaten', 1)
 
     def get_time_since_modification(self):
         self._get_babelfied_delta_time()

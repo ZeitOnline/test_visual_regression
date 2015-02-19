@@ -467,7 +467,7 @@ def test_nav_search_is_working_as_expected(
         search__button.click()
         time.sleep(transition_duration)  # wait for animation
         assert search__input.is_displayed() is False, 'Input is displayed'
-        # test search input is hidden after 
+        # test search input is hidden after
         # click somewhere else (show it first)
         search__button.click()
         time.sleep(transition_duration)  # wait for animation

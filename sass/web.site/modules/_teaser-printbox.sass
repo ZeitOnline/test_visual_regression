@@ -1,16 +1,18 @@
 .print-box
+	padding-bottom: remify(30px)
 	&__heading
 		color: $zon-charcoal
 		border-bottom: 1px solid $color-border
-		font-size: $font-ss
+		font-size: $font-s
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-m
-		margin: remify(16px) 0
-		padding: remify(10px)
+		margin: 0 0 remify(16px) 0
+		padding: remify(0 10px 10px 10px)
 		text-transform: uppercase
 
 	&__issue
 		font-weight: normal
+		white-space: nowrap
 
 	&__content
 		padding: 0 remify(10px)
@@ -91,8 +93,8 @@
 
 		&:hover
 			background-color: $zon_lighter_grey
-		&::after
-			content: "\25B8"
+		&:after
+			content: '\25B8' // ▸ = Black right-pointing small triangle
 			margin-left: 3px
 
 

@@ -4,13 +4,16 @@
 
 %teaser
 	+pie-clearfix
-	padding: $petite 0
 	border-top: 1px solid #ccc
+	margin: 0 -($page-padding)
+	padding: $petite $page-padding
 	&:nth-of-type(1)
 		border-top: none
 	+respond-min($break-tablet-min)
 		border-bottom: none
 		border-top: none
+		margin: 0
+		padding: $petite 0
 
 %teaser-small-media-placement
 	position: relative
@@ -49,7 +52,7 @@
 	font-family: $font-tabletgothicnarrow
 	font-size: $zon-font-s
 	font-weight: bold
-	letter-spacing: $zon-letter-spacing-l
+	letter-spacing: $zon-letter-spacing-m
 	line-height: 1.2
 	margin-bottom: em(3px, 13px)
 
@@ -85,9 +88,11 @@
 
 %teaser-text
 	color: $zon_grey
-	font-size: $font-mm
+	font-size: remify(17px)
 	line-height: 1.4
 	margin: 0 0 remify(4px) 0
+	+respond-min($break-phablet-min)
+		font-size: remify(15px)
 
 %teaser-byline
 	color: $zon_mid_grey
@@ -104,8 +109,8 @@
 	letter-spacing: $zon-letter-spacing-s
 
 %teaser-datetime
-	&:not(:last-child):after
-		content: ' ⧸ '
+	&:not(:last-child):not(:empty):after
+		content: ' \29F8 ' // ⧸ = Big solidus
 		margin: 0 $micro 0 $micro
 
 %teaser-commentcount
