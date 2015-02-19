@@ -419,11 +419,10 @@ def test_zon_main_nav_has_correct_structure(
         assert main_nav__tags.is_displayed() is False
         # date bar is hidden
         assert main_nav__date.is_displayed() is False
-        # last 3 services aren't shown
+        # services li hidden from 4th elem on
         serv_li = main_nav__services.find_elements_by_tag_name('li')
-        assert serv_li[3].is_displayed() is False
-        assert serv_li[4].is_displayed() is False
-        assert serv_li[5].is_displayed() is False
+        for li in serv_li[:3]:
+            assert li.is_displayed() is False
     else:
         # search button is visible in desktop mode
         assert search__button.is_displayed()
@@ -468,7 +467,8 @@ def test_nav_search_is_working_as_expected(
         search__button.click()
         time.sleep(transition_duration)  # wait for animation
         assert search__input.is_displayed() is False, 'Input is displayed'
-        # test search input is hidden after click somewhere else, show it first
+        # test search input is hidden after
+        # click somewhere else (show it first)
         search__button.click()
         time.sleep(transition_duration)  # wait for animation
         document.click()
