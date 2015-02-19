@@ -471,21 +471,21 @@ def test_article05_has_no_genre(testserver, testbrowser):
     assert article_view.genre is None
 
 
-def test_article08_has_correct_source(testserver, testbrowser):
+def test_article08_has_correct_source_label(testserver, testbrowser):
     # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.source_label == 'DIE ZEIT Nr. 26/2008'
 
 
-def test_article10_has_correct_source(testserver, testbrowser):
+def test_article10_has_correct_source_label(testserver, testbrowser):
     # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.source_label == 'Erschienen bei golem.de'
 
 
-def test_article03_has_empty_source(testserver, testbrowser):
+def test_article03_has_empty_source_label(testserver, testbrowser):
     # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
