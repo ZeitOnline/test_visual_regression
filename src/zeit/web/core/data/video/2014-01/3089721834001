@@ -31,20 +31,20 @@
         <attribute name="video_still" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/938/18140073001_3090367483001_held.jpg?pubId=18140073001</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">
-            <pickle>
-                <initialized_object>
-                    <klass>
-                        <global module="zope.interface.declarations" name="Provides"/>
-                    </klass>
-                    <arguments>
-                        <tuple>
-                            <global module="zeit.content.video.video" name="Video"/>
-                            <global module="zope.interface" name="Interface"/>
-                            <global module="zeit.magazin.interfaces" name="IZMOContent"/>
-                        </tuple>
-                    </arguments>
-                </initialized_object>
-            </pickle>
+            &lt;pickle&gt;
+              &lt;initialized_object&gt;
+                &lt;klass&gt;
+                  &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+                &lt;/klass&gt;
+                &lt;arguments&gt;
+                  &lt;tuple&gt;
+                    &lt;global name="Video" module="zeit.content.video.video"/&gt;
+                    &lt;global name="Interface" module="zope.interface"/&gt;
+                    &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+                  &lt;/tuple&gt;
+                &lt;/arguments&gt;
+              &lt;/initialized_object&gt;
+            &lt;/pickle&gt;
         </attribute>
     </head>
     <body>

@@ -611,3 +611,21 @@ def test_area_printbox_should_contain_teaser_image(testserver):
     isinstance(
         view.area_printbox.image,
         zeit.content.image.image.RepositoryImage)
+
+
+def test_homepage_indentifies_itself_as_homepage(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is True
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/main-teaser-setup')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is False
+
+
+def test_homepage_ressort_is_homepage(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.ressort == 'homepage'
