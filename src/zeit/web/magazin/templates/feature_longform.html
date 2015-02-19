@@ -1,21 +1,21 @@
 {% extends "zeit.web.magazin:templates/longform.html" %}
 
 {% block pagetitle %}
-<title>{{ view.pagetitle | replace('ZEITmagazin', 'ZEIT ONLINE')}}</title>
+<title>{{ view.pagetitle | replace('ZEITmagazin', 'ZEIT ONLINE') }}</title>
 {% endblock pagetitle %}
 
 {% block sharing_meta -%}
-    <meta name="twitter:card" content="{{view.twitter_card_type}}">
+    <meta name="twitter:card" content="{{view.twitter_card_type }}">
     <meta name="twitter:site" content="@zeitonline">
     <meta name="twitter:creator" content="@zeitonline">
-    <meta name="twitter:title" content="{{view.title}}">
-    <meta name="twitter:description" content="{{view.subtitle}}">
+    <meta name="twitter:title" content="{{ view.title }}">
+    <meta name="twitter:description" content="{{ view.subtitle }}">
     <meta property="og:site_name" content="ZEIT ONLINE">
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{view.title or 'ZEIT ONLINE'}}">
-    <meta property="og:description" content="{{view.subtitle or 'ZEIT ONLINE'}}">
-    <meta property="og:url" content="{{view.article_url or 'http://' + request.host + request.path_info}}">
+    <meta property="og:title" content="{{ view.title or 'ZEIT ONLINE' }}">
+    <meta property="og:description" content="{{ view.subtitle or 'ZEIT ONLINE' }}">
+    <meta property="og:url" content="{{ view.article_url or 'http://' + request.host + request.path_info }}">
     {% if view.image_group -%}
         <meta property="og:image" content="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">
         <link itemprop="image" rel="image_src" href="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">
@@ -28,7 +28,7 @@
 {%- endblock sharing_meta %}
 
 {% block longform_logo %}
-    <a href="http://www.zeit.de/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./index">
+    <a href="http://{{ view.request.host }}/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./index">
         <meta itemprop="name" content="Zeit Online">
         <h1 class="main-nav__logo__wrap">
             <span class="main-nav__logo__img icon-logo-zon-large" itemprop="logo" title="ZEIT ONLINE">ZEIT ONLINE</span>
@@ -47,9 +47,9 @@
             {% for crumb in view.breadcrumb -%}
                 <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
                 {% if crumb[1] != '' -%}
-                    <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
+                    <a href="{{ crumb[1] }}" itemprop="url"><span itemprop="title">{{ crumb[0] }}</span></a>
                 {% else -%}
-                    <span itemprop="title">{{crumb[0]}}</span>
+                    <span itemprop="title">{{ crumb[0] }}</span>
                 {% endif -%}
                 </div>
                 {% if not loop.last -%}
