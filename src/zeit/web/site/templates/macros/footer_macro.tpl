@@ -12,10 +12,6 @@
     {{ build_footer_bar(view.navigation_footer_links,'links') }}
 {%- endmacro %}
 
-{% macro footer_button(view) -%}
-    <div class="icon-top-arrow"></div><a href="?">Nach oben</a>
-{%- endmacro %}
-
 {% macro build_footer_bar(navigation,class,more) -%}
     {% for i in navigation -%}
         {% set section = navigation[i] %}
