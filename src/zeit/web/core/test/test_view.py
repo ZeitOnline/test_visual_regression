@@ -6,7 +6,7 @@ import zeit.web.core.date
 
 
 def test_json_delta_time_from_date_should_return_null(testserver,
-                                                            testbrowser):
+                                                      testbrowser):
     browser = testbrowser(
         '{}/json/delta_time?'
         'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
