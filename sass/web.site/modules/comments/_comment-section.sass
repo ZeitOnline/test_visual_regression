@@ -8,14 +8,16 @@
 
 .comment-section
 	+remove-side-padding
-
+	margin-top: 4rem
 	&__head,
 	&__notice
 		+restore-side-padding
-		font-size: 24px
-		font-weight: bold
-		margin: 40px 0 0
-		display: block
 		border-top: 2px solid $zon-seashell
+		display: block
+		font-size: remify(20px)
+		font-weight: bold
+		margin: 1rem 0
+		padding: 1rem 1rem
+		text-align: center
 		+respond-min($break-desktop-min)
 			padding: remify($medium--px 160px)
