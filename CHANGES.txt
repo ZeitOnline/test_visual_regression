@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1281: Webtrekk impression tracking
 
+- DEV-567: Add tracking information to links in RSS feed.
+
 
 1.13 (2015-02-17)
 -----------------
