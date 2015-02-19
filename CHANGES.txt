@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1392: Style comment section and forms
 
+- DEV-567: Add tracking information to links in RSS feed.
+
 
 1.13 (2015-02-17)
 -----------------

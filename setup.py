@@ -43,7 +43,7 @@ setup(
         'setuptools',
         'zc.iso8601',
         'wsgiproxy',
-        'zeit.cms',
+        'zeit.cms >= 2.37.0.dev0',
         'zeit.connector >= 2.6.0',
         'zeit.content.article',
         'zeit.content.author',
