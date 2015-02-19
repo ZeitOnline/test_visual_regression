@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1413: mobil poliert
 
+- BUG-192: Enable browser caching for spektrum, brightcove and native images
+
 
 1.13 (2015-02-17)
 -----------------
