@@ -482,7 +482,7 @@ def test_article_has_correct_product_id(testserver):
     assert article_view.product_id == 'ZEI'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.product_id is None
+    assert article_view.product_id == 'GOLEM'
 
 
 def test_article_page_should_throw_404_if_no_pages_are_exceeded(

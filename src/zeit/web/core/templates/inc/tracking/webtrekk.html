@@ -45,7 +45,7 @@
             2: "{{ view.banner_channel | lower }}", // IVW-Code
             3: "{{ pagination }}", // Seite
             4: "{{ view.ranked_tags_list | lower }}", // Schlagworte
-            5: "{{ view.show_article_date }}", // Last published
+            5: "{{ view.date_last_modified }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
             7: "{{ view.source | hide_none | lower }}", // Quelle
             8: "{{ view.product_id | hide_none | lower }}", // Product-Id
@@ -78,11 +78,11 @@
                 date
             ) 
         }}{% if view.type == 'article' -%}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s" | format(
-            view.authorsList | lower | hide_none,
+            view.authors_list | lower | hide_none,
             view.banner_channel | lower,
             pagination,
             view.ranked_tags_list | lower,
-            view.show_article_date,
+            view.date_last_modified,
             view.text_length,
             view.source | hide_none | lower,
             view.product_id | hide_none | lower,
