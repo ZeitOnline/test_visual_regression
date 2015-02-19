@@ -96,7 +96,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
 
-    html_str = tpl.render(teaser=teaser,layout='teaser')
+    html_str = tpl.render(teaser=teaser, layout='teaser')
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1, (
