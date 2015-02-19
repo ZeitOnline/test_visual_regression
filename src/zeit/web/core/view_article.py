@@ -7,8 +7,6 @@ import re
 import babel.dates
 import pyramid.httpexceptions
 
-import zeit.cms.content.sources
-
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector.connector
