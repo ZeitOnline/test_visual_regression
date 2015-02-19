@@ -44,37 +44,9 @@
             {% if view.comments and view.comments.comment_count > 1 %}
             {{ view.comments.comment_count }} Kommentare
             {% else %}
-            Diskutieren Sie mit.
+            Noch keine Kommentare. Diskutieren Sie mit.
             {% endif %}
         </div>
-        {% if view.request.authenticated_userid -%}
-            {% set user = view.request.session.user %}
-            <form class="comment-form" action="" method="POST">
-                <div class="">
-                    angemeldet als
-                    <a href="{{ view.request.registry.settings.community_host }}/user/{{ user.uid }}">
-                        {{ user.name | e }}
-                    </a>
-                </div>
-                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500" disabled></textarea>
-                <input type="hidden" name="nid" value="">
-                <input type="hidden" name="pid" value="">
-                <input type="hidden" name="uid" value="">
-                <input class="comment-form__submit" type="submit" value="Kommentar senden" />
-            </form>
-            {% else -%}
-            <div class="comment-login">
-                <div class="comment-login__cta">
-                    Bitte melden Sie sich an, um zu kommentieren.
-                </div>
-                <a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}">
-                    Anmelden
-                </a>
-                <a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}">
-                    Registrieren
-                </a>
-            </div>
-        {% endif -%}
         {% if view.comments %}
             {% for comment in view.comments.comments[:20] %}
                 <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="cid-{{ comment.cid }}">
@@ -111,10 +83,35 @@
                         </a></div>
                 </article>
             {% endfor %}
-        {% else %}
-            <div class="comment-section__notice">
-                Noch keine Kommentare.
-            </div>
         {% endif %}
+        {% if view.request.authenticated_userid -%}
+            {% set user = view.request.session.user %}
+            <form class="comment-form" action="" method="POST" id="comment-form">
+                <div class="">
+                    angemeldet als
+                    <img class="comment-form__avatar" alt="Avatarbild von {{ user.name | e }}" src="{{ user.picture }}">
+                    <a class="comment-form__username" href="{{ view.request.registry.settings.community_host }}/user/{{ user.uid }}">
+                        {{ user.name | e }}
+                    </a>
+                </div>
+                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500" disabled></textarea>
+                <input type="hidden" name="nid" value="">
+                <input type="hidden" name="pid" value="">
+                <input type="hidden" name="uid" value="">
+                <input class="comment-form__submit" type="submit" value="Kommentar senden" />
+            </form>
+            {% else -%}
+            <div class="comment-login">
+                <div class="comment-login__cta">
+                    Bitte melden Sie sich an, um zu kommentieren.
+                </div>
+                <a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}">
+                    Anmelden
+                </a>
+                <a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}">
+                    Registrieren
+                </a>
+            </div>
+        {% endif -%}
     </section>
 {% endblock main %}
