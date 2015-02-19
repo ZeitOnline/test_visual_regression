@@ -265,7 +265,7 @@ class Content(Base):
     def date_print_published(self):
         tz = babel.dates.get_timezone('Europe/Berlin')
         date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).print_publish
+            self.context).date_print_published
         if date:
             return date.astimezone(tz)
 
