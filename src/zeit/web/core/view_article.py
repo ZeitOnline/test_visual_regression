@@ -167,7 +167,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def authors(self):
-        authorList = []
+        author_list = []
         try:
             author_ref = self.context.authorships
             for index, author in enumerate(author_ref):
@@ -185,13 +185,13 @@ class Article(zeit.web.core.view.Content):
                         result['suffix'] = ' und'
                     elif index < len(author_ref) - 1:
                         result['suffix'] = ', '
-                    authorList.append(result)
-            return authorList
+                    author_list.append(result)
+            return author_list
         except (IndexError, OSError):
             return
 
     @zeit.web.reify
-    def authorsList(self):
+    def authors_list(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
 
@@ -268,14 +268,16 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def obfuscated_date(self):
         date = ''
-        format = "d. MMMM yyyy, H:mm 'Uhr'"
+        format = 'd. MMMM yyyy, H:mm \'Uhr\''
         if self.context.product and self.context.product.show == 'issue':
             date = u'ver\u00F6ffentlicht am '
         date += babel.dates.format_datetime(
-            self.date_first_released, format, locale="de_De")
+            self.date_first_released, format, locale='de_De')
         if self.date_last_published_semantic:
-            date += ' (Zuletzt aktualisiert am ' + babel.dates.format_datetime(
-                self.date_last_published_semantic, format, locale="de_De") + ')'
+            date = '{} (Zuletzt aktualisiert am )'.format(
+                date,
+                babel.dates.format_datetime(
+                    self.date_last_published_semantic, format, locale='de_De'))
         return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify

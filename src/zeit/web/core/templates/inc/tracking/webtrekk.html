@@ -39,7 +39,7 @@
 
         {% if view.type == "article" -%}
         wt.customParameter = {
-            1: "{{ view.authorsList | hide_none }}",
+            1: "{{ view.authors_list | hide_none }}",
             2: "{{ view.banner_channel }}",
             3: "{{ pagination }}",
             4: "{{ view.rankedTagsList }}",
