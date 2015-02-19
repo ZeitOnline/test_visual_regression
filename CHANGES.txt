@@ -5,6 +5,8 @@ Change log for zeit.web
 -----------------
 
 - ZON-1413: mobil poliert
+- ZON-1392: Kommentare gestyled
+
 
 
 1.13 (2015-02-17)
