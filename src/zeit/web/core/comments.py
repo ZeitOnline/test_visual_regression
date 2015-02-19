@@ -88,7 +88,8 @@ def comment_as_dict(comment):
     return dict(
         in_reply=in_reply,
         indented=bool(in_reply),
-        recommendations=len(comment.xpath('flagged[@type="kommentar_empfohlen"]')),
+        recommendations=len(
+            comment.xpath('flagged[@type="kommentar_empfohlen"]')),
         recommended=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
