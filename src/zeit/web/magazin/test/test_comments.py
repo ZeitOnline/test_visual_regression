@@ -17,14 +17,14 @@ def test_comment_as_dict(dummy_request, agatho, monkeyagatho):
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     comment = agatho.collection_get(unique_id).xpath('//comment')[0]
     json_comment = zeit.web.core.comments.comment_as_dict(comment)
-    assert json_comment['name'] == 'claudiaE'
+    assert json_comment['name'] == 'Skarsgard'
 
 
 def test_get_entire_thread(dummy_request, monkeyagatho):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, dummy_request)
+        unique_id, dummy_request, reverse=True)
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
@@ -37,7 +37,7 @@ def test_paging_should_not_affect_comment_threads(
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, dummy_request)
+        unique_id, dummy_request, reverse=True)
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
