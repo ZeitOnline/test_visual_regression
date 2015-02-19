@@ -4,7 +4,7 @@ Change log for zeit.web
 1.14 (unreleased)
 -----------------
 
-- ZON-1413: mobil poliert
+- ZON-1424: Polishing mobile experience
 
 - ZON-1392: Style comment section and forms
 
