@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1392: Style comment section and forms
 
+- ZON-1281: Webtrekk impression tracking
+
 
 1.13 (2015-02-17)
 -----------------
