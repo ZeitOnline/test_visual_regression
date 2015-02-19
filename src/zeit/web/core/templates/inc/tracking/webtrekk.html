@@ -13,7 +13,7 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    var Z_WT_KENNUNG = "redaktion.{{ view.ressort  }}.{{ view.sub_ressort }}.{{ view.serie }}.{{ view.type }}.online./{{ '/'.join(request.traversed or ()) }}";
+    var Z_WT_KENNUNG = "redaktion.{{ view.ressort  }}.{{ view.sub_ressort }}.{{ view.serie }}.{{ view.type }}.online|{{ request.host + request.path }}";
 
     var webtrekk = {
         linkTrack : "standard",
@@ -23,7 +23,6 @@
 
     if ( typeof webtrekkV3 === "function" ) {
         var wt = new webtrekkV3(webtrekk);
-
         wt.cookie = "1";
         wt.contentGroup = {
             1: "redaktion", // Zuordnung/Bereich
@@ -49,7 +48,7 @@
             7: "{{ view.source | hide_none | lower }}", // Quelle
             8: "{{ view.product_id | hide_none | lower }}", // Product-Id
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
-            10: "", // Banner aktiv?
+            10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
             11: "", // Fehler
             12: window.innerWidth >= ivw_min_width ? 'desktop.site' : 'mobile.site'
         };
