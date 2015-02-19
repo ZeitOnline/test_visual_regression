@@ -365,8 +365,7 @@ def appbrowser(application):
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
         path = zeit.web.core.comments.path_of_article(unique_id)
-        response = lxml.etree.parse(''.join([self.entry_point, path]))
-        return zeit.web.core.comments._place_answers_under_parent(response)
+        return lxml.etree.parse(''.join([self.entry_point, path]))
 
     monkeypatch.setattr(
         zeit.web.core.comments.Agatho, 'collection_get', collection_get)

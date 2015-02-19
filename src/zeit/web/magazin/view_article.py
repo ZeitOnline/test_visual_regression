@@ -37,6 +37,13 @@ log = logging.getLogger(__name__)
              renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     @zeit.web.reify
+    def comments(self):
+        return zeit.web.core.comments.get_thread(
+            unique_id=self.context.uniqueId,
+            request=self.request,
+            reverse=True)
+
+    @zeit.web.reify
     def issue_format(self):
         return u' Nr. %d/%d'
 
