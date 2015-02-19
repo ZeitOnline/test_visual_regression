@@ -69,7 +69,8 @@ settings = {
         'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
     'vivi_zeit.cms_source-navigation': (
         'egg://zeit.cms.content/navigation.xml'),
-    'vivi_zeit.cms_source-products': 'egg://zeit.cms.content/products.xml',
+    'vivi_zeit.cms_source-products': (
+        'egg://zeit.web.core/data/config/products.xml'),
     'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
