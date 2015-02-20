@@ -1,6 +1,12 @@
 Change log for zeit.web
 =======================
 
+1.15 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
 1.14 (2015-02-20)
 -----------------
 - ZON-1434: Allow envs to post comments for any resource
