@@ -275,7 +275,7 @@ class Article(zeit.web.core.view.Content):
             date = u'ver\u00F6ffentlicht am '
         date += first_released
         if self.date_last_published_semantic:
-            date = '{} (Zuletzt aktualisiert am )'.format(
+            date = '{} (Zuletzt aktualisiert am {})'.format(
                 date,
                 babel.dates.format_datetime(
                     self.date_last_published_semantic, format, locale='de_De'))
