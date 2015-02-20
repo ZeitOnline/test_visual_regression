@@ -40,6 +40,11 @@ $teaser-column-mobile-image-size: 80px
 			height: 100%
 	&__media-item
 		@extend %teaser-media-item
+		+old-ie
+			background: $white
+			margin-left: 20px
+			margin-top: 30px
+			position: static
 	&__heading
 		@extend %teaser-heading
 		&--padded
