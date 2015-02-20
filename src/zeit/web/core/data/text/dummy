@@ -1,0 +1,24 @@
+# robots.txt, www.zeit.de 12/01/2011
+# by ch
+
+User-agent: Mediapartners-Google
+Allow: /suche/index?
+Allow: /wirtschaft/maerkte/kursabfrage?
+
+User-agent: Adsbot-Google
+Allow: /suche/index?
+Allow: /wirtschaft/maerkte/kursabfrage?
+
+User-agent: *
+Disallow: /zeit/
+Disallow: /text/
+Disallow: /templates/
+Disallow: /hp_channels/
+Disallow: /software/tests/
+Disallow: /software/samples/
+Disallow: /suche/index?
+Disallow: /send/
+Disallow: /wirtschaft/maerkte/kursabfrage?
+
+Sitemap: http://www.zeit.de/gsitemaps/index.xml
+
