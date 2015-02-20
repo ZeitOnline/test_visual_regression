@@ -1,16 +1,21 @@
+import cProfile
 import datetime
 import email.utils
 import itertools
 import logging
 import mimetypes
+import os
 import pkg_resources
+import pstats
 import re
+import StringIO
 import time
 import urllib2
 import urlparse
 
 import babel.dates
 import jinja2.environment
+import jinja2.ext
 import jinja2.loaders
 import jinja2.nodes
 import jinja2.runtime
@@ -665,3 +670,44 @@ class PrefixLoader(jinja2.BaseLoader):
             # re-raise the exception with the correct fileame here.
             # (the one that includes the prefix)
             raise jinja2.TemplateNotFound(template)
+
+
+class ProfilerExtension(jinja2.ext.Extension):
+
+    tags = set(['profile'])
+
+    def __init__(self, env):
+        super(ProfilerExtension, self).__init__(env)
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        self.active = conf.get('debug.enable_profiler')
+        self.profiler = None
+
+    def parse(self, parser):
+        token = next(parser.stream)
+        name = 'no_{}_{}_{}'.format(
+            token.value, token.lineno, os.urandom(6).encode('hex'))
+
+        body = parser.parse_statements(['name:endprofile'], drop_needle=True)
+
+        if self.active:
+            name = name.lstrip('no_')
+            body.insert(0, jinja2.nodes.CallBlock(
+                self.call_method('engage', []), [], [], []))
+            body.append(jinja2.nodes.CallBlock(
+                self.call_method('disengage', []), [], [], []))
+
+        return jinja2.nodes.Block(name, body, False).set_lineno(token.lineno)
+
+    def engage(self, *args, **kw):
+        color = os.urandom(3).encode('hex')
+        self.profiler = cProfile.Profile()
+        self.profiler.enable()
+        return '<div class="__pro__" style="outline:3px dashed #{};">'.format(
+            color)
+
+    def disengage(self, *args, **kw):
+        self.profiler.disable()
+        stream = StringIO.StringIO()
+        stats = pstats.Stats(self.profiler, stream=stream)
+        return '<b position:relative;float:right;>{:.0f}ms</b></div>'.format(
+            stats.total_tt * 1000)

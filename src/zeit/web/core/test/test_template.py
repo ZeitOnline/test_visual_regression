@@ -296,3 +296,12 @@ def test_function_get_image_pattern_is_working_as_expected(testserver):
     teaser = zeit.web.core.template.get_image_pattern(
         'zon-large-none', 'default')
     assert teaser == ['default']
+
+
+def test_visual_profiler_should_not_interfere_with_rendering(
+        testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    assert not len(browser.cssselect('.__pro__'))
+
+    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    assert not len(browser.cssselect('.__pro__'))
