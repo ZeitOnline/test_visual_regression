@@ -269,16 +269,18 @@ class Article(zeit.web.core.view.Content):
     def obfuscated_date(self):
         date = ''
         format = 'd. MMMM yyyy, H:mm \'Uhr\''
+        first_released = babel.dates.format_datetime(
+            self.date_first_released, format, locale='de_De')
         if self.context.product and self.context.product.show == 'issue':
             date = u'ver\u00F6ffentlicht am '
-        date += babel.dates.format_datetime(
-            self.date_first_released, format, locale='de_De')
+        date += first_released
         if self.date_last_published_semantic:
-            date = '{} (Zuletzt aktualisiert am )'.format(
+            date = '{} (Zuletzt aktualisiert am {})'.format(
                 date,
                 babel.dates.format_datetime(
                     self.date_last_published_semantic, format, locale='de_De'))
-        return base64.b64encode(date.encode('latin-1'))
+        if date is not first_released:
+            return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
     def issue_format(self):
