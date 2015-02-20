@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1392: Style comment section and forms
 
+- ZON-1392: Enable rudimentary comment posting
+
 - ZON-1281: Webtrekk impression tracking
 
 - DEV-567: Add tracking information to links in RSS feed.

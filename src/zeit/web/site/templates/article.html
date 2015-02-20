@@ -108,7 +108,7 @@
         {% endif %}
         {% if view.request.authenticated_userid -%}
             {% set user = view.request.session.user %}
-            <form class="comment-form" action="" method="POST" id="comment-form">
+            <form class="comment-form" action="{{ view.comments.comment_post_url }}" method="POST" id="comment-form">
                 <div class="">
                     angemeldet als
                     <img class="comment-form__avatar" alt="Avatarbild von {{ user.name | e }}" src="{{ user.picture }}">
@@ -116,10 +116,10 @@
                         {{ user.name | e }}
                     </a>
                 </div>
-                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500" disabled></textarea>
-                <input type="hidden" name="nid" value="">
+                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500"></textarea>
+                <input type="hidden" name="nid" value="{{ view.comments.nid }}">
                 <input type="hidden" name="pid" value="">
-                <input type="hidden" name="uid" value="">
+                <input type="hidden" name="uid" value="{{ view.request.session.user.uid }}">
                 <input class="comment-form__submit" type="submit" value="Kommentar senden" />
             </form>
             {% else -%}
