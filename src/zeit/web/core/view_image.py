@@ -41,6 +41,7 @@ class Image(zeit.web.core.view.Base):
         response.headers['Content-Length'] = str(self.context.size)
         response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
             os.path.basename(self.context.uniqueId).encode('utf8'))
+        response.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
         return response
 
 
@@ -60,14 +61,17 @@ class Brightcove(zeit.web.core.view.Base):
         response.headers['Content-Type'] = response.content_type
         response.headers['Content-Disposition'] = (
             'inline; filename="{}"'.format(file_name))
+        response.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
         return response
 
 
 @view_config(route_name='spektrum-image')
 class SpektrumImage(zeit.web.core.view.Base):
+
     def __call__(self):
         path = '/'.join(self.request.matchdict.get('path'))
-        image_url = 'http://www.spektrum.de/{}'.format(path)
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        image_url = '{}/{}'.format(conf.get('spektrum_img_host', ''), path)
         _, file_name = path.rsplit('/', 1)
 
         try:
@@ -81,4 +85,5 @@ class SpektrumImage(zeit.web.core.view.Base):
         response.headers['Content-Type'] = response.content_type
         response.headers['Content-Disposition'] = (
             'inline; filename="{}"'.format(file_name).encode('utf8'))
+        response.cache_expires(zeit.web.core.cache.ICachingTime(image_url))
         return response

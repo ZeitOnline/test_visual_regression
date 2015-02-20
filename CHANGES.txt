@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1280: Print proper article metadata including source and dates
 
+- BUG-192: Enable browser caching for spektrum, brightcove and native images
+
 
 1.13 (2015-02-17)
 -----------------
