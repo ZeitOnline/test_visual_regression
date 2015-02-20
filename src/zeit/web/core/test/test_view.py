@@ -101,3 +101,8 @@ def test_http_header_should_not_contain_empty_fields(
         requests.head(
             testserver.url +
             '/zeit-magazin/index').headers['c1-track-sub-channel']
+
+
+def test_text_file_content_should_be_rendered(testserver, testbrowser):
+    browser = testbrowser('{}/text/dummy'.format(testserver.url))
+    assert browser.contents == 'zeit.web\n'

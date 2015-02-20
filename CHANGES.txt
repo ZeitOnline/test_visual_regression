@@ -4,6 +4,8 @@ Change log for zeit.web
 1.14 (unreleased)
 -----------------
 
+- ZON-1426: Enable plain text file rendering
+
 - ZON-1429: Dynamicize template links accross ZON and ZMO
 
 - ZON-1424: Polishing mobile experience
