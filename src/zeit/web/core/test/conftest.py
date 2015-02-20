@@ -116,8 +116,9 @@ settings = {
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
 
-    'debug.show_exceptions': 'True',
-    'debug.propagate_jinja_errors': 'True'
+    'debug.show_exceptions': True,
+    'debug.propagate_jinja_errors': True,
+    'debug.enable_profiler': False
 }
 
 

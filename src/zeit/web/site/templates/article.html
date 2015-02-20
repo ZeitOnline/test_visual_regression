@@ -9,6 +9,7 @@
 
 {% block main %}
     <article class="article" id="js-article">
+        {% profile %}
         <h1 class="article-heading">
             <span class="kicker">
                 {{- view.supertitle | hide_none -}}
@@ -25,6 +26,8 @@
                 {{ blocks.meta_author(view.authors, class="byline__author") }}
             {% endif %}
         </div>
+        {% endprofile %}
+        {% profile %}
         <div class="metadata">
             {% if view.source_label -%}
             <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
@@ -40,6 +43,8 @@
                 {{ view.date_last_modified | format_date(view.show_date_format) }}
             </time>
         </div>
+        {% endprofile %}
+        {% profile %}
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">
@@ -53,7 +58,9 @@
                 {% endif %}
             {% endblock article_pagination %}
         </div>
+        {% endprofile %}
     </article>
+    {% profile %}
     <section class="comment-section" id="comments">
         <div class="comment-section__head">
             {% if view.comments and view.comments.comment_count > 1 %}
@@ -129,4 +136,5 @@
             </div>
         {% endif -%}
     </section>
+    {% endprofile %}
 {% endblock main %}

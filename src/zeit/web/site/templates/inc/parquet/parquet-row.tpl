@@ -1,3 +1,4 @@
+{% profile %}
 <div class="parquet-row">
     <div class="parquet-meta">
         {% if row.referenced_cp is none %}{# parquet data model is a mess #}
@@ -34,3 +35,4 @@
         {% endfor %}
     </ul>
 </div>
+{% endprofile %}

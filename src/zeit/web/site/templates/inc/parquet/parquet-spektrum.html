@@ -1,4 +1,5 @@
 {% if row | length %}
+{% profile %}
 <div class="parquet-row parquet-row--spektrum" id="parquet-spektrum">
     {%- if parquet_position -%}
         {% set track_slug = 'hp.centerpage.teaser.parquet.' + parquet_position %}
@@ -30,4 +31,5 @@
         {% endfor %}
     </ul>
 </div>
+{% endprofile %}
 {% endif %}
