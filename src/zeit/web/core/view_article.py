@@ -1,8 +1,10 @@
+import base64
 import datetime
 import itertools
 import logging
 import re
 
+import babel.dates
 import pyramid.httpexceptions
 
 from zeit.content.author.interfaces import IAuthorReference
@@ -165,7 +167,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def authors(self):
-        authorList = []
+        author_list = []
         try:
             author_ref = self.context.authorships
             for index, author in enumerate(author_ref):
@@ -183,13 +185,13 @@ class Article(zeit.web.core.view.Content):
                         result['suffix'] = ' und'
                     elif index < len(author_ref) - 1:
                         result['suffix'] = ', '
-                    authorList.append(result)
-            return authorList
+                    author_list.append(result)
+            return author_list
         except (IndexError, OSError):
             return
 
     @zeit.web.reify
-    def authorsList(self):
+    def authors_list(self):
         if self.authors:
             return ';'.join([rt['name'] for rt in self.authors])
 
@@ -205,25 +207,6 @@ class Article(zeit.web.core.view.Content):
             prefix = 'eine'
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
-
-    @zeit.web.reify
-    def source(self):
-        # TODO: find sth more elegant (as)
-        # 1. dont know why source stays empty if default value wasnt changed
-        # 2. issue/year will only be shown for Z and ZM right now
-        # because there's alway a value in volume and year
-        source = None
-        if self.context.product:
-            if self.context.product.id == 'ZEI' or \
-               self.context.product.id == 'ZMLB':
-                source = self.context.product_text + ' Nr. ' \
-                    + str(self.context.volume) + '/' + \
-                    str(self.context.year)
-            elif self.context.product.id != 'ZEDE':
-                source = self.context.product_text
-        elif self.context.product_text:
-            source = self.context.product_text
-        return self.context.copyrights or source
 
     @zeit.web.reify
     def location(self):
@@ -281,6 +264,48 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def text_length(self):
         return self.context.textLength
+
+    @zeit.web.reify
+    def obfuscated_date(self):
+        date = ''
+        format = 'd. MMMM yyyy, H:mm \'Uhr\''
+        if self.context.product and self.context.product.show == 'issue':
+            date = u'ver\u00F6ffentlicht am '
+        date += babel.dates.format_datetime(
+            self.date_first_released, format, locale='de_De')
+        if self.date_last_published_semantic:
+            date = '{} (Zuletzt aktualisiert am )'.format(
+                date,
+                babel.dates.format_datetime(
+                    self.date_last_published_semantic, format, locale='de_De'))
+        return base64.b64encode(date.encode('latin-1'))
+
+    @zeit.web.reify
+    def issue_format(self):
+        return u' N\u00B0\u00A0%d/%d'
+
+    @zeit.web.reify
+    def source_label(self):
+        if self.context.product and self.context.product.show:
+            label = self.context.product.label or self.context.product.title
+            if self.context.product.show == 'issue':
+                label += self.issue_format % (self.context.volume,
+                                              self.context.year)
+            return label
+
+    @zeit.web.reify
+    def source_url(self):
+        if self.context.deeplink_url:
+            return self.context.deeplink_url
+        elif self.context.product and self.context.product.show == 'link':
+            return self.context.product.href
+
+    @zeit.web.reify
+    def obfuscated_source(self):
+        if self.context.product and self.context.product.show == 'issue':
+            label = '%s, %s' % (self.source_label, babel.dates.format_date(
+                self.date_print_published, "d. MMMM yyyy", locale="de_De"))
+            return base64.b64encode(label.encode('latin-1'))
 
     @property
     def copyrights(self):

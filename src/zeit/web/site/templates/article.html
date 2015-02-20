@@ -28,6 +28,23 @@
         </div>
         {% endprofile %}
         {% profile %}
+        <div class="metadata">
+            {% if view.source_label -%}
+            <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
+                {%- if view.source_url -%}
+                <a href="{{ view.source_url }}">{{ view.source_label }}</a> -
+                {%- else -%}
+                {{ view.source_label }}
+                {%- endif -%}
+            </span>
+            {% endif -%}
+
+            <time class="metadata__date encoded-date" datetime="{{ view.date_last_modified | format_date('iso8601') }}" data-obfuscated="{{ view.obfuscated_date }}">
+                {{ view.date_last_modified | format_date(view.show_date_format) }}
+            </time>
+        </div>
+        {% endprofile %}
+        {% profile %}
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">
@@ -42,28 +59,82 @@
             {% endblock article_pagination %}
         </div>
         {% endprofile %}
-        {% profile %}
-        <div class="comment-section">
-            <span class="comment-section__head">
-                Diskutieren Sie mit.
-            </span>
-            <div class="comment-section__comments">
-                {% if view.comments %}
-                    {% for comment in view.comments.comments[:20] %}
-                        <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="{{ comment.cid }}">
-                            <a class="comment__name" href="{{ comment.userprofile_url }}">{{ comment.name | e }}</a>
-                            <span  class="comment__date">{{ comment.timestamp | format_date_ago() }}</span>
-                            <a  class="comment__anchor" href="#{{ comment.cid }}">Kommentar #{{ loop.index }}</a>
-                            <div class="comment__body">{{ comment.text | safe }}</div>
-                        </article>
-                    {% endfor %}
-                {% else %}
-                    <span class="comment-section__notice">
-                        Noch keine Kommentare.
-                    </span>
-                {% endif %}
-            </div>
-        </div>
-        {% endprofile %}
     </article>
+    {% profile %}
+    <section class="comment-section" id="comments">
+        <div class="comment-section__head">
+            {% if view.comments and view.comments.comment_count > 1 %}
+            {{ view.comments.comment_count }} Kommentare
+            {% else %}
+            Noch keine Kommentare. Diskutieren Sie mit.
+            {% endif %}
+        </div>
+        {% if view.comments %}
+            {% for comment in view.comments.comments[:20] %}
+                <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="cid-{{ comment.cid }}">
+                    {% if comment.img_url %}
+                    <img class="comment__avatar" alt="Avatarbild von {{ comment.name | e }}" src="{{ comment.img_url }}">
+                    {% endif %}
+                    <div class="comment__meta">
+                        <a class="comment__name" href="{{ comment.userprofile_url }}">
+                            {{ comment.name | e }}
+                        </a>
+                        <a  class="comment__date-anchor" href="#cid-{{ comment.cid }}">
+                            {# Special-Char: &#10744; = Big solidus #}
+                            #{{ loop.index }} &nbsp;&#10744;&nbsp; {{ comment.timestamp | format_date_ago() }}
+                        </a>
+                    </div>
+                    {% if comment.recommended %}
+                    {# Special-Char: &#9733; = Black Star #}
+                    <div class="comment__recommendations">
+                        {{ comment.recommendations }} &#9733;
+                    </div>
+                    {% endif %}
+                    <div class="comment__body">
+                        {{ comment.text | safe }}
+                    </div>
+                    <div class="comment__reactions">
+                        <a class="comment__reaction comment__reaction--reply" href="#cid-{{ comment.cid }}">
+                            <span class="icon-comment-reactions-reply"></span> Antworten
+                        </a>
+                        <a class="comment__reaction comment__reaction--report" href="#cid-{{ comment.cid }}">
+                            <span class="icon-comment-reactions-report"></span> Melden
+                        </a>
+                        <a class="comment__reaction comment__reaction--recommend" href="#cid-{{ comment.cid }}">
+                            <span class="icon-comment-reactions-recommend"></span> Empfehlen
+                        </a></div>
+                </article>
+            {% endfor %}
+        {% endif %}
+        {% if view.request.authenticated_userid -%}
+            {% set user = view.request.session.user %}
+            <form class="comment-form" action="" method="POST" id="comment-form">
+                <div class="">
+                    angemeldet als
+                    <img class="comment-form__avatar" alt="Avatarbild von {{ user.name | e }}" src="{{ user.picture }}">
+                    <a class="comment-form__username" href="{{ view.request.registry.settings.community_host }}/user/{{ user.uid }}">
+                        {{ user.name | e }}
+                    </a>
+                </div>
+                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500" disabled></textarea>
+                <input type="hidden" name="nid" value="">
+                <input type="hidden" name="pid" value="">
+                <input type="hidden" name="uid" value="">
+                <input class="comment-form__submit" type="submit" value="Kommentar senden" />
+            </form>
+            {% else -%}
+            <div class="comment-login">
+                <div class="comment-login__cta">
+                    Bitte melden Sie sich an, um zu kommentieren.
+                </div>
+                <a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}">
+                    Anmelden
+                </a>
+                <a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}">
+                    Registrieren
+                </a>
+            </div>
+        {% endif -%}
+    </section>
+    {% endprofile %}
 {% endblock main %}

@@ -54,6 +54,7 @@
 {% macro liveblog(obj) -%}
     {% if obj.blog_id -%}
         <div class="wrapper__esi-content is-constrained is-centered">
+            {# TODO: We should mock the liveblog backend for local testing. #}
             <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue"></esi:include>
             <esi:remove>
                 <div data-type="esi-content"></div>
@@ -136,13 +137,6 @@
             {{ number }} &mdash; {{ subtitle }}
         </div>
     {% endif %}
-{%- endmacro %}
-
-{% macro source_date(date, source) -%}
-    {% if source %}
-        <span class="article__head__meta__source">{{ source }}{% if advertorial_byline %} {{ advertorial_byline }}{% endif %}</span>
-    {% endif %}
-    <span class="article__head__meta__date">{{ date }}</span>
 {%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
@@ -284,14 +278,14 @@
 {%- endmacro %}
 
 {% macro comment(comment, featured) -%}
-    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="{{ comment.cid }}"{% endif %}>
+    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="cid-{{ comment.cid }}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
             <span class="comment__head__avatar" style="background-image: url('{{ comment.img_url }}')"></span>
             {% endif -%}
             <div class="comment__head__meta">
                 <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
-                <a href="#{{ comment.cid }}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
+                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{ comment.role }}</div>
                 {% endif -%}
@@ -302,9 +296,9 @@
         </div>
         <aside class="comment__tools">
             {% if not comment.indented -%}
-            <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{ comment.cid|replace('cid-', '') }}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
+            <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {% endif -%}
-            <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{ comment.cid|replace('cid-', '')}}" title="Kommentar melden">Kommentar melden</a>
+            <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">Kommentar melden</a>
         </aside>
     </article>
 {%- endmacro %}
@@ -414,7 +408,7 @@
             <form action="{{ obj.comments.comment_report_url }}" method="POST" class="comment__form" style="display: none">
                 <p><textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
                 <p class="comment__form__text">
-                    Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+                    Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://{{ request.host }}/administratives/2010-03/netiquette">Netiquette</a> zu melden.
                     Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
                 </p>
                 <p class="comment__form__actions">

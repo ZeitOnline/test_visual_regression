@@ -36,7 +36,16 @@ log = logging.getLogger(__name__)
              name='komplettansicht',
              renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
-    pass
+    @zeit.web.reify
+    def comments(self):
+        return zeit.web.core.comments.get_thread(
+            unique_id=self.context.uniqueId,
+            request=self.request,
+            reverse=True)
+
+    @zeit.web.reify
+    def issue_format(self):
+        return u' Nr. %d/%d'
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
@@ -78,6 +87,10 @@ class LongformArticle(Article):
     @zeit.web.reify
     def banner_type(self):
         return 'longform'
+
+    @zeit.web.reify
+    def show_date_format(self):
+        return 'short'
 
 
 @view_config(context=zeit.web.core.article.IFeatureLongform,

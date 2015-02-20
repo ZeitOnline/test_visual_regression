@@ -5,45 +5,44 @@
 		margin: auto
 
 .article-heading
-	margin: remify($petite--px) 0
+	margin: remify($petite--px) 0 remify(25px) 0
 
 .kicker
 	color: $zon-red
 	display: block
-	font-family: $font-tabletgothic
 	font-size: remify(14px)
+	letter-spacing: $zon-letter-spacing-m
+	padding-bottom: remify(17px)
 	+respond-min($break-desktop-min)
 		font-size: remify(14px)
 
 .title
 	color: $zon-charcoal
 	display: block
-	font-family: $font-tabletgothic
 	font-size: remify(30px)
+	line-height: 1.2
 	+respond-min($break-desktop-min)
 		font-size: remify(42px)
 
 .summary
 	color: $grey--mid
-	font-family: $font-tabletgothic
 	font-size: remify(18px)
-	line-height: 1.2
-	margin-bottom : remify($petite--px)
+	line-height: 1.5
+	margin-bottom: remify($petite--px)
 	+respond-min($break-desktop-min)
 		font-size: remify(20px)
 
 .paragraph
 	font-family: $font-franziska
 	font-size: remify(18px)
-	line-height: 1.3
+	line-height: 1.4
 	margin-bottom: $little
 	+respond-min($break-desktop-min)
 		font-size: remify(20px)
 
 .byline
 	color: $grey--mid
-	font-family: $font-tabletgothic
-	margin-bottom : remify($petite--px)
+	margin-bottom: remify(40px)
 
 .byline__author
 	font-weight: bold
@@ -53,11 +52,17 @@
 	+on-interaction
 		text-decoration: underline
 
+.metadata
+	color: $zon_mid_grey
+	font-size: remify(14px)
+	letter-spacing: $zon-letter-spacing-s
+	margin-bottom: remify($petite--px)
+
 .stage--large
 	width: auto
-	margin: 0 (-$page-padding)
+	margin: 0 (-$page-padding) 40px (-$page-padding)
 	+respond-min($break-desktop-min)
-		margin: 0 -80px
+		margin: 0 -80px 40px -80px
 		img
 			width: 100% // prevents 'max-width: 100%', blows image up
 
@@ -65,8 +70,8 @@
 	font-family: $font-franziska
 	font-size: remify(14px)
 	font-style: italic
+	line-height: 1.5
 	margin: $thin $page-padding 0 $page-padding
-
 	+respond-min($break-desktop-min)
 		margin: $thin remify(80px) 0 remify(80px)
 		font-size: remify(16px)

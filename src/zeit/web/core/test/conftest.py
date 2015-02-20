@@ -52,7 +52,6 @@ settings = {
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
 
     'community_host_timeout_secs': '10',
-    'hp': 'zeit-magazin/index',
     'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
@@ -69,7 +68,8 @@ settings = {
         'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
     'vivi_zeit.cms_source-navigation': (
         'egg://zeit.cms.content/navigation.xml'),
-    'vivi_zeit.cms_source-products': 'egg://zeit.cms.content/products.xml',
+    'vivi_zeit.cms_source-products': (
+        'egg://zeit.web.core/data/config/products.xml'),
     'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
@@ -113,6 +113,8 @@ settings = {
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
     'vivi_zeit.solr_solr-url': 'http://mock.solr',
+    'vivi_zeit.content.cp_cp-types-url': (
+        'egg://zeit.web.core/data/config/cp-types.xml'),
 
     'debug.show_exceptions': True,
     'debug.propagate_jinja_errors': True,
@@ -365,8 +367,7 @@ def appbrowser(application):
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
         path = zeit.web.core.comments.path_of_article(unique_id)
-        response = lxml.etree.parse(''.join([self.entry_point, path]))
-        return zeit.web.core.comments._place_answers_under_parent(response)
+        return lxml.etree.parse(''.join([self.entry_point, path]))
 
     monkeypatch.setattr(
         zeit.web.core.comments.Agatho, 'collection_get', collection_get)

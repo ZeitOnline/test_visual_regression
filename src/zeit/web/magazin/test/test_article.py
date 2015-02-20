@@ -2,7 +2,7 @@
 from StringIO import StringIO
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import mock
 
@@ -15,7 +15,7 @@ import zeit.web.magazin.view_article
 import pytest
 
 
-def test_IPages_contains_blocks(application):
+def test_ipages_contains_blocks(application):
     xml = StringIO("""\
 <article>
   <body>
@@ -104,74 +104,77 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 
 
 def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
-    assert '1: "Anne Mustermann",' in browser.contents
-    assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
-    assert '3: "2/7",' in browser.contents
-    assert '4: "Wein;Italien;Toskana;Bologna;Bozen;Florenz;Tübingen",' \
-        in browser.contents
-    assert '6: "4952",' in browser.contents
-    assert '7: "",' in browser.contents
-    assert '9: "zeitmz/essenundtrinken/article"' in browser.contents
-    assert '1: "Redaktion",' in browser.contents
-    assert '2: "Artikel",' in browser.contents
-    assert '3: "lebensart",' in browser.contents
-    assert '4: "Online"' in browser.contents
+    browser = testbrowser('%s/artikel/03' % testserver.url)
 
+    # content _group
+    assert '1: "redaktion",' in browser.contents
+    assert '2: "artikel",' in browser.contents
+    assert '3: "lebensart",' in browser.contents
+    assert '4: "online"' in browser.contents
     assert '5: "essen-trinken",' in browser.contents
     assert '6: "weinkolumne",' in browser.contents
-    assert '7: "seite-2",' in browser.contents
+    assert '7: "03",' in browser.contents
     assert '8: "zeitmz/essenundtrinken/article",' in \
         browser.contents
     assert '9: "2013-07-30"' in browser.contents
-    assert 'http://zeit01.webtrekk.net/981949533494636/' \
-        'wt.pl?p=311,redaktion.lebensart.essen-trinken..' \
-        'article.online./artikel/03/seite-2,0,0,0,0,0,0,0,0' \
-        '&amp;cg1=Redaktion&amp;cg2=Artikel&amp;cg3=lebensart' \
-        '&amp;cg4=Online&amp;cg5=essen-trinken&amp;cg6=&amp;' \
-        'cg7=seite-2&amp;cg8=zeitmz/essenundtrinken/article' \
-        '&amp;cg9=2013-07-30&amp;cp1=Anne Mustermann&amp;' \
-        'cp2=zeitmz/essenundtrinken/article&amp;cp3=2/7' \
-        '&amp;cp4=Wein;Italien;Toskana;Bologna;Bozen;Florenz;' \
-        'Tübingen&amp;cp6=4952&amp;cp7=&amp;' \
-        'cp9=zeitmz/essenundtrinken/article' in browser.contents
 
-
-def test_article08_has_correct_webtrekk_values(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/08' % testserver.url)
-    assert '1: "Anne Mustermann;Oliver Fritsch",' in browser.contents
-    assert '2: "politik/article",' in browser.contents
-    assert '3: "1/1",' in browser.contents
-    assert '4: "Politik",' in browser.contents
-    assert '6: "2833",' in browser.contents
+    # custom parameter
+    assert '1: "anne mustermann",' in browser.contents
+    assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
+    assert '3: "1/7",' in browser.contents
+    assert '4: "wein;italien;toskana;bologna;bozen;florenz;tübingen",' \
+        in browser.contents
+    assert '6: "4952",' in browser.contents
     assert '7: "",' in browser.contents
-    assert '9: "politik/article"' in browser.contents
-    assert '1: "Redaktion",' in browser.contents
-    assert '2: "Artikel",' in browser.contents
-    assert '3: "politik",' in browser.contents
-    assert '4: "Online"' in browser.contents
-    assert '5: "",' in browser.contents
-    assert '6: "",' in browser.contents
-    assert '7: "08",' in browser.contents
-    assert '8: "politik/article",' in browser.contents
-    assert '9: "2014-02-19"' in browser.contents
-    assert 'http://zeit01.webtrekk.net/981949533494636/' \
-        'wt.pl?p=311,redaktion.politik...article.online./' \
-        'artikel/08,0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;' \
-        'cg2=Artikel&amp;cg3=politik&amp;cg4=Online&amp;' \
-        'cg5=&amp;cg6=&amp;cg7=08&amp;cg8=politik/article&amp;' \
-        'cg9=2014-02-19&amp;cp1=Anne Mustermann;Oliver Fritsch&amp;' \
-        'cp2=politik/article&amp;cp3=1/1&amp;cp4=Politik&amp;' \
-        'cp6=2833&amp;cp7=&amp;cp9=politik/article' in browser.contents
+    assert '8: "zede",' in browser.contents
+    assert '9: "zeitmz/essenundtrinken/article"' in browser.contents
+    assert '10: "yes",' or '10: "",' in browser.contents
+    assert '11: "",' in browser.contents
+    assert '12: window.innerWidth >= ivw_min_width ?' \
+        ' \'desktop.site\' : \'mobile.site\''
+
+    # noscript
+    assert 'http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion' \
+        '.lebensart.essen-trinken.weinkolumne.article.online./artikel/03,0,0' \
+        ',0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=artikel&amp;cg3=lebensart&am' \
+        'p;cg4=online&amp;cg5=essen-trinken&amp;cg6=weinkolumne&amp;cg7=03&a' \
+        'mp;cg8=zeitmz/essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=an' \
+        'ne mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;cp3=1/7&am' \
+        'p;cp4=wein;italien;toskana;bologna;bozen;florenz;tübingen&amp;cp5=2' \
+        '013-07-30 17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede&' \
+        'amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;cp11=&amp;' \
+        'cp12=' in browser.contents
+
+
+def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
+
+    # content _group
+    assert '7: "seite-2",' in browser.contents
+
+    # custom parameter
+    assert '3: "2/7",' in browser.contents
+
+    # noscript
+    assert 'http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.'\
+        'lebensart.essen-trinken.weinkolumne.article.online./artikel/03/seite'\
+        '-2,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=artikel&amp;cg3=lebensa'\
+        'rt&amp;cg4=online&amp;cg5=essen-trinken&amp;cg6=weinkolumne&amp;cg7='\
+        'seite-2&amp;cg8=zeitmz/essenundtrinken/article&amp;cg9=2013-07-30&am'\
+        'p;cp1=anne mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;cp3'\
+        '=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;tübingen&amp'\
+        ';cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8='\
+        'zede&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;cp11=&amp;'\
+        'cp12=' in browser.contents
 
 
 def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
-    assert '1: "Redaktion",' in browser.contents
-    assert '2: "Centerpage",' in browser.contents
+    assert '1: "redaktion",' in browser.contents
+    assert '2: "centerpage",' in browser.contents
     assert '3: "lebensart",' in browser.contents
-    assert '4: "Online",' in browser.contents
+    assert '4: "online",' in browser.contents
     assert '5: "",' in browser.contents
     assert '6: "",' in browser.contents
     assert '7: "test-cp-zmo",' in browser.contents
@@ -179,8 +182,8 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '9: ""' in browser.contents
     assert 'wt.pl?p=311,redaktion.lebensart...' \
         'centerpage.online./zeit-magazin/test-cp/test-cp-zmo,' \
-        '0,0,0,0,0,0,0,0&amp;cg1=Redaktion&amp;cg2=Centerpage&amp;' \
-        'cg3=lebensart&amp;cg4=Online&amp;cg5=&amp;cg6=&amp;' \
+        '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;' \
+        'cg3=lebensart&amp;cg4=online&amp;cg5=&amp;cg6=&amp;' \
         'cg7=test-cp-zmo&amp;' \
         'cg8=zeitmz/centerpage&amp;cg9=' in browser.contents
 
@@ -323,8 +326,8 @@ def test_article03_has_no_source(testserver, testbrowser):
 def test_article10_has_correct_online_source(testserver, testbrowser):
     # online source
     browser = testbrowser('%s/artikel/10' % testserver.url)
-    assert '<span class="article__head__meta__source">'\
-        'golem.de</span>' in browser.contents
+    meta_source = browser.cssselect('span.article__head__meta__source')[0]
+    assert 'Erschienen bei golem.de' in meta_source.text_content()
 
 
 def test_article08_has_correct_print_source(testserver, testbrowser):
@@ -476,7 +479,7 @@ def test_artikel_header_sequelpage_should_have_correct_source(
     assert browser.cssselect('header.article__head.article__head--sequel')
 
 
-def test_gallery_should_have_clickCounter_functions(testserver, testbrowser):
+def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     assert 'var clickCount = {' in browser.contents
@@ -618,7 +621,8 @@ def test_feature_longform_should_have_zon_logo_classes(
     browser = testbrowser('%s/feature/feature_longform' % testserver.url)
     assert browser.cssselect('.main-nav__logo__img.icon-logo-zon-small')
     logolink = browser.cssselect('a.main-nav__logo')
-    assert logolink[0].attrib['href'] == "http://www.zeit.de/index"
+    assert logolink[0].attrib['href'] == '{}/index'.format(
+        testserver.url)
 
 
 def test_feature_longform_should_have_zonish_title(testserver, testbrowser):

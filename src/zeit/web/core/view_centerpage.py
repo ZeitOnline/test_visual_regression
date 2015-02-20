@@ -19,7 +19,7 @@ class Centerpage(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def is_hp(self):
-        return self.request.path == '/' + self.request.registry.settings.hp
+        return self.context.type == 'homepage'
 
     @zeit.web.reify
     def tracking_type(self):

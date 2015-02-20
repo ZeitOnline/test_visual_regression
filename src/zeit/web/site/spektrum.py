@@ -3,6 +3,7 @@
 from datetime import datetime
 import email.utils
 import time
+import urllib
 
 import zope.component
 import pyramid.view
@@ -11,6 +12,7 @@ import lxml.etree
 import lxml.objectify
 
 import zeit.content.cp.interfaces
+import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.template
@@ -107,9 +109,21 @@ class RSSFeed(
         )
         root.append(channel)
         for content in zeit.content.cp.interfaces.ICPFeed(self.context).items:
+            normalized_title = zeit.cms.interfaces.normalize_filename(
+                content.title)
+            tracking = urllib.urlencode({
+                'wt_zmc':
+                'koop.ext.zonaudev.spektrumde.feed.%s.bildtext.link.x' % (
+                    normalized_title),
+                'utm_medium': 'koop',
+                'utm_source': 'spektrumde_zonaudev_ext',
+                'utm_campaign': 'feed',
+                'utm_content': '%s_bildtext_link_x' % normalized_title,
+            })
             item = E.item(
                 E.title(content.title),
-                E.link(zeit.web.core.template.create_url(content)),
+                E.link('%s?%s' % (
+                    zeit.web.core.template.create_url(content), tracking)),
                 E.description(content.teaserText),
                 E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),

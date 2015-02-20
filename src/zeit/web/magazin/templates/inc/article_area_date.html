@@ -1,0 +1,11 @@
+{% if view.source_label %}
+<span class="article__head__meta__source">
+	{%- if view.source_url -%}
+	<a href="{{ view.source_url }}">{{ view.source_label }}</a>
+	{%- else -%}
+	{{ view.source_label }}
+	{%- endif -%}
+	{%- if advertorial_byline %} {{ advertorial_byline }}{% endif -%}
+</span>
+{% endif %}
+<span class="article__head__meta__date">{{ view.date_last_modified | format_date(view.show_date_format) }}</span>

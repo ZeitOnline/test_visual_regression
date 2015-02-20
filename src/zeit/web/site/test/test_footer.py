@@ -29,17 +29,18 @@ def test_footer_should_have_basic_structure(jinja2_env):
     assert len(html('.footer-links__button')) == 1, (
         'just one .footer-links__button')
 
-    assert len(html('.icon-top-arrow')) == 1, (
-        'just one .icon-top-arrow')
-
 
 def test_footer_logo_macro_links_to_hp(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/footer_macro.tpl')
-    html_str = tpl.module.footer_logo()
+
+    request = mock.Mock()
+    request.host = 'foo.bar'
+
+    html_str = tpl.module.footer_logo(request)
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert html('a[href="http://www.zeit.de/index"]')[0] is not None, (
+    assert html('a[href="http://foo.bar/index"]')[0] is not None, (
         'No link to zeit.de')
 
 

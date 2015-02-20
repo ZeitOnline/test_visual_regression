@@ -10,8 +10,8 @@
     <!-- http-equiv='X-UA-Compatible' via Server -->
     <title>{{ view.pagetitle }}</title>
     <meta name="description" content="{{ view.pagedescription }}">
-    {% if view.rankedTagsList -%}
-        <meta name="keywords" content="{{ view.rankedTagsList | replace_list_seperator(', ') }}">
+    {% if view.ranked_tags_list -%}
+        <meta name="keywords" content="{{ view.ranked_tags_list | replace_list_seperator(', ') }}">
     {%- endif %}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" id="viewport-meta">
@@ -37,7 +37,7 @@
         <link href="{{ request.asset_url('css/web.site/ie-navi.css') }}" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
 
-    {%- include "zeit.web.site:templates/inc/meta/date.html" ignore missing -%}
+    {%- include "zeit.web.core:templates/inc/meta/date.html" ignore missing -%}
     {%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
 
     {# Modernizr -#}
@@ -104,6 +104,7 @@
             </footer>
         </div>
     </div>
+    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     <script>
         var require = {
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"

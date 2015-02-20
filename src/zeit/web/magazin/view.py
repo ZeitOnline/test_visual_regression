@@ -12,46 +12,46 @@ def is_advertorial(context, request):
 
 class Base(zeit.web.core.view.Base):
 
-    _navigation = {
-        'start': (
-            'Start',
-            'http://www.zeit.de/index',
-            'myid1'
-        ),
-        'zmo': (
-            'ZEIT Magazin',
-            'http://www.zeit.de/zeit-magazin/index',
-            'myid_zmo',
-        ),
-        'leben': (
-            'Leben',
-            'http://www.zeit.de/zeit-magazin/leben/index',
-            'myid2',
-        ),
-        'mode-design': (
-            'Mode & Design',
-            'http://www.zeit.de/zeit-magazin/mode-design/index',
-            'myid3',
-        ),
-        'essen-trinken': (
-            'Essen & Trinken',
-            'http://www.zeit.de/zeit-magazin/essen-trinken/index',
-            'myid4',
-        )
-    }
-
     @zeit.web.reify
     def breadcrumb(self):
-        crumb = self._navigation
-        l = [crumb['start']]
-        l.append(crumb['zmo'])
-        if self.context.ressort in crumb:
-            l.append(crumb[self.context.ressort])
-        if self.context.sub_ressort in crumb:
-            l.append(crumb[self.context.sub_ressort])
+        crumbs = {
+            'start': (
+                'Start',
+                'http://{}/index'.format(self.request.host),
+                'myid1'
+            ),
+            'zmo': (
+                'ZEIT Magazin',
+                'http://{}/zeit-magazin/index'.format(self.request.host),
+                'myid_zmo',
+            ),
+            'leben': (
+                'Leben',
+                'http://{}/zeit-magazin/leben/index'.format(self.request.host),
+                'myid2',
+            ),
+            'mode-design': (
+                'Mode & Design',
+                'http://{}/zeit-magazin/mode-design/index'.format(
+                    self.request.host),
+                'myid3',
+            ),
+            'essen-trinken': (
+                'Essen & Trinken',
+                'http://{}/zeit-magazin/essen-trinken/index'.format(
+                    self.request.host),
+                'myid4',
+            )
+        }
+        crumb_list = [crumbs['start']]
+        crumb_list.append(crumbs['zmo'])
+        if self.context.ressort in crumbs:
+            crumb_list.append(crumbs[self.context.ressort])
+        if self.context.sub_ressort in crumbs:
+            crumb_list.append(crumbs[self.context.sub_ressort])
         if self.title:
-            l.append((self.title, ''))
-        return l
+            crumb_list.append((self.title, ''))
+        return crumb_list
 
     @zeit.web.reify
     def pagetitle(self):

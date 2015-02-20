@@ -4,7 +4,17 @@ Change log for zeit.web
 1.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1429: Dynamicize template links accross ZON and ZMO
+
+- ZON-1424: Polishing mobile experience
+
+- ZON-1392: Style comment section and forms
+
+- ZON-1281: Webtrekk impression tracking
+
+- DEV-567: Add tracking information to links in RSS feed.
+
+- ZON-1280: Print proper article metadata including source and dates
 
 
 1.13 (2015-02-17)
@@ -15,6 +25,8 @@ Change log for zeit.web
 - DEV-567: Render a centerpage in RSS2.0 format as required for Spektrum.de
 
 - ZON-1297: Video-stage completion
+
+- ZON-1326: tweak navigation
 
 
 1.12.2 (2015-02-11)

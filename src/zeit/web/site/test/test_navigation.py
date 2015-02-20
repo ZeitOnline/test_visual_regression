@@ -75,7 +75,9 @@ def test_nav_services_macro_should_have_expected_links(jinja2_env):
             'hp.global.topnav.links.shop',
             'Shop',
             'http://shop.zeit.de?et=l6VVNm&et_cid=42&et_lid=175'))
-    html_str = tpl.module.main_nav_services(nav)
+    request = mock.Mock()
+    request.host = 'www.zeit.de'
+    html_str = tpl.module.main_nav_services(nav, request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li > a[href="http://www.zeitabo.de/'
@@ -101,7 +103,9 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/navigation_macro.tpl')
-    html_str = tpl.module.main_nav_classifieds(nav)
+    request = mock.Mock()
+    request.host = 'www.zeit.de'
+    html_str = tpl.module.main_nav_classifieds(nav, request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li[data-id="hp.global.topnav.links.jobs"]'
@@ -117,7 +121,9 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
 def test_nav_community_macro_should_render_a_login(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/navigation_macro.tpl')
-    html_str = tpl.module.main_nav_community()
+    request = mock.Mock()
+    request.host = 'www.zeit.de'
+    html_str = tpl.module.main_nav_community(request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('a[href="http://community.zeit.de/user/login?destination='
@@ -131,7 +137,9 @@ def test_nav_community_macro_should_render_a_login(jinja2_env):
 def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/navigation_macro.tpl')
-    html_str = tpl.module.main_nav_logo()
+    request = mock.Mock()
+    request.host = 'www.zeit.de'
+    html_str = tpl.module.main_nav_logo(request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('a[href="http://www.zeit.de/index"]'
@@ -160,7 +168,9 @@ def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
 def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/macros/navigation_macro.tpl')
-    html_str = tpl.module.main_nav_search()
+    request = mock.Mock()
+    request.host = 'www.zeit.de'
+    html_str = tpl.module.main_nav_search(request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('form.search'
@@ -201,7 +211,10 @@ def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
             'hp.global.topnav.links.partnersuche',
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
-    html_str = tpl.module.main_nav_ressorts(nav)
+
+    request = mock.Mock()
+    request.host = 'www.zeit.de'
+    html_str = tpl.module.main_nav_ressorts(nav, request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
@@ -371,14 +384,11 @@ def test_nav_date_isnt_shown_when_not_exists(testserver, testbrowser):
     assert html('div.main_nav__date')[0].text is None, (
         'Date shouldnt be shown')
 
-# selenium test
 
-screen_sizes = ((320, 480, True), (520, 960, True),
-                (768, 1024, False), (980, 1024, False))
-
-
-@pytest.fixture(scope='session', params=screen_sizes)
+@pytest.fixture(scope='session', params=(
+    (320, 480, 1), (520, 960, 1), (768, 1024, 0), (980, 1024, 0)))
 def screen_size(request):
+    """Run selenium test with multiple screen sizes."""
     return request.param
 
 
@@ -419,11 +429,10 @@ def test_zon_main_nav_has_correct_structure(
         assert main_nav__tags.is_displayed() is False
         # date bar is hidden
         assert main_nav__date.is_displayed() is False
-        # last 3 services aren't shown
+        # services li hidden from 4th elem on
         serv_li = main_nav__services.find_elements_by_tag_name('li')
-        assert serv_li[3].is_displayed() is False
-        assert serv_li[4].is_displayed() is False
-        assert serv_li[5].is_displayed() is False
+        for li in serv_li[:3]:
+            assert li.is_displayed() is False
     else:
         # search button is visible in desktop mode
         assert search__button.is_displayed()
@@ -459,22 +468,21 @@ def test_nav_search_is_working_as_expected(
     if screen_width == 768:
         # test search input is shown after button click
         search__button.click()
-        time.sleep(transition_duration) # wait for animation
+        time.sleep(transition_duration)  # wait for animation
         assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is not hidden after click in input
         search__input.click()
         assert search__input.is_displayed(), 'Input is not displayed'
         # test search input is hidden after button click, if its empty
         search__button.click()
-        time.sleep(transition_duration) # wait for animation
+        time.sleep(transition_duration)  # wait for animation
         assert search__input.is_displayed() is False, 'Input is displayed'
-        # test search input is hidden after click somewhere else (show it first)
+        # test search input is hidden after click somewhere else, show it first
         search__button.click()
-        time.sleep(transition_duration) # wait for animation
+        time.sleep(transition_duration)  # wait for animation
         document.click()
-        time.sleep(transition_duration) # wait for animation
+        time.sleep(transition_duration)  # wait for animation
         assert search__input.is_displayed() is False, 'Input is displayed'
-
 
     # open search for mobile
     if screen_width < 768:
@@ -482,14 +490,13 @@ def test_nav_search_is_working_as_expected(
     # open search for tablet
     elif screen_width == 768:
         search__button.click()
-        time.sleep(transition_duration) # wait for animation
+        time.sleep(transition_duration)  # wait for animation
 
     # test if search is performed
-    search__input.send_keys("test")
+    search__input.send_keys('test')
     search__button.click()
 
-    assert driver.current_url == 'http://www.zeit.de/suche/index?q=test', (
-        'Search wasnt performed')
+    assert driver.current_url == 'http://www.zeit.de/suche/index?q=test'
 
 
 @pytest.mark.xfail(reason='Maybe a problem with tear down. Runs isolated.')
@@ -607,14 +614,13 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
     zmo_link = zmo_button.find_element_by_class_name(
         'primary-nav__link')
 
-    assert (zmo_link.get_attribute('href') ==
-            'http://www.zeit.de/zeit-magazin/index'), (
-        'zmo link is not set correctly')
+    assert zmo_link.get_attribute('href') == '{}/zeit-magazin/index'.format(
+        testserver.url), 'zmo link is not set correctly'
     assert (zmo_link.get_attribute('id') ==
             'hp.global.topnav.centerpages.zeitmagazin'), (
         'zmo tracking is not set correctly')
 
     zmo_link.click()
 
-    assert driver.current_url == 'http://www.zeit.de/zeit-magazin/index', (
-        'zmo hp wasnt called correctly')
+    assert driver.current_url == '{}/zeit-magazin/index'.format(
+        testserver.url), 'zmo hp wasnt called correctly'
