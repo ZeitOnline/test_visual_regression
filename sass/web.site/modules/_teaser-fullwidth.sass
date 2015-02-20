@@ -5,6 +5,10 @@
 	padding: 0
 	position: relative
 	overflow: hidden
+	&:first-child
+		margin: 0 (-$page-padding)
+		+respond-min($break-tablet-min)
+			margin: $petite (-$petite)
 	+respond-min($break-tablet-min)
 		background: none
 		margin-top: 0

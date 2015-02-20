@@ -15,7 +15,7 @@
     <nav class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             {% block longform_logo %}
-            <a href="http://www.zeit.de/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
+            <a href="http://{{ request.host }}/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <h1 class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
@@ -52,7 +52,7 @@
 						{{ blocks.title() }}
 					</h1>
 					<div class="article__head__meta">
-						{{ blocks.source_date(view.show_article_date | format_date('short'), view.source) }}
+						{% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
 						{{ blocks.meta_author(view.authors) }}
 					</div>
 				</header>

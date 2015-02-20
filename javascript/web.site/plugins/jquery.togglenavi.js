@@ -1,5 +1,3 @@
-/* global console */
-
 /**
  * @fileOverview jQuery Plugin for toggling the mobile Navigation
  * @author anika.szuppa@zeit.de

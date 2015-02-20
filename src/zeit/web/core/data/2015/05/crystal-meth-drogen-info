@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+  <supertitle>Crystal Meth</supertitle>
+  <block>
+    <title py:pytype="str">Crystal Meth</title>
+    <text>
+      <p>Die Droge Methamphetamin ist eine synthetisch hergestellte Substanz, die geraucht,         geschnupft oder gespritzt wird. Sie bewirkt, dass der Körper       <strong>Glückshormone</strong>       ausschüttet.</p>
+      <p>Bereits im       <strong>Zweiten Weltkrieg</strong>       wurde der Wirkstoff unter anderem deutschen         Soldaten verabreicht. Er sollte ihnen die Angst nehmen und sie wach halten.</p>
+      <p>Heute ist Crystal Meth eine Partydroge. Die       <strong>Nebenwirkungen</strong>       sind massiv:         Manchen Abhängigen fallen die Zähne aus, andere verlieren enorm an Gewicht, viele leiden         unter Paranoia.</p>
+      <p>Hergestellt wird Crystal Meth zumeist in tschechischen Labors. In den angrenzenden         Bundesländern ist die Droge weit verbreitet. 2013 stellten Zoll und Polizei allein in Bayern         und Sachsen       <strong>63 Kilogramm</strong>       sicher – von 77 Kilogramm in ganz Deutschland. Im         selben Jahr registrierte das BKA sieben Prozent       <strong>mehr erstauffällige           Süchtige</strong>       als im Vorjahr.</p>
+    </text>
+  </block>
+</container>

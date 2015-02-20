@@ -1,5 +1,3 @@
-/* global console, debugger */
-
 /**
  * @fileOverview jQuery Plugin to adapt the primary navigation to limited horizontal space
  * @author arne.seemann@zeit.de

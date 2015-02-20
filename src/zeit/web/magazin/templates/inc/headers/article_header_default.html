@@ -10,7 +10,7 @@
         {{ blocks.subtitle(include_meta=True) }}
         <span class="article__head__meta-wrap">
             <span class="article__head__meta">
-                {{ blocks.source_date(view.show_article_date|format_date(view.show_date_format), view.source) }}
+                {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
             </span>
         </span>
     </header>

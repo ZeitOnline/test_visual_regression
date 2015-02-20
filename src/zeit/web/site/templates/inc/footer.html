@@ -2,7 +2,7 @@
 
 <div class="footer-logo">
     <div class="footer-logo__image">
-        {{ footer.footer_logo() }}
+        {{ footer.footer_logo(view.request) }}
     </div>
 </div>
 <div class="footer-publisher">
@@ -12,7 +12,7 @@
     {{ footer.footer_links(view) }}
     <div class="footer-links__seperator"></div>
     <div class="footer-links__button">
-        {{ footer.footer_button(view) }}
+        <a href="?" class="footer-links__linkbutton" title="Zurück nach oben">Nach oben</a>
     </div>
 </div>
 

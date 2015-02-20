@@ -1,0 +1,28 @@
+.comment-form
+	margin-bottom: 2rem
+	+respond-min($break-desktop-min)
+		margin: 1rem remify(160px)
+	&__textarea
+		background-color: $zon_lighter_grey
+		border: 1px solid $zon_light_grey
+		display: block
+		margin: 1rem auto
+		width: 97%
+		height: 16rem
+		padding: 1rem
+		color: $black
+	&__submit
+		+zon-button-light
+		display: block
+		margin: auto
+
+.comment-login
+	padding-bottom: 3rem
+	padding-top: 3rem
+	text-align: center
+	&__cta
+		display: inline-block
+		width: 98%
+	&__button
+		+zon-button-light
+		display: inline-block
