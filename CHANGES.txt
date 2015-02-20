@@ -3,6 +3,7 @@ Change log for zeit.web
 
 1.14 (unreleased)
 -----------------
+- ZON-1434: Allow envs to post comments for any resource
 
 - ZON-1426: Enable plain text file rendering
 

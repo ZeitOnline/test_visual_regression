@@ -10,13 +10,16 @@ import lxml.etree
 import urlparse
 
 
-def _from_localhost(context, request):
+def _is_admin(context, request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('is_admin'):
+        return True
     return request.client_addr == '127.0.0.1'
 
 
 @pyramid.view.view_config(route_name='post_test_comments',
                           renderer='templates/post_test_comments.html',
-                          custom_predicates=(_from_localhost,))
+                          custom_predicates=(_is_admin,))
 class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request):
