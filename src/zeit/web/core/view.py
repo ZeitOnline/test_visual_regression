@@ -487,9 +487,9 @@ def json_comment_count(request):
 
     return {'comment_count': comment_count}
 
+
 @pyramid.view.view_config(
     context=zeit.content.text.interfaces.IText,
     renderer='string')
-def view_textcontent(context,request):
+def view_textcontent(context, request):
     return context.text
-
