@@ -42,3 +42,24 @@ def caching_time_cp(context):
 def caching_time_gallery(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('caching_time_gallery', '0'))
+
+
+@grokcore.component.implementer(ICachingTime)
+@grokcore.component.adapter(zeit.content.image.interfaces.IImage)
+def caching_time_image(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_image', '0'))
+
+
+@grokcore.component.implementer(ICachingTime)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+def caching_time_videostill(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_videostill', '0'))
+
+
+@grokcore.component.implementer(ICachingTime)
+@grokcore.component.adapter(basestring)
+def caching_time_external(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_external', '0'))

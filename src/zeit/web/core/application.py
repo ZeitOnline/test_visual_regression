@@ -215,6 +215,8 @@ class Application(object):
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         self.config.add_jinja2_extension(jinja2.ext.WithExtension)
+        self.config.add_jinja2_extension(
+            zeit.web.core.template.ProfilerExtension)
 
         env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)

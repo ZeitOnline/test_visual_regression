@@ -1,8 +1,17 @@
 Change log for zeit.web
 =======================
 
-1.14 (unreleased)
+1.15 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+1.14 (2015-02-20)
+-----------------
+- ZON-1434: Allow envs to post comments for any resource
+
+- ZON-1426: Enable plain text file rendering
 
 - ZON-1429: Dynamicize template links accross ZON and ZMO
 
@@ -10,11 +19,15 @@ Change log for zeit.web
 
 - ZON-1392: Style comment section and forms
 
+- ZON-1392: Enable rudimentary comment posting
+
 - ZON-1281: Webtrekk impression tracking
 
 - DEV-567: Add tracking information to links in RSS feed.
 
 - ZON-1280: Print proper article metadata including source and dates
+
+- BUG-192: Enable browser caching for spektrum, brightcove and native images
 
 
 1.13 (2015-02-17)

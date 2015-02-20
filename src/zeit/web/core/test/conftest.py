@@ -42,6 +42,9 @@ settings = {
     'caching_time_article': '10',
     'caching_time_centerpage': '20',
     'caching_time_gallery': '40',
+    'caching_time_image': '30',
+    'caching_time_videostill': '35',
+    'caching_time_external': '15',
     'community_host': 'http://localhost:6551/',
     'agatho_host': u'file://%s' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/comments'),
@@ -53,6 +56,7 @@ settings = {
 
     'community_host_timeout_secs': '10',
     'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
+    'spektrum_img_host': 'http://localhost:6552',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -116,8 +120,9 @@ settings = {
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
 
-    'debug.show_exceptions': 'True',
-    'debug.propagate_jinja_errors': 'True'
+    'debug.show_exceptions': True,
+    'debug.propagate_jinja_errors': True,
+    'debug.enable_profiler': False
 }
 
 

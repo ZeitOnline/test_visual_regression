@@ -9,6 +9,7 @@
 
 {% block main %}
     <article class="article" id="js-article">
+        {% profile %}
         <h1 class="article-heading">
             <span class="kicker">
                 {{- view.supertitle | hide_none -}}
@@ -25,6 +26,8 @@
                 {{ blocks.meta_author(view.authors, class="byline__author") }}
             {% endif %}
         </div>
+        {% endprofile %}
+        {% profile %}
         <div class="metadata">
             {% if view.source_label -%}
             <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
@@ -36,10 +39,12 @@
             </span>
             {% endif -%}
 
-            <time class="metadata__date encoded-date" datetime="{{ view.date_last_modified | format_date('iso8601') }}" data-obfuscated="{{ view.obfuscated_date }}">
-                {{ view.date_last_modified | format_date(view.show_date_format) }}
+            <time class="metadata__date{% if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
+                {{- view.date_last_modified | format_date(view.show_date_format) -}}
             </time>
         </div>
+        {% endprofile %}
+        {% profile %}
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">
@@ -53,7 +58,9 @@
                 {% endif %}
             {% endblock article_pagination %}
         </div>
+        {% endprofile %}
     </article>
+    {% profile %}
     <section class="comment-section" id="comments">
         <div class="comment-section__head">
             {% if view.comments and view.comments.comment_count > 1 %}
@@ -101,7 +108,7 @@
         {% endif %}
         {% if view.request.authenticated_userid -%}
             {% set user = view.request.session.user %}
-            <form class="comment-form" action="" method="POST" id="comment-form">
+            <form class="comment-form" action="{{ view.comments.comment_post_url }}" method="POST" id="comment-form">
                 <div class="">
                     angemeldet als
                     <img class="comment-form__avatar" alt="Avatarbild von {{ user.name | e }}" src="{{ user.picture }}">
@@ -109,10 +116,10 @@
                         {{ user.name | e }}
                     </a>
                 </div>
-                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500" disabled></textarea>
-                <input type="hidden" name="nid" value="">
+                <textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500"></textarea>
+                <input type="hidden" name="nid" value="{{ view.comments.nid }}">
                 <input type="hidden" name="pid" value="">
-                <input type="hidden" name="uid" value="">
+                <input type="hidden" name="uid" value="{{ view.request.session.user.uid }}">
                 <input class="comment-form__submit" type="submit" value="Kommentar senden" />
             </form>
             {% else -%}
@@ -129,4 +136,5 @@
             </div>
         {% endif -%}
     </section>
+    {% endprofile %}
 {% endblock main %}

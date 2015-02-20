@@ -13,6 +13,7 @@ import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
+import zeit.content.text.interfaces
 
 import zeit.web
 import zeit.web.core.article
@@ -485,3 +486,10 @@ def json_comment_count(request):
             count == 0 and 'Keine' or count, count != 1 and 'e' or '')
 
     return {'comment_count': comment_count}
+
+
+@pyramid.view.view_config(
+    context=zeit.content.text.interfaces.IText,
+    renderer='string')
+def view_textcontent(context, request):
+    return context.text
