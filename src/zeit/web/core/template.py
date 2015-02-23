@@ -299,7 +299,7 @@ def default_image_url(image,
         signature = repoze.bitblt.transform.compute_signature(
             width, height, 'time')
 
-        if image.uniqueId is None:
+        if getattr(image, 'uniqueId', None) is None:
             return
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(
