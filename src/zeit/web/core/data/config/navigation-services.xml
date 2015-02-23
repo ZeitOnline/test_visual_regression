@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.global.topnav.links.abo">Abo</link>
-  </section>
-  <section>
-    <link href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.global.topnav.links.shop">Shop</link>
-  </section>
-  <section>
     <link href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.global.topnav.links.epaper">E-Paper</link>
   </section>
   <section>
