@@ -19,7 +19,7 @@ $zon-search-square-size: remify(35px)
 	+flex-wrap(wrap)
 	font-family: $font-tabletgothic
 	width: 100%
-	padding: 0
+	padding: 0 0 $fine 0
 	+respond-min($break-tablet-min)
 		padding: $fine $petite $fine $petite
 	& > *[data-dropdown="true"]
@@ -44,14 +44,14 @@ $zon-search-square-size: remify(35px)
 			margin-right: $little
 	width: 100%
 	a
-		+link-colors($grey--mid-dark)
+		+link-colors($black, $black, $black, $black, $black)
 	+respond-min($break-tablet-min)
 		width: auto
 		font-size: $font-xxxs
 		text-transform: uppercase
 		color: $zon_grey
 		a
-			+link-colors($grey--mid-dark)
+			+link-colors($black)
 
 %main_nav__topics
 	margin: 0 0 $petite 0
@@ -226,7 +226,7 @@ $zon-search-square-size: remify(35px)
 			& > li
 				width: auto
 				margin-right: $little
-				&:nth-child(n+6)
+				&:nth-child(n+4)
 					display: none
 		& [data-feature='dropdown']
 			display: inline-block

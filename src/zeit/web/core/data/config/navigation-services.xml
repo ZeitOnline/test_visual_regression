@@ -5,11 +5,17 @@
   </section>
   <section>
     <link href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.global.topnav.links.shop">Shop</link>
-  </section> 
-  <section>
-    <link href="http://jobs.zeit.de/" id="hp.global.topnav.links.jobs">Jobs</link>
   </section>
   <section>
-    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.global.topnav.links.partnersuche">Partnersuche</link>
+    <link href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.global.topnav.links.epaper">E-Paper</link>
+  </section>
+  <section>
+    <link href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.global.topnav.links.audio">Audio</link>
+  </section>
+  <section>
+    <link href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.global.topnav.links.apps">Apps</link>
+  </section>
+  <section>
+    <link href="http://www.zeit.de/archiv" id="hp.global.topnav.links.archiv">Archiv</link>
   </section>
 </navigation>

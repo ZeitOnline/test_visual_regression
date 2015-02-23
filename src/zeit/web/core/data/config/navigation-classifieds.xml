@@ -1,16 +1,10 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.global.topnav.links.epaper">E-Paper</link>
+    <link href="http://jobs.zeit.de/" id="hp.global.topnav.links.jobs">Jobs</link>
   </section>
   <section>
-    <link href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.global.topnav.links.audio">Audio</link>
-  </section>
-  <section>
-    <link href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.global.topnav.links.apps">Apps</link>
-  </section>
-  <section>
-    <link href="http://www.zeit.de/archiv" id="hp.global.topnav.links.archiv">Archiv</link>
+    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.global.topnav.links.partnersuche">Partnersuche</link>
   </section>
   <section>
     <link href="#" id="hp.global.topnav.links.mehr">mehr</link>
