@@ -11,7 +11,7 @@ import selenium.webdriver
 
 def test_nav_markup_should_match_css_selectors(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation.html')
+        'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)

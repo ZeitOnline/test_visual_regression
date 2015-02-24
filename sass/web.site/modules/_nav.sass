@@ -37,8 +37,8 @@ $zon-search-square-size: remify(35px)
 	letter-spacing: 1px
 	ul
 		list-style: none
-		padding: 0px
-		margin: 0px
+		padding: 0
+		margin: 0
 		li
 			display: inline-block
 			margin-right: $little
@@ -409,7 +409,7 @@ $zon-search-square-size: remify(35px)
 .primary-nav__link:hover,
 .primary-nav__link--current
 	+respond-min($break-tablet-min)
-		+box-shadow(inset 0px -3px 0px 0px $zon_light_grey) // w3c style box-shadow syntax
+		box-shadow: inset 0 -3px 0 0 $zon_light_grey
 
 
 .primary-nav__item--featured
@@ -427,7 +427,7 @@ $zon-search-square-size: remify(35px)
 		+transition(background-color .15s linear)
 		padding: 0 $fine
 		&:hover
-			+box-shadow(none)
+			box-shadow: none
 			background-color: $zon_grey
 
 
@@ -441,7 +441,7 @@ $zon-search-square-size: remify(35px)
 			+drop_icon()
 		&:hover
 			& > a
-				+box-shadow(none)
+				box-shadow: none
 				&:after
 					+rotate(180deg)
 			& > .dropdown
@@ -453,7 +453,7 @@ $zon-search-square-size: remify(35px)
 .dropdown
 	display: none
 	+respond-min($break-tablet-min)
-		+box-shadow(0 $micro $thin rgba(0,0,0,0.05))
+		box-shadow: 0 $micro $thin rgba(0,0,0,0.05)
 		background: $white
 		border: $dblhair solid $zon_light_grey
 		left: -$fine
@@ -471,11 +471,12 @@ $zon-search-square-size: remify(35px)
 				&:after
 					content: ""
 					margin-left: 0
-				&:hover
+				&:hover,
+				&--current
 					background-color: $gainsboro
 		// dropdowns can contain dropdowns
 		.dropdown
-			+box-shadow(none)
+			box-shadow: none
 			border: none
 			display: block
 			left: 0
