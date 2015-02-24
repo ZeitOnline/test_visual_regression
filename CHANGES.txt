@@ -4,7 +4,7 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Hotfix: Unknown bc images should not break anything
 
 
 1.15 (2015-02-24)
