@@ -104,7 +104,7 @@ class RSSFeed(
             E.copyright('Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             # Convoluted way of creating a namespaced tag, sigh.
             getattr(E, '{%s}link' % ATOM_NAMESPACE)(
-                href=self.request.url,  # XXX Is this correct?
+                href=self.request.url,
                 type=self.request.response.content_type)
         )
         root.append(channel)
