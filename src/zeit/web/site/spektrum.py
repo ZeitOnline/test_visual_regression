@@ -120,10 +120,16 @@ class RSSFeed(
                 'utm_campaign': 'feed',
                 'utm_content': '%s_bildtext_link_x' % normalized_title,
             })
+            content_url = zeit.web.core.template.create_url(content)
+            # XXX Since this view will be accessed via newsfeed.zeit.de, we
+            # cannot use route_url() as is, since it uses that hostname, which
+            # is not the one we want. In non-production environments this
+            # unfortunately still generates un-unseful production links.
+            content_url = content_url.replace(
+                self.request.route_url('home'), 'http://www.zeit.de/', 1)
             item = E.item(
                 E.title(content.title),
-                E.link('%s?%s' % (
-                    zeit.web.core.template.create_url(content), tracking)),
+                E.link('%s?%s' % (content_url, tracking)),
                 E.description(content.teaserText),
                 E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),
