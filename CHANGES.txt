@@ -4,7 +4,8 @@ Change log for zeit.web
 1.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- DEV-567: Fix links for both images and content, since the feed will be
+  accessed via newsfeed.zeit.de.
 
 
 1.14 (2015-02-20)
