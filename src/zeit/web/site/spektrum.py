@@ -132,9 +132,13 @@ class RSSFeed(
             image = zeit.content.image.interfaces.IMasterImage(
                 zeit.content.image.interfaces.IImages(content).image, None)
             if image is not None:
+                image_url = zeit.web.core.template.default_image_url(
+                    image, 'spektrum')
+                image_url = image_url.replace(
+                    self.request.route_url('home'),
+                    self.request.asset_url('/'), 1)
                 item.append(E.enclosure(
-                    url=zeit.web.core.template.default_image_url(
-                        image, 'spektrum'),
+                    url=image_url,
                     # XXX Incorrect length, since bitblt will resize the image,
                     # but since that happens outside of the application, we
                     # cannot know the real size here.
