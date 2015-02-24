@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.15 (unreleased)
+1.15 (2015-02-24)
 -----------------
 
 - DEV-567: Fix links for both images and content, since the feed will be
