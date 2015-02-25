@@ -1,6 +1,8 @@
 .main
 	padding: 0 $page-padding
 	overflow: hidden // prevent android from wrong zooming
+	+old-ie
+		width: $break-desktop-min
 	&__fullwidth
 		display: block
 		width: 100%

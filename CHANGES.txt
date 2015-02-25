@@ -1,10 +1,35 @@
 Change log for zeit.web
 =======================
 
-1.15 (unreleased)
+1.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1394: Enable a supertitle fallback for linkobjects and galleries
+
+- Fix navigation: fix bug where more is on the wrong side of the fence
+
+- Fixes for video stage
+
+- Fixes for IE8
+
+
+1.15.2 (2015-02-24)
+-----------------
+
+- ZON-1280: Tweak last modified date format string
+
+
+1.15.1 (2015-02-24)
+-------------------
+
+- Hotfix: Unknown bc images should not break anything
+
+
+1.15 (2015-02-24)
+-----------------
+
+- DEV-567: Fix links for both images and content, since the feed will be
+  accessed via newsfeed.zeit.de.
 
 
 1.14 (2015-02-20)

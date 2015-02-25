@@ -107,6 +107,9 @@ $footer_button_icon_width: em(10px)
 			width: $footer_logo_width_small
 			+respond-min($break-tablet-min)
 				width: $footer_logo_width
+			+old-ie
+				height: 37px
+				width: 346px
 
 .footer-publisher
 	background-color: $zon-charcoal

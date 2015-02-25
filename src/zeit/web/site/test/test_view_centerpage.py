@@ -580,9 +580,8 @@ def test_series_select_should_navigate_away(selenium_driver, testserver):
         if option.text == 'Rekorder':
             option.click()
             break
-    wait = WebDriverWait(driver, 10)
-    element = wait.until(EC.title_is('Serie: Rekorder | ZEIT ONLINE'))
-    assert element
+    driver.implicitly_wait(10) # seconds
+    assert '/serie/rekorder' in driver.current_url
 
 
 def test_video_stage_video_should_play(selenium_driver, testserver):
@@ -629,6 +628,22 @@ def test_homepage_ressort_is_homepage(testserver):
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.ressort == 'homepage'
+
+
+def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
+    kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
+                               '.teaser-small__kicker'.format(uid))[0]
+    assert kicker.text == 'Zeugenvernehmung'
+
+
+def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    uid = 'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'
+    kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
+                               '.teaser-small__kicker'.format(uid))[0]
+    assert kicker.text == 'Desktop-Bilder'
 
 
 def test_oldads_toggle_is_off(application):

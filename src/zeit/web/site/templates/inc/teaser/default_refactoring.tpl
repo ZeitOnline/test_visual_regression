@@ -11,12 +11,12 @@
     <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
-            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
+            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | translate_url }}">
                 {% block teaser_kicker %}
-                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle | hide_none }}</span>
+                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                 {% endblock %}
                 {% block teaser_title %}
-                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</span>
+                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
                 {% endblock %}
             </a>
             {% endblock %}
