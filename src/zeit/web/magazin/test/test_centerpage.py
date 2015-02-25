@@ -949,3 +949,10 @@ def test_homepage_indentifies_itself_as_homepage(testserver):
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-large-teaser')
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.is_hp is False
+
+
+def test_oldads_toggle_is_on(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.deliver_ads_oldschoolish is True

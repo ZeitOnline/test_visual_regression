@@ -629,3 +629,10 @@ def test_homepage_ressort_is_homepage(testserver):
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.ressort == 'homepage'
+
+
+def test_oldads_toggle_is_off(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.deliver_ads_oldschoolish is False
