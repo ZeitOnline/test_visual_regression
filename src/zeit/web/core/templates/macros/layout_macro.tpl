@@ -82,8 +82,8 @@
 </script>
 {% endmacro %}
 
-{% macro adcontroller_adplace(banner, view) -%}
-    {% if view.context.advertising_enabled -%}
+{% macro adplace_adctrl(banner, view) -%}
+    {{ caller() }}
     <div id="iqadtile{{ banner.tile }}" class="ad-{{ banner.name }} ad-{{ banner.name }}--on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
         {% if banner.label -%}
         <div class="ad-{{ banner.name }}__label">{{ banner.label }}</div>
@@ -94,13 +94,12 @@
             </script>
         </div>
     </div>
-    {% endif -%}
 {% endmacro %}
 
-{% macro adplace(banner, view) -%}
+{% macro adplace_oldschoolish(banner, view) -%}
+    {{ caller() }}
     {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    {% if view.context.advertising_enabled -%}
     <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
     <div id="iqadtile{{ banner.tile }}" class="ad-{{ banner.name }} ad-{{ banner.name }}--on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
         {% if banner.label -%}
@@ -125,7 +124,6 @@
             </noscript>
         </div>
     </div>
-    {%- endif %}
 {%- endmacro %}
 
 {% macro adplace_middle_mobile(item) -%}
@@ -135,4 +133,18 @@
             <div id="sas_13557"></div>
         </div>
     {%- endif %}
+{%- endmacro %}
+
+{% macro adplace(banner, view) -%}
+    {% if view.context.advertising_enabled -%}
+        {% if view.deliver_ads_oldschoolish %}
+            {% call adplace_oldschoolish(banner, view) -%}
+                <!-- tile: {{ banner.tile }} oldschoolish -->
+            {%- endcall %}
+        {% else %}
+            {% call adplace_adctrl(banner, view) -%}
+                <!-- tile: {{ banner.tile }} adctrl -->
+            {%- endcall %}
+        {% endif %}
+    {% endif -%}
 {%- endmacro %}
