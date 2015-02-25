@@ -63,16 +63,15 @@
             <!--[if gt IE 9]>-->
             <script src="{{request.asset_url('js/libs/iqd/sasmobile.js')}}"></script>
             <!-- <![endif]-->
+            {% include "zeit.web.core:templates/inc/ads/%s/iqd_head.html" % view.adtemplate_path ignore missing %}
         {% endif %}
-
-        {% include "zeit.web.core:templates/inc/tracking/iqd_head.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/iqd_krux_head.html" ignore missing %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
         <!-- tracking at top -->
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/iqd_nuggad.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/iqd_krux.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.adtemplate_path ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.adtemplate_path ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.adtemplate_path ignore missing %}
 
         <div class="page-wrap">
 
@@ -159,16 +158,9 @@
 
         </div>
 
-        <div id="iqdLastNode">
-            <script type="text/javascript">
-                var IQDComplete = {
-                    init : function() {
-                        return true;
-                    }
-                };
-            </script>
-        </div>
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+
+        {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.adtemplate_path ignore missing %}
 
         <!-- tracking at end -->
         {% include "zeit.web.core:templates/inc/tracking/google.html" ignore missing %}
@@ -176,6 +168,7 @@
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/clickcount.html" ignore missing %}
+
 
         <script type="text/javascript">
             var require = {

@@ -56,17 +56,15 @@
         <link href="{{ request.asset_url('css/icons/site.fallback.css') }}" rel="stylesheet">
     </noscript>
 
-    {% include "zeit.web.core:templates/inc/ads/iqd_head.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.adtemplate_path ignore missing %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}">
     <!-- tracking at top -->
     {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-    {% if (view.deliver_ads_oldschoolish) -%}
-        {% include "zeit.web.core:templates/inc/tracking/iqd_nuggad.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/iqd_krux.html" ignore missing %}
-    {%- else -%}
-        {% include "zeit.web.core:templates/inc/ads/iqd_static_oop_tag.html" ignore missing %}
-    {%- endif %}
+    {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.adtemplate_path ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.adtemplate_path ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.adtemplate_path ignore missing %}
+
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
     {% endblock skiplink %}
@@ -106,10 +104,9 @@
             </footer>
         </div>
     </div>
+    {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.adtemplate_path ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-    {% if view.context.advertising_enabled -%}
-    {% include "zeit.web.core:templates/inc/ads/iqd_bottom_adctrl.html" ignore missing %}
-    {% endif %}
+
     <script>
         var require = {
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"

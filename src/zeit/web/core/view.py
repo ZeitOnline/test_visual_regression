@@ -263,6 +263,12 @@ class Base(object):
         # TODODO: build feature toggle framework like waffle for pyramid
         return False
 
+    @zeit.web.reify
+    def adtemplate_path(self):
+        if self.deliver_ads_oldschoolish:
+            return 'oldschool'
+        return 'adcontroller'
+
 
 class Content(Base):
 
