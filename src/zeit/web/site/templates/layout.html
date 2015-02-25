@@ -106,6 +106,9 @@
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+    {% if view.context.advertising_enabled -%}
+    {% include "zeit.web.core:templates/inc/ads/iqd_bottom_adctrl.html" ignore missing %}
+    {% endif %}
     <script>
         var require = {
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
