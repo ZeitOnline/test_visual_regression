@@ -61,7 +61,6 @@
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}">
     <!-- tracking at top -->
     {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/tracking/ivw_ver1.html" ignore missing %}
     {% if (view.deliver_ads_oldschoolish) -%}
         {% include "zeit.web.core:templates/inc/tracking/iqd_nuggad.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/iqd_krux.html" ignore missing %}
