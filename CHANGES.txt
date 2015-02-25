@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-1446: Implement active state for main navigation items
 
+- Fixes for video stage
+
+- Fixes for IE8
+
 
 1.15.2 (2015-02-24)
 -----------------
