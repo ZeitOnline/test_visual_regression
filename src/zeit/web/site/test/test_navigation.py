@@ -60,10 +60,12 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     assert len(html('.main_nav > div.main_nav__date')) == 1, (
         'just one .main_nav__date')
 
+    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
+
 
 def test_nav_ressorts_should_produce_markup(application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation/navigation-ressorts.tpl')
+        'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
     nav = zeit.web.core.navigation.Navigation()
     nav['hp.global.topnav.links.jobs'] = (
         zeit.web.core.navigation.NavigationItem(
@@ -76,11 +78,11 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     mock_view = mock.Mock()
-    mock_view.navigation = nav
-    html_str = tpl.render(view=mock_view)
+    html_str = tpl.render(view=mock_view,
+                          navigation=nav, nav_class='primary-nav')
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
+    assert len(html('ul.primary-nav')) == 1
     assert len(html('ul li.primary-nav__item')) > 1
     assert len(html('ul li.primary-nav__item a.primary-nav__link')) == (
         len(html('ul li.primary-nav__item'))), (
@@ -89,7 +91,7 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
 
 def test_nav_services_should_have_expected_links(application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation/navigation-services.tpl')
+        'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
     nav = zeit.web.core.navigation.Navigation()
     nav['abo'] = (
         zeit.web.core.navigation.NavigationItem(
@@ -102,8 +104,8 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
             'Shop',
             'http://shop.zeit.de?et=l6VVNm&et_cid=42&et_lid=175'))
     mock_view = mock.Mock()
-    mock_view.navigation_services = nav
-    html_str = tpl.render(view=mock_view)
+    html_str = tpl.render(view=mock_view,
+                          navigation=nav, nav_class='primary-nav-services')
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li > a[href="http://www.zeitabo.de/'
@@ -128,10 +130,10 @@ def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation/navigation-classifieds.tpl')
+        'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
     mock_view = mock.Mock()
-    mock_view.navigation_classifieds = nav
-    html_str = tpl.render(view=mock_view)
+    html_str = tpl.render(view=mock_view,
+                          navigation=nav, nav_class='main-nav-classifieds')
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li[data-id="hp.global.topnav.links.jobs"]'

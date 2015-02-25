@@ -23,9 +23,23 @@
 			Anmelden
 		</a>
 	</div>
-	<div class="main_nav__ressorts" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-ressorts.tpl" %}</div>
-	<div class="main_nav__services" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-services.tpl" %}</div>
-	<div class="main_nav__classifieds" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-classifieds.tpl" %}</div>
+	<div class="main_nav__ressorts" data-dropdown="true">
+		<nav role="navigation" id="primary_nav">
+		{%- set navigation = view.navigation -%}
+		{%- set nav_class = 'primary-nav' -%}
+		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
+		</nav>
+	</div>
+	<div class="main_nav__services" data-dropdown="true">
+		{%- set navigation = view.navigation_services -%}
+		{%- set nav_class = 'primary-nav-services' -%}
+		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
+	</div>
+	<div class="main_nav__classifieds" data-dropdown="true">
+		{%- set navigation = view.navigation_classifieds -%}
+		{%- set nav_class = 'main-nav-classifieds' -%}
+		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
+	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
 	<!-- wrap end -->
 	{% if view.is_hp %}
