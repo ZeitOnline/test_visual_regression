@@ -7,6 +7,12 @@ Change log for zeit.web
 - Nothing changed yet.
 
 
+1.15.2 (2015-02-24)
+-----------------
+
+- ZON-1280: Tweak last modified date format string
+
+
 1.15.1 (2015-02-24)
 -------------------
 
