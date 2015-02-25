@@ -90,7 +90,9 @@
         {% endif -%}
         <div class="ad-{{ banner.name }}__inner">
             <script type="text/javascript">
-                 AdController.render('iqadtile{{ banner.tile }}');
+                if (typeof AdController !== 'undefined') {
+                    AdController.render('iqadtile{{ banner.tile }}');
+                }
             </script>
         </div>
     </div>

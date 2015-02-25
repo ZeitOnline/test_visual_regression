@@ -21,15 +21,16 @@
 
 <!-- mandanten object -->
 <script type="text/javascript">
-    var pageInfo = {
-        $handle: '{% if view.banner_type %}{{ view.banner_type }}{% endif %}',
-        $autoSizeFrames: true,
-        level2: '{% if view.ressort %}{{ view.ressort }}{% endif %}',
-        level3: '{% if view.sub_ressort %}{{ view.sub_ressort }}{% endif %}',
-        keywords: '{% if view.adwords %}{{ view.adwords|join(',') }}{% endif %}',
-        tma: ''
-    };
-    AdController.setPageInfo(pageInfo);
-    AdController.initialize();
+    if (typeof AdController !== 'undefined') {
+            AdController.setPageInfo({
+            $handle: '{% if view.banner_type %}{{ view.banner_type }}{% endif %}',
+            $autoSizeFrames: true,
+            level2: '{% if view.ressort %}{{ view.ressort }}{% endif %}',
+            level3: '{% if view.sub_ressort %}{{ view.sub_ressort }}{% endif %}',
+            keywords: '{% if view.adwords %}{{ view.adwords|join(',') }}{% endif %}',
+            tma: ''
+        });
+        AdController.initialize();
+    }
 </script>
 <!-- ad controller head end -->
