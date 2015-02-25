@@ -275,8 +275,9 @@ class Article(zeit.web.core.view.Content):
             date = u'ver\u00F6ffentlicht am '
         date += first_released
         if self.date_last_published_semantic:
-            date = '{} (Zuletzt aktualisiert am {})'.format(
+            date = u'{} ({} am {})'.format(
                 date,
+                self.last_modified_wording,
                 babel.dates.format_datetime(
                     self.date_last_published_semantic, format, locale='de_De'))
         if date is not first_released:
@@ -285,6 +286,12 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def issue_format(self):
         return u' N\u00B0\u00A0%d/%d'
+
+    @zeit.web.reify
+    def last_modified_wording(self):
+        if self.context.product and self.context.product.show == 'issue':
+            return 'Editiert'
+        return 'Zuletzt aktualisiert'
 
     @zeit.web.reify
     def source_label(self):

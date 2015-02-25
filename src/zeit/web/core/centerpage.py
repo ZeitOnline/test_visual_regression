@@ -238,8 +238,8 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             try:
                 with image.image.open('w') as fh:
                     fh.write(urllib2.urlopen(src, timeout=4).read())
-            except IOError:
-                pass
+            except (IOError, AttributeError):
+                continue
             image.src = src
             image.mimeType = 'image/jpeg'
             image.image_pattern = 'brightcove-{}'.format(image_pattern)
