@@ -187,8 +187,7 @@ def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
     assert browser.headers['Content-Type'].startswith('application/rss+xml')
     feed = browser.contents
     assert '<atom:link href="%s"' % feed_url in feed
-    assert ('<link>%s/centerpage/article_image_asset?' % testserver.url
-            in feed)
+    assert '<link>http://www.zeit.de/centerpage/article_image_asset?' in feed
     assert ('wt_zmc=koop.ext.zonaudev.spektrumde.feed.'
             'article-image-asset.bildtext.link.x' in feed)
     assert re.search('<enclosure .* url="%s/centerpage/katzencontent/'
