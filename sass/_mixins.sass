@@ -201,7 +201,7 @@
 	@if $display == inline-block or $display == inline
 		vertical-align: $vertical-align
 
-=zon-button($background-color, $hover-background-color, $border-color, $hover-border-color, $color, $hover-color, $visited-color, $font-size, $margin, $padding)
+=zon-button($background-color, $hover-background-color, $border-color, $hover-border-color, $color, $hover-color, $visited-color, $font-size: remify(13px), $margin: remify(14px 6px), $padding: remify(10px 18px))
 	background-color: $background-color
 	border-radius: 5px
 	border: 2px solid $border-color
@@ -223,12 +223,14 @@
 		color: $hover-color
 		cursor: pointer
 
+=zon-button-inky
+	+zon-button($zon_dark_grey, $zon_grey, $zon_dark_grey, $zon_grey, $white, $zon-alto, $white)
 
 =zon-button-dark
-	+zon-button(rgba(0,0,0, 0.2), rgba(0,0,0, 0.5), $zon_mid_grey, $zon-alto, $zon_lighter_grey, $white, $zon-alto, remify(13px), remify($little--px $tiny--px), remify($fine--px $small--px))
+	+zon-button(rgba(0,0,0, 0.2), rgba(0,0,0, 0.5), $zon_mid_grey, $zon-alto, $zon_lighter_grey, $white, $zon-alto)
 
 =zon-button-light
-	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal, remify(13px), remify($little--px $tiny--px), remify($fine--px $small--px))
+	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal)
 
 // pseudo classes
 %off-screen
