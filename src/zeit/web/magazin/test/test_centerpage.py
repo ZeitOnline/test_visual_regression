@@ -186,20 +186,21 @@ def test_cp_lead_areas_are_available(application):
     assert len(view.area_lead)
 
 
-def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_structure(
+        monkeyagatho, selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".cp_leader")
+    wrap = driver.find_elements_by_css_selector('.cp_leader')
     assert len(wrap) != 0
     for element in wrap:
         text_wrap = element.find_elements_by_css_selector(
-            ".cp_leader__title__wrap--dark")
+            '.cp_leader__title__wrap--dark')
         link_wrap = element.find_elements_by_tag_name(
-            "a")
+            'a')
         image_wrap = element.find_elements_by_css_selector(
-            ".cp_leader__asset--dark")
+            '.cp_leader__asset--dark')
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
         assert len(image_wrap) != 0
 
 
@@ -239,14 +240,15 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
         assert img.get_attribute("title") == 'Katze!'
 
 
-def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_links(
+        monkeyagatho, selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_leader")
     assert len(wrap) != 0
     for element in wrap:
         link_wrap = element.find_elements_by_tag_name("a")
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
         for link in link_wrap:
             assert link.get_attribute("href") in 'http://'\
                 'localhost:6543/centerpage/article_image_asset#show_comments'
@@ -335,7 +337,7 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
 
 
 def test_cp_large_photo_button_has_expected_structure(
-        selenium_driver, testserver):
+        monkeyagatho, selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--large-photo")
@@ -346,7 +348,7 @@ def test_cp_large_photo_button_has_expected_structure(
         link_wrap = element.find_elements_by_tag_name(
             "a")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
 
 
 def test_cp_large_photo_button_has_expected_text_content(
@@ -380,7 +382,8 @@ def test_cp_large_photo_button_has_expected_links(selenium_driver, testserver):
                 link.get_attribute("href"))
 
 
-def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
+def test_cp_gallery_teaser_has_expected_structure(
+        monkeyagatho, selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--gallery")
@@ -393,7 +396,7 @@ def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
         image_wrap = element.find_elements_by_css_selector(
             ".scaled-image")
         assert len(text_wrap) != 0
-        assert len(link_wrap) == 3
+        assert len(link_wrap) == 2
         assert len(image_wrap) != 0
 
 
@@ -851,12 +854,13 @@ def test_cp_informatives_should_have_no_blocks(application):
     assert informatives_last_block == cp_view.area_informatives_1[2].uniqueId
 
 
-def test_cp_teaser_should_have_comment_count(testserver, testbrowser):
+def test_cp_teaser_should_have_comment_count(
+        monkeyagatho, testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     counts = browser.cssselect(
         'span.cp_comment__count__wrap.icon-comments-count')
-    assert int(counts[0].text) == 150
+    assert int(counts[0].text) == 125
 
 
 def test_centerpage_should_have_monothematic_block(application):

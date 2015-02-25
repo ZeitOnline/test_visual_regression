@@ -55,7 +55,7 @@ def test_buzz_comments_should_render_correct_article_count(
 
 
 def test_buzz_comments_should_render_with_correct_scores(
-        testbrowser, testserver):
+        testbrowser, testserver, monkeyagatho):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
     media = browser.cssselect('.buzz-line__label--buzz-comments')
     assert [to_int(m.text) for m in media] == [129, 142, 110]
