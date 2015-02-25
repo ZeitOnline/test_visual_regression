@@ -7,7 +7,7 @@
 			{% include "zeit.web.site:templates/inc/navigation/navigation-section.tpl" %}
 		{%- endif %}
 	</li>
-	{%- endfor %}
+	{% endfor %}
 	{% if nav_class == 'primary-nav' %}
 	{# copy all nav-sections to more-dropdown as well #}
 	<li class="{{ nav_class }}__item" data-id="more-dropdown" data-feature="dropdown">
