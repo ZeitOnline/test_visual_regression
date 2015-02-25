@@ -4,6 +4,10 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
+- Fixes for video stage
+
+- Fixes for IE8
+
 - ZON-1394: Enable a supertitle fallback for linkobjects and galleries
 
 
