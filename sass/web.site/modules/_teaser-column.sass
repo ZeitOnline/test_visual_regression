@@ -11,7 +11,7 @@ $teaser-column-mobile-image-size: 80px
 	background: $color-column-background
 	border-top: none
 	padding:   $petite $petite $petite
-	margin: 40px -$page-padding $petite -$page-padding
+	margin: 40px (-$page-padding) $petite (-$page-padding)
 	position: relative
 	+box-shadow(inset 0 $teaser-column-shadow 0 0 $color-column-shadow)
 	+respond-min($break-tablet-min)
@@ -20,6 +20,7 @@ $teaser-column-mobile-image-size: 80px
 	+respond-min($break-desktop-min)
 		+box-shadow(none)
 		margin: $petite 0 $petite 0
+		min-height: remify(250px)
 		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
 	&__media
 		overflow: hidden
@@ -40,6 +41,11 @@ $teaser-column-mobile-image-size: 80px
 			height: 100%
 	&__media-item
 		@extend %teaser-media-item
+		+old-ie
+			background: $white
+			margin-left: 20px
+			margin-top: 30px
+			position: static
 	&__heading
 		@extend %teaser-heading
 		&--padded
@@ -72,6 +78,7 @@ $teaser-column-mobile-image-size: 80px
 				content: ' \29F8 ' // ⧸ = Big solidus
 	&__kicker
 		@extend %teaser-kicker
+		padding: remify(24px 0 3px 0)
 		+respond-min($break-desktop-min)
 			display: inline
 	&__title
@@ -94,5 +101,5 @@ $teaser-column-mobile-image-size: 80px
 // prevent next teaser from having border
 .teaser-column + .teaser // deprecated
 	border-top: none
-.teaser-series + *[data-block-type='teaser'] // new
+.teaser-column + *[data-block-type='teaser'] // new
 	border-top: none

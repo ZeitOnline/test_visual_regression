@@ -7,7 +7,7 @@
 		margin-top: $little
 		position: relative
 	+respond-min($break-desktop-min)
-		margin-top: em(16px)
+		margin-top: remify(16px)
 	&__label
 		font-size: $font-s
 		letter-spacing: $zon-letter-spacing-l
@@ -16,11 +16,14 @@
 		text-transform: uppercase
 		+respond-min($break-phablet-min)
 			background: $color-page-bg
-			left: 0
-			padding-right: em(5px, $little--px)
+			left: remify(17px)
+			padding: 0 remify(3px)
 			position: absolute
 			top: em(-6px, $little--px)
 			+inline-block
+		+respond-min($break-tablet-min)
+			left: 0
+			padding-left: 0
 		+respond-min($break-desktop-min)
 			font-size: 0.0875
 			padding-right: 0.75

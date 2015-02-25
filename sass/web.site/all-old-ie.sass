@@ -10,12 +10,14 @@ $fix-mqs-h: 48em
 // recently, not to fix many bugs in IE8 but to fallback
 // as much as possible. Some fixes though are applied
 // to logos and completely utter things
+// 
+// this file is only loaded under IE lte 8
 
-.lt-ie9
-	.main
-		min-width: $break-desktop-min
-	.teaser-column__media-item
-		background: $white
-		margin-left: 20px
-		margin-top: 30px
-		position: static
+// just do not note styles here
+// but at the place applicable
+// using the +old-ie mixin
+// example:
+// 	.link
+//		color: red
+//		+old-ie
+//			color: blue
