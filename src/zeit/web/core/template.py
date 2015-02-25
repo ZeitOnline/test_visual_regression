@@ -39,6 +39,7 @@ import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
+p_log = logging.getLogger('profile')
 
 
 class Undefined(jinja2.runtime.Undefined):
@@ -708,5 +709,7 @@ class ProfilerExtension(jinja2.ext.Extension):
         self.profiler.disable()
         stream = StringIO.StringIO()
         stats = pstats.Stats(self.profiler, stream=stream)
+        stats.print_stats('zeit.web', 20)
+        p_log.debug(stream.getvalue())
         return '<b position:relative;float:right;>{:.0f}ms</b></div>'.format(
             stats.total_tt * 1000)
