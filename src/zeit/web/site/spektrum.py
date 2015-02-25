@@ -104,7 +104,7 @@ class RSSFeed(
             E.copyright('Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             # Convoluted way of creating a namespaced tag, sigh.
             getattr(E, '{%s}link' % ATOM_NAMESPACE)(
-                href=self.request.url,  # XXX Is this correct?
+                href=self.request.url,
                 type=self.request.response.content_type)
         )
         root.append(channel)
@@ -120,10 +120,16 @@ class RSSFeed(
                 'utm_campaign': 'feed',
                 'utm_content': '%s_bildtext_link_x' % normalized_title,
             })
+            content_url = zeit.web.core.template.create_url(content)
+            # XXX Since this view will be accessed via newsfeed.zeit.de, we
+            # cannot use route_url() as is, since it uses that hostname, which
+            # is not the one we want. In non-production environments this
+            # unfortunately still generates un-unseful production links.
+            content_url = content_url.replace(
+                self.request.route_url('home'), 'http://www.zeit.de/', 1)
             item = E.item(
                 E.title(content.title),
-                E.link('%s?%s' % (
-                    zeit.web.core.template.create_url(content), tracking)),
+                E.link('%s?%s' % (content_url, tracking)),
                 E.description(content.teaserText),
                 E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),
@@ -132,9 +138,13 @@ class RSSFeed(
             image = zeit.content.image.interfaces.IMasterImage(
                 zeit.content.image.interfaces.IImages(content).image, None)
             if image is not None:
+                image_url = zeit.web.core.template.default_image_url(
+                    image, 'spektrum')
+                image_url = image_url.replace(
+                    self.request.route_url('home'),
+                    self.request.asset_url('/'), 1)
                 item.append(E.enclosure(
-                    url=zeit.web.core.template.default_image_url(
-                        image, 'spektrum'),
+                    url=image_url,
                     # XXX Incorrect length, since bitblt will resize the image,
                     # but since that happens outside of the application, we
                     # cannot know the real size here.
