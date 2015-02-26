@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
 
+import zeit.cms.interfaces
+
+
+def test_article_should_render_full_view(testserver, testbrowser):
+    article_path = '{}/zeit-online/article/zeit{}'
+    browser = testbrowser(article_path.format(
+        testserver.url, '/komplettansicht'))
+    article = zeit.cms.interfaces.ICMSContent(
+        article_path.format('http://xml.zeit.de', ''))
+    assert len(browser.cssselect('p.paragraph')) == article.paragraphs
+
+
 def test_article_with_pagination(testbrowser, testserver):
     browser = testbrowser('{}/zeit-online/article/zeit'.format(testserver.url))
     select = browser.cssselect
@@ -14,6 +26,7 @@ def test_article_with_pagination(testbrowser, testserver):
         u'Der Horror von Crystal wurzelt in der Normalität')
     assert len(numbers) == 5
     assert '--current' in (numbers[0].get('class'))
+
 
 def test_article_pagination_active_state(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/zeit/seite-3'.format(
