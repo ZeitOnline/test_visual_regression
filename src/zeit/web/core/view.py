@@ -264,7 +264,7 @@ class Base(object):
         return False
 
     @zeit.web.reify
-    def adtemplate_path(self):
+    def ad_delivery_type(self):
         if self.deliver_ads_oldschoolish:
             return 'oldschool'
         return 'adcontroller'

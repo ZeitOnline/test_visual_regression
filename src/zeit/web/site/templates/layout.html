@@ -56,14 +56,14 @@
         <link href="{{ request.asset_url('css/icons/site.fallback.css') }}" rel="stylesheet">
     </noscript>
 
-    {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.adtemplate_path ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}">
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}" data-adDeliveryType="{{view.ad_delivery_type}}">
     <!-- tracking at top -->
     {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.adtemplate_path ignore missing %}
-    {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.adtemplate_path ignore missing %}
-    {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.adtemplate_path ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.ad_delivery_type ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
 
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
@@ -104,7 +104,7 @@
             </footer>
         </div>
     </div>
-    {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.adtemplate_path ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
 
     <script>
