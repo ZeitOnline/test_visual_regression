@@ -461,6 +461,13 @@ def _existing_image(asset_id, image_base_name, image_patterns, ext):
 
 
 @zeit.web.register_global
+def get_column_image(teaser):
+    # XXX Needs testing and exception handling
+    return zeit.web.core.interfaces.ITeaserImage(
+        teaser.authorships[0].target.column_teaser_image)
+
+
+@zeit.web.register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
     import zeit.web.core.centerpage
 
