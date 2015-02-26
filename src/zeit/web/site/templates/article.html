@@ -19,7 +19,7 @@
             </span>
         </h1>
         {% if view.pagination and view.pagination.current > 1 %}
-        <div class="page-teaser">
+        <div class="article__page-teaser">
             Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
         </div>
         {% else %}

@@ -1,10 +1,15 @@
 {% extends "zeit.web.site:templates/article.html" %}
+
 {% block article_pages %}
     {% for page in view.pages %}
         <div class="article-page">
+            {% if not loop.first %}
+            <h3 class="article-page__page-teaser">{{ page.teaser }}</h3>
+            {% endif %}
             {{ render_page(page) }}
         </div>
     {% endfor %}
 {% endblock article_pages %}
+
 {% block article_pagination %}
 {% endblock article_pagination %}
