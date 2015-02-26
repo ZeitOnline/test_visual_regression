@@ -69,7 +69,7 @@ def test_banner_should_not_be_displayed_on_short_pages(
 def test_banner_should_not_be_displayed_on_disabled_article(
         testserver, testbrowser):
     # test article with xml banner = no
-    browser = testbrowser('%s/artikel/02' % testserver.url)
+    browser = testbrowser('%s/artikel/nobanner' % testserver.url)
     # no desktop ads
     assert not browser.cssselect('div[class*="ad-tile_"]')
     # no mobile ad script
