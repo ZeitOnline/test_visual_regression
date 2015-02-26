@@ -63,8 +63,8 @@
             <!--[if gt IE 9]>-->
             <script src="{{request.asset_url('js/libs/iqd/sasmobile.js')}}"></script>
             <!-- <![endif]-->
-            {% include "zeit.web.core:templates/inc/ads/%s/iqd_head.html" % view.adtemplate_path ignore missing %}
         {% endif %}
+        {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.adtemplate_path ignore missing %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage">
         <!-- tracking at top -->
