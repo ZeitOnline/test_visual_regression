@@ -4,7 +4,11 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
+- ZON-1446: Implement active state for main navigation items
+
 - ZON-1394: Enable a supertitle fallback for linkobjects and galleries
+
+- ZON-1459: Implement full view ("Komplettansicht") for articles
 
 - Fix navigation: fix bug where more is on the wrong side of the fence
 

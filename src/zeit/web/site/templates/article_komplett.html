@@ -1,0 +1,10 @@
+{% extends "zeit.web.site:templates/article.html" %}
+{% block article_pages %}
+    {% for page in view.pages %}
+        <div class="article-page">
+            {{ render_page(page) }}
+        </div>
+    {% endfor %}
+{% endblock article_pages %}
+{% block article_pagination %}
+{% endblock article_pagination %}
