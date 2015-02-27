@@ -240,7 +240,7 @@ def test_inline_gallery_should_have_images(testserver, testbrowser):
 def test_article_request_should_have_body_element(testserver, testbrowser):
     browser = testbrowser('%s/artikel/05' % testserver.url)
     assert ('<body itemscope itemtype='
-            '"http://schema.org/WebPage">') in browser.contents
+            '"http://schema.org/WebPage"') in browser.contents
     assert '</body>' in browser.contents
 
 
