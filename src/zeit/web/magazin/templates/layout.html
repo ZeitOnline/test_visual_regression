@@ -98,8 +98,10 @@
             <div class="page-wrap--inner" id="js-page-wrap-inner">
         {% endblock page_wrap_inner %}
 
+                {% profile %}
+
                 {% block navigation %}
-                    {{ lama.main_nav(view.context.main_nav_full_width,request) }}
+                    {{ lama.main_nav(view.context.main_nav_full_width, request) }}
                 {% endblock navigation %}
 
                 {% block adplace_billboard %}
@@ -109,13 +111,19 @@
                 {% block page_title %}
                 {% endblock page_title %}
 
+                {% endprofile %}
+
                 <main role="main" class="main">
-                    {%  block content %}{% endblock content %}
+                    {% block content %}{% endblock content %}
                 </main>
 
+                {% profile %}
                 {% block breadcrumbs %}
                     {{ lama.breadcrumbs(view.breadcrumb) }}
                 {% endblock breadcrumbs %}
+                {% endprofile %}
+
+                {% profile %}
                 {% block footer %}
                     <footer class="main-footer">
                         <div class="main-footer__box is-constrained is-centered">
@@ -144,10 +152,13 @@
                         </div>
                     </footer>
                 {% endblock footer %}
+                {% endprofile %}
 
+                {% profile %}
                 {% if view.copyrights -%}
                     {{ lama.copyrights(view.copyrights) }}
                 {%- endif %}
+                {% endprofile %}
 
             </div><!-- end: #js-page-wrap-inner -->
 

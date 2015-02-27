@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comments url="/commentsection/url/zeit-magazin/test-cp/essen-geniessen-spargel-lamm">
+ <last_comment_timestamp>1376757288</last_comment_timestamp>
+ <last_comment_name></last_comment_name>
+ <last_comment_uid>291552</last_comment_uid>
+ <comment_count>125</comment_count>
+ <nid>281882</nid>
+ <comment id="cid-2968470" moderated="true">
+  <subject>Komik</subject>
+  <content>Lorem ipsum Irure exercitation eiusmod ex cillum in nisi.</content>
+  <date>
+   <year>2013</year>
+   <month>08</month>
+   <day>16</day>
+   <hour>20</hour>
+   <minute>24</minute>
+  </date>
+  <homepage></homepage>
+  <flagged type="leser_empfehlung" userid="241862"/>
+  <author id="uid-394578" url="/user/skarsgard">
+   <name>Skarsgard</name>
+  </author>
+ </comment>
+ <path>/commentsection/url/zeit-magazin/test-cp/essen-geniessen-spargel-lamm</path>
+ <source>http://www.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm</source>
+</comments>

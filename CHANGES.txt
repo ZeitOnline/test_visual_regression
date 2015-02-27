@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1394: Enable a supertitle fallback for linkobjects and galleries
 
+- BUG-181: Make ZMO comments work again
+
 - ZON-1459: Implement full view ("Komplettansicht") for articles
 
 - Fix navigation: fix bug where more is on the wrong side of the fence

@@ -22,8 +22,10 @@ def comment_score(**ctx):
     :internal:
     """
 
-    comments = zeit.web.core.comments.comments_per_unique_id()
-    return int(comments.get(ctx.get('path'), 0))
+    thread = zeit.web.core.comments.get_thread(ctx.get('uri'), just_count=True)
+    if not thread:
+        return 0
+    return thread.get('comment_count', 0)
 
 
 def index_score(**ctx):
