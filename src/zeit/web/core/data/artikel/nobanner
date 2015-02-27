@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
 <article>
     <head>
         <references>
-            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/44/friedhof-hamburg-ohlsdorf" year="2013" issue="44" ressort="Gesellschaft" author="Henning Sußebach" contenttype="article" publication-date="2013-10-31T02:37:21+00:00" expires="">
+            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/44/friedhof-hamburg-ohlsdorf" year="2013" issue="44" ressort="Gesellschaft" author="Henning SuÃŸebach" contenttype="article" publication-date="2013-10-31T02:37:21+00:00" expires="">
                 <supertitle>Bestattungen</supertitle>
                 <title>Die Angst des Friedhofs vor dem Tod</title>
                 <text>
-                Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und Ruhewälder die Rettung fürs Geschäft?
+                Deutschland schrumpft. Viele BÃ¼rger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und RuhewÃ¤lder die Rettung fÃ¼rs GeschÃ¤ft?
                 </text>
                 <description>
-                Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und Ruhewälder die Rettung fürs Geschäft?
+                Deutschland schrumpft. Viele BÃ¼rger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Bringen Apfelhaine und RuhewÃ¤lder die Rettung fÃ¼rs GeschÃ¤ft?
                 </description>
-                <byline>von Henning Sußebach</byline>
+                <byline>von Henning SuÃŸebach</byline>
                 <image align="left" base-id="http://xml.zeit.de/gesellschaft/2013-10/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
-                    <bu>Einäscherung</bu>
-                    <copyright>© Benne Ochs</copyright>
+                    <bu>EinÃ¤scherung</bu>
+                    <copyright>Â© Benne Ochs</copyright>
                 </image>
             </reference>
         </references>
@@ -24,7 +23,7 @@
             <tag url_value="chanel" uuid="0af031da-ebf9-4976-b751-4c6f4803fda2" score="5" type="Organization">Chanel</tag>
             <tag url_value="mode" uuid="16d936b3-af28-49b6-9787-0ffdc1a7ca37" score="4" type="free">Mode</tag>
             <tag url_value="paris" uuid="677bc5e6-35e8-47da-af94-c8fed6316ba2" score="1" type="Location">Paris</tag>
-            <tag url_value="koerper" uuid="e6ce87ec-1302-44f0-86cd-c47f633b9b26" score="4" type="free">Körper</tag>
+            <tag url_value="koerper" uuid="e6ce87ec-1302-44f0-86cd-c47f633b9b26" score="4" type="free">KÃ¶rper</tag>
         </rankedTags>
         <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Ijoma Mangold</display_name>
@@ -33,14 +32,14 @@
             <display_name>Susanne Mayer</display_name>
         </author>
         <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/exampleimages/artikel/02/heft/" type="jpg" publication-date="" expires="">
-            <bu>Die Professorin und Autorin Barbara Vinken in einem ihrer Lieblingsstücke, einem kurzen Kleid von Thierry Mugler</bu>
-            <copyright>© Sigrid Reinichs</copyright>
+            <bu>Die Professorin und Autorin Barbara Vinken in einem ihrer LieblingsstÃ¼cke, einem kurzen Kleid von Thierry Mugler</bu>
+            <copyright>Â© Sigrid Reinichs</copyright>
         </image>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">748779</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="author">Ijoma Mangold;Susanne Mayer</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
@@ -103,7 +102,7 @@
 &lt;/pickle&gt;</attribute>
         <nextread>
           <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
-            <supertitle>Kochen für Gäste</supertitle>
+            <supertitle>Kochen fÃ¼r GÃ¤ste</supertitle>
             <teaser_supertitle xsi:nil="true"/>
             <title xsi:nil="true"/>
             <text xsi:nil="true"/>
@@ -112,7 +111,7 @@
             <breadcrumb_title xsi:nil="true"/>
             <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
               <display_name>Carolin Emcke</display_name>
-              <location>Eisenhüttenstadt</location>
+              <location>EisenhÃ¼ttenstadt</location>
             </author>
           </reference>
         </nextread>
@@ -120,89 +119,89 @@
     <body>
         <supertitle>Modetheoretikerin Barbara Vinken</supertitle>
         <title>Den Tod tragen unter der Sonne</title>
-        <subtitle>Eine elegante Frau steht unter Verdacht – der Dummheit und der Frivolität. Warum? Ein Gespräch über Mode mit Barbara Vinken, Autorin des Buches "Angezogen"</subtitle>
+        <subtitle>Eine elegante Frau steht unter Verdacht â€“ der Dummheit und der FrivolitÃ¤t. Warum? Ein GesprÃ¤ch Ã¼ber Mode mit Barbara Vinken, Autorin des Buches "Angezogen"</subtitle>
         <byline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
 
-        <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" ns0:__name__="id-678ba457-741c-4c5f-8cde-535405cd0654" type="page" teaser="&quot;Ich möchte Weiblichkeit behaupten&quot;">
+        <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" ns0:__name__="id-678ba457-741c-4c5f-8cde-535405cd0654" type="page" teaser="&quot;Ich mÃ¶chte Weiblichkeit behaupten&quot;">
         <liveblog ns0:__name__="id-b79786c1-9be1-4000-b4c2-1b0ad83411ca" blogID="100"/>
             <p>
                 <strong>ZEIT:</strong>
         Sie adressieren Ihr Buch an ein Publikum, das in den protestantischen Denkmustern lebt,
-        die mit der Mode nichts anfangen können. Und schreiben ein Buch, das viele der Vorwürfe, die
-        man an die Mode richtet, entkräften soll. Zuletzt ist aber wahr, dass die Mode die Frau zum
-        Objekt des Blickes der Männer macht. Gibt es ein Entkommen?
+        die mit der Mode nichts anfangen kÃ¶nnen. Und schreiben ein Buch, das viele der VorwÃ¼rfe, die
+        man an die Mode richtet, entkrÃ¤ften soll. Zuletzt ist aber wahr, dass die Mode die Frau zum
+        Objekt des Blickes der MÃ¤nner macht. Gibt es ein Entkommen?
       </p>
             <p>
                 <strong>Vinken:</strong>
-        Die Frau kann sich zum Subjekt ihrer Inszenierung machen und diesen Blick ver-rücken. Mode
+        Die Frau kann sich zum Subjekt ihrer Inszenierung machen und diesen Blick ver-rÃ¼cken. Mode
         hat ein fantastisches ironisches Potenzial. Weil ich in der Mode wie in der Literatur genau
-        dieses Moment der Ironie finde, des Verschiebens, des Ver-rückens, des Lachens, habe ich ein
+        dieses Moment der Ironie finde, des Verschiebens, des Ver-rÃ¼ckens, des Lachens, habe ich ein
         Lob auf die Mode geschrieben.
       </p>
             <p>
                 <strong>ZEIT:</strong>
         Die meisten weichen nicht aus ins Raffinement, sondern in robuste Freizeitmode. Da steht
-        der Vater des Täuflings mit kariertem Hemd vor dem Altar, als sei das ein Grill und er werde
+        der Vater des TÃ¤uflings mit kariertem Hemd vor dem Altar, als sei das ein Grill und er werde
         gleich die Steaks auflegen.
       </p>
             <p>
                 <strong>Vinken:</strong>
         Der amodische Impuls der Moderne ist so stark, dass es vielen Leuten vor allem darum geht,
-        nicht angezogen in einem emphatischen Sinne zu sein. Nackt wäre man am authentischsten, in
+        nicht angezogen in einem emphatischen Sinne zu sein. Nackt wÃ¤re man am authentischsten, in
         paradiesischer Unschuld. Kleider werden als Firlefanz gesehen, der unser Selbst verstellt.
         Ein bisschen narzisstisch, wen interessiert schon das authentische Selbst?
       </p>
             <p>
                 <strong>ZEIT:</strong>
-        Zur Mode gehört auch die Lächerlichkeit. Dass man gerne modisch sein will, aber es falsch
+        Zur Mode gehÃ¶rt auch die LÃ¤cherlichkeit. Dass man gerne modisch sein will, aber es falsch
         macht. Liegt darin auch der Reiz der Mode?
       </p>
             <p>
                 <strong>Vinken:</strong>
-        Und die Gefahr. Ich würde sagen, dass jede interessante Mode Mut zum Wagnis des
-        Lächerlichen haben muss.
+        Und die Gefahr. Ich wÃ¼rde sagen, dass jede interessante Mode Mut zum Wagnis des
+        LÃ¤cherlichen haben muss.
       </p>
             <p>
                 <strong>ZEIT:</strong>
-        Ein Bereich, der von modischen Ambitionen am wenigsten berührt ist, ist die akademische
+        Ein Bereich, der von modischen Ambitionen am wenigsten berÃ¼hrt ist, ist die akademische
         Welt. Wie bewegen Sie sich in ihr?
       </p>
             <p>
                 <strong>Vinken:</strong>
-        Auf dem letzten Uni-Fest habe ich zu einer Bekannten gesagt: Diese Männer hier – und es
-        sind ja fast nur Männer – sind so von sich eingenommen, dass sie es sich leisten, auf Charme
+        Auf dem letzten Uni-Fest habe ich zu einer Bekannten gesagt: Diese MÃ¤nner hier â€“ und es
+        sind ja fast nur MÃ¤nner â€“ sind so von sich eingenommen, dass sie es sich leisten, auf Charme
         und Eleganz zu verzichten. Sie hat sich totgelacht und gesagt: Hallo, das merkst du jetzt
         erst? Ich glaube, ich bin immer wieder aufs Neue schockiert.
       </p>
             <p>
                 <strong>ZEIT:</strong>
-        Könnten Sie einer deutschen Universität als Stilberaterin dienen?
+        KÃ¶nnten Sie einer deutschen UniversitÃ¤t als Stilberaterin dienen?
       </p>
             <p>
                 <strong>Vinken:</strong>
-        Schätze ich jetzt mal als wenig aussichtsreich ein.
+        SchÃ¤tze ich jetzt mal als wenig aussichtsreich ein.
       </p>
             <p>
                 <strong>ZEIT:</strong>
-        Erzählen Sie uns über sich, wie Sie sich anziehen.
+        ErzÃ¤hlen Sie uns Ã¼ber sich, wie Sie sich anziehen.
       </p>
             <p>
                 <strong>Vinken:</strong>
-        Ich möchte Weiblichkeit behaupten. Also Kleider tragen. Wie kann jemand im Kleid Autorität
-        haben? Das ist das Problem, mit dem sich seit Chanel alle beschäftigen. Deswegen gibt es so
-        viele Kleider, die auf altmodische Autoritätsfunde zurückgreifen und Talare, Richterroben,
-        sakrale Gewänder zitieren; Céline ist darin sehr geistreich, Jil Sander vielleicht zu sakral
-        pathetisch. Mein privates, ästhetisches Ideal ist die Passantin Baudelaires, eine üppige,
-        tiefschwarze Trauer tragende Frau mit Rüschen, Spitzen. Den Tod wie die sizilianischen
-        Frauen unter der heißen Sonne zu tragen. Du trägst Trauer, weil du, vom Tod umgeben, selbst
-        zum Tode geworden bist, und du trägst lebendig diesen Tod im gleißenden Licht dieses Südens.
+        Ich mÃ¶chte Weiblichkeit behaupten. Also Kleider tragen. Wie kann jemand im Kleid AutoritÃ¤t
+        haben? Das ist das Problem, mit dem sich seit Chanel alle beschÃ¤ftigen. Deswegen gibt es so
+        viele Kleider, die auf altmodische AutoritÃ¤tsfunde zurÃ¼ckgreifen und Talare, Richterroben,
+        sakrale GewÃ¤nder zitieren; CÃ©line ist darin sehr geistreich, Jil Sander vielleicht zu sakral
+        pathetisch. Mein privates, Ã¤sthetisches Ideal ist die Passantin Baudelaires, eine Ã¼ppige,
+        tiefschwarze Trauer tragende Frau mit RÃ¼schen, Spitzen. Den Tod wie die sizilianischen
+        Frauen unter der heiÃŸen Sonne zu tragen. Du trÃ¤gst Trauer, weil du, vom Tod umgeben, selbst
+        zum Tode geworden bist, und du trÃ¤gst lebendig diesen Tod im gleiÃŸenden Licht dieses SÃ¼dens.
         Das ist meine Vorstellung von Mode.
       </p>
         </division>
     </body>
     <teaser>
-        <title>Das neue Heft – im Video durchgeblättert</title>
-        <text>Warum steht eine elegante Frau unter Verdacht? Hat Mode noch etwas zu sagen? Was fehlt dem Mann im Anzug? Ein Gespräch mit Barbara Vinken, Autorin des Buches "Angezogen"</text>
+        <title>Das neue Heft â€“ im Video durchgeblÃ¤ttert</title>
+        <text>Warum steht eine elegante Frau unter Verdacht? Hat Mode noch etwas zu sagen? Was fehlt dem Mann im Anzug? Ein GesprÃ¤ch mit Barbara Vinken, Autorin des Buches "Angezogen"</text>
         <supertitle>ZEITmagazin</supertitle>
     </teaser>
 </article>
