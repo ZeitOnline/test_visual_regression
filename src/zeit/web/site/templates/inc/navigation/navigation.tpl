@@ -42,9 +42,4 @@
 	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
 	<!-- wrap end -->
-	{% if view.is_hp %}
-	{# please don't break line here, due to inline-block state #}
-	<div class="main_nav__tags">{% include "zeit.web.site:templates/inc/navigation/navigation-tags.tpl"
-	%}</div><div class="main_nav__date">{{ view.displayed_last_published_semantic | format_date('long') }}</div>
-	{% endif %}
 </div>
