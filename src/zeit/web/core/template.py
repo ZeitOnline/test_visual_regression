@@ -122,8 +122,7 @@ def strftime(t, format):
         elif isinstance(t, datetime.datetime):
             return t.strftime(format)
     except (AttributeError, TypeError, ValueError):
-        pass
-    return ''
+        return
 
 
 @zeit.web.register_filter
@@ -421,7 +420,7 @@ def get_image_group(asset):
     try:
         return zeit.content.image.interfaces.IImageGroup(asset)
     except TypeError:
-        return None
+        return
 
 
 @zeit.web.register_global

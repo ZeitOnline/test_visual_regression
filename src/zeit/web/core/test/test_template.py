@@ -218,8 +218,8 @@ def test_filter_strftime_works_as_expected():
     strftime = zeit.web.core.template.strftime
     now = datetime.datetime.now()
     localtime = time.localtime()
-    assert strftime('foo', '%s') == ''
-    assert strftime((2014, 01, 01), '%s') == ''
+    assert strftime('foo', '%s') is None
+    assert strftime((2014, 01, 01), '%s') is None
     assert strftime(tuple(now.timetuple()), '%s') == now.strftime('%s')
     assert strftime(now, '%s') == now.strftime('%s')
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
