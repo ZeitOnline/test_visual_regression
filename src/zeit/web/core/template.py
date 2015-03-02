@@ -1,30 +1,14 @@
-import cProfile
 import datetime
-import email.utils
 import itertools
 import logging
 import mimetypes
-import os
-import pkg_resources
-import pstats
 import re
-import StringIO
 import time
-import urllib2
 import urlparse
 
 import babel.dates
-import jinja2.environment
-import jinja2.ext
-import jinja2.loaders
-import jinja2.nodes
-import jinja2.runtime
-import jinja2.utils
-import lxml.objectify
 import pyramid.threadlocal
-import pytz
 import repoze.bitblt.transform
-import requests
 import zope.component
 import zope.interface
 
@@ -39,53 +23,6 @@ import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
-
-
-class Undefined(jinja2.runtime.Undefined):
-
-    """Custom jinja Undefined class that represents unresolvable template
-    statements and expressions. It ignores undefined errors, ensures it is
-    printable and returns further Undefined objects if indexed or called.
-    """
-
-    def __html__(self):
-        return jinja2.utils.Markup()
-
-    @jinja2.utils.internalcode
-    def _fail_with_undefined_error(self, *args, **kw):
-        pass
-
-    __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
-
-
-class Environment(jinja2.environment.Environment):
-
-    """Custom jinja Environment class that uses our custom Undefined class as
-    fallback for unknown filters, globals, tests, object-attributes and -items.
-    This way, most flaws and faults in view classes can be caught and affected
-    areas can be ommited from the rendered output.
-    """
-
-    def __init__(self, undefined=Undefined, **kw):
-        super(Environment, self).__init__(undefined=undefined, **kw)
-        self.filters = zeit.web.core.utils.defaultdict(undefined, self.filters)
-        self.globals = zeit.web.core.utils.defaultdict(undefined, self.globals)
-        self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
-
-    def handle_exception(self, *args, **kw):
-        return getattr(self.undefined(), '__html__', lambda: '')()
-
-    def __getsth__(self, func, obj, name):
-        try:
-            return getattr(super(Environment, self), func)(obj, name)
-        except BaseException:
-            return self.undefined(obj, name)
-
-    def getitem(self, obj, argument):
-        return self.__getsth__('getitem', obj, argument)
-
-    def getattr(self, obj, attribute):
-        return self.__getsth__('getattr', obj, attribute)
 
 
 @zeit.web.register_filter
@@ -202,23 +139,10 @@ def hide_none(string):
         return string
 
 
-_t_map = {"zon-large": ['leader', 'leader-two-columns', 'leader-panorama'],
-          "zon-small": ['text-teaser', 'buttons', 'large', 'short', 'date'],
-          "zon-fullwidth": ['leader-fullwidth'],
-          "zon-parquet-large": ['parquet-large'],
-          "zon-parquet-small": ['parquet-regular'],
-          "hide": ['archive-print-volume', 'archive-print-year',
-                   'two-side-by-side', 'ressort', 'leader-upright',
-                   'buttons-fullwidth', 'parquet-printteaser',
-                   'parquet-verlag']}
-
-# Flattens and reverses t_map, so we can easily lookup an layout.
-_t_map = dict(x for k, v in _t_map.iteritems() for x in zip(v, [k] * len(v)))
-
-
 @zeit.web.register_filter
 def get_mapped_teaser(layout):
-    return _t_map.get(layout, layout)
+    return zope.component.getUtility(
+        zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
 
 @zeit.web.register_filter
@@ -231,70 +155,18 @@ def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
 
-# definition of default images sizes per layout context
-default_images_sizes = {
-    'default': (200, 300),
-    'large': (800, 600),
-    'small': (200, 300),
-    'upright': (320, 480),
-    'zmo-xl-header': (460, 306),
-    'zmo-xl': (460, 306),
-    'zmo-medium-left': (225, 125),
-    'zmo-medium-center': (225, 125),
-    'zmo-medium-right': (225, 125),
-    'zmo-large-left': (225, 125),
-    'zmo-large-center': (225, 125),
-    'zmo-large-right': (225, 125),
-    'zmo-small-left': (225, 125),
-    'zmo-small-center': (225, 125),
-    'zmo-small-right': (225, 125),
-    '540x304': (290, 163),
-    '580x148': (290, 163),
-    '940x400': (470, 200),
-    '148x84': (74, 42),
-    '220x124': (110, 62),
-    '368x110': (160, 48),
-    '368x220': (160, 96),
-    '180x101': (90, 50),
-    'zmo-landscape-large': (460, 306),
-    'zmo-landscape-small': (225, 125),
-    'zmo-square-large': (200, 200),
-    'zmo-square-small': (50, 50),
-    'zmo-lead-upright': (320, 480),
-    'zmo-upright': (320, 432),
-    'zmo-large': (460, 200),
-    'zmo-medium': (330, 100),
-    'zmo-small': (200, 50),
-    'zmo-x-small': (100, 25),
-    'zmo-card-picture': (320, 480),
-    'zmo-print-cover': (315, 424),
-    'og-image': (600, 315),
-    'twitter-image_small': (120, 120),  # summary
-    'twitter-image-large': (560, 300),  # summary_large_image, photo
-    'newsletter-540x304': (540, 304),
-    'newsletter-220x124': (220, 124),
-    'zon-thumbnail': (580, 326),
-    'zon-large': (580, 326),
-    'zon-article-large': (820, 462),
-    'zon-printbox': (320, 234),
-    'zon-printbox-wide': (320, 148),
-    'brightcove-still': (580, 326),
-    'brightcove-thumbnail': (120, 67),
-    'spektrum': (220, 124)
-}
-
-
 @zeit.web.register_filter
-def default_image_url(image,
-                      image_pattern='default'):
+def default_image_url(image, image_pattern='default'):
     try:
+        scales = zope.component.getUtility(
+            zeit.web.core.interfaces.IImageScales)
         image_pattern = getattr(image, 'image_pattern', image_pattern)
         if image_pattern != 'default':
-            width, height = default_images_sizes.get(image_pattern, (640, 480))
+            width, height = scales.get(image_pattern, (640, 480))
         elif hasattr(image, 'layout'):
-            width, height = default_images_sizes.get(image.layout, (640, 480))
+            width, height = scales.get(image.layout, (640, 480))
         else:
-            width, height = default_images_sizes.get(image_pattern, (640, 480))
+            width, height = scales.get(image_pattern, (640, 480))
         # TODO: use secret from settings?
         signature = repoze.bitblt.transform.compute_signature(
             width, height, 'time')
@@ -312,6 +184,7 @@ def default_image_url(image,
 
         return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
     except Exception, e:
+        # XXX: Surely we do not want to try-except on a function scope.
         log.debug('Cannot produce a default URL for {}. Reason {}'.format(
                   image, e))
 
@@ -352,28 +225,27 @@ def closest_substitute_image(image_group,
     elif image_pattern in image_group:
         return image_group.get(image_pattern)
 
-    # Determine the image size correlating to the provided pattern.
-    scales = zope.component.getUtility(zeit.web.core.interfaces.IImageScales)
-    s_size = (scales.get(image_pattern) or
-              default_images_sizes.get(image_pattern))
+    # Determine the image scale correlating to the provided pattern.
+    scale = zope.component.getUtility(
+        zeit.web.core.interfaces.IImageScales).get(image_pattern)
 
-    if not s_size:
+    if not scale:
         return
 
     orientation = lambda x, y: (x > y) << 1 | (x < y)  # Binary hashing
 
     # Aggregate a list of images from the image group with a target separator.
-    candidates = [(image_pattern, s_size)]
+    candidates = [(image_pattern, scale)]
     for name, img in image_group.items():
         size = img.getImageSize()
-        if not force_orientation or orientation(*size) == orientation(*s_size):
+        if not force_orientation or orientation(*size) == orientation(*scale):
             candidates.append((name, size))
 
     if len(candidates) == 1:
         return
 
     candidates = sorted(candidates, key=lambda i: i[1][0] * i[1][1])
-    idx = candidates.index((image_pattern, s_size))
+    idx = candidates.index((image_pattern, scale))
     candidates.pop(idx)
 
     # Select the candidate that is preferably one size larger than the target.
@@ -564,150 +436,32 @@ class ImageScales(dict):
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
     def __init__(self, *args, **kw):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        scale_source = conf.get('vivi_zeit.web_image-scales')
 
-        if not scale_source:
-            return
-        try:
-            fileobject = urllib2.urlopen(scale_source)
-        except urllib2.URLError:
-            return
+        class Scales(zeit.imp.source.ScaleSource):
+            def isAvailable(self, *args):  # NOQA
+                return True
 
-        def to_int(value):
-            return int(re.sub('[^0-9]', '', '0' + str(value)))
-
-        for scale in lxml.objectify.fromstring(fileobject.read()).iter():
-            name = scale.attrib.get('name')
-            width = to_int(scale.attrib.get('width'))
-            height = to_int(scale.attrib.get('height'))
-            kw[name] = (width, height)
-
-        super(ImageScales, self).__init__(**kw)
+        sub = lambda x: int(re.sub('[^0-9]', '', '0' + str(x)))
+        scales = {s.name: (sub(s.width), sub(s.height)) for s in Scales()('')}
+        super(ImageScales, self).__init__(scales)
 
 
-class HTTPLoader(jinja2.loaders.BaseLoader):
+class TeaserMapping(dict):
 
-    def __init__(self, url):
-        self.url = url
-        if url and not self.url.endswith('/'):
-            self.url += '/'
+    zope.interface.implements(zeit.web.core.interfaces.ITeaserMapping)
 
-    def get_source(self, environment, template):
-        if not self.url:
-            # XXX: Why doesn't this throw an exception?
-            return (
-                'ERROR: load_template_from_dav_url not configured',
-                template, lambda: True)
+    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
+            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
+            'zon-fullwidth': ['leader-fullwidth'],
+            'zon-parquet-large': ['parquet-large'],
+            'zon-parquet-small': ['parquet-regular'],
+            'hide': ['archive-print-volume', 'archive-print-year',
+                     'two-side-by-side', 'ressort', 'leader-upright',
+                     'buttons-fullwidth', 'parquet-printteaser',
+                     'parquet-verlag']}
 
-        if self.url.startswith('egg://'):  # For tests
-            parts = urlparse.urlparse(self.url)
-            return (
-                pkg_resources.resource_string(
-                    parts.netloc, parts.path[1:] + template).decode('utf-8'),
-                template, lambda: False)
+    def __init__(self, *args, **kw):
 
-        url = self.url + template
-        log.debug('Loading template %r from %s', template, url)
-        response = requests.get(url)
-        return response.text, url, CompareModifiedHeader(
-            url, response.headers.get('Last-Modified'))
-
-
-class CompareModifiedHeader(object):
-
-    """Compares a stored timestamp against the current Last-Modified header."""
-
-    def __init__(self, url, timestamp):
-        self.url = url
-        self.last_retrieved = self.parse_rfc822(timestamp)
-
-    def __call__(self):
-        """Conforms to jinja2 uptodate semantics: Returns True if the template
-        was not modified."""
-        # NOTE: *Every time* a template is rendered we trigger an HTTP request.
-        # Do we need introduce a delay to only perform the request every X
-        # minutes?
-        response = requests.head(self.url)
-        last_modified = self.parse_rfc822(
-            response.headers.get('Last-Modified'))
-        return last_modified <= self.last_retrieved
-
-    @staticmethod
-    def parse_rfc822(timestamp):
-        # XXX Dear stdlib, are you serious? Unfortunately, not even arrow
-        # deals with RFC822 timestamps. This solution is sponsored by
-        # <https://stackoverflow.com/questions/1568856>.
-        if timestamp:
-            return datetime.datetime.fromtimestamp(
-                email.utils.mktime_tz(email.utils.parsedate_tz(timestamp)),
-                pytz.utc)
-
-
-class PrefixLoader(jinja2.BaseLoader):
-
-    """Tweaked version of jinja2.PrefixLoader that defaults to prefix None
-    if the requested path contains no prefix delimiter.
-    """
-
-    def __init__(self, mapping, delimiter='/'):
-        self.mapping = mapping
-        self.delimiter = delimiter
-
-    def get_source(self, environment, template):
-        if self.delimiter not in template:
-            loader = self.mapping[None]
-            name = template
-        else:
-            try:
-                prefix, name = template.split(self.delimiter, 1)
-                loader = self.mapping[prefix]
-            except (ValueError, KeyError):
-                raise jinja2.TemplateNotFound(template)
-        try:
-            return loader.get_source(environment, name)
-        except jinja2.TemplateNotFound:
-            # re-raise the exception with the correct fileame here.
-            # (the one that includes the prefix)
-            raise jinja2.TemplateNotFound(template)
-
-
-class ProfilerExtension(jinja2.ext.Extension):
-
-    tags = set(['profile'])
-
-    def __init__(self, env):
-        super(ProfilerExtension, self).__init__(env)
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.active = conf.get('debug.enable_profiler')
-        self.profiler = None
-
-    def parse(self, parser):
-        token = next(parser.stream)
-        name = 'no_{}_{}_{}'.format(
-            token.value, token.lineno, os.urandom(6).encode('hex'))
-
-        body = parser.parse_statements(['name:endprofile'], drop_needle=True)
-
-        if self.active:
-            name = name.lstrip('no_')
-            body.insert(0, jinja2.nodes.CallBlock(
-                self.call_method('engage', []), [], [], []))
-            body.append(jinja2.nodes.CallBlock(
-                self.call_method('disengage', []), [], [], []))
-
-        return jinja2.nodes.Block(name, body, False).set_lineno(token.lineno)
-
-    def engage(self, *args, **kw):
-        color = os.urandom(3).encode('hex')
-        self.profiler = cProfile.Profile()
-        self.profiler.enable()
-        return '<div class="__pro__" style="outline:3px dashed #{};">'.format(
-            color)
-
-    def disengage(self, *args, **kw):
-        self.profiler.disable()
-        stream = StringIO.StringIO()
-        stats = pstats.Stats(self.profiler, stream=stream)
-        return '<b position:relative;float:right;>{:.0f}ms</b></div>'.format(
-            stats.total_tt * 1000)
+        # Flattens and reverses _map, so we can easily lookup a layout.
+        super(TeaserMapping, self).__init__(
+            x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))

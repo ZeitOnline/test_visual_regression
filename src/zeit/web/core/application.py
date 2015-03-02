@@ -37,7 +37,7 @@ import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
 import zeit.web.core.security
-import zeit.web.core.template
+import zeit.web.core.jinja
 import zeit.web.site.video_series
 
 
@@ -216,7 +216,7 @@ class Application(object):
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         self.config.add_jinja2_extension(jinja2.ext.WithExtension)
         self.config.add_jinja2_extension(
-            zeit.web.core.template.ProfilerExtension)
+            zeit.web.core.jinja.ProfilerExtension)
 
         env = self.config.registry.getUtility(
             pyramid_jinja2.IJinja2Environment)
@@ -224,16 +224,16 @@ class Application(object):
         env.trim_blocks = True
 
         default_loader = env.loader
-        env.loader = zeit.web.core.template.PrefixLoader({
+        env.loader = zeit.web.core.jinja.PrefixLoader({
             None: default_loader,
-            'dav': zeit.web.core.template.HTTPLoader(self.settings.get(
+            'dav': zeit.web.core.jinja.HTTPLoader(self.settings.get(
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
         if not self.settings.get('debug.propagate_jinja_errors'):
             # If the application is not running in debug mode: overlay the
             # jinja environment with a custom, more fault tolerant one.
-            env.__class__ = zeit.web.core.template.Environment
+            env.__class__ = zeit.web.core.jinja.Environment
             env = env.overlay()
 
         venusian.Scanner(env=env).scan(
