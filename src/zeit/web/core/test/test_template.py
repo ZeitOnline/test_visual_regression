@@ -32,9 +32,8 @@ def template_server(template_server_session):
 def test_retrieves_template_via_http(template_server):
     open(template_server['documentroot'] + '/foo.html', 'w').write('foo')
 
-    loader = zeit.web.core.template.HTTPLoader(template_server.url)
-    UNUSED_ENVIRONMENT = None
-    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    loader = zeit.web.core.jinja.HTTPLoader(template_server.url)
+    source, path, uptodate = loader.get_source(None, 'foo.html')
     assert 'foo' == source
 
 
@@ -42,9 +41,8 @@ def test_checks_uptodate_using_last_modified_header(template_server):
     template = template_server['documentroot'] + '/foo.html'
     open(template, 'w').write('foo')
 
-    loader = zeit.web.core.template.HTTPLoader(template_server.url)
-    UNUSED_ENVIRONMENT = None
-    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    loader = zeit.web.core.jinja.HTTPLoader(template_server.url)
+    source, path, uptodate = loader.get_source(None, 'foo.html')
 
     assert uptodate()
     later = time.time() + 1
@@ -53,9 +51,8 @@ def test_checks_uptodate_using_last_modified_header(template_server):
 
 
 def test_no_url_configured_yields_error_message():
-    loader = zeit.web.core.template.HTTPLoader(url=None)
-    UNUSED_ENVIRONMENT = None
-    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    loader = zeit.web.core.jinja.HTTPLoader(url=None)
+    source, path, uptodate = loader.get_source(None, 'foo.html')
     assert 'load_template_from_dav_url' in source
 
 

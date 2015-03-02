@@ -210,7 +210,7 @@ def closest_substitute_image(image_group,
 
     Usage as jinja filter:
 
-        {{ my_image_group|closest_substitute_image('my-desired-pattern') }}
+        {{ my_image_group | closest_substitute_image('my-desired-pattern') }}
 
     :param image_group: Image Group instance that provides
                         zeit.content.image.interfaces.IImageGroup
