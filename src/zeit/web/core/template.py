@@ -10,7 +10,6 @@ import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
-import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
@@ -19,7 +18,6 @@ import zeit.content.cp.layout
 import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
-import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
@@ -427,38 +425,3 @@ def get_image_group(asset):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
-
-
-class ImageScales(dict):
-
-    zope.interface.implements(zeit.web.core.interfaces.IImageScales)
-
-    def __init__(self, *args, **kw):
-
-        class Scales(zeit.imp.source.ScaleSource):
-            def isAvailable(self, *args):  # NOQA
-                return True
-
-        sub = lambda x: int(re.sub('[^0-9]', '', '0' + str(x)))
-        scales = {s.name: (sub(s.width), sub(s.height)) for s in Scales()('')}
-        super(ImageScales, self).__init__(scales)
-
-
-class TeaserMapping(dict):
-
-    zope.interface.implements(zeit.web.core.interfaces.ITeaserMapping)
-
-    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
-            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
-            'zon-fullwidth': ['leader-fullwidth'],
-            'zon-parquet-large': ['parquet-large'],
-            'zon-parquet-small': ['parquet-regular'],
-            'hide': ['archive-print-volume', 'archive-print-year',
-                     'two-side-by-side', 'ressort', 'leader-upright',
-                     'buttons-fullwidth', 'parquet-printteaser',
-                     'parquet-verlag']}
-
-    def __init__(self, *args, **kw):
-        # Flattens and reverses _map, so we can easily lookup a layout.
-        super(TeaserMapping, self).__init__(
-            x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
