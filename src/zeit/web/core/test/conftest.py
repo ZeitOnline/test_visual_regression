@@ -113,6 +113,7 @@ settings = {
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (
         'egg://zeit.web.core/data/config/series.xml'),
+    'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
@@ -384,6 +385,7 @@ def image_group_factory():
         masterimage = None
 
     class MockRepositoryImage(object):
+
         def __init__(self, size, name):
             self._size = size
             self.uniqueId = name
