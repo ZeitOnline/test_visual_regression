@@ -51,7 +51,7 @@ class PostComment(zeit.web.core.view.Base):
                 request.params.get('path'))
 
             comment_thread = zeit.web.core.comments.get_thread(
-                unique_id=unique_id, request=request)
+                unique_id, destination=request.url)
             nid = None
             if comment_thread:
                 nid = comment_thread['nid']
@@ -112,4 +112,4 @@ class PostComment(zeit.web.core.view.Base):
             unique_id))
 
         return zeit.web.core.comments.get_thread(
-            unique_id=unique_id, request=self.request)
+            unique_id, destination=self.request.url)

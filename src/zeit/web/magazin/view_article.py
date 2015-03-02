@@ -39,9 +39,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     @zeit.web.reify
     def comments(self):
         return zeit.web.core.comments.get_thread(
-            unique_id=self.context.uniqueId,
-            request=self.request,
-            reverse=True)
+            self.context.uniqueId, destination=self.request.url, reverse=True)
 
     @zeit.web.reify
     def issue_format(self):

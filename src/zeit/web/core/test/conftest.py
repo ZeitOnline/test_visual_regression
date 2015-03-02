@@ -23,6 +23,7 @@ import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
+import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.comments
@@ -269,7 +270,7 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     return zeit.web.core.comments.Agatho(
-        agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+        settings['agatho_host'] + '/agatho/thread/')
 
 
 @pytest.fixture
@@ -371,8 +372,11 @@ def appbrowser(application):
 @pytest.fixture
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
-        path = zeit.web.core.comments.path_of_article(unique_id)
-        return lxml.etree.parse(''.join([self.entry_point, path]))
+        path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
+        try:
+            return lxml.etree.parse(self.agatho_host + path)
+        except IOError:
+            return
 
     monkeypatch.setattr(
         zeit.web.core.comments.Agatho, 'collection_get', collection_get)
