@@ -10,6 +10,7 @@ import zeit.content.cp.interfaces
 import zeit.web.core.interfaces
 import zeit.web.core.reach
 import zeit.web.core.template
+import zeit.web.core.sources
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
@@ -192,7 +193,7 @@ class Centerpage(
 
     @zeit.web.reify
     def video_series_list(self):
-        return zeit.web.site.video_series.video_series
+        return zeit.web.core.sources.video_series
 
     @zeit.web.reify
     def ressort(self):

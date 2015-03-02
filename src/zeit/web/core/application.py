@@ -33,13 +33,13 @@ from zeit.web.core.article import IShortformArticle
 from zeit.web.core.gallery import IGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
-import zeit.web.core.interfaces
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
-import zeit.web.core.security
+import zeit.web.core.interfaces
 import zeit.web.core.jinja
-import zeit.web.site.video_series
+import zeit.web.core.security
+import zeit.web.core.sources
 
 
 log = logging.getLogger(__name__)
@@ -84,8 +84,8 @@ class Application(object):
     def configure_series(self):
         series_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.web_series-source', ''))
-        zeit.web.site.video_series.video_series = (
-            zeit.web.site.video_series.get_video_series(series_source))
+        zeit.web.core.sources.video_series = (
+            zeit.web.core.sources.get_video_series(series_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
