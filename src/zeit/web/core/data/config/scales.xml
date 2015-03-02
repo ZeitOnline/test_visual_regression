@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <scales>
+  <!-- Legacy Image Scales -->
   <scale name="540x304" width="580" height="326" title="Aufmacher groß (580×326)"/>
   <scale name="940x400" width="940" height="400" title="Aufmacher vollbreit (940×400)"/>
   <scale name="148x84" width="148" height="84" title="Teaser klein (148×84)"/>
@@ -8,12 +9,27 @@
   <scale name="368x110" width="320" height="96" title="Vollgraphik Informatives (320×96)"/>
   <scale name="180x101" width="180" height="101" title="Inline-Bild (180×101)"/>
   <scale name="180xVar" width="180" height="?101" title="Inline-Bild variabel (180 × )"/>
-  <scale name="580x148" width="580" height="148" title="Zwischenaufmacher Panorama (580x148)"/>
-  <!-- ZEIT ONLINE Relaunch Formate -->
-  <scale name="zon-thumbnail" width="580" height="326" title="Relaunch 2015: Thumbnail (kleiner Teaser)"/>
-  <scale name="zon-large" width="580" height="326" title="Relaunch 2015: großer Teaser"/>
-  <scale name="zon-article-large" width="820" height="462" title="Relaunch 2015: Artikel groß"/>
-  <!-- ZEIT Magazin Online Formate -->
+  <scale name="580x148" width="580" height="148" title="Zwischenaufmacher Panorama (580×148)"/>
+  <!-- Friedbert Internal Scales -->
+  <scale name="default" width="300" height="200" title="Default generic scale" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="large" width="800" height="600" title="Large generic scale" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="small" width="300" height="200" title="Small generic scale" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="upright" width="320" height="480" title="Upright generic scale" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="og-image" width="600" height="315" title="Facebook share image" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="twitter-image_small" width="120" height="120" title="Twitter summary" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="twitter-image-large" width="560" height="300" title="Twitter large photo" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="newsletter-540x304" width="540" height="304" title="Newsletter large" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="newsletter-220x124" width="220" height="124" title="Newsletter small" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="brightcove-still" width="580" height="326" title="Brightcove video still" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="brightcove-thumbnail" width="120" height="67" title="Brightcove thumbnail" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="spektrum" width="220" height="124" title="Spektrum feed image" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zon-printbox" width="320" height="234" title="Relaunch 2015: Printbox" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zon-printbox-wide" width="320" height="148" title="Relaunch 2015: Printbox wide" available="zeit.web.core.interfaces.IInternalUse"/>
+  <!-- ZEIT ONLINE Scales -->
+  <scale name="zon-thumbnail" width="580" height="326" title="Relaunch 2015: Thumbnail (kleiner Teaser)" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zon-large" width="580" height="326" title="Relaunch 2015: großer Teaser" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zon-article-large" width="820" height="462" title="Relaunch 2015: Artikel groß" available="zeit.web.core.interfaces.IInternalUse"/>
+  <!-- ZEIT Magazin Scales -->
   <scale name="zmo-landscape-large" width="980" height="551" title="ZMO: Quer groß (16:9)" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-landscape-small" width="290" height="163" title="ZMO: Quer klein (16:9)" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-square-large" width="660" height="660" title="ZMO: Quadrat groß" available="zeit.magazin.interfaces.IZMOContent"/>
