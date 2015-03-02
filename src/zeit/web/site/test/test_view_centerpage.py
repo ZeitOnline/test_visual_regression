@@ -445,8 +445,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_display_copyright_with_nonbreaking_space(
         testserver, testbrowser):
 
-    browser = testbrowser(
-        '%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
 
     copyright = browser.cssselect('.snapshot-caption__item')
 
@@ -462,6 +461,14 @@ def test_snapshot_should_not_be_display_where_no_snapshot_is_present(
 
     assert not browser.cssselect('.snapshot'), (
         'There is an snaphot on a page which should not have one')
+
+
+def test_snapshot_should_have_description_text(testserver, testbrowser):
+
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    description = browser.cssselect('.snapshot-caption')
+    text = u'Die Installation "Cantareira-Wüste" des brasilianischen Künstlers'
+    assert text in description[0].text
 
 
 def test_small_teaser_without_image_has_no_padding_left(

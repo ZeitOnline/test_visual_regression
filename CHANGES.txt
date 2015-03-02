@@ -3,6 +3,7 @@ Change log for zeit.web
 
 1.16 (unreleased)
 -----------------
+- Fix: Snapshot on homepage now with description
 
 - ZON-1446: Implement active state for main navigation items
 
