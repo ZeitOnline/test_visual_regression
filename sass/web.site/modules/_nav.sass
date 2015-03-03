@@ -17,11 +17,7 @@ $zon-search-square-size: remify(35px)
 .main_nav
 	+display-flex()
 	+flex-wrap(wrap)
-	font-family: $font-tabletgothic
 	width: 100%
-	padding: 0 0 $fine 0
-	+respond-min($break-tablet-min)
-		padding: $fine $petite $fine $petite
 	& > *[data-dropdown="true"]
 		display: none
 		+respond-min($break-tablet-min)
@@ -52,17 +48,6 @@ $zon-search-square-size: remify(35px)
 		color: $zon_grey
 		a
 			+link-colors($black)
-
-%main_nav__topics
-	margin: 0 0 $petite 0
-	font-size: $font-11px
-	line-height: 1rem
-	text-transform: uppercase
-	letter-spacing: 1px
-	color: $zon_dark_grey
-	display: none
-	+respond-min($break-tablet-min)
-		display: inline-block
 
 %main_nav_button
 	+hide-text
@@ -308,50 +293,6 @@ $zon-search-square-size: remify(35px)
 	@extend %main_nav_icons
 	width: $small
 	height: $small
-
-//box 7: topics
-.main_nav__tags
-	@extend %main_nav__topics
-	+order(70)
-	width: 75%
-	+respond-min($break-desktop-min)
-		width: 80%
-	ul
-		width: 80%
-		display: inline-block
-		list-style: none
-		padding: 0
-		margin: 0
-		li
-			display: inline-block
-			border: 1px solid $zon_light_grey
-			border-radius: $tiny
-			margin: 0 0 0 $little
-			padding: 4px 7px 1px
-			&:hover
-				background-color: $zon_lighter_grey
-			a
-				+link-colors($zon_dark_grey)
-		+respond-min($break-desktop-min)
-			width: 85%
-
-.main_nav__tags__label
-	font-weight: bold
-	display: inline-block
-	width: 20%
-	+respond-min($break-desktop-min)
-		width: 15%
-
-//box 8: date
-.main_nav__date
-	@extend %main_nav__topics
-	font-weight: bold
-	width: 25%
-	text-align: right
-	padding-top: 4px
-	+order(80)
-	+respond-min($break-desktop-min)
-		width: 20%
 
 //box 9: special teaser
 .main_nav__teaser
