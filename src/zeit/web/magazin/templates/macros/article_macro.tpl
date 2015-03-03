@@ -431,16 +431,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro inlinegallery(obj, wrapper_class='inline-gallery__wrap') -%}
-    <div class="{{ wrapper_class }}">
-        <div class="inline-gallery">
-            {% for entry in obj.itervalues() -%}
-                {{ image(entry, loop) }}
-            {%- endfor %}
-        </div>
-    </div>
-{%- endmacro %}
-
 {% macro add_publish_date( lm_date, publish_date, format) -%}
     {% if lm_date %}
         <!--[if gt IE 8]><!-->
