@@ -4,11 +4,10 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
-<<<<<<< HEAD
+
 - ZON-1461: Add pagination
-=======
+
 - ZON-1305: Add Schema.org/Organization
->>>>>>> master
 
 - ZON-1446: Implement active state for main navigation items
 
