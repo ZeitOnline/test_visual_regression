@@ -1,9 +1,11 @@
 <div class="main_nav">
 	<!-- logo -->
-	<div class="logo_bar">
-		<div class="logo_bar__image">
-			<a href="//{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
-				<!--start: title-->Nachrichten auf ZEIT ONLINE<!--end: title-->
+	<div itemscope itemtype="http://schema.org/Organization" class="logo_bar">
+		<div class="logo_bar__image" itemprop="brand">
+			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
+				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
+				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png"></meta>
+				ZEIT ONLINE
 			</a>
 		</div>
 		<div class="logo_bar__menue">
@@ -18,7 +20,7 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		<a href="//community.zeit.de/user/login?destination=http://{{ view.request.host }}/index" rel="nofollow" class="user" id="drupal_login">
+		<a href="//{{ view.request.registry.settings.community_host }}/user/login?destination=http://{{ view.request.host }}/index" rel="nofollow" class="user" id="drupal_login">
 			<span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
 			Anmelden
 		</a>
@@ -42,9 +44,4 @@
 	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
 	<!-- wrap end -->
-	{% if view.is_hp %}
-	{# please don't break line here, due to inline-block state #}
-	<div class="main_nav__tags">{% include "zeit.web.site:templates/inc/navigation/navigation-tags.tpl"
-	%}</div><div class="main_nav__date">{{ view.displayed_last_published_semantic | format_date('long') }}</div>
-	{% endif %}
 </div>

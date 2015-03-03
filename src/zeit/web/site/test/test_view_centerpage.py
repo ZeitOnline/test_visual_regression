@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import lxml
 import mock
 import pytest
@@ -652,3 +653,38 @@ def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
     assert kicker.text == 'Desktop-Bilder'
+
+
+def test_centerpage_header_tags(application, jinja2_env):
+    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
+    view, request = (mock.Mock(),) * 2
+    view.resolve = mock.Mock(return_value=request)
+    view.topiclinks = [('Label 1', 'http://link_1'),
+                       ('Label 2', 'http://link_2'),
+                       ('Label 3', 'http://link_3')]
+    view.topiclink_title = 'My Title'
+    view.displayed_last_published_semantic = datetime.datetime.now()
+
+    html_str = ' '.join(list(tpl.blocks['metadata'](view)))
+    html = lxml.html.fromstring(html_str).cssselect
+    tags = html('.header__tags__link')
+
+    assert len(html('.header__tags')) == 1, 'just one .header__tags'
+    assert html('.header__tags__label')[0].text == 'My Title'
+    assert len(tags) == 3
+    assert tags[0].get('href') == 'http://link_1'
+    assert tags[0].get('title') == 'Label 1'
+    assert tags[0].text == 'Label 1'
+
+
+def test_centerpage_metadata(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    date = '3. Dezember 2014, 12:50 Uhr'
+
+    assert len(html('.header__tags')) == 1, 'just one .header__tags'
+    assert html('.header__tags__label')[0].text == 'Schwerpunkte'
+
+    assert len(html('.header__date')) == 1, 'just one .header__date'
+    assert html('.header__date')[0].text == date, 'Date is invalid'
