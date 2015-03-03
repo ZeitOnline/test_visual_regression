@@ -332,7 +332,7 @@ def test_article05_has_correct_dates(testserver, testbrowser):
         '2013-11-03T08:10:00.626737+01:00')
 
 
-def test_article03_has_correct_dates(testserver, testbrowser):
+def test_article03_has_correct_dates(application):
     # not updated article
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
@@ -413,7 +413,7 @@ def test_article10_has_correct_source_label(testserver, testbrowser):
     assert article_view.source_label == 'Erschienen bei golem.de'
 
 
-def test_article03_has_empty_source_label(testserver, testbrowser):
+def test_article03_has_empty_source_label(application):
     # zon source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
@@ -461,8 +461,7 @@ def test_article_has_correct_product_id(testserver):
     assert article_view.product_id == 'GOLEM'
 
 
-def test_article_page_should_throw_404_if_no_pages_are_exceeded(
-        testserver, testbrowser):
+def test_article_page_should_throw_404_if_no_pages_are_exceeded(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -471,7 +470,7 @@ def test_article_page_should_throw_404_if_no_pages_are_exceeded(
         page()
 
 
-def test_article_page_should_work_if_pages_from_request_fit(testserver):
+def test_article_page_should_work_if_pages_from_request_fit(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     page.request.registry.settings = {}
@@ -486,9 +485,8 @@ def test_article_page_komplett_should_show_all_pages(testserver, testbrowser):
     assert 'Chianti ein Comeback wirklich verdient' in browser.contents
 
 
-def test_pagination_dict_should_have_correct_entries(testserver, testbrowser):
+def test_pagination_dict_should_have_correct_entries(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-
     view = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     view.request.path_info = u'article/03/seite-2'
     view.request.traversed = (u'artikel', u'03')
@@ -499,7 +497,6 @@ def test_pagination_dict_should_have_correct_entries(testserver, testbrowser):
     assert view.pagination['next_page_title'] == (
         u'Sogar die eckige Flasche kommt zur\xfcck')
 
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     view.request.traversed = ('artikel', '03')
     view.request.route_url.return_value = '/'
@@ -511,16 +508,15 @@ def test_pagination_dict_should_have_correct_entries(testserver, testbrowser):
 
 
 def test_pagination_next_title_should_be_in_html(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/artikel/03/seite-2' % testserver.url)
+    browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
+
     assert 'Auf Seite 3' in browser.contents
     assert 'Sogar die eckige Flasche kommt' in browser.contents
 
 
 def test_pagination_urls_list_should_have_correct_entries_paged_article(
-        testserver):
+        application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-
     view = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     view.request.path_info = u'article/03/seite-2'
     view.request.traversed = ('artikel', '03')
@@ -532,9 +528,8 @@ def test_pagination_urls_list_should_have_correct_entries_paged_article(
 
 
 def test_pagination_urls_list_should_have_correct_entries_single_article(
-        testserver):
+        application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-
     view = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     view.request.path_info = u'article/01'
     view.request.traversed = (u'artikel', u'01')
@@ -544,7 +539,7 @@ def test_pagination_urls_list_should_have_correct_entries_single_article(
     assert len(view.pages_urls) == 1
 
 
-def test_pagination_next_page_url_is_working(testserver, testbrowser):
+def test_pagination_next_page_url_is_working(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     view.request.traversed = (u'artikel', u'03')
@@ -553,18 +548,18 @@ def test_pagination_next_page_url_is_working(testserver, testbrowser):
     assert view.pagination['next_page_url'] == '/artikel/03/seite-2'
 
 
-def test_pagination_next_page_url_on_last_page_is_none(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '%s/artikel/03/seite-7' % testserver.url)
-    content = '<span class="icon-pagination-next">Vor</span>'
-
-    assert content in browser.contents
-
-
-def test_pagination_prev_page_url_is_working(testserver, testbrowser):
+def test_pagination_next_page_url_on_last_page_is_none(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    view = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
+    view.request.path_info = u'article/03/seite-7'
+    view.request.traversed = (u'artikel', u'03')
+    view.request.route_url.return_value = '/'
 
+    assert view.pagination['next_page_url'] is None
+
+
+def test_pagination_prev_page_url_is_working(application):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
     view.request.path_info = u'article/03/seite-2'
     view.request.traversed = (u'artikel', u'03')
@@ -573,8 +568,7 @@ def test_pagination_prev_page_url_is_working(testserver, testbrowser):
     assert view.pagination['prev_page_url'] == u'/artikel/03'
 
 
-def test_pagination_prev_page_url_on_first_page_is_none(
-        testserver, testbrowser):
+def test_pagination_prev_page_url_on_first_page_is_none(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     view.request.traversed = ('artikel', '03')
@@ -629,7 +623,7 @@ def test_gallery_should_have_correct_js_view(testserver, testbrowser):
     assert "'type': 'gallery'," in bc
 
 
-def test_iqd_mobile_settings_are_filled(testserver, testbrowser):
+def test_iqd_mobile_settings_are_filled(application):
     # tested just as examlpe for an article here, all possible combinations
     # are tested in test_banner.py integration tests
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')

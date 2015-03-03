@@ -226,13 +226,13 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def comments(self):
         return zeit.web.core.comments.get_thread(
-            unique_id=self.context.uniqueId, request=self.request)
+            self.context.uniqueId, destination=self.request.url)
 
     @zeit.web.reify
     def serie(self):
         if self.context.serie is None:
             return ''
-        return self.context.serie.replace(' ', '').lower()
+        return self.context.serie.serienname.replace(' ', '').lower()
 
     @zeit.web.reify
     def linkreach(self):

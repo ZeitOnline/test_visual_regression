@@ -4,4 +4,11 @@
   <status>Online</status>
   <external>false</external>
   <display_name>Otto Meyer</display_name>
+  <column_teaser_image xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  src="http://xml.zeit.de/zeit-online/cp-content/ig-3/ig-3-zon-column.png"
+  type="png" align="left" publication-date="">
+    <bu py:pytype="str">Der Lobbyist Peter Hochegger (Archivfoto von 2010)</bu>
+    <copyright py:pytype="str">© Roland Schlager/dpa</copyright>
+  </column_teaser_image>
 </author>

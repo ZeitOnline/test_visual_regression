@@ -6,5 +6,6 @@
     <adapter factory="zeit.seo.seo.SEO" />
     <adapter factory="zeit.seo.seo.seo_dav_properties" />
 
-    <utility factory="zeit.web.core.template.ImageScales" provides="zeit.web.core.interfaces.IImageScales"/>
+    <utility factory="zeit.web.core.sources.ImageScales" provides="zeit.web.core.interfaces.IImageScales"/>
+    <utility factory="zeit.web.core.sources.TeaserMapping" provides="zeit.web.core.interfaces.ITeaserMapping"/>
 </configure>

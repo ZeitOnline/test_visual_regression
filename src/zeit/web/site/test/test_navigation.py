@@ -20,10 +20,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     assert len(html('.main_nav')) == 1, (
         'just one .main_nav should be present')
 
-    assert len(html('.main_nav > div')) == 9, ('nine divs within .main_nav')
-
-    assert '</div><div class="main_nav__date"' in html_str, (
-        'don\'t break line here, due to inline-block state')
+    assert len(html('.main_nav > div')) == 7, ('seven divs within .main_nav')
 
     assert len(html('.main_nav > div.logo_bar >'
                     'div.logo_bar__image')) == 1, 'just one .logo_bar__image'
@@ -53,12 +50,6 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     assert len(html('.main_nav > div.main_nav__search'
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__search w/ data-dropdown=true')
-
-    assert len(html('.main_nav > div.main_nav__tags')) == 1, (
-        'just one .main_nav__tags')
-
-    assert len(html('.main_nav > div.main_nav__date')) == 1, (
-        'just one .main_nav__date')
 
     assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
 
@@ -156,7 +147,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     html = lxml.html.fromstring(html_str).cssselect
 
     # Community
-    assert html('a[href="//community.zeit.de/user/login?destination='
+    assert html('a[href*="/user/login?destination='
                 'http://www.zeit.de/index"]'
                 '[rel="nofollow"]'
                 '[class="user"]'
@@ -164,7 +155,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'Community login is missing')
 
     # Logo
-    assert html('a[href="//www.zeit.de/index"]'
+    assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]'
                 '[class="icon-zon-logo-desktop"]'
                 '[id="hp.global.topnav.centerpages.logo"]')[0] is not None, (
@@ -204,27 +195,6 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                 '[type="search"][placeholder="Suche"]'
                 '[tabindex="1"]')[0] is not None, (
         'No search input present')
-
-
-def test_nav_tags_should_produce_markup(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation/navigation-tags.tpl')
-    mock_view = mock.Mock()
-    mock_view.request.host = 'www.zeit.de'
-    mock_view.topiclinks = [('Label 1', 'http://link_1'),
-                            ('Label 2', 'http://link_2'),
-                            ('Label 3', 'http://link_3')]
-    mock_view.topiclink_title = 'my title'
-    html_str = tpl.render(view=mock_view)
-    html = lxml.html.fromstring(html_str).cssselect
-
-    assert html('span.main_nav__tags__label')[0].text == 'my title', (
-        'Tags label is not present')
-    assert html('ul')[0] is not None, 'A list for the tags is not present.'
-    assert len(html('ul li')) == 3, 'We expect 3 items in this list'
-    assert html('ul li a')[0].attrib['href'] == 'http://link_1'
-    assert html('ul li a')[0].attrib['title'] == 'Label 1'
-    assert html('ul li a')[0].text == 'Label 1'
 
 
 # integration testing
@@ -343,24 +313,6 @@ def test_cp_has_valid_search_structure(testserver, testbrowser):
         'Element input.search__input is invalid')
 
 
-def test_hp_has_valid_tag_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    assert 'Schwerpunkte' in html('span.main_nav__tags__label')[0].text, (
-        'Element main_nav__tags__label is invalid')
-    assert html('ul'), 'Missing ul'
-
-
-def test_hp_has_valid_nav_date_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    date = '3. Dezember 2014, 12:50 Uhr'
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    assert html('div.main_nav__date')[0].text == date, (
-        'Date is invalid')
-
-
 @pytest.fixture(scope='session', params=(
     (320, 480, 1), (520, 960, 1), (768, 1024, 0), (980, 1024, 0)))
 def screen_size(request):
@@ -384,10 +336,10 @@ def test_zon_main_nav_has_correct_structure(
     main_nav__community = driver.find_elements_by_class_name(
         'main_nav__community')[0]
     logo_bar__menue = driver.find_elements_by_class_name('logo_bar__menue')[0]
-    main_nav__tags = driver.find_elements_by_class_name('main_nav__tags')[0]
     main_nav__ressorts = driver.find_elements_by_class_name(
         'main_nav__ressorts')[0]
-    main_nav__date = driver.find_elements_by_class_name('main_nav__date')[0]
+    header__tags = driver.find_elements_by_class_name('header__tags')[0]
+    header__date = driver.find_elements_by_class_name('header__date')[0]
     main_nav__services = driver.find_elements_by_class_name(
         'main_nav__services')[0]
     main_nav__classifieds = driver.find_elements_by_class_name(
@@ -402,9 +354,9 @@ def test_zon_main_nav_has_correct_structure(
         # burger menue is visible
         assert logo_bar__menue.is_displayed()
         # tags are hidden
-        assert main_nav__tags.is_displayed() is False
+        assert header__tags.is_displayed() is False
         # date bar is hidden
-        assert main_nav__date.is_displayed() is False
+        assert header__date.is_displayed() is False
         # services li hidden from 4th elem on
         serv_li = main_nav__services.find_elements_by_tag_name('li')
         for li in serv_li[:3]:
