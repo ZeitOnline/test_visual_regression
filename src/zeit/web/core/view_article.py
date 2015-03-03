@@ -232,7 +232,7 @@ class Article(zeit.web.core.view.Content):
     def serie(self):
         if self.context.serie is None:
             return ''
-        return self.context.serie.replace(' ', '').lower()
+        return self.context.serie.serienname.replace(' ', '').lower()
 
     @zeit.web.reify
     def linkreach(self):
