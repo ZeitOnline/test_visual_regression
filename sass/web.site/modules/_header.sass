@@ -1,0 +1,38 @@
+.header
+    padding-bottom: $fine
+    +respond-min($break-tablet-min)
+        padding: $fine $petite
+
+.header__metadata
+    +clearfix
+    color: $zon_dark_grey
+    display: none
+    font-size: $font-11px
+    letter-spacing: $zon-letter-spacing-l
+    line-height: 1rem
+    text-transform: uppercase
+    +respond-min($break-tablet-min)
+        display: block
+
+.header__tags
+    display: inline-block
+
+.header__tags__label
+    font-weight: bold
+    padding-right: 1em
+
+.header__tags__link
+    // normal, hover, active, visited, focus
+    +link-colors($zon_dark_grey, $color-link--hover, $color-link--active, $zon_dark_grey, $color-link--focus)
+    border-radius: $tiny
+    border: 1px solid $zon_light_grey
+    display: inline-block
+    margin: 0 9px 5px 0
+    padding: 4px 7px 1px
+    &:hover
+        background-color: $zon_lighter_grey
+
+.header__date
+    float: right
+    font-weight: bold
+    padding-top: 5px
