@@ -462,9 +462,12 @@ def _existing_image(asset_id, image_base_name, image_patterns, ext):
 
 @zeit.web.register_global
 def get_column_image(teaser):
-    # XXX Needs testing and exception handling
-    return zeit.web.core.interfaces.ITeaserImage(
-        teaser.authorships[0].target.column_teaser_image)
+    try:
+        return zeit.web.core.interfaces.ITeaserImage(
+            teaser.authorships[0].target.column_teaser_image)
+    except AttributeError:
+        log.warn('Teaser {} has no authorships'.format(getattr(
+            teaser, 'uniqueId', 'unknown')))
 
 
 @zeit.web.register_global
