@@ -1,73 +1,69 @@
-.article__pagination
+.pagination
     font-size: remify(14px)
     margin: remify(50px) 0 0
     a
         // normal, hover, active, visited, focus
         +link-colors($zon_mid_grey, $color-link--hover, $color-link--active, $zon_mid_grey, $color-link--focus)
+    &__a11y-title
+        +visuallyhidden
+    &__button
+        +zon-button-inky
+        font-weight: normal
+        line-height: remify(18px)
+        margin: 0
+        &--previous
+            &:before
+                content: "\27E8" // \27E9 \2329 \3008
+                padding-right: .5em
+        &--next
+            &:after
+                content: "\27E9" // \27E9 \232A \3009
+                padding-left: .5em
+    &__nexttitle
+        display: none
+        letter-spacing: $zon-letter-spacing-s
+        margin-left: 1em
 
-.article__pagination__button
-    +zon-button-inky
-    font-weight: normal
-    line-height: remify(18px)
-    margin: 0
-
-.article__pagination__button--previous
-    &:before
-        content: "\27E8" // \27E9 \2329 \3008
-        padding-right: .5em
-
-.article__pagination__button--next
-    &:after
-        content: "\27E9" // \27E9 \232A \3009
-        padding-left: .5em
-
-.article__pagination__nexttitle
-    display: none
-    letter-spacing: $zon-letter-spacing-s
-    margin-left: 1em
-
-.article__pager
+.pager
     letter-spacing: $zon-letter-spacing-m
     line-height: 2
     margin: 2em 0 0
     padding: 0
-
-.article__pager__label
-    display: none
-    font-weight: bold
-
-.article__pager__number
-    display: none
-    &:after
-        color: $zon_mid_grey
-        content: "/"
-    a
-        padding: 0 1em
+    &__label
+        display: none
+        font-weight: bold
+    &__number
+        display: none
+        &:after
+            color: $zon_mid_grey
+            content: "/"
+        a
+            padding: 0 1em
+            display: inline-block
+        &--current
+            a
+                // normal, hover, active, visited, focus
+                +link-colors($zon-charcoal, $color-link--hover, $color-link--active, $zon-charcoal, $color-link--focus)
+    &__all
         display: inline-block
-
-.article__pager__number--current
-    a
-        // normal, hover, active, visited, focus
-        +link-colors($zon-charcoal, $color-link--hover, $color-link--active, $zon-charcoal, $color-link--focus)
-
-.article__pager__all
-    display: inline-block
 
 +respond-min($break-tablet-min)
-    .article__pagination__button--previous
-        display: none
-    .article__pagination__nexttitle
-        display: inline
-    .article__pager
+    .pagination
+        &__button
+            &--previous
+                display: none
+        &__nexttitle
+            display: inline
+    .pager
         margin-top: 7em
-    .article__pager__label,
-    .article__pager__number
-        display: inline-block
-    .article__pager__all
-        padding-left: 1em
-    .article__pager__who
-        display: none
-    .article__pager__what
-        &:first-letter
-            color: inherit
-            text-transform: uppercase
+        &__label,
+        &__number
+            display: inline-block
+        &__all
+            padding-left: 1em
+        &__who
+            display: none
+        &__what
+            &:first-letter
+                color: inherit
+                text-transform: uppercase
