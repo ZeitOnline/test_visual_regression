@@ -311,6 +311,7 @@ def test_get_column_image_should_return_an_image_or_none(application):
     img = zeit.web.core.template.get_column_image(
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
+
     assert type(img) == zeit.web.core.centerpage.Image
     assert zeit.web.core.template.get_column_image(None) is None
 
