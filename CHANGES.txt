@@ -19,6 +19,8 @@ Change log for zeit.web
 
 - Fixes for IE8
 
+- Refactor header topics on CP
+
 
 1.15.2 (2015-02-24)
 -----------------
