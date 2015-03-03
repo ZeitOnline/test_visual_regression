@@ -13,7 +13,7 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    {% set wt_kennung = 'redaktion.' + view.ressort|lower + '.' + view.sub_ressort|lower + '.' + view.serie|lower + '.' + view.type|lower + '.online' %}
+    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + view.serie | lower + '.' + view.type | lower + '.online' %}
 
     var Z_WT_KENNUNG = "{{ wt_kennung }}|{{ request.host + request.path }}";
 

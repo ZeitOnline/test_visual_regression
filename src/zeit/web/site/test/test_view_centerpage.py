@@ -589,7 +589,7 @@ def test_series_select_should_navigate_away(selenium_driver, testserver):
         if option.text == 'Rekorder':
             option.click()
             break
-    driver.implicitly_wait(10) # seconds
+    driver.implicitly_wait(10)  # seconds
     assert '/serie/rekorder' in driver.current_url
 
 
