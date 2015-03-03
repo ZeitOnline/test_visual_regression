@@ -67,19 +67,19 @@
                 <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13" cp:type="teaser" module="zon-small">
                     <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-02" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008"/>
                 </container>
-                <container cp:__name__="id-33b2edb2-db8a-415d-bc05-c0e11e238029" cp:type="teaser" module="zon-column">
+                <container cp:__name__="id-33b2edb2-db8a-415d-bc05-c0e11e238029" cp:type="teaser" module="zon-small">
                     <block author="Theo Sommer" contenttype="article" date-first-released="2014-10-21T05:07:53.619066+00:00" date-last-modified="2014-10-21T05:06:54+00:00" date-last-published="2014-10-21T05:07:53.619066+00:00" expires="" href="http://xml.zeit.de/zeit-online/cp-content/kolumne" issue="43" last-semantic-change="2014-10-21T05:06:49.245555+00:00" publication-date="" ressort="Politik" serie="Fünf vor acht" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2014"/>
                 </container>
                 <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e14" cp:type="teaser" module="zon-small">
                     <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-05" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-05" year="2008"/>
                 </container>
-                <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-series">
+                <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-small">
                     <block author="Thorsten Schröder" contenttype="article" expires="" href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" issue="44" publication-date="" ressort="Digital" serie="App-Kritik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" xml:base="digital/index.lead" year="2014"/>
                 </container>
-                <container cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9ddshjdsjkdsjk" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                <container cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d" cp:type="teaser" module="zon-small" hide-dupes="True" visible="True">
                     <block author="Elisabeth Raether" contenttype="gallery" date-first-released="" date-last-modified="2014-04-15T10:11:45+00:00" date-last-published="" expires="" href="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" issue="17" last-semantic-change="2014-04-16T06:00:00+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" year="2014"/>
                 </container>
-                <container cp:type="teaser" module="buttons" cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12">
+                <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="buttons">
                     <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" uniqueId="http://xml.zeit.de/blogs/nsu-blog-bouffier" year="2015" issue="8" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/nsu-prozess-blog/2015/02/25/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
                 </container>
             </region>

@@ -68,7 +68,7 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
-        <container cp:type="teaser" module="zon-series" cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa">
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa">
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" year="2014" issue="44" ressort="Digital" serie="App-Kritik" contenttype="article" publication-date="" expires="" author="Thorsten Schröder" xml:base="digital/index.lead"></block>
         </container>
         <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
