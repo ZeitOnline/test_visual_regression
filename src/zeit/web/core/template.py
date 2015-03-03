@@ -140,12 +140,16 @@ def hide_none(string):
 def get_teaser_layout(teaser_block):
     try:
         layout = teaser_block.layout.id
-        teaser = list(teaser_block)[0]
-    except (AttributeError, IndexError):
+    except AttributeError:
         return 'default'
 
-    if teaser.serie:
-        layout = teaser.serie.column and 'zon-column' or 'zon-series'
+    try:
+        serie = list(teaser_block)[0].serie
+    except (AttributeError, IndexError, TypeError):
+        serie = None
+
+    if serie:
+        layout = serie.column and 'zon-column' or 'zon-series'
 
     return zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)

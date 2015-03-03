@@ -225,8 +225,7 @@ def test_filter_strftime_works_as_expected():
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
-def test_cp_teaser_with_comments_should_get_count(
-        monkeyagatho, testserver, testbrowser):
+def test_cp_teaser_with_comments_should_get_count(monkeyagatho, application):
     comment_count = zeit.web.core.template.get_teaser_commentcount(
         'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
     assert comment_count == 125
@@ -237,7 +236,7 @@ def test_cp_teaser_with_comments_should_get_count(
     assert comment_count is None
 
 
-def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
+def test_zon_large_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.layout.id = 'leader'
     teaser = zeit.web.core.template.get_teaser_layout(block)
@@ -250,7 +249,7 @@ def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
     assert teaser == 'zon-large'
 
 
-def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
+def test_zon_small_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.layout.id = 'text-teaser'
     teaser = zeit.web.core.template.get_teaser_layout(block)
@@ -269,14 +268,14 @@ def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
     assert teaser == 'zon-small'
 
 
-def test_teaser_fullwidth_mapping_is_working_as_expected(testserver):
+def test_teaser_fullwidth_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.layout.id = 'leader-fullwidth'
     teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-fullwidth'
 
 
-def test_hide_teaser_mapping_is_working_as_expected(testserver):
+def test_hide_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.layout.id = 'archive-print-volume'
     teaser = zeit.web.core.template.get_teaser_layout(block)
@@ -304,7 +303,27 @@ def test_hide_teaser_mapping_is_working_as_expected(testserver):
     assert teaser == 'hide'
 
 
-def test_function_get_image_pattern_is_working_as_expected(testserver):
+def test_teaser_layout_for_columns_should_be_adjusted_accordingly(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/kolumne')
+    block = mock.Mock()
+    block.layout.id = 'zon-small'
+    block.__iter__ = lambda _: iter([article])
+    teaser = zeit.web.core.template.get_teaser_layout(block)
+    assert teaser == 'zon-column'
+
+
+def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik')
+    block = mock.Mock()
+    block.layout.id = 'zon-small'
+    block.__iter__ = lambda _: iter([article])
+    teaser = zeit.web.core.template.get_teaser_layout(block)
+    assert teaser == 'zon-series'
+
+
+def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
     assert teaser == ['zon-large']
