@@ -21,19 +21,19 @@ def screen_size(request):
     return request.param
 
 
-def test_area_main_should_filter_teasers():
+def test_area_main_should_filter_teasers(application):
     context = mock.MagicMock()
 
     def create_mocked_teaserblocks():
         tb_large = mock.MagicMock()
         tb_large.layout.id = 'zon-large'
         tb_large.__len__.return_value = 2
-        tb_large.__iter__.return_value = iter(['article'])
+        tb_large.__iter__ = lambda _: iter(['article'])
 
         tb_small = mock.MagicMock()
         tb_small.layout.id = 'zon-small'
         tb_small.__len__.return_value = 2
-        tb_small.__iter__.return_value = iter(['article'])
+        tb_small.__iter__ = lambda _: iter(['article'])
 
         tb_no_layout = mock.MagicMock()
         tb_no_layout.layout = None
@@ -45,7 +45,7 @@ def test_area_main_should_filter_teasers():
 
         tb_no_teaser_in_block = mock.MagicMock()
         tb_no_teaser_in_block.layout.id = 'zon-small'
-        tb_no_teaser_in_block.__iter__.return_value = iter([])
+        tb_no_teaser_in_block.__iter__ = lambda _: iter([])
 
         return [tb_large, tb_small, tb_no_layout, tb_no_layout_id,
                 tb_no_teaser_in_block]
