@@ -11,14 +11,6 @@ import zeit.web.site.spektrum
 import zeit.web.site.view_centerpage
 import zeit.web.core.centerpage
 
-screen_sizes = ((320, 480, True), (520, 960, True),
-                (768, 1024, False), (980, 1024, False))
-
-
-@pytest.fixture(scope='session', params=screen_sizes)
-def screen_size(request):
-    return request.param
-
 
 def test_spektrum_teaser_object_should_have_expected_attributes():
     url = pkg_resources.resource_filename(

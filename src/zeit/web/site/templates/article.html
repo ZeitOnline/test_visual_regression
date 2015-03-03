@@ -9,7 +9,7 @@
 
 {% block main %}
     <article class="article" id="js-article">
-        {% profile %}
+    {% profile %}
         <h1 class="article-heading">
             <span class="kicker">
                 {{- view.supertitle | hide_none -}}
@@ -18,6 +18,11 @@
                 {{- view.title | hide_none -}}
             </span>
         </h1>
+        {% if view.pagination and view.pagination.current > 1 %}
+        <div class="article__page-teaser">
+            Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
+        </div>
+        {% else %}
         <div class="summary">
             {{ view.subtitle | hide_none }}
         </div>
@@ -26,8 +31,6 @@
                 {{ blocks.meta_author(view.authors, class="byline__author") }}
             {% endif %}
         </div>
-        {% endprofile %}
-        {% profile %}
         <div class="metadata">
             {% if view.source_label -%}
             <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
@@ -43,8 +46,9 @@
                 {{- view.date_last_modified | format_date(view.show_date_format) -}}
             </time>
         </div>
-        {% endprofile %}
-        {% profile %}
+        {% endif %}
+    {% endprofile %}
+    {% profile %}
         <div class="article-body">
             {% block article_pages %}
                 <div class="article-page">
@@ -53,12 +57,10 @@
             {% endblock article_pages %}
 
             {% block article_pagination %}
-                {% if view.pagination %}
-                    {{ blocks.print_pagination( view.pagination ) }}
-                {% endif %}
+                {% include "zeit.web.site:templates/inc/article/pagination.tpl" ignore missing %}
             {% endblock article_pagination %}
         </div>
-        {% endprofile %}
+    {% endprofile %}
     </article>
     {% profile %}
     <section class="comment-section" id="comments">

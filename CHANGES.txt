@@ -4,17 +4,28 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
+
+- ZON-1461: Add pagination
+
+- ZON-1305: Add Schema.org/Organization
+
 - ZON-1446: Implement active state for main navigation items
 
 - ZON-1394: Enable a supertitle fallback for linkobjects and galleries
 
+- BUG-181: Make ZMO comments work again
+
 - ZON-1459: Implement full view ("Komplettansicht") for articles
 
-- Fix navigation: fix bug where more is on the wrong side of the fence
+- FIX: Fix navigation bug where more is on the wrong side of the fence
+
+- FIX: Snapshot on homepage now with description
 
 - Fixes for video stage
 
 - Fixes for IE8
+
+- Refactor header topics on CP
 
 
 1.15.2 (2015-02-24)

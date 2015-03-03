@@ -24,7 +24,7 @@ def test_get_entire_thread(dummy_request, monkeyagatho):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, dummy_request, reverse=True)
+        unique_id, destination=dummy_request.url, reverse=True)
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
@@ -37,7 +37,7 @@ def test_paging_should_not_affect_comment_threads(
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, dummy_request, reverse=True)
+        unique_id, destination=dummy_request.url, reverse=True)
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
