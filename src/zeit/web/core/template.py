@@ -465,7 +465,7 @@ def get_column_image(teaser):
     try:
         return zeit.web.core.interfaces.ITeaserImage(
             teaser.authorships[0].target.column_teaser_image)
-    except AttributeError:
+    except (AttributeError, TypeError):
         log.warn('Teaser {} has no authorships'.format(getattr(
             teaser, 'uniqueId', 'unknown')))
 

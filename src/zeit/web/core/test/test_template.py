@@ -313,3 +313,7 @@ def test_get_column_image_should_return_an_image_or_none(application):
             'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
     assert type(img) == zeit.web.core.centerpage.Image
     assert zeit.web.core.template.get_column_image(None) is None
+
+    teaser = mock.Mock()
+    teaser.authorships = None
+    assert zeit.web.core.template.get_column_image(teaser) is None
