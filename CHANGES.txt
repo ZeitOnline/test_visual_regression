@@ -4,6 +4,7 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
+- ZON-1391: Adapt parquet styles
 
 - ZON-1461: Add pagination
 
