@@ -23,6 +23,7 @@ import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
+import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.comments
@@ -74,7 +75,8 @@ settings = {
         'egg://zeit.cms.content/navigation.xml'),
     'vivi_zeit.cms_source-products': (
         'egg://zeit.web.core/data/config/products.xml'),
-    'vivi_zeit.cms_source-serie': 'egg://zeit.cms.content/serie.xml',
+    'vivi_zeit.cms_source-serie': (
+        'egg://zeit.web.core/data/config/series.xml'),
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
     'vivi_zeit.web_iqd-mobile-ids': (
@@ -113,6 +115,7 @@ settings = {
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (
         'egg://zeit.web.core/data/config/series.xml'),
+    'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
@@ -268,7 +271,7 @@ def dummy_request(request, config):
 @pytest.fixture
 def agatho():
     return zeit.web.core.comments.Agatho(
-        agatho_url='%s/agatho/thread/' % settings['agatho_host'])
+        settings['agatho_host'] + '/agatho/thread/')
 
 
 @pytest.fixture
@@ -370,8 +373,11 @@ def appbrowser(application):
 @pytest.fixture
 def monkeyagatho(monkeypatch):
     def collection_get(self, unique_id):
-        path = zeit.web.core.comments.path_of_article(unique_id)
-        return lxml.etree.parse(''.join([self.entry_point, path]))
+        path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
+        try:
+            return lxml.etree.parse(self.agatho_host + path)
+        except IOError:
+            return
 
     monkeypatch.setattr(
         zeit.web.core.comments.Agatho, 'collection_get', collection_get)
@@ -384,6 +390,7 @@ def image_group_factory():
         masterimage = None
 
     class MockRepositoryImage(object):
+
         def __init__(self, size, name):
             self._size = size
             self.uniqueId = name

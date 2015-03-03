@@ -9,9 +9,9 @@ import zeit.web.core.navigation
 import selenium.webdriver
 
 
-def test_nav_markup_should_match_css_selectors(jinja2_env):
+def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation.html')
+        'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
@@ -20,10 +20,7 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
     assert len(html('.main_nav')) == 1, (
         'just one .main_nav should be present')
 
-    assert len(html('.main_nav > div')) == 9, ('nine divs within .main_nav')
-
-    assert '</div><div class="main_nav__date"' in html_str, (
-        'don\'t break line here, due to inline-block state')
+    assert len(html('.main_nav > div')) == 7, ('seven divs within .main_nav')
 
     assert len(html('.main_nav > div.logo_bar >'
                     'div.logo_bar__image')) == 1, 'just one .logo_bar__image'
@@ -54,16 +51,38 @@ def test_nav_markup_should_match_css_selectors(jinja2_env):
                     '[data-dropdown="true"]')) == 1, (
         'just one .main_nav__search w/ data-dropdown=true')
 
-    assert len(html('.main_nav > div.main_nav__tags')) == 1, (
-        'just one .main_nav__tags')
-
-    assert len(html('.main_nav > div.main_nav__date')) == 1, (
-        'just one .main_nav__date')
+    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
 
 
-def test_nav_services_macro_should_have_expected_links(jinja2_env):
+def test_nav_ressorts_should_produce_markup(application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
+        'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
+    nav = zeit.web.core.navigation.Navigation()
+    nav['hp.global.topnav.links.jobs'] = (
+        zeit.web.core.navigation.NavigationItem(
+            'hp.global.topnav.links.jobs',
+            'Jobs',
+            'http://jobs.zeit.de/'))
+    nav['hp.global.topnav.links.partnersuche'] = (
+        zeit.web.core.navigation.NavigationItem(
+            'hp.global.topnav.links.partnersuche',
+            'Partnersuche',
+            'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
+    mock_view = mock.Mock()
+    html_str = tpl.render(view=mock_view,
+                          navigation=nav, nav_class='primary-nav')
+    html = lxml.html.fromstring(html_str).cssselect
+
+    assert len(html('ul.primary-nav')) == 1
+    assert len(html('ul li.primary-nav__item')) > 1
+    assert len(html('ul li.primary-nav__item a.primary-nav__link')) == (
+        len(html('ul li.primary-nav__item'))), (
+        'Links must have same length a list items.')
+
+
+def test_nav_services_should_have_expected_links(application, jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
     nav = zeit.web.core.navigation.Navigation()
     nav['abo'] = (
         zeit.web.core.navigation.NavigationItem(
@@ -75,9 +94,9 @@ def test_nav_services_macro_should_have_expected_links(jinja2_env):
             'hp.global.topnav.links.shop',
             'Shop',
             'http://shop.zeit.de?et=l6VVNm&et_cid=42&et_lid=175'))
-    request = mock.Mock()
-    request.host = 'www.zeit.de'
-    html_str = tpl.module.main_nav_services(nav, request)
+    mock_view = mock.Mock()
+    html_str = tpl.render(view=mock_view,
+                          navigation=nav, nav_class='primary-nav-services')
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li > a[href="http://www.zeitabo.de/'
@@ -89,7 +108,7 @@ def test_nav_services_macro_should_have_expected_links(jinja2_env):
         'No link for shop.zeit.de')
 
 
-def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
+def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
     nav = zeit.web.core.navigation.Navigation()
     nav['hp.global.topnav.links.jobs'] = (
         zeit.web.core.navigation.NavigationItem(
@@ -102,10 +121,10 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    request = mock.Mock()
-    request.host = 'www.zeit.de'
-    html_str = tpl.module.main_nav_classifieds(nav, request)
+        'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
+    mock_view = mock.Mock()
+    html_str = tpl.render(view=mock_view,
+                          navigation=nav, nav_class='main-nav-classifieds')
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li[data-id="hp.global.topnav.links.jobs"]'
@@ -118,66 +137,47 @@ def test_nav_classifieds_macro_should_have_expected_structure(jinja2_env):
         'Link for partnersuche not present')
 
 
-def test_nav_community_macro_should_render_a_login(jinja2_env):
+def test_nav_contains_essential_elements(application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    request = mock.Mock()
-    request.host = 'www.zeit.de'
-    html_str = tpl.module.main_nav_community(request)
+        'zeit.web.site:templates/inc/navigation/navigation.tpl')
+    mock_view = mock.MagicMock()
+    mock_view.request.host = 'www.zeit.de'
+    mock_view.displayed_last_published_semantic = datetime.datetime.now()
+    html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert html('a[href="http://community.zeit.de/user/login?destination='
+    # Community
+    assert html('a[href*="/user/login?destination='
                 'http://www.zeit.de/index"]'
                 '[rel="nofollow"]'
                 '[class="user"]'
                 '[id="drupal_login"]')[0] is not None, (
         'Community login is missing')
 
-
-def test_nav_main_nav_logo_should_create_a_logo_link(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    request = mock.Mock()
-    request.host = 'www.zeit.de'
-    html_str = tpl.module.main_nav_logo(request)
-    html = lxml.html.fromstring(html_str).cssselect
-
-    assert html('a[href="http://www.zeit.de/index"]'
+    # Logo
+    assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]'
                 '[class="icon-zon-logo-desktop"]'
                 '[id="hp.global.topnav.centerpages.logo"]')[0] is not None, (
         'Logo link is missing')
 
-
-def test_nav_main_nav_burger_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    html_str = tpl.module.main_nav_burger()
-    html = lxml.html.fromstring(html_str).cssselect
-
-    assert html('a')[0] is not None, 'An empty link is not present'
+    # Main menu icon
+    assert html(u'a[aria-label="Hauptmenü"]')[0] is not None, (
+        'Main menu link is missing')
     assert len(html('div.logo_bar__menue__image.main_nav__icon--plain'
                     '.icon-zon-logo-navigation_menu')) == 1, (
         'Logo for bar menu is not present')
     assert len(html('div.logo_bar__menue__image'
                     '.main_nav__icon--hover.icon-zon-logo-'
                     'navigation_menu-hover')) == 1, (
-        "A div for the burger menu is missing.")
+        'A div for the burger menu is missing.')
 
-
-def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    request = mock.Mock()
-    request.host = 'www.zeit.de'
-    html_str = tpl.module.main_nav_search(request)
-    html = lxml.html.fromstring(html_str).cssselect
-
+    # Search
     assert html('form.search'
                 '[accept-charset="utf-8"]'
                 '[method="get"]'
                 '[role="search"]'
-                '[action="http://www.zeit.de/suche/index"]')[0] is not None, (
+                '[action="//www.zeit.de/suche/index"]')[0] is not None, (
         'Form element is not present')
     assert html('label.hideme[for="q"]')[0] is not None, (
         'Hide me label is not present')
@@ -195,52 +195,6 @@ def test_nav_macro_main_nav_search_should_produce_markup(jinja2_env):
                 '[type="search"][placeholder="Suche"]'
                 '[tabindex="1"]')[0] is not None, (
         'No search input present')
-
-
-def test_macro_main_nav_ressorts_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    nav = zeit.web.core.navigation.Navigation()
-    nav['hp.global.topnav.links.jobs'] = (
-        zeit.web.core.navigation.NavigationItem(
-            'hp.global.topnav.links.jobs',
-            'Jobs',
-            'http://jobs.zeit.de/'))
-    nav['hp.global.topnav.links.partnersuche'] = (
-        zeit.web.core.navigation.NavigationItem(
-            'hp.global.topnav.links.partnersuche',
-            'Partnersuche',
-            'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
-
-    request = mock.Mock()
-    request.host = 'www.zeit.de'
-    html_str = tpl.module.main_nav_ressorts(nav, request)
-    html = lxml.html.fromstring(html_str).cssselect
-
-    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
-    assert len(html('ul li.primary-nav__item')) > 1
-    assert len(html('ul li.primary-nav__item a.primary-nav__link')) == (
-        len(html('ul li.primary-nav__item'))), (
-        'Links must have same length a list items.')
-
-
-def test_macro_main_nav_tags_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/navigation_macro.tpl')
-    links = [('Label 1', 'http://link_1'),
-             ('Label 2', 'http://link_2'),
-             ('Label 3', 'http://link_3')]
-    title = 'my title'
-    html_str = tpl.module.main_nav_tags(title, links)
-    html = lxml.html.fromstring(html_str).cssselect
-
-    assert html('span.main_nav__tags__label')[0].text == 'my title', (
-        'Label span is not present')
-    assert html('ul')[0] is not None, 'A list for the tags is not present.'
-    assert len(html('ul li')) == 3, 'We expect 3 items in this list'
-    assert html('ul li a')[0].attrib['href'] == 'http://link_1'
-    assert html('ul li a')[0].attrib['title'] == 'Label 1'
-    assert html('ul li a')[0].text == 'Label 1'
 
 
 # integration testing
@@ -359,32 +313,6 @@ def test_cp_has_valid_search_structure(testserver, testbrowser):
         'Element input.search__input is invalid')
 
 
-def test_cp_has_valid_tag_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    assert 'Schwerpunkte' in html('span.main_nav__tags__label')[0].text, (
-        'Element main_nav__tags__label is invalid')
-    assert html('ul'), 'Missing ul'
-
-
-def test_cp_has_valid_nav_date_structure(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    date = '3. Dezember 2014, 12:50 Uhr'
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    assert html('div.main_nav__date')[0].text == date, (
-        'Date is invalid')
-
-
-def test_nav_date_isnt_shown_when_not_exists(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    assert html('div.main_nav__date')[0].text is None, (
-        'Date shouldnt be shown')
-
-
 @pytest.fixture(scope='session', params=(
     (320, 480, 1), (520, 960, 1), (768, 1024, 0), (980, 1024, 0)))
 def screen_size(request):
@@ -399,7 +327,7 @@ def test_zon_main_nav_has_correct_structure(
     small_screen = screen_size[2]
     screen_width = screen_size[0]
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/centerpage/zeitonline' % testserver.url)
+    driver.get('%s/zeit-online/index' % testserver.url)
 
     main_nav = driver.find_elements_by_class_name('main_nav')[0]
     logo_bar__image = driver.find_elements_by_class_name('logo_bar__image')[0]
@@ -408,10 +336,10 @@ def test_zon_main_nav_has_correct_structure(
     main_nav__community = driver.find_elements_by_class_name(
         'main_nav__community')[0]
     logo_bar__menue = driver.find_elements_by_class_name('logo_bar__menue')[0]
-    main_nav__tags = driver.find_elements_by_class_name('main_nav__tags')[0]
     main_nav__ressorts = driver.find_elements_by_class_name(
         'main_nav__ressorts')[0]
-    main_nav__date = driver.find_elements_by_class_name('main_nav__date')[0]
+    header__tags = driver.find_elements_by_class_name('header__tags')[0]
+    header__date = driver.find_elements_by_class_name('header__date')[0]
     main_nav__services = driver.find_elements_by_class_name(
         'main_nav__services')[0]
     main_nav__classifieds = driver.find_elements_by_class_name(
@@ -426,9 +354,9 @@ def test_zon_main_nav_has_correct_structure(
         # burger menue is visible
         assert logo_bar__menue.is_displayed()
         # tags are hidden
-        assert main_nav__tags.is_displayed() is False
+        assert header__tags.is_displayed() is False
         # date bar is hidden
-        assert main_nav__date.is_displayed() is False
+        assert header__date.is_displayed() is False
         # services li hidden from 4th elem on
         serv_li = main_nav__services.find_elements_by_tag_name('li')
         for li in serv_li[:3]:

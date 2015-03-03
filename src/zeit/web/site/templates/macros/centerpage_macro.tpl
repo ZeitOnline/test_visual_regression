@@ -23,7 +23,7 @@
 {%- endmacro %}
 
 {% macro include_teaser_datetime(teaser) -%}
-    <time class="teaser__datetime" datetime="{{ teaser | mod_date |strftime('%Y-%m-%d %H:%M') }}">{{ get_delta_time(teaser) | hide_none }}</time>
+    <time class="teaser__datetime" datetime="{{ teaser | mod_date | strftime('%Y-%m-%d %H:%M') | hide_none }}">{{ get_delta_time(teaser) | hide_none }}</time>
 {%- endmacro %}
 
 {% macro include_teaser_commentcount(teaser) -%}

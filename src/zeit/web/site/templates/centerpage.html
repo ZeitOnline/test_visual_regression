@@ -9,6 +9,18 @@ Available attributes:
 {% import "zeit.web.site:templates/macros/layout_macro.tpl" as lama_site with context %}
 {% extends "zeit.web.site:templates/layout.html" %}
 
+{% block metadata %}
+    <div class="header__metadata">
+        <div class="header__tags">
+            <span class="header__tags__label">{{ view.topiclink_title }}</span>
+            {% for label, link in view.topiclinks %}
+            <a href="{{ link }}" title="{{ label }}" class="header__tags__link">{{ label }}</a>
+            {% endfor %}
+        </div>
+        <div class="header__date">{{ view.displayed_last_published_semantic | format_date('long') }}</div>
+    </div>
+{% endblock metadata %}
+
 {% block main %}
     {% profile %}
     <div class="main__fullwidth">

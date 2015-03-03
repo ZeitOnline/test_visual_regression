@@ -86,22 +86,28 @@
             </div>
         {% endblock adplace_top %}
         <div class="page__content">
+            {% profile %}
             <header class="header" role="banner">
                 {% block navigation %}
-                    {%- include "zeit.web.site:templates/inc/navigation.html" ignore missing -%}
+                    {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
                 {% endblock navigation %}
+                {% block metadata %}
+                {% endblock metadata %}
             </header>
+            {% endprofile %}
             {% block adplace_billboard %}
                 {{ lama_core.adplace(view.banner(3), view) }}
             {% endblock adplace_billboard %}
             <main class="main" id="main" role="main">
-                {% block main %}Hallo Welt{% endblock main %}
+                {% block main %}{% endblock main %}
             </main>
+            {% profile %}
             <footer class="footer" role="contentinfo">
                 {% block footer %}
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}
             </footer>
+            {% endprofile %}
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}

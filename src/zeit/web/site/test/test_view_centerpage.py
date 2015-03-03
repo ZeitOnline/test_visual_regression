@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import lxml
 import mock
 import pytest
@@ -86,12 +87,13 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(application, jinja2_env):
+def test_default_teaser_should_match_css_selectors(
+        application, jinja2_env, monkeyagatho):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default_refactoring.tpl')
 
     teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    teaser.uniqueId = 'http://xml.zeit.de/artikel/header1'
+    # teaser.uniqueId = 'http://xml.zeit.de/artikel/header1'
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
@@ -103,7 +105,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No headline is present')
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == 'http://xml.zeit.de/artikel/header1', (
+    assert link.attrib['href'] == 'http://xml.zeit.de/artikel/01', (
         'No link is present')
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
         'There is no link title')
@@ -137,10 +139,10 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     assert teaser_co.attrib['href'] == teaser.uniqueId + '#comments', (
         'No comment link href present')
 
-    assert teaser_co.attrib['title'] == '328 Kommentare', (
+    assert teaser_co.attrib['title'] == '129 Kommentare', (
         'No comment link title present')
 
-    assert teaser_co.text == '328 Kommentare', (
+    assert teaser_co.text == '129 Kommentare', (
         'No comment text present')
 
 
@@ -444,8 +446,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_display_copyright_with_nonbreaking_space(
         testserver, testbrowser):
 
-    browser = testbrowser(
-        '%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
 
     copyright = browser.cssselect('.snapshot-caption__item')
 
@@ -461,6 +462,14 @@ def test_snapshot_should_not_be_display_where_no_snapshot_is_present(
 
     assert not browser.cssselect('.snapshot'), (
         'There is an snaphot on a page which should not have one')
+
+
+def test_snapshot_should_have_description_text(testserver, testbrowser):
+
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    description = browser.cssselect('.snapshot-caption')
+    text = u'Die Installation "Cantareira-Wüste" des brasilianischen Künstlers'
+    assert text in description[0].text
 
 
 def test_small_teaser_without_image_has_no_padding_left(
@@ -580,9 +589,8 @@ def test_series_select_should_navigate_away(selenium_driver, testserver):
         if option.text == 'Rekorder':
             option.click()
             break
-    wait = WebDriverWait(driver, 10)
-    element = wait.until(EC.title_is('Serie: Rekorder | ZEIT ONLINE'))
-    assert element
+    driver.implicitly_wait(10)  # seconds
+    assert '/serie/rekorder' in driver.current_url
 
 
 def test_video_stage_video_should_play(selenium_driver, testserver):
@@ -629,3 +637,54 @@ def test_homepage_ressort_is_homepage(testserver):
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.ressort == 'homepage'
+
+
+def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
+    kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
+                               '.teaser-small__kicker'.format(uid))[0]
+    assert kicker.text == 'Zeugenvernehmung'
+
+
+def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    uid = 'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'
+    kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
+                               '.teaser-small__kicker'.format(uid))[0]
+    assert kicker.text == 'Desktop-Bilder'
+
+
+def test_centerpage_header_tags(application, jinja2_env):
+    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
+    view, request = (mock.Mock(),) * 2
+    view.resolve = mock.Mock(return_value=request)
+    view.topiclinks = [('Label 1', 'http://link_1'),
+                       ('Label 2', 'http://link_2'),
+                       ('Label 3', 'http://link_3')]
+    view.topiclink_title = 'My Title'
+    view.displayed_last_published_semantic = datetime.datetime.now()
+
+    html_str = ' '.join(list(tpl.blocks['metadata'](view)))
+    html = lxml.html.fromstring(html_str).cssselect
+    tags = html('.header__tags__link')
+
+    assert len(html('.header__tags')) == 1, 'just one .header__tags'
+    assert html('.header__tags__label')[0].text == 'My Title'
+    assert len(tags) == 3
+    assert tags[0].get('href') == 'http://link_1'
+    assert tags[0].get('title') == 'Label 1'
+    assert tags[0].text == 'Label 1'
+
+
+def test_centerpage_metadata(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    html_str = browser.contents
+    html = lxml.html.fromstring(html_str).cssselect
+    date = '3. Dezember 2014, 12:50 Uhr'
+
+    assert len(html('.header__tags')) == 1, 'just one .header__tags'
+    assert html('.header__tags__label')[0].text == 'Schwerpunkte'
+
+    assert len(html('.header__date')) == 1, 'just one .header__date'
+    assert html('.header__date')[0].text == date, 'Date is invalid'

@@ -102,13 +102,13 @@ def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
     ('{% for item in bad.bad %} foo {% endfor %}',
      'Looping over attributes of unknown variables',
      {}),
-    ('{{ bad|bad }}',
+    ('{{ bad | bad }}',
      'Applying unknown filters to unknown variables',
      {}),
-    ('{{ good|bad }}',
+    ('{{ good | bad }}',
      'Applying unknown filters to known objects',
      {'good': object()}),
-    ('{{ good|bad|bad }}',
+    ('{{ good | bad | bad }}',
      'Chaining unknown filters',
      {'good': object()}),
     ('{% if good is bad %} foo {% endif %}',
@@ -143,7 +143,7 @@ def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
      {})
 ])
 def test_failsafe_rendering(markup, assertion, kw):
-    env = zeit.web.core.template.Environment()
+    env = zeit.web.core.jinja.Environment()
     tpl = env.from_string(markup)
     condition = isinstance(tpl.render(**kw), basestring)
     assert condition, assertion + ' should not bother zeit.web.'

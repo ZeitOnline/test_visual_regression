@@ -3,7 +3,7 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+(function( $, win ) {
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -34,9 +34,10 @@
                 e.preventDefault();
                 var value = $(this).find('option:selected').val();
                 if ( value ) {
-                    window.location.replace('http://www.zeit.de/serie/' + value, '_top');
+                    win.location.href = win.location.protocol +
+                        '//' + win.location.host + '/serie/' + value;
                 }
             } );
         });
     };
-})( jQuery );
+})( jQuery, window );
