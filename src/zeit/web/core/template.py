@@ -141,7 +141,7 @@ def get_teaser_layout(teaser_block):
     try:
         layout = teaser_block.layout.id
     except AttributeError:
-        return 'default'
+        return
 
     try:
         serie = list(teaser_block)[0].serie
