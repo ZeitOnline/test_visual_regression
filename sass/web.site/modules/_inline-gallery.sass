@@ -1,0 +1,140 @@
+$gallery-button-radius: em(35px)
+
+.inline-gallery__wrap
+    margin: 0 auto em(60px)
+
+.inline-gallery
+    .figure__media
+        width: auto
+        max-height: 620px
+        margin: 0 auto
+
+// appear just after bxSlider initialisation
+// needed for "static" galleries
+html.js
+    .inline-gallery
+        visibility: hidden
+    .bx-wrapper
+        .inline-gallery
+            visibility: visible
+
+.figure__caption__pager
+    +respond-min($break-1)
+        display: none
+
+// reset from bxSlider
+.bx-wrapper
+    position: relative
+    +has-layout()
+    +respond-min($break-1)
+        padding-top: $large
+
+    // figure elements in bxSlide
+    figure
+        margin: 0
+        padding: 0
+        clear: none
+    .figure__caption
+        color: $grey--mid
+        padding: 0
+        margin: $small auto 0
+        max-width: none
+        +respond-min($break-1)
+            padding-right: 30%
+    .figure__caption__copyright
+        color: $charcoal
+        a
+            +link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
+            +on-interaction
+                border-color: $charcoal
+
+// controls
+.bx-pager
+    +inline-block
+    color: $grey--mid
+    font-family: $font-tabletgothic
+    font-size: 0.9em
+    height: $gallery-button-radius
+    width: 6em
+    text-align: right
+    line-height: $gallery-button-radius + 0.5em
+    padding-right: $fine
+.bx-controls
+    height: $gallery-button-radius
+    position: absolute
+    top: 0
+    right: 0
+    +respond-max($break-1)
+        display: none
+.bx-controls-direction
+    +inline-block
+.bx-prev,
+.bx-next
+    +inline-block
+    width: $gallery-button-radius
+    height: $gallery-button-radius
+    text-indent: -5000em
+    margin-left: 10px
+    border-radius: 50%
+    background-color: #000
+    background-position: 50% 50%
+    background-size: 20%
+    color: #fff
+    border: none
+    +opacity(0.3)
+    &:hover
+        +opacity(0.7)
+    &:focus
+        outline: 0
+    &.disabled
+        +opacity(0.1)
+.bx-overlay-prev,
+.bx-overlay-next
+    @extend .bx-next
+    margin: 0
+    position: absolute
+    top: em(10px)
+    +respond-min($break-1)
+        top: 50%
+        margin-top: -$gallery-button-radius
+        width: $gallery-button-radius * 2
+        height: $gallery-button-radius * 2
+        +opacity(0)
+.bx-overlay-prev
+    left: em(10px)
+.bx-overlay-next
+    right: em(10px)
+
+.bx-viewport
+    +on-interaction
+        .bx-overlay-prev,
+        .bx-overlay-next
+            +opacity(0.3)
+
+.bx-zone-prev,
+.bx-zone-next
+    width: 15%
+    height: 20%
+    position: absolute
+    z-index: 9999
+    cursor: pointer
+    display: none
+    // background-color: rgba(255,0,0,.1)
+    +respond-min($break-1)
+        width: 50%
+        height: 90%
+        display: block
+.bx-zone-prev
+    &:hover
+        .bx-overlay-prev
+            +opacity(0.7)
+.bx-zone-next
+    right: 0
+    &:hover
+        .bx-overlay-next
+            +opacity(0.7)
+
+// elements not in actual use
+.bx-controls-auto,
+.bx-loading
+    display: none
