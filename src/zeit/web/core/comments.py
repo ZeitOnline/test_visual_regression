@@ -18,15 +18,15 @@ def path_of_article(unique_id):
 
 class Agatho(object):
 
-    def __init__(self, agatho_url, timeout=5.0):
-        self.entry_point = agatho_url
+    def __init__(self, agatho_host, timeout=5.0):
+        self.agatho_host = agatho_host
         self.timeout = timeout
 
     def collection_get(self, unique_id):
         try:
-            response = requests.get(
-                '%s%s' % (self.entry_point, path_of_article(unique_id)),
-                timeout=self.timeout)
+            path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
+            response = requests.get(self.agatho_host + path,
+                                    timeout=self.timeout)
         except:  # yes, we really do want to catch *all* exceptions here!
             return
         if response.ok:
@@ -102,43 +102,49 @@ def comment_as_dict(comment):
     )
 
 
-def get_thread(unique_id, request, reverse=False):
+def get_thread(unique_id, destination=None, reverse=False, just_count=False):
     """Return a dict representation of the comment thread of the given
-    article."""
+    article.
 
-    if 'agatho_host' not in request.registry.settings:
-        return
-    api = Agatho(
-        agatho_url='%s/agatho/thread/' % request.registry.settings.agatho_host,
-        timeout=float(request.registry.settings.community_host_timeout_secs)
-    )
+    :param destination: URL of the redirect destination
+    :param reverse: Reverse the chronological sort order of comments
+    :param just_count: Only return an integer to save processing time
+    :rtype: dict, int or None
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    agatho_host = conf.get('agatho_host', '')
+    community_host = conf.get('community_host', '')
+    timeout = float(conf.get('community_host_timeout_secs', 5))
+
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '', 1)
+
+    api = Agatho(agatho_host + '/agatho/thread', timeout=timeout)
     thread = api.collection_get(unique_id)
+
     if thread is None:
         return
+
+    comment_count = thread.xpath('/comments/comment_count/text()')
+
+    if just_count and comment_count:
+        return dict(comment_count=int(comment_count[0]))
 
     # Read more about sorting in multiple passes here:
     # https://docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
     comments = list(comment_as_dict(c) for c in thread.xpath('//comment'))
-
     comments = sorted(comments, key=lambda x: x['cid'])
-
     comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
                       reverse=reverse)
 
     try:
         return dict(
             comments=comments,
-            comment_count=int(
-                thread.xpath('/comments/comment_count')[0].text),
-            nid=thread.xpath('/comments/nid')[0].text,
-            # TODO: these urls should point to ourselves,
-            # not to the 'back-backend'
+            comment_count=int(comment_count[0]),
+            nid=thread.xpath('/comments/nid/text()')[0],
             comment_post_url='%s/agatho/thread/%s?destination=%s' % (
-                request.registry.settings.agatho_host,
-                '/'.join(request.traversed),
-                request.url),
-            comment_report_url='%s/services/json' % (
-                request.registry.settings.community_host))
+                agatho_host, path, destination),
+            comment_report_url='%s/services/json' % (community_host))
     except (IndexError, AttributeError):
         return
 

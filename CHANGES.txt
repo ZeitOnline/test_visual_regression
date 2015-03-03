@@ -3,10 +3,13 @@ Change log for zeit.web
 
 1.16 (unreleased)
 -----------------
+- ZON-1305: Add Schema.org/Organization
 
 - ZON-1446: Implement active state for main navigation items
 
 - ZON-1394: Enable a supertitle fallback for linkobjects and galleries
+
+- BUG-181: Make ZMO comments work again
 
 - ZON-1459: Implement full view ("Komplettansicht") for articles
 

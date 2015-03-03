@@ -147,7 +147,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     html = lxml.html.fromstring(html_str).cssselect
 
     # Community
-    assert html('a[href="//community.zeit.de/user/login?destination='
+    assert html('a[href*="/user/login?destination='
                 'http://www.zeit.de/index"]'
                 '[rel="nofollow"]'
                 '[class="user"]'
@@ -155,7 +155,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'Community login is missing')
 
     # Logo
-    assert html('a[href="//www.zeit.de/index"]'
+    assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]'
                 '[class="icon-zon-logo-desktop"]'
                 '[id="hp.global.topnav.centerpages.logo"]')[0] is not None, (

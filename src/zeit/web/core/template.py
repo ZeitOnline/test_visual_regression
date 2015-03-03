@@ -300,7 +300,7 @@ def default_image_url(image,
         signature = repoze.bitblt.transform.compute_signature(
             width, height, 'time')
 
-        if image.uniqueId is None:
+        if getattr(image, 'uniqueId', None) is None:
             return
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(
@@ -402,10 +402,9 @@ def get_attr(*args):
 
 @zeit.web.register_global
 def get_teaser_commentcount(unique_id):
-    index = '/' + urlparse.urlparse(unique_id).path[1:]
-    count = zeit.web.core.comments.comments_per_unique_id().get(index, 0)
-    if int(count) >= 5:
-        return count
+    thread = zeit.web.core.comments.get_thread(unique_id, just_count=True)
+    if thread and thread.get('comment_count', 0) >= 5:
+        return thread['comment_count']
 
 
 @zeit.web.register_global

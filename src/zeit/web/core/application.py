@@ -1,9 +1,10 @@
 import base64
 import logging
 import os.path
+import pkg_resources
 import re
 import urlparse
-import pkg_resources
+import warnings
 
 import grokcore.component
 import jinja2.ext
@@ -189,6 +190,8 @@ class Application(object):
         config.set_authorization_policy(
             pyramid.authorization.ACLAuthorizationPolicy())
 
+        warnings.warn('The authenticated user_id API will be deprecated in'
+                      'pyramid 1.5', DeprecationWarning)
         config.add_request_method(pyramid.security.authenticated_userid,
                                   'authenticated_userid', reify=True)
 

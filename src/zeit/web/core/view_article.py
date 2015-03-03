@@ -226,7 +226,7 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def comments(self):
         return zeit.web.core.comments.get_thread(
-            unique_id=self.context.uniqueId, request=self.request)
+            self.context.uniqueId, destination=self.request.url)
 
     @zeit.web.reify
     def serie(self):
