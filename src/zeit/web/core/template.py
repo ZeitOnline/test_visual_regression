@@ -138,7 +138,15 @@ def hide_none(string):
 
 @zeit.web.register_filter
 def get_teaser_layout(teaser_block):
-    layout = teaser_block.layout.id
+    try:
+        layout = teaser_block.layout.id
+        teaser = list(teaser_block)[0]
+    except (AttributeError, IndexError):
+        return 'default'
+
+    if teaser.serie:
+        layout = teaser.serie.column and 'zon-column' or 'zon-series'
+
     return zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
