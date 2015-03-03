@@ -32,23 +32,22 @@
     $.fn.inlinegallery = function( defaults ) {
 
         var options = $.extend({
-            onSlideAfter: function() {
-                // integrate tracking
-                if ( 'clickCount' in window ) {
-                    window.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
-                    window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
-                }
-            },
-            slideSelector: '.figure-full-width',
-            pagerType: 'short',
-            nextText: 'Zum nächsten Bild',
-            prevText: 'Zum vorigen Bild',
-            infiniteLoop: true,
-            hideControlOnEnd: false,
-            adaptiveHeight: true
-        }, defaults);
-
-        var singleGallery = null,
+                onSlideAfter: function() {
+                    // integrate tracking
+                    if ( 'clickCount' in window ) {
+                        window.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
+                        window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
+                    }
+                },
+                slideSelector: '.figure-full-width',
+                pagerType: 'short',
+                nextText: 'Zum nächsten Bild',
+                prevText: 'Zum vorigen Bild',
+                infiniteLoop: true,
+                hideControlOnEnd: false,
+                adaptiveHeight: true
+            }, defaults),
+            singleGallery = null,
             ressort = window.ZMO.view.ressort,
             viewType = window.ZMO.view.type,
             galleryType = /[\\?&]gallery=([^&#]*)/.exec( location.search ),
@@ -132,26 +131,25 @@
                 DOM_VK_RIGHT = 39,
                 slider = {},
                 sliderViewport,
-                mq;
+                mq,
+                handleKeydown = function( e ) {
+                    // enable keyboard navigation
+                    // do nothing if there is another key involved
+                    if ( e.altKey || e.shiftKey || e.ctrlKey || e.metaKey ) { return; }
 
-            // enable keyboard navigation
-            var handleKeydown = function( e ) {
-                // do nothing if there is another key involved
-                if ( e.altKey || e.shiftKey || e.ctrlKey || e.metaKey ) { return; }
-
-                switch ( e.keyCode ) {
-                    case DOM_VK_RIGHT:
-                        if ( isElementInViewport( sliderViewport ) ) {
-                            slider.goToNextSlide();
-                        }
-                        break;
-                    case DOM_VK_LEFT:
-                        if ( isElementInViewport( sliderViewport ) ) {
-                            slider.goToPrevSlide();
-                        }
-                        break;
-                }
-            };
+                    switch ( e.keyCode ) {
+                        case DOM_VK_RIGHT:
+                            if ( isElementInViewport( sliderViewport ) ) {
+                                slider.goToNextSlide();
+                            }
+                            break;
+                        case DOM_VK_LEFT:
+                            if ( isElementInViewport( sliderViewport ) ) {
+                                slider.goToPrevSlide();
+                            }
+                            break;
+                    }
+                };
 
             $( window ).on( 'keydown', handleKeydown );
 
@@ -201,25 +199,24 @@
             }
 
             var figCaptionSize = function( image, figcaption ) {
-                var caption = figcaption || image.closest( 'figure' ).find( 'figcaption' ),
-                    imageWidth = image.width();
+                    var caption = figcaption || image.closest( 'figure' ).find( 'figcaption' ),
+                        imageWidth = image.width();
 
-                if ( caption.length && imageWidth > 30 && imageWidth < galleryWidth ) {
-                    caption.css({
-                        'max-width': imageWidth + 'px',
-                        'padding-right': 0
+                    if ( caption.length && imageWidth > 30 && imageWidth < galleryWidth ) {
+                        caption.css({
+                            'max-width': imageWidth + 'px',
+                            'padding-right': 0
+                        });
+                    }
+                },
+                figCaptionSizing = function() {
+                    figcaptions.each( function() {
+                        var caption = $( this ),
+                            image = caption.prev().find( '.figure__media' );
+
+                        figCaptionSize( image, caption );
                     });
-                }
-            };
-
-            var figCaptionSizing = function() {
-                figcaptions.each( function() {
-                    var caption = $( this ),
-                        image = caption.prev().find( '.figure__media' );
-
-                    figCaptionSize( image, caption );
-                });
-            };
+                };
 
             options.onSliderLoad = function() {
 
@@ -238,7 +235,6 @@
                 //     }
                 // }
 
-
                 figCaptionSizing();
 
                 sliderViewport = gallery.parent();
@@ -252,7 +248,7 @@
                 $( '.bx-prev' ).addClass( 'icon-pfeil-links' );
 
                 // fix ad columns
-                $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( {height: document.body.offsetHeight + 'px'} );
+                $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
             };
 
             options.onSliderResize = function() {

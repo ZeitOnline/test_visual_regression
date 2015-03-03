@@ -213,30 +213,6 @@ def test_footer_should_have_expected_markup(testserver, testbrowser):
     assert expect == got
 
 
-def test_inline_gallery_should_be_contained_in_body(testserver, testbrowser):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    assert (
-        isinstance(body.values()[14],
-                   zeit.content.article.edit.reference.Gallery))
-
-
-def test_inline_gallery_should_have_images(testserver, testbrowser):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    gallery = zeit.web.core.block.IFrontendBlock(body.values()[14])
-    assert all(
-        zeit.web.core.gallery.IGalleryImage.providedBy(i)
-        for i in gallery.itervalues())
-
-    image = gallery.values()[4]
-    assert image.src == (
-        u'http://xml.zeit.de/galerien/bg-automesse-detroit'
-        '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg')
-    assert image.alt is None
-    assert image.copyright[0][0] == u'\xa9'
-
-
 def test_article_request_should_have_body_element(testserver, testbrowser):
     browser = testbrowser('%s/artikel/05' % testserver.url)
     assert ('<body itemscope itemtype='

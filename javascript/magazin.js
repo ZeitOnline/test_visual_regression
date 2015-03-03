@@ -41,8 +41,8 @@ require([
 // make a shim of them first
 // plugins that require plugins need to make this requirement in the shim-section of config
 require([
+    'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
-    'web.magazin/plugins/jquery.inlinegallery',
     'web.magazin/plugins/jquery.switchvideo',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.animatescroll',
