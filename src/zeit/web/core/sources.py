@@ -36,7 +36,7 @@ class ScaleSource(zeit.imp.source.ScaleSource):
         return True
 
 
-class ImageScales(dict):
+class ImageScales(zeit.web.core.utils.frozendict):
 
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
@@ -47,7 +47,7 @@ class ImageScales(dict):
         super(ImageScales, self).__init__(scales)
 
 
-class TeaserMapping(dict):
+class TeaserMapping(zeit.web.core.utils.frozendict):
 
     zope.interface.implements(zeit.web.core.interfaces.ITeaserMapping)
 
