@@ -4,6 +4,9 @@ Change log for zeit.web
 1.16 (unreleased)
 -----------------
 
+
+- ZON-1461: Add pagination
+
 - ZON-1305: Add Schema.org/Organization
 
 - ZON-1446: Implement active state for main navigation items
