@@ -238,48 +238,69 @@ def test_cp_teaser_with_comments_should_get_count(
 
 
 def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('leader')
+    block = mock.Mock()
+    block.layout.id = 'leader'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-two-columns')
+    block.layout.id = 'leader-two-columns'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-panorama')
+    block.layout.id = 'leader-panorama'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
 
 
 def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('text-teaser')
+    block = mock.Mock()
+    block.layout.id = 'text-teaser'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('buttons')
+    block.layout.id = 'buttons'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('large')
+    block.layout.id = 'large'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('short')
+    block.layout.id = 'short'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('date')
+    block.layout.id = 'date'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
 
 
 def test_teaser_fullwidth_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-fullwidth')
+    block = mock.Mock()
+    block.layout.id = 'leader-fullwidth'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-fullwidth'
 
 
 def test_hide_teaser_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-volume')
+    block = mock.Mock()
+    block.layout.id = 'archive-print-volume'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-year')
+    block.layout.id = 'archive-print-year'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('two-side-by-side')
+    block.layout.id = 'two-side-by-side'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('ressort')
+    block.layout.id = 'ressort'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-upright')
+    block.layout.id = 'leader-upright'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('buttons-fullwidth')
+    block.layout.id = 'buttons-fullwidth'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('parquet-printteaser')
+    block.layout.id = 'parquet-printteaser'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('parquet-verlag')
+    block.layout.id = 'parquet-verlag'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
 
 
