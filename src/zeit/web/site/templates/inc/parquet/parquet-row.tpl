@@ -29,7 +29,7 @@
     <ul class="parquet-teasers">
         {% for teaser in row -%}
             {% if loop.index <= row.display_amount %}
-                {% include ["zeit.web.site:templates/inc/parquet/" + row.layout.id | get_mapped_teaser + "_position_" + loop.index | string + ".tpl",
+                {% include ["zeit.web.site:templates/inc/parquet/" + row | get_teaser_layout + "_position_" + loop.index | string + ".tpl",
                             "zeit.web.site:templates/inc/parquet/zon-parquet-small.tpl"] %}
             {% endif %}
         {% endfor %}

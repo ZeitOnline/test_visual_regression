@@ -52,7 +52,7 @@ class Centerpage(
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and (
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id)
+                    zeit.web.core.template.get_teaser_layout(b)
                     not in ('zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
@@ -91,7 +91,7 @@ class Centerpage(
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and (
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
+                    zeit.web.core.template.get_teaser_layout(b) in (
                         'zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
