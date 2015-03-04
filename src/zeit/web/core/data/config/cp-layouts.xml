@@ -13,20 +13,6 @@
         image_pattern="zon-thumbnail"
         areas="lead"
         />
-    <!-- new zon series teaser -->
-    <layout
-        id="zon-series"
-        title="kleiner Teaser mit Serien-Label"
-        image_pattern="zon-thumbnail"
-        areas="lead"
-        />
-    <!-- new zon column teaser -->
-    <layout
-        id="zon-column"
-        title="Kolumnenteaser"
-        image_pattern="zon-column"
-        areas="lead"
-        />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
         id="zon-fullwidth"

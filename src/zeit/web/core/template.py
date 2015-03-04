@@ -137,7 +137,20 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
-def get_mapped_teaser(layout):
+def get_teaser_layout(teaser_block):
+    try:
+        layout = teaser_block.layout.id
+    except AttributeError:
+        return
+
+    try:
+        serie = list(teaser_block)[0].serie
+    except (AttributeError, IndexError, TypeError):
+        serie = None
+
+    if serie:
+        layout = serie.column and 'zon-column' or 'zon-series'
+
     return zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
@@ -372,7 +385,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 
     try:
         image_patterns = get_image_pattern(
-            get_mapped_teaser(teaser_block.layout.id),
+            get_teaser_layout(teaser_block),
             teaser_block.layout.image_pattern)
     except AttributeError:
         return

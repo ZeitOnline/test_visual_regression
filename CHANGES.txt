@@ -28,6 +28,8 @@ Change log for zeit.web
 
 - ZON-1459: Implement full view ("Komplettansicht") for articles
 
+- ZON-1466: Auto select correct teaser layout for series and columns
+
 - ZON-1467: Pull column teaser image from authorship
 
 - FIX: Fix navigation bug where more is on the wrong side of the fence
