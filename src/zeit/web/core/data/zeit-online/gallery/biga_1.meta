@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<head xmlns:D="DAV:">
+    <attribute name="href" ns="DAV:">/cms/work/digital/2014-04/fs-desktop-schreibtisch-computer</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-04-05T06:35:09.303935+00:00</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-05T06:36:09.138080+00:00</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">leben</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:cbcd4ccf-56b6-4989-9086-04cf7642d193}</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.dobmeier</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+    <attribute name="images_added" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-04-02T15:30:07.109680+00:00</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-03T14:17:49.355242+00:00</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">gallery</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-04-05T06:34:51.541755+00:00</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery">standalone</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+    <attribute name="resourcetype" ns="DAV:"/>
+    <attribute name="creationdate" ns="DAV:">2014-04-05T06:35:09Z</attribute>
+    <attribute name="getcontentlength" ns="DAV:">23934</attribute>
+    <attribute name="getlastmodified" ns="DAV:">Sat, 05 Apr 2014 06:35:09 GMT</attribute>
+    <attribute name="getetag" ns="DAV:">&quot;6a6ba6-5d7e-4f645d5f10c64&quot;</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="supportedlock" ns="DAV:"/>
+    <attribute name="lockdiscovery" ns="DAV:"/>
+   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+</head>
