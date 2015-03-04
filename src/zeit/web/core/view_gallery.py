@@ -48,9 +48,3 @@ class Gallery(zeit.web.core.view.Content):
                 )
             )
         return sorted(teaser_list, key=lambda k: k['label'])
-
-
-@view_config(context=zeit.web.core.gallery.IProductGallery,
-             renderer='templates/product.html')
-class ProductGallery(Gallery):
-    pass
