@@ -79,6 +79,9 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-ohne-bild" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-ohne-bild" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
+        </container>
       </region>
       <region area="informatives">
         <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">

@@ -378,17 +378,17 @@ def test_series_teaser_should_have_mobile_layout(
     border = driver.execute_script(border_script)
 
     if screen_size[0] == 320:
-        assert width > 250, 'mobile: imgage box of wrong size'
-        assert border == 'solid', 'mobile: border-top wrong'
+        assert width > 250  # mobile: imgage box of wrong size
+        assert border == 'solid'  # mobile: border-top wrong
     elif screen_size[0] == 520:
-        assert width == 150, 'phablet: imgage box of wrong size'
-        assert border == 'dotted', 'phablet: border-top wrong'
+        assert width == 150  # phablet: imgage box of wrong size
+        assert border == 'dotted'  # phablet: border-top wrong
     elif screen_size[0] == 768:
-        assert width == 150, 'ipad: imgage box of wrong size'
-        assert border == 'dotted', 'ipad: border-top wrong'
+        assert width == 150  # ipad: imgage box of wrong size
+        assert border == 'dotted'  # ipad: border-top wrong
     else:
-        assert width == 250, 'desktop: image box of wrong size'
-        assert border == 'dotted', 'desktop: border-top wrong'
+        assert width == 250  # desktop: image box of wrong size
+        assert border == 'dotted'  # desktop: border-top wrong
 
 
 def test_snapshot_hidden_on_initial_load(
@@ -487,7 +487,7 @@ def test_parquet_should_have_rows(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert len(view.area_parquet) == 3, (
+    assert len(view.area_parquet) == 4, (
         'View has invald number of parquet rows.')
 
 
