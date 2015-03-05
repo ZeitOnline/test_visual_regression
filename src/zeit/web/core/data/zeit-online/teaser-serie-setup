@@ -79,8 +79,11 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-ohne-bild" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-ohne-bild" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
-        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-7d8caa23-ae05-4e60-9572-20ca379a8e19">
           <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-8d8caa23-ae05-4e60-9572-20ca379a8e11">
+          <block href="http://xml.zeit.de/artikel/03a" uniqueId="http://xml.zeit.de/artikel/03a" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
         </container>
       </region>
       <region area="informatives">
@@ -131,13 +134,13 @@
       </region>
     </cluster>
     <cluster area="teaser-mosaic"/>
-    <supertitle>ZMO CP</supertitle>
-    <title>ZMO</title>
-    <subtitle>ZMO CP</subtitle>
+    <supertitle>ZON CP</supertitle>
+    <title>ZON</title>
+    <subtitle>ZON CP</subtitle>
   </body>
   <feed/>
   <teaser>
-    <title>ZMO</title>
-    <text>ZMO CP</text>
+    <title>ZON</title>
+    <text>ZON CP</text>
   </teaser>
 </centerpage>

@@ -30,9 +30,9 @@
                 </image>
             </reference>
         </references>
-        <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-chianti/" type="jpg" publication-date="" expires="">
-            <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
-            <copyright>© Reuters/Alessandro Bianchi</copyright>
+        <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-5" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+          <bu py:pytype="str">Die ist der image sub text</bu>
+          <copyright link="http://foo.de">©foo</copyright>
         </image>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
