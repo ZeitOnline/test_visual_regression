@@ -37,9 +37,6 @@
           <bu py:pytype="str">Bundesfinanzminister Wolfgang Schäuble</bu>
           <copyright py:pytype="str">© dpa</copyright>
         </image>
-        <author href="http://xml.zeit.de/autoren/G/Marcus_Gatzke/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Marcus Gatzke</display_name>
-        </author>
       </reference>
     </references>
     <rankedTags>
@@ -51,14 +48,10 @@
       <tag type="free" score="4" uuid="4b2d29a1-d9d6-4b6c-968a-e4d636858fce" url_value="europapolitik">Europapolitik</tag>
       <tag type="free" score="4" uuid="242bd103-9c34-436a-b498-5c3b3b1ed8ca" url_value="stabilitaetspakt">Stabilitätspakt</tag>
     </rankedTags>
-    <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
+    <author href="http://xml.zeit.de/autoren/author3" publication-date="" expires="">
       <display_name py:pytype="str">Anne Mustermann</display_name>
       <location>Berlin</location>
     </author>
-    <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-3" type="png" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-      <bu py:pytype="str">Die ist der image sub text</bu>
-      <copyright link="http://foo.de">©foo</copyright>
-    </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Theo Sommer</attribute>

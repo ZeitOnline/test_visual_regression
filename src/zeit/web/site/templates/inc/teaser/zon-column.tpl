@@ -7,16 +7,14 @@
 
 {% block teaser_media_position_before_title %}
     {% set teaser_block_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/"+
-        teaser | auto_select_asset | block_type +
-        "_zon-column.tpl" ignore missing with context %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/columnpic_zon-column.tpl" ignore missing with context %}
 {% endblock %}
 
 {% block teaser_link %}
-<a class="teaser-column__combined-link teaser-column__combined-link--padded" title="{{ teaser.serie }}: {{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
+<a class="teaser-column__combined-link teaser-column__combined-link--padded" title="{{ teaser.serie.serienname }}: {{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
     {% block teaser_kicker %}
     <span class="teaser-column__kicker-container">
-        <span class="teaser-column__series">{{ teaser.serie }}</span>
+        <span class="teaser-column__series">{{ teaser.serie.serienname }}</span>
         <span class="teaser-column__kicker">{{ teaser.teaserSupertitle }}</span>
     </span>
     {% endblock %}

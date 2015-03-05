@@ -32,9 +32,8 @@ def template_server(template_server_session):
 def test_retrieves_template_via_http(template_server):
     open(template_server['documentroot'] + '/foo.html', 'w').write('foo')
 
-    loader = zeit.web.core.template.HTTPLoader(template_server.url)
-    UNUSED_ENVIRONMENT = None
-    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    loader = zeit.web.core.jinja.HTTPLoader(template_server.url)
+    source, path, uptodate = loader.get_source(None, 'foo.html')
     assert 'foo' == source
 
 
@@ -42,9 +41,8 @@ def test_checks_uptodate_using_last_modified_header(template_server):
     template = template_server['documentroot'] + '/foo.html'
     open(template, 'w').write('foo')
 
-    loader = zeit.web.core.template.HTTPLoader(template_server.url)
-    UNUSED_ENVIRONMENT = None
-    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    loader = zeit.web.core.jinja.HTTPLoader(template_server.url)
+    source, path, uptodate = loader.get_source(None, 'foo.html')
 
     assert uptodate()
     later = time.time() + 1
@@ -53,9 +51,8 @@ def test_checks_uptodate_using_last_modified_header(template_server):
 
 
 def test_no_url_configured_yields_error_message():
-    loader = zeit.web.core.template.HTTPLoader(url=None)
-    UNUSED_ENVIRONMENT = None
-    source, path, uptodate = loader.get_source(UNUSED_ENVIRONMENT, 'foo.html')
+    loader = zeit.web.core.jinja.HTTPLoader(url=None)
+    source, path, uptodate = loader.get_source(None, 'foo.html')
     assert 'load_template_from_dav_url' in source
 
 
@@ -221,15 +218,14 @@ def test_filter_strftime_works_as_expected():
     strftime = zeit.web.core.template.strftime
     now = datetime.datetime.now()
     localtime = time.localtime()
-    assert strftime('foo', '%s') == ''
-    assert strftime((2014, 01, 01), '%s') == ''
+    assert strftime('foo', '%s') is None
+    assert strftime((2014, 01, 01), '%s') is None
     assert strftime(tuple(now.timetuple()), '%s') == now.strftime('%s')
     assert strftime(now, '%s') == now.strftime('%s')
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
-def test_cp_teaser_with_comments_should_get_count(
-        monkeyagatho, testserver, testbrowser):
+def test_cp_teaser_with_comments_should_get_count(monkeyagatho, application):
     comment_count = zeit.web.core.template.get_teaser_commentcount(
         'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
     assert comment_count == 125
@@ -240,53 +236,94 @@ def test_cp_teaser_with_comments_should_get_count(
     assert comment_count is None
 
 
-def test_zon_large_teaser_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('leader')
+def test_zon_large_teaser_mapping_is_working_as_expected(application):
+    block = mock.Mock()
+    block.layout.id = 'leader'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-two-columns')
+    block.layout.id = 'leader-two-columns'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-panorama')
+    block.layout.id = 'leader-panorama'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
 
 
-def test_zon_small_teaser_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('text-teaser')
+def test_zon_small_teaser_mapping_is_working_as_expected(application):
+    block = mock.Mock()
+    block.layout.id = 'text-teaser'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('buttons')
+    block.layout.id = 'buttons'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('large')
+    block.layout.id = 'large'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('short')
+    block.layout.id = 'short'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
-    teaser = zeit.web.core.template.get_mapped_teaser('date')
+    block.layout.id = 'date'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
 
 
-def test_teaser_fullwidth_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-fullwidth')
+def test_teaser_fullwidth_mapping_is_working_as_expected(application):
+    block = mock.Mock()
+    block.layout.id = 'leader-fullwidth'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-fullwidth'
 
 
-def test_hide_teaser_mapping_is_working_as_expected(testserver):
-    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-volume')
+def test_hide_teaser_mapping_is_working_as_expected(application):
+    block = mock.Mock()
+    block.layout.id = 'archive-print-volume'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('archive-print-year')
+    block.layout.id = 'archive-print-year'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('two-side-by-side')
+    block.layout.id = 'two-side-by-side'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('ressort')
+    block.layout.id = 'ressort'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('leader-upright')
+    block.layout.id = 'leader-upright'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('buttons-fullwidth')
+    block.layout.id = 'buttons-fullwidth'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('parquet-printteaser')
+    block.layout.id = 'parquet-printteaser'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
-    teaser = zeit.web.core.template.get_mapped_teaser('parquet-verlag')
+    block.layout.id = 'parquet-verlag'
+    teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'
 
 
-def test_function_get_image_pattern_is_working_as_expected(testserver):
+def test_teaser_layout_for_columns_should_be_adjusted_accordingly(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/kolumne')
+    block = mock.Mock()
+    block.layout.id = 'zon-small'
+    block.__iter__ = lambda _: iter([article])
+    teaser = zeit.web.core.template.get_teaser_layout(block)
+    assert teaser == 'zon-column'
+
+
+def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik')
+    block = mock.Mock()
+    block.layout.id = 'zon-small'
+    block.__iter__ = lambda _: iter([article])
+    teaser = zeit.web.core.template.get_teaser_layout(block)
+    assert teaser == 'zon-series'
+
+
+def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
     assert teaser == ['zon-large']
@@ -306,3 +343,16 @@ def test_visual_profiler_should_not_interfere_with_rendering(
 
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     assert not len(browser.cssselect('.__pro__'))
+
+
+def test_get_column_image_should_return_an_image_or_none(application):
+    img = zeit.web.core.template.get_column_image(
+        zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
+
+    assert type(img) == zeit.web.core.centerpage.Image
+    assert zeit.web.core.template.get_column_image(None) is None
+
+    teaser = mock.Mock()
+    teaser.authorships = None
+    assert zeit.web.core.template.get_column_image(teaser) is None

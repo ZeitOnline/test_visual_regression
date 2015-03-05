@@ -117,5 +117,13 @@ class IImageScales(zope.interface.Interface):
     """Image scale utility factory"""
 
 
+class ITeaserMapping(zope.interface.Interface):
+    """Legacy teaser mapping"""
+
+
 class ITopicLink(zope.interface.Interface):
     """TopicLink sanitizer"""
+
+
+class IInternalUse(zope.interface.Interface):
+    """Marks internally used source entries"""

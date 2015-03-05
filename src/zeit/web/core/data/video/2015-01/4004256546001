@@ -2,11 +2,11 @@
 <video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <head>
     <renditions>
-      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/1485/18140073001_4004359785001_Beitrag-Roboter-Myon-FInal.mp4" frame_width="640"/>
-      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/1485/18140073001_4004359788001_Beitrag-Roboter-Myon-FInal.mp4" frame_width="720"/>
-      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/1485/18140073001_4004359748001_Beitrag-Roboter-Myon-FInal.mp4" frame_width="400"/>
-      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/1485/18140073001_4004359802001_Beitrag-Roboter-Myon-FInal.mp4" frame_width="480"/>
-      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/1485/18140073001_4004359821001_Beitrag-Roboter-Myon-FInal.mp4" frame_width="1280"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319236001_thegreatrabbit-1280-720-h264.mp4" frame_width="720" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4" frame_width="400" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319186001_thegreatrabbit-1280-720-h264.mp4" frame_width="1280" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319240001_thegreatrabbit-1280-720-h264.mp4" frame_width="640" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319666001_thegreatrabbit-1280-720-h264.mp4" frame_width="480" video_duration="436118"/>
     </renditions>
     <references/>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>

@@ -2,8 +2,3 @@
 
 {% set image = get_teaser_image(teaser_block, teaser) %}
 {% set href = teaser.uniqueId | translate_url %}
-
-{% block mediablock %}{{ teaser_block_layout }}__media{% endblock %}
-{% block mediablock_helper %}{{ teaser_block_layout }}__media-container{% endblock %}
-{% block mediablock_link %}{{ teaser_block_layout }}__media-link{% endblock %}
-{% block mediablock_item %}{{ teaser_block_layout }}__media-item{% endblock %}

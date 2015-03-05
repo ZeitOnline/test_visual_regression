@@ -25,6 +25,7 @@ require([
 // make a shim of them first
 // plugins that require plugins need to make this requirement in the shim-section of config
 require([
+    'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.togglenavi',
@@ -42,6 +43,7 @@ require([
     $( '.primary-nav' ).adaptToSpace();
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
     $( '.footer-publisher__more' ).extendFooter();
+    $( '.inline-gallery' ).inlinegallery({ slideSelector: '.stage--large' });
     $( '.snapshot' ).snapshot();
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();

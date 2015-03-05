@@ -97,3 +97,10 @@ class nsunicode(unicode, nsmixin):
     """New style unicode class with attribute access and manipulation."""
 
     pass
+
+
+class frozendict(dict):
+    """Custom dictionary class that discourages item manipulation."""
+
+    __delitem__ = __setitem__ = clear = pop = popitem = setdefault = update = (
+        NotImplemented)

@@ -1,0 +1,244 @@
+<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+    <head>
+        <image-folder>http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/</image-folder>
+        <image align="left" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube" expires="" publication-date="" title="Desktops Teaser" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <bu/>
+            <copyright>© Mathias Modica</copyright>
+        </image>
+        <badges>
+            <badge>gallery</badge>
+        </badges>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+        <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="images_added" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-04-05T06:34:51.541755+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.dobmeier</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">leben</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">gallery</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery">standalone</attribute>
+        <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:cbcd4ccf-56b6-4989-9086-04cf7642d193}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+         <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    </head>
+    <body>
+        <column layout="left"/>
+        <column layout="right">
+            <container>
+                <block name="02-shomei-tomatsu.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Mathias Modica ist DJ, Musiker und Co-Chef des Münchner Labels Gomma. Er lässt sich von Frank Zappa inspirieren.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/02-shomei-tomatsu.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu xsi:nil="true"/>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/02-shomei-tomatsu.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu xsi:nil="true"/>
+                    </thumbnail>
+                </block>
+                <block name="01-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Nicole Zepter ist Chefredakteurin des Magazins &quot;The Germans&quot;, das hier ist ihr Schreibtisch. Zepter findet Blassrosa &quot;beruhigend&quot;.</caption>
+                    <image align="left" alt="pumpe" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/01-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Nicole Zepter für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/01-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Nicole Zepter für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block layout="hidden" name="13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
+                    <bu xsi:nil="true"/>
+                    <copyright py:pytype="str">©</copyright>
+                    </image>
+                    <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
+                    <bu xsi:nil="true"/>
+                    <copyright py:pytype="str">©</copyright>
+                    </thumbnail>
+                </block>
+                <block name="03-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Tim Raue ist Sternekoch, mag diese Galaxie und Musik von Satie.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/03-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Tim Raue für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/03-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Tim Raue für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="04-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Martin Roth ist der Leiter des Victoria and Albert Museum in London. Auf seinem Desktop: die Instrumente eines Wasserflugzeugs.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/04-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Martin Roth für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/04-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Martin Roth für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="05-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Antonia Wesseloh ist als Model erfolgreich. Die bunten Gräser hat vor einiger Zeit eine Freundin als Hintergrundbild für sie ausgesucht.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/05-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Antonia Wesseloh für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/05-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Antonia Wesseloh für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="06-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Jan Kath ist Teppichdesigner. Er blickt auf einen eigenen Entwurf- angeregt durch die Aufnahmen des Hubble-Teleskops.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/06-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Jan Kath für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/06-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Jan Kath für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="07-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Christine Westermann ist Moderatorin und Autorin. Sie findet jederzeit Ruhe und Entspannung beim Blick auf dieses Urlaubsfoto.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/07-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Christine Westermann für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/07-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Christine Westermann für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="08-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Kati Nescher ist Model. Ihr Hintergrundbild wechselt sie je nach Stimmung. Hier ist sie mit ihrem Sohn zu sehen.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/08-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Kati Nescher für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/08-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Kati Nescher für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="09-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Sarah Illenberger ist Illustratorin und hat einen Desktop voller Projekte. Der bunte Slogan versichert ihr: Alles wird wunderbar!</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/09-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Sarah Illenberger für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/09-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Sarah Illenberger für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="10-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Hape Kerkeling ist Entertainer, Moderator, Autor und kann sich bei der Arbeit jederzeit in die Augen sehen.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/10-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Hape Kerkeling für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/10-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Hape Kerkeling für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="11-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Caren Miosga stellt sich die Frage als &quot;Tagesthemen&quot;-Moderatorin auch immer mal wieder.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/11-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Caren Miosga für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/11-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Caren Miosga für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="12-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Carsten Nicolai kommt als Künstler und Musiker ganz ohne Hintergrund aus. Seine Dateien: vielschichtig!</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/12-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Carsten Nicolai für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/12-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Carsten Nicolai für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+                <block name="13-desktop-schreibtisch-computer-digital.jpg">
+                    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Kostas Murkudis ist Modedesigner mit einem Faible für Architektur. Auf seinem Schreibtisch: eine Installation von Carsten Nicolai.</caption>
+                    <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Kostas Murkudis für ZEITmagazin</copyright>
+                    </image>
+                    <thumbnail align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/thumbnails/13-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <bu/>
+                        <copyright>© Kostas Murkudis für ZEITmagazin</copyright>
+                    </thumbnail>
+                </block>
+            </container>
+        </column>
+        <title>Das hab ich auf dem Schirm</title>
+        <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <p>Die Idee, die Benutzeroberfläche eines Computers &quot;Desktop&quot; zu nennen, stammt aus den Siebzigern, marktreif wurde sie Mitte der Achtziger – in einer Zeit also, in der die Computer langsam alltagstauglich wurden. Bis heute erinnern Anwendungen wie der &quot;Papierkorb&quot; und &quot;Arbeitsplatz&quot; an die Schreibtischidee. Und wie der Namensgeber aus Holz, sagen auch die digitalen Schreibtische einiges über seine Nutzer aus. Ob Ordnungsfanatiker oder Messis, Strategen oder Chaoten – im ZEITmagazin präsentieren 13 Menschen ihren Desktop.</p>
+        </text>
+        <supertitle>Desktop-Bilder</supertitle>
+        <subtitle>Überlegte Ordnung oder buntes Chaos: Was auf dem Desktop zu sehen ist, verrät viel über unsere Arbeitsweise. 13 Menschen zeigen ihren digitalen Schreibtisch.</subtitle>
+    </body>
+    <teaser>
+        <title>Das hab ich auf dem Schirm</title>
+        <text>Überlegte Ordnung oder buntes Chaos: Was auf dem Desktop zu sehen ist, verrät viel über unsere Arbeitsweise. 13 Menschen zeigen ihren digitalen Schreibtisch.</text>
+    </teaser>
+</gallery>

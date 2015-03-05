@@ -10,10 +10,10 @@ import zeit.content.cp.interfaces
 import zeit.web.core.interfaces
 import zeit.web.core.reach
 import zeit.web.core.template
+import zeit.web.core.sources
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.video_series
 import zeit.web.site.view
 
 log = logging.getLogger(__name__)
@@ -52,7 +52,7 @@ class Centerpage(
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and (
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id)
+                    zeit.web.core.template.get_teaser_layout(b)
                     not in ('zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
@@ -91,7 +91,7 @@ class Centerpage(
         def valid_block(b):
             try:
                 return len(b) and b.layout.id and (
-                    zeit.web.core.template.get_mapped_teaser(b.layout.id) in (
+                    zeit.web.core.template.get_teaser_layout(b) in (
                         'zon-fullwidth',))
             except (TypeError, AttributeError):
                 return
@@ -192,7 +192,7 @@ class Centerpage(
 
     @zeit.web.reify
     def video_series_list(self):
-        return zeit.web.site.video_series.video_series
+        return zeit.web.core.sources.video_series
 
     @zeit.web.reify
     def ressort(self):

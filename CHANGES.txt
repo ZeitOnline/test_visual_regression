@@ -1,9 +1,19 @@
 Change log for zeit.web
 =======================
 
-1.16 (unreleased)
+1.17 (unreleased)
 -----------------
 - ZON-1445: AdController MVP
+
+- ZON-1314: Let gallery work for zeit.web.site
+
+
+1.16 (2015-03-03)
+-----------------
+
+- ZON-1391: Adapt parquet styles
+
+- ZON-1461: Add pagination
 
 - ZON-1305: Add Schema.org/Organization
 
@@ -11,9 +21,17 @@ Change log for zeit.web
 
 - ZON-1394: Enable a supertitle fallback for linkobjects and galleries
 
+- ZON-1315: Implement inline galleries
+
+- Fix navigation: fix bug where more is on the wrong side of the fence
+
 - BUG-181: Make ZMO comments work again
 
 - ZON-1459: Implement full view ("Komplettansicht") for articles
+
+- ZON-1466: Auto select correct teaser layout for series and columns
+
+- ZON-1467: Pull column teaser image from authorship
 
 - FIX: Fix navigation bug where more is on the wrong side of the fence
 
