@@ -64,21 +64,17 @@ class Base(object):
         c1_track_headers = {
             'C1-Track-Origin': lambda: 'web',
             'C1-Track-Service-ID': lambda: 'zon',
-            'C1-Track-Doc-Type': lambda:
-                c1_add_doc_types.get(self.type, 'Centerpage'),
-            'C1-Track-Content-ID': lambda:
-                '/' + '/'.join(self.request.traversed),
-            'C1-Track-CMS-ID': lambda:
-                zeit.cms.content.interfaces.IUUID(self.context).id,
-            'C1-Track-Channel': lambda:
-                c1_add_sections.get(
-                    self.context.ressort, self.context.ressort),
-            'C1-Track-Sub-Channel': lambda:
-                self.context.sub_ressort,
-            'C1-Track-Heading': lambda:
-                self.context.title,
-            'C1-Track-Kicker': lambda:
-                self.context.supertitle
+            'C1-Track-Doc-Type': lambda: c1_add_doc_types.get(
+                self.type, 'Centerpage'),
+            'C1-Track-Content-ID': lambda: '/' + '/'.join(
+                self.request.traversed),
+            'C1-Track-CMS-ID': lambda: zeit.cms.content.interfaces.IUUID(
+                self.context).id,
+            'C1-Track-Channel': lambda: c1_add_sections.get(
+                self.context.ressort, self.context.ressort),
+            'C1-Track-Sub-Channel': lambda: self.context.sub_ressort,
+            'C1-Track-Heading': lambda: self.context.title,
+            'C1-Track-Kicker': lambda: self.context.supertitle
         }
 
         for th_name in c1_track_headers:

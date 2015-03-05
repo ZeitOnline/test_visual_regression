@@ -131,7 +131,7 @@ def get_thread(unique_id, destination=None, reverse=False, just_count=False):
         return dict(comment_count=int(comment_count[0]))
 
     # Read more about sorting in multiple passes here:
-    # https://docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
+    # docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
     comments = list(comment_as_dict(c) for c in thread.xpath('//comment'))
     comments = sorted(comments, key=lambda x: x['cid'])
     comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
