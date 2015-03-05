@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 
-import zeit.web.core.gallery
+import zeit.web.core.view_gallery
+import zeit.web.core.view_image
 import zeit.web.magazin.view
 
 

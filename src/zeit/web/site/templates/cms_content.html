@@ -1,15 +1,66 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 {% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
 
-{% macro render_page(page) %}
-    {% for item in page %}
-        {{ (blocks[item | block_type] or blocks["no_block"])(item)}}
-    {% endfor %}
-{% endmacro %}
-
 {% block main %}
     {% block content %}
-        <!-- Here goes the content! -->
+    <article class="article" id="js-article">
+    {% profile %}
+        {% block article_heading %}
+        <h1 class="article-heading">
+            <span class="kicker">
+                {{- view.supertitle | hide_none -}}
+            </span>
+            <span class="title">
+                {{- view.title | hide_none -}}
+            </span>
+        </h1>
+        {% endblock article_heading %}
+        {% block article_meta %}
+            {% if view.pagination and view.pagination.current > 1 %}
+            <div class="article__page-teaser">
+                Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
+            </div>
+            {% else %}
+            <div class="summary">
+                {{ view.subtitle | hide_none }}
+            </div>
+            <div class="byline">
+                {% if view.authors %}
+                    {{ blocks.meta_author(view.authors, class="byline__author") }}
+                {% endif %}
+            </div>
+            <div class="metadata">
+                {% if view.source_label -%}
+                <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
+                    {%- if view.source_url -%}
+                    <a href="{{ view.source_url }}">{{ view.source_label }}</a> -
+                    {%- else -%}
+                    {{ view.source_label }}
+                    {%- endif -%}
+                </span>
+                {% endif -%}
+
+                <time class="metadata__date{% if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
+                {{- view.date_last_modified | format_date(view.show_date_format) -}}
+                </time>
+            </div>
+            {% endif %}
+        {% endblock article_meta %}
+    {% endprofile %}
+    {% profile %}
+        {% block article_body %} 
+        <div class="article-body">
+            {% block article_pages %}
+                <!-- Here goes the content for a page -->
+            {% endblock article_pages %}
+
+            {% block article_pagination %}
+                <!-- Here goes the pagination -->
+            {% endblock article_pagination %}
+        </div>
+        {% endblock article_body %}
+    {% endprofile %}
+    </article>
     {% endblock content %}
     {% block comments %}
     {% profile %}

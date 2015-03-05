@@ -1,59 +1,12 @@
 {% extends "zeit.web.site:templates/cms_content.html" %}
 {% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
-
-{% block content %}
-    <article class="article" id="js-article">
-    {% profile %}
-        <h1 class="article-heading">
-            <span class="kicker">
-                {{- view.supertitle | hide_none -}}
-            </span>
-            <span class="title">
-                {{- view.title | hide_none -}}
-            </span>
-        </h1>
-        {% if view.pagination and view.pagination.current > 1 %}
-        <div class="article__page-teaser">
-            Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
-        </div>
-        {% else %}
-        <div class="summary">
-            {{ view.subtitle | hide_none }}
-        </div>
-        <div class="byline">
-            {% if view.authors %}
-                {{ blocks.meta_author(view.authors, class="byline__author") }}
-            {% endif %}
-        </div>
-        <div class="metadata">
-            {% if view.source_label -%}
-            <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
-                {%- if view.source_url -%}
-                <a href="{{ view.source_url }}">{{ view.source_label }}</a> -
-                {%- else -%}
-                {{ view.source_label }}
-                {%- endif -%}
-            </span>
-            {% endif -%}
-
-            <time class="metadata__date{% if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
-                {{- view.date_last_modified | format_date(view.show_date_format) -}}
-            </time>
-        </div>
-        {% endif %}
-    {% endprofile %}
-    {% profile %}
-        <div class="article-body">
-            {% block article_pages %}
-                <div class="article-page">
-    {{ blocks.inlinegallery(view.images, wrapper_class='gallery') }}
+{% block article_pages %}
+    <div class="article-page">
+        {{ blocks.inlinegallery(view.images, wrapper_class='gallery') }}
+    </div>
     <div class="article__page gallery__info">
         <div class="gallery__description">
             {{ view.galleryText|safe }}
         </div>
-                </div>
-            {% endblock article_pages %}
-        </div>
-    {% endprofile %}
-    </article>
-{% endblock content %}
+    </div>
+{% endblock article_pages %}
