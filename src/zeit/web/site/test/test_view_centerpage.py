@@ -358,7 +358,7 @@ def test_series_teaser_should_render_series_element(testserver, testbrowser):
         '%s/zeit-online/teaser-serie-setup' % testserver.url)
 
     series_element = browser.cssselect('.teaser-series__label')
-    assert len(series_element) == 1
+    assert len(series_element) == 2
     assert series_element[0].text == 'Serie: App-Kritik'
 
 
