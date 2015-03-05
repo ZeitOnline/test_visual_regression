@@ -153,8 +153,8 @@ def get_teaser_layout(teaser_block):
 
     if serie:
         layout = serie.column and 'zon-column' or 'zon-series'
-    #elif blog:
-    #    layout = 'zon-blog'
+    elif blog:
+        layout = 'zon-blog'
 
     return zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
