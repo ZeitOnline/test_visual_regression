@@ -85,6 +85,7 @@ setup(
             'plone.testing [zca,zodb]',
             'pytest',
             'pytest-pep8',
+            'pytest-timeout',
             'selenium',
             'transaction',
             'waitress',
