@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 
 def test_ad_keyword_diuqilon(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(768, 1024)
     driver.get('%s/artikel/01' % testserver.url)
+    try:
+        selector = 'body[data-adDeliveryType="oldschool"]'
+        driver.find_element_by_css_selector(selector)
+    except:
+        pytest.skip("not applicable due to new ad configuration")
+
     diuqilon = driver.execute_script("return window.diuqilon")
     # ipad
     assert diuqilon == ',diuqilon'
@@ -20,6 +27,12 @@ def test_ad_display(selenium_driver, testserver):
     m_sel = "div[id='sas_13500']"
     driver.set_window_size(320, 480)
     driver.get('%s/artikel/01' % testserver.url)
+    try:
+        selector = 'body[data-adDeliveryType="oldschool"]'
+        driver.find_element_by_css_selector(selector)
+    except:
+        pytest.skip("not applicable due to new ad configuration")
+
     assert driver.find_element_by_css_selector(m_sel) != 0
 
 
@@ -27,6 +40,7 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/01' % testserver.url)
+
     content = driver.execute_script("return document.getElementById('viewport"
                                     "-meta').getAttribute('content')")
     orientation = driver.execute_script("return Math.abs(window.orientation)")
@@ -39,6 +53,7 @@ def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/01' % testserver.url)
+
     content = driver.execute_script("return document.getElementById('viewport"
                                     "-meta').getAttribute('content')")
     orientation = driver.execute_script("return Math.abs(window.orientation)")
@@ -50,6 +65,12 @@ def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
 def test_var_IQD_varPack_isset(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
+    try:
+        selector = 'body[data-adDeliveryType="oldschool"]'
+        driver.find_element_by_css_selector(selector)
+    except:
+        pytest.skip("not applicable due to new ad configuration")
+
     varpack = driver.execute_script("return typeof window.IQD_varPack")
     assert varpack == "object"
 
@@ -57,6 +78,12 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver):
 def test_var_Krux_isset(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
+    try:
+        selector = 'body[data-adDeliveryType="oldschool"]'
+        driver.find_element_by_css_selector(selector)
+    except:
+        pytest.skip("not applicable due to new ad configuration")
+
     krux = driver.execute_script("return typeof window.Krux")
     assert krux == "function"
 

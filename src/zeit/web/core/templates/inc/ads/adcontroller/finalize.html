@@ -1,0 +1,7 @@
+{% if view.context.advertising_enabled %}
+<script>
+	if (typeof AdController !== 'undefined') {
+		AdController.finalize();
+	}
+</script>
+{% endif %}

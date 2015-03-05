@@ -8,6 +8,10 @@ import zeit.web.core.banner
 import zeit.web.magazin
 
 
+def is_adcontrolled(contents):
+    return 'data-adDeliveryType="adcontroller"' in contents
+
+
 def test_banner_place_should_be_serialized(testserver, testbrowser):
     place = zeit.web.core.banner.Place(1, ['728x90'], True, label='')
     assert place.__dict__ == {'dcopt': 'ist', 'diuqilon': True,
@@ -69,7 +73,7 @@ def test_banner_should_not_be_displayed_on_short_pages(
 def test_banner_should_not_be_displayed_on_disabled_article(
         testserver, testbrowser):
     # test article with xml banner = no
-    browser = testbrowser('%s/artikel/02' % testserver.url)
+    browser = testbrowser('%s/artikel/nobanner' % testserver.url)
     # no desktop ads
     assert not browser.cssselect('div[class*="ad-tile_"]')
     # no mobile ad script
@@ -130,6 +134,9 @@ def test_banner_mobile_should_request_with_correct_data_in_article_mode(
         testserver, testbrowser):
     # Ressort mode-design
     browser = testbrowser('%s/artikel/01' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445612', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445612', 13557, sas_target);" in browser.contents
     assert "sasmobile('32375/445612', 13501, sas_target);" in browser.contents
@@ -139,6 +146,9 @@ def test_banner_mobile_should_request_with_correct_data_in_article_leben(
         testserver, testbrowser):
     # Ressort leben
     browser = testbrowser('%s/artikel/02' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445623', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445623', 13557, sas_target);" in browser.contents
     assert "sasmobile('32375/445623', 13501, sas_target);" in browser.contents
@@ -148,6 +158,9 @@ def test_banner_mobile_should_request_with_correct_data_in_article_essen(
         testserver, testbrowser):
     # Ressort essen-trinken
     browser = testbrowser('%s/artikel/03' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445618', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445618', 13557, sas_target);" in browser.contents
     assert "sasmobile('32375/445618', 13501, sas_target);" in browser.contents
@@ -156,6 +169,9 @@ def test_banner_mobile_should_request_with_correct_data_in_article_essen(
 def test_banner_mobile_should_fallback_for_articles_without_sub_ressort(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/09' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('" not in browser.contents
 
 
@@ -164,6 +180,9 @@ def test_banner_mobile_should_request_with_correct_data_in_cp_leben(
         testserver, testbrowser):
     # Ressort leben
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445622', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445622', 13501, sas_target);" in browser.contents
 
@@ -172,6 +191,9 @@ def test_banner_mobile_should_request_with_correct_data_in_cp_mode(
         testserver, testbrowser):
     # Ressort mode-design
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445611', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445611', 13501, sas_target);" in browser.contents
 
@@ -180,6 +202,9 @@ def test_banner_mobile_should_request_with_correct_data_in_cp_essen(
         testserver, testbrowser):
     # Ressort essen-trinken
     browser = testbrowser('%s/centerpage/lebensart-3' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445616', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445616', 13501, sas_target);" in browser.contents
 
@@ -190,6 +215,9 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_mode(
     # Ressort mode-design
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer-3' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445613', 13500, sas_target);" in browser.contents
 
 
@@ -198,6 +226,9 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_essen(
     # Ressort essen-trinken
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer-2' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445619', 13500, sas_target);" in browser.contents
 
 
@@ -206,6 +237,9 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_leben(
     # Ressort leben
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445624', 13500, sas_target);" in browser.contents
 
 
@@ -213,6 +247,9 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_leben(
 def test_banner_mobile_should_request_with_correct_data_at_hp(
         testserver, testbrowser):
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    if is_adcontrolled(browser.contents):
+        pytest.skip("not applicable due to new ad configuration")
+
     assert "sasmobile('32375/445608', 13500, sas_target);" in browser.contents
     assert "sasmobile('32375/445608', 13501, sas_target);" in browser.contents
 
