@@ -7,6 +7,7 @@ import zeit.cms.interfaces
 import zeit.web.core.banner
 import zeit.web.site
 
+
 def is_adcontrolled(contents):
     return 'data-adDeliveryType="adcontroller"' in contents
 
