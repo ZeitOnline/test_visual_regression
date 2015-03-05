@@ -4,7 +4,7 @@ Change log for zeit.web
 1.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1314: Let gallery work for zeit.web.site
 
 
 1.16 (2015-03-03)
