@@ -11,6 +11,6 @@
 
 {% block teaser_kicker %}
 <span class="{{ self.layout() }}__marker">Blog</span>
-<span class="{{ self.layout() }}__name"><!-- Bogname hier --></span>
+<span class="{{ self.layout() }}__name">{{ teaser.blog.name | hide_none }}</span>
 <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
 {% endblock %}

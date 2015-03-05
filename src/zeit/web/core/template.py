@@ -152,7 +152,7 @@ def get_teaser_layout(teaser_block):
     if serie:
         layout = serie.column and 'zon-column' or 'zon-series'
 
-    if 'blogs' in 'blogs' in [x for x in teaser.uniqueId.split("/") if x]:
+    if teaser.blog:
         layout = 'zon-blog'
 
     return zope.component.getUtility(
