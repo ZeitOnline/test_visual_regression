@@ -84,3 +84,8 @@ class Base(zeit.web.core.view.Base):
     def banner_toggles(self, name):
         # no banner toggles in ZMO in the moment
         return True
+
+    @zeit.web.reify
+    def deliver_ads_oldschoolish(self):
+        # old school ads in ZMO
+        return True

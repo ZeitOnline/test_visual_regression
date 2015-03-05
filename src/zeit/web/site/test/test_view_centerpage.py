@@ -655,6 +655,13 @@ def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
     assert kicker.text == 'Desktop-Bilder'
 
 
+def test_oldads_toggle_is_off(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.deliver_ads_oldschoolish is False
+
+
 def test_centerpage_header_tags(application, jinja2_env):
     tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
     view, request = (mock.Mock(),) * 2
