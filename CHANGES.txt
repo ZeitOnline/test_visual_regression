@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.17 (unreleased)
------------------
+1.16.1 (2015-03-05)
+-------------------
 
 - ZON-1445: AdController MVP
 
