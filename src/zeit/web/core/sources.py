@@ -41,7 +41,9 @@ class ImageScales(zeit.web.core.utils.frozendict):
     zope.interface.implements(zeit.web.core.interfaces.IImageScales)
 
     def __init__(self, *args, **kw):
-        sub = lambda x: int(re.sub('[^0-9]', '', '0' + str(x)))
+        def sub(x):
+            return int(re.sub('[^0-9]', '', '0' + str(x)))
+
         scales = {s.name: (sub(s.width), sub(s.height)) for s in
                   ScaleSource()('')}
         super(ImageScales, self).__init__(scales)

@@ -137,19 +137,23 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
-def get_teaser_layout(teaser_block):
+def get_teaser_layout(teaser_block, teaser_position=0):
     try:
         layout = teaser_block.layout.id
-    except AttributeError:
+        teaser = list(teaser_block)[teaser_position]
+    except (AttributeError, IndexError, TypeError), e:
+        log.debug('Cannot produce a teaser layout: {}'.format(e))
         return
 
     try:
-        serie = list(teaser_block)[0].serie
-    except (AttributeError, IndexError, TypeError):
+        serie = teaser.serie
+    except AttributeError:
         serie = None
 
     if serie:
-        layout = serie.column and 'zon-column' or 'zon-series'
+        layout = 'zon-series'
+        if serie.column and get_column_image(teaser):
+            layout = 'zon-column'
 
     return zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -242,7 +246,8 @@ def closest_substitute_image(image_group,
     if not scale:
         return
 
-    orientation = lambda x, y: (x > y) << 1 | (x < y)  # Binary hashing
+    def orientation(x, y):
+        return (x > y) << 1 | (x < y)  # Binary hashing
 
     # Aggregate a list of images from the image group with a target separator.
     candidates = [(image_pattern, scale)]
@@ -306,12 +311,15 @@ def get_teaser_template(block_layout,
                         separator='_'):
     types = (block_layout, content_type, asset)
     default = ('default',)
-    iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
+
+    def iterable(t):
+        return isinstance(t, tuple) or isinstance(t, list)
+
     zipped = (t + default if iterable(t) else (t,) + default for t in types)
 
     combinations = [t for t in itertools.product(*zipped)]
-    func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-    return map(func, combinations)
+    return map(lambda x: '%s%s%s' % (prefix, separator.join(x), suffix),
+               combinations)
 
 
 @zeit.web.register_global
@@ -346,7 +354,7 @@ def get_column_image(teaser):
     try:
         return zeit.web.core.interfaces.ITeaserImage(
             teaser.authorships[0].target.column_teaser_image)
-    except (AttributeError, TypeError):
+    except (AttributeError, IndexError, TypeError):
         log.warn('Teaser {} has no authorships'.format(getattr(
             teaser, 'uniqueId', 'unknown')))
 

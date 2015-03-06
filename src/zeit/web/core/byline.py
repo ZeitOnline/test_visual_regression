@@ -39,7 +39,9 @@ class RenderByline(object):
     genre = ['glosse', 'reportage', 'nachricht', 'analyse']
     display_fe = ['glosse', 'kommentar', 'leserartikel', 'gastbeitrag',
                   'interview']
-    eine_n = lambda self, x: 'Eine ' if x in self.genre else 'Ein '
+
+    def eine_n(self, x):
+        return 'Eine ' if x in self.genre else 'Ein '
 
     def __init__(self, content):
         self.byline = []
@@ -97,15 +99,15 @@ class RenderByline(object):
 
     def _author_location_list(self, authors):
         authors_str = [Author(a) for a in authors]
-        authors_location = [', ' + author.location if author.location else ''
-                            for author in authors]
+        authors_loc = [', ' + author.location if author.location else ''
+                       for author in authors]
 
-        if len(set(authors_location)) == 1:
-            authors_location = (['' for x in range(len(authors_location) - 1)]
-                                + [authors_location[0]])
+        if len(set(authors_loc)) == 1:
+            authors_loc = (['' for x in range(len(authors_loc) - 1)] +
+                           [authors_loc[0]])
 
-        assert len(authors_str) == len(authors_location)
-        return authors_str, authors_location
+        assert len(authors_str) == len(authors_loc)
+        return authors_str, authors_loc
 
 
 @grokcore.component.implementer(IRenderByline)
