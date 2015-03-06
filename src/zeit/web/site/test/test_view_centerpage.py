@@ -646,6 +646,7 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
                                '.teaser-small__kicker'.format(uid))[0]
     assert kicker.text == 'Freier Teaser Kicker'
 
+
 def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
     uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
@@ -658,15 +659,15 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
     assert marker.text == 'Blog'
 
     name_of_blog = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__name'.format(uid))[0]
+                                     '.teaser-blog__name'.format(uid))[0]
     assert name_of_blog.text == 'NSU-Prozess'
 
     title = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__title'.format(uid))[0]
+                              '.teaser-blog__title'.format(uid))[0]
     assert title.text == 'Beate, die harmlose Hausfrau'
 
     blog_text = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__text'.format(uid))[0]
+                                  '.teaser-blog__text'.format(uid))[0]
     assert 'Lorem ipsum' in blog_text.text
 
     byline = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
