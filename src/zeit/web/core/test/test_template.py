@@ -238,6 +238,7 @@ def test_cp_teaser_with_comments_should_get_count(monkeyagatho, application):
 
 def test_zon_large_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'leader'
     teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
@@ -251,6 +252,7 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
 
 def test_zon_small_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'text-teaser'
     teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-small'
@@ -270,6 +272,7 @@ def test_zon_small_teaser_mapping_is_working_as_expected(application):
 
 def test_teaser_fullwidth_mapping_is_working_as_expected(application):
     block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'leader-fullwidth'
     teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-fullwidth'
@@ -277,6 +280,7 @@ def test_teaser_fullwidth_mapping_is_working_as_expected(application):
 
 def test_hide_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'archive-print-volume'
     teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'hide'

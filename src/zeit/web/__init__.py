@@ -1,6 +1,8 @@
-__import__('pkg_resources').declare_namespace(__name__)
+# -*- coding: utf-8 -*-
 
 from .core import decorator
+
+__import__('pkg_resources').declare_namespace(__name__)
 
 
 __all__ = [
