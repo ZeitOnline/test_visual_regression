@@ -116,6 +116,8 @@ settings = {
     'vivi_zeit.web_series-source': (
         'egg://zeit.web.core/data/config/series.xml'),
     'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
+    'vivi_zeit.content.link_source-blogs': (
+        'egg://zeit.web.core/data/config/blogs_meta.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 

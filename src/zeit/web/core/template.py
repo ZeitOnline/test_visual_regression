@@ -141,19 +141,18 @@ def get_teaser_layout(teaser_block, teaser_position=0):
     try:
         layout = teaser_block.layout.id
         teaser = list(teaser_block)[teaser_position]
-    except (AttributeError, IndexError, TypeError), e:
+    except (IndexError, TypeError), e:
         log.debug('Cannot produce a teaser layout: {}'.format(e))
         return
 
-    try:
-        serie = teaser.serie
-    except AttributeError:
-        serie = None
+    serie = getattr(teaser, 'serie', None)
 
     if serie:
         layout = 'zon-series'
         if serie.column and get_column_image(teaser):
             layout = 'zon-column'
+    elif getattr(teaser, 'blog', None):
+        layout = 'zon-blog'
 
     return zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)

@@ -4,6 +4,8 @@ Change log for zeit.web
 1.16.2 (unreleased)
 -------------------
 
+- ZON-1079: Configure, design link as blog teaser.
+
 - FIX: Restore default images in FF 35+
 
 

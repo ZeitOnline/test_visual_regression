@@ -1,0 +1,51 @@
+.teaser-blog
+	@extend %teaser
+	&__media
+		@extend %teaser-media
+		@extend %teaser-small-media
+	&__media-item
+		@extend %teaser-media-item
+	&__container
+		@extend %teaser-small-container
+	&__heading
+		@extend %teaser-heading
+	&__combined-link
+		@extend %teaser-combined-link
+	&__marker
+		color: $color-text
+		font-family: $font-franziska
+		font-size: $zon-font-s
+		font-style: italic
+		font-weight: normal
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 1.2
+		margin-bottom: em(3px, 13px)
+		+inline-block
+	&__name
+		@extend %teaser-kicker
+		color: $color-text
+		+inline-block
+		&:before
+			color: $color-text
+			content: "| "
+			font-weight: normal
+		&:not(:empty):after
+			content: ': '
+	&__kicker
+		@extend %teaser-kicker
+		+inline-block
+	&__title
+		@extend %teaser-title
+		font-family: $font-franziska
+		font-style: italic
+		font-weight: normal
+	&__text
+		@extend %teaser-text
+	&__byline
+		@extend %teaser-byline
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
