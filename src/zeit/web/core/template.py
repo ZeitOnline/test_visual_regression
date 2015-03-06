@@ -144,11 +144,13 @@ def get_teaser_layout(teaser_block):
         return
 
     try:
-        teaser = list(teaser_block)[0]
-        serie = teaser.serie
-        blog = teaser.blog
+        serie = list(teaser_block)[0].serie
     except (AttributeError, IndexError, TypeError):
         serie = None
+
+    try:
+        blog = list(teaser_block)[0].blog
+    except (AttributeError, IndexError, TypeError):
         blog = None
 
     if serie:

@@ -4,7 +4,7 @@ Change log for zeit.web
 1.16.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1079: Configure, design link as blog teaser.
 
 
 1.16.1 (2015-03-05)
