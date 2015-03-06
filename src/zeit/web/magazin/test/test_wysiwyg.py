@@ -18,5 +18,5 @@ def test_accessing_html_body_works(application):
         with pyramid.testing.testConfig(
                 registry=registry,
                 hook_zca=False, request=pyramid.testing.DummyRequest()):
-            assert ('<a href="http://example.com/artikel/01">foo</a>\n'
-                    == html_content.html)
+            assert ('<a href="http://example.com/artikel/01">foo</a>\n' ==
+                    html_content.html)

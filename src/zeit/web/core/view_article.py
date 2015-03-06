@@ -161,8 +161,8 @@ class Article(zeit.web.core.view.Content):
             'prefix': '',
             'location': ', ' + IAuthorReference(author_ref).location
             if IAuthorReference(author_ref).location and
-            IArticleTemplateSettings(self.context).template
-            != 'longform' else '',
+            IArticleTemplateSettings(self.context).template !=
+            'longform' else '',
         }
 
     @zeit.web.reify

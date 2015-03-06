@@ -75,8 +75,9 @@ def test_article_has_valid_facebook_meta_tags(testserver, testbrowser):
 def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
     selenium_driver.get('%s/artikel/05' % testserver.url)
 
-    locate_by_selector = lambda xp: WebDriverWait(selenium_driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xp)))
+    def locate_by_selector(xp):
+        return WebDriverWait(selenium_driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, xp)))
 
     assert locate_by_selector(
         '//script[@src=\'//stats.g.doubleclick.net/dc.js\']'), (

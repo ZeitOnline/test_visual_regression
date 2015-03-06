@@ -246,7 +246,8 @@ def closest_substitute_image(image_group,
     if not scale:
         return
 
-    orientation = lambda x, y: (x > y) << 1 | (x < y)  # Binary hashing
+    def orientation(x, y):
+        return (x > y) << 1 | (x < y)  # Binary hashing
 
     # Aggregate a list of images from the image group with a target separator.
     candidates = [(image_pattern, scale)]
@@ -310,12 +311,15 @@ def get_teaser_template(block_layout,
                         separator='_'):
     types = (block_layout, content_type, asset)
     default = ('default',)
-    iterable = lambda t: isinstance(t, tuple) or isinstance(t, list)
+
+    def iterable(t):
+        return isinstance(t, tuple) or isinstance(t, list)
+
     zipped = (t + default if iterable(t) else (t,) + default for t in types)
 
     combinations = [t for t in itertools.product(*zipped)]
-    func = lambda x: '%s%s%s' % (prefix, separator.join(x), suffix)
-    return map(func, combinations)
+    return map(lambda x: '%s%s%s' % (prefix, separator.join(x), suffix),
+               combinations)
 
 
 @zeit.web.register_global
