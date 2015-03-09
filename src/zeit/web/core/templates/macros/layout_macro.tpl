@@ -72,7 +72,6 @@
             }
 
             if ( ! $spacer ) {
-                console.log('create');
                 // prepare spacer
                 $spacer = document.createElement( 'header' );
                 $spacer.setAttribute( 'id', spacerId);
