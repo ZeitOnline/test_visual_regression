@@ -4,7 +4,7 @@ Change log for zeit.web
 1.16.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- BUG-193: Avoid huge whitespace by repeated adding of header element
 
 
 1.16.2 (2015-03-06)
