@@ -4,7 +4,7 @@ Change log for zeit.web
 1.16.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- DEV-621: Render a centerpage in RSS2.0 format as required for SocialFlow.
 
 
 1.16.2 (2015-03-06)
