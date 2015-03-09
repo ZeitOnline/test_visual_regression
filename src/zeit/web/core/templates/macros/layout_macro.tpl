@@ -51,9 +51,10 @@
         //set margin for native bar
         setHeaderMargin: function( _density_independant_pixels ) {
 
-            var $nav = document.getElementsByClassName( 'main-nav' )[0],
-                $page = document.getElementsByClassName( 'page-wrap--inner' )[0],
-                $spacer = document.createElement( 'header' );
+            var spacerId = 'wrapper_spacer_header',
+                $nav = document.getElementById( 'js-main-nav' ),
+                $page = document.getElementById( 'js-page-wrap-inner' ),
+                $spacer = document.getElementById( spacerId );
 
             this.hideZMOHeader( $nav );
 
@@ -70,12 +71,16 @@
                 hm = _density_independant_pixels;
             }
 
-            //prepare spacer
-            $spacer.setAttribute( 'id', 'wrapper_spacer_header');
-            $spacer.setAttribute( 'style', 'height:' + hm + 'px' );
+            if ( ! $spacer ) {
+                console.log('create');
+                // prepare spacer
+                $spacer = document.createElement( 'header' );
+                $spacer.setAttribute( 'id', spacerId);
+                $page.insertBefore( $spacer, $nav );
+            }
 
             // set and save settings if in valid scope
-            $page.insertBefore( $spacer, $nav );
+            $spacer.setAttribute( 'style', 'height:' + hm + 'px' );
             document.cookie = 'zeitwrapper_hm=' + hm +'; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
         }
     };
