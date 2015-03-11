@@ -10,7 +10,7 @@ require.config({
     paths: {
         'jquery': 'vendor/jquery',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
-        'bxSlider': 'libs/jquery.bxslider',
+        'bxSlider': 'vendor/jquery.bxslider',
         'esiparser': 'libs/esiparser',
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
@@ -24,7 +24,7 @@ require.config({
         'bxSlider': [ 'jquery' ],
         'jquery.clarify': [ 'jquery', 'require' ],
         'jquery.debounce': [ 'jquery' ],
-        'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery' ],
+        'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr' ],
         'web.core/plugins/jquery.referrerCount': [ 'jquery' ],
         'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
