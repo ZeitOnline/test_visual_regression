@@ -4,7 +4,9 @@
 {% macro image(obj, loop) -%}
     {% if obj | default_image_url -%}
         <figure class="
-            {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
+            {%- if loop -%}
+                slide
+            {%- elif obj.layout == 'large' -%}
                 stage--large
             {%- endif -%}
             ">
