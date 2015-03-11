@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-193: Avoid huge whitespace by repeated adding of header element
 
+- ZON-1494: Set beta cookie lifetime to 30 days
+
 
 1.16.2 (2015-03-06)
 -------------------
