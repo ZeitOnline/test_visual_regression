@@ -26,6 +26,7 @@
     <include package="zeit.intrafind" />
     <include package="zeit.magazin" />
     <include package="zeit.newsletter" />
+    <include package="zeit.push" />
     <include package="zeit.solr" />
     <include package="zeit.wysiwyg" />
 
