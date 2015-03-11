@@ -73,11 +73,6 @@ class Teaser(object):
             return
 
 
-ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
-ElementMaker = lxml.objectify.ElementMaker(
-    annotate=False, nsmap={'atom': ATOM_NAMESPACE})
-
-
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
@@ -152,6 +147,16 @@ class RSSFeed(
                     type=image.mimeType))
             channel.append(item)
         return root
+
+
+# Generic RSS helpers below; should we extract them somewhere?
+
+ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
+CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
+ElementMaker = lxml.objectify.ElementMaker(annotate=False, nsmap={
+    'atom': ATOM_NAMESPACE,
+    'content': CONTENT_NAMESPACE,
+})
 
 
 def format_rfc822_date(timestamp):
