@@ -49,7 +49,7 @@ class Beta(zeit.web.core.view.Base):
                 'site-version',
                 value='beta-%s' % update,
                 max_age=(60 * 60 * 24 * 30)  # cookie lifetime = 30 days
-                )
+            )
         return update or original
 
     @property
