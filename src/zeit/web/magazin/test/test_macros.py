@@ -299,7 +299,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                   'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
                   '<!--<!\\[endif\\]--></div><figcaption '
                   'class="figure__caption"><span '
-                  'class="figure__caption__text">test</span><span '
+                  'class="figure__text">test</span><span '
                   'class="figure__copyright">%s</span>'
                   '</figcaption></figure>'
                   % (el['css'], el['alt'], el['title'], cr))

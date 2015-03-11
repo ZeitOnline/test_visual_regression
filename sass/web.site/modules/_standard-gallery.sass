@@ -1,0 +1,16 @@
+$gallery-offset-desktop: ($max-page-width - $medium-content-width) / 2
+
+.gallery
+    background-color: $zon_lighter_grey
+    margin-bottom: $compact
+    // disable page padding
+    margin-left: -$page-padding
+    margin-right: -$page-padding
+    padding: 0 0 $small
+    +respond-min($break-tablet-min)
+        margin-bottom: $big
+        padding: $page-padding
+    +respond-min($break-desktop-min)
+        margin-left: -$gallery-offset-desktop
+        margin-right: -$gallery-offset-desktop
+        padding: $medium $big $big

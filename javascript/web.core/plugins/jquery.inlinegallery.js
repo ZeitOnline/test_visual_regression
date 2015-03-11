@@ -5,7 +5,7 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+(function( $, Modernizr ) {
     /**
      * See (http://jquery.com/).
      * @name jQuery
@@ -31,7 +31,8 @@
      */
     $.fn.inlinegallery = function( defaults ) {
 
-        var options = $.extend({
+        var hasTouch = Modernizr.touch,
+            options = $.extend({
                 onSlideAfter: function() {
                     // integrate tracking
                     if ( 'clickCount' in window ) {
@@ -40,7 +41,8 @@
                     }
                 },
                 slideSelector: '.figure-full-width',
-                pagerType: 'short',
+                controls: !hasTouch,
+                pagerType: ( hasTouch ) ? 'full' : 'short',
                 nextText: 'Zum nächsten Bild',
                 prevText: 'Zum vorigen Bild',
                 infiniteLoop: true,
@@ -64,7 +66,7 @@
             }
         }
 
-        if (galleryType !== 'dynamic') {
+        if ( this.length && !window.ZMO.isMobileView() && galleryType !== 'dynamic' ) {
             $.ajax({
                 url: window.ZMO.scriptsURL + '/gallery.blocked.ressorts.js',
                 dataType: 'script',
@@ -72,7 +74,7 @@
                     var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
                         isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
 
-                    if ( singleGallery && isStatic && !window.ZMO.isMobileView() ) {
+                    if ( singleGallery && isStatic ) {
                         singleGallery.goToSlide = function( slideIndex, direction ) {
                             var total = singleGallery.getSlideCount(),
                                 next = ( total + slideIndex ) % total,
@@ -122,7 +124,7 @@
         return this.each( function() {
             var gallery = $( this ),
                 galleryWidth = gallery.width(),
-                figures = gallery.find( '.figure-full-width' ),
+                figures = gallery.find( options.slideSelector ),
                 figcaptions = gallery.find( '.figure__caption' ),
                 backButton = $( '<div class="bx-zone-prev"><a class="bx-overlay-prev icon-pfeil-links">Ein Bild zurück</a></div>' ),
                 nextButton = $( '<div class="bx-zone-next"><a class="bx-overlay-next icon-pfeil-rechts">Ein Bild vor</a></div>' ),
@@ -173,14 +175,12 @@
 
             var hideOverlays = function() {
                 buttons.hide();
-                figcaptions.hide();
                 figures.on( 'click', function() {
-                    figcaptions.toggle();
                     buttons.toggle();
                 });
             };
 
-            if ( window.matchMedia ) {
+            if ( window.matchMedia && !hasTouch ) {
                 mq = window.matchMedia( '(max-width: 576px)' );
 
                 if ( mq.matches ) {
@@ -191,7 +191,6 @@
                     if ( mq.matches ) {
                         hideOverlays();
                     } else {
-                        figcaptions.show();
                         buttons.show();
                         figures.off( 'click' );
                     }
@@ -205,6 +204,7 @@
                     if ( caption.length && imageWidth > 30 && imageWidth < galleryWidth ) {
                         caption.css({
                             'max-width': imageWidth + 'px',
+                            'padding-left': 0,
                             'padding-right': 0
                         });
                     }
@@ -239,13 +239,19 @@
 
                 sliderViewport = gallery.parent();
 
-                /* additional buttons on image */
-                nextButton.insertAfter( gallery ).on( 'click', function() { slider.goToNextSlide(); } );
-                backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
+                if ( !hasTouch ) {
+                    /* additional buttons on image */
+                    nextButton.insertAfter( gallery ).on( 'click', function() { slider.goToNextSlide(); } );
+                    backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
 
-                /* add icons to existing gallery buttons */
-                $( '.bx-next' ).addClass( 'icon-pfeil-rechts' );
-                $( '.bx-prev' ).addClass( 'icon-pfeil-links' );
+                    /* add icons to existing gallery buttons */
+                    $( '.bx-next' ).addClass( 'icon-pfeil-rechts' );
+                    $( '.bx-prev' ).addClass( 'icon-pfeil-links' );
+
+                    sliderViewport.parent().addClass('bx-wrapper--no-touch');
+                } else {
+                    sliderViewport.parent().addClass('bx-wrapper--touch');
+                }
 
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
@@ -263,4 +269,4 @@
             }
         });
     };
-})( jQuery );
+})( jQuery, window.Modernizr );
