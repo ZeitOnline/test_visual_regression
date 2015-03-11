@@ -47,7 +47,9 @@ class Beta(zeit.web.core.view.Base):
         if update is not None and original != update:
             self.request.response.set_cookie(
                 'site-version',
-                value='beta-%s' % update)
+                value='beta-%s' % update,
+                max_age=(60 * 60 * 24 * 30)  # cookie lifetime = 30 days
+            )
         return update or original
 
     @property

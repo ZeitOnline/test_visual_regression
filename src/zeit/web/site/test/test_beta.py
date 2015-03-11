@@ -94,7 +94,7 @@ def test_beta_view_should_pass_through_site_version_from_session(version):
     request = mock.MagicMock()
     request.cookies = {'site-version': 'beta-{}'.format(version)}
 
-    def set_cookie(key, value=''):
+    def set_cookie(key, max_age, value=''):
         request.cookies[key] = value
 
     request.response.set_cookie = set_cookie
@@ -113,7 +113,7 @@ def test_beta_view_should_write_updated_site_version_to_session(opt, version):
     request = mock.MagicMock()
     request.cookies = {'site-version': 'beta-{}'.format(version)}
 
-    def set_cookie(key, value=''):
+    def set_cookie(key, max_age, value=''):
         request.cookie[key] = value
 
     request.response.set_cookie = set_cookie
