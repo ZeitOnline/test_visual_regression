@@ -36,7 +36,7 @@ All calling templates have to provide:
             {{ blocks.headervideo(obj, 'cp_leader__asset cp_leader__asset--' + self.shade(), '') }}
         {%- else -%}
             {# call image asset #}
-            <div class="scaled-image is-pixelperfect cp_leader__asset cp_leader__asset--{{ self.shade() }}" data-wrap=".cp_leader">
+            <div class="scaled-image is-pixelperfect cp_leader__asset cp_leader__asset--{{ self.shade() }}">
                 {{ lama.insert_responsive_image(image) }}
             </div>
         {%- endif %}

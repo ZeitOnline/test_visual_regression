@@ -598,7 +598,7 @@ def test_lead_full_light_version_is_working(testserver, testbrowser):
         '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     assert '<div class="cp_leader cp_leader--full">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect cp_leader__asset'\
-        ' cp_leader__asset--light" data-wrap=".cp_leader">' in browser.contents
+        ' cp_leader__asset--light">' in browser.contents
 
 
 def test_get_image_asset_should_return_image_asset(testserver, testbrowser):
