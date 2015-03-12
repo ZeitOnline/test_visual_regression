@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
+import zope.component
+
 import zeit.web.core.view
 import zeit.web.magazin.view
 
@@ -15,6 +17,21 @@ def is_zon_content(context, request):
     #    not zeit.web.magazin.view.is_zmo_content(context, request))
 
     return bool(not zeit.web.magazin.view.is_zmo_content(context, request))
+
+
+def check_breaking_news():
+    """Check for published breaking news
+    :rtype: bool
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    breaking_news_path = conf.get('breaking_news')
+    try:
+        breaking_news = zeit.cms.interfaces.ICMSContent(breaking_news_path)
+        return zeit.cms.workflow.interfaces.IPublishInfo(
+            breaking_news).published
+    except TypeError:
+        return False
 
 
 class Base(zeit.web.core.view.Base):
