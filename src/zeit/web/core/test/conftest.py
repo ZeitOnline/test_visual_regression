@@ -63,6 +63,9 @@ settings = {
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
     'connector_type': 'mock',
 
+    'breaking_news': (
+        'http://xml.zeit.de/eilmeldung/homepage-banner'),
+
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
     'vivi_zeit.cms_keyword-configuration': (
