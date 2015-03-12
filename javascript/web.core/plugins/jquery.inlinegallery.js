@@ -31,7 +31,7 @@
      */
     $.fn.inlinegallery = function( defaults ) {
 
-        var hasTouch = Modernizr.touch,
+        var hasTouch = Modernizr.touch || location.search === '?touch',
             options = $.extend({
                 onSlideAfter: function() {
                     // integrate tracking
