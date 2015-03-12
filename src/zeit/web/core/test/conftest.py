@@ -444,6 +444,24 @@ def comment_counter(testserver, testbrowser):
     return get_count
 
 
+@pytest.fixture(autouse=True)
+def ephemeral_settings(request):
+    # Store genuine settings
+    settings_orig = pyramid.config.settings.Settings(d=settings)
+    interface = zeit.web.core.interfaces.ISettings
+
+    def update_settings(custom_settings):
+        settings = pyramid.config.settings.Settings(d=custom_settings)
+        zope.interface.declarations.alsoProvides(settings, interface)
+        zope.component.provideUtility(settings, interface)
+
+    def restore_settings():
+        zope.interface.declarations.alsoProvides(settings_orig, interface)
+        zope.component.provideUtility(settings_orig, interface)
+    request.addfinalizer(restore_settings)
+    return update_settings
+
+
 class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
