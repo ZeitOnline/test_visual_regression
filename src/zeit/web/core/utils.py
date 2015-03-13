@@ -53,6 +53,20 @@ def to_int(value, pattern=re.compile(r'[^\d.]+')):
     return int(pattern.sub('', unicode(value, errors='ignore')))
 
 
+def first_child(iterable):
+    """Safely returns the first child of an iterable or None, if the iterable
+    is exhausted.
+
+    :param iterable: Some kind of iterable
+    :rtype: arbitrary object
+    """
+
+    try:
+        return iter(iterable).next()
+    except (AttributeError, TypeError, StopIteration):
+        return
+
+
 def neighborhood(iterable, default=None):
     """Sliding window generator function that yields a tuple in the form
     of (prev, item, next).
