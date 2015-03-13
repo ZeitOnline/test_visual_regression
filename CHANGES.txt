@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1494: Set beta cookie lifetime to 30 days
 
+- ZON-1498: Add dotted pager to slideshow galleries
+
 
 1.16.2 (2015-03-06)
 -------------------
