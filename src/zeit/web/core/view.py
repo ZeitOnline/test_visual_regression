@@ -23,6 +23,12 @@ import zeit.web.core.date
 log = logging.getLogger(__name__)
 
 
+def known_content(resource):
+    return (zeit.content.article.interfaces.IArticle.providedBy(resource) or
+            zeit.content.gallery.interfaces.IGallery.providedBy(resource) or
+            zeit.content.video.interfaces.IVideo.providedBy(resource))
+
+
 class Base(object):
     """Base class for all views."""
 
