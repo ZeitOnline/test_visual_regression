@@ -1,3 +1,4 @@
+{% if view.area_videostage %}
 <section class="video-stage" id="video-stage">
     {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) #}
     <header>
@@ -31,3 +32,4 @@
         <a class="video-centerpage-link" href="{{ 'http://xml.zeit.de/video' | translate_url }}">Alle Videos</a>
     </footer>
 </section>
+{% endif %}
