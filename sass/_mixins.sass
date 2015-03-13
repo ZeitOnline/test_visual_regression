@@ -232,6 +232,17 @@
 =zon-button-light
 	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal)
 
+// please use extremely carefully http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
+// rather use case may be light text on dark background
+=font-smoothing($value: on)
+	@if $value == on
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+	@else
+		@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and ( min-device-pixel-ratio: 1.25), only screen and ( min-resolution: 200dpi), only screen and ( min-resolution: 1.25dppx)
+			-webkit-font-smoothing: subpixel-antialiased
+			-moz-osx-font-smoothing: auto
+
 // pseudo classes
 %off-screen
 	height: 1px

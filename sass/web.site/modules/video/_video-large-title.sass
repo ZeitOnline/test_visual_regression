@@ -3,7 +3,6 @@
 	left: $video-title-padding
 	margin: 0
 	position: absolute
-	text-shadow: 0 1px 0 black
 	z-index: 2
 	+respond-min($break-phablet-min)
 		bottom: remify(66px)
@@ -14,11 +13,10 @@
 		display: block
 		font-size: remify(14px)
 		font-weight: normal
-		-webkit-font-smoothing: antialiased
 	&__title
 		display: block
 		font-size: remify(16px)
-		-webkit-font-smoothing: antialiased
+		+font-smoothing(on)
 		+respond-min($break-phablet-min)
 			font-size: remify(20px)
 		+respond-min($break-tablet-min)
