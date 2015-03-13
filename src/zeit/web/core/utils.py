@@ -1,4 +1,6 @@
 import collections
+import re
+
 
 __all__ = ['defaultdict', 'nslist', 'nstuple', 'nsdict', 'nsset', 'nsstr',
            'nsunicode']
@@ -38,6 +40,17 @@ def fix_misrepresented_latin(val):
         except UnicodeDecodeError:
             pass
     return val
+
+
+def to_int(value, pattern=re.compile(r'[^\d.]+')):
+    """Converts an arbitrary object with a unicode representation to an int
+    by trashing all non-decimal characters.
+
+    :param value: Arbitrary input
+    :rtype: int
+    """
+
+    return int(pattern.sub('', unicode(value, errors='ignore')))
 
 
 def neighborhood(iterable, default=None):
