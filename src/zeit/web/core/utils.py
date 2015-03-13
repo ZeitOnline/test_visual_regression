@@ -117,3 +117,10 @@ class frozendict(dict):
 
     __delitem__ = __setitem__ = clear = pop = popitem = setdefault = update = (
         NotImplemented)
+
+
+class attrdict(dict):
+    """Custom dictionary class that allows item access via attribute names."""
+
+    def __getattr__(self, key):
+        return key in self and self[key] or self.__getattribute__(key)
