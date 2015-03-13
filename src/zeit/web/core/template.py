@@ -138,13 +138,19 @@ def hide_none(string):
 
 @zeit.web.register_filter
 def get_teaser_layout(teaser_block, teaser_position=0):
+    request = pyramid.threadlocal.get_current_request()
+    request.teaser_layout = get_attr(request, 'teaser_layout',{})
+    if getattr(teaser_block,"uniqueId", None):
+        layout = request.teaser_layout.get(teaser_block.uniqueId, None)
+        if layout:
+            return layout
+
     try:
         layout = teaser_block.layout.id
         teaser = list(teaser_block)[teaser_position]
     except (IndexError, TypeError), e:
         log.debug('Cannot produce a teaser layout: {}'.format(e))
         return
-
     serie = getattr(teaser, 'serie', None)
 
     if serie:
@@ -154,9 +160,13 @@ def get_teaser_layout(teaser_block, teaser_position=0):
     elif getattr(teaser, 'blog', None):
         layout = 'zon-blog'
 
-    return zope.component.getUtility(
+    layout =  zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
+    if getattr(teaser_block,"uniqueId", None):
+        request.teaser_layout[teaser_block.uniqueId] = layout
+
+    return layout
 
 @zeit.web.register_filter
 def remove_break(string):
