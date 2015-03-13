@@ -1,16 +1,9 @@
 .gallery
     background-color: $grey--light
-    margin-top: $compact
-    margin-bottom: $compact
-    // disable page padding
-    margin-left: -$page-padding--small
-    margin-right: -$page-padding--small
+    margin: $compact (-$page-padding--small)
     padding: 0 0 $small
     +respond-min($break-1)
-        margin-top: $big
-        margin-bottom: $big
-        margin-left: -$page-padding
-        margin-right: -$page-padding
+        margin: $big (-$page-padding)
         padding: $compact $page-padding
     +respond-min($break-3)
         margin-left: -($page-padding+$gutter/2)
