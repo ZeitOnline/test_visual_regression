@@ -468,8 +468,6 @@ def json_comment_count(request):
         return pyramid.response.Response(
             'Invalid value for parameter: unique_id', 412)
 
-    counts = zeit.web.core.comments.comments_per_unique_id()
-
     articles = []
     if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
         cp = zeit.web.site.view_centerpage.Centerpage(context, request)
@@ -479,13 +477,15 @@ def json_comment_count(request):
         article = zeit.content.article.interfaces.IArticle(context)
         articles.append(article)
 
+    counts = zeit.web.core.comments.get_counts(
+        *[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:
         try:
             uid = article.uniqueId
             path = uid.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
-            count = int(counts.get(path), 0)
+            count = counts.get(path)
         except (AttributeError, TypeError):
             count = 0
 
