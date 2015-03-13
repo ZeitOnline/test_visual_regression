@@ -1,6 +1,6 @@
 {% set box = view.area_printbox -%}
 
-{% if box.has_digital_ad -%}
+{% if box and box.has_digital_ad -%}
 <aside class="print-box print-box--angebot">
     <div class="print-box__heading">
         {{ box.supertitle }}
@@ -22,7 +22,7 @@
         </div>
     </div>
 </aside>
-{% else -%}
+{% elif box -%}
 <aside class="print-box">
     {% set title = box.supertitle + ' - ' + box.title -%}
     <div class="print-box__heading">
