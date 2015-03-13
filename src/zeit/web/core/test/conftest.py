@@ -56,8 +56,8 @@ settings = {
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
 
     'community_host_timeout_secs': '10',
-    'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
-    'spektrum_img_host': 'http://localhost:6552',
+    'spektrum_hp_feed': 'http://localhost:6552/spektrum/feed.xml',
+    'spektrum_img_host': 'http://localhost:6552/spektrum',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -288,7 +288,7 @@ def debug_testserver(debug_application, request):
 
 
 @pytest.fixture(scope='function')
-def mockcommunity_factory(request):
+def mockserver_factory(request):
     def factory(response=None):
         def mock_app(env, start_response):
             start_response('200 OK', [])
@@ -304,11 +304,10 @@ def mockcommunity_factory(request):
 
 
 @pytest.fixture(scope='session')
-def mockspektrum(request):
-
+def mockserver(request):
     from pyramid.config import Configurator
     config = Configurator()
-    config.add_static_view('static', 'zeit.web.core:data/spektrum/')
+    config.add_static_view('/', 'zeit.web.core:data/')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6552
@@ -320,7 +319,7 @@ def mockspektrum(request):
 
 
 @pytest.fixture(scope='session')
-def testserver(application_session, request, mockspektrum):
+def testserver(application_session, request, mockserver):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6543
     server.wsgi_app = application_session
