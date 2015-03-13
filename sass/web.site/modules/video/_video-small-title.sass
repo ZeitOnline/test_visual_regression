@@ -4,18 +4,18 @@
 	line-height: 1
 	margin: 0 remify(12px) 0 0
 	position: absolute
-	text-shadow: 0 1px 0 black
 	z-index: 2
 	&__kicker
 		color: #ccc
 		display: none
 		font-size: remify(14px)
 		font-weight: normal
-		-webkit-font-smoothing: antialiased
+		letter-spacing: $zon-letter-spacing-l
+		margin-bottom: remify(4px)
 		+respond-min($break-desktop-min)
 			display: block
 	&__title
 		color: #eee
-		display: inline
-		font-size: remify(14px)
-		-webkit-font-smoothing: antialiased
+		font-size: remify(16px)
+		letter-spacing: $zon-letter-spacing-s
+		+font-smoothing(on)

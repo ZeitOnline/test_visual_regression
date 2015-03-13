@@ -29,5 +29,8 @@
 			margin: 0
 	&--inline
 		display: inline
+		+respond-min($break-desktop-min)
+			display: block
+			padding-top: remify(7px)
 	&--hidden
 		display: none
