@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
-
 import babel.dates
 
 import zeit.content.cp.interfaces
@@ -16,6 +15,15 @@ class Centerpage(zeit.web.core.view.Base):
         super(Centerpage, self).__init__(*args, **kwargs)
         self._copyrights = {}
         self.context.advertising_enabled = self.banner_on
+
+    def __iter__(self):
+        for area in self.context.itervalues():
+            for block in area.itervalues():
+                if not hasattr(block, '__iter__'):
+                    continue
+                for teaser in block:
+                    if zeit.web.core.view.known_content(teaser):
+                        yield teaser
 
     @zeit.web.reify
     def is_hp(self):
