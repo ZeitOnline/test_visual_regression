@@ -1,17 +1,12 @@
 .teaser-fullwidth
 	@extend %teaser
-	background: $black
-	margin: $petite (-$petite)
-	padding: 0
-	position: relative
-	overflow: hidden
-	&:first-child
-		margin: 0 (-$page-padding)
-		+respond-min($break-tablet-min)
-			margin: $petite (-$petite)
+	border-bottom: 1px solid $zon_light_grey
 	+respond-min($break-tablet-min)
-		background: none
-		margin-top: 0
+		border-bottom: none
+		margin-bottom: $petite
+		overflow: hidden
+		padding: 0
+		position: relative
 		&:before
 			content: ''
 			min-height: 100%
@@ -28,76 +23,68 @@
 		&:hover:before
 			opacity: 1
 	&__media
-		margin: 0
-		width: 100%
-		z-index: 1
+		margin: 0 (-$page-padding) $petite
+		+respond-min($break-tablet-min)
+			margin: 0
+			z-index: 1
 	&__media-container
-		+teaser-image-dark-overlay
+		+respond-min($break-tablet-min)
+			+teaser-image-dark-overlay
 	&__media-item
 		height: auto
 		width: 100%
 	&__inner-helper
-		margin-top: em(-50px)
-		padding: 0 $little $petite $little
-		position: relative
-		z-index: 2
-		+respond-min($break-phablet-min)
-			margin-top: em(-80px)
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
 			position: absolute
-			margin-top: 0
 			padding: 0 $twice $twice $twice
 			width: em(510px) + (2 * $twice)
+			z-index: 2
 		+respond-min($break-desktop-min)
 			padding: 0 $big $big $big
 			width: em(530px) + (2 * $big)
 	&__heading
 		@extend %teaser-heading
-		position: relative
 	&__kicker
 		@extend %teaser-kicker
-		color: $white
-		letter-spacing: 0.12em
-		margin-bottom: em(6px, 13px)
-		-webkit-font-smoothing: antialiased
 		+respond-min($break-tablet-min)
+			color: $white
+			-webkit-font-smoothing: antialiased
 			font-size: $font-s
-			margin-bottom: em(6px, $font-s--px)
+			letter-spacing: 0.12em
+			margin-bottom: remify(6px)
 	&__title
 		@extend %teaser-title
-		color: $white
-		font-size: $zon-font-m
+		font-size: em(28px)
 		line-height: 1.12
-		&:hover
-			color: $white
-		-webkit-font-smoothing: antialiased
-		+respond-min($break-phablet-min)
-			font-size: $font-xl
 		+respond-min($break-tablet-min)
-			font-size: $font-mxxl
+			color: $white
+			&:hover
+				color: $white
+			-webkit-font-smoothing: antialiased
 		+respond-min($break-desktop-min)
 			font-size: em(34px)
 			line-height: 1.232
 	&__combined-link
 		@extend %teaser-combined-link
 	&__container
-		padding: 0
 	&__text
 		@extend %teaser-text
-		-webkit-font-smoothing: antialiased
-		color: $white
+		+respond-min($break-tablet-min)
+			color: $white
+			-webkit-font-smoothing: antialiased
 		+respond-min($break-desktop-min)
 			font-size: $font-ml
 	&__byline,
 	&__metadata
 		@extend %teaser-byline
-		-webkit-font-smoothing: antialiased
+		+respond-min($break-tablet-min)
+			color: $zon_lighter_grey
+			-webkit-font-smoothing: antialiased
 		+respond-min($break-desktop-min)
 			font-size: $font-s--rem
 			letter-spacing: 0.04em
-			margin-bottom: 0px
 	&__datetime
 		@extend %teaser-datetime
 	&__commentcount
