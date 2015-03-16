@@ -6,16 +6,20 @@
 	position: absolute
 	z-index: 2
 	&__kicker
-		color: #ccc
+		color: #eee
 		display: none
-		font-size: remify(14px)
+		font-size: remify(13px)
 		font-weight: normal
 		letter-spacing: $zon-letter-spacing-l
 		margin-bottom: remify(4px)
+		+transition-on-hover(&, '.video-small__combined-link')
+			opacity: 0.5
 		+respond-min($break-desktop-min)
 			display: block
 	&__title
-		color: #eee
+		color: #fff
 		font-size: remify(16px)
 		letter-spacing: $zon-letter-spacing-s
-		+font-smoothing(on)
+		+font-smoothing()
+		+transition-on-hover(&, '.video-small__combined-link')
+			opacity: 0.5
