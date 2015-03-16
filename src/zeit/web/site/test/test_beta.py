@@ -6,7 +6,7 @@ import zeit.web.site.view_beta
 
 
 def test_anon_user_should_see_login_prompt_on_beta_page(
-        mockcommunity_factory, testserver, testbrowser):
+        mockserver_factory, testserver, testbrowser):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>0</uid>
@@ -15,13 +15,13 @@ def test_anon_user_should_see_login_prompt_on_beta_page(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     browser = testbrowser('{}/beta'.format(testserver.url))
     assert len(browser.cssselect('a.beta-teaser__button')) == 2
 
 
 def test_community_user_should_see_email_prompt_on_beta_page(
-        mockcommunity_factory, testserver, testbrowser):
+        mockserver_factory, testserver, testbrowser):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>223754</uid>
@@ -30,13 +30,13 @@ def test_community_user_should_see_email_prompt_on_beta_page(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     browser = testbrowser('{}/beta'.format(testserver.url))
     assert len(browser.cssselect('a.beta-teaser__button')) == 1
 
 
 def test_beta_user_should_see_toggle_form_on_beta_page(
-        mockcommunity_factory, testserver, testbrowser):
+        mockserver_factory, testserver, testbrowser):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>223754</uid>
@@ -46,13 +46,13 @@ def test_beta_user_should_see_toggle_form_on_beta_page(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     browser = testbrowser('{}/beta'.format(testserver.url))
     assert len(browser.cssselect('input.beta-teaser__button')) == 1
 
 
 def test_beta_view_should_identify_community_user(
-        app_settings, mockcommunity_factory):
+        app_settings, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -61,7 +61,7 @@ def test_beta_view_should_identify_community_user(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     request = mock.MagicMock()
     request.registry.settings = app_settings
     view = zeit.web.site.view_beta.Beta(None, request)
@@ -69,7 +69,7 @@ def test_beta_view_should_identify_community_user(
 
 
 def test_beta_view_should_lookup_beta_role_correctly(
-        app_settings, mockcommunity_factory):
+        app_settings, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -79,7 +79,7 @@ def test_beta_view_should_lookup_beta_role_correctly(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     request = mock.MagicMock()
     request.registry.settings = app_settings
     view = zeit.web.site.view_beta.Beta(None, request)

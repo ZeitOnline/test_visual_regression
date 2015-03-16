@@ -164,7 +164,7 @@ def test_spektrum_topic_links_should_produce_correct_tracking_slugs(
         'hp.centerpage.teaser.parquet.43.3.c.title')
 ])
 def test_spektrum_teasers_should_produce_correct_tracking_slugs(
-        index, img_slug, title_slug, testbrowser, testserver):
+        index, img_slug, title_slug, testbrowser, testserver, mockserver):
     browser = testbrowser(
         '%s/spektrum-kooperation?parquet-position=43' % testserver.url)
     img = browser.cssselect('.teaser-parquet-small__media-link')[index]
