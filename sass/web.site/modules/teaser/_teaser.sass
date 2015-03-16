@@ -4,7 +4,7 @@
 
 %teaser
 	+pie-clearfix
-	border-top: 1px solid #ccc
+	border-top: 1px solid $zon_light_grey
 	margin: 0 -($page-padding)
 	padding: $petite $page-padding
 	&:nth-of-type(1)
@@ -109,6 +109,9 @@
 	letter-spacing: $zon-letter-spacing-s
 
 %teaser-datetime
+	display: inline-block // needed for text-transform to work
+	&:first-letter
+		text-transform: uppercase
 	&:not(:last-child):not(:empty):after
 		content: ' / '
 		margin: 0 $micro 0 $micro
