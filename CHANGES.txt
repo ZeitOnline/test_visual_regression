@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1494: Set beta cookie lifetime to 30 days
 
+- ZON-1506: Caching for get_teaser_layout
+
 
 1.16.2 (2015-03-06)
 -------------------
