@@ -29,7 +29,7 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
         u'Forscher entdecken ein China die \xc3\x9cberreste eines bisher '
         u'unbekannten, langhalsigen Dinosauriers.')
     assert teaser.feed_image == (
-        'http://localhost:6552/static/images/img1.jpg')
+        'http://localhost:6552/spektrum/images/img1.jpg')
 
 
 def test_spektrum_teaser_object_with_empty_values_should_not_break():
