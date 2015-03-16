@@ -156,10 +156,10 @@ def request_counts(*unique_ids):
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     timeout = float(conf.get('community_host_timeout_secs', 5))
-    uri = conf.get('community_host', '') + conf.get(
-        'node_comment_statistics', '')
+    uri = '{}/agatho/node-comment-statistics'.format(
+        conf.get('community_host', '').rstrip('/'))
     try:
-        response = requests.post(uri, data={'unique_id': unique_ids},
+        response = requests.post(uri, data={'unique_ids': unique_ids},
                                  timeout=timeout)
         return response.ok and response.content or None
     except (AttributeError, requests.exceptions.RequestException):
