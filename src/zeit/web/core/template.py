@@ -137,10 +137,17 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
-def get_teaser_layout(teaser_block, teaser_position=0):
-    request = pyramid.threadlocal.get_current_request()
-    request.teaser_layout = get_attr(request, 'teaser_layout',{})
-    if getattr(teaser_block,"uniqueId", None):
+def get_teaser_layout(teaser_block,
+                      teaser_position=0,
+                      request = pyramid.threadlocal.get_current_request()):
+
+    # Calculating the layout of a teaser can be slightly more expensive in
+    # zeit.web, since we do lookups in some vocabularies, to change the layout,
+    # that was originally set for a teaser.
+    # Since we might lookup a teaser-layout more than once per request, we can
+    # cache it in the request object.
+    if request and getattr(teaser_block,"uniqueId", None):
+        request.teaser_layout = get_attr(request, 'teaser_layout', {}) or {}
         layout = request.teaser_layout.get(teaser_block.uniqueId, None)
         if layout:
             return layout
@@ -163,10 +170,11 @@ def get_teaser_layout(teaser_block, teaser_position=0):
     layout =  zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
-    if getattr(teaser_block,"uniqueId", None):
+    if request and getattr(teaser_block,"uniqueId", None):
         request.teaser_layout[teaser_block.uniqueId] = layout
 
     return layout
+
 
 @zeit.web.register_filter
 def remove_break(string):
