@@ -90,9 +90,8 @@ def test_native_images_should_set_caching_headers(testserver, app_settings):
         app_settings.get('caching_time_image'))
 
 
-def test_spektrum_images_should_set_caching_headers(
-        mockserver, testserver, app_settings):
-    resp = requests.get('{}/spektrum-image/static/images/img1.jpg'.format(
+def test_spektrum_images_should_set_caching_headers(testserver, app_settings):
+    resp = requests.get('{}/spektrum-image/images/img1.jpg'.format(
         testserver.url))
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
         app_settings.get('caching_time_external'))

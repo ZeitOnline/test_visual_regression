@@ -186,8 +186,7 @@ def test_cp_lead_areas_are_available(application):
     assert len(view.area_lead)
 
 
-def test_cp_leadteaser_has_expected_structure(
-        mockserver, selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector('.cp_leader')
@@ -240,8 +239,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
         assert img.get_attribute("title") == 'Katze!'
 
 
-def test_cp_leadteaser_has_expected_links(
-        mockserver, selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_leader")
@@ -337,7 +335,7 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
 
 
 def test_cp_large_photo_button_has_expected_structure(
-        mockserver, selenium_driver, testserver):
+        selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--large-photo")
@@ -382,8 +380,7 @@ def test_cp_large_photo_button_has_expected_links(selenium_driver, testserver):
                 link.get_attribute("href"))
 
 
-def test_cp_gallery_teaser_has_expected_structure(
-        mockserver, selenium_driver, testserver):
+def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--gallery")

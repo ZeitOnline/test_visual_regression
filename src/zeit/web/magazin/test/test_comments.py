@@ -3,15 +3,14 @@ import lxml.etree
 import zeit.web.core.comments
 
 
-def test_request_thread_should_respond(application, mockserver):
+def test_request_thread_should_respond(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
     thread = zeit.web.core.comments.request_thread(unique_id)
     assert lxml.etree.fromstring(thread).xpath('comment_count')[0].text == '41'
 
 
-def test_request_thread_should_respond_for_nonexistent(
-        application, mockserver):
+def test_request_thread_should_respond_for_nonexistent(application):
     assert zeit.web.core.comments.request_thread('nosuchthread') is None
 
 

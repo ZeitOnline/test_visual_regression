@@ -4,13 +4,13 @@ import zeit.web.core.template
 
 
 def test_comment_section_should_be_preliminarily_limited_to_20_entries(
-        testbrowser, testserver, mockserver):
+        testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     assert len(browser.cssselect('article.comment')) == 20
 
 
 def test_comments_should_contain_basic_meta_data(
-        testbrowser, testserver, mockserver):
+        testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     comm = browser.cssselect('article.comment')[0]
     assert 'Skarsgard' in comm.cssselect('.comment__name')[0].text
@@ -23,7 +23,7 @@ def test_comments_should_contain_basic_meta_data(
 
 
 def test_comments_get_thread_should_respect_top_level_sort_order(
-        dummy_request, mockserver):
+        dummy_request):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
 

@@ -87,8 +87,7 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(
-        application, jinja2_env, mockserver):
+def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default_refactoring.tpl')
 
