@@ -246,6 +246,32 @@
 			-webkit-font-smoothing: subpixel-antialiased
 			-moz-osx-font-smoothing: auto
 
+/// animating elements *on hover*
+/// if a parent element is given, the hover event is tied to this element
+/// @param {element} $element - the element to play animation on
+/// @param {element|bool} $parent [false] - parent element for hover effect, if not supplied the $element is used
+/// @param {map} $trans - transition properties
+/// @property {string} $trans.property [opacity] - transition property
+/// @property {number} $trans.delay [0] - transition delay
+/// @property {number} $trans.duration [.5s] - transition duration
+/// @property {string} $trans.timing [ease-in-out] - transition timing function
+/// @content css of the animated state
+/// @output styles for the element, the parent (@-rooted) if applicable and the hover state
+=transition-on-hover($elem, $parent: false, $trans: (property: opacity, delay: 0, duration: .5s, timing: ease-in-out))
+	+transition-property( map-get($trans, property) )
+	+transition-delay( map-get($trans, delay) )
+	+transition-duration( map-get($trans, duration) )
+	+transition-timing-function( map-get($trans, timing) )
+	@if not $parent
+		&:hover
+			#{$elem}
+				@content
+	@else
+		@at-root #{$parent}
+			&:hover
+				#{$elem}
+					@content
+
 // pseudo classes
 %off-screen
 	height: 1px
