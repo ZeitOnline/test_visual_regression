@@ -91,9 +91,9 @@ def request_thread(path):
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     timeout = float(conf.get('community_host_timeout_secs', 5))
-    uri = '{}/agatho/thread{}'.format(conf.get('agatho_host', '') + path)
+    uri = '{}/agatho/thread{}'.format(conf.get('agatho_host', ''), path)
     try:
-        response = requests.get(uri, timeout=timeout).content
+        response = requests.get(uri, timeout=timeout)
         return response.ok and response.content or None
     except (AttributeError, requests.exceptions.RequestException):
         return
@@ -156,7 +156,8 @@ def request_counts(*unique_ids):
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     timeout = float(conf.get('community_host_timeout_secs', 5))
-    uri = conf.get('community_host', '').rstrip('/') + '/cp_counts'
+    uri = conf.get('community_host', '') + conf.get(
+        'node_comment_statistics', '')
     try:
         response = requests.post(uri, data={'unique_id': unique_ids},
                                  timeout=timeout)
@@ -177,18 +178,20 @@ def get_counts(*unique_ids):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
     if len(unique_ids):
-        raw = request_counts(unique_ids)
+        raw = request_counts(*unique_ids)
         if not raw:
             return {}
     else:
-        uri = 'http://xml.zeit.de/' + conf.get('node_comment_statistics')
+        uri = zeit.cms.interfaces.ID_NAMESPACE + conf.get(
+            'node_comment_statistics', '')
         try:
             raw = zeit.cms.interfaces.ICMSContent(uri).data.encode()
         except (AttributeError, TypeError):
             return {}
     try:
-        ascii = raw.encode('ascii', 'xmlcharrefreplace')
+        ascii = raw.encode('ascii', 'xmlcharrefreplace').strip()
         nodes = lxml.etree.fromstring(ascii).xpath('/nodes/node')
-        return {node.values()[1]: node.values()[0] for node in nodes}
-    except (AttributeError, IndexError, lxml.etree.LxmlError):
+        return {zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') + n.attrib['url']:
+                n.attrib['comment_count'] for n in nodes}
+    except (AttributeError, IndexError, KeyError, lxml.etree.LxmlError):
         return {}
