@@ -19,7 +19,7 @@ class FeedBase(
         self.request.response.content_type = 'application/rss+xml'
         return lxml.etree.tostring(
             self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='utf8')
+            encoding='UTF-8')
 
     def build_feed(self):
         E = zeit.web.site.spektrum.ElementMaker
