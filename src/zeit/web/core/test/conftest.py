@@ -2,7 +2,6 @@
 import json
 import os.path
 import pkg_resources
-import urllib
 
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -28,6 +27,8 @@ import zeit.cms.interfaces
 import zeit.web.core
 import zeit.web.core.comments
 import zeit.web.core.application
+import zeit.web.core.utils
+import zeit.web.core.view
 
 
 settings = {
@@ -47,8 +48,7 @@ settings = {
     'caching_time_videostill': '35',
     'caching_time_external': '15',
     'community_host': 'http://localhost:6551/',
-    'agatho_host': u'file://%s' % pkg_resources.resource_filename(
-        'zeit.web.core', 'data/comments'),
+    'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
@@ -151,7 +151,8 @@ def test_asset(path):
 
 @pytest.fixture
 def app_settings():
-    return settings.copy()
+    return zeit.web.core.utils.defaultattrdict(
+        lambda *_: None, settings.iteritems())
 
 
 @pytest.fixture(scope='module')
@@ -264,16 +265,12 @@ def config(application, request):
 
 
 @pytest.fixture
-def dummy_request(request, config):
+def dummy_request(request, config, app_settings):
     req = pyramid.testing.DummyRequest(is_xhr=False)
+    req.response.headers = set()
+    req.registry.settings = app_settings
     config.manager.get()['request'] = req
     return req
-
-
-@pytest.fixture
-def agatho():
-    return zeit.web.core.comments.Agatho(
-        settings['agatho_host'] + '/agatho/thread/')
 
 
 @pytest.fixture
@@ -305,6 +302,7 @@ def mockserver_factory(request):
 
 @pytest.fixture(scope='session')
 def mockserver(request):
+    """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
     config = Configurator()
     config.add_static_view('/', 'zeit.web.core:data/')
@@ -372,19 +370,6 @@ def appbrowser(application):
 
 
 @pytest.fixture
-def monkeyagatho(monkeypatch):
-    def collection_get(self, unique_id):
-        path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
-        try:
-            return lxml.etree.parse(self.agatho_host + path)
-        except IOError:
-            return
-
-    monkeypatch.setattr(
-        zeit.web.core.comments.Agatho, 'collection_get', collection_get)
-
-
-@pytest.fixture
 def image_group_factory():
     class MockImageGroup(dict):
         zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
@@ -435,11 +420,12 @@ def css_selector(request):
 
 
 @pytest.fixture
-def comment_counter(testserver, testbrowser):
-    def get_count(**kw):
-        params = urllib.urlencode(kw)
-        url = '%s/json/comment_count?%s' % (testserver.url, params)
-        return testbrowser(url)
+def comment_counter(app_settings, application):
+    def get_count(**kwargs):
+        request = pyramid.testing.DummyRequest()
+        request.registry.settings = app_settings
+        request.GET = kwargs
+        return zeit.web.core.view.json_comment_count(request)
     return get_count
 
 
