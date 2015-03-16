@@ -477,17 +477,11 @@ def json_comment_count(request):
         article = zeit.content.article.interfaces.IArticle(context)
         articles.append(article)
 
-    counts = zeit.web.core.comments.get_counts(
-        *[a.uniqueId for a in articles])
+    counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:
-        try:
-            uid = article.uniqueId
-            path = uid.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
-            count = counts.get(path)
-        except (AttributeError, TypeError):
-            count = 0
+        count = counts.get(article.uniqueId, 0)
 
         if 'no_interpolation' not in request.GET:
             # XXX: Interpolate comment counts to compensate for slow updates to
@@ -497,7 +491,7 @@ def json_comment_count(request):
             count = int(__import__('math').ceil(throttle * count))
             request.session.flash(throttle, queue='cc_throttle')
 
-        comment_count[uid] = '%s Kommentar%s' % (
+        comment_count[article.uniqueId] = '%s Kommentar%s' % (
             count == 0 and 'Keine' or count, count != 1 and 'e' or '')
 
     return {'comment_count': comment_count}
