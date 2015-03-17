@@ -3,42 +3,47 @@
 	&__media
 		@extend %teaser-media
 		@extend %teaser-small-media
+		margin-bottom: remify(12px)
 	&__media-item
 		@extend %teaser-media-item
 	&__container
 		@extend %teaser-small-container
 	&__heading
 		@extend %teaser-heading
+		display: inline
 	&__combined-link
 		@extend %teaser-combined-link
 	&__marker
-		color: $color-text
-		font-family: $font-franziska
-		font-size: $zon-font-s
-		font-style: italic
-		font-weight: normal
-		letter-spacing: $zon-letter-spacing-m
+		display: inline
+		color: $zon_dark_grey
+		font-family: $font-tabletgothic
+		font-size: remify(14px)
+		font-weight: bold
+		letter-spacing: 0.14em
 		line-height: 1.2
-		margin-bottom: em(3px, 13px)
-		+inline-block
-	&__name
-		@extend %teaser-kicker
-		color: $color-text
-		+inline-block
-		&:before
-			color: $color-text
-			content: "| "
-			font-weight: normal
-		&:not(:empty):after
-			content: ': '
+		margin: remify(0 2px 14px 0)
+	&__name,
 	&__kicker
-		@extend %teaser-kicker
-		+inline-block
+		color: $zon_dark_grey
+		font-family: $font-franziska
+		font-size: remify(14px)
+		font-style: italic
+		margin-right: remify(2px)
+	&__name
+		display: inline
+		line-height: 1.2
+	&__kicker
+		+inline-block(baseline)
+		font-weight: normal
 	&__title
 		@extend %teaser-title
-		font-family: $font-franziska
-		font-style: italic
-		font-weight: normal
+		margin: remify(8px 0)
+		&:before
+			border-top: remify(5px) solid $zon-alto
+			content: ''
+			display: block
+			padding-bottom: remify(10px)
+			width: remify(36px)
 	&__text
 		@extend %teaser-text
 	&__byline

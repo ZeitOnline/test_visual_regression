@@ -29,7 +29,7 @@ def test_session_cache_has_precedence(policy, dummy_request):
 
 
 def test_session_cache_cleared_when_id_changes(
-        policy, dummy_request, mockcommunity_factory):
+        policy, dummy_request, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -39,7 +39,7 @@ def test_session_cache_cleared_when_id_changes(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     dummy_request.cookies['drupal-userid'] = 23
     # Session still contains old user id and sensitive information
     dummy_request.session['user'] = dict(uid=42, name='s3crit')
@@ -50,7 +50,7 @@ def test_session_cache_cleared_when_id_changes(
 
 
 def test_empty_cache_triggers_backend_fills_cache(
-        policy, dummy_request, mockcommunity_factory):
+        policy, dummy_request, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -60,7 +60,7 @@ def test_empty_cache_triggers_backend_fills_cache(
         </roles>
     </user>
     """
-    mockcommunity_factory(user_xml)
+    mockserver_factory(user_xml)
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
