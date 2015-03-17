@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
+import re
+
 import lxml
 import mock
 import pytest
@@ -660,7 +662,7 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
 
     name_of_blog = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
                                      '.teaser-blog__name'.format(uid))[0]
-    assert name_of_blog.text == 'NSU-Prozess'
+    assert re.sub(r'^\s+|\t|\n|\s+$', '', name_of_blog.text) == 'NSU-Prozess /'
 
     title = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
                               '.teaser-blog__title'.format(uid))[0]

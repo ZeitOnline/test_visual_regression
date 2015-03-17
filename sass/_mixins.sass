@@ -230,6 +230,39 @@
 =zon-button-light
 	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal)
 
+/// mac font smoothing switching
+/// please use extremely carefully http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
+/// rather use case may be **light text on dark background**
+/// switching off fontsmoothing is prohibited except on high density mobile safari screens (see media query)
+/// @param {bool} $antialiased [true] - switch on antialiasing
+=font-smoothing($antialiased: true)
+	@if $antialiased
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+	@else
+		@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and ( min-device-pixel-ratio: 1.25), only screen and ( min-resolution: 200dpi), only screen and ( min-resolution: 1.25dppx)
+			-webkit-font-smoothing: subpixel-antialiased
+			-moz-osx-font-smoothing: auto
+
+/// animating elements *on hover* over one of it's parents
+/// @param {element} $parent  - parent element for hover effect, if not supplied the $element is used
+/// @param {map} $trans - transition properties
+/// @property {string} $trans.property [opacity] - transition property
+/// @property {number} $trans.duration [.5s] - transition duration
+/// @property {number} $trans.delay [0] - transition delay
+/// @property {string} $trans.timing [ease-in-out] - transition timing function
+/// @content css of the animated state
+/// @output styles for the element, the parent (@-rooted) and the hover state
+=transition-on-parent-hover($parent, $trans: ())
+	$element: &
+	$default-transition: ("property": opacity, "duration": .5s, "delay": 0, "timing": ease-in-out)
+	$transition: map_merge($default-transition, $trans)
+	+transition( map-get($transition, "property") map-get($transition, "duration") map-get($transition, "delay") map-get($transition, "timing") )
+	@at-root #{$parent}
+		&:hover
+			#{$element}
+				@content
+
 // pseudo classes
 %off-screen
 	height: 1px

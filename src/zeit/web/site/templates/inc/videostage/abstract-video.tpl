@@ -1,8 +1,10 @@
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{video.__name__}}">
     <a class="{{ self.layout() }}__combined-link" href="{{video | create_url}}">
         <div class="{{ self.layout() }}__container">
-            {% set image = (video | get_image_group)['still.jpg'] %}
-            {% include "zeit.web.site:templates/inc/teaser_asset/image_videostage.tpl" %}
+            {% block video_thumbnail %}
+                {% set image = (video | get_image_group)['still.jpg'] %}
+                {% include "zeit.web.site:templates/inc/teaser_asset/image_videostage.tpl" %}
+            {% endblock video_thumbnail %}
             <h2 class="{{ self.layout() }}-title">
                 <span class="{{ self.layout() }}-title__kicker">
                     {{- video.supertitle | hide_none -}}
