@@ -7,6 +7,7 @@
 		overflow: hidden
 		padding: 0
 		position: relative
+		text-shadow: 0 0 10px rgba(0, 0, 0, .5)
 		&:before
 			content: ''
 			min-height: 100%
@@ -42,8 +43,8 @@
 			width: em(510px) + (2 * $twice)
 			z-index: 2
 		+respond-min($break-desktop-min)
-			padding: 0 $big $big $big
-			width: em(530px) + (2 * $big)
+			padding: 0 0 $medium $medium
+			width: em(620px)
 	&__heading
 		@extend %teaser-heading
 	&__kicker
@@ -68,7 +69,8 @@
 			line-height: 1.232
 	&__combined-link
 		@extend %teaser-combined-link
-	&__container
+	// &__container
+	// not in use
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
@@ -82,6 +84,7 @@
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
 			-webkit-font-smoothing: antialiased
+			margin-bottom: 0
 		+respond-min($break-desktop-min)
 			font-size: $font-s--rem
 			letter-spacing: 0.04em
