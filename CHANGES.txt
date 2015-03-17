@@ -4,7 +4,7 @@ Change log for zeit.web
 1.17.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1441: Add Eilmeldungsartikel
 
 
 1.17.1 (2015-03-17)
@@ -31,6 +31,8 @@ Change log for zeit.web
   1.15.4)
 
 - ZON-1437: Reduce community requests for centerpage teaser counts
+
+- ZON-1486: Rework video teaser images
 
 
 1.16.2 (2015-03-06)
