@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.18 (unreleased)
------------------
+1.17.2 (unreleased)
+-------------------
 
 - Nothing changed yet.
+
+
+1.17.1 (2015-03-17)
+-------------------
+
+- FIX: Bring back the default image scales, for now.
 
 
 1.17 (2015-03-17)
