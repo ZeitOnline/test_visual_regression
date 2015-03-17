@@ -1,16 +1,36 @@
 Change log for zeit.web
 =======================
 
-1.16.3 (unreleased)
+1.17.2 (unreleased)
 -------------------
+
+- ZON-1498: Add dotted pager to slideshow galleries
+
+
+1.17.1 (2015-03-17)
+-------------------
+
+- FIX: Bring back the default image scales, for now.
+
+
+1.17 (2015-03-17)
+-----------------
 
 - DEV-621: Render a centerpage in RSS2.0 format as required for SocialFlow.
   (This was also a hotfix for release 1.15.3)
+
 - BUG-193: Avoid huge whitespace by repeated adding of header element
 
 - ZON-1494: Set beta cookie lifetime to 30 days
 
-- ZON-1498: Add dotted pager to slideshow galleries
+- ZON-1079: Finalise styling for Blog-Teaser
+
+- ZON-1506: Caching for get_teaser_layout
+
+- BUG-216: Use proper encoding declaration for social flow (also applied in
+  1.15.4)
+
+- ZON-1437: Reduce community requests for centerpage teaser counts
 
 
 1.16.2 (2015-03-06)
@@ -44,8 +64,6 @@ Change log for zeit.web
 
 - ZON-1315: Implement inline galleries
 
-- Fix navigation: fix bug where more is on the wrong side of the fence
-
 - BUG-181: Make ZMO comments work again
 
 - ZON-1459: Implement full view ("Komplettansicht") for articles
@@ -65,8 +83,15 @@ Change log for zeit.web
 - Refactor header topics on CP
 
 
+1.15.4 (2015-03-16)
+------------------
+
+- BUG-216: Proper encoding for social flow
+
+
 1.15.3 (2015-03-11)
 ------------------
+
 - DEV-621: Render a centerpage in RSS2.0 format as required for SocialFlow.
 
 
@@ -79,7 +104,7 @@ Change log for zeit.web
 1.15.1 (2015-02-24)
 -------------------
 
-- Hotfix: Unknown bc images should not break anything
+- HOTFIX: Unknown bc images should not break anything
 
 
 1.15 (2015-02-24)

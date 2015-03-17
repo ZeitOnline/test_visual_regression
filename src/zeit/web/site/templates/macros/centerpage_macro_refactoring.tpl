@@ -26,14 +26,6 @@
     <time class="{{ layout_id }}__datetime {{modifier}} js-update-datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">{{ get_delta_time(teaser) | hide_none }}</time>
 {%- endmacro %}
 
-{% macro include_teaser_commentcount(teaser, layout_id='', modifier='') -%}
-    {% set comments = get_teaser_commentcount(teaser.uniqueId) %}
-    {% if comments %}
-    {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
-    <a class="{{ layout_id }}__commentcount {{modifier}} js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
-    {% endif %}
-{%- endmacro %}
-
 {% macro include_teaser_byline(teaser, layout_id='', modifier='') -%}
     <span class="{{ layout_id }}__byline {{modifier}}">{{ teaser | render_byline }}</span>
 {%- endmacro %}

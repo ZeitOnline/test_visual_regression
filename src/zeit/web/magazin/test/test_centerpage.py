@@ -186,8 +186,7 @@ def test_cp_lead_areas_are_available(application):
     assert len(view.area_lead)
 
 
-def test_cp_leadteaser_has_expected_structure(
-        monkeyagatho, selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector('.cp_leader')
@@ -240,8 +239,7 @@ def test_cp_leadteaser_has_expected_img_content(selenium_driver, testserver):
         assert img.get_attribute("title") == 'Katze!'
 
 
-def test_cp_leadteaser_has_expected_links(
-        monkeyagatho, selenium_driver, testserver):
+def test_cp_leadteaser_has_expected_links(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_leader")
@@ -337,7 +335,7 @@ def test_cp_button_has_expected_links(selenium_driver, testserver):
 
 
 def test_cp_large_photo_button_has_expected_structure(
-        monkeyagatho, selenium_driver, testserver):
+        selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--large-photo")
@@ -382,8 +380,7 @@ def test_cp_large_photo_button_has_expected_links(selenium_driver, testserver):
                 link.get_attribute("href"))
 
 
-def test_cp_gallery_teaser_has_expected_structure(
-        monkeyagatho, selenium_driver, testserver):
+def test_cp_gallery_teaser_has_expected_structure(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/centerpage/lebensart' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".cp_button--gallery")
@@ -855,12 +852,19 @@ def test_cp_informatives_should_have_no_blocks(application):
 
 
 def test_cp_teaser_should_have_comment_count(
-        monkeyagatho, testserver, testbrowser):
+        mockserver_factory, testserver, testbrowser):
+    cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
+    <nodes>
+         <node comment_count="129"
+               url="/zeit-magazin/test-cp/essen-geniessen-spargel-lamm"/>
+    </nodes>
+    """
+    mockserver_factory(cp_counts)
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     counts = browser.cssselect(
         'span.cp_comment__count__wrap.icon-comments-count')
-    assert int(counts[0].text) == 125
+    assert int(counts[0].text) == 129
 
 
 def test_centerpage_should_have_monothematic_block(application):

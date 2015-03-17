@@ -85,7 +85,7 @@ class RSSFeed(
         self.request.response.content_type = 'application/rss+xml'
         return lxml.etree.tostring(
             self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='utf8')
+            encoding='UTF-8')
 
     def build_feed(self):
         E = ElementMaker
@@ -119,7 +119,7 @@ class RSSFeed(
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
             # cannot use route_url() as is, since it uses that hostname, which
             # is not the one we want. In non-production environments this
-            # unfortunately still generates un-unseful production links.
+            # unfortunately still generates useless production links.
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
             item = E.item(
