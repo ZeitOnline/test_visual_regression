@@ -39,3 +39,16 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
              renderer='templates/article.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
+
+
+def is_breaking_news(context, request):
+    return zeit.content.article.interfaces.IBreakingNews(context).is_breaking
+
+
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_breaking_news),
+             renderer='templates/breaking_news_article.html')
+class BreakingNews(zeit.web.core.view_article.Article,
+                   zeit.web.site.view.Base):
+    pass
