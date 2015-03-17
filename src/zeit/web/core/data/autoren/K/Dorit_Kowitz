@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author>
+  <firstname>Dorit</firstname>
+  <lastname>Kowitz</lastname>
+  <display_name xmlns:py="http://codespeak.net/lxml/objectify/pytype">Dorit Kowitz</display_name>
+</author>
