@@ -46,3 +46,11 @@ def test_article_pagination_active_state(testbrowser, testserver):
     assert select('.pagination__nexttitle')[0].text.strip() == (
         u'Aus dem abenteuerlustigen Mädchen vom Dorf wurde ein Junkie')
     assert '--current' in (select('.pager__number')[2].get('class'))
+
+
+def test_breaking_news_article_renders_breaking_bar(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/eilmeldungsartikel'.format(
+        testserver.url)).cssselect
+
+    assert len(select('.breaking-news-banner')) == 1
+    assert len(select('.article-heading--breaking-news')) == 1
