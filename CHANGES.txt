@@ -11,6 +11,8 @@ Change log for zeit.web
 
 - ZON-1494: Set beta cookie lifetime to 30 days
 
+- ZON-1079: Finalise styling for Blog-Teaser
+
 - ZON-1506: Caching for get_teaser_layout
 
 - BUG-216: Use proper encoding declaration for social flow (also applied in
