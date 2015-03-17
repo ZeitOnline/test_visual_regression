@@ -42,8 +42,12 @@
                 {% block teaser_datetime %}
                     {{ cp.include_teaser_datetime(teaser, self.layout()) }}
                 {% endblock %}
-                {% block teaser_commentcount%}
-                    {{ cp.include_teaser_commentcount(teaser, self.layout()) }}
+                {% block teaser_commentcount %}
+                    {% set comments = view.comment_counts[teaser.uniqueId] %}
+                    {% if comments %}
+                        {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
+                    {% endif %}
                 {% endblock %}
             </div>
             {% endblock %}

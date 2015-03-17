@@ -18,6 +18,8 @@ Change log for zeit.web
 - BUG-216: Use proper encoding declaration for social flow (also applied in
   1.15.4)
 
+- ZON-1437: Reduce community requests for centerpage teaser counts
+
 
 1.16.2 (2015-03-06)
 -------------------

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
-
 import babel.dates
 
 import zeit.content.cp.interfaces
@@ -17,6 +16,15 @@ class Centerpage(zeit.web.core.view.Base):
         self._copyrights = {}
         self.context.advertising_enabled = self.banner_on
 
+    def __iter__(self):
+        for area in self.context.itervalues():
+            for block in area.itervalues():
+                if not hasattr(block, '__iter__'):
+                    continue
+                for teaser in block:
+                    if zeit.web.core.view.known_content(teaser):
+                        yield teaser
+
     @zeit.web.reify
     def is_hp(self):
         return self.context.type == 'homepage'
@@ -28,6 +36,10 @@ class Centerpage(zeit.web.core.view.Base):
     @zeit.web.reify
     def displayed_last_published_semantic(self):
         return form_date(get_last_published_semantic(self.context))
+
+    @zeit.web.reify
+    def comment_counts(self):
+        return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
 
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,

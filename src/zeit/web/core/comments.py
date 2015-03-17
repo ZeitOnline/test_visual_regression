@@ -1,49 +1,28 @@
 # -*- coding: utf-8 -*-
 import datetime
-import string
-import urlparse
 
 import lxml.etree
 import requests
+import requests.exceptions
 import zope.component
 
 import zeit.cms.interfaces
 
+from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
 
 
-def path_of_article(unique_id):
-    return urlparse.urlparse(unique_id).path[1:]
-
-
-class Agatho(object):
-
-    def __init__(self, agatho_host, timeout=5.0):
-        self.agatho_host = agatho_host
-        self.timeout = timeout
-
-    def collection_get(self, unique_id):
-        try:
-            path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
-            response = requests.get(self.agatho_host + path,
-                                    timeout=self.timeout)
-        except:  # yes, we really do want to catch *all* exceptions here!
-            return
-        if response.ok:
-            try:
-                return lxml.etree.fromstring(response.content)
-            except (IOError, lxml.etree.XMLSyntaxError):
-                return
-        else:
-            return
-
-
-def comment_as_dict(comment):
+def comment_to_dict(comment):
     """Expects an lxml element representing an agatho comment and returns a
-    dict representation."""
+    dict representation.
 
+    :param comment: lxml.etree.Element comment
+    :rtype: dict
+    """
+
+    # TODO: Avoid repeatedly evaluating xpaths.
     if comment.xpath('author/@roles'):
-        roles = string.split(comment.xpath('author/@roles')[0], ',')
+        roles = comment.xpath('author/@roles')[0].split(',')
         try:
             gender = comment.xpath('author/@sex')[0]
         except IndexError:
@@ -85,6 +64,7 @@ def comment_as_dict(comment):
     dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
            'date/hour/text()', 'date/minute/text()')
 
+    # TODO: Catch name, timestamp and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
         indented=bool(in_reply),
@@ -102,63 +82,116 @@ def comment_as_dict(comment):
     )
 
 
-def get_thread(unique_id, destination=None, reverse=False, just_count=False):
+def request_thread(path):
+    """Send a GET request to receive an agatho comment thread.
+
+    :param path: Path section of a uniqueId
+    :rtype: unicode or None
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    timeout = float(conf.get('community_host_timeout_secs', 5))
+    uri = '{}/agatho/thread{}'.format(conf.get('agatho_host', ''), path)
+    try:
+        response = requests.get(uri, timeout=timeout)
+        return response.ok and response.content or None
+    except (AttributeError, requests.exceptions.RequestException):
+        return
+
+
+def get_thread(unique_id, destination=None, reverse=False):
     """Return a dict representation of the comment thread of the given
     article.
 
     :param destination: URL of the redirect destination
     :param reverse: Reverse the chronological sort order of comments
-    :param just_count: Only return an integer to save processing time
-    :rtype: dict, int or None
+    :rtype: dict or None
     """
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    agatho_host = conf.get('agatho_host', '')
-    community_host = conf.get('community_host', '')
-    timeout = float(conf.get('community_host_timeout_secs', 5))
 
-    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '', 1)
-
-    api = Agatho(agatho_host + '/agatho/thread', timeout=timeout)
-    thread = api.collection_get(unique_id)
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
+    thread = request_thread(path)
 
     if thread is None:
         return
 
-    comment_count = thread.xpath('/comments/comment_count/text()')
+    try:
+        document = lxml.etree.fromstring(thread)
+    except (IOError, lxml.etree.XMLSyntaxError):
+        return
 
-    if just_count and comment_count:
-        return dict(comment_count=int(comment_count[0]))
+    try:
+        comment_count = document.xpath('/comments/comment_count/text()')[0]
+        comment_nid = document.xpath('/comments/nid/text()')[0]
+        comment_list = document.xpath('//comment')
+    except (IndexError, lxml.etree.XMLSyntaxError):
+        return
 
     # Read more about sorting in multiple passes here:
     # docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
-    comments = list(comment_as_dict(c) for c in thread.xpath('//comment'))
+    comments = list(comment_to_dict(c) for c in comment_list)
     comments = sorted(comments, key=lambda x: x['cid'])
     comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
                       reverse=reverse)
-
     try:
         return dict(
             comments=comments,
-            comment_count=int(comment_count[0]),
-            nid=thread.xpath('/comments/nid/text()')[0],
-            comment_post_url='%s/agatho/thread/%s?destination=%s' % (
-                agatho_host, path, destination),
-            comment_report_url='%s/services/json' % (community_host))
+            comment_count=to_int(comment_count),
+            nid=comment_nid,
+            comment_post_url='{}/agatho/thread{}?destination={}'.format(
+                conf.get('agatho_host', ''), path, destination),
+            comment_report_url='{}/services/json'.format(
+                conf.get('community_host', '')))
     except (IndexError, AttributeError):
         return
 
 
-def comments_per_unique_id():
-    # XXX This should be registered as a utility instead of being recalculated
-    #     on every call.
+def request_counts(*unique_ids):
+    """Send a POST request to receive multiple comment counts for a CP.
+
+    :param unique_ids: List of uniqueIds
+    :rtype: unicode or None
+    """
+
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    uri = 'http://xml.zeit.de/' + conf.get('node_comment_statistics')
-
+    timeout = float(conf.get('community_host_timeout_secs', 5))
+    uri = '{}/agatho/node-comment-statistics'.format(
+        conf.get('community_host', '').rstrip('/'))
     try:
-        raw = zeit.cms.interfaces.ICMSContent(uri)
-        nodes = lxml.etree.fromstring(raw.data.encode()).xpath('/nodes/node')
-    except (lxml.etree.LxmlError, TypeError):
-        return {}
+        response = requests.post(uri, data=[('unique_ids[]', uid) for uid in
+                                            unique_ids], timeout=timeout)
+        return response.ok and response.content or None
+    except (AttributeError, requests.exceptions.RequestException):
+        return
 
-    return {node.values()[1]: node.values()[0] for node in nodes}
+
+def get_counts(*unique_ids):
+    """Return a dictionary containing comment counts for a select set of
+    content resources. If no resources are specified, the most commented
+    resources will be used.
+
+    :param unique_ids: Optional list of uniqueIds
+    :rtype: dict
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if len(unique_ids):
+        raw = request_counts(*unique_ids)
+        if not raw:
+            return {}
+    else:
+        uri = zeit.cms.interfaces.ID_NAMESPACE + conf.get(
+            'node_comment_statistics', '')
+        try:
+            raw = zeit.cms.interfaces.ICMSContent(uri).data.encode()
+        except (AttributeError, TypeError):
+            return {}
+    try:
+        ascii = raw.encode('ascii', 'xmlcharrefreplace').strip()
+        nodes = lxml.etree.fromstring(ascii).xpath('/nodes/node')
+        return {zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') + n.attrib['url']:
+                n.attrib['comment_count'] for n in nodes}
+    except (AttributeError, IndexError, KeyError, lxml.etree.LxmlError):
+        return {}

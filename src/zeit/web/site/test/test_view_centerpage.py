@@ -89,26 +89,25 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(
-        application, jinja2_env, monkeyagatho):
+def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default_refactoring.tpl')
 
-    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    # teaser.uniqueId = 'http://xml.zeit.de/artikel/header1'
+    uid = 'http://xml.zeit.de/artikel/01'
+    teaser = zeit.cms.interfaces.ICMSContent(uid)
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
+    view = {'comment_counts': {uid: 129}}
 
-    html_str = tpl.render(teaser=teaser, layout='teaser')
+    html_str = tpl.render(teaser=teaser, layout='teaser', view=view)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1, (
         'No headline is present')
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == 'http://xml.zeit.de/artikel/01', (
-        'No link is present')
+    assert link.attrib['href'] == uid, 'No link is present'
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
         'There is no link title')
 

@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import re
 
 import mock
 
 import zeit.cms.interfaces
 from zeit.cms.checkout.helper import checked_out
 
+from zeit.web.core.utils import to_int
 import zeit.web.site.view_centerpage
-
-
-def to_int(value, pattern=re.compile(r'[^\d.]+')):
-    return int(pattern.sub('', value))
 
 
 def test_centerpage_has_last_semantic_change_property(application):
@@ -55,7 +51,15 @@ def test_buzz_comments_should_render_correct_article_count(
 
 
 def test_buzz_comments_should_render_with_correct_scores(
-        testbrowser, testserver, monkeyagatho):
+        testbrowser, testserver, mockserver_factory):
+    cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
+    <nodes>
+        <node comment_count="129" url="/artikel/01"/>
+        <node comment_count="142" url="/artikel/02"/>
+        <node comment_count="110" url="/artikel/03"/>
+    </nodes>
+    """
+    mockserver_factory(cp_counts)
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
     media = browser.cssselect('.buzz-line__label--buzz-comments')
     assert [to_int(m.text) for m in media] == [129, 142, 110]

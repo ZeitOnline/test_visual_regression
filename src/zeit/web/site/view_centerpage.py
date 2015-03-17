@@ -19,12 +19,6 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-def known_content(res):
-    return (zeit.content.article.interfaces.IArticle.providedBy(res[1]) or
-            zeit.content.gallery.interfaces.IGallery.providedBy(res[1]) or
-            zeit.content.video.interfaces.IVideo.providedBy(res[1]))
-
-
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
