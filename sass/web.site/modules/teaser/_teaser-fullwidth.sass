@@ -51,10 +51,10 @@
 		@extend %teaser-kicker
 		+respond-min($break-tablet-min)
 			color: $white
-			-webkit-font-smoothing: antialiased
 			font-size: $font-s
 			letter-spacing: 0.12em
 			margin-bottom: remify(6px)
+			+font-smoothing()
 	&__title
 		@extend %teaser-title
 		font-size: em(28px)
@@ -63,7 +63,7 @@
 			color: $white
 			&:hover
 				color: $white
-			-webkit-font-smoothing: antialiased
+			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: em(34px)
 			line-height: 1.232
@@ -75,7 +75,7 @@
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
 			color: $white
-			-webkit-font-smoothing: antialiased
+			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: $font-ml
 	&__byline,
@@ -83,8 +83,8 @@
 		@extend %teaser-byline
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
-			-webkit-font-smoothing: antialiased
 			margin-bottom: 0
+			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: $font-s--rem
 			letter-spacing: 0.04em
