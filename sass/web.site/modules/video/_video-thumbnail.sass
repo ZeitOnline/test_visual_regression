@@ -8,9 +8,9 @@
 	&__helper
 		overflow: hidden
 	&__still
-		transform: scale(1)
-		+transition-on-hover(&, '.video-small__combined-link', (property: all, delay: 0, duration: .5s, timing: ease-in-out))
-			transform: scale(1.05)
+		+transform(scale(1))
+		+transition-on-hover(&, '.video-small__combined-link', (property: transform))
+			+transform(scale(1.05))
 	&--large
 		background-color: $black
 		position: relative
