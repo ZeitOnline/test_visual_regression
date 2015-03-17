@@ -62,7 +62,7 @@ class Centerpage(
             except AttributeError:
                 return
 
-        def valid_blocks(b):
+        def valid_block(b):
             try:
                 return b.layout.id in ('parquet-large', 'parquet-regular')
             except AttributeError:
@@ -73,7 +73,7 @@ class Centerpage(
 
         bars = filter(valid_bar, self.context['teaser-mosaic'].values())
         blocks = sum([bar.values() for bar in bars], [])
-        return [b for b in blocks if valid_blocks(b)]
+        return [b for b in blocks if valid_block(b)]
 
     @zeit.web.reify
     def area_fullwidth(self):
