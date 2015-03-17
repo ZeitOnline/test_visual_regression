@@ -159,8 +159,8 @@ def request_counts(*unique_ids):
     uri = '{}/agatho/node-comment-statistics'.format(
         conf.get('community_host', '').rstrip('/'))
     try:
-        response = requests.post(uri, data={'unique_ids[]': unique_ids},
-                                 timeout=timeout)
+        response = requests.post(uri, data=[('unique_ids[]', uid) for uid in
+                                            unique_ids], timeout=timeout)
         return response.ok and response.content or None
     except (AttributeError, requests.exceptions.RequestException):
         return
