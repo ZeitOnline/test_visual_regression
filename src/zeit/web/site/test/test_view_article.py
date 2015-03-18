@@ -54,3 +54,10 @@ def test_breaking_news_article_renders_breaking_bar(testbrowser, testserver):
 
     assert len(select('.breaking-news-banner')) == 1
     assert len(select('.article-heading--breaking-news')) == 1
+
+
+def test_schema_org_mainContentOfPage(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/01'.format(
+        testserver.url)).cssselect
+
+    assert len(select('main[itemprop="mainContentOfPage"]')) == 1
