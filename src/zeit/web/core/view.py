@@ -6,6 +6,7 @@ import babel.dates
 import pyramid.response
 import pyramid.view
 import requests
+import zope.component
 
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
@@ -502,3 +503,18 @@ def json_comment_count(request):
     renderer='string')
 def view_textcontent(context, request):
     return context.text
+
+
+def check_breaking_news():
+    """Check for published breaking news
+    :rtype: bool
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    breaking_news_path = conf.get('breaking_news')
+    try:
+        breaking_news = zeit.cms.interfaces.ICMSContent(breaking_news_path)
+        return zeit.cms.workflow.interfaces.IPublishInfo(
+            breaking_news).published
+    except TypeError:
+        return False
