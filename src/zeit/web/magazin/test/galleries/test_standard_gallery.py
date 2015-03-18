@@ -68,7 +68,7 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
         caption = driver.find_element_by_css_selector(".figure__caption")
         assert not bigButtonPrev.is_displayed()
         assert not bigButtonNext.is_displayed()
-        assert not caption.is_displayed()
+        assert caption.is_displayed()
 
 
 def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):

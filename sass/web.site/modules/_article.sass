@@ -77,10 +77,17 @@
 
 .figure__caption
 	font-family: $font-franziska
-	font-size: remify(14px)
+	font-size: remify(15px)
 	font-style: italic
 	line-height: 1.5
 	margin: $thin $page-padding 0 $page-padding
+	color: $zon_dark_grey
 	+respond-min($break-desktop-min)
 		margin: $thin remify(80px) 0 remify(80px)
 		font-size: remify(16px)
+
+.figure__copyright
+	color: $zon_grey
+	a
+		// normal, hover, active, visited, focus
+		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
