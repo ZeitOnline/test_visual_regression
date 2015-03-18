@@ -78,3 +78,10 @@ def test_schema_org_headline(testbrowser, testserver):
     text = u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?'
     assert len(headline) == 1
     assert text in headline[0].text_content()
+
+
+def test_schema_org_description(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/01'.format(
+        testserver.url)).cssselect
+
+    assert len(select('div[itemprop="description"]')) == 1

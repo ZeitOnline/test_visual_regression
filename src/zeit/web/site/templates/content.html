@@ -21,7 +21,7 @@
                 Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
             </div>
             {% else %}
-            <div class="summary">
+            <div class="summary" itemprop="description">
                 {{ view.subtitle | hide_none }}
             </div>
             <div class="byline">
