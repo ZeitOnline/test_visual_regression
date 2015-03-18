@@ -17,6 +17,9 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
+    except TimeoutException:
+        assert False, 'Timeout gallery script'
+    else:
         nextselector = ".bx-next"
         prevselector = ".bx-prev"
         onextselector = ".bx-overlay-next"
@@ -40,8 +43,6 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
         overlayprev.click()
         # opacity should have changed
         assert elemOpacity != elemOpacityLater
-    except:
-        assert False, 'Timeout gallery script'
 
 
 def test_inline_gallery_uses_responsive_images_with_ratio(

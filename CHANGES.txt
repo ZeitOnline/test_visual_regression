@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1441: Add Eilmeldungsartikel
 
+- ZON-1498: Add dotted pager to slideshow galleries
+
 
 1.17.1 (2015-03-17)
 -------------------
@@ -88,7 +90,7 @@ Change log for zeit.web
 1.15.4 (2015-03-16)
 ------------------
 
-- BUG-216: Proper encoding for social flow 
+- BUG-216: Proper encoding for social flow
 
 
 1.15.3 (2015-03-11)
