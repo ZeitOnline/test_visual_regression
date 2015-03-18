@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <header_image/>
+    <snapshot align="left" expires="" publication-date="" src="http://xml.zeit.de/broken/reference.jpg" title="Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New Broke" type="jpg">
+        <bu>Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New Broke</bu>
+        <copyright>© Lindsay DeDario/Reuters</copyright>
+    </snapshot>
+    <rankedTags xmlns:ns0="http://namespaces.zeit.de/CMS/tagging">
+      <tag type="Person" url_value="sasha-waltz" uuid="ee170ef7-ccdc-48f7-a617-62f5158512ea">Sasha Waltz</tag>
+      <tag type="Organization" url_value="interpol" uuid="0d1b12e1-1ee1-4cde-810b-033f45ce3450">Interpol</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-25T09:18:21.094801+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-05-21T10:58:36.573625+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.dhoppe</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:deea5ce3-46fa-45a7-887b-95b5727f68d1}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <topiclinks>
+        <topiclink_title>Schwerpunkte</topiclink_title>
+        <topiclink>
+            <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+            <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+            <topiclink_label_2>Bundeswehr</topiclink_label_2>
+            <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+            <topiclink_label_3>Hong Kong</topiclink_label_3>
+            <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+        </topiclink>
+    </topiclinks>
+  </head>
+  <body>
+    <cluster area="feature">
+      <region area="lead">
+        <container cp:type="teaser" module="zon-fullwidth" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e14">
+          <block href="http://xml.zeit.de/broken/reference" uniqueId="http://xml.zeit.de/broken/reference" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
+        <container cp:type="teaser" module="zon-large" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
+          <block href="http://xml.zeit.de/broken/reference" uniqueId="http://xml.zeit.de/broken/reference" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
+          <block href="http://xml.zeit.de/broken/reference" uniqueId="http://xml.zeit.de/broken/reference" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
+      </region>
+      <region area="informatives">
+        <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
+          <block href="http://xml.zeit.de/broken/reference" uniqueId="http://xml.zeit.de/broken/reference" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="teaser-mosaic">
+      <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398a">
+        <container cp:type="teaser" module="parquet-large" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="3" suppress-image-positions="3,4,5,6">
+          <referenced_cp>http://xml.zeit.de/broken/reference</referenced_cp>
+          <autopilot>true</autopilot>
+          <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/broken/reference.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
+            <xi:fallback>Ziel http://xml.zeit.de/broken/reference.lead nicht erreichbar.</xi:fallback>
+          </xi:include>
+          <topiclinks>
+            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde</topiclink>
+            <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
+          </topiclinks>
+        </container>
+        <container cp:type="placeholder" module="placeholder" cp:__name__="id-5b0d52bd-4beb-4602-b68a-6f00bdcb23c8"/>
+      </region>
+      <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398b">
+        <container cp:type="teaser" module="parquet-regular" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="ZEIT ONLINE" read_more="mehr von ZEIT ONLINE" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
+          <referenced_cp>http://xml.zeit.de/broken/reference</referenced_cp>
+          <autopilot>true</autopilot>
+          <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/broken/reference.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
+            <xi:fallback>Ziel http://xml.zeit.de/broken/reference.lead nicht erreichbar.</xi:fallback>
+          </xi:include>
+          <topiclinks>
+            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde Rosetta</topiclink>
+            <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
+          </topiclinks>
+        </container>
+        <container cp:type="placeholder" module="placeholder" cp:__name__="id-f9b0fb9d-9c0e-4e51-a17a-84f8a4db5958"/>
+        <container cp:type="placeholder" module="placeholder" cp:__name__="id-5b0d52bd-4beb-4602-b68a-6f00bdcb23c8"/>
+      </region>
+      <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398b">
+        <container cp:type="teaser" module="parquet-regular" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="ZEIT ONLINE" read_more="mehr von ZEIT ONLINE" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
+          <referenced_cp>http://xml.zeit.de/index</referenced_cp>
+          <autopilot>true</autopilot>
+          <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
+            <xi:fallback>Ziel http://xml.zeit.de/index.lead nicht erreichbar.</xi:fallback>
+          </xi:include>
+          <topiclinks>
+            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde Rosetta</topiclink>
+            <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
+          </topiclinks>
+        </container>
+        <container cp:type="placeholder" module="placeholder" cp:__name__="id-f9b0fb9d-9c0e-4e51-a17a-84f8a4db5958"/>
+        <container cp:type="placeholder" module="placeholder" cp:__name__="id-96d239ff-6922-4ef1-88f1-83a1273c2478"/>
+        <container cp:type="placeholder" module="placeholder" cp:__name__="id-5b0d52bd-4beb-4602-b68a-6f00bdcb23c8"/>
+      </region>
+    </cluster>
+    <supertitle>Broken CP</supertitle>
+    <title>Broken</title>
+    <subtitle>Broken CP</subtitle>
+  </body>
+  <feed/>
+  <teaser>
+    <title>Broken</title>
+    <text>Broken CP</text>
+  </teaser>
+</centerpage>

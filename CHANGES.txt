@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1498: Add dotted pager to slideshow galleries
 
+- ZON-1482: Ensure broken reference teasers are skipped on CPs
+
 
 1.17.1 (2015-03-17)
 -------------------

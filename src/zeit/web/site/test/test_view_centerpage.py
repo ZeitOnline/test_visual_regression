@@ -53,6 +53,7 @@ def test_area_main_should_filter_teasers(application):
                 tb_no_teaser_in_block]
 
     context['lead'].values = create_mocked_teaserblocks
+    context['lead'].itervalues = create_mocked_teaserblocks().__iter__
 
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.Centerpage(context, request)
