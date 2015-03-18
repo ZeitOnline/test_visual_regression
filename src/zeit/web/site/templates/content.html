@@ -6,10 +6,10 @@
     <article class="article" id="js-article" itemtype="http://schema.org/Article" itemscope>
     {% profile %}
         {% block article_heading %}
-        <h1 class="article-heading">
+        <h1 class="article-heading" itemprop="headline">
             <span class="article-heading__kicker">
                 {{- view.supertitle | hide_none -}}
-            </span>
+            </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
             <span class="article-heading__title">
                 {{- view.title | hide_none -}}
             </span>

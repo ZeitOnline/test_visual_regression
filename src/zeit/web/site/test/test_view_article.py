@@ -69,3 +69,12 @@ def test_schema_org_Article(testbrowser, testserver):
 
     assert len(select(
         'article[itemtype="http://schema.org/Article"][itemscope]')) == 1
+
+
+def test_schema_org_headline(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/01'.format(
+        testserver.url)).cssselect
+    headline = select('h1[itemprop="headline"]')
+    text = u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?'
+    assert len(headline) == 1
+    assert text in headline[0].text_content()
