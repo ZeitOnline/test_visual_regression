@@ -197,6 +197,30 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'No search input present')
 
 
+def test_nav_should_contain_schema_org_markup(application, jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/navigation/navigation.tpl')
+    mock_view = mock.MagicMock()
+    mock_view.request.host = 'www.zeit.de'
+    mock_view.displayed_last_published_semantic = datetime.datetime.now()
+    html_str = tpl.render(view=mock_view)
+    html = lxml.html.fromstring(html_str).cssselect
+
+    site_nav_element = html(
+        'ul[itemtype="http://schema.org/SiteNavigationElement"]')
+    assert len(site_nav_element) == 1
+
+    item_prop_url = html(
+        'ul[itemtype="http://schema.org/SiteNavigationElement"] '
+        'li a[itemprop="url"]')
+    item_prop_name = html(
+        'ul[itemtype="http://schema.org/SiteNavigationElement"] li '
+        'a[itemprop="url"] span[itemprop="name"]')
+
+    assert len(item_prop_url) > 0
+    assert len(item_prop_url) == len(item_prop_name)
+
+
 # integration testing
 
 def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
