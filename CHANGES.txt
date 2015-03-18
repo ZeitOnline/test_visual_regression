@@ -4,6 +4,8 @@ Change log for zeit.web
 1.17.2 (unreleased)
 -------------------
 
+- ZON-1441: Add Eilmeldungsartikel
+
 - ZON-1498: Add dotted pager to slideshow galleries
 
 
@@ -31,6 +33,8 @@ Change log for zeit.web
   1.15.4)
 
 - ZON-1437: Reduce community requests for centerpage teaser counts
+
+- ZON-1486: Rework video teaser images
 
 
 1.16.2 (2015-03-06)
