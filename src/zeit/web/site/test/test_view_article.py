@@ -61,3 +61,11 @@ def test_schema_org_mainContentOfPage(testbrowser, testserver):
         testserver.url)).cssselect
 
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
+
+
+def test_schema_org_Article(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/01'.format(
+        testserver.url)).cssselect
+
+    assert len(select(
+        'article[itemtype="http://schema.org/Article"][itemscope]')) == 1
