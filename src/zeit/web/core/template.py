@@ -48,7 +48,8 @@ def create_url(obj):
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
-               'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ"}
+               'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+               'time_only': "HH:mm 'Uhr'"}
     # workaround for inadequate format_datetime() parsing
     # "yyyy-MM-dd'T'HH:mm:ssZZZZZ" or "yyyy-MM-dd'T'HH:mm:ssXXX" is not working
     if type == 'iso8601':
@@ -186,11 +187,62 @@ def replace_list_seperator(semicolonseperatedlist, seperator):
     return semicolonseperatedlist.replace(';', seperator)
 
 
+# definition of default images sizes per layout context
+scales = {
+    'default': (200, 300),
+    'large': (800, 600),
+    'small': (200, 300),
+    'upright': (320, 480),
+    'zmo-xl-header': (460, 306),
+    'zmo-xl': (460, 306),
+    'zmo-medium-left': (225, 125),
+    'zmo-medium-center': (225, 125),
+    'zmo-medium-right': (225, 125),
+    'zmo-large-left': (225, 125),
+    'zmo-large-center': (225, 125),
+    'zmo-large-right': (225, 125),
+    'zmo-small-left': (225, 125),
+    'zmo-small-center': (225, 125),
+    'zmo-small-right': (225, 125),
+    '540x304': (290, 163),
+    '580x148': (290, 163),
+    '940x400': (470, 200),
+    '148x84': (74, 42),
+    '220x124': (110, 62),
+    '368x110': (160, 48),
+    '368x220': (160, 96),
+    '180x101': (90, 50),
+    'zmo-landscape-large': (460, 306),
+    'zmo-landscape-small': (225, 125),
+    'zmo-square-large': (200, 200),
+    'zmo-square-small': (50, 50),
+    'zmo-lead-upright': (320, 480),
+    'zmo-upright': (320, 432),
+    'zmo-large': (460, 200),
+    'zmo-medium': (330, 100),
+    'zmo-small': (200, 50),
+    'zmo-x-small': (100, 25),
+    'zmo-card-picture': (320, 480),
+    'zmo-print-cover': (315, 424),
+    'og-image': (600, 315),
+    'twitter-image_small': (120, 120),  # summary
+    'twitter-image-large': (560, 300),  # summary_large_image, photo
+    'newsletter-540x304': (540, 304),
+    'newsletter-220x124': (220, 124),
+    'zon-thumbnail': (580, 326),
+    'zon-large': (580, 326),
+    'zon-article-large': (820, 462),
+    'zon-printbox': (320, 234),
+    'zon-printbox-wide': (320, 148),
+    'brightcove-still': (580, 326),
+    'brightcove-thumbnail': (120, 67),
+    'spektrum': (220, 124)
+}
+
+
 @zeit.web.register_filter
 def default_image_url(image, image_pattern='default'):
     try:
-        scales = zope.component.getUtility(
-            zeit.web.core.interfaces.IImageScales)
         image_pattern = getattr(image, 'image_pattern', image_pattern)
         if image_pattern != 'default':
             width, height = scales.get(image_pattern, (640, 480))
@@ -301,13 +353,6 @@ def with_mods(elem, *mods):
 @zeit.web.register_filter
 def get_attr(*args):
     return getattr(*args)
-
-
-@zeit.web.register_global
-def get_teaser_commentcount(unique_id):
-    thread = zeit.web.core.comments.get_thread(unique_id, just_count=True)
-    if thread and thread.get('comment_count', 0) >= 5:
-        return thread['comment_count']
 
 
 @zeit.web.register_global

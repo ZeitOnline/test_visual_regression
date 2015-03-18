@@ -1,7 +1,7 @@
 #iqd_mainAd
     margin-bottom: 0
 #iqd_align_Ad
-    width: 61.25em
+    max-width: $max-page-width
     margin: 0 auto
 #iqd_topAd
     padding: 0
@@ -9,7 +9,7 @@
 #iqd_rightAd
     position: absolute
     bottom: -630px
-    left: 980px
+    left: $max-page-width
     width: 160px
-#iqadtile1
-    padding-left: 0px
+    +respond-max($max-page-width)
+        display: none

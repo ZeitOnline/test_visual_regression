@@ -226,17 +226,6 @@ def test_filter_strftime_works_as_expected():
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
-def test_cp_teaser_with_comments_should_get_count(monkeyagatho, application):
-    comment_count = zeit.web.core.template.get_teaser_commentcount(
-        'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
-    assert comment_count == 125
-    # For teaser uniquId with no entry in node-comment-statistics
-    # teaser_get_commentcount should return None
-    comment_count = zeit.web.core.template.get_teaser_commentcount(
-        'http://xml.zeit.de/does_not_exist')
-    assert comment_count is None
-
-
 def test_zon_large_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
