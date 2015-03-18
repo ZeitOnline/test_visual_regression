@@ -266,6 +266,11 @@ class Base(object):
             return 'oldschool'
         return 'adcontroller'
 
+    @zeit.web.reify
+    def breaking_news(self):
+        breaking_news = zeit.web.core.block.BreakingNews()
+        return breaking_news
+
 
 class Content(Base):
 
