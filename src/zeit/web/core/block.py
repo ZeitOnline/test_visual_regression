@@ -480,3 +480,23 @@ class NextreadTeaserBlock(object):
 
     def __len__(self):
         return len(self.teasers)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+class BreakingNews(object):
+
+    """Breaking news"""
+
+    def __init__(self):
+        bn_path = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings).get('breaking_news')
+        bn_banner = zeit.content.article.edit.interfaces.IBreakingNewsBody(
+            zeit.cms.interfaces.ICMSContent(bn_path))
+        self.uniqueId = bn_banner.article_id
+        bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
+        self.title = bn_article.title
+        self.date_last_published = zeit.cms.workflow.interfaces.IPublishInfo(
+            bn_article).date_last_published
+        self.date_string = "{}:{} Uhr".format(
+            self.date_last_published.hour, self.date_last_published.minute)
