@@ -4,26 +4,6 @@
 		width: remify(660px)
 		margin: auto
 
-.article-heading
-	margin: remify($petite--px) 0 remify(25px) 0
-
-.kicker
-	color: $zon-red
-	display: block
-	font-size: remify(14px)
-	letter-spacing: $zon-letter-spacing-m
-	padding-bottom: remify(17px)
-	+respond-min($break-desktop-min)
-		font-size: remify(14px)
-
-.title
-	color: $zon-charcoal
-	display: block
-	font-size: remify(30px)
-	line-height: 1.2
-	+respond-min($break-desktop-min)
-		font-size: remify(42px)
-
 .article-page__page-teaser
 	color: $zon-charcoal
 	font-size: remify(20px)
@@ -77,10 +57,17 @@
 
 .figure__caption
 	font-family: $font-franziska
-	font-size: remify(14px)
+	font-size: remify(15px)
 	font-style: italic
 	line-height: 1.5
 	margin: $thin $page-padding 0 $page-padding
+	color: $zon_dark_grey
 	+respond-min($break-desktop-min)
 		margin: $thin remify(80px) 0 remify(80px)
 		font-size: remify(16px)
+
+.figure__copyright
+	color: $zon_grey
+	a
+		// normal, hover, active, visited, focus
+		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)

@@ -1,0 +1,24 @@
+.article-heading
+	margin: remify($petite--px) 0 remify(25px) 0
+	&__kicker
+		color: $zon-red
+		display: block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-m
+		padding-bottom: remify(17px)
+		+respond-min($break-desktop-min)
+			font-size: remify(14px)
+	&__title
+		color: $zon-charcoal
+		display: block
+		font-size: remify(30px)
+		line-height: 1.2
+		+respond-min($break-desktop-min)
+			font-size: remify(42px)
+	&--breaking-news
+		background: #fffee8
+		margin: 0 (-$page-padding) remify(25px) (-$page-padding)
+		padding: remify(25px) $page-padding
+		+respond-min($break-desktop-min)
+			margin: 0 (-$article-gutter-desktop) remify(25px) (-$article-gutter-desktop)
+			padding: remify(45px) $article-gutter-desktop
