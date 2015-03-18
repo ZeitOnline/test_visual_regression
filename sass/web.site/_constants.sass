@@ -60,15 +60,6 @@ $color-button-bg:           $white
 $color-button-bg--hover:    $grey--light
 $color-button-bg--disabled: $white
 
-//extended fonts
-$font-xxxs: remify(9px)
-$font-11px: remify(11px)
-$font-zon-xl--rem: remify(23px)
-
-// rework this
-$zon-font-s: em(13px)
-$zon-font-m: em(22px)
-
 //mobile navigation bar globals
 $zon-bar-height-phablet-px: 54px
 $zon-bar-height-phablet: em($zon-bar-height-phablet-px)
@@ -77,4 +68,4 @@ $zon-bar-height-phablet: em($zon-bar-height-phablet-px)
 $page-padding: remify(20px)
 $video-title-padding--px: 15px
 $video-title-padding: remify($video-title-padding--px)
-$article-gutter-desktop: remify( (980px - 660px) / 2 )
+$article-gutter-desktop: remify( ($max-page-width - $medium-content-width) / 2 )
