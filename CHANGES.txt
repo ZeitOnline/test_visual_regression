@@ -4,6 +4,8 @@ Change log for zeit.web
 1.17.2 (unreleased)
 -------------------
 
+- ZON-1395: Polish full section teaser
+
 - ZON-1441: Add Eilmeldungsartikel
 
 - ZON-1498: Add dotted pager to slideshow galleries
