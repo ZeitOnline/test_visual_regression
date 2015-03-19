@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import datetime
 import time
 import lxml
@@ -207,14 +208,36 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
     html = lxml.html.fromstring(html_str).cssselect
 
     site_nav_element = html(
-        'ul[itemtype="http://schema.org/SiteNavigationElement"]')
+        '.main_nav__ressorts ul'
+        '[itemtype="http://schema.org/SiteNavigationElement"]')
     assert len(site_nav_element) == 1
 
     item_prop_url = html(
+        '.main_nav__ressorts '
         'ul[itemtype="http://schema.org/SiteNavigationElement"] '
         'li a[itemprop="url"]')
     item_prop_name = html(
+        '.main_nav__ressorts '
         'ul[itemtype="http://schema.org/SiteNavigationElement"] li '
+        'a[itemprop="url"] span[itemprop="name"]')
+
+    assert len(item_prop_url) > 0
+    assert len(item_prop_url) == len(item_prop_name)
+
+
+def test_footer_should_contain_schema_org_markup(testserver, testbrowser):
+    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+
+    html = browser.cssselect
+    site_nav_element = html(
+        'footer[itemtype="http://schema.org/SiteNavigationElement"]')
+    assert len(site_nav_element) == 1
+
+    item_prop_url = html(
+        'footer[itemtype="http://schema.org/SiteNavigationElement"] '
+        'li a[itemprop="url"]')
+    item_prop_name = html(
+        'footer[itemtype="http://schema.org/SiteNavigationElement"] li '
         'a[itemprop="url"] span[itemprop="name"]')
 
     assert len(item_prop_url) > 0
