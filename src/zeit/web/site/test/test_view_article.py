@@ -85,3 +85,12 @@ def test_schema_org_description(testbrowser, testserver):
         testserver.url)).cssselect
 
     assert len(select('div[itemprop="description"]')) == 1
+
+
+def test_schema_org_author(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/01'.format(
+        testserver.url)).cssselect
+
+    assert len(select('.byline[itemprop="author"]')) > 0
+    assert len(select('.byline a[itemprop="url"]')) > 0
+    assert len(select('.byline span[itemprop="name"]')) > 0

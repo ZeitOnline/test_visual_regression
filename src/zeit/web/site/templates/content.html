@@ -24,7 +24,7 @@
             <div class="summary" itemprop="description">
                 {{ view.subtitle | hide_none }}
             </div>
-            <div class="byline">
+            <div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
                 {% if view.authors %}
                     {{ blocks.meta_author(view.authors, class="byline__author") }}
                 {% endif %}
