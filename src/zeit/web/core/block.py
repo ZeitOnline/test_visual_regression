@@ -2,10 +2,11 @@
 import logging
 import os.path
 
+import PIL
 import grokcore.component
 import lxml.etree
 import lxml.html
-import PIL
+import urlparse
 import zope.interface
 
 import zeit.content.article.edit.interfaces
@@ -505,5 +506,6 @@ class BreakingNews(object):
         self.title = bn_article.title
         self.date_last_published = zeit.cms.workflow.interfaces.IPublishInfo(
             bn_article).date_last_published
+        self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
         self.date_string = "{}:{} Uhr".format(
             self.date_last_published.hour, self.date_last_published.minute)

@@ -134,6 +134,8 @@ class IBreakingNews(zope.interface.Interface):
 
     date_last_published = zope.interface.Attribute(
         'Publish date of breaking news')
+    doc_path = zope.interface.Attribute(
+        'Document path of breaking news article')
     publish_string = zope.interface.Attribute(
         'Publish date of breaking news as string')
     title = zope.interface.Attribute('title')
