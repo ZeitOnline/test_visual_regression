@@ -4,11 +4,15 @@ Change log for zeit.web
 1.17.2 (unreleased)
 -------------------
 
+- ZON-1304: Schema.org markup for SiteNavigationElement.
+
 - ZON-1395: Polish full section teaser
 
 - ZON-1441: Add Eilmeldungsartikel
 
 - ZON-1498: Add dotted pager to slideshow galleries
+
+- ZON-1288: Add schema.org Item, Author, Image to articles
 
 
 1.17.1 (2015-03-17)

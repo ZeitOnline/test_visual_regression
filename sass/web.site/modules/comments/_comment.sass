@@ -72,11 +72,11 @@
 
 
 .comment--indented
-	+box-shadow(inset $compact--px 0px 0px 0px $zon_lighter_grey)
+	box-shadow: inset 28px 0 0 0 $zon_lighter_grey
 	padding-left: remify($large--px)
 
 	+respond-min($break-desktop-min)
-		+box-shadow(none)
+		box-shadow: none
 		padding-left: $page-padding
 		padding-right: 0
 		margin: remify(0 160px)
@@ -107,8 +107,7 @@
 .icon-comment-reactions-reply,
 .icon-comment-reactions-report,
 .icon-comment-reactions-recommend
-	background-size: 100% 100%
-	background-size: contain
+	+background-size(contain)
 	display: inline-block
 	height: 1rem
 	opacity: 0.5
