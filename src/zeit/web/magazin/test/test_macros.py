@@ -335,7 +335,8 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     assert output.endswith(end)
 
 
-def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
+def test_macro_meta_author_should_produce_html_if_author_exists(
+        application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.core:templates/macros/article_macro.tpl')
     test_class = 'test'
@@ -343,8 +344,9 @@ def test_macro_meta_author_should_produce_html_if_author_exists(jinja2_env):
                 'location': ', Bern', 'suffix': 'und'},
                {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
                 'suffix': ''}]
-    markup = ('Von<a href="www.zeit.de" class="test">Tom</a>, Bern'
-              'und<span class="test">Anna</span>')
+    markup = ('Von<a href="www.zeit.de" class="test" itemprop="url"><span '
+              'itemprop="name">Tom</span></a>, Bernund<span class="test">'
+              '<span itemprop="name">Anna</span></span>')
     lines = tpl.module.meta_author(authors, test_class).splitlines()
     output = ''
     for line in lines:
