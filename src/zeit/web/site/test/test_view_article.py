@@ -91,13 +91,20 @@ def test_schema_org_author(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/01'.format(
         testserver.url)).cssselect
 
-    assert len(select('.byline[itemprop="author"]')) > 0
-    assert len(select('.byline a[itemprop="url"]')) > 0
-    assert len(select('.byline span[itemprop="name"]')) > 0
+    assert len(select('.byline[itemprop="author"]')) == 1
+    assert len(select('.byline a[itemprop="url"]')) == 1
+    assert len(select('.byline span[itemprop="name"]')) == 1
 
 
 def test_schema_org_articleBody(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/01'.format(
         testserver.url)).cssselect
 
-    assert len(select('.article-body[itemprop="articleBody"]'))
+    assert len(select('.article-body[itemprop="articleBody"]')) == 1
+
+
+def test_schema_org_image(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/01'.format(
+        testserver.url)).cssselect
+    json = 'article > script[type="application/ld+json"]'
+    assert(len(select(json))) == 1
