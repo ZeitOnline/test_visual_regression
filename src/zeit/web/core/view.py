@@ -268,8 +268,7 @@ class Base(object):
 
     @zeit.web.reify
     def breaking_news(self):
-        breaking_news = zeit.web.core.block.BreakingNews()
-        return breaking_news
+        return zeit.web.core.block.BreakingNews()
 
 
 class Content(Base):

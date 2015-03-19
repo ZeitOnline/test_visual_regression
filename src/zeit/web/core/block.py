@@ -491,8 +491,15 @@ class BreakingNews(object):
     def __init__(self):
         bn_path = zope.component.getUtility(
             zeit.web.core.interfaces.ISettings).get('breaking_news')
+        try:
+            bn_banner_content = zeit.cms.interfaces.ICMSContent(bn_path)
+        except TypeError:
+            self.published = False
+            return
+        self.published = zeit.cms.workflow.interfaces.IPublishInfo(
+            bn_banner_content).published
         bn_banner = zeit.content.article.edit.interfaces.IBreakingNewsBody(
-            zeit.cms.interfaces.ICMSContent(bn_path))
+            bn_banner_content)
         self.uniqueId = bn_banner.article_id
         bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
         self.title = bn_article.title
