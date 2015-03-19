@@ -30,12 +30,12 @@ class Base(object):
     def __call__(self):
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
+        self._set_response_headers()
         return {}
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self._set_response_headers()
 
     def _set_response_headers(self):
         # ZMO Version header
