@@ -228,8 +228,9 @@ def test_article_request_should_have_html5_doctype(testserver, testbrowser):
 def test_artikel05_should_have_header_image(testserver, testbrowser):
     browser = testbrowser('%s/artikel/05' % testserver.url)
     assert '<div class="article__head-wrap">' in browser.contents
-    assert '<div class="scaled-image is-pixelperfect">' in browser.contents
-    assert 'class="article__main-image--longform' in browser.contents
+    assert ('<div class="scaled-image is-pixelperfect'
+            ' article__head-image">') in browser.contents
+    assert 'class=" figure__media' in browser.contents
 
 
 def test_column_should_have_header_image(testserver, testbrowser):

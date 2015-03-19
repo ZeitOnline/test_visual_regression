@@ -323,11 +323,10 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     for line in lines:
         output += line.strip()
 
-    start = ('<div class="scaled-image is-pixelperfect">'
+    start = ('<div class="scaled-image is-pixelperfect article__head-image">'
              '<!--[if gt IE 8]><!--><noscript')
     middle = ('><!--<![endif]-->'
-              '<img alt="test" title="test" class="article__main-image--'
-              'longform figure__media" src="')
+              '<img alt="test" title="test" class=" figure__media" src="')
     end = '--></noscript><!--<![endif]--></div>testtest'
 
     assert output.startswith(start)
@@ -425,8 +424,7 @@ def test_macro_headervideo_should_produce_markup(jinja2_env):
     source = '<source src="test.mp4'
     source_webm = 'http://live0.zeit.de/multimedia/videos/1.webm'
     img = '<img '
-    fallback = ('<img class="video--fallback'
-                ' article__main-image--longform" src="http://live0.zeit.de/'
+    fallback = ('<img class="video--fallback " src="http://live0.zeit.de/'
                 'multimedia/videos/1.jpg')
     lines = tpl.module.headervideo(obj).splitlines()
     output = ''
