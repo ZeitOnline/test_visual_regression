@@ -230,8 +230,8 @@
 {%- endmacro %}
 
 {% macro headerimage(obj) -%}
-    <div class="scaled-image is-pixelperfect">
-        {{ lama.insert_responsive_image(obj, 'article__main-image--longform') }}
+    <div class="scaled-image is-pixelperfect article__head-image">
+        {{ lama.insert_responsive_image(obj) }}
     </div>{{ obj.caption }}{{ obj.copyright }}
 {%- endmacro %}
 
