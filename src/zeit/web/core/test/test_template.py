@@ -71,6 +71,7 @@ def test_get_teaser_image(testserver):
         'http://xml.zeit.de'
         '/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen'
     )
+
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
         'Article with image asset should produce a teaser image.')
@@ -225,17 +226,6 @@ def test_filter_strftime_works_as_expected():
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
-def test_cp_teaser_with_comments_should_get_count(monkeyagatho, application):
-    comment_count = zeit.web.core.template.get_teaser_commentcount(
-        'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
-    assert comment_count == 125
-    # For teaser uniquId with no entry in node-comment-statistics
-    # teaser_get_commentcount should return None
-    comment_count = zeit.web.core.template.get_teaser_commentcount(
-        'http://xml.zeit.de/does_not_exist')
-    assert comment_count is None
-
-
 def test_zon_large_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
@@ -248,6 +238,50 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
     block.layout.id = 'leader-panorama'
     teaser = zeit.web.core.template.get_teaser_layout(block)
     assert teaser == 'zon-large'
+
+
+def test_teaser_layout_should_be_cached_per_uniqueId(application):
+    block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
+    block.layout.id = 'zon-small'
+    block.uniqueId = 'http://unique'
+
+    request = mock.Mock()
+    request.teaser_layout = {}
+    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    assert teaser == 'zon-small'
+    assert request.teaser_layout['http://unique'] == 'zon-small'
+
+    request = mock.Mock()
+    request.teaser_layout.get = mock.Mock(return_value='zon-small')
+
+    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    assert teaser == 'zon-small'
+    request.teaser_layout.get.assert_called_with('http://unique', None)
+
+
+def test_get_teaser_layout_should_deal_with_all_sort_of_unset_params(
+        application):
+
+    block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
+    block.layout.id = 'zon-small'
+
+    request = mock.Mock()
+    request.teaser_layout = None
+
+    teaser = zeit.web.core.template.get_teaser_layout(block)
+    assert teaser == 'zon-small'
+
+    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    assert teaser == 'zon-small'
+
+    request = mock.Mock()
+    request.teaser_layout = {}
+    block.uniqueId = None
+
+    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    assert teaser == 'zon-small'
 
 
 def test_zon_small_teaser_mapping_is_working_as_expected(application):

@@ -19,12 +19,6 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-def known_content(res):
-    return (zeit.content.article.interfaces.IArticle.providedBy(res[1]) or
-            zeit.content.gallery.interfaces.IGallery.providedBy(res[1]) or
-            zeit.content.video.interfaces.IVideo.providedBy(res[1]))
-
-
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
@@ -140,35 +134,49 @@ class Centerpage(
         :rtype: dict
         """
 
-        uri = 'http://xml.zeit.de/angebote/print-box'
-        content = zeit.cms.interfaces.ICMSContent(uri)
+        try:
+            content = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/angebote/print-box')
+        except TypeError:
+            return
         has_digital_ad = False
 
         if content.byline == 'mo-mi':
-            # Rewrite content with digital ad box
-            uri = 'http://xml.zeit.de/angebote/angebotsbox'
-            content = zeit.cms.interfaces.ICMSContent(uri)
-            has_digital_ad = True
+            try:
+                # Rewrite content with digital ad box
+                content = zeit.cms.interfaces.ICMSContent(
+                    'http://xml.zeit.de/angebote/angebotsbox')
+                has_digital_ad = True
+            except TypeError:
+                pass
 
-        printbox = content
-        printbox.has_digital_ad = has_digital_ad
-        printbox.image = zeit.content.image.interfaces.IImages(content).image
-        return printbox
+        try:
+            image = zeit.content.image.interfaces.IImages(content).image
+        except (AttributeError, TypeError):
+            image = None
+
+        content.image = image
+        content.has_digital_ad = has_digital_ad
+        return content
 
     @zeit.web.reify
     def area_videostage(self):
         """Return a video playlist object to be displayed on the homepage."""
-        unique_id = 'http://xml.zeit.de/video/playlist/36516804001'
-        return zeit.cms.interfaces.ICMSContent(unique_id)
+
+        try:
+            return zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/video/playlist/36516804001')
+        except TypeError:
+            return
 
     @zeit.web.reify
     def snapshot(self):
         """Return the centerpage snapshot aka `Momentaufnahme`.
         :rtype: zeit.content.image.image.RepositoryImage
         """
-        snapshot = self.context.snapshot
-        return zeit.web.core.interfaces.ITeaserImage(snapshot) if (
-            snapshot is not None) else None
+
+        snap = self.context.snapshot
+        return snap and zeit.web.core.interfaces.ITeaserImage(snap) or None
 
     @zeit.web.reify
     def topiclink_title(self):

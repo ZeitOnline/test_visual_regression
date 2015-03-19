@@ -2,7 +2,6 @@
 import json
 import os.path
 import pkg_resources
-import urllib
 
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -28,6 +27,8 @@ import zeit.cms.interfaces
 import zeit.web.core
 import zeit.web.core.comments
 import zeit.web.core.application
+import zeit.web.core.utils
+import zeit.web.core.view
 
 
 settings = {
@@ -47,8 +48,7 @@ settings = {
     'caching_time_videostill': '35',
     'caching_time_external': '15',
     'community_host': 'http://localhost:6551/',
-    'agatho_host': u'file://%s' % pkg_resources.resource_filename(
-        'zeit.web.core', 'data/comments'),
+    'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
@@ -56,8 +56,8 @@ settings = {
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
 
     'community_host_timeout_secs': '10',
-    'spektrum_hp_feed': 'http://localhost:6552/static/feed.xml',
-    'spektrum_img_host': 'http://localhost:6552',
+    'spektrum_hp_feed': 'http://localhost:6552/spektrum/feed.xml',
+    'spektrum_img_host': 'http://localhost:6552/spektrum',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -154,7 +154,8 @@ def test_asset(path):
 
 @pytest.fixture
 def app_settings():
-    return settings.copy()
+    return zeit.web.core.utils.defaultattrdict(
+        lambda *_: None, settings.iteritems())
 
 
 @pytest.fixture(scope='module')
@@ -267,16 +268,12 @@ def config(application, request):
 
 
 @pytest.fixture
-def dummy_request(request, config):
+def dummy_request(request, config, app_settings):
     req = pyramid.testing.DummyRequest(is_xhr=False)
+    req.response.headers = set()
+    req.registry.settings = app_settings
     config.manager.get()['request'] = req
     return req
-
-
-@pytest.fixture
-def agatho():
-    return zeit.web.core.comments.Agatho(
-        settings['agatho_host'] + '/agatho/thread/')
 
 
 @pytest.fixture
@@ -291,7 +288,7 @@ def debug_testserver(debug_application, request):
 
 
 @pytest.fixture(scope='function')
-def mockcommunity_factory(request):
+def mockserver_factory(request):
     def factory(response=None):
         def mock_app(env, start_response):
             start_response('200 OK', [])
@@ -307,11 +304,11 @@ def mockcommunity_factory(request):
 
 
 @pytest.fixture(scope='session')
-def mockspektrum(request):
-
+def mockserver(request):
+    """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
     config = Configurator()
-    config.add_static_view('static', 'zeit.web.core:data/spektrum/')
+    config.add_static_view('/', 'zeit.web.core:data/')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6552
@@ -323,7 +320,7 @@ def mockspektrum(request):
 
 
 @pytest.fixture(scope='session')
-def testserver(application_session, request, mockspektrum):
+def testserver(application_session, request, mockserver):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6543
     server.wsgi_app = application_session
@@ -373,19 +370,6 @@ def appbrowser(application):
     """Returns an instance of `webtest.TestApp`."""
     extra_environ = dict(HTTP_HOST='example.com')
     return TestApp(application, extra_environ=extra_environ)
-
-
-@pytest.fixture
-def monkeyagatho(monkeypatch):
-    def collection_get(self, unique_id):
-        path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/')
-        try:
-            return lxml.etree.parse(self.agatho_host + path)
-        except IOError:
-            return
-
-    monkeypatch.setattr(
-        zeit.web.core.comments.Agatho, 'collection_get', collection_get)
 
 
 @pytest.fixture
@@ -439,11 +423,12 @@ def css_selector(request):
 
 
 @pytest.fixture
-def comment_counter(testserver, testbrowser):
-    def get_count(**kw):
-        params = urllib.urlencode(kw)
-        url = '%s/json/comment_count?%s' % (testserver.url, params)
-        return testbrowser(url)
+def comment_counter(app_settings, application):
+    def get_count(**kwargs):
+        request = pyramid.testing.DummyRequest()
+        request.registry.settings = app_settings
+        request.GET = kwargs
+        return zeit.web.core.view.json_comment_count(request)
     return get_count
 
 

@@ -43,7 +43,7 @@ require([
     $( '.primary-nav' ).adaptToSpace();
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
     $( '.footer-publisher__more' ).extendFooter();
-    $( '.inline-gallery' ).inlinegallery({ slideSelector: '.stage--large' });
+    $( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
     $( '.snapshot' ).snapshot();
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();

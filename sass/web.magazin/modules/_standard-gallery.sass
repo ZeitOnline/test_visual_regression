@@ -1,34 +1,19 @@
 .gallery
     background-color: $grey--light
-    margin-top: $compact
-    margin-bottom: $compact
-    // disable padding
-    margin-left: -$page-padding--small
-    margin-right: -$page-padding--small
+    margin: $compact (-$page-padding--small)
+    padding: 0 0 $small
     +respond-min($break-1)
-        margin-top: $big
-        margin-bottom: $big
-        margin-left: -$page-padding
-        margin-right: -$page-padding
+        margin: $big (-$page-padding)
         padding: $compact $page-padding
     +respond-min($break-3)
         margin-left: -($page-padding+$gutter/2)
         margin-right: -($page-padding+$gutter/2)
         padding: $medium $big $large
     .figure__caption
-        max-width: none
-        +respond-max($break-1)
-            color: $white
-            background-color: rgba(0,0,0,0.3)
-            position: absolute
-            left: 0
-            bottom: 0
-            display: none
-            margin-top: 0
-            padding: 15px
-            max-width: none !important
-            .figure__caption__copyright
-                color: $white
+        padding: 0 $page-padding--small
+        +respond-min($break-1)
+            padding-left: 0
+            padding-right: 30%
 
 .gallery__description
     margin-bottom: $compact

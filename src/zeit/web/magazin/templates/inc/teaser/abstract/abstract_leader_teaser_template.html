@@ -26,7 +26,7 @@ All calling templates have to provide:
 
     {# call comment box #}
     {% if self.format() != 'full' -%}
-         {{ cp.comments_count(get_teaser_commentcount(teaser.uniqueId), teaser | create_url) }}
+         {{ cp.comment_count(view.comment_counts[teaser.uniqueId], teaser | create_url) }}
     {%- endif %}
 
     <a href="{{ teaser | create_url }}">

@@ -299,7 +299,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                   'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
                   '<!--<!\\[endif\\]--></div><figcaption '
                   'class="figure__caption"><span '
-                  'class="figure__caption__text">test</span><span '
+                  'class="figure__text">test</span><span '
                   'class="figure__copyright">%s</span>'
                   '</figcaption></figure>'
                   % (el['css'], el['alt'], el['title'], cr))
@@ -647,12 +647,12 @@ def test_macro_teaser_text_block_should_produce_alternative_markup(
     assert '<div class="cp_button__subtitle' not in output
 
 
-def test_macro_comments_count_should_produce_correct_markup(jinja2_env):
+def test_macro_comment_count_should_produce_correct_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     markup = ('<span class="cp_comment__count__wrap '
               'icon-comments-count">3</span>')
-    lines = tpl.module.comments_count(3).splitlines()
+    lines = tpl.module.comment_count(3).splitlines()
     output = ''
     for line in lines:
         output += line.strip()

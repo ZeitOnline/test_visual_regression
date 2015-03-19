@@ -23,6 +23,17 @@
   <scale name="brightcove-still" width="580" height="326" title="Brightcove video still" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="brightcove-thumbnail" width="120" height="67" title="Brightcove thumbnail" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="spektrum" width="220" height="124" title="Spektrum feed image" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-large-center" widht="225" height="125" title="ZMO: Large center" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-large-left" widht="225" height="125" title="ZMO: Large left" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-large-right" widht="225" height="125" title="ZMO: Large right" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-medium-center" widht="225" height="125" title="ZMO: Medium center" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-medium-left" widht="225" height="125" title="ZMO: Medium left" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-medium-right" widht="225" height="125" title="ZMO: Medium right" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-small-center" widht="225" height="125" title="ZMO: Small center" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-small-left" widht="225" height="125" title="ZMO: Small left" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-small-right" widht="225" height="125" title="ZMO: Small right" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-xl" widht="460" height="306" title="ZMO: XL" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zmo-xl-header" widht="460" height="306" title="ZMO: XL header" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-printbox" width="320" height="234" title="Relaunch 2015: Printbox" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-printbox-wide" width="320" height="148" title="Relaunch 2015: Printbox wide" available="zeit.web.core.interfaces.IInternalUse"/>
   <!-- ZEIT ONLINE Scales -->
@@ -30,16 +41,17 @@
   <scale name="zon-large" width="580" height="326" title="Relaunch 2015: großer Teaser" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-article-large" width="820" height="462" title="Relaunch 2015: Artikel groß" available="zeit.web.core.interfaces.IInternalUse"/>
   <!-- ZEIT Magazin Scales -->
+  <scale name="zmo-card-picture" width="320" height="480" title="ZMO: Flippende Karte" available="zeit.magazin.interfaces.IZMOContent"/>
+  <scale name="zmo-article-dream" width="920" height="1150" title="ZMO: Artikel Traum" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-landscape-large" width="980" height="551" title="ZMO: Quer groß (16:9)" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-landscape-small" width="290" height="163" title="ZMO: Quer klein (16:9)" available="zeit.magazin.interfaces.IZMOContent"/>
+  <scale name="zmo-large" width="920" height="?400" title="ZMO: L" available="zeit.magazin.interfaces.IZMOContent"/>
+  <scale name="zmo-lead-upright" width="612" height="826" title="ZMO: Aufmacher hochkant" available="zeit.magazin.interfaces.IZMOContent"/>
+  <scale name="zmo-medium" width="660" height="?200" title="ZMO: M" available="zeit.magazin.interfaces.IZMOContent"/>
+  <scale name="zmo-print-cover" width="315" height="424" title="ZMO: Print Cover" available="zeit.magazin.interfaces.IZMOContent"/>
+  <scale name="zmo-small" width="500" height="?100" title="ZMO: S" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-square-large" width="660" height="660" title="ZMO: Quadrat groß" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-square-small" width="100" height="100" title="ZMO: Quadrat klein" available="zeit.magazin.interfaces.IZMOContent"/>
-  <scale name="zmo-lead-upright" width="612" height="826" title="ZMO: Aufmacher hochkant" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-upright" width="290" height="387" title="ZMO: Hochkant 3:4" available="zeit.magazin.interfaces.IZMOContent"/>
-  <scale name="zmo-large" width="920" height="?400" title="ZMO: L" available="zeit.magazin.interfaces.IZMOContent"/>
-  <scale name="zmo-medium" width="660" height="?200" title="ZMO: M" available="zeit.magazin.interfaces.IZMOContent"/>
-  <scale name="zmo-small" width="500" height="?100" title="ZMO: S" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-x-small" width="350" height="?100" title="ZMO: XS" available="zeit.magazin.interfaces.IZMOContent"/>
-  <scale name="zmo-article-dream" width="920" height="1150" title="ZMO: Artikel Traum" available="zeit.magazin.interfaces.IZMOContent"/>
-  <scale name="zmo-print-cover" width="315" height="424" title="ZMO: Print Cover" available="zeit.magazin.interfaces.IZMOContent"/>
 </scales>

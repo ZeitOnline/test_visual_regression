@@ -73,11 +73,6 @@ class Teaser(object):
             return
 
 
-ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
-ElementMaker = lxml.objectify.ElementMaker(
-    annotate=False, nsmap={'atom': ATOM_NAMESPACE})
-
-
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
@@ -90,7 +85,7 @@ class RSSFeed(
         self.request.response.content_type = 'application/rss+xml'
         return lxml.etree.tostring(
             self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='utf8')
+            encoding='UTF-8')
 
     def build_feed(self):
         E = ElementMaker
@@ -124,7 +119,7 @@ class RSSFeed(
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
             # cannot use route_url() as is, since it uses that hostname, which
             # is not the one we want. In non-production environments this
-            # unfortunately still generates un-unseful production links.
+            # unfortunately still generates useless production links.
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
             item = E.item(
@@ -152,6 +147,16 @@ class RSSFeed(
                     type=image.mimeType))
             channel.append(item)
         return root
+
+
+# Generic RSS helpers below; should we extract them somewhere?
+
+ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
+CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
+ElementMaker = lxml.objectify.ElementMaker(annotate=False, nsmap={
+    'atom': ATOM_NAMESPACE,
+    'content': CONTENT_NAMESPACE,
+})
 
 
 def format_rfc822_date(timestamp):

@@ -9,6 +9,10 @@
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
+        {% block teasaer_format_marker %}
+        {% endblock %}
+        {% block teasaer_format_name %}
+        {% endblock %}
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
             <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | translate_url }}">
@@ -38,8 +42,12 @@
                 {% block teaser_datetime %}
                     {{ cp.include_teaser_datetime(teaser, self.layout()) }}
                 {% endblock %}
-                {% block teaser_commentcount%}
-                    {{ cp.include_teaser_commentcount(teaser, self.layout()) }}
+                {% block teaser_commentcount %}
+                    {% set comments = view.comment_counts[teaser.uniqueId] %}
+                    {% if comments %}
+                        {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
+                    {% endif %}
                 {% endblock %}
             </div>
             {% endblock %}

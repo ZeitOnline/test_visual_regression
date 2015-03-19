@@ -4,7 +4,9 @@
 {% macro image(obj, loop) -%}
     {% if obj | default_image_url -%}
         <figure class="
-            {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
+            {%- if loop -%}
+                slide
+            {%- elif obj.layout == 'large' -%}
                 stage--large
             {%- endif -%}
             ">
@@ -13,9 +15,9 @@
             </div>
             <figcaption class="figure__caption">
                 {% if loop -%}
-                <span class="figure__caption__pager">{{ loop.index }}/{{ loop.length }}</span>
+                <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__caption__text">{{ obj.caption|hide_none }}</span>
+                <span class="figure__text">{{ obj.caption|hide_none }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
