@@ -1,0 +1,50 @@
+{% extends "zeit.web.site:templates/article_komplett.html" %}
+{% block pre_article_content %}
+    <div class="column-heading">
+        <div class="column-heading__upper">
+            <div class="column-heading__inner">
+                <div class="column-heading__information">
+                    <h3 class="column-heading__column-details__title"><a href="#" class="column-heading__column-details">
+                        {{- view.supertitle | hide_none -}}
+                    </a></h3>                    
+                    <h1 class="column-heading__title">{{- view.title | hide_none -}}</h1>
+                    <h1 class="column-heading__name">Eine Kolumne vom <a class="column-heading__name__link" href="{{view.authors[0].href}}">{{- view.authors[0].name | hide_none -}}</a></h1>
+                </div>
+                <div class="column-heading__author">
+                    <a href="{{view.authors[0].href}}"><img src="//i.guim.co.uk/static/w-300/h--/q-95/sys-images/Guardian/Pix/pictures/2014/3/13/1394733739486/JackMonroe.png" alt="Jack Monroe"></a>
+                </div>
+            </div>
+        </div>
+        <div class="column-heading__lower">
+            <div class="column-heading__inner">
+                <div class="column-heading__summary">
+                    <div class="summary">
+                        {{ view.subtitle | hide_none }}
+                    </div>
+                    <div class="metadata metadata--column">
+                        <!-- TODO: Make this more DRY with the meta template, comments, sharing, etc. -->
+                        {% if view.source_label -%}
+                        <span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
+                            {%- if view.source_url -%}
+                            <a href="{{ view.source_url }}">{{ view.source_label }}</a> -
+                            {%- else -%}
+                            {{ view.source_label }}
+                            {%- endif -%}
+                        </span>
+                        {% endif -%}
+
+                        <time class="metadata__date{% if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
+                        {{- view.date_last_modified | format_date(view.show_date_format) -}}
+                        </time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock pre_article_content %}
+
+<!-- TODO: This data needs displaying in the new header, find nicer way of doing this :/ -->
+{% block article_heading %}
+{% endblock article_heading %}
+{% block article_meta %}
+{% endblock article_meta %}

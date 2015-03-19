@@ -1,0 +1,93 @@
+.column-heading
+	margin-left: -1.25rem
+	margin-right: -1.25rem
+
+	// general colour and positioning
+	&__upper
+		background-color: $trout
+
+	&__lower
+		background-color: $cararra
+
+	&__inner
+		position: relative
+		width: auto
+		+respond-max($break-desktop-min)
+			margin-left: 1.25rem
+			margin-right: 1.25rem
+		+respond-min($break-desktop-min)
+			margin: auto
+			width: remify(660px)
+
+	// author and title
+	&__author,
+	&__information
+		+respond-min($break-phablet-min)
+			display: table-cell
+	
+	&__information
+		+respond-min($break-phablet-min)
+			width: 65%
+		+respond-min($break-tablet-min)
+			width: 70%
+	
+	&__author
+		+respond-max($break-phablet-min)
+			position: absolute
+			bottom: 0
+			right: 0
+			width: 33%
+			z-index: 0
+		+respond-min($break-phablet-min)
+			text-align: right
+			vertical-align: bottom
+			width: 35%
+		+respond-min($break-tablet-min)
+			width: 30%
+
+	&__information
+		padding: em(10px) 0 em(35px)
+		vertical-align: middle
+		+respond-max($break-phablet-min)
+			position: relative
+			z-index: 1
+		+respond-min($break-phablet-min)
+			padding: em(30px) 0 em(20px)
+
+	&__column-details
+		+link-colors($charcoal, $white, $white, $charcoal, $white)
+		&__title
+			letter-spacing: 0.05em
+			margin-bottom: em(3px)
+			font-size: $font-m--rem
+
+	&__title
+		color: $white
+		margin-bottom: 0
+		margin-top: 0
+		letter-spacing: 0.008em
+		font-size: $font-xl--rem
+		+respond-min($break-phablet-min)
+			font-size: $font-xl--rem
+		+respond-min($break-tablet-min)
+			font-size: $font-xxl--rem
+
+	&__name
+		color: $cararra
+		font-family: $font-franziska
+		font-style: italic
+		margin-top: 0
+		font-size: $font-m--rem
+		+respond-max($break-phablet-min)
+			width: 67%
+		+respond-min($break-phablet-min)
+			font-size: $font-xl--rem
+		+respond-min($break-tablet-min)
+			font-size: $font-xxl--rem
+		&__link
+			+link-colors($cararra, $white, $white, $cararra, $white)
+
+	&__summary
+		padding: $medium 0
+		+respond-min($break-phablet-min)
+			padding: $big 0
