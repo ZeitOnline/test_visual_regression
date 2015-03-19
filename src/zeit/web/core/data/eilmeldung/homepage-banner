@@ -38,7 +38,6 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Administratives</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">5bd33f33706f4977b744d70d22bdece6</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/workflow/published" name="published">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
