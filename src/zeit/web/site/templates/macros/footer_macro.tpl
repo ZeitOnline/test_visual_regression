@@ -16,7 +16,8 @@
     {% for i in navigation -%}
         {% set section = navigation[i] %}
         <div class="footer-{{ class }}__inner footer-{{ class }}__inner--is{{ section.item_id }}">
-            <ul class="footer-{{ class }}__list footer-{{ class }}__list--is{{ section.item_id }}">
+            <ul
+            class="footer-{{ class }}__list footer-{{ class }}__list--is{{ section.item_id }}">
                 <li class="footer-{{ class }}__item footer-{{ class }}__item--isbold">
                     {{ section.text | hide_none }}
                 </li>
@@ -24,7 +25,9 @@
                     {% for j in section -%}
                         {% set item = section[j] %}
                         <li class="footer-{{ class }}__item">
-                            <a class="footer-{{ class }}__link" href="{{ item.href | translate_url }}">{{ item.text }}</a>
+                            <a class="footer-{{ class }}__link" href="{{
+                            item.href | translate_url }}"  itemprop="url"><span
+                            itemprop="name">{{ item.text }}</span></a>
                         </li>
                     {%- endfor %}
                 {%- endif %}
