@@ -504,8 +504,7 @@ class BreakingNews(object):
         self.uniqueId = bn_banner.article_id
         bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
         self.title = bn_article.title
-        self.date_last_published = zeit.cms.workflow.interfaces.IPublishInfo(
-            bn_article).date_last_published
+        self.date_last_published_semantic = (
+            zeit.cms.workflow.interfaces.IPublishInfo(
+                bn_article).date_last_published_semantic)
         self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
-        self.date_string = "{}:{} Uhr".format(
-            self.date_last_published.hour, self.date_last_published.minute)

@@ -5,7 +5,7 @@
 
 {% block article_heading %}
     <div class="breaking-news-banner breaking-news-banner--article">
-        Eilmeldung <span class="breaking-news-banner__time">{{- view.date_last_modified | format_date('time_only') -}}</span>
+        Eilmeldung <span class="breaking-news-banner__time">{{- view.date_last_published_semantic | format_date('time_only') -}}</span>
     </div>
     <h1 class="article-heading article-heading--breaking-news">
         <span class="article-heading__kicker">
