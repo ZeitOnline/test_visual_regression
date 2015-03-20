@@ -7,9 +7,9 @@
                 {{ author.prefix }}
             {% endif %}
             {%- if author.href -%}
-                <a href="{{ author.href|translate_url }}" class="{{ class }}">{{ author.name }}</a>{{ author.location }}
+                <a href="{{ author.href|translate_url }}" class="{{ class }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
             {%- else -%}
-                <span class="{{ class }}">{{ author.name }}{{ author.location }}</span>
+                <span class="{{ class }}"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
             {%- endif -%}
             {{ author.suffix }}
         {%- endfor -%}

@@ -12,6 +12,9 @@ Change log for zeit.web
 
 - Kill the singing robot
 
+- ZON-1288: Add schema.org Item, Author, Image to articles
+
+
 
 1.17.1 (2015-03-17)
 -------------------
