@@ -4,6 +4,8 @@ Change log for zeit.web
 1.17.2 (unreleased)
 -------------------
 
+- ZON-1390: Polish article
+
 - ZON-1304: Schema.org markup for SiteNavigationElement.
 
 - ZON-1441: Add Eilmeldungsartikel

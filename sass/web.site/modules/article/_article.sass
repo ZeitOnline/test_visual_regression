@@ -4,20 +4,23 @@
 		width: remify(660px)
 		margin: auto
 
+.article__subheading,
 .article-page__page-teaser
-	color: $zon-charcoal
 	font-size: remify(20px)
 	line-height: 1.25
-	margin: 2em 0 1em
+	margin: 1.4em 0 .5em
 	+respond-min($break-desktop-min)
 		font-size: remify(24px)
 
 .summary,
+.byline,
 .article__page-teaser
 	color: $grey--mid
 	font-size: remify(18px)
-	line-height: 1.5
+	line-height: 1.4
 	margin-bottom: remify($petite--px)
+	+respond-min($break-tablet-min)
+		line-height: 1.5
 	+respond-min($break-desktop-min)
 		font-size: remify(20px)
 
@@ -25,21 +28,27 @@
 	font-family: $font-franziska
 	font-size: remify(18px)
 	line-height: 1.4
-	margin-bottom: $little
+	margin: 0 0 .6em
+	+respond-min($break-tablet-min)
+		line-height: 1.5
 	+respond-min($break-desktop-min)
 		font-size: remify(20px)
+	a
+		border-bottom: 1px solid rgba($color-link--default, .5)
+		+transition-property(border-bottom-color color)
+		+transition-duration(.2s)
+		&:focus
+			border-bottom-color: rgba($color-link--focus, .5)
+		&:hover
+			border-bottom-color: rgba($color-link--hover, .5)
+		&:active
+			border-bottom-color: rgba($color-link--active, .5)
 
 .byline
-	color: $grey--mid
-	margin-bottom: remify(40px)
+	margin-bottom: remify(30px)
 
 .byline__author
 	font-weight: bold
-	+link
-		color: inherit
-		text-decoration: none
-	+on-interaction
-		text-decoration: underline
 
 .metadata
 	color: $zon_grey
