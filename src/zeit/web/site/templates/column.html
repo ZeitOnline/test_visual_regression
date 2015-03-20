@@ -1,46 +1,46 @@
 {% extends "zeit.web.site:templates/article_komplett.html" %}
-{% block pre_article_content %}
+{% block article_heading %}
     <div class="column-heading">
         <div class="column-heading__upper">
-            <div class="column-heading__inner">
-                <div class="column-heading__information">
-                    <h3 class="column-heading__column-details">
-                        <!-- TODO: link to series? -->
-                        <a href="#" class="column-heading__column-details__link">
-                            <!-- TODO: Nicer series name -->
-                            <span>{{- view.serie | hide_none -}}</span> 
-                            <span> / </span>
+            <div class="article__item">
+                <div class="column-heading__inner">
+                    <div class="column-heading__information">
+                        <h3 class="column-heading__column-details">
+                            {#  note: wrap in link, when series landing page exists 
+                                <a href="#" class="column-heading__column-details__link">
+                                </a> 
+                            #}
+                            <span>{{- view.serie + ' / ' | hide_none -}}</span> 
                             <span>{{- view.supertitle | hide_none -}}</span>
+                        </h3>                    
+                        <h1 class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</h1>
+                        <h1 class="column-heading__name">Eine Kolumne vom <a class="column-heading__name__link" href="{{view.authors[0].href}}" itemtype="http://schema.org/Person" itemprop="author">{{- view.authors[0].name | hide_none -}}</a></h1>
+                    </div>
+                    <div class="column-heading__author">
+                        <!-- TODO: correct image, correct link? -->    
+                        <a href="{{view.authors[0].href}}">
+                            <img src="//i.guim.co.uk/static/w-300/h--/q-95/sys-images/Guardian/Pix/pictures/2014/3/13/1394733739486/JackMonroe.png" alt="Jack Monroe">
                         </a>
-                    </h3>                    
-                    <h1 class="column-heading__title">{{- view.title | hide_none -}}</h1>
-                    <h1 class="column-heading__name">Eine Kolumne vom <a class="column-heading__name__link" href="{{view.authors[0].href}}">{{- view.authors[0].name | hide_none -}}</a></h1>
-                </div>
-                <div class="column-heading__author">
-                    <!-- TODO: correct image, correct link? -->    
-                    <a href="{{view.authors[0].href}}">
-                        <img src="//i.guim.co.uk/static/w-300/h--/q-95/sys-images/Guardian/Pix/pictures/2014/3/13/1394733739486/JackMonroe.png" alt="Jack Monroe">
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="column-heading__lower">
-            <div class="column-heading__inner">
-                <div class="column-heading__summary">
-                    <div class="summary">
-                        {{ view.subtitle | hide_none }}
-                    </div>
-                    <div class="metadata metadata--column">
-                        {% include "zeit.web.site:templates/inc/article/metadata.tpl" ignore missing %}
+            <div class="article__item" itemprop="description">
+                <div class="column-heading__inner">
+                    <div class="column-heading__summary">
+                        <div class="summary">
+                            {{ view.subtitle | hide_none }}
+                        </div>
+                        <div class="metadata metadata--column">
+                            {% include "zeit.web.site:templates/inc/article/metadata.tpl" ignore missing %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock pre_article_content %}
-
-<!-- TODO: This data is displayed in the new header, so not in the article context, find nicer way of doing this :/ -->
-{% block article_heading %}
 {% endblock article_heading %}
+
 {% block article_meta %}
 {% endblock article_meta %}

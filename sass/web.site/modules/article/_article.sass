@@ -1,8 +1,21 @@
 .article
 	width: auto
-	+respond-min($break-desktop-min)
-		width: remify(660px)
-		margin: auto
+
+	&__item
+		&--wide
+			margin-bottom: em(40px)
+			margin-left: -$page-padding
+			margin-right: -$page-padding
+		+respond-min($break-desktop-min)
+			width: remify(660px)
+			margin-left: auto
+			margin-right: auto
+			&--wide
+				width: remify(820px)
+				margin-top: em(40px)
+
+			&--full
+				width: 100%
 
 .article__subheading,
 .article-page__page-teaser
@@ -28,7 +41,7 @@
 	font-family: $font-franziska
 	font-size: remify(18px)
 	line-height: 1.4
-	margin: 0 0 .6em
+	margin-bottom: .6em
 	+respond-min($break-tablet-min)
 		line-height: 1.5
 	+respond-min($break-desktop-min)

@@ -7,7 +7,7 @@
             {%- if loop -%}
                 slide
             {%- elif obj.layout == 'large' -%}
-                stage--large
+                article__item article__item--wide
             {%- endif -%}
             ">
             <div class="scaled-image">
@@ -77,7 +77,7 @@
             u'viel durchwanderten und umkämpften Land. Auch die deutsche '
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
-    <p class="paragraph">
+    <p class="paragraph article__item">
         {{ html | safe}}
     </p>
 {%- endmacro %}
