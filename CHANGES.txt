@@ -12,12 +12,13 @@ Change log for zeit.web
 
 - ZON-1498: Add dotted pager to slideshow galleries
 
-- Kill the singing robot
+- ZON-1440: Add Eilmeldungsbanderole
 
 - ZON-1288: Add schema.org Item, Author, Image to articles
 
-- BUG-164: Refactor video fallback image
+- Kill the singing robot
 
+- BUG-164: Refactor video fallback image
 
 
 1.17.1 (2015-03-17)

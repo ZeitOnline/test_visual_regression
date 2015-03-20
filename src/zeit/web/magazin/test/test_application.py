@@ -12,7 +12,7 @@ import requests
 
 
 @pytest.fixture
-def app_request(app_settings):
+def app_request(app_settings, application):
     app_settings['asset_prefix'] = '/assets'
     app = zeit.web.core.application.Application()
     app.settings = app_settings
