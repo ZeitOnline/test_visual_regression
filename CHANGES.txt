@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1288: Add schema.org Item, Author, Image to articles
 
+- BUG-164: Refactor video fallback image
+
 
 
 1.17.1 (2015-03-17)

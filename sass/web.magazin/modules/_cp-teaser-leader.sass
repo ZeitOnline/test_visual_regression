@@ -2,7 +2,7 @@
 $cp_lead-full-height: em(550px)
 $cp_lead-full-video-max-width: em(1000px)
 
-.cp_leader-assets, %cp_lead-assets
+%cp_lead-assets
 	overflow: hidden
 	position: absolute
 	top: 0
@@ -17,23 +17,6 @@ $cp_lead-full-video-max-width: em(1000px)
 		min-height: 100%
 		max-width: $cp_lead-full-video-max-width
 		display: none
-	img
-		position: absolute
-		top: 0
-		right: 0
-		bottom: 0
-		margin: auto
-		min-height: 100%
-		width: 100%
-	.video--fallback
-		display: inline
-		@media only screen and (orientation : portrait)
-			left: -50%
-			min-width: 200%
-		+respond-max($break-1)
-			@media only screen
-				left: -100%
-				min-width: 300%
 
 .cp_leader
 	position: relative
