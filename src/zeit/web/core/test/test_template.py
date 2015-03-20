@@ -257,7 +257,7 @@ def test_teaser_layout_should_be_cached_per_unique_id(application):
 
     teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
     assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with('http://unique', None)
+    request.teaser_layout.get.assert_called_with('http://unique#0', None)
 
 
 def test_get_teaser_layout_should_deal_with_all_sort_of_unset_params(
