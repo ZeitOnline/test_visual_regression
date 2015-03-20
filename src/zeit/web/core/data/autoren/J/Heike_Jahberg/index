@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author>
+  <firstname>Heike</firstname>
+  <lastname>Jahberg</lastname>
+  <vgwortid>9303723</vgwortid>
+  <display_name xmlns:py="http://codespeak.net/lxml/objectify/pytype">Heike Jahberg</display_name>
+  <title xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+  <email>heike.jahberg@tagesspiegel.de</email>
+  <status xmlns:py="http://codespeak.net/lxml/objectify/pytype">Online</status>
+</author>

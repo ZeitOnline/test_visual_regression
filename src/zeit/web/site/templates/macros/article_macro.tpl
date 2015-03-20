@@ -64,6 +64,12 @@
     {% endif %}
 {% endmacro %}
 
+{% macro intertitle(intertitle) -%}
+    <h2 class="article__subheading">
+        {{ intertitle|striptags }}
+    </h2>
+{%- endmacro %}
+
 {% macro paragraph(html, class) -%}
   {#
     html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '
