@@ -4,9 +4,17 @@ Change log for zeit.web
 1.17.2 (unreleased)
 -------------------
 
+- ZON-1304: Schema.org markup for SiteNavigationElement.
+
+- ZON-1441: Add Eilmeldungsartikel
+
 - ZON-1498: Add dotted pager to slideshow galleries
 
 - ZON-1482: Ensure broken reference teasers are skipped on CPs
+
+- Kill the singing robot
+
+- ZON-1288: Add schema.org Item, Author, Image to articles
 
 
 1.17.1 (2015-03-17)
@@ -33,6 +41,8 @@ Change log for zeit.web
   1.15.4)
 
 - ZON-1437: Reduce community requests for centerpage teaser counts
+
+- ZON-1486: Rework video teaser images
 
 
 1.16.2 (2015-03-06)

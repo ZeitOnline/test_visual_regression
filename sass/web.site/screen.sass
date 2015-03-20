@@ -3,15 +3,7 @@
 
 @charset "UTF-8"
 
-@import compass
-
-// ---------- Configure compass ----------
-// browsers() = android, android-chrome, android-firefox, blackberry, chrome, firefox, ie, ie-mobile, ios-safari, opera, opera-mini, opera-mobile, safari
-// $supported-browsers: ("chrome", "firefox", "ie", "safari")
-// @if compass-env() == "development"
-//     $debug-browser-support: true
-
-$svg-gradient-shim-threshold: 100 // Disable SVG gradient support in Opera and IE9
+@import "setup"
 
 @import "../vendor/normalize.css"
 
@@ -66,7 +58,9 @@ $svg-gradient-shim-threshold: 100 // Disable SVG gradient support in Opera and I
 @import "modules/iqd_adcode"
 
 // article
-@import "modules/article"
+@import "modules/breaking-news-banner"
+@import "modules/article/article"
+@import "modules/article/article-heading"
 @import "modules/pagination"
 
 // comments

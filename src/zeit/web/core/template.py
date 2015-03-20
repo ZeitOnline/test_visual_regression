@@ -48,7 +48,8 @@ def create_url(obj):
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
-               'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ"}
+               'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+               'time_only': "HH:mm 'Uhr'"}
     # workaround for inadequate format_datetime() parsing
     # "yyyy-MM-dd'T'HH:mm:ssZZZZZ" or "yyyy-MM-dd'T'HH:mm:ssXXX" is not working
     if type == 'iso8601':

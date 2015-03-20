@@ -165,18 +165,18 @@
 /* mixins for navigation/header */
 
 =add_nav_bar_style($height,$double: false)
+	border-bottom: 1px solid $zon_light_grey
 	height: $height
-	border-bottom: $hair solid $zon_light_grey
-	width: 100%
 	padding-left: $fine
+	width: 100%
 	@if $double
-		border-top: $hair solid $zon_light_grey
+		border-top: 1px solid $zon_light_grey
 
-=remove_nav_bar_style()
-	height: auto
+=remove_nav_bar_style($width: auto)
 	border: 0
-	width: auto
+	height: auto
 	padding-left: 0
+	width: $width
 
 =hover_nav_icon($display:block,$bgcolor:#FFF, $padding:$small)
 	.main_nav__icon--hover
@@ -194,8 +194,8 @@
 /* END: mixins for navigation/header */
 
 =image_text_replacement($display:block, $vertical-align:middle)
+	+background-size(contain)
 	background-position: 50% 50%
-	background-size: contain
 	display: $display
 	text-indent: -50000em
 	@if $display == inline-block or $display == inline

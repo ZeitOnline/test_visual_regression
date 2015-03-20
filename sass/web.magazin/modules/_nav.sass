@@ -64,10 +64,10 @@ $icon-avatar-std-size: em(32px)
 
 // declare logo styles "desktop first" to get them IE<9 safe
 .main-nav__logo__img
-    display: inline-block
     +hide-text
-    background-size: contain
+    +background-size(contain)
     background-position: 50% 50%
+    display: inline-block
     vertical-align: middle
 
     // small logo initials
