@@ -16,8 +16,6 @@ Change log for zeit.web
 
 - Kill the singing robot
 
->>>>>>> master
-
 
 1.17.1 (2015-03-17)
 -------------------
