@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
+
 import zeit.web.core.view
 import zeit.web.magazin.view
 

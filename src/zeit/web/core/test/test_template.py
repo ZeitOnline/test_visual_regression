@@ -394,3 +394,14 @@ def test_get_column_image_should_return_an_image_or_none(application):
     teaser = mock.Mock()
     teaser.authorships = None
     assert zeit.web.core.template.get_column_image(teaser) is None
+
+
+def test_debug_breaking_news_should_be_enableable(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    assert not browser.cssselect('.breaking-news-banner')
+
+
+def test_debug_breaking_news_should_be_disableable(testbrowser, testserver):
+    browser = testbrowser(
+        '%s/zeit-online/index?debug=eilmeldung' % testserver.url)
+    assert browser.cssselect('.breaking-news-banner')

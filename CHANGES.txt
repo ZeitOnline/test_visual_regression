@@ -14,9 +14,13 @@ Change log for zeit.web
 
 - ZON-1482: Ensure broken reference teasers are skipped on CPs
 
-- Kill the singing robot
+- ZON-1440: Add Eilmeldungsbanderole
 
 - ZON-1288: Add schema.org Item, Author, Image to articles
+
+- Kill the singing robot
+
+- BUG-164: Refactor video fallback image
 
 
 1.17.1 (2015-03-17)

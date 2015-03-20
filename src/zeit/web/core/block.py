@@ -2,10 +2,11 @@
 import logging
 import os.path
 
+import PIL
 import grokcore.component
 import lxml.etree
 import lxml.html
-import PIL
+import urlparse
 import zope.interface
 
 import zeit.content.article.edit.interfaces
@@ -480,3 +481,30 @@ class NextreadTeaserBlock(object):
 
     def __len__(self):
         return len(self.teasers)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+class BreakingNews(object):
+
+    """Breaking news"""
+
+    def __init__(self):
+        bn_path = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings).get('breaking_news')
+        try:
+            bn_banner_content = zeit.cms.interfaces.ICMSContent(bn_path)
+        except TypeError:
+            self.published = False
+            return
+        self.published = zeit.cms.workflow.interfaces.IPublishInfo(
+            bn_banner_content).published
+        bn_banner = zeit.content.article.edit.interfaces.IBreakingNewsBody(
+            bn_banner_content)
+        self.uniqueId = bn_banner.article_id
+        bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
+        self.title = bn_article.title
+        self.date_last_published_semantic = (
+            zeit.cms.workflow.interfaces.IPublishInfo(
+                bn_article).date_last_published_semantic)
+        self.doc_path = urlparse.urlparse(bn_article.uniqueId).path

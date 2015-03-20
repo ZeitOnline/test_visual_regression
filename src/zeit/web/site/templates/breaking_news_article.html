@@ -1,8 +1,11 @@
 {% extends "zeit.web.site:templates/article_komplett.html" %}
 
+{% block breaking_news %}
+{% endblock breaking_news %}
+
 {% block article_heading %}
-    <div class="breaking-news-banner">
-        Eilmeldung <span class="breaking-news-banner__time">{{- view.date_last_modified | format_date('time_only') -}}</span>
+    <div class="breaking-news-banner breaking-news-banner--article">
+        Eilmeldung <span class="breaking-news-banner__time">{{- view.date_last_published_semantic | format_date('time_only') -}}</span>
     </div>
     <h1 class="article-heading article-heading--breaking-news" itemprop="headline">
         <span class="article-heading__kicker">

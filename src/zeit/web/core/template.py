@@ -522,3 +522,9 @@ def get_image_group(asset):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
+
+
+@zeit.web.register_global
+def debug_breaking_news():
+    request = pyramid.threadlocal.get_current_request()
+    return 'eilmeldung' == request.GET.get('debug', '')
