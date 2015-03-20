@@ -240,7 +240,7 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-large'
 
 
-def test_teaser_layout_should_be_cached_per_uniqueId(application):
+def test_teaser_layout_should_be_cached_per_unique_id(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
@@ -250,14 +250,14 @@ def test_teaser_layout_should_be_cached_per_uniqueId(application):
     request.teaser_layout = {}
     teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
     assert teaser == 'zon-small'
-    assert request.teaser_layout['http://unique'] == 'zon-small'
+    assert request.teaser_layout['http://unique#0'] == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout.get = mock.Mock(return_value='zon-small')
 
     teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
     assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with('http://unique', None)
+    request.teaser_layout.get.assert_called_with('http://unique#0', None)
 
 
 def test_get_teaser_layout_should_deal_with_all_sort_of_unset_params(
