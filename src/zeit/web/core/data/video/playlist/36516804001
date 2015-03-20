@@ -35,16 +35,6 @@
     </head>
     <body>
         <videos>
-            <video type="video" href="http://xml.zeit.de/video/2015-01/4004256546001" year="2015" ressort="Digital" contenttype="video" publication-date="" expires="">
-                <supertitle>Künstliche Intelligenz</supertitle>
-                <title>Roboter Myon übernimmt Opernrolle</title>
-                <text>Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.</text>
-                <description>Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.</description>
-                <byline/>
-                <breadcrumb_title/>
-                <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3653/18140073001_4004353973001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001"/>
-                <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3339/18140073001_4004249823001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001"/>
-            </video>
             <video contenttype="video" expires="" href="http://xml.zeit.de/video/2014-01/3035864892001" publication-date="" ressort="Gesellschaft" type="video" year="2015">
                 <supertitle>Islamismus</supertitle>
                 <title>Boko Haram bekennt sich zu Angriff auf Baga</title>
@@ -54,6 +44,16 @@
                 <breadcrumb_title/>
                 <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3318/18140073001_4002291299001_video-still-for-video-4002182794001.jpg?pubId=18140073001"/>
                 <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/2318/18140073001_4002291298001_thumbnail-for-video-4002182794001.jpg?pubId=18140073001"/>
+            </video>
+            <video type="video" href="http://xml.zeit.de/video/2015-01/4004256546001" year="2015" ressort="Digital" contenttype="video" publication-date="" expires="">
+                <supertitle>Künstliche Intelligenz</supertitle>
+                <title>Roboter Myon übernimmt Opernrolle</title>
+                <text>Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.</text>
+                <description>Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.</description>
+                <byline/>
+                <breadcrumb_title/>
+                <video-still src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3653/18140073001_4004353973001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001"/>
+                <thumbnail src="http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3339/18140073001_4004249823001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001"/>
             </video>
             <video contenttype="video" expires="" href="http://xml.zeit.de/video/2014-01/3089721834001" publication-date="" ressort="Politik" type="video" year="2015">
                 <supertitle>Moderne Heldinnen</supertitle>
