@@ -56,14 +56,14 @@ def test_breaking_news_article_renders_breaking_bar(testbrowser, testserver):
     assert len(select('.article-heading--breaking-news')) == 1
 
 
-def test_schema_org_mainContentOfPage(testbrowser, testserver):
+def test_schema_org_main_content_of_page(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/01'.format(
         testserver.url)).cssselect
 
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_Article(testbrowser, testserver):
+def test_schema_org_article(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/01'.format(
         testserver.url)).cssselect
 
@@ -96,7 +96,7 @@ def test_schema_org_author(testbrowser, testserver):
     assert len(select('.byline span[itemprop="name"]')) == 1
 
 
-def test_schema_org_articleBody(testbrowser, testserver):
+def test_schema_org_article_body(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/01'.format(
         testserver.url)).cssselect
 
@@ -107,4 +107,37 @@ def test_schema_org_image(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/01'.format(
         testserver.url)).cssselect
     json = 'article > script[type="application/ld+json"]'
-    assert(len(select(json))) == 1
+    assert len(select(json)) == 1
+
+
+def test_multipage_article_should_designate_meta_pagination(
+        testbrowser, testserver):
+    browser = testbrowser('{}/zeit-online/article/zeit'.format(
+        testserver.url))
+    assert not browser.xpath('//head/meta[@rel="prev"]')
+    href = browser.xpath('//head/meta[@rel="next"]')[0].attrib.get('href')
+    assert href.endswith('zeit-online/article/zeit/seite-2')
+
+    browser = testbrowser('{}/zeit-online/article/zeit/seite-2'.format(
+        testserver.url))
+    href = browser.xpath('//head/meta[@rel="prev"]')[0].attrib.get('href')
+    assert href.endswith('zeit-online/article/zeit')
+    href = browser.xpath('//head/meta[@rel="next"]')[0].attrib.get('href')
+    assert href.endswith('zeit-online/article/zeit/seite-3')
+
+    browser = testbrowser('{}/zeit-online/article/zeit/seite-5'.format(
+        testserver.url))
+    href = browser.xpath('//head/meta[@rel="prev"]')[0].attrib.get('href')
+    assert href.endswith('zeit-online/article/zeit/seite-4')
+    assert not browser.xpath('//head/meta[@rel="next"]')
+
+
+def test_other_page_types_should_not_designate_meta_pagination(
+        testbrowser, testserver):
+    browser = testbrowser('{}/zeit-online/article/01'.format(testserver.url))
+    assert not browser.xpath('//head/meta[@rel="prev"]')
+    assert not browser.xpath('//head/meta[@rel="next"]')
+
+    browser = testbrowser('{}/zeit-online/index'.format(testserver.url))
+    assert not browser.xpath('//head/meta[@rel="prev"]')
+    assert not browser.xpath('//head/meta[@rel="next"]')

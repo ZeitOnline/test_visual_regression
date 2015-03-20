@@ -12,17 +12,20 @@
     <meta name="description" content="{{ view.pagedescription }}">
     {% if view.ranked_tags_list -%}
         <meta name="keywords" content="{{ view.ranked_tags_list | replace_list_seperator(', ') }}">
-    {%- endif %}
+    {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" id="viewport-meta">
-
-    {% include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing %}
-
     <meta name="apple-itunes-app" content="app-id=448633376">
     <meta name="author" content="ZEIT ONLINE GmbH, Hamburg, Germany">
     <meta name="application-name" content="ZEIT ONLINE">
     <meta name="msapplication-TileImage" content="http://images.zeit.de/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
+    {% if view.prev_page_url -%}
+        <meta rel="prev" href="{{ view.prev_page_url }}">
+    {% endif -%}
+    {% if view.next_page_url -%}
+        <meta rel="next" href="{{ view.next_page_url }}">
+    {% endif -%}
     <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
@@ -37,6 +40,7 @@
         <link href="{{ request.asset_url('css/web.site/ie-navi.css') }}" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
 
+    {%- include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" ignore missing -%}
     {%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
 
