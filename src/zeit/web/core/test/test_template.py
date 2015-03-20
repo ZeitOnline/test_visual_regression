@@ -250,7 +250,7 @@ def test_teaser_layout_should_be_cached_per_unique_id(application):
     request.teaser_layout = {}
     teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
     assert teaser == 'zon-small'
-    assert request.teaser_layout['http://unique#2'] == 'zon-small'
+    assert request.teaser_layout['http://unique#0'] == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout.get = mock.Mock(return_value='zon-small')
