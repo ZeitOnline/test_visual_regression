@@ -23,9 +23,11 @@ Available attributes:
 
 {% block main %}
     {% profile %}
+    {% if view.area_fullwidth | length %}
     <div class="main__fullwidth">
         {%- include "zeit.web.site:templates/inc/cp_area_fullwidth.html" ignore missing -%}
     </div>
+    {% endif %}
     {% endprofile %}
     {% profile %}
     <div class="main__content">

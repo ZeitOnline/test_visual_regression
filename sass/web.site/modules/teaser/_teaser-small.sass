@@ -29,16 +29,19 @@
 // only first small teaser in collection displays image in mobile mode
 // all others are hidden
 // first-of-type does not work in IE < 9 so we'll fix it in the IE stylesheet
-.teaser-collection--main
-	.teaser-small
-		.teaser-small__media
-			display: none
-			+respond-min($break-phablet-min)
-				display: table-cell
++respond-max($break-phablet-min)
+	.teaser-collection--main
+		.teaser-small
+			.teaser-small__media
+				display: none
 
-.teaser-collection--main
-	.teaser-small:first-of-type
-		.teaser-small__media
-			display: block
-			+respond-min($break-phablet-min)
-				display: table-cell
+	.teaser-collection--main
+		.teaser-small:first-of-type
+			.teaser-small__media
+				display: block
+
+	.main__fullwidth + .main__content .teaser-collection--main
+		.teaser-small:first-of-type
+			.teaser-small__media
+				display: none
+

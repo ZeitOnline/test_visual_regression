@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1304: Schema.org markup for SiteNavigationElement.
 
+- ZON-1395: Polish full section teaser
+
 - ZON-1441: Add Eilmeldungsartikel
 
 - ZON-1498: Add dotted pager to slideshow galleries
