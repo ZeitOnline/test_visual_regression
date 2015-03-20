@@ -16,9 +16,11 @@ Change log for zeit.web
 
 - ZON-1288: Add schema.org Item, Author, Image to articles
 
-- Kill the singing robot
+- ZON-1526: Designate meta pagination for multipage articles
 
 - BUG-164: Refactor video fallback image
+
+- Kill the singing robot
 
 
 1.17.1 (2015-03-17)

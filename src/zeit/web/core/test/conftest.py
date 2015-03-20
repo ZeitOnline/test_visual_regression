@@ -460,8 +460,8 @@ class TestApp(webtest.TestApp):
 
 
 class Browser(zope.testbrowser.browser.Browser):
-    """Custom testbrowser class that allows direct access to CSS selection on
-    its content.
+    """Custom testbrowser class that allows direct access to CSS and XPath
+    selection on its content.
 
     Usage examples:
 
@@ -487,10 +487,18 @@ class Browser(zope.testbrowser.browser.Browser):
 
     def cssselect(self, selector):
         """Return a list of lxml.HTMLElement instances that match a given CSS
-        selector."""
+        selector.
+        """
         xpath = self._translator.css_to_xpath(selector)
         if self.document is not None:
             return self.document.xpath(xpath)
+
+    def xpath(self, selector):
+        """Return a list of lxml.HTMLElement instances that match a given
+        XPath selector.
+        """
+        if self.document is not None:
+            return self.document.xpath(selector)
 
     @property
     def document(self):
