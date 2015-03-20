@@ -230,8 +230,8 @@
 {%- endmacro %}
 
 {% macro headerimage(obj) -%}
-    <div class="scaled-image is-pixelperfect">
-        {{ lama.insert_responsive_image(obj, 'article__main-image--longform') }}
+    <div class="scaled-image is-pixelperfect article__head-image">
+        {{ lama.insert_responsive_image(obj) }}
     </div>{{ obj.caption }}{{ obj.copyright }}
 {%- endmacro %}
 
@@ -258,7 +258,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='article__main-image--longform') -%}
+{% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='') -%}
 
     {% if obj.id is not defined and obj.uniqueId -%}
         {% set id = obj.uniqueId|substring_from('/') %}

@@ -3,7 +3,7 @@
     margin: remify(50px) 0 0
     a
         // normal, hover, active, visited, focus
-        +link-colors($zon_mid_grey, $color-link--hover, $color-link--active, $zon_mid_grey, $color-link--focus)
+        +link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
     &__a11y-title
         +visuallyhidden
     &__button
@@ -26,7 +26,6 @@
 
 .pager
     letter-spacing: $zon-letter-spacing-m
-    line-height: 2
     margin: 2em 0 0
     padding: 0
     &__label
@@ -35,7 +34,7 @@
     &__number
         display: none
         &:after
-            color: $zon_mid_grey
+            color: $zon_grey
             content: "/"
         a
             padding: 0 1em
@@ -44,6 +43,7 @@
             a
                 // normal, hover, active, visited, focus
                 +link-colors($zon-charcoal, $color-link--hover, $color-link--active, $zon-charcoal, $color-link--focus)
+                font-weight: bold
     &__all
         display: inline-block
 
@@ -55,6 +55,7 @@
         &__nexttitle
             display: inline
     .pager
+        line-height: 2
         margin-top: 7em
         &__label,
         &__number

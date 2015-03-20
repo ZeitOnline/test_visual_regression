@@ -97,6 +97,9 @@
                 {% endblock navigation %}
                 {% block metadata %}
                 {% endblock metadata %}
+                {% block breaking_news %}
+                    {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
+                {% endblock breaking_news %}
             </header>
             {% endprofile %}
             {% block adplace_billboard %}
