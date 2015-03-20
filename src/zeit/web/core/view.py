@@ -44,8 +44,11 @@ class Base(object):
 
     def _set_response_headers(self):
         # ZMO Version header
-        self.request.response.headers.add(
-            'X-Version', self.request.registry.settings.version)
+        try:
+            self.request.response.headers.add(
+                'X-Version', self.request.registry.settings.version)
+        except AttributeError:
+            pass
 
         # C1 headers
         #
