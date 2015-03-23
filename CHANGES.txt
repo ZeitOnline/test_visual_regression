@@ -30,9 +30,9 @@ Change log for zeit.web
 
 - BUG-164: Refactor video fallback image
 
-- Kill the singing robot
-
 - FIX: Make version detection failsafe
+
+- Kill the singing robot
 
 
 1.17.1 (2015-03-17)
