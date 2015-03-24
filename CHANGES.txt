@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.18.1 (unreleased)
+1.18.1 (2015-03-24)
 -------------------
 
 - Fixed ZMO menu icon
