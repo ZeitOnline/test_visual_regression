@@ -82,8 +82,8 @@ class Base(object):
             'C1-Track-Channel': lambda: c1_add_sections.get(
                 self.context.ressort, self.context.ressort),
             'C1-Track-Sub-Channel': lambda: self.context.sub_ressort,
-            'C1-Track-Heading': lambda: self.context.title,
-            'C1-Track-Kicker': lambda: self.context.supertitle
+            'C1-Track-Heading': lambda: self.context.title.strip(),
+            'C1-Track-Kicker': lambda: self.context.supertitle.strip()
         }
 
         for th_name in c1_track_headers:

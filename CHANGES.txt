@@ -4,7 +4,7 @@ Change log for zeit.web
 1.18.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- BUG-212: Strip preceding and trailing whitespaces and newlines in C1-header
 
 
 1.18 (2015-03-20)
