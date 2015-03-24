@@ -4,7 +4,9 @@ Change log for zeit.web
 1.18.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fixed ZMO menu icon
+
+- Fixed width of fullwidth teaser
 
 
 1.18 (2015-03-20)
