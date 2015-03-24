@@ -2,6 +2,7 @@
 import datetime
 import re
 
+import requests
 import lxml
 import mock
 import pytest
@@ -725,3 +726,8 @@ def test_centerpage_metadata(testbrowser, testserver):
 
     assert len(html('.header__date')) == 1, 'just one .header__date'
     assert html('.header__date')[0].text == date, 'Date is invalid'
+
+
+def test_new_centerpage_renders(testserver):
+    resp = requests.get('%s/index' % testserver.url)
+    assert resp.ok

@@ -22,8 +22,8 @@ log = logging.getLogger(__name__)
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
-    renderer='templates/centerpage.html')
-class Centerpage(
+    renderer='templates/centerpage_legacy.html')
+class LegacyCenterpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
 
     """Main view class for ZEIT ONLINE centerpages."""
@@ -196,3 +196,11 @@ class Centerpage(
             return self.context.ressort.lower()
         else:
             return ''
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    renderer='templates/centerpage.html')
+class Centerpage(zeit.web.site.view.Base):
+    pass
