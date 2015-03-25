@@ -11,7 +11,9 @@ $teaser-column-mobile-image-size: 80px
 	background: $color-column-background
 	border-top: none
 	padding:   $petite $petite $petite
-	margin: 40px (-$page-padding) $petite (-$page-padding)
+	margin-top: em(40px)
+	margin-left: -$page-padding
+	margin-right: -$page-padding
 	position: relative
 	box-shadow: inset 0 $teaser-column-shadow 0 0 $color-column-shadow
 	+respond-min($break-tablet-min)
@@ -19,7 +21,7 @@ $teaser-column-mobile-image-size: 80px
 		margin-right: 0
 	+respond-min($break-desktop-min)
 		box-shadow: none
-		margin: $petite 0 $petite 0
+		margin-top: $petite
 		min-height: remify(250px)
 		padding: $petite $petite $petite ($teaser-image-desktop-width + $petite)
 	&__media
