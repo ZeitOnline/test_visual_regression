@@ -3,8 +3,44 @@
 This is the main template for the context type "centerpage".
 
 Available attributes:
-    zeit.web.site.view_centerpage.Centerpage
+    zeit.web.site.view_centerpage.LegacyCenterpage
 
 #}
 {% import "zeit.web.site:templates/macros/layout_macro.tpl" as lama_site with context %}
 {% extends "zeit.web.site:templates/layout.html" %}
+
+{% block metadata %}
+    <div class="header__metadata">
+        <div class="header__tags">
+            <span class="header__tags__label">{{ view.topiclink_title }}</span>
+            {% for label, link in view.topiclinks %}
+            <a href="{{ link }}" title="{{ label }}" class="header__tags__link">{{ label }}</a>
+            {% endfor %}
+        </div>
+        <div class="header__date">{{ view.displayed_last_published_semantic | format_date('long') }}</div>
+    </div>
+{% endblock metadata %}
+
+{% block main %}
+
+    {% for region in view.regions %}
+        {%- include "zeit.web.site:templates/inc/region/default.html" ignore missing -%}
+    {% endfor %}
+
+    <div class="main__content">
+        {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
+    </div>
+    <div class="main__informatives">
+        {{ lama_site.show_informative_ad(view, true) }}
+        {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
+        {{ lama_site.show_informative_ad(view) }}
+        {%- include "zeit.web.site:templates/inc/cp_area_printbox.html" ignore missing -%}
+    </div>
+    {%- include "zeit.web.site:templates/inc/cp_area_videostage.html" ignore missing -%}
+    <div class="main__parquet">
+        {%- include "zeit.web.site:templates/inc/cp_area_parquet.html" ignore missing -%}
+    </div>
+    <div class="main__snapshot">
+        {%- include "zeit.web.site:templates/inc/cp_area_snapshot.html" ignore missing -%}
+    </div>
+{% endblock main %}

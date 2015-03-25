@@ -350,8 +350,10 @@ def pluralize(num, *forms):
 
 
 @zeit.web.register_filter
-def with_mods(elem, *mods):
-    return ' '.join([elem] + ['%s--%s' % (elem, m) for m in mods])
+def with_mods(b_or_e, *mods):
+    """Decorate a BEM-style block or element with an a set of modifiers."""
+    return ' '.join([b_or_e] + ['{}--{}'.format(b_or_e, m) for m in
+                                set(mods) if isinstance(m, basestring)])
 
 
 @zeit.web.register_filter

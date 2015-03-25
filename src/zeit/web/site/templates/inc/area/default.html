@@ -1,5 +1,5 @@
-<div class="teasers-fullwidth">
-    {% for layout, teaser, teaser_block in view.area_fullwidth -%}
+<div class="{{ 'cp-area' | with_mods(area.layout) }}">
+    {% for layout, teaser, teaser_block in area -%}
         {% include
             ["zeit.web.site:templates/inc/teaser/" + teaser_block | get_teaser_layout + ".tpl",
              "zeit.web.site:templates/inc/teaser/default.tpl"] %}
