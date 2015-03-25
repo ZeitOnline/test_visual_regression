@@ -47,8 +47,9 @@ class Centerpage(
             return zeit.web.core.template.get_teaser_layout(b) not in (
                 'zon-fullwidth', None)
 
+        lead = self.context.values()[0]["lead"]
         return [(b.layout.id, iter(b).next(), b) for b in
-                self.context['lead'].itervalues() if valid_block(b)]
+                lead.itervalues() if valid_block(b)]
 
     @zeit.web.reify
     def area_parquet(self):
@@ -63,7 +64,8 @@ class Centerpage(
                 'zon-parquet-large', 'zon-parquet-small') or getattr(
                 b, 'cpextra', None) in ('parquet-spektrum',)
 
-        return [b for bar in self.context['teaser-mosaic'].itervalues() if
+        parquet = self.context.values()[1]
+        return [b for bar in parquet.itervalues() if
                 valid_bar(bar) for b in bar.itervalues() if valid_block(b)]
 
     @zeit.web.reify
@@ -76,8 +78,9 @@ class Centerpage(
             return zeit.web.core.template.get_teaser_layout(b) in (
                 'zon-fullwidth',)
 
+        lead = self.context.values()[0]["lead"]
         return [(b.layout.id, iter(b).next(), b) for b in
-                self.context['lead'].values() if valid_block(b)]
+                lead.values() if valid_block(b)]
 
     @zeit.web.reify
     def area_buzz_mostread(self):
