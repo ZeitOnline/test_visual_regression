@@ -227,8 +227,15 @@ class LegacyCenterpage(
         :rtype: zeit.content.image.image.RepositoryImage
         """
 
-        snap = self.context.snapshot
-        return snap and zeit.web.core.interfaces.ITeaserImage(snap) or None
+        try:
+            snapshot = zeit.web.core.interfaces.ITeaserImage(
+                self.context.snapshot)
+        except TypeError:
+            return
+
+        block = zeit.web.core.utils.nslist([snapshot])
+        block.layout = 'snapshot'
+        return block
 
     @zeit.web.reify
     def topiclink_title(self):
