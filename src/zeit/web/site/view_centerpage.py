@@ -76,7 +76,15 @@ class LegacyCenterpage(
             [area_videomain, area_videoplaylist])
         region_video.layout = 'video'
 
-        return [r for r in [region_fullwidth, region_main, region_video] if r]
+        area_snapshot = zeit.web.core.utils.nslist([self.snapshot])
+        area_snapshot.layout = 'snapshot'
+        area_snapshot.width = '1/1'
+
+        region_snapshot = zeit.web.core.utils.nslist([area_snapshot])
+        region_snapshot.layout = 'normal'
+
+        return [r for r in [
+            region_fullwidth, region_main, region_video, region_snapshot] if r]
 
     @zeit.web.reify
     def area_main(self):
