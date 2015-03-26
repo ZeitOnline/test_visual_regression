@@ -39,6 +39,8 @@ class LegacyCenterpage(
 
     @zeit.web.reify
     def regions(self):
+        regions = []
+
         area_fullwidth = zeit.web.core.utils.nslist(
             self.area_fullwidth)
         area_fullwidth.layout = 'fullwidth'
@@ -47,6 +49,7 @@ class LegacyCenterpage(
         region_fullwidth = zeit.web.core.utils.nslist(
             [area_fullwidth])
         region_fullwidth.layout = 'normal'
+        regions.append(region_fullwidth)
 
         area_main = zeit.web.core.utils.nslist(
             self.area_main)
@@ -61,6 +64,7 @@ class LegacyCenterpage(
         region_main = zeit.web.core.utils.nslist(
             [area_main, area_informatives])
         region_main.layout = 'normal'
+        regions.append(region_main)
 
         area_videomain = zeit.web.core.utils.nslist(
             self.area_videostage[:1])
@@ -75,16 +79,18 @@ class LegacyCenterpage(
         region_video = zeit.web.core.utils.nslist(
             [area_videomain, area_videoplaylist])
         region_video.layout = 'video'
+        regions.append(region_video)
 
-        area_snapshot = zeit.web.core.utils.nslist([self.snapshot])
-        area_snapshot.layout = 'snapshot'
-        area_snapshot.width = '1/1'
+        if self.snapshot is not None:
+            area_snapshot = zeit.web.core.utils.nslist([self.snapshot])
+            area_snapshot.layout = 'snapshot'
+            area_snapshot.width = '1/1'
 
-        region_snapshot = zeit.web.core.utils.nslist([area_snapshot])
-        region_snapshot.layout = 'snapshot'
+            region_snapshot = zeit.web.core.utils.nslist([area_snapshot])
+            region_snapshot.layout = 'snapshot'
+            regions.append(region_snapshot)
 
-        return [r for r in [
-            region_fullwidth, region_main, region_video, region_snapshot] if r]
+        return regions
 
     @zeit.web.reify
     def area_main(self):
