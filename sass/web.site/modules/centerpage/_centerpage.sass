@@ -8,9 +8,18 @@ $cp-padding: em(10px)
 	padding: 0 $cp-padding
 	float: left
 	width: 100%
-	&--1third
+	&--threequarters
 		+respond-min($break-tablet-min)
-			width: 33.33%
-	&--2third
+			width: 75%
+	&--twothirds
 		+respond-min($break-tablet-min)
 			width: 66.66%
+	&--onehalf
+		+respond-min($break-tablet-min)
+			width: 50%
+	&--onethird
+		+respond-min($break-tablet-min)
+			width: 33.33%
+	&--onequarter
+		+respond-min($break-tablet-min)
+			width: 25%

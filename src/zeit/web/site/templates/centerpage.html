@@ -3,7 +3,7 @@
 This is the main template for the context type "centerpage".
 
 Available attributes:
-    zeit.web.site.view_centerpage.LegacyCenterpage
+    zeit.web.site.view_centerpage.Centerpage
 
 #}
 {% import "zeit.web.site:templates/macros/layout_macro.tpl" as lama_site with context %}
@@ -23,22 +23,9 @@ Available attributes:
 
 {% block main %}
     {% for region in view.regions %}
-        {%- include "zeit.web.site:templates/inc/region/default.html" ignore missing -%}
+        {%- include ["zeit.web.site:templates/inc/region/" + region.layout + ".html",
+                     "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
-
-    <div class="cp-region">
-        <div class="cp-area cp-area--2third">
-            {%- include "zeit.web.site:templates/inc/cp_area_main.html" ignore missing -%}
-        </div>
-        <div class="cp-area cp-area--1third">
-            {{ lama_site.show_informative_ad(view, true) }}
-            {%- include "zeit.web.site:templates/inc/cp_area_buzz.html" ignore missing -%}
-            {{ lama_site.show_informative_ad(view) }}
-            {%- include "zeit.web.site:templates/inc/cp_area_printbox.html" ignore missing -%}
-        </div>
-    </div>
-
-    {%- include "zeit.web.site:templates/inc/cp_area_videostage.html" ignore missing -%}
 
     <div class="cp-region">
         {%- include "zeit.web.site:templates/inc/cp_area_parquet.html" ignore missing -%}

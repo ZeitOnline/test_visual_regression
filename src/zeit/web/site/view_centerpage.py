@@ -39,11 +39,44 @@ class LegacyCenterpage(
 
     @zeit.web.reify
     def regions(self):
-        area_fullwidth = zeit.web.core.utils.nslist(self.area_fullwidth)
-        area_fullwidth.width = '1/1'
+        area_fullwidth = zeit.web.core.utils.nslist(
+            self.area_fullwidth)
         area_fullwidth.layout = 'fullwidth'
+        area_fullwidth.width = '1/1'
 
-        return [r for r in [(area_fullwidth,)] if r]
+        region_fullwidth = zeit.web.core.utils.nslist(
+            [area_fullwidth])
+        region_fullwidth.layout = 'normal'
+
+        area_main = zeit.web.core.utils.nslist(
+            self.area_main)
+        area_main.layout = 'lead'
+        area_main.width = '2/3'
+
+        area_informatives = zeit.web.core.utils.nslist(
+            self.area_informatives)
+        area_informatives.layout = 'informatives'
+        area_informatives.width = '1/3'
+
+        region_main = zeit.web.core.utils.nslist(
+            [area_main, area_informatives])
+        region_main.layout = 'normal'
+
+        area_videomain = zeit.web.core.utils.nslist(
+            self.area_videostage[:1])
+        area_videomain.layout = 'video-stage-main'
+        area_videomain.width = '2/3'
+
+        area_videoplaylist = zeit.web.core.utils.nslist(
+            self.area_videostage[1:4])
+        area_videoplaylist.layout = 'video-stage-secondary'
+        area_videoplaylist.width = '1/3'
+
+        region_video = zeit.web.core.utils.nslist(
+            [area_videomain, area_videoplaylist])
+        region_video.layout = 'video'
+
+        return [r for r in [region_fullwidth, region_main, region_video] if r]
 
     @zeit.web.reify
     def area_main(self):
@@ -55,8 +88,7 @@ class LegacyCenterpage(
             return zeit.web.core.template.get_teaser_layout(b) not in (
                 'zon-fullwidth', None)
 
-        return [(b.layout.id, iter(b).next(), b) for b in
-                self.context['lead'].itervalues() if valid_block(b)]
+        return [b for b in self.context['lead'].itervalues() if valid_block(b)]
 
     @zeit.web.reify
     def area_parquet(self):
@@ -84,8 +116,14 @@ class LegacyCenterpage(
             return zeit.web.core.template.get_teaser_layout(b) in (
                 'zon-fullwidth',)
 
-        return [(b.layout.id, iter(b).next(), b) for b in
-                self.context['lead'].values() if valid_block(b)]
+        return [b for b in self.context['lead'].values() if valid_block(b)]
+
+    @zeit.web.reify
+    def area_informatives(self):
+        return [b for b in [self.area_buzz_mostread,
+                            self.area_buzz_facebook,
+                            self.area_buzz_comments,
+                            self.area_printbox] if b]
 
     @zeit.web.reify
     def area_buzz_mostread(self):
@@ -93,11 +131,11 @@ class LegacyCenterpage(
         :rtype: zeit.web.core.utils.nslist
         """
 
-        area = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
-        area.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
-        area.layout.id = zeit.web.core.utils.nsunicode('mostread')
-        area.header = zeit.web.core.utils.nsunicode('Meistgelesene Artikel')
-        return area
+        block = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
+        block.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
+        block.layout.id = zeit.web.core.utils.nsunicode('mostread')
+        block.header = zeit.web.core.utils.nsunicode('Meistgelesene Artikel')
+        return block
 
     @zeit.web.reify
     def area_buzz_comments(self):
@@ -105,11 +143,11 @@ class LegacyCenterpage(
         :rtype: zeit.web.core.utils.nslist
         """
 
-        area = zeit.web.core.reach.fetch('comments', self.ressort, limit=3)
-        area.layout = zeit.web.core.utils.nsunicode('buzz-comments')
-        area.layout.id = zeit.web.core.utils.nsunicode('comments')
-        area.header = zeit.web.core.utils.nsunicode('Meistkommentiert')
-        return area
+        block = zeit.web.core.reach.fetch('comments', self.ressort, limit=3)
+        block.layout = zeit.web.core.utils.nsunicode('buzz-comments')
+        block.layout.id = zeit.web.core.utils.nsunicode('comments')
+        block.header = zeit.web.core.utils.nsunicode('Meistkommentiert')
+        return block
 
     @zeit.web.reify
     def area_buzz_facebook(self):
@@ -117,11 +155,11 @@ class LegacyCenterpage(
         :rtype: zeit.web.core.utils.nslist
         """
 
-        area = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
-        area.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
-        area.layout.id = zeit.web.core.utils.nsunicode('facebook')
-        area.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
-        return area
+        block = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
+        block.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
+        block.layout.id = zeit.web.core.utils.nsunicode('facebook')
+        block.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
+        return block
 
     @zeit.web.reify
     def area_printbox(self):
@@ -152,17 +190,36 @@ class LegacyCenterpage(
 
         content.image = image
         content.has_digital_ad = has_digital_ad
-        return content
+
+        block = zeit.web.core.utils.nslist([content])
+        block.layout = zeit.web.core.utils.nsunicode('printbox')
+        block.layout.id = zeit.web.core.utils.nsunicode('printbox')
+        return block
 
     @zeit.web.reify
     def area_videostage(self):
         """Return a video playlist object to be displayed on the homepage."""
 
         try:
-            return zeit.cms.interfaces.ICMSContent(
+            content = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/video/playlist/36516804001')
         except TypeError:
             return
+
+        blocks = []
+        try:
+            block = zeit.web.core.utils.nslist([content.videos[0]])
+            block.layout = 'video-large'
+            blocks.append(block)
+        except IndexError:
+            pass
+
+        for video in content.videos[1:]:
+            block = zeit.web.core.utils.nslist([video])
+            block.layout = 'video-small'
+            blocks.append(block)
+
+        return blocks
 
     @zeit.web.reify
     def snapshot(self):

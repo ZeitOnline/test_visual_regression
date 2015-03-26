@@ -138,7 +138,15 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
+def area_width(width):
+    return {'1/1': None, '3/4': 'threequarters', '2/3': 'twothirds',
+            '1/2': 'onehalf', '1/3': 'onethird', '1/4': 'onequarter'}.get(
+                width, None)
+
+
+@zeit.web.register_filter
 def get_teaser_layout(teaser_block, teaser_position=0, request=None):
+    # TODO: Rename to get_block_layout
 
     request = request or pyramid.threadlocal.get_current_request()
 
@@ -155,7 +163,10 @@ def get_teaser_layout(teaser_block, teaser_position=0, request=None):
             return layout
 
     try:
-        layout = teaser_block.layout.id
+        if isinstance(teaser_block.layout, basestring):
+            layout = teaser_block.layout
+        else:
+            layout = teaser_block.layout.id
         teaser = list(teaser_block)[teaser_position]
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             raise TypeError('Broken reference: {}'.format(teaser.uniqueId))
@@ -179,6 +190,14 @@ def get_teaser_layout(teaser_block, teaser_position=0, request=None):
         request.teaser_layout[hash_] = layout
 
     return layout
+
+
+@zeit.web.register_filter
+def first_child(iterable):
+    try:
+        return iter(iterable).next()
+    except:
+        return
 
 
 @zeit.web.register_filter

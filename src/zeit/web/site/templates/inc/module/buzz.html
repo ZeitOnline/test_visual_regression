@@ -1,0 +1,14 @@
+<div class="{{ 'buzz-box' | with_mods(teaser_block.layout) }}">
+    <div class="{{ 'buzz-box__heading' | with_mods(teaser_block.layout) }}">
+        {{ teaser_block.header }}
+    </div>
+    <div class="{{ 'buzz-box__teasers' | with_mods(teaser_block.layout) }}">
+        {% for teaser in teaser_block -%}
+            {% with -%}
+                {% set index = loop.index %}
+                {% include ["zeit.web.site:templates/inc/teaser/" + teaser_block.layout + ".tpl",
+                            "zeit.web.site:templates/inc/teaser/buzz.tpl"] with context %}
+            {%- endwith %}
+        {%- endfor %}
+    </div>
+</div>

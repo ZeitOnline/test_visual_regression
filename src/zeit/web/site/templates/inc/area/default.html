@@ -1,7 +1,10 @@
-<div class="{{ 'cp-area' | with_mods(area.layout) }}">
-    {% for layout, teaser, teaser_block in area -%}
+<div class="{{ 'cp-area' | with_mods(area.width | area_width) }} {{ area.layout | hide_none }}">
+    {% block before_module_list %}{% endblock %}
+    {% for teaser_block in area -%}
+        {% set teaser = teaser_block | first_child %}
         {% include
             ["zeit.web.site:templates/inc/teaser/" + teaser_block | get_teaser_layout + ".tpl",
+             "zeit.web.site:templates/inc/module/" + teaser_block | get_teaser_layout + ".html",
              "zeit.web.site:templates/inc/teaser/default.tpl"] %}
     {% endfor %}
 </div>
