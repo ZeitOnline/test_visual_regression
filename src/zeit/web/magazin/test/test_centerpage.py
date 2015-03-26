@@ -763,9 +763,9 @@ def test_cp_lead_should_have_correct_first_block(application):
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.Centerpage(
         cp_context, mock.Mock())
-    lead1_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
-        'zeit-magazin/test-cp/test-cp-zmo-2#'\
-        'lead/id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    lead1_first_block = ('http://block.vivi.zeit.de/http://xml.zeit.de/'
+        'zeit-magazin/test-cp/test-cp-zmo-2#body/feature/lead/id-f8f46488'
+        '-75ea-46f4-aaff-7654b4e1c805')
     lead1_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-eae7c703-98e9-491a-a30d-c1c5cebd2371'
@@ -778,9 +778,9 @@ def test_cp_lead_should_have_correct_second_block(application):
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.Centerpage(
         cp_context, mock.Mock())
-    lead2_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
-        'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
-        'id-cc6bbea3-1337-42f5-8fe1-01c9c4476600'
+    lead2_first_block = ('http://block.vivi.zeit.de/http://xml.zeit.de/'
+        'zeit-magazin/test-cp/test-cp-zmo-2#body/feature/lead/id-cc6bbea3-'
+        '1337-42f5-8fe1-01c9c4476600')
     lead2_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo-2#lead/'\
         'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
@@ -793,9 +793,9 @@ def test_cp_lead_should_have_no_blocks(application):
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.Centerpage(
         cp_context, mock.Mock())
-    lead_first_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
-        'zeit-magazin/test-cp/test-cp-zmo#lead/'\
-        'id-f8f46488-75ea-46f4-aaff-7654b4e1c805'
+    lead_first_block = ('http://block.vivi.zeit.de/http://xml.zeit.de/zeit-mag'
+        'azin/test-cp/test-cp-zmo#body/feature/lead/id-f8f46488-75ea-46f4-'
+        'aaff-7654b4e1c805')
     lead_last_block = 'http://block.vivi.zeit.de/http://xml.zeit.de/'\
         'zeit-magazin/test-cp/test-cp-zmo#lead/'\
         'id-48962e5e-cdbe-4148-a12c-17724cd0e96b'
