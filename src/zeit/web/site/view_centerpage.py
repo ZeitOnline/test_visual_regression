@@ -81,7 +81,7 @@ class LegacyCenterpage(
         area_snapshot.width = '1/1'
 
         region_snapshot = zeit.web.core.utils.nslist([area_snapshot])
-        region_snapshot.layout = 'normal'
+        region_snapshot.layout = 'snapshot'
 
         return [r for r in [
             region_fullwidth, region_main, region_video, region_snapshot] if r]
