@@ -298,13 +298,13 @@ def test_centerpage_view_should_have_topic_links():
                           ('Label 3', 'http://link_3')]
 
 
-def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
+def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
 
-    fullwidth = browser.cssselect('.main .main__fullwidth')
-    content = browser.cssselect('.main .main__content')
-    informatives = browser.cssselect('.main .main__informatives')
+    fullwidth = browser.cssselect('.cp-area.fullwidth')
+    content = browser.cssselect('.cp-area.cp-area--twothirds.lead')
+    informatives = browser.cssselect('.cp-area.cp-area--onethird.informatives')
 
     assert len(fullwidth) == 1, 'We expect 1 div here'
     assert len(content) == 1, 'We expect 1 div here'
