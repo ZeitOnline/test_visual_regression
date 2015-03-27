@@ -615,13 +615,11 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
         assert False, 'Video not visible with 10 seconds'
 
 
-def test_area_printbox_should_contain_teaser_image(testserver):
+def test_module_printbox_should_contain_teaser_image(testserver):
     mycp = mock.Mock()
     view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
-    view.area_printbox.image
-    isinstance(
-        view.area_printbox.image,
-        zeit.content.image.image.RepositoryImage)
+    image = view.module_printbox[0].image
+    assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
 
 def test_homepage_indentifies_itself_as_homepage(testserver):

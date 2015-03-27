@@ -137,7 +137,7 @@ class LegacyCenterpage(
         return [b for b in [self.area_buzz_mostread,
                             self.area_buzz_facebook,
                             self.area_buzz_comments,
-                            self.area_printbox] if b]
+                            self.module_printbox] if b]
 
     @zeit.web.reify
     def area_buzz_mostread(self):
@@ -176,10 +176,8 @@ class LegacyCenterpage(
         return block
 
     @zeit.web.reify
-    def area_printbox(self):
-        """Return the content object for the Printbox or Angebotsbox.
-        :rtype: dict
-        """
+    def module_printbox(self):
+        """Return the module block for the Printbox or Angebotsbox."""
 
         try:
             content = zeit.cms.interfaces.ICMSContent(
