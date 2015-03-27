@@ -60,10 +60,9 @@ def test_area_main_should_filter_teasers(application):
     cp = zeit.web.site.view_centerpage.Centerpage(context, request)
 
     assert len(cp.area_main) == 2
-    assert cp.area_main[0][0] == 'zon-large'
-    assert cp.area_main[0][1] == 'article'
-    assert cp.area_main[1][0] == 'zon-small'
-    assert cp.area_main[0][1] == 'article'
+    assert cp.area_main[0].layout.id == 'zon-large'
+    assert cp.area_main[1].layout.id == 'zon-small'
+    assert list(cp.area_main[0])[0] == 'article'
 
 
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
