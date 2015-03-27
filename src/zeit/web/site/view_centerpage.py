@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import collections
 import logging
 
 import pyramid.response
@@ -17,6 +18,38 @@ import zeit.web.core.view_centerpage
 import zeit.web.site.view
 
 log = logging.getLogger(__name__)
+
+
+class LegacyLayout(zeit.web.core.utils.nsunicode):
+    def __init__(self, arg, **kw):
+        if isinstance(arg, basestring):
+            layout, self.id = arg, None
+        else:
+            layout, self.id = arg
+        super(LegacyLayout, self).__init__(layout, **kw)
+
+
+class LegacyModule(zeit.web.core.utils.nslist):
+    def __init__(self, arg, **kw):
+        super(LegacyModule, self).__init__(arg)
+        self.layout = LegacyLayout(kw.pop('layout', 'default'))
+
+
+class LegacyArea(zeit.web.core.utils.nslist):
+    def __init__(self, arg, **kw):
+        super(LegacyArea, self).__init__(arg)
+        self.layout = LegacyLayout(kw.pop('layout', 'fullwidth'))
+        self.width = kw.pop('width', '1/1')
+
+
+class LegacyRegion(collections.OrderedDict):
+    def __init__(self, arg, **kw):
+        super(LegacyRegion, self).__init__(arg)
+        self.layout = LegacyLayout(kw.pop('layout', 'normal'))
+        self.title = kw.pop('title', None)
+
+    def __iter__(self):
+        return iter(self[k] for k in super(LegacyRegion, self).__iter__())
 
 
 @pyramid.view.view_config(
@@ -41,54 +74,34 @@ class LegacyCenterpage(
     def regions(self):
         regions = []
 
-        area_fullwidth = zeit.web.core.utils.nslist(
-            self.area_fullwidth)
-        area_fullwidth.layout = 'fullwidth'
-        area_fullwidth.width = '1/1'
-
-        region_fullwidth = zeit.web.core.utils.nslist(
-            [area_fullwidth])
-        region_fullwidth.layout = 'normal'
+        region_fullwidth = LegacyRegion([('fullwidth', self.area_fullwidth)],
+                                        layout='fullwidth')
         regions.append(region_fullwidth)
 
-        area_main = zeit.web.core.utils.nslist(
-            self.area_main)
-        area_main.layout = 'lead'
-        area_main.width = '2/3'
+        region_lead = LegacyRegion([('main', self.area_main),
+                                    ('informatives', self.area_informatives)],
+                                   layout='lead')
+        regions.append(region_lead)
 
-        area_informatives = zeit.web.core.utils.nslist(
-            self.area_informatives)
-        area_informatives.layout = 'informatives'
-        area_informatives.width = '1/3'
+        area_video_main = LegacyArea(self.area_videostage[:1],
+                                     layout='video-stage-main',
+                                     width='2/3')
 
-        region_main = zeit.web.core.utils.nslist(
-            [area_main, area_informatives])
-        region_main.layout = 'normal'
-        regions.append(region_main)
+        area_video_secondary = LegacyArea(self.area_videostage[1:4],
+                                          layout='video-stage-secondary',
+                                          width='1/3')
 
-        area_videomain = zeit.web.core.utils.nslist(
-            self.area_videostage[:1])
-        area_videomain.layout = 'video-stage-main'
-        area_videomain.width = '2/3'
-
-        area_videoplaylist = zeit.web.core.utils.nslist(
-            self.area_videostage[1:4])
-        area_videoplaylist.layout = 'video-stage-secondary'
-        area_videoplaylist.width = '1/3'
-
-        region_video = zeit.web.core.utils.nslist(
-            [area_videomain, area_videoplaylist])
-        region_video.layout = 'video'
+        region_video = LegacyRegion([('main', area_video_main),
+                                     ('secondary', area_video_secondary)],
+                                    layout='video')
         regions.append(region_video)
 
-        if self.snapshot is not None:
-            area_snapshot = zeit.web.core.utils.nslist([self.snapshot])
-            area_snapshot.layout = 'snapshot'
-            area_snapshot.width = '1/1'
+        area_snapshot = LegacyArea([b for b in [self.snapshot] if b],
+                                   layout='snapshot', width='1/1')
 
-            region_snapshot = zeit.web.core.utils.nslist([area_snapshot])
-            region_snapshot.layout = 'snapshot'
-            regions.append(region_snapshot)
+        region_snapshot = LegacyRegion([('main', area_snapshot)],
+                                       layout='snapshot')
+        regions.append(region_snapshot)
 
         return regions
 
@@ -102,7 +115,9 @@ class LegacyCenterpage(
             return zeit.web.core.template.get_teaser_layout(b) not in (
                 'zon-fullwidth', None)
 
-        return [b for b in self.context['lead'].itervalues() if valid_block(b)]
+        return LegacyArea(
+            [b for b in self.context['lead'].itervalues() if valid_block(b)],
+            layout='lead', width='2/3')
 
     @zeit.web.reify
     def area_parquet(self):
@@ -130,50 +145,51 @@ class LegacyCenterpage(
             return zeit.web.core.template.get_teaser_layout(b) in (
                 'zon-fullwidth',)
 
-        return [b for b in self.context['lead'].values() if valid_block(b)]
+        return LegacyArea(
+            [b for b in self.context['lead'].values() if valid_block(b)])
 
     @zeit.web.reify
     def area_informatives(self):
-        return [b for b in [self.area_buzz_mostread,
-                            self.area_buzz_facebook,
-                            self.area_buzz_comments,
-                            self.module_printbox] if b]
+        return LegacyArea([b for b in (
+            self.module_buzz_comments, self.module_buzz_facebook,
+            self.module_buzz_mostread, self.module_printbox) if b][-2:],
+            layout='informatives', width='1/3')
 
     @zeit.web.reify
-    def area_buzz_mostread(self):
+    def module_buzz_mostread(self):
         """Return a pseudo teaser block with the top 3 most read articles.
-        :rtype: zeit.web.core.utils.nslist
+        :rtype: LegacyModule
         """
 
-        block = zeit.web.core.reach.fetch('mostread', self.ressort, limit=3)
-        block.layout = zeit.web.core.utils.nsunicode('buzz-mostread')
-        block.layout.id = zeit.web.core.utils.nsunicode('mostread')
-        block.header = zeit.web.core.utils.nsunicode('Meistgelesene Artikel')
-        return block
+        module = LegacyModule(
+            zeit.web.core.reach.fetch('mostread', self.ressort, limit=3),
+            layout=('buzz-mostread', 'mostread'))
+        module.header = 'Meistgelesene Artikel'
+        return module
 
     @zeit.web.reify
-    def area_buzz_comments(self):
+    def module_buzz_comments(self):
         """Return a pseudo teaser block with the top 3 most commented articles.
-        :rtype: zeit.web.core.utils.nslist
+        :rtype: LegacyModule
         """
 
-        block = zeit.web.core.reach.fetch('comments', self.ressort, limit=3)
-        block.layout = zeit.web.core.utils.nsunicode('buzz-comments')
-        block.layout.id = zeit.web.core.utils.nsunicode('comments')
-        block.header = zeit.web.core.utils.nsunicode('Meistkommentiert')
-        return block
+        module = LegacyModule(
+            zeit.web.core.reach.fetch('comments', self.ressort, limit=3),
+            layout=('buzz-comments', 'comments'))
+        module.header = 'Meistkommentiert'
+        return module
 
     @zeit.web.reify
-    def area_buzz_facebook(self):
+    def module_buzz_facebook(self):
         """Return a pseudo teaser block with the top 3 most shared articles.
-        :rtype: zeit.web.core.utils.nslist
+        :rtype: LegacyModule
         """
 
-        block = zeit.web.core.reach.fetch('facebook', self.ressort, limit=3)
-        block.layout = zeit.web.core.utils.nsunicode('buzz-facebook')
-        block.layout.id = zeit.web.core.utils.nsunicode('facebook')
-        block.header = zeit.web.core.utils.nsunicode('Meistgeteilt')
-        return block
+        module = LegacyModule(
+            zeit.web.core.reach.fetch('facebook', self.ressort, limit=3),
+            layout=('buzz-facebook', 'facebook'))
+        module.header = 'Meistgeteilt'
+        return module
 
     @zeit.web.reify
     def module_printbox(self):
@@ -200,11 +216,9 @@ class LegacyCenterpage(
         except (AttributeError, TypeError):
             box.image = None
 
-        block = zeit.web.core.utils.nslist([box])
-        block.has_digital_ad = has_digital_ad
-        block.layout = zeit.web.core.utils.nsunicode('printbox')
-        block.layout.id = zeit.web.core.utils.nsunicode('printbox')
-        return block
+        module = LegacyModule([box], layout=('printbox', 'printbox'))
+        module.has_digital_ad = has_digital_ad
+        return module
 
     @zeit.web.reify
     def area_videostage(self):
@@ -216,20 +230,18 @@ class LegacyCenterpage(
         except TypeError:
             return
 
-        blocks = []
+        modules = []
         try:
-            block = zeit.web.core.utils.nslist([content.videos[0]])
-            block.layout = 'video-large'
-            blocks.append(block)
+            module = LegacyModule([content.videos[0]], layout='video-large')
+            modules.append(module)
         except IndexError:
             pass
 
         for video in content.videos[1:]:
-            block = zeit.web.core.utils.nslist([video])
-            block.layout = 'video-small'
-            blocks.append(block)
+            module = LegacyModule([video], layout='video-small')
+            modules.append(module)
 
-        return blocks
+        return modules
 
     @zeit.web.reify
     def snapshot(self):
@@ -240,12 +252,9 @@ class LegacyCenterpage(
         try:
             snapshot = zeit.web.core.interfaces.ITeaserImage(
                 self.context.snapshot)
+            return LegacyModule([snapshot], layout='snapshot')
         except TypeError:
             return
-
-        block = zeit.web.core.utils.nslist([snapshot])
-        block.layout = 'snapshot'
-        return block
 
     @zeit.web.reify
     def topiclink_title(self):
