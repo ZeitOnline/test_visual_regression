@@ -127,10 +127,10 @@ def test_printbox_is_present_and_has_digital_offerings(
     with checked_out(content) as co:
         co.byline = 'mo-mi'
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    prinbox = browser.cssselect('.print-box:not(.print-box--angebot)')
+    printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
-    assert len(prinbox) == 0
+    assert len(printbox) == 0
     assert len(anbebotsbox) == 1
 
 
@@ -141,10 +141,10 @@ def test_printbox_is_present_and_has_newsprint_offerings(
     with checked_out(content) as co:
         co.byline = ''
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    prinbox = browser.cssselect('.print-box:not(.print-box--angebot)')
+    printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
-    assert len(prinbox) == 1
+    assert len(printbox) == 1
     assert len(anbebotsbox) == 0
 
 

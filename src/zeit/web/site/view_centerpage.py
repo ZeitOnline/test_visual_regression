@@ -180,30 +180,28 @@ class LegacyCenterpage(
         """Return the module block for the Printbox or Angebotsbox."""
 
         try:
-            content = zeit.cms.interfaces.ICMSContent(
+            box = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/angebote/print-box')
         except TypeError:
             return
-        has_digital_ad = False
 
-        if content.byline == 'mo-mi':
+        has_digital_ad = False
+        if box.byline == 'mo-mi':
             try:
                 # Rewrite content with digital ad box
-                content = zeit.cms.interfaces.ICMSContent(
+                box = zeit.cms.interfaces.ICMSContent(
                     'http://xml.zeit.de/angebote/angebotsbox')
                 has_digital_ad = True
             except TypeError:
                 pass
 
         try:
-            image = zeit.content.image.interfaces.IImages(content).image
+            box.image = zeit.content.image.interfaces.IImages(box).image
         except (AttributeError, TypeError):
-            image = None
+            box.image = None
 
-        content.image = image
-        content.has_digital_ad = has_digital_ad
-
-        block = zeit.web.core.utils.nslist([content])
+        block = zeit.web.core.utils.nslist([box])
+        block.has_digital_ad = has_digital_ad
         block.layout = zeit.web.core.utils.nsunicode('printbox')
         block.layout.id = zeit.web.core.utils.nsunicode('printbox')
         return block
