@@ -151,7 +151,6 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
 
 def test_first_small_teaser_has_no_image_on_mobile_mode(
         selenium_driver, testserver):
-
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
@@ -164,10 +163,9 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
 
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
-
     browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
 
-    teaser_box = browser.cssselect('.teasers-fullwidth')
+    teaser_box = browser.cssselect('.cp-area.fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth')
 
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
@@ -197,7 +195,7 @@ def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    articles = browser.cssselect('.teaser-collection--main .teasers article')
+    articles = browser.cssselect('#main .cp-region .cp-area.lead article')
     assert len(articles) == 3, 'We expect 3 articles here'
 
 
@@ -234,7 +232,7 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     image = browser.cssselect(
-        '#main .teaser-collection .teasers'
+        '#main .cp-region .cp-area'
         ' article:first-of-type figure.scaled-image'
         ' a > img')
     assert len(image) == 1, 'Only one image for first article'
@@ -243,7 +241,7 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
 def test_image_should_be_on_position_b(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('#main .teaser-collection .teasers article')
+    articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[0][0][1].tag == 'figure', 'This position should haz image'
 
@@ -251,7 +249,7 @@ def test_image_should_be_on_position_b(testserver, testbrowser):
 def test_image_should_be_on_position_a(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('#main .teaser-collection .teasers article')
+    articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[1][0].tag == 'figure', 'An img should be on this position'
 
@@ -261,7 +259,7 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .teaser-collection .teasers article figure noscript')
+        '#main .cp-region .cp-area article figure noscript')
     assert len(noscript) == 2, 'No noscript areas found'
 
 
