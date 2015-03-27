@@ -1,0 +1,17 @@
+{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama with context %}
+
+{# XXX: This template should at least try to extend the default tpl. #}
+<div class="{{ 'cp-area' | with_mods(area.width | area_width) }} {{ area.layout | hide_none }}">
+    {% block before_module_list %}{% endblock %}
+    {% for teaser_block in area -%}
+        {% if loop.index == 1 %}
+            {{ lama.adplace(view.banner(7), view) }}
+        {% else %}
+            {% set teaser = teaser_block | first_child %}
+            {% include
+                ["zeit.web.site:templates/inc/teaser/" + teaser_block | get_teaser_layout + ".tpl",
+                 "zeit.web.site:templates/inc/module/" + teaser_block | get_teaser_layout + ".html",
+                 "zeit.web.site:templates/inc/teaser/default.tpl"] %}
+        {% endif %}
+    {% endfor %}
+</div>
