@@ -456,9 +456,20 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     json_dt = {'delta_time': []}
     for teaser in cp.area_main:
         time = zeit.web.core.date.get_delta_time(
-            teaser[1], base_date=parsed_base_date)
+            list(teaser)[0], base_date=parsed_base_date)
         if time:
-            json_dt['delta_time'].append({teaser[1].uniqueId: {'time': time}})
+            json_dt['delta_time'].append(
+                {list(teaser)[0].uniqueId: {'time': time}})
+
+        # TODO replace above with below after TeaserBlock are indexable.
+        # This has to be done after release of zeit.content.cp v3.0
+        #
+        # time = zeit.web.core.date.get_delta_time(
+        #     teaser[0], base_date=parsed_base_date)
+        # if time:
+        #     json_dt['delta_time'].append(
+        #         {teaser[0].uniqueId: {'time': time}})
+
     return json_dt
 
 
