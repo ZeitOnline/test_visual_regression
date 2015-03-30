@@ -28,6 +28,9 @@ class LegacyLayout(zeit.web.core.utils.nsunicode):
             layout, self.id = arg
         super(LegacyLayout, self).__init__(layout, **kw)
 
+    def __repr__(self):
+        return object.__repr__(self)
+
 
 class LegacyModule(zeit.web.core.utils.nslist):
     def __init__(self, arg, **kw):

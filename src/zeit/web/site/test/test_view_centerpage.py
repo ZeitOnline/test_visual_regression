@@ -454,13 +454,13 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
         'Copyright text hast no copyright sign with non breaking space')
 
 
-def test_snapshot_should_not_be_display_where_no_snapshot_is_present(
+def test_snapshot_should_not_be_displayed_where_no_snapshot_is_present(
         testserver, testbrowser):
 
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    assert not browser.cssselect('.snapshot'), (
+    assert not browser.cssselect('#snapshot'), (
         'There is an snaphot on a page which should not have one')
 
 
