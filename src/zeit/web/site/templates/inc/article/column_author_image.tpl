@@ -1,6 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/linked-image_refactoring.tpl" -%}
 
-{% set image = view.authors[0].column_teaser_image %}
+{% set image = view.authors[0].image %}
 {% set href = view.authors[0].href | translate_url %}
 
 {% block mediablock %}column-heading__author-image{% endblock %}

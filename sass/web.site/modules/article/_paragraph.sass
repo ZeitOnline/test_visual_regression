@@ -17,37 +17,3 @@
       border-bottom-color: rgba($color-link--hover, .5)
     &:active
       border-bottom-color: rgba($color-link--active, .5)
-
-  // dropcaps if author
-  .article-page--with-author &
-
-    &:first-of-type
-      clear: left
-
-      &:first-letter
-        float: left
-        font-family: $font-tabletgothic
-        font-weight: bold
-        font-size: 49px
-        line-height: 1
-        margin-top: 0.05em
-        padding-right: 0.1em
-        margin-bottom: -0.2em
-
-        +respond-min($break-tablet-min)
-          font-size: 54px
-
-        +respond-min($break-desktop-min)
-          font-size: 59px
-
-        // Vendor Chaos Follows: Beware, here be dragons.
-        // Firefox renders it too high.
-        @-moz-document url-prefix()
-          margin-top: 0.15em
-        // IE > 9 too low
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
-          // :D
-          margin-top: -0.01em
-        // IE 9 too low and a margin at the bottom
-        .lt-ie10 &
-          margin-top: -0.05em

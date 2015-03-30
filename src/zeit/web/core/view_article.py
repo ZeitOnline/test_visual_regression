@@ -157,7 +157,8 @@ class Article(zeit.web.core.view.Content):
         return {
             'name': author.display_name if author else None,
             'href': author.uniqueId if author else None,
-            'column_teaser_image': zeit.web.core.interfaces.ITeaserImage(author.column_teaser_image) if (author and author.column_teaser_image) else None,
+            'image': zeit.web.core.interfaces.ITeaserImage(author.column_teaser_image)
+            if (author and author.column_teaser_image) else None,
             'suffix': '',
             'prefix': '',
             'location': ', ' + IAuthorReference(author_ref).location

@@ -53,6 +53,7 @@ class BreakingNews(zeit.web.core.view_article.Article,
                    zeit.web.site.view.Base):
     pass
 
+
 def is_column_article(context, request):
     return getattr(context, 'serie', None) and context.serie.column
 
