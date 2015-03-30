@@ -2,7 +2,7 @@
 
 {% block article_pages %}
     {% for page in view.pages %}
-        <div class="article-page">
+        <div class="article-page {{ 'article-page--with-author' if view.authors }}">
             {% if not loop.first %}
             <h3 class="article-page__page-teaser">{{ page.teaser }}</h3>
             {% endif %}
