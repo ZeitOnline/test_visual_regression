@@ -3,6 +3,8 @@ import requests
 import urllib2
 
 import zeit.web.core.date
+import zeit.web.core.interfaces
+import zeit.web.site.view
 
 
 def test_json_delta_time_from_date_should_return_null(testserver,
@@ -130,3 +132,29 @@ def test_inline_gallery_should_have_images(testserver, testbrowser):
         '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg')
     assert image.alt is None
     assert image.copyright[0][0] == u'\xa9'
+
+
+def test_breaking_news_should_be_provided(application):
+    view = zeit.web.core.view.Base(None, None)
+    assert zeit.web.core.interfaces.IBreakingNews.providedBy(
+        view.breaking_news)
+
+
+def test_unpublished_breaking_news_should_be_detected(application):
+    view = zeit.web.core.view.Base(None, None)
+    assert view.breaking_news.published is False
+
+
+def test_published_breaking_news_should_be_detected(application, monkeypatch):
+    monkeypatch.setattr(
+        zeit.workflow.workflow.ContentWorkflow, 'published', True)
+    view = zeit.web.core.view.Base(None, None)
+    assert view.breaking_news.published is True
+
+
+def test_missing_breaking_news_should_eval_to_false(
+        application, app_settings, ephemeral_settings):
+    app_settings['breaking_news'] = 'moep'
+    ephemeral_settings(app_settings)
+    view = zeit.web.core.view.Base(None, None)
+    assert view.breaking_news.published is False

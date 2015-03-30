@@ -35,17 +35,20 @@ class Base(object):
     def __call__(self):
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
+        self._set_response_headers()
         return {}
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self._set_response_headers()
 
     def _set_response_headers(self):
         # ZMO Version header
-        self.request.response.headers.add(
-            'X-Version', self.request.registry.settings.version)
+        try:
+            self.request.response.headers.add(
+                'X-Version', self.request.registry.settings.version)
+        except AttributeError:
+            pass
 
         # C1 headers
         #
@@ -270,6 +273,10 @@ class Base(object):
         if self.deliver_ads_oldschoolish:
             return 'oldschool'
         return 'adcontroller'
+
+    @zeit.web.reify
+    def breaking_news(self):
+        return zeit.web.core.block.BreakingNews()
 
 
 class Content(Base):

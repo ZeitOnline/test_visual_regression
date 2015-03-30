@@ -146,3 +146,13 @@ def test_printbox_is_present_and_has_newsprint_offerings(
 
     assert len(prinbox) == 1
     assert len(anbebotsbox) == 0
+
+
+def test_centerpage_should_gracefully_skip_all_broken_references(
+        testbrowser, testserver):
+    browser = testbrowser(
+        '{}/zeit-online/teaser-broken-setup'.format(testserver.url))
+    assert not browser.cssselect('.main__fullwidth .teasers-fullwidth *')
+    assert not browser.cssselect('.teaser-collection .teasers *')
+    assert not browser.cssselect('.main__parquet .parquet *')
+    assert not browser.cssselect('.main__snapshot *')

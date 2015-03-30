@@ -29,25 +29,23 @@
 		right: 0
 		top: 0
 		width: 100%
-		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
 		z-index: 1
+		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
 
-=teaser-image-dark-overlay($color: $black)
+=teaser-image-dark-overlay($color: rgb(0, 15, 20))
 	background-color: $color
 	position: relative
 	&:after
 		bottom: 0
 		content: ''
+		height: 100%
 		left: 0
-		min-height: 100%
-		min-width: 100%
 		position: absolute
 		right: 0
 		top: 0
+		width: 100%
 		z-index: 1
-		+background-image(linear-gradient(to top, rgba($color, 1) 0%, rgba($color, 0.2) 35%, rgba($color, 0)))
-		+respond-min($break-tablet-min)
-			+background-image(linear-gradient(15deg, rgba($color, 0.5) 0%, rgba($color, 0.05) 60%))
+		+background-image(linear-gradient(12deg, rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%))
 
 =no-user-select
 	-webkit-touch-callout: none
@@ -241,6 +239,7 @@
 	@if $antialiased
 		-webkit-font-smoothing: antialiased
 		-moz-osx-font-smoothing: grayscale
+		text-rendering: optimizeLegibility
 	@else
 		@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and ( min-device-pixel-ratio: 1.25), only screen and ( min-resolution: 200dpi), only screen and ( min-resolution: 1.25dppx)
 			-webkit-font-smoothing: subpixel-antialiased

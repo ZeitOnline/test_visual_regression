@@ -44,15 +44,11 @@ class Centerpage(
         """
 
         def valid_block(b):
-            try:
-                return len(b) and b.layout.id and (
-                    zeit.web.core.template.get_teaser_layout(b)
-                    not in ('zon-fullwidth',))
-            except (TypeError, AttributeError):
-                return
+            return zeit.web.core.template.get_teaser_layout(b) not in (
+                'zon-fullwidth', None)
 
         return [(b.layout.id, iter(b).next(), b) for b in
-                self.context['lead'].values() if valid_block(b)]
+                self.context['lead'].itervalues() if valid_block(b)]
 
     @zeit.web.reify
     def area_parquet(self):
@@ -62,18 +58,13 @@ class Centerpage(
             except AttributeError:
                 return
 
-        def valid_blocks(b):
-            try:
-                return b.layout.id in ('parquet-large', 'parquet-regular')
-            except AttributeError:
-                try:
-                    return b.cpextra in ('parquet-spektrum')
-                except AttributeError:
-                    return
+        def valid_block(b):
+            return zeit.web.core.template.get_teaser_layout(b) in (
+                'zon-parquet-large', 'zon-parquet-small') or getattr(
+                b, 'cpextra', None) in ('parquet-spektrum',)
 
-        bars = filter(valid_bar, self.context['teaser-mosaic'].values())
-        blocks = sum([bar.values() for bar in bars], [])
-        return [b for b in blocks if valid_blocks(b)]
+        return [b for bar in self.context['teaser-mosaic'].itervalues() if
+                valid_bar(bar) for b in bar.itervalues() if valid_block(b)]
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -82,12 +73,8 @@ class Centerpage(
         """
 
         def valid_block(b):
-            try:
-                return len(b) and b.layout.id and (
-                    zeit.web.core.template.get_teaser_layout(b) in (
-                        'zon-fullwidth',))
-            except (TypeError, AttributeError):
-                return
+            return zeit.web.core.template.get_teaser_layout(b) in (
+                'zon-fullwidth',)
 
         return [(b.layout.id, iter(b).next(), b) for b in
                 self.context['lead'].values() if valid_block(b)]

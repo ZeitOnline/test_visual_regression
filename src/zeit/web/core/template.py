@@ -138,27 +138,31 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
-def get_teaser_layout(teaser_block,
-                      teaser_position=0,
-                      request=pyramid.threadlocal.get_current_request()):
+def get_teaser_layout(teaser_block, teaser_position=0, request=None):
+
+    request = request or pyramid.threadlocal.get_current_request()
 
     # Calculating the layout of a teaser can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
     # that was originally set for a teaser.
     # Since we might lookup a teaser-layout more than once per request, we can
     # cache it in the request object.
-    if request and getattr(teaser_block, "uniqueId", None):
-        request.teaser_layout = get_attr(request, 'teaser_layout', {}) or {}
-        layout = request.teaser_layout.get(teaser_block.uniqueId, None)
+    if request and hasattr(teaser_block, 'uniqueId'):
+        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
+        hash_ = '{}#{}'.format(teaser_block.uniqueId, teaser_position)
+        layout = request.teaser_layout.get(hash_, None)
         if layout:
             return layout
 
     try:
         layout = teaser_block.layout.id
         teaser = list(teaser_block)[teaser_position]
-    except (IndexError, TypeError), e:
+        if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
+            raise TypeError('Broken reference: {}'.format(teaser.uniqueId))
+    except (AttributeError, IndexError, TypeError), e:
         log.debug('Cannot produce a teaser layout: {}'.format(e))
-        return
+        layout = teaser = None
+
     serie = getattr(teaser, 'serie', None)
 
     if serie:
@@ -171,8 +175,8 @@ def get_teaser_layout(teaser_block,
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
-    if request and getattr(teaser_block, "uniqueId", None):
-        request.teaser_layout[teaser_block.uniqueId] = layout
+    if request and hasattr(teaser_block, 'uniqueId'):
+        request.teaser_layout[hash_] = layout
 
     return layout
 
@@ -518,3 +522,9 @@ def get_image_group(asset):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
+
+
+@zeit.web.register_global
+def debug_breaking_news():
+    request = pyramid.threadlocal.get_current_request()
+    return 'eilmeldung' == request.GET.get('debug', '')
