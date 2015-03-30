@@ -48,6 +48,7 @@ def _inject_banner_code(pages, advertising_enabled, is_longform):
     tile_list = [7, 8]  # banner tiles in articles
     possible_pages = [i for i in xrange(1, len(pages) + 1)]
     possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
+    possible_content_p = [4]  # paragraph/s to insert content ad after ZON-1531
 
     if is_longform:
         tile_list = [8]
@@ -60,6 +61,8 @@ def _inject_banner_code(pages, advertising_enabled, is_longform):
                 _place_adtag_by_paragraph(page,
                                           tile_list,
                                           possible_paragraphs)
+                if not is_longform:
+                    _place_content_ad_by_paragraph(page, possible_content_p)
     return pages
 
 
@@ -76,6 +79,23 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                         t = tile_list[index] - 1
                         page.blocks.insert(
                             i, zeit.web.core.banner.banner_list[t])
+                        break
+            except IndexError:
+                pass
+
+
+def _place_content_ad_by_paragraph(page, possible_paragraphs):
+    paragraphs = filter(
+        lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
+    contentAd = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
+
+    for index, pp in enumerate(possible_paragraphs):
+        if len(paragraphs) > pp + 1:
+            try:
+                _para = paragraphs[pp]
+                for i, block in enumerate(page.blocks):
+                    if _para == block:
+                        page.blocks.insert(i, contentAd)
                         break
             except IndexError:
                 pass

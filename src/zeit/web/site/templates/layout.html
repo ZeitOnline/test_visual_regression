@@ -61,6 +61,7 @@
     </noscript>
 
     {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
+    {%- block content_ad_script -%}{%- endblock -%}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}" data-adDeliveryType="{{view.ad_delivery_type}}">
     <!-- tracking at top -->
