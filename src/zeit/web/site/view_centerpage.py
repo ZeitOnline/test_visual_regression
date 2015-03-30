@@ -22,14 +22,12 @@ log = logging.getLogger(__name__)
 
 class LegacyLayout(zeit.web.core.utils.nsunicode):
     def __init__(self, arg, **kw):
-        if isinstance(arg, basestring):
-            layout, self.id = arg, None
-        else:
-            layout, self.id = arg
-        super(LegacyLayout, self).__init__(layout, **kw)
+        super(LegacyLayout, self).__init__(arg, **kw)
+        self.id = arg
 
     def __repr__(self):
-        return object.__repr__(self)
+        return '<{} at {} with layout {}>'.format(
+            self.__class__.__name__, hex(id(self)), unicode(self))
 
 
 class LegacyModule(zeit.web.core.utils.nslist):
@@ -37,12 +35,22 @@ class LegacyModule(zeit.web.core.utils.nslist):
         super(LegacyModule, self).__init__(arg)
         self.layout = LegacyLayout(kw.pop('layout', 'default'))
 
+    def __repr__(self):
+        return '<{} at {} with {} entr{}>'.format(
+            self.__class__.__name__, hex(id(self)), len(self),
+            'y' if len(self) == 1 else 'ies')
+
 
 class LegacyArea(zeit.web.core.utils.nslist):
     def __init__(self, arg, **kw):
         super(LegacyArea, self).__init__(arg)
         self.layout = LegacyLayout(kw.pop('layout', 'fullwidth'))
         self.width = kw.pop('width', '1/1')
+
+    def __repr__(self):
+        return '<{} at {} with {} module{}>'.format(
+            self.__class__.__name__, hex(id(self)), len(self),
+            '' if len(self) == 1 else 's')
 
 
 class LegacyRegion(collections.OrderedDict):
@@ -53,6 +61,11 @@ class LegacyRegion(collections.OrderedDict):
 
     def __iter__(self):
         return iter(self[k] for k in super(LegacyRegion, self).__iter__())
+
+    def __repr__(self):
+        return '<{} at {} with {} area{}>'.format(
+            self.__class__.__name__, hex(id(self)), len(self),
+            '' if len(self) == 1 else 's')
 
 
 @pyramid.view.view_config(
@@ -219,7 +232,7 @@ class LegacyCenterpage(
         except (AttributeError, TypeError):
             box.image = None
 
-        module = LegacyModule([box], layout=('printbox', 'printbox'))
+        module = LegacyModule([box], layout='printbox')
         module.has_digital_ad = has_digital_ad
         return module
 
