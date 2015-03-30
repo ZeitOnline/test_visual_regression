@@ -312,9 +312,13 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def obfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
-            label = '%s, %s' % (self.source_label, babel.dates.format_date(
-                self.date_print_published, "d. MMMM yyyy", locale="de_De"))
-            return base64.b64encode(label.encode('latin-1'))
+            if self.source_label:
+                label = self.source_label
+                if self.date_print_published:
+                    label += ', ' + babel.dates.format_date(
+                        self.date_print_published,
+                        "d. MMMM yyyy", locale="de_De")
+                return base64.b64encode(label.encode('latin-1'))
 
     @property
     def copyrights(self):

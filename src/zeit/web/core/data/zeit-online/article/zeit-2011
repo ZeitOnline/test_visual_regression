@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <head>
+    <keywordset>
+      <keyword xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" source="manual">hungersnot</keyword>
+      <keyword xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" source="manual">welterbe</keyword>
+      <keyword xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" source="manual">globalisierung</keyword>
+    </keywordset>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" alt="Der Schweizer Menschenrechtler Jean Ziegler in Genf" align="left" title="Jean Ziegler" base-id="http://xml.zeit.de/politik/ausland/2010-12/jean-ziegler/" type="jpg" publication-date="" expires="">
+      <bu>Der Schweizer Menschenrechtler Jean Ziegler in Genf</bu>
+      <copyright py:pytype="str">© Salvatore Di Nolfi / dpa</copyright>
+    </image>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2010-03/earth-hour" year="2010" issue="13" ressort="Gesellschaft" publication-date="" expires="">
+        <supertitle py:pytype="str">Earth Hour</supertitle>
+        <title py:pytype="str">Licht aus für den Klimaschutz</title>
+        <text py:pytype="str">An der "Earth Hour" haben sich 126 Länder und etwa 4000 Städte beteiligt. Um 20.30 Uhr gingen an berühmten Gebäuden rund um die Welt für eine Stunde die Lichter aus.</text>
+        <description py:pytype="str">An der "Earth Hour" haben sich 126 Länder und etwa 4000 Städte beteiligt. Um 20.30 Uhr gingen an berühmten Gebäuden rund um die Welt für eine Stunde die Lichter aus.</description>
+        <byline xsi:nil="true" />
+        <image align="left" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2010-03/earth-hour-bild/" type="jpg" publication-date="" expires="2010-06-28T07:03:45+00:00">
+          <bu>Am Eiffelturm wurde es dunkel: Am Pariser Wahrzeichen wurden für eine Stunde die Lichter ausgeknipst</bu>
+          <copyright py:pytype="str">© dpa</copyright>
+        </image>
+      </reference>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2009-12/klima-risiko-index" year="2009" issue="50" ressort="Wirtschaft" publication-date="" expires="">
+        <badges>
+          <badge py:pytype="str">video</badge>
+        </badges>
+        <supertitle py:pytype="str">Klimawandel</supertitle>
+        <title py:pytype="str">Es trifft die Ärmsten</title>
+        <text py:pytype="str">Der Klimawandel hat tödliche Folgen: Seit 1990 starben mehr als 600.000 Menschen bei Wetterkatastrophen. Das zeigt ein Klima-Risiko-Index.</text>
+        <description py:pytype="str">Der Klimawandel hat tödliche Folgen: Seit 1990 starben mehr als 600.000 Menschen bei Wetterkatastrophen. Das zeigt ein Klima-Risiko-Index.</description>
+        <byline xsi:nil="true" />
+        <image alt="Ein Rikscha-Fahrer quält sich durch die Fluten in der Hauptstadt Dhaka. Wie kein anderes Land ist Bangladesch von extremen Wetterlagen, die auch der Klimawandel verursacht, betroffen." align="left" title="Rikscha-Fahrer in den Fluten in Bangladesh" base-id="http://xml.zeit.de/wirtschaft/2009-12/Bangladesh-Flut/" type="jpg" publication-date="" expires="">
+          <bu>Ein Rikscha-Fahrer quält sich durch die Fluten in der Hauptstadt Dhaka. Wie kein anderes Land ist Bangladesch von extremen Wetterlagen, die auch der Klimawandel verursacht, betroffen.</bu>
+          <copyright py:pytype="str">© MUNIR UZ ZAMAN/AFP/Getty Images</copyright>
+        </image>
+      </reference>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/online/2009/18/mcplanet" year="2009" issue="18" ressort="Wirtschaft" publication-date="" expires="">
+        <supertitle py:pytype="str">Globalisierungskritik</supertitle>
+        <title py:pytype="str">Diskutieren, bis es kracht</title>
+        <text py:pytype="str">Mehr als 100 Workshops: Wer den McPlanet-Kongress besucht, hat viel über die Wirtschaftskrise, den Klimawandel und Genmais diskutiert. Und bleibt doch etwas ratlos</text>
+        <description py:pytype="str">Mehr als 100 Workshops: Wer den McPlanet-Kongress besucht, hat viel über die Wirtschaftskrise, den Klimawandel und Genmais diskutiert. Und bleibt doch etwas ratlos</description>
+        <byline py:pytype="str">Von Marlies Uken</byline>
+        <image align="left" base-id="http://xml.zeit.de/bilder/2009/18/gesellschaft/globalisierung/" type="" publication-date="" expires="">
+          <bu>Auf dem McPlanet-Kongress in Berlin diskutieren Globalisierungskritiker, Umweltschützer und Kirchenvertreter eine neue Weltordnung</bu>
+          <copyright py:pytype="str">© Thomas Lohnes/ ddp</copyright>
+        </image>
+      </reference>
+    </references>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://xml.zeit.de/autoren/B/Anita_Blasberg/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Anita Blasberg</display_name>
+    </author>
+    
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Anita Blasberg</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="boost">21</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="comment_boost">2</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="comment_count">11</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">notnecessary</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2012-02-04T17:08:05.976015+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2010-12-30T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2012-02-04T17:09:05.457939+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">notnecessary</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">30.12.2010</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="first_count">2011-01-04</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="hits_today">124</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2011-01-DOS-Ziegler</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">DOS-ziegler</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2011-01-03T17:42:44.529883+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2011-05-22</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">systemnewspublish</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">15</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">28</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">0f752b7de6a1416e969fd6eb0335378a</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1133533088</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="read_boost_today">0</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="read_boost_total">4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">Dossier</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2011-01</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">36568</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">191598</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/booster" name="type_boost">15</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5ac9e200-98ad-4a65-b4de-5d7ea1dd07e3}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2011</attribute>
+  <rankedTags><tag url_value="jean-paul-sartre" uuid="b403edbb-365f-4e39-9d2e-f12d54eea47c" score="9" type="Person">Jean-Paul Sartre</tag><tag url_value="ernesto-che-guevara" uuid="7462efcc-e9b9-4dc0-b14c-5a89ed93384b" score="8" type="Person">Ernesto Che Guevara</tag><tag url_value="jean-ziegler" uuid="14a7521a-33f5-48a0-bc6f-bfe1be77bde7" score="8" type="Person">Jean Ziegler</tag><tag url_value="christoph-blocher" uuid="1d9c05db-1dfb-46d5-a895-6b67c35abe1e" score="6" type="Person">Christoph Blocher</tag><tag url_value="muammar-al-gaddafi" uuid="0edfd1c8-f813-4aa8-aef7-8f8be9eacf61" score="6" type="Person">Muammar al-Gaddafi</tag><tag url_value="vereinte-nationen" uuid="a6edd8c3-f664-4c5b-b2f3-782f26ea7099" score="6" type="Organization">Vereinte Nationen</tag><tag url_value="schweiz" uuid="cf450d19-c8a2-4c92-b29a-51bf1f5bbf87" score="5" type="Location">Schweiz</tag><tag url_value="franken" uuid="e66c1cc5-68c9-4e35-a386-56b6644c003f" score="4" type="free">Franken</tag><tag url_value="kongo" uuid="399a214e-d4fe-4389-81ff-25ea6841fab5" score="4" type="Location">Kongo</tag><tag url_value="sambia" uuid="832cd439-ba04-4402-a133-186a4049001a" score="4" type="Location">Sambia</tag><tag url_value="ulan-bator" uuid="741d2390-feac-4eca-ae13-d76a9e77f3d9" score="4" type="Person">Ulan Bator</tag><tag url_value="weltbank" uuid="0c2f93a9-5991-4130-a388-2f9b6bd3d881" score="4" type="free">Weltbank</tag><tag url_value="genf" uuid="1b704594-fa2b-4ac2-8590-2cede6484cf0" score="3" type="Location">Genf</tag><tag url_value="liebeskummer" uuid="55e3393f-a7a1-42eb-afca-28d3c7a5dbd3" score="3" type="free">Liebeskummer</tag><tag url_value="mit" uuid="c503e81c-df84-4606-98e4-a3ba97db8b07" score="3" type="Organization">MIT</tag><tag url_value="afrika" uuid="42373676-dcfe-4211-83c2-555b9259e208" score="2" type="Location">Afrika</tag><tag url_value="europa" uuid="1c8b0c32-1a49-4370-9818-7af636e4b30b" score="2" type="Location">Europa</tag><tag url_value="paris" uuid="677bc5e6-35e8-47da-af94-c8fed6316ba2" score="2" type="Location">Paris</tag><tag url_value="darfur" uuid="17bb6d39-334b-46ce-ab16-8973f9dd6028" score="1" type="Location">Darfur</tag></rankedTags></head><body>
+    <title>"Ich bin ein weißer Neger"</title>
+    <subtitle>Der Schweizer Globalisierungskritiker Jean Ziegler über den Hunger in der Dritten Welt, seine Zeit als Chauffeur von Che Guevara und den größten Grund zur Verzweiflung: Frauen.</subtitle>
+    <byline>Von Anita Blasberg und Marian Blasberg</byline>
+    <blocker>»Ich bin pleite. Das Haus, in dem ich wohne, gehört meiner Frau. Mein Auto ist geleast. Ich habe mehr als sechs Millionen Schweizer Franken Schulden«</blocker>
+    <blocker>» Jeder siebte Milliardär der Welt lebt in der Schweiz, aber wir haben Zustände wie in Bangladesch: Drei Prozent der Einwohner  besitzen so viel wie die restlichen 97 «</blocker>
+    <blocker>» Die Ausbeuter jetten nicht mehr im Kolonialherrenanzug in die Tropen, sondern in Nadelstreifen «</blocker>
+    <caption>Jean Ziegler in den Schweizer Weinberger über der Rhone</caption>
+    <caption>Als UN-Sonderberichterstatter 1996 mit Nelson Mandela (unten)</caption>
+    <caption>Ziegler unterwegs in Genf (großes Foto) –  in der Hand einen Kunstdruck  mit der Aufschrift »Liberté«: Freiheit</caption>
+    <caption>Wer die Mächtigen trifft,  trifft mal Gute und mal weniger Gute: Ziegler 1991 mit  Willy Brandt (Foto ganz links), 2003 mit Kofi Annan (links), Hugo Chávez (unten) – ein Bild, das ihn mit Saddam Hussein zeigt, rückt er nicht raus</caption>
+    <caption>Ziegler am Genfer See, auf  dem Weg in sein Büro</caption>
+    <caption>Ziegler in den 80ern mit dem jungen Libyer Gadhafi (unten) und vor einem Poster  von Che Guevara (rechts)</caption>
+    <image-credits>Fotos: Jonas Unger für DIE ZEIT/www.jonasunger.com; privat (o.r.: Repro: Jean Revillard)</image-credits>
+    <supertitle xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Interview mit Jean Ziegler</supertitle>
+    <division type="page">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/politik/ausland/2010-12/jean-ziegler/jean-ziegler-180x240.jpg" type="jpg" publication-date="" expires="" layout="small">
+        <bu>Der Schweizer Menschenrechtler Jean Ziegler in Genf</bu>
+        <copyright py:pytype="str">© Salvatore Di Nolfi/ dpa</copyright>
+      </image>
+      <p>
+        Ein klarer Dezembermorgen, die Weinhänge des winzigen Dorfes Russin liegen verschneit in  der Vormittagsstille, ab und zu rast ein Schnellzug  vorbei. Natürlich ist es kein Zufall, dass er  hier wohnt: an der französischen Grenze,  wo die <entity idref="Schweiz" entity_type="Location" url_value="orte/schweiz">Schweiz</entity>, wie er zu sagen pflegt, zum Glück fast zu Ende ist.
+        <br />
+        <br />
+        <entity idref="Jean+Ziegler" entity_type="Person" url_value="personen/jean-ziegler">Jean Ziegler</entity>, Soziologieprofessor, Berater der  <entity idref="Vereinten+Nationen" entity_type="Organization" url_value="organisationen/vereinten-nationen">Vereinten Nationen</entity>, Gewissen der Weltgemeinschaft, ist hier zu Hause. Als die Tür sich öffnet, taxiert ein neugieriger Blick die Besucher, im Gesicht trägt Ziegler die Hornbrille, die er vor Jahrzehnten einmal in der DDR kaufte. Ein unverbesserlicher Revolutionär wurde er genannt, Stimme der Armen und Schreck der Mächtigen. Nestbeschmutzer und Relikt der sechziger Jahre. Einer, den man nur lieben oder hassen kann.
+      </p>
+      <p>
+        Seit 50 Jahren schreibt Ziegler an gegen das ungerechte
+        <a href="http://www.zeit.de/schlagworte/themen/Dritte%20Welt">Gefälle zwischen Erster und Dritter Welt</a>
+        ; als einer der Ersten warnte er vor einer entfesselten Globalisierung. Wenn er in diesen Tagen an die Rednerpulte tritt, um sein aktuelles Buch »Der Hass auf den Westen« vorzustellen, trägt er einen dunklen Anzug mit Krawatte.  »Je radikaler du sprichst, umso kleinbürgerlicher musst du aussehen«, sagt Ziegler. Er ist inzwischen 76, aber er denkt nicht daran, seinen »Kampf der Ideen« aufzugeben. Nur selten ist er eine Woche lang am Stück zu Hause in Russin. In der Welt gibt es zu viel zu tun.
+      </p>
+      <p>Sein Wohnzimmer ist hell und freundlich, auf einer Kommode stehen Bilder seiner Familie. Ziegler lebt hier mit seiner zweiten Frau, einer Kunsthistorikerin. Er bittet an einen alten Eichentisch in der Mitte des Raumes und gießt Rotwein ein.</p>
+      <infobox xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://xml.zeit.de/2011/01/ziegler-info" publication-date="" expires="" />
+      <p><strong>DIE ZEIT</strong>
+        : Herr Ziegler, stimmt es, dass Sie pleite sind?
+      </p>
+      <p><strong>Jean Ziegler</strong>
+        : Stimmt. Das Haus, in dem ich wohne, gehört meiner Frau. Mein Auto ist nur geleast. Ich habe mehr als sechs Millionen Franken Schulden.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Immer wieder wurden Sie von internationalen Gerichten dazu verurteilt, Schadensersatz zu zahlen, an Politiker, Banker und Spekulanten, die Sie in Ihren Büchern angegriffen haben.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Diese ganzen Wegelagerer aus dem Zürcher Bankenviertel! Einen von ihnen, den Geschäftsanwalt Hans W. Kopp, den nannte ich Geier. Kostete mich 320.000 Franken, den Geier musste ich zurücknehmen. Aber als das Zürcher Obergericht Kopp später wegen der Irreführung von Investoren verurteilte, hätte ich Betrüger zu ihm sagen dürfen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        An Augusto Pinochet mussten Sie ein Bußgeld von 2000 Franken zahlen, weil Sie ihn als Faschisten bezeichnet hatten.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Üble Nachrede, vergleichsweise günstig! Moussa Traoré, der 23 Jahre Präsident von Mali war, bekam 180.000 Franken. Weil ich schrieb, dass er zwei Milliarden Dollar aus der Staatskasse auf sein Privatkonto in der Schweiz verschoben habe, während die Menschen in seinem Land an Hunger starben. Kleptokrat hab ich ihn genannt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Hätten Sie den Mund manchmal nicht etwas weniger voll nehmen können?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Nein, man muss ihn voll nehmen, wenn man sich anlegt mit den mächtigen Halunken. Auch wenn ich die Prozesse meist verloren habe, heißt das nicht, dass ich im Unrecht war. Traoré wurde später in Mali wegen der Veruntreuung von Staatsgeldern zum Tode verurteilt. Ich halte es mit Karl Kraus, der über sich sagte, er schieße oft über das Ziel hinaus, doch selten daneben. Verstehen Sie?
+      </p>
+      <p><strong>ZEIT</strong>
+        : Nicht ganz.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich meine, diese ganze Justiz ist dazu da, Fassaden aufrechtzuerhalten. Die Banken und Konzerne benutzen sie, um einen unbequemen Autor aus dem Weg zu räumen. Wenn man sie angreift, setzen sie ihre Kommunikationsabteilungen in Gang, teure Presseanwälte, ihren ganzen Apparat, und der sucht dann nach Fehlern im Detail. Ein Feldzug mit dem Ziel, Menschen wie mich finanziell zu zerstören. Zum Glück hatte ich ein internationales Unterstützerkomitee, das mir dabei half, meine Anwälte zu bezahlen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Dann haben Sie an den Anwälten also auch nicht gespart?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Wie auch? Du bist schon 10.000 Euro los, wenn du nur einen Fuß auf ihren Teppich setzt. Wäre ich eine Putzfrau, wäre ich längst am Ende, fix und fertig.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wie viele Verfahren laufen heute gegen Sie?
+      </p>
+      <relateds />
+      <p><strong>Ziegler</strong>
+        : Ein paar noch, aber ich rede nicht so gern darüber.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Haben Sie Angst vor der großen, endgültigen Niederlage?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Nicht mehr. Seit ich bei der Uno bin, genieße ich Immunität. In meinen Buchverträgen gibt es jetzt Klauseln, dass die Verlage meine Anwaltskosten bis zu einer gewissen Höhe übernehmen. Das Schlimmste ist vorbei: die Angst meiner Familie, in dieser Prozessflut unterzugehen, die Angst, den Lehrstuhl zu verlieren, die Morddrohungen, der Polizeischutz. Es hätte ja schnell gehen können: Ich signiere irgendwo ein Buch, und... paff! Es gibt in <entity idref="Genf" entity_type="Location" url_value="orte/genf">Genf</entity> allerdings noch heute einen Polizeibeamten, dem ich sage, wohin ich verreise. Wenn ich mich heute Abend gegen zehn nicht bei ihm melde, dann würde er fragen, wo ich abgeblieben bin.
+      </p>
+    </division>
+    <division teaser=" " type="page">
+      <p><strong>ZEIT:</strong>
+        Herr Ziegler, Sie sind jetzt 76 Jahre alt. Sie schreiben fast jedes Jahr ein Buch, halten Vorträge, reisen für die Vereinten Nationen durch die Welt. Gehen Sie nie in Rente?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ein Intellektueller wird nie pensioniert. Er sollte sich nützlich machen, wenn er Privilegien genießt wie ich: ein Weißer, Universitätsprofessor mit Assistenten, als Schweizer ein Verschonter unter den Verschonten, nie Krieg hier, nie auf eine Mine getreten in Nicaragua oder El Salvador, Uno-Mandate, Parlamentsmandate. Natürlich ist das Schweizer Parlament voller verkommener Verwaltungsräte, aber es ist eine Bühne. Meine Privilegien sind eine Waffe, die man mir in die Hand gegeben hat. Also muss ich sie im Namen der Unterdrückten nutzen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sie sind ein Moralist.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich bin ein völlig unmoralischer Mensch. Ein schlechtes Gewissen ist eine jämmerliche Sache. Man braucht ein klares Bewusstsein.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Was treibt Sie an?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Der Zorn. Die Wahrnehmung von Unvernunft, unnötigen Leids. Regelmäßig bin ich in São Luís, Brasilien. Dort gibt es ein staatlich betriebenes Haus, in dem Straßenkinder einmal am Tag eine Mahlzeit kriegen. Man sperrt sie dabei ein, damit sie ihr Essen nicht draußen mit ihren Geschwistern teilen, sondern selbst genug bekommen. Man treibt ihnen die Menschlichkeit aus, damit sie überleben! Wenn ich das sehe, dann muss ich doch was machen. Ich muss die Täter nennen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wer sind die Täter?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich gebe Ihnen ein Beispiel. Am 12. Oktober 2008, auf dem Höhepunkt der Finanzkrise, kamen in <entity idref="Paris" entity_type="Location" url_value="orte/paris">Paris</entity> die Staatschefs der Euro-Zone zusammen und beschlossen einen Kreditrahmen von 1700 Milliarden Euro zur Stabilisierung ihrer Banken. 1700 Milliarden! Bevor das Jahr herum war, haben dieselben Staatschefs das Budget des Welternährungsprogramms der Uno um die Hälfte reduziert, von sechs auf drei Milliarden. Wissen Sie, was das bedeutet? Keine Schülerspeisungen mehr in Honduras oder Bangladesch. Essensrationen in den Flüchtlingslagern von <entity idref="Darfur" entity_type="Location" url_value="orte/darfur">Darfur</entity>, deren Kaloriengehalt nach medizinischem Ermessen unter dem Existenzminimum liegt. Da sterben Menschen, verstehen Sie?
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sie glauben, die Politiker sind schuld?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Sie sind die Handlanger dieser Banditen, die so lange an der Börse spekulierten, bis alles einkrachte. Sie streichen dort, wo niemand protestiert. Die Menschen, die verhungern, liegen ja nicht auf der Wiese vor dem Reichstag. Ich sage Ihnen etwas: Alle fünf Sekunden stirbt auf dieser Welt ein Kind an Hunger. So steht es im World Food Report der FAO, der Ernährungsorganisation der Uno. Alle fünf Sekunden, jetzt, während wir reden! Alle vier Minuten verliert ein Mensch sein Augenlicht, nur weil er zu wenig Vitamin A bekommt. Jeder sechste Mensch ist permanent schwerst unterernährt...
+      </p>
+      <p><strong>ZEIT:</strong>
+        Diese Zahlen wiederholen Sie immer wieder.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Diese Zahlen sind Waffen, gute Waffen, weil sie nicht einmal von den Weltbank-Leuten angezweifelt werden. Und derselbe World Food Report erklärt, dass wir mit unserer Landwirtschaft zwölf Milliarden Menschen normal ernähren könnten. Es gibt keinen objektiven Mangel. Ein Kind, das heute an Hunger stirbt, wird ermordet. Und seine Mörder gehörten vor ein Nürnberger Gericht. Punkt, aus.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sie übertreiben.
+      </p>
+      <p><strong>Ziegler:</strong>
+        Nein, das tue ich nicht.
+      </p>
+      <p><strong>ZEIT</strong>
+        : In der Schweiz die Goldberge, in <entity idref="Afrika" entity_type="Location" url_value="orte/afrika">Afrika</entity> die Leichenberge?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Man muss schreien, um gehört zu werden in dieser lärmenden Medienwelt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wer zu oft schreit, wirkt irgendwann unglaubwürdig.
+      </p>
+      <p><strong>Ziegler:</strong>
+        Das werfen mir meine Universitätskollegen manchmal vor: dass ich zu unakademisch schreibe, zu wenig subtil. Dieses Ghettodenken der Akademiker! Es geht um Effizienz.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Man könnte meinen, dass der Ziegler mit seinen Standardphrasen mindestens so verbohrt ist wie seine Gegner.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Meine Leidenschaft geht hin und wieder mit mir durch. Andererseits: Ich erinnere mich, in einem Roman von einem Mann gelesen zu haben, der am Nachmittag auf einem Platz steht und behauptet, es sei Mitternacht. Die Leute denken: Was für ein Spinner! Aber die Zeit vergeht, irgendwann ist Mitternacht, und nun sagen dieselben Leute: Mensch, er hat ja recht.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Sie haben eine Fülle von Schimpfwörtern für den Kapitalismus: Killerkapitalismus, Casinokapitalismus, Dschungelkapitalismus. Was ist Ihr aktueller Favorit?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Raubtierkapitalismus, auch wenn das eine Beleidigung der Raubtiere ist.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Der Kommunismus ist auch deshalb zusammengebrochen, weil die Menschen den Kapitalismus wollten.
+      </p>
+      <p><strong>Ziegler:</strong>
+        Ach, hören Sie auf. Die Sowjetunion hatte mit Marx so viel am Hut wie ich mit Buddhismus. Aber glauben Sie mir: Ich bin auch nicht für den Stalinismus. Ich bin für Vernunft.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Was sagen Sie den Chinesen oder Indern, die sich dank Kapitalismus und Globalisierung ein Auto leisten können?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Jetzt klingen Sie wie der amerikanische Botschafter! In Wahrheit ist es doch so, dass in diesen Ländern eine Oligarchie den Profit unter sich aufteilt. China ist eine brutale Polizeidiktatur, in Indien lebt noch immer die Hälfte aller schwer unterernährten Menschen.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Warum ist das Ihrer Meinung nach so?
+      </p>
+      <relateds />
+      <p><strong>Ziegler</strong>
+        : Seit fünf Jahrhunderten herrscht die weiße Minderheit mit immer anderen Ausbeutungssystemen über den Planeten. Erst die Plünderungen und der Völkermord in Südamerika, was Marx die Primitivakkumulation des Kapitals genannt hat. Dann der trianguläre Verkehr: Sklaven von Afrika nach Amerika, Zucker nach <entity idref="Europa" entity_type="Location" url_value="orte/europa">Europa</entity>. Dann 150 Jahre lang Kolonialmassaker, und heute das schlimmste all dieser Systeme: die Weltdiktatur des globalisierten Finanzkapitals. Die entfesselte Profitgier. Die totale Ausbeutung des Menschen. Die Zerstörung der Natur. Laut Weltbank haben die 500 größten multinationalen Konzerne im vergangenen Jahr 53,8 Prozent des Weltbruttosozialproduktes kontrolliert. Das ist ein Reichtum, eine Macht, wie sie kein Kaiser, König oder Papst je hatte.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wie erklären Sie sich, dass dieses System von kaum jemandem grundsätzlich infrage gestellt wird – nicht einmal jetzt, wo es beinahe kollabierte?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich glaube, dass diese neoliberale Wahnidee das Kollektivbewusstsein nachhaltig verwüstet hat. Die Tatsache, dass Kinder verhungern, erscheint in dieser Perspektive wie ein Naturgesetz. Genauso die Profitgier. Unfassbar, dass die UBS, die größte Schweizer Bank, ihren Angestellten 1,9 Milliarden Franken Boni austeilt, nachdem sie erst im Jahr zuvor vom Steuerzahler 61 Milliarden eingesackt hat.
+      </p>
+    </division>
+    <division teaser=" " type="page">
+      <p><strong>ZEIT:</strong>
+        Hassen Sie diese Leute?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Nein, ich hab nichts gegen sie. Kennen Sie den Brabeck, den CEO von Nestlé? Ich kreuz den ab und an beim Skifahren. Ein Halunke ist das nicht, sondern ein ziemlich anständiger Mensch. Der tut nur das, was seine Shareholder von ihm erwarten. <entity idref="Jean-Paul+Sartre" entity_type="Person" url_value="personen/jean-paul-sartre">Jean-Paul Sartre</entity> sagte: Um die Menschen zu lieben, muss man sehr stark hassen, was sie unterdrückt. Nicht wer sie unterdrückt. Es geht nicht um persönliche Feindschaften. Es geht um die Strukturen dieser Welt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sie waren neun Jahre lang UN-Sonderberichterstatter für das Menschenrecht auf Nahrung. Seit August vergangenen Jahres sitzen Sie im beratenden Ausschuss des UN-Menschenrechtsrates. Was machen Sie da?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Ich bin ein kleiner Mann in dieser riesigen Uno. Was ich tun kann, ist, den Menschenrechtsrat auf Probleme hinzuweisen. Als Sonderberichterstatter war ich sechs bis sieben Mal im Jahr auf Mission, um mir ein Bild von einem Land zu machen. Ich hatte Zugang zu Gefängnissen, zu Flüchtlingslagern, Waisenhäusern. Ich habe mit Betroffenen gesprochen, mit Politikern und Wissenschaftlern. Am Ende trug ich meinen Bericht der Generalversammlung vor.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Entscheidet ein Sonderbotschafter selbst, wohin er reist?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ja. Ich kann sagen: Da gibt es ein Problem, da will ich hin. Dann rufe ich beim Hochkommissariat für Menschenrechte an und sage zum Beispiel, ich möchte in die Mongolei, weil die Verzweifelten dort wieder anfangen zu nomadisieren. Dann heißt es: Es gibt drei Möglichkeiten. Entweder Sie fliegen über Seoul nach <entity idref="Ulan-Bator" entity_type="Person" url_value="personen/ulan-bator">Ulan-Bator</entity>, oder Sie fliegen nach Peking und nehmen den Zug durch die Wüste Gobi, oder Sie reisen über Irkutsk in Sibirien. Dann mache ich ein Kreuz, und ein paar Tage später kommt das Billett mit dem Besuchsplan. In Ulan-Bator warten dann meine Assistenten, die Sicherheitsleute, der ganze Tross.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Wie kommt man an so einen Job?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Zufall. Kofi Annan erinnerte sich an mich. Als er noch ein kleiner Uno-Beamter in Genf war, sind wir beide denselben Frauen nachgelaufen. Als er den Posten eines Sonderberichterstatters für das Recht auf Nahrung schuf, hatte ich gerade ein Buch über den Hunger geschrieben. Kofi schlug mich also vor, aber die westlichen Länder stimmten fast geschlossen gegen mich. Gewählt wurde ich, weil mich viele Botschafter aus dem Süden kannten, einige hatten sogar bei mir studiert. Sie wussten, dass ich ihnen eine Stimme gebe. Ein Freund von mir hat mal gesagt: Der Ziegler ist ein weißer Neger. Das stimmt: Ich bin ein weißer Neger!
+      </p>
+      <p><strong>ZEIT:</strong>
+        Hört man Ihnen bei den Vereinten Nationen zu?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Mir begegnet man in New York immerhin auf Augenhöhe, anders als einem mongolischen oder somalischen Minister. Ich bin ein weißer Professor. Sie glauben gar nicht, wie rassistisch diese Vereinten Nationen immer noch sind.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Im Ausland sind Sie fast so populär wie Schweizer Uhren. In der Heimat gelten Sie vielen als Vaterlandsverräter. Schmerzt Sie das?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Heimat ist für mich meine Familie. Die Mutter meines Sohnes ist Ägypterin. Mein Sohn ist französischer Theaterautor, obwohl er hier geboren ist. Was also ist Heimat?
+      </p>
+      <p><strong>ZEIT:</strong>
+        Im vergangenen Jahr wurde in der Schweiz der Neubau von Minaretten verboten. Der Rechtspopulist <entity idref="Christoph+Blocher" entity_type="Person" url_value="personen/christoph-blocher">Christoph Blocher</entity> ist inzwischen der einflussreichste Politiker. Was ist los in Ihrem Land?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Jeder siebte Milliardär der Welt lebt in der Schweiz, aber wir haben Zustände wie in Bangladesch: Drei Prozent der Einwohner besitzen genauso viel wie die restlichen 97. Hier in Genf können sich immer weniger die teuren Wohnungen leisten. Da wächst eine Angst, die Leute wie Blocher ausnutzen. Mit seinen xenophoben Kampagnen verdummt er die Menschen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Es gibt Länder, in denen es sich schlechter lebt. Was haben Sie gegen die Schweiz?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Nichts, ich liebe mein Land. Ich habe nur etwas gegen diese verlogene Herrschaftsschicht. Gemessen am Pro-Kopf-Einkommen, ist die Schweiz das zweitreichste Land der Welt – ein rohstoffarmes Fleckchen von 41.000 Quadratkilometern, davon gerade mal 60 Prozent bewohnbar, der Rest ist Fels und Gletscher. Wie macht die Schweiz das also? Ihr Rohstoff ist das fremde Geld: Blutgeld, Fluchtgeld aus der Dritten Welt, Steuerhinterziehungsgeld. 2,2 Milliarden Franken allein vom ehemaligen kongolesischen Präsidenten Mobutu, dafür gibt es im <entity idref="Kongo" entity_type="Location" url_value="orte/kongo">Kongo</entity> kaum Spitäler. 1,8 Milliarden von Abacha, einem kokainabhängigen Mörder, der mal Präsident von Nigeria war. Diese Reihe könnte ich beliebig fortsetzen! Und denken Sie an die Milliarden, die dem deutschen Fiskus fehlen. Ein riesiger Aderlass, der durch die Schweiz erst möglich wird. Da wird ein Rechtsstaat sabotiert.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Für viele Deutsche ist die Schweiz ein Vorbild.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Auch bei uns glaubt man: Wir sind so reich, weil wir so arbeitsam sind. Und deutsches Steuergeld fließt zu uns, weil der deutsche Staat ein Terrorist ist. Pierre Mirabaud, der Präsident der Schweizerischen Bankiervereinigung, sagt: Deutsche Finanzämter verfolgen ihre Bürger mit Gestapo-Methoden. Die Steuerflucht sei also ein Fall von Notwehr. Da müsse man helfen. Ihr Deutschen seid viel zu nachsichtig mit uns.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wir mögen euch Schweizer halt.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Aber eure Liebe wird nicht erwidert. Selbst diese antideutsche Welle, die seit einiger Zeit durch Zürich rollt, seht ihr folkloristisch! Ihr glaubt, wir seien brave Bergler, aber unsere Herrschaftsschicht ist unfassbar selbstherrlich, vielleicht die arroganteste in ganz Europa.
+      </p>
+      <relateds />
+      <p><strong>ZEIT</strong>
+        : Wie kommen Sie darauf?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Sie ist die ungebrochenste. Der letzte fremde Soldat auf Schweizer Boden war ein Soldat Napoleons. Seitdem hat Europa Revolutionen, Kriege, Verwüstungen erlebt, faschistische und kommunistische Diktaturen. Nur die Schweiz: nichts. Dieselbe Herrschaftsstruktur seit Jahrhunderten. Immer dieselben Leute, die auf dem Gotthard sitzen und der Welt Lektionen erteilen. Ein historisch korruptes Alpenalbanien!
+      </p>
+      <p><strong>ZEIT</strong>
+        : Sie übertreiben schon wieder...
+      </p>
+      <p><strong>Ziegler</strong>
+        : Nein, wir sprechen hier von einer Elite, die den Zweiten Weltkrieg verlängert hat, indem sie das Raubgold der Nazis in Devisen umgewandelt hat, ohne zu fragen, wo es herkam. Nachgefragt haben die Schweizer Bankbeamten erst, als jüdische Bürger nach dem Krieg die Konten ihrer Angehörigen sehen wollten. Da fragten die Beamten: Wo haben Sie denn den Totenschein? Als hätte man in Auschwitz Totenscheine ausgestellt!
+      </p>
+    </division>
+    <division teaser=" " type="page">
+      <p><strong>ZEIT</strong>
+        : Erfüllt es Sie mit Genugtuung, dass das Schweizer Bankgeheimnis im vergangenen Jahr gelockert wurde?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Gelockert? Ach was, das bisschen Rechtshilfe. Nein, in diesem Fall ruht meine einzige Hoffnung auf dem Kapitalismus selbst: darauf, dass noch mehr Bankangestellte diese Steuersünder-CDs pressen, weil sie es nicht einsehen, dass irgendwelche Betrüger Millionen horten, während sie mit einem läppischen Gehalt abgespeist werden.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Sie sind in der deutschsprachigen Schweiz aufgewachsen, aber Ihren Vornamen Hans haben Sie gegen Jean eingetauscht; selbst Ihre Bücher schreiben Sie auf Französisch. Man gewinnt den Eindruck, dass Sie Ihre Herkunft gern vergessen würden.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Die Jahre verändern einen. Ich hatte eine ganz und gar sorglose Kindheit in der deutschsprachigen Schweiz, eingebettet in das calvinistische Bürgertum von Thun. Meine Mutter war eine wunderschöne, fröhliche Bauerntochter, mein Vater ein introvertierter, hochanständiger Mann. Ein Gerichtspräsident, sehr kultiviert. Wir wohnten in einer Villa, den ganzen Tag fuhr ich mit meinem Velo herum. Aber die ärmeren Kinder aus den umliegenden Dörfern waren bereits von ihren Eltern verdingt worden und arbeiteten als Mägde und Knechte. Jeden Donnerstag war Viehmarkt, und während die großen Händler sich im Restaurant die Bäuche vollschlugen, hüteten die Kinder der Armen draußen das Vieh, bleich und frierend. Diese Dinge habe ich in der Pubertät plötzlich wahrgenommen. Ich ging zu meinem Vater und fragte: Warum sind die so arm und wir so reich? Und mein Vater, der Calvinist, sagte: »Mein Sohn, mach deine Sach. Die Welt kannst du nicht ändern.«
+      </p>
+      <p><strong>ZEIT</strong>
+        : Was haben Sie ihm geantwortet?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich bin in die Luft gegangen. Ich war 14, das ist kein Alter, in dem du sagst: Alles, was ich vom Leben will, ist, mich fortpflanzen und Anwalt in Thun werden.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Mit 18 sind Sie nach Paris durchgebrannt.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich hatte mich sehr schlecht benommen, meinen Vater beleidigt. In Paris schlug ich mich durch und stapelte nachts in Les Halles Kisten. Irgendwann lernte ich marxistische Studenten kennen, die zu einer Gruppe um Jean-Paul Sartre gehörten. Er gab damals die Zeitschrift
+        <em>Les Temps Modernes</em>
+        heraus. Ich konnte mein Glück kaum fassen: Diese Zeitschrift war für mich so etwas wie das Wort Gottes, und sie ließen mich mitmachen. Ich war der Jüngste und durfte jeden Mittwoch zu Sartre in die Rue Bonaparte, wo er bei seiner Mutter wohnte.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Welche Erinnerungen haben Sie an ihn?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Er war unglaublich freundschaftlich! Ein warmherziger, humorvoller Mann, der viele Fragen stellte und sehr gut zuhören konnte. Stellen Sie sich vor: Der große Sartre fragte mich kleinen Trottel aus! Aber manchmal kam es vor, dass er sich mitten im Satz wegdrehte und sagte:
+        <em>Maintenant je dois travailler</em>
+        . Jetzt muss ich arbeiten. Dann griff er seinen grünen Filzstift und fing an zu schreiben.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Bekehrte er Sie zum Marxismus?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Das musste er nicht. Ich war längst mit einem stahlfesten Glaubenssystem ausgestattet. Mit den anderen Studenten um Sartre unterstützte ich die algerische Befreiungsbewegung, machte Botendienste für die Leute im Untergrund, und alle zwei Monate gab ich an, meinen Pass verloren zu haben. Dann schickte mir die Schweizer Botschaft einen neuen, und den alten schenkte ich den Genossen. Was mich am meisten an Sartre beeindruckte, war seine Großzügigkeit. Auf seinem Kaminsims stand eine Vase, so eine kitschige, bürgerliche, vollgestopft mit Geldscheinen, und jeder durfte sich daraus bedienen. Sartre lebte, was er schrieb. Noch heute kann ich nicht nach Paris fahren, ohne sein Grab zu besuchen.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Was haben Sie ihm zu verdanken?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Absolut alles. Nach meinem Studium war ich für fast zwei Jahre als Uno-Mitarbeiter im Kongo. Nach meiner Rückkehr lud mich Sartre zu sich ein. Da er kaum etwas über die afrikanischen Unabhängigkeitskämpfe wusste, löcherte er mich mit Fragen, und am Ende sagte er: Das müssen Sie schreiben. So verfasste ich den ersten Artikel meines Lebens.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Und?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Als ich fertig war, redigierte ihn Simone de Beauvoir. Sie war eine strenge Frau. Bevor sie ihn an
+        <em>Les Temps Modernes</em>
+        weitergab, hatte sie noch meinen Vornamen gestrichen und durch Jean ersetzt. »Hans«, sagte sie, »das ist doch kein Name!« Viel entscheidender aber war, dass Sartre mich nach meinem Aufenthalt im Kongo intellektuell wieder zusammenflickte. Ich war ja als leuchtender Ritter dorthin aufgebrochen. Aber dann traf ich auf die afrikanische Realität: Ich sah, wie Schwarze andere Schwarze abschlachteten, und gleichzeitig erlebte ich, wie Europäer unter widrigsten Umständen eine Leprastation unterhielten. Nichts in meinem Weltbild stimmte mehr. Nachdem ich dem Calvinismus meines Elternhauses abgeschworen hatte, war nun meine zweite Sozialisation zerschossen. Das war der Augenblick, in dem Sartres Existenzialismus mich befreite. Ich begriff: Der Mensch ist, was er tut. Nichts anderes.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Haben Sie neu angefangen?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich kehrte in die Schweiz zurück und stürzte mich in die Arbeit. Ich fand eine Stelle beim neu gegründeten Afrika-Institut in Genf, promovierte, erst in Jura, dann in Soziologie, habilitierte – und schnitt dann mit einer internationalen Arbeitsbrigade Zucker auf Kuba.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Dort lernten Sie <entity idref="Che+Guevara" entity_type="Person" url_value="personen/che-guevara">Che Guevara</entity> kennen.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Die kubanischen Revolutionäre trafen sich regelmäßig in der Küche des Hotels, in dem ich wohnte. Che war damals Industrieminister, er plante, bald zu einer Zuckerkonferenz nach Genf zu reisen, und da sie dort keine Botschaft hatten, fragten seine Leute mich, ob ich ein Auto hätte. »Einen kleinen, schwarzen Morris«, sagte ich, und dann wollten sie wissen, ob ich für zwölf Tage der Fahrer des Che sein könne.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Sie konnten?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Keine Frage. Ich holte ihn in Genf vom Bahnhof ab, fuhr ihn jeden Tag vom Hotel zur Konferenz, begleitete ihn abends zu Empfängen, und am freien Sonntag spazierten wir durch Chamonix. Wie ein Außerirdischer kam er mir in der Schweiz vor, in seiner Windjacke und auf dem Kopf das Barett mit Kommandantenstern. Er wirkte schüchtern, ironisch, aber man spürte gleich seine Autorität.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Haben Sie viel mit ihm gesprochen?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Ich habe es versucht, immer wieder:
+        <em>»Comandante, explícame...«</em>
+        Aber es langweilte ihn. Am letzten Abend seines Aufenthaltes habe ich mir dann ein Herz gefasst. Es gab Gerüchte, dass er plante, nach Afrika zu gehen, um dort zu kämpfen. Ich sagte: »Comandante, ich will mit Euch gehen.«
+      </p>
+      <relateds />
+      <p><strong>ZEIT:</strong>
+        Sie wollten zur Waffe greifen?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Aber ja!
+      </p>
+      <p><strong>ZEIT</strong>
+        : Was hat Che Guevara Ihnen geantwortet?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Wir standen am Fenster seines Hotelzimmers, auf einem Hügel über Genf, und er deutete auf die Leuchtreklamen unten in der Stadt, auf all die Banken und die glitzernden Konzernfilialen. »Mein Freund«, sagte er, »da bist du geboren. Dein Platz ist hier. Hier ist das Gehirn des Monsters, hier musst du kämpfen.« Dann ließ er mich stehen. Ich war zutiefst beleidigt. Aber er hatte mich als das erkannt, was ich war: ein 25-jähriger Kleinbürger, der mit nichts schlechter umgehen konnte als mit einer Waffe. Ein Guerillakrieg wäre mein sicherer Tod gewesen.
+      </p>
+    </division>
+    <division teaser=" " type="page">
+      <p><strong>ZEIT</strong>
+        : Würden Sie heute immer noch Gewalt anwenden?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Kommt drauf an. Che Guevara hat mal gesagt, ein Revolutionär sei nichts anderes als ein bewaffneter Lehrer. Wenn es keine Freiheit für sein Wort gibt, dann muss er sie erkämpfen. Stauffenberg hat recht gehabt, als er versuchte, Hitler zu ermorden, Baader irrte. Aber verstehen Sie mich nicht falsch. Ich weiß nicht, ob ich den Mut zu so was hätte.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Herr Ziegler, kann man als Revolutionär in Würde altern?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Was heißt denn altern? Ein Wort, das ich nicht verstehe. Die Zellstruktur des Menschen erneuert sich langsamer, das Sexualverhalten ändert sich, ich fahre langsamer Ski. Aber sonst? Kennen Sie den französischen Soziologen Lévi-Strauss? Der wurde über hundert Jahre alt, und seine größten Bücher hat er mit über 80 geschrieben.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Ihre beste Zeit kommt also noch.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Merci, Kameraden. Aber ich bin niemand, der dauernd denkt: Mein Lebenswerk, mein Lebenswerk! Ich bin ein glücklicher Mensch. Jeder Tag ist ein Wunder. Jeden Tag wird gekämpft, und Schluss!
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sind Ihre Gegner über die Jahre andere geworden?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Nein, sie tragen nur andere Masken.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sie haben 20 Bücher verfasst, aber wenn man mal nüchtern bilanziert, haben Sie nicht viel bewirkt.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Brecht wurde am Ende seines Lebens gefragt: Was hat das alles denn genützt? All die Theaterstücke, die Schriften, dieses Ringen im Exil? Brecht dachte nach, und schließlich sagte er: Ohne uns hätten sie es leichter gehabt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Was war der größte Irrtum Ihres Lebens?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Vielleicht Kambodscha. Erst die radikalste Revolution und später dann das reinste, blutigste Verbrechen. Ich hatte an Pol Pot und seine Leute geglaubt. Sie waren zur gleichen Zeit wie ich in Paris, das waren Intellektuelle, gute Theoretiker.
+      </p>
+      <p><strong>ZEIT:</strong>
+        War das ein Moment, in dem Sie verzweifelten?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Nein, verzweifelt bin ich immer nur wegen der Frauen. In Brasilien, in Moskau. Über Monate nicht mehr gegessen, nicht mehr geschlafen. Liebeskummer ist eine der gefährlichsten Krankheiten der Welt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Liebeskummer ist der wahre Feind der Revolution.
+      </p>
+      <p><strong>Ziegler</strong>
+        : Da haben Sie recht. Wollen Sie noch einen Schluck Rotwein?
+      </p>
+      <p><strong>ZEIT</strong>
+        : Geben Sie uns einen Rat: Wie übersteht man mit 76 Jahren eigentlich all diese Meetings, diese Interkontinentalflüge?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ich habe einen eigenen
+        <em>maître de sports.</em>
+        Zweimal die Woche quält er mich mit Judo-Übungen. Wenn ich sage, ich kann nicht mehr, wird er sehr unangenehm. Sie müssen wissen: Ich habe keine Disziplin.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Wie macht man Smalltalk mit dem libyschen Revolutionsführer <entity idref="Gadhafi" entity_type="Person" url_value="personen/gadhafi">Gadhafi</entity>?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Ganz einfach: Ich lasse ihn reden. Gadhafi wurde ja in Sandhurst ausgebildet, er spricht fließend Englisch. Völlig ungefragt überfällt er einen mit Monologen: Palästina, der Kampf gegen die Amerikaner und so weiter. Aber Gadhafi ist nicht der Schlimmste. Schlimmer sind Leute wie Blaise Compaoré, der Präsident von Burkina Faso, der seinen Vorgänger Thomas Sankara ermorden ließ. Sankara war mein Freund.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wie reden Sie mit so jemandem?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Schwierig. Natürlich kann ich versuchen, jemanden diplomatisch auszufragen. »Monsieur le Président«, könnte ich sagen, »der Menschenrechtsrat ist besorgt. Wir haben gehört, dass... Kann es nicht sein...« Und natürlich benutze ich dabei nicht das Wort Folter, ich sage
+        <em>enforced interrogation</em>
+        . Verschärftes Verhör. Aber mehr als ein verständnisvolles Lächeln werde ich nicht kriegen. Und ich muss stets aufpassen, dass ich nicht hinters Licht geführt werde. Bei mir im Büro habe ich ein Foto, auf dem Saddam Hussein mich umarmt. Ich war wegen einer Geiselnahme in den Irak gereist, wartete in einem seiner Paläste, und plötzlich stürmt er auf mich zu. Seine Hoffotografen drückten auf den Auslöser, das Bild schickten sie mir hinterher. Ich hoffe, dass es niemals an die Öffentlichkeit gelangt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sind Sie eine Art Grüßaugust der Weltgemeinschaft?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Schauen Sie, als Sonderberichterstatter für das Recht auf Nahrung bin ich einmal mit meinem ganzen Tross bei vertriebenen Bauern in Guatemala vorgefahren. Ich hörte mir ihre Probleme an, und im selben Augenblick war mir bewusst, dass ich sie verriet. Zurück in Genf, schrieb ich meinen Bericht und empfahl eine Landreform, die unter dem Druck amerikanischer Bananenkonzerne abgelehnt wurde. Das Einzige, was durchkam, waren vier Helikopter, die das Land vermessen sollten, weil es in Guatemala nicht einmal ein Grundbuch gibt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wie gehen Sie damit um?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Das Volk der Wolof im Senegal hat ein Sprichwort: Man kennt nicht die Früchte der Bäume, die man pflanzt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Sie verdrängen diesen Verrat.
+      </p>
+      <p><strong>Ziegler:</strong>
+        Wahrscheinlich schon. Irgendwie muss ich ja klarkommen mit dieser Schizophrenie der Vereinten Nationen: Erst rauben die Liberalisierungsprogramme ihrer Weltbank den Bauern die Existenzgrundlage, und hinterher nehme ich für den Menschenrechtsrat den Schaden auf.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Sie haben mal gesagt, Sie seien wie ein Vampir, das Elend sei Ihre Geschäftsgrundlage.
+      </p>
+      <relateds />
+      <p><strong>Ziegler:</strong>
+        Ich gebe Ihnen ein Beispiel. Vor drei Jahren, als ich noch Sonderberichterstatter war, erwischte mich fast eine Kugel. Es gab damals eine fürchterliche Hungersnot in <entity idref="Sambia" entity_type="Location" url_value="orte/sambia">Sambia</entity>. Die internationalen Agrarkonzerne versuchten, diese Notlage auszunutzen, um ihre gentechnisch veränderte Nahrung dort in den Markt zu drücken. Ihr Kalkül: Sie spenden ihren Genmais an die Uno-Hungerhilfe, die ihn dann in Sambia unters Volk bringt.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Was ist das Problem dabei?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Angesichts der Knappheit hätten viele Bauern einige Maiskörner aufbewahrt, um sie im nächsten Jahr zu pflanzen. Sie wären dadurch abhängig geworden von diesem speziellen Genmais. Für die Saatgutkonzerne wäre das ein lukratives Geschäft gewesen, für die Bauern langfristig der Ruin. Sie verkaufen ihren Mais vor allem nach Europa, aber in Europa meiden die Konsumenten gentechnisch veränderte Nahrung. Was macht also der Präsident von Sambia? Ruft:
+        <em>»Poisoned food!«,</em>
+        und verbrennt die Maissäcke der Hungerhilfe. Ich gab ihm recht. Da fielen sie über mich her: Die Amerikaner verlangten meine sofortige Demission. Die Presse brüllte: Der Ziegler, dieser Hund, wegen seines Dogmatismus sterben Menschen! Eine schlimme Zeit. Aber wir hielten durch und fanden einen Kompromiss. Die Uno hat den Mais verteilt, doch nicht als Korn, sondern zu Mehl gemahlen, sodass man ihn nicht pflanzen kann.
+      </p>
+    </division>
+    <division teaser=" " type="page">
+      <p><strong>ZEIT</strong>
+        : Macht Ihnen ein solches Beispiel Hoffnung?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Auch wenn es diesmal gut ausging, die multilaterale Diplomatie ist am Ende. Total zusammengebrochen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Wie meinen Sie das?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Anfang unseres Jahrtausends trafen sich 147 Staatschefs in New York, um ein Inventar der größten Tragödien zu erstellen, von denen die Welt heimgesucht wird: Hunger, Analphabetismus, verseuchtes Wasser, Kindersterblichkeit, HIV. Eigentlich eine Sternstunde der Vereinten Nationen, denn diese Probleme können ja nur gemeinsam gelöst werden. Man stellte also einen buchhalterisch klaren Fahrplan für die nächsten 15 Jahre auf, die sogenannten Millennium-Goals, aber was ist seitdem passiert? Nichts!
+      </p>
+      <p><strong>ZEIT</strong>
+        : Warum geht nichts voran?
+      </p>
+      <p>Ziegler: Wie oft habe ich mich das gefragt, wenn sich in all diesen Nachtsitzungen die Diplomaten gegenübersaßen, Arm und Reich, unfähig zum Minimalkonsens. Einmal ging es um eine Resolution für Darfur, Blauhelmtruppen, die einen humanitären Korridor zum Tschad einrichten sollten. Da ergriff die Koordinatorin der asiatischen Gruppe das Wort und sagte: Kommt nicht infrage! Die Dame heißt Sarala Fernando, eine hochintelligente Frau aus Sri Lanka. In einer Sitzungspause nahm ich sie beiseite, aber sie sagte nur: »Hast du gesehen, wer den Entwurf verfasst hat? Die Engländer. Du weißt, was sie uns angetan haben.« Die alten Kolonialherren. Deshalb war sie dagegen. Deshalb geht das Massaker weiter. Verstehen Sie? Da ist ein tiefer Hass, der sich aus dem verwundeten Gedächtnis dieser Völker ableitet und politisches Bewusstsein wird.</p>
+      <p><strong>ZEIT</strong>
+        : Was bedeutet das?
+      </p>
+      <p><strong>Ziegler:</strong>
+        Dass der Westen seinen Kredit verspielt hat. Der Süden glaubt ihm nicht mehr. Der Süden weiß, dass er entwaffnet werden soll. Dass die Ausbeuter jetzt nicht mehr im Kolonialherrenanzug in die Tropen jetten, sondern in Nadelstreifen, und er begehrt dagegen auf.
+      </p>
+      <p><strong>ZEIT:</strong>
+        In Ihrem aktuellen Buch
+        <em>Der Hass auf den Westen</em>
+        schildern Sie ein bezeichnendes Aufeinandertreffen von Abdelasis Bouteflika, dem Präsidenten von Algerien, und Nicolas Sarkozy.
+      </p>
+      <p><strong>Ziegler:</strong>
+        Die beiden trafen sich im Dezember 2007 in Algier, um Lieferverträge für Erdgas zu unterzeichnen. Alles lag fertig auf dem Tisch, als sich Bouteflika plötzlich erhebt und sagt: »Ich will eine Entschuldigung für Setif.« In der Stadt Setif waren 1945 zigtausend Algerier abgeschlachtet worden, weil sie aufbegehrten gegen die französischen Kolonialherren. Daraufhin sagt Sarkozy den unglaublichen Satz: »Ich bin nicht der Nostalgie wegen gekommen.« So steht es im Protokoll. Doch Bouteflika insistierte:
+        <em>»La mémoire avant les affaires.«</em>
+        Das Gedächtnis vor den Geschäften. Die Verträge wurden nicht unterschrieben, bis heute nicht.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Allerdings haben langjährige Machthaber wie Bouteflika oft selbst Blut an den Händen.
+      </p>
+      <p><strong>Ziegler:</strong>
+        Darüber kann man reden. Aber alles, was er verlangt, ist zunächst einmal ein Anerkennen dessen, was geschehen ist. Ich denke, es ist wie in zwischenmenschlichen Beziehungen. Einer muss sagen: Tut mir leid, die Kolonialmassaker, die Sklaverei, und an diesem Punkt kann dann ein Dialog beginnen. Erst dann kann der Westen mit dem Finger auf den Süden zeigen.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Was gibt Ihnen Hoffnung, wenn alles stillzustehen scheint?
+      </p>
+      <relateds />
+      <p><strong>Ziegler:</strong>
+        Ich halte es mit Victor Hugo: Ich hasse alle Kirchen, ich liebe die Menschen, ich glaube an Gott. Alle Verbrechen geschehen unter offenem Himmel. Es wird einen Aufstand des Gewissens geben. Ich beobachte das Entstehen einer neuen, planetarischen Zivilgesellschaft. Egal ob es um diese Proteste bei G-8-Gipfeln geht, um Atommülltransporte oder wie bei euch um diesen Stuttgarter Bahnhof: Es gibt wieder Leute, die nicht mehr nur tun, was man ihnen diktiert, die ihre Freiheit umsetzen in Widerstand.
+      </p>
+      <p><strong>ZEIT</strong>
+        : Gibt es ein Ziel, das diese Menschen eint?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Sie wissen, was sie nicht wollen, und niemand kann voraussehen, was daraus entsteht. Was sie aus ihrer Freiheit machen, ist das große Mysterium der Geschichte. Kennen Sie diesen Vers von Whitman:
+        <em>He awoke at dawn and went into the rising sun...limping.</em>
+        Er erwachte am frühen Morgen und ging der aufgehenden Sonne entgegen... hinkend.
+      </p>
+      <p><strong>ZEIT:</strong>
+        Darauf gründen Sie Ihre Hoffnung?
+      </p>
+      <p><strong>Ziegler</strong>
+        : Als Revolutionär muss ich das Gras wachsen hören.
+      </p>
+    </division>
+  </body>
+  
+  <teaser>
+    <title xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">"Ich bin ein weißer Neger"</title>
+    <text xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Der Globalisierungskritiker Jean Ziegler über den Hunger in der Dritten Welt, seine Zeit als Chauffeur von Che Guevara und den größten Grund zur Verzweiflung: Frauen.</text>
+  </teaser>
+</article>

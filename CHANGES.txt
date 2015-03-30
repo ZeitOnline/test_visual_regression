@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1531: iqd content ad in ZON and ZMO (commented out a this point, until officially live)
 
+- BUG-227: Hide missing date of publication
+
 
 1.18.1 (2015-03-24)
 -------------------
