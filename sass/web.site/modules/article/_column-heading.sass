@@ -1,6 +1,6 @@
 .column-heading
-	margin-left: -1.25rem
-	margin-right: -1.25rem
+	margin-left: -$page-padding
+	margin-right: -$page-padding
 
 	// general colour and positioning
 	&__upper
@@ -12,8 +12,8 @@
 	&__inner
 		position: relative
 		+respond-max($break-desktop-min)
-			margin-left: 1.25rem
-			margin-right: 1.25rem
+			margin-left: $page-padding
+			margin-right: $page-padding
 
 	// author and title
 	&__author,
@@ -31,7 +31,7 @@
 		+respond-max($break-phablet-min)
 			position: absolute
 			bottom: 0
-			right: remify(-1.25em)
+			right: -$page-padding
 			width: 33%
 			z-index: 0
 		+respond-min($break-phablet-min)
