@@ -21,9 +21,14 @@ log = logging.getLogger(__name__)
 
 
 class LegacyLayout(zeit.web.core.utils.nsunicode):
-    def __init__(self, arg, **kw):
-        super(LegacyLayout, self).__init__(arg, **kw)
-        self.id = arg
+    def __new__(cls, arg):
+        if isinstance(arg, tuple):
+            arg, id_ = arg
+        else:
+            id_ = arg[:]
+        layout = super(LegacyLayout, cls).__new__(cls, arg)
+        layout.id = id_
+        return layout
 
     def __repr__(self):
         return '<{} at {} with layout {}>'.format(
