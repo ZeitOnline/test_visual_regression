@@ -17,10 +17,7 @@
                         <h1 class="column-heading__name">Eine Kolumne vom <a class="column-heading__name__link" href="{{view.authors[0].href}}" itemtype="http://schema.org/Person" itemprop="author">{{- view.authors[0].name | hide_none -}}</a></h1>
                     </div>
                     <div class="column-heading__author">
-                        <!-- TODO: correct image, correct link? -->    
-                        <a href="{{view.authors[0].href}}">
-                            <img src="//i.guim.co.uk/static/w-300/h--/q-95/sys-images/Guardian/Pix/pictures/2014/3/13/1394733739486/JackMonroe.png" alt="Jack Monroe">
-                        </a>
+                        {% include "zeit.web.site:templates/inc/article/column_author_image.tpl" %}
                     </div>
                 </div>
             </div>

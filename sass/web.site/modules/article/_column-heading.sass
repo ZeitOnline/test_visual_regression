@@ -11,8 +11,9 @@
 
 	&__inner
 		position: relative
-		margin-left: 1.25rem
-		margin-right: 1.25rem
+		+respond-max($break-desktop-min)
+			margin-left: 1.25rem
+			margin-right: 1.25rem
 
 	// author and title
 	&__author,
@@ -39,6 +40,14 @@
 			width: 35%
 		+respond-min($break-tablet-min)
 			width: 30%
+
+	&__author-image
+		width: 100%
+		height: 0
+		margin: 0
+		padding-bottom: 100%
+		position: relative
+		overflow: hidden
 
 	&__information
 		padding: em(10px) 0 em(35px)
