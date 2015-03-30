@@ -1,6 +1,7 @@
 <div class="{{ 'cp-area' | with_mods(area.width | area_width) }} {{ area.layout | hide_none }}">
     {% block before_module_list %}{% endblock %}
     {% for teaser_block in area -%}
+    {# For compat reasons, we call all our modules teaser_block #}
         {% set teaser = teaser_block | first_child %}
         {% set index = loop.index %}
         {% block before_module_include scoped %}{% endblock %}
