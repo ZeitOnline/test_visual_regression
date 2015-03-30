@@ -60,6 +60,6 @@ Dadurch werden ein Verzeichnis `node_modules` angelegt. Dies bitte nicht anfasse
 
 Konfigurationsänderungen und -updates sind durch das Anpassen der package.json, vor allem aber der Gruntfile.js umzusetzen.
 
-Ist alles fertig installiert, kann mit diesem Kommando der Grunt Watchdemon gestartet werden
+Ist alles fertig installiert, kann mit diesem Kommando der Grunt Watchdemon in work/grunt gestartet werden
 
-    grunt watch
+    bin/grunt watch

@@ -1,8 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.17.2 (unreleased)
+1.18.2 (unreleased)
 -------------------
+
+- Nothing changed yet.
+
+
+1.18.1 (2015-03-24)
+-------------------
+
+- Fixed ZMO menu icon
+
+- Fixed width of fullwidth teaser
+
+
+1.18 (2015-03-20)
+-----------------
 
 - ZON-1390: Polish article
 
@@ -24,9 +38,9 @@ Change log for zeit.web
 
 - BUG-164: Refactor video fallback image
 
-- Kill the singing robot
-
 - FIX: Make version detection failsafe
+
+- Kill the singing robot
 
 
 1.17.1 (2015-03-17)

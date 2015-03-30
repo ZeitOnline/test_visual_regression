@@ -148,7 +148,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No comment text present')
 
 
-def test_first_small_teaser_has_image_on_mobile_mode(
+def test_first_small_teaser_has_no_image_on_mobile_mode(
         selenium_driver, testserver):
 
     driver = selenium_driver
@@ -158,7 +158,7 @@ def test_first_small_teaser_has_image_on_mobile_mode(
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
-    assert first.is_displayed(), 'image is not displayed'
+    assert first.is_displayed() is False, 'image is displayed'
     assert second.is_displayed() is False, 'image is displayed'
 
 
@@ -189,7 +189,7 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         # test ipad width
         assert helper.size.get('width') == 574
     elif screen_size[0] == 980:
-        assert helper.size.get('width') == 626
+        assert helper.size.get('width') == 640
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
