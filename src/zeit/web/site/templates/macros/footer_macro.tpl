@@ -1,5 +1,5 @@
 {% macro footer_logo(request) -%}
-    <a href="http://{{ request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
+    <a href="http://{{ request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop">
         <!--start: title-->Nachrichten auf ZEIT ONLINE<!--end: title-->
     </a>
 {%- endmacro %}

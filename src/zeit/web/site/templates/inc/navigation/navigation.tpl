@@ -4,7 +4,7 @@
 		<div class="logo_bar__image" itemprop="brand">
 			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
-				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png"></meta>
+				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png">
 				ZEIT ONLINE
 			</a>
 		</div>
