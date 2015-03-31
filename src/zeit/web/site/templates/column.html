@@ -1,0 +1,51 @@
+{% extends "zeit.web.site:templates/article_komplett.html" %}
+{% block article_heading %}
+	<div class="column-heading">
+		<div class="column-heading__upper">
+			<div class="article__item">
+				<div class="column-heading__inner">
+					<div class="column-heading__information">
+						<h1 class="column-heading__header" itemprop="headline">
+							<span class="column-heading__kicker">
+								{{ view.serie + ' / ' | hide_none }}
+								{{ view.supertitle | hide_none }}
+							</span>{% if view.title %}<span class="article-heading__colon">: </span>{% endif %}
+							<span class="column-heading__title">{{ view.title | hide_none }}</span>
+						</h1>
+						{% if view.authors %}
+							<div class="column-heading__name" itemscope itemtype="http://schema.org/Person" itemprop="author">
+								Eine Kolumne von
+								{% for author in view.authors -%}
+									{%- if loop.length > 1 -%}
+										{%- if loop.last %} und {% else %}, {% endif -%}
+									{%- endif -%}
+									{%- if author.href -%}
+										<a href="{{ author.href | translate_url }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>
+									{%- else -%}
+										<span itemprop="name">{{ author.name }}</span>
+									{%- endif -%}
+								{%- endfor %}
+							</div>
+						{% endif %}
+					</div>
+					<div class="column-heading__author">
+						{% include "zeit.web.site:templates/inc/article/column_author_image.tpl" %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="column-heading__lower">
+			<div class="article__item">
+				<div class="summary" itemprop="description">
+					{{ view.subtitle | hide_none }}
+				</div>
+				<div class="metadata metadata--column">
+					{% include "zeit.web.site:templates/inc/article/metadata.tpl" ignore missing %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock article_heading %}
+
+{% block article_meta %}
+{% endblock article_meta %}

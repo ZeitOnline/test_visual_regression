@@ -4,6 +4,7 @@
 
     {% set date = '' -%}
     {% set pagination = '' -%}
+    {% set serie = view.serie | replace(' ', '') | lower %}
 
     {% if view.date_first_released -%}
         {% set date = view.date_first_released | format_date('short_num') -%}
@@ -13,7 +14,7 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + view.serie | lower + '.' + view.type | lower + '.online' %}
+    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
 
     var Z_WT_KENNUNG = "{{ wt_kennung }}|{{ request.host + request.path }}";
 
@@ -32,7 +33,7 @@
             3: "{{ view.ressort | lower }}", // Ressort
             4: "online", // Online/Sourcetype
             5: "{{ view.sub_ressort | lower }}", // Subressort
-            6: "{{ view.serie | lower }}", // Cluster
+            6: "{{ serie }}", // Cluster
             7: "{{ request.path_info | substring_from('/') }}", // doc-path
             8: "{{ view.banner_channel | lower }}", // Banner-Channel
             9: "{{ date }}" // First Published
@@ -62,7 +63,7 @@
 </script>
 <noscript>
     <div>
-        <img alt="" width="1" height="1" src="{{ "%s,%s.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" | 
+        <img alt="" width="1" height="1" src="{{ "%s,%s.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" |
             format(
                 "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311",
                 wt_kennung,
@@ -72,11 +73,11 @@
                 view.ressort | lower,
                 "online",
                 view.sub_ressort | lower,
-                view.serie | lower,
+                serie,
                 request.path_info | substring_from('/'),
                 view.banner_channel | lower,
                 date
-            ) 
+            )
         }}{% if view.type == 'article' -%}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s" | format(
             view.authors_list | lower | hide_none,
             view.banner_channel | lower,
