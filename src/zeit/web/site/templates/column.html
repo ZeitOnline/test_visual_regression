@@ -14,7 +14,7 @@
                             <span>{{- view.supertitle | hide_none -}}</span>
                         </h3>
                         <h1 class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</h1>
-                        <h1 class="column-heading__name">Eine Kolumne vom <a class="column-heading__name__link" href="{{view.authors[0].href | translate_url}}" itemtype="http://schema.org/Person" itemprop="author">{{- view.authors[0].name | hide_none -}}</a></h1>
+                        <h1 class="column-heading__name">Eine Kolumne von <a href="{{view.authors[0].href | translate_url}}" itemtype="http://schema.org/Person" itemprop="author">{{- view.authors[0].name | hide_none -}}</a></h1>
                     </div>
                     <div class="column-heading__author">
                         {% include "zeit.web.site:templates/inc/article/column_author_image.tpl" %}
@@ -24,15 +24,11 @@
         </div>
         <div class="column-heading__lower">
             <div class="article__item">
-                <div class="column-heading__inner">
-                    <div class="column-heading__summary">
-                        <div class="summary" itemprop="description">
-                            {{ view.subtitle | hide_none }}
-                        </div>
-                        <div class="metadata metadata--column">
-                            {% include "zeit.web.site:templates/inc/article/metadata.tpl" ignore missing %}
-                        </div>
-                    </div>
+                <div class="summary" itemprop="description">
+                    {{ view.subtitle | hide_none }}
+                </div>
+                <div class="metadata metadata--column">
+                    {% include "zeit.web.site:templates/inc/article/metadata.tpl" ignore missing %}
                 </div>
             </div>
         </div>
