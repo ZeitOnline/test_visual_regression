@@ -27,13 +27,13 @@
 
 	&__information
 		+font-smoothing
-		padding: em(10px) 0 em(35px)
+		padding: em(10px) 0 em(50px)
 		vertical-align: middle
 		+respond-max($break-phablet-min)
 			position: relative
 			z-index: 1
 		+respond-min($break-phablet-min)
-			padding: em(30px) 0 em(20px)
+			padding: em(30px) 0 em(40px)
 			width: 65%
 		+respond-min($break-tablet-min)
 			width: 70%
@@ -60,7 +60,12 @@
 		position: relative
 		overflow: hidden
 
-	&__column-details
+	&__header
+		margin-top: remify(0.25em)
+		margin-bottom: remify(0.25em)
+
+	&__kicker
+		display: block
 		color: $charcoal
 		letter-spacing: $zon-letter-spacing-m
 		margin-bottom: em(3px)
@@ -69,9 +74,8 @@
 			+link-colors($charcoal, $white, $white, $charcoal, $white)
 
 	&__title
+		display: block
 		color: $white
-		margin-bottom: remify(0.25em)
-		margin-top: remify(0.25em)
 		letter-spacing: 0.008em
 		font-size: remify(24px)
 		line-height: percentage(31/24)

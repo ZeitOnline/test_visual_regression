@@ -5,15 +5,17 @@
 			<div class="article__item">
 				<div class="column-heading__inner">
 					<div class="column-heading__information">
-						<h3 class="column-heading__column-details">
-							{#  note: wrap in link, when series landing page exists
-								<a href="#" class="column-heading__column-details__link">
-								</a>
-							#}
-							<span>{{- view.serie + ' / ' | hide_none -}}</span>
-							<span>{{- view.supertitle | hide_none -}}</span>
-						</h3>
-						<h1 class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</h1>
+						<h1 class="column-heading__header">
+							<span class="column-heading__kicker">
+								{#  note: wrap in link, when series landing page exists
+									<a href="#" class="column-heading__kicker__link">
+									</a>
+								#}
+								{{- view.serie + ' / ' | hide_none -}}
+								{{- view.supertitle | hide_none -}}
+							</span>
+							<span class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</span>
+						</h1>
 						{% if view.authors %}
 							<div class="column-heading__name">
 								Eine Kolumne von
