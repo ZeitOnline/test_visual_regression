@@ -245,6 +245,9 @@ class Application(object):
             ignore=self.DONT_SCAN
         )
 
+        # TODO: We would want to make contextfilters venusian-discoverable too.
+        env.filters['macro'] = zeit.web.core.template.call_macro_by_name
+
         return env
 
     def configure_zca(self):
