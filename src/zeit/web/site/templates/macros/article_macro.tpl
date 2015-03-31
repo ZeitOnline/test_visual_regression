@@ -65,7 +65,7 @@
 {% endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h2 class="article__subheading">
+    <h2 class="article__item article__subheading">
         {{ intertitle|striptags }}
     </h2>
 {%- endmacro %}
