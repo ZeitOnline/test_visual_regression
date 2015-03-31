@@ -110,3 +110,18 @@
         </figure>
     {%- endif %}
 {%- endmacro %}
+
+{% macro infobox(obj) %}
+{% if obj.contents -%}
+    <aside class="infobox">
+        {% for title, text in obj.contents %}
+            <div class="infobox-area">
+                <h1>{{ title }}</h1>
+                {% for item in text %}
+                    {{ (item | block_type or "no_block") | macro(item) }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </aside>
+{%- endif %}
+{% endmacro %}
