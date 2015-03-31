@@ -89,6 +89,10 @@
 #}
 {%- endmacro %}
 
+{% macro contentadblock(item) -%}
+    {{ lama_core.content_ad_article(view) }}
+{%- endmacro %}
+
 {% macro portraitbox(obj) -%}
   {#
     obj = {'name': u'Herrmann Koser',

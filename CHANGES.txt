@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - Fix border-width in navigation
 
+- ZON-1531: iqd content ad in ZON and ZMO (commented out a this point, until officially live)
+
 
 1.18.1 (2015-03-24)
 -------------------
