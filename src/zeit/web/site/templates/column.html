@@ -17,13 +17,13 @@
 							<span class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</span>
 						</h1>
 						{% if view.authors %}
-							<div class="column-heading__name">
+							<div class="column-heading__name" itemscope itemtype="http://schema.org/Person" itemprop="author">
 								Eine Kolumne von
 								{% for author in view.authors %}
 									{%- if author.href -%}
-										<a href="{{ author.href | translate_url }}" itemprop="url"><span itemtype="http://schema.org/Person" itemprop="author">{{ author.name }}</span></a>
+										<a href="{{ author.href | translate_url }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>
 									{%- else -%}
-										<span itemtype="http://schema.org/Person" itemprop="author">{{ author.name }}</span>
+										<span itemprop="name">{{ author.name }}</span>
 									{%- endif -%}
 								{% endfor %}
 							</div>
