@@ -33,7 +33,7 @@
             </div>
         {% endblock article_heading %}
         {% block article_meta %}
-            <div class="article__item">    
+            <div class="article__item">
                 {% if view.pagination and view.pagination.current > 1 %}
                 <div class="article__page-teaser">
                     Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
@@ -55,7 +55,7 @@
         {% endblock article_meta %}
     {% endprofile %}
     {% profile %}
-        {% block article_body %} 
+        {% block article_body %}
         <div class="article-body" itemprop="articleBody">
             {% block article_pages %}
                 <!-- Here goes the content for a page -->

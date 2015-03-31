@@ -6,13 +6,13 @@
                 <div class="column-heading__inner">
                     <div class="column-heading__information">
                         <h3 class="column-heading__column-details">
-                            {#  note: wrap in link, when series landing page exists 
+                            {#  note: wrap in link, when series landing page exists
                                 <a href="#" class="column-heading__column-details__link">
-                                </a> 
+                                </a>
                             #}
-                            <span>{{- view.serie + ' / ' | hide_none -}}</span> 
+                            <span>{{- view.serie + ' / ' | hide_none -}}</span>
                             <span>{{- view.supertitle | hide_none -}}</span>
-                        </h3>                    
+                        </h3>
                         <h1 class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</h1>
                         <h1 class="column-heading__name">Eine Kolumne vom <a class="column-heading__name__link" href="{{view.authors[0].href | translate_url}}" itemtype="http://schema.org/Person" itemprop="author">{{- view.authors[0].name | hide_none -}}</a></h1>
                     </div>
