@@ -22,7 +22,14 @@
 			display: table-cell
 
 	&__information
+		+font-smoothing
+		padding: em(10px) 0 em(35px)
+		vertical-align: middle
+		+respond-max($break-phablet-min)
+			position: relative
+			z-index: 1
 		+respond-min($break-phablet-min)
+			padding: em(30px) 0 em(20px)
 			width: 65%
 		+respond-min($break-tablet-min)
 			width: 70%
@@ -48,15 +55,6 @@
 		padding-bottom: 100%
 		position: relative
 		overflow: hidden
-
-	&__information
-		padding: em(10px) 0 em(35px)
-		vertical-align: middle
-		+respond-max($break-phablet-min)
-			position: relative
-			z-index: 1
-		+respond-min($break-phablet-min)
-			padding: em(30px) 0 em(20px)
 
 	&__column-details
 		color: $charcoal
