@@ -1,19 +1,25 @@
 .paragraph
-  font-family: $font-franziska
-  font-size: remify(18px)
-  line-height: 1.4
-  margin-bottom: .6em
-  +respond-min($break-tablet-min)
-    line-height: 1.5
-  +respond-min($break-desktop-min)
-    font-size: remify(20px)
-  a
-    border-bottom: 1px solid rgba($color-link--default, .5)
-    +transition-property(border-bottom-color color)
-    +transition-duration(.2s)
-    &:focus
-      border-bottom-color: rgba($color-link--focus, .5)
-    &:hover
-      border-bottom-color: rgba($color-link--hover, .5)
-    &:active
-      border-bottom-color: rgba($color-link--active, .5)
+    font-family: $font-franziska
+    font-size: remify(18px)
+    line-height: 1.4
+    margin-bottom: .6em
+
+    +respond-min($break-tablet-min)
+        line-height: 1.5
+
+    +respond-min($break-desktop-min)
+        font-size: remify(20px)
+
+    a
+        border-bottom: 1px solid rgba($color-link--default, .5)
+        +transition-property(border-bottom-color color)
+        +transition-duration(.2s)
+
+        &:focus
+            border-bottom-color: rgba($color-link--focus, .5)
+
+        &:hover
+            border-bottom-color: rgba($color-link--hover, .5)
+
+        &:active
+            border-bottom-color: rgba($color-link--active, .5)
