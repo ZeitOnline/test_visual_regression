@@ -81,6 +81,10 @@ class IPlace(zope.interface.Interface):
     """
 
 
+class IContentAdBlock(zope.interface.Interface):
+    """A space for an iqd content ad"""
+
+
 class IIqdMobileList(zope.interface.Interface):
     """A set of iqd ids for a certain ressort.
     """
