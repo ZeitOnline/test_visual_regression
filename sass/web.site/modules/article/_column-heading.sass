@@ -5,6 +5,7 @@
 	// general colour and positioning
 	&__upper
 		background-color: $trout
+		padding: 0 $page-padding
 
 	&__lower
 		background-color: $cararra
@@ -15,9 +16,6 @@
 
 	&__inner
 		position: relative
-		+respond-max($break-desktop-min)
-			margin-left: $page-padding
-			margin-right: $page-padding
 
 	// author and title
 	&__author,
@@ -37,6 +35,8 @@
 			width: 65%
 		+respond-min($break-tablet-min)
 			width: 70%
+		a
+			+link-colors(inherit, $white, $white, inherit, $white)
 
 	&__author
 		+respond-max($break-phablet-min)
@@ -70,8 +70,6 @@
 		letter-spacing: $zon-letter-spacing-m
 		margin-bottom: em(3px)
 		font-size: $font-m--rem
-		&__link
-			+link-colors($charcoal, $white, $white, $charcoal, $white)
 
 	&__title
 		display: block
@@ -100,5 +98,3 @@
 		+respond-min($break-tablet-min)
 			font-size: remify(32px)
 			line-height: 1.5
-		a
-			+link-colors($cararra, $white, $white, $cararra, $white)
