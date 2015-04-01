@@ -65,7 +65,7 @@
 {% endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h2 class="article__item article__subheading">
+    <h2 class="article__subheading article__item">
         {{ intertitle|striptags }}
     </h2>
 {%- endmacro %}
@@ -83,14 +83,14 @@
 {%- endmacro %}
 
 {% macro place(item) -%}
-{#
     {{ lama_core.adplace(item, view) }}
     {{ lama_core.adplace_middle_mobile(item) }}
-#}
 {%- endmacro %}
 
 {% macro contentadblock(item) -%}
+{#
     {{ lama_core.content_ad_article(view) }}
+#}
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}
