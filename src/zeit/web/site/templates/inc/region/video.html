@@ -1,21 +1,13 @@
-{% if view.area_videostage %}
 <section class="video-stage" id="video-stage">
     {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) #}
     <header>
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
 
-    <div class="video-stage-main">
-        {% set video = view.area_videostage.videos[0] %}
-        {% include "zeit.web.site:templates/inc/videostage/video-large.tpl" %}
-    </div>
-
-    <div class="video-stage-secondary">
-        <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
-        {% for video in view.area_videostage.videos[1:4] %}
-            {% include "zeit.web.site:templates/inc/videostage/video-small.tpl" %}
-        {% endfor %}
-    </div>
+    {% for area in region %}
+        {% include ["zeit.web.site:templates/inc/area/" + area.layout + ".html",
+                    "zeit.web.site:templates/inc/area/default.html"] ignore missing %}
+    {% endfor %}
 
     <footer class="video-stage-footer">
         <div class="video-series">
@@ -32,4 +24,3 @@
         <a class="video-centerpage-link" href="{{ 'http://xml.zeit.de/video' | translate_url }}">Alle Videos</a>
     </footer>
 </section>
-{% endif %}

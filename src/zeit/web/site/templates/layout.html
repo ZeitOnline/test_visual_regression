@@ -61,6 +61,7 @@
     </noscript>
 
     {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
+    {%- block content_ad_script -%}{%- endblock -%}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}" data-adDeliveryType="{{view.ad_delivery_type}}">
     <!-- tracking at top -->
@@ -97,19 +98,19 @@
                 {% endblock navigation %}
                 {% block metadata %}
                 {% endblock metadata %}
-                {% block breaking_news %}
-                    {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
-                {% endblock breaking_news %}
             </header>
+            {% block breaking_news %}
+                {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
+            {% endblock breaking_news %}
             {% endprofile %}
             {% block adplace_billboard %}
                 {{ lama_core.adplace(view.banner(3), view) }}
             {% endblock adplace_billboard %}
-            <main class="main" id="main" role="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' |  with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
             </main>
             {% profile %}
-            <footer class="footer" role="contentinfo">
+            <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
                 {% block footer %}
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}

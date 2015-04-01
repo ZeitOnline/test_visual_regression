@@ -53,7 +53,7 @@ def test_breaking_news_article_renders_breaking_bar(testbrowser, testserver):
         testserver.url)).cssselect
 
     assert len(select('.breaking-news-banner')) == 1
-    assert len(select('.article-heading--breaking-news')) == 1
+    assert len(select('.breaking-news-heading')) == 1
 
 
 def test_schema_org_main_content_of_page(testbrowser, testserver):

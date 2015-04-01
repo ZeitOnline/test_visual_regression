@@ -52,3 +52,15 @@ def is_breaking_news(context, request):
 class BreakingNews(zeit.web.core.view_article.Article,
                    zeit.web.site.view.Base):
     pass
+
+
+def is_column_article(context, request):
+    return getattr(context, 'serie', None) and context.serie.column
+
+
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_column_article),
+             renderer='templates/column.html')
+class ColumnArticle(Article, zeit.web.core.view_article.Article):
+    pass

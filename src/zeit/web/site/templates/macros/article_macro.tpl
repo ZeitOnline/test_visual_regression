@@ -7,7 +7,7 @@
             {%- if loop -%}
                 slide
             {%- elif obj.layout == 'large' -%}
-                stage--large
+                article__item article__item--wide
             {%- endif -%}
             ">
             <div class="scaled-image">
@@ -65,7 +65,7 @@
 {% endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h2 class="article__subheading">
+    <h2 class="article__item article__subheading">
         {{ intertitle|striptags }}
     </h2>
 {%- endmacro %}
@@ -77,7 +77,7 @@
             u'viel durchwanderten und umkämpften Land. Auch die deutsche '
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
-    <p class="paragraph">
+    <p class="paragraph article__item">
         {{ html | safe}}
     </p>
 {%- endmacro %}
@@ -87,6 +87,10 @@
     {{ lama_core.adplace(item, view) }}
     {{ lama_core.adplace_middle_mobile(item) }}
 #}
+{%- endmacro %}
+
+{% macro contentadblock(item) -%}
+    {{ lama_core.content_ad_article(view) }}
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}

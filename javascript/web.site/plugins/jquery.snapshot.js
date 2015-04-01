@@ -16,11 +16,11 @@
 
     $.fn.snapshot = function( options ) {
         var defaults = $.extend({
-                triggerElement: '.main__parquet'
+                triggerElement: '.cp-region.snapshot'
             }, options),
             that = this;
         return this.each( function() {
-            $( defaults.triggerElement ).on( 'inview', function( evt ) {
+            $( defaults.triggerElement ).prev().on( 'inview', function( evt ) {
                 $( that ).addClass('snapshot--blurred');
                 $( that ).show(0, function() {
                     // change html5 prop "hidden" (which is more accessible)

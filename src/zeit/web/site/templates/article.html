@@ -3,9 +3,24 @@
 
 {% macro render_page(page) %}
     {% for item in page %}
-        {{ (blocks[item | block_type] or blocks["no_block"])(item)}}
+        {{ (blocks[item | block_type] or blocks["no_block"])(item) }}
     {% endfor %}
 {% endmacro %}
+
+{% block content_ad_script -%}
+{% if view.context.advertising_enabled %}
+<!-- content ad script, commented out until toggled -->
+<!--script type="text/javascript">
+    (function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = document.location.protocol + '//cdn.iqcontentplatform.de/iq.js';
+        var sc = document.getElementsByTagName('script')[0]; sc.parentNode.insertBefore(s, sc);
+    })();
+</script-->
+{% endif %}
+{%- endblock %}
 
 
 {% block article_pages %}

@@ -3,6 +3,10 @@
 	&__media
 		@extend %teaser-media
 		@extend %teaser-small-media
+		// @todo show 1st image "sometimes"
+		// (when there is no fullwidth teaser above)
+		+respond-max($break-phablet-min)
+			display: none
 	&__media-item
 		@extend %teaser-media-item
 	&__container
@@ -25,23 +29,3 @@
 		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
-
-// only first small teaser in collection displays image in mobile mode
-// all others are hidden
-// first-of-type does not work in IE < 9 so we'll fix it in the IE stylesheet
-+respond-max($break-phablet-min)
-	.teaser-collection--main
-		.teaser-small
-			.teaser-small__media
-				display: none
-
-	.teaser-collection--main
-		.teaser-small:first-of-type
-			.teaser-small__media
-				display: block
-
-	.main__fullwidth + .main__content .teaser-collection--main
-		.teaser-small:first-of-type
-			.teaser-small__media
-				display: none
-

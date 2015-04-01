@@ -2,6 +2,7 @@
 import datetime
 import re
 
+import requests
 import lxml
 import mock
 import pytest
@@ -62,10 +63,9 @@ def test_area_main_should_filter_teasers(application):
     cp = zeit.web.site.view_centerpage.Centerpage(context, request)
 
     assert len(cp.area_main) == 2
-    assert cp.area_main[0][0] == 'zon-large'
-    assert cp.area_main[0][1] == 'article'
-    assert cp.area_main[1][0] == 'zon-small'
-    assert cp.area_main[0][1] == 'article'
+    assert cp.area_main[0].layout.id == 'zon-large'
+    assert cp.area_main[1].layout.id == 'zon-small'
+    assert list(cp.area_main[0])[0] == 'article'
 
 
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
@@ -151,25 +151,23 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No comment text present')
 
 
-def test_first_small_teaser_has_image_on_mobile_mode(
+def test_first_small_teaser_has_no_image_on_mobile_mode(
         selenium_driver, testserver):
-
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('teaser-collection')[0]
+    box = driver.find_elements_by_class_name('lead')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
-    assert first.is_displayed(), 'image is not displayed'
+    assert first.is_displayed() is False, 'image is displayed'
     assert second.is_displayed() is False, 'image is displayed'
 
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
-
     browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
 
-    teaser_box = browser.cssselect('.teasers-fullwidth')
+    teaser_box = browser.cssselect('.cp-area.fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth')
 
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
@@ -192,14 +190,14 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         # test ipad width
         assert helper.size.get('width') == 574
     elif screen_size[0] == 980:
-        assert helper.size.get('width') == 626
+        assert helper.size.get('width') == 640
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    articles = browser.cssselect('.teaser-collection--main .teasers article')
+    articles = browser.cssselect('#main .cp-region .cp-area.lead article')
     assert len(articles) == 3, 'We expect 3 articles here'
 
 
@@ -236,7 +234,7 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     image = browser.cssselect(
-        '#main .teaser-collection .teasers'
+        '#main .cp-region .cp-area'
         ' article:first-of-type figure.scaled-image'
         ' a > img')
     assert len(image) == 1, 'Only one image for first article'
@@ -245,7 +243,7 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
 def test_image_should_be_on_position_b(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('#main .teaser-collection .teasers article')
+    articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[0][0][1].tag == 'figure', 'This position should haz image'
 
@@ -253,7 +251,7 @@ def test_image_should_be_on_position_b(testserver, testbrowser):
 def test_image_should_be_on_position_a(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('#main .teaser-collection .teasers article')
+    articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[1][0].tag == 'figure', 'An img should be on this position'
 
@@ -263,7 +261,7 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .teaser-collection .teasers article figure noscript')
+        '#main .cp-region .cp-area article figure noscript')
     assert len(noscript) == 2, 'No noscript areas found'
 
 
@@ -300,13 +298,13 @@ def test_centerpage_view_should_have_topic_links():
                           ('Label 3', 'http://link_3')]
 
 
-def test_main_areas_should_be_rendered_correctly(testserver, testbrowser):
+def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
 
-    fullwidth = browser.cssselect('.main .main__fullwidth')
-    content = browser.cssselect('.main .main__content')
-    informatives = browser.cssselect('.main .main__informatives')
+    fullwidth = browser.cssselect('.cp-area.fullwidth')
+    content = browser.cssselect('.cp-area.cp-area--twothirds.lead')
+    informatives = browser.cssselect('.cp-area.cp-area--onethird.informatives')
 
     assert len(fullwidth) == 1, 'We expect 1 div here'
     assert len(content) == 1, 'We expect 1 div here'
@@ -459,13 +457,13 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
         'Copyright text hast no copyright sign with non breaking space')
 
 
-def test_snapshot_should_not_be_display_where_no_snapshot_is_present(
+def test_snapshot_should_not_be_displayed_where_no_snapshot_is_present(
         testserver, testbrowser):
 
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    assert not browser.cssselect('.snapshot'), (
+    assert not browser.cssselect('#snapshot'), (
         'There is an snaphot on a page which should not have one')
 
 
@@ -617,13 +615,11 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
         assert False, 'Video not visible with 10 seconds'
 
 
-def test_area_printbox_should_contain_teaser_image(testserver):
+def test_module_printbox_should_contain_teaser_image(testserver):
     mycp = mock.Mock()
     view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
-    view.area_printbox.image
-    isinstance(
-        view.area_printbox.image,
-        zeit.content.image.image.RepositoryImage)
+    image = view.module_printbox[0].image
+    assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
 
 def test_homepage_indentifies_itself_as_homepage(testserver):
@@ -728,3 +724,8 @@ def test_centerpage_metadata(testbrowser, testserver):
 
     assert len(html('.header__date')) == 1, 'just one .header__date'
     assert html('.header__date')[0].text == date, 'Date is invalid'
+
+
+def test_new_centerpage_renders(testserver):
+    resp = requests.get('%s/index' % testserver.url)
+    assert resp.ok
