@@ -491,7 +491,7 @@ def test_parquet_should_have_rows(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     assert len(view.area_parquet) == 4, (
-        'View has invald number of parquet rows.')
+        'View contains {} parquet rows instead of 4' % len(view.area_parquet))
 
 
 def test_parquet_row_should_have_teasers(application):
@@ -499,8 +499,8 @@ def test_parquet_row_should_have_teasers(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
     teasers = view.area_parquet[0]
-    assert len(teasers) == 4, (
-        'Parquet row does not contain 4 teasers.')
+    assert len(teasers) == 6, (
+        'Parquet row contains %s teasers instead of 4' % len(teasers))
 
 
 def test_parquet_should_render_desired_amount_of_teasers(
