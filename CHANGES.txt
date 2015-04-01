@@ -4,6 +4,8 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- ZON-1573: Downgrade videostage from region to module
+
 - ZON-1550: Prepare test cp and render it with the new view
 
 - ZON-1540: Adapt to zeit.content.cp 3.0 API changes
