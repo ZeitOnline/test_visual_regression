@@ -4,7 +4,7 @@
 
 {% block teaser_media_position_before_teaser %}{% endblock %}
 
-<article class="{% block layout %}{{ layout }}{% endblock %} {% block teaser_modifier %}{% endblock %}"{% if teaser_block %} data-block-type="{{ teaser_block.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}">
+<article class="{% block layout %}{{ layout }}{% endblock %} {% block teaser_modifier %}{% endblock %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}">
 
     {% block teaser_media_position_before_title %}{% endblock %}
 

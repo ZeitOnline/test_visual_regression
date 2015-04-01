@@ -8,11 +8,11 @@ Available attributes:
 
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context -%}
 
-{%- set teaser_block = view.nextread -%}
+{%- set module = view.nextread -%}
 
-<aside class="article__nextread nextread-{{ teaser_block.layout.id }} is-centered">
-    <div class="article__nextread__lead">{{ teaser_block.lead }}</div>
+<aside class="article__nextread nextread-{{ module.layout.id }} is-centered">
+    <div class="article__nextread__lead">{{ module.lead }}</div>
     <div class="article__nextread__wrap">
-        {{ cp.include_teaser(teaser_block, 'zmo-nextread-') }}
+        {{ cp.include_teaser(module, 'zmo-nextread-') }}
     </div>
 </aside>

@@ -1,4 +1,4 @@
-{% for layout, teaser, teaser_block in view.area_main -%}
-    {% include ["zeit.web.site:templates/inc/teaser/" + teaser_block | get_teaser_layout + ".tpl",
+{% for layout, teaser, module in view.area_main -%}
+    {% include ["zeit.web.site:templates/inc/teaser/" + module | get_teaser_layout + ".tpl",
                 "zeit.web.site:templates/inc/teaser/default.tpl"] %}
 {% endfor %}

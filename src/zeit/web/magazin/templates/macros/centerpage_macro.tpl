@@ -1,21 +1,21 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% macro include_teaser_block(obj) -%}
+{% macro include_module(obj) -%}
     {% if obj -%}
-        {% for teaser_block in obj -%}
-            {% if teaser_block.layout -%}
-                {{ include_teaser(teaser_block) }}
+        {% for module in obj -%}
+            {% if module.layout -%}
+                {{ include_teaser(module) }}
             {% endif %}
         {% endfor %}
     {% endif %}
 {%- endmacro %}
 
-{% macro include_teaser_block_with_ad(obj) -%}
+{% macro include_module_with_ad(obj) -%}
     {% if obj -%}
-        {% for teaser_block in obj -%}
-            {% if teaser_block.layout -%}
-                {{ include_teaser(teaser_block) }}
+        {% for module in obj -%}
+            {% if module.layout -%}
+                {{ include_teaser(module) }}
 
                 {% if (loop.index == 2 or loop.last) and (added is not defined) -%}
                     <!-- special ad integration by counter -->
@@ -27,17 +27,17 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro include_teaser(teaser_block, prefix) -%}
+{% macro include_teaser(module, prefix) -%}
     {% if prefix is not defined -%}
         {% set prefix = '' -%}
     {% endif %}
-    {% if teaser_block is iterable -%}
-        {% for teaser in teaser_block %}
-            {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + teaser_block.layout.id + '.html',
+    {% if module is iterable -%}
+        {% for teaser in module %}
+            {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + module.layout.id + '.html',
             'zeit.web.magazin:templates/inc/teaser/default.html'] ignore missing %}
         {% endfor %}
-    {% elif teaser_block.type == 'fullgraphical' %}
-        {% include 'zeit.web.magazin:templates/inc/teaser/' + prefix + teaser_block.type + '.html' %}
+    {% elif module.type == 'fullgraphical' %}
+        {% include 'zeit.web.magazin:templates/inc/teaser/' + prefix + module.type + '.html' %}
     {% endif %}
 {%- endmacro %}
 
