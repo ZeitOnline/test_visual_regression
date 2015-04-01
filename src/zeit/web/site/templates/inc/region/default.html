@@ -1,6 +1,6 @@
 <div class="cp-region {{ region.layout | hide_none }}">
-    {% for area in region %}
-        {%- include ["zeit.web.site:templates/inc/area/" + area.layout + ".html",
+    {% for area in region.values() %}
+        {%- include ["zeit.web.site:templates/inc/area/" + area.layout.id + ".html",
                      "zeit.web.site:templates/inc/area/default.html"] ignore missing -%}
     {% endfor %}
 </div>

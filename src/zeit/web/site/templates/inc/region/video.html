@@ -4,7 +4,7 @@
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
 
-    {% for area in region %}
+    {% for area in region.values() %}
         {% include ["zeit.web.site:templates/inc/area/" + area.layout + ".html",
                     "zeit.web.site:templates/inc/area/default.html"] ignore missing %}
     {% endfor %}
