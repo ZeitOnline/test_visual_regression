@@ -48,7 +48,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      */
     rescaleOne = function( image ) {
         var $img = $( image ),
-            $parent = $img.parent(),
+            $parent = $img.closest( '.scaled-image' ),
             msieWidth = false,
             width, height, token, source;
 
