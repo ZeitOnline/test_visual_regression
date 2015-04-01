@@ -6,8 +6,8 @@
         {% for teaser in teaser_block -%}
             {% with -%}
                 {% set index = loop.index %}
-                {% include ["zeit.web.site:templates/inc/teaser/" + teaser_block.layout + ".tpl",
-                            "zeit.web.site:templates/inc/teaser/buzz.tpl"] with context %}
+                {% set layout = teaser_block.layout %}
+                {% include "zeit.web.site:templates/inc/teaser/" + teaser_block.layout + ".tpl" with context %}
             {%- endwith %}
         {%- endfor %}
     </div>
