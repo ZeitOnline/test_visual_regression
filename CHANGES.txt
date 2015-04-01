@@ -4,6 +4,8 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- ZON-1540: Adapt to zeit.content.cp 3.0 API changes
+
 - ZON-1539: Add view for new centerpages
 
 - ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
