@@ -8,13 +8,17 @@ Change log for zeit.web
 
 - ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
 
+- ZON-1493: Implement column article :sunglasses:
+
+- Fix border-width in navigation
+
 
 1.18.1 (2015-03-24)
 -------------------
 
-- Fixed ZMO menu icon
+- Fix ZMO menu icon
 
-- Fixed width of fullwidth teaser
+- Fix width of fullwidth teaser
 
 
 1.18 (2015-03-20)
