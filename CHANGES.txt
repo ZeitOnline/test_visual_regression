@@ -6,11 +6,13 @@ Change log for zeit.web
 
 - ZON-1539: Add view for new centerpages
 
-- ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
+- BUG-168: Fix nextread glitch
+
+- Fix border-width in navigation
 
 - ZON-1493: Implement column article :sunglasses:
 
-- Fix border-width in navigation
+- ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
 
 
 1.18.1 (2015-03-24)
