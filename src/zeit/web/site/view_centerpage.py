@@ -83,15 +83,6 @@ class LegacyCenterpage(
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
-    def last_semantic_change(self):
-        """Timestamp representing the last semantic change of the centerpage.
-        :rtype: datetime.datetime
-        """
-
-        return zeit.cms.content.interfaces.ISemanticChange(
-            self.context).last_semantic_change
-
-    @zeit.web.reify
     def regions(self):
         regions = []
 
@@ -132,31 +123,31 @@ class LegacyCenterpage(
         :rtype: list
         """
 
-        def valid_block(b):
-            return zeit.web.core.template.get_teaser_layout(b) not in (
+        def valid_module(m):
+            return zeit.web.core.template.get_teaser_layout(m) not in (
                 'zon-fullwidth', None)
 
-        lead = self.context.values()[0]['lead']
+        area = self.context.values()[0]['lead']
         return LegacyArea(
-            [b for b in lead.itervalues() if valid_block(b)],
+            [m for m in area.itervalues() if valid_module(m)],
             layout='lead', width='2/3')
 
     @zeit.web.reify
     def area_parquet(self):
-        def valid_bar(b):
+        def valid_area(a):
             try:
-                return b.layout.id in ('parquet',)
+                return a.layout.id in ('parquet',)
             except AttributeError:
                 return
 
-        def valid_block(b):
-            return zeit.web.core.template.get_teaser_layout(b) in (
+        def valid_module(m):
+            return zeit.web.core.template.get_teaser_layout(m) in (
                 'zon-parquet-large', 'zon-parquet-small') or getattr(
-                b, 'cpextra', None) in ('parquet-spektrum',)
+                m, 'cpextra', None) in ('parquet-spektrum',)
 
-        parquet = self.context.values()[1]
-        return [b for bar in parquet.itervalues() if
-                valid_bar(bar) for b in bar.itervalues() if valid_block(b)]
+        region = self.context.values()[1]
+        return [m for area in region.itervalues() if
+                valid_area(area) for m in area.itervalues() if valid_module(m)]
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -164,18 +155,18 @@ class LegacyCenterpage(
         :rtype: list
         """
 
-        def valid_block(b):
-            return zeit.web.core.template.get_teaser_layout(b) in (
+        def valid_module(m):
+            return zeit.web.core.template.get_teaser_layout(m) in (
                 'zon-fullwidth',)
 
         lead = self.context.values()[0]['lead']
         return LegacyArea(
-            [b for b in lead.itervalues() if valid_block(b)])
+            [m for m in lead.itervalues() if valid_module(m)])
 
     @zeit.web.reify
     def area_informatives(self):
-        return LegacyArea([b for b in (
-            self.module_buzz_mostread, self.module_printbox) if b],
+        return LegacyArea([m for m in (
+            self.module_buzz_mostread, self.module_printbox) if m],
             layout='informatives', width='1/3')
 
     @zeit.web.reify
@@ -278,6 +269,15 @@ class LegacyCenterpage(
             return LegacyModule([snapshot], layout='snapshot')
         except TypeError:
             return
+
+    @zeit.web.reify
+    def last_semantic_change(self):
+        """Timestamp representing the last semantic change of the centerpage.
+        :rtype: datetime.datetime
+        """
+
+        return zeit.cms.content.interfaces.ISemanticChange(
+            self.context).last_semantic_change
 
     @zeit.web.reify
     def topiclink_title(self):
