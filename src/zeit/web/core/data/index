@@ -51,13 +51,24 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+        <topiclinks>
+            <topiclink_title>Schwerpunkte</topiclink_title>
+            <topiclink>
+                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+                <topiclink_label_2>Bundeswehr</topiclink_label_2>
+                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+                <topiclink_label_3>Hongkong</topiclink_label_3>
+                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+            </topiclink>
+        </topiclinks>
     </head>
     <body>
         <title>CP-Editor 0.4</title>
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" width="1/1">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -76,9 +87,9 @@
             </region>
         </cluster>
         <cluster area="feature" visible="True">
-            <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knï¿½pfe Teil 1" visible="True">
-                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="buttons" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+            <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
+                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -94,8 +105,8 @@
                         </author>
                     </block>
                 </container>
-                <container cp:__name__="id-bab27568-9d14-4553-ab74-70310bf45317" cp:type="teaser" hide-dupes="True" module="buttons" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+                <container cp:__name__="id-bab27568-9d14-4553-ab74-70310bf45317" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/kolumne" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -111,8 +122,8 @@
                         </author>
                     </block>
                 </container>
-                <container cp:__name__="id-6a370fea-c678-46ac-b546-dc1d30143978" cp:type="teaser" hide-dupes="True" module="leader-panorama" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+                <container cp:__name__="id-6a370fea-c678-46ac-b546-dc1d30143978" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-05" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-05" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -128,8 +139,8 @@
                         </author>
                     </block>
                 </container>
-                <container cp:__name__="id-0e4c300a-813a-4549-95a7-2ccde49167fe" cp:type="teaser" hide-dupes="True" module="buttons" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+                <container cp:__name__="id-0e4c300a-813a-4549-95a7-2ccde49167fe" cp:type="teaser" hide-dupes="True" module="zon-large" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -148,7 +159,7 @@
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" width="1/3">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="one-third-small" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -163,7 +174,7 @@
                             <display_name>Test Mann</display_name>
                         </author>
                     </block>
-                    <block author="Test Mann" contenttype="article" date-first-released="2010-09-28T14:47:21.340730+00:00" date-last-modified="2014-07-17T14:02:48+00:00" date-last-published="2012-07-20T03:48:01+00:00" expires="" genre="gastbeitrag" href="http://xml.zeit.de/politik/deutschland/2010-09/iran-markfitzpatrick-atomprogramm" issue="39" last-semantic-change="2014-07-17T14:02:47.393607+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/politik/deutschland/2010-09/iran-markfitzpatrick-atomprogramm" year="2010">
+                    <block author="Test Mann" contenttype="article" date-first-released="2010-09-28T14:47:21.340730+00:00" date-last-modified="2014-07-17T14:02:48+00:00" date-last-published="2012-07-20T03:48:01+00:00" expires="" genre="gastbeitrag" href="http://xml.zeit.de/zeit-online/article/01" issue="39" last-semantic-change="2014-07-17T14:02:47.393607+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2010">
                         <supertitle>Atomstreit</supertitle>
                         <title>&quot;Ein Kalter Krieg mit Iran ist das optimistische Szenario&quot;</title>
                         <text>Wir mï¿½ssen akzeptieren, dass Iran irgendwann fï¿½hig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fï¿½higkeit bleibe.</text>
@@ -181,14 +192,71 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="teaser-mosaic" visible="True">
-            <region area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" visible="True" width="1/2"/>
-            <region area="id-76a16784-b3f0-487f-a2cb-b5cecf4daf9e" visible="True" width="1/2"/>
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff4" visible="True">
+            <region area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" visible="True" width="1/2">
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
+                        <supertitle>CP-Editor</supertitle>
+                        <title>Universaler Testartikel 2.0</title>
+                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
+                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
+                        <byline/>
+                        <breadcrumb_title/>
+                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
+                            <bu>Jelly danish pudding chocolate cake.</bu>
+                            <copyright>ï¿½ ZEIT ONLINE</copyright>
+                        </image>
+                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
+                            <display_name>Test Mann</display_name>
+                        </author>
+                    </block>
+                </container>
+            </region>
+            <region area="id-76a16784-b3f0-487f-a2cb-b5cecf4daf9e" visible="True" width="1/2">
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
+                        <supertitle>CP-Editor</supertitle>
+                        <title>Universaler Testartikel 2.0</title>
+                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
+                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
+                        <byline/>
+                        <breadcrumb_title/>
+                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
+                            <bu>Jelly danish pudding chocolate cake.</bu>
+                            <copyright>ï¿½ ZEIT ONLINE</copyright>
+                        </image>
+                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
+                            <display_name>Test Mann</display_name>
+                        </author>
+                    </block>
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff7" visible="True">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" width="1/1">
+                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
+                        <supertitle>CP-Editor</supertitle>
+                        <title>Universaler Testartikel 2.0</title>
+                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
+                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
+                        <byline/>
+                        <breadcrumb_title/>
+                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
+                            <bu>Jelly danish pudding chocolate cake.</bu>
+                            <copyright>ï¿½ ZEIT ONLINE</copyright>
+                        </image>
+                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
+                            <display_name>Test Mann</display_name>
+                        </author>
+                    </block>
+                </container>
+            </region>
         </cluster>
         <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True">
-            <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knï¿½pfe Teil 2" visible="True" width="2/3">
+            <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 2" visible="True" width="2/3">
                 <container cp:__name__="id-7948b50a-f6b3-485a-baae-9b6d00b67cd4" cp:type="teaser" hide-dupes="True" module="buttons" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" year="2008">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
                         <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
@@ -207,532 +275,8 @@
             </region>
             <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" width="1/3"/>
         </cluster>
-        <cluster area="id-1bdaddc5-c997-470d-8a82-930e718a8a4f" visible="True"/>
-        <cluster area="id-02365a23-9643-4812-8d1b-0faa49a198fd" visible="True">
-            <region area="id-1811e455-6b44-4919-b898-0b2da947ed8d" module="parquet" visible="True" width="1/1">
-                <container cp:__name__="id-5f9dffba-1a3e-44a7-a9b9-dc7f351d98fc" cp:type="teaser" display-amount="2" hide-dupes="True" module="parquet-regular" read_more="mehr Politik" read_more_url="http://www.zeit.de/politik/index" title="Politik" visible="True">
-                    <block contenttype="article" date-first-released="2012-08-15T13:33:32.856822+00:00" date-last-modified="2012-08-15T13:32:33+00:00" date-last-published="2012-08-15T13:33:32.856822+00:00" expires="" href="http://xml.zeit.de/politik/ausland/2012-08/syrien-innere-perspektive" issue="33" last-semantic-change="2012-08-15T13:26:24.045516+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/politik/ausland/2012-08/syrien-innere-perspektive" year="2012">
-                        <supertitle>Bï¿½rgerkrieg</supertitle>
-                        <title>Assads letzte Tage kï¿½nnen noch Jahre dauern</title>
-                        <text>Die syrische Bloggerin Jasmine Roman schreibt ï¿½ber den Krieg in ihrem Land, der ein konfessioneller geworden ist. Und der auch nach dem Sturz Assads andauern kï¿½nnte.</text>
-                        <description>Die syrische Bloggerin Jasmine Roman schreibt ï¿½ber den Krieg in ihrem Land, der ein konfessioneller geworden ist. Und der auch nach dem Sturz Assads andauern kï¿½nnte.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" alt="Damaskus" base-id="http://xml.zeit.de/politik/ausland/2012-08/Damaskus/" expires="" publication-date="" title="Damaskus" type="jpg">
-                            <bu>In einem Vorort der syrischen Hauptstadt Damaskus, 21. Juli</bu>
-                            <copyright>ï¿½ Reuters</copyright>
-                        </image>
-                    </block>
-                    <referenced_cp>http://xml.zeit.de/politik/index</referenced_cp>
-                    <autopilot>true</autopilot>
-                    <block author="Josef Joffe" contenttype="article" expires="" genre="leserartikel" href="http://xml.zeit.de/politik/ausland/2014-10/automatisch-platzierter-politik-artikel" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/politik/ausland/2014-10/automatisch-platzierter-politik-artikel" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>Neuer Aufmacher</supertitle>
-                        <title>Automatisch platzierter Politik-Artikel 1</title>
-                        <text>Dieser Artikel soll neuer Aufmacher auf der automatischen CP zum NSA-Untersuchungsausschuss werden</text>
-                        <description>Dieser Artikel soll neuer Aufmacher auf der automatischen CP zum NSA-Untersuchungsausschuss werden</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                            <bu/>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/J/Josef_Joffe-2/index" publication-date="">
-                            <display_name>Josef Joffe</display_name>
-                        </author>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/2014-11/timtest2" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/2014-11/timtest2" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>neue Spitzmarke</supertitle>
-                        <title>2. Test</title>
-                        <text>hier kommt text</text>
-                        <description>hier kommt text</description>
-                        <byline/>
-                        <breadcrumb_title>Nachrichtenï¿½berschrift text</breadcrumb_title>
-                        <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                            <bu/>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/2014-11/timtest" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/2014-11/timtest" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>test fï¿½r query</supertitle>
-                        <title>test fï¿½r query</title>
-                        <text>test fï¿½r query</text>
-                        <description>test fï¿½r query</description>
-                        <byline/>
-                        <breadcrumb_title>test fï¿½r query</breadcrumb_title>
-                        <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" expires="" publication-date="" type="jpg">
-                            <bu/>
-                            <copyright>ï¿½</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/test/holger/acp-test-hw-2" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/holger/acp-test-hw-2" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>Teaser</supertitle>
-                        <title>ï¿½berschrift</title>
-                        <text/>
-                        <description/>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                            <bu/>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/2014-10/relaunch/artikel-1" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/2014-10/relaunch/artikel-1" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>Tï¿½rkei</supertitle>
-                        <title>Kein Bï¿½rgerkrieg, aber viel Gewalt</title>
-                        <text>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</text>
-                        <description>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                            <bu/>
-                        </image>
-                    </block>
-                    <block contenttype="link" expires="" href="http://xml.zeit.de/2014-10/relaunch/teaser-1" issue="26" ns0:href="http://www.zeit.de/politik/ausland/2014-10/kurden-tuerkei-friedensprozess-kobani" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/2014-10/relaunch/teaser-1" xml:base="../../politik/index.lead" xmlns:ns0="http://namespaces.zeit.de/CMS/link" year="2008">
-                        <supertitle>Tï¿½rkei</supertitle>
-                        <title>Kein Bï¿½rgerkrieg, aber viel Gewalt</title>
-                        <text>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</text>
-                        <description>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                            <bu/>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/politik/deutschland/2014-10/blatest" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/politik/deutschland/2014-10/blatest" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle/>
-                        <title/>
-                        <text/>
-                        <description/>
-                        <byline/>
-                        <breadcrumb_title/>
-                    </block>
-                    <block author="Rï¿½diger Bï¿½ï¿½ler;Anne Mustermann;Armin Mustermann" contenttype="article" expires="" href="http://xml.zeit.de/politik/deutschland/2014-09/elaztest" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/politik/deutschland/2014-09/elaztest" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>Ein Artikel fï¿½rn Newsletter</supertitle>
-                        <title>Hallo News</title>
-                        <text>hier kommt dann teasertext hier kommt dann teasertext .hier kommt dann teasertext .hier kommt dann teasertext .hier kommt dann teasertext .hier kommt dann teasertext .</text>
-                        <description>hier kommt dann teasertext hier kommt dann teasertext .hier kommt dann teasertext .hier kommt dann teasertext .hier kommt dann teasertext .hier kommt dann teasertext .</description>
-                        <byline/>
-                        <breadcrumb_title>Newsletter</breadcrumb_title>
-                        <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" expires="" publication-date="" type="jpg">
-                            <bu/>
-                            <copyright>ï¿½</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/B/Ruediger_Baessler-2/index" publication-date="">
-                            <display_name>Rï¿½diger Bï¿½ï¿½ler</display_name>
-                            <location>Hamburg</location>
-                        </author>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Anne_Mustermann/index" publication-date="">
-                            <display_name>Anne Mustermann</display_name>
-                            <location>Berlin</location>
-                        </author>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Armin_Mustermann/index" publication-date="">
-                            <display_name>Armin Mustermann</display_name>
-                        </author>
-                    </block>
-                    <block author="Bernd Schulz;Rï¿½diger Bï¿½ï¿½ler" contenttype="article" expires="" href="http://xml.zeit.de/politik/2014-09/newsletter" issue="26" publication-date="" ressort="Wissen" uniqueId="http://xml.zeit.de/politik/2014-09/newsletter" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle>Newsletterinhalt</supertitle>
-                        <title>Newsletterinhalt zum Test</title>
-                        <text>ein Newsletter Artikel schaut dann so aus ...</text>
-                        <description>ein Newsletter Artikel schaut dann so aus ...</description>
-                        <byline/>
-                        <breadcrumb_title>ein Newsletter Artikel</breadcrumb_title>
-                        <image align="left" base-id="http://xml.zeit.de/test/wosc/mygroup/" expires="" publication-date="" type="jpg">
-                            <bu>Originalunterschrift</bu>
-                            <copyright link="http://example.com" rel="nofollow">ï¿½me</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/S/Bernd_Schulz/index" publication-date="">
-                            <display_name>Bernd Schulz</display_name>
-                            <location>Hamburg</location>
-                        </author>
-                        <author expires="" href="http://xml.zeit.de/autoren/B/Ruediger_Baessler-2/index" publication-date="">
-                            <display_name>Rï¿½diger Bï¿½ï¿½ler</display_name>
-                        </author>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/test/sonja/automatischer-artikel-5" issue="26" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/test/sonja/automatischer-artikel-5" xml:base="../../politik/index.lead" year="2008">
-                        <supertitle/>
-                        <title>Automatischer Artikel 5</title>
-                        <text/>
-                        <description/>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/2012-05/angela-merkel-energiewende/" expires="" publication-date="" title="Merkel" type="jpg">
-                            <bu>Bundeskanzlerin Angela Merkel</bu>
-                            <copyright>ï¿½ Odd Andersen/AFP/Getty Images</copyright>
-                        </image>
-                    </block>
-                    <topiclinks>
-                        <topiclink href="http://xml.zeit.de/schlagworte/organisationen/nsa/index">NSA-Skandal</topiclink>
-                        <topiclink href="http://xml.zeit.de/schlagworte/themen/koalitionsverhandlung/index">Koalitionsverhandlungen</topiclink>
-                        <topiclink href="http://xml.zeit.de/schlagworte/orte/griechenland/index">Griechenland</topiclink>
-                    </topiclinks>
-                </container>
-            </region>
-        </cluster>
-        <cluster area="id-e6ece1d0-8d64-41cd-987a-6753a2dcbbe8" visible="True">
-            <region area="id-7b9bb306-7e7e-40a2-9372-3149e2cc8625" module="parquet" visible="True" width="1/1">
-                <container cp:__name__="id-7746dbaa-f223-427e-9dd7-8d79180a4d4b" cp:type="teaser" display-amount="2" hide-dupes="True" module="parquet-large" visible="True">
-                    <referenced_cp>http://xml.zeit.de/wirtschaft/index</referenced_cp>
-                    <autopilot>true</autopilot>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/schweiz-banken-singapur" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/schweiz-banken-singapur" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Schweiz</supertitle>
-                        <title>Schweizer Banken verstï¿½rken Engagement in Singapur</title>
-                        <text>Verschieben Schweizer Banken Steuergelder nach Asien? DIE ZEIT hat Daten ausgewertet, die zeigen, dass sie die Geldtransfers nach Singapur drastisch erhï¿½ht haben.</text>
-                        <description>Verschieben Schweizer Banken Steuergelder nach Asien? DIE ZEIT hat Daten ausgewertet, die zeigen, dass sie die Geldtransfers nach Singapur drastisch erhï¿½ht haben.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/skyline-singapur/" expires="2012-11-15T11:35:09+00:00" publication-date="" title="Die Skyline von Singapur" type="jpg">
-                            <bu>Finanzdistrikt in Singapur</bu>
-                            <copyright>ï¿½ dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="link" expires="" href="http://xml.zeit.de/politik/deutschland/2010-08/link-stoerungsmelder-thor-steinar" issue="32" ns1:href="http://blog.zeit.de/stoerungsmelder/2010/08/11/modemarke-thor-steinar-verliert-prozess-gegen-satire-projekt_4197" publication-date="" ressort="Gesellschaft" uniqueId="http://xml.zeit.de/politik/deutschland/2010-08/link-stoerungsmelder-thor-steinar" xml:base="../../wirtschaft/index.lead" xmlns:ns1="http://namespaces.zeit.de/CMS/link" year="2010">
-                        <supertitle>Storch Heinar</supertitle>
-                        <title>Thor Steinar verliert Prozess gegen Satire-Projekt</title>
-                        <text>Storch Heinar darf weitermachen. Ein Gericht hat bestï¿½tigt, dass keine Verwechslungsgefahr mit der bei Neonazis beliebten Marke Thor Steinar besteht. Von Johannes Radke</text>
-                        <description>Storch Heinar darf weitermachen. Ein Gericht hat bestï¿½tigt, dass keine Verwechslungsgefahr mit der bei Neonazis beliebten Marke Thor Steinar besteht. Von Johannes Radke</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2010-08/storch-heinar-110810/" expires="" publication-date="" title="Storch Heinar" type="jpg">
-                            <bu/>
-                            <copyright>ï¿½ Screenshot: Storch Heinar/ZEIT ONLINE</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/mieten-inflation-energie" issue="32" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/mieten-inflation-energie" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Steigende Mieten</supertitle>
-                        <title>Strom, Gas und Heizung sind die Kostentreiber</title>
-                        <text>In der Stadt ist Wohnen teuer; in ganz Deutschland aber sind die Kaltmieten zuletzt nur geringfï¿½gig gestiegen. Dafï¿½r haben sich die Energiepreise mehr als verdoppelt.</text>
-                        <description>In der Stadt ist Wohnen teuer; in ganz Deutschland aber sind die Kaltmieten zuletzt nur geringfï¿½gig gestiegen. Dafï¿½r haben sich die Energiepreise mehr als verdoppelt.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/miethaeuser/" expires="" publication-date="" type="jpg">
-                            <bu>Miethï¿½user in Germering bei Mï¿½nchen (Archivbild)</bu>
-                            <copyright>ï¿½ Alexandra Beier/Getty Images</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/unternehmen/2012-08/bbc-thompson-nytimes" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/unternehmen/2012-08/bbc-thompson-nytimes" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Medien</supertitle>
-                        <title>New York Times holt sich BBC-Chef Thompson</title>
-                        <text>Personalcoup in der Medienbranche: Mark Thompson, Chef der BBC, wechselt zur New York Times. Er soll das verlustreiche Blatt tiefer ins digitale Zeitalter fï¿½hren.</text>
-                        <description>Personalcoup in der Medienbranche: Mark Thompson, Chef der BBC, wechselt zur New York Times. Er soll das verlustreiche Blatt tiefer ins digitale Zeitalter fï¿½hren.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/mark-thomspon/" expires="" publication-date="" title="Mark Thompson" type="jpg">
-                            <bu>Mark Thompson</bu>
-                            <copyright>ï¿½ Nigel Roddis/Reuters</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/wirtschaftsstaatsanwalt-hans-richter" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/wirtschaftsstaatsanwalt-hans-richter" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Hans Richter</supertitle>
-                        <title>Vor diesem Staatsanwalt zittern die Manager</title>
-                        <text>LBBW, Schlecker, EnBW – Hans Richter ist der Staatsanwalt mit den spektakulï¿½rsten Ermittlungsakten in Deutschland. Nun nimmt er es mit Ex-Porsche-Chef Wiedeking auf.</text>
-                        <description>LBBW, Schlecker, EnBW – Hans Richter ist der Staatsanwalt mit den spektakulï¿½rsten Ermittlungsakten in Deutschland. Nun nimmt er es mit Ex-Porsche-Chef Wiedeking auf.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" alt="Oberstaatsanwalt Hans Richter von der Staatsanwaltschaft Stuttgart in seinem Bï¿½ro" base-id="http://xml.zeit.de/wirtschaft/2012-08/hans-richter/" expires="2012-11-14T11:36:33+00:00" publication-date="" title="Hans Richter" type="jpg">
-                            <bu>Oberstaatsanwalt Hans Richter von der Staatsanwaltschaft Stuttgart in seinem Bï¿½ro</bu>
-                            <copyright>ï¿½ Marijan Murat dpa/lsw</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/renten-berechnung-bundesversicherungsamt" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/renten-berechnung-bundesversicherungsamt" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Altersversorgung</supertitle>
-                        <title>Tausende Rentner bekamen jahrelang zu wenig Geld</title>
-                        <text>Das Bundesversicherungsamt hat Tausende Rentenbescheide nach oben korrigiert. Zuschlï¿½ge fï¿½r Verwitwete wurden nicht berï¿½cksichtigt, Ausbildungszeiten falsch berechnet.</text>
-                        <description>Das Bundesversicherungsamt hat Tausende Rentenbescheide nach oben korrigiert. Zuschlï¿½ge fï¿½r Verwitwete wurden nicht berï¿½cksichtigt, Ausbildungszeiten falsch berechnet.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2012-08/rentner/" expires="" publication-date="" title="Senioren-Paar" type="jpg">
-                            <bu>Ein Senioren-Paar in Geesthacht bei Hamburg (Archiv)</bu>
-                            <copyright>ï¿½ Christian Charisius/dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/unternehmen/2012-08/standard-chartered-geldstrafe" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/unternehmen/2012-08/standard-chartered-geldstrafe" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Einigung</supertitle>
-                        <title>Standard Chartered zahlt Geldstrafe fï¿½r Iran-Geschï¿½fte</title>
-                        <text>Die britische Groï¿½bank hat sich mit der New Yorker Finanzaufsicht geeinigt: Weil sie Sanktionen gegen den Iran umgangen hat, akzeptiert sie eine hohe Millionenzahlung.</text>
-                        <description>Die britische Groï¿½bank hat sich mit der New Yorker Finanzaufsicht geeinigt: Weil sie Sanktionen gegen den Iran umgangen hat, akzeptiert sie eine hohe Millionenzahlung.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/standard-chartered-2/" expires="" publication-date="" title="Zentrale der Londoner Bank Standard Chartered" type="jpg">
-                            <bu>Standard Chartered in London</bu>
-                            <copyright>ï¿½ Matthew Lloyd/GettyImages</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/deutschland-zinsniveau-euro-krise" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/deutschland-zinsniveau-euro-krise" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Haushaltspolitik</supertitle>
-                        <title>Wie Deutschland an der Euro-Krise verdient</title>
-                        <text>Wï¿½hrend der Sï¿½den sparen muss, saniert sich der deutsche Haushalt quasi von selbst. Allein die Zinskosten sinken durch die Krise um mehr als 60 Milliarden Euro.</text>
-                        <description>Wï¿½hrend der Sï¿½den sparen muss, saniert sich der deutsche Haushalt quasi von selbst. Allein die Zinskosten sinken durch die Krise um mehr als 60 Milliarden Euro.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/schaeuble-zinsniveau/" expires="" publication-date="" type="jpg">
-                            <bu>Bundesfinanzminister Wolfgang Schï¿½uble</bu>
-                            <copyright>ï¿½ REUTERS/Miguel Vidal</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/2012/32/Bankenskandale-Investment-Zocker" issue="32" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/2012/32/Bankenskandale-Investment-Zocker" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Banken</supertitle>
-                        <title>Investmentsparte abtrennen, den Rest retten</title>
-                        <text>Wegen der vielen Skandale sollen Geschï¿½ftsbanken jetzt wieder ihre Investmentarme abtrennen. Das kï¿½nnte mehr Stabilitï¿½t schaffen. Krisen verhindern wï¿½rde es aber nicht.</text>
-                        <description>Wegen der vielen Skandale sollen Geschï¿½ftsbanken jetzt wieder ihre Investmentarme abtrennen. Das kï¿½nnte mehr Stabilitï¿½t schaffen. Krisen verhindern wï¿½rde es aber nicht.</description>
-                        <byline>Von Arne Storn</byline>
-                        <breadcrumb_title/>
-                        <image align="left" alt="Der Turm der Commerzbank in Frankfurt am Main" base-id="http://xml.zeit.de/wirtschaft/2012-08/bank/" expires="2012-11-10T15:45:26+00:00" publication-date="2012-08-10T14:45:24+00:00" title="bank" type="jpg">
-                            <bu>Der Turm der Commerzbank in Frankfurt am Main</bu>
-                            <copyright>ï¿½ Arne Dedert/dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="link" expires="" href="http://xml.zeit.de/wirtschaft/geldanlage/2012-08/gruene-geldanlage" issue="33" ns0:href="http://blog.zeit.de/gruenegeschaefte/2012/08/14/okofonds-konnen-der-finanzkrise-kaum-trotzen/" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/geldanlage/2012-08/gruene-geldanlage" xml:base="../../wirtschaft/index.lead" xmlns:ns0="http://namespaces.zeit.de/CMS/link" year="2012">
-                        <supertitle>Geldanlage</supertitle>
-                        <title>ï¿½kofonds kï¿½nnen der Finanzkrise kaum trotzen</title>
-                        <text>Wer sein Geld in grï¿½ne Fonds gesteckt hat, um so der Finanzkrise zu entgehen, hat Pech gehabt. Die meisten haben ï¿½hnlich schlecht abgeschnitten wie der restliche Markt.</text>
-                        <description>Wer sein Geld in grï¿½ne Fonds gesteckt hat, um so der Finanzkrise zu entgehen, hat Pech gehabt. Die meisten haben ï¿½hnlich schlecht abgeschnitten wie der restliche Markt.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" alt="Ein Solarpark im Landkreis Regensburg" base-id="http://xml.zeit.de/wirtschaft/geldanlage/2012-08/solarpark/" expires="2012-11-14T15:04:30+00:00" publication-date="" title="Ein Solarpark im Landkreis Regensburg" type="jpg">
-                            <bu>Ein Solarpark im Landkreis Regensburg</bu>
-                            <copyright>ï¿½ dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/unternehmen/2012-08/drogerie-anton-schlecker" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/unternehmen/2012-08/drogerie-anton-schlecker" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Insolvenz</supertitle>
-                        <title>Schleckers falsche Spuren</title>
-                        <text>Vom Vermï¿½gen des Anton Schlecker ist nichts ï¿½brig, und die Firma wird gerettet – das war lange das Mantra des Schlecker-Clans. Nun wandelt sich das Bild. Von R. Bï¿½ï¿½ler</text>
-                        <description>Vom Vermï¿½gen des Anton Schlecker ist nichts ï¿½brig, und die Firma wird gerettet – das war lange das Mantra des Schlecker-Clans. Nun wandelt sich das Bild. Von R. Bï¿½ï¿½ler</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/schlecker-filiale-2/" expires="2012-11-14T09:41:40+00:00" publication-date="" title="Schlecker Filiale" type="jpg">
-                            <bu>Leere Regale stehen in einer Schlecker Filiale in Dï¿½sseldorf</bu>
-                            <copyright>ï¿½ Caroline Seidel/dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/oekosteuer" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/oekosteuer" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>ï¿½kosteuer</supertitle>
-                        <title>Energie verteuern, aber richtig</title>
-                        <text>ï¿½kosteuern sollen der Umwelt nï¿½tzen. Setzt man sie klug um, kï¿½nnen sie zugleich auch sozial gerecht, bezahlbar und gut fï¿½r die Staatskassen sein. Von Kai Schlegelmilch</text>
-                        <description>ï¿½kosteuern sollen der Umwelt nï¿½tzen. Setzt man sie klug um, kï¿½nnen sie zugleich auch sozial gerecht, bezahlbar und gut fï¿½r die Staatskassen sein. Von Kai Schlegelmilch</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/braunkohle/" expires="" publication-date="" type="jpg">
-                            <bu>Liefert rund ein Viertel des deutschen Stroms: Braunkohle, hier eine Grube in der Nï¿½he von Gï¿½rlitz.</bu>
-                            <copyright>ï¿½ John Macdougall/AFP/Getty Images</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/wirtschaft-wachstum-deutschland" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/wirtschaft-wachstum-deutschland" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Konjunktur</supertitle>
-                        <title>Wirtschaft in der Euro-Zone schrumpft</title>
-                        <text>Im zweiten Quartal ist die Wirtschaft in Deutschland zwar leicht gewachsen, in Frankreich aber stagniert. Insgesamt gab es in der Euro-Zone ein Minus von 0,2 Prozent.</text>
-                        <description>Im zweiten Quartal ist die Wirtschaft in Deutschland zwar leicht gewachsen, in Frankreich aber stagniert. Insgesamt gab es in der Euro-Zone ein Minus von 0,2 Prozent.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" alt="Baukrï¿½ne stehen in Essen auf dem Limberger Platz (Archiv)" base-id="http://xml.zeit.de/wirtschaft/2012-08/wirtschaftswachstum/" expires="2012-11-14T07:20:31+00:00" publication-date="" title="Wirtschaftswachstum" type="jpg">
-                            <bu>Baukrï¿½ne stehen in Essen auf dem Limberger Platz (Archiv)</bu>
-                            <copyright>ï¿½ Horst Ossinger/dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/textilindustrie-energiewende" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/textilindustrie-energiewende" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>ï¿½kostrom</supertitle>
-                        <title>Textilindustrie greift Energiewende an</title>
-                        <text>Die Regierung finanziert die Energiewende auch ï¿½ber Zuschlï¿½ge auf den Strompreis. Dieses System aber hï¿½lt die Textilbranche fï¿½r ungerecht und will dagegen vorgehen.</text>
-                        <description>Die Regierung finanziert die Energiewende auch ï¿½ber Zuschlï¿½ge auf den Strompreis. Dieses System aber hï¿½lt die Textilbranche fï¿½r ungerecht und will dagegen vorgehen.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/erneuerbare-energie/" expires="2012-11-14T06:43:51+00:00" publication-date="" title="Erneuerbare Energie" type="jpg">
-                            <bu>Ein Solar-Park in der Eifel (Archiv)</bu>
-                            <copyright>ï¿½ Oliver Berg/dpa</copyright>
-                        </image>
-                    </block>
-                    <block contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/interview-diw-fratzscher" issue="33" publication-date="" ressort="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/2012-08/interview-diw-fratzscher" xml:base="../../wirtschaft/index.lead" year="2012">
-                        <supertitle>Marcel Fratzscher</supertitle>
-                        <title>&quot;Der Tiefpunkt in der Krise ist erreicht&quot;</title>
-                        <text>Durch die Euro-Krise kï¿½nnte Europa stï¿½rker werden, sagt der designierte DIW-Chef Marcel Fratzscher. Im Interview erklï¿½rt er, welche Rolle Deutschland dabei spielt.</text>
-                        <description>Durch die Euro-Krise kï¿½nnte Europa stï¿½rker werden, sagt der designierte DIW-Chef Marcel Fratzscher. Im Interview erklï¿½rt er, welche Rolle Deutschland dabei spielt.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/marcel-fratzscher-3/" expires="2012-11-13T16:35:58+00:00" publication-date="2012-08-12T22:00:00+00:00" type="jpg">
-                            <bu/>
-                            <copyright>ï¿½DIW/dpa</copyright>
-                        </image>
-                    </block>
-                    <topiclinks>
-                        <topiclink href="http://xml.zeit.de/themen/wirtschaft/finanzkrise/index">Euro Gipfel</topiclink>
-                        <topiclink href="http://xml.zeit.de/themen/wirtschaft/maerkte/energiemaerkte/index">Energiemï¿½rkte</topiclink>
-                        <topiclink href="http://xml.zeit.de/wirtschaft/2013-11/soja-bilanz">Vegane-Klimabilanz</topiclink>
-                    </topiclinks>
-                </container>
-            </region>
-        </cluster>
     </body>
-    <feed>
-        <reference contenttype="link" expires="" href="http://xml.zeit.de/politik/deutschland/2010-08/link-stoerungsmelder-thor-steinar" issue="32" ns0:href="http://blog.zeit.de/stoerungsmelder/2010/08/11/modemarke-thor-steinar-verliert-prozess-gegen-satire-projekt_4197" publication-date="" ressort="Gesellschaft" type="intern" xmlns:ns0="http://namespaces.zeit.de/CMS/link" year="2010">
-            <supertitle>Storch Heinar</supertitle>
-            <title>Thor Steinar verliert Prozess gegen Satire-Projekt</title>
-            <text>Storch Heinar darf weitermachen. Ein Gericht hat bestï¿½tigt, dass keine Verwechslungsgefahr mit der bei Neonazis beliebten Marke Thor Steinar besteht. Von Johannes Radke</text>
-            <description>Storch Heinar darf weitermachen. Ein Gericht hat bestï¿½tigt, dass keine Verwechslungsgefahr mit der bei Neonazis beliebten Marke Thor Steinar besteht. Von Johannes Radke</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/politik/deutschland/2010-08/storch-heinar-110810/" expires="" publication-date="" title="Storch Heinar" type="jpg">
-                <bu/>
-                <copyright>ï¿½ Screenshot: Storch Heinar/ZEIT ONLINE</copyright>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/unternehmen/2012-07/schweiz-banken" issue="28" publication-date="" ressort="Wirtschaft" type="intern" year="2012">
-            <supertitle>Schuldenkrise</supertitle>
-            <title>Schweizer Angst vor dem Kollaps der Groï¿½banken</title>
-            <text>In der Schweiz wird eifrig darï¿½ber gestritten, ob eine Massenkarambolage der Banken droht. Eine Debatte, die auch andernorts zu denken geben mï¿½sste. Von Ralph Pï¿½hner</text>
-            <description>In der Schweiz wird eifrig darï¿½ber gestritten, ob eine Massenkarambolage der Banken droht. Eine Debatte, die auch andernorts zu denken geben mï¿½sste. Von Ralph Pï¿½hner</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" alt="Das Logo der Schweizer Groï¿½bank UBS in Zï¿½rich" base-id="http://xml.zeit.de/wirtschaft/unternehmen/2012-07/ubs/" expires="" publication-date="" title="Das Logo der Schweizer Groï¿½bank UBS in Zï¿½rich" type="jpg">
-                <bu>Das Logo der Schweizer Groï¿½bank UBS in Zï¿½rich</bu>
-                <copyright>ï¿½ dpa</copyright>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/2011/46/CH-Wallstreet" issue="46" publication-date="2011-11-14T05:57:58+00:00" ressort="Wirtschaft" type="intern" year="2011">
-            <supertitle>Schweizer Banker</supertitle>
-            <title>New Yorker Verlockungen</title>
-            <text>Wie die Schweizer Banker sich selbst demontierten. Die Geschichte eines Wahns</text>
-            <description>Wie die Schweizer Banker sich selbst demontierten. Die Geschichte eines Wahns</description>
-            <byline>von Ralph Pï¿½hner</byline>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/wirtschaft/2011-11/ch-wallstreet/" expires="" publication-date="" type="jpg">
-                <bu/>
-                <copyright link="http://www.photocase.de/foto/85054-stock-photo-haus-arbeit-erwerbstaetigkeit-buero-fenster-glas-house">ï¿½ Leonard/photocase.com</copyright>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/schweiz-credit-suisse-datenweitergabe" issue="33" publication-date="" ressort="Wirtschaft" type="intern" year="2012">
-            <supertitle>Schweiz</supertitle>
-            <title>Der Streit um das Bankgeheimnis spaltet das Land</title>
-            <text>Die Schweizer sehen ihre Unabhï¿½ngigkeit gefï¿½hrdet, sollte das Bankgeheimnis fallen. Manche sprechen schon von einem Wirtschaftskrieg gegen Deutschland. Von Lukas Hï¿½ssig</text>
-            <description>Die Schweizer sehen ihre Unabhï¿½ngigkeit gefï¿½hrdet, sollte das Bankgeheimnis fallen. Manche sprechen schon von einem Wirtschaftskrieg gegen Deutschland. Von Lukas Hï¿½ssig</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" alt="Schweizer Nationalflaggen hï¿½ngen an den Zentralen der Schweizer Banken Credit Suisse und UBS in Zï¿½rich." base-id="http://xml.zeit.de/wirtschaft/2012-08/schweiz/" expires="" publication-date="" title="schweiz" type="jpg">
-                <bu>Schweizer Nationalflaggen hï¿½ngen an den Zentralen der Schweizer Banken Credit Suisse und UBS in Zï¿½rich.</bu>
-                <copyright>ï¿½ Arnd Wiegmann / Reuters</copyright>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/geldanlage/2012-07/steuerfahndung-credit-suisse" issue="28" publication-date="" ressort="Wirtschaft" type="intern" year="2012">
-            <supertitle>Steuerfahndung</supertitle>
-            <title>Hausdurchsuchungen bei deutschen Credit-Suisse-Kunden</title>
-            <text>Tausende deutsche Anleger bekommen ï¿½rger mit der Steuerfahndung. Sie sollen Milliarden Euro an Steuern durch Scheinversicherungen der Credit Suisse hinterzogen haben.</text>
-            <description>Tausende deutsche Anleger bekommen ï¿½rger mit der Steuerfahndung. Sie sollen Milliarden Euro an Steuern durch Scheinversicherungen der Credit Suisse hinterzogen haben.</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/gesellschaft/zeitgeschehen/2012-07/credit-suisse-hausdurchsuchungen/" expires="2012-10-11T05:11:22+00:00" publication-date="" title="Credit Suisse Hausdurchsuchungen" type="jpg">
-                <bu>Sitz der Bank Credit Suisse in Zï¿½rich</bu>
-                <copyright>ï¿½ Ennio Leanza/EPA/dpa</copyright>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/wirtschaft/2012-08/schweiz-banken-singapur" issue="33" publication-date="" ressort="Wirtschaft" type="intern" year="2012">
-            <supertitle>Schweiz</supertitle>
-            <title>Schweizer Banken verstï¿½rken Engagement in Singapur</title>
-            <text>Verschieben Schweizer Banken Steuergelder nach Asien? DIE ZEIT hat Daten ausgewertet, die zeigen, dass sie die Geldtransfers nach Singapur drastisch erhï¿½ht haben.</text>
-            <description>Verschieben Schweizer Banken Steuergelder nach Asien? DIE ZEIT hat Daten ausgewertet, die zeigen, dass sie die Geldtransfers nach Singapur drastisch erhï¿½ht haben.</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/wirtschaft/2012-08/skyline-singapur/" expires="2012-11-15T11:35:09+00:00" publication-date="" title="Die Skyline von Singapur" type="jpg">
-                <bu>Finanzdistrikt in Singapur</bu>
-                <copyright>ï¿½ dpa</copyright>
-            </image>
-        </reference>
-        <reference contenttype="link" expires="" href="http://xml.zeit.de/2014-10/relaunch/teaser-1" issue="26" ns0:href="http://www.zeit.de/politik/ausland/2014-10/kurden-tuerkei-friedensprozess-kobani" publication-date="" ressort="Politik" type="intern" xmlns:ns0="http://namespaces.zeit.de/CMS/link" year="2008">
-            <supertitle>Tï¿½rkei</supertitle>
-            <title>Kein Bï¿½rgerkrieg, aber viel Gewalt</title>
-            <text>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</text>
-            <description>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                <bu/>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/2014-10/relaunch/artikel-1" issue="26" publication-date="" ressort="Politik" type="intern" year="2008">
-            <supertitle>Tï¿½rkei</supertitle>
-            <title>Kein Bï¿½rgerkrieg, aber viel Gewalt</title>
-            <text>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</text>
-            <description>Der Kampf um Kobani lï¿½sst auch die Front zwischen Kurden und tï¿½rkischem Staat wieder aufreiï¿½en. Heute lï¿½uft ein PKK-Ultimatum aus, der Friedensprozess ist faktisch tot.</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                <bu/>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/test/holger/acp-test-hw-2" issue="26" publication-date="" ressort="Politik" type="intern" year="2008">
-            <supertitle>Teaser</supertitle>
-            <title>ï¿½berschrift</title>
-            <text/>
-            <description/>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                <bu/>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/2014-11/timtest" issue="26" publication-date="" ressort="Politik" type="intern" year="2008">
-            <supertitle>test fï¿½r query</supertitle>
-            <title>test fï¿½r query</title>
-            <text>test fï¿½r query</text>
-            <description>test fï¿½r query</description>
-            <byline/>
-            <breadcrumb_title>test fï¿½r query</breadcrumb_title>
-            <image align="left" base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" expires="" publication-date="" type="jpg">
-                <bu/>
-                <copyright>ï¿½ZEITONLINE</copyright>
-            </image>
-        </reference>
-        <reference contenttype="article" expires="" href="http://xml.zeit.de/2014-11/timtest2" issue="26" publication-date="" ressort="Politik" type="intern" year="2008">
-            <supertitle>neue Spitzmarke</supertitle>
-            <title>2. Test</title>
-            <text>hier kommt text</text>
-            <description>hier kommt text</description>
-            <byline/>
-            <breadcrumb_title>Nachrichtenï¿½berschrift text</breadcrumb_title>
-            <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                <bu/>
-            </image>
-        </reference>
-        <reference author="Josef Joffe" contenttype="article" expires="" genre="leserartikel" href="http://xml.zeit.de/politik/ausland/2014-10/automatisch-platzierter-politik-artikel" issue="26" publication-date="" ressort="Politik" type="intern" year="2008">
-            <supertitle>Neuer Aufmacher</supertitle>
-            <title>Automatisch platzierter Politik-Artikel 1</title>
-            <text>Dieser Artikel soll neuer Aufmacher auf der automatischen CP zum NSA-Untersuchungsausschuss werden</text>
-            <description>Dieser Artikel soll neuer Aufmacher auf der automatischen CP zum NSA-Untersuchungsausschuss werden</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/2014-10/relaunch/bg-teaser-1/" expires="" publication-date="" title="bild-teaser-1" type="jpg">
-                <bu/>
-            </image>
-            <author expires="" href="http://xml.zeit.de/autoren/J/Josef_Joffe-2/index" publication-date="">
-                <display_name>Josef Joffe</display_name>
-            </author>
-        </reference>
-        <reference author="Test Mann" contenttype="article" expires="" href="http://xml.zeit.de/test/sonja/test-artikel-cp-editor" issue="26" publication-date="" ressort="Politik" type="intern" year="2008">
-            <supertitle>CP-Editor</supertitle>
-            <title>Universaler Testartikel 2.0</title>
-            <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-            <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                <bu>Jelly danish pudding chocolate cake.</bu>
-                <copyright>ï¿½ ZEIT ONLINE</copyright>
-            </image>
-            <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                <display_name>Test Mann</display_name>
-            </author>
-        </reference>
-        <reference author="Test Mann" contenttype="article" expires="" genre="gastbeitrag" href="http://xml.zeit.de/politik/deutschland/2010-09/iran-markfitzpatrick-atomprogramm" issue="39" publication-date="" ressort="Politik" type="intern" year="2010">
-            <supertitle>Atomstreit</supertitle>
-            <title>&quot;Ein Kalter Krieg mit Iran ist das optimistische Szenario&quot;</title>
-            <text>Wir mï¿½ssen akzeptieren, dass Iran irgendwann fï¿½hig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fï¿½higkeit bleibe.</text>
-            <description>Wir mï¿½ssen akzeptieren, dass Iran irgendwann fï¿½hig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fï¿½higkeit bleibe.</description>
-            <byline/>
-            <breadcrumb_title/>
-            <image align="left" base-id="http://xml.zeit.de/politik/ausland/2010-09/geistlicher-iran-nuklearprogramm/" expires="" publication-date="" type="jpg">
-                <bu>Im November 2009 fï¿½hrte Iran Militï¿½rmanï¿½ver durch. Geprobt wurde dabei der Schutz der iranischen Nuklearanlagen</bu>
-                <copyright>ï¿½ Ali Shayegan/AFP/Getty Images</copyright>
-            </image>
-            <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                <display_name>Test Mann</display_name>
-            </author>
-        </reference>
-    </feed>
+    <feed/>
     <teaser>
         <title>CP-Editor 0.4</title>
     </teaser>
