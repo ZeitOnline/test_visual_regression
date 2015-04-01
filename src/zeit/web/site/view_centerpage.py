@@ -172,8 +172,7 @@ class LegacyCenterpage(
     @zeit.web.reify
     def area_informatives(self):
         return LegacyArea([b for b in (
-            self.module_buzz_comments, self.module_buzz_facebook,
-            self.module_buzz_mostread, self.module_printbox) if b][-2:],
+            self.module_buzz_mostread, self.module_printbox) if b],
             layout='informatives', width='1/3')
 
     @zeit.web.reify
