@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1531: iqd content ad in ZON and ZMO (commented out a this point, until officially live)
 
+- Fix display of print article source with missing volume attribute
+
 
 1.18.1 (2015-03-24)
 -------------------
