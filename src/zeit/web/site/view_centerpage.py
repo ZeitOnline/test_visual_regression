@@ -106,13 +106,14 @@ class LegacyCenterpage(
                                     layout='video')
         regions.append(region_video)
 
+        return regions
+
+    @zeit.web.reify
+    def region_snapshot(self):
         area_snapshot = LegacyArea([b for b in [self.snapshot] if b],
                                    layout='snapshot', width='1/1')
 
-        region_snapshot = LegacyRegion([area_snapshot], layout='snapshot')
-        regions.append(region_snapshot)
-
-        return regions
+        return LegacyRegion([area_snapshot], layout='snapshot')
 
     @zeit.web.reify
     def area_main(self):
