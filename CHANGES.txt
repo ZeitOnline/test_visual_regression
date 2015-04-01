@@ -14,6 +14,10 @@ Change log for zeit.web
 
 - ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
 
+- BUG-168: fix nextread glitch
+
+- Fix border-width in navigation
+
 - ZON-1493: Implement column article :sunglasses:
 
 - Fix border-width in navigation
