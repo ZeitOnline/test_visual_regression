@@ -4,6 +4,8 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- BUG-168: fix nextread glitch
+
 - Fix border-width in navigation
 
 - ZON-1493: Implement column article :sunglasses:
