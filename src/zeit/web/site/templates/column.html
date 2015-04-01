@@ -5,25 +5,26 @@
 			<div class="article__item">
 				<div class="column-heading__inner">
 					<div class="column-heading__information">
-						<h3 class="column-heading__column-details">
-							{#  note: wrap in link, when series landing page exists
-								<a href="#" class="column-heading__column-details__link">
-								</a>
-							#}
-							<span>{{- view.serie + ' / ' | hide_none -}}</span>
-							<span>{{- view.supertitle | hide_none -}}</span>
-						</h3>
-						<h1 class="column-heading__title" itemprop="headline">{{- view.title | hide_none -}}</h1>
+						<h1 class="column-heading__header" itemprop="headline">
+							<span class="column-heading__kicker">
+								{{ view.serie + ' / ' | hide_none }}
+								{{ view.supertitle | hide_none }}
+							</span>{% if view.title %}<span class="article-heading__colon">: </span>{% endif %}
+							<span class="column-heading__title">{{ view.title | hide_none }}</span>
+						</h1>
 						{% if view.authors %}
-							<div class="column-heading__name">
+							<div class="column-heading__name" itemscope itemtype="http://schema.org/Person" itemprop="author">
 								Eine Kolumne von
-								{% for author in view.authors %}
-									{%- if author.href -%}
-										<a href="{{ author.href | translate_url }}" itemprop="url"><span itemtype="http://schema.org/Person" itemprop="author">{{ author.name }}</span></a>
-									{%- else -%}
-										<span itemtype="http://schema.org/Person" itemprop="author">{{ author.name }}</span>
+								{% for author in view.authors -%}
+									{%- if loop.length > 1 -%}
+										{%- if loop.last %} und {% else %}, {% endif -%}
 									{%- endif -%}
-								{% endfor %}
+									{%- if author.href -%}
+										<a href="{{ author.href | translate_url }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>
+									{%- else -%}
+										<span itemprop="name">{{ author.name }}</span>
+									{%- endif -%}
+								{%- endfor %}
 							</div>
 						{% endif %}
 					</div>

@@ -4,15 +4,19 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- Fix border-width in navigation
+
+- ZON-1493: Implement column article :sunglasses:
+
 - ZON-1531: iqd content ad in ZON and ZMO (commented out a this point, until officially live)
 
 
 1.18.1 (2015-03-24)
 -------------------
 
-- Fixed ZMO menu icon
+- Fix ZMO menu icon
 
-- Fixed width of fullwidth teaser
+- Fix width of fullwidth teaser
 
 
 1.18 (2015-03-20)
