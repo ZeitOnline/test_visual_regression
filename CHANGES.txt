@@ -1,10 +1,26 @@
 Change log for zeit.web
 =======================
 
-1.18.1 (unreleased)
+1.18.2 (unreleased)
 -------------------
 
 - BUG-212: Strip preceding and trailing whitespaces and newlines in C1-header
+
+- BUG-168: fix nextread glitch
+
+- Fix border-width in navigation
+
+- ZON-1493: Implement column article :sunglasses:
+
+- ZON-1531: iqd content ad in ZON and ZMO (commented out a this point, until officially live)
+
+
+1.18.1 (2015-03-24)
+-------------------
+
+- Fix ZMO menu icon
+
+- Fix width of fullwidth teaser
 
 
 1.18 (2015-03-20)

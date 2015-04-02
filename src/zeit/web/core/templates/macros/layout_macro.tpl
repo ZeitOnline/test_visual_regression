@@ -154,3 +154,9 @@
         {% endif %}
     {% endif -%}
 {%- endmacro %}
+
+{% macro content_ad_article(view) -%}
+    {% if view.context.advertising_enabled -%}
+    <div id="iq-artikelanker"></div>
+    {% endif -%}
+{%- endmacro %}

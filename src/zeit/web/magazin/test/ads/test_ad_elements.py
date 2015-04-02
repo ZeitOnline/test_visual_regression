@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import pytest
 
+import zeit.cms.interfaces
+
+import zeit.web.magazin
+
 
 def test_ad_keyword_diuqilon(selenium_driver, testserver):
     driver = selenium_driver
@@ -104,3 +108,8 @@ def test_ad_tile2_not_ommitted_in_landscape(selenium_driver, testserver):
     script = 'return $(".ad-tile_2").find("script").size()'
     scripts = driver.execute_script(script)
     assert scripts > 1
+
+
+def test_ad_content_ad_in_article(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    assert browser.cssselect('#iq-artikelanker')

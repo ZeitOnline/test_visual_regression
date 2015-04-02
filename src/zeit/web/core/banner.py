@@ -36,6 +36,15 @@ class Place(object):
         self.noscript_width_height = self.sizes[0].split('x')
 
 
+@zope.interface.implementer(zeit.web.core.interfaces.IContentAdBlock)
+class ContentAdBlock(object):
+
+    """A space for an iqd content ad"""
+
+    def __init__(self, name):
+        self.name = name
+
+
 @zope.interface.implementer(zeit.web.core.interfaces.IIqdMobileList)
 class IqdMobileList(object):
 

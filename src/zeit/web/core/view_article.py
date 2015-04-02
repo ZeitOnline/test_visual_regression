@@ -157,6 +157,9 @@ class Article(zeit.web.core.view.Content):
         return {
             'name': author.display_name if author else None,
             'href': author.uniqueId if author else None,
+            'image': zeit.web.core.interfaces.ITeaserImage(
+                author.column_teaser_image)
+            if (author and author.column_teaser_image) else None,
             'suffix': '',
             'prefix': '',
             'location': ', ' + IAuthorReference(author_ref).location
@@ -232,7 +235,7 @@ class Article(zeit.web.core.view.Content):
     def serie(self):
         if self.context.serie is None:
             return ''
-        return self.context.serie.serienname.replace(' ', '').lower()
+        return self.context.serie.serienname
 
     @zeit.web.reify
     def linkreach(self):

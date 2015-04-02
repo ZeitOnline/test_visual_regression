@@ -1,5 +1,5 @@
 .article-heading
-	margin: remify($petite--px) 0 remify(25px) 0
+	margin: remify(20px) 0 remify(25px)
 	&__kicker
 		color: $zon-red
 		display: block
@@ -17,10 +17,12 @@
 			font-size: remify(42px)
 	&__colon
 		+visuallyhidden
-	&--breaking-news
-		background: #fffee8
-		margin: 0 (-$page-padding) remify(25px) (-$page-padding)
-		padding: remify(25px) $page-padding
-		+respond-min($break-desktop-min)
-			margin: 0 (-$article-gutter-desktop) remify(25px) (-$article-gutter-desktop)
-			padding: remify(45px) $article-gutter-desktop
+
+.breaking-news-heading
+	background: #fffee8
+	margin: 0 (-$page-padding) remify(25px)
+	padding: em(25px) $page-padding
+	+respond-min($break-desktop-min)
+		padding: em(40px) $page-padding
+	.article-heading
+		margin: 0

@@ -260,9 +260,12 @@ def test_inject_banner_code_should_be_inserted_on_all_pages():
 
     with mock.patch.object(zeit.web.core.article,
                            "_place_adtag_by_paragraph") as mock_method:
-        mock_method.return_value = True
-        zeit.web.core.article._inject_banner_code(pages, True, False)
-        assert mock_method.call_count == total
+        with mock.patch.object(zeit.web.core.article,
+                               "_place_content_ad_by_paragraph") as mock_meth:
+            mock_method.return_value = True
+            mock_meth.return_value = True
+            zeit.web.core.article._inject_banner_code(pages, True, False)
+            assert mock_method.call_count == total
 
 
 def test_inject_banner_code_should_be_inserted_on_certain_pages():
