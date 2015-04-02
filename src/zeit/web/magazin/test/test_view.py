@@ -404,7 +404,7 @@ def test_article08_has_correct_source_label(testserver, testbrowser):
     # print source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.source_label == 'DIE ZEIT Nr. 26/2008'
+    assert article_view.source_label == u'DIE ZEIT N° 26/2008'
 
 
 def test_article10_has_correct_source_label(testserver, testbrowser):

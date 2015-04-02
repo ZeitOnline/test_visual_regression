@@ -41,10 +41,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
         return zeit.web.core.comments.get_thread(
             self.context.uniqueId, destination=self.request.url, reverse=True)
 
-    @zeit.web.reify
-    def issue_format(self):
-        return u' Nr. %d/%d'
-
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
