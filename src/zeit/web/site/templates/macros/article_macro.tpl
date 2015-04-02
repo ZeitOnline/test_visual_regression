@@ -117,12 +117,21 @@
 {% if obj.contents -%}
     {% set id = 'infobox' | random_id_fragment %}
     <aside class="infobox">
+        <div class="infobox__navigation">
+        {% for title, text in obj.contents %}
+            <div class="infobox__navtitle">
+                <label for="{{id}}-{{loop.index}}-radio" class="infobox__navlabel{%- if loop.first -%} infobox__navlabel--checked{%- endif -%}">{{ title }}</label>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="infobox__content">
         {% for title, text in obj.contents %}
             <section class="infobox__tab">
-                <input class="infobox__checkbox" name="{{id}}" id="{{id}}-{{loop.index}}" type="checkbox" />
-                <h3 class="infobox__title">
-                    <label for="{{id}}-{{loop.index}}" class="infobox__label">{{ title }}</label>
-                </h3>
+                <input class="infobox__checkbox" name="{{id}}" id="{{id}}-{{loop.index}}-check" type="checkbox" />
+                <input class="infobox__radio" name="{{id}}-radio" id="{{id}}-{{loop.index}}-radio" type="radio" {%- if loop.first -%}checked="checked"{%- endif -%}/>
+                <div class="infobox__title">
+                    <label for="{{id}}-{{loop.index}}-check" class="infobox__label">{{ title }}</label>
+                </div>
                 <article class="infobox__inner">
                 {% for item in text %}
                     {{ (item | block_type or "no_block") | macro(item) }}
@@ -130,6 +139,7 @@
                 </article>
             </section>
         {% endfor %}
+        </div>
     </aside>
 {%- endif %}
 {% endmacro %}
