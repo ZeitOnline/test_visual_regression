@@ -13,12 +13,13 @@
 			//       currently targeting: .scaled-image img
 			img
 				width: 100%
-
-		+respond-min($break-desktop-min)
+		
+		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			margin-left: auto
 			margin-right: auto
 
+		+respond-min($break-desktop-min)
 			&--wide
 				max-width: remify(820px)
 				margin-top: remify(40px)
