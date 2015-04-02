@@ -460,9 +460,20 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     json_dt = {'delta_time': []}
     for teaser in cp.area_main:
         time = zeit.web.core.date.get_delta_time(
-            teaser[1], base_date=parsed_base_date)
+            list(teaser)[0], base_date=parsed_base_date)
         if time:
-            json_dt['delta_time'].append({teaser[1].uniqueId: {'time': time}})
+            json_dt['delta_time'].append(
+                {list(teaser)[0].uniqueId: {'time': time}})
+
+        # TODO replace above with below after TeaserBlock are indexable.
+        # This has to be done after release of zeit.content.cp v3.0
+        #
+        # time = zeit.web.core.date.get_delta_time(
+        #     teaser[0], base_date=parsed_base_date)
+        # if time:
+        #     json_dt['delta_time'].append(
+        #         {teaser[0].uniqueId: {'time': time}})
+
     return json_dt
 
 
@@ -479,29 +490,17 @@ def json_comment_count(request):
         return pyramid.response.Response(
             'Invalid value for parameter: unique_id', 412)
 
-    articles = []
     if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
-        cp = zeit.web.site.view_centerpage.Centerpage(context, request)
-        for teaser in cp.area_main:
-            articles.append(teaser[1])
+        articles = list(
+            zeit.web.site.view_centerpage.Centerpage(context, request))
     else:
-        article = zeit.content.article.interfaces.IArticle(context)
-        articles.append(article)
+        articles = [zeit.content.article.interfaces.IArticle(context)]
 
     counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:
         count = counts.get(article.uniqueId, 0)
-
-        if 'no_interpolation' not in request.GET:
-            # XXX: Interpolate comment counts to compensate for slow updates to
-            #      the node comment statistics file.
-            queue = request.session.pop_flash(queue='cc_throttle')
-            throttle = min((queue + [0.7])[0] * 1.025, 1.0)
-            count = int(__import__('math').ceil(throttle * count))
-            request.session.flash(throttle, queue='cc_throttle')
-
         comment_count[article.uniqueId] = '%s Kommentar%s' % (
             count == 0 and 'Keine' or count, count != 1 and 'e' or '')
 

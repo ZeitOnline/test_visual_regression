@@ -146,13 +146,6 @@ class TeaserBlock(TeaserList):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IAutoPilotTeaserBlock)
-class AutoPilotTeaserBlock(TeaserBlock):
-
-    pass
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
 @grokcore.component.adapter(dict)
 class TeaserDict(TeaserSequence):
 
@@ -163,8 +156,8 @@ class TeaserDict(TeaserSequence):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBar)
-class TeaserBar(TeaserDict):
+@grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
+class Area(TeaserDict):
 
     pass
 

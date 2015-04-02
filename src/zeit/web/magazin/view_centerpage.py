@@ -68,7 +68,7 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
 
     @zeit.web.reify
     def area_lead(self):
-        teaser_list = self.context['lead'].values()
+        teaser_list = self.context.values()[0]["lead"].values()
         for teaser in teaser_list:
             try:
                 if 'zmo-leader-fullwidth' in teaser.layout.id:
@@ -91,7 +91,7 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
     @zeit.web.reify
     @zeit.web.register_copyrights
     def area_lead_full_teaser(self):
-        for teaser_block in self.context['lead'].values():
+        for teaser_block in self.context.values()[0]["lead"].values():
             try:
                 if 'zmo-leader-fullwidth' in teaser_block.layout.id:
                     return teaser_block
@@ -100,7 +100,7 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
 
     @zeit.web.reify
     def area_informatives(self):
-        return self.context['informatives'].values()
+        return self.context.values()[0]["informatives"].values()
 
     @zeit.web.reify
     @zeit.web.register_copyrights

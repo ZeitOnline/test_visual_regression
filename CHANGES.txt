@@ -4,6 +4,12 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- ZON-1540: Adapt to zeit.content.cp 3.0 API changes
+
+- ZON-1539: Add view for new centerpages
+
+- ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
+
 - BUG-212: Strip preceding and trailing whitespaces and newlines in C1-header
 
 - BUG-168: fix nextread glitch
@@ -12,7 +18,7 @@ Change log for zeit.web
 
 - ZON-1493: Implement column article :sunglasses:
 
-- ZON-1531: iqd content ad in ZON and ZMO (commented out a this point, until officially live)
+- Fix border-width in navigation
 
 
 1.18.1 (2015-03-24)

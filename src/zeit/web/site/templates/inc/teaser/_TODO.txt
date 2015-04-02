@@ -1,0 +1,1 @@
+Rename folder to "block" or "module" or whatever

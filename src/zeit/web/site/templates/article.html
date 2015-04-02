@@ -3,7 +3,7 @@
 
 {% macro render_page(page) %}
     {% for item in page %}
-        {{ (blocks[item | block_type] or blocks["no_block"])(item)}}
+        {{ (blocks[item | block_type] or blocks["no_block"])(item) }}
     {% endfor %}
 {% endmacro %}
 
