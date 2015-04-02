@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - Fix display of print article source with missing volume attribute
 
+- BUG-227: Hide missing date of publication
+
 
 1.18.1 (2015-03-24)
 -------------------
