@@ -159,6 +159,7 @@ def test_centerpage_should_gracefully_skip_all_broken_references(
         testbrowser, testserver):
     browser = testbrowser(
         '{}/zeit-online/teaser-broken-setup'.format(testserver.url))
+    # @todo these class names are all gone
     assert not browser.cssselect('.main__fullwidth .teasers-fullwidth *')
     assert not browser.cssselect('.teaser-collection .teasers *')
     assert not browser.cssselect('.main__parquet .parquet *')

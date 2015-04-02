@@ -12,34 +12,18 @@
 * @version 2.0
 *
 */
-(function($) {
+(function( $ ) {
 
-    $.fn.snapshot = function( options ) {
-        var defaults = $.extend({
-                triggerElement: '.cp-region.snapshot'
-            }, options),
-            that = this;
+    $.fn.snapshot = function() {
+
         return this.each( function() {
-            $( defaults.triggerElement ).prev().on( 'inview', function( evt ) {
-                $( that ).addClass('snapshot--blurred');
-                $( that ).show(0, function() {
-                    // change html5 prop "hidden" (which is more accessible)
-                    $( this ).prop('hidden', false);
-                    // resize triggers image load
-                    $(window).resize();
-                    // jscs:disable
-                    // callback fuer GWPBanner, Erwin Senk, 18.07.2011
-                    if (typeof window.GWPLine !== 'undefined' && typeof window.GWPLine3 !== 'undefined') {
-                        window.GWPLine.init();
-                        window.GWPLine3.init2();
-                    }
-                    if (typeof window.nsIqd_setBg !== 'undefined') {
-                        window.nsIqd_setBg();
-                    }
-                    // jscs:enable
-                    $( that ).removeClass('snapshot--blurred');
-                });
-                $( this ).unbind( 'inview' );
+            var shot = $( this );
+
+            shot.parent().on( 'inview', function( event, isInView ) {
+                // change html5 prop "hidden" (which is more accessible)
+                shot.prop('hidden', false);
+                shot.addClass('snapshot--uncovered');
+                $( this ).off( 'inview' );
             });
         });
     };

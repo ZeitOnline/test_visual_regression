@@ -1,5 +1,5 @@
 .print-box
-	padding-bottom: remify(30px)
+	padding: $petite 0
 	&__heading
 		color: $zon-charcoal
 		border-bottom: 1px solid $color-border
@@ -15,8 +15,7 @@
 		white-space: nowrap
 
 	&__content
-		padding: 0 remify(10px)
-		overflow: hidden
+		+clearfix
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -48,6 +47,7 @@
 			float: none
 			margin-bottom: remify(16px)
 			margin-top: 0
+			padding-right: 0
 			width: auto
 
 	&__container

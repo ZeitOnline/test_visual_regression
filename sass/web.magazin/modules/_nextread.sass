@@ -40,6 +40,7 @@ $nextread-maximal-height: em(320px)
 .article__nextread__supertitle
 	@extend %supertitle
 	font-size: $font-s
+	font-weight: normal
 	display: block
 	margin: $small 0 $micro
 	text-align: left
@@ -63,6 +64,10 @@ $nextread-maximal-height: em(320px)
 		+respond-min($break-2)
 			height: $nextread-image-height
 			width: $nextread-teaser-width
+
+.article__nextread__link
+	width: 100%
+	display: block
 
 .nextread-base
 	@extend %nextread-link-dark

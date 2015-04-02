@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+import re
 
 import babel.dates
 import pyramid.response
 import pyramid.view
 import requests
+import werkzeug.http
 
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
@@ -70,6 +72,8 @@ class Base(object):
             'homepage': 'Homepage',
         }
 
+        token = re.compile(r'[^ %s]' % ''.join(werkzeug.http._token_chars))
+
         c1_track_headers = {
             'C1-Track-Origin': lambda: 'web',
             'C1-Track-Service-ID': lambda: 'zon',
@@ -82,8 +86,8 @@ class Base(object):
             'C1-Track-Channel': lambda: c1_add_sections.get(
                 self.context.ressort, self.context.ressort),
             'C1-Track-Sub-Channel': lambda: self.context.sub_ressort,
-            'C1-Track-Heading': lambda: self.context.title,
-            'C1-Track-Kicker': lambda: self.context.supertitle
+            'C1-Track-Heading': lambda: token.sub('', self.context.title),
+            'C1-Track-Kicker': lambda: token.sub('', self.context.supertitle)
         }
 
         for th_name in c1_track_headers:
@@ -95,7 +99,7 @@ class Base(object):
                 continue
             self.request.response.headers.add(
                 th_name,
-                track_header.encode('utf-8'))
+                track_header.encode('utf-8').strip())
 
     @zeit.web.reify
     def type(self):
