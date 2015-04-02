@@ -145,6 +145,7 @@ def test_other_page_types_should_not_designate_meta_pagination(
     assert not browser.xpath('//head/meta[@rel="prev"]')
     assert not browser.xpath('//head/meta[@rel="next"]')
 
+
 def test_article_obfuscated_source_without_date_print_published(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/zeit-2011')
