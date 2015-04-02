@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - Fix border-width in navigation
 
+- Fix display of print article source with missing volume attribute
+
 
 1.18.1 (2015-03-24)
 -------------------

@@ -335,7 +335,7 @@ def test_article08_has_correct_print_source(testserver, testbrowser):
     # print source
     browser = testbrowser('%s/artikel/08' % testserver.url)
     meta_source = browser.cssselect('span.article__head__meta__source')[0]
-    assert 'DIE ZEIT Nr. 26/2008' in meta_source.text_content()
+    assert u'DIE ZEIT N° 26/2008' in meta_source.text_content()
 
 
 def test_article_1_10_produce_no_error(testserver, testbrowser):
