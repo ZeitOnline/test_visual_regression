@@ -115,14 +115,20 @@
 
 {% macro infobox(obj) %}
 {% if obj.contents -%}
+    {% set id = 'infobox' | random_id_fragment %}
     <aside class="infobox">
         {% for title, text in obj.contents %}
-            <div class="infobox-area">
-                <h1>{{ title }}</h1>
+            <section class="infobox__tab">
+                <input class="infobox__checkbox" name="{{id}}" id="{{id}}-{{loop.index}}" type="checkbox" />
+                <h3 class="infobox__title">
+                    <label for="{{id}}-{{loop.index}}" class="infobox__label">{{ title }}</label>
+                </h3>
+                <article class="infobox__inner">
                 {% for item in text %}
                     {{ (item | block_type or "no_block") | macro(item) }}
                 {% endfor %}
-            </div>
+                </article>
+            </section>
         {% endfor %}
     </aside>
 {%- endif %}
