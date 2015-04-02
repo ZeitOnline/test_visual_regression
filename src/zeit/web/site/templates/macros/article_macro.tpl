@@ -8,6 +8,8 @@
                 slide
             {%- elif obj.layout == 'large' -%}
                 article__item article__item--wide
+            {%- elif obj.layout == 'small' -%}
+                article__item
             {%- endif -%}
             ">
             <div class="scaled-image">
