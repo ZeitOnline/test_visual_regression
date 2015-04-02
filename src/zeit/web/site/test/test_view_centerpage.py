@@ -395,15 +395,6 @@ def test_series_teaser_should_have_mobile_layout(
         assert border == 'dotted'  # desktop: border-top wrong
 
 
-def test_snapshot_hidden_on_initial_load(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
-    snapshot = driver.find_element_by_id('snapshot')
-    assert not snapshot.is_displayed(), 'Momentaufnahme is not hidden onload'
-
-
 def test_snapshot_displayed_after_scroll(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
