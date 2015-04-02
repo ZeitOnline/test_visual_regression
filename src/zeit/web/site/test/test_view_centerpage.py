@@ -261,7 +261,7 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .cp-region .cp-area article figure noscript')
+        '#main .cp-region--lead .cp-area article figure noscript')
     assert len(noscript) == 2, 'No noscript areas found'
 
 

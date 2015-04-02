@@ -9,7 +9,7 @@
 define([ 'jquery', 'video' ], function($, video) {
     return {
         init: function() {
-            var article = $('.cp-area--video-stage-main .video-large'),
+            var article = $('.video-stage-main .video-large'),
                 link = article.find('a'),
                 container = article.find('.video-large__container'),
                 button = article.find('.video-text-playbutton'),
