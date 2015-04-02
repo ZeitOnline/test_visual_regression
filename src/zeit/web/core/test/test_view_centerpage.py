@@ -46,7 +46,7 @@ def test_centerpage_should_aggregate_all_teasers_correctly(
     items = list(zeit.web.core.view_centerpage.Centerpage(cp, dummy_request))
     assert items[0].uniqueId == (
         'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
-    assert len(items) == 13
+    assert len(items) == 19
 
 
 def test_centerpage_should_collect_teaser_counts_from_community(
