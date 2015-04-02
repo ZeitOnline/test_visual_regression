@@ -4,6 +4,8 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- BUG-212: Strip preceding and trailing whitespaces and newlines in C1-header
+
 - BUG-168: fix nextread glitch
 
 - Fix border-width in navigation
