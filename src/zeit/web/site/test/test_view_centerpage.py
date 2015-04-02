@@ -156,7 +156,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('lead')[0]
+    box = driver.find_elements_by_class_name('cp-area--lead')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
