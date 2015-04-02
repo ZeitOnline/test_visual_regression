@@ -4,6 +4,10 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- ZON-1539: Add view for new centerpages
+
+- BUG-168: Fix nextread glitch
+
 - ZON-1540: Adapt to zeit.content.cp 3.0 API changes
 
 - ZON-1539: Add view for new centerpages
@@ -18,7 +22,7 @@ Change log for zeit.web
 
 - ZON-1493: Implement column article :sunglasses:
 
-- Fix border-width in navigation
+- ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
 
 - Fix display of print article source with missing volume attribute
 

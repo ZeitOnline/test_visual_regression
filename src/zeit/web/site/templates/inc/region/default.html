@@ -1,4 +1,4 @@
-<div class="cp-region {{ region.layout | hide_none }}">
+<div class="{{ 'cp-region' | with_mods(region.layout) }}">
     {% for area in region %}
         {%- include ["zeit.web.site:templates/inc/area/" + area.layout + ".html",
                      "zeit.web.site:templates/inc/area/default.html"] ignore missing -%}

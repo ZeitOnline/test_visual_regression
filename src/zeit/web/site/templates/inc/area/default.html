@@ -1,4 +1,4 @@
-<div class="{{ 'cp-area' | with_mods(area.width | area_width) }} {{ area.layout | hide_none }}">
+<div class="{{ 'cp-area' | with_mods(area.layout, area.width | area_width) }}">
     {% block before_module_list %}{% endblock %}
     {% for teaser_block in area -%}
     {# For compat reasons, we call all our modules teaser_block #}
