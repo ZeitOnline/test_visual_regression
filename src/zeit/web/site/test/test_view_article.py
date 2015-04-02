@@ -2,6 +2,7 @@
 
 import base64
 import mock
+import zeit.web.site.view_article
 
 import zeit.cms.interfaces
 
@@ -146,7 +147,7 @@ def test_other_page_types_should_not_designate_meta_pagination(
     assert not browser.xpath('//head/meta[@rel="next"]')
 
 
-def test_article_obfuscated_source_without_date_print_published(application):
+def test_article_obfuscated_source_without_date_print_published():
     content = mock.Mock()
     content.product.label = content.product.title = 'DIE ZEIT'
     content.product.show = 'issue'
