@@ -3,12 +3,23 @@
     <header>
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
-
-    {% for area in region %}
-        {% include ["zeit.web.site:templates/inc/area/" + area.layout + ".html",
-                    "zeit.web.site:templates/inc/area/default.html"] ignore missing %}
-    {% endfor %}
-
+    {% set video_module = teaser_block %}
+    <div class="video-stage-main">
+        {% with %}
+            {% set teaser_block = video_module[0] %}
+            {% set teaser = teaser_block | first_child %}
+            {% include ["zeit.web.site:templates/inc/teaser/" + teaser_block | get_teaser_layout | hide_none + ".tpl",
+                        "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
+        {% endwith %}
+    </div>
+    <div class="video-stage-secondary">
+        <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
+        {% for teaser_block in video_module[1:4] %}
+            {% set teaser = teaser_block | first_child %}
+            {% include ["zeit.web.site:templates/inc/teaser/" + teaser_block | get_teaser_layout | hide_none + ".tpl",
+                        "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
+        {% endfor %}
+    </div>
     <footer class="video-stage-footer">
         <div class="video-series">
             {# ist so nicht accessible umzusetzen, ohne js auch nicht bedienbar (NB) #}

@@ -454,26 +454,15 @@ def json_delta_time_from_date(date, parsed_base_date):
 def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     try:
         content = zeit.cms.interfaces.ICMSContent(unique_id)
-        cp = zeit.web.site.view_centerpage.Centerpage(content, request)
     except TypeError:
         return pyramid.response.Response('Invalid resource', 500)
     json_dt = {'delta_time': []}
-    for teaser in cp.area_main:
+    for article in zeit.web.site.view_centerpage.Centerpage(content, request):
         time = zeit.web.core.date.get_delta_time(
-            list(teaser)[0], base_date=parsed_base_date)
+            article, base_date=parsed_base_date)
         if time:
             json_dt['delta_time'].append(
-                {list(teaser)[0].uniqueId: {'time': time}})
-
-        # TODO replace above with below after TeaserBlock are indexable.
-        # This has to be done after release of zeit.content.cp v3.0
-        #
-        # time = zeit.web.core.date.get_delta_time(
-        #     teaser[0], base_date=parsed_base_date)
-        # if time:
-        #     json_dt['delta_time'].append(
-        #         {teaser[0].uniqueId: {'time': time}})
-
+                {article.uniqueId: {'time': time}})
     return json_dt
 
 
