@@ -1,0 +1,63 @@
+.infobox
+	background: $zon_lighter_grey
+	margin: remify(40px) remify(-20px)
+	padding: 0 remify(20px)
+	&__checkbox
+		+visuallyhidden
+	&__tab
+		border-bottom: 1px solid $zon_light_grey
+		&:last-child
+			border: none
+	&__label
+		display: block
+		color: $zon_grey
+		cursor: pointer
+		font-family: $font-tabletgothic
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-l
+		line-height: remify(17px)
+		overflow: hidden
+		padding: remify(15px 0 13px 0)
+		text-overflow: ellipsis
+		text-transform: uppercase
+		white-space: nowrap
+		&:after
+			background: $zon_mid_grey
+			border-radius: 3px
+			color: $white
+			content: "+"
+			font-family: sans-serif
+			font-weight: 100
+			height: remify(17px)
+			margin-left: remify(10px)
+			text-align: center
+			vertical-align: text-bottom
+			width: remify(17px)
+			+inline-block
+			+font-smoothing
+	&__title
+		line-height: 1
+		margin: 0
+	&__inner
+		max-height: 0px
+		overflow: hidden
+		p
+			color: $zon_grey
+			font-family: $font-tabletgothic
+			font-size: remify(14px)
+			line-height: remify(20px)
+		figure
+			margin: remify(10px) 0
+		.figure__caption
+			font-size: remify(14px)
+			line-height: 1.3
+			margin: remify(8px 0 0 0)
+		img
+			max-width: 100%
+
+.infobox__checkbox:checked ~ h3 > .infobox__label:after
+	content: "–"
+.infobox__checkbox:checked ~ .infobox__inner
+	height: auto
+	max-height: 100em
+	+transition(max-height 0.5s ease-in-out)
