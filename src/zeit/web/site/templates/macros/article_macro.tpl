@@ -78,7 +78,7 @@
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
     <p class="paragraph article__item">
-        {{ html | safe}}
+        {{ html | safe }}
     </p>
 {%- endmacro %}
 
