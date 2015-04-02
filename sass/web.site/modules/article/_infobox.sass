@@ -2,11 +2,17 @@
 	background: $zon_lighter_grey
 	margin: remify(40px) remify(-20px)
 	padding: 0 remify(20px)
-	&__checkbox
+	+respond-min($break-tablet-min)
+		padding: remify(50px 55px)
+		overflow: hidden
+	&__checkbox,
+	&__radio
 		+visuallyhidden
 	&__tab
 		border-bottom: 1px solid $zon_light_grey
-		&:last-child
+		&:last-of-type
+			border: none
+		+respond-min($break-tablet-min)
 			border: none
 	&__label
 		display: block
@@ -14,6 +20,7 @@
 		cursor: pointer
 		font-family: $font-tabletgothic
 		font-size: remify(14px)
+		font-weight: 700
 		letter-spacing: $zon-letter-spacing-l
 		line-height: remify(17px)
 		overflow: hidden
@@ -38,6 +45,8 @@
 	&__title
 		line-height: 1
 		margin: 0
+		+respond-min($break-tablet-min)
+			display: none
 	&__inner
 		max-height: 0px
 		overflow: hidden
@@ -51,6 +60,10 @@
 			font-size: remify(14px)
 			line-height: remify(20px)
 			margin: remify(5px 0 10px 0)
+			+respond-min($break-tablet-min)
+				margin: remify(0 0 15px 0)
+				font-size: remify(16px)
+				line-height: remify(23px)
 		figure
 			margin: remify(10px) 0
 		.figure__caption
@@ -59,12 +72,50 @@
 			margin: remify(8px 0 0 0)
 		img
 			max-width: 100%
+	&__navigation
+		display: none
+		+respond-min($break-tablet-min)
+			display: table-cell
+			width: remify(148px)
+		+respond-min($break-desktop-min)
+			width: remify(180px)
+	&__navtitle
+		border-bottom: 1px solid $zon_light_grey
+		&:last-child
+			border: none
+	&__navlabel
+		display: block
+		color: $zon_grey
+		cursor: pointer
+		font-family: $font-tabletgothic
+		font-size: remify(14px)
+		font-weight: 700
+		letter-spacing: $zon-letter-spacing-l
+		line-height: remify(20px)
+		padding: remify(15px 0 11px 0)
+		text-transform: uppercase
+	&__content
+		+respond-min($break-tablet-min)
+			display: table-cell
+			padding-left: remify(40px)
+		+respond-min($break-desktop-min)
+			padding-left: remify(62px)
+
 
 // explicit unBEMmish code to realize acordion per css with checkboxes
 // sorry for that, http://i.giphy.com/sSlq4iEQ4KdDa.gif
-.infobox__checkbox:checked ~ h3 > .infobox__label:after
+.infobox__checkbox:checked ~ .infobox__title > .infobox__label:after
 	content: "–"
-.infobox__checkbox:checked ~ .infobox__inner
-	height: auto
-	max-height: 100em
-	+transition(max-height 0.5s ease-in-out)
+.infobox__checkbox:checked 
+	& ~ .infobox__inner
+		height: auto
+		max-height: 100em
+		+transition(max-height 0.5s ease-in-out)
+	& ~ .infobox__title > .infobox__label
+		color: $zon-charcoal
+.infobox__radio:checked
+	+respond-min($break-tablet-min)
+		& ~ .infobox__inner
+			height: auto
+			max-height: 100em
+			+transition(max-height 0.5s ease-in-out)
