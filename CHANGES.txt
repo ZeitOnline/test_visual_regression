@@ -10,6 +10,12 @@ Change log for zeit.web
 
 - ZON-1531: IQD content ad in ZON and ZMO (commented out until officially live)
 
+- BUG-212: Strip preceding and trailing whitespaces and newlines in C1-header
+
+- BUG-168: fix nextread glitch
+
+- Fix border-width in navigation
+
 - ZON-1493: Implement column article :sunglasses:
 
 - Fix border-width in navigation
