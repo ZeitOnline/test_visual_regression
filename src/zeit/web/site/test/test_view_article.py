@@ -147,8 +147,12 @@ def test_other_page_types_should_not_designate_meta_pagination(
 
 
 def test_article_obfuscated_source_without_date_print_published(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/zeit-2011')
-    view = zeit.web.site.view_article.Article(context, mock.Mock())
+    content = mock.Mock()
+    content.product.label = content.product.title = 'DIE ZEIT'
+    content.product.show = 'issue'
+    content.volume = 1
+    content.year = 2011
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view.date_print_published = None
     source = u'DIE ZEIT N\u00B0\u00A01/2011'
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
