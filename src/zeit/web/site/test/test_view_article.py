@@ -2,8 +2,8 @@
 
 import base64
 import mock
-import zeit.web.site.view_article
 
+import zeit.web.site.view_article
 import zeit.cms.interfaces
 
 
