@@ -10,8 +10,8 @@
         </figure>
         {% endif %}
     {% else %}
-        {% set teaser_block = row %}
-        {% set teaser_block_layout = 'teaser-parquet-small' %}
+        {% set module = row %}
+        {% set module_layout = 'teaser-parquet-small' %}
         {% set image = teaser.image %}
         {% if image %}
         <figure class="teaser-parquet-small__media scaled-image">

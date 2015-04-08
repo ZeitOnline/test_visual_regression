@@ -5,7 +5,7 @@ Default teaser template for nextread teasers
 Available attributes:
     lama
     teaser
-    teaser_block
+    module
 
 All calling templates have to provide:
     teaser_image: to define display of teaser image ('true', 'false')
@@ -14,7 +14,7 @@ All calling templates have to provide:
 
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% set image = get_teaser_image(teaser_block, teaser) %}
+{% set image = get_teaser_image(module, teaser) %}
 {% set bg_image = '' %}
 
 {# if we have to display a bg image, prepare it here #}
@@ -26,18 +26,18 @@ All calling templates have to provide:
     {% endif %}
 {% endif %}
 
-<div class="article__nextread__body article__nextread__body--{{ teaser_block.multitude }}{% if not image %} article__nextread__body--no-img{% endif %}" style="{{ bg_image }}">
-    <a class="article__nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId|translate_url }}">
-
+<div class="article__nextread__body article__nextread__body--{{ module.multitude }}{% if not image %} article__nextread__body--no-img{% endif %}" style="{{ bg_image }}">
+    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId|translate_url }}">
+        
         {# display bg image #}
         {% if image and self.teaser_image() == 'true' %}
-            <div class="scaled-image article__nextread__img article__nextread__img--{{ teaser_block.multitude }}">
+            <div class="scaled-image article__nextread__img article__nextread__img--{{ module.multitude }}">
                 {{ lama.insert_responsive_image(image) }}
             </div>
         {% endif %}
 
         {# display nextread text #}
-        <div class="article__nextread__article article__nextread__article--{{ teaser_block.multitude }}">
+        <div class="article__nextread__article article__nextread__article--{{ module.multitude }}">
             <span class="article__nextread__supertitle">{{ teaser.supertitle }}</span>
             <span class="article__nextread__title">{{ teaser.title }}</span>
         </div>

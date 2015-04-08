@@ -4,7 +4,7 @@ Default teaser template for cards.
 
 Available attributes:
     cp
-    teaser_block
+    module
     teaser
 
 All calling templates have to provide:
@@ -20,10 +20,10 @@ All calling templates have to provide:
 
 {% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 
-{% set image = get_teaser_image(teaser_block, teaser) -%}
+{% set image = get_teaser_image(module, teaser) -%}
 
-{% if teaser_block.background_color %}
-    {% set card_style = 'background-color: #' + teaser_block.background_color + ';' -%}
+{% if module.background_color %}
+    {% set card_style = 'background-color: #' + module.background_color + ';' -%}
 {% else %}
     {% set card_style = '' %}
 {% endif %}
@@ -31,7 +31,7 @@ All calling templates have to provide:
 {# if we have to display a bg image, prepare it here #}
 {% if self.bg_image() == 'true' %}
     {% if image %}
-        {% set card_style = card_style + ' background-image: url(' + image|default_image_url(image_pattern=teaser_block.layout.image_pattern) + ')' %}
+        {% set card_style = card_style + ' background-image: url(' + image|default_image_url(image_pattern=module.layout.image_pattern) + ')' %}
     {% endif %}
 {% endif %}
 
@@ -56,7 +56,7 @@ All calling templates have to provide:
 
             {# back of card #}
             {% if self.front_action() == 'flip' %}
-                <div class="card card--back {{ self.back_class() }}" style="background-color: #{{ teaser_block.background_color }};">
+                <div class="card card--back {{ self.back_class() }}" style="background-color: #{{ module.background_color }};">
                     <h2>
                         <div class="card__title">{{ teaser.teaserSupertitle }}</div>
                         <div class="card__text">{{ teaser.teaserText }}</div>

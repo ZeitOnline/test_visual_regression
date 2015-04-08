@@ -6,7 +6,7 @@ Available attributes:
     cp
     lama
     blocks
-    teaser_block
+    module
     teaser
 
 All calling templates have to provide:
@@ -20,7 +20,7 @@ All calling templates have to provide:
 {%- import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
 {%- set asset = teaser | get_all_assets | block_type %}
-{%- set image = get_teaser_image(teaser_block, teaser) %}
+{%- set image = get_teaser_image(module, teaser) %}
 
 <div class="cp_leader cp_leader--{{ self.format() }}{{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}">
 

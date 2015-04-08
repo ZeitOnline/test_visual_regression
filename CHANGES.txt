@@ -4,6 +4,8 @@ Change log for zeit.web
 1.18.2 (unreleased)
 -------------------
 
+- ZON-1550: Rename occurences of teaser_block to more generic module
+
 - ZON-1573: Downgrade videostage from region to module
 
 - ZON-1550: Prepare test cp and render it with the new view
