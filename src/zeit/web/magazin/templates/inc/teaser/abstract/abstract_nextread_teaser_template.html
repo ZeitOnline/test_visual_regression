@@ -26,15 +26,9 @@ All calling templates have to provide:
     {% endif %}
 {% endif %}
 
-<<<<<<< HEAD
 <div class="article__nextread__body article__nextread__body--{{ module.multitude }}{% if not image %} article__nextread__body--no-img{% endif %}" style="{{ bg_image }}">
     <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId|translate_url }}">
         
-=======
-<div class="article__nextread__body article__nextread__body--{{ teaser_block.multitude }}{% if not image %} article__nextread__body--no-img{% endif %}" style="{{ bg_image }}">
-    <a class="article__nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId|translate_url }}">
-
->>>>>>> master
         {# display bg image #}
         {% if image and self.teaser_image() == 'true' %}
             <div class="scaled-image article__nextread__img article__nextread__img--{{ module.multitude }}">
