@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.18.2 (unreleased)
--------------------
+1.19 (2015-04-08)
+-----------------
 
 - ZON-1573: Downgrade videostage from region to module
 
