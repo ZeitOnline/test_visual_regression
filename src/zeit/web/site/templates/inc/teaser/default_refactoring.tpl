@@ -2,8 +2,6 @@
 
 {% block teaser %}
 
-{% block teaser_media_position_before_teaser %}{% endblock %}
-
 <article class="{% block layout %}{{ layout }}{% endblock %} {% block teaser_modifier %}{% endblock %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}">
 
     {% block teaser_media_position_before_title %}{% endblock %}
@@ -24,8 +22,6 @@
                 {% endblock %}
             </a>
             {% endblock %}
-
-            {% block teaser_metadata_head %}{% endblock %}
         </h2>
 
         {% block teaser_media_position_after_title %}{% endblock %}

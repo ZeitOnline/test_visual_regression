@@ -3,8 +3,6 @@
 {% block teaser %}
 {% profile %}
 
-{% block teaser_media_position_before_teaser %}{% endblock %}
-
 <article class="teaser {% block teaser_modifier %}{% endblock %}" data-unique-id="{{ teaser.uniqueId }}">
     {% block teaser_media_position_before_title %}{% endblock %}
 
@@ -19,8 +17,6 @@
             {% endblock %}
         </a>
         {% endblock %}
-
-        {% block teaser_metadata_head %}{% endblock %}
     </h2>
 
     {% block teaser_media_position_after_title %}{% endblock %}
