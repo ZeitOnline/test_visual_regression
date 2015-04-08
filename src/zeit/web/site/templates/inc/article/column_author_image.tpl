@@ -4,5 +4,3 @@
 {% set href = view.authors[0].href | translate_url %}
 
 {% set module_layout = 'column-heading' %}
-
-{{ super() }}
