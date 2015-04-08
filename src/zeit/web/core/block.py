@@ -74,10 +74,10 @@ class Portraitbox(object):
             self.name = model_block.references.name
 
     def _author_text(self, pbox):
-        # TODO: Highly fragile, we need to find a better solution
-        # Apparently we don't have a root element
-        p_text = lxml.html.fragments_fromstring(pbox)[0]
-        return lxml.etree.tostring(p_text)
+        # not the most elegant solution, but it gets sh*t done
+        return "".join([lxml.etree.tostring(element) for element in
+                       lxml.html.fragments_fromstring(pbox) if
+                       element.tag != 'raw'])
 
 
 @grokcore.component.implementer(IFrontendBlock)

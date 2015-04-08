@@ -156,7 +156,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('lead')[0]
+    box = driver.find_elements_by_class_name('cp-area--lead')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
@@ -167,7 +167,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
 
-    teaser_box = browser.cssselect('.cp-area.fullwidth')
+    teaser_box = browser.cssselect('.cp-area.cp-area--fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth')
 
     assert len(teaser_box) == 1, 'No fullwidth teaser box'
@@ -197,7 +197,7 @@ def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    articles = browser.cssselect('#main .cp-region .cp-area.lead article')
+    articles = browser.cssselect('#main .cp-region .cp-area--lead article')
     assert len(articles) == 3, 'We expect 3 articles here'
 
 
@@ -261,7 +261,7 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .cp-region .cp-area article figure noscript')
+        '#main .cp-region--lead .cp-area article figure noscript')
     assert len(noscript) == 2, 'No noscript areas found'
 
 
@@ -302,9 +302,10 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
 
-    fullwidth = browser.cssselect('.cp-area.fullwidth')
-    content = browser.cssselect('.cp-area.cp-area--twothirds.lead')
-    informatives = browser.cssselect('.cp-area.cp-area--onethird.informatives')
+    fullwidth = browser.cssselect('.cp-area.cp-area--fullwidth')
+    content = browser.cssselect('.cp-area.cp-area--twothirds.cp-area--lead')
+    informatives = browser.cssselect(
+        '.cp-area.cp-area--onethird.cp-area--informatives')
 
     assert len(fullwidth) == 1, 'We expect 1 div here'
     assert len(content) == 1, 'We expect 1 div here'
@@ -392,15 +393,6 @@ def test_series_teaser_should_have_mobile_layout(
     else:
         assert width == 250  # desktop: image box of wrong size
         assert border == 'dotted'  # desktop: border-top wrong
-
-
-def test_snapshot_hidden_on_initial_load(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
-    snapshot = driver.find_element_by_id('snapshot')
-    assert not snapshot.is_displayed(), 'Momentaufnahme is not hidden onload'
 
 
 def test_snapshot_displayed_after_scroll(

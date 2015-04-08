@@ -94,16 +94,11 @@ class LegacyCenterpage(
                                    layout='lead')
         regions.append(region_lead)
 
-        area_video_main = LegacyArea(self.area_videostage[:1],
-                                     layout='video-stage-main',
-                                     width='2/3')
-
-        area_video_secondary = LegacyArea(self.area_videostage[1:4],
-                                          layout='video-stage-secondary',
-                                          width='1/3')
-
-        region_video = LegacyRegion([area_video_main, area_video_secondary],
-                                    layout='video')
+        area_videostage = LegacyArea([self.module_videostage],
+                                     layout='video',
+                                     width='1/1')
+        region_video = LegacyRegion([area_videostage],
+                                    layout='fullwidth')
         regions.append(region_video)
 
         return regions
@@ -233,7 +228,7 @@ class LegacyCenterpage(
         return module
 
     @zeit.web.reify
-    def area_videostage(self):
+    def module_videostage(self):
         """Return a video playlist object to be displayed on the homepage."""
 
         try:
@@ -242,18 +237,13 @@ class LegacyCenterpage(
         except TypeError:
             return
 
-        modules = []
-        try:
-            module = LegacyModule([content.videos[0]], layout='video-large')
-            modules.append(module)
-        except IndexError:
-            pass
+        module = LegacyModule([], layout='videostage')
 
-        for video in content.videos[1:]:
-            module = LegacyModule([video], layout='video-small')
-            modules.append(module)
+        for index, video in enumerate(content.videos):
+            layout = index and 'video-small' or 'video-large'
+            module.append(LegacyModule([video], layout=layout))
 
-        return modules
+        return module
 
     @zeit.web.reify
     def snapshot(self):
