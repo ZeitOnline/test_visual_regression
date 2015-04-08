@@ -4,7 +4,7 @@ Change log for zeit.web
 1.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Maintenance: clean up templates
 
 
 1.19 (2015-04-08)
