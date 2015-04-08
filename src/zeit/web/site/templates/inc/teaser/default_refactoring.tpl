@@ -9,9 +9,9 @@
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
-        {% block teasaer_format_marker %}
+        {% block teaser_format_marker %}
         {% endblock %}
-        {% block teasaer_format_name %}
+        {% block teaser_format_name %}
         {% endblock %}
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
