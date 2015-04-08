@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title py:pytype="str">Wenke Husmann</title>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/administratives/autoreninfos/bilder/wenke-husmann.jpg" type="jpg" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© ZEIT ONLINE</copyright>
+    </image>
+    <text py:pytype="str">
+      <p>Wenke Husmann ist Redakteurin im Ressort Kultur bei ZEIT ONLINE.</p>
+      <raw>
+        <a data-twittername="zeitonline_kul" class="twitterFollowlink"/>
+      </raw>
+      <p>Ihre Profilseite finden Sie <a href="http://community.zeit.de/user/wenke-husmann">hier</a>.</p>
+    </text>
+  </block>
+</container>

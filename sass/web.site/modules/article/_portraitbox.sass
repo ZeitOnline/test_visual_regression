@@ -1,0 +1,24 @@
+.portraitbox
+	+default-article-textlink
+	clear: both
+	font-family: $font-tabletgothic
+	font-size: remify(14px)
+	line-height: 1.2
+	margin: remify(40px) auto
+	width: 90%
+	+respond-min($break-tablet-min)
+		float: left
+		margin: remify(14px 25px 14px 0)
+		width: remify(205px)
+	+respond-min($break-desktop-min)
+		font-size: remify(15px)
+		margin: remify(16px 25px 16px 60px)
+		width: remify(220px)
+	&__heading
+		color: $zon-charcoal
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-l
+		text-transform: uppercase
+	&__body
+		color: $zon_grey
+		letter-spacing: $zon-letter-spacing-s

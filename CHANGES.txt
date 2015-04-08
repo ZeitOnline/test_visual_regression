@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - BUG-227: Hide missing date of publication
 
+- ZON-1329: Portrait boxes in articles
+
 
 1.18.1 (2015-03-24)
 -------------------
