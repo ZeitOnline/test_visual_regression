@@ -88,6 +88,7 @@
 
 {% macro adplace_adctrl(banner, view) -%}
     {{ caller() }}
+    {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     <div id="iqadtile{{ banner.tile }}" class="ad-{{ banner.name }} ad-{{ banner.name }}--on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
         {% if banner.label -%}
         <div class="ad-{{ banner.name }}__label">{{ banner.label }}</div>
