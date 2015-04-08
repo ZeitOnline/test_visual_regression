@@ -1,51 +1,55 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
-{% profile %}
 
-{% block teaser_media_position_before_teaser %}{% endblock %}
+<article class="{% block layout %}{{ layout }}{% endblock %} {% block teaser_modifier %}{% endblock %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}">
 
-<article class="teaser {% block teaser_modifier %}{% endblock %}" data-unique-id="{{ teaser.uniqueId }}">
     {% block teaser_media_position_before_title %}{% endblock %}
 
-    <h2 class="teaser__heading {% block teaser_heading_modifier %}{% endblock %}">
-        {% block teaser_link %}
-        <a class="teaser__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.uniqueId | translate_url }}">
-            {% block teaser_kicker %}
-            <span class="teaser__kicker">{{ teaser.teaserSupertitle }}</span>
-            {% endblock %}
-            {% block teaser_title %}
-            <span class="teaser__title">{{ teaser.teaserTitle }}</span>
-            {% endblock %}
-        </a>
+    <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
+        {% block teaser_format_marker %}
         {% endblock %}
-
-        {% block teaser_metadata_head %}{% endblock %}
-    </h2>
-
-    {% block teaser_media_position_after_title %}{% endblock %}
-
-    {% block teaser_container %}
-    <div class="teaser__container {% block teaser_container_modifier %}{% endblock %}">
-        {% block teaser_text %}
-        <p class="teaser__text">{{ teaser.teaserText }}{% block teaser_byline_inner %}{% endblock %}</p>
+        {% block teaser_format_name %}
         {% endblock %}
-        {% block teaser_byline %}
-            {{ cp.include_teaser_byline(teaser) }}
-        {% endblock %}
-        {% block teaser_metadata_default %}
-        <div class="teaser__metadata">
-            {% block teaser_datetime %}
-                {{ cp.include_teaser_datetime(teaser) }}
+        <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
+            {% block teaser_link %}
+            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | translate_url }}">
+                {% block teaser_kicker %}
+                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                {% endblock %}
+                {% block teaser_title %}
+                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+                {% endblock %}
+            </a>
             {% endblock %}
-            {% block teaser_commentcount%}
-                {{ cp.include_teaser_commentcount(teaser) }}
+        </h2>
+
+        {% block teaser_media_position_after_title %}{% endblock %}
+
+        {% block teaser_container %}
+            {% block teaser_text %}
+            <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}{% block teaser_byline_inner %}{% endblock %}</p>
             {% endblock %}
-        </div>
+            {% block teaser_byline %}
+                {{ cp.include_teaser_byline(teaser, self.layout()) }}
+            {% endblock %}
+            {% block teaser_metadata_default %}
+            <div class="{{ self.layout() }}__metadata">
+                {% block teaser_datetime %}
+                    {{ cp.include_teaser_datetime(teaser, self.layout()) }}
+                {% endblock %}
+                {% block teaser_commentcount %}
+                    {% set comments = view.comment_counts[teaser.uniqueId] %}
+                    {% if comments %}
+                        {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
+                    {% endif %}
+                {% endblock %}
+            </div>
+            {% endblock %}
         {% endblock %}
     </div>
-    {% endblock %}
+    {% block teaser_media_position_after_container %}{% endblock %}
 
 </article>
-{% endprofile %}
 {% endblock %}

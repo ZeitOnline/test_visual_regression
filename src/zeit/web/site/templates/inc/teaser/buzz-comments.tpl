@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block teaser_media_position_after_title %}
     {% with -%}
