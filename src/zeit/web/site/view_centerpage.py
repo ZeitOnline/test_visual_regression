@@ -101,11 +101,15 @@ class LegacyCenterpage(
                                     layout='fullwidth')
         regions.append(region_video)
 
+        regions += self.region_list_parquet
+
+        regions.append(self.region_snapshot)
+
         return regions
 
     @zeit.web.reify
     def region_snapshot(self):
-        area_snapshot = LegacyArea([b for b in [self.snapshot] if b],
+        area_snapshot = LegacyArea([b for b in [self.module_snapshot] if b],
                                    layout='snapshot', width='1/1')
 
         return LegacyRegion([area_snapshot], layout='snapshot')
@@ -126,7 +130,7 @@ class LegacyCenterpage(
             layout='lead', width='2/3')
 
     @zeit.web.reify
-    def area_parquet(self):
+    def region_list_parquet(self):
         def valid_area(a):
             try:
                 return a.layout.id in ('parquet',)
@@ -138,9 +142,15 @@ class LegacyCenterpage(
                 'zon-parquet-large', 'zon-parquet-small') or getattr(
                 m, 'cpextra', None) in ('parquet-spektrum',)
 
-        region = self.context.values()[1]
-        return [m for area in region.itervalues() if
-                valid_area(area) for m in area.itervalues() if valid_module(m)]
+        def get_layout(m):
+            try:
+                return getattr(m, 'cpextra', None) or m.layout.id
+            except AttributeError:
+                return 'parquet-regular'
+
+        return [LegacyRegion([LegacyArea([m], layout=get_layout(m))]) for area
+                in self.context.values()[1].itervalues() if valid_area(area)
+                for m in area.itervalues() if valid_module(m)]
 
     @zeit.web.reify
     def area_fullwidth(self):
@@ -246,7 +256,7 @@ class LegacyCenterpage(
         return module
 
     @zeit.web.reify
-    def snapshot(self):
+    def module_snapshot(self):
         """Return the centerpage snapshot aka `Momentaufnahme`.
         :rtype: zeit.content.image.image.RepositoryImage
         """
