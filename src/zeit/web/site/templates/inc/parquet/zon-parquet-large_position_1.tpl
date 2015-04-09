@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-parquet-large{% endblock %}
 {% block block_type %}teaser{% endblock %}
