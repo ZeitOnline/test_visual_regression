@@ -120,7 +120,7 @@
         <div class="infobox__navigation">
         {% for title, text in obj.contents %}
             <div class="infobox__navtitle">
-                <label for="{{id}}-{{loop.index}}-radio" class="infobox__navlabel{%- if loop.first -%} infobox__navlabel--checked{%- endif -%}">{{ title }}</label>
+                <label for="{{id}}-{{loop.index}}-radio" class="infobox__navlabel {%- if loop.first %} infobox__navlabel--checked{% endif -%}">{{ title }}</label>
             </div>
         {% endfor %}
         </div>
