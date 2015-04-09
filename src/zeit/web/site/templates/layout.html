@@ -106,7 +106,7 @@
             {% block adplace_billboard %}
                 {{ lama_core.adplace(view.banner(3), view) }}
             {% endblock adplace_billboard %}
-            <main class="main" id="main" role="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' |  with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
             </main>
             {% profile %}

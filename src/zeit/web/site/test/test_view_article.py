@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import base64
+import mock
+
+import zeit.web.site.view_article
 import zeit.cms.interfaces
 
 
@@ -141,3 +145,15 @@ def test_other_page_types_should_not_designate_meta_pagination(
     browser = testbrowser('{}/zeit-online/index'.format(testserver.url))
     assert not browser.xpath('//head/meta[@rel="prev"]')
     assert not browser.xpath('//head/meta[@rel="next"]')
+
+
+def test_article_obfuscated_source_without_date_print_published():
+    content = mock.Mock()
+    content.product.label = content.product.title = 'DIE ZEIT'
+    content.product.show = 'issue'
+    content.volume = 1
+    content.year = 2011
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view.date_print_published = None
+    source = u'DIE ZEIT N\u00B0\u00A01/2011'
+    assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))

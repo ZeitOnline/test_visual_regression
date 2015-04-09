@@ -4,9 +4,8 @@
     {% with -%}
         {% set class = 'buzz-index' %}
         {% set label = index %}
-        {% set modifier = area.layout %}
-        {% include ["zeit.web.site:templates/inc/teaser_asset/annotation_" + area.layout + ".tpl",
-                    "zeit.web.site:templates/inc/teaser_asset/annotation.tpl"] with context %}
+        {% set modifier = module.layout %}
+        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" with context %}
     {%- endwith %}
 {% endblock %}
 

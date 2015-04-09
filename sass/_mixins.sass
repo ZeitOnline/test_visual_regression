@@ -9,6 +9,21 @@
 	&:focus
 		@content
 
+=default-article-textlink
+	a
+		border-bottom: 1px solid rgba($color-link--default, .5)
+		+transition-property(border-bottom-color color)
+		+transition-duration(.2s)
+
+		&:focus
+			border-bottom-color: rgba($color-link--focus, .5)
+
+		&:hover
+			border-bottom-color: rgba($color-link--hover, .5)
+
+		&:active
+			border-bottom-color: rgba($color-link--active, .5)
+
 =max-width-rem($px)
 	max-width: $px
 	max-width: rem($px)

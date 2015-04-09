@@ -3,6 +3,6 @@
 {% set image = view.authors[0].image %}
 {% set href = view.authors[0].href | translate_url %}
 
-{% set teaser_block_layout = 'column-heading' %}
+{% set module_layout = 'column-heading' %}
 
 {{ super() }}

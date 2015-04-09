@@ -67,7 +67,7 @@
 {% endmacro %}
 
 {% macro intertitle(intertitle) -%}
-    <h2 class="article__item article__subheading">
+    <h2 class="article__subheading article__item">
         {{ intertitle|striptags }}
     </h2>
 {%- endmacro %}
@@ -97,18 +97,20 @@
 
 {% macro portraitbox(obj) -%}
   {#
-    obj = {'name': u'Herrmann Koser',
-           'text': (u'Herrmann Koser ist ZEITmagazin-Leserin und eine der '
-                    u'meinungsstarken Kommentatoren bei unseren sonntäglichen '
-                    u'Tatort-Diskussionen bei Facebook.')
+    obj = {'name': u'Kai Biermann',
+           'text': (u'<p>Kai Biermann ist Redakteur im Team Investigativ/Daten bei '
+                    u'ZEIT&nbsp;ONLINE. Seine Profilseite finden Sie '
+                    u'<a href="http://community.zeit.de/user/kai-biermann">hier</a>.</p>')
            }
   #}
     {% if obj.name -%}
-        <figure class="portraitbox figure-stamp">
-            <div class="portraitbox-heading">
+        <figure class="portraitbox">
+            <div class="portraitbox__heading">
                 {{ obj.name }}
             </div>
-            {{ obj.text | safe }}
+            <div class="portraitbox__body">
+                {{ obj.text | safe }}
+            </div>
         </figure>
     {%- endif %}
 {%- endmacro %}

@@ -75,7 +75,7 @@ def test_mixed_teaser_sequence_should_resolve_copyrights(cp_factory):
     view = cp_factory(lambda s: {'foo': s.context['lead'][0],
                                  'bla': s.context['informatives'][1],
                                  'meh': s.context['lead'].values()})
-    assert len(view._copyrights) == 6  # 6 unique teaser images expected.
+    assert len(view._copyrights) == 5  # 6 unique teaser images expected.
 
 
 def test_empty_sequences_should_not_resolve_copyrights(cp_factory):

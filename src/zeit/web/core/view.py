@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+import re
 
 import babel.dates
 import pyramid.response
 import pyramid.view
 import requests
+import werkzeug.http
 
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
@@ -70,6 +72,8 @@ class Base(object):
             'homepage': 'Homepage',
         }
 
+        token = re.compile(r'[^ %s]' % ''.join(werkzeug.http._token_chars))
+
         c1_track_headers = {
             'C1-Track-Origin': lambda: 'web',
             'C1-Track-Service-ID': lambda: 'zon',
@@ -82,8 +86,8 @@ class Base(object):
             'C1-Track-Channel': lambda: c1_add_sections.get(
                 self.context.ressort, self.context.ressort),
             'C1-Track-Sub-Channel': lambda: self.context.sub_ressort,
-            'C1-Track-Heading': lambda: self.context.title,
-            'C1-Track-Kicker': lambda: self.context.supertitle
+            'C1-Track-Heading': lambda: token.sub('', self.context.title),
+            'C1-Track-Kicker': lambda: token.sub('', self.context.supertitle)
         }
 
         for th_name in c1_track_headers:
@@ -95,7 +99,7 @@ class Base(object):
                 continue
             self.request.response.headers.add(
                 th_name,
-                track_header.encode('utf-8'))
+                track_header.encode('utf-8').strip())
 
     @zeit.web.reify
     def type(self):
@@ -450,15 +454,15 @@ def json_delta_time_from_date(date, parsed_base_date):
 def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     try:
         content = zeit.cms.interfaces.ICMSContent(unique_id)
-        cp = zeit.web.site.view_centerpage.Centerpage(content, request)
     except TypeError:
         return pyramid.response.Response('Invalid resource', 500)
     json_dt = {'delta_time': []}
-    for teaser in cp.area_main:
+    for article in zeit.web.site.view_centerpage.Centerpage(content, request):
         time = zeit.web.core.date.get_delta_time(
-            teaser[1], base_date=parsed_base_date)
+            article, base_date=parsed_base_date)
         if time:
-            json_dt['delta_time'].append({teaser[1].uniqueId: {'time': time}})
+            json_dt['delta_time'].append(
+                {article.uniqueId: {'time': time}})
     return json_dt
 
 
@@ -475,29 +479,17 @@ def json_comment_count(request):
         return pyramid.response.Response(
             'Invalid value for parameter: unique_id', 412)
 
-    articles = []
     if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
-        cp = zeit.web.site.view_centerpage.Centerpage(context, request)
-        for teaser in cp.area_main:
-            articles.append(teaser[1])
+        articles = list(
+            zeit.web.site.view_centerpage.Centerpage(context, request))
     else:
-        article = zeit.content.article.interfaces.IArticle(context)
-        articles.append(article)
+        articles = [zeit.content.article.interfaces.IArticle(context)]
 
     counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:
         count = counts.get(article.uniqueId, 0)
-
-        if 'no_interpolation' not in request.GET:
-            # XXX: Interpolate comment counts to compensate for slow updates to
-            #      the node comment statistics file.
-            queue = request.session.pop_flash(queue='cc_throttle')
-            throttle = min((queue + [0.7])[0] * 1.025, 1.0)
-            count = int(__import__('math').ceil(throttle * count))
-            request.session.flash(throttle, queue='cc_throttle')
-
         comment_count[article.uniqueId] = '%s Kommentar%s' % (
             count == 0 and 'Keine' or count, count != 1 and 'e' or '')
 

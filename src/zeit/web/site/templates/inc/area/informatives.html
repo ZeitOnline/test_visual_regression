@@ -1,0 +1,9 @@
+{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama with context %}
+
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
+
+{% block after_module_include %}
+    {% if index == 1 %}
+        {{ lama.adplace(view.banner(7), view) }}
+    {% endif %}
+{% endblock %}

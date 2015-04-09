@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/videostage/abstract-video.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/abstract-video.tpl" -%}
 
 {% block layout %}video-large{% endblock %}
 

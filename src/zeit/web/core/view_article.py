@@ -288,7 +288,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def issue_format(self):
-        return u' N\u00B0\u00A0%d/%d'
+        return u' N\u00B0\u00A0{}/{}'
 
     @zeit.web.reify
     def last_modified_wording(self):
@@ -300,9 +300,9 @@ class Article(zeit.web.core.view.Content):
     def source_label(self):
         if self.context.product and self.context.product.show:
             label = self.context.product.label or self.context.product.title
-            if self.context.product.show == 'issue':
-                label += self.issue_format % (self.context.volume,
-                                              self.context.year)
+            if self.context.product.show == 'issue' and self.context.volume:
+                label += self.issue_format.format(self.context.volume,
+                                                  self.context.year)
             return label
 
     @zeit.web.reify
@@ -315,9 +315,13 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def obfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
-            label = '%s, %s' % (self.source_label, babel.dates.format_date(
-                self.date_print_published, "d. MMMM yyyy", locale="de_De"))
-            return base64.b64encode(label.encode('latin-1'))
+            if self.source_label:
+                label = self.source_label
+                if self.date_print_published:
+                    label += ', ' + babel.dates.format_date(
+                        self.date_print_published,
+                        "d. MMMM yyyy", locale="de_De")
+                return base64.b64encode(label.encode('latin-1'))
 
     @property
     def copyrights(self):

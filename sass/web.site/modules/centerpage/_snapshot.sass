@@ -1,10 +1,6 @@
 .snapshot
-	filter: blur(0px)
 	margin-top: $twice
-	opacity: 1
 	position: relative
-	transition: all 2.5s ease-out
-	-webkit-filter: blur(0px)
 	&__title
 		color: $zon-charcoal
 		font-size: remify(21px)
@@ -20,15 +16,17 @@
 			margin: 0 0 remify(14px) 0
 	&__media-item
 		width: 100%
-	&--blurred
-		filter: blur(10px)
-		opacity: 0.1
-		-webkit-filter: blur(10px)
 
 .js .snapshot
-	// hide in js capable browser
-	// for lazy loading
-	display: none
+	display: block // needed for working transition
+	opacity: 0.1
+	+filter(blur(10px))
+	+transition-property(filter opacity)
+	+transition-duration(2.5s)
+	+transition-timing-function(ease-out)
+	&--uncovered
+		opacity: 1
+		+filter(blur(0px))
 
 .snapshot-readmore
 	color: $grey--mid

@@ -11,7 +11,7 @@ Parameters:
 {% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{%- set image = get_teaser_image(teaser_block, teaser) -%}
+{%- set image = get_teaser_image(module, teaser) -%}
 
 <div class="cp_button cp_button--cover">
     <a href="{{ teaser | create_url }}">
