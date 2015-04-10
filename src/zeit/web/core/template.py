@@ -548,7 +548,7 @@ def get_image_group(asset):
 @zeit.web.register_filter
 def attr_safe(text):
     """ Return an attribute safe version of text """
-    return re.sub('[\s*\d*]', '', text).lower()
+    return re.sub('[^a-zA-Z]', '', text).lower()
 
 
 @zeit.web.register_global
