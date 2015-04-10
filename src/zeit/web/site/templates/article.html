@@ -39,16 +39,19 @@
         <span class="more-interactions"></span>
         <span class="sharing">
             Teilen
-            <a class="sharing-link sharing-link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url|e }}" target="_blank">
+            {# Facebook's sharer.php seems to be deprecated, but nevertheless still works
+               it fetches all article related information out of the open graph og:-tags #}
+            <a class="sharing-link sharing-link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url }}" target="_blank">
                 Facebook
             </a>
-            <a class="sharing-link sharing-link--twitter" href="http://twitter.com/home?status={{ view.article_url|e }}" target="_blank">
+            <a class="sharing-link sharing-link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&url={{ view.article_url }}&via=zeitonline" target="_blank">
                 Twitter
             </a>
-            <a class="sharing-link sharing-link--googleplus" href="https://plus.google.com/share?url={{ view.article_url|e }}" target="_blank">
+            {# Google+ will be closed in the near future, all info is fetched automaticall, no params needed #}
+            <a class="sharing-link sharing-link--googleplus" href="https://plus.google.com/share?url={{ view.article_url }}" target="_blank">
                 Google +
             </a>
-            <a class="sharing-link sharing-link--mail" href="mailto:?subject=Artikel">
+            <a class="sharing-link sharing-link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE">
                 Mail
             </a>
         </span>
