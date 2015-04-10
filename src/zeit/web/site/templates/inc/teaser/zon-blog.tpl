@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-blog{% endblock %}
 
@@ -9,11 +9,11 @@
         "_zon-thumbnail.tpl" ignore missing with context %}
 {% endblock %}
 
-{% block teasaer_format_marker %}
+{% block teaser_format_marker %}
 	<span class="{{ self.layout() }}__marker">Blog</span>
 {% endblock %}
 
-{% block teasaer_format_name %}
+{% block teaser_format_name %}
 	<span class="{{ self.layout() }}__name">
 		{{ teaser.blog.name | hide_none }}
 		{% if teaser.teaserSupertitle or teaser.supertitle %} / {% endif %}

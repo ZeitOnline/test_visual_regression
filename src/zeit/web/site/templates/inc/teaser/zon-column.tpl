@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default_refactoring.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block teaser_modifier %}teaser-column--smallmedia teaser-column--hasmedia{% endblock %}
 {% block teaser_heading_modifier %}teaser-column__heading--padded{% endblock %}

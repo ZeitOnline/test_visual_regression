@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/image_refactoring.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/image.tpl" -%}
 
 {% if href %}
 {% block mediablock_wrapper %}

@@ -70,7 +70,7 @@ def test_area_main_should_filter_teasers(application):
 
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/teaser/default_refactoring.tpl')
+        'zeit.web.site:templates/inc/teaser/default.tpl')
 
     assert 'teaser' in tpl.blocks, 'No block named teaser'
     assert 'teaser_modifier' in tpl.blocks, 'No teaser_modifier block'
@@ -95,7 +95,7 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
 
 def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/teaser/default_refactoring.tpl')
+        'zeit.web.site:templates/inc/teaser/default.tpl')
 
     uid = 'http://xml.zeit.de/artikel/01'
     teaser = zeit.cms.interfaces.ICMSContent(uid)

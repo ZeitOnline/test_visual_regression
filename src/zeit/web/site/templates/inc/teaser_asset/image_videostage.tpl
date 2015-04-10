@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/image_refactoring.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/image.tpl" -%}
 
 {% block mediablock %}video-thumbnail video-thumbnail--large{% endblock %}
 {% block mediablock_item %}video-thumbnail__still{% endblock %}

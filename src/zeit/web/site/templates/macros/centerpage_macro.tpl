@@ -22,16 +22,12 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro include_teaser_datetime(teaser) -%}
-    <time class="teaser__datetime" datetime="{{ teaser | mod_date | strftime('%Y-%m-%d %H:%M') | hide_none }}">{{ get_delta_time(teaser) | hide_none }}</time>
+{% macro include_teaser_datetime(teaser, layout_id='', modifier='') -%}
+    <time class="{{ layout_id }}__datetime {{modifier}} js-update-datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">{{ get_delta_time(teaser) | hide_none }}</time>
 {%- endmacro %}
 
-{% macro include_teaser_commentcount(teaser) -%}
-    <a class="teaser__commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="9 Kommentare">9 Kommentare</a>
-{%- endmacro %}
-
-{% macro include_teaser_byline(teaser, modifier='') -%}
-    <span class="teaser__byline {{modifier}}">{{ teaser | render_byline }}</span>
+{% macro include_teaser_byline(teaser, layout_id='', modifier='') -%}
+    <span class="{{ layout_id }}__byline {{modifier}}">{{ teaser | render_byline }}</span>
 {%- endmacro %}
 
 {% macro image_copyright(copyright, blockname) -%}
@@ -43,3 +39,9 @@
         </a>
     {%- endif -%}
 {%- endmacro %}
+
+{% macro playbutton(modifier, duration) %}
+    <div class="video-text-playbutton video-text-playbutton--{{ modifier }}">
+        <span class="video-text-playbutton__text video-text-playbutton__text--{{ modifier }}">Video ansehen</span><span class="video-text-playbutton__duration">{{ duration | hide_none }}</span>
+    </div>
+{% endmacro %}
