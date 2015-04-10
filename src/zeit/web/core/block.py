@@ -117,6 +117,10 @@ class Infobox(object):
         self.contents = []
         if model_block.references is None:
             return
+        try:
+            self.title = model_block.references.supertitle
+        except:
+            self.title = 'infobox'
         for block in model_block.references.xml.xpath('block'):
             text = block.find('text')
             title = block.find('title')
