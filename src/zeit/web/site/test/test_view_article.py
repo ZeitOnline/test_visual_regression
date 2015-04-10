@@ -23,7 +23,8 @@ def test_article_should_render_full_view(testserver, testbrowser):
         testserver.url, '/komplettansicht'))
     article = zeit.cms.interfaces.ICMSContent(
         article_path.format('http://xml.zeit.de', ''))
-    assert len(browser.cssselect('p.paragraph')) == article.paragraphs
+    assert len(browser.cssselect(
+        '.article-page > p.paragraph')) == article.paragraphs
 
 
 def test_article_full_view_has_no_pagination(testbrowser, testserver):
@@ -206,4 +207,3 @@ def test_infobox_interactions(selenium_driver, testserver, screen_size):
         assert tabpanels[1].get_attribute('aria-hidden') == 'true'
         assert tabpanels[2].get_attribute('aria-hidden') == 'true'
         assert tabpanels[3].get_attribute('aria-hidden') == 'false'
-
