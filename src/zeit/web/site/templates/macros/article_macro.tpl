@@ -118,23 +118,33 @@
 {% macro infobox(obj) %}
 {% if obj.contents -%}
     {% set id = 'infobox' | random_id_fragment %}
-    <aside class="infobox">
-        <div class="infobox__navigation">
+    <aside class="infobox" id="{{id}}">
+        <div class="infobox__navigation" role="tablist">
         {% for title, text in obj.contents %}
             <div class="infobox__navtitle">
-                <label for="{{id}}-{{loop.index}}-radio" class="infobox__navlabel {%- if loop.first %} infobox__navlabel--checked{% endif -%}">{{ title }}</label>
+                <label 
+                    id="{{id}}-{{loop.index}}-tablabel" 
+                    for="{{id}}-{{loop.index}}-radio" 
+                    class="infobox__navlabel {%- if loop.first %} infobox__navlabel--checked{% endif -%}" 
+                    role="tab" 
+                    aria-selected="{%- if loop.first %}true{%- else -%}false{% endif -%}"
+                >{{ title }}</label>
             </div>
         {% endfor %}
         </div>
         <div class="infobox__content">
         {% for title, text in obj.contents %}
             <section class="infobox__tab">
-                <input class="infobox__checkbox" name="{{id}}" id="{{id}}-{{loop.index}}-check" type="checkbox" />
+                <input class="infobox__checkbox" id="{{id}}-{{loop.index}}-check" type="checkbox" />
                 <input class="infobox__radio" name="{{id}}-radio" id="{{id}}-{{loop.index}}-radio" type="radio" {%- if loop.first -%}checked="checked"{%- endif -%}/>
                 <div class="infobox__title">
-                    <label for="{{id}}-{{loop.index}}-check" class="infobox__label">{{ title }}</label>
+                    <label id="{{id}}-{{loop.index}}-label" for="{{id}}-{{loop.index}}-check" class="infobox__label" role="tab">{{ title }}</label>
                 </div>
-                <article class="infobox__inner">
+                <article 
+                    id="{{id}}-{{loop.index}}-panel" 
+                    class="infobox__inner" 
+                    role="tabpanel" 
+                    aria-hidden="true">
                 {% for item in text %}
                     {{ (item | block_type or "no_block") | macro(item) }}
                 {% endfor %}
