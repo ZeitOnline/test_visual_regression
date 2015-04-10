@@ -117,7 +117,7 @@
 
 {% macro infobox(obj) %}
 {% if obj.contents -%}
-    {% set id = 'infobox' | random_id_fragment %}
+    {% set id = obj.title | attr_safe %}
     <aside class="infobox" id="{{id}}">
         <div class="infobox__navigation" role="tablist">
         {% for title, text in obj.contents %}

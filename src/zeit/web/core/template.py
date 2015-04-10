@@ -9,7 +9,6 @@ import urlparse
 import jinja2
 import babel.dates
 import pyramid.threadlocal
-import random
 import repoze.bitblt.transform
 import zope.component
 
@@ -547,8 +546,9 @@ def get_image_group(asset):
 
 
 @zeit.web.register_filter
-def random_id_fragment(id):
-    return '{!s}-{!s}'.format(id, random.randint(0,10001))
+def attr_safe(text):
+    """ Return an attribute safe version of text """
+    return re.sub('[\s*\d*]', '', text).lower()
 
 
 @zeit.web.register_global
