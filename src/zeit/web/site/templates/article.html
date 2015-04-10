@@ -32,3 +32,25 @@
 {% block article_pagination %}
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" ignore missing %}
 {% endblock article_pagination %}
+
+{% block article_interactions %}
+    <div class="article-interactions">
+        <span class="interaction-print"></span>
+        <span class="more-interactions"></span>
+        <span class="sharing">
+            Teilen
+            <a class="sharing-link sharing-link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url|e }}" target="_blank">
+                Facebook
+            </a>
+            <a class="sharing-link sharing-link--twitter" href="http://twitter.com/home?status={{ view.article_url|e }}" target="_blank">
+                Twitter
+            </a>
+            <a class="sharing-link sharing-link--googleplus" href="https://plus.google.com/share?url={{ view.article_url|e }}" target="_blank">
+                Google +
+            </a>
+            <a class="sharing-link sharing-link--mail" href="mailto:?subject=Artikel">
+                Mail
+            </a>
+        </span>
+    </div>
+{% endblock %}
