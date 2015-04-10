@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
-  <supertitle py:pytype="str">Saurier</supertitle>
+  <supertitle py:pytype="str">10 Saurier sind super</supertitle>
   <block>
     <title py:pytype="str">Zeitalter</title>
     <text>
