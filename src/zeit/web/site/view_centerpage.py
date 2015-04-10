@@ -148,9 +148,28 @@ class LegacyCenterpage(
             except AttributeError:
                 return 'parquet-regular'
 
-        return [LegacyRegion([LegacyArea([m], layout=get_layout(m))]) for area
-                in self.context.values()[1].itervalues() if valid_area(area)
-                for m in area.itervalues() if valid_module(m)]
+        region = self.context.values()[1]
+
+        def legacy_transformation(m):
+            if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
+                m = self.spektrum_hp_feed
+            modules = [LegacyModule([t]) for t in m][:getattr(
+                m, 'display_amount', 3)]
+
+            area = LegacyArea(modules, layout=get_layout(m))
+
+            area.referenced_cp = getattr(m, 'referenced_cp', None)
+            area.title = getattr(m, 'title', None)
+            area.read_more = getattr(m, 'read_more', None)
+            area.read_more_url = getattr(m, 'read_more_url', None)
+            area.display_amount = getattr(m, 'display_amount', 0)
+
+            return LegacyRegion([area])
+
+        # Slice teaser_block teasers into separate modules encapsulated in
+        # areas and regions.
+        return [legacy_transformation(m) for area in region.itervalues()
+                if valid_area(area) for m in area.values() if valid_module(m)]
 
     @zeit.web.reify
     def area_fullwidth(self):
