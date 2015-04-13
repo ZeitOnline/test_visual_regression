@@ -8,6 +8,7 @@ import pyramid.view
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.cp.layout
 
 import zeit.web.core.interfaces
 import zeit.web.core.reach
@@ -21,25 +22,12 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-class LegacyLayout(zeit.web.core.utils.nsunicode):
-    def __new__(cls, arg):
-        if isinstance(arg, tuple):
-            arg, id_ = arg
-        else:
-            id_ = arg[:]
-        layout = super(LegacyLayout, cls).__new__(cls, arg)
-        layout.id = id_
-        return layout
-
-    def __repr__(self):
-        return '<{} at {} with layout {}>'.format(
-            self.__class__.__name__, hex(id(self)), unicode(self))
-
-
 class LegacyModule(zeit.web.core.utils.nslist):
     def __init__(self, arg, **kw):
         super(LegacyModule, self).__init__(arg)
-        self.layout = LegacyLayout(kw.pop('layout', 'default'))
+        layout_id = kw.pop('layout', 'default')
+        self.layout = zeit.content.cp.layout.BlockLayout(
+            layout_id, layout_id, areas=[], image_pattern=layout_id)
 
     def __repr__(self):
         return '<{} at {} with {} entr{}>'.format(
@@ -51,7 +39,9 @@ class LegacyArea(collections.OrderedDict):
     def __init__(self, arg, **kw):
         super(LegacyArea, self).__init__(
             [('id-{}'.format(uuid.uuid1()), v) for v in arg])
-        self.layout = LegacyLayout(kw.pop('layout', 'fullwidth'))
+        layout_id = kw.pop('layout', 'fullwidth')
+        self.layout = zeit.content.cp.layout.BlockLayout(
+            layout_id, layout_id, areas=[], image_pattern=layout_id)
         self.width = kw.pop('width', '1/1')
 
     def __repr__(self):
@@ -64,7 +54,9 @@ class LegacyRegion(collections.OrderedDict):
     def __init__(self, arg, **kw):
         super(LegacyRegion, self).__init__(
             [('id-{}'.format(uuid.uuid1()), v) for v in arg])
-        self.layout = LegacyLayout(kw.pop('layout', 'normal'))
+        layout_id = kw.pop('layout', 'normal')
+        self.layout = zeit.content.cp.layout.BlockLayout(
+            layout_id, layout_id, areas=[], image_pattern=layout_id)
         self.title = kw.pop('title', None)
 
     def __repr__(self):
@@ -74,11 +66,63 @@ class LegacyRegion(collections.OrderedDict):
 
 
 @pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    renderer='templates/centerpage.html')
+class Centerpage(
+        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
+
+    @zeit.web.reify
+    def regions(self):
+        return self.context.values()
+
+    @zeit.web.reify
+    def last_semantic_change(self):
+        """Timestamp representing the last semantic change of the centerpage.
+        :rtype: datetime.datetime
+        """
+
+        return zeit.cms.content.interfaces.ISemanticChange(
+            self.context).last_semantic_change
+
+    @zeit.web.reify
+    def topiclink_title(self):
+        """Cache topiclink_title
+        :rtype: str
+        """
+
+        return self.context.topiclink_title or 'Schwerpunkte'
+
+    @zeit.web.reify
+    def topiclinks(self):
+        return zeit.web.core.interfaces.ITopicLink(self.context)
+
+    @zeit.web.reify
+    def spektrum_hp_feed(self):
+        try:
+            return zeit.web.site.spektrum.HPFeed()
+        except (TypeError, AttributeError):
+            return
+
+    @zeit.web.reify
+    def video_series_list(self):
+        return zeit.web.core.sources.video_series
+
+    @zeit.web.reify
+    def ressort(self):
+        if self.is_hp:
+            return 'homepage'
+        elif self.context.ressort:
+            return self.context.ressort.lower()
+        else:
+            return ''
+
+
+@pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
-class LegacyCenterpage(
-        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
+class LegacyCenterpage(Centerpage):
 
     """Main view class for ZEIT ONLINE centerpages."""
 
@@ -153,6 +197,8 @@ class LegacyCenterpage(
         def legacy_transformation(m):
             if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
                 m = self.spektrum_hp_feed
+                # XXX: This should be re-organized into something like
+                #      zeit.web.site.module.Spektrum
             modules = [LegacyModule([t]) for t in m][:getattr(
                 m, 'display_amount', 3)]
 
@@ -164,7 +210,7 @@ class LegacyCenterpage(
             area.read_more_url = getattr(m, 'read_more_url', None)
             area.display_amount = getattr(m, 'display_amount', 0)
 
-            return LegacyRegion([area])
+            return LegacyRegion([area], layout=get_layout(m))
 
         # Slice teaser_block teasers into separate modules encapsulated in
         # areas and regions.
@@ -199,7 +245,7 @@ class LegacyCenterpage(
 
         module = LegacyModule(
             zeit.web.core.reach.fetch('mostread', self.ressort, limit=3),
-            layout=('buzz-mostread', 'mostread'))
+            layout='buzz-mostread')
         module.header = 'Meistgelesene Artikel'
         return module
 
@@ -211,7 +257,7 @@ class LegacyCenterpage(
 
         module = LegacyModule(
             zeit.web.core.reach.fetch('comments', self.ressort, limit=3),
-            layout=('buzz-comments', 'comments'))
+            layout='buzz-comments')
         module.header = 'Meistkommentiert'
         return module
 
@@ -223,7 +269,7 @@ class LegacyCenterpage(
 
         module = LegacyModule(
             zeit.web.core.reach.fetch('facebook', self.ressort, limit=3),
-            layout=('buzz-facebook', 'facebook'))
+            layout='buzz-facebook')
         module.header = 'Meistgeteilt'
         return module
 
@@ -286,55 +332,3 @@ class LegacyCenterpage(
             return LegacyModule([snapshot], layout='snapshot')
         except TypeError:
             return
-
-    @zeit.web.reify
-    def last_semantic_change(self):
-        """Timestamp representing the last semantic change of the centerpage.
-        :rtype: datetime.datetime
-        """
-
-        return zeit.cms.content.interfaces.ISemanticChange(
-            self.context).last_semantic_change
-
-    @zeit.web.reify
-    def topiclink_title(self):
-        """Cache topiclink_title
-        :rtype: str
-        """
-
-        return self.context.topiclink_title or 'Schwerpunkte'
-
-    @zeit.web.reify
-    def topiclinks(self):
-        return zeit.web.core.interfaces.ITopicLink(self.context)
-
-    @zeit.web.reify
-    def spektrum_hp_feed(self):
-        try:
-            return zeit.web.site.spektrum.HPFeed()
-        except (TypeError, AttributeError):
-            return
-
-    @zeit.web.reify
-    def video_series_list(self):
-        return zeit.web.core.sources.video_series
-
-    @zeit.web.reify
-    def ressort(self):
-        if self.is_hp:
-            return 'homepage'
-        elif self.context.ressort:
-            return self.context.ressort.lower()
-        else:
-            return ''
-
-
-@pyramid.view.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
-    renderer='templates/centerpage.html')
-class Centerpage(LegacyCenterpage):
-
-    @zeit.web.reify
-    def regions(self):
-        return self.context.values()
