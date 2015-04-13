@@ -35,25 +35,35 @@
 
 {% block article_interactions %}
     <div class="article-interactions">
-        <span class="interaction-print"></span>
-        <span class="more-interactions"></span>
-        <span class="sharing">
-            Teilen
-            {# Facebook's sharer.php seems to be deprecated, but nevertheless still works
-               it fetches all article related information out of the open graph og:-tags #}
-            <a class="sharing-link sharing-link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url }}" target="_blank">
-                Facebook
-            </a>
-            <a class="sharing-link sharing-link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&url={{ view.article_url }}&via=zeitonline" target="_blank">
-                Twitter
-            </a>
-            {# Google+ will be closed in the near future, all info is fetched automaticall, no params needed #}
-            <a class="sharing-link sharing-link--googleplus" href="https://plus.google.com/share?url={{ view.article_url }}" target="_blank">
-                Google +
-            </a>
-            <a class="sharing-link sharing-link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE">
-                Mail
-            </a>
-        </span>
+        <div class="interaction-print"></div>
+        <div class="more-interactions"></div>
+        <div class="sharing-menu">
+            <span class="sharing-menu__title">Teilen</span>
+            <ul class="sharing-menu__items">
+                {# Facebook's sharer.php seems to be deprecated, but nevertheless still works
+                   it fetches all article related information out of the open graph og:-tags #}
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url }}" target="_blank">
+                        Facebook
+                    </a>
+                </li>
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&url={{ view.article_url }}&via=zeitonline" target="_blank">
+                        Twitter
+                    </a>
+                </li>
+                {# Google+ will be closed in the near future, all info is fetched automaticall, no params needed #}
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--google" href="https://plus.google.com/share?url={{ view.article_url }}" target="_blank">
+                        Google +
+                    </a>
+                </li>
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE">
+                        Mail
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 {% endblock %}
