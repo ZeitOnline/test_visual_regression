@@ -146,7 +146,7 @@ def area_width(width):
 
 @zeit.web.register_filter
 def get_teaser_layout(teaser_block, teaser_position=0, request=None):
-    # TODO: Rename to get_block_layout
+    # TODO: Rename to get_layout
 
     request = request or pyramid.threadlocal.get_current_request()
 

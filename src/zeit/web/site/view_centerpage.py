@@ -195,6 +195,8 @@ class LegacyCenterpage(Centerpage):
         region = self.context.values()[1]
 
         def legacy_transformation(m):
+            layout = get_layout(m)
+
             if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
                 m = self.spektrum_hp_feed
                 # XXX: This should be re-organized into something like
@@ -202,7 +204,7 @@ class LegacyCenterpage(Centerpage):
             modules = [LegacyModule([t]) for t in m][:getattr(
                 m, 'display_amount', 3)]
 
-            area = LegacyArea(modules, layout=get_layout(m))
+            area = LegacyArea(modules, layout=layout)
 
             area.referenced_cp = getattr(m, 'referenced_cp', None)
             area.title = getattr(m, 'title', None)
@@ -210,7 +212,7 @@ class LegacyCenterpage(Centerpage):
             area.read_more_url = getattr(m, 'read_more_url', None)
             area.display_amount = getattr(m, 'display_amount', 0)
 
-            return LegacyRegion([area], layout=get_layout(m))
+            return LegacyRegion([area], layout=layout)
 
         # Slice teaser_block teasers into separate modules encapsulated in
         # areas and regions.
