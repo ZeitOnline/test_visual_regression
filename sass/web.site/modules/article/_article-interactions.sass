@@ -1,0 +1,42 @@
+.article-interactions
+	border-top: 1px solid $zon_light_grey
+	padding: remify(8px)
+
+.sharing-menu
+	font-size: remify(14px)
+	font-family: $font-tabletgothic
+	color: $zon_grey
+	+on-interaction
+		color: $zon_dark_grey
+	&__items
+		display: block
+	&__item
+		display: inline-block
+		&:before
+			content: " / "
+			color: $zon_grey
+			margin: remify(0 6px)
+		&:first-child:before
+			content: ""
+			margin: 0
+	&__link
+		&--facebook
+			+link
+				color: #3B5998 // corporate fb color
+			+on-interaction
+				border-bottom: 1px solid #3B5998
+		&--twitter
+			+link
+				color: #55ACEE // corporate twitter color
+			+on-interaction
+				border-bottom: 1px solid #55ACEE
+		&--google
+			+link
+				color: #CC3732 // corporate g+ color
+			+on-interaction
+				border-bottom: 1px solid #CC3732
+		&--mail
+			+link
+				color: $zon_grey
+			+on-interaction
+				border-bottom: 1px solid $zon_grey
