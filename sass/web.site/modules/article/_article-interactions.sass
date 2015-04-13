@@ -1,24 +1,33 @@
 .article-interactions
 	border-top: 1px solid $zon_light_grey
-	padding: remify(8px)
+	padding: remify(12px 0)
 
 .sharing-menu
 	font-size: remify(14px)
 	font-family: $font-tabletgothic
-	color: $zon_grey
-	+on-interaction
-		color: $zon_dark_grey
+	&__title
+		color: $zon_grey
+		cursor: pointer
+		letter-spacing: 0.04em
+		+on-interaction
+			color: $zon_dark_grey
+		&:after
+			+drop_icon()
 	&__items
-		display: block
+		display: none
+		padding: 0
+		margin: remify(20px 0)
 	&__item
 		display: inline-block
+		font-weight: bold
 		&:before
 			content: " / "
 			color: $zon_grey
 			margin: remify(0 6px)
+			display: inline-block
+
 		&:first-child:before
-			content: ""
-			margin: 0
+			display: none
 	&__link
 		&--facebook
 			+link
@@ -40,3 +49,12 @@
 				color: $zon_grey
 			+on-interaction
 				border-bottom: 1px solid $zon_grey
+	// js-induced state modifications
+	&--active
+		& > .sharing-menu__title
+			color: $zon_dark_grey
+			&:after
+				+rotate(180deg)
+		& > .sharing-menu__items,
+		.no-js .sharing-menu__items // no-js fallback
+			display: block
