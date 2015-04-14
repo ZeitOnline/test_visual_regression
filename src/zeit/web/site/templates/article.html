@@ -34,11 +34,11 @@
 {% endblock article_pagination %}
 
 {% block article_interactions %}
-    <div class="article-interactions">
+    <div class="article-interactions article__item">
         <div class="interaction-print"></div>
         <div class="more-interactions"></div>
         <div class="sharing-menu">
-            <span class="sharing-menu__title">Teilen</span>
+            <span class="sharing-menu__title js-sharing-menu">Teilen</span>
             <ul class="sharing-menu__items">
                 {# Facebook's sharer.php seems to be deprecated, but nevertheless still works
                    it fetches all article related information out of the open graph og:-tags #}
