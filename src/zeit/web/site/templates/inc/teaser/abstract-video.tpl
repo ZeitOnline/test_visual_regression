@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/centerpage_macro_refactoring.tpl' as cp with context %}
+{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp with context %}
 
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}">
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser | create_url }}">

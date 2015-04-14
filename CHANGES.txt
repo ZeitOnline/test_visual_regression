@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1536: Improved get_teaser_image perfomance
 
+- Maintenance: clean up templates
+
 
 1.19 (2015-04-08)
 -----------------
