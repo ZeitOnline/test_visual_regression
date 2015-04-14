@@ -4,7 +4,7 @@ Change log for zeit.web
 1.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1536: Improved get_teaser_image perfomance
 
 
 1.19 (2015-04-08)
