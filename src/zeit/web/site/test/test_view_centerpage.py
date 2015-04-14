@@ -156,7 +156,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('cp-area--lead')[0]
+    box = driver.find_elements_by_class_name('cp-area--twothirds')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
@@ -511,7 +511,7 @@ def test_parquet_should_render_desired_amount_of_teasers(
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
     teasers = browser.cssselect(
-        '#parquet > .parquet-row:first-child '
+        '.cp-area--parquet t > .parquet-row:first-child '
         'article[data-block-type="teaser"]')
     actual_amount = len(teasers)
     assert actual_amount == desired_amount, (

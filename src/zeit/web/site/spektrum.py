@@ -20,21 +20,26 @@ import zeit.web.core.view_centerpage
 import zeit.web.site.view
 
 
-class HPFeed(list):
+class HPFeed(object):
+    # XXX: This is a factory class just because circular imports are circular.
 
-    def __init__(self):
+    def __new__(cls):
         """Generate a list of teasers from an RSS feed."""
+        from zeit.web.site.view_centerpage import LegacyArea
+        from zeit.web.site.view_centerpage import LegacyModule
+
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         feed_url = conf.get('spektrum_hp_feed')
 
         try:
             resp = requests.get(feed_url, timeout=2.0)
             xml = lxml.etree.fromstring(resp.content)
-            super(HPFeed, self).__init__(
-                Teaser(i) for i in xml.xpath('/rss/channel/item'))
+            return LegacyArea(
+                LegacyModule([Teaser(i)], layout='parquet-spektrum')
+                for i in xml.xpath('/rss/channel/item'))
         except (requests.exceptions.RequestException,
                 lxml.etree.XMLSyntaxError):
-            super(HPFeed, self).__init__()
+            return LegacyArea([])
 
 
 class Teaser(object):

@@ -37,6 +37,6 @@ def spektrum_hp_feed(request):
     request.response.cache_expires(60)
     return {
         'esi_toggle': True,
-        'row': zeit.web.site.spektrum.HPFeed(),
+        'area': zeit.web.site.spektrum.HPFeed(),
         'parquet_position': request.params.get('parquet-position')
     }

@@ -98,13 +98,6 @@ class Centerpage(
         return zeit.web.core.interfaces.ITopicLink(self.context)
 
     @zeit.web.reify
-    def spektrum_hp_feed(self):
-        try:
-            return zeit.web.site.spektrum.HPFeed()
-        except (TypeError, AttributeError):
-            return
-
-    @zeit.web.reify
     def video_series_list(self):
         return zeit.web.core.sources.video_series
 
@@ -198,20 +191,22 @@ class LegacyCenterpage(Centerpage):
             layout = get_layout(m)
 
             if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
-                m = self.spektrum_hp_feed
+                area = zeit.web.site.spektrum.HPFeed()
                 # XXX: This should be re-organized into something like
-                #      zeit.web.site.module.Spektrum
-            modules = [LegacyModule([t], layout=layout) for t in m][:getattr(
-                m, 'display_amount', 3)]
+                #      zeit.web.modules.Spektrum and selected automatically.
+                #      -> This `if` must fall!
+            else:
+                modules = [LegacyModule([t], layout=layout) for t in m][
+                    :getattr(m, 'display_amount', 3)]
 
-            area = LegacyArea(modules, layout=layout)
-            area.referenced_cp = getattr(m, 'referenced_cp', None)
-            area.title = getattr(m, 'title', None)
-            area.read_more = getattr(m, 'read_more', None)
-            area.read_more_url = getattr(m, 'read_more_url', None)
-            area.display_amount = getattr(m, 'display_amount', 0)
+                area = LegacyArea(modules, layout=layout)
+                area.referenced_cp = getattr(m, 'referenced_cp', None)
+                area.title = getattr(m, 'title', None)
+                area.read_more = getattr(m, 'read_more', None)
+                area.read_more_url = getattr(m, 'read_more_url', None)
+                area.display_amount = getattr(m, 'display_amount', 0)
 
-            return LegacyRegion([area], layout=layout)
+            return LegacyRegion([area] if area else [], layout=layout)
 
         # Slice teaser_block teasers into separate modules encapsulated in
         # areas and regions.

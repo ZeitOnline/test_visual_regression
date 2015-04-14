@@ -132,7 +132,7 @@ def test_spektrum_area_should_render_empty_if_feed_unavailable(
     monkeypatch.setattr(zeit.web.site.spektrum, 'HPFeed', list)
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    assert not browser.cssselect('#parquet-spektrum')
+    assert not browser.cssselect('.parquet-row--spektrum')
 
 
 def test_spektrum_cooperation_route_should_be_configured(testserver):
