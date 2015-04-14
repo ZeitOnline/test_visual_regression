@@ -430,7 +430,8 @@ def _existing_image(asset_id, base_name, patterns, ext, filenames):
 
     try:
         name = possible_filenames.intersection(filenames).pop()
-        pattern = name.replace(base_name, '').replace(ext, '')
+        pattern = name.replace('{}-'.format(base_name), '')
+        pattern = pattern.replace('.{}'.format(ext), '')
         name = "{}{}".format(asset_id, name)
 
         return zeit.cms.interfaces.ICMSContent(name), pattern
