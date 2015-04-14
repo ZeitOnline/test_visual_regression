@@ -201,11 +201,10 @@ class LegacyCenterpage(Centerpage):
                 m = self.spektrum_hp_feed
                 # XXX: This should be re-organized into something like
                 #      zeit.web.site.module.Spektrum
-            modules = [LegacyModule([t]) for t in m][:getattr(
+            modules = [LegacyModule([t], layout=layout) for t in m][:getattr(
                 m, 'display_amount', 3)]
 
             area = LegacyArea(modules, layout=layout)
-
             area.referenced_cp = getattr(m, 'referenced_cp', None)
             area.title = getattr(m, 'title', None)
             area.read_more = getattr(m, 'read_more', None)

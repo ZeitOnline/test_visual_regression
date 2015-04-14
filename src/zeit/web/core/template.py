@@ -501,6 +501,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         teaser_image.image_pattern = image_pattern
         return teaser_image
     except TypeError:
+        log.debug('Cannot retrieve teaser image: {}'.format(image_id))
         # Don't fallback when a unique_id is given explicitly in order to
         # prevent infinite recursion.
         if not unique_id:
