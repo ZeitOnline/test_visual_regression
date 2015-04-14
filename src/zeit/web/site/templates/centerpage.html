@@ -23,7 +23,9 @@ Available attributes:
 
 {% block main %}
     {% for region in view.regions %}
-        {%- include ["zeit.web.site:templates/inc/region/" + region.layout.id + ".html",
+        {# XXX: Waiting for regions to have a layout or ID attribute. #}
+        {% set region_layout = region | get_attr('layout', None) | get_attr('id', 'default') %}
+        {%- include ["zeit.web.site:templates/inc/region/" + region_layout + ".html",
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
 {% endblock main %}
