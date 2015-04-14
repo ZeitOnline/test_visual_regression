@@ -1,5 +1,5 @@
 .article-interactions
-	border-top: 1px solid $zon_light_grey
+	border-top: 2px solid $zon_lighter_grey
 	padding: remify(12px 0)
 
 .sharing-menu
@@ -14,21 +14,27 @@
 		&:after
 			+drop_icon()
 	&__items
-		display: none
+		// we animate both margin & max-height so it looks smoother
+		+transition-property(margin max-height)
+		+transition-duration(0.5s)
+		+transition-timing-function(ease)
+		max-height: 0 // animated
+		margin: 0 // animated
+		overflow: hidden // needed for animation
 		padding: 0
-		margin: remify(20px 0)
 	&__item
 		display: inline-block
-		font-weight: bold
 		&:before
 			content: " / "
-			color: $zon_grey
-			margin: remify(0 6px)
+			color: $zon_light_grey
+			margin: remify(0 8px)
 			display: inline-block
 
 		&:first-child:before
+			content: ""
 			display: none
 	&__link
+		font-weight: bold
 		&--facebook
 			+link
 				color: #3B5998 // corporate fb color
@@ -57,4 +63,5 @@
 				+rotate(180deg)
 		& > .sharing-menu__items,
 		.no-js .sharing-menu__items // no-js fallback
-			display: block
+			margin:  remify(16px 0) // animated
+			max-height: remify(64px) // animated
