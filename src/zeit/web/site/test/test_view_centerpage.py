@@ -481,7 +481,7 @@ def test_small_teaser_without_image_has_no_padding_left(
 def test_parquet_region_list_should_have_regions(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert len(view.region_list_parquet) == 4, (
         'View contains {} parquet regions instead of 4' % len(
             view.region_list_parquet))
@@ -490,16 +490,16 @@ def test_parquet_region_list_should_have_regions(application):
 def test_parquet_regions_should_have_one_area_each(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert all(len(region) == 1 for region in view.region_list_parquet)
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert all([len(region) == 1 for region in view.region_list_parquet])
 
 
-def test_parquet_region_areas_should_have_three_modules_each(application):
+def test_parquet_region_areas_should_have_multiple_modules_each(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert all(len(area.values()) == 3 for region in view.region_list_parquet
-               for area in region)
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert all([len(area.values()) > 1 for region in view.region_list_parquet
+                for area in region.values()])
 
 
 def test_parquet_should_render_desired_amount_of_teasers(
@@ -617,7 +617,7 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
 
 def test_module_printbox_should_contain_teaser_image(testserver):
     mycp = mock.Mock()
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(mycp, mock.Mock())
     image = view.module_printbox[0].image
     assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
