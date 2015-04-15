@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1632: Choose new CP by name pattern, if it exists
 
+- ZON-1535: Add title to comment-text
+
 
 1.19 (2015-04-08)
 -----------------
