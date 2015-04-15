@@ -58,6 +58,13 @@ def test_feature_longform_should_be_discovered_during_traversal(my_traverser):
     assert zeit.web.core.article.IFeatureLongform.providedBy(tdict['context'])
 
 
+def test_parallel_cps_should_be_discovered_during_traversal(my_traverser):
+    req = pyramid.request.Request.blank('/parallel_cps/index')
+    tdict = my_traverser(req)
+    assert tdict['context'].uniqueId == (
+        'http://xml.zeit.de/parallel_cps/index.cp2015')
+
+
 def test_acceptable_pagination_should_not_redirect(testserver):
     resp = requests.get('%s/artikel/03/seite-3' % testserver.url,
                         allow_redirects=False)

@@ -23,6 +23,7 @@ import zope.interface.declarations
 
 import zeit.connector
 import zeit.content.gallery.interfaces
+import zeit.content.cp.interfaces
 import zeit.magazin.interfaces
 
 from zeit.web.core.article import IColumnArticle
@@ -389,6 +390,18 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             tdict = super(RepositoryTraverser, self).__call__(request)
 
             context = tdict['context']
+
+            # Rewriting the context, if we have a CP2015
+            # When zeit.content.cp is in production for everybody,
+            # we can remove this. (RD)
+            try:
+                if (zeit.content.cp.interfaces.ICenterPage.providedBy(
+                    context)):
+                    tdict['context'] = context = context.__parent__[(
+                        '{}.cp2015'.format(context.__name__))]
+            except (KeyError, TypeError):
+                pass
+
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 template = zeit.magazin.interfaces.IArticleTemplateSettings(
                     context).template
