@@ -60,7 +60,7 @@ def test_area_main_should_filter_teasers(application):
     context.values = val
 
     request = mock.Mock()
-    cp = zeit.web.site.view_centerpage.Centerpage(context, request)
+    cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
     assert len(cp.area_main) == 2
     assert cp.area_main.values()[0].layout.id == 'zon-large'
@@ -562,7 +562,7 @@ def test_video_series_should_be_available(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    video_series = view.video_series_list
+    video_series = view.module_videostage.video_series_list
     assert len(video_series) > 0, (
         'Series object is empty')
 

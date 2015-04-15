@@ -3,6 +3,7 @@
     <header>
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
+    {# We heard you like modules, so we put some modules in your module (ND) #}
     {% set video_module = module %}
     <div class="video-stage-main">
         {% with %}
@@ -26,7 +27,7 @@
             <label for="series_select" class="video-series__label">Videoserien</label>
             <select id="series_select" class="video-series__select" name="serie">
                 <option>Bitte auswählen</option>
-                {% for video in view.video_series_list %}
+                {% for video in video_module.video_series_list %}
                     <option value="{{ video.url }}">{{ video.title }}</option>
                 {% endfor %}
             </select>

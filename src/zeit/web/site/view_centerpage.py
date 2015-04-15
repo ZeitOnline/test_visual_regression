@@ -98,10 +98,6 @@ class Centerpage(
         return zeit.web.core.interfaces.ITopicLink(self.context)
 
     @zeit.web.reify
-    def video_series_list(self):
-        return zeit.web.core.sources.video_series
-
-    @zeit.web.reify
     def ressort(self):
         if self.is_hp:
             return 'homepage'
@@ -145,11 +141,18 @@ class LegacyCenterpage(Centerpage):
         return regions
 
     @zeit.web.reify
-    def region_snapshot(self):
-        area_snapshot = LegacyArea([b for b in [self.module_snapshot] if b],
-                                   layout='snapshot', width='1/1')
+    def area_fullwidth(self):
+        """Return all fullwidth teaser blocks with a minimum length of 1.
+        :rtype: list
+        """
 
-        return LegacyRegion([area_snapshot], layout='snapshot')
+        def valid_module(m):
+            return zeit.web.core.template.get_teaser_layout(m) in (
+                'zon-fullwidth',)
+
+        lead = self.context.values()[0]['lead']
+        return LegacyArea(
+            [m for m in lead.itervalues() if valid_module(m)])
 
     @zeit.web.reify
     def area_main(self):
@@ -165,67 +168,6 @@ class LegacyCenterpage(Centerpage):
         return LegacyArea(
             [m for m in area.itervalues() if valid_module(m)],
             layout='lead', width='2/3')
-
-    @zeit.web.reify
-    def region_list_parquet(self):
-        def valid_area(a):
-            try:
-                return a.layout.id in ('parquet',)
-            except AttributeError:
-                return
-
-        def valid_module(m):
-            return zeit.web.core.template.get_teaser_layout(m) in (
-                'zon-parquet-large', 'zon-parquet-small') or getattr(
-                m, 'cpextra', None) in ('parquet-spektrum',)
-
-        def get_layout(m):
-            try:
-                return getattr(m, 'cpextra', None) or m.layout.id
-            except AttributeError:
-                return 'parquet-regular'
-
-        region = self.context.values()[1]
-
-        def legacy_transformation(m):
-            layout = get_layout(m)
-
-            if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
-                area = zeit.web.site.spektrum.HPFeed()
-                # XXX: This should be re-organized into something like
-                #      zeit.web.modules.Spektrum and selected automatically.
-                #      -> This `if` must fall!
-            else:
-                modules = [LegacyModule([t], layout=layout) for t in m][
-                    :getattr(m, 'display_amount', 3)]
-
-                area = LegacyArea(modules, layout=layout)
-                area.referenced_cp = getattr(m, 'referenced_cp', None)
-                area.title = getattr(m, 'title', None)
-                area.read_more = getattr(m, 'read_more', None)
-                area.read_more_url = getattr(m, 'read_more_url', None)
-                area.display_amount = getattr(m, 'display_amount', 0)
-
-            return LegacyRegion([area] if area else [], layout=layout)
-
-        # Slice teaser_block teasers into separate modules encapsulated in
-        # areas and regions.
-        return [legacy_transformation(m) for area in region.itervalues()
-                if valid_area(area) for m in area.values() if valid_module(m)]
-
-    @zeit.web.reify
-    def area_fullwidth(self):
-        """Return all fullwidth teaser blocks with a minimum length of 1.
-        :rtype: list
-        """
-
-        def valid_module(m):
-            return zeit.web.core.template.get_teaser_layout(m) in (
-                'zon-fullwidth',)
-
-        lead = self.context.values()[0]['lead']
-        return LegacyArea(
-            [m for m in lead.itervalues() if valid_module(m)])
 
     @zeit.web.reify
     def area_informatives(self):
@@ -314,7 +256,62 @@ class LegacyCenterpage(Centerpage):
             layout = index and 'video-small' or 'video-large'
             module.append(LegacyModule([video], layout=layout))
 
+        module.video_series_list = zeit.web.core.sources.video_series
         return module
+
+    @zeit.web.reify
+    def region_list_parquet(self):
+        def valid_area(a):
+            try:
+                return a.layout.id in ('parquet',)
+            except AttributeError:
+                return
+
+        def valid_module(m):
+            return zeit.web.core.template.get_teaser_layout(m) in (
+                'zon-parquet-large', 'zon-parquet-small') or getattr(
+                m, 'cpextra', None) in ('parquet-spektrum',)
+
+        def get_layout(m):
+            try:
+                return getattr(m, 'cpextra', None) or m.layout.id
+            except AttributeError:
+                return 'parquet-regular'
+
+        region = self.context.values()[1]
+
+        def legacy_transformation(m):
+            layout = get_layout(m)
+
+            if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
+                area = zeit.web.site.spektrum.HPFeed()
+                # XXX: This should be re-organized into something like
+                #      zeit.web.modules.Spektrum and selected automatically.
+                #      (The if-clause must fall!)
+            else:
+                modules = [LegacyModule([t], layout=layout) for t in m][
+                    :getattr(m, 'display_amount', 3)]
+
+                area = LegacyArea(modules, layout=layout)
+                area.referenced_cp = getattr(m, 'referenced_cp', None)
+                area.title = getattr(m, 'title', None)
+                area.read_more = getattr(m, 'read_more', None)
+                area.read_more_url = getattr(m, 'read_more_url', None)
+                area.display_amount = getattr(m, 'display_amount', 0)
+
+            return LegacyRegion([area] if area else [], layout=layout)
+
+        # Slice teaser_block teasers into separate modules encapsulated in
+        # areas and regions.
+        return [legacy_transformation(m) for area in region.itervalues()
+                if valid_area(area) for m in area.values() if valid_module(m)]
+
+    @zeit.web.reify
+    def region_snapshot(self):
+        area_snapshot = LegacyArea([b for b in [self.module_snapshot] if b],
+                                   layout='snapshot', width='1/1')
+
+        return LegacyRegion([area_snapshot], layout='snapshot')
 
     @zeit.web.reify
     def module_snapshot(self):
