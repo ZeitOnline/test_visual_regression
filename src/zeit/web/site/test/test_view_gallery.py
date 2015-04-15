@@ -9,7 +9,8 @@ def test_article_should_render_full_view(testserver, testbrowser):
         testserver.url, '/komplettansicht'))
     article = zeit.cms.interfaces.ICMSContent(
         article_path.format('http://xml.zeit.de', ''))
-    assert len(browser.cssselect('p.paragraph')) == article.paragraphs
+    assert len(browser.cssselect(
+        '.article-page > p.paragraph')) == article.paragraphs
 
 
 def test_zon_gallery_should_have_metadata(testbrowser, testserver):
