@@ -55,13 +55,14 @@
 				color: $zon_grey
 			+on-interaction
 				border-bottom: 1px solid $zon_grey
-	// js-induced state modifications
-	&--active
-		& > .sharing-menu__title
-			color: $zon_dark_grey
-			&:after
-				+rotate(180deg)
-		& > .sharing-menu__items,
-		.no-js .sharing-menu__items // no-js fallback
-			margin:  remify(16px 0) // animated
-			max-height: remify(64px) // animated
+
+// js-induced state modifications
+.sharing-menu--active > .sharing-menu__title
+	color: $zon_dark_grey
+	&:after
+		+rotate(180deg)
+
+.sharing-menu--active > .sharing-menu__items,
+.no-js .sharing-menu__items // no-js fallback
+	margin:  remify(16px 0) // animated
+	max-height: remify(64px) // animated
