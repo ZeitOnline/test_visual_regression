@@ -3,6 +3,11 @@
 import base64
 import mock
 
+import selenium.webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
+
 import zeit.web.site.view_article
 import zeit.cms.interfaces
 
@@ -157,3 +162,31 @@ def test_article_obfuscated_source_without_date_print_published():
     view.date_print_published = None
     source = u'DIE ZEIT N\u00B0\u00A01/2011'
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
+
+
+def test_article_sharing_menu_should_open_and_close(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+
+    sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
+    sharing_menu_target = driver.find_element_by_css_selector(
+        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+    sharing_menu_items = driver.find_element_by_css_selector(
+        sharing_menu_selector)
+
+    assert sharing_menu_items.is_displayed() is False, (
+        'sharing menu should be hidden by default')
+
+    sharing_menu_target.click()
+    assert sharing_menu_items.is_displayed(), (
+        'sharing menu should be visible after interaction')
+
+    sharing_menu_target.click()
+    # we need to wait for the CSS animation to finish
+    # so the sharing menu is actually hidden
+    condition = EC.invisibility_of_element_located((
+        By.CSS_SELECTOR, sharing_menu_selector))
+    assert WebDriverWait(driver, 1).until(condition), (
+        'sharing menu should hide again on click')
