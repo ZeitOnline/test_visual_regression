@@ -68,6 +68,7 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
     assert cc[NS + 'zeit-magazin/test-cp/essen-geniessen-spargel-lamm'] == (
         'Keine Kommentare')
 
+
 def test_request_thread_should_respond(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
@@ -88,12 +89,14 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)
     assert comment['name'] == 'Skarsgard'
     assert comment['text'] == ("<p>Komik</p><p>Ein Iraner,der findet,"
-                               "dass die Deutschen zu wenig meckern...^^</p>\n")
+                               "dass die Deutschen zu wenig meckern..."
+                               "^^</p>\n")
     # Remove subject
     del comment_xml.xpath('//comment')[0][0]
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)
     assert comment['text'] == ("<p>Ein Iraner,der findet,"
-                               "dass die Deutschen zu wenig meckern...^^</p>\n")
+                               "dass die Deutschen zu wenig meckern..."
+                               "^^</p>\n")
 
 
 def test_entire_thread_should_be_parsed(application, testserver):
