@@ -221,13 +221,15 @@ class LegacyCenterpage(Centerpage):
         except TypeError:
             return
 
-        has_digital_ad = False
+        module = LegacyModule([box], layout='printbox')
+        module.has_digital_ad = False
+
         if box.byline == 'mo-mi':
             try:
                 # Rewrite content with digital ad box
                 box = zeit.cms.interfaces.ICMSContent(
                     'http://xml.zeit.de/angebote/angebotsbox')
-                has_digital_ad = True
+                module.has_digital_ad = True
             except TypeError:
                 pass
 
@@ -236,8 +238,6 @@ class LegacyCenterpage(Centerpage):
         except (AttributeError, TypeError):
             box.image = None
 
-        module = LegacyModule([box], layout='printbox')
-        module.has_digital_ad = has_digital_ad
         return module
 
     @zeit.web.reify
