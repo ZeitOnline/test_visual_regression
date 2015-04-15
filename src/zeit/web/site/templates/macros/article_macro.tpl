@@ -80,7 +80,7 @@
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
     <p class="paragraph article__item">
-        {{ html | safe }}
+        {{ html|safe }}
     </p>
 {%- endmacro %}
 
@@ -117,16 +117,16 @@
 
 {% macro infobox(obj) %}
 {% if obj.contents -%}
-    {% set id = obj.title | attr_safe %}
-    <aside class="infobox" id="{{id}}">
+    {% set id = obj.title|attr_safe %}
+    <aside class="infobox" id="{{ id }}">
         <div class="infobox__navigation" role="tablist">
         {% for title, text in obj.contents %}
             <div class="infobox__navtitle">
-                <label 
-                    id="{{id}}-{{loop.index}}-tablabel" 
-                    for="{{id}}-{{loop.index}}-radio" 
-                    class="infobox__navlabel {%- if loop.first %} infobox__navlabel--checked{% endif -%}" 
-                    role="tab" 
+                <label
+                    id="{{ id }}-{{ loop.index }}-tablabel"
+                    for="{{ id }}-{{ loop.index }}-radio"
+                    class="infobox__navlabel {%- if loop.first %} infobox__navlabel--checked{% endif -%}"
+                    role="tab"
                     aria-selected="{%- if loop.first %}true{%- else -%}false{% endif -%}"
                 >{{ title }}</label>
             </div>
@@ -135,18 +135,18 @@
         <div class="infobox__content">
         {% for title, text in obj.contents %}
             <section class="infobox__tab">
-                <input class="infobox__checkbox" id="{{id}}-{{loop.index}}-check" type="checkbox" />
-                <input class="infobox__radio" name="{{id}}-radio" id="{{id}}-{{loop.index}}-radio" type="radio" {%- if loop.first -%}checked="checked"{%- endif -%}/>
+                <input class="infobox__checkbox" id="{{ id }}-{{ loop.index }}-check" type="checkbox" />
+                <input class="infobox__radio" name="{{ id }}-radio" id="{{ id }}-{{ loop.index }}-radio" type="radio" {%- if loop.first -%}checked="checked"{%- endif -%}/>
                 <div class="infobox__title">
-                    <label id="{{id}}-{{loop.index}}-label" for="{{id}}-{{loop.index}}-check" class="infobox__label" role="tab">{{ title }}</label>
+                    <label id="{{ id }}-{{ loop.index }}-label" for="{{ id }}-{{ loop.index }}-check" class="infobox__label" role="tab">{{ title }}</label>
                 </div>
-                <article 
-                    id="{{id}}-{{loop.index}}-panel" 
-                    class="infobox__inner" 
-                    role="tabpanel" 
+                <article
+                    id="{{ id }}-{{ loop.index }}-panel"
+                    class="infobox__inner"
+                    role="tabpanel"
                     aria-hidden="true">
                 {% for item in text %}
-                    {{ (item | block_type or "no_block") | macro(item) }}
+                    {{ (item|block_type or "no_block")|macro(item) }}
                 {% endfor %}
                 </article>
             </section>
