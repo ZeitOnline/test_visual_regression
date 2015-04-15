@@ -396,7 +396,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             # we can remove this. (RD)
             try:
                 if (zeit.content.cp.interfaces.ICenterPage.providedBy(
-                    context)):
+                        context)):
                     tdict['context'] = context = context.__parent__[(
                         '{}.cp2015'.format(context.__name__))]
             except (KeyError, TypeError):
