@@ -23,11 +23,10 @@
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-l
 		line-height: remify(17px)
-		overflow: hidden
 		padding: remify(15px 0 13px 0)
-		text-overflow: ellipsis
 		text-transform: uppercase
-		white-space: nowrap
+		+on-interaction
+			color: $black
 		&:after
 			background: $zon_mid_grey
 			border-radius: 3px
@@ -65,7 +64,7 @@
 				font-size: remify(16px)
 				line-height: remify(23px)
 		figure
-			margin: remify(10px) 0
+			margin: remify(32px) 0
 			+old-ie
 				.lt-ie9 &
 					display: none
@@ -98,7 +97,7 @@
 		padding: remify(15px 0 11px 0)
 		text-transform: uppercase
 		&--checked
-			color: $zon-charcoal
+			color: $black
 	&__content
 		+respond-min($break-tablet-min)
 			display: table-cell
