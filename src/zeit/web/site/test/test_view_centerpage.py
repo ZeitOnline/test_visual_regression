@@ -561,7 +561,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 def test_video_series_should_be_available(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     video_series = view.module_videostage.video_series_list
     assert len(video_series) > 0, (
         'Series object is empty')

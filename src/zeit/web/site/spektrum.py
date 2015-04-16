@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+import datetime
 import email.utils
+import logging
 import time
 import urllib
+import uuid
 
 import zope.component
 import pyramid.view
@@ -20,26 +22,28 @@ import zeit.web.core.view_centerpage
 import zeit.web.site.view
 
 
+log = logging.getLogger(__name__)
+
+
 class HPFeed(object):
-    # XXX: This is a factory class just because circular imports are circular.
 
     def __new__(cls):
         """Generate a list of teasers from an RSS feed."""
-        from zeit.web.site.view_centerpage import LegacyArea
-        from zeit.web.site.view_centerpage import LegacyModule
-
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         feed_url = conf.get('spektrum_hp_feed')
-
+        layout = 'parquet-spektrum'
+        area = LegacyArea([], layout=layout)
         try:
             resp = requests.get(feed_url, timeout=2.0)
             xml = lxml.etree.fromstring(resp.content)
-            return LegacyArea(
-                LegacyModule([Teaser(i)], layout='parquet-spektrum')
-                for i in xml.xpath('/rss/channel/item'))
+            for i in xml.xpath('/rss/channel/item'):
+                module = LegacyModule([Teaser(i)], layout=layout)
+                module.type = 'teaser'
+                area['id-{}'.format(uuid.uuid1())] = module
         except (requests.exceptions.RequestException,
-                lxml.etree.XMLSyntaxError):
-            return LegacyArea([])
+                lxml.etree.XMLSyntaxError), e:
+            log.warn('Could not collect spektrum feed: %s' % e)
+        return area
 
 
 class Teaser(object):
@@ -48,6 +52,8 @@ class Teaser(object):
             'description': 'teaserText',
             'link': 'url',
             'guid': 'guid'}
+
+    uniqueId = None
 
     def __init__(self, item):
         for value in self._map.values():
@@ -166,10 +172,15 @@ ElementMaker = lxml.objectify.ElementMaker(annotate=False, nsmap={
 
 def format_rfc822_date(timestamp):
     if timestamp is None:
-        timestamp = datetime.min
+        timestamp = datetime.datetime.min
     return email.utils.formatdate(time.mktime(timestamp.timetuple()))
 
 
 def last_published_semantic(content):
     return zeit.web.core.view_centerpage.form_date(
         zeit.web.core.view_centerpage.get_last_published_semantic(content))
+
+
+# Down here to prevent circular imports.
+from zeit.web.site.view_centerpage import LegacyArea
+from zeit.web.site.view_centerpage import LegacyModule

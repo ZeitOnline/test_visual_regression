@@ -30,8 +30,7 @@
             {% for module in area.values() -%}
                 {% set teaser = module | first_child %}
                 {% if loop.index <= area.display_amount %}
-                    {% include ["zeit.web.site:templates/inc/parquet/" + area | get_teaser_layout(loop.index - 1) + "_position_" + loop.index | string + ".tpl",
-                                "zeit.web.site:templates/inc/parquet/" + area | get_teaser_layout(loop.index - 1) + ".tpl" + "highly-sophisticated-feature-toggle_off",
+                    {% include ["zeit.web.site:templates/inc/parquet/" + module | get_layout + "_position_" + loop.index | string + ".tpl",
                                 "zeit.web.site:templates/inc/parquet/zon-parquet-small.tpl"] %}
                 {% endif %}
             {% endfor %}

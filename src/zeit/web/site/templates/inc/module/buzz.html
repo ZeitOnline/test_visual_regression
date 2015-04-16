@@ -6,7 +6,7 @@
         {% for teaser in module -%}
             {% with -%}
                 {% set index = loop.index %}
-                {% set layout = module.layout.id %}
+                {% set layout = module | get_layout %}
                 {% include "zeit.web.site:templates/inc/teaser/" + layout + ".tpl" with context %}
             {%- endwith %}
         {%- endfor %}

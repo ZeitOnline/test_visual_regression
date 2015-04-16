@@ -91,7 +91,7 @@ def test_spektrum_image_should_have_expected_attributes(application):
 def test_spektrum_hp_feed_returns_values(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     feed = view.spektrum_hp_feed
     assert isinstance(feed, zeit.web.site.spektrum.HPFeed)
 

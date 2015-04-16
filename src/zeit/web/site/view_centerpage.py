@@ -5,6 +5,7 @@ import uuid
 
 import pyramid.response
 import pyramid.view
+import grokcore.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -18,51 +19,59 @@ import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
 import zeit.web.site.view
+import zeit.web.site.spektrum
 
 log = logging.getLogger(__name__)
 
 
-class LegacyModule(zeit.web.core.utils.nslist):
-    def __init__(self, arg, **kw):
-        super(LegacyModule, self).__init__(arg)
-        layout_id = kw.pop('layout', 'default')
-        self.layout = zeit.content.cp.layout.BlockLayout(
-            layout_id, layout_id, areas=[], image_pattern=layout_id)
+class LegacyMixin(object):
+
+    @property
+    def layout(self):
+        return getattr(self, '_layout', None)
+
+    @layout.setter
+    def layout(self, value):
+        self._layout = zeit.content.cp.layout.BlockLayout(
+            value, value, areas=[], image_pattern=value)
 
     def __repr__(self):
-        return '<{} at {} with {} entr{}>'.format(
+        return '<{} at {} with {} {}>'.format(
             self.__class__.__name__, hex(id(self)), len(self),
-            'y' if len(self) == 1 else 'ies')
+            'child' if len(self) == 1 else 'children')
+
+    def __hash__(self):
+        if hasattr(self.layout, 'id'):
+            return hash((self.layout.id, id(self)))
+        return super(LegacyMixin, self).__hash__()
 
 
-class LegacyArea(collections.OrderedDict):
+@grokcore.component.implementer(zeit.content.cp.interfaces.ITeaserBlock)
+class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
+
+    def __init__(self, arg, **kw):
+        super(LegacyModule, self).__init__(arg)
+        self.layout = kw.pop('layout', 'default')
+
+
+@grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
+class LegacyArea(LegacyMixin, collections.OrderedDict):
+
     def __init__(self, arg, **kw):
         super(LegacyArea, self).__init__(
             [('id-{}'.format(uuid.uuid1()), v) for v in arg])
-        layout_id = kw.pop('layout', 'fullwidth')
-        self.layout = zeit.content.cp.layout.BlockLayout(
-            layout_id, layout_id, areas=[], image_pattern=layout_id)
+        self.layout = kw.pop('layout', 'fullwidth')
         self.width = kw.pop('width', '1/1')
 
-    def __repr__(self):
-        return '<{} at {} with {} module{}>'.format(
-            self.__class__.__name__, hex(id(self)), len(self),
-            '' if len(self) == 1 else 's')
 
+@grokcore.component.implementer(zeit.content.cp.interfaces.IRegion)
+class LegacyRegion(LegacyMixin, collections.OrderedDict):
 
-class LegacyRegion(collections.OrderedDict):
     def __init__(self, arg, **kw):
         super(LegacyRegion, self).__init__(
             [('id-{}'.format(uuid.uuid1()), v) for v in arg])
-        layout_id = kw.pop('layout', 'normal')
-        self.layout = zeit.content.cp.layout.BlockLayout(
-            layout_id, layout_id, areas=[], image_pattern=layout_id)
+        self.layout = kw.pop('layout', 'normal')
         self.title = kw.pop('title', None)
-
-    def __repr__(self):
-        return '<{} at {} with {} area{}>'.format(
-            self.__class__.__name__, hex(id(self)), len(self),
-            '' if len(self) == 1 else 's')
 
 
 @pyramid.view.view_config(
@@ -147,7 +156,7 @@ class LegacyCenterpage(Centerpage):
         """
 
         def valid_module(m):
-            return zeit.web.core.template.get_teaser_layout(m) in (
+            return zeit.web.core.template.get_layout(m) in (
                 'zon-fullwidth',)
 
         lead = self.context.values()[0]['lead']
@@ -161,7 +170,7 @@ class LegacyCenterpage(Centerpage):
         """
 
         def valid_module(m):
-            return zeit.web.core.template.get_teaser_layout(m) not in (
+            return zeit.web.core.template.get_layout(m) not in (
                 'zon-fullwidth', None)
 
         area = self.context.values()[0]['lead']
@@ -268,7 +277,7 @@ class LegacyCenterpage(Centerpage):
                 return
 
         def valid_module(m):
-            return zeit.web.core.template.get_teaser_layout(m) in (
+            return zeit.web.core.template.get_layout(m) in (
                 'zon-parquet-large', 'zon-parquet-small') or getattr(
                 m, 'cpextra', None) in ('parquet-spektrum',)
 
@@ -287,7 +296,6 @@ class LegacyCenterpage(Centerpage):
                 area = zeit.web.site.spektrum.HPFeed()
                 # XXX: This should be re-organized into something like
                 #      zeit.web.modules.Spektrum and selected automatically.
-                #      (The if-clause must fall!)
             else:
                 modules = [LegacyModule([t], layout=layout) for t in m][
                     :getattr(m, 'display_amount', 3)]

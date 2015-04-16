@@ -9,7 +9,7 @@
         {% with %}
             {% set module = video_module[0] %}
             {% set teaser = module | first_child %}
-            {% include ["zeit.web.site:templates/inc/teaser/" + module | get_teaser_layout | hide_none + ".tpl",
+            {% include ["zeit.web.site:templates/inc/teaser/" + module | get_layout | hide_none + ".tpl",
                         "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
         {% endwith %}
     </div>
@@ -17,7 +17,7 @@
         <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
         {% for module in video_module[1:4] %}
             {% set teaser = module | first_child %}
-            {% include ["zeit.web.site:templates/inc/teaser/" + module | get_teaser_layout | hide_none + ".tpl",
+            {% include ["zeit.web.site:templates/inc/teaser/" + module | get_layout | hide_none + ".tpl",
                         "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
         {% endfor %}
     </div>
