@@ -99,7 +99,6 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
                                "dass die Deutschen zu wenig meckern..."
                                "^^</p>\n")
 
-
     # Remove subject
     del comment_xml.xpath('//comment')[0][0]
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)
