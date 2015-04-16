@@ -56,6 +56,10 @@ def comment_to_dict(comment):
     else:
         content = '[fehler]'
 
+    if comment.xpath('subject/text()'):
+        content = u'<p>{}</p>{}'.format(comment.xpath('subject/text()')[0],
+                                        content)
+
     if comment.xpath('inreply/@to'):
         in_reply = int(comment.xpath('inreply/@to')[0].lstrip('cid-'))
     else:
