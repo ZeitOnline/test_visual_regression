@@ -20,7 +20,6 @@ import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 
-
 log = logging.getLogger(__name__)
 
 
@@ -189,7 +188,6 @@ def get_teaser_layout(teaser_block, teaser_position=0, request=None):
 
     if request and hasattr(teaser_block, 'uniqueId'):
         request.teaser_layout[hash_] = layout
-
     return layout
 
 
@@ -432,13 +430,20 @@ def set_image_id(asset_id, image_base_name, image_pattern, ext):
         asset_id, image_base_name, image_pattern, ext)
 
 
-def _existing_image(asset_id, image_base_name, image_patterns, ext):
-    for image_pattern in image_patterns:
-        image = set_image_id(asset_id, image_base_name, image_pattern, ext)
-        try:
-            return zeit.cms.interfaces.ICMSContent(image), image_pattern
-        except:
-            pass
+def _existing_image(asset_id, base_name, patterns, ext, filenames):
+    possible_filenames = set(["{}-{}.{}".format(
+        base_name, pattern, ext) for pattern in patterns])
+
+    try:
+        name = possible_filenames.intersection(filenames).pop()
+        pattern = name.replace('{}-'.format(base_name), '')
+        pattern = pattern.replace('.{}'.format(ext), '')
+        name = "{}{}".format(asset_id, name)
+
+        return zeit.cms.interfaces.ICMSContent(name), pattern
+    except:
+        pass
+
     return None, None
 
 
@@ -475,14 +480,15 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
 
     # If imagegroup has no images, return default image
-    if len(asset.items()) == 0:
+    if len(asset) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
     # Assumes all images in this group have the same mimetype.
-    sample_image = asset.values().next()
+    filenames = asset.keys()
+    sample_image = "{}{}".format(asset.uniqueId, filenames[0])
 
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
-        mimetypes.guess_type(sample_image.uniqueId)[0], 'jpg')
+        mimetypes.guess_type(sample_image)[0], 'jpg')
 
     try:
         image_patterns = get_image_pattern(
@@ -492,17 +498,18 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         return
 
     image, image_pattern = _existing_image(asset_id, image_base_name,
-                                           image_patterns, ext)
-
-    if image is None and image_pattern is None:
-        image_pattern = teaser_block.layout.image_pattern
-        image_id = set_image_id(asset_id, image_base_name, image_pattern, ext)
-    else:
-        image_id = image.uniqueId
+                                           image_patterns, ext, filenames)
 
     try:
+        if image is None and image_pattern is None:
+
+            image_pattern = teaser_block.layout.image_pattern
+            image_id = set_image_id(asset_id, image_base_name,
+                                    image_pattern, ext)
+            image = zeit.cms.interfaces.ICMSContent(image_id)
+
         teaser_image = zope.component.getMultiAdapter(
-            (asset, zeit.cms.interfaces.ICMSContent(image_id)),
+            (asset, image),
             zeit.web.core.interfaces.ITeaserImage)
         teaser_image.image_pattern = image_pattern
         return teaser_image
