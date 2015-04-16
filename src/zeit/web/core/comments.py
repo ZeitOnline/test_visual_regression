@@ -12,6 +12,13 @@ from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
 
 
+def rewrite_picture_url(url):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    static_host = conf.get('community_static_host').strip('/')
+    community_host = conf.get('community_host').strip('/')
+    return url.replace(community_host, static_host)
+
+
 def comment_to_dict(comment):
     """Expects an lxml element representing an agatho comment and returns a
     dict representation.
@@ -42,7 +49,8 @@ def comment_to_dict(comment):
         roles = []
 
     if comment.xpath('author/@picture'):
-        picture_url = comment.xpath('author/@picture')[0]
+        picture_url = rewrite_picture_url(
+            comment.xpath('author/@picture')[0])
     else:
         picture_url = None
 
