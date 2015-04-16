@@ -52,6 +52,7 @@ class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
     def __init__(self, arg, **kw):
         super(LegacyModule, self).__init__(arg)
         self.layout = kw.pop('layout', 'default')
+        self.type = 'teaser'  # XXX: When would this be something else?
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IArea)

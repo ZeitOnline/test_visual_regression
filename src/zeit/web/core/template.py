@@ -168,19 +168,17 @@ def get_layout(block, default='default', request=None):
     # Since we might lookup a layout more than once per request, we can cache
     # it in the request object.
 
-    # Allow the request to be set by the caller via a keyword argument.
     request = request or pyramid.threadlocal.get_current_request()
 
-    # Determine a suitable hash value for our block element.
     try:
-        hash_ = hash(block)
+        key = request and hash(block)
     except TypeError, e:
-        log.debug('Cannot cache cp block layout: {}'.format(e))
-        hash_ = None
+        log.debug('Cannot hash and cache cp block layout: {}'.format(e))
+        key = None
 
-    if request and hash_:
+    if key:
         request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
-        layout = request.teaser_layout.get(hash_, None)
+        layout = request.teaser_layout.get(key, None)
         if layout:
             return layout
 
@@ -202,8 +200,8 @@ def get_layout(block, default='default', request=None):
         except (AttributeError, IndexError, TypeError), e:
             log.debug('Cannot apply content-dependent layout rules: %s' % e)
 
-    if request and hash_:
-        request.teaser_layout[hash_] = layout
+    if key:
+        request.teaser_layout[key] = layout
 
     return layout
 
@@ -433,11 +431,12 @@ def get_teaser_template(block_layout,
 @zeit.web.register_global
 def get_image_pattern(teaser_layout, orig_image_pattern):
     layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
-    layout_image = {
-        block.id: [block.image_pattern] for block in list(layout(None))}
+    layout_image = {block.id: [block.image_pattern] for block in
+                    list(layout(None)) if block.image_pattern}
 
     layout_image['zon-small'].extend(layout_image['leader'])
     layout_image['zon-parquet-small'].extend(layout_image['leader'])
+    layout_image['zon-parquet-large'].extend(layout_image['leader'])
     return layout_image.get(teaser_layout, [orig_image_pattern])
 
 
