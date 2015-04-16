@@ -91,6 +91,15 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
     assert comment['text'] == ("<p>Komik</p><p>Ein Iraner,der findet,"
                                "dass die Deutschen zu wenig meckern..."
                                "^^</p>\n")
+
+    # Dont' show subject if taken from comment itself
+    comment_xml.xpath('//comment')[0][0].text = 'Ein Iraner'
+    comment = zeit.web.core.comments.comment_to_dict(comment_xml)
+    assert comment['text'] == ("<p>Ein Iraner,der findet,"
+                               "dass die Deutschen zu wenig meckern..."
+                               "^^</p>\n")
+
+
     # Remove subject
     del comment_xml.xpath('//comment')[0][0]
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)

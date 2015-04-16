@@ -5,6 +5,7 @@ import lxml.etree
 import requests
 import requests.exceptions
 import zope.component
+from BeautifulSoup import BeautifulSoup
 
 import zeit.cms.interfaces
 
@@ -56,7 +57,13 @@ def comment_to_dict(comment):
     else:
         content = '[fehler]'
 
-    if comment.xpath('subject/text()'):
+    # We have the drupal behaviour that the subject is partly coypied from the
+    # comment itself, if a subject was not set. This leads to a slightly more
+    # complex evaluation of the subject in our usecase
+    subject = comment.xpath('subject/text()')
+    content_stripped = ''.join(BeautifulSoup(content).findAll(text=True))
+    if (subject and not subject[0] == '[empty]' and
+            not subject[0] == content_stripped[0:len(subject[0])]):
         content = u'<p>{}</p>{}'.format(comment.xpath('subject/text()')[0],
                                         content)
 
