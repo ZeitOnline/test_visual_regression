@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1330: Social/sharing menu in articles
 
+- ZON-1328: Add Infobox
+
 
 1.19 (2015-04-08)
 -----------------

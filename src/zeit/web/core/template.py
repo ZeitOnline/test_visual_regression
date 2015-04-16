@@ -6,6 +6,7 @@ import re
 import time
 import urlparse
 
+import jinja2
 import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
@@ -380,6 +381,11 @@ def get_attr(*args):
     return getattr(*args)
 
 
+@jinja2.contextfilter
+def call_macro_by_name(context, macro_name, *args, **kwargs):
+    return context.vars[macro_name](*args, **kwargs)
+
+
 @zeit.web.register_global
 def topiclinks(centerpage):
     try:
@@ -537,6 +543,12 @@ def get_image_group(asset):
         return zeit.content.image.interfaces.IImageGroup(asset)
     except TypeError:
         return
+
+
+@zeit.web.register_filter
+def attr_safe(text):
+    """ Return an attribute safe version of text """
+    return re.sub('[^a-zA-Z]', '', text).lower()
 
 
 @zeit.web.register_global

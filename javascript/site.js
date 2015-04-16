@@ -37,7 +37,8 @@ require([
     'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.toggleBeta',
-    'web.site/plugins/jquery.selectNav'
+    'web.site/plugins/jquery.selectNav',
+    'web.site/plugins/jquery.infobox'
 ], function() {
     $( window ).referrerCount();
     $( '.main_nav__search' ).toggleSearch();
@@ -49,6 +50,7 @@ require([
     $( '.snapshot' ).snapshot();
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();
+    $( '.infobox' ).infobox();
     // comment out till we decide if it should be used and how (as)
     // $( '.footer-links__button' ).scrollUp();
 });

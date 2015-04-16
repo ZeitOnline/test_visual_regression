@@ -2,6 +2,7 @@
 
 import base64
 import mock
+import pytest
 
 import selenium.webdriver
 from selenium.webdriver.common.by import By
@@ -12,13 +13,23 @@ import zeit.web.site.view_article
 import zeit.cms.interfaces
 
 
+screen_sizes = ((320, 480, True), (520, 960, True),
+                (768, 1024, False), (980, 1024, False))
+
+
+@pytest.fixture(scope='session', params=screen_sizes)
+def screen_size(request):
+    return request.param
+
+
 def test_article_should_render_full_view(testserver, testbrowser):
     article_path = '{}/zeit-online/article/zeit{}'
     browser = testbrowser(article_path.format(
         testserver.url, '/komplettansicht'))
     article = zeit.cms.interfaces.ICMSContent(
         article_path.format('http://xml.zeit.de', ''))
-    assert len(browser.cssselect('p.paragraph')) == article.paragraphs
+    assert len(browser.cssselect(
+        '.article-page > p.paragraph')) == article.paragraphs
 
 
 def test_article_full_view_has_no_pagination(testbrowser, testserver):
@@ -190,3 +201,42 @@ def test_article_sharing_menu_should_open_and_close(
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(driver, 1).until(condition), (
         'sharing menu should hide again on click')
+
+
+def test_infobox_in_article_is_shown(testbrowser, testserver):
+    select = testbrowser('{}/zeit-online/article/infoboxartikel'.format(
+        testserver.url)).cssselect
+    assert len(select('aside#sauriersindsuper.infobox')) == 1
+    assert len(select('#sauriersindsuper label')) == 12
+    assert len(select('#sauriersindsuper input[type="checkbox"]')) == 6
+    assert len(select('#sauriersindsuper input[type="radio"]')) == 6
+
+
+def test_infobox_interactions(selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
+    infobox = driver.find_element_by_id('sauriersindsuper')
+    tabnavigation = infobox.find_elements_by_class_name(
+        'infobox__navigation')[0]
+    tabpanels = infobox.find_elements_by_class_name('infobox__inner')
+    tabnavs = infobox.find_elements_by_class_name('infobox__navlabel')
+    tabchecks = infobox.find_elements_by_class_name('infobox__label')
+
+    assert infobox.is_displayed(), 'Infobox missing'
+    if screen_size[0] == 320 or screen_size[0] == 520:
+        assert not tabnavigation.is_displayed(), 'Mobile not accordion'
+        tabchecks[1].click()
+        assert tabpanels[1].get_attribute('aria-hidden') == 'false'
+        tabchecks[2].click()
+        assert tabpanels[1].get_attribute('aria-hidden') == 'false'
+        assert tabpanels[2].get_attribute('aria-hidden') == 'false'
+        tabchecks[1].click()
+        assert tabpanels[1].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[2].get_attribute('aria-hidden') == 'false'
+    if screen_size[0] > 767:
+        assert tabnavigation.is_displayed(), 'Desktop not Tabs'
+        tabnavs[3].click()
+        assert tabpanels[1].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[2].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[3].get_attribute('aria-hidden') == 'false'
