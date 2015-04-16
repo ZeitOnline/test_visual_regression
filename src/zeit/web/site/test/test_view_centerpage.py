@@ -62,7 +62,7 @@ def test_area_main_should_filter_teasers(application):
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_main) == 2
+    assert len(cp.area_main) == 4
     assert cp.area_main.values()[0].layout.id == 'zon-large'
     assert cp.area_main.values()[1].layout.id == 'zon-small'
     assert list(cp.area_main.values()[0])[0] == 'article'
@@ -510,9 +510,8 @@ def test_parquet_should_render_desired_amount_of_teasers(
     desired_amount = view.context.values()[1][0][0].display_amount
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    teasers = browser.cssselect(
-        '.cp-area--parquet t > .parquet-row:first-child '
-        'article[data-block-type="teaser"]')
+    teasers = browser.cssselect('.cp-region--parquet-large '
+                                'article[data-block-type="teaser"]')
     actual_amount = len(teasers)
     assert actual_amount == desired_amount, (
         'Parquet row does not display the right amount of teasers. '
