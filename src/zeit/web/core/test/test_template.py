@@ -405,3 +405,9 @@ def test_debug_breaking_news_should_be_disableable(testbrowser, testserver):
     browser = testbrowser(
         '%s/zeit-online/index?debug=eilmeldung' % testserver.url)
     assert browser.cssselect('.breaking-news-banner')
+
+
+def test_attr_safe_returns_safe_text(application):
+    text = u'10 Saurier sind super % auf Zack'
+    target = 'sauriersindsuperaufzack'
+    assert zeit.web.core.template.attr_safe(text) == target
