@@ -5,6 +5,7 @@ import pyramid.authentication
 
 import zeit.web.core.comments
 
+
 class CommunityAuthenticationPolicy(
         pyramid.authentication.SessionAuthenticationPolicy):
     """An authentication policy that queries the Community backend for user
