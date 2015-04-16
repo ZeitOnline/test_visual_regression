@@ -244,20 +244,20 @@ def test_teaser_layout_should_be_cached_per_unique_id(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
-    block.uniqueId = 'http://unique'
+    block.__hash__ = lambda _: 42
 
     request = mock.Mock()
     request.teaser_layout = {}
     teaser = zeit.web.core.template.get_layout(block, request=request)
     assert teaser == 'zon-small'
-    assert request.teaser_layout['http://unique#0'] == 'zon-small'
+    assert request.teaser_layout[42] == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout.get = mock.Mock(return_value='zon-small')
 
     teaser = zeit.web.core.template.get_layout(block, request=request)
     assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with('http://unique#0', None)
+    request.teaser_layout.get.assert_called_with(42, None)
 
 
 def test_get_layout_should_deal_with_all_sort_of_unset_params(
