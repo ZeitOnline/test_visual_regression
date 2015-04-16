@@ -4,7 +4,15 @@ Change log for zeit.web
 1.20 (unreleased)
 -----------------
 
+- ZON-1536: Improved get_teaser_image perfomance
+
 - Maintenance: clean up templates
+
+- ZON-1330: Social/sharing menu in articles
+
+- ZON-1632: Choose new CP by name pattern, if it exists
+
+- ZON-1535: Add title to comment-text
 
 - ZON-1328: Add Infobox
 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <header_image/>
+        <snapshot align="left" expires="" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/leinwand.jpg" title="Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York" type="jpg">
+            <bu>Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York</bu>
+            <copyright>© Lindsay DeDario/Reuters</copyright>
+        </snapshot>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2013-07-25T09:18:21.094801+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-12-03T11:50:17.795986+00:00</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="html-meta-hide-timestamp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-05-21T10:58:36.573625+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.dhoppe</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:deea5ce3-46fa-45a7-887b-95b5727f68d1}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+        <topiclinks>
+            <topiclink_title>FALLBACK CP</topiclink_title>
+            <topiclink>
+                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+                <topiclink_label_2>Bundeswehr</topiclink_label_2>
+                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+                <topiclink_label_3>Hongkong</topiclink_label_3>
+                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+            </topiclink>
+        </topiclinks>
+    </head>
+    <body>
+        <cluster area="feature">
+            <region area="lead">
+                <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3" cp:type="teaser" module="zon-fullwidth">
+                    <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008"/>
+                </container>
+                <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13" cp:type="teaser" module="zon-small">
+                    <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-02" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008"/>
+                </container>
+                <container cp:__name__="id-33b2edb2-db8a-415d-bc05-c0e11e238029" cp:type="teaser" module="zon-small">
+                    <block author="Theo Sommer" contenttype="article" date-first-released="2014-10-21T05:07:53.619066+00:00" date-last-modified="2014-10-21T05:06:54+00:00" date-last-published="2014-10-21T05:07:53.619066+00:00" expires="" href="http://xml.zeit.de/zeit-online/cp-content/kolumne" issue="43" last-semantic-change="2014-10-21T05:06:49.245555+00:00" publication-date="" ressort="Politik" serie="Fünf vor acht" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2014"/>
+                </container>
+                <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e14" cp:type="teaser" module="zon-small">
+                    <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-05" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-05" year="2008"/>
+                </container>
+                <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-small">
+                    <block author="Thorsten Schröder" contenttype="article" expires="" href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" issue="44" publication-date="" ressort="Digital" serie="App-Kritik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" xml:base="digital/index.lead" year="2014"/>
+                </container>
+                <container cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d" cp:type="teaser" module="zon-small" hide-dupes="True" visible="True">
+                    <block author="Elisabeth Raether" contenttype="gallery" date-first-released="" date-last-modified="2014-04-15T10:11:45+00:00" date-last-published="" expires="" href="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" issue="17" last-semantic-change="2014-04-16T06:00:00+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" year="2014"/>
+                </container>
+                <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="buttons">
+                    <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" uniqueId="http://xml.zeit.de/blogs/nsu-blog-bouffier" year="2015" issue="8" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/nsu-prozess-blog/2015/02/25/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
+                </container>
+                <container cp:__name__="id-25630755-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="buttons">
+                    <block xmlns:ns0="http://namespaces.zeit.de/CMS/link"
+                    href="http://xml.zeit.de/zeit-online/cp-content/link_teaser"
+                    uniqueId="http://xml.zeit.de/zeit-online/cp-content/link_teaser"
+                    year="2015" issue="8" ressort="Gesellschaft"
+                    contenttype="link" publication-date="" expires=""
+                    ns0:href="http://example.com/some_target" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
+                </container>
+            </region>
+            <region area="informatives"/>
+        </cluster>
+        <cluster area="teaser-mosaic"/>
+        <supertitle>ZON CP</supertitle>
+        <title>ZON</title>
+        <subtitle>ZON CP</subtitle>
+    </body>
+    <feed/>
+    <teaser>
+        <title>ZON</title>
+        <text>ZON CP</text>
+    </teaser>
+</centerpage>
