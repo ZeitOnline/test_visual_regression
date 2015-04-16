@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1328: Add Infobox
 
+- ZON-1535: Improve handling of subject in comments
+
 
 1.19 (2015-04-08)
 -----------------
