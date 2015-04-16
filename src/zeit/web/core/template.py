@@ -172,20 +172,17 @@ def get_layout(block, default='default', request=None):
     request = request or pyramid.threadlocal.get_current_request()
 
     # Determine a suitable hash value for our block element.
-    # try:
-    #     if hasattr(block, 'uniqueId'):
-    #         hash_ = block.uniqueId
-    #     else:
-    #         hash_ = hash(block)
-    # except TypeError, e:
-    #     log.debug('Cannot cache cp block layout: {}'.format(e))
-    #     hash_ = None
+    try:
+        hash_ = hash(block)
+    except TypeError, e:
+        log.debug('Cannot cache cp block layout: {}'.format(e))
+        hash_ = None
 
-    # if request and hash_:
-    #     request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
-    #     layout = request.teaser_layout.get(hash_, None)
-    #     if layout:
-    #         return layout
+    if request and hash_:
+        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
+        layout = request.teaser_layout.get(hash_, None)
+        if layout:
+            return layout
 
     try:
         if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
@@ -205,8 +202,8 @@ def get_layout(block, default='default', request=None):
         except (AttributeError, IndexError, TypeError), e:
             log.debug('Cannot apply content-dependent layout rules: %s' % e)
 
-    # if request and hash_:
-    #     request.teaser_layout[hash_] = layout
+    if request and hash_:
+        request.teaser_layout[hash_] = layout
 
     return layout
 
