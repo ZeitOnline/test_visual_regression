@@ -58,18 +58,21 @@ class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
 class LegacyArea(LegacyMixin, collections.OrderedDict):
 
     def __init__(self, arg, **kw):
-        super(LegacyArea, self).__init__(
-            [('id-{}'.format(uuid.uuid1()), v) for v in arg])
+        collections.OrderedDict.__init__(
+            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg])
         self.layout = kw.pop('layout', 'fullwidth')
         self.width = kw.pop('width', '1/1')
 
+    def append(self, value):
+        self['id-{}'.format(uuid.uuid1())] = value
+
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IRegion)
-class LegacyRegion(LegacyMixin, collections.OrderedDict):
+class LegacyRegion(LegacyArea):
 
     def __init__(self, arg, **kw):
-        super(LegacyRegion, self).__init__(
-            [('id-{}'.format(uuid.uuid1()), v) for v in arg])
+        collections.OrderedDict.__init__(
+            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg])
         self.layout = kw.pop('layout', 'normal')
         self.title = kw.pop('title', None)
 
@@ -278,8 +281,7 @@ class LegacyCenterpage(Centerpage):
 
         def valid_module(m):
             return zeit.web.core.template.get_layout(m) in (
-                'zon-parquet-large', 'zon-parquet-small') or getattr(
-                m, 'cpextra', None) in ('parquet-spektrum',)
+                'zon-parquet-large', 'zon-parquet-small', 'parquet-spektrum')
 
         def get_layout(m):
             try:
@@ -287,9 +289,8 @@ class LegacyCenterpage(Centerpage):
             except AttributeError:
                 return 'parquet-regular'
 
-        region = self.context.values()[1]
-
         def legacy_transformation(m):
+            # XXX: Why doesn't this work with the cacheable z.w.c.t.get_layout?
             layout = get_layout(m)
 
             if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
@@ -311,6 +312,7 @@ class LegacyCenterpage(Centerpage):
 
         # Slice teaser_block teasers into separate modules encapsulated in
         # areas and regions.
+        region = self.context.values()[1]
         return [legacy_transformation(m) for area in region.itervalues()
                 if valid_area(area) for m in area.values() if valid_module(m)]
 

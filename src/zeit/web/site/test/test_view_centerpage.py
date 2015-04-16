@@ -515,7 +515,7 @@ def test_parquet_should_render_desired_amount_of_teasers(
         'article[data-block-type="teaser"]')
     actual_amount = len(teasers)
     assert actual_amount == desired_amount, (
-        'Parquet row does not display the right amount of teasers.'
+        'Parquet row does not display the right amount of teasers. '
         'Got %s, expected %s.' % (actual_amount, desired_amount))
 
 

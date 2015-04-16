@@ -5,7 +5,6 @@ import email.utils
 import logging
 import time
 import urllib
-import uuid
 
 import zope.component
 import pyramid.view
@@ -39,7 +38,7 @@ class HPFeed(object):
             for i in xml.xpath('/rss/channel/item'):
                 module = LegacyModule([Teaser(i)], layout=layout)
                 module.type = 'teaser'
-                area['id-{}'.format(uuid.uuid1())] = module
+                area.append(module)
         except (requests.exceptions.RequestException,
                 lxml.etree.XMLSyntaxError), e:
             log.warn('Could not collect spektrum feed: %s' % e)
