@@ -1,23 +1,15 @@
-=remove-side-padding
+.comment-section
 	margin-left: (-$page-padding)
 	margin-right: (-$page-padding)
-
-=restore-side-padding
-	padding-left: $page-padding
-	padding-right: $page-padding
-
-.comment-section
-	+remove-side-padding
 	margin-top: 4rem
 	&__head,
 	&__notice
-		+restore-side-padding
 		border-top: 2px solid $zon-seashell
 		display: block
 		font-size: remify(20px)
 		font-weight: bold
 		margin: 1rem 0
-		padding: 1rem 1rem
+		padding: 1rem
 		text-align: center
 		+respond-min($break-desktop-min)
 			padding: remify($medium--px 160px)
