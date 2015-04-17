@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.20.1 (unreleased)
+1.20.1 (2015-04-17)
 -------------------
 
 - ZON-1541: Unglitch vertical parquet padding
