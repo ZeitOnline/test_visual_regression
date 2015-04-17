@@ -30,7 +30,9 @@ def comment_to_dict(comment):
 
     # TODO: Avoid repeatedly evaluating xpaths.
     if comment.xpath('author/@roles'):
-        roles = comment.xpath('author/@roles')[0].split(',')
+        roles = comment.xpath('author/@roles')[0]
+        is_author = 'author' in roles
+        roles = roles.split(',')
         try:
             gender = comment.xpath('author/@sex')[0]
         except IndexError:
@@ -87,17 +89,18 @@ def comment_to_dict(comment):
     return dict(
         in_reply=in_reply,
         indented=bool(in_reply),
-        recommendations=len(
-            comment.xpath('flagged[@type="kommentar_empfohlen"]')),
-        recommended=bool(
-            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
         timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(roles),
-        cid=int(comment.xpath('./@id')[0].lstrip('cid-'))
+        cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
+        recommendations=len(
+            comment.xpath('flagged[@type="kommentar_empfohlen"]')),
+        is_recommended=bool(
+            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
+        is_author=is_author
     )
 
 

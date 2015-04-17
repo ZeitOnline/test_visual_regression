@@ -387,7 +387,7 @@
                 <div class="tabs__content">
                     <div class="comments__list" id="tab2">
                         {% for commentdict in obj.comments.comments %}
-                            {% if commentdict['recommended'] -%}
+                            {% if commentdict['is_recommended'] -%}
                                 {{ comment(commentdict, true) }}
                             {%- endif %}
                         {% endfor %}

@@ -94,7 +94,7 @@
                             #{{ loop.index }} &nbsp;&#10744;&nbsp; {{ comment.timestamp | format_date_ago() }}
                         </a>
                     </div>
-                    {% if comment.recommended %}
+                    {% if comment.is_recommended %}
                     {# Special-Char: &#9733; = Black Star #}
                     <div class="comment__recommendations">
                         {{ comment.recommendations }} &#9733;
