@@ -68,6 +68,7 @@ class PostComment(zeit.web.core.view.Base):
 
             data = {'nid': nid,
                     'uid': uid,
+                    'subject': '[empty]',
                     'comment': request.params.get('comment'),
                     'pid': request.params.get('pid')}
             response = requests.post(action_url, data=data,

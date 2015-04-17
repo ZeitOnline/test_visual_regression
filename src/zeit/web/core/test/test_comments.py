@@ -91,6 +91,14 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
     assert comment['text'] == ("<p>Komik</p><p>Ein Iraner,der findet,"
                                "dass die Deutschen zu wenig meckern..."
                                "^^</p>\n")
+
+    # Dont' show subject if taken from comment itself
+    comment_xml.xpath('//comment')[0][0].text = 'Ein Iraner'
+    comment = zeit.web.core.comments.comment_to_dict(comment_xml)
+    assert comment['text'] == ("<p>Ein Iraner,der findet,"
+                               "dass die Deutschen zu wenig meckern..."
+                               "^^</p>\n")
+
     # Remove subject
     del comment_xml.xpath('//comment')[0][0]
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)
@@ -132,3 +140,10 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
     resp = comment_counter(no_interpolation='true', unique_id=unique_id)
     assert isinstance(resp, dict)
     assert resp['comment_count'][unique_id] == '125 Kommentare'
+
+
+def test_rewrite_comments_url_should_rewrite_to_static_host(application):
+    import zeit.web.core.comments
+    url = zeit.web.core.comments.rewrite_picture_url(
+        'http://localhost:6551/baaa')
+    assert url == 'http://static_community/foo/baaa'
