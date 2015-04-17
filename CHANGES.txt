@@ -14,9 +14,12 @@ Change log for zeit.web
 
 - ZON-1535: Add title to comment-text
 
-- ZON-1328: Add Infobox
+- ZON-1535: Improve handling of subject in comments
 
 - ZON-1535: Community images can be loaded via configurable url
+
+- ZON-1328: Add Infobox
+
 
 
 1.19 (2015-04-08)
