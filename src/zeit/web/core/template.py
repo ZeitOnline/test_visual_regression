@@ -145,49 +145,63 @@ def area_width(width):
 
 
 @zeit.web.register_filter
-def get_teaser_layout(teaser_block, teaser_position=0, request=None):
-    # TODO: Rename to get_block_layout
-
-    request = request or pyramid.threadlocal.get_current_request()
-
-    # Calculating the layout of a teaser can be slightly more expensive in
-    # zeit.web, since we do lookups in some vocabularies, to change the layout,
-    # that was originally set for a teaser.
-    # Since we might lookup a teaser-layout more than once per request, we can
-    # cache it in the request object.
-    if request and hasattr(teaser_block, 'uniqueId'):
-        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
-        hash_ = '{}#{}'.format(teaser_block.uniqueId, teaser_position)
-        layout = request.teaser_layout.get(hash_, None)
-        if layout:
-            return layout
-
-    try:
-        if isinstance(teaser_block.layout, basestring):
-            layout = teaser_block.layout
-        else:
-            layout = teaser_block.layout.id
-        teaser = list(teaser_block)[teaser_position]
-        if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
-            raise TypeError('Broken reference: {}'.format(teaser.uniqueId))
-    except (AttributeError, IndexError, TypeError), e:
-        log.debug('Cannot produce a teaser layout: {}'.format(e))
-        layout = teaser = None
-
-    serie = getattr(teaser, 'serie', None)
-
-    if serie:
+def get_teaser_layout(teaser, layout, default=None):
+    if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
+        raise TypeError('Broken ref at {}'.format(teaser.uniqueId))
+    elif getattr(teaser, 'serie', None):
         layout = 'zon-series'
-        if serie.column and get_column_image(teaser):
+        if teaser.serie.column and get_column_image(teaser):
             layout = 'zon-column'
     elif getattr(teaser, 'blog', None):
         layout = 'zon-blog'
 
-    layout = zope.component.getUtility(
-        zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
+    return zope.component.getUtility(
+        zeit.web.core.interfaces.ITeaserMapping).get(layout, default or layout)
 
-    if request and hasattr(teaser_block, 'uniqueId'):
-        request.teaser_layout[hash_] = layout
+
+@zeit.web.register_filter
+def get_layout(block, default='default', request=None):
+    # Calculating the layout of a cp block can be slightly more expensive in
+    # zeit.web, since we do lookups in some vocabularies, to change the layout,
+    # that was originally set for the block.
+    # Since we might lookup a layout more than once per request, we can cache
+    # it in the request object.
+
+    request = request or pyramid.threadlocal.get_current_request()
+
+    try:
+        key = request and hash(block)
+    except TypeError, e:
+        log.debug('Cannot hash and cache cp block layout: {}'.format(e))
+        key = None
+
+    if key:
+        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
+        layout = request.teaser_layout.get(key, None)
+        if layout:
+            return layout
+
+    try:
+        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
+            layout = block.cpextra
+        else:
+            layout = block.layout.id
+    except (AttributeError, TypeError), e:
+        log.debug('Cannot produce a cp block layout: {}'.format(e))
+        layout = default
+
+    if not zeit.edit.interfaces.IContainer.providedBy(block):
+        # If our block is not a container (e.g. z.c.c.area.Region), it might
+        # be a content object (e.g. z.c.a.a.Article) or at least posing as
+        # one (e.g. z.w.c.spektrum.Teaser).
+        try:
+            layout = get_teaser_layout(list(block)[0], layout)
+        except (AttributeError, IndexError, TypeError), e:
+            log.debug('Cannot apply content-dependent layout rules: %s' % e)
+
+    if key:
+        request.teaser_layout[key] = layout
+
     return layout
 
 
@@ -205,8 +219,8 @@ def remove_break(string):
 
 
 @zeit.web.register_filter
-def replace_list_seperator(semicolonseperatedlist, seperator):
-    return semicolonseperatedlist.replace(';', seperator)
+def replace_list_seperator(scsv, seperator):
+    return scsv.replace(';', seperator)
 
 
 # definition of default images sizes per layout context
@@ -416,11 +430,12 @@ def get_teaser_template(block_layout,
 @zeit.web.register_global
 def get_image_pattern(teaser_layout, orig_image_pattern):
     layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
-    layout_image = {
-        block.id: [block.image_pattern] for block in list(layout(None))}
+    layout_image = {block.id: [block.image_pattern] for block in
+                    list(layout(None)) if block.image_pattern}
 
     layout_image['zon-small'].extend(layout_image['leader'])
     layout_image['zon-parquet-small'].extend(layout_image['leader'])
+    layout_image['zon-parquet-large'].extend(layout_image['leader'])
     return layout_image.get(teaser_layout, [orig_image_pattern])
 
 
@@ -492,7 +507,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 
     try:
         image_patterns = get_image_pattern(
-            get_teaser_layout(teaser_block),
+            get_layout(teaser_block),
             teaser_block.layout.image_pattern)
     except AttributeError:
         return
@@ -514,7 +529,8 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         teaser_image.image_pattern = image_pattern
         return teaser_image
     except TypeError:
-        # Don't fallback when an unique_id is given explicitly in order to
+        log.debug('Cannot retrieve teaser image: {}'.format(image_id))
+        # Don't fallback when a unique_id is given explicitly in order to
         # prevent infinite recursion.
         if not unique_id:
             return get_teaser_image(teaser_block, teaser, unique_id=default_id)

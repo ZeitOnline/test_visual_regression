@@ -88,12 +88,12 @@ def test_spektrum_image_should_have_expected_attributes(application):
     assert image.image.getImageSize() == (180, 120)
 
 
-def test_spektrum_hp_feed_returns_values(application):
+def test_centerpage_recognizes_spektrum_cpextra(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    feed = view.spektrum_hp_feed
-    assert isinstance(feed, zeit.web.site.spektrum.HPFeed)
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    teasers = view.region_list_parquet[1].values()[0].values()[0]
+    assert all(isinstance(t, zeit.web.site.spektrum.Teaser) for t in teasers)
 
 
 def test_spektrum_parquet_should_render_special_parquet_link(
@@ -132,7 +132,7 @@ def test_spektrum_area_should_render_empty_if_feed_unavailable(
     monkeypatch.setattr(zeit.web.site.spektrum, 'HPFeed', list)
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    assert not browser.cssselect('#parquet-spektrum')
+    assert not browser.cssselect('.parquet-row--spektrum')
 
 
 def test_spektrum_cooperation_route_should_be_configured(testserver):

@@ -230,13 +230,13 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'leader'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-large'
     block.layout.id = 'leader-two-columns'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-large'
     block.layout.id = 'leader-panorama'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-large'
 
 
@@ -244,23 +244,23 @@ def test_teaser_layout_should_be_cached_per_unique_id(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
-    block.uniqueId = 'http://unique'
+    block.__hash__ = lambda _: 42
 
     request = mock.Mock()
     request.teaser_layout = {}
-    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block, request=request)
     assert teaser == 'zon-small'
-    assert request.teaser_layout['http://unique#0'] == 'zon-small'
+    assert request.teaser_layout[42] == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout.get = mock.Mock(return_value='zon-small')
 
-    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block, request=request)
     assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with('http://unique#0', None)
+    request.teaser_layout.get.assert_called_with(42, None)
 
 
-def test_get_teaser_layout_should_deal_with_all_sort_of_unset_params(
+def test_get_layout_should_deal_with_all_sort_of_unset_params(
         application):
 
     block = mock.Mock()
@@ -270,17 +270,17 @@ def test_get_teaser_layout_should_deal_with_all_sort_of_unset_params(
     request = mock.Mock()
     request.teaser_layout = None
 
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block, request=request)
     assert teaser == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout = {}
     block.uniqueId = None
 
-    teaser = zeit.web.core.template.get_teaser_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block, request=request)
     assert teaser == 'zon-small'
 
 
@@ -288,19 +288,19 @@ def test_zon_small_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'text-teaser'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
     block.layout.id = 'buttons'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
     block.layout.id = 'large'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
     block.layout.id = 'short'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
     block.layout.id = 'date'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
 
@@ -308,7 +308,7 @@ def test_teaser_fullwidth_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'leader-fullwidth'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-fullwidth'
 
 
@@ -316,28 +316,28 @@ def test_hide_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'archive-print-volume'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'archive-print-year'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'two-side-by-side'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'ressort'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'leader-upright'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'buttons-fullwidth'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'parquet-printteaser'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'parquet-verlag'
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
 
 
@@ -347,7 +347,7 @@ def test_teaser_layout_for_columns_should_be_adjusted_accordingly(application):
     block = mock.Mock()
     block.layout.id = 'zon-small'
     block.__iter__ = lambda _: iter([article])
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-column'
 
 
@@ -357,7 +357,7 @@ def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
     block = mock.Mock()
     block.layout.id = 'zon-small'
     block.__iter__ = lambda _: iter([article])
-    teaser = zeit.web.core.template.get_teaser_layout(block)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-series'
 
 

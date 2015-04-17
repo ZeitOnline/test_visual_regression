@@ -4,6 +4,8 @@ Change log for zeit.web
 1.20 (unreleased)
 -----------------
 
+- ZON-1541: Reorganize parquet into RAM structure
+
 - ZON-1536: Improved get_teaser_image perfomance
 
 - Maintenance: clean up templates

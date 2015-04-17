@@ -23,16 +23,9 @@ Available attributes:
 
 {% block main %}
     {% for region in view.regions %}
-        {%- include ["zeit.web.site:templates/inc/region/" + region | get_attr('layout', '') + ".html",
+        {# XXX: Waiting for regions to have a layout or ID attribute. #}
+        {% set region_layout = region | get_attr('layout', None) | get_attr('id', 'default') %}
+        {%- include ["zeit.web.site:templates/inc/region/" + region_layout + ".html",
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
-
-    <div class="cp-region">
-        {%- include "zeit.web.site:templates/inc/cp_area_parquet.html" ignore missing -%}
-    </div>
-
-    {% with region = view.region_snapshot %}
-        {%- include ["zeit.web.site:templates/inc/region/" + region | get_attr('layout', '') + ".html",
-                     "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
-    {% endwith %}
 {% endblock main %}

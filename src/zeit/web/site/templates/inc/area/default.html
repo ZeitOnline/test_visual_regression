@@ -1,12 +1,12 @@
-<div class="{{ 'cp-area' | with_mods(area.layout, area.width | area_width) }}">
+<div class="{{ 'cp-area' | with_mods(area | get_layout, area.width | area_width) }}">
     {% block before_module_list %}{% endblock %}
-    {% for module in area.values() -%}
+    {% for module in area.values() if module | first_child -%}
         {% set teaser = module | first_child %}
         {% set index = loop.index %}
         {% block before_module_include scoped %}{% endblock %}
         {% include
-            ["zeit.web.site:templates/inc/module/" + module | get_teaser_layout | hide_none + ".html",
-             "zeit.web.site:templates/inc/teaser/" + module | get_teaser_layout | hide_none + ".tpl",
+            ["zeit.web.site:templates/inc/module/" + module | get_layout | hide_none + ".html",
+             "zeit.web.site:templates/inc/teaser/" + module | get_layout | hide_none + ".tpl",
              "zeit.web.site:templates/inc/teaser/default.tpl"] %}
         {% block after_module_include scoped %}{% endblock %}
     {% endfor %}

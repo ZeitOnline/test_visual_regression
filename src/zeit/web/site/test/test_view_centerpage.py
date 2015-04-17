@@ -60,9 +60,9 @@ def test_area_main_should_filter_teasers(application):
     context.values = val
 
     request = mock.Mock()
-    cp = zeit.web.site.view_centerpage.Centerpage(context, request)
+    cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_main) == 2
+    assert len(cp.area_main) == 4
     assert cp.area_main.values()[0].layout.id == 'zon-large'
     assert cp.area_main.values()[1].layout.id == 'zon-small'
     assert list(cp.area_main.values()[0])[0] == 'article'
@@ -156,7 +156,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('cp-area--lead')[0]
+    box = driver.find_elements_by_class_name('cp-area--twothirds')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
@@ -261,8 +261,8 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .cp-region--lead .cp-area article figure noscript')
-    assert len(noscript) == 2, 'No noscript areas found'
+        '#main .cp-region--lead .scaled-image noscript')
+    assert len(noscript) == 3
 
 
 def test_topiclinks_title_schould_have_a_value_and_default_value():
@@ -478,21 +478,28 @@ def test_small_teaser_without_image_has_no_padding_left(
     assert teaser.location.get('x') is 20
 
 
-def test_parquet_should_have_rows(application):
+def test_parquet_region_list_should_have_regions(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert len(view.area_parquet) == 4, (
-        'View contains {} parquet rows instead of 4' % len(view.area_parquet))
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert len(view.region_list_parquet) == 4, (
+        'View contains {} parquet regions instead of 4' % len(
+            view.region_list_parquet))
 
 
-def test_parquet_row_should_have_teasers(application):
+def test_parquet_regions_should_have_one_area_each(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    teasers = view.area_parquet[0]
-    assert len(teasers) == 6, (
-        'Parquet row contains %s teasers instead of 4' % len(teasers))
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert all([len(region) == 1 for region in view.region_list_parquet])
+
+
+def test_parquet_region_areas_should_have_multiple_modules_each(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert all([len(area.values()) > 1 for region in view.region_list_parquet
+                for area in region.values()])
 
 
 def test_parquet_should_render_desired_amount_of_teasers(
@@ -500,15 +507,15 @@ def test_parquet_should_render_desired_amount_of_teasers(
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    desired_amount = view.area_parquet[0].display_amount
+    desired_amount = view.context.values()[1][0][0].display_amount
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    teasers = browser.cssselect(
-        '#parquet > .parquet-row:first-child '
-        'article[data-block-type="teaser"]')
+    teasers = browser.cssselect('.cp-region--parquet-large '
+                                'article[data-block-type="teaser"]')
     actual_amount = len(teasers)
     assert actual_amount == desired_amount, (
-        'Parquet row does not display the right amount of teasers.')
+        'Parquet row does not display the right amount of teasers. '
+        'Got %s, expected %s.' % (actual_amount, desired_amount))
 
 
 def test_parquet_should_display_meta_links_only_on_desktop(
@@ -553,8 +560,8 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 def test_video_series_should_be_available(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    video_series = view.video_series_list
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    video_series = view.module_videostage.video_series_list
     assert len(video_series) > 0, (
         'Series object is empty')
 
@@ -609,7 +616,7 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
 
 def test_module_printbox_should_contain_teaser_image(testserver):
     mycp = mock.Mock()
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(mycp, mock.Mock())
     image = view.module_printbox[0].image
     assert isinstance(image, zeit.content.image.image.RepositoryImage)
 

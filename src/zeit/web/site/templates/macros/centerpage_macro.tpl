@@ -17,7 +17,7 @@
 
     {% if module -%}
         {% for teaser in module %}
-            {% include ['zeit.web.site:templates/inc/teaser/' + prefix + module.layout.id + '.html', 'zeit.web.site:templates/inc/teaser/default.html'] ignore missing %}
+            {% include ['zeit.web.site:templates/inc/teaser/' + prefix + module | get_layout + '.html', 'zeit.web.site:templates/inc/teaser/default.html'] ignore missing %}
         {% endfor %}
     {% endif %}
 {%- endmacro %}
