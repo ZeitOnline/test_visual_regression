@@ -3,11 +3,11 @@
         <div class="parquet-meta">
             {% if area.referenced_cp is none %}
                 <span class="parquet-meta__title">
-                    {{ area.title }}
+                    {{ area.title | hide_none }}
                 </span>
             {% else %}
                 <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | translate_url }}">
-                    {{ area.title }}
+                    {{ area.title | hide_none }}
                 </a>
                 <ul class="parquet-meta__topic-links">
                     {% for label, link in topiclinks(area.referenced_cp) %}
