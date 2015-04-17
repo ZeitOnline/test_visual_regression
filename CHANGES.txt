@@ -4,7 +4,7 @@ Change log for zeit.web
 1.20.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1541: Unglitch vertical parquet padding
 
 
 1.20 (2015-04-17)
@@ -13,8 +13,6 @@ Change log for zeit.web
 - ZON-1541: Reorganize parquet into RAM structure
 
 - ZON-1536: Improved get_teaser_image perfomance
-
-- Maintenance: clean up templates
 
 - ZON-1330: Social/sharing menu in articles
 
@@ -28,6 +26,7 @@ Change log for zeit.web
 
 - ZON-1328: Add Infobox
 
+- Maintenance: Clean up templates
 
 
 1.19 (2015-04-08)
