@@ -81,7 +81,7 @@
         </div>
         {% if view.comments %}
             {% for comment in view.comments.comments[:20] %}
-                <article class="comment{% if comment.indented %} comment--indented{% endif %}" id="cid-{{ comment.cid }}">
+                <article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
                     {% if comment.img_url %}
                     <img class="comment__avatar" alt="Avatarbild von {{ comment.name | e }}" src="{{ comment.img_url }}">
                     {% endif %}

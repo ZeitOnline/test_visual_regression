@@ -88,7 +88,6 @@ def comment_to_dict(comment):
     # TODO: Catch name, timestamp and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
-        indented=bool(in_reply),
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
@@ -98,9 +97,10 @@ def comment_to_dict(comment):
         cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
         recommendations=len(
             comment.xpath('flagged[@type="kommentar_empfohlen"]')),
+        is_author=is_author,
+        is_reply=bool(in_reply),
         is_recommended=bool(
-            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
-        is_author=is_author
+            len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
     )
 
 

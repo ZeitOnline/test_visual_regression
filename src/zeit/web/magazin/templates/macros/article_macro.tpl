@@ -282,7 +282,7 @@
 {%- endmacro %}
 
 {% macro comment(comment, featured) -%}
-    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="cid-{{ comment.cid }}"{% endif %}>
+    <article class="comment{% if comment.is_reply and not featured %} is-indented{% endif %}"{% if not featured %} id="cid-{{ comment.cid }}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
             <span class="comment__head__avatar" style="background-image: url('{{ comment.img_url }}')"></span>
@@ -299,7 +299,7 @@
             {{ comment.text|safe }}
         </div>
         <aside class="comment__tools">
-            {% if not comment.indented -%}
+            {% if not comment.is_reply -%}
             <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {% endif -%}
             <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">Kommentar melden</a>
