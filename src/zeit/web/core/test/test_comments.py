@@ -132,3 +132,10 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
     resp = comment_counter(no_interpolation='true', unique_id=unique_id)
     assert isinstance(resp, dict)
     assert resp['comment_count'][unique_id] == '125 Kommentare'
+
+
+def test_rewrite_comments_url_should_rewrite_to_static_host(application):
+    import zeit.web.core.comments
+    url = zeit.web.core.comments.rewrite_picture_url(
+        'http://localhost:6551/baaa')
+    assert url == 'http://static_community/foo/baaa'
