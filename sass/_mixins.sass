@@ -12,7 +12,7 @@
 =default-article-textlink
 	a
 		border-bottom: 1px solid rgba($color-link--default, .5)
-		+transition-property(border-bottom-color color)
+		+transition-property(border-bottom-color, color)
 		+transition-duration(.2s)
 
 		&:focus
@@ -173,7 +173,7 @@
 =drop_icon()
 	display: inline-block // needed for "rotate on hover"
 	margin-left: $tiny
-	content: "\25BE" // Unicode for ▾
+	content: "\25BE" // ▾ = black down-pointing small triangle
 
 /* mixins for navigation/header */
 
