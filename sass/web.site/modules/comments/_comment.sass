@@ -38,9 +38,6 @@
 		margin: 0 20px 0 0
 
 	&__date-anchor
-		color: $zon-grey
-		display: inline-block
-		font-size: remify(12px)
 
 	&__recommendations
 		color: $zon-red
@@ -62,21 +59,23 @@
 
 	&__reactions
 		display: block
-		font-size: remify(12px)
 		line-height: 1.5
 		margin-top: remify(30px)
 		+respond-min($break-desktop-min)
 			width: remify(320px)
 
-	&__reaction
-		+inline-block
+	&__reaction,
+	&__date-anchor
 		+link
 			color: $zon_mid_grey
 		+on-interaction
-			color: $zon-charcoal
+			color: $zon_dark_grey
+		font-size: remify(12px)
 		letter-spacing: $zon-letter-spacing-s
+
+	&__reaction,
+		+inline-block(top)
 		margin-left: 1rem
-		vertical-align: top
 		+respond-min($break-phablet-min)
 			margin-left: 1.5rem
 
