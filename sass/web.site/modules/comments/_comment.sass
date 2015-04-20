@@ -4,7 +4,7 @@
 	position: relative
 
 	+respond-min($break-desktop-min)
-		padding: remify($medium--px 160px)
+		padding: remify(50px 160px)
 
 	&--author
 		border: none
@@ -24,6 +24,8 @@
 	&__meta
 		display: inline-block
 		vertical-align: top
+		display: block
+		height: remify(50px)
 
 	&__name
 		+link
@@ -44,7 +46,6 @@
 		color: $zon-red
 		float: right
 		font-size: remify(14px)
-		margin-top: remify($micro--px)
 
 	&__body
 		color: $zon-charcoal
@@ -63,7 +64,7 @@
 		display: block
 		font-size: remify(12px)
 		line-height: 1.5
-		margin-top: 2rem
+		margin-top: remify(30px)
 		+respond-min($break-desktop-min)
 			width: remify(320px)
 
