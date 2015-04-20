@@ -280,12 +280,13 @@ class TopicLink(object):
     :rtype: generator
     """
 
-    def __init__(self, centerpage):
-        self.centerpage = centerpage
+    def __init__(self, context):
+        self.context = context
+        self.title = context.topiclink_title or 'Schwerpunkte'
 
     def __iter__(self):
         for i in xrange(1, 4):
-            label = getattr(self.centerpage, 'topiclink_label_%s' % i, None)
-            link = getattr(self.centerpage, 'topiclink_url_%s' % i, None)
+            label = getattr(self.context, 'topiclink_label_%s' % i, None)
+            link = getattr(self.context, 'topiclink_url_%s' % i, None)
             if label is not None and link is not None:
                 yield label, link

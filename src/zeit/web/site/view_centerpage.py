@@ -99,15 +99,11 @@ class Centerpage(
             self.context).last_semantic_change
 
     @zeit.web.reify
-    def topiclink_title(self):
-        """Cache topiclink_title
-        :rtype: str
+    def topic_links(self):
+        """Return topic links of a centerpage as a TopicLink object
+        :rtype: zeit.web.core.centerpage.TopicLink
         """
 
-        return self.context.topiclink_title or 'Schwerpunkte'
-
-    @zeit.web.reify
-    def topiclinks(self):
         return zeit.web.core.interfaces.ITopicLink(self.context)
 
     @zeit.web.reify

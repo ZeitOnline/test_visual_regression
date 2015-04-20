@@ -393,18 +393,18 @@ def get_attr(*args):
     return getattr(*args)
 
 
-@jinja2.contextfilter
-def call_macro_by_name(context, macro_name, *args, **kwargs):
-    return context.vars[macro_name](*args, **kwargs)
-
-
-@zeit.web.register_global
-def topiclinks(centerpage):
+@zeit.web.register_filter
+def topic_links(centerpage):
     try:
         return zeit.web.core.interfaces.ITopicLink(centerpage)
     except TypeError:
         log.debug('object %s could not be adapted' % (
                   getattr(centerpage, 'uniqueId', '')))
+
+
+@jinja2.contextfilter
+def call_macro_by_name(context, macro_name, *args, **kwargs):
+    return context.vars[macro_name](*args, **kwargs)
 
 
 @zeit.web.register_global
