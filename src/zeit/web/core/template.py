@@ -500,7 +500,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 
     # Assumes all images in this group have the same mimetype.
     filenames = asset.keys()
-    sample_image = "{}{}".format(asset.uniqueId, filenames[0])
+    sample_image = u'{}{}'.format(asset.uniqueId, filenames[0])
 
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image)[0], 'jpg')
