@@ -47,10 +47,17 @@
 		margin-top: remify($micro--px)
 
 	&__body
-		font-size: 1rem
-		margin-top: 1rem
+		color: $zon-charcoal
+		font-size: remify(16px)
+		margin-top: remify(16px)
+		margin-bottom: remify(16px)
+		+respond-min($break-desktop-min)
+			font-size: remify(18px)
+			margin-top: remify(30px)
+			margin-bottom: remify(30px)
+
 		& > p
-			margin: remify(0 0 10px 0)
+			margin: 0 0 0.6667em 0
 
 	&__reactions
 		display: block
