@@ -26,7 +26,7 @@ def screen_size(request):
     return request.param
 
 
-def test_area_main_should_filter_teasers(application):
+def test_region_list_lead_should_filter_main_teasers(application):
     context = mock.MagicMock()
 
     def create_mocked_teaserblocks():
@@ -60,14 +60,16 @@ def test_area_main_should_filter_teasers(application):
         m.itervalues = create_mocked_teaserblocks().__iter__
         return [{'lead': m}]
     context.values = val
+    context.ressort = 'ressort'
 
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_main) == 4
-    assert cp.area_main.values()[0].layout.id == 'zon-large'
-    assert cp.area_main.values()[1].layout.id == 'zon-small'
-    assert list(cp.area_main.values()[0])[0] == 'article'
+    area_main = cp.region_list_lead[1].values()[0]
+    assert len(area_main) == 4
+    assert area_main.values()[0].layout.id == 'zon-large'
+    assert area_main.values()[1].layout.id == 'zon-small'
+    assert list(area_main.values()[0])[0] == 'article'
 
 
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
