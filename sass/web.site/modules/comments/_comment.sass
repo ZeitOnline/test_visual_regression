@@ -6,6 +6,13 @@
 	+respond-min($break-desktop-min)
 		padding: remify($medium--px 160px)
 
+	&--author
+		border: none
+		background-color: $zon_lighter_grey
+
+	&--author + & // remove border-top of following comment
+		border: none
+
 
 	&__avatar
 		border-radius: 50%
