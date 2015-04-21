@@ -18,7 +18,7 @@ from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
 import zeit.web.core.view
 
-cache_maker= repoze.lru.CacheMaker()
+cache_maker = repoze.lru.CacheMaker()
 
 
 def rewrite_picture_url(url):
@@ -129,8 +129,9 @@ def request_thread(path):
 def get_thread(unique_id, destination=None, reverse=False):
     return get_cacheable_thread(unique_id, destination, reverse)
 
+
 @cache_maker.expiring_lrucache(maxsize=1000, timeout=60, name='comment_thread')
-def get_cacheable_thread(unique_id, destination, reverse):
+def get_cacheable_thread(unique_id, destination=None, reverse=False):
     """Return a dict representation of the comment thread of the given
     article.
 
@@ -227,6 +228,7 @@ def get_counts(*unique_ids):
     except (AttributeError, IndexError, KeyError, lxml.etree.LxmlError):
         return {}
 
+
 def _is_admin(context, request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     if conf.get('is_admin'):
@@ -265,18 +267,13 @@ class PostComment(zeit.web.core.view.Base):
 
         if request.method == "POST":
 
-            if (not (self.path or request.params.get('nid'))
-                and not request.params.get('comment')):
+            if (not self.path and not request.params.get('comment')):
                     raise pyramid.httpexceptions.HTTPInternalServerError(
                         title='No comment could be posted',
                         explanation=('Path and comment are required'))
 
-            unique_id = 'http://xml.zeit.de/[community_nid]'
-
-            nid = request.params.get('nid')
-            if not nid:
-                unique_id = 'http://xml.zeit.de/{}'.format(self.path)
-                nid = self._nid_by_comment_thread(unique_id)
+            unique_id = 'http://xml.zeit.de/{}'.format(self.path)
+            nid = self._nid_by_comment_thread(unique_id)
 
             action_url = '{}/agatho/thread/{}'.format(
                 self.community_host, request.params.get('path'))
@@ -294,7 +291,9 @@ class PostComment(zeit.web.core.view.Base):
                     unique_id))
                 # XXX: invalidate object from cache here!
                 # use something like
-                # cache_maker.__dict__['_cache']['comment_thread'].invalidate
+                cache_maker._cache['comment_thread'].invalidate(
+                    (unique_id, None, None))
+                # cache on other app servers should be invalidated also
             else:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title='No comment could be posted',
@@ -302,9 +301,7 @@ class PostComment(zeit.web.core.view.Base):
                                 'posted.'.format(unique_id))
 
     def _nid_by_comment_thread(self, unique_id):
-        request = self.request
-        comment_thread = zeit.web.core.comments.get_thread(
-            unique_id, destination=request.url)
+        comment_thread = zeit.web.core.comments.get_thread(unique_id)
 
         if comment_thread:
             return comment_thread['nid']
@@ -313,8 +310,8 @@ class PostComment(zeit.web.core.view.Base):
         if not nid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No comment thread',
-                explanation='No comment thread for {} could be '
-                    'created.'.format(unique_id))
+                explanation=('No comment thread for {} could be '
+                             'created.').format(unique_id))
         else:
             return nid
 
