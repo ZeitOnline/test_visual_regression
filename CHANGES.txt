@@ -4,7 +4,7 @@ Change log for zeit.web
 1.20.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- BUG-226: Fix ZMO image captions should not escape xmlcharrefs
 
 
 1.20.1 (2015-04-17)
