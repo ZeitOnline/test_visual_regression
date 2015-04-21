@@ -132,11 +132,15 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def regions(self):
-        """Wire together a legacy centerpage behaving like a RAM-style one."""
-
         regions = []
 
-        regions += self.region_list_lead
+        region_fullwidth = LegacyRegion([self.area_fullwidth],
+                                        layout='fullwidth')
+        regions.append(region_fullwidth)
+
+        region_lead = LegacyRegion([self.area_main, self.area_informatives],
+                                   layout='lead')
+        regions.append(region_lead)
 
         area_videostage = LegacyArea([self.module_videostage],
                                      layout='video',
@@ -149,36 +153,39 @@ class LegacyCenterpage(Centerpage):
 
         regions.append(self.region_snapshot)
 
-        return [r for r in regions if r]
+        return regions
 
     @zeit.web.reify
-    def region_list_lead(self):
-        """Split lead area into fullwidth, main and informatives regions."""
+    def area_fullwidth(self):
+        """Return all fullwidth teaser blocks with a minimum length of 1.
+        :rtype: list
+        """
 
-        def trisect_layout(m):
-            """Groups modules into three buckets according to their layout.
-            Invalid layouts return `None`, fullwidth layouts return `0` and
-            other layouts return `1`.
-            """
-            layout = zeit.web.core.template.get_layout(m)
-            return layout and int(layout != 'zon-fullwidth')
+        def valid_module(m):
+            return zeit.web.core.template.get_layout(m) in (
+                'zon-fullwidth',)
 
-        partitions = collections.defaultdict(list)
-        for m in self.context.values()[0]['lead'].itervalues():
-            partitions[trisect_layout(m)].append(m)
+        lead = self.context.values()[0]['lead']
+        return LegacyArea(
+            [m for m in lead.itervalues() if valid_module(m)])
 
-        region_fullwidth = LegacyRegion([LegacyArea(partitions[0])],
-                                        layout='fullwidth')
-        area_main = LegacyArea(partitions[1], layout='lead', width='2/3')
-        region_lead = LegacyRegion([area_main, self.area_informatives],
-                                   layout='lead')
+    @zeit.web.reify
+    def area_main(self):
+        """Return all non-fullwidth teaser blocks with a minimum length of 1.
+        :rtype: list
+        """
 
-        return [region_fullwidth, region_lead]
+        def valid_module(m):
+            return zeit.web.core.template.get_layout(m) not in (
+                'zon-fullwidth', None)
+
+        area = self.context.values()[0]['lead']
+        return LegacyArea(
+            [m for m in area.itervalues() if valid_module(m)],
+            layout='lead', width='2/3')
 
     @zeit.web.reify
     def area_informatives(self):
-        """Construct informatives area from buzz and print boxes."""
-
         return LegacyArea([m for m in (
             self.module_buzz_mostread, self.module_printbox) if m],
             layout='informatives', width='1/3')
