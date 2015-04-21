@@ -45,8 +45,8 @@
                     not( '.primary-nav__item--featured' );
                 this.$feature = el.$nav.find( '.primary-nav__item--featured' );
 
-                this.$moreList = el.$nav.find( '.primary-nav__item[data-id="more-dropdown"]');
-                this.$moreListItems = el.$moreList.find( '.dropdown > .dropdown__item');
+                this.$moreList = el.$nav.find( '.primary-nav__item[data-id="more-dropdown"]' );
+                this.$moreListItems = el.$moreList.find( '.dropdown > .dropdown__item' );
 
                 this.toggleNavItems();
                 this.$nav.removeClass( 'primary-nav--js-no-overflow' );
@@ -65,7 +65,7 @@
 
                     // shall the item be displayed?
                     el.$items.each(function() {
-                        var $navItem = $(this),
+                        var $navItem = $( this ),
                             itemId = $navItem.data( 'id' ),
                             $dropdownItem = el.$moreListItems.filter( '[data-id="' + itemId + '"]' );
 
@@ -99,7 +99,7 @@
 
         //run through nav element and return object
         return this.each( function() {
-            el.init( $(this) );
+            el.init( $( this ) );
         });
 
     };

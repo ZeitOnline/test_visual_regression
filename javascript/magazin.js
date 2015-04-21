@@ -5,7 +5,7 @@
 
 // A hack for Modernizr and AMD.
 // This lets Modernizr be in the <head> and also compatible with other modules.
-define('modernizr', [], window.Modernizr);
+define( 'modernizr', [], window.Modernizr );
 
 // load config first including path and shim config
 require([ 'config' ], function() {});
