@@ -323,8 +323,8 @@ class LegacyCenterpage(Centerpage):
             snapshot = zeit.web.core.interfaces.ITeaserImage(
                 self.context.snapshot)
             assert snapshot
-        except (AssertionError, TypeError):
-            return
+        except TypeError:
+            snapshot = None
 
         module = LegacyModule([snapshot], layout='snapshot')
         area = LegacyArea([module], layout='snapshot', width='1/1')
