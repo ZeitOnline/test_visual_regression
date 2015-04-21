@@ -1,5 +1,6 @@
 import logging
 import urllib2
+import base64
 
 import grokcore.component
 
@@ -16,6 +17,7 @@ import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 import zeit.web.site.spektrum
+import os
 
 
 log = logging.getLogger(__name__)
@@ -215,6 +217,23 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.uniqueId = image.uniqueId
 
 
+class LocalVideoImage(object):
+
+    base_path = "/tmp/"
+
+    def __init__(self, video_url):
+        self.filename = "{}{}".format(
+                                      self.base_path,
+                                      base64.b64encode(video_url))
+
+    def open(self, mode="r"):
+        return file(self.filename, mode)
+
+    def isfile(self):
+        return os.path.isfile(self.filename)
+
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
@@ -226,13 +245,16 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
         for image_pattern, src in [('still', video.video_still),
                                    ('thumbnail', video.thumbnail)]:
             image = zeit.web.core.block.BaseImage()
-            image.image = zeit.content.image.image.LocalImage()
+
+            image.image = LocalVideoImage(src)
             file_name = '{}.jpg'.format(image_pattern)
-            try:
-                with image.image.open('w') as fh:
-                    fh.write(urllib2.urlopen(src, timeout=4).read())
-            except (IOError, AttributeError):
-                continue
+
+            if not image.image.isfile():
+                try:
+                    with image.image.open('w') as fh:
+                        fh.write(urllib2.urlopen(src, timeout=4).read())
+                except (IOError, AttributeError):
+                    continue
             image.src = src
             image.mimeType = 'image/jpeg'
             image.image_pattern = 'brightcove-{}'.format(image_pattern)
@@ -242,6 +264,9 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             image.alt = (video.title or '').strip('\n')
             image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
             self[file_name] = image
+
+
+
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
