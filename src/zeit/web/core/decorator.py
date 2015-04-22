@@ -3,6 +3,10 @@ import sys
 import pyramid
 import pyramid.decorator
 import venusian
+import zope.component
+
+import zeit.content.cp.interfaces
+import zeit.edit.interfaces
 
 import zeit.web.core.interfaces
 
@@ -67,3 +71,12 @@ class reify(pyramid.decorator.reify):
         except:
             exc, val, tb = sys.exc_info()
             raise exc, val, tb
+
+
+def register_module(name):
+    def registrator(cls):
+        gsm = zope.component.getGlobalSiteManager()
+        gsm.registerAdapter(cls, (zeit.content.cp.interfaces.ICPExtraBlock,),
+                            zeit.edit.interfaces.IBlock, name)
+        return cls
+    return registrator

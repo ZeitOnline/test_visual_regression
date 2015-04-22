@@ -569,6 +569,19 @@ def get_image_group(asset):
 
 
 @zeit.web.register_filter
+def get_module(block):
+    if not zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
+        return
+    try:
+        module = zope.component.getAdapter(
+            block, zeit.edit.interfaces.IBlock, block.cpextra)
+    except TypeError:
+        return
+    if block.visible:
+        return module
+
+
+@zeit.web.register_filter
 def attr_safe(text):
     """ Return an attribute safe version of text """
     return re.sub('[^a-zA-Z]', '', text).lower()

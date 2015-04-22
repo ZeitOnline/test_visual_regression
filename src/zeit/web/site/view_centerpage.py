@@ -46,13 +46,13 @@ class LegacyMixin(object):
         return super(LegacyMixin, self).__hash__()
 
 
-@grokcore.component.implementer(zeit.content.cp.interfaces.ITeaserBlock)
+@grokcore.component.implementer(zeit.edit.interfaces.IBlock)
 class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         super(LegacyModule, self).__init__(arg)
         self.layout = kw.pop('layout', 'default')
-        self.type = 'teaser'  # XXX: When would this be something else?
+        self.type = 'teaser'
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
