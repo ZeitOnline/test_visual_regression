@@ -29,6 +29,7 @@ def comment_to_dict(comment):
     """
 
     # TODO: Avoid repeatedly evaluating xpaths.
+    is_author = False
     if comment.xpath('author/@roles'):
         roles = comment.xpath('author/@roles')[0]
         is_author = 'author' in roles
