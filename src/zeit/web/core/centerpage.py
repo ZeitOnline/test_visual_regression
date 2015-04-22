@@ -265,6 +265,10 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
                 try:
                     with image.image.open('w+') as fh:
                         fh.write(urllib2.urlopen(src, timeout=4).read())
+                        log.debug("Save brightcove image {} "
+                                  "to local file {}".format(
+                                      src,
+                                      image.image.filename))
                 except (IOError, AttributeError):
                     continue
             image.src = src

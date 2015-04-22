@@ -4,7 +4,7 @@ Change log for zeit.web
 1.20.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- BUG-241: Save brightcove images to HD
 
 
 1.20 (2015-04-17)
