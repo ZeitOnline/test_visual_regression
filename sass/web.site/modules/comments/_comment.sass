@@ -22,20 +22,19 @@
 		width: remify(50px)
 
 	&__meta
-		display: inline-block
-		vertical-align: top
-		display: block
-		height: remify(50px)
+		+inline-block(top)
 
 	&__name
 		+link
 			color: $zon-red
 		+on-interaction
 			text-decoration: underline
-		display: block
-		font-size: remify(16px)
+		font-size: remify(18px)
 		font-weight: bold
-		margin: 0 20px 0 0
+		+respond-min($break-desktop-min)
+			+inline-block(top)
+			margin: remify(0 20px 0 0)
+			line-height: remify(50px)
 
 	&__date-anchor
 
@@ -114,11 +113,14 @@
 
 // icons
 .icon-zon-author-badge
-	+inline-block
-	background-position: top remify(15px) center
-	height: remify(50px)
+	+inline-block(text-bottom)
+	height: remify(18px)
 	width: remify(16px)
 	margin-right: remify(6px)
+	+respond-min($break-desktop-min)
+		background-position: top remify(15px) center
+		height: remify(50px)
+
 
 .icon-comment-reactions-reply,
 .icon-comment-reactions-report,
