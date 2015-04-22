@@ -86,6 +86,9 @@
                     <img class="comment__avatar" alt="Avatarbild von {{ comment.name | e }}" src="{{ comment.img_url }}">
                     {% endif %}
                     <div class="comment__meta">
+                        {% if comment.is_author %}
+                        <span class="icon-zon-author-badge"></span>
+                        {% endif %}
                         <a class="comment__name" href="{{ comment.userprofile_url }}">
                             {{ comment.name | e }}
                         </a>
