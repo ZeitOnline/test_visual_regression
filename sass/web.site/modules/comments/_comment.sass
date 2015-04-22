@@ -37,11 +37,24 @@
 			line-height: remify(50px)
 
 	&__date-anchor
+		display: block
+		+respond-min($break-desktop-min)
+			line-height: remify(50px)
+			position: absolute
+			right: remify(160px)
+			top: remify(50px)
 
 	&__recommendations
 		color: $zon-red
-		float: right
 		font-size: remify(14px)
+		margin-left: remify(20px)
+		position: absolute
+		right: $page-padding
+		top: remify(28px)
+		+respond-min($break-desktop-min)
+			left: auto
+			position: static
+			top: auto
 
 	&__body
 		color: $zon-charcoal
@@ -58,7 +71,7 @@
 
 	&__reactions
 		line-height: 1.5
-		+respond-min($break-tablet-min)
+		+respond-min($break-desktop-min)
 			text-align: right
 
 	&__reaction,
@@ -85,10 +98,11 @@
 
 	+respond-min($break-desktop-min)
 		box-shadow: none
+		margin: remify(0 160px)
 		padding-left: remify(80px)
 		padding-right: 0
-		margin: remify(0 160px)
-
+		.comment__date-anchor
+			right: 0
 	// this :before and :after stuff creates a up-facing triangle
 	// to designate the comment which is replied to
 	// source: http://davidwalsh.name/css-triangles
