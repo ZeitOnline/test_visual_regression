@@ -3,6 +3,10 @@ $cp-padding: em(10px)
 .cp-region
 	padding: 0 $cp-padding
 	+pie-clearfix
+	&--parquet-large,
+	&--parquet-regular,
+	&--parquet-spektrum
+		padding: 0
 
 .cp-area
 	padding: 0 $cp-padding
@@ -23,3 +27,5 @@ $cp-padding: em(10px)
 	&--onequarter
 		+respond-min($break-tablet-min)
 			width: 25%
+	&--parquet
+		padding: 0
