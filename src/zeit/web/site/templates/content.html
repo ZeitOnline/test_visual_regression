@@ -95,14 +95,14 @@
                         <a  class="comment__date-anchor" href="#cid-{{ comment.cid }}">
                             {# Special-Char: &#10744; = Big solidus #}
                             #{{ loop.index }} &nbsp;&#10744;&nbsp; {{ comment.timestamp | format_date_ago() }}
+                            {% if comment.is_recommended %}
+                            {# Special-Char: &#9733; = Black Star #}
+                            <span class="comment__recommendations">
+                                {{ comment.recommendations }} &#9733;
+                            </span>
+                            {% endif %}
                         </a>
                     </div>
-                    {% if comment.is_recommended %}
-                    {# Special-Char: &#9733; = Black Star #}
-                    <div class="comment__recommendations">
-                        {{ comment.recommendations }} &#9733;
-                    </div>
-                    {% endif %}
                     <div class="comment__body">
                         {{ comment.text | safe }}
                     </div>
@@ -115,7 +115,8 @@
                         </a>
                         <a class="comment__reaction comment__reaction--recommend" href="#cid-{{ comment.cid }}">
                             <span class="icon-comment-reactions-recommend"></span> Empfehlen
-                        </a></div>
+                        </a>
+                    </div>
                 </article>
             {% endfor %}
         {% endif %}
