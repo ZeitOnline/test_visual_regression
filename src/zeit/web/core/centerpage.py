@@ -1,8 +1,11 @@
 import logging
 import urllib2
-import base64
+import md5
+import tempfile
+import PIL
 
 import grokcore.component
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -219,19 +222,28 @@ class TeaserImage(zeit.web.core.block.BaseImage):
 
 class LocalVideoImage(object):
 
-    base_path = "/tmp/"
-
     def __init__(self, video_url):
-        self.filename = "{}{}".format(
-                                      self.base_path,
-                                      base64.b64encode(video_url))
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        self.filename = "{}/{}".format(
+            conf.get('brightcove_image_cache', tempfile.gettempdir()),
+            md5.new(video_url).hexdigest())
 
     def open(self, mode="r"):
-        return file(self.filename, mode)
+        return open(self.filename, mode)
 
     def isfile(self):
         return os.path.isfile(self.filename)
 
+    @zeit.web.reify
+    def size(self):
+        if self.isfile():
+            return os.stat(self.filename).st_size
+        return 0
+
+    def getImageSize(self):
+        if self.isfile():
+            return PIL.Image.open(self.open()).size
+        return (0, 0)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
@@ -251,7 +263,7 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
 
             if not image.image.isfile():
                 try:
-                    with image.image.open('w') as fh:
+                    with image.image.open('w+') as fh:
                         fh.write(urllib2.urlopen(src, timeout=4).read())
                 except (IOError, AttributeError):
                     continue
@@ -264,9 +276,6 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             image.alt = (video.title or '').strip('\n')
             image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
             self[file_name] = image
-
-
-
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
