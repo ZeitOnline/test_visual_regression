@@ -48,7 +48,7 @@
                 infiniteLoop: true,
                 hideControlOnEnd: false,
                 adaptiveHeight: true
-            }, defaults),
+            }, defaults ),
             singleGallery = null,
             ressort = window.ZMO.view.ressort,
             viewType = window.ZMO.view.type,
@@ -164,7 +164,7 @@
                 if ( slider.getCurrentSlideElement ) {
                     currentSlide = slider.getCurrentSlideElement();
                     // if loaded image is inside current active slide
-                    if ( currentSlide.get(0) === this ) {
+                    if ( currentSlide.get( 0 ) === this ) {
                         // adjust height if necessary
                         if ( sliderViewport && sliderViewport.height() < currentSlide.height() ) {
                             sliderViewport.height( currentSlide.height() );
@@ -248,9 +248,9 @@
                     $( '.bx-next' ).addClass( 'icon-pfeil-rechts' );
                     $( '.bx-prev' ).addClass( 'icon-pfeil-links' );
 
-                    sliderViewport.parent().addClass('bx-wrapper--no-touch');
+                    sliderViewport.parent().addClass( 'bx-wrapper--no-touch' );
                 } else {
-                    sliderViewport.parent().addClass('bx-wrapper--touch');
+                    sliderViewport.parent().addClass( 'bx-wrapper--touch' );
                 }
 
                 // fix ad columns
