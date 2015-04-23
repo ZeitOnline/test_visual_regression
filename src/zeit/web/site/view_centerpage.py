@@ -132,9 +132,10 @@ class LegacyCenterpage(Centerpage):
     def regions(self):
         regions = []
 
-        region_fullwidth = LegacyRegion([self.area_fullwidth],
-                                        layout='fullwidth')
-        regions.append(region_fullwidth)
+        if len(self.area_fullwidth.values()) > 0:
+            region_fullwidth = LegacyRegion([self.area_fullwidth],
+                                            layout='fullwidth')
+            regions.append(region_fullwidth)
 
         region_lead = LegacyRegion([self.area_main, self.area_informatives],
                                    layout='lead')
