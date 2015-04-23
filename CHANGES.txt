@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1549: Add square teaser for ZON content
 
+- BUG-241: Save brightcove images to HD
+
 
 1.20.1 (2015-04-17)
 -------------------
