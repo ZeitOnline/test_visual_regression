@@ -734,5 +734,5 @@ def test_centerpage_should_not_render_empty_fullwidth_region(
         testbrowser, testserver):
     browser = testbrowser(
         '{}/zeit-online/parquet-teaser-setup'.format(testserver.url))
-    assert not browser.cssselect('.main > .cp-region--fullwidth:first-child'), (
-        'Unwanted first region fullwidth')
+    assert not browser.cssselect(
+        '.main > .cp-region--fullwidth:first-child'), ('Unwanted --fullwidth')
