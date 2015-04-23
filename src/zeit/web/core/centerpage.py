@@ -1,7 +1,11 @@
 import logging
 import urllib2
+import md5
+import tempfile
+import PIL
 
 import grokcore.component
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -16,6 +20,7 @@ import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 import zeit.web.site.spektrum
+import os
 
 
 log = logging.getLogger(__name__)
@@ -215,6 +220,32 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.uniqueId = image.uniqueId
 
 
+class LocalVideoImage(object):
+
+    def __init__(self, video_url):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        self.filename = "{}/{}".format(
+            conf.get('brightcove_image_cache', tempfile.gettempdir()),
+            md5.new(video_url).hexdigest())
+
+    def open(self, mode="r"):
+        return open(self.filename, mode)
+
+    def isfile(self):
+        return os.path.isfile(self.filename)
+
+    @zeit.web.reify
+    def size(self):
+        if self.isfile():
+            return os.stat(self.filename).st_size
+        return 0
+
+    def getImageSize(self):
+        if self.isfile():
+            return PIL.Image.open(self.open()).size
+        return (0, 0)
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
@@ -226,13 +257,20 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
         for image_pattern, src in [('still', video.video_still),
                                    ('thumbnail', video.thumbnail)]:
             image = zeit.web.core.block.BaseImage()
-            image.image = zeit.content.image.image.LocalImage()
+
+            image.image = LocalVideoImage(src)
             file_name = '{}.jpg'.format(image_pattern)
-            try:
-                with image.image.open('w') as fh:
-                    fh.write(urllib2.urlopen(src, timeout=4).read())
-            except (IOError, AttributeError):
-                continue
+
+            if not image.image.isfile():
+                try:
+                    with image.image.open('w+') as fh:
+                        fh.write(urllib2.urlopen(src, timeout=4).read())
+                        log.debug("Save brightcove image {} "
+                                  "to local file {}".format(
+                                      src,
+                                      image.image.filename))
+                except (IOError, AttributeError):
+                    continue
             image.src = src
             image.mimeType = 'image/jpeg'
             image.image_pattern = 'brightcove-{}'.format(image_pattern)

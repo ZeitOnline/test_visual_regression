@@ -30,9 +30,9 @@
 
         //run through search element and return object
         return this.each( function() {
-            $( this ).on( 'change', function(e) {
+            $( this ).on( 'change', function( e ) {
                 e.preventDefault();
-                var value = $(this).find('option:selected').val();
+                var value = $( this ).find( 'option:selected' ).val();
                 if ( value ) {
                     win.location.href = win.location.protocol +
                         '//' + win.location.host + '/serie/' + value;
