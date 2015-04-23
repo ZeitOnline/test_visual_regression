@@ -1,6 +1,8 @@
 {
 	"preset": "jquery",
 
+	// disable preset rule
+	"requirePaddingNewLinesBeforeLineComments": null,
 
 	// "\"": all strings require double quotes
 	// "'": all strings require single quotes
@@ -16,8 +18,11 @@
 	// true or "onevar"
 	"requireMultipleVarDecl": true,
 
+	"requireSpacesInsideParentheses": {
+		"all": true,
+		"except": [ "{", "}", "(", ")", "[", "]", "function" ]
+	},
+
 	"maximumLineLength": 140
 
-	// "all" for strict mode, "allButNested" ignores nested brackets in a row.
-	// "requireSpacesInsideParentheses": "allButNested"
 }

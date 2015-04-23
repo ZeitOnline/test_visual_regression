@@ -48,8 +48,8 @@
         },
         hasLocalstorage = function() {
             try {
-                return ('localStorage' in win) && ('setItem' in localStorage);
-            } catch (e) {
+                return ( 'localStorage' in win ) && ( 'setItem' in localStorage );
+            } catch ( e ) {
                 return false;
             }
         },
@@ -65,7 +65,7 @@
                 // check against sites
                 var ret = false;
                 $.each( defaults.sites, function( i, n ) {
-                    if ( doc.referrer.search(n.regex) > -1 ) {
+                    if ( doc.referrer.search( n.regex ) > -1 ) {
                         ret = n.name;
                         return false; // return false to exit loop
                     }
@@ -96,7 +96,7 @@
              * @returns {boolean}
             */
             hasExternalReferrer: function() {
-                return document.referrer && document.referrer.indexOf(location.protocol + '//' + location.host) !== 0;
+                return document.referrer && document.referrer.indexOf( location.protocol + '//' + location.host ) !== 0;
             },
             /**
              * checks lookup the count for name and increment it
@@ -114,7 +114,7 @@
                 } else {
                     data[ name ] = 1;
                 }
-                localStorage.setItem(defaults.storageName, JSON.stringify( data ) );
+                localStorage.setItem( defaults.storageName, JSON.stringify( data ) );
             },
             /**
              * checks lookup the count for name and increment it
@@ -125,11 +125,11 @@
             */
             init: function( options ) {
                 var ref;
-                defaults = $.extend(defaults, options);
+                defaults = $.extend( defaults, options );
                 if ( methods.hasExternalReferrer() ) {
                     ref = methods.checkReferrer();
                     if ( ref ) {
-                        methods.incrementVisit(ref);
+                        methods.incrementVisit( ref );
                     }
                 }
             },
