@@ -4,6 +4,8 @@ Change log for zeit.web
 1.20.2 (unreleased)
 -------------------
 
+- ZON-1667: Prepare search centerpage, spice up cpextra handling
+
 - BUG-241: Save brightcove images to HD
 
 
