@@ -50,6 +50,7 @@ def test_video_imagegroup_should_set_local_image_fileobj(
     assert image.image.size == size
     assert image.image.getImageSize() == res
 
+
 def test_video_imagegroup_should_fallback(
         application, workingcopy, monkeypatch):
     def filename(me, src):
@@ -67,6 +68,3 @@ def test_video_imagegroup_should_fallback(
         obj.video_still = 'http://fusel'
     group = zeit.content.image.interfaces.IImageGroup(video)
     assert group['still.jpg'].image.getImageSize() == (500, 300)
-
-
-
