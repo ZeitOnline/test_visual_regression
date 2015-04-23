@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from zeit.cms.interfaces import ID_NAMESPACE as NS
 import lxml.etree
-
-import zeit.web.core.comments
+import pyramid.httpexceptions
+import mock
+import pytest
+import zeit.web.core.view_comment
+from mock import patch
+import zope
+import requests
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -147,3 +152,85 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
     url = zeit.web.core.comments.rewrite_picture_url(
         'http://localhost:6551/baaa')
     assert url == 'http://static_community/foo/baaa'
+
+
+def test_post_comment_should_throw_exception_if_no_user_is_present():
+    request = mock.Mock()
+    request.authenticated_userid = False
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        zeit.web.core.view_comment.PostComment(mock.Mock(), request)
+
+
+def _create_poster(monkeypatch):
+    request = mock.Mock()
+    request.authenticated_userid = True
+
+    request.params = {'path': 'my/path'}
+    request.session = {'user': {'uid': '123'}}
+    request.cookies = {}
+    context = mock.Mock()
+
+    def util(arg):
+        return {
+            'community_host': 'http://foo'}
+
+    monkeypatch.setattr(zope.component, 'getUtility', util)
+
+    def post(action_url, data=None, cookies=None):
+        return None
+    monkeypatch.setattr(requests, 'post', post)
+
+    def nid(me, uid):
+        return 1
+    monkeypatch.setattr(
+        zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
+
+    return zeit.web.core.view_comment.PostComment(context, request)
+
+
+def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
+    poster = _create_poster(monkeypatch)
+
+    assert poster.path == 'my/path'
+    assert isinstance(poster.context, mock.Mock)
+    assert poster.community_host == 'http://foo'
+    assert poster.status == []
+
+
+def test_post_comment_should_only_do_sth_on_post(monkeypatch):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "GET"
+    assert poster.post_comment() is None
+
+
+def test_post_comment_should_raise_exception_if_params_are_wrong(monkeypatch):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+
+    poster.path = None
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment() is None
+
+    poster.path = 'my/path'
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment() is None
+
+
+def test_post_comments_should_post_with_correct_arguments(monkeypatch):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+    with patch.object(requests, 'post') as mock_method:
+        response = mock.Mock()
+        response.status_code = 200
+        mock_method.return_value = response
+        poster.post_comment()
+
+    assert mock_method.call_args == (
+            ('http://foo/agatho/thread/my/path',),
+            {'cookies': {},
+             'data': {
+                      'comment': None,
+                      'pid': None,
+                      'uid': '123',
+                      'nid': 1,
+                      'subject': '[empty]'}})
