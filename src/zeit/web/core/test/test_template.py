@@ -411,3 +411,22 @@ def test_attr_safe_returns_safe_text(application):
     text = u'10 Saurier sind super % auf Zack'
     target = 'sauriersindsuperaufzack'
     assert zeit.web.core.template.attr_safe(text) == target
+
+
+def test_get_module_filter_should_correctly_extract_cpextra_id(testserver):
+    context, xml = mock.Mock(), mock.Mock()
+
+    assert zeit.web.core.template.get_module(None) is None
+
+    xml.attrib = {'visible': True, 'module': 'n/a'}
+    block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
+    assert zeit.web.core.template.get_module(block) is None
+
+    xml.attrib = {'visible': True, 'module': 'search-form'}
+    block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
+    assert isinstance(zeit.web.core.template.get_module(block),
+                      zeit.web.site.search.Search)
+
+    xml.attrib = {'visible': False, 'module': 'n/a'}
+    block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
+    assert zeit.web.core.template.get_module(block) is None
