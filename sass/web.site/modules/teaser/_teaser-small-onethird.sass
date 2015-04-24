@@ -4,6 +4,8 @@
 	padding: $petite $page-padding
 	+respond-min($break-tablet-min)
 		border-top: none
+		margin: 0
+		padding: remify(20px) 0
 	&__container
 		+display-flex
 		+flex-direction(column)
@@ -52,3 +54,11 @@
 	&__commentcount
 		@extend %teaser-commentcount
 	
+// funny rules for checking
+// if image should be shown or not
+.teaser-small-onethird 
+	& ~ .teaser-small-onethird
+		.teaser-small-onethird__media
+			display: none
+		.teaser-small-onethird__container
+			padding-left: 0
