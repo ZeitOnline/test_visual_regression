@@ -73,11 +73,16 @@
     {% profile %}
     <section class="comment-section" id="comments">
         <div class="comment-section__head">
-            {% if view.comments and view.comments.comment_count > 1 %}
-            {{ view.comments.comment_count }} Kommentare
-            {% else %}
-            Noch keine Kommentare. Diskutieren Sie mit.
-            {% endif %}
+            <div class="comment-section__count">
+                {% if view.comments and view.comments.comment_count > 1 %}
+                {{ view.comments.comment_count }} Kommentare
+                {% else %}
+                Noch keine Kommentare. Diskutieren Sie mit.
+                {% endif %}
+            </div>
+            <a href="#comment-form" class="comment-section__cta">
+                Kommentieren
+            </a>
         </div>
         {% if view.comments %}
             {% for comment in view.comments.comments[:20] %}
@@ -136,8 +141,8 @@
                 <input type="hidden" name="uid" value="{{ view.request.session.user.uid }}">
                 <input class="comment-form__submit" type="submit" value="Kommentar senden" />
             </form>
-            {% else -%}
-            <div class="comment-login">
+        {% else -%}
+            <div class="comment-login" id="comment-form">
                 <div class="comment-login__cta">
                     Bitte melden Sie sich an, um zu kommentieren.
                 </div>
