@@ -728,3 +728,22 @@ def test_centerpage_metadata(testbrowser, testserver):
 def test_new_centerpage_renders(testserver):
     resp = requests.get('%s/index' % testserver.url)
     assert resp.ok
+
+
+def test_onethird_teaser_has_correct_width_in_all_screen_sizes(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/index' % testserver.url)
+    teaser = driver.find_elements_by_class_name('teaser-small-onethird')[0]
+
+    assert teaser.is_displayed(), 'Fullwidth teaser missing'
+
+    if screen_size[0] == 320:
+        assert teaser.size.get('width') == 335
+    elif screen_size[0] == 520:
+        assert teaser.size.get('width') == 520
+    elif screen_size[0] == 768:
+        assert teaser.size.get('width') == 229
+    elif screen_size[0] == 980:
+        assert teaser.size.get('width') == 300
