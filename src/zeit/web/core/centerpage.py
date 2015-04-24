@@ -277,8 +277,8 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
 
                         image.image = zeit.cms.interfaces.ICMSContent(
                             '{}/{}'.format(
-                                           conf.get('default_teaser_images'),
-                                           'teaser_image-default.jpg'))
+                                conf.get('default_teaser_images'),
+                                'teaser_image-default.jpg'))
                     except:
                         continue
             image.src = src
