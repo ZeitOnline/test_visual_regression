@@ -52,11 +52,11 @@
                 $button.on( 'click', function( event ) {
 
                     if ( $input.css( 'visibility' ) === 'hidden' ) {
-                    // only applies if input is hidden
+                        // only applies if input is hidden
                         event.preventDefault();
                         showInput();
-                    } else if ( $input.hasClass( 'search__input--visible' ) && !$input.val() ){
-                    // if input is empty we wanne hide it when search button is pressed again
+                    } else if ( $input.hasClass( 'search__input--visible' ) && !$input.val() ) {
+                        // if input is empty we wanne hide it when search button is pressed again
                         event.preventDefault();
                         return;
                     }

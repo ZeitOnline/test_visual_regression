@@ -29,13 +29,13 @@
     $.fn.scrollUp = function() {
 
         //scroll to top of page
-        function scrollToTop(){
+        function scrollToTop() {
             $( 'html, body' ).animate( { scrollTop: '0px' }, 100 );
         }
 
         //run through search element and return object
         return this.each( function() {
-            $( this ).on( 'click', function(e) {
+            $( this ).on( 'click', function( e ) {
                 e.preventDefault();
                 scrollToTop();
             } );
