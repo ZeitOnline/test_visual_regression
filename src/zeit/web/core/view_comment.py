@@ -45,23 +45,34 @@ class PostComment(zeit.web.core.view.Base):
         request = self.request
         user = request.session['user']
         uid = user['uid']
+        pid = request.params.get('pid')
+        comment = request.params.get('comment')
+        questionable = request.params.get('is_questionable')
 
         if request.method == "POST":
-            if (not self.path or not request.params.get('comment')):
-                    raise pyramid.httpexceptions.HTTPInternalServerError(
-                        title='No comment could be posted',
-                        explanation=('Path and comment are required'))
+            if not comment or not(self.path or pid):
+                raise pyramid.httpexceptions.HTTPInternalServerError(
+                    title='No comment could be posted',
+                    explanation=('Path or pid and comment are required.'))
+            if questionable and not pid:
+                raise pyramid.httpexceptions.HTTPInternalServerError(
+                    title='No comment could be posted',
+                    explanation=('Pid needed to call comments questionable.'))
 
             unique_id = 'http://xml.zeit.de/{}'.format(self.path)
             nid = self._nid_by_comment_thread(unique_id)
+            action_url = self._action_url(questionable, self.path)
 
-            action_url = _action_url(request, self.path)
+            data = {'uid': uid}
+            if self.path and not questionable:
+                    data['nid'] = nid
+                    data['subject'] = '[empty]'
+                    data['comment'] = comment
+                    data['pid'] = pid
+            elif pid and questionable:
+                    data['note'] = comment
+                    data['content_id'] = pid
 
-            data = {'nid': nid,
-                    'uid': uid,
-                    'subject': '[empty]',
-                    'comment': request.params.get('comment'),
-                    'pid': request.params.get('pid')}
             response = requests.post(action_url, data=data,
                                      cookies=dict(request.cookies))
 
@@ -79,9 +90,9 @@ class PostComment(zeit.web.core.view.Base):
                     explanation='No comment  for {} could be '
                                 'posted.'.format(unique_id))
 
-    def _action_url(self, request, path):
+    def _action_url(self, is_questionable, path):
         endpoint = 'services/json' if (
-            request.params.get('is_questionable')) else 'agatho/thread'
+            is_questionable) else 'agatho/thread'
 
         if endpoint == 'services/json':
             path = ''
@@ -93,16 +104,15 @@ class PostComment(zeit.web.core.view.Base):
         comment_thread = zeit.web.core.comments.get_thread(unique_id)
 
         if comment_thread:
-            return comment_thread['nid']
+            return comment_thread.get('nid')
 
-        nid = self._create_and_load_comment_thread(unique_id)['nid']
+        nid = self._create_and_load_comment_thread(unique_id).get('nid')
         if not nid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No comment thread',
                 explanation=('No comment thread for {} could be '
                              'created.').format(unique_id))
-        else:
-            return nid
+        return nid
 
     def _create_and_load_comment_thread(self, unique_id):
         content = None
