@@ -58,7 +58,7 @@
 
         //run through search element and return object
         return this.each( function() {
-            $( this ).on( 'click', function(e) {
+            $( this ).on( 'click', function( e ) {
                 e.preventDefault();
                 toggleFooter( this );
             } );
