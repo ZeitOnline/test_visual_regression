@@ -8,11 +8,11 @@ define([ 'require', 'jquery' ], function( require, $ ) {
         init: function() {
             var dates = $( '.encoded-date' );
 
-            if (dates.length) {
+            if ( dates.length ) {
                 /**
                  * require jquery.clarify
                  */
-                require( [
+                require([
                     'jquery.clarify'
                 ], function() {
                     dates.clarify();

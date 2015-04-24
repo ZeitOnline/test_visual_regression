@@ -114,8 +114,8 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
                     });
 
                 } else {
-                // noscript doesn't has any content we can read (might happen in older browsers)
-                // therefore we have to hide allocated image spaces
+                    // noscript doesn't has any content we can read (might happen in older browsers)
+                    // therefore we have to hide allocated image spaces
                     hideImages( $parent, $noscript.attr( 'data-src' ));
                 }
 
