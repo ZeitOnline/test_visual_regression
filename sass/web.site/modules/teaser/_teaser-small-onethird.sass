@@ -7,8 +7,10 @@
 	&__container
 		+display-flex
 		+flex-direction(column)
-		+respond-min-max($break-phablet-min, $break-phablet-max)
+		+respond-min($break-phablet-min)
 			padding-left: remify(170px)
+		+respond-min($break-tablet-min)
+			padding-left: 0
 	&__heading
 		@extend %teaser-heading
 		+order(2)
@@ -18,13 +20,15 @@
 		margin: remify(0 0 15px 0)
 		width: 100%
 		+order(1)
-		+respond-min-max($break-phablet-min, $break-phablet-max)
+		+respond-min($break-phablet-min)
 			margin-left: remify(-170px)
 			position: absolute
 			width: remify(150px)
 		+respond-min($break-tablet-min)
 			display: block
+			margin-left: 0
 			padding-right: 0
+			position: static
 			width: auto
 			+order(2)
 	&__media-item
