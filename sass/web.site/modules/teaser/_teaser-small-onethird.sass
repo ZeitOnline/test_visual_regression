@@ -1,0 +1,50 @@
+.teaser-small-onethird
+	border-top: 1px solid $zon_light_grey
+	margin: 0 -($page-padding)
+	padding: $petite $page-padding
+	+respond-min($break-tablet-min)
+		border-top: none
+	&__container
+		+display-flex
+		+flex-direction(column)
+		+respond-min-max($break-phablet-min, $break-phablet-max)
+			padding-left: remify(170px)
+	&__heading
+		@extend %teaser-heading
+		+order(2)
+		+respond-min($break-tablet-min)
+			+order(1)
+	&__media
+		margin: remify(0 0 15px 0)
+		width: 100%
+		+order(1)
+		+respond-min-max($break-phablet-min, $break-phablet-max)
+			margin-left: remify(-170px)
+			position: absolute
+			width: remify(150px)
+		+respond-min($break-tablet-min)
+			display: block
+			padding-right: 0
+			width: auto
+			+order(2)
+	&__media-item
+		@extend %teaser-media-item
+	&__inner
+		+order(3)
+	&__combined-link
+		@extend %teaser-combined-link
+	&__kicker
+		@extend %teaser-kicker
+	&__title
+		@extend %teaser-title
+	&__text
+		@extend %teaser-text
+	&__byline
+		@extend %teaser-byline
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+	
