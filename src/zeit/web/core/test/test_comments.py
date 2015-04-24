@@ -203,22 +203,27 @@ def test_post_comment_should_only_do_sth_on_post(monkeypatch):
     assert poster.post_comment() is None
 
 
-def test_post_comment_should_raise_exception_if_params_are_wrong(monkeypatch):
+@pytest.mark.parametrize("path,comment", [
+    ('/my/path', None),
+    (None, None),
+    (None, 'my_comment')])
+def test_post_comment_should_raise_exception_if_params_are_wrong(
+                                                                 monkeypatch,
+                                                                 path,
+                                                                 comment):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
-    poster.path = None
+    poster.path = path
+    poster.request.params['comment'] = comment
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
-        poster.post_comment() is None
-
-    poster.path = 'my/path'
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
-        poster.post_comment() is None
+        poster.post_comment()
 
 
 def test_post_comments_should_post_with_correct_arguments(monkeypatch):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
+    poster.request.params['comment'] = 'my comment'
     with patch.object(requests, 'post') as mock_method:
         response = mock.Mock()
         response.status_code = 200
@@ -229,8 +234,13 @@ def test_post_comments_should_post_with_correct_arguments(monkeypatch):
             ('http://foo/agatho/thread/my/path',),
             {'cookies': {},
              'data': {
-                      'comment': None,
+                      'comment': 'my comment',
                       'pid': None,
                       'uid': '123',
                       'nid': 1,
                       'subject': '[empty]'}})
+
+def test_action_url_should_be_created_correctly(monkeypatch):
+    poster = _create_poster(monkeypatch)
+    assert poster._action_url(poster.request, poster.path) == 'foo'
+

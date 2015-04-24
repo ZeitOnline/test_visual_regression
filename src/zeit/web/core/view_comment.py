@@ -47,7 +47,7 @@ class PostComment(zeit.web.core.view.Base):
         uid = user['uid']
 
         if request.method == "POST":
-            if (not self.path and not request.params.get('comment')):
+            if (not self.path or not request.params.get('comment')):
                     raise pyramid.httpexceptions.HTTPInternalServerError(
                         title='No comment could be posted',
                         explanation=('Path and comment are required'))
@@ -55,8 +55,7 @@ class PostComment(zeit.web.core.view.Base):
             unique_id = 'http://xml.zeit.de/{}'.format(self.path)
             nid = self._nid_by_comment_thread(unique_id)
 
-            action_url = '{}/agatho/thread/{}'.format(
-                self.community_host, request.params.get('path'))
+            action_url = _action_url(request, self.path)
 
             data = {'nid': nid,
                     'uid': uid,
@@ -79,6 +78,16 @@ class PostComment(zeit.web.core.view.Base):
                     title='No comment could be posted',
                     explanation='No comment  for {} could be '
                                 'posted.'.format(unique_id))
+
+    def _action_url(self, request, path):
+        endpoint = 'services/json' if (
+            request.params.get('is_questionable')) else 'agatho/thread'
+
+        if endpoint == 'services/json':
+            path = ''
+
+        return '{}/{}/{}'.format(
+            self.community_host, endpoint, path)
 
     def _nid_by_comment_thread(self, unique_id):
         comment_thread = zeit.web.core.comments.get_thread(unique_id)
