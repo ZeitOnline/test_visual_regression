@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+import lxml.etree
 import re
 
 import babel.dates
@@ -501,3 +502,43 @@ def json_comment_count(request):
     renderer='string')
 def view_textcontent(context, request):
     return context.text
+
+
+@pyramid.view.view_config(
+    context=zeit.cms.content.interfaces.IXMLContent,
+    route_name='xml')
+def view_xml(context, request):
+    xml = context.xml
+    filter_xslt = lxml.etree.XML("""
+        <xsl:stylesheet version="1.0"
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml"
+                        omit-xml-declaration="yes" />
+            <xsl:template match="*|@*|text()">
+                <xsl:copy>
+                    <xsl:apply-templates select="*|@*|text()" />
+                </xsl:copy>
+            </xsl:template>
+            <xsl:template match="cluster">
+                <region>
+                    <xsl:apply-templates select="*|@*|text()" />
+                </region>
+            </xsl:template>
+            <xsl:template match="region">
+                <area>
+                    <xsl:apply-templates select="*|@*|text()" />
+                </area>
+            </xsl:template>
+            <xsl:template match="container">
+                <module>
+                    <xsl:apply-templates select="*|@*|text()" />
+                </module>
+            </xsl:template>
+        </xsl:stylesheet>""")
+    try:
+        transform = lxml.etree.XSLT(filter_xslt)
+        return pyramid.response.Response(
+            str(transform(xml)),
+            content_type='text/xml')
+    except TypeError:
+        return

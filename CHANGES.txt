@@ -4,7 +4,7 @@ Change log for zeit.web
 1.20.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- XML view for IXMLContent tranformed to RAM @ xml/*traverse
 
 
 1.20.2 (2015-04-24)

@@ -157,6 +157,7 @@ class Application(object):
         config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
+        config.add_route('xml', '/xml/*traverse')
 
         if not self.settings.get('debug.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
