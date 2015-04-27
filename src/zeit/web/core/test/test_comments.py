@@ -198,12 +198,6 @@ def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
     assert poster.status == []
 
 
-def test_post_comment_should_only_do_sth_on_post(monkeypatch):
-    poster = _create_poster(monkeypatch)
-    poster.request.method = "GET"
-    assert poster.post_comment() is None
-
-
 @pytest.mark.parametrize("path, comment, pid, action", [
     ('path', 'my comment', '1', 'comment')])
 def test_post_comment_should_raise_exception_if_no_post_is_used(
