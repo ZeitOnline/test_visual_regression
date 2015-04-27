@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.20.3 (unreleased)
+1.20.4 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.20.3 (2015-04-27)
 -------------------
 
 - BUG-242: Do not save images with content length <= 20
