@@ -181,5 +181,5 @@ def last_published_semantic(content):
 
 
 # Down here to prevent circular imports.
-from zeit.web.site.view_centerpage import LegacyArea
-from zeit.web.site.view_centerpage import LegacyModule
+from zeit.web.site.view_centerpage import LegacyArea  # NOQA
+from zeit.web.site.view_centerpage import LegacyModule  # NOQA

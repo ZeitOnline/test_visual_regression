@@ -246,6 +246,10 @@ class LocalVideoImage(object):
         return (0, 0)
 
 
+class ContentTooShort(Exception):
+    pass
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
@@ -263,14 +267,18 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
 
             if not image.image.isfile():
                 try:
-                    with image.image.open('w+') as fh:
-                        fh.write(urllib2.urlopen(src, timeout=1.5).read())
+                    request = urllib2.urlopen(src, timeout=1.5)
+                    content = request.read()
+                    if len(content) <= 20:
+                        raise ContentTooShort()
 
+                    with image.image.open('w+') as fh:
+                        fh.write(content)
                         log.debug("Save brightcove image {} "
                                   "to local file {}".format(
                                       src,
                                       image.image.filename))
-                except (IOError, AttributeError):
+                except (IOError, AttributeError, ContentTooShort):
                     try:
                         conf = zope.component.getUtility(
                             zeit.web.core.interfaces.ISettings)
@@ -328,12 +336,13 @@ class TopicLink(object):
     :rtype: generator
     """
 
-    def __init__(self, centerpage):
-        self.centerpage = centerpage
+    def __init__(self, context):
+        self.context = context
+        self.title = context.topiclink_title or 'Schwerpunkte'
 
     def __iter__(self):
         for i in xrange(1, 4):
-            label = getattr(self.centerpage, 'topiclink_label_%s' % i, None)
-            link = getattr(self.centerpage, 'topiclink_url_%s' % i, None)
+            label = getattr(self.context, 'topiclink_label_%s' % i, None)
+            link = getattr(self.context, 'topiclink_url_%s' % i, None)
             if label is not None and link is not None:
                 yield label, link

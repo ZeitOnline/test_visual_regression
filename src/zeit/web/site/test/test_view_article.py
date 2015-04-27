@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
 import base64
 import mock
 import pytest
 
-import selenium.webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait

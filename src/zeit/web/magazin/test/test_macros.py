@@ -334,6 +334,12 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     assert output.endswith(end)
 
 
+def test_image_macro_should_not_autoescape_markup(testserver, testbrowser):
+    browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+    text = browser.cssselect('.figure-stamp--right .figure__text')[0]
+    assert u'Heckler & Koch' in text.text
+
+
 def test_macro_meta_author_should_produce_html_if_author_exists(
         application, jinja2_env):
     tpl = jinja2_env.get_template(

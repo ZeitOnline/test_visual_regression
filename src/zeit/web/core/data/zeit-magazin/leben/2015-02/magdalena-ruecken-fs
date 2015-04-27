@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image-folder>http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/</image-folder>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-teaser/" type="jpg" title="Magdalena Teaser" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+    </image>
+    <badges>
+      <badge>gallery</badge>
+    </badges>
+    <rankedTags xmlns:ns4="http://namespaces.zeit.de/CMS/tagging">
+      <tag type="free" url_value="" uuid="32e9c584-5f42-4173-b91c-215607eb6acd" py:pytype="str">Naturfotografie</tag>
+      <tag type="Location" url_value="" uuid="f3a2804b-9378-4f9e-a327-d7f115da1bc7" py:pytype="str">Nordamerika</tag>
+      <tag type="free" url_value="" uuid="91b63840-1488-46fd-9126-75441e5bedc7" py:pytype="str">Reisefotos</tag>
+      <tag type="topic" url_value="" uuid="7c2b9ca6-d52e-4972-b7b4-0e16315697ca" py:pytype="str">Reise</tag>
+      <tag type="topic" url_value="" uuid="fbcd1d0b-81fd-48c5-923e-26e68131d60c" py:pytype="str">Fotografie</tag>
+    </rankedTags>
+    <references>
+      <reference xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/leben/2015-02/tattoo-szene-motive-praxis-ausstellung-mkg-hamburg-fs" year="2015" issue="6" ressort="zeit-magazin" contenttype="gallery" publication-date="" expires="2015-09-20T09:56:30+00:00">
+        <badges>
+          <badge py:pytype="str">gallery</badge>
+        </badges>
+        <supertitle py:pytype="str">Tattoos</supertitle>
+        <title py:pytype="str">Das Leben der Linien</title>
+        <text py:pytype="str">Sie ranken sich um Brüste, Augenlider oder Pofalten. Eine Ausstellung im Hamburger Museum für Kunst und Gewerbe widmet sich dem Eigenleben von Tattoos. </text>
+        <description py:pytype="str">Sie ranken sich um Brüste, Augenlider oder Pofalten. Eine Ausstellung im Hamburger Museum für Kunst und Gewerbe widmet sich dem Eigenleben von Tattoos. </description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/leben/2015-02/tattoo-szene-motive-praxis-ausstellung-mkg-hamburg-teaser/" type="jpg" align="left" publication-date="" expires="2015-09-20T09:55:14+00:00">
+          <bu py:pytype="str">Um die Fotostrecke zu sehen, klicken Sie bitte auf das Bild</bu>
+          <copyright py:pytype="str" link="http://www.zeit.de/zeit-magazin/leben/2015-02/tattoo-szene-motive-praxis-ausstellung-mkg-hamburg-fs">© Christian Poveda/Agence VU'/Museum für Kunst und Gewerbe Hamburg</copyright>
+        </image>
+      </reference>
+    </references>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-03-02T15:39:02.684761+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-03-02T15:40:54.961977+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-02T15:39:55.211950+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-03-02T15:40:54.961977+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-03-02T15:39:29.261733+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.haake</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Die Fotografin Magdalena Wosinska stellt die Idee des Selfies auf den Kopf. Der Betrachter ihrer Reisebilder sieht von ihr nämlich immer nur den Rücken. </attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Die Fotografin Magdalena Wosinska stellt die Idee des Selfies auf den Kopf: Ihre Reisebilder zeigen nur ihren Rücken.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">leben</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">standalone</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:dc595cd5-d238-4f49-a994-8f964d77e50e}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">7</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <column layout="left"/>
+    <column layout="right">
+      <container>
+        <block name="01-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Auch der Rücken ist eine Landschaft.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/01-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/01-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="02-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Ausblick: Kaktus</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/02-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/02-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="03-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Ländliches Amerika</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/03-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/03-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="04-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">"Take a walk on the wild side."</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/04-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/04-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="05-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Objekte, die in der Landschaft eher stören, dienen Wosinska als Bühne.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/05-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/05-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="06-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">In Italien</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/06-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/06-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="07-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Sie stellt sich gern dorthin, wo die Aussicht gut ist.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/07-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/07-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="08-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Die Fotografin mit jungen Rotluchsen</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/08-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/08-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="09-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Die Fotografin mit ihren Eltern</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/09-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/09-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+        <block name="10-magdalena-ruecken.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Die Fotografin als Trainhopperin</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/10-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-bilder/thumbnails/10-magdalena-ruecken.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+          </thumbnail>
+        </block>
+      </container>
+    </column>
+    <title>Stadt, Land, Rücken</title>
+    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <p>Ein schöner Rücken kann auch entzücken. Der schönste Beweis dieser These sind die Bilder der Serie <em>The Experience vol.1</em> von <a href="http://magdalenawosinska.com/">Magdalena Wosinska</a>. Die 1983 in Polen geborenen Fotografin reiste dafür durch alle Welt und lichtete sich selbst vor den unterschiedlichsten Kulissen ab. Grüne Hügel, verrostete Land Art in der Wüste, eine glitzernde Stadt am Meer oder ein schroffer Gebirgszug dienten ihr ebenso als Bühne wie Efeu an einer Hauswand. Wosinska lebt in Los Angeles, ihre Arbeit kann man auf <a href="https://instagram.com/themagdalenaexperience/">Instagram</a> verfolgen. Da sieht man sie auch mal von vorne.</p>
+    </text>
+    <supertitle>Reisefotografie</supertitle>
+    <subtitle>Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</subtitle>
+  </body>
+  <teaser>
+    <title>Stadt, Land, Rücken</title>
+    <text>Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</text>
+  </teaser>
+</gallery>
