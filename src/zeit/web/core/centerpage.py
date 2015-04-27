@@ -246,6 +246,10 @@ class LocalVideoImage(object):
         return (0, 0)
 
 
+class ContentTooShort(Exception):
+    pass
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
@@ -263,14 +267,18 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
 
             if not image.image.isfile():
                 try:
-                    with image.image.open('w+') as fh:
-                        fh.write(urllib2.urlopen(src, timeout=1.5).read())
+                    request = urllib2.urlopen(src, timeout=1.5)
+                    content = request.read()
+                    if len(content) <= 20:
+                        raise ContentTooShort()
 
+                    with image.image.open('w+') as fh:
+                        fh.write(content)
                         log.debug("Save brightcove image {} "
                                   "to local file {}".format(
                                       src,
                                       image.image.filename))
-                except (IOError, AttributeError):
+                except (IOError, AttributeError, ContentTooShort):
                     try:
                         conf = zope.component.getUtility(
                             zeit.web.core.interfaces.ISettings)
