@@ -21,7 +21,6 @@ import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.date
-import zeit.web.core.view
 
 log = logging.getLogger(__name__)
 
@@ -299,7 +298,7 @@ class Content(Base):
     @zeit.web.reify
     def date_print_published(self):
         tz = babel.dates.get_timezone('Europe/Berlin')
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
+        date = zeit.Zon 1660cms.workflow.interfaces.IPublishInfo(
             self.context).date_print_published
         if date:
             return date.astimezone(tz)
