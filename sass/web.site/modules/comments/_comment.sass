@@ -3,6 +3,8 @@
 	border-top: 1px solid $zon_light_grey
 	position: relative
 
+	+respond-min($break-phablet-min)
+		padding: remify(50px 54px)
 	+respond-min($break-desktop-min)
 		padding: remify(50px 160px)
 
@@ -29,20 +31,24 @@
 			color: $zon-red
 		+on-interaction
 			text-decoration: underline
-		font-size: remify(18px)
+		font-size: remify(16px)
 		font-weight: bold
-		+respond-min($break-desktop-min)
+		+respond-min($break-phablet-min)
 			+inline-block(top)
 			margin: remify(0 20px 0 0)
 			line-height: remify(50px)
+		+respond-min($break-desktop-min)
+			font-size: remify(18px)
 
 	&__date-anchor
 		display: block
-		+respond-min($break-desktop-min)
+		+respond-min($break-phablet-min)
 			line-height: remify(50px)
 			position: absolute
-			right: remify(160px)
+			right: remify(54px)
 			top: remify(50px)
+		+respond-min($break-desktop-min)
+			right: remify(160px)
 
 	&__recommendations
 		color: $zon-red
@@ -51,7 +57,7 @@
 		position: absolute
 		right: $page-padding
 		top: remify(28px)
-		+respond-min($break-desktop-min)
+		+respond-min($break-phablet-min)
 			left: auto
 			position: static
 			top: auto
@@ -61,17 +67,18 @@
 		font-size: remify(16px)
 		margin-top: remify(16px)
 		margin-bottom: remify(16px)
-		+respond-min($break-desktop-min)
-			font-size: remify(18px)
+		+respond-min($break-phablet-min)
 			margin-top: remify(30px)
 			margin-bottom: remify(30px)
+		+respond-min($break-desktop-min)
+			font-size: remify(18px)
 
 		& > p
 			margin: 0 0 0.6667em 0
 
 	&__reactions
 		line-height: 1.5
-		+respond-min($break-desktop-min)
+		+respond-min($break-phablet-min)
 			text-align: right
 
 	&__reaction,
@@ -96,10 +103,11 @@
 	box-shadow: inset remify(28px) 0 0 0 $zon_lighter_grey
 	padding-left: remify($large--px)
 
-	+respond-min($break-desktop-min)
+	+respond-min($break-phablet-min)
 		box-shadow: none
-		margin: remify(0 160px)
 		padding-left: remify(80px)
+	+respond-min($break-desktop-min)
+		margin: remify(0 160px)
 		padding-right: 0
 		.comment__date-anchor
 			right: 0
@@ -114,7 +122,7 @@
 		content: ' '
 		left: remify(70px)
 		position: absolute
-		+respond-min($break-desktop-min)
+		+respond-min($break-phablet-min)
 			left: remify(94px)
 	&:before
 		border-bottom-color: $zon_light_grey
@@ -131,7 +139,7 @@
 	height: remify(18px)
 	width: remify(16px)
 	margin-right: remify(6px)
-	+respond-min($break-desktop-min)
+	+respond-min($break-phablet-min)
 		background-position: top remify(15px) center
 		height: remify(50px)
 
