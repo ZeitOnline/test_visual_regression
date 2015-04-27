@@ -264,13 +264,23 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             if not image.image.isfile():
                 try:
                     with image.image.open('w+') as fh:
-                        fh.write(urllib2.urlopen(src, timeout=4).read())
+                        fh.write(urllib2.urlopen(src, timeout=1.5).read())
+
                         log.debug("Save brightcove image {} "
                                   "to local file {}".format(
                                       src,
                                       image.image.filename))
                 except (IOError, AttributeError):
-                    continue
+                    try:
+                        conf = zope.component.getUtility(
+                            zeit.web.core.interfaces.ISettings)
+
+                        image.image = zeit.cms.interfaces.ICMSContent(
+                            '{}/{}'.format(
+                                conf.get('default_teaser_images'),
+                                'teaser_image-default.jpg'))
+                    except:
+                        continue
             image.src = src
             image.mimeType = 'image/jpeg'
             image.image_pattern = 'brightcove-{}'.format(image_pattern)
