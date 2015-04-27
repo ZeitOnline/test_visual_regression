@@ -342,6 +342,47 @@
             </region>
             <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" width="1/3"/>
         </cluster>
+        <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
+            <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" width="1/2">
+                <container cp:type="teaser" module="one-half" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
+                    <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2015" issue="7" ressort="zeit-magazin" contenttype="gallery" publication-date="" expires="">
+                        <badges>
+                            <badge py:pytype="str">gallery</badge>
+                        </badges>
+                        <supertitle py:pytype="str">Reisefotografie</supertitle>
+                        <title py:pytype="str">Stadt, Land, Rücken</title>
+                        <text py:pytype="str">Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</text>
+                        <description py:pytype="str">Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</description>
+                        <byline xsi:nil="true"/>
+                        <breadcrumb_title xsi:nil="true"/>
+                        <image base-id="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-teaser/" type="jpg" title="Magdalena Teaser" align="left" publication-date="" expires="">
+                            <bu xsi:nil="true"/>
+                            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+                        </image>
+                    </block>
+                </container>
+            </region>
+            <region visible="True" area="id-bb856af5-0ad1-4849-b2f3-43fb635f4fc6" width="1/2">
+                <container cp:type="teaser" module="one-half" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
+                    <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Tillmann Prüfer" genre="interview">
+                        <video href="http://xml.zeit.de/video/2014-05/3537359236001" href2="" expires="" video_id="vid3537359236001" video_id_2=""/>
+                        <supertitle py:pytype="str">Karl Lagerfeld</supertitle>
+                        <title py:pytype="str">"Ich bin nicht intellektuell, nur ziemlich kultiviert"</title>
+                        <text py:pytype="str">Er gibt Nietzsche-Bände heraus und lernt von seiner Katze. Im Interview spricht Karl Lagerfeld über schöne Hände und ewige Jugend.</text>
+                        <description py:pytype="str">Er gibt Nietzsche-Bände heraus und lernt von seiner Katze. Im Interview spricht Karl Lagerfeld über schöne Hände und ewige Jugend.</description>
+                        <byline xsi:nil="true"/>
+                        <breadcrumb_title xsi:nil="true"/>
+                        <author href="http://xml.zeit.de/autoren/P/Tillmann_Pruefer/index.xml" publication-date="" expires="">
+                            <display_name py:pytype="str">Tillmann Prüfer</display_name>
+                        </author>
+                        <image base-id="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld/" type="jpg" title="Karl Lagerfeld" alt="Karl Lagerfeld" align="left" publication-date="" expires="">
+                            <bu py:pytype="str">Karl Lagerfeld</bu>
+                            <copyright py:pytype="str">© Karl Lagerfeld</copyright>
+                        </image>
+                    </block>
+                </container>
+            </region>
+        </cluster>
     </body>
     <feed/>
     <teaser>
