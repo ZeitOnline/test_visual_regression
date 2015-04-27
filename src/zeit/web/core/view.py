@@ -506,7 +506,8 @@ def view_textcontent(context, request):
 
 @pyramid.view.view_config(
     context=zeit.cms.content.interfaces.IXMLContent,
-    route_name='xml')
+    route_name='xml',
+    custom_predicates=(zeit.web.core.is_admin,))
 def view_xml(context, request):
     xml = context.xml
     filter_xslt = lxml.etree.XML("""
