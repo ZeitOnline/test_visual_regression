@@ -5,13 +5,14 @@ Change log for zeit.web
 -------------------
 
 - BUG-242: Do not save images with content length <= 20
-
+- ZON-1549: Add square teaser for ZON content
 
 1.20.2 (2015-04-24)
 -------------------
 
-- BUG-241: Save brightcove images to HD
 - BUG-241: Set default image for Brightcove
+- BUG-241: Save brightcove images to disk
+
 
 1.20.1 (2015-04-17)
 -------------------
