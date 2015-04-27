@@ -261,8 +261,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def tracking_type(self):
-        if self.type == 'article':
-            return 'Artikel'
+        return self.type
 
     @zeit.web.reify
     def text_length(self):
