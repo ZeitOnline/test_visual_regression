@@ -41,31 +41,38 @@ class PostComment(zeit.web.core.view.Base):
         uid = user['uid']
         pid = request.params.get('pid')
         comment = request.params.get('comment')
-        questionable = request.params.get('is_questionable')
+        action = request.params.get('action')
 
         if request.method == "POST":
-            if not comment or not(self.path or pid):
+            if not comment or not(self.path or pid) and not action:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title='No comment could be posted',
-                    explanation=('Path or pid and comment are required.'))
-            if questionable and not pid:
+                    explanation=('Path or pid and comment'
+                                 ' and action are required.'))
+            if (action == 'report' or action == 'recommend') and not pid:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title='No comment could be posted',
-                    explanation=('Pid needed to call comments questionable.'))
+                    explanation=('Pid needed to recommend or report.'))
 
             unique_id = 'http://xml.zeit.de/{}'.format(self.path)
             nid = self._nid_by_comment_thread(unique_id)
-            action_url = self._action_url(questionable, self.path)
+            action_url = self._action_url(action, self.path)
 
             data = {'uid': uid}
-            if self.path and not questionable:
+            if action == 'comment' and self.path:
                     data['nid'] = nid
                     data['subject'] = '[empty]'
                     data['comment'] = comment
                     data['pid'] = pid
-            elif pid and questionable:
+            elif action == 'report' and pid:
                     data['note'] = comment
                     data['content_id'] = pid
+                    data['method'] = 'flag.flagnote'
+                    data['flag_name'] = 'kommentar_bedenklich'
+            elif action == 'recommend' and pid:
+                    data['content_id'] = pid
+                    data['method'] = 'flag.flag'
+                    data['flag_name'] = 'leser_empfehlung'
 
             response = requests.post(action_url, data=data,
                                      cookies=dict(request.cookies))
@@ -84,9 +91,9 @@ class PostComment(zeit.web.core.view.Base):
                     explanation='No comment  for {} could be '
                                 'posted.'.format(unique_id))
 
-    def _action_url(self, is_questionable, path):
+    def _action_url(self, action, path):
         endpoint = 'services/json' if (
-            is_questionable) else 'agatho/thread'
+            action in ['recommend', 'report']) else 'agatho/thread'
 
         if endpoint == 'services/json':
             path = ''
