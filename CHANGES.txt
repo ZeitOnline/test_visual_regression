@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1549: Add square teaser for ZON content
 
+- XML view for IXMLContent tranformed to RAM @ xml/*traverse
+
 
 1.20.2 (2015-04-24)
 -------------------
