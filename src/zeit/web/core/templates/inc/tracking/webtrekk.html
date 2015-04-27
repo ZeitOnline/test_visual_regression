@@ -14,9 +14,10 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
+    {% set wt_kennung_part = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
+    {% set wt_kennung = "%s|%s%s" | format(wt_kennung_part, request.host, request.path) %}
 
-    var Z_WT_KENNUNG = "{{ wt_kennung }}|{{ request.host + request.path }}";
+    var Z_WT_KENNUNG = "{{ wt_kennung }}";
 
     var webtrekk = {
         linkTrack : "standard",
@@ -63,11 +64,10 @@
 </script>
 <noscript>
     <div>
-        <img alt="" width="1" height="1" src="{{ "%s,%s.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" |
+        <img alt="" width="1" height="1" src="{{ "%s,%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" |
             format(
-                "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311",
+                "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328",
                 wt_kennung,
-                request.path_info,
                 "redaktion",
                 view.tracking_type | lower,
                 view.ressort | lower,
