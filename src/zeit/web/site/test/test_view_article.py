@@ -240,3 +240,26 @@ def test_infobox_interactions(selenium_driver, testserver, screen_size):
         assert tabpanels[1].get_attribute('aria-hidden') == 'true'
         assert tabpanels[2].get_attribute('aria-hidden') == 'true'
         assert tabpanels[3].get_attribute('aria-hidden') == 'false'
+
+
+def test_article_has_news_source_as_list():
+    content = mock.Mock()
+    content.copyrights = 'ZEIT ONLINE, Reuters'
+
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == 'ZEITONLINE;Reuters'
+
+
+def test_article_has_news_source_dpa():
+    content = mock.Mock()
+    content.ressort = 'News'
+    content.product.id = 'News'
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == "dpa"
+
+
+def test_article_has_news_source_sid():
+    content = mock.Mock()
+    content.product.id = 'SID'
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == "Sport-Informations-Dienst"

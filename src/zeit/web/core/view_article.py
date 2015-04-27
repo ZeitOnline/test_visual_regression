@@ -322,6 +322,21 @@ class Article(zeit.web.core.view.Content):
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
 
+    @zeit.web.reify
+    def news_source(self):
+        """1:1 implementation of questionable xslt construct"""
+
+        sources = ""
+        if self.context.ressort == 'News' and \
+           self.context.product.id == 'News':
+            sources = 'dpa'
+        elif self.context.product.id == 'SID':
+            sources = 'Sport-Informations-Dienst'
+        else:
+            sources = self.context.copyrights.replace(
+                ',', ';').replace(' ', '')
+        return sources
+
     @property
     def copyrights(self):
         for i in (self.is_longform and itertools.chain(*self.pages) or
