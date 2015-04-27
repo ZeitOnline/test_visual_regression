@@ -9,11 +9,14 @@
 		padding: remify(50px 160px)
 
 	&--author
-		border: none
+		border-top-width: 0
 		background-color: $zon_lighter_grey
 
 	&--author + & // remove border-top of following comment
-		border: none
+		border-top-width: 0
+
+	&--author + &--author // keep border-top between consecutive author comments
+		border-top-width: 1px
 
 
 	&__avatar
@@ -130,6 +133,9 @@
 	&:after
 		border-bottom-color: $white
 		top: remify(-9px)
+
+.comment--author.comment--indented:after
+	border-bottom-color: $zon_lighter_grey
 
 
 
