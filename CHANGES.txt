@@ -4,8 +4,7 @@ Change log for zeit.web
 1.20.4 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- FIX: Clean up centerpage view attributes and topic link objects
 
 1.20.3 (2015-04-27)
 -------------------

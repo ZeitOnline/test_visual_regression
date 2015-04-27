@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 import re
 
 import requests
@@ -12,6 +11,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
 
+import zeit.web.core.centerpage
+import zeit.web.core.interfaces
+import zeit.web.core.utils
 import zeit.web.site.view_centerpage
 
 
@@ -58,6 +60,7 @@ def test_area_main_should_filter_teasers(application):
         m.itervalues = create_mocked_teaserblocks().__iter__
         return [{'lead': m}]
     context.values = val
+    context.ressort = 'ressort'
 
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
@@ -265,25 +268,22 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
     assert len(noscript) == 3
 
 
-def test_topiclinks_title_schould_have_a_value_and_default_value():
+def test_topic_links_title_schould_have_a_value_and_default_value(testserver):
+    context = mock.Mock()
+    context.topic_links = mock.Mock()
+    context.topiclink_title = 'My Title'
+    topic_links = zeit.web.core.centerpage.TopicLink(context)
+
+    assert topic_links.title == 'My Title'
+
+    context.topiclink_title = None
+    topic_links = zeit.web.core.centerpage.TopicLink(context)
+
+    assert topic_links.title == 'Schwerpunkte'
+
+
+def test_centerpage_view_should_have_topic_links(testserver):
     mycp = mock.Mock()
-    mycp.topiclink_title = 'My Title'
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
-
-    assert view.topiclink_title == 'My Title', 'There is no title present'
-
-    mycp = mock.Mock()
-    mycp.topiclink_title = None
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
-
-    assert view.topiclink_title == 'Schwerpunkte', 'There is no title present'
-
-
-def test_centerpage_view_should_have_topic_links():
-
-    mycp = mock.Mock()
-
-    mycp.topiclink_title = 'My Title'
     mycp.topiclink_label_1 = 'Label 1'
     mycp.topiclink_url_1 = 'http://link_1'
     mycp.topiclink_label_2 = 'Label 2'
@@ -291,11 +291,11 @@ def test_centerpage_view_should_have_topic_links():
     mycp.topiclink_label_3 = 'Label 3'
     mycp.topiclink_url_3 = 'http://link_3'
 
-    topiclinks = list(zeit.web.core.centerpage.TopicLink(mycp))
+    topic_links = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert topiclinks == [('Label 1', 'http://link_1'),
-                          ('Label 2', 'http://link_2'),
-                          ('Label 3', 'http://link_3')]
+    assert topic_links == [('Label 1', 'http://link_1'),
+                           ('Label 2', 'http://link_2'),
+                           ('Label 3', 'http://link_3')]
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
@@ -313,7 +313,6 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
 
 
 def test_column_teaser_should_render_series_element(testserver, testbrowser):
-
     browser = testbrowser(
         '%s/zeit-online/teaser-types-setup' % testserver.url)
 
@@ -690,39 +689,21 @@ def test_oldads_toggle_is_off(application):
     assert view.deliver_ads_oldschoolish is False
 
 
-def test_centerpage_header_tags(application, jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
-    view, request = (mock.Mock(),) * 2
-    view.resolve = mock.Mock(return_value=request)
-    view.topiclinks = [('Label 1', 'http://link_1'),
-                       ('Label 2', 'http://link_2'),
-                       ('Label 3', 'http://link_3')]
-    view.topiclink_title = 'My Title'
-    view.displayed_last_published_semantic = datetime.datetime.now()
-
-    html_str = ' '.join(list(tpl.blocks['metadata'](view)))
-    html = lxml.html.fromstring(html_str).cssselect
-    tags = html('.header__tags__link')
-
-    assert len(html('.header__tags')) == 1, 'just one .header__tags'
-    assert html('.header__tags__label')[0].text == 'My Title'
-    assert len(tags) == 3
-    assert tags[0].get('href') == 'http://link_1'
-    assert tags[0].get('title') == 'Label 1'
-    assert tags[0].text == 'Label 1'
-
-
-def test_centerpage_metadata(testbrowser, testserver):
+def test_centerpage_should_have_header_tags(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    date = '3. Dezember 2014, 12:50 Uhr'
+    html = lxml.html.fromstring(browser.contents).cssselect
 
-    assert len(html('.header__tags')) == 1, 'just one .header__tags'
+    assert len(html('.header__tags')) == 1
     assert html('.header__tags__label')[0].text == 'Schwerpunkte'
 
-    assert len(html('.header__date')) == 1, 'just one .header__date'
-    assert html('.header__date')[0].text == date, 'Date is invalid'
+    assert len(html('.header__date')) == 1
+    assert html('.header__date')[0].text == '3. Dezember 2014, 12:50 Uhr'
+
+    assert len(html('.header__tags__link')) == 3
+    assert html('.header__tags__link')[0].get('href').endswith(
+        '/schlagworte/organisationen/islamischer-staat/index')
+    assert html('.header__tags__link')[0].get('title') == 'Islamischer Staat'
+    assert html('.header__tags__link')[0].text == 'Islamischer Staat'
 
 
 def test_new_centerpage_renders(testserver):
