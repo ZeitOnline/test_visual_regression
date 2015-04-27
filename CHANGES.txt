@@ -1,20 +1,29 @@
 Change log for zeit.web
 =======================
 
-1.20.3 (unreleased)
+1.20.4 (unreleased)
 -------------------
 
 - ZON-1660: Implement comment interface.
 
+- FIX: Clean up centerpage view attributes and topic link objects
+
+1.20.3 (2015-04-27)
+-------------------
+
+- BUG-242: Do not save images with content length <= 20
+
 - ZON-1549: Add square teaser for ZON content
 
-- BUG-241: Save brightcove images to disk
+- XML view for IXMLContent tranformed to RAM @ xml/*traverse
 
 
 1.20.2 (2015-04-24)
 -------------------
 
 - BUG-241: Set default image for Brightcove
+
+- BUG-241: Save brightcove images to disk
 
 
 1.20.1 (2015-04-17)

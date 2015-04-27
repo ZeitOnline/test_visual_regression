@@ -12,8 +12,8 @@ Available attributes:
 {% block metadata %}
     <div class="header__metadata">
         <div class="header__tags">
-            <span class="header__tags__label">{{ view.topiclink_title }}</span>
-            {% for label, link in view.topiclinks %}
+            <span class="header__tags__label">{{ view.topic_links.title | hide_none }}</span>
+            {% for label, link in view.topic_links %}
             <a href="{{ link }}" title="{{ label }}" class="header__tags__link">{{ label }}</a>
             {% endfor %}
         </div>
