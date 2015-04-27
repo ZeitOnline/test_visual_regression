@@ -23,6 +23,8 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No User',
                 explanation='Please log in in order to comment')
+        self.pid = None
+        self.action = None
         self.path = request.params.get('path') or path
         self.context = context
         self.request = request
@@ -105,6 +107,9 @@ class PostComment(zeit.web.core.view.Base):
                 explanation='No comment  for {} could be '
                             'posted.'.format(unique_id))
 
+        self.action = action
+        self.pid = pid
+
     def _action_url(self, action, path):
         endpoint = 'services/json' if (
             action in ['recommend', 'report']) else 'agatho/thread'
@@ -170,3 +175,23 @@ class PostCommentAdmin(PostComment):
         super(PostCommentAdmin, self).__init__(context, request)
         self.context = zeit.content.article.article.Article()
         self.post_comment()
+
+
+@pyramid.view.view_config(
+    context='zeit.content.article.interfaces.IArticle',
+    renderer='json',
+    request_method='POST')
+class PostCommentResource(PostComment):
+    def __init__(self, context, request):
+        super(PostCommentAdmin, self).__init__(context, request)
+        self.path = urlparse.urlparse(self.context.uniqueId)[2][1:]
+
+    def __call__(self):
+        self.request.response.cache_expires(0)
+        self.post_comment()
+
+        if self.request.params.get('ajax') == 'true':
+            return self.status
+        else:
+            return pyramid.httpexceptions.HTTPFound(
+                location=self.request.url)
