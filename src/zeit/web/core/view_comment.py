@@ -50,12 +50,19 @@ class PostComment(zeit.web.core.view.Base):
 
         if action not in ('comment', 'report', 'recommend'):
             raise pyramid.httpexceptions.HTTPInternalServerError(
-                title='No comment could be posted',
+                title='Nothing could be posted',
                 explanation=(
                     'Action is not set or not allowed. '
                     'Choose one of comment, recommend or report.'))
 
-        if action == 'comment' and (not(self.path) or not(comment)):
+        if not self.path:
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='Nothing could be posted',
+                explanation=(
+                    'We need a resource path '
+                    'in order to load a comment thread.'))
+
+        if action == 'comment' and not comment:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No comment could be posted',
                 explanation=('Path and comment needed.'))
@@ -74,19 +81,19 @@ class PostComment(zeit.web.core.view.Base):
 
         data = {'uid': uid}
         if action == 'comment' and self.path:
-                data['nid'] = nid
-                data['subject'] = '[empty]'
-                data['comment'] = comment
-                data['pid'] = pid
+            data['nid'] = nid
+            data['subject'] = '[empty]'
+            data['comment'] = comment
+            data['pid'] = pid
         elif action == 'report' and pid:
-                data['note'] = comment
-                data['content_id'] = pid
-                data['method'] = 'flag.flagnote'
-                data['flag_name'] = 'kommentar_bedenklich'
+            data['note'] = comment
+            data['content_id'] = pid
+            data['method'] = 'flag.flagnote'
+            data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
-                data['content_id'] = pid
-                data['method'] = 'flag.flag'
-                data['flag_name'] = 'leser_empfehlung'
+            data['content_id'] = pid
+            data['method'] = 'flag.flag'
+            data['flag_name'] = 'leser_empfehlung'
 
         response = requests.post(action_url, data=data,
                                  cookies=dict(request.cookies))
