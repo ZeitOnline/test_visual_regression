@@ -34,10 +34,10 @@
             inVelocity: 500,
             outEffect: { opacity: 1 },
             outVelocity: 500,
-            uniqueId: $( this ).data('uniqueId'),
+            uniqueId: $( this ).data( 'uniqueId' ),
             timeEndpoint: '/json/delta_time?unique_id=',
             commentsEndpoint: '/json/comment_count?unique_id='
-        }, options),
+        }, options ),
         // remove this, when the real endpoint is in use
         fakecounter = 1,
         /**
@@ -63,17 +63,17 @@
                      * @fires   singals:update
                      */
                     success: function( data ) {
-                        $.each(data, function(i, name) {
-                            $.each(name, function(identifier, object) {
+                        $.each( data, function( i, name ) {
+                            $.each( name, function( identifier, object ) {
                                 // account for differing api
-                                if ( typeof object !== 'object') {
-                                    $('[data-unique-id=\'' + identifier + '\']')
+                                if ( typeof object !== 'object' ) {
+                                    $( '[data-unique-id=\'' + identifier + '\']' )
                                     .find( selector )
                                     .trigger( 'signals.update', object );
                                 } else {
                                     for ( var name in object ) {
-                                        if (object.hasOwnProperty(name)) {
-                                            $('[data-unique-id=\'' + name + '\']')
+                                        if ( object.hasOwnProperty( name ) ) {
+                                            $( '[data-unique-id=\'' + name + '\']' )
                                             .find( selector )
                                             .trigger( 'signals.update', object[name].time );
                                         }
@@ -92,7 +92,7 @@
                         poll( endpoint, interval, selector );
                     }
                 });
-            }, interval);
+            }, interval );
         },
         /**
          * takes new text to animate
@@ -107,20 +107,20 @@
                     $elem
                     .html( text )
                     .delay( 10 )
-                    .animate( defaults.outEffect, defaults.outVelocity);
+                    .animate( defaults.outEffect, defaults.outVelocity );
                 });
             }
         };
 
         return this.each( function() {
 
-            poll( defaults.timeEndpoint, 1000 * 60, '.js-update-datetime');
-            poll( defaults.commentsEndpoint, 1000 * 20, '.js-update-commentcount');
+            poll( defaults.timeEndpoint, 1000 * 60, '.js-update-datetime' );
+            poll( defaults.commentsEndpoint, 1000 * 20, '.js-update-commentcount' );
             /**
              * bind event on diverse elements
              * @event  signals.update
              */
-            $( '.js-update-datetime, .js-update-commentcount' ).on('signals.update', textAnimation);
+            $( '.js-update-datetime, .js-update-commentcount' ).on( 'signals.update', textAnimation );
 
         });
     };

@@ -15,7 +15,6 @@ module.exports = function(grunt) {
     // local variables
     var project = {
         name: '<%= pkg.name %>-<%= pkg.version%>',
-        binDir: './',
         sourceDir: './',
         d11nDir: './../zeit.web.d11n/',
         codePath: 'src/zeit/web/static/',
@@ -25,7 +24,7 @@ module.exports = function(grunt) {
             production: [ 'bower', 'modernizr', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'icons' ],
             development: [ 'bower', 'modernizr', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'icons' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            icons: [ 'svgmin', 'grunticon' ],
+            icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -39,6 +38,9 @@ module.exports = function(grunt) {
             grunt.log.writeln('You are using Ruby ' + stdout);
         }
     });
+
+    // we need either this or the "force" option in clean task
+    // grunt.file.setBase( project.sourceDir );
 
     // configuration
     grunt.initConfig({
@@ -203,6 +205,15 @@ module.exports = function(grunt) {
             }
         },
 
+        clean:{
+            options: {
+                // needed for grunt_runner to delete outside current working dir
+                force: true
+            },
+            // cleanup minified SVGs, remove orphaned files
+            icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ]
+        },
+
         svgmin: {
             magazin: {
                 expand: true,
@@ -323,7 +334,7 @@ module.exports = function(grunt) {
                 tasks: [ 'compass:dev' ]
             },
             icons: {
-                files: [ project.sourceDir + 'sass/**/*.svg' ],
+                files: [ '<%= svgmin.magazin.cwd %>/*.svg', '<%= svgmin.website.cwd %>/*.svg' ],
                 tasks: [ 'icons' ]
             },
             config: {
@@ -347,6 +358,7 @@ module.exports = function(grunt) {
 
     // load node modules
     grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');

@@ -21,8 +21,8 @@
 
             shot.parent().on( 'inview', function( event, isInView ) {
                 // change html5 prop "hidden" (which is more accessible)
-                shot.prop('hidden', false);
-                shot.addClass('snapshot--uncovered');
+                shot.prop( 'hidden', false );
+                shot.addClass( 'snapshot--uncovered' );
                 $( this ).off( 'inview' );
             });
         });
