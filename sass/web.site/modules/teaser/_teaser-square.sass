@@ -1,0 +1,69 @@
+// nth() needed because remify() gives back a list
+$additional-margin: nth($page-padding, 1) * 2
+
+.teaser-square
+	background-color: $zon_mid_grey
+	color: $white
+	margin: 0 -($page-padding) $petite
+	padding-bottom: 100%
+	// calc() needed to compensate the negative margin
+	padding-bottom: calc(100% + #{$additional-margin})
+	position: relative
+	// this breakpoint must be the same as the one for .cp-area--onehalf
+	+respond-min($break-tablet-min)
+		margin: 0 0 $petite 0
+		padding-bottom: 100%
+
+	&__media
+		margin: 0
+		position: absolute
+		top: 0
+		width: 100%
+	&__media-container
+		+teaser-image-dark-overlay($angle: 0deg)
+	&__media-item
+		width: 100%
+	&__container
+		position: absolute
+		bottom: 0
+		left: 0
+		right: 0
+		padding: $junior
+	&__heading
+		@extend %teaser-heading
+		margin: 0
+	&__combined-link
+		@extend %teaser-combined-link
+		color: $white
+		text-shadow: 0 0 10px rgba(0, 0, 0, .5)
+	&__kicker
+		display: block
+		font-size: $font-s
+		font-weight: normal
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 1.2857
+		margin-bottom: .5em
+	&__title
+		+font-smoothing()
+		display: block
+		font-size: remify(28px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.1071
+		+respond-min($break-desktop-min)
+			font-size: remify(34px)
+			line-height: 1.2352
+	&__product
+		margin-top: em(12px)
+		&:before
+			background-color: $white
+			content: ""
+			display: block
+			height: 1px
+			opacity: .5
+			width: 20%
+
+	&__zmo-logo
+		+background-size(contain)
+		width: em(183px)
+		height: em(18px)
+		margin-top: em(26px)
