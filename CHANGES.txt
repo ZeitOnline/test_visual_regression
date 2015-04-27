@@ -1,10 +1,18 @@
 Change log for zeit.web
 =======================
 
-1.20.2 (unreleased)
+1.20.3 (unreleased)
 -------------------
 
-- BUG-241: Save brightcove images to HD
+- ZON-1549: Add square teaser for ZON content
+
+- BUG-241: Save brightcove images to disk
+
+
+1.20.2 (2015-04-24)
+-------------------
+
+- BUG-241: Set default image for Brightcove
 
 - FIX: Clean up centerpage view attributes and topic link objects
 
