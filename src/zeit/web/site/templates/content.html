@@ -98,8 +98,7 @@
                             {{ comment.name | e }}
                         </a>
                         <a  class="comment__date-anchor" href="#cid-{{ comment.cid }}">
-                            {# Special-Char: &#10744; = Big solidus #}
-                            #{{ loop.index }} &nbsp;&#10744;&nbsp; {{ comment.timestamp | format_date_ago() }}
+                        #{{ loop.index }} &nbsp;/&nbsp; {{ comment.timestamp | format_date_ago() }}
                             {% if comment.is_recommended %}
                             {# Special-Char: &#9733; = Black Star #}
                             <span class="comment__recommendations">
