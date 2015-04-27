@@ -97,10 +97,10 @@ def comment_to_dict(comment):
         role=', '.join(roles),
         cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
         recommendations=len(
-            comment.xpath('flagged[@type="kommentar_empfohlen"]')),
+            comment.xpath('flagged[@type="leser_empfehlung"]')),
         is_author=is_author,
         is_reply=bool(in_reply),
-        is_recommended=bool(
+        is_promoted=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
     )
 
