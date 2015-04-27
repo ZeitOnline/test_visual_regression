@@ -3,17 +3,11 @@ import lxml
 import zope.component
 import pyramid.httpexceptions
 import requests
+import zeit.web.core
 import zeit.web.core.view
 import zeit.web.core.comments
 import pyramid.view
 import urlparse
-
-
-def _is_admin(context, request):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if conf.get('is_admin'):
-        return True
-    return request.client_addr == '127.0.0.1'
 
 
 class PostComment(zeit.web.core.view.Base):
@@ -149,7 +143,7 @@ class PostComment(zeit.web.core.view.Base):
 
 @pyramid.view.view_config(route_name='post_test_comments',
                           renderer='templates/post_test_comments.html',
-                          custom_predicates=(_is_admin,))
+                          custom_predicates=(zeit.web.core.is_admin,))
 class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)
