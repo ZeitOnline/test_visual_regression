@@ -8,6 +8,7 @@ import zeit.web.core.view_comment
 from mock import patch
 import zope
 import requests
+import operator
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -203,30 +204,66 @@ def test_post_comment_should_only_do_sth_on_post(monkeypatch):
     assert poster.post_comment() is None
 
 
-@pytest.mark.parametrize("path, comment, pid", [
-    ('/my/path', None, None),
-    (None, 'my_comment', None),
-    (None, None, 1),
-    (None, None, None)])
+@pytest.mark.parametrize("path, comment, pid, action", [
+    ('path', 'my comment', '1', 'comment')])
+def test_post_comment_should_raise_exception_if_no_post_is_used(
+        monkeypatch, path, pid, comment, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "GET"
+
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment()
+
+
+@pytest.mark.parametrize("path, comment, pid, action", [
+    ('/my/path', None, None, 'comment'),
+    (None, None, None, 'comment'),
+    (None, 'my_comment', None, 'comment')])
 def test_post_comment_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment):
+        monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
     poster.path = path
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
 
 
-def test_questionable_comments_should_have_pid_in_post(monkeypatch):
+@pytest.mark.parametrize("path, comment, pid, action", [
+    (None, None, None, 'report'),
+    (None, 'my_comment', None, 'report'),
+    (None, None, 1, 'report')])
+def test_post_report_should_raise_exception_if_params_are_wrong(
+        monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
-    poster.path = 'my/path'
-    poster.request.params['comment'] = 'my comment'
-    poster.request.params['is_questionable'] = True
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment()
+
+
+@pytest.mark.parametrize("path, comment, pid, action", [
+    (None, None, None, 'recommend')])
+def test_post_recommondation_should_raise_exception_if_params_are_wrong(
+        monkeypatch, path, pid, comment, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
 
@@ -241,29 +278,41 @@ endpoint_agatho = (
      'nid': 1,
      'subject': '[empty]'}})
 
-endpoint_services_json = (
+endpoint_report = (
     ('http://foo/services/json/',),
     {'cookies': {},
      'data': {
      'note': 'my comment',
      'content_id': '1',
+     'method': 'flag.flagnote',
+     'flag_name': 'kommentar_bedenklich',
+     'uid': '123', }})
+
+endpoint_recommend = (
+    ('http://foo/services/json/',),
+    {'cookies': {},
+     'data': {
+     'content_id': '1',
+     'method': 'flag.flag',
+     'flag_name': 'leser_empfehlung',
      'uid': '123', }})
 
 
-@pytest.mark.parametrize("path, comment, pid, questionable, result", [
-    ('my/path', 'my comment', None, None, endpoint_agatho),
-    (None, 'my comment', '1', True, endpoint_services_json)])
+@pytest.mark.parametrize("path, comment, pid, action, result", [
+    ('my/path', 'my comment', None, 'comment', endpoint_agatho),
+    (None, None, '1', 'recommend', endpoint_recommend),
+    (None, 'my comment', '1', 'report', endpoint_report)])
 def test_post_comments_should_post_with_correct_arguments(monkeypatch,
                                                           path,
                                                           comment,
                                                           pid,
                                                           result,
-                                                          questionable):
+                                                          action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
     poster.path = path
-    poster.request.params['is_questionable'] = questionable
+    poster.request.params['action'] = action
     poster.request.params['pid'] = pid
     with patch.object(requests, 'post') as mock_method:
         response = mock.Mock()
@@ -271,13 +320,17 @@ def test_post_comments_should_post_with_correct_arguments(monkeypatch,
         mock_method.return_value = response
         poster.post_comment()
 
-    assert mock_method.call_args == result
+    expected = sorted(result[1]['data'].items(), key=operator.itemgetter(1))
+    actual = sorted(
+        mock_method.call_args[1]['data'].items(), key=operator.itemgetter(1))
+    assert actual == expected
+    assert result[0] == mock_method.call_args[0]
 
 
-@pytest.mark.parametrize("questionable, path, service", [
-    (None, 'my/article', 'http://foo/agatho/thread/my/article'),
-    ('yep', 'my/article', 'http://foo/services/json/')])
+@pytest.mark.parametrize("action, path, service", [
+    ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
+    ('report', 'my/article', 'http://foo/services/json/')])
 def test_action_url_should_be_created_correctly(monkeypatch,
-                                                questionable, path, service):
+                                                action, path, service):
     poster = _create_poster(monkeypatch)
-    assert poster._action_url(questionable, path) == service
+    assert poster._action_url(action, path) == service

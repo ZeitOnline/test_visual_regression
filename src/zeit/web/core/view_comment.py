@@ -43,53 +43,67 @@ class PostComment(zeit.web.core.view.Base):
         comment = request.params.get('comment')
         action = request.params.get('action')
 
-        if request.method == "POST":
-            if not comment or not(self.path or pid) and not action:
-                raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='No comment could be posted',
-                    explanation=('Path or pid and comment'
-                                 ' and action are required.'))
-            if (action == 'report' or action == 'recommend') and not pid:
-                raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='No comment could be posted',
-                    explanation=('Pid needed to recommend or report.'))
+        if not request.method == "POST":
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title="No comment could be posted",
+                explanation="Only post request are allowed")
 
-            unique_id = 'http://xml.zeit.de/{}'.format(self.path)
-            nid = self._nid_by_comment_thread(unique_id)
-            action_url = self._action_url(action, self.path)
+        if action not in ('comment', 'report', 'recommend'):
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='No comment could be posted',
+                explanation=(
+                    'Action is not set or not allowed. '
+                    'Choose one of comment, recommend or report.'))
 
-            data = {'uid': uid}
-            if action == 'comment' and self.path:
-                    data['nid'] = nid
-                    data['subject'] = '[empty]'
-                    data['comment'] = comment
-                    data['pid'] = pid
-            elif action == 'report' and pid:
-                    data['note'] = comment
-                    data['content_id'] = pid
-                    data['method'] = 'flag.flagnote'
-                    data['flag_name'] = 'kommentar_bedenklich'
-            elif action == 'recommend' and pid:
-                    data['content_id'] = pid
-                    data['method'] = 'flag.flag'
-                    data['flag_name'] = 'leser_empfehlung'
+        if action == 'comment' and (not(self.path) or not(comment)):
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='No comment could be posted',
+                explanation=('Path and comment needed.'))
+        elif action == 'report' and (not(pid) or not(comment)):
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='No report could be posted',
+                explanation=('Pid and comment needed.'))
+        elif action == 'recommend' and not pid:
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='No recommondation could be posted',
+                explanation=('Pid needed.'))
 
-            response = requests.post(action_url, data=data,
-                                     cookies=dict(request.cookies))
+        unique_id = 'http://xml.zeit.de/{}'.format(self.path)
+        nid = self._nid_by_comment_thread(unique_id)
+        action_url = self._action_url(action, self.path)
 
-            if response.status_code >= 200 and response.status_code < 300:
-                self.status.append('A comment for {} was posted'.format(
-                    unique_id))
-                # XXX: invalidate object from cache here!
-                # use something like
-                cache_maker._cache['comment_thread'].invalidate(
-                    (unique_id, None, None))
-                # cache on other app servers should be invalidated also
-            else:
-                raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='No comment could be posted',
-                    explanation='No comment  for {} could be '
-                                'posted.'.format(unique_id))
+        data = {'uid': uid}
+        if action == 'comment' and self.path:
+                data['nid'] = nid
+                data['subject'] = '[empty]'
+                data['comment'] = comment
+                data['pid'] = pid
+        elif action == 'report' and pid:
+                data['note'] = comment
+                data['content_id'] = pid
+                data['method'] = 'flag.flagnote'
+                data['flag_name'] = 'kommentar_bedenklich'
+        elif action == 'recommend' and pid:
+                data['content_id'] = pid
+                data['method'] = 'flag.flag'
+                data['flag_name'] = 'leser_empfehlung'
+
+        response = requests.post(action_url, data=data,
+                                 cookies=dict(request.cookies))
+
+        if response.status_code >= 200 and response.status_code < 300:
+            self.status.append('A comment for {} was posted'.format(
+                unique_id))
+            # XXX: invalidate object from cache here!
+            # use something like
+            cache_maker._cache['comment_thread'].invalidate(
+                (unique_id, None, None))
+            # cache on other app servers should be invalidated also
+        else:
+            raise pyramid.httpexceptions.HTTPInternalServerError(
+                title='No comment could be posted',
+                explanation='No comment  for {} could be '
+                            'posted.'.format(unique_id))
 
     def _action_url(self, action, path):
         endpoint = 'services/json' if (
