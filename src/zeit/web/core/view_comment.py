@@ -200,5 +200,9 @@ class PostCommentResource(PostComment):
         if self.request.params.get('ajax') == 'true':
             return self.status
         else:
+            location = self.request.url
+            if self.pid:
+                location = "{}#cid-{}".format(location, self.pid)
+
             return pyramid.httpexceptions.HTTPFound(
-                location=self.request.url)
+                location=location)
