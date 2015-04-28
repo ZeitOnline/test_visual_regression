@@ -216,7 +216,7 @@
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__text">{{ obj.caption|hide_none }}</span>
+                <span class="figure__text">{{ obj.caption | safe | hide_none }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
@@ -236,7 +236,7 @@
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect article__head-image">
         {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption }}{{ obj.copyright }}
+    </div>{{ obj.caption | safe | hide_none }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro video(obj) -%}

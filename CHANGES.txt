@@ -1,12 +1,39 @@
 Change log for zeit.web
 =======================
 
-1.20.2 (unreleased)
+1.20.5 (unreleased)
 -------------------
 
 - ZON-1667: Prepare search centerpage, spice up cpextra handling
 
+- Nothing changed yet.
+
+
+1.20.4 (2015-04-27)
+-------------------
+
+- BUG-226: Fix ZMO image captions should not escape xmlcharrefs
+
+- FIX: Clean up centerpage view attributes and topic link objects
+
+1.20.3 (2015-04-27)
+-------------------
+
+- BUG-242: Do not save images with content length <= 20
+
+- ZON-1549: Add square teaser for ZON content
+
+- XML view for IXMLContent tranformed to RAM @ xml/*traverse
+
+
+1.20.2 (2015-04-24)
+-------------------
+
+- BUG-241: Set default image for Brightcove
+
 - BUG-241: Save brightcove images to HD
+
+- BUG-241: Save brightcove images to disk
 
 
 1.20.1 (2015-04-17)
