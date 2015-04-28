@@ -197,7 +197,7 @@ class Base(object):
 
     @zeit.web.reify
     def title(self):
-        return self.context.title
+        return self.context.title.strip()
 
     @zeit.web.reify
     def supertitle(self):

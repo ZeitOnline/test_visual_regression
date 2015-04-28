@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1660: Implement comment interface.
 
+- ZON-1626: fix/clearify vertical spaces on centerpages
+
 
 1.20.4 (2015-04-27)
 -------------------
