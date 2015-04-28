@@ -80,7 +80,6 @@
 			margin: 0 0 0.6667em 0
 
 	&__reactions
-		line-height: 1.5
 		+respond-min($break-phablet-min)
 			text-align: right
 
@@ -94,7 +93,7 @@
 		letter-spacing: $zon-letter-spacing-s
 
 	&__reaction
-		+inline-block(top)
+		+inline-block
 		margin-left: remify(16px)
 		+respond-min($break-phablet-min)
 			margin-left: remify(24px)
@@ -155,8 +154,11 @@
 .icon-comment-reactions-recommend
 	+background-size(contain)
 	+inline-block
-	height: 1rem
+	background-position: right center
+	height: remify(16px)
+	margin-right: .5em
 	opacity: 0.5
-	width: 1.2rem
+	vertical-align: text-bottom
+	width: remify(18px)
 	a:hover > &
 		opacity: 1.0
