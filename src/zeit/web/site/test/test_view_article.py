@@ -261,3 +261,11 @@ def test_article_has_news_source_sid():
     content.product.id = 'SID'
     view = zeit.web.site.view_article.Article(content, mock.Mock())
     assert view.news_source == "Sport-Informations-Dienst"
+
+
+def test_article_has_news_source_empty():
+    content = mock.Mock()
+    content.copyrights = None
+
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == ''

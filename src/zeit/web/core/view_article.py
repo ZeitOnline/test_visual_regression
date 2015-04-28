@@ -326,16 +326,17 @@ class Article(zeit.web.core.view.Content):
     def news_source(self):
         """1:1 implementation of questionable xslt construct"""
 
-        sources = ""
         if self.context.ressort == 'News' and \
            self.context.product.id == 'News':
-            sources = 'dpa'
+            return 'dpa'
         elif self.context.product.id == 'SID':
-            sources = 'Sport-Informations-Dienst'
+            return 'Sport-Informations-Dienst'
         else:
-            sources = self.context.copyrights.replace(
-                ',', ';').replace(' ', '')
-        return sources
+            try:
+                return self.context.copyrights.replace(
+                    ',', ';').replace(' ', '')
+            except(AttributeError):
+                return ""
 
     @property
     def copyrights(self):
