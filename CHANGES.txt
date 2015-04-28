@@ -1,7 +1,20 @@
 Change log for zeit.web
 =======================
 
-1.20.3 (unreleased)
+1.20.5 (unreleased)
+-------------------
+
+- ZON-1626: fix/clearify vertical spaces on centerpages
+
+
+1.20.4 (2015-04-27)
+-------------------
+
+- BUG-226: Fix ZMO image captions should not escape xmlcharrefs
+
+- FIX: Clean up centerpage view attributes and topic link objects
+
+1.20.3 (2015-04-27)
 -------------------
 
 - ZON-1238: Standard teaser in a onethird area

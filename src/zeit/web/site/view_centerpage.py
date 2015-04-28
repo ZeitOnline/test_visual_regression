@@ -50,9 +50,9 @@ class LegacyMixin(object):
 class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
-        super(LegacyModule, self).__init__(arg)
+        super(LegacyModule, self).__init__([v for v in arg if v])
         self.layout = kw.pop('layout', 'default')
-        self.type = 'teaser'  # XXX: When would this be something else?
+        self.type = 'teaser'
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
@@ -60,7 +60,7 @@ class LegacyArea(LegacyMixin, collections.OrderedDict):
 
     def __init__(self, arg, **kw):
         collections.OrderedDict.__init__(
-            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg])
+            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.layout = kw.pop('layout', 'fullwidth')
         self.width = kw.pop('width', '1/1')
 
@@ -73,7 +73,7 @@ class LegacyRegion(LegacyArea):
 
     def __init__(self, arg, **kw):
         collections.OrderedDict.__init__(
-            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg])
+            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.layout = kw.pop('layout', 'normal')
         self.title = kw.pop('title', None)
 
@@ -87,6 +87,10 @@ class Centerpage(
 
     @zeit.web.reify
     def regions(self):
+        """List of regions, the outermost container making up our centerpage.
+        :rtype: list
+        """
+
         return self.context.values()
 
     @zeit.web.reify
@@ -99,25 +103,24 @@ class Centerpage(
             self.context).last_semantic_change
 
     @zeit.web.reify
-    def topiclink_title(self):
-        """Cache topiclink_title
-        :rtype: str
+    def topic_links(self):
+        """Return topic links of a centerpage as a TopicLink object
+        :rtype: zeit.web.core.centerpage.TopicLink
         """
 
-        return self.context.topiclink_title or 'Schwerpunkte'
-
-    @zeit.web.reify
-    def topiclinks(self):
         return zeit.web.core.interfaces.ITopicLink(self.context)
 
     @zeit.web.reify
     def ressort(self):
+        """Ressort of the centerpage or the string `homepage` if context is HP.
+        :rtype: str
+        """
+
         if self.is_hp:
             return 'homepage'
         elif self.context.ressort:
             return self.context.ressort.lower()
-        else:
-            return ''
+        return ''
 
 
 @pyramid.view.view_config(
@@ -125,15 +128,14 @@ class Centerpage(
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class LegacyCenterpage(Centerpage):
-
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
     def regions(self):
         regions = []
 
-        region_fullwidth = LegacyRegion([self.area_fullwidth],
-                                        layout='fullwidth')
+        region_fullwidth = LegacyRegion(
+            [self.area_fullwidth], layout='fullwidth')
         regions.append(region_fullwidth)
 
         region_lead = LegacyRegion([self.area_main, self.area_informatives],
@@ -190,9 +192,7 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def module_buzz_mostread(self):
-        """Return a pseudo teaser block with the top 3 most read articles.
-        :rtype: LegacyModule
-        """
+        """Return buzz box module with the top 3 most read articles."""
 
         module = LegacyModule(
             zeit.web.core.reach.fetch('mostread', self.ressort, limit=3),
@@ -202,9 +202,7 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def module_buzz_comments(self):
-        """Return a pseudo teaser block with the top 3 most commented articles.
-        :rtype: LegacyModule
-        """
+        """Return buzz box module with the top 3 most commented articles."""
 
         module = LegacyModule(
             zeit.web.core.reach.fetch('comments', self.ressort, limit=3),
@@ -214,9 +212,7 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def module_buzz_facebook(self):
-        """Return a pseudo teaser block with the top 3 most shared articles.
-        :rtype: LegacyModule
-        """
+        """Return buzz box module with the top 3 most shared articles."""
 
         module = LegacyModule(
             zeit.web.core.reach.fetch('facebook', self.ressort, limit=3),
@@ -255,7 +251,7 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def module_videostage(self):
-        """Return a video playlist object to be displayed on the homepage."""
+        """Return a video playlist module to be displayed on the homepage."""
 
         try:
             content = zeit.cms.interfaces.ICMSContent(
@@ -274,6 +270,8 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def region_list_parquet(self):
+        """Re-model the parquet to conform with new RAM-style structure."""
+
         def valid_area(a):
             try:
                 return a.layout.id in ('parquet',)
@@ -319,20 +317,15 @@ class LegacyCenterpage(Centerpage):
 
     @zeit.web.reify
     def region_snapshot(self):
-        area_snapshot = LegacyArea([b for b in [self.module_snapshot] if b],
-                                   layout='snapshot', width='1/1')
-
-        return LegacyRegion([area_snapshot], layout='snapshot')
-
-    @zeit.web.reify
-    def module_snapshot(self):
-        """Return the centerpage snapshot aka `Momentaufnahme`.
-        :rtype: zeit.content.image.image.RepositoryImage
-        """
+        """Return the centerpage snapshot region aka Momentaufnahme."""
 
         try:
             snapshot = zeit.web.core.interfaces.ITeaserImage(
                 self.context.snapshot)
-            return LegacyModule([snapshot], layout='snapshot')
+            assert snapshot
         except TypeError:
-            return
+            snapshot = None
+
+        module = LegacyModule([snapshot], layout='snapshot')
+        area = LegacyArea([module], layout='snapshot', width='1/1')
+        return LegacyRegion([area], layout='snapshot')

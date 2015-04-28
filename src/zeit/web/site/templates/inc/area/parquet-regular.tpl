@@ -10,7 +10,7 @@
                     {{ area.title | hide_none }}
                 </a>
                 <ul class="parquet-meta__topic-links">
-                    {% for label, link in topiclinks(area.referenced_cp) %}
+                    {% for label, link in area.referenced_cp | topic_links %}
                         <li>
                             <a href="{{ link }}" class="parquet-meta__topic-link">
                                 {{ label }}
