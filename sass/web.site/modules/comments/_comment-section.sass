@@ -1,24 +1,29 @@
 .comment-section
-	margin-left: (-$page-padding)
-	margin-right: (-$page-padding)
-	margin-top: 4rem
+	border-top: 2px solid $zon-seashell
+	margin: 4rem (-$page-padding) 0
 	&__head
-		border-top: 2px solid $zon-seashell
-		padding: remify(16px)
+		margin-left: auto
+		margin-right: auto
+		max-width: remify(700px) // 660px + 2*$page-padding
+		padding: em(32px) $page-padding
 		text-align: center
 		+respond-min($break-phablet-min)
 			+display-flex // flexbox
 			+justify-content(space-between) // flexbox
-			padding: remify(16px 54px)
-		+respond-min($break-desktop-min)
-			padding: remify(16px 160px)
-	&__count
-		font-size: remify(20px)
+			+align-items(center)
+	&__headline
+		font-size: remify(18px)
 		font-weight: bold
-		padding-top: remify(24px)
-		line-height: 1.0
+		display: block
+		margin-bottom: .5em
+		+respond-min($break-phablet-min)
+			font-size: remify(20px)
+			display: inline
+			margin-bottom: 0
 	&__cta
 		+zon-button-light
+		white-space: nowrap
+		margin: 0
 		&:after
-			content: '\25B8' // ▸ = Black right-pointing small triangle
+			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
