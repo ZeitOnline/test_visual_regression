@@ -1,7 +1,19 @@
 .comment-form
-	margin-bottom: 2rem
+	margin-bottom: 2em
 	+respond-min($break-desktop-min)
-		margin: 1rem remify(160px)
+		margin: 1em em(160px)
+	&__avatar
+		border-radius: 50%
+		display: inline-block
+		height: em(36px)
+		margin-right: em(12px)
+		width: em(36px)
+		vertical-align: middle
+	&__username
+		+link
+			color: $zon-red
+		+on-interaction
+			text-decoration: underline
 	&__textarea
 		background-color: $zon_lighter_grey
 		border: 1px solid $zon_light_grey
