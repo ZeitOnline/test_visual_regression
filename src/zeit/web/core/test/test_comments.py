@@ -231,9 +231,9 @@ def test_post_comment_should_raise_exception_if_params_are_wrong(
 
 
 @pytest.mark.parametrize("path, comment, pid, action", [
-    (None, None, None, 'report'),
-    (None, 'my_comment', None, 'report'),
-    (None, None, 1, 'report')])
+    ('my/path', None, None, 'report'),
+    ('my/path', 'my_comment', None, 'report'),
+    ('my/path', None, 1, 'report')])
 def test_post_report_should_raise_exception_if_params_are_wrong(
         monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
@@ -248,7 +248,7 @@ def test_post_report_should_raise_exception_if_params_are_wrong(
 
 
 @pytest.mark.parametrize("path, comment, pid, action", [
-    (None, None, None, 'recommend')])
+    ('my/path', None, None, 'recommend')])
 def test_post_recommondation_should_raise_exception_if_params_are_wrong(
         monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
@@ -294,8 +294,8 @@ endpoint_recommend = (
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho),
-    (None, None, '1', 'recommend', endpoint_recommend),
-    (None, 'my comment', '1', 'report', endpoint_report)])
+    ('my/path', None, '1', 'recommend', endpoint_recommend),
+    ('my/path', 'my comment', '1', 'report', endpoint_report)])
 def test_post_comments_should_post_with_correct_arguments(monkeypatch,
                                                           path,
                                                           comment,
