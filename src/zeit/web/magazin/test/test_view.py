@@ -275,7 +275,7 @@ def test_content_should_have_type(testserver, testbrowser):
 def test_tracking_type_is_provided(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.tracking_type == 'Artikel'
+    assert article_view.tracking_type == 'article'
 
 
 def test_artikel02_has_lebensart_ressort(testserver, testbrowser):
