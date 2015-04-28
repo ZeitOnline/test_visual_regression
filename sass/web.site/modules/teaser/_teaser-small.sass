@@ -3,10 +3,6 @@
 	&__media
 		@extend %teaser-media
 		@extend %teaser-small-media
-		// @todo show 1st image "sometimes"
-		// (when there is no fullwidth teaser above)
-		+respond-max($break-phablet-min)
-			display: none
 	&__media-item
 		@extend %teaser-media-item
 	&__container
@@ -30,3 +26,10 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
+// mobile in a list of small teasers
+// only the first should show an image
++respond-max($break-phablet-min)
+	.teaser-small
+		& ~ .teaser-small
+			.teaser-small__media
+				display: none

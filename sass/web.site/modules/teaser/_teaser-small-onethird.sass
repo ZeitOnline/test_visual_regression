@@ -54,11 +54,12 @@
 	&__commentcount
 		@extend %teaser-commentcount
 	
-// funny rules for checking
-// if image should be shown or not
-.teaser-small-onethird 
-	& ~ .teaser-small-onethird
-		.teaser-small-onethird__media
-			display: none
-		.teaser-small-onethird__container
-			padding-left: 0
+// mobile in a list of small onethird teasers
+// only the first should show an image
++respond-max($break-phablet-min)
+	.teaser-small-onethird 
+		& ~ .teaser-small-onethird
+			.teaser-small-onethird__media
+				display: none
+			.teaser-small-onethird__container
+				padding-left: 0
