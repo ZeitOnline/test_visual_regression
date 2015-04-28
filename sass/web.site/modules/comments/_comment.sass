@@ -119,9 +119,9 @@
 	// source: http://davidwalsh.name/css-triangles
 	&:before,
 	&:after
-		border-bottom: remify(10px) solid transparent
-		border-left: remify(10px) solid transparent // left arrow slant
-		border-right: remify(10px) solid transparent // right arrow slant
+		border-width: 0 10px 10px
+		border-style: solid
+		border-color: transparent
 		content: ' '
 		left: remify(70px)
 		position: absolute
@@ -129,10 +129,10 @@
 			left: remify(94px)
 	&:before
 		border-bottom-color: $zon_light_grey
-		top: remify(-10px)
+		top: -10px
 	&:after
 		border-bottom-color: $white
-		top: remify(-9px)
+		top: -9px
 
 .comment--author.comment--indented:after
 	border-bottom-color: $zon_lighter_grey
