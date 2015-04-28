@@ -204,5 +204,5 @@ class PostCommentResource(PostComment):
             if self.pid:
                 location = "{}#cid-{}".format(location, self.pid)
 
-            return pyramid.httpexceptions.HTTPFound(
+            return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)
