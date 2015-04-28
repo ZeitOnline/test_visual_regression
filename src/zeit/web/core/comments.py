@@ -32,8 +32,11 @@ def comment_to_dict(comment):
     """
 
     # TODO: Avoid repeatedly evaluating xpaths.
+    is_author = False
     if comment.xpath('author/@roles'):
-        roles = comment.xpath('author/@roles')[0].split(',')
+        roles = comment.xpath('author/@roles')[0]
+        is_author = 'author' in roles
+        roles = roles.split(',')
         try:
             gender = comment.xpath('author/@sex')[0]
         except IndexError:
@@ -89,18 +92,19 @@ def comment_to_dict(comment):
     # TODO: Catch name, timestamp and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
-        indented=bool(in_reply),
-        recommendations=len(
-            comment.xpath('flagged[@type="kommentar_empfohlen"]')),
-        recommended=bool(
-            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
         timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(roles),
-        cid=int(comment.xpath('./@id')[0].lstrip('cid-'))
+        cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
+        recommendations=len(
+            comment.xpath('flagged[@type="leser_empfehlung"]')),
+        is_author=is_author,
+        is_reply=bool(in_reply),
+        is_promoted=bool(
+            len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
     )
 
 

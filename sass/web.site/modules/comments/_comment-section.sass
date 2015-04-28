@@ -1,23 +1,29 @@
-=remove-side-padding
-	margin-left: (-$page-padding)
-	margin-right: (-$page-padding)
-
-=restore-side-padding
-	padding-left: $page-padding
-	padding-right: $page-padding
-
 .comment-section
-	+remove-side-padding
-	margin-top: 4rem
-	&__head,
-	&__notice
-		+restore-side-padding
-		border-top: 2px solid $zon-seashell
-		display: block
-		font-size: remify(20px)
-		font-weight: bold
-		margin: 1rem 0
-		padding: 1rem 1rem
+	border-top: 2px solid $zon-seashell
+	margin: 4rem (-$page-padding) 0
+	&__head
+		margin-left: auto
+		margin-right: auto
+		max-width: remify(700px) // 660px + 2*$page-padding
+		padding: em(32px) $page-padding
 		text-align: center
-		+respond-min($break-desktop-min)
-			padding: remify($medium--px 160px)
+		+respond-min($break-phablet-min)
+			+display-flex // flexbox
+			+justify-content(space-between) // flexbox
+			+align-items(center)
+	&__headline
+		font-size: remify(18px)
+		font-weight: bold
+		display: block
+		margin-bottom: .5em
+		+respond-min($break-phablet-min)
+			font-size: remify(20px)
+			display: inline
+			margin-bottom: 0
+	&__cta
+		+zon-button-light
+		white-space: nowrap
+		margin: 0
+		&:after
+			content: "\25B8" // ▸ = Black right-pointing small triangle
+			margin-left: 3px

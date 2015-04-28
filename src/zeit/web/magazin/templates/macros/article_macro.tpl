@@ -281,15 +281,15 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro comment(comment, featured) -%}
-    <article class="comment{% if comment.indented and not featured %} is-indented{% endif %}"{% if not featured %} id="cid-{{ comment.cid }}"{% endif %}>
+{% macro comment(comment) -%}
+    <article class="comment{% if comment.is_reply and not comment.is_promoted %} is-indented{% endif %}"{% if not comment.is_promoted %} id="cid-{{ comment.cid }}"{% endif %}>
         <div class="comment__head">
             {% if comment.img_url -%}
             <span class="comment__head__avatar" style="background-image: url('{{ comment.img_url }}')"></span>
             {% endif -%}
             <div class="comment__head__meta">
                 <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
-                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not featured %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
+                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{ comment.role }}</div>
                 {% endif -%}
@@ -299,7 +299,7 @@
             {{ comment.text|safe }}
         </div>
         <aside class="comment__tools">
-            {% if not comment.indented -%}
+            {% if not comment.is_reply -%}
             <a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
             {% endif -%}
             <a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">Kommentar melden</a>
@@ -380,15 +380,15 @@
                 <div class="tabs__content is-active">
                     <div class="comments__list" id="tab1">
                         {% for commentdict in obj.comments.comments %}
-                            {{ comment(commentdict, false) }}
+                            {{ comment(commentdict) }}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="tabs__content">
                     <div class="comments__list" id="tab2">
                         {% for commentdict in obj.comments.comments %}
-                            {% if commentdict['recommended'] -%}
-                                {{ comment(commentdict, true) }}
+                            {% if commentdict.is_promoted -%}
+                                {{ comment(commentdict) }}
                             {%- endif %}
                         {% endfor %}
                     </div>
