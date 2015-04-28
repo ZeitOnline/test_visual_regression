@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-import datetime
 
+import zope.component
 import lxml.etree
+import datetime
 import requests
 import requests.exceptions
-import zope.component
 from BeautifulSoup import BeautifulSoup
+import repoze.lru
 
 import zeit.cms.interfaces
 
 from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
+
+cache_maker = repoze.lru.CacheMaker()
 
 
 def rewrite_picture_url(url):
@@ -123,6 +126,11 @@ def request_thread(path):
 
 
 def get_thread(unique_id, destination=None, reverse=False):
+    return get_cacheable_thread(unique_id, destination, reverse)
+
+
+@cache_maker.expiring_lrucache(maxsize=1000, timeout=60, name='comment_thread')
+def get_cacheable_thread(unique_id, destination=None, reverse=False):
     """Return a dict representation of the comment thread of the given
     article.
 

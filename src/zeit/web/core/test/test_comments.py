@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 from zeit.cms.interfaces import ID_NAMESPACE as NS
 import lxml.etree
-
-import zeit.web.core.comments
+import pyramid.httpexceptions
+import mock
+import pytest
+import zeit.web.core.view_comment
+from mock import patch
+import zope
+import requests
+import operator
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -147,3 +153,178 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
     url = zeit.web.core.comments.rewrite_picture_url(
         'http://localhost:6551/baaa')
     assert url == 'http://static_community/foo/baaa'
+
+
+def test_post_comment_should_throw_exception_if_no_user_is_present():
+    request = mock.Mock()
+    request.authenticated_userid = False
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        zeit.web.core.view_comment.PostComment(mock.Mock(), request)
+
+
+def _create_poster(monkeypatch):
+    request = mock.Mock()
+    request.authenticated_userid = True
+
+    request.params = {'path': 'my/path'}
+    request.session = {'user': {'uid': '123'}}
+    request.cookies = {}
+    context = mock.Mock()
+
+    def util(arg):
+        return {
+            'community_host': 'http://foo'}
+
+    monkeypatch.setattr(zope.component, 'getUtility', util)
+
+    def post(action_url, data=None, cookies=None):
+        return None
+    monkeypatch.setattr(requests, 'post', post)
+
+    def nid(me, uid):
+        return 1
+    monkeypatch.setattr(
+        zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
+
+    return zeit.web.core.view_comment.PostComment(context, request)
+
+
+def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
+    poster = _create_poster(monkeypatch)
+
+    assert poster.path == 'my/path'
+    assert isinstance(poster.context, mock.Mock)
+    assert poster.community_host == 'http://foo'
+    assert poster.status == []
+
+
+@pytest.mark.parametrize("path, comment, pid, action", [
+    ('path', 'my comment', '1', 'comment')])
+def test_post_comment_should_raise_exception_if_no_post_is_used(
+        monkeypatch, path, pid, comment, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "GET"
+
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment()
+
+
+@pytest.mark.parametrize("path, comment, pid, action", [
+    ('/my/path', None, None, 'comment'),
+    (None, None, None, 'comment'),
+    (None, 'my_comment', None, 'comment')])
+def test_post_comment_should_raise_exception_if_params_are_wrong(
+        monkeypatch, path, pid, comment, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment()
+
+
+@pytest.mark.parametrize("path, comment, pid, action", [
+    ('my/path', None, None, 'report'),
+    ('my/path', 'my_comment', None, 'report'),
+    ('my/path', None, 1, 'report')])
+def test_post_report_should_raise_exception_if_params_are_wrong(
+        monkeypatch, path, pid, comment, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment()
+
+
+@pytest.mark.parametrize("path, comment, pid, action", [
+    ('my/path', None, None, 'recommend')])
+def test_post_recommondation_should_raise_exception_if_params_are_wrong(
+        monkeypatch, path, pid, comment, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+
+    poster.path = path
+    poster.request.params['comment'] = comment
+    poster.request.params['pid'] = pid
+    poster.request.params['action'] = action
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        poster.post_comment()
+
+
+endpoint_agatho = (
+    ('http://foo/agatho/thread/my/path',),
+    {'cookies': {},
+     'data': {
+     'comment': 'my comment',
+     'pid': None,
+     'uid': '123',
+     'nid': 1,
+     'subject': '[empty]'}})
+
+endpoint_report = (
+    ('http://foo/services/json/',),
+    {'cookies': {},
+     'data': {
+     'note': 'my comment',
+     'content_id': '1',
+     'method': 'flag.flagnote',
+     'flag_name': 'kommentar_bedenklich',
+     'uid': '123', }})
+
+endpoint_recommend = (
+    ('http://foo/services/json/',),
+    {'cookies': {},
+     'data': {
+     'content_id': '1',
+     'method': 'flag.flag',
+     'flag_name': 'leser_empfehlung',
+     'uid': '123', }})
+
+
+@pytest.mark.parametrize("path, comment, pid, action, result", [
+    ('my/path', 'my comment', None, 'comment', endpoint_agatho),
+    ('my/path', None, '1', 'recommend', endpoint_recommend),
+    ('my/path', 'my comment', '1', 'report', endpoint_report)])
+def test_post_comments_should_post_with_correct_arguments(monkeypatch,
+                                                          path,
+                                                          comment,
+                                                          pid,
+                                                          result,
+                                                          action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+    poster.request.params['comment'] = comment
+    poster.path = path
+    poster.request.params['action'] = action
+    poster.request.params['pid'] = pid
+    with patch.object(requests, 'post') as mock_method:
+        response = mock.Mock()
+        response.status_code = 200
+        mock_method.return_value = response
+        poster.post_comment()
+
+    expected = sorted(result[1]['data'].items(), key=operator.itemgetter(1))
+    actual = sorted(
+        mock_method.call_args[1]['data'].items(), key=operator.itemgetter(1))
+    assert actual == expected
+    assert result[0] == mock_method.call_args[0]
+
+
+@pytest.mark.parametrize("action, path, service", [
+    ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
+    ('report', 'my/article', 'http://foo/services/json/')])
+def test_action_url_should_be_created_correctly(monkeypatch,
+                                                action, path, service):
+    poster = _create_poster(monkeypatch)
+    assert poster._action_url(action, path) == service
