@@ -20,7 +20,7 @@
 	</div>
 
 {% if view.comments %}
-	{% for comment in view.comments.comments[:40] %}
+	{% for comment in view.comments.comments[:20] %}
 	<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 		<div class="comment__container">
 			{% if comment.img_url %}
