@@ -7,7 +7,7 @@
  * @module displayVideo
  */
 define([ 'jquery' ],
-    function($) {
+    function( $ ) {
         return {
             /**
              * Replaces a given list of dom nodes with video or return video html code
@@ -30,7 +30,7 @@ define([ 'jquery' ],
                             'playerId': '65fa926a-0fe0-4031-8cbf-9db35cecf64a'
                         },
                         type: 'iframe' // change to 'html5' when html5 player is available
-                    }, config),
+                    }, config ),
                     /**
                      * html templates for player code
                      * @type {Object}
@@ -50,15 +50,15 @@ define([ 'jquery' ],
                     return;
                 } else {
                     snippet = templates[defaults.type]
-                            .replace('{{accountId}}', defaults.playerData.accountId)
-                            .replace('{{playerId}}', defaults.playerData.playerId)
-                            .replace('{{videoId}}', videoId);
+                            .replace( '{{accountId}}', defaults.playerData.accountId )
+                            .replace( '{{playerId}}', defaults.playerData.playerId )
+                            .replace( '{{videoId}}', videoId );
                     if ( defaults.elem.size() > 0 ) {
-                        $.each(defaults.elem, function(index, value) {
-                            $(defaults.elem[index]).empty().html(snippet);
+                        $.each( defaults.elem, function( index, value ) {
+                            $( defaults.elem[index] ).empty().html( snippet );
                         });
                     }
-                    return $(snippet);
+                    return $( snippet );
                 }
             }
         };

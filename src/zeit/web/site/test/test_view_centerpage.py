@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 import re
 
 import requests
@@ -12,6 +11,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
 
+import zeit.web.core.centerpage
+import zeit.web.core.interfaces
+import zeit.web.core.utils
 import zeit.web.site.view_centerpage
 
 
@@ -58,11 +60,12 @@ def test_area_main_should_filter_teasers(application):
         m.itervalues = create_mocked_teaserblocks().__iter__
         return [{'lead': m}]
     context.values = val
+    context.ressort = 'ressort'
 
     request = mock.Mock()
-    cp = zeit.web.site.view_centerpage.Centerpage(context, request)
+    cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_main) == 2
+    assert len(cp.area_main) == 4
     assert cp.area_main.values()[0].layout.id == 'zon-large'
     assert cp.area_main.values()[1].layout.id == 'zon-small'
     assert list(cp.area_main.values()[0])[0] == 'article'
@@ -156,7 +159,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('cp-area--lead')[0]
+    box = driver.find_elements_by_class_name('cp-area--twothirds')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
@@ -261,29 +264,26 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .cp-region--lead .cp-area article figure noscript')
-    assert len(noscript) == 2, 'No noscript areas found'
+        '#main .cp-region--lead .scaled-image noscript')
+    assert len(noscript) == 3
 
 
-def test_topiclinks_title_schould_have_a_value_and_default_value():
+def test_topic_links_title_schould_have_a_value_and_default_value(testserver):
+    context = mock.Mock()
+    context.topic_links = mock.Mock()
+    context.topiclink_title = 'My Title'
+    topic_links = zeit.web.core.centerpage.TopicLink(context)
+
+    assert topic_links.title == 'My Title'
+
+    context.topiclink_title = None
+    topic_links = zeit.web.core.centerpage.TopicLink(context)
+
+    assert topic_links.title == 'Schwerpunkte'
+
+
+def test_centerpage_view_should_have_topic_links(testserver):
     mycp = mock.Mock()
-    mycp.topiclink_title = 'My Title'
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
-
-    assert view.topiclink_title == 'My Title', 'There is no title present'
-
-    mycp = mock.Mock()
-    mycp.topiclink_title = None
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
-
-    assert view.topiclink_title == 'Schwerpunkte', 'There is no title present'
-
-
-def test_centerpage_view_should_have_topic_links():
-
-    mycp = mock.Mock()
-
-    mycp.topiclink_title = 'My Title'
     mycp.topiclink_label_1 = 'Label 1'
     mycp.topiclink_url_1 = 'http://link_1'
     mycp.topiclink_label_2 = 'Label 2'
@@ -291,11 +291,11 @@ def test_centerpage_view_should_have_topic_links():
     mycp.topiclink_label_3 = 'Label 3'
     mycp.topiclink_url_3 = 'http://link_3'
 
-    topiclinks = list(zeit.web.core.centerpage.TopicLink(mycp))
+    topic_links = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert topiclinks == [('Label 1', 'http://link_1'),
-                          ('Label 2', 'http://link_2'),
-                          ('Label 3', 'http://link_3')]
+    assert topic_links == [('Label 1', 'http://link_1'),
+                           ('Label 2', 'http://link_2'),
+                           ('Label 3', 'http://link_3')]
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
@@ -313,7 +313,6 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
 
 
 def test_column_teaser_should_render_series_element(testserver, testbrowser):
-
     browser = testbrowser(
         '%s/zeit-online/teaser-types-setup' % testserver.url)
 
@@ -478,21 +477,28 @@ def test_small_teaser_without_image_has_no_padding_left(
     assert teaser.location.get('x') is 20
 
 
-def test_parquet_should_have_rows(application):
+def test_parquet_region_list_should_have_regions(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    assert len(view.area_parquet) == 4, (
-        'View contains {} parquet rows instead of 4' % len(view.area_parquet))
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert len(view.region_list_parquet) == 4, (
+        'View contains {} parquet regions instead of 4' % len(
+            view.region_list_parquet))
 
 
-def test_parquet_row_should_have_teasers(application):
+def test_parquet_regions_should_have_one_area_each(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    teasers = view.area_parquet[0]
-    assert len(teasers) == 6, (
-        'Parquet row contains %s teasers instead of 4' % len(teasers))
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert all([len(region) == 1 for region in view.region_list_parquet])
+
+
+def test_parquet_region_areas_should_have_multiple_modules_each(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert all([len(area.values()) > 1 for region in view.region_list_parquet
+                for area in region.values()])
 
 
 def test_parquet_should_render_desired_amount_of_teasers(
@@ -500,15 +506,15 @@ def test_parquet_should_render_desired_amount_of_teasers(
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    desired_amount = view.area_parquet[0].display_amount
+    desired_amount = view.context.values()[1][0][0].display_amount
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    teasers = browser.cssselect(
-        '#parquet > .parquet-row:first-child '
-        'article[data-block-type="teaser"]')
+    teasers = browser.cssselect('.cp-region--parquet-large '
+                                'article[data-block-type="teaser"]')
     actual_amount = len(teasers)
     assert actual_amount == desired_amount, (
-        'Parquet row does not display the right amount of teasers.')
+        'Parquet row does not display the right amount of teasers. '
+        'Got %s, expected %s.' % (actual_amount, desired_amount))
 
 
 def test_parquet_should_display_meta_links_only_on_desktop(
@@ -553,8 +559,8 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 def test_video_series_should_be_available(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    video_series = view.video_series_list
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    video_series = view.module_videostage.video_series_list
     assert len(video_series) > 0, (
         'Series object is empty')
 
@@ -609,7 +615,7 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
 
 def test_module_printbox_should_contain_teaser_image(testserver):
     mycp = mock.Mock()
-    view = zeit.web.site.view_centerpage.Centerpage(mycp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(mycp, mock.Mock())
     image = view.module_printbox[0].image
     assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
@@ -683,39 +689,21 @@ def test_oldads_toggle_is_off(application):
     assert view.deliver_ads_oldschoolish is False
 
 
-def test_centerpage_header_tags(application, jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
-    view, request = (mock.Mock(),) * 2
-    view.resolve = mock.Mock(return_value=request)
-    view.topiclinks = [('Label 1', 'http://link_1'),
-                       ('Label 2', 'http://link_2'),
-                       ('Label 3', 'http://link_3')]
-    view.topiclink_title = 'My Title'
-    view.displayed_last_published_semantic = datetime.datetime.now()
-
-    html_str = ' '.join(list(tpl.blocks['metadata'](view)))
-    html = lxml.html.fromstring(html_str).cssselect
-    tags = html('.header__tags__link')
-
-    assert len(html('.header__tags')) == 1, 'just one .header__tags'
-    assert html('.header__tags__label')[0].text == 'My Title'
-    assert len(tags) == 3
-    assert tags[0].get('href') == 'http://link_1'
-    assert tags[0].get('title') == 'Label 1'
-    assert tags[0].text == 'Label 1'
-
-
-def test_centerpage_metadata(testbrowser, testserver):
+def test_centerpage_should_have_header_tags(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    date = '3. Dezember 2014, 12:50 Uhr'
+    html = lxml.html.fromstring(browser.contents).cssselect
 
-    assert len(html('.header__tags')) == 1, 'just one .header__tags'
+    assert len(html('.header__tags')) == 1
     assert html('.header__tags__label')[0].text == 'Schwerpunkte'
 
-    assert len(html('.header__date')) == 1, 'just one .header__date'
-    assert html('.header__date')[0].text == date, 'Date is invalid'
+    assert len(html('.header__date')) == 1
+    assert html('.header__date')[0].text == '3. Dezember 2014, 12:50 Uhr'
+
+    assert len(html('.header__tags__link')) == 3
+    assert html('.header__tags__link')[0].get('href').endswith(
+        '/schlagworte/organisationen/islamischer-staat/index')
+    assert html('.header__tags__link')[0].get('title') == 'Islamischer Staat'
+    assert html('.header__tags__link')[0].text == 'Islamischer Staat'
 
 
 def test_new_centerpage_renders(testserver):

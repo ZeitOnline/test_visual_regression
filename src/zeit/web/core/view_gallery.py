@@ -1,5 +1,3 @@
-from pyramid.view import view_config
-
 import zeit.wysiwyg.interfaces
 
 import zeit.web

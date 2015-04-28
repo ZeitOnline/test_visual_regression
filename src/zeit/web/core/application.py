@@ -23,6 +23,7 @@ import zope.interface.declarations
 
 import zeit.connector
 import zeit.content.gallery.interfaces
+import zeit.content.cp.interfaces
 import zeit.magazin.interfaces
 
 from zeit.web.core.article import IColumnArticle
@@ -157,6 +158,8 @@ class Application(object):
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
+        config.add_route('xml', '/xml/*traverse')
+
         if not self.settings.get('debug.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
                             context=Exception)
@@ -244,6 +247,9 @@ class Application(object):
             categories=('jinja',),
             ignore=self.DONT_SCAN
         )
+
+        # TODO: We would want to make contextfilters venusian-discoverable too.
+        env.filters['macro'] = zeit.web.core.template.call_macro_by_name
 
         return env
 
@@ -389,6 +395,18 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             tdict = super(RepositoryTraverser, self).__call__(request)
 
             context = tdict['context']
+
+            # Rewriting the context, if we have a CP2015
+            # When zeit.content.cp is in production for everybody,
+            # we can remove this. (RD)
+            try:
+                if (zeit.content.cp.interfaces.ICenterPage.providedBy(
+                        context)):
+                    tdict['context'] = context = context.__parent__[(
+                        '{}.cp2015'.format(context.__name__))]
+            except (KeyError, TypeError):
+                pass
+
             if zeit.content.article.interfaces.IArticle.providedBy(context):
                 template = zeit.magazin.interfaces.IArticleTemplateSettings(
                     context).template

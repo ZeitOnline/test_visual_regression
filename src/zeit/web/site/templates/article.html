@@ -32,3 +32,36 @@
 {% block article_pagination %}
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" ignore missing %}
 {% endblock article_pagination %}
+
+{% block article_interactions %}
+    <div class="article-interactions article__item">
+        <div class="interaction-print"></div>
+        <div class="more-interactions"></div>
+        <div class="sharing-menu">
+            <span class="sharing-menu__title js-sharing-menu">Teilen</span>
+            <ul class="sharing-menu__items">
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url }}" target="_blank">
+                        Facebook
+                    </a>
+                </li>
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&url={{ view.article_url }}&via=zeitonline" target="_blank">
+                        Twitter
+                    </a>
+                </li>
+                {# Google+ will be closed in the near future, all info is fetched automaticall, no params needed #}
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--google" href="https://plus.google.com/share?url={{ view.article_url }}" target="_blank">
+                        Google +
+                    </a>
+                </li>
+                <li class="sharing-menu__item">
+                    <a class="sharing-menu__link sharing-menu__link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE">
+                        Mail
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

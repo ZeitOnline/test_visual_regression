@@ -32,10 +32,10 @@
     <div class="teaser-parquet-small__container ">
         <h2 class="teaser-parquet-small__heading">
             <a {% if track_slug %}id="{{ track_slug }}.3.{{ teaser_track_id }}.title|{{ teaser.url }}"{% endif %} class="teaser-parquet-small__combined-link" title="{{ teaser.teaserSupertitle }} - {{ teaser.teaserTitle }}" href="{{ teaser.url }}">
-                <span class="teaser-parquet-small__kicker teaser-parquet-small__kicker--spektrum">{{ teaser.teaserSupertitle }}</span>
-                <span class="teaser-parquet-small__title">{{ teaser.teaserTitle }}</span>
+                <span class="teaser-parquet-small__kicker teaser-parquet-small__kicker--spektrum">{{ teaser.teaserSupertitle | hide_none }}</span>
+                <span class="teaser-parquet-small__title">{{ teaser.teaserTitle | hide_none }}</span>
             </a>
          </h2>
-        <p class="teaser-parquet-small__text">{{ teaser.teaserText }}</p>
+        <p class="teaser-parquet-small__text">{{ teaser.teaserText | hide_none }}</p>
     </div>
 </article>

@@ -38,6 +38,7 @@ require.config({
         'web.site/plugins/jquery.toggleBeta': [ 'jquery' ],
         'web.site/plugins/jquery.togglenavi': [ 'jquery' ],
         'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
+        'web.site/plugins/jquery.infobox': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },

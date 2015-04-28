@@ -12,7 +12,7 @@
 =default-article-textlink
 	a
 		border-bottom: 1px solid rgba($color-link--default, .5)
-		+transition-property(border-bottom-color color)
+		+transition-property(border-bottom-color, color)
 		+transition-duration(.2s)
 
 		&:focus
@@ -47,7 +47,7 @@
 		z-index: 1
 		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
 
-=teaser-image-dark-overlay($color: rgb(0, 15, 20))
+=teaser-image-dark-overlay($color: rgb(0, 15, 20), $angle: 12deg)
 	background-color: $color
 	position: relative
 	&:after
@@ -59,8 +59,7 @@
 		right: 0
 		top: 0
 		width: 100%
-		z-index: 1
-		+background-image(linear-gradient(12deg, rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%))
+		+background-image(linear-gradient($angle, rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%))
 
 =no-user-select
 	-webkit-touch-callout: none
@@ -173,7 +172,7 @@
 =drop_icon()
 	display: inline-block // needed for "rotate on hover"
 	margin-left: $tiny
-	content: "\25BE" // Unicode for ▾
+	content: "\25BE" // ▾ = black down-pointing small triangle
 
 /* mixins for navigation/header */
 

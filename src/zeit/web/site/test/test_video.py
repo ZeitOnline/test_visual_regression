@@ -49,3 +49,22 @@ def test_video_imagegroup_should_set_local_image_fileobj(
     image = group['{}.jpg'.format(img)]
     assert image.image.size == size
     assert image.image.getImageSize() == res
+
+
+def test_video_imagegroup_should_fallback(
+        application, workingcopy, monkeypatch):
+    def filename(me, src):
+        me.filename = "/dev/null/fusel"
+    monkeypatch.setattr(
+        zeit.web.core.centerpage.LocalVideoImage, "__init__", filename)
+    unique_id = 'http://xml.zeit.de/video/2015-01/4004256546001'
+    video = zeit.cms.interfaces.ICMSContent(unique_id)
+    with zeit.cms.checkout.helper.checked_out(video) as obj:
+        obj.video_still = 'http://example.com/foo'
+    group = zeit.content.image.interfaces.IImageGroup(video)
+    assert group['still.jpg'].image.getImageSize() == (500, 300)
+
+    with zeit.cms.checkout.helper.checked_out(video) as obj:
+        obj.video_still = 'http://fusel'
+    group = zeit.content.image.interfaces.IImageGroup(video)
+    assert group['still.jpg'].image.getImageSize() == (500, 300)

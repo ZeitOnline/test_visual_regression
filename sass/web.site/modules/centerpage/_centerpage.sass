@@ -1,25 +1,34 @@
-$cp-padding: em(10px)
+// RAM vertical space rules
+// Regions have vertical space as margin-bottom of $vertical-space
+// Areas have no vertical space (and as they float don't collapse margins of children)
+// Modules have vertical space on top and bottom as padding
+// 
+// $vertcal-space * 2 is the vertical gutter between two elements (rule of thumb)
 
 .cp-region
+	margin-bottom: $vertical-space
 	padding: 0 $cp-padding
 	+pie-clearfix
+	&--parquet-large,
+	&--parquet-regular,
+	&--parquet-spektrum
+		margin-bottom: 0
+		padding: 0
 
 .cp-area
 	padding: 0 $cp-padding
 	float: left
 	width: 100%
-	&--threequarters
-		+respond-min($break-tablet-min)
+	&--parquet
+		padding: 0
+	+respond-min($break-tablet-min)
+		&--threequarters
 			width: 75%
-	&--twothirds
-		+respond-min($break-tablet-min)
+		&--twothirds
 			width: 66.66%
-	&--onehalf
-		+respond-min($break-tablet-min)
+		&--onehalf
 			width: 50%
-	&--onethird
-		+respond-min($break-tablet-min)
+		&--onethird
 			width: 33.33%
-	&--onequarter
-		+respond-min($break-tablet-min)
+		&--onequarter
 			width: 25%

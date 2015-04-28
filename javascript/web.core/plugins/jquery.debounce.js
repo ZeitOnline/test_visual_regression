@@ -18,25 +18,25 @@
          * @param {number} wait The number of milliseconds to delay.
          * @param {boolean} [immediate] invoke `func` on the leading edge of the timeout
          */
-        debounce: function(func, wait, immediate) {
+        debounce: function( func, wait, immediate ) {
             var timeout;
 
             return function() {
                 var context = this,
                     args = arguments;
 
-                if (timeout) {
-                    clearTimeout(timeout);
-                } else if (immediate) {
-                    func.apply(context, args);
+                if ( timeout ) {
+                    clearTimeout( timeout );
+                } else if ( immediate ) {
+                    func.apply( context, args );
                 }
 
                 timeout = setTimeout(function() {
                     timeout = null;
-                    if (!immediate) {
-                        func.apply(context, args);
+                    if ( !immediate ) {
+                        func.apply( context, args );
                     }
-                }, wait);
+                }, wait );
             };
         }
     });

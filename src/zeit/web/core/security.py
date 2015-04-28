@@ -3,6 +3,8 @@ import urllib2
 import lxml.etree
 import pyramid.authentication
 
+import zeit.web.core.comments
+
 
 class CommunityAuthenticationPolicy(
         pyramid.authentication.SessionAuthenticationPolicy):
@@ -63,9 +65,11 @@ def get_community_user_info(request):
 
     for key in user_info.keys():
         postfix = 'roles' in key and '/role' or ''
-        elements = xml_info.xpath('//user/{}/text()'.format(key + postfix))
+        elements = xml_info.xpath('/user/{}/text()'.format(key + postfix))
         if len(elements) == 0:
             continue
+        elif key == 'picture':
+            elements = zeit.web.core.comments.rewrite_picture_url(elements[0])
         elif 'roles' not in key:
             elements = elements[0]
         user_info[key] = elements

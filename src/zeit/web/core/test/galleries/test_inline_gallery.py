@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import re
-from lxml import etree
+
+import lxml
+
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -49,7 +52,7 @@ def test_inline_gallery_uses_responsive_images_with_ratio(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
     image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
-    assert 'data-ratio="1.77914110429"' in etree.tostring(image)
+    assert 'data-ratio="1.77914110429"' in lxml.etree.tostring(image)
 
 
 def test_photocluster_has_expected_markup(selenium_driver, testserver):

@@ -8,7 +8,9 @@ import lxml.etree
 import lxml.html
 import urlparse
 import zope.interface
+import zope.interface.declarations
 
+import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
@@ -78,6 +80,52 @@ class Portraitbox(object):
         return "".join([lxml.etree.tostring(element) for element in
                        lxml.html.fragments_fromstring(pbox) if
                        element.tag != 'raw'])
+
+
+class IInfoboxDivision(zope.interface.Interface):
+    pass
+
+
+@grokcore.component.implementer(
+    zeit.content.article.edit.interfaces.IEditableBody)
+@grokcore.component.adapter(IInfoboxDivision)
+class InfoboxDivision(zeit.content.article.edit.body.EditableBody):
+
+    def values(self):
+        result = []
+        for child in self.xml.iterchildren():
+            element = self._get_element_for_node(child)
+            if element is None:
+                element = self._get_element_for_node(
+                    child, zeit.edit.block.UnknownBlock.type)
+            result.append(element)
+        return result
+
+
+@grokcore.component.adapter(InfoboxDivision)
+@grokcore.component.implementer(zeit.content.article.interfaces.IArticle)
+def make_article_blocks_work_with_infobox_content(context):
+    return context.__parent__
+
+
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IInfobox)
+class Infobox(object):
+
+    def __init__(self, model_block):
+        self.contents = []
+        if model_block.references is None:
+            return
+        try:
+            self.title = model_block.references.supertitle
+        except:
+            self.title = 'infobox'
+        for block in model_block.references.xml.xpath('block'):
+            text = block.find('text')
+            title = block.find('title')
+            division = InfoboxDivision(model_block.references, text)
+            self.contents.append(
+                (title, [IFrontendBlock(b, None) for b in division.values()]))
 
 
 @grokcore.component.implementer(IFrontendBlock)

@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-import zeit.cms.interfaces
-
-import zeit.web.magazin
-
 
 def test_ad_keyword_diuqilon(selenium_driver, testserver):
     driver = selenium_driver

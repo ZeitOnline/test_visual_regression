@@ -580,12 +580,20 @@ def test_article03_has_linked_image(testserver, testbrowser):
     assert '<a href="http://www.test.de"><img alt="Immer' in output
 
 
+@pytest.mark.skipif(True,
+                    reason="We need a way to mock liveblog in tests")
 def test_article02_uses_esi(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/artikel/02' % testserver.url)
     blog = WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.ID, "livedesk-root")))
     assert blog.is_displayed(), 'ESI Liveblog not displayed'
+
+
+def test_article02_should_have_esi_include(testbrowser, testserver):
+    browser = testbrowser('%s/artikel/02' % testserver.url)
+    element = browser.cssselect('.wrapper__esi-content')[0]
+    assert element.getchildren()[0].tag == 'include'
 
 
 def test_article_has_linked_copyright(testserver, testbrowser):

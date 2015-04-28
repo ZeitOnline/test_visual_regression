@@ -5,7 +5,7 @@
 
 // A hack for Modernizr and AMD.
 // This lets Modernizr be in the <head> and also compatible with other modules.
-define('modernizr', [], window.Modernizr);
+define( 'modernizr', [], window.Modernizr );
 
 // load config first including path and shim config
 require([ 'config' ], function() {});
@@ -14,11 +14,13 @@ require([ 'config' ], function() {});
 require([
     'web.core/images',
     'web.site/video/videoStage',
-    'web.site/articledate'
-], function( images, videoStage, articledate ) {
+    'web.site/articledate',
+    'web.site/articlesharing'
+], function( images, videoStage, articledate, articlesharing ) {
     images.init();
     videoStage.init();
     articledate.init();
+    articlesharing.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here
@@ -35,7 +37,8 @@ require([
     'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.toggleBeta',
-    'web.site/plugins/jquery.selectNav'
+    'web.site/plugins/jquery.selectNav',
+    'web.site/plugins/jquery.infobox'
 ], function() {
     $( window ).referrerCount();
     $( '.main_nav__search' ).toggleSearch();
@@ -47,6 +50,7 @@ require([
     $( '.snapshot' ).snapshot();
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();
+    $( '.infobox' ).infobox();
     // comment out till we decide if it should be used and how (as)
     // $( '.footer-links__button' ).scrollUp();
 });
