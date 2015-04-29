@@ -72,6 +72,9 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
 
 
 class Solr(object):
+    """Half-baked mock Solr implementation that is used for local development.
+    Will eventually spit out random articles from the core/data folder.
+    """
 
     zope.interface.implements(zeit.solr.interfaces.ISolr)
 

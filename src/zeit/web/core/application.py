@@ -316,6 +316,9 @@ class Application(object):
             config[setting] = value
 
     def configure_overrides(self, context):
+        """Local development environments use an overrides zcml to allow
+        us to mock external dependencies or tweak the zope product config.
+        """
         if not self.settings.get('dev_environment'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
@@ -396,6 +399,12 @@ def join_url_path(base, path):
 
 
 def find_block(context, attrib='cp:__name__', **specs):
+    """Find a block (region/area/module/block/container/cluster, you name it)
+    in the XML of a given context. You can pass in arbitrary keyword arguments
+    that need to match the attributes of your desired block.
+    You may also need to override the name of the uuid attribute using the
+    attrib keyword.
+    """
     tpl = jinja2.Template("""
         .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
     """)
