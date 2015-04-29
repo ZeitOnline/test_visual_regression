@@ -346,7 +346,7 @@ module.exports = function(grunt) {
                 tasks: [ 'compass:dev' ]
             },
             livereload: {
-                // This target doesnt run any tasks
+                // This target doesn't run any tasks
                 // But when a file in `dist/css/*` is edited it will trigger the live reload
                 // So when compass compiles the files, it will only trigger live reload on
                 // the css files and not on the scss files
