@@ -1,17 +1,16 @@
 {% set module = module | get_module %}
 
 <form class="search-form">
-    <label for="query">{{ module.title }}</label>
-    <input type="text" name="q" id="query" value="{{ module.query }}"/>
+    <input type="text" name="q" id="query" value="{{ module.q }}"/>
 
-    {% for id, value, label in module.ranges %}
+    {% for id, checked, label in module.mode_choice %}
     <label for="{{ id }}">{{ label }}</label>
-    <input type="radio" id="{{ id }}" value="{{ value }}"/>
+    <input type="radio" name="mode" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
     {% endfor %}
 
-    {% for id, label in module.types %}
+    {% for id, checked, label in module.type_choice %}
     <label for="{{ id }}">{{ label }}</label>
-    <input type="checkbox" id="{{ id }}"/>
+    <input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
     {% endfor %}
 
     <input type="submit" id="search" value="Suchen"/>
