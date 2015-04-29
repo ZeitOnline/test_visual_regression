@@ -77,6 +77,7 @@ def comment_to_dict(comment):
     subject = comment.xpath('subject/text()')
     content_stripped = ''.join(BeautifulSoup(content).findAll(text=True))
     if (subject and not subject[0] == '[empty]' and
+            not subject[0] == '[...]' and
             not subject[0] == content_stripped[0:len(subject[0])]):
         content = u'<p>{}</p>{}'.format(comment.xpath('subject/text()')[0],
                                         content)
