@@ -32,7 +32,7 @@
 					<span class="comment__badge comment__badge--promoted" title="Redaktionsempfehlung">&#9733;</span>
 					{% endif %}
 					{% if comment.is_author %}
-					<span class="comment__badge icon-comment-zon-author-badge"></span>
+					<span class="comment__badge icon-comment-zon-author-badge" title="{{ comment.role }}"></span>
 					{% endif %}
 					<a class="comment__name" href="{{ comment.userprofile_url }}">
 						{{ comment.name | e }}
