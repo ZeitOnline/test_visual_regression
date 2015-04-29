@@ -273,7 +273,7 @@ endpoint_agatho = (
      'subject': '[empty]'}})
 
 endpoint_report = (
-    ('http://foo/services/json/',),
+    ('http://foo/services/json?callback=zeit',),
     {'cookies': {},
      'data': {
      'note': 'my comment',
@@ -283,7 +283,7 @@ endpoint_report = (
      'uid': '123', }})
 
 endpoint_recommend = (
-    ('http://foo/services/json/',),
+    ('http://foo/services/json?callback=zeit',),
     {'cookies': {},
      'data': {
      'content_id': '1',
@@ -293,15 +293,9 @@ endpoint_recommend = (
 
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
-    ('my/path', 'my comment', None, 'comment', endpoint_agatho),
-    ('my/path', None, '1', 'recommend', endpoint_recommend),
-    ('my/path', 'my comment', '1', 'report', endpoint_report)])
-def test_post_comments_should_post_with_correct_arguments(monkeypatch,
-                                                          path,
-                                                          comment,
-                                                          pid,
-                                                          result,
-                                                          action):
+    ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
+def test_post_comments_should_post_with_correct_arguments(
+        monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -321,10 +315,34 @@ def test_post_comments_should_post_with_correct_arguments(monkeypatch,
     assert result[0] == mock_method.call_args[0]
 
 
+@pytest.mark.parametrize("path, comment, pid, action, result", [
+    ('my/path', None, '1', 'recommend', endpoint_recommend),
+    ('my/path', 'my comment', '1', 'report', endpoint_report)])
+def test_post_comments_should_get_with_correct_arguments(
+        monkeypatch, path, comment, pid, result, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+    poster.request.params['comment'] = comment
+    poster.path = path
+    poster.request.params['action'] = action
+    poster.request.params['pid'] = pid
+    with patch.object(requests, 'get') as mock_method:
+        response = mock.Mock()
+        response.status_code = 200
+        mock_method.return_value = response
+        poster.post_comment()
+
+    expected = sorted(result[1]['data'].items(), key=operator.itemgetter(1))
+    actual = sorted(
+        mock_method.call_args[1]['data'].items(), key=operator.itemgetter(1))
+    assert actual == expected
+    assert result[0] == mock_method.call_args[0]
+
+
 @pytest.mark.parametrize("action, path, service", [
     ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
-    ('report', 'my/article', 'http://foo/services/json/')])
-def test_action_url_should_be_created_correctly(monkeypatch,
-                                                action, path, service):
+    ('report', 'my/article', 'http://foo/services/json?callback=zeit')])
+def test_action_url_should_be_created_correctly(
+        monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
