@@ -44,7 +44,6 @@ class PostComment(zeit.web.core.view.Base):
         pid = request.params.get('pid')
         comment = request.params.get('comment')
         action = request.params.get('action')
-        import pdb; pdb.set_trace()  # XXX BREAKPOINT
 
         if not request.method == "POST":
             raise pyramid.httpexceptions.HTTPInternalServerError(
@@ -82,7 +81,7 @@ class PostComment(zeit.web.core.view.Base):
         nid = self._nid_by_comment_thread(unique_id)
         action_url = self._action_url(action, self.path)
 
-
+        method = 'post'
         data = {'uid': uid}
         if action == 'comment' and self.path:
             data['nid'] = nid
@@ -90,19 +89,25 @@ class PostComment(zeit.web.core.view.Base):
             data['comment'] = comment
             data['pid'] = pid
         elif action == 'report' and pid:
+            method = 'get'
             data['note'] = comment
             data['content_id'] = pid
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
+            method = 'get'
             data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'leser_empfehlung'
 
-        response = requests.post(action_url, data=data,
-                                 cookies=dict(request.cookies))
+        response = getattr(requests, method)(
+            action_url,
+            data=data,
+            params=data,
+            cookies=dict(request.cookies),
+            allow_redirects=False)
 
-        if response.status_code >= 200 and response.status_code < 300:
+        if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('A comment for {} was posted'.format(
                 unique_id))
             # XXX: invalidate object from cache here!
@@ -120,14 +125,14 @@ class PostComment(zeit.web.core.view.Base):
         self.pid = pid
 
     def _action_url(self, action, path):
-        endpoint = 'services/json' if (
+        endpoint = 'services/json?callback=zeit' if (
             action in ['recommend', 'report']) else 'agatho/thread'
 
-        if endpoint == 'services/json':
+        if endpoint == 'services/json?callback=zeit':
             path = ''
 
         return '{}/{}/{}'.format(
-            self.community_host, endpoint, path)
+            self.community_host, endpoint, path).strip('/')
 
     def _nid_by_comment_thread(self, unique_id):
         comment_thread = zeit.web.core.comments.get_thread(unique_id)
@@ -183,8 +188,6 @@ class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)
         self.context = zeit.content.article.article.Article()
-        import pdb; pdb.set_trace()  # XXX BREAKPOINT
-
         self.post_comment()
 
 
