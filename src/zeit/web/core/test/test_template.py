@@ -425,7 +425,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(testserver):
     xml.attrib = {'visible': True, 'module': 'search-form'}
     block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
     assert isinstance(zeit.web.core.template.get_module(block),
-                      zeit.web.site.search.Search)
+                      zeit.web.site.search.Form)
 
     xml.attrib = {'visible': False, 'module': 'n/a'}
     block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
