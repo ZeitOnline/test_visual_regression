@@ -15,12 +15,14 @@ require([
     'web.core/images',
     'web.site/video/videoStage',
     'web.site/articledate',
-    'web.site/articlesharing'
-], function( images, videoStage, articledate, articlesharing ) {
+    'web.site/articlesharing',
+    'web.site/comments'
+], function( images, videoStage, articledate, articlesharing, comments ) {
     images.init();
     videoStage.init();
     articledate.init();
     articlesharing.init();
+    comments.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here
