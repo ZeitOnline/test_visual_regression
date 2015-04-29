@@ -14,9 +14,10 @@
         {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
     {% endif -%}
 
-    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
+    {% set wt_kennung_part = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
+    {% set wt_kennung = "%s|%s%s" | format(wt_kennung_part, request.host, request.path) %}
 
-    var Z_WT_KENNUNG = "{{ wt_kennung }}|{{ request.host + request.path }}";
+    var Z_WT_KENNUNG = "{{ wt_kennung }}";
 
     var webtrekk = {
         linkTrack : "standard",
@@ -36,7 +37,7 @@
             6: "{{ serie }}", // Cluster
             7: "{{ request.path_info | substring_from('/') }}", // doc-path
             8: "{{ view.banner_channel | lower }}", // Banner-Channel
-            9: "{{ date }}" // First Published
+            9: "{{ date }}" // {{ view.date_first_released | default("not published yet") }}
         };
 
         {% if view.type == "article" -%}
@@ -48,7 +49,7 @@
             4: "{{ view.ranked_tags_list | lower }}", // Schlagworte
             5: "{{ view.date_last_modified }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
-            7: "{{ view.source | hide_none | lower }}", // Quelle
+            7: "{{ view.news_source | hide_none | lower }}", // Quelle
             8: "{{ view.product_id | hide_none | lower }}", // Product-Id
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
@@ -63,11 +64,10 @@
 </script>
 <noscript>
     <div>
-        <img alt="" width="1" height="1" src="{{ "%s,%s.%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" |
+        <img alt="" width="1" height="1" src="{{ "%s,%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" |
             format(
-                "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311",
+                "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328",
                 wt_kennung,
-                request.path_info,
                 "redaktion",
                 view.tracking_type | lower,
                 view.ressort | lower,
@@ -85,12 +85,12 @@
             view.ranked_tags_list | lower,
             view.date_last_modified,
             view.text_length,
-            view.source | hide_none | lower,
+            view.news_source | hide_none | lower,
             view.product_id | hide_none | lower,
             view.banner_channel | lower,
             "",
             "",
-            ""
+            "desktop.site"
         ) }}{% endif -%}" />
     </div>
 </noscript>

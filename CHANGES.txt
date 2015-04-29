@@ -4,6 +4,10 @@ Change log for zeit.web
 1.20.5 (unreleased)
 -------------------
 
+- ZON-1628: fix/clearify vertical spaces on centerpages
+
+- ZON-1627: add some webtrekk features hidden as errors 
+
 - ZON-1660: Implement comment interface.
 
 - ZON-1535: Polishing comments & ZON author badge
