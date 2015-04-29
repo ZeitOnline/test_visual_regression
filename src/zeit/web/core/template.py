@@ -14,6 +14,7 @@ import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 
 import zeit.web
@@ -405,6 +406,15 @@ def topic_links(centerpage):
 @jinja2.contextfilter
 def call_macro_by_name(context, macro_name, *args, **kwargs):
     return context.vars[macro_name](*args, **kwargs)
+
+
+@zeit.web.register_filter
+def automatize(area):
+    return zeit.web.site.search.ResultsArea(area)  # WTAF?
+    try:
+        return zeit.web.site.search.IResultsArea(area)
+    except TypeError:
+        return area
 
 
 @zeit.web.register_global
