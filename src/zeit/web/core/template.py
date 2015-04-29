@@ -410,7 +410,9 @@ def call_macro_by_name(context, macro_name, *args, **kwargs):
 
 @zeit.web.register_filter
 def automatize(area):
-    return zeit.web.site.search.ResultsArea(area)  # WTAF?
+    """Fill an autmatic area with results from a search-form query."""
+    # Wtaf y u no zca? TODO: Make wurk.
+    return zeit.web.site.search.ResultsArea(area)
     try:
         return zeit.web.site.search.IResultsArea(area)
     except TypeError:
