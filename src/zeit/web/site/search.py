@@ -161,7 +161,6 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
             fl=FIELDS,
             **HIGHLIGHTING
         ))
-        __import__('pdb').set_trace()
         for block in self.context.values():
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
                     block) or not len(solr_result):
