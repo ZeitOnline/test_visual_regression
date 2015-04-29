@@ -109,7 +109,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
 
     # content _group
     assert '1: "redaktion",' in browser.contents
-    assert '2: "artikel",' in browser.contents
+    assert '2: "article",' in browser.contents
     assert '3: "lebensart",' in browser.contents
     assert '4: "online"' in browser.contents
     assert '5: "essen-trinken",' in browser.contents
@@ -125,6 +125,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '3: "1/7",' in browser.contents
     assert '4: "wein;italien;toskana;bologna;bozen;florenz;tübingen",' \
         in browser.contents
+    assert '5: "2013-07-30 17:20:50.176115+02:00",' in browser.contents
     assert '6: "4952",' in browser.contents
     assert '7: "",' in browser.contents
     assert '8: "zede",' in browser.contents
@@ -134,17 +135,19 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '12: window.innerWidth >= ivw_min_width ?' \
         ' \'desktop.site\' : \'mobile.site\''
 
-    # noscript
-    assert 'http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion' \
-        '.lebensart.essen-trinken.weinkolumne.article.online./artikel/03,0,0' \
-        ',0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=artikel&amp;cg3=lebensart&am' \
-        'p;cg4=online&amp;cg5=essen-trinken&amp;cg6=weinkolumne&amp;cg7=03&a' \
-        'mp;cg8=zeitmz/essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=an' \
-        'ne mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;cp3=1/7&am' \
-        'p;cp4=wein;italien;toskana;bologna;bozen;florenz;tübingen&amp;cp5=2' \
-        '013-07-30 17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede&' \
-        'amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;cp11=&amp;' \
-        'cp12=' in browser.contents
+    # noscript string
+    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
+            '.lebensart.essen-trinken.weinkolumne.article.online|%s:%s/'
+            'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
+            '&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-trinken&amp;cg6'
+            '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
+            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=zeitmz/'
+            'essenundtrinken/article&amp;cp3=1/7&amp;cp4=wein;italien;'
+            'toskana;bologna;bozen;florenz;tübingen&amp;cp5=2013-07-30 '
+            '17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
+            '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;'
+            'cp11=&amp;cp12=desktop'
+            '.site') % (testserver.host, testserver.port) in browser.contents
 
 
 def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
@@ -157,16 +160,18 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
     assert '3: "2/7",' in browser.contents
 
     # noscript
-    assert 'http://zeit01.webtrekk.net/981949533494636/wt.pl?p=311,redaktion.'\
-        'lebensart.essen-trinken.weinkolumne.article.online./artikel/03/seite'\
-        '-2,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=artikel&amp;cg3=lebensa'\
-        'rt&amp;cg4=online&amp;cg5=essen-trinken&amp;cg6=weinkolumne&amp;cg7='\
-        'seite-2&amp;cg8=zeitmz/essenundtrinken/article&amp;cg9=2013-07-30&am'\
-        'p;cp1=anne mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;cp3'\
-        '=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;tübingen&amp'\
-        ';cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8='\
-        'zede&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;cp11=&amp;'\
-        'cp12=' in browser.contents
+    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
+            'redaktion.lebensart.essen-trinken.weinkolumne.article.'
+            'online|%s:%s/artikel/03/seite-2,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
+            '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-'
+            'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
+            'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
+            'mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;'
+            'cp3=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;'
+            'tübingen&amp;cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952'
+            '&amp;cp7=&amp;cp8=zede&amp;cp9=zeitmz/essenundtrinken/article'
+            '&amp;cp10=&amp;cp11=&amp;cp12=desktop'
+            '.site') % (testserver.host, testserver.port) in browser.contents
 
 
 def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
@@ -181,20 +186,21 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '7: "test-cp-zmo",' in browser.contents
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
-    assert 'wt.pl?p=311,redaktion.lebensart...' \
-        'centerpage.online./zeit-magazin/test-cp/test-cp-zmo,' \
-        '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;' \
-        'cg3=lebensart&amp;cg4=online&amp;cg5=&amp;cg6=&amp;' \
-        'cg7=test-cp-zmo&amp;' \
-        'cg8=zeitmz/centerpage&amp;cg9=' in browser.contents
+    assert ('wt.pl?p=328,redaktion.lebensart...'
+            'centerpage.online|%s:%s/zeit-magazin/test-cp/test-cp-zmo,'
+            '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
+            'cg3=lebensart&amp;cg4=online&amp;cg5=&amp;cg6=&amp;'
+            'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
+            'cg9=') % (testserver.host, testserver.port) in browser.contents
 
 
 def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
     browser = testbrowser(
         '%s/artikel/06' % testserver.url)
     assert '6: "tödlichekeime",' in browser.contents
-    assert 'redaktion.zeit-magazin..tödlichekeime.' \
-        'article.online./artikel/06' in browser.contents
+    assert ('redaktion.zeit-magazin..tödlichekeime.'
+            'article.online|%s:%s/artikel/'
+            '06') % (testserver.host, testserver.port) in browser.contents
 
 
 def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):

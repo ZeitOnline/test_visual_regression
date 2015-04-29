@@ -261,8 +261,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def tracking_type(self):
-        if self.type == 'article':
-            return 'Artikel'
+        return self.type
 
     @zeit.web.reify
     def text_length(self):
@@ -322,6 +321,22 @@ class Article(zeit.web.core.view.Content):
                         self.date_print_published,
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
+
+    @zeit.web.reify
+    def news_source(self):
+        """1:1 implementation of questionable xslt construct"""
+
+        if self.context.ressort == 'News' and \
+           self.context.product.id == 'News':
+            return 'dpa'
+        elif self.context.product.id == 'SID':
+            return 'Sport-Informations-Dienst'
+        else:
+            try:
+                return self.context.copyrights.replace(
+                    ',', ';').replace(' ', '')
+            except(AttributeError):
+                return ""
 
     @property
     def copyrights(self):
