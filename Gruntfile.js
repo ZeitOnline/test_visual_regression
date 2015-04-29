@@ -88,6 +88,18 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/all-old-ie.*',
+                        '!' + project.sourceDir + 'sass/**/ie-navi.*'
+                    ],
+                    sourcemap: true,
+                    environment: 'development',
+                    outputStyle: 'expanded'
+                }
+            },
+            'dev-with-ie': {
+                options: {
                     sourcemap: true,
                     environment: 'development',
                     outputStyle: 'expanded'
@@ -332,6 +344,16 @@ module.exports = function(grunt) {
             compass: {
                 files: [ '<%= compass.options.sassDir %>' + '/**/*.s{a,c}ss' ],
                 tasks: [ 'compass:dev' ]
+            },
+            livereload: {
+                // This target doesn't run any tasks
+                // But when a file in `dist/css/*` is edited it will trigger the live reload
+                // So when compass compiles the files, it will only trigger live reload on
+                // the css files and not on the scss files
+                files: [ '<%= compass.options.cssDir %>' + '/**/*.css' ],
+                options: {
+                    livereload: true
+                }
             },
             icons: {
                 files: [ '<%= svgmin.magazin.cwd %>/*.svg', '<%= svgmin.website.cwd %>/*.svg' ],
