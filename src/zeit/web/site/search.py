@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import collections
 
 import grokcore.component
@@ -41,22 +42,23 @@ FIELDS = ' '.join([
 
 
 MODES = collections.OrderedDict([
-    ('today', (zeit.find.daterange.today_range, 'Heute')),
-    ('24h', (zeit.find.daterange.one_day_range, '24 Stunden')),
-    ('7d', (zeit.find.daterange.seven_day_range, '7 Tage')),
-    ('30d', (zeit.find.daterange.month_range, '30 Tage')),
-    ('1y', (zeit.find.daterange.year_range, '1 Jahr'))
+    (None, (None, u'keine Einschränkung')),
+    ('today', (zeit.find.daterange.today_range, u'Heute')),
+    ('24h', (zeit.find.daterange.one_day_range, u'24 Stunden')),
+    ('7d', (zeit.find.daterange.seven_day_range, u'7 Tage')),
+    ('30d', (zeit.find.daterange.month_range, u'30 Tage')),
+    ('1y', (zeit.find.daterange.year_range, u'1 Jahr'))
 ])
 
 
 TYPES = collections.OrderedDict([
-    ('article', 'Artikel'),
-    # ('author', 'Autor'),
-    # ('series', 'Serie'),
-    # ('comment', 'Kommentar'),
-    ('gallery', 'Fotostrecke'),
-    ('video', 'Video'),
-    # ('blog', 'Blogbeitrag')
+    ('article', u'Artikel'),
+    # ('author', u'Autor'),
+    # ('series', u'Serie'),
+    # ('comment', u'Kommentar'),
+    ('gallery', u'Fotostrecke'),
+    ('video', u'Video'),
+    # ('blog', u'Blogbeitrag')
 ])
 
 
