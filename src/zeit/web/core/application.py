@@ -7,6 +7,7 @@ import urlparse
 import warnings
 
 import grokcore.component
+import jinja2
 import jinja2.ext
 import pyramid.authorization
 import pyramid.config
@@ -22,9 +23,11 @@ import zope.interface
 import zope.interface.declarations
 
 import zeit.connector
-import zeit.content.gallery.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.gallery.interfaces
+import zeit.find.search
 import zeit.magazin.interfaces
+import zeit.solr.interfaces
 
 from zeit.web.core.article import IColumnArticle
 from zeit.web.core.article import IFeatureLongform
@@ -264,6 +267,7 @@ class Application(object):
         zope.configuration.xmlconfig.registerCommonDirectives(context)
         zope.configuration.xmlconfig.include(context, package=zeit.web.core)
         self.configure_connector(context)
+        self.configure_overrides(context)
         context.execute_actions()
 
     def configure_connector(self, context):
@@ -310,6 +314,12 @@ class Application(object):
             if key == 'vivi_zeit.connector_repository-path':
                 value = value.replace('file://', '')
             config[setting] = value
+
+    def configure_overrides(self, context):
+        # XXX: Maybe we should use a more generic env variable here.
+        if not self.settings.get('vivi_zeit.solr_solr-url'):
+            zope.configuration.xmlconfig.includeOverrides(
+                context, package=zeit.web.core, file='overrides.zcml')
 
     @property
     def pipeline(self):
@@ -386,6 +396,20 @@ def join_url_path(base, path):
         (parts[0], parts[1], path, parts[3], parts[4]))
 
 
+def find_block(context, attrib='cp:__name__', **specs):
+    tpl = jinja2.Template("""
+        .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
+    """)
+    unique_ids = context.xml.xpath(
+        tpl.render(attr=attrib, specs=specs.items()).strip(),
+        namespaces={'cp': 'http://namespaces.zeit.de/CMS/cp'})
+    try:
+        block = context.get_recursive(unique_ids[0])
+        return zeit.cms.interfaces.ICMSContent(block.uniqueId)
+    except (AttributeError, IndexError, TypeError):
+        return
+
+
 @grokcore.component.adapter(zeit.cms.repository.interfaces.IRepository)
 @grokcore.component.implementer(pyramid.interfaces.ITraverser)
 class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
@@ -393,7 +417,6 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def __call__(self, request):
         try:
             tdict = super(RepositoryTraverser, self).__call__(request)
-
             context = tdict['context']
 
             # Rewriting the context, if we have a CP2015
@@ -408,32 +431,55 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 pass
 
             if zeit.content.article.interfaces.IArticle.providedBy(context):
-                template = zeit.magazin.interfaces.IArticleTemplateSettings(
-                    context).template
-                # ToDo: Remove when Longform will be generally used on
-                # www.zeit.de. By then do not forget to remove marker
-                # interfaces from uniqueID http://xml.zeit.de/feature (RD)
-                path = urlparse.urlparse(context.uniqueId).path
-                if path[:9] == '/feature/':
-                    zope.interface.alsoProvides(context, IFeatureLongform)
-                elif template == 'longform':
-                    zope.interface.alsoProvides(context, ILongformArticle)
-                elif template == 'short':
-                    zope.interface.alsoProvides(context, IShortformArticle)
-                elif template == 'column':
-                    zope.interface.alsoProvides(context, IColumnArticle)
-                elif template == 'photocluster':
-                    zope.interface.alsoProvides(context, IPhotoclusterArticle)
+                self._handle_article(context, request)
+            elif zeit.content.cp.interfaces.ICenterPage.providedBy(context):
+                self._handle_centerpage(context, request)
             elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
-                ctx = zeit.content.gallery.interfaces.IGalleryMetadata(context)
-                if ctx.type == 'zmo-product':
-                    zope.interface.alsoProvides(context, IProductGallery)
-                else:
-                    zope.interface.alsoProvides(context, IGallery)
+                self._handle_gallery(context, request)
             return self._change_viewname(tdict)
         except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
+
+    def _handle_article(self, context, request):
+        template = zeit.magazin.interfaces.IArticleTemplateSettings(
+            context).template
+        # ToDo: Remove when Longform will be generally used on
+        # www.zeit.de. By then do not forget to remove marker
+        # interfaces from uniqueID http://xml.zeit.de/feature (RD)
+        if urlparse.urlparse(context.uniqueId).path.startswith('/feature/'):
+            zope.interface.alsoProvides(context, IFeatureLongform)
+        elif template == 'longform':
+            zope.interface.alsoProvides(context, ILongformArticle)
+        elif template == 'short':
+            zope.interface.alsoProvides(context, IShortformArticle)
+        elif template == 'column':
+            zope.interface.alsoProvides(context, IColumnArticle)
+        elif template == 'photocluster':
+            zope.interface.alsoProvides(context, IPhotoclusterArticle)
+
+    def _handle_gallery(self, context, request):
+        meta = zeit.content.gallery.interfaces.IGalleryMetadata(context)
+        if meta.type == 'zmo-product':
+            zope.interface.alsoProvides(context, IProductGallery)
+        else:
+            zope.interface.alsoProvides(context, IGallery)
+
+    def _handle_centerpage(self, context, request):
+        if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
+            form = find_block(context, module='search-form')
+            area = find_block(context, attrib='area', module='search-results')
+            if form and area:
+                form = zeit.web.core.template.get_module(form)
+                area = zeit.web.site.search.ResultsArea(area)
+
+                form['q'] = ' '.join(request.GET.getall('q'))
+                form['type'] = ' '.join(request.GET.getall('type'))
+                form['mode'] = request.GET.get('mode')
+                form['sort'] = request.GET.get('sort')
+
+                area.raw_query = form.raw_query
+                area.sort_order = form.sort_order
 
     def _change_viewname(self, tdict):
         if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
