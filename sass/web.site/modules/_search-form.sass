@@ -1,0 +1,52 @@
+%hidden-fieldset
+	border: none
+	margin: 0
+	padding: 0
+
+.search-form
+	background: $zon_lighter_grey
+	margin: remify(0 -20px)
+	padding: remify(25px 20px)
+
+.search-text-input
+	background: $white
+	border: 1px solid $zon_light_grey
+	height: remify(48px)
+	+display-flex
+	&__label
+		@extend %off-screen
+	&__input
+		border: none
+		padding: remify(10px)
+		+flex-grow(1)
+
+.search-submit
+	background: $white
+	border: none
+	border-left: 1px solid $zon_light_grey
+	height: remify(46px)
+	overflow: hidden
+	padding: 0
+	width: remify(46px)
+	&__icon
+		background-position: 50%
+		float: left
+		height: remify(46px)
+		width: remify(46px)
+	&__text
+		display: none
+		float: left
+
+.search-additional-queries
+	&__toggle
+	&__container
+		.js &
+			display: none
+
+.search-timerange
+	@extend %hidden-fieldset
+	&__legend
+
+.search-typerange
+	@extend %hidden-fieldset
+	&__legend
