@@ -206,3 +206,11 @@ $color-comment-border: $zon_light_grey
 	opacity: 0.55
 	vertical-align: text-bottom
 	width: remify(17px)
+	&--sending
+		+animation(rotate 1s linear infinite)
+
++keyframes(rotate)
+	from
+		+transform(rotate(0deg))
+	to
+		+transform(rotate(360deg))

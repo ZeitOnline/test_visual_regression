@@ -90,6 +90,7 @@ define([ 'jquery' ], function( $ ) {
         }
 
         hideOtherForms();
+        link.find( '.comment__icon' ).addClass( 'comment__icon--sending' );
 
         $.ajax({
             url: sendurl,
@@ -120,8 +121,9 @@ define([ 'jquery' ], function( $ ) {
                         link.toggleClass( 'comment__reaction--active' );
                         link.find( '.comment__icon' )
                             .toggleClass( 'icon-comment-reactions-recommend' )
-                            .toggleClass( 'icon-comment-reactions-recommend-active' );
-                        link.find( '.comment__action' ).html( label );
+                            .toggleClass( 'icon-comment-reactions-recommend-active' )
+                            .removeClass( 'comment__icon--sending' );
+                        link.find( '.comment__action' ).attr( 'title', label ).html( label );
 
                         recommendations.html( stars );
                     } else {

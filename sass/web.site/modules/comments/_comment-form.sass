@@ -23,6 +23,9 @@
 	&__cancel
 		margin: 0 remify(22px)
 		border-bottom-color: currentcolor !important
+		display: none
+		+respond-min(em(480px))
+			display: inline
 		+link
 			color: $zon_grey
 		+on-interaction
