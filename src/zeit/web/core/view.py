@@ -23,6 +23,8 @@ import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.date
 
+import zope.component
+
 log = logging.getLogger(__name__)
 
 
@@ -282,6 +284,11 @@ class Base(object):
     @zeit.web.reify
     def breaking_news(self):
         return zeit.web.core.block.BreakingNews()
+
+    @zeit.web.reify
+    def is_dev_environment(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('dev_environment', '')
 
 
 class Content(Base):
