@@ -44,6 +44,7 @@ class PostComment(zeit.web.core.view.Base):
         pid = request.params.get('pid')
         comment = request.params.get('comment')
         action = request.params.get('action')
+        import pdb; pdb.set_trace()  # XXX BREAKPOINT
 
         if not request.method == "POST":
             raise pyramid.httpexceptions.HTTPInternalServerError(
@@ -80,6 +81,7 @@ class PostComment(zeit.web.core.view.Base):
         unique_id = 'http://xml.zeit.de/{}'.format(self.path)
         nid = self._nid_by_comment_thread(unique_id)
         action_url = self._action_url(action, self.path)
+
 
         data = {'uid': uid}
         if action == 'comment' and self.path:
@@ -181,6 +183,8 @@ class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)
         self.context = zeit.content.article.article.Article()
+        import pdb; pdb.set_trace()  # XXX BREAKPOINT
+
         self.post_comment()
 
 
@@ -190,7 +194,7 @@ class PostCommentAdmin(PostComment):
     request_method='POST')
 class PostCommentResource(PostComment):
     def __init__(self, context, request):
-        super(PostCommentAdmin, self).__init__(context, request)
+        super(PostCommentResource, self).__init__(context, request)
         self.path = urlparse.urlparse(self.context.uniqueId)[2][1:]
 
     def __call__(self):
