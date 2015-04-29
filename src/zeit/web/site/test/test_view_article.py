@@ -201,6 +201,22 @@ def test_article_sharing_menu_should_open_and_close(
         'sharing menu should hide again on click')
 
 
+def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(768, 800)
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+
+    sharing_menu_target = driver.find_element_by_css_selector(
+        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+    whatsapp_item = driver.find_element_by_css_selector(
+        '.sharing-menu__item--whatsapp')
+
+    sharing_menu_target.click()
+    assert not(whatsapp_item.is_displayed()), (
+        'Sharing link to WhatsApp should be hidden on tablet & desktop')
+
+
 def test_infobox_in_article_is_shown(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url)).cssselect
