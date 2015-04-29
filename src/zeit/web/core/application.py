@@ -316,8 +316,7 @@ class Application(object):
             config[setting] = value
 
     def configure_overrides(self, context):
-        # XXX: Maybe we should use a more generic env variable here.
-        if not self.settings.get('vivi_zeit.solr_solr-url'):
+        if not self.settings.get('dev_environment'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
