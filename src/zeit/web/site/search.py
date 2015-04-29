@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import collections
 
 import grokcore.component
@@ -11,54 +10,54 @@ import zeit.content.cp.interfaces
 import zeit.find.daterange
 import zeit.find.search
 import zeit.solr.interfaces
+from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block
 
 
 FIELDS = ' '.join([
-    'date-last-published',
-    'graphical-preview-url-large',
-    'image-base-id',
-    'image-expires',
-    'image-type',
-    'image-xml',
-    'keyword',
-    'last-semantic-change',
-    'main_text',
-    'ns-meta-type',
-    'product_id',
-    'ressort',
-    'sub_ressort',
-    'subtitle',
-    'image',
-    'supertitle',
-    'teaser_text',
-    'title',
-    'type',
+    # 'date-last-published',
+    # 'graphical-preview-url-large',
+    # 'image-base-id',
+    # 'image-expires',
+    # 'image-type',
+    # 'image-xml',
+    # 'keyword',
+    # 'last-semantic-change',
+    # 'main_text',
+    # 'ns-meta-type',
+    # 'product_id',
+    # 'ressort',
+    # 'sub_ressort',
+    # 'subtitle',
+    # 'image',
+    # 'supertitle',
+    # 'teaser_text',
+    # 'title',
+    # 'type',
     'uniqueId',
-    'uuid'
+    # 'uuid'
 ])
 
 
 MODES = collections.OrderedDict([
-    (None, (None, u'keine Einschränkung')),
-    ('today', (zeit.find.daterange.today_range, u'Heute')),
-    ('24h', (zeit.find.daterange.one_day_range, u'24 Stunden')),
-    ('7d', (zeit.find.daterange.seven_day_range, u'7 Tage')),
-    ('30d', (zeit.find.daterange.month_range, u'30 Tage')),
-    ('1y', (zeit.find.daterange.year_range, u'1 Jahr'))
+    ('today', (zeit.find.daterange.today_range, 'Heute')),
+    ('24h', (zeit.find.daterange.one_day_range, '24 Stunden')),
+    ('7d', (zeit.find.daterange.seven_day_range, '7 Tage')),
+    ('30d', (zeit.find.daterange.month_range, '30 Tage')),
+    ('1y', (zeit.find.daterange.year_range, '1 Jahr'))
 ])
 
 
 TYPES = collections.OrderedDict([
-    ('article', u'Artikel'),
-    # ('author', u'Autor'),
-    # ('series', u'Serie'),
-    # ('comment', u'Kommentar'),
-    ('gallery', u'Fotostrecke'),
-    ('video', u'Video'),
-    # ('blog', u'Blogbeitrag')
+    ('article', 'Artikel'),
+    # ('author', 'Autor'),
+    # ('series', 'Serie'),
+    # ('comment', 'Kommentar'),
+    ('gallery', 'Fotostrecke'),
+    ('video', 'Video'),
+    # ('blog', 'Blogbeitrag')
 ])
 
 
@@ -76,17 +75,23 @@ HIGHLIGHTING = {
 }
 
 
-BOOSTS = [
-    '{!boost b=recip(ms(NOW,last-semantic-change),3.16e-11,1,1)}'
+BOOSTS = ''.join([
+    '{!boost b=recip(ms(NOW,last-semantic-change),3.16e-11,1,1)}',
     '{!type=IntrafindQueryParser}'
-]
+])
 
 
-ORDERS = collections.defaultdict(
-    lambda: 'score desc',
-    {'relevanz': 'score desc',
-     'aktuell': 'last-semantic-change desc'}
-)
+ORDERS = {
+    'relevanz': 'score desc',
+    'aktuell': 'last-semantic-change desc'
+}
+
+
+RESTRICTIONS = [lq.not_(lq._field(k, v)) for k, v in {
+    'product_id': lq.or_('News', 'afp', 'SID', 'ADV'),
+    'ressort': lq.or_('Administratives', 'News', 'Aktuelles'),
+    'expires': '[* TO NOW]'
+}.items()]
 
 
 @zeit.web.register_module('search-form')
@@ -125,24 +130,27 @@ class Form(zeit.web.core.block.Module):
     @zeit.web.reify
     def sort_order(self):
         this = self['sort']
-        return this in ORDERS and this or None
+        return this in ORDERS and this or 'relevanz'
 
     @zeit.web.reify
     def raw_query(self):
-        kw = {'published': 'true'}
+        tokens = collections.deque()
         if self.query:
-            kw['fulltext'] = self.query
+            tokens.append(BOOSTS + lq.quoted(self.query))
+            # TODO: Set sort order to latest.
         if self.mode:
-            kw['from_'], kw['until'] = MODES[self.mode][0]()
-        if self.types:
-            kw['types'] = self.types
-        query = zeit.find.search.query(**kw)
-        return ''.join(BOOSTS + [query])
+            tokens.append(lq.datetime_range(
+                'last-semantic-change', *MODES[self.mode][0]()))
+        tokens.append(
+            lq._field('type', lq.or_(*(self.types or TYPES.keys()))))
+        tokens.extend(RESTRICTIONS)
+        return ' '.join(tokens)
 
 
 class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
 
-    sort_order = zope.schema.TextLine(default=u'score desc', required=False)
+    sort_order = zope.schema.TextLine(
+        title=u'Search result order', default=u'score desc', required=False)
 
 
 @grokcore.component.implementer(IResultsArea)
@@ -156,13 +164,8 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
         solr_result = list(conn.search(
-            self.raw_query,
-            # sort=self.sort_order,
-            sort='score desc',
-            rows=self.count,
-            fl=FIELDS,
-            **HIGHLIGHTING
-        ))
+            self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
+            fl=FIELDS, **HIGHLIGHTING))
         for block in self.context.values():
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
                     block) or not len(solr_result):
