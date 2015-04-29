@@ -294,8 +294,7 @@ class LegacyCenterpage(Centerpage):
 
             if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
                 area = zeit.web.site.spektrum.HPFeed()
-                # XXX: This should be re-organized into something like
-                #      zeit.web.modules.Spektrum and selected automatically.
+                # XXX: This should be re-organized into a registered module.
             else:
                 modules = [LegacyModule([t], layout=layout) for t in m][
                     :getattr(m, 'display_amount', 3)]
