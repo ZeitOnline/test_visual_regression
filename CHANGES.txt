@@ -36,8 +36,6 @@ Change log for zeit.web
 
 - BUG-241: Set default image for Brightcove
 
-- BUG-241: Save brightcove images to HD
-
 - BUG-241: Save brightcove images to disk
 
 
