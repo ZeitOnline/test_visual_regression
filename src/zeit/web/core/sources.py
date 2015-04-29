@@ -2,6 +2,7 @@ import logging
 import re
 
 import lxml.etree
+import pysolr
 import zope.interface
 
 import zeit.imp.source
@@ -68,3 +69,26 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
         # Flattens and reverses _map, so we can easily lookup a layout.
         super(TeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
+
+
+class Solr(object):
+
+    zope.interface.implements(zeit.solr.interfaces.ISolr)
+
+    def add(self, docs, **kw):
+        raise NotImplementedError()
+
+    def commit(self, **kw):
+        raise NotImplementedError()
+
+    def delete(self, **kw):
+        raise NotImplementedError()
+
+    def more_like_this(self, q, mltfl, **kw):
+        raise NotImplementedError()
+
+    def search(self, q, **kw):
+        return pysolr.Results([], 0)
+
+    def update_raw(self, xml, **kw):
+        raise NotImplementedError()
