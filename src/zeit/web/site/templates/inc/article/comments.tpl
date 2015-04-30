@@ -65,35 +65,6 @@
 	{% endfor %}
 {% endif %}
 
-{% if view.request.authenticated_userid -%}
-	<form class="comment-form" action="{{ view.comments.comment_post_url }}" method="POST" id="comment-form">
-		<div class="">
-	        {% if view.request.session.user.picture %}
-			<img class="comment-form__avatar" alt="Avatarbild von {{ view.request.session.user.name | e }}" src="{{ view.request.session.user.picture }}">
-			{% endif %}
-			Angemeldet als
-			<a class="comment-form__username" href="{{ view.request.registry.settings.community_host }}/user/{{ view.request.session.user.uid }}">
-				{{ view.request.session.user.name | e }}
-			</a>
-			<!-- Abmelden -->
-		</div>
-		<textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500"></textarea>
-		<input type="hidden" name="nid" value="{{ view.comments.nid }}">
-		<input type="hidden" name="pid" value="">
-		<input type="hidden" name="uid" value="{{ view.request.session.user.uid }}">
-		<input class="comment-form__submit" type="submit" value="Kommentar senden" />
-	</form>
-{% else -%}
-	<div class="comment-login" id="comment-form">
-		<div class="comment-login__cta">
-			Bitte melden Sie sich an, um zu kommentieren.
-		</div>
-		<a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}">
-			Anmelden
-		</a>
-		<a class="comment-login__button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}">
-			Registrieren
-		</a>
-	</div>
-{% endif -%}
+<esi:include src="{{ view.article_url }}/comment-form" />
+
 </section>

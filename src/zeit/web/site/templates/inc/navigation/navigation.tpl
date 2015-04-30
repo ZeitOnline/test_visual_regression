@@ -20,7 +20,7 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		<a href="//{{ view.request.registry.settings.community_host }}/user/login?destination=http://{{ view.request.host }}/index" rel="nofollow" class="user" id="drupal_login">
+		<a href="{{ view.request.registry.settings.community_host }}/user/login?destination=http://{{ view.request.host }}/index" rel="nofollow" class="user" id="drupal_login">
 			<span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
 			Anmelden
 		</a>

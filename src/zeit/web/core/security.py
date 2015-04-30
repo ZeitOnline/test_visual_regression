@@ -54,7 +54,8 @@ def get_community_user_info(request):
 
     try:
         community_response = urllib2.urlopen(community_request, timeout=3)
-    except urllib2.URLError:
+    except Exception:
+        # Catch any possible socket error occuring through community requests.
         return user_info
 
     try:
