@@ -379,7 +379,7 @@ def pluralize(num, *forms):
         num = int(num)
     except ValueError:
         num = 0
-    return forms[min(len(forms) - 1, num - 1):][0] % num
+    return forms[min(len(forms) - 1, num):][0].format(num)
 
 
 @zeit.web.register_filter

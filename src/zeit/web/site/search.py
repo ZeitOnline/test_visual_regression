@@ -1,4 +1,5 @@
 import collections
+import logging
 
 import grokcore.component
 import zope.component
@@ -14,6 +15,9 @@ from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block
+
+
+log = logging.getLogger(__name__)
 
 
 FIELDS = ' '.join([
@@ -129,6 +133,8 @@ class Form(zeit.web.core.block.Module):
 
     @zeit.web.reify
     def sort_order(self):
+        if self.query in (None, lq.any_value()):
+            return 'aktuell'
         this = self['sort']
         return this in ORDERS and this or 'relevanz'
 
@@ -137,7 +143,6 @@ class Form(zeit.web.core.block.Module):
         tokens = collections.deque()
         if self.query:
             tokens.append(BOOSTS + lq.quoted(self.query))
-            # TODO: Set sort order to latest.
         if self.mode:
             tokens.append(lq.datetime_range(
                 'last-semantic-change', *MODES[self.mode][0]()))
@@ -152,6 +157,9 @@ class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'score desc', required=False)
 
+    hits = zope.schema.Int(
+        title=u'Search result count', default=None, required=False)
+
 
 @grokcore.component.implementer(IResultsArea)
 @grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
@@ -160,18 +168,55 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IResultsArea['sort_order'])
 
+    query = zeit.cms.content.property.ObjectPathProperty(
+        '.query', IResultsArea['query'])
+
+    _hits = zeit.cms.content.property.ObjectPathProperty(
+        '.hits', IResultsArea['hits'])
+
     def values(self):
+        return self._values
+
+    @zeit.web.reify
+    def _values(self):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        solr_result = list(conn.search(
+        solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, **HIGHLIGHTING))
+            fl=FIELDS, **HIGHLIGHTING)
+        docs = list(solr_result)
+        self.hits = solr_result.hits
         for block in self.context.values():
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
-                    block) or not len(solr_result):
+                    block) or not len(docs):
                 result.append(block)
                 continue
-            block.insert(0, zeit.cms.interfaces.ICMSContent(
-                self._extract_newest(solr_result)))
+            unique_id = self._extract_newest(docs)
+            try:
+                block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
+            except TypeError, err:
+                log.debug('Corrupt search result', err)
             result.append(block)
         return result
+
+    @property
+    def hits(self):
+        if self._hits is None:
+            return len(self.values()) and self._hits
+
+    @hits.setter
+    def hits(self, value):
+        if self._hits is None:
+            self._hits = value
+
+    @zeit.web.reify
+    def pagination(self):
+        return [1, None, 2, 3, None, 8]
+
+    @zeit.web.reify
+    def current_page(self):
+        return 2
+
+    @zeit.web.reify
+    def next_page(self):
+        return 3

@@ -7,6 +7,7 @@ import re
 import urlparse
 
 import lxml.etree
+import pysolr
 import zope.interface
 
 import zeit.cms.interfaces
@@ -103,6 +104,7 @@ class Solr(object):
                 continue  # Skip some folders to speed things up.
             for filename in files:
                 try:
+                    assert not filename.endswith('meta')
                     unique_id = os.path.join(
                         root.replace(repo, 'http://xml.zeit.de'), filename)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
@@ -111,7 +113,8 @@ class Solr(object):
                     results.append({u'uniqueId': content.uniqueId})
                 except (AssertionError, TypeError):
                     continue
-        return random.sample(results, min(rows, len(results)))
+        return pysolr.Results(
+            random.sample(results, min(rows, len(results))), len(results))
 
     def update_raw(self, xml, **kw):
         raise NotImplementedError()

@@ -3,7 +3,7 @@
 <form class="search-form">
     <div class="search-text-input">
         <label for="query" class="search-text-input__label">Suchbegriff</label>
-        <input type="text" name="q" id="query" value="{% if module.q is not none %}{{ module.q }}{% endif %}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
+        <input type="text" name="q" id="query" value="{{ module.q | hide_none }}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
         <button type="submit" id="search" value="Suchen" class="search-submit">
             <span class="search-submit__icon icon-zon-logo-navigation_suche"></span>
             <span class="search-submit__text">Suchen</span>
