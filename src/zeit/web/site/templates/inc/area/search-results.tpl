@@ -4,16 +4,16 @@
 
 {% block before_module_list %}
 <div class="search-counter">
-    <h2>
+    <div class="search-counter__hits">
         {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }}
         {% if area.query %}f&uuml;r &raquo;{{ area.query }}&laquo;{% endif %}
-    </h2>
-    <p>
-        Sortieren nach
-        <a style="text-decoration:underline;" href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
-        <a style="text-decoration:underline;" href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
-    </p>
-<div>
+    </div>
+    <nav>
+        <span class="search-counter__label">Sortieren nach</span>
+        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
+        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
+    </nav>
+</div>
 {% endblock %}
 
 {% block after_module_list %}
