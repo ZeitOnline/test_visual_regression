@@ -178,7 +178,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                 '[accept-charset="utf-8"]'
                 '[method="get"]'
                 '[role="search"]'
-                '[action="//www.zeit.de/suche/index"]')[0] is not None, (
+                '[action$="suche/index"]')[0] is not None, (
         'Form element is not present')
     assert html('label.hideme[for="q"]')[0] is not None, (
         'Hide me label is not present')
@@ -334,7 +334,7 @@ def test_cp_has_valid_search_structure(testserver, testbrowser):
                 '[accept-charset="utf-8"]'
                 '[method="get"]'
                 '[role="search"]'
-                '[action="http://www.zeit.de/suche/index"]') is not None, (
+                '[action$="suche/index"]') is not None, (
         'Element form.search is invalid')
     assert html('label.hideme[for="q"]') is not None, (
         'label.hideme is invalid')
@@ -471,7 +471,7 @@ def test_nav_search_is_working_as_expected(
     search__input.send_keys('test')
     search__button.click()
 
-    assert driver.current_url == 'http://www.zeit.de/suche/index?q=test'
+    assert driver.current_url.endswith('suche/index?q=test')
 
 
 @pytest.mark.xfail(reason='Maybe a problem with tear down. Runs isolated.')

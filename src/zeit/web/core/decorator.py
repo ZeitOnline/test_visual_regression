@@ -3,6 +3,10 @@ import sys
 import pyramid
 import pyramid.decorator
 import venusian
+import zope.component
+
+import zeit.content.cp.interfaces
+import zeit.edit.interfaces
 
 import zeit.web.core.interfaces
 
@@ -67,3 +71,39 @@ class reify(pyramid.decorator.reify):
         except:
             exc, val, tb = sys.exc_info()
             raise exc, val, tb
+
+
+def register_module(name):
+    """Register a CPExtra implementation for a RAM-style module using the
+    cpextra name as an adapter identifier.
+
+    Usage example:
+    First, implement your module class in python
+
+    @zeit.web.register_module('ice-cream-truck')
+    class IceCreamTruck(object):
+        @zeit.web.reify
+        def flavours(self):
+            return ('chocolate', 'vanilla', 'cherry')
+
+    Register the module in the cpextra.xml file, so it's available in vivi
+
+    <cpextra for="zeit.content.cp.interfaces.IArea" id="ice-cream-truck">
+        Sell some ice cream on your centerpage!
+    </cpextra>
+
+    Create a template in site/templates/inc/modules/ice-cream-truck.tpl
+
+    {% for f in module.flavours %}
+        <img src="//images.zeit.de/ice-cream-assets/{{ f }}.jpg"/>
+    {% endfor %}
+
+    That's it.
+    """
+
+    def registrator(cls):
+        gsm = zope.component.getGlobalSiteManager()
+        gsm.registerAdapter(cls, (zeit.content.cp.interfaces.ICPExtraBlock,),
+                            zeit.edit.interfaces.IBlock, name)
+        return cls
+    return registrator

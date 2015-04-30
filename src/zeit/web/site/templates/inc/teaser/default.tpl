@@ -41,7 +41,7 @@
                 {% block teaser_commentcount %}
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments %}
-                        {% set comments_string = comments | pluralize('%s Kommentar', '%s Kommentare') %}
+                        {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
                         <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
                     {% endif %}
                 {% endblock %}

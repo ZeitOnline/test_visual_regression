@@ -556,3 +556,21 @@ class BreakingNews(object):
             zeit.cms.workflow.interfaces.IPublishInfo(
                 bn_article).date_last_published_semantic)
         self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
+
+
+class Module(object):
+    """Base class for RAM-style modules to be used in cp2015 centerpages."""
+
+    def __init__(self, context):
+        self.context = context
+
+    def __hash__(self):
+        return self.context.xml.attrib.get(
+            '{http://namespaces.zeit.de/CMS/cp}__name__',
+            super(Module, self).__hash__())
+
+    def __eq__(self, other):
+        return hash(self) == hash(other)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)

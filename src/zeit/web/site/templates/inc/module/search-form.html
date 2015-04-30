@@ -1,0 +1,41 @@
+{% set module = module | get_module %}
+
+<form class="search-form">
+    <div class="search-text-input">
+        <label for="query" class="search-text-input__label">Suchbegriff</label>
+        <input type="text" name="q" id="query" value="{{ module.q | hide_none }}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
+        <button type="submit" id="search" value="Suchen" class="search-submit">
+            <span class="search-submit__icon icon-zon-logo-navigation_suche"></span>
+            <span class="search-submit__text">Suchen</span>
+        </button>
+    </div>
+    
+    <div class="search-additional-queries">
+        <span class="search-additional-queries__on">+ Suchergebnis eingrenzen</span>
+        <div class="search-additional-queries__container search-additional-queries__container--hidden">
+            <fieldset class="search-timerange">
+                <legend class="search-timerange__legend icon-dropdown-closed">Datum eingrenzen</legend>
+                <div class="search-timerange__extend search-timerange__extend--hidden">
+                    {% for id, checked, label in module.mode_choice %}
+                    <div class="search-timerange__group">
+                        <input type="radio" name="mode" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
+                        <label class="search-timerange__label" for="{{ id }}">{{ label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </fieldset>
+            <fieldset class="search-typerange">
+                <legend class="search-typerange__legend icon-dropdown-closed">Typ eingrenzen</legend>
+                <div class="search-typerange__extend search-typerange__extend--hidden">
+                    {% for id, checked, label in module.type_choice %}
+                    <div class="search-typerange__group">
+                        <input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
+                        <label class="search-typerange__label" for="{{ id }}">{{ label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </fieldset>
+            <span class="search-additional-queries__off icon-zon-logo-navigation_close"></span>
+        </div>
+    </div>
+</form>
