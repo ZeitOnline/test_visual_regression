@@ -39,16 +39,16 @@ def mod_date(resource):
 
 
 @zeit.web.register_global
-def get_delta_time(article, base_date=None):
+def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
     if modification is not None:
-        dt = DeltaTime(modification.replace(tzinfo=None), base_date)
-        return dt.get_time_since_modification()
+        return get_delta_time_from_datetime(modification.replace(tzinfo=None),
+                                            base_date)
 
 
 @zeit.web.register_global
-def get_delta_time_from_datetime(datetime):
-    dt = DeltaTime(datetime)
+def get_delta_time_from_datetime(datetime, base_date=None):
+    dt = DeltaTime(datetime, base_date)
     return dt.get_time_since_modification()
 
 

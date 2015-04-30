@@ -466,7 +466,7 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
         return pyramid.response.Response('Invalid resource', 500)
     json_dt = {'delta_time': []}
     for article in zeit.web.site.view_centerpage.Centerpage(content, request):
-        time = zeit.web.core.date.get_delta_time(
+        time = zeit.web.core.date.get_delta_time_from_article(
             article, base_date=parsed_base_date)
         if time:
             json_dt['delta_time'].append(
