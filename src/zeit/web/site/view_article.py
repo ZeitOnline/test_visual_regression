@@ -23,6 +23,7 @@ log = logging.getLogger(__name__)
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.site.view.is_zon_content,),
+             request_method='GET',
              renderer='templates/article.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.site.view.is_zon_content,),
