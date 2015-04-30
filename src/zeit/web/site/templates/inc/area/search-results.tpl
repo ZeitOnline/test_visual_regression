@@ -8,7 +8,11 @@
         {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }}
         {% if area.query %}f&uuml;r &raquo;{{ area.query }}&laquo;{% endif %}
     </h2>
-    <p>Sortieren nach <a href={{ '#' }}>Relevanz</a> <a href={{ '#' }}>Aktualit&auml;t</a></p>
+    <p>
+        Sortieren nach
+        <a href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
+        <a href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
+    </p>
 <div>
 {% endblock %}
 
