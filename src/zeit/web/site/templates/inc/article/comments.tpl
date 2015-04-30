@@ -2,7 +2,7 @@
 	<div class="comment-section__head">
 	{% if view.comments and view.comments.comment_count %}
 		<span class="comment-section__headline">
-			{{ view.comments.comment_count | pluralize('{} Kommentar', '{} Kommentare') }}
+			{{ view.comments.comment_count | pluralize('{} Kommentare', '{} Kommentar', '{} Kommentare') }}
 		</span>
 		<a href="#comment-form" class="comment-section__button button">
 			Kommentieren
