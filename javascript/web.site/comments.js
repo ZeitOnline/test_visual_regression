@@ -10,6 +10,7 @@ define([ 'jquery' ], function( $ ) {
 
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
+        $commentForm = $( '#comment-form' ),
         slideDuration = 300,
         startEvent = ( 'ontouchstart' in window ) ? 'touchstart' : 'click',
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
@@ -27,7 +28,7 @@ define([ 'jquery' ], function( $ ) {
         this.blur();
 
         if ( !form.length ) {
-            form = $( '#comment-form' )
+            form = $commentForm
                 .clone()
                 .removeAttr( 'id' )
                 .addClass( 'js-reply-form' )
@@ -70,14 +71,14 @@ define([ 'jquery' ], function( $ ) {
             link = $( this ),
             comment = link.closest( '.comment__container' ),
             sendurl = $commentsBody.attr( 'data-action' ),
-            authenticated = $commentsBody.attr( 'data-auth' ),
+            authenticated = $commentForm.hasClass( 'comment-form' ),
             form,
             template;
 
         e.preventDefault();
         this.blur();
 
-        if ( authenticated === 'false' ) {
+        if ( !authenticated ) {
             form = comment.find( '.js-recommend-form' );
 
             if ( !form.length ) {

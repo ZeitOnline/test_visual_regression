@@ -20,7 +20,7 @@
 	</div>
 
 {% if view.comments %}
-	<div id="js-comments-body" data-action="{{ view.comments.comment_report_url }}" data-auth="{% if request.authenticated_userid %}true{% else %}false{% endif %}">
+	<div id="js-comments-body" data-action="{{ view.comments.comment_report_url }}">
 	{% for comment in view.comments.comments[:20] %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
@@ -58,10 +58,17 @@
 						<span class="comment__icon icon-comment-reactions-report"></span>
 						<span class="comment__action">Melden</span>
 					</a>
+					{% if comment.is_recommended -%}
+					<a class="comment__reaction comment__reaction--active js-recommend-comment" data-cid="{{ comment.cid }}" href="#cid-{{ comment.cid }}" title="Empfohlen">
+						<span class="comment__icon icon-comment-reactions-recommend-active"></span>
+						<span class="comment__action">Empfohlen</span>
+					</a>
+					{% else -%}
 					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" href="#cid-{{ comment.cid }}" title="Empfehlen">
 						<span class="comment__icon icon-comment-reactions-recommend"></span>
 						<span class="comment__action">Empfehlen</span>
 					</a>
+					{% endif -%}
 				</div>
 			</div>
 		</article>
@@ -106,6 +113,12 @@
 		</form>
 	{% endif -%}
 	</div>
+
+	<script type="text/template" id="js-report-success-template">
+		<div class="comment-form__response--success">
+			Danke! Ihre Meldung wird an die Redaktion weitergeleitet.
+		</div>
+	</script>
 
 	<script type="text/template" id="js-report-comment-template">
 		{% if request.authenticated_userid -%}

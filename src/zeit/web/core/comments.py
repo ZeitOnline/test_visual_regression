@@ -6,6 +6,7 @@ import datetime
 import requests
 import requests.exceptions
 from BeautifulSoup import BeautifulSoup
+import pyramid.threadlocal
 import repoze.lru
 
 import zeit.cms.interfaces
@@ -32,7 +33,6 @@ def comment_to_dict(comment):
     """
 
     # TODO: Avoid repeatedly evaluating xpaths.
-    is_author = False
     if comment.xpath('author/@roles'):
         roles = comment.xpath('author/@roles')[0]
         is_author = 'author' in roles
@@ -53,6 +53,7 @@ def comment_to_dict(comment):
         roles = [roles_words['%s_%s' % (role, gender)] for role in roles
                  if '%s_%s' % (role, gender) in roles_words]
     else:
+        is_author = False
         roles = []
 
     if comment.xpath('author/@picture'):
@@ -70,6 +71,14 @@ def comment_to_dict(comment):
         content = comment.xpath('content/text()')[0]
     else:
         content = '[fehler]'
+
+    request = pyramid.threadlocal.get_current_request()
+    if request.authenticated_userid:
+        is_recommended = bool(len(
+            comment.xpath('flagged[@type="{}"][@userid="{}"]'.format(
+                'leser_empfehlung', request.authenticated_userid))))
+    else:
+        is_recommended = False
 
     # We have the drupal behaviour that the subject is partly coypied from the
     # comment itself, if a subject was not set. This leads to a slightly more
@@ -104,6 +113,7 @@ def comment_to_dict(comment):
             comment.xpath('flagged[@type="leser_empfehlung"]')),
         is_author=is_author,
         is_reply=bool(in_reply),
+        is_recommended=is_recommended,
         is_promoted=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
     )
