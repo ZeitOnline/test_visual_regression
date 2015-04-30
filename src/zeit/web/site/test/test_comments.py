@@ -14,7 +14,7 @@ def test_comments_should_contain_basic_meta_data(
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     comm = browser.cssselect('article.comment')[0]
     assert 'Skarsgard' in comm.cssselect('.comment__name')[0].text
-    date = zeit.web.core.template.format_date_ago(
+    date = zeit.web.core.template.format_date(
         datetime.datetime(2013, 8, 16, 20, 24))
     assert date in comm.cssselect('.comment__date')[0].text
     assert '#1' in comm.cssselect('.comment__date')[0].text
