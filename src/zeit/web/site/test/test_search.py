@@ -4,6 +4,7 @@ import pytest
 
 import zeit.cms.interfaces
 
+import zeit.web.core.sources
 import zeit.web.site.search
 import zeit.web.core.application
 
@@ -13,7 +14,17 @@ def search_form(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
     return zeit.web.core.template.get_module(
-        zeit.web.core.application.find_block(context, module='search-form'))
+        zeit.web.core.application.find_block(
+            context, module='search-form'))
+
+
+@pytest.fixture
+def search_area(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/suche/index')
+    return zeit.web.core.template.get_module(
+        zeit.web.core.application.find_block(
+            context, attrib='area', module='search-results'))
 
 
 def test_search_form_should_allow_empty_query(search_form):
@@ -129,3 +140,13 @@ def test_search_form_should_create_valid_type_restricted_query(search_form):
         'type:(article OR gallery OR video) NOT expires:[* TO NOW] NOT '
         'product_id:(News OR afp OR SID OR ADV) NOT ressort:(Administratives '
         'OR News OR Aktuelles)')
+
+
+@pytest.mark.xfail(reason='TGIT')
+def test_search_area_should_set_hit_counter_to_zero(search_area):
+    pass
+
+
+@pytest.mark.xfail(reason='TGIT')
+def test_search_area_should_produce_valid_set_of_search_results(search_area):
+    pass
