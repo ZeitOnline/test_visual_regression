@@ -104,6 +104,7 @@ class Solr(object):
                 continue  # Skip some folders to speed things up.
             for filename in files:
                 try:
+                    assert not filename.endswith('meta')
                     unique_id = os.path.join(
                         root.replace(repo, 'http://xml.zeit.de'), filename)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
