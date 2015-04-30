@@ -1,3 +1,10 @@
+{% set pid = view.request.GET['commentpid'] %}
+{% if pid %}
+	{% set submit_value = 'Antwort senden' %}
+{% else %}
+	{% set submit_value = 'Kommentar senden' %}
+{% endif %}
+
 {% if view.request.authenticated_userid -%}
 	<form class="comment-form" action="{{ view.comments.comment_post_url }}" method="POST" id="comment-form">
 		<div class="">
@@ -12,9 +19,9 @@
 		</div>
 		<textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500"></textarea>
 		<input type="hidden" name="nid" value="{{ view.comments.nid }}">
-		<input type="hidden" name="pid" value="{{ view.request.GET['commentpid'] }}">
+		<input type="hidden" name="pid" value="{{ pid }}">
 		<input type="hidden" name="uid" value="{{ view.request.session.user.uid }}">
-		<input class="comment-form__submit" type="submit" value="Kommentar senden" />
+		<input class="comment-form__submit" type="submit" value="{{ submit_value }}" />
 	</form>
 {% else -%}
 	<div class="comment-login" id="comment-form">
