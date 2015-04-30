@@ -161,6 +161,7 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
 
     # Read more about sorting in multiple passes here:
     # docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
+    comments = list(comment_to_dict(c) for c in comment_list)
     comments = sorted(comments, key=lambda x: x['cid'])
     comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
                       reverse=reverse)
