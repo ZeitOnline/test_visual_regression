@@ -168,6 +168,9 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IResultsArea['sort_order'])
 
+    query = zeit.cms.content.property.ObjectPathProperty(
+        '.query', IResultsArea['query'])
+
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', IResultsArea['hits'])
 
@@ -205,3 +208,14 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     def hits(self, value):
         if self._hits is None:
             self._hits = value
+
+    @property
+    def pagination(self):
+        return [
+            ('1', '#', False),
+            (None, None, False),
+            ('2', '#', True),
+            ('3', '#', False),
+            (None, None, False),
+            ('8', '#', False)
+        ]
