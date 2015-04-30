@@ -39,6 +39,7 @@ require.config({
         'web.site/plugins/jquery.togglenavi': [ 'jquery' ],
         'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
         'web.site/plugins/jquery.infobox': [ 'jquery' ],
+        'web.site/plugins/jquery.searchTools': [ 'jquery' ],
         'sjcl': {
             exports: 'sjcl'
         },

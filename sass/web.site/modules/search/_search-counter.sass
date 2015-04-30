@@ -1,0 +1,22 @@
+.search-counter
+	padding: 20px 0
+	&__hits
+		font-size: remify(24px)
+		font-weight: bold
+	&__label
+		font-size: remify(12px)
+	&__link
+		font-size: remify(12px)
+		margin-left: remify(15px)
+		+link
+			color: $zon_grey
+			font-size: remify(12px)
+			text-decoration: none
+		+on-interaction
+			border-bottom-color: rgba($color-link--hover, .5)
+		&--marked
+			color: $zon-charcoal
+			border-bottom: 1px solid $zon-charcoal
+			+link
+				color: $zon-charcoal
+				border-bottom: 1px solid $zon-charcoal

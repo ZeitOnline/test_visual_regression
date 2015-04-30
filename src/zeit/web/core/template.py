@@ -14,6 +14,7 @@ import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 
 import zeit.web
@@ -378,7 +379,7 @@ def pluralize(num, *forms):
         num = int(num)
     except ValueError:
         num = 0
-    return forms[min(len(forms) - 1, num - 1):][0] % num
+    return forms[min(len(forms) - 1, num):][0].format(num)
 
 
 @zeit.web.register_filter
@@ -405,6 +406,17 @@ def topic_links(centerpage):
 @jinja2.contextfilter
 def call_macro_by_name(context, macro_name, *args, **kwargs):
     return context.vars[macro_name](*args, **kwargs)
+
+
+@zeit.web.register_filter
+def automatize(area):
+    """Fill an autmatic area with results from a search-form query."""
+    # Wtaf y u no zca? TODO: Make wurk.
+    return zeit.web.site.search.ResultsArea(area)
+    try:
+        return zeit.web.site.search.IResultsArea(area)
+    except TypeError:
+        return area
 
 
 @zeit.web.register_global
@@ -566,6 +578,19 @@ def get_image_group(asset):
         return zeit.content.image.interfaces.IImageGroup(asset)
     except TypeError:
         return
+
+
+@zeit.web.register_filter
+def get_module(block):
+    if not zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
+        return
+    try:
+        module = zope.component.getAdapter(
+            block, zeit.edit.interfaces.IBlock, block.cpextra)
+    except TypeError:
+        return
+    if block.visible:
+        return module
 
 
 @zeit.web.register_filter

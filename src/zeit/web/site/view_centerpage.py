@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import collections
 import logging
+import urllib
 import uuid
 
 import pyramid.response
@@ -46,7 +47,7 @@ class LegacyMixin(object):
         return super(LegacyMixin, self).__hash__()
 
 
-@grokcore.component.implementer(zeit.content.cp.interfaces.ITeaserBlock)
+@grokcore.component.implementer(zeit.edit.interfaces.IBlock)
 class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
@@ -121,6 +122,11 @@ class Centerpage(
         elif self.context.ressort:
             return self.context.ressort.lower()
         return ''
+
+    def path_with_params(self, **kw):
+        """Return the current request URL extended by given GET parameters."""
+        params = dict(self.request.GET.items() + kw.items())
+        return '?'.join([self.request.path_url, urllib.urlencode(params)])
 
 
 @pyramid.view.view_config(
@@ -294,8 +300,7 @@ class LegacyCenterpage(Centerpage):
 
             if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
                 area = zeit.web.site.spektrum.HPFeed()
-                # XXX: This should be re-organized into something like
-                #      zeit.web.modules.Spektrum and selected automatically.
+                # XXX: This should be re-organized into a registered module.
             else:
                 modules = [LegacyModule([t], layout=layout) for t in m][
                     :getattr(m, 'display_amount', 3)]

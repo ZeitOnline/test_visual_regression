@@ -57,7 +57,7 @@ setup(
         'zeit.content.text',
         'zeit.content.video',
         'zeit.edit',
-        'zeit.find',
+        'zeit.find >= 2.4.1.dev0',
         'zeit.intrafind',
         'zeit.magazin',
         'zeit.newsletter >= 1.3.1',

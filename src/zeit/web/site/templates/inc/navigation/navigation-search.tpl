@@ -1,5 +1,4 @@
-{# TODO: Make action host configurable, as soon as friedbert knows search. #}
-<form accept-charset="utf-8" method="get" class="search" role="search" action="//www.zeit.de/suche/index">
+<form accept-charset="utf-8" method="get" class="search" role="search" action="{{ view.request.route_url('home') }}suche/index">
 	<label for="q" class="hideme">suchen</label>
 	{# Please don't break line here, due to inline-block state. #}
 	<input class="search__input" id="q" name="q" type="search" placeholder="Suche" tabindex="1"><button class="search__button" type="submit" tabindex="2">
