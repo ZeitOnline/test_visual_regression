@@ -41,6 +41,14 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(zeit.web.site.view.is_zon_content,),
+             name='comment-form',
+             renderer='templates/inc/comments/comment-form.html')
+class CommentForm(zeit.web.core.view_article.Article):
+    pass
+
+
 def is_breaking_news(context, request):
     return zeit.content.article.interfaces.IBreakingNews(context).is_breaking
 

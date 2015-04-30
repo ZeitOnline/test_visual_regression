@@ -1,10 +1,16 @@
 import logging
+import os
+import os.path
+import pkg_resources
+import random
 import re
+import urlparse
 
 import lxml.etree
-import pysolr
 import zope.interface
 
+import zeit.cms.interfaces
+import zeit.content.article.interfaces
 import zeit.imp.source
 
 import zeit.web.core.interfaces
@@ -72,9 +78,7 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
 
 
 class Solr(object):
-    """Half-baked mock Solr implementation that is used for local development.
-    Will eventually spit out random articles from the core/data folder.
-    """
+    """Mock Solr implementation that is used for local development."""
 
     zope.interface.implements(zeit.solr.interfaces.ISolr)
 
@@ -90,8 +94,24 @@ class Solr(object):
     def more_like_this(self, q, mltfl, **kw):
         raise NotImplementedError()
 
-    def search(self, q, **kw):
-        return pysolr.Results([], 0)
+    def search(self, q, rows=10, **kw):
+        parts = urlparse.urlparse('egg://zeit.web.core/data')
+        repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
+        results = []
+        for root, subdirs, files in os.walk(repo):
+            if not random.randint(0, 4):
+                continue  # Skip some folders to speed things up.
+            for filename in files:
+                try:
+                    unique_id = os.path.join(
+                        root.replace(repo, 'http://xml.zeit.de'), filename)
+                    content = zeit.cms.interfaces.ICMSContent(unique_id)
+                    assert zeit.content.article.interfaces.IArticle.providedBy(
+                        content)
+                    results.append({u'uniqueId': content.uniqueId})
+                except (AssertionError, TypeError):
+                    continue
+        return random.sample(results, min(rows, len(results)))
 
     def update_raw(self, xml, **kw):
         raise NotImplementedError()

@@ -8,6 +8,7 @@ import zeit.web.core.view
 import zeit.web.core.comments
 import pyramid.view
 import urlparse
+import json
 
 
 class PostComment(zeit.web.core.view.Base):
@@ -108,21 +109,42 @@ class PostComment(zeit.web.core.view.Base):
             allow_redirects=False)
 
         if response.status_code >= 200 and response.status_code <= 303:
-            self.status.append('A comment for {} was posted'.format(
-                unique_id))
+            self.status.append('Action {} was performed for {}'
+                               ' (with pid {})'.format(method, unique_id, pid))
+
             # XXX: invalidate object from cache here!
             # use something like
             cache_maker._cache['comment_thread'].invalidate(
                 (unique_id, None, None))
             # cache on other app servers should be invalidated also
+
+            content = None
+            new_content_id = None
+            if response.content:
+                content = json.loads(response.content[5:-2])
+            elif response.status_code == 303:
+                url = urlparse.urlparse(response.headers.get('location'))
+                new_content_id = url[5][4:]
+
+            return {
+                "request": {
+                    "action": action,
+                    "path": self.path,
+                    "nid": nid,
+                    "pid": pid},
+                "response": {
+                    "content": content,
+                    "new_content_id": new_content_id}
+            }
+
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
-                title='No comment could be posted',
-                explanation='No comment  for {} could be '
-                            'posted.'.format(unique_id))
-
-        self.action = action
-        self.pid = pid
+                title='Action {} could not be performed'.format(action),
+                explanation='Status code {} was send for {}'
+                            'on resource {}.'.format(
+                                action,
+                                response.status_code,
+                                unique_id))
 
     def _action_url(self, action, path):
         endpoint = 'services/json?callback=zeit' if (
@@ -202,10 +224,10 @@ class PostCommentResource(PostComment):
 
     def __call__(self):
         self.request.response.cache_expires(0)
-        self.post_comment()
+        result = self.post_comment()
 
         if self.request.params.get('ajax') == 'true':
-            return self.status
+            return result
         else:
             location = self.request.url
             if self.pid:
