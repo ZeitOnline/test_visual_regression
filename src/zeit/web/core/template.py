@@ -589,10 +589,7 @@ def debug_breaking_news():
 
 @zeit.web.register_filter
 def append_get_params(request, get_params):
-    if len(request.GET) >= 1:
-        append_with = '&'
-    else:
-        append_with = '?'
-
-    return '{}{}{}'.format(
-        request.url, append_with, urllib.urlencode(get_params))
+    p = request.GET.copy()
+    p.update(get_params)
+    return '{}?{}'.format(
+        request.path_url, urllib.urlencode(p))
