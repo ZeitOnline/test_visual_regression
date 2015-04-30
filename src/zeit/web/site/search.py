@@ -1,4 +1,5 @@
 import collections
+import logging
 
 import grokcore.component
 import zope.component
@@ -14,6 +15,9 @@ from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block
+
+
+log = logging.getLogger(__name__)
 
 
 FIELDS = ' '.join([
@@ -183,8 +187,11 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
                     block) or not len(docs):
                 result.append(block)
                 continue
-            block.insert(0, zeit.cms.interfaces.ICMSContent(
-                self._extract_newest(docs)))
+            unique_id = self._extract_newest(docs)
+            try:
+                block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
+            except TypeError, err:
+                log.debug('Corrupt search result', err)
             result.append(block)
         return result
 
