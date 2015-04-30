@@ -11,23 +11,31 @@
     </div>
     
     <div class="search-additional-queries">
-        <span class="search-additional-queries__open">+ Suchergebnis eingrenzen</span>
-        <div class="search-additional-queries__container">
+        <span class="search-additional-queries__on">+ Suchergebnis eingrenzen</span>
+        <div class="search-additional-queries__container search-additional-queries__container--hidden">
             <fieldset class="search-timerange">
-                <legend class="search-timerange__legend">Datum eingrenzen</legend>
-                {% for id, checked, label in module.mode_choice %}
-                <label for="{{ id }}">{{ label }}</label>
-                <input type="radio" name="mode" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
-                {% endfor %}
+                <legend class="search-timerange__legend icon-dropdown-closed">Datum eingrenzen</legend>
+                <div class="search-timerange__extend search-timerange__extend--hidden">
+                    {% for id, checked, label in module.mode_choice %}
+                    <div class="search-timerange__group">
+                        <input type="radio" name="mode" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
+                        <label class="search-timerange__label" for="{{ id }}">{{ label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
             </fieldset>
             <fieldset class="search-typerange">
-                <legend class="search-typerange__legend">Typ eingrenzen</legend>
-                {% for id, checked, label in module.type_choice %}
-                <label for="{{ id }}">{{ label }}</label>
-                <input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
-                {% endfor %}
+                <legend class="search-typerange__legend icon-dropdown-closed">Typ eingrenzen</legend>
+                <div class="search-typerange__extend search-typerange__extend--hidden">
+                    {% for id, checked, label in module.type_choice %}
+                    <div class="search-typerange__group">
+                        <input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
+                        <label class="search-typerange__label" for="{{ id }}">{{ label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
             </fieldset>
-            <span class="search-additional-queries__close icon-zon-logo-navigation_close"></span>
+            <span class="search-additional-queries__off icon-zon-logo-navigation_close"></span>
         </div>
     </div>
 </form>

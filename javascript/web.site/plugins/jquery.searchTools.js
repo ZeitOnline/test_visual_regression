@@ -17,23 +17,48 @@
     $.fn.searchTools = function( options ) {
 
         var defaults = $.extend({
-            toggleOnClassName: 'search-additional-queries__on',
-            toggledElemClassName: 'search-additional-queries__container',
-            toggleOffClassName: 'search-additional-queries__off'
+            toggleOn: '.search-additional-queries__on',
+            toggledElem: '.search-additional-queries__container',
+            toggleOff: '.search-additional-queries__off',
+            timeRange: '.search-timerange__legend',
+            typeRange: '.search-typerange__legend'
         }, options ),
         toggleTarget = function( target ) {
-            $( target ).toggleClass( target + '--hidden' );
+            var className = target.substr( 1 );
+            $( target ).toggleClass( className + '--hidden' );
+        },
+        toggleDropdown = function( target, self ) {
+            var className = target.substr( 1 );
+            $( target ).toggleClass( className + '--hidden' );
+            if ( $( self ).hasClass( 'icon-dropdown-closed' ) ) {
+                $( self ).removeClass( 'icon-dropdown-closed' );
+                $( self ).addClass( 'icon-dropdown-opened' );
+            } else {
+                $( self ).removeClass( 'icon-dropdown-opened' );
+                $( self ).addClass( 'icon-dropdown-closed' );
+            }
         };
 
         return this.each( function() {
-            $( defaults.toggleOnClassName ).on( 'click', function( event ) {
-                toggleTarget( defaults.toggleOnClassName );
-                toggleTarget( defaults.toggledElemClassName );
+
+            $( defaults.toggleOn ).on( 'click', function( event ) {
+                toggleTarget( defaults.toggleOn );
+                toggleTarget( defaults.toggledElem );
             });
 
-            $( defaults.toggleOffClassName ).on( 'click', function( event ) {
-                toggleTarget( defaults.toggledElemClassName );
+            $( defaults.toggleOff ).on( 'click', function( event ) {
+                toggleTarget( defaults.toggledElem );
+                toggleTarget( defaults.toggleOn );
             });
+
+            $( defaults.timeRange ).on( 'click', function( event ) {
+                toggleDropdown( '.search-timerange__extend', event.target );
+            });
+
+            $( defaults.typeRange ).on( 'click', function( event ) {
+                toggleDropdown( '.search-typerange__extend', event.target );
+            });
+
         });
     };
 })( jQuery );

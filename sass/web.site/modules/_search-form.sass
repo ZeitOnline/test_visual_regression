@@ -1,9 +1,32 @@
 $focus-color: rgba(0, 136, 193, 0.55)
+$dropdown-width: remify(160px)
 
 %hidden-fieldset
 	border: none
 	margin: 0
 	padding: 0
+
+%dropdown-legend
+	background-color: $white
+	background-position: 94% 50%
+	border: 1px solid $zon_light_grey
+	border-radius: remify(4px)
+	color: $zon_grey
+	cursor: pointer
+	display: block
+	font-size: remify(12px)
+	height: remify(32px)
+	line-height: remify(32px)
+	padding: remify(0 15px)
+	width: $dropdown-width
+
+%dropdown-extend
+	background: $zon-warm-grey
+	border: 1px solid $zon_light_grey
+	border-top: none
+	max-height: 5000px // absurd high px value for get height anim working
+	overflow: hidden
+	+transition(all 0.50s ease-in-out)
 
 .search-form
 	background: $zon_lighter_grey
@@ -16,6 +39,9 @@ $focus-color: rgba(0, 136, 193, 0.55)
 	border-radius: remify(4px)
 	height: remify(48px)
 	+display-flex
+	+respond-min($break-tablet-min)
+		margin: 0 auto
+		width: 660px
 	&__label
 		@extend %off-screen
 	&__input
@@ -39,6 +65,8 @@ $focus-color: rgba(0, 136, 193, 0.55)
 	padding: 0
 	width: remify(46px)
 	+transition(all 0.50s ease-in-out)
+	+respond-min($break-tablet-min)
+		width: remify(120px)
 	&:focus
 		box-shadow: inset 0 0 10px $focus-color
 	&__icon
@@ -49,35 +77,95 @@ $focus-color: rgba(0, 136, 193, 0.55)
 	&__text
 		display: none
 		float: left
+		font-size: remify(14px)
+		height: remify(46px)
+		line-height: remify(46px)
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			display: block
 
 .search-additional-queries
 	margin-top: remify(15px) // has topmargin to defend position on toggle effect
-	&__open
+	+respond-min($break-tablet-min)
+		margin: remify(15px) auto 0 auto
+		width: 660px
+	&__on
 		cursor: pointer
+		display: block
 		font-size: remify(14px)
-		opacity: 1
-		+transition(all 0.50s ease-in-out)
+		max-height: 5000px // absurd high px value for get height anim working
+		overflow: hidden
+		+transition(max-height 0.50s ease-in-out)
 		&--hidden
-			opacity: 0
+			max-height: 0
+		+respond-min($break-tablet-min)
+			display: none
 	&__container
-		.js &
-			display: none
-		&--hidden
-			display: none
+		max-height: 5000px // absurd high px value for get height anim working
+		overflow: hidden
+		+transition(max-height 0.50s ease-in-out)
+		.js &--hidden
+			max-height: 0
+			+respond-min($break-tablet-min)
+				max-height: 5000px // absurd high px value for get height anim working
 	&__off
 		display: none
 		.js &
+			background-position: 50%
 			cursor: pointer
 			display: block
-			height: remify(35px)
-			width: remify(35px)
-		&--hidden
-			display: none
+			float: left
+			height: remify(28px)
+			width: remify(28px)
+			+respond-min($break-tablet-min)
+				display: none
 
 .search-timerange
 	@extend %hidden-fieldset
+	float: left
+	margin-right: remify(12px)
+	width: $dropdown-width
 	&__legend
+		@extend %dropdown-legend
+	&__extend
+		@extend %dropdown-extend
+		+transition(all 0.30s ease-in-out)
+		.js &--hidden
+			background: transparent
+			border: none
+			max-height: 0
+	&__label
+		font-size: remify(11px)
+		padding-left: 5px
+		vertical-align: middle
+	&__group
+		margin: remify(0 14px)
+		&:first-child
+			margin-top: remify(14px)
+		&:last-child
+			margin-bottom: remify(14px)
 
 .search-typerange
 	@extend %hidden-fieldset
+	float: left
+	margin-right: remify(12px)
+	width: $dropdown-width
 	&__legend
+		@extend %dropdown-legend
+	&__extend
+		@extend %dropdown-extend
+		+transition(all 0.30s ease-in-out)
+		.js &--hidden
+			background: transparent
+			border: none
+			max-height: 0
+	&__label
+		font-size: remify(11px)
+		padding-left: remify(5px)
+		vertical-align: middle
+	&__group
+		margin: remify(0 14px)
+		&:first-child
+			margin-top: remify(14px)
+		&:last-child
+			margin-bottom: remify(14px)
