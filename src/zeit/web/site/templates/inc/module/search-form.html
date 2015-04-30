@@ -1,7 +1,7 @@
 {% set module = module | get_module %}
 
 <form class="search-form">
-    <input type="text" name="q" id="query" value="{{ module.q }}"/>
+    <input type="text" name="q" id="query" value="{{ module.q | hide_none }}"/>
 
     {% for id, checked, label in module.mode_choice %}
     <label for="{{ id }}">{{ label }}</label>
