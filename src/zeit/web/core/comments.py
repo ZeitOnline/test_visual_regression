@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 
-import zope.component
-import lxml.etree
+from BeautifulSoup import BeautifulSoup
+import collections
 import datetime
+import lxml.etree
+import repoze.lru
 import requests
 import requests.exceptions
-from BeautifulSoup import BeautifulSoup
-import repoze.lru
+import zope.component
+import itertools
+import logging
 
 import zeit.cms.interfaces
 
 from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
 
+
 cache_maker = repoze.lru.CacheMaker()
+log = logging.getLogger(__name__)
 
 
 def rewrite_picture_url(url):
@@ -159,25 +164,8 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
     except (IndexError, lxml.etree.XMLSyntaxError):
         return
 
-    # Read more about sorting in multiple passes here:
-    # docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
+    comments = _sort_comments(list(comment_to_dict(c) for c in comment_list))
 
-    import collections
-
-    comments_sorted = collections.OrderedDict()
-
-    comments = list(comment_to_dict(c) for c in comment_list)
-
-    while comments:
-        comment = comments.pop()
-
-        if comment["in_reply"]:
-            pass
-
-
-    comments = sorted(comments, key=lambda x: x['cid'])
-    comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
-                      reverse=reverse)
     try:
         return dict(
             comments=comments,
@@ -189,6 +177,29 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
                 conf.get('community_host', '')))
     except (IndexError, AttributeError):
         return
+
+
+def _sort_comments(comments):
+
+    comments_sorted = collections.OrderedDict()
+    root_ancestors = {}
+
+    while comments:
+        comment = comments.pop(0)
+
+        if not comment["in_reply"]:
+            root_ancestors[comment['cid']] = comment['cid']
+            comments_sorted[comment['cid']] = [comment, []]
+        else:
+            try:
+                ancestor = root_ancestors[comment['in_reply']]
+                root_ancestors[comment['cid']] = ancestor
+                comments_sorted[ancestor][1].append(comment)
+            except KeyError:
+                log.error("The comment with the cid {} is a reply, but"
+                          "no ancestor could be found".format(comment['cid']))
+    return list(
+        itertools.chain(*[[li[0]]+li[1] for li in comments_sorted.values()]))
 
 
 def request_counts(*unique_ids):

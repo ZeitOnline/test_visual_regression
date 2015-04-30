@@ -162,6 +162,38 @@ def test_post_comment_should_throw_exception_if_no_user_is_present():
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
 
+def test_comment_tree_should_be_flattened_on_level_two():
+
+    cid_1 = dict(
+        in_reply=None,
+        cid=1)
+
+    cid_2 = dict(
+        in_reply=None,
+        cid=2)
+
+    cid_3 = dict(
+        in_reply=None,
+        cid=3)
+
+    cid_4 = dict(
+        in_reply=2,
+        cid=4)
+
+    cid_5 = dict(
+        in_reply=2,
+        cid=5)
+
+    cid_6 = dict(
+        in_reply=1,
+        cid=6)
+
+    comments = [cid_1, cid_2, cid_3, cid_4, cid_5, cid_6]
+    sorted_comments = zeit.web.core.comments._sort_comments(comments)
+    readable_comments = [comment['cid'] for comment in sorted_comments]
+    assert readable_comments == [1, 6, 2, 4, 5, 3]
+
+
 def _create_poster(monkeypatch):
     request = mock.Mock()
     request.authenticated_userid = True
