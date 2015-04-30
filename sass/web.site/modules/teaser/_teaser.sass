@@ -18,11 +18,11 @@
 %teaser-small-media-placement
 	position: relative
 	+respond-min($break-phablet-min)
-		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
+		padding: $petite 0 $petite remify(150px+20px)
 	+respond-min($break-tablet-min)
-		padding: $petite 0 $petite ($teaser-image-phablet-width + $petite)
+		padding: $petite 0 $petite remify(150px+20px)
 	+respond-min($break-desktop-min)
-		padding: $petite 0 $petite ($teaser-image-desktop-width + $petite)
+		padding: $petite 0 $petite remify(250px+20px)
 
 %teaser-small-media
 	vertical-align: top
@@ -30,11 +30,11 @@
 	+respond-min($break-phablet-min)
 		display: table-cell
 		padding-right: $petite
-		width: $teaser-image-phablet-width + $petite
+		width: remify(150px+20px)
 	+respond-min($break-tablet-min)
-		width: $teaser-image-phablet-width + $petite
+		width: remify(150px+20px)
 	+respond-min($break-desktop-min)
-		width: $teaser-image-desktop-width + $petite
+		width: remify(250px+20px)
 
 %teaser-small-container
 	vertical-align: top

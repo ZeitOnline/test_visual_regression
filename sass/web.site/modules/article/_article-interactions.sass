@@ -29,12 +29,15 @@
 			color: $zon_light_grey
 			margin: remify(0 8px)
 			display: inline-block
-
 		&:first-child:before
 			content: ""
 			display: none
+		&--whatsapp
+			+respond-min($break-tablet-min)
+				display: none
 	&__link
 		font-weight: bold
+		line-height: 2.0
 		&--facebook
 			+link
 				color: #3B5998 // corporate fb color
@@ -55,6 +58,11 @@
 				color: $zon_grey
 			+on-interaction
 				border-bottom: 1px solid $zon_grey
+		&--whatsapp
+			+link
+				color: #4DC247 // corporate whatsapp color
+			+on-interaction
+				border-bottom: 1px solid #4DC247
 
 // js-induced state modifications
 .sharing-menu--active > .sharing-menu__title
@@ -64,5 +72,5 @@
 
 .sharing-menu--active > .sharing-menu__items,
 .no-js .sharing-menu__items // no-js fallback
-	margin:  remify(16px 0) // animated
+	margin:  remify(14px 0) // animated
 	max-height: remify(64px) // animated

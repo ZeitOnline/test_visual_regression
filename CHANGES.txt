@@ -4,9 +4,9 @@ Change log for zeit.web
 1.20.5 (unreleased)
 -------------------
 
-- ZON-1628: fix/clearify vertical spaces on centerpages
+- ZON-1628: Fix/clearify vertical spaces on centerpages
 
-- ZON-1627: add some webtrekk features hidden as errors 
+- ZON-1627: Add some webtrekk features hidden as errors 
 
 - ZON-1660: Implement comment interface.
 
@@ -15,6 +15,14 @@ Change log for zeit.web
 - ZON-1626: Fix/clarify vertical spaces on centerpages
 
 - ZON-1701: Fix test-comment form
+
+- ZON-1664: WhatsApp sharing link for mobile
+
+- ZON-1238: Standard teaser in a onethird area
+
+- ZON-1704: Generate json for ajax requests on comment interface
+
+- ZON-1622: add video description
 
 - ZON-1673: Render comment form through edge side includes
 
@@ -26,12 +34,13 @@ Change log for zeit.web
 
 - FIX: Clean up centerpage view attributes and topic link objects
 
+
 1.20.3 (2015-04-27)
 -------------------
 
-- BUG-242: Do not save images with content length <= 20
-
 - ZON-1549: Add square teaser for ZON content
+
+- BUG-242: Do not save images with content length <= 20
 
 - XML view for IXMLContent tranformed to RAM @ xml/*traverse
 
