@@ -2,11 +2,7 @@
 	<div class="comment-section__head">
 	{% if view.comments and view.comments.comment_count %}
 		<span class="comment-section__headline">
-		{%- if view.comments.comment_count != 1 -%}
-			{{ view.comments.comment_count }} Kommentare
-		{%- else -%}
-			1 Kommentar
-		{%- endif -%}
+			{{ view.comments.comment_count | pluralize('{} Kommentar', '{} Kommentare') }}
 		</span>
 		<a href="#comment-form" class="comment-section__button button">
 			Kommentieren
