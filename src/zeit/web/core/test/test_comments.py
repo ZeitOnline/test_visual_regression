@@ -294,12 +294,8 @@ endpoint_recommend = (
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
-def test_post_comments_should_post_with_correct_arguments(monkeypatch,
-                                                          path,
-                                                          comment,
-                                                          pid,
-                                                          result,
-                                                          action):
+def test_post_comments_should_post_with_correct_arguments(
+        monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -324,12 +320,8 @@ def test_post_comments_should_post_with_correct_arguments(monkeypatch,
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', None, '1', 'recommend', endpoint_recommend),
     ('my/path', 'my comment', '1', 'report', endpoint_report)])
-def test_post_comments_should_get_with_correct_arguments(monkeypatch,
-                                                         path,
-                                                         comment,
-                                                         pid,
-                                                         result,
-                                                         action):
+def test_post_comments_should_get_with_correct_arguments(
+        monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -354,7 +346,7 @@ def test_post_comments_should_get_with_correct_arguments(monkeypatch,
 @pytest.mark.parametrize("action, path, service", [
     ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
     ('report', 'my/article', 'http://foo/services/json?callback=zeit')])
-def test_action_url_should_be_created_correctly(monkeypatch,
-                                                action, path, service):
+def test_action_url_should_be_created_correctly(
+        monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service

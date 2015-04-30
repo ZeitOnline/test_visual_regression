@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="sharing-menu__item">
-                    <a class="sharing-menu__link sharing-menu__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&url={{ view.article_url }}&via=zeitonline" target="_blank">
+                    <a class="sharing-menu__link sharing-menu__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&amp;url={{ view.article_url }}&amp;via=zeitonline" target="_blank">
                         Twitter
                     </a>
                 </li>
@@ -57,8 +57,13 @@
                     </a>
                 </li>
                 <li class="sharing-menu__item">
-                    <a class="sharing-menu__link sharing-menu__link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE">
+                    <a class="sharing-menu__link sharing-menu__link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE&body=Artikel auf ZEIT ONLINE lesen: {{ view.article_url }}">
                         Mail
+                    </a>
+                </li>
+                <li class="sharing-menu__item sharing-menu__item--whatsapp">
+                    <a class="sharing-menu__link sharing-menu__link--whatsapp" href="whatsapp://send?text={{ view.title }} - Artikel auf ZEIT ONLINE: {{ view.article_url }}">
+                        WhatsApp
                     </a>
                 </li>
             </ul>
