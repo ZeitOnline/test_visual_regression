@@ -129,7 +129,7 @@ class Form(zeit.web.core.block.Module):
     @zeit.web.reify
     def page(self):
         try:
-            return int(self['page'])
+            return abs(int(self['page']))
         except (TypeError, ValueError):
             return 1
 
@@ -216,6 +216,8 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     def hits(self):
         if self._hits is None:
             return len(self.values()) and self._hits
+        else:
+            return 0
 
     @hits.setter
     def hits(self, value):
