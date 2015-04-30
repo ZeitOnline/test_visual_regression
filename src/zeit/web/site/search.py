@@ -114,7 +114,10 @@ class Form(zeit.web.core.block.Module):
     @zeit.web.reify
     def types(self):
         these = set((self['type'] or '').split())
-        return list(these.intersection(TYPES.keys()))
+        if len(these):
+            return list(these.intersection(TYPES.keys()))
+        else:
+            return TYPES.keys()
 
     @property
     def type_choice(self):
@@ -162,7 +165,7 @@ class Form(zeit.web.core.block.Module):
 class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
 
     sort_order = zope.schema.TextLine(
-        title=u'Search result order', default=u'score desc', required=False)
+        title=u'Search result order', default=u'relevanz', required=False)
 
     hits = zope.schema.Int(
         title=u'Search result count', default=None, required=False)
