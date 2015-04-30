@@ -12,7 +12,7 @@
 		</div>
 		<textarea class="comment-form__textarea" name="comment" placeholder="Ihr Kommentar" maxlength="1500"></textarea>
 		<input type="hidden" name="nid" value="{{ view.comments.nid }}">
-		<input type="hidden" name="pid" value="{{ view.request.GET['comment_pid'] }}">
+		<input type="hidden" name="pid" value="{{ view.request.GET['commentpid'] }}">
 		<input type="hidden" name="uid" value="{{ view.request.session.user.uid }}">
 		<input class="comment-form__submit" type="submit" value="Kommentar senden" />
 	</form>

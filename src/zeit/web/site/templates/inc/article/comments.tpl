@@ -47,7 +47,7 @@
 				{{ comment.text | safe }}
 			</div>
 			<div class="comment__reactions">
-				<a class="comment__reaction" href="{{ view.request | append_get_params({'comment_cid': comment.cid}) }}#comment-form" title="Antworten">
+				<a class="comment__reaction" href="{{ view.request | append_get_params({'commentpid': comment.cid}) }}#comment-form" title="Antworten">
 					<span class="icon-comment-reactions-reply"></span>
 					<span class="comment__action">Antworten</span>
 				</a>
@@ -65,6 +65,6 @@
 	{% endfor %}
 {% endif %}
 
-<esi:include src="{{ view.article_url }}/comment-form?comment_pid={{ view.request.GET['comment_cid'] }}" />
+<esi:include src="{{ view.article_url }}/comment-form?commentpid={{ view.request.GET['commentpid'] }}" />
 
 </section>
