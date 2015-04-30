@@ -305,6 +305,8 @@ def test_post_comments_should_post_with_correct_arguments(
     with patch.object(requests, 'post') as mock_method:
         response = mock.Mock()
         response.status_code = 200
+        response.headers = {}
+        response.content = ''
         mock_method.return_value = response
         poster.post_comment()
 
@@ -329,6 +331,8 @@ def test_post_comments_should_get_with_correct_arguments(
     with patch.object(requests, 'get') as mock_method:
         response = mock.Mock()
         response.status_code = 200
+        response.headers = {}
+        response.content = ''
         mock_method.return_value = response
         poster.post_comment()
 
