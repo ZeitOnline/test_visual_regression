@@ -135,7 +135,7 @@ class PostComment(zeit.web.core.view.Base):
                 "response": {
                     "content": content,
                     "new_content_id": new_content_id}
-                }
+            }
 
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
