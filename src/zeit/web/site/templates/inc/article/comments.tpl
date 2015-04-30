@@ -47,7 +47,7 @@
 				{{ comment.text | safe }}
 			</div>
 			<div class="comment__reactions">
-				<a class="comment__reaction" href="#cid-{{ comment.cid }}" title="Antworten">
+				<a class="comment__reaction" href="{{ view.request | append_get_params({'comment_cid': comment.cid}) }}#cid-{{ comment.cid }}" title="Antworten">
 					<span class="icon-comment-reactions-reply"></span>
 					<span class="comment__action">Antworten</span>
 				</a>
