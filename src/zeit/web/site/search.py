@@ -114,7 +114,10 @@ class Form(zeit.web.core.block.Module):
     @zeit.web.reify
     def types(self):
         these = set((self['type'] or '').split())
-        return list(these.intersection(TYPES.keys()))
+        if len(these):
+            return list(these.intersection(TYPES.keys()))
+        else:
+            return TYPES.keys()
 
     @property
     def type_choice(self):
