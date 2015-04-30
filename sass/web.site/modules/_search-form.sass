@@ -1,3 +1,5 @@
+$focus-color: rgba(0, 136, 193, 0.55)
+
 %hidden-fieldset
 	border: none
 	margin: 0
@@ -11,23 +13,34 @@
 .search-text-input
 	background: $white
 	border: 1px solid $zon_light_grey
+	border-radius: remify(4px)
 	height: remify(48px)
 	+display-flex
 	&__label
 		@extend %off-screen
 	&__input
+		background: transparent
 		border: none
+		font-size: remify(14px)
+		outline: none // readd in :focus for a11y
 		padding: remify(10px)
 		+flex-grow(1)
+		+transition(all 0.50s ease-in-out)
+		&:focus
+			box-shadow: inset 0 0 10px $focus-color
 
 .search-submit
-	background: $white
+	background: transparent
 	border: none
 	border-left: 1px solid $zon_light_grey
 	height: remify(46px)
+	outline: none // readd in :focus for a11y
 	overflow: hidden
 	padding: 0
 	width: remify(46px)
+	+transition(all 0.50s ease-in-out)
+	&:focus
+		box-shadow: inset 0 0 10px $focus-color
 	&__icon
 		background-position: 50%
 		float: left
