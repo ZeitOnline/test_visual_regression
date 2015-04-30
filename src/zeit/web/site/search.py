@@ -133,6 +133,8 @@ class Form(zeit.web.core.block.Module):
 
     @zeit.web.reify
     def sort_order(self):
+        if self.query in (None, lq.any_value()):
+            return 'aktuell'
         this = self['sort']
         return this in ORDERS and this or 'relevanz'
 
@@ -141,7 +143,6 @@ class Form(zeit.web.core.block.Module):
         tokens = collections.deque()
         if self.query:
             tokens.append(BOOSTS + lq.quoted(self.query))
-            # TODO: Set sort order to latest.
         if self.mode:
             tokens.append(lq.datetime_range(
                 'last-semantic-change', *MODES[self.mode][0]()))
