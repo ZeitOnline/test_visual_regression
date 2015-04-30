@@ -126,6 +126,13 @@ class Form(zeit.web.core.block.Module):
         this = self['mode']
         return this in MODES and this or None
 
+    @zeit.web.reify
+    def page(self):
+        try:
+            return int(self['page'])
+        except (TypeError, ValueError):
+            return 1
+
     @property
     def mode_choice(self):
         for key, (_, label) in MODES.items():
@@ -160,6 +167,9 @@ class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
     hits = zope.schema.Int(
         title=u'Search result count', default=None, required=False)
 
+    page = zope.schema.Int(
+        title=u'Search result page', default=None, required=False)
+
 
 @grokcore.component.implementer(IResultsArea)
 @grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
@@ -170,6 +180,9 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
 
     query = zeit.cms.content.property.ObjectPathProperty(
         '.query', IResultsArea['query'])
+
+    page = zeit.cms.content.property.ObjectPathProperty(
+        '.page', IResultsArea['page'])
 
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', IResultsArea['hits'])
@@ -210,13 +223,17 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
             self._hits = value
 
     @zeit.web.reify
-    def pagination(self):
-        return [1, None, 2, 3, None, 8]
+    def total_pages(self):
+        return 0
 
     @zeit.web.reify
     def current_page(self):
-        return 2
+        return 0
 
     @zeit.web.reify
     def next_page(self):
-        return 3
+        return 0
+
+    @zeit.web.reify
+    def pagination(self):
+        return []

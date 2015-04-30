@@ -485,10 +485,12 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 form['type'] = ' '.join(request.GET.getall('type'))
                 form['mode'] = request.GET.get('mode')
                 form['sort'] = request.GET.get('sort')
+                form['page'] = request.GET.get('p')
 
                 area.raw_query = form.raw_query
                 area.sort_order = form.sort_order
                 area.query = form.query
+                area.page = form.page
 
     def _change_viewname(self, tdict):
         if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
