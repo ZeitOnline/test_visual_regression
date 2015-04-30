@@ -152,6 +152,9 @@ class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'score desc', required=False)
 
+    hits = zope.schema.Int(
+        title=u'Search result count', default=None, required=False)
+
 
 @grokcore.component.implementer(IResultsArea)
 @grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
@@ -160,18 +163,37 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IResultsArea['sort_order'])
 
+    _hits = zeit.cms.content.property.ObjectPathProperty(
+        '.hits', IResultsArea['hits'])
+
     def values(self):
+        return self._values
+
+    @zeit.web.reify
+    def _values(self):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        solr_result = list(conn.search(
+        solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, **HIGHLIGHTING))
+            fl=FIELDS, **HIGHLIGHTING)
+        docs = list(solr_result)
+        self.hits = solr_result.hits
         for block in self.context.values():
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
-                    block) or not len(solr_result):
+                    block) or not len(docs):
                 result.append(block)
                 continue
             block.insert(0, zeit.cms.interfaces.ICMSContent(
-                self._extract_newest(solr_result)))
+                self._extract_newest(docs)))
             result.append(block)
         return result
+
+    @property
+    def hits(self):
+        if self._hits is None:
+            return len(self.values()) and self._hits
+
+    @hits.setter
+    def hits(self, value):
+        if self._hits is None:
+            self._hits = value
