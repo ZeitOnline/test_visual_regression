@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-1664: WhatsApp sharing link for mobile
 
+- ZON-1238: Standard teaser in a onethird area
+
 
 1.20.4 (2015-04-27)
 -------------------
@@ -29,8 +31,6 @@ Change log for zeit.web
 
 1.20.3 (2015-04-27)
 -------------------
-
-- ZON-1238: Standard teaser in a onethird area
 
 - ZON-1549: Add square teaser for ZON content
 
