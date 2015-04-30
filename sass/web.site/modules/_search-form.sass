@@ -51,9 +51,27 @@ $focus-color: rgba(0, 136, 193, 0.55)
 		float: left
 
 .search-additional-queries
-	&__toggle
+	margin-top: remify(15px) // has topmargin to defend position on toggle effect
+	&__open
+		cursor: pointer
+		font-size: remify(14px)
+		opacity: 1
+		+transition(all 0.50s ease-in-out)
+		&--hidden
+			opacity: 0
 	&__container
 		.js &
+			display: none
+		&--hidden
+			display: none
+	&__off
+		display: none
+		.js &
+			cursor: pointer
+			display: block
+			height: remify(35px)
+			width: remify(35px)
+		&--hidden
 			display: none
 
 .search-timerange

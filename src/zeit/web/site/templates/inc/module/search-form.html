@@ -3,7 +3,7 @@
 <form class="search-form">
     <div class="search-text-input">
         <label for="query" class="search-text-input__label">Suchbegriff</label>
-        <input type="text" name="q" id="query" value="{% if module.q != 'None' %}{{ module.q }}{% endif %}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
+        <input type="text" name="q" id="query" value="{% if module.q is not none %}{{ module.q }}{% endif %}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
         <button type="submit" id="search" value="Suchen" class="search-submit">
             <span class="search-submit__icon icon-zon-logo-navigation_suche"></span>
             <span class="search-submit__text">Suchen</span>
@@ -11,7 +11,7 @@
     </div>
     
     <div class="search-additional-queries">
-        <span class="search-additional-queries__toggle">+ Suchergebnis eingrenzen</span>
+        <span class="search-additional-queries__open">+ Suchergebnis eingrenzen</span>
         <div class="search-additional-queries__container">
             <fieldset class="search-timerange">
                 <legend class="search-timerange__legend">Datum eingrenzen</legend>
@@ -27,6 +27,7 @@
                 <input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
                 {% endfor %}
             </fieldset>
+            <span class="search-additional-queries__close icon-zon-logo-navigation_close"></span>
         </div>
     </div>
 </form>
