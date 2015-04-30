@@ -1,116 +1,178 @@
+$color-comment-author-bg: $zon_lighter_grey
+$color-comment-border: $zon_light_grey
+
 .comment
-	+restore-side-padding
-	border-top: 1px solid $zon_light_grey
-	padding-top: remify($junior--px)
-	padding-bottom: remify($twice--px)
-	position: relative
+	padding: 0 $page-padding
+	border-top: 1px solid $color-comment-border
 
-	+respond-min($break-desktop-min)
-		padding: remify($medium--px 160px)
+	&--author
+		border-top-width: 0
+		background-color: $color-comment-author-bg
 
+	&--author + & // remove border-top of following comment
+		border-top-width: 0
+
+	&--author + &--author // keep border-top between consecutive author comments
+		border-top-width: 1px
+
+	&__container
+		margin-left: auto
+		margin-right: auto
+		max-width: remify(660px)
+		padding-bottom: remify(30px)
+		padding-top: remify(20px)
+		position: relative
+
+		+respond-min($break-phablet-min)
+			padding-bottom: remify(50px)
+			padding-top: remify(50px)
 
 	&__avatar
 		border-radius: 50%
-		display: inline-block
+		float: left
 		height: remify(50px)
-		margin-right: remify($petite--px)
+		margin-bottom: remify(30px)
 		width: remify(50px)
-
-	&__meta
-		display: inline-block
-		vertical-align: top
+		& + .comment__meta
+			margin: remify(6px) 0 0 remify(66px)
+			+respond-min($break-phablet-min)
+				margin: remify(12px) 0 0 remify(72px)
 
 	&__name
 		+link
 			color: $zon-red
 		+on-interaction
 			text-decoration: underline
-		display: block
 		font-size: remify(16px)
 		font-weight: bold
-		margin: 0 20px 0 0
+		+respond-min($break-desktop-min)
+			font-size: remify(18px)
 
-	&__date-anchor
-		color: $zon-grey
-		display: inline-block
-		font-size: remify(12px)
+	&__date
+		display: block
+		line-height: 2
+		+respond-min($break-phablet-min)
+			float: right
 
 	&__recommendations
 		color: $zon-red
 		float: right
-		font-size: remify(14px)
-		margin-top: remify($micro--px)
+		font-size: remify(12px)
+		line-height: 2
+		margin-left: remify(20px)
 
 	&__body
-		font-size: 1rem
-		margin-top: 1rem
+		clear: both
+		color: $zon-charcoal
+		font-size: remify(16px)
+		margin-top: remify(30px)
+		margin-bottom: remify(30px)
+		+respond-min($break-desktop-min)
+			font-size: remify(18px)
+
 		& > p
-			margin: remify(0 0 10px 0)
+			margin: 0 0 0.6667em 0
 
 	&__reactions
-		display: block
-		font-size: remify(12px)
-		line-height: 1.5
-		margin-top: 2rem
-		+respond-min($break-desktop-min)
-			width: remify(320px)
+		text-align: right
 
-	&__reaction
-		+inline-block
+	&__reaction,
+	&__date
 		+link
 			color: $zon_mid_grey
 		+on-interaction
-			color: $zon-charcoal
+			color: $zon_dark_grey
+		font-size: remify(12px)
 		letter-spacing: $zon-letter-spacing-s
-		margin-left: 1rem
-		vertical-align: top
-		+respond-min($break-phablet-min)
-			margin-left: 1.5rem
 
+	&__reaction
+		+inline-block
+		margin-left: remify(16px)
+		+respond-min($break-phablet-min)
+			margin-left: remify(24px)
 		&:first-child
 			margin-left: 0
 
+	&__action
+		display: none
+		+respond-min($break-phablet-min)
+			display: inline
+			padding-left: .5em
+
 
 .comment--indented
-	box-shadow: inset 28px 0 0 0 $zon_lighter_grey
-	padding-left: remify($large--px)
+	border-top-width: 0 !important
+	padding: 0
+	+respond-min($break-phablet-min)
+		padding: 0 $page-padding
 
-	+respond-min($break-desktop-min)
-		box-shadow: none
-		padding-left: $page-padding
-		padding-right: 0
-		margin: remify(0 160px)
+	.comment__container
+		box-shadow: inset remify(24px) 0 0 0 $zon_lighter_grey
+		padding-left: remify(48px)
+		padding-right: $page-padding
+		border-top: 1px solid $color-comment-border
 
-	// this :before and :after stuff creates a up-facing triangle
-	// to designate the comment which is replied to
-	// source: http://davidwalsh.name/css-triangles
-	&:before,
-	&:after
-		border-bottom: remify(10px) solid transparent
-		border-left: remify(10px) solid transparent // left arrow slant
-		border-right: remify(10px) solid transparent // right arrow slant
-		content: ' '
-		left: remify(70px)
-		position: absolute
-		+respond-min($break-tablet-min)
-			left: remify(34px)
+		+respond-min($break-phablet-min)
+			box-shadow: none
+			padding-left: remify(80px)
+			padding-right: 0
+		// this :before and :after stuff creates a up-facing triangle
+		// to designate the comment which is replied to
+		// source: http://davidwalsh.name/css-triangles
+		&:before,
+		&:after
+			border-color: transparent
+			border-style: solid
+			border-width: 0 10px 10px
+			content: ' '
+			left: remify(75px)
+			position: absolute
+		&:before
+			border-bottom-color: $color-comment-border
+			top: -10px
+		&:after
+			border-bottom-color: $white
+			top: -9px
+
+	&.comment--author
+		.comment__container
+			border-top-width: 0
+			&:before
+				border-bottom-color: transparent
+			&:after
+				border-bottom-color: $color-comment-author-bg
+
+// remove border-top of comment after author comment
+.comment--author + .comment--indented .comment__container
+	border-top-width: 0
 	&:before
-		border-bottom-color: $zon_light_grey
-		top: remify(-10px)
-	&:after
-		border-bottom-color: $white
-		top: remify(-9px)
+		border-bottom-color: transparent
 
+// keep border-top between consecutive author comments
+.comment--author + .comment--author.comment--indented .comment__container
+	border-top-width: 1px
+	&:before
+		border-bottom-color: $color-comment-border
 
 
 // icons
+.icon-comment-zon-author-badge
+	+background-size(contain)
+	+inline-block
+	height: remify(16px)
+	margin-right: remify(6px)
+	vertical-align: text-top
+	width: remify(16px)
+
 .icon-comment-reactions-reply,
 .icon-comment-reactions-report,
 .icon-comment-reactions-recommend
 	+background-size(contain)
-	display: inline-block
-	height: 1rem
+	+inline-block
+	background-position: right center
+	height: remify(16px)
 	opacity: 0.5
-	width: 1.2rem
+	vertical-align: text-bottom
+	width: remify(18px)
 	a:hover > &
 		opacity: 1.0
