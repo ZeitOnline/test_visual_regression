@@ -73,7 +73,7 @@ def comment_to_dict(comment):
         content = '[fehler]'
 
     request = pyramid.threadlocal.get_current_request()
-    if request.authenticated_userid:
+    if request and request.authenticated_userid:
         is_recommended = bool(len(
             comment.xpath('flagged[@type="{}"][@userid="{}"]'.format(
                 'leser_empfehlung', request.authenticated_userid))))
