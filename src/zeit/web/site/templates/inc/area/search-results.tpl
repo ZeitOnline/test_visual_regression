@@ -10,25 +10,27 @@
     </h2>
     <p>
         Sortieren nach
-        <a href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
-        <a href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
+        <a style="text-decoration:underline;" href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
+        <a style="text-decoration:underline;" href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
     </p>
 <div>
 {% endblock %}
 
 {% block after_module_list %}
 <div class="search-pager">
-    {% if area.pagination | length %}
-        <div>N&auml;chste Seite</div>
+    {% if area.next_page %}
+        <div style="display:inline;">
+            <a href="#{{ area.next_page }}">N&auml;chste Seite</a>
+        </div>
     {% endif %}
-    <ul style="list-style-type:none;">
-    {% for num, href, active in area.pagination %}
+    <ul style="list-style-type:none;display:inline;">
+    {% for num in area.pagination %}
         <li style="display:inline-block;">
-            {% if href %}<a href="{{ href }}">{% endif %}
-                <span style="{{ 'font-weight:bolder;' if active else '' }}">
-                    {{ num if num else '...' }}
-                </span>
-            {% if href %}</a>{% endif %}
+            {% if num %}
+                <a style="{{ 'font-weight:bolder;' if num == area.current_page else '' }}" href="#{{ num }}">{{ num }}</a>
+            {% else %}
+                <span>...</span>
+            {% endif %}
         </li>
     {% endfor %}
     </ul>

@@ -209,13 +209,14 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         if self._hits is None:
             self._hits = value
 
-    @property
+    @zeit.web.reify
     def pagination(self):
-        return [
-            ('1', '#', False),
-            (None, None, False),
-            ('2', '#', True),
-            ('3', '#', False),
-            (None, None, False),
-            ('8', '#', False)
-        ]
+        return [1, None, 2, 3, None, 8]
+
+    @zeit.web.reify
+    def current_page(self):
+        return 2
+
+    @zeit.web.reify
+    def next_page(self):
+        return 3
