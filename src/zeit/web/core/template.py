@@ -4,6 +4,7 @@ import logging
 import mimetypes
 import re
 import time
+import urllib
 import urlparse
 
 import jinja2
@@ -584,3 +585,14 @@ def get_google_tag_manager_host():
 def debug_breaking_news():
     request = pyramid.threadlocal.get_current_request()
     return 'eilmeldung' == request.GET.get('debug', '')
+
+
+@zeit.web.register_filter
+def append_get_params(request, get_params):
+    if len(request.GET) >= 1:
+        append_with = '&'
+    else:
+        append_with = '?'
+
+    return '{}{}{}'.format(
+        request.url, append_with, urllib.urlencode(get_params))
