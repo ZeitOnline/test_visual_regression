@@ -65,6 +65,6 @@
 	{% endfor %}
 {% endif %}
 
-<esi:include src="{{ view.article_url }}/comment-form" />
+<esi:include src="{{ view.article_url }}/comment-form?comment_pid={{ view.request.GET['comment_cid'] }}" />
 
 </section>
