@@ -40,7 +40,7 @@
 				</span>
 				{% endif %}
 				<a  class="comment__date" href="#cid-{{ comment.cid }}">
-				#{{ loop.index }} &nbsp;/&nbsp; {{ comment.timestamp | format_date_ago() }}
+				#{{ loop.index }} &nbsp;/&nbsp; {{ get_delta_time_from_datetime(comment.timestamp) or (comment.timestamp | format_date) }}
 				</a>
 			</div>
 			<div class="comment__body">

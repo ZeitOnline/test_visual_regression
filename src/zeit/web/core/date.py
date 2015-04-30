@@ -46,6 +46,12 @@ def get_delta_time(article, base_date=None):
         return dt.get_time_since_modification()
 
 
+@zeit.web.register_global
+def get_delta_time_from_datetime(datetime):
+    dt = DeltaTime(datetime)
+    return dt.get_time_since_modification()
+
+
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)
 class DeltaTimeEntity(object):
 
