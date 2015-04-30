@@ -1,0 +1,65 @@
+.teaser-small-onethird
+	border-top: 1px solid $zon_light_grey
+	margin: 0 -($page-padding)
+	padding: $petite $page-padding
+	+respond-min($break-tablet-min)
+		border-top: none
+		margin: 0
+		padding: remify(20px) 0
+	&__container
+		+display-flex
+		+flex-direction(column)
+		+respond-min($break-phablet-min)
+			padding-left: remify(170px)
+		+respond-min($break-tablet-min)
+			padding-left: 0
+	&__heading
+		@extend %teaser-heading
+		+order(2)
+		+respond-min($break-tablet-min)
+			+order(1)
+	&__media
+		margin: remify(0 0 15px 0)
+		width: 100%
+		+order(1)
+		+respond-min($break-phablet-min)
+			margin-left: remify(-170px)
+			position: absolute
+			width: remify(150px)
+		+respond-min($break-tablet-min)
+			display: block
+			margin-left: 0
+			padding-right: 0
+			position: static
+			width: auto
+			+order(2)
+	&__media-item
+		@extend %teaser-media-item
+	&__inner
+		+order(3)
+	&__combined-link
+		@extend %teaser-combined-link
+	&__kicker
+		@extend %teaser-kicker
+	&__title
+		@extend %teaser-title
+	&__text
+		@extend %teaser-text
+	&__byline
+		@extend %teaser-byline
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+	
+// mobile in a list of small onethird teasers
+// only the first should show an image
++respond-max($break-phablet-min)
+	.teaser-small-onethird 
+		& ~ .teaser-small-onethird
+			.teaser-small-onethird__media
+				display: none
+			.teaser-small-onethird__container
+				padding-left: 0

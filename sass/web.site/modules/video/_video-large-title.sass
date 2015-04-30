@@ -8,12 +8,16 @@
 		bottom: remify(66px)
 	+respond-min($break-desktop-min)
 		bottom: auto
+		left: auto
 		padding-top: remify(20px)
+		position: static
 	&__kicker
 		display: block
 		font-size: remify(14px)
 		font-weight: normal
 		letter-spacing: $zon-letter-spacing-l
+		margin-bottom: remify(5px)
+		+font-smoothing()
 	&__title
 		display: block
 		font-size: remify(16px)
@@ -22,6 +26,8 @@
 			font-size: remify(20px)
 		+respond-min($break-tablet-min)
 			font-size: remify(22px)
+		+respond-min($break-desktop-min)
+			margin-bottom: remify(7px)
 	&--playing
 		display: none
 		+respond-min($break-desktop-min)

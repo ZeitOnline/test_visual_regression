@@ -1,0 +1,67 @@
+<div class="comment-section__form">
+{%- if request.authenticated_userid %}
+	<form class="comment-form" action="{{ view.comments.comment_post_url }}" method="POST" id="comment-form">
+		<div class="comment-form__text">
+			{% if request.session.user.picture %}
+			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name | e }}" src="{{ request.session.user.picture }}">
+			{% endif %}
+			Angemeldet als
+			<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">
+				{{ request.session.user.name | e }}
+			</a>
+			<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url | e }}">
+				Abmelden
+			</a>
+		</div>
+		<textarea class="comment-form__textarea js-required" name="comment" placeholder="Ihr Kommentar" maxlength="1500"></textarea>
+		<p class="comment-form__actions">
+			<input type="hidden" name="nid" value="{{ view.comments.nid }}">
+			<input type="hidden" name="pid" value="">
+			<input type="hidden" name="uid" value="{{ request.session.user.uid }}">
+			<input class="button" type="submit" value="Kommentar senden" />
+		</p>
+	</form>
+{%- else %}
+	<form class="comment-login" id="comment-form">
+		<p>
+			Bitte melden Sie sich an, um zu kommentieren.
+		</p>
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url | e }}">
+			Anmelden
+		</a>
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url | e }}">
+			Registrieren
+		</a>
+	</form>
+{%- endif %}
+</div>
+
+<script type="text/template" id="js-report-comment-template">
+{%- if request.authenticated_userid %}
+	<form action="{{ view.comments.comment_report_url }}" method="POST" class="comment-form" style="display: none">
+		<textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="comment-form__textarea js-required"></textarea>
+		<p class="comment-form__text">
+			Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="//administratives/2010-03/netiquette">Netiquette</a> zu melden.
+			Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+		</p>
+		<p class="comment-form__actions">
+			<input type="hidden" name="uid" value="{{ request.session.user.uid }}">
+			<input type="hidden" name="content_id" value="<% commentId %>">
+			<a href="{{ request.url | e }}" class="comment-form__cancel js-cancel-report">Abbrechen</a>
+			<button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
+		</p>
+	</form>
+{%- else %}
+	<form class="comment-login" style="display: none">
+		<p>
+			Bitte melden Sie sich an, um diesen Kommentar zu melden.
+		</p>
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url | e }}">
+			Anmelden
+		</a>
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url | e }}">
+			Registrieren
+		</a>
+	</form>
+{%- endif %}
+</script>

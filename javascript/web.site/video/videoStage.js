@@ -13,6 +13,7 @@ define([ 'jquery', 'video' ], function( $, video ) {
                 link = article.find( 'a' ),
                 container = article.find( '.video-large__container' ),
                 button = article.find( '.video-text-playbutton' ),
+                inner = article.find( '.video-large__inner' ),
                 title = article.find( '.video-large-title' ),
                 videoId = article.data( 'video-id' ),
                 elem = article.find( '.video-thumbnail' );
@@ -22,6 +23,7 @@ define([ 'jquery', 'video' ], function( $, video ) {
                     evt.preventDefault();
                     container.unwrap();
                     button.addClass( 'video-text-playbutton--hidden' );
+                    inner.addClass( 'video-large__inner--playing' );
                     title.addClass( 'video-large-title--playing' );
                     video.displayVideo( videoId, { elem: elem });
                 });
