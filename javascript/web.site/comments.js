@@ -107,25 +107,10 @@ define([ 'jquery' ], function( $ ) {
                     if ( !response['#error'] ) {
                         var recommendations = comment.find( '.comment__recommendations' ),
                             number = recommendations.html().replace( /\D+/g, '' ) || 0,
-                            label, stars;
+                            stars;
 
-                        if ( link.hasClass( 'comment__reaction--active' )) {
-                            label = 'Empfehlen';
-                            --number;
-                        } else {
-                            label = 'Empfohlen';
-                            ++number;
-                        }
-
+                        number = toggleRecommendationLink( link, number );
                         stars = number ? number + ' &#9733;' : '';
-
-                        link.toggleClass( 'comment__reaction--active' );
-                        link.find( '.comment__icon' )
-                            .toggleClass( 'icon-comment-reactions-recommend' )
-                            .toggleClass( 'icon-comment-reactions-recommend-active' )
-                            .removeClass( 'comment__icon--sending' );
-                        link.find( '.comment__action' ).attr( 'title', label ).html( label );
-
                         recommendations.html( stars );
                     } else {
                         // what else?
@@ -134,6 +119,33 @@ define([ 'jquery' ], function( $ ) {
             }
         });
 
+    },
+
+    /**
+     * comments.js: toggle recommendation link
+     * @function toggleRecommendationLink
+     * @param  {object} link    jQuery object
+     * @param  {int} number     number of recommendations
+     */
+    toggleRecommendationLink = function( link, number ) {
+        var label;
+
+        if ( link.hasClass( 'comment__reaction--active' )) {
+            label = 'Empfehlen';
+            --number;
+        } else {
+            label = 'Empfohlen';
+            ++number;
+        }
+
+        link.toggleClass( 'comment__reaction--active' )
+            .find( '.comment__icon' )
+            .toggleClass( 'icon-comment-reactions-recommend' )
+            .toggleClass( 'icon-comment-reactions-recommend-active' )
+            .removeClass( 'comment__icon--sending' );
+        link.find( '.comment__action' ).attr( 'title', label ).html( label );
+
+        return number;
     },
 
     /**
@@ -249,6 +261,21 @@ define([ 'jquery' ], function( $ ) {
 
         if ( !$comments.length ) {
             return;
+        }
+
+        var uid = $commentForm.find( 'input[name="uid"]' ).val();
+
+        // highlight recommended comments for logged in user
+        if ( uid ) {
+            $commentsBody.find( '.js-recommend-comment' ).each( function() {
+                var fans = this.getAttribute( 'data-fans' );
+
+                fans = fans.length ? fans.split( ',' ) : [];
+
+                if ( fans.indexOf( uid ) !== -1 ) {
+                    toggleRecommendationLink( $( this ) );
+                }
+            });
         }
 
         // disable submit buttons of required fields

@@ -54,17 +54,10 @@
 						<span class="comment__icon icon-comment-reactions-report"></span>
 						<span class="comment__action">Melden</span>
 					</a>
-					{% if comment.is_recommended -%}
-					<a class="comment__reaction comment__reaction--active js-recommend-comment" data-cid="{{ comment.cid }}" href="#cid-{{ comment.cid }}" title="Empfohlen">
-						<span class="comment__icon icon-comment-reactions-recommend-active"></span>
-						<span class="comment__action">Empfohlen</span>
-					</a>
-					{% else -%}
-					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" href="#cid-{{ comment.cid }}" title="Empfehlen">
+					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="#cid-{{ comment.cid }}" title="Empfehlen">
 						<span class="comment__icon icon-comment-reactions-recommend"></span>
 						<span class="comment__action">Empfehlen</span>
 					</a>
-					{% endif -%}
 				</div>
 			</div>
 		</article>

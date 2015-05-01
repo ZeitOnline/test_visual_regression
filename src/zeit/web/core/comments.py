@@ -6,7 +6,6 @@ import datetime
 import requests
 import requests.exceptions
 from BeautifulSoup import BeautifulSoup
-import pyramid.threadlocal
 import repoze.lru
 
 import zeit.cms.interfaces
@@ -72,13 +71,7 @@ def comment_to_dict(comment):
     else:
         content = '[fehler]'
 
-    request = pyramid.threadlocal.get_current_request()
-    if request and request.authenticated_userid:
-        is_recommended = bool(len(
-            comment.xpath('flagged[@type="{}"][@userid="{}"]'.format(
-                'leser_empfehlung', request.authenticated_userid))))
-    else:
-        is_recommended = False
+    fans = comment.xpath('flagged[@type="leser_empfehlung"]/@userid')
 
     # We have the drupal behaviour that the subject is partly coypied from the
     # comment itself, if a subject was not set. This leads to a slightly more
@@ -108,12 +101,12 @@ def comment_to_dict(comment):
         timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(roles),
+        fans=','.join(fans),
         cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
         recommendations=len(
             comment.xpath('flagged[@type="leser_empfehlung"]')),
         is_author=is_author,
         is_reply=bool(in_reply),
-        is_recommended=is_recommended,
         is_promoted=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
     )
