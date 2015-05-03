@@ -4,11 +4,13 @@ Change log for zeit.web
 1.20.5 (unreleased)
 -------------------
 
+- ZON-1646: Reply, report and recommend comments
+
 - ZON-1667: Implement search centerpage, spice up cpextra handling
 
 - ZON-1628: Fix/clearify vertical spaces on centerpages
 
-- ZON-1627: Add some webtrekk features hidden as errors 
+- ZON-1627: Add some webtrekk features hidden as errors
 
 - ZON-1660: Implement comment interface.
 
