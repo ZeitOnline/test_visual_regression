@@ -1,71 +1,71 @@
 .pagination
-    font-size: remify(14px)
-    margin-top: remify(50px)
-    margin-bottom: remify(20px)
-    a
-        // normal, hover, active, visited, focus
-        +link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
-    &__a11y-title
-        +visuallyhidden
-    &__button
-        +zon-button-inky
-        font-weight: normal
-        line-height: remify(18px)
-        margin: 0
-        &--previous
-            &:before
-                content: "\27E8" // \27E9 \2329 \3008
-                padding-right: .5em
-        &--next
-            &:after
-                content: "\27E9" // \27E9 \232A \3009
-                padding-left: .5em
-    &__nexttitle
-        display: none
-        letter-spacing: $zon-letter-spacing-s
-        margin-left: 1em
+	font-size: remify(14px)
+	margin-top: remify(50px)
+	margin-bottom: remify(20px)
+	a
+		// normal, hover, active, visited, focus
+		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
+	&__a11y-title
+		+visuallyhidden
+	&__button
+		+zon-button-inky
+		font-weight: normal
+		line-height: remify(18px)
+		margin: 0
+		&--previous
+			&:before
+				content: "\27E8" // \27E9 \2329 \3008
+				padding-right: .5em
+		&--next
+			&:after
+				content: "\27E9" // \27E9 \232A \3009
+				padding-left: .5em
+	&__nexttitle
+		display: none
+		letter-spacing: $zon-letter-spacing-s
+		margin-left: 1em
 
 .pager
-    letter-spacing: $zon-letter-spacing-m
-    margin: 2em 0 0
-    padding: 0
-    &__label
-        display: none
-        font-weight: bold
-    &__number
-        display: none
-        &:after
-            color: $zon_grey
-            content: "/"
-        a
-            padding: 0 1em
-            display: inline-block
-        &--current
-            a
-                // normal, hover, active, visited, focus
-                +link-colors($zon-charcoal, $color-link--hover, $color-link--active, $zon-charcoal, $color-link--focus)
-                font-weight: bold
-    &__all
-        display: inline-block
+	letter-spacing: $zon-letter-spacing-m
+	margin: 2em 0 0
+	padding: 0
+	&__label
+		display: none
+		font-weight: bold
+	&__number
+		display: none
+		&:after
+			color: $zon_grey
+			content: "/"
+		a
+			padding: 0 1em
+			display: inline-block
+		&--current
+			a
+				// normal, hover, active, visited, focus
+				+link-colors($zon-charcoal, $color-link--hover, $color-link--active, $zon-charcoal, $color-link--focus)
+				font-weight: bold
+	&__all
+		display: inline-block
 
 +respond-min($break-tablet-min)
-    .pagination
-        &__button
-            &--previous
-                display: none
-        &__nexttitle
-            display: inline
-    .pager
-        line-height: 2
-        margin-top: 7em
-        &__label,
-        &__number
-            display: inline-block
-        &__all
-            padding-left: 1em
-        &__who
-            display: none
-        &__what
-            display: inline-block // needed for text-transform to work
-            &:first-letter
-                text-transform: uppercase
+	.pagination
+		&__button
+			&--previous
+				display: none
+		&__nexttitle
+			display: inline
+	.pager
+		line-height: 2
+		margin-top: 7em
+		&__label,
+		&__number
+			display: inline-block
+		&__all
+			padding-left: 1em
+		&__who
+			display: none
+		&__what
+			display: inline-block // needed for text-transform to work
+			&:first-letter
+				text-transform: uppercase
