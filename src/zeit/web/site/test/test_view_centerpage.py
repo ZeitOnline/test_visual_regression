@@ -728,6 +728,8 @@ def test_onethird_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 520:
         assert teaser.size.get('width') == main_width
     elif screen_size[0] == 768:
-        assert teaser.size.get('width') == (main_width - gutter_width) / 3 - gutter_width
+        assert teaser.size.get('width') == (
+            (main_width - gutter_width) / 3 - gutter_width)
     elif screen_size[0] == 980:
-        assert teaser.size.get('width') == (main_width - gutter_width) / 3 - gutter_width
+        assert teaser.size.get('width') == (
+            (main_width - gutter_width) / 3 - gutter_width)
