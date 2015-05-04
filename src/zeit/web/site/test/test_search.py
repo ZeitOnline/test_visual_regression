@@ -1,30 +1,32 @@
 import datetime
 
 import pytest
+import pysolr
 
 import zeit.cms.interfaces
+import zeit.content.cp.interfaces
 
-import zeit.web.core.sources
 import zeit.web.site.search
 import zeit.web.core.application
+import zeit.web.core.sources
 
 
 @pytest.fixture
 def search_form(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
-    return zeit.web.core.template.get_module(
-        zeit.web.core.application.find_block(
-            context, module='search-form'))
+    block = zeit.web.core.application.find_block(
+        context, module='search-form')
+    return zeit.web.core.template.get_module(block)
 
 
 @pytest.fixture
 def search_area(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
-    return zeit.web.core.template.get_module(
-        zeit.web.core.application.find_block(
-            context, attrib='area', module='search-results'))
+    area = zeit.web.core.application.find_block(
+        context, attrib='area', module='search-results')
+    return zeit.web.core.template.get_results(area)
 
 
 def test_search_form_should_allow_empty_query(search_form):
@@ -142,11 +144,44 @@ def test_search_form_should_create_valid_type_restricted_query(search_form):
         'OR News OR Aktuelles)')
 
 
-@pytest.mark.xfail(reason='TGIT')
-def test_search_area_should_set_hit_counter_to_zero(search_area):
-    pass
+def test_search_area_should_produce_valid_set_of_search_results(
+        monkeypatch, search_area):
+    assert search_area.values()
 
 
-@pytest.mark.xfail(reason='TGIT')
-def test_search_area_should_produce_valid_set_of_search_results(search_area):
-    pass
+def test_empty_search_result_should_produce_zero_hit_counter(
+        monkeypatch, search_area):
+    def search(self, q, **kw):
+        return pysolr.Results([], 0)
+    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+    assert search_area.hits == 0
+
+
+def test_successful_search_result_should_produce_nonzero_hit_counter(
+        monkeypatch, search_area):
+    def search(self, q, **kw):
+        return pysolr.Results([], 73)
+    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+    assert search_area.hits == 73
+
+
+def test_empty_search_result_should_produce_valid_resultset(
+        monkeypatch, search_area):
+    def search(self, q, **kw):
+        return pysolr.Results([], 0)
+    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+    assert len([a for b in search_area.values() for a in b if b]) == 0
+
+
+def test_successful_search_result_should_produce_valid_resultset(
+        monkeypatch, search_area):
+    def search(self, q, **kw):
+        return pysolr.Results(
+            [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
+                for i in range(1, 9)], 42)
+    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+    assert len([a for b in search_area.values() for a in b if b]) == 8
+
+    block = iter(search_area.values()).next()
+    assert zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(block)
+    assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())

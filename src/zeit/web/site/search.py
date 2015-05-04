@@ -85,10 +85,10 @@ BOOSTS = ''.join([
 ])
 
 
-ORDERS = {
-    'relevanz': 'score desc',
-    'aktuell': 'last-semantic-change desc'
-}
+ORDERS = collections.defaultdict(
+    lambda: 'score desc', {
+        'aktuell': 'last-semantic-change desc'}
+)
 
 
 RESTRICTIONS = [lq.not_(lq._field(k, v)) for k, v in {
@@ -199,7 +199,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
         solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, **HIGHLIGHTING)
+            fl=FIELDS, start=self.page, **HIGHLIGHTING)
         docs = list(solr_result)
         self.hits = solr_result.hits
         for block in self.context.values():
