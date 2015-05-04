@@ -1,0 +1,32 @@
+.search-pager
+	margin: remify(40px 0)
+	&__next
+		+zon-button-inky
+		font-weight: normal
+		letter-spacing: 0.1em
+		line-height: remify(18px)
+		margin: 0
+		&:after
+			content: "\27E9" // \27E9 \232A \3009
+			padding-left: .5em
+	&__pages
+		+inline-block(baseline)
+		padding-left: remify(18px)
+	&__page
+		+inline-block
+		color: $zon_dark_grey
+		font-size: remify(14px)
+		&:before
+			+inline-block(baseline)
+			content: " / "
+			color: $zon_light_grey
+			font-weight: normal
+			margin: remify(0 14px)
+		&:first-child:before
+			content: ""
+			display: none
+		&--current
+			color: $zon-charcoal
+			font-weight: bold
+		&--ellipsis
+			color: $zon_light_grey
