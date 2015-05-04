@@ -413,21 +413,21 @@ def test_attr_safe_returns_safe_text(application):
     assert zeit.web.core.template.attr_safe(text) == target
 
 
-@pytest.mark.xfail(reason='I don\'t know how to get this running (ND)')
-def test_get_module_filter_should_correctly_extract_cpextra_id(testserver):
-    context, xml = mock.Mock(), mock.Mock()
-
+def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     assert zeit.web.core.template.get_module(None) is None
 
-    xml.attrib = {'visible': True, 'module': 'n/a'}
-    block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
+    block = zeit.web.core.application.find_block(cp, module='search-form')
+
+    block.visible = True
+    block.cpextra = 'n/a'
     assert zeit.web.core.template.get_module(block) is None
 
-    xml.attrib = {'visible': True, 'module': 'search-form'}
-    block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
+    block.visible = True
+    block.cpextra = 'search-form'
     assert isinstance(zeit.web.core.template.get_module(block),
                       zeit.web.site.search.Form)
 
-    xml.attrib = {'visible': False, 'module': 'n/a'}
-    block = zeit.content.cp.blocks.cpextra.CPExtraBlock(context, xml)
+    block.visible = False
+    block.cpextra = 'n/a'
     assert zeit.web.core.template.get_module(block) is None

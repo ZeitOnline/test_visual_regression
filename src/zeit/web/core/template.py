@@ -11,6 +11,7 @@ import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
+import zope.component.interfaces
 
 import zeit.cms.interfaces
 import zeit.content.link.interfaces
@@ -409,9 +410,9 @@ def call_macro_by_name(context, macro_name, *args, **kwargs):
 
 
 @zeit.web.register_filter
-def automatize(area):
+def get_results(area):
     """Fill an autmatic area with results from a search-form query."""
-    # Wtaf y u no zca? TODO: Make wurk.
+    # TODO: Make this filter utilize ZCA.
     return zeit.web.site.search.ResultsArea(area)
     try:
         return zeit.web.site.search.IResultsArea(area)
@@ -587,7 +588,7 @@ def get_module(block):
     try:
         module = zope.component.getAdapter(
             block, zeit.edit.interfaces.IBlock, block.cpextra)
-    except TypeError:
+    except (zope.component.interfaces.ComponentLookupError, TypeError):
         return
     if block.visible:
         return module
