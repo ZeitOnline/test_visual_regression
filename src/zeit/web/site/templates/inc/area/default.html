@@ -8,10 +8,10 @@
            unrecognized modules, that don't behave like teaser blocks, from using the default teaser template.
            We can id them by checking if they contain a `first_child` teaser. (ND) #}
         {% include
-            ["zeit.web.site:templates/inc/module/{0}_{1}.html".format(module | get_layout | hide_none, area.kind),
-             "zeit.web.site:templates/inc/teaser/{0}_{1}.tpl".format(module | get_layout | hide_none, area.kind),
-             "zeit.web.site:templates/inc/module/" + module | get_layout | hide_none + ".html"] +
-             (teaser and ["zeit.web.site:templates/inc/teaser/" + module | get_layout | default("default.tpl") + ".tpl"] or []) ignore missing %}
+            ["zeit.web.site:templates/inc/module/{0}_{1}.html".format(module | get_layout, area.kind),
+             "zeit.web.site:templates/inc/teaser/{0}_{1}.tpl".format(module | get_layout, area.kind),
+             "zeit.web.site:templates/inc/module/.html".format(module | get_layout)] +
+             (teaser and ["zeit.web.site:templates/inc/teaser/{}.tpl".format(module | get_layout | default("default.tpl"))] or []) ignore missing %}
         {% block after_module_include scoped %}{% endblock %}
     {% endfor %}
     {% block after_module_list %}{% endblock %}

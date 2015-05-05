@@ -1,7 +1,7 @@
 <div class="{{ 'cp-region' | with_mods(region | get_layout) }}">
     {% for area in region.values() %}
-        {%- include ["zeit.web.site:templates/inc/area/" + area | get_layout + ".html",
-                     "zeit.web.site:templates/inc/area/" + area | get_layout + ".tpl",
+        {%- include ["zeit.web.site:templates/inc/area/{}.html".format(area | get_layout),
+                     "zeit.web.site:templates/inc/area/{}.tpl".format(area | get_layout),
                      "zeit.web.site:templates/inc/area/default.html"] ignore missing -%}
     {% endfor %}
 </div>

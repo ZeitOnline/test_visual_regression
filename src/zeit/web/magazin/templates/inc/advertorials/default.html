@@ -1,4 +1,4 @@
-{% extends "zeit.web.magazin:templates/" + view.type + ".html" %}
+{% extends "zeit.web.magazin:templates/{}.html".format(view.type) %}
 
 {% block css_link %}
 <!--[if gt IE 8]><!-->

@@ -30,7 +30,7 @@
             {% for module in area.values() -%}
                 {% set teaser = module | first_child %}
                 {% if loop.index <= area.display_amount %}
-                    {% include ["zeit.web.site:templates/inc/teaser/" + module | get_layout + "_position_" + loop.index | string + ".tpl",
+                    {% include ["zeit.web.site:templates/inc/teaser/{}_position_{}.tpl".format(module | get_layout, loop.index),
                                 "zeit.web.site:templates/inc/teaser/zon-parquet-small.tpl"] %}
                 {% endif %}
             {% endfor %}

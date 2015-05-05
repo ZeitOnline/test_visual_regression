@@ -23,7 +23,7 @@ Available attributes:
 
 {% block main %}
     {% for region in view.regions %}
-        {%- include ["zeit.web.site:templates/inc/region/" + region.kind + ".html",
+        {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
 {% endblock main %}
