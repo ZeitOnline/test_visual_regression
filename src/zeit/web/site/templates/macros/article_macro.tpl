@@ -127,8 +127,9 @@
                         data-role="tab" 
                         data-aria-controls="{{ id }}-{{ loop.index }}-article" 
                         class="infobox-tab__title"
-                        data-index="{{ loop.index }}">
-                        <a class="infobox-tab__link" href="#{{ id }}-{{ loop.index }}">{{ title }}</a>
+                        data-index="{{ loop.index }}"
+                        tabindex="0">
+                        <a tabindex="-1" class="infobox-tab__link" href="#{{ id }}-{{ loop.index }}">{{ title }}</a>
                     </h3>
                     <article 
                         role="tabpanel" 

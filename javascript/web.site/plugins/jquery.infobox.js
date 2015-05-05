@@ -82,7 +82,8 @@
                             .removeAttr( 'role' )
                             .removeAttr( 'aria-controls' )
                             .removeAttr( 'id' )
-                            .removeClass( 'infobox-tab__title--displayed' );
+                            .removeClass( 'infobox-tab__title--displayed' )
+                            .attr( 'tabindex', '-1' );
                         if ( $( this ).attr( 'aria-selected' ) === 'true' ) {
                             $( '.infobox-tab .infobox-tab__title' )
                                 .eq( index )
@@ -97,6 +98,7 @@
                             .attr( 'role', $( this ).data( 'role' ) )
                             .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
                             .attr( 'id', id + $( this ).data( 'index' ) + '-tab' )
+                            .attr( 'tabindex', '0' )
                             .addClass( 'infobox-tab__title--displayed' );
                     });
                 } else {
@@ -105,13 +107,15 @@
                             .removeAttr( 'role' )
                             .removeAttr( 'aria-controls' )
                             .removeAttr( 'id' )
-                            .removeClass( 'infobox-tab__title--displayed' );
+                            .removeClass( 'infobox-tab__title--displayed' )
+                            .attr( 'tabindex', '-1' );
                     });
                     $( '.infobox__navigation .infobox-tab__title' ).each(function() {
                         $( this )
                             .attr( 'role', $( this ).data( 'role' ) )
                             .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
                             .attr( 'id', id + '-' + $( this ).data( 'index' ) + '-tab' )
+                            .attr( 'tabindex', '0' )
                             .addClass( 'infobox-tab__title--displayed' );
                     });
                     if ( state === 'desktop' && openPanels.length !== 1 ) {
@@ -131,7 +135,10 @@
             // mark all as hidden
             panels.attr( 'aria-hidden', true );
             // copy links
-            $( '.infobox-tab__title', this ).clone( true ).appendTo( '#' + id + '--navigation' );
+            $( '.infobox-tab__title', this )
+                .clone( true )
+                .attr( 'tabindex', '-1' )
+                .appendTo( '#' + id + '--navigation' );
             // listener change in a11y functionality
             $( this ).on( 'infoboxChange', changeMenu );
             // trigger for first load
