@@ -45,13 +45,13 @@
                 var panel = $( '#' + $( elem ).attr( 'aria-controls' ) ),
                     showPanels = function( tabs, panels ) {
                         tabs.attr( 'aria-selected', 'true' ).attr( 'aria-expanded', 'true' );
-                        tabs.find( 'a' ).addClass( 'infobox-tab__link--active' ).blur();
-                        panels.attr( 'aria-hidden', 'false' ).focus();
+                        tabs.find( 'a' ).addClass( 'infobox-tab__link--active' );
+                        panels.attr( 'aria-hidden', 'false' );
                     },
                     hidePanels = function( tabs, panels ) {
                         tabs.attr( 'aria-selected', 'false' ).attr( 'aria-expanded', 'false' );
-                        tabs.find( 'a' ).removeClass( 'infobox-tab__link--active' ).blur();
-                        panels.attr( 'aria-hidden', 'true' ).blur();
+                        tabs.find( 'a' ).removeClass( 'infobox-tab__link--active' );
+                        panels.attr( 'aria-hidden', 'true' );
                     };
                 if ( state === 'mobile' ) {
                     if ( elem.attr( 'aria-selected' ) === 'true' ) {
@@ -148,6 +148,13 @@
             $( '.infobox-tab__title', this ).on( 'click', function( event ) {
                 event.preventDefault();
                 switchPanel( $( this ) );
+            });
+            $( '.infobox-tab__title', this ).on( 'keypress', function( event ) {
+                var code = event.keyCode || event.which;
+                event.preventDefault();
+                if ( code === 13 || code === 32 ) { // enter or space
+                    $( this ).trigger( 'click' );
+                }
             });
         });
     };
