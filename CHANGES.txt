@@ -1,8 +1,20 @@
 Change log for zeit.web
 =======================
 
-1.20.5 (unreleased)
+1.21.2 (unreleased)
 -------------------
+
+- Nothing changed yet.
+
+
+1.21.1 (2015-05-05)
+-------------------
+
+- FIX: Strip unfulfillable version constraints
+
+
+1.21 (2015-05-05)
+-----------------
 
 - ZON-1534: Improve search implementation test coverage
 
