@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<regions>
+    <region kind="empty" title="Leer"/>
+    <region kind="multi" title="Multi">
+        <area kind="major"/>
+        <area kind="minor"/>
+    </region>
+    <region kind="duo" title="Duo">
+        <area kind="duo"/>
+        <area kind="duo"/>
+    </region>
+    <region kind="solo" title="Solo">
+        <area kind="single"/>
+    </region>
+</regions>

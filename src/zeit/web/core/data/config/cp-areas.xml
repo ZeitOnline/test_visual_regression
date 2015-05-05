@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<areas>
+    <area kind="single">single</area>
+    <area kind="duo">duo</area>
+    <area kind="major">major</area>
+    <area kind="minor">minor</area>
+    <area kind="parquet">parquet</area>
+    <area kind="search-results">search-results</area>
+</areas>
