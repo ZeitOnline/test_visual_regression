@@ -173,7 +173,7 @@ def get_layout(block, default='default', request=None):
 
     try:
         key = request and hash(block)
-    except TypeError, e:
+    except (NotImplementedError, TypeError), e:
         log.debug('Cannot hash and cache cp block layout: {}'.format(e))
         key = None
 

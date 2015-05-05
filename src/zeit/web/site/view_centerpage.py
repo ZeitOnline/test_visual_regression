@@ -25,7 +25,13 @@ import zeit.web.site.spektrum
 log = logging.getLogger(__name__)
 
 
-class LegacyMixin(object):
+@grokcore.component.implementer(zeit.edit.interfaces.IBlock)
+class LegacyModule(zeit.web.core.utils.nslist):
+
+    def __init__(self, arg, **kw):
+        super(LegacyModule, self).__init__([v for v in arg if v])
+        self.layout = kw.pop('layout', 'default')
+        self.type = 'teaser'
 
     @property
     def layout(self):
@@ -36,37 +42,30 @@ class LegacyMixin(object):
         self._layout = zeit.content.cp.layout.BlockLayout(
             value, value, areas=[], image_pattern=value)
 
-    def __repr__(self):
-        return '<{} at {} with {} {}>'.format(
-            self.__class__.__name__, hex(id(self)), len(self),
-            'child' if len(self) == 1 else 'children')
-
     def __hash__(self):
-        if hasattr(self.layout, 'id'):
+        if getattr(self.layout, 'id', None):
             return hash((self.layout.id, id(self)))
-        return super(LegacyMixin, self).__hash__()
-
-
-@grokcore.component.implementer(zeit.edit.interfaces.IBlock)
-class LegacyModule(LegacyMixin, zeit.web.core.utils.nslist):
-
-    def __init__(self, arg, **kw):
-        super(LegacyModule, self).__init__([v for v in arg if v])
-        self.layout = kw.pop('layout', 'default')
-        self.type = 'teaser'
+        else:
+            raise NotImplementedError()
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
-class LegacyArea(LegacyMixin, collections.OrderedDict):
+class LegacyArea(collections.OrderedDict):
 
     def __init__(self, arg, **kw):
         collections.OrderedDict.__init__(
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
-        self.layout = kw.pop('layout', 'fullwidth')
-        self.width = kw.pop('width', '1/1')
+        self.kind = kw.pop('kind', 'single')
+        self.is_teaserbar = kw.pop('is_teaserbar', False)
 
     def append(self, value):
         self['id-{}'.format(uuid.uuid1())] = value
+
+    def __hash__(self):
+        if self.kind:
+            return hash((self.kind, id(self)))
+        else:
+            raise NotImplementedError()
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IRegion)
@@ -75,8 +74,13 @@ class LegacyRegion(LegacyArea):
     def __init__(self, arg, **kw):
         collections.OrderedDict.__init__(
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
-        self.layout = kw.pop('layout', 'normal')
-        self.title = kw.pop('title', None)
+        self.kind = kw.pop('kind', 'solo')
+
+    def __hash__(self):
+        if self.kind:
+            return hash((self.kind, id(self)))
+        else:
+            raise NotImplementedError()
 
 
 @pyramid.view.view_config(
@@ -140,19 +144,15 @@ class LegacyCenterpage(Centerpage):
     def regions(self):
         regions = []
 
-        region_fullwidth = LegacyRegion(
-            [self.area_fullwidth], layout='fullwidth')
+        region_fullwidth = LegacyRegion([self.area_fullwidth])
         regions.append(region_fullwidth)
 
         region_lead = LegacyRegion([self.area_main, self.area_informatives],
-                                   layout='lead')
+                                   kind='multi')
         regions.append(region_lead)
 
-        area_videostage = LegacyArea([self.module_videostage],
-                                     layout='video',
-                                     width='1/1')
-        region_video = LegacyRegion([area_videostage],
-                                    layout='fullwidth')
+        area_videostage = LegacyArea([self.module_videostage])
+        region_video = LegacyRegion([area_videostage])
         regions.append(region_video)
 
         regions += self.region_list_parquet
@@ -186,15 +186,13 @@ class LegacyCenterpage(Centerpage):
                 'zon-fullwidth', None)
 
         area = self.context.values()[0]['lead']
-        return LegacyArea(
-            [m for m in area.itervalues() if valid_module(m)],
-            layout='lead', width='2/3')
+        return LegacyArea([m for m in area.itervalues() if valid_module(m)],
+                          kind='major')
 
     @zeit.web.reify
     def area_informatives(self):
-        return LegacyArea([m for m in (
-            self.module_buzz_mostread, self.module_printbox) if m],
-            layout='informatives', width='1/3')
+        return LegacyArea([m for m in (self.module_buzz_mostread,
+                           self.module_printbox) if m], kind='minor')
 
     @zeit.web.reify
     def module_buzz_mostread(self):

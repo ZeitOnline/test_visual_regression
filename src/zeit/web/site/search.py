@@ -162,7 +162,7 @@ class Form(zeit.web.core.block.Module):
         return ' '.join(tokens)
 
 
-class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
+class IResultsArea(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'relevanz', required=False)
