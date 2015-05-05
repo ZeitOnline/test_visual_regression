@@ -4,7 +4,7 @@ Change log for zeit.web
 1.22 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Strip unfulfillable version constraints
 
 
 1.21 (2015-05-05)
