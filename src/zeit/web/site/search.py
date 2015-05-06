@@ -15,6 +15,7 @@ from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block
+import zeit.web.core.template
 
 
 log = logging.getLogger(__name__)
@@ -241,4 +242,5 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def pagination(self):
-        return []
+        return zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages)
