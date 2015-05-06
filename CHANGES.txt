@@ -4,7 +4,7 @@ Change log for zeit.web
 1.21.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1729 Setup view defaults to DRY
 
 
 1.21.1 (2015-05-05)
