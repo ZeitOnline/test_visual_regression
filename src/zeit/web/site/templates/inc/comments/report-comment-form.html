@@ -1,5 +1,3 @@
-<div class="comment-section__form">
-{%- if request.authenticated_userid %}
 	<form action="{{ view.comments.comment_report_url }}" method="POST" class="comment-form" id="report-comment-form">
 		<textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="comment-form__textarea js-required"></textarea>
 		<p class="comment-form__text">
@@ -13,17 +11,3 @@
 			<button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
 		</p>
 	</form>
-{%- else %}
-	<form class="comment-login" style="display: none">
-		<p>
-			Bitte melden Sie sich an, um diesen Kommentar zu melden.
-		</p>
-		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url | e }}">
-			Anmelden
-		</a>
-		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url | e }}">
-			Registrieren
-		</a>
-	</form>
-{%- endif %}
-</div>

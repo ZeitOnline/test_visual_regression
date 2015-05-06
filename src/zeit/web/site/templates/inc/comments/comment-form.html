@@ -1,6 +1,6 @@
 {% set pid = view.request.GET['commentpid'] %}
 {% if pid %}
-	{% set submit_value = 'Antwort senden' %}
+	{% set submit_value = 'Antworten' %}
 	{% set placeholder = 'Ihre Antwort auf Kommentar #' + pid %}
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
@@ -9,6 +9,7 @@
 
 <div class="comment-section__form">
 {%- if request.authenticated_userid %}
+	{%- block comment_form %}
 	<form class="comment-form" action="{{ view.comments.comment_post_url }}" method="POST" id="comment-form">
 		<div class="comment-form__text">
 			{% if request.session.user.picture %}
@@ -30,6 +31,7 @@
 			<input class="button" type="submit" value="{{ submit_value }}" />
 		</p>
 	</form>
+	{%- endblock %}
 {%- else %}
 	<form class="comment-login" id="comment-form">
 		<p>
@@ -46,5 +48,19 @@
 </div>
 
 <script type="text/template" id="js-report-comment-template">
+{%- if request.authenticated_userid %}
 	{% include "zeit.web.site:templates/inc/comments/report-comment-form.html" %}
+{%- else %}
+	<form class="comment-login" style="display: none">
+		<p>
+			Bitte melden Sie sich an, um diesen Kommentar zu melden.
+		</p>
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url | e }}">
+			Anmelden
+		</a>
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url | e }}">
+			Registrieren
+		</a>
+	</form>
+{%- endif %}
 </script>

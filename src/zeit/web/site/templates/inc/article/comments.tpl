@@ -66,7 +66,7 @@
 {% endif %}
 
 {% if view.request.GET['reportcid'] %}
-    <esi:include src="{{ view.article_url }}/report-comment-form?reportcid={{ view.request.GET['reportcid'] }}" />
+    <esi:include src="{{ view.article_url }}/report-form?reportcid={{ view.request.GET['reportcid'] }}" />
 {% else %}
     <esi:include src="{{ view.article_url }}/comment-form?commentpid={{ view.request.GET['commentpid'] }}" />
 {% endif %}
