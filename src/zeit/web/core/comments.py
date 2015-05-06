@@ -130,12 +130,34 @@ def request_thread(path):
         return
 
 
-def get_thread(unique_id, destination=None, reverse=False):
-    return get_cacheable_thread(unique_id, destination, reverse)
+def get_thread(unique_id, destination=None, sort='asc', page='all'):
+    thread = get_cacheable_thread(unique_id, destination)
+
+    if thread is None:
+        return
+
+    thread = thread.copy()
+
+    if not(thread['sort'] == sort):
+        thread['comments'].reverse()
+        thread['sort'] == sort
+
+    thread['page_number'] = page
+    c_len = len(thread['comments'])
+    thread['page_total'] = (
+        c_len // 10 if c_len % 10 == 0 else (c_len // 10) + 1)
+
+    if not(page == 'all'):
+        if thread['page_total'] <= page:
+            thread['comments'] = thread['comments'][(page - 1) * 10: page * 10]
+        else:
+            thread['comments'] = []
+
+    return thread
 
 
 @cache_maker.expiring_lrucache(maxsize=1000, timeout=60, name='comment_thread')
-def get_cacheable_thread(unique_id, destination=None, reverse=False):
+def get_cacheable_thread(unique_id, destination=None):
     """Return a dict representation of the comment thread of the given
     article.
 
@@ -164,12 +186,15 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
     except (IndexError, lxml.etree.XMLSyntaxError):
         return
 
-    comments = _sort_comments(list(comment_to_dict(c) for c in comment_list))
+    comment_list = list(comment_to_dict(c) for c in comment_list)
+    comments, index = _sort_comments(comment_list)
 
     try:
         return dict(
             comments=comments,
+            index=index,
             comment_count=to_int(comment_count),
+            sort='asc',
             nid=comment_nid,
             comment_post_url='{}/agatho/thread{}?destination={}'.format(
                 conf.get('agatho_host', ''), path, destination),
@@ -183,6 +208,7 @@ def _sort_comments(comments):
 
     comments_sorted = collections.OrderedDict()
     root_ancestors = {}
+    comment_index = {}
 
     while comments:
         comment = comments.pop(0)
@@ -190,16 +216,24 @@ def _sort_comments(comments):
         if not comment["in_reply"]:
             root_ancestors[comment['cid']] = comment['cid']
             comments_sorted[comment['cid']] = [comment, []]
+            comment['shown_num'] = str(
+                comments_sorted.keys().index(comment['cid']) + 1)
         else:
             try:
                 ancestor = root_ancestors[comment['in_reply']]
                 root_ancestors[comment['cid']] = ancestor
                 comments_sorted[ancestor][1].append(comment)
+                p_index = comments_sorted[ancestor][0]['shown_num']
+                comment['shown_num'] = "{}.{}".format(p_index, len(
+                    comments_sorted[ancestor][1]))
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
                           "no ancestor could be found".format(comment['cid']))
-    return list(
-        itertools.chain(*[[li[0]]+li[1] for li in comments_sorted.values()]))
+        comment_index[comment['cid']] = comment
+    return (
+        list(itertools.chain(
+            *[[li[0]] + li[1] for li in comments_sorted.values()])),
+        comment_index)
 
 
 def request_counts(*unique_ids):

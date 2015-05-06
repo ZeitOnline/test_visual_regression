@@ -117,7 +117,7 @@ def test_entire_thread_should_be_parsed(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, destination='foo', reverse=True)
+        unique_id, destination='foo', sort='desc')
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
@@ -127,7 +127,7 @@ def test_paging_should_not_affect_comment_threads(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, destination='foo', reverse=True)
+        unique_id, destination='foo', sort='desc')
     assert thread_as_json['comments'][0]['name'] == 'claudiaE'
     assert thread_as_json['comments'][40]['name'] == 'Galgenstein'
     assert thread_as_json['comment_count'] == 41
@@ -189,9 +189,11 @@ def test_comment_tree_should_be_flattened_on_level_two():
         cid=6)
 
     comments = [cid_1, cid_2, cid_3, cid_4, cid_5, cid_6]
-    sorted_comments = zeit.web.core.comments._sort_comments(comments)
-    readable_comments = [comment['cid'] for comment in sorted_comments]
-    assert readable_comments == [1, 6, 2, 4, 5, 3]
+    sorted_comments = zeit.web.core.comments._sort_comments(comments)[0]
+    readable_comments = [
+        (comment['cid'], comment['shown_num']) for comment in sorted_comments]
+    assert readable_comments == (
+        [(1, '1'), (6, '1.1'), (2, '2'), (4, '2.1'), (5, '2.2'), (3, '3')])
 
 
 def _create_poster(monkeypatch):
