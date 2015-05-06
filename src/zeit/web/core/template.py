@@ -615,5 +615,10 @@ def debug_breaking_news():
 
 @zeit.web.register_filter
 def append_get_params(request, **kw):
-    params = dict(request.GET.items() + kw.items())
+    # Append GET parameters that are not reset
+    # by setting the param value to None explicitly.
+    params = dict((k, v) for k, v in dict(
+        request.GET.items() + kw.items()).iteritems() if v is not None)
+    if params == {}:
+        return request.path_url
     return '?'.join([request.path_url, urllib.urlencode(params)])
