@@ -65,7 +65,11 @@
 	</div>
 {% endif %}
 
-	<esi:include src="{{ view.article_url }}/comment-form?commentpid={{ view.request.GET['commentpid'] }}" />
+{% if view.request.GET['reportcid'] %}
+    <esi:include src="{{ view.article_url }}/report-comment-form?reportcid={{ view.request.GET['reportcid'] }}" />
+{% else %}
+    <esi:include src="{{ view.article_url }}/comment-form?commentpid={{ view.request.GET['commentpid'] }}" />
+{% endif %}
 
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">
