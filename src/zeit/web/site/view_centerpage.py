@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import collections
 import logging
-import urllib
 import uuid
 
 import pyramid.response
@@ -122,11 +121,6 @@ class Centerpage(
         elif self.context.ressort:
             return self.context.ressort.lower()
         return ''
-
-    def path_with_params(self, **kw):
-        """Return the current request URL extended by given GET parameters."""
-        params = dict(self.request.GET.items() + kw.items())
-        return '?'.join([self.request.path_url, urllib.urlencode(params)])
 
 
 @pyramid.view.view_config(

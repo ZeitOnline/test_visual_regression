@@ -614,8 +614,6 @@ def debug_breaking_news():
 
 
 @zeit.web.register_filter
-def append_get_params(request, get_params):
-    p = request.GET.copy()
-    p.update(get_params)
-    return '{}?{}'.format(
-        request.path_url, urllib.urlencode(p))
+def append_get_params(request, **kw):
+    params = dict(request.GET.items() + kw.items())
+    return '?'.join([request.path_url, urllib.urlencode(params)])
