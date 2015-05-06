@@ -1,5 +1,6 @@
 import collections
 import logging
+import math
 
 import grokcore.component
 import zope.component
@@ -230,15 +231,21 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def total_pages(self):
-        return 0
+        if self.hits > 0:
+            return math.ceil(self.hits / self.count)
+        else:
+            return 0
 
     @zeit.web.reify
     def current_page(self):
-        return 0
+        return self.page
 
     @zeit.web.reify
     def next_page(self):
-        return 0
+        if self.current_page == self.total_pages:
+            return
+        else:
+            return min(self.total_pages, self.current_page+1)
 
     @zeit.web.reify
     def pagination(self):
