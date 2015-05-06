@@ -610,3 +610,38 @@ def get_google_tag_manager_host():
 def debug_breaking_news():
     request = pyramid.threadlocal.get_current_request()
     return 'eilmeldung' == request.GET.get('debug', '')
+
+
+@zeit.web.register_global
+def calculate_pagination(current_page, total_pages):
+    # we have 7 slots to display pages,
+    # so anything less than 8 pages can be displayed 'as is'
+    if total_pages <= 7:
+        return range(1, total_pages+1)
+
+    # real math :D
+    the_set = set([1, max(1, current_page-1), current_page,
+                  min(total_pages, current_page+1), total_pages])
+    pages = sorted(list(the_set))
+
+    if pages[1] - pages[0] == 2:
+        pages.insert(1, pages[0]+1)
+    elif pages[1] - pages[0] > 2:
+        pages.insert(1, None)
+
+    if pages[-1] - pages[-2] == 2:
+        pages.insert(-1, pages[-2]+1)
+    elif pages[-1] - pages[-2] > 2:
+        pages.insert(-1, None)
+
+    if len(pages) < 7:
+        pre_none_filler = range(min(total_pages, current_page + 2),
+                                total_pages)[:7 - len(pages)]
+        post_none_filler = range(2, max(2, current_page-1))[len(pages) - 7:]
+
+        if pre_none_filler:
+            pages = pages[:-2] + pre_none_filler + pages[-2:]
+        if post_none_filler:
+            pages = pages[:2] + post_none_filler + pages[2:]
+
+    return pages
