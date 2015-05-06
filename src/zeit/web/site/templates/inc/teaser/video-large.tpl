@@ -4,4 +4,6 @@
 
 {% block playbutton_modifier %}block{% endblock %}
 
+{% block description %}<p class="{{ self.layout() }}__description">{{ teaser.teaserText }}</p>{% endblock %}
+
 {% block inlineplaybutton %}{% endblock %}

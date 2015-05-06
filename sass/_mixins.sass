@@ -229,11 +229,20 @@
 	+transition(all .15s ease-in-out)
 	&:visited
 		color: $visited-color
-	&:hover
+	&:hover,
+	&:focus
 		background-color: $hover-background-color
 		border-color: $hover-border-color
 		color: $hover-color
 		cursor: pointer
+	&[disabled]
+		opacity: .5
+	&[disabled]:hover,
+	&[disabled]:focus
+		background-color: $background-color
+		border-color: $border-color
+		color: $color
+		cursor: default
 
 =zon-button-inky
 	+zon-button($zon_dark_grey, $zon_grey, $zon_dark_grey, $zon_grey, $white, $zon-alto, $white, $margin: 0, $padding: remify(5px) 1em remify(4px))
@@ -242,7 +251,7 @@
 	+zon-button(rgba(0,0,0, 0.2), rgba(0,0,0, 0.5), $zon_mid_grey, $zon-alto, $zon_lighter_grey, $white, $zon-alto)
 
 =zon-button-light
-	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal)
+	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal, $margin: 0)
 
 /// mac font smoothing switching
 /// please use extremely carefully http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/

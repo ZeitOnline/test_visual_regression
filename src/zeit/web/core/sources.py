@@ -1,9 +1,17 @@
 import logging
+import os
+import os.path
+import pkg_resources
+import random
 import re
+import urlparse
 
 import lxml.etree
+import pysolr
 import zope.interface
 
+import zeit.cms.interfaces
+import zeit.content.article.interfaces
 import zeit.imp.source
 
 import zeit.web.core.interfaces
@@ -68,3 +76,45 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
         # Flattens and reverses _map, so we can easily lookup a layout.
         super(TeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
+
+
+class Solr(object):
+    """Mock Solr implementation that is used for local development."""
+
+    zope.interface.implements(zeit.solr.interfaces.ISolr)
+
+    def add(self, docs, **kw):
+        raise NotImplementedError()
+
+    def commit(self, **kw):
+        raise NotImplementedError()
+
+    def delete(self, **kw):
+        raise NotImplementedError()
+
+    def more_like_this(self, q, mltfl, **kw):
+        raise NotImplementedError()
+
+    def search(self, q, rows=10, **kw):
+        parts = urlparse.urlparse('egg://zeit.web.core/data')
+        repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
+        results = []
+        for root, subdirs, files in os.walk(repo):
+            if not random.randint(0, 4):
+                continue  # Skip some folders to speed things up.
+            for filename in files:
+                try:
+                    assert not filename.endswith('meta')
+                    unique_id = os.path.join(
+                        root.replace(repo, 'http://xml.zeit.de'), filename)
+                    content = zeit.cms.interfaces.ICMSContent(unique_id)
+                    assert zeit.content.article.interfaces.IArticle.providedBy(
+                        content)
+                    results.append({u'uniqueId': content.uniqueId})
+                except (AssertionError, TypeError):
+                    continue
+        return pysolr.Results(
+            random.sample(results, min(rows, len(results))), len(results))
+
+    def update_raw(self, xml, **kw):
+        raise NotImplementedError()

@@ -5,6 +5,7 @@
   <layout id="dmr" blocks="1">Double Ad-Medium Rectangle</layout>
   <layout id="parquet">Parkett (Teaser untereinander)</layout>
   <layout id="parquet-break">Parkett-Unterbrecherleiste</layout>
+  <layout id="search-results" blocks="10">Suchergebnisliste</layout>
   <layout id="zmo-cluster" blocks="1" available="zeit.magazin.interfaces.IZMOContent">Teaser-Cluster (ZMO)</layout>
   <layout id="zmo-mtb" blocks="6" available="zeit.magazin.interfaces.IZMOContent">Monothematischer Block (ZMO)</layout>
   <layout id="zmo-teaser-bar" blocks="3" available="zeit.magazin.interfaces.IZMOContent">Teaser Block (ZMO, 3sp)</layout>

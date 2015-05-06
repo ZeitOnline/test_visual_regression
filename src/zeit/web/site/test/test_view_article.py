@@ -201,6 +201,22 @@ def test_article_sharing_menu_should_open_and_close(
         'sharing menu should hide again on click')
 
 
+def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(768, 800)
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+
+    sharing_menu_target = driver.find_element_by_css_selector(
+        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+    whatsapp_item = driver.find_element_by_css_selector(
+        '.sharing-menu__item--whatsapp')
+
+    sharing_menu_target.click()
+    assert not(whatsapp_item.is_displayed()), (
+        'Sharing link to WhatsApp should be hidden on tablet & desktop')
+
+
 def test_infobox_in_article_is_shown(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url)).cssselect
@@ -272,3 +288,34 @@ def test_infobox_desktop_actions(selenium_driver, testserver, screen_size):
         assert tabpanels[1].get_attribute('aria-hidden') == 'true'
         assert tabpanels[2].get_attribute('aria-hidden') == 'true'
         assert tabpanels[3].get_attribute('aria-hidden') == 'false'
+
+
+def test_article_has_news_source_as_list():
+    content = mock.Mock()
+    content.copyrights = 'ZEIT ONLINE, Reuters'
+
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == 'ZEITONLINE;Reuters'
+
+
+def test_article_has_news_source_dpa():
+    content = mock.Mock()
+    content.ressort = 'News'
+    content.product.id = 'News'
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == "dpa"
+
+
+def test_article_has_news_source_sid():
+    content = mock.Mock()
+    content.product.id = 'SID'
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == "Sport-Informations-Dienst"
+
+
+def test_article_has_news_source_empty():
+    content = mock.Mock()
+    content.copyrights = None
+
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == ''

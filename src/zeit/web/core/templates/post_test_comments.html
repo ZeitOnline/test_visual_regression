@@ -13,28 +13,28 @@
                 </ul>
             </div>
             {% endif %}
-            <form method='POST'>
-                <div>
+            <form method="POST">
+                <p>
                     <label>Kommentar:</label>
-                    <textarea rows="5" cols="70" name='comment'></textarea>
-                </div>
-                <div>
-                    <input id='path' type='text' name='path'/>
-                    <label for='path'> für Pfad (z.B.: artikel/01)</label>
-                </div>
-                <div>
-                    <input id='pid' type='text' name='pid'/>
-                    <label for='pid'>Antwort auf (pid)</label>
-                </div>
-                <div>
-                    <select id='action' name='action'>
+                    <textarea rows="5" cols="70" name="comment"></textarea>
+                </p>
+                <p>
+                    <input id="path" type="text" name="path"/>
+                    <label for="path"> für Pfad (z.B.: artikel/01)</label>
+                </p>
+                <p>
+                    <input id="pid" type="text" name="pid"/>
+                    <label for="pid">bezieht sich auf (pid)</label>
+                </p>
+                <p>
+                    <select id="action" name="action">
                         <option value="comment">Kommentieren</option>
                         <option value="report">Bedenklich melden</option>
                         <option value="recommend">Empfehlen</option>
                     </select>
-                    <label for='action'>Action</label>
-                </div>
-                <input type='submit'/>
+                    <label for="action">Action</label>
+                </p>
+                <input type="submit" class="button"/>
             <form>
         </div>
     </div>

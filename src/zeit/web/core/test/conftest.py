@@ -131,7 +131,8 @@ settings = {
 
     'debug.show_exceptions': True,
     'debug.propagate_jinja_errors': True,
-    'debug.enable_profiler': False
+    'debug.enable_profiler': False,
+    'dev_environment': True
 }
 
 

@@ -14,7 +14,7 @@ def test_comments_should_contain_basic_meta_data(
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     comm = browser.cssselect('article.comment')[0]
     assert 'Skarsgard' in comm.cssselect('.comment__name')[0].text
-    date = zeit.web.core.template.format_date_ago(
+    date = zeit.web.core.template.format_date(
         datetime.datetime(2013, 8, 16, 20, 24))
     assert date in comm.cssselect('.comment__date')[0].text
     assert '#1' in comm.cssselect('.comment__date')[0].text
@@ -39,3 +39,16 @@ def test_comments_get_thread_should_respect_top_level_sort_order(
     assert (thread_most_recent['comments'][0]['timestamp'] >
             thread_most_recent['comments'][1]['timestamp'],
             'Comments are not sorted most recent first.')
+
+
+def test_comment_form_should_be_rendered(
+        testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01/comment-form' %
+                          testserver.url)
+    assert len(browser.cssselect('#comment-form')) == 1
+
+
+def test_comment_form_should_be_rendered_through_esi(
+        testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    assert len(browser.cssselect('include')) == 1
