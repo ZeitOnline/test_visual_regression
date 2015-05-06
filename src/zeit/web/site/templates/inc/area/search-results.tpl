@@ -17,17 +17,18 @@
 {% endblock %}
 
 {% block after_module_list %}
-<div class="search-pager" id="search-nav">
-    {# if area.next_page #}
-    <a class="search-pager__next" href="#{{ area.next_page }}">Nächste Seite</a>
-    {# endif #}
-    <ul class="search-pager__pages">
+{% if area.pagination %}
+<div class="center-pager" id="center-pager">
+    {% if area.next_page %}
+    <a class="center-pager__next" href="#{{ area.next_page }}">Nächste Seite</a>
+    {% endif %}
+    <ul class="center-pager__pages">
         {% for num in area.pagination %}
-        <li class="search-pager__page {% if num == area.current_page %} search-pager__page--current {% endif %}">
+        <li class="center-pager__page {% if num == area.current_page %} center-pager__page--current {% endif %}">
             {% if num == area.current_page %}
                 {{ num }}
             {% elif num %}
-                <a class="search-pager__link" href="#{{ num }}">{{ num }}</a>
+                <a class="center-pager__link" href="#{{ num }}">{{ num }}</a>
             {% else %}
                 <span>…</span>
             {% endif %}
@@ -35,4 +36,5 @@
         {% endfor %}
     </ul>
 </div>
+{% endif %}
 {% endblock %}
