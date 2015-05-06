@@ -130,28 +130,33 @@ def request_thread(path):
         return
 
 
-def get_thread(unique_id, destination=None, sort='asc', page='all'):
+def get_thread(unique_id, destination=None, sort='asc', page=None):
     thread = get_cacheable_thread(unique_id, destination)
-
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    page_size = int(conf.get('comment_page_size', '10'))
     if thread is None:
         return
 
+    # We do not want to touch the references of the cached thread
     thread = thread.copy()
+    thread['comments'] = list(thread['comments'])
 
     if not(thread['sort'] == sort):
         thread['comments'].reverse()
         thread['sort'] == sort
 
-    thread['page_number'] = page
+    thread['page'] = page
     c_len = len(thread['comments'])
-    thread['page_total'] = (
-        c_len // 10 if c_len % 10 == 0 else (c_len // 10) + 1)
+    total =  c_len // page_size
+    thread['page_total'] = total if c_len % page_size == 0 else total + 1
 
-    if not(page == 'all'):
-        if thread['page_total'] <= page:
-            thread['comments'] = thread['comments'][(page - 1) * 10: page * 10]
+    if page:
+        if page <= thread['page_total']:
+            thread['comments'] = (
+                thread['comments'][(page - 1) * page_size: page * page_size])
         else:
             thread['comments'] = []
+            thread['page'] = '{} (invalid)'.format(page)
 
     return thread
 
@@ -162,7 +167,7 @@ def get_cacheable_thread(unique_id, destination=None):
     article.
 
     :param destination: URL of the redirect destination
-    :param reverse: Reverse the chronological sort order of comments
+    :param sort: Sort order of comments, desc or asc
     :rtype: dict or None
     """
 
