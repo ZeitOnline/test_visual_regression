@@ -20,7 +20,8 @@
     "grunt-jsdoc": "~0.5.8",
     "grunt-modernizr": "~0.6.0",
     "grunt-sftp-deploy": "~0.2.4",
-    "grunt-svgmin": "^2.0.1"
+    "grunt-svgmin": "^2.0.1",
+    "grunt-svgstore": "^0.5.0"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="kommentar-flag" fill="#444444">
-    <path d="M1.8500061,16H0.1499939V0h1.7000122V16L1.8500061,16z M13.8500061,1.2000122H3.0500183v8.3999939
+    <title>Melden</title>
+    <path fill="#444444" d="M1.8500061,16H0.1499939V0h1.7000122V16L1.8500061,16z M13.8500061,1.2000122H3.0500183v8.3999939
         h10.7999878l-2.7999878-4.2000122L13.8500061,1.2000122L13.8500061,1.2000122z"/>
-</g>
 </svg>

@@ -91,7 +91,7 @@ define([ 'jquery' ], function( $ ) {
         }
 
         hideOtherForms();
-        link.find( '.comment__icon' ).addClass( 'comment__icon--sending' );
+        link.addClass( 'comment__reaction--sending' );
 
         $.ajax({
             url: sendurl,
@@ -104,6 +104,8 @@ define([ 'jquery' ], function( $ ) {
             dataType: 'jsonp',
             success: function( response ) {
                 if ( response ) {
+                    link.removeClass( 'comment__reaction--sending' );
+
                     if ( !response['#error'] ) {
                         var recommendations = comment.find( '.comment__recommendations' ),
                             number = recommendations.html().replace( /\D+/g, '' ) || 0,
@@ -139,11 +141,7 @@ define([ 'jquery' ], function( $ ) {
         }
 
         link.toggleClass( 'comment__reaction--active' )
-            .find( '.comment__icon' )
-            .toggleClass( 'icon-comment-reactions-recommend' )
-            .toggleClass( 'icon-comment-reactions-recommend-active' )
-            .removeClass( 'comment__icon--sending' );
-        link.find( '.comment__action' ).attr( 'title', label ).html( label );
+            .find( '.comment__action' ).attr( 'title', label ).html( label );
 
         return number;
     },
