@@ -34,6 +34,7 @@ define([ 'jquery' ], function( $ ) {
                 .addClass( 'js-reply-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
+            form.get( 0 ).elements.comment.placeholder = 'Ihre Antwort';
             form.find( 'input[type="submit"]' ).prop( 'disabled', true ).val( 'Antworten' );
             form.find( 'input[name="pid"]' ).val( cid );
         }
