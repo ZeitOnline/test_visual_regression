@@ -1,40 +1,51 @@
 .comment-form
-	margin-bottom: 2em
-	+respond-min($break-desktop-min)
-		margin: 1em em(160px)
+	+default-article-textlink
+	&__response--success
+		background-color: #d4e8d4
+		color: #278d27
+		padding: .75em
+		text-align: center
+
+	& > *:first-child
+		margin-top: 2em
 	&__avatar
 		border-radius: 50%
 		display: inline-block
-		height: em(36px)
-		margin-right: em(12px)
-		width: em(36px)
+		height: remify(36px)
+		margin-right: remify(12px)
+		width: remify(36px)
 		vertical-align: middle
+		overflow: hidden
+	&__text
+		color: $zon_grey
+		font-size: remify(14px)
+		margin: 1em 0
 	&__username
 		+link
 			color: $zon-red
+			border-bottom-width: 0
 		+on-interaction
-			text-decoration: underline
+			border-bottom-width: 1px
+	&__cancel
+		margin: 0 remify(22px)
+		border-bottom-color: currentcolor !important
+		display: none
+		+respond-min(em(480px))
+			display: inline
+		+link
+			color: $zon_grey
+		+on-interaction
+			color: $color-link--hover
 	&__textarea
-		background-color: $zon_lighter_grey
-		border: 1px solid $zon_light_grey
-		display: block
-		margin: 1rem auto
-		width: 97%
-		height: 16rem
-		padding: 1rem
-		color: $black
-	&__submit
-		+zon-button-light
-		display: block
-		margin: auto
+		margin: 1em 0
+		height: 16em
+	&__actions
+		font-size: remify(14px)
+		text-align: right
 
 .comment-login
-	padding-bottom: 3rem
-	padding-top: 3rem
 	text-align: center
-	&__cta
-		display: inline-block
-		width: 98%
-	&__button
-		+zon-button-light
-		display: inline-block
+	p
+		margin: 2em 0 1em
+	.button
+		margin: 1em .5em 0

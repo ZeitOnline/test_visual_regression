@@ -32,7 +32,6 @@ def comment_to_dict(comment):
     """
 
     # TODO: Avoid repeatedly evaluating xpaths.
-    is_author = False
     if comment.xpath('author/@roles'):
         roles = comment.xpath('author/@roles')[0]
         is_author = 'author' in roles
@@ -53,6 +52,7 @@ def comment_to_dict(comment):
         roles = [roles_words['%s_%s' % (role, gender)] for role in roles
                  if '%s_%s' % (role, gender) in roles_words]
     else:
+        is_author = False
         roles = []
 
     if comment.xpath('author/@picture'):
@@ -71,12 +71,15 @@ def comment_to_dict(comment):
     else:
         content = '[fehler]'
 
+    fans = comment.xpath('flagged[@type="leser_empfehlung"]/@userid')
+
     # We have the drupal behaviour that the subject is partly coypied from the
     # comment itself, if a subject was not set. This leads to a slightly more
     # complex evaluation of the subject in our usecase
     subject = comment.xpath('subject/text()')
     content_stripped = ''.join(BeautifulSoup(content).findAll(text=True))
     if (subject and not subject[0] == '[empty]' and
+            not subject[0] == '[...]' and
             not subject[0] == content_stripped[0:len(subject[0])]):
         content = u'<p>{}</p>{}'.format(comment.xpath('subject/text()')[0],
                                         content)
@@ -98,6 +101,7 @@ def comment_to_dict(comment):
         timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
         text=content,
         role=', '.join(roles),
+        fans=','.join(fans),
         cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
         recommendations=len(
             comment.xpath('flagged[@type="leser_empfehlung"]')),
@@ -161,9 +165,7 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
 
     # Read more about sorting in multiple passes here:
     # docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
-
     comments = list(comment_to_dict(c) for c in comment_list)
-
     comments = sorted(comments, key=lambda x: x['cid'])
     comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
                       reverse=reverse)

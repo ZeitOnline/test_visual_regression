@@ -430,3 +430,23 @@ def test_filter_append_get_params_should_append_params(request):
     zeit.web.core.template.append_get_params(request, get_params)
     assert 'http://example.com?key1=1&newparam=foo' == (
         zeit.web.core.template.append_get_params(request, get_params))
+
+
+def test_get_module_filter_should_correctly_extract_cpextra_id(application):
+    assert zeit.web.core.template.get_module(None) is None
+
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
+    block = zeit.web.core.application.find_block(cp, module='search-form')
+
+    block.visible = True
+    block.cpextra = 'n/a'
+    assert zeit.web.core.template.get_module(block) is None
+
+    block.visible = True
+    block.cpextra = 'search-form'
+    assert isinstance(zeit.web.core.template.get_module(block),
+                      zeit.web.site.search.Form)
+
+    block.visible = False
+    block.cpextra = 'n/a'
+    assert zeit.web.core.template.get_module(block) is None
