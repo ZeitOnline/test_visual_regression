@@ -15,12 +15,14 @@ require([
     'web.core/images',
     'web.site/video/videoStage',
     'web.site/articledate',
-    'web.site/articlesharing'
-], function( images, videoStage, articledate, articlesharing ) {
+    'web.site/articlesharing',
+    'web.site/comments'
+], function( images, videoStage, articledate, articlesharing, comments ) {
     images.init();
     videoStage.init();
     articledate.init();
     articlesharing.init();
+    comments.init();
 });
 
 // add required jQuery-Plugins that are writte with AMD header here
@@ -38,7 +40,8 @@ require([
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.selectNav',
-    'web.site/plugins/jquery.infobox'
+    'web.site/plugins/jquery.infobox',
+    'web.site/plugins/jquery.searchTools'
 ], function() {
     $( window ).referrerCount();
     $( '.main_nav__search' ).toggleSearch();
@@ -51,6 +54,7 @@ require([
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();
     $( '.infobox' ).infobox();
+    $( '.search-form' ).searchTools();
     // comment out till we decide if it should be used and how (as)
     // $( '.footer-links__button' ).scrollUp();
 });

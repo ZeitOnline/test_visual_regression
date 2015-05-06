@@ -1,18 +1,19 @@
 <div class="{{ 'cp-area' | with_mods(area | get_layout, area.width | area_width) }}">
     {% set area_layout = area.width | area_width %}
     {% block before_module_list %}{% endblock %}
-    {% for module in area.values() if module | first_child -%}
+    {% for module in area.values() -%}
         {% set teaser = module | first_child %}
         {% set index = loop.index %}
         {% block before_module_include scoped %}{% endblock %}
+        {# XXX Because most teaser templates still expect a global variable `teaser` we need to prevent
+           unrecognized modules, that don't behave like teaser blocks, from using the default teaser template.
+           We can id them by checking if they contain a `first_child` teaser. (ND) #}
         {% include
             ["zeit.web.site:templates/inc/module/{0}_{1}.html".format(module | get_layout | hide_none, area_layout),
              "zeit.web.site:templates/inc/teaser/{0}_{1}.tpl".format(module | get_layout | hide_none, area_layout),
-             "zeit.web.site:templates/inc/module/" + module | get_layout | hide_none + ".html",
-             "zeit.web.site:templates/inc/teaser/" + module | get_layout | hide_none + ".tpl",
-             "zeit.web.site:templates/inc/teaser/default.tpl"] %}
+             "zeit.web.site:templates/inc/module/" + module | get_layout | hide_none + ".html"] +
+             (teaser and ["zeit.web.site:templates/inc/teaser/" + module | get_layout | default("default.tpl") + ".tpl"] or []) ignore missing %}
         {% block after_module_include scoped %}{% endblock %}
     {% endfor %}
     {% block after_module_list %}{% endblock %}
 </div>
-

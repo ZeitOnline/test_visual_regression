@@ -88,12 +88,12 @@ def test_spektrum_image_should_have_expected_attributes(application):
     assert image.image.getImageSize() == (180, 120)
 
 
-def test_centerpage_recognizes_spektrum_cpextra(application):
+def test_centerpage_recognizes_spektrum_cpextra(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
-    teasers = view.region_list_parquet[1].values()[0].values()[0]
-    assert all(isinstance(t, zeit.web.site.spektrum.Teaser) for t in teasers)
+    mods = view.region_list_parquet[1].values()[0].values()
+    assert all(isinstance(t[0], zeit.web.site.spektrum.Teaser) for t in mods)
 
 
 def test_spektrum_parquet_should_render_special_parquet_link(

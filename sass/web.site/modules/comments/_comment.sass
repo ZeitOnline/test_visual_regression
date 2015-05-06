@@ -33,6 +33,7 @@ $color-comment-border: $zon_light_grey
 		height: remify(50px)
 		margin-bottom: remify(30px)
 		width: remify(50px)
+		overflow: hidden
 		& + .comment__meta
 			margin: remify(6px) 0 0 remify(66px)
 			+respond-min($break-phablet-min)
@@ -60,8 +61,11 @@ $color-comment-border: $zon_light_grey
 		font-size: remify(12px)
 		line-height: 2
 		margin-left: remify(20px)
+		&:empty
+			margin-left: 0
 
 	&__body
+		+default-article-textlink
 		clear: both
 		color: $zon-charcoal
 		font-size: remify(16px)
@@ -73,6 +77,24 @@ $color-comment-border: $zon_light_grey
 		& > p
 			margin: 0 0 0.6667em 0
 
+		em
+			color: $zon_grey
+			font-family: $font-franziska
+			font-style: normal
+			&:before
+				background-color: $zon_grey
+				border-radius: 50%
+				color: $white
+				content: "!"
+				display: inline-block
+				font-size: remify(13px)
+				height: remify(16px)
+				line-height: remify(16px)
+				margin-right: .5em
+				text-align: center
+				width: remify(16px)
+				vertical-align: text-top
+
 	&__reactions
 		text-align: right
 
@@ -82,6 +104,8 @@ $color-comment-border: $zon_light_grey
 			color: $zon_mid_grey
 		+on-interaction
 			color: $zon_dark_grey
+			.comment__icon
+				opacity: 1
 		font-size: remify(12px)
 		letter-spacing: $zon-letter-spacing-s
 
@@ -92,6 +116,11 @@ $color-comment-border: $zon_light_grey
 			margin-left: remify(24px)
 		&:first-child
 			margin-left: 0
+		&--active
+			.comment__icon
+				opacity: 1
+			+link
+				color: $zon-red
 
 	&__action
 		display: none
@@ -156,23 +185,33 @@ $color-comment-border: $zon_light_grey
 
 
 // icons
-.icon-comment-zon-author-badge
+.comment__badge
 	+background-size(contain)
 	+inline-block
 	height: remify(16px)
 	margin-right: remify(6px)
 	vertical-align: text-top
 	width: remify(16px)
+	&--promoted
+		background-color: $zon-charcoal
+		border-radius: 2px
+		color: $white
+		font-size: remify(12px)
+		text-align: center
 
-.icon-comment-reactions-reply,
-.icon-comment-reactions-report,
-.icon-comment-reactions-recommend
+.comment__icon
 	+background-size(contain)
 	+inline-block
 	background-position: right center
 	height: remify(16px)
-	opacity: 0.5
+	opacity: 0.55
 	vertical-align: text-bottom
-	width: remify(18px)
-	a:hover > &
-		opacity: 1.0
+	width: remify(17px)
+	&--sending
+		+animation(rotate 1s linear infinite)
+
++keyframes(rotate)
+	from
+		+transform(rotate(0deg))
+	to
+		+transform(rotate(360deg))

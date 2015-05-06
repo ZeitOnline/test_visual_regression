@@ -1,12 +1,30 @@
 Change log for zeit.web
 =======================
 
-1.20.5 (unreleased)
+1.21.2 (unreleased)
 -------------------
+
+- ZON-1698: Sorting an pagination for comment_thread
+
+
+1.21.1 (2015-05-05)
+-------------------
+
+- FIX: Strip unfulfillable version constraints
+
+
+1.21 (2015-05-05)
+-----------------
+
+- ZON-1534: Improve search implementation test coverage
+
+- ZON-1646: Reply, report and recommend comments
+
+- ZON-1667: Implement search centerpage, spice up cpextra handling
 
 - ZON-1628: Fix/clearify vertical spaces on centerpages
 
-- ZON-1627: Add some webtrekk features hidden as errors 
+- ZON-1627: Add some webtrekk features hidden as errors
 
 - ZON-1660: Implement comment interface.
 
@@ -26,7 +44,7 @@ Change log for zeit.web
 
 - ZON-1673: Render comment form through edge side includes
 
-- ZON-1698: Sorting an pagination for comment_thread
+- ZON-1700: Beautfiy comment dates
 
 
 1.20.4 (2015-04-27)
