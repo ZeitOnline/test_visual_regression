@@ -147,7 +147,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
 
     thread['page'] = page
     c_len = len(thread['comments'])
-    total =  c_len // page_size
+    total = c_len // page_size
     thread['page_total'] = total if c_len % page_size == 0 else total + 1
 
     if page:
