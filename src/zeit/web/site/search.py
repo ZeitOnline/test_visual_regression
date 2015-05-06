@@ -201,7 +201,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
         solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, start=self.page, **HIGHLIGHTING)
+            fl=FIELDS, start=self.count*(self.page-1), **HIGHLIGHTING)
         docs = list(solr_result)
         self.hits = solr_result.hits
         for block in self.context.values():
@@ -220,9 +220,8 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     @property
     def hits(self):
         if self._hits is None:
-            return len(self.values()) and self._hits
-        else:
-            return 0
+            self.values()
+        return self._hits
 
     @hits.setter
     def hits(self, value):
@@ -232,7 +231,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def total_pages(self):
         if self.hits > 0:
-            return math.ceil(self.hits / self.count)
+            return int(math.ceil(float(self.hits) / float(self.count)))
         else:
             return 0
 
