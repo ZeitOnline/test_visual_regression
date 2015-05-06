@@ -56,7 +56,10 @@ define([ 'jquery' ], function( $ ) {
 
         if ( !form.length ) {
             template = $( '#js-report-comment-template' ).html().replace( /<% commentId %>/, cid );
-            form = $( template ).addClass( 'js-report-form' ).appendTo( comment );
+            form = $( template )
+                .addClass( 'js-report-form' )
+                .css( 'display', 'none' )
+                .appendTo( comment );
         }
 
         showForm( form, comment );
@@ -83,7 +86,10 @@ define([ 'jquery' ], function( $ ) {
 
             if ( !form.length ) {
                 template = $( '#js-report-comment-template' ).html().replace( /zu melden./, 'zu empfehlen.' );
-                form = $( template ).addClass( 'js-recommend-form' ).appendTo( comment );
+                form = $( template )
+                    .addClass( 'js-recommend-form' )
+                    .css( 'display', 'none' )
+                    .appendTo( comment );
             }
 
             showForm( form, comment );
