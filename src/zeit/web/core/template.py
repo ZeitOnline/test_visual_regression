@@ -614,6 +614,13 @@ def debug_breaking_news():
 
 @zeit.web.register_global
 def calculate_pagination(current_page, total_pages):
+    # only accept ints as params
+    if not (isinstance(current_page, int) and isinstance(total_pages, int)):
+        return
+    # check for sensible values
+    if current_page > total_pages or current_page < 0 or total_pages <= 1:
+        return
+
     # we have 7 slots to display pages,
     # so anything less than 8 pages can be displayed 'as is'
     if total_pages <= 7:
