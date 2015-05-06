@@ -1,15 +1,21 @@
 <?xml version="1.0"?>
 <regions>
     <region kind="empty" title="Leer"/>
-    <region kind="multi" title="Multi">
-        <area kind="major"/>
-        <area kind="minor"/>
+    <region kind="solo" title="Solo">
+        <area kind="solo"/>
     </region>
     <region kind="duo" title="Duo">
         <area kind="duo"/>
         <area kind="duo"/>
     </region>
-    <region kind="solo" title="Solo">
-        <area kind="single"/>
+    <region kind="multi" title="Multi">
+        <area kind="major"/>
+        <area kind="minor"/>
+    </region>
+    <region kind="parquet" title="Parquet">
+        <area kind="parquet"/>
+    </region>
+    <region kind="search-results" title="Search Results">
+        <area kind="search-results"/>
     </region>
 </regions>
