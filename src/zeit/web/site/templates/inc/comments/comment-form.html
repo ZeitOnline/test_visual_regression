@@ -1,8 +1,10 @@
 {% set pid = view.request.GET['commentpid'] %}
 {% if pid %}
 	{% set submit_value = 'Antwort senden' %}
+	{% set placeholder = 'Ihre Antwort auf Kommentar #' + pid %}
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
+	{% set placeholder = 'Ihr Kommentar' %}
 {% endif %}
 
 <div class="comment-section__form">
