@@ -41,6 +41,8 @@
 			display: none
 		.js &--displayed
 			display: block
+		&:focus
+			outline: 0
 	&__link
 		font-family: $font-tabletgothic
 		font-size: remify(14px)
@@ -53,6 +55,8 @@
 		+on-interaction
 			color: $black
 			text-decoration: underline
+		&:focus
+			outline: 0
 		&:after
 			background: $zon_mid_grey
 			border-radius: 3px
