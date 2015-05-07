@@ -4,6 +4,7 @@ import logging
 import mimetypes
 import re
 import time
+import urllib
 import urlparse
 
 import jinja2
@@ -652,3 +653,15 @@ def calculate_pagination(current_page, total_pages):
             pages = pages[:2] + post_none_filler + pages[2:]
 
     return pages
+
+
+@zeit.web.register_filter
+def append_get_params(request, **kw):
+    # Append GET parameters that are not reset
+    # by setting the param value to None explicitly.
+    req_params = [i for i in request.GET.items() if i[0] not in kw.keys()]
+    params = req_params + [i for i in kw.items() if i[1] is not None]
+
+    if params == []:
+        return request.path_url
+    return '?'.join([request.path_url, urllib.urlencode(params)])
