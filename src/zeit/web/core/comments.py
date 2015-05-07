@@ -136,8 +136,6 @@ def request_thread(path):
 
 def get_thread(unique_id, destination=None, sort='asc', page=None):
     thread = get_cacheable_thread(unique_id, destination)
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    page_size = int(conf.get('comment_page_size', '10'))
     if thread is None:
         return
 
@@ -148,6 +146,9 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     if not(thread['sort'] == sort):
         thread['comments'].reverse()
         thread['sort'] == sort
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    page_size = int(conf.get('comment_page_size', '10'))
 
     thread['page'] = page
     c_len = len(thread['comments'])
