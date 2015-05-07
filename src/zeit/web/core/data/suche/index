@@ -56,14 +56,14 @@
   <body>
     <title>Suche</title>
     <cluster area="feature" visible="True" title="Suchformular">
-      <region visible="True" area="id-12e4530c-1806-481b-bff9-7a47c2095a05" width="1/1" title="Formular">
+      <region visible="True" area="id-12e4530c-1806-481b-bff9-7a47c2095a05" kind="solo" title="Formular">
         <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="cpextra" module="search-form">
           <cp_extra id="search-form"/>
         </container>
       </region>
     </cluster>
     <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" title="Suchergebnisse">
-      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" width="1/1" title="Ergebnisse" count="10" automatic="True" module="search-results">
+      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="solo" title="Ergebnisse" count="10" automatic="True" module="ranking">
         <query>
           <condition type="Channel" py:pytype="str">News</condition>
         </query>
