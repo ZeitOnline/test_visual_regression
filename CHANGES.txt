@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1698: Sorting an pagination for comment_thread
 
+- ZON-1674: Implement No-JS variant for comment forms
+
 
 1.21.1 (2015-05-05)
 -------------------
