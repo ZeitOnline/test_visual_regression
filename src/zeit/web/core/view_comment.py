@@ -152,8 +152,6 @@ class PostComment(zeit.web.core.view.Base):
         invalidate_comment_thread(unique_id)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         servers = conf.get('app_servers', None)
-        import pdb; pdb.set_trace()  # XXX BREAKPOINT
-
         if not servers:
             return
 
