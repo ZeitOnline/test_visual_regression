@@ -23,14 +23,14 @@ def test_comments_should_contain_basic_meta_data(
 
 
 def test_comments_get_thread_should_respect_top_level_sort_order(
-        dummy_request):
+        dummy_request, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
 
     thread_chronological = zeit.web.core.comments.get_thread(
         unique_id, dummy_request)
     thread_most_recent = zeit.web.core.comments.get_thread(
-        unique_id, dummy_request, reverse=True)
+        unique_id, dummy_request, sort='desc')
 
     assert (thread_chronological['comments'][0]['timestamp'] <
             thread_chronological['comments'][1]['timestamp'],
