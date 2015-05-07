@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1698: Sorting an pagination for comment_thread
 
+- ZON-1710: Upgrade to new centerpage editor paradigms
+
 
 1.21.1 (2015-05-05)
 -------------------
