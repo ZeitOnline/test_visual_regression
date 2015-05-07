@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <regions>
-    <region kind="empty" title="Leer"/>
+    <region kind="empty" title="Empty"/>
     <region kind="solo" title="Solo">
         <area kind="solo"/>
     </region>
@@ -8,14 +8,19 @@
         <area kind="duo"/>
         <area kind="duo"/>
     </region>
-    <region kind="multi" title="Multi">
+    <region kind="trio" title="Trio">
+        <area kind="trio"/>
+        <area kind="trio"/>
+        <area kind="trio"/>
+    </region>
+    <region kind="duo" title="Multi">
         <area kind="major"/>
         <area kind="minor"/>
     </region>
-    <region kind="parquet" title="Parquet">
+    <region kind="solo" title="Parquet">
         <area kind="parquet"/>
     </region>
-    <region kind="search-results" title="Search Results">
-        <area kind="search-results"/>
+    <region kind="solo" title="Ranking">
+        <area kind="ranking"/>
     </region>
 </regions>
