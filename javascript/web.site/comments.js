@@ -43,6 +43,17 @@ define([ 'jquery' ], function( $ ) {
     },
 
     /**
+     * comments.js: cancel reply to comment
+     * @function cancelReplyToComment
+     * @param  {object} e event object
+     */
+    cancelReplyToComment = function( e ) {
+        e.preventDefault();
+
+        $( this ).closest( '.js-reply-form' ).slideUp( slideDuration );
+    },
+
+    /**
      * comments.js: report comment
      * @function reportComment
      */
@@ -292,6 +303,7 @@ define([ 'jquery' ], function( $ ) {
 
         // register event handlers
         $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
+        $commentsBody.on( startEvent, '.js-cancel-reply-to-comment', cancelReplyToComment );
         $commentsBody.on( startEvent, '.js-report-comment', reportComment );
         $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
         $commentsBody.on( startEvent, '.js-submit-report', submitReport );
