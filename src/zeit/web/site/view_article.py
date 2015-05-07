@@ -1,6 +1,7 @@
 import logging
 
 from pyramid.view import view_config
+from pyramid.view import view_defaults
 
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -21,31 +22,26 @@ import zeit.web.core.view_article
 log = logging.getLogger(__name__)
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.site.view.is_zon_content,),
-             renderer='templates/article.html')
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.site.view.is_zon_content,),
-             name='komplettansicht',
+@view_defaults(context=zeit.content.article.interfaces.IArticle,
+               custom_predicates=(zeit.web.site.view.is_zon_content,),
+               request_method='GET')
+@view_config(renderer='templates/article.html')
+@view_config(name='komplettansicht',
              renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     pass
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.site.view.is_zon_content,),
-             name='seite',
+@view_config(name='seite',
              path_info='.*seite-(.*)',
              renderer='templates/article.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.site.view.is_zon_content,),
-             name='comment-form',
+@view_config(name='comment-form',
              renderer='templates/inc/comments/comment-form.html')
-class CommentForm(zeit.web.core.view_article.Article):
+class CommentForm(Article):
     pass
 
 
@@ -53,12 +49,10 @@ def is_breaking_news(context, request):
     return zeit.content.article.interfaces.IBreakingNews(context).is_breaking
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.site.view.is_zon_content,
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_breaking_news),
              renderer='templates/breaking_news_article.html')
-class BreakingNews(zeit.web.core.view_article.Article,
-                   zeit.web.site.view.Base):
+class BreakingNews(Article):
     pass
 
 
@@ -66,9 +60,8 @@ def is_column_article(context, request):
     return getattr(context, 'serie', None) and context.serie.column
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.site.view.is_zon_content,
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article),
              renderer='templates/column.html')
-class ColumnArticle(Article, zeit.web.core.view_article.Article):
+class ColumnArticle(Article):
     pass
