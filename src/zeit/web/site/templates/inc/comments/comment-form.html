@@ -1,5 +1,5 @@
 {% set pid = view.request.GET['pid'] %}
-{% if view.request.GET['form'] == 'comment' %}
+{% if pid %}
 	{% set submit_value = 'Antworten' %}
 	{% set placeholder = 'Ihre Antwort auf Kommentar #' + pid %}
 {% else %}

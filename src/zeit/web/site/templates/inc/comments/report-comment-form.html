@@ -1,6 +1,5 @@
-{% if view.request.GET['form'] == 'report' %}
-	{% set cid = view.request.GET['rid'] %}
-{% else %}
+{% set cid = view.request.GET['rid'] %}
+{% if not cid %}
 	{% set cid = '<% commentId %>' %}
 {% endif %}
 	<form action="{{ view.comments.comment_report_url }}" method="POST" class="comment-form" id="report-comment-form">
