@@ -404,3 +404,34 @@ def test_action_url_should_be_created_correctly(
         monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
+
+
+def test_invalidation_view_should_work_correctly(
+        testserver, monkeypatch):
+    def invalidate(arg):
+        return {'community_host': 'http://foo'}
+
+    monkeypatch.setattr(
+        zeit.web.core.view_comment, 'invalidate_comment_thread', invalidate)
+
+    unique_id = 'http://xml.zeit.de/zeit-online/article/01'
+
+    response = requests.get(
+        '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
+
+    assert response.json()['msg'] == (
+        u'http://xml.zeit.de/zeit-online/article/01 was invalidated')
+
+    unique_id = '/xml.zeit.de/zeit-online/article/01'
+    response = requests.get(
+            '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
+
+    assert response.status_code == 500
+
+    unique_id = 'http://hrgs.de/article/01'
+    response = requests.get(
+            '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
+    assert response.status_code == 500
+
+    response = requests.get('%s/json/invalidate' % testserver.url)
+    assert response.status_code == 500
