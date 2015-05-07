@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 
-import zope.component
-import lxml.etree
+from BeautifulSoup import BeautifulSoup
+import collections
 import datetime
+import lxml.etree
+import repoze.lru
 import requests
 import requests.exceptions
-from BeautifulSoup import BeautifulSoup
-import repoze.lru
+import zope.component
+import itertools
+import logging
 
 import zeit.cms.interfaces
 
 from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
 
+
 cache_maker = repoze.lru.CacheMaker()
+log = logging.getLogger(__name__)
 
 
 def rewrite_picture_url(url):
@@ -129,17 +134,45 @@ def request_thread(path):
         return
 
 
-def get_thread(unique_id, destination=None, reverse=False):
-    return get_cacheable_thread(unique_id, destination, reverse)
+def get_thread(unique_id, destination=None, sort='asc', page=None):
+    thread = get_cacheable_thread(unique_id, destination)
+    if thread is None:
+        return
+
+    # We do not want to touch the references of the cached thread
+    thread = thread.copy()
+    thread['comments'] = list(thread['comments'])
+
+    if not(thread['sort'] == sort):
+        thread['comments'].reverse()
+        thread['sort'] == sort
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    page_size = int(conf.get('comment_page_size', '10'))
+
+    thread['page'] = page
+    c_len = len(thread['comments'])
+    total = c_len // page_size
+    thread['page_total'] = total if c_len % page_size == 0 else total + 1
+
+    if page:
+        if page <= thread['page_total']:
+            thread['comments'] = (
+                thread['comments'][(page - 1) * page_size: page * page_size])
+        else:
+            thread['comments'] = []
+            thread['page'] = '{} (invalid)'.format(page)
+
+    return thread
 
 
 @cache_maker.expiring_lrucache(maxsize=1000, timeout=60, name='comment_thread')
-def get_cacheable_thread(unique_id, destination=None, reverse=False):
+def get_cacheable_thread(unique_id, destination=None):
     """Return a dict representation of the comment thread of the given
     article.
 
     :param destination: URL of the redirect destination
-    :param reverse: Reverse the chronological sort order of comments
+    :param sort: Sort order of comments, desc or asc
     :rtype: dict or None
     """
 
@@ -163,16 +196,15 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
     except (IndexError, lxml.etree.XMLSyntaxError):
         return
 
-    # Read more about sorting in multiple passes here:
-    # docs.python.org/2/howto/sorting.html#sort-stability-and-complex-sorts
-    comments = list(comment_to_dict(c) for c in comment_list)
-    comments = sorted(comments, key=lambda x: x['cid'])
-    comments = sorted(comments, key=lambda x: (x['in_reply'] or x['cid']),
-                      reverse=reverse)
+    comment_list = list(comment_to_dict(c) for c in comment_list)
+    comments, index = _sort_comments(comment_list)
+
     try:
         return dict(
             comments=comments,
+            index=index,
             comment_count=to_int(comment_count),
+            sort='asc',
             nid=comment_nid,
             comment_post_url='{}/agatho/thread{}?destination={}'.format(
                 conf.get('agatho_host', ''), path, destination),
@@ -180,6 +212,38 @@ def get_cacheable_thread(unique_id, destination=None, reverse=False):
                 conf.get('community_host', '')))
     except (IndexError, AttributeError):
         return
+
+
+def _sort_comments(comments):
+
+    comments_sorted = collections.OrderedDict()
+    root_ancestors = {}
+    comment_index = {}
+
+    while comments:
+        comment = comments.pop(0)
+
+        if not comment["in_reply"]:
+            root_ancestors[comment['cid']] = comment['cid']
+            comments_sorted[comment['cid']] = [comment, []]
+            comment['shown_num'] = str(
+                comments_sorted.keys().index(comment['cid']) + 1)
+        else:
+            try:
+                ancestor = root_ancestors[comment['in_reply']]
+                root_ancestors[comment['cid']] = ancestor
+                comments_sorted[ancestor][1].append(comment)
+                p_index = comments_sorted[ancestor][0]['shown_num']
+                comment['shown_num'] = "{}.{}".format(p_index, len(
+                    comments_sorted[ancestor][1]))
+            except KeyError:
+                log.error("The comment with the cid {} is a reply, but"
+                          "no ancestor could be found".format(comment['cid']))
+        comment_index[comment['cid']] = comment
+    return (
+        list(itertools.chain(
+            *[[li[0]] + li[1] for li in comments_sorted.values()])),
+        comment_index)
 
 
 def request_counts(*unique_ids):

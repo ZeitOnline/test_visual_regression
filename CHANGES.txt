@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1729 Setup view defaults to DRY
 
+- ZON-1698: Sorting an pagination for comment_thread
+
 
 1.21.1 (2015-05-05)
 -------------------
