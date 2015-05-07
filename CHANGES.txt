@@ -6,7 +6,7 @@ Change log for zeit.web
 
 - ZON-1729 Setup view defaults to DRY
 
-- ZON-1698: Sorting an pagination for comment_thread
+- ZON-1698: Sorting and pagination for comment_thread
 
 - ZON-1674: Implement No-JS variant for comment forms
 
