@@ -25,7 +25,7 @@ def search_area(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
     area = zeit.web.core.application.find_block(
-        context, attrib='area', module='search-results')
+        context, attrib='area', module='ranking')
     return zeit.web.core.template.get_results(area)
 
 
