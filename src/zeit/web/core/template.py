@@ -617,8 +617,9 @@ def debug_breaking_news():
 def append_get_params(request, **kw):
     # Append GET parameters that are not reset
     # by setting the param value to None explicitly.
-    params = dict((k, v) for k, v in dict(
-        request.GET.items() + kw.items()).iteritems() if v is not None)
-    if params == {}:
+    req_params = [i for i in request.GET.items() if i[0] not in kw.keys()]
+    params = req_params + [i for i in kw.items() if i[1] is not None]
+
+    if params == []:
         return request.path_url
     return '?'.join([request.path_url, urllib.urlencode(params)])

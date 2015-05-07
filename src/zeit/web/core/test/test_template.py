@@ -7,6 +7,7 @@ import gocept.httpserverlayer.static
 import mock
 import pytest
 import venusian
+import webob.multidict
 
 import zeit.cms.interfaces
 
@@ -428,6 +429,16 @@ def test_filter_append_get_params_should_append_params(request):
     request.GET = {u'key1': u'1'}
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?key1=1&newparam=foo' == (
+        zeit.web.core.template.append_get_params(request, **get_params))
+
+
+def test_filter_append_get_params_should_keep_not_overridden_params(request):
+    request = mock.Mock()
+    request.path_url = 'http://example.com'
+    request.GET = webob.multidict.MultiDict(
+        [(u'key1', u'1'), (u'key1', u'2')])
+    get_params = {'newparam': 'foo'}
+    assert 'http://example.com?key1=1&key1=2&newparam=foo' == (
         zeit.web.core.template.append_get_params(request, **get_params))
 
 
