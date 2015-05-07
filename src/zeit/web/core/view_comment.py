@@ -38,7 +38,6 @@ class PostComment(zeit.web.core.view.Base):
         return {}
 
     def post_comment(self):
-        cache_maker = zeit.web.core.comments.cache_maker
         request = self.request
         user = request.session['user']
         uid = user['uid']
@@ -111,14 +110,7 @@ class PostComment(zeit.web.core.view.Base):
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
                                ' (with pid {})'.format(method, unique_id, pid))
-
-            # XXX: invalidate object from cache here!
-            # use something like
-
-            cache_maker._cache['comment_thread'].invalidate(
-                (unique_id, None, None))
-            # cache on other app servers should be invalidated also
-
+            invalidate_comment_thread(unique_id)
             content = None
             new_content_id = None
             if response.content:
@@ -238,3 +230,8 @@ class PostCommentResource(PostComment):
 
             return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)
+
+
+def invalidate_comment_thread(unique_id=None):
+    cache_maker = zeit.web.core.comments.cache_maker
+    cache_maker._cache['comment_thread'].invalidate((unique_id,))

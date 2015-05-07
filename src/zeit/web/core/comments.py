@@ -173,7 +173,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     return thread
 
 
-@cache_maker.expiring_lrucache(maxsize=1000, timeout=60, name='comment_thread')
+@cache_maker.expiring_lrucache(maxsize=1000, timeout=3600, name='comment_thread')
 def get_cacheable_thread(unique_id):
     """Return a dict representation of the comment thread of the given
     article.

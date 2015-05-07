@@ -144,6 +144,7 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_comment_count', '/json/comment_count')
+        config.add_route('json_invalidate', '/json/invalidate')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
