@@ -11,6 +11,7 @@ import zeit.web.site.view
 class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.site.view.Base):
     advertising_enabled = True
 
+
 @view_config(request_param='form=comment',
              renderer='templates/inc/comments/comment-form.html')
 @view_config(request_param='form=report',
