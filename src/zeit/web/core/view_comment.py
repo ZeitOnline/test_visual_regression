@@ -9,6 +9,11 @@ import zeit.web.core.comments
 import pyramid.view
 import urlparse
 import json
+import logging
+
+import zeit.cms.interfaces
+
+log = logging.getLogger(__name__)
 
 
 class PostComment(zeit.web.core.view.Base):
@@ -110,7 +115,9 @@ class PostComment(zeit.web.core.view.Base):
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
                                ' (with pid {})'.format(method, unique_id, pid))
-            invalidate_comment_thread(unique_id)
+
+            self._invalidate_app_servers(unique_id)
+
             content = None
             new_content_id = None
             if response.content:
@@ -138,6 +145,29 @@ class PostComment(zeit.web.core.view.Base):
                                 action,
                                 response.status_code,
                                 unique_id))
+
+    def _invalidate_app_servers(self, unique_id):
+        # We can save ourself a request, if we don't invalidate the current
+        # app via http.
+        invalidate_comment_thread(unique_id)
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        servers = conf.get('app_servers', None)
+        import pdb; pdb.set_trace()  # XXX BREAKPOINT
+
+        if not servers:
+            return
+
+        for server in servers:
+            url = '{}/json/invalidate?unique_id={}'.format(
+                server,
+                unique_id)
+
+            try:
+                requests.get(url)
+            except:
+                log.warning('{} could not be invalidated on {}'.format(
+                    unique_id,
+                    server))
 
     def _action_url(self, action, path):
         endpoint = 'services/json?callback=zeit' if (
@@ -232,6 +262,30 @@ class PostCommentResource(PostComment):
                 location=location)
 
 
-def invalidate_comment_thread(unique_id=None):
+@pyramid.view.view_config(
+    route_name='json_invalidate',
+    renderer='json')
+def invalidate(request):
+    unique_id = request.params.get('unique_id', None)
+    if not unique_id:
+        raise pyramid.httpexceptions.HTTPInternalServerError(
+            title='No unique_id given')
+
+    url = urlparse.urlparse(unique_id)
+    if not url.scheme:
+        raise pyramid.httpexceptions.HTTPInternalServerError(
+            title='unique_id is not a valid url')
+
+    try:
+        zeit.cms.interfaces.ICMSContent(unique_id)
+    except TypeError:
+        raise pyramid.httpexceptions.HTTPInternalServerError(
+            title='unique_id does not exist')
+
+    invalidate_comment_thread(unique_id)
+    return {"msg": "{} was invalidated".format(unique_id)}
+
+
+def invalidate_comment_thread(unique_id):
     cache_maker = zeit.web.core.comments.cache_maker
     cache_maker._cache['comment_thread'].invalidate((unique_id,))
