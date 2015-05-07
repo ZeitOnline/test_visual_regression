@@ -318,15 +318,15 @@
             </div>
             {%- endif %}
             <div class="article__sharing__services blind">
-                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.article_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                <a href="http://twitter.com/home?status={{ view.article_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="http://twitter.com/home?status={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a href="https://plus.google.com/share?url={{ view.article_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="https://plus.google.com/share?url={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-google"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
                </a>
