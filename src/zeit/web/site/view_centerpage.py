@@ -48,6 +48,9 @@ class LegacyModule(zeit.web.core.utils.nslist):
         else:
             raise NotImplementedError()
 
+    def __repr__(self):
+        return object.__repr__(self)
+
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
 class LegacyArea(collections.OrderedDict):
@@ -55,7 +58,7 @@ class LegacyArea(collections.OrderedDict):
     def __init__(self, arg, **kw):
         collections.OrderedDict.__init__(
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
-        self.kind = kw.pop('kind', 'single')
+        self.kind = kw.pop('kind', 'solo')
         self.is_teaserbar = kw.pop('is_teaserbar', False)
 
     def append(self, value):
@@ -67,6 +70,9 @@ class LegacyArea(collections.OrderedDict):
         else:
             raise NotImplementedError()
 
+    def __repr__(self):
+        return object.__repr__(self)
+
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IRegion)
 class LegacyRegion(LegacyArea):
@@ -76,12 +82,6 @@ class LegacyRegion(LegacyArea):
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
 
-    def __hash__(self):
-        if self.kind:
-            return hash((self.kind, id(self)))
-        else:
-            raise NotImplementedError()
-
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
@@ -89,6 +89,7 @@ class LegacyRegion(LegacyArea):
     renderer='templates/centerpage.html')
 class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
+    """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
     def regions(self):
@@ -138,18 +139,18 @@ class Centerpage(
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class LegacyCenterpage(Centerpage):
-    """Main view class for ZEIT ONLINE centerpages."""
+    """Legacy view for centerpages built with the old cp-editor."""
 
     @zeit.web.reify
     def regions(self):
         regions = []
 
-        region_fullwidth = LegacyRegion([self.area_fullwidth])
+        region_fullwidth = LegacyRegion([self.area_solo])
         regions.append(region_fullwidth)
 
-        region_lead = LegacyRegion([self.area_main, self.area_informatives],
-                                   kind='multi')
-        regions.append(region_lead)
+        region_multi = LegacyRegion([self.area_major, self.area_minor],
+                                    kind='multi')
+        regions.append(region_multi)
 
         area_videostage = LegacyArea([self.module_videostage])
         region_video = LegacyRegion([area_videostage])
@@ -162,24 +163,19 @@ class LegacyCenterpage(Centerpage):
         return regions
 
     @zeit.web.reify
-    def area_fullwidth(self):
-        """Return all fullwidth teaser blocks with a minimum length of 1.
-        :rtype: list
-        """
+    def area_solo(self):
+        """Return all fullwidth teaser blocks with a minimum length of 1."""
 
         def valid_module(m):
             return zeit.web.core.template.get_layout(m) in (
                 'zon-fullwidth',)
 
-        lead = self.context.values()[0]['lead']
-        return LegacyArea(
-            [m for m in lead.itervalues() if valid_module(m)])
+        area = self.context.values()[0]['lead']
+        return LegacyArea([m for m in area.itervalues() if valid_module(m)])
 
     @zeit.web.reify
-    def area_main(self):
-        """Return all non-fullwidth teaser blocks with a minimum length of 1.
-        :rtype: list
-        """
+    def area_major(self):
+        """Return all non-fullwidth teaser blocks with a min length of 1."""
 
         def valid_module(m):
             return zeit.web.core.template.get_layout(m) not in (
@@ -190,7 +186,9 @@ class LegacyCenterpage(Centerpage):
                           kind='major')
 
     @zeit.web.reify
-    def area_informatives(self):
+    def area_minor(self):
+        """Return an automated informatives-style area with buzz and ads."""
+
         return LegacyArea([m for m in (self.module_buzz_mostread,
                            self.module_printbox) if m], kind='minor')
 
@@ -276,47 +274,36 @@ class LegacyCenterpage(Centerpage):
     def region_list_parquet(self):
         """Re-model the parquet to conform with new RAM-style structure."""
 
-        def valid_area(a):
-            try:
-                return a.layout.id in ('parquet',)
-            except AttributeError:
-                return
+        regions = []
 
-        def valid_module(m):
-            return zeit.web.core.template.get_layout(m) in (
-                'zon-parquet-large', 'zon-parquet-small', 'parquet-spektrum')
+        for area in self.context.values()[1].itervalues():
+            if area.kind != 'parquet':
+                continue
 
-        def get_layout(m):
-            try:
-                return getattr(m, 'cpextra', None) or m.layout.id
-            except AttributeError:
-                return 'parquet-regular'
+            for block in area.values():
+                if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
+                    legacy = zeit.web.site.spektrum.HPFeed()
+                elif zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
+                    area.count = int(block.xml.get('display_amount', 3))
+                    uid = unicode(block.xml.find('./referenced_cp'))
+                    area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
+                    auto = zeit.content.cp.interfaces.IRenderedArea(area)
+                    values = auto._query_centerpage()[:area.count]
 
-        def legacy_transformation(m):
-            # XXX: Why doesn't this work with the cacheable z.w.c.t.get_layout?
-            layout = get_layout(m)
+                    lids = [block.layout.id] + area.count * ['zon-parquet-small']
+                    modules = [LegacyModule([t], layout=lids.pop(0)) for t in values]
+                    legacy = LegacyArea(modules, kind='parquet', is_teaserbar=True)
 
-            if getattr(m, 'cpextra', None) in ('parquet-spektrum',):
-                area = zeit.web.site.spektrum.HPFeed()
-                # XXX: This should be re-organized into a registered module.
-            else:
-                modules = [LegacyModule([t], layout=layout) for t in m][
-                    :getattr(m, 'display_amount', 3)]
+                    legacy.read_more = block.read_more
+                    legacy.read_more_url = block.read_more_url
+                    legacy.title = block.title
+                    legacy.referenced_cp = area.referenced_cp
+                else:
+                    continue
 
-                area = LegacyArea(modules, layout=layout)
-                area.referenced_cp = getattr(m, 'referenced_cp', None)
-                area.title = getattr(m, 'title', None)
-                area.read_more = getattr(m, 'read_more', None)
-                area.read_more_url = getattr(m, 'read_more_url', None)
-                area.display_amount = getattr(m, 'display_amount', 0)
+                regions.append(LegacyRegion([legacy], kind='parquet'))
 
-            return LegacyRegion([area] if area else [], layout=layout)
-
-        # Slice teaser_block teasers into separate modules encapsulated in
-        # areas and regions.
-        region = self.context.values()[1]
-        return [legacy_transformation(m) for area in region.itervalues()
-                if valid_area(area) for m in area.values() if valid_module(m)]
+        return regions
 
     @zeit.web.reify
     def region_snapshot(self):
@@ -330,5 +317,4 @@ class LegacyCenterpage(Centerpage):
             snapshot = None
 
         module = LegacyModule([snapshot], layout='snapshot')
-        area = LegacyArea([module], layout='snapshot', width='1/1')
-        return LegacyRegion([area], layout='snapshot')
+        return LegacyRegion([LegacyArea([module])])
