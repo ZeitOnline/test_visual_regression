@@ -1,4 +1,4 @@
-.teaser-small-onethird
+.teaser-small-minor
 	border-top: 1px solid $zon_light_grey
 	margin: 0 -($page-padding)
 	padding: $petite $page-padding
@@ -54,12 +54,12 @@
 	&__commentcount
 		@extend %teaser-commentcount
 	
-// mobile in a list of small onethird teasers
+// mobile in a list of small minor teasers
 // only the first should show an image
 +respond-max($break-phablet-min)
-	.teaser-small-onethird 
-		& ~ .teaser-small-onethird
-			.teaser-small-onethird__media
+	.teaser-small-minor 
+		& ~ .teaser-small-minor
+			.teaser-small-minor__media
 				display: none
-			.teaser-small-onethird__container
+			.teaser-small-minor__container
 				padding-left: 0

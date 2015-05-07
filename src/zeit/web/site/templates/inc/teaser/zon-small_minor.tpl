@@ -1,6 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
-{% block layout %}teaser-small-onethird{% endblock %}
+{% block layout %}teaser-small-minor{% endblock %}
 
 {% block teaser_media_position_after_title %}
     {% set module_layout = self.layout() %}
