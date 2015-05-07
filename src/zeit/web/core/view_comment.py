@@ -114,6 +114,7 @@ class PostComment(zeit.web.core.view.Base):
 
             # XXX: invalidate object from cache here!
             # use something like
+
             cache_maker._cache['comment_thread'].invalidate(
                 (unique_id, None, None))
             # cache on other app servers should be invalidated also
