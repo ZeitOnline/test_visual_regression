@@ -1,11 +1,13 @@
-{% set pid = view.request.GET['commentpid'] | e %}
+{% set pid = view.request.GET['pid'] | e %}
 {% if pid %}
 	{% set submit_value = 'Antworten' %}
 	{% set comment = view.comments.index[pid | int] | e %}
 	{% set placeholder = 'Ihre Antwort auf Kommentar #' + comment.shown_num | e + ' von ' + comment.name | e %}
+	{% set class = '' %}
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
 	{% set placeholder = 'Ihr Kommentar' %}
+	{% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
 
 <div class="comment-section__form">
@@ -20,7 +22,7 @@
 			<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">
 				{{ request.session.user.name | e }}
 			</a>
-			<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url | e }}">
+			<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ view.content_url | e }}">
 				Abmelden
 			</a>
 		</div>
@@ -29,7 +31,7 @@
 			<input type="hidden" name="nid" value="{{ view.comments.nid }}">
 			<input type="hidden" name="pid" value="{{ pid }}">
 			<input type="hidden" name="uid" value="{{ request.session.user.uid }}">
-			<a href="{{ view.article_url }}" class="comment-form__cancel js-cancel-reply-to-comment">Abbrechen</a>
+			<a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
 			<input class="button" type="submit" value="{{ submit_value }}" />
 		</p>
 	</form>
@@ -39,10 +41,10 @@
 		<p>
 			Bitte melden Sie sich an, um zu kommentieren.
 		</p>
-		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url | e }}">
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.content_url | e }}">
 			Anmelden
 		</a>
-		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url | e }}">
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.content_url | e }}">
 			Registrieren
 		</a>
 	</form>
@@ -57,10 +59,10 @@
 		<p>
 			Bitte melden Sie sich an, um diesen Kommentar zu melden.
 		</p>
-		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url | e }}">
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.content_url | e }}">
 			Anmelden
 		</a>
-		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url | e }}">
+		<a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.content_url | e }}">
 			Registrieren
 		</a>
 	</form>

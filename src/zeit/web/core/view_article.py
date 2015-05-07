@@ -1,4 +1,3 @@
-import base64
 import datetime
 import itertools
 import logging
@@ -67,15 +66,10 @@ class Article(zeit.web.core.view.Content):
             return self.pages[self.page_nr].teaser
 
     @zeit.web.reify
-    def article_url(self):
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path
-
-    @zeit.web.reify
     def pages_urls(self):
         urls = []
         for number in range(0, len(self.pages)):
-            url = self.article_url
+            url = self.content_url
             if number > 0:
                 url += '/seite-' + str(number + 1)
             urls.append(url)
@@ -99,7 +93,7 @@ class Article(zeit.web.core.view.Content):
             'current': self.page_nr,
             'total': len(self.pages),
             'next_page_title': self.next_title,
-            'article_url': self.article_url,
+            'content_url': self.content_url,
             'pages_urls': self.pages_urls,
             'next_page_url': self.next_page_url,
             'prev_page_url': self.prev_page_url
@@ -227,11 +221,6 @@ class Article(zeit.web.core.view.Content):
         return nextread
 
     @zeit.web.reify
-    def comments(self):
-        return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url)
-
-    @zeit.web.reify
     def serie(self):
         if self.context.serie is None:
             return ''
@@ -249,7 +238,7 @@ class Article(zeit.web.core.view.Content):
             else:
                 return str(n / 1000000), 'Mio.'
 
-        raw = zeit.web.core.reach.fetch('path', self.article_url)
+        raw = zeit.web.core.reach.fetch('path', self.content_url)
         total = raw.pop('total', 0)
         counts = {'total': unitize(total)} if total >= 10 else {}
         for k, v in raw.items():
@@ -266,61 +255,6 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def text_length(self):
         return self.context.textLength
-
-    @zeit.web.reify
-    def obfuscated_date(self):
-        date = ''
-        format = 'd. MMMM yyyy, H:mm \'Uhr\''
-        first_released = babel.dates.format_datetime(
-            self.date_first_released, format, locale='de_De')
-        if self.context.product and self.context.product.show == 'issue':
-            date = u'ver\u00F6ffentlicht am '
-        date += first_released
-        if self.date_last_published_semantic:
-            date = u'{} ({} am {})'.format(
-                date,
-                self.last_modified_wording,
-                babel.dates.format_datetime(
-                    self.date_last_published_semantic, format, locale='de_De'))
-        if date is not first_released:
-            return base64.b64encode(date.encode('latin-1'))
-
-    @zeit.web.reify
-    def issue_format(self):
-        return u' N\u00B0\u00A0{}/{}'
-
-    @zeit.web.reify
-    def last_modified_wording(self):
-        if self.context.product and self.context.product.show == 'issue':
-            return 'Editiert'
-        return 'Zuletzt aktualisiert'
-
-    @zeit.web.reify
-    def source_label(self):
-        if self.context.product and self.context.product.show:
-            label = self.context.product.label or self.context.product.title
-            if self.context.product.show == 'issue' and self.context.volume:
-                label += self.issue_format.format(self.context.volume,
-                                                  self.context.year)
-            return label
-
-    @zeit.web.reify
-    def source_url(self):
-        if self.context.deeplink_url:
-            return self.context.deeplink_url
-        elif self.context.product and self.context.product.show == 'link':
-            return self.context.product.href
-
-    @zeit.web.reify
-    def obfuscated_source(self):
-        if self.context.product and self.context.product.show == 'issue':
-            if self.source_label:
-                label = self.source_label
-                if self.date_print_published:
-                    label += ', ' + babel.dates.format_date(
-                        self.date_print_published,
-                        "d. MMMM yyyy", locale="de_De")
-                return base64.b64encode(label.encode('latin-1'))
 
     @zeit.web.reify
     def news_source(self):

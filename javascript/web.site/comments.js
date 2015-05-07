@@ -44,10 +44,10 @@ define([ 'jquery' ], function( $ ) {
 
     /**
      * comments.js: cancel reply to comment
-     * @function cancelReplyToComment
+     * @function cancelReply
      * @param  {object} e event object
      */
-    cancelReplyToComment = function( e ) {
+    cancelReply = function( e ) {
         e.preventDefault();
 
         $( this ).closest( '.js-reply-form' ).slideUp( slideDuration );
@@ -303,7 +303,7 @@ define([ 'jquery' ], function( $ ) {
 
         // register event handlers
         $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
-        $commentsBody.on( startEvent, '.js-cancel-reply-to-comment', cancelReplyToComment );
+        $commentsBody.on( startEvent, '.js-cancel-reply', cancelReply );
         $commentsBody.on( startEvent, '.js-report-comment', reportComment );
         $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
         $commentsBody.on( startEvent, '.js-submit-report', submitReport );
