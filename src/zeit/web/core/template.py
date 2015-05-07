@@ -190,21 +190,17 @@ def get_layout(block, default='default', request=None):
             layout = block.layout.id
     except (AttributeError, TypeError), e:
         log.debug('Cannot produce a cp block layout: {}'.format(e))
-        layout = default
+        layout = None
 
-    if not zeit.edit.interfaces.IContainer.providedBy(block):
-        # If our block is not a container (e.g. z.c.c.area.Region), it might
-        # be a content object (e.g. z.c.a.a.Article) or at least posing as
-        # one (e.g. z.w.c.spektrum.Teaser).
-        try:
-            layout = get_teaser_layout(list(block)[0], layout)
-        except (AttributeError, IndexError, TypeError), e:
-            log.debug('Cannot apply content-dependent layout rules: %s' % e)
+    try:
+        layout = get_teaser_layout(list(block)[0], layout)
+    except (AttributeError, IndexError, TypeError), e:
+        log.debug('Cannot apply content-dependent layout rules: %s' % e)
 
     if key:
-        request.teaser_layout[key] = layout
+        request.teaser_layout[key] = layout or default
 
-    return layout
+    return layout or default
 
 
 @zeit.web.register_filter
