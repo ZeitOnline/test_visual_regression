@@ -39,8 +39,10 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(request_param='form',
+@view_config(request_param='form=comment',
              renderer='templates/inc/comments/comment-form.html')
+@view_config(request_param='form=report',
+             renderer='templates/inc/comments/report-form.html')
 class CommentForm(Article):
     pass
 
