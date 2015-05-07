@@ -59,6 +59,9 @@ class Application(object):
 
     def __call__(self, global_config, **settings):
         settings = pyramid.config.settings.Settings(d=settings)
+        settings['app_servers'] = filter(
+            None, settings['app_servers'].split(','))
+
         interface = zeit.web.core.interfaces.ISettings
         zope.interface.declarations.alsoProvides(settings, interface)
         zope.component.provideUtility(settings, interface)
