@@ -29,7 +29,7 @@ class Base(zeit.web.core.view.Base):
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
-    renderer='templates/inc/area/parquet-spektrum.html')
+    renderer='templates/inc/area/spektrum.html')
 def spektrum_hp_feed(request):
     # add CORS header to allow ESI JS drop-in
     request.response.headers.add(

@@ -26,7 +26,7 @@ def screen_size(request):
     return request.param
 
 
-def test_area_main_should_filter_teasers(application):
+def test_area_solo_should_filter_teasers(application):
     context = mock.MagicMock()
 
     def create_mocked_teaserblocks():
@@ -65,10 +65,10 @@ def test_area_main_should_filter_teasers(application):
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_main) == 4
-    assert cp.area_main.values()[0].layout.id == 'zon-large'
-    assert cp.area_main.values()[1].layout.id == 'zon-small'
-    assert list(cp.area_main.values()[0])[0] == 'article'
+    assert len(cp.area_solo) == 4
+    assert cp.area_solo.values()[0].layout.id == 'zon-large'
+    assert cp.area_solo.values()[1].layout.id == 'zon-small'
+    assert list(cp.area_solo.values()[0])[0] == 'article'
 
 
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
@@ -169,12 +169,9 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
 
-    teaser_box = browser.cssselect('.cp-area.cp-area--fullwidth')
-    teaser = browser.cssselect('.teaser-fullwidth')
-
-    assert len(teaser_box) == 1, 'No fullwidth teaser box'
-    assert len(teaser) == 1, 'No fullwidth teaser'
+    assert len(teaser) == 1
 
 
 def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
@@ -200,8 +197,8 @@ def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
-    articles = browser.cssselect('#main .cp-region .cp-area--lead article')
-    assert len(articles) == 3, 'We expect 3 articles here'
+    articles = browser.cssselect('#main .cp-region .cp-area--major article')
+    assert len(articles) == 3
 
 
 def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
@@ -264,7 +261,7 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
         '%s/zeit-online/main-teaser-setup' % testserver.url)
 
     noscript = browser.cssselect(
-        '#main .cp-region--lead .scaled-image noscript')
+        '#main .cp-region--multi .scaled-image noscript')
     assert len(noscript) == 3
 
 
@@ -302,14 +299,13 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
 
-    fullwidth = browser.cssselect('.cp-area.cp-area--fullwidth')
-    content = browser.cssselect('.cp-area.cp-area--twothirds.cp-area--lead')
-    informatives = browser.cssselect(
-        '.cp-area.cp-area--onethird.cp-area--informatives')
+    fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
+    content = browser.cssselect('.cp-area.cp-area--major')
+    informatives = browser.cssselect('.cp-area.cp-area--minor')
 
-    assert len(fullwidth) == 1, 'We expect 1 div here'
-    assert len(content) == 1, 'We expect 1 div here'
-    assert len(informatives) == 1, 'We expect 1 div here'
+    assert len(fullwidth) == 1
+    assert len(content) == 1
+    assert len(informatives) == 1
 
 
 def test_column_teaser_should_render_series_element(testserver, testbrowser):
@@ -503,18 +499,11 @@ def test_parquet_region_areas_should_have_multiple_modules_each(application):
 
 def test_parquet_should_render_desired_amount_of_teasers(
         testbrowser, testserver):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
-    desired_amount = view.context.values()[1][0][0].display_amount
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    teasers = browser.cssselect('.cp-region--parquet-large '
+    teasers = browser.cssselect('.cp-region--parquet '
                                 'article[data-block-type="teaser"]')
-    actual_amount = len(teasers)
-    assert actual_amount == desired_amount, (
-        'Parquet row does not display the right amount of teasers. '
-        'Got %s, expected %s.' % (actual_amount, desired_amount))
+    assert len(teasers) == 12
 
 
 def test_parquet_should_display_meta_links_only_on_desktop(
