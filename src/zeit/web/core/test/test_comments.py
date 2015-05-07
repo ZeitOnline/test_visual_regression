@@ -435,3 +435,14 @@ def test_invalidation_view_should_work_correctly(
 
     response = requests.get('%s/json/invalidate' % testserver.url)
     assert response.status_code == 500
+
+def test_lru_cache_should_be_invalidated_by_unique_id(testserver):
+    cache_maker = zeit.web.core.comments.cache_maker
+    cache_maker._cache['comment_thread'].data = {}
+    requests.get('%s/zeit-online/article/01' % testserver.url)
+    assert cache_maker._cache['comment_thread'].data.keys()[0] == (
+        ('http://xml.zeit.de/zeit-online/article/01',))
+
+    zeit.web.core.view_comment.invalidate_comment_thread(
+        'http://xml.zeit.de/zeit-online/article/01')
+    assert cache_maker._cache['comment_thread'].data == {}
