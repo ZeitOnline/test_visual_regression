@@ -46,11 +46,11 @@
 					{{ comment.text | safe }}
 				</div>
 				<div class="comment__reactions">
-					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(commentpid=comment.cid, reportcid=none) }}#comment-form" title="Antworten">
+					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', cid=comment.cid) }}#comment-form" title="Antworten">
 						<span class="comment__icon icon-comment-reactions-reply"></span>
 						<span class="comment__action">Antworten</span>
 					</a>
-					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(reportcid=comment.cid, commentpid=none) }}#report-comment-form" title="Melden">
+					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', cid=comment.cid) }}#report-comment-form" title="Melden">
 						<span class="comment__icon icon-comment-reactions-report"></span>
 						<span class="comment__action">Melden</span>
 					</a>
@@ -65,10 +65,10 @@
 	</div>
 {% endif %}
 
-{% if view.request.GET['reportcid'] %}
-    <esi:include src="{{ view.article_url }}/report-form?reportcid={{ view.request.GET['reportcid'] }}" />
+{% if view.request.GET['action'] == 'report' %}
+    <esi:include src="{{ view.content_url }}?form=report&amp;rid={{ view.request.GET['cid'] }}" />
 {% else %}
-    <esi:include src="{{ view.article_url }}/comment-form?commentpid={{ view.request.GET['commentpid'] }}" />
+    <esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['cid'] }}" />
 {% endif %}
 
 	<script type="text/template" id="js-report-success-template">

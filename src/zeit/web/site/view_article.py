@@ -44,11 +44,11 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.site.view.is_zon_content,),
-             name='comment-form',
+             request_param='form=comment',
              renderer='templates/inc/comments/comment-form.html')
 @view_config(context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.site.view.is_zon_content,),
-             name='report-form',
+             request_param='form=report',
              renderer='templates/inc/comments/report-form.html')
 class CommentForm(zeit.web.core.view_article.Article):
     pass
