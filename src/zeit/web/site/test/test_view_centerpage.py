@@ -26,7 +26,7 @@ def screen_size(request):
     return request.param
 
 
-def test_area_major_should_filter_teasers(application):
+def test_area_major_should_correctly_process_teasers(application):
     context = mock.MagicMock()
 
     def create_mocked_teaserblocks():
