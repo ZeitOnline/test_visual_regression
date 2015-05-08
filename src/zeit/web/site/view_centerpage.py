@@ -4,9 +4,10 @@ import logging
 import urllib
 import uuid
 
+import grokcore.component
 import pyramid.response
 import pyramid.view
-import grokcore.component
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -14,13 +15,14 @@ import zeit.content.cp.layout
 
 import zeit.web.core.interfaces
 import zeit.web.core.reach
-import zeit.web.core.template
 import zeit.web.core.sources
+import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.view
 import zeit.web.site.spektrum
+import zeit.web.site.view
+
 
 log = logging.getLogger(__name__)
 
@@ -81,6 +83,27 @@ class LegacyRegion(LegacyArea):
         collections.OrderedDict.__init__(
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
+
+
+@grokcore.component.implementer(zeit.content.cp.interfaces.IRenderedArea)
+@grokcore.component.adapter(zeit.content.cp.interfaces.IArea,
+                            zeit.content.cp.interfaces.ITeaserBlock)
+def rendered_area_from_teaser_block(area, block):
+    area.count = int(block.xml.get('display_amount', 3))
+    uid = unicode(block.xml.find('./referenced_cp'))
+    area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
+    auto = zeit.content.cp.interfaces.IRenderedArea(area)
+    values = auto._query_centerpage()[:area.count]
+
+    lids = [block.layout.id] + area.count * ['zon-parquet-small']
+    modules = [LegacyModule([t], layout=lids.pop(0)) for t in values]
+    legacy = LegacyArea(modules, kind='parquet', is_teaserbar=True)
+
+    legacy.read_more = block.read_more
+    legacy.read_more_url = block.read_more_url
+    legacy.title = block.title
+    legacy.referenced_cp = area.referenced_cp
+    return legacy
 
 
 @pyramid.view.view_config(
@@ -279,28 +302,16 @@ class LegacyCenterpage(Centerpage):
         for area in self.context.values()[1].itervalues():
             if area.kind != 'parquet':
                 continue
-
             for block in area.values():
                 if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
                     legacy = zeit.web.site.spektrum.HPFeed()
-                elif zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
-                    area.count = int(block.xml.get('display_amount', 3))
-                    uid = unicode(block.xml.find('./referenced_cp'))
-                    area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
-                    auto = zeit.content.cp.interfaces.IRenderedArea(area)
-                    values = auto._query_centerpage()[:area.count]
-
-                    lids = [block.layout.id] + area.count * ['zon-parquet-small']
-                    modules = [LegacyModule([t], layout=lids.pop(0)) for t in values]
-                    legacy = LegacyArea(modules, kind='parquet', is_teaserbar=True)
-
-                    legacy.read_more = block.read_more
-                    legacy.read_more_url = block.read_more_url
-                    legacy.title = block.title
-                    legacy.referenced_cp = area.referenced_cp
                 else:
-                    continue
-
+                    try:
+                        legacy = zope.component.getMultiAdapter(
+                            (area, block),
+                            zeit.content.cp.interfaces.IRenderedArea)
+                    except TypeError:
+                        continue
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
         return regions
