@@ -8,7 +8,6 @@ import zeit.web.core.view
 import zeit.web.core.comments
 import zeit.web.core.template
 import pyramid.view
-import urllib
 import urlparse
 import json
 import logging
