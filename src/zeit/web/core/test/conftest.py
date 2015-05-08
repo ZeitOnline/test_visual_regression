@@ -53,7 +53,7 @@ settings = {
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
-
+    'app_servers': '',
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
 
     'community_host_timeout_secs': '10',
