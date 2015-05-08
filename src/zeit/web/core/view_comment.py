@@ -80,11 +80,11 @@ class PostComment(zeit.web.core.view.Base):
         elif action == 'report' and (not(pid) or not(comment)):
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No report could be posted',
-                explanation=('comment-ID and comment needed.'))
+                explanation=('Pid and comment needed.'))
         elif action == 'recommend' and not pid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No recommondation could be posted',
-                explanation=('comment-ID needed.'))
+                explanation=('Pid needed.'))
 
         unique_id = 'http://xml.zeit.de/{}'.format(self.path)
         nid = self._nid_by_comment_thread(unique_id)
