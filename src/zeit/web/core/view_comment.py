@@ -123,13 +123,13 @@ class PostComment(zeit.web.core.view.Base):
 
             content = None
             error = None
-            self.cid = cid
+            new_content_id = None
             if response.content:
                 content = json.loads(response.content[5:-2])
                 error = content['#error']
             elif response.status_code == 303:
                 url = urlparse.urlparse(response.headers.get('location'))
-                self.cid = url[5][4:]
+                new_content_id = url[5][4:]
 
             return {
                 "request": {
@@ -140,7 +140,7 @@ class PostComment(zeit.web.core.view.Base):
                 "response": {
                     "content": content,
                     "error": error,
-                    "cid": self.cid}
+                    "new_content_id": new_content_id}
             }
 
         else:
@@ -258,8 +258,8 @@ class PostCommentResource(PostComment):
         else:
             location = zeit.web.core.template.append_get_params(
                 self.request, action=None, cid=None)
-            if self.cid:
-                location = "{}#cid-{}".format(location, self.cid)
+            if new_content_id:
+                location = "{}#cid-{}".format(location, new_content_id)
 
             return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)
