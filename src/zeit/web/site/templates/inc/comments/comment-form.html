@@ -1,5 +1,5 @@
-{% set pid = view.request.GET['pid'] | int | d(None) %}
-{% set comment = view.comments.index[pid] | d(None) %}
+{% set pid = view.request.GET['pid'] | d(None) %}
+{% set comment = view.comments.index[pid | int] | d(None) %}
 
 {% if comment %}
 	{% set submit_value = 'Antworten' %}
