@@ -264,6 +264,9 @@ class PostCommentResource(PostComment):
     route_name='json_invalidate',
     renderer='json')
 def invalidate(request):
+    if request.host_port == 80:
+        raise pyramid.httpexceptions.HTTPNotFound()
+
     unique_id = request.params.get('unique_id', None)
     if not unique_id:
         raise pyramid.httpexceptions.HTTPInternalServerError(
