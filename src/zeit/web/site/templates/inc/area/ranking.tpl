@@ -10,8 +10,8 @@
     </div>
     <nav>
         <span class="search-counter__label">Sortieren nach</span>
-        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
-        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
+        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href={{ view.request | append_get_params(sort='relevanz') }}>Relevanz</a>
+        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.request | append_get_params(sort='aktuell') }}>Aktualit&auml;t</a>
     </nav>
 </div>
 {% endblock %}

@@ -22,7 +22,7 @@
 	{%- endfor %}
 
 		<li class="pager__all">
-			<a href="{{ view.article_url }}/komplettansicht">
+			<a href="{{ view.content_url }}/komplettansicht">
 				<span class="pager__who">Artikel</span>
 				<span class="pager__what">auf einer Seite lesen</span>
 			</a>

@@ -34,11 +34,23 @@ define([ 'jquery' ], function( $ ) {
                 .addClass( 'js-reply-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
+            form.get( 0 ).elements.comment.placeholder = 'Ihre Antwort';
             form.find( 'input[type="submit"]' ).prop( 'disabled', true ).val( 'Antworten' );
             form.find( 'input[name="pid"]' ).val( cid );
         }
 
         showForm( form, comment );
+    },
+
+    /**
+     * comments.js: cancel reply to comment
+     * @function cancelReply
+     * @param  {object} e event object
+     */
+    cancelReply = function( e ) {
+        e.preventDefault();
+
+        $( this ).closest( '.js-reply-form' ).slideUp( slideDuration );
     },
 
     /**
@@ -56,7 +68,10 @@ define([ 'jquery' ], function( $ ) {
 
         if ( !form.length ) {
             template = $( '#js-report-comment-template' ).html().replace( /<% commentId %>/, cid );
-            form = $( template ).addClass( 'js-report-form' ).appendTo( comment );
+            form = $( template )
+                .addClass( 'js-report-form' )
+                .css( 'display', 'none' )
+                .appendTo( comment );
         }
 
         showForm( form, comment );
@@ -83,7 +98,10 @@ define([ 'jquery' ], function( $ ) {
 
             if ( !form.length ) {
                 template = $( '#js-report-comment-template' ).html().replace( /zu melden./, 'zu empfehlen.' );
-                form = $( template ).addClass( 'js-recommend-form' ).appendTo( comment );
+                form = $( template )
+                    .addClass( 'js-recommend-form' )
+                    .css( 'display', 'none' )
+                    .appendTo( comment );
             }
 
             showForm( form, comment );
@@ -285,6 +303,7 @@ define([ 'jquery' ], function( $ ) {
 
         // register event handlers
         $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
+        $commentsBody.on( startEvent, '.js-cancel-reply', cancelReply );
         $commentsBody.on( startEvent, '.js-report-comment', reportComment );
         $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
         $commentsBody.on( startEvent, '.js-submit-report', submitReport );

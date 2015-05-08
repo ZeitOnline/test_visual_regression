@@ -7,6 +7,7 @@ import gocept.httpserverlayer.static
 import mock
 import pytest
 import venusian
+import webob.multidict
 
 import zeit.cms.interfaces
 
@@ -411,6 +412,43 @@ def test_attr_safe_returns_safe_text(application):
     text = u'10 Saurier sind super % auf Zack'
     target = 'sauriersindsuperaufzack'
     assert zeit.web.core.template.attr_safe(text) == target
+
+
+def test_filter_append_get_params_should_create_params(request):
+    request = mock.Mock()
+    request.path_url = 'http://example.com'
+    request.GET = {}
+    get_params = {'newparam': 'foo'}
+    assert 'http://example.com?newparam=foo' == (
+        zeit.web.core.template.append_get_params(request, **get_params))
+
+
+def test_filter_append_get_params_should_append_params(request):
+    request = mock.Mock()
+    request.path_url = 'http://example.com'
+    request.GET = {u'key1': u'1'}
+    get_params = {'newparam': 'foo'}
+    assert 'http://example.com?key1=1&newparam=foo' == (
+        zeit.web.core.template.append_get_params(request, **get_params))
+
+
+def test_filter_append_get_params_should_keep_not_overridden_params(request):
+    request = mock.Mock()
+    request.path_url = 'http://example.com'
+    request.GET = webob.multidict.MultiDict(
+        [(u'key1', u'1'), (u'key1', u'2')])
+    get_params = {'newparam': 'foo'}
+    assert 'http://example.com?key1=1&key1=2&newparam=foo' == (
+        zeit.web.core.template.append_get_params(request, **get_params))
+
+
+def test_filter_append_get_params_should_reset_params(request):
+    request = mock.Mock()
+    request.path_url = 'http://example.com'
+    request.GET = {u'key1': u'1', u'key2': u'2'}
+    get_params = {u'key1': None}
+    assert 'http://example.com?key2=2' == (
+        zeit.web.core.template.append_get_params(request, **get_params))
 
 
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
