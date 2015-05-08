@@ -8,6 +8,7 @@ import grokcore.component
 import pyramid.response
 import pyramid.view
 import zope.component
+import zope.component.interfaces
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -85,25 +86,23 @@ class LegacyRegion(LegacyArea):
         self.kind = kw.pop('kind', 'solo')
 
 
-@grokcore.component.implementer(zeit.content.cp.interfaces.IRenderedArea)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IArea,
-                            zeit.content.cp.interfaces.ITeaserBlock)
-def rendered_area_from_teaser_block(area, block):
-    area.count = int(block.xml.get('display_amount', 3))
-    uid = unicode(block.xml.find('./referenced_cp'))
-    area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
-    auto = zeit.content.cp.interfaces.IRenderedArea(area)
-    values = auto._query_centerpage()[:area.count]
+class RenderedLegacyArea(LegacyArea):
 
-    lids = [block.layout.id] + area.count * ['zon-parquet-small']
-    modules = [LegacyModule([t], layout=lids.pop(0)) for t in values]
-    legacy = LegacyArea(modules, kind='parquet', is_teaserbar=True)
+    def __init__(self, area, block):
+        area.count = int(block.xml.get('display_amount', 3))
+        uid = unicode(block.xml.find('./referenced_cp'))
+        area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
+        auto = zeit.content.cp.interfaces.IRenderedArea(area)
+        values = auto._query_centerpage()[:area.count]
 
-    legacy.read_more = block.read_more
-    legacy.read_more_url = block.read_more_url
-    legacy.title = block.title
-    legacy.referenced_cp = area.referenced_cp
-    return legacy
+        lids = [block.layout.id] + area.count * ['zon-parquet-small']
+        modules = [LegacyModule([t], layout=lids.pop(0)) for t in values]
+
+        LegacyArea.__init__(self, modules, kind='parquet', is_teaserbar=True)
+        self.read_more = block.read_more
+        self.read_more_url = block.read_more_url
+        self.title = block.title
+        self.referenced_cp = area.referenced_cp
 
 
 @pyramid.view.view_config(
@@ -298,19 +297,21 @@ class LegacyCenterpage(Centerpage):
         """Re-model the parquet to conform with new RAM-style structure."""
 
         regions = []
-
         for area in self.context.values()[1].itervalues():
             if area.kind != 'parquet':
                 continue
             for block in area.values():
                 if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
+                    if block.cpextra != 'parquet-spektrum':
+                        continue
                     legacy = zeit.web.site.spektrum.HPFeed()
                 else:
                     try:
                         legacy = zope.component.getMultiAdapter(
                             (area, block),
                             zeit.content.cp.interfaces.IRenderedArea)
-                    except TypeError:
+                    except (zope.component.interfaces.ComponentLookupError,
+                            TypeError):
                         continue
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
@@ -329,3 +330,12 @@ class LegacyCenterpage(Centerpage):
 
         module = LegacyModule([snapshot], layout='snapshot')
         return LegacyRegion([LegacyArea([module])])
+
+
+# First of all: congrats for scrolling all the way down. Now that you've made
+# it this far, registering the RLA as a ZCA multiadapter with grokcore should
+# be a breeze for you #TodosFromHell #FIXME
+zope.component.getGlobalSiteManager().registerAdapter(
+    RenderedLegacyArea, (zeit.content.cp.interfaces.IArea,
+                         zeit.content.cp.interfaces.ITeaserBlock),
+    zeit.content.cp.interfaces.IRenderedArea)
