@@ -10,8 +10,8 @@
     </div>
     <nav>
         <span class="search-counter__label">Sortieren nach</span>
-        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
-        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='aktuell') }}>Aktualität</a>
+        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href="{{ view.request | append_get_params(sort='relevanz') }}">Relevanz</a>
+        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.request | append_get_params(sort='aktuell') }}>Aktualität</a>
     </nav>
 </div>
 {% endblock %}
@@ -20,7 +20,7 @@
 {% if area.pagination %}
 <div class="center-pager" id="center-pager">
     {% if area.next_page %}
-    <a class="center-pager__next" href="{{ view.path_with_params(p=area.next_page) }}">Nächste Seite</a>
+    <a class="center-pager__next" href="{{ view.request | append_get_params(p=area.next_page) }}">Nächste Seite</a>
     {% endif %}
     <ul class="center-pager__pages">
         {% for num in area.pagination %}
@@ -28,7 +28,7 @@
             {% if num == area.current_page %}
                 {{ num }}
             {% elif num %}
-                <a class="center-pager__link" href="{{ view.path_with_params(p=num) }}">{{ num }}</a>
+                <a class="center-pager__link" href="{{ view.request | append_get_params(p=num) }}">{{ num }}</a>
             {% else %}
                 <span>…</span>
             {% endif %}

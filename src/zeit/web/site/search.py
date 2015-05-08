@@ -201,7 +201,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
         solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, start=self.count*(self.page-1), **HIGHLIGHTING)
+            fl=FIELDS, start=self.count * (self.page - 1), **HIGHLIGHTING)
         docs = list(solr_result)
         self.hits = solr_result.hits
         for block in self.context.values():
@@ -244,7 +244,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         if self.current_page == self.total_pages:
             return
         else:
-            return min(self.total_pages, self.current_page+1)
+            return min(self.total_pages, self.current_page + 1)
 
     @zeit.web.reify
     def pagination(self):
