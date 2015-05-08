@@ -614,7 +614,7 @@ def debug_breaking_news():
 
 
 @zeit.web.register_global
-def calculate_pagination(current_page, total_pages):
+def calculate_pagination(current_page, total_pages, slots=7):
     # only accept ints as params
     if not (isinstance(current_page, int) and isinstance(total_pages, int)):
         return
@@ -622,16 +622,20 @@ def calculate_pagination(current_page, total_pages):
     if current_page > total_pages or current_page < 0 or total_pages <= 1:
         return
 
-    # we have 7 slots to display pages,
+    # we have 7 slots by default to display pages,
     # so anything less than 8 pages can be displayed 'as is'
-    if total_pages <= 7:
+    if total_pages <= slots:
         return range(1, total_pages + 1)
 
-    # real math :D
-    the_set = set([1, max(1, current_page - 1), current_page,
-                  min(total_pages, current_page + 1), total_pages])
-    pages = sorted(list(the_set))
+    # collect all known page numbers:
+    #  - first and last page
+    #  - current page and its two neighbours
+    locp = max(1, current_page - 1)  # left of current page
+    rocp = min(total_pages, current_page + 1)  # left of current page
+    pages_set = set([1, locp, current_page, rocp, total_pages])
+    pages = sorted(list(pages_set))
 
+    # fill up slots with number or ellipsis
     if pages[1] - pages[0] == 2:
         pages.insert(1, pages[0] + 1)
     elif pages[1] - pages[0] > 2:
@@ -642,10 +646,12 @@ def calculate_pagination(current_page, total_pages):
     elif pages[-1] - pages[-2] > 2:
         pages.insert(-1, None)
 
-    if len(pages) < 7:
+    # account for edge cases where's more to fill
+    if len(pages) < slots:
         pre_none_filler = range(min(total_pages, current_page + 2),
-                                total_pages)[:7 - len(pages)]
-        post_none_filler = range(2, max(2, current_page - 1))[len(pages) - 7:]
+                                total_pages)[:slots - len(pages)]
+        post_none_filler = range(2,
+                                 max(2, current_page - 1))[len(pages) - slots:]
 
         if pre_none_filler:
             pages = pages[:-2] + pre_none_filler + pages[-2:]
