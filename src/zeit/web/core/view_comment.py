@@ -29,8 +29,9 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No User',
                 explanation='Please log in in order to comment')
-        self.cid = None
+        self.pid = None
         self.action = None
+        self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
         self.context = context
@@ -47,7 +48,7 @@ class PostComment(zeit.web.core.view.Base):
         request = self.request
         user = request.session['user']
         uid = user['uid']
-        cid = request.params.get('cid')
+        pid = request.params.get('cid')
         comment = request.params.get('comment')
         action = request.params.get('action')
 
@@ -76,11 +77,11 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No comment could be posted',
                 explanation=('Path and comment needed.'))
-        elif action == 'report' and (not(cid) or not(comment)):
+        elif action == 'report' and (not(pid) or not(comment)):
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No report could be posted',
                 explanation=('comment-ID and comment needed.'))
-        elif action == 'recommend' and not cid:
+        elif action == 'recommend' and not pid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No recommondation could be posted',
                 explanation=('comment-ID needed.'))
@@ -95,16 +96,16 @@ class PostComment(zeit.web.core.view.Base):
             data['nid'] = nid
             data['subject'] = '[empty]'
             data['comment'] = comment
-            data['pid'] = cid
-        elif action == 'report' and cid:
+            data['pid'] = pid
+        elif action == 'report' and pid:
             method = 'get'
             data['note'] = comment
-            data['content_id'] = cid
+            data['content_id'] = pid
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
-        elif action == 'recommend' and cid:
+        elif action == 'recommend' and pid:
             method = 'get'
-            data['content_id'] = cid
+            data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'leser_empfehlung'
 
@@ -117,30 +118,29 @@ class PostComment(zeit.web.core.view.Base):
 
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
-                               ' (with cid {})'.format(method, unique_id, cid))
+                               ' (with pid {})'.format(method, unique_id, pid))
 
             self._invalidate_app_servers(unique_id)
 
             content = None
             error = None
-            new_content_id = None
             if response.content:
                 content = json.loads(response.content[5:-2])
                 error = content['#error']
             elif response.status_code == 303:
                 url = urlparse.urlparse(response.headers.get('location'))
-                new_content_id = url[5][4:]
+                self.new_cid = url[5][4:]
 
             return {
                 "request": {
                     "action": action,
                     "path": self.path,
                     "nid": nid,
-                    "cid": cid},
+                    "pid": pid},
                 "response": {
                     "content": content,
                     "error": error,
-                    "new_content_id": new_content_id}
+                    "new_cid": self.new_cid}
             }
 
         else:
@@ -258,8 +258,8 @@ class PostCommentResource(PostComment):
         else:
             location = zeit.web.core.template.append_get_params(
                 self.request, action=None, cid=None)
-            if new_content_id:
-                location = "{}#cid-{}".format(location, new_content_id)
+            if self.new_cid:
+                location = "{}#cid-{}".format(location, self.new_cid)
 
             return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)
