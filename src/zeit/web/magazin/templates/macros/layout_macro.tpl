@@ -28,7 +28,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
-    <meta property="og:url" content="{{obj.article_url or 'http://' + request.host + request.path_info}}">
+    <meta property="og:url" content="{{obj.content_url or 'http://' + request.host + request.path_info}}">
     {% if obj.image_group -%}
         <meta property="og:image" content="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
         <link itemprop="image" rel="image_src" href="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">

@@ -4,9 +4,15 @@ Change log for zeit.web
 1.21.2 (unreleased)
 -------------------
 
+- ZON-1720: Use new comment API and enable "recommend comment"
+
 - ZON-1729 Setup view defaults to DRY
 
-- ZON-1698: Sorting an pagination for comment_thread
+- ZON-1698: Sorting and pagination for comment_thread
+
+- ZON-1674: Implement No-JS variant for comment forms
+
+- ZON-1683: Invalidate comment thread on all app servers
 
 
 1.21.1 (2015-05-05)
