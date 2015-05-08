@@ -613,7 +613,6 @@ def debug_breaking_news():
     return 'eilmeldung' == request.GET.get('debug', '')
 
 
-<<<<<<< HEAD
 @zeit.web.register_global
 def calculate_pagination(current_page, total_pages, slots=7):
     # only accept ints as params

@@ -471,25 +471,6 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     assert zeit.web.core.template.get_module(block) is None
 
 
-def test_filter_append_get_params_should_keep_not_overridden_params(request):
-    request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = webob.multidict.MultiDict(
-        [(u'key1', u'1'), (u'key1', u'2')])
-    get_params = {'newparam': 'foo'}
-    assert 'http://example.com?key1=1&key1=2&newparam=foo' == (
-        zeit.web.core.template.append_get_params(request, **get_params))
-
-
-def test_filter_append_get_params_should_reset_params(request):
-    request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'key1': u'1', u'key2': u'2'}
-    get_params = {u'key1': None}
-    assert 'http://example.com?key2=2' == (
-        zeit.web.core.template.append_get_params(request, **get_params))
-
-
 def test_pagination_calculation_should_deliver_valid_output():
     pager = zeit.web.core.template.calculate_pagination
     assert pager(1, 1) is None
