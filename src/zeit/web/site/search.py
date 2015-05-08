@@ -200,18 +200,18 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
             fl=FIELDS, start=self.page, **HIGHLIGHTING)
-        docs = list(solr_result)
+        docs = collections.deque(solr_result)
         self.hits = solr_result.hits
         for block in self.context.values():
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
                     block) or not len(docs):
                 result.append(block)
                 continue
-            unique_id = self._extract_newest(docs)
+            unique_id = docs.popleft().get('uniqueId')
             try:
                 block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
             except TypeError, err:
-                log.debug('Corrupt search result', err)
+                log.debug('Corrupted search result', unique_id, err)
             result.append(block)
         return result
 

@@ -168,7 +168,7 @@ class LegacyCenterpage(Centerpage):
 
         def valid_module(m):
             return zeit.web.core.template.get_layout(m) in (
-                'zon-fullwidth',)
+                'zon-fullwidth', None)
 
         area = self.context.values()[0]['lead']
         return LegacyArea([m for m in area.itervalues() if valid_module(m)])

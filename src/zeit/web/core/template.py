@@ -162,7 +162,7 @@ def get_teaser_layout(teaser, layout, default=None):
 
 
 @zeit.web.register_filter
-def get_layout(block, default='default', request=None):
+def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
     # that was originally set for the block.
@@ -174,7 +174,7 @@ def get_layout(block, default='default', request=None):
     try:
         key = request and hash(block)
     except (NotImplementedError, TypeError), e:
-        log.debug('Cannot hash and cache cp block layout: {}'.format(e))
+        log.debug('Cannot hash and cache cp module layout: {}'.format(e))
         key = None
 
     if key:
@@ -187,20 +187,15 @@ def get_layout(block, default='default', request=None):
         if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
             layout = block.cpextra
         else:
-            layout = block.layout.id
-    except (AttributeError, TypeError), e:
-        log.debug('Cannot produce a cp block layout: {}'.format(e))
-        layout = None
-
-    try:
-        layout = get_teaser_layout(list(block)[0], layout)
+            layout = get_teaser_layout(list(block)[0], block.layout.id)
     except (AttributeError, IndexError, TypeError), e:
-        log.debug('Cannot apply content-dependent layout rules: %s' % e)
+        log.debug('Cannot produce a cp module layout: {}'.format(e))
+        return
 
     if key:
-        request.teaser_layout[key] = layout or default
+        request.teaser_layout[key] = layout
 
-    return layout or default
+    return layout
 
 
 @zeit.web.register_filter

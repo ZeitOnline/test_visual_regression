@@ -26,7 +26,7 @@ def screen_size(request):
     return request.param
 
 
-def test_area_solo_should_filter_teasers(application):
+def test_area_major_should_filter_teasers(application):
     context = mock.MagicMock()
 
     def create_mocked_teaserblocks():
@@ -65,10 +65,10 @@ def test_area_solo_should_filter_teasers(application):
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_solo) == 4
-    assert cp.area_solo.values()[0].layout.id == 'zon-large'
-    assert cp.area_solo.values()[1].layout.id == 'zon-small'
-    assert list(cp.area_solo.values()[0])[0] == 'article'
+    assert len(cp.area_major) == 2
+    assert cp.area_major.values()[0].layout.id == 'zon-large'
+    assert cp.area_major.values()[1].layout.id == 'zon-small'
+    assert list(cp.area_major.values()[0])[0] == 'article'
 
 
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
@@ -159,7 +159,7 @@ def test_first_small_teaser_has_no_image_on_mobile_mode(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
-    box = driver.find_elements_by_class_name('cp-area--twothirds')[0]
+    box = driver.find_elements_by_class_name('cp-area--major')[0]
     first = box.find_elements_by_class_name('teaser-small__media')[0]
     second = box.find_elements_by_class_name('teaser-small__media')[1]
 
@@ -700,12 +700,12 @@ def test_new_centerpage_renders(testserver):
     assert resp.ok
 
 
-def test_onethird_teaser_has_correct_width_in_all_screen_sizes(
+def test_minor_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/index' % testserver.url)
-    teaser = driver.find_elements_by_class_name('teaser-small-onethird')[0]
+    teaser = driver.find_elements_by_class_name('teaser-small-minor')[0]
     main = driver.find_element_by_id('main')
     main_width = main.size.get('width')
     gutter_width = 20
