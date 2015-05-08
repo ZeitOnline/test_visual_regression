@@ -185,3 +185,17 @@ def test_successful_search_result_should_produce_valid_resultset(
     block = iter(search_area.values()).next()
     assert zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(block)
     assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())
+
+
+def test_successful_search_result_should_render_in_browser(
+        monkeypatch, testserver, testbrowser):
+    def search(self, q, **kw):
+        return pysolr.Results([
+            {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
+            {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit'},
+            {'uniqueId': 'http://xml.zeit.de/artikel/artikel-ohne-assets'}
+        ], 42)
+    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+
+    browser = testbrowser('{}/suche/index'.format(testserver.url))
+    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
