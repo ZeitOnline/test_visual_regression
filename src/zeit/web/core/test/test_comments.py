@@ -262,7 +262,7 @@ def test_post_comment_should_raise_exception_if_no_post_is_used(
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['cid'] = pid
+    poster.request.params['pid'] = pid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
@@ -279,7 +279,7 @@ def test_post_comment_should_raise_exception_if_params_are_wrong(
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['cid'] = pid
+    poster.request.params['pid'] = pid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
@@ -296,7 +296,7 @@ def test_post_report_should_raise_exception_if_params_are_wrong(
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['cid'] = pid
+    poster.request.params['pid'] = pid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
@@ -311,7 +311,7 @@ def test_post_recommondation_should_raise_exception_if_params_are_wrong(
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['cid'] = pid
+    poster.request.params['pid'] = pid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
@@ -356,7 +356,7 @@ def test_post_comments_should_post_with_correct_arguments(
     poster.request.params['comment'] = comment
     poster.path = path
     poster.request.params['action'] = action
-    poster.request.params['cid'] = pid
+    poster.request.params['pid'] = pid
     with patch.object(requests, 'post') as mock_method:
         response = mock.Mock()
         response.status_code = 200
@@ -382,7 +382,7 @@ def test_post_comments_should_get_with_correct_arguments(
     poster.request.params['comment'] = comment
     poster.path = path
     poster.request.params['action'] = action
-    poster.request.params['cid'] = pid
+    poster.request.params['pid'] = pid
     with patch.object(requests, 'get') as mock_method:
         response = mock.Mock()
         response.status_code = 200

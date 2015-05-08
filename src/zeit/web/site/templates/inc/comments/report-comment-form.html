@@ -1,4 +1,4 @@
-{% set cid = view.request.GET['rid'] | e %}
+{% set pid = view.request.GET['pid'] | d(None) %}
 	<form class="comment-form" method="POST" id="report-comment-form">
 		<textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="comment-form__textarea js-required"></textarea>
 		<p class="comment-form__text">
@@ -7,7 +7,7 @@
 		</p>
 		<p class="comment-form__actions">
 			<input type="hidden" name="action" value="report">
-			<input type="hidden" name="cid" value="{{ cid }}">
+			<input type="hidden" name="pid" value="{{ pid }}">
 			<a href="{{ view.content_url }}" class="comment-form__cancel js-cancel-report">Abbrechen</a>
 			<input class="button js-submit-report" type="submit" value="Abschicken" />
 		</p>

@@ -48,7 +48,7 @@ class PostComment(zeit.web.core.view.Base):
         request = self.request
         user = request.session['user']
         uid = user['uid']
-        pid = request.params.get('cid')
+        pid = request.params.get('pid')
         comment = request.params.get('comment')
         action = request.params.get('action')
 
@@ -257,7 +257,7 @@ class PostCommentResource(PostComment):
             return result
         else:
             location = zeit.web.core.template.append_get_params(
-                self.request, action=None, cid=None)
+                self.request, action=None, pid=None)
             if self.new_cid:
                 location = "{}#cid-{}".format(location, self.new_cid)
 

@@ -1,7 +1,7 @@
-{% set cid = view.request.GET['pid'] | d(None) %}
+{% set pid = view.request.GET['pid'] | d(None) %}
 
-{%- if cid and view.comments -%}
-	{% set comment = view.comments.index[cid | int] | d(None) %}
+{%- if pid and view.comments -%}
+	{% set comment = view.comments.index[pid | int] | d(None) %}
 {%- endif %}
 
 {% if comment %}
@@ -33,7 +33,7 @@
 		<textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500"></textarea>
 		<p class="comment-form__actions">
 			<input type="hidden" name="action" value="comment">
-			<input type="hidden" name="cid" value="{{ cid }}">
+			<input type="hidden" name="pid" value="{{ pid }}">
 			<a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
 			<input class="button" type="submit" value="{{ submit_value }}" />
 		</p>

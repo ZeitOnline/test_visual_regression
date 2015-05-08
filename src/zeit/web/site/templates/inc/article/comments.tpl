@@ -46,15 +46,15 @@
 					{{ comment.text | safe }}
 				</div>
 				<div class="comment__reactions">
-					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', cid=comment.cid) }}#comment-form" title="Antworten">
+					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
 						<span class="comment__icon icon-comment-reactions-reply"></span>
 						<span class="comment__action">Antworten</span>
 					</a>
-					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', cid=comment.cid) }}#report-comment-form" title="Melden">
+					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
 						<span class="comment__icon icon-comment-reactions-report"></span>
 						<span class="comment__action">Melden</span>
 					</a>
-					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', cid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
+					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
 						<span class="comment__icon icon-comment-reactions-recommend"></span>
 						<span class="comment__action">Empfehlen</span>
 					</a>
@@ -66,9 +66,9 @@
 {% endif %}
 
 {% if view.request.GET['action'] == 'report' %}
-	<esi:include src="{{ view.content_url }}?form=report&amp;rid={{ view.request.GET['cid'] }}" />
+	<esi:include src="{{ view.content_url }}?form=report&amp;pid={{ view.request.GET['pid'] }}" />
 {% else %}
-	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['cid'] }}" />
+	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['pid'] }}" />
 {% endif %}
 
 	<script type="text/template" id="js-report-success-template">
