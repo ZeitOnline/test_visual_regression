@@ -186,7 +186,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     query = zeit.cms.content.property.ObjectPathProperty(
         '.query', IResultsArea['query'])
 
-    page = zeit.cms.content.property.ObjectPathProperty(
+    _page = zeit.cms.content.property.ObjectPathProperty(
         '.page', IResultsArea['page'])
 
     _hits = zeit.cms.content.property.ObjectPathProperty(
@@ -227,6 +227,16 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     def hits(self, value):
         if self._hits is None:
             self._hits = value
+
+    @property
+    def page(self):
+        if self._page is None:
+            return 1
+        return self._page
+
+    @page.setter
+    def page(self, value):
+        self._page = value
 
     @zeit.web.reify
     def total_pages(self):
