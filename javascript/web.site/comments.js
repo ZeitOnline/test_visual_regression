@@ -272,7 +272,7 @@ define([ 'jquery' ], function( $ ) {
             return;
         }
 
-        var uid = $commentForm.find( 'input[name="uid"]' ).val();
+        var uid = $commentForm.attr( 'data-uid' );
 
         // highlight recommended comments for logged in user
         if ( uid ) {

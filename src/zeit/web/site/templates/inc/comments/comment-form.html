@@ -13,7 +13,7 @@
 <div class="comment-section__form">
 {%- if request.authenticated_userid %}
 	{%- block comment_form %}
-	<form class="comment-form" method="POST" id="comment-form">
+	<form class="comment-form" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">
 		<div class="comment-form__text">
 			{% if request.session.user.picture %}
 			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name | e }}" src="{{ request.session.user.picture }}">
