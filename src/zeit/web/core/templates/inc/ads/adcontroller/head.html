@@ -23,13 +23,10 @@
 <!-- mandanten object -->
 <script type="text/javascript">
     if (typeof AdController !== 'undefined') {
-            AdController.setPageInfo({
-            $handle: '{% if view.banner_type %}{{ view.banner_type }}{% endif %}',
-            level2: '{% if view.ressort %}{{ view.ressort }}{% endif %}',
-            level3: '{% if view.sub_ressort %}{{ view.sub_ressort }}{% endif %}',
-            keywords: '',
-            tma: '',
-            $autoSizeFrames: true
+        AdController.setPageInfo({
+        {% for name, value in view.adcontroller_values -%}
+                {{ '' | indent(4, true) }}{{ name }}: {% if value is string %}'{{ value }}'{% else %}{{ value | lower }}{% endif %}{{ ',' if not loop.last }}
+        {% endfor -%}
         });
         AdController.initialize();
     }

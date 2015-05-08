@@ -158,3 +158,33 @@ def test_missing_breaking_news_should_eval_to_false(
     ephemeral_settings(app_settings)
     view = zeit.web.core.view.Base(None, None)
     assert view.breaking_news.published is False
+
+
+def _adcontroller_handle(type, ressort, sub_ressort, is_hp=False):
+    replacements = {
+        'article': 'artikel',
+        'centerpage': 'centerpage',
+        'gallery': 'galerie',
+        'quiz': 'quiz',
+        'video': 'video_artikel'}
+    if is_hp:
+        return 'homepage'
+    else:
+        return 'index' if type == 'centerpage' and (
+            sub_ressort == ''
+            or ressort == 'zeit-magazin') else replacements[type]
+
+
+def test_adcontroller_handle_return_value():
+    assert _adcontroller_handle('centerpage', 'politik', '') == 'index'
+    assert _adcontroller_handle('centerpage', 'zeit-magazin', '') == 'index'
+    assert _adcontroller_handle(
+        'centerpage', 'homepage', '', is_hp=True) == 'homepage'
+    assert _adcontroller_handle(
+        'centerpage', 'politik', 'deutschland') == 'centerpage'
+    assert _adcontroller_handle(
+        'article', 'politik', 'deutschland') == 'artikel'
+    assert _adcontroller_handle(
+        'video', 'politik', 'deutschland') == 'video_artikel'
+    assert _adcontroller_handle(
+        'quiz', 'politik', 'deutschland') == 'quiz'
