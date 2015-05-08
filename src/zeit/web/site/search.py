@@ -212,6 +212,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
                 block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
             except TypeError, err:
                 log.debug('Corrupted search result', unique_id, err)
+                continue
             result.append(block)
         return result
 

@@ -187,10 +187,11 @@ def get_layout(block, request=None):
         if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
             layout = block.cpextra
         else:
-            layout = get_teaser_layout(list(block)[0], block.layout.id)
+            layout = get_teaser_layout(
+                list(block)[0], block.layout.id)
     except (AttributeError, IndexError, TypeError), e:
         log.debug('Cannot produce a cp module layout: {}'.format(e))
-        return
+        return 'hide'
 
     if key:
         request.teaser_layout[key] = layout
