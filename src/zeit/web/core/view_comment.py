@@ -189,6 +189,8 @@ class PostComment(zeit.web.core.view.Base):
         if comment_thread:
             return comment_thread.get('nid')
 
+        # @todo: liefert beim Posten des ersten Kommentars einer Seite
+        # AttributeError: 'NoneType' object has no attribute 'get'
         nid = self._create_and_load_comment_thread(unique_id).get('nid')
         if not nid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
