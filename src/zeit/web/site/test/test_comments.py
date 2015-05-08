@@ -43,7 +43,7 @@ def test_comments_get_thread_should_respect_top_level_sort_order(
 
 def test_comment_form_should_be_rendered(
         testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01/comment-form' %
+    browser = testbrowser('%s/zeit-online/article/01?form=comment' %
                           testserver.url)
     assert len(browser.cssselect('#comment-form')) == 1
 

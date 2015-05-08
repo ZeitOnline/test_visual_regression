@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import collections
 import logging
-import urllib
 import uuid
 
 import pyramid.response

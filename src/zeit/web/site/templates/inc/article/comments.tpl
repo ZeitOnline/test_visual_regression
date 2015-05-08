@@ -39,18 +39,18 @@
 					{%- endif -%}
 					</span>
 					<a  class="comment__date" href="#cid-{{ comment.cid }}">
-					#{{ loop.index }} &nbsp;/&nbsp; {{ get_delta_time_from_datetime(comment.timestamp) or (comment.timestamp | format_date) }}
+					#{{ comment.shown_num }} &nbsp;/&nbsp; {{ get_delta_time_from_datetime(comment.timestamp) or (comment.timestamp | format_date) }}
 					</a>
 				</div>
 				<div class="comment__body">
 					{{ comment.text | safe }}
 				</div>
 				<div class="comment__reactions">
-					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="#cid-{{ comment.cid }}" title="Antworten">
+					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', cid=comment.cid) }}#comment-form" title="Antworten">
 						<span class="comment__icon icon-comment-reactions-reply"></span>
 						<span class="comment__action">Antworten</span>
 					</a>
-					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="#cid-{{ comment.cid }}" title="Melden">
+					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', cid=comment.cid) }}#report-comment-form" title="Melden">
 						<span class="comment__icon icon-comment-reactions-report"></span>
 						<span class="comment__action">Melden</span>
 					</a>
@@ -65,7 +65,11 @@
 	</div>
 {% endif %}
 
-	<esi:include src="{{ view.article_url }}/comment-form" />
+{% if view.request.GET['action'] == 'report' %}
+	<esi:include src="{{ view.content_url }}?form=report&amp;rid={{ view.request.GET['cid'] }}" />
+{% else %}
+	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['cid'] }}" />
+{% endif %}
 
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">

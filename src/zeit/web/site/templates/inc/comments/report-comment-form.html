@@ -1,0 +1,17 @@
+{% set cid = view.request.GET['rid'] | e %}
+{% if not cid %}
+	{% set cid = '<% commentId %>' %}
+{% endif %}
+	<form action="{{ view.comments.comment_report_url }}" method="POST" class="comment-form" id="report-comment-form">
+		<textarea name="note" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="comment-form__textarea js-required"></textarea>
+		<p class="comment-form__text">
+			Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="//administratives/2010-03/netiquette">Netiquette</a> zu melden.
+			Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+		</p>
+		<p class="comment-form__actions">
+			<input type="hidden" name="uid" value="{{ request.session.user.uid }}">
+			<input type="hidden" name="content_id" value="{{ cid }}">
+			<a href="{{ view.content_url }}" class="comment-form__cancel js-cancel-report">Abbrechen</a>
+			<button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
+		</p>
+	</form>
