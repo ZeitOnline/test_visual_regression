@@ -393,9 +393,10 @@ def test_post_comments_should_get_with_correct_arguments(
 
     expected = sorted(result[1]['data'].items(), key=operator.itemgetter(1))
     actual = sorted(
-        mock_method.call_args[1]['data'].items(), key=operator.itemgetter(1))
+        mock_method.call_args_list[0][1]['data'].items(),
+        key=operator.itemgetter(1))
     assert actual == expected
-    assert result[0] == mock_method.call_args[0]
+    assert result[0] == mock_method.call_args_list[0][0]
 
 
 @pytest.mark.parametrize("action, path, service", [
@@ -424,13 +425,13 @@ def test_invalidation_view_should_work_correctly(
 
     unique_id = '/xml.zeit.de/zeit-online/article/01'
     response = requests.get(
-            '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
+        '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
 
     assert response.status_code == 500
 
     unique_id = 'http://hrgs.de/article/01'
     response = requests.get(
-            '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
+        '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
     assert response.status_code == 500
 
     response = requests.get('%s/json/invalidate' % testserver.url)
