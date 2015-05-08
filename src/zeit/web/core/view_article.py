@@ -3,7 +3,6 @@ import itertools
 import logging
 import re
 
-import babel.dates
 import pyramid.httpexceptions
 
 from zeit.content.author.interfaces import IAuthorReference
