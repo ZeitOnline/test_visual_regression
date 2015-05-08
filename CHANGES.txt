@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1698: Sorting an pagination for comment_thread
 
+- ZON-1683: Invalidate comment thread on all app servers
+
 
 1.21.1 (2015-05-05)
 -------------------

@@ -135,7 +135,7 @@ def request_thread(path):
 
 
 def get_thread(unique_id, destination=None, sort='asc', page=None):
-    thread = get_cacheable_thread(unique_id, destination)
+    thread = get_cacheable_thread(unique_id)
     if thread is None:
         return
 
@@ -163,11 +163,19 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
             thread['comments'] = []
             thread['page'] = '{} (invalid)'.format(page)
 
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
+
+    thread['comment_post_url'] = '{}/agatho/thread{}?destination={}'.format(
+        conf.get('agatho_host', ''), path, destination)
+    thread['comment_report_url'] = '{}/services/json'.format(
+        conf.get('community_host', ''))
     return thread
 
 
-@cache_maker.expiring_lrucache(maxsize=1000, timeout=60, name='comment_thread')
-def get_cacheable_thread(unique_id, destination=None):
+@cache_maker.expiring_lrucache(
+    maxsize=1000, timeout=3600, name='comment_thread')
+def get_cacheable_thread(unique_id):
     """Return a dict representation of the comment thread of the given
     article.
 
@@ -175,8 +183,6 @@ def get_cacheable_thread(unique_id, destination=None):
     :param sort: Sort order of comments, desc or asc
     :rtype: dict or None
     """
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
     thread = request_thread(path)
@@ -205,11 +211,7 @@ def get_cacheable_thread(unique_id, destination=None):
             index=index,
             comment_count=to_int(comment_count),
             sort='asc',
-            nid=comment_nid,
-            comment_post_url='{}/agatho/thread{}?destination={}'.format(
-                conf.get('agatho_host', ''), path, destination),
-            comment_report_url='{}/services/json'.format(
-                conf.get('community_host', '')))
+            nid=comment_nid)
     except (IndexError, AttributeError):
         return
 
