@@ -237,7 +237,9 @@ class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)
         self.context = zeit.content.article.article.Article()
-        self.post_comment()
+
+        if request.method == "POST":
+            self.post_comment()
 
 
 @pyramid.view.view_config(
