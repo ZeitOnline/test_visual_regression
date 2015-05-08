@@ -16,7 +16,7 @@
 	</div>
 
 {% if view.comments %}
-	<div id="js-comments-body" data-action="{{ view.comments.comment_report_url }}">
+	<div id="js-comments-body">
 	{% for comment in view.comments.comments[:20] %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
@@ -38,7 +38,7 @@
 						{{ comment.recommendations }} &#9733;
 					{%- endif -%}
 					</span>
-					<a  class="comment__date" href="#cid-{{ comment.cid }}">
+					<a  class="comment__date" href="{{ view.content_url }}#cid-{{ comment.cid }}">
 					#{{ comment.shown_num }} &nbsp;/&nbsp; {{ get_delta_time_from_datetime(comment.timestamp) or (comment.timestamp | format_date) }}
 					</a>
 				</div>
@@ -54,7 +54,7 @@
 						<span class="comment__icon icon-comment-reactions-report"></span>
 						<span class="comment__action">Melden</span>
 					</a>
-					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="#cid-{{ comment.cid }}" title="Empfehlen">
+					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', cid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
 						<span class="comment__icon icon-comment-reactions-recommend"></span>
 						<span class="comment__action">Empfehlen</span>
 					</a>

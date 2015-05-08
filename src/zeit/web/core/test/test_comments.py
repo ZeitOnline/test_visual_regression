@@ -252,65 +252,65 @@ def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
     assert poster.status == []
 
 
-@pytest.mark.parametrize("path, comment, pid, action", [
+@pytest.mark.parametrize("path, comment, cid, action", [
     ('path', 'my comment', '1', 'comment')])
 def test_post_comment_should_raise_exception_if_no_post_is_used(
-        monkeypatch, path, pid, comment, action):
+        monkeypatch, path, cid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "GET"
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['pid'] = pid
+    poster.request.params['cid'] = cid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
 
 
-@pytest.mark.parametrize("path, comment, pid, action", [
+@pytest.mark.parametrize("path, comment, cid, action", [
     ('/my/path', None, None, 'comment'),
     (None, None, None, 'comment'),
     (None, 'my_comment', None, 'comment')])
 def test_post_comment_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        monkeypatch, path, cid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['pid'] = pid
+    poster.request.params['cid'] = cid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
 
 
-@pytest.mark.parametrize("path, comment, pid, action", [
+@pytest.mark.parametrize("path, comment, cid, action", [
     ('my/path', None, None, 'report'),
     ('my/path', 'my_comment', None, 'report'),
     ('my/path', None, 1, 'report')])
 def test_post_report_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        monkeypatch, path, cid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['pid'] = pid
+    poster.request.params['cid'] = cid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
 
 
-@pytest.mark.parametrize("path, comment, pid, action", [
+@pytest.mark.parametrize("path, comment, cid, action", [
     ('my/path', None, None, 'recommend')])
 def test_post_recommondation_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        monkeypatch, path, cid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
     poster.path = path
     poster.request.params['comment'] = comment
-    poster.request.params['pid'] = pid
+    poster.request.params['cid'] = cid
     poster.request.params['action'] = action
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         poster.post_comment()
@@ -346,16 +346,16 @@ endpoint_recommend = (
      'uid': '123', }})
 
 
-@pytest.mark.parametrize("path, comment, pid, action, result", [
+@pytest.mark.parametrize("path, comment, cid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
 def test_post_comments_should_post_with_correct_arguments(
-        monkeypatch, path, comment, pid, result, action):
+        monkeypatch, path, comment, cid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
     poster.path = path
     poster.request.params['action'] = action
-    poster.request.params['pid'] = pid
+    poster.request.params['cid'] = cid
     with patch.object(requests, 'post') as mock_method:
         response = mock.Mock()
         response.status_code = 200
@@ -371,17 +371,17 @@ def test_post_comments_should_post_with_correct_arguments(
     assert result[0] == mock_method.call_args[0]
 
 
-@pytest.mark.parametrize("path, comment, pid, action, result", [
+@pytest.mark.parametrize("path, comment, cid, action, result", [
     ('my/path', None, '1', 'recommend', endpoint_recommend),
     ('my/path', 'my comment', '1', 'report', endpoint_report)])
 def test_post_comments_should_get_with_correct_arguments(
-        monkeypatch, path, comment, pid, result, action):
+        monkeypatch, path, comment, cid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
     poster.path = path
     poster.request.params['action'] = action
-    poster.request.params['pid'] = pid
+    poster.request.params['cid'] = cid
     with patch.object(requests, 'get') as mock_method:
         response = mock.Mock()
         response.status_code = 200
