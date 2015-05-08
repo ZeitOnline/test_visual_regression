@@ -59,6 +59,9 @@ class Application(object):
 
     def __call__(self, global_config, **settings):
         settings = pyramid.config.settings.Settings(d=settings)
+        settings['app_servers'] = filter(
+            None, settings['app_servers'].split(','))
+
         interface = zeit.web.core.interfaces.ISettings
         zope.interface.declarations.alsoProvides(settings, interface)
         zope.component.provideUtility(settings, interface)
@@ -144,6 +147,7 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_comment_count', '/json/comment_count')
+        config.add_route('json_invalidate', '/json/invalidate')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
