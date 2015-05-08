@@ -228,8 +228,11 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def comments(self):
+        sort = 'asc'
+        if self.request.params.get('sort') == 'desc':
+            sort = 'desc'
         return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url)
+            self.context.uniqueId, destination=self.request.url, sort=sort)
 
     @zeit.web.reify
     def serie(self):

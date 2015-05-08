@@ -23,9 +23,16 @@
 				{{ blocks.use_svg_icon('spinner', 'comment-section__icon-spinner') }}
 				Auto-Aktualisierung an
 			</a>
-			<a class="comment-section__link-sorting nowrap" href="{{ request.url | e }}#comments">
+			{% if view.comments.sort == 'asc' %}
+				{% set href = request.url + '?sort=desc' %}
+				{% set label = 'Älteste zuerst' %}
+			{% else %}
+				{% set href = request.url %}
+				{% set label = 'Neuste zuerst' %}
+			{% endif %}
+			<a class="comment-section__link-sorting nowrap" href="{{ href | e }}#comments">
 				{{ blocks.use_svg_icon('sorting', 'comment-section__icon-sorting') }}
-				Älteste zuerst
+				{{ label }}
 			</a>
 		</div>
 	</div>
