@@ -3,7 +3,6 @@ import itertools
 import logging
 import re
 
-import babel.dates
 import pyramid.httpexceptions
 
 from zeit.content.author.interfaces import IAuthorReference
@@ -21,7 +20,6 @@ import zeit.web.core.interfaces
 import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
-
 import zeit.web.magazin.view
 
 
