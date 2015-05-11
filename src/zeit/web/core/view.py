@@ -270,8 +270,8 @@ class Base(object):
     @zeit.web.reify
     def is_hp(self):
         try:
-            return self.request.path == (
-                '/' + self.request.registry.settings.hp)
+            return self.request.path == ('/{}'.format(
+                self.request.registry.settings.hp))
         except AttributeError:
             return False
 
