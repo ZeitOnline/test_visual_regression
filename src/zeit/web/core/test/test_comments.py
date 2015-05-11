@@ -75,14 +75,15 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         'Keine Kommentare')
 
 
-def test_request_thread_should_respond(application):
+def test_request_thread_should_respond(application, mockserver):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
     thread = zeit.web.core.comments.request_thread(unique_id)
     assert lxml.etree.fromstring(thread).xpath('comment_count')[0].text == '41'
 
 
-def test_request_thread_should_respond_for_nonexistent(application):
+def test_request_thread_should_respond_for_nonexistent(
+        application, mockserver):
     assert zeit.web.core.comments.request_thread('nosuchthread') is None
 
 
@@ -178,7 +179,7 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
 def test_post_comment_should_throw_exception_if_no_user_is_present():
     request = mock.Mock()
     request.authenticated_userid = False
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
 
@@ -221,6 +222,7 @@ def _create_poster(monkeypatch):
     request.authenticated_userid = True
 
     request.params = {'path': 'my/path'}
+    request.GET = request.POST = request.params
     request.session = {'user': {'uid': '123'}}
     request.cookies = {}
     context = mock.Mock()
@@ -264,7 +266,7 @@ def test_post_comment_should_raise_exception_if_no_post_is_used(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPMethodNotAllowed):
         poster.post_comment()
 
 
@@ -281,7 +283,7 @@ def test_post_comment_should_raise_exception_if_params_are_wrong(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPBadRequest):
         poster.post_comment()
 
 
@@ -298,7 +300,7 @@ def test_post_report_should_raise_exception_if_params_are_wrong(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPBadRequest):
         poster.post_comment()
 
 
@@ -313,7 +315,7 @@ def test_post_recommondation_should_raise_exception_if_params_are_wrong(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPBadRequest):
         poster.post_comment()
 
 

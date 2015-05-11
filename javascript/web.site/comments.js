@@ -67,11 +67,13 @@ define([ 'jquery' ], function( $ ) {
         this.blur();
 
         if ( !form.length ) {
-            template = $( '#js-report-comment-template' ).html().replace( /<% commentId %>/, cid );
+            template = $( '#js-report-comment-template' ).html();
             form = $( template )
                 .addClass( 'js-report-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
+            form.find( 'input[type="submit"]' ).prop( 'disabled', true );
+            form.find( 'input[name="pid"]' ).val( cid );
         }
 
         showForm( form, comment );
@@ -85,7 +87,7 @@ define([ 'jquery' ], function( $ ) {
         var cid  = this.getAttribute( 'data-cid' ),
             link = $( this ),
             comment = link.closest( '.comment__container' ),
-            sendurl = $commentsBody.attr( 'data-action' ),
+            sendurl = window.location.href,
             authenticated = $commentForm.hasClass( 'comment-form' ),
             form,
             template;
@@ -114,15 +116,15 @@ define([ 'jquery' ], function( $ ) {
         $.ajax({
             url: sendurl,
             data: {
-                'method':       'flag.flag',
-                'flag_name':    'leser_empfehlung', // 'kommentar_empfohlen' should work very similar
-                'content_id':   cid
+                'ajax':     'true',
+                'action':   'recommend',
+                'pid':      cid
             },
-            jsonpCallback: 'jsonp' + generateJSONPNumber(),
-            dataType: 'jsonp',
+            dataType: 'json',
+            method: 'POST',
             success: function( response ) {
                 if ( response ) {
-                    if ( !response['#error'] ) {
+                    if ( response.response.error === false ) {
                         var recommendations = comment.find( '.comment__recommendations' ),
                             number = recommendations.html().replace( /\D+/g, '' ) || 0,
                             stars;
@@ -201,28 +203,26 @@ define([ 'jquery' ], function( $ ) {
     submitReport = function( e ) {
         e.preventDefault();
 
-        var sendurl = this.form.getAttribute( 'action' ),
+        var sendurl = window.location.href,
             form = this.form,
-            input = this.form.elements,
-            name = 'content_id'; // bizarre workaround for JSCS
+            input = this.form.elements;
 
         // avoid repeated submits
         $( this ).prop( 'disabled', true );
 
         $.ajax({
-            url: sendurl + '?method=flag.flagnote',
+            url: sendurl,
             data: {
-                'method':       'flag.flagnote',
-                'flag_name':    'kommentar_bedenklich',
-                'uid':          input.uid.value,
-                'content_id':   input[name].value,
-                'note':         input.note.value
+                'ajax':     'true',
+                'action':   'report',
+                'pid':      input.pid.value,
+                'comment':  input.comment.value
             },
-            jsonpCallback: 'jsonp' + generateJSONPNumber(),
-            dataType: 'jsonp',
+            dataType: 'json',
+            method: 'POST',
             success: function( response ) {
                 if ( response ) {
-                    if ( !response['#error'] ) {
+                    if ( response.response.error === false ) {
                         var $form = $( form ),
                             html = $( '#js-report-success-template' ).html(),
                             height = $form.css( 'height' ),
@@ -263,15 +263,6 @@ define([ 'jquery' ], function( $ ) {
     },
 
     /**
-     * comments.js: generate jsonp number
-     * @function generateJSONPNumber
-     * @return {integer}
-     */
-    generateJSONPNumber = function() {
-        return ( 1361462065627 + Math.floor( Math.random() * 101 ));
-    },
-
-    /**
      * comments.js: initialize
      * @function init
      */
@@ -281,7 +272,7 @@ define([ 'jquery' ], function( $ ) {
             return;
         }
 
-        var uid = $commentForm.find( 'input[name="uid"]' ).val();
+        var uid = $commentForm.attr( 'data-uid' );
 
         // highlight recommended comments for logged in user
         if ( uid ) {
