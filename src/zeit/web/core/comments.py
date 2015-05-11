@@ -145,7 +145,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     thread['comments'] = list(thread['comments'])
 
     if not(thread['sort'] == sort):
-        thread['comments'].reverse()
+        thread['comments'] = _reverse_comments(thread['comments'])
         thread['sort'] = sort
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -247,6 +247,26 @@ def _sort_comments(comments):
         list(itertools.chain(
             *[[li[0]] + li[1] for li in comments_sorted.values()])),
         comment_index)
+
+
+def _reverse_comments(comments):
+
+    comment_replies = []
+    comments_reversed = []
+
+    while comments:
+        comment = comments.pop()
+
+        if comment['in_reply']:
+            comment_replies.insert(0, comment)
+        else:
+            comments_reversed.append(comment)
+
+            if len(comment_replies):
+                comments_reversed.extend(comment_replies)
+                comment_replies = []
+
+    return comments_reversed
 
 
 def request_counts(*unique_ids):
