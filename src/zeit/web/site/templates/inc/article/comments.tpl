@@ -19,20 +19,20 @@
 
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
-			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url | e }}#comments">
+			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url }}#comments">
 				{{ blocks.use_svg_icon('spinner', 'comment-section__icon-spinner') }}
 				Auto-Aktualisierung an
 			</a>
 			{% if view.comments.sort == 'asc' %}
-				{% set href = request.url + '?sort=desc' %}
+				{% set href = view.request | append_get_params(sort='desc') %}
 				{% set label = 'Älteste zuerst' %}
 			{% else %}
-				{% set href = request.url %}
+				{% set href = view.request | append_get_params(sort=None) %}
 				{% set label = 'Neuste zuerst' %}
 			{% endif %}
-			<a class="comment-section__link-sorting nowrap" href="{{ href | e }}#comments">
+			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
 				{{ blocks.use_svg_icon('sorting', 'comment-section__icon-sorting') }}
-				{{ label }}
+				{{ label }} ({{ view.comments.sort }})
 			</a>
 		</div>
 	</div>
