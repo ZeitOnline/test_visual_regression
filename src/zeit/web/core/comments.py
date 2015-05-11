@@ -146,7 +146,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
 
     if not(thread['sort'] == sort):
         thread['comments'].reverse()
-        thread['sort'] == sort
+        thread['sort'] = sort
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
