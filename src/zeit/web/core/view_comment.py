@@ -252,7 +252,6 @@ class PostCommentAdmin(PostComment):
 
 @pyramid.view.view_defaults(renderer='json', request_method='POST')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 class PostCommentResource(PostComment):
     def __init__(self, context, request):
@@ -280,7 +279,6 @@ class PostCommentResource(PostComment):
     request_param='action=recommend',
     request_method='GET')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
