@@ -146,7 +146,7 @@ class PostComment(zeit.web.core.view.Base):
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Action {} could not be performed'.format(action),
-                explanation='Status code {} was send for {}'
+                explanation='Status code {} was send for action {} '
                             'on resource {}.'.format(
                                 action,
                                 response.status_code,
