@@ -4,6 +4,8 @@ Change log for zeit.web
 1.21.2 (unreleased)
 -------------------
 
+- ZON-1719: Sort comments
+
 - ZON-1720: Use new comment API and enable "recommend comment"
 
 - ZON-1729 Setup view defaults to DRY
