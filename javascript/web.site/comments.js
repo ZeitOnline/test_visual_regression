@@ -36,7 +36,7 @@ define([ 'jquery' ], function( $ ) {
                 .appendTo( comment );
             form.get( 0 ).elements.comment.placeholder = 'Ihre Antwort';
             form.find( 'input[type="submit"]' ).prop( 'disabled', true ).val( 'Antworten' );
-            form.find( 'input[name="cid"]' ).val( cid );
+            form.find( 'input[name="pid"]' ).val( cid );
         }
 
         showForm( form, comment );
@@ -73,7 +73,7 @@ define([ 'jquery' ], function( $ ) {
                 .css( 'display', 'none' )
                 .appendTo( comment );
             form.find( 'input[type="submit"]' ).prop( 'disabled', true );
-            form.find( 'input[name="cid"]' ).val( cid );
+            form.find( 'input[name="pid"]' ).val( cid );
         }
 
         showForm( form, comment );
@@ -118,7 +118,7 @@ define([ 'jquery' ], function( $ ) {
             data: {
                 'ajax':     'true',
                 'action':   'recommend',
-                'cid':      cid
+                'pid':      cid
             },
             dataType: 'json',
             method: 'POST',
@@ -213,7 +213,7 @@ define([ 'jquery' ], function( $ ) {
             data: {
                 'ajax':     'true',
                 'action':   'report',
-                'cid':      input.cid.value,
+                'pid':      input.pid.value,
                 'comment':  input.comment.value
             },
             dataType: 'json',

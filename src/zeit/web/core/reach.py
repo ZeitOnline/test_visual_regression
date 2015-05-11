@@ -48,7 +48,8 @@ def fetch(service, target, limit=3):
         # Translate unseparated to underscored term, so we can maintain
         # a consistent naming scheme in our templates.
         service = service.replace('most', 'most_')
-        feed = '%s_%s.rss' % (service, target or 'all')
+        target = 'all' if target in ('homepage', None) else target
+        feed = '%s_%s.rss' % (service, target)
         result = fetch_feed(feed, limit)
         [result[i].update({'score': i + 1}) for i in xrange(len(result))]
         return result

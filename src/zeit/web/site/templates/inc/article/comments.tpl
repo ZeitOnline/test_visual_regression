@@ -43,7 +43,7 @@
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
-				<img class="comment__avatar" alt="Avatarbild von {{ comment.name | e }}" src="{{ comment.img_url }}">
+				<img class="comment__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
 				{% endif %}
 				<div class="comment__meta">
 					{% if comment.is_promoted %}
@@ -55,7 +55,7 @@
 					</span>
 					{% endif %}
 					<a class="comment__name" href="{{ comment.userprofile_url }}">
-						{{ comment.name | e }}
+						{{ comment.name }}
 					</a>
 					<span class="comment__recommendations" title="Leserempfehlungen">
 					{%- if comment.recommendations -%}
@@ -70,15 +70,15 @@
 					{{ comment.text | safe }}
 				</div>
 				<div class="comment__reactions">
-					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', cid=comment.cid) }}#comment-form" title="Antworten">
+					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
 						{{ blocks.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply') }}
 						<span class="comment__action">Antworten</span>
 					</a>
-					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', cid=comment.cid) }}#report-comment-form" title="Melden">
+					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
 						{{ blocks.use_svg_icon('comment-report', 'comment__icon comment__icon-report') }}
 						<span class="comment__action">Melden</span>
 					</a>
-					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', cid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
+					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
 						{{ blocks.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend') }}
 						<span class="comment__action">Empfehlen</span>
 					</a>
@@ -90,9 +90,9 @@
 {% endif %}
 
 {% if view.request.GET['action'] == 'report' %}
-	<esi:include src="{{ view.content_url }}?form=report&amp;rid={{ view.request.GET['cid'] }}" />
+	<esi:include src="{{ view.content_url }}?form=report&amp;pid={{ view.request.GET['pid'] }}" />
 {% else %}
-	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['cid'] }}" />
+	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['pid'] }}" />
 {% endif %}
 
 	<script type="text/template" id="js-report-success-template">

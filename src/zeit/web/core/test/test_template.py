@@ -469,3 +469,37 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     block.visible = False
     block.cpextra = 'n/a'
     assert zeit.web.core.template.get_module(block) is None
+
+
+def test_pagination_calculation_should_deliver_valid_output():
+    pager = zeit.web.core.template.calculate_pagination
+    assert pager(1, 1) is None
+    assert pager(1, 2) == [1, 2]
+    assert pager(6, 7) == [1, 2, 3, 4, 5, 6, 7]
+
+    assert pager(1, 8) == [1, 2, 3, 4, 5, None, 8]
+    assert pager(2, 8) == [1, 2, 3, 4, 5, None, 8]
+    assert pager(3, 8) == [1, 2, 3, 4, 5, None, 8]
+    assert pager(4, 8) == [1, 2, 3, 4, 5, None, 8]
+
+    assert pager(5, 8) == [1, None, 4, 5, 6, 7, 8]
+    assert pager(6, 8) == [1, None, 4, 5, 6, 7, 8]
+    assert pager(7, 8) == [1, None, 4, 5, 6, 7, 8]
+    assert pager(8, 8) == [1, None, 4, 5, 6, 7, 8]
+
+    assert pager(1, 9) == [1, 2, 3, 4, 5, None, 9]
+    assert pager(5, 9) == [1, None, 4, 5, 6, None, 9]
+    assert pager(6, 9) == [1, None, 5, 6, 7, 8, 9]
+
+    assert pager(20, 400) == [1, None, 19, 20, 21, None, 400]
+    assert pager(399, 400) == [1, None, 396, 397, 398, 399, 400]
+
+
+def test_pagination_calculation_should_fail_gracefully():
+    pager = zeit.web.core.template.calculate_pagination
+    assert pager('foo', 9) is None
+    assert pager('foo', 'bar') is None
+    assert pager(None, None) is None
+    assert pager(10, 5) is None
+    assert pager(2, 1) is None
+    assert pager(1, 1) is None

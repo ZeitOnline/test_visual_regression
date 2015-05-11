@@ -8,7 +8,6 @@ import zeit.web.core.view
 import zeit.web.core.comments
 import zeit.web.core.template
 import pyramid.view
-import urllib
 import urlparse
 import json
 import logging
@@ -27,11 +26,12 @@ class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request, path=None):
         if not request.authenticated_userid:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
-        self.cid = None
+        self.pid = None
         self.action = None
+        self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
         self.context = context
@@ -48,43 +48,45 @@ class PostComment(zeit.web.core.view.Base):
         request = self.request
         user = request.session['user']
         uid = user['uid']
-        cid = request.params.get('cid')
-        comment = request.params.get('comment')
-        action = request.params.get('action')
+        # use submitted values for POSTs, not GET values from request url
+        params = (request.GET, request.POST)[self.request_method == 'POST']
+        pid = params.get('pid')
+        comment = params.get('comment')
+        action = params.get('action')
 
         if not request.method == self.request_method:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPMethodNotAllowed(
                 title='Method not allowed',
                 explanation=(
                     'Only {} requests are allowed for this action.'.format(
-                    self.request_method)))
+                        self.request_method)))
 
         if action not in ('comment', 'report', 'recommend'):
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='Nothing could be posted',
                 explanation=(
                     'Action is not set or not allowed. '
                     'Choose one of comment, recommend or report.'))
 
         if not self.path:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='Nothing could be posted',
                 explanation=(
                     'We need a resource path '
                     'in order to load a comment thread.'))
 
         if action == 'comment' and not comment:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No comment could be posted',
                 explanation=('Path and comment needed.'))
-        elif action == 'report' and (not(cid) or not(comment)):
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+        elif action == 'report' and (not(pid) or not(comment)):
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No report could be posted',
-                explanation=('comment-ID and comment needed.'))
-        elif action == 'recommend' and not cid:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+                explanation=('Pid and comment needed.'))
+        elif action == 'recommend' and not pid:
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No recommondation could be posted',
-                explanation=('comment-ID needed.'))
+                explanation=('Pid needed.'))
 
         unique_id = 'http://xml.zeit.de/{}'.format(self.path)
         nid = self._nid_by_comment_thread(unique_id)
@@ -96,16 +98,16 @@ class PostComment(zeit.web.core.view.Base):
             data['nid'] = nid
             data['subject'] = '[empty]'
             data['comment'] = comment
-            data['pid'] = cid
-        elif action == 'report' and cid:
+            data['pid'] = pid
+        elif action == 'report' and pid:
             method = 'get'
             data['note'] = comment
-            data['content_id'] = cid
+            data['content_id'] = pid
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
-        elif action == 'recommend' and cid:
+        elif action == 'recommend' and pid:
             method = 'get'
-            data['content_id'] = cid
+            data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'leser_empfehlung'
 
@@ -118,36 +120,35 @@ class PostComment(zeit.web.core.view.Base):
 
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
-                               ' (with cid {})'.format(method, unique_id, cid))
+                               ' (with pid {})'.format(method, unique_id, pid))
 
             self._invalidate_app_servers(unique_id)
 
             content = None
             error = None
-            self.cid = cid
             if response.content:
                 content = json.loads(response.content[5:-2])
                 error = content['#error']
             elif response.status_code == 303:
                 url = urlparse.urlparse(response.headers.get('location'))
-                self.cid = url[5][4:]
+                self.new_cid = url[5][4:]
 
             return {
-                "request": {
-                    "action": action,
-                    "path": self.path,
-                    "nid": nid,
-                    "cid": cid},
-                "response": {
-                    "content": content,
-                    "error": error,
-                    "cid": self.cid}
+                'request': {
+                    'action': action,
+                    'path': self.path,
+                    'nid': nid,
+                    'pid': pid},
+                'response': {
+                    'content': content,
+                    'error': error,
+                    'new_cid': self.new_cid}
             }
 
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Action {} could not be performed'.format(action),
-                explanation='Status code {} was send for {}'
+                explanation='Status code {} was send for action {} '
                             'on resource {}.'.format(
                                 action,
                                 response.status_code,
@@ -189,8 +190,12 @@ class PostComment(zeit.web.core.view.Base):
 
         if comment_thread:
             return comment_thread.get('nid')
+        else:
+            comment_thread = self._create_and_load_comment_thread(unique_id)
 
-        nid = self._create_and_load_comment_thread(unique_id).get('nid')
+            if comment_thread:
+                nid = comment_thread.get('nid')
+
         if not nid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No comment thread',
@@ -227,6 +232,10 @@ class PostComment(zeit.web.core.view.Base):
         self.status.append('A comment section for {} was created'.format(
             unique_id))
 
+        # invalidate comment thread to get the newly created comment section ID
+        # only the thread of the current app server gets invalidated here
+        invalidate_comment_thread(unique_id)
+
         return zeit.web.core.comments.get_thread(
             unique_id, destination=self.request.url)
 
@@ -238,13 +247,14 @@ class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)
         self.context = zeit.content.article.article.Article()
-        self.post_comment()
+
+        if request.method == 'POST':
+            self.post_comment()
 
 
-@pyramid.view.view_config(
-    context='zeit.content.article.interfaces.IArticle',
-    renderer='json',
-    request_method='POST')
+@pyramid.view.view_defaults(renderer='json', request_method='POST')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 class PostCommentResource(PostComment):
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)
@@ -258,19 +268,20 @@ class PostCommentResource(PostComment):
             return result
         else:
             location = zeit.web.core.template.append_get_params(
-                self.request, action=None, cid=None)
-            if self.cid:
-                location = "{}#cid-{}".format(location, self.cid)
+                self.request, action=None, pid=None)
+            if self.new_cid:
+                location = '{}#cid-{}'.format(location, self.new_cid)
 
             return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)
 
 
-@pyramid.view.view_config(
-    context='zeit.content.article.interfaces.IArticle',
+@pyramid.view.view_defaults(
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     request_param='action=recommend',
     request_method='GET')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         super(RecommendCommentResource, self).__init__(context, request)
@@ -301,7 +312,7 @@ def invalidate(request):
             title='unique_id does not exist')
 
     invalidate_comment_thread(unique_id)
-    return {"msg": "{} was invalidated".format(unique_id)}
+    return {'msg': '{} was invalidated'.format(unique_id)}
 
 
 def invalidate_comment_thread(unique_id):
