@@ -59,7 +59,7 @@ class PostComment(zeit.web.core.view.Base):
                 title='Method not allowed',
                 explanation=(
                     'Only {} requests are allowed for this action.'.format(
-                    self.request_method)))
+                        self.request_method)))
 
         if action not in ('comment', 'report', 'recommend'):
             raise pyramid.httpexceptions.HTTPBadRequest(

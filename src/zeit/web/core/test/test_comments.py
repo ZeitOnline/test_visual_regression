@@ -222,6 +222,7 @@ def _create_poster(monkeypatch):
     request.authenticated_userid = True
 
     request.params = {'path': 'my/path'}
+    request.GET = request.POST = request.params
     request.session = {'user': {'uid': '123'}}
     request.cookies = {}
     context = mock.Mock()
