@@ -741,3 +741,13 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert adcv == view.adcontroller_values
+
+
+def test_canonical_url_returns_correct_value_on_cp(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+    request.host_url = 'http://localhorst'
+    request.path_info = '/centerpage/index'
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
+    assert view.canonical_url == 'http://localhorst/centerpage/index'
