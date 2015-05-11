@@ -132,15 +132,15 @@ class PostComment(zeit.web.core.view.Base):
                 self.new_cid = url[5][4:]
 
             return {
-                "request": {
-                    "action": action,
-                    "path": self.path,
-                    "nid": nid,
-                    "pid": pid},
-                "response": {
-                    "content": content,
-                    "error": error,
-                    "new_cid": self.new_cid}
+                'request': {
+                    'action': action,
+                    'path': self.path,
+                    'nid': nid,
+                    'pid': pid},
+                'response': {
+                    'content': content,
+                    'error': error,
+                    'new_cid': self.new_cid}
             }
 
         else:
@@ -246,7 +246,7 @@ class PostCommentAdmin(PostComment):
         super(PostCommentAdmin, self).__init__(context, request)
         self.context = zeit.content.article.article.Article()
 
-        if request.method == "POST":
+        if request.method == 'POST':
             self.post_comment()
 
 
@@ -268,7 +268,7 @@ class PostCommentResource(PostComment):
             location = zeit.web.core.template.append_get_params(
                 self.request, action=None, pid=None)
             if self.new_cid:
-                location = "{}#cid-{}".format(location, self.new_cid)
+                location = '{}#cid-{}'.format(location, self.new_cid)
 
             return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)
@@ -310,7 +310,7 @@ def invalidate(request):
             title='unique_id does not exist')
 
     invalidate_comment_thread(unique_id)
-    return {"msg": "{} was invalidated".format(unique_id)}
+    return {'msg': '{} was invalidated'.format(unique_id)}
 
 
 def invalidate_comment_thread(unique_id):
