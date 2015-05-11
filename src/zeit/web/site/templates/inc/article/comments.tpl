@@ -32,7 +32,7 @@
 			{% endif %}
 			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
 				{{ blocks.use_svg_icon('sorting', 'comment-section__icon-sorting') }}
-				{{ label }} ({{ view.comments.sort }})
+				{{ label }}
 			</a>
 		</div>
 	</div>
