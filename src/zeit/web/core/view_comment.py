@@ -48,9 +48,11 @@ class PostComment(zeit.web.core.view.Base):
         request = self.request
         user = request.session['user']
         uid = user['uid']
-        pid = request.params.get('pid')
-        comment = request.params.get('comment')
-        action = request.params.get('action')
+        # use submitted values for POSTs, not GET values from request url
+        params = (request.GET, request.POST)[self.request_method == 'POST']
+        pid = params.get('pid')
+        comment = params.get('comment')
+        action = params.get('action')
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
