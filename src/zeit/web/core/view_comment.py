@@ -188,10 +188,12 @@ class PostComment(zeit.web.core.view.Base):
 
         if comment_thread:
             return comment_thread.get('nid')
+        else:
+            comment_thread = self._create_and_load_comment_thread(unique_id)
 
-        # @todo: liefert beim Posten des ersten Kommentars einer Seite
-        # AttributeError: 'NoneType' object has no attribute 'get'
-        nid = self._create_and_load_comment_thread(unique_id).get('nid')
+            if comment_thread:
+                nid = comment_thread.get('nid')
+
         if not nid:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='No comment thread',
@@ -227,6 +229,10 @@ class PostComment(zeit.web.core.view.Base):
 
         self.status.append('A comment section for {} was created'.format(
             unique_id))
+
+        # invalidate comment thread to get the newly created comment section ID
+        # only the cached thread of the current app server gets invalidated here
+        invalidate_comment_thread(unique_id)
 
         return zeit.web.core.comments.get_thread(
             unique_id, destination=self.request.url)
