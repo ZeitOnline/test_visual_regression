@@ -199,6 +199,12 @@ class Base(object):
             return
 
     @zeit.web.reify
+    def canonical_url(self):
+        """ Set own url as default canonical. Overwrite for special
+            cases and page types"""
+        return "{}{}".format(self.request.host_url, self.request.path_info)
+
+    @zeit.web.reify
     def js_vars(self):
         names = ('banner_channel', 'ressort', 'sub_ressort', 'type')
         return [(name, getattr(self, name, '')) for name in names]
