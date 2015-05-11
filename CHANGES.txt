@@ -4,7 +4,19 @@ Change log for zeit.web
 1.21.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1729 Setup view defaults to DRY
+
+- ZON-1698: Sorting and pagination for comment_thread
+
+- ZON-1674: Implement No-JS variant for comment forms
+
+- ZON-1710: Upgrade to new centerpage editor paradigms
+
+- ZON-1683: Invalidate comment thread on all app servers
+
+- ZON-1723: Remove wrong keywords from adcontroller code
+
+- ZON-1724: Add $handle mapping in adcontroller code
 
 
 1.21.1 (2015-05-05)
@@ -45,6 +57,8 @@ Change log for zeit.web
 - ZON-1673: Render comment form through edge side includes
 
 - ZON-1700: Beautfiy comment dates
+
+- ZON-1669: Pagination for Centerpages, like search
 
 
 1.20.4 (2015-04-27)

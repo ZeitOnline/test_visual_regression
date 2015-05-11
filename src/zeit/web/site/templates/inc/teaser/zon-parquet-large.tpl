@@ -7,7 +7,6 @@
     {% set module_layout = self.layout() %}
     {# set again due to scope #}
     {% set module = module %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/" +
-        teaser | auto_select_asset | block_type +
-        "_zon-large.tpl" ignore missing with context %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-large.tpl".format(teaser | auto_select_asset | block_type)
+        ignore missing with context %}
 {% endblock %}

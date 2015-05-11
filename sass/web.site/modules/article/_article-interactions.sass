@@ -23,12 +23,12 @@
 		overflow: hidden // needed for animation
 		padding: 0
 	&__item
-		display: inline-block
+		+inline-block(baseline)
 		&:before
+			+inline-block(baseline)
 			content: " / "
 			color: $zon_light_grey
 			margin: remify(0 8px)
-			display: inline-block
 		&:first-child:before
 			content: ""
 			display: none

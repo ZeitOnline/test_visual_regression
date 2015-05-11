@@ -1,5 +1,6 @@
 import collections
 import logging
+import math
 
 import grokcore.component
 import zope.component
@@ -15,6 +16,7 @@ from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block
+import zeit.web.core.template
 
 
 log = logging.getLogger(__name__)
@@ -162,7 +164,7 @@ class Form(zeit.web.core.block.Module):
         return ' '.join(tokens)
 
 
-class IResultsArea(zeit.content.cp.interfaces.IAutomaticArea):
+class IResultsArea(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'relevanz', required=False)
@@ -184,7 +186,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     query = zeit.cms.content.property.ObjectPathProperty(
         '.query', IResultsArea['query'])
 
-    page = zeit.cms.content.property.ObjectPathProperty(
+    _page = zeit.cms.content.property.ObjectPathProperty(
         '.page', IResultsArea['page'])
 
     _hits = zeit.cms.content.property.ObjectPathProperty(
@@ -199,46 +201,63 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
         solr_result = conn.search(
             self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, start=self.page, **HIGHLIGHTING)
-        docs = list(solr_result)
+            fl=FIELDS, start=self.count * (self.page - 1), **HIGHLIGHTING)
+        docs = collections.deque(solr_result)
         self.hits = solr_result.hits
         for block in self.context.values():
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
                     block) or not len(docs):
                 result.append(block)
                 continue
-            unique_id = self._extract_newest(docs)
+            unique_id = docs.popleft().get('uniqueId')
             try:
                 block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
             except TypeError, err:
-                log.debug('Corrupt search result', err)
+                log.debug('Corrupted search result', unique_id, err)
+                continue
             result.append(block)
         return result
 
     @property
     def hits(self):
         if self._hits is None:
-            return len(self.values()) and self._hits
-        else:
-            return 0
+            self.values()
+        return self._hits
 
     @hits.setter
     def hits(self, value):
         if self._hits is None:
             self._hits = value
 
+    @property
+    def page(self):
+        if self._page is None:
+            return 1
+        return self._page
+
+    @page.setter
+    def page(self, value):
+        self._page = value
+
     @zeit.web.reify
     def total_pages(self):
-        return 0
+        if self.hits > 0:
+            return int(math.ceil(float(self.hits) / float(self.count)))
+        else:
+            return 0
 
     @zeit.web.reify
     def current_page(self):
-        return 0
+        return self.page
 
     @zeit.web.reify
     def next_page(self):
-        return 0
+        if self.current_page == self.total_pages:
+            return
+        else:
+            return min(self.total_pages, self.current_page + 1)
 
     @zeit.web.reify
     def pagination(self):
-        return []
+        return zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages)

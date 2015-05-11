@@ -27,7 +27,7 @@
             {% for module in area.values() -%}
                 {% set teaser_track_id = loop.cycle('a', 'b', 'c') %}
                 {% set teaser = module | first_child %}
-                {% include ["zeit.web.site:templates/inc/teaser/zon-parquet-small-spektrum.tpl"] %}
+                {% include "zeit.web.site:templates/inc/teaser/zon-parquet-small-spektrum.tpl" %}
             {% endfor %}
         </ul>
     </div>

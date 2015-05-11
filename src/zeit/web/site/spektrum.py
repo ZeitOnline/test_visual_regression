@@ -30,13 +30,12 @@ class HPFeed(object):
         """Generate a list of teasers from an RSS feed."""
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         feed_url = conf.get('spektrum_hp_feed')
-        layout = 'parquet-spektrum'
-        area = LegacyArea([], layout=layout)
+        area = LegacyArea([], kind='spektrum')
         try:
             resp = requests.get(feed_url, timeout=2.0)
             xml = lxml.etree.fromstring(resp.content)
             for i in xml.xpath('/rss/channel/item'):
-                module = LegacyModule([Teaser(i)], layout=layout)
+                module = LegacyModule([Teaser(i)], layout='parquet-spektrum')
                 module.type = 'teaser'
                 area.append(module)
         except (requests.exceptions.RequestException,
