@@ -6,33 +6,35 @@
 <div class="search-counter">
     <div class="search-counter__hits">
         {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }}
-        {% if area.query %}f&uuml;r &raquo;{{ area.query }}&laquo;{% endif %}
+        {% if area.query %}für &raquo;{{ area.query }}&laquo;{% endif %}
     </div>
     <nav>
         <span class="search-counter__label">Sortieren nach</span>
-        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='relevanz') }}>Relevanz</a>
-        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.path_with_params(sort='aktuell') }}>Aktualit&auml;t</a>
+        <a class="search-counter__link{% if area.sort_order == 'relevanz' %} search-counter__link--marked{% endif %}" href="{{ view.request | append_get_params(sort='relevanz') }}">Relevanz</a>
+        <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.request | append_get_params(sort='aktuell') }}>Aktualität</a>
     </nav>
 </div>
 {% endblock %}
 
 {% block after_module_list %}
-<div class="search-pager">
+{% if area.pagination %}
+<div class="center-pager" id="center-pager">
     {% if area.next_page %}
-        <div style="display:inline;">
-            <a href="#{{ area.next_page }}">N&auml;chste Seite</a>
-        </div>
+    <a class="center-pager__next" href="{{ view.request | append_get_params(p=area.next_page) }}">Nächste Seite</a>
     {% endif %}
-    <ul style="list-style-type:none;display:inline;">
-    {% for num in area.pagination %}
-        <li style="display:inline-block;">
-            {% if num %}
-                <a style="{{ 'font-weight:bolder;' if num == area.current_page else '' }}" href="#{{ num }}">{{ num }}</a>
+    <ul class="center-pager__pages">
+        {% for num in area.pagination %}
+        <li class="center-pager__page {% if num == area.current_page %} center-pager__page--current {% endif %}">
+            {% if num == area.current_page %}
+                {{ num }}
+            {% elif num %}
+                <a class="center-pager__link" href="{{ view.request | append_get_params(p=num) }}">{{ num }}</a>
             {% else %}
-                <span>...</span>
+                <span>…</span>
             {% endif %}
         </li>
-    {% endfor %}
+        {% endfor %}
     </ul>
 </div>
+{% endif %}
 {% endblock %}

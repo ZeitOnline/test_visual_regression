@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import base64
 import datetime
 import logging
 import lxml.etree
@@ -421,6 +422,71 @@ class Content(Base):
                 return group
         except TypeError:
             return
+
+    @zeit.web.reify
+    def content_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path
+
+    @zeit.web.reify
+    def comments(self):
+        return zeit.web.core.comments.get_thread(
+            self.context.uniqueId, destination=self.request.url)
+
+    @zeit.web.reify
+    def obfuscated_date(self):
+        date = ''
+        format = 'd. MMMM yyyy, H:mm \'Uhr\''
+        first_released = babel.dates.format_datetime(
+            self.date_first_released, format, locale='de_De')
+        if self.context.product and self.context.product.show == 'issue':
+            date = u'ver\u00F6ffentlicht am '
+        date += first_released
+        if self.date_last_published_semantic:
+            date = u'{} ({} am {})'.format(
+                date,
+                self.last_modified_wording,
+                babel.dates.format_datetime(
+                    self.date_last_published_semantic, format, locale='de_De'))
+        if date is not first_released:
+            return base64.b64encode(date.encode('latin-1'))
+
+    @zeit.web.reify
+    def issue_format(self):
+        return u' N\u00B0\u00A0{}/{}'
+
+    @zeit.web.reify
+    def last_modified_wording(self):
+        if self.context.product and self.context.product.show == 'issue':
+            return 'Editiert'
+        return 'Zuletzt aktualisiert'
+
+    @zeit.web.reify
+    def source_label(self):
+        if self.context.product and self.context.product.show:
+            label = self.context.product.label or self.context.product.title
+            if self.context.product.show == 'issue' and self.context.volume:
+                label += self.issue_format.format(self.context.volume,
+                                                  self.context.year)
+            return label
+
+    @zeit.web.reify
+    def source_url(self):
+        if self.context.deeplink_url:
+            return self.context.deeplink_url
+        elif self.context.product and self.context.product.show == 'link':
+            return self.context.product.href
+
+    @zeit.web.reify
+    def obfuscated_source(self):
+        if self.context.product and self.context.product.show == 'issue':
+            if self.source_label:
+                label = self.source_label
+                if self.date_print_published:
+                    label += ', ' + babel.dates.format_date(
+                        self.date_print_published,
+                        "d. MMMM yyyy", locale="de_De")
+                return base64.b64encode(label.encode('latin-1'))
 
 
 @pyramid.view.view_config(route_name='health_check')
