@@ -7,6 +7,18 @@ import zeit.web.core.interfaces
 import zeit.web.site.view
 
 
+@pytest.fixture
+def mock_ad_view(application):
+    class MockAdView(zeit.web.core.view.Base):
+        def __init__(self, type, ressort, sub_ressort, is_hp=False):
+            self.type = type
+            self.ressort = ressort
+            self.sub_ressort = sub_ressort
+            self.is_hp = is_hp
+
+    return MockAdView
+
+
 def test_json_delta_time_from_date_should_return_null(testserver,
                                                       testbrowser):
     browser = testbrowser(
@@ -160,31 +172,18 @@ def test_missing_breaking_news_should_eval_to_false(
     assert view.breaking_news.published is False
 
 
-def _adcontroller_handle(type, ressort, sub_ressort, is_hp=False):
-    replacements = {
-        'article': 'artikel',
-        'centerpage': 'centerpage',
-        'gallery': 'galerie',
-        'quiz': 'quiz',
-        'video': 'video_artikel'}
-    if is_hp:
-        return 'homepage'
-    else:
-        return 'index' if type == 'centerpage' and (
-            sub_ressort == ''
-            or ressort == 'zeit-magazin') else replacements[type]
-
-
-def test_adcontroller_handle_return_value():
-    assert _adcontroller_handle('centerpage', 'politik', '') == 'index'
-    assert _adcontroller_handle('centerpage', 'zeit-magazin', '') == 'index'
-    assert _adcontroller_handle(
-        'centerpage', 'homepage', '', is_hp=True) == 'homepage'
-    assert _adcontroller_handle(
-        'centerpage', 'politik', 'deutschland') == 'centerpage'
-    assert _adcontroller_handle(
-        'article', 'politik', 'deutschland') == 'artikel'
-    assert _adcontroller_handle(
-        'video', 'politik', 'deutschland') == 'video_artikel'
-    assert _adcontroller_handle(
-        'quiz', 'politik', 'deutschland') == 'quiz'
+def test_adcontroller_handle_return_value(mock_ad_view):
+    assert mock_ad_view('centerpage', 'politik', ''
+                        ).adcontroller_handle == 'index'
+    assert mock_ad_view('centerpage', 'zeit-magazin', ''
+                        ).adcontroller_handle == 'index'
+    assert mock_ad_view('centerpage', 'homepage', '', is_hp=True
+                        ).adcontroller_handle == 'homepage'
+    assert mock_ad_view('centerpage', 'politik', 'deutschland'
+                        ).adcontroller_handle == 'centerpage'
+    assert mock_ad_view('article', 'politik', 'deutschland'
+                        ).adcontroller_handle == 'artikel'
+    assert mock_ad_view('video', 'politik', 'deutschland'
+                        ).adcontroller_handle == 'video_artikel'
+    assert mock_ad_view('quiz', 'politik', 'deutschland'
+                        ).adcontroller_handle == 'quiz'
