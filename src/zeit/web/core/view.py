@@ -150,6 +150,31 @@ class Base(object):
             return True
 
     @zeit.web.reify
+    def adcontroller_handle(self):
+        replacements = {
+            'article': 'artikel',
+            'centerpage': 'centerpage',
+            'gallery': 'galerie',
+            'quiz': 'quiz',
+            'video': 'video_artikel'}
+        if self.is_hp:
+            return 'homepage'
+        else:
+            return 'index' if self.type == 'centerpage' and (
+                self.sub_ressort == '' or self.ressort ==
+                'zeit-magazin') else replacements[self.type]
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+        """Fill the adcontroller js object with actual values"""
+        return [('$handle', self.adcontroller_handle),
+                ('level2', self.ressort),
+                ('level3', self.sub_ressort),
+                ('$autoSizeFrames', True),
+                ('keywords', ''),
+                ('tma', '')]
+
+    @zeit.web.reify
     def meta_robots(self):
         try:
             seo = zeit.seo.interfaces.ISEO(self.context)
@@ -246,8 +271,8 @@ class Base(object):
     @zeit.web.reify
     def is_hp(self):
         try:
-            return self.request.path == (
-                '/' + self.request.registry.settings.hp)
+            return self.request.path == ('/{}'.format(
+                self.request.registry.settings.hp))
         except AttributeError:
             return False
 

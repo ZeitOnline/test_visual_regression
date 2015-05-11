@@ -285,3 +285,17 @@ def test_article_has_news_source_empty():
 
     view = zeit.web.site.view_article.Article(content, mock.Mock())
     assert view.news_source == ''
+
+
+def test_adcontroller_values_return_values_on_article(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/infoboxartikel')
+    adcv = [
+        ('$handle', 'artikel'),
+        ('level2', u'wissen'),
+        ('level3', 'umwelt'),
+        ('$autoSizeFrames', True),
+        ('keywords', ''),
+        ('tma', '')]
+    view = view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert adcv == view.adcontroller_values
