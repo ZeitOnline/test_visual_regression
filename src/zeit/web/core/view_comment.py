@@ -26,7 +26,7 @@ class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request, path=None):
         if not request.authenticated_userid:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPUnauthorized(
                 title='No User',
                 explanation='Please log in in order to comment')
         self.pid = None
@@ -53,36 +53,36 @@ class PostComment(zeit.web.core.view.Base):
         action = request.params.get('action')
 
         if not request.method == self.request_method:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPMethodNotAllowed(
                 title='Method not allowed',
                 explanation=(
                     'Only {} requests are allowed for this action.'.format(
                     self.request_method)))
 
         if action not in ('comment', 'report', 'recommend'):
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='Nothing could be posted',
                 explanation=(
                     'Action is not set or not allowed. '
                     'Choose one of comment, recommend or report.'))
 
         if not self.path:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='Nothing could be posted',
                 explanation=(
                     'We need a resource path '
                     'in order to load a comment thread.'))
 
         if action == 'comment' and not comment:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No comment could be posted',
                 explanation=('Path and comment needed.'))
         elif action == 'report' and (not(pid) or not(comment)):
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No report could be posted',
                 explanation=('Pid and comment needed.'))
         elif action == 'recommend' and not pid:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
+            raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No recommondation could be posted',
                 explanation=('Pid needed.'))
 
