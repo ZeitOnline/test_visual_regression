@@ -19,10 +19,12 @@
 
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
+			{# funky future feature?
 			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url }}#comments">
 				{{ blocks.use_svg_icon('spinner', 'comment-section__icon-spinner') }}
 				Auto-Aktualisierung an
 			</a>
+			#}
 			{% if view.comments.sort == 'asc' %}
 				{% set href = view.request | append_get_params(sort='desc') %}
 				{% set label = 'Älteste zuerst' %}
