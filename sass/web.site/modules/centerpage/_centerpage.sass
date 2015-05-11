@@ -9,9 +9,7 @@
 	margin-bottom: $vertical-space
 	padding: 0 $cp-padding
 	+pie-clearfix
-	&--parquet-large,
-	&--parquet-regular,
-	&--parquet-spektrum
+	&--parquet
 		margin-bottom: 0
 		padding: 0
 
@@ -22,13 +20,11 @@
 	&--parquet
 		padding: 0
 	+respond-min($break-tablet-min)
-		&--threequarters
-			width: 75%
-		&--twothirds
+		&--major
 			width: 66.66%
-		&--onehalf
+		&--duo
 			width: 50%
-		&--onethird
+		&--minor
 			width: 33.33%
-		&--onequarter
+		&--quartet
 			width: 25%
