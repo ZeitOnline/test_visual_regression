@@ -497,15 +497,6 @@ def test_parquet_region_areas_should_have_multiple_modules_each(application):
                 for area in region.values()])
 
 
-def test_parquet_should_render_desired_amount_of_teasers(
-        testbrowser, testserver):
-    browser = testbrowser(
-        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
-    teasers = browser.cssselect('.cp-region--parquet '
-                                'article[data-block-type="teaser"]')
-    assert len(teasers) == 12
-
-
 def test_parquet_should_display_meta_links_only_on_desktop(
         selenium_driver, testserver):
     driver = selenium_driver
