@@ -229,7 +229,9 @@ module.exports = function(grunt) {
             },
             // cleanup minified SVGs, remove orphaned files
             icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ],
-            symbols: [ '<%= svgmin.symbols.dest %>' ]
+            symbols: [ '<%= svgmin.symbols.dest %>' ],
+            // delete unused directories
+            legacy: [ project.sourceDir + 'sass/web.*/icons-minified' ]
         },
 
         svgmin: {
