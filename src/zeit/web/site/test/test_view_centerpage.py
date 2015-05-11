@@ -751,3 +751,35 @@ def test_canonical_url_returns_correct_value_on_cp(application):
     request.path_info = '/centerpage/index'
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
     assert view.canonical_url == 'http://localhorst/centerpage/index'
+
+
+def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
+    url = '%s/zeit-online/index' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/zeit-online/article/01' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/zeit-online/article/zeit' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/zeit-online/article/zeit' % testserver.url
+    browser = testbrowser("{}/komplettansicht".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/suche/index' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/suche/index' % testserver.url
+    browser = testbrowser("{}?p=2".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
