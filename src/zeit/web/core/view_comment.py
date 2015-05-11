@@ -26,7 +26,7 @@ class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request, path=None):
         if not request.authenticated_userid:
-            raise pyramid.httpexceptions.HTTPUnauthorized(
+            raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
         self.pid = None
