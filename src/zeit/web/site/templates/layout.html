@@ -29,6 +29,9 @@
     {% if view.next_page_url -%}
         <meta rel="next" href="{{ view.next_page_url }}">
     {% endif -%}
+    {% if view.syndication_source -%}
+        <meta name="syndication-source" href="{{ view.syndication_source }}">
+    {% endif -%}
     <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
