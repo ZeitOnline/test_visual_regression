@@ -75,14 +75,15 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         'Keine Kommentare')
 
 
-def test_request_thread_should_respond(application):
+def test_request_thread_should_respond(application, mockserver):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
     thread = zeit.web.core.comments.request_thread(unique_id)
     assert lxml.etree.fromstring(thread).xpath('comment_count')[0].text == '41'
 
 
-def test_request_thread_should_respond_for_nonexistent(application):
+def test_request_thread_should_respond_for_nonexistent(
+        application, mockserver):
     assert zeit.web.core.comments.request_thread('nosuchthread') is None
 
 
