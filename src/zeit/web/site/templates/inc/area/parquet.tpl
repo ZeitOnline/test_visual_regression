@@ -29,10 +29,8 @@
         <ul class="parquet-teasers">
             {% for module in area.values() -%}
                 {% set teaser = module | first_child %}
-                {% if loop.index <= area.display_amount %}
-                    {% include ["zeit.web.site:templates/inc/teaser/" + module | get_layout + "_position_" + loop.index | string + ".tpl",
-                                "zeit.web.site:templates/inc/teaser/zon-parquet-small.tpl"] %}
-                {% endif %}
+                {% include ["zeit.web.site:templates/inc/teaser/{}.tpl".format(module | get_layout),
+                            "zeit.web.site:templates/inc/teaser/default.tpl"] %}
             {% endfor %}
         </ul>
     </div>

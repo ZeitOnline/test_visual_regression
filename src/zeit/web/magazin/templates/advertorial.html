@@ -1,3 +1,3 @@
 {%- include
-    ["zeit.web.magazin:templates/inc/advertorials/" + view.sub_ressort + ".html",
-    "zeit.web.magazin:templates/inc/advertorials/default.html"] -%}
+    ["zeit.web.magazin:templates/inc/advertorials/{}.html".format(view.sub_ressort),
+     "zeit.web.magazin:templates/inc/advertorials/default.html"] -%}

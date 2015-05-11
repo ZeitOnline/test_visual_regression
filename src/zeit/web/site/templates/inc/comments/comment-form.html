@@ -6,7 +6,7 @@
 
 {% if comment %}
 	{% set submit_value = 'Antworten' %}
-	{% set placeholder = 'Ihre Antwort auf Kommentar #' + comment.shown_num | e + ' von ' + comment.name | e %}
+	{% set placeholder = 'Ihre Antwort auf Kommentar #' + comment.shown_num + ' von ' + comment.name %}
 	{% set class = '' %}
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
@@ -20,11 +20,11 @@
 	<form class="comment-form" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">
 		<div class="comment-form__text">
 			{% if request.session.user.picture %}
-			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name | e }}" src="{{ request.session.user.picture }}">
+			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
 			{% endif %}
 			Angemeldet als
 			<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">
-				{{ request.session.user.name | e }}
+				{{ request.session.user.name }}
 			</a>
 			<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ view.content_url | e }}">
 				Abmelden

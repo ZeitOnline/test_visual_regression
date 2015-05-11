@@ -21,7 +21,7 @@
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
-				<img class="comment__avatar" alt="Avatarbild von {{ comment.name | e }}" src="{{ comment.img_url }}">
+				<img class="comment__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
 				{% endif %}
 				<div class="comment__meta">
 					{% if comment.is_promoted %}
@@ -31,7 +31,7 @@
 					<span class="comment__badge icon-comment-zon-author-badge" title="{{ comment.role }}"></span>
 					{% endif %}
 					<a class="comment__name" href="{{ comment.userprofile_url }}">
-						{{ comment.name | e }}
+						{{ comment.name }}
 					</a>
 					<span class="comment__recommendations" title="Leserempfehlungen">
 					{%- if comment.recommendations -%}

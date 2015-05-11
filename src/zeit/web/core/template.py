@@ -163,7 +163,7 @@ def get_teaser_layout(teaser, layout, default=None):
 
 
 @zeit.web.register_filter
-def get_layout(block, default='default', request=None):
+def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
     # that was originally set for the block.
@@ -174,8 +174,8 @@ def get_layout(block, default='default', request=None):
 
     try:
         key = request and hash(block)
-    except TypeError, e:
-        log.debug('Cannot hash and cache cp block layout: {}'.format(e))
+    except (NotImplementedError, TypeError), e:
+        log.debug('Cannot hash and cache cp module layout: {}'.format(e))
         key = None
 
     if key:
@@ -188,19 +188,10 @@ def get_layout(block, default='default', request=None):
         if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
             layout = block.cpextra
         else:
-            layout = block.layout.id
-    except (AttributeError, TypeError), e:
-        log.debug('Cannot produce a cp block layout: {}'.format(e))
-        layout = default
-
-    if not zeit.edit.interfaces.IContainer.providedBy(block):
-        # If our block is not a container (e.g. z.c.c.area.Region), it might
-        # be a content object (e.g. z.c.a.a.Article) or at least posing as
-        # one (e.g. z.w.c.spektrum.Teaser).
-        try:
-            layout = get_teaser_layout(list(block)[0], layout)
-        except (AttributeError, IndexError, TypeError), e:
-            log.debug('Cannot apply content-dependent layout rules: %s' % e)
+            layout = get_teaser_layout(list(block)[0], block.layout.id)
+    except (AttributeError, IndexError, TypeError), e:
+        log.debug('Cannot produce a cp module layout: {}'.format(e))
+        return 'hide'
 
     if key:
         request.teaser_layout[key] = layout
@@ -611,6 +602,54 @@ def get_google_tag_manager_host():
 def debug_breaking_news():
     request = pyramid.threadlocal.get_current_request()
     return 'eilmeldung' == request.GET.get('debug', '')
+
+
+@zeit.web.register_global
+def calculate_pagination(current_page, total_pages, slots=7):
+    # only accept ints as params
+    if not (isinstance(current_page, int) and isinstance(total_pages, int)):
+        return
+    # check for sensible values
+    if current_page > total_pages or current_page < 0 or total_pages <= 1:
+        return
+
+    # we have 7 slots by default to display pages,
+    # so anything less than 8 pages can be displayed 'as is'
+    if total_pages <= slots:
+        return range(1, total_pages + 1)
+
+    # collect all known page numbers:
+    #  - first and last page
+    #  - current page and its two neighbours
+    locp = max(1, current_page - 1)  # left of current page
+    rocp = min(total_pages, current_page + 1)  # left of current page
+    pages_set = set([1, locp, current_page, rocp, total_pages])
+    pages = sorted(list(pages_set))
+
+    # fill up slots with number or ellipsis
+    if pages[1] - pages[0] == 2:
+        pages.insert(1, pages[0] + 1)
+    elif pages[1] - pages[0] > 2:
+        pages.insert(1, None)
+
+    if pages[-1] - pages[-2] == 2:
+        pages.insert(-1, pages[-2] + 1)
+    elif pages[-1] - pages[-2] > 2:
+        pages.insert(-1, None)
+
+    # account for edge cases where's more to fill
+    if len(pages) < slots:
+        pre_none_filler = range(min(total_pages, current_page + 2),
+                                total_pages)[:slots - len(pages)]
+        post_none_filler = range(2,
+                                 max(2, current_page - 1))[len(pages) - slots:]
+
+        if pre_none_filler:
+            pages = pages[:-2] + pre_none_filler + pages[-2:]
+        if post_none_filler:
+            pages = pages[:2] + post_none_filler + pages[2:]
+
+    return pages
 
 
 @zeit.web.register_filter
