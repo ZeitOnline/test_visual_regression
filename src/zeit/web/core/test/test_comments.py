@@ -119,19 +119,21 @@ def test_entire_thread_should_be_parsed(application, testserver):
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
         unique_id, destination='foo', sort='desc')
-    assert thread_as_json['comments'][0]['name'] == 'claudiaE'
-    assert thread_as_json['comments'][40]['name'] == 'Skarsgard'
+    assert thread_as_json['comments'][0]['cid'] == 2969196
+    assert thread_as_json['comments'][40]['cid'] == 2968920
     assert thread_as_json['comment_count'] == 41
 
 
-def test_paging_should_not_affect_comment_threads(application, testserver):
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
-    thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, destination='foo', sort='desc')
-    assert thread_as_json['comments'][0]['name'] == 'claudiaE'
-    assert thread_as_json['comments'][40]['name'] == 'Skarsgard'
-    assert thread_as_json['comment_count'] == 41
+# this test is the same as "test_entire_thread_should_be_parsed"
+# what paging should be tested here? comment paging or article paging?
+# def test_paging_should_not_affect_comment_threads(application, testserver):
+#     unique_id = ('http://xml.zeit.de/politik/deutschland/'
+#                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+#     thread_as_json = zeit.web.core.comments.get_thread(
+#         unique_id, destination='foo', sort='desc')
+#     assert thread_as_json['comments'][0]['cid'] == 2969196
+#     assert thread_as_json['comments'][40]['cid'] == 2968920
+#     assert thread_as_json['comment_count'] == 41
 
 
 def test_thread_should_have_valid_page_information(application, testserver):

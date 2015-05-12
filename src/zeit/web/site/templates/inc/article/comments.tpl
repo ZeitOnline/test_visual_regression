@@ -1,5 +1,7 @@
+{% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
+
 <section class="comment-section" id="comments">
-	<div class="comment-section__head">
+	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
 		<span class="comment-section__headline">
 			{{ view.comments.comment_count | pluralize('{} Kommentare', '{} Kommentar', '{} Kommentare') }}
@@ -15,6 +17,28 @@
 	{% endif %}
 	</div>
 
+	<div class="comment-section__preferences">
+		<div class="comment-section__item">
+			{# funky future feature?
+			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url }}#comments">
+				{{ blocks.use_svg_icon('spinner', 'comment-section__icon-spinner') }}
+				Auto-Aktualisierung an
+			</a>
+			#}
+			{% if view.comments.sort == 'asc' %}
+				{% set href = view.request | append_get_params(sort='desc') %}
+				{% set label = 'Älteste zuerst' %}
+			{% else %}
+				{% set href = view.request | append_get_params(sort=None) %}
+				{% set label = 'Neueste zuerst' %}
+			{% endif %}
+			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
+				{{ blocks.use_svg_icon('sorting', 'comment-section__icon-sorting') }}
+				{{ label }}
+			</a>
+		</div>
+	</div>
+
 {% if view.comments %}
 	<div id="js-comments-body">
 	{% for comment in view.comments.comments[:20] %}
@@ -28,7 +52,9 @@
 					<span class="comment__badge comment__badge--promoted" title="Redaktionsempfehlung">&#9733;</span>
 					{% endif %}
 					{% if comment.is_author %}
-					<span class="comment__badge icon-comment-zon-author-badge" title="{{ comment.role }}"></span>
+					<span title="{{ comment.role }}">
+						{{ blocks.use_svg_icon('comment-author', 'comment__badge comment__badge--author') }}
+					</span>
 					{% endif %}
 					<a class="comment__name" href="{{ comment.userprofile_url }}">
 						{{ comment.name }}
@@ -47,15 +73,15 @@
 				</div>
 				<div class="comment__reactions">
 					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
-						<span class="comment__icon icon-comment-reactions-reply"></span>
+						{{ blocks.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply') }}
 						<span class="comment__action">Antworten</span>
 					</a>
 					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
-						<span class="comment__icon icon-comment-reactions-report"></span>
+						{{ blocks.use_svg_icon('comment-report', 'comment__icon comment__icon-report') }}
 						<span class="comment__action">Melden</span>
 					</a>
 					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
-						<span class="comment__icon icon-comment-reactions-recommend"></span>
+						{{ blocks.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend') }}
 						<span class="comment__action">Empfehlen</span>
 					</a>
 				</div>

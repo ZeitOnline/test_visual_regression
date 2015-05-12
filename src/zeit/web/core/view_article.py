@@ -75,6 +75,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def next_page_url(self):
+        if self.request.view_name == 'komplettansicht':
+            return None
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index + 1] \
             if actual_index + 1 < len(self.pages) else None
@@ -96,6 +98,15 @@ class Article(zeit.web.core.view.Content):
             'next_page_url': self.next_page_url,
             'prev_page_url': self.prev_page_url
         }
+
+    @zeit.web.reify
+    def syndication_source(self):
+        if self.context.product.id == 'TGS':
+            return 'http://www.tagesspiegel.de'
+        elif self.context.product.id == 'HaBl':
+            return 'http://www.handelsblatt.com'
+        else:
+            return
 
     @zeit.web.reify
     def first_body_obj(self):

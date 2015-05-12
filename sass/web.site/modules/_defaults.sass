@@ -23,3 +23,8 @@ a
 	// normal, hover, active, visited, focus
 	+link-colors($color-link--default, $color-link--hover, $color-link--active, $color-link--visited, $color-link--focus)
 	text-decoration: none
+
+svg
+	fill: currentColor
+	// see: http://bugs.jquery.com/ticket/11352
+	pointer-events: none

@@ -29,7 +29,11 @@ log = logging.getLogger(__name__)
 @view_config(name='komplettansicht',
              renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
-    pass
+
+    @zeit.web.reify
+    def canonical_url(self):
+        """ Canonical for komplettansicht is first page """
+        return self.resource_url
 
 
 @view_config(name='seite',
