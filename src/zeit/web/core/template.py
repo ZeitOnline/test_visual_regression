@@ -401,17 +401,6 @@ def call_macro_by_name(context, macro_name, *args, **kwargs):
     return context.vars[macro_name](*args, **kwargs)
 
 
-@zeit.web.register_filter
-def get_results(area):
-    """Fill an autmatic area with results from a search-form query."""
-    # TODO: Make this filter utilize ZCA.
-    return zeit.web.site.search.ResultsArea(area)
-    try:
-        return zeit.web.site.search.IResultsArea(area)
-    except TypeError:
-        return area
-
-
 @zeit.web.register_global
 def get_teaser_template(block_layout,
                         content_type,
@@ -575,15 +564,27 @@ def get_image_group(asset):
 
 @zeit.web.register_filter
 def get_module(block):
-    if not zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
-        return
+    if not (zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block) and
+            block.visible):
+        return block
     try:
         module = zope.component.getAdapter(
             block, zeit.edit.interfaces.IBlock, block.cpextra)
     except (zope.component.interfaces.ComponentLookupError, TypeError):
-        return
-    if block.visible:
-        return module
+        return block
+    return module
+
+
+@zeit.web.register_filter
+def get_area(area, name=None):
+    try:
+        name = area.kind if name is None else name
+        area = zope.component.getAdapter(
+            area, zeit.content.cp.interfaces.IRenderedArea, name)
+    except (zope.component.interfaces.ComponentLookupError, TypeError):
+        if name is None:
+            return get_area(area, name='')
+    return area
 
 
 @zeit.web.register_filter

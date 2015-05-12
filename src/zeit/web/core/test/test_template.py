@@ -452,14 +452,15 @@ def test_filter_append_get_params_should_reset_params(request):
 
 
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
-    assert zeit.web.core.template.get_module(None) is None
+    block = object()
+    assert zeit.web.core.template.get_module(block) is block
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     block = zeit.web.core.application.find_block(cp, module='search-form')
 
     block.visible = True
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is None
+    assert zeit.web.core.template.get_module(block) is block
 
     block.visible = True
     block.cpextra = 'search-form'
@@ -468,7 +469,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
 
     block.visible = False
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is None
+    assert zeit.web.core.template.get_module(block) is block
 
 
 def test_pagination_calculation_should_deliver_valid_output():

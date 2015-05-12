@@ -26,7 +26,7 @@ def search_area(application):
         'http://xml.zeit.de/suche/index')
     area = zeit.web.core.application.find_block(
         context, attrib='area', kind='ranking')
-    return zeit.web.core.template.get_results(area)
+    return zeit.web.core.template.get_area(area)
 
 
 def test_search_form_should_allow_empty_query(search_form):

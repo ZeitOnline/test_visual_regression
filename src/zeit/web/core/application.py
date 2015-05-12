@@ -483,7 +483,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             area = find_block(context, attrib='area', kind='ranking')
             if form and area:
                 form = zeit.web.core.template.get_module(form)
-                area = zeit.web.site.search.ResultsArea(area)
+                area = zeit.web.core.template.get_area(area)
 
                 form['q'] = ' '.join(request.GET.getall('q'))
                 form['type'] = ' '.join(request.GET.getall('type'))
