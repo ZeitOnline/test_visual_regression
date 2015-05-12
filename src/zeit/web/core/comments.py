@@ -130,8 +130,7 @@ def request_thread(path):
     try:
         response = requests.get(uri, timeout=timeout)
         return response.ok and response.content or None
-    except (AttributeError, requests.exceptions.RequestException), err:
-        __import__('pdb').set_trace()
+    except (AttributeError, requests.exceptions.RequestException):
         return
 
 
