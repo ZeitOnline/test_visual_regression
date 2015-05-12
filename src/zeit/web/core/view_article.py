@@ -75,6 +75,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def next_page_url(self):
+        if self.request.view_name == 'komplettansicht':
+            return None
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index + 1] \
             if actual_index + 1 < len(self.pages) else None
