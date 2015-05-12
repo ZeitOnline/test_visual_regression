@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - ZON-1521/22: ZMO articles and longform should have only one h1
 
+- ZON-1527: ZON HP has an H1-Logo
+
 
 1.21.1 (2015-05-05)
 -------------------
