@@ -30,7 +30,7 @@
 				{% set label = 'Älteste zuerst' %}
 			{% else %}
 				{% set href = view.request | append_get_params(sort=None) %}
-				{% set label = 'Neuste zuerst' %}
+				{% set label = 'Neueste zuerst' %}
 			{% endif %}
 			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
 				{{ blocks.use_svg_icon('sorting', 'comment-section__icon-sorting') }}
