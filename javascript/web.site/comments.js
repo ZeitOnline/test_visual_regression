@@ -34,7 +34,7 @@ define([ 'jquery' ], function( $ ) {
                 .addClass( 'js-reply-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
-            form.get( 0 ).elements.comment.placeholder = 'Ihre Antwort';
+            form.find( 'textarea[name="comment"]' ).attr( 'placeholder', 'Ihre Antwort' );
             form.find( 'input[type="submit"]' ).prop( 'disabled', true ).val( 'Antworten' );
             form.find( 'input[name="pid"]' ).val( cid );
         }
@@ -111,7 +111,7 @@ define([ 'jquery' ], function( $ ) {
         }
 
         hideOtherForms();
-        link.find( '.comment__icon' ).addClass( 'comment__icon--sending' );
+        link.addClass( 'comment__reaction--sending' );
 
         $.ajax({
             url: sendurl,
@@ -124,6 +124,8 @@ define([ 'jquery' ], function( $ ) {
             method: 'POST',
             success: function( response ) {
                 if ( response ) {
+                    link.removeClass( 'comment__reaction--sending' );
+
                     if ( response.response.error === false ) {
                         var recommendations = comment.find( '.comment__recommendations' ),
                             number = recommendations.html().replace( /\D+/g, '' ) || 0,
@@ -159,11 +161,7 @@ define([ 'jquery' ], function( $ ) {
         }
 
         link.toggleClass( 'comment__reaction--active' )
-            .find( '.comment__icon' )
-            .toggleClass( 'icon-comment-reactions-recommend' )
-            .toggleClass( 'icon-comment-reactions-recommend-active' )
-            .removeClass( 'comment__icon--sending' );
-        link.find( '.comment__action' ).attr( 'title', label ).html( label );
+            .find( '.comment__action' ).attr( 'title', label ).html( label );
 
         return number;
     },

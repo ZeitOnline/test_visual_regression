@@ -14,7 +14,7 @@
 	{% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
 
-<div class="comment-section__form">
+<div class="comment-section__form comment-section__item">
 {%- if request.authenticated_userid %}
 	{%- block comment_form %}
 	<form class="comment-form" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">

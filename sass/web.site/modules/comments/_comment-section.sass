@@ -1,11 +1,14 @@
 .comment-section
 	border-top: 2px solid $zon-seashell
 	margin: 4rem (-$page-padding) 0
-	&__head
+	&__item
 		margin-left: auto
 		margin-right: auto
 		max-width: remify(700px) // 660px + 2*$page-padding
-		padding: em(32px) $page-padding
+		padding: 0 $page-padding
+	&__head
+		padding-bottom: em(32px)
+		padding-top: em(32px)
 		text-align: center
 		+respond-min($break-phablet-min)
 			+display-flex // flexbox
@@ -25,6 +28,28 @@
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
+	&__preferences
+		background-color: $zon_lighter_grey
+		color: $zon_grey
+		font-size: em(13px)
+		margin-bottom: 1px
+		padding-bottom: remify(13px)
+		padding-top: remify(13px)
+		a
+			+link-colors(inherit, $color-link--hover, $color-link--active, inherit, $color-link--focus)
+			margin-right: 2em
+			&:last-child
+				margin-right: 0
+		svg
+			vertical-align: text-top
+		+respond-min($break-phablet-min)
+			font-size: em(15px)
+	&__icon-sorting
+		width: em(14px)  // em intended
+		height: em(16px) // em intended
+	&__icon-spinner
+		width: em(17px)  // em intended
+		height: em(14px) // em intended
 
 	&__form
 		margin-left: auto
@@ -34,3 +59,6 @@
 
 		.comment-form__cancel--hidden
 			display: none
+
+.no-js .comment-section__link-autoupdate
+	display: none
