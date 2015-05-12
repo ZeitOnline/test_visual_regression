@@ -38,6 +38,9 @@ def known_content(resource):
 class Base(object):
     """Base class for all views."""
 
+    seo_title_default = u''
+    pagetitle_suffix = u''
+
     def __call__(self):
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
@@ -233,28 +236,23 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
-        default = u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten'
         try:
-            seo = zeit.seo.interfaces.ISEO(self.context)
-            if seo.html_title:
-                return seo.html_title
-        except TypeError:
-            pass
-        tokens = (self.supertitle, self.title)
-        return ': '.join([t for t in tokens if t]) or default
+            title = zeit.seo.interfaces.ISEO(self.context).html_title
+            assert title
+        except (AssertionError, TypeError):
+            title = ': '.join([t for t in (self.supertitle, self.title) if t])
+        if title:
+            return title + (u'' if self.is_hp else self.pagetitle_suffix)
+        return self.seo_title_default
 
     @zeit.web.reify
     def pagedescription(self):
-        default = u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten'
         try:
-            seo = zeit.seo.interfaces.ISEO(self.context)
-        except TypeError:
-            return default
-        if seo.html_description:
-            return seo.html_description
-        if self.context.subtitle:
-            return self.context.subtitle
-        return default
+            desc = zeit.seo.interfaces.ISEO(self.context).html_description
+            assert desc
+        except (AssertionError, TypeError):
+            desc = self.context.subtitle
+        return desc or self.seo_title_default
 
     @zeit.web.reify
     def ranked_tags(self):
