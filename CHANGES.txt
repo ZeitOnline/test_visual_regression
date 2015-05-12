@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-1724: Add $handle mapping in adcontroller code
 
+- ZON-1520: Add canonical urls to ZON/ZMO
+
 
 1.21.1 (2015-05-05)
 -------------------
