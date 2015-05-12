@@ -2,7 +2,6 @@ import collections
 import logging
 import math
 
-import grokcore.component
 import zope.component
 import zope.schema
 
@@ -176,9 +175,11 @@ class IResultsArea(zeit.content.cp.interfaces.IArea):
         title=u'Search result page', default=None, required=False)
 
 
-@grokcore.component.implementer(IResultsArea)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
+@zeit.web.register_area('ranking')
 class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
+
+    zope.interface.implements(IResultsArea,
+                              zeit.content.cp.interfaces.IRenderedArea)
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IResultsArea['sort_order'])
