@@ -6,13 +6,13 @@ import grokcore.component
 import zope.component
 import zope.schema
 
+from zeit.solr import query as lq
 import zeit.cms.content.property
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
 import zeit.find.daterange
 import zeit.find.search
 import zeit.solr.interfaces
-from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block

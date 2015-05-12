@@ -2,7 +2,7 @@
     {% block before_module_list %}{% endblock %}
     {% for module in area.values() -%}
         {% set teaser = module | first_child %}
-        {% set area_loop = loop %}
+        {% set module_loop = loop %}
         {% block before_module_include scoped %}{% endblock %}
         {% include
             ["zeit.web.site:templates/inc/module/{0}_{1}.html".format(module | get_layout, area.kind),
