@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - ZON-1520: Add canonical urls to ZON/ZMO
 
+- ZON-1521/22: ZMO articles and longform should have only one h1
+
 
 1.21.1 (2015-05-05)
 -------------------
