@@ -25,6 +25,15 @@
         <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
         <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
         <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+        {% if view.canonical_url -%}
+            <link rel="canonical" href="{{ view.canonical_url }}">
+        {% endif -%}
+        {% if view.prev_page_url -%}
+            <meta rel="prev" href="{{ view.prev_page_url }}">
+        {% endif -%}
+        {% if view.next_page_url -%}
+            <meta rel="next" href="{{ view.next_page_url }}">
+        {% endif -%}
         {% block css_lte8_link %}
         <!--[if lte IE 8]>
             <link href="{{ request.asset_url('css/web.magazin/all-old-ie.css') }}" media="screen" rel="stylesheet" type="text/css" />

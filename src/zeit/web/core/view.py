@@ -199,6 +199,12 @@ class Base(object):
             return
 
     @zeit.web.reify
+    def canonical_url(self):
+        """ Set own url as default canonical. Overwrite for special
+            cases and page types"""
+        return "{}{}".format(self.request.host_url, self.request.path_info)
+
+    @zeit.web.reify
     def js_vars(self):
         names = ('banner_channel', 'ressort', 'sub_ressort', 'type')
         return [(name, getattr(self, name, '')) for name in names]
@@ -430,8 +436,11 @@ class Content(Base):
 
     @zeit.web.reify
     def comments(self):
+        sort = 'asc'
+        if self.request.params.get('sort') == 'desc':
+            sort = 'desc'
         return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url)
+            self.context.uniqueId, destination=self.request.url, sort=sort)
 
     @zeit.web.reify
     def obfuscated_date(self):
