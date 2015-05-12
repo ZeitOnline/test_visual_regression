@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-1724: Add $handle mapping in adcontroller code
 
+- ZON-1523: Rework seo page title and descriptions
+
 - ZON-1520: Add canonical urls to ZON/ZMO
 
 

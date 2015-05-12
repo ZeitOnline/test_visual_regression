@@ -18,6 +18,8 @@
         <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
         <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="html-meta-hide-timestamp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">ZON description</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">ZON title</attribute>
         <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-05-21T10:58:36.573625+00:00</attribute>

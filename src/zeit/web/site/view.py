@@ -20,6 +20,10 @@ def is_zon_content(context, request):
 
 class Base(zeit.web.core.view.Base):
 
+    seo_title_default = (
+        u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten')
+    pagetitle_suffix = u' | ZEIT ONLINE'
+
     def banner_toggles(self, name):
         try:
             return bool(zeit.web.core.banner.banner_toggles[name])
