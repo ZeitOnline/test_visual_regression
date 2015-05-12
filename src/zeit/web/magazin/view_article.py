@@ -59,7 +59,7 @@ class LongformArticle(Article):
 
     main_nav_full_width = True
     is_longform = True
-    pagetitle_suffix = ' | ZEIT ONLINE'
+    pagetitle_suffix = u' | ZEIT ONLINE'
 
     @zeit.web.reify
     def header_img(self):
