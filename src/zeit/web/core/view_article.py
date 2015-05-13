@@ -314,6 +314,7 @@ class ArticlePage(Article):
         return self._validate_and_determine_page_nr()
 
     def _validate_and_determine_page_nr(self):
+        # see https://github.com/ZeitOnline/zeit.web/wiki/Artikel#seo
         try:
             spec = self.request.path_info.split('/')[-1][6:]
             number = int(re.sub('[^0-9]', '', spec))
@@ -328,7 +329,7 @@ class ArticlePage(Article):
                         self.resource_url, self.request.view_name, number))
             elif number > len(self.pages):
                 raise pyramid.httpexceptions.HTTPNotFound()
-            elif number == 0:
+            elif number == 1 or number == 0:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
                     self.resource_url)
             return number
