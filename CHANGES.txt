@@ -4,6 +4,8 @@ Change log for zeit.web
 1.21.2 (unreleased)
 -------------------
 
+- ZON-1700: Show relative dates for comments
+
 - ZON-1714: Add pagination for comments
 
 - ZON-1719: Sort comments
