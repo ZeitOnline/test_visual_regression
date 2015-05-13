@@ -40,6 +40,9 @@ class Article(zeit.web.core.view.Content):
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
+        # throw 404 for 'komplettansicht' if there's just one article page
+        if self.is_all_pages_view and len(self.pages) == 1:
+            raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
     def template(self):
