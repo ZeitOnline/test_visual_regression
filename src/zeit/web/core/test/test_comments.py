@@ -152,8 +152,8 @@ def test_thread_should_have_valid_page_information(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=6)
-    assert thread['comments'] == []
-    assert thread['pages']['current'] == '6 (invalid)'
+    assert thread['pages']['current'] == 1
+    assert len(thread['comments']) == 10
 
 
 def test_dict_with_article_paths_and_comment_counts_should_be_created(

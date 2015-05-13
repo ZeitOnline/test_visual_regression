@@ -439,7 +439,7 @@ class Content(Base):
         if self.request.params.get('sort') == 'desc':
             sort = 'desc'
         if self.request.params.get('page'):
-            page = int(self.request.params.get('page'))
+            page = self.request.params.get('page')
         return zeit.web.core.comments.get_thread(
             self.context.uniqueId, destination=self.request.url, sort=sort,
             page=page)

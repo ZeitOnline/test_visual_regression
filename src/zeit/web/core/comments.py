@@ -154,6 +154,10 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
 
     comments = len(thread['comments'])
     pages = int(math.ceil(float(comments) / float(page_size)))
+
+    if page and (page < 1 or page > pages):
+        page = 1
+
     thread['headline'] = '{} {}'.format(
         comments, 'Kommentar' if comments == 1 else 'Kommentare')
     thread['pages'] = {
@@ -163,20 +167,17 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     }
 
     if page:
-        if page <= pages:
-            first = ((page - 1) * page_size) + 1
-            last = min(comments, ((page - 1) * page_size) + page_size)
-            if first == last:
-                thread['headline'] = u'Kommentar {} von {}'.format(
-                    first, comments)
-            else:
-                thread['headline'] = u'Kommentare {} – {} von {}'.format(
-                    first, last, comments)
-            thread['comments'] = (
-                thread['comments'][(page - 1) * page_size: page * page_size])
+
+        first = ((page - 1) * page_size) + 1
+        last = min(comments, ((page - 1) * page_size) + page_size)
+        if first == last:
+            thread['headline'] = u'Kommentar {} von {}'.format(
+                first, comments)
         else:
-            thread['comments'] = []
-            thread['pages']['current'] = '{} (invalid)'.format(page)
+            thread['headline'] = u'Kommentare {} – {} von {}'.format(
+                first, last, comments)
+        thread['comments'] = (
+            thread['comments'][(page - 1) * page_size: page * page_size])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
