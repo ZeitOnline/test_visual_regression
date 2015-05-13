@@ -69,6 +69,7 @@ define([ 'jquery' ], function( $ ) {
         if ( !form.length ) {
             template = $( '#js-report-comment-template' ).html();
             form = $( template )
+                .removeAttr( 'id' )
                 .addClass( 'js-report-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
