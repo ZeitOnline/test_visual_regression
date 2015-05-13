@@ -2,6 +2,7 @@
 import re
 
 import lxml
+import math
 import mock
 import pytest
 import requests
@@ -708,11 +709,11 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 520:
         assert teaser.size.get('width') == main_width
     elif screen_size[0] == 768:
-        assert teaser.size.get('width') == (
-            (main_width - gutter_width) / 3 - gutter_width)
+        assert teaser.size.get('width') == (int(
+            math.ceil((main_width - gutter_width) / 3.0) - gutter_width))
     elif screen_size[0] == 980:
-        assert teaser.size.get('width') == (
-            (main_width - gutter_width) / 3 - gutter_width)
+        assert teaser.size.get('width') == (int(
+            math.ceil((main_width - gutter_width) / 3.0) - gutter_width))
 
 
 def test_adcontroller_values_return_values_on_hp(application):
