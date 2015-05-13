@@ -17,6 +17,7 @@
 	{% endif %}
 	</div>
 
+{% if view.comments %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?
@@ -39,7 +40,6 @@
 		</div>
 	</div>
 
-{% if view.comments %}
 	<div id="js-comments-body">
 	{% for comment in view.comments.comments %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
