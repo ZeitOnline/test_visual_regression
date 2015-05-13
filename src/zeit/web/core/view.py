@@ -435,10 +435,14 @@ class Content(Base):
     @zeit.web.reify
     def comments(self):
         sort = 'asc'
+        page = 1
         if self.request.params.get('sort') == 'desc':
             sort = 'desc'
+        if self.request.params.get('page'):
+            page = self.request.params.get('page')
         return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url, sort=sort)
+            self.context.uniqueId, destination=self.request.url, sort=sort,
+            page=page)
 
     @zeit.web.reify
     def obfuscated_date(self):

@@ -96,9 +96,14 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def pagination(self):
+        current = self.page_nr
+        total = len(self.pages)
+        pager = zeit.web.core.template.calculate_pagination(current, total)
+
         return {
-            'current': self.page_nr,
-            'total': len(self.pages),
+            'current': current,
+            'total': total,
+            'pager': pager,
             'next_page_title': self.next_title,
             'content_url': self.content_url,
             'pages_urls': self.pages_urls,
