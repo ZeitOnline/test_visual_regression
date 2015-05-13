@@ -99,16 +99,18 @@ def comment_to_dict(comment):
     dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
            'date/hour/text()', 'date/minute/text()')
 
-    changed = datetime.datetime.utcfromtimestamp(
-                float(comment.xpath('changed/text()')[0]))
     created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts))
+    changed = comment.xpath('changed/text()')
 
-    # the agatho thread does not contain seconds for the creation date
-    # for newly created comments, copy the seconds from the "changed" date
-    # to enable "5 seconds ago" display
-    # whould be much easier if we get the original "created" value from drupal
-    if created.replace(second=59) > changed:
-        created = created.replace(second=changed.second)
+    if changed:
+        changed = datetime.datetime.utcfromtimestamp(float(changed[0]))
+
+        # the agatho thread does not contain seconds for the creation date
+        # for newly created comments, copy the seconds from the "changed" date
+        # to enable "5 seconds ago" display
+        # whould be easier if we get the original "created" date from drupal
+        if created.replace(second=59) > changed:
+            created = created.replace(second=changed.second)
 
     # TODO: Catch name, timestamp and cid unavailabilty in element tree.
     return dict(
