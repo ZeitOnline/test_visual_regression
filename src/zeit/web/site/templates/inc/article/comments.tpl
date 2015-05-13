@@ -4,7 +4,7 @@
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
 		<span class="comment-section__headline">
-			{{ view.comments.comment_count | pluralize('{} Kommentare', '{} Kommentar', '{} Kommentare') }}
+			{{ view.comments.headline }}
 		</span>
 		<a href="#comment-form" class="comment-section__button button">
 			Kommentieren
@@ -41,7 +41,7 @@
 
 {% if view.comments %}
 	<div id="js-comments-body">
-	{% for comment in view.comments.comments[:20] %}
+	{% for comment in view.comments.comments %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
@@ -89,6 +89,9 @@
 		</article>
 	{% endfor %}
 	</div>
+
+    {% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
+
 {% endif %}
 
 {% if view.request.GET['action'] == 'report' %}
