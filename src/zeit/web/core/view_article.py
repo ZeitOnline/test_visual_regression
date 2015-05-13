@@ -55,6 +55,10 @@ class Article(zeit.web.core.view.Content):
         return zeit.web.core.interfaces.IPages(self.context)
 
     @zeit.web.reify
+    def is_all_pages_view(self):
+        return self.request.view_name == 'komplettansicht'
+
+    @zeit.web.reify
     def current_page(self):
         return self.pages[0]
 
@@ -75,7 +79,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def next_page_url(self):
-        if self.request.view_name == 'komplettansicht':
+        if self.is_all_pages_view:
             return None
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index + 1] \
