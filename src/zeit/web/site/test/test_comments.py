@@ -45,14 +45,31 @@ def test_comments_get_thread_should_respect_top_level_sort_order(
             'Comments are not sorted most recent first.')
 
 
-def test_comment_form_should_be_rendered(
-        testbrowser, testserver):
+def test_comment_form_should_be_rendered(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01?form=comment' %
                           testserver.url)
     assert len(browser.cssselect('#comment-form')) == 1
 
 
-def test_comment_form_should_be_rendered_through_esi(
-        testbrowser, testserver):
+def test_comment_form_should_be_rendered_through_esi(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     assert len(browser.cssselect('include')) == 1
+
+
+def test_comment_pagination_should_work(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01?page=2' % testserver.url)
+    section = browser.document.get_element_by_id('comments')
+    pages = section.find_class('pager__page')
+    assert len(pages) == 5
+    assert '--current' in (pages[1].get('class'))
+
+
+def test_comment_sorting_should_work(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01?sort=desc' %
+                          testserver.url)
+    comments_body = browser.document.get_element_by_id('js-comments-body')
+    comments = comments_body.cssselect('article')
+    link = browser.cssselect('.comment-section__link-sorting')
+    assert comments[0].get('id') == 'cid-2969196'
+    assert link[0].text_content().strip() == 'Neueste zuerst'
+    assert '/zeit-online/article/01#comments' in link[0].get('href')
