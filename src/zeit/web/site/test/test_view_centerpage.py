@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import re
 
-import requests
 import lxml
 import mock
 import pytest
+import requests
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
 
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
