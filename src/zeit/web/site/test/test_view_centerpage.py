@@ -2,7 +2,6 @@
 import re
 
 import lxml
-import math
 import mock
 import pytest
 import requests
