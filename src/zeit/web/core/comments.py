@@ -156,8 +156,14 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     pages = int(math.ceil(float(comments) / float(page_size)))
 
     # sanitize page value
-    if page and (page < 1 or page > pages):
-        page = 1
+    if page:
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+
+        if page < 1 or page > pages:
+            page = 1
 
     thread['headline'] = '{} {}'.format(
         comments, 'Kommentar' if comments == 1 else 'Kommentare')
