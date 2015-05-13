@@ -40,6 +40,9 @@ class Article(zeit.web.core.view.Content):
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
+        # throw 404 for 'komplettansicht' if there's just one article page
+        if self.is_all_pages_view and len(self.pages) == 1:
+            raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
     def template(self):
@@ -53,6 +56,10 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def pages(self):
         return zeit.web.core.interfaces.IPages(self.context)
+
+    @zeit.web.reify
+    def is_all_pages_view(self):
+        return self.request.view_name == 'komplettansicht'
 
     @zeit.web.reify
     def current_page(self):
@@ -75,7 +82,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def next_page_url(self):
-        if self.request.view_name == 'komplettansicht':
+        if self.is_all_pages_view:
             return None
         actual_index = self.page_nr - 1
         return self.pages_urls[actual_index + 1] \
@@ -314,6 +321,7 @@ class ArticlePage(Article):
         return self._validate_and_determine_page_nr()
 
     def _validate_and_determine_page_nr(self):
+        # see https://github.com/ZeitOnline/zeit.web/wiki/Artikel#seo
         try:
             spec = self.request.path_info.split('/')[-1][6:]
             number = int(re.sub('[^0-9]', '', spec))
@@ -328,7 +336,7 @@ class ArticlePage(Article):
                         self.resource_url, self.request.view_name, number))
             elif number > len(self.pages):
                 raise pyramid.httpexceptions.HTTPNotFound()
-            elif number == 0:
+            elif number == 1 or number == 0:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
                     self.resource_url)
             return number

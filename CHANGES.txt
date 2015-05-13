@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - ZON-1520: Add canonical urls to ZON/ZMO
 
+- ZON-1519: Article: prevent superflous pagination slugs
+
 - ZON-1731: Refactor parquet and spektrum to extend default area template
 
 
