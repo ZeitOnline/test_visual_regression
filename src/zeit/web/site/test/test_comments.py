@@ -1,12 +1,16 @@
+# -*- coding: utf-8 -*-
 import datetime
+import zope.component
 
+import zeit.web.core.interfaces
 import zeit.web.core.template
 
 
-def test_comment_section_should_be_preliminarily_limited_to_20_entries(
-        testbrowser, testserver):
+def test_comment_section_should_be_limited(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert len(browser.cssselect('article.comment')) == 20
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    page_size = int(conf.get('comment_page_size', '10'))
+    assert len(browser.cssselect('article.comment')) == page_size
 
 
 def test_comments_should_contain_basic_meta_data(
