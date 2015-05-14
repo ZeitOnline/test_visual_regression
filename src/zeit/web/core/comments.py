@@ -103,7 +103,7 @@ def comment_to_dict(comment):
     tz = babel.dates.get_timezone('Europe/Berlin')
     utc = babel.dates.get_timezone('UTC')
     created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)
-        ).replace(tzinfo=utc).astimezone(tz)
+                                ).replace(tzinfo=utc).astimezone(tz)
     changed = comment.xpath('changed/text()')
 
     if changed:
