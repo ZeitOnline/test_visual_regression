@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from BeautifulSoup import BeautifulSoup
+import babel.dates
 import collections
 import datetime
 import itertools
@@ -99,11 +100,14 @@ def comment_to_dict(comment):
     dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
            'date/hour/text()', 'date/minute/text()')
 
-    created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts))
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    utc = babel.dates.get_timezone('UTC')
+    created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)
+        ).replace(tzinfo=utc).astimezone(tz)
     changed = comment.xpath('changed/text()')
 
     if changed:
-        changed = datetime.datetime.utcfromtimestamp(float(changed[0]))
+        changed = datetime.datetime.fromtimestamp(float(changed[0]), tz)
 
         # the agatho thread does not contain seconds for the creation date
         # for newly created comments, copy the seconds from the "changed" date

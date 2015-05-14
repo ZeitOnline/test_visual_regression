@@ -39,17 +39,15 @@ def mod_date(resource):
 
 
 @zeit.web.register_filter
-def format_comment_date(datetime, base_date=None):
-    dt = DeltaTime(datetime, base_date)
-    if dt.delta.days < 365:
-        return dt.get_time_since_comment_posting()
+def format_comment_date(comment_date, base_date=None):
+    if base_date is None:
+        base_date = datetime.datetime.now(comment_date.tzinfo)
+    interval = DeltaTime(comment_date, base_date)
+    if interval.delta.days < 365:
+        return interval.get_time_since_comment_posting()
     else:
-        # comment datetime is a naive datetime, adapt timezone
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        utc = babel.dates.get_timezone('UTC')
-        datetime = datetime.replace(tzinfo=utc)
         return babel.dates.format_datetime(
-            datetime.astimezone(tz), "d. MMMM yyyy, H:mm 'Uhr'", locale=locale)
+            comment_date, "d. MMMM yyyy, H:mm 'Uhr'", locale=locale)
 
 
 @zeit.web.register_global
