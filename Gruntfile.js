@@ -21,13 +21,17 @@ module.exports = function(grunt) {
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'bower', 'modernizr', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'icons' ],
-            development: [ 'bower', 'modernizr', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'icons' ],
+            production: [ 'bower', 'modernizr', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
+            development: [ 'bower', 'modernizr', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
+            svg: [ 'clean', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
+            symbols: [ 'clean:symbols', 'svgmin:symbols', 'svgstore' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
+
+    var path = require('path');
 
     // checking ruby version, printing a hint if not standard version
     var sys = require('sys');
@@ -84,6 +88,7 @@ module.exports = function(grunt) {
                 imagesPath: project.codeDir + 'img',
                 javascriptsPath: project.codeDir + 'js',
                 sassDir: project.sourceDir + 'sass',
+                sassPath: path.resolve(project.sourceDir + 'sass'),
                 raw: 'preferred_syntax=:sass\n'
             },
             dev: {
@@ -223,7 +228,10 @@ module.exports = function(grunt) {
                 force: true
             },
             // cleanup minified SVGs, remove orphaned files
-            icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ]
+            icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ],
+            symbols: [ '<%= svgmin.symbols.dest %>' ],
+            // delete unused directories
+            legacy: [ project.sourceDir + 'sass/web.*/icons-minified' ]
         },
 
         svgmin: {
@@ -231,13 +239,19 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/icons',
                 src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.magazin/icons-minified'
+                dest: project.sourceDir + 'sass/web.magazin/icons/_minified'
             },
             website: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.site/icons',
                 src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.site/icons-minified'
+                dest: project.sourceDir + 'sass/web.site/icons/_minified'
+            },
+            symbols: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.site/svg/_minified'
             }
         },
 
@@ -252,7 +266,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '<%= svgmin.magazin.dest %>',
                     src: [ '*.svg', '*.png' ],
-                    dest: project.codeDir + '/css/icons'
+                    dest: project.codeDir + 'css/icons'
                 }],
                 options: {
                     datasvgcss: 'magazin.data.svg.css',
@@ -267,7 +281,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '<%= svgmin.website.dest %>',
                     src: [ '*.svg', '*.png' ],
-                    dest: project.codeDir + '/css/icons'
+                    dest: project.codeDir + 'css/icons'
                 }],
                 options: {
                     datasvgcss: 'site.data.svg.css',
@@ -276,6 +290,27 @@ module.exports = function(grunt) {
                     previewhtml: 'site.preview.html',
                     pngfolder: 'site'
                 }
+            }
+        },
+
+        svgstore: {
+            options: {
+                prefix : 'svg-', // This will prefix each ID
+                // will add and overide the the default xmlns="http://www.w3.org/2000/svg" attribute to the resulting SVG
+                // symbol: {
+                //     viewBox : '0 0 100 100',
+                //     xmlns: 'http://www.w3.org/2000/svg'
+                // },
+                cleanup: [ 'fill' ],
+                includedemo: true,
+                formatting: {
+                    indent_size: 1,
+                    indent_char: '  '
+                }
+            },
+            website: {
+                src: '<%= svgmin.symbols.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.site/icons.svg'
             }
         },
 
@@ -359,6 +394,10 @@ module.exports = function(grunt) {
                 files: [ '<%= svgmin.magazin.cwd %>/*.svg', '<%= svgmin.website.cwd %>/*.svg' ],
                 tasks: [ 'icons' ]
             },
+            symbols: {
+                files: [ '<%= svgmin.symbols.cwd %>/*.svg' ],
+                tasks: [ 'symbols' ]
+            },
             config: {
                 files: [
                     project.sourceDir + '.jscsrc',
@@ -392,13 +431,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-modernizr');
     grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-svgmin');
+    grunt.loadNpmTasks('grunt-svgstore');
 
     // register tasks here
     grunt.registerTask('default', project.tasks.production);
     grunt.registerTask('production', project.tasks.production);
     grunt.registerTask('dev', project.tasks.development);
     grunt.registerTask('docs', project.tasks.docs);
+    grunt.registerTask('svg', project.tasks.svg);
     grunt.registerTask('icons', project.tasks.icons);
+    grunt.registerTask('symbols', project.tasks.symbols);
     grunt.registerTask('lint', project.tasks.lint);
 
 };

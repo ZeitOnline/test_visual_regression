@@ -20,11 +20,17 @@
     <meta name="application-name" content="ZEIT ONLINE">
     <meta name="msapplication-TileImage" content="http://images.zeit.de/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
+    {% if view.canonical_url -%}
+        <link rel="canonical" href="{{ view.canonical_url }}">
+    {% endif -%}
     {% if view.prev_page_url -%}
         <meta rel="prev" href="{{ view.prev_page_url }}">
     {% endif -%}
     {% if view.next_page_url -%}
         <meta rel="next" href="{{ view.next_page_url }}">
+    {% endif -%}
+    {% if view.syndication_source -%}
+        <meta name="syndication-source" href="{{ view.syndication_source }}">
     {% endif -%}
     <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">

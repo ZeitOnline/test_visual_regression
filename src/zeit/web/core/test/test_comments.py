@@ -75,14 +75,15 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         'Keine Kommentare')
 
 
-def test_request_thread_should_respond(application):
+def test_request_thread_should_respond(application, mockserver):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
     thread = zeit.web.core.comments.request_thread(unique_id)
     assert lxml.etree.fromstring(thread).xpath('comment_count')[0].text == '41'
 
 
-def test_request_thread_should_respond_for_nonexistent(application):
+def test_request_thread_should_respond_for_nonexistent(
+        application, mockserver):
     assert zeit.web.core.comments.request_thread('nosuchthread') is None
 
 
@@ -118,39 +119,41 @@ def test_entire_thread_should_be_parsed(application, testserver):
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
         unique_id, destination='foo', sort='desc')
-    assert thread_as_json['comments'][0]['name'] == 'claudiaE'
-    assert thread_as_json['comments'][40]['name'] == 'Skarsgard'
+    assert thread_as_json['comments'][0]['cid'] == 2969196
+    assert thread_as_json['comments'][40]['cid'] == 2968920
     assert thread_as_json['comment_count'] == 41
 
 
-def test_paging_should_not_affect_comment_threads(application, testserver):
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
-    thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, destination='foo', sort='desc')
-    assert thread_as_json['comments'][0]['name'] == 'claudiaE'
-    assert thread_as_json['comments'][40]['name'] == 'Skarsgard'
-    assert thread_as_json['comment_count'] == 41
+# this test is the same as "test_entire_thread_should_be_parsed"
+# what paging should be tested here? comment paging or article paging?
+# def test_paging_should_not_affect_comment_threads(application, testserver):
+#     unique_id = ('http://xml.zeit.de/politik/deutschland/'
+#                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+#     thread_as_json = zeit.web.core.comments.get_thread(
+#         unique_id, destination='foo', sort='desc')
+#     assert thread_as_json['comments'][0]['cid'] == 2969196
+#     assert thread_as_json['comments'][40]['cid'] == 2968920
+#     assert thread_as_json['comment_count'] == 41
 
 
 def test_thread_should_have_valid_page_information(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id)
-    assert thread['page'] is None
-    assert thread['page_total'] == 5
+    assert thread['pages']['current'] is None
+    assert thread['pages']['total'] == 5
 
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=2)
-    assert thread['page'] == 2
+    assert thread['pages']['current'] == 2
     assert len(thread['comments']) == 10
 
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=6)
-    assert thread['comments'] == []
-    assert thread['page'] == '6 (invalid)'
+    assert thread['pages']['current'] == 1
+    assert len(thread['comments']) == 10
 
 
 def test_dict_with_article_paths_and_comment_counts_should_be_created(
@@ -178,7 +181,7 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
 def test_post_comment_should_throw_exception_if_no_user_is_present():
     request = mock.Mock()
     request.authenticated_userid = False
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
 
@@ -221,6 +224,7 @@ def _create_poster(monkeypatch):
     request.authenticated_userid = True
 
     request.params = {'path': 'my/path'}
+    request.GET = request.POST = request.params
     request.session = {'user': {'uid': '123'}}
     request.cookies = {}
     context = mock.Mock()
@@ -264,7 +268,7 @@ def test_post_comment_should_raise_exception_if_no_post_is_used(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPMethodNotAllowed):
         poster.post_comment()
 
 
@@ -281,7 +285,7 @@ def test_post_comment_should_raise_exception_if_params_are_wrong(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPBadRequest):
         poster.post_comment()
 
 
@@ -298,7 +302,7 @@ def test_post_report_should_raise_exception_if_params_are_wrong(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPBadRequest):
         poster.post_comment()
 
 
@@ -313,7 +317,7 @@ def test_post_recommondation_should_raise_exception_if_params_are_wrong(
     poster.request.params['comment'] = comment
     poster.request.params['pid'] = pid
     poster.request.params['action'] = action
-    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+    with pytest.raises(pyramid.httpexceptions.HTTPBadRequest):
         poster.post_comment()
 
 

@@ -3,18 +3,20 @@
 from BeautifulSoup import BeautifulSoup
 import collections
 import datetime
+import itertools
+import logging
 import lxml.etree
+import math
 import repoze.lru
 import requests
 import requests.exceptions
 import zope.component
-import itertools
-import logging
 
 import zeit.cms.interfaces
 
-from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
+import zeit.web.core.template
+import zeit.web.core.utils
 
 
 cache_maker = repoze.lru.CacheMaker()
@@ -144,24 +146,45 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     thread['comments'] = list(thread['comments'])
 
     if not(thread['sort'] == sort):
-        thread['comments'].reverse()
-        thread['sort'] == sort
+        thread['comments'] = _reverse_comments(thread['comments'])
+        thread['sort'] = sort
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
-    thread['page'] = page
-    c_len = len(thread['comments'])
-    total = c_len // page_size
-    thread['page_total'] = total if c_len % page_size == 0 else total + 1
+    comments = len(thread['comments'])
+    pages = int(math.ceil(float(comments) / float(page_size)))
+
+    # sanitize page value
+    if page:
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+
+        if page < 1 or page > pages:
+            page = 1
+
+    thread['headline'] = '{} {}'.format(
+        comments, 'Kommentar' if comments == 1 else 'Kommentare')
+    thread['pages'] = {
+        'current': page,
+        'total': pages,
+        'pager': zeit.web.core.template.calculate_pagination(page, pages)
+    }
 
     if page:
-        if page <= thread['page_total']:
-            thread['comments'] = (
-                thread['comments'][(page - 1) * page_size: page * page_size])
+        thread['comments'] = (
+            thread['comments'][(page - 1) * page_size: page * page_size])
+        first = ((page - 1) * page_size) + 1
+        last = min(comments, ((page - 1) * page_size) + page_size)
+
+        if first == last:
+            thread['headline'] = u'Kommentar {} von {}'.format(
+                first, comments)
         else:
-            thread['comments'] = []
-            thread['page'] = '{} (invalid)'.format(page)
+            thread['headline'] = u'Kommentare {} – {} von {}'.format(
+                first, last, comments)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
@@ -209,7 +232,7 @@ def get_cacheable_thread(unique_id):
         return dict(
             comments=comments,
             index=index,
-            comment_count=to_int(comment_count),
+            comment_count=zeit.web.core.utils.to_int(comment_count),
             sort='asc',
             nid=comment_nid)
     except (IndexError, AttributeError):
@@ -246,6 +269,26 @@ def _sort_comments(comments):
         list(itertools.chain(
             *[[li[0]] + li[1] for li in comments_sorted.values()])),
         comment_index)
+
+
+def _reverse_comments(comments):
+
+    comment_replies = []
+    comments_reversed = []
+
+    while comments:
+        comment = comments.pop()
+
+        if comment['in_reply']:
+            comment_replies.insert(0, comment)
+        else:
+            comments_reversed.append(comment)
+
+            if len(comment_replies):
+                comments_reversed.extend(comment_replies)
+                comment_replies = []
+
+    return comments_reversed
 
 
 def request_counts(*unique_ids):

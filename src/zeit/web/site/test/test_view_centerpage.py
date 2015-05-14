@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import re
 
-import requests
 import lxml
 import mock
 import pytest
+import requests
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
 
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
@@ -708,11 +708,11 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 520:
         assert teaser.size.get('width') == main_width
     elif screen_size[0] == 768:
-        assert teaser.size.get('width') == (
-            (main_width - gutter_width) / 3 - gutter_width)
+        assert teaser.size.get('width') == (int(
+            round((main_width - gutter_width) / 3.0) - gutter_width))
     elif screen_size[0] == 980:
-        assert teaser.size.get('width') == (
-            (main_width - gutter_width) / 3 - gutter_width)
+        assert teaser.size.get('width') == (int(
+            round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
 def test_adcontroller_values_return_values_on_hp(application):
@@ -741,3 +741,45 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert adcv == view.adcontroller_values
+
+
+def test_canonical_url_returns_correct_value_on_cp(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+    request.host_url = 'http://localhorst'
+    request.path_info = '/centerpage/index'
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
+    assert view.canonical_url == 'http://localhorst/centerpage/index'
+
+
+def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
+    url = '%s/zeit-online/index' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/zeit-online/article/01' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/zeit-online/article/zeit' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/zeit-online/article/zeit' % testserver.url
+    browser = testbrowser("{}/komplettansicht".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/suche/index' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    url = '%s/suche/index' % testserver.url
+    browser = testbrowser("{}?p=2".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
