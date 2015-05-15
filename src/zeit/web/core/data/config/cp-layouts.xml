@@ -14,6 +14,12 @@
         areas="solo duo major minor ranking parquet"
         />
     <layout
+        id="zon-topic"
+        title="Dossier-Teaser"
+        image_pattern="zon-topic"
+        areas="solo"
+        />
+    <layout
         id="zon-square"
         title="quadratischer Teaser"
         image_pattern="zmo-square-large"

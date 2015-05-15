@@ -61,6 +61,17 @@
 		width: 100%
 		+background-image(linear-gradient($angle, rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%))
 
+=fake-box-dimming($color: $black, $perc: 0.5)
+	&:after
+		content: ''
+		position: absolute
+		z-index: 1
+		height: 100%
+		width: 100%
+		left: 0px
+		top: 0px
+		+background(none repeat scroll 0 0 / 100% auto rgba($color, $perc))
+
 =no-user-select
 	-webkit-touch-callout: none
 	-webkit-user-select: none

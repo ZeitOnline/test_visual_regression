@@ -1,0 +1,116 @@
+.teaser-topic
+	@extend %teaser
+	background: $black
+	margin: $petite (-$petite)
+	padding: 0
+	position: relative
+	&__heading
+		@extend %teaser-heading
+		position: relative
+		margin-top: $small
+		margin-bottom: $twice
+	&__inner-helper
+		left: 0
+		padding: 0
+		position: absolute
+		top: 0
+		z-index: 1
+		+respond-min($break-tablet-min)
+			width: 55%
+			top: em(45px)
+			padding-left: em(48px)
+			padding-right: em(48px)
+		+respond-min($break-desktop-min)
+			width: 60%
+			top: em(65px)
+			padding-left: em(68px)
+			padding-right: em(68px)
+	&__introduction
+		color: $white
+		letter-spacing: $zon-letter-spacing-l
+		-webkit-font-smoothing: antialiased
+		+respond-min($break-tablet-min)
+			font-size: $font-ml
+		+respond-min($break-desktop-min)
+			font-size: em(19px)
+	&__media
+		margin: 0
+		width: 100%
+		z-index: 1
+	&__media-container
+		background-color: $black
+		position: relative
+		&:after
+			bottom: 0
+			content: ''
+			left: 0
+			min-height: 100%
+			min-width: 100%
+			position: absolute
+			right: 0
+			top: 0
+			z-index: 1
+			+background(rgba(0, 0, 0, 0.5))
+			+respond-min($break-tablet-min)
+				+background(rgba(0, 0, 0, 0.5))
+	&__readmore
+		border-radius: 5px
+		border: 2px solid $charcoal
+		color: $zon_light_grey
+		font-family: TabletGothic
+		font-size: $font-s
+		letter-spacing: $zon-letter-spacing-l
+		padding: 0.5em 1.2em
+		text-transform: uppercase
+		-webkit-font-smoothing: antialiased
+	&__relateds
+		margin: 0
+		padding: 0
+		position: absolute
+		right: 0
+		top: 65px
+		z-index: 1
+		+respond-min($break-tablet-min)
+			top: 45px
+			width: 45%
+		+respond-min($break-desktop-min)
+			top: 65px
+			width: 40%
+	&__related
+		list-style: outside none none
+		&:after
+			content: ""
+			display: block
+			width: 15%
+			height: 0px
+			border-bottom: 1px solid $zon_grey
+			margin-bottom: $petite
+			padding-bottom: $petite
+		&:last-child:after
+			border: none
+	&__related-kicker
+		@extend %teaser-kicker
+		color: $zon_light_grey
+		font-size: $font-s
+		font-weight: normal
+		letter-spacing: 0.1em
+		margin-bottom: $thin
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			font-size: $font-xs
+		+respond-min($break-desktop-min)
+			font-size: $font-s
+	&__related-title
+		@extend %teaser-title
+		color: $white
+		line-height: 1.12em
+		letter-spacing: $zon-letter-spacing-m
+		+respond-min($break-tablet-min)
+			font-size: $font-m
+		+respond-min($break-desktop-min)
+			font-size: $font-ml
+	&__title
+		@extend %teaser-title
+		color: $white
+		font-size: $font-xxxl
+		line-height: 1.12em

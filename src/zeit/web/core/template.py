@@ -4,9 +4,9 @@ import logging
 import mimetypes
 import re
 import time
+import types
 import urllib
 import urlparse
-
 import jinja2
 import babel.dates
 import pyramid.threadlocal
@@ -596,6 +596,21 @@ def attr_safe(text):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
+
+
+@zeit.web.register_global
+def list(iterable):
+    return types.ListType(iterable)
+
+
+@zeit.web.register_global
+def tuple(iterable):
+    return types.TupleType(iterable)
+
+
+@zeit.web.register_global
+def dict(mapping):
+    return types.DictType(mapping)
 
 
 @zeit.web.register_global
