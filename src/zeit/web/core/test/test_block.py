@@ -92,3 +92,10 @@ def test_module_class_should_hash_as_expected():
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
     mod = zeit.web.core.block.Module(context)
     assert hash(mod) == 42
+
+
+def test_module_class_should_have_a_layout_attribute():
+    context = mock.Mock()
+    context.cpextra = 'lorem-ipsum'
+    mod = zeit.web.core.block.Module(context)
+    assert mod._layout.layout.id == 'lorem-ipsum'
