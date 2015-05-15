@@ -30,12 +30,13 @@ Change log for zeit.web
 
 - ZON-1520: Add canonical urls to ZON/ZMO
 
+- ZON-1521/22: ZMO articles and longform should have only one h1
+
+- ZON-1527: ZON HP has an H1-Logo
+
 - ZON-1519: Article: prevent superflous pagination slugs
 
 - ZON-1731: Refactor parquet and spektrum to extend default area template
-
-- BUG-251: Don't display "None" in image captions (fixes regression introduced
-  in 1.20.4 by fix for BUG-226).
 
 - ZON-1722: New version of jinja2
 
