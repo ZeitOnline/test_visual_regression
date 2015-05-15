@@ -5,6 +5,9 @@
 	{% if view.comments and view.comments.comment_count %}
 		<span class="comment-section__headline">
 			{{ view.comments.headline }}
+			{% if view.comments.pages.title %}
+			<small>{{ view.comments.pages.title }}</small>
+			{% endif %}
 		</span>
 		<a href="#comment-form" class="comment-section__button button">
 			Kommentieren

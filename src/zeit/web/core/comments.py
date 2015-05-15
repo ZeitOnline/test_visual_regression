@@ -205,15 +205,17 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     if page:
         thread['comments'] = (
             thread['comments'][(page - 1) * page_size: page * page_size])
-        first = ((page - 1) * page_size) + 1
-        last = min(comment_count, ((page - 1) * page_size) + page_size)
 
-        if first == last:
-            thread['headline'] = u'Kommentar {} von {}'.format(
-                first, comment_count)
-        else:
-            thread['headline'] = u'Kommentare {} – {} von {}'.format(
-                first, last, comment_count)
+        if thread['pages']['pager']:
+            first = ((page - 1) * page_size) + 1
+            last = min(comment_count, ((page - 1) * page_size) + page_size)
+
+            if first == last:
+                thread['pages']['title'] = u'Kommentar {} von {}'.format(
+                    first, comment_count)
+            else:
+                thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
+                    first, last, comment_count)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
