@@ -68,7 +68,7 @@
                 }
             },
             /**
-             * [changeMenu description]
+             * changeMenu all dom operations to switch between responsive modes
              * @param  {object} event
              * @param  {string} type  'mobile|desktop'
              * @param  {object} [panel] jQuery-Object of a panels tab element
@@ -97,7 +97,7 @@
                         $( this )
                             .attr( 'role', $( this ).data( 'role' ) )
                             .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
-                            .attr( 'id', id + $( this ).data( 'index' ) + '-tab' )
+                            .attr( 'id', id + '-' + $( this ).data( 'index' ) + '-tab' )
                             .attr( 'tabindex', '0' )
                             .addClass( 'infobox-tab__title--displayed' );
                     });
@@ -122,9 +122,26 @@
                         index = openPanels.first().data( 'index' ) || 1;
                         switchPanel( $( '#' + id + '-' + index + '-tab' ) );
                     }
-                    if ( panel ) {
-                        switchPanel( $( '#' + id + '-' + panel + '-tab' ) );
-                    }
+                }
+                if ( panel ) {
+                    switchPanel( $( '#' + id + '-' + panel + '-tab' ) );
+                }
+            },
+            /**
+             * pageHashInBox find possible url hash in infobox and return index
+             * @return {int} position of the linked element, if none, the first elements position
+             */
+            pageHashInBox = function() {
+                var hash, position = 0;
+                if ( win.location.hash ) {
+                    hash = win.location.hash.substring( 1 );
+                    $that.find( '.infobox-tab' ).each( function( index, elem ) {
+                        if ( elem.id === hash ) {
+                            position = index + 1;
+                            return false;
+                        }
+                    });
+                    return position > 0 ? position : 1;
                 }
             },
             state;
@@ -142,7 +159,7 @@
             // listener change in a11y functionality
             $( this ).on( 'infoboxChange', changeMenu );
             // trigger for first load
-            $that.trigger( 'infoboxChange', [ state, 1 ] );
+            $that.trigger( 'infoboxChange', [ state, pageHashInBox() ] );
             // state checker
             $( window ).on( 'resize', function() {
                 var newstate = responsiveState();
@@ -155,6 +172,12 @@
             $( '.infobox-tab__title', this ).on( 'click', function( event ) {
                 event.preventDefault();
                 switchPanel( $( this ) );
+                if ( state === 'desktop' ) {
+                    var id = $( this ).attr( 'id' );
+                    if ( history.pushState ) {
+                        history.pushState( null, null, '#' + id.substring( 0, id.length - 4 ) );
+                    }
+                }
             });
             $( '.infobox-tab__title', this ).on( 'keypress', function( event ) {
                 var code = event.keyCode || event.which;
