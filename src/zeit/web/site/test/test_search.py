@@ -178,7 +178,7 @@ def test_successful_search_result_should_produce_valid_resultset(
     def search(self, q, **kw):
         return pysolr.Results(
             [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
-                for i in range(1, 9)], 42)
+                for i in range(1, 9)], 8)
     monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
     assert len([a for b in search_area.values() for a in b if b]) == 8
 
@@ -194,7 +194,7 @@ def test_successful_search_result_should_render_in_browser(
             {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
             {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit'},
             {'uniqueId': 'http://xml.zeit.de/artikel/artikel-ohne-assets'}
-        ], 42)
+        ], 3)
     monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
 
     browser = testbrowser('{}/suche/index'.format(testserver.url))
