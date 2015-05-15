@@ -134,16 +134,26 @@ class Base(object):
 
     @zeit.web.reify
     def banner_channel(self):
-        channel = ''
-        if self.ressort:
-            myressort = self.ressort.replace('zeit-magazin', 'zeitmz')
-            # TODO: End discrepancy between testing and live ressorts!
-            myressort = myressort.replace('lebensart', 'zeitmz')
-            channel += myressort
-        if self.sub_ressort:
-            channel += '/' + self.sub_ressort.replace('-', 'und', 1)
-        channel += '/' + self.banner_type
-        return channel
+        # manually banner_id rules first
+        if self.context.banner_id is not None:
+            return self.context.banner_id
+        # second rule: angebote are mapped with two levels
+        if self.ressort == 'angebote':
+            _serie = self.serie.replace(' ', '_')
+            return '{}/{}'.format(self.ressort, _serie)
+        # third: do the mapping
+        mappings = zeit.web.core.banner.banner_id_mappings
+        for mapping in mappings:
+            if getattr(self, mapping['target'], None) == mapping['value']:
+                return mapping['banner_code']
+        # subressort?
+        if self.sub_ressort != '':
+            return '{}/{}'.format(self.ressort, self.sub_ressort)
+        # ressort ?
+        if self.ressort != '':
+            return self.ressort
+        # fallback of the fallbacks
+            return 'vermischtes'
 
     @zeit.web.reify
     def banner_type(self):
