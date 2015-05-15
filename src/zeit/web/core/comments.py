@@ -292,26 +292,6 @@ def _sort_comments(comments):
     return (comments_sorted, comment_index)
 
 
-def _reverse_comments(comments):
-
-    comment_replies = []
-    comments_reversed = []
-
-    while comments:
-        comment = comments.pop()
-
-        if comment['in_reply']:
-            comment_replies.insert(0, comment)
-        else:
-            comments_reversed.append(comment)
-
-            if len(comment_replies):
-                comments_reversed.extend(comment_replies)
-                comment_replies = []
-
-    return comments_reversed
-
-
 def request_counts(*unique_ids):
     """Send a POST request to receive multiple comment counts for a CP.
 
