@@ -571,28 +571,15 @@ def get_image_group(asset):
 
 
 @zeit.web.register_filter
-def get_module(block):
-    if not (zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block) and
-            block.visible):
-        return block
-    try:
-        module = zope.component.getAdapter(
-            block, zeit.edit.interfaces.IBlock, block.cpextra)
-    except (zope.component.interfaces.ComponentLookupError, TypeError):
-        return block
-    return module
+def get_module(module, name=None):
+    return zeit.web.core.utils.get_named_adapter(
+        module, zeit.edit.interfaces.IBlock, 'cpextra')
 
 
 @zeit.web.register_filter
 def get_area(area, name=None):
-    try:
-        name = area.kind if name is None else name
-        area = zope.component.getAdapter(
-            area, zeit.content.cp.interfaces.IRenderedArea, name)
-    except (zope.component.interfaces.ComponentLookupError, TypeError):
-        if name is None:
-            return get_area(area, name='')
-    return area
+    return zeit.web.core.utils.get_named_adapter(
+        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 
 
 @zeit.web.register_filter
