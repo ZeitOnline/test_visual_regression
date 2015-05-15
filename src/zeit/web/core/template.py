@@ -22,6 +22,7 @@ import zeit.content.cp.layout
 import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
+import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
 
@@ -148,21 +149,6 @@ def area_width(width):
 
 
 @zeit.web.register_filter
-def get_teaser_layout(teaser, layout, default=None):
-    if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
-        raise TypeError('Broken ref at {}'.format(teaser.uniqueId))
-    elif getattr(teaser, 'serie', None):
-        layout = 'zon-series'
-        if teaser.serie.column and get_column_image(teaser):
-            layout = 'zon-column'
-    elif getattr(teaser, 'blog', None):
-        layout = 'zon-blog'
-
-    return zope.component.getUtility(
-        zeit.web.core.interfaces.ITeaserMapping).get(layout, default or layout)
-
-
-@zeit.web.register_filter
 def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
@@ -175,7 +161,7 @@ def get_layout(block, request=None):
     try:
         key = request and hash(block)
     except (NotImplementedError, TypeError), e:
-        log.debug('Cannot hash and cache cp module layout: {}'.format(e))
+        log.debug('Cannot cache {} layout: {}'.format(block, e))
         key = None
 
     if key:
@@ -185,13 +171,35 @@ def get_layout(block, request=None):
             return layout
 
     try:
-        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
-            layout = block.cpextra
+        layout_id = block.layout.id
+    except AttributeError:
+        layout_id = 'hide'
+
+    try:
+        teaser = list(block)[0]
+    except (IndexError, TypeError):
+        if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
+            layout = layout_id
         else:
-            layout = get_teaser_layout(list(block)[0], block.layout.id)
-    except (AttributeError, IndexError, TypeError), e:
-        log.debug('Cannot produce a cp module layout: {}'.format(e))
-        return 'hide'
+            layout = 'hide'
+    else:
+        if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
+            log.debug('Broken ref at {}'.format(teaser.uniqueId))
+            layout = 'hide'
+        elif False:
+            # XXX What about placeholder containers?
+            layout = 'hide'
+        elif getattr(teaser, 'serie', None):
+            layout = 'zon-series'
+            if teaser.serie.column and get_column_image(teaser):
+                layout = 'zon-column'
+        elif getattr(teaser, 'blog', None):
+            layout = 'zon-blog'
+        else:
+            layout = layout_id
+
+    layout = zope.component.getUtility(
+        zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
     if key:
         request.teaser_layout[key] = layout
