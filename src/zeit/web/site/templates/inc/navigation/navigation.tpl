@@ -1,13 +1,15 @@
 <div class="main_nav">
 	<!-- logo -->
 	<div itemscope itemtype="http://schema.org/Organization" class="logo_bar">
-		<div class="logo_bar__image" itemprop="brand">
+		{% with tag_name = 'h1' if view.is_hp else 'div' %}
+		<{{ tag_name }} class="logo_bar__image" itemprop="brand">
 			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" id="hp.global.topnav.centerpages.logo">
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
 				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png">
 				ZEIT ONLINE
 			</a>
-		</div>
+		</{{ tag_name }}>
+		{% endwith %}
 		<div class="logo_bar__menue">
 			<a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
 				<div class="logo_bar__menue__image main_nav__icon--plain icon-zon-logo-navigation_menu"></div>

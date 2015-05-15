@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.21.3 (unreleased)
+1.22.1 (unreleased)
 -------------------
+
+- Nothing changed yet.
+
+
+1.22 (2015-05-15)
+-----------------
+
+- ZON-1700: Show relative dates for comments
 
 - ZON-1714: Add pagination for comments
 
@@ -28,12 +36,15 @@ Change log for zeit.web
 
 - ZON-1520: Add canonical urls to ZON/ZMO
 
+- ZON-1521/22: ZMO articles and longform should have only one h1
+
+- ZON-1527: ZON HP has an H1-Logo
+
 - ZON-1519: Article: prevent superflous pagination slugs
 
 - ZON-1731: Refactor parquet and spektrum to extend default area template
 
-- BUG-251: Don't display "None" in image captions (fixes regression introduced
-  in 1.20.4 by fix for BUG-226).
+- ZON-1722: New version of jinja2
 
 
 1.21.2 (2015-05-15)

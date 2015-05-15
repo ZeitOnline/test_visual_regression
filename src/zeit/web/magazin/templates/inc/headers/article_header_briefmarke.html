@@ -4,9 +4,9 @@
     <header class="article__head article__head--stamp is-constrained">
         <div class="article__head__stamp-wrap">
             {{ blocks[view.header_elem|block_type](view.header_elem) }}
-            {{ blocks.supertitle() }}
         </div>
         <h1>
+            {{ blocks.supertitle() }}
             {{ blocks.title() }}
         </h1>
         {{ blocks.subtitle(include_meta=True) }}

@@ -22,6 +22,10 @@
 {% endif %}
 {%- endblock %}
 
+{% block navigation %}
+    {{ lama.main_nav(view.context.main_nav_full_width, request, is_main_h1=False) }}
+{% endblock navigation %}
+
 {% block content %}
     <article class="article" id="js-article">
         <div class="article__wrap">

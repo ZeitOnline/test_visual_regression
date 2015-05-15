@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='1.21.2.dev0',
+    version='1.22.1.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -31,7 +31,7 @@ setup(
         'martian',
         'pyramid',
         'pyramid_beaker',
-        'pyramid_jinja2',
+        'pyramid_jinja2>=2.5',
         'pyramid_tm',
         'pyramid_debugtoolbar',
         'pyramid_mako',
