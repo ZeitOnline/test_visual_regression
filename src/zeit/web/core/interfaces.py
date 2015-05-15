@@ -38,11 +38,11 @@ class IDeltaHoursEntity(IDeltaTimeEntity):
 
 
 class IDeltaMinutesEntity(IDeltaTimeEntity):
-    """An babelfied minutes entity from a delta time"""
+    """A babelfied minutes entity from a delta time"""
 
 
 class IDeltaSecondsEntity(IDeltaTimeEntity):
-    """An babelfied seconds entity from a delta time"""
+    """A babelfied seconds entity from a delta time"""
 
 
 class INavigation(zope.interface.Interface):
