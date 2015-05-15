@@ -14,10 +14,10 @@ hide = {'days': 0, 'hours': 3}
 locale = 'de_DE'
 
 
-def utcnow():
+def get_base_date(date):
     # XXX Wrapper function needed on module level, because we need to patch
     #     it in tests.
-    return datetime.datetime.utcnow()
+    return datetime.datetime.now(date.tzinfo)
 
 
 def parse_date(date,
@@ -40,8 +40,6 @@ def mod_date(resource):
 
 @zeit.web.register_filter
 def format_comment_date(comment_date, base_date=None):
-    if base_date is None:
-        base_date = datetime.datetime.now(comment_date.tzinfo)
     interval = DeltaTime(comment_date, base_date)
     if interval.delta.days < 365:
         return interval.get_time_since_comment_posting()
@@ -54,14 +52,8 @@ def format_comment_date(comment_date, base_date=None):
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
     if modification is not None:
-        return get_delta_time_from_datetime(modification.replace(tzinfo=None),
-                                            base_date)
-
-
-@zeit.web.register_global
-def get_delta_time_from_datetime(datetime, base_date=None):
-    dt = DeltaTime(datetime, base_date)
-    return dt.get_time_since_modification()
+        dt = DeltaTime(modification, base_date)
+        return dt.get_time_since_modification()
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)
@@ -133,7 +125,7 @@ class DeltaTime(object):
 
     def __init__(self, date, base_date=None):
         self.date = date
-        self.base_date = base_date or utcnow()
+        self.base_date = base_date or get_base_date(date)
         self.delta = self.base_date - self.date
 
     def _get_babelfied_delta_time(self):
