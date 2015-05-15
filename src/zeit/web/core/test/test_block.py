@@ -87,11 +87,8 @@ def test_image_should_be_fail_if_is_empty_doesnot_exist():
     assert image is None
 
 
-def test_module_class_should_hash_and_compare_as_expected():
+def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
-    mod1 = zeit.web.core.block.Module(context)
-    mod2 = zeit.web.core.block.Module(context)
-    assert hash(mod1) == 42
-    assert mod1 == mod2
-    assert not mod1 != mod2
+    mod = zeit.web.core.block.Module(context)
+    assert hash(mod) == 42
