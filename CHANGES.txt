@@ -4,6 +4,9 @@ Change log for zeit.web
 1.21.3 (unreleased)
 -------------------
 
+ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xml
+           with the latest versions from the zeit.content.cp repository.
+
 - ZON-1714: Add pagination for comments
 
 - ZON-1719: Sort comments
@@ -31,6 +34,8 @@ Change log for zeit.web
 - ZON-1519: Article: prevent superflous pagination slugs
 
 - ZON-1731: Refactor parquet and spektrum to extend default area template
+
+- ZON-1731: Prepare centerpage areas for dynamic operation
 
 - BUG-251: Don't display "None" in image captions (fixes regression introduced
   in 1.20.4 by fix for BUG-226).
