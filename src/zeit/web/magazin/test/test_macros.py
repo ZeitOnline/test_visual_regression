@@ -6,6 +6,9 @@ import pyramid.threadlocal
 import pyramid.config
 import lxml
 
+from zeit.cms.checkout.helper import checked_out
+import zeit.cms
+
 
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
@@ -338,6 +341,15 @@ def test_image_macro_should_not_autoescape_markup(testserver, testbrowser):
     browser = testbrowser('%s/feature/feature_longform' % testserver.url)
     text = browser.cssselect('.figure-stamp--right .figure__text')[0]
     assert u'Heckler & Koch' in text.text
+
+
+def test_image_macro_should_hide_none(testserver, testbrowser):
+    # XXX I'd much rather change a caption in the article, but trying
+    # to checkout raises ConstrainedNotSatisfiedError: xl-header. :-(
+    with mock.patch('zeit.web.core.block._inline_html') as inline:
+        inline.return_value = None
+        browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+        assert '<span class="figure__text">None</span>' not in browser.contents
 
 
 def test_macro_meta_author_should_produce_html_if_author_exists(

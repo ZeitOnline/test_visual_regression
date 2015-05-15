@@ -93,6 +93,20 @@ def test_out_of_scope_pagination_should_produce_404_page(testserver):
     assert resp.status_code == 404
 
 
+def test_article_should_redirect_page_one(testserver):
+    resp = requests.get('%s/zeit-online/article/01/seite-1' % testserver.url,
+                        allow_redirects=False)
+    assert (resp.headers['location'] ==
+            '%s/zeit-online/article/01' % testserver.url)
+    assert resp.status_code == 301
+
+
+def test_single_page_article_should_error_on_all_pages_view(testserver):
+    resp = requests.get('%s/zeit-online/article/01/komplettansicht' %
+                        testserver.url, allow_redirects=False)
+    assert resp.status_code == 404
+
+
 def test_malformed_paginaton_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/artikel/03/seite-abc' % testserver.url,
                         allow_redirects=False)

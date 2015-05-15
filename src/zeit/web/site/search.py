@@ -252,13 +252,6 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
         return self.page
 
     @zeit.web.reify
-    def next_page(self):
-        if self.current_page == self.total_pages:
-            return
-        else:
-            return min(self.total_pages, self.current_page + 1)
-
-    @zeit.web.reify
     def pagination(self):
         return zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
