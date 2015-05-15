@@ -4,6 +4,8 @@ Change log for zeit.web
 1.22.1 (unreleased)
 -------------------
 
+- ZON-1733: Enable deeplinks and working redirects for comments
+
 - Diverse fixes: fix infobox, fix html conformity, fix a11y errors
 
 
