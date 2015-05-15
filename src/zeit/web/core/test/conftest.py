@@ -105,6 +105,8 @@ settings = {
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
+    'vivi_zeit.web_banner-id-mappings': (
+        'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
     'vivi_zeit.web_navigation': (
         'egg://zeit.web.core/data/config/navigation.xml'),
     'vivi_zeit.web_navigation-services': (

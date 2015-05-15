@@ -1,0 +1,29 @@
+<banner_id_mappings>
+  <!--
+    Implemetierungshinweis Mapping:
+    target = Eigenschaft an der das Mapping ausgelöst wird, bspw. Ressort, Subressort, Serie
+    value = der Ausgangswert der gesucht wird
+    banner_code = Bannercode in der alten Schreibweise 'level2[/level3]' (backwardscompatible)
+    Wurde ein Mapping gefunden, Verarbeitung beenden, also positioning counts!
+  -->
+  <mapping target="ressort" value="zeit-magazin" banner_code="zeitmz" />
+  <mapping target="ressort" value="lebensart" banner_code="zeitmz" />
+  <mapping target="ressort" value="mobilitaet" banner_code="auto" />
+  <mapping target="product-id" value="news" banner_code="news" />
+  <mapping target="product-id" value="sid" banner_code="sid" />
+  <mapping target="ressort" value="foto" banner_code="kultur" />
+  <mapping target="series" value="geldspezial" banner_code="geldspezial" />
+  <mapping target="sub_ressort" value="zeit wissen" banner_code="wissen/zeit_wissen" />
+  <mapping target="sub_ressort" value="zeit campus" banner_code="wissen/zeit_campus" />
+  <mapping target="sub_ressort" value="zeit geschichte" banner_code="wissen/zeit_geschichte" />
+  <mapping target="sub_ressort" value="das wissen dieser welt" banner_code="wissen/bildungskanon" />
+  <mapping target="series" value="spiele" banner_code="spiele" />
+  <mapping target="ressort" value="campus" banner_code="studium" />
+  <mapping target="series" value="reise" banner_code="reisen" />  
+  <mapping target="sub_ressort" value="computer" banner_code="digital" />
+  <mapping target="ressort" value="technik" banner_code="digital" />
+  <mapping target="topic" value="technik" banner_code="digital" />
+  <mapping target="ressort" value="ranking" banner_code="studium" />
+  <mapping target="topic" value="reisen" banner_code="reisen" />
+  <mapping target="topic" value="sport" banner_code="sport" />
+</banner_id_mappings>
