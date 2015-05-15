@@ -153,7 +153,19 @@ def request_thread(path):
         return
 
 
+<<<<<<< Updated upstream
 def get_thread(unique_id, destination=None, sort='asc', page=None):
+=======
+def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
+    """Return a dict representation of the comment thread of the given
+    article.
+
+    :param destination: URL of the redirect destination
+    :param sort: Sort order of comments, desc or asc
+    :param page: Pagination value
+    :rtype: dict or None
+    """
+>>>>>>> Stashed changes
     thread = get_cacheable_thread(unique_id)
     if thread is None:
         return
