@@ -4,7 +4,7 @@ Change log for zeit.web
 1.22.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Diverse fixes: fix infobox, fix html conformity, fix a11y errors
 
 
 1.22 (2015-05-15)
@@ -45,8 +45,6 @@ Change log for zeit.web
 - ZON-1731: Refactor parquet and spektrum to extend default area template
 
 - ZON-1722: New version of jinja2
-
-- Diverse fixes: fix infobox, fix html conformity, fix a11y errors
 
 
 1.21.2 (2015-05-15)
