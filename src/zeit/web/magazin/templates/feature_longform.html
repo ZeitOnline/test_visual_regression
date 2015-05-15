@@ -1,9 +1,5 @@
 {% extends "zeit.web.magazin:templates/longform.html" %}
 
-{% block pagetitle %}
-<title>{{ view.pagetitle | replace('ZEITmagazin', 'ZEIT ONLINE') }}</title>
-{% endblock pagetitle %}
-
 {% block sharing_meta -%}
     <meta name="twitter:card" content="{{view.twitter_card_type }}">
     <meta name="twitter:site" content="@zeitonline">

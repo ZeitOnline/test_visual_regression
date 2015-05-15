@@ -216,7 +216,7 @@
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__text">{{ obj.caption | safe | hide_none }}</span>
+                <span class="figure__text">{{ obj.caption | hide_none | safe }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
@@ -236,7 +236,7 @@
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect article__head-image">
         {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption | safe | hide_none }}{{ obj.copyright }}
+    </div>{{ obj.caption | hide_none | safe }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro video(obj) -%}
@@ -289,7 +289,7 @@
             {% endif -%}
             <div class="comment__head__meta">
                 <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
-                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
+                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.created | format_comment_date }}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{ comment.role }}</div>
                 {% endif -%}

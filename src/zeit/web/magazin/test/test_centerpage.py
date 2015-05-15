@@ -38,43 +38,6 @@ def test_homepage_should_have_buzz_module_centerpage_should_not(
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
     assert '<div class="cp_buzz">' not in browser.contents
 
-# commented out for first launch (as)
-# def test_centerpage_should_have_pagetitle_in_body_but_hp_not(
-#         selenium_driver, testserver):
-#     driver = selenium_driver
-#     driver.get('%s/zeit-magazin/index' % testserver.url)
-#     assert len(driver.find_elements_by_css_selector('.cp_title')) == 0
-#     driver.get('%s/centerpage/lebensart' % testserver.url)
-#     pagetitle_in_body = driver.find_elements_by_css_selector('.cp_title')
-#     assert pagetitle_in_body[0].text.strip() == "ZMO"
-
-
-def test_centerpage_should_have_correct_page_title(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<title>ZMO CP: ZMO | ZEITmagazin</title>' in browser.contents
-
-
-def test_centerpage_should_have_correct_seo_title(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<title>SEO title | ZEITmagazin</title>' in browser.contents
-
-
-def test_hp_should_have_correct_title(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    assert '<title>My Test SEO - ZEITmagazin ONLINE</title>' in (
-        browser.contents)
-
-
-def test_centerpage_should_have_page_meta_description(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<meta name="description" content="ZMO CP">' in browser.contents
-
-
-def test_centerpage_should_have_seo_description(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
-    assert '<meta name="description" content="SEO description">' in (
-        browser.contents)
-
 
 def test_centerpage_should_have_default_keywords(testserver, testbrowser):
     # Default means ressort and sub ressort respectively

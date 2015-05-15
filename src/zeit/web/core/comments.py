@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 
 from BeautifulSoup import BeautifulSoup
+import babel.dates
 import collections
 import datetime
+import itertools
+import logging
 import lxml.etree
+import math
 import repoze.lru
 import requests
 import requests.exceptions
 import zope.component
-import itertools
-import logging
 
 import zeit.cms.interfaces
 
-from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
+import zeit.web.core.template
+import zeit.web.core.utils
 
 
 cache_maker = repoze.lru.CacheMaker()
@@ -97,13 +100,29 @@ def comment_to_dict(comment):
     dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
            'date/hour/text()', 'date/minute/text()')
 
-    # TODO: Catch name, timestamp and cid unavailabilty in element tree.
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    utc = babel.dates.get_timezone('UTC')
+    created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)
+                                ).replace(tzinfo=utc).astimezone(tz)
+    changed = comment.xpath('changed/text()')
+
+    if changed:
+        changed = datetime.datetime.fromtimestamp(float(changed[0]), tz)
+
+        # the agatho thread does not contain seconds for the creation date
+        # for newly created comments, copy the seconds from the "changed" date
+        # to enable "5 seconds ago" display
+        # whould be easier if we get the original "created" date from drupal
+        if created.replace(second=59) > changed:
+            created = created.replace(second=changed.second)
+
+    # TODO: Catch name, creation date and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
-        timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
+        created=created,
         text=content,
         role=', '.join(roles),
         fans=','.join(fans),
@@ -150,18 +169,39 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
-    thread['page'] = page
-    c_len = len(thread['comments'])
-    total = c_len // page_size
-    thread['page_total'] = total if c_len % page_size == 0 else total + 1
+    comments = len(thread['comments'])
+    pages = int(math.ceil(float(comments) / float(page_size)))
+
+    # sanitize page value
+    if page:
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+
+        if page < 1 or page > pages:
+            page = 1
+
+    thread['headline'] = '{} {}'.format(
+        comments, 'Kommentar' if comments == 1 else 'Kommentare')
+    thread['pages'] = {
+        'current': page,
+        'total': pages,
+        'pager': zeit.web.core.template.calculate_pagination(page, pages)
+    }
 
     if page:
-        if page <= thread['page_total']:
-            thread['comments'] = (
-                thread['comments'][(page - 1) * page_size: page * page_size])
+        thread['comments'] = (
+            thread['comments'][(page - 1) * page_size: page * page_size])
+        first = ((page - 1) * page_size) + 1
+        last = min(comments, ((page - 1) * page_size) + page_size)
+
+        if first == last:
+            thread['headline'] = u'Kommentar {} von {}'.format(
+                first, comments)
         else:
-            thread['comments'] = []
-            thread['page'] = '{} (invalid)'.format(page)
+            thread['headline'] = u'Kommentare {} – {} von {}'.format(
+                first, last, comments)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
@@ -209,7 +249,7 @@ def get_cacheable_thread(unique_id):
         return dict(
             comments=comments,
             index=index,
-            comment_count=to_int(comment_count),
+            comment_count=zeit.web.core.utils.to_int(comment_count),
             sort='asc',
             nid=comment_nid)
     except (IndexError, AttributeError):

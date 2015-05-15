@@ -5,7 +5,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">My Test SEO - ZEITmagazin ONLINE ist die emotionale Seite von ZEIT ONLINE. Hier finden Sie tagesaktuellen Magazinjournalismus zu Mode, Design, Essen, Trinken und Leben.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">My Test SEO - ZEITmagazin ONLINE ist die emotionale Seite von ZEIT ONLINE.</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">My Test SEO - ZEITmagazin ONLINE</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>

@@ -64,45 +64,6 @@ def format_date(obj, type='short'):
 
 
 @zeit.web.register_filter
-def format_date_ago(dt, precision=2, past_tense='vor {}',
-                    future_tense='in {}'):
-    # customization of https://bitbucket.org/russellballestrini/ago :)
-    delta = dt
-    if not isinstance(dt, datetime.timedelta):
-        delta = datetime.datetime.now() - dt
-
-    the_tense = past_tense
-    if delta < datetime.timedelta(0):
-        the_tense = future_tense
-
-    delta = abs(delta)
-    d = {
-        'Jahr': int(delta.days / 365),
-        'Tag': int(delta.days % 365),
-        'Stunde': int(delta.seconds / 3600),
-        'Minute': int(delta.seconds / 60) % 60,
-        'Sekunde': delta.seconds % 60
-    }
-    hlist = []
-    count = 0
-    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
-    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
-                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
-    for unit in units:
-        unit_displayed = unit
-        if count >= precision:
-            break  # met precision
-        if d[unit] == 0:
-            continue  # skip 0's
-        if d[unit] != 1:
-            unit_displayed = units_plural[unit]
-        hlist.append('%s %s' % (d[unit], unit_displayed))
-        count += 1
-    human_delta = ', '.join(hlist)
-    return the_tense.format(human_delta)
-
-
-@zeit.web.register_filter
 def obj_debug(value):
     try:
         res = []

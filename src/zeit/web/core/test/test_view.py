@@ -1,10 +1,17 @@
+# -*- coding: utf-8 -*-
+import mock
 import pytest
 import requests
 import urllib2
 
 import zeit.web.core.date
 import zeit.web.core.interfaces
+import zeit.web.magazin.view
+import zeit.web.magazin.view_article
+import zeit.web.magazin.view_centerpage
 import zeit.web.site.view
+import zeit.web.site.view_article
+import zeit.web.site.view_centerpage
 
 
 @pytest.fixture
@@ -61,7 +68,7 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
                                                                  testbrowser,
                                                                  monkeypatch):
     now = zeit.web.core.date.parse_date('2014-10-15T16:53:59.780412+00:00')
-    monkeypatch.setattr(zeit.web.core.date, 'utcnow', lambda: now)
+    monkeypatch.setattr(zeit.web.core.date, 'get_base_date', lambda *_: now)
 
     browser = testbrowser(
         '{}/json/delta_time?'
@@ -187,3 +194,54 @@ def test_adcontroller_handle_return_value(mock_ad_view):
                         ).adcontroller_handle == 'video_artikel'
     assert mock_ad_view('quiz', 'politik', 'deutschland'
                         ).adcontroller_handle == 'quiz'
+
+
+def test_centerpage_should_have_manual_seo_pagetitle(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE'
+
+
+def test_centerpage_should_have_generated_seo_pagetitle(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/lebensart-3')
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.pagetitle == u'ZMO CP: ZMO | ZEITmagazin'
+
+
+def test_article_should_have_postfixed_seo_pagetitle(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/06')
+    view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert view.pagetitle == (u'Friedhof Hamburg-Ohlsdorf: '
+                              'Im Schnabel des Graureihers | ZEITmagazin')
+
+
+def test_homepage_should_have_unpostfixed_seo_pagetitle(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.pagetitle == u'ZON title'
+
+
+def test_centerpage_should_have_manual_seo_pagedescription(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.pagedescription == (u'My Test SEO - ZEITmagazin ONLINE ist '
+                                    'die emotionale Seite von ZEIT ONLINE.')
+
+
+def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/lebensart-3')
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.pagedescription == u'ZMO CP'
+
+
+def test_centerpage_should_have_default_seo_pagedescription(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.pagedescription == zeit.web.magazin.view.Base.seo_title_default
