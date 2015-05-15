@@ -267,10 +267,14 @@ class PostCommentResource(PostComment):
         if self.request.params.get('ajax') == 'true':
             return result
         else:
-            location = zeit.web.core.template.append_get_params(
-                self.request, action=None, pid=None)
             if self.new_cid:
+                location = zeit.web.core.template.append_get_params(
+                    self.request, action=None, pid=None, page=None,
+                    cid=self.new_cid)
                 location = '{}#cid-{}'.format(location, self.new_cid)
+            else:
+                location = zeit.web.core.template.append_get_params(
+                    self.request, action=None, pid=None)
 
             return pyramid.httpexceptions.HTTPSeeOther(
                 location=location)

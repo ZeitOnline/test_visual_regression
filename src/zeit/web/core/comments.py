@@ -153,13 +153,14 @@ def request_thread(path):
         return
 
 
-def get_thread(unique_id, destination=None, sort='asc', page=None):
+def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
     """Return a dict representation of the comment thread of the given
     article.
 
     :param destination: URL of the redirect destination
     :param sort: Sort order of comments, desc or asc
     :param page: Pagination value
+    :param cid: Comment ID to calculate appropriate pagination
     :rtype: dict or None
     """
     thread = get_cacheable_thread(unique_id)
@@ -183,6 +184,20 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
 
     comment_count = len(thread['comments'])
     pages = int(math.ceil(float(comment_count) / float(page_size)))
+
+    # show page for requested comment
+    if pages > 1 and cid:
+        try:
+            cid = int(cid)
+        except ValueError:
+            cid = None
+        else:
+            if thread['index'][cid]:
+                comment = thread['index'][cid]
+                position = thread['comments'].index(comment)
+
+            if position:
+                page = (position // page_size) + 1
 
     # sanitize page value
     if page:
