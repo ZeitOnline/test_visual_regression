@@ -127,6 +127,12 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def serie(self):
+        if self.context.serie is None:
+            return ''
+        return self.context.serie.serienname
+
+    @zeit.web.reify
     def banner_channel(self):
         channel = ''
         if self.ressort:
