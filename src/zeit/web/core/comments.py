@@ -116,13 +116,13 @@ def comment_to_dict(comment):
         if created.replace(second=59) > changed:
             created = created.replace(second=changed.second)
 
-    # TODO: Catch name, timestamp and cid unavailabilty in element tree.
+    # TODO: Catch name, creation date and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
-        timestamp=created,
+        created=created,
         text=content,
         role=', '.join(roles),
         fans=','.join(fans),

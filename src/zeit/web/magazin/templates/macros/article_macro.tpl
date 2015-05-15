@@ -289,7 +289,7 @@
             {% endif -%}
             <div class="comment__head__meta">
                 <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
-                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.timestamp | format_comment_date }}</a>
+                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.created | format_comment_date }}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{ comment.role }}</div>
                 {% endif -%}
