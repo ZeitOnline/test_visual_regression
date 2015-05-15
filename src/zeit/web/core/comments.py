@@ -154,23 +154,35 @@ def request_thread(path):
 
 
 def get_thread(unique_id, destination=None, sort='asc', page=None):
+    """Return a dict representation of the comment thread of the given
+    article.
+
+    :param destination: URL of the redirect destination
+    :param sort: Sort order of comments, desc or asc
+    :param page: Pagination value
+    :rtype: dict or None
+    """
     thread = get_cacheable_thread(unique_id)
     if thread is None:
         return
 
     # We do not want to touch the references of the cached thread
     thread = thread.copy()
-    thread['comments'] = list(thread['comments'])
+    sorted_tree = thread['sorted_tree'].values()
+    del thread['sorted_tree']
 
-    if not(thread['sort'] == sort):
-        thread['comments'] = _reverse_comments(thread['comments'])
-        thread['sort'] = sort
+    if (sort != 'asc'):
+        sorted_tree = reversed(sorted_tree)
+        thread['sort'] = 'desc'
+
+    thread['comments'] = list(itertools.chain(
+        *[[li[0]] + li[1] for li in sorted_tree]))
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
-    comments = len(thread['comments'])
-    pages = int(math.ceil(float(comments) / float(page_size)))
+    comment_count = len(thread['comments'])
+    pages = int(math.ceil(float(comment_count) / float(page_size)))
 
     # sanitize page value
     if page:
@@ -183,7 +195,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
             page = 1
 
     thread['headline'] = '{} {}'.format(
-        comments, 'Kommentar' if comments == 1 else 'Kommentare')
+        comment_count, 'Kommentar' if comment_count == 1 else 'Kommentare')
     thread['pages'] = {
         'current': page,
         'total': pages,
@@ -194,14 +206,14 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
         thread['comments'] = (
             thread['comments'][(page - 1) * page_size: page * page_size])
         first = ((page - 1) * page_size) + 1
-        last = min(comments, ((page - 1) * page_size) + page_size)
+        last = min(comment_count, ((page - 1) * page_size) + page_size)
 
         if first == last:
             thread['headline'] = u'Kommentar {} von {}'.format(
-                first, comments)
+                first, comment_count)
         else:
             thread['headline'] = u'Kommentare {} – {} von {}'.format(
-                first, last, comments)
+                first, last, comment_count)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
@@ -216,13 +228,6 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
 @cache_maker.expiring_lrucache(
     maxsize=1000, timeout=3600, name='comment_thread')
 def get_cacheable_thread(unique_id):
-    """Return a dict representation of the comment thread of the given
-    article.
-
-    :param destination: URL of the redirect destination
-    :param sort: Sort order of comments, desc or asc
-    :rtype: dict or None
-    """
 
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
     thread = request_thread(path)
@@ -243,11 +248,11 @@ def get_cacheable_thread(unique_id):
         return
 
     comment_list = list(comment_to_dict(c) for c in comment_list)
-    comments, index = _sort_comments(comment_list)
+    sorted_tree, index = _sort_comments(comment_list)
 
     try:
         return dict(
-            comments=comments,
+            sorted_tree=sorted_tree,
             index=index,
             comment_count=zeit.web.core.utils.to_int(comment_count),
             sort='asc',
@@ -282,10 +287,7 @@ def _sort_comments(comments):
                 log.error("The comment with the cid {} is a reply, but"
                           "no ancestor could be found".format(comment['cid']))
         comment_index[comment['cid']] = comment
-    return (
-        list(itertools.chain(
-            *[[li[0]] + li[1] for li in comments_sorted.values()])),
-        comment_index)
+    return (comments_sorted, comment_index)
 
 
 def _reverse_comments(comments):
