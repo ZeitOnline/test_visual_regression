@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <banner_id_mappings>
   <!--
     Implemetierungshinweis Mapping:
@@ -12,14 +13,14 @@
   <mapping target="product-id" value="news" banner_code="news" />
   <mapping target="product-id" value="sid" banner_code="sid" />
   <mapping target="ressort" value="foto" banner_code="kultur" />
-  <mapping target="series" value="geldspezial" banner_code="geldspezial" />
+  <mapping target="serie" value="geldspezial" banner_code="geldspezial" />
   <mapping target="sub_ressort" value="zeit wissen" banner_code="wissen/zeit_wissen" />
   <mapping target="sub_ressort" value="zeit campus" banner_code="wissen/zeit_campus" />
   <mapping target="sub_ressort" value="zeit geschichte" banner_code="wissen/zeit_geschichte" />
   <mapping target="sub_ressort" value="das wissen dieser welt" banner_code="wissen/bildungskanon" />
   <mapping target="series" value="spiele" banner_code="spiele" />
   <mapping target="ressort" value="campus" banner_code="studium" />
-  <mapping target="series" value="reise" banner_code="reisen" />  
+  <mapping target="serie" value="reise" banner_code="reisen" />  
   <mapping target="sub_ressort" value="computer" banner_code="digital" />
   <mapping target="ressort" value="technik" banner_code="digital" />
   <mapping target="topic" value="technik" banner_code="digital" />
