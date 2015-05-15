@@ -52,7 +52,7 @@ def format_comment_date(comment_date, base_date=None):
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
     if modification is not None:
-        dt = DeltaTime(modification, base_date)
+        dt = DeltaTime(modification.replace(tzinfo=None), base_date)
         return dt.get_time_since_modification()
 
 
