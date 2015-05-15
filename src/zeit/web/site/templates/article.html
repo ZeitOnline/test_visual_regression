@@ -41,23 +41,27 @@
             <span class="sharing-menu__title js-sharing-menu">Teilen</span>
             <ul class="sharing-menu__items">
                 <li class="sharing-menu__item">
-                    <a class="sharing-menu__link sharing-menu__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url }}" target="_blank">
+                    {# for reference: not-url encoded campaing params = ?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x #}
+                    <a class="sharing-menu__link sharing-menu__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url }}%3Fwt_zmc%3Dsm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x%26utm_medium%3Dsm%26utm_source%3Dfacebook_zonaudev_int%26utm_campaign%3Dfacebook_referrer%26utm_content%3Dzeitde_dskshare_link_x" target="_blank">
                         Facebook
                     </a>
                 </li>
                 <li class="sharing-menu__item">
-                    <a class="sharing-menu__link sharing-menu__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&amp;url={{ view.content_url }}&amp;via=zeitonline" target="_blank">
+                    {# for reference: not-url encoded campaing params = ?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x #}
+                    <a class="sharing-menu__link sharing-menu__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title }}&via=zeitonline&url={{ view.content_url }}%3Fwt_zmc%3Dsm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x%26utm_medium%3Dsm%26utm_source%3Dtwitter_zonaudev_int%26utm_campaign%3Dtwitter_referrer%26utm_content%3Dzeitde_dskshare_link_x" target="_blank">
                         Twitter
                     </a>
                 </li>
                 {# Google+ will be closed in the near future, all info is fetched automaticall, no params needed #}
                 <li class="sharing-menu__item">
-                    <a class="sharing-menu__link sharing-menu__link--google" href="https://plus.google.com/share?url={{ view.content_url }}" target="_blank">
+                    {# for reference: not-url encoded campaing params = ?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x #}
+                    <a class="sharing-menu__link sharing-menu__link--google" href="https://plus.google.com/share?url={{ view.content_url }}%3Fwt_zmc%3Dsm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x%26utm_medium%3Dsm%26utm_source%3Dgplus_zonaudev_int%26utm_campaign%3Dgplus_referrer%26utm_content%3Dzeitde_dskshare_link_x" target="_blank">
                         Google +
                     </a>
                 </li>
                 <li class="sharing-menu__item">
-                    <a class="sharing-menu__link sharing-menu__link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE&body=Artikel auf ZEIT ONLINE lesen: {{ view.content_url }}">
+                    {# for reference: not-url encoded campaing params = ?wt_zmc=sm.ext.zonaudev.mail.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=mail_zonaudev_ext&utm_campaign=mail_referrer&utm_content=zeitde_dskshare_link_x #}
+                    <a class="sharing-menu__link sharing-menu__link--mail" href="mailto:?subject={{ view.title }} - Artikel auf ZEIT ONLINE&body=Artikel auf ZEIT ONLINE lesen: {{ view.content_url }}%3Fwt_zmc%3Dsm.ext.zonaudev.mail.ref.zeitde.dskshare.link.x%26utm_medium%3Dsm%26utm_source%3Dmail_zonaudev_ext%26utm_campaign%3Dmail_referrer%26utm_content%3Dzeitde_dskshare_link_x">
                         Mail
                     </a>
                 </li>
