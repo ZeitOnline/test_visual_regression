@@ -194,10 +194,12 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
         else:
             if thread['index'][cid]:
                 comment = thread['index'][cid]
-                position = thread['comments'].index(comment)
-
-            if position:
-                page = (position // page_size) + 1
+                try:
+                    position = thread['comments'].index(comment)
+                except ValueError:
+                    position = None
+                else:
+                    page = (position // page_size) + 1
 
     # sanitize page value
     if page:
