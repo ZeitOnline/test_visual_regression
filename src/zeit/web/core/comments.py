@@ -210,7 +210,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
 
 
 @cache_maker.expiring_lrucache(
-    maxsize=1000, timeout=1, name='comment_thread')
+    maxsize=1000, timeout=3600, name='comment_thread')
 def get_cacheable_thread(unique_id):
 
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
