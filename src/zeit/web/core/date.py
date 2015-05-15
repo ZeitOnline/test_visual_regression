@@ -14,10 +14,10 @@ hide = {'days': 0, 'hours': 3}
 locale = 'de_DE'
 
 
-def utcnow():
+def get_base_date(date):
     # XXX Wrapper function needed on module level, because we need to patch
     #     it in tests.
-    return datetime.datetime.utcnow()
+    return datetime.datetime.now(date.tzinfo)
 
 
 def parse_date(date,
@@ -38,18 +38,22 @@ def mod_date(resource):
         return
 
 
+@zeit.web.register_filter
+def format_comment_date(comment_date, base_date=None):
+    interval = DeltaTime(comment_date, base_date)
+    if interval.delta.days < 365:
+        return interval.get_time_since_comment_posting()
+    else:
+        return babel.dates.format_datetime(
+            comment_date, "d. MMMM yyyy, H:mm 'Uhr'", locale=locale)
+
+
 @zeit.web.register_global
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
     if modification is not None:
-        return get_delta_time_from_datetime(modification.replace(tzinfo=None),
-                                            base_date)
-
-
-@zeit.web.register_global
-def get_delta_time_from_datetime(datetime, base_date=None):
-    dt = DeltaTime(datetime, base_date)
-    return dt.get_time_since_modification()
+        dt = DeltaTime(modification, base_date)
+        return dt.get_time_since_modification()
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)
@@ -102,18 +106,33 @@ class DeltaMinutesEntity(DeltaTimeEntity):
             threshold=1, locale=locale)
 
 
+@zope.interface.implementer(zeit.web.core.interfaces.IDeltaSecondsEntity)
+class DeltaSecondsEntity(DeltaTimeEntity):
+
+    def __init__(self, delta):
+        # Since babel does round timedeltas inconveniently,
+        # we need to perform some calculations manually.
+        super(DeltaSecondsEntity, self).__init__(delta)
+        seconds = self.delta.seconds % 60
+        self.number = seconds
+        self.text = babel.dates.format_timedelta(
+            babel.dates.timedelta(seconds=seconds),
+            threshold=1, locale=locale)
+
+
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTime)
 class DeltaTime(object):
 
     def __init__(self, date, base_date=None):
         self.date = date
-        self.base_date = base_date or utcnow()
+        self.base_date = base_date or get_base_date(date)
         self.delta = self.base_date - self.date
 
     def _get_babelfied_delta_time(self):
         self.days = zeit.web.core.date.DeltaDaysEntity(self.delta)
         self.hours = zeit.web.core.date.DeltaHoursEntity(self.delta)
         self.minutes = zeit.web.core.date.DeltaMinutesEntity(self.delta)
+        self.seconds = zeit.web.core.date.DeltaSecondsEntity(self.delta)
 
     def _filter_delta_time(self):
         if (self.days.number >= hide['days'] and self.hours.number +
@@ -121,15 +140,21 @@ class DeltaTime(object):
             self.days = None
             self.hours = None
             self.minutes = None
+            self.seconds = None
         elif self.days.number >= limit['days']:
             self.hours = None
             self.minutes = None
+            self.seconds = None
         elif self.hours.number + self.days.number * 24 >= limit['hours']:
             self.minutes = None
+            self.seconds = None
 
     def _stringify_delta_time(self):
+        if self.delta.days or self.delta.seconds > 59:
+            self.seconds = None
+
         human_readable = ' '.join(
-            i.text for i in (self.days, self.hours, self.minutes)
+            i.text for i in (self.days, self.hours, self.minutes, self.seconds)
             if i is not None and i.number != 0)
         if human_readable is '':
             return
@@ -137,10 +162,20 @@ class DeltaTime(object):
         # german cases (as in Kasus)
         return 'vor ' + human_readable.replace(
             'Tage', 'Tagen', 1).replace(
-            'Monate', 'Monaten', 1)
+            'Monate', 'Monaten', 1).replace(
+            'Jahre', 'Jahren', 1)
 
     def get_time_since_modification(self):
         self._get_babelfied_delta_time()
         self._filter_delta_time()
         stringified_dt = self._stringify_delta_time()
         return stringified_dt
+
+    def get_time_since_comment_posting(self):
+        self._get_babelfied_delta_time()
+        stringified_dt = self._stringify_delta_time()
+        if stringified_dt:
+            parts = stringified_dt.split(' ')[:5]
+            return ' '.join(parts)
+        else:
+            return ''
