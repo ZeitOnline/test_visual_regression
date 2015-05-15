@@ -172,7 +172,7 @@ def get_layout(block, request=None):
 
     try:
         layout_id = block.layout.id
-    except AttributeError:
+    except (AttributeError, TypeError):
         layout_id = 'hide'
 
     try:
