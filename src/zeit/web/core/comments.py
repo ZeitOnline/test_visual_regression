@@ -149,7 +149,6 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     if thread is None:
         return
 
-
     # We do not want to touch the references of the cached thread
     thread = thread.copy()
     sorted_tree = thread['sorted_tree'].values()
