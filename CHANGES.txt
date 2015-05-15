@@ -35,6 +35,8 @@ Change log for zeit.web
 - BUG-251: Don't display "None" in image captions (fixes regression introduced
   in 1.20.4 by fix for BUG-226).
 
+- Diverse fixes: fix infobox, fix html conformity, fix a11y errors
+
 
 1.21.2 (2015-05-15)
 -------------------
