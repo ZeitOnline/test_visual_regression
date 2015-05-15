@@ -87,6 +87,10 @@ class Application(object):
             self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
+        banner_id_mappings = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
+        zeit.web.core.banner.banner_id_mappings = (
+            zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
 
     def configure_series(self):
         series_source = maybe_convert_egg_url(
