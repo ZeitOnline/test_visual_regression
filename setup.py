@@ -31,7 +31,7 @@ setup(
         'martian',
         'pyramid',
         'pyramid_beaker',
-        'pyramid_jinja2',
+        'pyramid_jinja2>=2.5',
         'pyramid_tm',
         'pyramid_debugtoolbar',
         'pyramid_mako',
