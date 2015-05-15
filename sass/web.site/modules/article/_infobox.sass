@@ -1,59 +1,106 @@
 .infobox
 	background: $zon_lighter_grey
 	margin: remify(40px) remify(-20px)
+	overflow: hidden
 	padding: 0 remify(20px)
-	+respond-min($break-tablet-min)
-		padding: remify(50px 55px)
-		overflow: hidden
-	&__checkbox,
-	&__radio
-		+visuallyhidden
-	&__tab
-		border-bottom: 1px solid $zon_light_grey
-		&:last-of-type
-			border: none
+	.js &__navigation
+		display: none
 		+respond-min($break-tablet-min)
-			border: none
-	&__label
-		display: block
-		color: $zon_dark_grey
-		cursor: pointer
-		font-family: $font-tabletgothic
-		font-size: remify(14px)
-		font-weight: 700
-		letter-spacing: $zon-letter-spacing-l
-		line-height: remify(17px)
+			display: block
+			float: left
+			margin: remify(35px 40px 50px 40px)
+			width: remify(148px)
+		+respond-min($break-desktop-min)
+			margin: remify(35px 65px 50px 40px)
+			width: 180px
+	.js &__content
+		+respond-min($break-tablet-min)
+			float: left
+			margin: remify(50px 0)
+			width: remify(465px)
+		+respond-min($break-desktop-min)
+			width: remify(582px)
+
+.infobox-tab
+	margin: 0
+	padding: 0
+	border-bottom: 1px solid $zon_light_grey
+	+respond-min($break-tablet-min)
+		border: none
+	&:last-of-type
+		border: none
+	&__title
+		margin: 0
 		padding: remify(15px 0 13px 0)
 		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			border-bottom: 1px solid $zon_light_grey
+			&:last-of-type
+				border: none
+		.js &
+			display: none
+		.js &--displayed
+			display: block
+		&:focus
+			outline: 0
+	&__link
+		font-family: $font-tabletgothic
+		font-size: remify(14px)
+		font-weight: 300
+		letter-spacing: $zon-letter-spacing-l
+		line-height: remify(17px)
+		+link
+			color: $zon_dark_grey
+			text-decoration: none
 		+on-interaction
 			color: $black
+			text-decoration: underline
+		&:focus
+			outline: 0
 		&:after
 			background: $zon_mid_grey
 			border-radius: 3px
 			color: $white
 			content: "+"
 			font-family: sans-serif
-			font-weight: 100
+			font-weight: 700
 			height: remify(17px)
+			line-height: 1
 			margin-left: remify(10px)
 			text-align: center
-			vertical-align: text-bottom
+			text-decoration: none
+			vertical-align: middle
 			width: remify(17px)
 			+inline-block
 			+font-smoothing
-	&__title
-		line-height: 1
-		margin: 0
-		+respond-min($break-tablet-min)
-			display: none
-	&__inner
-		max-height: 0px
+			+respond-min($break-tablet-min)
+				display: none
+		&--active
+			font-weight: 700
+			text-decoration: none
+			&:after
+				content: "–"
+				text-decoration: none
+				+respond-min($break-tablet-min)
+					display: none
+		.js &--displayed
+			display: block
+	&__content
+		// aria attributes late added by javascript
+		// so these apply only progressively enhanced
 		overflow: hidden
+		&[aria-hidden='true']
+			max-height: 0
+		&[aria-hidden='false']
+			height: auto
+			max-height: 100000px // very large size just to animate container
 		// obviously we left the BEM path here
 		// cause in the moment, we have no influence on html in infoboxes
 		// for backwards compatibility puposes
 		// sorry for that, http://i.giphy.com/sSlq4iEQ4KdDa.gif
-		p
+		p,
+		li,
+		td
 			color: $zon_dark_grey
 			font-family: $font-tabletgothic
 			font-size: remify(14px)
@@ -74,56 +121,3 @@
 			margin: remify(8px 0 0 0)
 		img
 			max-width: 100%
-	&__navigation
-		display: none
-		+respond-min($break-tablet-min)
-			display: table-cell
-			width: remify(148px)
-		+respond-min($break-desktop-min)
-			width: remify(180px)
-	&__navtitle
-		border-bottom: 1px solid $zon_light_grey
-		&:last-child
-			border: none
-	&__navlabel
-		display: block
-		color: $zon_dark_grey
-		cursor: pointer
-		font-family: $font-tabletgothic
-		font-size: remify(14px)
-		font-weight: 700
-		letter-spacing: $zon-letter-spacing-l
-		line-height: remify(20px)
-		padding: remify(15px 0 11px 0)
-		text-transform: uppercase
-		&--checked
-			color: $black
-	&__content
-		+respond-min($break-tablet-min)
-			display: table-cell
-			padding-left: remify(40px)
-		+respond-min($break-desktop-min)
-			padding-left: remify(62px)
-
-
-// explicit unBEMmish code to realize acordion per css with checkboxes
-// sorry for that, http://i.giphy.com/sSlq4iEQ4KdDa.gif
-.infobox__checkbox:checked ~ .infobox__title > .infobox__label:after
-	content: "–"
-.infobox__checkbox:checked
-	& ~ .infobox__inner
-		height: auto
-		max-height: 100em
-		+transition(max-height 0.5s ease-in-out)
-	& ~ .infobox__title > .infobox__label
-		color: $zon-charcoal
-.infobox__radio:checked
-	+respond-min($break-tablet-min)
-		& ~ .infobox__inner
-			height: auto
-			max-height: 100em
-			+transition(max-height 0.5s ease-in-out)
-+old-ie
-	.lt-ie-9 .infobox .infobox__inner--active
-		height: auto
-		max-height: 100em
