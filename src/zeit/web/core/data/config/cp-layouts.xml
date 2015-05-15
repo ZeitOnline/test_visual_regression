@@ -17,7 +17,7 @@
         id="zon-topic"
         title="Dossier-Teaser"
         image_pattern="zon-topic"
-        areas="solo"
+        areas="topic"
         />
     <layout
         id="zon-square"
