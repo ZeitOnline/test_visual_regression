@@ -40,15 +40,16 @@
     {% endif -%}
 {%- endmacro %}
 
-{% macro main_nav(is_full_width, request, is_advertorial=False) -%}
+{% macro main_nav(is_full_width, request, is_advertorial=False, is_main_h1=True) -%}
+    {% set title_tag = 'h1' if is_main_h1 else 'div' %}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://{{ request.host }}/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
-                <h1 class="main-nav__logo__wrap">
+                <{{ title_tag }} class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
                     <span class="main-nav__logo__img icon-logo-zmo-small"></span>
-                </h1>
+                </{{ title_tag }}>
             </a>
             <div class="main-nav__menu">
                 {% if is_advertorial %}

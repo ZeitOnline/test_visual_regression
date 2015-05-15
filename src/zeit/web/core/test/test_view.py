@@ -68,7 +68,7 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
                                                                  testbrowser,
                                                                  monkeypatch):
     now = zeit.web.core.date.parse_date('2014-10-15T16:53:59.780412+00:00')
-    monkeypatch.setattr(zeit.web.core.date, 'utcnow', lambda: now)
+    monkeypatch.setattr(zeit.web.core.date, 'get_base_date', lambda *_: now)
 
     browser = testbrowser(
         '{}/json/delta_time?'

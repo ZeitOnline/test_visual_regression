@@ -5,6 +5,7 @@ import pyramid.httpexceptions
 import mock
 import pytest
 import zeit.web.core.view_comment
+import itertools
 from mock import patch
 import zope
 import requests
@@ -212,7 +213,14 @@ def test_comment_tree_should_be_flattened_on_level_two():
         cid=6)
 
     comments = [cid_1, cid_2, cid_3, cid_4, cid_5, cid_6]
+
     sorted_comments = zeit.web.core.comments._sort_comments(comments)[0]
+
+    # flatten list here to test, if the structure will be valid
+    # The flattening now actually happens in z.w.c.comments.get_thread
+    sorted_comments = list(itertools.chain(
+        *[[li[0]] + li[1] for li in sorted_comments.values()]))
+
     readable_comments = [
         (comment['cid'], comment['shown_num']) for comment in sorted_comments]
     assert readable_comments == (
