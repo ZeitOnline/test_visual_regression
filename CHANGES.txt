@@ -4,6 +4,8 @@ Change log for zeit.web
 1.21.3 (unreleased)
 -------------------
 
+- ZON-1700: Show relative dates for comments
+
 - ZON-1714: Add pagination for comments
 
 - ZON-1719: Sort comments
@@ -34,6 +36,8 @@ Change log for zeit.web
 
 - BUG-251: Don't display "None" in image captions (fixes regression introduced
   in 1.20.4 by fix for BUG-226).
+
+- ZON-1722: New version of jinja2
 
 
 1.21.2 (2015-05-15)

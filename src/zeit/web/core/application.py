@@ -231,9 +231,8 @@ class Application(object):
         self.config.add_jinja2_extension(
             zeit.web.core.jinja.ProfilerExtension)
 
-        env = self.config.registry.getUtility(
-            pyramid_jinja2.IJinja2Environment)
-
+        self.config.commit()
+        env = self.config.get_jinja2_environment()
         env.trim_blocks = True
 
         default_loader = env.loader
