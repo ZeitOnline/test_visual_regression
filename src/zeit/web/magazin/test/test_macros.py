@@ -6,9 +6,6 @@ import pyramid.threadlocal
 import pyramid.config
 import lxml
 
-from zeit.cms.checkout.helper import checked_out
-import zeit.cms
-
 
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
