@@ -186,9 +186,11 @@ class Base(object):
     @zeit.web.reify
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values"""
+        levels = self.banner_channel.split('/')
+        levels.append('')  # make sure levels is always long enough
         return [('$handle', self.adcontroller_handle),
-                ('level2', self.ressort),
-                ('level3', self.sub_ressort),
+                ('level2', levels[0]),
+                ('level3', levels[1]),
                 ('$autoSizeFrames', True),
                 ('keywords', ''),
                 ('tma', '')]
