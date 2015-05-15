@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import datetime
 import time
 import lxml
@@ -21,10 +20,10 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     assert len(html('.main_nav')) == 1, (
         'just one .main_nav should be present')
 
-    assert len(html('.main_nav > div')) == 7, ('seven divs within .main_nav')
+    assert len(html('.main_nav > div')) == 7, 'seven divs within .main_nav'
 
     assert len(html('.main_nav > div.logo_bar >'
-                    'div.logo_bar__image')) == 1, 'just one .logo_bar__image'
+                    'h1.logo_bar__image')) == 1, 'just one .logo_bar__image'
 
     assert len(html('.main_nav > div.logo_bar >'
                     'div.logo_bar__menue')) == 1, 'just one .logo_bar__menue'
@@ -182,8 +181,8 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'Form element is not present')
     assert html('label.hideme[for="q"]')[0] is not None, (
         'Hide me label is not present')
-    assert html('button.search__button[type="submit"]'
-                '[tabindex="2"]')[0] is not None, 'No search button present'
+    assert html('button.search__button[type="submit"]')[0] is not None, (
+        'No search button present')
     assert html('span.icon-zon-logo-navigation_suche'
                 '.search__button__image.'
                 'main_nav__icon--plain')[0] is not None, (
@@ -193,8 +192,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                 'main_nav__icon--hover')[0] is not None, (
         'No icon-hover present')
     assert html('input.search__input[id="q"][name="q"]'
-                '[type="search"][placeholder="Suche"]'
-                '[tabindex="1"]')[0] is not None, (
+                '[type="search"][placeholder="Suche"]')[0] is not None, (
         'No search input present')
 
 

@@ -14,6 +14,8 @@ class IDeltaTime(zope.interface.Interface):
         'A delta hours entity')
     minutes = zope.interface.Attribute(
         'A delta minutes entity')
+    seconds = zope.interface.Attribute(
+        'A delta seconds entity')
 
 
 class IDeltaTimeEntity(zope.interface.Interface):
@@ -36,7 +38,11 @@ class IDeltaHoursEntity(IDeltaTimeEntity):
 
 
 class IDeltaMinutesEntity(IDeltaTimeEntity):
-    """An babelfied minutes entity from a delta time"""
+    """A babelfied minutes entity from a delta time"""
+
+
+class IDeltaSecondsEntity(IDeltaTimeEntity):
+    """A babelfied seconds entity from a delta time"""
 
 
 class INavigation(zope.interface.Interface):

@@ -36,12 +36,12 @@ def test_comments_get_thread_should_respect_top_level_sort_order(
     thread_most_recent = zeit.web.core.comments.get_thread(
         unique_id, dummy_request, sort='desc')
 
-    assert (thread_chronological['comments'][0]['timestamp'] <
-            thread_chronological['comments'][1]['timestamp'],
+    assert (thread_chronological['comments'][0]['created'] <
+            thread_chronological['comments'][1]['created'],
             'Comments are not chronological.')
 
-    assert (thread_most_recent['comments'][0]['timestamp'] >
-            thread_most_recent['comments'][1]['timestamp'],
+    assert (thread_most_recent['comments'][0]['created'] >
+            thread_most_recent['comments'][1]['created'],
             'Comments are not sorted most recent first.')
 
 
