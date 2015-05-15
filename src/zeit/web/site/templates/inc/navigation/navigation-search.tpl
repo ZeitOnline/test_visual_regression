@@ -2,9 +2,7 @@
 	<label for="q" class="hideme">suchen</label>
 	{# Please don't break line here, due to inline-block state. #}
 	<input class="search__input" id="q" name="q" type="search" placeholder="Suche"><button class="search__button" type="submit">
-		<a>
-			<span class="icon-zon-logo-navigation_suche search__button__image main_nav__icon--plain"></span>
-			<span class="icon-zon-logo-navigation_suche-hover search__button__image main_nav__icon--hover"></span>
-		</a>
+		<span class="icon-zon-logo-navigation_suche search__button__image main_nav__icon--plain"></span>
+		<span class="icon-zon-logo-navigation_suche-hover search__button__image main_nav__icon--hover"></span>
 	</button>
 </form>
