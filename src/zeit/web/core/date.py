@@ -152,14 +152,17 @@ class DeltaTime(object):
     def _stringify_delta_time(self):
         if self.delta.days or self.delta.seconds > 59:
             self.seconds = None
+        if self.delta.days:
+            self.hours = None
+            self.minutes = None
 
         human_readable = ' '.join(
             i.text for i in (self.days, self.hours, self.minutes, self.seconds)
             if i is not None and i.number != 0)
         if human_readable is '':
             return
-        # Dirty hack, since babel does not understand
-        # german cases (as in Kasus)
+        # Dirty hack, since we are building the string ourself
+        # instead of using babels "add_direction"
         return 'vor ' + human_readable.replace(
             'Tage', 'Tagen', 1).replace(
             'Monate', 'Monaten', 1).replace(
@@ -174,8 +177,4 @@ class DeltaTime(object):
     def get_time_since_comment_posting(self):
         self._get_babelfied_delta_time()
         stringified_dt = self._stringify_delta_time()
-        if stringified_dt:
-            parts = stringified_dt.split(' ')[:5]
-            return ' '.join(parts)
-        else:
-            return ''
+        return stringified_dt or ''
