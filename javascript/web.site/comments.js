@@ -111,6 +111,10 @@ define([ 'jquery' ], function( $ ) {
             return false;
         }
 
+        if ( link.hasClass( 'comment__reaction--sending' ) ) {
+            return false;
+        }
+
         hideOtherForms();
         link.addClass( 'comment__reaction--sending' );
 
