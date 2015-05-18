@@ -7,7 +7,15 @@ Change log for zeit.web
 ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xml
            with the latest versions from the zeit.content.cp repository.
 
+- ZON-1733: Enable deeplinks and working redirects for comments
+
+- ZON-1658: add campaign params to share URLs
+
+- ZON-1731: Prepare centerpage areas for dynamic operation
+
 - Diverse fixes: fix infobox, fix html conformity, fix a11y errors
+
+- Comments: straighten dates
 
 
 1.22 (2015-05-15)
@@ -46,8 +54,6 @@ ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xm
 - ZON-1519: Article: prevent superflous pagination slugs
 
 - ZON-1731: Refactor parquet and spektrum to extend default area template
-
-- ZON-1731: Prepare centerpage areas for dynamic operation
 
 - ZON-1722: New version of jinja2
 
