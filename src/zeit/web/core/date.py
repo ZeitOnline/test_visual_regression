@@ -7,10 +7,6 @@ import zope.interface
 import zeit.web
 import zeit.web.core.interfaces
 
-
-# Will be made configurable with ZON-1038
-limit = {'days': 1, 'hours': 1}
-hide = {'days': 0, 'hours': 3}
 locale = 'de_DE'
 
 
@@ -127,6 +123,15 @@ class DeltaTime(object):
         self.date = date
         self.base_date = base_date or get_base_date(date)
         self.delta = self.base_date - self.date
+        # configuration for display
+        self.limit = {
+            'days': 1,  # blank any time data after this many days
+            'hours': 1  # blank minutes data after this many hours
+        }
+        self.hide = {
+            'days': 0,  # suppress delta after this many days
+            'hours': 3  # suppress delta after this many hours
+        }
 
     def _get_babelfied_delta_time(self):
         self.days = zeit.web.core.date.DeltaDaysEntity(self.delta)
@@ -135,31 +140,34 @@ class DeltaTime(object):
         self.seconds = zeit.web.core.date.DeltaSecondsEntity(self.delta)
 
     def _filter_delta_time(self):
-        if (self.days.number >= hide['days'] and self.hours.number +
-                self.days.number * 24 >= hide['hours']):
+        if (self.hide and (
+                (self.hide.get('days') and
+                 self.days.number >= self.hide['days'])
+                or
+                (self.hide.get('hours') and self.hours.number +
+                 self.days.number * 24 >= self.hide['hours']))):
             self.days = None
             self.hours = None
             self.minutes = None
             self.seconds = None
-        elif self.days.number >= limit['days']:
+        elif self.days.number >= self.limit['days']:
             self.hours = None
             self.minutes = None
             self.seconds = None
-        elif self.hours.number + self.days.number * 24 >= limit['hours']:
+        elif self.hours.number + self.days.number * 24 >= self.limit['hours']:
             self.minutes = None
+            self.seconds = None
+        elif self.delta.days or self.delta.seconds > 59:
             self.seconds = None
 
     def _stringify_delta_time(self):
-        if self.delta.days or self.delta.seconds > 59:
-            self.seconds = None
-
         human_readable = ' '.join(
             i.text for i in (self.days, self.hours, self.minutes, self.seconds)
             if i is not None and i.number != 0)
         if human_readable is '':
             return
-        # Dirty hack, since babel does not understand
-        # german cases (as in Kasus)
+        # Dirty hack, since we are building the string ourself
+        # instead of using babels "add_direction"
         return 'vor ' + human_readable.replace(
             'Tage', 'Tagen', 1).replace(
             'Monate', 'Monaten', 1).replace(
@@ -172,10 +180,5 @@ class DeltaTime(object):
         return stringified_dt
 
     def get_time_since_comment_posting(self):
-        self._get_babelfied_delta_time()
-        stringified_dt = self._stringify_delta_time()
-        if stringified_dt:
-            parts = stringified_dt.split(' ')[:5]
-            return ' '.join(parts)
-        else:
-            return ''
+        self.hide = None
+        return self.get_time_since_modification() or ''
