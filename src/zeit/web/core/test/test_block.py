@@ -98,4 +98,4 @@ def test_module_class_should_have_a_layout_attribute():
     context = mock.Mock()
     context.cpextra = 'lorem-ipsum'
     mod = zeit.web.core.block.Module(context)
-    assert mod._layout.layout.id == 'lorem-ipsum'
+    assert mod._layout.id == 'lorem-ipsum'
