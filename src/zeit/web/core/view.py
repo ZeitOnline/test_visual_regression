@@ -147,13 +147,13 @@ class Base(object):
             if getattr(self, mapping['target'], None) == mapping['value']:
                 return mapping['banner_code']
         # subressort?
-        if self.sub_ressort != '':
+        if self.sub_ressort != '' and self.ressort != '':
             return '{}/{}'.format(self.ressort, self.sub_ressort)
         # ressort ?
         if self.ressort != '':
             return self.ressort
         # fallback of the fallbacks
-            return 'vermischtes'
+        return 'vermischtes'
 
     @zeit.web.reify
     def banner_type(self):
