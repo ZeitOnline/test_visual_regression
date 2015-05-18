@@ -617,9 +617,10 @@ def calculate_pagination(current_page, total_pages, slots=7):
 def append_get_params(request, **kw):
     # Append GET parameters that are not reset
     # by setting the param value to None explicitly.
-    req_params = [i for i in request.GET.items() if i[0] not in kw.keys()]
-    params = req_params + [i for i in kw.items() if i[1] is not None]
+    encode = lambda x: unicode(x).encode('utf-8')
+    params = [(encode(k), encode(v)) for k, v in itertools.chain(
+              (i for i in request.GET.iteritems() if i[0] not in kw),
+              (i for i in kw.iteritems() if i[1] is not None))]
 
-    if params == []:
-        return request.path_url
-    return '?'.join([request.path_url, urllib.urlencode(params)])
+    return ('{}?{}' if params else '{}').format(
+        request.path_url, urllib.urlencode(params))
