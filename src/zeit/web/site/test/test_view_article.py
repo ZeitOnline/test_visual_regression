@@ -217,6 +217,15 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
         'Sharing link to WhatsApp should be hidden on tablet & desktop')
 
 
+def test_article_sharing_links_should_be_url_encoded(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    # it's hard to check for url-encodedness,
+    # but checking for unencoded spaces nearly should do the trick
+    spacey_sharing_links = browser.cssselect(
+        '.sharing-menu .sharing-menu__link[href*=" "]')
+    assert len(spacey_sharing_links) == 0
+
+
 def test_infobox_in_article_is_shown(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url)).cssselect

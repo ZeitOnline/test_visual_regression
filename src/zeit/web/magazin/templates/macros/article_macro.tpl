@@ -318,15 +318,15 @@
             </div>
             {%- endif %}
             <div class="article__sharing__services blind">
-                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                <a href="http://twitter.com/home?status={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&via=zeitonline&url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a href="https://plus.google.com/share?url={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-google"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
                </a>
