@@ -50,7 +50,7 @@ class PostComment(zeit.web.core.view.Base):
         uid = user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
-        pid = params.get('pid')
+        pid = self.pid = params.get('pid')
         comment = params.get('comment')
         action = params.get('action')
 
@@ -94,6 +94,7 @@ class PostComment(zeit.web.core.view.Base):
 
         method = 'post'
         data = {'uid': uid}
+        recommendations = None
         if action == 'comment' and self.path:
             data['nid'] = nid
             data['subject'] = '[empty]'
@@ -106,6 +107,14 @@ class PostComment(zeit.web.core.view.Base):
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
+            fans = self._get_recommendations(unique_id)
+            if uid in fans:
+                data['action'] = 'unflag'
+                fans.remove(uid)
+            else:
+                data['action'] = 'flag'
+                fans.append(uid)
+            recommendations = len(fans)
             method = 'get'
             data['content_id'] = pid
             data['method'] = 'flag.flag'
@@ -142,6 +151,7 @@ class PostComment(zeit.web.core.view.Base):
                 'response': {
                     'content': content,
                     'error': error,
+                    'recommendations': recommendations,
                     'new_cid': self.new_cid}
             }
 
@@ -184,6 +194,21 @@ class PostComment(zeit.web.core.view.Base):
 
         return '{}/{}/{}'.format(
             self.community_host, endpoint, path).strip('/')
+
+    def _get_recommendations(self, unique_id):
+        comment_thread = zeit.web.core.comments.get_thread(unique_id)
+
+        try:
+            pid = int(self.pid)
+        except ValueError:
+            pid = None
+        else:
+            if comment_thread['index'][pid]:
+                comment = comment_thread['index'][pid]
+                if len(comment['fans']):
+                    return comment['fans'].split(',')
+
+        return []
 
     def _nid_by_comment_thread(self, unique_id):
         comment_thread = zeit.web.core.comments.get_thread(unique_id)

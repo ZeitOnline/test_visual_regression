@@ -133,10 +133,10 @@ define([ 'jquery' ], function( $ ) {
 
                     if ( response.response.error === false ) {
                         var recommendations = comment.find( '.comment__recommendations' ),
-                            number = recommendations.html().replace( /\D+/g, '' ) || 0,
+                            number = response.response.recommendations,
                             stars;
 
-                        number = toggleRecommendationLink( link, number );
+                        toggleRecommendationLink( link );
                         stars = number ? number + ' &#9733;' : '';
                         recommendations.html( stars );
                     } else {
@@ -152,23 +152,18 @@ define([ 'jquery' ], function( $ ) {
      * comments.js: toggle recommendation link
      * @function toggleRecommendationLink
      * @param  {object} link    jQuery object
-     * @param  {int} number     number of recommendations
      */
-    toggleRecommendationLink = function( link, number ) {
+    toggleRecommendationLink = function( link ) {
         var label;
 
         if ( link.hasClass( 'comment__reaction--active' )) {
             label = 'Empfehlen';
-            --number;
         } else {
             label = 'Empfohlen';
-            ++number;
         }
 
         link.toggleClass( 'comment__reaction--active' )
             .find( '.comment__action' ).attr( 'title', label ).html( label );
-
-        return number;
     },
 
     /**
