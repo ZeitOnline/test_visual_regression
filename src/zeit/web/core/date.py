@@ -142,8 +142,7 @@ class DeltaTime(object):
     def _filter_delta_time(self):
         if (self.hide and (
                 (self.hide.get('days') and
-                 self.days.number >= self.hide['days'])
-                or
+                 self.days.number >= self.hide['days']) or
                 (self.hide.get('hours') and self.hours.number +
                  self.days.number * 24 >= self.hide['hours']))):
             self.days = None

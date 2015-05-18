@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import os
 import sys
@@ -414,7 +415,7 @@ def test_attr_safe_returns_safe_text(application):
     assert zeit.web.core.template.attr_safe(text) == target
 
 
-def test_filter_append_get_params_should_create_params(request):
+def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
     request.path_url = 'http://example.com'
     request.GET = {}
@@ -423,7 +424,7 @@ def test_filter_append_get_params_should_create_params(request):
         zeit.web.core.template.append_get_params(request, **get_params))
 
 
-def test_filter_append_get_params_should_append_params(request):
+def test_filter_append_get_params_should_append_params():
     request = mock.Mock()
     request.path_url = 'http://example.com'
     request.GET = {u'key1': u'1'}
@@ -432,7 +433,7 @@ def test_filter_append_get_params_should_append_params(request):
         zeit.web.core.template.append_get_params(request, **get_params))
 
 
-def test_filter_append_get_params_should_keep_not_overridden_params(request):
+def test_filter_append_get_params_should_keep_not_overridden_params():
     request = mock.Mock()
     request.path_url = 'http://example.com'
     request.GET = webob.multidict.MultiDict(
@@ -442,13 +443,21 @@ def test_filter_append_get_params_should_keep_not_overridden_params(request):
         zeit.web.core.template.append_get_params(request, **get_params))
 
 
-def test_filter_append_get_params_should_reset_params(request):
+def test_filter_append_get_params_should_reset_params():
     request = mock.Mock()
     request.path_url = 'http://example.com'
     request.GET = {u'key1': u'1', u'key2': u'2'}
     get_params = {u'key1': None}
     assert 'http://example.com?key2=2' == (
         zeit.web.core.template.append_get_params(request, **get_params))
+
+
+def test_filter_append_get_params_should_accept_unicode():
+    request = mock.Mock()
+    request.path_url = 'http://example.com'
+    request.GET = {u'sören_mag': u'käse'}
+    assert u'http://example.com?s%C3%B6ren_mag=k%C3%A4se' == (
+        zeit.web.core.template.append_get_params(request))
 
 
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
