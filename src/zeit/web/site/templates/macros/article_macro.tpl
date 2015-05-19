@@ -104,7 +104,7 @@
            }
   #}
     {% if obj.name -%}
-        <figure class="portraitbox">
+        <figure class="portraitbox article__item article__item--marginalia">
             <div class="portraitbox__heading">
                 {{ obj.name }}
             </div>
