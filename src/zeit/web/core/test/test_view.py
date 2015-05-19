@@ -206,73 +206,76 @@ def test_adcontroller_handle_return_value(mock_ad_view):
 
 def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):
     assert mock_ad_view(
-        'centerpage', 'angebote',
-        '', banner_id='mein/ad/code').banner_channel == 'mein/ad/code'
+        'centerpage', 'angebote', '',
+        banner_id='mein/ad/code').banner_channel == 'mein/ad/code/centerpage'
 
 
 def test_banner_channel_mapping_should_apply_second_rule(mock_ad_view):
     assert mock_ad_view(
-        'centerpage', 'angebote',
-        '', serienname='meine serie').banner_channel == 'angebote/meine_serie'
+        'centerpage', 'angebote', '', serienname='meine serie'
+        ).banner_channel == 'angebote/meine_serie/centerpage'
     assert mock_ad_view(
-        'centerpage', 'angebote',
-        '', serienname='alles klar').banner_channel == 'angebote/alles_klar'
+        'centerpage', 'angebote', '', serienname='alles klar'
+        ).banner_channel == 'angebote/alles_klar/centerpage'
 
 
 def test_banner_channel_mapping_should_apply_third_rule(mock_ad_view):
+    assert mock_ad_view('centerpage', 'zeit-magazin',
+                        'irgendwas').banner_channel == 'zeitmz/centerpage'
+    assert mock_ad_view('centerpage', 'lebensart',
+                        'leben').banner_channel == 'zeitmz/centerpage'
     assert mock_ad_view(
-        'centerpage', 'zeit-magazin', 'irgendwas').banner_channel == 'zeitmz'
+        'centerpage', 'mobilitaet', '').banner_channel == 'auto/centerpage'
     assert mock_ad_view(
-        'centerpage', 'lebensart', 'leben').banner_channel == 'zeitmz'
-    assert mock_ad_view(
-        'centerpage', 'mobilitaet', '').banner_channel == 'auto'
-    assert mock_ad_view(
-        'centerpage', 'ranking', '').banner_channel == 'studium'
+        'centerpage', 'ranking', '').banner_channel == 'studium/centerpage'
     assert mock_ad_view(
         'centerpage', 'sport',
-        '', product_id='news').banner_channel == 'news'
+        '', product_id='news').banner_channel == 'news/centerpage'
     assert mock_ad_view(
         'centerpage', 'politk',
-        '', product_id='sid').banner_channel == 'sid'
+        '', product_id='sid').banner_channel == 'sid/centerpage'
     assert mock_ad_view(
-        'article', 'foto', '').banner_channel == 'kultur'
+        'article', 'foto', '').banner_channel == 'kultur/article'
     assert mock_ad_view(
         'article', 'wirtschaft', 'geld',
-        serienname='geldspezial').banner_channel == 'geldspezial'
-    assert mock_ad_view('centerpage', 'sport',
-                        'zeit wissen').banner_channel == 'wissen/zeit_wissen'
-    assert mock_ad_view('centerpage', 'sport',
-                        'zeit campus').banner_channel == 'wissen/zeit_campus'
+        serienname='geldspezial').banner_channel == 'geldspezial/article'
+    assert mock_ad_view(
+        'centerpage', 'sport', 'zeit wissen'
+        ).banner_channel == 'wissen/zeit_wissen/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'sport', 'zeit campus'
+        ).banner_channel == 'wissen/zeit_campus/centerpage'
     assert mock_ad_view('centerpage', 'sport',
                         'zeit geschichte').banner_channel == (
-        'wissen/zeit_geschichte')
+        'wissen/zeit_geschichte/centerpage')
     assert mock_ad_view('centerpage', 'sport',
                         'das wissen dieser welt').banner_channel == (
-        'wissen/bildungskanon')
+        'wissen/bildungskanon/centerpage')
     assert mock_ad_view(
         'centerpage', 'wissen', '', serienname="spiele").banner_channel == (
-        'spiele')
+        'spiele/centerpage')
     assert mock_ad_view(
-        'centerpage', 'campus', 'irgendwas').banner_channel == 'studium'
+        'centerpage', 'campus', 'irgendwas'
+        ).banner_channel == 'studium/centerpage'
     assert mock_ad_view(
         'centerpage', 'wissen', '', serienname="reise").banner_channel == (
-        'reisen')
+        'reisen/centerpage')
+    assert mock_ad_view('centerpage', 'kultur',
+                        'computer').banner_channel == 'digital/centerpage'
     assert mock_ad_view(
-        'centerpage', 'kultur', 'computer').banner_channel == 'digital'
-    assert mock_ad_view(
-        'centerpage', 'technik', '').banner_channel == 'digital'
+        'centerpage', 'technik', '').banner_channel == 'digital/centerpage'
 
 
 def test_banner_channel_mapping_should_apply_fourthandfitfth(mock_ad_view):
     assert mock_ad_view(
-        'centerpage', 'politik', '').banner_channel == 'politik'
+        'centerpage', 'politik', '').banner_channel == 'politik/centerpage'
     assert mock_ad_view(
-        'centerpage', 'pol', 'deu').banner_channel == 'pol/deu'
+        'centerpage', 'pol', 'deu').banner_channel == 'pol/deu/centerpage'
 
 
 def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
     assert mock_ad_view(
-        'centerpage', '', '').banner_channel == 'vermischtes'
+        'centerpage', '', '').banner_channel == 'vermischtes/centerpage'
 
 
 def test_adcontroller_values_are_correctly_returned(mock_ad_view):
