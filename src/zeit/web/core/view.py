@@ -136,24 +136,24 @@ class Base(object):
     def banner_channel(self):
         # manually banner_id rules first
         if self.context.banner_id is not None:
-            return self.context.banner_id
+            return '{}/{}'.format(self.context.banner_id, self.type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
             _serie = self.serie.replace(' ', '_')
-            return '{}/{}'.format(self.ressort, _serie)
+            return '{}/{}/{}'.format(self.ressort, _serie, self.type)
         # third: do the mapping
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
-                return mapping['banner_code']
+                return '{}/{}'.format(mapping['banner_code'], self.type)
         # subressort?
         if self.sub_ressort != '' and self.ressort != '':
-            return '{}/{}'.format(self.ressort, self.sub_ressort)
+            return '{}/{}/{}'.format(self.ressort, self.sub_ressort, self.type)
         # ressort ?
         if self.ressort != '':
-            return self.ressort
+            return '{}/{}'.format(self.ressort, self.type)
         # fallback of the fallbacks
-        return 'vermischtes'
+        return 'vermischtes/{}'.format(self.type)
 
     @zeit.web.reify
     def banner_type(self):
@@ -187,7 +187,8 @@ class Base(object):
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values"""
         levels = self.banner_channel.split('/')
-        levels.append('')  # make sure levels is always long enough
+        # remove type from level3
+        levels[1] = '' if levels[1] == self.type else levels[1]
         return [('$handle', self.adcontroller_handle),
                 ('level2', levels[0]),
                 ('level3', levels[1]),
