@@ -48,6 +48,7 @@ setup(
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.cp >= 3.0.0b12',
+        'zeit.content.dynamicfolder',
         'zeit.content.gallery',
         'zeit.content.image',
         'zeit.content.infobox',

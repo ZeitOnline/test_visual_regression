@@ -9,13 +9,15 @@ ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xm
 
 - ZON-1733: Enable deeplinks and working redirects for comments
 
-- ZON-1658: add campaign params to share URLs
-
 - ZON-1731: Prepare centerpage areas for dynamic operation
 
-- Diverse fixes: fix infobox, fix html conformity, fix a11y errors
+- ZON-1658: Add campaign params to share URLs
 
-- Comments: straighten dates
+- DEV-774: Wire up zeit.content.dynamicfolder
+
+- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
+
+- FIX: Straighten comment dates
 
 
 1.22 (2015-05-15)
@@ -29,7 +31,7 @@ ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xm
 
 - ZON-1720: Use new comment API and enable "recommend comment"
 
-- ZON-1729 Setup view defaults to DRY
+- ZON-1729: Setup view defaults to DRY
 
 - ZON-1698: Sorting and pagination for comment_thread
 
