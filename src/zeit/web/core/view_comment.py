@@ -275,7 +275,6 @@ class PostCommentResource(PostComment):
                 location = zeit.web.core.template.remove_get_params(
                     location, 'page')
                 location = '{}#cid-{}'.format(location, self.new_cid)
-
             return pyramid.httpexceptions.HTTPSeeOther(location=location)
 
 

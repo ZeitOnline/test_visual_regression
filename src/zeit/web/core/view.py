@@ -438,8 +438,7 @@ class Content(Base):
         page = self.request.params.get('page', 1)
         cid = self.request.params.get('cid', None)
         return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url, sort=sort,
-            page=page, cid=cid)
+            self.context.uniqueId, sort=sort, page=page, cid=cid)
 
     @zeit.web.reify
     def obfuscated_date(self):

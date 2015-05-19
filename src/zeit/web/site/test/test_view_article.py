@@ -217,40 +217,83 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
         'Sharing link to WhatsApp should be hidden on tablet & desktop')
 
 
+def test_article_sharing_links_should_be_url_encoded(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    # it's hard to check for url-encodedness,
+    # but checking for unencoded spaces nearly should do the trick
+    spacey_sharing_links = browser.cssselect(
+        '.sharing-menu .sharing-menu__link[href*=" "]')
+    assert len(spacey_sharing_links) == 0
+
+
 def test_infobox_in_article_is_shown(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url)).cssselect
     assert len(select('aside#sauriersindsuper.infobox')) == 1
-    assert len(select('#sauriersindsuper label')) == 12
-    assert len(select('#sauriersindsuper input[type="checkbox"]')) == 6
-    assert len(select('#sauriersindsuper input[type="radio"]')) == 6
+    assert len(select('#sauriersindsuper .infobox-tab__title')) == 6
 
 
-def test_infobox_interactions(selenium_driver, testserver, screen_size):
+def test_infobox_mobile_actions(selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
     infobox = driver.find_element_by_id('sauriersindsuper')
     tabnavigation = infobox.find_elements_by_class_name(
         'infobox__navigation')[0]
-    tabpanels = infobox.find_elements_by_class_name('infobox__inner')
-    tabnavs = infobox.find_elements_by_class_name('infobox__navlabel')
-    tabchecks = infobox.find_elements_by_class_name('infobox__label')
+    tabpanels = infobox.find_elements_by_class_name('infobox-tab__content')
+    clicker = infobox.find_elements_by_css_selector(
+        '.infobox-tab .infobox-tab__title')
 
     assert infobox.is_displayed(), 'Infobox missing'
+
     if screen_size[0] == 320 or screen_size[0] == 520:
         assert not tabnavigation.is_displayed(), 'Mobile not accordion'
-        tabchecks[1].click()
-        assert tabpanels[1].get_attribute('aria-hidden') == 'false'
-        tabchecks[2].click()
-        assert tabpanels[1].get_attribute('aria-hidden') == 'false'
-        assert tabpanels[2].get_attribute('aria-hidden') == 'false'
-        tabchecks[1].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'true'
         assert tabpanels[1].get_attribute('aria-hidden') == 'true'
-        assert tabpanels[2].get_attribute('aria-hidden') == 'false'
+        assert tabpanels[2].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[3].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[4].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[5].get_attribute('aria-hidden') == 'true'
+        clicker[0].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'false'
+        clicker[1].click()
+        assert tabpanels[1].get_attribute('aria-hidden') == 'false'
+        clicker[3].click()
+        assert tabpanels[3].get_attribute('aria-hidden') == 'false'
+        clicker[5].click()
+        assert tabpanels[5].get_attribute('aria-hidden') == 'false'
+        clicker[0].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'true'
+
+
+def test_infobox_desktop_actions(selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
+    infobox = driver.find_element_by_id('sauriersindsuper')
+    tabnavigation = infobox.find_elements_by_class_name(
+        'infobox__navigation')[0]
+    tabpanels = infobox.find_elements_by_class_name('infobox-tab__content')
+    clicker = infobox.find_elements_by_css_selector(
+        '.infobox__navigation .infobox-tab__title')
+
+    assert infobox.is_displayed(), 'Infobox missing'
+
     if screen_size[0] > 767:
         assert tabnavigation.is_displayed(), 'Desktop not Tabs'
-        tabnavs[3].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'false'
+        assert tabpanels[1].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[2].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[3].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[4].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[5].get_attribute('aria-hidden') == 'true'
+        clicker[0].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'false'
+        clicker[1].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'true'
+        assert tabpanels[1].get_attribute('aria-hidden') == 'false'
+        clicker[3].click()
+        assert tabpanels[0].get_attribute('aria-hidden') == 'true'
         assert tabpanels[1].get_attribute('aria-hidden') == 'true'
         assert tabpanels[2].get_attribute('aria-hidden') == 'true'
         assert tabpanels[3].get_attribute('aria-hidden') == 'false'

@@ -27,94 +27,164 @@
     * @return {object} jQuery-Object for chaining
     */
     $.fn.infobox = function() {
-        var pos,
-            ltIE9 = ( $( 'html.lt-ie9' ).size() > 0 ),
-            id = $( this ).attr( 'id' ),
+        var id = $( this ).attr( 'id' ),
             $that = $( this ),
-            ariaState = '',
+            panels = $that.find( '.infobox-tab__content' ),
             /**
-             * changeAriaState sets initially and based on tab/accordion aria features
-             * @param  {bool} initial triggers initial setting of aria-hidden in tabs
+             * responsiveState – check if mobile or desktop version is shown
+             * @return {string} 'mobile|desktop'
              */
-            changeAriaState = function( initial ) {
-                // expose aria relationships based on visibility of acordion/tabs
-                if ( $( '.infobox__navigation:visible' ).size() > 0 && ariaState !== 'tabs' ) {
-                    // remove possible accordion rel
-                    $that.find( '.infobox__tab' ).find( '*[role=tab]' ).each( function( n ) {
-                        $( this ).attr( 'aria-controls', '' );
-                    });
-                    // add/change tabs rels
-                    $that.find( '*[role=tabpanel]' ).each( function( n ) {
-                        if ( initial && n === 0 ) {
-                            $( this ).attr( 'aria-hidden', 'false' );
-                        }
-                        $( this ).attr( 'aria-labelledby', id + '-' + ( n + 1 ) + '-tablabel' );
-                    });
-                    // labels
-                    $that.find( '.infobox__navigation' ).find( '*[role=tab]' ).each( function( n ) {
-                        $( this ).attr( 'aria-controls', id + '-' + ( n + 1 ) + '-panel' );
-                    });
-                    ariaState = 'tabs';
-                } else if ( ariaState !== 'accordion' ) {
-                    // remove possible tabs rel
-                    $that.find( '.infobox__navigation' ).find( '*[role=tab]' ).each( function( n ) {
-                        $( this ).attr( 'aria-controls', '' );
-                    });
-                    // add/change accordion rels
-                    $that.find( '*[role=tabpanel]' ).each( function( n ) {
-                        if ( $( this ).height() === 0 ) {
-                            $( this ).attr( 'aria-hidden', 'true' );
-                        } else {
-                            $( this ).attr( 'aria-hidden', 'false' );
-                        }
-                        $( this ).attr( 'aria-labelledby', id + '-' + ( n + 1 ) + '-label' );
-                    });
-                    $that.find( '.infobox__tab' ).find( '*[role=tab]' ).each( function( n ) {
-                        $( this ).attr( 'aria-controls', id + '-' + ( n + 1 ) + '-panel' );
-                    });
-                    ariaState = 'accordion';
+            responsiveState = function() {
+                return $( '#' + id + '--navigation' ).is( ':visible' ) ? 'desktop' : 'mobile';
+            },
+            /**
+             * switchPanel – switch the displayed panel with all aria attribs
+             * @param  {object} elem jQuery-Object of the panels tab element
+             */
+            switchPanel = function( elem ) {
+                var panel = $( '#' + $( elem ).attr( 'aria-controls' ) ),
+                    showPanels = function( tabs, panels ) {
+                        tabs.attr( 'aria-selected', 'true' ).attr( 'aria-expanded', 'true' );
+                        tabs.find( 'a' ).addClass( 'infobox-tab__link--active' );
+                        panels.attr( 'aria-hidden', 'false' );
+                    },
+                    hidePanels = function( tabs, panels ) {
+                        tabs.attr( 'aria-selected', 'false' ).attr( 'aria-expanded', 'false' );
+                        tabs.find( 'a' ).removeClass( 'infobox-tab__link--active' );
+                        panels.attr( 'aria-hidden', 'true' );
+                    };
+                if ( state === 'mobile' ) {
+                    if ( elem.attr( 'aria-selected' ) === 'true' ) {
+                        hidePanels( elem, panel );
+                    } else {
+                        // panel is unselected: show it
+                        showPanels( elem, panel );
+                    }
+                } else {
+                    // hide all
+                    hidePanels( $that.find( '.infobox-tab__title' ), panels );
+                    // and show the wanted
+                    showPanels( elem, panel );
                 }
             },
-            changeAriaHiddenState = function( $elem, tabs ) {
-                if ( tabs ) {
-                    $( '.infobox__tab .infobox__inner' ).attr( 'aria-hidden', 'true' );
-                    $elem.attr( 'aria-hidden', 'false' );
-                } else {
-                    $elem.attr( 'aria-hidden', function( i, val ) {
-                        return val === 'false' ? 'true' : 'false';
+            /**
+             * changeMenu all dom operations to switch between responsive modes
+             * @param  {object} event
+             * @param  {string} type  'mobile|desktop'
+             * @param  {object} [panel] jQuery-Object of a panels tab element
+             */
+            changeMenu = function( event, type, panel ) {
+                var openPanels = $( '.infobox-tab__title--displayed[aria-selected=true]' ),
+                    index;
+                if ( type === 'mobile' ) {
+                    $( '.infobox__navigation .infobox-tab__title' ).each(function( index ) {
+                        $( this )
+                            .removeAttr( 'role' )
+                            .removeAttr( 'aria-controls' )
+                            .removeAttr( 'id' )
+                            .removeClass( 'infobox-tab__title--displayed' )
+                            .attr( 'tabindex', '-1' );
+                        if ( $( this ).attr( 'aria-selected' ) === 'true' ) {
+                            $( '.infobox-tab .infobox-tab__title' )
+                                .eq( index )
+                                .attr( 'aria-selected', 'true' )
+                                .attr( 'aria-expanded', 'true' )
+                                .find( 'a' )
+                                .addClass( 'infobox-tab__link--active' );
+                        }
                     });
+                    $( '.infobox-tab .infobox-tab__title' ).each(function() {
+                        $( this )
+                            .attr( 'role', $( this ).data( 'role' ) )
+                            .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
+                            .attr( 'id', id + '-' + $( this ).data( 'index' ) + '-tab' )
+                            .attr( 'tabindex', '0' )
+                            .addClass( 'infobox-tab__title--displayed' );
+                    });
+                } else {
+                    $( '.infobox-tab .infobox-tab__title' ).each(function() {
+                        $( this )
+                            .removeAttr( 'role' )
+                            .removeAttr( 'aria-controls' )
+                            .removeAttr( 'id' )
+                            .removeClass( 'infobox-tab__title--displayed' )
+                            .attr( 'tabindex', '-1' );
+                    });
+                    $( '.infobox__navigation .infobox-tab__title' ).each(function() {
+                        $( this )
+                            .attr( 'role', $( this ).data( 'role' ) )
+                            .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
+                            .attr( 'id', id + '-' + $( this ).data( 'index' ) + '-tab' )
+                            .attr( 'tabindex', '0' )
+                            .addClass( 'infobox-tab__title--displayed' );
+                    });
+                    if ( state === 'desktop' && openPanels.length !== 1 ) {
+                        index = openPanels.first().data( 'index' ) || 1;
+                        switchPanel( $( '#' + id + '-' + index + '-tab' ) );
+                    }
                 }
-            };
+                if ( panel ) {
+                    switchPanel( $( '#' + id + '-' + panel + '-tab' ) );
+                }
+            },
+            /**
+             * pageHashInBox find possible url hash in infobox and return index
+             * @return {int} position of the linked element, if none, the first elements position
+             */
+            pageHashInBox = function() {
+                var hash, position = 0;
+                if ( win.location.hash ) {
+                    hash = win.location.hash.substring( 1 );
+                    $that.find( '.infobox-tab' ).each( function( index, elem ) {
+                        if ( elem.id === hash ) {
+                            position = index + 1;
+                            return false;
+                        }
+                    });
+                    return position > 0 ? position : 1;
+                }
+            },
+            state;
 
         return this.each( function() {
-            // fallback for ie lower 9
-            if ( ltIE9 ) {
-                $( '.infobox__tab' ).eq( 0 ).find( '.infobox__inner' ).addClass( 'infobox__inner--active' );
-            }
-            // actions following click on tab
-            $( '.infobox__navlabel' ).on( 'click', function( evt ) {
-                $( '.infobox__navlabel.infobox__navlabel--checked' ).removeClass( 'infobox__navlabel--checked' );
-                $( evt.target ).addClass( 'infobox__navlabel--checked' );
-                $( '.infobox__navlabel[aria-selected=true]' ).attr( 'aria-selected', 'false' );
-                $( evt.target ).attr( 'aria-selected', 'true' );
-                // aria hidden on/off and IE9 classing
-                pos = $( evt.target ).parent().prevAll().size();
-                changeAriaHiddenState( $( '.infobox__tab' ).eq( pos ).find( '.infobox__inner' ), true );
-                if ( ltIE9 ) {
-                    // fallback for ie lower 9
-                    $( '.infobox__tab .infobox__inner' ).removeClass( 'infobox__inner--active' );
-                    $( '.infobox__tab' ).eq( pos ).find( '.infobox__inner' ).addClass( 'infobox__inner--active' );
-                }
-
-            });
-            // actions following click on accordion title
-            $( '.infobox__title .infobox__label' ).on( 'click', function( evt ) {
-                changeAriaHiddenState( $( evt.target ).parent().next( 'article' ) );
-            });
-            // adding ARIA roles, first run
-            changeAriaState( true );
+            // initially set state
+            state = responsiveState();
+            // mark all as hidden
+            panels.attr( 'aria-hidden', true );
+            // copy links
+            $( '.infobox-tab__title', this )
+                .clone( true )
+                .attr( 'tabindex', '-1' )
+                .appendTo( '#' + id + '--navigation' );
+            // listener change in a11y functionality
+            $( this ).on( 'infoboxChange', changeMenu );
+            // trigger for first load
+            $that.trigger( 'infoboxChange', [ state, pageHashInBox() ] );
+            // state checker
             $( window ).on( 'resize', function() {
-                changeAriaState();
+                var newstate = responsiveState();
+                if ( newstate !== state ) {
+                    state = newstate;
+                    $that.trigger( 'infoboxChange', [ newstate ] );
+                }
+            });
+            // actions
+            $( '.infobox-tab__title', this ).on( 'click', function( event ) {
+                event.preventDefault();
+                switchPanel( $( this ) );
+                if ( state === 'desktop' ) {
+                    var id = $( this ).attr( 'id' );
+                    if ( history.pushState ) {
+                        history.pushState( null, null, '#' + id.substring( 0, id.length - 4 ) );
+                    }
+                }
+            });
+            $( '.infobox-tab__title', this ).on( 'keypress', function( event ) {
+                var code = event.keyCode || event.which;
+                event.preventDefault();
+                if ( code === 13 || code === 32 ) { // enter or space
+                    $( this ).trigger( 'click' );
+                }
             });
         });
     };

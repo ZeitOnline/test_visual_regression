@@ -160,6 +160,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
     :param destination: URL of the redirect destination
     :param sort: Sort order of comments, desc or asc
     :param page: Pagination value
+    :param cid: Comment ID to calculate appropriate pagination
     :rtype: dict or None
     """
     thread = get_cacheable_thread(unique_id)
@@ -209,6 +210,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
             page = int(math.ceil(float(pos) / float(page_size)))
         except (KeyError, ValueError):
             pass
+
     thread['headline'] = '{} {}'.format(
         comment_count, 'Kommentar' if comment_count == 1 else 'Kommentare')
     thread['pages'] = {
@@ -220,15 +222,17 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
     if page:
         thread['comments'] = (
             thread['comments'][(page - 1) * page_size: page * page_size])
-        first = ((page - 1) * page_size) + 1
-        last = min(comment_count, ((page - 1) * page_size) + page_size)
 
-        if first == last:
-            thread['headline'] = u'Kommentar {} von {}'.format(
-                first, comment_count)
-        else:
-            thread['headline'] = u'Kommentare {} – {} von {}'.format(
-                first, last, comment_count)
+        if thread['pages']['pager']:
+            first = ((page - 1) * page_size) + 1
+            last = min(comment_count, ((page - 1) * page_size) + page_size)
+
+            if first == last:
+                thread['pages']['title'] = u'Kommentar {} von {}'.format(
+                    first, comment_count)
+            else:
+                thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
+                    first, last, comment_count)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)

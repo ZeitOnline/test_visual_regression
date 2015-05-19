@@ -5,6 +5,9 @@
 	{% if view.comments and view.comments.comment_count %}
 		<span class="comment-section__headline">
 			{{ view.comments.headline }}
+			{% if view.comments.pages.title %}
+			<small>{{ view.comments.pages.title }}</small>
+			{% endif %}
 		</span>
 		<a href="#comment-form" class="comment-section__button button">
 			Kommentieren
@@ -64,7 +67,7 @@
 						{{ comment.recommendations }} &#9733;
 					{%- endif -%}
 					</span>
-					<a  class="comment__date" href="{{ view.request | append_get_params(action=None, pid=None) }}#cid-{{ comment.cid }}">
+					<a  class="comment__date" href="{{ view.request | append_get_params(action=None, pid=None, page=None, sort=None, cid=comment.cid) }}#cid-{{ comment.cid }}">
 					#{{ comment.shown_num }} &nbsp;/&nbsp; {{ comment.created | format_comment_date }}
 					</a>
 				</div>
