@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1658: add campaign params to share URLs
 
+- DEV-774: Wire up zeit.content.dynamicfolder
+
 
 1.22 (2015-05-15)
 -----------------
