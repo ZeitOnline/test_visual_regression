@@ -1,9 +1,7 @@
 <div class="{{ 'cp-area' | with_mods(area.kind) }}">
     {% block before_module_list %}{% endblock %}
-    {% for module in area.values() -%}
+    {% for module in area.values() | map('get_module') -%}
         {% set teaser = module | first_child %}
-        {# XXX jinja 2.7 could solve this ugliness with the `map` filter. #}
-        {% set module = module | get_module %}
         {% set layout = module | get_layout %}
         {% set module_loop = loop %}
         {% block before_module_include scoped %}{% endblock %}
