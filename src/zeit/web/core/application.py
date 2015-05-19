@@ -483,10 +483,10 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def _handle_centerpage(self, context, request):
         if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
             form = find_block(context, module='search-form')
-            area = find_block(context, attrib='area', module='ranking')
+            area = find_block(context, attrib='area', kind='ranking')
             if form and area:
                 form = zeit.web.core.template.get_module(form)
-                area = zeit.web.site.search.ResultsArea(area)
+                area = zeit.web.core.template.get_area(area)
 
                 form['q'] = ' '.join(request.GET.getall('q'))
                 form['type'] = ' '.join(request.GET.getall('type'))

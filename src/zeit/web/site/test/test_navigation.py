@@ -181,8 +181,8 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'Form element is not present')
     assert html('label.hideme[for="q"]')[0] is not None, (
         'Hide me label is not present')
-    assert html('button.search__button[type="submit"]'
-                '[tabindex="2"]')[0] is not None, 'No search button present'
+    assert html('button.search__button[type="submit"]')[0] is not None, (
+        'No search button present')
     assert html('span.icon-zon-logo-navigation_suche'
                 '.search__button__image.'
                 'main_nav__icon--plain')[0] is not None, (
@@ -192,8 +192,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                 'main_nav__icon--hover')[0] is not None, (
         'No icon-hover present')
     assert html('input.search__input[id="q"][name="q"]'
-                '[type="search"][placeholder="Suche"]'
-                '[tabindex="1"]')[0] is not None, (
+                '[type="search"][placeholder="Suche"]')[0] is not None, (
         'No search input present')
 
 

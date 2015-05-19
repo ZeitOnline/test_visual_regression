@@ -1,4 +1,4 @@
-{% set area = area | get_results %}
+{% set area = area | get_area %}
 
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 

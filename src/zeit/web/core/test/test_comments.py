@@ -144,17 +144,23 @@ def test_thread_should_have_valid_page_information(application, testserver):
     assert thread['pages']['current'] is None
     assert thread['pages']['total'] == 5
 
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=2)
     assert thread['pages']['current'] == 2
     assert len(thread['comments']) == 10
 
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=6)
     assert thread['pages']['current'] == 1
     assert len(thread['comments']) == 10
+
+    thread = zeit.web.core.comments.get_thread(unique_id, cid=2969196)
+    assert thread['pages']['current'] == 5
+
+    thread = zeit.web.core.comments.get_thread(unique_id, page=3, cid=2969196)
+    assert thread['pages']['current'] == 5
+
+    thread = zeit.web.core.comments.get_thread(unique_id, sort='desc',
+                                               cid=2969196)
+    assert thread['pages']['current'] == 1
 
 
 def test_dict_with_article_paths_and_comment_counts_should_be_created(
