@@ -11,6 +11,7 @@ import pyramid.view
 import urlparse
 import json
 import logging
+import urllib
 
 import zeit.cms.interfaces
 
@@ -268,12 +269,14 @@ class PostCommentResource(PostComment):
             return result
         else:
             location = zeit.web.core.template.append_get_params(
-                self.request, action=None, pid=None)
+                self.request, action=None, pid=None, cid=self.new_cid)
             if self.new_cid:
+                # remove page param in redirect
+                location = zeit.web.core.template.remove_get_params(
+                    location, 'page')
                 location = '{}#cid-{}'.format(location, self.new_cid)
 
-            return pyramid.httpexceptions.HTTPSeeOther(
-                location=location)
+            return pyramid.httpexceptions.HTTPSeeOther(location=location)
 
 
 @pyramid.view.view_defaults(

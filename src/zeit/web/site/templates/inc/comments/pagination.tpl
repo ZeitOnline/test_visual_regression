@@ -6,7 +6,7 @@
 		{% if pages.current == pages.total %}
 		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1) }}#comments">Vorherige Seite</a>
 		{% else %}
-		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1) }}#comments">Nächste Seite</a>
+		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1) | remove_get_params('cid')}}#comments">Nächste Seite</a>
 		{% endif %}
 		<ul class="pager__pages">
 			{% for page in pages.pager %}
@@ -14,7 +14,7 @@
 				{%- if page == pages.current -%}
 					<span>{{ page }}</span>
 				{%- elif page -%}
-					<a href="{{ view.request | append_get_params(page=page) }}#comments">{{ page }}</a>
+					<a href="{{ view.request | append_get_params(page=page) | remove_get_params('cid') }}#comments">{{ page }}</a>
 				{%- else -%}
 					<span>…</span>
 				{%- endif -%}

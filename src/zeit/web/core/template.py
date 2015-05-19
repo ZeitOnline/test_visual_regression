@@ -623,3 +623,14 @@ def append_get_params(request, **kw):
     if params == []:
         return request.path_url
     return '?'.join([request.path_url, urllib.urlencode(params)])
+
+
+@zeit.web.register_filter
+def remove_get_params(url, *args):
+    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
+    query_p = urlparse.parse_qs(query)
+    for arg in args:
+        query_p.pop(arg, None)
+
+    return '{}://{}{}?{}'.format(
+        scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
