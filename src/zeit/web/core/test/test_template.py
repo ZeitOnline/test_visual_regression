@@ -306,6 +306,14 @@ def test_zon_small_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-small'
 
 
+def test_get_layout_works_on_empty_blocks(application):
+    block = mock.Mock()
+    block.__iter__ = lambda _: iter([])
+    block.layout.id = 'zon-small'
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'zon-small'
+
+
 def test_teaser_fullwidth_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
