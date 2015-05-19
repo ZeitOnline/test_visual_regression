@@ -432,10 +432,11 @@ def _existing_image(asset_id, base_name, patterns, ext, filenames):
 @zeit.web.register_global
 def get_column_image(teaser):
     try:
-        return zeit.web.core.interfaces.ITeaserImage(
-            teaser.authorships[0].target.column_teaser_image)
+        image_group = teaser.authorships[0].target.image_group
+        image = closest_substitute_image(image_group, 'zon-column')
+        return zeit.web.core.interfaces.ITeaserImage(image)
     except (AttributeError, IndexError, TypeError):
-        log.warn('Teaser {} has no authorships'.format(getattr(
+        log.debug('Author of {} has no column image.'.format(getattr(
             teaser, 'uniqueId', 'unknown')))
 
 
