@@ -524,6 +524,7 @@ def test_pagination_calculation_should_fail_gracefully():
     assert pager(2, 1) is None
     assert pager(1, 1) is None
 
+
 def test_remove_get_params_should_remove_get_params():
     url = "http://example.org/foo/baa?foo=ba&ba=batz&batz=x"
     url = zeit.web.core.template.remove_get_params(url, 'foo', 'batz')
@@ -534,4 +535,3 @@ def test_remove_get_params_should_remove_get_params():
     url = zeit.web.core.template.remove_get_params(url, 'batz')
 
     assert url == "http://example.org/foo/baa?foo=ba"
-

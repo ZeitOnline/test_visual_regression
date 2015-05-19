@@ -4,6 +4,7 @@ import urlparse
 
 import zeit.cms.interfaces
 
+
 def test_comment_post_url_contains_destination(application, testserver):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     request = mock.Mock()
