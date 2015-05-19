@@ -10,9 +10,6 @@ Change log for zeit.web
 1.23 (2015-05-19)
 -----------------
 
-ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xml
-           with the latest versions from the zeit.content.cp repository.
-
 - ZON-1733: Enable deeplinks and working redirects for comments
 
 - ZON-1731: Prepare centerpage areas for dynamic operation
