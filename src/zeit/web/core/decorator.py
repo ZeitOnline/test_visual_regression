@@ -107,3 +107,16 @@ def register_module(name):
                             zeit.edit.interfaces.IBlock, name)
         return cls
     return registrator
+
+
+def register_area(name):
+    """Register an area renderer implementation for a RAM-style area using the
+    area kind descriptor as an adapter identifier.
+    """
+
+    def registrator(cls):
+        gsm = zope.component.getGlobalSiteManager()
+        gsm.registerAdapter(cls, (zeit.content.cp.interfaces.IArea,),
+                            zeit.content.cp.interfaces.IRenderedArea, name)
+        return cls
+    return registrator

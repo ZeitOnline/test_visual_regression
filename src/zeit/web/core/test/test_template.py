@@ -5,12 +5,14 @@ import sys
 import time
 
 import gocept.httpserverlayer.static
+import lxml.objectify
 import mock
 import pytest
 import venusian
 import webob.multidict
 
 import zeit.cms.interfaces
+import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.decorator
 import zeit.web.core.template
@@ -306,14 +308,6 @@ def test_zon_small_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-small'
 
 
-def test_get_layout_works_on_empty_blocks(application):
-    block = mock.Mock()
-    block.__iter__ = lambda _: iter([])
-    block.layout.id = 'zon-small'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-
-
 def test_teaser_fullwidth_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
@@ -369,6 +363,14 @@ def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
     block.__iter__ = lambda _: iter([article])
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-series'
+
+
+def test_layout_for_empty_teaser_block_should_be_set_to_hide(application):
+    block = zeit.content.cp.blocks.teaser.TeaserBlock(
+        mock.Mock(), lxml.objectify.E.block(module='zon-small'))
+    block.__iter__ = lambda _: iter([])
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'hide'
 
 
 def test_function_get_image_pattern_is_working_as_expected(application):
@@ -469,14 +471,15 @@ def test_filter_append_get_params_should_accept_unicode():
 
 
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
-    assert zeit.web.core.template.get_module(None) is None
+    block = object()
+    assert zeit.web.core.template.get_module(block) is block
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     block = zeit.web.core.application.find_block(cp, module='search-form')
 
     block.visible = True
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is None
+    assert zeit.web.core.template.get_module(block) is block
 
     block.visible = True
     block.cpextra = 'search-form'
@@ -485,7 +488,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
 
     block.visible = False
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is None
+    assert zeit.web.core.template.get_module(block) is block
 
 
 def test_pagination_calculation_should_deliver_valid_output():
