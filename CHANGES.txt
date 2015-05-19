@@ -13,6 +13,8 @@ ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xm
 
 - ZON-1731: Prepare centerpage areas for dynamic operation
 
+- ZON-1569: Upgrade author column images to image groups
+
 - Diverse fixes: fix infobox, fix html conformity, fix a11y errors
 
 - Comments: straighten dates
