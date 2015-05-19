@@ -28,7 +28,8 @@
 
         {% block teaser_container %}
             {% block teaser_text %}
-            <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}{% block teaser_byline_inner %}{% endblock %}</p>
+            {# TODO: Extract teaser-length text snippet from articles that don't have a teaser text. #}
+            <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}{% block teaser_byline_inner %}{% endblock %}</p>
             {% endblock %}
             {% block teaser_byline %}
                 {{ cp.include_teaser_byline(teaser, self.layout()) }}

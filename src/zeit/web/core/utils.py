@@ -1,9 +1,7 @@
 import collections
 import re
 
-
-__all__ = ['defaultdict', 'nslist', 'nstuple', 'nsdict', 'nsset', 'nsstr',
-           'nsunicode']
+import zope.component
 
 
 def fix_misrepresented_latin(val):
@@ -26,6 +24,27 @@ def to_int(value, pattern=re.compile(r'[^\d.]+')):
     """
 
     return int(pattern.sub('', unicode(value, errors='ignore')))
+
+
+def get_named_adapter(obj, iface, attr, name=None):
+    """Retrieve a named adapted for a given object and interface, with a name
+    beeing extracted from a given attribute. If no adapter is found, fallback
+    to the unnamed default or the initial object itself.
+
+    :param obj: Object to be adapted
+    :param iface: A zope interface class
+    :param attr: Attribute of object to extract the name from
+    :param name: Override argument for the name
+    :rtype: Object that hopefully implements `iface`
+    """
+
+    try:
+        return zope.component.getAdapter(
+            obj, iface, getattr(obj, attr, u'') if name is None else name)
+    except (zope.component.ComponentLookupError, TypeError):
+        if name is None:
+            return get_named_adapter(obj, iface, attr, u'')
+    return obj
 
 
 def first_child(iterable):
@@ -106,6 +125,9 @@ class frozendict(dict):
 
     __delitem__ = __setitem__ = clear = pop = popitem = setdefault = update = (
         NotImplemented)
+
+    def __hash__(self):
+        return hash(tuple(sorted(self.items())))
 
 
 class attrdict(dict):
