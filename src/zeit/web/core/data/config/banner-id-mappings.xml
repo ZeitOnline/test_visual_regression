@@ -7,6 +7,8 @@
     banner_code = Bannercode in der alten Schreibweise 'level2[/level3]' (backwardscompatible)
     Wurde ein Mapping gefunden, Verarbeitung beenden, also positioning counts!
   -->
+  <mapping target="sub_ressort" value="essen-trinken" banner_code="zeitmz/essenundtrinken" />
+  <mapping target="sub_ressort" value="mode-design" banner_code="zeitmz/modeunddesign" />
   <mapping target="ressort" value="zeit-magazin" banner_code="zeitmz" />
   <mapping target="ressort" value="lebensart" banner_code="zeitmz" />
   <mapping target="ressort" value="mobilitaet" banner_code="auto" />
