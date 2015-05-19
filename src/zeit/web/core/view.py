@@ -136,24 +136,31 @@ class Base(object):
     def banner_channel(self):
         # manually banner_id rules first
         if self.context.banner_id is not None:
-            return '{}/{}'.format(self.context.banner_id, self.type)
+            return '{}/{}'.format(self.context.banner_id, self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
             _serie = self.serie.replace(' ', '_')
-            return '{}/{}/{}'.format(self.ressort, _serie, self.type)
+            return '{}/{}/{}'.format(self.ressort, _serie, self.banner_type)
         # third: do the mapping
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
-                return '{}/{}'.format(mapping['banner_code'], self.type)
+                if mapping['target'] == 'ressort' and self.sub_ressort != '':
+                    return '{}/{}/{}'.format(
+                        mapping['banner_code'],
+                        self.sub_ressort, self.banner_type)
+                else:
+                    return '{}/{}'.format(mapping['banner_code'],
+                                          self.banner_type)
         # subressort?
         if self.sub_ressort != '' and self.ressort != '':
-            return '{}/{}/{}'.format(self.ressort, self.sub_ressort, self.type)
+            return '{}/{}/{}'.format(self.ressort,
+                                     self.sub_ressort, self.banner_type)
         # ressort ?
         if self.ressort != '':
-            return '{}/{}'.format(self.ressort, self.type)
+            return '{}/{}'.format(self.ressort, self.banner_type)
         # fallback of the fallbacks
-        return 'vermischtes/{}'.format(self.type)
+        return 'vermischtes/{}'.format(self.banner_type)
 
     @zeit.web.reify
     def banner_type(self):
