@@ -30,10 +30,10 @@
 			</a>
 			#}
 			{% if view.comments.sort == 'asc' %}
-				{% set href = view.request | append_get_params(sort='desc') %}
+				{% set href = '{}?sort=desc'.format(view.request.path_url) %}
 				{% set label = 'Älteste zuerst' %}
 			{% else %}
-				{% set href = view.request | append_get_params(sort=None) %}
+				{% set href = view.request.path_url %}
 				{% set label = 'Neueste zuerst' %}
 			{% endif %}
 			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
@@ -67,7 +67,7 @@
 						{{ comment.recommendations }} &#9733;
 					{%- endif -%}
 					</span>
-					<a  class="comment__date" href="{{ view.request | append_get_params(action=None, pid=None, page=None, sort=None, cid=comment.cid) }}#cid-{{ comment.cid }}">
+					<a  class="comment__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
 					#{{ comment.shown_num }} &nbsp;/&nbsp; {{ comment.created | format_comment_date }}
 					</a>
 				</div>

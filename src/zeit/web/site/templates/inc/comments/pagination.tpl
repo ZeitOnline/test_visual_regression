@@ -4,7 +4,7 @@
 	<div class="pager" role="navigation" aria-labeledby="comments-pagination-title">
 		<div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
 		{% if pages.current == pages.total %}
-		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1, cid=None) }}#comments">Vorherige Seite</a>
+		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1, cid=None}}#comments">Vorherige Seite</a>
         {% else %}
 		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1, cid=None)}}#comments">Nächste Seite</a>
 		{% endif %}
