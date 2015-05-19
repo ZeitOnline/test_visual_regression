@@ -1,8 +1,6 @@
 <div class="{{ 'cp-region' | with_mods(region.kind) }}">
     {% block before_area_list %}{% endblock %}
-    {% for area in region.values() %}
-        {# XXX jinja 2.7 could solve this ugliness with the `map` filter. #}
-        {% set area = area | get_area %}
+    {% for area in region.values() | map('get_area') %}
         {% set area_loop = loop %}
         {% block before_area_include scoped %}{% endblock %}
         {% include
