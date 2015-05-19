@@ -620,5 +620,25 @@ def append_get_params(request, **kw):
               (i for i in request.GET.iteritems() if i[0] not in kw),
               (i for i in kw.iteritems() if i[1] is not None))]
 
-    return ('{}?{}' if params else '{}').format(
-        request.path_url, urllib.urlencode(params))
+    if params == []:
+        return request.path_url
+    return '?'.join([request.path_url, urllib.urlencode(params)])
+
+
+@zeit.web.register_filter
+def remove_get_params(url, *args):
+    # ToDo: This should be used in templates,
+    # if append_get_params gets refactored.
+    # It'd be more useful to use these functions on URL and not request level
+    # This way we could say sth. like
+    # `request | make_url() |
+    #  append_get_param(foo='ba', ba='batz') | remove_get_param('foobar')`
+    # and vice versa.
+
+    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
+    query_p = urlparse.parse_qs(query)
+    for arg in args:
+        query_p.pop(arg, None)
+
+    return '{}://{}{}?{}'.format(
+        scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
