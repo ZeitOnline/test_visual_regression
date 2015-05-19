@@ -8,7 +8,7 @@
             <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=fix.int.zonpme.zeitde.angebbox.angebseite.bildtext.headline.headline&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=angebseite_bildtext_headline_headline" title="{{ teaser.title }}">{{ teaser.title }}</a>
         <figure class="print-box__media">
             <a href="{{ teaser.url }}?wt_zmc=fix.int.zonpme.zeitde.angebbox.angebseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=angebseite_bildtext_cover_cover" title="{{ teaser.title }}">
-                <img class="print-box__media-item" src="{{ teaser.image | default_image_url('zon-printbox') }}">
+                <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox') }}">
             </a>
         </figure>
         <div class="print-box__container">
@@ -31,7 +31,7 @@
     <div class="print-box__content">
         <figure class="print-box__media">
             <a href="{{ teaser.url }}?wt_zmc=fix.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}">
-                <img class="print-box__media-item" src="{{ teaser.image | default_image_url('zon-printbox-wide') }}">
+                <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox-wide') }}">
             </a>
         </figure>
         <div class="print-box__container">
