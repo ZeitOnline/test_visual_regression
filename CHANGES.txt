@@ -17,6 +17,8 @@ ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xm
 
 - Comments: straighten dates
 
+- ZON-1732: Add banner code mapping rules and table
+
 
 1.22 (2015-05-15)
 -----------------
