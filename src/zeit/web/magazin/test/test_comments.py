@@ -14,7 +14,6 @@ def test_comment_post_url_contains_destination(application, testserver):
     param = urlparse.parse_qs(query, True)
 
     assert param.get('destination') == [request.url]
-    assert view.comments.get('comment_report_url') == 'hi'
 
 
 def test_comment_thread_contains_comment_report_url(application, testserver):
