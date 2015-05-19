@@ -275,6 +275,21 @@ def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
         'centerpage', '', '').banner_channel == 'vermischtes'
 
 
+def test_adcontroller_values_are_correctly_returned(mock_ad_view):
+    zw_code = [('$handle', 'centerpage'), ('level2', 'wissen'),
+               ('level3', 'zeit_wissen'), ('$autoSizeFrames', True),
+               ('keywords', ''), ('tma', '')]
+    zw_test = mock_ad_view(
+        'centerpage', 'sport', 'zeit wissen').adcontroller_values
+    assert zw_code == zw_test
+    zmz_code = [('$handle', 'index'), ('level2', 'zeitmz'),
+                ('level3', ''), ('$autoSizeFrames', True),
+                ('keywords', ''), ('tma', '')]
+    zmz_test = mock_ad_view(
+        'centerpage', 'zeit-magazin', 'irgendwas').adcontroller_values
+    assert zmz_code == zmz_test
+
+
 def test_centerpage_should_have_manual_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
