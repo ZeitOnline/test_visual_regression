@@ -1,16 +1,29 @@
 Change log for zeit.web
 =======================
 
-1.22.1 (unreleased)
--------------------
+1.24 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.23 (2015-05-19)
+-----------------
+
+ATTENTION: Before deploying to production, update cp-areas.xml and cp-regions.xml
+           with the latest versions from the zeit.content.cp repository.
 
 - ZON-1733: Enable deeplinks and working redirects for comments
 
-- Diverse fixes: fix infobox, fix html conformity, fix a11y errors
+- ZON-1731: Prepare centerpage areas for dynamic operation
 
-- Comments: straighten dates
+- ZON-1658: Add campaign params to share URLs
 
-- ZON-1658: add campaign params to share URLs
+- DEV-774: Wire up zeit.content.dynamicfolder
+
+- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
+
+- FIX: Straighten comment dates
 
 
 1.22 (2015-05-15)
@@ -24,7 +37,7 @@ Change log for zeit.web
 
 - ZON-1720: Use new comment API and enable "recommend comment"
 
-- ZON-1729 Setup view defaults to DRY
+- ZON-1729: Setup view defaults to DRY
 
 - ZON-1698: Sorting and pagination for comment_thread
 
