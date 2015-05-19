@@ -1,7 +1,13 @@
 <div class="{{ 'cp-region' | with_mods(region.kind) }}">
-    {% for area in region.values() %}
-        {%- include ["zeit.web.site:templates/inc/area/{}.html".format(area.kind),
-                     "zeit.web.site:templates/inc/area/{}.tpl".format(area.kind),
-                     "zeit.web.site:templates/inc/area/default.html"] ignore missing -%}
+    {% block before_area_list %}{% endblock %}
+    {% for area in region.values() | map('get_area') %}
+        {% set area_loop = loop %}
+        {% block before_area_include scoped %}{% endblock %}
+        {% include
+            ["zeit.web.site:templates/inc/area/{}.html".format(area.kind),
+             "zeit.web.site:templates/inc/area/{}.tpl".format(area.kind),
+             "zeit.web.site:templates/inc/area/default.html"] ignore missing %}
+        {% block after_area_include scoped %}{% endblock %}
     {% endfor %}
+    {% block after_area_list %}{% endblock %}
 </div>
