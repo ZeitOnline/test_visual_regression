@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Bring back printbox images
 
+- FIX: Area Parquet padding lost and found
+
 
 1.23 (2015-05-19)
 -----------------
