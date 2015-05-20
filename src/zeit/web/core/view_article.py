@@ -163,47 +163,33 @@ class Article(zeit.web.core.view.Content):
     def resource_url(self):
         return self.request.resource_url(self.context).rstrip('/')
 
-    def _get_author(self, index):
-        try:
-            author = index.target
-            author_ref = index
-        except (IndexError, OSError):
-            author = None
-        return {
-            'name': author.display_name if author else None,
-            'href': author.uniqueId if author else None,
-            'image': zeit.web.core.interfaces.ITeaserImage(
-                author.column_teaser_image)
-            if (author and author.column_teaser_image) else None,
-            'suffix': '',
-            'prefix': '',
-            'location': ', ' + IAuthorReference(author_ref).location
-            if IAuthorReference(author_ref).location and
-            IArticleTemplateSettings(self.context).template !=
-            'longform' else '',
-        }
-
     @zeit.web.reify
     def authors(self):
         author_list = []
         try:
             author_ref = self.context.authorships
             for index, author in enumerate(author_ref):
-                result = self._get_author(author)
-                if result is not None:
-                    # add prefix
-                    if index == 0:
-                        if IArticleTemplateSettings(self.context).template \
-                           == 'longform':
-                            result['prefix'] = u'\u2014' + ' von'
-                        else:
-                            result['prefix'] = ' von'
-                    # add suffix
-                    if index == len(author_ref) - 2:
-                        result['suffix'] = ' und'
-                    elif index < len(author_ref) - 1:
-                        result['suffix'] = ', '
-                    author_list.append(result)
+                location = IAuthorReference(author).location
+                author = {
+                    'name': getattr(author.target, 'display_name', None),
+                    'href': getattr(author.target, 'uniqueId', None),
+                    'image_group': getattr(author.target, 'image_group', None),
+                    'prefix': '', 'suffix': '', 'location': ''}
+                # add location
+                if location and not self.is_longform:
+                    author['location'] = ', {}'.format(location)
+                # add prefix
+                if index == 0:
+                    if self.is_longform:
+                        author['prefix'] = u'\u2014 von'
+                    else:
+                        author['prefix'] = ' von'
+                # add suffix
+                if index == len(author_ref) - 2:
+                    author['suffix'] = ' und'
+                elif index < len(author_ref) - 1:
+                    author['suffix'] = ', '
+                author_list.append(author)
             return author_list
         except (IndexError, OSError):
             return

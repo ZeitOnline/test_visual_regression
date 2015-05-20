@@ -24,11 +24,13 @@ Change log for zeit.web
 
 - ZON-1731: Prepare centerpage areas for dynamic operation
 
+- ZON-1569: Upgrade author column images to image groups
+
+- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
+
 - ZON-1658: Add campaign params to share URLs
 
 - DEV-774: Wire up zeit.content.dynamicfolder
-
-- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
 
 - FIX: Straighten comment dates
 

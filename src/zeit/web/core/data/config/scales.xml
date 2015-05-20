@@ -36,6 +36,7 @@
   <scale name="zmo-xl-header" widht="460" height="306" title="ZMO: XL header" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-printbox" width="320" height="234" title="Relaunch 2015: Printbox" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-printbox-wide" width="320" height="148" title="Relaunch 2015: Printbox wide" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="zon-column" width="300" height="400" title="Relaunch 2015: Author column image" available="zeit.web.core.interfaces.IInternalUse"/>
   <!-- ZEIT ONLINE Scales -->
   <scale name="zon-thumbnail" width="580" height="326" title="Relaunch 2015: Thumbnail (kleiner Teaser)" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-large" width="580" height="326" title="Relaunch 2015: großer Teaser" available="zeit.web.core.interfaces.IInternalUse"/>
