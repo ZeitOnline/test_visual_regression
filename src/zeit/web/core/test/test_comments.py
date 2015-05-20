@@ -425,6 +425,7 @@ def test_post_comments_should_get_with_correct_arguments(
     assert actual == expected
     assert result[0] == mock_method.call_args_list[0][0]
 
+
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
 def test_invalidation_should_be_called_on_successful_post(
@@ -442,10 +443,11 @@ def test_invalidation_should_be_called_on_successful_post(
         response.content = ''
         mock_method.return_value = response
         with patch.object(
-            zeit.web.core.view_comment, 'invalidate_comment_thread') as inv:
+                zeit.web.core.view_comment, 'invalidate_comment_thread') as iv:
             poster.post_comment()
 
-    assert inv.call_args[0][0] == 'http://xml.zeit.de/my/path'
+    assert iv.call_args[0][0] == 'http://xml.zeit.de/my/path'
+
 
 @pytest.mark.parametrize("action, path, service", [
     ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),

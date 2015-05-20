@@ -241,6 +241,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
         conf.get('community_host', ''))
     return thread
 
+
 @beaker.cache.cache_region('long_term', 'comment_thread')
 def get_cacheable_thread(unique_id):
 
