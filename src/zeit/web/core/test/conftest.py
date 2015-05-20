@@ -117,8 +117,8 @@ settings = {
         'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
     'vivi_zeit.web_navigation-footer-links': (
         'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
-    'vivi_zeit.web_navigation-servicebox': (
-        'egg://zeit.web.core/data/config/navigation-servicebox.xml'),
+    'vivi_zeit.web_servicebox-source': (
+        'egg://zeit.web.core/data/config/servicebox.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (

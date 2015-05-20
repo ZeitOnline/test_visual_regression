@@ -25,7 +25,7 @@ class Service(object):
 
 class ServiceSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
-    config_url = 'source-servicebox'
+    config_url = 'servicebox-source'
 
     def getValues(self, context):
         tree = self._get_tree()
