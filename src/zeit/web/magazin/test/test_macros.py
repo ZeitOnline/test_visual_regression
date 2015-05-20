@@ -818,6 +818,3 @@ def test_macro_liveblog_produces_html(jinja2_env):
         output += line.strip()
     assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
             'onerror="continue"></esi:include>') in output
-    assert '<esi:remove>' in output
-    assert '<div data-type="esi-content"></div>' in output
-    assert '</esi:remove>' in output
