@@ -17,11 +17,19 @@ import zeit.web.site.view_centerpage
 @pytest.fixture
 def mock_ad_view(application):
     class MockAdView(zeit.web.core.view.Base):
-        def __init__(self, type, ressort, sub_ressort, is_hp=False):
+        def __init__(
+                self, type, ressort,
+                sub_ressort, is_hp=False, banner_id=None, serienname='',
+                product_id=None):
             self.type = type
             self.ressort = ressort
             self.sub_ressort = sub_ressort
             self.is_hp = is_hp
+            self.product_id = product_id
+            self.serie = serienname
+            context = mock.Mock()
+            context.banner_id = banner_id
+            self.context = context
 
     return MockAdView
 
@@ -194,6 +202,99 @@ def test_adcontroller_handle_return_value(mock_ad_view):
                         ).adcontroller_handle == 'video_artikel'
     assert mock_ad_view('quiz', 'politik', 'deutschland'
                         ).adcontroller_handle == 'quiz'
+
+
+def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):
+    assert mock_ad_view(
+        'centerpage', 'angebote', '',
+        banner_id='mein/ad/code').banner_channel == 'mein/ad/code/centerpage'
+
+
+def test_banner_channel_mapping_should_apply_second_rule(mock_ad_view):
+    assert mock_ad_view('centerpage', 'angebote', '',
+                        serienname='meh').banner_channel == (
+        'angebote/meh/centerpage')
+    assert mock_ad_view('centerpage', 'angebote', '',
+                        serienname='a k').banner_channel == (
+        'angebote/a_k/centerpage')
+
+
+def test_banner_channel_mapping_should_apply_third_rule(mock_ad_view):
+    assert mock_ad_view('centerpage', 'zeit-magazin',
+                        'irgendwas').banner_channel == (
+        'zeitmz/irgendwas/centerpage')
+    assert mock_ad_view('centerpage', 'lebensart',
+                        '').banner_channel == 'zeitmz/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'mobilitaet', '').banner_channel == 'auto/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'ranking', '').banner_channel == 'studium/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'sport',
+        '', product_id='news').banner_channel == 'news/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'politk',
+        '', product_id='sid').banner_channel == 'sid/centerpage'
+    assert mock_ad_view(
+        'article', 'foto', '').banner_channel == 'kultur/article'
+    assert mock_ad_view(
+        'article', 'wirtschaft', 'geld',
+        serienname='geldspezial').banner_channel == 'geldspezial/article'
+    assert mock_ad_view(
+        'centerpage',
+        'sport',
+        'zeit wissen').banner_channel == 'wissen/zeit_wissen/centerpage'
+    assert mock_ad_view(
+        'centerpage',
+        'sport',
+        'zeit campus').banner_channel == 'wissen/zeit_campus/centerpage'
+    assert mock_ad_view('centerpage', 'sport',
+                        'zeit geschichte').banner_channel == (
+        'wissen/zeit_geschichte/centerpage')
+    assert mock_ad_view('centerpage', 'sport',
+                        'das wissen dieser welt').banner_channel == (
+        'wissen/bildungskanon/centerpage')
+    assert mock_ad_view(
+        'centerpage', 'wissen', '', serienname="spiele").banner_channel == (
+        'spiele/centerpage')
+    assert mock_ad_view(
+        'centerpage',
+        'campus',
+        'irgendwas').banner_channel == 'studium/irgendwas/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'wissen', '', serienname="reise").banner_channel == (
+        'reisen/centerpage')
+    assert mock_ad_view('centerpage', 'kultur',
+                        'computer').banner_channel == 'digital/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'technik', '').banner_channel == 'digital/centerpage'
+
+
+def test_banner_channel_mapping_should_apply_fourthandfitfth(mock_ad_view):
+    assert mock_ad_view(
+        'centerpage', 'politik', '').banner_channel == 'politik/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'pol', 'deu').banner_channel == 'pol/deu/centerpage'
+
+
+def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
+    assert mock_ad_view(
+        'centerpage', '', '').banner_channel == 'vermischtes/centerpage'
+
+
+def test_adcontroller_values_are_correctly_returned(mock_ad_view):
+    zw_code = [('$handle', 'centerpage'), ('level2', 'wissen'),
+               ('level3', 'zeit_wissen'), ('$autoSizeFrames', True),
+               ('keywords', ''), ('tma', '')]
+    zw_test = mock_ad_view(
+        'centerpage', 'sport', 'zeit wissen').adcontroller_values
+    assert zw_code == zw_test
+    zmz_code = [('$handle', 'index'), ('level2', 'zeitmz'),
+                ('level3', 'irgendwas'), ('$autoSizeFrames', True),
+                ('keywords', ''), ('tma', '')]
+    zmz_test = mock_ad_view(
+        'centerpage', 'zeit-magazin', 'irgendwas').adcontroller_values
+    assert zmz_code == zmz_test
 
 
 def test_centerpage_should_have_manual_seo_pagetitle(application):

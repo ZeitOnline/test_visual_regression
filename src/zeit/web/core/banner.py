@@ -74,6 +74,7 @@ class IqdMobileList(object):
 banner_list = None
 iqd_mobile_ids = None
 banner_toggles = None
+banner_id_mappings = None
 
 
 def make_banner_list(banner_config):
@@ -138,3 +139,20 @@ def make_iqd_mobile_ids(banner_config):
         except:
             pass
     return iqd_mobile_ids
+
+
+def make_banner_id_mappings(banner_id_mappings_source):
+    try:
+        banner_id_mappings_xml = lxml.etree.parse(banner_id_mappings_source)
+    except (TypeError, IOError):
+        return list()
+    banner_id_mappings = banner_id_mappings_xml.xpath(
+        '/banner_id_mappings/mapping')
+    mapping_list = list()
+    for mapping in banner_id_mappings:
+        target = mapping.xpath('@target')[0]
+        value = mapping.xpath('@value')[0]
+        banner_code = mapping.xpath('@banner_code')[0]
+        mapping_list.append(
+            dict(target=target, value=value, banner_code=banner_code))
+    return mapping_list

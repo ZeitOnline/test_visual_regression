@@ -4,7 +4,9 @@ Change log for zeit.web
 1.24 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1732: Add banner code mapping rules and table
+
+- ZON-1569: Upgrade author column images to image groups
 
 
 1.23.1 (2015-05-20)
@@ -24,11 +26,11 @@ Change log for zeit.web
 
 - ZON-1731: Prepare centerpage areas for dynamic operation
 
+- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
+
 - ZON-1658: Add campaign params to share URLs
 
 - DEV-774: Wire up zeit.content.dynamicfolder
-
-- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
 
 - FIX: Straighten comment dates
 
