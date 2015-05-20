@@ -92,7 +92,7 @@ And you will know My name is the Lord when I lay My vengeance upon thee.
             u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
             u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
   #}
-    <ul class="article__item">
+    <ul class="list article__item">
         {{ html | safe }}
     </ul>
 {%- endmacro %}
@@ -103,7 +103,7 @@ And you will know My name is the Lord when I lay My vengeance upon thee.
             u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
             u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
   #}
-    <ol class="article__item">
+    <ol class="list article__item">
         {{ html | safe }}
     </ol>
 {%- endmacro %}
