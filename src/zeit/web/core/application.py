@@ -125,11 +125,6 @@ class Application(object):
         zeit.web.core.navigation.navigation_footer_links = (
             zeit.web.core.navigation.make_navigation(
                 navigation_footer_links_config))
-        navigation_servicebox_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-servicebox', ''))
-        zeit.web.core.navigation.navigation_servicebox = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_servicebox_config))
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
