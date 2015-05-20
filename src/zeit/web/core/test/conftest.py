@@ -33,12 +33,17 @@ import zeit.web.core.view
 
 settings = {
     'pyramid.reload_templates': 'false',
-
     'pyramid.debug_authorization': 'false',
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-
+    'cache.type': 'memory',
+    'cache.lock_file': '/tmp/test_lock',
+    'cache.regions': 'default_term, second, short_term, long_term',
+    'cache.second.expire': '1',
+    'cache.short_term.expire': '60',
+    'cache.default_term.expire': '300',
+    'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
     'caching_time_content': '5',
     'caching_time_article': '10',

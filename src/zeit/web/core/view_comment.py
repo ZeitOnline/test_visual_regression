@@ -11,7 +11,7 @@ import pyramid.view
 import urlparse
 import json
 import logging
-import beaker
+import beaker.cache
 
 import zeit.cms.interfaces
 

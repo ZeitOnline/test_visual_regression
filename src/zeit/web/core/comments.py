@@ -10,7 +10,7 @@ import math
 import requests
 import requests.exceptions
 import zope.component
-import beaker
+import beaker.cache
 
 import zeit.cms.interfaces
 
