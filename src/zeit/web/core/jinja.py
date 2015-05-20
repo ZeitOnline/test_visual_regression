@@ -23,7 +23,6 @@ import zope.interface
 
 import zeit.cms.interfaces
 
-import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
@@ -64,6 +63,7 @@ class Environment(jinja2.environment.Environment):
         self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
     def handle_exception(self, *args, **kw):
+        log.error(traceback.format_exc())
         return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):
