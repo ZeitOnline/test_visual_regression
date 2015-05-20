@@ -13,7 +13,7 @@
             {%- endif -%}
             ">
             <div class="scaled-image">
-                {{ insert_responsive_image(obj, None, 'article') }}
+                {{ lama_core.insert_responsive_image(obj, None, 'article') }}
             </div>
             <figcaption class="figure__caption">
                 {% if loop -%}
@@ -35,36 +35,6 @@
         </figure>
     {%- endif %}
 {%- endmacro %}
-
-{% macro insert_responsive_image(image, image_class, page_type) %}
-
-    {% set alt = ''%}
-    {% set title = ''%}
-
-    {% if image.alt %}
-        {% set alt = image.alt %}
-        {% set title = image.title %}
-    {% elif image.attr_alt %}
-        {% set alt = image.attr_alt %}
-        {% set title = image.attr_title %}
-    {% endif %}
-
-    {% if image %}
-        <!--[if gt IE 8]><!-->
-            <noscript data-src="{{image | default_image_url}}">
-        <!--<![endif]-->
-        {% if page_type == 'article' and image.href %}
-            <a href="{{image.href}}">
-        {% endif %}
-                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
-        {% if page_type == 'article' and image.href %}
-            </a>
-        {% endif %}
-        <!--[if gt IE 8]><!-->
-            </noscript>
-        <!--<![endif]-->
-    {% endif %}
-{% endmacro %}
 
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading article__item">
