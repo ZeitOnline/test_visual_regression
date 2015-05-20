@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<navigation>
+<!-- 1. Spalte (von 4) -->
+  <section>
+    <link href="http://community.zeit.de/newsletter" label="Newsletter" id="hp.global.servicebox.links.newsletter">Newsletter</link>
+  </section>
+  <section>
+    <link href="https://premium.zeit.de/abo/probeabo?wt_mc=pm.intern.fix.zeitde.servicezeile.digipak.text.appsepaper" label="Apps &amp; E-Paper" id="hp.global.servicebox.links.apps-epaper">Apps &amp; E-Paper</link>
+  </section>
+  <section>
+    <link href="http://www.zeitabo.de/?mcwt=2009_07_0002" label="Abo-Services" id="hp.global.servicebox.links.abo-services">Abo-Services</link>
+  </section>
+  <section>
+    <link href="http://www.zeitakademie.de/?mc=zeitakademie.Footer.Textlink.zeitakademie.textlink.textlink" label="BildungWeiterbildung" id="hp.global.servicebox.links.bildung-weiterbildung">ZEIT Akademie</link>
+  </section>
+  <section>
+    <link href="http://marktplatz.zeit.de/kataloge/" label="Kataloge" id="hp.global.servicebox.links.kataloge">Kataloge</link>
+  </section>
+<!-- 2. Spalte (von 4) -->
+  <section>
+    <link href="http://studiengaenge.zeit.de/" label="Studiengangsuche" id="hp.global.servicebox.links.studiengangsuche">Studiengangsuche</link>
+  </section>
+  <section>
+    <link href="http://xml.zeit.de/studium/rankings/index" label="Uni-Rankings" id="hp.global.servicebox.links.uni-rankings">Uni-Rankings</link>
+  </section>
+  <section>
+    <link href="http://marktplatz.zeit.de/veranstaltungen/index" label="Kulturangebote" id="hp.global.servicebox.links.kulturangebote">Kulturangebote</link>
+  </section>
+  <section>
+    <link href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.servicezeile.digipak.text.zaudio" label="ZEIT-Audio" id="hp.global.servicebox.links.zeit-audio">ZEIT Audio</link>
+  </section>
+  <section>
+    <link href="http://xml.zeit.de/spiele/index" label="Spiele" id="hp.global.servicebox.links.spiele">Spiele</link>
+  </section>
+<!-- 3. Spalte (von 4) -->
+  <section>
+    <link href="http://automarkt.zeit.de/" label="Automarkt" id="hp.global.servicebox.links.automarkt">Automarkt</link>
+  </section>
+  <section>
+    <link href="http://jobs.zeit.de/" label="Jobsuche" id="hp.global.servicebox.links.jobsuche">Jobsuche</link>
+  </section>
+  <section>
+    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" label="Partnersuche" id="hp.global.servicebox.links.partnersuche">Partnersuche</link>
+  </section>
+  <section>
+    <link href="http://zeit.immowelt.de/" label="Immobiliensuche" id="hp.global.servicebox.links.immobiliensuche" rel="nofollow">Immobiliensuche</link>
+  </section>
+  <section>
+    <link href="http://www.bellevue-ferienhaus.de/zeit/" label="ReisenUnterkuenfte" id="hp.global.servicebox.links.ferienhaeuser" rel="nofollow">Ferienhäuser</link>
+  </section>
+<!-- 4. Spalte (von 4) -->
+  <section>
+    <link href=" http://www.zeit.de/angebote/experteer/index?affiliate=affiliate_2012_97" label="Headhunter" id="hp.global.servicebox.links.headhunter">Headhunter</link>
+  </section>
+  <section>
+    <link href="http://services.zeit.de/toptarif/vergleichsrechner.php" label="Tarifvergleiche" id="hp.global.servicebox.links.tarifvergleiche">Tarifvergleiche</link>
+  </section>
+  <section>
+    <link href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.servicelink.zon.urlaubsziele.zeit_blog_urlaubsziele.textlink.textlink" label="Urlaubsziele" id="hp.global.servicebox.links.urlaubsziele">Urlaubsziele</link>
+  </section>
+  <section>
+    <link href="http://schach.zeit.de/" label="Schach spielen" id="hp.global.servicebox.links.schach">Schach spielen</link>
+  </section>
+  <section>
+    <link href="http://www.zeit.de/angebote/senioren-ratgeber/" label="Senioren-Ratgeber" id="hp.global.servicebox.links.seniorenratgeber">Senioren-Ratgeber</link>
+  </section>
+</navigation>
