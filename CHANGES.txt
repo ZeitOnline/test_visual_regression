@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1733: Refactor deeplinks
 
+- FIX: Bring back printbox images
+
 
 1.23 (2015-05-19)
 -----------------
