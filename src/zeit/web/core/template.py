@@ -233,6 +233,7 @@ scales = {
     'zon-article-large': (820, 462),
     'zon-printbox': (320, 234),
     'zon-printbox-wide': (320, 148),
+    'zon-column': (300, 400),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
     'spektrum': (220, 124)
@@ -428,10 +429,11 @@ def _existing_image(asset_id, base_name, patterns, ext, filenames):
 @zeit.web.register_global
 def get_column_image(teaser):
     try:
-        return zeit.web.core.interfaces.ITeaserImage(
-            teaser.authorships[0].target.column_teaser_image)
+        image_group = teaser.authorships[0].target.image_group
+        image = closest_substitute_image(image_group, 'zon-column')
+        return zeit.web.core.interfaces.ITeaserImage(image)
     except (AttributeError, IndexError, TypeError):
-        log.warn('Teaser {} has no authorships'.format(getattr(
+        log.debug('Author of {} has no column image.'.format(getattr(
             teaser, 'uniqueId', 'unknown')))
 
 
