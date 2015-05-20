@@ -47,7 +47,7 @@ settings = {
     'caching_time_image': '30',
     'caching_time_videostill': '35',
     'caching_time_external': '15',
-    'community_host': 'http://localhost:6551/',
+    'community_host': 'http://localhost:6551',
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
@@ -105,6 +105,8 @@ settings = {
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
+    'vivi_zeit.web_banner-id-mappings': (
+        'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
     'vivi_zeit.web_navigation': (
         'egg://zeit.web.core/data/config/navigation.xml'),
     'vivi_zeit.web_navigation-services': (

@@ -87,6 +87,10 @@ class Application(object):
             self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
+        banner_id_mappings = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
+        zeit.web.core.banner.banner_id_mappings = (
+            zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
 
     def configure_series(self):
         series_source = maybe_convert_egg_url(
@@ -479,10 +483,10 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def _handle_centerpage(self, context, request):
         if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
             form = find_block(context, module='search-form')
-            area = find_block(context, attrib='area', module='ranking')
+            area = find_block(context, attrib='area', kind='ranking')
             if form and area:
                 form = zeit.web.core.template.get_module(form)
-                area = zeit.web.site.search.ResultsArea(area)
+                area = zeit.web.core.template.get_area(area)
 
                 form['q'] = ' '.join(request.GET.getall('q'))
                 form['type'] = ' '.join(request.GET.getall('type'))

@@ -12,6 +12,7 @@
     <exclude package="zeit.content.article.edit.browser" />
     <exclude package="zeit.content.article.browser" />
     <include package="zeit.content.article" />
+    <include package="zeit.content.dynamicfolder" />
     <include package="zeit.content.image" />
     <include package="zeit.content.link" />
     <include package="zeit.content.text" />

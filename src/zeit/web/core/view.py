@@ -127,17 +127,40 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def serie(self):
+        if self.context.serie is None:
+            return ''
+        return self.context.serie.serienname
+
+    @zeit.web.reify
     def banner_channel(self):
-        channel = ''
-        if self.ressort:
-            myressort = self.ressort.replace('zeit-magazin', 'zeitmz')
-            # TODO: End discrepancy between testing and live ressorts!
-            myressort = myressort.replace('lebensart', 'zeitmz')
-            channel += myressort
-        if self.sub_ressort:
-            channel += '/' + self.sub_ressort.replace('-', 'und', 1)
-        channel += '/' + self.banner_type
-        return channel
+        # manually banner_id rules first
+        if self.context.banner_id is not None:
+            return '{}/{}'.format(self.context.banner_id, self.banner_type)
+        # second rule: angebote are mapped with two levels
+        if self.ressort == 'angebote':
+            _serie = self.serie.replace(' ', '_')
+            return '{}/{}/{}'.format(self.ressort, _serie, self.banner_type)
+        # third: do the mapping
+        mappings = zeit.web.core.banner.banner_id_mappings
+        for mapping in mappings:
+            if getattr(self, mapping['target'], None) == mapping['value']:
+                if mapping['target'] == 'ressort' and self.sub_ressort != '':
+                    return '{}/{}/{}'.format(
+                        mapping['banner_code'],
+                        self.sub_ressort, self.banner_type)
+                else:
+                    return '{}/{}'.format(mapping['banner_code'],
+                                          self.banner_type)
+        # subressort?
+        if self.sub_ressort != '' and self.ressort != '':
+            return '{}/{}/{}'.format(self.ressort,
+                                     self.sub_ressort, self.banner_type)
+        # ressort ?
+        if self.ressort != '':
+            return '{}/{}'.format(self.ressort, self.banner_type)
+        # fallback of the fallbacks
+        return 'vermischtes/{}'.format(self.banner_type)
 
     @zeit.web.reify
     def banner_type(self):
@@ -170,9 +193,12 @@ class Base(object):
     @zeit.web.reify
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values"""
+        levels = self.banner_channel.split('/')
+        # remove type from level3
+        levels[1] = '' if levels[1] == self.type else levels[1]
         return [('$handle', self.adcontroller_handle),
-                ('level2', self.ressort),
-                ('level3', self.sub_ressort),
+                ('level2', levels[0]),
+                ('level3', levels[1]),
                 ('$autoSizeFrames', True),
                 ('keywords', ''),
                 ('tma', '')]
@@ -434,15 +460,15 @@ class Content(Base):
 
     @zeit.web.reify
     def comments(self):
-        sort = 'asc'
-        page = 1
-        if self.request.params.get('sort') == 'desc':
-            sort = 'desc'
-        if self.request.params.get('page'):
-            page = self.request.params.get('page')
+        sort = self.request.params.get('sort', 'asc')
+        page = self.request.params.get('page', 1)
+        cid = self.request.params.get('cid', None)
         return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url, sort=sort,
-            page=page, cid=self.request.params.get('cid'))
+            self.context.uniqueId,
+            destination=self.request.url,
+            sort=sort,
+            page=page,
+            cid=cid)
 
     @zeit.web.reify
     def obfuscated_date(self):
