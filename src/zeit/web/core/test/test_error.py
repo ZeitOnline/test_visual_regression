@@ -24,30 +24,7 @@ class Raiser(object):
         raise getattr(exceptions, cls)()
 
 
-def test_url_path_not_found_should_render_404(testserver):
-    resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
-    assert u'Dokument nicht gefunden' in resp.text
-
-
-def test_not_renderable_content_object_should_trigger_restart(testserver):
-    resp = requests.get('%s/quiz-workaholic' % testserver.url)
-    assert resp.headers['x-render-with'] == 'default'
-
-
-def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
-    def raise_exc(exc, *args):
-        """Helper function for raising exceptions without using the builtin
-        `raise` statement."""
-        raise exc(*args)
-
-    monkeypatch.setattr(Centerpage, 'title',
-                        property(lambda self: raise_exc(Exception)))
-
-    resp = requests.get('%s/centerpage/lebensart' % debug_testserver.url)
-    assert u'Dokument zurzeit nicht verfügbar' in resp.text
-
-
-@pytest.mark.parametrize('markup,assertion,kw', [
+faulty_templates = [
     ('{{ bad }}',
      'Unknown variables',
      {}),
@@ -140,10 +117,38 @@ def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
      {}),
     ('{{ 100 / 0 }}',
      'Insanity',
-     {})
-])
+     {})]
+
+message = '{} should not bother friedbert.'
+
+
+def test_url_path_not_found_should_render_404(testserver):
+    resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
+    assert u'Dokument nicht gefunden' in resp.text
+
+
+def test_not_renderable_content_object_should_trigger_restart(testserver):
+    resp = requests.get('%s/quiz-workaholic' % testserver.url)
+    assert resp.headers['x-render-with'] == 'default'
+
+
+def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
+    def raise_exc(exc, *args):
+        """Helper function for raising exceptions without using the builtin
+        `raise` statement."""
+        raise exc(*args)
+
+    monkeypatch.setattr(Centerpage, 'title',
+                        property(lambda self: raise_exc(Exception)))
+
+    resp = requests.get('%s/centerpage/lebensart' % debug_testserver.url)
+    assert u'Dokument zurzeit nicht verfügbar' in resp.text
+
+
+@pytest.mark.parametrize('markup,assertion,kw', faulty_templates,
+                         ids=[message.format(i[1]) for i in faulty_templates])
 def test_failsafe_rendering(markup, assertion, kw):
     env = zeit.web.core.jinja.Environment()
     tpl = env.from_string(markup)
     condition = isinstance(tpl.render(**kw), basestring)
-    assert condition, assertion + ' should not bother zeit.web.'
+    assert condition, message.format(assertion)
