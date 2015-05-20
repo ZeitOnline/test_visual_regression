@@ -86,9 +86,9 @@
 
 {% macro unorderedlist(html) -%}
   {#
-    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+    html = (u'<li><i>Your</i> bones don’t break, <em>mine</em> do. That’s clear.</li>'
             u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
-            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+            u'<li>You don’t get sick, <a href="#">I do</a>.</li>')
   #}
     <ul class="article__item">
         {{ html | safe }}
@@ -97,9 +97,9 @@
 
 {% macro orderedlist(html) -%}
   {#
-    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+    html = (u'<li><i>Your</i> bones don’t break, <em>mine</em> do. That’s clear.</li>'
             u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
-            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+            u'<li>You don’t get sick, <a href="#">I do</a>.</li>')
   #}
     <ol class="article__item">
         {{ html | safe }}
@@ -145,18 +145,18 @@
         <div class="infobox__content">
             {% for title, text in obj.contents %}
                 <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
-                    <h3 
-                        data-role="tab" 
-                        data-aria-controls="{{ id }}-{{ loop.index }}-article" 
+                    <h3
+                        data-role="tab"
+                        data-aria-controls="{{ id }}-{{ loop.index }}-article"
                         class="infobox-tab__title"
                         data-index="{{ loop.index }}"
                         tabindex="0">
                         <a tabindex="-1" class="infobox-tab__link" href="#{{ id }}-{{ loop.index }}">{{ title }}</a>
                     </h3>
-                    <article 
-                        role="tabpanel" 
-                        aria-labelledby="{{ id }}-{{ loop.index }}-tab" 
-                        class="infobox-tab__content" 
+                    <article
+                        role="tabpanel"
+                        aria-labelledby="{{ id }}-{{ loop.index }}-tab"
+                        class="infobox-tab__content"
                         id="{{ id }}-{{ loop.index }}-article">
                         {% for item in text %}
                             {{ (item | block_type or "no_block") | macro(item) }}

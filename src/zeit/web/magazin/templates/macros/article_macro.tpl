@@ -81,9 +81,9 @@
 
 {% macro unorderedlist(html) -%}
   {#
-    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+    html = (u'<li><i>Your</i> bones don’t break, <em>mine</em> do. That’s clear.</li>'
             u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
-            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+            u'<li>You don’t get sick, <a href="#">I do</a>.</li>')
   #}
     <ul class="is-constrained is-centered">
         {{ html | safe }}
@@ -92,9 +92,9 @@
 
 {% macro orderedlist(html) -%}
   {#
-    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+    html = (u'<li><i>Your</i> bones don’t break, <em>mine</em> do. That’s clear.</li>'
             u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
-            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+            u'<li>You don’t get sick, <a href="#">I do</a>.</li>')
   #}
     <ol class="is-constrained is-centered">
         {{ html | safe }}
