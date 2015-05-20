@@ -5,6 +5,7 @@ import logging
 import os
 import pkg_resources
 import pstats
+import traceback
 
 import StringIO
 import urlparse
@@ -69,6 +70,7 @@ class Environment(jinja2.environment.Environment):
         try:
             return getattr(super(Environment, self), func)(obj, name)
         except BaseException:
+            log.error(traceback.format_exc())
             return self.undefined(obj, name)
 
     def getitem(self, obj, argument):
