@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - FIX: Straighten comment dates
 
+- ZON-1732: Add banner code mapping rules and table
+
 
 1.22 (2015-05-15)
 -----------------

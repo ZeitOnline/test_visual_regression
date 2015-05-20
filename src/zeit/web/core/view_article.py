@@ -242,12 +242,6 @@ class Article(zeit.web.core.view.Content):
         return nextread
 
     @zeit.web.reify
-    def serie(self):
-        if self.context.serie is None:
-            return ''
-        return self.context.serie.serienname
-
-    @zeit.web.reify
     def linkreach(self):
         def unitize(n):
             if n <= 999:
