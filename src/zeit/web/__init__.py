@@ -1,22 +1,15 @@
-# -*- coding: utf-8 -*-
+__import__('pkg_resources').declare_namespace(__name__)
 
-import pkg_resources
+from zeit.web.core.decorator import register_copyrights
+from zeit.web.core.decorator import register_area
+from zeit.web.core.decorator import register_filter
+from zeit.web.core.decorator import register_global
+from zeit.web.core.decorator import register_module
+from zeit.web.core.decorator import register_test
+from zeit.web.core.decorator import reify
 
-from .core import decorator
-
-
-pkg_resources.declare_namespace(__name__)
 
 __all__ = [
     'register_copyrights', 'register_area', 'register_filter',
     'register_global', 'register_module', 'register_test', 'reify'
 ]
-
-register_filter = decorator.JinjaEnvRegistrator('filters')
-register_global = decorator.JinjaEnvRegistrator('globals')
-register_test = decorator.JinjaEnvRegistrator('tests')
-
-register_copyrights = decorator.register_copyrights
-register_module = decorator.register_module
-register_area = decorator.register_area
-reify = decorator.reify
