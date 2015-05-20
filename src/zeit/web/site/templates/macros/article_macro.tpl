@@ -72,7 +72,7 @@
     </h2>
 {%- endmacro %}
 
-{% macro paragraph(html, class) -%}
+{% macro paragraph(html) -%}
   {#
     html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '
             u'deutsches Kulturgut. <b>Dialekte</b> gehören schon immer zu diesem '
@@ -80,8 +80,30 @@
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
     <p class="paragraph article__item">
-        {{ html|safe }}
+        {{ html | safe }}
     </p>
+{%- endmacro %}
+
+{% macro unorderedlist(html) -%}
+  {#
+    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+            u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
+            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+  #}
+    <ul class="article__item">
+        {{ html | safe }}
+    </ul>
+{%- endmacro %}
+
+{% macro orderedlist(html) -%}
+  {#
+    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+            u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
+            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+  #}
+    <ol class="article__item">
+        {{ html | safe }}
+    </ol>
 {%- endmacro %}
 
 {% macro place(item) -%}

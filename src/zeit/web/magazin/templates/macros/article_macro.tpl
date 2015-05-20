@@ -67,7 +67,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro paragraph(html, class) -%}
+{% macro paragraph(html) -%}
   {#
     html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '
             u'deutsches Kulturgut. <b>Dialekte</b> gehören schon immer zu diesem '
@@ -77,6 +77,28 @@
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
+{%- endmacro %}
+
+{% macro unorderedlist(html) -%}
+  {#
+    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+            u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
+            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+  #}
+    <ul class="is-constrained is-centered">
+        {{ html | safe }}
+    </ul>
+{%- endmacro %}
+
+{% macro orderedlist(html) -%}
+  {#
+    html = (u'<li><i>Your</i> bones don't break, <em>mine</em> do. That's clear.</li>'
+            u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
+            u'<li>You don't get sick, <a href="#">I do</a>.</li>')
+  #}
+    <ol class="is-constrained is-centered">
+        {{ html | safe }}
+    </ol>
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}

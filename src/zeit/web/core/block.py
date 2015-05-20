@@ -68,6 +68,22 @@ class Paragraph(object):
 
 
 @grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IUnorderedList)
+class UnorderedList(Paragraph):
+
+    def __init__(self, model_block):
+        self.html = ''.join(
+            lxml.etree.tostring(item)
+            for item in model_block.xml.li)
+
+
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IOrderedList)
+class OrderedList(UnorderedList):
+    pass
+
+
+@grokcore.component.implementer(IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(object):
 
