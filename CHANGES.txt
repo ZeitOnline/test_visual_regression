@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1732: Add banner code mapping rules and table
 
+- ZON-1569: Upgrade author column images to image groups
+
 
 1.23.1 (2015-05-20)
 -------------------
@@ -23,8 +25,6 @@ Change log for zeit.web
 - ZON-1733: Enable deeplinks and working redirects for comments
 
 - ZON-1731: Prepare centerpage areas for dynamic operation
-
-- ZON-1569: Upgrade author column images to image groups
 
 - FIX: Diverse fixes for infobox, HTML conformity and a11y errors
 
