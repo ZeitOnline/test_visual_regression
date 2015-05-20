@@ -1,4 +1,7 @@
+import logging
+import traceback
 import sys
+import types
 
 import pyramid
 import pyramid.decorator
@@ -9,9 +12,44 @@ import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
 import zeit.web.core.interfaces
+import zeit.web.core.jinja
 
 
-def JinjaEnvRegistrator(env_attr):
+__all__ = [
+    'register_copyrights', 'register_area', 'register_filter',
+    'register_global', 'register_module', 'register_test', 'reify'
+]
+
+log = logging.getLogger(__name__)
+
+
+def safeguard(*args, **kw):
+    """Try to execute jinja environment modifier code and intercept potential
+    exceptions. If execution is intercept, return a jinja.Undefined object.
+
+    :internal:
+    """
+    try:
+        return globals()['func'](*args, **kw)
+    except BaseException:
+        logger(*sys.exc_info())
+        return globals()['undefined']()
+
+
+def logger(exc, val, tb):
+    """Log an exception that occoured during a jinja env modifier to
+    the error level of this module's logger. Strips off the uppermost
+    entry of the traceback.
+
+    :internal:
+    """
+    log.error(u''.join(
+        ['Traceback (most recent call last):\n'] +
+        traceback.format_list(traceback.extract_tb(tb)[1:]) +
+        [exc.__name__, ': ', unicode(val)]))
+
+
+def JinjaEnvRegistrator(env_attr):  # NOQA
     """Factory function that returns a decorator configured to register a given
     environment attribute to the jinja context.
 
@@ -20,9 +58,9 @@ def JinjaEnvRegistrator(env_attr):
     :rtype: types.FunctionType
     """
     def registrator(func):
-        """This decorator is non-destructive, meaning it does not replace the
-        decorated function with a wrapped one. Instead, a callback is attached
-        to the venusian scanner that is triggered at application startup.
+        """This decorator is recronstructs the decorated function and injects
+        the safeguarded codeblock into the dynamically created counterpart.
+        A callback is attached to the venusian scanner for env registration.
 
         :internal:
         """
@@ -35,9 +73,26 @@ def JinjaEnvRegistrator(env_attr):
             """
             if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj
-        venusian.attach(func, callback, category='jinja')
-        return func
+
+        fn = types.FunctionType(
+            safeguard.func_code, func.func_globals.copy(), name=func.func_name,
+            argdefs=func.func_defaults, closure=func.func_closure)
+
+        fn.func_globals.update(
+            {'undefined': zeit.web.core.jinja.Undefined, 'logger': logger,
+             'func': func, 'sys': sys})
+
+        fn.__doc__ = func.__doc__
+
+        venusian.attach(fn, callback, category='jinja')
+        return fn
+
     return registrator
+
+
+register_filter = JinjaEnvRegistrator('filters')
+register_global = JinjaEnvRegistrator('globals')
+register_test = JinjaEnvRegistrator('tests')
 
 
 def register_copyrights(func):
@@ -58,7 +113,7 @@ class NestedAttributeError(StandardError):
     pass
 
 
-class reify(pyramid.decorator.reify):
+class reify(pyramid.decorator.reify):  # NOQA
     """Subclass of `pyramid.decorator.reify` that fixes misleading tracebacks
     caused by AttributeErrors nested inside the property code."""
 
