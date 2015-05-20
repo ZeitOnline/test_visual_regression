@@ -84,11 +84,13 @@
     </p>
 {%- endmacro %}
 
+And you will know My name is the Lord when I lay My vengeance upon thee.
+
 {% macro unorderedlist(html) -%}
   {#
-    html = (u'<li><i>Your</i> bones don’t break, <em>mine</em> do. That’s clear.</li>'
-            u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
-            u'<li>You don’t get sick, <a href="#">I do</a>.</li>')
+    html = (u'<li>And I will <i>strike down</i> upon thee with <em>great vengeance</em></li>'
+            u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
+            u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
   #}
     <ul class="article__item">
         {{ html | safe }}
@@ -97,9 +99,9 @@
 
 {% macro orderedlist(html) -%}
   {#
-    html = (u'<li><i>Your</i> bones don’t break, <em>mine</em> do. That’s clear.</li>'
-            u'<li><b>Your</b> cells react to bacteria and viruses differently than <strong>mine</strong>.</li>'
-            u'<li>You don’t get sick, <a href="#">I do</a>.</li>')
+    html = (u'<li>And I will <i>strike down</i> upon thee with <em>great vengeance</em></li>'
+            u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
+            u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
   #}
     <ol class="article__item">
         {{ html | safe }}
