@@ -47,7 +47,7 @@ settings = {
     'caching_time_image': '30',
     'caching_time_videostill': '35',
     'caching_time_external': '15',
-    'community_host': 'http://localhost:6551/',
+    'community_host': 'http://localhost:6551',
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(

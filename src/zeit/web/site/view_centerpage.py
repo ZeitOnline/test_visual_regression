@@ -258,9 +258,9 @@ class LegacyCenterpage(Centerpage):
                 pass
 
         try:
-            box.image = zeit.content.image.interfaces.IImages(box).image
+            module.image = zeit.content.image.interfaces.IImages(box).image
         except (AttributeError, TypeError):
-            box.image = None
+            module.image = None
 
         return module
 
