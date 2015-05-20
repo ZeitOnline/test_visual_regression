@@ -4,14 +4,13 @@ from BeautifulSoup import BeautifulSoup
 import babel.dates
 import collections
 import datetime
-import itertools
 import logging
 import lxml.etree
 import math
-import repoze.lru
 import requests
 import requests.exceptions
 import zope.component
+import beaker
 
 import zeit.cms.interfaces
 
@@ -20,7 +19,6 @@ import zeit.web.core.template
 import zeit.web.core.utils
 
 
-cache_maker = repoze.lru.CacheMaker()
 log = logging.getLogger(__name__)
 
 
@@ -243,9 +241,7 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
         conf.get('community_host', ''))
     return thread
 
-
-@cache_maker.expiring_lrucache(
-    maxsize=1000, timeout=3600, name='comment_thread')
+@beaker.cache.cache_region('long_term', 'comment_thread')
 def get_cacheable_thread(unique_id):
 
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
