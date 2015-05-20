@@ -103,13 +103,6 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
-def area_width(width):
-    return {'1/1': None, '3/4': 'threequarters', '2/3': 'twothirds',
-            '1/2': 'onehalf', '1/3': 'onethird', '1/4': 'onequarter'}.get(
-                width, None)
-
-
-@zeit.web.register_filter
 def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
