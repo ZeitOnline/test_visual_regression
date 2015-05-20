@@ -9,13 +9,13 @@
             {%- elif obj.layout == 'large' -%}
                 article__item article__item--wide
             {%- elif obj.layout == 'small' -%}
-                article__item
+                article__item article__item--marginalia
             {%- endif -%}
             ">
             <div class="scaled-image">
                 {{ lama_core.insert_responsive_image(obj, None, 'article') }}
             </div>
-            <figcaption class="figure__caption">
+            <figcaption class="figure__caption {% if obj.layout == 'small' %}figure__caption--marginalia{%- endif -%}">
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
