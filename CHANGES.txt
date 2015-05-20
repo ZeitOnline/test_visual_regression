@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.24 (unreleased)
------------------
+1.23.1 (2015-05-20)
+-------------------
 
 - ZON-1733: Refactor deeplinks
 
