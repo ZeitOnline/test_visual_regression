@@ -2,10 +2,6 @@
 
 {% block layout %}teaser-topic-main{% endblock %}
 
-{#% block teaser_modifier %}teaser--ispositioned teaser--islight{% endblock %#}
-{#% block teaser_heading_modifier %}teaser__heading--issized{% endblock %#}
-{#% block teaser_container_modifier %}teaser__container--issized-desktop{% endblock %#}
-
 {% block teaser_media_position_before_title %}
     {% set teaser_block_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/teaser_asset/"+
@@ -20,20 +16,11 @@
 {% block teaser_kicker %}
 {% endblock %}
 
+{% block teaser_container %}
+{% endblock %}
+
 {% block teaser_media_position_after_container %}
     </div>
-    <ul class="{{ self.layout() }}__relateds">
-    {% for related in list(block)[1:] %}
-        <li class="{{ self.layout() }}__related">
-            <a href="{{ related.uniqueId | translate_url }}">
-                <span class="{{ self.layout() }}__related-kicker">{{ related.teaserSupertitle }}</span>
-            </a>
-            <a href="{{ related.uniqueId | translate_url }}">
-                <span class="{{ self.layout() }}__related-title">{{ related.teaserTitle }}</span>
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
 {% endblock %}
 
 {% block teaser_media_position_after_title %}
