@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
-import lxml
-import zope.component
-import pyramid.httpexceptions
-import requests
-import zeit.web.core
-import zeit.web.core.view
-import zeit.web.core.comments
-import zeit.web.core.template
-import pyramid.view
-import urlparse
 import json
 import logging
-import urllib
+import urlparse
+
+import lxml
+import pyramid.httpexceptions
+import pyramid.view
+import requests
+import zope.component
 
 import zeit.cms.interfaces
+
+import zeit.web.core
+import zeit.web.core.comments
+import zeit.web.core.template
+import zeit.web.core.view
+
 
 log = logging.getLogger(__name__)
 
