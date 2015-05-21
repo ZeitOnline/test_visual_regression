@@ -178,30 +178,22 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
         sorted_tree = reversed(sorted_tree)
         thread['sort'] = 'desc'
 
-    thread['comments'] = list(itertools.chain(
-        *[[li[0]] + li[1] for li in sorted_tree]))
+    comments = []
+    positional_index = {}
+    for main_comment in sorted_tree:
+        positional_index[main_comment[0]['cid']] = len(comments)
+        comments.append(main_comment[0])
+        for sub_comment in main_comment[1]:
+            positional_index[sub_comment['cid']] = len(comments)
+            comments.append(sub_comment)
+
+    thread['comments'] = comments
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
     comment_count = len(thread['comments'])
     pages = int(math.ceil(float(comment_count) / float(page_size)))
-
-    # show page for requested comment
-    if pages > 1 and cid:
-        try:
-            cid = int(cid)
-        except ValueError:
-            cid = None
-        else:
-            if thread['index'][cid]:
-                comment = thread['index'][cid]
-                try:
-                    position = thread['comments'].index(comment)
-                except ValueError:
-                    position = None
-                else:
-                    page = (position // page_size) + 1
 
     # sanitize page value
     if page:
@@ -212,6 +204,14 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
 
         if page < 1 or page > pages:
             page = 1
+
+    # find page by cid
+    if cid:
+        try:
+            pos = positional_index[int(cid)] + 1
+            page = int(math.ceil(float(pos) / float(page_size)))
+        except (KeyError, ValueError):
+            pass
 
     thread['headline'] = '{} {}'.format(
         comment_count, 'Kommentar' if comment_count == 1 else 'Kommentare')

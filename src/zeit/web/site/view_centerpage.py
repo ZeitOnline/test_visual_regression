@@ -10,6 +10,7 @@ import zope.component
 import zope.component.interfaces
 
 import zeit.cms.interfaces
+import zeit.content.cp.area
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 
@@ -28,21 +29,12 @@ log = logging.getLogger(__name__)
 
 
 @grokcore.component.implementer(zeit.edit.interfaces.IBlock)
-class LegacyModule(zeit.web.core.utils.nslist):
+class LegacyModule(zeit.web.core.block.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
-        super(LegacyModule, self).__init__([v for v in arg if v])
+        zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
         self.layout = kw.pop('layout', 'default')
-        self.type = 'teaser'
-
-    @property
-    def layout(self):
-        return getattr(self, '_layout', None)
-
-    @layout.setter
-    def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)
+        self.type = kw.pop('type', 'teaser')
 
     def __hash__(self):
         if getattr(self.layout, 'id', None):
@@ -55,13 +47,20 @@ class LegacyModule(zeit.web.core.utils.nslist):
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
-class LegacyArea(collections.OrderedDict):
+class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
 
     def __init__(self, arg, **kw):
         collections.OrderedDict.__init__(
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
-        self.is_teaserbar = kw.pop('is_teaserbar', False)
+        self.xml = kw.pop('xml', self.get_xml())
+        self.automatic = kw.pop('kind', False)
+        for key in kw:
+            try:
+                assert not hasattr(self, key)
+                setattr(self, key, kw[key])
+            except:
+                continue
 
     def append(self, value):
         self['id-{}'.format(uuid.uuid1())] = value
@@ -77,12 +76,10 @@ class LegacyArea(collections.OrderedDict):
 
 
 @grokcore.component.implementer(zeit.content.cp.interfaces.IRegion)
-class LegacyRegion(LegacyArea):
+class LegacyRegion(LegacyArea, zeit.content.cp.area.RegionFactory):
 
     def __init__(self, arg, **kw):
-        collections.OrderedDict.__init__(
-            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
-        self.kind = kw.pop('kind', 'solo')
+        LegacyArea.__init__(self, arg, **kw)
 
 
 class RenderedLegacyArea(LegacyArea):
@@ -261,9 +258,9 @@ class LegacyCenterpage(Centerpage):
                 pass
 
         try:
-            box.image = zeit.content.image.interfaces.IImages(box).image
+            module.image = zeit.content.image.interfaces.IImages(box).image
         except (AttributeError, TypeError):
-            box.image = None
+            module.image = None
 
         return module
 

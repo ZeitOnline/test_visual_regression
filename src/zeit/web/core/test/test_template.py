@@ -5,12 +5,14 @@ import sys
 import time
 
 import gocept.httpserverlayer.static
+import lxml.objectify
 import mock
 import pytest
 import venusian
 import webob.multidict
 
 import zeit.cms.interfaces
+import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.decorator
 import zeit.web.core.template
@@ -363,6 +365,14 @@ def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
     assert teaser == 'zon-series'
 
 
+def test_layout_for_empty_teaser_block_should_be_set_to_hide(application):
+    block = zeit.content.cp.blocks.teaser.TeaserBlock(
+        mock.Mock(), lxml.objectify.E.block(module='zon-small'))
+    block.__iter__ = lambda _: iter([])
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'hide'
+
+
 def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
@@ -390,7 +400,7 @@ def test_get_column_image_should_return_an_image_or_none(application):
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
 
-    assert type(img) == zeit.web.core.centerpage.Image
+    assert isinstance(img, zeit.web.core.centerpage.Image)
     assert zeit.web.core.template.get_column_image(None) is None
 
     teaser = mock.Mock()
@@ -461,14 +471,15 @@ def test_filter_append_get_params_should_accept_unicode():
 
 
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
-    assert zeit.web.core.template.get_module(None) is None
+    block = object()
+    assert zeit.web.core.template.get_module(block) is block
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     block = zeit.web.core.application.find_block(cp, module='search-form')
 
     block.visible = True
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is None
+    assert zeit.web.core.template.get_module(block) is block
 
     block.visible = True
     block.cpextra = 'search-form'
@@ -477,7 +488,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
 
     block.visible = False
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is None
+    assert zeit.web.core.template.get_module(block) is block
 
 
 def test_pagination_calculation_should_deliver_valid_output():
@@ -512,3 +523,15 @@ def test_pagination_calculation_should_fail_gracefully():
     assert pager(10, 5) is None
     assert pager(2, 1) is None
     assert pager(1, 1) is None
+
+
+def test_remove_get_params_should_remove_get_params():
+    url = "http://example.org/foo/baa?foo=ba&ba=batz&batz=x"
+    url = zeit.web.core.template.remove_get_params(url, 'foo', 'batz')
+
+    assert url == "http://example.org/foo/baa?ba=batz"
+
+    url = "http://example.org/foo/baa?foo=ba"
+    url = zeit.web.core.template.remove_get_params(url, 'batz')
+
+    assert url == "http://example.org/foo/baa?foo=ba"

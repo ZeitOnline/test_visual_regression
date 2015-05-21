@@ -65,7 +65,7 @@ def test_area_major_should_correctly_process_teasers(application):
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_major) == 2
+    assert len(cp.area_major) == 4
     assert cp.area_major.values()[0].layout.id == 'zon-large'
     assert cp.area_major.values()[1].layout.id == 'zon-small'
     assert list(cp.area_major.values()[0])[0] == 'article'
@@ -593,10 +593,10 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
         assert False, 'Video not visible with 10 seconds'
 
 
-def test_module_printbox_should_contain_teaser_image(testserver):
+def test_module_printbox_should_contain_teaser_image(application):
     mycp = mock.Mock()
     view = zeit.web.site.view_centerpage.LegacyCenterpage(mycp, mock.Mock())
-    image = view.module_printbox[0].image
+    image = view.module_printbox.image
     assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
 
