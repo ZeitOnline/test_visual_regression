@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1569: Upgrade author column images to image groups
 
+- ZON-1253: Safeguard jinja tests, modifiers and globals
+
 
 1.23.1 (2015-05-20)
 -------------------
