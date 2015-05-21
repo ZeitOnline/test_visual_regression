@@ -3,7 +3,7 @@
     {% block before_module_include scoped %}{% endblock %}
     {% set module = area.values()[:1][0] %}
     {% set teaser = module | first_child %}
-    {% set module_layout = module | get_layout %}
+    {% set module_layout = 'teaser-topic-main' %}
     {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-topic.tpl".format(teaser | auto_select_asset | block_type)
         ignore missing with context %}
     {% include
