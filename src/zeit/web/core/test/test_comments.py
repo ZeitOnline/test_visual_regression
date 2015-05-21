@@ -254,6 +254,11 @@ def _create_poster(monkeypatch):
         return None
     monkeypatch.setattr(requests, 'post', post)
 
+    def fans(me, uid):
+        return []
+    monkeypatch.setattr(
+        zeit.web.core.view_comment.PostComment, '_get_recommendations', fans)
+
     def nid(me, uid):
         return 1
     monkeypatch.setattr(
@@ -360,6 +365,7 @@ endpoint_recommend = (
     {'cookies': {},
      'data': {
      'content_id': 1,
+     'action': 'flag',
      'method': 'flag.flag',
      'flag_name': 'leser_empfehlung',
      'uid': '123', }})
