@@ -204,7 +204,7 @@ class PostComment(zeit.web.core.view.Base):
     def _get_recommendations(self, unique_id):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        if comment_thread['index'][self.pid]:
+        if comment_thread and comment_thread['index'][self.pid]:
             comment = comment_thread['index'][self.pid]
             if len(comment['fans']):
                 return comment['fans'].split(',')
