@@ -2,118 +2,119 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <author href="http://xml.zeit.de/autoren/S/Sven_Stockrahm/index.xml" publication-date="" expires="">
-      <display_name py:pytype="str">Sven Stockrahm</display_name>
+      <display_name>Sven Stockrahm</display_name>
     </author>
     <author href="http://xml.zeit.de/autoren/S/Alina_Schadwinkel/index" publication-date="" expires="">
-      <display_name py:pytype="str">Alina Schadwinkel</display_name>
+      <display_name>Alina Schadwinkel</display_name>
     </author>
     <author href="http://xml.zeit.de/autoren/G/Saskia_Gerhard/index" publication-date="" expires="">
-      <display_name py:pytype="str">Saskia Gerhard</display_name>
+      <display_name>Saskia Gerhard</display_name>
     </author>
     <author href="http://xml.zeit.de/autoren/R/Jasper_Riemann/index" publication-date="" expires="">
-      <display_name py:pytype="str">Jasper Riemann</display_name>
+      <display_name>Jasper Riemann</display_name>
     </author>
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2015/11/sonnenfinsternis-solarstrom-netz-probleme" year="2015" issue="11" ressort="Wissen" contenttype="article" publication-date="2015-03-26T02:48:59+00:00" expires="" author="Dirk Asendorpf">
-        <supertitle py:pytype="str">Sonnenfinsternis</supertitle>
-        <title py:pytype="str">Stresstest für den Solarstrom</title>
-        <text py:pytype="str">Ist am 20. März der Himmel vormittags klar, können wir einwandfrei eine teilweise Sonnenfinsternis bewundern. Gut für uns, für Solarstrombetreiber aber ein Albtraum.</text>
-        <description py:pytype="str">Ist am 20. März der Himmel vormittags klar, können wir einwandfrei eine teilweise Sonnenfinsternis bewundern. Gut für uns, für Solarstrombetreiber aber ein Albtraum.</description>
-        <byline py:pytype="str">von Dirk Asendorpf</byline>
+        <supertitle>Sonnenfinsternis</supertitle>
+        <title>Stresstest für den Solarstrom</title>
+        <text>Ist am 20. März der Himmel vormittags klar, können wir einwandfrei eine teilweise Sonnenfinsternis bewundern. Gut für uns, für Solarstrombetreiber aber ein Albtraum.</text>
+        <description>Ist am 20. März der Himmel vormittags klar, können wir einwandfrei eine teilweise Sonnenfinsternis bewundern. Gut für uns, für Solarstrombetreiber aber ein Albtraum.</description>
+        <byline>von Dirk Asendorpf</byline>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/wissen/umwelt/2015-03/sonnenfinsternis-solarstrom-netz/" type="jpg" title="Sonnenfinsternis: Stresstest für den Solarstrom" alt="Sonnenfinsternis: Stresstest für den Solarstrom" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Der Mond schiebt sich zwischen Erde und Sonne und verdunkelt so den Tag, wie hier 2011 in München.</bu>
-          <copyright py:pytype="str">© REUTERS/Michaela Rehle</copyright>
+          <bu>Der Mond schiebt sich zwischen Erde und Sonne und verdunkelt so den Tag, wie hier 2011 in München.</bu>
+          <copyright>© REUTERS/Michaela Rehle</copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/A/Dirk_Asendorpf/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Dirk Asendorpf</display_name>
+          <display_name>Dirk Asendorpf</display_name>
         </author>
       </reference>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/wirtschaft/2015-03/sonnenfinsternis-solarstrom-energiewende" year="2015" issue="9" ressort="Wirtschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/gruenegeschaefte/2015/03/03/sonnenfinsternis-energiewende" ns0:target="_blank" author="Marlies Uken">
-        <supertitle py:pytype="str">Sonnenfinsternis</supertitle>
-        <title py:pytype="str">Der Härtetest für die Energiewende </title>
-        <text py:pytype="str">Am 20. März versinkt Deutschland in eine partielle Sonnenfinsternis. Für das Stromnetz ein extremer Stresstest: Kein anderes Land weltweit setzt so sehr auf Solarstrom.</text>
-        <description py:pytype="str">Am 20. März versinkt Deutschland in eine partielle Sonnenfinsternis. Für das Stromnetz ein extremer Stresstest: Kein anderes Land weltweit setzt so sehr auf Solarstrom.</description>
+        <supertitle>Sonnenfinsternis</supertitle>
+        <title>Der Härtetest für die Energiewende </title>
+        <text>Am 20. März versinkt Deutschland in eine partielle Sonnenfinsternis. Für das Stromnetz ein extremer Stresstest: Kein anderes Land weltweit setzt so sehr auf Solarstrom.</text>
+        <description>Am 20. März versinkt Deutschland in eine partielle Sonnenfinsternis. Für das Stromnetz ein extremer Stresstest: Kein anderes Land weltweit setzt so sehr auf Solarstrom.</description>
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/wirtschaft/2015-03/sonnenfinsternis-blackout/" type="jpg" title="Sonnenfinsternis Blackout" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Drei Frauen während einer teilweisen Sonnenfinsternis in San Diego im Jahr 2014 </bu>
-          <copyright py:pytype="str">© REUTERS/Mike Blake </copyright>
+          <bu>Drei Frauen während einer teilweisen Sonnenfinsternis in San Diego im Jahr 2014 </bu>
+          <copyright>© REUTERS/Mike Blake </copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/U/Marlies_Uken/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Marlies Uken</display_name>
+          <display_name>Marlies Uken</display_name>
         </author>
       </reference>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wissen/2012-11/fs-sonnenfinsternis-australien" year="2012" issue="46" ressort="Wissen" contenttype="gallery" publication-date="" expires="">
         <badges>
-          <badge py:pytype="str">gallery</badge>
+          <badge>gallery</badge>
         </badges>
-        <supertitle py:pytype="str">Totale Sonnenfinsternis</supertitle>
-        <title py:pytype="str">Gleißender Feuerring über Down Under</title>
-        <text py:pytype="str">Am Morgen des 14. November waren Teile Ostaustraliens in Dunkelheit gehüllt – Tausende beobachteten, wie sich die Silhouette des Mondes langsam vor die Sonne schob.</text>
-        <description py:pytype="str">Am Morgen des 14. November waren Teile Ostaustraliens in Dunkelheit gehüllt – Tausende beobachteten, wie sich die Silhouette des Mondes langsam vor die Sonne schob.</description>
+        <supertitle>Totale Sonnenfinsternis</supertitle>
+        <title>Gleißender Feuerring über Down Under</title>
+        <text>Am Morgen des 14. November waren Teile Ostaustraliens in Dunkelheit gehüllt – Tausende beobachteten, wie sich die Silhouette des Mondes langsam vor die Sonne schob.</text>
+        <description>Am Morgen des 14. November waren Teile Ostaustraliens in Dunkelheit gehüllt – Tausende beobachteten, wie sich die Silhouette des Mondes langsam vor die Sonne schob.</description>
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/wissen/2012-11/fs-sonnenfinsternis-australien-teaser/" type="jpg" align="left" publication-date="" expires="">
           <bu xsi:nil="true"/>
-          <copyright py:pytype="str">© Brian Cassey/dpa</copyright>
+          <copyright>© Brian Cassey/dpa</copyright>
         </image>
       </reference>
     </references>
     <badges/>
     <image base-id="http://xml.zeit.de/zeit-online/live-blog/sonnenfinsternis-bilder/sonnenfinsternis-svalbard/" type="jpg" title="Totale Sonnenfinsternis Svalbard" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Die totale Sonnenfinsternis gab es über Svalbard. Schön.</bu>
-      <copyright py:pytype="str">© EPA/OLAV JON NESVOLD</copyright>
+      <bu>Die totale Sonnenfinsternis gab es über Svalbard. Schön.</bu>
+      <copyright>© EPA/OLAV JON NESVOLD</copyright>
     </image>
     <rankedTags>
       <tag type="free" score="4" uuid="a4e6724b-c24a-4ed8-a570-421dab796124" url_value="sonnenfinsternis">Sonnenfinsternis</tag>
-      <tag py:pytype="str" uuid="8e7643e7-7014-4372-ba0e-7acf4605f34d" url_value="" type="free">Astronomie</tag>
-      <tag py:pytype="str" uuid="553f9679-2cfc-4b43-9d4a-ae4444f610b0" url_value="" type="free">Sonne</tag>
-      <tag py:pytype="str" uuid="a632a45e-6736-4798-8ebb-b934651e8c41" url_value="" type="free">Mond</tag>
+      <tag uuid="8e7643e7-7014-4372-ba0e-7acf4605f34d" url_value="" type="free">Astronomie</tag>
+      <tag uuid="553f9679-2cfc-4b43-9d4a-ae4444f610b0" url_value="" type="free">Sonne</tag>
+      <tag uuid="a632a45e-6736-4798-8ebb-b934651e8c41" url_value="" type="free">Mond</tag>
     </rankedTags>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Sven Stockrahm;Alina Schadwinkel;Saskia Gerhard;Jasper Riemann</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Wissen</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-03-20T12:10:53.555185+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-03-20T07:53:46.232663+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-20T12:11:03.906277+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-03-20T12:12:03.699042+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-20T11:03:58.954167+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
-    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-03-20T11:02:59.923242+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stockrahm</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/wissen/2015-03/89f2076d-21f2-4c14-9d0b-c83b0c05ecac.tmp;http://xml.zeit.de/wissen/2015-03/sonnenfinsternis-deutschland-sofi2015</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">2021fbd6dd1045279f2a93d744bc593c</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">749</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fb783eb9-ff31-4ace-bf94-a30ba3698f77}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">11</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Sven Stockrahm;Alina Schadwinkel;Saskia Gerhard;Jasper Riemann</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wissen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-03-20T12:10:53.555185+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-03-20T07:53:46.232663+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-20T12:11:03.906277+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-03-20T12:12:03.699042+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-20T11:03:58.954167+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-03-20T11:02:59.923242+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stockrahm</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/wissen/2015-03/89f2076d-21f2-4c14-9d0b-c83b0c05ecac.tmp;http://xml.zeit.de/wissen/2015-03/sonnenfinsternis-deutschland-sofi2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">2021fbd6dd1045279f2a93d744bc593c</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">liveblog</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">749</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fb783eb9-ff31-4ace-bf94-a30ba3698f77}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">11</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name="Provides" module="zope.interface.declarations"/&gt;
@@ -135,9 +136,9 @@
     <subtitle>Und da ist sie schon wieder weg, die Sonnenfinsternis. Aber macht ja nichts. Wir haben das Beste hier gesammelt. Der Blick ins Live-Blog lohnt sich noch, versprochen.</subtitle>
     <division type="page">
       <image src="http://xml.zeit.de/zeit-online/live-blog/sonnenfinsternis-bilder/sonnenfinsternis-5/sonnenfinsternis-5-540x304.jpg" type="jpg" title="Sonnenfinsternis" alt="Sonnenfinsternis" align="left" publication-date="" expires="2015-06-20T09:21:29+00:00" layout="large" is_empty="False">
-        <bu py:pytype="str">Die Sonnenfinsternis in Liverpool
+        <bu>Die Sonnenfinsternis in Liverpool
 </bu>
-        <copyright py:pytype="str">© Peter Byrne/dpa</copyright>
+        <copyright>© Peter Byrne/dpa</copyright>
       </image>
       <ul>
         <li>
