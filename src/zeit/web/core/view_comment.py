@@ -55,9 +55,9 @@ class PostComment(zeit.web.core.view.Base):
         action = params.get('action')
 
         try:
-            self.pid = int(params.get('pid'))
+            pid = int(params.get('pid'))
         except (TypeError, ValueError):
-            self.pid = None
+            pid = None
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -84,11 +84,11 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No comment could be posted',
                 explanation=('Path and comment needed.'))
-        elif action == 'report' and (not(self.pid) or not(comment)):
+        elif action == 'report' and (not(pid) or not(comment)):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No report could be posted',
                 explanation=('Pid and comment needed.'))
-        elif action == 'recommend' and not self.pid:
+        elif action == 'recommend' and not pid:
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No recommondation could be posted',
                 explanation=('Pid needed.'))
@@ -104,15 +104,15 @@ class PostComment(zeit.web.core.view.Base):
             data['nid'] = nid
             data['subject'] = '[empty]'
             data['comment'] = comment
-            data['pid'] = self.pid
-        elif action == 'report' and self.pid:
+            data['pid'] = pid
+        elif action == 'report' and pid:
             method = 'get'
             data['note'] = comment
-            data['content_id'] = self.pid
+            data['content_id'] = pid
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
-        elif action == 'recommend' and self.pid:
-            fans = self._get_recommendations(unique_id)
+        elif action == 'recommend' and pid:
+            fans = self._get_recommendations(unique_id, pid)
             if uid in fans:
                 data['action'] = 'unflag'
                 fans.remove(uid)
@@ -121,7 +121,7 @@ class PostComment(zeit.web.core.view.Base):
                 fans.append(uid)
             recommendations = len(fans)
             method = 'get'
-            data['content_id'] = self.pid
+            data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'leser_empfehlung'
 
@@ -133,9 +133,8 @@ class PostComment(zeit.web.core.view.Base):
             allow_redirects=False)
 
         if response.status_code >= 200 and response.status_code <= 303:
-            self.status.append(
-                'Action {} was performed for {} (with pid {})'.format(
-                    method, unique_id, self.pid))
+            self.status.append('Action {} was performed for {}'
+                               ' (with pid {})'.format(method, unique_id, pid))
 
             self._invalidate_app_servers(unique_id)
 
@@ -153,7 +152,7 @@ class PostComment(zeit.web.core.view.Base):
                     'action': action,
                     'path': self.path,
                     'nid': nid,
-                    'pid': self.pid},
+                    'pid': pid},
                 'response': {
                     'content': content,
                     'error': error,
@@ -201,11 +200,11 @@ class PostComment(zeit.web.core.view.Base):
         return '{}/{}/{}'.format(
             self.community_host, endpoint, path).strip('/')
 
-    def _get_recommendations(self, unique_id):
+    def _get_recommendations(self, unique_id, pid):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        if comment_thread and comment_thread['index'][self.pid]:
-            comment = comment_thread['index'][self.pid]
+        if comment_thread and comment_thread['index'][pid]:
+            comment = comment_thread['index'][pid]
             if len(comment['fans']):
                 return comment['fans'].split(',')
 

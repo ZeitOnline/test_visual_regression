@@ -254,7 +254,7 @@ def _create_poster(monkeypatch):
         return None
     monkeypatch.setattr(requests, 'post', post)
 
-    def fans(me, uid):
+    def fans(me, uid, pid):
         return []
     monkeypatch.setattr(
         zeit.web.core.view_comment.PostComment, '_get_recommendations', fans)
