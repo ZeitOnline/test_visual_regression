@@ -1,39 +1,45 @@
-.teaser-topic
+.teaser-topic-main
 	@extend %teaser
-	background: $black
 	margin: $petite (-$petite)
 	padding: 0
 	position: relative
 	&__heading
 		@extend %teaser-heading
 		position: relative
-		margin-top: $small
-		margin-bottom: $twice
+		margin-top: remify(6px)
+		margin-bottom: remify(34px)
+		+respond-min($break-desktop-min)
+			margin-bottom: $twice
+			margin-top: $small
 	&__inner-helper
 		left: 0
 		padding: 0
 		position: absolute
-		top: 0
+		text-align: center
+		top: remify(27px)
+		width: 100%
 		z-index: 1
 		+respond-min($break-tablet-min)
 			width: 55%
-			top: em(45px)
-			padding-left: em(48px)
-			padding-right: em(48px)
+			top: remify(45px)
+			padding-left: remify(48px)
+			padding-right: remify(48px)
 		+respond-min($break-desktop-min)
 			width: 60%
-			top: em(65px)
-			padding-left: em(68px)
-			padding-right: em(68px)
+			padding-left: remify(68px)
+			padding-right: remify(68px)
 	&__introduction
 		color: $white
+		font-size: $font-s
 		letter-spacing: $zon-letter-spacing-l
+		text-transform: uppercase
 		-webkit-font-smoothing: antialiased
 		+respond-min($break-tablet-min)
 			font-size: $font-ml
 		+respond-min($break-desktop-min)
-			font-size: em(19px)
+			font-size: remify(19px)
 	&__media
+		float: left
 		margin: 0
 		width: 100%
 		z-index: 1
@@ -54,41 +60,47 @@
 			+respond-min($break-tablet-min)
 				+background(rgba(0, 0, 0, 0.5))
 	&__readmore
+		background-color: rgba(0, 0, 0, 0.5)
 		border-radius: 5px
 		border: 2px solid $charcoal
-		color: $zon_light_grey
+		color: $white
 		font-family: TabletGothic
-		font-size: $font-s
+		font-size: $font-ss
+		font-weight: bold
 		letter-spacing: $zon-letter-spacing-l
-		padding: 0.5em 1.2em
+		padding: remify(12px 25px)
 		text-transform: uppercase
 		-webkit-font-smoothing: antialiased
-	&__relateds
-		margin: 0
-		padding: 0
-		position: absolute
-		right: 0
-		top: 65px
-		z-index: 1
-		+respond-min($break-tablet-min)
-			top: 45px
-			width: 45%
 		+respond-min($break-desktop-min)
-			top: 65px
-			width: 40%
-	&__related
-		list-style: outside none none
-		&:after
-			content: ""
-			display: block
-			width: 15%
-			height: 0px
-			border-bottom: 1px solid $zon_grey
-			margin-bottom: $petite
-			padding-bottom: $petite
-		&:last-child:after
-			border: none
-	&__related-kicker
+			padding: 0.5em 1.2em
+	&__title
+		@extend %teaser-title
+		color: $white
+		font-size: $font-l
+		line-height: 1.12em
+		+respond-min($break-desktop-min)
+			font-size: $font-xxxl
+
+.teaser-topic-list
+	display: none
+	+respond-min($break-tablet-min)
+		display: block
+		top: 45px
+		width: 45%
+	+respond-min($break-desktop-min)
+		top: 65px
+		width: 40%
+	&:after
+		content: ""
+		display: block
+		width: 15%
+		height: 0px
+		border-bottom: 1px solid $zon_grey
+		margin-bottom: $petite
+		padding-bottom: $petite
+	&:last-child:after
+		border: none
+	&__kicker
 		@extend %teaser-kicker
 		color: $zon_light_grey
 		font-size: $font-s
@@ -100,7 +112,7 @@
 			font-size: $font-xs
 		+respond-min($break-desktop-min)
 			font-size: $font-s
-	&__related-title
+	&__title
 		@extend %teaser-title
 		color: $white
 		line-height: 1.12em
@@ -109,8 +121,3 @@
 			font-size: $font-m
 		+respond-min($break-desktop-min)
 			font-size: $font-ml
-	&__title
-		@extend %teaser-title
-		color: $white
-		font-size: $font-xxxl
-		line-height: 1.12em
