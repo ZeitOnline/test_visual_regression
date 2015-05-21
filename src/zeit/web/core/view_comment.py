@@ -51,9 +51,13 @@ class PostComment(zeit.web.core.view.Base):
         uid = user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
-        pid = self.pid = params.get('pid')
         comment = params.get('comment')
         action = params.get('action')
+
+        try:
+            self.pid = int(params.get('pid'))
+        except ValueError:
+            self.pid = None
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -80,11 +84,11 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No comment could be posted',
                 explanation=('Path and comment needed.'))
-        elif action == 'report' and (not(pid) or not(comment)):
+        elif action == 'report' and (not(self.pid) or not(comment)):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No report could be posted',
                 explanation=('Pid and comment needed.'))
-        elif action == 'recommend' and not pid:
+        elif action == 'recommend' and not self.pid:
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No recommondation could be posted',
                 explanation=('Pid needed.'))
@@ -100,14 +104,14 @@ class PostComment(zeit.web.core.view.Base):
             data['nid'] = nid
             data['subject'] = '[empty]'
             data['comment'] = comment
-            data['pid'] = pid
-        elif action == 'report' and pid:
+            data['pid'] = self.pid
+        elif action == 'report' and self.pid:
             method = 'get'
             data['note'] = comment
-            data['content_id'] = pid
+            data['content_id'] = self.pid
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
-        elif action == 'recommend' and pid:
+        elif action == 'recommend' and self.pid:
             fans = self._get_recommendations(unique_id)
             if uid in fans:
                 data['action'] = 'unflag'
@@ -117,7 +121,7 @@ class PostComment(zeit.web.core.view.Base):
                 fans.append(uid)
             recommendations = len(fans)
             method = 'get'
-            data['content_id'] = pid
+            data['content_id'] = self.pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'leser_empfehlung'
 
@@ -129,8 +133,9 @@ class PostComment(zeit.web.core.view.Base):
             allow_redirects=False)
 
         if response.status_code >= 200 and response.status_code <= 303:
-            self.status.append('Action {} was performed for {}'
-                               ' (with pid {})'.format(method, unique_id, pid))
+            self.status.append(
+                'Action {} was performed for {} (with pid {})'.format(
+                    method, unique_id, self.pid))
 
             self._invalidate_app_servers(unique_id)
 
@@ -148,7 +153,7 @@ class PostComment(zeit.web.core.view.Base):
                     'action': action,
                     'path': self.path,
                     'nid': nid,
-                    'pid': pid},
+                    'pid': self.pid},
                 'response': {
                     'content': content,
                     'error': error,
@@ -199,15 +204,10 @@ class PostComment(zeit.web.core.view.Base):
     def _get_recommendations(self, unique_id):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        try:
-            pid = int(self.pid)
-        except ValueError:
-            pid = None
-        else:
-            if comment_thread['index'][pid]:
-                comment = comment_thread['index'][pid]
-                if len(comment['fans']):
-                    return comment['fans'].split(',')
+        if comment_thread['index'][self.pid]:
+            comment = comment_thread['index'][self.pid]
+            if len(comment['fans']):
+                return comment['fans'].split(',')
 
         return []
 
