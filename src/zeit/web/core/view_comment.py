@@ -56,7 +56,7 @@ class PostComment(zeit.web.core.view.Base):
 
         try:
             self.pid = int(params.get('pid'))
-        except ValueError:
+        except (TypeError, ValueError):
             self.pid = None
 
         if not request.method == self.request_method:
