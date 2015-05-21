@@ -146,19 +146,6 @@ def test_not_renderable_content_object_should_trigger_restart(testserver):
     assert resp.headers['x-render-with'] == 'default'
 
 
-def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
-    def raise_exc(exc, *args):
-        """Helper function for raising exceptions without using the builtin
-        `raise` statement."""
-        raise exc(*args)
-
-    monkeypatch.setattr(zeit.web.magazin.view_centerpage.Centerpage, 'title',
-                        property(lambda self: raise_exc(Exception)))
-
-    resp = requests.get('%s/centerpage/lebensart' % debug_testserver.url)
-    assert u'Dokument zurzeit nicht verfügbar' in resp.text
-
-
 @zeit.web.register_filter
 def do_things(arg, kw1=42, kw2=45):
     """Docstrings document things."""
