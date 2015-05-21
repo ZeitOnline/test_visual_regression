@@ -3,9 +3,10 @@ import exceptions
 import pytest
 import requests
 
-import zeit.web.core.view_centerpage
-from zeit.web.magazin.view_centerpage import Centerpage
+import zeit.web.magazin.view_centerpage
+import zeit.web.core.decorator
 import zeit.web.core.template
+import zeit.web.core.view_centerpage
 
 
 class Raiser(object):
@@ -22,6 +23,10 @@ class Raiser(object):
         if not hasattr(exceptions, cls):
             return super(Raiser, self).__getattr__(name)
         raise getattr(exceptions, cls)()
+
+
+def faulty_func(*args, **kw):
+    raise Exception('Lorem ipsum Dolore officia nostrud in.')
 
 
 faulty_templates = [
@@ -122,6 +127,15 @@ faulty_templates = [
 message = '{} should not bother friedbert.'
 
 
+@pytest.mark.parametrize('markup,assertion,kw', faulty_templates,
+                         ids=[message.format(i[1]) for i in faulty_templates])
+def test_failsafe_rendering(markup, assertion, kw):
+    env = zeit.web.core.jinja.Environment()
+    tpl = env.from_string(markup)
+    condition = isinstance(tpl.render(**kw), basestring)
+    assert condition, message.format(assertion)
+
+
 def test_url_path_not_found_should_render_404(testserver):
     resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
     assert u'Dokument nicht gefunden' in resp.text
@@ -138,17 +152,46 @@ def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
         `raise` statement."""
         raise exc(*args)
 
-    monkeypatch.setattr(Centerpage, 'title',
+    monkeypatch.setattr(zeit.web.magazin.view_centerpage.Centerpage, 'title',
                         property(lambda self: raise_exc(Exception)))
 
     resp = requests.get('%s/centerpage/lebensart' % debug_testserver.url)
     assert u'Dokument zurzeit nicht verfügbar' in resp.text
 
 
-@pytest.mark.parametrize('markup,assertion,kw', faulty_templates,
-                         ids=[message.format(i[1]) for i in faulty_templates])
-def test_failsafe_rendering(markup, assertion, kw):
+def test_safeguarded_jinja_modifier_should_preserve_appearance():
+    def do_things(arg, kw1=42, kw2=45):
+        """Docstrings document things."""
+        return arg * (kw2 - kw1)
+
     env = zeit.web.core.jinja.Environment()
-    tpl = env.from_string(markup)
-    condition = isinstance(tpl.render(**kw), basestring)
-    assert condition, message.format(assertion)
+    mod = zeit.web.core.decorator.register_filter(do_things)
+    env.filters['mod'] = mod
+    tpl = env.from_string(u'{{ "foo" | mod }}')
+    assert tpl.render().strip() == 'foofoofoo'
+
+    assert mod.func_defaults == (42, 45)
+    assert mod.func_name == 'do_things'
+    assert mod.__doc__ == 'Docstrings document things.'
+    assert mod('bar', kw2=4, kw1=2) == 'barbar'
+
+
+def test_faulty_jinja_filter_should_not_bother_friedbert():
+    env = zeit.web.core.jinja.Environment()
+    env.filters['bad'] = zeit.web.core.decorator.register_filter(faulty_func)
+    tpl = env.from_string(u'foo {{ 42 | bad }}')
+    assert tpl.render().strip() == 'foo', message.format('Faulty filters')
+
+
+def test_faulty_jinja_global_should_not_bother_friedbert():
+    env = zeit.web.core.jinja.Environment()
+    env.globals['bad'] = zeit.web.core.decorator.register_global(faulty_func)
+    tpl = env.from_string(u'foo {{ bad(42) }}')
+    assert tpl.render().strip() == 'foo', message.format('Faulty globals')
+
+
+def test_faulty_jinja_test_should_not_bother_friedbert():
+    env = zeit.web.core.jinja.Environment()
+    env.tests['bad'] = zeit.web.core.decorator.register_test(faulty_func)
+    tpl = env.from_string(u'foo {{ 42 is bad }}')
+    assert tpl.render().strip() == 'foo', message.format('Faulty tests')
