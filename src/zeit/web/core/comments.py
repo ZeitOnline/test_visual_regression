@@ -97,26 +97,28 @@ def comment_to_dict(comment):
     else:
         in_reply = None
 
-    dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
-           'date/hour/text()', 'date/minute/text()')
-
     tz = babel.dates.get_timezone('Europe/Berlin')
-    utc = babel.dates.get_timezone('UTC')
-    created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)
-                                ).replace(tzinfo=utc).astimezone(tz)
-    changed = comment.xpath('changed/text()')
+    created = comment.xpath('created/text()')
 
-    if changed:
-        changed = datetime.datetime.fromtimestamp(float(changed[0]), tz)
+    if created:
+        created = datetime.datetime.fromtimestamp(float(created[0]), tz)
+    else:
+        # legacy code to mimic new "created" timestamp in agatho thread
+        # obsolete since https://github.com/ZeitOnline/community/pull/166
+        dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
+               'date/hour/text()', 'date/minute/text()')
+        utc = babel.dates.get_timezone('UTC')
+        created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)
+                                    ).replace(tzinfo=utc).astimezone(tz)
+        changed = comment.xpath('changed/text()')
 
-        # the agatho thread does not contain seconds for the creation date
-        # for newly created comments, copy the seconds from the "changed" date
-        # to enable "5 seconds ago" display
-        # whould be easier if we get the original "created" date from drupal
-        if created.replace(second=59) > changed:
-            created = created.replace(second=changed.second)
+        if changed:
+            changed = datetime.datetime.fromtimestamp(float(changed[0]), tz)
 
-    # TODO: Catch name, creation date and cid unavailabilty in element tree.
+            if created.replace(second=59) > changed:
+                created = created.replace(second=changed.second)
+
+    # TODO: Catch name and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
         img_url=picture_url,
