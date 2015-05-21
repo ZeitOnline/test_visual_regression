@@ -81,7 +81,7 @@ def register_module(name):
     First, implement your module class in python
 
     @zeit.web.register_module('ice-cream-truck')
-    class IceCreamTruck(object):
+    class IceCreamTruck(zeit.web.core.block.Module):
         @zeit.web.reify
         def flavours(self):
             return ('chocolate', 'vanilla', 'cherry')
@@ -92,7 +92,7 @@ def register_module(name):
         Sell some ice cream on your centerpage!
     </cpextra>
 
-    Create a template in site/templates/inc/modules/ice-cream-truck.tpl
+    Create a template in site/templates/inc/module/ice-cream-truck.tpl
 
     {% for f in module.flavours %}
         <img src="//images.zeit.de/ice-cream-assets/{{ f }}.jpg"/>
