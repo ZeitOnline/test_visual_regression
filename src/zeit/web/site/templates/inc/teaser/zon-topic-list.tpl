@@ -1,8 +1,10 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
-{% block teaser_modifier %}teaser--ispositioned teaser--islight{% endblock %}
-{% block teaser_heading_modifier %}teaser__heading--issized{% endblock %}
-{% block teaser_container_modifier %}teaser__container--issized-desktop{% endblock %}
+{% block layout %}teaser-topic-list{% endblock %}
+
+{#% block teaser_modifier %}teaser--ispositioned teaser--islight{% endblock %#}
+{#% block teaser_heading_modifier %}teaser__heading--issized{% endblock %#}
+{#% block teaser_container_modifier %}teaser__container--issized-desktop{% endblock %#}
 
 {% block teaser_media_position_before_title %}
     {% set teaser_block_layout = self.layout() %}
