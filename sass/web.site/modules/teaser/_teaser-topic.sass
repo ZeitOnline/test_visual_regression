@@ -1,3 +1,9 @@
+.cp-region.cp-region--topic
+	padding: 0
+
+.cp-area.cp-area--topic
+	padding: 0
+
 .teaser-topic-main
 	@extend %teaser
 	margin: $petite (-$petite)
@@ -9,8 +15,8 @@
 		margin-top: remify(6px)
 		margin-bottom: remify(34px)
 		+respond-min($break-desktop-min)
-			margin-bottom: $twice
-			margin-top: $small
+			margin-bottom: remify(43px)
+			margin-top: remify(14px)
 	&__inner-helper
 		left: 0
 		padding: 0
@@ -21,13 +27,15 @@
 		z-index: 1
 		+respond-min($break-tablet-min)
 			width: 55%
+			text-align: left
 			top: remify(45px)
 			padding-left: remify(48px)
 			padding-right: remify(48px)
 		+respond-min($break-desktop-min)
 			width: 60%
-			padding-left: remify(68px)
-			padding-right: remify(68px)
+			top: remify(34px)
+			padding-left: remify(70px)
+			padding-right: remify(70px)
 	&__introduction
 		color: $white
 		font-size: $font-s
@@ -36,6 +44,7 @@
 		-webkit-font-smoothing: antialiased
 		+respond-min($break-tablet-min)
 			font-size: $font-ml
+			text-transform: none
 		+respond-min($break-desktop-min)
 			font-size: remify(19px)
 	&__media
@@ -72,7 +81,7 @@
 		text-transform: uppercase
 		-webkit-font-smoothing: antialiased
 		+respond-min($break-desktop-min)
-			padding: 0.5em 1.2em
+			padding: remify(12px 25px)
 	&__title
 		@extend %teaser-title
 		color: $white
@@ -80,6 +89,7 @@
 		line-height: 1.12em
 		+respond-min($break-desktop-min)
 			font-size: $font-xxxl
+			line-height: 1.28em
 
 .teaser-topic-list
 	display: none
