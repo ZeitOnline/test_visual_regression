@@ -11,6 +11,7 @@ import zope.component
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
+from zeit.web.core.interfaces import ISettings
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 
@@ -58,34 +59,35 @@ def JinjaEnvRegistrator(env_attr):  # NOQA
     :rtype: types.FunctionType
     """
     def registrator(func):
-        """This decorator is recronstructs the decorated function and injects
+        """This decorator recronstructs the decorated function and injects
         the safeguarded codeblock into the dynamically created counterpart.
-        A callback is attached to the venusian scanner for env registration.
 
         :internal:
         """
         def callback(scanner, name, obj):
-            """Venusian callback that registers the decorated function under
-            its `func_name` to the jinja `env_attr` passed to the registrator
-            factory.
+            """Venusian callback that registers the decorated function.
 
             :internal:
             """
             if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj
 
-        fn = types.FunctionType(
-            safeguard.func_code, func.func_globals.copy(), name=func.func_name,
-            argdefs=func.func_defaults, closure=func.func_closure)
+            if not zope.component.getUtility(
+                    ISettings).get('debug.propagate_jinja_errors', False):
 
-        fn.func_globals.update(
-            {'undefined': zeit.web.core.jinja.Undefined, 'logger': logger,
-             'func': func, 'sys': sys})
+                fn = types.FunctionType(
+                    safeguard.func_code, obj.func_globals.copy(),
+                    obj.func_name, obj.func_defaults, obj.func_closure)
 
-        fn.__doc__ = func.__doc__
+                fn.func_globals.update({
+                    'func': obj, 'logger': logger, 'sys': sys,
+                    'undefined': zeit.web.core.jinja.Undefined})
 
-        venusian.attach(fn, callback, category='jinja')
-        return fn
+                fn.__doc__ = obj.__doc__
+                sys.modules[obj.__module__] = fn
+
+        venusian.attach(func, callback, category='jinja')
+        return func
 
     return registrator
 
