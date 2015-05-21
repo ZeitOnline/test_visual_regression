@@ -5,6 +5,7 @@ import zope.security.proxy
 import zeit.cms.content.sources
 
 import zeit.web
+import zeit.web.core.block
 
 
 log = logging.getLogger(__name__)
@@ -42,7 +43,7 @@ class ServiceSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
 
 @zeit.web.register_module('servicebox')
-class Servicebox(object):
+class Servicebox(zeit.web.core.block.Module):
 
     service_source = ServiceSource()
 
