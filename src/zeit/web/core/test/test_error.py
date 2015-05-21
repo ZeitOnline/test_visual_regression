@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 import exceptions
+import sys
+
 import pytest
 import requests
+import venusian
 
+import zeit.web
 import zeit.web.magazin.view_centerpage
 import zeit.web.core.decorator
 import zeit.web.core.template
@@ -23,10 +27,6 @@ class Raiser(object):
         if not hasattr(exceptions, cls):
             return super(Raiser, self).__getattr__(name)
         raise getattr(exceptions, cls)()
-
-
-def faulty_func(*args, **kw):
-    raise Exception('Lorem ipsum Dolore officia nostrud in.')
 
 
 faulty_templates = [
@@ -159,39 +159,55 @@ def test_uncaught_exception_renders_500(monkeypatch, debug_testserver):
     assert u'Dokument zurzeit nicht verfügbar' in resp.text
 
 
-def test_safeguarded_jinja_modifier_should_preserve_appearance():
-    def do_things(arg, kw1=42, kw2=45):
-        """Docstrings document things."""
-        return arg * (kw2 - kw1)
+@zeit.web.register_filter
+def do_things(arg, kw1=42, kw2=45):
+    """Docstrings document things."""
+    return arg * (kw2 - kw1)
 
+
+def test_safeguarded_jinja_modifier_should_preserve_func(debug_application):
     env = zeit.web.core.jinja.Environment()
-    mod = zeit.web.core.decorator.register_filter(do_things)
-    env.filters['mod'] = mod
-    tpl = env.from_string(u'{{ "foo" | mod }}')
+    venusian.Scanner(env=env).scan(sys.modules[__name__])
+    tpl = env.from_string(u'{{ "foo" | do_things }}')
     assert tpl.render().strip() == 'foofoofoo'
 
-    assert mod.func_defaults == (42, 45)
-    assert mod.func_name == 'do_things'
-    assert mod.__doc__ == 'Docstrings document things.'
-    assert mod('bar', kw2=4, kw1=2) == 'barbar'
+    assert do_things.func_defaults == (42, 45)
+    assert do_things.func_name == 'do_things'
+    assert do_things.__doc__ == 'Docstrings document things.'
+    assert do_things('bar', kw2=4, kw1=2) == 'barbar'
 
 
-def test_faulty_jinja_filter_should_not_bother_friedbert():
+@zeit.web.register_filter
+def faulty_filter(*args):
+    1 / 0
+
+
+def test_faulty_jinja_filter_should_not_bother_friedbert(debug_application):
     env = zeit.web.core.jinja.Environment()
-    env.filters['bad'] = zeit.web.core.decorator.register_filter(faulty_func)
+    venusian.Scanner(env=env).scan(sys.modules[__name__])
     tpl = env.from_string(u'foo {{ 42 | bad }}')
-    assert tpl.render().strip() == 'foo', message.format('Faulty filters')
+    assert tpl.render().strip() == 'foo'
 
 
-def test_faulty_jinja_global_should_not_bother_friedbert():
+@zeit.web.register_global
+def faulty_global(*args):
+    1 / 0
+
+
+def test_faulty_jinja_global_should_not_bother_friedbert(debug_application):
     env = zeit.web.core.jinja.Environment()
-    env.globals['bad'] = zeit.web.core.decorator.register_global(faulty_func)
+    venusian.Scanner(env=env).scan(sys.modules[__name__])
     tpl = env.from_string(u'foo {{ bad(42) }}')
-    assert tpl.render().strip() == 'foo', message.format('Faulty globals')
+    assert tpl.render().strip() == 'foo'
 
 
-def test_faulty_jinja_test_should_not_bother_friedbert():
+@zeit.web.register_test
+def faulty_test(*args):
+    1 / 0
+
+
+def test_faulty_jinja_test_should_not_bother_friedbert(debug_application):
     env = zeit.web.core.jinja.Environment()
-    env.tests['bad'] = zeit.web.core.decorator.register_test(faulty_func)
+    venusian.Scanner(env=env).scan(sys.modules[__name__])
     tpl = env.from_string(u'foo {{ 42 is bad }}')
-    assert tpl.render().strip() == 'foo', message.format('Faulty tests')
+    assert tpl.render().strip() == 'foo'
