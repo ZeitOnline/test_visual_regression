@@ -350,7 +350,7 @@ endpoint_report = (
     {'cookies': {},
      'data': {
      'note': 'my comment',
-     'content_id': '1',
+     'content_id': 1,
      'method': 'flag.flagnote',
      'flag_name': 'kommentar_bedenklich',
      'uid': '123', }})
@@ -359,7 +359,7 @@ endpoint_recommend = (
     ('http://foo/services/json?callback=zeit',),
     {'cookies': {},
      'data': {
-     'content_id': '1',
+     'content_id': 1,
      'method': 'flag.flag',
      'flag_name': 'leser_empfehlung',
      'uid': '123', }})
