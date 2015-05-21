@@ -30,8 +30,6 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
-        self.pid = None
-        self.action = None
         self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
