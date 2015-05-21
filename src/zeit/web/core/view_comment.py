@@ -197,7 +197,7 @@ class PostComment(zeit.web.core.view.Base):
             self.community_host, endpoint, path).strip('/')
 
     def _get_recommendations(self, unique_id):
-        comment_thread = zeit.web.core.comments.get_thread(unique_id)
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
         try:
             pid = int(self.pid)
@@ -212,7 +212,7 @@ class PostComment(zeit.web.core.view.Base):
         return []
 
     def _nid_by_comment_thread(self, unique_id):
-        comment_thread = zeit.web.core.comments.get_thread(unique_id)
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
         if comment_thread:
             return comment_thread.get('nid')
@@ -262,8 +262,7 @@ class PostComment(zeit.web.core.view.Base):
         # only the thread of the current app server gets invalidated here
         invalidate_comment_thread(unique_id)
 
-        return zeit.web.core.comments.get_thread(
-            unique_id, destination=self.request.url)
+        return zeit.web.core.comments.get_cacheable_thread(unique_id)
 
 
 @pyramid.view.view_config(route_name='post_test_comments',
