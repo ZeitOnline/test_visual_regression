@@ -367,7 +367,7 @@ endpoint_recommend = (
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
-def test_post_comments_should_post_with_correct_arguments(
+def test_post_comment_should_post_with_correct_arguments(
         monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
@@ -393,7 +393,7 @@ def test_post_comments_should_post_with_correct_arguments(
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', None, '1', 'recommend', endpoint_recommend),
     ('my/path', 'my comment', '1', 'report', endpoint_report)])
-def test_post_comments_should_get_with_correct_arguments(
+def test_post_comment_should_get_with_correct_arguments(
         monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
