@@ -69,9 +69,6 @@ def JinjaEnvRegistrator(env_attr):  # NOQA
 
             :internal:
             """
-            if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
-                scanner.env.__dict__[env_attr][name] = obj
-
             if not zope.component.getUtility(
                     ISettings).get('debug.propagate_jinja_errors', False):
 
@@ -84,7 +81,12 @@ def JinjaEnvRegistrator(env_attr):  # NOQA
                     'undefined': zeit.web.core.jinja.Undefined})
 
                 fn.__doc__ = obj.__doc__
-                sys.modules[obj.__module__] = fn
+
+                setattr(sys.modules[obj.__module__], obj.func_name, fn)
+                obj = fn
+
+            if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
+                scanner.env.__dict__[env_attr][name] = obj
 
         venusian.attach(func, callback, category='jinja')
         return func
