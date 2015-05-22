@@ -71,3 +71,24 @@ def is_column_article(context, request):
              renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
+
+
+# I would rather do:
+# @view_config(context=zeit.web.core.article.ILiveblogArticle,
+#              renderer='templates/liveblog.html')
+# or:
+# @view_defaults()
+# @view_config(context=zeit.web.core.article.ILiveblogArticle,
+#              custom_predicates=(zeit.web.site.view.is_zon_content,),
+#              request_method='GET',
+#              renderer='templates/liveblog.html')
+# but that did not work. This works:
+def is_liveblog(context, request):
+    return zeit.web.core.article.ILiveblogArticle.providedBy(context)
+
+
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_liveblog),
+             renderer='templates/liveblog.html')
+class LiveblogArticle(Article):
+    pass
