@@ -50,7 +50,7 @@ def logger(exc, val, tb):
         [exc.__name__, ': ', unicode(val)]))
 
 
-def JinjaEnvRegistrator(env_attr):  # NOQA
+def JinjaEnvRegistrator(env_attr, category='jinja'):  # NOQA
     """Factory function that returns a decorator configured to register a given
     environment attribute to the jinja context.
 
@@ -88,7 +88,7 @@ def JinjaEnvRegistrator(env_attr):  # NOQA
             if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj
 
-        venusian.attach(func, callback, category='jinja')
+        venusian.attach(func, callback, category=category)
         return func
 
     return registrator

@@ -6,7 +6,6 @@ import pytest
 import requests
 import venusian
 
-import zeit.web
 import zeit.web.magazin.view_centerpage
 import zeit.web.core.decorator
 import zeit.web.core.template
@@ -146,7 +145,7 @@ def test_not_renderable_content_object_should_trigger_restart(testserver):
     assert resp.headers['x-render-with'] == 'default'
 
 
-@zeit.web.register_filter
+@zeit.web.core.decorator.JinjaEnvRegistrator('filters', '_c1')
 def do_things(arg, kw1=42, kw2=45):
     """Docstrings document things."""
     return arg * (kw2 - kw1)
@@ -154,7 +153,7 @@ def do_things(arg, kw1=42, kw2=45):
 
 def test_safeguarded_jinja_modifier_should_preserve_func(debug_application):
     env = zeit.web.core.jinja.Environment()
-    venusian.Scanner(env=env).scan(sys.modules[__name__])
+    venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c1',))
     tpl = env.from_string(u'{{ "foo" | do_things }}')
     assert tpl.render().strip() == 'foofoofoo'
 
@@ -164,37 +163,37 @@ def test_safeguarded_jinja_modifier_should_preserve_func(debug_application):
     assert do_things('bar', kw2=4, kw1=2) == 'barbar'
 
 
-@zeit.web.register_filter
+@zeit.web.core.decorator.JinjaEnvRegistrator('filters', '_c2')
 def faulty_filter(*args):
     1 / 0
 
 
 def test_faulty_jinja_filter_should_not_bother_friedbert(debug_application):
     env = zeit.web.core.jinja.Environment()
-    venusian.Scanner(env=env).scan(sys.modules[__name__])
+    venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c2',))
     tpl = env.from_string(u'foo {{ 42 | bad }}')
     assert tpl.render().strip() == 'foo'
 
 
-@zeit.web.register_global
+@zeit.web.core.decorator.JinjaEnvRegistrator('globals', '_c3')
 def faulty_global(*args):
     1 / 0
 
 
 def test_faulty_jinja_global_should_not_bother_friedbert(debug_application):
     env = zeit.web.core.jinja.Environment()
-    venusian.Scanner(env=env).scan(sys.modules[__name__])
+    venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c3',))
     tpl = env.from_string(u'foo {{ bad(42) }}')
     assert tpl.render().strip() == 'foo'
 
 
-@zeit.web.register_test
+@zeit.web.core.decorator.JinjaEnvRegistrator('tests', '_c4')
 def faulty_test(*args):
     1 / 0
 
 
 def test_faulty_jinja_test_should_not_bother_friedbert(debug_application):
     env = zeit.web.core.jinja.Environment()
-    venusian.Scanner(env=env).scan(sys.modules[__name__])
+    venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c4',))
     tpl = env.from_string(u'foo {{ 42 is bad }}')
     assert tpl.render().strip() == 'foo'
