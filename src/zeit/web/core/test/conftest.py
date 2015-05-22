@@ -380,14 +380,14 @@ def appbrowser(application):
 def image_group_factory():
     class MockImageGroup(dict):
         zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
-        masterimage = None
+        master_image = None
 
     class MockRepositoryImage(object):
 
         def __init__(self, size, name):
             self._size = size
             self.uniqueId = name
-            self.masterimage = None
+            self.master_image = None
 
         def getImageSize(self):  # NOQA
             return self._size
