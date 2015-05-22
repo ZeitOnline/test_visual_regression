@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
+import collections
+import datetime
+import logging
+import math
 
 from BeautifulSoup import BeautifulSoup
 import babel.dates
-import collections
-import datetime
-import itertools
-import logging
 import lxml.etree
-import math
+
 import repoze.lru
 import requests
 import requests.exceptions

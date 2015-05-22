@@ -162,12 +162,9 @@ def app_settings():
         lambda *_: None, settings.iteritems())
 
 
-@pytest.fixture(scope='module')
-def jinja2_env():
-    app = zeit.web.core.application.Application()
-    app.settings = settings.copy()
-    app.configure_pyramid()
-    return app.configure_jinja()
+@pytest.fixture
+def jinja2_env(application):
+    return application.zeit_app.jinja_env
 
 
 class ZODBLayer(plone.testing.zodb.EmptyZODB):
@@ -258,6 +255,7 @@ def debug_application(request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app_settings = settings.copy()
     app_settings['debug.show_exceptions'] = ''
+    app_settings['debug.propagate_jinja_errors'] = ''
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
         secret='time'
