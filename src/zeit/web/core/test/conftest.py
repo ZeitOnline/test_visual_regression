@@ -162,12 +162,9 @@ def app_settings():
         lambda *_: None, settings.iteritems())
 
 
-@pytest.fixture(scope='module')
-def jinja2_env():
-    app = zeit.web.core.application.Application()
-    app.settings = settings.copy()
-    app.configure_pyramid()
-    return app.configure_jinja()
+@pytest.fixture
+def jinja2_env(application):
+    return application.zeit_app.jinja_env
 
 
 class ZODBLayer(plone.testing.zodb.EmptyZODB):
